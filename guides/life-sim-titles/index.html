@@ -19,41 +19,90 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Life Sim guide: every life title and how to unlock it", "description": "Every Life Sim title explained: The Godfather, The Tycoon, Living Legend and more. Exact requirements, how to unlock each one, and all life goals with their rewards.", "url": "https://jeremstyke.github.io/guides/life-sim-titles/", "image": "https://jeremstyke.github.io/og-lifesim.png", "datePublished": "2026-09-29", "dateModified": "2026-09-29", "author": {"@type": "Person", "name": "Jeremstyke", "url": "https://jeremstyke.github.io/"}, "publisher": {"@type": "Person", "name": "Jeremstyke", "url": "https://jeremstyke.github.io/"}, "inLanguage": "en", "mainEntityOfPage": "https://jeremstyke.github.io/guides/life-sim-titles/"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How many titles are there in Life Sim?", "acceptedAnswer": {"@type": "Answer", "text": "There are 13 life titles, from The Godfather to An Ordinary Life. Each life earns exactly one."}}, {"@type": "Question", "name": "What if my life matches several titles?", "acceptedAnswer": {"@type": "Answer", "text": "The game checks the titles in a fixed order and gives you the first one that matches, which is the order of the table on this page."}}, {"@type": "Question", "name": "How do life goals work?", "acceptedAnswer": {"@type": "Answer", "text": "Each life gets 3 random goals out of 10. They appear under your journal after your first year. Complete one and you get its reward right away, plus a little happiness."}}, {"@type": "Question", "name": "Is Life Sim free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Life Sim is free to play inside Telegram, with nothing to download."}}]}</script>
 <style>
+  :root { --c: #6C3FD1; --dark: #2A1450; --tint: #F3EDFF; --acc: #FFB21E; --ink: #1c1733; --soft: #5f5a78; --line: #ebe7f3; }
   * { box-sizing: border-box; }
-  body { margin: 0; font: 400 18px/1.7 'Nunito', system-ui, sans-serif; color: #1c1733; background: #fff; }
-  .wrap { max-width: 720px; margin: 0 auto; padding: 32px 24px 64px; }
-  .crumbs { font-size: 14px; color: #6b6585; margin-bottom: 28px; }
-  .crumbs a { color: inherit; }
-  h1 { font-size: clamp(32px, 5vw, 46px); line-height: 1.12; margin: 0 0 16px; font-weight: 900; }
-  h2 { font-size: 27px; line-height: 1.2; margin: 44px 0 10px; font-weight: 900; }
-  h3 { font-size: 20px; margin: 26px 0 6px; }
-  .intro { font-size: 20px; color: #4c4666; }
-  a { color: #5a33c2; }
-  table { width: 100%; border-collapse: collapse; font-size: 16px; margin: 16px 0; }
-  th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid #ece8f5; vertical-align: top; }
-  th { font-size: 14px; color: #6b6585; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font: 400 17.5px/1.7 'Nunito', system-ui, sans-serif; color: var(--ink); background: #fff; }
+  a { color: var(--c); }
+  :focus-visible { outline: 3px solid var(--acc); outline-offset: 3px; border-radius: 6px; }
+  .bar { position: sticky; top: 0; z-index: 5; background: rgba(255,255,255,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .bar .in { max-width: 1080px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 8px; font-weight: 900; font-size: 19px; color: var(--dark); text-decoration: none; }
+  .brand span { font-size: 24px; }
+  .go { background: var(--c); color: #fff; text-decoration: none; font-weight: 800; font-size: 15px; padding: 9px 18px; border-radius: 999px; white-space: nowrap; }
+  .hero { background: var(--tint); }
+  .hero .in { max-width: 1080px; margin: 0 auto; padding: 44px 24px 40px; }
+  .crumbs { font-size: 14px; color: var(--soft); margin-bottom: 14px; }
+  .crumbs a { color: inherit; text-decoration: none; font-weight: 700; }
+  .crumbs a:hover { color: var(--c); }
+  h1 { font-size: clamp(32px, 5vw, 50px); line-height: 1.08; margin: 0; font-weight: 900; color: var(--dark); max-width: 18em; }
+  .intro { font-size: 19px; color: var(--soft); margin: 14px 0 0; max-width: 38em; }
+  .keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 28px; }
+  .key { background: #fff; border-radius: 18px; padding: 16px; font-weight: 700; font-size: 15px; line-height: 1.4; color: var(--dark); border: 1px solid var(--line); }
+  .key b { display: block; font-size: 26px; margin-bottom: 6px; }
+  .layout { max-width: 1080px; margin: 0 auto; padding: 36px 24px 72px; display: grid; grid-template-columns: 230px 1fr; gap: 56px; }
+  .toc { position: sticky; top: 76px; align-self: start; font-size: 15px; }
+  .toc p { font-weight: 900; color: var(--dark); margin: 0 0 8px; }
+  .toc a { display: block; padding: 6px 0 6px 12px; border-left: 3px solid var(--line); color: var(--soft); text-decoration: none; font-weight: 700; }
+  .toc a:hover { color: var(--c); border-left-color: var(--c); }
+  .doc { min-width: 0; max-width: 700px; }
+  .doc h2 { font-size: 26px; line-height: 1.2; margin: 40px 0 10px; font-weight: 900; color: var(--dark); scroll-margin-top: 80px; }
+  .doc h2:first-child { margin-top: 0; }
+  .doc h3 { font-size: 19px; margin: 24px 0 4px; color: var(--dark); }
+  .doc ul, .doc ol { padding-left: 22px; }
+  .doc li { margin: 8px 0; }
+  .doc li::marker { color: var(--c); font-weight: 900; }
+  .doc table { width: 100%; border-collapse: collapse; font-size: 15.5px; margin: 16px 0; }
+  .doc th, .doc td { text-align: left; padding: 11px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .doc thead th { background: var(--tint); color: var(--dark); font-size: 14px; }
+  .doc thead th:first-child { border-radius: 10px 0 0 10px; } .doc thead th:last-child { border-radius: 0 10px 10px 0; }
   .tbl { overflow-x: auto; }
-  ol li, ul li { margin: 8px 0; }
-  .tip { background: #f5f1ff; border-radius: 16px; padding: 16px 20px; margin: 24px 0; }
-  .cta { display: inline-block; margin-top: 8px; background: var(--c, #6C3FD1); color: #fff; font-weight: 800; text-decoration: none; padding: 14px 24px; border-radius: 999px; }
-  .end { margin-top: 48px; padding-top: 24px; border-top: 1px solid #ece8f5; font-size: 16px; color: #6b6585; }
-  :focus-visible { outline: 3px solid #FFB21E; outline-offset: 3px; }
+  .tip { background: var(--tint); border-left: 4px solid var(--c); border-radius: 0 16px 16px 0; padding: 16px 20px; margin: 24px 0; }
+  .cta { display: inline-block; margin: 6px 0; background: var(--c); color: #fff; font-weight: 800; text-decoration: none; padding: 14px 26px; border-radius: 999px; box-shadow: 0 10px 24px -12px var(--c); }
+  .end { margin-top: 44px; padding: 20px 22px; background: var(--tint); border-radius: 18px; font-size: 16px; color: var(--dark); }
+  .foot { border-top: 1px solid var(--line); }
+  .foot .in { max-width: 1080px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 14px; color: var(--soft); }
+  .foot a { color: inherit; font-weight: 700; text-decoration: none; }
+  .foot a:hover { color: var(--c); }
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; gap: 20px; }
+    .toc { position: static; background: #faf9fd; border-radius: 16px; padding: 14px 16px; }
+    .keys { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .doc thead { display: none; }
+    .doc table, .doc tbody, .doc tr, .doc td { display: block; width: 100%; }
+    .doc tr { background: #faf9fd; border-radius: 16px; padding: 10px 14px; margin: 0 0 12px; }
+    .doc td { border: 0; padding: 4px 0; }
+    .doc td[data-label]::before { content: attr(data-label); display: block; font-size: 12px; font-weight: 800; color: var(--soft); }
+    .doc td:first-child::before { display: none; }
+    .doc td:first-child { font-size: 17px; }
+  }
 </style>
 </head>
-<body style="--c:#6C3FD1">
-<article class="wrap">
+<body>
+<header class="bar"><div class="in">
+  <a class="brand" href="https://jeremstyke.github.io/lifesim/"><span>🎂</span> Life Sim</a>
+  <a class="go" href="https://t.me/LsimgameBot/Play?startapp=src_site">Play free</a>
+</div></header>
+<div class="hero"><div class="in">
 <div class="crumbs"><a href="https://jeremstyke.github.io/">Home</a> / <a href="https://jeremstyke.github.io/lifesim/">Life Sim</a> / Guide</div>
 <h1>Life Sim guide: every life title and how to unlock it</h1>
 <p class="intro">When your life ends in Life Sim, it earns one title that sums it up. Here are all 13 titles, exactly what each one requires, and how to go for the rare ones.</p>
+
+</div></div>
+<main class="layout">
+<nav class="toc" aria-label="On this page"><p>On this page</p><a href="#all-13-life-titles">All 13 life titles</a><a href="#life-goals-and-their-rewards">Life goals and their rewards</a><a href="#tips-for-a-legendary-life">Tips for a legendary life</a><a href="#frequently-asked-questions">Frequently asked questions</a></nav>
+<article class="doc">
 <a class="cta" href="https://t.me/LsimgameBot/Play?startapp=src_site">Play Life Sim free</a>
-<h2>All 13 life titles</h2>
+<h2 id="all-13-life-titles">All 13 life titles</h2>
 <p>The game checks the titles in this order and gives you the <strong>first one that matches</strong>. Net worth means your cash plus what you own.</p>
-<div class="tbl"><table><thead><tr><th>Title</th><th>Requirement</th><th>How to get it</th></tr></thead><tbody><tr><td><strong>⛓️ Died behind bars</strong></td><td>You die while you are in prison.</td><td>Commit crimes until you get caught, then stay inside until the end.</td></tr><tr><td><strong>👑 The Godfather</strong></td><td>You have a criminal record and a net worth of at least $1,000,000.</td><td>Build a real fortune after your first conviction.</td></tr><tr><td><strong>💎 The Tycoon</strong></td><td>Your net worth reaches $10,000,000.</td><td>Invest early, buy properties and rent them out.</td></tr><tr><td><strong>💰 The Millionaire</strong></td><td>Your net worth reaches $1,000,000.</td><td>A good career plus a few smart investments is enough.</td></tr><tr><td><strong>🎂 Living Legend</strong></td><td>You live to 100.</td><td>Look after your health gauge every year, especially after 60.</td></tr><tr><td><strong>👨‍👩‍👧‍👦 Family Pillar</strong></td><td>You have at least 4 children.</td><td>Have children with your partner, or adopt: adoption is possible from 21 to 60 with a salary of at least $45,000 a year.</td></tr><tr><td><strong>🧠 The Genius</strong></td><td>Your smarts reach 90.</td><td>Read, take lessons and go to university. Gains get smaller as a gauge gets higher, so start young.</td></tr><tr><td><strong>✨ Beauty Icon</strong></td><td>Your looks reach 90.</td><td>Use the looks actions every year: routine, hairdresser, wardrobe, makeover.</td></tr><tr><td><strong>🌍 The Globetrotter</strong></td><td>You traveled around the world.</td><td>Save up and book the world tour from your activities.</td></tr><tr><td><strong>🕶️ The Outlaw</strong></td><td>You have a criminal record.</td><td>One conviction is enough, as long as you don't qualify for a rarer title.</td></tr><tr><td><strong>🕯️ Gone Too Soon</strong></td><td>You die before 30.</td><td>Usually not a choice: risky crimes, bad health or bad luck.</td></tr><tr><td><strong>😊 A Happy Soul</strong></td><td>Your happiness is at least 80 when you die.</td><td>Keep the happiness gauge high in your final years.</td></tr><tr><td><strong>🙂 An Ordinary Life</strong></td><td>None of the above.</td><td>The default title. Every legend starts somewhere.</td></tr></tbody></table></div>
+<div class="tbl"><table><thead><tr><th>Title</th><th>Requirement</th><th>How to get it</th></tr></thead><tbody><tr><td data-label="Title"><strong>⛓️ Died behind bars</strong></td><td data-label="Requirement">You die while you are in prison.</td><td data-label="How to get it">Commit crimes until you get caught, then stay inside until the end.</td></tr><tr><td data-label="Title"><strong>👑 The Godfather</strong></td><td data-label="Requirement">You have a criminal record and a net worth of at least $1,000,000.</td><td data-label="How to get it">Build a real fortune after your first conviction.</td></tr><tr><td data-label="Title"><strong>💎 The Tycoon</strong></td><td data-label="Requirement">Your net worth reaches $10,000,000.</td><td data-label="How to get it">Invest early, buy properties and rent them out.</td></tr><tr><td data-label="Title"><strong>💰 The Millionaire</strong></td><td data-label="Requirement">Your net worth reaches $1,000,000.</td><td data-label="How to get it">A good career plus a few smart investments is enough.</td></tr><tr><td data-label="Title"><strong>🎂 Living Legend</strong></td><td data-label="Requirement">You live to 100.</td><td data-label="How to get it">Look after your health gauge every year, especially after 60.</td></tr><tr><td data-label="Title"><strong>👨‍👩‍👧‍👦 Family Pillar</strong></td><td data-label="Requirement">You have at least 4 children.</td><td data-label="How to get it">Have children with your partner, or adopt: adoption is possible from 21 to 60 with a salary of at least $45,000 a year.</td></tr><tr><td data-label="Title"><strong>🧠 The Genius</strong></td><td data-label="Requirement">Your smarts reach 90.</td><td data-label="How to get it">Read, take lessons and go to university. Gains get smaller as a gauge gets higher, so start young.</td></tr><tr><td data-label="Title"><strong>✨ Beauty Icon</strong></td><td data-label="Requirement">Your looks reach 90.</td><td data-label="How to get it">Use the looks actions every year: routine, hairdresser, wardrobe, makeover.</td></tr><tr><td data-label="Title"><strong>🌍 The Globetrotter</strong></td><td data-label="Requirement">You traveled around the world.</td><td data-label="How to get it">Save up and book the world tour from your activities.</td></tr><tr><td data-label="Title"><strong>🕶️ The Outlaw</strong></td><td data-label="Requirement">You have a criminal record.</td><td data-label="How to get it">One conviction is enough, as long as you don't qualify for a rarer title.</td></tr><tr><td data-label="Title"><strong>🕯️ Gone Too Soon</strong></td><td data-label="Requirement">You die before 30.</td><td data-label="How to get it">Usually not a choice: risky crimes, bad health or bad luck.</td></tr><tr><td data-label="Title"><strong>😊 A Happy Soul</strong></td><td data-label="Requirement">Your happiness is at least 80 when you die.</td><td data-label="How to get it">Keep the happiness gauge high in your final years.</td></tr><tr><td data-label="Title"><strong>🙂 An Ordinary Life</strong></td><td data-label="Requirement">None of the above.</td><td data-label="How to get it">The default title. Every legend starts somewhere.</td></tr></tbody></table></div>
 <div class="tip"><strong>Why the order matters:</strong> if you are a millionaire with a criminal record, you get The Godfather, not The Millionaire. And if you die in prison, you get Died behind bars, whatever your fortune.</div>
-<h2>Life goals and their rewards</h2>
+<h2 id="life-goals-and-their-rewards">Life goals and their rewards</h2>
 <p>Each life gets <strong>3 random goals</strong> out of these 10. They show up under your journal after your first year, and each one pays its reward as soon as you reach it. Goals with an age limit fail if you pass that age.</p>
-<div class="tbl"><table><thead><tr><th>Goal</th><th>Reward</th><th>Deadline</th></tr></thead><tbody><tr><td>Have $100,000 before 30</td><td>$10,000</td><td>Before 30</td></tr><tr><td>Become a millionaire before 50</td><td>$50,000</td><td>Before 50</td></tr><tr><td>Get married before 30</td><td>$5,000</td><td>Before 30</td></tr><tr><td>Have 3 children</td><td>$10,000</td><td>Anytime</td></tr><tr><td>Graduate from university</td><td>$10,000</td><td>Anytime</td></tr><tr><td>Live to 90</td><td>$20,000</td><td>Anytime</td></tr><tr><td>Travel around the world</td><td>$5,000</td><td>Anytime</td></tr><tr><td>Own 3 possessions (houses, cars...)</td><td>$15,000</td><td>Anytime</td></tr><tr><td>Reach 95 in smarts</td><td>$5,000</td><td>Anytime</td></tr><tr><td>End up in prison</td><td>$5,000</td><td>Anytime</td></tr></tbody></table></div>
-<h2>Tips for a legendary life</h2>
+<div class="tbl"><table><thead><tr><th>Goal</th><th>Reward</th><th>Deadline</th></tr></thead><tbody><tr><td data-label="Goal">Have $100,000 before 30</td><td data-label="Reward">$10,000</td><td data-label="Deadline">Before 30</td></tr><tr><td data-label="Goal">Become a millionaire before 50</td><td data-label="Reward">$50,000</td><td data-label="Deadline">Before 50</td></tr><tr><td data-label="Goal">Get married before 30</td><td data-label="Reward">$5,000</td><td data-label="Deadline">Before 30</td></tr><tr><td data-label="Goal">Have 3 children</td><td data-label="Reward">$10,000</td><td data-label="Deadline">Anytime</td></tr><tr><td data-label="Goal">Graduate from university</td><td data-label="Reward">$10,000</td><td data-label="Deadline">Anytime</td></tr><tr><td data-label="Goal">Live to 90</td><td data-label="Reward">$20,000</td><td data-label="Deadline">Anytime</td></tr><tr><td data-label="Goal">Travel around the world</td><td data-label="Reward">$5,000</td><td data-label="Deadline">Anytime</td></tr><tr><td data-label="Goal">Own 3 possessions (houses, cars...)</td><td data-label="Reward">$15,000</td><td data-label="Deadline">Anytime</td></tr><tr><td data-label="Goal">Reach 95 in smarts</td><td data-label="Reward">$5,000</td><td data-label="Deadline">Anytime</td></tr><tr><td data-label="Goal">End up in prison</td><td data-label="Reward">$5,000</td><td data-label="Deadline">Anytime</td></tr></tbody></table></div>
+<h2 id="tips-for-a-legendary-life">Tips for a legendary life</h2>
 <ul>
 <li><strong>Start early on your gauges.</strong> Each gauge rises more slowly as it gets higher, so small daily efforts in childhood pay off.</li>
 <li><strong>One action per gauge per year.</strong> Choose the one that gives the most for your budget.</li>
@@ -61,9 +110,19 @@
 <li><strong>Watch for rare events.</strong> About one year in twenty brings a huge twist: a fortune, fame or a disaster.</li>
 <li><strong>Write your own move.</strong> If no choice fits your plan, type what you want to do: the story adapts.</li>
 </ul>
-<h2>Frequently asked questions</h2>
+<h2 id="frequently-asked-questions">Frequently asked questions</h2>
 <h3>How many titles are there in Life Sim?</h3><p>There are 13 life titles, from The Godfather to An Ordinary Life. Each life earns exactly one.</p><h3>What if my life matches several titles?</h3><p>The game checks the titles in a fixed order and gives you the first one that matches, which is the order of the table on this page.</p><h3>How do life goals work?</h3><p>Each life gets 3 random goals out of 10. They appear under your journal after your first year. Complete one and you get its reward right away, plus a little happiness.</p><h3>Is Life Sim free?</h3><p>Yes. Life Sim is free to play inside Telegram, with nothing to download.</p>
 <div class="end">Ready to try for The Godfather? <a href="https://t.me/LsimgameBot/Play?startapp=src_site">Play Life Sim</a>, discover <a href="https://jeremstyke.github.io/lifesim/">the game</a>, or read <a href="https://jeremstyke.github.io/guides/telegram-quiz-bot/">how to add a quiz bot to your Telegram group</a>.</div>
 </article>
+</main>
+<footer class="foot"><div class="in">
+  <span>Made by Jeremstyke</span>
+  <a href="https://jeremstyke.github.io/">Home</a>
+  <a href="https://jeremstyke.github.io/lifesim/">Life Sim</a>
+  <a href="https://jeremstyke.github.io/chatpal/">ChatPal</a>
+  <a href="https://jeremstyke.github.io/lifesim/privacy/">Privacy</a>
+  <a href="https://jeremstyke.github.io/lifesim/terms/">Terms</a>
+  <a href="https://t.me/jeremstyke">Telegram channel</a>
+</div></footer>
 </body>
 </html>
