@@ -1,6 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://jeremstyke.github.io/</loc><lastmod>2026-09-29</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://jeremstyke.github.io/lifesim/</loc><lastmod>2026-09-29</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://jeremstyke.github.io/chatpal/</loc><lastmod>2026-09-29</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://jeremstyke.github.io/</loc><lastmod>2026-09-29</lastmod><priority>0.8</priority></url>
+  <url><loc>https://jeremstyke.github.io/lifesim/</loc><lastmod>2026-09-29</lastmod><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jeremstyke.github.io/lifesim/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jeremstyke.github.io/lifesim/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jeremstyke.github.io/lifesim/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jeremstyke.github.io/lifesim/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jeremstyke.github.io/lifesim/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jeremstyke.github.io/lifesim/"/>
+  </url>
+  <url><loc>https://jeremstyke.github.io/lifesim/fr/</loc><lastmod>2026-09-29</lastmod><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jeremstyke.github.io/lifesim/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jeremstyke.github.io/lifesim/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jeremstyke.github.io/lifesim/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jeremstyke.github.io/lifesim/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jeremstyke.github.io/lifesim/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jeremstyke.github.io/lifesim/"/>
+  </url>
+  <url><loc>https://jeremstyke.github.io/lifesim/es/</loc><lastmod>2026-09-29</lastmod><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jeremstyke.github.io/lifesim/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jeremstyke.github.io/lifesim/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jeremstyke.github.io/lifesim/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jeremstyke.github.io/lifesim/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jeremstyke.github.io/lifesim/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jeremstyke.github.io/lifesim/"/>
+  </url>
+  <url><loc>https://jeremstyke.github.io/lifesim/pt/</loc><lastmod>2026-09-29</lastmod><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jeremstyke.github.io/lifesim/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jeremstyke.github.io/lifesim/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jeremstyke.github.io/lifesim/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jeremstyke.github.io/lifesim/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jeremstyke.github.io/lifesim/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jeremstyke.github.io/lifesim/"/>
+  </url>
+  <url><loc>https://jeremstyke.github.io/lifesim/ru/</loc><lastmod>2026-09-29</lastmod><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jeremstyke.github.io/lifesim/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jeremstyke.github.io/lifesim/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jeremstyke.github.io/lifesim/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jeremstyke.github.io/lifesim/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jeremstyke.github.io/lifesim/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jeremstyke.github.io/lifesim/"/>
+  </url>
+  <url><loc>https://jeremstyke.github.io/chatpal/</loc><lastmod>2026-09-29</lastmod><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jeremstyke.github.io/chatpal/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jeremstyke.github.io/chatpal/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jeremstyke.github.io/chatpal/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jeremstyke.github.io/chatpal/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jeremstyke.github.io/chatpal/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jeremstyke.github.io/chatpal/"/>
+  </url>
+  <url><loc>https://jeremstyke.github.io/chatpal/fr/</loc><lastmod>2026-09-29</lastmod><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jeremstyke.github.io/chatpal/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jeremstyke.github.io/chatpal/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jeremstyke.github.io/chatpal/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jeremstyke.github.io/chatpal/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jeremstyke.github.io/chatpal/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jeremstyke.github.io/chatpal/"/>
+  </url>
+  <url><loc>https://jeremstyke.github.io/chatpal/es/</loc><lastmod>2026-09-29</lastmod><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jeremstyke.github.io/chatpal/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jeremstyke.github.io/chatpal/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jeremstyke.github.io/chatpal/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jeremstyke.github.io/chatpal/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jeremstyke.github.io/chatpal/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jeremstyke.github.io/chatpal/"/>
+  </url>
+  <url><loc>https://jeremstyke.github.io/chatpal/pt/</loc><lastmod>2026-09-29</lastmod><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jeremstyke.github.io/chatpal/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jeremstyke.github.io/chatpal/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jeremstyke.github.io/chatpal/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jeremstyke.github.io/chatpal/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jeremstyke.github.io/chatpal/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jeremstyke.github.io/chatpal/"/>
+  </url>
+  <url><loc>https://jeremstyke.github.io/chatpal/ru/</loc><lastmod>2026-09-29</lastmod><priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jeremstyke.github.io/chatpal/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jeremstyke.github.io/chatpal/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jeremstyke.github.io/chatpal/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jeremstyke.github.io/chatpal/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jeremstyke.github.io/chatpal/ru/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jeremstyke.github.io/chatpal/"/>
+  </url>
+  <url><loc>https://jeremstyke.github.io/guides/telegram-quiz-bot/</loc><lastmod>2026-09-29</lastmod><priority>0.7</priority></url>
+  <url><loc>https://jeremstyke.github.io/guides/life-sim-titles/</loc><lastmod>2026-09-29</lastmod><priority>0.7</priority></url>
 </urlset>
