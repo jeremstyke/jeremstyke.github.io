@@ -450,7 +450,7 @@ function profileCard() {
     <div class="stat"><b>${st.me.picks || 0}</b><span>⚽</span></div></div>
     <button class="btn ghost" id="set2">⚙️ ${esc(t('settings2'))}</button>
     ${ON_ANDROID_WEB ? `<a class="btn ghost" href="${APK_PAGE}" style="display:block;text-decoration:none;text-align:center;margin-top:8px">📲 ${esc(t('apkBtn'))}</a>` : ''}
-    ${IN_TG ? `<div style="display:grid;grid-template-columns:${tg.platform === 'android' ? '1fr 1fr' : '1fr'};gap:8px;margin-top:8px">${tg.platform === 'android' ? `<button class="btn ghost" style="margin:0" data-ext="${APK_PAGE}">📲 ${esc(t('apkBtn'))}</button>` : ''}<button class="btn ghost" style="margin:0" data-ext="https://jeremstyke.github.io/dailyscore/">🌐 ${esc(t('webBtn'))}</button></div>` : ''}</div>`;
+    ${IN_TG && tg.platform === 'android' ? `<button class="btn ghost" style="margin-top:8px" data-ext="${APK_PAGE}">📲 ${esc(t('apkBtn'))}</button>` : ''}</div>`;
 }
 function render() {
   if (!st.me.country) return setupView();
