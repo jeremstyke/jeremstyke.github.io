@@ -522,6 +522,8 @@ async function load() {
 setInterval(() => { const el = document.getElementById('cd'); if (el && st && st.match) { const ms = new Date(st.match.kickoff).getTime() - Date.now(); if (ms <= 0) load(); else el.textContent = countdown(ms); } }, 30000);
 load();
 checkAppUpdate();
+// Android app: count this phone once (first opening), for the install counter
+if (IS_ANDROID) { try { if (!localStorage.getItem('ds_inst')) { const d = Array.from(crypto.getRandomValues(new Uint8Array(12)), (x) => x.toString(16).padStart(2, '0')).join(''); fetch('https://pote-ia-bot-en-production.up.railway.app/ds/install', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ d }) }).then(() => localStorage.setItem('ds_inst', d)).catch(() => {}); } } catch (e) {} }
 if (!IN_TG && 'serviceWorker' in navigator && location.hostname.endsWith('github.io')) navigator.serviceWorker.register('/dailyscore/sw.js', { scope: '/dailyscore/' }).catch(() => {});
 if (!IN_TG) document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && TOKEN && isWebOnly()) load(); });
 </script>
