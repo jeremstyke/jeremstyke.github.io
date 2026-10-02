@@ -139,14 +139,15 @@ try {
   if (hp.get('lg')) { localStorage.setItem('ds_lg', JSON.stringify({ c: hp.get('lg'), r: hp.get('r') || null })); history.replaceState(null, '', location.pathname); }
   TOKEN = localStorage.getItem('ds_token');
 } catch (e) {}
-// Adsgram interstitial after every validation or change of the score: Telegram only, 20 seconds at least between two ads, nothing if no ad.
+// Adsgram interstitial after the first validation of the day (from the very first pick, so moderators see it), never on changes:
+// Adsgram refuses apps where every click leads to an ad. Telegram only, nothing if no ad.
 const DS_INTER = 'int-51478';
 function showInter() {
   try {
     if (!IN_TG || !window.Adsgram) return;
-    const last = Number(localStorage.getItem('ds_inter_at') || 0);
-    if (Date.now() - last < 20000) return;
-    localStorage.setItem('ds_inter_at', String(Date.now()));
+    const today = new Date().toISOString().slice(0, 10);
+    if (localStorage.getItem('ds_inter') === today) return;
+    localStorage.setItem('ds_inter', today);
     window.Adsgram.init({ blockId: DS_INTER }).show().then(() => api('ev', { k: 'ad_inter' }).catch(() => {})).catch(() => {});
   } catch (e) {}
 }
@@ -492,7 +493,8 @@ function bind() {
   const lock = document.getElementById('lock');
   if (lock) lock.onclick = async () => {
     lock.disabled = true; haptic('medium');
-    try { st = await api('pick', { home, away }); editing = false; setTimeout(showInter, 900); try { tg.HapticFeedback.notificationOccurred('success'); } catch (e) {} toast(t('saved')); render(); }
+    const firstPick = !st.pick;
+    try { st = await api('pick', { home, away }); editing = false; if (firstPick) setTimeout(showInter, 900); try { tg.HapticFeedback.notificationOccurred('success'); } catch (e) {} toast(t('saved')); render(); }
     catch (e) { toast(e.code === 'started' ? t('errStarted') : t('err')); lock.disabled = false; if (e.code === 'started') load(); }
   };
   const edit = document.getElementById('edit'); if (edit) edit.onclick = () => { editing = true; render(); };
