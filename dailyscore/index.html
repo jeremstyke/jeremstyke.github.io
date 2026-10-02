@@ -21,6 +21,7 @@
 <meta name="apple-mobile-web-app-title" content="Daily Score">
 <meta property="og:image" content="https://jeremstyke.github.io/dailyscore/icon-512.png">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://sad.adsgram.ai/js/sad.min.js" async></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -136,6 +137,17 @@ try {
   if (hp.get('lg')) { localStorage.setItem('ds_lg', JSON.stringify({ c: hp.get('lg'), r: hp.get('r') || null })); history.replaceState(null, '', location.pathname); }
   TOKEN = localStorage.getItem('ds_token');
 } catch (e) {}
+// Adsgram interstitial after a pick: Telegram only, once a day, not during the first 3 picks, nothing if no ad.
+const DS_INTER = 'int-51478';
+function showInter() {
+  try {
+    if (!IN_TG || !window.Adsgram || (st.me.picks || 0) <= 3) return;
+    const today = new Date().toISOString().slice(0, 10);
+    if (localStorage.getItem('ds_inter') === today) return;
+    localStorage.setItem('ds_inter', today);
+    window.Adsgram.init({ blockId: DS_INTER }).show().then(() => api('ev', { k: 'ad_inter' }).catch(() => {})).catch(() => {});
+  } catch (e) {}
+}
 const openLink = (u) => { if (IN_TG) tg.openTelegramLink(u); else window.open(u, '_blank'); };
 async function shareLink(url, text) {
   if (IN_TG) return tg.openTelegramLink('https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text));
@@ -416,7 +428,8 @@ function bind() {
   const lock = document.getElementById('lock');
   if (lock) lock.onclick = async () => {
     lock.disabled = true; haptic('medium');
-    try { st = await api('pick', { home, away }); editing = false; try { tg.HapticFeedback.notificationOccurred('success'); } catch (e) {} toast(t('saved')); render(); }
+    const firstPick = !st.pick;
+    try { st = await api('pick', { home, away }); editing = false; if (firstPick) setTimeout(showInter, 900); try { tg.HapticFeedback.notificationOccurred('success'); } catch (e) {} toast(t('saved')); render(); }
     catch (e) { toast(e.code === 'started' ? t('errStarted') : t('err')); lock.disabled = false; if (e.code === 'started') load(); }
   };
   const edit = document.getElementById('edit'); if (edit) edit.onclick = () => { editing = true; render(); };
