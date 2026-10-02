@@ -139,15 +139,17 @@ try {
   if (hp.get('lg')) { localStorage.setItem('ds_lg', JSON.stringify({ c: hp.get('lg'), r: hp.get('r') || null })); history.replaceState(null, '', location.pathname); }
   TOKEN = localStorage.getItem('ds_token');
 } catch (e) {}
-// Adsgram interstitial after the first validation of the day (from the very first pick, so moderators see it), never on changes:
-// Adsgram refuses apps where every click leads to an ad. Telegram only, nothing if no ad.
+// Adsgram interstitial after a validation or a change of the score, from the very first pick (so moderators see it):
+// 3 a day at most and 20 seconds between two ads (Adsgram refuses apps where every click leads to an ad). Telegram only.
 const DS_INTER = 'int-51478';
 function showInter() {
   try {
     if (!IN_TG || !window.Adsgram) return;
     const today = new Date().toISOString().slice(0, 10);
-    if (localStorage.getItem('ds_inter') === today) return;
-    localStorage.setItem('ds_inter', today);
+    let c = {}; try { c = JSON.parse(localStorage.getItem('ds_inter3') || '{}'); } catch (e) {}
+    const n = c.d === today ? c.n || 0 : 0;
+    if (n >= 3 || Date.now() - (c.at || 0) < 20000) return;
+    localStorage.setItem('ds_inter3', JSON.stringify({ d: today, n: n + 1, at: Date.now() }));
     window.Adsgram.init({ blockId: DS_INTER }).show().then(() => api('ev', { k: 'ad_inter' }).catch(() => {})).catch(() => {});
   } catch (e) {}
 }
@@ -493,8 +495,7 @@ function bind() {
   const lock = document.getElementById('lock');
   if (lock) lock.onclick = async () => {
     lock.disabled = true; haptic('medium');
-    const firstPick = !st.pick;
-    try { st = await api('pick', { home, away }); editing = false; if (firstPick) setTimeout(showInter, 900); try { tg.HapticFeedback.notificationOccurred('success'); } catch (e) {} toast(t('saved')); render(); }
+    try { st = await api('pick', { home, away }); editing = false; setTimeout(showInter, 900); try { tg.HapticFeedback.notificationOccurred('success'); } catch (e) {} toast(t('saved')); render(); }
     catch (e) { toast(e.code === 'started' ? t('errStarted') : t('err')); lock.disabled = false; if (e.code === 'started') load(); }
   };
   const edit = document.getElementById('edit'); if (edit) edit.onclick = () => { editing = true; render(); };
