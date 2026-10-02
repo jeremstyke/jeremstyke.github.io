@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Daily Score ⚽ Free football prediction game: one match a day</title>
+<meta name="description" content="Daily Score: one big football match a day. Guess the score, earn points, keep your streak and climb the world and country rankings. Free, in 9 languages. Play on the web with GitHub or on Telegram.">
+<meta property="og:title" content="Daily Score ⚽ one match a day, guess the score">
+<meta property="og:description" content="Free football prediction game: Premier League, La Liga, Serie A, Bundesliga, Ligue 1, Champions League. World and country rankings, streaks, badges.">
+<meta property="og:url" content="https://jeremstyke.github.io/dailyscore/">
+<meta name="author" content="@jeremstyke">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #0b1a12; --pitch: #0f2a1c; --card: #13241a; --line: rgba(255,255,255,.09); --ink: #f2f7f3; --mute: #9fb7a8; --lime: #c6ff3d; --gold: #ffc83d; --red: #ff5b5b; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: Inter, system-ui, sans-serif; }
+body { background: radial-gradient(1200px 500px at 50% -200px, #1d4a30 0%, transparent 60%), var(--bg); min-height: 100vh; }
+#app { max-width: 480px; margin: 0 auto; padding: 14px 14px 40px; }
+.top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.brand { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 23px; letter-spacing: .3px; text-transform: uppercase; white-space: nowrap; }
+@media (max-width: 380px) { .brand { font-size: 20px; } .chip { padding: 5px 8px; font-size: 12px; } }
+.brand b { color: var(--lime); }
+.beta { font-family: Inter, sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 1px; background: rgba(198,255,61,.15); color: var(--lime); border: 1px solid rgba(198,255,61,.4); border-radius: 6px; padding: 2px 5px; vertical-align: middle; margin-left: 4px; }
+.chips { display: flex; gap: 6px; }
+.chip { background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; font-weight: 700; font-size: 13px; white-space: nowrap; }
+.chip.fire { color: var(--gold); }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 16px; margin-bottom: 12px; }
+.label { font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--mute); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.label img { width: 18px; height: 18px; object-fit: contain; }
+.match { position: relative; overflow: hidden; background: linear-gradient(160deg, #18402a, #0f2a1c 70%); }
+.match::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(255,255,255,.025) 0 28px, transparent 28px 56px); pointer-events: none; }
+.teams { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; position: relative; z-index: 1; }
+.team { text-align: center; }
+.crest { width: 64px; height: 64px; object-fit: contain; display: block; margin: 0 auto 8px; filter: drop-shadow(0 4px 10px rgba(0,0,0,.35)); }
+.tname { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px; line-height: 1.1; }
+.vs { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: var(--mute); font-size: 18px; }
+.when { text-align: center; margin-top: 12px; font-size: 14px; color: var(--mute); position: relative; z-index: 1; }
+.when b { color: var(--lime); font-variant-numeric: tabular-nums; }
+.picker { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; margin-top: 16px; position: relative; z-index: 1; }
+.stepper { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.stepper button { width: 42px; height: 42px; border-radius: 12px; border: 1px solid var(--line); background: rgba(255,255,255,.06); color: var(--ink); font-size: 24px; font-weight: 700; cursor: pointer; }
+.stepper button:active { transform: scale(.94); }
+.goals { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 48px; min-width: 34px; text-align: center; font-variant-numeric: tabular-nums; }
+.dash { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 34px; color: var(--mute); }
+.btn { width: 100%; border: 0; border-radius: 16px; padding: 15px; font-weight: 800; font-size: 16px; cursor: pointer; margin-top: 14px; position: relative; z-index: 1; }
+.btn.go { background: var(--lime); color: #10200f; }
+.btn.ghost { background: rgba(255,255,255,.06); color: var(--ink); border: 1px solid var(--line); }
+.btn.gold { background: var(--gold); color: #241a00; }
+.btn:active { transform: scale(.98); }
+.btn:disabled { opacity: .55; }
+.note { text-align: center; color: var(--mute); font-size: 13px; margin-top: 10px; position: relative; z-index: 1; }
+.locked { text-align: center; margin-top: 14px; font-weight: 700; position: relative; z-index: 1; }
+.big { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 54px; text-align: center; letter-spacing: 2px; }
+.streak { display: flex; justify-content: space-between; gap: 6px; }
+.dot { flex: 1; aspect-ratio: 1; max-width: 44px; border-radius: 12px; display: grid; place-items: center; font-weight: 800; background: rgba(255,255,255,.06); color: var(--mute); font-size: 14px; }
+.dot.on { background: var(--gold); color: #241a00; }
+.bar { display: grid; grid-template-columns: 1fr 44px; gap: 8px; align-items: center; margin: 7px 0; font-size: 14px; }
+.track { height: 10px; background: rgba(255,255,255,.07); border-radius: 99px; overflow: hidden; margin-top: 4px; }
+.fill { height: 100%; background: var(--lime); border-radius: 99px; }
+.pct { text-align: right; font-weight: 800; }
+.ai { margin-top: 14px; padding: 12px; border-radius: 14px; background: rgba(198,255,61,.08); border: 1px solid rgba(198,255,61,.25); }
+.ai .sc { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 26px; color: var(--lime); }
+.tabs { display: flex; gap: 6px; margin-bottom: 10px; }
+.tab { flex: 1; text-align: center; padding: 9px; border-radius: 12px; background: rgba(255,255,255,.05); font-weight: 700; font-size: 14px; cursor: pointer; border: 1px solid transparent; }
+.tab.on { background: rgba(198,255,61,.12); border-color: rgba(198,255,61,.4); color: var(--lime); }
+.row { display: grid; grid-template-columns: 30px 1fr auto; gap: 8px; padding: 9px 4px; border-bottom: 1px solid var(--line); align-items: center; font-size: 15px; }
+.row:last-child { border-bottom: 0; }
+.row.me { color: var(--lime); font-weight: 800; }
+.rk { font-weight: 800; color: var(--mute); }
+.pts { font-weight: 800; }
+.myrank { text-align: center; color: var(--mute); font-size: 13px; margin-top: 8px; }
+select { width: 100%; padding: 13px; border-radius: 14px; border: 1px solid var(--line); background: #0f1f16; color: var(--ink); font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+.center { text-align: center; }
+.muted { color: var(--mute); }
+.last { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 14px; }
+.last b { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; }
+.bgrid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.bdg { aspect-ratio: 1; border-radius: 12px; display: grid; place-items: center; font-size: 22px; background: rgba(255,255,255,.06); cursor: pointer; }
+.bdg.on { background: rgba(255,200,61,.14); box-shadow: inset 0 0 0 1px rgba(255,200,61,.45); }
+.bdg.off { filter: grayscale(1); opacity: .28; }
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: #24402f; color: var(--ink); padding: 11px 16px; border-radius: 14px; font-weight: 700; font-size: 14px; z-index: 9; box-shadow: 0 8px 30px rgba(0,0,0,.35); }
+.skel { height: 120px; border-radius: 20px; background: linear-gradient(90deg, #13241a, #1a3324, #13241a); background-size: 200% 100%; animation: sk 1.2s infinite; margin-bottom: 12px; }
+@keyframes sk { to { background-position: -200% 0; } }
+[dir="rtl"] .bar, [dir="rtl"] .row { direction: rtl; }
+</style>
+</head>
+<body>
+<div id="app"><div class="skel"></div><div class="skel"></div></div>
+<script>
+const tg = window.Telegram.WebApp;
+tg.ready(); tg.expand();
+try { tg.setHeaderColor('#0b1a12'); tg.setBackgroundColor('#0b1a12'); } catch (e) {}
+const BOT = 'DailyScorefootbot';
+const IN_TG = !!(tg && tg.initData);
+const API = IN_TG ? '' : 'https://pote-ia-bot-en-production.up.railway.app';
+let TOKEN = null;
+try {
+  const hp = new URLSearchParams(location.hash.slice(1));
+  if (hp.get('t')) { localStorage.setItem('ds_token', hp.get('t')); history.replaceState(null, '', location.pathname); }
+  if (hp.get('err')) { window.__loginErr = true; history.replaceState(null, '', location.pathname); }
+  TOKEN = localStorage.getItem('ds_token');
+} catch (e) {}
+const openLink = (u) => { if (IN_TG) tg.openTelegramLink(u); else window.open(u, '_blank'); };
+const TG_ICON = '<svg width="13" height="13" viewBox="0 0 24 24" style="vertical-align:-1px;opacity:.85"><circle cx="12" cy="12" r="12" fill="#2AABEE"/><path d="M5.4 11.7l11.6-4.5c.5-.2 1 .1.8.9l-2 9.3c-.1.6-.5.8-1.1.5l-3-2.2-1.4 1.4c-.2.2-.3.3-.6.3l.2-3.1 5.6-5.1c.2-.2 0-.3-.4-.1l-6.9 4.4-3-.9c-.6-.2-.7-.6.2-.9z" fill="#fff"/></svg>';
+const GH_ICON = '<svg width="13" height="13" viewBox="0 0 16 16" style="vertical-align:-1px;opacity:.85" fill="#f2f7f3"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>';
+const provIcon = (p) => (p === 'gh' ? GH_ICON : TG_ICON);
+const LANGS = { en: 'English', fr: 'Français', es: 'Español', pt: 'Português', de: 'Deutsch', it: 'Italiano', ar: 'العربية', tr: 'Türkçe', ru: 'Русский' };
+const COUNTRIES = ['AR','AT','AU','BE','BR','CA','CH','CI','CL','CM','CN','CO','CZ','DE','DK','DZ','EG','ES','FR','GB','GH','GR','HR','ID','IE','IN','IQ','IR','IT','JP','KR','KZ','MA','MX','NG','NL','NO','PE','PL','PT','QA','RO','RS','RU','SA','SE','SN','TN','TR','UA','US','UY','UZ','VE','AE','ZA'];
+const S = {
+  en: { wText: 'One big match a day: guess the score and climb the world ranking.', wGh: 'Sign in with GitHub', wTg: 'Play on Telegram', tgOnly: 'On Telegram', logout: 'Sign out', wErr: 'Login failed, please try again.', invT: 'Invite friends', invText: 'For each friend who makes their first pick, you both get the trend + AI prediction for free.', invCount: '{n} friends invited', invNext: 'Next badge {b} at {k} friends', invBtn: 'Invite friends', invShare: 'Join me on Daily Score ⚽ one big match a day, guess the score and climb the ranking!', free: 'Free', nextM: 'Next match', safe: 'No match today: your streak is safe 🔥', pDay: 'Day', pWeek: 'Week', pMonth: 'Month', pAll: 'All time', players: 'players', today: 'Match of the day', kick: 'Kick-off in', started: 'Match in progress', final: 'Final score', yourPick: 'Your pick', lock: 'Lock my pick', change: 'Change my pick', saved: 'Pick saved! ✅', locked: 'Your pick is locked', rules: 'Exact score: 3 pts · Right winner: 1 pt', nomatch: 'No big match today. Come back tomorrow! ⚽', streak: 'Day streak', streakNote: 'Play 7 days in a row: +3 bonus points 🔥', trend: 'See the trend + AI prediction', trendNote: 'What everyone picked, and the AI prediction', homeW: 'Home win', draw: 'Draw', awayW: 'Away win', topScores: 'Most played scores', nobody: 'No picks yet: be the first!', aiPick: 'AI prediction', ranking: 'Ranking', world: '🌍 World', yourRank: 'Your rank', pts: 'pts', yesterday: 'Last match', noPick: 'no pick', setupTitle: 'Welcome to Daily Score ⚽', setupText: 'Choose your language and your country (for the country ranking).', language: 'Language', country: 'Country', start: "Let's go!", settings: 'Settings', share: 'Challenge my friends', shareText: 'I made my Daily Score pick ⚽ Can you beat me?', errStarted: 'Too late, the match has started!', err: 'Something went wrong, try again.', h: 'h', m: 'min', empty: 'No ranking yet: make the first pick!' },
+  fr: { wText: 'Un grand match par jour : devine le score et grimpe au classement mondial.', wGh: 'Se connecter avec GitHub', wTg: 'Jouer sur Telegram', tgOnly: 'Sur Telegram', logout: 'Se déconnecter', wErr: 'La connexion a échoué, réessaie.', invT: 'Inviter des amis', invText: "Pour chaque ami qui fait son premier pronostic, vous gagnez tous les deux la tendance + le prono de l'IA gratuits.", invCount: '{n} amis invités', invNext: 'Prochain badge {b} à {k} amis', invBtn: 'Inviter des amis', invShare: 'Rejoins-moi sur Daily Score ⚽ un grand match par jour, devine le score et grimpe au classement !', free: 'Gratuit', nextM: 'Prochain match', safe: "Pas de match aujourd'hui : ta série est protégée 🔥", pDay: 'Jour', pWeek: 'Semaine', pMonth: 'Mois', pAll: 'Total', players: 'joueurs', today: 'Match du jour', kick: "Coup d'envoi dans", started: 'Match en cours', final: 'Score final', yourPick: 'Ton pronostic', lock: 'Valider mon pronostic', change: 'Modifier mon pronostic', saved: 'Pronostic enregistré ! ✅', locked: 'Ton pronostic est verrouillé', rules: 'Score exact : 3 pts · Bon vainqueur : 1 pt', nomatch: "Pas de grand match aujourd'hui. Reviens demain ! ⚽", streak: 'Série de jours', streakNote: 'Joue 7 jours de suite : +3 points bonus 🔥', trend: "Voir la tendance + le prono de l'IA", trendNote: "Ce que tout le monde a joué, et le pronostic de l'IA", homeW: 'Victoire domicile', draw: 'Match nul', awayW: 'Victoire extérieur', topScores: 'Scores les plus joués', nobody: 'Aucun pronostic encore : sois le premier !', aiPick: "Pronostic de l'IA", ranking: 'Classement', world: '🌍 Monde', yourRank: 'Ta place', pts: 'pts', yesterday: 'Dernier match', noPick: 'pas de prono', setupTitle: 'Bienvenue sur Daily Score ⚽', setupText: 'Choisis ta langue et ton pays (pour le classement par pays).', language: 'Langue', country: 'Pays', start: "C'est parti !", settings: 'Réglages', share: 'Défier mes amis', shareText: "J'ai fait mon prono Daily Score ⚽ Tu fais mieux ?", errStarted: 'Trop tard, le match a commencé !', err: 'Une erreur est survenue, réessaie.', h: 'h', m: 'min', empty: 'Pas encore de classement : fais le premier pronostic !' },
+  es: { wText: 'Un gran partido al día: adivina el resultado y sube en la clasificación mundial.', wGh: 'Entrar con GitHub', wTg: 'Jugar en Telegram', tgOnly: 'En Telegram', logout: 'Cerrar sesión', wErr: 'Error al iniciar sesión, inténtalo de nuevo.', invT: 'Invitar amigos', invText: 'Por cada amigo que haga su primer pronóstico, ambos ganan la tendencia + el pronóstico de la IA gratis.', invCount: '{n} amigos invitados', invNext: 'Próxima insignia {b} con {k} amigos', invBtn: 'Invitar amigos', invShare: 'Únete a Daily Score ⚽ un gran partido al día, adivina el resultado y sube en la clasificación.', free: 'Gratis', nextM: 'Próximo partido', safe: 'Hoy no hay partido: tu racha está a salvo 🔥', pDay: 'Día', pWeek: 'Semana', pMonth: 'Mes', pAll: 'Total', players: 'jugadores', today: 'Partido del día', kick: 'Empieza en', started: 'Partido en juego', final: 'Resultado final', yourPick: 'Tu pronóstico', lock: 'Confirmar pronóstico', change: 'Cambiar pronóstico', saved: '¡Pronóstico guardado! ✅', locked: 'Tu pronóstico está cerrado', rules: 'Resultado exacto: 3 pts · Ganador: 1 pt', nomatch: 'Hoy no hay gran partido. ¡Vuelve mañana! ⚽', streak: 'Racha de días', streakNote: 'Juega 7 días seguidos: +3 puntos extra 🔥', trend: 'Ver la tendencia + pronóstico de la IA', trendNote: 'Lo que todos jugaron y el pronóstico de la IA', homeW: 'Gana local', draw: 'Empate', awayW: 'Gana visitante', topScores: 'Resultados más jugados', nobody: 'Aún no hay pronósticos: ¡sé el primero!', aiPick: 'Pronóstico de la IA', ranking: 'Clasificación', world: '🌍 Mundo', yourRank: 'Tu puesto', pts: 'pts', yesterday: 'Último partido', noPick: 'sin pronóstico', setupTitle: 'Bienvenido a Daily Score ⚽', setupText: 'Elige tu idioma y tu país (para la clasificación por país).', language: 'Idioma', country: 'País', start: '¡Vamos!', settings: 'Ajustes', share: 'Retar a mis amigos', shareText: 'Hice mi pronóstico de Daily Score ⚽ ¿Me ganas?', errStarted: '¡Demasiado tarde, el partido empezó!', err: 'Algo salió mal, inténtalo de nuevo.', h: 'h', m: 'min', empty: 'Aún no hay clasificación: ¡haz el primer pronóstico!' },
+  pt: { wText: 'Um grande jogo por dia: adivinhe o placar e suba no ranking mundial.', wGh: 'Entrar com GitHub', wTg: 'Jogar no Telegram', tgOnly: 'No Telegram', logout: 'Sair', wErr: 'Falha no login, tente de novo.', invT: 'Convidar amigos', invText: 'Para cada amigo que fizer o primeiro palpite, vocês dois ganham a tendência + o palpite da IA grátis.', invCount: '{n} amigos convidados', invNext: 'Próximo selo {b} com {k} amigos', invBtn: 'Convidar amigos', invShare: 'Entra no Daily Score ⚽ um grande jogo por dia, adivinhe o placar e suba no ranking!', free: 'Grátis', nextM: 'Próximo jogo', safe: 'Sem jogo hoje: sua sequência está protegida 🔥', pDay: 'Dia', pWeek: 'Semana', pMonth: 'Mês', pAll: 'Total', players: 'jogadores', today: 'Jogo do dia', kick: 'Começa em', started: 'Jogo em andamento', final: 'Placar final', yourPick: 'Seu palpite', lock: 'Confirmar palpite', change: 'Mudar palpite', saved: 'Palpite salvo! ✅', locked: 'Seu palpite está fechado', rules: 'Placar exato: 3 pts · Vencedor: 1 pt', nomatch: 'Sem grande jogo hoje. Volte amanhã! ⚽', streak: 'Sequência de dias', streakNote: 'Jogue 7 dias seguidos: +3 pontos bônus 🔥', trend: 'Ver a tendência + palpite da IA', trendNote: 'O que todos jogaram e o palpite da IA', homeW: 'Vitória mandante', draw: 'Empate', awayW: 'Vitória visitante', topScores: 'Placares mais jogados', nobody: 'Nenhum palpite ainda: seja o primeiro!', aiPick: 'Palpite da IA', ranking: 'Ranking', world: '🌍 Mundo', yourRank: 'Sua posição', pts: 'pts', yesterday: 'Último jogo', noPick: 'sem palpite', setupTitle: 'Bem-vindo ao Daily Score ⚽', setupText: 'Escolha seu idioma e seu país (para o ranking por país).', language: 'Idioma', country: 'País', start: 'Vamos lá!', settings: 'Ajustes', share: 'Desafiar amigos', shareText: 'Fiz meu palpite no Daily Score ⚽ Você me supera?', errStarted: 'Tarde demais, o jogo começou!', err: 'Algo deu errado, tente de novo.', h: 'h', m: 'min', empty: 'Ainda sem ranking: faça o primeiro palpite!' },
+  de: { wText: 'Jeden Tag ein großes Spiel: Tippe das Ergebnis und klettere in der Weltrangliste.', wGh: 'Mit GitHub anmelden', wTg: 'Auf Telegram spielen', tgOnly: 'Auf Telegram', logout: 'Abmelden', wErr: 'Anmeldung fehlgeschlagen, versuch es erneut.', invT: 'Freunde einladen', invText: 'Für jeden Freund, der seinen ersten Tipp abgibt, bekommt ihr beide den Trend + KI-Tipp gratis.', invCount: '{n} Freunde eingeladen', invNext: 'Nächstes Abzeichen {b} bei {k} Freunden', invBtn: 'Freunde einladen', invShare: 'Spiel mit mir Daily Score ⚽ jeden Tag ein großes Spiel, tippe das Ergebnis und klettere in der Rangliste!', free: 'Gratis', nextM: 'Nächstes Spiel', safe: 'Heute kein Spiel: deine Serie ist sicher 🔥', pDay: 'Tag', pWeek: 'Woche', pMonth: 'Monat', pAll: 'Gesamt', players: 'Spieler', today: 'Spiel des Tages', kick: 'Anpfiff in', started: 'Spiel läuft', final: 'Endstand', yourPick: 'Dein Tipp', lock: 'Tipp abgeben', change: 'Tipp ändern', saved: 'Tipp gespeichert! ✅', locked: 'Dein Tipp ist gesperrt', rules: 'Genaues Ergebnis: 3 Pkt · Richtiger Sieger: 1 Pkt', nomatch: 'Heute kein großes Spiel. Komm morgen wieder! ⚽', streak: 'Tage in Folge', streakNote: 'Spiel 7 Tage in Folge: +3 Bonuspunkte 🔥', trend: 'Trend + KI-Tipp ansehen', trendNote: 'Was alle getippt haben, und der KI-Tipp', homeW: 'Heimsieg', draw: 'Unentschieden', awayW: 'Auswärtssieg', topScores: 'Häufigste Tipps', nobody: 'Noch keine Tipps: sei der Erste!', aiPick: 'KI-Tipp', ranking: 'Rangliste', world: '🌍 Welt', yourRank: 'Dein Platz', pts: 'Pkt', yesterday: 'Letztes Spiel', noPick: 'kein Tipp', setupTitle: 'Willkommen bei Daily Score ⚽', setupText: 'Wähle deine Sprache und dein Land (für die Länderrangliste).', language: 'Sprache', country: 'Land', start: "Los geht's!", settings: 'Einstellungen', share: 'Freunde herausfordern', shareText: 'Ich habe meinen Daily-Score-Tipp abgegeben ⚽ Schlägst du mich?', errStarted: 'Zu spät, das Spiel hat begonnen!', err: 'Etwas ist schiefgelaufen, versuch es erneut.', h: 'Std', m: 'Min', empty: 'Noch keine Rangliste: gib den ersten Tipp ab!' },
+  it: { wText: 'Una grande partita al giorno: indovina il risultato e scala la classifica mondiale.', wGh: 'Accedi con GitHub', wTg: 'Gioca su Telegram', tgOnly: 'Su Telegram', logout: 'Esci', wErr: 'Accesso non riuscito, riprova.', invT: 'Invita amici', invText: "Per ogni amico che fa il primo pronostico, ricevete entrambi la tendenza + il pronostico dell'IA gratis.", invCount: '{n} amici invitati', invNext: 'Prossimo badge {b} a {k} amici', invBtn: 'Invita amici', invShare: 'Gioca con me a Daily Score ⚽ una grande partita al giorno, indovina il risultato e scala la classifica!', free: 'Gratis', nextM: 'Prossima partita', safe: 'Nessuna partita oggi: la tua serie è al sicuro 🔥', pDay: 'Giorno', pWeek: 'Settimana', pMonth: 'Mese', pAll: 'Totale', players: 'giocatori', today: 'Partita del giorno', kick: "Calcio d'inizio tra", started: 'Partita in corso', final: 'Risultato finale', yourPick: 'Il tuo pronostico', lock: 'Conferma pronostico', change: 'Cambia pronostico', saved: 'Pronostico salvato! ✅', locked: 'Il tuo pronostico è bloccato', rules: 'Risultato esatto: 3 pt · Vincitore giusto: 1 pt', nomatch: 'Oggi nessuna grande partita. Torna domani! ⚽', streak: 'Giorni di fila', streakNote: 'Gioca 7 giorni di fila: +3 punti bonus 🔥', trend: "Vedi la tendenza + pronostico dell'IA", trendNote: "Cosa hanno giocato tutti e il pronostico dell'IA", homeW: 'Vittoria casa', draw: 'Pareggio', awayW: 'Vittoria trasferta', topScores: 'Risultati più giocati', nobody: 'Ancora nessun pronostico: sii il primo!', aiPick: "Pronostico dell'IA", ranking: 'Classifica', world: '🌍 Mondo', yourRank: 'Il tuo posto', pts: 'pt', yesterday: 'Ultima partita', noPick: 'nessun pronostico', setupTitle: 'Benvenuto su Daily Score ⚽', setupText: 'Scegli la tua lingua e il tuo paese (per la classifica del paese).', language: 'Lingua', country: 'Paese', start: 'Si parte!', settings: 'Impostazioni', share: 'Sfida i miei amici', shareText: 'Ho fatto il mio pronostico Daily Score ⚽ Mi batti?', errStarted: 'Troppo tardi, la partita è iniziata!', err: 'Qualcosa è andato storto, riprova.', h: 'h', m: 'min', empty: 'Ancora nessuna classifica: fai il primo pronostico!' },
+  ar: { wText: 'مباراة كبيرة كل يوم: توقّع النتيجة واصعد في الترتيب العالمي.', wGh: 'الدخول عبر GitHub', wTg: 'العب على Telegram', tgOnly: 'على Telegram', logout: 'تسجيل الخروج', wErr: 'فشل تسجيل الدخول، حاول مرة أخرى.', invT: 'ادعُ أصدقاءك', invText: 'مقابل كل صديق يقدّم توقعه الأول، تحصلان معًا على التوجه + توقع الذكاء الاصطناعي مجانًا.', invCount: '{n} أصدقاء مدعوون', invNext: 'الشارة التالية {b} عند {k} أصدقاء', invBtn: 'ادعُ أصدقاءك', invShare: 'انضم إليّ في Daily Score ⚽ مباراة كبيرة كل يوم، توقّع النتيجة واصعد في الترتيب!', free: 'مجانًا', nextM: 'المباراة القادمة', safe: 'لا مباراة اليوم: سلسلتك محمية 🔥', pDay: 'اليوم', pWeek: 'الأسبوع', pMonth: 'الشهر', pAll: 'الإجمالي', players: 'لاعب', today: 'مباراة اليوم', kick: 'تبدأ بعد', started: 'المباراة جارية', final: 'النتيجة النهائية', yourPick: 'توقعك', lock: 'تأكيد توقعي', change: 'تعديل توقعي', saved: 'تم حفظ التوقع! ✅', locked: 'توقعك مُقفل', rules: 'نتيجة دقيقة: 3 نقاط · الفائز الصحيح: نقطة', nomatch: 'لا توجد مباراة كبيرة اليوم. عد غدًا! ⚽', streak: 'أيام متتالية', streakNote: 'العب 7 أيام متتالية: +3 نقاط إضافية 🔥', trend: 'شاهد التوجه + توقع الذكاء الاصطناعي', trendNote: 'ما توقعه الجميع وتوقع الذكاء الاصطناعي', homeW: 'فوز المضيف', draw: 'تعادل', awayW: 'فوز الضيف', topScores: 'النتائج الأكثر توقعًا', nobody: 'لا توقعات بعد: كن الأول!', aiPick: 'توقع الذكاء الاصطناعي', ranking: 'الترتيب', world: '🌍 العالم', yourRank: 'ترتيبك', pts: 'نقطة', yesterday: 'آخر مباراة', noPick: 'بدون توقع', setupTitle: 'مرحبًا بك في Daily Score ⚽', setupText: 'اختر لغتك وبلدك (لترتيب البلد).', language: 'اللغة', country: 'البلد', start: 'هيا بنا!', settings: 'الإعدادات', share: 'تحدَّ أصدقائي', shareText: 'قدّمت توقعي في Daily Score ⚽ هل تتفوق علي؟', errStarted: 'فات الأوان، بدأت المباراة!', err: 'حدث خطأ، حاول مرة أخرى.', h: 'س', m: 'د', empty: 'لا يوجد ترتيب بعد: قدّم أول توقع!' },
+  tr: { wText: 'Her gün büyük bir maç: skoru tahmin et ve dünya sıralamasında yüksel.', wGh: 'GitHub ile giriş yap', wTg: "Telegram'da oyna", tgOnly: "Telegram'da", logout: 'Çıkış yap', wErr: 'Giriş başarısız, tekrar dene.', invT: 'Arkadaşlarını davet et', invText: 'İlk tahminini yapan her arkadaş için ikiniz de eğilim + yapay zekâ tahminini ücretsiz kazanırsınız.', invCount: '{n} arkadaş davet edildi', invNext: 'Sonraki rozet {b}: {k} arkadaş', invBtn: 'Arkadaşlarını davet et', invShare: "Daily Score'da bana katıl ⚽ her gün büyük bir maç, skoru tahmin et ve sıralamada yüksel!", free: 'Ücretsiz', nextM: 'Sonraki maç', safe: 'Bugün maç yok: serin güvende 🔥', pDay: 'Gün', pWeek: 'Hafta', pMonth: 'Ay', pAll: 'Toplam', players: 'oyuncu', today: 'Günün maçı', kick: 'Başlamasına', started: 'Maç oynanıyor', final: 'Maç sonucu', yourPick: 'Tahminin', lock: 'Tahminimi onayla', change: 'Tahminimi değiştir', saved: 'Tahmin kaydedildi! ✅', locked: 'Tahminin kilitlendi', rules: 'Tam skor: 3 puan · Doğru kazanan: 1 puan', nomatch: 'Bugün büyük maç yok. Yarın gel! ⚽', streak: 'Gün serisi', streakNote: '7 gün üst üste oyna: +3 bonus puan 🔥', trend: 'Eğilim + yapay zekâ tahmini', trendNote: 'Herkesin tahmini ve yapay zekânın tahmini', homeW: 'Ev sahibi kazanır', draw: 'Beraberlik', awayW: 'Deplasman kazanır', topScores: 'En çok oynanan skorlar', nobody: 'Henüz tahmin yok: ilk sen ol!', aiPick: 'Yapay zekâ tahmini', ranking: 'Sıralama', world: '🌍 Dünya', yourRank: 'Sıran', pts: 'puan', yesterday: 'Son maç', noPick: 'tahmin yok', setupTitle: "Daily Score'a hoş geldin ⚽", setupText: 'Dilini ve ülkeni seç (ülke sıralaması için).', language: 'Dil', country: 'Ülke', start: 'Başlayalım!', settings: 'Ayarlar', share: 'Arkadaşlarıma meydan oku', shareText: 'Daily Score tahminimi yaptım ⚽ Beni geçebilir misin?', errStarted: 'Çok geç, maç başladı!', err: 'Bir hata oluştu, tekrar dene.', h: 'sa', m: 'dk', empty: 'Henüz sıralama yok: ilk tahmini yap!' },
+  ru: { wText: 'Один большой матч в день: угадай счёт и поднимайся в мировом рейтинге.', wGh: 'Войти через GitHub', wTg: 'Играть в Telegram', tgOnly: 'В Telegram', logout: 'Выйти', wErr: 'Не удалось войти, попробуй ещё раз.', invT: 'Пригласить друзей', invText: 'За каждого друга, который сделает первый прогноз, вы оба получаете тенденцию + прогноз ИИ бесплатно.', invCount: 'Приглашено друзей: {n}', invNext: 'Следующий значок {b}: {k} друзей', invBtn: 'Пригласить друзей', invShare: 'Играй со мной в Daily Score ⚽ один большой матч в день, угадай счёт и поднимайся в рейтинге!', free: 'Бесплатно', nextM: 'Следующий матч', safe: 'Сегодня нет матча: твоя серия в безопасности 🔥', pDay: 'День', pWeek: 'Неделя', pMonth: 'Месяц', pAll: 'Всего', players: 'игроков', today: 'Матч дня', kick: 'До начала', started: 'Матч идёт', final: 'Итоговый счёт', yourPick: 'Твой прогноз', lock: 'Подтвердить прогноз', change: 'Изменить прогноз', saved: 'Прогноз сохранён! ✅', locked: 'Твой прогноз закрыт', rules: 'Точный счёт: 3 очка · Верный победитель: 1 очко', nomatch: 'Сегодня нет большого матча. Возвращайся завтра! ⚽', streak: 'Серия дней', streakNote: 'Играй 7 дней подряд: +3 бонусных очка 🔥', trend: 'Тенденция + прогноз ИИ', trendNote: 'Что выбрали все и прогноз ИИ', homeW: 'Победа хозяев', draw: 'Ничья', awayW: 'Победа гостей', topScores: 'Самые частые счета', nobody: 'Прогнозов пока нет: будь первым!', aiPick: 'Прогноз ИИ', ranking: 'Рейтинг', world: '🌍 Мир', yourRank: 'Твоё место', pts: 'оч', yesterday: 'Прошлый матч', noPick: 'без прогноза', setupTitle: 'Добро пожаловать в Daily Score ⚽', setupText: 'Выбери язык и страну (для рейтинга страны).', language: 'Язык', country: 'Страна', start: 'Поехали!', settings: 'Настройки', share: 'Бросить вызов друзьям', shareText: 'Я сделал прогноз в Daily Score ⚽ Сможешь лучше?', errStarted: 'Слишком поздно, матч начался!', err: 'Что-то пошло не так, попробуй ещё раз.', h: 'ч', m: 'мин', empty: 'Рейтинга пока нет: сделай первый прогноз!' },
+};
+let st = null, lang = 'en', tab = 'world', period = 'week', rk = null, home = 1, away = 1, editing = false, trendData = null, timer = null;
+const t = (k) => (S[lang] && S[lang][k]) || S.en[k] || k;
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const BADGES = [[25, '👑'], [10, '🏟️'], [3, '🤝']];
+const DSB = [["p1", "⚽", "picks", 1], ["p10", "🎯", "picks", 10], ["p50", "📅", "picks", 50], ["p100", "💯", "picks", 100], ["p365", "🗓️", "picks", 365], ["e1", "🔮", "exact", 1], ["e5", "🧙", "exact", 5], ["e20", "🧠", "exact", 20], ["e50", "🌟", "exact", 50], ["s3", "🔥", "streak", 3], ["s7", "⚡", "streak", 7], ["s30", "☄️", "streak", 30], ["s100", "🌋", "streak", 100], ["t10", "🥉", "points", 10], ["t50", "🥈", "points", 50], ["t100", "🥇", "points", 100], ["t250", "🏆", "points", 250], ["t500", "💎", "points", 500], ["r1", "🤗", "refs", 1], ["r3", "🤝", "refs", 3], ["r10", "🏟️", "refs", 10], ["r25", "👑", "refs", 25], ["a1", "📊", "trends", 1], ["a10", "🔬", "trends", 10], ["d1", "🟰", "drawexact", 1], ["g1", "🎆", "goalfest", 1]];
+const DSB_TPL = {"picks": {"en": "{n} picks", "fr": "{n} pronostics", "es": "{n} pronósticos", "pt": "{n} palpites", "de": "{n} Tipps", "it": "{n} pronostici", "ar": "{n} توقعات", "tr": "{n} tahmin", "ru": "{n} прогнозов"}, "exact": {"en": "{n} exact scores", "fr": "{n} scores exacts", "es": "{n} resultados exactos", "pt": "{n} placares exatos", "de": "{n} genaue Ergebnisse", "it": "{n} risultati esatti", "ar": "{n} نتائج دقيقة", "tr": "{n} tam skor", "ru": "{n} точных счётов"}, "streak": {"en": "{n} days in a row", "fr": "{n} jours de suite", "es": "{n} días seguidos", "pt": "{n} dias seguidos", "de": "{n} Tage in Folge", "it": "{n} giorni di fila", "ar": "{n} أيام متتالية", "tr": "{n} gün üst üste", "ru": "{n} дней подряд"}, "points": {"en": "{n} points", "fr": "{n} points", "es": "{n} puntos", "pt": "{n} pontos", "de": "{n} Punkte", "it": "{n} punti", "ar": "{n} نقطة", "tr": "{n} puan", "ru": "{n} очков"}, "refs": {"en": "{n} friends invited", "fr": "{n} amis invités", "es": "{n} amigos invitados", "pt": "{n} amigos convidados", "de": "{n} Freunde eingeladen", "it": "{n} amici invitati", "ar": "{n} أصدقاء مدعوون", "tr": "{n} arkadaş davet edildi", "ru": "{n} приглашённых друзей"}, "trends": {"en": "{n} trends seen", "fr": "{n} tendances vues", "es": "{n} tendencias vistas", "pt": "{n} tendências vistas", "de": "{n} Trends angesehen", "it": "{n} tendenze viste", "ar": "{n} توجهات", "tr": "{n} eğilim görüldü", "ru": "{n} тенденций"}, "drawexact": {"en": "Exact score on a draw", "fr": "Score exact sur un match nul", "es": "Resultado exacto en un empate", "pt": "Placar exato num empate", "de": "Genaues Ergebnis bei einem Unentschieden", "it": "Risultato esatto su un pareggio", "ar": "نتيجة دقيقة في تعادل", "tr": "Beraberlikte tam skor", "ru": "Точный счёт в ничьей"}, "goalfest": {"en": "Exact score with 5+ goals", "fr": "Score exact avec 5 buts ou plus", "es": "Resultado exacto con 5+ goles", "pt": "Placar exato com 5+ gols", "de": "Genaues Ergebnis mit 5+ Toren", "it": "Risultato esatto con 5+ gol", "ar": "نتيجة دقيقة بـ5 أهداف أو أكثر", "tr": "5+ gollü maçta tam skor", "ru": "Точный счёт с 5+ голами"}};
+const DSB_CARD = {"en": "Badges", "fr": "Badges", "es": "Insignias", "pt": "Selos", "de": "Abzeichen", "it": "Badge", "ar": "الشارات", "tr": "Rozetler", "ru": "Значки"};
+const bLabel = (b) => (DSB_TPL[b[2]][lang] || DSB_TPL[b[2]].en).replace('{n}', b[3]);
+const badge = (n) => { const b = BADGES.find(([k]) => (n || 0) >= k); return b ? ' ' + b[1] : ''; };
+const flag = (cc) => (cc && cc.length === 2 ? String.fromCodePoint(...[...cc.toUpperCase()].map((c) => 127397 + c.charCodeAt(0))) : '🏳️');
+const countryName = (cc) => { try { return new Intl.DisplayNames([lang], { type: 'region' }).of(cc); } catch (e) { return cc; } };
+async function api(route, body) {
+  const auth = IN_TG ? { initData: tg.initData } : { token: TOKEN };
+  const r = await fetch(API + '/ds/api/' + route, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...auth, ...(body || {}) }) });
+  const j = await r.json().catch(() => ({}));
+  if (r.status === 401 && !IN_TG) { try { localStorage.removeItem('ds_token'); } catch (e) {} TOKEN = null; loginView(); throw Object.assign(new Error('auth'), { code: 'auth' }); }
+  if (!r.ok) throw Object.assign(new Error(j.error || 'error'), { code: j.error });
+  return j;
+}
+function toast(msg) { const d = document.createElement('div'); d.className = 'toast'; d.textContent = msg; document.body.appendChild(d); setTimeout(() => d.remove(), 2200); }
+const haptic = (k) => { try { tg.HapticFeedback.impactOccurred(k || 'light'); } catch (e) {} };
+function applyLang() { document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr'; document.documentElement.lang = lang; }
+
+function loginView() {
+  const nl = (navigator.language || 'en').slice(0, 2); lang = S[nl] ? nl : 'en'; applyLang();
+  document.getElementById('app').innerHTML = `
+  <div class="top"><div class="brand">Daily <b>Score</b><span class="beta">BETA</span></div></div>
+  <div class="card center"><div class="big" style="font-size:44px">⚽</div>
+    <h2 style="margin:6px 0 6px">Daily Score</h2>
+    <p class="muted" style="margin:0 0 6px">${esc(t('wText'))}</p>
+    <p class="muted" style="margin:0 0 10px;font-size:13px">${esc(t('rules'))}</p>
+    <button class="btn go" id="gh">${GH_ICON.replace('#f2f7f3', '#10200f').replace(/13/g, '18')} &nbsp;${esc(t('wGh'))}</button>
+    <button class="btn ghost" id="tgp">${TG_ICON.replace(/13/g, '18')} &nbsp;${esc(t('wTg'))}</button>
+    <p class="muted" style="margin:16px 0 0;font-size:12px">by <a href="https://t.me/jeremstyke" style="color:var(--lime)">@jeremstyke</a></p>
+  </div>`;
+  if (window.__loginErr) { window.__loginErr = false; toast(t('wErr')); }
+  document.getElementById('gh').onclick = () => { location.href = API + '/ds/gh/login?lang=' + lang; };
+  document.getElementById('tgp').onclick = () => { window.open('https://t.me/' + BOT + '?start=src_web', '_blank'); };
+}
+function setupView() {
+  const l0 = st.me.lang && S[st.me.lang] ? st.me.lang : 'en';
+  const c0 = st.me.country || st.me.suggestedCountry || 'GB';
+  lang = l0; applyLang();
+  const cs = [...COUNTRIES].sort((a, b) => countryName(a).localeCompare(countryName(b), lang));
+  document.getElementById('app').innerHTML = `
+  <div class="top"><div class="brand">Daily <b>Score</b><span class="beta">BETA</span></div></div>
+  <div class="card"><div class="big" style="font-size:40px">⚽</div>
+    <h2 class="center" style="margin:6px 0 4px">${esc(t('setupTitle'))}</h2>
+    <p class="center muted" style="margin:0 0 16px">${esc(t('setupText'))}</p>
+    <div class="label">${esc(t('language'))}</div>
+    <select id="sl">${Object.entries(LANGS).map(([k, v]) => `<option value="${k}" ${k === l0 ? 'selected' : ''}>${v}</option>`).join('')}</select>
+    <div class="label">${esc(t('country'))}</div>
+    <select id="sc">${cs.map((c) => `<option value="${c}" ${c === c0 ? 'selected' : ''}>${flag(c)} ${esc(countryName(c))}</option>`).join('')}</select>
+    <button class="btn go" id="sgo">${esc(t('start'))}</button>
+    ${!IN_TG && st.me.country ? `<button class="btn ghost" id="lout">${esc(t('logout'))}</button>` : ''}
+  </div>`;
+  const lo = document.getElementById('lout'); if (lo) lo.onclick = () => { try { localStorage.removeItem('ds_token'); } catch (e) {} TOKEN = null; loginView(); };
+  document.getElementById('sl').onchange = (e) => { lang = e.target.value; st.me.lang = lang; setupView(); };
+  document.getElementById('sgo').onclick = async () => {
+    haptic('medium');
+    try { st = await api('setup', { lang: document.getElementById('sl').value, country: document.getElementById('sc').value }); lang = st.me.lang; applyLang(); render(); }
+    catch (e) { toast(t('err')); }
+  };
+}
+
+function countdown(ms) { const h = Math.floor(ms / 3600000), m = Math.floor((ms % 3600000) / 60000); return (h ? h + ' ' + t('h') + ' ' : '') + m + ' ' + t('m'); }
+function matchCard() {
+  const m = st.match;
+  if (!m) {
+    const n = st.next;
+    const nx = n ? `<div class="label" style="justify-content:center;margin-top:14px;position:relative;z-index:1">${esc(t('nextM'))}</div><div class="center" style="position:relative;z-index:1"><div class="tname">${esc(n.home)} - ${esc(n.away)}</div><div class="note">${esc(n.competition)} · ${esc(new Date(n.kickoff).toLocaleString(lang, { weekday: 'long', hour: '2-digit', minute: '2-digit' }))}</div></div>` : '';
+    return `<div class="card match"><div class="label" style="position:relative;z-index:1">⚽ ${esc(t('today'))}</div><p class="center" style="position:relative;z-index:1;font-weight:700;margin:6px 0">${esc(t('safe'))}</p>${nx}</div>`;
+  }
+  const ko = new Date(m.kickoff).getTime(), now = Date.now(), open = ko > now;
+  const kickTime = new Date(m.kickoff).toLocaleString(lang, { weekday: 'short', hour: '2-digit', minute: '2-digit' });
+  let body = '';
+  if (open && (!st.pick || editing)) {
+    body = `<div class="picker">
+      <div class="stepper"><button data-s="h-">−</button><div class="goals" id="gh">${home}</div><button data-s="h+">+</button></div>
+      <div class="dash">-</div>
+      <div class="stepper"><button data-s="a-">−</button><div class="goals" id="ga">${away}</div><button data-s="a+">+</button></div>
+    </div>
+    <button class="btn go" id="lock">${esc(t('lock'))}</button>
+    <div class="note">${esc(t('rules'))}</div>`;
+  } else if (open) {
+    body = `<div class="label" style="justify-content:center;margin-top:16px;position:relative;z-index:1">${esc(t('yourPick'))}</div><div class="big">${st.pick.home} - ${st.pick.away}</div>
+    <button class="btn ghost" id="edit">${esc(t('change'))}</button>
+    <button class="btn ghost" id="share" style="margin-top:8px">📣 ${esc(t('share'))}</button>`;
+  } else {
+    const fin = m.status === 'FINISHED' && m.home_goals != null;
+    body = `<div class="label" style="justify-content:center;margin-top:16px;position:relative;z-index:1">${esc(fin ? t('final') : t('started'))}</div>
+    ${fin ? `<div class="big">${m.home_goals} - ${m.away_goals}</div>` : ''}
+    <div class="locked">${esc(t('yourPick'))} : ${st.pick ? st.pick.home + ' - ' + st.pick.away : esc(t('noPick'))}${st.pick && st.pick.points != null ? ' · +' + st.pick.points + ' ' + esc(t('pts')) : ''}</div>`;
+  }
+  return `<div class="card match">
+    <div class="label" style="position:relative;z-index:1">${m.competition_emblem ? `<img src="${esc(m.competition_emblem)}" alt="">` : '⚽'} ${esc(m.competition || t('today'))}</div>
+    <div class="teams">
+      <div class="team">${m.home_crest ? `<img class="crest" src="${esc(m.home_crest)}" alt="">` : ''}<div class="tname">${esc(m.home)}</div></div>
+      <div class="vs">VS</div>
+      <div class="team">${m.away_crest ? `<img class="crest" src="${esc(m.away_crest)}" alt="">` : ''}<div class="tname">${esc(m.away)}</div></div>
+    </div>
+    <div class="when">${open ? `${esc(kickTime)} · ${esc(t('kick'))} <b id="cd">${countdown(ko - now)}</b>` : ''}</div>
+    ${body}
+  </div>`;
+}
+function streakCard() {
+  const n = st.me.streak || 0, filled = n % 7 === 0 && n > 0 ? 7 : n % 7;
+  return `<div class="card"><div class="label">🔥 ${esc(t('streak'))} : ${n}</div>
+    <div class="streak">${Array.from({ length: 7 }, (_, i) => `<div class="dot ${i < filled ? 'on' : ''}">${i < filled ? '✓' : i === 6 ? '+3' : i + 1}</div>`).join('')}</div>
+    <div class="note">${esc(t('streakNote'))}</div></div>`;
+}
+function trendCard() {
+  if (!st.match) return '';
+  if (!trendData) return `<div class="card"><div class="label">📊 ${esc(t('trendNote'))}</div><button class="btn gold" id="trend">📊 ${esc(t('trend'))} · ${st.me.freeTrends > 0 && !st.trendPaid ? '🎁 ' + esc(t('free')) + ' (' + st.me.freeTrends + ')' : IN_TG ? '1 ⭐' : '1 ⭐ ' + esc(t('tgOnly'))}</button></div>`;
+  const d = trendData;
+  const bars = d.n ? [['homeW', d.home], ['draw', d.draw], ['awayW', d.away]].map(([k, v]) => `<div class="bar"><div>${esc(t(k))}<div class="track"><div class="fill" style="width:${v}%"></div></div></div><div class="pct">${v}%</div></div>`).join('')
+    + `<div class="label" style="margin-top:12px">${esc(t('topScores'))}</div>` + d.top.map((x) => `<div class="bar"><div><b>${esc(x.score)}</b></div><div class="pct">${x.pct}%</div></div>`).join('')
+    : `<p class="muted">${esc(t('nobody'))}</p>`;
+  const ai = d.ai ? `<div class="ai"><div class="label" style="margin-bottom:4px">🤖 ${esc(t('aiPick'))}</div><div class="sc">${esc(st.match.home)} ${d.ai.home} - ${d.ai.away} ${esc(st.match.away)}</div><div style="font-size:14px;margin-top:4px">${esc(d.ai.reason)}</div></div>` : '';
+  return `<div class="card"><div class="label">📊 ${esc(t('trendNote'))} · ${d.n || 0}</div>${bars}${ai}</div>`;
+}
+function lastCard() {
+  const l = st.last;
+  if (!l || l.home_goals == null) return '';
+  return `<div class="card"><div class="label">${esc(t('yesterday'))}</div><div class="last"><span>${esc(l.home)} <b>${l.home_goals} - ${l.away_goals}</b> ${esc(l.away)}</span><span class="muted">${l.pick ? l.pick.home + '-' + l.pick.away + (l.pick.points != null ? ' · +' + l.pick.points : '') : esc(t('noPick'))}</span></div></div>`;
+}
+function rankingCard() {
+  const r = rk || st.ranking, c = st.me.country;
+  const per = [['day', 'pDay'], ['week', 'pWeek'], ['month', 'pMonth'], ['all', 'pAll']].map(([k, s]) => `<div class="tab ${period === k ? 'on' : ''}" data-period="${k}">${esc(t(s))}</div>`).join('');
+  const rows = r.top && r.top.length ? r.top.map((x) => `<div class="row ${x.me ? 'me' : ''}"><div class="rk">${x.rank}</div><div>${provIcon(x.provider)} ${flag(x.country)} ${esc(x.name)}${badge(x.refs)}</div><div class="pts">${x.points} ${esc(t('pts'))}</div></div>`).join('') : `<p class="muted center">${esc(t('empty'))}</p>`;
+  return `<div class="card"><div class="label">🏆 ${esc(t('ranking'))}${r.players ? ' · ' + r.players + ' ' + esc(t('players')) : ''}</div>
+    <div class="tabs">${per}</div>
+    <div class="tabs"><div class="tab ${tab === 'world' ? 'on' : ''}" data-tab="world">${esc(t('world'))}</div><div class="tab ${tab === 'country' ? 'on' : ''}" data-tab="country">${flag(c)} ${esc(countryName(c))}</div></div>
+    <div id="rkl">${rows}</div>
+    ${r.me ? `<div class="myrank">${esc(t('yourRank'))} : #${r.me.rank} · ${r.me.points} ${esc(t('pts'))}</div>` : ''}</div>`;
+}
+async function loadRanking() {
+  try { rk = await api('ranking', { period, scope: tab }); render(); } catch (e) { toast(t('err')); }
+}
+function badgesCard() {
+  const got = new Set(st.me.badges || []);
+  return `<div class="card"><div class="label">🏅 ${esc(DSB_CARD[lang] || DSB_CARD.en)} · ${got.size}/${DSB.length}</div>
+    <div class="bgrid">${DSB.map((b) => `<div class="bdg ${got.has(b[0]) ? 'on' : 'off'}" data-b="${b[0]}">${b[1]}</div>`).join('')}</div></div>`;
+}
+function inviteCard() {
+  const n = st.me.refs || 0;
+  const next = [...BADGES].reverse().find(([k]) => n < k);
+  const tpl = (s, v) => s.replace('{n}', v.n).replace('{b}', v.b).replace('{k}', v.k);
+  return `<div class="card"><div class="label">🤝 ${esc(t('invT'))}${badge(n)}</div>
+    <p style="margin:0 0 8px;font-size:14px">${esc(t('invText'))}</p>
+    <div class="note" style="margin:0">${esc(tpl(t('invCount'), { n }))}${next ? ' · ' + esc(tpl(t('invNext'), { b: next[1], k: next[0] })) : ''}</div>
+    <button class="btn go" id="invite">📣 ${esc(t('invBtn'))}</button></div>`;
+}
+function render() {
+  if (!st.me.country) return setupView();
+  lang = S[st.me.lang] ? st.me.lang : 'en'; applyLang();
+  if (st.pick && !editing) { home = st.pick.home; away = st.pick.away; }
+  document.getElementById('app').innerHTML = `
+  <div class="top"><div class="brand">Daily <b>Score</b><span class="beta">BETA</span></div>
+    <div class="chips"><div class="chip fire">🔥 ${st.me.streak || 0}</div><div class="chip">🏆 ${st.me.points}</div><div class="chip" id="set">⚙️</div></div></div>
+  ${matchCard()}${trendCard()}${streakCard()}${inviteCard()}${badgesCard()}${lastCard()}${rankingCard()}`;
+  bind();
+}
+function bind() {
+  document.querySelectorAll('[data-s]').forEach((b) => b.onclick = () => {
+    haptic(); const s = b.dataset.s;
+    if (s === 'h+') home = Math.min(20, home + 1); if (s === 'h-') home = Math.max(0, home - 1);
+    if (s === 'a+') away = Math.min(20, away + 1); if (s === 'a-') away = Math.max(0, away - 1);
+    document.getElementById('gh').textContent = home; document.getElementById('ga').textContent = away;
+  });
+  const lock = document.getElementById('lock');
+  if (lock) lock.onclick = async () => {
+    lock.disabled = true; haptic('medium');
+    try { st = await api('pick', { home, away }); editing = false; try { tg.HapticFeedback.notificationOccurred('success'); } catch (e) {} toast(t('saved')); render(); }
+    catch (e) { toast(e.code === 'started' ? t('errStarted') : t('err')); lock.disabled = false; if (e.code === 'started') load(); }
+  };
+  const edit = document.getElementById('edit'); if (edit) edit.onclick = () => { editing = true; render(); };
+  const share = document.getElementById('share'); if (share) share.onclick = () => { api('ev', { k: 'share' }).catch(() => {}); openLink('https://t.me/share/url?url=' + encodeURIComponent('https://t.me/' + BOT + '?start=src_share') + '&text=' + encodeURIComponent(t('shareText'))); };
+  const tr = document.getElementById('trend'); if (tr) tr.onclick = buyTrend;
+  document.querySelectorAll('[data-b]').forEach((x) => x.onclick = () => { haptic(); const b = DSB.find((y) => y[0] === x.dataset.b); toast((x.classList.contains('on') ? '✅ ' : '🔒 ') + b[1] + ' ' + bLabel(b)); });
+  const inv = document.getElementById('invite'); if (inv) inv.onclick = () => { haptic('medium'); api('ev', { k: 'invite' }).catch(() => {}); openLink('https://t.me/share/url?url=' + encodeURIComponent('https://t.me/' + BOT + '?start=ref_' + st.me.id) + '&text=' + encodeURIComponent(t('invShare'))); };
+  document.querySelectorAll('[data-tab]').forEach((x) => x.onclick = () => { haptic(); tab = x.dataset.tab; loadRanking(); });
+  document.querySelectorAll('[data-period]').forEach((x) => x.onclick = () => { haptic(); period = x.dataset.period; loadRanking(); });
+  const set = document.getElementById('set'); if (set) set.onclick = () => { setupView(); };
+}
+async function loadTrend() { try { trendData = await api('trend'); render(); return true; } catch (e) { return false; } }
+async function buyTrend() {
+  haptic('medium');
+  if (st.trendPaid && await loadTrend()) return;
+  if (!IN_TG && !(st.me.freeTrends > 0)) { openLink('https://t.me/' + BOT + '?start=src_web_trend'); return; }
+  if (st.me.freeTrends > 0) { try { trendData = await api('trend_free'); st.me.freeTrends--; st.trendPaid = true; render(); return; } catch (e) {} }
+  try {
+    const r = await api('trend_invoice');
+    if (!r.link) return toast(t('err'));
+    tg.openInvoice(r.link, async (status) => {
+      if (status !== 'paid') return;
+      for (let i = 0; i < 6; i++) { if (await loadTrend()) return; await new Promise((ok) => setTimeout(ok, 1200)); }
+      toast(t('err'));
+    });
+  } catch (e) { toast(t('err')); }
+}
+async function load() {
+  if (!IN_TG && !TOKEN) return loginView();
+  try { st = await api('state'); rk = null; if (st.trendPaid) loadTrend(); render(); if (period !== 'week' || tab !== 'world') loadRanking(); }
+  catch (e) { document.getElementById('app').innerHTML = `<div class="card center"><p>${esc(t('err'))}</p><button class="btn go" onclick="load()">↻</button></div>`; }
+}
+setInterval(() => { const el = document.getElementById('cd'); if (el && st && st.match) { const ms = new Date(st.match.kickoff).getTime() - Date.now(); if (ms <= 0) load(); else el.textContent = countdown(ms); } }, 30000);
+load();
+</script>
+</body>
+</html>
