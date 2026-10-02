@@ -12,7 +12,14 @@
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0b1a12">
 <link rel="apple-touch-icon" href="icon-192.png">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+<link rel="icon" type="image/png" href="https://jeremstyke.github.io/dailyscore/favicon.png">
+<link rel="manifest" href="https://jeremstyke.github.io/dailyscore/manifest.webmanifest">
+<link rel="apple-touch-icon" href="https://jeremstyke.github.io/dailyscore/apple-touch-icon.png">
+<meta name="theme-color" content="#0b1a12">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Daily Score">
+<meta property="og:image" content="https://jeremstyke.github.io/dailyscore/icon-512.png">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -36,6 +43,7 @@ body { background: radial-gradient(1200px 500px at 50% -200px, #1d4a30 0%, trans
 .brand { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 23px; letter-spacing: .3px; text-transform: uppercase; white-space: nowrap; }
 @media (max-width: 380px) { .brand { font-size: 20px; } .chip { padding: 5px 8px; font-size: 12px; } }
 .brand b { color: var(--lime); }
+.blogo { width: 30px; height: 30px; border-radius: 50%; vertical-align: middle; margin-right: 6px; margin-top: -3px; }
 .beta { font-family: Inter, sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 1px; background: rgba(198,255,61,.15); color: var(--lime); border: 1px solid rgba(198,255,61,.4); border-radius: 6px; padding: 2px 5px; vertical-align: middle; margin-left: 4px; }
 .chips { display: flex; gap: 6px; }
 .chip { background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; font-weight: 700; font-size: 13px; white-space: nowrap; }
@@ -182,14 +190,13 @@ function loginView() {
   hideNav();
   const nl = (navigator.language || 'en').slice(0, 2); lang = S[nl] ? nl : 'en'; applyLang();
   document.getElementById('app').innerHTML = `
-  <div class="top"><div class="brand">Daily <b>Score</b><span class="beta">BETA</span></div></div>
-  <div class="card center"><div class="big" style="font-size:44px">⚽</div>
-    <h2 style="margin:6px 0 6px">Daily Score</h2>
+  <div class="top"><div class="brand"><img class="blogo" src="https://jeremstyke.github.io/dailyscore/logo-96.png" alt="">Daily <b>Score</b><span class="beta">BETA</span></div></div>
+  <div class="card center"><img src="https://jeremstyke.github.io/dailyscore/icon-512.png" alt="Daily Score" style="width:150px;height:150px;display:block;margin:4px auto 10px">
     <p class="muted" style="margin:0 0 6px">${esc(t('wText'))}</p>
     <p class="muted" style="margin:0 0 10px;font-size:13px">${esc(t('rules'))}</p>
     <button class="btn go" id="gh">${GH_ICON.replace('#f2f7f3', '#10200f').replace(/13/g, '18')} &nbsp;${esc(t('wGh'))}</button>
     <button class="btn ghost" id="tgp">${TG_ICON.replace(/13/g, '18')} &nbsp;${esc(t('wTg'))}</button>
-    <p class="muted" style="margin:16px 0 0;font-size:12px">by <a href="https://t.me/jeremstyke" style="color:var(--lime)">@jeremstyke</a></p>
+    <p class="muted" style="margin:16px 0 0;font-size:12px">by <a href="https://t.me/jeremstyke" style="color:var(--lime)">@jeremstyke</a> · <a href="https://jeremstyke.github.io/dailyscore/privacy.html" style="color:var(--mute)">Privacy</a></p>
   </div>`;
   if (window.__loginErr) { window.__loginErr = false; toast(t('wErr')); }
   document.getElementById('gh').onclick = () => { location.href = API + '/ds/gh/login?lang=' + lang; };
@@ -203,7 +210,7 @@ function setupView() {
   lang = l0; applyLang();
   const cs = [...COUNTRIES].sort((a, b) => countryName(a).localeCompare(countryName(b), lang));
   document.getElementById('app').innerHTML = `
-  <div class="top"><div class="brand">Daily <b>Score</b><span class="beta">BETA</span></div></div>
+  <div class="top"><div class="brand"><img class="blogo" src="https://jeremstyke.github.io/dailyscore/logo-96.png" alt="">Daily <b>Score</b><span class="beta">BETA</span></div></div>
   <div class="card"><div class="big" style="font-size:40px">⚽</div>
     <h2 class="center" style="margin:6px 0 4px">${esc(t('setupTitle'))}</h2>
     <p class="center muted" style="margin:0 0 16px">${esc(t('setupText'))}</p>
@@ -393,8 +400,8 @@ function render() {
   lang = S[st.me.lang] ? st.me.lang : 'en'; applyLang();
   if (st.pick && !editing) { home = st.pick.home; away = st.pick.away; }
   document.getElementById('app').innerHTML = `
-  <div class="top"><div class="brand">Daily <b>Score</b><span class="beta">BETA</span></div>
-    <div class="chips"><div class="chip fire">🔥 ${st.me.streak || 0}</div><div class="chip">🏆 ${st.me.points}</div><div class="chip" id="set">⚙️</div></div></div>
+  <div class="top"><div class="brand"><img class="blogo" src="https://jeremstyke.github.io/dailyscore/logo-96.png" alt="">Daily <b>Score</b><span class="beta">BETA</span></div>
+    <div class="chips"><div class="chip fire">🔥 ${st.me.streak || 0}</div><div class="chip">🏆 ${st.me.points}</div></div></div>
   ${view === 'match' ? matchCard() + trendCard() + lastCard() : view === 'rank' ? rankingCard() : view === 'leagues' ? leaguesCard() + inviteCard() : profileCard() + streakCard() + badgesCard()}`;
   navBar();
   bind();
@@ -455,6 +462,7 @@ async function load() {
 }
 setInterval(() => { const el = document.getElementById('cd'); if (el && st && st.match) { const ms = new Date(st.match.kickoff).getTime() - Date.now(); if (ms <= 0) load(); else el.textContent = countdown(ms); } }, 30000);
 load();
+if (!IN_TG && 'serviceWorker' in navigator && location.hostname.endsWith('github.io')) navigator.serviceWorker.register('/dailyscore/sw.js', { scope: '/dailyscore/' }).catch(() => {});
 if (!IN_TG) document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && TOKEN && st && st.me && st.me.provider === 'gh') load(); });
 </script>
 </body>
