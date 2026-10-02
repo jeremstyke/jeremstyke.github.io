@@ -350,7 +350,7 @@ function matchCard() {
 }
 function streakCard() {
   const n = st.me.streak || 0, filled = n % 7 === 0 && n > 0 ? 7 : n % 7;
-  return `<div class="card"><div class="label">🔥 ${esc(t('streak'))} : ${n}</div>
+  return `<div class="card" id="streakcard"><div class="label">🔥 ${esc(t('streak'))} : ${n}</div>
     <div class="streak">${Array.from({ length: 7 }, (_, i) => `<div class="dot ${i < filled ? 'on' : ''}">${i < filled ? '✓' : i === 6 ? '+3' : i + 1}</div>`).join('')}</div>
     <div class="note">${esc(t('streakNote'))}</div></div>`;
 }
@@ -480,7 +480,7 @@ function render() {
   if (st.pick && !editing) { home = st.pick.home; away = st.pick.away; }
   document.getElementById('app').innerHTML = `
   <div class="top"><div class="brand"><img class="blogo" src="https://jeremstyke.github.io/dailyscore/logo-96.png" alt="">Daily <b>Score</b><span class="beta">BETA</span></div>
-    <div class="chips"><div class="chip fire">🔥 ${st.me.streak || 0}</div><div class="chip">🏆 ${st.me.points}</div></div></div>
+    <div class="chips"><div class="chip fire" id="hfire" style="cursor:pointer">🔥 ${st.me.streak || 0}</div><div class="chip" id="htrophy" style="cursor:pointer">🏆 ${st.me.points}</div></div></div>
   ${view === 'match' ? matchCard() + trendCard() + lastCard() : view === 'rank' ? rankingCard() : view === 'leagues' ? leaguesCard() + inviteCard() : profileCard() + streakCard() + badgesCard()}`;
   navBar();
   bind();
@@ -511,6 +511,8 @@ function bind() {
   document.querySelectorAll('[data-period]').forEach((x) => x.onclick = () => { haptic(); period = x.dataset.period; loadRanking(); });
   const set = document.getElementById('set'); if (set) set.onclick = () => { setupView(); };
   document.querySelectorAll('[data-ext]').forEach((x) => x.onclick = () => { haptic(); try { tg.openLink(x.dataset.ext); } catch (e) { window.open(x.dataset.ext, '_blank'); } });
+  const hf = document.getElementById('hfire'); if (hf) hf.onclick = () => { haptic(); view = 'profile'; leagueView = null; render(); const sc = document.getElementById('streakcard'); if (sc) sc.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+  const ht = document.getElementById('htrophy'); if (ht) ht.onclick = () => { haptic(); view = 'rank'; leagueView = null; render(); window.scrollTo(0, 0); };
   const set2 = document.getElementById('set2'); if (set2) set2.onclick = () => { setupView(); };
 }
 async function loadTrend() { try { trendData = await api('trend'); render(); return true; } catch (e) { return false; } }
