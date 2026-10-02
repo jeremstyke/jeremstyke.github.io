@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.jeremstyke.dailyscore",
+      "sha256_cert_fingerprints": [
+        "EF:41:80:9C:53:E6:59:BB:12:2B:77:50:FD:50:97:B1:36:1A:6A:2D:6B:03:CE:27:C2:25:8C:29:9F:12:B8:08"
+      ]
+    }
+  }
+]
