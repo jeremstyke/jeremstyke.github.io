@@ -289,7 +289,7 @@ function leaguesCard() {
 const backBar = () => `<div class="top"><div class="chip" id="bk" style="cursor:pointer">‹ ${esc(t('back'))}</div><div class="brand" style="font-size:18px">Daily <b>Score</b></div></div>`;
 function createView() {
   document.getElementById('app').innerHTML = backBar() + `<div class="card"><div class="label">➕ ${esc(t('lgCreate'))}</div>
-    <div class="label">${esc(t('lgName'))}</div><input class="inp" id="lgn" maxlength="30" placeholder="${esc(st.me.name || '')} FC">
+    <div class="label">${esc(t('lgName'))}</div><input class="inp" id="lgn" maxlength="30" placeholder="${esc(((st.me.name || 'Daily').split(' ')[0]).slice(0, 20))} FC">
     <div class="label">${esc(t('lgDur'))}</div>
     <div class="durs">${[['7d', 'd7'], ['30d', 'd30'], ['month', 'dMonth'], ['1y', 'd1y']].map(([k, s]) => `<div class="tab ${durSel === k ? 'on' : ''}" data-dur="${k}">${esc(t(s))}</div>`).join('')}</div>
     <button class="btn go" id="lgok">${esc(t('lgGo'))}</button></div>`;
@@ -297,7 +297,7 @@ function createView() {
   document.querySelectorAll('[data-dur]').forEach((x) => x.onclick = () => { durSel = x.dataset.dur; const v = document.getElementById('lgn').value; createView(); document.getElementById('lgn').value = v; });
   document.getElementById('lgok').onclick = async () => {
     haptic('medium');
-    try { const r = await api('league_create', { name: document.getElementById('lgn').value, dur: durSel }); st = await api('state'); openLeague(r.id); }
+    try { const el = document.getElementById('lgn'); const r = await api('league_create', { name: el.value.trim() || el.placeholder, dur: durSel }); st = await api('state'); openLeague(r.id); }
     catch (e) { toast(t('e_' + e.code) !== 'e_' + e.code ? t('e_' + e.code) : t('err')); }
   };
 }
