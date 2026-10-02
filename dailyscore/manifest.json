@@ -1,0 +1,31 @@
+{
+  "name": "Daily Score: football predictions",
+  "short_name": "Daily Score",
+  "description": "One big football match a day: guess the score, climb the world and country rankings.",
+  "start_url": "/dailyscore/",
+  "scope": "/dailyscore/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b1a12",
+  "theme_color": "#0b1a12",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
