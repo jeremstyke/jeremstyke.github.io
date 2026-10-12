@@ -72,6 +72,7 @@ summary{cursor:pointer;list-style:none;padding:20px 0;font-weight:800;font-size:
 summary::-webkit-details-marker{display:none}summary::after{content:"+";color:var(--g);font-size:22px;line-height:1}details[open] summary::after{content:"−"}
 details p{margin:0 0 20px;color:var(--mut)}
 .final{text-align:center;border-radius:30px;padding:64px 24px;background:radial-gradient(circle at 50% 0,#1f4a34,var(--card) 70%);border:1px solid var(--line)}
+.c4{grid-template-columns:repeat(2,1fr)}.lk{display:block;transition:border-color .15s,transform .15s}.lk:hover{border-color:rgba(61,255,160,.5);transform:translateY(-3px)}.lk .go{display:inline-block;margin-top:14px;color:var(--g);font-weight:800}
 .final h2{margin-top:0}.final .sub{margin:0 auto 30px}
 footer{padding:40px 0;color:var(--mut);font-size:14px}footer .wrap{display:flex;gap:18px;align-items:center;flex-wrap:wrap}footer a:hover{color:var(--txt)}
 @media(max-width:900px){.links{display:none}.hero .wrap,.split{grid-template-columns:1fr}.cards,.aud{grid-template-columns:1fr}.hero{padding:48px 0}.donut{width:min(300px,76vw)}section{padding:60px 0}}
@@ -165,6 +166,17 @@ footer{padding:40px 0;color:var(--mut);font-size:14px}footer .wrap{display:flex;
   <details><summary data-t="q6">How does the affiliate program work?</summary><p data-t="p6">Once your channel is approved, you get a personal link. Every channel or advertiser who signs up with it earns you 15% of the 80/20 Ads commission on their activity, for 12 months. It costs them nothing.</p></details>
 </div></section>
 
+<section id="links"><div class="wrap">
+  <div class="kick" data-t="k4">Telegram ads</div>
+  <h2 data-t="h4" style="margin-bottom:28px">Free or paid, we have you covered</h2>
+  <div class="cards c4">
+    <a class="card lk" href="https://t.me/PostOnAdSpotBot?start=src_8020web"><div class="ic">🆓</div><h3 data-t="f1t">Free ads</h3><p data-t="f1p">Post your ad for free on AdSpot, our free ads channel.</p><span class="go" data-t="f1b">Open AdSpot ›</span></a>
+    <a class="card lk" href="https://t.me/Ads8020Bot?start=src_web"><div class="ic">🎯</div><h3 data-t="f2t">Paid ads</h3><p data-t="f2p">Boost your project on real Telegram channels with 80/20 Ads.</p><span class="go" data-t="f2b">Advertise ›</span></a>
+    <a class="card lk" href="https://t.me/Ads8020Bot?start=src_web"><div class="ic">💰</div><h3 data-t="f3t">Earn money with your channel</h3><p data-t="f3p">Keep 80% of the ad revenue with 80/20 Ads.</p><span class="go" data-t="f3b">Register my channel ›</span></a>
+    <a class="card lk" href="https://t.me/Grampedia_bot?start=src_8020web"><div class="ic">📚</div><h3 data-t="f4t">Telegram directory</h3><p data-t="f4p">Get your channel, group or bot listed for free on GramPedia.</p><span class="go" data-t="f4b">Open GramPedia ›</span></a>
+  </div>
+</div></section>
+
 <section><div class="wrap">
   <div class="final grid-bg">
     <h2 data-t="hz">Be ready on day one</h2>
@@ -177,6 +189,8 @@ footer{padding:40px 0;color:var(--mut);font-size:14px}footer .wrap{display:flex;
   <span class="logo" style="font-size:18px"><b>80</b>/<i>20</i> Ads</span>
   <a href="https://t.me/Ads8020Bot?start=src_web">@Ads8020Bot</a>
   <a href="https://t.me/ads8020" data-t="chan">Official channel</a>
+  <a href="https://t.me/PostOnAdSpotBot?start=src_8020web" data-t="fadsp">Free ads: AdSpot</a>
+  <a href="https://t.me/Grampedia_bot?start=src_8020web" data-t="fgp">Directory: GramPedia</a>
   <span class="sp"></span>
   <a href="https://t.me/jeremstyke">by @jeremstyke</a>
 </div></footer>
@@ -202,6 +216,7 @@ q3:"Que veut dire 80/20 exactement ?",p3:"Pour chaque pub diffusée sur ta chaî
 q4:"Comment je suis payé ?",p4:"Tes gains sont suivis dans la mini app et peuvent être retirés en USDT ou TON une fois le minimum atteint.",
 q5:"Je garde le contrôle de ma chaîne ?",p5:"Oui. Tu choisis les catégories de pubs, le nombre de pubs par jour et si elles sont supprimées automatiquement. Tu peux retirer le bot à tout moment.",
 q6:"Comment marche l'affiliation ?",p6:"Une fois ta chaîne validée, tu reçois un lien perso. Chaque chaîne ou annonceur qui s'inscrit avec ce lien te rapporte 15 % de la commission 80/20 Ads sur son activité, pendant 12 mois. Ça ne lui coûte rien.",
+k4:"Pub Telegram",h4:"Gratuite ou payante, on a ce qu'il te faut",f1t:"Pub gratuite",f1p:"Publie ta pub gratuitement sur AdSpot, notre chaîne de pubs gratuites.",f1b:"Ouvrir AdSpot ›",f2t:"Pub payante",f2p:"Booste ton projet sur de vraies chaînes Telegram avec 80/20 Ads.",f2b:"Faire de la pub ›",f3t:"Gagne de l'argent avec ta chaîne",f3p:"Garde 80 % des revenus pub avec 80/20 Ads.",f3b:"Inscrire ma chaîne ›",f4t:"Annuaire Telegram",f4p:"Référence gratuitement ta chaîne, ton groupe ou ton bot sur GramPedia.",f4b:"Ouvrir GramPedia ›",fadsp:"Pub gratuite : AdSpot",fgp:"Annuaire : GramPedia",
 hz:"Sois prêt dès le premier jour",sz:"Inscris ta chaîne maintenant. Ça prend moins d'une minute.",chan:"Chaîne officielle"};
 const EN={};document.querySelectorAll('[data-t]').forEach(e=>{EN[e.dataset.t]=e.textContent});
 let L=(new URLSearchParams(location.search).get('lang')||navigator.language||'en').slice(0,2)==='fr'?'fr':'en';
