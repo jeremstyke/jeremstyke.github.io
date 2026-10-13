@@ -6,7 +6,6 @@
   var S = [
     ['home', '✨', 'Jeremstyke', 'All my free apps', 'https://jeremstyke.github.io/'],
     ['lifesim', '🎂', 'Life Sim', 'Life simulator game', 'https://jeremstyke.github.io/lifesim/'],
-    ['chatpal', '🤖', 'ChatPal', 'Your AI best friend', 'https://jeremstyke.github.io/chatpal/'],
     ['dailyscore', '⚽', 'Daily Score', 'Football prediction game', 'https://dailyscoreapp.com/en/'],
     ['memecointycoon', '🐸', 'Meme Coin Tycoon', 'Memecoin trading game', 'https://jeremstyke.github.io/memecointycoon/'],
     ['whoknowsme', '💬', 'Who Knows Me Best?', 'Quiz for your friends', 'https://jeremstyke.github.io/whoknowsme/'],
