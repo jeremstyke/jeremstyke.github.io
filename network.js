@@ -8,7 +8,6 @@
     ['lifesim', '🎂', 'Life Sim', 'Life simulator game', 'https://jeremstyke.github.io/lifesim/'],
     ['dailyscore', '⚽', 'Daily Score', 'Football prediction game', 'https://dailyscoreapp.com/en/'],
     ['memecointycoon', '🐸', 'Meme Coin Tycoon', 'Memecoin trading game', 'https://jeremstyke.github.io/memecointycoon/'],
-    ['whoknowsme', '💬', 'Who Knows Me Best?', 'Quiz for your friends', 'https://jeremstyke.github.io/whoknowsme/'],
     ['grampedia', '📚', 'GramPedia', 'Telegram directory', 'https://jeremstyke.github.io/grampedia/'],
     ['adspot', '📣', 'AdSpot', 'Free ads on Telegram', 'https://jeremstyke.github.io/adspot/']
   ];
