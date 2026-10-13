@@ -5,7 +5,6 @@
   try { if (window.Telegram && Telegram.WebApp && Telegram.WebApp.initData) return; } catch (e) {}
   var S = [
     ['home', '✨', 'Jeremstyke', 'All my free apps', 'https://jeremstyke.github.io/'],
-    ['lifesim', '🎂', 'Life Sim', 'Life simulator game', 'https://jeremstyke.github.io/lifesim/'],
     ['dailyscore', '⚽', 'Daily Score', 'Football prediction game', 'https://dailyscoreapp.com/en/'],
     ['memecointycoon', '🐸', 'Meme Coin Tycoon', 'Memecoin trading game', 'https://jeremstyke.github.io/memecointycoon/'],
     ['grampedia', '📚', 'GramPedia', 'Telegram directory', 'https://jeremstyke.github.io/grampedia/'],
