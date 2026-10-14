@@ -5,8 +5,8 @@
   const BLOCK = '53969';
   const F = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-ton';
   const TX = {
-    en: { h: '⚡ Boost x2 for 1 hour', s: 'Double your mining for 1 hour. One boost a day.', pay: 'Pay 5 ⭐', ad: '📺 Watch an ad (free)', cancel: 'Cancel', short: 'Watch the ad to the end to get your boost.', err: 'Something went wrong, try again.' },
-    fr: { h: '⚡ Boost x2 pendant 1 heure', s: 'Double ton minage pendant 1 heure. Un boost par jour.', pay: 'Payer 5 ⭐', ad: '📺 Regarder une pub (gratuit)', cancel: 'Annuler', short: 'Regarde la pub jusqu\'au bout pour avoir ton boost.', err: 'Une erreur est survenue, réessaie.' },
+    en: { lb: '⚡ Boost x2', h: '⚡ Boost x2 for 1 hour', s: 'Double your mining for 1 hour. One boost a day.', pay: 'Pay 5 ⭐', ad: '📺 Watch an ad (free)', cancel: 'Cancel', short: 'Watch the ad to the end to get your boost.', err: 'Something went wrong, try again.' },
+    fr: { lb: '⚡ Boost x2', h: '⚡ Boost x2 pendant 1 heure', s: 'Double ton minage pendant 1 heure. Un boost par jour.', pay: 'Payer 5 ⭐', ad: '📺 Regarder une pub (gratuit)', cancel: 'Annuler', short: 'Regarde la pub jusqu\'au bout pour avoir ton boost.', err: 'Une erreur est survenue, réessaie.' },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] || TX.en; };
   const hap = (k) => { try { haptic(k); } catch (e) {} };
@@ -41,12 +41,20 @@
     w.querySelector('#bstad').onclick = () => { hap(); close(); watch(); };
     w.querySelector('#bstpay').onclick = () => { hap(); close(); pass = true; btn.click(); }; // the usual 5-star payment of the game
   }
-  // the game's boost button: when it asks for stars, open the window first (Supporters keep their free boost as before)
+  // the game's boost button: it shows just "Boost x2" (not the price in stars, players thought it was stars only)
+  // and opens the window with the two choices (Supporters keep their free boost as before)
+  function relabel() {
+    const b = document.getElementById('boost');
+    if (b && !b.disabled && /⭐/.test(b.textContent || '')) { b.dataset.ad = '1'; b.textContent = L().lb; }
+    else if (b && b.disabled && b.dataset.ad) delete b.dataset.ad;
+  }
+  new MutationObserver(relabel).observe(document.body, { childList: true, subtree: true, characterData: true });
+  relabel();
   document.addEventListener('click', (e) => {
     const b = e.target && e.target.closest ? e.target.closest('#boost') : null;
     if (!b || b.disabled) return;
     if (pass) { pass = false; return; }
-    if (!/⭐/.test(b.textContent || '')) return;
+    if (b.dataset.ad !== '1' && !/⭐/.test(b.textContent || '')) return;
     let tg = ''; try { tg = tw.initData; } catch (er) {}
     if (!tg) return;
     e.preventDefault(); e.stopImmediatePropagation(); e.stopPropagation();
