@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Earn by Jeremstyke</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{--bg:#0d0b1f;--card:#17142f;--line:rgba(255,255,255,.09);--ink:#f4f2ff;--mute:#a7a1c9;--gold:#ffd43b;--cyan:#2ee6ff;--mint:#4ff0b7}
+*{box-sizing:border-box;margin:0}
+body{background:radial-gradient(120% 60% at 50% -10%,#3a1e7a 0%,var(--bg) 60%) fixed,var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:20px 16px calc(28px + env(safe-area-inset-bottom));min-height:100vh}
+.top{text-align:center;margin:6px 0 20px}
+.logo{font-size:44px;filter:drop-shadow(0 0 18px rgba(255,212,59,.45))}
+h1{font-size:26px;font-weight:900;letter-spacing:-.02em;margin:6px 0 4px}
+.sub{color:var(--mute);max-width:420px;margin:0 auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin:0 auto 14px;max-width:520px;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--c)}
+.head{display:flex;gap:12px;align-items:center}
+.ico{flex:none;width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;background:color-mix(in srgb,var(--c) 18%,transparent)}
+.head h2{font-size:18px;font-weight:800}
+.badge{display:inline-block;margin-top:4px;font-size:13px;font-weight:800;color:#0d0b1f;background:var(--c);padding:2px 9px;border-radius:999px}
+.what{color:var(--mute);margin:12px 0 10px}
+ol{list-style:none;padding:0;margin:0 0 14px;counter-reset:s}
+ol li{counter-increment:s;display:flex;gap:10px;align-items:flex-start;margin:0 0 8px;font-size:14px}
+ol li::before{content:counter(s);flex:none;width:22px;height:22px;border-radius:50%;background:color-mix(in srgb,var(--c) 25%,transparent);color:var(--c);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.go{display:block;width:100%;border:0;border-radius:14px;padding:14px;font:800 16px system-ui,sans-serif;color:#0d0b1f;background:var(--c);cursor:pointer;box-shadow:0 6px 0 color-mix(in srgb,var(--c) 55%,#000)}
+.go:active{transform:translateY(3px);box-shadow:0 3px 0 color-mix(in srgb,var(--c) 55%,#000)}
+.foot{text-align:center;color:var(--mute);font-size:13px;margin-top:22px}
+.foot a{color:var(--ink);text-decoration:none;font-weight:700}
+</style>
+</head>
+<body>
+<div class="top"><div class="logo">💰</div><h1>Earn by Jeremstyke</h1><p class="sub" id="sub"></p></div>
+<div id="list"></div>
+<p class="foot" id="foot"></p>
+<script>
+// 14 oct 2026: Earn by Jeremstyke, the mini app of @earnbyjeremstykebot: the affiliate programs, explained, with direct links
+const tw = window.Telegram && Telegram.WebApp;
+try { tw.ready(); tw.expand(); tw.setHeaderColor('#0d0b1f'); tw.setBackgroundColor('#0d0b1f'); } catch (e) {}
+const lc = ((tw && tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || 'en').toLowerCase();
+const FR = lc.startsWith('fr');
+document.documentElement.lang = FR ? 'fr' : 'en';
+const P = [
+  { k: 'mct', c: '#ffd43b', i: '💎', name: 'Meme Coin Tycoon', link: 'https://t.me/Memecointycoonbot?startapp=v_earn',
+    badge: FR ? '0,05 $ en TON par ami' : '$0.05 in TON per friend',
+    what: FR ? 'Un jeu de trading gratuit avec de l\'argent virtuel. Tu gagnes de vrais TON pour chaque ami qui joue vraiment, et vous recevez tous les deux 500 $ dans le jeu.' : 'A free trading game with virtual money. You earn real TON for every friend who really plays, and you both get $500 in the game.',
+    steps: FR ? ['Ouvre le jeu et appuie sur le bandeau 💎 TON', 'Partage ton lien d\'invitation à tes amis', 'Ton ami fait 5 échanges et revient un autre jour (dans les 7 jours)', 'Ajoute ton portefeuille TON : paiement dès 0,50 $, sous 7 jours'] : ['Open the game and tap the 💎 TON banner', 'Share your invite link with your friends', 'Your friend makes 5 trades and comes back another day (within 7 days)', 'Add your TON wallet: paid from $0.50, within 7 days'],
+    go: FR ? '🎮 Commencer à gagner' : '🎮 Start earning' },
+  { k: 'gp', c: '#2ee6ff', i: '📚', name: 'GramPedia', link: 'https://t.me/Grampedia_bot?startapp=ton',
+    badge: FR ? '0,05 $ en TON par ami' : '$0.05 in TON per friend',
+    what: FR ? 'L\'annuaire des chaînes, groupes, bots et mini apps Telegram. Tu gagnes de vrais TON pour chaque ami qui y inscrit son projet (c\'est gratuit pour lui).' : 'The directory of Telegram channels, groups, bots and mini apps. You earn real TON for every friend who lists his project (free for him).',
+    steps: FR ? ['Ouvre GramPedia sur la page 💎 TON', 'Partage ton lien aux propriétaires de chaînes, groupes et bots', 'Ton ami ajoute son projet et il est approuvé', 'Ajoute ton portefeuille TON : paiement dès 0,50 $, sous 7 jours'] : ['Open GramPedia on the 💎 TON page', 'Share your link with channel, group and bot owners', 'Your friend adds his project and it gets approved', 'Add your TON wallet: paid from $0.50, within 7 days'],
+    go: FR ? '📚 Commencer à gagner' : '📚 Start earning' },
+  { k: 'ia', c: '#4ff0b7', i: '📢', name: 'InsideAds', link: 'https://t.me/InsideAds_bot/open?startapp=r_7057960224',
+    badge: FR ? '10 % à vie' : '10% for life',
+    what: FR ? 'La régie pub de Telegram : les chaînes gagnent en publiant des pubs, les annonceurs achètent de la promotion. Avec leur programme d\'affiliation, tu touches 10 % de ce que gagnent les personnes que tu amènes.' : 'The ad network of Telegram: channels earn by posting ads, advertisers buy promotion. With their affiliate program, you get 10% of what the people you bring earn.',
+    steps: FR ? ['Inscris-toi sur InsideAds avec le bouton ci-dessous', 'Récupère ton lien de parrainage dans l\'app', 'Partage-le aux propriétaires de chaînes et aux annonceurs', 'Touche 10 % de leurs gains, à vie'] : ['Sign up on InsideAds with the button below', 'Get your referral link in the app', 'Share it with channel owners and advertisers', 'Get 10% of their earnings, for life'],
+    go: FR ? '📢 Rejoindre InsideAds' : '📢 Join InsideAds' },
+];
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+document.getElementById('sub').textContent = FR ? 'Découvre les programmes d\'affiliation et gagne de vrais TON sur Telegram.' : 'Discover the affiliate programs and earn real TON on Telegram.';
+document.getElementById('list').innerHTML = P.map((p) => `<section class="card" style="--c:${p.c}"><div class="head"><div class="ico">${p.i}</div><div><h2>${esc(p.name)}</h2><span class="badge">${esc(p.badge)}</span></div></div>`
+  + `<p class="what">${esc(p.what)}</p><ol>${p.steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol><button class="go" data-k="${p.k}">${esc(p.go)}</button></section>`).join('');
+document.querySelectorAll('.go').forEach((b) => b.onclick = () => {
+  const p = P.find((x) => x.k === b.dataset.k);
+  try { tw.HapticFeedback.impactOccurred('medium'); } catch (e) {}
+  try { tw.openTelegramLink(p.link); } catch (e) { window.open(p.link, '_blank'); }
+});
+document.getElementById('foot').innerHTML = (FR ? 'Une question ? ' : 'A question? ') + '<a href="https://t.me/jeremstyke?direct" id="ct">' + (FR ? 'Écris-moi' : 'Message me') + '</a><br>by @jeremstyke';
+document.getElementById('ct').onclick = (e) => { e.preventDefault(); try { tw.openTelegramLink('https://t.me/jeremstyke?direct'); } catch (x) { window.open('https://t.me/jeremstyke?direct', '_blank'); } };
+</script>
+</body>
+</html>
