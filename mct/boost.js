@@ -54,7 +54,7 @@
     const b = e.target && e.target.closest ? e.target.closest('#boost') : null;
     if (!b || b.disabled) return;
     if (pass) { pass = false; return; }
-    if (b.dataset.ad !== '1' && !/⭐/.test(b.textContent || '')) return;
+    if (/💎/.test(b.textContent || '')) return; // Supporter: his free boost, as before
     let tg = ''; try { tg = tw.initData; } catch (er) {}
     if (!tg) return;
     e.preventDefault(); e.stopImmediatePropagation(); e.stopPropagation();
