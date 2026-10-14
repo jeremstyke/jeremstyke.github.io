@@ -31,6 +31,7 @@ h1{font-size:26px;font-weight:900;letter-spacing:-.02em;margin:6px 0 4px}
 .stat{flex:1;background:rgba(255,255,255,.05);border-radius:12px;padding:8px 10px}
 .stat b{display:block;font-size:18px}.stat small{color:var(--mute);font-size:12px}
 .push{background:color-mix(in srgb,var(--c) 12%,transparent);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);border-radius:14px;padding:12px;margin:0 0 12px;font-size:14px}.push .btn{margin-top:10px}
+.gate{text-align:center;padding:26px 18px}.gate .big{font-size:46px}.gate h2{font-size:20px;margin:8px 0 6px}.gate p{color:var(--mute);margin:0 0 16px}.gate .btn{margin-bottom:10px}
 .warn{background:rgba(255,212,59,.12);border:1px solid rgba(255,212,59,.35);border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:10px}
 details{margin-top:12px}summary{cursor:pointer;color:var(--mute);font-weight:700;font-size:14px}
 ol{list-style:none;padding:0;margin:10px 0 0;counter-reset:s}
@@ -76,12 +77,14 @@ const X = FR ? {
   yl: 'Ton lien d\'affiliation', copy: '📋 Copier', share: '📤 Partager', copied: 'Lien copié ✅',
   valid: 'amis validés', bal: 'solde', min: (m) => 'paiement dès ' + m, how: 'Comment ça marche',
   act: 'Ouvre une première fois pour activer ton lien 👇', w: '👛 Ton portefeuille TON', wh: 'Pour recevoir tes gains en TON (Meme Coin Tycoon et GramPedia).', ph: 'Colle ton adresse TON (UQ... ou EQ...)', save: 'OK', ok: 'Portefeuille enregistré ✅', bad: 'Adresse TON invalide', chg: 'Changer', paid: 'Paiement sous 7 jours, dès 0,50 $ par programme.',
+  g1: 'Abonne-toi à la chaîne Jeremstyke', g2: 'Les programmes d\'affiliation sont réservés aux abonnés. Rejoins la chaîne, puis reviens ici.', g3: '📢 Rejoindre la chaîne', g4: '✅ J\'ai rejoint', g5: 'Pas encore abonné : rejoins la chaîne puis réessaie.',
   ask: 'Une question ? ', me: 'Écris-moi', nolink: 'Ouvre cette page depuis le bot pour voir ton lien.'
 } : {
   sub: 'Discover the affiliate programs and earn real TON on Telegram.',
   yl: 'Your affiliate link', copy: '📋 Copy', share: '📤 Share', copied: 'Link copied ✅',
   valid: 'valid friends', bal: 'balance', min: (m) => 'paid from ' + m, how: 'How it works',
   act: 'Open it once to activate your link 👇', w: '👛 Your TON wallet', wh: 'To receive your TON earnings (Meme Coin Tycoon and GramPedia).', ph: 'Paste your TON address (UQ... or EQ...)', save: 'Save', ok: 'Wallet saved ✅', bad: 'Invalid TON address', chg: 'Change', paid: 'Paid within 7 days, from $0.50 per program.',
+  g1: 'Join the Jeremstyke channel', g2: 'The affiliate programs are for channel members. Join the channel, then come back here.', g3: '📢 Join the channel', g4: '✅ I joined', g5: 'Not a member yet: join the channel and try again.',
   ask: 'A question? ', me: 'Message me', nolink: 'Open this page from the bot to see your link.'
 };
 const P = [
@@ -113,6 +116,9 @@ $('ct').onclick = (e) => { e.preventDefault(); open('https://t.me/jeremstyke?dir
 let S = null, EDIT = false;
 async function call(body) { const r = await fetch(F, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ app: 'earn', initData: INIT, ...body }) }); return r.json(); }
 function render() {
+  // 14 oct 2026: the programs are for @jeremstyke members only
+  if (INIT && !S) { $('wal').innerHTML = ''; $('list').innerHTML = '<section class="card gate"><div class="big">⏳</div></section>'; return; }
+  if (S && S.joined === false) { gate(); return; }
   // the shared TON wallet
   if (S) {
     const w = S.wallet, ed = EDIT || !w;
@@ -156,6 +162,12 @@ function render() {
     const p = P.find((x) => x.k === b.dataset.share); haptic('medium');
     open('https://t.me/share/url?url=' + encodeURIComponent(S[p.k].link) + '&text=' + encodeURIComponent(p.share));
   });
+}
+function gate(again) {
+  $('wal').innerHTML = '';
+  $('list').innerHTML = `<section class="card gate" style="--c:#ffd43b"><div class="big">🔒</div><h2>${X.g1}</h2><p>${X.g2}</p><button class="btn" id="gj">${X.g3}</button><button class="ghost" id="gc">${X.g4}</button></section>`;
+  $('gj').onclick = () => { haptic('medium'); open('https://t.me/jeremstyke'); };
+  $('gc').onclick = async () => { haptic(); $('gc').disabled = true; let r; try { r = await call({}); } catch (e) { r = null; } if (r && r.ok) { S = r; if (r.joined === false) toast(X.g5); render(); } else $('gc').disabled = false; };
 }
 render();
 if (INIT) call({}).then((r) => { if (r && r.ok) { S = r; render(); } }).catch(() => {});
