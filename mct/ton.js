@@ -1,4 +1,4 @@
-// 14 oct 2026: Meme Coin Tycoon, real TON for referrals: the card in Earn (status and TON wallet), served by the Supabase function mct-ton
+// 14 oct 2026: real TON for referrals: the card in Earn (status and TON wallet), served by the Supabase function mct-ton
 const TONF = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-ton';
 const TONT = {
   en: { h: '💎 Earn real TON', s: (u) => '$' + u + ' in TON for every friend who really plays', v: 'Valid friends', p: 'Pending', b: 'Balance', mn: (m) => 'paid from $' + m, paid: 'received', wait: 'being paid', w: 'Your TON wallet', ph: 'Paste your TON address (UQ... or EQ...)', save: 'Save', ok: 'Wallet saved ✅', bad: 'Invalid TON address', chg: 'Change', inv: '👥 Invite my friends', delay: (d) => 'Paid within ' + d + ' days', rule: 'A friend counts when he comes back to play another day within 7 days and makes 5 trades.', off: 'Budget of the month reached: TON rewards are back next month.' },
@@ -18,7 +18,7 @@ async function tonCard(edit) {
   el.innerHTML = `<div class="msn" style="border-color:#2ee6ff;padding:14px 14px 10px">`
     + `<b style="font-size:16px">${L.h}</b><br><small style="color:var(--mute)">${L.s(f2(s.usd))}</small>`
     + `<div class="tiles" style="margin:10px 0"><div class="tile"><b>${s.valid}</b><small>✅ ${L.v}</small></div><div class="tile"><b>${s.pending}</b><small>⏳ ${L.p}</small></div>`
-    + `<div class="tile wide"><b>$${f2(s.balance)}</b><small>💰 ${L.b} · ${L.mn(f2(s.min))}${extra}</small></div></div>`
+    + `<div class="tile wide"><b>${LANG === 'fr' ? f2(s.balance) + ' $' : '$' + f2(s.balance)}</b><small>💰 ${L.b} · ${L.mn(f2(s.min))}${extra}</small></div></div>`
     + (ed
       ? `<small style="color:var(--mute)">👛 ${L.w}</small><div style="display:flex;gap:8px;margin:6px 0 10px"><input id="tona" placeholder="${L.ph}" value="${esc(w || '')}" autocomplete="off" spellcheck="false" style="flex:1;min-width:0;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:inherit;font-size:14px"><button class="ghost sm" id="tons">${L.save}</button></div>`
       : `<div class="row" style="margin:0 0 10px"><div class="who"><b>👛 ${L.w}</b><small style="white-space:normal;word-break:break-all">${esc(w)}</small></div><button class="ghost sm" id="tonc2">${L.chg}</button></div>`)
@@ -36,3 +36,4 @@ async function tonCard(edit) {
 }
 // the Earn screen is rebuilt each time it opens: fill the card as soon as its empty slot appears
 new MutationObserver(() => { const el = document.getElementById('tonc'); if (el && !el.dataset.t) { el.dataset.t = '1'; tonCard(); } }).observe(document.body, { childList: true, subtree: true });
+{ const el = document.getElementById('tonc'); if (el && !el.dataset.t) { el.dataset.t = '1'; tonCard(); } }
