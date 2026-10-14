@@ -45,7 +45,7 @@
   // and opens the window with the two choices (Supporters keep their free boost as before)
   function relabel() {
     const b = document.getElementById('boost');
-    if (b && !b.disabled && /⭐/.test(b.textContent || '')) { b.dataset.ad = '1'; b.textContent = L().lb; }
+    if (b && !b.disabled && !/💎/.test(b.textContent || '') && b.textContent !== L().lb) { b.dataset.ad = '1'; b.textContent = L().lb; }
     else if (b && b.disabled && b.dataset.ad) delete b.dataset.ad;
   }
   new MutationObserver(relabel).observe(document.body, { childList: true, subtree: true, characterData: true });
