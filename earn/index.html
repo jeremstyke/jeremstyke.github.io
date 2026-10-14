@@ -30,6 +30,7 @@ h1{font-size:26px;font-weight:900;letter-spacing:-.02em;margin:6px 0 4px}
 .stats{display:flex;gap:8px;margin:0 0 12px}
 .stat{flex:1;background:rgba(255,255,255,.05);border-radius:12px;padding:8px 10px}
 .stat b{display:block;font-size:18px}.stat small{color:var(--mute);font-size:12px}
+.push{background:color-mix(in srgb,var(--c) 12%,transparent);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);border-radius:14px;padding:12px;margin:0 0 12px;font-size:14px}.push .btn{margin-top:10px}
 .warn{background:rgba(255,212,59,.12);border:1px solid rgba(255,212,59,.35);border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:10px}
 details{margin-top:12px}summary{cursor:pointer;color:var(--mute);font-weight:700;font-size:14px}
 ol{list-style:none;padding:0;margin:10px 0 0;counter-reset:s}
@@ -89,13 +90,17 @@ const P = [
     what: FR ? 'Un jeu de trading gratuit avec de l\'argent virtuel. Tu gagnes de vrais TON pour chaque ami qui joue vraiment, et vous recevez tous les deux 500 $ dans le jeu.' : 'A free trading game with virtual money. You earn real TON for every friend who really plays, and you both get $500 in the game.',
     steps: FR ? ['Partage ton lien d\'affiliation ci-dessus', 'Ton ami ouvre le jeu : vous gagnez tous les deux 500 $ dans le jeu', 'Il fait 5 échanges et revient un autre jour (dans les 7 jours)', 'Tu gagnes 0,05 $ en TON, payés sur ton portefeuille dès 0,50 $'] : ['Share your affiliate link above', 'Your friend opens the game: you both get $500 in the game', 'He makes 5 trades and comes back another day (within 7 days)', 'You earn $0.05 in TON, paid to your wallet from $0.50'],
     share: FR ? '🎮 Joue à Meme Coin Tycoon avec moi : on gagne 500 $ chacun pour commencer !' : '🎮 Play Meme Coin Tycoon with me: we both get $500 to start!',
-    go: FR ? '🎮 Ouvrir le jeu' : '🎮 Open the game' },
+    go: FR ? '🎮 Ouvrir le jeu' : '🎮 Open the game',
+    push: FR ? '🎮 <b>Joue toi aussi !</b> C\'est gratuit et sans inscription. Crée ton coin, mine, grimpe au classement : plus tu joues, plus c\'est facile de convaincre tes amis.' : '🎮 <b>Play too!</b> It\'s free, no sign-up. Create your coin, mine, climb the leaderboard: the more you play, the easier it is to convince your friends.',
+    cta: FR ? '🎮 Jouer maintenant' : '🎮 Play now', ctaLink: 'https://t.me/Memecointycoonbot?startapp=src_earn' },
   { k: 'gp', c: '#2ee6ff', i: '📚', name: 'GramPedia', open: 'https://t.me/Grampedia_bot?startapp=ton',
     badge: FR ? '0,05 $ en TON par ami' : '$0.05 in TON per friend',
     what: FR ? 'L\'annuaire des chaînes, groupes, bots et mini apps Telegram. Tu gagnes de vrais TON pour chaque ami qui y inscrit son projet (c\'est gratuit pour lui).' : 'The directory of Telegram channels, groups, bots and mini apps. You earn real TON for every friend who lists his project (free for him).',
     steps: FR ? ['Partage ton lien aux propriétaires de chaînes, groupes et bots', 'Ton ami ajoute son projet sur GramPedia', 'Sa fiche est approuvée', 'Tu gagnes 0,05 $ en TON, payés sur ton portefeuille dès 0,50 $'] : ['Share your link with channel, group and bot owners', 'Your friend adds his project to GramPedia', 'His listing gets approved', 'You earn $0.05 in TON, paid to your wallet from $0.50'],
     share: FR ? '📚 Ajoute ta chaîne, ton groupe ou ton bot gratuitement sur GramPedia, l\'annuaire Telegram !' : '📚 Add your channel, group or bot for free to GramPedia, the Telegram directory!',
-    go: FR ? '📚 Ouvrir GramPedia' : '📚 Open GramPedia' },
+    go: FR ? '📚 Ouvrir GramPedia' : '📚 Open GramPedia',
+    push: FR ? '📢 <b>Tu as une chaîne, un groupe, un bot ou une mini app ?</b> Ajoute ta fiche sur GramPedia : c\'est gratuit et ça t\'apporte des abonnés.' : '📢 <b>Do you have a channel, group, bot or mini app?</b> Add your listing to GramPedia: it\'s free and brings you subscribers.',
+    cta: FR ? '➕ Ajouter ma fiche' : '➕ Add my listing', ctaLink: 'https://t.me/Grampedia_bot?startapp=add' },
   { k: 'ia', c: '#4ff0b7', i: '📢', name: 'InsideAds', open: 'https://t.me/InsideAds_bot/open?startapp=r_7057960224',
     badge: FR ? '10 % à vie' : '10% for life',
     what: FR ? 'La régie pub de Telegram : les chaînes gagnent en publiant des pubs, les annonceurs achètent de la promotion. Avec leur programme d\'affiliation, tu touches 10 % de ce que gagnent les personnes que tu amènes.' : 'The ad network of Telegram: channels earn by posting ads, advertisers buy promotion. With their affiliate program, you get 10% of what the people you bring earn.',
@@ -134,11 +139,14 @@ function render() {
         + (st.member ? '' : `<p class="warn">${X.act}</p>`);
     }
     return `<section class="card" style="--c:${p.c}"><div class="head"><div class="ico">${p.i}</div><div><h2>${esc(p.name)}</h2><span class="badge">${esc(p.badge)}</span></div></div>`
-      + `<p class="what">${esc(p.what)}</p>${mid}`
+      + `<p class="what">${esc(p.what)}</p>`
+      + (p.push ? `<div class="push">${p.push}<button class="btn" data-cta="${p.k}">${esc(p.cta)}</button></div>` : '')
+      + mid
       + `<button class="${p.k === 'ia' ? 'btn' : 'ghost'}" data-open="${p.k}">${esc(p.go)}</button>`
       + `<details><summary>${X.how}</summary><ol>${p.steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol></details></section>`;
   }).join('');
   document.querySelectorAll('[data-open]').forEach((b) => b.onclick = () => { haptic('medium'); open(P.find((x) => x.k === b.dataset.open).open); });
+  document.querySelectorAll('[data-cta]').forEach((b) => b.onclick = () => { haptic('medium'); open(P.find((x) => x.k === b.dataset.cta).ctaLink); });
   document.querySelectorAll('[data-copy]').forEach((b) => b.onclick = async () => {
     const l = S[b.dataset.copy].link; haptic();
     try { await navigator.clipboard.writeText(l); } catch (e) { const t = document.createElement('textarea'); t.value = l; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (x) {} t.remove(); }
