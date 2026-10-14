@@ -32,7 +32,7 @@ async function tonPage(edit) {
   }
   let s; try { s = await tonCall({}); } catch (e) { return; }
   if (!s || !s.ok || VIEW !== 'ton') return;
-  const w = s.wallet, ed = edit || !w, bal = Number(s.balance), mn = Number(s.min), pct = Math.min(100, Math.round(bal / mn * 100));
+  const w = s.wallet, ed = edit || !w, bal = Number(s.total != null ? s.total : s.balance), mn = Number(s.min), pct = Math.min(100, Math.round(bal / mn * 100));
   const steps = L.st(tonF2(s.usd), tonF2(s.min), s.delay).map((x, i) => `<div class="row" style="margin:0 0 6px"><span class="med sm" style="--c:#2ee6ff">${i + 1}</span><div class="who"><small style="white-space:normal;font-size:14px;color:inherit">${x}</small></div></div>`).join('');
   v.innerHTML = `<button class="ghost sm" id="tonbk" style="margin-bottom:8px">${L.back}</button><h1>${L.h}</h1><p class="hint" style="margin-top:-6px">${L.s(tonF2(s.usd))}</p>`
     + `<div class="msn" style="border-color:#2ee6ff;padding:18px 16px;text-align:center"><small style="color:var(--mute);font-size:12px;text-transform:uppercase;letter-spacing:.06em">${L.b}</small>`
