@@ -87,6 +87,17 @@ const X = FR ? {
   g1: 'Join the Jeremstyke channel', g2: 'The affiliate programs are for channel members. Join the channel, then come back here.', g3: '📢 Join the channel', g4: '✅ I joined', g5: 'Not a member yet: join the channel and try again.',
   ask: 'A question? ', me: 'Message me', nolink: 'Open this page from the bot to see your link.'
 };
+// 14 oct 2026: sharing Earn itself: +$0.02 in TON every time someone you brought earns a commission on the games
+const EARN = { k: 'earn', share: FR ? '💰 Gagne de vrais TON avec des jeux Telegram gratuits : regarde ça !' : '💰 Earn real TON with free Telegram games: check this out!' };
+const XE = FR ? { h: '👥 Partage Earn', w: 'Invite tes amis dans Earn : tu gagnes 0,02 $ en TON à chaque fois que l\'un d\'eux gagne une commission sur les jeux. Sans limite.', f: 'amis dans Earn', c: 'bonus gagnés' }
+  : { h: '👥 Share Earn', w: 'Invite your friends to Earn: you earn $0.02 in TON every time one of them earns a commission on the games. No limit.', f: 'friends in Earn', c: 'bonus earned' };
+function earnCard() {
+  const e = S && S.earn; if (!e || !e.on) return '';
+  return `<section class="card" style="--c:#b18cff"><div class="head"><div class="ico">👥</div><div><h2>${XE.h.replace('👥 ', '')}</h2><span class="badge">${FR ? '+0,02 $ par commission' : '+$0.02 per commission'}</span></div></div>`
+    + `<p class="what">${esc(XE.w)}</p><div class="lbl">${X.yl}</div><div class="link">${esc(e.link)}</div>`
+    + `<div class="row2"><button class="btn" data-copy="earn">${X.copy}</button><button class="btn" data-share="earn">${X.share}</button></div>`
+    + `<div class="stats"><div class="stat"><b>${e.friends || 0}</b><small>👥 ${XE.f}</small></div><div class="stat"><b>${m$(e.balance)}</b><small>💰 ${XE.c} · ${X.min(m$(e.min))}</small></div></div></section>`;
+}
 const P = [
   { k: 'mct', c: '#ffd43b', i: '💎', name: 'Meme Coin Tycoon', open: 'https://t.me/Memecointycoonbot?startapp=v_earn',
     badge: FR ? '0,05 $ en TON par ami' : '$0.05 in TON per friend',
@@ -142,7 +153,7 @@ function render() {
       S = r; EDIT = false; toast(X.ok); render();
     };
   }
-  $('list').innerHTML = P.map((p) => {
+  $('list').innerHTML = earnCard() + P.map((p) => {
     const st = S && S[p.k];
     let mid = '';
     if (p.k !== 'ia') {
@@ -167,7 +178,7 @@ function render() {
     toast(X.copied);
   });
   document.querySelectorAll('[data-share]').forEach((b) => b.onclick = () => {
-    const p = P.find((x) => x.k === b.dataset.share); haptic('medium');
+    const p = P.find((x) => x.k === b.dataset.share) || EARN; haptic('medium');
     open('https://t.me/share/url?url=' + encodeURIComponent(S[p.k].link) + '&text=' + encodeURIComponent(p.share));
   });
 }
