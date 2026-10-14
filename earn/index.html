@@ -6,68 +6,151 @@
 <title>Earn by Jeremstyke</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
-:root{--bg:#0d0b1f;--card:#17142f;--line:rgba(255,255,255,.09);--ink:#f4f2ff;--mute:#a7a1c9;--gold:#ffd43b;--cyan:#2ee6ff;--mint:#4ff0b7}
+:root{--bg:#0d0b1f;--card:#17142f;--line:rgba(255,255,255,.09);--ink:#f4f2ff;--mute:#a7a1c9}
 *{box-sizing:border-box;margin:0}
 body{background:radial-gradient(120% 60% at 50% -10%,#3a1e7a 0%,var(--bg) 60%) fixed,var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:20px 16px calc(28px + env(safe-area-inset-bottom));min-height:100vh}
-.top{text-align:center;margin:6px 0 20px}
+.wrap{max-width:520px;margin:0 auto}
+.top{text-align:center;margin:6px 0 18px}
 .logo{font-size:44px;filter:drop-shadow(0 0 18px rgba(255,212,59,.45))}
 h1{font-size:26px;font-weight:900;letter-spacing:-.02em;margin:6px 0 4px}
-.sub{color:var(--mute);max-width:420px;margin:0 auto}
-.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin:0 auto 14px;max-width:520px;position:relative;overflow:hidden}
-.card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--c)}
+.sub{color:var(--mute)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin:0 0 14px;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--c,#ffd43b)}
 .head{display:flex;gap:12px;align-items:center}
 .ico{flex:none;width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;background:color-mix(in srgb,var(--c) 18%,transparent)}
 .head h2{font-size:18px;font-weight:800}
 .badge{display:inline-block;margin-top:4px;font-size:13px;font-weight:800;color:#0d0b1f;background:var(--c);padding:2px 9px;border-radius:999px}
-.what{color:var(--mute);margin:12px 0 10px}
-ol{list-style:none;padding:0;margin:0 0 14px;counter-reset:s}
+.what{color:var(--mute);margin:12px 0}
+.lbl{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin-bottom:6px}
+.link{background:rgba(255,255,255,.06);border:1px dashed color-mix(in srgb,var(--c) 60%,transparent);border-radius:12px;padding:10px 12px;font:600 13px ui-monospace,Menlo,monospace;word-break:break-all;margin-bottom:8px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.btn{display:block;width:100%;border:0;border-radius:14px;padding:13px;font:800 15px system-ui,sans-serif;cursor:pointer;color:#0d0b1f;background:var(--c);box-shadow:0 5px 0 color-mix(in srgb,var(--c) 55%,#000)}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 color-mix(in srgb,var(--c) 55%,#000)}
+.ghost{display:block;width:100%;border:1px solid var(--line);border-radius:14px;padding:12px;font:700 14px system-ui,sans-serif;cursor:pointer;color:var(--ink);background:rgba(255,255,255,.05)}
+.stats{display:flex;gap:8px;margin:0 0 12px}
+.stat{flex:1;background:rgba(255,255,255,.05);border-radius:12px;padding:8px 10px}
+.stat b{display:block;font-size:18px}.stat small{color:var(--mute);font-size:12px}
+.warn{background:rgba(255,212,59,.12);border:1px solid rgba(255,212,59,.35);border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:10px}
+details{margin-top:12px}summary{cursor:pointer;color:var(--mute);font-weight:700;font-size:14px}
+ol{list-style:none;padding:0;margin:10px 0 0;counter-reset:s}
 ol li{counter-increment:s;display:flex;gap:10px;align-items:flex-start;margin:0 0 8px;font-size:14px}
 ol li::before{content:counter(s);flex:none;width:22px;height:22px;border-radius:50%;background:color-mix(in srgb,var(--c) 25%,transparent);color:var(--c);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:1px}
-.go{display:block;width:100%;border:0;border-radius:14px;padding:14px;font:800 16px system-ui,sans-serif;color:#0d0b1f;background:var(--c);cursor:pointer;box-shadow:0 6px 0 color-mix(in srgb,var(--c) 55%,#000)}
-.go:active{transform:translateY(3px);box-shadow:0 3px 0 color-mix(in srgb,var(--c) 55%,#000)}
+.wal{display:flex;gap:8px}
+.wal input{flex:1;min-width:0;padding:12px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--ink);font-size:14px}
+.wal .btn{width:auto;padding:12px 16px}
+.addr{font:600 13px ui-monospace,Menlo,monospace;word-break:break-all;color:var(--ink)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#f4f2ff;color:#0d0b1f;font-weight:800;padding:10px 18px;border-radius:999px;opacity:0;transition:.2s;pointer-events:none}
+.toast.on{opacity:1}
 .foot{text-align:center;color:var(--mute);font-size:13px;margin-top:22px}
 .foot a{color:var(--ink);text-decoration:none;font-weight:700}
 </style>
 </head>
 <body>
+<div class="wrap">
 <div class="top"><div class="logo">💰</div><h1>Earn by Jeremstyke</h1><p class="sub" id="sub"></p></div>
+<div id="wal"></div>
 <div id="list"></div>
 <p class="foot" id="foot"></p>
+</div>
+<div class="toast" id="toast"></div>
 <script>
-// 14 oct 2026: Earn by Jeremstyke, the mini app of @earnbyjeremstykebot: the affiliate programs, explained, with direct links
+// 14 oct 2026: Earn by Jeremstyke, the mini app of @earnbyjeremstykebot: the affiliate programs, explained, with each player's
+// own invite links for Meme Coin Tycoon and GramPedia (real TON), the shared TON wallet, and the InsideAds affiliate link
+const F = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-ton';
 const tw = window.Telegram && Telegram.WebApp;
 try { tw.ready(); tw.expand(); tw.setHeaderColor('#0d0b1f'); tw.setBackgroundColor('#0d0b1f'); } catch (e) {}
+const INIT = (tw && tw.initData) || '';
 const lc = ((tw && tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || 'en').toLowerCase();
 const FR = lc.startsWith('fr');
 document.documentElement.lang = FR ? 'fr' : 'en';
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const f2 = (n) => { const x = Number(n || 0).toFixed(2); return FR ? x.replace('.', ',') : x; };
+const m$ = (n) => FR ? f2(n) + ' $' : '$' + f2(n);
+const haptic = (k) => { try { tw.HapticFeedback.impactOccurred(k || 'light'); } catch (e) {} };
+const open = (u) => { try { tw.openTelegramLink(u); } catch (e) { window.open(u, '_blank'); } };
+const toast = (m) => { const t = $('toast'); t.textContent = m; t.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('on'), 2000); };
+const X = FR ? {
+  sub: 'Découvre les programmes d\'affiliation et gagne de vrais TON sur Telegram.',
+  yl: 'Ton lien d\'affiliation', copy: '📋 Copier', share: '📤 Partager', copied: 'Lien copié ✅',
+  valid: 'amis validés', bal: 'solde', min: (m) => 'paiement dès ' + m, how: 'Comment ça marche',
+  act: 'Ouvre une première fois pour activer ton lien 👇', w: '👛 Ton portefeuille TON', wh: 'Pour recevoir tes gains en TON (Meme Coin Tycoon et GramPedia).', ph: 'Colle ton adresse TON (UQ... ou EQ...)', save: 'OK', ok: 'Portefeuille enregistré ✅', bad: 'Adresse TON invalide', chg: 'Changer', paid: 'Paiement sous 7 jours, dès 0,50 $ par programme.',
+  ask: 'Une question ? ', me: 'Écris-moi', nolink: 'Ouvre cette page depuis le bot pour voir ton lien.'
+} : {
+  sub: 'Discover the affiliate programs and earn real TON on Telegram.',
+  yl: 'Your affiliate link', copy: '📋 Copy', share: '📤 Share', copied: 'Link copied ✅',
+  valid: 'valid friends', bal: 'balance', min: (m) => 'paid from ' + m, how: 'How it works',
+  act: 'Open it once to activate your link 👇', w: '👛 Your TON wallet', wh: 'To receive your TON earnings (Meme Coin Tycoon and GramPedia).', ph: 'Paste your TON address (UQ... or EQ...)', save: 'Save', ok: 'Wallet saved ✅', bad: 'Invalid TON address', chg: 'Change', paid: 'Paid within 7 days, from $0.50 per program.',
+  ask: 'A question? ', me: 'Message me', nolink: 'Open this page from the bot to see your link.'
+};
 const P = [
-  { k: 'mct', c: '#ffd43b', i: '💎', name: 'Meme Coin Tycoon', link: 'https://t.me/Memecointycoonbot?startapp=v_earn',
+  { k: 'mct', c: '#ffd43b', i: '💎', name: 'Meme Coin Tycoon', open: 'https://t.me/Memecointycoonbot?startapp=v_earn',
     badge: FR ? '0,05 $ en TON par ami' : '$0.05 in TON per friend',
     what: FR ? 'Un jeu de trading gratuit avec de l\'argent virtuel. Tu gagnes de vrais TON pour chaque ami qui joue vraiment, et vous recevez tous les deux 500 $ dans le jeu.' : 'A free trading game with virtual money. You earn real TON for every friend who really plays, and you both get $500 in the game.',
-    steps: FR ? ['Ouvre le jeu et appuie sur le bandeau 💎 TON', 'Partage ton lien d\'invitation à tes amis', 'Ton ami fait 5 échanges et revient un autre jour (dans les 7 jours)', 'Ajoute ton portefeuille TON : paiement dès 0,50 $, sous 7 jours'] : ['Open the game and tap the 💎 TON banner', 'Share your invite link with your friends', 'Your friend makes 5 trades and comes back another day (within 7 days)', 'Add your TON wallet: paid from $0.50, within 7 days'],
-    go: FR ? '🎮 Commencer à gagner' : '🎮 Start earning' },
-  { k: 'gp', c: '#2ee6ff', i: '📚', name: 'GramPedia', link: 'https://t.me/Grampedia_bot?startapp=ton',
+    steps: FR ? ['Partage ton lien d\'affiliation ci-dessus', 'Ton ami ouvre le jeu : vous gagnez tous les deux 500 $ dans le jeu', 'Il fait 5 échanges et revient un autre jour (dans les 7 jours)', 'Tu gagnes 0,05 $ en TON, payés sur ton portefeuille dès 0,50 $'] : ['Share your affiliate link above', 'Your friend opens the game: you both get $500 in the game', 'He makes 5 trades and comes back another day (within 7 days)', 'You earn $0.05 in TON, paid to your wallet from $0.50'],
+    share: FR ? '🎮 Joue à Meme Coin Tycoon avec moi : on gagne 500 $ chacun pour commencer !' : '🎮 Play Meme Coin Tycoon with me: we both get $500 to start!',
+    go: FR ? '🎮 Ouvrir le jeu' : '🎮 Open the game' },
+  { k: 'gp', c: '#2ee6ff', i: '📚', name: 'GramPedia', open: 'https://t.me/Grampedia_bot?startapp=ton',
     badge: FR ? '0,05 $ en TON par ami' : '$0.05 in TON per friend',
     what: FR ? 'L\'annuaire des chaînes, groupes, bots et mini apps Telegram. Tu gagnes de vrais TON pour chaque ami qui y inscrit son projet (c\'est gratuit pour lui).' : 'The directory of Telegram channels, groups, bots and mini apps. You earn real TON for every friend who lists his project (free for him).',
-    steps: FR ? ['Ouvre GramPedia sur la page 💎 TON', 'Partage ton lien aux propriétaires de chaînes, groupes et bots', 'Ton ami ajoute son projet et il est approuvé', 'Ajoute ton portefeuille TON : paiement dès 0,50 $, sous 7 jours'] : ['Open GramPedia on the 💎 TON page', 'Share your link with channel, group and bot owners', 'Your friend adds his project and it gets approved', 'Add your TON wallet: paid from $0.50, within 7 days'],
-    go: FR ? '📚 Commencer à gagner' : '📚 Start earning' },
-  { k: 'ia', c: '#4ff0b7', i: '📢', name: 'InsideAds', link: 'https://t.me/InsideAds_bot/open?startapp=r_7057960224',
+    steps: FR ? ['Partage ton lien aux propriétaires de chaînes, groupes et bots', 'Ton ami ajoute son projet sur GramPedia', 'Sa fiche est approuvée', 'Tu gagnes 0,05 $ en TON, payés sur ton portefeuille dès 0,50 $'] : ['Share your link with channel, group and bot owners', 'Your friend adds his project to GramPedia', 'His listing gets approved', 'You earn $0.05 in TON, paid to your wallet from $0.50'],
+    share: FR ? '📚 Ajoute ta chaîne, ton groupe ou ton bot gratuitement sur GramPedia, l\'annuaire Telegram !' : '📚 Add your channel, group or bot for free to GramPedia, the Telegram directory!',
+    go: FR ? '📚 Ouvrir GramPedia' : '📚 Open GramPedia' },
+  { k: 'ia', c: '#4ff0b7', i: '📢', name: 'InsideAds', open: 'https://t.me/InsideAds_bot/open?startapp=r_7057960224',
     badge: FR ? '10 % à vie' : '10% for life',
     what: FR ? 'La régie pub de Telegram : les chaînes gagnent en publiant des pubs, les annonceurs achètent de la promotion. Avec leur programme d\'affiliation, tu touches 10 % de ce que gagnent les personnes que tu amènes.' : 'The ad network of Telegram: channels earn by posting ads, advertisers buy promotion. With their affiliate program, you get 10% of what the people you bring earn.',
-    steps: FR ? ['Inscris-toi sur InsideAds avec le bouton ci-dessous', 'Récupère ton lien de parrainage dans l\'app', 'Partage-le aux propriétaires de chaînes et aux annonceurs', 'Touche 10 % de leurs gains, à vie'] : ['Sign up on InsideAds with the button below', 'Get your referral link in the app', 'Share it with channel owners and advertisers', 'Get 10% of their earnings, for life'],
-    go: FR ? '📢 Rejoindre InsideAds' : '📢 Join InsideAds' },
+    steps: FR ? ['Inscris-toi sur InsideAds avec le bouton ci-dessous', 'Ton lien d\'affiliation InsideAds est dans leur app', 'Partage-le aux propriétaires de chaînes et aux annonceurs', 'Touche 10 % de leurs gains, à vie'] : ['Sign up on InsideAds with the button below', 'Your InsideAds affiliate link is in their app', 'Share it with channel owners and advertisers', 'Get 10% of their earnings, for life'],
+    go: FR ? '📢 S\'inscrire sur InsideAds' : '📢 Sign up on InsideAds' },
 ];
-const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-document.getElementById('sub').textContent = FR ? 'Découvre les programmes d\'affiliation et gagne de vrais TON sur Telegram.' : 'Discover the affiliate programs and earn real TON on Telegram.';
-document.getElementById('list').innerHTML = P.map((p) => `<section class="card" style="--c:${p.c}"><div class="head"><div class="ico">${p.i}</div><div><h2>${esc(p.name)}</h2><span class="badge">${esc(p.badge)}</span></div></div>`
-  + `<p class="what">${esc(p.what)}</p><ol>${p.steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol><button class="go" data-k="${p.k}">${esc(p.go)}</button></section>`).join('');
-document.querySelectorAll('.go').forEach((b) => b.onclick = () => {
-  const p = P.find((x) => x.k === b.dataset.k);
-  try { tw.HapticFeedback.impactOccurred('medium'); } catch (e) {}
-  try { tw.openTelegramLink(p.link); } catch (e) { window.open(p.link, '_blank'); }
-});
-document.getElementById('foot').innerHTML = (FR ? 'Une question ? ' : 'A question? ') + '<a href="https://t.me/jeremstyke?direct" id="ct">' + (FR ? 'Écris-moi' : 'Message me') + '</a><br>by @jeremstyke';
-document.getElementById('ct').onclick = (e) => { e.preventDefault(); try { tw.openTelegramLink('https://t.me/jeremstyke?direct'); } catch (x) { window.open('https://t.me/jeremstyke?direct', '_blank'); } };
+$('sub').textContent = X.sub;
+$('foot').innerHTML = X.ask + '<a href="#" id="ct">' + X.me + '</a><br>by @jeremstyke';
+$('ct').onclick = (e) => { e.preventDefault(); open('https://t.me/jeremstyke?direct'); };
+let S = null, EDIT = false;
+async function call(body) { const r = await fetch(F, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ app: 'earn', initData: INIT, ...body }) }); return r.json(); }
+function render() {
+  // the shared TON wallet
+  if (S) {
+    const w = S.wallet, ed = EDIT || !w;
+    $('wal').innerHTML = `<section class="card" style="--c:#b18cff"><div class="lbl">${X.w}</div><p class="what" style="margin:0 0 10px">${X.wh}</p>`
+      + (ed ? `<div class="wal"><input id="wa" placeholder="${X.ph}" value="${esc(w || '')}" autocomplete="off" spellcheck="false"><button class="btn" id="ws">${X.save}</button></div>`
+        : `<div class="head" style="justify-content:space-between"><span class="addr">${esc(w)}</span><button class="ghost" id="wc" style="width:auto;padding:8px 12px">${X.chg}</button></div>`)
+      + `<p class="what" style="margin:10px 0 0;font-size:13px">${X.paid}</p></section>`;
+    if ($('wc')) $('wc').onclick = () => { haptic(); EDIT = true; render(); };
+    if ($('ws')) $('ws').onclick = async () => {
+      const a = ($('wa').value || '').trim(); if (!a) return; haptic(); $('ws').disabled = true;
+      let r; try { r = await call({ action: 'wallet', addr: a }); } catch (e) { r = null; }
+      if (!r || !r.ok) { toast(X.bad); $('ws').disabled = false; return; }
+      S = r; EDIT = false; toast(X.ok); render();
+    };
+  }
+  $('list').innerHTML = P.map((p) => {
+    const st = S && S[p.k];
+    let mid = '';
+    if (p.k !== 'ia') {
+      if (!st) mid = INIT ? '' : `<p class="warn">${X.nolink}</p>`;
+      else mid = `<div class="lbl">${X.yl}</div><div class="link">${esc(st.link)}</div>`
+        + `<div class="row2"><button class="btn" data-copy="${p.k}">${X.copy}</button><button class="btn" data-share="${p.k}">${X.share}</button></div>`
+        + `<div class="stats"><div class="stat"><b>${st.valid}</b><small>✅ ${X.valid}</small></div><div class="stat"><b>${m$(st.balance)}</b><small>💰 ${X.bal} · ${X.min(m$(st.min))}</small></div></div>`
+        + (st.member ? '' : `<p class="warn">${X.act}</p>`);
+    }
+    return `<section class="card" style="--c:${p.c}"><div class="head"><div class="ico">${p.i}</div><div><h2>${esc(p.name)}</h2><span class="badge">${esc(p.badge)}</span></div></div>`
+      + `<p class="what">${esc(p.what)}</p>${mid}`
+      + `<button class="${p.k === 'ia' ? 'btn' : 'ghost'}" data-open="${p.k}">${esc(p.go)}</button>`
+      + `<details><summary>${X.how}</summary><ol>${p.steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol></details></section>`;
+  }).join('');
+  document.querySelectorAll('[data-open]').forEach((b) => b.onclick = () => { haptic('medium'); open(P.find((x) => x.k === b.dataset.open).open); });
+  document.querySelectorAll('[data-copy]').forEach((b) => b.onclick = async () => {
+    const l = S[b.dataset.copy].link; haptic();
+    try { await navigator.clipboard.writeText(l); } catch (e) { const t = document.createElement('textarea'); t.value = l; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (x) {} t.remove(); }
+    toast(X.copied);
+  });
+  document.querySelectorAll('[data-share]').forEach((b) => b.onclick = () => {
+    const p = P.find((x) => x.k === b.dataset.share); haptic('medium');
+    open('https://t.me/share/url?url=' + encodeURIComponent(S[p.k].link) + '&text=' + encodeURIComponent(p.share));
+  });
+}
+render();
+if (INIT) call({}).then((r) => { if (r && r.ok) { S = r; render(); } }).catch(() => {});
 </script>
 </body>
 </html>
