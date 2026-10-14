@@ -137,7 +137,7 @@ async function call(body) { const r = await fetch(F, { method: 'POST', headers: 
 function render() {
   // 14 oct 2026: the programs are for @jeremstyke members only
   if (INIT && !S) { $('wal').innerHTML = ''; $('list').innerHTML = '<section class="card gate"><div class="big">⏳</div></section>'; return; }
-  if (S && S.joined === false) { gate(); return; }
+  // 14 oct 2026: joining @jeremstyke is recommended, no longer required: a card suggests it, the programs stay open
   // the shared TON wallet
   if (S) {
     const w = S.wallet, ed = EDIT || !w;
@@ -153,7 +153,8 @@ function render() {
       S = r; EDIT = false; toast(X.ok); render();
     };
   }
-  $('list').innerHTML = earnCard() + P.map((p) => {
+  const joinTip = () => S && S.joined === false ? `<section class="card" style="--c:#ffd43b"><div class="head"><div class="ico">📢</div><div><h2>${FR ? 'Suis la chaîne Jeremstyke' : 'Follow the Jeremstyke channel'}</h2></div></div><p class="what">${FR ? 'Conseillé : les nouveaux programmes, les astuces pour gagner plus et les preuves de paiement y sont publiés en premier.' : 'Recommended: new programs, tips to earn more and payment proofs are posted there first.'}</p><button class="btn" data-join="1">${X.g3}</button></section>` : '';
+  $('list').innerHTML = joinTip() + earnCard() + P.map((p) => {
     const st = S && S[p.k];
     let mid = '';
     if (p.k !== 'ia') {
@@ -170,6 +171,7 @@ function render() {
       + `<button class="${p.k === 'ia' ? 'btn' : 'ghost'}" data-open="${p.k}">${esc(p.go)}</button>`
       + `<details><summary>${X.how}</summary><ol>${p.steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol></details></section>`;
   }).join('');
+  document.querySelectorAll('[data-join]').forEach((b) => b.onclick = () => { haptic('medium'); open('https://t.me/jeremstyke'); });
   document.querySelectorAll('[data-open]').forEach((b) => b.onclick = () => { haptic('medium'); open(P.find((x) => x.k === b.dataset.open).open); });
   document.querySelectorAll('[data-cta]').forEach((b) => b.onclick = () => { haptic('medium'); open(P.find((x) => x.k === b.dataset.cta).ctaLink); });
   document.querySelectorAll('[data-copy]').forEach((b) => b.onclick = async () => {
