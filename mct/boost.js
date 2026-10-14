@@ -61,3 +61,42 @@
     hap(); open(b);
   }, true);
 })();
+
+// 14 oct 2026: selling a coin, profit or loss compared to what the coins cost. In the sell panel: what the player paid for his coins,
+// what they are worth now, and the difference. After a sale: the profit or loss of that sale (the server sends cost and pnl).
+(() => {
+  const PX = {
+    en: { paid: 'You paid', now: 'worth now', p: 'Profit', l: 'Loss', sale: (w, m, pc) => '📊 ' + w + ' on this sale: ' + m + ' (' + pc + ')' },
+    fr: { paid: 'Tu as payé', now: 'valeur actuelle', p: 'Bénéfice', l: 'Perte', sale: (w, m, pc) => '📊 ' + w + ' sur cette vente : ' + m + ' (' + pc + ')' },
+  };
+  const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return PX[l] || PX.en; };
+  const mo = (n) => { try { return money(n); } catch (e) { return '$' + Number(n).toFixed(2); } };
+  const sm = (n) => (n >= 0 ? '+' : '') + mo(n);
+  const pc = (a, b) => (a >= 0 ? '+' : '') + (a / b * 100).toFixed(1) + '%';
+  function sellInfo() {
+    const es = document.getElementById('es'), box0 = document.getElementById('plbox');
+    if (!es || !document.getElementById('dosell')) { if (box0) box0.remove(); return; }
+    let h = null; try { h = COIN && COIN.hold; } catch (e) {}
+    if (!h || !(Number(h.cost) > 0)) { if (box0) box0.remove(); return; }
+    const T = L(), cb = Number(h.cost), v = Number(h.value), d = v - cb;
+    const html = T.paid + ' <b>' + mo(cb) + '</b> · ' + T.now + ' <b>' + mo(v) + '</b><br><b class="' + (d >= 0 ? 'up' : 'down') + '">' + (d >= 0 ? T.p : T.l) + ' ' + sm(d) + ' (' + pc(d, cb) + ')</b>';
+    let box = box0;
+    if (!box) { box = document.createElement('div'); box.id = 'plbox'; box.className = 'est num'; box.style.marginTop = '4px'; es.parentNode.insertBefore(box, es.nextSibling); }
+    if (box.innerHTML !== html) box.innerHTML = html;
+  }
+  let q = 0; new MutationObserver(() => { if (!q) q = requestAnimationFrame(() => { q = 0; sellInfo(); }); }).observe(document.body, { childList: true, subtree: true });
+  const of = window.fetch;
+  window.fetch = async function (u, o) {
+    const r = await of.apply(this, arguments);
+    try {
+      if (String(u).indexOf('/mct/api') >= 0 && o && typeof o.body === 'string' && o.body.indexOf('"action":"sell"') >= 0) {
+        r.clone().json().then((j) => {
+          if (!j || !j.ok || !(Number(j.cost) > 0)) return;
+          const T = L(), d = Number(j.pnl);
+          setTimeout(() => { try { toast(T.sale(d >= 0 ? T.p : T.l, sm(d), pc(d, Number(j.cost)))); } catch (e) {} }, 2700);
+        }).catch(() => {});
+      }
+    } catch (e) {}
+    return r;
+  };
+})();
