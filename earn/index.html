@@ -128,6 +128,12 @@ const P = [
     what: FR ? 'La régie pub de Telegram : les chaînes gagnent en publiant des pubs, les annonceurs achètent de la promotion. Avec leur programme d\'affiliation, tu touches 10 % de ce que gagnent les personnes que tu amènes.' : 'The ad network of Telegram: channels earn by posting ads, advertisers buy promotion. With their affiliate program, you get 10% of what the people you bring earn.',
     steps: FR ? ['Inscris-toi sur InsideAds avec le bouton ci-dessous', 'Ton lien d\'affiliation InsideAds est dans leur app', 'Partage-le aux propriétaires de chaînes et aux annonceurs', 'Touche 10 % de leurs gains, à vie'] : ['Sign up on InsideAds with the button below', 'Your InsideAds affiliate link is in their app', 'Share it with channel owners and advertisers', 'Get 10% of their earnings, for life'],
     go: FR ? '📢 S\'inscrire sur InsideAds' : '📢 Sign up on InsideAds' },
+  // 15 oct 2026: Ads Galaxy affiliate program (paid in USDT by Ads Galaxy), with Jeremy's affiliate link
+  { k: 'agx', c: '#26a17b', i: '🌌', name: 'Ads Galaxy', open: 'https://t.me/Ads_Galaxy_bot?start=AGX7057960224',
+    badge: FR ? '0,015 $ en USDT par ami' : '$0.015 in USDT per friend',
+    what: FR ? 'Une plateforme Telegram qui paie en USDT. Avec son programme de parrainage, tu gagnes 0,005 $ dès qu\'un ami rejoint (payé tout de suite sur ton solde retirable), puis 0,010 $ quand il valide en rejoignant la chaîne demandée.' : 'A Telegram platform that pays in USDT. With its referral program, you earn $0.005 as soon as a friend joins (paid instantly to your withdrawable balance), then $0.010 when he verifies by joining the required channel.',
+    steps: FR ? ['Inscris-toi sur Ads Galaxy avec le bouton ci-dessous', 'Ton lien de parrainage Ads Galaxy est dans leur bot', 'Ton ami rejoint : +0,005 $ en USDT, tout de suite', 'Il rejoint la chaîne demandée : +0,010 $, soit 0,015 $ par ami'] : ['Sign up on Ads Galaxy with the button below', 'Your Ads Galaxy referral link is in their bot', 'Your friend joins: +$0.005 in USDT, instantly', 'He joins the required channel: +$0.010, so $0.015 per friend'],
+    go: FR ? '🌌 S\'inscrire sur Ads Galaxy' : '🌌 Sign up on Ads Galaxy' },
 ];
 $('sub').textContent = X.sub;
 $('foot').innerHTML = X.ask + '<a href="#" id="ct">' + X.me + '</a><br>by @jeremstyke';
@@ -157,7 +163,7 @@ function render() {
   $('list').innerHTML = joinTip() + earnCard() + P.map((p) => {
     const st = S && S[p.k];
     let mid = '';
-    if (p.k !== 'ia') {
+    if (p.k !== 'ia' && p.k !== 'agx') {
       if (!st) mid = INIT ? '' : `<p class="warn">${X.nolink}</p>`;
       else mid = `<div class="lbl">${X.yl}</div><div class="link">${esc(st.link)}</div>`
         + `<div class="row2"><button class="btn" data-copy="${p.k}">${X.copy}</button><button class="btn" data-share="${p.k}">${X.share}</button></div>`
@@ -168,7 +174,7 @@ function render() {
       + `<p class="what">${esc(p.what)}</p>`
       + (p.push ? `<div class="push">${p.push}<button class="btn" data-cta="${p.k}">${esc(p.cta)}</button></div>` : '')
       + mid
-      + `<button class="${p.k === 'ia' ? 'btn' : 'ghost'}" data-open="${p.k}">${esc(p.go)}</button>`
+      + `<button class="${p.k === 'ia' || p.k === 'agx' ? 'btn' : 'ghost'}" data-open="${p.k}">${esc(p.go)}</button>`
       + `<details><summary>${X.how}</summary><ol>${p.steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol></details></section>`;
   }).join('');
   document.querySelectorAll('[data-join]').forEach((b) => b.onclick = () => { haptic('medium'); open('https://t.me/jeremstyke'); });
