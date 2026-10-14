@@ -34,3 +34,5 @@ async function tonCard(edit) {
     haptic('ok'); toast(L.ok); tonCard(false);
   };
 }
+// the Earn screen is rebuilt each time it opens: fill the card as soon as its empty slot appears
+new MutationObserver(() => { const el = document.getElementById('tonc'); if (el && !el.dataset.t) { el.dataset.t = '1'; tonCard(); } }).observe(document.body, { childList: true, subtree: true });
