@@ -1,5 +1,5 @@
 // 14 oct 2026: Meme Coin Tycoon, real TON for referrals: a dedicated page (status, progress, TON wallet, how it works)
-// and a button to it on the market and in Earn. Served by the Supabase function mct-ton.
+// and a banner to it at the top of the market (and in Earn). Served by the Supabase function mct-ton.
 const TONF = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-ton';
 const TONT = {
   en: { h: '💎 Earn real TON', s: (u) => '$' + u + ' in TON for every friend who really plays', v: 'Valid friends', p: 'Pending', r: 'Received', b: 'Balance', mn: (m) => 'Paid from $' + m, togo: (x) => '$' + x + ' to go before your payment', ready: 'Ready: paid within 7 days 🎉', wait: 'Being paid', w: 'Your TON wallet', ph: 'Paste your TON address (UQ... or EQ...)', save: 'Save', ok: 'Wallet saved ✅', bad: 'Invalid TON address', chg: 'Change', nowal: 'Add your wallet to get paid 👇', inv: '👥 Invite my friends', how: 'How it works', st: (u, m, d) => ['👥 Invite your friends with your link', '🎮 They play: 5 trades and they come back another day (within 7 days)', '💎 You earn $' + u + ' in TON per friend', '👛 Paid to your TON wallet from $' + m + ', within ' + d + ' days'], rule: 'Fake or duplicate accounts are never paid. No limit per player.', off: 'Budget of the month reached: TON rewards are back next month.', back: '← Back', bh: '💎 Earn real TON with your friends', bs: '$0.05 in TON for every friend who plays · tap here' },
@@ -59,7 +59,7 @@ async function tonPage(edit) {
     haptic('ok'); toast(L.ok); tonPage(false);
   };
 }
-// the button to the page (market: above the cards, Earn: in its slot)
+// the banner to the page (market: at the top, Earn: in its slot)
 function tonButton() {
   const L = tonL(), b = document.createElement('button');
   b.className = 'row tonbtn'; b.style.cssText = 'border:1px solid #2ee6ff;border-radius:14px;width:100%;text-align:start;cursor:pointer;margin-bottom:10px';
@@ -77,25 +77,6 @@ async function tonPlace() {
   const ec2 = document.getElementById('tonc');
   if (ec2 && !ec2.dataset.t) { ec2.dataset.t = '1'; ec2.appendChild(tonButton()); }
 }
-// 14 oct 2026: a small floating diamond above the bottom bar, on every screen, opens the TON page
-function tonFab() {
-  let f = document.getElementById('tonfab');
-  if (!f) {
-    const st = document.createElement('style');
-    st.textContent = '@keyframes tonbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}#tonfab{position:fixed;right:16px;bottom:calc(var(--tab) + 16px + env(safe-area-inset-bottom));z-index:11;width:56px;height:56px;border-radius:50%;border:2px solid #2ee6ff;background:radial-gradient(circle at 30% 30%,#7ff6ff,#1aa7c9 60%,#0b5f86);box-shadow:0 0 18px rgba(46,230,255,.6);font-size:26px;display:flex;align-items:center;justify-content:center;animation:tonbob 2.4s ease-in-out infinite;cursor:pointer;padding:0}#tonfab small{position:absolute;bottom:-7px;left:50%;transform:translateX(-50%);background:#ffd43b;color:#1a0638;font-size:10px;font-weight:900;padding:1px 6px;border-radius:8px;line-height:1.4}';
-    document.head.appendChild(st);
-    f = document.createElement('button'); f.id = 'tonfab'; f.setAttribute('aria-label', 'TON'); f.innerHTML = '💎<small>TON</small>';
-    f.onclick = () => { haptic(); tonPage(); };
-    document.body.appendChild(f);
-  }
-  let coin = false; try { coin = !!COIN; } catch (e) {}
-  const show = VIEW !== 'ton' && !coin;
-  if (f.style.display !== (show ? 'flex' : 'none')) f.style.display = show ? 'flex' : 'none';
-}
-// the screens are rebuilt each time they open: add the buttons as soon as their place appears
-async function tonTick() {
-  if (!tw || !tw.initData || !(await tonOn())) return;
-  tonFab(); tonPlace();
-}
-new MutationObserver(() => { tonTick(); }).observe(document.body, { childList: true, subtree: true });
-tonTick();
+// the screens are rebuilt each time they open: add the banner as soon as its place appears
+new MutationObserver(() => { tonPlace(); }).observe(document.body, { childList: true, subtree: true });
+tonPlace();
