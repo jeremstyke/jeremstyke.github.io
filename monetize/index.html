@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Monetize Telegram</title>
+<meta name="description" content="Monetize Telegram: estimate how much your Telegram channel, group, bot or mini app can earn per month, source by source.">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root {
+  --bg: #f4f6fb; --card: #ffffff; --ink: #14182b; --mute: #6b7290; --line: #e3e7f2;
+  --acc: #1f9d55; --acc2: #2d6cdf; --gold: #f2b705;
+  --r: 16px;
+}
+@media (prefers-color-scheme: dark) { :root { --bg: #0f1220; --card: #181c30; --ink: #eef0fa; --mute: #9aa1bf; --line: #2a3050; } }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 16px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+.wrap { max-width: 520px; margin: 0 auto; padding: 18px 16px 40px; display: grid; gap: 14px; }
+h1 { font-size: 26px; line-height: 1.15; margin: 4px 0 0; text-wrap: balance; }
+h2 { font-size: 15px; margin: 0; }
+.sub { color: var(--mute); margin: 0; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; display: grid; gap: 14px; }
+label { display: grid; gap: 6px; font-weight: 600; font-size: 14px; }
+label small, .hint { font-weight: 400; color: var(--mute); font-size: 12px; }
+input, select { width: 100%; font: inherit; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+input:focus, select:focus { outline: 2px solid var(--acc2); outline-offset: 1px; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.seg { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.seg button { font: inherit; font-size: 13px; padding: 10px 4px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); cursor: pointer; }
+.seg button[aria-pressed="true"] { border-color: var(--acc2); background: color-mix(in srgb, var(--acc2) 14%, var(--bg)); font-weight: 700; }
+.src { display: grid; gap: 8px; }
+.chk { display: flex; gap: 10px; align-items: flex-start; font-weight: 600; font-size: 14px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); cursor: pointer; }
+.chk input { width: 20px; height: 20px; margin: 1px 0 0; flex: none; accent-color: var(--acc2); }
+.chk span small { display: block; font-weight: 400; color: var(--mute); font-size: 12px; }
+.sub-opts { display: grid; gap: 10px; padding: 0 2px 4px 32px; }
+details.adv summary { cursor: pointer; font-weight: 700; font-size: 14px; }
+details.adv[open] summary { margin-bottom: 12px; }
+.btn { font: inherit; font-weight: 700; border: 0; border-radius: 14px; padding: 15px; cursor: pointer; text-align: center; text-decoration: none; display: block; }
+.go { background: var(--acc2); color: #fff; font-size: 17px; }
+.res { text-align: center; gap: 8px; }
+.res .lbl { color: var(--mute); font-size: 14px; }
+.res .big { font-size: 40px; font-weight: 800; color: var(--acc); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.res .yr { color: var(--mute); font-size: 14px; }
+.lines { display: grid; gap: 8px; text-align: left; margin-top: 6px; }
+.line { display: grid; grid-template-columns: 1fr auto; gap: 8px; font-size: 14px; border-top: 1px solid var(--line); padding-top: 8px; font-variant-numeric: tabular-nums; }
+.line b { white-space: nowrap; }
+.grow2 { font-size: 14px; background: color-mix(in srgb, var(--acc) 12%, var(--card)); border-radius: 12px; padding: 10px 12px; text-align: left; }
+.tips { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px; }
+.earn { background: var(--acc); color: #fff; }
+.grow { background: var(--card); color: var(--ink); border: 1px solid var(--line); }
+.share { background: var(--gold); color: #1d1600; }
+.how { font-size: 13px; color: var(--mute); }
+.how summary { cursor: pointer; font-weight: 600; color: var(--ink); }
+.how ul { padding-left: 18px; margin: 8px 0; display: grid; gap: 4px; }
+.foot { text-align: center; font-size: 12px; color: var(--mute); }
+.foot a { color: var(--mute); }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div>
+    <h1>💰 Monetize Telegram</h1>
+    <p class="sub">How much can your channel, group, bot or mini app earn? Pick your income sources and get a monthly estimate, source by source. Free, no sign-up.</p>
+  </div>
+
+  <form class="card" id="f">
+    <label>Project name <small>(optional, for your result card)</small>
+      <input id="name" maxlength="40" placeholder="@mychannel" autocomplete="off">
+    </label>
+    <div>
+      <label style="margin-bottom:6px">Type</label>
+      <div class="seg" role="group" id="type">
+        <button type="button" data-v="channel" aria-pressed="true">📣 Channel</button>
+        <button type="button" data-v="group" aria-pressed="false">👥 Group</button>
+        <button type="button" data-v="bot" aria-pressed="false">🤖 Bot</button>
+        <button type="button" data-v="app" aria-pressed="false">🚀 Mini app</button>
+      </div>
+    </div>
+    <div class="row">
+      <label>Topic
+        <select id="niche">
+          <option value="crypto">Crypto & trading</option>
+          <option value="finance">Finance & business</option>
+          <option value="earn">Earn money online</option>
+          <option value="tech">Tech & AI</option>
+          <option value="edu">Education</option>
+          <option value="health">Health & sport</option>
+          <option value="games">Games</option>
+          <option value="news">News</option>
+          <option value="fun">Fun & entertainment</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+      <label>Main audience
+        <select id="geo">
+          <option value="t1">USA, UK, Canada, Australia</option>
+          <option value="eu">Western Europe</option>
+          <option value="cis">Russia & CIS</option>
+          <option value="mena">Middle East & Turkey</option>
+          <option value="latam">Latin America, Spain, Portugal</option>
+          <option value="asia">South & Southeast Asia</option>
+          <option value="africa">Africa</option>
+          <option value="mix" selected>Mixed / worldwide</option>
+        </select>
+      </label>
+    </div>
+    <div class="row">
+      <label id="l1">Subscribers
+        <input id="subs" type="number" inputmode="numeric" min="0" value="5000">
+      </label>
+      <label id="l2">Average views per post
+        <input id="views" type="number" inputmode="numeric" min="0" value="1500">
+      </label>
+    </div>
+    <div class="row" id="chanrow">
+      <label>Posts per day
+        <input id="ppd" type="number" inputmode="numeric" min="1" max="20" value="3">
+      </label>
+      <label>Currency
+        <select id="cur">
+          <option value="USD">$ USD</option>
+          <option value="EUR">€ EUR</option>
+          <option value="GBP">£ GBP</option>
+          <option value="RUB">₽ RUB</option>
+          <option value="INR">₹ INR</option>
+          <option value="TRY">₺ TRY</option>
+          <option value="BRL">R$ BRL</option>
+          <option value="NGN">₦ NGN</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="src">
+      <h2>Income sources</h2>
+
+      <label class="chk" data-for="channel group"><input type="checkbox" id="s_ads" checked><span>📢 Selling ad posts<small>Advertisers pay you to publish their post</small></span></label>
+      <div class="sub-opts" id="o_ads">
+        <div class="row">
+          <label>Ads per day
+            <select id="ads"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select>
+          </label>
+          <label>Ad format
+            <select id="fmt"><option value="1">Stays 24 h</option><option value="1.5">Permanent post</option><option value="2">Pinned 24 h</option></select>
+          </label>
+        </div>
+      </div>
+
+      <label class="chk" data-for="channel group bot app"><input type="checkbox" id="s_net" checked><span>🤝 Ad network (InsideAds and others)<small>Ads placed automatically, you earn per view, no hunting advertisers</small></span></label>
+
+      <label class="chk" data-for="bot app"><input type="checkbox" id="s_rew" checked><span>🎬 Rewarded ads in your bot or mini app<small>Users watch a short ad for a bonus, you earn per view</small></span></label>
+      <div class="sub-opts" id="o_rew">
+        <label>Ad views per user per day
+          <select id="rewn"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="5">5</option></select>
+        </label>
+      </div>
+
+      <label class="chk" data-for="channel group bot app"><input type="checkbox" id="s_aff"><span>🔗 Affiliate links<small>You earn a commission when your readers sign up or buy</small></span></label>
+      <div class="sub-opts" id="o_aff">
+        <div class="row">
+          <label>Affiliate posts per week
+            <input id="affn" type="number" inputmode="numeric" min="0" max="50" value="2">
+          </label>
+          <label>Commission per sale
+            <input id="affc" type="number" inputmode="decimal" min="0" value="10">
+          </label>
+        </div>
+      </div>
+
+      <label class="chk" data-for="channel group bot app"><input type="checkbox" id="s_prem"><span>⭐ Paid premium access<small>A private channel or premium features paid in Telegram Stars</small></span></label>
+      <div class="sub-opts" id="o_prem">
+        <div class="row">
+          <label>Price per month
+            <input id="premp" type="number" inputmode="decimal" min="0" value="5">
+          </label>
+          <label>Readers who pay (%)
+            <select id="premr"><option value="0.5">0.5%</option><option value="1" selected>1%</option><option value="2">2%</option><option value="5">5%</option></select>
+          </label>
+        </div>
+      </div>
+
+      <label class="chk" data-for="channel group bot app"><input type="checkbox" id="s_tip"><span>🎁 Donations and Star reactions<small>Readers send Stars or tips to support you</small></span></label>
+    </div>
+
+    <details class="adv">
+      <summary>⚙️ Advanced: my own ad price</summary>
+      <label>Price per 1,000 views, in your currency <small>Leave empty to use our estimate for your topic and audience</small>
+        <input id="mycpm" type="number" inputmode="decimal" min="0" placeholder="Auto">
+      </label>
+    </details>
+
+    <button class="btn go" type="submit">Estimate my earnings</button>
+  </form>
+
+  <div class="card res" id="out" hidden>
+    <div class="lbl" id="who">Your project could earn about</div>
+    <div class="big" id="range">0</div>
+    <div class="yr" id="yr">per month</div>
+    <div class="lines" id="lines"></div>
+    <div class="grow2" id="grow2"></div>
+  </div>
+
+  <div class="card" id="next" hidden>
+    <b>🚀 Earn more, faster</b>
+    <ul class="tips" id="tips"></ul>
+    <a class="btn earn" href="https://t.me/InsideAds_bot/open?startapp=r_7057960224" target="_blank" rel="noopener">💰 Start earning with InsideAds</a>
+    <a class="btn grow" href="https://t.me/Grampedia_bot?startapp=src_calc" target="_blank" rel="noopener">📚 Get more views: list it free on GramPedia</a>
+    <a class="btn share" id="share" href="#" target="_blank" rel="noopener">📤 Share my result</a>
+    <details class="how">
+      <summary>How we calculate</summary>
+      <ul id="howtxt"></ul>
+      <p>This is a rough estimate, not a promise. Real earnings depend on your audience quality, how much you actually sell and the prices you negotiate. Prices per 1,000 views are cautious market ranges for your topic and audience, not official figures. The InsideAds link is an affiliate link: it costs you nothing.</p>
+    </details>
+  </div>
+
+  <p class="foot">Monetize Telegram · by <a href="https://t.me/jeremstyke" target="_blank" rel="noopener">@jeremstyke</a></p>
+</div>
+
+<script>
+const tg = window.Telegram && Telegram.WebApp;
+try { tg.ready(); tg.expand(); } catch (e) {}
+const $ = (s) => document.querySelector(s);
+// Price for 1,000 ad views in USD (low, high) by topic, before the audience factor. Cautious market ranges, not official figures.
+const CPM = { crypto: [3, 8], finance: [3, 7], earn: [2, 5], tech: [2, 5], edu: [1.5, 4], health: [1.5, 4], games: [1, 3], news: [1, 3], fun: [0.5, 2], other: [1, 3] };
+const GEO = { t1: 1, eu: 0.8, cis: 0.45, mena: 0.45, latam: 0.35, asia: 0.25, africa: 0.2, mix: 0.5 };
+// Approximate conversion from USD, only used to display the result in another currency
+const FX = { USD: [1, '$'], EUR: [0.92, '€'], GBP: [0.79, '£'], RUB: [92, '₽'], INR: [84, '₹'], TRY: [34, '₺'], BRL: [5.5, 'R$'], NGN: [1600, '₦'] };
+let TYPE = 'channel';
+const isBot = () => TYPE === 'bot' || TYPE === 'app';
+function sync() {
+  $('#l1').firstChild.nodeValue = isBot() ? 'Monthly users ' : TYPE === 'group' ? 'Members ' : 'Subscribers ';
+  $('#l2').firstChild.nodeValue = isBot() ? 'Daily active users ' : TYPE === 'group' ? 'Daily active members ' : 'Average views per post ';
+  $('#ppd').parentElement.hidden = isBot();
+  document.querySelectorAll('.chk').forEach((c) => { c.hidden = !c.dataset.for.split(' ').includes(TYPE); });
+  $('#o_ads').hidden = isBot() || !$('#s_ads').checked;
+  $('#o_rew').hidden = !isBot() || !$('#s_rew').checked;
+  $('#o_aff').hidden = !$('#s_aff').checked;
+  $('#o_prem').hidden = !$('#s_prem').checked;
+}
+document.querySelectorAll('#type button').forEach((b) => b.onclick = () => {
+  TYPE = b.dataset.v; document.querySelectorAll('#type button').forEach((x) => x.setAttribute('aria-pressed', x === b)); sync();
+});
+document.querySelectorAll('.chk input').forEach((c) => c.onchange = sync);
+sync();
+const fmt = (usd) => { const [r, s] = FX[$('#cur').value]; const v = usd * r; return s + (v >= 1000 ? Math.round(v).toLocaleString('en-US') : v >= 10 ? Math.round(v) : v.toFixed(2)); };
+const num = (id, d) => { const v = parseFloat($(id).value); return isFinite(v) && v >= 0 ? v : d; };
+$('#f').onsubmit = (e) => {
+  e.preventDefault();
+  const rate = FX[$('#cur').value][0];
+  const subs = num('#subs', 0), v = num('#views', 0), g = GEO[$('#geo').value];
+  let [lo, hi] = CPM[$('#niche').value]; lo *= g; hi *= g;
+  const own = parseFloat($('#mycpm').value); if (isFinite(own) && own > 0) { lo = own / rate * 0.8; hi = own / rate * 1.2; }
+  const reach = isBot() ? v : TYPE === 'group' ? v * 0.5 : v;
+  const L = [], H = [];
+  const add = (name, l, h, why) => { L.push([name, l, h]); H.push(why); };
+  if (!isBot() && $('#s_ads').checked) {
+    const ads = +$('#ads').value, f = +$('#fmt').value;
+    add('📢 Ad posts', reach * ads * 30 * 0.4 * lo * f / 1000, reach * ads * 30 * 0.8 * hi * f / 1000,
+      `Ad posts: ${Math.round(reach).toLocaleString('en-US')} views per ad × ${ads} a day × 30 days, 40% to 80% of slots sold, ×${f} for the format.`);
+  }
+  if ($('#s_net').checked) {
+    const per = isBot() ? 0.5 : Math.min(1, num('#ppd', 3) / 3);
+    add('🤝 Ad network', reach * per * 30 * 0.3 * lo / 1000, reach * per * 30 * 0.6 * hi / 1000,
+      `Ad network: automatic ads paid about 30% to 60% of a direct ad, on ${isBot() ? 'part of your daily users' : 'your daily views'}.`);
+  }
+  if (isBot() && $('#s_rew').checked) {
+    const n = +$('#rewn').value;
+    add('🎬 Rewarded ads', v * n * 30 * lo * 0.6 / 1000, v * n * 30 * hi * 0.9 / 1000,
+      `Rewarded ads: ${Math.round(v).toLocaleString('en-US')} daily users × ${n} ad views a day × 30 days.`);
+  }
+  if ($('#s_aff').checked) {
+    const n = num('#affn', 2), c = num('#affc', 10) / rate, clicks = reach * 0.01 * n * 4.3;
+    add('🔗 Affiliate links', clicks * 0.01 * c, clicks * 0.03 * c,
+      `Affiliate: ${n} posts a week, about 1% of viewers click, 1% to 3% of clicks become a sale at ${fmt(c)} each.`);
+  }
+  if ($('#s_prem').checked) {
+    const p = num('#premp', 5) / rate, r = +$('#premr').value / 100, base = subs;
+    add('⭐ Premium access', base * r * 0.5 * p, base * r * p,
+      `Premium: ${(r * 100)}% of your ${Math.round(base).toLocaleString('en-US')} ${isBot() ? 'users' : 'subscribers'} at ${fmt(p)} a month (we count half of them as a low case).`);
+  }
+  if ($('#s_tip').checked) {
+    add('🎁 Donations & Stars', subs * 0.0005 * 2, subs * 0.002 * 5,
+      'Donations: a very small share of your audience sends a small tip each month.');
+  }
+  const low = L.reduce((s, x) => s + x[1], 0), high = L.reduce((s, x) => s + x[2], 0);
+  const name = $('#name').value.trim();
+  $('#who').textContent = name ? `${name} could earn about` : 'Your project could earn about';
+  $('#range').textContent = L.length ? `${fmt(low)} - ${fmt(high)}` : 'Pick an income source';
+  $('#yr').textContent = L.length ? `per month · ${fmt(low * 12)} - ${fmt(high * 12)} per year` : '';
+  $('#lines').innerHTML = L.map((x) => `<div class="line"><span>${x[0]}</span><b>${fmt(x[1])} - ${fmt(x[2])}</b></div>`).join('');
+  $('#grow2').innerHTML = L.length ? `📈 With <b>twice your current audience</b>, that would be about <b>${fmt(low * 2)} - ${fmt(high * 2)}</b> per month.` : '';
+  const T = [];
+  if (!isBot() && subs > 0 && v / subs < 0.15) T.push('Your views are low compared to your audience. More views = higher ad prices: post better, not more.');
+  if (reach < 1000) T.push('Under 1,000 views, direct advertisers are rare. Start with an ad network and grow with free ad exchanges and directories.');
+  if (g < 0.5 && !isBot()) T.push('Your audience pays lower ad prices. A bot or mini app with rewarded ads can earn more per user.');
+  if (!$('#s_aff').checked) T.push('Affiliate links are easy to add: recommend 1 or 2 tools you really use each week.');
+  if (!$('#s_prem').checked && subs >= 2000) T.push('With your audience, a small paid premium channel in Stars is worth testing.');
+  T.push('Sell your ad slots without hunting advertisers: ad networks bring them to you.');
+  $('#tips').innerHTML = T.slice(0, 3).map((t) => `<li>${t}</li>`).join('');
+  $('#howtxt').innerHTML = H.map((t) => `<li>${t.replace(/</g, '&lt;')}</li>`).join('') + `<li>Price per 1,000 views used: ${fmt(lo)} to ${fmt(hi)}.</li>`;
+  const msg = `${name || 'My Telegram project'} could earn ${fmt(low)} - ${fmt(high)} per month 💰 How much can yours earn?`;
+  $('#share').href = 'https://t.me/share/url?url=' + encodeURIComponent('https://jeremstyke.github.io/monetize/') + '&text=' + encodeURIComponent(msg);
+  $('#out').hidden = false; $('#next').hidden = !L.length;
+  $('#out').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  try { tg.HapticFeedback.notificationOccurred('success'); } catch (x) {}
+};
+document.querySelectorAll('a[target=_blank]').forEach((a) => a.addEventListener('click', (e) => {
+  if (!tg || !tg.openTelegramLink || !/^https:\/\/t\.me\//.test(a.href)) return;
+  e.preventDefault(); try { tg.openTelegramLink(a.href); } catch (x) { location.href = a.href; }
+}));
+</script>
+</body>
+</html>
