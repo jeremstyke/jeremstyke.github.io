@@ -76,14 +76,14 @@ const X = FR ? {
   sub: 'Découvre les programmes d\'affiliation et gagne de vrais TON sur Telegram.',
   yl: 'Ton lien d\'affiliation', copy: '📋 Copier', share: '📤 Partager', copied: 'Lien copié ✅',
   valid: 'amis validés', bal: 'solde', min: (m) => 'paiement dès ' + m, how: 'Comment ça marche',
-  act: 'Ouvre une première fois pour activer ton lien 👇', w: '👛 Ton portefeuille TON', wh: 'Pour recevoir tes gains en TON (Meme Coin Tycoon, GramPedia et Daily Score).', ph: 'Colle ton adresse TON (UQ... ou EQ...)', save: 'OK', ok: 'Portefeuille enregistré ✅', bad: 'Adresse TON invalide', chg: 'Changer', paid: 'Paiement sous 7 jours, dès 0,50 $ par programme.',
+  act: 'Ouvre une première fois pour activer ton lien 👇', w: '👛 Ton portefeuille TON', wh: 'Pour recevoir tes gains en TON (Meme Coin Tycoon, GramPedia et Daily Score).', ph: 'Colle ton adresse TON (UQ... ou EQ...)', save: 'OK', ok: 'Portefeuille enregistré ✅', bad: 'Adresse TON invalide', chg: 'Changer', paid: 'Paiement sous 7 jours, dès 0,50 $ au total (tous programmes ensemble).',
   g1: 'Abonne-toi à la chaîne Jeremstyke', g2: 'Les programmes d\'affiliation sont réservés aux abonnés. Rejoins la chaîne, puis reviens ici.', g3: '📢 Rejoindre la chaîne', g4: '✅ J\'ai rejoint', g5: 'Pas encore abonné : rejoins la chaîne puis réessaie.',
   ask: 'Une question ? ', me: 'Écris-moi', nolink: 'Ouvre cette page depuis le bot pour voir ton lien.'
 } : {
   sub: 'Discover the affiliate programs and earn real TON on Telegram.',
   yl: 'Your affiliate link', copy: '📋 Copy', share: '📤 Share', copied: 'Link copied ✅',
   valid: 'valid friends', bal: 'balance', min: (m) => 'paid from ' + m, how: 'How it works',
-  act: 'Open it once to activate your link 👇', w: '👛 Your TON wallet', wh: 'To receive your TON earnings (Meme Coin Tycoon, GramPedia and Daily Score).', ph: 'Paste your TON address (UQ... or EQ...)', save: 'Save', ok: 'Wallet saved ✅', bad: 'Invalid TON address', chg: 'Change', paid: 'Paid within 7 days, from $0.50 per program.',
+  act: 'Open it once to activate your link 👇', w: '👛 Your TON wallet', wh: 'To receive your TON earnings (Meme Coin Tycoon, GramPedia and Daily Score).', ph: 'Paste your TON address (UQ... or EQ...)', save: 'Save', ok: 'Wallet saved ✅', bad: 'Invalid TON address', chg: 'Change', paid: 'Paid within 7 days, from $0.50 in total (all programs together).',
   g1: 'Join the Jeremstyke channel', g2: 'The affiliate programs are for channel members. Join the channel, then come back here.', g3: '📢 Join the channel', g4: '✅ I joined', g5: 'Not a member yet: join the channel and try again.',
   ask: 'A question? ', me: 'Message me', nolink: 'Open this page from the bot to see your link.'
 };
@@ -150,7 +150,7 @@ function render() {
     $('wal').innerHTML = `<section class="card" style="--c:#b18cff"><div class="lbl">${X.w}</div><p class="what" style="margin:0 0 10px">${X.wh}</p>`
       + (ed ? `<div class="wal"><input id="wa" placeholder="${X.ph}" value="${esc(w || '')}" autocomplete="off" spellcheck="false"><button class="btn" id="ws">${X.save}</button></div>`
         : `<div class="head" style="justify-content:space-between"><span class="addr">${esc(w)}</span><button class="ghost" id="wc" style="width:auto;padding:8px 12px">${X.chg}</button></div>`)
-      + `<p class="what" style="margin:10px 0 0;font-size:13px">${X.paid}</p></section>`;
+      + `<p class="what" style="margin:10px 0 0;font-size:13px">${S.mct && S.mct.total != null ? (FR ? 'Solde total : ' : 'Total balance: ') + '<b>' + m$(S.mct.total) + '</b> · ' : ''}${X.paid}</p></section>`;
     if ($('wc')) $('wc').onclick = () => { haptic(); EDIT = true; render(); };
     if ($('ws')) $('ws').onclick = async () => {
       const a = ($('wa').value || '').trim(); if (!a) return; haptic(); $('ws').disabled = true;
