@@ -8,246 +8,271 @@
 <style>
 :root{--bg:#0d0b1f;--card:#17142f;--line:rgba(255,255,255,.09);--ink:#f4f2ff;--mute:#a7a1c9}
 *{box-sizing:border-box;margin:0}
-body{background:radial-gradient(120% 60% at 50% -10%,#3a1e7a 0%,var(--bg) 60%) fixed,var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:20px 16px calc(28px + env(safe-area-inset-bottom));min-height:100vh}
+body{background:radial-gradient(120% 60% at 50% -10%,#3a1e7a 0%,var(--bg) 60%) fixed,var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:18px 16px calc(96px + env(safe-area-inset-bottom));min-height:100vh}
 .wrap{max-width:520px;margin:0 auto}
-.top{text-align:center;margin:6px 0 18px}
-.logo{font-size:44px;filter:drop-shadow(0 0 18px rgba(255,212,59,.45))}
-h1{font-size:26px;font-weight:900;letter-spacing:-.02em;margin:6px 0 4px}
-.sub{color:var(--mute)}
+.top{text-align:center;margin:4px 0 16px}
+.logo{font-size:40px;filter:drop-shadow(0 0 18px rgba(255,212,59,.45))}
+h1{font-size:24px;font-weight:900;letter-spacing:-.02em;margin:4px 0 2px}
+.sub{color:var(--mute);font-size:14px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin:0 0 14px;position:relative;overflow:hidden}
 .card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--c,#ffd43b)}
 .head{display:flex;gap:12px;align-items:center}
-.ico{flex:none;width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;background:color-mix(in srgb,var(--c) 18%,transparent)}
-.head h2{font-size:18px;font-weight:800}
-.badge{display:inline-block;margin-top:4px;font-size:13px;font-weight:800;color:#0d0b1f;background:var(--c);padding:2px 9px;border-radius:999px}
-.what{color:var(--mute);margin:12px 0}
+.ico{flex:none;width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;background:color-mix(in srgb,var(--c) 18%,transparent)}
+.head h2{font-size:17px;font-weight:800}
+.badge{display:inline-block;margin-top:3px;font-size:12px;font-weight:800;color:#0d0b1f;background:var(--c);padding:2px 9px;border-radius:999px}
+.what{color:var(--mute);margin:10px 0}
 .lbl{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin-bottom:6px}
+.big{font-size:32px;font-weight:900;line-height:1.1;margin:2px 0 4px}
 .link{background:rgba(255,255,255,.06);border:1px dashed color-mix(in srgb,var(--c) 60%,transparent);border-radius:12px;padding:10px 12px;font:600 13px ui-monospace,Menlo,monospace;word-break:break-all;margin-bottom:8px}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
 .btn{display:block;width:100%;border:0;border-radius:14px;padding:13px;font:800 15px system-ui,sans-serif;cursor:pointer;color:#0d0b1f;background:var(--c);box-shadow:0 5px 0 color-mix(in srgb,var(--c) 55%,#000)}
 .btn:active{transform:translateY(3px);box-shadow:0 2px 0 color-mix(in srgb,var(--c) 55%,#000)}
 .ghost{display:block;width:100%;border:1px solid var(--line);border-radius:14px;padding:12px;font:700 14px system-ui,sans-serif;cursor:pointer;color:var(--ink);background:rgba(255,255,255,.05)}
-.stats{display:flex;gap:8px;margin:0 0 12px}
+.row3 .btn,.row3 .ghost{padding:11px 4px;font-size:13px}
+.stats{display:flex;gap:8px;margin:0}
 .stat{flex:1;background:rgba(255,255,255,.05);border-radius:12px;padding:8px 10px}
 .stat b{display:block;font-size:18px}.stat small{color:var(--mute);font-size:12px}
-.push{background:color-mix(in srgb,var(--c) 12%,transparent);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);border-radius:14px;padding:12px;margin:0 0 12px;font-size:14px}.push .btn{margin-top:10px}
-.gate{text-align:center;padding:26px 18px}.gate .big{font-size:46px}.gate h2{font-size:20px;margin:8px 0 6px}.gate p{color:var(--mute);margin:0 0 16px}.gate .btn{margin-bottom:10px}
-.warn{background:rgba(255,212,59,.12);border:1px solid rgba(255,212,59,.35);border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:10px}
-details{margin-top:12px}summary{cursor:pointer;color:var(--mute);font-weight:700;font-size:14px}
-ol{list-style:none;padding:0;margin:10px 0 0;counter-reset:s}
-ol li{counter-increment:s;display:flex;gap:10px;align-items:flex-start;margin:0 0 8px;font-size:14px}
-ol li::before{content:counter(s);flex:none;width:22px;height:22px;border-radius:50%;background:color-mix(in srgb,var(--c) 25%,transparent);color:var(--c);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:1px}
-.wal{display:flex;gap:8px}
+.wal{display:flex;gap:8px;margin-top:8px}
 .wal input{flex:1;min-width:0;padding:12px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--ink);font-size:14px}
 .wal .btn{width:auto;padding:12px 16px}
-.addr{font:600 13px ui-monospace,Menlo,monospace;word-break:break-all;color:var(--ink)}
-.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#f4f2ff;color:#0d0b1f;font-weight:800;padding:10px 18px;border-radius:999px;opacity:0;transition:.2s;pointer-events:none}
+.help{margin:10px 0 0;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.06);font-size:13px;line-height:1.55}
+.ok{font-size:14px;font-weight:700;margin-top:10px}
+.ok a{font-weight:400;opacity:.7;text-decoration:underline;color:inherit;margin-inline-start:6px}
+.toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#f4f2ff;color:#0d0b1f;font-weight:800;padding:10px 18px;border-radius:999px;opacity:0;transition:.2s;pointer-events:none;z-index:30;max-width:90vw;text-align:center}
 .toast.on{opacity:1}
-.foot{text-align:center;color:var(--mute);font-size:13px;margin-top:22px}
+.foot{text-align:center;color:var(--mute);font-size:13px;margin-top:18px}
 .foot a{color:var(--ink);text-decoration:none;font-weight:700}
+.rk{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid rgba(255,255,255,.08)}
+.rk.me{color:#ffd43b;font-weight:700}
+nav#tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(3,1fr);background:rgba(14,10,30,.96);border-top:1px solid rgba(255,255,255,.1);padding:6px 6px calc(6px + env(safe-area-inset-bottom));backdrop-filter:blur(8px)}
+nav#tabs button{background:none;border:0;color:rgba(255,255,255,.55);font:600 12px system-ui;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;cursor:pointer}
+nav#tabs button.on{color:#fff}
+nav#tabs span{font-size:22px}
+#taparea{position:relative;height:220px;border-radius:16px;background:rgba(46,230,255,.06);overflow:hidden;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+#tapgem{position:absolute;transform:translate(-50%,-50%);width:112px;height:112px;border-radius:50%;border:0;background:radial-gradient(circle at 35% 30%,#bff6ff,#2ee6ff 45%,#0b6c80);font-size:58px;cursor:pointer;box-shadow:0 10px 30px rgba(46,230,255,.35);transition:left .25s,top .25s}
 </style>
 </head>
 <body>
 <div class="wrap">
 <div class="top"><div class="logo">💰</div><h1>Earn by Jeremstyke</h1><p class="sub" id="sub"></p></div>
-<div id="wal"></div>
-<div id="list"></div>
+<div id="app"></div>
 <p class="foot" id="foot"></p>
 </div>
+<nav id="tabs"></nav>
 <div class="toast" id="toast"></div>
 <script>
-// 14 oct 2026: Earn by Jeremstyke, the mini app of @earnbyjeremstykebot: the affiliate programs, explained, with each player's
-// own invite links for Meme Coin Tycoon, GramPedia and Daily Score (real TON), the shared TON wallet, and the InsideAds affiliate link
+// 15 oct 2026 (v2): Earn by Jeremstyke is built around the diamond: tap, earn TON, invite friends (10 % of what they earn by tapping),
+// the weekly diamond contest, and links to the other programs (each game has its own program, its gains and the wallet inside the game).
+// The TON wallet is one per person, shared by all the apps. Data from the Supabase function mct-ton (app 'earn').
 const F = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-ton';
 const tw = window.Telegram && Telegram.WebApp;
 try { tw.ready(); tw.expand(); tw.setHeaderColor('#0d0b1f'); tw.setBackgroundColor('#0d0b1f'); } catch (e) {}
 const INIT = (tw && tw.initData) || '';
-const lc = ((tw && tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || 'en').toLowerCase();
-const FR = lc.startsWith('fr');
-document.documentElement.lang = FR ? 'fr' : 'en';
+const SP = String((tw && tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '');
+const lc = ((tw && tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || 'en').toLowerCase().slice(0, 2);
+const LG = ['fr', 'es', 'pt', 'ru', 'ar', 'id'].includes(lc) ? lc : 'en';
+const FR = LG === 'fr';
+document.documentElement.lang = LG; if (LG === 'ar') document.documentElement.dir = 'rtl';
+// the texts, in 7 languages
+const TX = {
+  en: { sub: 'Tap the diamond, earn real TON, and invite your friends.', tTap: 'Diamond', tCon: 'Contest', tPro: 'Programs',
+    gain: '💎 My diamond earnings', today: 'Today', taps: 'taps', pay: 'Paid every Monday with your other TON earnings, from $0.10 in total.',
+    lead: 'Tap the diamond and watch your TON grow, no limit.', check: 'Quick check: tap the 💎', wrong: '❌ Wrong, try again', paused: '⏸️ The diamond is paused until next month (budget reached).',
+    walT: '👛 My TON wallet', walOk: '✅ Wallet added', chg: 'Change', addW: '👛 Add my wallet', ph: 'Paste your TON address (UQ... or EQ...)', save: 'Save', saved: 'Wallet saved ✅', bad: 'Invalid TON address',
+    walSync: 'One wallet for all the apps: Meme Coin Tycoon, Daily Score, GramPedia and Earn.',
+    h1: 'No TON address? It\'s free and takes 1 minute:', h2: 'Open <b>@wallet</b> in Telegram (Telegram\'s official wallet)', h3: 'Tap <b>Receive</b>, then <b>TON</b>', h4: 'Copy the address and paste it here', openW: '👛 Open @wallet',
+    invT: '👥 Invite your friends', invX: 'You earn 10% of everything your friends earn by tapping, on top. Nothing is taken from them.', link: 'Your link', copy: '📋 Copy', share: '📤 Share', copied: 'Link copied ✅',
+    fr: 'friends invited', fe: 'earned thanks to them', msg: '💎 Tap the diamond and earn real TON on Telegram, it\'s free!', noTg: 'No Telegram yet? Install it, then tap this link again.',
+    cT: '🏆 Diamond contest of the week', cX: 'The 3 players who tap the most this week win', cTon: 'in TON on Monday, on top of their earnings.', nobody: 'Nobody yet: be the first!', you: 'you', rank: 'Your rank', week: 'taps this week',
+    cMin: (n) => 'Tap at least ' + n + ' times this week to enter the ranking.', left: 'Ends in', d: 'd', h: 'h', payouts: '💸 Latest payouts',
+    proI: 'My other programs. Each one happens inside its app: your earnings and your wallet too.', perF: '$0.05 in TON per friend', play: 'Open',
+    mct: 'A free trading game with virtual money. Invite friends who really play.', ds: 'Guess the score of one big match a day. Invite friends who make 4 predictions.', gp: 'The directory of Telegram channels, groups and bots. Invite friends who list their project.',
+    iaB: '10% for life · paid by InsideAds', ia: 'A separate platform, the ad network of Telegram. Sign up, get your own link there and earn 10% of what the people you bring earn. InsideAds pays you.', iaG: '📢 Sign up on InsideAds',
+    agB: '$0.015 per friend · paid by Ads Galaxy', ag: 'A separate platform that pays in USDT. Sign up and get your own referral link in their bot. Ads Galaxy pays you.', agG: '🌌 Sign up on Ads Galaxy',
+    fol: 'Follow the Jeremstyke channel', folX: 'New programs, tips to earn more and payment proofs are posted there first.', join: '📢 Join the channel',
+    ask: 'A question? ', me: 'Message me', notif: '✅ You will be told about your earnings and payouts', noApp: 'Open this page from the bot @earnbyjeremstykebot.' },
+  fr: { sub: 'Tape sur le diamant, gagne de vrais TON et invite tes amis.', tTap: 'Diamant', tCon: 'Concours', tPro: 'Programmes',
+    gain: '💎 Mes gains diamant', today: 'Aujourd\'hui', taps: 'tapes', pay: 'Payé chaque lundi avec tes autres gains TON, dès 0,10 $ au total.',
+    lead: 'Tape sur le diamant et regarde tes TON monter, sans limite.', check: 'Petit test : touche le 💎', wrong: '❌ Raté, réessaie', paused: '⏸️ Le diamant est en pause jusqu\'au mois prochain (budget atteint).',
+    walT: '👛 Mon portefeuille TON', walOk: '✅ Portefeuille ajouté', chg: 'Changer', addW: '👛 Ajouter mon portefeuille', ph: 'Colle ton adresse TON (UQ... ou EQ...)', save: 'OK', saved: 'Portefeuille enregistré ✅', bad: 'Adresse TON invalide',
+    walSync: 'Un seul portefeuille pour toutes les apps : Meme Coin Tycoon, Daily Score, GramPedia et Earn.',
+    h1: 'Pas d\'adresse TON ? C\'est gratuit et ça prend 1 minute :', h2: 'Ouvre <b>@wallet</b> dans Telegram (le portefeuille officiel de Telegram)', h3: 'Touche <b>Recevoir</b>, puis <b>TON</b>', h4: 'Copie l\'adresse et colle-la ici', openW: '👛 Ouvrir @wallet',
+    invT: '👥 Invite tes amis', invX: 'Tu gagnes 10 % de tout ce que tes amis gagnent en tapant, en plus. Rien ne leur est retiré.', link: 'Ton lien', copy: '📋 Copier', share: '📤 Partager', copied: 'Lien copié ✅',
+    fr: 'amis invités', fe: 'gagnés grâce à eux', msg: '💎 Tape sur le diamant et gagne de vrais TON sur Telegram, c\'est gratuit !', noTg: 'Pas encore Telegram ? Installe-le, puis reclique sur ce lien.',
+    cT: '🏆 Concours du diamant de la semaine', cX: 'Les 3 joueurs qui tapent le plus cette semaine gagnent', cTon: 'en TON lundi, en plus de leurs gains.', nobody: 'Personne pour l\'instant : sois le premier !', you: 'toi', rank: 'Ta place', week: 'tapes cette semaine',
+    cMin: (n) => 'Fais au moins ' + n + ' tapes cette semaine pour entrer dans le classement.', left: 'Fin dans', d: 'j', h: 'h', payouts: '💸 Derniers paiements',
+    proI: 'Mes autres programmes. Tout se passe dans chaque app : tes gains et ton portefeuille aussi.', perF: '0,05 $ en TON par ami', play: 'Ouvrir',
+    mct: 'Un jeu de trading gratuit avec de l\'argent virtuel. Invite des amis qui jouent vraiment.', ds: 'Devine le score d\'un grand match par jour. Invite des amis qui font 4 pronos.', gp: 'L\'annuaire des chaînes, groupes et bots Telegram. Invite des amis qui ajoutent leur projet.',
+    iaB: '10 % à vie · payé par InsideAds', ia: 'Une plateforme à part, la régie pub de Telegram. Inscris-toi, récupère ton propre lien chez eux et touche 10 % des gains des gens que tu amènes. C\'est InsideAds qui te paie.', iaG: '📢 S\'inscrire sur InsideAds',
+    agB: '0,015 $ par ami · payé par Ads Galaxy', ag: 'Une plateforme à part, qui paie en USDT. Inscris-toi et récupère ton propre lien de parrainage dans leur bot. C\'est Ads Galaxy qui te paie.', agG: '🌌 S\'inscrire sur Ads Galaxy',
+    fol: 'Suis la chaîne Jeremstyke', folX: 'Les nouveaux programmes, les astuces pour gagner plus et les preuves de paiement y sont publiés en premier.', join: '📢 Rejoindre la chaîne',
+    ask: 'Une question ? ', me: 'Écris-moi', notif: '✅ Tu seras prévenu de tes gains et paiements', noApp: 'Ouvre cette page depuis le bot @earnbyjeremstykebot.' },
+  es: { sub: 'Toca el diamante, gana TON de verdad e invita a tus amigos.', tTap: 'Diamante', tCon: 'Concurso', tPro: 'Programas',
+    gain: '💎 Mis ganancias del diamante', today: 'Hoy', taps: 'toques', pay: 'Pagado cada lunes con tus otras ganancias en TON, desde 0,10 $ en total.',
+    lead: 'Toca el diamante y mira cómo suben tus TON, sin límite.', check: 'Comprobación rápida: toca el 💎', wrong: '❌ Incorrecto, inténtalo de nuevo', paused: '⏸️ El diamante está en pausa hasta el próximo mes (presupuesto alcanzado).',
+    walT: '👛 Mi billetera TON', walOk: '✅ Billetera añadida', chg: 'Cambiar', addW: '👛 Añadir mi billetera', ph: 'Pega tu dirección TON (UQ... o EQ...)', save: 'OK', saved: 'Billetera guardada ✅', bad: 'Dirección TON no válida',
+    walSync: 'Una sola billetera para todas las apps: Meme Coin Tycoon, Daily Score, GramPedia y Earn.',
+    h1: '¿No tienes dirección TON? Es gratis y tarda 1 minuto:', h2: 'Abre <b>@wallet</b> en Telegram (la billetera oficial de Telegram)', h3: 'Toca <b>Recibir</b> y luego <b>TON</b>', h4: 'Copia la dirección y pégala aquí', openW: '👛 Abrir @wallet',
+    invT: '👥 Invita a tus amigos', invX: 'Ganas el 10 % de todo lo que tus amigos ganan tocando, además. No se les quita nada.', link: 'Tu enlace', copy: '📋 Copiar', share: '📤 Compartir', copied: 'Enlace copiado ✅',
+    fr: 'amigos invitados', fe: 'ganado gracias a ellos', msg: '💎 Toca el diamante y gana TON de verdad en Telegram, ¡es gratis!', noTg: '¿Aún no tienes Telegram? Instálalo y vuelve a tocar este enlace.',
+    cT: '🏆 Concurso del diamante de la semana', cX: 'Los 3 jugadores que más toquen esta semana ganan', cTon: 'en TON el lunes, además de sus ganancias.', nobody: 'Nadie todavía: ¡sé el primero!', you: 'tú', rank: 'Tu puesto', week: 'toques esta semana',
+    cMin: (n) => 'Toca al menos ' + n + ' veces esta semana para entrar en la clasificación.', left: 'Termina en', d: 'd', h: 'h', payouts: '💸 Últimos pagos',
+    proI: 'Mis otros programas. Todo pasa dentro de cada app: tus ganancias y tu billetera también.', perF: '0,05 $ en TON por amigo', play: 'Abrir',
+    mct: 'Un juego de trading gratis con dinero virtual. Invita a amigos que jueguen de verdad.', ds: 'Adivina el resultado de un gran partido al día. Invita a amigos que hagan 4 pronósticos.', gp: 'El directorio de canales, grupos y bots de Telegram. Invita a amigos que añadan su proyecto.',
+    iaB: '10 % de por vida · pagado por InsideAds', ia: 'Una plataforma aparte, la red publicitaria de Telegram. Regístrate, consigue allí tu propio enlace y gana el 10 % de lo que ganen las personas que traigas. Te paga InsideAds.', iaG: '📢 Registrarse en InsideAds',
+    agB: '0,015 $ por amigo · pagado por Ads Galaxy', ag: 'Una plataforma aparte que paga en USDT. Regístrate y consigue tu propio enlace de referido en su bot. Te paga Ads Galaxy.', agG: '🌌 Registrarse en Ads Galaxy',
+    fol: 'Sigue el canal Jeremstyke', folX: 'Los nuevos programas, consejos para ganar más y las pruebas de pago se publican allí primero.', join: '📢 Unirme al canal',
+    ask: '¿Una pregunta? ', me: 'Escríbeme', notif: '✅ Te avisaremos de tus ganancias y pagos', noApp: 'Abre esta página desde el bot @earnbyjeremstykebot.' },
+  pt: { sub: 'Toque no diamante, ganhe TON de verdade e convide seus amigos.', tTap: 'Diamante', tCon: 'Concurso', tPro: 'Programas',
+    gain: '💎 Meus ganhos do diamante', today: 'Hoje', taps: 'toques', pay: 'Pago toda segunda com seus outros ganhos em TON, a partir de 0,10 $ no total.',
+    lead: 'Toque no diamante e veja seus TON subirem, sem limite.', check: 'Verificação rápida: toque no 💎', wrong: '❌ Errado, tente de novo', paused: '⏸️ O diamante está pausado até o mês que vem (orçamento atingido).',
+    walT: '👛 Minha carteira TON', walOk: '✅ Carteira adicionada', chg: 'Alterar', addW: '👛 Adicionar minha carteira', ph: 'Cole seu endereço TON (UQ... ou EQ...)', save: 'OK', saved: 'Carteira salva ✅', bad: 'Endereço TON inválido',
+    walSync: 'Uma só carteira para todos os apps: Meme Coin Tycoon, Daily Score, GramPedia e Earn.',
+    h1: 'Sem endereço TON? É grátis e leva 1 minuto:', h2: 'Abra <b>@wallet</b> no Telegram (a carteira oficial do Telegram)', h3: 'Toque em <b>Receber</b> e depois em <b>TON</b>', h4: 'Copie o endereço e cole aqui', openW: '👛 Abrir @wallet',
+    invT: '👥 Convide seus amigos', invX: 'Você ganha 10 % de tudo o que seus amigos ganham tocando, a mais. Nada é tirado deles.', link: 'Seu link', copy: '📋 Copiar', share: '📤 Compartilhar', copied: 'Link copiado ✅',
+    fr: 'amigos convidados', fe: 'ganhos graças a eles', msg: '💎 Toque no diamante e ganhe TON de verdade no Telegram, é grátis!', noTg: 'Ainda não tem Telegram? Instale e toque neste link de novo.',
+    cT: '🏆 Concurso do diamante da semana', cX: 'Os 3 jogadores que mais tocarem esta semana ganham', cTon: 'em TON na segunda, além dos seus ganhos.', nobody: 'Ninguém ainda: seja o primeiro!', you: 'você', rank: 'Sua posição', week: 'toques esta semana',
+    cMin: (n) => 'Toque pelo menos ' + n + ' vezes esta semana para entrar no ranking.', left: 'Termina em', d: 'd', h: 'h', payouts: '💸 Últimos pagamentos',
+    proI: 'Meus outros programas. Tudo acontece dentro de cada app: seus ganhos e sua carteira também.', perF: '0,05 $ em TON por amigo', play: 'Abrir',
+    mct: 'Um jogo de trading grátis com dinheiro virtual. Convide amigos que jogam de verdade.', ds: 'Adivinhe o placar de um grande jogo por dia. Convide amigos que façam 4 palpites.', gp: 'O diretório de canais, grupos e bots do Telegram. Convide amigos que adicionem seu projeto.',
+    iaB: '10 % para sempre · pago pela InsideAds', ia: 'Uma plataforma à parte, a rede de anúncios do Telegram. Cadastre-se, pegue seu próprio link lá e ganhe 10 % do que as pessoas que você traz ganham. A InsideAds te paga.', iaG: '📢 Cadastrar na InsideAds',
+    agB: '0,015 $ por amigo · pago pela Ads Galaxy', ag: 'Uma plataforma à parte que paga em USDT. Cadastre-se e pegue seu próprio link de indicação no bot deles. A Ads Galaxy te paga.', agG: '🌌 Cadastrar na Ads Galaxy',
+    fol: 'Siga o canal Jeremstyke', folX: 'Novos programas, dicas para ganhar mais e provas de pagamento são publicados lá primeiro.', join: '📢 Entrar no canal',
+    ask: 'Uma pergunta? ', me: 'Fale comigo', notif: '✅ Você será avisado dos seus ganhos e pagamentos', noApp: 'Abra esta página pelo bot @earnbyjeremstykebot.' },
+  ru: { sub: 'Нажимай на алмаз, зарабатывай настоящие TON и приглашай друзей.', tTap: 'Алмаз', tCon: 'Конкурс', tPro: 'Программы',
+    gain: '💎 Мой заработок с алмаза', today: 'Сегодня', taps: 'нажатий', pay: 'Выплата каждый понедельник вместе с другими TON, от 0,10 $ в сумме.',
+    lead: 'Нажимай на алмаз и смотри, как растут твои TON, без лимита.', check: 'Быстрая проверка: нажми на 💎', wrong: '❌ Неверно, попробуй ещё', paused: '⏸️ Алмаз на паузе до следующего месяца (бюджет исчерпан).',
+    walT: '👛 Мой TON-кошелёк', walOk: '✅ Кошелёк добавлен', chg: 'Изменить', addW: '👛 Добавить кошелёк', ph: 'Вставь свой TON-адрес (UQ... или EQ...)', save: 'OK', saved: 'Кошелёк сохранён ✅', bad: 'Неверный TON-адрес',
+    walSync: 'Один кошелёк для всех приложений: Meme Coin Tycoon, Daily Score, GramPedia и Earn.',
+    h1: 'Нет TON-адреса? Это бесплатно и займёт 1 минуту:', h2: 'Открой <b>@wallet</b> в Telegram (официальный кошелёк Telegram)', h3: 'Нажми <b>Получить</b>, затем <b>TON</b>', h4: 'Скопируй адрес и вставь его сюда', openW: '👛 Открыть @wallet',
+    invT: '👥 Пригласи друзей', invX: 'Ты получаешь 10 % от всего, что друзья зарабатывают нажатиями, сверху. У них ничего не отнимается.', link: 'Твоя ссылка', copy: '📋 Копировать', share: '📤 Поделиться', copied: 'Ссылка скопирована ✅',
+    fr: 'приглашено друзей', fe: 'заработано благодаря им', msg: '💎 Нажимай на алмаз и зарабатывай настоящие TON в Telegram, это бесплатно!', noTg: 'Ещё нет Telegram? Установи его и снова нажми на эту ссылку.',
+    cT: '🏆 Конкурс алмаза недели', cX: '3 игрока, которые нажмут больше всех за неделю, получат', cTon: 'в TON в понедельник, сверх своего заработка.', nobody: 'Пока никого: будь первым!', you: 'ты', rank: 'Твоё место', week: 'нажатий за неделю',
+    cMin: (n) => 'Сделай хотя бы ' + n + ' нажатий за неделю, чтобы попасть в рейтинг.', left: 'До конца', d: 'дн', h: 'ч', payouts: '💸 Последние выплаты',
+    proI: 'Мои другие программы. Всё происходит внутри каждого приложения: заработок и кошелёк тоже.', perF: '0,05 $ в TON за друга', play: 'Открыть',
+    mct: 'Бесплатная игра-трейдинг с виртуальными деньгами. Приглашай друзей, которые действительно играют.', ds: 'Угадывай счёт одного большого матча в день. Приглашай друзей, которые сделают 4 прогноза.', gp: 'Каталог каналов, групп и ботов Telegram. Приглашай друзей, которые добавят свой проект.',
+    iaB: '10 % навсегда · платит InsideAds', ia: 'Отдельная платформа, рекламная сеть Telegram. Зарегистрируйся, получи там свою ссылку и получай 10 % от заработка приглашённых. Платит InsideAds.', iaG: '📢 Зарегистрироваться в InsideAds',
+    agB: '0,015 $ за друга · платит Ads Galaxy', ag: 'Отдельная платформа, которая платит в USDT. Зарегистрируйся и получи свою реферальную ссылку в их боте. Платит Ads Galaxy.', agG: '🌌 Зарегистрироваться в Ads Galaxy',
+    fol: 'Подпишись на канал Jeremstyke', folX: 'Новые программы, советы, как заработать больше, и доказательства выплат публикуются там первыми.', join: '📢 Подписаться на канал',
+    ask: 'Вопрос? ', me: 'Напиши мне', notif: '✅ Мы сообщим тебе о заработке и выплатах', noApp: 'Открой эту страницу через бота @earnbyjeremstykebot.' },
+  ar: { sub: 'اضغط على الماسة، اربح عملات TON حقيقية وادعُ أصدقاءك.', tTap: 'الماسة', tCon: 'المسابقة', tPro: 'البرامج',
+    gain: '💎 أرباحي من الماسة', today: 'اليوم', taps: 'ضغطة', pay: 'تُدفع كل يوم اثنين مع أرباحك الأخرى من TON، ابتداءً من 0.10 $ إجمالًا.',
+    lead: 'اضغط على الماسة وشاهد عملات TON تزداد، بلا حدود.', check: 'تحقق سريع: اضغط على 💎', wrong: '❌ خطأ، حاول مرة أخرى', paused: '⏸️ الماسة متوقفة حتى الشهر القادم (تم بلوغ الميزانية).',
+    walT: '👛 محفظتي TON', walOk: '✅ تمت إضافة المحفظة', chg: 'تغيير', addW: '👛 أضف محفظتي', ph: 'الصق عنوان TON الخاص بك (UQ... أو EQ...)', save: 'حفظ', saved: 'تم حفظ المحفظة ✅', bad: 'عنوان TON غير صالح',
+    walSync: 'محفظة واحدة لكل التطبيقات: Meme Coin Tycoon و Daily Score و GramPedia و Earn.',
+    h1: 'ليس لديك عنوان TON؟ إنه مجاني ويستغرق دقيقة واحدة:', h2: 'افتح <b>@wallet</b> في تيليجرام (المحفظة الرسمية لتيليجرام)', h3: 'اضغط <b>استلام</b> ثم <b>TON</b>', h4: 'انسخ العنوان والصقه هنا', openW: '👛 افتح @wallet',
+    invT: '👥 ادعُ أصدقاءك', invX: 'تربح 10 % من كل ما يربحه أصدقاؤك بالضغط، إضافةً. لا يُنقص منهم شيء.', link: 'رابطك', copy: '📋 نسخ', share: '📤 مشاركة', copied: 'تم نسخ الرابط ✅',
+    fr: 'أصدقاء مدعوون', fe: 'أرباح بفضلهم', msg: '💎 اضغط على الماسة واربح عملات TON حقيقية على تيليجرام، مجانًا!', noTg: 'ليس لديك تيليجرام بعد؟ ثبّته ثم اضغط على هذا الرابط مرة أخرى.',
+    cT: '🏆 مسابقة الماسة لهذا الأسبوع', cX: 'أكثر 3 لاعبين ضغطًا هذا الأسبوع يربحون', cTon: 'بعملة TON يوم الاثنين، إضافةً إلى أرباحهم.', nobody: 'لا أحد بعد: كن الأول!', you: 'أنت', rank: 'ترتيبك', week: 'ضغطة هذا الأسبوع',
+    cMin: (n) => 'اضغط ' + n + ' مرة على الأقل هذا الأسبوع لتدخل الترتيب.', left: 'ينتهي خلال', d: 'ي', h: 'س', payouts: '💸 آخر المدفوعات',
+    proI: 'برامجي الأخرى. كل شيء يحدث داخل كل تطبيق: أرباحك ومحفظتك أيضًا.', perF: '0.05 $ بعملة TON لكل صديق', play: 'فتح',
+    mct: 'لعبة تداول مجانية بأموال افتراضية. ادعُ أصدقاء يلعبون فعلًا.', ds: 'خمّن نتيجة مباراة كبيرة كل يوم. ادعُ أصدقاء يقدّمون 4 توقعات.', gp: 'دليل قنوات ومجموعات وبوتات تيليجرام. ادعُ أصدقاء يضيفون مشروعهم.',
+    iaB: '10 % مدى الحياة · تدفعها InsideAds', ia: 'منصة مستقلة، شبكة إعلانات تيليجرام. سجّل، واحصل على رابطك هناك، واربح 10 % مما يربحه من تجلبهم. InsideAds هي من تدفع لك.', iaG: '📢 التسجيل في InsideAds',
+    agB: '0.015 $ لكل صديق · تدفعها Ads Galaxy', ag: 'منصة مستقلة تدفع بعملة USDT. سجّل واحصل على رابط الإحالة الخاص بك في البوت. Ads Galaxy هي من تدفع لك.', agG: '🌌 التسجيل في Ads Galaxy',
+    fol: 'تابع قناة Jeremstyke', folX: 'البرامج الجديدة ونصائح لربح المزيد وإثباتات الدفع تُنشر هناك أولًا.', join: '📢 انضم إلى القناة',
+    ask: 'سؤال؟ ', me: 'راسلني', notif: '✅ سنخبرك بأرباحك ومدفوعاتك', noApp: 'افتح هذه الصفحة من البوت @earnbyjeremstykebot.' },
+  id: { sub: 'Ketuk berlian, dapatkan TON asli, dan undang teman-temanmu.', tTap: 'Berlian', tCon: 'Kontes', tPro: 'Program',
+    gain: '💎 Penghasilan berlianku', today: 'Hari ini', taps: 'ketukan', pay: 'Dibayar setiap Senin bersama penghasilan TON lainnya, mulai 0,10 $ total.',
+    lead: 'Ketuk berlian dan lihat TON-mu bertambah, tanpa batas.', check: 'Cek singkat: ketuk 💎', wrong: '❌ Salah, coba lagi', paused: '⏸️ Berlian dijeda sampai bulan depan (anggaran tercapai).',
+    walT: '👛 Dompet TON-ku', walOk: '✅ Dompet ditambahkan', chg: 'Ubah', addW: '👛 Tambahkan dompetku', ph: 'Tempel alamat TON-mu (UQ... atau EQ...)', save: 'OK', saved: 'Dompet disimpan ✅', bad: 'Alamat TON tidak valid',
+    walSync: 'Satu dompet untuk semua aplikasi: Meme Coin Tycoon, Daily Score, GramPedia, dan Earn.',
+    h1: 'Belum punya alamat TON? Gratis dan cuma 1 menit:', h2: 'Buka <b>@wallet</b> di Telegram (dompet resmi Telegram)', h3: 'Ketuk <b>Terima</b>, lalu <b>TON</b>', h4: 'Salin alamatnya dan tempel di sini', openW: '👛 Buka @wallet',
+    invT: '👥 Undang teman-temanmu', invX: 'Kamu dapat 10 % dari semua yang temanmu dapatkan dengan mengetuk, sebagai tambahan. Tidak ada yang diambil dari mereka.', link: 'Tautanmu', copy: '📋 Salin', share: '📤 Bagikan', copied: 'Tautan disalin ✅',
+    fr: 'teman diundang', fe: 'didapat berkat mereka', msg: '💎 Ketuk berlian dan dapatkan TON asli di Telegram, gratis!', noTg: 'Belum punya Telegram? Pasang dulu, lalu ketuk tautan ini lagi.',
+    cT: '🏆 Kontes berlian minggu ini', cX: '3 pemain yang paling banyak mengetuk minggu ini memenangkan', cTon: 'dalam TON hari Senin, di luar penghasilan mereka.', nobody: 'Belum ada: jadilah yang pertama!', you: 'kamu', rank: 'Peringkatmu', week: 'ketukan minggu ini',
+    cMin: (n) => 'Ketuk setidaknya ' + n + ' kali minggu ini untuk masuk peringkat.', left: 'Berakhir dalam', d: 'h', h: 'j', payouts: '💸 Pembayaran terakhir',
+    proI: 'Program lainku. Semuanya terjadi di dalam tiap aplikasi: penghasilan dan dompetmu juga.', perF: '0,05 $ dalam TON per teman', play: 'Buka',
+    mct: 'Game trading gratis dengan uang virtual. Undang teman yang benar-benar bermain.', ds: 'Tebak skor satu pertandingan besar setiap hari. Undang teman yang membuat 4 tebakan.', gp: 'Direktori kanal, grup, dan bot Telegram. Undang teman yang menambahkan proyeknya.',
+    iaB: '10 % seumur hidup · dibayar InsideAds', ia: 'Platform terpisah, jaringan iklan Telegram. Daftar, ambil tautanmu sendiri di sana dan dapatkan 10 % dari penghasilan orang yang kamu bawa. InsideAds yang membayarmu.', iaG: '📢 Daftar di InsideAds',
+    agB: '0,015 $ per teman · dibayar Ads Galaxy', ag: 'Platform terpisah yang membayar dalam USDT. Daftar dan ambil tautan referalmu sendiri di bot mereka. Ads Galaxy yang membayarmu.', agG: '🌌 Daftar di Ads Galaxy',
+    fol: 'Ikuti kanal Jeremstyke', folX: 'Program baru, tips untuk dapat lebih banyak, dan bukti pembayaran dipublikasikan di sana lebih dulu.', join: '📢 Gabung ke kanal',
+    ask: 'Ada pertanyaan? ', me: 'Kirim pesan', notif: '✅ Kamu akan diberi tahu soal penghasilan dan pembayaranmu', noApp: 'Buka halaman ini dari bot @earnbyjeremstykebot.' }
+};
+const L = TX[LG];
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const f2 = (n) => { const x = Number(n || 0).toFixed(2); return FR ? x.replace('.', ',') : x; };
-const m$ = (n) => FR ? f2(n) + ' $' : '$' + f2(n);
+const money = (n, d) => { const x = Number(n || 0).toFixed(d || 2); return ['en'].includes(LG) ? '$' + x : x.replace('.', LG === 'ar' ? '.' : ',') + ' $'; };
 const haptic = (k) => { try { tw.HapticFeedback.impactOccurred(k || 'light'); } catch (e) {} };
 const open = (u) => { try { tw.openTelegramLink(u); } catch (e) { window.open(u, '_blank'); } };
-const toast = (m) => { const t = $('toast'); t.textContent = m; t.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('on'), 2000); };
-const X = FR ? {
-  sub: 'Découvre les programmes d\'affiliation et gagne de vrais TON sur Telegram.',
-  yl: 'Ton lien d\'affiliation', copy: '📋 Copier', share: '📤 Partager', copied: 'Lien copié ✅',
-  valid: 'amis validés', bal: 'solde', min: (m) => 'paiement dès ' + m, how: 'Comment ça marche',
-  act: 'Ouvre une première fois pour activer ton lien 👇', w: '👛 Ton portefeuille TON', wh: 'Pour recevoir tes gains en TON (Meme Coin Tycoon, GramPedia et Daily Score).', ph: 'Colle ton adresse TON (UQ... ou EQ...)', save: 'OK', ok: 'Portefeuille enregistré ✅', bad: 'Adresse TON invalide', chg: 'Changer', paid: 'Paiement sous 7 jours, dès 0,10 $ au total (tous programmes ensemble).',
-  g1: 'Abonne-toi à la chaîne Jeremstyke', g2: 'Les programmes d\'affiliation sont réservés aux abonnés. Rejoins la chaîne, puis reviens ici.', g3: '📢 Rejoindre la chaîne', g4: '✅ J\'ai rejoint', g5: 'Pas encore abonné : rejoins la chaîne puis réessaie.',
-  ask: 'Une question ? ', me: 'Écris-moi', nolink: 'Ouvre cette page depuis le bot pour voir ton lien.'
-} : {
-  sub: 'Discover the affiliate programs and earn real TON on Telegram.',
-  yl: 'Your affiliate link', copy: '📋 Copy', share: '📤 Share', copied: 'Link copied ✅',
-  valid: 'valid friends', bal: 'balance', min: (m) => 'paid from ' + m, how: 'How it works',
-  act: 'Open it once to activate your link 👇', w: '👛 Your TON wallet', wh: 'To receive your TON earnings (Meme Coin Tycoon, GramPedia and Daily Score).', ph: 'Paste your TON address (UQ... or EQ...)', save: 'Save', ok: 'Wallet saved ✅', bad: 'Invalid TON address', chg: 'Change', paid: 'Paid within 7 days, from $0.10 in total (all programs together).',
-  g1: 'Join the Jeremstyke channel', g2: 'The affiliate programs are for channel members. Join the channel, then come back here.', g3: '📢 Join the channel', g4: '✅ I joined', g5: 'Not a member yet: join the channel and try again.',
-  ask: 'A question? ', me: 'Message me', nolink: 'Open this page from the bot to see your link.'
-};
-// 14 oct 2026: sharing Earn itself: 10 % (15 oct, was $0.05) of every commission earned by someone you brought
-const EARN = { k: 'earn', share: FR ? '💰 Gagne de vrais TON avec des jeux Telegram gratuits : regarde ça !' : '💰 Earn real TON with free Telegram games: check this out!' };
-const XE = FR ? { h: '👥 Partage Earn', w: 'Invite tes amis dans Earn : tu gagnes 10 % en plus de chaque commission que l\'un d\'eux gagne sur les jeux, en TON. Sans limite.', f: 'amis dans Earn', c: 'bonus gagnés' }
-  : { h: '👥 Share Earn', w: 'Invite your friends to Earn: you earn 10% on top of every commission one of them earns on the games, in TON. No limit.', f: 'friends in Earn', c: 'bonus earned' };
-function earnCard() {
-  const e = S && S.earn; if (!e || !e.on) return '';
-  return `<section class="card" style="--c:#b18cff"><div class="head"><div class="ico">👥</div><div><h2>${XE.h.replace('👥 ', '')}</h2><span class="badge">${FR ? '10 % de leurs commissions' : '10% of their commissions'}</span></div></div>`
-    + `<p class="what">${esc(XE.w)}</p><div class="lbl">${X.yl}</div><div class="link">${esc(e.link)}</div>`
-    + `<div class="row2"><button class="btn" data-copy="earn">${X.copy}</button><button class="btn" data-share="earn">${X.share}</button><button class="btn" data-wa="earn" style="grid-column:1/-1">📲 WhatsApp</button></div>`
-    + `<div class="stats"><div class="stat"><b>${e.friends || 0}</b><small>👥 ${XE.f}</small></div><div class="stat"><b>${m$(e.balance)}</b><small>💰 ${XE.c} · ${X.min(m$(e.min))}</small></div></div></section>`;
-}
-const P = [
-  { k: 'mct', c: '#ffd43b', i: '💎', name: 'Meme Coin Tycoon', open: 'https://t.me/Memecointycoonbot?startapp=v_earn',
-    badge: FR ? '0,05 $ en TON par ami' : '$0.05 in TON per friend',
-    what: FR ? 'Un jeu de trading gratuit avec de l\'argent virtuel. Tu gagnes de vrais TON pour chaque ami qui joue vraiment, et vous recevez tous les deux 500 $ dans le jeu.' : 'A free trading game with virtual money. You earn real TON for every friend who really plays, and you both get $500 in the game.',
-    steps: FR ? ['Partage ton lien d\'affiliation ci-dessus', 'Ton ami ouvre le jeu : vous gagnez tous les deux 500 $ dans le jeu', 'Il fait 5 échanges et joue 3 jours différents (dans les 30 jours)', 'Tu gagnes 0,05 $ en TON, payés sur ton portefeuille dès 0,10 $'] : ['Share your affiliate link above', 'Your friend opens the game: you both get $500 in the game', 'He makes 5 trades and plays on 3 different days (within 30 days)', 'You earn $0.05 in TON, paid to your wallet from $0.10'],
-    share: FR ? '🎮 Joue à Meme Coin Tycoon avec moi : on gagne 500 $ chacun pour commencer !' : '🎮 Play Meme Coin Tycoon with me: we both get $500 to start!',
-    go: FR ? '🎮 Ouvrir le jeu' : '🎮 Open the game',
-    push: FR ? '🎮 <b>Joue toi aussi !</b> C\'est gratuit et sans inscription. Crée ton coin, mine, grimpe au classement : plus tu joues, plus c\'est facile de convaincre tes amis.' : '🎮 <b>Play too!</b> It\'s free, no sign-up. Create your coin, mine, climb the leaderboard: the more you play, the easier it is to convince your friends.',
-    cta: FR ? '🎮 Jouer maintenant' : '🎮 Play now', ctaLink: 'https://t.me/Memecointycoonbot?startapp=src_earn' },
-  { k: 'gp', c: '#2ee6ff', i: '📚', name: 'GramPedia', open: 'https://t.me/Grampedia_bot?startapp=ton',
-    badge: FR ? '0,05 $ en TON par ami' : '$0.05 in TON per friend',
-    what: FR ? 'L\'annuaire des chaînes, groupes, bots et mini apps Telegram. Tu gagnes de vrais TON pour chaque ami qui y inscrit son projet (c\'est gratuit pour lui).' : 'The directory of Telegram channels, groups, bots and mini apps. You earn real TON for every friend who lists his project (free for him).',
-    steps: FR ? ['Partage ton lien aux propriétaires de chaînes, groupes et bots', 'Ton ami ajoute son projet sur GramPedia', 'Sa fiche est approuvée', 'Tu gagnes 0,05 $ en TON, payés sur ton portefeuille dès 0,10 $'] : ['Share your link with channel, group and bot owners', 'Your friend adds his project to GramPedia', 'His listing gets approved', 'You earn $0.05 in TON, paid to your wallet from $0.10'],
-    share: FR ? '📚 Ajoute ta chaîne, ton groupe ou ton bot gratuitement sur GramPedia, l\'annuaire Telegram !' : '📚 Add your channel, group or bot for free to GramPedia, the Telegram directory!',
-    go: FR ? '📚 Ouvrir GramPedia' : '📚 Open GramPedia',
-    push: FR ? '📢 <b>Tu as une chaîne, un groupe, un bot ou une mini app ?</b> Ajoute ta fiche sur GramPedia : c\'est gratuit et ça t\'apporte des abonnés.' : '📢 <b>Do you have a channel, group, bot or mini app?</b> Add your listing to GramPedia: it\'s free and brings you subscribers.',
-    cta: FR ? '➕ Ajouter ma fiche' : '➕ Add my listing', ctaLink: 'https://t.me/Grampedia_bot?startapp=add' },
-  { k: 'ds', c: '#7dff6b', i: '⚽', name: 'Daily Score', open: 'https://t.me/DailyScorefootbot/play?startapp=src_earn',
-    badge: FR ? '0,05 $ en TON par ami' : '$0.05 in TON per friend',
-    what: FR ? 'Le jeu de pronostics foot gratuit : un match par jour, devine le score et grimpe au classement. Tu gagnes de vrais TON pour chaque ami qui fait 4 pronos.' : 'The free football prediction game: one match a day, guess the score and climb the leaderboard. You earn real TON for every friend who makes 4 predictions.',
-    steps: FR ? ['Partage ton lien d\'affiliation ci-dessus', 'Ton ami ouvre Daily Score', 'Il fait 4 pronos (un par jour)', 'Tu gagnes 0,05 $ en TON, payés sur ton portefeuille dès 0,10 $'] : ['Share your affiliate link above', 'Your friend opens Daily Score', 'He makes 4 predictions (one per day)', 'You earn $0.05 in TON, paid to your wallet from $0.10'],
-    share: FR ? '⚽ Devine le score du match du jour avec moi sur Daily Score, c\'est gratuit !' : '⚽ Guess the score of the match of the day with me on Daily Score, it\'s free!',
-    go: FR ? '⚽ Ouvrir Daily Score' : '⚽ Open Daily Score',
-    push: FR ? '⚽ <b>Fais ton prono du jour !</b> 30 secondes par jour, gratuit : plus tu joues, plus c\'est facile d\'embarquer tes potes.' : '⚽ <b>Make your prediction of the day!</b> 30 seconds a day, free: the more you play, the easier it is to bring your friends.',
-    cta: FR ? '⚽ Faire mon prono' : '⚽ Make my prediction', ctaLink: 'https://t.me/DailyScorefootbot/play?startapp=src_earn' },
-  { k: 'ia', c: '#4ff0b7', i: '📢', name: 'InsideAds', open: 'https://t.me/InsideAds_bot/open?startapp=r_7057960224',
-    badge: FR ? '10 % à vie · payé par InsideAds' : '10% for life · paid by InsideAds',
-    what: FR ? 'Une plateforme à part, la régie pub de Telegram. Inscris-toi, récupère ton propre lien chez eux et touche 10 % des gains des gens que tu amènes, à vie. C\'est InsideAds qui te paie, pas Earn.' : 'A separate platform, the ad network of Telegram. Sign up, get your own link there and earn 10% of what the people you bring earn, for life. InsideAds pays you, not Earn.',
-    steps: FR ? ['Inscris-toi sur InsideAds avec le bouton ci-dessous', 'Ton lien d\'affiliation InsideAds est dans leur app', 'Partage-le aux propriétaires de chaînes et aux annonceurs', 'Touche 10 % de leurs gains, à vie'] : ['Sign up on InsideAds with the button below', 'Your InsideAds affiliate link is in their app', 'Share it with channel owners and advertisers', 'Get 10% of their earnings, for life'],
-    go: FR ? '📢 S\'inscrire sur InsideAds' : '📢 Sign up on InsideAds' },
-  // 15 oct 2026: Ads Galaxy affiliate program (paid in USDT by Ads Galaxy), with Jeremy's affiliate link
-  { k: 'agx', c: '#26a17b', i: '🌌', name: 'Ads Galaxy', open: 'https://t.me/Ads_Galaxy_bot?start=AGX7057960224',
-    badge: FR ? '0,015 $ par ami · payé par Ads Galaxy' : '$0.015 per friend · paid by Ads Galaxy',
-    what: FR ? 'Une plateforme à part, qui paie en USDT. Inscris-toi, récupère ton propre lien de parrainage dans leur bot : 0,005 $ par ami qui rejoint, +0,010 $ quand il valide, et des concours pour les meilleurs parrains. C\'est Ads Galaxy qui te paie, pas Earn.' : 'A separate platform that pays in USDT. Sign up, get your own referral link in their bot: $0.005 per friend who joins, +$0.010 when he verifies, and contests for the best referrers. Ads Galaxy pays you, not Earn.',
-    steps: FR ? ['Inscris-toi sur Ads Galaxy avec le bouton ci-dessous', 'Ton lien de parrainage Ads Galaxy est dans leur bot', 'Ton ami rejoint : +0,005 $ en USDT, tout de suite', 'Il rejoint la chaîne demandée : +0,010 $, soit 0,015 $ par ami', 'Sprints du jour et du mois : les meilleurs parrains gagnent jusqu\'à 1 $ (1,50 $ par équipe). Il faut des filleuls actifs et sans triche, et des plafonds par jour et par mois s\'appliquent'] : ['Sign up on Ads Galaxy with the button below', 'Your Ads Galaxy referral link is in their bot', 'Your friend joins: +$0.005 in USDT, instantly', 'He joins the required channel: +$0.010, so $0.015 per friend', 'Daily and monthly sprints: the best referrers win up to $1 ($1.50 per team). Referrals must be active and fraud-free, and daily and monthly caps apply'],
-    go: FR ? '🌌 S\'inscrire sur Ads Galaxy' : '🌌 Sign up on Ads Galaxy' },
-];
-$('sub').textContent = X.sub;
-$('foot').innerHTML = X.ask + '<a href="#" id="ct">' + X.me + '</a><br>by @jeremstyke';
-$('ct').onclick = (e) => { e.preventDefault(); open('https://t.me/jeremstyke?direct'); };
-let S = null, EDIT = false;
+const toast = (m) => { const t = $('toast'); t.textContent = m; t.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('on'), 2200); };
 async function call(body) { const r = await fetch(F, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ app: 'earn', initData: INIT, ...body }) }); return r.json(); }
-function render() {
-  // 14 oct 2026: the programs are for @jeremstyke members only
-  if (INIT && !S) { $('wal').innerHTML = ''; $('list').innerHTML = '<section class="card gate"><div class="big">⏳</div></section>'; return; }
-  // 14 oct 2026: joining @jeremstyke is recommended, no longer required: a card suggests it, the programs stay open
-  // the shared TON wallet
-  if (S) {
-    const w = S.wallet, ed = EDIT || !w;
-    $('wal').innerHTML = sumCard() + tapSlot() + contestCard() + `<section class="card" style="--c:#b18cff"><div class="lbl">${X.w}</div><p class="what" style="margin:0 0 10px">${X.wh}</p>`
-      + (ed ? `<div class="wal"><input id="wa" placeholder="${X.ph}" value="${esc(w || '')}" autocomplete="off" spellcheck="false"><button class="btn" id="ws">${X.save}</button></div>`
-        + `<div style="margin:10px 0 0;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.06);font-size:13px;line-height:1.5"><b>${FR ? 'Pas d\'adresse TON ? C\'est gratuit et ça prend 1 minute :' : 'No TON address? It\'s free and takes 1 minute:'}</b><br>1. ${FR ? 'Ouvre <b>@wallet</b> dans Telegram (le portefeuille officiel de Telegram)' : 'Open <b>@wallet</b> in Telegram (Telegram\'s official wallet)'}<br>2. ${FR ? 'Touche <b>Recevoir</b>, puis <b>TON</b>' : 'Tap <b>Receive</b>, then <b>TON</b>'}<br>3. ${FR ? 'Copie l\'adresse et colle-la ici' : 'Copy the address and paste it here'}<button class="ghost" onclick="try{tw.openTelegramLink('https://t.me/wallet')}catch(e){window.open('https://t.me/wallet','_blank')}" style="width:100%;margin-top:8px">👛 ${FR ? 'Ouvrir @wallet' : 'Open @wallet'}</button></div>`
-        : `<div class="head" style="justify-content:space-between"><span class="addr">${esc(w)}</span><button class="ghost" id="wc" style="width:auto;padding:8px 12px">${X.chg}</button></div>`)
-      + `<p class="what" style="margin:10px 0 0;font-size:13px">${S.mct && S.mct.total != null ? (FR ? 'Solde total : ' : 'Total balance: ') + '<b>' + m$(S.mct.total) + '</b> · ' : ''}${X.paid}</p></section>`;
-    if ($('wc')) $('wc').onclick = () => { haptic(); EDIT = true; render(); };
-    if ($('ws')) $('ws').onclick = async () => {
-      const a = ($('wa').value || '').trim(); if (!a) return; haptic(); $('ws').disabled = true;
-      let r; try { r = await call({ action: 'wallet', addr: a }); } catch (e) { r = null; }
-      if (!r || !r.ok) { toast(X.bad); $('ws').disabled = false; return; }
-      S = r; EDIT = false; toast(X.ok); render();
-    };
-  }
-  const joinTip = () => S && (S.joined === false || S.uid === 7057960224) ? `<section class="card" style="--c:#ffd43b"><div class="head"><div class="ico">📢</div><div><h2>${FR ? 'Suis la chaîne Jeremstyke' : 'Follow the Jeremstyke channel'}</h2></div></div><p class="what">${FR ? 'Conseillé : les nouveaux programmes, les astuces pour gagner plus et les preuves de paiement y sont publiés en premier.' : 'Recommended: new programs, tips to earn more and payment proofs are posted there first.'}</p><button class="btn" data-join="1">${X.g3}</button></section>` : '';
-  $('list').innerHTML = admSlot() + joinTip() + earnCard() + P.map((p) => {
-    const st = S && S[p.k];
-    let mid = '';
-    if (p.k !== 'ia' && p.k !== 'agx') {
-      if (!st) mid = INIT ? '' : `<p class="warn">${X.nolink}</p>`;
-      else mid = `<div class="lbl">${X.yl}</div><div class="link">${esc(st.link)}</div>`
-        + `<div class="row2"><button class="btn" data-copy="${p.k}">${X.copy}</button><button class="btn" data-share="${p.k}">${X.share}</button><button class="btn" data-wa="${p.k}" style="grid-column:1/-1">📲 WhatsApp</button></div>`
-        + `<div class="stats"><div class="stat"><b>${st.valid}</b><small>✅ ${X.valid}</small></div><div class="stat"><b>${m$(st.balance)}</b><small>💰 ${X.bal} · ${X.min(m$(st.min))}</small></div></div>`
-        + (st.member ? '' : `<p class="warn">${X.act}</p>`);
-    }
-    return `<section class="card" style="--c:${p.c}"><div class="head"><div class="ico">${p.i}</div><div><h2>${esc(p.name)}</h2><span class="badge">${esc(p.badge)}</span></div></div>`
-      + `<p class="what">${esc(p.what)}</p>`
-      + (p.push ? `<div class="push">${p.push}<button class="btn" data-cta="${p.k}">${esc(p.cta)}</button></div>` : '')
-      + mid
-      + `<button class="${p.k === 'ia' || p.k === 'agx' ? 'btn' : 'ghost'}" data-open="${p.k}">${esc(p.go)}</button>`
-      + `<details><summary>${X.how}</summary><ol>${p.steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol></details></section>`;
-  }).join('');
-  document.querySelectorAll('[data-join]').forEach((b) => b.onclick = () => { haptic('medium'); open('https://t.me/jeremstyke'); });
-  document.querySelectorAll('[data-open]').forEach((b) => b.onclick = () => { haptic('medium'); call({ action: 'track', prog: b.dataset.open, kind: 'open' }).catch(() => {}); open(P.find((x) => x.k === b.dataset.open).open); });
-  document.querySelectorAll('[data-cta]').forEach((b) => b.onclick = () => { haptic('medium'); open(P.find((x) => x.k === b.dataset.cta).ctaLink); });
-  document.querySelectorAll('[data-copy]').forEach((b) => b.onclick = async () => {
-    const l = S[b.dataset.copy].link; haptic(); call({ action: 'track', prog: b.dataset.copy, kind: 'copy' }).catch(() => {}); // 15 oct 2026: counted for Jeremy's stats
-    try { await navigator.clipboard.writeText(l); } catch (e) { const t = document.createElement('textarea'); t.value = l; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (x) {} t.remove(); }
-    toast(X.copied);
-  });
-  document.querySelectorAll('[data-wa]').forEach((b) => b.onclick = () => {
-    const p = P.find((x) => x.k === b.dataset.wa) || EARN; haptic('medium'); call({ action: 'track', prog: p.k, kind: 'whatsapp' }).catch(() => {});
-    outWa(p.share + ' 👉 ' + S[p.k].link + (FR ? '\n\n(Pas encore Telegram ? Installe-le, puis reclique sur ce lien.)' : '\n\n(No Telegram yet? Install it, then tap this link again.)'));
-  });
-  document.querySelectorAll('[data-share]').forEach((b) => b.onclick = () => {
-    const p = P.find((x) => x.k === b.dataset.share) || EARN; haptic('medium'); call({ action: 'track', prog: p.k, kind: 'share' }).catch(() => {});
-    open('https://t.me/share/url?url=' + encodeURIComponent(S[p.k].link) + '&text=' + encodeURIComponent(p.share));
-  });
-}
-// 15 oct 2026: share outside Telegram (WhatsApp, Messenger, SMS...): the friend still opens the game in Telegram
-function outCopy(v, ok) {
+const track = (prog, kind) => call({ action: 'track', prog, kind }).catch(() => {});
+function copyText(v) {
   let done = false;
   try { navigator.clipboard.writeText(v); done = true; } catch (x) {}
   if (!done) { try { const t = document.createElement('textarea'); t.value = v; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); } catch (x) {} }
-  try { toast(ok); } catch (x) {}
 }
-function outWa(msg) { const u = 'https://wa.me/?text=' + encodeURIComponent(msg); try { (window.Telegram && Telegram.WebApp && Telegram.WebApp.initData ? Telegram.WebApp.openLink(u) : window.open(u, '_blank')); } catch (x) { window.open(u, '_blank'); } }
-function gate(again) {
-  $('wal').innerHTML = '';
-  $('list').innerHTML = `<section class="card gate" style="--c:#ffd43b"><div class="big">🔒</div><h2>${X.g1}</h2><p>${X.g2}</p><button class="btn" id="gj">${X.g3}</button><button class="ghost" id="gc">${X.g4}</button></section>`;
-  $('gj').onclick = () => { haptic('medium'); open('https://t.me/jeremstyke'); };
-  $('gc').onclick = async () => { haptic(); $('gc').disabled = true; let r; try { r = await call({}); } catch (e) { r = null; } if (r && r.ok) { S = r; if (r.joined === false) toast(X.g5); render(); } else $('gc').disabled = false; };
-}
-// 15 oct 2026: "My earnings" at the top: the total of all programs, friends validated and pending, what was received, and the progress to the payout
-// 15 oct 2026: Tap & Earn (beta): tap the diamond, 0.01 $ in TON every 5000 taps, credited every night to the TON balance.
-// Taps are sent by batches every second; the server limits the speed and asks a human check every 250 taps. The diamond moves every 50 taps.
+function outWa(msg) { const u = 'https://wa.me/?text=' + encodeURIComponent(msg); try { tw && tw.initData ? tw.openLink(u) : window.open(u, '_blank'); } catch (x) { window.open(u, '_blank'); } }
+
+$('sub').textContent = L.sub;
+$('foot').innerHTML = esc(L.ask) + '<a href="#" id="ct">' + esc(L.me) + '</a><br>by @jeremstyke';
+$('ct').onclick = (e) => { e.preventDefault(); open('https://t.me/jeremstyke?direct'); };
+
+// links ?startapp=contest_... open the contest, ?startapp=progs_... the programs (from the games), wallet_... the wallet field
+let S = null, EDIT = false, TAB = /^contest/.test(SP) ? 'con' : /^progs/.test(SP) ? 'pro' : 'tap', GOWAL = /^wallet/.test(SP);
 let TP = null, TQ = 0, TBUSY = false, TPOS = { x: 50, y: 50 }, TCOUNT = 0, TTIMER = null;
-function tapSlot() { if (!S || !S.tap || !S.tap.on) return ''; if (!TP) TP = S.tap; setTimeout(tapPaint, 0); return '<div id="tapbox"></div>'; }
-function tapUsd() { const tpc = TP.tpc || 5000; return (Number(TP.pending_taps) + TQ) / tpc * 0.01; }
+
+// ---------- the diamond tab ----------
+function tapUsd() { if (!TP) return 0; return Number(TP.balance || 0) + TQ / (TP.tpc || 3000) * 0.01; }
 function tapNums() {
-  const tpc = TP.tpc || 5000, pend = Number(TP.pending_taps) + TQ, pct = Math.min(100, (pend % tpc) / tpc * 100);
+  if (!TP) return;
+  const tpc = TP.tpc || 3000, pend = Number(TP.pending_taps || 0) + TQ, pct = Math.min(100, (pend % tpc) / tpc * 100);
   const u = $('tapusd'), b = $('tapbar'), n = $('tapn');
-  if (u) u.textContent = (FR ? '' : '$') + tapUsd().toFixed(5).replace('.', FR ? ',' : '.') + (FR ? ' $' : '');
+  if (u) u.textContent = money(tapUsd(), tapUsd() < 1 ? 4 : 2);
   if (b) b.style.width = pct.toFixed(1) + '%';
-  if (n) n.textContent = (FR ? 'Aujourd\'hui : ' : 'Today: ') + (Number(TP.today) + TQ).toLocaleString(FR ? 'fr-FR' : 'en-US') + ' taps';
+  if (n) n.textContent = L.today + ' : ' + (Number(TP.today || 0) + TQ).toLocaleString(LG) + ' ' + L.taps;
+}
+function walletCard() {
+  const w = S.wallet, ed = EDIT || !w;
+  return `<section class="card" style="--c:#b18cff" id="walcard"><div class="lbl">${L.walT}</div>`
+    + (ed ? (w ? '' : `<button class="btn" id="wgo" style="margin:2px 0 4px">${L.addW}</button>`)
+        + `<div class="wal" id="walform" style="${w || EDIT ? '' : 'display:none'}"><input id="wa" placeholder="${esc(L.ph)}" value="${esc(w || '')}" autocomplete="off" spellcheck="false"><button class="btn" id="ws">${esc(L.save)}</button></div>`
+        + `<div class="help" id="walhelp" style="${w || EDIT ? '' : 'display:none'}"><b>${L.h1}</b><br>1. ${L.h2}<br>2. ${L.h3}<br>3. ${L.h4}<button class="ghost" id="wopen" style="margin-top:8px">${L.openW}</button></div>`
+      : `<div class="ok">${L.walOk} <a href="#" id="wchg">${esc(L.chg)}</a></div><div class="what" style="font-size:12px;margin:6px 0 0;word-break:break-all">${esc(w)}</div>`)
+    + `<p class="what" style="font-size:12px;margin:10px 0 0">${esc(L.walSync)}</p></section>`;
+}
+function showWalForm() {
+  const f = $('walform'), h = $('walhelp'), g = $('wgo');
+  if (f) f.style.display = ''; if (h) h.style.display = ''; if (g) g.style.display = 'none';
+  const i = $('wa'); if (i) { i.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(() => { try { i.focus(); } catch (e) {} }, 450); }
+}
+function inviteCard() {
+  const e = S.earn || {}, t = S.tap || {};
+  if (!e.link) return '';
+  return `<section class="card" style="--c:#ffd43b"><div class="lbl">${L.invT}</div><p class="what" style="margin:0 0 10px">${esc(L.invX)}</p>`
+    + `<div class="lbl">${L.link}</div><div class="link">${esc(e.link)}</div>`
+    + `<div class="row3"><button class="btn" id="icp">${L.copy}</button><button class="btn" id="ish">${L.share}</button><button class="btn" id="iwa">📲 WhatsApp</button></div>`
+    + `<div class="stats"><div class="stat"><b>${Number(t.sponsor || 0)}</b><small>👥 ${L.fr}</small></div><div class="stat"><b>${money(t.sponsor_usd, Number(t.sponsor_usd) < 1 ? 4 : 2)}</b><small>💰 ${L.fe}</small></div></div></section>`;
+}
+function tapTab() {
+  if (!TP) TP = S.tap;
+  const on = TP && TP.on;
+  return (on ? `<section class="card" style="--c:#2ee6ff"><div class="lbl">${L.gain}</div><div class="big" id="tapusd"></div>`
+      + `<div style="height:8px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden;margin:6px 0 4px"><i id="tapbar" style="display:block;height:100%;width:0;background:#2ee6ff;transition:width .15s"></i></div>`
+      + `<div class="what" style="font-size:13px;margin:0 0 10px" id="tapn"></div><div id="taparea"></div>`
+      + `<p class="what" style="font-size:12px;margin:10px 0 0">${esc(L.pay)}</p></section>` : '')
+    + walletCard() + inviteCard();
 }
 function tapPaint() {
-  const el = $('tapbox'); if (!el || !TP) return;
-  const tpc = TP.tpc || 5000, ck = TP.check, paused = TP.paused;
-  el.innerHTML = `<section class="card" style="--c:#2ee6ff"><div class="lbl">💎 Tap & Earn <span class="badge">beta</span></div>`
-    + `<p class="what" style="margin:0 0 6px">${FR ? 'Tape sur le diamant et regarde tes gains monter en TON, sans limite.' : 'Tap the diamond and watch your TON earnings grow, no limit.'}</p>`
-    + `<div style="font-size:28px;font-weight:800;margin:4px 0" id="tapusd"></div>`
-    + `<div style="height:8px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden;margin:0 0 4px"><i id="tapbar" style="display:block;height:100%;width:0;background:#2ee6ff;transition:width .15s"></i></div>`
-    + `<div class="what" style="font-size:13px;margin:0 0 8px" id="tapn"></div>`
-    + `<div id="taparea" style="position:relative;height:210px;border-radius:16px;background:rgba(46,230,255,.06);overflow:hidden;touch-action:manipulation;user-select:none;-webkit-user-select:none">`
-    + (paused ? `<div style="position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:16px" class="what">${FR ? '⏸️ Le diamant est en pause jusqu\'au mois prochain (budget atteint).' : '⏸️ The diamond is paused until next month (budget reached).'}</div>`
-      : ck ? `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px"><b>${FR ? 'Petit test : touche le 💎' : 'Quick check: tap the 💎'}</b><div style="display:flex;gap:12px">${ck.map((e, i) => `<button class="ghost" data-tck="${i + 1}" style="width:auto;font-size:30px;padding:8px 14px">${e}</button>`).join('')}</div></div>`
-      : `<button id="tapgem" aria-label="Tap" style="position:absolute;left:${TPOS.x}%;top:${TPOS.y}%;transform:translate(-50%,-50%);width:110px;height:110px;border-radius:50%;border:0;background:radial-gradient(circle at 35% 30%,#bff6ff,#2ee6ff 45%,#0b6c80);font-size:58px;cursor:pointer;box-shadow:0 10px 30px rgba(46,230,255,.35);transition:left .25s,top .25s">💎</button>`)
-    + `</div><p class="what" style="font-size:12px;margin:8px 0 0">${FR ? 'Crédité chaque nuit sur ton solde, payé le lundi avec le reste. Ton parrain gagne 10 % en plus, offert (rien n\'est retiré de tes gains).' : 'Credited every night to your balance, paid on Monday with the rest. Your sponsor earns 10% on top, as a gift (nothing is taken from you).'}</p></section>`;
+  const el = $('taparea'); if (!el || !TP) return;
+  const ck = TP.check, paused = TP.paused;
+  el.innerHTML = paused ? `<div style="position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:16px" class="what">${esc(L.paused)}</div>`
+    : ck ? `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px"><b>${esc(L.check)}</b><div style="display:flex;gap:12px">${ck.map((e, i) => `<button class="ghost" data-tck="${i + 1}" style="width:auto;font-size:30px;padding:8px 14px">${e}</button>`).join('')}</div></div>`
+    : `<button id="tapgem" aria-label="Tap" style="left:${TPOS.x}%;top:${TPOS.y}%">💎</button>`
+      + `<div style="position:absolute;left:12px;right:12px;bottom:10px;text-align:center;font-size:12px;color:var(--mute);pointer-events:none">${esc(L.lead)}</div>`;
   tapNums();
   const g = $('tapgem');
   if (g) g.onpointerdown = (ev) => {
     ev.preventDefault(); TQ++; TCOUNT++;
     g.style.transform = 'translate(-50%,-50%) scale(.9)'; setTimeout(() => { if (g) g.style.transform = 'translate(-50%,-50%)'; }, 70);
     if (TCOUNT % 10 === 0) haptic();
-    if (TCOUNT % 50 === 0) { TPOS = { x: 20 + Math.random() * 60, y: 25 + Math.random() * 50 }; g.style.left = TPOS.x + '%'; g.style.top = TPOS.y + '%'; }
+    if (TCOUNT % 50 === 0) { TPOS = { x: 20 + Math.random() * 60, y: 22 + Math.random() * 46 }; g.style.left = TPOS.x + '%'; g.style.top = TPOS.y + '%'; }
     tapNums();
     if (!TTIMER) TTIMER = setTimeout(tapFlush, 1000);
   };
   el.querySelectorAll('[data-tck]').forEach((b) => b.onclick = async () => {
     haptic(); let r = null; try { r = await call({ action: 'tap_check', a: Number(b.dataset.tck) }); } catch (e) {}
-    if (r && r.state) TP = r.state; if (r && !r.ok) toast(FR ? '❌ Raté, réessaie' : '❌ Wrong, try again');
+    if (r && r.state) TP = r.state; if (r && !r.ok) toast(L.wrong);
     tapPaint();
   });
 }
@@ -256,157 +281,83 @@ async function tapFlush() {
   const n = TQ; TQ = 0; let r = null;
   try { r = await call({ action: 'tap', n }); } catch (e) {}
   TBUSY = false;
-  if (r && r.state) { TP = r.state; } else if (!r) { TQ += n; }
-  if (r && r.error === 'check') { TQ = 0; }
-  if (r && (r.state && (r.state.check || r.state.paused)) || (r && r.error === 'off')) { if (r.error === 'off') TP.on = false; tapPaint(); return; }
+  if (r && r.state) TP = r.state; else if (!r) TQ += n;
+  if (r && r.error === 'check') TQ = 0;
+  if ((r && r.state && (r.state.check || r.state.paused)) || (r && r.error === 'off')) { if (r.error === 'off') TP.on = false; tapPaint(); return; }
   tapNums();
   if (TQ && !TTIMER) TTIMER = setTimeout(tapFlush, 1000);
 }
-// 15 oct 2026: the weekly referral contest (top inviters win TON on Monday) and the last payouts (proof that people get paid)
-function contestCard() {
-  const c = S && S.contest; if (!c || !c.on) return '';
-  const md = ['🥇', '🥈', '🥉'], pz = c.prizes || [], top = (c.top || []).slice(0, 5);
-  const left = Math.max(0, Math.round((Date.parse(c.ends) - Date.now()) / 36e5)), lt = left > 48 ? Math.round(left / 24) + (FR ? ' j' : ' days') : left + ' h';
-  const rows = top.map((x, i) => `<div style="display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid rgba(255,255,255,.08);${x.me ? 'color:#ffd43b;font-weight:700' : ''}"><span>${md[i] || (i + 1) + '.'} ${esc(x.name)}${x.me ? (FR ? ' (toi)' : ' (you)') : ''}</span><span>${x.n} ${FR ? 'ami' + (x.n > 1 ? 's' : '') : 'friend' + (x.n > 1 ? 's' : '')}${i < 3 && pz[i] ? ' · ' + m$(pz[i]) : ''}</span></div>`).join('')
-    || `<p class="what" style="margin:6px 0">${FR ? 'Personne pour l\'instant : sois le premier !' : 'Nobody yet: be the first!'}</p>`;
-  const me = c.me && c.me.rank ? `<p class="what" style="font-size:13px;margin:8px 0 0">${FR ? 'Ta place : ' : 'Your rank: '}<b>#${c.me.rank}</b> · ${c.me.n} ${FR ? 'ami(s) cette semaine' : 'friend(s) this week'}</p>` : `<p class="what" style="font-size:13px;margin:8px 0 0">${FR ? 'Invite au moins ' + c.min + ' amis cette semaine pour entrer dans le classement.' : 'Invite at least ' + c.min + ' friends this week to enter the ranking.'}</p>`;
-  const pays = (c.payouts || []).slice(0, 5).map((p) => `<div style="display:flex;justify-content:space-between;font-size:13px;padding:4px 0"><span>✅ ${esc(p.name)}</span><span>${Number(p.ton).toFixed(3)} TON · ${new Date(p.at).toLocaleDateString(FR ? 'fr-FR' : 'en-GB')}</span></div>`).join('');
-  return `<section class="card" style="--c:#ffd43b"><div class="lbl">🏆 ${FR ? 'Concours de parrainage de la semaine' : 'Referral contest of the week'}</div>`
-    + `<p class="what" style="margin:0 0 8px">${FR ? 'Les 3 meilleurs parrains gagnent ' : 'The top 3 inviters win '}<b>${pz.map((x) => m$(x)).join(' / ')}</b> ${FR ? 'en TON lundi, <b>en plus</b> de tes 0,05 $ par ami' : 'in TON on Monday, <b>on top of</b> your $0.05 per friend'} · ⏳ ${lt}</p>`
-    + rows + me + (pays ? `<div class="lbl" style="margin-top:14px">💸 ${FR ? 'Derniers paiements' : 'Latest payouts'}</div>` + pays : '') + `</section>`;
-}
-// 15 oct 2026: the detail per program of the total balance (same numbers as in Meme Coin Tycoon, GramPedia and Daily Score)
-function earnDet(a) {
-  if (!a) return '';
-  const dd = a.detail || {}, keys = ['mct', 'gp', 'ds', 'earn', 'tap'].concat(['other'].filter((k) => Number(dd[k]) > 0)).sort((x, y) => Number(dd[y] || 0) - Number(dd[x] || 0)); // 15 oct 2026: biggest first
-  const N = FR ? { mct: '🪙 Meme Coin Tycoon', gp: '📚 GramPedia', ds: '⚽ Daily Score', earn: '💰 Bonus Earn (amis)', tap: '💎 Diamant', other: '🏆 Concours et bonus' } : { mct: '🪙 Meme Coin Tycoon', gp: '📚 GramPedia', ds: '⚽ Daily Score', earn: '💰 Earn bonus (friends)', tap: '💎 Diamond', other: '🏆 Contest and bonuses' };
-  const v = (k) => { const x = Number(dd[k] || 0); return k === 'tap' && x > 0 && x < 0.01 ? (FR ? x.toFixed(4).replace('.', ',') + ' $' : '$' + x.toFixed(4)) : m$(x); };
-  return `<div style="margin:0 0 10px">` + keys.map((k) => `<div style="display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-top:1px solid rgba(255,255,255,.08);font-size:14px"><span>${N[k]}</span><b>${v(k)}</b></div>`).join('') + `</div>`;
-}
-let GOWAL = /^wallet/.test(String((tw && tw.initDataUnsafe && tw.initDataUnsafe.start_param) || ''));
-function earnGoWal() {
-  const i = $('wa'); if (!i) return;
-  try { haptic(); } catch (e) {}
-  i.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(() => { try { i.focus(); } catch (e) {} }, 450);
-}
-// 15 oct 2026: the money waiting: friends who still have to play, with their progress (Meme Coin Tycoon: days /3 and trades /5,
-// Daily Score: predictions /4, GramPedia: listing)
-function tonPendHtml(p, pend, need, M) {
-  if (!p || !p.n) return '';
-  const prog = (f) => f.app === 'mct' ? '📅 ' + Math.min(f.dy, 3) + '/3 · 🔁 ' + Math.min(f.tr, 5) + '/5' : f.app === 'ds' ? '⚽ ' + Math.min(f.tr, 4) + '/4' : '📚 ' + (f.tr > 0 ? '⏳' : '0/1');
-  const ic = { mct: '🪙', ds: '⚽', gp: '📚' };
-  // 15 oct 2026: shown big, right under the total balance, to motivate (the list of friends opens below)
-  return `<div style="margin:10px 0 8px;padding:10px 12px;border-radius:12px;background:rgba(255,212,59,.12);border:1px solid rgba(255,212,59,.5)"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font-size:14px;font-weight:700">⏳ ${pend}</span><b style="font-size:24px;color:#ffd43b;white-space:nowrap">+ ${M(p.usd)}</b></div><small style="display:block;opacity:.8;margin-top:2px">${need(p.n)}</small>`
-    + `<details style="margin-top:6px"><summary style="cursor:pointer;font-size:13px;opacity:.85">👥 ${p.n} ▾</summary>`
-    + (p.friends || []).map((f) => `<div style="display:flex;justify-content:space-between;gap:8px;padding:5px 0;font-size:13px;border-top:1px solid rgba(255,255,255,.06)"><span>${ic[f.app] || ''} ${esc(f.name)}</span><span style="opacity:.8;white-space:nowrap">${prog(f)}</span></div>`).join('')
-    + (p.n > (p.friends || []).length ? `<small style="opacity:.6">+ ${p.n - p.friends.length}</small>` : '') + `</details></div>`;
-}
-// puts the waiting block right after the total (the first closing div of the balance card)
-function tonPendIn(h, x) { const i = h.indexOf('</div>') + 6; return i > 5 ? h.slice(0, i) + x + h.slice(i) : h + x; }
-const earnDet0 = earnDet;
-earnDet = (a) => (a ? tonPendHtml(a.pending, FR ? 'En attente' : 'Pending', (n) => FR ? n + (n > 1 ? ' amis doivent' : ' ami doit') + ' encore jouer' : n + (n > 1 ? ' friends' : ' friend') + ' still to play', m$) : '') + earnDet0(a);
-// 15 oct 2026: "Change": the wallet field opens again (also from the games' "Change" link, ?startapp=wallet_...)
-function earnChgWal() { EDIT = true; render(); setTimeout(earnGoWal, 200); }
-function sumCard() {
-  if (!S) return '';
-  const K = ['mct', 'gp', 'ds', 'earn'].filter((k) => S[k]), add = (f) => K.reduce((a, k) => a + (Number(S[k][f]) || 0), 0);
-  const first = S[K[0]] || {}, A = first.all, tot = Number(A ? A.total : first.total != null ? first.total : add('balance')), mn = Number(first.min) || 0.1, paid = add('paid'), wait = add('waiting');
-  const pct = Math.max(0, Math.min(100, Math.round(tot / mn * 100)));
-  const note = tot >= mn ? (S.wallet ? (FR ? '🎉 Prêt : paiement sous 7 jours' : '🎉 Ready: paid within 7 days') : (FR ? '👇 Ajoute ton portefeuille TON pour être payé' : '👇 Add your TON wallet to get paid'))
-    : (FR ? 'Encore ' + m$(mn - tot) + ' avant ton paiement (dès ' + m$(mn) + ')' : m$(mn - tot) + ' to go before your payout (from ' + m$(mn) + ')');
-  return `<section class="card" style="--c:#4ff0b7"><div class="lbl">${FR ? '💰 Mes gains' : '💰 My earnings'}</div>`
-    + `<div style="font-size:34px;font-weight:800;margin:4px 0 2px">${m$(tot)}</div><div class="what" style="margin:0 0 8px">${FR ? 'à recevoir, tous programmes ensemble' : 'to receive, all programs together'}</div>` + earnDet(A)
-    + `<div style="height:8px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden;margin:0 0 6px"><i style="display:block;height:100%;width:${pct}%;background:#4ff0b7"></i></div>`
-    + `<div class="what" style="font-size:13px;margin:0 0 10px">${note}</div>`
-    + (S.wallet ? `<div style="font-size:14px;font-weight:700;margin:0 0 12px">✅ ${FR ? 'Portefeuille ajouté' : 'Wallet added'} <a href="#" onclick="earnChgWal();return false" style="font-weight:400;opacity:.7;text-decoration:underline;color:inherit;margin-left:6px">${FR ? 'Changer' : 'Change'}</a></div>` : `<button class="btn" onclick="earnGoWal()" style="width:100%;margin:0 0 12px">${FR ? '👛 Ajouter mon portefeuille' : '👛 Add my wallet'}</button>`)
-    + (GOWAL ? ((GOWAL = false), setTimeout(S.wallet ? earnChgWal : earnGoWal, 400), '') : '')
-    + `<div class="stats"><div class="stat"><b>${add('valid')}</b><small>✅ ${FR ? 'amis validés' : 'valid friends'}</small></div><div class="stat"><b>${add('pending')}</b><small>⏳ ${FR ? 'en attente' : 'pending'}</small></div></div>`
-    + `<div class="stats" style="margin-top:8px"><div class="stat"><b>${m$(paid)}</b><small>💸 ${FR ? 'déjà reçu' : 'received'}${wait ? ' · ' + (FR ? 'en cours ' : 'on the way ') + m$(wait) : ''}</small></div></div></section>`;
-}
-// 15 oct 2026: Jeremy's payment board, visible to him only: payouts to make (Tonkeeper prefilled, then "Paid"),
-// balances coming up (wallet or not, suspicious accounts flagged) and the last payouts. Data from mct-ton (actions admin*, owner only).
-let ADM = null, ADMB = false;
-function admSlot() { return ''; // 15 oct 2026: the payment board moved to the Earn bot (/paiements)
-  if (!(S && S.uid === 7057960224)) return ''; setTimeout(admPaint, 0); return '<div id="adm"></div>'; }
-async function admLoad(action, extra) {
-  if (ADMB) return; ADMB = true;
-  try { const r = await call({ action: action || 'admin', ...(extra || {}) }); if (r && r.ok) ADM = r; else if (r && r.error) toast('Erreur : ' + r.error); } catch (e) { toast('Erreur réseau'); }
-  ADMB = false; admPaint();
-}
-function admPaint() {
-  const el = $('adm'); if (!el) return;
-  if (!ADM) { el.innerHTML = '<section class="card" style="--c:#ff6b6b"><div class="lbl">🔐 Paiements · visible par toi seul</div><p class="what">Chargement…</p></section>'; return; }
-  const d = ADM, who = (x) => esc(x.name || '?') + (x.username ? ' <small>@' + esc(x.username) + '</small>' : '');
-  const pend = d.pending.map((p) => `<div style="border-top:1px solid rgba(255,255,255,.1);padding:10px 0"><b>#${p.id}</b> ${who(p)}<br><b>${m$(p.usd)}</b> = <b>${Number(p.ton).toFixed(3)} TON</b> · ${p.friends} ami(s)<div class="addr" style="font-size:12px;margin:4px 0 8px;word-break:break-all">${esc(p.addr)}</div><div class="row2"><button class="btn" data-apay="${p.id}">💸 Payer</button><button class="ghost" data-adone="${p.id}">✅ Payé</button></div></div>`).join('');
-  const st = (n) => n.ready ? '✅ prêt' : !n.wallet ? '👛 pas de portefeuille' : n.wallet_new ? '⏳ portefeuille récent (24 h)' : '⏳ sous ' + m$(d.min);
-  const next = d.next.map((n) => `<div style="border-top:1px solid rgba(255,255,255,.1);padding:8px 0;font-size:14px">${n.suspect ? '⚠️ ' : ''}${who(n)}<br><b>${m$(n.usd)}</b> · ${n.friends} ami(s) · ${esc(n.apps)} · ${st(n)}</div>`).join('');
-  const paid = d.paid.map((p) => `<div style="font-size:13px;padding:4px 0">#${p.id} ${who(p)} · ${m$(p.usd)} · ${new Date(p.at).toLocaleDateString('fr-FR')}</div>`).join('');
-  el.innerHTML = `<section class="card" style="--c:#ff6b6b"><div class="lbl">🔐 Paiements · visible par toi seul</div>`
-    + `<div class="stats"><div class="stat"><b>${m$(d.month)}</b><small>gagné ce mois / ${m$(d.budget)}</small></div><div class="stat"><b>${m$(d.paid_total)}</b><small>payé au total</small></div></div>`
-    + `<p class="what" style="font-size:13px;margin:8px 0">1 TON = ${m$(d.px)} · paiement dès ${m$(d.min)}</p>`
-    + `<h2 style="margin:14px 0 4px">💸 À payer (${d.pending.length})</h2>` + (pend || '<p class="what">Rien à payer pour l\'instant.</p>')
-    + `<button class="ghost" id="arun" style="margin-top:8px">📋 Préparer les paiements maintenant</button>`
-    + `<h2 style="margin:16px 0 4px">⏳ Prochains paiements (${d.next.length})</h2>` + (next || '<p class="what">Personne pour l\'instant.</p>')
-    + (paid ? `<details><summary>Derniers paiements</summary>${paid}</details>` : '')
-    + `<button class="ghost" id="aref" style="margin-top:10px">🔄 Actualiser</button></section>`;
-  el.querySelectorAll('[data-apay]').forEach((b) => b.onclick = () => { haptic('medium'); const p = d.pending.find((x) => String(x.id) === b.dataset.apay); if (p) { try { tw.openLink(p.pay); } catch (e) { window.open(p.pay, '_blank'); } } });
-  el.querySelectorAll('[data-adone]').forEach((b) => b.onclick = () => { haptic(); const id = Number(b.dataset.adone); const go = () => admLoad('admin_paid', { id }).then(() => toast('✅ #' + id + ' marqué payé')); try { tw.showConfirm('Tu as bien envoyé le paiement #' + id + ' ? Le joueur sera prévenu et la preuve publiée.', (ok) => { if (ok) go(); }); } catch (e) { if (confirm('Paiement #' + id + ' envoyé ?')) go(); } });
-  $('arun').onclick = () => { haptic('medium'); admLoad('admin_run').then(() => toast('📋 Liste prête, envoyée aussi par le bot')); };
-  $('aref').onclick = () => { haptic(); admLoad('admin'); };
-}
-// 15 oct 2026: the app was too long: 4 tabs at the bottom. Earnings (balance, wallet, payment board), the diamond, the contest, the programs.
-// 15 oct 2026: links ?startapp=tap_... (and the bot button ?tab=tap) open the diamond tab directly
-const ESP = String((tw && tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '') + ' ' + (new URLSearchParams(location.search).get('tab') || '');
-let ETAB = /(^|\s)contest/.test(ESP) ? 'contest' : /(^|\s)tap/.test(ESP) ? 'tap' : 'home';
-function tabOf(el, inList) {
-  if (el.id === 'tapbox') return 'tap';
-  if (/^🏆/.test((el.querySelector('.lbl') || {}).textContent || '')) return 'contest';
-  if (!inList) return 'home';
-  if (el.id === 'adm' || el.querySelector('[data-join]')) return 'home';
-  return 'progs';
-}
-function applyTab() {
-  if (!S) { ['wal', 'list'].forEach((id) => { const box = $(id); if (box) [...box.children].forEach((el) => { el.style.display = ''; }); }); return; }
-  [['wal', false], ['list', true]].forEach(([id, inList]) => { const box = $(id); if (box) [...box.children].forEach((el) => { el.style.display = tabOf(el, inList) === ETAB ? '' : 'none'; }); });
-  let nav = $('etabs');
-  if (!nav) {
-    nav = document.createElement('nav'); nav.id = 'etabs';
-    nav.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(4,1fr);background:rgba(14,10,30,.96);border-top:1px solid rgba(255,255,255,.1);padding:6px 6px calc(6px + env(safe-area-inset-bottom));backdrop-filter:blur(8px)';
-    document.body.appendChild(nav); document.body.style.paddingBottom = '84px';
+
+// ---------- the contest tab ----------
+function conTab() {
+  const c = (TP && TP.contest) || (S.tap && S.tap.contest);
+  let h = '';
+  if (c && c.on) {
+    const md = ['🥇', '🥈', '🥉'], pz = c.prizes || [], top = (c.top || []).slice(0, 10);
+    const left = Math.max(0, Math.round((Date.parse(c.ends) - Date.now()) / 36e5)), lt = left > 48 ? Math.round(left / 24) + ' ' + L.d : left + ' ' + L.h;
+    const rows = top.map((x, i) => `<div class="rk${x.me ? ' me' : ''}"><span>${md[i] || (i + 1) + '.'} ${esc(x.name)}${x.me ? ' (' + esc(L.you) + ')' : ''}</span><span>${Number(x.n).toLocaleString(LG)} ${esc(L.taps)}${i < 3 && pz[i] ? ' · ' + money(pz[i]) : ''}</span></div>`).join('')
+      || `<p class="what">${esc(L.nobody)}</p>`;
+    const me = c.me && c.me.rank ? `<p class="what" style="font-size:13px;margin:8px 0 0">${esc(L.rank)} : <b>#${c.me.rank}</b> · ${Number(c.me.n).toLocaleString(LG)} ${esc(L.week)}</p>` : `<p class="what" style="font-size:13px;margin:8px 0 0">${esc(L.cMin(Number(c.min).toLocaleString(LG)))}</p>`;
+    h += `<section class="card" style="--c:#ffd43b"><div class="lbl">${L.cT}</div><p class="what" style="margin:0 0 8px">${esc(L.cX)} <b>${pz.map((x) => money(x)).join(' / ')}</b> ${esc(L.cTon)} ⏳ ${esc(L.left)} ${lt}</p>`
+      + rows + me + `<button class="btn" id="cgo" style="margin-top:12px">💎 ${esc(L.tTap)}</button></section>`;
   }
-  const T = [['home', '💰', FR ? 'Gains' : 'Earnings'], ['tap', '💎', 'Tap'], ['contest', '🏆', FR ? 'Concours' : 'Contest'], ['progs', '🔗', FR ? 'Programmes' : 'Programs']]
-    .filter(([k]) => k !== 'tap' || (S && S.tap && S.tap.on)).filter(([k]) => k !== 'contest' || (S && S.contest && S.contest.on));
-  nav.style.gridTemplateColumns = `repeat(${T.length},1fr)`;
-  nav.innerHTML = T.map(([k, e, l]) => `<button data-et="${k}" style="background:none;border:0;color:${k === ETAB ? '#fff' : 'rgba(255,255,255,.55)'};font:600 12px system-ui;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;cursor:pointer"><span style="font-size:22px">${e}</span>${l}</button>`).join('');
-  nav.querySelectorAll('[data-et]').forEach((b) => b.onclick = () => { haptic(); ETAB = b.dataset.et; applyTab(); window.scrollTo(0, 0); });
+  const pays = ((S.contest && S.contest.payouts) || []).slice(0, 6).map((p) => `<div class="rk" style="font-size:13px"><span>✅ ${esc(p.name)}</span><span>${Number(p.ton).toFixed(3)} TON · ${new Date(p.at).toLocaleDateString(LG)}</span></div>`).join('');
+  if (pays) h += `<section class="card" style="--c:#4ff0b7"><div class="lbl">${L.payouts}</div>${pays}</section>`;
+  return h;
 }
-const renderBase = render;
-render = function () { renderBase.apply(this, arguments); applyTab(); };
-// 15 oct 2026: the Programs tab was too long: each program is a compact card (icon, name, what you earn, Copy / Share);
-// tapping its title opens the details (explanation, stats, how it works)
-(() => {
-  const css = document.createElement('style');
-  css.textContent = '#list .card.mini .what,#list .card.mini .push,#list .card.mini .lbl,#list .card.mini .link,#list .card.mini .stats,#list .card.mini .warn,#list .card.mini details,#list .card.mini .ghost[data-open]{display:none}'
-    + '#list .card.mini{padding-top:12px;padding-bottom:12px}#list .card.mini .row2{margin:10px 0 0}#list .card.mini .btn[data-open]{margin-top:10px}'
-    + '#list .card.mini.ext .btn[data-open]{display:none}#list .card .head{cursor:pointer;position:relative}#list .card .head::after{content:"▾";position:absolute;right:0;top:4px;opacity:.5;transition:transform .2s}#list .card:not(.mini) .head::after{transform:rotate(180deg)}';
-  document.head.appendChild(css);
-})();
-const EOPEN = {};
-function miniCards() {
-  const box = $('list'); if (!box || !S) return;
-  [...box.children].forEach((el, i) => {
-    if (tabOf(el, true) !== 'progs' || !el.classList.contains('card')) return;
-    const k = (el.querySelector('h2') || {}).textContent || String(i);
-    el.classList.toggle('mini', !EOPEN[k]); el.classList.toggle('ext', !!el.querySelector('.btn[data-open]'));
-    const h = el.querySelector('.head'); if (h && !h.dataset.mini) { h.dataset.mini = '1'; h.onclick = () => { haptic(); EOPEN[k] = !EOPEN[k]; el.classList.toggle('mini', !EOPEN[k]); el.classList.toggle('ext', !!el.querySelector('.btn[data-open]')); }; }
+
+// ---------- the programs tab ----------
+const PROGS = [
+  { k: 'mct', c: '#ffd43b', i: '🪙', name: 'Meme Coin Tycoon', badge: () => L.perF, what: () => L.mct, url: 'https://t.me/Memecointycoonbot?startapp=v_earn' },
+  { k: 'ds', c: '#7dff6b', i: '⚽', name: 'Daily Score', badge: () => L.perF, what: () => L.ds, url: 'https://t.me/DailyScorefootbot/play?startapp=src_earn' },
+  { k: 'gp', c: '#2ee6ff', i: '📚', name: 'GramPedia', badge: () => L.perF, what: () => L.gp, url: 'https://t.me/Grampedia_bot?startapp=ton' },
+  { k: 'ia', c: '#4ff0b7', i: '📢', name: 'InsideAds', badge: () => L.iaB, what: () => L.ia, url: 'https://t.me/InsideAds_bot/open?startapp=r_7057960224', go: () => L.iaG },
+  { k: 'agx', c: '#26a17b', i: '🌌', name: 'Ads Galaxy', badge: () => L.agB, what: () => L.ag, url: 'https://t.me/Ads_Galaxy_bot?start=AGX7057960224', go: () => L.agG }
+];
+function proTab() {
+  return `<p class="what" style="margin:0 0 12px">${esc(L.proI)}</p>`
+    + PROGS.map((p) => `<section class="card" style="--c:${p.c}"><div class="head"><div class="ico">${p.i}</div><div><h2>${esc(p.name)}</h2><span class="badge">${esc(p.badge())}</span></div></div>`
+      + `<p class="what">${esc(p.what())}</p><button class="${p.go ? 'btn' : 'ghost'}" data-open="${p.k}">${esc(p.go ? p.go() : p.i + ' ' + L.play + ' ' + p.name)}</button></section>`).join('')
+    + (S && (S.joined === false || S.uid === 7057960224) ? `<section class="card" style="--c:#ffd43b"><div class="head"><div class="ico">📢</div><div><h2>${esc(L.fol)}</h2></div></div><p class="what">${esc(L.folX)}</p><button class="btn" id="join">${esc(L.join)}</button></section>` : '');
+}
+
+// ---------- page ----------
+function tabs() {
+  const T = [['tap', '💎', L.tTap], ['con', '🏆', L.tCon], ['pro', '🔗', L.tPro]];
+  $('tabs').innerHTML = T.map(([k, e, l]) => `<button data-t="${k}" class="${k === TAB ? 'on' : ''}"><span>${e}</span>${esc(l)}</button>`).join('');
+  $('tabs').querySelectorAll('[data-t]').forEach((b) => b.onclick = () => { haptic(); TAB = b.dataset.t; render(); window.scrollTo(0, 0); });
+}
+function render() {
+  tabs();
+  if (!INIT) { $('app').innerHTML = `<section class="card"><p class="what">${esc(L.noApp)}</p></section>` + (TAB === 'pro' ? proTab() : ''); bind(); return; }
+  if (!S) { $('app').innerHTML = '<section class="card" style="text-align:center;font-size:40px">⏳</section>'; return; }
+  $('app').innerHTML = TAB === 'tap' ? tapTab() : TAB === 'con' ? conTab() : proTab();
+  bind();
+  if (TAB === 'tap') tapPaint();
+  if (GOWAL && TAB === 'tap') { GOWAL = false; if (S.wallet) { EDIT = true; render(); } setTimeout(showWalForm, 300); }
+}
+function bind() {
+  const q = (id, f) => { const e = $(id); if (e) e.onclick = f; };
+  q('wgo', () => { haptic(); showWalForm(); });
+  q('wopen', () => { haptic(); open('https://t.me/wallet'); });
+  q('wchg', (e) => { e.preventDefault(); haptic(); EDIT = true; render(); setTimeout(showWalForm, 200); });
+  q('ws', async () => {
+    const a = ($('wa').value || '').trim(); if (!a) return; haptic(); $('ws').disabled = true;
+    let r; try { r = await call({ action: 'wallet', addr: a }); } catch (e) { r = null; }
+    if (!r || !r.ok) { toast(L.bad); $('ws').disabled = false; return; }
+    S = r; TP = r.tap || TP; EDIT = false; toast(L.saved); render();
   });
+  const link = S && S.earn && S.earn.link;
+  q('icp', () => { haptic(); track('earn', 'copy'); copyText(link); toast(L.copied); });
+  q('ish', () => { haptic('medium'); track('earn', 'share'); open('https://t.me/share/url?url=' + encodeURIComponent(link) + '&text=' + encodeURIComponent(L.msg)); });
+  q('iwa', () => { haptic('medium'); track('earn', 'whatsapp'); outWa(L.msg + ' 👉 ' + link + '\n\n(' + L.noTg + ')'); });
+  q('cgo', () => { haptic(); TAB = 'tap'; render(); window.scrollTo(0, 0); });
+  q('join', () => { haptic('medium'); open('https://t.me/jeremstyke'); });
+  document.querySelectorAll('[data-open]').forEach((b) => b.onclick = () => { haptic('medium'); track(b.dataset.open, 'open'); open(PROGS.find((x) => x.k === b.dataset.open).url); });
 }
-const applyTabBase = applyTab;
-applyTab = function () { applyTabBase.apply(this, arguments); miniCards(); };
 render();
-if (INIT) call({}).then((r) => { if (r && r.ok) { S = r; render(); askWrite(); } }).catch(() => {});
-// 15 oct 2026: Telegram's own "allow messages from the bot" request, so Earn can tell people when they earn or get paid
-// (people who open the mini app from a link never started the bot, and the bot cannot write first). Asked once, 2 s after loading.
+if (INIT) call({}).then((r) => { if (r && r.ok) { S = r; TP = r.tap; render(); askWrite(); } }).catch(() => {});
+// Telegram's own "allow messages from the bot" request, asked once, 2 s after loading
 function askWrite() {
   let done = false; try { done = localStorage.getItem('earn_wa') === '1'; } catch (e) {}
   if (done || !tw || typeof tw.requestWriteAccess !== 'function') return;
@@ -414,8 +365,8 @@ function askWrite() {
     try {
       tw.requestWriteAccess((ok) => {
         try { localStorage.setItem('earn_wa', '1'); } catch (e) {}
-        call({ action: 'track', prog: 'write', kind: ok ? 'allowed' : 'refused' }).catch(() => {});
-        if (ok) toast(FR ? '✅ Tu seras prévenu de tes gains et paiements' : '✅ You will be told about your earnings and payouts');
+        track('write', ok ? 'allowed' : 'refused');
+        if (ok) toast(L.notif);
       });
     } catch (e) {}
   }, 2000);
