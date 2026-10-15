@@ -304,6 +304,8 @@ function tonPendHtml(p, pend, need, M) {
 function tonPendIn(h, x) { const i = h.indexOf('</div>') + 6; return i > 5 ? h.slice(0, i) + x + h.slice(i) : h + x; }
 const earnDet0 = earnDet;
 earnDet = (a) => (a ? tonPendHtml(a.pending, FR ? 'En attente' : 'Pending', (n) => FR ? n + (n > 1 ? ' amis doivent' : ' ami doit') + ' encore jouer' : n + (n > 1 ? ' friends' : ' friend') + ' still to play', m$) : '') + earnDet0(a);
+// 15 oct 2026: "Change": the wallet field opens again (also from the games' "Change" link, ?startapp=wallet_...)
+function earnChgWal() { EDIT = true; render(); setTimeout(earnGoWal, 200); }
 function sumCard() {
   if (!S) return '';
   const K = ['mct', 'gp', 'ds', 'earn'].filter((k) => S[k]), add = (f) => K.reduce((a, k) => a + (Number(S[k][f]) || 0), 0);
@@ -315,8 +317,8 @@ function sumCard() {
     + `<div style="font-size:34px;font-weight:800;margin:4px 0 2px">${m$(tot)}</div><div class="what" style="margin:0 0 8px">${FR ? 'à recevoir, tous programmes ensemble' : 'to receive, all programs together'}</div>` + earnDet(A)
     + `<div style="height:8px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden;margin:0 0 6px"><i style="display:block;height:100%;width:${pct}%;background:#4ff0b7"></i></div>`
     + `<div class="what" style="font-size:13px;margin:0 0 10px">${note}</div>`
-    + (S.wallet ? `<div style="font-size:14px;font-weight:700;margin:0 0 12px">✅ ${FR ? 'Portefeuille ajouté' : 'Wallet added'}</div>` : `<button class="btn" onclick="earnGoWal()" style="width:100%;margin:0 0 12px">${FR ? '👛 Ajouter mon portefeuille' : '👛 Add my wallet'}</button>`)
-    + (GOWAL && !S.wallet ? ((GOWAL = false), setTimeout(earnGoWal, 400), '') : '')
+    + (S.wallet ? `<div style="font-size:14px;font-weight:700;margin:0 0 12px">✅ ${FR ? 'Portefeuille ajouté' : 'Wallet added'} <a href="#" onclick="earnChgWal();return false" style="font-weight:400;opacity:.7;text-decoration:underline;color:inherit;margin-left:6px">${FR ? 'Changer' : 'Change'}</a></div>` : `<button class="btn" onclick="earnGoWal()" style="width:100%;margin:0 0 12px">${FR ? '👛 Ajouter mon portefeuille' : '👛 Add my wallet'}</button>`)
+    + (GOWAL ? ((GOWAL = false), setTimeout(S.wallet ? earnChgWal : earnGoWal, 400), '') : '')
     + `<div class="stats"><div class="stat"><b>${add('valid')}</b><small>✅ ${FR ? 'amis validés' : 'valid friends'}</small></div><div class="stat"><b>${add('pending')}</b><small>⏳ ${FR ? 'en attente' : 'pending'}</small></div></div>`
     + `<div class="stats" style="margin-top:8px"><div class="stat"><b>${m$(paid)}</b><small>💸 ${FR ? 'déjà reçu' : 'received'}${wait ? ' · ' + (FR ? 'en cours ' : 'on the way ') + m$(wait) : ''}</small></div></div></section>`;
 }
