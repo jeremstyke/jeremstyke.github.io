@@ -124,14 +124,14 @@ const P = [
     push: FR ? '⚽ <b>Fais ton prono du jour !</b> 30 secondes par jour, gratuit : plus tu joues, plus c\'est facile d\'embarquer tes potes.' : '⚽ <b>Make your prediction of the day!</b> 30 seconds a day, free: the more you play, the easier it is to bring your friends.',
     cta: FR ? '⚽ Faire mon prono' : '⚽ Make my prediction', ctaLink: 'https://t.me/DailyScorefootbot/play?startapp=src_earn' },
   { k: 'ia', c: '#4ff0b7', i: '📢', name: 'InsideAds', open: 'https://t.me/InsideAds_bot/open?startapp=r_7057960224',
-    badge: FR ? '10 % à vie' : '10% for life',
-    what: FR ? 'La régie pub de Telegram : les chaînes gagnent en publiant des pubs, les annonceurs achètent de la promotion. Avec leur programme d\'affiliation, tu touches 10 % de ce que gagnent les personnes que tu amènes.' : 'The ad network of Telegram: channels earn by posting ads, advertisers buy promotion. With their affiliate program, you get 10% of what the people you bring earn.',
+    badge: FR ? '10 % à vie · payé par InsideAds' : '10% for life · paid by InsideAds',
+    what: FR ? 'Une plateforme à part, la régie pub de Telegram. Inscris-toi, récupère ton propre lien chez eux et touche 10 % des gains des gens que tu amènes, à vie. C\'est InsideAds qui te paie, pas Earn.' : 'A separate platform, the ad network of Telegram. Sign up, get your own link there and earn 10% of what the people you bring earn, for life. InsideAds pays you, not Earn.',
     steps: FR ? ['Inscris-toi sur InsideAds avec le bouton ci-dessous', 'Ton lien d\'affiliation InsideAds est dans leur app', 'Partage-le aux propriétaires de chaînes et aux annonceurs', 'Touche 10 % de leurs gains, à vie'] : ['Sign up on InsideAds with the button below', 'Your InsideAds affiliate link is in their app', 'Share it with channel owners and advertisers', 'Get 10% of their earnings, for life'],
     go: FR ? '📢 S\'inscrire sur InsideAds' : '📢 Sign up on InsideAds' },
   // 15 oct 2026: Ads Galaxy affiliate program (paid in USDT by Ads Galaxy), with Jeremy's affiliate link
   { k: 'agx', c: '#26a17b', i: '🌌', name: 'Ads Galaxy', open: 'https://t.me/Ads_Galaxy_bot?start=AGX7057960224',
-    badge: FR ? '0,015 $ en USDT par ami' : '$0.015 in USDT per friend',
-    what: FR ? 'Une plateforme Telegram qui paie en USDT. Avec son programme de parrainage, tu gagnes 0,005 $ dès qu\'un ami rejoint (payé tout de suite sur ton solde retirable), puis 0,010 $ quand il valide en rejoignant la chaîne demandée. En plus, des sprints de parrainage, chaque jour et chaque mois, récompensent les meilleurs : 1 $ / 0,50 $ / 0,25 $ en solo, et 1,50 $ / 0,75 $ / 0,25 $ par équipe.' : 'A Telegram platform that pays in USDT. With its referral program, you earn $0.005 as soon as a friend joins (paid instantly to your withdrawable balance), then $0.010 when he verifies by joining the required channel. On top of that, daily and monthly referral sprints reward the best: $1 / $0.50 / $0.25 solo, and $1.50 / $0.75 / $0.25 per team.',
+    badge: FR ? '0,015 $ par ami · payé par Ads Galaxy' : '$0.015 per friend · paid by Ads Galaxy',
+    what: FR ? 'Une plateforme à part, qui paie en USDT. Inscris-toi, récupère ton propre lien de parrainage dans leur bot : 0,005 $ par ami qui rejoint, +0,010 $ quand il valide, et des concours pour les meilleurs parrains. C\'est Ads Galaxy qui te paie, pas Earn.' : 'A separate platform that pays in USDT. Sign up, get your own referral link in their bot: $0.005 per friend who joins, +$0.010 when he verifies, and contests for the best referrers. Ads Galaxy pays you, not Earn.',
     steps: FR ? ['Inscris-toi sur Ads Galaxy avec le bouton ci-dessous', 'Ton lien de parrainage Ads Galaxy est dans leur bot', 'Ton ami rejoint : +0,005 $ en USDT, tout de suite', 'Il rejoint la chaîne demandée : +0,010 $, soit 0,015 $ par ami', 'Sprints du jour et du mois : les meilleurs parrains gagnent jusqu\'à 1 $ (1,50 $ par équipe). Il faut des filleuls actifs et sans triche, et des plafonds par jour et par mois s\'appliquent'] : ['Sign up on Ads Galaxy with the button below', 'Your Ads Galaxy referral link is in their bot', 'Your friend joins: +$0.005 in USDT, instantly', 'He joins the required channel: +$0.010, so $0.015 per friend', 'Daily and monthly sprints: the best referrers win up to $1 ($1.50 per team). Referrals must be active and fraud-free, and daily and monthly caps apply'],
     go: FR ? '🌌 S\'inscrire sur Ads Galaxy' : '🌌 Sign up on Ads Galaxy' },
 ];
@@ -339,7 +339,7 @@ render = function () { renderBase.apply(this, arguments); applyTab(); };
   const css = document.createElement('style');
   css.textContent = '#list .card.mini .what,#list .card.mini .push,#list .card.mini .lbl,#list .card.mini .link,#list .card.mini .stats,#list .card.mini .warn,#list .card.mini details,#list .card.mini .ghost[data-open]{display:none}'
     + '#list .card.mini{padding-top:12px;padding-bottom:12px}#list .card.mini .row2{margin:10px 0 0}#list .card.mini .btn[data-open]{margin-top:10px}'
-    + '#list .card .head{cursor:pointer;position:relative}#list .card .head::after{content:"▾";position:absolute;right:0;top:4px;opacity:.5;transition:transform .2s}#list .card:not(.mini) .head::after{transform:rotate(180deg)}';
+    + '#list .card.mini.ext .what{display:block;margin:8px 0 0;font-size:13px}#list .card .head{cursor:pointer;position:relative}#list .card .head::after{content:"▾";position:absolute;right:0;top:4px;opacity:.5;transition:transform .2s}#list .card:not(.mini) .head::after{transform:rotate(180deg)}';
   document.head.appendChild(css);
 })();
 const EOPEN = {};
@@ -348,8 +348,8 @@ function miniCards() {
   [...box.children].forEach((el, i) => {
     if (tabOf(el, true) !== 'progs' || !el.classList.contains('card')) return;
     const k = (el.querySelector('h2') || {}).textContent || String(i);
-    el.classList.toggle('mini', !EOPEN[k]);
-    const h = el.querySelector('.head'); if (h && !h.dataset.mini) { h.dataset.mini = '1'; h.onclick = () => { haptic(); EOPEN[k] = !EOPEN[k]; el.classList.toggle('mini', !EOPEN[k]); }; }
+    el.classList.toggle('mini', !EOPEN[k]); el.classList.toggle('ext', !!el.querySelector('.btn[data-open]'));
+    const h = el.querySelector('.head'); if (h && !h.dataset.mini) { h.dataset.mini = '1'; h.onclick = () => { haptic(); EOPEN[k] = !EOPEN[k]; el.classList.toggle('mini', !EOPEN[k]); el.classList.toggle('ext', !!el.querySelector('.btn[data-open]')); }; }
   });
 }
 const applyTabBase = applyTab;
