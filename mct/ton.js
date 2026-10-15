@@ -60,6 +60,42 @@ function outCopy(v, ok) {
   try { toast(ok); } catch (x) {}
 }
 function outWa(msg) { const u = 'https://wa.me/?text=' + encodeURIComponent(msg); try { (window.Telegram && Telegram.WebApp && Telegram.WebApp.initData ? Telegram.WebApp.openLink(u) : window.open(u, '_blank')); } catch (x) { window.open(u, '_blank'); } }
+// 15 oct 2026 (v2): the game shows only its own program: its earnings, its friends waiting, and the TON wallet, added right here
+// (one wallet per person, shared by all the apps). The other referral programs are in Earn by Jeremstyke.
+function gameDet(s, app, D, M, fr) {
+  const a = s.all || {}, P = a.pending || {}, fl = (P.friends || []).filter((f) => f.app === app), pn = Number(s.pending || 0);
+  const t = fr ? { mine: 'Mes gains Meme Coin Tycoon', pend: 'En attente', need: (n) => n + (n > 1 ? ' amis doivent' : ' ami doit') + ' encore jouer', paid: 'Déjà reçu', wait: 'En cours de paiement', pay: (m) => 'Payé chaque lundi sur ton portefeuille TON, dès ' + m + ' (avec tes autres gains TON)', ok: '✅ Portefeuille ajouté', chg: 'Changer', add: '👛 Ajouter mon portefeuille', ph: 'Colle ton adresse TON (UQ... ou EQ...)', h1: 'Pas d\'adresse TON ? C\'est gratuit et ça prend 1 minute :', h2: 'Ouvre <b>@wallet</b> dans Telegram', h3: 'Touche <b>Recevoir</b>, puis <b>TON</b>', h4: 'Copie l\'adresse et colle-la ici', ow: 'Ouvrir @wallet', sync: 'Un seul portefeuille pour toutes les apps (Daily Score, GramPedia, Earn…).' }
+    : { mine: 'My Meme Coin Tycoon earnings', pend: 'Pending', need: (n) => n + (n > 1 ? ' friends' : ' friend') + ' still to play', paid: 'Already received', wait: 'Being paid', pay: (m) => 'Paid every Monday to your TON wallet, from ' + m + ' (with your other TON earnings)', ok: '✅ Wallet added', chg: 'Change', add: '👛 Add my wallet', ph: 'Paste your TON address (UQ... or EQ...)', h1: 'No TON address? It\'s free and takes 1 minute:', h2: 'Open <b>@wallet</b> in Telegram', h3: 'Tap <b>Receive</b>, then <b>TON</b>', h4: 'Copy the address and paste it here', ow: 'Open @wallet', sync: 'One wallet for all the apps (Daily Score, GramPedia, Earn…).' };
+  let h = `<small style="display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;opacity:.7">${t.mine}</small><div style="font-size:34px;font-weight:900;line-height:1.15;margin:2px 0 6px">${M(s.balance)}</div>`;
+  h += tonPendHtml({ n: pn, usd: pn * Number(s.usd || 0), friends: fl }, t.pend, t.need, M);
+  if (Number(s.paid) || Number(s.waiting)) h += `<small style="display:block;margin-top:8px;opacity:.75">${Number(s.paid) ? '💸 ' + t.paid + ' ' + M(s.paid) : ''}${Number(s.paid) && Number(s.waiting) ? ' · ' : ''}${Number(s.waiting) ? '⏳ ' + t.wait + ' ' + M(s.waiting) : ''}</small>`;
+  h += `<small style="display:block;margin-top:8px;opacity:.75">${t.pay(M(a.min || s.min))}</small>`;
+  h += a.wallet ? `<div style="margin-top:8px;font-size:14px;font-weight:700">${t.ok} <a href="#" onclick="gameWalShow();return false" style="font-weight:400;opacity:.7;text-decoration:underline;color:inherit;margin-left:6px">${t.chg}</a></div>`
+    : `<button class="btn" onclick="gameWalShow()" style="width:100%;margin-top:10px">${t.add}</button>`;
+  h += `<div id="gamewf" style="display:none;margin-top:10px"><div style="display:flex;gap:8px"><input id="gamewa" placeholder="${t.ph}" autocomplete="off" spellcheck="false" style="flex:1;min-width:0;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:inherit;font-size:14px"><button class="btn" onclick="gameWalSave()" style="width:auto;margin:0;padding:12px 16px">OK</button></div>`
+    + `<div style="margin-top:8px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.06);font-size:13px;line-height:1.5"><b>${t.h1}</b><br>1. ${t.h2}<br>2. ${t.h3}<br>3. ${t.h4}<button class="ghost" onclick="gameOpen('https://t.me/wallet')" style="width:100%;margin-top:8px">👛 ${t.ow}</button></div><small style="display:block;margin-top:6px;opacity:.7">${t.sync}</small></div>`;
+  return h;
+}
+function gameWalShow() { const f = document.getElementById('gamewf'); if (!f) return; f.style.display = ''; const i = document.getElementById('gamewa'); if (i) { i.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(() => { try { i.focus(); } catch (e) {} }, 400); } }
+const gameWalOpen = () => { const f = document.getElementById('gamewf'); return !!(f && f.style.display !== 'none'); };
+function gameOpen(u) { try { tw.openTelegramLink(u); } catch (e) { window.open(u, '_blank'); } }
+async function gameWalSave() {
+  const i = document.getElementById('gamewa'), v = ((i && i.value) || '').trim(); if (!v) return;
+  try { haptic(); } catch (e) {}
+  let r; try { r = await tonCall({ action: 'wallet', addr: v }); } catch (e) { r = null; }
+  if (!r || !r.ok) { toast(LANG === 'fr' ? 'Adresse TON invalide' : 'Invalid TON address'); return; }
+  toast(LANG === 'fr' ? 'Portefeuille enregistré ✅' : 'Wallet saved ✅'); tonPage();
+}
+// the Meme Coin Tycoon referral contest of the week (top 3 win TON on Monday)
+function mctContestHtml(c, fr, M) {
+  if (!c || !c.on) return '';
+  const md = ['🥇', '🥈', '🥉'], pz = c.prizes || [], top = (c.top || []).slice(0, 3);
+  const left = Math.max(0, Math.round((Date.parse(c.ends) - Date.now()) / 36e5)), lt = left > 48 ? Math.round(left / 24) + (fr ? ' j' : ' d') : left + ' h';
+  const rows = top.map((x, i) => `<div style="display:flex;justify-content:space-between;gap:8px;padding:5px 0;font-size:13px;border-top:1px solid rgba(255,255,255,.08)${x.me ? ';color:#ffd43b;font-weight:700' : ''}"><span>${md[i]} ${esc(x.name)}</span><span>${x.n} ${fr ? 'ami' + (x.n > 1 ? 's' : '') : 'friend' + (x.n > 1 ? 's' : '')} · ${M(pz[i] || 0)}</span></div>`).join('')
+    || `<div style="font-size:13px;opacity:.8">${fr ? 'Personne pour l\'instant : sois le premier !' : 'Nobody yet: be the first!'}</div>`;
+  const me = c.me && c.me.rank ? `<div style="font-size:13px;margin-top:6px">${fr ? 'Ta place' : 'Your rank'} : <b>#${c.me.rank}</b> · ${c.me.n} ${fr ? 'ami(s)' : 'friend(s)'}</div>` : '';
+  return `<div style="margin:6px 0 12px;padding:12px;border-radius:14px;border:1px solid rgba(255,212,59,.45);background:rgba(255,212,59,.08)"><b style="display:block;font-size:15px;margin-bottom:4px">🏆 ${fr ? 'Concours de parrainage de la semaine' : 'Referral contest of the week'}</b><div style="font-size:13px;opacity:.85;margin-bottom:6px">${fr ? 'Les 3 meilleurs parrains gagnent ' : 'The top 3 inviters win '}<b>${pz.map((x) => M(x)).join(' / ')}</b> ${fr ? 'en TON lundi, en plus de leurs gains · ⏳ ' : 'in TON on Monday, on top of their earnings · ⏳ '}${lt}</div>${rows}${me}</div>`;
+}
 let TONSH_T = null;
 function tonTiles(s, L) {
   const tile = (b, l) => `<div style="flex:1;min-width:0;padding:8px 4px;border-radius:12px;background:rgba(255,255,255,.07);text-align:center"><b style="display:block;font-size:17px">${b}</b><small style="display:block;font-size:11px;opacity:.7">${l}</small></div>`;
@@ -75,11 +111,11 @@ async function tonPage() {
   d.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center';
   const steps = L.st(tonF2(s.usd), tonF2(s.min), s.delay).map((x, i) => `<div style="display:flex;gap:10px;align-items:flex-start;margin:0 0 8px"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#2ee6ff;color:#062a33;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13px">${i + 1}</span><span style="font-size:14px">${x}</span></div>`).join('');
   d.innerHTML = `<div style="width:100%;max-width:520px;max-height:88vh;overflow:auto;background:#151a23;color:#fff;border-radius:20px 20px 0 0;padding:18px 16px 24px;box-sizing:border-box"><b style="display:block;font-size:18px;margin-bottom:4px">${L.h}</b><p style="margin:0 0 12px;font-size:15px;font-weight:700">${L.s(tonF2(s.usd))}</p>`
-    + `<div id="tondet" style="margin:0 0 12px;padding:14px;border-radius:16px;border:1px solid rgba(46,230,255,.45);background:rgba(46,230,255,.08)">${tonDet(s.all, 'mct', D, tonM)}</div>`
+    + `<div id="tondet" style="margin:0 0 12px;padding:14px;border-radius:16px;border:1px solid rgba(46,230,255,.45);background:rgba(46,230,255,.08)">${gameDet(s, 'mct', D, tonM, LANG === 'fr')}</div>`
     + `<div id="tontl" style="display:flex;gap:6px;margin:0 0 14px">${tonTiles(s, L)}</div>` + '<details style="margin:0 0 10px"><summary style="cursor:pointer;font-size:14px;font-weight:700;margin-bottom:8px">' + L.how + ' ▾</summary>' + steps + '</details>'
     + (Number(s.budget_left) < Number(s.usd) ? `<p style="font-size:13px;opacity:.75">${L.off}</p>` : '')
-    + `<div style="margin:6px 0 6px;font-size:13px;color:#ffd43b">${D.c}</div><div style="margin:0 0 12px;font-size:13px;opacity:.75">${D.n}</div>`
-    + `<button class="btn" id="tonsi" style="width:100%">${L.inv}</button><div style="display:flex;gap:8px;margin-top:8px"><button class="ghost" id="tonwa" style="flex:1">📲 WhatsApp</button><button class="ghost" id="toncp" style="flex:1">📋 ${LANG === 'fr' ? 'Copier mon lien' : 'Copy my link'}</button></div><button class="ghost" id="tonse" style="width:100%;margin-top:8px">${D.my}</button><div id="tonsc" style="cursor:pointer;text-decoration:underline;text-align:center;margin-top:12px;opacity:.75">${D.close}</div></div>`;
+    + mctContestHtml(s.contest, LANG === 'fr', tonM)
+    + `<button class="btn" id="tonsi" style="width:100%">${L.inv}</button><div style="display:flex;gap:8px;margin-top:8px"><button class="ghost" id="tonwa" style="flex:1">📲 WhatsApp</button><button class="ghost" id="toncp" style="flex:1">📋 ${LANG === 'fr' ? 'Copier mon lien' : 'Copy my link'}</button></div><button class="ghost" id="tonse" style="width:100%;margin-top:8px">🔗 ${LANG === 'fr' ? 'Autres programmes de parrainage (Earn)' : 'More referral programs (Earn)'}</button><div id="tonsc" style="cursor:pointer;text-decoration:underline;text-align:center;margin-top:12px;opacity:.75">${D.close}</div></div>`;
   document.body.appendChild(d);
   const close = () => { d.remove(); clearInterval(TONSH_T); };
   d.onclick = (e) => { if (e.target === d || e.target.id === 'tonsc') close(); };
@@ -88,7 +124,7 @@ async function tonPage() {
   const myMsg = LANG === 'fr' ? '🚀 Joue à Meme Coin Tycoon avec moi sur Telegram : on gagne 500 $ chacun pour commencer 👉 ' + myLink + '\n\n(Pas encore Telegram ? Installe-le, puis reclique sur ce lien.)' : '🚀 Play Meme Coin Tycoon with me on Telegram: we both get $500 to start 👉 ' + myLink + '\n\n(No Telegram yet? Install it, then tap this link again.)';
   d.querySelector('#tonwa').onclick = () => { try { haptic(); } catch (x) {} outWa(myMsg); };
   d.querySelector('#toncp').onclick = () => { try { haptic(); } catch (x) {} outCopy(myLink, LANG === 'fr' ? 'Lien copié ✅ Colle-le dans Messenger, WhatsApp, SMS…' : 'Link copied ✅ Paste it in Messenger, WhatsApp, SMS…'); };
-  d.querySelector('#tonse').onclick = () => { haptic(); try { tw.openTelegramLink('https://t.me/earnbyjeremstykebot?startapp=mct'); } catch (e) { window.open('https://t.me/earnbyjeremstykebot?startapp=mct', '_blank'); } };
+  d.querySelector('#tonse').onclick = () => { haptic(); try { tw.openTelegramLink('https://t.me/earnbyjeremstykebot?startapp=progs_mct'); } catch (e) { window.open('https://t.me/earnbyjeremstykebot?startapp=progs_mct', '_blank'); } };
   // live: the balance is refreshed every 20 s while the sheet is open
   clearInterval(TONSH_T);
   TONSH_T = setInterval(async () => {
@@ -96,7 +132,7 @@ async function tonPage() {
     let x; try { x = await tonCall({}); } catch (e) { return; }
     if (!x || !x.ok) return;
     const a = document.getElementById('tondet'), t = document.getElementById('tontl');
-    if (a) a.innerHTML = tonDet(x.all, 'mct', D, tonM); if (t) t.innerHTML = tonTiles(x, L);
+    if (gameWalOpen()) return; if (a) a.innerHTML = gameDet(x, 'mct', D, tonM, LANG === 'fr'); if (t) t.innerHTML = tonTiles(x, L);
   }, 20000);
 }
 // the banner to the page (market: at the top, Earn: in its slot)
