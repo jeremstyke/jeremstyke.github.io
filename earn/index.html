@@ -227,7 +227,22 @@ function admPaint() {
   $('aref').onclick = () => { haptic(); admLoad('admin'); };
 }
 render();
-if (INIT) call({}).then((r) => { if (r && r.ok) { S = r; render(); if (r.uid === 7057960224) admLoad('admin'); } }).catch(() => {});
+if (INIT) call({}).then((r) => { if (r && r.ok) { S = r; render(); if (r.uid === 7057960224) admLoad('admin'); askWrite(); } }).catch(() => {});
+// 15 oct 2026: Telegram's own "allow messages from the bot" request, so Earn can tell people when they earn or get paid
+// (people who open the mini app from a link never started the bot, and the bot cannot write first). Asked once, 2 s after loading.
+function askWrite() {
+  let done = false; try { done = localStorage.getItem('earn_wa') === '1'; } catch (e) {}
+  if (done || !tw || typeof tw.requestWriteAccess !== 'function') return;
+  setTimeout(() => {
+    try {
+      tw.requestWriteAccess((ok) => {
+        try { localStorage.setItem('earn_wa', '1'); } catch (e) {}
+        call({ action: 'track', prog: 'write', kind: ok ? 'allowed' : 'refused' }).catch(() => {});
+        if (ok) toast(FR ? '✅ Tu seras prévenu de tes gains et paiements' : '✅ You will be told about your earnings and payouts');
+      });
+    } catch (e) {}
+  }, 2000);
+}
 </script>
 </body>
 </html>
