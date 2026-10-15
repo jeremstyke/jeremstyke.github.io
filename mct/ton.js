@@ -47,9 +47,11 @@ async function tonPage(edit) {
       ? `<div style="display:flex;gap:8px;margin:6px 0 14px"><input id="tona" placeholder="${L.ph}" value="${esc(w || '')}" autocomplete="off" spellcheck="false" style="flex:1;min-width:0;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:inherit;font-size:14px"><button class="ghost sm" id="tons">${L.save}</button></div>`
       : `<div class="row" style="margin:6px 0 14px"><div class="who"><small style="white-space:normal;word-break:break-all;font-size:13px;color:inherit">${esc(w)}</small></div><button class="ghost sm" id="tonc2">${L.chg}</button></div>`)
     + (Number(s.budget_left) < Number(s.usd) ? `<p class="hint">${L.off}</p>` : '')
+    + `<button class="ghost" id="tonearn" style="width:100%;margin:0 0 14px">💰 ${LANG === 'fr' ? 'Tous mes programmes et mes gains : Earn by Jeremstyke' : 'All my programs and earnings: Earn by Jeremstyke'}</button>` // 15 oct 2026: tracked link to Earn (source mct)
     + `<h2>${L.how}</h2>${steps}<p class="hint" style="font-size:12px;margin-top:10px">${L.rule}</p>`;
   $('#tonbk').onclick = () => { haptic(); tonBack(); };
   $('#toni').onclick = invite;
+  $('#tonearn').onclick = () => { haptic(); try { tw.openTelegramLink('https://t.me/earnbyjeremstykebot?startapp=mct'); } catch (e) { window.open('https://t.me/earnbyjeremstykebot?startapp=mct', '_blank'); } };
   if ($('#tonc2')) $('#tonc2').onclick = () => { haptic(); tonPage(true); };
   if ($('#tons')) $('#tons').onclick = async () => {
     const a = ($('#tona').value || '').trim(); if (!a) return;
