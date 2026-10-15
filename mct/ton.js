@@ -52,6 +52,14 @@ function tonPendHtml(p, pend, need, M) {
 function tonPendIn(h, x) { const i = h.indexOf('</div>') + 6; return i > 5 ? h.slice(0, i) + x + h.slice(i) : h + x; }
 const tonDet0 = tonDet;
 tonDet = (a, here, D, M) => tonPendIn(tonDet0(a, here, D, M), a ? tonPendHtml(a.pending, LANG === 'fr' ? 'En attente' : 'Pending', (n) => LANG === 'fr' ? n + (n > 1 ? ' amis doivent' : ' ami doit') + ' encore jouer' : n + (n > 1 ? ' friends' : ' friend') + ' still to play', M) : '');
+// 15 oct 2026: share outside Telegram (WhatsApp, Messenger, SMS...): the friend still opens the game in Telegram
+function outCopy(v, ok) {
+  let done = false;
+  try { navigator.clipboard.writeText(v); done = true; } catch (x) {}
+  if (!done) { try { const t = document.createElement('textarea'); t.value = v; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); } catch (x) {} }
+  try { toast(ok); } catch (x) {}
+}
+function outWa(msg) { const u = 'https://wa.me/?text=' + encodeURIComponent(msg); try { (window.Telegram && Telegram.WebApp && Telegram.WebApp.initData ? Telegram.WebApp.openLink(u) : window.open(u, '_blank')); } catch (x) { window.open(u, '_blank'); } }
 let TONSH_T = null;
 function tonTiles(s, L) {
   const tile = (b, l) => `<div style="flex:1;min-width:0;padding:8px 4px;border-radius:12px;background:rgba(255,255,255,.07);text-align:center"><b style="display:block;font-size:17px">${b}</b><small style="display:block;font-size:11px;opacity:.7">${l}</small></div>`;
@@ -71,11 +79,15 @@ async function tonPage() {
     + `<div id="tontl" style="display:flex;gap:6px;margin:0 0 14px">${tonTiles(s, L)}</div>` + steps
     + (Number(s.budget_left) < Number(s.usd) ? `<p style="font-size:13px;opacity:.75">${L.off}</p>` : '')
     + `<div style="margin:6px 0 6px;font-size:13px;color:#ffd43b">${D.c}</div><div style="margin:0 0 12px;font-size:13px;opacity:.75">${D.n}</div>`
-    + `<button class="btn" id="tonsi" style="width:100%">${L.inv}</button><button class="ghost" id="tonse" style="width:100%;margin-top:8px">${D.my}</button><div id="tonsc" style="cursor:pointer;text-decoration:underline;text-align:center;margin-top:12px;opacity:.75">${D.close}</div></div>`;
+    + `<button class="btn" id="tonsi" style="width:100%">${L.inv}</button><div style="display:flex;gap:8px;margin-top:8px"><button class="ghost" id="tonwa" style="flex:1">📲 WhatsApp</button><button class="ghost" id="toncp" style="flex:1">📋 ${LANG === 'fr' ? 'Copier mon lien' : 'Copy my link'}</button></div><button class="ghost" id="tonse" style="width:100%;margin-top:8px">${D.my}</button><div id="tonsc" style="cursor:pointer;text-decoration:underline;text-align:center;margin-top:12px;opacity:.75">${D.close}</div></div>`;
   document.body.appendChild(d);
   const close = () => { d.remove(); clearInterval(TONSH_T); };
   d.onclick = (e) => { if (e.target === d || e.target.id === 'tonsc') close(); };
   d.querySelector('#tonsi').onclick = () => { close(); invite(); };
+  const myLink = 'https://t.me/Memecointycoonbot?startapp=r_' + ((tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.id) || '');
+  const myMsg = LANG === 'fr' ? '🚀 Joue à Meme Coin Tycoon avec moi sur Telegram : on gagne 500 $ chacun pour commencer 👉 ' + myLink + '\n\n(Pas encore Telegram ? Installe-le, puis reclique sur ce lien.)' : '🚀 Play Meme Coin Tycoon with me on Telegram: we both get $500 to start 👉 ' + myLink + '\n\n(No Telegram yet? Install it, then tap this link again.)';
+  d.querySelector('#tonwa').onclick = () => { try { haptic(); } catch (x) {} outWa(myMsg); };
+  d.querySelector('#toncp').onclick = () => { try { haptic(); } catch (x) {} outCopy(myLink, LANG === 'fr' ? 'Lien copié ✅ Colle-le dans Messenger, WhatsApp, SMS…' : 'Link copied ✅ Paste it in Messenger, WhatsApp, SMS…'); };
   d.querySelector('#tonse').onclick = () => { haptic(); try { tw.openTelegramLink('https://t.me/earnbyjeremstykebot?startapp=mct'); } catch (e) { window.open('https://t.me/earnbyjeremstykebot?startapp=mct', '_blank'); } };
   // live: the balance is refreshed every 20 s while the sheet is open
   clearInterval(TONSH_T);
