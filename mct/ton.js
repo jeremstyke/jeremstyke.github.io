@@ -98,9 +98,34 @@ function mctContestHtml(c, fr, M) {
 }
 let TONSH_T = null;
 function tonTiles(s, L) {
-  const tile = (b, l) => `<div style="flex:1;min-width:0;padding:8px 4px;border-radius:12px;background:rgba(255,255,255,.07);text-align:center"><b style="display:block;font-size:17px">${b}</b><small style="display:block;font-size:11px;opacity:.7">${l}</small></div>`;
+  const tile = (b, l) => `<div><b>${b}</b><small>${l}</small></div>`;
   return tile('✅ ' + Number(s.valid || 0), L.v) + tile('⏳ ' + Number(s.pending || 0), L.p);
 }
+// 15 oct 2026: the look of the TON sheet
+(() => {
+  const st = document.createElement('style');
+  st.textContent = '.tsx{width:100%;max-width:520px;max-height:90vh;overflow:auto;background:linear-gradient(180deg,#1d2142 0%,#121522 40%);color:#fff;border-radius:24px 24px 0 0;padding:10px 16px 26px;box-sizing:border-box;box-shadow:0 -10px 40px rgba(0,0,0,.5);animation:tsxUp .25s ease-out}'
+    + '@keyframes tsxUp{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}'
+    + '.tsx .grab{width:42px;height:5px;border-radius:9px;background:rgba(255,255,255,.25);margin:0 auto 14px}'
+    + '.tsx .hero{display:flex;gap:12px;align-items:center;margin:0 0 10px}'
+    + '.tsx .hero .ic{flex:none;width:54px;height:54px;border-radius:18px;display:grid;place-items:center;font-size:30px;background:radial-gradient(circle at 30% 25%,#bff6ff,#2ee6ff 55%,#0b6c80);box-shadow:0 6px 22px rgba(46,230,255,.4)}'
+    + '.tsx .hero b{display:block;font-size:21px;font-weight:900;letter-spacing:-.01em}'
+    + '.tsx .hero span{display:inline-block;margin-top:4px;font-size:12px;font-weight:800;color:#062a33;background:linear-gradient(90deg,#2ee6ff,#4ff0b7);padding:3px 10px;border-radius:999px}'
+    + '.tsx .sub{font-size:13px;opacity:.75;margin:0 0 14px;line-height:1.45}'
+    + '.tsx .earn{margin:0 0 14px;padding:16px;border-radius:20px;background:linear-gradient(145deg,rgba(46,230,255,.16),rgba(124,92,255,.14));border:1px solid rgba(46,230,255,.35);box-shadow:0 10px 30px rgba(46,230,255,.12)}'
+    + '.tsx .cta{display:block;width:100%;border:0;border-radius:16px;padding:15px;font-weight:900;font-size:16px;color:#062a33;background:linear-gradient(90deg,#2ee6ff,#4ff0b7);box-shadow:0 6px 0 #0b8f86;cursor:pointer}'
+    + '.tsx .cta:active{transform:translateY(3px);box-shadow:0 3px 0 #0b8f86}'
+    + '.tsx .row{display:flex;gap:8px;margin:12px 0 16px}'
+    + '.tsx .sec{flex:1;border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:11px 6px;font-weight:700;font-size:14px;color:#fff;background:rgba(255,255,255,.06);cursor:pointer}'
+    + '.tsx .tiles{display:flex;gap:8px;margin:0 0 14px}'
+    + '.tsx .tiles>div{flex:1;padding:12px 6px;border-radius:16px;background:rgba(255,255,255,.06);text-align:center}'
+    + '.tsx .tiles b{display:block;font-size:22px;font-weight:900}.tsx .tiles small{font-size:11px;opacity:.7}'
+    + '.tsx details.how{margin:0 0 10px;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.04)}'
+    + '.tsx details.how summary{cursor:pointer;font-weight:800;font-size:14px;list-style:none}.tsx details.how summary::-webkit-details-marker{display:none}'
+    + '.tsx .more{display:block;width:100%;border:0;background:none;color:#9fe9ff;font-weight:700;font-size:14px;padding:12px;cursor:pointer}'
+    + '.tsx .close{text-align:center;opacity:.6;font-size:13px;cursor:pointer;padding:4px}';
+  document.head.appendChild(st);
+})();
 async function tonPage() {
   if (!tw || !tw.initData) return;
   const L = tonL(), D = TOND[LANG === 'fr' ? 'fr' : 'en'];
@@ -110,12 +135,17 @@ async function tonPage() {
   const d = document.createElement('div'); d.id = 'tonsheet';
   d.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center';
   const steps = L.st(tonF2(s.usd), tonF2(s.min), s.delay).map((x, i) => `<div style="display:flex;gap:10px;align-items:flex-start;margin:0 0 8px"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#2ee6ff;color:#062a33;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13px">${i + 1}</span><span style="font-size:14px">${x}</span></div>`).join('');
-  d.innerHTML = `<div style="width:100%;max-width:520px;max-height:88vh;overflow:auto;background:#151a23;color:#fff;border-radius:20px 20px 0 0;padding:18px 16px 24px;box-sizing:border-box"><b style="display:block;font-size:18px;margin-bottom:4px">${L.h}</b><p style="margin:0 0 12px;font-size:15px;font-weight:700">${L.s(tonF2(s.usd))}</p>`
-    + `<div id="tondet" style="margin:0 0 12px;padding:14px;border-radius:16px;border:1px solid rgba(46,230,255,.45);background:rgba(46,230,255,.08)">${gameDet(s, 'mct', D, tonM, LANG === 'fr')}</div>`
-    + `<div id="tontl" style="display:flex;gap:6px;margin:0 0 14px">${tonTiles(s, L)}</div>` + '<details style="margin:0 0 10px"><summary style="cursor:pointer;font-size:14px;font-weight:700;margin-bottom:8px">' + L.how + ' ▾</summary>' + steps + '</details>'
+  // 15 oct 2026: a nicer sheet: the earnings card first, then the big invite button, the friends, the contest, how it works
+  d.innerHTML = `<div class="tsx"><div class="grab"></div>`
+    + `<div class="hero"><div class="ic">💎</div><div><b>${L.h.replace(/^💎 /, '')}</b><span>${LANG === 'fr' ? tonF2(s.usd) + ' $ / ami' : '$' + tonF2(s.usd) + ' / friend'}</span></div></div>`
+    + `<p class="sub">${L.s(tonF2(s.usd))}</p>`
+    + `<div class="earn" id="tondet">${gameDet(s, 'mct', D, tonM, LANG === 'fr')}</div>`
+    + `<button class="cta" id="tonsi">${L.inv}</button><div class="row"><button class="sec" id="tonwa">📲 WhatsApp</button><button class="sec" id="toncp">📋 ${LANG === 'fr' ? 'Copier mon lien' : 'Copy my link'}</button></div>`
+    + `<div class="tiles" id="tontl">${tonTiles(s, L)}</div>`
     + (Number(s.budget_left) < Number(s.usd) ? `<p style="font-size:13px;opacity:.75">${L.off}</p>` : '')
     + mctContestHtml(s.contest, LANG === 'fr', tonM)
-    + `<button class="btn" id="tonsi" style="width:100%">${L.inv}</button><div style="display:flex;gap:8px;margin-top:8px"><button class="ghost" id="tonwa" style="flex:1">📲 WhatsApp</button><button class="ghost" id="toncp" style="flex:1">📋 ${LANG === 'fr' ? 'Copier mon lien' : 'Copy my link'}</button></div><button class="ghost" id="tonse" style="width:100%;margin-top:8px">🔗 ${LANG === 'fr' ? 'Autres programmes de parrainage (Earn)' : 'More referral programs (Earn)'}</button><div id="tonsc" style="cursor:pointer;text-decoration:underline;text-align:center;margin-top:12px;opacity:.75">${D.close}</div></div>`;
+    + `<details class="how"><summary>📖 ${L.how} ▾</summary><div style="margin-top:10px">${steps}</div></details>`
+    + `<button class="more" id="tonse">🔗 ${LANG === 'fr' ? 'Autres programmes de parrainage (Earn)' : 'More referral programs (Earn)'}</button><div class="close" id="tonsc">${D.close}</div></div>`;
   document.body.appendChild(d);
   const close = () => { d.remove(); clearInterval(TONSH_T); };
   d.onclick = (e) => { if (e.target === d || e.target.id === 'tonsc') close(); };
