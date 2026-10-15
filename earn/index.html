@@ -265,7 +265,7 @@ function contestCard() {
 // 15 oct 2026: the detail per program of the total balance (same numbers as in Meme Coin Tycoon, GramPedia and Daily Score)
 function earnDet(a) {
   if (!a) return '';
-  const dd = a.detail || {}, keys = ['mct', 'gp', 'ds', 'earn', 'tap'].concat(['other'].filter((k) => Number(dd[k]) > 0));
+  const dd = a.detail || {}, keys = ['mct', 'gp', 'ds', 'earn', 'tap'].concat(['other'].filter((k) => Number(dd[k]) > 0)).sort((x, y) => Number(dd[y] || 0) - Number(dd[x] || 0)); // 15 oct 2026: biggest first
   const N = FR ? { mct: '🪙 Meme Coin Tycoon', gp: '📚 GramPedia', ds: '⚽ Daily Score', earn: '💰 Bonus Earn (amis)', tap: '💎 Diamant', other: '🏆 Concours et bonus' } : { mct: '🪙 Meme Coin Tycoon', gp: '📚 GramPedia', ds: '⚽ Daily Score', earn: '💰 Earn bonus (friends)', tap: '💎 Diamond', other: '🏆 Contest and bonuses' };
   const v = (k) => { const x = Number(dd[k] || 0); return k === 'tap' && x > 0 && x < 0.01 ? (FR ? x.toFixed(4).replace('.', ',') + ' $' : '$' + x.toFixed(4)) : m$(x); };
   return `<div style="margin:0 0 10px">` + keys.map((k) => `<div style="display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-top:1px solid rgba(255,255,255,.08);font-size:14px"><span>${N[k]}</span><b>${v(k)}</b></div>`).join('') + `</div>`;
