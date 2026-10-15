@@ -279,7 +279,8 @@ function sumCard() {
 // 15 oct 2026: Jeremy's payment board, visible to him only: payouts to make (Tonkeeper prefilled, then "Paid"),
 // balances coming up (wallet or not, suspicious accounts flagged) and the last payouts. Data from mct-ton (actions admin*, owner only).
 let ADM = null, ADMB = false;
-function admSlot() { if (!(S && S.uid === 7057960224)) return ''; setTimeout(admPaint, 0); return '<div id="adm"></div>'; }
+function admSlot() { return ''; // 15 oct 2026: the payment board moved to the Earn bot (/paiements)
+  if (!(S && S.uid === 7057960224)) return ''; setTimeout(admPaint, 0); return '<div id="adm"></div>'; }
 async function admLoad(action, extra) {
   if (ADMB) return; ADMB = true;
   try { const r = await call({ action: action || 'admin', ...(extra || {}) }); if (r && r.ok) ADM = r; else if (r && r.error) toast('Erreur : ' + r.error); } catch (e) { toast('Erreur réseau'); }
@@ -354,7 +355,7 @@ function miniCards() {
 const applyTabBase = applyTab;
 applyTab = function () { applyTabBase.apply(this, arguments); miniCards(); };
 render();
-if (INIT) call({}).then((r) => { if (r && r.ok) { S = r; render(); if (r.uid === 7057960224) admLoad('admin'); askWrite(); } }).catch(() => {});
+if (INIT) call({}).then((r) => { if (r && r.ok) { S = r; render(); askWrite(); } }).catch(() => {});
 // 15 oct 2026: Telegram's own "allow messages from the bot" request, so Earn can tell people when they earn or get paid
 // (people who open the mini app from a link never started the bot, and the bot cannot write first). Asked once, 2 s after loading.
 function askWrite() {
