@@ -5,8 +5,8 @@
   const BLOCK = '53969';
   const F = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-ton';
   const TX = {
-    en: { lb: '⚡ Boost x2', h: '⚡ Boost x2 for 1 hour', s: 'Double your mining for 1 hour. One boost a day.', pay: 'Pay 5 ⭐', ad: '📺 Watch an ad (free)', cancel: 'Cancel', short: 'Watch the ad to the end to get your boost.', err: 'Something went wrong, try again.' },
-    fr: { lb: '⚡ Boost x2', h: '⚡ Boost x2 pendant 1 heure', s: 'Double ton minage pendant 1 heure. Un boost par jour.', pay: 'Payer 5 ⭐', ad: '📺 Regarder une pub (gratuit)', cancel: 'Annuler', short: 'Regarde la pub jusqu\'au bout pour avoir ton boost.', err: 'Une erreur est survenue, réessaie.' },
+    en: { lb: '⚡ Boost x2', h: '⚡ Boost x2 for 1 hour', s: 'Double your mining for 1 hour. As often as you want, one at a time.', pay: 'Pay 5 ⭐', ad: '📺 Watch an ad (free)', cancel: 'Cancel', short: 'Watch the ad to the end to get your boost.', err: 'Something went wrong, try again.' },
+    fr: { lb: '⚡ Boost x2', h: '⚡ Boost x2 pendant 1 heure', s: 'Double ton minage pendant 1 heure. Autant de fois que tu veux, un à la fois.', pay: 'Payer 5 ⭐', ad: '📺 Regarder une pub (gratuit)', cancel: 'Annuler', short: 'Regarde la pub jusqu\'au bout pour avoir ton boost.', err: 'Une erreur est survenue, réessaie.' },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] || TX.en; };
   const hap = (k) => { try { haptic(k); } catch (e) {} };
