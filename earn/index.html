@@ -178,15 +178,15 @@ function render() {
       + `<details><summary>${X.how}</summary><ol>${p.steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol></details></section>`;
   }).join('');
   document.querySelectorAll('[data-join]').forEach((b) => b.onclick = () => { haptic('medium'); open('https://t.me/jeremstyke'); });
-  document.querySelectorAll('[data-open]').forEach((b) => b.onclick = () => { haptic('medium'); open(P.find((x) => x.k === b.dataset.open).open); });
+  document.querySelectorAll('[data-open]').forEach((b) => b.onclick = () => { haptic('medium'); call({ action: 'track', prog: b.dataset.open, kind: 'open' }).catch(() => {}); open(P.find((x) => x.k === b.dataset.open).open); });
   document.querySelectorAll('[data-cta]').forEach((b) => b.onclick = () => { haptic('medium'); open(P.find((x) => x.k === b.dataset.cta).ctaLink); });
   document.querySelectorAll('[data-copy]').forEach((b) => b.onclick = async () => {
-    const l = S[b.dataset.copy].link; haptic();
+    const l = S[b.dataset.copy].link; haptic(); call({ action: 'track', prog: b.dataset.copy, kind: 'copy' }).catch(() => {}); // 15 oct 2026: counted for Jeremy's stats
     try { await navigator.clipboard.writeText(l); } catch (e) { const t = document.createElement('textarea'); t.value = l; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (x) {} t.remove(); }
     toast(X.copied);
   });
   document.querySelectorAll('[data-share]').forEach((b) => b.onclick = () => {
-    const p = P.find((x) => x.k === b.dataset.share) || EARN; haptic('medium');
+    const p = P.find((x) => x.k === b.dataset.share) || EARN; haptic('medium'); call({ action: 'track', prog: p.k, kind: 'share' }).catch(() => {});
     open('https://t.me/share/url?url=' + encodeURIComponent(S[p.k].link) + '&text=' + encodeURIComponent(p.share));
   });
 }
