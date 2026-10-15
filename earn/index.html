@@ -262,15 +262,23 @@ function contestCard() {
     + `<p class="what" style="margin:0 0 8px">${FR ? 'Les 3 meilleurs parrains gagnent ' : 'The top 3 inviters win '}<b>${pz.map((x) => m$(x)).join(' / ')}</b> ${FR ? 'en TON lundi, <b>en plus</b> de tes 0,05 $ par ami' : 'in TON on Monday, <b>on top of</b> your $0.05 per friend'} · ⏳ ${lt}</p>`
     + rows + me + (pays ? `<div class="lbl" style="margin-top:14px">💸 ${FR ? 'Derniers paiements' : 'Latest payouts'}</div>` + pays : '') + `</section>`;
 }
+// 15 oct 2026: the detail per program of the total balance (same numbers as in Meme Coin Tycoon, GramPedia and Daily Score)
+function earnDet(a) {
+  if (!a) return '';
+  const dd = a.detail || {}, keys = ['mct', 'gp', 'ds', 'earn', 'tap'].concat(['other'].filter((k) => Number(dd[k]) > 0));
+  const N = FR ? { mct: '🪙 Meme Coin Tycoon', gp: '📚 GramPedia', ds: '⚽ Daily Score', earn: '💰 Bonus Earn (amis)', tap: '💎 Diamant', other: '🏆 Concours et bonus' } : { mct: '🪙 Meme Coin Tycoon', gp: '📚 GramPedia', ds: '⚽ Daily Score', earn: '💰 Earn bonus (friends)', tap: '💎 Diamond', other: '🏆 Contest and bonuses' };
+  const v = (k) => { const x = Number(dd[k] || 0); return k === 'tap' && x > 0 && x < 0.01 ? (FR ? x.toFixed(4).replace('.', ',') + ' $' : '$' + x.toFixed(4)) : m$(x); };
+  return `<div style="margin:0 0 10px">` + keys.map((k) => `<div style="display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-top:1px solid rgba(255,255,255,.08);font-size:14px"><span>${N[k]}</span><b>${v(k)}</b></div>`).join('') + `</div>`;
+}
 function sumCard() {
   if (!S) return '';
   const K = ['mct', 'gp', 'ds', 'earn'].filter((k) => S[k]), add = (f) => K.reduce((a, k) => a + (Number(S[k][f]) || 0), 0);
-  const first = S[K[0]] || {}, tot = Number(first.total != null ? first.total : add('balance')), mn = Number(first.min) || 0.1, paid = add('paid'), wait = add('waiting');
+  const first = S[K[0]] || {}, A = first.all, tot = Number(A ? A.total : first.total != null ? first.total : add('balance')), mn = Number(first.min) || 0.1, paid = add('paid'), wait = add('waiting');
   const pct = Math.max(0, Math.min(100, Math.round(tot / mn * 100)));
   const note = tot >= mn ? (S.wallet ? (FR ? '🎉 Prêt : paiement sous 7 jours' : '🎉 Ready: paid within 7 days') : (FR ? '👇 Ajoute ton portefeuille TON pour être payé' : '👇 Add your TON wallet to get paid'))
     : (FR ? 'Encore ' + m$(mn - tot) + ' avant ton paiement (dès ' + m$(mn) + ')' : m$(mn - tot) + ' to go before your payout (from ' + m$(mn) + ')');
   return `<section class="card" style="--c:#4ff0b7"><div class="lbl">${FR ? '💰 Mes gains' : '💰 My earnings'}</div>`
-    + `<div style="font-size:34px;font-weight:800;margin:4px 0 2px">${m$(tot)}</div><div class="what" style="margin:0 0 8px">${FR ? 'à recevoir, tous programmes ensemble' : 'to receive, all programs together'}</div>`
+    + `<div style="font-size:34px;font-weight:800;margin:4px 0 2px">${m$(tot)}</div><div class="what" style="margin:0 0 8px">${FR ? 'à recevoir, tous programmes ensemble' : 'to receive, all programs together'}</div>` + earnDet(A)
     + `<div style="height:8px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden;margin:0 0 6px"><i style="display:block;height:100%;width:${pct}%;background:#4ff0b7"></i></div>`
     + `<div class="what" style="font-size:13px;margin:0 0 10px">${note}</div>`
     + `<div class="stats"><div class="stat"><b>${add('valid')}</b><small>✅ ${FR ? 'amis validés' : 'valid friends'}</small></div><div class="stat"><b>${add('pending')}</b><small>⏳ ${FR ? 'en attente' : 'pending'}</small></div></div>`
