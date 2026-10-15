@@ -147,7 +147,7 @@ function render() {
   // the shared TON wallet
   if (S) {
     const w = S.wallet, ed = EDIT || !w;
-    $('wal').innerHTML = sumCard() + `<section class="card" style="--c:#b18cff"><div class="lbl">${X.w}</div><p class="what" style="margin:0 0 10px">${X.wh}</p>`
+    $('wal').innerHTML = sumCard() + contestCard() + `<section class="card" style="--c:#b18cff"><div class="lbl">${X.w}</div><p class="what" style="margin:0 0 10px">${X.wh}</p>`
       + (ed ? `<div class="wal"><input id="wa" placeholder="${X.ph}" value="${esc(w || '')}" autocomplete="off" spellcheck="false"><button class="btn" id="ws">${X.save}</button></div>`
         : `<div class="head" style="justify-content:space-between"><span class="addr">${esc(w)}</span><button class="ghost" id="wc" style="width:auto;padding:8px 12px">${X.chg}</button></div>`)
       + `<p class="what" style="margin:10px 0 0;font-size:13px">${S.mct && S.mct.total != null ? (FR ? 'Solde total : ' : 'Total balance: ') + '<b>' + m$(S.mct.total) + '</b> · ' : ''}${X.paid}</p></section>`;
@@ -197,6 +197,19 @@ function gate(again) {
   $('gc').onclick = async () => { haptic(); $('gc').disabled = true; let r; try { r = await call({}); } catch (e) { r = null; } if (r && r.ok) { S = r; if (r.joined === false) toast(X.g5); render(); } else $('gc').disabled = false; };
 }
 // 15 oct 2026: "My earnings" at the top: the total of all programs, friends validated and pending, what was received, and the progress to the payout
+// 15 oct 2026: the weekly referral contest (top inviters win TON on Monday) and the last payouts (proof that people get paid)
+function contestCard() {
+  const c = S && S.contest; if (!c || !c.on) return '';
+  const md = ['🥇', '🥈', '🥉'], pz = c.prizes || [], top = (c.top || []).slice(0, 5);
+  const left = Math.max(0, Math.round((Date.parse(c.ends) - Date.now()) / 36e5)), lt = left > 48 ? Math.round(left / 24) + (FR ? ' j' : ' days') : left + ' h';
+  const rows = top.map((x, i) => `<div style="display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid rgba(255,255,255,.08);${x.me ? 'color:#ffd43b;font-weight:700' : ''}"><span>${md[i] || (i + 1) + '.'} ${esc(x.name)}${x.me ? (FR ? ' (toi)' : ' (you)') : ''}</span><span>${x.n} ${FR ? 'ami' + (x.n > 1 ? 's' : '') : 'friend' + (x.n > 1 ? 's' : '')}${i < 3 && pz[i] ? ' · ' + m$(pz[i]) : ''}</span></div>`).join('')
+    || `<p class="what" style="margin:6px 0">${FR ? 'Personne pour l\'instant : sois le premier !' : 'Nobody yet: be the first!'}</p>`;
+  const me = c.me && c.me.rank ? `<p class="what" style="font-size:13px;margin:8px 0 0">${FR ? 'Ta place : ' : 'Your rank: '}<b>#${c.me.rank}</b> · ${c.me.n} ${FR ? 'ami(s) cette semaine' : 'friend(s) this week'}</p>` : `<p class="what" style="font-size:13px;margin:8px 0 0">${FR ? 'Invite au moins ' + c.min + ' amis cette semaine pour entrer dans le classement.' : 'Invite at least ' + c.min + ' friends this week to enter the ranking.'}</p>`;
+  const pays = (c.payouts || []).slice(0, 5).map((p) => `<div style="display:flex;justify-content:space-between;font-size:13px;padding:4px 0"><span>✅ ${esc(p.name)}</span><span>${Number(p.ton).toFixed(3)} TON · ${new Date(p.at).toLocaleDateString(FR ? 'fr-FR' : 'en-GB')}</span></div>`).join('');
+  return `<section class="card" style="--c:#ffd43b"><div class="lbl">🏆 ${FR ? 'Concours de parrainage de la semaine' : 'Referral contest of the week'}</div>`
+    + `<p class="what" style="margin:0 0 8px">${FR ? 'Les 3 meilleurs parrains gagnent ' : 'The top 3 inviters win '}<b>${pz.map((x) => m$(x)).join(' / ')}</b> ${FR ? 'en TON lundi' : 'in TON on Monday'} · ⏳ ${lt}</p>`
+    + rows + me + (pays ? `<div class="lbl" style="margin-top:14px">💸 ${FR ? 'Derniers paiements' : 'Latest payouts'}</div>` + pays : '') + `</section>`;
+}
 function sumCard() {
   if (!S) return '';
   const K = ['mct', 'gp', 'ds', 'earn'].filter((k) => S[k]), add = (f) => K.reduce((a, k) => a + (Number(S[k][f]) || 0), 0);
