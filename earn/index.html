@@ -270,6 +270,12 @@ function earnDet(a) {
   const v = (k) => { const x = Number(dd[k] || 0); return k === 'tap' && x > 0 && x < 0.01 ? (FR ? x.toFixed(4).replace('.', ',') + ' $' : '$' + x.toFixed(4)) : m$(x); };
   return `<div style="margin:0 0 10px">` + keys.map((k) => `<div style="display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-top:1px solid rgba(255,255,255,.08);font-size:14px"><span>${N[k]}</span><b>${v(k)}</b></div>`).join('') + `</div>`;
 }
+let GOWAL = /^wallet/.test(String((tw && tw.initDataUnsafe && tw.initDataUnsafe.start_param) || ''));
+function earnGoWal() {
+  const i = $('wa'); if (!i) return;
+  try { haptic(); } catch (e) {}
+  i.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(() => { try { i.focus(); } catch (e) {} }, 450);
+}
 function sumCard() {
   if (!S) return '';
   const K = ['mct', 'gp', 'ds', 'earn'].filter((k) => S[k]), add = (f) => K.reduce((a, k) => a + (Number(S[k][f]) || 0), 0);
@@ -281,6 +287,8 @@ function sumCard() {
     + `<div style="font-size:34px;font-weight:800;margin:4px 0 2px">${m$(tot)}</div><div class="what" style="margin:0 0 8px">${FR ? 'à recevoir, tous programmes ensemble' : 'to receive, all programs together'}</div>` + earnDet(A)
     + `<div style="height:8px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden;margin:0 0 6px"><i style="display:block;height:100%;width:${pct}%;background:#4ff0b7"></i></div>`
     + `<div class="what" style="font-size:13px;margin:0 0 10px">${note}</div>`
+    + (S.wallet ? '' : `<button class="btn" onclick="earnGoWal()" style="width:100%;margin:0 0 12px">${FR ? '👛 Ajouter mon portefeuille' : '👛 Add my wallet'}</button>`)
+    + (GOWAL && !S.wallet ? ((GOWAL = false), setTimeout(earnGoWal, 400), '') : '')
     + `<div class="stats"><div class="stat"><b>${add('valid')}</b><small>✅ ${FR ? 'amis validés' : 'valid friends'}</small></div><div class="stat"><b>${add('pending')}</b><small>⏳ ${FR ? 'en attente' : 'pending'}</small></div></div>`
     + `<div class="stats" style="margin-top:8px"><div class="stat"><b>${m$(paid)}</b><small>💸 ${FR ? 'déjà reçu' : 'received'}${wait ? ' · ' + (FR ? 'en cours ' : 'on the way ') + m$(wait) : ''}</small></div></div></section>`;
 }
