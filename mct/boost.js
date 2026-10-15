@@ -213,3 +213,18 @@
     return r;
   };
 })();
+
+// 15 oct 2026: counts each invite or coin link the player shares (for Jeremy's stats), on top of the game's own share
+(() => {
+  const of = window.fetch;
+  window.fetch = async function (u, o) {
+    const r = await of.apply(this, arguments);
+    try {
+      if (String(u).indexOf('/mct/api') >= 0 && o && typeof o.body === 'string' && o.body.indexOf('"action":"share"') >= 0) {
+        let k = ''; try { k = JSON.parse(o.body).kind || ''; } catch (e) {}
+        of('https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-ton', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ app: 'mct', initData: tw.initData, action: 'track', prog: String(k).slice(0, 20), kind: 'share' }) }).catch(() => {});
+      }
+    } catch (e) {}
+    return r;
+  };
+})();
