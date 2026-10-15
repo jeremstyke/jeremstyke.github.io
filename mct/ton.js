@@ -42,12 +42,16 @@ function tonPendHtml(p, pend, need, M) {
   if (!p || !p.n) return '';
   const prog = (f) => f.app === 'mct' ? '📅 ' + Math.min(f.dy, 3) + '/3 · 🔁 ' + Math.min(f.tr, 5) + '/5' : f.app === 'ds' ? '⚽ ' + Math.min(f.tr, 4) + '/4' : '📚 ' + (f.tr > 0 ? '⏳' : '0/1');
   const ic = { mct: '🪙', ds: '⚽', gp: '📚' };
-  return `<details style="margin-top:10px"><summary style="cursor:pointer;font-size:14px">⏳ <b>${pend} : ${M(p.usd)}</b> <small style="opacity:.7">(${need(p.n)})</small></summary>`
+  // 15 oct 2026: shown big, right under the total balance, to motivate (the list of friends opens below)
+  return `<div style="margin:10px 0 8px;padding:10px 12px;border-radius:12px;background:rgba(255,212,59,.12);border:1px solid rgba(255,212,59,.5)"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font-size:14px;font-weight:700">⏳ ${pend}</span><b style="font-size:24px;color:#ffd43b;white-space:nowrap">+ ${M(p.usd)}</b></div><small style="display:block;opacity:.8;margin-top:2px">${need(p.n)}</small>`
+    + `<details style="margin-top:6px"><summary style="cursor:pointer;font-size:13px;opacity:.85">👥 ${p.n} ▾</summary>`
     + (p.friends || []).map((f) => `<div style="display:flex;justify-content:space-between;gap:8px;padding:5px 0;font-size:13px;border-top:1px solid rgba(255,255,255,.06)"><span>${ic[f.app] || ''} ${esc(f.name)}</span><span style="opacity:.8;white-space:nowrap">${prog(f)}</span></div>`).join('')
-    + (p.n > (p.friends || []).length ? `<small style="opacity:.6">+ ${p.n - p.friends.length}</small>` : '') + `</details>`;
+    + (p.n > (p.friends || []).length ? `<small style="opacity:.6">+ ${p.n - p.friends.length}</small>` : '') + `</details></div>`;
 }
+// puts the waiting block right after the total (the first closing div of the balance card)
+function tonPendIn(h, x) { const i = h.indexOf('</div>') + 6; return i > 5 ? h.slice(0, i) + x + h.slice(i) : h + x; }
 const tonDet0 = tonDet;
-tonDet = (a, here, D, M) => tonDet0(a, here, D, M) + (a ? tonPendHtml(a.pending, LANG === 'fr' ? 'En attente' : 'Pending', (n) => LANG === 'fr' ? n + (n > 1 ? ' amis doivent' : ' ami doit') + ' encore jouer' : n + (n > 1 ? ' friends' : ' friend') + ' still to play', M) : '');
+tonDet = (a, here, D, M) => tonPendIn(tonDet0(a, here, D, M), a ? tonPendHtml(a.pending, LANG === 'fr' ? 'En attente' : 'Pending', (n) => LANG === 'fr' ? n + (n > 1 ? ' amis doivent' : ' ami doit') + ' encore jouer' : n + (n > 1 ? ' friends' : ' friend') + ' still to play', M) : ''));
 let TONSH_T = null;
 function tonTiles(s, L) {
   const tile = (b, l) => `<div style="flex:1;min-width:0;padding:8px 4px;border-radius:12px;background:rgba(255,255,255,.07);text-align:center"><b style="display:block;font-size:17px">${b}</b><small style="display:block;font-size:11px;opacity:.7">${l}</small></div>`;
