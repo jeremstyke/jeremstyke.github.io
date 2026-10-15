@@ -147,7 +147,7 @@ function render() {
   // the shared TON wallet
   if (S) {
     const w = S.wallet, ed = EDIT || !w;
-    $('wal').innerHTML = `<section class="card" style="--c:#b18cff"><div class="lbl">${X.w}</div><p class="what" style="margin:0 0 10px">${X.wh}</p>`
+    $('wal').innerHTML = sumCard() + `<section class="card" style="--c:#b18cff"><div class="lbl">${X.w}</div><p class="what" style="margin:0 0 10px">${X.wh}</p>`
       + (ed ? `<div class="wal"><input id="wa" placeholder="${X.ph}" value="${esc(w || '')}" autocomplete="off" spellcheck="false"><button class="btn" id="ws">${X.save}</button></div>`
         : `<div class="head" style="justify-content:space-between"><span class="addr">${esc(w)}</span><button class="ghost" id="wc" style="width:auto;padding:8px 12px">${X.chg}</button></div>`)
       + `<p class="what" style="margin:10px 0 0;font-size:13px">${S.mct && S.mct.total != null ? (FR ? 'Solde total : ' : 'Total balance: ') + '<b>' + m$(S.mct.total) + '</b> · ' : ''}${X.paid}</p></section>`;
@@ -195,6 +195,21 @@ function gate(again) {
   $('list').innerHTML = `<section class="card gate" style="--c:#ffd43b"><div class="big">🔒</div><h2>${X.g1}</h2><p>${X.g2}</p><button class="btn" id="gj">${X.g3}</button><button class="ghost" id="gc">${X.g4}</button></section>`;
   $('gj').onclick = () => { haptic('medium'); open('https://t.me/jeremstyke'); };
   $('gc').onclick = async () => { haptic(); $('gc').disabled = true; let r; try { r = await call({}); } catch (e) { r = null; } if (r && r.ok) { S = r; if (r.joined === false) toast(X.g5); render(); } else $('gc').disabled = false; };
+}
+// 15 oct 2026: "My earnings" at the top: the total of all programs, friends validated and pending, what was received, and the progress to the payout
+function sumCard() {
+  if (!S) return '';
+  const K = ['mct', 'gp', 'ds', 'earn'].filter((k) => S[k]), add = (f) => K.reduce((a, k) => a + (Number(S[k][f]) || 0), 0);
+  const first = S[K[0]] || {}, tot = Number(first.total != null ? first.total : add('balance')), mn = Number(first.min) || 0.1, paid = add('paid'), wait = add('waiting');
+  const pct = Math.max(0, Math.min(100, Math.round(tot / mn * 100)));
+  const note = tot >= mn ? (S.wallet ? (FR ? '🎉 Prêt : paiement sous 7 jours' : '🎉 Ready: paid within 7 days') : (FR ? '👇 Ajoute ton portefeuille TON pour être payé' : '👇 Add your TON wallet to get paid'))
+    : (FR ? 'Encore ' + m$(mn - tot) + ' avant ton paiement (dès ' + m$(mn) + ')' : m$(mn - tot) + ' to go before your payout (from ' + m$(mn) + ')');
+  return `<section class="card" style="--c:#4ff0b7"><div class="lbl">${FR ? '💰 Mes gains' : '💰 My earnings'}</div>`
+    + `<div style="font-size:34px;font-weight:800;margin:4px 0 2px">${m$(tot)}</div><div class="what" style="margin:0 0 8px">${FR ? 'à recevoir, tous programmes ensemble' : 'to receive, all programs together'}</div>`
+    + `<div style="height:8px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden;margin:0 0 6px"><i style="display:block;height:100%;width:${pct}%;background:#4ff0b7"></i></div>`
+    + `<div class="what" style="font-size:13px;margin:0 0 10px">${note}</div>`
+    + `<div class="stats"><div class="stat"><b>${add('valid')}</b><small>✅ ${FR ? 'amis validés' : 'valid friends'}</small></div><div class="stat"><b>${add('pending')}</b><small>⏳ ${FR ? 'en attente' : 'pending'}</small></div></div>`
+    + `<div class="stats" style="margin-top:8px"><div class="stat"><b>${m$(paid)}</b><small>💸 ${FR ? 'déjà reçu' : 'received'}${wait ? ' · ' + (FR ? 'en cours ' : 'on the way ') + m$(wait) : ''}</small></div></div></section>`;
 }
 // 15 oct 2026: Jeremy's payment board, visible to him only: payouts to make (Tonkeeper prefilled, then "Paid"),
 // balances coming up (wallet or not, suspicious accounts flagged) and the last payouts. Data from mct-ton (actions admin*, owner only).
