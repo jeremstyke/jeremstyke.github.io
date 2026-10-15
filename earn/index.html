@@ -95,7 +95,7 @@ function earnCard() {
   const e = S && S.earn; if (!e || !e.on) return '';
   return `<section class="card" style="--c:#b18cff"><div class="head"><div class="ico">👥</div><div><h2>${XE.h.replace('👥 ', '')}</h2><span class="badge">${FR ? '10 % de leurs commissions' : '10% of their commissions'}</span></div></div>`
     + `<p class="what">${esc(XE.w)}</p><div class="lbl">${X.yl}</div><div class="link">${esc(e.link)}</div>`
-    + `<div class="row2"><button class="btn" data-copy="earn">${X.copy}</button><button class="btn" data-share="earn">${X.share}</button></div>`
+    + `<div class="row2"><button class="btn" data-copy="earn">${X.copy}</button><button class="btn" data-share="earn">${X.share}</button><button class="btn" data-wa="earn" style="grid-column:1/-1">📲 WhatsApp</button></div>`
     + `<div class="stats"><div class="stat"><b>${e.friends || 0}</b><small>👥 ${XE.f}</small></div><div class="stat"><b>${m$(e.balance)}</b><small>💰 ${XE.c} · ${X.min(m$(e.min))}</small></div></div></section>`;
 }
 const P = [
@@ -166,7 +166,7 @@ function render() {
     if (p.k !== 'ia' && p.k !== 'agx') {
       if (!st) mid = INIT ? '' : `<p class="warn">${X.nolink}</p>`;
       else mid = `<div class="lbl">${X.yl}</div><div class="link">${esc(st.link)}</div>`
-        + `<div class="row2"><button class="btn" data-copy="${p.k}">${X.copy}</button><button class="btn" data-share="${p.k}">${X.share}</button></div>`
+        + `<div class="row2"><button class="btn" data-copy="${p.k}">${X.copy}</button><button class="btn" data-share="${p.k}">${X.share}</button><button class="btn" data-wa="${p.k}" style="grid-column:1/-1">📲 WhatsApp</button></div>`
         + `<div class="stats"><div class="stat"><b>${st.valid}</b><small>✅ ${X.valid}</small></div><div class="stat"><b>${m$(st.balance)}</b><small>💰 ${X.bal} · ${X.min(m$(st.min))}</small></div></div>`
         + (st.member ? '' : `<p class="warn">${X.act}</p>`);
     }
@@ -185,11 +185,23 @@ function render() {
     try { await navigator.clipboard.writeText(l); } catch (e) { const t = document.createElement('textarea'); t.value = l; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (x) {} t.remove(); }
     toast(X.copied);
   });
+  document.querySelectorAll('[data-wa]').forEach((b) => b.onclick = () => {
+    const p = P.find((x) => x.k === b.dataset.wa) || EARN; haptic('medium'); call({ action: 'track', prog: p.k, kind: 'whatsapp' }).catch(() => {});
+    outWa(p.share + ' 👉 ' + S[p.k].link + (FR ? '\n\n(Pas encore Telegram ? Installe-le, puis reclique sur ce lien.)' : '\n\n(No Telegram yet? Install it, then tap this link again.)'));
+  });
   document.querySelectorAll('[data-share]').forEach((b) => b.onclick = () => {
     const p = P.find((x) => x.k === b.dataset.share) || EARN; haptic('medium'); call({ action: 'track', prog: p.k, kind: 'share' }).catch(() => {});
     open('https://t.me/share/url?url=' + encodeURIComponent(S[p.k].link) + '&text=' + encodeURIComponent(p.share));
   });
 }
+// 15 oct 2026: share outside Telegram (WhatsApp, Messenger, SMS...): the friend still opens the game in Telegram
+function outCopy(v, ok) {
+  let done = false;
+  try { navigator.clipboard.writeText(v); done = true; } catch (x) {}
+  if (!done) { try { const t = document.createElement('textarea'); t.value = v; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); } catch (x) {} }
+  try { toast(ok); } catch (x) {}
+}
+function outWa(msg) { const u = 'https://wa.me/?text=' + encodeURIComponent(msg); try { (window.Telegram && Telegram.WebApp && Telegram.WebApp.initData ? Telegram.WebApp.openLink(u) : window.open(u, '_blank')); } catch (x) { window.open(u, '_blank'); } }
 function gate(again) {
   $('wal').innerHTML = '';
   $('list').innerHTML = `<section class="card gate" style="--c:#ffd43b"><div class="big">🔒</div><h2>${X.g1}</h2><p>${X.g2}</p><button class="btn" id="gj">${X.g3}</button><button class="ghost" id="gc">${X.g4}</button></section>`;
