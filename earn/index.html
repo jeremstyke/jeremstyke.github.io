@@ -209,7 +209,7 @@ $('foot').innerHTML = esc(L.ask) + '<a href="#" id="ct">' + esc(L.me) + '</a><br
 $('ct').onclick = (e) => { e.preventDefault(); open('https://t.me/jeremstyke?direct'); };
 
 // links ?startapp=contest_... open the contest, ?startapp=progs_... the programs (from the games), wallet_... the wallet field
-let S = null, EDIT = false, TAB = /^contest/.test(SP) ? 'con' : /^progs/.test(SP) ? 'pro' : 'tap', GOWAL = /^wallet/.test(SP);
+let S = null, EDIT = false, TAB = /^contest/.test(SP) ? 'con' : (/^progs/.test(SP) || /^(mct|gp|ds)$/.test(SP) || /^js_spot/.test(SP)) ? 'pro' : 'tap', GOWAL = /^wallet/.test(SP);
 let TP = null, TQ = 0, TBUSY = false, TPOS = { x: 50, y: 50 }, TCOUNT = 0, TTIMER = null;
 
 // ---------- the diamond tab ----------
