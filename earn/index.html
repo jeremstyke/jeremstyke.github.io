@@ -244,14 +244,31 @@ function inviteCard() {
     + `<div class="row3"><button class="btn" id="icp">${L.copy}</button><button class="btn" id="ish">${L.share}</button><button class="btn" id="iwa">📲 WhatsApp</button></div>`
     + `<div class="stats"><div class="stat"><b>${Number(t.sponsor || 0)}</b><small>👥 ${L.fr}</small></div><div class="stat"><b>${money(t.sponsor_usd, Number(t.sponsor_usd) < 1 ? 4 : 2)}</b><small>💰 ${L.fe}</small></div></div></section>`;
 }
+// 15 oct 2026: subscribers of @jeremstyke earn more on their taps (checked every night when the taps are credited)
+const SUB = {
+  en: { t: (p) => '📢 Subscribe to Jeremstyke: +' + p + '% on your taps', x: 'As long as you are subscribed, every tap earns more. Added every night with your earnings.', j: '📢 Subscribe', c: '✅ I subscribed', on: (p) => '✅ Subscriber bonus +' + p + '%', no: 'Not subscribed yet: join the channel and try again.' },
+  fr: { t: (p) => '📢 Abonne-toi à Jeremstyke : +' + p + ' % sur tes tapes', x: 'Tant que tu es abonné, chaque tape rapporte plus. Versé chaque nuit avec tes gains.', j: '📢 M\'abonner', c: '✅ Je suis abonné', on: (p) => '✅ Bonus abonné +' + p + ' %', no: 'Pas encore abonné : rejoins la chaîne puis réessaie.' },
+  es: { t: (p) => '📢 Suscríbete a Jeremstyke: +' + p + ' % en tus toques', x: 'Mientras estés suscrito, cada toque te da más. Se añade cada noche con tus ganancias.', j: '📢 Suscribirme', c: '✅ Ya me suscribí', on: (p) => '✅ Bono de suscriptor +' + p + ' %', no: 'Aún no estás suscrito: únete al canal y vuelve a intentarlo.' },
+  pt: { t: (p) => '📢 Inscreva-se no Jeremstyke: +' + p + ' % nos seus toques', x: 'Enquanto estiver inscrito, cada toque rende mais. Adicionado toda noite com seus ganhos.', j: '📢 Inscrever-me', c: '✅ Já me inscrevi', on: (p) => '✅ Bônus de inscrito +' + p + ' %', no: 'Ainda não inscrito: entre no canal e tente de novo.' },
+  ru: { t: (p) => '📢 Подпишись на Jeremstyke: +' + p + ' % к нажатиям', x: 'Пока ты подписан, каждое нажатие приносит больше. Начисляется каждую ночь вместе с заработком.', j: '📢 Подписаться', c: '✅ Я подписался', on: (p) => '✅ Бонус подписчика +' + p + ' %', no: 'Ты ещё не подписан: подпишись на канал и попробуй снова.' },
+  ar: { t: (p) => '📢 اشترك في Jeremstyke: ‎+' + p + ' % على ضغطاتك', x: 'ما دمت مشتركًا، كل ضغطة تربح أكثر. تُضاف كل ليلة مع أرباحك.', j: '📢 اشترك', c: '✅ اشتركت', on: (p) => '✅ مكافأة المشترك ‎+' + p + ' %', no: 'لست مشتركًا بعد: انضم إلى القناة ثم حاول مرة أخرى.' },
+  id: { t: (p) => '📢 Langganan Jeremstyke: +' + p + ' % untuk ketukanmu', x: 'Selama kamu berlangganan, setiap ketukan menghasilkan lebih banyak. Ditambahkan setiap malam bersama penghasilanmu.', j: '📢 Langganan', c: '✅ Sudah langganan', on: (p) => '✅ Bonus pelanggan +' + p + ' %', no: 'Belum berlangganan: gabung ke kanal lalu coba lagi.' }
+};
+const subPct = () => Number((TP && TP.sub_pct) || (S && S.tap && S.tap.sub_pct) || 0);
+function subCard() {
+  if (!S || S.joined !== false || !subPct()) return '';
+  const T = SUB[LG];
+  return `<section class="card" style="--c:#ffd43b"><div class="head"><div class="ico">📢</div><div><h2>${esc(T.t(subPct()))}</h2></div></div><p class="what">${esc(T.x)}</p>`
+    + `<div class="row3" style="grid-template-columns:1fr 1fr;margin:0"><button class="btn" id="subj">${esc(T.j)}</button><button class="ghost" id="subc">${esc(T.c)}</button></div></section>`;
+}
 function tapTab() {
   if (!TP) TP = S.tap;
   const on = TP && TP.on;
-  return (on ? `<section class="card" style="--c:#2ee6ff"><div class="lbl">${L.gain}</div><div class="big" id="tapusd"></div>`
+  return (on ? `<section class="card" style="--c:#2ee6ff"><div class="lbl">${L.gain}</div><div class="big" id="tapusd"></div>${S.joined && subPct() ? `<span style="display:inline-block;margin:2px 0 4px;font-size:12px;font-weight:800;color:#062a33;background:#ffd43b;padding:3px 10px;border-radius:999px">${esc(SUB[LG].on(subPct()))}</span>` : ''}`
       + `<div style="height:8px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden;margin:6px 0 4px"><i id="tapbar" style="display:block;height:100%;width:0;background:#2ee6ff;transition:width .15s"></i></div>`
       + `<div class="what" style="font-size:13px;margin:0 0 10px" id="tapn"></div><div id="taparea"></div>`
       + `<p class="what" style="font-size:12px;margin:10px 0 0">${esc(L.pay)}</p></section>` : '')
-    + walletCard() + inviteCard();
+    + subCard() + walletCard() + inviteCard();
 }
 function tapPaint() {
   const el = $('taparea'); if (!el || !TP) return;
@@ -353,6 +370,8 @@ function bind() {
   q('iwa', () => { haptic('medium'); track('earn', 'whatsapp'); outWa(L.msg + ' 👉 ' + link + '\n\n(' + L.noTg + ')'); });
   q('cgo', () => { haptic(); TAB = 'tap'; render(); window.scrollTo(0, 0); });
   q('join', () => { haptic('medium'); open('https://t.me/jeremstyke'); });
+  q('subj', () => { haptic('medium'); track('sub', 'open'); open('https://t.me/jeremstyke'); });
+  q('subc', async () => { haptic(); let r = null; try { r = await call({}); } catch (x) {} if (r && r.ok) { S = r; TP = r.tap || TP; if (!r.joined) toast(SUB[LG].no); render(); } });
   document.querySelectorAll('[data-open]').forEach((b) => b.onclick = () => { haptic('medium'); track(b.dataset.open, 'open'); open(PROGS.find((x) => x.k === b.dataset.open).url); });
 }
 render();
