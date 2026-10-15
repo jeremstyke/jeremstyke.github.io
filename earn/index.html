@@ -258,7 +258,7 @@ const subPct = () => Number((TP && TP.sub_pct) || (S && S.tap && S.tap.sub_pct) 
 function subCard() {
   if (!S || S.joined !== false || !subPct()) return '';
   const T = SUB[LG];
-  return `<section class="card" style="--c:#ffd43b"><div class="head"><div class="ico">📢</div><div><h2>${esc(T.t(subPct()))}</h2></div></div><p class="what">${esc(T.x)}</p>`
+  return `<section class="card" style="--c:#ffd43b"><div class="head"><div class="ico">📢</div><div><h2>${esc(T.t(subPct()).replace(/^📢 /, ''))}</h2></div></div><p class="what">${esc(T.x)}</p>`
     + `<div class="row3" style="grid-template-columns:1fr 1fr;margin:0"><button class="btn" id="subj">${esc(T.j)}</button><button class="ghost" id="subc">${esc(T.c)}</button></div></section>`;
 }
 function tapTab() {
