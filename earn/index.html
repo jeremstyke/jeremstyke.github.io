@@ -213,7 +213,7 @@ function tapPaint() {
   const el = $('tapbox'); if (!el || !TP) return;
   const tpc = TP.tpc || 5000, ck = TP.check, paused = TP.paused;
   el.innerHTML = `<section class="card" style="--c:#2ee6ff"><div class="lbl">💎 Tap & Earn <span class="badge">beta</span></div>`
-    + `<p class="what" style="margin:0 0 6px">${FR ? 'Tape sur le diamant : ' + tpc.toLocaleString('fr-FR') + ' taps = 0,01 $ en TON, sans limite.' : 'Tap the diamond: ' + tpc.toLocaleString('en-US') + ' taps = $0.01 in TON, no limit.'}</p>`
+    + `<p class="what" style="margin:0 0 6px">${FR ? 'Tape sur le diamant et regarde tes gains monter en TON, sans limite.' : 'Tap the diamond and watch your TON earnings grow, no limit.'}</p>`
     + `<div style="font-size:28px;font-weight:800;margin:4px 0" id="tapusd"></div>`
     + `<div style="height:8px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden;margin:0 0 4px"><i id="tapbar" style="display:block;height:100%;width:0;background:#2ee6ff;transition:width .15s"></i></div>`
     + `<div class="what" style="font-size:13px;margin:0 0 8px" id="tapn"></div>`
