@@ -19,40 +19,55 @@ function tonOn() {
 }
 function tonBack() { try { tw.BackButton.hide(); tw.BackButton.offClick(tonBack); } catch (e) {} if (VIEW === 'ton') go('market'); }
 // the dedicated page
-async function tonPage(edit) {
+// 15 oct 2026: like Daily Score, a sheet instead of a separate page, with the same live total balance in every app (Meme Coin Tycoon,
+// GramPedia, Daily Score) and its detail per program. The wallet and the payouts are in Earn by Jeremstyke.
+const TOND = {
+  fr: { tot: 'Mon solde total', mct: '🪙 Meme Coin Tycoon', gp: '📚 GramPedia', ds: '⚽ Daily Score', earn: '💰 Bonus Earn', tap: '💎 Diamant', other: '🏆 Concours et bonus', here: 'ici', paid: 'Déjà reçu', wait: 'En cours de paiement', pay: (m) => 'Payé chaque lundi dès ' + m + ' sur ton portefeuille TON', nowal: '👛 Ajoute ton portefeuille dans Earn pour être payé', wal: '✅ Portefeuille ajouté', c: '🏆 Tes amis comptent aussi pour le concours de la semaine sur Earn by Jeremstyke : 1 $, 0,50 $ et 0,25 $ en TON pour le top 3 chaque lundi, en plus de tes gains.', n: 'Ton portefeuille et tes paiements sont dans Earn by Jeremstyke.', my: '💰 Mes gains TON', close: 'Plus tard' },
+  en: { tot: 'My total balance', mct: '🪙 Meme Coin Tycoon', gp: '📚 GramPedia', ds: '⚽ Daily Score', earn: '💰 Earn bonus', tap: '💎 Diamond', other: '🏆 Contest and bonuses', here: 'here', paid: 'Already received', wait: 'Being paid', pay: (m) => 'Paid every Monday from ' + m + ' to your TON wallet', nowal: '👛 Add your wallet in Earn to get paid', wal: '✅ Wallet added', c: '🏆 Your friends also count in the weekly contest on Earn by Jeremstyke: $1, $0.50 and $0.25 in TON for the top 3 every Monday, on top of your earnings.', n: 'Your wallet and your payouts are in Earn by Jeremstyke.', my: '💰 My TON earnings', close: 'Later' }
+};
+function tonDet(a, here, D, M) {
+  if (!a) return '';
+  const det = a.detail || {}, keys = ['mct', 'gp', 'ds'].concat(['earn', 'tap', 'other'].filter((k) => Number(det[k]) > 0));
+  const row = (k) => `<div style="display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-top:1px solid rgba(255,255,255,.08);font-size:14px${k === here ? ';font-weight:700' : ''}"><span>${D[k]}${k === here ? ' <small style="opacity:.6">(' + D.here + ')</small>' : ''}</span><b>${M(det[k] || 0)}</b></div>`;
+  return `<small style="display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;opacity:.7">${D.tot}</small><div style="font-size:34px;font-weight:900;line-height:1.15;margin:2px 0 8px">${M(a.total)}</div>`
+    + keys.map(row).join('')
+    + (Number(a.paid) || Number(a.waiting) ? `<small style="display:block;margin-top:8px;opacity:.75">${Number(a.paid) ? '💸 ' + D.paid + ' ' + M(a.paid) : ''}${Number(a.paid) && Number(a.waiting) ? ' · ' : ''}${Number(a.waiting) ? '⏳ ' + D.wait + ' ' + M(a.waiting) : ''}</small>` : '')
+    + `<small style="display:block;margin-top:8px;opacity:.75">${D.pay(M(a.min))}</small><small style="display:block;margin-top:4px;font-weight:600">${a.wallet ? D.wal : D.nowal}</small>`;
+}
+let TONSH_T = null;
+function tonTiles(s, L) {
+  const tile = (b, l) => `<div style="flex:1;min-width:0;padding:8px 4px;border-radius:12px;background:rgba(255,255,255,.07);text-align:center"><b style="display:block;font-size:17px">${b}</b><small style="display:block;font-size:11px;opacity:.7">${l}</small></div>`;
+  return tile('✅ ' + Number(s.valid || 0), L.v) + tile('⏳ ' + Number(s.pending || 0), L.p);
+}
+async function tonPage() {
   if (!tw || !tw.initData) return;
-  const L = tonL(), v = $('#view');
-  if (VIEW !== 'ton') {
-    VIEW = 'ton'; try { clearInterval(MINE_T); } catch (e) {}
-    document.querySelectorAll('nav.tb button').forEach((b) => b.removeAttribute('aria-current'));
-    window.scrollTo(0, 0);
-    try { tw.BackButton.show(); tw.BackButton.onClick(tonBack); } catch (e) {}
-    v.innerHTML = `<button class="ghost sm" id="tonbk" style="margin-bottom:8px">${L.back}</button><h1>${L.h}</h1><div class="skel"></div><div class="skel"></div>`;
-    $('#tonbk').onclick = () => { haptic(); tonBack(); };
-  }
+  const L = tonL(), D = TOND[LANG === 'fr' ? 'fr' : 'en'];
   let s; try { s = await tonCall({}); } catch (e) { return; }
-  if (!s || !s.ok || VIEW !== 'ton') return;
-  const w = s.wallet, ed = edit || !w, bal = Number(s.total != null ? s.total : s.balance), mn = Number(s.min), pct = Math.min(100, Math.round(bal / mn * 100));
-  const steps = L.st(tonF2(s.usd), tonF2(s.min), s.delay).map((x, i) => `<div class="row" style="margin:0 0 6px"><span class="med sm" style="--c:#2ee6ff">${i + 1}</span><div class="who"><small style="white-space:normal;font-size:14px;color:inherit">${x}</small></div></div>`).join('');
-  v.innerHTML = `<button class="ghost sm" id="tonbk" style="margin-bottom:8px">${L.back}</button><h1>${L.h}</h1><p class="hint" style="margin-top:-6px">${L.s(tonF2(s.usd))}</p>`
-    // 15 oct 2026: the game shows its own gains; the total balance, the TON wallet and the payouts are in Earn by Jeremstyke (one place for the money)
-    + `<div class="tiles" style="margin:12px 0"><div class="tile"><b>${s.valid}</b><small>✅ ${L.v}</small></div><div class="tile"><b>${s.pending}</b><small>⏳ ${L.p}</small></div>`
-    + `<div class="tile wide"><b>${tonM(Number(s.balance))}</b><small>💰 ${LANG === 'fr' ? 'Solde de ce jeu' : 'Balance from this game'}${Number(s.paid) ? ' · ' + L.r + ' ' + tonM(Number(s.paid)) : ''}</small></div></div>`
-    + `<button class="btn" id="toni" style="margin-bottom:6px">${L.inv}</button><p class="hint" style="margin:0 0 14px;font-size:13px">${L.invn}</p>`
-    + (Number(s.budget_left) < Number(s.usd) ? `<p class="hint">${L.off}</p>` : '')
-    + `<div style="margin:0 0 14px;padding:12px;border-radius:14px;border:1px solid rgba(255,200,60,.45);background:rgba(255,200,60,.08)"><b style="display:block;font-size:15px;margin-bottom:6px">💰 Earn by Jeremstyke</b><span style="display:block;font-size:13px;line-height:1.45">${LANG === 'fr' ? '👛 Ton solde total (tous les jeux), ton portefeuille TON et tes paiements sont dans Earn.<br>🏆 Tes amis invités ici comptent pour le concours de la semaine : chaque lundi, le top 3 gagne 1 $, 0,50 $ et 0,25 $ en TON, en plus de tes gains.' : '👛 Your total balance (all games), your TON wallet and your payouts are in Earn.<br>🏆 The friends you invite here count in the weekly contest: every Monday the top 3 win $1, $0.50 and $0.25 in TON, on top of your earnings.'}</span><button class="btn" id="tonearn" style="width:100%;margin:10px 0 0">💰 ${LANG === 'fr' ? 'Ouvrir Earn : solde, portefeuille, concours' : 'Open Earn: balance, wallet, contest'}</button></div>`
-    + `<h2>${L.how}</h2>${steps}<p class="hint" style="font-size:12px;margin-top:10px">${L.rule}</p>`;
-  $('#tonbk').onclick = () => { haptic(); tonBack(); };
-  $('#toni').onclick = invite;
-  $('#tonearn').onclick = () => { haptic(); try { tw.openTelegramLink('https://t.me/earnbyjeremstykebot?startapp=mct'); } catch (e) { window.open('https://t.me/earnbyjeremstykebot?startapp=mct', '_blank'); } };
-  if ($('#tonc2')) $('#tonc2').onclick = () => { haptic(); tonPage(true); };
-  if ($('#tons')) $('#tons').onclick = async () => {
-    const a = ($('#tona').value || '').trim(); if (!a) return;
-    haptic(); $('#tons').disabled = true;
-    let r; try { r = await tonCall({ action: 'wallet', addr: a }); } catch (e) { r = null; }
-    if (!r || !r.ok) { haptic('err'); toast(L.bad); if ($('#tons')) $('#tons').disabled = false; return; }
-    haptic('ok'); toast(L.ok); tonPage(false);
-  };
+  if (!s || !s.ok) return;
+  const old = document.getElementById('tonsheet'); if (old) old.remove();
+  const d = document.createElement('div'); d.id = 'tonsheet';
+  d.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center';
+  const steps = L.st(tonF2(s.usd), tonF2(s.min), s.delay).map((x, i) => `<div style="display:flex;gap:10px;align-items:flex-start;margin:0 0 8px"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#2ee6ff;color:#062a33;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13px">${i + 1}</span><span style="font-size:14px">${x}</span></div>`).join('');
+  d.innerHTML = `<div style="width:100%;max-width:520px;max-height:88vh;overflow:auto;background:#151a23;color:#fff;border-radius:20px 20px 0 0;padding:18px 16px 24px;box-sizing:border-box"><b style="display:block;font-size:18px;margin-bottom:4px">${L.h}</b><p style="margin:0 0 12px;font-size:15px;font-weight:700">${L.s(tonF2(s.usd))}</p>`
+    + `<div id="tondet" style="margin:0 0 12px;padding:14px;border-radius:16px;border:1px solid rgba(46,230,255,.45);background:rgba(46,230,255,.08)">${tonDet(s.all, 'mct', D, tonM)}</div>`
+    + `<div id="tontl" style="display:flex;gap:6px;margin:0 0 14px">${tonTiles(s, L)}</div>` + steps
+    + (Number(s.budget_left) < Number(s.usd) ? `<p style="font-size:13px;opacity:.75">${L.off}</p>` : '')
+    + `<div style="margin:6px 0 6px;font-size:13px;color:#ffd43b">${D.c}</div><div style="margin:0 0 12px;font-size:13px;opacity:.75">${D.n}</div>`
+    + `<button class="btn" id="tonsi" style="width:100%">${L.inv}</button><button class="ghost" id="tonse" style="width:100%;margin-top:8px">${D.my}</button><div id="tonsc" style="cursor:pointer;text-decoration:underline;text-align:center;margin-top:12px;opacity:.75">${D.close}</div></div>`;
+  document.body.appendChild(d);
+  const close = () => { d.remove(); clearInterval(TONSH_T); };
+  d.onclick = (e) => { if (e.target === d || e.target.id === 'tonsc') close(); };
+  d.querySelector('#tonsi').onclick = () => { close(); invite(); };
+  d.querySelector('#tonse').onclick = () => { haptic(); try { tw.openTelegramLink('https://t.me/earnbyjeremstykebot?startapp=mct'); } catch (e) { window.open('https://t.me/earnbyjeremstykebot?startapp=mct', '_blank'); } };
+  // live: the balance is refreshed every 20 s while the sheet is open
+  clearInterval(TONSH_T);
+  TONSH_T = setInterval(async () => {
+    if (!document.getElementById('tonsheet')) { clearInterval(TONSH_T); return; }
+    let x; try { x = await tonCall({}); } catch (e) { return; }
+    if (!x || !x.ok) return;
+    const a = document.getElementById('tondet'), t = document.getElementById('tontl');
+    if (a) a.innerHTML = tonDet(x.all, 'mct', D, tonM); if (t) t.innerHTML = tonTiles(x, L);
+  }, 20000);
 }
 // the banner to the page (market: at the top, Earn: in its slot)
 function tonButton() {
