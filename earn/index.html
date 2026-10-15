@@ -160,7 +160,7 @@ function render() {
     };
   }
   const joinTip = () => S && (S.joined === false || S.uid === 7057960224) ? `<section class="card" style="--c:#ffd43b"><div class="head"><div class="ico">📢</div><div><h2>${FR ? 'Suis la chaîne Jeremstyke' : 'Follow the Jeremstyke channel'}</h2></div></div><p class="what">${FR ? 'Conseillé : les nouveaux programmes, les astuces pour gagner plus et les preuves de paiement y sont publiés en premier.' : 'Recommended: new programs, tips to earn more and payment proofs are posted there first.'}</p><button class="btn" data-join="1">${X.g3}</button></section>` : '';
-  $('list').innerHTML = joinTip() + earnCard() + P.map((p) => {
+  $('list').innerHTML = admSlot() + joinTip() + earnCard() + P.map((p) => {
     const st = S && S[p.k];
     let mid = '';
     if (p.k !== 'ia' && p.k !== 'agx') {
@@ -196,8 +196,38 @@ function gate(again) {
   $('gj').onclick = () => { haptic('medium'); open('https://t.me/jeremstyke'); };
   $('gc').onclick = async () => { haptic(); $('gc').disabled = true; let r; try { r = await call({}); } catch (e) { r = null; } if (r && r.ok) { S = r; if (r.joined === false) toast(X.g5); render(); } else $('gc').disabled = false; };
 }
+// 15 oct 2026: Jeremy's payment board, visible to him only: payouts to make (Tonkeeper prefilled, then "Paid"),
+// balances coming up (wallet or not, suspicious accounts flagged) and the last payouts. Data from mct-ton (actions admin*, owner only).
+let ADM = null, ADMB = false;
+function admSlot() { if (!(S && S.uid === 7057960224)) return ''; setTimeout(admPaint, 0); return '<div id="adm"></div>'; }
+async function admLoad(action, extra) {
+  if (ADMB) return; ADMB = true;
+  try { const r = await call({ action: action || 'admin', ...(extra || {}) }); if (r && r.ok) ADM = r; else if (r && r.error) toast('Erreur : ' + r.error); } catch (e) { toast('Erreur réseau'); }
+  ADMB = false; admPaint();
+}
+function admPaint() {
+  const el = $('adm'); if (!el) return;
+  if (!ADM) { el.innerHTML = '<section class="card" style="--c:#ff6b6b"><div class="lbl">🔐 Paiements · visible par toi seul</div><p class="what">Chargement…</p></section>'; return; }
+  const d = ADM, who = (x) => esc(x.name || '?') + (x.username ? ' <small>@' + esc(x.username) + '</small>' : '');
+  const pend = d.pending.map((p) => `<div style="border-top:1px solid rgba(255,255,255,.1);padding:10px 0"><b>#${p.id}</b> ${who(p)}<br><b>${m$(p.usd)}</b> = <b>${Number(p.ton).toFixed(3)} TON</b> · ${p.friends} ami(s)<div class="addr" style="font-size:12px;margin:4px 0 8px;word-break:break-all">${esc(p.addr)}</div><div class="row2"><button class="btn" data-apay="${p.id}">💸 Payer</button><button class="ghost" data-adone="${p.id}">✅ Payé</button></div></div>`).join('');
+  const st = (n) => n.ready ? '✅ prêt' : !n.wallet ? '👛 pas de portefeuille' : n.wallet_new ? '⏳ portefeuille récent (24 h)' : '⏳ sous ' + m$(d.min);
+  const next = d.next.map((n) => `<div style="border-top:1px solid rgba(255,255,255,.1);padding:8px 0;font-size:14px">${n.suspect ? '⚠️ ' : ''}${who(n)}<br><b>${m$(n.usd)}</b> · ${n.friends} ami(s) · ${esc(n.apps)} · ${st(n)}</div>`).join('');
+  const paid = d.paid.map((p) => `<div style="font-size:13px;padding:4px 0">#${p.id} ${who(p)} · ${m$(p.usd)} · ${new Date(p.at).toLocaleDateString('fr-FR')}</div>`).join('');
+  el.innerHTML = `<section class="card" style="--c:#ff6b6b"><div class="lbl">🔐 Paiements · visible par toi seul</div>`
+    + `<div class="stats"><div class="stat"><b>${m$(d.month)}</b><small>gagné ce mois / ${m$(d.budget)}</small></div><div class="stat"><b>${m$(d.paid_total)}</b><small>payé au total</small></div></div>`
+    + `<p class="what" style="font-size:13px;margin:8px 0">1 TON = ${m$(d.px)} · paiement dès ${m$(d.min)}</p>`
+    + `<h2 style="margin:14px 0 4px">💸 À payer (${d.pending.length})</h2>` + (pend || '<p class="what">Rien à payer pour l\'instant.</p>')
+    + `<button class="ghost" id="arun" style="margin-top:8px">📋 Préparer les paiements maintenant</button>`
+    + `<h2 style="margin:16px 0 4px">⏳ Prochains paiements (${d.next.length})</h2>` + (next || '<p class="what">Personne pour l\'instant.</p>')
+    + (paid ? `<details><summary>Derniers paiements</summary>${paid}</details>` : '')
+    + `<button class="ghost" id="aref" style="margin-top:10px">🔄 Actualiser</button></section>`;
+  el.querySelectorAll('[data-apay]').forEach((b) => b.onclick = () => { haptic('medium'); const p = d.pending.find((x) => String(x.id) === b.dataset.apay); if (p) { try { tw.openLink(p.pay); } catch (e) { window.open(p.pay, '_blank'); } } });
+  el.querySelectorAll('[data-adone]').forEach((b) => b.onclick = () => { haptic(); const id = Number(b.dataset.adone); const go = () => admLoad('admin_paid', { id }).then(() => toast('✅ #' + id + ' marqué payé')); try { tw.showConfirm('Tu as bien envoyé le paiement #' + id + ' ? Le joueur sera prévenu et la preuve publiée.', (ok) => { if (ok) go(); }); } catch (e) { if (confirm('Paiement #' + id + ' envoyé ?')) go(); } });
+  $('arun').onclick = () => { haptic('medium'); admLoad('admin_run').then(() => toast('📋 Liste prête, envoyée aussi par le bot')); };
+  $('aref').onclick = () => { haptic(); admLoad('admin'); };
+}
 render();
-if (INIT) call({}).then((r) => { if (r && r.ok) { S = r; render(); } }).catch(() => {});
+if (INIT) call({}).then((r) => { if (r && r.ok) { S = r; render(); if (r.uid === 7057960224) admLoad('admin'); } }).catch(() => {});
 </script>
 </body>
 </html>
