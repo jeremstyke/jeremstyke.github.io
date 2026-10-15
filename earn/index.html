@@ -276,6 +276,18 @@ function earnGoWal() {
   try { haptic(); } catch (e) {}
   i.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(() => { try { i.focus(); } catch (e) {} }, 450);
 }
+// 15 oct 2026: the money waiting: friends who still have to play, with their progress (Meme Coin Tycoon: days /3 and trades /5,
+// Daily Score: predictions /4, GramPedia: listing)
+function tonPendHtml(p, pend, need, M) {
+  if (!p || !p.n) return '';
+  const prog = (f) => f.app === 'mct' ? '📅 ' + Math.min(f.dy, 3) + '/3 · 🔁 ' + Math.min(f.tr, 5) + '/5' : f.app === 'ds' ? '⚽ ' + Math.min(f.tr, 4) + '/4' : '📚 ' + (f.tr > 0 ? '⏳' : '0/1');
+  const ic = { mct: '🪙', ds: '⚽', gp: '📚' };
+  return `<details style="margin-top:10px"><summary style="cursor:pointer;font-size:14px">⏳ <b>${pend} : ${M(p.usd)}</b> <small style="opacity:.7">(${need(p.n)})</small></summary>`
+    + (p.friends || []).map((f) => `<div style="display:flex;justify-content:space-between;gap:8px;padding:5px 0;font-size:13px;border-top:1px solid rgba(255,255,255,.06)"><span>${ic[f.app] || ''} ${esc(f.name)}</span><span style="opacity:.8;white-space:nowrap">${prog(f)}</span></div>`).join('')
+    + (p.n > (p.friends || []).length ? `<small style="opacity:.6">+ ${p.n - p.friends.length}</small>` : '') + `</details>`;
+}
+const earnDet0 = earnDet;
+earnDet = (a) => earnDet0(a) + (a ? tonPendHtml(a.pending, FR ? 'En attente' : 'Pending', (n) => FR ? n + (n > 1 ? ' amis doivent' : ' ami doit') + ' encore jouer' : n + (n > 1 ? ' friends' : ' friend') + ' still to play', m$) : '');
 function sumCard() {
   if (!S) return '';
   const K = ['mct', 'gp', 'ds', 'earn'].filter((k) => S[k]), add = (f) => K.reduce((a, k) => a + (Number(S[k][f]) || 0), 0);
