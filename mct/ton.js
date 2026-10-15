@@ -13,8 +13,11 @@ async function tonCall(body) {
   return r.json();
 }
 let TONON = null; // one status call per session, shared by every caller
+// 15 oct 2026: the last status, for the amounts shown on the home banner
+let TONLAST = null;
+const tonMini = (s) => '✅ ' + tonM(s.balance) + (LANG === 'fr' ? ' validé' : ' validated') + ' · ⏳ ' + tonM(Number(s.pending || 0) * Number(s.usd || 0)) + (LANG === 'fr' ? ' en attente' : ' pending') + ' · 💸 ' + tonM(Number(s.paid || 0) + Number(s.waiting || 0)) + (LANG === 'fr' ? ' payé' : ' paid');
 function tonOn() {
-  if (!TONON) TONON = tonCall({}).then((s) => !!(s && s.ok && s.on)).catch(() => { TONON = null; return false; });
+  if (!TONON) TONON = tonCall({}).then((s) => { TONLAST = s; return !!(s && s.ok && s.on); }).catch(() => { TONON = null; return false; });
   return TONON;
 }
 function tonBack() { try { tw.BackButton.hide(); tw.BackButton.offClick(tonBack); } catch (e) {} if (VIEW === 'ton') go('market'); }
@@ -172,7 +175,7 @@ async function tonPage() {
 function tonButton() {
   const L = tonL(), b = document.createElement('button');
   b.className = 'row tonbtn'; b.style.cssText = 'border:1px solid #2ee6ff;border-radius:14px;width:100%;text-align:start;cursor:pointer;margin-bottom:10px';
-  b.innerHTML = `<span class="med sm" style="--c:#2ee6ff">💎</span><div class="who"><b style="white-space:normal">${L.bh}</b><small style="white-space:normal">${L.bs}</small></div><span class="chip up">TON</span>`;
+  b.innerHTML = `<span class="med sm" style="--c:#2ee6ff">💎</span><div class="who"><b style="white-space:normal">${L.bh}</b><small style="white-space:normal">${TONLAST && TONLAST.ok ? tonMini(TONLAST) : L.bs}</small></div><span class="chip up">TON</span>`;
   b.onclick = () => { haptic(); tonPage(); };
   return b;
 }
