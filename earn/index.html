@@ -324,7 +324,9 @@ function admPaint() {
   $('aref').onclick = () => { haptic(); admLoad('admin'); };
 }
 // 15 oct 2026: the app was too long: 4 tabs at the bottom. Earnings (balance, wallet, payment board), the diamond, the contest, the programs.
-let ETAB = (/^contest/.test(String((tw && tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '')) ? 'contest' : 'home');
+// 15 oct 2026: links ?startapp=tap_... (and the bot button ?tab=tap) open the diamond tab directly
+const ESP = String((tw && tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '') + ' ' + (new URLSearchParams(location.search).get('tab') || '');
+let ETAB = /(^|\s)contest/.test(ESP) ? 'contest' : /(^|\s)tap/.test(ESP) ? 'tap' : 'home';
 function tabOf(el, inList) {
   if (el.id === 'tapbox') return 'tap';
   if (/^🏆/.test((el.querySelector('.lbl') || {}).textContent || '')) return 'contest';
