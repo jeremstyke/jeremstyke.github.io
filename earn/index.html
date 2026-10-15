@@ -297,7 +297,7 @@ function conTab() {
     const left = Math.max(0, Math.round((Date.parse(c.ends) - Date.now()) / 36e5)), lt = left > 48 ? Math.round(left / 24) + ' ' + L.d : left + ' ' + L.h;
     const rows = top.map((x, i) => `<div class="rk${x.me ? ' me' : ''}"><span>${md[i] || (i + 1) + '.'} ${esc(x.name)}${x.me ? ' (' + esc(L.you) + ')' : ''}</span><span>${Number(x.n).toLocaleString(LG)} ${esc(L.taps)}${i < 3 && pz[i] ? ' · ' + money(pz[i]) : ''}</span></div>`).join('')
       || `<p class="what">${esc(L.nobody)}</p>`;
-    const me = c.me && c.me.rank ? `<p class="what" style="font-size:13px;margin:8px 0 0">${esc(L.rank)} : <b>#${c.me.rank}</b> · ${Number(c.me.n).toLocaleString(LG)} ${esc(L.week)}</p>` : `<p class="what" style="font-size:13px;margin:8px 0 0">${esc(L.cMin(Number(c.min).toLocaleString(LG)))}</p>`;
+    const me = c.me && c.me.rank ? `<p class="what" style="font-size:13px;margin:8px 0 0">${esc(L.rank)} : <b>#${c.me.rank}</b> · ${Number(c.me.n).toLocaleString(LG)} ${esc(L.week)}</p>` : (Number(c.min) > 1 ? `<p class="what" style="font-size:13px;margin:8px 0 0">${esc(L.cMin(Number(c.min).toLocaleString(LG)))}</p>` : '');
     h += `<section class="card" style="--c:#ffd43b"><div class="lbl">${L.cT}</div><p class="what" style="margin:0 0 8px">${esc(L.cX)} <b>${pz.map((x) => money(x)).join(' / ')}</b> ${esc(L.cTon)} ⏳ ${esc(L.left)} ${lt}</p>`
       + rows + me + `<button class="btn" id="cgo" style="margin-top:12px">💎 ${esc(L.tTap)}</button></section>`;
   }
