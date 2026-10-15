@@ -178,3 +178,75 @@
     return r;
   };
 })();
+
+// 15 oct 2026: every shared link earns the sharer TON. A coin shared carries the player's invite (c_<coin>_r_<id>): the friend gets $500,
+// the sharer $500 and $0.05 in TON when the friend plays. After each share, the player is told. A clear "Share" call on a coin's page,
+// and after a winning sale (+5 % or more, every 6 hours at most) a challenge to send to friends.
+(() => {
+  const TX = {
+    en: { told: '💎 Every friend who joins through your link earns you $0.05 in TON (and $500 for both of you in the game)', cta: (tk) => '📣 Share $' + tk + ': earn TON for each friend', win: (p, tk) => '📈 +' + p + '% on $' + tk + '!', wins: 'Challenge your friends: they get $500 to start, you earn $0.05 in TON for each one who plays.', go: '🔥 Challenge my friends', later: 'Later' },
+    fr: { told: '💎 Chaque ami qui rejoint avec ton lien te rapporte 0,05 $ en TON (et 500 $ chacun dans le jeu)', cta: (tk) => '📣 Partage $' + tk + ' : gagne des TON par ami', win: (p, tk) => '📈 +' + p + ' % sur $' + tk + ' !', wins: 'Défie tes amis : ils reçoivent 500 $ pour commencer, tu gagnes 0,05 $ en TON pour chaque ami qui joue.', go: '🔥 Défier mes amis', later: 'Plus tard' },
+  };
+  const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] || TX.en; };
+  const uid = () => { try { return ME && ME.uid; } catch (e) { return null; } };
+  const tell = () => setTimeout(() => { try { toast(L().told); } catch (e) {} }, 1200);
+  // 1. every share (invite, coin): the coin link carries the invite, and the player is told what he earns
+  try {
+    const orig = shareGame;
+    window.shareGame = async function (kind, id, url, text) {
+      if (kind === 'coin' && uid() && /startapp=c_\d+$/.test(String(url || ''))) url = url + '_r_' + uid();
+      const r = await orig.call(this, kind, id, url, text); tell(); return r;
+    };
+  } catch (e) {}
+  // 2. a shared coin link (c_<coin>_r_<id>) opens the coin
+  const sp = String((window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.start_param) || '');
+  const cm = /^c_(\d+)_r_\d+$/.exec(sp);
+  if (cm) { let n = 0; const w = setInterval(() => { n++; let ok = false; try { ok = !!ME && typeof openCoin === 'function' && !!document.querySelector('nav.tb'); } catch (e) {} if (ok) { clearInterval(w); try { openCoin(cm[1]); } catch (e) {} } if (n > 60) clearInterval(w); }, 250); }
+  // 3. a clear share call on a coin's page, under its header
+  function cta() {
+    const sh = document.getElementById('sh'); let c = null; try { c = COIN && COIN.coin; } catch (e) {}
+    if (!sh || !c || document.getElementById('shbig')) return;
+    const head = sh.closest('div'); if (!head || !head.parentNode) return;
+    const b = document.createElement('button'); b.id = 'shbig'; b.className = 'btn'; b.style.cssText = 'width:100%;margin:8px 0 4px;background:#ffd43b;color:#1a0638';
+    b.textContent = L().cta(c.ticker); b.onclick = () => sh.click();
+    head.parentNode.insertBefore(b, head.nextSibling);
+  }
+  let q = 0; new MutationObserver(() => { if (!q) q = requestAnimationFrame(() => { q = 0; cta(); }); }).observe(document.body, { childList: true, subtree: true });
+  // 4. after a winning sale: a challenge to send to friends
+  function winSheet(pct, tk) {
+    if (document.getElementById('winw')) return;
+    const T = L(), w = document.createElement('div'); w.id = 'winw';
+    w.style.cssText = 'position:fixed;inset:0;z-index:30;background:rgba(10,2,25,.6);display:flex;align-items:flex-end;justify-content:center';
+    w.innerHTML = `<div style="width:100%;max-width:560px;background:#2b0a57;border-radius:22px 22px 0 0;padding:20px 18px calc(22px + env(safe-area-inset-bottom));border-top:1px solid rgba(255,255,255,.12)"><h3 style="margin:0 0 6px;font-size:22px">${T.win(pct, tk)}</h3><p style="margin:0 0 16px;color:#b4a3d8;font-size:14px">${T.wins}</p><button class="btn" id="wingo" style="width:100%">${T.go}</button><button class="ghost" id="winno" style="display:block;width:100%;margin-top:10px;background:none;border:none;color:#b4a3d8">${T.later}</button></div>`;
+    document.body.appendChild(w);
+    const close = () => w.remove();
+    w.onclick = (e) => { if (e.target === w) close(); };
+    w.querySelector('#winno').onclick = close;
+    w.querySelector('#wingo').onclick = async () => {
+      try { haptic(); } catch (e) {} close();
+      try { api('ev', { k: 'win_share' }).catch(() => {}); } catch (e) {}
+      let done = false;
+      try { const r = await api('share', { kind: 'win', pct, ticker: tk }); if (r && r.id && tw && tw.shareMessage) { tw.shareMessage(r.id); done = true; } } catch (e) {}
+      if (!done) { const u = 'https://t.me/Memecointycoonbot?startapp=r_' + uid(); try { tw.openTelegramLink('https://t.me/share/url?url=' + encodeURIComponent(u) + '&text=' + encodeURIComponent(T.win(pct, tk))); } catch (e) {} }
+      tell();
+    };
+  }
+  const of = window.fetch;
+  window.fetch = async function (u, o) {
+    const r = await of.apply(this, arguments);
+    try {
+      if (String(u).indexOf('/mct/api') >= 0 && o && typeof o.body === 'string' && o.body.indexOf('"action":"sell"') >= 0) {
+        r.clone().json().then((j) => {
+          if (!j || !j.ok || !(Number(j.cost) > 0) || !(Number(j.pnl) > 0)) return;
+          const pct = Math.round(Number(j.pnl) / Number(j.cost) * 100); if (pct < 5) return;
+          let last = 0; try { last = Number(localStorage.getItem('mct_win_at') || 0); } catch (e) {}
+          if (Date.now() - last < 6 * 36e5) return;
+          try { localStorage.setItem('mct_win_at', String(Date.now())); } catch (e) {}
+          let tk = ''; try { tk = COIN.coin.ticker; } catch (e) {}
+          setTimeout(() => winSheet(pct, tk || 'COIN'), 3400);
+        }).catch(() => {});
+      }
+    } catch (e) {}
+    return r;
+  };
+})();
