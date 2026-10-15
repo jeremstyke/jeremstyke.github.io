@@ -147,7 +147,7 @@ function render() {
   // the shared TON wallet
   if (S) {
     const w = S.wallet, ed = EDIT || !w;
-    $('wal').innerHTML = sumCard() + contestCard() + `<section class="card" style="--c:#b18cff"><div class="lbl">${X.w}</div><p class="what" style="margin:0 0 10px">${X.wh}</p>`
+    $('wal').innerHTML = sumCard() + tapSlot() + contestCard() + `<section class="card" style="--c:#b18cff"><div class="lbl">${X.w}</div><p class="what" style="margin:0 0 10px">${X.wh}</p>`
       + (ed ? `<div class="wal"><input id="wa" placeholder="${X.ph}" value="${esc(w || '')}" autocomplete="off" spellcheck="false"><button class="btn" id="ws">${X.save}</button></div>`
         : `<div class="head" style="justify-content:space-between"><span class="addr">${esc(w)}</span><button class="ghost" id="wc" style="width:auto;padding:8px 12px">${X.chg}</button></div>`)
       + `<p class="what" style="margin:10px 0 0;font-size:13px">${S.mct && S.mct.total != null ? (FR ? 'Solde total : ' : 'Total balance: ') + '<b>' + m$(S.mct.total) + '</b> · ' : ''}${X.paid}</p></section>`;
@@ -197,6 +197,58 @@ function gate(again) {
   $('gc').onclick = async () => { haptic(); $('gc').disabled = true; let r; try { r = await call({}); } catch (e) { r = null; } if (r && r.ok) { S = r; if (r.joined === false) toast(X.g5); render(); } else $('gc').disabled = false; };
 }
 // 15 oct 2026: "My earnings" at the top: the total of all programs, friends validated and pending, what was received, and the progress to the payout
+// 15 oct 2026: Tap & Earn (beta): tap the diamond, 0.01 $ in TON every 5000 taps, credited every night to the TON balance.
+// Taps are sent by batches every second; the server limits the speed and asks a human check every 250 taps. The diamond moves every 50 taps.
+let TP = null, TQ = 0, TBUSY = false, TPOS = { x: 50, y: 50 }, TCOUNT = 0, TTIMER = null;
+function tapSlot() { if (!S || !S.tap || !S.tap.on) return ''; if (!TP) TP = S.tap; setTimeout(tapPaint, 0); return '<div id="tapbox"></div>'; }
+function tapUsd() { const tpc = TP.tpc || 5000; return (Number(TP.pending_taps) + TQ) / tpc * 0.01; }
+function tapNums() {
+  const tpc = TP.tpc || 5000, pend = Number(TP.pending_taps) + TQ, pct = Math.min(100, (pend % tpc) / tpc * 100);
+  const u = $('tapusd'), b = $('tapbar'), n = $('tapn');
+  if (u) u.textContent = (FR ? '' : '$') + tapUsd().toFixed(5).replace('.', FR ? ',' : '.') + (FR ? ' $' : '');
+  if (b) b.style.width = pct.toFixed(1) + '%';
+  if (n) n.textContent = (FR ? 'Aujourd\'hui : ' : 'Today: ') + (Number(TP.today) + TQ).toLocaleString(FR ? 'fr-FR' : 'en-US') + ' taps';
+}
+function tapPaint() {
+  const el = $('tapbox'); if (!el || !TP) return;
+  const tpc = TP.tpc || 5000, ck = TP.check, paused = TP.paused;
+  el.innerHTML = `<section class="card" style="--c:#2ee6ff"><div class="lbl">💎 Tap & Earn <span class="badge">beta</span></div>`
+    + `<p class="what" style="margin:0 0 6px">${FR ? 'Tape sur le diamant : ' + tpc.toLocaleString('fr-FR') + ' taps = 0,01 $ en TON, sans limite.' : 'Tap the diamond: ' + tpc.toLocaleString('en-US') + ' taps = $0.01 in TON, no limit.'}</p>`
+    + `<div style="font-size:28px;font-weight:800;margin:4px 0" id="tapusd"></div>`
+    + `<div style="height:8px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden;margin:0 0 4px"><i id="tapbar" style="display:block;height:100%;width:0;background:#2ee6ff;transition:width .15s"></i></div>`
+    + `<div class="what" style="font-size:13px;margin:0 0 8px" id="tapn"></div>`
+    + `<div id="taparea" style="position:relative;height:210px;border-radius:16px;background:rgba(46,230,255,.06);overflow:hidden;touch-action:manipulation;user-select:none;-webkit-user-select:none">`
+    + (paused ? `<div style="position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:16px" class="what">${FR ? '⏸️ Le diamant est en pause jusqu\'au mois prochain (budget atteint).' : '⏸️ The diamond is paused until next month (budget reached).'}</div>`
+      : ck ? `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px"><b>${FR ? 'Petit test : touche le 💎' : 'Quick check: tap the 💎'}</b><div style="display:flex;gap:12px">${ck.map((e, i) => `<button class="ghost" data-tck="${i + 1}" style="width:auto;font-size:30px;padding:8px 14px">${e}</button>`).join('')}</div></div>`
+      : `<button id="tapgem" aria-label="Tap" style="position:absolute;left:${TPOS.x}%;top:${TPOS.y}%;transform:translate(-50%,-50%);width:110px;height:110px;border-radius:50%;border:0;background:radial-gradient(circle at 35% 30%,#bff6ff,#2ee6ff 45%,#0b6c80);font-size:58px;cursor:pointer;box-shadow:0 10px 30px rgba(46,230,255,.35);transition:left .25s,top .25s">💎</button>`)
+    + `</div><p class="what" style="font-size:12px;margin:8px 0 0">${FR ? 'Crédité chaque nuit sur ton solde, payé le lundi avec le reste. Ton parrain gagne 10 % en plus, offert (rien n\'est retiré de tes gains).' : 'Credited every night to your balance, paid on Monday with the rest. Your sponsor earns 10% on top, as a gift (nothing is taken from you).'}</p></section>`;
+  tapNums();
+  const g = $('tapgem');
+  if (g) g.onpointerdown = (ev) => {
+    ev.preventDefault(); TQ++; TCOUNT++;
+    g.style.transform = 'translate(-50%,-50%) scale(.9)'; setTimeout(() => { if (g) g.style.transform = 'translate(-50%,-50%)'; }, 70);
+    if (TCOUNT % 10 === 0) haptic();
+    if (TCOUNT % 50 === 0) { TPOS = { x: 20 + Math.random() * 60, y: 25 + Math.random() * 50 }; g.style.left = TPOS.x + '%'; g.style.top = TPOS.y + '%'; }
+    tapNums();
+    if (!TTIMER) TTIMER = setTimeout(tapFlush, 1000);
+  };
+  el.querySelectorAll('[data-tck]').forEach((b) => b.onclick = async () => {
+    haptic(); let r = null; try { r = await call({ action: 'tap_check', a: Number(b.dataset.tck) }); } catch (e) {}
+    if (r && r.state) TP = r.state; if (r && !r.ok) toast(FR ? '❌ Raté, réessaie' : '❌ Wrong, try again');
+    tapPaint();
+  });
+}
+async function tapFlush() {
+  TTIMER = null; if (TBUSY || !TQ) return; TBUSY = true;
+  const n = TQ; TQ = 0; let r = null;
+  try { r = await call({ action: 'tap', n }); } catch (e) {}
+  TBUSY = false;
+  if (r && r.state) { TP = r.state; } else if (!r) { TQ += n; }
+  if (r && r.error === 'check') { TQ = 0; }
+  if (r && (r.state && (r.state.check || r.state.paused)) || (r && r.error === 'off')) { if (r.error === 'off') TP.on = false; tapPaint(); return; }
+  tapNums();
+  if (TQ && !TTIMER) TTIMER = setTimeout(tapFlush, 1000);
+}
 // 15 oct 2026: the weekly referral contest (top inviters win TON on Monday) and the last payouts (proof that people get paid)
 function contestCard() {
   const c = S && S.contest; if (!c || !c.on) return '';
