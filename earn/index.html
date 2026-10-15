@@ -306,6 +306,32 @@ function admPaint() {
   $('arun').onclick = () => { haptic('medium'); admLoad('admin_run').then(() => toast('📋 Liste prête, envoyée aussi par le bot')); };
   $('aref').onclick = () => { haptic(); admLoad('admin'); };
 }
+// 15 oct 2026: the app was too long: 4 tabs at the bottom. Earnings (balance, wallet, payment board), the diamond, the contest, the programs.
+let ETAB = (/^contest/.test(String((tw && tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '')) ? 'contest' : 'home');
+function tabOf(el, inList) {
+  if (el.id === 'tapbox') return 'tap';
+  if (/^🏆/.test((el.querySelector('.lbl') || {}).textContent || '')) return 'contest';
+  if (!inList) return 'home';
+  if (el.id === 'adm' || el.querySelector('[data-join]')) return 'home';
+  return 'progs';
+}
+function applyTab() {
+  if (!S) { ['wal', 'list'].forEach((id) => { const box = $(id); if (box) [...box.children].forEach((el) => { el.style.display = ''; }); }); return; }
+  [['wal', false], ['list', true]].forEach(([id, inList]) => { const box = $(id); if (box) [...box.children].forEach((el) => { el.style.display = tabOf(el, inList) === ETAB ? '' : 'none'; }); });
+  let nav = $('etabs');
+  if (!nav) {
+    nav = document.createElement('nav'); nav.id = 'etabs';
+    nav.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(4,1fr);background:rgba(14,10,30,.96);border-top:1px solid rgba(255,255,255,.1);padding:6px 6px calc(6px + env(safe-area-inset-bottom));backdrop-filter:blur(8px)';
+    document.body.appendChild(nav); document.body.style.paddingBottom = '84px';
+  }
+  const T = [['home', '💰', FR ? 'Gains' : 'Earnings'], ['tap', '💎', 'Tap'], ['contest', '🏆', FR ? 'Concours' : 'Contest'], ['progs', '🔗', FR ? 'Programmes' : 'Programs']]
+    .filter(([k]) => k !== 'tap' || (S && S.tap && S.tap.on)).filter(([k]) => k !== 'contest' || (S && S.contest && S.contest.on));
+  nav.style.gridTemplateColumns = `repeat(${T.length},1fr)`;
+  nav.innerHTML = T.map(([k, e, l]) => `<button data-et="${k}" style="background:none;border:0;color:${k === ETAB ? '#fff' : 'rgba(255,255,255,.55)'};font:600 12px system-ui;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;cursor:pointer"><span style="font-size:22px">${e}</span>${l}</button>`).join('');
+  nav.querySelectorAll('[data-et]').forEach((b) => b.onclick = () => { haptic(); ETAB = b.dataset.et; applyTab(); window.scrollTo(0, 0); });
+}
+const renderBase = render;
+render = function () { renderBase.apply(this, arguments); applyTab(); };
 render();
 if (INIT) call({}).then((r) => { if (r && r.ok) { S = r; render(); if (r.uid === 7057960224) admLoad('admin'); askWrite(); } }).catch(() => {});
 // 15 oct 2026: Telegram's own "allow messages from the bot" request, so Earn can tell people when they earn or get paid
