@@ -207,7 +207,7 @@ function contestCard() {
   const me = c.me && c.me.rank ? `<p class="what" style="font-size:13px;margin:8px 0 0">${FR ? 'Ta place : ' : 'Your rank: '}<b>#${c.me.rank}</b> · ${c.me.n} ${FR ? 'ami(s) cette semaine' : 'friend(s) this week'}</p>` : `<p class="what" style="font-size:13px;margin:8px 0 0">${FR ? 'Invite au moins ' + c.min + ' amis cette semaine pour entrer dans le classement.' : 'Invite at least ' + c.min + ' friends this week to enter the ranking.'}</p>`;
   const pays = (c.payouts || []).slice(0, 5).map((p) => `<div style="display:flex;justify-content:space-between;font-size:13px;padding:4px 0"><span>✅ ${esc(p.name)}</span><span>${Number(p.ton).toFixed(3)} TON · ${new Date(p.at).toLocaleDateString(FR ? 'fr-FR' : 'en-GB')}</span></div>`).join('');
   return `<section class="card" style="--c:#ffd43b"><div class="lbl">🏆 ${FR ? 'Concours de parrainage de la semaine' : 'Referral contest of the week'}</div>`
-    + `<p class="what" style="margin:0 0 8px">${FR ? 'Les 3 meilleurs parrains gagnent ' : 'The top 3 inviters win '}<b>${pz.map((x) => m$(x)).join(' / ')}</b> ${FR ? 'en TON lundi' : 'in TON on Monday'} · ⏳ ${lt}</p>`
+    + `<p class="what" style="margin:0 0 8px">${FR ? 'Les 3 meilleurs parrains gagnent ' : 'The top 3 inviters win '}<b>${pz.map((x) => m$(x)).join(' / ')}</b> ${FR ? 'en TON lundi, <b>en plus</b> de tes 0,05 $ par ami' : 'in TON on Monday, <b>on top of</b> your $0.05 per friend'} · ⏳ ${lt}</p>`
     + rows + me + (pays ? `<div class="lbl" style="margin-top:14px">💸 ${FR ? 'Derniers paiements' : 'Latest payouts'}</div>` + pays : '') + `</section>`;
 }
 function sumCard() {
