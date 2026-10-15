@@ -339,7 +339,7 @@ render = function () { renderBase.apply(this, arguments); applyTab(); };
   const css = document.createElement('style');
   css.textContent = '#list .card.mini .what,#list .card.mini .push,#list .card.mini .lbl,#list .card.mini .link,#list .card.mini .stats,#list .card.mini .warn,#list .card.mini details,#list .card.mini .ghost[data-open]{display:none}'
     + '#list .card.mini{padding-top:12px;padding-bottom:12px}#list .card.mini .row2{margin:10px 0 0}#list .card.mini .btn[data-open]{margin-top:10px}'
-    + '#list .card.mini.ext .what{display:block;margin:8px 0 0;font-size:13px}#list .card .head{cursor:pointer;position:relative}#list .card .head::after{content:"▾";position:absolute;right:0;top:4px;opacity:.5;transition:transform .2s}#list .card:not(.mini) .head::after{transform:rotate(180deg)}';
+    + '#list .card.mini.ext .btn[data-open]{display:none}#list .card .head{cursor:pointer;position:relative}#list .card .head::after{content:"▾";position:absolute;right:0;top:4px;opacity:.5;transition:transform .2s}#list .card:not(.mini) .head::after{transform:rotate(180deg)}';
   document.head.appendChild(css);
 })();
 const EOPEN = {};
