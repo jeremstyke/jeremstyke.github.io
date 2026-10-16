@@ -1,196 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Earn by Jeremstyke - Earn real TON on Telegram</title>
-<meta name="description" content="Earn real TON on Telegram by inviting friends to free games and apps. $0.05 per friend, no limit, paid every Monday from $0.10. By @jeremstyke.">
-<link rel="canonical" href="https://jeremstyke.github.io/earn-by-jeremstyke/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Earn by Jeremstyke - Earn real TON on Telegram">
-<meta property="og:description" content="Invite friends to free Telegram games and apps. $0.05 in TON per friend, no limit, paid every Monday from $0.10.">
-<meta property="og:url" content="https://jeremstyke.github.io/earn-by-jeremstyke/">
-<meta name="twitter:card" content="summary">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Earn by Jeremstyke","url":"https://jeremstyke.github.io/earn-by-jeremstyke/","author":{"@type":"Person","name":"Jeremstyke","url":"https://t.me/jeremstyke"}}</script>
-<style>
-:root{--bg:#07110f;--ink:#eafff6;--mute:#8fb3a6;--line:rgba(234,255,246,.12);--card:#0e1c19;--mint:#4ff0b7;--ton:#2ee6ff;--gold:#ffd43b}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:inherit}
-.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
-h1,h2,h3{font-family:"Space Grotesk",system-ui,sans-serif;line-height:1.1;margin:0}
-nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
-.logo{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:18px;text-decoration:none}
-.logo b{color:var(--mint)}
-.lang{border:1px solid var(--line);background:none;color:var(--mute);border-radius:99px;padding:6px 12px;font:600 13px Inter,sans-serif;cursor:pointer}
-.hero{padding:56px 0 40px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
-.kicker{display:inline-block;color:var(--mint);font:600 13px Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
-.hero h1{font-size:clamp(40px,7vw,72px);letter-spacing:-.02em}
-.hero h1 em{font-style:normal;color:var(--mint)}
-.hero p{color:var(--mute);font-size:18px;max-width:520px;margin:18px 0 28px}
-.cta{display:inline-flex;align-items:center;gap:10px;background:var(--mint);color:#04140f;font:700 17px "Space Grotesk",sans-serif;padding:16px 26px;border-radius:14px;text-decoration:none;transition:transform .15s}
-.cta:hover{transform:translateY(-2px)}
-.sub{display:block;color:var(--mute);font-size:13px;margin-top:12px}
-.coin{aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#7af6cf 0,#2cc791 35%,#0f5c49 70%,#06231c 100%);display:grid;place-items:center;box-shadow:0 30px 80px rgba(79,240,183,.18),inset 0 -12px 30px rgba(0,0,0,.35);position:relative}
-.coin span{font:700 clamp(48px,9vw,96px) "Space Grotesk",sans-serif;color:#04140f}
-.coin small{position:absolute;bottom:22%;font:600 14px Inter,sans-serif;color:#04140f;opacity:.75}
-.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin:8px 0 72px}
-.fact{background:var(--card);padding:20px}
-.fact b{display:block;font:700 26px "Space Grotesk",sans-serif;color:var(--mint)}
-.fact span{color:var(--mute);font-size:14px}
-section{margin:0 0 80px}
-section>h2{font-size:clamp(28px,4vw,40px);margin-bottom:10px}
-section>p.lead{color:var(--mute);margin:0 0 28px;max-width:600px}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:s}
-.step{border-top:2px solid var(--mint);padding-top:16px}
-.step::before{counter-increment:s;content:"0" counter(s);font:700 14px "Space Grotesk",sans-serif;color:var(--mint)}
-.step h3{font-size:19px;margin:8px 0 6px}
-.step p{color:var(--mute);margin:0;font-size:15px}
-.progs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.prog{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column}
-.prog .i{font-size:30px}
-.prog h3{font-size:20px;margin:10px 0 4px}
-.prog .pay{color:var(--gold);font-weight:600;font-size:15px;margin-bottom:8px}
-.prog p{color:var(--mute);font-size:15px;margin:0 0 16px;flex:1}
-.prog a{color:var(--mint);font-weight:600;text-decoration:none;font-size:15px}
-.prog.ton{border-color:rgba(79,240,183,.35)}
-.pay-box{background:linear-gradient(135deg,rgba(46,230,255,.12),rgba(79,240,183,.08));border:1px solid rgba(46,230,255,.3);border-radius:22px;padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
-.pay-box h2{font-size:clamp(26px,3.6vw,36px);margin-bottom:12px}
-.pay-box ul{margin:0;padding:0;list-style:none}
-.pay-box li{padding:10px 0;border-bottom:1px solid var(--line);color:var(--ink)}
-.pay-box li:last-child{border:0}
-.pay-box li b{color:var(--ton)}
-details{border-bottom:1px solid var(--line);padding:16px 0}
-summary{cursor:pointer;font-weight:600;font-size:17px;list-style:none}
-summary::after{content:"+";float:right;color:var(--mint)}
-details[open] summary::after{content:"-"}
-details p{color:var(--mute);margin:10px 0 0}
-.final{text-align:center;padding:56px 20px;background:var(--card);border:1px solid var(--line);border-radius:24px}
-.final h2{font-size:clamp(28px,4.5vw,44px);margin-bottom:14px}
-.final p{color:var(--mute);margin:0 auto 26px;max-width:480px}
-footer{color:var(--mute);font-size:14px;padding:28px 0 44px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line)}
-footer a{color:var(--mint);text-decoration:none}
-@media (max-width:820px){.hero{grid-template-columns:1fr;padding-top:28px}.coin{width:200px;margin:0 auto;order:-1}.coin span{font-size:52px}.facts{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.progs{grid-template-columns:1fr}.pay-box{grid-template-columns:1fr;padding:24px}}
-@media (max-width:420px){.steps{grid-template-columns:1fr}}
-</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Earn by Jeremstyke is now in Meme Coin Tycoon</title>
+<meta name="description" content="Earn by Jeremstyke moved to Meme Coin Tycoon: tap the diamond at the top of the game and earn real TON, paid every Monday.">
+<link rel="canonical" href="https://jeremstyke.github.io/memecointycoon/">
+<meta http-equiv="refresh" content="3;url=https://t.me/Memecointycoonbot?startapp=src_dia_earnpage">
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0b1020;color:#eef2ff;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;text-align:center;padding:24px;box-sizing:border-box}
+a{display:inline-block;margin-top:18px;background:#2ee6ff;color:#062a33;font-weight:800;text-decoration:none;padding:14px 22px;border-radius:14px}p{color:#9aa4c7;max-width:420px;margin:10px auto}</style>
 </head>
 <body>
-<div class="wrap">
-<nav><a class="logo" href="#">💰 Earn <b>by Jeremstyke</b></a><button class="lang" id="lang">FR</button></nav>
-
-<header class="hero">
-  <div>
-    <span class="kicker" data-t="kicker">Telegram affiliate programs</span>
-    <h1 data-t="h1" data-html>Invite friends.<br><em>Earn real TON.</em></h1>
-    <p data-t="lead">Share free Telegram games and apps with your friends. Every friend who really plays earns you $0.05 in TON, with no limit. All your programs, one wallet, one place.</p>
-    <a class="cta" href="https://t.me/earnbyjeremstykebot?startapp=site"><span data-t="cta">Start earning on Telegram</span> →</a>
-    <span class="sub" data-t="free">Free. No deposit, no investment.</span>
-  </div>
-  <div class="coin" aria-hidden="true"><span>TON</span><small>$0.05 / friend</small></div>
-</header>
-
-<div class="facts">
-  <div class="fact"><b>$0.05</b><span data-t="f1">in TON per valid friend</span></div>
-  <div class="fact"><b>$0.10</b><span data-t="f2">minimum payout</span></div>
-  <div class="fact"><b data-t="f3v">Monday</b><span data-t="f3">payouts every week</span></div>
-  <div class="fact"><b>0 $</b><span data-t="f4">to start, ever</span></div>
-</div>
-
-<section>
-  <h2 data-t="howh">How it works</h2>
-  <p class="lead" data-t="howl">Four steps, all inside Telegram.</p>
-  <div class="steps">
-    <div class="step"><h3 data-t="s1h">Open Earn</h3><p data-t="s1">Open the Earn by Jeremstyke mini app on Telegram. Your personal links are ready.</p></div>
-    <div class="step"><h3 data-t="s2h">Share your links</h3><p data-t="s2">Send them to friends, groups and channels. Copy or share in one tap.</p></div>
-    <div class="step"><h3 data-t="s3h">Friends play</h3><p data-t="s3">A friend counts once he really plays. Fake accounts are never paid.</p></div>
-    <div class="step"><h3 data-t="s4h">Get paid in TON</h3><p data-t="s4">Add your TON wallet once. Paid every Monday from $0.10.</p></div>
-  </div>
-</section>
-
-<section>
-  <h2 data-t="progh">The programs</h2>
-  <p class="lead" data-t="progl">Free games and apps your friends will actually enjoy. One balance for all of them.</p>
-  <div class="progs">
-    <div class="prog ton"><div class="i">🚀</div><h3>Meme Coin Tycoon</h3><div class="pay" data-t="p1p">$0.05 in TON per friend who plays</div><p data-t="p1">A free memecoin trading game with virtual money. Launch your coin, mine, climb the leaderboard. Your friend gets $500 in the game too.</p><a href="https://t.me/earnbyjeremstykebot?startapp=site_mct" data-t="go">Get my link →</a></div>
-    <div class="prog ton"><div class="i">⚽</div><h3>Daily Score</h3><div class="pay" data-t="p2p">$0.05 in TON per friend who makes 4 predictions</div><p data-t="p2">One big football match a day. Guess the score, beat your friends, climb the ranking.</p><a href="https://t.me/earnbyjeremstykebot?startapp=site_ds" data-t="go">Get my link →</a></div>
-    <div class="prog ton"><div class="i">📚</div><h3>GramPedia</h3><div class="pay" data-t="p3p">$0.05 in TON per friend who lists his project</div><p data-t="p3">The directory of Telegram channels, groups, bots and mini apps. Free listing for channel owners, more subscribers for them.</p><a href="https://t.me/earnbyjeremstykebot?startapp=site_gp" data-t="go">Get my link →</a></div>
-    <div class="prog ton"><div class="i">🔁</div><h3 data-t="p4h">Share Earn</h3><div class="pay" data-t="p4p">10% of their commissions</div><p data-t="p4">Invite people to Earn itself. Each time someone you brought earns a commission, you get 10% on top.</p><a href="https://t.me/earnbyjeremstykebot?startapp=site_earn" data-t="go">Get my link →</a></div>
-    <div class="prog"><div class="i">📢</div><h3>InsideAds</h3><div class="pay" data-t="p5p">10% of your referrals' earnings, for life</div><p data-t="p5">The Telegram ad network: channel owners earn by posting ads, advertisers buy promotion.</p><a href="https://t.me/earnbyjeremstykebot?startapp=site_ia" data-t="go2">See in Earn →</a></div>
-    <div class="prog"><div class="i">🌌</div><h3>Ads Galaxy</h3><div class="pay" data-t="p6p">Up to $0.015 in USDT per referral + sprints</div><p data-t="p6">A Telegram promotion platform. Daily and monthly sprints reward the best inviters with extra prizes.</p><a href="https://t.me/earnbyjeremstykebot?startapp=site_agx" data-t="go2">See in Earn →</a></div>
-  </div>
-</section>
-
-<section>
-  <div class="pay-box">
-    <div><h2 data-t="payh">Paid in real TON, every Monday</h2><p style="color:var(--mute);margin:0" data-t="payl">Your earnings from all TON programs add up into one balance. Paste your TON wallet once in the app and you are set.</p></div>
-    <ul>
-      <li data-t="pl1" data-html>Payout from <b>$0.10</b> in total</li>
-      <li data-t="pl2" data-html><b>Every Monday</b>, straight to your TON wallet</li>
-      <li data-t="pl3" data-html>Converted at the <b>TON price of the day</b></li>
-      <li data-t="pl4" data-html>Any TON wallet: <b>Tonkeeper, Telegram Wallet...</b></li>
-    </ul>
-  </div>
-</section>
-
-<section>
-  <h2 data-t="faqh">Questions</h2>
-  <details><summary data-t="q1">Is it really free?</summary><p data-t="a1">Yes. You never pay anything. The games and apps are free for your friends too.</p></details>
-  <details><summary data-t="q2">When does a friend count?</summary><p data-t="a2">When he really uses the program: plays Meme Coin Tycoon on a second day, makes 4 predictions on Daily Score, or gets his project approved on GramPedia.</p></details>
-  <details><summary data-t="q3">How and when am I paid?</summary><p data-t="a3">Every Monday, in TON, to the wallet you saved in Earn, as soon as your total reaches $0.10.</p></details>
-  <details><summary data-t="q4">Can I invite myself or use fake accounts?</summary><p data-t="a4">No. Self-referrals, fake accounts and bots are refused and never paid.</p></details>
-  <details><summary data-t="q5">Who is behind Earn?</summary><p data-t="a5" data-html>Jeremstyke, an independent developer who makes Telegram games and apps. Questions? Write to me on <a href="https://t.me/jeremstyke?direct">t.me/jeremstyke</a>.</p></details>
-</section>
-
-<section class="final">
-  <h2 data-t="finh">Your first TON is two friends away</h2>
-  <p data-t="finl">Open Earn, copy your link, share it. That's it.</p>
-  <a class="cta" href="https://t.me/earnbyjeremstykebot?startapp=site"><span data-t="cta">Start earning on Telegram</span> →</a>
-</section>
-
-<footer><span>💰 Earn by Jeremstyke · by <a href="https://t.me/jeremstyke">@jeremstyke</a></span><span><a href="https://t.me/jeremstyke?direct" data-t="contact">Contact</a></span></footer>
-</div>
-<script>
-const FRT = {
-  kicker: 'Programmes d\'affiliation Telegram', h1: 'Invite tes amis.<br><em>Gagne de vrais TON.</em>',
-  lead: 'Partage des jeux et apps Telegram gratuits avec tes amis. Chaque ami qui joue vraiment te rapporte 0,05 $ en TON, sans limite. Tous tes programmes, un portefeuille, un seul endroit.',
-  cta: 'Commencer à gagner sur Telegram', free: 'Gratuit. Aucun dépôt, aucun investissement.',
-  f1: 'en TON par ami validé', f2: 'paiement minimum', f3v: 'Lundi', f3: 'paiement chaque semaine', f4: 'pour commencer, jamais',
-  howh: 'Comment ça marche', howl: 'Quatre étapes, tout dans Telegram.',
-  s1h: 'Ouvre Earn', s1: 'Ouvre la mini app Earn by Jeremstyke sur Telegram. Tes liens perso sont prêts.',
-  s2h: 'Partage tes liens', s2: 'Envoie-les à tes amis, dans des groupes et des chaînes. Copie ou partage en un geste.',
-  s3h: 'Tes amis jouent', s3: 'Un ami compte quand il joue vraiment. Les faux comptes ne sont jamais payés.',
-  s4h: 'Reçois tes TON', s4: 'Ajoute ton portefeuille TON une fois. Paiement chaque lundi dès 0,10 $.',
-  progh: 'Les programmes', progl: 'Des jeux et apps gratuits que tes amis vont vraiment aimer. Un seul solde pour tout.',
-  p1p: '0,05 $ en TON par ami qui joue', p1: 'Un jeu gratuit de trading de memecoins avec de l\'argent virtuel. Lance ton coin, mine, grimpe au classement. Ton ami reçoit aussi 500 $ dans le jeu.',
-  p2p: '0,05 $ en TON par ami qui fait 4 pronos', p2: 'Un grand match de foot par jour. Devine le score, bats tes amis, grimpe au classement.',
-  p3p: '0,05 $ en TON par ami qui ajoute son projet', p3: 'L\'annuaire des chaînes, groupes, bots et mini apps Telegram. Fiche gratuite pour les propriétaires, plus d\'abonnés pour eux.',
-  p4h: 'Partage Earn', p4p: '10 % de leurs commissions', p4: 'Invite des gens sur Earn. À chaque commission gagnée par quelqu\'un que tu as amené, tu touches 10 % en plus.',
-  p5p: '10 % des gains de tes filleuls, à vie', p5: 'La régie pub de Telegram : les propriétaires de chaînes gagnent en publiant des pubs, les annonceurs achètent de la promo.',
-  p6p: 'Jusqu\'à 0,015 $ en USDT par filleul + sprints', p6: 'Une plateforme de promotion Telegram. Des sprints quotidiens et mensuels récompensent les meilleurs parrains.',
-  go: 'Obtenir mon lien →', go2: 'Voir dans Earn →',
-  payh: 'Payé en vrais TON, chaque lundi', payl: 'Tes gains de tous les programmes TON s\'additionnent dans un seul solde. Colle ton portefeuille TON une fois dans l\'app et c\'est réglé.',
-  pl1: 'Paiement dès <b>0,10 $</b> au total', pl2: '<b>Chaque lundi</b>, directement sur ton portefeuille TON', pl3: 'Converti au <b>cours du TON du jour</b>', pl4: 'Tout portefeuille TON : <b>Tonkeeper, Wallet de Telegram...</b>',
-  faqh: 'Questions', q1: 'C\'est vraiment gratuit ?', a1: 'Oui. Tu ne paies jamais rien. Les jeux et apps sont gratuits pour tes amis aussi.',
-  q2: 'Quand un ami compte-t-il ?', a2: 'Quand il utilise vraiment le programme : joue à Meme Coin Tycoon un deuxième jour, fait 4 pronos sur Daily Score, ou fait approuver son projet sur GramPedia.',
-  q3: 'Comment et quand suis-je payé ?', a3: 'Chaque lundi, en TON, sur le portefeuille enregistré dans Earn, dès que ton total atteint 0,10 $.',
-  q4: 'Je peux m\'inviter moi-même ou utiliser de faux comptes ?', a4: 'Non. Les auto-parrainages, faux comptes et bots sont refusés et ne sont jamais payés.',
-  q5: 'Qui est derrière Earn ?', a5: 'Jeremstyke, un développeur indépendant qui crée des jeux et apps Telegram. Une question ? Écris-moi sur <a href="https://t.me/jeremstyke?direct">t.me/jeremstyke</a>.',
-  finh: 'Tes premiers TON sont à deux amis', finl: 'Ouvre Earn, copie ton lien, partage-le. C\'est tout.', contact: 'Contact'
-};
-const EN = {}; document.querySelectorAll('[data-t]').forEach((e) => { EN[e.dataset.t] = e.innerHTML; });
-let fr = false;
-function apply() {
-  document.documentElement.lang = fr ? 'fr' : 'en';
-  document.querySelectorAll('[data-t]').forEach((e) => { const v = (fr ? FRT : EN)[e.dataset.t]; if (v != null) e.innerHTML = v; });
-  document.getElementById('lang').textContent = fr ? 'EN' : 'FR';
-  document.querySelector('.coin small').textContent = fr ? '0,05 $ / ami' : '$0.05 / friend';
-}
-try { fr = /^fr/i.test(new URLSearchParams(location.search).get('lang') || navigator.language || ''); } catch (e) {}
-if (fr) apply();
-document.getElementById('lang').onclick = () => { fr = !fr; apply(); };
-</script>
+<main>
+  <div style="font-size:64px">💎</div>
+  <h1>Earn by Jeremstyke is now in Meme Coin Tycoon</h1>
+  <p>Tap the small diamond at the top of the game and earn real TON. A new rate every day, weekly contests, paid every Monday from $0.10.</p>
+  <a href="https://t.me/Memecointycoonbot?startapp=src_dia_earnpage">💎 Tap the diamond</a>
+  <p style="font-size:13px;margin-top:22px">by @jeremstyke</p>
+</main>
 </body>
 </html>
