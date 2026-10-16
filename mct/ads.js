@@ -1,7 +1,7 @@
 // 16 oct 2026: Meme Coin Tycoon rewarded videos (Ads Galaxy, game id 135). Three places where the player really wants something:
 // 1. the mining boost x2: a free video instead of 5 stars (once a day, the stars stay possible);
 // 2. the scoop: the next news (which coin, up or down) before everyone (2 a day), a card at the top of the market and the news;
-//    once unlocked, it stays visible for free until that news comes out;
+//    once unlocked, it stays visible for free until that news comes out; after the 2 free videos, 5 stars;
 // 3. the insurance: right after a losing sale, a video gives back 50 % of the loss (3 a day, within 10 minutes).
 // The server checks every limit (Supabase function mct-ton: boost_ad, scoop, insure).
 (() => {
@@ -15,7 +15,7 @@
       iOk: (r) => '🛟 ' + r + ' added to your cash!', iLim: 'You used your 3 insurances today.', iLate: 'Too late: the insurance lasts 10 minutes after the sale.',
       sT: '📰 Scoop', sX: 'See the next news before everyone', sB: '📺 Watch', sUp: (t) => '$' + t + ' will get good news soon 🚀', sDn: (t) => '$' + t + ' will get bad news soon 📉',
       sAllUp: 'The whole market will pump soon 🚀', sAllDn: 'The whole market will dip soon 📉', sNote: 'Nobody knows exactly when: in 30 minutes or tomorrow. Your move!',
-      sOpen: '👀 See', sGo: (t) => 'Open $' + t, sLim: 'You saw your 2 scoops today. Come back tomorrow!',
+      sOpen: '👀 See', sPayT: 'You used your 2 free scoops today. Unlock this one for 5 stars, or come back tomorrow.', sPay: '⭐ Unlock for 5 stars', sGo: (t) => 'Open $' + t, sLim: 'You saw your 2 scoops today. Come back tomorrow!',
     },
     fr: {
       bT: 'Boost x2 pendant 1 heure', bX: 'Ton minage rapporte le double pendant 1 heure.', bAd: '📺 Regarder une vidéo (gratuit, 1 par jour)', bPay: '⭐ Payer 5 étoiles', bOk: '⚡ Boost x2 activé !',
@@ -25,7 +25,7 @@
       iOk: (r) => '🛟 ' + r + ' ajoutés à ton cash !', iLim: 'Tu as utilisé tes 3 assurances du jour.', iLate: 'Trop tard : l\'assurance dure 10 minutes après la vente.',
       sT: '📰 Scoop', sX: 'Découvre la prochaine news avant tout le monde', sB: '📺 Voir', sUp: (t) => '$' + t + ' va bientôt avoir une bonne news 🚀', sDn: (t) => '$' + t + ' va bientôt avoir une mauvaise news 📉',
       sAllUp: 'Tout le marché va bientôt monter 🚀', sAllDn: 'Tout le marché va bientôt baisser 📉', sNote: 'Personne ne sait exactement quand : dans 30 minutes ou demain. À toi de jouer !',
-      sOpen: '👀 Voir', sGo: (t) => 'Voir $' + t, sLim: 'Tu as vu tes 2 scoops du jour. Reviens demain !',
+      sOpen: '👀 Voir', sPayT: 'Tu as utilisé tes 2 scoops gratuits du jour. Débloque celui-ci pour 5 étoiles, ou reviens demain.', sPay: '⭐ Débloquer pour 5 étoiles', sGo: (t) => 'Voir $' + t, sLim: 'Tu as vu tes 2 scoops du jour. Reviens demain !',
     },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] || TX.en; };
@@ -116,11 +116,11 @@
     h1.parentNode.insertBefore(el, h1.nextSibling);
     el.querySelector('#scb').onclick = scoop;
     // 16 oct 2026: an already unlocked scoop is shown right in the card, without a new video, until that news comes out
-    peek().then((r) => { if (!r || !document.body.contains(el)) return; el.querySelector('small').textContent = sMsg(r); el.querySelector('#scb').textContent = T.sOpen; });
+    peek().then((r) => { if (!r || !document.body.contains(el)) return; if (r.ok) { el.querySelector('small').textContent = sMsg(r); el.querySelector('#scb').textContent = T.sOpen; } else if (r.left === 0) el.querySelector('#scb').textContent = '⭐ 5'; });
   }
   let PK = null, PKT = 0;
   function peek(force) {
-    if (force || !PK || Date.now() - PKT > 60000) { PKT = Date.now(); PK = tonCall({ action: 'scoop_peek' }).then((r) => (r && r.ok ? r : null)).catch(() => null); }
+    if (force || !PK || Date.now() - PKT > 60000) { PKT = Date.now(); PK = tonCall({ action: 'scoop_peek' }).catch(() => null); }
     return PK;
   }
   const sMsg = (r) => { const T = L(); return r.all ? (r.up ? T.sAllUp : T.sAllDn) : (r.up ? T.sUp(r.ticker) : T.sDn(r.ticker)); };
@@ -131,14 +131,35 @@
     d.querySelector('#sok').onclick = () => close();
     const g = d.querySelector('#sgo'); if (g) g.onclick = () => { close(); try { openCoin(r.coin); } catch (x) {} };
   }
+  // 16 oct 2026: after the 2 free videos of the day, the scoop costs 5 stars (invoice by the game server, unlocked by the payment)
+  function paySheet(b) {
+    const T = L();
+    const d = modal(head('📰', T.sT, T.sPayT) + `<button class="btn" id="spy">${ec(T.sPay)}</button><button class="ghost" id="sno" style="width:100%;margin-top:10px">${ec(T.no)}</button>`);
+    d.querySelector('#sno').onclick = () => close();
+    d.querySelector('#spy').onclick = async (ev) => {
+      busy(ev.currentTarget);
+      let r = null; try { r = await api('scoop_pay'); } catch (x) {}
+      close();
+      if (!r || !r.link) { hp('err'); return tst(T.err); }
+      try {
+        tw.openInvoice(r.link, (st) => {
+          if (st !== 'paid') return;
+          hp('ok');
+          setTimeout(async () => { const v = await peek(true); if (v && v.ok) { if (b) b.textContent = T.sOpen; const c = document.getElementById('scoopc'); if (c) c.querySelector('small').textContent = sMsg(v); show(v); } }, 1800);
+        });
+      } catch (x) { tst(T.err); }
+    };
+  }
   async function scoop(ev) {
     const T = L(), b = ev.currentTarget; hp(); busy(b);
     const back = (t) => { b.disabled = false; b.textContent = t || T.sB; };
-    const seen = await peek(true);
-    if (seen) { back(T.sOpen); hp('ok'); return show(seen); }
+    const pk = await peek(true);
+    if (pk && pk.ok) { back(T.sOpen); hp('ok'); return show(pk); }
+    if (pk && pk.left === 0) { back('⭐ 5'); return paySheet(b); }
     if (!(await watch())) { back(); return tst(T.noad); }
     let r = null; try { r = await tonCall({ action: 'scoop' }); } catch (x) {}
-    if (!r || !r.ok) { back(); hp('err'); return tst(r && r.error === 'limit' ? T.sLim : T.err); }
+    if (r && r.error === 'limit') { back('⭐ 5'); return paySheet(b); }
+    if (!r || !r.ok) { back(); hp('err'); return tst(T.err); }
     PK = Promise.resolve(r); PKT = Date.now(); back(T.sOpen); hp('ok');
     const c = document.getElementById('scoopc'); if (c) c.querySelector('small').textContent = sMsg(r);
     show(r);
