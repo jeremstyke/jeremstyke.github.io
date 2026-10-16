@@ -3,6 +3,12 @@
 // The player can change his nickname and his photo: Jeremy accepts or refuses each change first (Supabase function mct-ton).
 (() => {
   const TX = {
+    id: { me: 'Profilku', worth: 'Kekayaan bersih', rank: 'Peringkat', trades: 'Transaksi', days: 'Hari bermain', sale: 'Penjualan terbaik', coins: 'Koin dibuat', refs: 'Teman diundang', taps: 'Ketukan berlian',
+      since: 'Bermain sejak', badges: 'Lencana', none: 'Belum ada lencana: trading, buat koin, undang teman!', mycoins: 'Koin dibuat', ton: '💰 TON asli', earned: 'Total didapat', paid: 'Sudah dibayar', next: 'Senin depan',
+      nowal: 'Tambahkan dompet TON-mu di halaman 💎 TON untuk dibayar.', hasTon: '✅ Sudah dibayar dalam TON asli', nick: '✏️ Ganti nama panggilan', photo: '📷 Ganti foto', ph: 'Nama panggilan baru (2 sampai 16 karakter)', send: 'Kirim',
+      pend: '⏳ Menunggu persetujuan', pendN: (n) => '⏳ Nama panggilan "' + n + '" menunggu persetujuan', pendP: '⏳ Foto baru menunggu persetujuan', sent: '✅ Terkirim! Kamu akan dapat pesan setelah diperiksa.',
+      e_nick: '2 sampai 16 karakter, tanpa link atau @.', e_taken: 'Nama panggilan ini sudah dipakai.', e_wait: 'Satu perubahan per jam, coba lagi nanti.', e_photo: 'Foto ini tidak bisa dikirim.', err: 'Masalah koneksi, coba lagi.', close: 'Tutup', dev: 'pembuat game', x: 'sejak peluncuran',
+      b: { trade: '🎯 Transaksi pertama', creator: '🪙 Kreator', x10: '🚀 Koin x10', week: '🔥 7 hari bermain', sponsor: '👥 Pengundang', sponsor5: '🤝 Pengundang super', tapper: '💎 Pengetuk', winner: '🏆 Juara kontes', paid: '💸 Dibayar dalam TON', whale: '🐋 Paus', supporter: '💎 Supporter', crown: '👑 Mahkota' } },
     en: { me: 'My profile', worth: 'Net worth', rank: 'Rank', trades: 'Trades', days: 'Days played', sale: 'Best sale', coins: 'Coins created', refs: 'Friends invited', taps: 'Diamond taps',
       since: 'Playing since', badges: 'Badges', none: 'No badge yet: trade, create a coin, invite friends!', mycoins: 'Coins created', ton: '💰 Real TON', earned: 'Earned in total', paid: 'Already paid', next: 'Next Monday',
       nowal: 'Add your TON wallet in the 💎 TON page to get paid.', hasTon: '✅ Already paid in real TON', nick: '✏️ Change my nickname', photo: '📷 Change my photo', ph: 'New nickname (2 to 16 characters)', send: 'Send',
