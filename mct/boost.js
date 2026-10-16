@@ -2,7 +2,8 @@
 // Adsgram refused the game, so the rewarded-ad choice is gone: the game's own button pays directly. Supporters keep their free boost.
 // The button says the price, so players know before tapping.
 (() => {
-  const TX = { en: '⚡ Boost x2 · 5 ⭐', fr: '⚡ Boost x2 · 5 ⭐' };
+  // 16 oct 2026 (Jeremy): just "Boost x2"; tapping it offers the free video (once a day) or 5 stars (mct/ads.js)
+  const TX = { en: '⚡ Boost x2', fr: '⚡ Boost x2' };
   const lb = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] || TX.en; };
   function relabel() {
     const b = document.getElementById('boost');
