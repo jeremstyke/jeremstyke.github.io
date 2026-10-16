@@ -88,7 +88,7 @@
     const b = document.getElementById('pfb'); if (!b) return;
     const T = L();
     const stat = (k, v) => '<div class="pst"><small>' + ec(T[k]) + '</small><b>' + ec(v) + '</b></div>';
-    let h = '<div class="phead">' + av(p, 64) + '<div><h2>' + ec(p.name) + '</h2><small>' + (p.dev ? '👨‍💻 ' + ec(T.dev) : p.rank ? '🏆 #' + p.rank + ' / ' + nf(p.total) : '') + '</small><small>' + ec(T.since) + ' ' + ec(day(p.since)) + '</small></div></div>';
+    let h = '<div class="phead">' + av(p, 64) + '<div><h2>' + ec(p.name) + '</h2><small>' + (p.dev ? '👨‍💻 ' + ec(T.dev) : p.ai ? '🤖 AI' : p.rank ? '🏆 #' + p.rank + ' / ' + nf(p.total) : '') + '</small><small>' + ec(T.since) + ' ' + ec(day(p.since)) + '</small></div></div>';
     if (p.me) {
       h += (p.nick_pending ? '<p class="pnote">' + ec(T.pendN(p.nick_pending)) + '</p>' : '') + (p.photo_pending ? '<p class="pnote">' + ec(T.pendP) + '</p>' : '');
       h += '<div class="ped"><button class="btn ghost" id="pfn">' + ec(T.nick) + '</button><button class="btn ghost" id="pfp">' + ec(T.photo) + '</button></div><div id="pfedit"></div>';
@@ -136,8 +136,8 @@
   // a tap on a player in the Leaders tab (players ranking) opens his profile
   let IDS = null, IDT = 0;
   async function bindLeaders() {
-    let ok = false; try { ok = VIEW === 'leaders' && LB === 'players'; } catch (e) {}
-    const v = document.getElementById('view'); if (!ok || !v) return;
+    // the players ranking is the one whose tab is pressed (does not depend on the game's variables)
+    const v = document.getElementById('view'); if (!v || !v.querySelector('[data-lb="players"][aria-pressed="true"]')) return;
     const rows = [...v.querySelectorAll(':scope > .row')]; if (!rows.length || rows[0].dataset.pf) return;
     rows.forEach((r) => { r.dataset.pf = '1'; });
     if (!IDS || Date.now() - IDT > 60000) { try { const r = await tonCall({ action: 'lb_ids' }); IDS = (r && r.ids) || []; IDT = Date.now(); } catch (e) { IDS = []; } }
@@ -149,5 +149,6 @@
       r.style.cursor = 'pointer'; r.onclick = () => { hp(); show(id); };
     });
   }
+  window.mctProfile = (pid) => show(pid || 0); // used by the contests (rank.js)
   (function watch() { const v = document.getElementById('view'); if (!v) { setTimeout(watch, 250); return; } new MutationObserver(() => bindLeaders()).observe(v, { childList: true }); })();
 })();
