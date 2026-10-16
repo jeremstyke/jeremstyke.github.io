@@ -52,6 +52,7 @@
     s.onload = ok; s.onerror = () => { ld = null; ko(new Error('load')); }; document.head.appendChild(s);
   }));
   async function watch() {
+    if (window.MCTPREM) return true; // 17 oct 2026: Premium players skip the videos (prem.js)
     try { await sdk(); const r = await window.showAdsGalaxy({ miniappId: AGX }); return !!(r && r.reward_eligible); } catch (e) { return false; }
   }
 
