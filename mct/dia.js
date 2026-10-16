@@ -1,29 +1,29 @@
 // 16 oct 2026 (Jeremy): the diamond inside Meme Coin Tycoon. A small 💎 at the top, next to the FAQ: tap it and earn real TON,
-// added to the player's Meme Coin Tycoon TON balance (with his invited friends), paid every Monday from $0.10.
+// kept in the diamond until the player taps "Add to my balance" (16 oct 2026: not automatic any more), then paid every Monday from $0.10.
 // The rate changes every day (3,500 to 10,000 taps per $0.01) and is announced every morning on @memecointycoon.
 // +10 % for subscribers of @memecointycoon and +10 % for subscribers of @jeremstyke. A weekly contest of the best tappers.
 // The server counts every tap, limits the speed and asks a human check (Supabase function mct-ton: dia, dia_tap, dia_check).
 (() => {
   const TX = {
     en: {
-      t: 'Diamond', mine: 'My diamond earnings', today: 'Today', taps: 'taps', rate: (n) => 'Rate of the day: ' + n + ' taps = $0.01',
-      lead: 'Tap the diamond, it moves every 50 taps', pay: 'Added to your Meme Coin Tycoon TON balance, with your friends. Paid every Monday from $0.10.',
+      t: 'Diamond', mine: 'In my diamond', claim: (v) => '➕ Add ' + v + ' to my balance', claim0: '➕ Add to my balance', solde: (v) => '👛 My TON balance: ' + v, added: (v) => '✅ ' + v + ' added to your balance', none: 'Keep tapping: from $0.01 you can add it to your balance', today: 'Today', taps: 'taps', rate: (n) => 'Rate of the day: ' + n + ' taps = $0.01',
+      lead: 'Tap the diamond, it moves every 50 taps', pay: 'Your earnings wait in the diamond: tap "Add to my balance" to get them. Your balance is paid every Monday from $0.10 to your TON wallet.',
       check: 'Quick check: tap the 💎', wrong: 'Wrong one, try again', paused: 'The diamond is resting until next month. Come back soon!', off: 'The diamond is closed for now.',
       bon: 'Subscriber bonus', bm: '📢 Meme Coin Tycoon channel', bj: '📢 Jeremstyke channel', join: 'Join', on: '✅ +10 %', recheck: '🔄 I joined',
       con: '🏆 Diamond contest of the week', ends: 'Ends in', you: 'you', nobody: 'Nobody yet: be the first!', rank: 'Your rank', prizes: 'Monday prizes in TON',
       wal: '👛 My TON wallet', err: 'Connection problem, try again.', close: 'Close',
     },
     fr: {
-      t: 'Diamant', mine: 'Mes gains diamant', today: 'Aujourd\'hui', taps: 'tapes', rate: (n) => 'Taux du jour : ' + n + ' tapes = 0,01 $',
-      lead: 'Tape le diamant, il bouge toutes les 50 tapes', pay: 'Ajouté à ton solde TON Meme Coin Tycoon, avec tes amis. Payé chaque lundi dès 0,10 $.',
+      t: 'Diamant', mine: 'Dans mon diamant', claim: (v) => '➕ Ajouter ' + v + ' à mon solde', claim0: '➕ Ajouter à mon solde', solde: (v) => '👛 Mon solde TON : ' + v, added: (v) => '✅ ' + v + ' ajouté à ton solde', none: 'Continue de taper : dès 0,01 $ tu peux l\'ajouter à ton solde', today: 'Aujourd\'hui', taps: 'tapes', rate: (n) => 'Taux du jour : ' + n + ' tapes = 0,01 $',
+      lead: 'Tape le diamant, il bouge toutes les 50 tapes', pay: 'Tes gains restent dans le diamant : appuie sur "Ajouter à mon solde" pour les récupérer. Ton solde est payé chaque lundi dès 0,10 $ sur ton portefeuille TON.',
       check: 'Petite vérification : touche le 💎', wrong: 'Pas le bon, réessaie', paused: 'Le diamant se repose jusqu\'au mois prochain. Reviens bientôt !', off: 'Le diamant est fermé pour le moment.',
       bon: 'Bonus abonné', bm: '📢 Chaîne Meme Coin Tycoon', bj: '📢 Chaîne Jeremstyke', join: 'S\'abonner', on: '✅ +10 %', recheck: '🔄 Je suis abonné',
       con: '🏆 Concours du diamant de la semaine', ends: 'Fin dans', you: 'toi', nobody: 'Personne pour l\'instant : sois le premier !', rank: 'Ton rang', prizes: 'Gains du lundi en TON',
       wal: '👛 Mon portefeuille TON', err: 'Problème de connexion, réessaie.', close: 'Fermer',
     },
     ar: {
-      t: 'الماسة', mine: 'أرباحي من الماسة', today: 'اليوم', taps: 'ضغطة', rate: (n) => 'سعر اليوم: ' + n + ' ضغطة = ‎0.01 $',
-      lead: 'اضغط على الماسة، تتحرك كل 50 ضغطة', pay: 'تُضاف إلى رصيد TON في Meme Coin Tycoon مع أصدقائك. تُدفع كل يوم اثنين ابتداءً من ‎0.10 $.',
+      t: 'الماسة', mine: 'في ماستي', claim: (v) => '➕ أضف ' + v + ' إلى رصيدي', claim0: '➕ أضف إلى رصيدي', solde: (v) => '👛 رصيد TON: ' + v, added: (v) => '✅ أُضيف ' + v + ' إلى رصيدك', none: 'واصل الضغط: ابتداءً من ‎0.01 $ يمكنك إضافتها إلى رصيدك', today: 'اليوم', taps: 'ضغطة', rate: (n) => 'سعر اليوم: ' + n + ' ضغطة = ‎0.01 $',
+      lead: 'اضغط على الماسة، تتحرك كل 50 ضغطة', pay: 'أرباحك تبقى في الماسة: اضغط "أضف إلى رصيدي" لاستلامها. يُدفع رصيدك كل يوم اثنين ابتداءً من ‎0.10 $ إلى محفظة TON.',
       check: 'تحقق سريع: اضغط على 💎', wrong: 'ليست هي، حاول مرة أخرى', paused: 'الماسة في استراحة حتى الشهر القادم. عُد قريبًا!', off: 'الماسة مغلقة حاليًا.',
       bon: 'مكافأة المشترك', bm: '📢 قناة Meme Coin Tycoon', bj: '📢 قناة Jeremstyke', join: 'اشترك', on: '✅ ‎+10 %', recheck: '🔄 اشتركت',
       con: '🏆 مسابقة الماسة لهذا الأسبوع', ends: 'تنتهي خلال', you: 'أنت', nobody: 'لا أحد بعد: كن الأول!', rank: 'ترتيبك', prizes: 'جوائز يوم الاثنين بعملة TON',
@@ -38,6 +38,8 @@
   const nf = (n) => Number(n || 0).toLocaleString(lg() === 'fr' ? 'fr-FR' : 'en-US');
   const usd = (v, d) => { const x = Number(v || 0).toFixed(d == null ? 2 : d); return lg() === 'fr' ? x.replace('.', ',') + ' $' : '$' + x; };
   const call = (b) => tonCall(b);
+  // 16 oct 2026: "Add to my balance" goes through the function mct-fr (initData checked there)
+  const claimCall = async () => (await fetch('https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-fr', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ initData: Telegram.WebApp.initData, action: 'claim' }) })).json();
   const open = (u) => { try { Telegram.WebApp.openTelegramLink(u); } catch (e) { location.href = u; } };
 
   let S = null, Q = 0, BUSY = false, TIMER = null, CNT = 0, POS = { x: 50, y: 50 };
@@ -93,6 +95,11 @@
     if (u) u.textContent = usd(bal, bal < 1 ? 4 : 2);
     if (b) b.style.width = Math.min(100, (pend % tpc) / tpc * 100).toFixed(1) + '%';
     if (n) n.textContent = L().today + ' : ' + nf(Number(S.today || 0) + Q) + ' ' + L().taps;
+    // what "Add to my balance" moves now: the diamond + the full cents tapped
+    const pot = Number(S.claim || 0) - Math.floor(Number(S.pending_taps || 0) / tpc) * 0.01, can = Math.max(0, pot + Math.floor(pend / tpc) * 0.01);
+    const cb = document.getElementById('dclaim'), so = document.getElementById('dsolde');
+    if (cb) { cb.disabled = can < 0.009; cb.style.opacity = can < 0.009 ? '.45' : '1'; cb.textContent = can < 0.009 ? L().claim0 : L().claim(usd(can)); }
+    if (so) so.textContent = L().solde(usd(S.solde, Number(S.solde || 0) < 1 ? 4 : 2));
   }
 
   function paint() {
@@ -104,7 +111,7 @@
       || '<p class="dsm">' + ec(T.nobody) + '</p>';
     b.style.cssText = '';
     b.innerHTML = '<div class="dc"><div class="dl">' + ec(T.mine) + '</div><div class="dbig" id="dusd"></div><div class="dbar"><i id="dbar"></i></div>'
-      + '<div class="dsm" id="dtoday"></div><div class="dsm">' + ec(T.rate(nf(S.tpc))) + '</div><div id="darea"></div><p class="dnote">' + ec(T.pay) + '</p></div>'
+      + '<button class="btn" id="dclaim" style="width:100%;margin:10px 0 6px"></button><div class="dsm" id="dsolde" style="font-weight:700;opacity:1"></div><div class="dsm" id="dtoday"></div><div class="dsm">' + ec(T.rate(nf(S.tpc))) + '</div><div id="darea"></div><p class="dnote">' + ec(T.pay) + '</p></div>'
       + (Number(S.sub_pct) > 0 ? '<div class="dc"><div class="dl">' + ec(T.bon) + '</div>' + sub('bm', S.sub_mct, 'https://t.me/memecointycoon') + sub('bj', S.sub_js, 'https://t.me/jeremstyke')
         + (S.sub_mct && S.sub_js ? '' : '<button class="btn ghost" id="drc" style="width:100%;margin:8px 0 0">' + ec(T.recheck) + '</button>') + '</div>' : '')
       + (c.on ? '<div class="dc"><div class="dl">' + ec(T.con) + '</div><div class="dsm">' + ec(T.ends) + ' <b id="dcd">' + cd(c.ends) + '</b> · ' + ec(T.prizes) + ' : ' + pz.map((p) => usd(p)).join(' / ') + '</div>' + rows
@@ -112,8 +119,27 @@
       + '<button class="btn ghost" id="dwal" style="width:100%">' + ec(T.wal) + '</button>';
     b.querySelectorAll('[data-dj]').forEach((x) => x.onclick = () => { hp(); open(x.dataset.dj); });
     const rc = document.getElementById('drc'); if (rc) rc.onclick = () => { hp(); show(); };
+    document.getElementById('dclaim').onclick = claim;
     document.getElementById('dwal').onclick = () => { hp(); closeIt(); try { tonPage(); } catch (e) {} };
     area();
+  }
+
+  let CLAIMING = false;
+  async function claim() {
+    const T = L(), cb = document.getElementById('dclaim');
+    if (CLAIMING) return;
+    if (!cb || cb.disabled) { tst(T.none); return; }
+    CLAIMING = true; hp(); cb.disabled = true;
+    if (TIMER) { clearTimeout(TIMER); TIMER = null; }
+    let k = 0; while (BUSY && k++ < 40) await new Promise((ok) => setTimeout(ok, 100));
+    await flush();
+    let r = null; try { r = await claimCall(); } catch (e) {}
+    CLAIMING = false;
+    if (!r || !r.ok) { tst(T.err); nums(); return; }
+    if (r.state) S = r.state;
+    try { Telegram.WebApp.HapticFeedback.notificationOccurred('success'); } catch (e) {}
+    tst(Number(r.added) > 0 ? T.added(usd(r.added)) : T.none);
+    nums();
   }
 
   function area() {
