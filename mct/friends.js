@@ -6,6 +6,9 @@
 (() => {
   const FN = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-fr';
   const TX = {
+    id: { card: '👥 Temanku', cardx: 'Peringkat antar teman, dan hadiah untuk dikirim setiap hari', see: 'Lihat', t: '👥 Temanku', you: 'kamu', dev: 'dev',
+      add: '➕ Tambah teman', share: 'Main Meme Coin Tycoon bareng aku: trading memecoin dan menangkan TON asli 🚀', gift: (n) => '🎁 ' + n, sent: '✅ Terkirim', none: 'Belum ada teman. Tambahkan temanmu: kamu bisa lihat siapa yang paling jago trading dan saling kirim hadiah setiap hari 🎁',
+      okg: (n) => '🎁 Hadiah terkirim: ' + n + '!', full: 'Teman ini sudah menerima cukup hadiah hari ini.', already: 'Sudah dikirim hari ini.', err: 'Masalah koneksi, coba lagi.', added: (n) => '👥 ' + n + ' sekarang temanmu!', padd: '➕ Tambah sebagai teman', isf: '👥 Teman', pend: '⏳ Permintaan terkirim', rsent: (n) => '📩 Permintaan terkirim ke ' + n, reqs: '📩 Permintaan pertemanan', acc: '✅ Terima', ref: 'Ditolak', refb: 'Tolak', on: 'main hari ini', gifts: 'Hadiah diterima hari ini', close: 'Tutup' },
     en: { card: '👥 My friends', cardx: 'Your ranking between friends, and a gift to send every day', see: 'See', t: '👥 My friends', you: 'you', dev: 'dev',
       add: '➕ Add a friend', share: 'Play Meme Coin Tycoon with me: trade memecoins and win real TON 🚀', gift: (n) => '🎁 ' + n, sent: '✅ Sent', none: 'No friend yet. Add your friends: you will see who trades best and you can send each other a gift every day 🎁',
       okg: (n) => '🎁 Gift sent: ' + n + '!', full: 'This friend has received enough gifts today.', already: 'Already sent today.', err: 'Connection problem, try again.', added: (n) => '👥 ' + n + ' is now your friend!', padd: '➕ Add as friend', isf: '👥 Friend', pend: '⏳ Request sent', rsent: (n) => '📩 Request sent to ' + n, reqs: '📩 Friend requests', acc: '✅ Accept', ref: 'Refused', refb: 'Refuse', on: 'played today', gifts: 'Gifts received today', close: 'Close' },
