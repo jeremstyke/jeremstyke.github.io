@@ -3,6 +3,11 @@
 // 3 ads at most at the same time, they take turns every 8 seconds. Supabase function mct-ton: 'ads', 'ad_new', 'ad_hit'.
 (() => {
   const TX = {
+    id: { ad: 'Iklan', go: 'Buka ›', book: 'Pesan', yours: '📢 Iklanmu di sini, dilihat semua pemain', from: (s) => 'mulai ' + s + ' ⭐', title: '📢 Beriklan di Meme Coin Tycoon', intro: 'Banner-mu di atas menu game, dilihat setiap pemain. Diperiksa sebelum tayang, uang kembali jika ditolak.',
+      p_day: '24 jam', p_boost: '24 jam · tampil 2x lebih sering dan paling depan', p_week: '7 hari', img: '🖼 Pilih gambar', txt: 'Teksmu (maks 60 karakter)', link: 'Link-mu (https://t.me/... atau https://...)', pay: (s) => 'Bayar ' + s + ' ⭐',
+      preview: 'Pratinjau', mine: 'Iklanku', st: { paid: '⏳ Sedang diperiksa', live: '✅ Tayang', queued: '🕒 Menunggu slot kosong', refused: '❌ Ditolak, uang kembali', done: '✔️ Selesai' }, vw: 'tayangan', ck: 'klik',
+      e_text: 'Teks: 3 sampai 60 karakter.', e_link: 'Link harus diawali https://', e_photo: 'Pilih gambar.', e_wait: 'Terlalu banyak percobaan, tunggu sebentar.', e_invoice: 'Pembayaran tidak tersedia, coba lagi.', err: 'Masalah koneksi, coba lagi.',
+      paid: '✅ Dibayar! Iklanmu tayang setelah diperiksa.', close: 'Tutup' },
     en: { ad: 'Ad', go: 'Open ›', book: 'Book', yours: '📢 Your ad here, seen by all', from: (s) => 'from ' + s + ' ⭐', title: '📢 Advertise in Meme Coin Tycoon', intro: 'Your banner above the menu of the game, seen by every player. Checked before going live, refunded if refused.',
       p_day: '24 hours', p_boost: '24 hours · shown 2x more and first', p_week: '7 days', img: '🖼 Choose an image', txt: 'Your text (60 characters max)', link: 'Your link (https://t.me/... or https://...)', pay: (s) => 'Pay ' + s + ' ⭐',
       preview: 'Preview', mine: 'My ads', st: { paid: '⏳ Being checked', live: '✅ On', queued: '🕒 Waiting for a free slot', refused: '❌ Refused, refunded', done: '✔️ Finished' }, vw: 'views', ck: 'clicks',
