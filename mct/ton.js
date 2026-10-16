@@ -155,7 +155,7 @@ async function tonPage() {
     + (Number(s.budget_left) < Number(s.usd) ? `<p style="font-size:13px;opacity:.75">${L.off}</p>` : '')
     + mctContestHtml(s.contest, LANG === 'fr', tonM)
     + `<details class="how"><summary>📖 ${L.how} ▾</summary><div style="margin-top:10px">${steps}</div></details>`
-    + `<button class="more" id="tonse">💰 ${LANG === 'fr' ? 'Gagne plus de TON' : 'Earn more TON'}</button><div class="close" id="tonsc">${D.close}</div></div>`;
+    + `<button class="more" id="tonse">💎 ${LANG === 'fr' ? 'Tape le diamant et gagne de l\'argent' : 'Tap the diamond, earn money'}</button><div class="close" id="tonsc">${D.close}</div></div>`;
   document.body.appendChild(d);
   const close = () => { d.remove(); clearInterval(TONSH_T); };
   d.onclick = (e) => { if (e.target === d || e.target.id === 'tonsc') close(); };
@@ -164,7 +164,7 @@ async function tonPage() {
   const myMsg = LANG === 'fr' ? '🚀 Joue à Meme Coin Tycoon avec moi sur Telegram : on gagne 500 $ chacun pour commencer 👉 ' + myLink + '\n\n(Pas encore Telegram ? Installe-le, puis reclique sur ce lien.)' : '🚀 Play Meme Coin Tycoon with me on Telegram: we both get $500 to start 👉 ' + myLink + '\n\n(No Telegram yet? Install it, then tap this link again.)';
   d.querySelector('#tonwa').onclick = () => { try { haptic(); } catch (x) {} outWa(myMsg); };
   d.querySelector('#toncp').onclick = () => { try { haptic(); } catch (x) {} outCopy(myLink, LANG === 'fr' ? 'Lien copié ✅ Colle-le dans Messenger, WhatsApp, SMS…' : 'Link copied ✅ Paste it in Messenger, WhatsApp, SMS…'); };
-  d.querySelector('#tonse').onclick = () => { haptic(); try { tw.openTelegramLink('https://t.me/earnbyjeremstykebot?startapp=progs_mct'); } catch (e) { window.open('https://t.me/earnbyjeremstykebot?startapp=progs_mct', '_blank'); } };
+  d.querySelector('#tonse').onclick = () => { haptic(); try { tw.openTelegramLink('https://t.me/earnbyjeremstykebot?startapp=tap_mct'); } catch (e) { window.open('https://t.me/earnbyjeremstykebot?startapp=tap_mct', '_blank'); } };
   // live: the balance is refreshed every 20 s while the sheet is open
   clearInterval(TONSH_T);
   TONSH_T = setInterval(async () => {
