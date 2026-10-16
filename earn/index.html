@@ -326,7 +326,7 @@ function tapTab() {
       + `<div style="height:8px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden;margin:6px 0 4px"><i id="tapbar" style="display:block;height:100%;width:0;background:#2ee6ff;transition:width .15s"></i></div>`
       + `<div class="what" style="font-size:13px;margin:0 0 10px" id="tapn"></div><div id="taparea"></div>`
       + `<p class="what" style="font-size:12px;margin:10px 0 0">${esc(L.pay)}</p></section>` : '')
-    + subCard() + mctCard();
+    + subCard() + totalCard() + mctCard();
 }
 function tapPaint() {
   const el = $('taparea'); if (!el || !TP) return;
@@ -432,13 +432,18 @@ function mctCard() {
     + `<p class="what">${esc(p.what())}</p><button class="btn" data-open="${p.k}">${esc(p.i + ' ' + TB2[3])}</button></section>`;
 }
 function refTab() { return inviteCard() || `<section class="card"><p class="what">⏳</p></section>`; }
-// 16 oct 2026: what was earned on Meme Coin Tycoon (and the old programs), paid together on Monday
-const OTH = { en: (m, g) => '➕ ' + m + ' earned on ' + (g ? 'Meme Coin Tycoon' : 'your other apps') + ', paid together', fr: (m, g) => '➕ ' + m + ' gagnés sur ' + (g ? 'Meme Coin Tycoon' : 'tes autres apps') + ', payés avec', es: (m, g) => '➕ ' + m + ' ganados en ' + (g ? 'Meme Coin Tycoon' : 'tus otras apps') + ', pagados juntos', pt: (m, g) => '➕ ' + m + ' ganhos no ' + (g ? 'Meme Coin Tycoon' : 'seus outros apps') + ', pagos juntos', ru: (m, g) => '➕ ' + m + ' заработано в ' + (g ? 'Meme Coin Tycoon' : 'других приложениях') + ', выплата вместе', ar: (m, g) => '➕ ' + m + ' ربحتها في ' + (g ? 'Meme Coin Tycoon' : 'تطبيقاتك الأخرى') + '، تُدفع معًا', id: (m, g) => '➕ ' + m + ' didapat di ' + (g ? 'Meme Coin Tycoon' : 'aplikasi lainmu') + ', dibayar bersama' };
-function othLine() {
-  const d = (S && S.mct && S.mct.all && S.mct.all.detail) || {}, v = ['mct', 'gp', 'ds'].reduce((x, k) => x + Number(d[k] || 0), 0);
-  return v > 0 ? `<p class="what" style="font-size:13px;font-weight:700;color:#ffd43b;margin:-6px 6px 14px">${esc(OTH[LG](money(v, v < 1 ? 4 : 2), !Number(d.gp || 0) && !Number(d.ds || 0)))}</p>` : '';
+// 16 oct 2026 (Jeremy): one wallet for Earn and Meme Coin Tycoon, the same block in both apps: the total paid on Monday and its parts
+const WB = { en: ['👛 My wallet', 'Other earnings', 'Already received', '📅 Next payment: Monday, from'], fr: ['👛 Mon portefeuille', 'Autres gains', 'Déjà reçu', '📅 Prochain paiement : lundi, dès'], es: ['👛 Mi billetera', 'Otras ganancias', 'Ya recibido', '📅 Próximo pago: lunes, desde'], pt: ['👛 Minha carteira', 'Outros ganhos', 'Já recebido', '📅 Próximo pagamento: segunda, a partir de'], ru: ['👛 Мой кошелёк', 'Другие доходы', 'Уже получено', '📅 Следующая выплата: понедельник, от'], ar: ['👛 محفظتي', 'أرباح أخرى', 'تم استلامه', '📅 الدفعة القادمة: الاثنين، ابتداءً من'], id: ['👛 Dompetku', 'Penghasilan lain', 'Sudah diterima', '📅 Pembayaran berikutnya: Senin, mulai'] }[LG];
+function walBlock() {
+  const a = S && S.mct && S.mct.all; if (!a) return '';
+  const d = a.detail || {}, e = Number(d.tap || 0) + Number(d.earn || 0), m = Number(d.mct || 0), o = Math.max(0, Number(a.total || 0) - e - m);
+  const mo = (v) => money(v, Number(v) > 0 && Number(v) < 1 ? 4 : 2);
+  const r = (l, v) => `<div class="rk" style="font-size:14px"><span>${esc(l)}</span><b>${mo(v)}</b></div>`;
+  return `<section class="card" style="--c:#2ee6ff;background:linear-gradient(160deg,rgba(46,230,255,.16),rgba(125,255,107,.08) 60%,var(--card))"><div class="lbl">${esc(WB[0])}</div><div class="big" style="font-size:40px;color:#2ee6ff">${mo(a.total)}</div>`
+    + r('💎 Earn by Jeremstyke', e) + r('🎮 Meme Coin Tycoon', m) + (o > 0.00001 ? r('➕ ' + WB[1], o) : '') + (Number(a.paid) ? r('💸 ' + WB[2], a.paid) : '')
+    + `<p class="what" style="font-size:12px;margin:8px 0 0">${esc(WB[3])} ${money(a.min || 0.1)}</p></section>`;
 }
-function walTab() { return totalCard() + othLine() + walletCard(); }
+function walTab() { return walBlock() + walletCard(); }
 function proTab() {
   return `<p class="what" style="margin:0 0 12px">${esc(L.proI)}</p>`
     + PROGS.map((p) => `<section class="card" style="--c:${p.c}"><div class="head"><div class="ico">${p.i}</div><div><h2>${esc(p.name)}</h2><span class="badge">${esc(p.badge())}</span></div></div>`
