@@ -230,8 +230,8 @@ function tapNums() {
   const u = $('tapusd'), b = $('tapbar'), n = $('tapn');
   if (u) u.textContent = money(tapUsd(), tapUsd() < 1 ? 4 : 2);
   if (b) b.style.width = pct.toFixed(1) + '%';
-  // 16 oct 2026: the rate of the day (it changes at random every day at midnight, Paris time)
-  if (n) n.textContent = L.today + ' : ' + (Number(TP.today || 0) + TQ).toLocaleString(LG) + ' ' + L.taps + ' · 💎 ' + tpc.toLocaleString(LG) + ' = ' + money(0.01);
+  // 16 oct 2026 (Jeremy): the rate is not shown
+  if (n) n.textContent = L.today + ' : ' + (Number(TP.today || 0) + TQ).toLocaleString(LG) + ' ' + L.taps;
 }
 function walletCard() {
   const w = S.wallet, ed = EDIT || !w;
