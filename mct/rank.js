@@ -89,7 +89,10 @@
     const T = L(), c = TAB === 'pl' ? D.player : TAB === 'rf' ? D.ref : D.dia;
     const md = ['🥇', '🥈', '🥉'], pz = (c && c.prizes) || [];
     const val = (n) => TAB === 'pl' ? big(n) : nf(n) + ' ' + T.u[TAB];
-    const rows = ((c && c.top) || []).slice(0, 10).map((x, i) => '<div class="rrow' + (x.me ? ' me' : '') + '"><span>' + (md[i] || (i + 1) + '.') + ' ' + ec(x.name) + (x.me ? ' (' + ec(T.you) + ')' : '') + '</span><span>' + ec(val(x.n)) + '</span></div>').join('')
+    // 16 oct 2026 (Jeremy): Jeremy shows with 👨‍💻 at his place, out of the ranking and the prizes (the medals stay with the players)
+    const list = ((c && c.top) || []).slice(0, 10).map((x, i) => ({ x, lab: md[i] || (i + 1) + '.' }));
+    if (c && c.dev) { let k = list.findIndex((y) => Number(y.x.n) < Number(c.dev.n)); if (k < 0) k = list.length; list.splice(k, 0, { x: { name: c.dev.name, n: c.dev.n }, lab: '👨‍💻', dev: true }); }
+    const rows = list.map(({ x, lab, dev }) => '<div class="rrow' + (x.me ? ' me' : '') + '"' + (dev ? ' style="opacity:.8"' : '') + '><span>' + lab + ' ' + ec(x.name) + (dev ? ' <small style="opacity:.7">dev</small>' : '') + (x.me ? ' (' + ec(T.you) + ')' : '') + '</span><span>' + ec(val(x.n)) + '</span></div>').join('')
       || '<p class="rsm" style="text-align:center;margin:8px 0">' + ec(T.nobody) + '</p>';
     let me = '';
     if (c && c.me && c.me.rank) me = '<p class="rsm" style="margin:8px 0 0">' + ec(T.rank) + ' : <b>#' + c.me.rank + '</b> · ' + ec(val(c.me.n)) + '</p>';
