@@ -1,19 +1,20 @@
 // 16 oct 2026 (Jeremy): friends in Meme Coin Tycoon. A card "👥 My friends" in the Leaders tab opens the ranking between friends,
 // with a 🎁 gift (game cash) to send to each friend once a day, and a button to add a friend (Telegram share of the link r_<id>).
-// The sponsor and the friends invited are friends automatically; a link r_<id> opened by a player who already plays adds a friend too.
+// The sponsor and the friends invited are friends automatically; a link r_<id> opened by a player who already plays, or the button on a
+// profile, sends a friend request (16 oct 2026: the other player accepts or refuses it in this sheet).
 // Data from the Supabase function mct-fr.
 (() => {
   const FN = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-fr';
   const TX = {
     en: { card: '👥 My friends', cardx: 'Your ranking between friends, and a gift to send every day', see: 'See', t: '👥 My friends', you: 'you', dev: 'dev',
       add: '➕ Add a friend', share: 'Play Meme Coin Tycoon with me: trade memecoins and win real TON 🚀', gift: (n) => '🎁 ' + n, sent: '✅ Sent', none: 'No friend yet. Add your friends: you will see who trades best and you can send each other a gift every day 🎁',
-      okg: (n) => '🎁 Gift sent: ' + n + '!', full: 'This friend has received enough gifts today.', already: 'Already sent today.', err: 'Connection problem, try again.', added: (n) => '👥 ' + n + ' is now your friend!', padd: '➕ Add as friend', isf: '👥 Friend', on: 'played today', gifts: 'Gifts received today', close: 'Close' },
+      okg: (n) => '🎁 Gift sent: ' + n + '!', full: 'This friend has received enough gifts today.', already: 'Already sent today.', err: 'Connection problem, try again.', added: (n) => '👥 ' + n + ' is now your friend!', padd: '➕ Add as friend', isf: '👥 Friend', pend: '⏳ Request sent', rsent: (n) => '📩 Request sent to ' + n, reqs: '📩 Friend requests', acc: '✅ Accept', ref: 'Refused', refb: 'Refuse', on: 'played today', gifts: 'Gifts received today', close: 'Close' },
     fr: { card: '👥 Mes amis', cardx: 'Ton classement entre amis, et un cadeau à envoyer chaque jour', see: 'Voir', t: '👥 Mes amis', you: 'toi', dev: 'dev',
       add: '➕ Ajouter un ami', share: 'Joue à Meme Coin Tycoon avec moi : trade des memecoins et gagne de vrais TON 🚀', gift: (n) => '🎁 ' + n, sent: '✅ Envoyé', none: 'Pas encore d\'ami. Ajoute tes amis : tu verras qui trade le mieux et vous pourrez vous envoyer un cadeau chaque jour 🎁',
-      okg: (n) => '🎁 Cadeau envoyé : ' + n + ' !', full: 'Cet ami a déjà reçu assez de cadeaux aujourd\'hui.', already: 'Déjà envoyé aujourd\'hui.', err: 'Problème de connexion, réessaie.', added: (n) => '👥 ' + n + ' est maintenant ton ami !', padd: '➕ Ajouter en ami', isf: '👥 Ami', on: 'a joué aujourd\'hui', gifts: 'Cadeaux reçus aujourd\'hui', close: 'Fermer' },
+      okg: (n) => '🎁 Cadeau envoyé : ' + n + ' !', full: 'Cet ami a déjà reçu assez de cadeaux aujourd\'hui.', already: 'Déjà envoyé aujourd\'hui.', err: 'Problème de connexion, réessaie.', added: (n) => '👥 ' + n + ' est maintenant ton ami !', padd: '➕ Ajouter en ami', isf: '👥 Ami', pend: '⏳ Demande envoyée', rsent: (n) => '📩 Demande envoyée à ' + n, reqs: '📩 Demandes d\'ami', acc: '✅ Accepter', ref: 'Demande refusée', refb: 'Refuser', on: 'a joué aujourd\'hui', gifts: 'Cadeaux reçus aujourd\'hui', close: 'Fermer' },
     ar: { card: '👥 أصدقائي', cardx: 'ترتيبك بين أصدقائك، وهدية ترسلها كل يوم', see: 'عرض', t: '👥 أصدقائي', you: 'أنت', dev: 'dev',
       add: '➕ أضف صديقًا', share: 'العب Meme Coin Tycoon معي: تداول عملات الميم واربح TON حقيقية 🚀', gift: (n) => '🎁 ' + n, sent: '✅ أُرسلت', none: 'لا أصدقاء بعد. أضف أصدقاءك لترى من يتداول أفضل وتتبادلوا هدية كل يوم 🎁',
-      okg: (n) => '🎁 أُرسلت الهدية: ' + n + '!', full: 'تلقى هذا الصديق ما يكفي من الهدايا اليوم.', already: 'أُرسلت اليوم.', err: 'مشكلة في الاتصال، حاول مرة أخرى.', added: (n) => '👥 ' + n + ' أصبح صديقك!', padd: '➕ أضف كصديق', isf: '👥 صديق', on: 'لعب اليوم', gifts: 'الهدايا المستلمة اليوم', close: 'إغلاق' },
+      okg: (n) => '🎁 أُرسلت الهدية: ' + n + '!', full: 'تلقى هذا الصديق ما يكفي من الهدايا اليوم.', already: 'أُرسلت اليوم.', err: 'مشكلة في الاتصال، حاول مرة أخرى.', added: (n) => '👥 ' + n + ' أصبح صديقك!', padd: '➕ أضف كصديق', isf: '👥 صديق', pend: '⏳ تم إرسال الطلب', rsent: (n) => '📩 تم إرسال الطلب إلى ' + n, reqs: '📩 طلبات الصداقة', acc: '✅ قبول', ref: 'تم الرفض', refb: 'رفض', on: 'لعب اليوم', gifts: 'الهدايا المستلمة اليوم', close: 'إغلاق' },
   };
   const tw = window.Telegram && Telegram.WebApp;
   const lg = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] ? l : 'en'; };
@@ -86,11 +87,21 @@
     const rows = list.map((x, i) => '<div class="frow' + (x.me ? ' me' : '') + '"><span class="fk">' + (['🥇', '🥈', '🥉'][i] || (i + 1)) + '</span>' + av(x)
       + '<span class="fn" data-pid="' + x.pid + '"><b>' + ec(x.name) + (x.dev ? ' <small>👨‍💻 ' + ec(T.dev) + '</small>' : '') + (x.me ? ' (' + ec(T.you) + ')' : '') + '</b><small>' + big(x.worth) + (x.active && !x.me ? ' · 🟢 ' + ec(T.on) : '') + '</small></span>'
       + (x.me ? '' : '<button class="fg" data-g="' + x.pid + '"' + (x.gifted ? ' disabled' : '') + '>' + ec(x.gifted ? T.sent : T.gift(gift)) + '</button>') + '</div>').join('');
+    // 16 oct 2026: friend requests received, to accept or refuse
+    const rin = (D.requests && D.requests.in) || [];
+    const rq = rin.length ? '<div class="fc" style="border-color:#ffd43b"><p class="fsm" style="margin:8px 0 2px"><b>' + ec(T.reqs) + ' (' + rin.length + ')</b></p>' + rin.map((x) => '<div class="frow">' + av(x) + '<span class="fn" data-pid="' + x.pid + '"><b>' + ec(x.name) + '</b></span><button class="fg" data-acc="' + x.pid + '">' + ec(T.acc) + '</button><button class="fg" data-ref="' + x.pid + '" style="background:rgba(255,255,255,.1);color:inherit" aria-label="' + ec(T.refb) + '">✕</button></div>').join('') + '</div>' : '';
     b.style.cssText = '';
-    b.innerHTML = (others.length ? '<div class="fc">' + rows + '</div>' : '<p class="fsm" style="text-align:center;margin:10px 0 16px">' + ec(T.none) + '</p>')
+    b.innerHTML = rq + (others.length ? '<div class="fc">' + rows + '</div>' : '<p class="fsm" style="text-align:center;margin:10px 0 16px">' + ec(T.none) + '</p>')
       + (Number(D.received) ? '<p class="fsm">🎁 ' + ec(T.gifts) + ' : <b>' + D.received + '</b></p>' : '')
       + '<button class="btn" id="fradd">' + ec(T.add) + '</button>';
     b.querySelectorAll('[data-pid]').forEach((x) => x.onclick = () => { if (typeof window.mctProfile !== 'function') return; hp(); closeIt(); window.mctProfile(x.dataset.pid); });
+    b.querySelectorAll('[data-acc],[data-ref]').forEach((x) => x.onclick = async () => {
+      const yes = !!x.dataset.acc, id = x.dataset.acc || x.dataset.ref; hp('medium');
+      x.parentNode.querySelectorAll('button').forEach((y) => { y.disabled = true; });
+      let r = null; try { r = await call({ action: 'answer', id, yes }); } catch (e) {}
+      if (!r || !r.ok) { tst(T.err); x.parentNode.querySelectorAll('button').forEach((y) => { y.disabled = false; }); return; }
+      tst(yes ? T.added(r.name || '') : T.ref); show();
+    });
     b.querySelectorAll('[data-g]').forEach((x) => x.onclick = async () => {
       if (x.disabled) return; hp('medium'); x.disabled = true;
       let r = null; try { r = await call({ action: 'gift', id: x.dataset.g }); } catch (e) {}
@@ -125,14 +136,15 @@
     const pid = PID, T = L(), x = document.createElement('button');
     x.id = 'pfadd'; x.className = 'btn'; x.style.cssText = 'width:100%;margin:10px 0 12px'; x.disabled = true; x.textContent = '⏳';
     h.after(x);
-    const isF = (await friendIds()).has(pid);
+    const isF = (await friendIds()).has(pid), sent = ((D && D.requests && D.requests.out) || []).map(Number).includes(pid);
     if (PID !== pid) return;
     if (isF) { x.className = 'btn ghost'; x.textContent = T.isf; return; }
+    if (sent) { x.className = 'btn ghost'; x.textContent = T.pend; return; }
     x.disabled = false; x.textContent = T.padd;
     x.onclick = async () => {
       hp('medium'); x.disabled = true;
-      let r = null; try { r = await call({ action: 'add', id: pid }); } catch (e) {}
-      if (r && r.ok) { x.className = 'btn ghost'; x.textContent = T.isf; D = null; tst(T.added(r.name || '')); }
+      let r = null; try { r = await call({ action: 'req', id: pid }); } catch (e) {}
+      if (r && r.ok) { x.className = 'btn ghost'; x.textContent = r.friend ? T.isf : T.pend; D = null; tst(r.friend ? T.added(r.name || '') : T.rsent(r.name || '')); }
       else { x.disabled = false; tst(T.err); }
     };
   }
@@ -143,7 +155,7 @@
   const m = /^r_(\d+)/.exec(sp);
   if (m && Number(m[1]) !== me()) setTimeout(async () => {
     let r = null; try { r = await call({ action: 'add', id: m[1] }); } catch (e) {}
-    if (r && r.ok && r.new) tst(L().added(r.name));
+    if (r && r.ok) tst(r.friend ? L().added(r.name) : L().rsent(r.name)); // 16 oct 2026: a request, the other player accepts
   }, 4000);
   if (/friends/.test(sp)) { let n = 0; const w = setInterval(() => { n++; let ok = false; try { ok = !!document.querySelector('nav.tb'); } catch (e) {} if (ok || n > 60) { clearInterval(w); if (ok) show(); } }, 250); }
 })();
