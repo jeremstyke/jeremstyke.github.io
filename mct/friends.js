@@ -7,13 +7,13 @@
   const TX = {
     en: { card: '👥 My friends', cardx: 'Your ranking between friends, and a gift to send every day', see: 'See', t: '👥 My friends', you: 'you', dev: 'dev',
       add: '➕ Add a friend', share: 'Play Meme Coin Tycoon with me: trade memecoins and win real TON 🚀', gift: (n) => '🎁 ' + n, sent: '✅ Sent', none: 'No friend yet. Add your friends: you will see who trades best and you can send each other a gift every day 🎁',
-      okg: (n) => '🎁 Gift sent: ' + n + '!', full: 'This friend has received enough gifts today.', already: 'Already sent today.', err: 'Connection problem, try again.', added: (n) => '👥 ' + n + ' is now your friend!', on: 'played today', gifts: 'Gifts received today', close: 'Close' },
+      okg: (n) => '🎁 Gift sent: ' + n + '!', full: 'This friend has received enough gifts today.', already: 'Already sent today.', err: 'Connection problem, try again.', added: (n) => '👥 ' + n + ' is now your friend!', padd: '➕ Add as friend', isf: '👥 Friend', on: 'played today', gifts: 'Gifts received today', close: 'Close' },
     fr: { card: '👥 Mes amis', cardx: 'Ton classement entre amis, et un cadeau à envoyer chaque jour', see: 'Voir', t: '👥 Mes amis', you: 'toi', dev: 'dev',
       add: '➕ Ajouter un ami', share: 'Joue à Meme Coin Tycoon avec moi : trade des memecoins et gagne de vrais TON 🚀', gift: (n) => '🎁 ' + n, sent: '✅ Envoyé', none: 'Pas encore d\'ami. Ajoute tes amis : tu verras qui trade le mieux et vous pourrez vous envoyer un cadeau chaque jour 🎁',
-      okg: (n) => '🎁 Cadeau envoyé : ' + n + ' !', full: 'Cet ami a déjà reçu assez de cadeaux aujourd\'hui.', already: 'Déjà envoyé aujourd\'hui.', err: 'Problème de connexion, réessaie.', added: (n) => '👥 ' + n + ' est maintenant ton ami !', on: 'a joué aujourd\'hui', gifts: 'Cadeaux reçus aujourd\'hui', close: 'Fermer' },
+      okg: (n) => '🎁 Cadeau envoyé : ' + n + ' !', full: 'Cet ami a déjà reçu assez de cadeaux aujourd\'hui.', already: 'Déjà envoyé aujourd\'hui.', err: 'Problème de connexion, réessaie.', added: (n) => '👥 ' + n + ' est maintenant ton ami !', padd: '➕ Ajouter en ami', isf: '👥 Ami', on: 'a joué aujourd\'hui', gifts: 'Cadeaux reçus aujourd\'hui', close: 'Fermer' },
     ar: { card: '👥 أصدقائي', cardx: 'ترتيبك بين أصدقائك، وهدية ترسلها كل يوم', see: 'عرض', t: '👥 أصدقائي', you: 'أنت', dev: 'dev',
       add: '➕ أضف صديقًا', share: 'العب Meme Coin Tycoon معي: تداول عملات الميم واربح TON حقيقية 🚀', gift: (n) => '🎁 ' + n, sent: '✅ أُرسلت', none: 'لا أصدقاء بعد. أضف أصدقاءك لترى من يتداول أفضل وتتبادلوا هدية كل يوم 🎁',
-      okg: (n) => '🎁 أُرسلت الهدية: ' + n + '!', full: 'تلقى هذا الصديق ما يكفي من الهدايا اليوم.', already: 'أُرسلت اليوم.', err: 'مشكلة في الاتصال، حاول مرة أخرى.', added: (n) => '👥 ' + n + ' أصبح صديقك!', on: 'لعب اليوم', gifts: 'الهدايا المستلمة اليوم', close: 'إغلاق' },
+      okg: (n) => '🎁 أُرسلت الهدية: ' + n + '!', full: 'تلقى هذا الصديق ما يكفي من الهدايا اليوم.', already: 'أُرسلت اليوم.', err: 'مشكلة في الاتصال، حاول مرة أخرى.', added: (n) => '👥 ' + n + ' أصبح صديقك!', padd: '➕ أضف كصديق', isf: '👥 صديق', on: 'لعب اليوم', gifts: 'الهدايا المستلمة اليوم', close: 'إغلاق' },
   };
   const tw = window.Telegram && Telegram.WebApp;
   const lg = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] ? l : 'en'; };
@@ -104,6 +104,39 @@
     };
   }
   window.mctFriends = show;
+
+  // 16 oct 2026 (Jeremy): "Add as friend" right on the profile of another player (leaderboard, contests, friends list)
+  let PID = 0;
+  // the profile sheet (profile.js) loads through tonCall({action:'profile'}): keep the pid of the player shown (0 for me or an AI)
+  const oc = window.tonCall;
+  if (typeof oc === 'function') window.tonCall = async (body) => {
+    if (body && body.action === 'profile') PID = 0;
+    const r = await oc(body);
+    if (body && body.action === 'profile' && r && r.ok) PID = r.me || r.ai ? 0 : Number(r.pid) || 0;
+    return r;
+  };
+  async function friendIds() {
+    if (!D) { try { const r = await call({ action: 'list' }); if (r && r.ok) D = r; } catch (e) {} }
+    return new Set(((D && D.list) || []).map((f) => Number(f.pid)));
+  }
+  async function profBtn() {
+    const b = document.getElementById('pfb'), h = b && b.querySelector('.phead');
+    if (!h || document.getElementById('pfadd') || !PID || PID === me()) return;
+    const pid = PID, T = L(), x = document.createElement('button');
+    x.id = 'pfadd'; x.className = 'btn'; x.style.cssText = 'width:100%;margin:10px 0 12px'; x.disabled = true; x.textContent = '⏳';
+    h.after(x);
+    const isF = (await friendIds()).has(pid);
+    if (PID !== pid) return;
+    if (isF) { x.className = 'btn ghost'; x.textContent = T.isf; return; }
+    x.disabled = false; x.textContent = T.padd;
+    x.onclick = async () => {
+      hp('medium'); x.disabled = true;
+      let r = null; try { r = await call({ action: 'add', id: pid }); } catch (e) {}
+      if (r && r.ok) { x.className = 'btn ghost'; x.textContent = T.isf; D = null; tst(T.added(r.name || '')); }
+      else { x.disabled = false; tst(T.err); }
+    };
+  }
+  new MutationObserver(() => { if (document.querySelector('#pfb .phead') && !document.getElementById('pfadd')) profBtn(); }).observe(document.body, { childList: true, subtree: true });
 
   // a link r_<id> opened by a player who already plays: that player becomes a friend (a new player is linked by the referral itself)
   const sp = String((tw && tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '');
