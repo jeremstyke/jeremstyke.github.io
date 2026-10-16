@@ -440,7 +440,7 @@ function walBlock() {
   const mo = (v) => money(v, Number(v) > 0 && Number(v) < 1 ? 4 : 2);
   const r = (l, v) => `<div class="rk" style="font-size:14px"><span>${esc(l)}</span><b>${mo(v)}</b></div>`;
   return `<section class="card" style="--c:#2ee6ff;background:linear-gradient(160deg,rgba(46,230,255,.16),rgba(125,255,107,.08) 60%,var(--card))"><div class="lbl">${esc(WB[0])}</div><div class="big" style="font-size:40px;color:#2ee6ff">${mo(a.total)}</div>`
-    + r('💎 Earn by Jeremstyke', e) + r('🎮 Meme Coin Tycoon', m) + (o > 0.00001 ? r('➕ ' + WB[1], o) : '') + (Number(a.paid) ? r('💸 ' + WB[2], a.paid) : '')
+    + r('💎 Earn by Jeremstyke', e) + r('🎮 Meme Coin Tycoon', m) + (Number(a.paid) ? r('💸 ' + WB[2], a.paid) : '')
     + `<p class="what" style="font-size:12px;margin:8px 0 0">${esc(WB[3])} ${money(a.min || 0.1)}</p></section>`;
 }
 function walTab() { return walBlock() + walletCard(); }
