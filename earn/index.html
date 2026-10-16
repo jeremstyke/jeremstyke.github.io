@@ -326,7 +326,7 @@ function tapTab() {
       + `<div style="height:8px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden;margin:6px 0 4px"><i id="tapbar" style="display:block;height:100%;width:0;background:#2ee6ff;transition:width .15s"></i></div>`
       + `<div class="what" style="font-size:13px;margin:0 0 10px" id="tapn"></div><div id="taparea"></div>`
       + `<p class="what" style="font-size:12px;margin:10px 0 0">${esc(L.pay)}</p></section>` : '')
-    + subCard() + mctCard();
+    + mctCard() + subCard(); // 16 oct 2026: Meme Coin Tycoon right under the diamond
 }
 function tapPaint() {
   const el = $('taparea'); if (!el || !TP) return;
@@ -341,6 +341,7 @@ function tapPaint() {
     ev.preventDefault(); TQ++; TCOUNT++;
     g.style.transform = 'translate(-50%,-50%) scale(.9)'; setTimeout(() => { if (g) g.style.transform = 'translate(-50%,-50%)'; }, 70);
     if (TCOUNT % 10 === 0) haptic();
+    if (TCOUNT % 1000 === 0) mctPause(); // 16 oct 2026: a break every 1,000 taps, to Meme Coin Tycoon
     if (TCOUNT % 50 === 0) { TPOS = { x: 20 + Math.random() * 60, y: 22 + Math.random() * 46 }; g.style.left = TPOS.x + '%'; g.style.top = TPOS.y + '%'; }
     tapNums();
     if (!TTIMER) TTIMER = setTimeout(tapFlush, 1000);
@@ -425,6 +426,14 @@ const TB2 = { en: ['Referral', 'Wallet', '🎮 My other game', 'Play'], fr: ['Pa
 const PROGS = [
   { k: 'mct', c: '#ffd43b', i: '🪙', name: 'Meme Coin Tycoon', badge: () => L.perF, what: () => L.mct, url: 'https://t.me/Memecointycoonbot?startapp=v_earn' },
 ];
+// 16 oct 2026: every 1,000 taps, a Telegram popup offers a break on Meme Coin Tycoon (tracked link tap_ -> src_earnpause)
+const PAUSE = { en: ['💪 Take a break?', 'Launch your own memecoin on Meme Coin Tycoon, my other game: $1,000 of virtual cash to start, and real TON for every friend who plays.', '🎮 Play', 'Keep tapping'], fr: ['💪 Une pause ?', 'Lance ton propre memecoin sur Meme Coin Tycoon, mon autre jeu : 1 000 $ virtuels pour commencer, et du vrai TON pour chaque ami qui joue.', '🎮 Jouer', 'Continuer'], es: ['💪 ¿Un descanso?', 'Lanza tu propio memecoin en Meme Coin Tycoon, mi otro juego: 1 000 $ virtuales para empezar y TON real por cada amigo que juegue.', '🎮 Jugar', 'Seguir'], pt: ['💪 Uma pausa?', 'Lance seu próprio memecoin no Meme Coin Tycoon, meu outro jogo: 1 000 $ virtuais para começar e TON de verdade por cada amigo que jogar.', '🎮 Jogar', 'Continuar'], ru: ['💪 Перерыв?', 'Запусти свой мемкоин в Meme Coin Tycoon, моей другой игре: 1 000 $ виртуальных на старт и настоящие TON за каждого друга, который играет.', '🎮 Играть', 'Продолжить'], ar: ['💪 استراحة؟', 'أطلق عملتك الخاصة في Meme Coin Tycoon، لعبتي الأخرى: 1000 $ افتراضية للبدء و TON حقيقية عن كل صديق يلعب.', '🎮 العب', 'تابع'], id: ['💪 Istirahat?', 'Luncurkan memecoin-mu sendiri di Meme Coin Tycoon, game-ku yang lain: 1.000 $ virtual untuk mulai, dan TON asli untuk setiap teman yang bermain.', '🎮 Main', 'Lanjut ketuk'] }[LG];
+function mctPause() {
+  try {
+    if (!tw || !tw.showPopup) return;
+    tw.showPopup({ title: PAUSE[0], message: PAUSE[1], buttons: [{ id: 'play', type: 'default', text: PAUSE[2] }, { id: 'no', type: 'cancel', text: PAUSE[3] }] }, (id) => { if (id === 'play') { track('mct', 'open'); open('https://t.me/Memecointycoonbot?startapp=src_earnpause'); } });
+  } catch (e) {}
+}
 // the small card to Meme Coin Tycoon at the bottom of the Diamond tab
 function mctCard() {
   const p = PROGS[0];
