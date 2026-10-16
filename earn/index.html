@@ -362,6 +362,10 @@ async function tapFlush() {
 }
 
 // ---------- the contest tab ----------
+// 16 oct 2026: live countdown to the end of the diamond contest
+const CDL = LG === 'fr' ? 'j' : LG === 'ru' ? 'д' : LG === 'ar' ? 'ي' : 'd';
+function cdTxt(end, dl) { const x = Math.max(0, Math.floor((Date.parse(end) - Date.now()) / 1000)), d = Math.floor(x / 86400), p = (n) => String(n).padStart(2, '0'); return (d ? d + dl + ' ' : '') + p(Math.floor(x % 86400 / 3600)) + ':' + p(Math.floor(x % 3600 / 60)) + ':' + p(x % 60); }
+setInterval(() => { document.querySelectorAll('[data-cdend]').forEach((e) => { e.textContent = cdTxt(e.dataset.cdend, e.dataset.cdl || 'd'); }); }, 1000);
 function conTab() {
   const c = (TP && TP.contest) || (S.tap && S.tap.contest);
   let h = '';
@@ -371,7 +375,7 @@ function conTab() {
     const rows = top.map((x, i) => `<div class="rk${x.me ? ' me' : ''}"><span>${md[i] || (i + 1) + '.'} ${esc(x.name)}${x.me ? ' (' + esc(L.you) + ')' : ''}</span><span>${Number(x.n).toLocaleString(LG)} ${esc(L.taps)}${i < 3 && pz[i] ? ' · ' + money(pz[i]) : ''}</span></div>`).join('')
       || `<p class="what">${esc(L.nobody)}</p>`;
     const me = c.me && c.me.rank ? `<p class="what" style="font-size:13px;margin:8px 0 0">${esc(L.rank)} : <b>#${c.me.rank}</b> · ${Number(c.me.n).toLocaleString(LG)} ${esc(L.week)}</p>` : (Number(c.min) > 1 ? `<p class="what" style="font-size:13px;margin:8px 0 0">${esc(L.cMin(Number(c.min).toLocaleString(LG)))}</p>` : '');
-    h += `<section class="card" style="--c:#ffd43b"><div class="lbl">${L.cT}</div><p class="what" style="margin:0 0 8px">${esc(L.cX)} <b>${pz.map((x) => money(x)).join(' / ')}</b> ${esc(L.cTon)} ⏳ ${esc(L.left)} ${lt}</p>`
+    h += `<section class="card" style="--c:#ffd43b"><div class="lbl">${L.cT}</div><p class="what" style="margin:0 0 8px">${esc(L.cX)} <b>${pz.map((x) => money(x)).join(' / ')}</b> ${esc(L.cTon)} </p><div style="margin:0 0 10px;padding:8px 10px;border-radius:10px;background:rgba(0,0,0,.28);text-align:center"><div style="font-size:12px;opacity:.75">⏳ ${esc(L.left)}</div><div style="font-size:22px;font-weight:900;font-variant-numeric:tabular-nums" data-cdend="${c.ends}" data-cdl="${CDL}">${cdTxt(c.ends, CDL)}</div></div>`
       + rows + me + `<button class="btn" id="cgo" style="margin-top:12px">💎 ${esc(L.tTap)}</button></section>`;
   }
   const pays = ((S.contest && S.contest.payouts) || []).slice(0, 6).map((p) => `<div class="rk" style="font-size:13px"><span>✅ ${esc(p.name)}</span><span>${Number(p.ton).toFixed(3)} TON · ${new Date(p.at).toLocaleDateString(LG)}</span></div>`).join('');
