@@ -151,7 +151,7 @@ async function tonPage() {
     + (Number(s.budget_left) < Number(s.usd) ? `<p style="font-size:13px;opacity:.75">${L.off}</p>` : '')
     + mctContestHtml(s.contest, LANG === 'fr', tonM)
     + `<details class="how"><summary>📖 ${L.how} ▾</summary><div style="margin-top:10px">${steps}</div></details>`
-    + `<button class="more" id="tonse">🔗 ${LANG === 'fr' ? 'Autres programmes de parrainage (Earn)' : 'More referral programs (Earn)'}</button><div class="close" id="tonsc">${D.close}</div></div>`;
+    + `<button class="more" id="tonse">💰 ${LANG === 'fr' ? 'Gagne plus de TON' : 'Earn more TON'}</button><div class="close" id="tonsc">${D.close}</div></div>`;
   document.body.appendChild(d);
   const close = () => { d.remove(); clearInterval(TONSH_T); };
   d.onclick = (e) => { if (e.target === d || e.target.id === 'tonsc') close(); };
