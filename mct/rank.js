@@ -91,8 +91,8 @@
     const val = (n) => TAB === 'pl' ? big(n) : nf(n) + ' ' + T.u[TAB];
     // 16 oct 2026 (Jeremy): Jeremy shows with 👨‍💻 at his place, out of the ranking and the prizes (the medals stay with the players)
     const list = ((c && c.top) || []).slice(0, 10).map((x, i) => ({ x, lab: md[i] || (i + 1) + '.' }));
-    if (c && c.dev) { let k = list.findIndex((y) => Number(y.x.n) < Number(c.dev.n)); if (k < 0) k = list.length; list.splice(k, 0, { x: { name: c.dev.name, n: c.dev.n }, lab: '👨‍💻', dev: true }); }
-    const rows = list.map(({ x, lab, dev }) => '<div class="rrow' + (x.me ? ' me' : '') + '"' + (dev ? ' style="opacity:.8"' : '') + '><span>' + lab + ' ' + ec(x.name) + (dev ? ' <small style="opacity:.7">dev</small>' : '') + (x.me ? ' (' + ec(T.you) + ')' : '') + '</span><span>' + ec(val(x.n)) + '</span></div>').join('')
+    if (c && c.dev) { let k = list.findIndex((y) => Number(y.x.n) < Number(c.dev.n)); if (k < 0) k = list.length; list.splice(k, 0, { x: { name: c.dev.name, n: c.dev.n, pid: c.dev.pid }, lab: '👨‍💻', dev: true }); }
+    const rows = list.map(({ x, lab, dev }) => '<div class="rrow' + (x.me ? ' me' : '') + '"' + (x.pid ? ' data-pid="' + x.pid + '"' : '') + (dev ? ' style="opacity:.8;cursor:pointer"' : x.pid ? ' style="cursor:pointer"' : '') + '><span>' + lab + ' ' + ec(x.name) + (dev ? ' <small style="opacity:.7">dev</small>' : '') + (x.me ? ' (' + ec(T.you) + ')' : '') + '</span><span>' + ec(val(x.n)) + '</span></div>').join('')
       || '<p class="rsm" style="text-align:center;margin:8px 0">' + ec(T.nobody) + '</p>';
     let me = '';
     if (c && c.me && c.me.rank) me = '<p class="rsm" style="margin:8px 0 0">' + ec(T.rank) + ' : <b>#' + c.me.rank + '</b> · ' + ec(val(c.me.n)) + '</p>';
@@ -105,6 +105,8 @@
       + '<div class="rpz">' + pz.slice(0, 3).map((p, i) => '<span>' + md[i] + ' ' + usd(p) + '</span>').join('') + '</div><p class="rsm" style="margin:-4px 0 8px;font-size:12px">' + ec(T.prizes) + '</p>'
       + rows + me + '</div>' + act;
     b.querySelectorAll('[data-rt]').forEach((x) => x.onclick = () => { hp(); TAB = x.dataset.rt; paint(); });
+    // 16 oct 2026: a tap on a name opens that player's profile (profile.js)
+    b.querySelectorAll('[data-pid]').forEach((x) => x.onclick = () => { if (typeof window.mctProfile !== 'function') return; hp(); closeIt(); window.mctProfile(x.dataset.pid); });
     document.getElementById('rka').onclick = () => {
       hp(); closeIt();
       if (TAB === 'dg') { const d = document.getElementById('diatop'); if (d) d.click(); }
