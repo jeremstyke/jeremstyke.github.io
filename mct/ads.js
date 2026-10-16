@@ -1,6 +1,7 @@
 // 16 oct 2026: Meme Coin Tycoon rewarded videos (Ads Galaxy, game id 135). Three places where the player really wants something:
 // 1. the mining boost x2: a free video instead of 5 stars (once a day, the stars stay possible);
 // 2. the scoop: the next news (which coin, up or down) before everyone (2 a day), a card at the top of the market and the news;
+//    once unlocked, it stays visible for free until that news comes out;
 // 3. the insurance: right after a losing sale, a video gives back 50 % of the loss (3 a day, within 10 minutes).
 // The server checks every limit (Supabase function mct-ton: boost_ad, scoop, insure).
 (() => {
@@ -14,7 +15,7 @@
       iOk: (r) => '🛟 ' + r + ' added to your cash!', iLim: 'You used your 3 insurances today.', iLate: 'Too late: the insurance lasts 10 minutes after the sale.',
       sT: '📰 Scoop', sX: 'See the next news before everyone', sB: '📺 Watch', sUp: (t) => '$' + t + ' will get good news soon 🚀', sDn: (t) => '$' + t + ' will get bad news soon 📉',
       sAllUp: 'The whole market will pump soon 🚀', sAllDn: 'The whole market will dip soon 📉', sNote: 'Nobody knows exactly when: in 30 minutes or tomorrow. Your move!',
-      sGo: (t) => 'Open $' + t, sLim: 'You saw your 2 scoops today. Come back tomorrow!',
+      sOpen: '👀 See', sGo: (t) => 'Open $' + t, sLim: 'You saw your 2 scoops today. Come back tomorrow!',
     },
     fr: {
       bT: 'Boost x2 pendant 1 heure', bX: 'Ton minage rapporte le double pendant 1 heure.', bAd: '📺 Regarder une vidéo (gratuit, 1 par jour)', bPay: '⭐ Payer 5 étoiles', bOk: '⚡ Boost x2 activé !',
@@ -24,7 +25,7 @@
       iOk: (r) => '🛟 ' + r + ' ajoutés à ton cash !', iLim: 'Tu as utilisé tes 3 assurances du jour.', iLate: 'Trop tard : l\'assurance dure 10 minutes après la vente.',
       sT: '📰 Scoop', sX: 'Découvre la prochaine news avant tout le monde', sB: '📺 Voir', sUp: (t) => '$' + t + ' va bientôt avoir une bonne news 🚀', sDn: (t) => '$' + t + ' va bientôt avoir une mauvaise news 📉',
       sAllUp: 'Tout le marché va bientôt monter 🚀', sAllDn: 'Tout le marché va bientôt baisser 📉', sNote: 'Personne ne sait exactement quand : dans 30 minutes ou demain. À toi de jouer !',
-      sGo: (t) => 'Voir $' + t, sLim: 'Tu as vu tes 2 scoops du jour. Reviens demain !',
+      sOpen: '👀 Voir', sGo: (t) => 'Voir $' + t, sLim: 'Tu as vu tes 2 scoops du jour. Reviens demain !',
     },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] || TX.en; };
@@ -114,20 +115,33 @@
     el.innerHTML = `<div style="flex:1;min-width:0"><b style="font-size:16px">${ec(T.sT)}</b><br><small style="color:var(--mute);font-size:12px">${ec(T.sX)}</small></div><button class="msn-b go" id="scb">${ec(T.sB)}</button>`;
     h1.parentNode.insertBefore(el, h1.nextSibling);
     el.querySelector('#scb').onclick = scoop;
+    // 16 oct 2026: an already unlocked scoop is shown right in the card, without a new video, until that news comes out
+    peek().then((r) => { if (!r || !document.body.contains(el)) return; el.querySelector('small').textContent = sMsg(r); el.querySelector('#scb').textContent = T.sOpen; });
   }
-  async function scoop(ev) {
-    const T = L(), b = ev.currentTarget; hp(); busy(b);
-    const back = () => { b.disabled = false; b.textContent = T.sB; };
-    if (!(await watch())) { back(); return tst(T.noad); }
-    let r = null; try { r = await tonCall({ action: 'scoop' }); } catch (x) {}
-    back();
-    if (!r || !r.ok) { hp('err'); return tst(r && r.error === 'limit' ? T.sLim : T.err); }
-    hp('ok');
-    const msg = r.all ? (r.up ? T.sAllUp : T.sAllDn) : (r.up ? T.sUp(r.ticker) : T.sDn(r.ticker));
-    const d = modal(head(r.all ? '🌍' : (r.emoji || '📰'), T.sT, msg) + `<p class="hint" style="margin:-6px 0 16px;font-size:12px">${ec(T.sNote)}</p>`
+  let PK = null, PKT = 0;
+  function peek(force) {
+    if (force || !PK || Date.now() - PKT > 60000) { PKT = Date.now(); PK = tonCall({ action: 'scoop_peek' }).then((r) => (r && r.ok ? r : null)).catch(() => null); }
+    return PK;
+  }
+  const sMsg = (r) => { const T = L(); return r.all ? (r.up ? T.sAllUp : T.sAllDn) : (r.up ? T.sUp(r.ticker) : T.sDn(r.ticker)); };
+  function show(r) {
+    const T = L();
+    const d = modal(head(r.all ? '🌍' : (r.emoji || '📰'), T.sT, sMsg(r)) + `<p class="hint" style="margin:-6px 0 16px;font-size:12px">${ec(T.sNote)}</p>`
       + (r.all ? `<button class="btn" id="sok">${ec(T.ok)}</button>` : `<button class="btn" id="sgo">${ec(T.sGo(r.ticker))}</button><button class="ghost" id="sok" style="width:100%;margin-top:10px">${ec(T.ok)}</button>`));
     d.querySelector('#sok').onclick = () => close();
     const g = d.querySelector('#sgo'); if (g) g.onclick = () => { close(); try { openCoin(r.coin); } catch (x) {} };
+  }
+  async function scoop(ev) {
+    const T = L(), b = ev.currentTarget; hp(); busy(b);
+    const back = (t) => { b.disabled = false; b.textContent = t || T.sB; };
+    const seen = await peek(true);
+    if (seen) { back(T.sOpen); hp('ok'); return show(seen); }
+    if (!(await watch())) { back(); return tst(T.noad); }
+    let r = null; try { r = await tonCall({ action: 'scoop' }); } catch (x) {}
+    if (!r || !r.ok) { back(); hp('err'); return tst(r && r.error === 'limit' ? T.sLim : T.err); }
+    PK = Promise.resolve(r); PKT = Date.now(); back(T.sOpen); hp('ok');
+    const c = document.getElementById('scoopc'); if (c) c.querySelector('small').textContent = sMsg(r);
+    show(r);
   }
   let q = 0;
   new MutationObserver(() => { if (!q) q = requestAnimationFrame(() => { q = 0; card(); }); }).observe(document.body, { childList: true, subtree: true });
