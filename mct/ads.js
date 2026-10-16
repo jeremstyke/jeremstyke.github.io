@@ -59,11 +59,14 @@
   const busy = (b) => { b.disabled = true; b.textContent = '⏳'; };
 
   // 1. the boost x2: the button first offers a free video (once a day) or 5 stars
-  document.addEventListener('click', (e) => {
+  document.addEventListener('click', async (e) => {
     const b = e.target && e.target.closest && e.target.closest('#boost');
     if (!b || b.disabled || /💎/.test(b.textContent || '')) return; // supporters keep their free boost
     e.stopImmediatePropagation(); e.preventDefault(); hp();
     const T = L();
+    // 16 oct 2026 (Jeremy): once today's free video is used, the button goes straight to the 5 stars
+    let pk = null; try { pk = await tonCall({ action: 'boost_ad', ad: 'none' }); } catch (x) {}
+    if (pk && Number(pk.left) === 0) { if (typeof b.onclick === 'function') b.onclick.call(b); return; }
     const d = modal(head('⚡', T.bT, T.bX) + `<button class="btn" id="adw">${ec(T.bAd)}</button><button class="ghost" id="adp" style="width:100%;margin-top:10px">${ec(T.bPay)}</button>`);
     d.querySelector('#adp').onclick = () => { close(); if (typeof b.onclick === 'function') b.onclick.call(b); };
     d.querySelector('#adw').onclick = async (ev) => {
