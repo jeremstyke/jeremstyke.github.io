@@ -432,7 +432,13 @@ function mctCard() {
     + `<p class="what">${esc(p.what())}</p><button class="btn" data-open="${p.k}">${esc(p.i + ' ' + TB2[3])}</button></section>`;
 }
 function refTab() { return inviteCard() || `<section class="card"><p class="what">⏳</p></section>`; }
-function walTab() { return totalCard() + walletCard(); }
+// 16 oct 2026: what was earned on Meme Coin Tycoon (and the old programs), paid together on Monday
+const OTH = { en: (m, g) => '➕ ' + m + ' earned on ' + (g ? 'Meme Coin Tycoon' : 'your other apps') + ', paid together', fr: (m, g) => '➕ ' + m + ' gagnés sur ' + (g ? 'Meme Coin Tycoon' : 'tes autres apps') + ', payés avec', es: (m, g) => '➕ ' + m + ' ganados en ' + (g ? 'Meme Coin Tycoon' : 'tus otras apps') + ', pagados juntos', pt: (m, g) => '➕ ' + m + ' ganhos no ' + (g ? 'Meme Coin Tycoon' : 'seus outros apps') + ', pagos juntos', ru: (m, g) => '➕ ' + m + ' заработано в ' + (g ? 'Meme Coin Tycoon' : 'других приложениях') + ', выплата вместе', ar: (m, g) => '➕ ' + m + ' ربحتها في ' + (g ? 'Meme Coin Tycoon' : 'تطبيقاتك الأخرى') + '، تُدفع معًا', id: (m, g) => '➕ ' + m + ' didapat di ' + (g ? 'Meme Coin Tycoon' : 'aplikasi lainmu') + ', dibayar bersama' };
+function othLine() {
+  const d = (S && S.mct && S.mct.all && S.mct.all.detail) || {}, v = ['mct', 'gp', 'ds'].reduce((x, k) => x + Number(d[k] || 0), 0);
+  return v > 0 ? `<p class="what" style="font-size:13px;font-weight:700;color:#ffd43b;margin:-6px 6px 14px">${esc(OTH[LG](money(v, v < 1 ? 4 : 2), !Number(d.gp || 0) && !Number(d.ds || 0)))}</p>` : '';
+}
+function walTab() { return totalCard() + othLine() + walletCard(); }
 function proTab() {
   return `<p class="what" style="margin:0 0 12px">${esc(L.proI)}</p>`
     + PROGS.map((p) => `<section class="card" style="--c:${p.c}"><div class="head"><div class="ico">${p.i}</div><div><h2>${esc(p.name)}</h2><span class="badge">${esc(p.badge())}</span></div></div>`
