@@ -207,7 +207,9 @@
   const cm = /^c_(\d+)_r_\d+$/.exec(sp);
   if (cm) { let n = 0; const w = setInterval(() => { n++; let ok = false; try { ok = !!ME && typeof openCoin === 'function' && !!document.querySelector('nav.tb'); } catch (e) {} if (ok) { clearInterval(w); try { openCoin(cm[1]); } catch (e) {} } if (n > 60) clearInterval(w); }, 250); }
   // 3. a clear share call on a coin's page, under its header
+  // 16 oct 2026 (Jeremy): removed, ugly and redundant with the 📣 Share button of the coin page
   function cta() {
+    return;
     const sh = document.getElementById('sh'); let c = null; try { c = COIN && COIN.coin; } catch (e) {}
     if (!sh || !c || document.getElementById('shbig')) return;
     const head = sh.closest('div'); if (!head || !head.parentNode) return;
