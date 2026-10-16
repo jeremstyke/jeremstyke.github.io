@@ -218,7 +218,7 @@ $('foot').innerHTML = esc(L.ask) + '<a href="#" id="ct">' + esc(L.me) + '</a><br
 $('ct').onclick = (e) => { e.preventDefault(); open('https://t.me/jeremstyke?direct'); };
 
 // links ?startapp=contest_... open the contest, ?startapp=progs_... the programs (from the games), wallet_... the wallet field
-let S = null, EDIT = false, TAB = /^task/.test(SP) ? 'tsk' : /^contest/.test(SP) ? 'con' : (/^progs/.test(SP) || /^(mct|gp|ds)$/.test(SP) || /^js_spot/.test(SP)) ? 'tsk' : 'tap', GOWAL = /^wallet/.test(SP);
+let S = null, EDIT = false, TAB = /^task/.test(SP) ? 'pro' : /^contest/.test(SP) ? 'con' : (/^progs/.test(SP) || /^(mct|gp|ds)$/.test(SP) || /^js_spot/.test(SP)) ? 'pro' : 'tap', GOWAL = /^wallet/.test(SP);
 let TP = null, TQ = 0, TBUSY = false, TPOS = { x: 50, y: 50 }, TCOUNT = 0, TTIMER = null;
 
 // ---------- the diamond tab ----------
@@ -418,7 +418,6 @@ const PROGS = [
   { k: 'mct', c: '#ffd43b', i: '🪙', name: 'Meme Coin Tycoon', badge: () => L.perF, what: () => L.mct, url: 'https://t.me/Memecointycoonbot?startapp=v_earn' },
   { k: 'ds', c: '#7dff6b', i: '⚽', name: 'Daily Score', badge: () => L.perF, what: () => L.ds, url: 'https://t.me/DailyScorefootbot/play?startapp=src_earn' },
   { k: 'gp', c: '#2ee6ff', i: '📚', name: 'GramPedia', badge: () => ({ en: '$0.05 in TON per listing added and approved', fr: '0,05 $ en TON par fiche ajoutée et validée', es: '0,05 $ en TON por ficha añadida y validada', pt: '0,05 $ em TON por ficha adicionada e aprovada', ru: '0,05 $ в TON за добавленную и одобренную карточку', ar: '0.05 $ بعملة TON لكل بطاقة مضافة ومعتمدة', id: '0,05 $ dalam TON per listing yang ditambahkan dan disetujui' })[LG], what: () => L.gp, url: 'https://t.me/Grampedia_bot?startapp=ton' },
-  { k: 'ia', c: '#4ff0b7', i: '📢', name: 'InsideAds', badge: () => L.iaB, what: () => L.ia, url: 'https://t.me/InsideAds_bot/open?startapp=r_7057960224', go: () => L.iaG }
 ];
 function proTab() {
   return `<p class="what" style="margin:0 0 12px">${esc(L.proI)}</p>`
@@ -429,8 +428,8 @@ function proTab() {
 
 // ---------- page ----------
 function tabs() {
-  const T = [['tap', '💎', L.tTap], ['tsk', '✅', TSK[LG].tab], ['con', '🏆', L.tCon]];
-  // 16 oct 2026 (Jeremy): no more Programs tab; the games are reached through the Tasks (where each game shows its own program and contest), InsideAds is no longer in Earn (it is in GramPedia and the Jeremstyke posts, for channel owners)
+  const T = [['tap', '💎', L.tTap], ['con', '🏆', L.tCon], ['pro', '🔗', L.tPro]];
+  // 16 oct 2026 (Jeremy, 8h17): the Programs tab is back (the 3 games and what each pays per friend), the Tasks tab is gone; InsideAds stays out of Earn
   $('tabs').innerHTML = T.map(([k, e, l]) => `<button data-t="${k}" class="${k === TAB ? 'on' : ''}"><span>${e}</span>${esc(l)}</button>`).join('');
   $('tabs').querySelectorAll('[data-t]').forEach((b) => b.onclick = () => { haptic(); TAB = b.dataset.t; render(); window.scrollTo(0, 0); });
 }
@@ -438,7 +437,7 @@ function render() {
   tabs();
   if (!INIT) { $('app').innerHTML = `<section class="card"><p class="what">${esc(L.noApp)}</p></section>` + (TAB === 'pro' ? proTab() : ''); bind(); return; }
   if (!S) { $('app').innerHTML = '<section class="card" style="text-align:center;font-size:40px">⏳</section>'; return; }
-  $('app').innerHTML = TAB === 'tap' ? tapTab() : TAB === 'tsk' ? taskTab() : TAB === 'con' ? conTab() : taskTab();
+  $('app').innerHTML = TAB === 'tap' ? tapTab() : TAB === 'tsk' ? taskTab() : TAB === 'con' ? conTab() : proTab();
   bind();
   if (TAB === 'tap') tapPaint();
   if (GOWAL && TAB === 'tap') { GOWAL = false; if (S.wallet) { EDIT = true; render(); } setTimeout(showWalForm, 300); }
