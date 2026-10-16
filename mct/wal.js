@@ -6,6 +6,8 @@
   const MAN = 'https://jeremstyke.github.io/mct/tonconnect-manifest.json';
   const fr = () => (typeof LANG !== 'undefined' ? LANG : 'en') === 'fr';
   let UI = null, LOADING = null, SENT = '', HAS = null, WANT = false;
+  // 16 oct 2026: the TON Connect window (z-index 1000) opened BEHIND the game sheets (9998/9999): put it on top of everything
+  const zs = document.createElement('style'); zs.textContent = '#tc-widget-root{position:relative;z-index:2147483000}'; document.head.appendChild(zs);
 
   // raw address "0:hex" -> user-friendly non-bounceable (UQ...)
   function friendly(raw) {
