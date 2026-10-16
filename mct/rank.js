@@ -3,19 +3,19 @@
 // A card at the top of the Leaders tab opens them. Data from the Supabase function mct-ton (action 'ranks').
 (() => {
   const TX = {
-    en: { t: 'Contests of the week', pl: '📈 Trader', rf: '👥 Sponsor', dg: '💎 Tapper', ends: 'Ends in', prizes: 'Monday prizes in real TON', you: 'you', rank: 'Your rank',
+    en: { t: 'Contests of the week', pl: '📈 Gains', rf: '👥 Sponsor', dg: '💎 Tapper', ends: 'Ends in', prizes: 'Monday prizes in real TON', you: 'you', rank: 'Your rank',
       nobody: 'Nobody yet: take the lead!', err: 'Connection problem, try again.', close: 'Close',
-      plx: 'The biggest trading gain since Monday. Only trading counts (not bonuses, mining or stars). At least 3 trades.', plme: (g, n) => 'Your week: ' + g + ' · ' + n + ' trades',
+      plx: 'The best total trading gain since Monday (gains minus losses). Only trading counts, not bonuses, mining or stars. At least 3 trades.', plme: (g, n) => 'Your week: ' + g + ' · ' + n + ' trades',
       rfx: 'The most friends who really play (3 different days).', rfb: '👥 Invite my friends', dgx: 'The most taps on the diamond this week.', dgb: '💎 Tap the diamond', plb: '🪙 Go to the market',
       u: { pl: '', rf: 'friends', dg: 'taps' } },
-    fr: { t: 'Concours de la semaine', pl: '📈 Trader', rf: '👥 Parrain', dg: '💎 Tapeur', ends: 'Fin dans', prizes: 'Gains du lundi en vrais TON', you: 'toi', rank: 'Ton rang',
+    fr: { t: 'Concours de la semaine', pl: '📈 Gains', rf: '👥 Parrain', dg: '💎 Tapeur', ends: 'Fin dans', prizes: 'Gains du lundi en vrais TON', you: 'toi', rank: 'Ton rang',
       nobody: 'Personne pour l\'instant : prends la tête !', err: 'Problème de connexion, réessaie.', close: 'Fermer',
-      plx: 'Le plus gros gain en trading depuis lundi. Seul le trading compte (pas les bonus, le minage ou les étoiles). Au moins 3 trades.', plme: (g, n) => 'Ta semaine : ' + g + ' · ' + n + ' trades',
+      plx: 'Le meilleur gain total en trading depuis lundi (gains moins pertes). Seul le trading compte, pas les bonus, le minage ou les étoiles. Au moins 3 trades.', plme: (g, n) => 'Ta semaine : ' + g + ' · ' + n + ' trades',
       rfx: 'Le plus d\'amis qui jouent vraiment (3 jours différents).', rfb: '👥 Inviter mes amis', dgx: 'Le plus de tapes sur le diamant cette semaine.', dgb: '💎 Taper le diamant', plb: '🪙 Aller au marché',
       u: { pl: '', rf: 'amis', dg: 'tapes' } },
-    ar: { t: 'مسابقات الأسبوع', pl: '📈 لاعب', rf: '👥 داعٍ', dg: '💎 ضاغط', ends: 'تنتهي خلال', prizes: 'جوائز يوم الاثنين بعملة TON حقيقية', you: 'أنت', rank: 'ترتيبك',
+    ar: { t: 'مسابقات الأسبوع', pl: '📈 الأرباح', rf: '👥 داعٍ', dg: '💎 ضاغط', ends: 'تنتهي خلال', prizes: 'جوائز يوم الاثنين بعملة TON حقيقية', you: 'أنت', rank: 'ترتيبك',
       nobody: 'لا أحد بعد: تصدّر الترتيب!', err: 'مشكلة في الاتصال، حاول مرة أخرى.', close: 'إغلاق',
-      plx: 'أكبر ربح من التداول منذ الاثنين. التداول فقط يُحتسب (لا المكافآت ولا التعدين ولا النجوم). 3 صفقات على الأقل.', plme: (g, n) => 'أسبوعك: ' + g + ' · ' + n + ' صفقات',
+      plx: 'أفضل ربح إجمالي من التداول منذ الاثنين (الأرباح ناقص الخسائر). التداول فقط يُحتسب (لا المكافآت ولا التعدين ولا النجوم). 3 صفقات على الأقل.', plme: (g, n) => 'أسبوعك: ' + g + ' · ' + n + ' صفقات',
       rfx: 'أكثر عدد من الأصدقاء الذين يلعبون فعلًا (3 أيام مختلفة).', rfb: '👥 ادعُ أصدقائي', dgx: 'أكثر عدد من الضغطات على الماسة هذا الأسبوع.', dgb: '💎 اضغط على الماسة', plb: '🪙 إلى السوق',
       u: { pl: '', rf: 'أصدقاء', dg: 'ضغطة' } },
   };
