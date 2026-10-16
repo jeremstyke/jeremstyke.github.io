@@ -9,7 +9,7 @@
   const TX = {
     en: {
       bT: 'Boost x2 for 1 hour', bX: 'Your mining earns double for 1 hour.', bAd: '📺 Watch a video (free, 1 a day)', bPay: '⭐ Pay 5 stars', bOk: '⚡ Boost x2 on!',
-      bLim: 'You used your free boost today. Pay with stars or come back tomorrow.',
+      bLim: 'You used your free boost today. Pay with stars or come back tomorrow.', bLim2: 'Only 1 free boost a day, and you already used today\'s. To boost again now: 5 stars. Your free boost comes back tomorrow.', later: 'Later',
       noad: 'No video available right now, try again in a moment.', err: 'Something went wrong, try again.', no: 'No thanks', ok: 'OK',
       iT: '🛟 Insurance', iX: (l, b) => 'You lost ' + l + ' on this sale. Watch a video and get back ' + b + ' (50 %).', iAd: (b) => '📺 Get back ' + b,
       iOk: (r) => '🛟 ' + r + ' added to your cash!', iLim: 'You used your 3 insurances today.', iLate: 'Too late: the insurance lasts 10 minutes after the sale.',
@@ -19,7 +19,7 @@
     },
     fr: {
       bT: 'Boost x2 pendant 1 heure', bX: 'Ton minage rapporte le double pendant 1 heure.', bAd: '📺 Regarder une vidéo (gratuit, 1 par jour)', bPay: '⭐ Payer 5 étoiles', bOk: '⚡ Boost x2 activé !',
-      bLim: 'Tu as utilisé ton boost gratuit du jour. Paie en étoiles ou reviens demain.',
+      bLim: 'Tu as utilisé ton boost gratuit du jour. Paie en étoiles ou reviens demain.', bLim2: 'Il n\'y a qu\'un boost gratuit par jour, et tu as déjà utilisé celui d\'aujourd\'hui. Pour rebooster maintenant : 5 étoiles. Ton boost gratuit revient demain.', later: 'Plus tard',
       noad: 'Pas de vidéo disponible pour le moment, réessaie dans un instant.', err: 'Une erreur est survenue, réessaie.', no: 'Non merci', ok: 'OK',
       iT: '🛟 Assurance', iX: (l, b) => 'Tu as perdu ' + l + ' sur cette vente. Regarde une vidéo et récupère ' + b + ' (50 %).', iAd: (b) => '📺 Récupérer ' + b,
       iOk: (r) => '🛟 ' + r + ' ajoutés à ton cash !', iLim: 'Tu as utilisé tes 3 assurances du jour.', iLate: 'Trop tard : l\'assurance dure 10 minutes après la vente.',
@@ -66,7 +66,12 @@
     const T = L();
     // 16 oct 2026 (Jeremy): once today's free video is used, the button goes straight to the 5 stars
     let pk = null; try { pk = await tonCall({ action: 'boost_ad', ad: 'none' }); } catch (x) {}
-    if (pk && Number(pk.left) === 0) { if (typeof b.onclick === 'function') b.onclick.call(b); return; }
+    if (pk && Number(pk.left) === 0) {
+      const d0 = modal(head('⚡', T.bT, T.bLim2) + `<button class="btn" id="adp">${ec(T.bPay)}</button><button class="ghost" id="adn" style="width:100%;margin-top:10px">${ec(T.later)}</button>`);
+      d0.querySelector('#adn').onclick = () => close();
+      d0.querySelector('#adp').onclick = () => { close(); if (typeof b.onclick === 'function') b.onclick.call(b); };
+      return;
+    }
     const d = modal(head('⚡', T.bT, T.bX) + `<button class="btn" id="adw">${ec(T.bAd)}</button><button class="ghost" id="adp" style="width:100%;margin-top:10px">${ec(T.bPay)}</button>`);
     d.querySelector('#adp').onclick = () => { close(); if (typeof b.onclick === 'function') b.onclick.call(b); };
     d.querySelector('#adw').onclick = async (ev) => {
