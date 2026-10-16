@@ -3,6 +3,7 @@
 // Cycle of 7 days, day 7 = $1,000. Before, the streak was only at the bottom of the portfolio.
 (() => {
   const TX = {
+    id: { st: (d) => '🔥 Streak: hari ' + d + '/7 ✓ · kembali besok · hari ke-7 = $1,000', go: (d) => '🔥 Hari ' + d + '/7 menunggu: ambil 🎁 sekarang!', zero: '🔥 Ambil 🎁 setiap hari: hari ke-7 = $1,000' },
     en: { st: (d) => '🔥 Streak: day ' + d + '/7 ✓ · come back tomorrow · day 7 = $1,000', go: (d) => '🔥 Day ' + d + '/7 waiting: claim your 🎁 now!', zero: '🔥 Claim your 🎁 every day: day 7 = $1,000' },
     fr: { st: (d) => '🔥 Série : jour ' + d + '/7 ✓ · reviens demain · jour 7 = 1 000 $', go: (d) => '🔥 Jour ' + d + '/7 qui t\'attend : récupère ton 🎁 !', zero: '🔥 Récupère ton 🎁 chaque jour : jour 7 = 1 000 $' },
     ar: { st: (d) => '🔥 السلسلة: اليوم ' + d + '/7 ✓ · عُد غدًا · اليوم 7 = $1,000', go: (d) => '🔥 اليوم ' + d + '/7 بانتظارك: اجمع 🎁 الآن!', zero: '🔥 اجمع 🎁 كل يوم: اليوم 7 = $1,000' },
