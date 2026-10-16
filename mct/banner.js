@@ -30,8 +30,8 @@
 
   const st = document.createElement('style');
   // 16 oct 2026 (Jeremy): stuck to the menu, full width and bright (like the game shop banners), the + of the menu fits in the menu
-  st.textContent = 'body{padding-bottom:calc(var(--tab,68px) + 84px + env(safe-area-inset-bottom)) !important}'
-    + '.toast{bottom:calc(var(--tab,68px) + 72px + env(safe-area-inset-bottom)) !important}nav.tb .plus{margin-top:0 !important;width:48px !important;height:48px !important;font-size:28px !important}'
+  st.textContent = 'body.hasad{padding-bottom:calc(var(--tab,68px) + 84px + env(safe-area-inset-bottom)) !important}'
+    + 'body.hasad .toast{bottom:calc(var(--tab,68px) + 72px + env(safe-area-inset-bottom)) !important}nav.tb .plus{margin-top:0 !important;width:48px !important;height:48px !important;font-size:28px !important}'
     + '#adbar{position:fixed;left:0;right:0;bottom:calc(var(--tab,68px) + env(safe-area-inset-bottom));z-index:9;height:58px;display:flex;align-items:center;gap:10px;padding:7px 10px;background:linear-gradient(100deg,#ff4d00,#ff8a00 55%,#ffb800);color:#fff;box-shadow:0 -4px 18px rgba(255,120,0,.35);cursor:pointer;overflow:hidden}'
     + '#adbar:after{content:"";position:absolute;top:0;bottom:0;width:60px;left:-80px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:adsh 4s ease-in-out infinite}@keyframes adsh{0%,60%{left:-80px}100%{left:110%}}'
     + '#adbar img{width:44px;height:44px;border-radius:10px;object-fit:cover;flex:none;box-shadow:0 2px 8px rgba(0,0,0,.25);background:#fff}#adbar .adt{flex:1;min-width:0;font-size:14px;line-height:1.2;font-weight:800;text-shadow:0 1px 2px rgba(0,0,0,.25);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}'
@@ -49,15 +49,11 @@
 
   function bar() {
     let b = document.getElementById('adbar');
-    if (!A || !A.on) { if (b) b.remove(); return; }
+    // 16 oct 2026 (Jeremy): no "your ad here" banner any more: without a paid ad, nothing is shown
+    if (!A || !A.on || !LIST.length) { if (b) b.remove(); document.body.classList.remove('hasad'); return; }
     if (!b) { b = document.createElement('div'); b.id = 'adbar'; document.body.appendChild(b); }
-    const T = L(), ad = LIST.length ? LIST[I % LIST.length] : null;
-    if (!ad) {
-      const p = A.plans && A.plans.day ? A.plans.day.stars : 25;
-      b.innerHTML = '<span style="font-size:30px;width:44px;text-align:center;flex:none">📢</span><div class="adt">' + ec(T.yours.replace(/^📢 /, '')) + '<br><small style="opacity:.9;font-weight:700">' + ec(T.from(p)) + '</small></div><span class="adc">' + ec(T.book) + '</span>';
-      b.onclick = () => { hp(); buy(); };
-      return;
-    }
+    document.body.classList.add('hasad');
+    const T = L(), ad = LIST[I % LIST.length];
     b.innerHTML = (ad.img ? '<img src="' + ec(ad.img) + '" alt="">' : '') + '<div class="adt">' + ec(ad.txt) + '</div><span class="adl">' + ec(T.ad) + '</span><span class="adc">' + ec(T.go) + '</span><span class="adp" data-buy="1">+</span>';
     b.onclick = (e) => {
       if (e.target && e.target.dataset && e.target.dataset.buy) { hp(); buy(); return; }
