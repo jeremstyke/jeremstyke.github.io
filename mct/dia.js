@@ -67,7 +67,14 @@
     + '#diam .dsub{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;font-size:14px}#diam .dsub button{width:auto;padding:6px 12px;margin:0;font-size:13px}#diam .dok{color:#7dff6b;font-weight:800}'
     // 17 oct 2026: the "Add to my balance" button in the colours of the diamond (it was the plain game button)
     + '#dclaim{display:block;width:100%;margin:12px 0 8px;padding:13px 14px;border:0;border-radius:14px;background:linear-gradient(135deg,#7ff3ff,#2ee6ff 45%,#0aa9c7);color:#03202a;font-weight:800;font-size:15px;cursor:pointer;box-shadow:0 6px 18px rgba(46,230,255,.3);transition:transform .1s}'
-    + '#dclaim:active{transform:scale(.98)}#dclaim:disabled{opacity:.6}#dclaim.dz{background:transparent;color:#2ee6ff;border:1px solid rgba(46,230,255,.45);box-shadow:none}';
+    + '#dclaim:active{transform:scale(.98)}#dclaim:disabled{opacity:.6}#dclaim.dz{background:transparent;color:#2ee6ff;border:1px solid rgba(46,230,255,.45);box-shadow:none}'
+    // 17 oct 2026: the main card of the diamond, prettier (glow, big amount, balance and stats as chips)
+    + '#diam .dhero{text-align:center;border-color:rgba(46,230,255,.35);background:radial-gradient(120% 80% at 50% 0%,rgba(46,230,255,.22),rgba(46,230,255,.03) 65%),rgba(255,255,255,.02);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}'
+    + '#diam .dhero .dbig{display:flex;align-items:center;justify-content:center;gap:8px;font-size:40px;margin:6px 0 4px;text-shadow:0 0 22px rgba(46,230,255,.55)}#diam .dgi{font-size:30px;filter:drop-shadow(0 0 8px rgba(46,230,255,.7))}'
+    + '#diam .dhero .dbar{height:10px;margin:8px 4px 4px;background:rgba(255,255,255,.08)}#diam .dhero .dbar i{background:linear-gradient(90deg,#0aa9c7,#2ee6ff,#bff6ff);box-shadow:0 0 10px rgba(46,230,255,.8)}'
+    + '#dsolde{display:inline-block;margin:2px 0 8px;padding:7px 14px;border-radius:999px;background:rgba(255,212,59,.12);border:1px solid rgba(255,212,59,.35);color:#ffd43b;font-weight:800;font-size:14px}'
+    + '#diam .dmeta{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:0 0 4px}#diam .dmeta span{font-size:12px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.06);opacity:.9}'
+    + '#diam .dhero #darea{text-align:left}#diam .dhero .dnote{text-align:left}';
   document.head.appendChild(st);
 
   // the small 💎 at the top, right before the FAQ
@@ -122,8 +129,8 @@
     const rows = (c.top || []).slice(0, 10).map((x, i) => '<div class="drow' + (x.me ? ' me' : '') + '"><span>' + (md[i] || (i + 1) + '.') + ' ' + ec(x.name) + (x.me ? ' (' + ec(T.you) + ')' : '') + '</span><span>' + nf(x.n) + ' ' + ec(T.taps) + (i < 3 && pz[i] ? ' · ' + usd(pz[i]) : '') + '</span></div>').join('')
       || '<p class="dsm">' + ec(T.nobody) + '</p>';
     b.style.cssText = '';
-    b.innerHTML = '<div class="dc"><div class="dl">' + ec(T.mine) + '</div><div class="dbig" id="dusd"></div><div class="dbar"><i id="dbar"></i></div>'
-      + '<button id="dclaim" type="button"></button><div class="dsm" id="dsolde" style="font-weight:700;opacity:1"></div><div class="dsm" id="dtoday"></div><div class="dsm">' + ec(T.rate(nf(S.tpc))) + '</div><div id="darea"></div><p class="dnote">' + ec(T.pay) + '</p></div>'
+    b.innerHTML = '<div class="dc dhero"><div class="dl">' + ec(T.mine) + '</div><div class="dbig"><span class="dgi">💎</span><span id="dusd"></span></div><div class="dbar"><i id="dbar"></i></div>'
+      + '<button id="dclaim" type="button"></button><div id="dsolde"></div><div class="dmeta"><span id="dtoday"></span><span>' + ec(T.rate(nf(S.tpc))) + '</span></div><div id="darea"></div><p class="dnote">' + ec(T.pay) + '</p></div>'
       + (Number(S.sub_pct) > 0 ? '<div class="dc"><div class="dl">' + ec(T.bon) + '</div>' + sub('bm', S.sub_mct, 'https://t.me/memecointycoon') + sub('bj', S.sub_js, 'https://t.me/jeremstyke')
         + (S.sub_mct && S.sub_js ? '' : '<button class="btn ghost" id="drc" style="width:100%;margin:8px 0 0">' + ec(T.recheck) + '</button>') + '</div>' : '')
       + (c.on ? '<div class="dc"><div class="dl">' + ec(T.con) + '</div><div class="dsm">' + ec(T.ends) + ' <b id="dcd">' + cd(c.ends) + '</b> · ' + ec(T.prizes) + ' : ' + pz.map((p) => usd(p)).join(' / ') + '</div>' + rows
