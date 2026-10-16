@@ -57,10 +57,10 @@
   const head = (e, t, x) => `<div style="font-size:46px;line-height:1">${e}</div><h2 style="margin:8px 0 6px">${ec(String(t).replace(/^\S+ /, ''))}</h2><p class="hint" style="margin:0 0 16px">${ec(x)}</p>`;
   const busy = (b) => { b.disabled = true; b.textContent = '⏳'; };
 
-  // 1. the boost x2: the paid button (5 stars) first offers a free video
+  // 1. the boost x2: the button first offers a free video (once a day) or 5 stars
   document.addEventListener('click', (e) => {
     const b = e.target && e.target.closest && e.target.closest('#boost');
-    if (!b || b.disabled || !/⭐/.test(b.textContent || '')) return;
+    if (!b || b.disabled || /💎/.test(b.textContent || '')) return; // supporters keep their free boost
     e.stopImmediatePropagation(); e.preventDefault(); hp();
     const T = L();
     const d = modal(head('⚡', T.bT, T.bX) + `<button class="btn" id="adw">${ec(T.bAd)}</button><button class="ghost" id="adp" style="width:100%;margin-top:10px">${ec(T.bPay)}</button>`);
