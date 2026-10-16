@@ -7,6 +7,16 @@
 (() => {
   const AGX = 135;
   const TX = {
+    id: {
+      bT: 'Boost x2 selama 1 jam', bX: 'Tambangmu menghasilkan dua kali lipat selama 1 jam.', bAd: '📺 Tonton video (gratis, 1 per hari)', bPay: '⭐ Bayar 5 stars', bOk: '⚡ Boost x2 aktif!',
+      bLim: 'Boost gratismu hari ini sudah dipakai. Bayar dengan stars atau kembali besok.', bLim2: 'Hanya 1 boost gratis per hari, dan hari ini sudah dipakai. Untuk boost lagi sekarang: 5 stars. Boost gratismu kembali besok.', later: 'Nanti',
+      noad: 'Belum ada video saat ini, coba lagi sebentar.', err: 'Terjadi kesalahan, coba lagi.', no: 'Tidak, terima kasih', ok: 'OK',
+      iT: '🛟 Asuransi', iX: (l, b) => 'Kamu rugi ' + l + ' dari penjualan ini. Tonton video dan dapatkan kembali ' + b + ' (50 %).', iAd: (b) => '📺 Dapatkan kembali ' + b,
+      iOk: (r) => '🛟 ' + r + ' ditambahkan ke uangmu!', iLim: 'Kamu sudah memakai 3 asuransi hari ini.', iLate: 'Terlambat: asuransi hanya berlaku 10 menit setelah penjualan.',
+      sT: '📰 Bocoran', sX: 'Lihat berita berikutnya sebelum orang lain', sB: '📺 Tonton', sUp: (t) => '$' + t + ' akan dapat kabar baik sebentar lagi 🚀', sDn: (t) => '$' + t + ' akan dapat kabar buruk sebentar lagi 📉',
+      sAllUp: 'Seluruh pasar akan pump sebentar lagi 🚀', sAllDn: 'Seluruh pasar akan turun sebentar lagi 📉', sNote: 'Tidak ada yang tahu pastinya kapan: 30 menit lagi atau besok. Giliranmu!',
+      sOpen: '👀 Lihat', sPayT: 'Kamu sudah memakai 2 bocoran gratis hari ini. Buka yang ini dengan 5 stars, atau kembali besok.', sPay: '⭐ Buka dengan 5 stars', sGo: (t) => 'Buka $' + t, sLim: 'Kamu sudah melihat 2 bocoran hari ini. Kembali besok!',
+    },
     en: {
       bT: 'Boost x2 for 1 hour', bX: 'Your mining earns double for 1 hour.', bAd: '📺 Watch a video (free, 1 a day)', bPay: '⭐ Pay 5 stars', bOk: '⚡ Boost x2 on!',
       bLim: 'You used your free boost today. Pay with stars or come back tomorrow.', bLim2: 'Only 1 free boost a day, and you already used today\'s. To boost again now: 5 stars. Your free boost comes back tomorrow.', later: 'Later',
