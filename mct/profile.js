@@ -52,11 +52,11 @@
     + '#pfm .pnote{font-size:13px;opacity:.85;margin:0 0 10px}';
   document.head.appendChild(st);
 
-  // at the top left: photo, name and rank instead of "Tycoon"
+  // at the top left: the player's photo and just "Profile" (16 oct 2026, Jeremy), instead of "Tycoon"
   function brand() {
     const b = document.querySelector('header.top .brand'); if (!b || !ME_P) return;
     b.classList.add('pf');
-    b.innerHTML = av(ME_P, 30) + '<b>' + ec(ME_P.name) + '</b><small>' + (ME_P.dev ? '👨‍💻' : ME_P.rank ? '#' + ME_P.rank : '') + '</small>';
+    b.innerHTML = av(ME_P, 30) + '<b>' + ({ fr: 'Profil', ar: 'ملفي' }[lg()] || 'Profile') + '</b>';
     b.onclick = () => { hp(); show(0); };
   }
   async function loadMe() {
