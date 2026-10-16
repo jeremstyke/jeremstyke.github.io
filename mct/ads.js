@@ -1,5 +1,5 @@
 // 16 oct 2026: Meme Coin Tycoon rewarded videos (Ads Galaxy, game id 135). Three places where the player really wants something:
-// 1. the mining boost x2: a free video instead of 5 stars (6 a day, the stars stay possible);
+// 1. the mining boost x2: a free video instead of 5 stars (once a day, the stars stay possible);
 // 2. the scoop: the next news (which coin, up or down) before everyone (2 a day), a card at the top of the market and the news;
 // 3. the insurance: right after a losing sale, a video gives back 50 % of the loss (3 a day, within 10 minutes).
 // The server checks every limit (Supabase function mct-ton: boost_ad, scoop, insure).
@@ -7,8 +7,8 @@
   const AGX = 135;
   const TX = {
     en: {
-      bT: 'Boost x2 for 1 hour', bX: 'Your mining earns double for 1 hour.', bAd: '📺 Watch a video (free)', bPay: '⭐ Pay 5 stars', bOk: '⚡ Boost x2 on!',
-      bLim: 'You used your 6 free boosts today. Pay with stars or come back tomorrow.',
+      bT: 'Boost x2 for 1 hour', bX: 'Your mining earns double for 1 hour.', bAd: '📺 Watch a video (free, 1 a day)', bPay: '⭐ Pay 5 stars', bOk: '⚡ Boost x2 on!',
+      bLim: 'You used your free boost today. Pay with stars or come back tomorrow.',
       noad: 'No video available right now, try again in a moment.', err: 'Something went wrong, try again.', no: 'No thanks', ok: 'OK',
       iT: '🛟 Insurance', iX: (l, b) => 'You lost ' + l + ' on this sale. Watch a video and get back ' + b + ' (50 %).', iAd: (b) => '📺 Get back ' + b,
       iOk: (r) => '🛟 ' + r + ' added to your cash!', iLim: 'You used your 3 insurances today.', iLate: 'Too late: the insurance lasts 10 minutes after the sale.',
@@ -17,8 +17,8 @@
       sGo: (t) => 'Open $' + t, sLim: 'You saw your 2 scoops today. Come back tomorrow!',
     },
     fr: {
-      bT: 'Boost x2 pendant 1 heure', bX: 'Ton minage rapporte le double pendant 1 heure.', bAd: '📺 Regarder une vidéo (gratuit)', bPay: '⭐ Payer 5 étoiles', bOk: '⚡ Boost x2 activé !',
-      bLim: 'Tu as utilisé tes 6 boosts gratuits du jour. Paie en étoiles ou reviens demain.',
+      bT: 'Boost x2 pendant 1 heure', bX: 'Ton minage rapporte le double pendant 1 heure.', bAd: '📺 Regarder une vidéo (gratuit, 1 par jour)', bPay: '⭐ Payer 5 étoiles', bOk: '⚡ Boost x2 activé !',
+      bLim: 'Tu as utilisé ton boost gratuit du jour. Paie en étoiles ou reviens demain.',
       noad: 'Pas de vidéo disponible pour le moment, réessaie dans un instant.', err: 'Une erreur est survenue, réessaie.', no: 'Non merci', ok: 'OK',
       iT: '🛟 Assurance', iX: (l, b) => 'Tu as perdu ' + l + ' sur cette vente. Regarde une vidéo et récupère ' + b + ' (50 %).', iAd: (b) => '📺 Récupérer ' + b,
       iOk: (r) => '🛟 ' + r + ' ajoutés à ton cash !', iLim: 'Tu as utilisé tes 3 assurances du jour.', iLate: 'Trop tard : l\'assurance dure 10 minutes après la vente.',
