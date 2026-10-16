@@ -6,19 +6,19 @@
 // 'prem_rch', 'prem_promo'); the payment is received by the game bot.
 (() => {
   const TX = {
-    en: { t: 'Premium', price: '100 ⭐ / month', sub: 'Cancel anytime in Telegram', go: '💎 Get Premium · 100 ⭐ / month', on: (d) => '💎 Premium until ' + d, act: '✅ Your Premium is on', mng: 'To cancel: Telegram > Settings > My Stars.',
+    en: { t: 'Premium', price: '100 ⭐ / month', sub: 'Cancel anytime in Telegram', go: '💎 Get Premium · 100 ⭐ / month', wk: 'Try 7 days · 30 ⭐ (no renewal)', on: (d) => '💎 Premium until ' + d, act: '✅ Your Premium is on', mng: 'To cancel: Telegram > Settings > My Stars.',
       b: ['📰 Unlimited news (scoop)', '⚡ 10 mining boosts x2 a day', '📺 Zero videos: insurance, boost and scoop in one tap', '💵 +$1,000 free every day', '📣 1 free coin promotion a day (3 h at the top)', '🔥 2 streak saves a month', '💎 Premium badge everywhere'],
       rch: '💵 Get my free $1,000', rchd: '💵 Free $1,000 already taken today', rchok: '💵 +$1,000 added!', promo: '📣 Promote for free (Premium)', promok: '📣 Your coin is at the top of the market for 3 hours!', used: 'Free promotion already used today.', busy: 'Too many coins promoted right now, try again later.',
       thx: '💎 Thank you! Premium is on.', err: 'Something went wrong, try again.', up: '💎 Unlimited and no videos with Premium', tile: '💎 Premium', tiles: '+$1,000 free every day', left: (n) => n + ' free boosts left today', close: 'Close' },
-    fr: { t: 'Premium', price: '100 ⭐ / mois', sub: 'Résiliable à tout moment dans Telegram', go: '💎 Passer Premium · 100 ⭐ / mois', on: (d) => '💎 Premium jusqu\'au ' + d, act: '✅ Ton Premium est actif', mng: 'Pour résilier : Telegram > Réglages > Mes étoiles.',
+    fr: { t: 'Premium', price: '100 ⭐ / mois', sub: 'Résiliable à tout moment dans Telegram', go: '💎 Passer Premium · 100 ⭐ / mois', wk: 'Essayer 7 jours · 30 ⭐ (sans renouvellement)', on: (d) => '💎 Premium jusqu\'au ' + d, act: '✅ Ton Premium est actif', mng: 'Pour résilier : Telegram > Réglages > Mes étoiles.',
       b: ['📰 News (scoop) illimitées', '⚡ 10 boosts de minage x2 par jour', '📺 Zéro vidéo : assurance, boost et scoop en un clic', '💵 +1 000 $ gratuits chaque jour', '📣 1 promotion de coin gratuite par jour (3 h en tête)', '🔥 2 sauvetages de série par mois', '💎 Badge Premium partout'],
       rch: '💵 Récupérer mes 1 000 $ gratuits', rchd: '💵 1 000 $ gratuits déjà pris aujourd\'hui', rchok: '💵 +1 000 $ ajoutés !', promo: '📣 Promouvoir gratuitement (Premium)', promok: '📣 Ton coin est en tête du marché pendant 3 heures !', used: 'Promotion gratuite déjà utilisée aujourd\'hui.', busy: 'Trop de coins sont mis en avant, réessaie plus tard.',
       thx: '💎 Merci ! Ton Premium est actif.', err: 'Une erreur est survenue, réessaie.', up: '💎 Illimité et sans vidéo avec Premium', tile: '💎 Premium', tiles: '+1 000 $ gratuits chaque jour', left: (n) => n + ' boosts gratuits restants aujourd\'hui', close: 'Fermer' },
-    id: { t: 'Premium', price: '100 ⭐ / bulan', sub: 'Bisa dibatalkan kapan saja di Telegram', go: '💎 Ambil Premium · 100 ⭐ / bulan', on: (d) => '💎 Premium sampai ' + d, act: '✅ Premium-mu aktif', mng: 'Untuk membatalkan: Telegram > Pengaturan > Stars Saya.',
+    id: { t: 'Premium', price: '100 ⭐ / bulan', sub: 'Bisa dibatalkan kapan saja di Telegram', go: '💎 Ambil Premium · 100 ⭐ / bulan', wk: 'Coba 7 hari · 30 ⭐ (tanpa perpanjangan)', on: (d) => '💎 Premium sampai ' + d, act: '✅ Premium-mu aktif', mng: 'Untuk membatalkan: Telegram > Pengaturan > Stars Saya.',
       b: ['📰 Berita (bocoran) tanpa batas', '⚡ 10 boost tambang x2 per hari', '📺 Tanpa video: asuransi, boost dan bocoran sekali ketuk', '💵 +$1,000 gratis setiap hari', '📣 1 promosi koin gratis per hari (3 jam teratas)', '🔥 2 penyelamat streak per bulan', '💎 Lencana Premium di mana-mana'],
       rch: '💵 Ambil $1,000 gratisku', rchd: '💵 $1,000 gratis sudah diambil hari ini', rchok: '💵 +$1,000 ditambahkan!', promo: '📣 Promosikan gratis (Premium)', promok: '📣 Koinmu teratas di pasar selama 3 jam!', used: 'Promosi gratis sudah dipakai hari ini.', busy: 'Terlalu banyak koin dipromosikan, coba lagi nanti.',
       thx: '💎 Terima kasih! Premium-mu aktif.', err: 'Terjadi kesalahan, coba lagi.', up: '💎 Tanpa batas dan tanpa video dengan Premium', tile: '💎 Premium', tiles: '+$1,000 gratis setiap hari', left: (n) => 'Sisa ' + n + ' boost gratis hari ini', close: 'Tutup' },
-    ar: { t: 'بريميوم', price: '100 ⭐ / شهر', sub: 'يمكن الإلغاء في أي وقت من تيليجرام', go: '💎 اشترك في بريميوم · 100 ⭐ / شهر', on: (d) => '💎 بريميوم حتى ' + d, act: '✅ بريميوم مفعّل', mng: 'للإلغاء: تيليجرام > الإعدادات > نجومي.',
+    ar: { t: 'بريميوم', price: '100 ⭐ / شهر', sub: 'يمكن الإلغاء في أي وقت من تيليجرام', go: '💎 اشترك في بريميوم · 100 ⭐ / شهر', wk: 'جرّب 7 أيام · 30 ⭐ (بدون تجديد)', on: (d) => '💎 بريميوم حتى ' + d, act: '✅ بريميوم مفعّل', mng: 'للإلغاء: تيليجرام > الإعدادات > نجومي.',
       b: ['📰 أخبار بلا حدود', '⚡ 10 تعزيزات تعدين x2 يوميًا', '📺 بدون فيديو: التأمين والتعزيز والسبق بضغطة', '💵 1000$ مجانًا كل يوم', '📣 ترويج عملة مجاني يوميًا (3 ساعات في القمة)', '🔥 حفظان للسلسلة شهريًا', '💎 شارة بريميوم في كل مكان'],
       rch: '💵 احصل على 1000$ المجانية', rchd: '💵 تم أخذ 1000$ المجانية اليوم', rchok: '💵 أُضيفت 1000$!', promo: '📣 روّج مجانًا (بريميوم)', promok: '📣 عملتك في قمة السوق لمدة 3 ساعات!', used: 'تم استخدام الترويج المجاني اليوم.', busy: 'عملات كثيرة مروّجة الآن، حاول لاحقًا.',
       thx: '💎 شكرًا! بريميوم مفعّل.', err: 'حدث خطأ، حاول مرة أخرى.', up: '💎 بلا حدود وبدون فيديو مع بريميوم', tile: '💎 بريميوم', tiles: '1000$ مجانًا كل يوم', left: (n) => 'متبقٍ ' + n + ' تعزيزات مجانية اليوم', close: 'إغلاق' },
@@ -59,20 +59,22 @@
       + (on ? '<div class="pr">' + ec(T.act) + '</div><small style="margin-top:0">' + ec(T.on(day(s.until))) + '</small>' : '<div class="pr">' + ec(T.price) + '</div><small style="margin-top:0">' + ec(T.sub) + '</small>')
       + '<ul>' + T.b.map((x) => '<li>' + ec(x) + '</li>').join('') + '</ul>'
       + (on ? '<button class="btn" id="prch"' + (s.rch ? '' : ' disabled style="opacity:.5"') + '>' + ec(s.rch ? T.rch : T.rchd) + '</button><small>' + ec(T.left(s.boosts)) + '</small><small>' + ec(T.mng) + '</small>'
-        : '<button class="btn" id="pgo">' + ec(T.go) + '</button>')
+        : '<button class="btn" id="pgo">' + ec(T.go) + '</button><button class="ghost" id="pwk" style="width:100%;margin-top:10px;border:1px solid #ffd43b;color:#ffd43b">' + ec(T.wk) + '</button>')
       + '<button class="ghost" id="pcl" style="width:100%;margin-top:10px">' + ec(T.close) + '</button>';
     b.querySelector('#pcl').onclick = () => { hp(); closeIt(); };
     const g = b.querySelector('#pgo'); if (g) g.onclick = buy;
+    // 17 oct 2026: the 7-day pass, 30 ⭐ paid once (no renewal), to try Premium for cheap
+    const w = b.querySelector('#pwk'); if (w) w.onclick = (ev) => buy(ev, 'week');
     const r = b.querySelector('#prch'); if (r) r.onclick = () => freeRch(r);
   }
-  async function buy(ev) {
+  async function buy(ev, plan) {
     const T = L(), btn = ev && ev.currentTarget; hp('medium');
     if (btn) { btn.disabled = true; btn.textContent = '⏳'; }
-    let r = null; try { r = await call({ action: 'prem_link', lang: lg() }); } catch (e) {}
-    if (!r || !r.link) { tst(T.err); if (btn) { btn.disabled = false; btn.textContent = T.go; } return; }
+    let r = null; try { r = await call({ action: 'prem_link', lang: lg(), plan: plan === 'week' ? 'week' : 'month' }); } catch (e) {}
+    if (!r || !r.link) { tst(T.err); if (btn) { btn.disabled = false; btn.textContent = plan === 'week' ? T.wk : T.go; } return; }
     try {
       tw.openInvoice(r.link, async (st2) => {
-        if (btn) { btn.disabled = false; btn.textContent = T.go; }
+        if (btn) { btn.disabled = false; btn.textContent = plan === 'week' ? T.wk : T.go; }
         if (st2 !== 'paid') return;
         hp('ok'); tst(T.thx);
         // the bot activates Premium as soon as Telegram confirms the payment: check again a few times
