@@ -3,6 +3,11 @@
 // A card at the top of the Leaders tab opens them. Data from the Supabase function mct-ton (action 'ranks').
 (() => {
   const TX = {
+    id: { t: 'Kontes minggu ini', pl: '📈 Keuntungan', rf: '👥 Pengundang', dg: '💎 Pengetuk', ends: 'Berakhir dalam', prizes: 'Hadiah Senin dalam TON asli', you: 'kamu', rank: 'Peringkatmu',
+      nobody: 'Belum ada: ambil posisi teratas!', err: 'Masalah koneksi, coba lagi.', close: 'Tutup',
+      plx: 'Total keuntungan trading terbaik sejak Senin (untung dikurangi rugi). Hanya trading yang dihitung, bukan bonus, tambang atau stars. Minimal 3 transaksi.', plme: (g, n) => 'Minggumu: ' + g + ' · ' + n + ' transaksi',
+      rfx: 'Paling banyak teman yang benar-benar bermain (3 hari berbeda).', rfb: '👥 Undang temanku', dgx: 'Paling banyak ketukan berlian minggu ini.', dgb: '💎 Ketuk berlian', plb: '🪙 Ke pasar',
+      u: { pl: '', rf: 'teman', dg: 'ketukan' } },
     en: { t: 'Contests of the week', pl: '📈 Gains', rf: '👥 Sponsor', dg: '💎 Tapper', ends: 'Ends in', prizes: 'Monday prizes in real TON', you: 'you', rank: 'Your rank',
       nobody: 'Nobody yet: take the lead!', err: 'Connection problem, try again.', close: 'Close',
       plx: 'The best total trading gain since Monday (gains minus losses). Only trading counts, not bonuses, mining or stars. At least 3 trades.', plme: (g, n) => 'Your week: ' + g + ' · ' + n + ' trades',
@@ -41,6 +46,7 @@
 
   // 16 oct 2026 (Jeremy): no button at the top: a "contests of the week" card at the top of the Leaders tab opens the three contests
   const CARD = {
+    id: { t: '🏆 Kontes minggu ini', x: '3 kontes, TON asli untuk dimenangkan setiap Senin', b: 'Lihat' },
     en: { t: '🏆 Contests of the week', x: '3 contests, real TON to win every Monday', b: 'See' },
     fr: { t: '🏆 Concours de la semaine', x: '3 concours, de vrais TON à gagner chaque lundi', b: 'Voir' },
     ar: { t: '🏆 مسابقات الأسبوع', x: '3 مسابقات، عملات TON حقيقية كل يوم اثنين', b: 'عرض' },
