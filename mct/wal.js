@@ -5,6 +5,7 @@
   const TCU = 'https://unpkg.com/@tonconnect/ui@2.0.9/dist/tonconnect-ui.min.js';
   const MAN = 'https://jeremstyke.github.io/mct/tonconnect-manifest.json';
   const fr = () => (typeof LANG !== 'undefined' ? LANG : 'en') === 'fr';
+  const idn = () => (typeof LANG !== 'undefined' ? LANG : 'en') === 'id'; // 16 oct 2026: Indonesian
   let UI = null, LOADING = null, SENT = '', HAS = null, WANT = false;
   // 16 oct 2026: the TON Connect window (z-index 1000) opened BEHIND the game sheets (9998/9999): put it on top of everything
   const zs = document.createElement('style'); zs.textContent = '#tc-widget-root{position:relative;z-index:2147483000}'; document.head.appendChild(zs);
@@ -46,7 +47,7 @@
     if (!a || SENT === a) return;
     SENT = a; WANT = false;
     let r; try { r = await tonCall({ action: 'wallet', addr: a }); } catch (e) { r = null; }
-    if (!r || !r.ok) { SENT = ''; try { toast(fr() ? 'Oups, réessaie' : 'Oops, try again'); } catch (e) {} return; }
+    if (!r || !r.ok) { SENT = ''; try { toast(fr() ? 'Oups, réessaie' : idn() ? 'Ups, coba lagi' : 'Oops, try again'); } catch (e) {} return; }
     HAS = true;
     try { tw.HapticFeedback.notificationOccurred('success'); } catch (e) {}
     // 16 oct 2026: says what is already earned and when it arrives
@@ -54,8 +55,8 @@
     const bal = Number((s && s.balance) || 0), min = Number((s && ((s.all && s.all.min) || s.min)) || 0.1);
     const M = (v) => fr() ? v.toFixed(2).replace('.', ',') + ' $' : '$' + v.toFixed(2);
     try {
-      toast(bal >= min ? (fr() ? '✅ Portefeuille relié : tes ' + M(bal) + ' arrivent lundi' : '✅ Wallet linked: your ' + M(bal) + ' arrive on Monday')
-        : (fr() ? '✅ Portefeuille relié : payé le lundi dès ' + M(min) : '✅ Wallet linked: paid on Monday from ' + M(min)));
+      toast(bal >= min ? (fr() ? '✅ Portefeuille relié : tes ' + M(bal) + ' arrivent lundi' : idn() ? '✅ Dompet terhubung: ' + M(bal) + '-mu tiba hari Senin' : '✅ Wallet linked: your ' + M(bal) + ' arrive on Monday')
+        : (fr() ? '✅ Portefeuille relié : payé le lundi dès ' + M(min) : idn() ? '✅ Dompet terhubung: dibayar hari Senin mulai ' + M(min) : '✅ Wallet linked: paid on Monday from ' + M(min)));
     } catch (e) {}
     const b = document.getElementById('dwalx'); if (b) b.replaceWith(okLine());
     if (document.getElementById('tonsheet')) { try { tonPage(); } catch (e) {} }
@@ -63,13 +64,13 @@
   function okLine() {
     const d = document.createElement('div'); d.id = 'dwalx'; d.className = 'dsm';
     d.style.cssText = 'text-align:center;margin:6px 0 10px;font-weight:700';
-    d.textContent = fr() ? '👛 Envoyé sur ton portefeuille chaque lundi' : '👛 Sent to your wallet every Monday';
+    d.textContent = fr() ? '👛 Envoyé sur ton portefeuille chaque lundi' : idn() ? '👛 Dikirim ke dompetmu setiap Senin' : '👛 Sent to your wallet every Monday';
     return d;
   }
   // one tap: opens the wallet list (Wallet in Telegram first), the address is saved as soon as it is confirmed
   async function connect(change) {
     try { haptic(); } catch (e) {}
-    let ui; try { ui = await load(); } catch (e) { try { toast(fr() ? 'Connexion impossible, réessaie' : 'Could not connect, try again'); } catch (x) {} return; }
+    let ui; try { ui = await load(); } catch (e) { try { toast(fr() ? 'Connexion impossible, réessaie' : idn() ? 'Gagal terhubung, coba lagi' : 'Could not connect, try again'); } catch (x) {} return; }
     WANT = true; SENT = '';
     if (ui.connected && ui.wallet && ui.wallet.account) {
       if (!change) return save(ui.wallet.account.address);
@@ -96,8 +97,8 @@
     if (has) { const l = okLine(); if (top0 && top0.nextSibling) top0.parentNode.insertBefore(l, top0.nextSibling); else w.parentNode.insertBefore(l, w); return; }
     const c = document.createElement('div'); c.id = 'dwalx'; c.className = 'dc';
     c.style.cssText = 'border:1px solid rgba(255,212,59,.6);background:rgba(255,212,59,.12)';
-    c.innerHTML = '<div class="dsm" style="margin-bottom:8px;font-weight:700">' + (fr() ? '💰 Tes gains t\'attendent : ajoute ton portefeuille pour être payé chaque lundi.' : '💰 Your earnings are waiting: add your wallet to get paid every Monday.') + '</div>'
-      + '<button class="btn" style="width:100%;margin:0">' + (fr() ? '👛 Ajouter mon portefeuille' : '👛 Add my wallet') + '</button>';
+    c.innerHTML = '<div class="dsm" style="margin-bottom:8px;font-weight:700">' + (fr() ? '💰 Tes gains t\'attendent : ajoute ton portefeuille pour être payé chaque lundi.' : idn() ? '💰 Penghasilanmu menunggu: tambahkan dompetmu agar dibayar setiap Senin.' : '💰 Your earnings are waiting: add your wallet to get paid every Monday.') + '</div>'
+      + '<button class="btn" style="width:100%;margin:0">' + (fr() ? '👛 Ajouter mon portefeuille' : idn() ? '👛 Tambahkan dompetku' : '👛 Add my wallet') + '</button>';
     c.querySelector('button').onclick = () => connect(false);
     const top = w.parentNode.querySelector('.dc');
     if (top && top.nextSibling) top.parentNode.insertBefore(c, top.nextSibling); else w.parentNode.insertBefore(c, w);
