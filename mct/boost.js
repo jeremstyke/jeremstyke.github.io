@@ -17,6 +17,7 @@
 // what they are worth now, and the difference. After a sale: the profit or loss of that sale (the server sends cost and pnl).
 (() => {
   const PX = {
+    id: { paid: 'Kamu bayar', now: 'nilai sekarang', p: 'Untung', l: 'Rugi', sale: (w, m, pc) => '📊 ' + w + ' dari penjualan ini: ' + m + ' (' + pc + ')' },
     en: { paid: 'You paid', now: 'worth now', p: 'Profit', l: 'Loss', sale: (w, m, pc) => '📊 ' + w + ' on this sale: ' + m + ' (' + pc + ')' },
     fr: { paid: 'Tu as payé', now: 'valeur actuelle', p: 'Bénéfice', l: 'Perte', sale: (w, m, pc) => '📊 ' + w + ' sur cette vente : ' + m + ' (' + pc + ')' },
   };
@@ -54,7 +55,7 @@
 
 // 14 oct 2026: portfolio, what the player paid for each coin under its line; coin page, the "News effect" badge opens the news post on @memecointycoon
 (() => {
-  const PX = { en: { paid: 'paid' }, fr: { paid: 'payé' } };
+  const PX = { id: { paid: 'dibayar' }, en: { paid: 'paid' }, fr: { paid: 'payé' } };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return PX[l] || PX.en; };
   const mo = (n) => { try { return money(n); } catch (e) { return '$' + Number(n).toFixed(2); } };
   const COST = {}; // coin id -> what the player paid for the coins he still holds
@@ -123,6 +124,7 @@
 // (mct_rig), so nothing changes for the players' current levels. Daily bonus: the +$100 for the channel subscribers, said clearly.
 (() => {
   const PX = {
+    id: { rig: 'Rig', lv: 'Level', up: 'Upgrade rig', pw: 'kekuatan tambang', run: 'jalan', h: 'j', max: 'Level maksimal tercapai', bd: (r) => '🎁 Bonus harian: +' + r, bs: (s) => '📰 Pelanggan channel: +' + s, bn: '📰 Gabung @memecointycoon: +$100 setiap hari' },
     en: { rig: 'Rig', lv: 'Level', up: 'Upgrade the rig', pw: 'mining power', run: 'runs', h: 'h', max: 'Max level reached', bd: (r) => '🎁 Daily bonus: +' + r, bs: (s) => '📰 Channel subscriber: +' + s, bn: '📰 Join @memecointycoon: +$100 every day' },
     fr: { rig: 'Rig', lv: 'Niveau', up: 'Améliorer le rig', pw: 'puissance', run: 'autonomie', h: 'h', max: 'Niveau maximum atteint', bd: (r) => '🎁 Bonus du jour : +' + r, bs: (s) => '📰 Abonné à la chaîne : +' + s, bn: '📰 Abonne-toi à @memecointycoon : +100 $ chaque jour' },
   };
@@ -185,6 +187,7 @@
 // and after a winning sale (+5 % or more, every 6 hours at most) a challenge to send to friends.
 (() => {
   const TX = {
+    id: { told: '💎 Setiap teman yang bergabung lewat link-mu memberimu $0.05 dalam TON (dan $500 untuk kalian berdua di game)', cta: (tk) => '📣 Bagikan $' + tk + ': dapatkan TON untuk setiap teman', win: (p, tk) => '📈 +' + p + '% di $' + tk + '!', wins: 'Tantang temanmu: mereka dapat $500 untuk mulai, kamu dapat $0.05 dalam TON untuk setiap teman yang bermain.', go: '🔥 Tantang temanku', later: 'Nanti' },
     en: { told: '💎 Every friend who joins through your link earns you $0.05 in TON (and $500 for both of you in the game)', cta: (tk) => '📣 Share $' + tk + ': earn TON for each friend', win: (p, tk) => '📈 +' + p + '% on $' + tk + '!', wins: 'Challenge your friends: they get $500 to start, you earn $0.05 in TON for each one who plays.', go: '🔥 Challenge my friends', later: 'Later' },
     fr: { told: '💎 Chaque ami qui rejoint avec ton lien te rapporte 0,05 $ en TON (et 500 $ chacun dans le jeu)', cta: (tk) => '📣 Partage $' + tk + ' : gagne des TON par ami', win: (p, tk) => '📈 +' + p + ' % sur $' + tk + ' !', wins: 'Défie tes amis : ils reçoivent 500 $ pour commencer, tu gagnes 0,05 $ en TON pour chaque ami qui joue.', go: '🔥 Défier mes amis', later: 'Plus tard' },
   };
