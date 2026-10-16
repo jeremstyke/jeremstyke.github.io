@@ -47,9 +47,22 @@
     if (!r || !r.ok) { SENT = ''; try { toast(fr() ? 'Oups, réessaie' : 'Oops, try again'); } catch (e) {} return; }
     HAS = true;
     try { tw.HapticFeedback.notificationOccurred('success'); } catch (e) {}
-    try { toast(fr() ? 'Portefeuille enregistré ✅' : 'Wallet saved ✅'); } catch (e) {}
-    const b = document.getElementById('dwalx'); if (b) b.remove();
+    // 16 oct 2026: says what is already earned and when it arrives
+    let s = null; try { s = await tonCall({}); } catch (e) {}
+    const bal = Number((s && s.balance) || 0), min = Number((s && ((s.all && s.all.min) || s.min)) || 0.1);
+    const M = (v) => fr() ? v.toFixed(2).replace('.', ',') + ' $' : '$' + v.toFixed(2);
+    try {
+      toast(bal >= min ? (fr() ? '✅ Portefeuille relié : tes ' + M(bal) + ' arrivent lundi' : '✅ Wallet linked: your ' + M(bal) + ' arrive on Monday')
+        : (fr() ? '✅ Portefeuille relié : payé le lundi dès ' + M(min) : '✅ Wallet linked: paid on Monday from ' + M(min)));
+    } catch (e) {}
+    const b = document.getElementById('dwalx'); if (b) b.replaceWith(okLine());
     if (document.getElementById('tonsheet')) { try { tonPage(); } catch (e) {} }
+  }
+  function okLine() {
+    const d = document.createElement('div'); d.id = 'dwalx'; d.className = 'dsm';
+    d.style.cssText = 'text-align:center;margin:6px 0 10px;font-weight:700';
+    d.textContent = fr() ? '👛 Envoyé sur ton portefeuille chaque lundi' : '👛 Sent to your wallet every Monday';
+    return d;
   }
   // one tap: opens the wallet list (Wallet in Telegram first), the address is saved as soon as it is confirmed
   async function connect(change) {
@@ -75,7 +88,10 @@
   async function dia() {
     const w = document.getElementById('dwal');
     if (!w || document.getElementById('dwalx')) return;
-    if ((await status()) !== false || document.getElementById('dwalx')) return;
+    const has = await status();
+    if (has === null || document.getElementById('dwalx')) return;
+    const top0 = w.parentNode.querySelector('.dc');
+    if (has) { const l = okLine(); if (top0 && top0.nextSibling) top0.parentNode.insertBefore(l, top0.nextSibling); else w.parentNode.insertBefore(l, w); return; }
     const c = document.createElement('div'); c.id = 'dwalx'; c.className = 'dc';
     c.style.cssText = 'border:1px solid rgba(255,212,59,.6);background:rgba(255,212,59,.12)';
     c.innerHTML = '<div class="dsm" style="margin-bottom:8px;font-weight:700">' + (fr() ? '💰 Tes gains t\'attendent : ajoute ton portefeuille pour être payé chaque lundi.' : '💰 Your earnings are waiting: add your wallet to get paid every Monday.') + '</div>'
