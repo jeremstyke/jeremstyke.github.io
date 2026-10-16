@@ -8,25 +8,25 @@
       nowal: 'Tambahkan dompet TON-mu di halaman 💎 TON untuk dibayar.', hasTon: '✅ Sudah dibayar dalam TON asli', nick: '✏️ Ganti nama panggilan', photo: '📷 Ganti foto', ph: 'Nama panggilan baru (2 sampai 16 karakter)', send: 'Kirim',
       pend: '⏳ Menunggu persetujuan', pendN: (n) => '⏳ Nama panggilan "' + n + '" menunggu persetujuan', pendP: '⏳ Foto baru menunggu persetujuan', sent: '✅ Terkirim! Kamu akan dapat pesan setelah diperiksa.',
       e_nick: '2 sampai 16 karakter, tanpa link atau @.', e_taken: 'Nama panggilan ini sudah dipakai.', e_wait: 'Satu perubahan per jam, coba lagi nanti.', e_photo: 'Foto ini tidak bisa dikirim.', err: 'Masalah koneksi, coba lagi.', close: 'Tutup', dev: 'pembuat game', x: 'sejak peluncuran',
-      b: { trade: '🎯 Transaksi pertama', creator: '🪙 Kreator', x10: '🚀 Koin x10', week: '🔥 7 hari bermain', sponsor: '👥 Pengundang', sponsor5: '🤝 Pengundang super', tapper: '💎 Pengetuk', winner: '🏆 Juara kontes', paid: '💸 Dibayar dalam TON', whale: '🐋 Paus', supporter: '💎 Supporter', crown: '👑 Mahkota' } },
+      b: { trade: '🎯 Transaksi pertama', creator: '🪙 Kreator', x10: '🚀 Koin x10', week: '🔥 7 hari bermain', sponsor: '👥 Pengundang', sponsor5: '🤝 Pengundang super', tapper: '💎 Pengetuk', winner: '🏆 Juara kontes', paid: '💸 Dibayar dalam TON', whale: '🐋 Paus', supporter: '💎 Premium', crown: '👑 Mahkota' } },
     en: { me: 'My profile', worth: 'Net worth', rank: 'Rank', trades: 'Trades', days: 'Days played', sale: 'Best sale', coins: 'Coins created', refs: 'Friends invited', taps: 'Diamond taps',
       since: 'Playing since', badges: 'Badges', none: 'No badge yet: trade, create a coin, invite friends!', mycoins: 'Coins created', ton: '💰 Real TON', earned: 'Earned in total', paid: 'Already paid', next: 'Next Monday',
       nowal: 'Add your TON wallet in the 💎 TON page to get paid.', hasTon: '✅ Already paid in real TON', nick: '✏️ Change my nickname', photo: '📷 Change my photo', ph: 'New nickname (2 to 16 characters)', send: 'Send',
       pend: '⏳ Waiting for approval', pendN: (n) => '⏳ Nickname "' + n + '" waiting for approval', pendP: '⏳ New photo waiting for approval', sent: '✅ Sent! You will get a message once it is checked.',
       e_nick: '2 to 16 characters, no links or @.', e_taken: 'This nickname is already taken.', e_wait: 'One change per hour, try again later.', e_photo: 'This photo could not be sent.', err: 'Connection problem, try again.', close: 'Close', dev: 'creator of the game', x: 'since launch',
-      b: { trade: '🎯 First trade', creator: '🪙 Creator', x10: '🚀 Coin x10', week: '🔥 7 days played', sponsor: '👥 Sponsor', sponsor5: '🤝 Super sponsor', tapper: '💎 Tapper', winner: '🏆 Contest winner', paid: '💸 Paid in TON', whale: '🐋 Whale', supporter: '💎 Supporter', crown: '👑 Crown' } },
+      b: { trade: '🎯 First trade', creator: '🪙 Creator', x10: '🚀 Coin x10', week: '🔥 7 days played', sponsor: '👥 Sponsor', sponsor5: '🤝 Super sponsor', tapper: '💎 Tapper', winner: '🏆 Contest winner', paid: '💸 Paid in TON', whale: '🐋 Whale', supporter: '💎 Premium', crown: '👑 Crown' } },
     fr: { me: 'Mon profil', worth: 'Fortune', rank: 'Rang', trades: 'Trades', days: 'Jours joués', sale: 'Plus grosse vente', coins: 'Coins créés', refs: 'Amis invités', taps: 'Tapes diamant',
       since: 'Joue depuis le', badges: 'Badges', none: 'Pas encore de badge : trade, crée un coin, invite des amis !', mycoins: 'Coins créés', ton: '💰 Vrais TON', earned: 'Gagné au total', paid: 'Déjà payé', next: 'Lundi prochain',
       nowal: 'Ajoute ton portefeuille TON dans la page 💎 TON pour être payé.', hasTon: '✅ Déjà payé en vrais TON', nick: '✏️ Changer de pseudo', photo: '📷 Changer de photo', ph: 'Nouveau pseudo (2 à 16 caractères)', send: 'Envoyer',
       pend: '⏳ En attente de validation', pendN: (n) => '⏳ Pseudo « ' + n + ' » en attente de validation', pendP: '⏳ Nouvelle photo en attente de validation', sent: '✅ Envoyé ! Tu recevras un message une fois vérifié.',
       e_nick: '2 à 16 caractères, sans lien ni @.', e_taken: 'Ce pseudo est déjà pris.', e_wait: 'Un changement par heure, réessaie plus tard.', e_photo: 'Cette photo n\'a pas pu être envoyée.', err: 'Problème de connexion, réessaie.', close: 'Fermer', dev: 'créateur du jeu', x: 'depuis le lancement',
-      b: { trade: '🎯 Premier trade', creator: '🪙 Créateur', x10: '🚀 Coin x10', week: '🔥 7 jours de jeu', sponsor: '👥 Parrain', sponsor5: '🤝 Super parrain', tapper: '💎 Tapeur', winner: '🏆 Gagnant de concours', paid: '💸 Payé en TON', whale: '🐋 Baleine', supporter: '💎 Supporter', crown: '👑 Couronne' } },
+      b: { trade: '🎯 Premier trade', creator: '🪙 Créateur', x10: '🚀 Coin x10', week: '🔥 7 jours de jeu', sponsor: '👥 Parrain', sponsor5: '🤝 Super parrain', tapper: '💎 Tapeur', winner: '🏆 Gagnant de concours', paid: '💸 Payé en TON', whale: '🐋 Baleine', supporter: '💎 Premium', crown: '👑 Couronne' } },
     ar: { me: 'ملفي', worth: 'الثروة', rank: 'الترتيب', trades: 'الصفقات', days: 'أيام اللعب', sale: 'أكبر بيع', coins: 'العملات المُنشأة', refs: 'الأصدقاء المدعوون', taps: 'ضغطات الماسة',
       since: 'يلعب منذ', badges: 'الشارات', none: 'لا شارة بعد: تداول، أنشئ عملة، ادعُ أصدقاءك!', mycoins: 'العملات المُنشأة', ton: '💰 عملات TON حقيقية', earned: 'المجموع المكتسب', paid: 'مدفوع سابقًا', next: 'الاثنين القادم',
       nowal: 'أضف محفظة TON في صفحة 💎 TON لتحصل على الدفع.', hasTon: '✅ حصل على دفعات TON حقيقية', nick: '✏️ تغيير الاسم', photo: '📷 تغيير الصورة', ph: 'اسم جديد (من 2 إلى 16 حرفًا)', send: 'إرسال',
       pend: '⏳ بانتظار الموافقة', pendN: (n) => '⏳ الاسم «' + n + '» بانتظار الموافقة', pendP: '⏳ الصورة الجديدة بانتظار الموافقة', sent: '✅ تم الإرسال! ستصلك رسالة بعد المراجعة.',
       e_nick: 'من 2 إلى 16 حرفًا، بدون روابط أو @.', e_taken: 'هذا الاسم مستخدم.', e_wait: 'تغيير واحد كل ساعة، حاول لاحقًا.', e_photo: 'تعذر إرسال الصورة.', err: 'مشكلة في الاتصال، حاول مرة أخرى.', close: 'إغلاق', dev: 'صانع اللعبة', x: 'منذ الإطلاق',
-      b: { trade: '🎯 أول صفقة', creator: '🪙 منشئ', x10: '🚀 عملة x10', week: '🔥 7 أيام لعب', sponsor: '👥 داعٍ', sponsor5: '🤝 داعٍ ممتاز', tapper: '💎 ضاغط', winner: '🏆 فائز بمسابقة', paid: '💸 دُفع له TON', whale: '🐋 حوت', supporter: '💎 داعم', crown: '👑 تاج' } },
+      b: { trade: '🎯 أول صفقة', creator: '🪙 منشئ', x10: '🚀 عملة x10', week: '🔥 7 أيام لعب', sponsor: '👥 داعٍ', sponsor5: '🤝 داعٍ ممتاز', tapper: '💎 ضاغط', winner: '🏆 فائز بمسابقة', paid: '💸 دُفع له TON', whale: '🐋 حوت', supporter: '💎 بريميوم', crown: '👑 تاج' } },
   };
   const lg = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] ? l : 'en'; };
   const L = () => TX[lg()];
@@ -51,7 +51,7 @@
     + '#pfm .phead{display:flex;align-items:center;gap:14px;margin:4px 0 14px}#pfm .phead h2{margin:0;font-size:21px;word-break:break-word}#pfm .phead small{display:block;opacity:.75;font-size:13px}'
     + '#pfm .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px}#pfm .pst{background:rgba(255,255,255,.04);border:1px solid var(--line,rgba(255,255,255,.12));border-radius:14px;padding:10px 12px}#pfm .pst small{display:block;opacity:.7;font-size:12px}#pfm .pst b{font-size:17px}'
     + '#pfm .pc{border:1px solid var(--line,rgba(255,255,255,.12));border-radius:16px;padding:12px 14px;margin:0 0 12px;background:rgba(255,255,255,.03)}#pfm .pl{font-size:12px;opacity:.7;text-transform:uppercase;letter-spacing:.04em;margin:0 0 8px}'
-    + '#pfm .pbd{display:flex;flex-wrap:wrap;gap:6px}#pfm .pbd span{background:rgba(255,212,59,.12);border:1px solid rgba(255,212,59,.35);border-radius:999px;padding:5px 10px;font-size:13px;font-weight:700}'
+    + '#pfm .pbd{display:flex;flex-wrap:wrap;gap:6px}#pfm .pbd span,.pbd .pbp{background:rgba(255,212,59,.12);border:1px solid rgba(255,212,59,.35);border-radius:999px;padding:5px 10px;font-size:13px;font-weight:700}.pbd .pbp{color:#ffd43b;font-family:inherit;cursor:pointer;margin:0;width:auto}'
     + '#pfm .pco{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:0;border-bottom:1px solid rgba(255,255,255,.06);background:none;color:inherit;padding:8px 0;font-size:14px}#pfm .pco:last-child{border-bottom:0}'
     + '#pfm .prow{display:flex;justify-content:space-between;font-size:14px;padding:5px 0}#pfm .ped{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px}#pfm .ped button{margin:0;padding:10px 6px;font-size:14px}'
     + '#pfm input{width:100%;box-sizing:border-box;border-radius:12px;border:1px solid var(--line,rgba(255,255,255,.2));background:rgba(255,255,255,.06);color:inherit;padding:11px 12px;font-size:15px;margin:0 0 8px}'
@@ -100,7 +100,7 @@
       h += '<div class="ped"><button class="btn ghost" id="pfn">' + ec(T.nick) + '</button><button class="btn ghost" id="pfp">' + ec(T.photo) + '</button></div><div id="pfedit"></div>';
     }
     h += '<div class="pgrid">' + stat('worth', big(p.worth)) + stat('trades', nf(p.trades)) + stat('days', nf(p.days)) + stat('sale', big(p.best_sale)) + stat('coins', nf(p.coins_n)) + stat('refs', nf(p.refs)) + stat('taps', nf(p.taps)) + stat('rank', p.dev ? '👨‍💻' : p.rank ? '#' + p.rank : '-') + '</div>';
-    h += '<div class="pc"><div class="pl">' + ec(T.badges) + '</div>' + ((p.badges || []).length ? '<div class="pbd">' + p.badges.map((k) => '<span>' + ec(T.b[k] || k) + '</span>').join('') + '</div>' : '<p class="pnote" style="margin:0">' + ec(T.none) + '</p>') + '</div>';
+    h += '<div class="pc"><div class="pl">' + ec(T.badges) + '</div>' + ((p.badges || []).length ? '<div class="pbd">' + p.badges.map((k) => k === 'supporter' ? '<button type="button" class="pbp">' + ec(T.b[k]) + ' ›</button>' : '<span>' + ec(T.b[k] || k) + '</span>').join('') + '</div>' : '<p class="pnote" style="margin:0">' + ec(T.none) + '</p>') + '</div>';
     if ((p.coins || []).length) h += '<div class="pc"><div class="pl">' + ec(T.mycoins) + ' (' + p.coins_n + ')</div>' + p.coins.map((c) => '<button class="pco" data-coin="' + c.id + '"><span style="font-size:20px">' + ec(c.emoji || '🪙') + '</span><b style="flex:1">$' + ec(c.ticker) + (c.rug ? ' 🚨' : '') + '</b><span style="opacity:.8">×' + ec(String(c.x).replace('.', lg() === 'fr' ? ',' : '.')) + ' <small>' + ec(T.x) + '</small></span></button>').join('') + '</div>';
     if (p.me && p.ton) h += '<div class="pc"><div class="pl">' + ec(T.ton) + '</div><div class="prow"><span>' + ec(T.earned) + '</span><b>' + usd(p.ton.earned, 4) + '</b></div><div class="prow"><span>' + ec(T.paid) + '</span><b>' + usd(p.ton.paid) + '</b></div><div class="prow"><span>' + ec(T.next) + '</span><b>' + usd(p.ton.next, 4) + '</b></div>' + (p.ton.wallet ? '' : '<p class="pnote" style="margin:6px 0 0">' + ec(T.nowal) + '</p>') + '</div>';
     else if (p.has_ton) h += '<p class="pnote" style="text-align:center">' + ec(T.hasTon) + '</p>';
@@ -157,4 +157,10 @@
   }
   window.mctProfile = (pid) => show(pid || 0); // used by the contests (rank.js)
   (function watch() { const v = document.getElementById('view'); if (!v) { setTimeout(watch, 250); return; } new MutationObserver(() => bindLeaders()).observe(v, { childList: true }); })();
+  // 17 oct 2026: the 💎 Premium badge of a player (his profile) opens the Premium offer (prem.js)
+  document.addEventListener('click', (e) => {
+    const b = e.target && e.target.closest && e.target.closest('.pbp'); if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    try { window.mctPremium && window.mctPremium(); } catch (x) {}
+  }, true);
 })();
