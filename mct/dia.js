@@ -5,6 +5,14 @@
 // The server counts every tap, limits the speed and asks a human check (Supabase function mct-ton: dia, dia_tap, dia_check).
 (() => {
   const TX = {
+    id: {
+      t: 'Berlian', mine: 'Di berlianku', claim: (v) => '➕ Tambahkan ' + v + ' ke saldoku', claim0: '➕ Tambahkan ke saldoku', solde: (v) => '👛 Saldo TON-ku: ' + v, added: (v) => '✅ ' + v + ' ditambahkan ke saldomu', none: 'Terus ketuk: mulai $0.01 kamu bisa menambahkannya ke saldomu', today: 'Hari ini', taps: 'ketukan', rate: (n) => 'Kurs hari ini: ' + n + ' ketukan = $0.01',
+      lead: 'Ketuk berliannya, ia pindah setiap 50 ketukan', pay: 'Penghasilanmu menunggu di berlian: ketuk "Tambahkan ke saldoku" untuk mengambilnya. Saldomu dibayar setiap Senin mulai $0.10 ke dompet TON-mu.',
+      check: 'Cek singkat: ketuk 💎', wrong: 'Salah, coba lagi', paused: 'Berlian sedang istirahat sampai bulan depan. Sampai jumpa!', off: 'Berlian ditutup untuk sementara.',
+      bon: 'Bonus pelanggan', bm: '📢 Channel Meme Coin Tycoon', bj: '📢 Channel Jeremstyke', join: 'Gabung', on: '✅ +10 %', recheck: '🔄 Sudah gabung',
+      con: '🏆 Kontes berlian minggu ini', ends: 'Berakhir dalam', you: 'kamu', nobody: 'Belum ada: jadilah yang pertama!', rank: 'Peringkatmu', prizes: 'Hadiah Senin dalam TON',
+      wal: '👛 Dompet TON-ku', err: 'Masalah koneksi, coba lagi.', close: 'Tutup',
+    },
     en: {
       t: 'Diamond', mine: 'In my diamond', claim: (v) => '➕ Add ' + v + ' to my balance', claim0: '➕ Add to my balance', solde: (v) => '👛 My TON balance: ' + v, added: (v) => '✅ ' + v + ' added to your balance', none: 'Keep tapping: from $0.01 you can add it to your balance', today: 'Today', taps: 'taps', rate: (n) => 'Rate of the day: ' + n + ' taps = $0.01',
       lead: 'Tap the diamond, it moves every 50 taps', pay: 'Your earnings wait in the diamond: tap "Add to my balance" to get them. Your balance is paid every Monday from $0.10 to your TON wallet.',
