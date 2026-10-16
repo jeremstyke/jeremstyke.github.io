@@ -300,13 +300,13 @@ function subCard() {
 }
 // ---------- 16 oct 2026: the total balance on every app (diamond and tasks, the games, the contests), with what is pending and paid ----------
 const TOT = {
-  en: { t: '💰 Your balance on all apps', tap: '💎 Diamond and tasks', other: '🏆 Contests', pend: '⏳ Pending', paid: '💸 Paid', x: 'Paid on Monday to your TON wallet, from' },
-  fr: { t: '💰 Ton solde sur toutes les apps', tap: '💎 Diamant et tâches', other: '🏆 Concours', pend: '⏳ En attente', paid: '💸 Payé', x: 'Payé le lundi sur ton portefeuille TON, dès' },
-  es: { t: '💰 Tu saldo en todas las apps', tap: '💎 Diamante y tareas', other: '🏆 Concursos', pend: '⏳ Pendiente', paid: '💸 Pagado', x: 'Se paga el lunes en tu billetera TON, desde' },
-  pt: { t: '💰 Seu saldo em todos os apps', tap: '💎 Diamante e tarefas', other: '🏆 Concursos', pend: '⏳ Pendente', paid: '💸 Pago', x: 'Pago na segunda-feira na sua carteira TON, a partir de' },
-  ru: { t: '💰 Твой баланс во всех приложениях', tap: '💎 Алмаз и задания', other: '🏆 Конкурсы', pend: '⏳ В ожидании', paid: '💸 Выплачено', x: 'Выплата в понедельник на твой TON кошелёк, от' },
-  ar: { t: '💰 رصيدك في كل التطبيقات', tap: '💎 الماسة والمهام', other: '🏆 المسابقات', pend: '⏳ قيد الانتظار', paid: '💸 مدفوع', x: 'يُدفع يوم الاثنين إلى محفظة TON، ابتداءً من' },
-  id: { t: '💰 Saldomu di semua aplikasi', tap: '💎 Berlian dan tugas', other: '🏆 Kontes', pend: '⏳ Tertunda', paid: '💸 Dibayar', x: 'Dibayar hari Senin ke dompet TON-mu, mulai dari' }
+  en: { t: '💰 Your balance on all apps', tap: '💎 Diamond', other: '🏆 Contests', pend: '⏳ Pending', paid: '💸 Paid', x: 'Paid on Monday to your TON wallet, from' },
+  fr: { t: '💰 Ton solde sur toutes les apps', tap: '💎 Diamant', other: '🏆 Concours', pend: '⏳ En attente', paid: '💸 Payé', x: 'Payé le lundi sur ton portefeuille TON, dès' },
+  es: { t: '💰 Tu saldo en todas las apps', tap: '💎 Diamante', other: '🏆 Concursos', pend: '⏳ Pendiente', paid: '💸 Pagado', x: 'Se paga el lunes en tu billetera TON, desde' },
+  pt: { t: '💰 Seu saldo em todos os apps', tap: '💎 Diamante', other: '🏆 Concursos', pend: '⏳ Pendente', paid: '💸 Pago', x: 'Pago na segunda-feira na sua carteira TON, a partir de' },
+  ru: { t: '💰 Твой баланс во всех приложениях', tap: '💎 Алмаз', other: '🏆 Конкурсы', pend: '⏳ В ожидании', paid: '💸 Выплачено', x: 'Выплата в понедельник на твой TON кошелёк, от' },
+  ar: { t: '💰 رصيدك في كل التطبيقات', tap: '💎 الماسة', other: '🏆 المسابقات', pend: '⏳ قيد الانتظار', paid: '💸 مدفوع', x: 'يُدفع يوم الاثنين إلى محفظة TON، ابتداءً من' },
+  id: { t: '💰 Saldomu di semua aplikasi', tap: '💎 Berlian', other: '🏆 Kontes', pend: '⏳ Tertunda', paid: '💸 Dibayar', x: 'Dibayar hari Senin ke dompet TON-mu, mulai dari' }
 };
 function totalCard() {
   const a = (TP && TP.all) || (S && S.tap && S.tap.all); if (!a) return '';
@@ -315,16 +315,16 @@ function totalCard() {
     .map((k) => `<div class="rk" style="font-size:14px"><span>${esc(NM[k])}</span><b>${money(d[k], 3)}</b></div>`).join('');
   const pend = a.pending && Number(a.pending.usd) > 0 ? `<div class="rk" style="font-size:13px"><span>${esc(X.pend)}</span><span>${money(a.pending.usd)}</span></div>` : '';
   const paid = Number(a.paid) + Number(a.waiting || 0) > 0 ? `<div class="rk" style="font-size:13px"><span>${esc(X.paid)}</span><span>${money(Number(a.paid) + Number(a.waiting || 0))}</span></div>` : '';
-  return `<section class="card" style="--c:#7dff6b"><div class="lbl">${esc(X.t)}</div><div class="big">${money(a.total, 3)}</div>${rows}${pend}${paid}<p class="what" style="font-size:12px;margin:8px 0 0">${esc(X.x)} ${money(a.min || 0.1)}</p></section>`;
+  return `<section class="card" style="--c:#7dff6b;background:linear-gradient(160deg,rgba(125,255,107,.16),rgba(46,230,255,.08) 60%,var(--card))"><div class="lbl">${esc(X.t)}</div><div class="big" style="font-size:40px;color:#7dff6b">${money(a.total, 3)}</div>${rows}${pend}${paid}<p class="what" style="font-size:12px;margin:8px 0 0">${esc(X.x)} ${money(a.min || 0.1)}</p></section>`;
 }
 function tapTab() {
   if (!TP) TP = S.tap;
   const on = TP && TP.on;
-  return (on ? `<section class="card" style="--c:#2ee6ff"><div class="lbl">${L.gain}</div><div class="big" id="tapusd"></div>${S.joined && subPct() ? `<span style="display:inline-block;margin:2px 0 4px;font-size:12px;font-weight:800;color:#062a33;background:#ffd43b;padding:3px 10px;border-radius:999px">${esc(SUB[LG].on(subPct()))}</span>` : ''}`
+  return totalCard() + (on ? `<section class="card" style="--c:#2ee6ff"><div class="lbl">${L.gain}</div><div class="big" id="tapusd"></div>${S.joined && subPct() ? `<span style="display:inline-block;margin:2px 0 4px;font-size:12px;font-weight:800;color:#062a33;background:#ffd43b;padding:3px 10px;border-radius:999px">${esc(SUB[LG].on(subPct()))}</span>` : ''}`
       + `<div style="height:8px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden;margin:6px 0 4px"><i id="tapbar" style="display:block;height:100%;width:0;background:#2ee6ff;transition:width .15s"></i></div>`
       + `<div class="what" style="font-size:13px;margin:0 0 10px" id="tapn"></div><div id="taparea"></div>`
       + `<p class="what" style="font-size:12px;margin:10px 0 0">${esc(L.pay)}</p></section>` : '')
-    + totalCard() + subCard() + walletCard() + inviteCard();
+    + subCard() + walletCard() + inviteCard();
 }
 function tapPaint() {
   const el = $('taparea'); if (!el || !TP) return;
