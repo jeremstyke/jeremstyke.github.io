@@ -29,6 +29,9 @@ h1{font-size:24px;font-weight:900;letter-spacing:-.02em;margin:4px 0 2px}
 .btn:active{transform:translateY(3px);box-shadow:0 2px 0 color-mix(in srgb,var(--c) 55%,#000)}
 .ghost{display:block;width:100%;border:1px solid var(--line);border-radius:14px;padding:12px;font:700 14px system-ui,sans-serif;cursor:pointer;color:var(--ink);background:rgba(255,255,255,.05)}
 .row3 .btn,.row3 .ghost{padding:11px 4px;font-size:13px}
+.pbar{height:9px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden;margin:6px 0 4px}.pbar i{display:block;height:100%;border-radius:9px;background:var(--c)}
+.plab{display:flex;justify-content:space-between;font-size:12px;color:var(--mute);margin-top:8px}
+.tdone{font-weight:800;color:#7dff6b;margin:10px 0 0}
 .stats{display:flex;gap:8px;margin:0}
 .stat{flex:1;background:rgba(255,255,255,.05);border-radius:12px;padding:8px 10px}
 .stat b{display:block;font-size:18px}.stat small{color:var(--mute);font-size:12px}
@@ -44,7 +47,7 @@ h1{font-size:24px;font-weight:900;letter-spacing:-.02em;margin:4px 0 2px}
 .foot a{color:var(--ink);text-decoration:none;font-weight:700}
 .rk{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid rgba(255,255,255,.08)}
 .rk.me{color:#ffd43b;font-weight:700}
-nav#tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(3,1fr);background:rgba(14,10,30,.96);border-top:1px solid rgba(255,255,255,.1);padding:6px 6px calc(6px + env(safe-area-inset-bottom));backdrop-filter:blur(8px)}
+nav#tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(4,1fr);background:rgba(14,10,30,.96);border-top:1px solid rgba(255,255,255,.1);padding:6px 6px calc(6px + env(safe-area-inset-bottom));backdrop-filter:blur(8px)}
 nav#tabs button{background:none;border:0;color:rgba(255,255,255,.55);font:600 12px system-ui;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;cursor:pointer}
 nav#tabs button.on{color:#fff}
 nav#tabs span{font-size:22px}
@@ -215,7 +218,7 @@ $('foot').innerHTML = esc(L.ask) + '<a href="#" id="ct">' + esc(L.me) + '</a><br
 $('ct').onclick = (e) => { e.preventDefault(); open('https://t.me/jeremstyke?direct'); };
 
 // links ?startapp=contest_... open the contest, ?startapp=progs_... the programs (from the games), wallet_... the wallet field
-let S = null, EDIT = false, TAB = /^contest/.test(SP) ? 'con' : (/^progs/.test(SP) || /^(mct|gp|ds)$/.test(SP) || /^js_spot/.test(SP)) ? 'pro' : 'tap', GOWAL = /^wallet/.test(SP);
+let S = null, EDIT = false, TAB = /^task/.test(SP) ? 'tsk' : /^contest/.test(SP) ? 'con' : (/^progs/.test(SP) || /^(mct|gp|ds)$/.test(SP) || /^js_spot/.test(SP)) ? 'pro' : 'tap', GOWAL = /^wallet/.test(SP);
 let TP = null, TQ = 0, TBUSY = false, TPOS = { x: 50, y: 50 }, TCOUNT = 0, TTIMER = null;
 
 // ---------- the diamond tab ----------
@@ -260,6 +263,34 @@ const SUB = {
   ar: { t: (p) => '📢 اشترك في Jeremstyke: ‎+' + p + ' % على ضغطاتك', x: 'ما دمت مشتركًا، كل ضغطة تربح أكثر. تُضاف كل ليلة مع أرباحك.', j: '📢 اشترك', c: '✅ اشتركت', on: (p) => '✅ مكافأة المشترك ‎+' + p + ' %', no: 'لست مشتركًا بعد: انضم إلى القناة ثم حاول مرة أخرى.' },
   id: { t: (p) => '📢 Langganan Jeremstyke: +' + p + ' % untuk ketukanmu', x: 'Selama kamu berlangganan, setiap ketukan menghasilkan lebih banyak. Ditambahkan setiap malam bersama penghasilanmu.', j: '📢 Langganan', c: '✅ Sudah langganan', on: (p) => '✅ Bonus pelanggan +' + p + ' %', no: 'Belum berlangganan: gabung ke kanal lalu coba lagi.' }
 };
+// ---------- 16 oct 2026: the Tasks tab (the player does it himself in Jeremy's games, paid once per account) ----------
+const TASKURL = { ds4: 'https://t.me/DailyScorefootbot/play?startapp=src_earntask', mct5: 'https://t.me/Memecointycoonbot?startapp=v_earntask', gp1: 'https://t.me/Grampedia_bot?startapp=add' };
+const TSK = {
+  en: { tab: 'Tasks', i: 'For you: do these tasks yourself in our games and earn real TON. Each task is paid once.', ds4: '⚽ Make 4 predictions on Daily Score', ds4x: 'One match a day: come back 4 days and guess the score.', mct5: '🪙 Make 5 trades on 3 different days in Meme Coin Tycoon', mct5x: 'Buy and sell meme coins with virtual money, on 3 different days.', gp1: '📚 Add your channel, group or bot to GramPedia', gp1x: 'Paid once your listing is approved by a human.', pr: 'predictions', tr: 'trades', dy: 'days', li: 'approved listing', go: '▶️ Start', done: '✅ Validated! Credited in a few minutes', paid: '✅ Validated: added to your balance', inv: '👥 Now invite your friends to {g}: $0.05 in TON for every friend who really plays.', invg: '👥 Now invite channel owners: as soon as a listing is added and approved through your link, you get $0.05 in TON.', invb: '👥 Invite my friends', sub: '📢 Subscribe to @jeremstyke', subx: 'Your taps on the diamond earn more as long as you are subscribed.', subok: '✅ Subscribed: bonus active', note: 'Only what you do after joining Earn counts. Paid on Monday with the rest of your balance, to your TON wallet.' },
+  fr: { tab: 'Tâches', i: 'Pour toi : fais ces tâches toi-même dans nos jeux et gagne de vrais TON. Chaque tâche est payée une fois.', ds4: '⚽ Fais 4 pronos sur Daily Score', ds4x: 'Un match par jour : reviens 4 jours et devine le score.', mct5: '🪙 Fais 5 trades sur 3 jours différents dans Meme Coin Tycoon', mct5x: 'Achète et vends des meme coins avec de l\'argent virtuel, sur 3 jours différents.', gp1: '📚 Ajoute ta chaîne, ton groupe ou ton bot sur GramPedia', gp1x: 'Payé une fois ta fiche validée par un humain.', pr: 'pronos', tr: 'trades', dy: 'jours', li: 'fiche validée', go: '▶️ Commencer', done: '✅ Validée ! Créditée dans quelques minutes', paid: '✅ Validée : ajoutée à ton solde', inv: '👥 Maintenant, invite tes amis dans {g} : 0,05 $ en TON pour chaque ami qui joue vraiment.', invg: '👥 Maintenant, invite des propriétaires de chaînes : dès qu\'une fiche est ajoutée et validée via ton lien, tu touches 0,05 $ en TON.', invb: '👥 Inviter mes amis', sub: '📢 Abonne-toi à @jeremstyke', subx: 'Tes tapes sur le diamant rapportent plus tant que tu es abonné.', subok: '✅ Abonné : bonus actif', note: 'Seul ce que tu fais après ton arrivée sur Earn compte. Payé le lundi avec le reste de ton solde, sur ton portefeuille TON.' },
+  es: { tab: 'Tareas', i: 'Para ti: haz estas tareas tú mismo en nuestros juegos y gana TON de verdad. Cada tarea se paga una vez.', ds4: '⚽ Haz 4 pronósticos en Daily Score', ds4x: 'Un partido al día: vuelve 4 días y adivina el marcador.', mct5: '🪙 Haz 5 trades en 3 días distintos en Meme Coin Tycoon', mct5x: 'Compra y vende meme coins con dinero virtual, en 3 días distintos.', gp1: '📚 Añade tu canal, grupo o bot a GramPedia', gp1x: 'Se paga cuando una persona aprueba tu ficha.', pr: 'pronósticos', tr: 'trades', dy: 'días', li: 'ficha aprobada', go: '▶️ Empezar', done: '✅ ¡Validada! Acreditada en unos minutos', paid: '✅ Validada: añadida a tu saldo', inv: '👥 Ahora invita a tus amigos a {g}: 0,05 $ en TON por cada amigo que juegue de verdad.', invg: '👥 Ahora invita a dueños de canales: en cuanto se añada y apruebe una ficha con tu enlace, ganas 0,05 $ en TON.', invb: '👥 Invitar a mis amigos', sub: '📢 Suscríbete a @jeremstyke', subx: 'Tus toques en el diamante ganan más mientras estés suscrito.', subok: '✅ Suscrito: bono activo', note: 'Solo cuenta lo que haces después de unirte a Earn. Se paga el lunes con el resto de tu saldo, en tu billetera TON.' },
+  pt: { tab: 'Tarefas', i: 'Para você: faça estas tarefas você mesmo nos nossos jogos e ganhe TON de verdade. Cada tarefa é paga uma vez.', ds4: '⚽ Faça 4 palpites no Daily Score', ds4x: 'Um jogo por dia: volte 4 dias e adivinhe o placar.', mct5: '🪙 Faça 5 trades em 3 dias diferentes no Meme Coin Tycoon', mct5x: 'Compre e venda meme coins com dinheiro virtual, em 3 dias diferentes.', gp1: '📚 Adicione seu canal, grupo ou bot ao GramPedia', gp1x: 'Pago quando sua ficha é aprovada por uma pessoa.', pr: 'palpites', tr: 'trades', dy: 'dias', li: 'ficha aprovada', go: '▶️ Começar', done: '✅ Validada! Creditada em alguns minutos', paid: '✅ Validada: adicionada ao seu saldo', inv: '👥 Agora convide seus amigos para o {g}: 0,05 $ em TON por cada amigo que jogar de verdade.', invg: '👥 Agora convide donos de canais: assim que uma ficha for adicionada e aprovada pelo seu link, você ganha 0,05 $ em TON.', invb: '👥 Convidar meus amigos', sub: '📢 Inscreva-se no @jeremstyke', subx: 'Seus toques no diamante rendem mais enquanto estiver inscrito.', subok: '✅ Inscrito: bônus ativo', note: 'Só conta o que você faz depois de entrar no Earn. Pago na segunda-feira com o resto do seu saldo, na sua carteira TON.' },
+  ru: { tab: 'Задания', i: 'Для тебя: выполняй эти задания сам в наших играх и получай настоящие TON. Каждое задание оплачивается один раз.', ds4: '⚽ Сделай 4 прогноза в Daily Score', ds4x: 'Один матч в день: заходи 4 дня и угадывай счёт.', mct5: '🪙 Сделай 5 сделок в 3 разных дня в Meme Coin Tycoon', mct5x: 'Покупай и продавай мемкоины за виртуальные деньги, в 3 разных дня.', gp1: '📚 Добавь свой канал, группу или бота в GramPedia', gp1x: 'Оплата после одобрения карточки модератором.', pr: 'прогнозов', tr: 'сделок', dy: 'дней', li: 'одобренная карточка', go: '▶️ Начать', done: '✅ Засчитано! Начислим через несколько минут', paid: '✅ Засчитано: добавлено к балансу', inv: '👥 Теперь приглашай друзей в {g}: 0,05 $ в TON за каждого друга, который реально играет.', invg: '👥 Теперь приглашай владельцев каналов: как только карточка добавлена и одобрена по твоей ссылке, ты получаешь 0,05 $ в TON.', invb: '👥 Пригласить друзей', sub: '📢 Подпишись на @jeremstyke', subx: 'Пока ты подписан, нажатия на алмаз приносят больше.', subok: '✅ Подписан: бонус активен', note: 'Считается только то, что ты делаешь после входа в Earn. Выплата в понедельник вместе с остальным балансом на твой TON кошелёк.' },
+  ar: { tab: 'المهام', i: 'لك: أنجز هذه المهام بنفسك في ألعابنا واربح عملات TON حقيقية. تُدفع كل مهمة مرة واحدة.', ds4: '⚽ قدّم 4 توقعات في Daily Score', ds4x: 'مباراة واحدة يوميًا: عُد 4 أيام وخمّن النتيجة.', mct5: '🪙 نفّذ 5 صفقات في 3 أيام مختلفة في Meme Coin Tycoon', mct5x: 'اشترِ وبِع عملات الميم بأموال افتراضية، في 3 أيام مختلفة.', gp1: '📚 أضف قناتك أو مجموعتك أو البوت الخاص بك إلى GramPedia', gp1x: 'تُدفع بعد موافقة شخص على بطاقتك.', pr: 'توقعات', tr: 'صفقات', dy: 'أيام', li: 'بطاقة مقبولة', go: '▶️ ابدأ', done: '✅ تم التحقق! تُضاف خلال دقائق', paid: '✅ تم التحقق: أُضيفت إلى رصيدك', inv: '👥 الآن ادعُ أصدقاءك إلى {g}: ‎0.05 $ بعملة TON لكل صديق يلعب فعلًا.', invg: '👥 الآن ادعُ أصحاب القنوات: بمجرد إضافة بطاقة وقبولها عبر رابطك، تربح ‎0.05 $ بعملة TON.', invb: '👥 ادعُ أصدقائي', sub: '📢 اشترك في @jeremstyke', subx: 'ضغطاتك على الماسة تربح أكثر ما دمت مشتركًا.', subok: '✅ مشترك: المكافأة مفعّلة', note: 'يُحتسب فقط ما تفعله بعد انضمامك إلى Earn. يُدفع يوم الاثنين مع باقي رصيدك إلى محفظة TON.' },
+  id: { tab: 'Tugas', i: 'Untukmu: kerjakan tugas ini sendiri di game kami dan dapatkan TON asli. Setiap tugas dibayar sekali.', ds4: '⚽ Buat 4 tebakan di Daily Score', ds4x: 'Satu pertandingan per hari: kembali 4 hari dan tebak skornya.', mct5: '🪙 Lakukan 5 trade di 3 hari berbeda di Meme Coin Tycoon', mct5x: 'Beli dan jual meme coin dengan uang virtual, di 3 hari berbeda.', gp1: '📚 Tambahkan channel, grup, atau botmu ke GramPedia', gp1x: 'Dibayar setelah listingmu disetujui oleh manusia.', pr: 'tebakan', tr: 'trade', dy: 'hari', li: 'listing disetujui', go: '▶️ Mulai', done: '✅ Tervalidasi! Dikreditkan dalam beberapa menit', paid: '✅ Tervalidasi: ditambahkan ke saldomu', inv: '👥 Sekarang undang temanmu ke {g}: 0,05 $ dalam TON untuk setiap teman yang benar-benar bermain.', invg: '👥 Sekarang undang pemilik channel: begitu listing ditambahkan dan disetujui lewat tautanmu, kamu dapat 0,05 $ dalam TON.', invb: '👥 Undang temanku', sub: '📢 Langganan @jeremstyke', subx: 'Ketukanmu di berlian menghasilkan lebih banyak selama kamu berlangganan.', subok: '✅ Berlangganan: bonus aktif', note: 'Hanya yang kamu lakukan setelah bergabung dengan Earn yang dihitung. Dibayar hari Senin bersama sisa saldomu, ke dompet TON-mu.' }
+};
+const TCOL = { ds4: '#7dff6b', mct5: '#ffd43b', gp1: '#2ee6ff' };
+// once a task is validated, the player is pushed to the referral program of that game (Daily Score and Meme Coin Tycoon: $0.05 per friend who plays; GramPedia: $0.05 per listing added through his link)
+const TINV = { ds4: ['Daily Score', 'https://t.me/DailyScorefootbot/play?startapp=src_earninv'], mct5: ['Meme Coin Tycoon', 'https://t.me/Memecointycoonbot?startapp=v_earninv'], gp1: ['GramPedia', 'https://t.me/Grampedia_bot?startapp=ton'] };
+function taskTab() {
+  const X = TSK[LG], ts = (TP && TP.tasks) || (S && S.tap && S.tap.tasks);
+  const bar = (n, g, lab) => `<div class="plab"><span>${esc(lab)}</span><b>${n}/${g}</b></div><div class="pbar"><i style="width:${Math.round(Math.min(1, n / g) * 100)}%"></i></div>`;
+  let h = `<p class="what" style="margin:0 0 12px">${esc(X.i)}</p>`;
+  for (const t of (ts && ts.list) || []) {
+    h += `<section class="card" style="--c:${TCOL[t.k] || '#ffd43b'}"><div class="head"><div><h2 style="font-size:16px">${esc(X[t.k])}</h2><span class="badge">+${esc(money(t.usd))}</span></div></div><p class="what">${esc(X[t.k + 'x'])}</p>`
+      + (t.k === 'ds4' ? bar(t.n, t.goal, X.pr) : t.k === 'mct5' ? bar(t.n, t.goal, X.tr) + bar(t.n2, t.goal2, X.dy) : bar(t.n, t.goal, X.li))
+      + (t.paid || t.done ? `<p class="tdone">${esc(t.paid ? X.paid : X.done)}</p><p class="what" style="margin:10px 0">${esc(t.k === 'gp1' ? X.invg : X.inv.replace('{g}', TINV[t.k][0]))}</p><button class="btn" data-tinv="${t.k}">${esc(X.invb)}</button>` : `<button class="btn" style="margin-top:10px" data-task="${t.k}">${esc(X.go)}</button>`) + '</section>';
+  }
+  const sp = subPct();
+  if (sp) h += `<section class="card" style="--c:#ffd43b"><div class="head"><div><h2 style="font-size:16px">${esc(X.sub)}</h2><span class="badge">+${sp} %</span></div></div><p class="what">${esc(X.subx)}</p>`
+    + (S.joined ? `<p class="tdone">${esc(X.subok)}</p>` : `<div class="row3" style="grid-template-columns:1fr 1fr;margin:0"><button class="btn" id="tsj">${esc(SUB[LG].j)}</button><button class="ghost" id="tsc">${esc(SUB[LG].c)}</button></div>`) + '</section>';
+  return h + `<p class="what" style="font-size:12px;text-align:center">${esc(X.note)}</p>`;
+}
 const subPct = () => Number((TP && TP.sub_pct) || (S && S.tap && S.tap.sub_pct) || 0);
 function subCard() {
   if (!S || S.joined !== false || !subPct()) return '';
@@ -324,8 +355,43 @@ function conTab() {
     h += `<section class="card" style="--c:#ffd43b"><div class="lbl">${L.cT}</div><p class="what" style="margin:0 0 8px">${esc(L.cX)} <b>${pz.map((x) => money(x)).join(' / ')}</b> ${esc(L.cTon)} ⏳ ${esc(L.left)} ${lt}</p>`
       + rows + me + `<button class="btn" id="cgo" style="margin-top:12px">💎 ${esc(L.tTap)}</button></section>`;
   }
+  h += gameContests();
   const pays = ((S.contest && S.contest.payouts) || []).slice(0, 6).map((p) => `<div class="rk" style="font-size:13px"><span>✅ ${esc(p.name)}</span><span>${Number(p.ton).toFixed(3)} TON · ${new Date(p.at).toLocaleDateString(LG)}</span></div>`).join('');
   if (pays) h += `<section class="card" style="--c:#4ff0b7"><div class="lbl">${L.payouts}</div>${pays}</section>`;
+  return h;
+}
+
+// ---------- 16 oct 2026: the contests of the games, under the diamond contest (live leaderboard, button to the game) ----------
+const GC = {
+  en: { mT: '🪙 Meme Coin Tycoon contest', mX: 'The 3 who invite the most players this week win', ton: 'in TON', fr: 'friends', mMin: (n) => 'From ' + n + ' friends who really play.', mGo: '🪙 Play and invite', dT: '⚽ Daily Score leaderboard', dX: 'The #1 of the week wins 7 days of Premium in the game.', pts: 'pts', dGo: '⚽ Make my prediction', none: 'Nobody yet: be the first!', me: 'Your rank', gT: '📚 GramPedia contest', gX: 'The 3 who get the most listings added and approved through their link this week win', gU: 'listings', gMin: 'From {n} approved listings.', gGo: '📚 Invite channel owners' },
+  fr: { mT: '🪙 Concours Meme Coin Tycoon', mX: 'Les 3 qui invitent le plus de joueurs cette semaine gagnent', ton: 'en TON', fr: 'amis', mMin: (n) => 'À partir de ' + n + ' amis qui jouent vraiment.', mGo: '🪙 Jouer et inviter', dT: '⚽ Classement Daily Score', dX: 'Le n°1 de la semaine gagne 7 jours de Premium dans le jeu.', pts: 'pts', dGo: '⚽ Faire mon prono', none: 'Personne pour l\'instant : sois le premier !', me: 'Ton rang', gT: '📚 Concours GramPedia', gX: 'Les 3 qui font ajouter le plus de fiches validées via leur lien cette semaine gagnent', gU: 'fiches', gMin: 'À partir de {n} fiches validées.', gGo: '📚 Inviter des chaînes' },
+  es: { mT: '🪙 Concurso Meme Coin Tycoon', mX: 'Los 3 que inviten más jugadores esta semana ganan', ton: 'en TON', fr: 'amigos', mMin: (n) => 'Desde ' + n + ' amigos que juegan de verdad.', mGo: '🪙 Jugar e invitar', dT: '⚽ Clasificación Daily Score', dX: 'El n.º 1 de la semana gana 7 días de Premium en el juego.', pts: 'pts', dGo: '⚽ Hacer mi pronóstico', none: 'Nadie todavía: ¡sé el primero!', me: 'Tu puesto', gT: '📚 Concurso GramPedia', gX: 'Los 3 que consigan más fichas añadidas y aprobadas con su enlace esta semana ganan', gU: 'fichas', gMin: 'Desde {n} fichas aprobadas.', gGo: '📚 Invitar canales' },
+  pt: { mT: '🪙 Concurso Meme Coin Tycoon', mX: 'Os 3 que convidarem mais jogadores nesta semana ganham', ton: 'em TON', fr: 'amigos', mMin: (n) => 'A partir de ' + n + ' amigos que jogam de verdade.', mGo: '🪙 Jogar e convidar', dT: '⚽ Ranking Daily Score', dX: 'O nº 1 da semana ganha 7 dias de Premium no jogo.', pts: 'pts', dGo: '⚽ Fazer meu palpite', none: 'Ninguém ainda: seja o primeiro!', me: 'Sua posição', gT: '📚 Concurso GramPedia', gX: 'Os 3 que conseguirem mais fichas adicionadas e aprovadas pelo seu link nesta semana ganham', gU: 'fichas', gMin: 'A partir de {n} fichas aprovadas.', gGo: '📚 Convidar canais' },
+  ru: { mT: '🪙 Конкурс Meme Coin Tycoon', mX: 'Трое, кто пригласит больше всех игроков за неделю, получат', ton: 'в TON', fr: 'друзей', mMin: (n) => 'От ' + n + ' друзей, которые реально играют.', mGo: '🪙 Играть и приглашать', dT: '⚽ Рейтинг Daily Score', dX: 'Лучший игрок недели получает 7 дней Premium в игре.', pts: 'очк.', dGo: '⚽ Сделать прогноз', none: 'Пока никого: будь первым!', me: 'Твоё место', gT: '📚 Конкурс GramPedia', gX: 'Трое, по чьей ссылке за неделю добавят и одобрят больше всего карточек, получат', gU: 'карточек', gMin: 'От {n} одобренных карточек.', gGo: '📚 Пригласить каналы' },
+  ar: { mT: '🪙 مسابقة Meme Coin Tycoon', mX: 'أكثر 3 يدعون لاعبين هذا الأسبوع يربحون', ton: 'بعملة TON', fr: 'أصدقاء', mMin: (n) => 'ابتداءً من ' + n + ' أصدقاء يلعبون فعلًا.', mGo: '🪙 العب وادعُ', dT: '⚽ ترتيب Daily Score', dX: 'الأول هذا الأسبوع يربح 7 أيام Premium في اللعبة.', pts: 'نقاط', dGo: '⚽ قدّم توقعي', none: 'لا أحد بعد: كن الأول!', me: 'ترتيبك', gT: '📚 مسابقة GramPedia', gX: 'أكثر 3 تُضاف عبر روابطهم بطاقات مقبولة هذا الأسبوع يربحون', gU: 'بطاقات', gMin: 'ابتداءً من {n} بطاقات مقبولة.', gGo: '📚 ادعُ القنوات' },
+  id: { mT: '🪙 Kontes Meme Coin Tycoon', mX: '3 orang yang mengundang pemain terbanyak minggu ini menang', ton: 'dalam TON', fr: 'teman', mMin: (n) => 'Mulai dari ' + n + ' teman yang benar-benar bermain.', mGo: '🪙 Main dan undang', dT: '⚽ Peringkat Daily Score', dX: 'Peringkat #1 minggu ini menang 7 hari Premium di game.', pts: 'poin', dGo: '⚽ Buat tebakanku', none: 'Belum ada: jadilah yang pertama!', me: 'Peringkatmu', gT: '📚 Kontes GramPedia', gX: '3 orang dengan listing terbanyak yang ditambahkan dan disetujui lewat tautannya minggu ini menang', gU: 'listing', gMin: 'Mulai dari {n} listing disetujui.', gGo: '📚 Undang channel' }
+};
+const GCURL = { gp: 'https://t.me/Grampedia_bot?startapp=ton', mct: 'https://t.me/Memecointycoonbot?startapp=v_earncon', ds: 'https://t.me/DailyScorefootbot/play?startapp=src_earncon' };
+function gameContests() {
+  const X = GC[LG], md = ['🥇', '🥈', '🥉'];
+  const rows = (top, unit, pz, mn) => (top || []).slice(0, 5).map((x, i) => `<div class="rk${x.me ? ' me' : ''}"><span>${md[x.rank - 1] || x.rank + '.'} ${esc(x.name)}${x.me ? ' (' + esc(L.you) + ')' : ''}</span><span>${Number(x.n).toLocaleString(LG)} ${esc(unit)}${pz && pz[x.rank - 1] && Number(x.n) >= (mn || 1) ? ' · ' + money(pz[x.rank - 1]) : ''}</span></div>`).join('') || `<p class="what">${esc(X.none)}</p>`;
+  const meL = (c, unit) => c && c.me && c.me.rank ? `<p class="what" style="font-size:13px;margin:8px 0 0">${esc(X.me)} : <b>#${c.me.rank}</b> · ${Number(c.me.n).toLocaleString(LG)} ${esc(unit)}</p>` : '';
+  let h = '';
+  const m = S && S.contest;
+  if (m && m.on) {
+    const pz = m.prizes || [];
+    h += `<section class="card" style="--c:#ffd43b"><div class="lbl">${esc(X.mT)}</div><p class="what" style="margin:0 0 8px">${esc(X.mX)} <b>${pz.map((x) => money(x)).join(' / ')}</b> ${esc(X.ton)}.${Number(m.min) > 1 ? ' ' + esc(X.mMin(m.min)) : ''}</p>`
+      + rows(m.top, X.fr, pz, Number(m.min) || 1) + meL(m, X.fr) + `<button class="ghost" data-gc="mct" style="margin-top:12px">${esc(X.mGo)}</button></section>`;
+  }
+  const g = (TP && TP.gp_contest) || (S && S.tap && S.tap.gp_contest);
+  if (g && g.on) {
+    const pz = g.prizes || [];
+    h += `<section class="card" style="--c:#2ee6ff"><div class="lbl">${esc(X.gT)}</div><p class="what" style="margin:0 0 8px">${esc(X.gX)} <b>${pz.map((x) => money(x)).join(' / ')}</b> ${esc(X.ton)}.${Number(g.min) > 1 ? ' ' + esc(X.gMin.replace('{n}', g.min)) : ''}</p>`
+      + rows(g.top, X.gU, pz, Number(g.min) || 1) + meL(g, X.gU) + `<button class="ghost" data-gc="gp" style="margin-top:12px">${esc(X.gGo)}</button></section>`;
+  }
+  const d = (TP && TP.ds_week) || (S && S.tap && S.tap.ds_week);
+  if (d && d.on) h += `<section class="card" style="--c:#7dff6b"><div class="lbl">${esc(X.dT)}</div><p class="what" style="margin:0 0 8px">${esc(X.dX)}</p>`
+    + rows(d.top, X.pts) + meL(d, X.pts) + `<button class="ghost" data-gc="ds" style="margin-top:12px">${esc(X.dGo)}</button></section>`;
   return h;
 }
 
@@ -345,7 +411,7 @@ function proTab() {
 
 // ---------- page ----------
 function tabs() {
-  const T = [['tap', '💎', L.tTap], ['con', '🏆', L.tCon], ['pro', '🔗', L.tPro]];
+  const T = [['tap', '💎', L.tTap], ['tsk', '✅', TSK[LG].tab], ['con', '🏆', L.tCon], ['pro', '🔗', L.tPro]];
   $('tabs').innerHTML = T.map(([k, e, l]) => `<button data-t="${k}" class="${k === TAB ? 'on' : ''}"><span>${e}</span>${esc(l)}</button>`).join('');
   $('tabs').querySelectorAll('[data-t]').forEach((b) => b.onclick = () => { haptic(); TAB = b.dataset.t; render(); window.scrollTo(0, 0); });
 }
@@ -353,7 +419,7 @@ function render() {
   tabs();
   if (!INIT) { $('app').innerHTML = `<section class="card"><p class="what">${esc(L.noApp)}</p></section>` + (TAB === 'pro' ? proTab() : ''); bind(); return; }
   if (!S) { $('app').innerHTML = '<section class="card" style="text-align:center;font-size:40px">⏳</section>'; return; }
-  $('app').innerHTML = TAB === 'tap' ? tapTab() : TAB === 'con' ? conTab() : proTab();
+  $('app').innerHTML = TAB === 'tap' ? tapTab() : TAB === 'tsk' ? taskTab() : TAB === 'con' ? conTab() : proTab();
   bind();
   if (TAB === 'tap') tapPaint();
   if (GOWAL && TAB === 'tap') { GOWAL = false; if (S.wallet) { EDIT = true; render(); } setTimeout(showWalForm, 300); }
@@ -375,6 +441,11 @@ function bind() {
   q('iwa', () => { haptic('medium'); track('earn', 'whatsapp'); outWa(L.msg + ' 👉 ' + link + '\n\n(' + L.noTg + ')'); });
   q('cgo', () => { haptic(); TAB = 'tap'; render(); window.scrollTo(0, 0); });
   q('join', () => { haptic('medium'); open('https://t.me/jeremstyke'); });
+  q('tsj', () => { haptic('medium'); track('sub', 'open'); open('https://t.me/jeremstyke'); });
+  q('tsc', async () => { haptic(); let r = null; try { r = await call({}); } catch (x) {} if (r && r.ok) { S = r; TP = r.tap || TP; if (!r.joined) toast(SUB[LG].no); render(); } });
+  document.querySelectorAll('[data-gc]').forEach((b) => b.onclick = () => { haptic('medium'); track('con_' + b.dataset.gc, 'open'); open(GCURL[b.dataset.gc]); });
+  document.querySelectorAll('[data-tinv]').forEach((b) => b.onclick = () => { haptic('medium'); track('inv_' + b.dataset.tinv, 'open'); open(TINV[b.dataset.tinv][1]); });
+  document.querySelectorAll('[data-task]').forEach((b) => b.onclick = () => { haptic('medium'); track('task_' + b.dataset.task, 'open'); open(TASKURL[b.dataset.task]); });
   q('subj', () => { haptic('medium'); track('sub', 'open'); open('https://t.me/jeremstyke'); });
   q('subc', async () => { haptic(); let r = null; try { r = await call({}); } catch (x) {} if (r && r.ok) { S = r; TP = r.tap || TP; if (!r.joined) toast(SUB[LG].no); render(); } });
   document.querySelectorAll('[data-open]').forEach((b) => b.onclick = () => { haptic('medium'); track(b.dataset.open, 'open'); open(PROGS.find((x) => x.k === b.dataset.open).url); });
