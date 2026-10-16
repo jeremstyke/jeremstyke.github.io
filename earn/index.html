@@ -47,7 +47,7 @@ h1{font-size:24px;font-weight:900;letter-spacing:-.02em;margin:4px 0 2px}
 .foot a{color:var(--ink);text-decoration:none;font-weight:700}
 .rk{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid rgba(255,255,255,.08)}
 .rk.me{color:#ffd43b;font-weight:700}
-nav#tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(3,1fr);background:rgba(14,10,30,.96);border-top:1px solid rgba(255,255,255,.1);padding:6px 6px calc(6px + env(safe-area-inset-bottom));backdrop-filter:blur(8px)}
+nav#tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(4,1fr);background:rgba(14,10,30,.96);border-top:1px solid rgba(255,255,255,.1);padding:6px 6px calc(6px + env(safe-area-inset-bottom));backdrop-filter:blur(8px)}
 nav#tabs button{background:none;border:0;color:rgba(255,255,255,.55);font:600 12px system-ui;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;cursor:pointer}
 nav#tabs button.on{color:#fff}
 nav#tabs span{font-size:22px}
@@ -218,7 +218,8 @@ $('foot').innerHTML = esc(L.ask) + '<a href="#" id="ct">' + esc(L.me) + '</a><br
 $('ct').onclick = (e) => { e.preventDefault(); open('https://t.me/jeremstyke?direct'); };
 
 // links ?startapp=contest_... open the contest, ?startapp=progs_... the programs (from the games), wallet_... the wallet field
-let S = null, EDIT = false, TAB = /^contest/.test(SP) ? 'con' : (/^(progs|task)/.test(SP) || /^(mct|gp|ds)$/.test(SP) || /^js_spot/.test(SP)) ? 'pro' : 'tap', GOWAL = /^wallet/.test(SP);
+// 16 oct 2026 (Jeremy): 4 tabs, Diamond (with a card to Meme Coin Tycoon), Contest, Referral and Wallet; no more Programs tab
+let S = null, EDIT = false, TAB = /^contest/.test(SP) ? 'con' : /^wallet/.test(SP) ? 'wal' : /^(ref|inv)/.test(SP) && !/^ref_\d/.test(SP) ? 'ref' : 'tap', GOWAL = /^wallet/.test(SP);
 let TP = null, TQ = 0, TBUSY = false, TPOS = { x: 50, y: 50 }, TCOUNT = 0, TTIMER = null;
 
 // ---------- the diamond tab ----------
@@ -320,11 +321,11 @@ function totalCard() {
 function tapTab() {
   if (!TP) TP = S.tap;
   const on = TP && TP.on;
-  return totalCard() + (on ? `<section class="card" style="--c:#2ee6ff"><div class="lbl">${L.gain}</div><div class="big" id="tapusd"></div>${S.joined && subPct() ? `<span style="display:inline-block;margin:2px 0 4px;font-size:12px;font-weight:800;color:#062a33;background:#ffd43b;padding:3px 10px;border-radius:999px">${esc(SUB[LG].on(subPct()))}</span>` : ''}`
+  return (on ? `<section class="card" style="--c:#2ee6ff"><div class="lbl">${L.gain}</div><div class="big" id="tapusd"></div>${S.joined && subPct() ? `<span style="display:inline-block;margin:2px 0 4px;font-size:12px;font-weight:800;color:#062a33;background:#ffd43b;padding:3px 10px;border-radius:999px">${esc(SUB[LG].on(subPct()))}</span>` : ''}`
       + `<div style="height:8px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden;margin:6px 0 4px"><i id="tapbar" style="display:block;height:100%;width:0;background:#2ee6ff;transition:width .15s"></i></div>`
       + `<div class="what" style="font-size:13px;margin:0 0 10px" id="tapn"></div><div id="taparea"></div>`
       + `<p class="what" style="font-size:12px;margin:10px 0 0">${esc(L.pay)}</p></section>` : '')
-    + subCard() + walletCard() + inviteCard();
+    + subCard() + mctCard();
 }
 function tapPaint() {
   const el = $('taparea'); if (!el || !TP) return;
@@ -419,9 +420,18 @@ function gameContests() {
 
 // ---------- the programs tab ----------
 // 16 oct 2026 (Jeremy): everything on Earn and Meme Coin Tycoon; the Daily Score and GramPedia programs are stopped
+const TB2 = { en: ['Referral', 'Wallet', '🎮 My other game', 'Play'], fr: ['Parrainage', 'Portefeuille', '🎮 Mon autre jeu', 'Jouer'], es: ['Referidos', 'Billetera', '🎮 Mi otro juego', 'Jugar'], pt: ['Indicações', 'Carteira', '🎮 Meu outro jogo', 'Jogar'], ru: ['Рефералы', 'Кошелёк', '🎮 Моя другая игра', 'Играть'], ar: ['الإحالة', 'المحفظة', '🎮 لعبتي الأخرى', 'العب'], id: ['Referral', 'Dompet', '🎮 Game-ku yang lain', 'Main'] }[LG];
 const PROGS = [
   { k: 'mct', c: '#ffd43b', i: '🪙', name: 'Meme Coin Tycoon', badge: () => L.perF, what: () => L.mct, url: 'https://t.me/Memecointycoonbot?startapp=v_earn' },
 ];
+// the small card to Meme Coin Tycoon at the bottom of the Diamond tab
+function mctCard() {
+  const p = PROGS[0];
+  return `<section class="card" style="--c:${p.c}"><div class="lbl">${esc(TB2[2])}</div><div class="head"><div class="ico">${p.i}</div><div><h2>${esc(p.name)}</h2><span class="badge">${esc(p.badge())}</span></div></div>`
+    + `<p class="what">${esc(p.what())}</p><button class="btn" data-open="${p.k}">${esc(p.i + ' ' + TB2[3])}</button></section>`;
+}
+function refTab() { return inviteCard() || `<section class="card"><p class="what">⏳</p></section>`; }
+function walTab() { return totalCard() + walletCard(); }
 function proTab() {
   return `<p class="what" style="margin:0 0 12px">${esc(L.proI)}</p>`
     + PROGS.map((p) => `<section class="card" style="--c:${p.c}"><div class="head"><div class="ico">${p.i}</div><div><h2>${esc(p.name)}</h2><span class="badge">${esc(p.badge())}</span></div></div>`
@@ -431,19 +441,19 @@ function proTab() {
 
 // ---------- page ----------
 function tabs() {
-  const T = [['tap', '💎', L.tTap], ['con', '🏆', L.tCon], ['pro', '🔗', L.tPro]];
+  const T = [['tap', '💎', L.tTap], ['con', '🏆', L.tCon], ['ref', '👥', TB2[0]], ['wal', '👛', TB2[1]]];
   // 16 oct 2026 (Jeremy, 9h20): the Programs tab is back (Meme Coin Tycoon, Daily Score, GramPedia); the Earn balance stays Earn only
   $('tabs').innerHTML = T.map(([k, e, l]) => `<button data-t="${k}" class="${k === TAB ? 'on' : ''}"><span>${e}</span>${esc(l)}</button>`).join('');
   $('tabs').querySelectorAll('[data-t]').forEach((b) => b.onclick = () => { haptic(); TAB = b.dataset.t; render(); window.scrollTo(0, 0); });
 }
 function render() {
   tabs();
-  if (!INIT) { $('app').innerHTML = `<section class="card"><p class="what">${esc(L.noApp)}</p></section>` + (TAB === 'pro' ? proTab() : ''); bind(); return; }
+  if (!INIT) { $('app').innerHTML = `<section class="card"><p class="what">${esc(L.noApp)}</p></section>` + ''; bind(); return; }
   if (!S) { $('app').innerHTML = '<section class="card" style="text-align:center;font-size:40px">⏳</section>'; return; }
-  $('app').innerHTML = TAB === 'tap' ? tapTab() : TAB === 'tsk' ? taskTab() : TAB === 'con' ? conTab() : proTab();
+  $('app').innerHTML = TAB === 'tap' ? tapTab() : TAB === 'con' ? conTab() : TAB === 'ref' ? refTab() : walTab();
   bind();
   if (TAB === 'tap') tapPaint();
-  if (GOWAL && TAB === 'tap') { GOWAL = false; if (S.wallet) { EDIT = true; render(); } setTimeout(showWalForm, 300); }
+  if (GOWAL && TAB === 'wal') { GOWAL = false; if (S.wallet) { EDIT = true; render(); } setTimeout(showWalForm, 300); }
 }
 function bind() {
   const q = (id, f) => { const e = $(id); if (e) e.onclick = f; };
