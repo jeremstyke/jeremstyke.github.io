@@ -153,6 +153,8 @@ async function tonPage() {
     + `<div class="hero"><div class="ic">💎</div><div><b>${L.h.replace(/^💎 /, '')}</b><span>${LANG === 'fr' ? tonF2(s.usd) + ' $ / ami' : '$' + tonF2(s.usd) + ' / friend'}</span></div></div>`
     + `<p class="sub">${L.s(tonF2(s.usd))}</p>`
     + `<div class="earn" id="tondet">${gameDet(s, 'mct', D, tonM, LANG === 'fr')}</div>`
+    // 17 oct 2026 (Jeremy): the other ways to earn, in the sheet: subscribe to @jeremstyke and Daily Score
+    + `<div class="row"><button class="sec" id="tonjs" style="color:#7dff6b">📣 ${({ fr: '@jeremstyke : +0,01 $ / 30 j', id: '@jeremstyke: +$0.01 / 30 hari', ar: '@jeremstyke: +0.01 $ / 30 يومًا' })[LANG] || '@jeremstyke: +$0.01 / 30 days'}</button><button class="sec" id="tonds" style="color:#7dff6b">⚽ ${({ fr: 'Daily Score : pronos payés', id: 'Daily Score: prediksi dibayar', ar: 'Daily Score: توقعات مدفوعة' })[LANG] || 'Daily Score: paid predictions'}</button></div>`
     + `<button class="cta" id="tonsi">${L.inv}</button><div class="row"><button class="sec" id="tonwa">📲 WhatsApp</button><button class="sec" id="toncp">📋 ${LANG === 'fr' ? 'Copier mon lien' : 'Copy my link'}</button></div>`
     + `<div class="tiles" id="tontl">${tonTiles(s, L)}</div>`
     + (Number(s.budget_left) < Number(s.usd) ? `<p style="font-size:13px;opacity:.75">${L.off}</p>` : '')
@@ -163,6 +165,8 @@ async function tonPage() {
   const close = () => { d.remove(); clearInterval(TONSH_T); };
   d.onclick = (e) => { if (e.target === d || e.target.id === 'tonsc') close(); };
   d.querySelector('#tonsi').onclick = () => { close(); invite(); };
+  d.querySelector('#tonjs').onclick = () => { try { haptic(); } catch (x) {} gameOpen('https://t.me/jeremstyke'); };
+  d.querySelector('#tonds').onclick = () => { try { haptic(); } catch (x) {} gameOpen('https://t.me/DailyScorefootbot/play?startapp=src_mctsheet'); };
   const myLink = 'https://t.me/Memecointycoonbot?startapp=r_' + ((tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.id) || '');
   const myMsg = LANG === 'fr' ? '🚀 Joue à Meme Coin Tycoon avec moi sur Telegram : on gagne 500 $ chacun pour commencer 👉 ' + myLink + '\n\n(Pas encore Telegram ? Installe-le, puis reclique sur ce lien.)' : '🚀 Play Meme Coin Tycoon with me on Telegram: we both get $500 to start 👉 ' + myLink + '\n\n(No Telegram yet? Install it, then tap this link again.)';
   d.querySelector('#tonwa').onclick = () => { try { haptic(); } catch (x) {} outWa(myMsg); };
@@ -255,12 +259,10 @@ async function usdtBar() {
     ar: '👥 صديق يلعب 3 أيام: ' + u + ' · 💎 اضغط على الماسة: مال مع كل ضغطة · 🏆 مسابقة الأرباح: 1 $ و0.50 $ و0.25 $ · 🏆 مسابقة الداعين: 1 $ و0.50 $ و0.25 $ · 🏆 مسابقة الماسة: 1 $ و0.50 $ و0.25 $ (تُدفع كل اثنين) · 📣 اشترك في @jeremstyke: 0.01 $ كل 30 يومًا · ⚽ Daily Score: توقعاتك مدفوعة أيضًا · 💸 الدفع بعملة USDT كل اثنين',
   })[LANG] || '👥 Friend who plays 3 days: ' + u + ' · 💎 Tap the diamond: money on every tap · 🏆 Gains contest: $1, $0.50 and $0.25 · 🏆 Sponsor contest: $1, $0.50 and $0.25 · 🏆 Diamond contest: $1, $0.50 and $0.25 (all 3 paid every Monday) · 📣 Subscribed to @jeremstyke: $0.01 every 30 days · ⚽ Daily Score: your predictions pay too · 💸 Paid in USDT every Monday';
   const d = document.createElement('div'); d.id = 'usdtb';
-  d.innerHTML = '<div class="ubi"><span style="font-size:22px">💵</span><div class="ubt"><b class="ubm"></b><span class="ubw"><span></span></span></div><button class="ubx ubsub" type="button" aria-label="@jeremstyke">📣</button><button class="ubx ubds" type="button" aria-label="Daily Score">⚽</button></div>';
+  d.innerHTML = '<div class="ubi"><span style="font-size:22px">💵</span><div class="ubt"><b class="ubm"></b><span class="ubw"><span></span></span></div><span style="font-size:18px;opacity:.6">›</span></div>';
   d.querySelector('.ubm').textContent = usdtGain(); d.querySelector('.ubw span').textContent = ways;
   d.querySelector('.ubi').onclick = (e) => {
     try { haptic(); } catch (x) {}
-    if (e.target && e.target.closest && e.target.closest('.ubsub')) { gameOpen('https://t.me/jeremstyke'); return; }
-    if (e.target && e.target.closest && e.target.closest('.ubds')) { gameOpen('https://t.me/DailyScorefootbot/play?startapp=src_mctbar'); return; }
     tonPage();
   };
   document.body.appendChild(d); document.body.classList.add('ub'); USDTB = d;
