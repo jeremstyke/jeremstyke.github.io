@@ -48,8 +48,9 @@
   const day = (d) => { try { return new Date(d).toLocaleDateString(lg() === 'fr' ? 'fr-FR' : 'en-US', { day: 'numeric', month: 'short' }); } catch (e) { return ''; } };
   const call = async (a, b) => { try { return await tonCall(Object.assign({ action: 'mon_' + a }, b || {})); } catch (e) { return null; } };
   const errOf = (r) => { const T = L(); return (r && r.error && T.e[r.error]) || T.err; };
-  const EMO = ['🛡️', '🐸', '🐶', '🐱', '🦍', '🐺', '🦁', '🐉', '🦅', '🔥', '⚡', '💎', '🚀', '👑', '🌙', '💀'];
-  const COL = ['#ffd43b', '#4ff0b7', '#2ee6ff', '#ff6b9d', '#b388ff', '#ff9a3c', '#7dff6b', '#ff5a5a'];
+  // 17 oct 2026 (Jeremy): plenty of logos and colors so the clans look different
+  const EMO = ['🛡️', '⚔️', '🏰', '👑', '💎', '🔥', '⚡', '🚀', '🌙', '☀️', '⭐', '🌈', '💀', '👻', '👽', '🤖', '🎃', '😈', '🤡', '🥷', '🧙', '🧛', '🧟', '🦸', '🐸', '🐶', '🐱', '🦊', '🐺', '🦁', '🐯', '🐻', '🐼', '🐨', '🐮', '🐷', '🐵', '🦍', '🐲', '🐉', '🦄', '🐴', '🦅', '🦉', '🐧', '🦈', '🐬', '🐙', '🦂', '🐍', '🦖', '🐝', '🦋', '🐞', '🌵', '🌴', '🍀', '🌸', '🍄', '🌊', '❄️', '🌋', '🍕', '🍔', '🍩', '🍺', '🍷', '🎮', '🎲', '🎯', '🏆', '⚽', '🏀', '🎸', '🎧', '💰', '💵', '🪙', '📈', '🧠', '👁️', '💣', '🗡️', '🏹', '🔱', '⚓', '🎩', '🕶️', '💍', '🌍', '🛸'];
+  const COL = ['#ffd43b', '#4ff0b7', '#2ee6ff', '#ff6b9d', '#b388ff', '#ff9a3c', '#7dff6b', '#ff5a5a', '#ffffff', '#9aa4b2', '#3d7bff', '#00c2a8', '#c56cff', '#ff3df2', '#ffb3c7', '#c9a227', '#8b5a2b', '#1e9e5a'];
 
   const st = document.createElement('style');
   st.textContent = '#clm{position:fixed;inset:0;z-index:9998;background:rgba(5,3,15,.78);display:flex;align-items:flex-end;justify-content:center}'
@@ -61,7 +62,7 @@
     + '#clm .crow:first-of-type{border-top:0}#clm .cb{border:0;border-radius:999px;padding:7px 12px;font-weight:800;font-size:12.5px;background:#ffd43b;color:#1a1200;cursor:pointer;white-space:nowrap}'
     + '#clm .cb.g{background:rgba(255,255,255,.1);color:inherit}#clm .cb.r{background:rgba(255,90,90,.18);color:#ff8a8a}#clm .cb:disabled{opacity:.5}'
     + '#clm input{width:100%;box-sizing:border-box;padding:11px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:inherit;font-size:15px;margin:4px 0 10px}'
-    + '#clm .cgrid{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px}#clm .cgrid button{width:40px;height:40px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);font-size:20px;cursor:pointer}'
+    + '#clm .cgrid{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px}#clm #cfe{max-height:188px;overflow-y:auto;padding:2px}#clm .cgrid button{width:40px;height:40px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);font-size:20px;cursor:pointer}'
     + '#clm .cgrid button[aria-pressed=true]{border:2px solid #ffd43b}#clm .big{font-size:24px;font-weight:900}#clm ul{margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.5;opacity:.9}';
   document.head.appendChild(st);
 
