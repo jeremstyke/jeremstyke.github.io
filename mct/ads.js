@@ -134,6 +134,13 @@
     el.innerHTML = `<div style="flex:1;min-width:0"><b style="font-size:16px">${ec(T.sT)}</b><br><small style="color:var(--mute);font-size:12px">${ec(T.sX)}</small></div><button class="msn-b go" id="scb">${ec(T.sB)}</button>`;
     h1.parentNode.insertBefore(el, h1.nextSibling);
     el.querySelector('#scb').onclick = scoop;
+    // 17 oct 2026: the card can be folded into one line (title + button), the choice is kept on the phone
+    if (!document.getElementById('scfst')) { const st = document.createElement('style'); st.id = 'scfst'; st.textContent = '#scoopc.min{padding:6px 12px!important}#scoopc.min small,#scoopc.min br{display:none}#scoopc.min b{font-size:14px!important}#scoopc .scf{flex:none;width:26px;height:26px;border:0;border-radius:50%;background:rgba(255,255,255,.08);color:inherit;font-size:14px;line-height:1;padding:0;margin:0}'; document.head.appendChild(st); }
+    const f = document.createElement('button'); f.type = 'button'; f.className = 'scf'; f.setAttribute('aria-label', 'fold');
+    const setF = (m) => { el.classList.toggle('min', m); f.textContent = m ? '▾' : '▴'; };
+    let fm = false; try { fm = localStorage.getItem('mct_scoop_min') === '1'; } catch (e) {}
+    setF(fm); el.appendChild(f);
+    f.onclick = () => { hp(); fm = !el.classList.contains('min'); setF(fm); try { localStorage.setItem('mct_scoop_min', fm ? '1' : '0'); } catch (e) {} };
     // 16 oct 2026: an already unlocked scoop is shown right in the card, without a new video, until that news comes out
     peek().then((r) => { if (!r || !document.body.contains(el)) return; if (r.ok) { el.querySelector('small').textContent = sMsg(r); el.querySelector('#scb').textContent = T.sOpen; } else if (r.left === 0) el.querySelector('#scb').textContent = '⭐ 5'; });
   }
