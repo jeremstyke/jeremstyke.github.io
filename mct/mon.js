@@ -11,33 +11,38 @@
     fr: { t: 'Meme Coin Monsters', sec: 'Mode secret · visible par toi seulement', eggs: 'Œufs du jour', egg: (t) => 'Faire éclore $' + t, starter: '🥚 Œuf de départ', noegg: 'Garde au moins 100 $ d\'un coin pour recevoir son œuf (1 par jour et par coin).', team: 'Mes monstres', none: 'Aucun monstre pour l\'instant.',
       fight: (n, m) => '⚔️ Combattre (' + n + '/' + m + ')', nofight: 'Plus de combat aujourd\'hui, reviens demain !', feed: (t) => 'Nourrir en $' + t, meal: (u, q, t) => '1 repas : ' + u + ' $ = ' + q + ' ' + t, merge: '🔀 Fusionner', lvl: 'Niv.', power: 'Force', base: 'base', coin24: 'coin 24 h', held: 'coins gardés', news: 'news',
       feedq: (t, px) => 'Nourrir en $' + t + ' : combien de $ veux-tu dépenser ?\n1 ' + t + ' = ' + px + ' $. Ça achète du ' + t + ' (le prix monte) et ton monstre le mange (1 $ = 1 XP).', fedq: (q, t, u) => 'Ton monstre a mangé ' + q + ' ' + t + ' (' + u + ' $) !', fed: 'Miam ! +XP et le coin monte 📈', merged: '🔀 Fusion réussie : stade supérieur !', hatched: '🐣 Un monstre est né !', win: '🏆 Victoire !', lose: '😵 Défaite…', vs: 'contre', rew: (v) => '+' + v + ' $', board: 'Classement de la semaine', pts: 'pts',
-      types: ['🔥 Feu', '🌿 Plante', '💧 Eau'], hint: '🔥 bat 🌿 · 🌿 bat 💧 · 💧 bat 🔥', err: 'Erreur, réessaie.', nocoin: 'Pas assez d\'argent pour ce repas.', max: 'Niveau max : fusionne-le avec un autre du même stade.', close: 'Fermer', go: 'Voir le coin', coinbtn: (t) => 'Le monstre de $' + t, coinsub: (t, n) => (n ? n + ' monstre' + (n > 1 ? 's' : '') + ' · ' : '') + 'Nourris-le en ' + t + ' et fais-le combattre', pfbtn: '🐉 Mes monstres',
+      fd: { eat: 'Il va manger', go: (u, t) => '🍽️ Nourrir : ' + u + ' $ de ' + t, up: '⬆️ Assez pour passer au niveau suivant !', left: (n) => 'Encore ' + n + ' XP avant le niveau suivant' },
+      dt: { h: 'Pourquoi cette force', val: (p) => '💰 Valeur du coin (' + p + ' $)', ch: '📈 Variation sur 24 h', held: (v) => '💎 Tes coins gardés (' + v + ' $)', news: '🚀 News de pump (2 h)', base: '⭐ Force de base (niveau et stade)', tot: '💪 Force totale', inf: (h, a) => 'En combat : ' + h + ' PV et ' + a + ' d\'attaque', tip: 'Plus le prix du coin monte, plus ton monstre est fort.' },
+      fw: '⚔️ Combattre', atk: '👊 Attaque', spe: '💥 Spéciale', def: '🛡️ Défense', rc: (n) => 'recharge ' + n, miss: 'Raté !', crit: 'Critique !', heal: (v) => '+' + v + ' PV',
+      wild: (t) => 'Monstre sauvage $' + t, ofp: (n) => 'Monstre de ' + n, turn: (n) => 'Tour ' + n, yours: 'À toi de jouer', back: '↩️ Retour',
+      lg: { atk: (a, d) => a + ' attaque : -' + d, spe: (a, d) => a + ' lance son attaque spéciale : -' + d, def: (a, h) => a + ' se protège et récupère ' + h + ' PV', miss: (a) => a + ' rate son attaque spéciale' }, err: 'Erreur, réessaie.', nocoin: 'Pas assez d\'argent pour ce repas.', max: 'Niveau max : fusionne-le avec un autre du même stade.', close: 'Fermer', go: 'Voir le coin', coinbtn: (t) => 'Le monstre de $' + t, coinsub: (t, n) => (n ? n + ' monstre' + (n > 1 ? 's' : '') + ' · ' : '') + 'Nourris-le en ' + t + ' et fais-le combattre', pfbtn: '🐉 Mes monstres',
       rules: '📖 Les règles', rl: (f) => [
         '🥚 <b>Œufs</b> : garde au moins 100 $ d\'un coin et tu reçois son œuf (1 par jour et par coin). Le monstre qui naît est celui de ce coin.',
         '🪙 <b>Nourrir</b> : tu choisis combien de $ dépenser. Ça achète du coin (son prix monte) et ton monstre le mange : 1 $ = 1 XP. Les coins achetés sont mangés, ceux que tu avais déjà ne bougent pas.',
         '⬆️ <b>Niveaux</b> : la barre jaune se remplit avec l\'XP, jusqu\'au niveau 10. Fusionne 2 monstres du même coin et du même stade pour passer au stade supérieur (⭐ en plus, cornes puis couronne).',
-        '💪 <b>Force</b> : elle dépend du niveau et du stade, puis de ton coin : sa hausse sur 24 h (de x0,5 à x2), les coins que tu gardes (+1 % par 100 $, jusqu\'à +50 %) et une news de pump (+20 % pendant 2 h).',
-        '⚔️ <b>Combats</b> : ' + f + ' par jour, contre l\'équipe d\'un joueur de ta force ou des monstres sauvages. 3 duels, 2 gagnés = victoire. Victoire : +300 $, défaite : +50 $.',
-        '🔥 bat 🌿, 🌿 bat 💧, 💧 bat 🔥 : le bon type donne x1,5 en duel.',
+        '💪 <b>Force</b> : elle dépend du niveau et du stade, puis de ton coin : sa valeur (plus son prix est haut, plus le monstre est fort, de x0,6 à x2), sa hausse sur 24 h (de x0,5 à x2), les coins que tu gardes (+1 % par 100 $, jusqu\'à +50 %) et une news de pump (+20 % pendant 2 h).',
+        '⚔️ <b>Combats</b> : ' + f + ' par jour. Ton monstre affronte le monstre d\'un autre joueur de ta force, ou un monstre sauvage. À chaque tour tu choisis : 👊 Attaque, 💥 Attaque spéciale (presque 2 fois plus forte, peut rater, puis 2 tours de recharge) ou 🛡️ Défense (60 % de dégâts en moins et +10 % de PV). Le premier à 0 PV perd. Victoire : +300 $, défaite : +50 $.',
         '🏆 <b>Classement</b> : tes victoires de la semaine donnent des points.'] },
     en: { t: 'Meme Coin Monsters', sec: 'Secret mode · only you can see it', eggs: 'Today\'s eggs', egg: (t) => 'Hatch $' + t, starter: '🥚 Starter egg', noegg: 'Hold at least $100 of a coin to get its egg (1 a day per coin).', team: 'My monsters', none: 'No monster yet.',
       fight: (n, m) => '⚔️ Fight (' + n + '/' + m + ')', nofight: 'No fight left today, come back tomorrow!', feed: (t) => 'Feed with $' + t, meal: (u, q, t) => '1 meal: $' + u + ' = ' + q + ' ' + t, merge: '🔀 Merge', lvl: 'Lv.', power: 'Power', base: 'base', coin24: 'coin 24 h', held: 'coins held', news: 'news',
       feedq: (t, px) => 'Feed with $' + t + ': how many $ do you want to spend?\n1 ' + t + ' = $' + px + '. It buys ' + t + ' (the price goes up) and your monster eats it ($1 = 1 XP).', fedq: (q, t, u) => 'Your monster ate ' + q + ' ' + t + ' ($' + u + ')!', fed: 'Yum! +XP and the coin goes up 📈', merged: '🔀 Merged: next stage!', hatched: '🐣 A monster is born!', win: '🏆 Victory!', lose: '😵 Defeat…', vs: 'vs', rew: (v) => '+$' + v, board: 'This week\'s ranking', pts: 'pts',
-      types: ['🔥 Fire', '🌿 Plant', '💧 Water'], hint: '🔥 beats 🌿 · 🌿 beats 💧 · 💧 beats 🔥', err: 'Error, try again.', nocoin: 'Not enough cash for this meal.', max: 'Max level: merge it with another of the same stage.', close: 'Close', go: 'See the coin', coinbtn: (t) => 'The monster of $' + t, coinsub: (t, n) => (n ? n + ' monster' + (n > 1 ? 's' : '') + ' · ' : '') + 'Feed it with ' + t + ' and make it fight', pfbtn: '🐉 My monsters',
+      fd: { eat: 'It will eat', go: (u, t) => '🍽️ Feed: $' + u + ' of ' + t, up: '⬆️ Enough to reach the next level!', left: (n) => n + ' XP to the next level' },
+      dt: { h: 'Why this power', val: (p) => '💰 Coin value ($' + p + ')', ch: '📈 24 h change', held: (v) => '💎 Your coins held ($' + v + ')', news: '🚀 Pump news (2 h)', base: '⭐ Base power (level and stage)', tot: '💪 Total power', inf: (h, a) => 'In a fight: ' + h + ' HP and ' + a + ' attack', tip: 'The higher the coin price, the stronger your monster.' },
+      fw: '⚔️ Fight', atk: '👊 Attack', spe: '💥 Special', def: '🛡️ Defend', rc: (n) => 'recharging ' + n, miss: 'Missed!', crit: 'Critical!', heal: (v) => '+' + v + ' HP',
+      wild: (t) => 'Wild monster $' + t, ofp: (n) => n + '\'s monster', turn: (n) => 'Turn ' + n, yours: 'Your move', back: '↩️ Back',
+      lg: { atk: (a, d) => a + ' attacks: -' + d, spe: (a, d) => a + ' uses its special attack: -' + d, def: (a, h) => a + ' defends and heals ' + h + ' HP', miss: (a) => a + ' misses its special attack' }, err: 'Error, try again.', nocoin: 'Not enough cash for this meal.', max: 'Max level: merge it with another of the same stage.', close: 'Close', go: 'See the coin', coinbtn: (t) => 'The monster of $' + t, coinsub: (t, n) => (n ? n + ' monster' + (n > 1 ? 's' : '') + ' · ' : '') + 'Feed it with ' + t + ' and make it fight', pfbtn: '🐉 My monsters',
       rules: '📖 Rules', rl: (f) => [
         '🥚 <b>Eggs</b>: hold at least $100 of a coin and you get its egg (1 a day per coin). The monster that hatches is that coin\'s monster.',
         '🪙 <b>Feeding</b>: you choose how many $ to spend. It buys the coin (its price goes up) and your monster eats it: $1 = 1 XP. The coins bought are eaten, the ones you already had stay.',
         '⬆️ <b>Levels</b>: the yellow bar fills with XP, up to level 10. Merge 2 monsters of the same coin and stage to reach the next stage (one more ⭐, horns then a crown).',
-        '💪 <b>Power</b>: it comes from level and stage, then from your coin: its 24 h change (x0.5 to x2), the coins you hold (+1% per $100, up to +50%) and a pump news (+20% for 2 h).',
-        '⚔️ <b>Fights</b>: ' + f + ' a day, against a player team of your strength or wild monsters. 3 duels, win 2 = victory. Victory: +$300, defeat: +$50.',
-        '🔥 beats 🌿, 🌿 beats 💧, 💧 beats 🔥: the right type gives x1.5 in a duel.',
+        '💪 <b>Power</b>: it comes from level and stage, then from your coin: its value (the higher its price, the stronger the monster, x0.6 to x2), its 24 h change (x0.5 to x2), the coins you hold (+1% per $100, up to +50%) and a pump news (+20% for 2 h).',
+        '⚔️ <b>Fights</b>: ' + f + ' a day. Your monster faces another player\'s monster of your strength, or a wild monster. Each turn you choose: 👊 Attack, 💥 Special attack (almost twice as strong, can miss, then 2 turns to recharge) or 🛡️ Defend (60% less damage and +10% HP). The first at 0 HP loses. Victory: +$300, defeat: +$50.',
         '🏆 <b>Ranking</b>: your wins of the week give points.'] },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l === 'fr' ? 'fr' : 'en']; };
   const hp = (k) => { try { haptic(k); } catch (e) {} };
   const tst = (m) => { try { toast(m); } catch (e) {} };
   const ec = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-  const TI = ['🔥', '🌿', '💧'];
   let S = null, busy = false;
 
   const st = document.createElement('style');
@@ -64,9 +69,34 @@
     + '#monm .xb{height:6px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;margin:8px 0 0}#monm .xb i{display:block;height:100%;background:linear-gradient(90deg,#ffb300,#ffd43b)}'
     + '#monm .ma{display:flex;gap:8px;margin:10px 0 0}#monm .ma button{flex:1;margin:0;padding:9px;font-size:13px;font-weight:700}#monm .mml{display:block;font-size:11px;font-weight:400;opacity:.65;margin-top:2px}'
     + '#monfight{display:block;width:100%;margin:6px 0 4px;padding:14px;border:0;border-radius:14px;background:linear-gradient(135deg,#ff6b6b,#ff3d71);color:#fff;font-weight:800;font-size:16px;cursor:pointer}#monfight:disabled{opacity:.5}'
-    + '#monm .duel{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px;border-radius:12px;background:rgba(255,255,255,.04);margin:6px 0;opacity:0;transform:translateY(8px);transition:all .35s}#monm .duel.on{opacity:1;transform:none}'
-    + '#monm .duel .w{color:#7dff6b;font-weight:800}#monm .duel .l{color:#ff6b81;font-weight:800}#monm .res{text-align:center;font-size:22px;font-weight:800;margin:12px 0 4px}'
-    + '#monm .mrl{margin:14px 0 0;border:1px solid var(--line,rgba(255,255,255,.12));border-radius:14px;padding:10px 12px;background:rgba(255,255,255,.03)}#monm .mrl summary{font-weight:700;cursor:pointer}#monm .mrl ul{margin:8px 0 0;padding-left:4px;list-style:none}#monm .mrl li{font-size:13px;line-height:1.45;margin:0 0 8px}#monm .hint a{color:#ffd43b}'
+    + '.mfo{position:fixed;inset:0;z-index:10060;background:rgba(5,3,15,.7);display:flex;align-items:flex-end;justify-content:center}'
+    + '.mfs,.mfs *{box-sizing:border-box}.mfs{width:100%;max-width:520px;background:linear-gradient(180deg,#24164d,#140c2c 45%);border-radius:22px 22px 0 0;padding:10px 16px calc(18px + env(safe-area-inset-bottom));color:#fff;animation:mfu .22s ease-out}@keyframes mfu{from{transform:translateY(40px);opacity:.5}}'
+    + '.mfs .grab{width:42px;height:5px;border-radius:9px;background:rgba(255,255,255,.25);margin:0 auto 12px}.mfh{display:flex;gap:12px;align-items:center}.mfa{width:58px;height:58px;flex:none}.mfa svg{width:100%;height:100%;overflow:visible;animation:mbob 2.4s ease-in-out infinite}'
+    + '.mfh b{display:block;font-size:18px}.mfh small{display:block;font-size:12px;opacity:.7;margin-top:2px}'
+    + '.mfv{display:flex;align-items:center;gap:6px;margin:14px 0 10px;padding:10px 14px;border-radius:16px;background:rgba(0,0,0,.3);border:1px solid rgba(255,212,59,.35)}.mfv span{font-size:26px;font-weight:800;color:#ffd43b}.mfv input{flex:1;min-width:0;background:none;border:0;outline:0;color:#fff;font-size:30px;font-weight:900}'
+    + '.mfp{display:flex;gap:6px}.mfp button{flex:1;padding:10px 0;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;font-weight:800;font-size:14px;cursor:pointer}.mfp button.on{background:#ffd43b;color:#1d0f00;border-color:#ffd43b}'
+    + '.mfr{display:flex;gap:8px;margin:12px 0 4px}.mfr div{flex:1;padding:10px;border-radius:14px;background:rgba(255,255,255,.05);text-align:center}.mfr small{display:block;font-size:11px;opacity:.7}.mfr b{display:block;font-size:17px;margin-top:3px;white-space:nowrap}'
+    + '.mfr .mco{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-size:11px;font-style:normal;vertical-align:middle;margin-right:5px;box-shadow:0 0 0 2px #ffd43b;animation:mspin 3s ease-in-out infinite}'
+    + '.mfn{display:block;text-align:center;font-size:12px;color:#ffd43b;min-height:16px;margin:4px 0 8px}'
+    + '.mfgo{display:block;width:100%;border:0;border-radius:16px;padding:15px;font-weight:900;font-size:16px;color:#1d0f00;background:linear-gradient(90deg,#ffd43b,#ffb300);box-shadow:0 5px 0 #b37d00;cursor:pointer}.mfgo:disabled{opacity:.45}'
+    + '.mfc{text-align:center;opacity:.6;font-size:13px;padding:10px 4px 0;cursor:pointer}'
+    + '#monm .mav{cursor:pointer}#monm .mdt{margin:10px 0 0;padding:10px 12px;border-radius:12px;background:rgba(0,0,0,.25);border:1px solid rgba(255,212,59,.25)}#monm .mdt small{display:block;font-size:11px;opacity:.7;margin:4px 0}'
+    + '#monm .dr{display:flex;justify-content:space-between;gap:8px;font-size:13px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06)}#monm .dr.tot{border:0;font-size:14px}#monm .dr.tot b{color:#ffd43b}'
+    + '#monm .res{text-align:center;font-size:22px;font-weight:800;margin:12px 0 8px}#monm .mfw{flex:.7}'
+    + '#monm .arena{position:relative;border-radius:18px;padding:12px;background:radial-gradient(ellipse at 50% 120%,rgba(125,255,107,.18),transparent 60%),linear-gradient(180deg,#24164d,#120a28);border:1px solid rgba(255,255,255,.1)}'
+    + '#monm .bs{display:flex;align-items:center;gap:10px}#monm .bs.op{flex-direction:row}#monm .bs.me{flex-direction:row-reverse;text-align:right}'
+    + '#monm .bi{flex:1;min-width:0}#monm .bi b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#monm .bi small{display:block;font-size:11px;opacity:.7}'
+    + '#monm .hb{height:9px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden;margin:4px 0 2px}#monm .hb i{display:block;height:100%;transition:width .5s ease,background .5s}'
+    + '#monm .bm{position:relative;width:96px;height:96px;flex:none;animation:mbob 2.4s ease-in-out infinite}#monm .bm .fl{display:block;width:100%;height:100%}#monm .bs.op .fl{transform:scaleX(-1)}#monm .bm svg{width:100%;height:100%;overflow:visible}'
+    + '#monm .bs.lunge .bm svg{animation:blunge .4s ease}#monm .bs.lunge2 .bm svg{animation:blunge2 .5s ease}#monm .bs.hit .bm svg{animation:bhit .45s ease}#monm .bs.shield .bm svg{filter:drop-shadow(0 0 10px #2ee6ff)}'
+    + '@keyframes blunge{50%{transform:translateX(26px) scale(1.08)}}@keyframes blunge2{30%{transform:translateX(-6px) scale(.95)}60%{transform:translateX(34px) scale(1.18)}}'
+    + '@keyframes bhit{0%,100%{transform:none;filter:none}20%{transform:translateX(-7px);filter:brightness(2) saturate(0)}50%{transform:translateX(6px)}80%{transform:translateX(-3px)}}'
+    + '#monm .fx{position:absolute;left:50%;top:-6px;transform:translateX(-50%);font-weight:900;font-size:16px;white-space:nowrap;opacity:0;pointer-events:none}'
+    + '#monm .fx.dn{color:#ff5d6b;animation:bfx .9s ease forwards}#monm .fx.up{color:#7dff6b;animation:bfx .9s ease forwards}@keyframes bfx{0%{opacity:0;margin-top:10px}20%{opacity:1}100%{opacity:0;margin-top:-26px}}'
+    + '#monm .blog{text-align:center;font-size:13px;min-height:36px;padding:8px 4px;opacity:.9}'
+    + '#monm .bact{display:flex;gap:8px;margin:12px 0 0}#monm .bact button{flex:1;margin:0;padding:13px 4px;border:0;border-radius:14px;font-weight:800;font-size:14px;color:#fff;cursor:pointer;background:linear-gradient(135deg,#ff6b6b,#ff3d71)}'
+    + '#monm .bact button[data-mv=spe]{background:linear-gradient(135deg,#ffb300,#ff6b00)}#monm .bact button[data-mv=def]{background:linear-gradient(135deg,#2ee6ff,#3b82f6)}#monm .bact button:disabled{opacity:.45}#monm .bact small{display:block;font-size:10px;font-weight:600}'
+    + '#monm .bback{display:block;width:100%;margin:6px 0 0}'
     + '#monm .br{display:flex;justify-content:space-between;font-size:14px;padding:5px 0}#monm .br.me{color:#ffd43b;font-weight:700}#monm .hint{font-size:12px;opacity:.6;text-align:center;margin:6px 0 0}';
   document.head.appendChild(st);
 
@@ -98,6 +128,7 @@
 
   const call = async (b) => { try { return await tonCall(b); } catch (e) { return null; } };
   const pc = (v) => (v > 0 ? '+' : '') + Math.round(v) + ' %';
+  const xf = (v) => 'x' + Number(v || 1).toFixed(2).replace(/\.?0+$/, '');
   // 17 oct 2026 (Jeremy): show how many coins a meal costs and its $ value
   const MEAL = 10;
   const fq = (n) => (n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? (n / 1e3).toFixed(1) + 'k' : n >= 10 ? String(Math.round(n)) : n.toFixed(2)).replace('.0', '');
@@ -132,17 +163,27 @@
   function card(m) {
     const T = L(), b = m.boost || {}, mons = (S && S.mons) || [];
     const twin = mons.find((x) => x.id !== m.id && x.coin === m.coin && x.stage === m.stage);
-    const chips = ['<span>' + T.types[m.type] + '</span>', '<span>' + T.base + ' ' + m.power + '</span>'];
+    const chips = ['<span class="' + ((b.val || 1) >= 1 ? 'up' : 'dn') + '">💰 ' + xf(b.val) + '</span>', '<span>' + T.base + ' ' + m.power + '</span>'];
     if (b.ch) chips.push('<span class="' + (b.ch > 0 ? 'up' : 'dn') + '">📈 ' + T.coin24 + ' ' + pc(b.ch) + '</span>');
     if (b.heldb > 0) chips.push('<span class="up">💎 ' + T.held + ' +' + Math.round(b.heldb * 100) + ' %</span>');
     if (b.news) chips.push('<span class="up">🚀 ' + T.news + ' +20 %</span>');
-    return '<div class="mc"><div class="mh"><div class="mav">' + monSvg(m) + '</div>'
+    const D = T.dt;
+    const row = (l, v, c) => '<div class="dr"><span>' + l + '</span><b' + (c ? ' class="' + c + '"' : '') + '>' + v + '</b></div>';
+    const det = '<div class="mdt" id="mdt' + m.id + '" hidden><small>' + D.h + '</small>'
+      + row(D.base, m.power)
+      + row(ec(D.val(fp(Number(b.px || m.price || 0)))), xf(b.val), (b.val || 1) >= 1 ? 'up' : 'dn')
+      + row(D.ch + ' (' + pc(b.ch || 0) + ')', xf(b.mult), (b.mult || 1) >= 1 ? 'up' : 'dn')
+      + row(ec(D.held(Math.round(Number(b.held || m.held || 0)))), '+' + Math.round((b.heldb || 0) * 100) + ' %', 'up')
+      + (b.news ? row(D.news, '+20 %', 'up') : '')
+      + '<div class="dr tot"><span>' + D.tot + '</span><b>' + m.power + ' ' + xf(b.f) + ' = ' + m.epower + '</b></div>'
+      + '<small>' + D.inf(Math.round(m.hp * (b.f || 1) * 1.6), Math.round(m.atk * (b.f || 1))) + '</small><small>💡 ' + D.tip + '</small></div>';
+    return '<div class="mc"><div class="mh"><div class="mav" data-det="' + m.id + '">' + monSvg(m) + '</div>'
       + '<div class="mn"><b>$' + ec(m.tk) + ' ' + '⭐'.repeat(m.stage) + '</b><small>' + T.lvl + ' ' + m.lvl + '/10 · ' + ec(m.name || '') + '</small></div>'
       + '<div class="mp"><b>' + m.epower + '</b><small>' + T.power + '</small></div></div>'
-      + '<div class="chips">' + chips.join('') + '</div>'
+      + '<div class="chips">' + chips.join('') + '</div>' + det
       + '<div class="xb"><i style="width:' + Math.min(100, (m.xp / m.need) * 100) + '%"></i></div>'
       // 17 oct 2026 (Jeremy): the feed button shows the coin itself, a small round coin that spins
-      + '<div class="ma"><button class="ghost" data-feed="' + m.id + '"><i class="mco" style="background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.55),' + ec(m.color) + ' 45%,' + ec(m.color) + ')">' + ec(m.emoji) + '</i>' + T.feed(ec(m.tk)) + (Number(m.price) > 0 ? '<small class="mml">' + T.meal(MEAL, fq(qty(m, MEAL)), ec(m.tk)) + '</small>' : '') + '</button>' + (twin ? '<button class="ghost" data-merge="' + m.id + ',' + twin.id + '">' + T.merge + '</button>' : '') + '</div></div>';
+      + '<div class="ma"><button class="ghost" data-feed="' + m.id + '"><i class="mco" style="background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.55),' + ec(m.color) + ' 45%,' + ec(m.color) + ')">' + ec(m.emoji) + '</i>' + T.feed(ec(m.tk)) + (Number(m.price) > 0 ? '<small class="mml">' + T.meal(MEAL, fq(qty(m, MEAL)), ec(m.tk)) + '</small>' : '') + '</button>' + '<button class="ghost mfw" data-fight="' + m.id + '"' + (S.fights > 0 ? '' : ' disabled') + '>' + T.fw + '</button>' + (twin ? '<button class="ghost" data-merge="' + m.id + ',' + twin.id + '">' + T.merge + '</button>' : '') + '</div></div>';
   }
   function render() {
     const T = L(), B = document.getElementById('monb'); if (!B || !S) return;
@@ -150,7 +191,7 @@
     if (!S.ok) { B.innerHTML = '<p style="text-align:center;opacity:.7">' + ec(T.err) + '</p>'; return; }
     const fo = (a) => FOCUS ? [...a].sort((x, y) => (y.coin === FOCUS) - (x.coin === FOCUS)) : a;
     S.mons = fo(S.mons || []); S.eggs = fo(S.eggs || []);
-    let h = '<button id="monfight"' + (S.fights > 0 && S.mons.length ? '' : ' disabled') + '>' + ec(S.fights > 0 ? T.fight(S.fights, S.fmax) : T.nofight) + '</button><div class="hint">' + T.hint + ' · <a href="#" id="mrlk">' + T.rules + '</a></div><div id="mfr"></div>';
+    let h = '<button id="monfight"' + (S.fights > 0 && S.mons.length ? '' : ' disabled') + '>' + ec(S.fights > 0 ? T.fight(S.fights, S.fmax) : T.nofight) + '</button><div class="hint"><a href="#" id="mrlk">' + T.rules + '</a></div>';
     h += '<h4>' + T.eggs + '</h4><div class="eggs">';
     if (S.starter) h += '<button class="eg" data-starter="1">' + T.starter + '</button>';
     (S.eggs || []).forEach((e) => { h += '<button class="eg" data-egg="' + e.coin + '">🥚 ' + ec(e.emoji) + ' ' + ec(T.egg(e.tk)) + '</button>'; });
@@ -159,7 +200,9 @@
     h += '<details class="mrl"><summary>' + T.rules + '</summary><ul>' + T.rl(S.fmax || 3).map((x) => '<li>' + x + '</li>').join('') + '</ul></details>';
     h += '<h4>' + T.board + '</h4>' + (S.board || []).map((r, i) => '<div class="br' + (r.me ? ' me' : '') + '"><span>' + (i + 1) + '. ' + ec(r.name) + '</span><span>' + r.pts + ' ' + T.pts + '</span></div>').join('');
     B.innerHTML = h;
-    B.querySelector('#monfight').onclick = fight;
+    B.querySelector('#monfight').onclick = () => fight(0);
+    B.querySelectorAll('[data-det]').forEach((x) => { x.onclick = () => { hp('light'); const d = document.getElementById('mdt' + x.dataset.det); if (d) d.hidden = !d.hidden; }; });
+    B.querySelectorAll('[data-fight]').forEach((x) => { x.onclick = () => fight(Number(x.dataset.fight)); });
     B.querySelector('#mrlk').onclick = (e) => { e.preventDefault(); const d = B.querySelector('.mrl'); d.open = true; d.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
     B.querySelectorAll('[data-egg],[data-starter]').forEach((x) => { x.onclick = () => act({ action: 'mon_hatch', coin: x.dataset.egg, starter: x.dataset.starter || '' }, T.hatched); });
     B.querySelectorAll('[data-feed]').forEach((x) => { x.onclick = () => feed(Number(x.dataset.feed)); });
@@ -172,26 +215,91 @@
     if (r && r.ok) { tst(okMsg); if (r.cash != null) { try { setCash(r.cash); } catch (e) {} } S = r.state || S; render(); return r; }
     const T = L(); tst(r && (r.error === 'no_coin' || r.error === 'cash') ? T.nocoin : r && r.error === 'max' ? T.max : T.err); return null;
   }
+  // 17 oct 2026 (Jeremy): feeding in a sheet of the game (no more browser prompt): amounts in one tap, coins and XP shown live
   function feed(id) {
-    const T = L(), m = S.mons.find((x) => x.id === id); if (!m) return;
+    const T = L(), F = T.fd, m = S.mons.find((x) => x.id === id); if (!m) return;
     let cash = 0; try { cash = Number(ME.cash) || 0; } catch (e) {}
-    const v = prompt(T.feedq(m.tk, fp(Number(m.price) || 0)) + '\n(💵 ' + Math.floor(cash) + ' $)', String(Math.max(1, Math.min(MEAL, Math.floor(cash)))));
-    const usd = Number(String(v || '').replace(',', '.'));
-    if (usd > 0) act({ action: 'mon_feed', id, usd }, m.emoji + ' ' + T.fedq(fq(qty(m, usd)), m.tk, usd) + ' ' + T.fed);
+    const px = Number(m.price) || 0, need = Math.max(0, (m.need || 0) - (m.xp || 0));
+    const presets = [10, 50, 100, 500].filter((v) => v <= cash || v === 10);
+    let usd = Math.max(1, Math.min(MEAL, Math.floor(cash)));
+    const d = document.createElement('div'); d.className = 'mfo';
+    d.innerHTML = '<div class="mfs"><div class="grab"></div><div class="mfh"><span class="mfa">' + monSvg(m) + '</span><div><b>' + ec(T.feed(m.tk)) + '</b><small>1 ' + ec(m.tk) + ' = ' + fp(px) + ' $ · 💵 ' + Math.floor(cash) + ' $</small></div></div>'
+      + '<div class="mfv"><span>$</span><input id="mfin" inputmode="decimal" value="' + usd + '"></div>'
+      + '<div class="mfp">' + presets.map((v) => '<button data-u="' + v + '">' + v + ' $</button>').join('') + (cash > 0 ? '<button data-u="max">MAX</button>' : '') + '</div>'
+      + '<div class="mfr"><div><small>' + F.eat + '</small><b id="mfq"></b></div><div><small>XP</small><b id="mfx"></b></div></div>'
+      + '<small class="mfn" id="mfn"></small>'
+      + '<button class="mfgo" id="mfgo"></button><div class="mfc" id="mfc">' + T.close + '</div></div>';
+    document.body.appendChild(d);
+    const inp = d.querySelector('#mfin');
+    const upd = () => {
+      usd = Math.max(0, Number(String(inp.value || '').replace(',', '.')) || 0);
+      d.querySelector('#mfq').innerHTML = '<i class="mco" style="background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.55),' + ec(m.color) + ' 45%,' + ec(m.color) + ')">' + ec(m.emoji) + '</i>' + fq(qty(m, usd)) + ' ' + ec(m.tk);
+      d.querySelector('#mfx').textContent = '+' + Math.floor(usd);
+      d.querySelector('#mfn').textContent = usd > cash ? T.nocoin : need > 0 ? (usd >= need ? F.up : F.left(Math.ceil(need))) : '';
+      const go = d.querySelector('#mfgo'); go.disabled = !(usd > 0 && usd <= cash); go.textContent = F.go(Math.floor(usd) || 0, m.tk);
+      d.querySelectorAll('[data-u]').forEach((x) => x.classList.toggle('on', (x.dataset.u === 'max' ? Math.floor(cash) : Number(x.dataset.u)) === usd));
+    };
+    inp.oninput = upd;
+    d.querySelectorAll('[data-u]').forEach((x) => { x.onclick = () => { hp('light'); inp.value = x.dataset.u === 'max' ? Math.floor(cash) : x.dataset.u; upd(); }; });
+    const close = () => d.remove();
+    d.onclick = (e) => { if (e.target === d || e.target.id === 'mfc') close(); };
+    d.querySelector('#mfgo').onclick = () => { if (!(usd > 0 && usd <= cash)) return; close(); act({ action: 'mon_feed', id, usd }, m.emoji + ' ' + T.fedq(fq(qty(m, usd)), m.tk, usd) + ' ' + T.fed); };
+    upd();
   }
-  async function fight() {
+  // 17 oct 2026 (Jeremy): real fights, turn by turn (no more fire / plant / water). The server plays the opponent (mon_fight, mon_move).
+  let BT = null;
+  const fname = (x, b, me) => me ? '$' + x.tk : (b.opn ? L().ofp(b.opn) : L().wild(x.tk));
+  function side(x, b, me) {
+    const pc = Math.max(0, Math.min(100, (x.hp / x.max) * 100));
+    return '<div class="bs ' + (me ? 'me' : 'op') + '" id="bs' + (me ? 'm' : 'o') + '"><div class="bi"><b>' + ec(fname(x, b, me)) + ' ' + '⭐'.repeat(x.stage || 1) + '</b><small>' + L().lvl + ' ' + (x.lvl || 1) + '</small>'
+      + '<div class="hb"><i style="width:' + pc + '%;background:' + (pc > 50 ? '#7dff6b' : pc > 20 ? '#ffd43b' : '#ff5d6b') + '"></i></div><small class="hpn">' + Math.round(x.hp) + ' / ' + Math.round(x.max) + '</small></div>'
+      + '<div class="bm"><span class="fl">' + monSvg({ coin: x.coin, color: x.color, emoji: x.emoji, stage: x.stage }) + '</span><span class="fx"></span></div></div>';
+  }
+  function drawBattle(b) {
+    const T = L(), B = document.getElementById('monb'); if (!B) return;
+    const cd = (b.me && b.me.cd) || 0;
+    B.innerHTML = '<div class="arena">' + side(b.op, b, false) + '<div class="blog" id="blog">' + ec(b.done ? '' : T.turn((b.turn || 0) + 1) + ' · ' + T.yours) + '</div>' + side(b.me, b, true) + '</div>'
+      + (b.done ? '<div class="res">' + (b.win ? T.win : T.lose) + ' <span style="color:#7dff6b">' + T.rew(b.reward) + '</span></div><button class="ghost bback" id="bback">' + T.back + '</button>'
+        : '<div class="bact"><button data-mv="atk">' + T.atk + '</button><button data-mv="spe"' + (cd > 0 ? ' disabled' : '') + '>' + T.spe + (cd > 0 ? '<small>' + T.rc(cd) + '</small>' : '') + '</button><button data-mv="def">' + T.def + '</button></div>');
+    B.querySelectorAll('[data-mv]').forEach((x) => { x.onclick = () => move(x.dataset.mv); });
+    const bb = B.querySelector('#bback'); if (bb) bb.onclick = () => { BT = null; load(); };
+  }
+  async function fight(id) {
     if (busy) return; busy = true; hp('medium');
-    const T = L(), btn = document.getElementById('monfight'); if (btn) btn.disabled = true;
-    const r = await call({ action: 'mon_fight' }); busy = false;
-    const F = document.getElementById('mfr'); if (!F) return;
-    if (!r || !r.ok) { tst(T.err); if (btn) btn.disabled = false; return; }
-    F.innerHTML = '<div style="text-align:center;opacity:.7;font-size:13px;margin:8px 0">' + T.vs + ' <b>' + ec(r.opp) + '</b></div>'
-      + r.duels.map((d) => '<div class="duel"><span>' + ec(d.me.emoji) + ' $' + ec(d.me.tk) + ' ' + TI[d.me.type] + ' <b>' + d.me.p + '</b></span><span class="' + (d.win ? 'w' : 'l') + '">' + (d.win ? '✔' : '✖') + '</span><span><b>' + d.op.p + '</b> ' + TI[d.op.type] + ' ' + ec(d.op.emoji) + ' $' + ec(d.op.tk) + '</span></div>').join('')
-      + '<div class="res" style="opacity:0">' + (r.win ? T.win : T.lose) + ' <span style="color:#7dff6b">' + T.rew(r.reward) + '</span></div>';
-    const ds = F.querySelectorAll('.duel');
-    ds.forEach((x, i) => setTimeout(() => { x.classList.add('on'); hp('light'); }, 500 + i * 700));
-    setTimeout(() => { const z = F.querySelector('.res'); if (z) z.style.opacity = 1; hp(r.win ? 'success' : 'error'); try { setCash(r.cash); } catch (e) {} }, 500 + ds.length * 700);
-    setTimeout(() => { S = r.state || S; const keep = F.innerHTML; render(); const F2 = document.getElementById('mfr'); if (F2) { F2.innerHTML = keep; F2.querySelectorAll('.duel').forEach((x) => x.classList.add('on')); const z = F2.querySelector('.res'); if (z) z.style.opacity = 1; } }, 900 + ds.length * 700);
+    const r = await call({ action: 'mon_fight', id: id || '' }); busy = false;
+    if (!r || !r.ok || !r.battle) { tst(L().err); return; }
+    BT = r.battle; if (r.state) S = r.state; drawBattle(BT);
+  }
+  const wait = (ms) => new Promise((ok) => setTimeout(ok, ms));
+  async function move(mv) {
+    if (busy || !BT) return; busy = true; hp('light');
+    document.querySelectorAll('#monb [data-mv]').forEach((x) => { x.disabled = true; });
+    const r = await call({ action: 'mon_move', fid: BT.fid, mv }); 
+    if (!r || !r.ok || !r.battle) { busy = false; tst(L().err); drawBattle(BT); return; }
+    const T = L(), nb = r.battle, cur = JSON.parse(JSON.stringify(BT));
+    for (const e of nb.ev || []) {
+      const me = e.w === 'me', att = document.getElementById(me ? 'bsm' : 'bso'), def = document.getElementById(me ? 'bso' : 'bsm');
+      const an = me ? '$' + cur.me.tk : fname(cur.op, cur, false), lg = document.getElementById('blog');
+      if (e.mv === 'def') {
+        const t = me ? cur.me : cur.op; t.hp = Math.min(t.max, t.hp + (e.heal || 0));
+        if (att) { att.classList.add('shield'); const f = att.querySelector('.fx'); if (f) { f.textContent = '🛡️ ' + T.heal(e.heal); f.className = 'fx up'; } }
+        if (lg) lg.textContent = T.lg.def(an, e.heal); hp('light');
+      } else {
+        if (att) att.classList.add(e.mv === 'spe' ? 'lunge2' : 'lunge');
+        await wait(260);
+        const t = me ? cur.op : cur.me; t.hp = Math.max(0, t.hp - (e.dmg || 0));
+        if (def) { if (!e.miss) def.classList.add('hit'); const f = def.querySelector('.fx'); if (f) { f.textContent = e.miss ? T.miss : '-' + e.dmg + (e.crit ? ' ' + T.crit : ''); f.className = 'fx ' + (e.miss ? 'up' : 'dn'); } }
+        if (lg) lg.textContent = e.miss ? T.lg.miss(an) : T.lg[e.mv](an, e.dmg) + (e.crit ? ' (' + T.crit + ')' : '');
+        hp(e.miss ? 'light' : e.crit ? 'heavy' : 'medium');
+      }
+      const upd = (id, x) => { const el = document.getElementById(id); if (!el) return; const pc = Math.max(0, Math.min(100, (x.hp / x.max) * 100)); const i = el.querySelector('.hb i'); if (i) { i.style.width = pc + '%'; i.style.background = pc > 50 ? '#7dff6b' : pc > 20 ? '#ffd43b' : '#ff5d6b'; } const n = el.querySelector('.hpn'); if (n) n.textContent = Math.round(x.hp) + ' / ' + Math.round(x.max); };
+      upd('bsm', cur.me); upd('bso', cur.op);
+      await wait(900);
+      document.querySelectorAll('#monb .bs').forEach((x) => { x.classList.remove('lunge', 'lunge2', 'hit', 'shield'); const f = x.querySelector('.fx'); if (f) f.className = 'fx'; });
+    }
+    BT = nb; busy = false;
+    if (nb.done) { hp(nb.win ? 'success' : 'error'); if (r.cash != null) { try { setCash(r.cash); } catch (e) {} } if (r.state) S = r.state; }
+    drawBattle(BT);
   }
   function show(focus) {
     FOCUS = Number(focus) || 0;
