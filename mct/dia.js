@@ -126,7 +126,7 @@
     const T = L(), c = S.contest || {}, md = ['🥇', '🥈', '🥉'], pz = c.prizes || [];
     if (!S.on) { b.innerHTML = '<p class="dsm">' + ec(T.off) + '</p>'; return; }
     const sub = (k, on, url) => '<div class="dsub"><span>' + ec(T[k]) + '</span>' + (on ? '<span class="dok">' + ec(T.on) + '</span>' : '<button class="btn" data-dj="' + url + '">' + ec(T.join) + ' +10 %</button>') + '</div>';
-    const rows = (c.top || []).slice(0, 10).map((x, i) => '<div class="drow' + (x.me ? ' me' : '') + '"><span>' + (md[i] || (i + 1) + '.') + ' ' + ec(x.name) + (x.me ? ' (' + ec(T.you) + ')' : '') + '</span><span>' + nf(x.n) + ' ' + ec(T.taps) + (i < 3 && pz[i] ? ' · ' + usd(pz[i]) : '') + '</span></div>').join('')
+    const rows = (c.top || []).slice(0, 10).map((x, i) => '<div class="drow' + (x.me ? ' me' : '') + '"' + (x.pid ? ' data-pid="' + Number(x.pid) + '" style="cursor:pointer"' : '') + '><span>' + (md[i] || (i + 1) + '.') + ' ' + ec(x.name) + (x.me ? ' (' + ec(T.you) + ')' : '') + '</span><span>' + nf(x.n) + ' ' + ec(T.taps) + (i < 3 && pz[i] ? ' · ' + usd(pz[i]) : '') + '</span></div>').join('')
       || '<p class="dsm">' + ec(T.nobody) + '</p>';
     b.style.cssText = '';
     b.innerHTML = '<div class="dc dhero"><div class="dl">' + ec(T.mine) + '</div><div class="dbig"><span class="dgi">💎</span><span id="dusd"></span></div><div class="dbar"><i id="dbar"></i></div>'
@@ -137,6 +137,8 @@
         + (c.me && c.me.rank ? '<div class="dsm" style="margin-top:6px">' + ec(T.rank) + ' : <b>#' + c.me.rank + '</b> · ' + nf(c.me.n) + ' ' + ec(T.taps) + '</div>' : '') + '</div>' : '')
       + '<button class="btn ghost" id="dwal" style="width:100%">' + ec(T.wal) + '</button>';
     b.querySelectorAll('[data-dj]').forEach((x) => x.onclick = () => { hp(); open(x.dataset.dj); });
+    // 17 oct 2026: tap a tapper to see his profile (and add him as a friend)
+    b.querySelectorAll('.drow[data-pid]').forEach((x) => x.onclick = () => { if (typeof window.mctProfile !== 'function') return; hp(); closeIt(); window.mctProfile(x.dataset.pid); });
     const rc = document.getElementById('drc'); if (rc) rc.onclick = () => { hp(); show(); };
     document.getElementById('dclaim').onclick = claim;
     document.getElementById('dwal').onclick = () => { hp(); closeIt(); try { tonPage(); } catch (e) {} };
