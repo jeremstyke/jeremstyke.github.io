@@ -207,6 +207,17 @@
   }
   new MutationObserver(() => { document.querySelectorAll('#burnb:not([data-cl])').forEach(coinLabel); }).observe(document.body, { childList: true, subtree: true });
 
+  // 17 oct 2026 (Jeremy, 23h): a 🛡️ button at the top of the game, where the diamond was (the diamond is in the green earnings bar now)
+  function topBtn() {
+    if (document.getElementById('clantop')) return true;
+    const f = document.getElementById('faqtop'); if (!f) return false;
+    const b = document.createElement('button'); b.className = 'lng'; b.id = 'clantop'; b.setAttribute('aria-label', 'Clans'); b.textContent = '🛡️';
+    b.style.cssText = 'padding:4px 8px;font-size:15px;line-height:1';
+    b.onclick = () => { hp(); show(); };
+    f.parentNode.insertBefore(b, f); return true;
+  }
+  if (!topBtn()) { let n = 0; const w = setInterval(() => { if (topBtn() || ++n > 80) clearInterval(w); }, 250); }
+
   window.mctClans = show;
   // links ?startapp=clan (the clans) and ?startapp=cl_<id> (a clan, to ask to join)
   const sp = String((window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.start_param) || '');
