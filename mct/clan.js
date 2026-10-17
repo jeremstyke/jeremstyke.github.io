@@ -19,6 +19,9 @@
       donate: '💝 Donner à la cagnotte', amount: 'Montant en $', leave: 'Quitter le clan', leaveq: 'Sûr ? Tu perds ta part de la semaine.',
       reqs: 'Demandes', accept: 'Accepter', refuse: 'Refuser', newp: 'nouveau joueur', nreq: 'Aucune demande.',
       chiefh: '👑 Gestion de la cagnotte', take: 'Prendre pour moi', give: 'Donner à', lock7: 'Bloquer 7 j (+10 %)', lock30: 'Bloquer 30 j (+50 %)', locks: 'Bloqué', until: 'jusqu\'au', kick: 'Exclure',
+      lgb: '📒 Journal du clan', lgt: '📒 Journal du clan', back: '‹ Retour', lgn: 'Rien pour l\'instant.', lgw: '→ gains de la semaine', lgp: '→ cagnotte', lgo: '← cagnotte',
+      lk: { fee: (n) => '🪙 Frais du coin du clan (' + n + ' échange' + (n > 1 ? 's' : '') + ')', join: (w) => '👤 ' + w + ' a rejoint le clan', new: (w) => '🆕 ' + w + ' recruté avec le lien (3 jours de jeu)', top: () => '🏆 Récompense du classement des clans', donate: (w) => '💝 ' + w + ' a donné à la cagnotte', take: (w) => '💰 ' + w + ' a pris dans la cagnotte', give: (w) => '🎁 Cagnotte donnée à ' + w, lock: () => '🔒 Argent bloqué', unlock: () => '🔓 Argent débloqué avec son bonus', week: () => '🗓️ Partage du lundi', create: (w) => '🛡️ Clan créé par ' + w },
+      lgs: (n, s, p) => n + ' membre(s) × ' + s + ', cagnotte +' + p,
       pendn: (n) => n + ' recrue(s) en attente de leurs 3 jours (+5 000 $ chacune)', label: (n) => '🛡️ Coin du clan ' + n, joinbtn: 'Rejoindre', badge: '🏆 Clan de la semaine', closed: '🔒 Fermé', lockb: '🔒 Fermer le clan aux demandes', unlockb: '🔓 Rouvrir le clan aux demandes', lockx: 'Clan fermé : on n\'y entre que sur invitation, avec le lien du clan.',
       e: { cash: 'Pas assez d\'argent.', name: 'Nom invalide (3 à 20 caractères).', name_taken: 'Ce nom est déjà pris.', ticker: 'Ticker invalide (2 à 8 lettres).', taken: 'Ce ticker existe déjà.', in_clan: 'Tu es déjà dans un clan.', full: 'Ce clan est complet.', too_many: 'Tu as déjà 3 demandes en cours.', amount: 'Montant invalide.', pot: 'Pas assez dans la cagnotte. Elle se remplit chaque lundi avec 50 % des gains de la semaine.', closed: 'Ce clan est fermé aux demandes.' },
     },
@@ -33,6 +36,9 @@
       donate: '💝 Give to the pot', amount: 'Amount in $', leave: 'Leave the clan', leaveq: 'Sure? You lose your share of the week.',
       reqs: 'Requests', accept: 'Accept', refuse: 'Refuse', newp: 'new player', nreq: 'No request.',
       chiefh: '👑 Pot management', take: 'Take for me', give: 'Give to', lock7: 'Lock 7 d (+10%)', lock30: 'Lock 30 d (+50%)', locks: 'Locked', until: 'until', kick: 'Remove',
+      lgb: '📒 Clan log', lgt: '📒 Clan log', back: '‹ Back', lgn: 'Nothing yet.', lgw: '→ earnings of the week', lgp: '→ pot', lgo: '← pot',
+      lk: { fee: (n) => '🪙 Fees of the clan coin (' + n + ' trade' + (n > 1 ? 's' : '') + ')', join: (w) => '👤 ' + w + ' joined the clan', new: (w) => '🆕 ' + w + ' recruited with the link (3 days of play)', top: () => '🏆 Clan ranking prize', donate: (w) => '💝 ' + w + ' gave to the pot', take: (w) => '💰 ' + w + ' took from the pot', give: (w) => '🎁 Pot given to ' + w, lock: () => '🔒 Money locked', unlock: () => '🔓 Money unlocked with its bonus', week: () => '🗓️ Monday split', create: (w) => '🛡️ Clan created by ' + w },
+      lgs: (n, s, p) => n + ' member(s) × ' + s + ', pot +' + p,
       pendn: (n) => n + ' recruit(s) waiting for their 3 days (+$5,000 each)', label: (n) => '🛡️ Coin of the clan ' + n, joinbtn: 'Join', badge: '🏆 Clan of the week', closed: '🔒 Closed', lockb: '🔒 Close the clan to requests', unlockb: '🔓 Open the clan to requests again', lockx: 'Closed clan: invitation only, with the clan link.',
       e: { cash: 'Not enough money.', name: 'Invalid name (3 to 20 characters).', name_taken: 'This name is taken.', ticker: 'Invalid ticker (2 to 8 letters).', taken: 'This ticker already exists.', in_clan: 'You are already in a clan.', full: 'This clan is full.', too_many: 'You already have 3 pending requests.', amount: 'Invalid amount.', pot: 'Not enough in the pot. It fills every Monday with 50% of the week\'s earnings.', closed: 'This clan is closed to requests.' },
     },
@@ -199,7 +205,8 @@
       + '<div class="crow"><span>' + ec(T.pot) + '<small>' + ec(T.potx(usd(Number(c.week || 0) * 0.5))) + '</small></span><span class="big">' + usd(c.treasury) + '</span></div>'
       + (c.coin ? '<div class="crow"><span>' + ec(T.coin) + ' <b>$' + ec(c.coin.ticker) + '</b><small>' + px(c.coin.price) + ' · ' + usd(c.coin.mcap) + '</small></span><button class="cb g" id="clsc">' + ec(T.seecoin) + '</button></div>' : '')
       + ((c.locks || []).length ? (c.locks || []).map((l) => '<div class="crow"><span>🔒 ' + ec(T.locks) + ' ' + usd(l.amount) + ' (+' + l.pct + ' %)</span><small style="display:inline">' + ec(T.until) + ' ' + ec(day(l.until)) + '</small></div>').join('') : '')
-      + (Number(c.pending_new) ? '<small style="margin-top:6px">' + ec(T.pendn(c.pending_new)) + '</small>' : '') + '</div>';
+      + (Number(c.pending_new) ? '<small style="margin-top:6px">' + ec(T.pendn(c.pending_new)) + '</small>' : '')
+      + '<button class="cb g" id="cllog" style="width:100%;margin-top:10px">' + ec(T.lgb) + '</button></div>';
     h += '<button class="btn" id="clinv" style="width:100%;margin:0 0 12px">' + ec(T.invite) + '</button>';
     if (chief) {
       h += '<div class="cc"><b>' + ec(T.reqs) + '</b>' + ((c.requests || []).length ? c.requests.map((q) => '<div class="crow"><span>' + ec(q.name) + (q.new ? ' <small style="display:inline;color:#4ff0b7">' + ec(T.newp) + '</small>' : '') + '</span><span style="display:flex;gap:6px"><button class="cb" data-acc="' + q.uid + '">' + ec(T.accept) + '</button><button class="cb g" data-ref="' + q.uid + '">' + ec(T.refuse) + '</button></span></div>').join('') : '<small style="margin-top:4px">' + ec(T.nreq) + '</small>') + (c.locked ? '<small style="margin-top:6px">' + ec(T.lockx) + '</small>' : '') + '<button class="cb g" id="cllock" style="margin-top:8px">' + ec(c.locked ? T.unlockb : T.lockb) + '</button></div>';
@@ -217,6 +224,7 @@
     const act = async (a, body, btn) => { hp(); if (btn) btn.disabled = true; const q = await call(a, body); if (btn) btn.disabled = false; if (!q || !q.ok) { hp('err'); tst(errOf(q)); return false; } hp('ok'); show(); return true; };
     b.querySelectorAll('[data-acc]').forEach((x) => x.onclick = () => act('clanaccept', { uid: Number(x.dataset.acc) }, x));
     b.querySelectorAll('[data-ref]').forEach((x) => x.onclick = () => act('clanrefuse', { uid: Number(x.dataset.ref) }, x));
+    b.querySelector('#cllog').onclick = () => { hp(); journal(b, r); };
     const lk = b.querySelector('#cllock'); if (lk) lk.onclick = () => act('clanlockjoin', {}, lk);
     b.querySelectorAll('[data-kick]').forEach((x) => x.onclick = () => act('clankick', { uid: Number(x.dataset.kick) }, x));
     const amt = () => Number((b.querySelector('#clamt') || {}).value || 0);
@@ -227,6 +235,24 @@
       let ok = true; try { ok = await new Promise((res) => tw.showConfirm(T.leaveq, res)); } catch (e) { ok = window.confirm(T.leaveq); }
       if (ok) { const q = await call('clanleave'); if (q && q.ok) { hp('ok'); show(); } else tst(errOf(q)); }
     };
+  }
+
+  // 18 oct 2026 (Jeremy): the money log of the clan: incomes (to the earnings of the week), Monday splits, pot moves
+  async function journal(b, st) {
+    const T = L(); b.innerHTML = '<button class="cb g" id="clbk">' + ec(T.back) + '</button><div style="text-align:center;padding:30px 0">⏳</div>';
+    b.querySelector('#clbk').onclick = () => { hp(); show(); };
+    const r = await call('clanledger');
+    const rows = (r && r.rows) || [];
+    const dst = { fee: T.lgw, join: T.lgw, new: T.lgw, top: T.lgw, donate: T.lgp, unlock: T.lgp, take: T.lgo, give: T.lgo, lock: T.lgo };
+    const when = (d) => { try { return new Date(d).toLocaleString(lg() === 'fr' ? 'fr-FR' : 'en-US', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } };
+    const sg = (a) => (a > 0 ? '+' : a < 0 ? '−' : '') + usd(Math.abs(a));
+    b.innerHTML = '<div style="display:flex;align-items:center;gap:10px;margin:0 0 10px"><button class="cb g" id="clbk">' + ec(T.back) + '</button><b style="font-size:16px">' + ec(T.lgt) + '</b></div>'
+      + '<div class="cc">' + (rows.length ? rows.map((x) => {
+        const a = Number(x.a || 0), f = T.lk[x.k], lab = f ? f(x.k === 'fee' ? Number(x.n || 1) : (x.who || '?')) : x.k;
+        const sub = x.k === 'week' && x.w ? T.lgs(x.w[0], usd(Number(x.w[1])), usd(Number(x.w[2]))) : (dst[x.k] || '');
+        return '<div class="crow"><span style="min-width:0">' + ec(lab) + '<small>' + ec(when(x.at)) + (sub ? ' · ' + ec(sub) : '') + (x.k === 'lock' && x.note ? ' · ' + ec(String(x.note).replace('days', lg() === 'fr' ? 'jours' : 'days')) : '') + '</small></span><b style="white-space:nowrap;color:' + (x.k === 'week' || x.k === 'create' ? 'inherit' : a >= 0 ? '#4ff0b7' : '#ff8a8a') + '">' + (x.k === 'create' ? '' : x.k === 'week' ? usd(a) : sg(a)) + '</b></div>';
+      }).join('') : '<small>' + ec(T.lgn) + '</small>') + '</div>';
+    b.querySelector('#clbk').onclick = () => { hp(); show(); };
   }
 
   // the page of a coin: "Coin of the clan X" when it is a clan coin
