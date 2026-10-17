@@ -204,7 +204,7 @@
     if (!r || !r.clan || !document.body.contains(el)) return;
     const T = L(), d = document.createElement('div');
     d.style.cssText = 'margin-top:8px';
-    d.innerHTML = '<button type="button" style="border:1px solid #4ff0b7;background:rgba(79,240,183,.12);color:#4ff0b7;font-weight:800;font-size:13px;border-radius:999px;padding:6px 14px;cursor:pointer">' + ec(r.clan.emoji) + ' ' + ec(T.label(r.clan.name)) + (r.mine ? '' : ' · ' + ec(T.joinbtn) + ' ›') + '</button>';
+    d.innerHTML = '<button type="button" style="border:1px solid #4ff0b7;background:rgba(79,240,183,.12);color:#4ff0b7;font-weight:800;font-size:13px;border-radius:999px;padding:6px 14px;cursor:pointer">' + ec(r.clan.emoji) + ' ' + ec(T.label(r.clan.name)) + (r.mine ? '' : r.clan.locked ? ' · 🔒' : ' · ' + ec(T.joinbtn) + ' ›') + '</button>';
     d.querySelector('button').onclick = () => { hp(); show(r.clan.id); };
     el.insertAdjacentElement('beforebegin', d);
   }
