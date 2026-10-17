@@ -305,7 +305,9 @@ async function burnFill(el) {
   let i = null; try { i = await tonCall({ action: 'burn_info', id }); } catch (e) {}
   if (!i || !i.ok) { el.innerHTML = ''; return; }
   if (i.next_at) { const h = Math.max(1, Math.ceil((Date.parse(i.next_at) - Date.now()) / 36e5)); el.innerHTML = '<span class="brn off">🔥 ' + T.wait(h) + '</span>'; return; }
-  el.innerHTML = '<button class="brn" type="button">🔥 ' + T.go + ' +5 % · ' + (i.free ? T.free : i.stars + ' ⭐') + '</button><small>' + T.x + (i.free || i.prem ? '' : '<br>' + T.prem) + '</small>';
+  el.innerHTML = '<button class="brn" type="button">🔥 ' + T.go + ' +5 % · ' + (i.free ? T.free : i.stars + ' ⭐') + '</button><small>' + T.x + (i.free || i.prem ? '' : '<br><a href="#" class="brp" style="color:#ffd43b;font-weight:800;text-decoration:underline">' + T.prem + ' ›</a>') + '</small>';
+  // 17 oct 2026 (Jeremy): the Premium line opens the Premium page
+  const bp = el.querySelector('.brp'); if (bp) bp.onclick = (ev) => { ev.preventDefault(); try { haptic(); } catch (e) {} if (typeof window.mctPremium === 'function') window.mctPremium(); };
   const b = el.querySelector('button');
   b.onclick = async () => {
     try { haptic(); } catch (e) {}
