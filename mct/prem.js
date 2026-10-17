@@ -41,9 +41,13 @@
 
   const st = document.createElement('style');
   st.textContent = '#prm{position:fixed;inset:0;z-index:9998;background:rgba(5,3,15,.78);display:flex;align-items:flex-end;justify-content:center}'
-    + '#prm .pbx{width:100%;max-width:520px;max-height:92vh;overflow:auto;background:var(--night,#140c2c);border:1px solid #ffd43b;border-radius:22px 22px 0 0;padding:20px 18px calc(22px + env(safe-area-inset-bottom));text-align:center}'
-    + '#prm h2{margin:6px 0 2px;font-size:24px}#prm .pr{font-size:20px;font-weight:900;color:#ffd43b;margin:2px 0}#prm ul{list-style:none;padding:0;margin:14px 0;text-align:left}#prm li{padding:8px 4px;border-bottom:1px solid rgba(255,255,255,.07);font-size:15px}'
-    + '#prm small{display:block;opacity:.7;margin-top:8px}.pmup{display:block;width:100%;margin-top:10px;background:none;border:1px dashed #ffd43b;color:#ffd43b;border-radius:12px;padding:9px;font-weight:800;font-size:13px}'
+    + '#prm .pbx{position:relative;width:100%;max-width:520px;max-height:92vh;overflow:auto;background:var(--night,#140c2c);border:1px solid #ffd43b;border-radius:22px 22px 0 0;padding:14px 14px calc(14px + env(safe-area-inset-bottom));text-align:center}'
+    // 17 oct 2026: compact sheet, it must fit a small phone without scrolling (header on one line, perks in 2 columns, ✕ in the corner)
+    + '#prm .phd{display:flex;align-items:center;justify-content:center;gap:10px;margin:2px 26px 0}#prm .phd span{font-size:34px;line-height:1}#prm .phd div{text-align:left}'
+    + '#prm h2{margin:0;font-size:20px;line-height:1.1}#prm .pr{font-size:16px;font-weight:900;color:#ffd43b;margin:2px 0 0}#prm .pcx{position:absolute;top:8px;right:8px;width:32px;height:32px;margin:0;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.08);color:inherit;font-size:16px}'
+    + '#prm ul{list-style:none;padding:0;margin:10px 0;text-align:left;display:grid;grid-template-columns:1fr 1fr;gap:6px}#prm li{padding:7px 8px;border:1px solid rgba(255,255,255,.08);border-radius:10px;background:rgba(255,255,255,.03);font-size:12.5px;line-height:1.25}'
+    + '#prm .btn,#prm .ghost{padding-top:11px;padding-bottom:11px;font-size:15px}'
+    + '#prm small{display:block;opacity:.7;margin-top:6px;font-size:12px}.pmup{display:block;width:100%;margin-top:10px;background:none;border:1px dashed #ffd43b;color:#ffd43b;border-radius:12px;padding:9px;font-weight:800;font-size:13px}'
     + '#pfprem{display:block;width:100%;margin:0 0 12px;background:linear-gradient(135deg,#ffd43b,#f59f00);color:#1a0638;border:0;border-radius:14px;padding:12px;font-weight:900}';
   document.head.appendChild(st);
 
@@ -55,12 +59,11 @@
     document.body.appendChild(d);
     const s = await state(true), T = L(), b = d.querySelector('.pbx'); if (!b) return;
     const on = s && s.on;
-    b.innerHTML = '<div style="font-size:52px;line-height:1">💎</div><h2>Meme Coin Tycoon ' + ec(T.t) + '</h2>'
-      + (on ? '<div class="pr">' + ec(T.act) + '</div><small style="margin-top:0">' + ec(T.on(day(s.until))) + '</small>' : '<div class="pr">' + ec(T.price) + '</div><small style="margin-top:0">' + ec(T.sub) + '</small>')
+    b.innerHTML = '<button class="pcx" id="pcl" aria-label="' + ec(T.close) + '">✕</button><div class="phd"><span>💎</span><div><h2>' + ec(T.t) + '</h2><div class="pr">' + ec(on ? T.act : T.price) + '</div></div></div>'
+      + '<small style="margin-top:4px">' + ec(on ? T.on(day(s.until)) : T.sub) + '</small>'
       + '<ul>' + T.b.map((x) => '<li>' + ec(x) + '</li>').join('') + '</ul>'
       + (on ? '<button class="btn" id="prch"' + (s.rch ? '' : ' disabled style="opacity:.5"') + '>' + ec(s.rch ? T.rch : T.rchd) + '</button><small>' + ec(T.left(s.boosts)) + '</small><small>' + ec(T.mng) + '</small>'
-        : '<button class="btn" id="pgo">' + ec(T.go) + '</button><button class="ghost" id="pwk" style="width:100%;margin-top:10px;border:1px solid #ffd43b;color:#ffd43b">' + ec(T.wk) + '</button>')
-      + '<button class="ghost" id="pcl" style="width:100%;margin-top:10px">' + ec(T.close) + '</button>';
+        : '<button class="btn" id="pgo">' + ec(T.go) + '</button><button class="ghost" id="pwk" style="width:100%;margin-top:8px;border:1px solid #ffd43b;color:#ffd43b">' + ec(T.wk) + '</button>');
     b.querySelector('#pcl').onclick = () => { hp(); closeIt(); };
     const g = b.querySelector('#pgo'); if (g) g.onclick = buy;
     // 17 oct 2026: the 7-day pass, 30 ⭐ paid once (no renewal), to try Premium for cheap
