@@ -11,11 +11,11 @@
     fr: { t: 'Meme Coin Monsters', sec: 'Mode secret · visible par toi seulement', eggs: 'Œufs du jour', egg: (t) => 'Faire éclore $' + t, starter: '🥚 Œuf de départ', noegg: 'Garde au moins 100 $ d\'un coin pour recevoir son œuf (1 par jour et par coin).', team: 'Mes monstres', none: 'Aucun monstre pour l\'instant.',
       fight: (n, m) => '⚔️ Combattre (' + n + '/' + m + ')', nofight: 'Plus de combat aujourd\'hui, reviens demain !', feed: '🍖 Nourrir', merge: '🔀 Fusionner', lvl: 'Niv.', power: 'Force', base: 'base', coin24: 'coin 24 h', held: 'coins gardés', news: 'news',
       feedq: 'Combien de $ de ce coin lui donner ? (les coins sont mangés)', fed: '🍖 Miam ! +XP', merged: '🔀 Fusion réussie : stade supérieur !', hatched: '🐣 Un monstre est né !', win: '🏆 Victoire !', lose: '😵 Défaite…', vs: 'contre', rew: (v) => '+' + v + ' $', board: 'Classement de la semaine', pts: 'pts',
-      types: ['🔥 Feu', '🌿 Plante', '💧 Eau'], hint: '🔥 bat 🌿 · 🌿 bat 💧 · 💧 bat 🔥', err: 'Erreur, réessaie.', nocoin: 'Tu n\'as plus de ce coin.', max: 'Niveau max : fusionne-le avec un autre du même stade.', close: 'Fermer', go: 'Voir le coin', coinbtn: (t) => '🥚 Le monstre de $' + t },
+      types: ['🔥 Feu', '🌿 Plante', '💧 Eau'], hint: '🔥 bat 🌿 · 🌿 bat 💧 · 💧 bat 🔥', err: 'Erreur, réessaie.', nocoin: 'Tu n\'as plus de ce coin.', max: 'Niveau max : fusionne-le avec un autre du même stade.', close: 'Fermer', go: 'Voir le coin', coinbtn: (t) => '🥚 Le monstre de $' + t, pfbtn: '🐉 Mes monstres' },
     en: { t: 'Meme Coin Monsters', sec: 'Secret mode · only you can see it', eggs: 'Today\'s eggs', egg: (t) => 'Hatch $' + t, starter: '🥚 Starter egg', noegg: 'Hold at least $100 of a coin to get its egg (1 a day per coin).', team: 'My monsters', none: 'No monster yet.',
       fight: (n, m) => '⚔️ Fight (' + n + '/' + m + ')', nofight: 'No fight left today, come back tomorrow!', feed: '🍖 Feed', merge: '🔀 Merge', lvl: 'Lv.', power: 'Power', base: 'base', coin24: 'coin 24 h', held: 'coins held', news: 'news',
       feedq: 'How many $ of this coin to feed it? (the coins are eaten)', fed: '🍖 Yum! +XP', merged: '🔀 Merged: next stage!', hatched: '🐣 A monster is born!', win: '🏆 Victory!', lose: '😵 Defeat…', vs: 'vs', rew: (v) => '+$' + v, board: 'This week\'s ranking', pts: 'pts',
-      types: ['🔥 Fire', '🌿 Plant', '💧 Water'], hint: '🔥 beats 🌿 · 🌿 beats 💧 · 💧 beats 🔥', err: 'Error, try again.', nocoin: 'You have none of this coin left.', max: 'Max level: merge it with another of the same stage.', close: 'Close', go: 'See the coin', coinbtn: (t) => '🥚 The monster of $' + t },
+      types: ['🔥 Fire', '🌿 Plant', '💧 Water'], hint: '🔥 beats 🌿 · 🌿 beats 💧 · 💧 beats 🔥', err: 'Error, try again.', nocoin: 'You have none of this coin left.', max: 'Max level: merge it with another of the same stage.', close: 'Close', go: 'See the coin', coinbtn: (t) => '🥚 The monster of $' + t, pfbtn: '🐉 My monsters' },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l === 'fr' ? 'fr' : 'en']; };
   const hp = (k) => { try { haptic(k); } catch (e) {} };
@@ -25,7 +25,7 @@
   let S = null, busy = false;
 
   const st = document.createElement('style');
-  st.textContent = '#monco{display:block;width:100%;margin:8px 0;padding:11px 14px;border:1px dashed rgba(255,212,59,.6);border-radius:14px;background:rgba(255,212,59,.08);color:#ffd43b;font-weight:700;font-size:14px;cursor:pointer}'
+  st.textContent = '#monpf,#monco{display:block;width:100%;margin:8px 0;box-sizing:border-box;padding:11px 14px;border:1px dashed rgba(255,212,59,.6);border-radius:14px;background:rgba(255,212,59,.08);color:#ffd43b;font-weight:700;font-size:14px;cursor:pointer}'
     + '#monm{position:fixed;inset:0;z-index:10050;background:rgba(5,3,15,.8);display:flex;align-items:flex-end;justify-content:center}'
     + '#monm .mb{width:100%;max-width:520px;max-height:92vh;overflow:auto;background:var(--night,#140c2c);border:1px solid var(--line,rgba(255,255,255,.12));border-radius:22px 22px 0 0;padding:16px 16px calc(20px + env(safe-area-inset-bottom))}'
     + '#monm .mt{display:flex;align-items:center;justify-content:space-between}#monm .mt b{font-size:18px}#monm .mx{background:none;border:0;color:inherit;font-size:22px;opacity:.7;padding:4px 8px;cursor:pointer}'
@@ -55,8 +55,17 @@
     b.onclick = () => { hp(); show(Number(c.id)); };
     host.insertBefore(b, host.children[1] || null);
   }
+  // 17 oct 2026 (Jeremy): also a line "🐉 My monsters" on the player's own profile (under the nickname / photo buttons)
+  function addProfileBtn() {
+    const ped = document.querySelector('#pfm .ped');
+    if (!ped || document.getElementById('monpf')) return;
+    const b = document.createElement('button'); b.id = 'monpf'; b.type = 'button';
+    b.textContent = L().pfbtn;
+    b.onclick = () => { hp(); show(0); };
+    ped.parentNode.insertBefore(b, ped.nextSibling);
+  }
   let MQ = 0;
-  new MutationObserver(() => { if (!MQ) MQ = requestAnimationFrame(() => { MQ = 0; addCoinBtn(); }); }).observe(document.body, { childList: true, subtree: true });
+  new MutationObserver(() => { if (!MQ) MQ = requestAnimationFrame(() => { MQ = 0; addCoinBtn(); addProfileBtn(); }); }).observe(document.body, { childList: true, subtree: true });
 
   const call = async (b) => { try { return await tonCall(b); } catch (e) { return null; } };
   const pc = (v) => (v > 0 ? '+' : '') + Math.round(v) + ' %';
