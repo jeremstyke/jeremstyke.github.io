@@ -19,8 +19,8 @@
       donate: '💝 Donner à la cagnotte', amount: 'Montant en $', leave: 'Quitter le clan', leaveq: 'Sûr ? Tu perds ta part de la semaine.',
       reqs: 'Demandes', accept: 'Accepter', refuse: 'Refuser', newp: 'nouveau joueur', nreq: 'Aucune demande.',
       chiefh: '👑 Gestion de la cagnotte', take: 'Prendre pour moi', give: 'Donner à', lock7: 'Bloquer 7 j (+10 %)', lock30: 'Bloquer 30 j (+50 %)', locks: 'Bloqué', until: 'jusqu\'au', kick: 'Exclure',
-      pendn: (n) => n + ' recrue(s) en attente de leurs 3 jours (+5 000 $ chacune)', label: (n) => '🛡️ Coin du clan ' + n, joinbtn: 'Rejoindre', badge: '🏆 Clan de la semaine',
-      e: { cash: 'Pas assez d\'argent.', name: 'Nom invalide (3 à 20 caractères).', name_taken: 'Ce nom est déjà pris.', ticker: 'Ticker invalide (2 à 8 lettres).', taken: 'Ce ticker existe déjà.', in_clan: 'Tu es déjà dans un clan.', full: 'Ce clan est complet.', too_many: 'Tu as déjà 3 demandes en cours.', amount: 'Montant invalide.' },
+      pendn: (n) => n + ' recrue(s) en attente de leurs 3 jours (+5 000 $ chacune)', label: (n) => '🛡️ Coin du clan ' + n, joinbtn: 'Rejoindre', badge: '🏆 Clan de la semaine', closed: '🔒 Fermé', lockb: '🔒 Fermer le clan aux demandes', unlockb: '🔓 Rouvrir le clan aux demandes', lockx: 'Clan fermé : personne ne peut demander à entrer.',
+      e: { cash: 'Pas assez d\'argent.', name: 'Nom invalide (3 à 20 caractères).', name_taken: 'Ce nom est déjà pris.', ticker: 'Ticker invalide (2 à 8 lettres).', taken: 'Ce ticker existe déjà.', in_clan: 'Tu es déjà dans un clan.', full: 'Ce clan est complet.', too_many: 'Tu as déjà 3 demandes en cours.', amount: 'Montant invalide.', closed: 'Ce clan est fermé aux demandes.' },
     },
     en: {
       card: '🛡️ Clans · BETA', cardx: 'Create or join a clan: a pot shared every Monday', cardm: (n, p) => n + ' members · pot ' + p, see: 'See',
@@ -33,8 +33,8 @@
       donate: '💝 Give to the pot', amount: 'Amount in $', leave: 'Leave the clan', leaveq: 'Sure? You lose your share of the week.',
       reqs: 'Requests', accept: 'Accept', refuse: 'Refuse', newp: 'new player', nreq: 'No request.',
       chiefh: '👑 Pot management', take: 'Take for me', give: 'Give to', lock7: 'Lock 7 d (+10%)', lock30: 'Lock 30 d (+50%)', locks: 'Locked', until: 'until', kick: 'Remove',
-      pendn: (n) => n + ' recruit(s) waiting for their 3 days (+$5,000 each)', label: (n) => '🛡️ Coin of the clan ' + n, joinbtn: 'Join', badge: '🏆 Clan of the week',
-      e: { cash: 'Not enough money.', name: 'Invalid name (3 to 20 characters).', name_taken: 'This name is taken.', ticker: 'Invalid ticker (2 to 8 letters).', taken: 'This ticker already exists.', in_clan: 'You are already in a clan.', full: 'This clan is full.', too_many: 'You already have 3 pending requests.', amount: 'Invalid amount.' },
+      pendn: (n) => n + ' recruit(s) waiting for their 3 days (+$5,000 each)', label: (n) => '🛡️ Coin of the clan ' + n, joinbtn: 'Join', badge: '🏆 Clan of the week', closed: '🔒 Closed', lockb: '🔒 Close the clan to requests', unlockb: '🔓 Open the clan to requests again', lockx: 'Closed clan: nobody can ask to join.',
+      e: { cash: 'Not enough money.', name: 'Invalid name (3 to 20 characters).', name_taken: 'This name is taken.', ticker: 'Invalid ticker (2 to 8 letters).', taken: 'This ticker already exists.', in_clan: 'You are already in a clan.', full: 'This clan is full.', too_many: 'You already have 3 pending requests.', amount: 'Invalid amount.', closed: 'This clan is closed to requests.' },
     },
   };
   const lg = () => { let l = 'en'; try { l = LANG; } catch (e) {} return l === 'fr' ? 'fr' : 'en'; };
@@ -64,6 +64,8 @@
     + '#clm input{width:100%;box-sizing:border-box;padding:11px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:inherit;font-size:15px;margin:4px 0 10px}'
     + '#clm .cgrid{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px}#clm #cfe{max-height:188px;overflow-y:auto;padding:2px}#clm .cgrid button{width:40px;height:40px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);font-size:20px;cursor:pointer}'
     + '#clm .cgrid button[aria-pressed=true]{border:2px solid #ffd43b}#clm .big{font-size:24px;font-weight:900}#clm ul{margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.5;opacity:.9}';
+  // 17 oct 2026: the game's toast must show above the clan page (it was hidden behind it, so errors were invisible)
+  st.textContent += '#toast,.toast{z-index:10001!important}';
   document.head.appendChild(st);
 
   // the card at the top of the Leaders tab (under the card of the contests of the week)
@@ -116,7 +118,7 @@
     const T = L(), asked = (r.asked || []).map(Number);
     let h = '<div class="cc"><ul>' + T.how.map((x) => '<li>' + ec(x) + '</li>').join('') + '</ul></div>';
     h += '<div class="cc"><b>' + ec(T.list) + '</b>' + ((r.list || []).length ? (r.list || []).map((c) => '<div class="crow" data-v="' + c.id + '" style="cursor:pointer"><span style="display:flex;align-items:center;gap:8px;min-width:0"><span style="font-size:22px">' + ec(c.emoji) + '</span><span style="min-width:0"><b style="display:block">' + ec(c.name) + (c.badge ? ' 🏆' : '') + '</b><small>' + ec(T.members(c.n)) + ' · $' + ec(c.ticker || '') + ' · ' + usd(c.mcap) + '</small></span></span>'
-      + (asked.includes(Number(c.id)) ? '<span style="font-size:12px;opacity:.7">' + ec(T.asked) + '</span>' : Number(c.n) >= 20 ? '<span style="font-size:12px;opacity:.7">' + ec(T.full) + '</span>' : '<button class="cb" data-ask="' + c.id + '">' + ec(T.ask) + '</button>') + '</div>').join('') : '<small style="margin-top:6px">' + ec(T.none) + '</small>') + '</div>';
+      + (asked.includes(Number(c.id)) ? '<span style="font-size:12px;opacity:.7">' + ec(T.asked) + '</span>' : c.locked ? '<span style="font-size:12px;opacity:.7">' + ec(T.closed) + '</span>' : Number(c.n) >= 20 ? '<span style="font-size:12px;opacity:.7">' + ec(T.full) + '</span>' : '<button class="cb" data-ask="' + c.id + '">' + ec(T.ask) + '</button>') + '</div>').join('') : '<small style="margin-top:6px">' + ec(T.none) + '</small>') + '</div>';
     h += '<button class="btn" id="clnew" style="width:100%">' + ec(T.create) + '</button><div id="clform"></div>';
     b.innerHTML = h;
     b.querySelectorAll('[data-ask]').forEach((x) => x.onclick = async (e) => { e.stopPropagation(); hp(); x.disabled = true; const q = await call('clanrequest', { id: Number(x.dataset.ask) }); if (!q || !q.ok) { x.disabled = false; tst(errOf(q)); return; } tst('✅ ' + T.asked); show(); });
@@ -152,7 +154,7 @@
     let h = '<div class="cc"><div class="ch">' + logo(c) + '<div style="min-width:0"><b style="font-size:18px">' + ec(c.name) + '</b><small>' + (c.badge ? ec(T.badge) + ' · ' : '') + ec(T.rank(c.rank)) + ' · ' + ec(T.members(c.n)) + '</small></div></div></div>';
     if (c.coin) h += '<div class="cc"><div class="crow"><span>' + ec(T.coin) + ' <b>$' + ec(c.coin.ticker) + '</b><small>' + px(c.coin.price) + ' · ' + usd(c.coin.mcap) + '</small></span><button class="cb g" id="clsc">' + ec(T.seecoin) + '</button></div></div>';
     h += '<div class="cc"><b>' + ec(T.mem) + '</b>' + (c.members || []).map((m) => '<div class="crow"><span>' + ec(m.name) + (m.role === 'chief' ? ' <small style="display:inline">' + ec(T.chief) + '</small>' : '') + '</span></div>').join('') + '</div>';
-    if (!inClan && !c.closed) h += r.asked ? '<p style="text-align:center;opacity:.8">' + ec(T.asked) + '</p>' : c.n >= 20 ? '<p style="text-align:center;opacity:.8">' + ec(T.full) + '</p>' : '<button class="btn" id="clask" style="width:100%">🛡️ ' + ec(T.ask) + '</button>';
+    if (!inClan && !c.closed) h += c.locked ? '<p style="text-align:center;opacity:.8">' + ec(T.lockx) + '</p>' : r.asked ? '<p style="text-align:center;opacity:.8">' + ec(T.asked) + '</p>' : c.n >= 20 ? '<p style="text-align:center;opacity:.8">' + ec(T.full) + '</p>' : '<button class="btn" id="clask" style="width:100%">🛡️ ' + ec(T.ask) + '</button>';
     b.innerHTML = h;
     const sc = b.querySelector('#clsc'); if (sc) sc.onclick = () => { hp(); closeIt(); try { openCoin(c.coin.id); } catch (e) {} };
     const a = b.querySelector('#clask'); if (a) a.onclick = async () => { hp(); a.disabled = true; const q = await call('clanrequest', { id }); if (!q || !q.ok) { a.disabled = false; tst(errOf(q)); return; } tst('✅ ' + T.asked); show(id); };
@@ -169,7 +171,7 @@
       + (Number(c.pending_new) ? '<small style="margin-top:6px">' + ec(T.pendn(c.pending_new)) + '</small>' : '') + '</div>';
     h += '<button class="btn" id="clinv" style="width:100%;margin:0 0 12px">' + ec(T.invite) + '</button>';
     if (chief) {
-      h += '<div class="cc"><b>' + ec(T.reqs) + '</b>' + ((c.requests || []).length ? c.requests.map((q) => '<div class="crow"><span>' + ec(q.name) + (q.new ? ' <small style="display:inline;color:#4ff0b7">' + ec(T.newp) + '</small>' : '') + '</span><span style="display:flex;gap:6px"><button class="cb" data-acc="' + q.uid + '">' + ec(T.accept) + '</button><button class="cb g" data-ref="' + q.uid + '">' + ec(T.refuse) + '</button></span></div>').join('') : '<small style="margin-top:4px">' + ec(T.nreq) + '</small>') + '</div>';
+      h += '<div class="cc"><b>' + ec(T.reqs) + '</b>' + ((c.requests || []).length ? c.requests.map((q) => '<div class="crow"><span>' + ec(q.name) + (q.new ? ' <small style="display:inline;color:#4ff0b7">' + ec(T.newp) + '</small>' : '') + '</span><span style="display:flex;gap:6px"><button class="cb" data-acc="' + q.uid + '">' + ec(T.accept) + '</button><button class="cb g" data-ref="' + q.uid + '">' + ec(T.refuse) + '</button></span></div>').join('') : '<small style="margin-top:4px">' + ec(T.nreq) + '</small>') + (c.locked ? '<small style="margin-top:6px">' + ec(T.lockx) + '</small>' : '') + '<button class="cb g" id="cllock" style="margin-top:8px">' + ec(c.locked ? T.unlockb : T.lockb) + '</button></div>';
       h += '<div class="cc"><b>' + ec(T.chiefh) + '</b><small>' + ec(T.amount) + '</small><input id="clamt" type="number" inputmode="decimal" min="1" placeholder="1000">'
         + '<div style="display:flex;flex-wrap:wrap;gap:6px"><button class="cb" data-pot="take">' + ec(T.take) + '</button><button class="cb g" data-pot="lock7">' + ec(T.lock7) + '</button><button class="cb g" data-pot="lock30">' + ec(T.lock30) + '</button></div>'
         + '<small style="margin-top:8px">' + ec(T.give) + '</small><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">' + (c.members || []).filter((m) => m.role !== 'chief').map((m) => '<button class="cb g" data-give="' + m.uid + '">' + ec(m.name) + '</button>').join('') + '</div></div>';
@@ -183,6 +185,7 @@
     const act = async (a, body, btn) => { hp(); if (btn) btn.disabled = true; const q = await call(a, body); if (btn) btn.disabled = false; if (!q || !q.ok) { hp('err'); tst(errOf(q)); return false; } hp('ok'); show(); return true; };
     b.querySelectorAll('[data-acc]').forEach((x) => x.onclick = () => act('clanaccept', { uid: Number(x.dataset.acc) }, x));
     b.querySelectorAll('[data-ref]').forEach((x) => x.onclick = () => act('clanrefuse', { uid: Number(x.dataset.ref) }, x));
+    const lk = b.querySelector('#cllock'); if (lk) lk.onclick = () => act('clanlockjoin', {}, lk);
     b.querySelectorAll('[data-kick]').forEach((x) => x.onclick = () => act('clankick', { uid: Number(x.dataset.kick) }, x));
     const amt = () => Number((b.querySelector('#clamt') || {}).value || 0);
     b.querySelectorAll('[data-pot]').forEach((x) => x.onclick = () => { const p = x.dataset.pot; act(p === 'take' ? 'clantake' : 'clanlock', { amount: amt(), days: p === 'lock30' ? 30 : 7 }, x); });
