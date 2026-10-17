@@ -324,3 +324,24 @@ async function burnFill(el) {
   };
 }
 new MutationObserver(() => { document.querySelectorAll('#burnb:not([data-done])').forEach(burnFill); }).observe(document.body, { childList: true, subtree: true });
+// 17 oct 2026 (Jeremy): on the page of his own coin, the creator is pushed to get his friends to buy it: he earns his creator fee
+// on every buy and every sale, and each buy raises the price. Empty #crsh in the page (data-t = ticker, data-f = creator fee %).
+const CRSHT = {
+  fr: { h: (t) => '📣 Fais acheter $' + t + ' à tes amis', s: (t, f) => 'Tu touches ' + f + ' % sur chaque achat et chaque vente de $' + t + ', et chaque achat fait monter le prix.', b: '📤 Partager mon coin', m: (t) => '🚀 Achète mon coin $' + t + ' sur Meme Coin Tycoon avant qu\'il décolle !' },
+  id: { h: (t) => '📣 Ajak temanmu membeli $' + t, s: (t, f) => 'Kamu dapat ' + f + '% dari setiap beli dan jual $' + t + ', dan setiap pembelian menaikkan harga.', b: '📤 Bagikan koinku', m: (t) => '🚀 Beli koinku $' + t + ' di Meme Coin Tycoon sebelum terbang!' },
+  ar: { h: (t) => '📣 اجعل أصدقاءك يشترون $' + t, s: (t, f) => 'تحصل على ' + f + '% من كل شراء وبيع لـ $' + t + '، وكل شراء يرفع السعر.', b: '📤 شارك عملتي', m: (t) => '🚀 اشترِ عملتي $' + t + ' في Meme Coin Tycoon قبل أن تنطلق!' },
+  en: { h: (t) => '📣 Get your friends to buy $' + t, s: (t, f) => 'You earn ' + f + '% on every buy and every sale of $' + t + ', and every buy pushes the price up.', b: '📤 Share my coin', m: (t) => '🚀 Buy my coin $' + t + ' on Meme Coin Tycoon before it takes off!' },
+};
+function crshFill(el) {
+  el.dataset.done = '1';
+  const T = CRSHT[LANG] || CRSHT.en, tk = el.dataset.t || '', f = String(el.dataset.f || '0.5').replace('.', LANG === 'fr' ? ',' : '.');
+  el.style.cssText = 'margin:12px 0 0;padding:12px 14px;border-radius:14px;border:1px solid #ffd43b;background:rgba(255,212,59,.08);text-align:center';
+  el.innerHTML = '<b style="display:block;font-size:15px">' + T.h(tk) + '</b><small style="display:block;opacity:.85;margin:4px 0 10px;line-height:1.4">' + T.s(tk, f) + '</small><button class="btn" type="button" style="width:100%">' + T.b + '</button>';
+  el.querySelector('button').onclick = () => {
+    try { haptic(); } catch (e) {}
+    let url = 'https://t.me/Memecointycoonbot?startapp=c_' + el.dataset.id;
+    try { if (COIN && COIN.share) url = COIN.share; } catch (e) {}
+    try { shareGame('coin', Number(el.dataset.id), url, T.m(tk)); } catch (e) { try { tw.openTelegramLink('https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(T.m(tk))); } catch (x) {} }
+  };
+}
+new MutationObserver(() => { document.querySelectorAll('#crsh:not([data-done])').forEach(crshFill); }).observe(document.body, { childList: true, subtree: true });
