@@ -1,7 +1,7 @@
 // 17 oct 2026 (Jeremy): Meme Coin Monsters, HIDDEN inside Meme Coin Tycoon, by @jeremstyke. Only Jeremy and Doriane see it
 // (the server answers 'hidden' to everyone else, ds_config mmon_allow). A monster is born from a coin held for $100 or more
 // (one egg a day per coin), and is tied to its coin: its strength follows the coin's price over 24 h, grows with the coins held,
-// and a pump news boosts it. Feed it with its coin, merge two of the same stage, fight other players' teams (automatic, 3 a day).
+// and a pump news boosts it. Feeding it BUYS its coin with cash (the price goes up, the coins are eaten), merge two of the same stage, fight other players' teams (automatic, 3 a day).
 // Data: Supabase function mct-ton, actions mon_state, mon_hatch, mon_feed, mon_merge, mon_fight (SQL mmon_api).
 (() => {
   const ALLOW = [7057960224, 8844440894];
@@ -10,12 +10,12 @@
   const TX = {
     fr: { t: 'Meme Coin Monsters', sec: 'Mode secret · visible par toi seulement', eggs: 'Œufs du jour', egg: (t) => 'Faire éclore $' + t, starter: '🥚 Œuf de départ', noegg: 'Garde au moins 100 $ d\'un coin pour recevoir son œuf (1 par jour et par coin).', team: 'Mes monstres', none: 'Aucun monstre pour l\'instant.',
       fight: (n, m) => '⚔️ Combattre (' + n + '/' + m + ')', nofight: 'Plus de combat aujourd\'hui, reviens demain !', feed: '🍖 Nourrir', merge: '🔀 Fusionner', lvl: 'Niv.', power: 'Force', base: 'base', coin24: 'coin 24 h', held: 'coins gardés', news: 'news',
-      feedq: 'Combien de $ de ce coin lui donner ? (les coins sont mangés)', fed: '🍖 Miam ! +XP', merged: '🔀 Fusion réussie : stade supérieur !', hatched: '🐣 Un monstre est né !', win: '🏆 Victoire !', lose: '😵 Défaite…', vs: 'contre', rew: (v) => '+' + v + ' $', board: 'Classement de la semaine', pts: 'pts',
-      types: ['🔥 Feu', '🌿 Plante', '💧 Eau'], hint: '🔥 bat 🌿 · 🌿 bat 💧 · 💧 bat 🔥', err: 'Erreur, réessaie.', nocoin: 'Tu n\'as plus de ce coin.', max: 'Niveau max : fusionne-le avec un autre du même stade.', close: 'Fermer', go: 'Voir le coin', coinbtn: (t) => '🥚 Le monstre de $' + t, pfbtn: '🐉 Mes monstres' },
+      feedq: 'Combien de $ dépenser pour le nourrir ? Ça achète du coin (le prix monte) et ton monstre le mange.', fed: '🍖 Miam ! +XP et le coin monte 📈', merged: '🔀 Fusion réussie : stade supérieur !', hatched: '🐣 Un monstre est né !', win: '🏆 Victoire !', lose: '😵 Défaite…', vs: 'contre', rew: (v) => '+' + v + ' $', board: 'Classement de la semaine', pts: 'pts',
+      types: ['🔥 Feu', '🌿 Plante', '💧 Eau'], hint: '🔥 bat 🌿 · 🌿 bat 💧 · 💧 bat 🔥', err: 'Erreur, réessaie.', nocoin: 'Pas assez d\'argent pour ce repas.', max: 'Niveau max : fusionne-le avec un autre du même stade.', close: 'Fermer', go: 'Voir le coin', coinbtn: (t) => '🥚 Le monstre de $' + t, pfbtn: '🐉 Mes monstres' },
     en: { t: 'Meme Coin Monsters', sec: 'Secret mode · only you can see it', eggs: 'Today\'s eggs', egg: (t) => 'Hatch $' + t, starter: '🥚 Starter egg', noegg: 'Hold at least $100 of a coin to get its egg (1 a day per coin).', team: 'My monsters', none: 'No monster yet.',
       fight: (n, m) => '⚔️ Fight (' + n + '/' + m + ')', nofight: 'No fight left today, come back tomorrow!', feed: '🍖 Feed', merge: '🔀 Merge', lvl: 'Lv.', power: 'Power', base: 'base', coin24: 'coin 24 h', held: 'coins held', news: 'news',
-      feedq: 'How many $ of this coin to feed it? (the coins are eaten)', fed: '🍖 Yum! +XP', merged: '🔀 Merged: next stage!', hatched: '🐣 A monster is born!', win: '🏆 Victory!', lose: '😵 Defeat…', vs: 'vs', rew: (v) => '+$' + v, board: 'This week\'s ranking', pts: 'pts',
-      types: ['🔥 Fire', '🌿 Plant', '💧 Water'], hint: '🔥 beats 🌿 · 🌿 beats 💧 · 💧 beats 🔥', err: 'Error, try again.', nocoin: 'You have none of this coin left.', max: 'Max level: merge it with another of the same stage.', close: 'Close', go: 'See the coin', coinbtn: (t) => '🥚 The monster of $' + t, pfbtn: '🐉 My monsters' },
+      feedq: 'How many $ to spend to feed it? It buys the coin (the price goes up) and your monster eats it.', fed: '🍖 Yum! +XP and the coin goes up 📈', merged: '🔀 Merged: next stage!', hatched: '🐣 A monster is born!', win: '🏆 Victory!', lose: '😵 Defeat…', vs: 'vs', rew: (v) => '+$' + v, board: 'This week\'s ranking', pts: 'pts',
+      types: ['🔥 Fire', '🌿 Plant', '💧 Water'], hint: '🔥 beats 🌿 · 🌿 beats 💧 · 💧 beats 🔥', err: 'Error, try again.', nocoin: 'Not enough cash for this meal.', max: 'Max level: merge it with another of the same stage.', close: 'Close', go: 'See the coin', coinbtn: (t) => '🥚 The monster of $' + t, pfbtn: '🐉 My monsters' },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l === 'fr' ? 'fr' : 'en']; };
   const hp = (k) => { try { haptic(k); } catch (e) {} };
@@ -25,7 +25,9 @@
   let S = null, busy = false;
 
   const st = document.createElement('style');
-  st.textContent = '#monpf,#monco{display:block;width:100%;margin:8px 0;box-sizing:border-box;padding:11px 14px;border:1px dashed rgba(255,212,59,.6);border-radius:14px;background:rgba(255,212,59,.08);color:#ffd43b;font-weight:700;font-size:14px;cursor:pointer}'
+  st.textContent = '#monpf{display:block;width:100%;margin:8px 0;box-sizing:border-box;padding:11px 14px;border:1px dashed rgba(255,212,59,.6);border-radius:14px;background:rgba(255,212,59,.08);color:#ffd43b;font-weight:700;font-size:14px;cursor:pointer}'
+    // 17 oct 2026 (Jeremy): on the coin page, very small, right under the news effect
+    + '#monco{display:inline-block;width:auto;margin:4px 0 0;padding:2px 9px;border:1px dashed rgba(255,212,59,.5);border-radius:999px;background:rgba(255,212,59,.06);color:#ffd43b;font-weight:600;font-size:11px;line-height:1.5;cursor:pointer}'
     + '#monm{position:fixed;inset:0;z-index:10050;background:rgba(5,3,15,.8);display:flex;align-items:flex-end;justify-content:center}'
     + '#monm .mb{width:100%;max-width:520px;max-height:92vh;overflow:auto;background:var(--night,#140c2c);border:1px solid var(--line,rgba(255,255,255,.12));border-radius:22px 22px 0 0;padding:16px 16px calc(20px + env(safe-area-inset-bottom))}'
     + '#monm .mt{display:flex;align-items:center;justify-content:space-between}#monm .mt b{font-size:18px}#monm .mx{background:none;border:0;color:inherit;font-size:22px;opacity:.7;padding:4px 8px;cursor:pointer}'
@@ -49,11 +51,11 @@
     let c = null; try { c = COIN && COIN.coin; } catch (e) {}
     const sh = document.getElementById('sheet');
     if (!c || !c.id || !sh || sh.querySelector('#monco')) return;
-    const host = sh.firstElementChild || sh;
     const b = document.createElement('button'); b.id = 'monco'; b.type = 'button';
     b.textContent = L().coinbtn(c.ticker || '?');
     b.onclick = () => { hp(); show(Number(c.id)); };
-    host.insertBefore(b, host.children[1] || null);
+    const bd = sh.querySelector('.badges.hint'); // under the "News effect" line
+    if (bd) bd.parentNode.insertBefore(b, bd.nextSibling); else { const host = sh.firstElementChild || sh; host.insertBefore(b, host.children[1] || null); }
   }
   // 17 oct 2026 (Jeremy): also a line "🐉 My monsters" on the player's own profile (under the nickname / photo buttons)
   function addProfileBtn() {
@@ -106,12 +108,13 @@
   async function act(body, okMsg) {
     if (busy) return; busy = true; hp();
     const r = await call(body); busy = false;
-    if (r && r.ok) { tst(okMsg); S = r.state || S; render(); return r; }
-    const T = L(); tst(r && r.error === 'no_coin' ? T.nocoin : r && r.error === 'max' ? T.max : T.err); return null;
+    if (r && r.ok) { tst(okMsg); if (r.cash != null) { try { setCash(r.cash); } catch (e) {} } S = r.state || S; render(); return r; }
+    const T = L(); tst(r && (r.error === 'no_coin' || r.error === 'cash') ? T.nocoin : r && r.error === 'max' ? T.max : T.err); return null;
   }
   function feed(id) {
     const T = L(), m = S.mons.find((x) => x.id === id); if (!m) return;
-    const v = prompt(T.feedq + '\n($' + m.tk + ': ' + Math.round(m.held) + ' $)', String(Math.min(100, Math.floor(m.held))));
+    let cash = 0; try { cash = Number(ME.cash) || 0; } catch (e) {}
+    const v = prompt(T.feedq + '\n(💵 ' + Math.floor(cash) + ' $)', String(Math.max(1, Math.min(100, Math.floor(cash)))));
     const usd = Number(String(v || '').replace(',', '.'));
     if (usd > 0) act({ action: 'mon_feed', id, usd }, T.fed);
   }
