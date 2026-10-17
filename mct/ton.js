@@ -285,3 +285,40 @@ async function usdtBar() {
 // the screens are rebuilt each time they open: add the banner as soon as its place appears
 new MutationObserver(() => { tonPlace(); }).observe(document.body, { childList: true, subtree: true });
 tonPlace();
+// 17 oct 2026 (Jeremy): burn a coin from its page: +5 % on the price for every holder, once per coin per 24 h,
+// 50 Stars (or free once a week with Premium). Announced on @memecointycoon. The page has an empty #burnb (data-id = the coin).
+const BURNT = {
+  fr: { go: 'Brûler', free: 'gratuit (Premium)', wait: (h) => 'Déjà brûlé aujourd\'hui · prochain brûlage dans ' + h + ' h', prem: '💎 Gratuit 1 fois par semaine avec Premium', x: 'Détruit 5 % des coins en circulation : le prix monte de 5 % pour tous ceux qui en ont.', done: '🔥 Coin brûlé : +5 % !', paid: '🔥 Paiement reçu, le coin brûle…', err: 'Problème, réessaie.' },
+  id: { go: 'Bakar', free: 'gratis (Premium)', wait: (h) => 'Sudah dibakar hari ini · berikutnya dalam ' + h + ' jam', prem: '💎 Gratis 1x seminggu dengan Premium', x: 'Menghancurkan 5% koin yang beredar: harga naik 5% untuk semua pemegang.', done: '🔥 Koin dibakar: +5%!', paid: '🔥 Pembayaran diterima, koin dibakar…', err: 'Ada masalah, coba lagi.' },
+  ar: { go: 'احرق', free: 'مجانًا (بريميوم)', wait: (h) => 'تم الحرق اليوم · الحرق التالي خلال ' + h + ' س', prem: '💎 مجانًا مرة أسبوعيًا مع بريميوم', x: 'يدمّر 5% من العملات المتداولة: يرتفع السعر 5% لكل من يملكها.', done: '🔥 تم حرق العملة: +5%!', paid: '🔥 تم الدفع، العملة تحترق…', err: 'حدثت مشكلة، حاول مجددًا.' },
+  en: { go: 'Burn', free: 'free (Premium)', wait: (h) => 'Already burned today · next burn in ' + h + ' h', prem: '💎 Free once a week with Premium', x: 'Destroys 5% of the coins in circulation: the price rises 5% for every holder.', done: '🔥 Coin burned: +5%!', paid: '🔥 Payment received, the coin is burning…', err: 'Something went wrong, try again.' },
+};
+(() => {
+  const st = document.createElement('style');
+  st.textContent = '#burnb{margin-top:10px}#burnb .brn{border:0;border-radius:999px;padding:9px 16px;font-weight:800;font-size:14px;color:#fff;background:linear-gradient(90deg,#ff5a1f,#ff9a3c);box-shadow:0 4px 14px rgba(255,90,31,.35);cursor:pointer}'
+    + '#burnb .brn:disabled{opacity:.6}#burnb .brn.off{display:inline-block;background:rgba(255,120,40,.12);color:#ff9a4d;box-shadow:none;font-size:12.5px;padding:6px 12px}#burnb small{display:block;font-size:11.5px;opacity:.75;margin-top:5px}';
+  document.head.appendChild(st);
+})();
+async function burnFill(el) {
+  el.dataset.done = '1';
+  const id = Number(el.dataset.id), T = BURNT[LANG] || BURNT.en;
+  let i = null; try { i = await tonCall({ action: 'burn_info', id }); } catch (e) {}
+  if (!i || !i.ok) { el.innerHTML = ''; return; }
+  if (i.next_at) { const h = Math.max(1, Math.ceil((Date.parse(i.next_at) - Date.now()) / 36e5)); el.innerHTML = '<span class="brn off">🔥 ' + T.wait(h) + '</span>'; return; }
+  el.innerHTML = '<button class="brn" type="button">🔥 ' + T.go + ' +5 % · ' + (i.free ? T.free : i.stars + ' ⭐') + '</button><small>' + T.x + (i.free || i.prem ? '' : '<br>' + T.prem) + '</small>';
+  const b = el.querySelector('button');
+  b.onclick = async () => {
+    try { haptic(); } catch (e) {}
+    b.disabled = true;
+    let r = null; try { r = await tonCall({ action: 'burn', id, lang: LANG }); } catch (e) {}
+    const again = () => { try { openCoin(id); } catch (e) {} };
+    if (r && r.ok && r.link) {
+      try { tw.openInvoice(r.link, (s) => { if (s === 'paid') { try { toast(T.paid); } catch (e) {} setTimeout(again, 2500); } else b.disabled = false; }); } catch (e) { b.disabled = false; }
+      return;
+    }
+    if (r && r.ok) { try { toast(T.done); } catch (e) {} again(); return; }
+    b.disabled = false;
+    try { toast(r && r.error === 'wait' ? T.wait(Math.max(1, Math.ceil((Date.parse(r.next_at) - Date.now()) / 36e5))) : T.err); } catch (e) {}
+  };
+}
+new MutationObserver(() => { document.querySelectorAll('#burnb:not([data-done])').forEach(burnFill); }).observe(document.body, { childList: true, subtree: true });
