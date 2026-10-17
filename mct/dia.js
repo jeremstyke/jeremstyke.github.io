@@ -1,4 +1,4 @@
-// 16 oct 2026 (Jeremy): the diamond inside Meme Coin Tycoon. A small 💎 at the top, next to the FAQ: tap it and earn real USDT,
+// 16 oct 2026 (Jeremy): the diamond inside Meme Coin Tycoon. A small 💎 at the top, next to the FAQ: tap it and earn real TON,
 // kept in the diamond until the player taps "Add to my balance" (16 oct 2026: not automatic any more), then paid every Monday from $0.10.
 // The rate changes every day (3,500 to 10,000 taps per $0.01) and is announced every morning on @memecointycoon.
 // +10 % for subscribers of @memecointycoon and +10 % for subscribers of @jeremstyke. A weekly contest of the best tappers.
@@ -6,35 +6,35 @@
 (() => {
   const TX = {
     id: {
-      t: 'Berlian', mine: 'Di berlianku', claim: (v) => '➕ Tambahkan ' + v + ' ke saldoku', claim0: '➕ Tambahkan ke saldoku', solde: (v) => '👛 Saldo USDT-ku: ' + v, added: (v) => '✅ ' + v + ' ditambahkan ke saldomu', none: 'Belum ada apa-apa di berlianmu, terus ketuk!', today: 'Hari ini', taps: 'ketukan', rate: (n) => 'Kurs hari ini: ' + n + ' ketukan = $0.01',
+      t: 'Berlian', mine: 'Di berlianku', claim: (v) => '➕ Tambahkan ' + v + ' ke saldoku', claim0: '➕ Tambahkan ke saldoku', solde: (v) => '👛 Saldo TON-ku: ' + v, added: (v) => '✅ ' + v + ' ditambahkan ke saldomu', none: 'Belum ada apa-apa di berlianmu, terus ketuk!', today: 'Hari ini', taps: 'ketukan', rate: (n) => 'Kurs hari ini: ' + n + ' ketukan = $0.01',
       lead: 'Ketuk berliannya, ia pindah setiap 50 ketukan', pay: 'Penghasilanmu menunggu di berlian: ketuk "Tambahkan ke saldoku" untuk mengambilnya. Saldomu dibayar setiap Senin mulai $0.10 ke dompet TON-mu.',
       check: 'Cek singkat: ketuk 💎', wrong: 'Salah, coba lagi', paused: 'Berlian sedang istirahat sampai bulan depan. Sampai jumpa!', off: 'Berlian ditutup untuk sementara.',
       bon: 'Bonus pelanggan', bm: '📢 Channel Meme Coin Tycoon', bj: '📢 Channel Jeremstyke', join: 'Gabung', on: '✅ +10 %', recheck: '🔄 Sudah gabung',
-      con: '🏆 Kontes berlian minggu ini', ends: 'Berakhir dalam', you: 'kamu', nobody: 'Belum ada: jadilah yang pertama!', rank: 'Peringkatmu', prizes: 'Hadiah Senin dalam USDT',
+      con: '🏆 Kontes berlian minggu ini', ends: 'Berakhir dalam', you: 'kamu', nobody: 'Belum ada: jadilah yang pertama!', rank: 'Peringkatmu', prizes: 'Hadiah Senin dalam TON',
       wal: '👛 Dompet TON-ku', err: 'Masalah koneksi, coba lagi.', close: 'Tutup',
     },
     en: {
-      t: 'Diamond', mine: 'In my diamond', claim: (v) => '➕ Add ' + v + ' to my balance', claim0: '➕ Add to my balance', solde: (v) => '👛 My USDT balance: ' + v, added: (v) => '✅ ' + v + ' added to your balance', none: 'Nothing in your diamond yet, keep tapping!', today: 'Today', taps: 'taps', rate: (n) => 'Rate of the day: ' + n + ' taps = $0.01',
+      t: 'Diamond', mine: 'In my diamond', claim: (v) => '➕ Add ' + v + ' to my balance', claim0: '➕ Add to my balance', solde: (v) => '👛 My TON balance: ' + v, added: (v) => '✅ ' + v + ' added to your balance', none: 'Nothing in your diamond yet, keep tapping!', today: 'Today', taps: 'taps', rate: (n) => 'Rate of the day: ' + n + ' taps = $0.01',
       lead: 'Tap the diamond, it moves every 50 taps', pay: 'Your earnings wait in the diamond: tap "Add to my balance" to get them. Your balance is paid every Monday from $0.10 to your TON wallet.',
       check: 'Quick check: tap the 💎', wrong: 'Wrong one, try again', paused: 'The diamond is resting until next month. Come back soon!', off: 'The diamond is closed for now.',
       bon: 'Subscriber bonus', bm: '📢 Meme Coin Tycoon channel', bj: '📢 Jeremstyke channel', join: 'Join', on: '✅ +10 %', recheck: '🔄 I joined',
-      con: '🏆 Diamond contest of the week', ends: 'Ends in', you: 'you', nobody: 'Nobody yet: be the first!', rank: 'Your rank', prizes: 'Monday prizes in USDT',
+      con: '🏆 Diamond contest of the week', ends: 'Ends in', you: 'you', nobody: 'Nobody yet: be the first!', rank: 'Your rank', prizes: 'Monday prizes in TON',
       wal: '👛 My TON wallet', err: 'Connection problem, try again.', close: 'Close',
     },
     fr: {
-      t: 'Diamant', mine: 'Dans mon diamant', claim: (v) => '➕ Ajouter ' + v + ' à mon solde', claim0: '➕ Ajouter à mon solde', solde: (v) => '👛 Mon solde USDT : ' + v, added: (v) => '✅ ' + v + ' ajouté à ton solde', none: 'Rien dans ton diamant pour l\'instant, continue de taper !', today: 'Aujourd\'hui', taps: 'tapes', rate: (n) => 'Taux du jour : ' + n + ' tapes = 0,01 $',
+      t: 'Diamant', mine: 'Dans mon diamant', claim: (v) => '➕ Ajouter ' + v + ' à mon solde', claim0: '➕ Ajouter à mon solde', solde: (v) => '👛 Mon solde TON : ' + v, added: (v) => '✅ ' + v + ' ajouté à ton solde', none: 'Rien dans ton diamant pour l\'instant, continue de taper !', today: 'Aujourd\'hui', taps: 'tapes', rate: (n) => 'Taux du jour : ' + n + ' tapes = 0,01 $',
       lead: 'Tape le diamant, il bouge toutes les 50 tapes', pay: 'Tes gains restent dans le diamant : appuie sur "Ajouter à mon solde" pour les récupérer. Ton solde est payé chaque lundi dès 0,10 $ sur ton portefeuille TON.',
       check: 'Petite vérification : touche le 💎', wrong: 'Pas le bon, réessaie', paused: 'Le diamant se repose jusqu\'au mois prochain. Reviens bientôt !', off: 'Le diamant est fermé pour le moment.',
       bon: 'Bonus abonné', bm: '📢 Chaîne Meme Coin Tycoon', bj: '📢 Chaîne Jeremstyke', join: 'S\'abonner', on: '✅ +10 %', recheck: '🔄 Je suis abonné',
-      con: '🏆 Concours du diamant de la semaine', ends: 'Fin dans', you: 'toi', nobody: 'Personne pour l\'instant : sois le premier !', rank: 'Ton rang', prizes: 'Gains du lundi en USDT',
+      con: '🏆 Concours du diamant de la semaine', ends: 'Fin dans', you: 'toi', nobody: 'Personne pour l\'instant : sois le premier !', rank: 'Ton rang', prizes: 'Gains du lundi en TON',
       wal: '👛 Mon portefeuille TON', err: 'Problème de connexion, réessaie.', close: 'Fermer',
     },
     ar: {
-      t: 'الماسة', mine: 'في ماستي', claim: (v) => '➕ أضف ' + v + ' إلى رصيدي', claim0: '➕ أضف إلى رصيدي', solde: (v) => '👛 رصيد USDT: ' + v, added: (v) => '✅ أُضيف ' + v + ' إلى رصيدك', none: 'لا شيء في ماستك بعد، واصل الضغط!', today: 'اليوم', taps: 'ضغطة', rate: (n) => 'سعر اليوم: ' + n + ' ضغطة = ‎0.01 $',
+      t: 'الماسة', mine: 'في ماستي', claim: (v) => '➕ أضف ' + v + ' إلى رصيدي', claim0: '➕ أضف إلى رصيدي', solde: (v) => '👛 رصيد TON: ' + v, added: (v) => '✅ أُضيف ' + v + ' إلى رصيدك', none: 'لا شيء في ماستك بعد، واصل الضغط!', today: 'اليوم', taps: 'ضغطة', rate: (n) => 'سعر اليوم: ' + n + ' ضغطة = ‎0.01 $',
       lead: 'اضغط على الماسة، تتحرك كل 50 ضغطة', pay: 'أرباحك تبقى في الماسة: اضغط "أضف إلى رصيدي" لاستلامها. يُدفع رصيدك كل يوم اثنين ابتداءً من ‎0.10 $ إلى محفظة TON.',
       check: 'تحقق سريع: اضغط على 💎', wrong: 'ليست هي، حاول مرة أخرى', paused: 'الماسة في استراحة حتى الشهر القادم. عُد قريبًا!', off: 'الماسة مغلقة حاليًا.',
       bon: 'مكافأة المشترك', bm: '📢 قناة Meme Coin Tycoon', bj: '📢 قناة Jeremstyke', join: 'اشترك', on: '✅ ‎+10 %', recheck: '🔄 اشتركت',
-      con: '🏆 مسابقة الماسة لهذا الأسبوع', ends: 'تنتهي خلال', you: 'أنت', nobody: 'لا أحد بعد: كن الأول!', rank: 'ترتيبك', prizes: 'جوائز يوم الاثنين بعملة USDT',
+      con: '🏆 مسابقة الماسة لهذا الأسبوع', ends: 'تنتهي خلال', you: 'أنت', nobody: 'لا أحد بعد: كن الأول!', rank: 'ترتيبك', prizes: 'جوائز يوم الاثنين بعملة TON',
       wal: '👛 محفظة TON', err: 'مشكلة في الاتصال، حاول مرة أخرى.', close: 'إغلاق',
     },
   };
