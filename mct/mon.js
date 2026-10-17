@@ -34,7 +34,9 @@
     + '#monm .ms{font-size:12px;opacity:.6;margin:0 0 12px}#monm h4{margin:14px 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;opacity:.7}'
     + '#monm .eggs{display:flex;gap:8px;flex-wrap:wrap}#monm .eg{border:1px dashed rgba(255,212,59,.6);background:rgba(255,212,59,.08);color:inherit;border-radius:14px;padding:10px 12px;font-size:14px;cursor:pointer}'
     + '#monm .mc{border:1px solid var(--line,rgba(255,255,255,.12));border-radius:16px;padding:12px;margin:0 0 10px;background:rgba(255,255,255,.03)}'
-    + '#monm .mh{display:flex;align-items:center;gap:10px}#monm .mav{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:30px;flex:none}'
+    + '#monm .mh{display:flex;align-items:center;gap:10px}#monm .mav{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:28px;flex:none;box-shadow:inset 0 -4px 0 rgba(0,0,0,.25),inset 0 3px 0 rgba(255,255,255,.25),0 0 0 3px #ffd43b,0 4px 14px rgba(0,0,0,.4);animation:mspin 4s ease-in-out infinite}'
+    // 17 oct 2026 (Jeremy): the monster is a round coin that spins, like the coins of the game
+    + '@keyframes mspin{0%{transform:rotateY(0)}35%{transform:rotateY(360deg)}100%{transform:rotateY(360deg)}}'
     + '#monm .mn{flex:1;min-width:0}#monm .mn b{font-size:16px}#monm .mn small{display:block;opacity:.7;font-size:12px}#monm .mp{text-align:right}#monm .mp b{font-size:20px;color:#ffd43b}#monm .mp small{display:block;font-size:11px;opacity:.6}'
     + '#monm .chips{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 0}#monm .chips span{font-size:11px;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.07)}#monm .up{color:#7dff6b}#monm .dn{color:#ff6b81}'
     + '#monm .xb{height:6px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;margin:8px 0 0}#monm .xb i{display:block;height:100%;background:linear-gradient(90deg,#ffb300,#ffd43b)}'
@@ -78,7 +80,7 @@
     if (b.ch) chips.push('<span class="' + (b.ch > 0 ? 'up' : 'dn') + '">📈 ' + T.coin24 + ' ' + pc(b.ch) + '</span>');
     if (b.heldb > 0) chips.push('<span class="up">💎 ' + T.held + ' +' + Math.round(b.heldb * 100) + ' %</span>');
     if (b.news) chips.push('<span class="up">🚀 ' + T.news + ' +20 %</span>');
-    return '<div class="mc"><div class="mh"><div class="mav" style="background:' + ec(m.color) + '33;border:1px solid ' + ec(m.color) + '88">' + ec(m.emoji) + '</div>'
+    return '<div class="mc"><div class="mh"><div class="mav" style="background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.55),' + ec(m.color) + ' 45%,' + ec(m.color) + ')">' + ec(m.emoji) + '</div>'
       + '<div class="mn"><b>$' + ec(m.tk) + ' ' + '⭐'.repeat(m.stage) + '</b><small>' + T.lvl + ' ' + m.lvl + '/10 · ' + ec(m.name || '') + '</small></div>'
       + '<div class="mp"><b>' + m.epower + '</b><small>' + T.power + '</small></div></div>'
       + '<div class="chips">' + chips.join('') + '</div>'
