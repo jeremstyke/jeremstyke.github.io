@@ -51,7 +51,7 @@
     + '#pfm .phead{display:flex;align-items:center;gap:14px;margin:4px 0 14px}#pfm .phead h2{margin:0;font-size:21px;word-break:break-word}#pfm .phead small{display:block;opacity:.75;font-size:13px}'
     + '#pfm .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px}#pfm .pst{background:rgba(255,255,255,.04);border:1px solid var(--line,rgba(255,255,255,.12));border-radius:14px;padding:10px 12px}#pfm .pst small{display:block;opacity:.7;font-size:12px}#pfm .pst b{font-size:17px}'
     + '#pfm .pc{border:1px solid var(--line,rgba(255,255,255,.12));border-radius:16px;padding:12px 14px;margin:0 0 12px;background:rgba(255,255,255,.03)}#pfm .pl{font-size:12px;opacity:.7;text-transform:uppercase;letter-spacing:.04em;margin:0 0 8px}'
-    + '#pfm .pbd{display:flex;flex-wrap:wrap;gap:6px}#pfm .pbd span,.pbd .pbp{background:rgba(255,212,59,.12);border:1px solid rgba(255,212,59,.35);border-radius:999px;padding:5px 10px;font-size:13px;font-weight:700}.pbd .pbp{color:#ffd43b;font-family:inherit;cursor:pointer;margin:0;width:auto}'
+    + '#pfm .pbd{display:flex;flex-wrap:wrap;gap:6px}#pfm .pbd span,.pbd .pbp{background:rgba(255,212,59,.12);border:1px solid rgba(255,212,59,.35);border-radius:999px;padding:5px 10px;font-size:13px;font-weight:700}.pbd .pbp{color:#ffd43b;font-family:inherit;cursor:pointer;margin:0;width:auto}#pfm .phpb{display:inline-block;margin:3px 0 4px;padding:3px 10px;border:0;border-radius:999px;background:linear-gradient(135deg,#ffd43b,#f59f00);color:#1a0638;font-family:inherit;font-size:12px;font-weight:900;cursor:pointer;width:auto}#pfm .pprem > img,#pfm .pprem > span{box-shadow:0 0 0 3px #ffd43b}'
     + '#pfm .pco{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:0;border-bottom:1px solid rgba(255,255,255,.06);background:none;color:inherit;padding:8px 0;font-size:14px}#pfm .pco:last-child{border-bottom:0}'
     + '#pfm .prow{display:flex;justify-content:space-between;font-size:14px;padding:5px 0}#pfm .ped{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px}#pfm .ped button{margin:0;padding:10px 6px;font-size:14px}'
     + '#pfm input{width:100%;box-sizing:border-box;border-radius:12px;border:1px solid var(--line,rgba(255,255,255,.2));background:rgba(255,255,255,.06);color:inherit;padding:11px 12px;font-size:15px;margin:0 0 8px}'
@@ -94,7 +94,9 @@
     const b = document.getElementById('pfb'); if (!b) return;
     const T = L();
     const stat = (k, v) => '<div class="pst"><small>' + ec(T[k]) + '</small><b>' + ec(v) + '</b></div>';
-    let h = '<div class="phead">' + av(p, 64) + '<div><h2>' + ec(p.name) + '</h2><small>' + (p.dev ? '👨‍💻 ' + ec(T.dev) : p.ai ? '🤖 AI' : p.rank ? '🏆 #' + p.rank + ' / ' + nf(p.total) : '') + '</small><small>' + ec(T.since) + ' ' + ec(day(p.since)) + '</small></div></div>';
+    // 17 oct 2026: a Premium player shows it at the top of his profile (💎 after the name, a gold Premium tag that opens the offer)
+    const prem = (p.badges || []).includes('supporter');
+    let h = '<div class="phead' + (prem ? ' pprem' : '') + '">' + av(p, 64) + '<div><h2>' + ec(p.name) + (prem ? ' 💎' : '') + '</h2>' + (prem ? '<button type="button" class="pbp phpb">💎 Premium</button>' : '') + '<small>' + (p.dev ? '👨‍💻 ' + ec(T.dev) : p.ai ? '🤖 AI' : p.rank ? '🏆 #' + p.rank + ' / ' + nf(p.total) : '') + '</small><small>' + ec(T.since) + ' ' + ec(day(p.since)) + '</small></div></div>';
     if (p.me) {
       h += (p.nick_pending ? '<p class="pnote">' + ec(T.pendN(p.nick_pending)) + '</p>' : '') + (p.photo_pending ? '<p class="pnote">' + ec(T.pendP) + '</p>' : '');
       h += '<div class="ped"><button class="btn ghost" id="pfn">' + ec(T.nick) + '</button><button class="btn ghost" id="pfp">' + ec(T.photo) + '</button></div><div id="pfedit"></div>';
