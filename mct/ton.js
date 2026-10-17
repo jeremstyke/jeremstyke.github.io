@@ -149,7 +149,7 @@ function earnAllHtml(s) {
   return `<div style="margin:0 0 14px;padding:12px 14px;border-radius:16px;border:1px solid rgba(125,255,107,.45);background:rgba(125,255,107,.07)"><b style="display:block;font-size:15px;margin-bottom:4px">${T.h}</b>`
     + row(T.f) + row(T.d) + row(T.cg + K(1, 0.5, 0.25) + T.wk) + row(T.cp + K(1, 0.5, 0.25) + T.wk) + row(T.cd + K(1, 0.5, 0.25) + T.wk, T.cb, 'tonrk')
     // 17 oct 2026: already subscribed: it says so (no button)
-    + (s.sub ? row('✅ ' + T.js.replace(/^📣 /, '') + ' · ' + T.ok) : row(T.js, T.jb, 'tonjs')) + row(T.ds, T.db, 'tonds') + row(T.pay) + `</div>`;
+    + (s.sub ? row('✅ ' + T.js.replace(/^📣 /, '') + ' · ' + T.ok) : row(T.js, T.jb, 'tonjs')) + row(T.pay) + `</div>`;
 }
 async function tonPage() {
   if (!tw || !tw.initData) return;
@@ -179,7 +179,7 @@ async function tonPage() {
   d.querySelector('#tonsi').onclick = () => { close(); invite(); };
   const trk = d.querySelector('#tonrk'); if (trk) trk.onclick = () => { try { haptic(); } catch (x) {} close(); if (typeof window.mctRanks === 'function') window.mctRanks(); };
   const tjs = d.querySelector('#tonjs'); if (tjs) tjs.onclick = () => { try { haptic(); } catch (x) {} gameOpen('https://t.me/jeremstyke'); };
-  d.querySelector('#tonds').onclick = () => { try { haptic(); } catch (x) {} gameOpen('https://t.me/DailyScorefootbot/play?startapp=src_mctsheet'); };
+  if (d.querySelector('#tonds')) d.querySelector('#tonds').onclick = () => { try { haptic(); } catch (x) {} gameOpen('https://t.me/DailyScorefootbot/play?startapp=src_mctsheet'); };
   const myLink = 'https://t.me/Memecointycoonbot?startapp=r_' + ((tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.id) || '');
   const myMsg = LANG === 'fr' ? '🚀 Joue à Meme Coin Tycoon avec moi sur Telegram : on gagne 500 $ chacun pour commencer 👉 ' + myLink + '\n\n(Pas encore Telegram ? Installe-le, puis reclique sur ce lien.)' : '🚀 Play Meme Coin Tycoon with me on Telegram: we both get $500 to start 👉 ' + myLink + '\n\n(No Telegram yet? Install it, then tap this link again.)';
   d.querySelector('#tonwa').onclick = () => { try { haptic(); } catch (x) {} outWa(myMsg); };
@@ -267,10 +267,10 @@ async function usdtBar() {
   }
   const u = tonM((TONLAST && TONLAST.usd) || 0.05);
   const ways = ({
-    fr: '👥 Parrainage : ' + u + ' par ami qui joue 3 jours (+ 500 $ chacun dans le jeu) · 💎 Tape le diamant : de l\'argent à chaque tape · 🏆 Concours des gains : 1 $, 0,50 $ et 0,25 $ · 🏆 Concours des parrains : 1 $, 0,50 $ et 0,25 $ · 🏆 Concours du diamant : 1 $, 0,50 $ et 0,25 $ (les 3 payés chaque lundi) · 📣 Abonné à @jeremstyke : 0,01 $ tous les 30 jours · ⚽ Daily Score : un prono foot gratuit par jour · 💸 Payé en USDT chaque lundi',
-    id: '👥 Undang teman: ' + u + ' per teman yang bermain 3 hari (+ $500 di game) · 💎 Ketuk berlian: uang di setiap ketukan · 🏆 Kontes keuntungan: $1, $0.50, $0.25 · 🏆 Kontes pengundang: $1, $0.50, $0.25 · 🏆 Kontes berlian: $1, $0.50, $0.25 (dibayar tiap Senin) · 📣 Langganan @jeremstyke: $0.01 tiap 30 hari · ⚽ Daily Score: satu prediksi bola gratis tiap hari · 💸 Dibayar dalam USDT tiap Senin',
-    ar: '👥 الإحالة: ' + u + ' عن كل صديق يلعب 3 أيام (+ 500 $ في اللعبة) · 💎 اضغط على الماسة: مال مع كل ضغطة · 🏆 مسابقة الأرباح: 1 $ و0.50 $ و0.25 $ · 🏆 مسابقة الداعين: 1 $ و0.50 $ و0.25 $ · 🏆 مسابقة الماسة: 1 $ و0.50 $ و0.25 $ (تُدفع كل اثنين) · 📣 اشترك في @jeremstyke: 0.01 $ كل 30 يومًا · ⚽ Daily Score: توقع كرة قدم مجاني كل يوم · 💸 الدفع بعملة USDT كل اثنين',
-  })[LANG] || '👥 Referral: ' + u + ' per friend who plays 3 days (+ $500 each in the game) · 💎 Tap the diamond: money on every tap · 🏆 Gains contest: $1, $0.50 and $0.25 · 🏆 Sponsor contest: $1, $0.50 and $0.25 · 🏆 Diamond contest: $1, $0.50 and $0.25 (all 3 paid every Monday) · 📣 Subscribed to @jeremstyke: $0.01 every 30 days · ⚽ Daily Score: one free football prediction a day · 💸 Paid in USDT every Monday';
+    fr: '👥 Parrainage : ' + u + ' par ami qui joue 3 jours (+ 500 $ chacun dans le jeu) · 💎 Tape le diamant : de l\'argent à chaque tape · 🏆 Concours des gains : 1 $, 0,50 $ et 0,25 $ · 🏆 Concours des parrains : 1 $, 0,50 $ et 0,25 $ · 🏆 Concours du diamant : 1 $, 0,50 $ et 0,25 $ (les 3 payés chaque lundi) · 📣 Abonné à @jeremstyke : 0,01 $ tous les 30 jours · 💸 Payé en USDT chaque lundi',
+    id: '👥 Undang teman: ' + u + ' per teman yang bermain 3 hari (+ $500 di game) · 💎 Ketuk berlian: uang di setiap ketukan · 🏆 Kontes keuntungan: $1, $0.50, $0.25 · 🏆 Kontes pengundang: $1, $0.50, $0.25 · 🏆 Kontes berlian: $1, $0.50, $0.25 (dibayar tiap Senin) · 📣 Langganan @jeremstyke: $0.01 tiap 30 hari · 💸 Dibayar dalam USDT tiap Senin',
+    ar: '👥 الإحالة: ' + u + ' عن كل صديق يلعب 3 أيام (+ 500 $ في اللعبة) · 💎 اضغط على الماسة: مال مع كل ضغطة · 🏆 مسابقة الأرباح: 1 $ و0.50 $ و0.25 $ · 🏆 مسابقة الداعين: 1 $ و0.50 $ و0.25 $ · 🏆 مسابقة الماسة: 1 $ و0.50 $ و0.25 $ (تُدفع كل اثنين) · 📣 اشترك في @jeremstyke: 0.01 $ كل 30 يومًا · 💸 الدفع بعملة USDT كل اثنين',
+  })[LANG] || '👥 Referral: ' + u + ' per friend who plays 3 days (+ $500 each in the game) · 💎 Tap the diamond: money on every tap · 🏆 Gains contest: $1, $0.50 and $0.25 · 🏆 Sponsor contest: $1, $0.50 and $0.25 · 🏆 Diamond contest: $1, $0.50 and $0.25 (all 3 paid every Monday) · 📣 Subscribed to @jeremstyke: $0.01 every 30 days · 💸 Paid in USDT every Monday';
   const d = document.createElement('div'); d.id = 'usdtb';
   d.innerHTML = '<div class="ubi"><span style="font-size:22px">💵</span><div class="ubt"><b class="ubm"></b><span class="ubw"><span></span></span></div><span style="font-size:18px;opacity:.6">›</span></div>';
   d.querySelector('.ubm').textContent = usdtGain(); d.querySelector('.ubw span').textContent = ways;
