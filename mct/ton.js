@@ -191,7 +191,7 @@ function tonFold(b) {
   if (!document.getElementById('tonfst')) {
     const st = document.createElement('style'); st.id = 'tonfst';
     st.textContent = '#tonb{position:relative;padding-right:40px}#tonb .tonfold{position:absolute;top:6px;right:8px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);font-size:14px;line-height:1}'
-      + '#tonb.min{padding-top:6px;padding-bottom:6px}#tonb.min .who small,#tonb.min .tondia,#tonb.min .chip{display:none}#tonb.min .med{transform:scale(.8)}#tonb.min .tonfold{top:50%;margin-top:-13px}';
+      + '#tonb.min{padding-top:6px;padding-bottom:6px}#tonb.min .who small,#tonb.min .tondia,#tonb.min .chip{display:none!important}#tonb.min .med{transform:scale(.8)}#tonb.min .tonfold{top:50%;margin-top:-13px}';
     document.head.appendChild(st);
   }
   let min = false; try { min = localStorage.getItem('mct_tonb_min') === '1'; } catch (e) {}
