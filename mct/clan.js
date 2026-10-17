@@ -19,7 +19,7 @@
       donate: '💝 Donner à la cagnotte', amount: 'Montant en $', leave: 'Quitter le clan', leaveq: 'Sûr ? Tu perds ta part de la semaine.',
       reqs: 'Demandes', accept: 'Accepter', refuse: 'Refuser', newp: 'nouveau joueur', nreq: 'Aucune demande.',
       chiefh: '👑 Gestion de la cagnotte', take: 'Prendre pour moi', give: 'Donner à', lock7: 'Bloquer 7 j (+10 %)', lock30: 'Bloquer 30 j (+50 %)', locks: 'Bloqué', until: 'jusqu\'au', kick: 'Exclure',
-      pendn: (n) => n + ' recrue(s) en attente de leurs 3 jours (+5 000 $ chacune)', label: (n) => '🛡️ Coin du clan ' + n, joinbtn: 'Rejoindre', badge: '🏆 Clan de la semaine', closed: '🔒 Fermé', lockb: '🔒 Fermer le clan aux demandes', unlockb: '🔓 Rouvrir le clan aux demandes', lockx: 'Clan fermé : personne ne peut demander à entrer.',
+      pendn: (n) => n + ' recrue(s) en attente de leurs 3 jours (+5 000 $ chacune)', label: (n) => '🛡️ Coin du clan ' + n, joinbtn: 'Rejoindre', badge: '🏆 Clan de la semaine', closed: '🔒 Fermé', lockb: '🔒 Fermer le clan aux demandes', unlockb: '🔓 Rouvrir le clan aux demandes', lockx: 'Clan fermé : on n\'y entre que sur invitation, avec le lien du clan.',
       e: { cash: 'Pas assez d\'argent.', name: 'Nom invalide (3 à 20 caractères).', name_taken: 'Ce nom est déjà pris.', ticker: 'Ticker invalide (2 à 8 lettres).', taken: 'Ce ticker existe déjà.', in_clan: 'Tu es déjà dans un clan.', full: 'Ce clan est complet.', too_many: 'Tu as déjà 3 demandes en cours.', amount: 'Montant invalide.', closed: 'Ce clan est fermé aux demandes.' },
     },
     en: {
@@ -33,7 +33,7 @@
       donate: '💝 Give to the pot', amount: 'Amount in $', leave: 'Leave the clan', leaveq: 'Sure? You lose your share of the week.',
       reqs: 'Requests', accept: 'Accept', refuse: 'Refuse', newp: 'new player', nreq: 'No request.',
       chiefh: '👑 Pot management', take: 'Take for me', give: 'Give to', lock7: 'Lock 7 d (+10%)', lock30: 'Lock 30 d (+50%)', locks: 'Locked', until: 'until', kick: 'Remove',
-      pendn: (n) => n + ' recruit(s) waiting for their 3 days (+$5,000 each)', label: (n) => '🛡️ Coin of the clan ' + n, joinbtn: 'Join', badge: '🏆 Clan of the week', closed: '🔒 Closed', lockb: '🔒 Close the clan to requests', unlockb: '🔓 Open the clan to requests again', lockx: 'Closed clan: nobody can ask to join.',
+      pendn: (n) => n + ' recruit(s) waiting for their 3 days (+$5,000 each)', label: (n) => '🛡️ Coin of the clan ' + n, joinbtn: 'Join', badge: '🏆 Clan of the week', closed: '🔒 Closed', lockb: '🔒 Close the clan to requests', unlockb: '🔓 Open the clan to requests again', lockx: 'Closed clan: invitation only, with the clan link.',
       e: { cash: 'Not enough money.', name: 'Invalid name (3 to 20 characters).', name_taken: 'This name is taken.', ticker: 'Invalid ticker (2 to 8 letters).', taken: 'This ticker already exists.', in_clan: 'You are already in a clan.', full: 'This clan is full.', too_many: 'You already have 3 pending requests.', amount: 'Invalid amount.', closed: 'This clan is closed to requests.' },
     },
   };
@@ -102,6 +102,7 @@
     }
     return d.querySelector('#clb');
   }
+  let LINK = 0; // the clan of the invite link the game was opened with
   async function show(viewId) {
     const b = sheet(); b.style.cssText = 'text-align:center;padding:30px 0'; b.textContent = '⏳';
     const r = await call('clanstate'); ME = r;
@@ -154,10 +155,12 @@
     let h = '<div class="cc"><div class="ch">' + logo(c) + '<div style="min-width:0"><b style="font-size:18px">' + ec(c.name) + '</b><small>' + (c.badge ? ec(T.badge) + ' · ' : '') + ec(T.rank(c.rank)) + ' · ' + ec(T.members(c.n)) + '</small></div></div></div>';
     if (c.coin) h += '<div class="cc"><div class="crow"><span>' + ec(T.coin) + ' <b>$' + ec(c.coin.ticker) + '</b><small>' + px(c.coin.price) + ' · ' + usd(c.coin.mcap) + '</small></span><button class="cb g" id="clsc">' + ec(T.seecoin) + '</button></div></div>';
     h += '<div class="cc"><b>' + ec(T.mem) + '</b>' + (c.members || []).map((m) => '<div class="crow"><span>' + ec(m.name) + (m.role === 'chief' ? ' <small style="display:inline">' + ec(T.chief) + '</small>' : '') + '</span></div>').join('') + '</div>';
-    if (!inClan && !c.closed) h += c.locked ? '<p style="text-align:center;opacity:.8">' + ec(T.lockx) + '</p>' : r.asked ? '<p style="text-align:center;opacity:.8">' + ec(T.asked) + '</p>' : c.n >= 20 ? '<p style="text-align:center;opacity:.8">' + ec(T.full) + '</p>' : '<button class="btn" id="clask" style="width:100%">🛡️ ' + ec(T.ask) + '</button>';
+    // 17 oct 2026 (Jeremy): a closed clan only blocks the requests from the list: a player who comes with the invite link can still ask
+    const inv = LINK === id;
+    if (!inClan && !c.closed) h += c.locked && !inv ? '<p style="text-align:center;opacity:.8">' + ec(T.lockx) + '</p>' : r.asked ? '<p style="text-align:center;opacity:.8">' + ec(T.asked) + '</p>' : c.n >= 20 ? '<p style="text-align:center;opacity:.8">' + ec(T.full) + '</p>' : '<button class="btn" id="clask" style="width:100%">🛡️ ' + ec(T.ask) + '</button>';
     b.innerHTML = h;
     const sc = b.querySelector('#clsc'); if (sc) sc.onclick = () => { hp(); closeIt(); try { openCoin(c.coin.id); } catch (e) {} };
-    const a = b.querySelector('#clask'); if (a) a.onclick = async () => { hp(); a.disabled = true; const q = await call('clanrequest', { id }); if (!q || !q.ok) { a.disabled = false; tst(errOf(q)); return; } tst('✅ ' + T.asked); show(id); };
+    const a = b.querySelector('#clask'); if (a) a.onclick = async () => { hp(); a.disabled = true; const q = await call('clanrequest', { id, link: inv }); if (!q || !q.ok) { a.disabled = false; tst(errOf(q)); return; } tst('✅ ' + T.asked); show(id); };
   }
 
   // my clan
@@ -224,6 +227,6 @@
   window.mctClans = show;
   // links ?startapp=clan (the clans) and ?startapp=cl_<id> (a clan, to ask to join)
   const sp = String((window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.start_param) || '');
-  const m = /^cl_(\d+)$/.exec(sp);
+  const m = /^cl_(\d+)$/.exec(sp); if (m) LINK = Number(m[1]);
   if (sp === 'clan' || m) { let n = 0; const w = setInterval(() => { n++; let ok = false; try { ok = !!document.querySelector('nav.tb') && !!document.getElementById('view'); } catch (e) {} if (ok || n > 60) { clearInterval(w); if (ok) setTimeout(() => show(m ? m[1] : undefined), 600); } }, 250); }
 })();
