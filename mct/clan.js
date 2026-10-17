@@ -9,11 +9,11 @@
 (() => {
   const TX = {
     fr: {
-      card: '🛡️ Clans · BETA', cardx: 'Crée ou rejoins un clan : une cagnotte partagée chaque lundi', cardm: (n, p) => n + ' membres · cagnotte ' + p, see: 'Voir',
+      card: '🛡️ Clans · BETA', cardx: 'Crée ou rejoins un clan : une cagnotte partagée chaque lundi', cardm: (n, p) => n + ' membres · cagnotte ' + p, see: 'Voir', rkt: '🛡️ Classement des clans · BETA', rks: 'Chaque lundi, les 3 premiers gagnent, partagé entre leurs membres (valeur du coin du clan, 2 membres minimum)', rkp: ['20 000 $ + 10 000 $ au clan', '10 000 $', '5 000 $'], rkn: 'Aucun clan pour l\'instant : crée le premier !', rkb: '🛡️ Créer ou rejoindre un clan', rkm: (n) => n + '/20 membres',
       t: '🛡️ Clans · BETA', close: 'Fermer', err: 'Problème, réessaie.', load: '⏳',
-      how: ['💰 Le coin du clan est créé avec le clan : ses frais (achats et ventes) remplissent la cagnotte.', '👥 +5 000 $ pour le clan par nouveau joueur amené avec le lien du clan (après 3 jours de jeu), +1 000 $ par joueur du jeu qui rejoint.', '🗓️ Chaque lundi, 50 % des gains de la semaine sont partagés à parts égales entre les membres présents depuis 3 jours. Les 50 % restants vont dans la cagnotte du chef.', '🏆 Le meilleur clan de la semaine gagne 20 000 $ partagés entre ses membres, +10 000 $ dans les gains du clan et le badge 🏆.'],
+      how: ['💰 Le coin du clan est créé avec le clan : ses frais (achats et ventes) remplissent la cagnotte.', '👥 +5 000 $ pour le clan par nouveau joueur amené avec le lien du clan (après 3 jours de jeu), +1 000 $ par joueur du jeu qui rejoint.', '🗓️ Chaque lundi, 50 % des gains de la semaine sont partagés à parts égales entre les membres présents depuis 3 jours. Les 50 % restants vont dans la cagnotte du chef.', '🏆 Chaque lundi, les 3 meilleurs clans gagnent : 1er 20 000 $ partagés entre ses membres, +10 000 $ dans les gains du clan et le badge 🏆, 2e 10 000 $, 3e 5 000 $.'],
       list: 'Clans', none: 'Aucun clan pour l\'instant : crée le premier !', ask: 'Demander', asked: 'Demande envoyée', full: 'Complet', members: (n) => n + '/20',
-      create: '➕ Créer un clan · 5 000 $', name: 'Nom du clan (3 à 20 caractères)', ticker: 'Ticker du coin du clan (2 à 8 lettres)', logo: 'Logo et couleur', chainl: '⛓️ Blockchain du coin (elle prend ses frais sur chaque échange)', feel: '💸 Frais créateur du coin (ils remplissent la cagnotte du clan)', go: '🛡️ Créer mon clan',
+      create: '➕ Créer un clan · 5 000 $', name: 'Nom du clan (3 à 20 caractères)', ticker: 'Ticker du coin du clan (2 à 8 lettres)', logo: 'Logo et couleur', go: '🛡️ Créer mon clan',
       week: 'Gagné cette semaine', weekx: '50 % partagés lundi entre les membres', pot: 'Cagnotte du chef', coin: 'Coin du clan', seecoin: 'Voir le coin', rank: (r) => '#' + r + ' des clans',
       mem: 'Membres', chief: '👑 chef', wait3: '⏳ moins de 3 jours', invite: '📤 Inviter avec le lien du clan', invmsg: (n) => '🛡️ Rejoins mon clan ' + n + ' sur Meme Coin Tycoon : on partage les gains chaque lundi !',
       donate: '💝 Donner à la cagnotte', amount: 'Montant en $', leave: 'Quitter le clan', leaveq: 'Sûr ? Tu perds ta part de la semaine.',
@@ -23,11 +23,11 @@
       e: { cash: 'Pas assez d\'argent.', name: 'Nom invalide (3 à 20 caractères).', name_taken: 'Ce nom est déjà pris.', ticker: 'Ticker invalide (2 à 8 lettres).', taken: 'Ce ticker existe déjà.', in_clan: 'Tu es déjà dans un clan.', full: 'Ce clan est complet.', too_many: 'Tu as déjà 3 demandes en cours.', amount: 'Montant invalide.', closed: 'Ce clan est fermé aux demandes.' },
     },
     en: {
-      card: '🛡️ Clans · BETA', cardx: 'Create or join a clan: a pot shared every Monday', cardm: (n, p) => n + ' members · pot ' + p, see: 'See',
+      card: '🛡️ Clans · BETA', cardx: 'Create or join a clan: a pot shared every Monday', cardm: (n, p) => n + ' members · pot ' + p, see: 'See', rkt: '🛡️ Clan ranking · BETA', rks: 'Every Monday, the top 3 win, shared between their members (value of the clan coin, 2 members min)', rkp: ['$20,000 + $10,000 to the clan', '$10,000', '$5,000'], rkn: 'No clan yet: create the first one!', rkb: '🛡️ Create or join a clan', rkm: (n) => n + '/20 members',
       t: '🛡️ Clans · BETA', close: 'Close', err: 'Something went wrong, try again.', load: '⏳',
-      how: ['💰 The clan coin is created with the clan: its fees (buys and sales) fill the pot.', '👥 +$5,000 for the clan per new player brought with the clan link (after 3 days of play), +$1,000 per player of the game who joins.', '🗓️ Every Monday, 50% of the week\'s earnings are shared equally between the members present for 3 days. The other 50% go to the chief\'s pot.', '🏆 The best clan of the week wins $20,000 shared between its members, +$10,000 in the clan\'s earnings and the 🏆 badge.'],
+      how: ['💰 The clan coin is created with the clan: its fees (buys and sales) fill the pot.', '👥 +$5,000 for the clan per new player brought with the clan link (after 3 days of play), +$1,000 per player of the game who joins.', '🗓️ Every Monday, 50% of the week\'s earnings are shared equally between the members present for 3 days. The other 50% go to the chief\'s pot.', '🏆 Every Monday, the top 3 clans win: 1st $20,000 shared between its members, +$10,000 in the clan\'s earnings and the 🏆 badge, 2nd $10,000, 3rd $5,000.'],
       list: 'Clans', none: 'No clan yet: create the first one!', ask: 'Ask to join', asked: 'Request sent', full: 'Full', members: (n) => n + '/20',
-      create: '➕ Create a clan · $5,000', name: 'Clan name (3 to 20 characters)', ticker: 'Ticker of the clan coin (2 to 8 letters)', logo: 'Logo and color', chainl: '⛓️ Blockchain of the coin (it takes its fee on every trade)', feel: '💸 Creator fee of the coin (it fills the clan pot)', go: '🛡️ Create my clan',
+      create: '➕ Create a clan · $5,000', name: 'Clan name (3 to 20 characters)', ticker: 'Ticker of the clan coin (2 to 8 letters)', logo: 'Logo and color', go: '🛡️ Create my clan',
       week: 'Earned this week', weekx: '50% shared on Monday between the members', pot: 'Chief\'s pot', coin: 'Clan coin', seecoin: 'See the coin', rank: (r) => '#' + r + ' of the clans',
       mem: 'Members', chief: '👑 chief', wait3: '⏳ less than 3 days', invite: '📤 Invite with the clan link', invmsg: (n) => '🛡️ Join my clan ' + n + ' on Meme Coin Tycoon: we share the earnings every Monday!',
       donate: '💝 Give to the pot', amount: 'Amount in $', leave: 'Leave the clan', leaveq: 'Sure? You lose your share of the week.',
@@ -61,31 +61,41 @@
     + '#clm small{display:block;font-size:12.5px;opacity:.8;line-height:1.4}#clm .crow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid rgba(255,255,255,.07);font-size:14px}'
     + '#clm .crow:first-of-type{border-top:0}#clm .cb{border:0;border-radius:999px;padding:7px 12px;font-weight:800;font-size:12.5px;background:#ffd43b;color:#1a1200;cursor:pointer;white-space:nowrap}'
     + '#clm .cb.g{background:rgba(255,255,255,.1);color:inherit}#clm .cb.r{background:rgba(255,90,90,.18);color:#ff8a8a}#clm .cb:disabled{opacity:.5}'
-    + '#clm input,#clm .csel{width:100%;box-sizing:border-box;padding:11px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:inherit;font-size:15px;margin:4px 0 10px}#clm .csel option{background:#14161c;color:#fff}'
+    + '#clm input{width:100%;box-sizing:border-box;padding:11px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:inherit;font-size:15px;margin:4px 0 10px}'
     + '#clm .cgrid{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px}#clm #cfe{max-height:188px;overflow-y:auto;padding:2px}#clm .cgrid button{width:40px;height:40px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);font-size:20px;cursor:pointer}'
     + '#clm .cgrid button[aria-pressed=true]{border:2px solid #ffd43b}#clm .big{font-size:24px;font-weight:900}#clm ul{margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.5;opacity:.9}';
   // 17 oct 2026: the game's toast must show above the clan page (it was hidden behind it, so errors were invisible)
   st.textContent += '#toast,.toast{z-index:10001!important}';
   document.head.appendChild(st);
 
-  // the card at the top of the Leaders tab (under the card of the contests of the week)
+  // 18 oct 2026 (Jeremy): no big card in the Leaders tab any more: the ranking of the clans, with the prizes of the top 3 (every Monday)
   let ME = null;
   async function card() {
     let lb = false; try { lb = VIEW === 'leaders'; } catch (e) {}
     const v = document.getElementById('view'); if (!lb || !v || document.getElementById('clcard')) return;
     const h = v.querySelector('h1'); if (!h) return;
-    const T = L(), d = document.createElement('button'); d.id = 'clcard'; d.type = 'button';
-    d.style.cssText = 'display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid #4ff0b7;background:linear-gradient(135deg,rgba(79,240,183,.16),rgba(79,240,183,.03));border-radius:16px;padding:12px 14px;margin:0 0 12px;color:inherit';
-    d.innerHTML = '<span style="font-size:30px;line-height:1" class="cle">🛡️</span><span style="flex:1"><b style="display:block" class="cln">' + ec(T.card) + '</b><small style="opacity:.8" class="clx">' + ec(T.cardx) + '</small></span><span style="background:#4ff0b7;color:#06291f;font-weight:800;border-radius:10px;padding:6px 12px">' + ec(T.see) + '</span>';
-    d.onclick = () => { hp(); show(); };
+    const T = L(), d = document.createElement('div'); d.id = 'clcard';
+    d.style.cssText = 'border:1px solid rgba(79,240,183,.45);background:linear-gradient(160deg,rgba(79,240,183,.10),rgba(79,240,183,.02) 70%);border-radius:16px;padding:12px 14px;margin:0 0 12px';
+    d.innerHTML = '<b style="display:block;font-size:16px">' + ec(T.rkt) + '</b><small style="display:block;opacity:.75;font-size:12px;margin:2px 0 6px;line-height:1.35">' + ec(T.rks) + '</small><div class="clrk" style="text-align:center;padding:8px 0">⏳</div>';
     const rk = document.getElementById('rkcard');
     (rk || h).insertAdjacentElement('afterend', d);
     const r = await call('clanstate'); ME = r;
-    if (r && r.clan && document.body.contains(d)) {
-      d.querySelector('.cle').textContent = r.clan.emoji;
-      d.querySelector('.cln').textContent = r.clan.name + (r.clan.badge ? ' 🏆' : '');
-      d.querySelector('.clx').textContent = T.cardm(r.clan.n, usd(r.clan.treasury));
-    }
+    if (!document.body.contains(d)) return;
+    const box = d.querySelector('.clrk'); box.style.cssText = '';
+    const xs = ((r && r.list) || []).slice(0, 10), med = ['🏆', '🥈', '🥉'];
+    let w = 0; // the prizes go to the first 3 clans with 2 members or more
+    box.innerHTML = (xs.length ? xs.map((c, i) => {
+      const ok = Number(c.n) >= 2 && w < 3, pz = ok ? w++ : -1, mine = r.clan && Number(r.clan.id) === Number(c.id);
+      return '<div data-cl="' + c.id + '" style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:' + (i ? '1px solid rgba(255,255,255,.07)' : '0') + ';cursor:pointer' + (mine ? ';background:rgba(79,240,183,.08);border-radius:10px;padding-left:6px;padding-right:6px' : '') + '">'
+        + '<span style="width:22px;text-align:center;font-weight:800;opacity:.8;flex:none">' + (pz >= 0 ? med[pz] : (i + 1)) + '</span>'
+        + '<span style="font-size:22px;flex:none">' + ec(c.emoji) + '</span>'
+        + '<span style="flex:1;min-width:0"><b style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + ec(c.name) + (c.badge ? ' 🏆' : '') + (c.locked ? ' 🔒' : '') + '</b><small style="display:block;opacity:.7;font-size:12px">' + ec(T.rkm(c.n)) + ' · $' + ec(c.ticker || '') + '</small>'
+        + (pz >= 0 ? '<small style="display:block;color:#ffd43b;font-weight:800;font-size:12px">🎁 ' + ec(T.rkp[pz]) + '</small>' : '') + '</span>'
+        + '<b style="flex:none;font-size:13px">' + usd(c.mcap) + '</b></div>';
+    }).join('') : '<small style="display:block;opacity:.8">' + ec(T.rkn) + '</small>')
+      + '<button type="button" class="clrkb" style="width:100%;margin-top:8px;border:0;border-radius:12px;padding:10px;font-weight:800;background:#4ff0b7;color:#06291f;cursor:pointer">' + ec(r && r.clan ? r.clan.emoji + ' ' + r.clan.name : T.rkb) + '</button>';
+    box.querySelectorAll('[data-cl]').forEach((x) => x.onclick = () => { hp(); show(x.dataset.cl); });
+    box.querySelector('.clrkb').onclick = () => { hp(); show(); };
   }
   function watch() { const v = document.getElementById('view'); if (!v) return false; new MutationObserver(() => card()).observe(v, { childList: true }); card(); return true; }
   if (!watch()) { let n = 0; const w = setInterval(() => { if (watch() || ++n > 80) clearInterval(w); }, 250); }
@@ -131,19 +141,15 @@
     f.innerHTML = '<div class="cc"><small>' + ec(T.name) + '</small><input id="cfn" maxlength="20" autocomplete="off"><small>' + ec(T.ticker) + '</small><input id="cft" maxlength="8" autocomplete="off" style="text-transform:uppercase"><small>' + ec(T.logo) + '</small>'
       + '<div class="cgrid" id="cfe">' + EMO.map((e) => '<button type="button" data-e="' + e + '" aria-pressed="' + (e === emo) + '">' + e + '</button>').join('') + '</div>'
       + '<div class="cgrid" id="cfc">' + COL.map((c) => '<button type="button" data-c="' + c + '" aria-pressed="' + (c === col) + '" style="background:' + c + '"></button>').join('') + '</div>'
-      // 17 oct 2026 (Jeremy): the chief picks the blockchain and the creator fee of the clan coin, like for a normal coin
-      + '<small>' + ec(T.chainl) + '</small><select id="cfch" class="csel"><option value="0">⏳</option></select>'
-      + '<small>' + ec(T.feel) + '</small><select id="cff" class="csel">' + [2, 1.5, 1, 0.5, 0].map((x) => '<option value="' + x + '">' + String(x).replace('.', L() === TX.fr ? ',' : '.') + ' %</option>').join('') + '</select>'
       + '<button class="btn" id="cfgo" style="width:100%;margin-top:6px">' + ec(T.go) + '</button></div>';
     f.querySelectorAll('[data-e]').forEach((x) => x.onclick = () => { emo = x.dataset.e; f.querySelectorAll('[data-e]').forEach((y) => y.setAttribute('aria-pressed', y === x)); });
     f.querySelectorAll('[data-c]').forEach((x) => x.onclick = () => { col = x.dataset.c; f.querySelectorAll('[data-c]').forEach((y) => y.setAttribute('aria-pressed', y === x)); });
-    const nm = f.querySelector('#cfn'), tk = f.querySelector('#cft'), ch = f.querySelector('#cfch'), fe = f.querySelector('#cff');
-    try { api('chains').then((r) => { const xs = (r && r.list) || []; if (!xs.length) { ch.innerHTML = '<option value="0">Ethereum</option>'; return; } const d = (xs.find((x) => x.official) || xs[0]).id; ch.innerHTML = xs.map((x) => '<option value="' + x.id + '"' + (x.id === d ? ' selected' : '') + '>' + ec(x.emoji) + ' ' + ec(x.name) + ' · ' + x.fee + ' %' + (Number(x.grant_amt) > 0 ? ' · 🎁 ' + x.grant_amt + ' $' : '') + '</option>').join(''); }).catch(() => {}); } catch (e) {}
+    const nm = f.querySelector('#cfn'), tk = f.querySelector('#cft');
     nm.oninput = () => { if (!tk.dataset.t) tk.value = nm.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, 8); };
     tk.oninput = () => { tk.dataset.t = '1'; };
     f.querySelector('#cfgo').onclick = async (e) => {
       hp('medium'); const btn = e.currentTarget; btn.disabled = true;
-      const r = await call('clancreate', { name: nm.value, ticker: tk.value, emoji: emo, color: col, chain: Number(ch.value) || 0, cfee: Number(fe.value) });
+      const r = await call('clancreate', { name: nm.value, ticker: tk.value, emoji: emo, color: col });
       btn.disabled = false;
       if (!r || !r.ok) { hp('err'); tst(errOf(r)); return; }
       hp('ok'); show();
