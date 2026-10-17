@@ -229,28 +229,34 @@ async function tonPlace() {
 // 17 oct 2026 (Jeremy): like Daily Score, a bar at the bottom (above the menu) with the player's real earnings and everything he can earn,
 // and a link to Daily Score (where predictions also pay real USDT). A tap on the bar opens the USDT page.
 let USDTB = null;
+// 17 oct 2026 (18h20): smaller, one line like Daily Score: my gains + everything that can be earned (scrolling), and 2 small buttons
+const usdtGain = () => TONLAST && TONLAST.ok ? (LANG === 'fr' ? 'Mes gains : ' : 'My earnings: ') + tonM(Number(TONLAST.balance || 0) + Number(TONLAST.paid || 0) + Number(TONLAST.waiting || 0)) : tonL().bh.replace(/^💵 /, '');
 async function usdtBar() {
   if (!tw || !tw.initData) return;
-  if (USDTB && document.body.contains(USDTB)) { const m = USDTB.querySelector('.ubm'); if (m && TONLAST && TONLAST.ok && m.textContent !== tonMini(TONLAST)) m.textContent = tonMini(TONLAST); return; }
+  if (USDTB && document.body.contains(USDTB)) { const m = USDTB.querySelector('.ubm'); if (m && m.textContent !== usdtGain()) m.textContent = usdtGain(); return; }
   if (USDTB === false) return;
   USDTB = false;
   if (!(await tonOn())) { USDTB = null; return; }
   if (!document.getElementById('usdtst')) {
     const st = document.createElement('style'); st.id = 'usdtst';
-    st.textContent = 'body.ub{padding-bottom:calc(var(--tab) + 24px + 100px + env(safe-area-inset-bottom))!important}'
-      + '#usdtb{position:fixed;left:0;right:0;bottom:calc(var(--tab) + env(safe-area-inset-bottom));z-index:9;max-width:520px;margin:0 auto;padding:0 10px 6px;box-sizing:border-box}'
-      + '#usdtb .ubi{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:14px;border:1px solid rgba(125,255,107,.5);background:linear-gradient(135deg,rgba(24,40,30,.96),rgba(18,22,44,.96));box-shadow:0 -4px 18px rgba(0,0,0,.35);cursor:pointer}'
-      + '#usdtb .ubt{flex:1;min-width:0}#usdtb b{display:block;font-size:13px}#usdtb small{display:block;font-size:11px;opacity:.85;line-height:1.35}'
-      + '#usdtb .ubds{flex:none;border:0;border-radius:999px;padding:7px 10px;font-weight:800;font-size:12px;background:#7dff6b;color:#10200f;cursor:pointer}';
+    st.textContent = 'body.ub{padding-bottom:calc(var(--tab) + 24px + 52px + env(safe-area-inset-bottom))!important}'
+      + '#usdtb{position:fixed;left:0;right:0;bottom:calc(var(--tab) + env(safe-area-inset-bottom));z-index:9;max-width:520px;margin:0 auto;padding:0 10px 5px;box-sizing:border-box}'
+      + '#usdtb .ubi{display:flex;align-items:center;gap:8px;height:42px;padding:0 6px 0 10px;border-radius:12px;border:1px solid rgba(125,255,107,.5);background:linear-gradient(135deg,rgba(24,40,30,.97),rgba(18,22,44,.97));box-shadow:0 -4px 14px rgba(0,0,0,.3);cursor:pointer;box-sizing:border-box}'
+      + '#usdtb .ubt{flex:1;min-width:0;overflow:hidden}#usdtb b{display:block;font-size:12px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
+      + '#usdtb .ubw{display:block;overflow:hidden;white-space:nowrap;font-size:11px;line-height:1.3;opacity:.85}#usdtb .ubw span{display:inline-block;padding-left:100%;animation:ubscroll 22s linear infinite}'
+      + '@keyframes ubscroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}'
+      + '#usdtb .ubx{flex:none;width:30px;height:30px;border:0;border-radius:50%;font-size:15px;background:rgba(125,255,107,.18);cursor:pointer;padding:0}';
     document.head.appendChild(st);
   }
-  const u = tonM((TONLAST && TONLAST.usd) || 0.05), fr = LANG === 'fr';
-  const ways = ({ fr: '👥 Ami ' + u + ' · 💎 Diamant · 🏆 3 concours le lundi', id: '👥 Teman ' + u + ' · 💎 Berlian · 🏆 3 kontes tiap Senin', ar: '👥 صديق ' + u + ' · 💎 الماسة · 🏆 3 مسابقات كل اثنين' })[LANG] || '👥 Friend ' + u + ' · 💎 Diamond · 🏆 3 contests on Monday';
-  // 17 oct 2026 (Jeremy): and a line to subscribe to @jeremstyke: $0.01 every 30 days while subscribed
-  const sub = ({ fr: '📣 Abonne-toi à @jeremstyke : +0,01 $ tous les 30 jours ›', id: '📣 Langganan @jeremstyke: +$0.01 tiap 30 hari ›', ar: '📣 اشترك في @jeremstyke: +0.01 $ كل 30 يومًا ›' })[LANG] || '📣 Subscribe to @jeremstyke: +$0.01 every 30 days ›';
-  const dsb = ({ fr: '⚽ Daily Score', id: '⚽ Daily Score', ar: '⚽ Daily Score' })[LANG] || '⚽ Daily Score';
+  const u = tonM((TONLAST && TONLAST.usd) || 0.05);
+  const ways = ({
+    fr: '👥 Ami qui joue 3 jours : ' + u + ' · 💎 Tape le diamant : de l\'argent à chaque tape · 🏆 3 concours : 1 $, 0,50 $ et 0,25 $ chaque lundi · 📣 Abonné à @jeremstyke : 0,01 $ tous les 30 jours · ⚽ Daily Score : tes pronos payés aussi · 💸 Payé en USDT chaque lundi',
+    id: '👥 Teman yang bermain 3 hari: ' + u + ' · 💎 Ketuk berlian: uang di setiap ketukan · 🏆 3 kontes: $1, $0.50 dan $0.25 tiap Senin · 📣 Langganan @jeremstyke: $0.01 tiap 30 hari · ⚽ Daily Score: prediksimu juga dibayar · 💸 Dibayar dalam USDT tiap Senin',
+    ar: '👥 صديق يلعب 3 أيام: ' + u + ' · 💎 اضغط على الماسة: مال مع كل ضغطة · 🏆 3 مسابقات: 1 $ و0.50 $ و0.25 $ كل اثنين · 📣 اشترك في @jeremstyke: 0.01 $ كل 30 يومًا · ⚽ Daily Score: توقعاتك مدفوعة أيضًا · 💸 الدفع بعملة USDT كل اثنين',
+  })[LANG] || '👥 Friend who plays 3 days: ' + u + ' · 💎 Tap the diamond: money on every tap · 🏆 3 contests: $1, $0.50 and $0.25 every Monday · 📣 Subscribed to @jeremstyke: $0.01 every 30 days · ⚽ Daily Score: your predictions pay too · 💸 Paid in USDT every Monday';
   const d = document.createElement('div'); d.id = 'usdtb';
-  d.innerHTML = '<div class="ubi"><span style="font-size:22px">💵</span><div class="ubt"><b>' + tonL().bh.replace(/^💵 /, '') + '</b><small class="ubm" style="font-weight:700">' + (TONLAST && TONLAST.ok ? tonMini(TONLAST) : tonL().bs) + '</small><small>' + ways + '</small><small class="ubsub" style="color:#7dff6b;font-weight:700;margin-top:2px">' + sub + '</small></div><button class="ubds" type="button">' + dsb + '</button></div>';
+  d.innerHTML = '<div class="ubi"><span style="font-size:18px">💵</span><div class="ubt"><b class="ubm"></b><span class="ubw"><span></span></span></div><button class="ubx ubsub" type="button" aria-label="@jeremstyke">📣</button><button class="ubx ubds" type="button" aria-label="Daily Score">⚽</button></div>';
+  d.querySelector('.ubm').textContent = usdtGain(); d.querySelector('.ubw span').textContent = ways;
   d.querySelector('.ubi').onclick = (e) => {
     try { haptic(); } catch (x) {}
     if (e.target && e.target.closest && e.target.closest('.ubsub')) { gameOpen('https://t.me/jeremstyke'); return; }
