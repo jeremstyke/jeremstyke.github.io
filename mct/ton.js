@@ -264,6 +264,7 @@ async function usdtBar() {
       + '#usdtb .ubt{flex:1;min-width:0;overflow:hidden}#usdtb b{display:block;font-size:14px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
       + '#usdtb .ubw{display:block;overflow:hidden;white-space:nowrap;font-size:12.5px;line-height:1.4;opacity:.9}#usdtb .ubw span{display:inline-block;padding-left:100%;animation:ubscroll 70s linear infinite}'
       + '@keyframes ubscroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}'
+      + '#diatop{display:none!important}' // 17 oct 2026: the diamond is opened from the earnings bar now
       + '#usdtb .ubx{flex:none;width:36px;height:36px;border:0;border-radius:50%;font-size:18px;background:rgba(125,255,107,.18);cursor:pointer;padding:0}';
     document.head.appendChild(st);
   }
@@ -274,10 +275,12 @@ async function usdtBar() {
     ar: '👥 الإحالة: ' + u + ' عن كل صديق يلعب 3 أيام (+ 500 $ في اللعبة) · 💎 اضغط على الماسة: مال مع كل ضغطة · 🏆 مسابقة الأرباح: 1 $ و0.50 $ و0.25 $ · 🏆 مسابقة الداعين: 1 $ و0.50 $ و0.25 $ · 🏆 مسابقة الماسة: 1 $ و0.50 $ و0.25 $ (تُدفع كل اثنين) · 📣 اشترك في @jeremstyke و@memecointycoon: 0.01 $ لكل منهما فورًا ثم كل 30 يومًا · 💸 الدفع بعملة USDT كل اثنين',
   })[LANG] || '👥 Referral: ' + u + ' per friend who plays 3 days (+ $500 each in the game) · 💎 Tap the diamond: money on every tap · 🏆 Gains contest: $1, $0.50 and $0.25 · 🏆 Sponsor contest: $1, $0.50 and $0.25 · 🏆 Diamond contest: $1, $0.50 and $0.25 (all 3 paid every Monday) · 📣 Subscribed to @jeremstyke and @memecointycoon: $0.01 each right away, then every 30 days · 💸 Paid in USDT every Monday';
   const d = document.createElement('div'); d.id = 'usdtb';
-  d.innerHTML = '<div class="ubi"><span style="font-size:22px">💵</span><div class="ubt"><b class="ubm"></b><span class="ubw"><span></span></span></div><span style="font-size:18px;opacity:.6">›</span></div>';
+  // 17 oct 2026 (Jeremy, 23h): the diamond moves from the top bar to this bar (the clans take its place at the top)
+  d.innerHTML = '<div class="ubi"><span style="font-size:22px">💵</span><div class="ubt"><b class="ubm"></b><span class="ubw"><span></span></span></div><button class="ubx ubd" type="button" aria-label="Diamond" style="background:rgba(46,230,255,.18);border:1px solid rgba(46,230,255,.5)">💎</button></div>';
   d.querySelector('.ubm').textContent = usdtGain(); d.querySelector('.ubw span').textContent = ways;
   d.querySelector('.ubi').onclick = (e) => {
     try { haptic(); } catch (x) {}
+    if (e && e.target && e.target.closest && e.target.closest('.ubd')) { const g = document.getElementById('diatop'); if (g) g.click(); return; }
     tonPage();
   };
   document.body.appendChild(d); document.body.classList.add('ub'); USDTB = d;
