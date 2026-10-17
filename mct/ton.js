@@ -239,23 +239,23 @@ async function usdtBar() {
   if (!(await tonOn())) { USDTB = null; return; }
   if (!document.getElementById('usdtst')) {
     const st = document.createElement('style'); st.id = 'usdtst';
-    st.textContent = 'body.ub{padding-bottom:calc(var(--tab) + 24px + 52px + env(safe-area-inset-bottom))!important}'
+    st.textContent = 'body.ub{padding-bottom:calc(var(--tab) + 24px + 64px + env(safe-area-inset-bottom))!important}'
       + '#usdtb{position:fixed;left:0;right:0;bottom:calc(var(--tab) + env(safe-area-inset-bottom));z-index:9;max-width:520px;margin:0 auto;padding:0 10px 5px;box-sizing:border-box}'
-      + '#usdtb .ubi{display:flex;align-items:center;gap:8px;height:42px;padding:0 6px 0 10px;border-radius:12px;border:1px solid rgba(125,255,107,.5);background:linear-gradient(135deg,rgba(24,40,30,.97),rgba(18,22,44,.97));box-shadow:0 -4px 14px rgba(0,0,0,.3);cursor:pointer;box-sizing:border-box}'
-      + '#usdtb .ubt{flex:1;min-width:0;overflow:hidden}#usdtb b{display:block;font-size:12px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
-      + '#usdtb .ubw{display:block;overflow:hidden;white-space:nowrap;font-size:11px;line-height:1.3;opacity:.85}#usdtb .ubw span{display:inline-block;padding-left:100%;animation:ubscroll 22s linear infinite}'
+      + '#usdtb .ubi{display:flex;align-items:center;gap:8px;height:54px;padding:0 8px 0 12px;border-radius:14px;border:1px solid rgba(125,255,107,.5);background:linear-gradient(135deg,rgba(24,40,30,.97),rgba(18,22,44,.97));box-shadow:0 -4px 14px rgba(0,0,0,.3);cursor:pointer;box-sizing:border-box}'
+      + '#usdtb .ubt{flex:1;min-width:0;overflow:hidden}#usdtb b{display:block;font-size:14px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
+      + '#usdtb .ubw{display:block;overflow:hidden;white-space:nowrap;font-size:12.5px;line-height:1.4;opacity:.9}#usdtb .ubw span{display:inline-block;padding-left:100%;animation:ubscroll 34s linear infinite}'
       + '@keyframes ubscroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}'
-      + '#usdtb .ubx{flex:none;width:30px;height:30px;border:0;border-radius:50%;font-size:15px;background:rgba(125,255,107,.18);cursor:pointer;padding:0}';
+      + '#usdtb .ubx{flex:none;width:36px;height:36px;border:0;border-radius:50%;font-size:18px;background:rgba(125,255,107,.18);cursor:pointer;padding:0}';
     document.head.appendChild(st);
   }
   const u = tonM((TONLAST && TONLAST.usd) || 0.05);
   const ways = ({
-    fr: '👥 Ami qui joue 3 jours : ' + u + ' · 💎 Tape le diamant : de l\'argent à chaque tape · 🏆 3 concours : 1 $, 0,50 $ et 0,25 $ chaque lundi · 📣 Abonné à @jeremstyke : 0,01 $ tous les 30 jours · ⚽ Daily Score : tes pronos payés aussi · 💸 Payé en USDT chaque lundi',
-    id: '👥 Teman yang bermain 3 hari: ' + u + ' · 💎 Ketuk berlian: uang di setiap ketukan · 🏆 3 kontes: $1, $0.50 dan $0.25 tiap Senin · 📣 Langganan @jeremstyke: $0.01 tiap 30 hari · ⚽ Daily Score: prediksimu juga dibayar · 💸 Dibayar dalam USDT tiap Senin',
-    ar: '👥 صديق يلعب 3 أيام: ' + u + ' · 💎 اضغط على الماسة: مال مع كل ضغطة · 🏆 3 مسابقات: 1 $ و0.50 $ و0.25 $ كل اثنين · 📣 اشترك في @jeremstyke: 0.01 $ كل 30 يومًا · ⚽ Daily Score: توقعاتك مدفوعة أيضًا · 💸 الدفع بعملة USDT كل اثنين',
-  })[LANG] || '👥 Friend who plays 3 days: ' + u + ' · 💎 Tap the diamond: money on every tap · 🏆 3 contests: $1, $0.50 and $0.25 every Monday · 📣 Subscribed to @jeremstyke: $0.01 every 30 days · ⚽ Daily Score: your predictions pay too · 💸 Paid in USDT every Monday';
+    fr: '👥 Ami qui joue 3 jours : ' + u + ' · 💎 Tape le diamant : de l\'argent à chaque tape · 🏆 Concours des gains : 1 $, 0,50 $ et 0,25 $ · 🏆 Concours des parrains : 1 $, 0,50 $ et 0,25 $ · 🏆 Concours du diamant : 1 $, 0,50 $ et 0,25 $ (les 3 payés chaque lundi) · 📣 Abonné à @jeremstyke : 0,01 $ tous les 30 jours · ⚽ Daily Score : tes pronos payés aussi · 💸 Payé en USDT chaque lundi',
+    id: '👥 Teman yang bermain 3 hari: ' + u + ' · 💎 Ketuk berlian: uang di setiap ketukan · 🏆 Kontes keuntungan: $1, $0.50, $0.25 · 🏆 Kontes pengundang: $1, $0.50, $0.25 · 🏆 Kontes berlian: $1, $0.50, $0.25 (dibayar tiap Senin) · 📣 Langganan @jeremstyke: $0.01 tiap 30 hari · ⚽ Daily Score: prediksimu juga dibayar · 💸 Dibayar dalam USDT tiap Senin',
+    ar: '👥 صديق يلعب 3 أيام: ' + u + ' · 💎 اضغط على الماسة: مال مع كل ضغطة · 🏆 مسابقة الأرباح: 1 $ و0.50 $ و0.25 $ · 🏆 مسابقة الداعين: 1 $ و0.50 $ و0.25 $ · 🏆 مسابقة الماسة: 1 $ و0.50 $ و0.25 $ (تُدفع كل اثنين) · 📣 اشترك في @jeremstyke: 0.01 $ كل 30 يومًا · ⚽ Daily Score: توقعاتك مدفوعة أيضًا · 💸 الدفع بعملة USDT كل اثنين',
+  })[LANG] || '👥 Friend who plays 3 days: ' + u + ' · 💎 Tap the diamond: money on every tap · 🏆 Gains contest: $1, $0.50 and $0.25 · 🏆 Sponsor contest: $1, $0.50 and $0.25 · 🏆 Diamond contest: $1, $0.50 and $0.25 (all 3 paid every Monday) · 📣 Subscribed to @jeremstyke: $0.01 every 30 days · ⚽ Daily Score: your predictions pay too · 💸 Paid in USDT every Monday';
   const d = document.createElement('div'); d.id = 'usdtb';
-  d.innerHTML = '<div class="ubi"><span style="font-size:18px">💵</span><div class="ubt"><b class="ubm"></b><span class="ubw"><span></span></span></div><button class="ubx ubsub" type="button" aria-label="@jeremstyke">📣</button><button class="ubx ubds" type="button" aria-label="Daily Score">⚽</button></div>';
+  d.innerHTML = '<div class="ubi"><span style="font-size:22px">💵</span><div class="ubt"><b class="ubm"></b><span class="ubw"><span></span></span></div><button class="ubx ubsub" type="button" aria-label="@jeremstyke">📣</button><button class="ubx ubds" type="button" aria-label="Daily Score">⚽</button></div>';
   d.querySelector('.ubm').textContent = usdtGain(); d.querySelector('.ubw span').textContent = ways;
   d.querySelector('.ubi').onclick = (e) => {
     try { haptic(); } catch (x) {}
