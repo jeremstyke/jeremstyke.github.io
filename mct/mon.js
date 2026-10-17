@@ -9,13 +9,29 @@
   if (!ALLOW.includes(me)) return;
   const TX = {
     fr: { t: 'Meme Coin Monsters', sec: 'Mode secret · visible par toi seulement', eggs: 'Œufs du jour', egg: (t) => 'Faire éclore $' + t, starter: '🥚 Œuf de départ', noegg: 'Garde au moins 100 $ d\'un coin pour recevoir son œuf (1 par jour et par coin).', team: 'Mes monstres', none: 'Aucun monstre pour l\'instant.',
-      fight: (n, m) => '⚔️ Combattre (' + n + '/' + m + ')', nofight: 'Plus de combat aujourd\'hui, reviens demain !', feed: 'Nourrir', merge: '🔀 Fusionner', lvl: 'Niv.', power: 'Force', base: 'base', coin24: 'coin 24 h', held: 'coins gardés', news: 'news',
-      feedq: 'Combien de $ dépenser pour le nourrir ? Ça achète du coin (le prix monte) et ton monstre le mange.', fed: 'Miam ! +XP et le coin monte 📈', merged: '🔀 Fusion réussie : stade supérieur !', hatched: '🐣 Un monstre est né !', win: '🏆 Victoire !', lose: '😵 Défaite…', vs: 'contre', rew: (v) => '+' + v + ' $', board: 'Classement de la semaine', pts: 'pts',
-      types: ['🔥 Feu', '🌿 Plante', '💧 Eau'], hint: '🔥 bat 🌿 · 🌿 bat 💧 · 💧 bat 🔥', err: 'Erreur, réessaie.', nocoin: 'Pas assez d\'argent pour ce repas.', max: 'Niveau max : fusionne-le avec un autre du même stade.', close: 'Fermer', go: 'Voir le coin', coinbtn: (t) => '🥚 Le monstre de $' + t, pfbtn: '🐉 Mes monstres' },
+      fight: (n, m) => '⚔️ Combattre (' + n + '/' + m + ')', nofight: 'Plus de combat aujourd\'hui, reviens demain !', feed: (t) => 'Nourrir en $' + t, meal: (u, q, t) => '1 repas : ' + u + ' $ = ' + q + ' ' + t, merge: '🔀 Fusionner', lvl: 'Niv.', power: 'Force', base: 'base', coin24: 'coin 24 h', held: 'coins gardés', news: 'news',
+      feedq: (t, px) => 'Nourrir en $' + t + ' : combien de $ veux-tu dépenser ?\n1 ' + t + ' = ' + px + ' $. Ça achète du ' + t + ' (le prix monte) et ton monstre le mange (1 $ = 1 XP).', fedq: (q, t, u) => 'Ton monstre a mangé ' + q + ' ' + t + ' (' + u + ' $) !', fed: 'Miam ! +XP et le coin monte 📈', merged: '🔀 Fusion réussie : stade supérieur !', hatched: '🐣 Un monstre est né !', win: '🏆 Victoire !', lose: '😵 Défaite…', vs: 'contre', rew: (v) => '+' + v + ' $', board: 'Classement de la semaine', pts: 'pts',
+      types: ['🔥 Feu', '🌿 Plante', '💧 Eau'], hint: '🔥 bat 🌿 · 🌿 bat 💧 · 💧 bat 🔥', err: 'Erreur, réessaie.', nocoin: 'Pas assez d\'argent pour ce repas.', max: 'Niveau max : fusionne-le avec un autre du même stade.', close: 'Fermer', go: 'Voir le coin', coinbtn: (t) => '🥚 Le monstre de $' + t, pfbtn: '🐉 Mes monstres',
+      rules: '📖 Les règles', rl: (f) => [
+        '🥚 <b>Œufs</b> : garde au moins 100 $ d\'un coin et tu reçois son œuf (1 par jour et par coin). Le monstre qui naît est celui de ce coin.',
+        '🪙 <b>Nourrir</b> : tu choisis combien de $ dépenser. Ça achète du coin (son prix monte) et ton monstre le mange : 1 $ = 1 XP. Les coins achetés sont mangés, ceux que tu avais déjà ne bougent pas.',
+        '⬆️ <b>Niveaux</b> : la barre jaune se remplit avec l\'XP, jusqu\'au niveau 10. Fusionne 2 monstres du même coin et du même stade pour passer au stade supérieur (⭐ en plus, cornes puis couronne).',
+        '💪 <b>Force</b> : elle dépend du niveau et du stade, puis de ton coin : sa hausse sur 24 h (de x0,5 à x2), les coins que tu gardes (+1 % par 100 $, jusqu\'à +50 %) et une news de pump (+20 % pendant 2 h).',
+        '⚔️ <b>Combats</b> : ' + f + ' par jour, contre l\'équipe d\'un joueur de ta force ou des monstres sauvages. 3 duels, 2 gagnés = victoire. Victoire : +300 $, défaite : +50 $.',
+        '🔥 bat 🌿, 🌿 bat 💧, 💧 bat 🔥 : le bon type donne x1,5 en duel.',
+        '🏆 <b>Classement</b> : tes victoires de la semaine donnent des points.'] },
     en: { t: 'Meme Coin Monsters', sec: 'Secret mode · only you can see it', eggs: 'Today\'s eggs', egg: (t) => 'Hatch $' + t, starter: '🥚 Starter egg', noegg: 'Hold at least $100 of a coin to get its egg (1 a day per coin).', team: 'My monsters', none: 'No monster yet.',
-      fight: (n, m) => '⚔️ Fight (' + n + '/' + m + ')', nofight: 'No fight left today, come back tomorrow!', feed: 'Feed', merge: '🔀 Merge', lvl: 'Lv.', power: 'Power', base: 'base', coin24: 'coin 24 h', held: 'coins held', news: 'news',
-      feedq: 'How many $ to spend to feed it? It buys the coin (the price goes up) and your monster eats it.', fed: 'Yum! +XP and the coin goes up 📈', merged: '🔀 Merged: next stage!', hatched: '🐣 A monster is born!', win: '🏆 Victory!', lose: '😵 Defeat…', vs: 'vs', rew: (v) => '+$' + v, board: 'This week\'s ranking', pts: 'pts',
-      types: ['🔥 Fire', '🌿 Plant', '💧 Water'], hint: '🔥 beats 🌿 · 🌿 beats 💧 · 💧 beats 🔥', err: 'Error, try again.', nocoin: 'Not enough cash for this meal.', max: 'Max level: merge it with another of the same stage.', close: 'Close', go: 'See the coin', coinbtn: (t) => '🥚 The monster of $' + t, pfbtn: '🐉 My monsters' },
+      fight: (n, m) => '⚔️ Fight (' + n + '/' + m + ')', nofight: 'No fight left today, come back tomorrow!', feed: (t) => 'Feed with $' + t, meal: (u, q, t) => '1 meal: $' + u + ' = ' + q + ' ' + t, merge: '🔀 Merge', lvl: 'Lv.', power: 'Power', base: 'base', coin24: 'coin 24 h', held: 'coins held', news: 'news',
+      feedq: (t, px) => 'Feed with $' + t + ': how many $ do you want to spend?\n1 ' + t + ' = $' + px + '. It buys ' + t + ' (the price goes up) and your monster eats it ($1 = 1 XP).', fedq: (q, t, u) => 'Your monster ate ' + q + ' ' + t + ' ($' + u + ')!', fed: 'Yum! +XP and the coin goes up 📈', merged: '🔀 Merged: next stage!', hatched: '🐣 A monster is born!', win: '🏆 Victory!', lose: '😵 Defeat…', vs: 'vs', rew: (v) => '+$' + v, board: 'This week\'s ranking', pts: 'pts',
+      types: ['🔥 Fire', '🌿 Plant', '💧 Water'], hint: '🔥 beats 🌿 · 🌿 beats 💧 · 💧 beats 🔥', err: 'Error, try again.', nocoin: 'Not enough cash for this meal.', max: 'Max level: merge it with another of the same stage.', close: 'Close', go: 'See the coin', coinbtn: (t) => '🥚 The monster of $' + t, pfbtn: '🐉 My monsters',
+      rules: '📖 Rules', rl: (f) => [
+        '🥚 <b>Eggs</b>: hold at least $100 of a coin and you get its egg (1 a day per coin). The monster that hatches is that coin\'s monster.',
+        '🪙 <b>Feeding</b>: you choose how many $ to spend. It buys the coin (its price goes up) and your monster eats it: $1 = 1 XP. The coins bought are eaten, the ones you already had stay.',
+        '⬆️ <b>Levels</b>: the yellow bar fills with XP, up to level 10. Merge 2 monsters of the same coin and stage to reach the next stage (one more ⭐, horns then a crown).',
+        '💪 <b>Power</b>: it comes from level and stage, then from your coin: its 24 h change (x0.5 to x2), the coins you hold (+1% per $100, up to +50%) and a pump news (+20% for 2 h).',
+        '⚔️ <b>Fights</b>: ' + f + ' a day, against a player team of your strength or wild monsters. 3 duels, win 2 = victory. Victory: +$300, defeat: +$50.',
+        '🔥 beats 🌿, 🌿 beats 💧, 💧 beats 🔥: the right type gives x1.5 in a duel.',
+        '🏆 <b>Ranking</b>: your wins of the week give points.'] },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l === 'fr' ? 'fr' : 'en']; };
   const hp = (k) => { try { haptic(k); } catch (e) {} };
@@ -43,10 +59,11 @@
     + '#monm .mn{flex:1;min-width:0}#monm .mn b{font-size:16px}#monm .mn small{display:block;opacity:.7;font-size:12px}#monm .mp{text-align:right}#monm .mp b{font-size:20px;color:#ffd43b}#monm .mp small{display:block;font-size:11px;opacity:.6}'
     + '#monm .chips{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 0}#monm .chips span{font-size:11px;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.07)}#monm .up{color:#7dff6b}#monm .dn{color:#ff6b81}'
     + '#monm .xb{height:6px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;margin:8px 0 0}#monm .xb i{display:block;height:100%;background:linear-gradient(90deg,#ffb300,#ffd43b)}'
-    + '#monm .ma{display:flex;gap:8px;margin:10px 0 0}#monm .ma button{flex:1;margin:0;padding:9px;font-size:13px}'
+    + '#monm .ma{display:flex;gap:8px;margin:10px 0 0}#monm .ma button{flex:1;margin:0;padding:9px;font-size:13px;font-weight:700}#monm .mml{display:block;font-size:11px;font-weight:400;opacity:.65;margin-top:2px}'
     + '#monfight{display:block;width:100%;margin:6px 0 4px;padding:14px;border:0;border-radius:14px;background:linear-gradient(135deg,#ff6b6b,#ff3d71);color:#fff;font-weight:800;font-size:16px;cursor:pointer}#monfight:disabled{opacity:.5}'
     + '#monm .duel{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px;border-radius:12px;background:rgba(255,255,255,.04);margin:6px 0;opacity:0;transform:translateY(8px);transition:all .35s}#monm .duel.on{opacity:1;transform:none}'
     + '#monm .duel .w{color:#7dff6b;font-weight:800}#monm .duel .l{color:#ff6b81;font-weight:800}#monm .res{text-align:center;font-size:22px;font-weight:800;margin:12px 0 4px}'
+    + '#monm .mrl{margin:14px 0 0;border:1px solid var(--line,rgba(255,255,255,.12));border-radius:14px;padding:10px 12px;background:rgba(255,255,255,.03)}#monm .mrl summary{font-weight:700;cursor:pointer}#monm .mrl ul{margin:8px 0 0;padding-left:4px;list-style:none}#monm .mrl li{font-size:13px;line-height:1.45;margin:0 0 8px}#monm .hint a{color:#ffd43b}'
     + '#monm .br{display:flex;justify-content:space-between;font-size:14px;padding:5px 0}#monm .br.me{color:#ffd43b;font-weight:700}#monm .hint{font-size:12px;opacity:.6;text-align:center;margin:6px 0 0}';
   document.head.appendChild(st);
 
@@ -76,6 +93,11 @@
 
   const call = async (b) => { try { return await tonCall(b); } catch (e) { return null; } };
   const pc = (v) => (v > 0 ? '+' : '') + Math.round(v) + ' %';
+  // 17 oct 2026 (Jeremy): show how many coins a meal costs and its $ value
+  const MEAL = 10;
+  const fq = (n) => (n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? (n / 1e3).toFixed(1) + 'k' : n >= 10 ? String(Math.round(n)) : n.toFixed(2)).replace('.0', '');
+  const fp = (p) => (p >= 1 ? p.toFixed(2) : p >= 0.01 ? p.toFixed(4) : p.toPrecision(3));
+  const qty = (m, usd) => (Number(m.price) > 0 ? usd / Number(m.price) : 0);
   // a monster drawn from its coin: body shape from the coin, its colour, its emoji on the belly, horns / crown grow with the stage
   function monSvg(m) {
     const k = Number(m.coin) || 1, c = String(m.color || '#ffd43b').replace(/[^#0-9a-fA-F]/g, '') || '#ffd43b', st = m.stage || 1;
@@ -115,7 +137,7 @@
       + '<div class="chips">' + chips.join('') + '</div>'
       + '<div class="xb"><i style="width:' + Math.min(100, (m.xp / m.need) * 100) + '%"></i></div>'
       // 17 oct 2026 (Jeremy): the feed button shows the coin itself, a small round coin that spins
-      + '<div class="ma"><button class="ghost" data-feed="' + m.id + '"><i class="mco" style="background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.55),' + ec(m.color) + ' 45%,' + ec(m.color) + ')">' + ec(m.emoji) + '</i>' + T.feed + '</button>' + (twin ? '<button class="ghost" data-merge="' + m.id + ',' + twin.id + '">' + T.merge + '</button>' : '') + '</div></div>';
+      + '<div class="ma"><button class="ghost" data-feed="' + m.id + '"><i class="mco" style="background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.55),' + ec(m.color) + ' 45%,' + ec(m.color) + ')">' + ec(m.emoji) + '</i>' + T.feed(ec(m.tk)) + (Number(m.price) > 0 ? '<small class="mml">' + T.meal(MEAL, fq(qty(m, MEAL)), ec(m.tk)) + '</small>' : '') + '</button>' + (twin ? '<button class="ghost" data-merge="' + m.id + ',' + twin.id + '">' + T.merge + '</button>' : '') + '</div></div>';
   }
   function render() {
     const T = L(), B = document.getElementById('monb'); if (!B || !S) return;
@@ -123,15 +145,17 @@
     if (!S.ok) { B.innerHTML = '<p style="text-align:center;opacity:.7">' + ec(T.err) + '</p>'; return; }
     const fo = (a) => FOCUS ? [...a].sort((x, y) => (y.coin === FOCUS) - (x.coin === FOCUS)) : a;
     S.mons = fo(S.mons || []); S.eggs = fo(S.eggs || []);
-    let h = '<button id="monfight"' + (S.fights > 0 && S.mons.length ? '' : ' disabled') + '>' + ec(S.fights > 0 ? T.fight(S.fights, S.fmax) : T.nofight) + '</button><div class="hint">' + T.hint + '</div><div id="mfr"></div>';
+    let h = '<button id="monfight"' + (S.fights > 0 && S.mons.length ? '' : ' disabled') + '>' + ec(S.fights > 0 ? T.fight(S.fights, S.fmax) : T.nofight) + '</button><div class="hint">' + T.hint + ' · <a href="#" id="mrlk">' + T.rules + '</a></div><div id="mfr"></div>';
     h += '<h4>' + T.eggs + '</h4><div class="eggs">';
     if (S.starter) h += '<button class="eg" data-starter="1">' + T.starter + '</button>';
     (S.eggs || []).forEach((e) => { h += '<button class="eg" data-egg="' + e.coin + '">🥚 ' + ec(e.emoji) + ' ' + ec(T.egg(e.tk)) + '</button>'; });
     if (!S.starter && !(S.eggs || []).length) h += '<small style="opacity:.6">' + T.noegg + '</small>';
     h += '</div><h4>' + T.team + ' (' + S.mons.length + ')</h4>' + (S.mons.length ? S.mons.map(card).join('') : '<small style="opacity:.6">' + T.none + '</small>');
+    h += '<details class="mrl"><summary>' + T.rules + '</summary><ul>' + T.rl(S.fmax || 3).map((x) => '<li>' + x + '</li>').join('') + '</ul></details>';
     h += '<h4>' + T.board + '</h4>' + (S.board || []).map((r, i) => '<div class="br' + (r.me ? ' me' : '') + '"><span>' + (i + 1) + '. ' + ec(r.name) + '</span><span>' + r.pts + ' ' + T.pts + '</span></div>').join('');
     B.innerHTML = h;
     B.querySelector('#monfight').onclick = fight;
+    B.querySelector('#mrlk').onclick = (e) => { e.preventDefault(); const d = B.querySelector('.mrl'); d.open = true; d.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
     B.querySelectorAll('[data-egg],[data-starter]').forEach((x) => { x.onclick = () => act({ action: 'mon_hatch', coin: x.dataset.egg, starter: x.dataset.starter || '' }, T.hatched); });
     B.querySelectorAll('[data-feed]').forEach((x) => { x.onclick = () => feed(Number(x.dataset.feed)); });
     B.querySelectorAll('[data-merge]').forEach((x) => { const [a, b] = x.dataset.merge.split(','); x.onclick = () => act({ action: 'mon_merge', a, b }, T.merged); });
@@ -146,9 +170,9 @@
   function feed(id) {
     const T = L(), m = S.mons.find((x) => x.id === id); if (!m) return;
     let cash = 0; try { cash = Number(ME.cash) || 0; } catch (e) {}
-    const v = prompt(T.feedq + '\n(💵 ' + Math.floor(cash) + ' $)', String(Math.max(1, Math.min(100, Math.floor(cash)))));
+    const v = prompt(T.feedq(m.tk, fp(Number(m.price) || 0)) + '\n(💵 ' + Math.floor(cash) + ' $)', String(Math.max(1, Math.min(MEAL, Math.floor(cash)))));
     const usd = Number(String(v || '').replace(',', '.'));
-    if (usd > 0) act({ action: 'mon_feed', id, usd }, m.emoji + ' ' + T.fed);
+    if (usd > 0) act({ action: 'mon_feed', id, usd }, m.emoji + ' ' + T.fedq(fq(qty(m, usd)), m.tk, usd) + ' ' + T.fed);
   }
   async function fight() {
     if (busy) return; busy = true; hp('medium');
