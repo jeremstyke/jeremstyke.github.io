@@ -9,9 +9,9 @@
 (() => {
   const TX = {
     fr: {
-      card: '🛡️ Clans · BETA', cardx: 'Crée ou rejoins un clan : une cagnotte partagée chaque lundi', cardm: (n, p) => n + ' membres · cagnotte ' + p, see: 'Voir', rkt: '🛡️ Classement des clans · BETA', rks: 'Chaque lundi, les 3 premiers gagnent, partagé entre leurs membres (selon la valeur du coin du clan)', rkp: ['20 000 $ + 10 000 $ au clan', '10 000 $', '5 000 $'], rkn: 'Aucun clan pour l\'instant : crée le premier !', rkb: '🛡️ Créer ou rejoindre un clan', rkm: (n) => n + '/20 membres',
+      card: '🛡️ Clans · BETA', cardx: 'Crée ou rejoins un clan : une cagnotte partagée chaque lundi', cardm: (n, p) => n + ' membres · cagnotte ' + p, see: 'Voir', tab: '🛡️ Clans', rkt: '🛡️ Classement des clans · BETA', rks: 'Chaque lundi, les 3 premiers clans (selon la valeur de leur coin) gagnent une récompense versée dans les gains du clan', rkp: ['20 000 $ au clan', '10 000 $ au clan', '5 000 $ au clan'], rkn: 'Aucun clan pour l\'instant : crée le premier !', rkb: '🛡️ Créer ou rejoindre un clan', rkm: (n) => n + '/20 membres',
       t: '🛡️ Clans · BETA', close: 'Fermer', err: 'Problème, réessaie.', load: '⏳',
-      how: ['💰 Le coin du clan est créé avec le clan : ses frais (achats et ventes) remplissent la cagnotte.', '👥 +5 000 $ pour le clan par nouveau joueur amené avec le lien du clan (après 3 jours de jeu), +1 000 $ par joueur du jeu qui rejoint.', '🗓️ Chaque lundi, 50 % des gains de la semaine sont partagés à parts égales entre les membres présents depuis 3 jours. Les 50 % restants vont dans la cagnotte du chef.', '🏆 Chaque lundi, les 3 meilleurs clans gagnent : 1er 20 000 $ partagés entre ses membres, +10 000 $ dans les gains du clan et le badge 🏆, 2e 10 000 $, 3e 5 000 $.'],
+      how: ['💰 Le coin du clan est créé avec le clan : ses frais (achats et ventes) remplissent la cagnotte.', '👥 +5 000 $ pour le clan par nouveau joueur amené avec le lien du clan (après 3 jours de jeu), +1 000 $ par joueur du jeu qui rejoint.', '🗓️ Chaque lundi, 50 % des gains de la semaine sont partagés à parts égales entre les membres présents depuis 3 jours. Les 50 % restants vont dans la cagnotte du chef.', '🏆 Chaque lundi, les 3 meilleurs clans gagnent dans les gains du clan : 1er 20 000 $ et le badge 🏆, 2e 10 000 $, 3e 5 000 $.'],
       list: 'Clans', none: 'Aucun clan pour l\'instant : crée le premier !', ask: 'Demander', asked: 'Demande envoyée', full: 'Complet', members: (n) => n + '/20',
       create: '➕ Créer un clan · 5 000 $', name: 'Nom du clan (3 à 20 caractères)', ticker: 'Ticker du coin du clan (2 à 8 lettres)', logo: 'Logo et couleur', go: '🛡️ Créer mon clan',
       week: 'Gagné cette semaine', weekx: '50 % partagés lundi entre les membres', pot: 'Cagnotte du chef', coin: 'Coin du clan', seecoin: 'Voir le coin', rank: (r) => '#' + r + ' des clans',
@@ -23,9 +23,9 @@
       e: { cash: 'Pas assez d\'argent.', name: 'Nom invalide (3 à 20 caractères).', name_taken: 'Ce nom est déjà pris.', ticker: 'Ticker invalide (2 à 8 lettres).', taken: 'Ce ticker existe déjà.', in_clan: 'Tu es déjà dans un clan.', full: 'Ce clan est complet.', too_many: 'Tu as déjà 3 demandes en cours.', amount: 'Montant invalide.', closed: 'Ce clan est fermé aux demandes.' },
     },
     en: {
-      card: '🛡️ Clans · BETA', cardx: 'Create or join a clan: a pot shared every Monday', cardm: (n, p) => n + ' members · pot ' + p, see: 'See', rkt: '🛡️ Clan ranking · BETA', rks: 'Every Monday, the top 3 win, shared between their members (by value of the clan coin)', rkp: ['$20,000 + $10,000 to the clan', '$10,000', '$5,000'], rkn: 'No clan yet: create the first one!', rkb: '🛡️ Create or join a clan', rkm: (n) => n + '/20 members',
+      card: '🛡️ Clans · BETA', cardx: 'Create or join a clan: a pot shared every Monday', cardm: (n, p) => n + ' members · pot ' + p, see: 'See', tab: '🛡️ Clans', rkt: '🛡️ Clan ranking · BETA', rks: 'Every Monday, the top 3 clans (by value of their coin) win a prize paid into the clan\'s earnings', rkp: ['$20,000 to the clan', '$10,000 to the clan', '$5,000 to the clan'], rkn: 'No clan yet: create the first one!', rkb: '🛡️ Create or join a clan', rkm: (n) => n + '/20 members',
       t: '🛡️ Clans · BETA', close: 'Close', err: 'Something went wrong, try again.', load: '⏳',
-      how: ['💰 The clan coin is created with the clan: its fees (buys and sales) fill the pot.', '👥 +$5,000 for the clan per new player brought with the clan link (after 3 days of play), +$1,000 per player of the game who joins.', '🗓️ Every Monday, 50% of the week\'s earnings are shared equally between the members present for 3 days. The other 50% go to the chief\'s pot.', '🏆 Every Monday, the top 3 clans win: 1st $20,000 shared between its members, +$10,000 in the clan\'s earnings and the 🏆 badge, 2nd $10,000, 3rd $5,000.'],
+      how: ['💰 The clan coin is created with the clan: its fees (buys and sales) fill the pot.', '👥 +$5,000 for the clan per new player brought with the clan link (after 3 days of play), +$1,000 per player of the game who joins.', '🗓️ Every Monday, 50% of the week\'s earnings are shared equally between the members present for 3 days. The other 50% go to the chief\'s pot.', '🏆 Every Monday, the top 3 clans win, in the clan\'s earnings: 1st $20,000 and the 🏆 badge, 2nd $10,000, 3rd $5,000.'],
       list: 'Clans', none: 'No clan yet: create the first one!', ask: 'Ask to join', asked: 'Request sent', full: 'Full', members: (n) => n + '/20',
       create: '➕ Create a clan · $5,000', name: 'Clan name (3 to 20 characters)', ticker: 'Ticker of the clan coin (2 to 8 letters)', logo: 'Logo and color', go: '🛡️ Create my clan',
       week: 'Earned this week', weekx: '50% shared on Monday between the members', pot: 'Chief\'s pot', coin: 'Clan coin', seecoin: 'See the coin', rank: (r) => '#' + r + ' of the clans',
@@ -66,35 +66,52 @@
     + '#clm .cgrid button[aria-pressed=true]{border:2px solid #ffd43b}#clm .big{font-size:24px;font-weight:900}#clm ul{margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.5;opacity:.9}';
   // 17 oct 2026: the game's toast must show above the clan page (it was hidden behind it, so errors were invisible)
   st.textContent += '#toast,.toast{z-index:10001!important}';
+  // 18 oct 2026: the Leaders tabs with the Clans tab: they scroll sideways instead of squeezing
+  st.textContent += '#view .seg:has([data-clb]){overflow-x:auto;scrollbar-width:none}#view .seg:has([data-clb])::-webkit-scrollbar{display:none}#view .seg:has([data-clb]) button{flex:1 0 auto;padding:8px 11px}';
   document.head.appendChild(st);
 
-  // 18 oct 2026 (Jeremy): no big card in the Leaders tab any more: the ranking of the clans, with the prizes of the top 3 (every Monday)
-  let ME = null;
-  async function card() {
+  // 18 oct 2026 (Jeremy): the clans are a tab of the Leaders page, next to the other rankings (no big card): the ranking of the
+  // clans with the prizes of the top 3 (every Monday)
+  let ME = null, CLB = false, CLD = null;
+  function card() {
     let lb = false; try { lb = VIEW === 'leaders'; } catch (e) {}
-    const v = document.getElementById('view'); if (!lb || !v || document.getElementById('clcard')) return;
-    const h = v.querySelector('h1'); if (!h) return;
-    const T = L(), d = document.createElement('div'); d.id = 'clcard';
-    d.style.cssText = 'border:1px solid rgba(79,240,183,.45);background:linear-gradient(160deg,rgba(79,240,183,.10),rgba(79,240,183,.02) 70%);border-radius:16px;padding:12px 14px;margin:0 0 12px';
-    d.innerHTML = '<b style="display:block;font-size:16px">' + ec(T.rkt) + '</b><small style="display:block;opacity:.75;font-size:12px;margin:2px 0 6px;line-height:1.35">' + ec(T.rks) + '</small><div class="clrk" style="text-align:center;padding:8px 0">⏳</div>';
-    const rk = document.getElementById('rkcard');
-    (rk || h).insertAdjacentElement('afterend', d);
-    const r = await call('clanstate'); ME = r;
-    if (!document.body.contains(d)) return;
-    const box = d.querySelector('.clrk'); box.style.cssText = '';
-    const xs = ((r && r.list) || []).slice(0, 10), med = ['🏆', '🥈', '🥉'];
-    box.innerHTML = (xs.length ? xs.map((c, i) => {
-      const pz = i < 3 ? i : -1, mine = r.clan && Number(r.clan.id) === Number(c.id);
-      return '<div data-cl="' + c.id + '" style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:' + (i ? '1px solid rgba(255,255,255,.07)' : '0') + ';cursor:pointer' + (mine ? ';background:rgba(79,240,183,.08);border-radius:10px;padding-left:6px;padding-right:6px' : '') + '">'
-        + '<span style="width:22px;text-align:center;font-weight:800;opacity:.8;flex:none">' + (pz >= 0 ? med[pz] : (i + 1)) + '</span>'
-        + '<span style="font-size:22px;flex:none">' + ec(c.emoji) + '</span>'
-        + '<span style="flex:1;min-width:0"><b style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + ec(c.name) + (c.badge ? ' 🏆' : '') + (c.locked ? ' 🔒' : '') + '</b><small style="display:block;opacity:.7;font-size:12px">' + ec(T.rkm(c.n)) + ' · $' + ec(c.ticker || '') + '</small>'
-        + (pz >= 0 ? '<small style="display:block;color:#ffd43b;font-weight:800;font-size:12px">🎁 ' + ec(T.rkp[pz]) + '</small>' : '') + '</span>'
-        + '<b style="flex:none;font-size:13px">' + usd(c.mcap) + '</b></div>';
-    }).join('') : '<small style="display:block;opacity:.8">' + ec(T.rkn) + '</small>')
-      + '<button type="button" class="clrkb" style="width:100%;margin-top:8px;border:0;border-radius:12px;padding:10px;font-weight:800;background:#4ff0b7;color:#06291f;cursor:pointer">' + ec(r && r.clan ? r.clan.emoji + ' ' + r.clan.name : T.rkb) + '</button>';
+    const v = document.getElementById('view'); if (!lb || !v) { CLB = false; return; }
+    const seg = v.querySelector('.seg'); if (!seg) return;
+    const T = L();
+    let tb = seg.querySelector('[data-clb]');
+    if (!tb) {
+      tb = document.createElement('button'); tb.type = 'button'; tb.dataset.clb = '1'; tb.textContent = T.tab;
+      seg.appendChild(tb);
+      tb.onclick = () => { hp(); CLB = true; CLD = null; draw(v, seg); };
+      // the other rankings: leave the clans
+      seg.querySelectorAll('[data-lb]').forEach((b) => b.addEventListener('click', () => { CLB = false; }, true));
+    }
+    tb.setAttribute('aria-pressed', String(CLB));
+    if (CLB) { seg.querySelectorAll('[data-lb]').forEach((b) => b.setAttribute('aria-pressed', 'false')); if (!v.querySelector('#clrk')) draw(v, seg); }
+  }
+  async function draw(v, seg) {
+    const T = L();
+    seg.querySelectorAll('[data-lb]').forEach((b) => b.setAttribute('aria-pressed', 'false'));
+    const tb = seg.querySelector('[data-clb]'); if (tb) tb.setAttribute('aria-pressed', 'true');
+    // everything under the tabs is replaced by the clan ranking
+    let n = seg.nextSibling; while (n) { const x = n.nextSibling; n.remove(); n = x; }
+    const box = document.createElement('div'); box.id = 'clrk';
+    box.innerHTML = '<p class="hint">' + ec(T.rks) + '</p><div class="skel"></div><div class="skel"></div>';
+    v.appendChild(box);
+    const r = CLD || await call('clanstate'); CLD = r; ME = r;
+    if (!CLB || !document.body.contains(box)) return;
+    const xs = ((r && r.list) || []).slice(0, 20), med = ['🥇', '🥈', '🥉'];
+    box.innerHTML = '<p class="hint">' + ec(T.rks) + '</p>' + (xs.length ? xs.map((c, i) => {
+      const mine = r.clan && Number(r.clan.id) === Number(c.id);
+      return '<button class="row' + (mine ? ' me' : '') + '" data-cl="' + c.id + '" style="width:100%"><div class="rank">' + (med[i] || i + 1) + '</div>'
+        + '<span class="med sm" style="--c:' + ec(c.color || '#4ff0b7') + '">' + ec(c.emoji) + '</span>'
+        + '<div class="who"><b>' + ec(c.name) + (c.badge ? ' 🏆' : '') + (c.locked ? ' 🔒' : '') + '</b><small>' + ec(T.rkm(c.n)) + ' · $' + ec(c.ticker || '') + '</small>'
+        + (i < 3 ? '<small style="color:var(--gold,#ffd43b);font-weight:800;white-space:normal">🎁 ' + ec(T.rkp[i]) + '</small>' : '') + '</div>'
+        + '<div class="px num"><b>' + usd(c.mcap) + '</b></div></button>';
+    }).join('') : '<div class="empty"><p class="hint">' + ec(T.rkn) + '</p></div>')
+      + '<button class="btn" id="clrkb" style="margin-top:12px">' + ec(r && r.clan ? r.clan.emoji + ' ' + r.clan.name : T.rkb) + '</button>';
     box.querySelectorAll('[data-cl]').forEach((x) => x.onclick = () => { hp(); show(x.dataset.cl); });
-    box.querySelector('.clrkb').onclick = () => { hp(); show(); };
+    box.querySelector('#clrkb').onclick = () => { hp(); show(); };
   }
   function watch() { const v = document.getElementById('view'); if (!v) return false; new MutationObserver(() => card()).observe(v, { childList: true }); card(); return true; }
   if (!watch()) { let n = 0; const w = setInterval(() => { if (watch() || ++n > 80) clearInterval(w); }, 250); }
