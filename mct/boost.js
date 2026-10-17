@@ -246,7 +246,7 @@
           if (!j || !j.ok || !(Number(j.cost) > 0) || !(Number(j.pnl) > 0)) return;
           const pct = Math.round(Number(j.pnl) / Number(j.cost) * 100); if (pct < 5) return;
           let last = 0; try { last = Number(localStorage.getItem('mct_win_at') || 0); } catch (e) {}
-          if (Date.now() - last < 6 * 36e5) return;
+          if (Date.now() - last < 2 * 36e5) return; // 17 oct 2026: at most every 2 hours (was 6)
           try { localStorage.setItem('mct_win_at', String(Date.now())); } catch (e) {}
           let tk = ''; try { tk = COIN.coin.ticker; } catch (e) {}
           setTimeout(() => winSheet(pct, tk || 'COIN'), 3400);
