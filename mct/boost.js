@@ -183,13 +183,13 @@
 })();
 
 // 15 oct 2026: every shared link earns the sharer TON. A coin shared carries the player's invite (c_<coin>_r_<id>): the friend gets $500,
-// the sharer $500 and $0.05 in TON when the friend plays. After each share, the player is told. A clear "Share" call on a coin's page,
+// the sharer $500 and $0.05 in USDT when the friend plays. After each share, the player is told. A clear "Share" call on a coin's page,
 // and after a winning sale (+5 % or more, every 6 hours at most) a challenge to send to friends.
 (() => {
   const TX = {
-    id: { told: '💎 Setiap teman yang bergabung lewat link-mu memberimu $0.05 dalam TON (dan $500 untuk kalian berdua di game)', cta: (tk) => '📣 Bagikan $' + tk + ': dapatkan TON untuk setiap teman', win: (p, tk) => '📈 +' + p + '% di $' + tk + '!', wins: 'Tantang temanmu: mereka dapat $500 untuk mulai, kamu dapat $0.05 dalam TON untuk setiap teman yang bermain.', go: '🔥 Tantang temanku', later: 'Nanti' },
-    en: { told: '💎 Every friend who joins through your link earns you $0.05 in TON (and $500 for both of you in the game)', cta: (tk) => '📣 Share $' + tk + ': earn TON for each friend', win: (p, tk) => '📈 +' + p + '% on $' + tk + '!', wins: 'Challenge your friends: they get $500 to start, you earn $0.05 in TON for each one who plays.', go: '🔥 Challenge my friends', later: 'Later' },
-    fr: { told: '💎 Chaque ami qui rejoint avec ton lien te rapporte 0,05 $ en TON (et 500 $ chacun dans le jeu)', cta: (tk) => '📣 Partage $' + tk + ' : gagne des TON par ami', win: (p, tk) => '📈 +' + p + ' % sur $' + tk + ' !', wins: 'Défie tes amis : ils reçoivent 500 $ pour commencer, tu gagnes 0,05 $ en TON pour chaque ami qui joue.', go: '🔥 Défier mes amis', later: 'Plus tard' },
+    id: { told: '💎 Setiap teman yang bergabung lewat link-mu memberimu $0.05 dalam USDT (dan $500 untuk kalian berdua di game)', cta: (tk) => '📣 Bagikan $' + tk + ': dapatkan USDT untuk setiap teman', win: (p, tk) => '📈 +' + p + '% di $' + tk + '!', wins: 'Tantang temanmu: mereka dapat $500 untuk mulai, kamu dapat $0.05 dalam USDT untuk setiap teman yang bermain.', go: '🔥 Tantang temanku', later: 'Nanti' },
+    en: { told: '💎 Every friend who joins through your link earns you $0.05 in USDT (and $500 for both of you in the game)', cta: (tk) => '📣 Share $' + tk + ': earn USDT for each friend', win: (p, tk) => '📈 +' + p + '% on $' + tk + '!', wins: 'Challenge your friends: they get $500 to start, you earn $0.05 in USDT for each one who plays.', go: '🔥 Challenge my friends', later: 'Later' },
+    fr: { told: '💎 Chaque ami qui rejoint avec ton lien te rapporte 0,05 $ en USDT (et 500 $ chacun dans le jeu)', cta: (tk) => '📣 Partage $' + tk + ' : gagne des USDT par ami', win: (p, tk) => '📈 +' + p + ' % sur $' + tk + ' !', wins: 'Défie tes amis : ils reçoivent 500 $ pour commencer, tu gagnes 0,05 $ en USDT pour chaque ami qui joue.', go: '🔥 Défier mes amis', later: 'Plus tard' },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] || TX.en; };
   const uid = () => { try { return ME && ME.uid; } catch (e) { return null; } };
