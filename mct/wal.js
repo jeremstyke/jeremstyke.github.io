@@ -104,5 +104,17 @@
     if (top && top.nextSibling) top.parentNode.insertBefore(c, top.nextSibling); else w.parentNode.insertBefore(c, w);
   }
   new MutationObserver(() => { if (document.getElementById('dwal') && !document.getElementById('dwalx')) dia(); }).observe(document.body, { childList: true, subtree: true });
+  // 17 oct 2026: a link ?startapp=src_wal... (the channel posts) opens the wallet list in one tap, or says it is already linked
+  const SPW = String((window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.start_param) || '');
+  if (/(^|_)wal(_|$)/.test(SPW)) {
+    let n = 0; const w = setInterval(async () => {
+      n++; let ok = false; try { ok = !!document.querySelector('nav.tb'); } catch (e) {}
+      if (!ok && n <= 60) return;
+      clearInterval(w); if (!ok) return;
+      const has = await status();
+      if (has) { try { toast(fr() ? '✅ Ton portefeuille est déjà relié, payé chaque lundi' : idn() ? '✅ Dompetmu sudah terhubung, dibayar setiap Senin' : '✅ Your wallet is already linked, paid every Monday'); } catch (e) {} return; }
+      connect(false);
+    }, 250);
+  }
   setTimeout(() => { try { if (tw && tw.initData) load().catch(() => {}); } catch (e) {} }, 3000);
 })();
