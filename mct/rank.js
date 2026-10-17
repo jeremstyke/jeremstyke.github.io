@@ -1,24 +1,24 @@
-// 16 oct 2026 (Jeremy): the three weekly rankings of Meme Coin Tycoon, each with real TON prizes on Monday ($1.00 / $0.50 / $0.25):
+// 16 oct 2026 (Jeremy): the three weekly rankings of Meme Coin Tycoon, each with real USDT prizes on Monday ($1.00 / $0.50 / $0.25):
 // 📈 best player (biggest trading gain since Monday, only trading counts), 👥 best sponsor (friends who really play), 💎 best tapper (the diamond).
 // A card at the top of the Leaders tab opens them. Data from the Supabase function mct-ton (action 'ranks').
 (() => {
   const TX = {
-    id: { t: 'Kontes minggu ini', pl: '📈 Keuntungan', rf: '👥 Pengundang', dg: '💎 Pengetuk', ends: 'Berakhir dalam', prizes: 'Hadiah Senin dalam TON asli', you: 'kamu', rank: 'Peringkatmu',
+    id: { t: 'Kontes minggu ini', pl: '📈 Keuntungan', rf: '👥 Pengundang', dg: '💎 Pengetuk', ends: 'Berakhir dalam', prizes: 'Hadiah Senin dalam USDT asli', you: 'kamu', rank: 'Peringkatmu',
       nobody: 'Belum ada: ambil posisi teratas!', err: 'Masalah koneksi, coba lagi.', close: 'Tutup',
       plx: 'Total keuntungan trading terbaik sejak Senin (untung dikurangi rugi). Hanya trading yang dihitung, bukan bonus, tambang atau stars. Minimal 3 transaksi.', plme: (g, n) => 'Minggumu: ' + g + ' · ' + n + ' transaksi',
       rfx: 'Paling banyak teman yang benar-benar bermain (3 hari berbeda).', rfb: '👥 Undang temanku', dgx: 'Paling banyak ketukan berlian minggu ini.', dgb: '💎 Ketuk berlian', plb: '🪙 Ke pasar',
       u: { pl: '', rf: 'teman', dg: 'ketukan' } },
-    en: { t: 'Contests of the week', pl: '📈 Gains', rf: '👥 Sponsor', dg: '💎 Tapper', ends: 'Ends in', prizes: 'Monday prizes in real TON', you: 'you', rank: 'Your rank',
+    en: { t: 'Contests of the week', pl: '📈 Gains', rf: '👥 Sponsor', dg: '💎 Tapper', ends: 'Ends in', prizes: 'Monday prizes in real USDT', you: 'you', rank: 'Your rank',
       nobody: 'Nobody yet: take the lead!', err: 'Connection problem, try again.', close: 'Close',
       plx: 'The best total trading gain since Monday (gains minus losses). Only trading counts, not bonuses, mining or stars. At least 3 trades.', plme: (g, n) => 'Your week: ' + g + ' · ' + n + ' trades',
       rfx: 'The most friends who really play (3 different days).', rfb: '👥 Invite my friends', dgx: 'The most taps on the diamond this week.', dgb: '💎 Tap the diamond', plb: '🪙 Go to the market',
       u: { pl: '', rf: 'friends', dg: 'taps' } },
-    fr: { t: 'Concours de la semaine', pl: '📈 Gains', rf: '👥 Parrain', dg: '💎 Tapeur', ends: 'Fin dans', prizes: 'Gains du lundi en vrais TON', you: 'toi', rank: 'Ton rang',
+    fr: { t: 'Concours de la semaine', pl: '📈 Gains', rf: '👥 Parrain', dg: '💎 Tapeur', ends: 'Fin dans', prizes: 'Gains du lundi en vrais USDT', you: 'toi', rank: 'Ton rang',
       nobody: 'Personne pour l\'instant : prends la tête !', err: 'Problème de connexion, réessaie.', close: 'Fermer',
       plx: 'Le meilleur gain total en trading depuis lundi (gains moins pertes). Seul le trading compte, pas les bonus, le minage ou les étoiles. Au moins 3 trades.', plme: (g, n) => 'Ta semaine : ' + g + ' · ' + n + ' trades',
       rfx: 'Le plus d\'amis qui jouent vraiment (3 jours différents).', rfb: '👥 Inviter mes amis', dgx: 'Le plus de tapes sur le diamant cette semaine.', dgb: '💎 Taper le diamant', plb: '🪙 Aller au marché',
       u: { pl: '', rf: 'amis', dg: 'tapes' } },
-    ar: { t: 'مسابقات الأسبوع', pl: '📈 الأرباح', rf: '👥 داعٍ', dg: '💎 ضاغط', ends: 'تنتهي خلال', prizes: 'جوائز يوم الاثنين بعملة TON حقيقية', you: 'أنت', rank: 'ترتيبك',
+    ar: { t: 'مسابقات الأسبوع', pl: '📈 الأرباح', rf: '👥 داعٍ', dg: '💎 ضاغط', ends: 'تنتهي خلال', prizes: 'جوائز يوم الاثنين بعملة USDT حقيقية', you: 'أنت', rank: 'ترتيبك',
       nobody: 'لا أحد بعد: تصدّر الترتيب!', err: 'مشكلة في الاتصال، حاول مرة أخرى.', close: 'إغلاق',
       plx: 'أفضل ربح إجمالي من التداول منذ الاثنين (الأرباح ناقص الخسائر). التداول فقط يُحتسب (لا المكافآت ولا التعدين ولا النجوم). 3 صفقات على الأقل.', plme: (g, n) => 'أسبوعك: ' + g + ' · ' + n + ' صفقات',
       rfx: 'أكثر عدد من الأصدقاء الذين يلعبون فعلًا (3 أيام مختلفة).', rfb: '👥 ادعُ أصدقائي', dgx: 'أكثر عدد من الضغطات على الماسة هذا الأسبوع.', dgb: '💎 اضغط على الماسة', plb: '🪙 إلى السوق',
@@ -46,10 +46,10 @@
 
   // 16 oct 2026 (Jeremy): no button at the top: a "contests of the week" card at the top of the Leaders tab opens the three contests
   const CARD = {
-    id: { t: '🏆 Kontes minggu ini', x: '3 kontes, TON asli untuk dimenangkan setiap Senin', b: 'Lihat' },
-    en: { t: '🏆 Contests of the week', x: '3 contests, real TON to win every Monday', b: 'See' },
-    fr: { t: '🏆 Concours de la semaine', x: '3 concours, de vrais TON à gagner chaque lundi', b: 'Voir' },
-    ar: { t: '🏆 مسابقات الأسبوع', x: '3 مسابقات، عملات TON حقيقية كل يوم اثنين', b: 'عرض' },
+    id: { t: '🏆 Kontes minggu ini', x: '3 kontes, USDT asli untuk dimenangkan setiap Senin', b: 'Lihat' },
+    en: { t: '🏆 Contests of the week', x: '3 contests, real USDT to win every Monday', b: 'See' },
+    fr: { t: '🏆 Concours de la semaine', x: '3 concours, de vrais USDT à gagner chaque lundi', b: 'Voir' },
+    ar: { t: '🏆 مسابقات الأسبوع', x: '3 مسابقات، عملات USDT حقيقية كل يوم اثنين', b: 'عرض' },
   };
   function card() {
     const v = document.getElementById('view'); if (!v) return;
