@@ -2,9 +2,9 @@
 // and a banner to it at the top of the market (and in Earn). Served by the Supabase function mct-ton.
 const TONF = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-ton';
 const TONT = {
-  id: { h: '💎 Dapatkan USDT asli', s: (u) => '$' + u + ' dalam USDT untuk setiap teman yang benar-benar bermain, plus $500 di game untukmu dan temanmu', v: 'Teman valid', p: 'Tertunda', r: 'Diterima', b: 'Saldo', mn: (m) => 'Dibayar mulai $' + m, togo: (x) => 'Kurang $' + x + ' sebelum pembayaranmu', ready: 'Siap: dibayar dalam 7 hari 🎉', wait: 'Sedang dibayar', w: 'Dompet TON-mu', ph: 'Tempel alamat TON-mu (UQ... atau EQ...)', save: 'Simpan', ok: 'Dompet tersimpan ✅', bad: 'Alamat TON tidak valid', chg: 'Ganti', nowal: 'Tambahkan dompetmu untuk dibayar 👇', inv: '👥 Undang temanku', invn: 'Setiap teman yang kamu undang dengan tombol ini dihitung untuk TON-mu, dan kalian berdua dapat $500 di game.', how: 'Cara kerjanya', st: (u, m, d) => ['👥 Undang temanmu dengan link-mu: kalian berdua langsung dapat $500 di game 🎁', '🎮 Mereka bermain: 5 transaksi dan bermain di 3 hari berbeda (dalam 30 hari)', '💎 Kamu dapat $' + u + ' dalam USDT asli per teman', '👛 Dibayar ke dompet TON-mu mulai $' + m + ', dalam ' + d + ' hari'], rule: 'Akun palsu atau ganda tidak pernah dibayar. Tanpa batas per pemain.', off: 'Anggaran bulan ini tercapai: hadiah TON kembali bulan depan.', back: '← Kembali', bh: '💎 Dapatkan USDT asli bersama temanmu', bs: '$0.05 dalam USDT + $500 di game per teman · ketuk di sini' },
-  en: { h: '💎 Earn real USDT', s: (u) => '$' + u + ' in USDT for every friend who really plays, plus $500 in the game for you and your friend', v: 'Valid friends', p: 'Pending', r: 'Received', b: 'Balance', mn: (m) => 'Paid from $' + m, togo: (x) => '$' + x + ' to go before your payment', ready: 'Ready: paid within 7 days 🎉', wait: 'Being paid', w: 'Your TON wallet', ph: 'Paste your TON address (UQ... or EQ...)', save: 'Save', ok: 'Wallet saved ✅', bad: 'Invalid TON address', chg: 'Change', nowal: 'Add your wallet to get paid 👇', inv: '👥 Invite my friends', invn: 'Every friend you invite with this button counts for your TON, and you both get $500 in the game.', how: 'How it works', st: (u, m, d) => ['👥 Invite your friends with your link: you both get $500 in the game right away 🎁', '🎮 They play: 5 trades and they play on 3 different days (within 30 days)', '💎 You earn $' + u + ' in real USDT per friend', '👛 Paid to your TON wallet from $' + m + ', within ' + d + ' days'], rule: 'Fake or duplicate accounts are never paid. No limit per player.', off: 'Budget of the month reached: TON rewards are back next month.', back: '← Back', bh: '💎 Earn real USDT with your friends', bs: '$0.05 in USDT + $500 in the game per friend · tap here' },
-  fr: { h: '💎 Gagne de vrais USDT', s: (u) => u + ' $ en USDT par ami qui joue vraiment, et 500 $ dans le jeu pour toi et ton ami', v: 'Amis validés', p: 'En attente', r: 'Reçu', b: 'Solde', mn: (m) => 'Paiement dès ' + m + ' $', togo: (x) => 'Encore ' + x + ' $ avant ton paiement', ready: 'Prêt : paiement sous 7 jours 🎉', wait: 'En cours de paiement', w: 'Ton portefeuille TON', ph: 'Colle ton adresse TON (UQ... ou EQ...)', save: 'OK', ok: 'Portefeuille enregistré ✅', bad: 'Adresse TON invalide', chg: 'Changer', nowal: 'Ajoute ton portefeuille pour être payé 👇', inv: '👥 Inviter mes amis', invn: 'Chaque ami invité avec ce bouton compte pour tes TON, et vous recevez 500 $ chacun dans le jeu.', how: 'Comment ça marche', st: (u, m, d) => ['👥 Invite tes amis avec ton lien : vous gagnez tous les deux 500 $ dans le jeu tout de suite 🎁', '🎮 Ils jouent : 5 échanges et ils jouent 3 jours différents (dans les 30 jours)', '💎 Tu gagnes ' + u + ' $ en vrais USDT par ami', '👛 Paiement sur ton portefeuille TON dès ' + m + ' $, sous ' + d + ' jours'], rule: 'Les faux comptes et doublons ne sont jamais payés. Pas de limite par joueur.', off: 'Budget du mois atteint : les gains en USDT reprennent le mois prochain.', back: '← Retour', bh: '💎 Gagne de vrais USDT avec tes amis', bs: '0,05 $ en USDT + 500 $ dans le jeu par ami · appuie ici' },
+  id: { h: '💎 Dapatkan USDT asli', s: (u) => '$' + u + ' dalam USDT untuk setiap teman yang benar-benar bermain, plus $500 di game untukmu dan temanmu', v: 'Teman valid', p: 'Tertunda', r: 'Diterima', b: 'Saldo', mn: (m) => 'Dibayar mulai $' + m, togo: (x) => 'Kurang $' + x + ' sebelum pembayaranmu', ready: 'Siap: dibayar dalam 7 hari 🎉', wait: 'Sedang dibayar', w: 'Dompet TON-mu', ph: 'Tempel alamat TON-mu (UQ... atau EQ...)', save: 'Simpan', ok: 'Dompet tersimpan ✅', bad: 'Alamat TON tidak valid', chg: 'Ganti', nowal: 'Tambahkan dompetmu untuk dibayar 👇', inv: '👥 Undang temanku', invn: 'Setiap teman yang kamu undang dengan tombol ini dihitung untuk TON-mu, dan kalian berdua dapat $500 di game.', how: 'Cara kerjanya', st: (u, m, d) => ['👥 Undang temanmu dengan link-mu: kalian berdua langsung dapat $500 di game 🎁', '🎮 Mereka bermain: 5 transaksi dan bermain di 3 hari berbeda (dalam 30 hari)', '💎 Kamu dapat $' + u + ' dalam USDT asli per teman', '👛 Dibayar ke dompet TON-mu mulai $' + m + ', dalam ' + d + ' hari'], rule: 'Akun palsu atau ganda tidak pernah dibayar. Tanpa batas per pemain.', off: 'Anggaran bulan ini tercapai: hadiah TON kembali bulan depan.', back: '← Kembali', bh: '💵 Dapatkan USDT asli', bs: '$0.05 dalam USDT + $500 di game per teman · ketuk di sini' },
+  en: { h: '💎 Earn real USDT', s: (u) => '$' + u + ' in USDT for every friend who really plays, plus $500 in the game for you and your friend', v: 'Valid friends', p: 'Pending', r: 'Received', b: 'Balance', mn: (m) => 'Paid from $' + m, togo: (x) => '$' + x + ' to go before your payment', ready: 'Ready: paid within 7 days 🎉', wait: 'Being paid', w: 'Your TON wallet', ph: 'Paste your TON address (UQ... or EQ...)', save: 'Save', ok: 'Wallet saved ✅', bad: 'Invalid TON address', chg: 'Change', nowal: 'Add your wallet to get paid 👇', inv: '👥 Invite my friends', invn: 'Every friend you invite with this button counts for your TON, and you both get $500 in the game.', how: 'How it works', st: (u, m, d) => ['👥 Invite your friends with your link: you both get $500 in the game right away 🎁', '🎮 They play: 5 trades and they play on 3 different days (within 30 days)', '💎 You earn $' + u + ' in real USDT per friend', '👛 Paid to your TON wallet from $' + m + ', within ' + d + ' days'], rule: 'Fake or duplicate accounts are never paid. No limit per player.', off: 'Budget of the month reached: TON rewards are back next month.', back: '← Back', bh: '💵 Earn real USDT', bs: '$0.05 in USDT + $500 in the game per friend · tap here' },
+  fr: { h: '💎 Gagne de vrais USDT', s: (u) => u + ' $ en USDT par ami qui joue vraiment, et 500 $ dans le jeu pour toi et ton ami', v: 'Amis validés', p: 'En attente', r: 'Reçu', b: 'Solde', mn: (m) => 'Paiement dès ' + m + ' $', togo: (x) => 'Encore ' + x + ' $ avant ton paiement', ready: 'Prêt : paiement sous 7 jours 🎉', wait: 'En cours de paiement', w: 'Ton portefeuille TON', ph: 'Colle ton adresse TON (UQ... ou EQ...)', save: 'OK', ok: 'Portefeuille enregistré ✅', bad: 'Adresse TON invalide', chg: 'Changer', nowal: 'Ajoute ton portefeuille pour être payé 👇', inv: '👥 Inviter mes amis', invn: 'Chaque ami invité avec ce bouton compte pour tes TON, et vous recevez 500 $ chacun dans le jeu.', how: 'Comment ça marche', st: (u, m, d) => ['👥 Invite tes amis avec ton lien : vous gagnez tous les deux 500 $ dans le jeu tout de suite 🎁', '🎮 Ils jouent : 5 échanges et ils jouent 3 jours différents (dans les 30 jours)', '💎 Tu gagnes ' + u + ' $ en vrais USDT par ami', '👛 Paiement sur ton portefeuille TON dès ' + m + ' $, sous ' + d + ' jours'], rule: 'Les faux comptes et doublons ne sont jamais payés. Pas de limite par joueur.', off: 'Budget du mois atteint : les gains en USDT reprennent le mois prochain.', back: '← Retour', bh: '💵 Gagne de vrais USDT', bs: '0,05 $ en USDT + 500 $ dans le jeu par ami · appuie ici' },
 };
 const tonL = () => TONT[LANG] || TONT.en;
 const tonF2 = (n) => { const x = Number(n || 0).toFixed(2); return LANG === 'fr' ? x.replace('.', ',') : x; };
@@ -181,7 +181,14 @@ async function tonPage() {
 function tonButton() {
   const L = tonL(), b = document.createElement('button');
   b.className = 'row tonbtn'; b.style.cssText = 'border:1px solid #2ee6ff;border-radius:14px;width:100%;text-align:start;cursor:pointer;margin-bottom:10px';
-  b.innerHTML = `<span class="med sm" style="--c:#2ee6ff">💎</span><div class="who"><b style="white-space:normal">${L.bh}</b><small style="white-space:normal">${TONLAST && TONLAST.ok ? tonMini(TONLAST) : L.bs}</small><span class="tondia" style="display:inline-block;margin-top:6px;padding:4px 10px;border-radius:999px;background:rgba(46,230,255,.15);border:1px solid rgba(46,230,255,.5);color:#2ee6ff;font-size:12px;font-weight:800">💎 ${({ fr: 'Tape le diamant', id: 'Ketuk berlian', ar: 'اضغط على الماسة' })[LANG] || 'Tap the diamond'} ›</span></div><span class="chip up">TON</span>`;
+  // 17 oct 2026 (Jeremy): like Daily Score, the banner shows the player's real earnings and everything he can earn (USDT, paid on Monday)
+  const u = tonM((TONLAST && TONLAST.usd) || 0.05), W = ({
+    fr: ['👥 Ami qui joue 3 jours : ' + u + ' + 500 $ dans le jeu', '💎 Tape le diamant : de l\'argent à chaque tape', '🏆 3 concours chaque semaine : 1 $, 0,50 $ et 0,25 $ le lundi'],
+    id: ['👥 Teman yang bermain 3 hari: ' + u + ' + $500 di game', '💎 Ketuk berlian: uang di setiap ketukan', '🏆 3 kontes tiap minggu: $1, $0.50 dan $0.25 setiap Senin'],
+    ar: ['👥 صديق يلعب 3 أيام: ' + u + ' + 500 $ في اللعبة', '💎 اضغط على الماسة: مال مع كل ضغطة', '🏆 3 مسابقات أسبوعيًا: 1 $ و0.50 $ و0.25 $ كل اثنين'],
+  })[LANG] || ['👥 Friend who plays 3 days: ' + u + ' + $500 in the game', '💎 Tap the diamond: money on every tap', '🏆 3 contests every week: $1, $0.50 and $0.25 on Monday'];
+  b.style.borderColor = '#7dff6b'; b.style.background = 'linear-gradient(135deg,rgba(125,255,107,.12),rgba(46,230,255,.06))';
+  b.innerHTML = `<span class="med sm" style="--c:#7dff6b">💵</span><div class="who"><b style="white-space:normal">${L.bh}</b><small style="white-space:normal;font-weight:700">${TONLAST && TONLAST.ok ? tonMini(TONLAST) : L.bs}</small><small class="tonways" style="white-space:normal;display:block;margin-top:4px;line-height:1.5">${W.join('<br>')}</small><span class="tondia" style="display:inline-block;margin-top:6px;padding:4px 10px;border-radius:999px;background:rgba(46,230,255,.15);border:1px solid rgba(46,230,255,.5);color:#2ee6ff;font-size:12px;font-weight:800">💎 ${({ fr: 'Tape le diamant', id: 'Ketuk berlian', ar: 'اضغط على الماسة' })[LANG] || 'Tap the diamond'} ›</span></div><span class="chip up">USDT</span>`;
   // 17 oct 2026: a "Tap the diamond" link inside the banner opens the diamond, the rest of the banner the TON page
   b.onclick = (e) => { haptic(); const d = document.getElementById('diatop'); if (d && e && e.target && e.target.closest && e.target.closest('.tondia')) { d.click(); return; } tonPage(); };
   return b;
@@ -191,7 +198,7 @@ function tonFold(b) {
   if (!document.getElementById('tonfst')) {
     const st = document.createElement('style'); st.id = 'tonfst';
     st.textContent = '#tonb{position:relative;padding-right:40px}#tonb .tonfold{position:absolute;top:6px;right:8px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);font-size:14px;line-height:1}'
-      + '#tonb.min{padding-top:6px;padding-bottom:6px}#tonb.min .who small,#tonb.min .tondia,#tonb.min .chip{display:none!important}#tonb.min .med{transform:scale(.8)}#tonb.min .tonfold{top:50%;margin-top:-13px}';
+      + '#tonb.min{padding-top:6px;padding-bottom:6px}#tonb.min .who small,#tonb.min .tonways,#tonb.min .tondia,#tonb.min .chip{display:none!important}#tonb.min .med{transform:scale(.8)}#tonb.min .tonfold{top:50%;margin-top:-13px}';
     document.head.appendChild(st);
   }
   let min = false; try { min = localStorage.getItem('mct_tonb_min') === '1'; } catch (e) {}
@@ -211,13 +218,46 @@ function tonFold(b) {
 async function tonPlace() {
   if (!tw || !tw.initData) return;
   const sp = document.getElementById('simpl'), ec = document.getElementById('tonc');
-  if (!(sp && VIEW === 'market' && !document.getElementById('tonb')) && !(ec && !ec.dataset.t)) return;
+  usdtBar();
+  if (!(ec && !ec.dataset.t)) return;
   if (!(await tonOn())) return;
   const sp2 = document.getElementById('simpl');
-  // 17 oct 2026 (Jeremy): the TON banner is back at the top of the market (friends invited, TON earned)
-  if (sp2 && VIEW === 'market' && !document.getElementById('tonb')) { const b = tonButton(); b.id = 'tonb'; tonFold(b); sp2.parentNode.insertBefore(b, sp2); }
+  // 17 oct 2026 (Jeremy, 18h): no more banner at the top of the market: the earnings bar sits at the bottom, above the menu (usdtBar)
   const ec2 = document.getElementById('tonc');
   if (ec2 && !ec2.dataset.t) { ec2.dataset.t = '1'; ec2.appendChild(tonButton()); }
+}
+// 17 oct 2026 (Jeremy): like Daily Score, a bar at the bottom (above the menu) with the player's real earnings and everything he can earn,
+// and a link to Daily Score (where predictions also pay real USDT). A tap on the bar opens the USDT page.
+let USDTB = null;
+async function usdtBar() {
+  if (!tw || !tw.initData) return;
+  if (USDTB && document.body.contains(USDTB)) { const m = USDTB.querySelector('.ubm'); if (m && TONLAST && TONLAST.ok && m.textContent !== tonMini(TONLAST)) m.textContent = tonMini(TONLAST); return; }
+  if (USDTB === false) return;
+  USDTB = false;
+  if (!(await tonOn())) { USDTB = null; return; }
+  if (!document.getElementById('usdtst')) {
+    const st = document.createElement('style'); st.id = 'usdtst';
+    st.textContent = 'body.ub{padding-bottom:calc(var(--tab) + 24px + 100px + env(safe-area-inset-bottom))!important}'
+      + '#usdtb{position:fixed;left:0;right:0;bottom:calc(var(--tab) + env(safe-area-inset-bottom));z-index:9;max-width:520px;margin:0 auto;padding:0 10px 6px;box-sizing:border-box}'
+      + '#usdtb .ubi{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:14px;border:1px solid rgba(125,255,107,.5);background:linear-gradient(135deg,rgba(24,40,30,.96),rgba(18,22,44,.96));box-shadow:0 -4px 18px rgba(0,0,0,.35);cursor:pointer}'
+      + '#usdtb .ubt{flex:1;min-width:0}#usdtb b{display:block;font-size:13px}#usdtb small{display:block;font-size:11px;opacity:.85;line-height:1.35}'
+      + '#usdtb .ubds{flex:none;border:0;border-radius:999px;padding:7px 10px;font-weight:800;font-size:12px;background:#7dff6b;color:#10200f;cursor:pointer}';
+    document.head.appendChild(st);
+  }
+  const u = tonM((TONLAST && TONLAST.usd) || 0.05), fr = LANG === 'fr';
+  const ways = ({ fr: '👥 Ami ' + u + ' · 💎 Diamant · 🏆 3 concours le lundi', id: '👥 Teman ' + u + ' · 💎 Berlian · 🏆 3 kontes tiap Senin', ar: '👥 صديق ' + u + ' · 💎 الماسة · 🏆 3 مسابقات كل اثنين' })[LANG] || '👥 Friend ' + u + ' · 💎 Diamond · 🏆 3 contests on Monday';
+  // 17 oct 2026 (Jeremy): and a line to subscribe to @jeremstyke: $0.01 every 30 days while subscribed
+  const sub = ({ fr: '📣 Abonne-toi à @jeremstyke : +0,01 $ tous les 30 jours ›', id: '📣 Langganan @jeremstyke: +$0.01 tiap 30 hari ›', ar: '📣 اشترك في @jeremstyke: +0.01 $ كل 30 يومًا ›' })[LANG] || '📣 Subscribe to @jeremstyke: +$0.01 every 30 days ›';
+  const dsb = ({ fr: '⚽ Daily Score', id: '⚽ Daily Score', ar: '⚽ Daily Score' })[LANG] || '⚽ Daily Score';
+  const d = document.createElement('div'); d.id = 'usdtb';
+  d.innerHTML = '<div class="ubi"><span style="font-size:22px">💵</span><div class="ubt"><b>' + tonL().bh.replace(/^💵 /, '') + '</b><small class="ubm" style="font-weight:700">' + (TONLAST && TONLAST.ok ? tonMini(TONLAST) : tonL().bs) + '</small><small>' + ways + '</small><small class="ubsub" style="color:#7dff6b;font-weight:700;margin-top:2px">' + sub + '</small></div><button class="ubds" type="button">' + dsb + '</button></div>';
+  d.querySelector('.ubi').onclick = (e) => {
+    try { haptic(); } catch (x) {}
+    if (e.target && e.target.closest && e.target.closest('.ubsub')) { gameOpen('https://t.me/jeremstyke'); return; }
+    if (e.target && e.target.closest && e.target.closest('.ubds')) { gameOpen('https://t.me/DailyScorefootbot/play?startapp=src_mctbar'); return; }
+    tonPage();
+  };
+  document.body.appendChild(d); document.body.classList.add('ub'); USDTB = d;
 }
 // the screens are rebuilt each time they open: add the banner as soon as its place appears
 new MutationObserver(() => { tonPlace(); }).observe(document.body, { childList: true, subtree: true });
