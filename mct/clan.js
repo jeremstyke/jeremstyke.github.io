@@ -9,7 +9,7 @@
 (() => {
   const TX = {
     fr: {
-      card: '🛡️ Clans · BETA', cardx: 'Crée ou rejoins un clan : une cagnotte partagée chaque lundi', cardm: (n, p) => n + ' membres · cagnotte ' + p, see: 'Voir', rkt: '🛡️ Classement des clans · BETA', rks: 'Chaque lundi, les 3 premiers gagnent, partagé entre leurs membres (valeur du coin du clan, 2 membres minimum)', rkp: ['20 000 $ + 10 000 $ au clan', '10 000 $', '5 000 $'], rkn: 'Aucun clan pour l\'instant : crée le premier !', rkb: '🛡️ Créer ou rejoindre un clan', rkm: (n) => n + '/20 membres',
+      card: '🛡️ Clans · BETA', cardx: 'Crée ou rejoins un clan : une cagnotte partagée chaque lundi', cardm: (n, p) => n + ' membres · cagnotte ' + p, see: 'Voir', rkt: '🛡️ Classement des clans · BETA', rks: 'Chaque lundi, les 3 premiers gagnent, partagé entre leurs membres (selon la valeur du coin du clan)', rkp: ['20 000 $ + 10 000 $ au clan', '10 000 $', '5 000 $'], rkn: 'Aucun clan pour l\'instant : crée le premier !', rkb: '🛡️ Créer ou rejoindre un clan', rkm: (n) => n + '/20 membres',
       t: '🛡️ Clans · BETA', close: 'Fermer', err: 'Problème, réessaie.', load: '⏳',
       how: ['💰 Le coin du clan est créé avec le clan : ses frais (achats et ventes) remplissent la cagnotte.', '👥 +5 000 $ pour le clan par nouveau joueur amené avec le lien du clan (après 3 jours de jeu), +1 000 $ par joueur du jeu qui rejoint.', '🗓️ Chaque lundi, 50 % des gains de la semaine sont partagés à parts égales entre les membres présents depuis 3 jours. Les 50 % restants vont dans la cagnotte du chef.', '🏆 Chaque lundi, les 3 meilleurs clans gagnent : 1er 20 000 $ partagés entre ses membres, +10 000 $ dans les gains du clan et le badge 🏆, 2e 10 000 $, 3e 5 000 $.'],
       list: 'Clans', none: 'Aucun clan pour l\'instant : crée le premier !', ask: 'Demander', asked: 'Demande envoyée', full: 'Complet', members: (n) => n + '/20',
@@ -23,7 +23,7 @@
       e: { cash: 'Pas assez d\'argent.', name: 'Nom invalide (3 à 20 caractères).', name_taken: 'Ce nom est déjà pris.', ticker: 'Ticker invalide (2 à 8 lettres).', taken: 'Ce ticker existe déjà.', in_clan: 'Tu es déjà dans un clan.', full: 'Ce clan est complet.', too_many: 'Tu as déjà 3 demandes en cours.', amount: 'Montant invalide.', closed: 'Ce clan est fermé aux demandes.' },
     },
     en: {
-      card: '🛡️ Clans · BETA', cardx: 'Create or join a clan: a pot shared every Monday', cardm: (n, p) => n + ' members · pot ' + p, see: 'See', rkt: '🛡️ Clan ranking · BETA', rks: 'Every Monday, the top 3 win, shared between their members (value of the clan coin, 2 members min)', rkp: ['$20,000 + $10,000 to the clan', '$10,000', '$5,000'], rkn: 'No clan yet: create the first one!', rkb: '🛡️ Create or join a clan', rkm: (n) => n + '/20 members',
+      card: '🛡️ Clans · BETA', cardx: 'Create or join a clan: a pot shared every Monday', cardm: (n, p) => n + ' members · pot ' + p, see: 'See', rkt: '🛡️ Clan ranking · BETA', rks: 'Every Monday, the top 3 win, shared between their members (by value of the clan coin)', rkp: ['$20,000 + $10,000 to the clan', '$10,000', '$5,000'], rkn: 'No clan yet: create the first one!', rkb: '🛡️ Create or join a clan', rkm: (n) => n + '/20 members',
       t: '🛡️ Clans · BETA', close: 'Close', err: 'Something went wrong, try again.', load: '⏳',
       how: ['💰 The clan coin is created with the clan: its fees (buys and sales) fill the pot.', '👥 +$5,000 for the clan per new player brought with the clan link (after 3 days of play), +$1,000 per player of the game who joins.', '🗓️ Every Monday, 50% of the week\'s earnings are shared equally between the members present for 3 days. The other 50% go to the chief\'s pot.', '🏆 Every Monday, the top 3 clans win: 1st $20,000 shared between its members, +$10,000 in the clan\'s earnings and the 🏆 badge, 2nd $10,000, 3rd $5,000.'],
       list: 'Clans', none: 'No clan yet: create the first one!', ask: 'Ask to join', asked: 'Request sent', full: 'Full', members: (n) => n + '/20',
@@ -83,9 +83,8 @@
     if (!document.body.contains(d)) return;
     const box = d.querySelector('.clrk'); box.style.cssText = '';
     const xs = ((r && r.list) || []).slice(0, 10), med = ['🏆', '🥈', '🥉'];
-    let w = 0; // the prizes go to the first 3 clans with 2 members or more
     box.innerHTML = (xs.length ? xs.map((c, i) => {
-      const ok = Number(c.n) >= 2 && w < 3, pz = ok ? w++ : -1, mine = r.clan && Number(r.clan.id) === Number(c.id);
+      const pz = i < 3 ? i : -1, mine = r.clan && Number(r.clan.id) === Number(c.id);
       return '<div data-cl="' + c.id + '" style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:' + (i ? '1px solid rgba(255,255,255,.07)' : '0') + ';cursor:pointer' + (mine ? ';background:rgba(79,240,183,.08);border-radius:10px;padding-left:6px;padding-right:6px' : '') + '">'
         + '<span style="width:22px;text-align:center;font-weight:800;opacity:.8;flex:none">' + (pz >= 0 ? med[pz] : (i + 1)) + '</span>'
         + '<span style="font-size:22px;flex:none">' + ec(c.emoji) + '</span>'
