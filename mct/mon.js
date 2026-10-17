@@ -1,6 +1,6 @@
 // 17 oct 2026 (Jeremy): Meme Coin Monsters, HIDDEN inside Meme Coin Tycoon, by @jeremstyke. Only Jeremy and Doriane see it
 // (the server answers 'hidden' to everyone else, ds_config mmon_allow). A monster is born from a coin held for $100 or more
-// (one egg a day per coin), and is tied to its coin: its strength follows the coin's price over 24 h, grows with the coins held,
+// (one monster per coin; the daily egg of a coin he already has makes it grow), and is tied to its coin: its strength follows the coin's price over 24 h, grows with the coins held,
 // and a pump news boosts it. Feeding it BUYS its coin with cash (the price goes up, the coins are eaten), merge two of the same stage, fight other players' teams (automatic, 3 a day).
 // Data: Supabase function mct-ton, actions mon_state, mon_hatch, mon_feed, mon_merge, mon_fight (SQL mmon_api).
 (() => {
@@ -8,33 +8,33 @@
   const me = (() => { try { return Number(Telegram.WebApp.initDataUnsafe.user.id); } catch (e) { return 0; } })();
   if (!ALLOW.includes(me)) return;
   const TX = {
-    fr: { t: 'Meme Coin Monsters', sec: 'Mode secret · visible par toi seulement', eggs: 'Œufs du jour', egg: (t) => 'Faire éclore $' + t, starter: '🥚 Œuf de départ', noegg: 'Garde au moins 100 $ d\'un coin pour recevoir son œuf (1 par jour et par coin).', team: 'Mes monstres', none: 'Aucun monstre pour l\'instant.',
+    fr: { t: 'Meme Coin Monsters', sec: 'Mode secret · visible par toi seulement', eggs: 'Œufs du jour', egg: (t) => 'Faire éclore $' + t, eggx: (t) => '+50 XP pour $' + t, grew: (t) => '🥚 Ton monstre $' + t + ' grandit : +50 XP !', starter: '🥚 Œuf de départ', noegg: 'Garde au moins 100 $ d\'un coin pour recevoir son œuf (1 par jour et par coin).', team: 'Mes monstres', none: 'Aucun monstre pour l\'instant.',
       fight: (n, m) => '⚔️ Combattre (' + n + '/' + m + ')', nofight: 'Plus de combat aujourd\'hui, reviens demain !', feed: (t) => 'Nourrir en $' + t, meal: (u, q, t) => '1 repas : ' + u + ' $ = ' + q + ' ' + t, merge: '🔀 Fusionner', lvl: 'Niv.', power: 'Force', base: 'base', coin24: 'coin 24 h', held: 'coins gardés', news: 'news',
       feedq: (t, px) => 'Nourrir en $' + t + ' : combien de $ veux-tu dépenser ?\n1 ' + t + ' = ' + px + ' $. Ça achète du ' + t + ' (le prix monte) et ton monstre le mange (1 $ = 1 XP).', fedq: (q, t, u) => 'Ton monstre a mangé ' + q + ' ' + t + ' (' + u + ' $) !', fed: 'Miam ! +XP et le coin monte 📈', merged: '🔀 Fusion réussie : stade supérieur !', hatched: '🐣 Un monstre est né !', win: '🏆 Victoire !', lose: '😵 Défaite…', vs: 'contre', rew: (v) => '+' + v + ' $', board: 'Classement de la semaine', pts: 'pts',
       fd: { eat: 'Il va manger', go: (u, t) => '🍽️ Nourrir : ' + u + ' $ de ' + t, up: '⬆️ Assez pour passer au niveau suivant !', left: (n) => 'Encore ' + n + ' XP avant le niveau suivant' },
       dt: { h: 'Pourquoi cette force', val: (p) => '💰 Valeur du coin (' + p + ' $)', ch: '📈 Variation sur 24 h', held: (v) => '💎 Tes coins gardés (' + v + ' $)', news: '🚀 News de pump (2 h)', base: '⭐ Force de base (niveau et stade)', tot: '💪 Force totale', inf: (h, a) => 'En combat : ' + h + ' PV et ' + a + ' d\'attaque', tip: 'Plus le prix du coin monte, plus ton monstre est fort.' },
       fw: '⚔️ Combattre', atk: '👊 Attaque', spe: '💥 Spéciale', def: '🛡️ Défense', rc: (n) => 'recharge ' + n, miss: 'Raté !', crit: 'Critique !', heal: (v) => '+' + v + ' PV',
       wild: (t) => 'Monstre sauvage $' + t, ofp: (n) => 'Monstre de ' + n, turn: (n) => 'Tour ' + n, yours: 'À toi de jouer', back: '↩️ Retour',
-      lg: { atk: (a, d) => a + ' attaque : -' + d, spe: (a, d) => a + ' lance son attaque spéciale : -' + d, def: (a, h) => a + ' se protège et récupère ' + h + ' PV', miss: (a) => a + ' rate son attaque spéciale' }, err: 'Erreur, réessaie.', nocoin: 'Pas assez d\'argent pour ce repas.', max: 'Niveau max : fusionne-le avec un autre du même stade.', close: 'Fermer', go: 'Voir le coin', coinbtn: (t) => 'Le monstre de $' + t, coinsub: (t, n) => (n ? n + ' monstre' + (n > 1 ? 's' : '') + ' · ' : '') + 'Nourris-le en ' + t + ' et fais-le combattre', pfbtn: '🐉 Mes monstres',
+      lg: { atk: (a, d) => a + ' attaque : -' + d, spe: (a, d) => a + ' lance son attaque spéciale : -' + d, def: (a, h) => a + ' se protège et récupère ' + h + ' PV', miss: (a) => a + ' rate son attaque spéciale' }, err: 'Erreur, réessaie.', nocoin: 'Pas assez d\'argent pour ce repas.', max: 'Ton monstre est au maximum !', close: 'Fermer', go: 'Voir le coin', coinbtn: (t) => 'Le monstre de $' + t, coinsub: (t, n) => (n ? n + ' monstre' + (n > 1 ? 's' : '') + ' · ' : '') + 'Nourris-le en ' + t + ' et fais-le combattre', pfbtn: '🐉 Mes monstres',
       rules: '📖 Les règles', rl: (f) => [
-        '🥚 <b>Œufs</b> : garde au moins 100 $ d\'un coin et tu reçois son œuf (1 par jour et par coin). Le monstre qui naît est celui de ce coin.',
+        '🥚 <b>Œufs</b> : garde au moins 100 $ d\'un coin et tu reçois son œuf chaque jour. Un seul monstre par coin : le premier œuf le fait naître, les suivants le font grandir (+50 XP par jour).',
         '🪙 <b>Nourrir</b> : tu choisis combien de $ dépenser. Ça achète du coin (son prix monte) et ton monstre le mange : 1 $ = 1 XP. Les coins achetés sont mangés, ceux que tu avais déjà ne bougent pas.',
-        '⬆️ <b>Niveaux</b> : la barre jaune se remplit avec l\'XP, jusqu\'au niveau 10. Fusionne 2 monstres du même coin et du même stade pour passer au stade supérieur (⭐ en plus, cornes puis couronne).',
+        '⬆️ <b>Niveaux</b> : la barre jaune se remplit avec l\'XP. Après le niveau 10, ton monstre évolue au stade suivant (⭐ en plus, cornes puis couronne), jusqu\'au stade 5.',
         '💪 <b>Force</b> : elle dépend du niveau et du stade, puis de ton coin : sa valeur (plus son prix est haut, plus le monstre est fort, de x0,6 à x2), sa hausse sur 24 h (de x0,5 à x2), les coins que tu gardes (+1 % par 100 $, jusqu\'à +50 %) et une news de pump (+20 % pendant 2 h).',
         '⚔️ <b>Combats</b> : ' + f + ' par jour. Ton monstre affronte le monstre d\'un autre joueur de ta force, ou un monstre sauvage. À chaque tour tu choisis : 👊 Attaque, 💥 Attaque spéciale (presque 2 fois plus forte, peut rater, puis 2 tours de recharge) ou 🛡️ Défense (60 % de dégâts en moins et +10 % de PV). Le premier à 0 PV perd. Victoire : +300 $, défaite : +50 $.',
         '🏆 <b>Classement</b> : tes victoires de la semaine donnent des points.'] },
-    en: { t: 'Meme Coin Monsters', sec: 'Secret mode · only you can see it', eggs: 'Today\'s eggs', egg: (t) => 'Hatch $' + t, starter: '🥚 Starter egg', noegg: 'Hold at least $100 of a coin to get its egg (1 a day per coin).', team: 'My monsters', none: 'No monster yet.',
+    en: { t: 'Meme Coin Monsters', sec: 'Secret mode · only you can see it', eggs: 'Today\'s eggs', egg: (t) => 'Hatch $' + t, eggx: (t) => '+50 XP for $' + t, grew: (t) => '🥚 Your $' + t + ' monster grows: +50 XP!', starter: '🥚 Starter egg', noegg: 'Hold at least $100 of a coin to get its egg (1 a day per coin).', team: 'My monsters', none: 'No monster yet.',
       fight: (n, m) => '⚔️ Fight (' + n + '/' + m + ')', nofight: 'No fight left today, come back tomorrow!', feed: (t) => 'Feed with $' + t, meal: (u, q, t) => '1 meal: $' + u + ' = ' + q + ' ' + t, merge: '🔀 Merge', lvl: 'Lv.', power: 'Power', base: 'base', coin24: 'coin 24 h', held: 'coins held', news: 'news',
       feedq: (t, px) => 'Feed with $' + t + ': how many $ do you want to spend?\n1 ' + t + ' = $' + px + '. It buys ' + t + ' (the price goes up) and your monster eats it ($1 = 1 XP).', fedq: (q, t, u) => 'Your monster ate ' + q + ' ' + t + ' ($' + u + ')!', fed: 'Yum! +XP and the coin goes up 📈', merged: '🔀 Merged: next stage!', hatched: '🐣 A monster is born!', win: '🏆 Victory!', lose: '😵 Defeat…', vs: 'vs', rew: (v) => '+$' + v, board: 'This week\'s ranking', pts: 'pts',
       fd: { eat: 'It will eat', go: (u, t) => '🍽️ Feed: $' + u + ' of ' + t, up: '⬆️ Enough to reach the next level!', left: (n) => n + ' XP to the next level' },
       dt: { h: 'Why this power', val: (p) => '💰 Coin value ($' + p + ')', ch: '📈 24 h change', held: (v) => '💎 Your coins held ($' + v + ')', news: '🚀 Pump news (2 h)', base: '⭐ Base power (level and stage)', tot: '💪 Total power', inf: (h, a) => 'In a fight: ' + h + ' HP and ' + a + ' attack', tip: 'The higher the coin price, the stronger your monster.' },
       fw: '⚔️ Fight', atk: '👊 Attack', spe: '💥 Special', def: '🛡️ Defend', rc: (n) => 'recharging ' + n, miss: 'Missed!', crit: 'Critical!', heal: (v) => '+' + v + ' HP',
       wild: (t) => 'Wild monster $' + t, ofp: (n) => n + '\'s monster', turn: (n) => 'Turn ' + n, yours: 'Your move', back: '↩️ Back',
-      lg: { atk: (a, d) => a + ' attacks: -' + d, spe: (a, d) => a + ' uses its special attack: -' + d, def: (a, h) => a + ' defends and heals ' + h + ' HP', miss: (a) => a + ' misses its special attack' }, err: 'Error, try again.', nocoin: 'Not enough cash for this meal.', max: 'Max level: merge it with another of the same stage.', close: 'Close', go: 'See the coin', coinbtn: (t) => 'The monster of $' + t, coinsub: (t, n) => (n ? n + ' monster' + (n > 1 ? 's' : '') + ' · ' : '') + 'Feed it with ' + t + ' and make it fight', pfbtn: '🐉 My monsters',
+      lg: { atk: (a, d) => a + ' attacks: -' + d, spe: (a, d) => a + ' uses its special attack: -' + d, def: (a, h) => a + ' defends and heals ' + h + ' HP', miss: (a) => a + ' misses its special attack' }, err: 'Error, try again.', nocoin: 'Not enough cash for this meal.', max: 'Your monster is at the maximum!', close: 'Close', go: 'See the coin', coinbtn: (t) => 'The monster of $' + t, coinsub: (t, n) => (n ? n + ' monster' + (n > 1 ? 's' : '') + ' · ' : '') + 'Feed it with ' + t + ' and make it fight', pfbtn: '🐉 My monsters',
       rules: '📖 Rules', rl: (f) => [
-        '🥚 <b>Eggs</b>: hold at least $100 of a coin and you get its egg (1 a day per coin). The monster that hatches is that coin\'s monster.',
+        '🥚 <b>Eggs</b>: hold at least $100 of a coin and you get its egg every day. One monster per coin: the first egg hatches it, the next ones make it grow (+50 XP a day).',
         '🪙 <b>Feeding</b>: you choose how many $ to spend. It buys the coin (its price goes up) and your monster eats it: $1 = 1 XP. The coins bought are eaten, the ones you already had stay.',
-        '⬆️ <b>Levels</b>: the yellow bar fills with XP, up to level 10. Merge 2 monsters of the same coin and stage to reach the next stage (one more ⭐, horns then a crown).',
+        '⬆️ <b>Levels</b>: the yellow bar fills with XP. After level 10, your monster evolves to the next stage (one more ⭐, horns then a crown), up to stage 5.',
         '💪 <b>Power</b>: it comes from level and stage, then from your coin: its value (the higher its price, the stronger the monster, x0.6 to x2), its 24 h change (x0.5 to x2), the coins you hold (+1% per $100, up to +50%) and a pump news (+20% for 2 h).',
         '⚔️ <b>Fights</b>: ' + f + ' a day. Your monster faces another player\'s monster of your strength, or a wild monster. Each turn you choose: 👊 Attack, 💥 Special attack (almost twice as strong, can miss, then 2 turns to recharge) or 🛡️ Defend (60% less damage and +10% HP). The first at 0 HP loses. Victory: +$300, defeat: +$50.',
         '🏆 <b>Ranking</b>: your wins of the week give points.'] },
@@ -162,7 +162,6 @@
   }
   function card(m) {
     const T = L(), b = m.boost || {}, mons = (S && S.mons) || [];
-    const twin = mons.find((x) => x.id !== m.id && x.coin === m.coin && x.stage === m.stage);
     const chips = ['<span class="' + ((b.val || 1) >= 1 ? 'up' : 'dn') + '">💰 ' + xf(b.val) + '</span>', '<span>' + T.base + ' ' + m.power + '</span>'];
     if (b.ch) chips.push('<span class="' + (b.ch > 0 ? 'up' : 'dn') + '">📈 ' + T.coin24 + ' ' + pc(b.ch) + '</span>');
     if (b.heldb > 0) chips.push('<span class="up">💎 ' + T.held + ' +' + Math.round(b.heldb * 100) + ' %</span>');
@@ -183,7 +182,7 @@
       + '<div class="chips">' + chips.join('') + '</div>' + det
       + '<div class="xb"><i style="width:' + Math.min(100, (m.xp / m.need) * 100) + '%"></i></div>'
       // 17 oct 2026 (Jeremy): the feed button shows the coin itself, a small round coin that spins
-      + '<div class="ma"><button class="ghost" data-feed="' + m.id + '"><i class="mco" style="background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.55),' + ec(m.color) + ' 45%,' + ec(m.color) + ')">' + ec(m.emoji) + '</i>' + T.feed(ec(m.tk)) + (Number(m.price) > 0 ? '<small class="mml">' + T.meal(MEAL, fq(qty(m, MEAL)), ec(m.tk)) + '</small>' : '') + '</button>' + '<button class="ghost mfw" data-fight="' + m.id + '"' + (S.fights > 0 ? '' : ' disabled') + '>' + T.fw + '</button>' + (twin ? '<button class="ghost" data-merge="' + m.id + ',' + twin.id + '">' + T.merge + '</button>' : '') + '</div></div>';
+      + '<div class="ma"><button class="ghost" data-feed="' + m.id + '"><i class="mco" style="background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.55),' + ec(m.color) + ' 45%,' + ec(m.color) + ')">' + ec(m.emoji) + '</i>' + T.feed(ec(m.tk)) + (Number(m.price) > 0 ? '<small class="mml">' + T.meal(MEAL, fq(qty(m, MEAL)), ec(m.tk)) + '</small>' : '') + '</button>' + '<button class="ghost mfw" data-fight="' + m.id + '"' + (S.fights > 0 ? '' : ' disabled') + '>' + T.fw + '</button>' + '</div></div>';
   }
   function render() {
     const T = L(), B = document.getElementById('monb'); if (!B || !S) return;
@@ -194,7 +193,7 @@
     let h = '<button id="monfight"' + (S.fights > 0 && S.mons.length ? '' : ' disabled') + '>' + ec(S.fights > 0 ? T.fight(S.fights, S.fmax) : T.nofight) + '</button><div class="hint"><a href="#" id="mrlk">' + T.rules + '</a></div>';
     h += '<h4>' + T.eggs + '</h4><div class="eggs">';
     if (S.starter) h += '<button class="eg" data-starter="1">' + T.starter + '</button>';
-    (S.eggs || []).forEach((e) => { h += '<button class="eg" data-egg="' + e.coin + '">🥚 ' + ec(e.emoji) + ' ' + ec(T.egg(e.tk)) + '</button>'; });
+    (S.eggs || []).forEach((e) => { h += '<button class="eg" data-egg="' + e.coin + '" data-tk="' + ec(e.tk) + '"' + (e.has ? ' data-has="1"' : '') + '>🥚 ' + ec(e.emoji) + ' ' + ec(e.has ? T.eggx(e.tk) : T.egg(e.tk)) + '</button>'; });
     if (!S.starter && !(S.eggs || []).length) h += '<small style="opacity:.6">' + T.noegg + '</small>';
     h += '</div><h4>' + T.team + ' (' + S.mons.length + ')</h4>' + (S.mons.length ? S.mons.map(card).join('') : '<small style="opacity:.6">' + T.none + '</small>');
     h += '<details class="mrl"><summary>' + T.rules + '</summary><ul>' + T.rl(S.fmax || 3).map((x) => '<li>' + x + '</li>').join('') + '</ul></details>';
@@ -204,9 +203,8 @@
     B.querySelectorAll('[data-det]').forEach((x) => { x.onclick = () => { hp('light'); const d = document.getElementById('mdt' + x.dataset.det); if (d) d.hidden = !d.hidden; }; });
     B.querySelectorAll('[data-fight]').forEach((x) => { x.onclick = () => fight(Number(x.dataset.fight)); });
     B.querySelector('#mrlk').onclick = (e) => { e.preventDefault(); const d = B.querySelector('.mrl'); d.open = true; d.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
-    B.querySelectorAll('[data-egg],[data-starter]').forEach((x) => { x.onclick = () => act({ action: 'mon_hatch', coin: x.dataset.egg, starter: x.dataset.starter || '' }, T.hatched); });
+    B.querySelectorAll('[data-egg],[data-starter]').forEach((x) => { x.onclick = () => act({ action: 'mon_hatch', coin: x.dataset.egg, starter: x.dataset.starter || '' }, x.dataset.has ? T.grew(x.dataset.tk) : T.hatched); });
     B.querySelectorAll('[data-feed]').forEach((x) => { x.onclick = () => feed(Number(x.dataset.feed)); });
-    B.querySelectorAll('[data-merge]').forEach((x) => { const [a, b] = x.dataset.merge.split(','); x.onclick = () => act({ action: 'mon_merge', a, b }, T.merged); });
   }
   async function load() { const r = await call({ action: 'mon_state' }); S = r || { ok: false }; render(); }
   async function act(body, okMsg) {
