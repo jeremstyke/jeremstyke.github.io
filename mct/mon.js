@@ -11,11 +11,11 @@
     fr: { t: 'Meme Coin Monsters', sec: 'Mode secret · visible par toi seulement', eggs: 'Œufs du jour', egg: (t) => 'Faire éclore $' + t, starter: '🥚 Œuf de départ', noegg: 'Garde au moins 100 $ d\'un coin pour recevoir son œuf (1 par jour et par coin).', team: 'Mes monstres', none: 'Aucun monstre pour l\'instant.',
       fight: (n, m) => '⚔️ Combattre (' + n + '/' + m + ')', nofight: 'Plus de combat aujourd\'hui, reviens demain !', feed: '🍖 Nourrir', merge: '🔀 Fusionner', lvl: 'Niv.', power: 'Force', base: 'base', coin24: 'coin 24 h', held: 'coins gardés', news: 'news',
       feedq: 'Combien de $ de ce coin lui donner ? (les coins sont mangés)', fed: '🍖 Miam ! +XP', merged: '🔀 Fusion réussie : stade supérieur !', hatched: '🐣 Un monstre est né !', win: '🏆 Victoire !', lose: '😵 Défaite…', vs: 'contre', rew: (v) => '+' + v + ' $', board: 'Classement de la semaine', pts: 'pts',
-      types: ['🔥 Feu', '🌿 Plante', '💧 Eau'], hint: '🔥 bat 🌿 · 🌿 bat 💧 · 💧 bat 🔥', err: 'Erreur, réessaie.', nocoin: 'Tu n\'as plus de ce coin.', max: 'Niveau max : fusionne-le avec un autre du même stade.', close: 'Fermer', go: 'Voir le coin' },
+      types: ['🔥 Feu', '🌿 Plante', '💧 Eau'], hint: '🔥 bat 🌿 · 🌿 bat 💧 · 💧 bat 🔥', err: 'Erreur, réessaie.', nocoin: 'Tu n\'as plus de ce coin.', max: 'Niveau max : fusionne-le avec un autre du même stade.', close: 'Fermer', go: 'Voir le coin', coinbtn: (t) => '🥚 Le monstre de $' + t },
     en: { t: 'Meme Coin Monsters', sec: 'Secret mode · only you can see it', eggs: 'Today\'s eggs', egg: (t) => 'Hatch $' + t, starter: '🥚 Starter egg', noegg: 'Hold at least $100 of a coin to get its egg (1 a day per coin).', team: 'My monsters', none: 'No monster yet.',
       fight: (n, m) => '⚔️ Fight (' + n + '/' + m + ')', nofight: 'No fight left today, come back tomorrow!', feed: '🍖 Feed', merge: '🔀 Merge', lvl: 'Lv.', power: 'Power', base: 'base', coin24: 'coin 24 h', held: 'coins held', news: 'news',
       feedq: 'How many $ of this coin to feed it? (the coins are eaten)', fed: '🍖 Yum! +XP', merged: '🔀 Merged: next stage!', hatched: '🐣 A monster is born!', win: '🏆 Victory!', lose: '😵 Defeat…', vs: 'vs', rew: (v) => '+$' + v, board: 'This week\'s ranking', pts: 'pts',
-      types: ['🔥 Fire', '🌿 Plant', '💧 Water'], hint: '🔥 beats 🌿 · 🌿 beats 💧 · 💧 beats 🔥', err: 'Error, try again.', nocoin: 'You have none of this coin left.', max: 'Max level: merge it with another of the same stage.', close: 'Close', go: 'See the coin' },
+      types: ['🔥 Fire', '🌿 Plant', '💧 Water'], hint: '🔥 beats 🌿 · 🌿 beats 💧 · 💧 beats 🔥', err: 'Error, try again.', nocoin: 'You have none of this coin left.', max: 'Max level: merge it with another of the same stage.', close: 'Close', go: 'See the coin', coinbtn: (t) => '🥚 The monster of $' + t },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l === 'fr' ? 'fr' : 'en']; };
   const hp = (k) => { try { haptic(k); } catch (e) {} };
@@ -25,8 +25,8 @@
   let S = null, busy = false;
 
   const st = document.createElement('style');
-  st.textContent = '#montop{padding:4px 8px;font-size:15px;line-height:1}'
-    + '#monm{position:fixed;inset:0;z-index:9998;background:rgba(5,3,15,.8);display:flex;align-items:flex-end;justify-content:center}'
+  st.textContent = '#monco{display:block;width:100%;margin:8px 0;padding:11px 14px;border:1px dashed rgba(255,212,59,.6);border-radius:14px;background:rgba(255,212,59,.08);color:#ffd43b;font-weight:700;font-size:14px;cursor:pointer}'
+    + '#monm{position:fixed;inset:0;z-index:10050;background:rgba(5,3,15,.8);display:flex;align-items:flex-end;justify-content:center}'
     + '#monm .mb{width:100%;max-width:520px;max-height:92vh;overflow:auto;background:var(--night,#140c2c);border:1px solid var(--line,rgba(255,255,255,.12));border-radius:22px 22px 0 0;padding:16px 16px calc(20px + env(safe-area-inset-bottom))}'
     + '#monm .mt{display:flex;align-items:center;justify-content:space-between}#monm .mt b{font-size:18px}#monm .mx{background:none;border:0;color:inherit;font-size:22px;opacity:.7;padding:4px 8px;cursor:pointer}'
     + '#monm .ms{font-size:12px;opacity:.6;margin:0 0 12px}#monm h4{margin:14px 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;opacity:.7}'
@@ -43,15 +43,20 @@
     + '#monm .br{display:flex;justify-content:space-between;font-size:14px;padding:5px 0}#monm .br.me{color:#ffd43b;font-weight:700}#monm .hint{font-size:12px;opacity:.6;text-align:center;margin:6px 0 0}';
   document.head.appendChild(st);
 
-  // the small 🥚 at the top, next to the diamond (only for the people allowed)
-  function addBtn() {
-    if (document.getElementById('montop')) return true;
-    const f = document.getElementById('diatop') || document.getElementById('faqtop'); if (!f) return false;
-    const b = document.createElement('button'); b.className = 'lng'; b.id = 'montop'; b.setAttribute('aria-label', 'Monsters'); b.textContent = '🥚';
-    b.onclick = () => { hp(); show(); };
-    f.parentNode.insertBefore(b, f); return true;
+  // 17 oct 2026 (Jeremy): the way in is on each coin page, "🥚 The monster of $X" (no button at the top any more)
+  let FOCUS = 0;
+  function addCoinBtn() {
+    let c = null; try { c = COIN && COIN.coin; } catch (e) {}
+    const sh = document.getElementById('sheet');
+    if (!c || !c.id || !sh || sh.querySelector('#monco')) return;
+    const host = sh.firstElementChild || sh;
+    const b = document.createElement('button'); b.id = 'monco'; b.type = 'button';
+    b.textContent = L().coinbtn(c.ticker || '?');
+    b.onclick = () => { hp(); show(Number(c.id)); };
+    host.insertBefore(b, host.children[1] || null);
   }
-  if (!addBtn()) { let n = 0; const w = setInterval(() => { if (addBtn() || ++n > 80) clearInterval(w); }, 250); }
+  let MQ = 0;
+  new MutationObserver(() => { if (!MQ) MQ = requestAnimationFrame(() => { MQ = 0; addCoinBtn(); }); }).observe(document.body, { childList: true, subtree: true });
 
   const call = async (b) => { try { return await tonCall(b); } catch (e) { return null; } };
   const pc = (v) => (v > 0 ? '+' : '') + Math.round(v) + ' %';
@@ -73,6 +78,8 @@
     const T = L(), B = document.getElementById('monb'); if (!B || !S) return;
     B.removeAttribute('style');
     if (!S.ok) { B.innerHTML = '<p style="text-align:center;opacity:.7">' + ec(T.err) + '</p>'; return; }
+    const fo = (a) => FOCUS ? [...a].sort((x, y) => (y.coin === FOCUS) - (x.coin === FOCUS)) : a;
+    S.mons = fo(S.mons || []); S.eggs = fo(S.eggs || []);
     let h = '<button id="monfight"' + (S.fights > 0 && S.mons.length ? '' : ' disabled') + '>' + ec(S.fights > 0 ? T.fight(S.fights, S.fmax) : T.nofight) + '</button><div class="hint">' + T.hint + '</div><div id="mfr"></div>';
     h += '<h4>' + T.eggs + '</h4><div class="eggs">';
     if (S.starter) h += '<button class="eg" data-starter="1">' + T.starter + '</button>';
@@ -113,7 +120,8 @@
     setTimeout(() => { const z = F.querySelector('.res'); if (z) z.style.opacity = 1; hp(r.win ? 'success' : 'error'); try { setCash(r.cash); } catch (e) {} }, 500 + ds.length * 700);
     setTimeout(() => { S = r.state || S; const keep = F.innerHTML; render(); const F2 = document.getElementById('mfr'); if (F2) { F2.innerHTML = keep; F2.querySelectorAll('.duel').forEach((x) => x.classList.add('on')); const z = F2.querySelector('.res'); if (z) z.style.opacity = 1; } }, 900 + ds.length * 700);
   }
-  function show() {
+  function show(focus) {
+    FOCUS = Number(focus) || 0;
     const T = L(); let d = document.getElementById('monm'); if (d) d.remove();
     d = document.createElement('div'); d.id = 'monm';
     d.innerHTML = '<div class="mb"><div class="mt"><b>🐉 ' + ec(T.t) + '</b><button class="mx" aria-label="' + ec(T.close) + '">✕</button></div><div class="ms">🔒 ' + ec(T.sec) + '</div><div id="monb" style="text-align:center;padding:30px 0">⏳</div></div>';
