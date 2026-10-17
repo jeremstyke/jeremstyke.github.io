@@ -188,10 +188,11 @@ function tonButton() {
 async function tonPlace() {
   if (!tw || !tw.initData) return;
   const sp = document.getElementById('simpl'), ec = document.getElementById('tonc');
-  if (!(ec && !ec.dataset.t)) return;
+  if (!(sp && VIEW === 'market' && !document.getElementById('tonb')) && !(ec && !ec.dataset.t)) return;
   if (!(await tonOn())) return;
   const sp2 = document.getElementById('simpl');
-  // 17 oct 2026 (Jeremy): no more TON banner at the top of the market (ugly and redundant)
+  // 17 oct 2026 (Jeremy): the TON banner is back at the top of the market (friends invited, TON earned)
+  if (sp2 && VIEW === 'market' && !document.getElementById('tonb')) { const b = tonButton(); b.id = 'tonb'; sp2.parentNode.insertBefore(b, sp2); }
   const ec2 = document.getElementById('tonc');
   if (ec2 && !ec2.dataset.t) { ec2.dataset.t = '1'; ec2.appendChild(tonButton()); }
 }
