@@ -186,6 +186,28 @@ function tonButton() {
   b.onclick = (e) => { haptic(); const d = document.getElementById('diatop'); if (d && e && e.target && e.target.closest && e.target.closest('.tondia')) { d.click(); return; } tonPage(); };
   return b;
 }
+// 17 oct 2026: the market banner can be folded into a slim line (the choice is kept on the phone)
+function tonFold(b) {
+  if (!document.getElementById('tonfst')) {
+    const st = document.createElement('style'); st.id = 'tonfst';
+    st.textContent = '#tonb{position:relative;padding-right:40px}#tonb .tonfold{position:absolute;top:6px;right:8px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);font-size:14px;line-height:1}'
+      + '#tonb.min{padding-top:6px;padding-bottom:6px}#tonb.min .who small,#tonb.min .tondia,#tonb.min .chip{display:none}#tonb.min .med{transform:scale(.8)}#tonb.min .tonfold{top:50%;margin-top:-13px}';
+    document.head.appendChild(st);
+  }
+  let min = false; try { min = localStorage.getItem('mct_tonb_min') === '1'; } catch (e) {}
+  const f = document.createElement('span'); f.className = 'tonfold'; f.setAttribute('aria-label', 'fold');
+  const set = (m) => { b.classList.toggle('min', m); f.textContent = m ? '▾' : '▴'; };
+  set(min); b.appendChild(f);
+  const go = b.onclick;
+  b.onclick = (e) => {
+    if (e && e.target && e.target.closest && e.target.closest('.tonfold')) {
+      try { haptic(); } catch (x) {}
+      min = !b.classList.contains('min'); set(min); try { localStorage.setItem('mct_tonb_min', min ? '1' : '0'); } catch (x) {}
+      return;
+    }
+    go(e);
+  };
+}
 async function tonPlace() {
   if (!tw || !tw.initData) return;
   const sp = document.getElementById('simpl'), ec = document.getElementById('tonc');
@@ -193,7 +215,7 @@ async function tonPlace() {
   if (!(await tonOn())) return;
   const sp2 = document.getElementById('simpl');
   // 17 oct 2026 (Jeremy): the TON banner is back at the top of the market (friends invited, TON earned)
-  if (sp2 && VIEW === 'market' && !document.getElementById('tonb')) { const b = tonButton(); b.id = 'tonb'; sp2.parentNode.insertBefore(b, sp2); }
+  if (sp2 && VIEW === 'market' && !document.getElementById('tonb')) { const b = tonButton(); b.id = 'tonb'; tonFold(b); sp2.parentNode.insertBefore(b, sp2); }
   const ec2 = document.getElementById('tonc');
   if (ec2 && !ec2.dataset.t) { ec2.dataset.t = '1'; ec2.appendChild(tonButton()); }
 }
