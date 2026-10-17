@@ -116,7 +116,7 @@
     const ped = document.querySelector('#pfb .ped');
     if (ped && !document.getElementById('pfprem')) {
       const x = document.createElement('button'); x.id = 'pfprem'; x.type = 'button';
-      x.textContent = on ? T.on(day(S.until)) : T.go; x.onclick = show;
+      x.textContent = on ? T.on(day(S.until)) : T.go.split(' · ')[0]; x.onclick = show; // 17 oct 2026: no price here, the sheet shows both offers (month and 7 days)
       ped.parentNode.insertBefore(x, ped);
     }
     // the coin page: the promotion button says it is free today
