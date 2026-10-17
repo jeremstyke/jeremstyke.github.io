@@ -158,6 +158,32 @@
     });
   }
   window.mctProfile = (pid) => show(pid || 0); // used by the contests (rank.js)
+  // 17 oct 2026: tap a player anywhere to see his profile (and add him as a friend): the coin creator on a coin page,
+  // the referral ranking (the contests, friends and diamond lists already open it)
+  async function pidOf(kind, arg) { try { const r = await tonCall({ action: 'pid', kind, arg: String(arg) }); return r || {}; } catch (e) { return {}; } }
+  async function bindMore() {
+    let c = null; try { c = COIN && COIN.coin; } catch (e) {}
+    const sh = document.getElementById('sheet');
+    if (c && !c.real && c.creator && sh) {
+      sh.querySelectorAll('.hint').forEach((h) => {
+        const tx = h.textContent || '';
+        if (h.dataset.pf || tx.indexOf(String(c.creator)) < 0 || /⛓️/.test(tx)) return;
+        h.dataset.pf = '1'; h.style.cursor = 'pointer'; h.style.textDecoration = 'underline';
+        h.onclick = async () => { hp(); const r = await pidOf('coin', c.id); if (r.pid) show(r.pid); };
+      });
+    }
+    const v = document.getElementById('view');
+    if (v && v.querySelector('[data-lb="refs"][aria-pressed="true"]')) {
+      const rows = [...v.querySelectorAll(':scope > .row')].filter((r) => r.querySelector('.rank'));
+      if (!rows.length || rows[0].dataset.pf) return;
+      rows.forEach((r) => { r.dataset.pf = '1'; });
+      let per = 'week'; try { per = RP; } catch (e) {}
+      const ids = (await pidOf('refs', per)).ids || [];
+      rows.forEach((row, i) => { const id = ids[i]; if (!id) return; row.style.cursor = 'pointer'; row.onclick = () => { hp(); show(id); }; });
+    }
+  }
+  let BQ = 0;
+  new MutationObserver(() => { if (!BQ) BQ = requestAnimationFrame(() => { BQ = 0; bindMore(); }); }).observe(document.body, { childList: true, subtree: true });
   (function watch() { const v = document.getElementById('view'); if (!v) { setTimeout(watch, 250); return; } new MutationObserver(() => bindLeaders()).observe(v, { childList: true }); })();
   // 17 oct 2026: the 💎 Premium badge of a player (his profile) opens the Premium offer (prem.js)
   document.addEventListener('click', (e) => {
