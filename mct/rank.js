@@ -121,6 +121,7 @@
     };
   }
 
+  window.mctRanks = show; // 17 oct 2026: opened from the USDT sheet too
   // a link ?startapp=src_rank... opens the rankings
   const sp = String((window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.start_param) || '');
   if (/rank/.test(sp)) { let n = 0; const w = setInterval(() => { n++; let ok = false; try { ok = !!document.querySelector('nav.tb') && !!document.getElementById('view'); } catch (e) {} if (ok || n > 60) { clearInterval(w); if (ok) show(); } }, 250); }
