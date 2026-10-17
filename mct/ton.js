@@ -139,6 +139,17 @@ function tonTiles(s, L) {
     + '.tsx .close{text-align:center;opacity:.6;font-size:13px;cursor:pointer;padding:4px}';
   document.head.appendChild(st);
 })();
+function earnAllHtml(s) {
+  const u = tonM(s.usd || 0.05), m = tonM(s.min || 0.1), K = (a, b, c) => tonM(a) + ', ' + tonM(b) + (LANG === 'fr' ? ' et ' : ' and ') + tonM(c);
+  const T = ({
+    fr: { h: '💵 Tout ce que tu peux gagner', f: '👥 Ami qui joue 3 jours : ' + u + ' (+ 500 $ dans le jeu)', d: '💎 Tape le diamant : de l\'argent à chaque tape', cg: '🏆 Concours des gains : ', cp: '🏆 Concours des parrains : ', cd: '🏆 Concours du diamant : ', wk: ' chaque lundi', js: '📣 Abonné à @jeremstyke : 0,01 $ tous les 30 jours', jb: 'S\'abonner', ds: '⚽ Daily Score : bon résultat 0,02 $, score exact 0,05 $, 7 jours de suite 0,05 $', db: 'Jouer', pay: '💸 Payé chaque lundi en USDT, dès ' + m },
+    id: { h: '💵 Semua yang bisa kamu dapatkan', f: '👥 Teman yang bermain 3 hari: ' + u + ' (+ $500 di game)', d: '💎 Ketuk berlian: uang di setiap ketukan', cg: '🏆 Kontes keuntungan: ', cp: '🏆 Kontes pengundang: ', cd: '🏆 Kontes berlian: ', wk: ' tiap Senin', js: '📣 Langganan @jeremstyke: $0.01 tiap 30 hari', jb: 'Langganan', ds: '⚽ Daily Score: hasil benar $0.02, skor tepat $0.05, 7 hari beruntun $0.05', db: 'Main', pay: '💸 Dibayar tiap Senin dalam USDT, mulai ' + m },
+  })[LANG] || { h: '💵 Everything you can earn', f: '👥 Friend who plays 3 days: ' + u + ' (+ $500 in the game)', d: '💎 Tap the diamond: money on every tap', cg: '🏆 Gains contest: ', cp: '🏆 Sponsor contest: ', cd: '🏆 Diamond contest: ', wk: ' every Monday', js: '📣 Subscribed to @jeremstyke: $0.01 every 30 days', jb: 'Subscribe', ds: '⚽ Daily Score: right result $0.02, exact score $0.05, 7 days in a row $0.05', db: 'Play', pay: '💸 Paid every Monday in USDT, from ' + m };
+  const row = (t, btn, id) => `<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-top:1px solid rgba(255,255,255,.07);font-size:13.5px;line-height:1.35"><span style="flex:1">${t}</span>${btn ? `<button id="${id}" style="flex:none;border:0;border-radius:999px;padding:6px 12px;font-weight:800;font-size:12px;background:#7dff6b;color:#10200f;cursor:pointer">${btn}</button>` : ''}</div>`;
+  return `<div style="margin:0 0 14px;padding:12px 14px;border-radius:16px;border:1px solid rgba(125,255,107,.45);background:rgba(125,255,107,.07)"><b style="display:block;font-size:15px;margin-bottom:4px">${T.h}</b>`
+    + row(T.f) + row(T.d) + row(T.cg + K(1, 0.5, 0.25) + T.wk) + row(T.cp + K(1, 0.5, 0.25) + T.wk) + row(T.cd + K(1, 0.5, 0.25) + T.wk)
+    + row(T.js, T.jb, 'tonjs') + row(T.ds, T.db, 'tonds') + row(T.pay) + `</div>`;
+}
 async function tonPage() {
   if (!tw || !tw.initData) return;
   const L = tonL(), D = TOND[LANG] || TOND.en; // 16 oct 2026: + Indonesian
@@ -153,8 +164,8 @@ async function tonPage() {
     + `<div class="hero"><div class="ic">💎</div><div><b>${L.h.replace(/^💎 /, '')}</b><span>${LANG === 'fr' ? tonF2(s.usd) + ' $ / ami' : '$' + tonF2(s.usd) + ' / friend'}</span></div></div>`
     + `<p class="sub">${L.s(tonF2(s.usd))}</p>`
     + `<div class="earn" id="tondet">${gameDet(s, 'mct', D, tonM, LANG === 'fr')}</div>`
-    // 17 oct 2026 (Jeremy): the other ways to earn, in the sheet: subscribe to @jeremstyke and Daily Score
-    + `<div class="row"><button class="sec" id="tonjs" style="color:#7dff6b">📣 ${({ fr: '@jeremstyke : +0,01 $ / 30 j', id: '@jeremstyke: +$0.01 / 30 hari', ar: '@jeremstyke: +0.01 $ / 30 يومًا' })[LANG] || '@jeremstyke: +$0.01 / 30 days'}</button><button class="sec" id="tonds" style="color:#7dff6b">⚽ ${({ fr: 'Daily Score : pronos payés', id: 'Daily Score: prediksi dibayar', ar: 'Daily Score: توقعات مدفوعة' })[LANG] || 'Daily Score: paid predictions'}</button></div>`
+    // 17 oct 2026 (Jeremy): everything that can be earned, in the sheet: friends, diamond, the 3 paid contests, @jeremstyke and Daily Score
+    + earnAllHtml(s)
     + `<button class="cta" id="tonsi">${L.inv}</button><div class="row"><button class="sec" id="tonwa">📲 WhatsApp</button><button class="sec" id="toncp">📋 ${LANG === 'fr' ? 'Copier mon lien' : 'Copy my link'}</button></div>`
     + `<div class="tiles" id="tontl">${tonTiles(s, L)}</div>`
     + (Number(s.budget_left) < Number(s.usd) ? `<p style="font-size:13px;opacity:.75">${L.off}</p>` : '')
@@ -247,7 +258,7 @@ async function usdtBar() {
       + '#usdtb{position:fixed;left:0;right:0;bottom:calc(var(--tab) + env(safe-area-inset-bottom));z-index:9;max-width:520px;margin:0 auto;padding:0 10px 5px;box-sizing:border-box}'
       + '#usdtb .ubi{display:flex;align-items:center;gap:8px;height:54px;padding:0 8px 0 12px;border-radius:14px;border:1px solid rgba(125,255,107,.5);background:linear-gradient(135deg,rgba(24,40,30,.97),rgba(18,22,44,.97));box-shadow:0 -4px 14px rgba(0,0,0,.3);cursor:pointer;box-sizing:border-box}'
       + '#usdtb .ubt{flex:1;min-width:0;overflow:hidden}#usdtb b{display:block;font-size:14px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
-      + '#usdtb .ubw{display:block;overflow:hidden;white-space:nowrap;font-size:12.5px;line-height:1.4;opacity:.9}#usdtb .ubw span{display:inline-block;padding-left:100%;animation:ubscroll 34s linear infinite}'
+      + '#usdtb .ubw{display:block;overflow:hidden;white-space:nowrap;font-size:12.5px;line-height:1.4;opacity:.9}#usdtb .ubw span{display:inline-block;padding-left:100%;animation:ubscroll 70s linear infinite}'
       + '@keyframes ubscroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}'
       + '#usdtb .ubx{flex:none;width:36px;height:36px;border:0;border-radius:50%;font-size:18px;background:rgba(125,255,107,.18);cursor:pointer;padding:0}';
     document.head.appendChild(st);
