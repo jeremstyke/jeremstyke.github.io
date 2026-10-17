@@ -34,9 +34,12 @@
     + '#monm .ms{font-size:12px;opacity:.6;margin:0 0 12px}#monm h4{margin:14px 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;opacity:.7}'
     + '#monm .eggs{display:flex;gap:8px;flex-wrap:wrap}#monm .eg{border:1px dashed rgba(255,212,59,.6);background:rgba(255,212,59,.08);color:inherit;border-radius:14px;padding:10px 12px;font-size:14px;cursor:pointer}'
     + '#monm .mc{border:1px solid var(--line,rgba(255,255,255,.12));border-radius:16px;padding:12px;margin:0 0 10px;background:rgba(255,255,255,.03)}'
-    + '#monm .mh{display:flex;align-items:center;gap:10px}#monm .mav{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:28px;flex:none;box-shadow:inset 0 -4px 0 rgba(0,0,0,.25),inset 0 3px 0 rgba(255,255,255,.25),0 0 0 3px #ffd43b,0 4px 14px rgba(0,0,0,.4);animation:mspin 4s ease-in-out infinite}'
-    // 17 oct 2026 (Jeremy): the monster is a round coin that spins, like the coins of the game
-    + '@keyframes mspin{0%{transform:rotateY(0)}35%{transform:rotateY(360deg)}100%{transform:rotateY(360deg)}}'
+    + '#monm .mh{display:flex;align-items:center;gap:10px}#monm .mav{width:64px;height:64px;flex:none;animation:mbob 2.6s ease-in-out infinite}#monm .mav svg{width:100%;height:100%;overflow:visible}'
+    // 17 oct 2026 (Jeremy): the monster is a real creature made from its coin (colour, emoji on the belly, horns with the stage);
+    // the round coin that spins is on the Feed button
+    + '@keyframes mbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}'
+    + '#monm .mco{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;font-size:12px;font-style:normal;vertical-align:middle;margin-right:6px;box-shadow:inset 0 -2px 0 rgba(0,0,0,.25),0 0 0 2px #ffd43b;animation:mspin 3s ease-in-out infinite}'
+    + '@keyframes mspin{0%{transform:rotateY(0)}40%{transform:rotateY(360deg)}100%{transform:rotateY(360deg)}}'
     + '#monm .mn{flex:1;min-width:0}#monm .mn b{font-size:16px}#monm .mn small{display:block;opacity:.7;font-size:12px}#monm .mp{text-align:right}#monm .mp b{font-size:20px;color:#ffd43b}#monm .mp small{display:block;font-size:11px;opacity:.6}'
     + '#monm .chips{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 0}#monm .chips span{font-size:11px;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.07)}#monm .up{color:#7dff6b}#monm .dn{color:#ff6b81}'
     + '#monm .xb{height:6px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;margin:8px 0 0}#monm .xb i{display:block;height:100%;background:linear-gradient(90deg,#ffb300,#ffd43b)}'
@@ -73,6 +76,32 @@
 
   const call = async (b) => { try { return await tonCall(b); } catch (e) { return null; } };
   const pc = (v) => (v > 0 ? '+' : '') + Math.round(v) + ' %';
+  // a monster drawn from its coin: body shape from the coin, its colour, its emoji on the belly, horns / crown grow with the stage
+  function monSvg(m) {
+    const k = Number(m.coin) || 1, c = String(m.color || '#ffd43b').replace(/[^#0-9a-fA-F]/g, '') || '#ffd43b', st = m.stage || 1;
+    const shape = k % 3, eyes = 1 + (k % 2 === 0 ? 1 : 0) + (k % 5 === 0 ? 1 : 0), dk = 'rgba(0,0,0,.28)';
+    let g = '';
+    // feet
+    g += '<ellipse cx="22" cy="58" rx="8" ry="4" fill="' + c + '"/><ellipse cx="42" cy="58" rx="8" ry="4" fill="' + c + '"/>';
+    // horns (stage 2+) and crown (stage 3+)
+    if (st >= 2) g += '<path d="M18 16 L12 2 L25 12Z" fill="#ffd43b"/><path d="M46 16 L52 2 L39 12Z" fill="#ffd43b"/>';
+    if (shape === 2) g += '<path d="M8 30 L0 24 L6 36Z M56 30 L64 24 L58 36Z" fill="' + c + '"/>';
+    else g += '<ellipse cx="7" cy="36" rx="5" ry="9" fill="' + c + '" transform="rotate(-25 7 36)"/><ellipse cx="57" cy="36" rx="5" ry="9" fill="' + c + '" transform="rotate(25 57 36)"/>';
+    // body
+    if (shape === 0) g += '<ellipse cx="32" cy="35" rx="25" ry="23" fill="' + c + '"/>';
+    else if (shape === 1) g += '<rect x="9" y="10" width="46" height="48" rx="20" fill="' + c + '"/>';
+    else g += '<path d="M32 8 L40 14 L50 12 L52 22 L60 30 L54 40 L56 52 L44 58 L32 56 L20 58 L8 52 L10 40 L4 30 L12 22 L14 12 L24 14Z" fill="' + c + '"/>';
+    g += '<ellipse cx="24" cy="22" rx="10" ry="5" fill="rgba(255,255,255,.3)"/>';
+    // belly with the coin
+    g += '<circle cx="32" cy="43" r="10" fill="#ffd43b" stroke="' + dk + '" stroke-width="1.5"/><text x="32" y="47.5" font-size="12" text-anchor="middle">' + ec(m.emoji || '🪙') + '</text>';
+    // eyes
+    const xs = eyes === 1 ? [32] : eyes === 2 ? [24, 40] : [21, 32, 43];
+    xs.forEach((x) => { g += '<circle cx="' + x + '" cy="24" r="6" fill="#fff"/><circle cx="' + (x + 1) + '" cy="25" r="3" fill="#140c2c"/><circle cx="' + (x + 2) + '" cy="23" r="1" fill="#fff"/>'; });
+    // mouth with fangs
+    g += '<path d="M24 32 Q32 38 40 32" stroke="#140c2c" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M27 33.5 L28.5 37 L30 34.6Z M34 34.6 L35.5 37 L37 33.5Z" fill="#fff"/>';
+    if (st >= 3) g += '<path d="M22 6 L26 0 L32 5 L38 0 L42 6 L40 10 L24 10Z" fill="#ffd43b" stroke="#c99a00"/>';
+    return '<svg viewBox="0 0 64 64">' + g + '</svg>';
+  }
   function card(m) {
     const T = L(), b = m.boost || {}, mons = (S && S.mons) || [];
     const twin = mons.find((x) => x.id !== m.id && x.coin === m.coin && x.stage === m.stage);
@@ -80,13 +109,13 @@
     if (b.ch) chips.push('<span class="' + (b.ch > 0 ? 'up' : 'dn') + '">📈 ' + T.coin24 + ' ' + pc(b.ch) + '</span>');
     if (b.heldb > 0) chips.push('<span class="up">💎 ' + T.held + ' +' + Math.round(b.heldb * 100) + ' %</span>');
     if (b.news) chips.push('<span class="up">🚀 ' + T.news + ' +20 %</span>');
-    return '<div class="mc"><div class="mh"><div class="mav" style="background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.55),' + ec(m.color) + ' 45%,' + ec(m.color) + ')">' + ec(m.emoji) + '</div>'
+    return '<div class="mc"><div class="mh"><div class="mav">' + monSvg(m) + '</div>'
       + '<div class="mn"><b>$' + ec(m.tk) + ' ' + '⭐'.repeat(m.stage) + '</b><small>' + T.lvl + ' ' + m.lvl + '/10 · ' + ec(m.name || '') + '</small></div>'
       + '<div class="mp"><b>' + m.epower + '</b><small>' + T.power + '</small></div></div>'
       + '<div class="chips">' + chips.join('') + '</div>'
       + '<div class="xb"><i style="width:' + Math.min(100, (m.xp / m.need) * 100) + '%"></i></div>'
-      // 17 oct 2026 (Jeremy): the feed button shows the coin's own picture, not a drumstick
-      + '<div class="ma"><button class="ghost" data-feed="' + m.id + '">' + ec(m.emoji) + ' ' + T.feed + '</button>' + (twin ? '<button class="ghost" data-merge="' + m.id + ',' + twin.id + '">' + T.merge + '</button>' : '') + '</div></div>';
+      // 17 oct 2026 (Jeremy): the feed button shows the coin itself, a small round coin that spins
+      + '<div class="ma"><button class="ghost" data-feed="' + m.id + '"><i class="mco" style="background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.55),' + ec(m.color) + ' 45%,' + ec(m.color) + ')">' + ec(m.emoji) + '</i>' + T.feed + '</button>' + (twin ? '<button class="ghost" data-merge="' + m.id + ',' + twin.id + '">' + T.merge + '</button>' : '') + '</div></div>';
   }
   function render() {
     const T = L(), B = document.getElementById('monb'); if (!B || !S) return;
