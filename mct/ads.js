@@ -1,6 +1,6 @@
 // 16 oct 2026: Meme Coin Tycoon rewarded videos (Ads Galaxy, game id 135). Three places where the player really wants something:
 // 1. the mining boost x2: a free video instead of 5 stars (once a day, the stars stay possible);
-// 2. the scoop: the next news (which coin, up or down) before everyone (2 a day), a card at the top of the market and the news;
+// 2. the scoop: the next news (which coin, up or down) before everyone (1 a day since 17 oct 2026, was 2), a card at the top of the market and the news;
 //    once unlocked, it stays visible for free until that news comes out; after the 2 free videos, 5 stars;
 // 3. the insurance: right after a losing sale, a video gives back 50 % of the loss (3 a day, within 10 minutes).
 // The server checks every limit (Supabase function mct-ton: boost_ad, scoop, insure).
@@ -15,7 +15,7 @@
       iOk: (r) => '🛟 ' + r + ' ditambahkan ke uangmu!', iLim: 'Kamu sudah memakai 3 asuransi hari ini.', iLate: 'Terlambat: asuransi hanya berlaku 10 menit setelah penjualan.',
       sT: '📰 Bocoran', sX: 'Lihat berita berikutnya sebelum orang lain', sB: '📺 Tonton', sUp: (t) => '$' + t + ' akan dapat kabar baik sebentar lagi 🚀', sDn: (t) => '$' + t + ' akan dapat kabar buruk sebentar lagi 📉',
       sAllUp: 'Seluruh pasar akan pump sebentar lagi 🚀', sAllDn: 'Seluruh pasar akan turun sebentar lagi 📉', sNote: 'Tidak ada yang tahu pastinya kapan: 30 menit lagi atau besok. Giliranmu!',
-      sOpen: '👀 Lihat', sPayT: 'Kamu sudah memakai 2 bocoran gratis hari ini. Buka yang ini dengan 5 stars, atau kembali besok.', sPay: '⭐ Buka dengan 5 stars', sGo: (t) => 'Buka $' + t, sLim: 'Kamu sudah melihat 2 bocoran hari ini. Kembali besok!',
+      sOpen: '👀 Lihat', sPayT: 'Kamu sudah memakai bocoran gratis hari ini. Buka yang ini dengan 5 stars, atau kembali besok.', sPay: '⭐ Buka dengan 5 stars', sGo: (t) => 'Buka $' + t, sLim: 'Kamu sudah melihat bocoranmu hari ini. Kembali besok!',
     },
     en: {
       bT: 'Boost x2 for 1 hour', bX: 'Your mining earns double for 1 hour.', bAd: '📺 Watch a video (free, 1 a day)', bPay: '⭐ Pay 5 stars', bOk: '⚡ Boost x2 on!',
@@ -25,7 +25,7 @@
       iOk: (r) => '🛟 ' + r + ' added to your cash!', iLim: 'You used your 3 insurances today.', iLate: 'Too late: the insurance lasts 10 minutes after the sale.',
       sT: '📰 Scoop', sX: 'See the next news before everyone', sB: '📺 Watch', sUp: (t) => '$' + t + ' will get good news soon 🚀', sDn: (t) => '$' + t + ' will get bad news soon 📉',
       sAllUp: 'The whole market will pump soon 🚀', sAllDn: 'The whole market will dip soon 📉', sNote: 'Nobody knows exactly when: in 30 minutes or tomorrow. Your move!',
-      sOpen: '👀 See', sPayT: 'You used your 2 free scoops today. Unlock this one for 5 stars, or come back tomorrow.', sPay: '⭐ Unlock for 5 stars', sGo: (t) => 'Open $' + t, sLim: 'You saw your 2 scoops today. Come back tomorrow!',
+      sOpen: '👀 See', sPayT: 'You used your free scoop today. Unlock this one for 5 stars, or come back tomorrow.', sPay: '⭐ Unlock for 5 stars', sGo: (t) => 'Open $' + t, sLim: 'You saw your scoop today. Come back tomorrow!',
     },
     fr: {
       bT: 'Boost x2 pendant 1 heure', bX: 'Ton minage rapporte le double pendant 1 heure.', bAd: '📺 Regarder une vidéo (gratuit, 1 par jour)', bPay: '⭐ Payer 5 étoiles', bOk: '⚡ Boost x2 activé !',
@@ -35,7 +35,7 @@
       iOk: (r) => '🛟 ' + r + ' ajoutés à ton cash !', iLim: 'Tu as utilisé tes 3 assurances du jour.', iLate: 'Trop tard : l\'assurance dure 10 minutes après la vente.',
       sT: '📰 Scoop', sX: 'Découvre la prochaine news avant tout le monde', sB: '📺 Voir', sUp: (t) => '$' + t + ' va bientôt avoir une bonne news 🚀', sDn: (t) => '$' + t + ' va bientôt avoir une mauvaise news 📉',
       sAllUp: 'Tout le marché va bientôt monter 🚀', sAllDn: 'Tout le marché va bientôt baisser 📉', sNote: 'Personne ne sait exactement quand : dans 30 minutes ou demain. À toi de jouer !',
-      sOpen: '👀 Voir', sPayT: 'Tu as utilisé tes 2 scoops gratuits du jour. Débloque celui-ci pour 5 étoiles, ou reviens demain.', sPay: '⭐ Débloquer pour 5 étoiles', sGo: (t) => 'Voir $' + t, sLim: 'Tu as vu tes 2 scoops du jour. Reviens demain !',
+      sOpen: '👀 Voir', sPayT: 'Tu as utilisé ton scoop gratuit du jour. Débloque celui-ci pour 5 étoiles, ou reviens demain.', sPay: '⭐ Débloquer pour 5 étoiles', sGo: (t) => 'Voir $' + t, sLim: 'Tu as vu ton scoop du jour. Reviens demain !',
     },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] || TX.en; };
