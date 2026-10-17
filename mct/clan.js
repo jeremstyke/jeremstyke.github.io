@@ -3,15 +3,15 @@
 // creator fees go to the clan. Every Monday half of what the clan earned in the week is shared equally between the members
 // present for 3 days, the other half goes to the chief's pot (take, give, lock 7 days +10 % or 30 days +50 %).
 // A new player brought by the clan link: +$5,000 for the clan after his 3 days of play; a player of the game who joins: +$1,000.
-// Each new member gets $1,000 of the clan coin. The best clan of the week (value of its coin) wins $20,000 shared between its members, +$10,000 in its pot and a 🏆 badge.
+// Each new member gets $1,000 of the clan coin. The best clan of the week (value of its coin) wins $20,000 shared between its members, +$10,000 in the clan's earnings (shared like the rest) and a 🏆 badge. Clans are in beta.
 // Where: a card at the top of the Leaders tab, a label on the page of a clan coin, links ?startapp=clan and ?startapp=cl_<id>.
 // Data from the Supabase function mct-ton (actions mon_clan..., handled in SQL by mct_clan_api).
 (() => {
   const TX = {
     fr: {
-      card: '🛡️ Clans', cardx: 'Crée ou rejoins un clan : une cagnotte partagée chaque lundi', cardm: (n, p) => n + ' membres · cagnotte ' + p, see: 'Voir',
-      t: '🛡️ Clans', close: 'Fermer', err: 'Problème, réessaie.', load: '⏳',
-      how: ['💰 Le coin du clan est créé avec le clan : ses frais (achats et ventes) remplissent la cagnotte.', '👥 +5 000 $ pour le clan par nouveau joueur amené avec le lien du clan (après 3 jours de jeu), +1 000 $ par joueur du jeu qui rejoint.', '🗓️ Chaque lundi, 50 % des gains de la semaine sont partagés à parts égales entre les membres présents depuis 3 jours. Les 50 % restants vont dans la cagnotte du chef.', '🏆 Le meilleur clan de la semaine gagne 20 000 $ partagés entre ses membres, +10 000 $ dans sa cagnotte et le badge 🏆.'],
+      card: '🛡️ Clans · BETA', cardx: 'Crée ou rejoins un clan : une cagnotte partagée chaque lundi', cardm: (n, p) => n + ' membres · cagnotte ' + p, see: 'Voir',
+      t: '🛡️ Clans · BETA', close: 'Fermer', err: 'Problème, réessaie.', load: '⏳',
+      how: ['💰 Le coin du clan est créé avec le clan : ses frais (achats et ventes) remplissent la cagnotte.', '👥 +5 000 $ pour le clan par nouveau joueur amené avec le lien du clan (après 3 jours de jeu), +1 000 $ par joueur du jeu qui rejoint.', '🗓️ Chaque lundi, 50 % des gains de la semaine sont partagés à parts égales entre les membres présents depuis 3 jours. Les 50 % restants vont dans la cagnotte du chef.', '🏆 Le meilleur clan de la semaine gagne 20 000 $ partagés entre ses membres, +10 000 $ dans les gains du clan et le badge 🏆.'],
       list: 'Clans', none: 'Aucun clan pour l\'instant : crée le premier !', ask: 'Demander', asked: 'Demande envoyée', full: 'Complet', members: (n) => n + '/20',
       create: '➕ Créer un clan · 5 000 $', name: 'Nom du clan (3 à 20 caractères)', ticker: 'Ticker du coin du clan (2 à 8 lettres)', logo: 'Logo et couleur', go: '🛡️ Créer mon clan',
       week: 'Gagné cette semaine', weekx: '50 % partagés lundi entre les membres', pot: 'Cagnotte du chef', coin: 'Coin du clan', seecoin: 'Voir le coin', rank: (r) => '#' + r + ' des clans',
@@ -23,9 +23,9 @@
       e: { cash: 'Pas assez d\'argent.', name: 'Nom invalide (3 à 20 caractères).', name_taken: 'Ce nom est déjà pris.', ticker: 'Ticker invalide (2 à 8 lettres).', taken: 'Ce ticker existe déjà.', in_clan: 'Tu es déjà dans un clan.', full: 'Ce clan est complet.', too_many: 'Tu as déjà 3 demandes en cours.', amount: 'Montant invalide.' },
     },
     en: {
-      card: '🛡️ Clans', cardx: 'Create or join a clan: a pot shared every Monday', cardm: (n, p) => n + ' members · pot ' + p, see: 'See',
-      t: '🛡️ Clans', close: 'Close', err: 'Something went wrong, try again.', load: '⏳',
-      how: ['💰 The clan coin is created with the clan: its fees (buys and sales) fill the pot.', '👥 +$5,000 for the clan per new player brought with the clan link (after 3 days of play), +$1,000 per player of the game who joins.', '🗓️ Every Monday, 50% of the week\'s earnings are shared equally between the members present for 3 days. The other 50% go to the chief\'s pot.', '🏆 The best clan of the week wins $20,000 shared between its members, +$10,000 in its pot and the 🏆 badge.'],
+      card: '🛡️ Clans · BETA', cardx: 'Create or join a clan: a pot shared every Monday', cardm: (n, p) => n + ' members · pot ' + p, see: 'See',
+      t: '🛡️ Clans · BETA', close: 'Close', err: 'Something went wrong, try again.', load: '⏳',
+      how: ['💰 The clan coin is created with the clan: its fees (buys and sales) fill the pot.', '👥 +$5,000 for the clan per new player brought with the clan link (after 3 days of play), +$1,000 per player of the game who joins.', '🗓️ Every Monday, 50% of the week\'s earnings are shared equally between the members present for 3 days. The other 50% go to the chief\'s pot.', '🏆 The best clan of the week wins $20,000 shared between its members, +$10,000 in the clan\'s earnings and the 🏆 badge.'],
       list: 'Clans', none: 'No clan yet: create the first one!', ask: 'Ask to join', asked: 'Request sent', full: 'Full', members: (n) => n + '/20',
       create: '➕ Create a clan · $5,000', name: 'Clan name (3 to 20 characters)', ticker: 'Ticker of the clan coin (2 to 8 letters)', logo: 'Logo and color', go: '🛡️ Create my clan',
       week: 'Earned this week', weekx: '50% shared on Monday between the members', pot: 'Chief\'s pot', coin: 'Clan coin', seecoin: 'See the coin', rank: (r) => '#' + r + ' of the clans',
