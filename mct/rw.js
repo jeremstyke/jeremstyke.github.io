@@ -10,6 +10,7 @@
   const AGX = 135;
   const TX = {
     en: {
+      rT: '💵 Recharge', rS: 'The video once a day, plus one Stars pack a day. Bought cash does not count in the rankings.', rV: '📺 +$500 with a video', rVp: '💎 +$500 (Premium)', rVs: 'Free · once a day, under $1,000', rVr: 'Only when you have less than $1,000', rVd: 'Already taken today', rP: (a) => '+$' + a, rD: 'Starter', rDw: 'Pack taken today · come back tomorrow', rM: 'Good deal', rL: '+33 % more', rX: '🔥 Best value', rOk: (a) => '💵 +$' + a + ' added!',
       vid: '📺 Watch a video', vid2: '📺 Watch 2 videos (about 30 s)', prem: '💎 Take it (Premium, no video)', no: 'No thanks', next: '📺 One more video…',
       bT: 'Double your bonus!', bX: (a) => 'Watch a short video and get ' + a + ' more.', bOk: (a) => '🎁 +' + a + ' added!',
       mT: 'Double your harvest!', mX: (q) => 'Watch 2 short videos and get ' + q + ' more.', mOk: (q) => '⛏️ +' + q + ' added to your coins!',
@@ -19,6 +20,7 @@
       skip: 'The video was not finished: no reward this time.', late: 'Too late for this one.', done: 'Already taken today. Come back tomorrow!', wait: 'Not yet: one x2 every 3 minutes.', rich: 'Only when you are short of cash.', err: 'Something went wrong, try again.',
     },
     fr: {
+      rT: '💵 Recharger', rS: 'La vidéo 1 fois par jour, plus 1 pack d\'étoiles par jour. Le cash acheté ne compte pas au classement.', rV: '📺 +500 $ avec une vidéo', rVp: '💎 +500 $ (Premium)', rVs: 'Gratuit · 1 fois par jour, sous 1 000 $', rVr: 'Seulement quand tu as moins de 1 000 $', rVd: 'Déjà pris aujourd\'hui', rP: (a) => '+' + a + ' $', rD: 'Le petit pack', rDw: 'Pack déjà pris aujourd\'hui · reviens demain', rM: 'Bonne affaire', rL: '+33 % en plus', rX: '🔥 Le meilleur prix', rOk: (a) => '💵 +' + a + ' $ ajoutés !',
       vid: '📺 Regarder une vidéo', vid2: '📺 Regarder 2 vidéos (environ 30 s)', prem: '💎 Prendre (Premium, sans vidéo)', no: 'Non merci', next: '📺 Encore une vidéo…',
       bT: 'Double ton bonus !', bX: (a) => 'Regarde une courte vidéo et reçois encore ' + a + '.', bOk: (a) => '🎁 +' + a + ' ajoutés !',
       mT: 'Double ta récolte !', mX: (q) => 'Regarde 2 courtes vidéos et reçois encore ' + q + '.', mOk: (q) => '⛏️ +' + q + ' ajoutés à tes coins !',
@@ -28,6 +30,7 @@
       skip: 'Vidéo pas terminée : pas de récompense cette fois.', late: 'Trop tard pour celle-ci.', done: 'Déjà pris aujourd\'hui. Reviens demain !', wait: 'Pas encore : un x2 toutes les 3 minutes.', rich: 'Seulement quand tu manques de cash.', err: 'Une erreur est survenue, réessaie.',
     },
     id: {
+      rT: '💵 Isi ulang', rS: 'Video 1 kali sehari, plus 1 paket bintang per hari. Uang yang dibeli tidak dihitung di peringkat.', rV: '📺 +$500 dengan video', rVp: '💎 +$500 (Premium)', rVs: 'Gratis · 1 kali sehari, di bawah $1,000', rVr: 'Hanya saat uangmu kurang dari $1,000', rVd: 'Sudah diambil hari ini', rP: (a) => '+$' + a, rD: 'Paket kecil', rDw: 'Paket sudah diambil hari ini · kembali besok', rM: 'Hemat', rL: '+33 % lebih', rX: '🔥 Harga terbaik', rOk: (a) => '💵 +$' + a + ' ditambahkan!',
       vid: '📺 Tonton video', vid2: '📺 Tonton 2 video (sekitar 30 dtk)', prem: '💎 Ambil (Premium, tanpa video)', no: 'Tidak, terima kasih', next: '📺 Satu video lagi…',
       bT: 'Gandakan bonusmu!', bX: (a) => 'Tonton video singkat dan dapatkan ' + a + ' lagi.', bOk: (a) => '🎁 +' + a + ' ditambahkan!',
       mT: 'Gandakan hasil tambangmu!', mX: (q) => 'Tonton 2 video singkat dan dapatkan ' + q + ' lagi.', mOk: (q) => '⛏️ +' + q + ' ditambahkan ke koinmu!',
@@ -37,6 +40,7 @@
       skip: 'Video tidak selesai: tidak ada hadiah kali ini.', late: 'Terlambat untuk yang ini.', done: 'Sudah diambil hari ini. Kembali besok!', wait: 'Belum: satu x2 setiap 3 menit.', rich: 'Hanya saat uangmu habis.', err: 'Terjadi kesalahan, coba lagi.',
     },
     ar: {
+      rT: '💵 شحن', rS: 'الفيديو مرة يوميًا، وحزمة نجوم واحدة يوميًا. المال المشترى لا يُحسب في الترتيب.', rV: '📺 +500$ مع فيديو', rVp: '💎 +500$ (بريميوم)', rVs: 'مجانًا · مرة يوميًا، تحت 1000$', rVr: 'فقط عندما يكون لديك أقل من 1000$', rVd: 'تم أخذها اليوم', rP: (a) => '+' + a + '$', rD: 'الحزمة الصغيرة', rDw: 'تم أخذ حزمة اليوم · عد غدًا', rM: 'صفقة جيدة', rL: '+33 % أكثر', rX: '🔥 أفضل سعر', rOk: (a) => '💵 أُضيفت +' + a + '$!',
       vid: '📺 شاهد فيديو', vid2: '📺 شاهد فيديوهين (حوالي 30 ث)', prem: '💎 خذها (بريميوم، بدون فيديو)', no: 'لا شكرًا', next: '📺 فيديو آخر…',
       bT: 'ضاعف مكافأتك!', bX: (a) => 'شاهد فيديو قصيرًا واحصل على ' + a + ' إضافية.', bOk: (a) => '🎁 أُضيفت +' + a + '!',
       mT: 'ضاعف حصادك!', mX: (q) => 'شاهد فيديوهين قصيرين واحصل على ' + q + ' إضافية.', mOk: (q) => '⛏️ أُضيفت +' + q + ' إلى عملاتك!',
@@ -148,6 +152,55 @@
     };
   }
 
+  // 18 oct 2026 (Jeremy): everything in one recharge window (the game's rchBuy now opens it): the video (+$500, once a day, under $1,000,
+  // free for Premium) and ONE Stars pack a day, any of the 4: 10 ⭐ $1,000, 50 ⭐ $7,500, 100 ⭐ $20,000, 250 ⭐ $60,000 (mct_recharge_pack)
+  const PACKS = [['s', 10, 1000, 'rD'], ['m', 50, 7500, 'rM'], ['l', 100, 20000, 'rL'], ['xl', 250, 60000, 'rX']];
+  const nfmt = (n) => Number(n).toLocaleString(lg() === 'fr' ? 'fr-FR' : 'en-US');
+  async function pay(pack, after) {
+    let r = null; try { r = await api('recharge', { pack }); } catch (e) {}
+    if (!r || !r.link) { hp('err'); try { tst(errMsg(r || {})); } catch (e) { tst(L().err); } return; }
+    try {
+      tw.openInvoice(r.link, async (st) => {
+        if (st !== 'paid') return;
+        hp('ok'); await new Promise((ok) => setTimeout(ok, 1800));
+        try { await loadMe(); setCash(ME.cash); } catch (e) {}
+        if (after) after();
+      });
+    } catch (e) { tst(L().err); }
+  }
+  async function rechargeSheet(after) {
+    hp(); close();
+    const T = L(), [st, ri] = await Promise.all([call('state'), (async () => { try { return await api('rch_info'); } catch (e) { return null; } })()]);
+    let cash = 0; try { cash = Number(ME.cash); } catch (e) {}
+    const vidOk = !!(st && st.cash), vidWhy = vidOk ? T.rVs : cash >= 1000 ? T.rVr : T.rVd;
+    const dayOk = !(ri && Number(ri.next) > Date.now());
+    const row = (k, e, b, sm, on, tag) => '<button class="cso" data-r="' + k + '"' + (on ? '' : ' disabled style="opacity:.5"') + '><span class="e">' + e + '</span><span class="w"><b>' + ec(b) + '</b><small>' + ec(sm) + '</small></span>'
+      + (tag ? '<span class="go" style="font-size:11px;font-weight:800;white-space:nowrap">' + ec(tag) + '</span>' : '<span class="go">›</span>') + '</button>';
+    const d = document.createElement('div'); d.id = 'rwm';
+    d.style.cssText = 'position:fixed;inset:0;z-index:60;background:rgba(5,3,15,.72);display:flex;align-items:flex-end;justify-content:center';
+    d.innerHTML = '<div style="width:100%;max-width:520px;max-height:88vh;overflow:auto;background:var(--night,#140c2c);border:1px solid var(--line,rgba(255,255,255,.12));border-radius:22px 22px 0 0;padding:20px 16px calc(22px + env(safe-area-inset-bottom))">'
+      + '<h2 style="margin:0 0 4px;text-align:center">' + ec(T.rT) + '</h2><p class="hint" style="margin:0 0 14px;text-align:center">' + ec(T.rS) + '</p>'
+      + row('v', prem() ? '💎' : '📺', (prem() ? T.rVp : T.rV).replace(/^\S+ /, ''), vidWhy, vidOk)
+      + PACKS.map((p) => row(p[0], '⭐', T.rP(nfmt(p[2])) + ' · ' + p[1] + ' ⭐', dayOk ? T[p[3]] : T.rDw, dayOk)).join('')
+      + '<button class="ghost" id="rwn" style="width:100%;margin-top:10px">' + ec(T.no) + '</button></div>';
+    d.onclick = (ev) => { if (ev.target === d) close(); };
+    document.body.appendChild(d);
+    d.querySelector('#rwn').onclick = () => { hp(); close(); };
+    d.querySelectorAll('[data-r]').forEach((b) => b.onclick = async () => {
+      if (b.disabled) return; const k = b.dataset.r; hp();
+      if (k === 'v') {
+        b.disabled = true; close();
+        if (!(await watchN(1))) return tst(T.skip);
+        const r = await call('cash');
+        if (!r || !r.ok) { hp('err'); return tst(errOf(r)); }
+        hp('ok'); setCash(r.cash); try { ME.cash = r.cash; } catch (e) {} tst(T.rOk(nfmt(r.amount))); if (after) after(); return;
+      }
+      close(); pay(k, after);
+    });
+  }
+  try { window.rchBuy = rechargeSheet; } catch (e) {}
+  window.mctRw.recharge = rechargeSheet;
+
   // 1. the diamond: a button under the tapping area
   let DIA = { x2: 0, wait: 0, t: 0 };
   const left = (end) => Math.max(0, Math.round((end - Date.now()) / 1000));
@@ -201,6 +254,5 @@
   // one light loop: the diamond button and the cash sheet appear when their screens are open
   setInterval(() => {
     const a = document.getElementById('darea'); if (a && !document.getElementById('drw')) diaBtn(a); else diaDraw();
-    const sh = document.getElementById('cssh'); if (sh) cashOpt(sh);
   }, 700);
 })();
