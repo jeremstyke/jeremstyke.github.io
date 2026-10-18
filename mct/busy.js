@@ -93,10 +93,31 @@
     document.body.appendChild(pillEl);
   }
   const of = window.fetch;
+  // 18 oct 2026 (Jeremy): the game opening sent 10 to 15 calls at the very same moment, and they queued on the server. Now, during
+  // the first 10 s, the calls of the screen the player sees (me, market, news, missions, steps) go first; the calls of the extra
+  // parts (profile, ads, premium, notifications, clan, videos...) wait until those have answered, then go 2 at a time.
+  // A call made right after a tap never waits.
+  const MAIN = /"action":"(me|market|news|missions|steps|ping|lang)"/;
+  const gate = []; let mainOn = 0, extraOn = 0, mainEnd = 0;
+  const bootOver = () => Date.now() - T0 > 10000;
+  const pump = () => {
+    while (gate.length && (bootOver() || (mainOn === 0 && extraOn < 2 && Date.now() - T0 > 800 && Date.now() - mainEnd > 400))) { extraOn++; gate.shift()(); }
+    if (gate.length) setTimeout(pump, 250);
+  };
   window.fetch = function (u, o) {
     if (!watched(u)) return of.apply(this, arguments);
-    const id = ++seq, user = isUser(), pending_t = Date.now(); pending.set(id, { t: pending_t, user });
-    return of.apply(this, arguments).then((r) => {
+    const self = this, args = arguments, user = isUser();
+    let body = ''; try { body = (o && typeof o.body === 'string') ? o.body : ''; } catch (e) {}
+    const isMain = String((u && u.url) || u || '').indexOf('/mct/api') >= 0 && MAIN.test(body);
+    const tapped = Date.now() - lastTap < 1500;
+    if (isMain || tapped || bootOver()) { if (isMain) mainOn++; return send(self, args, user, () => { if (isMain) { mainOn--; mainEnd = Date.now(); setTimeout(pump, 450); } }); }
+    return new Promise((ok) => { gate.push(ok); pump(); }).then(() => send(self, args, user, () => { extraOn--; pump(); }));
+  };
+  function send(self, args, user, done) {
+    const id = ++seq, pending_t = Date.now(); pending.set(id, { t: pending_t, user });
+    const p = of.apply(self, args);
+    p.then(done, done);
+    return p.then((r) => {
       pending.delete(id);
       if (r.status === 502 || r.status === 503 || r.status === 504) { if (user) { failAt = Date.now(); show('down'); } }
       else {
@@ -105,7 +126,7 @@
       }
       return r;
     }, (e) => { pending.delete(id); if (user && navigator.onLine !== false) { failAt = Date.now(); show('down'); } throw e; });
-  };
+  }
   // a call of the player that takes more than 4 s shows the screen; it goes away when the calls answer again
   setInterval(() => {
     if (stuck()) { if (slowConn() && !ov) pill(true); else show('slow'); }
