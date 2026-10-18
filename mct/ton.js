@@ -259,8 +259,12 @@ function usdtWays() {
     ar: '👥 الإحالة: ' + u + ' عن كل صديق يلعب 3 أيام (+ 500 $ في اللعبة) · 💎 اضغط على الماسة: مال مع كل ضغطة · 🏆 مسابقة الأرباح: 1 $ و0.50 $ و0.25 $ · 🏆 مسابقة الداعين: 1 $ و0.50 $ و0.25 $ · 🏆 مسابقة الماسة: 1 $ و0.50 $ و0.25 $ (تُدفع كل اثنين) · 📣 اشترك في @jeremstyke و@memecointycoon: 0.01 $ لكل منهما فورًا ثم كل 30 يومًا · 💸 الدفع بعملة TON كل اثنين',
   })[LANG] || '👥 Referral: ' + u + ' per friend who plays 3 days (+ $500 each in the game) · 💎 Tap the diamond: money on every tap · 🏆 Gains contest: $1, $0.50 and $0.25 · 🏆 Sponsor contest: $1, $0.50 and $0.25 · 🏆 Diamond contest: $1, $0.50 and $0.25 (all 3 paid every Monday) · 📣 Subscribed to @jeremstyke and @memecointycoon: $0.01 each right away, then every 30 days · 💸 Paid in TON every Monday';
 }
+// 18 oct 2026 (Jeremy): the top diamond button is hidden from the very start (it used to show a few seconds at launch,
+// until the earnings bar was ready); it comes back only if the earnings bar cannot show
+(() => { try { const st = document.createElement('style'); st.id = 'diahide'; st.textContent = '#diatop{display:none!important}'; document.head.appendChild(st); } catch (e) {} })();
+const diaShow = () => { const h = document.getElementById('diahide'); if (h) h.remove(); };
 async function usdtBar() {
-  if (!tw || !tw.initData) return;
+  if (!tw || !tw.initData) return diaShow();
   if (USDTB && document.body.contains(USDTB)) {
     const m = USDTB.querySelector('.ubm'); if (m && m.textContent !== usdtGain()) m.textContent = usdtGain();
     if (USDTB.dataset.l !== LANG) { USDTB.dataset.l = LANG; const w = USDTB.querySelector('.ubw span'); if (w) w.textContent = usdtWays(); }
@@ -268,7 +272,7 @@ async function usdtBar() {
   }
   if (USDTB === false) return;
   USDTB = false;
-  if (!(await tonOn())) { USDTB = null; return; }
+  if (!(await tonOn())) { USDTB = null; diaShow(); return; }
   if (!document.getElementById('usdtst')) {
     const st = document.createElement('style'); st.id = 'usdtst';
     st.textContent = 'body.ub{padding-bottom:calc(var(--tab) + 24px + 64px + env(safe-area-inset-bottom))!important}'
