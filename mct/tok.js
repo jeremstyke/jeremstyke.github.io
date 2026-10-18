@@ -4,16 +4,16 @@
 (() => {
   const TX = {
     en: {
-      t: '🏛️ $MCT · the official coin', sub: 'The coin of the game: the more the game grows, the more it is worth', you: 'You hold', res: (a, b) => 'Free $MCT left: ' + a + ' / ' + b,
+      t: '🏛️ $MCT · the official coin', sub: 'The coin of the game: the more the game grows, the more it is worth', you: 'You hold', res: (a, b) => 'Free $MCT left: ' + a + ' / ' + b, pot: (a) => '💵 Pot of the week: ' + a + ' (2 % of every buy and sale), shared on Monday', badge: '🏛️ The official coin of the game · 2 % fee on every trade, paid back to the holders every Monday',
       vid: (q, n) => '📺 +' + q + ' $MCT (' + n + '/3)', vidp: (q, n) => '💎 +' + q + ' $MCT (' + n + '/3)', vid0: '📺 Come back tomorrow', see: 'See the coin', how: '❓ How to earn $MCT', ok: (q) => '🏛️ +' + q + ' $MCT added!', skip: 'The video was not finished: no reward this time.', done: 'Already taken 3 times today. Come back tomorrow!', empty: 'The reserve is empty: $MCT is only bought now.', err: 'Something went wrong, try again.',
       tiers: ['', '🥉 Bronze', '🥈 Silver', '🥇 Gold'],
-      list: (e, d) => ['📺 A video: +' + e.video + ' $MCT (3 a day)', '🔥 Day 7 of your streak: +' + e.streak + ' $MCT', '👥 Each friend who really plays: +' + e.ref + ' $MCT', '🛡️ Top 3 clans of the week: +' + e.clan.join(' / ') + ' $MCT for each member', '💎 Top 3 of the diamond contest: +' + e.dia.join(' / ') + ' $MCT', '⛏️ Mine it with your rig (50 % of the normal yield)', '💵 Every Monday: $' + d.div.toLocaleString('en-US') + ' shared between the holders of ' + d.min + ' $MCT or more', '🥉 1,000 Bronze · 🥈 10,000 Silver (+5 % mining) · 🥇 100,000 Gold (+10 % mining)', '⭐ Every Star spent in the game pushes $MCT up', '📉 The free rewards are halved when the reserve goes under 500,000, then 250,000'],
+      list: (e, d) => ['📺 A video: +' + e.video + ' $MCT (3 a day)', '🔥 Day 7 of your streak: +' + e.streak + ' $MCT', '👥 Each friend who really plays: +' + e.ref + ' $MCT', '🛡️ Top 3 clans of the week: +' + e.clan.join(' / ') + ' $MCT for each member', '💎 Top 3 of the diamond contest: +' + e.dia.join(' / ') + ' $MCT', '⛏️ Mine it with your rig (50 % of the normal yield)', '💵 Every Monday: the 2 % fees of the week are shared between the holders of ' + d.min + ' $MCT or more, the more you hold the bigger your share', '🥉 1,000 Bronze · 🥈 10,000 Silver (+5 % mining) · 🥇 100,000 Gold (+10 % mining)', '⭐ Every Star spent in the game pushes $MCT up', '📉 The free rewards are halved when the reserve goes under 500,000, then 250,000'],
     },
     fr: {
-      t: '🏛️ $MCT · le coin officiel', sub: 'Le coin du jeu : plus le jeu grandit, plus il vaut cher', you: 'Tu as', res: (a, b) => '$MCT gratuits restants : ' + a + ' / ' + b,
+      t: '🏛️ $MCT · le coin officiel', sub: 'Le coin du jeu : plus le jeu grandit, plus il vaut cher', you: 'Tu as', res: (a, b) => '$MCT gratuits restants : ' + a + ' / ' + b, pot: (a) => '💵 Cagnotte de la semaine : ' + a + ' (2 % de chaque achat et vente), partagée lundi', badge: '🏛️ Le coin officiel du jeu · 2 % de frais sur chaque achat et vente, reversés aux détenteurs chaque lundi',
       vid: (q, n) => '📺 +' + q + ' $MCT (' + n + '/3)', vidp: (q, n) => '💎 +' + q + ' $MCT (' + n + '/3)', vid0: '📺 Reviens demain', see: 'Voir le coin', how: '❓ Comment gagner des $MCT', ok: (q) => '🏛️ +' + q + ' $MCT ajoutés !', skip: 'Vidéo pas terminée : pas de récompense cette fois.', done: 'Déjà pris 3 fois aujourd\'hui. Reviens demain !', empty: 'La réserve est vide : $MCT s\'achète maintenant.', err: 'Une erreur est survenue, réessaie.',
       tiers: ['', '🥉 Bronze', '🥈 Argent', '🥇 Or'],
-      list: (e, d) => ['📺 Une vidéo : +' + e.video + ' $MCT (3 par jour)', '🔥 7e jour de ta série : +' + e.streak + ' $MCT', '👥 Chaque ami qui joue vraiment : +' + e.ref + ' $MCT', '🛡️ Top 3 des clans de la semaine : +' + e.clan.join(' / ') + ' $MCT par membre', '💎 Top 3 du concours du diamant : +' + e.dia.join(' / ') + ' $MCT', '⛏️ Mine-le avec ton rig (50 % du rendement normal)', '💵 Chaque lundi : ' + d.div.toLocaleString('fr-FR') + ' $ partagés entre ceux qui ont ' + d.min + ' $MCT ou plus', '🥉 1 000 Bronze · 🥈 10 000 Argent (+5 % de minage) · 🥇 100 000 Or (+10 % de minage)', '⭐ Chaque étoile dépensée dans le jeu fait monter $MCT', '📉 Les récompenses gratuites sont divisées par 2 quand la réserve passe sous 500 000, puis sous 250 000'],
+      list: (e, d) => ['📺 Une vidéo : +' + e.video + ' $MCT (3 par jour)', '🔥 7e jour de ta série : +' + e.streak + ' $MCT', '👥 Chaque ami qui joue vraiment : +' + e.ref + ' $MCT', '🛡️ Top 3 des clans de la semaine : +' + e.clan.join(' / ') + ' $MCT par membre', '💎 Top 3 du concours du diamant : +' + e.dia.join(' / ') + ' $MCT', '⛏️ Mine-le avec ton rig (50 % du rendement normal)', '💵 Chaque lundi : les 2 % de frais de la semaine sont partagés entre ceux qui ont ' + d.min + ' $MCT ou plus, plus tu en as, plus ta part est grosse', '🥉 1 000 Bronze · 🥈 10 000 Argent (+5 % de minage) · 🥇 100 000 Or (+10 % de minage)', '⭐ Chaque étoile dépensée dans le jeu fait monter $MCT', '📉 Les récompenses gratuites sont divisées par 2 quand la réserve passe sous 500 000, puis sous 250 000'],
     },
   };
   const lg = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] ? l : 'en'; };
@@ -30,7 +30,7 @@
   const st = document.createElement('style');
   st.textContent = '#tokc{display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;border:1px solid rgba(255,212,59,.4);background:rgba(255,212,59,.08);border-radius:12px;padding:7px 10px;margin:0 0 10px;color:inherit;font:inherit;font-size:13px;cursor:pointer;text-align:left}'
     + '#tokc .ti{font-size:16px;flex:none}#tokc b{flex:none}#tokc .tm{opacity:.75;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}#tokc .tg{flex:none;font-weight:800;font-size:12px;padding:3px 8px;border-radius:99px;background:#ffd43b;color:#1a1200}#tokc .ta{flex:none;opacity:.6}'
-    + '#tokm{position:fixed;inset:0;z-index:60;background:rgba(5,3,15,.72);display:flex;align-items:flex-end;justify-content:center}#tokm>div{width:100%;max-width:520px;max-height:85vh;overflow:auto;background:var(--night,#140c2c);border:1px solid var(--line,rgba(255,255,255,.12));border-radius:22px 22px 0 0;padding:18px 16px calc(20px + env(safe-area-inset-bottom))}'
+    + '#tokm{position:fixed;inset:0;z-index:90;background:rgba(5,3,15,.72);display:flex;align-items:flex-end;justify-content:center}#tokm>div{width:100%;max-width:520px;max-height:85vh;overflow:auto;background:var(--night,#140c2c);border:1px solid var(--line,rgba(255,255,255,.12));border-radius:22px 22px 0 0;padding:18px 16px calc(20px + env(safe-area-inset-bottom))}'
     + '#tokm .th{display:flex;align-items:center;gap:10px}#tokm .tp{margin-left:auto;text-align:right;white-space:nowrap;flex:none}#tokm small{display:block;font-size:12px;opacity:.8;line-height:1.35}'
     + '#tokm .tr{height:6px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden;margin:10px 0 4px}#tokm .tr i{display:block;height:100%;background:linear-gradient(90deg,#ffd43b,#ff9a3c)}'
     + '#tokm .tb{display:flex;gap:8px;margin-top:12px}#tokm .tb button{flex:1;border:0;border-radius:12px;padding:10px 6px;font-weight:800;font-size:13px;cursor:pointer}#tokm .tv{background:#ffd43b;color:#1a1200}#tokm .ts{background:rgba(255,255,255,.1);color:inherit}#tokm .tb button:disabled{opacity:.55}'
@@ -40,9 +40,8 @@
   // the bar
   function draw(c) {
     if (!S || !c) return;
-    const T = L(), ch = S.px24 ? (Number(S.px) / Number(S.px24) - 1) * 100 : 0, can = S.vid_left > 0 && S.reserve > 0;
-    c.innerHTML = '<span class="ti">🏛️</span><b>$MCT ' + usd(S.px) + '</b><small style="color:' + (ch >= 0 ? '#4ff0b7' : '#ff8a8a') + ';font-weight:800;flex:none">' + (ch >= 0 ? '+' : '') + ch.toFixed(1) + '%</small>'
-      + '<span class="tm">· ' + ec(T.you) + ' ' + nf(S.held) + '</span>' + (can ? '<span class="tg">+' + nf(S.vid) + '</span>' : '') + '<span class="ta">›</span>';
+    const T = L(), can = S.vid_left > 0 && S.reserve > 0;
+    c.innerHTML = '<span class="ti">🏛️</span><span class="tm" style="opacity:1">' + ec(T.how) + '</span>' + (can ? '<span class="tg">📺 +' + nf(S.vid) + '</span>' : '') + '<span class="ta">›</span>';
     c.onclick = () => { hp(); sheet(c); };
   }
   // the sheet with everything
@@ -56,11 +55,11 @@
       + '<div class="tp"><b style="font-size:16px">' + usd(S.px) + '</b><small style="color:' + (ch >= 0 ? '#4ff0b7' : '#ff8a8a') + ';font-weight:800">' + (ch >= 0 ? '+' : '') + ch.toFixed(1) + ' %</small></div></div>'
       + '<small style="margin-top:10px">' + ec(T.you) + ' <b>' + nf(S.held, 2) + ' $MCT</b> (≈ ' + usd(S.value) + ')' + (S.tier ? ' · <b>' + ec(T.tiers[S.tier]) + '</b>' : '') + '</small>'
       + '<div class="tr"><i style="width:' + pct.toFixed(1) + '%"></i></div><small>' + ec(T.res(nf(S.reserve), nf(S.reserve0))) + '</small>'
-      + '<div class="tb"><button type="button" class="tv" id="tokv"' + (S.vid_left > 0 && S.reserve > 0 ? '' : ' disabled') + '>' + ec(S.vid_left > 0 ? (pr ? T.vidp : T.vid)(nf(S.vid, 2), S.vid_left) : T.vid0) + '</button><button type="button" class="ts" id="toks">' + ec(T.see) + '</button></div>'
+      + '<small style="margin-top:8px;font-weight:700">' + ec(T.pot(usd(S.div))) + '</small>'
+      + '<div class="tb"><button type="button" class="tv" id="tokv"' + (S.vid_left > 0 && S.reserve > 0 ? '' : ' disabled') + '>' + ec(S.vid_left > 0 ? (pr ? T.vidp : T.vid)(nf(S.vid, 2), S.vid_left) : T.vid0) + '</button></div>'
       + '<b style="display:block;margin-top:14px;font-size:13px">' + ec(T.how) + '</b><ul>' + T.list(S.earn, { div: Number(S.div), min: nf(S.div_min) }).map((x) => '<li>' + ec(x) + '</li>').join('') + '</ul></div>';
     d.onclick = (ev) => { if (ev.target === d) d.remove(); };
     document.body.appendChild(d);
-    d.querySelector('#toks').onclick = () => { hp(); d.remove(); try { openCoin(S.id); } catch (e) {} };
     d.querySelector('#tokv').onclick = async (ev) => {
       const b = ev.currentTarget; hp(); b.disabled = true; b.textContent = '⏳';
       // 18 oct 2026 (Jeremy): check before the video, so nobody watches a video for nothing
@@ -73,11 +72,15 @@
     };
   }
   async function load() { const r = await call('state'); if (r && r.ok) S = r; return S; }
+  // 18 oct 2026 (Jeremy, 2h40): $MCT is listed with the other coins (first in Hot and Top, mct_market); no bar in the market any more,
+  // the video and how to earn are a thin bar on the $MCT coin page, a tap opens the sheet
   async function card() {
-    let mk = false; try { mk = VIEW === 'market'; } catch (e) {}
-    const v = document.getElementById('view'); if (!mk || !v || document.getElementById('tokc')) return;
-    const h = v.querySelector('h1'); if (!h) return;
-    const c = document.createElement('button'); c.type = 'button'; c.id = 'tokc'; h.insertAdjacentElement('afterend', c);
+    let cid = null; try { cid = COIN && COIN.coin && COIN.coin.id; } catch (e) {}
+    const sh = document.getElementById('sheet');
+    if (cid === 102 && sh) { const bd = sh.querySelector('.badges.hint'); if (bd && bd.textContent !== L().badge) bd.textContent = L().badge; }
+    if (cid !== 102 || !sh || !sh.classList.contains('open') || document.getElementById('tokc')) return;
+    const bar = sh.querySelector('.bar'); if (!bar) return;
+    const c = document.createElement('button'); c.type = 'button'; c.id = 'tokc'; c.style.margin = '8px 16px 0'; c.style.width = 'calc(100% - 32px)'; bar.insertAdjacentElement('afterend', c);
     if (S) draw(c);
     await load(); if (document.body.contains(c)) draw(c);
   }
