@@ -24,38 +24,52 @@
   const nf = (n, d) => Number(n || 0).toLocaleString(lg() === 'fr' ? 'fr-FR' : 'en-US', { maximumFractionDigits: d == null ? 0 : d });
   const usd = (n) => { try { return money(n); } catch (e) { return '$' + nf(n, 2); } };
   const call = async (k, b) => { try { return await tonCall(Object.assign({ action: 'mon_tok' + k }, b || {})); } catch (e) { return null; } };
-  let S = null, OPEN = false;
+  let S = null;
 
+  // 18 oct 2026 (Jeremy, 2h35): no big card, a thin one-line bar at the top of the market; a tap opens a sheet with the details
   const st = document.createElement('style');
-  st.textContent = '#tokc{border:1px solid rgba(255,212,59,.55);background:linear-gradient(150deg,rgba(255,212,59,.16),rgba(255,154,60,.04) 70%);border-radius:18px;padding:12px 14px;margin:0 0 12px}'
-    + '#tokc .th{display:flex;align-items:center;gap:10px}#tokc .ti{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:22px;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.55),transparent 42%),radial-gradient(circle at 50% 60%,#ffd43b,#b07d00);flex:none}'
-    + '#tokc b.tn{display:block;font-size:15px}#tokc small{display:block;font-size:12px;opacity:.8;line-height:1.35}#tokc .tp{margin-left:auto;text-align:right;flex:none}#tokc .tp b{display:block;font-size:16px}'
-    + '#tokc .tr{height:6px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden;margin:8px 0 4px}#tokc .tr i{display:block;height:100%;background:linear-gradient(90deg,#ffd43b,#ff9a3c)}'
-    + '#tokc .tb{display:flex;gap:8px;margin-top:10px}#tokc .tb button{flex:1;border:0;border-radius:12px;padding:9px 6px;font-weight:800;font-size:13px;cursor:pointer}#tokc .tv{background:#ffd43b;color:#1a1200}#tokc .ts{background:rgba(255,255,255,.1);color:inherit}#tokc .tb button:disabled{opacity:.55}'
-    + '#tokc .thw{background:none;border:0;color:inherit;opacity:.85;font-size:12.5px;font-weight:700;padding:8px 0 0;cursor:pointer}#tokc ul{margin:6px 0 0;padding-left:18px;font-size:12.5px;line-height:1.5;opacity:.9}';
+  st.textContent = '#tokc{display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;border:1px solid rgba(255,212,59,.4);background:rgba(255,212,59,.08);border-radius:12px;padding:7px 10px;margin:0 0 10px;color:inherit;font:inherit;font-size:13px;cursor:pointer;text-align:left}'
+    + '#tokc .ti{font-size:16px;flex:none}#tokc b{flex:none}#tokc .tm{opacity:.75;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}#tokc .tg{flex:none;font-weight:800;font-size:12px;padding:3px 8px;border-radius:99px;background:#ffd43b;color:#1a1200}#tokc .ta{flex:none;opacity:.6}'
+    + '#tokm{position:fixed;inset:0;z-index:60;background:rgba(5,3,15,.72);display:flex;align-items:flex-end;justify-content:center}#tokm>div{width:100%;max-width:520px;max-height:85vh;overflow:auto;background:var(--night,#140c2c);border:1px solid var(--line,rgba(255,255,255,.12));border-radius:22px 22px 0 0;padding:18px 16px calc(20px + env(safe-area-inset-bottom))}'
+    + '#tokm .th{display:flex;align-items:center;gap:10px}#tokm .tp{margin-left:auto;text-align:right;white-space:nowrap;flex:none}#tokm small{display:block;font-size:12px;opacity:.8;line-height:1.35}'
+    + '#tokm .tr{height:6px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden;margin:10px 0 4px}#tokm .tr i{display:block;height:100%;background:linear-gradient(90deg,#ffd43b,#ff9a3c)}'
+    + '#tokm .tb{display:flex;gap:8px;margin-top:12px}#tokm .tb button{flex:1;border:0;border-radius:12px;padding:10px 6px;font-weight:800;font-size:13px;cursor:pointer}#tokm .tv{background:#ffd43b;color:#1a1200}#tokm .ts{background:rgba(255,255,255,.1);color:inherit}#tokm .tb button:disabled{opacity:.55}'
+    + '#tokm ul{margin:12px 0 0;padding-left:18px;font-size:12.5px;line-height:1.5;opacity:.9}';
   document.head.appendChild(st);
 
+  // the bar
   function draw(c) {
     if (!S || !c) return;
+    const T = L(), ch = S.px24 ? (Number(S.px) / Number(S.px24) - 1) * 100 : 0, can = S.vid_left > 0 && S.reserve > 0;
+    c.innerHTML = '<span class="ti">🏛️</span><b>$MCT ' + usd(S.px) + '</b><small style="color:' + (ch >= 0 ? '#4ff0b7' : '#ff8a8a') + ';font-weight:800;flex:none">' + (ch >= 0 ? '+' : '') + ch.toFixed(1) + '%</small>'
+      + '<span class="tm">· ' + ec(T.you) + ' ' + nf(S.held) + '</span>' + (can ? '<span class="tg">+' + nf(S.vid) + '</span>' : '') + '<span class="ta">›</span>';
+    c.onclick = () => { hp(); sheet(c); };
+  }
+  // the sheet with everything
+  function sheet(c) {
+    const old = document.getElementById('tokm'); if (old) old.remove();
+    if (!S) return;
     const T = L(), ch = S.px24 ? (Number(S.px) / Number(S.px24) - 1) * 100 : 0, pr = !!window.MCTPREM;
     const pct = Math.max(0, Math.min(100, Number(S.reserve) / Number(S.reserve0) * 100));
-    c.innerHTML = '<div class="th"><span class="ti">🏛️</span><div style="min-width:0"><b class="tn">' + ec(T.t) + '</b><small>' + ec(T.sub) + '</small></div>'
-      + '<div class="tp"><b>' + usd(S.px) + '</b><small style="color:' + (ch >= 0 ? '#4ff0b7' : '#ff8a8a') + ';font-weight:800">' + (ch >= 0 ? '+' : '') + ch.toFixed(1) + ' %</small></div></div>'
-      + '<small style="margin-top:8px">' + ec(T.you) + ' <b>' + nf(S.held, 2) + ' $MCT</b> (≈ ' + usd(S.value) + ')' + (S.tier ? ' · <b>' + ec(T.tiers[S.tier]) + '</b>' : '') + '</small>'
+    const d = document.createElement('div'); d.id = 'tokm';
+    d.innerHTML = '<div><div class="th"><span style="font-size:30px">🏛️</span><div style="min-width:0"><b style="font-size:16px">' + ec(T.t) + '</b><small>' + ec(T.sub) + '</small></div>'
+      + '<div class="tp"><b style="font-size:16px">' + usd(S.px) + '</b><small style="color:' + (ch >= 0 ? '#4ff0b7' : '#ff8a8a') + ';font-weight:800">' + (ch >= 0 ? '+' : '') + ch.toFixed(1) + ' %</small></div></div>'
+      + '<small style="margin-top:10px">' + ec(T.you) + ' <b>' + nf(S.held, 2) + ' $MCT</b> (≈ ' + usd(S.value) + ')' + (S.tier ? ' · <b>' + ec(T.tiers[S.tier]) + '</b>' : '') + '</small>'
       + '<div class="tr"><i style="width:' + pct.toFixed(1) + '%"></i></div><small>' + ec(T.res(nf(S.reserve), nf(S.reserve0))) + '</small>'
       + '<div class="tb"><button type="button" class="tv" id="tokv"' + (S.vid_left > 0 && S.reserve > 0 ? '' : ' disabled') + '>' + ec(S.vid_left > 0 ? (pr ? T.vidp : T.vid)(nf(S.vid, 2), S.vid_left) : T.vid0) + '</button><button type="button" class="ts" id="toks">' + ec(T.see) + '</button></div>'
-      + '<button type="button" class="thw" id="tokh">' + ec(T.how) + '</button>' + (OPEN ? '<ul>' + T.list(S.earn, { div: Number(S.div), min: nf(S.div_min) }).map((x) => '<li>' + ec(x) + '</li>').join('') + '</ul>' : '');
-    c.querySelector('#toks').onclick = () => { hp(); try { openCoin(S.id); } catch (e) {} };
-    c.querySelector('#tokh').onclick = () => { hp(); OPEN = !OPEN; draw(c); };
-    c.querySelector('#tokv').onclick = async (ev) => {
+      + '<b style="display:block;margin-top:14px;font-size:13px">' + ec(T.how) + '</b><ul>' + T.list(S.earn, { div: Number(S.div), min: nf(S.div_min) }).map((x) => '<li>' + ec(x) + '</li>').join('') + '</ul></div>';
+    d.onclick = (ev) => { if (ev.target === d) d.remove(); };
+    document.body.appendChild(d);
+    d.querySelector('#toks').onclick = () => { hp(); d.remove(); try { openCoin(S.id); } catch (e) {} };
+    d.querySelector('#tokv').onclick = async (ev) => {
       const b = ev.currentTarget; hp(); b.disabled = true; b.textContent = '⏳';
       // 18 oct 2026 (Jeremy): check before the video, so nobody watches a video for nothing
-      await load(); if (!S || !(S.vid_left > 0) || !(S.reserve > 0)) { tst(S && S.reserve > 0 ? T.done : T.empty); draw(c); return; }
+      await load(); if (!S || !(S.vid_left > 0) || !(S.reserve > 0)) { tst(S && S.reserve > 0 ? T.done : T.empty); draw(c); sheet(c); return; }
       const ok = window.mctRw ? await window.mctRw.watch(1, b) : true;
-      if (!ok) { tst(T.skip); draw(c); return; }
+      if (!ok) { tst(T.skip); draw(c); sheet(c); return; }
       const r = await call('vid');
       if (!r || !r.ok) { hp('err'); tst((r && r.error && T[r.error]) || T.err); } else { hp('ok'); tst(T.ok(nf(r.qty, 2))); }
-      await load(); draw(c);
+      await load(); draw(c); if (document.getElementById('tokm')) sheet(c);
     };
   }
   async function load() { const r = await call('state'); if (r && r.ok) S = r; return S; }
@@ -63,7 +77,7 @@
     let mk = false; try { mk = VIEW === 'market'; } catch (e) {}
     const v = document.getElementById('view'); if (!mk || !v || document.getElementById('tokc')) return;
     const h = v.querySelector('h1'); if (!h) return;
-    const c = document.createElement('div'); c.id = 'tokc'; h.insertAdjacentElement('afterend', c);
+    const c = document.createElement('button'); c.type = 'button'; c.id = 'tokc'; h.insertAdjacentElement('afterend', c);
     if (S) draw(c);
     await load(); if (document.body.contains(c)) draw(c);
   }
