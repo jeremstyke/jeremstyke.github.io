@@ -139,6 +139,8 @@ function tonTiles(s, L) {
     + '.tsx .close{text-align:center;opacity:.6;font-size:13px;cursor:pointer;padding:4px}';
   document.head.appendChild(st);
 })();
+// 19 oct 2026 (Jeremy): special week ($0.10 per friend instead of $0.05): the game says it is for this week only
+const tonPromo = (s) => s && s.promo_until && Date.parse(s.promo_until) > Date.now() ? (({ fr: '🔥 Cette semaine seulement (jusqu\'à dimanche minuit), puis 0,05 $', ar: '🔥 هذا الأسبوع فقط (حتى منتصف ليل الأحد)، ثم 0.05 $', id: '🔥 Hanya minggu ini (sampai Minggu tengah malam), lalu $0.05' })[LANG] || '🔥 This week only (until Sunday midnight), then $0.05') : '';
 function earnAllHtml(s) {
   const u = tonM(s.usd || 0.05), m = tonM(s.min || 0.1), K = (a, b, c) => tonM(a) + ', ' + tonM(b) + (LANG === 'fr' ? ' et ' : ' and ') + tonM(c);
   const T = ({
@@ -147,7 +149,7 @@ function earnAllHtml(s) {
   })[LANG] || { h: '💵 Everything you can earn', f: '👥 Referral: ' + u + ' per friend who plays 3 days (+ $500 each in the game)', d: '💎 Tap the diamond: money on every tap', cg: '🏆 Gains contest: ', cp: '🏆 Sponsor contest: ', cd: '🏆 Diamond contest: ', wk: ' every Monday', js: '📣 Subscribe to @jeremstyke: $0.01 right away, then every 30 days', mc: '📣 Subscribe to @memecointycoon: $0.01 right away, then every 30 days', jb: 'Subscribe', ok: 'you are subscribed 👍', cb: 'Rankings', ds: '⚽ Daily Score: my other game, one free football prediction a day', db: 'Play', pay: '💸 Paid every Monday in TON, from ' + m };
   const row = (t, btn, id) => `<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-top:1px solid rgba(255,255,255,.07);font-size:13.5px;line-height:1.35"><span style="flex:1">${t}</span>${btn ? `<button id="${id}" style="flex:none;border:0;border-radius:999px;padding:6px 12px;font-weight:800;font-size:12px;background:#7dff6b;color:#10200f;cursor:pointer">${btn}</button>` : ''}</div>`;
   return `<div style="margin:0 0 14px;padding:12px 14px;border-radius:16px;border:1px solid rgba(125,255,107,.45);background:rgba(125,255,107,.07)"><b style="display:block;font-size:15px;margin-bottom:4px">${T.h}</b>`
-    + row(T.f) + row(T.d) + row(T.cg + K(1, 0.5, 0.25) + T.wk) + row(T.cp + K(1, 0.5, 0.25) + T.wk) + row(T.cd + K(1, 0.5, 0.25) + T.wk, T.cb, 'tonrk')
+    + row(T.f + (tonPromo(s) ? '<br><b style="color:#ffd43b">' + tonPromo(s) + '</b>' : '')) + row(T.d) + row(T.cg + K(1, 0.5, 0.25) + T.wk) + row(T.cp + K(1, 0.5, 0.25) + T.wk) + row(T.cd + K(1, 0.5, 0.25) + T.wk, T.cb, 'tonrk')
     // 17 oct 2026: already subscribed: it says so (no button)
     + (s.sub ? row('✅ ' + T.js.replace(/^📣 /, '') + ' · ' + T.ok) : row(T.js, T.jb, 'tonjs'))
     + (s.subm ? row('✅ ' + T.mc.replace(/^📣 /, '') + ' · ' + T.ok) : row(T.mc, T.jb, 'tonmc')) + row(T.pay) + `</div>`;
@@ -163,7 +165,7 @@ async function tonPage() {
   const steps = L.st(tonF2(s.usd), tonF2(s.min), s.delay).map((x, i) => `<div style="display:flex;gap:10px;align-items:flex-start;margin:0 0 8px"><span style="flex:none;width:24px;height:24px;border-radius:50%;background:#2ee6ff;color:#062a33;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13px">${i + 1}</span><span style="font-size:14px">${x}</span></div>`).join('');
   // 15 oct 2026: a nicer sheet: the earnings card first, then the big invite button, the friends, the contest, how it works
   d.innerHTML = `<div class="tsx"><div class="grab"></div>`
-    + `<div class="hero"><div class="ic">💎</div><div><b>${L.h.replace(/^💎 /, '')}</b><span>${LANG === 'fr' ? tonF2(s.usd) + ' $ / ami' : '$' + tonF2(s.usd) + ' / friend'}</span></div></div>`
+    + `<div class="hero"><div class="ic">💎</div><div><b>${L.h.replace(/^💎 /, '')}</b><span>${LANG === 'fr' ? tonF2(s.usd) + ' $ / ami' : '$' + tonF2(s.usd) + ' / friend'}${tonPromo(s) ? '<small style="display:block;margin-top:2px;color:#ffd43b;font-weight:700">' + tonPromo(s) + '</small>' : ''}</span></div></div>`
     + `<p class="sub">${L.s(tonF2(s.usd))}</p>`
     + `<div class="earn" id="tondet">${gameDet(s, 'mct', D, tonM, LANG === 'fr')}</div>`
     // 17 oct 2026 (Jeremy): everything that can be earned, in the sheet: friends, diamond, the 3 paid contests, @jeremstyke and Daily Score
