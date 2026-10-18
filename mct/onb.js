@@ -5,6 +5,7 @@
 (() => {
   const TX = {
     en: {
+      tmct: '🆕 You unlock 🏛️ $MCT', u3m: '🆕 Unlocked today: 🏛️ $MCT', u3ms: 'The official coin of the game: its holders share a dividend every Monday. You already got some when you arrived.', u3mb: '🏛️ See $MCT',
       g1: '🎯 Your goal today: buy your first memecoin', g1s: 'Tap a coin in the 🔥 Hot list below, then Buy. $100 is enough to start.', g1b: '👇 See the coins',
       g2: '📈 Well done! Now sell it with a gain', g2s: 'Prices move all the time. Open your portfolio: when your coin is green, sell it to cash in.', g2b: '💼 My portfolio',
       g3: '✅ You got the game!', tm: '📅 Come back tomorrow:', tb: (d, a) => '🎁 Daily bonus day ' + d + ': +' + a, tbn: (d, a) => '🎁 Today\'s bonus (day ' + d + '): +' + a + ', take it now!', tc: '📈 Your coins will have moved', tmine: '🆕 You unlock ⛏️ mining', tclan: '🆕 You unlock 🛡️ clans and 🏛️ $MCT', tharv: '⛏️ Collect what your rig mined',
@@ -12,6 +13,7 @@
       u3: '🆕 Unlocked today: 🛡️ clans and 🏛️ $MCT', u3s: 'Join a clan: every week the top 3 win up to $20,000. And $MCT, the official coin, pays its holders every Monday.', u3b: '🛡️ See the clans',
     },
     fr: {
+      tmct: '🆕 Tu débloques 🏛️ $MCT', u3m: '🆕 Débloqué aujourd\'hui : 🏛️ $MCT', u3ms: 'Le coin officiel du jeu : ceux qui en ont se partagent un dividende chaque lundi. Tu en as déjà reçu à ton arrivée.', u3mb: '🏛️ Voir $MCT',
       g1: '🎯 Ton objectif du jour : achète ton premier memecoin', g1s: 'Touche un coin de la liste 🔥 Hot ci-dessous, puis Acheter. 100 $ suffisent pour commencer.', g1b: '👇 Voir les coins',
       g2: '📈 Bien joué ! Maintenant, revends avec un gain', g2s: 'Les prix bougent tout le temps. Ouvre ton portefeuille : quand ton coin est en vert, vends-le pour encaisser.', g2b: '💼 Mon portefeuille',
       g3: '✅ Tu as compris le jeu !', tm: '📅 Reviens demain :', tb: (d, a) => '🎁 Bonus du jour ' + d + ' : +' + a, tbn: (d, a) => '🎁 Bonus d\'aujourd\'hui (jour ' + d + ') : +' + a + ', prends-le maintenant !', tc: '📈 Tes coins auront bougé', tmine: '🆕 Tu débloques le ⛏️ minage', tclan: '🆕 Tu débloques les 🛡️ clans et 🏛️ $MCT', tharv: '⛏️ Récupère ce que ton rig a miné',
@@ -19,6 +21,7 @@
       u3: '🆕 Débloqué aujourd\'hui : les 🛡️ clans et 🏛️ $MCT', u3s: 'Rejoins un clan : chaque semaine, les 3 meilleurs gagnent jusqu\'à 20 000 $. Et $MCT, le coin officiel, rapporte un dividende chaque lundi.', u3b: '🛡️ Voir les clans',
     },
     id: {
+      tmct: '🆕 Kamu membuka 🏛️ $MCT', u3m: '🆕 Terbuka hari ini: 🏛️ $MCT', u3ms: 'Koin resmi game ini: pemegangnya berbagi dividen setiap Senin. Kamu sudah dapat saat bergabung.', u3mb: '🏛️ Lihat $MCT',
       g1: '🎯 Target hari ini: beli memecoin pertamamu', g1s: 'Ketuk koin di daftar 🔥 Hot di bawah, lalu Beli. $100 cukup untuk mulai.', g1b: '👇 Lihat koin',
       g2: '📈 Bagus! Sekarang jual dengan untung', g2s: 'Harga bergerak terus. Buka portofoliomu: saat koinmu hijau, jual untuk mencairkan.', g2b: '💼 Portofolioku',
       g3: '✅ Kamu sudah paham gamenya!', tm: '📅 Kembali besok:', tb: (d, a) => '🎁 Bonus harian hari ' + d + ': +' + a, tbn: (d, a) => '🎁 Bonus hari ini (hari ' + d + '): +' + a + ', ambil sekarang!', tc: '📈 Koinmu akan bergerak', tmine: '🆕 Kamu membuka ⛏️ tambang', tclan: '🆕 Kamu membuka 🛡️ klan dan 🏛️ $MCT', tharv: '⛏️ Ambil hasil tambang rig-mu',
@@ -26,6 +29,7 @@
       u3: '🆕 Terbuka hari ini: 🛡️ klan dan 🏛️ $MCT', u3s: 'Gabung klan: setiap minggu 3 teratas menang hingga $20,000. Dan $MCT, koin resmi, membayar pemegangnya setiap Senin.', u3b: '🛡️ Lihat klan',
     },
     ar: {
+      tmct: '🆕 تفتح 🏛️ $MCT', u3m: '🆕 فُتح اليوم: 🏛️ $MCT', u3ms: 'العملة الرسمية للعبة: يتقاسم حاملوها أرباحًا كل اثنين. لقد حصلت على بعضها عند وصولك.', u3mb: '🏛️ شاهد $MCT',
       g1: '🎯 هدفك اليوم: اشترِ أول عملة ميم', g1s: 'اضغط على عملة من قائمة 🔥 الرائج أدناه، ثم اشترِ. 100$ تكفي للبدء.', g1b: '👇 شاهد العملات',
       g2: '📈 أحسنت! الآن بِعها بربح', g2s: 'الأسعار تتحرك باستمرار. افتح محفظتك: عندما تكون عملتك خضراء، بِعها لتحصد الربح.', g2b: '💼 محفظتي',
       g3: '✅ فهمت اللعبة!', tm: '📅 عد غدًا:', tb: (d, a) => '🎁 المكافأة اليومية اليوم ' + d + ': +' + a, tbn: (d, a) => '🎁 مكافأة اليوم (اليوم ' + d + '): +' + a + '، خذها الآن!', tc: '📈 ستكون عملاتك قد تحركت', tmine: '🆕 تفتح ⛏️ التعدين', tclan: '🆕 تفتح 🛡️ العشائر و🏛️ $MCT', tharv: '⛏️ اجمع ما عدّنه جهازك',
@@ -54,7 +58,7 @@
     a.push(S.bonus_today ? T.tb(S.tomorrow_day, usd(S.tomorrow)) : T.tbn(S.tomorrow_day, usd(S.tomorrow)));
     if (S.holds) a.push(T.tc);
     if (S.day === 1) a.push(T.tmine);
-    else if (S.day === 2) a.push(S.mining ? T.tharv : T.tmine, T.tclan);
+    else if (S.day === 2) a.push(S.mining ? T.tharv : T.tmine, S.clan ? T.tmct : T.tclan); // 18 oct 2026: arrived through a clan link, already in a clan
     else if (S.mining) a.push(T.tharv);
     return '<b class="h" style="margin-top:10px;font-size:14px">' + ec(T.tm) + '</b><ul>' + a.map((x) => '<li>' + ec(x) + '</li>').join('') + '</ul>';
   }
@@ -65,6 +69,7 @@
     else if (S.day === 1) h = '<b class="h">' + ec(T.g3) + '</b>' + tomorrowList(T);
     else if (S.day === 2 && !S.mining) { h = '<b class="h">' + ec(T.u2) + '</b><p>' + ec(T.u2s) + '</p>'; btn = ['u2b', () => { try { go('mine'); } catch (e) {} }]; }
     else if (S.day === 2) h = tomorrowList(T).replace('margin-top:10px;', '');
+    else if (S.day === 3 && S.clan) { h = '<b class="h">' + ec(T.u3m) + '</b><p>' + ec(T.u3ms) + '</p>'; btn = ['u3mb', () => { try { openCoin(102); } catch (e) {} }]; }
     else if (S.day === 3) { h = '<b class="h">' + ec(T.u3) + '</b><p>' + ec(T.u3s) + '</p>'; btn = ['u3b', () => { try { if (window.mctClans) window.mctClans(); else go('leaders'); } catch (e) {} }]; }
     if (!h) { c.remove(); return; }
     c.innerHTML = h + (btn ? '<button type="button" class="go">' + ec(T[btn[0]]) + '</button>' : '');
