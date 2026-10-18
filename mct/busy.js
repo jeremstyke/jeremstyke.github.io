@@ -1,6 +1,6 @@
 // 18 oct 2026 (Jeremy): when too many players arrive at once and the server is slow or down, a nice "busy" screen
 // instead of a frozen game: "So many players right now, please wait". It shows when a call of the game takes more than
-// 7 s or fails (502, 503, 504, network), and goes away by itself as soon as a call works again. Each showing is counted. While it is shown,
+// 4 s or fails (502, 503, 504, network), and goes away by itself as soon as a call works again. Each showing is counted. While it is shown,
 // the page is reloaded after 30 s if the game never managed to load, and the server is checked again every 10 s. Loaded in <head>, before the game, so every call is watched.
 (() => {
   const TX = {
@@ -76,13 +76,13 @@
     return of.apply(this, arguments).then((r) => {
       pending.delete(id);
       if (r.status === 502 || r.status === 503 || r.status === 504) { failAt = Date.now(); show('down'); }
-      else { if (r.ok) okOnce = true; failAt = 0; if (![...pending.values()].some((t) => Date.now() - t > 7000)) hide(); }
+      else { if (r.ok) okOnce = true; failAt = 0; if (![...pending.values()].some((t) => Date.now() - t > 4000)) hide(); }
       return r;
     }, (e) => { pending.delete(id); if (navigator.onLine !== false) { failAt = Date.now(); show('down'); } throw e; });
   };
-  // a call that takes more than 7 s shows the screen; it goes away when the calls answer again
+  // a call that takes more than 4 s shows the screen; it goes away when the calls answer again
   setInterval(() => {
-    const slow = [...pending.values()].some((t) => Date.now() - t > 7000);
+    const slow = [...pending.values()].some((t) => Date.now() - t > 4000);
     if (slow) show('slow'); else if (ov && !failAt && !pending.size) hide();
     // after a failure, a light check every 10 s: as soon as the server answers again, the screen goes away
     if (ov && failAt && !pending.size && Date.now() - lastProbe > 10000) {
