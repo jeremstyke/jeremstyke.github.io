@@ -1,6 +1,6 @@
 // 18 oct 2026 (Jeremy): when too many players arrive at once and the server is slow or down, a nice "busy" screen
 // instead of a frozen game: "So many players right now, please wait". It shows when a call of the game takes more than
-// 7 s or fails (502, 503, 504, network), and goes away by itself as soon as a call works again. While it is shown,
+// 7 s or fails (502, 503, 504, network), and goes away by itself as soon as a call works again. Each showing is counted. While it is shown,
 // the page is reloaded after 30 s if the game never managed to load, and the server is checked again every 10 s. Loaded in <head>, before the game, so every call is watched.
 (() => {
   const TX = {
@@ -20,9 +20,23 @@
 
   let ov = null, okOnce = false, failAt = 0, reloadT = null, lastProbe = 0;
   const pending = new Map(); let seq = 0;
-  function show() {
+  // each showing is counted (mct_busy_log, action mon_busy): when, how long and why; kept in the phone until it can be sent
+  const TONF = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-ton';
+  let shownAt = 0, shownKind = '';
+  function report() {
+    let q = []; try { q = JSON.parse(localStorage.getItem('mct_busyq') || '[]'); } catch (e) {}
+    let id = ''; try { id = window.Telegram.WebApp.initData || ''; } catch (e) {}
+    if (!q.length || !id) return;
+    try { localStorage.removeItem('mct_busyq'); } catch (e) {}
+    q.slice(-10).forEach((x) => { of(TONF, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(Object.assign({ initData: id, action: 'mon_busy' }, x)) }).catch(() => {}); });
+  }
+  function note(secs) {
+    try { const q = JSON.parse(localStorage.getItem('mct_busyq') || '[]'); q.push({ at: shownAt, secs, kind: shownKind }); localStorage.setItem('mct_busyq', JSON.stringify(q.slice(-10))); } catch (e) {}
+  }
+  function show(kind) {
     if (ov || document.getElementById('mtov')) return; // the maintenance screen has priority
     if (!document.body) return;
+    shownAt = Date.now(); shownKind = kind === 'down' ? 'down' : 'slow'; note(0);
     const T = TX[lg()];
     if (!document.getElementById('busyst')) {
       const st = document.createElement('style'); st.id = 'busyst';
@@ -50,6 +64,9 @@
   function hide() {
     if (reloadT) { clearTimeout(reloadT); reloadT = null; }
     if (!ov) return; const o = ov; ov = null;
+    // the last line of the queue is this showing: its length is now known
+    try { const q = JSON.parse(localStorage.getItem('mct_busyq') || '[]'); if (q.length && q[q.length - 1].at === shownAt) { q[q.length - 1].secs = Math.round((Date.now() - shownAt) / 1000); localStorage.setItem('mct_busyq', JSON.stringify(q)); } } catch (e) {}
+    setTimeout(report, 2000);
     o.style.transition = 'opacity .3s'; o.style.opacity = '0'; setTimeout(() => o.remove(), 320);
   }
   const of = window.fetch;
@@ -58,20 +75,21 @@
     const id = ++seq; pending.set(id, Date.now());
     return of.apply(this, arguments).then((r) => {
       pending.delete(id);
-      if (r.status === 502 || r.status === 503 || r.status === 504) { failAt = Date.now(); show(); }
+      if (r.status === 502 || r.status === 503 || r.status === 504) { failAt = Date.now(); show('down'); }
       else { if (r.ok) okOnce = true; failAt = 0; if (![...pending.values()].some((t) => Date.now() - t > 7000)) hide(); }
       return r;
-    }, (e) => { pending.delete(id); if (navigator.onLine !== false) { failAt = Date.now(); show(); } throw e; });
+    }, (e) => { pending.delete(id); if (navigator.onLine !== false) { failAt = Date.now(); show('down'); } throw e; });
   };
   // a call that takes more than 7 s shows the screen; it goes away when the calls answer again
   setInterval(() => {
     const slow = [...pending.values()].some((t) => Date.now() - t > 7000);
-    if (slow) show(); else if (ov && !failAt && !pending.size) hide();
+    if (slow) show('slow'); else if (ov && !failAt && !pending.size) hide();
     // after a failure, a light check every 10 s: as soon as the server answers again, the screen goes away
     if (ov && failAt && !pending.size && Date.now() - lastProbe > 10000) {
       lastProbe = Date.now();
       window.fetch('/mct/api', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{"action":"ping"}' }).catch(() => {});
     }
   }, 1000);
+  setTimeout(() => { if (okOnce && !ov) report(); }, 15000);
   window.mctBusy = { show, hide };
 })();
