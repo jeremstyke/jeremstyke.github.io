@@ -49,6 +49,8 @@
     c.querySelector('#tokh').onclick = () => { hp(); OPEN = !OPEN; draw(c); };
     c.querySelector('#tokv').onclick = async (ev) => {
       const b = ev.currentTarget; hp(); b.disabled = true; b.textContent = '⏳';
+      // 18 oct 2026 (Jeremy): check before the video, so nobody watches a video for nothing
+      await load(); if (!S || !(S.vid_left > 0) || !(S.reserve > 0)) { tst(S && S.reserve > 0 ? T.done : T.empty); draw(c); return; }
       const ok = window.mctRw ? await window.mctRw.watch(1, b) : true;
       if (!ok) { tst(T.skip); draw(c); return; }
       const r = await call('vid');
