@@ -18,7 +18,7 @@
   };
   const watched = (u) => { const s = String((u && u.url) || u || ''); return s.indexOf('/mct/api') >= 0 || s.indexOf('/functions/v1/mct-ton') >= 0; };
 
-  let ov = null, okOnce = false, failAt = 0, reloadT = null, lastProbe = 0;
+  let ov = null, okOnce = false, failAt = 0, reloadT = null, lastProbe = 0, demo = false;
   const pending = new Map(); let seq = 0;
   // each showing is counted (mct_busy_log, action mon_busy): when, how long and why; kept in the phone until it can be sent
   const TONF = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-ton';
@@ -36,7 +36,7 @@
   function show(kind) {
     if (ov || document.getElementById('mtov')) return; // the maintenance screen has priority
     if (!document.body) return;
-    shownAt = Date.now(); shownKind = kind === 'down' ? 'down' : 'slow'; note(0);
+    shownAt = Date.now(); shownKind = kind === 'down' ? 'down' : 'slow'; if (!demo) note(0);
     const T = TX[lg()];
     if (!document.getElementById('busyst')) {
       const st = document.createElement('style'); st.id = 'busyst';
@@ -83,7 +83,7 @@
   // a call that takes more than 4 s shows the screen; it goes away when the calls answer again
   setInterval(() => {
     const slow = [...pending.values()].some((t) => Date.now() - t > 4000);
-    if (slow) show('slow'); else if (ov && !failAt && !pending.size) hide();
+    if (slow) show('slow'); else if (ov && !demo && !failAt && !pending.size) hide();
     // after a failure, a light check every 10 s: as soon as the server answers again, the screen goes away
     if (ov && failAt && !pending.size && Date.now() - lastProbe > 10000) {
       lastProbe = Date.now();
@@ -91,5 +91,11 @@
     }
   }, 1000);
   setTimeout(() => { if (okOnce && !ov) report(); }, 15000);
+  // 18 oct 2026 (Jeremy): a link ?startapp=busytest shows the screen for 10 s, to see it (not counted, never reloads the page)
+  try {
+    if ((window.Telegram.WebApp.initDataUnsafe || {}).start_param === 'busytest') {
+      setTimeout(() => { demo = true; okOnce = true; show('slow'); setTimeout(() => { demo = false; hide(); }, 10000); }, 2500);
+    }
+  } catch (e) {}
   window.mctBusy = { show, hide };
 })();
