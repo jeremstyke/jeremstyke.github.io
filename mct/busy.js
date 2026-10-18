@@ -69,21 +69,26 @@
     setTimeout(report, 2000);
     o.style.transition = 'opacity .3s'; o.style.opacity = '0'; setTimeout(() => o.remove(), 320);
   }
+  // 18 oct 2026 (Jeremy): only when the player is really stuck: the calls made while the game loads (first 15 s) or right after
+  // he touched something (1.5 s). A slow call in the background (notifications, refreshes) never covers the screen.
+  const T0 = Date.now(); let lastTap = 0;
+  ['pointerdown', 'touchstart', 'click'].forEach((ev) => document.addEventListener(ev, () => { lastTap = Date.now(); }, true));
+  const isUser = () => Date.now() - T0 < 15000 || Date.now() - lastTap < 1500;
+  const stuck = () => [...pending.values()].some((p) => p.user && Date.now() - p.t > 4000);
   const of = window.fetch;
   window.fetch = function (u, o) {
     if (!watched(u)) return of.apply(this, arguments);
-    const id = ++seq; pending.set(id, Date.now());
+    const id = ++seq, user = isUser(); pending.set(id, { t: Date.now(), user });
     return of.apply(this, arguments).then((r) => {
       pending.delete(id);
-      if (r.status === 502 || r.status === 503 || r.status === 504) { failAt = Date.now(); show('down'); }
-      else { if (r.ok) okOnce = true; failAt = 0; if (![...pending.values()].some((t) => Date.now() - t > 4000)) hide(); }
+      if (r.status === 502 || r.status === 503 || r.status === 504) { if (user) { failAt = Date.now(); show('down'); } }
+      else { if (r.ok) okOnce = true; failAt = 0; if (!stuck()) hide(); }
       return r;
-    }, (e) => { pending.delete(id); if (navigator.onLine !== false) { failAt = Date.now(); show('down'); } throw e; });
+    }, (e) => { pending.delete(id); if (user && navigator.onLine !== false) { failAt = Date.now(); show('down'); } throw e; });
   };
-  // a call that takes more than 4 s shows the screen; it goes away when the calls answer again
+  // a call of the player that takes more than 4 s shows the screen; it goes away when the calls answer again
   setInterval(() => {
-    const slow = [...pending.values()].some((t) => Date.now() - t > 4000);
-    if (slow) show('slow'); else if (ov && !demo && !failAt && !pending.size) hide();
+    if (stuck()) show('slow'); else if (ov && !demo && !failAt) hide();
     // after a failure, a light check every 10 s: as soon as the server answers again, the screen goes away
     if (ov && failAt && !pending.size && Date.now() - lastProbe > 10000) {
       lastProbe = Date.now();
