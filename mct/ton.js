@@ -249,10 +249,23 @@ async function tonPlace() {
 // and a link to Daily Score (where predictions also pay real TON). A tap on the bar opens the TON page.
 let USDTB = null;
 // 17 oct 2026 (18h20): smaller, one line like Daily Score: my gains + everything that can be earned (scrolling), and 2 small buttons
-const usdtGain = () => TONLAST && TONLAST.ok ? (LANG === 'fr' ? 'Mes gains : ' : 'My earnings: ') + tonM(Number(TONLAST.balance || 0) + Number(TONLAST.paid || 0) + Number(TONLAST.waiting || 0)) : tonL().bh.replace(/^💵 /, '');
+// 18 oct 2026 (Jeremy): the bar follows the player's language (it kept the language it was built in when he changed it)
+const usdtGain = () => TONLAST && TONLAST.ok ? (({ fr: 'Mes gains : ', id: 'Penghasilanku: ', ar: 'أرباحي: ' })[LANG] || 'My earnings: ') + tonM(Number(TONLAST.balance || 0) + Number(TONLAST.paid || 0) + Number(TONLAST.waiting || 0)) : tonL().bh.replace(/^💵 /, '');
+function usdtWays() {
+  const u = tonM((TONLAST && TONLAST.usd) || 0.05);
+  return ({
+    fr: '👥 Parrainage : ' + u + ' par ami qui joue 3 jours (+ 500 $ chacun dans le jeu) · 💎 Tape le diamant : de l\'argent à chaque tape · 🏆 Concours des gains : 1 $, 0,50 $ et 0,25 $ · 🏆 Concours des parrains : 1 $, 0,50 $ et 0,25 $ · 🏆 Concours du diamant : 1 $, 0,50 $ et 0,25 $ (les 3 payés chaque lundi) · 📣 Abonné à @jeremstyke et à @memecointycoon : 0,01 $ chacun tout de suite, puis tous les 30 jours · 💸 Payé en TON chaque lundi',
+    id: '👥 Undang teman: ' + u + ' per teman yang bermain 3 hari (+ $500 di game) · 💎 Ketuk berlian: uang di setiap ketukan · 🏆 Kontes keuntungan: $1, $0.50, $0.25 · 🏆 Kontes pengundang: $1, $0.50, $0.25 · 🏆 Kontes berlian: $1, $0.50, $0.25 (dibayar tiap Senin) · 📣 Langganan @jeremstyke dan @memecointycoon: masing-masing $0.01 langsung, lalu tiap 30 hari · 💸 Dibayar dalam TON tiap Senin',
+    ar: '👥 الإحالة: ' + u + ' عن كل صديق يلعب 3 أيام (+ 500 $ في اللعبة) · 💎 اضغط على الماسة: مال مع كل ضغطة · 🏆 مسابقة الأرباح: 1 $ و0.50 $ و0.25 $ · 🏆 مسابقة الداعين: 1 $ و0.50 $ و0.25 $ · 🏆 مسابقة الماسة: 1 $ و0.50 $ و0.25 $ (تُدفع كل اثنين) · 📣 اشترك في @jeremstyke و@memecointycoon: 0.01 $ لكل منهما فورًا ثم كل 30 يومًا · 💸 الدفع بعملة TON كل اثنين',
+  })[LANG] || '👥 Referral: ' + u + ' per friend who plays 3 days (+ $500 each in the game) · 💎 Tap the diamond: money on every tap · 🏆 Gains contest: $1, $0.50 and $0.25 · 🏆 Sponsor contest: $1, $0.50 and $0.25 · 🏆 Diamond contest: $1, $0.50 and $0.25 (all 3 paid every Monday) · 📣 Subscribed to @jeremstyke and @memecointycoon: $0.01 each right away, then every 30 days · 💸 Paid in TON every Monday';
+}
 async function usdtBar() {
   if (!tw || !tw.initData) return;
-  if (USDTB && document.body.contains(USDTB)) { const m = USDTB.querySelector('.ubm'); if (m && m.textContent !== usdtGain()) m.textContent = usdtGain(); return; }
+  if (USDTB && document.body.contains(USDTB)) {
+    const m = USDTB.querySelector('.ubm'); if (m && m.textContent !== usdtGain()) m.textContent = usdtGain();
+    if (USDTB.dataset.l !== LANG) { USDTB.dataset.l = LANG; const w = USDTB.querySelector('.ubw span'); if (w) w.textContent = usdtWays(); }
+    return;
+  }
   if (USDTB === false) return;
   USDTB = false;
   if (!(await tonOn())) { USDTB = null; return; }
@@ -268,16 +281,10 @@ async function usdtBar() {
       + '#usdtb .ubx{flex:none;width:36px;height:36px;border:0;border-radius:50%;font-size:18px;background:rgba(125,255,107,.18);cursor:pointer;padding:0}';
     document.head.appendChild(st);
   }
-  const u = tonM((TONLAST && TONLAST.usd) || 0.05);
-  const ways = ({
-    fr: '👥 Parrainage : ' + u + ' par ami qui joue 3 jours (+ 500 $ chacun dans le jeu) · 💎 Tape le diamant : de l\'argent à chaque tape · 🏆 Concours des gains : 1 $, 0,50 $ et 0,25 $ · 🏆 Concours des parrains : 1 $, 0,50 $ et 0,25 $ · 🏆 Concours du diamant : 1 $, 0,50 $ et 0,25 $ (les 3 payés chaque lundi) · 📣 Abonné à @jeremstyke et à @memecointycoon : 0,01 $ chacun tout de suite, puis tous les 30 jours · 💸 Payé en TON chaque lundi',
-    id: '👥 Undang teman: ' + u + ' per teman yang bermain 3 hari (+ $500 di game) · 💎 Ketuk berlian: uang di setiap ketukan · 🏆 Kontes keuntungan: $1, $0.50, $0.25 · 🏆 Kontes pengundang: $1, $0.50, $0.25 · 🏆 Kontes berlian: $1, $0.50, $0.25 (dibayar tiap Senin) · 📣 Langganan @jeremstyke dan @memecointycoon: masing-masing $0.01 langsung, lalu tiap 30 hari · 💸 Dibayar dalam TON tiap Senin',
-    ar: '👥 الإحالة: ' + u + ' عن كل صديق يلعب 3 أيام (+ 500 $ في اللعبة) · 💎 اضغط على الماسة: مال مع كل ضغطة · 🏆 مسابقة الأرباح: 1 $ و0.50 $ و0.25 $ · 🏆 مسابقة الداعين: 1 $ و0.50 $ و0.25 $ · 🏆 مسابقة الماسة: 1 $ و0.50 $ و0.25 $ (تُدفع كل اثنين) · 📣 اشترك في @jeremstyke و@memecointycoon: 0.01 $ لكل منهما فورًا ثم كل 30 يومًا · 💸 الدفع بعملة TON كل اثنين',
-  })[LANG] || '👥 Referral: ' + u + ' per friend who plays 3 days (+ $500 each in the game) · 💎 Tap the diamond: money on every tap · 🏆 Gains contest: $1, $0.50 and $0.25 · 🏆 Sponsor contest: $1, $0.50 and $0.25 · 🏆 Diamond contest: $1, $0.50 and $0.25 (all 3 paid every Monday) · 📣 Subscribed to @jeremstyke and @memecointycoon: $0.01 each right away, then every 30 days · 💸 Paid in TON every Monday';
   const d = document.createElement('div'); d.id = 'usdtb';
   // 17 oct 2026 (Jeremy, 23h): the diamond moves from the top bar to this bar (the clans take its place at the top)
   d.innerHTML = '<div class="ubi"><span style="font-size:22px">💵</span><div class="ubt"><b class="ubm"></b><span class="ubw"><span></span></span></div><button class="ubx ubd" type="button" aria-label="Diamond" style="background:rgba(46,230,255,.18);border:1px solid rgba(46,230,255,.5)">💎</button></div>';
-  d.querySelector('.ubm').textContent = usdtGain(); d.querySelector('.ubw span').textContent = ways;
+  d.querySelector('.ubm').textContent = usdtGain(); d.querySelector('.ubw span').textContent = usdtWays(); d.dataset.l = LANG;
   d.querySelector('.ubi').onclick = (e) => {
     try { haptic(); } catch (x) {}
     if (e && e.target && e.target.closest && e.target.closest('.ubd')) { const g = document.getElementById('diatop'); if (g) g.click(); return; }
