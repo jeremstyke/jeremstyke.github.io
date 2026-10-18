@@ -1,6 +1,6 @@
 // 18 oct 2026 (Jeremy): when too many players arrive at once and the server is slow or down, a nice "busy" screen
 // instead of a frozen game: "So many players right now, please wait". It shows when a call of the game takes more than
-// 4 s or fails (502, 503, 504, network), and goes away by itself as soon as a call works again. Each showing is counted. While it is shown,
+// 4 s (later for a player whose connection is always slow: a small pill instead) or fails (502, 503, 504, network), and goes away by itself as soon as a call works again. Each showing is counted. While it is shown,
 // the page is reloaded after 30 s if the game never managed to load, and the server is checked again every 10 s. Loaded in <head>, before the game, so every call is watched.
 (() => {
   const TX = {
@@ -74,21 +74,42 @@
   const T0 = Date.now(); let lastTap = 0;
   ['pointerdown', 'touchstart', 'click'].forEach((ev) => document.addEventListener(ev, () => { lastTap = Date.now(); }, true));
   const isUser = () => Date.now() - T0 < 15000 || Date.now() - lastTap < 1500;
-  const stuck = () => [...pending.values()].some((p) => p.user && Date.now() - p.t > 4000);
+  // 18 oct 2026 (Jeremy): the speed of each player's own connection. A player whose calls are always slow (far country, VPN)
+  // gets a later limit and a small "slow connection" pill that does not block the screen; the big screen stays for real
+  // problems (server down, or a usually fast player suddenly stuck). Baseline = the 25 % fastest of his last 30 calls.
+  const durs = [];
+  const base = () => { if (durs.length < 6) return 0; const a = durs.slice().sort((x, y) => x - y); return a[Math.floor(a.length * 0.25)]; };
+  const slowConn = () => base() > 1500;
+  const thr = () => slowConn() ? Math.max(4000, Math.min(15000, base() * 4)) : 4000;
+  const stuck = () => { const l = thr(); return [...pending.values()].some((p) => p.user && Date.now() - p.t > l); };
+  const PX = { en: '⏳ Slow connection…', fr: '⏳ Connexion lente…', id: '⏳ Koneksi lambat…', ar: '⏳ اتصال بطيء…' };
+  let pillEl = null;
+  function pill(on) {
+    if (!on) { if (pillEl) { pillEl.remove(); pillEl = null; } return; }
+    if (pillEl || ov || !document.body) return;
+    pillEl = document.createElement('div'); pillEl.id = 'busypill'; pillEl.setAttribute('role', 'status');
+    pillEl.style.cssText = 'position:fixed;left:50%;transform:translateX(-50%);top:calc(10px + env(safe-area-inset-top));z-index:9997;padding:7px 14px;border-radius:999px;background:rgba(26,6,56,.92);border:1px solid rgba(255,212,59,.45);color:#f7f1ff;font:600 13px "Bricolage Grotesque",system-ui,sans-serif;pointer-events:none;box-shadow:0 6px 18px rgba(0,0,0,.35)';
+    pillEl.textContent = PX[lg()] || PX.en;
+    document.body.appendChild(pillEl);
+  }
   const of = window.fetch;
   window.fetch = function (u, o) {
     if (!watched(u)) return of.apply(this, arguments);
-    const id = ++seq, user = isUser(); pending.set(id, { t: Date.now(), user });
+    const id = ++seq, user = isUser(), pending_t = Date.now(); pending.set(id, { t: pending_t, user });
     return of.apply(this, arguments).then((r) => {
       pending.delete(id);
       if (r.status === 502 || r.status === 503 || r.status === 504) { if (user) { failAt = Date.now(); show('down'); } }
-      else { if (r.ok) okOnce = true; failAt = 0; if (!stuck()) hide(); }
+      else {
+        if (r.ok) { okOnce = true; durs.push(Date.now() - pending_t); if (durs.length > 30) durs.shift(); }
+        failAt = 0; if (!stuck()) { hide(); pill(false); }
+      }
       return r;
     }, (e) => { pending.delete(id); if (user && navigator.onLine !== false) { failAt = Date.now(); show('down'); } throw e; });
   };
   // a call of the player that takes more than 4 s shows the screen; it goes away when the calls answer again
   setInterval(() => {
-    if (stuck()) show('slow'); else if (ov && !demo && !failAt) hide();
+    if (stuck()) { if (slowConn() && !ov) pill(true); else show('slow'); }
+    else { pill(false); if (ov && !demo && !failAt) hide(); }
     // after a failure, a light check every 10 s: as soon as the server answers again, the screen goes away
     if (ov && failAt && !pending.size && Date.now() - lastProbe > 10000) {
       lastProbe = Date.now();
