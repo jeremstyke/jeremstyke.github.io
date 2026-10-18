@@ -19,7 +19,7 @@
       donate: '💝 Donner à la cagnotte', amount: 'Montant en $', leave: 'Quitter le clan', leaveq: 'Sûr ? Tu perds ta part de la semaine.',
       reqs: 'Demandes', accept: 'Accepter', refuse: 'Refuser', newp: 'nouveau joueur', nreq: 'Aucune demande.',
       chiefh: '👑 Gestion de la cagnotte', take: 'Prendre pour moi', give: 'Donner à', lock7: 'Bloquer 7 j (+10 %)', lock30: 'Bloquer 30 j (+50 %)', locks: 'Bloqué', until: 'jusqu\'au', kick: 'Exclure',
-      help: '📺 Aider mon clan : +200 $', helpp: '💎 Aider mon clan : +200 $ (Premium)', helps: '1 vidéo par jour = +200 $ dans les gains de la semaine du clan', helpok: '🛡️ +200 $ pour ton clan !', skip: 'Vidéo pas terminée : pas de récompense cette fois.',
+      help: '📺 Aider mon clan : +200 $', helpp: '💎 Aider mon clan : +200 $ (Premium)', helps: '1 vidéo par jour = +200 $ dans les gains de la semaine du clan', helpok: '🛡️ +200 $ pour ton clan !', helped: '✅ Clan aidé aujourd\'hui · reviens demain', skip: 'Vidéo pas terminée : pas de récompense cette fois.',
       chh: '⛓️ Blockchain du clan', chx: 'Le clan lance sa propre blockchain : les frais de chaque échange de ses coins (5 % max) vont dans les gains du clan, et la prime de lancement est payée par la cagnotte.', chcost: '⛓️ Créer la blockchain · 3 000 $ de la cagnotte', chname: 'Nom (3 à 20 lettres ou chiffres)', chfee: 'Frais sur chaque échange (5 % max)', chgrant: 'Prime de lancement pour chaque nouveau coin (0 à 10 000 $, payée par la cagnotte)', chgo: '⛓️ Lancer la blockchain du clan', chinfo: (f, g, n, e) => f + ' % de frais · prime ' + g + ' · ' + n + ' coin(s) · gagné ' + e, chfeeb: '💸 Changer les frais', chgrantb: '🎁 Changer la prime', chok: '⛓️ La blockchain du clan est lancée !', chsaved: '✅ Enregistré', chnote: 'Les créateurs choisissent ta blockchain quand ils lancent un coin : des frais bas et une prime attirent plus de coins.',
       lkf: { video: '📺 Vidéos', chain: '⛓️ Frais de la blockchain', fee: '🪙 Frais du coin', donate: '💝 Dons', take: '💰 Pris par le chef', give: '🎁 Donné par le chef', lock: '🔒 Bloqué', unlock: '🔓 Débloqué', week: '🗓️ Partages du lundi', create: '🛡️ Création', join: '👤 Arrivées', new: '🆕 Recrues', top: '🏆 Classement', grant: '🎁 Primes de lancement', chain_new: '⛓️ Blockchain créée' },
       lgf: 'Tout',
@@ -40,7 +40,7 @@
       donate: '💝 Give to the pot', amount: 'Amount in $', leave: 'Leave the clan', leaveq: 'Sure? You lose your share of the week.',
       reqs: 'Requests', accept: 'Accept', refuse: 'Refuse', newp: 'new player', nreq: 'No request.',
       chiefh: '👑 Pot management', take: 'Take for me', give: 'Give to', lock7: 'Lock 7 d (+10%)', lock30: 'Lock 30 d (+50%)', locks: 'Locked', until: 'until', kick: 'Remove',
-      help: '📺 Help my clan: +$200', helpp: '💎 Help my clan: +$200 (Premium)', helps: '1 video a day = +$200 in the clan\'s earnings of the week', helpok: '🛡️ +$200 for your clan!', skip: 'The video was not finished: no reward this time.',
+      help: '📺 Help my clan: +$200', helpp: '💎 Help my clan: +$200 (Premium)', helps: '1 video a day = +$200 in the clan\'s earnings of the week', helpok: '🛡️ +$200 for your clan!', helped: '✅ Clan helped today · come back tomorrow', skip: 'The video was not finished: no reward this time.',
       chh: '⛓️ Clan blockchain', chx: 'The clan launches its own blockchain: the fees of every trade of its coins (5% max) go to the clan\'s earnings, and the launch grant is paid from the pot.', chcost: '⛓️ Create the blockchain · $3,000 from the pot', chname: 'Name (3 to 20 letters or digits)', chfee: 'Fee on every trade (5% max)', chgrant: 'Launch grant for each new coin ($0 to $10,000, paid from the pot)', chgo: '⛓️ Launch the clan blockchain', chinfo: (f, g, n, e) => f + '% fees · grant ' + g + ' · ' + n + ' coin(s) · earned ' + e, chfeeb: '💸 Change the fee', chgrantb: '🎁 Change the grant', chok: '⛓️ The clan blockchain is live!', chsaved: '✅ Saved', chnote: 'Creators pick your blockchain when they launch a coin: low fees and a grant attract more coins.',
       lkf: { video: '📺 Videos', chain: '⛓️ Blockchain fees', fee: '🪙 Coin fees', donate: '💝 Gifts', take: '💰 Taken by the chief', give: '🎁 Given by the chief', lock: '🔒 Locked', unlock: '🔓 Unlocked', week: '🗓️ Monday splits', create: '🛡️ Creation', join: '👤 Arrivals', new: '🆕 Recruits', top: '🏆 Ranking', grant: '🎁 Launch grants', chain_new: '⛓️ Blockchain created' },
       lgf: 'All',
@@ -222,7 +222,8 @@
     h += '<button class="btn" id="clinv" style="width:100%;margin:0 0 12px">' + ec(T.invite) + '</button>';
     // 18 oct 2026 (Jeremy): one video a day = +$200 for the clan (rw.js); Premium players do it without the video
     const pr = !!(window.mctRw && window.mctRw.prem());
-    h += '<button class="btn ghost" id="clhelp" style="width:100%;margin:0 0 4px">' + ec(pr ? T.helpp : T.help) + '</button><small style="display:block;text-align:center;margin:0 0 12px;opacity:.7">' + ec(T.helps) + '</small>';
+    // 18 oct 2026: greyed out once used today (c.helped)
+    h += '<button class="btn ghost" id="clhelp" style="width:100%;margin:0 0 4px"' + (c.helped ? ' disabled' : '') + '>' + ec(c.helped ? T.helped : pr ? T.helpp : T.help) + '</button><small style="display:block;text-align:center;margin:0 0 12px;opacity:.7">' + ec(T.helps) + '</small>';
     // 18 oct 2026 (Jeremy): the clan blockchain: its fees go to the clan, its launch grant comes from the pot
     if (c.chain) h += '<div class="cc"><b>' + ec(T.chh) + '</b><div class="crow"><span>' + ec(c.chain.emoji) + ' <b>' + ec(c.chain.name) + '</b><small>' + ec(T.chinfo(c.chain.fee, usd(c.chain.grant), c.chain.coins, usd(c.chain.earned))) + '</small></span></div>'
       + (chief ? '<small>' + ec(T.chfee) + '</small><select id="chfe" class="csel">' + [0.5, 1, 1.5, 2, 2.5, 3, 4, 5].map((x) => '<option value="' + x + '"' + (Number(c.chain.fee) === x ? ' selected' : '') + '>' + x + ' %</option>').join('') + (([0.5, 1, 1.5, 2, 2.5, 3, 4, 5].indexOf(Number(c.chain.fee)) < 0) ? '<option value="' + c.chain.fee + '" selected>' + c.chain.fee + ' %</option>' : '') + '</select><button class="cb g" id="chfeb">' + ec(T.chfeeb) + '</button>'
@@ -247,11 +248,11 @@
     b.querySelectorAll('[data-ref]').forEach((x) => x.onclick = () => act('clanrefuse', { uid: Number(x.dataset.ref) }, x));
     b.querySelector('#cllog').onclick = () => { hp(); journal(b, r); };
     b.querySelector('#clhelp').onclick = async (ev) => {
-      const bt = ev.currentTarget; hp(); if (!window.mctRw) return; bt.disabled = true; const t0 = bt.textContent; bt.textContent = '⏳';
+      const bt = ev.currentTarget; hp(); if (!window.mctRw || bt.disabled || c.helped) return; bt.disabled = true; const t0 = bt.textContent; bt.textContent = '⏳';
       const ok = await window.mctRw.watch(1, bt); if (!ok) { bt.disabled = false; bt.textContent = t0; return tst(T.skip); }
       const q = await call('rwclan'); bt.disabled = false; bt.textContent = t0;
-      if (!q || !q.ok) { hp('err'); return tst(errOf(q)); }
-      hp('ok'); tst(T.helpok); show();
+      if (!q || !q.ok) { hp('err'); if (q && q.error === 'done') { bt.disabled = true; bt.textContent = T.helped; } return tst(errOf(q)); }
+      hp('ok'); tst(T.helpok); bt.disabled = true; bt.textContent = T.helped; show();
     };
     const chn = b.querySelector('#chnew'); if (chn) chn.onclick = () => {
       hp(); chn.remove(); const f = b.querySelector('#chform');
