@@ -84,8 +84,9 @@
     if (cid === 102 && sh) { const bd = sh.querySelector('.badges.hint'); if (bd && bd.textContent !== L().badge) bd.textContent = L().badge; }
     let c = null;
     if (open && cid === 102 && !sh.querySelector('#tokcc')) {
-      const bar = sh.querySelector('.bar'); if (!bar) return;
-      c = document.createElement('button'); c.type = 'button'; c.id = 'tokcc'; c.className = 'tokc'; c.dataset.m = 'coin'; c.style.margin = '8px 16px 0'; c.style.width = 'calc(100% - 32px)'; bar.insertAdjacentElement('afterend', c);
+      // 18 oct 2026 (Jeremy, 2h53): just above the chart
+      const ch = sh.querySelector('#ch'); if (!ch) return;
+      c = document.createElement('button'); c.type = 'button'; c.id = 'tokcc'; c.className = 'tokc'; c.dataset.m = 'coin'; c.style.margin = '10px 16px 6px'; c.style.width = 'calc(100% - 32px)'; ch.insertAdjacentElement('beforebegin', c);
     } else if (mk) {
       const v = document.getElementById('view'); if (!v || v.querySelector('#tokc')) return;
       const h = v.querySelector('h1'); if (!h) return;
