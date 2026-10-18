@@ -28,8 +28,8 @@
 
   // 18 oct 2026 (Jeremy, 2h35): no big card, a thin one-line bar at the top of the market; a tap opens a sheet with the details
   const st = document.createElement('style');
-  st.textContent = '#tokc{display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;border:1px solid rgba(255,212,59,.4);background:rgba(255,212,59,.08);border-radius:12px;padding:7px 10px;margin:0 0 10px;color:inherit;font:inherit;font-size:13px;cursor:pointer;text-align:left}'
-    + '#tokc .ti{font-size:16px;flex:none}#tokc b{flex:none}#tokc .tm{opacity:.75;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}#tokc .tg{flex:none;font-weight:800;font-size:12px;padding:3px 8px;border-radius:99px;background:#ffd43b;color:#1a1200}#tokc .ta{flex:none;opacity:.6}'
+  st.textContent = '.tokc{display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;border:1px solid rgba(255,212,59,.4);background:rgba(255,212,59,.08);border-radius:12px;padding:7px 10px;margin:0 0 10px;color:inherit;font:inherit;font-size:13px;cursor:pointer;text-align:left}'
+    + '.tokc .ti{font-size:16px;flex:none}.tokc b{flex:none}.tokc .tm{opacity:.75;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}.tokc .tg{flex:none;font-weight:800;font-size:12px;padding:3px 8px;border-radius:99px;background:#ffd43b;color:#1a1200}.tokc .ta{flex:none;opacity:.6}'
     + '#tokm{position:fixed;inset:0;z-index:90;background:rgba(5,3,15,.72);display:flex;align-items:flex-end;justify-content:center}#tokm>div{width:100%;max-width:520px;max-height:85vh;overflow:auto;background:var(--night,#140c2c);border:1px solid var(--line,rgba(255,255,255,.12));border-radius:22px 22px 0 0;padding:18px 16px calc(20px + env(safe-area-inset-bottom))}'
     + '#tokm .th{display:flex;align-items:center;gap:10px}#tokm .tp{margin-left:auto;text-align:right;white-space:nowrap;flex:none}#tokm small{display:block;font-size:12px;opacity:.8;line-height:1.35}'
     + '#tokm .tr{height:6px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden;margin:10px 0 4px}#tokm .tr i{display:block;height:100%;background:linear-gradient(90deg,#ffd43b,#ff9a3c)}'
@@ -40,8 +40,12 @@
   // the bar
   function draw(c) {
     if (!S || !c) return;
-    const T = L(), can = S.vid_left > 0 && S.reserve > 0;
-    c.innerHTML = '<span class="ti">🏛️</span><span class="tm" style="opacity:1">' + ec(T.how) + '</span>' + (can ? '<span class="tg">📺 +' + nf(S.vid) + '</span>' : '') + '<span class="ta">›</span>';
+    const T = L(), can = S.vid_left > 0 && S.reserve > 0, ch = S.px24 ? (Number(S.px) / Number(S.px24) - 1) * 100 : 0;
+    // in the market: price, change and what the player holds; on the coin page: how to earn
+    c.innerHTML = c.dataset.m === 'mk'
+      ? '<span class="ti">🏛️</span><b>$MCT ' + usd(S.px) + '</b><small style="color:' + (ch >= 0 ? '#4ff0b7' : '#ff8a8a') + ';font-weight:800;flex:none">' + (ch >= 0 ? '+' : '') + ch.toFixed(1) + '%</small>'
+        + '<span class="tm">· ' + ec(T.you) + ' ' + nf(S.held) + '</span>' + (can ? '<span class="tg">📺 +' + nf(S.vid) + '</span>' : '') + '<span class="ta">›</span>'
+      : '<span class="ti">🏛️</span><span class="tm" style="opacity:1">' + ec(T.how) + '</span>' + (can ? '<span class="tg">📺 +' + nf(S.vid) + '</span>' : '') + '<span class="ta">›</span>';
     c.onclick = () => { hp(); sheet(c); };
   }
   // the sheet with everything
@@ -72,15 +76,22 @@
     };
   }
   async function load() { const r = await call('state'); if (r && r.ok) S = r; return S; }
-  // 18 oct 2026 (Jeremy, 2h40): $MCT is listed with the other coins (first in Hot and Top, mct_market); no bar in the market any more,
-  // the video and how to earn are a thin bar on the $MCT coin page, a tap opens the sheet
+  // 18 oct 2026 (Jeremy): $MCT is listed with the other coins (first in Hot and Top, mct_market), a thin bar at the top of the
+  // market (2h51: kept) and on the $MCT coin page; a tap opens the sheet with the video and how to earn
   async function card() {
-    let cid = null; try { cid = COIN && COIN.coin && COIN.coin.id; } catch (e) {}
-    const sh = document.getElementById('sheet');
+    let cid = null, mk = false; try { cid = COIN && COIN.coin && COIN.coin.id; } catch (e) {} try { mk = VIEW === 'market'; } catch (e) {}
+    const sh = document.getElementById('sheet'), open = sh && sh.classList.contains('open');
     if (cid === 102 && sh) { const bd = sh.querySelector('.badges.hint'); if (bd && bd.textContent !== L().badge) bd.textContent = L().badge; }
-    if (cid !== 102 || !sh || !sh.classList.contains('open') || document.getElementById('tokc')) return;
-    const bar = sh.querySelector('.bar'); if (!bar) return;
-    const c = document.createElement('button'); c.type = 'button'; c.id = 'tokc'; c.style.margin = '8px 16px 0'; c.style.width = 'calc(100% - 32px)'; bar.insertAdjacentElement('afterend', c);
+    let c = null;
+    if (open && cid === 102 && !sh.querySelector('#tokcc')) {
+      const bar = sh.querySelector('.bar'); if (!bar) return;
+      c = document.createElement('button'); c.type = 'button'; c.id = 'tokcc'; c.className = 'tokc'; c.dataset.m = 'coin'; c.style.margin = '8px 16px 0'; c.style.width = 'calc(100% - 32px)'; bar.insertAdjacentElement('afterend', c);
+    } else if (mk) {
+      const v = document.getElementById('view'); if (!v || v.querySelector('#tokc')) return;
+      const h = v.querySelector('h1'); if (!h) return;
+      c = document.createElement('button'); c.type = 'button'; c.id = 'tokc'; c.className = 'tokc'; c.dataset.m = 'mk'; h.insertAdjacentElement('afterend', c);
+    }
+    if (!c) return;
     if (S) draw(c);
     await load(); if (document.body.contains(c)) draw(c);
   }
