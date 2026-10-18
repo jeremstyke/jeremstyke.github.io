@@ -140,6 +140,7 @@
     const lt = sh.querySelector('.later'); sh.insertBefore(b, lt);
     b.onclick = async () => {
       hp(); b.disabled = true; try { lt.click(); } catch (e) {}
+      const st2 = await call('state'); if (st2 && st2.ok && !st2.cash) return tst(T.done);
       if (!(await watchN(1))) return tst(T.skip);
       const r = await call('cash');
       if (!r || !r.ok) { hp('err'); return tst(errOf(r)); }
@@ -163,11 +164,14 @@
     b.style.cssText = 'width:100%;margin:8px 0 0'; area.insertAdjacentElement('afterend', b);
     if (Date.now() - DIA.t > 20000) { const st = await call('state'); if (st && st.ok) DIA = { x2: Date.now() + st.dia_x2 * 1000, wait: Date.now() + st.dia_wait * 1000, t: Date.now() }; }
     diaDraw();
+    const sync = async () => { const st = await call('state'); if (st && st.ok) DIA = { x2: Date.now() + st.dia_x2 * 1000, wait: Date.now() + st.dia_wait * 1000, t: Date.now() }; return st; };
     b.onclick = async () => {
       const T = L(); hp(); b.disabled = true; b.textContent = '⏳';
+      // 18 oct 2026 (Jeremy): check before the video, so nobody watches a video for nothing
+      const st = await sync(); if (st && st.ok && (st.dia_wait > 0 || st.dia_x2 > 0)) { diaDraw(); return tst(T.wait); }
       if (!(await watchN(1, b))) { diaDraw(); return tst(T.skip); }
       const r = await call('dia');
-      if (!r || !r.ok) { hp('err'); diaDraw(); return tst(errOf(r)); }
+      if (!r || !r.ok) { hp('err'); await sync(); diaDraw(); return tst(errOf(r)); }
       DIA = { x2: Date.now() + 30000, wait: Date.now() + 180000, t: Date.now() };
       hp('ok'); tst(T.dOk); diaDraw();
     };
