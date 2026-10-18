@@ -177,6 +177,27 @@
     };
   }
 
+  // 18 oct 2026 (Jeremy): anti multi-accounts. Once per opening, a print of the connection (public IP) and of the phone (screen, system,
+  // graphics chip, drawing), sent to mct_fp_log (action mon_fp), which keeps only scrambled hashes. Nothing is shown to the player.
+  setTimeout(async () => {
+    try {
+      let ip = '';
+      try { const ac = new AbortController(); setTimeout(() => ac.abort(), 4000); ip = ((await (await fetch('https://api.ipify.org?format=json', { signal: ac.signal })).json()) || {}).ip || ''; } catch (e) {}
+      let gl = '';
+      try { const g = document.createElement('canvas').getContext('webgl'), d = g && g.getExtension('WEBGL_debug_renderer_info'); gl = g ? String(d ? g.getParameter(d.UNMASKED_RENDERER_WEBGL) : g.getParameter(g.RENDERER)) : ''; } catch (e) {}
+      let cv = '';
+      try {
+        const c = document.createElement('canvas'); c.width = 220; c.height = 40; const x = c.getContext('2d');
+        x.textBaseline = 'top'; x.font = '16px Arial'; x.fillStyle = '#f60'; x.fillRect(0, 0, 110, 22); x.fillStyle = '#069'; x.fillText('Meme Coin Tycoon 🏛️ ✓', 2, 2);
+        const u = c.toDataURL(); let h = 0; for (let i = 0; i < u.length; i++) h = (h * 31 + u.charCodeAt(i)) | 0; cv = String(h);
+      } catch (e) {}
+      const tg = (window.Telegram && window.Telegram.WebApp) || {};
+      let tz = ''; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) {}
+      const fp = [screen.width + 'x' + screen.height, window.devicePixelRatio, tz, navigator.platform, navigator.hardwareConcurrency, navigator.deviceMemory, (navigator.languages || []).join(','), tg.platform, gl, cv].join('|');
+      await tonCall({ action: 'mon_fp', ip, fp, ua: navigator.userAgent });
+    } catch (e) {}
+  }, 5000);
+
   // one light loop: the diamond button and the cash sheet appear when their screens are open
   setInterval(() => {
     const a = document.getElementById('darea'); if (a && !document.getElementById('drw')) diaBtn(a); else diaDraw();
