@@ -67,15 +67,17 @@
     d.querySelector('#tokv').onclick = async (ev) => {
       const b = ev.currentTarget; hp(); b.disabled = true; b.textContent = '⏳';
       // 18 oct 2026 (Jeremy): check before the video, so nobody watches a video for nothing
-      await load(); if (!S || !(S.vid_left > 0) || !(S.reserve > 0)) { tst(S && S.reserve > 0 ? T.done : T.empty); draw(c); sheet(c); return; }
+      await load(true); if (!S || !(S.vid_left > 0) || !(S.reserve > 0)) { tst(S && S.reserve > 0 ? T.done : T.empty); draw(c); sheet(c); return; }
       const ok = window.mctRw ? await window.mctRw.watch(1, b) : true;
       if (!ok) { tst(T.skip); draw(c); sheet(c); return; }
       const r = await call('vid');
       if (!r || !r.ok) { hp('err'); tst((r && r.error && T[r.error]) || T.err); } else { hp('ok'); tst(T.ok(nf(r.qty, 2))); }
-      await load(); draw(c); if (document.getElementById('tokm')) sheet(c);
+      await load(true); draw(c); if (document.getElementById('tokm')) sheet(c);
     };
   }
-  async function load() { const r = await call('state'); if (r && r.ok) S = r; return S; }
+  // 18 oct 2026: asked again at most once a minute (the market is drawn again often; the base was overloaded)
+  let T0 = 0;
+  async function load(force) { if (!force && S && Date.now() - T0 < 60000) return S; const r = await call('state'); if (r && r.ok) { S = r; T0 = Date.now(); } return S; }
   // 18 oct 2026 (Jeremy): $MCT is listed with the other coins (first in Hot and Top, mct_market), a thin bar at the top of the
   // market (2h51: kept) and on the $MCT coin page; a tap opens the sheet with the video and how to earn
   async function card() {
