@@ -249,6 +249,7 @@
     b.querySelector('#cllog').onclick = () => { hp(); journal(b, r); };
     b.querySelector('#clhelp').onclick = async (ev) => {
       const bt = ev.currentTarget; hp(); if (!window.mctRw || bt.disabled || c.helped) return; bt.disabled = true; const t0 = bt.textContent; bt.textContent = '⏳';
+      const st = await window.mctRw.call('state'); if (st && st.ok && !st.clan) { c.helped = true; bt.textContent = T.helped; return; }
       const ok = await window.mctRw.watch(1, bt); if (!ok) { bt.disabled = false; bt.textContent = t0; return tst(T.skip); }
       const q = await call('rwclan'); bt.disabled = false; bt.textContent = t0;
       if (!q || !q.ok) { hp('err'); if (q && q.error === 'done') { bt.disabled = true; bt.textContent = T.helped; } return tst(errOf(q)); }
