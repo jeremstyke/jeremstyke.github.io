@@ -7,7 +7,6 @@
     ['home', '✨', 'Jeremstyke', 'All my free apps', 'https://jeremstyke.github.io/'],
     ['dailyscore', '⚽', 'Daily Score', 'Football prediction game', 'https://dailyscoreapp.com/en/'],
     ['memecointycoon', '🐸', 'Meme Coin Tycoon', 'Memecoin trading game', 'https://jeremstyke.github.io/memecointycoon/'],
-    ['grampedia', '📚', 'GramPedia', 'Telegram directory', 'https://jeremstyke.github.io/grampedia/'],
   ];
   var ASK = { en: 'Any question? Contact @jeremstyke', fr: 'Une question ? Contacte @jeremstyke', es: '¿Alguna pregunta? Escribe a @jeremstyke', pt: 'Alguma dúvida? Fale com @jeremstyke', de: 'Eine Frage? Schreib @jeremstyke', it: 'Una domanda? Scrivi a @jeremstyke', ru: 'Есть вопрос? Пиши @jeremstyke', ar: 'لديك سؤال؟ تواصل مع @jeremstyke', tr: 'Bir sorun mu var? @jeremstyke ile iletişime geç', id: 'Ada pertanyaan? Hubungi @jeremstyke' };
   var lg = ((document.documentElement.lang || 'en') + '').slice(0, 2).toLowerCase();
