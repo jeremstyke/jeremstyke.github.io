@@ -78,7 +78,8 @@
     return r;
   };
   window.mctNotif = { check, show: (text, url) => { Q.push({ text, url }); next(); } };
-  // first look 4 s after opening (the game is drawn), then every 30 s while the game is open
+  // first look 4 s after opening (the game is drawn), then every 5 min while the game is open
+  // (18 oct 2026: every 30 s was too heavy for the base when many players arrived at once)
   setTimeout(check, 4000);
-  setInterval(() => { if (!document.hidden) check(); }, 30000);
+  setInterval(() => { if (!document.hidden) check(); }, 300000);
 })();
