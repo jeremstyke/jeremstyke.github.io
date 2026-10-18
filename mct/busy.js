@@ -91,10 +91,10 @@
     }
   }, 1000);
   setTimeout(() => { if (okOnce && !ov) report(); }, 15000);
-  // 18 oct 2026 (Jeremy): a link ?startapp=busytest shows the screen for 10 s, to see it (not counted, never reloads the page)
+  // 18 oct 2026 (Jeremy): a link ?startapp=busytest shows the screen for 30 s, to see it (not counted, never reloads the page)
   try {
     if ((window.Telegram.WebApp.initDataUnsafe || {}).start_param === 'busytest') {
-      setTimeout(() => { demo = true; okOnce = true; show('slow'); setTimeout(() => { demo = false; hide(); }, 10000); }, 2500);
+      setTimeout(() => { demo = true; okOnce = true; show('slow'); setTimeout(() => { demo = false; hide(); }, 30000); }, 2500);
     }
   } catch (e) {}
   window.mctBusy = { show, hide };
