@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>MCT Duel</title>
+<!-- 20 oct 2026 (Jeremy): MCT Duel, the second mini app of the Meme Coin Tycoon bot (t.me/Memecointycoonbot/Mctduel).
+     Pump or dump duels: the same 5 charts for both players, best score takes the pot. Same account as Meme Coin Tycoon.
+     Every answer is checked and timed in the base (edge function mct-duel), the page never knows the answer before the pick. by @jeremstyke -->
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0D0B1A;--s1:#17142B;--s2:#1D1838;--ln:#2A2547;--ln2:#3A3462;--ink:#F4F1FF;--mu:#A39DC4;--mu2:#CFC9EE;--cy:#2EE6FF;--cyd:#139DB3;--cyb:#10303A;--or:#FF9A3C;--orb:#3A2410;--up:#3EE69A;--upd:#1E9E64;--upb:#123526;--dn:#FF5A6E;--dnd:#B32A3D;--dnb:#3A1218;--go:#FFD24A;--gob:#2B2410;--r:18px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:15px;-webkit-font-smoothing:antialiased;overscroll-behavior:none}
+body{min-height:100vh;user-select:none;-webkit-user-select:none}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;padding:0}
+button:disabled{cursor:default}
+input{font:inherit;color:inherit}
+.disp{font-family:'Bricolage Grotesque',Inter,sans-serif;font-weight:800;letter-spacing:-.5px}
+#app{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+.scr{flex:1;display:flex;flex-direction:column;padding:16px 18px calc(96px + env(safe-area-inset-bottom));gap:14px;animation:in .28s ease both}
+.scr.full{padding-bottom:calc(20px + env(safe-area-inset-bottom))}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.logo{display:flex;align-items:center;gap:10px}
+.lg{width:36px;height:36px;border-radius:11px;background:var(--s1);border:1px solid var(--ln);display:flex;align-items:center;justify-content:center}
+.chips{display:flex;gap:6px}
+.chip{display:flex;align-items:center;gap:5px;padding:7px 11px;border-radius:999px;background:var(--s1);border:1px solid var(--ln);font-weight:700;font-size:14px;white-space:nowrap}
+.chip i{font-style:normal;color:var(--up)}.chip.t i{color:var(--go)}
+.card{border-radius:22px;background:var(--s1);border:1px solid var(--ln);padding:18px}
+.hero{position:relative;overflow:hidden;padding:22px 20px 20px}
+.hero svg.bgc{position:absolute;right:-12px;top:0;opacity:.32}
+.kick{position:relative;font-size:12px;font-weight:700;color:var(--cy);text-transform:uppercase;letter-spacing:2px}
+.hero h1{position:relative;margin:6px 0 6px;font-size:33px;line-height:1.04;white-space:pre-line}
+.hero p{position:relative;margin:0 0 18px;font-size:14px;line-height:1.45;color:var(--mu)}
+.btn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:54px;border-radius:16px;font-weight:800;font-size:17px;transition:transform .08s ease,filter .15s}
+.btn:active{transform:translateY(3px);box-shadow:none!important}
+.btn.p{background:var(--cy);color:var(--bg);box-shadow:0 4px 0 var(--cyd)}
+.btn.g{background:var(--go);color:#2B2410;box-shadow:0 4px 0 #B8901A}
+.btn.o{border:1.5px solid var(--ln2);color:var(--ink);min-height:50px;font-size:16px;font-weight:700}
+.btn:disabled{filter:grayscale(.6) brightness(.7)}
+.stack{display:flex;flex-direction:column;gap:10px;position:relative}
+.sh{display:flex;align-items:baseline;justify-content:space-between;margin-top:4px}
+.sh h2{margin:0;font-size:16px;font-weight:800}.sh span{font-size:13px;color:var(--mu)}
+.row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:var(--r);background:var(--s1);border:1px solid var(--ln);width:100%;text-align:left}
+.row.hot{border-color:var(--or)}.row.mine{border-color:var(--cy)}
+.av{flex:none;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;overflow:hidden;background:var(--cyb);color:var(--cy)}
+.av img{width:100%;height:100%;object-fit:cover}
+.av.o{background:var(--orb);color:var(--or)}.av.g{background:var(--upb);color:var(--up)}.av.b{background:#2a2547;color:var(--mu2)}
+.who{flex:1;min-width:0}.who b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.who small{display:block;font-size:13px;color:var(--mu);margin-top:2px}
+.pill{flex:none;height:38px;padding:0 15px;border-radius:12px;font-weight:800;font-size:14px;display:flex;align-items:center}
+.pill.or{background:var(--or);color:var(--bg)}.pill.cy{background:var(--cy);color:var(--bg)}
+.amt{flex:none;font-weight:800;font-size:15px}.amt.w{color:var(--up)}.amt.l{color:var(--dn)}
+.note{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:16px;background:var(--s2);font-size:13px;color:var(--mu2);width:100%;text-align:left}
+.empty{padding:22px;text-align:center;color:var(--mu);font-size:14px;border:1.5px dashed var(--ln);border-radius:var(--r)}
+nav.tb{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:8px 12px calc(10px + env(safe-area-inset-bottom));border-top:1px solid #221E3D;background:rgba(15,12,31,.96);backdrop-filter:blur(10px)}
+nav.tb[hidden],#cf[hidden]{display:none}
+nav.tb button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0;color:var(--mu);font-size:12px;font-weight:600}
+nav.tb button.on{color:var(--cy);font-weight:800}
+.hdr{display:flex;align-items:center;gap:12px}
+.hdr h1{margin:0;font-size:24px}
+.vs{display:flex;align-items:center;justify-content:space-between;padding:22px 16px}
+.vs .side{display:flex;flex-direction:column;align-items:center;gap:7px;width:118px;text-align:center}
+.vs .big{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;overflow:hidden;border:3px solid var(--cy);background:var(--cyb);color:var(--cy)}
+.vs .big.o{border-color:var(--or);background:var(--orb);color:var(--or)}.vs .big.q{border-style:dashed;background:var(--s2)}
+.vs .big img{width:100%;height:100%;object-fit:cover}
+.vs .side b{font-size:15px;max-width:118px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.vs .side small{font-size:12px;color:var(--mu)}
+.vs .x{font-size:30px;color:#6E6894}
+.seg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;padding:4px;border-radius:14px;background:var(--s1)}
+.seg button{height:40px;border-radius:10px;color:var(--mu);font-weight:700;font-size:14px}
+.seg button.on{background:var(--ln);color:var(--ink)}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.st{height:52px;border-radius:14px;background:var(--s1);border:1.5px solid var(--ln);font-weight:700;font-size:15px}
+.st.on{background:var(--cyb);border:2px solid var(--cy);color:var(--cy);font-weight:800}
+.st:disabled{opacity:.4}
+.lbl{margin:0;font-size:15px;font-weight:800}
+.sum{display:flex;justify-content:space-between;font-size:14px;color:var(--mu)}.sum b{color:var(--up)}
+.rules{display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:18px;background:var(--s2)}
+.rules div{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--mu2)}
+.find{display:flex;gap:8px}
+.find input{flex:1;min-width:0;height:48px;border-radius:14px;border:1.5px solid var(--ln);background:var(--s1);padding:0 14px;outline:none;user-select:text;-webkit-user-select:text}
+.find input:focus{border-color:var(--cy)}
+.find button{height:48px;padding:0 16px;border-radius:14px;background:var(--ln);font-weight:700}
+.warn{font-size:13px;color:var(--or);line-height:1.4}
+/* play */
+.ph{display:flex;align-items:center;justify-content:space-between}
+.ph .pl{display:flex;align-items:center;gap:9px}.ph .pl.r{flex-direction:row-reverse;text-align:right}
+.ph .av{width:40px;height:40px;border:2px solid var(--cy)}.ph .pl.r .av{border-color:var(--or)}
+.ph small{display:block;font-size:12px;color:var(--mu);max-width:92px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ph .sc{font-size:23px;line-height:1}
+.dots{display:flex;flex-direction:column;align-items:center;gap:6px}
+.dots b{font-size:13px;color:var(--mu2)}
+.dots div{display:flex;gap:5px}.dots i{width:20px;height:6px;border-radius:3px;background:var(--ln)}
+.dots i.ok{background:var(--up)}.dots i.ko{background:var(--dn)}.dots i.cur{background:var(--cy);animation:pu 1s ease-in-out infinite}
+@keyframes pu{50%{opacity:.45}}
+.chart{padding:14px 14px 10px;display:flex;flex-direction:column;gap:8px;transition:border-color .2s,box-shadow .2s}
+.chart.ok{border-color:var(--up);box-shadow:0 0 0 3px rgba(62,230,154,.18)}
+.chart.ko{border-color:var(--dn);box-shadow:0 0 0 3px rgba(255,90,110,.18)}
+.ch-h{display:flex;align-items:center;justify-content:space-between}
+.coin{display:flex;align-items:center;gap:10px}
+.ce{width:38px;height:38px;border-radius:12px;background:var(--s2);display:flex;align-items:center;justify-content:center;font-size:20px}
+.ch-h b{font-size:17px}.ch-h small{display:block;font-size:12px;color:var(--mu)}
+.chg{text-align:right;font-weight:800;font-size:15px}
+.chart svg{width:100%;height:auto;display:block}
+.cnd{transform-box:fill-box;transform-origin:center bottom;animation:cg .35s cubic-bezier(.2,.9,.3,1.2) both}
+@keyframes cg{from{transform:scaleY(0);opacity:0}to{transform:none;opacity:1}}
+.qbox{animation:qb 1.6s ease-in-out infinite}
+@keyframes qb{50%{opacity:.55}}
+.q{text-align:center;font-size:14px;color:var(--mu2);font-weight:600}
+.tm{display:flex;align-items:center;justify-content:center;gap:10px;min-height:46px}
+.tm span{font-size:14px;font-weight:600;color:var(--mu2)}
+.res{font-size:22px;text-align:center;min-height:46px;display:flex;align-items:center;justify-content:center;gap:8px}
+.res.ok{color:var(--up)}.res.ko{color:var(--dn)}
+.pd{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:auto}
+.pd button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;height:100px;border-radius:22px;transition:transform .08s}
+.pd button:active{transform:translateY(4px);box-shadow:none!important}
+.pd .u{background:var(--up);color:#06291A;box-shadow:0 5px 0 var(--upd)}
+.pd .d{background:var(--dn);color:#33060E;box-shadow:0 5px 0 var(--dnd)}
+.pd button:disabled{opacity:.35}
+.pd b{font-size:23px;letter-spacing:.5px}
+/* result */
+.rs{align-items:center;text-align:center;position:relative}
+.trophy{width:92px;height:92px;border-radius:28px;display:flex;align-items:center;justify-content:center;background:var(--gob);border:2px solid var(--go);margin-top:26px;animation:pop .5s cubic-bezier(.2,1.4,.4,1) both}
+.trophy.l{background:var(--dnb);border-color:var(--dn)}.trophy.t{background:var(--s2);border-color:var(--mu)}
+@keyframes pop{from{transform:scale(.3);opacity:0}to{transform:none;opacity:1}}
+.rs h1{margin:6px 0 0;font-size:44px;line-height:1}
+.gain{font-size:30px}.gain.w{color:var(--up)}.gain.l{color:var(--dn)}
+.duo{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.duo div{display:flex;flex-direction:column;align-items:center;gap:5px;padding:15px 8px;border-radius:20px;background:var(--s1);border:1px solid var(--ln)}
+.duo div.m{background:var(--cyb);border:2px solid var(--cy)}
+.duo b{font-size:14px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.duo .disp{font-size:34px}.duo small{font-size:12px;color:var(--mu2)}
+.rr{width:100%;padding:14px;border-radius:18px;background:var(--s1);border:1px solid var(--ln);display:flex;flex-direction:column;gap:8px}
+.rr .l{display:grid;grid-template-columns:62px repeat(5,minmax(0,1fr));gap:6px;align-items:center;font-size:13px;font-weight:700;text-align:left}
+.rr .l span.h{text-align:center;color:var(--mu);font-size:12px;font-weight:600}
+.rr .l i{height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-style:normal}
+.rr .l i.ok{background:var(--upb);color:var(--up)}.rr .l i.ko{background:var(--dnb);color:#FF8A99}
+.rr .l b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#cf{position:fixed;inset:0;pointer-events:none;z-index:50}
+/* ranking */
+.pod{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-items:end;padding-top:6px}
+.pod>div{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
+.pod .av{width:56px;height:56px;border:3px solid #C9CEDA;font-size:20px;background:#23212F;color:var(--ink)}
+.pod .p1 .av{width:66px;height:66px;border-color:var(--go);background:var(--gob);color:var(--go)}
+.pod .p3 .av{border-color:#E0915A;background:#2E1D12}
+.pod b.n{font-size:13px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pod .bar{width:100%;border-radius:14px 14px 0 0;background:var(--s2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.pod .p1 .bar{height:112px;background:var(--gob)}.pod .p2 .bar{height:84px}.pod .p3 .bar{height:64px}
+.pod .bar span{font-size:26px}.pod .p1 .bar span{color:var(--go);font-size:30px}.pod .p2 .bar span{color:#C9CEDA}.pod .p3 .bar span{color:#E0915A}
+.pod .bar small{font-size:12px;color:var(--mu2)}
+.rk{width:24px;font-weight:800;color:var(--mu)}
+/* profile */
+.pf{display:flex;align-items:center;gap:14px}
+.pf .av{width:68px;height:68px;border:3px solid var(--cy);font-size:28px}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.badges span{padding:3px 9px;border-radius:999px;font-size:12px;font-weight:700;background:var(--s2);color:var(--mu2)}
+.stat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.stat div,.stat2 div{padding:10px;border-radius:14px;background:#0F0C1F;text-align:center}
+.stat .disp,.stat2 .disp{font-size:22px}.stat small,.stat2 small{display:block;font-size:12px;color:var(--mu);margin-top:2px}
+.stat2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.stat2 div{text-align:left}.stat2 .disp{font-size:18px}
+.tg{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-radius:16px;background:var(--s1);border:1px solid var(--ln)}
+.sw{position:relative;width:48px;height:28px;border-radius:999px;background:var(--ln);transition:background .2s;flex:none}
+.sw::after{content:'';position:absolute;left:3px;top:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .2s}
+.sw.on{background:var(--cy)}.sw.on::after{transform:translateX(20px)}
+.lgs{display:flex;flex-wrap:wrap;gap:6px}
+.lgs button{padding:7px 11px;border-radius:10px;background:var(--s2);font-weight:700;font-size:13px;color:var(--mu2)}
+.lgs button.on{background:var(--cy);color:var(--bg)}
+.foot{text-align:center;font-size:12px;color:#6E6894;margin-top:6px}
+.center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:30px}
+.spin{width:44px;height:44px;border-radius:50%;border:4px solid var(--ln);border-top-color:var(--cy);animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:60;max-width:88vw;padding:12px 16px;border-radius:14px;background:#2A2547;color:var(--ink);font-size:14px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.4);animation:in .2s ease both;text-align:center}
+.cnt{font-variant-numeric:tabular-nums}
+[dir=rtl] .hero svg.bgc{right:auto;left:-12px;transform:scaleX(-1)}
+</style>
+</head>
+<body>
+<div id="app"><div class="center"><div class="spin"></div></div></div>
+<nav class="tb" id="nav" hidden></nav>
+<canvas id="cf" hidden></canvas>
+<script>
+(function () {
+'use strict';
+var tw = window.Telegram && Telegram.WebApp;
+var FN = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-duel';
+var APP = 'https://t.me/Memecointycoonbot/Mctduel';
+var MCT = 'https://t.me/Memecointycoonbot?startapp=src_mctduel';
+
+/* ---------- languages ---------- */
+var TX = {
+en: { tag: 'Pump or Dump', hero_h: 'Read the chart.\nBeat your friend.', hero_s: '5 rounds, the same charts for both of you. Best score takes the pot.', ch_friend: 'Challenge a friend', ch_random: 'Random opponent', your_duels: 'Your duels', active: '{n} active', no_duels: 'No duel yet. Challenge someone!', d_play: 'Your turn to play', d_accept: '{n} challenges you', d_wait: 'Waiting for {n}', d_wait_any: 'Waiting for a friend', d_won: 'You beat {n}', d_lost: '{n} beat you', d_tie: 'Tie with {n}', d_exp: 'Expired · stake back', d_left: '{t} left', play_b: 'Play', open_b: 'Open', rank_banner: 'Weekly ranking · ends in {t}', nav_duel: 'Duel', nav_rank: 'Ranking', nav_prof: 'Profile', new_ch: 'New challenge', opp_any: 'Anyone with the link', opp_find: 'A player', find_ph: '@username', find_b: 'Find', your_friend: 'Your friend', gets: 'plays after you', cur_cash: 'Cash', cur_mct: '$MCT', stake: 'Stake', winner_takes: 'Winner takes', burn_note: '5 % of every $MCT pot is burned', r1: '5 rounds, the same charts for both', r2: '24 h for your opponent to play', r3: 'Tie? The fastest player wins', go_first: 'Play first', rand_s: 'You face the real run of another player on the same 5 charts. Instant result.', rand_left: '{n} random duels left today', start: 'Start the duel', round_x: 'Round {i} of 5', q: 'Will the next candle be green or red?', pump: 'PUMP', dump: 'DUMP', sl: 'seconds left', right: 'Right!', wrong: 'Wrong', late: 'Too late', you: 'You', wait_h: 'Your score: {s}/5', wait_s_any: 'Now send the challenge. Your friend has 24 h to beat you.', wait_s_to: '{n} has been notified. You get a message when the duel is over.', share_b: 'Send to a friend', copy_b: 'Copy the link', copied: 'Link copied', share_txt: '⚔️ I challenge you on MCT Duel! {s} at stake. Beat my score if you can.', acc_h: '{n} challenges you!', acc_s: 'Same 5 charts. Best score takes the pot.', acc_b: 'Accept the duel', later: 'Not now', win_h: 'You win!', lose_h: 'You lose', tie_h: 'Perfect tie', tie_s: 'Your stake is back.', per_ans: '{t} s per answer', rematch: 'Rematch', revenge: 'Revenge', again: 'Play again', home: 'Back home', share_win: 'Share my win', win_txt: '⚔️ I just won {s} on MCT Duel! Think you can beat me?', ghost_of: 'Ghost of {n}', ghost_note: 'The real run of {n} on the same charts', week: 'This week', all: 'All time', ends_in: 'Ends in {t}', wins: 'wins', rank_empty: 'No winner yet. Be the first!', rank_rule: 'Max 2 wins counted per opponent each week', you_rank: 'Your place', no_rank: 'Win a duel to enter the ranking', linked: 'One account with Meme Coin Tycoon', duels_h: 'Duels', w: 'Wins', wr: 'Win rate', st: 'Streak', worth: 'Net worth', coins: 'Coins launched', trades: 'Trades', open_mct: 'Open Meme Coin Tycoon', refuse: 'Refuse challenges', sound: 'Sounds', lang: 'Language', won_total: 'Won in duels', nouser_h: 'Create your tycoon account', nouser_s: 'MCT Duel uses your Meme Coin Tycoon account. Open the game once to get your starting cash, then come back here.', nouser_b: 'Open Meme Coin Tycoon', tg_only: 'Open MCT Duel from Telegram', retry: 'Try again', loading: 'Loading…', burned: '{n} $MCT burned', challenge_b: 'Challenge', mct_off: '$MCT duels', e_cash: 'Not enough cash', e_nomct: 'Not enough $MCT', e_mct_new: '$MCT duels open 3 days after your first game', e_mct_trades: 'Make 5 trades in Meme Coin Tycoon to play for $MCT', e_mct_no: '$MCT duels are not available for this account', e_mct_cap: 'Daily $MCT win limit reached, come back tomorrow', e_rand_cap: '10 random duels a day, come back tomorrow', e_pair_cap: '3 duels a day against the same player', e_no_ch: 'This player refuses challenges', e_too_many: 'Finish your open duels first (5 max)', e_self: 'You cannot duel yourself', e_noplayer: 'Player not found', e_gone: 'This duel is over or expired', e_taken: 'Someone already took this duel', e_net: 'Connection problem, try again', e_x: 'Something went wrong, try again', e_blocked: 'This account is blocked' },
+fr: { tag: 'Pump ou Dump', hero_h: 'Lis le graphique.\nBats ton pote.', hero_s: '5 manches, les mêmes graphiques pour vous deux. Le meilleur score rafle le pot.', ch_friend: 'Défier un ami', ch_random: 'Adversaire au hasard', your_duels: 'Tes duels', active: '{n} en cours', no_duels: 'Aucun duel pour l\'instant. Défie quelqu\'un !', d_play: 'À toi de jouer', d_accept: '{n} te défie', d_wait: 'En attente de {n}', d_wait_any: 'En attente d\'un ami', d_won: 'Tu as battu {n}', d_lost: '{n} t\'a battu', d_tie: 'Égalité avec {n}', d_exp: 'Expiré · mise rendue', d_left: 'encore {t}', play_b: 'Jouer', open_b: 'Ouvrir', rank_banner: 'Classement de la semaine · fin dans {t}', nav_duel: 'Duel', nav_rank: 'Classement', nav_prof: 'Profil', new_ch: 'Nouveau défi', opp_any: 'Quiconque a le lien', opp_find: 'Un joueur', find_ph: '@pseudo', find_b: 'Chercher', your_friend: 'Ton ami', gets: 'joue après toi', cur_cash: 'Cash', cur_mct: '$MCT', stake: 'Mise', winner_takes: 'Le gagnant empoche', burn_note: '5 % de chaque pot en $MCT sont brûlés', r1: '5 manches, les mêmes graphiques pour les deux', r2: '24 h pour que ton adversaire joue', r3: 'Égalité ? Le plus rapide gagne', go_first: 'Jouer en premier', rand_s: 'Tu affrontes la vraie partie d\'un autre joueur sur les mêmes 5 graphiques. Résultat immédiat.', rand_left: 'Encore {n} duels au hasard aujourd\'hui', start: 'Lancer le duel', round_x: 'Manche {i} sur 5', q: 'La prochaine bougie sera verte ou rouge ?', pump: 'PUMP', dump: 'DUMP', sl: 'secondes', right: 'Bien vu !', wrong: 'Raté', late: 'Trop tard', you: 'Toi', wait_h: 'Ton score : {s}/5', wait_s_any: 'Envoie maintenant le défi. Ton ami a 24 h pour te battre.', wait_s_to: '{n} a été prévenu. Tu recevras un message à la fin du duel.', share_b: 'Envoyer à un ami', copy_b: 'Copier le lien', copied: 'Lien copié', share_txt: '⚔️ Je te défie sur MCT Duel ! {s} en jeu. Bats mon score si tu peux.', acc_h: '{n} te défie !', acc_s: 'Les mêmes 5 graphiques. Le meilleur score rafle le pot.', acc_b: 'Relever le duel', later: 'Plus tard', win_h: 'Gagné !', lose_h: 'Perdu', tie_h: 'Égalité parfaite', tie_s: 'Ta mise t\'est rendue.', per_ans: '{t} s par réponse', rematch: 'Revanche', revenge: 'Prendre ma revanche', again: 'Rejouer', home: 'Retour à l\'accueil', share_win: 'Partager ma victoire', win_txt: '⚔️ Je viens de gagner {s} sur MCT Duel ! Tu crois pouvoir me battre ?', ghost_of: 'Fantôme de {n}', ghost_note: 'La vraie partie de {n} sur les mêmes graphiques', week: 'Cette semaine', all: 'Depuis le début', ends_in: 'Fin dans {t}', wins: 'victoires', rank_empty: 'Pas encore de gagnant. Sois le premier !', rank_rule: '2 victoires max comptées par adversaire et par semaine', you_rank: 'Ta place', no_rank: 'Gagne un duel pour entrer au classement', linked: 'Un seul compte avec Meme Coin Tycoon', duels_h: 'Duels', w: 'Victoires', wr: 'Réussite', st: 'Série', worth: 'Fortune', coins: 'Coins lancés', trades: 'Trades', open_mct: 'Ouvrir Meme Coin Tycoon', refuse: 'Refuser les défis', sound: 'Sons', lang: 'Langue', won_total: 'Gagné en duel', nouser_h: 'Crée ton compte de tycoon', nouser_s: 'MCT Duel utilise ton compte Meme Coin Tycoon. Ouvre le jeu une fois pour recevoir ton cash de départ, puis reviens ici.', nouser_b: 'Ouvrir Meme Coin Tycoon', tg_only: 'Ouvre MCT Duel depuis Telegram', retry: 'Réessayer', loading: 'Chargement…', burned: '{n} $MCT brûlés', challenge_b: 'Défier', mct_off: 'Duels en $MCT', e_cash: 'Pas assez de cash', e_nomct: 'Pas assez de $MCT', e_mct_new: 'Les duels en $MCT ouvrent 3 jours après ta première partie', e_mct_trades: 'Fais 5 trades dans Meme Coin Tycoon pour jouer en $MCT', e_mct_no: 'Les duels en $MCT ne sont pas disponibles pour ce compte', e_mct_cap: 'Limite de gains en $MCT du jour atteinte, reviens demain', e_rand_cap: '10 duels au hasard par jour, reviens demain', e_pair_cap: '3 duels par jour contre le même joueur', e_no_ch: 'Ce joueur refuse les défis', e_too_many: 'Termine d\'abord tes duels en cours (5 max)', e_self: 'Tu ne peux pas te défier toi-même', e_noplayer: 'Joueur introuvable', e_gone: 'Ce duel est terminé ou expiré', e_taken: 'Quelqu\'un a déjà pris ce duel', e_net: 'Problème de connexion, réessaie', e_x: 'Un problème est survenu, réessaie', e_blocked: 'Ce compte est bloqué' },
+es: { tag: 'Pump o Dump', hero_h: 'Lee el gráfico.\nGana a tu amigo.', hero_s: '5 rondas, los mismos gráficos para los dos. La mejor puntuación se lleva el bote.', ch_friend: 'Retar a un amigo', ch_random: 'Rival al azar', your_duels: 'Tus duelos', active: '{n} activos', no_duels: 'Aún no hay duelos. ¡Reta a alguien!', d_play: 'Te toca jugar', d_accept: '{n} te reta', d_wait: 'Esperando a {n}', d_wait_any: 'Esperando a un amigo', d_won: 'Ganaste a {n}', d_lost: '{n} te ganó', d_tie: 'Empate con {n}', d_exp: 'Expirado · apuesta devuelta', d_left: 'quedan {t}', play_b: 'Jugar', open_b: 'Abrir', rank_banner: 'Ranking semanal · termina en {t}', nav_duel: 'Duelo', nav_rank: 'Ranking', nav_prof: 'Perfil', new_ch: 'Nuevo reto', opp_any: 'Cualquiera con el enlace', opp_find: 'Un jugador', find_ph: '@usuario', find_b: 'Buscar', your_friend: 'Tu amigo', gets: 'juega después', cur_cash: 'Cash', cur_mct: '$MCT', stake: 'Apuesta', winner_takes: 'El ganador se lleva', burn_note: 'Se quema el 5 % de cada bote en $MCT', r1: '5 rondas, los mismos gráficos para los dos', r2: '24 h para que tu rival juegue', r3: '¿Empate? Gana el más rápido', go_first: 'Jugar primero', rand_s: 'Te enfrentas a la partida real de otro jugador con los mismos 5 gráficos. Resultado inmediato.', rand_left: 'Te quedan {n} duelos al azar hoy', start: 'Empezar el duelo', round_x: 'Ronda {i} de 5', q: '¿La próxima vela será verde o roja?', pump: 'PUMP', dump: 'DUMP', sl: 'segundos', right: '¡Bien!', wrong: 'Fallo', late: 'Demasiado tarde', you: 'Tú', wait_h: 'Tu puntuación: {s}/5', wait_s_any: 'Ahora envía el reto. Tu amigo tiene 24 h para ganarte.', wait_s_to: '{n} ha sido avisado. Recibirás un mensaje al terminar.', share_b: 'Enviar a un amigo', copy_b: 'Copiar el enlace', copied: 'Enlace copiado', share_txt: '⚔️ ¡Te reto en MCT Duel! {s} en juego. Supera mi puntuación si puedes.', acc_h: '¡{n} te reta!', acc_s: 'Los mismos 5 gráficos. La mejor puntuación se lleva el bote.', acc_b: 'Aceptar el duelo', later: 'Ahora no', win_h: '¡Ganaste!', lose_h: 'Perdiste', tie_h: 'Empate perfecto', tie_s: 'Te devolvemos tu apuesta.', per_ans: '{t} s por respuesta', rematch: 'Revancha', revenge: 'Tomar revancha', again: 'Jugar otra vez', home: 'Volver al inicio', share_win: 'Compartir mi victoria', win_txt: '⚔️ ¡Acabo de ganar {s} en MCT Duel! ¿Crees que puedes ganarme?', ghost_of: 'Fantasma de {n}', ghost_note: 'La partida real de {n} con los mismos gráficos', week: 'Esta semana', all: 'Siempre', ends_in: 'Termina en {t}', wins: 'victorias', rank_empty: 'Aún no hay ganador. ¡Sé el primero!', rank_rule: 'Máx. 2 victorias contadas por rival cada semana', you_rank: 'Tu puesto', no_rank: 'Gana un duelo para entrar al ranking', linked: 'Una sola cuenta con Meme Coin Tycoon', duels_h: 'Duelos', w: 'Victorias', wr: 'Acierto', st: 'Racha', worth: 'Fortuna', coins: 'Monedas creadas', trades: 'Trades', open_mct: 'Abrir Meme Coin Tycoon', refuse: 'Rechazar retos', sound: 'Sonidos', lang: 'Idioma', won_total: 'Ganado en duelos', nouser_h: 'Crea tu cuenta de tycoon', nouser_s: 'MCT Duel usa tu cuenta de Meme Coin Tycoon. Abre el juego una vez para recibir tu dinero inicial y vuelve aquí.', nouser_b: 'Abrir Meme Coin Tycoon', tg_only: 'Abre MCT Duel desde Telegram', retry: 'Reintentar', loading: 'Cargando…', burned: '{n} $MCT quemados', challenge_b: 'Retar', mct_off: 'Duelos en $MCT', e_cash: 'No tienes suficiente cash', e_nomct: 'No tienes suficientes $MCT', e_mct_new: 'Los duelos en $MCT se abren 3 días después de tu primera partida', e_mct_trades: 'Haz 5 trades en Meme Coin Tycoon para jugar en $MCT', e_mct_no: 'Los duelos en $MCT no están disponibles para esta cuenta', e_mct_cap: 'Límite diario de ganancias en $MCT alcanzado, vuelve mañana', e_rand_cap: '10 duelos al azar por día, vuelve mañana', e_pair_cap: '3 duelos al día contra el mismo jugador', e_no_ch: 'Este jugador rechaza los retos', e_too_many: 'Termina primero tus duelos abiertos (máx. 5)', e_self: 'No puedes retarte a ti mismo', e_noplayer: 'Jugador no encontrado', e_gone: 'Este duelo terminó o expiró', e_taken: 'Alguien ya tomó este duelo', e_net: 'Problema de conexión, reintenta', e_x: 'Algo salió mal, reintenta', e_blocked: 'Esta cuenta está bloqueada' },
+id: { tag: 'Pump atau Dump', hero_h: 'Baca grafiknya.\nKalahkan temanmu.', hero_s: '5 ronde, grafik yang sama untuk kalian berdua. Skor terbaik membawa pulang pot.', ch_friend: 'Tantang teman', ch_random: 'Lawan acak', your_duels: 'Duelmu', active: '{n} aktif', no_duels: 'Belum ada duel. Tantang seseorang!', d_play: 'Giliranmu main', d_accept: '{n} menantangmu', d_wait: 'Menunggu {n}', d_wait_any: 'Menunggu teman', d_won: 'Kamu mengalahkan {n}', d_lost: '{n} mengalahkanmu', d_tie: 'Seri dengan {n}', d_exp: 'Kedaluwarsa · taruhan kembali', d_left: 'sisa {t}', play_b: 'Main', open_b: 'Buka', rank_banner: 'Peringkat mingguan · berakhir {t}', nav_duel: 'Duel', nav_rank: 'Peringkat', nav_prof: 'Profil', new_ch: 'Tantangan baru', opp_any: 'Siapa pun dengan tautan', opp_find: 'Seorang pemain', find_ph: '@username', find_b: 'Cari', your_friend: 'Temanmu', gets: 'main setelahmu', cur_cash: 'Cash', cur_mct: '$MCT', stake: 'Taruhan', winner_takes: 'Pemenang dapat', burn_note: '5 % dari setiap pot $MCT dibakar', r1: '5 ronde, grafik yang sama untuk berdua', r2: '24 jam untuk lawanmu bermain', r3: 'Seri? Yang tercepat menang', go_first: 'Main duluan', rand_s: 'Kamu melawan permainan asli pemain lain dengan 5 grafik yang sama. Hasil langsung.', rand_left: 'Sisa {n} duel acak hari ini', start: 'Mulai duel', round_x: 'Ronde {i} dari 5', q: 'Lilin berikutnya hijau atau merah?', pump: 'PUMP', dump: 'DUMP', sl: 'detik', right: 'Benar!', wrong: 'Salah', late: 'Terlambat', you: 'Kamu', wait_h: 'Skormu: {s}/5', wait_s_any: 'Sekarang kirim tantangannya. Temanmu punya 24 jam untuk mengalahkanmu.', wait_s_to: '{n} sudah diberi tahu. Kamu dapat pesan saat duel selesai.', share_b: 'Kirim ke teman', copy_b: 'Salin tautan', copied: 'Tautan disalin', share_txt: '⚔️ Aku menantangmu di MCT Duel! {s} dipertaruhkan. Kalahkan skorku kalau bisa.', acc_h: '{n} menantangmu!', acc_s: '5 grafik yang sama. Skor terbaik membawa pulang pot.', acc_b: 'Terima duel', later: 'Nanti', win_h: 'Kamu menang!', lose_h: 'Kamu kalah', tie_h: 'Seri sempurna', tie_s: 'Taruhanmu dikembalikan.', per_ans: '{t} d per jawaban', rematch: 'Tanding ulang', revenge: 'Balas dendam', again: 'Main lagi', home: 'Kembali', share_win: 'Bagikan kemenangan', win_txt: '⚔️ Aku baru menang {s} di MCT Duel! Bisa kalahkan aku?', ghost_of: 'Bayangan {n}', ghost_note: 'Permainan asli {n} dengan grafik yang sama', week: 'Minggu ini', all: 'Sepanjang masa', ends_in: 'Berakhir {t}', wins: 'menang', rank_empty: 'Belum ada pemenang. Jadilah yang pertama!', rank_rule: 'Maks. 2 kemenangan dihitung per lawan setiap minggu', you_rank: 'Posisimu', no_rank: 'Menangkan duel untuk masuk peringkat', linked: 'Satu akun dengan Meme Coin Tycoon', duels_h: 'Duel', w: 'Menang', wr: 'Rasio', st: 'Beruntun', worth: 'Kekayaan', coins: 'Koin dibuat', trades: 'Trade', open_mct: 'Buka Meme Coin Tycoon', refuse: 'Tolak tantangan', sound: 'Suara', lang: 'Bahasa', won_total: 'Menang dari duel', nouser_h: 'Buat akun tycoon-mu', nouser_s: 'MCT Duel memakai akun Meme Coin Tycoon-mu. Buka game sekali untuk dapat modal awal, lalu kembali ke sini.', nouser_b: 'Buka Meme Coin Tycoon', tg_only: 'Buka MCT Duel dari Telegram', retry: 'Coba lagi', loading: 'Memuat…', burned: '{n} $MCT dibakar', challenge_b: 'Tantang', mct_off: 'Duel $MCT', e_cash: 'Cash tidak cukup', e_nomct: '$MCT tidak cukup', e_mct_new: 'Duel $MCT terbuka 3 hari setelah permainan pertamamu', e_mct_trades: 'Lakukan 5 trade di Meme Coin Tycoon untuk main dengan $MCT', e_mct_no: 'Duel $MCT tidak tersedia untuk akun ini', e_mct_cap: 'Batas kemenangan $MCT harian tercapai, kembali besok', e_rand_cap: '10 duel acak per hari, kembali besok', e_pair_cap: '3 duel per hari melawan pemain yang sama', e_no_ch: 'Pemain ini menolak tantangan', e_too_many: 'Selesaikan dulu duel yang terbuka (maks. 5)', e_self: 'Kamu tidak bisa menantang dirimu sendiri', e_noplayer: 'Pemain tidak ditemukan', e_gone: 'Duel ini sudah selesai atau kedaluwarsa', e_taken: 'Duel ini sudah diambil orang lain', e_net: 'Masalah koneksi, coba lagi', e_x: 'Terjadi kesalahan, coba lagi', e_blocked: 'Akun ini diblokir' },
+ru: { tag: 'Pump или Dump', hero_h: 'Читай график.\nОбыграй друга.', hero_s: '5 раундов, одинаковые графики для обоих. Лучший счёт забирает банк.', ch_friend: 'Вызвать друга', ch_random: 'Случайный соперник', your_duels: 'Твои дуэли', active: 'активных: {n}', no_duels: 'Дуэлей пока нет. Брось кому-нибудь вызов!', d_play: 'Твой ход', d_accept: '{n} вызывает тебя', d_wait: 'Ждём {n}', d_wait_any: 'Ждём друга', d_won: 'Ты обыграл {n}', d_lost: '{n} обыграл тебя', d_tie: 'Ничья с {n}', d_exp: 'Истекло · ставка возвращена', d_left: 'осталось {t}', play_b: 'Играть', open_b: 'Открыть', rank_banner: 'Рейтинг недели · конец через {t}', nav_duel: 'Дуэль', nav_rank: 'Рейтинг', nav_prof: 'Профиль', new_ch: 'Новый вызов', opp_any: 'Любой по ссылке', opp_find: 'Игрок', find_ph: '@username', find_b: 'Найти', your_friend: 'Твой друг', gets: 'играет после тебя', cur_cash: 'Кэш', cur_mct: '$MCT', stake: 'Ставка', winner_takes: 'Победитель получает', burn_note: '5 % каждого банка в $MCT сжигается', r1: '5 раундов, одинаковые графики для обоих', r2: '24 ч, чтобы соперник сыграл', r3: 'Ничья? Побеждает самый быстрый', go_first: 'Играть первым', rand_s: 'Ты играешь против реальной партии другого игрока на тех же 5 графиках. Мгновенный результат.', rand_left: 'Осталось случайных дуэлей сегодня: {n}', start: 'Начать дуэль', round_x: 'Раунд {i} из 5', q: 'Следующая свеча будет зелёной или красной?', pump: 'PUMP', dump: 'DUMP', sl: 'секунд', right: 'Верно!', wrong: 'Мимо', late: 'Поздно', you: 'Ты', wait_h: 'Твой счёт: {s}/5', wait_s_any: 'Теперь отправь вызов. У друга 24 ч, чтобы тебя обыграть.', wait_s_to: '{n} получил уведомление. Ты получишь сообщение, когда дуэль закончится.', share_b: 'Отправить другу', copy_b: 'Скопировать ссылку', copied: 'Ссылка скопирована', share_txt: '⚔️ Вызываю тебя в MCT Duel! На кону {s}. Побей мой счёт, если сможешь.', acc_h: '{n} вызывает тебя!', acc_s: 'Те же 5 графиков. Лучший счёт забирает банк.', acc_b: 'Принять вызов', later: 'Не сейчас', win_h: 'Победа!', lose_h: 'Поражение', tie_h: 'Идеальная ничья', tie_s: 'Твоя ставка возвращена.', per_ans: '{t} с на ответ', rematch: 'Реванш', revenge: 'Взять реванш', again: 'Ещё раз', home: 'На главную', share_win: 'Поделиться победой', win_txt: '⚔️ Я только что выиграл {s} в MCT Duel! Думаешь, сможешь меня обыграть?', ghost_of: 'Призрак {n}', ghost_note: 'Реальная партия {n} на тех же графиках', week: 'Эта неделя', all: 'За всё время', ends_in: 'Конец через {t}', wins: 'побед', rank_empty: 'Победителей пока нет. Будь первым!', rank_rule: 'Не более 2 побед над одним соперником в неделю', you_rank: 'Твоё место', no_rank: 'Выиграй дуэль, чтобы попасть в рейтинг', linked: 'Один аккаунт с Meme Coin Tycoon', duels_h: 'Дуэли', w: 'Победы', wr: 'Успех', st: 'Серия', worth: 'Состояние', coins: 'Создано монет', trades: 'Сделки', open_mct: 'Открыть Meme Coin Tycoon', refuse: 'Отклонять вызовы', sound: 'Звуки', lang: 'Язык', won_total: 'Выиграно в дуэлях', nouser_h: 'Создай аккаунт магната', nouser_s: 'MCT Duel использует твой аккаунт Meme Coin Tycoon. Открой игру один раз, чтобы получить стартовый кэш, и возвращайся сюда.', nouser_b: 'Открыть Meme Coin Tycoon', tg_only: 'Открой MCT Duel в Telegram', retry: 'Повторить', loading: 'Загрузка…', burned: 'Сожжено {n} $MCT', challenge_b: 'Вызвать', mct_off: 'Дуэли на $MCT', e_cash: 'Недостаточно кэша', e_nomct: 'Недостаточно $MCT', e_mct_new: 'Дуэли на $MCT открываются через 3 дня после первой игры', e_mct_trades: 'Сделай 5 сделок в Meme Coin Tycoon, чтобы играть на $MCT', e_mct_no: 'Дуэли на $MCT недоступны для этого аккаунта', e_mct_cap: 'Дневной лимит выигрыша $MCT достигнут, приходи завтра', e_rand_cap: '10 случайных дуэлей в день, приходи завтра', e_pair_cap: '3 дуэли в день против одного игрока', e_no_ch: 'Этот игрок отклоняет вызовы', e_too_many: 'Сначала заверши открытые дуэли (макс. 5)', e_self: 'Нельзя вызвать самого себя', e_noplayer: 'Игрок не найден', e_gone: 'Эта дуэль завершена или истекла', e_taken: 'Эту дуэль уже кто-то принял', e_net: 'Проблема со связью, попробуй ещё раз', e_x: 'Что-то пошло не так, попробуй ещё раз', e_blocked: 'Этот аккаунт заблокирован' },
+ar: { tag: 'Pump أو Dump', hero_h: 'اقرأ الرسم البياني.\nتغلّب على صديقك.', hero_s: '5 جولات، نفس الرسوم لكما معًا. أفضل نتيجة تأخذ الرهان كله.', ch_friend: 'تحدَّ صديقًا', ch_random: 'خصم عشوائي', your_duels: 'مبارزاتك', active: '{n} نشطة', no_duels: 'لا توجد مبارزات بعد. تحدَّ أحدهم!', d_play: 'دورك للعب', d_accept: '{n} يتحداك', d_wait: 'بانتظار {n}', d_wait_any: 'بانتظار صديق', d_won: 'تغلّبت على {n}', d_lost: '{n} تغلّب عليك', d_tie: 'تعادل مع {n}', d_exp: 'انتهت · أُعيد الرهان', d_left: 'متبقٍ {t}', play_b: 'العب', open_b: 'افتح', rank_banner: 'ترتيب الأسبوع · ينتهي بعد {t}', nav_duel: 'مبارزة', nav_rank: 'الترتيب', nav_prof: 'الملف', new_ch: 'تحدٍّ جديد', opp_any: 'أي شخص لديه الرابط', opp_find: 'لاعب محدد', find_ph: '@username', find_b: 'بحث', your_friend: 'صديقك', gets: 'يلعب بعدك', cur_cash: 'نقد', cur_mct: '$MCT', stake: 'الرهان', winner_takes: 'الفائز يأخذ', burn_note: 'يُحرق 5 % من كل رهان بـ $MCT', r1: '5 جولات، نفس الرسوم للاثنين', r2: '24 ساعة ليلعب خصمك', r3: 'تعادل؟ الأسرع يفوز', go_first: 'العب أولًا', rand_s: 'تواجه اللعب الحقيقي للاعب آخر على نفس الرسوم الخمسة. نتيجة فورية.', rand_left: 'متبقٍ {n} مبارزات عشوائية اليوم', start: 'ابدأ المبارزة', round_x: 'الجولة {i} من 5', q: 'هل الشمعة التالية خضراء أم حمراء؟', pump: 'PUMP', dump: 'DUMP', sl: 'ثانية', right: 'صحيح!', wrong: 'خطأ', late: 'متأخر', you: 'أنت', wait_h: 'نتيجتك: {s}/5', wait_s_any: 'أرسل التحدي الآن. لدى صديقك 24 ساعة ليتغلب عليك.', wait_s_to: 'تم إخطار {n}. ستصلك رسالة عند انتهاء المبارزة.', share_b: 'أرسل إلى صديق', copy_b: 'انسخ الرابط', copied: 'تم نسخ الرابط', share_txt: '⚔️ أتحداك في MCT Duel! الرهان {s}. تغلّب على نتيجتي إن استطعت.', acc_h: '{n} يتحداك!', acc_s: 'نفس الرسوم الخمسة. أفضل نتيجة تأخذ الرهان.', acc_b: 'اقبل التحدي', later: 'ليس الآن', win_h: 'فزت!', lose_h: 'خسرت', tie_h: 'تعادل تام', tie_s: 'أُعيد إليك رهانك.', per_ans: '{t} ث لكل إجابة', rematch: 'إعادة', revenge: 'خذ ثأرك', again: 'العب مجددًا', home: 'العودة', share_win: 'شارك فوزي', win_txt: '⚔️ فزت للتو بـ {s} في MCT Duel! هل تظن أنك تستطيع هزيمتي؟', ghost_of: 'شبح {n}', ghost_note: 'اللعب الحقيقي لـ {n} على نفس الرسوم', week: 'هذا الأسبوع', all: 'كل الأوقات', ends_in: 'ينتهي بعد {t}', wins: 'فوز', rank_empty: 'لا فائز بعد. كن الأول!', rank_rule: 'فوزان كحد أقصى ضد نفس الخصم كل أسبوع', you_rank: 'مركزك', no_rank: 'افز بمبارزة لتدخل الترتيب', linked: 'حساب واحد مع Meme Coin Tycoon', duels_h: 'المبارزات', w: 'فوز', wr: 'النسبة', st: 'سلسلة', worth: 'الثروة', coins: 'عملات أطلقتها', trades: 'صفقات', open_mct: 'افتح Meme Coin Tycoon', refuse: 'رفض التحديات', sound: 'الأصوات', lang: 'اللغة', won_total: 'أرباح المبارزات', nouser_h: 'أنشئ حسابك', nouser_s: 'يستخدم MCT Duel حسابك في Meme Coin Tycoon. افتح اللعبة مرة لتحصل على رصيد البداية ثم عد إلى هنا.', nouser_b: 'افتح Meme Coin Tycoon', tg_only: 'افتح MCT Duel من تيليجرام', retry: 'أعد المحاولة', loading: 'جارٍ التحميل…', burned: 'تم حرق {n} $MCT', challenge_b: 'تحدَّ', mct_off: 'مبارزات $MCT', e_cash: 'النقد غير كافٍ', e_nomct: '$MCT غير كافية', e_mct_new: 'تُفتح مبارزات $MCT بعد 3 أيام من أول لعبة', e_mct_trades: 'نفّذ 5 صفقات في Meme Coin Tycoon لتلعب بـ $MCT', e_mct_no: 'مبارزات $MCT غير متاحة لهذا الحساب', e_mct_cap: 'بلغت حد أرباح $MCT اليومي، عد غدًا', e_rand_cap: '10 مبارزات عشوائية يوميًا، عد غدًا', e_pair_cap: '3 مبارزات يوميًا ضد نفس اللاعب', e_no_ch: 'هذا اللاعب يرفض التحديات', e_too_many: 'أنهِ مبارزاتك المفتوحة أولًا (5 كحد أقصى)', e_self: 'لا يمكنك تحدي نفسك', e_noplayer: 'اللاعب غير موجود', e_gone: 'هذه المبارزة انتهت', e_taken: 'شخص آخر قبل هذه المبارزة', e_net: 'مشكلة في الاتصال، أعد المحاولة', e_x: 'حدث خطأ، أعد المحاولة', e_blocked: 'هذا الحساب محظور' },
+fa: { tag: 'Pump یا Dump', hero_h: 'نمودار را بخوان.\nدوستت را شکست بده.', hero_s: '۵ دور، نمودارهای یکسان برای هر دو. بهترین امتیاز کل جایزه را می‌برد.', ch_friend: 'دوستت را به چالش بکش', ch_random: 'حریف تصادفی', your_duels: 'دوئل‌های تو', active: '{n} فعال', no_duels: 'هنوز دوئلی نداری. کسی را به چالش بکش!', d_play: 'نوبت توست', d_accept: '{n} تو را به چالش کشید', d_wait: 'در انتظار {n}', d_wait_any: 'در انتظار یک دوست', d_won: '{n} را شکست دادی', d_lost: '{n} تو را شکست داد', d_tie: 'مساوی با {n}', d_exp: 'منقضی شد · شرط برگشت', d_left: '{t} مانده', play_b: 'بازی', open_b: 'باز کن', rank_banner: 'رده‌بندی هفته · پایان تا {t}', nav_duel: 'دوئل', nav_rank: 'رده‌بندی', nav_prof: 'پروفایل', new_ch: 'چالش جدید', opp_any: 'هر کسی با لینک', opp_find: 'یک بازیکن', find_ph: '@username', find_b: 'جستجو', your_friend: 'دوستت', gets: 'بعد از تو بازی می‌کند', cur_cash: 'پول نقد', cur_mct: '$MCT', stake: 'شرط', winner_takes: 'برنده می‌برد', burn_note: '۵ ٪ هر جایزه $MCT سوزانده می‌شود', r1: '۵ دور، نمودارهای یکسان برای هر دو', r2: '۲۴ ساعت برای بازی حریف', r3: 'مساوی؟ سریع‌تر برنده است', go_first: 'اول بازی کن', rand_s: 'با بازی واقعی یک بازیکن دیگر روی همان ۵ نمودار روبرو می‌شوی. نتیجه فوری.', rand_left: '{n} دوئل تصادفی امروز مانده', start: 'شروع دوئل', round_x: 'دور {i} از ۵', q: 'شمع بعدی سبز است یا قرمز؟', pump: 'PUMP', dump: 'DUMP', sl: 'ثانیه', right: 'درست!', wrong: 'اشتباه', late: 'دیر شد', you: 'تو', wait_h: 'امتیاز تو: {s}/5', wait_s_any: 'حالا چالش را بفرست. دوستت ۲۴ ساعت وقت دارد تو را شکست دهد.', wait_s_to: 'به {n} خبر داده شد. وقتی دوئل تمام شود پیام می‌گیری.', share_b: 'ارسال برای دوست', copy_b: 'کپی لینک', copied: 'لینک کپی شد', share_txt: '⚔️ تو را در MCT Duel به چالش می‌کشم! {s} شرط است. اگر می‌توانی امتیازم را بزن.', acc_h: '{n} تو را به چالش کشید!', acc_s: 'همان ۵ نمودار. بهترین امتیاز جایزه را می‌برد.', acc_b: 'قبول دوئل', later: 'بعدا', win_h: 'بردی!', lose_h: 'باختی', tie_h: 'تساوی کامل', tie_s: 'شرطت برگشت داده شد.', per_ans: '{t} ثانیه برای هر پاسخ', rematch: 'بازی دوباره', revenge: 'انتقام بگیر', again: 'دوباره بازی کن', home: 'بازگشت', share_win: 'برد من را به اشتراک بگذار', win_txt: '⚔️ همین الان {s} در MCT Duel بردم! فکر می‌کنی می‌توانی مرا ببری؟', ghost_of: 'شبح {n}', ghost_note: 'بازی واقعی {n} روی همان نمودارها', week: 'این هفته', all: 'همه زمان‌ها', ends_in: 'پایان تا {t}', wins: 'برد', rank_empty: 'هنوز برنده‌ای نیست. اولین باش!', rank_rule: 'حداکثر ۲ برد در هفته مقابل یک حریف حساب می‌شود', you_rank: 'رتبه تو', no_rank: 'یک دوئل ببر تا وارد رده‌بندی شوی', linked: 'یک حساب با Meme Coin Tycoon', duels_h: 'دوئل‌ها', w: 'برد', wr: 'درصد برد', st: 'پشت سر هم', worth: 'ثروت', coins: 'کوین‌های ساخته', trades: 'معاملات', open_mct: 'باز کردن Meme Coin Tycoon', refuse: 'رد چالش‌ها', sound: 'صداها', lang: 'زبان', won_total: 'برد در دوئل‌ها', nouser_h: 'حساب خود را بساز', nouser_s: 'MCT Duel از حساب Meme Coin Tycoon تو استفاده می‌کند. یک بار بازی را باز کن تا پول شروع را بگیری، بعد اینجا برگرد.', nouser_b: 'باز کردن Meme Coin Tycoon', tg_only: 'MCT Duel را از تلگرام باز کن', retry: 'دوباره', loading: 'در حال بارگذاری…', burned: '{n} $MCT سوزانده شد', challenge_b: 'چالش', mct_off: 'دوئل‌های $MCT', e_cash: 'پول نقد کافی نیست', e_nomct: '$MCT کافی نیست', e_mct_new: 'دوئل‌های $MCT سه روز بعد از اولین بازی باز می‌شوند', e_mct_trades: 'برای بازی با $MCT، ۵ معامله در Meme Coin Tycoon انجام بده', e_mct_no: 'دوئل‌های $MCT برای این حساب در دسترس نیست', e_mct_cap: 'سقف برد روزانه $MCT پر شد، فردا برگرد', e_rand_cap: 'روزی ۱۰ دوئل تصادفی، فردا برگرد', e_pair_cap: 'روزی ۳ دوئل با یک بازیکن', e_no_ch: 'این بازیکن چالش‌ها را رد می‌کند', e_too_many: 'اول دوئل‌های باز را تمام کن (حداکثر ۵)', e_self: 'نمی‌توانی خودت را به چالش بکشی', e_noplayer: 'بازیکن پیدا نشد', e_gone: 'این دوئل تمام یا منقضی شده', e_taken: 'کس دیگری این دوئل را گرفته', e_net: 'مشکل اتصال، دوباره امتحان کن', e_x: 'مشکلی پیش آمد، دوباره امتحان کن', e_blocked: 'این حساب مسدود است' }
+};
+var LANGS = ['en', 'fr', 'es', 'id', 'ru', 'ar', 'fa'];
+function pickLang() {
+  try { var s = localStorage.getItem('mctd_lang'); if (s && TX[s]) return s; } catch (e) {}
+  var c = '';
+  try { c = String((tw && tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || 'en').toLowerCase(); } catch (e) {}
+  if (/^(ru|uk|be|kk)/.test(c)) return 'ru';
+  var b = c.slice(0, 2); return TX[b] ? b : 'en';
+}
+var LANG = pickLang();
+function t(k, o) { var s = (TX[LANG] && TX[LANG][k]) || TX.en[k] || k; if (o) Object.keys(o).forEach(function (x) { s = s.split('{' + x + '}').join(o[x]); }); return s; }
+function applyDir() { document.documentElement.lang = LANG; document.documentElement.dir = (LANG === 'ar' || LANG === 'fa') ? 'rtl' : 'ltr'; }
+applyDir();
+
+/* ---------- helpers ---------- */
+var $ = function (s) { return document.querySelector(s); };
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function money(n, cur) {
+  n = Number(n) || 0;
+  if (cur === 'mct') return (Math.round(n * 100) / 100).toLocaleString('en-US', { maximumFractionDigits: 2 }) + ' $MCT';
+  return '$' + Math.round(n).toLocaleString('en-US');
+}
+function short(n) { n = Number(n) || 0; if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M'; if (n >= 1e4) return Math.round(n / 1e3) + 'k'; return Math.round(n).toLocaleString('en-US'); }
+function dur(sec) { sec = Math.max(0, Math.floor(sec)); var d = Math.floor(sec / 86400), h = Math.floor(sec % 86400 / 3600), m = Math.floor(sec % 3600 / 60); return d ? d + ' d ' + h + ' h' : h ? h + ' h ' + m + ' min' : m + ' min'; }
+function av(name, photo, cls) {
+  var l = esc(String(name || '?').replace(/^@/, '').charAt(0).toUpperCase() || '?');
+  return '<span class="av ' + (cls || '') + '">' + (photo ? '<img src="' + esc(photo) + '" alt="" loading="lazy" onerror="this.remove()">' : '') + (photo ? '' : l) + '</span>';
+}
+function hp(k) { try { if (!tw || !tw.HapticFeedback) return; if (k === 'ok' || k === 'err' || k === 'warn') tw.HapticFeedback.notificationOccurred(k === 'ok' ? 'success' : k === 'err' ? 'error' : 'warning'); else tw.HapticFeedback.impactOccurred(k || 'light'); } catch (e) {} }
+var TT = null;
+function toast(m) { var o = $('.toast'); if (o) o.remove(); var d = document.createElement('div'); d.className = 'toast'; d.textContent = m; document.body.appendChild(d); clearTimeout(TT); TT = setTimeout(function () { d.remove(); }, 2600); }
+function errT(r) { var e = (r && r.error) || 'x'; return t('e_' + e) !== 'e_' + e ? t('e_' + e) : t('e_x'); }
+function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+function openTg(u) { try { tw.openTelegramLink(u); } catch (e) { location.href = u; } }
+function share(link, text) { openTg('https://t.me/share/url?url=' + encodeURIComponent(link) + '&text=' + encodeURIComponent(text)); }
+function copy(s) { try { navigator.clipboard.writeText(s).then(function () { toast(t('copied')); }, function () { toast(s); }); } catch (e) { toast(s); } }
+
+var IC = {
+  sw: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20 L14 10"/><path d="M20 20 L10 10"/><path d="M12 4 L14 10 L10 10 Z"/></svg>',
+  rank: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V12"/><path d="M10 20V6"/><path d="M16 20V10"/><path d="M22 20H2"/></svg>',
+  user: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
+  send: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 L11 13"/><path d="M22 2 L15 22 L11 13 L2 9 Z"/></svg>',
+  dice: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.3" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/></svg>',
+  up: '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19 V5"/><path d="M5 12 L12 5 L19 12"/></svg>',
+  dn: '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5 V19"/><path d="M5 12 L12 19 L19 12"/></svg>',
+  cup: '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 6h3a3 3 0 0 1-3 4"/><path d="M7 6H4a3 3 0 0 0 3 4"/></svg>',
+  cupS: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFD24A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 6h3a3 3 0 0 1-3 4"/><path d="M7 6H4a3 3 0 0 0 3 4"/></svg>',
+  link: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3EE69A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l3-3a5 5 0 0 0-7.1-7.1l-1 1"/><path d="M14 11a5 5 0 0 0-7.1 0l-3 3a5 5 0 0 0 7.1 7.1l1-1"/></svg>',
+  chart: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2EE6FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3,17 9,11 13,15 21,7"/></svg>',
+  clock: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2EE6FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  bolt: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2EE6FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 L4 14 h7 l-1 8 9-12 h-7 z"/></svg>',
+  flame: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF9A3C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22c4 0 7-3 7-7 0-5-5-7-5-12-3 2-6 6-6 9-1-1-2-2-2-4-1 2-1 4-1 7 0 4 3 7 7 7z"/></svg>',
+  rpt: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg>',
+  ext: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 L17 7"/><path d="M8 7h9v9"/></svg>'
+};
+
+/* ---------- sounds (made in the browser, no file) ---------- */
+var SND = true; try { SND = localStorage.getItem('mctd_snd') !== '0'; } catch (e) {}
+var AC = null;
+function tone(f, d, type, vol, at) {
+  if (!SND) return;
+  try {
+    AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+    if (AC.state === 'suspended') AC.resume();
+    var o = AC.createOscillator(), g = AC.createGain(), s = AC.currentTime + (at || 0);
+    o.type = type || 'sine'; o.frequency.setValueAtTime(f, s);
+    g.gain.setValueAtTime(0.0001, s); g.gain.exponentialRampToValueAtTime(vol || 0.12, s + 0.015); g.gain.exponentialRampToValueAtTime(0.0001, s + d);
+    o.connect(g); g.connect(AC.destination); o.start(s); o.stop(s + d + 0.02);
+  } catch (e) {}
+}
+var SFX = {
+  tap: function () { tone(520, 0.06, 'triangle', 0.08); },
+  tick: function () { tone(880, 0.05, 'square', 0.03); },
+  ok: function () { tone(660, 0.12, 'triangle', 0.12); tone(990, 0.18, 'triangle', 0.12, 0.09); },
+  ko: function () { tone(180, 0.25, 'sawtooth', 0.07); tone(140, 0.3, 'sawtooth', 0.06, 0.08); },
+  win: function () { [523, 659, 784, 1047].forEach(function (f, i) { tone(f, 0.22, 'triangle', 0.13, i * 0.11); }); tone(1319, 0.5, 'triangle', 0.1, 0.48); },
+  lose: function () { [392, 330, 262].forEach(function (f, i) { tone(f, 0.3, 'triangle', 0.1, i * 0.16); }); },
+  go: function () { tone(440, 0.08, 'triangle', 0.1); tone(660, 0.12, 'triangle', 0.1, 0.08); }
+};
+
+/* ---------- api ---------- */
+async function api(action, body) {
+  try {
+    var r = await fetch(FN, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ initData: (tw && tw.initData) || '', action: action, body: body || {} }) });
+    return await r.json();
+  } catch (e) { return { ok: false, error: 'net' }; }
+}
+
+/* ---------- state ---------- */
+var S = { me: null, duels: [], stakes: null, tab: 'duel', rankScope: 'week' };
+var BUSY = false;
+
+function nav(on) {
+  var n = $('#nav');
+  if (!on) { n.hidden = true; return; }
+  n.hidden = false;
+  n.innerHTML = '<button data-t="duel" class="' + (S.tab === 'duel' ? 'on' : '') + '">' + IC.sw.replace('width="20" height="20"', 'width="22" height="22"') + t('nav_duel') + '</button>' +
+    '<button data-t="rank" class="' + (S.tab === 'rank' ? 'on' : '') + '">' + IC.rank + t('nav_rank') + '</button>' +
+    '<button data-t="prof" class="' + (S.tab === 'prof' ? 'on' : '') + '">' + IC.user + t('nav_prof') + '</button>';
+  n.querySelectorAll('button').forEach(function (b) { b.onclick = function () { hp(); SFX.tap(); go(b.dataset.t); }; });
+}
+function back(on, fn) {
+  try {
+    if (!tw || !tw.BackButton) return;
+    tw.BackButton.offClick(back._f || function () {});
+    if (on) { back._f = fn || function () { go('duel'); }; tw.BackButton.onClick(back._f); tw.BackButton.show(); } else tw.BackButton.hide();
+  } catch (e) {}
+}
+function screen(html, opt) {
+  opt = opt || {};
+  $('#app').innerHTML = '<div class="scr' + (opt.full ? ' full' : '') + '">' + html + '</div>';
+  nav(!opt.full); back(!!opt.back, opt.back === true ? null : opt.back);
+  window.scrollTo(0, 0);
+}
+function loading() { $('#app').innerHTML = '<div class="center"><div class="spin"></div></div>'; nav(false); }
+function go(tab) { S.tab = tab; if (tab === 'rank') return rank(); if (tab === 'prof') return profile(); return home(); }
+
+/* ---------- home ---------- */
+function chipsHtml() {
+  var m = S.me || {};
+  return '<div class="chips"><span class="chip"><i>$</i>' + short(m.cash) + '</span><span class="chip t"><i>◆</i>' + short(m.mct) + '</span></div>';
+}
+function duelRow(d) {
+  var on = d.opp && d.opp.name ? (d.opp.ghost ? t('ghost_of', { n: d.opp.name }) : d.opp.name) : null;
+  var stake = money(d.stake, d.cur), title, sub = stake, right = '', cls = '', avh;
+  var meA = d.me === 'a';
+  var oppN = d.me === 'b' ? d.a_name : on;
+  var oppP = d.me === 'b' ? d.a_photo : (d.opp && d.opp.photo);
+  avh = av(oppN || '?', oppP, d.act === 'accept' ? 'o' : d.status === 'done' ? (d.win ? 'g' : 'b') : '');
+  if (d.status === 'done') {
+    var my = meA ? d.a_score : d.b_score, op = meA ? d.b_score : d.a_score;
+    title = d.tie ? t('d_tie', { n: esc(oppN) }) : d.win ? t('d_won', { n: esc(oppN) }) : t('d_lost', { n: esc(oppN) });
+    sub = my + ' - ' + op + ' · ' + stake;
+    var net = d.tie ? 0 : d.win ? (d.kind === 'random' ? d.stake : d.stake * 2 - (d.burn || 0) - d.stake) : -d.stake;
+    right = '<span class="amt ' + (net > 0 ? 'w' : net < 0 ? 'l' : '') + '">' + (net > 0 ? '+' : net < 0 ? '-' : '') + money(Math.abs(net), d.cur) + '</span>';
+  } else if (d.status === 'expired') {
+    title = t('d_exp'); sub = stake;
+  } else if (d.act === 'play') {
+    title = t('d_play'); cls = 'mine'; sub = (oppN ? esc(oppN) + ' · ' : '') + stake;
+    right = '<span class="pill cy">' + t('play_b') + '</span>';
+  } else if (d.act === 'accept') {
+    title = t('d_accept', { n: esc(d.a_name) }); cls = 'hot'; sub = stake + ' · ' + t('d_left', { t: dur(d.expires - Date.now() / 1000) });
+    right = '<span class="pill or">' + t('play_b') + '</span>';
+  } else {
+    title = oppN ? t('d_wait', { n: esc(oppN) }) : t('d_wait_any');
+    sub = t('you') + ' ' + d.my_score + '/5 · ' + stake;
+    right = '<span class="amt" style="color:var(--mu);font-size:13px;font-weight:600">' + dur(d.expires - Date.now() / 1000) + '</span>';
+  }
+  return '<button class="row ' + cls + '" data-d="' + d.id + '">' + avh + '<span class="who"><b>' + title + '</b><small>' + sub + '</small></span>' + right + '</button>';
+}
+async function home(fresh) {
+  S.tab = 'duel';
+  if (!S.me || fresh !== false) {
+    if (!S.me) loading();
+    var r = await api('home');
+    if (!r.ok) return fail(r);
+    S.me = r.me; S.duels = r.duels || []; S.stakes = r.stakes;
+  }
+  var act = S.duels.filter(function (d) { return ['a_play', 'wait_b', 'b_play'].indexOf(d.status) >= 0; }).length;
+  var rows = S.duels.length ? S.duels.map(duelRow).join('') : '<div class="empty">' + t('no_duels') + '</div>';
+  screen(
+    '<div class="top"><div class="logo"><span class="lg">' + IC.sw.replace('currentColor', '#2EE6FF') + '</span><span class="disp" style="font-size:21px">MCT DUEL</span></div>' + chipsHtml() + '</div>' +
+    '<section class="card hero"><svg class="bgc" width="340" height="120" viewBox="0 0 340 120" aria-hidden="true"><polyline points="0,95 30,80 55,88 85,60 110,70 140,40 165,52 195,30 225,45 255,20 285,34 315,10 340,22" fill="none" stroke="#2EE6FF" stroke-width="3" stroke-linejoin="round"/></svg>' +
+    '<div class="kick">' + t('tag') + '</div><h1 class="disp">' + esc(t('hero_h')) + '</h1><p>' + t('hero_s') + '</p>' +
+    '<div class="stack"><button class="btn p" id="bF">' + IC.sw + t('ch_friend') + '</button><button class="btn o" id="bR">' + IC.dice + t('ch_random') + '</button></div></section>' +
+    '<div class="sh"><h2>' + t('your_duels') + '</h2><span>' + (act ? t('active', { n: act }) : '') + '</span></div>' +
+    '<div class="stack" id="dl">' + rows + '</div>' +
+    '<button class="note" id="bRk">' + IC.cupS + '<span>' + t('rank_banner', { t: weekLeft() }) + '</span></button>'
+  );
+  $('#bF').onclick = function () { hp(); SFX.tap(); C.mode = 'any'; C.to = null; create(null); };
+  $('#bR').onclick = function () { hp(); SFX.tap(); random(); };
+  $('#bRk').onclick = function () { hp(); go('rank'); };
+  document.querySelectorAll('[data-d]').forEach(function (b) { b.onclick = function () { hp(); SFX.tap(); openDuel(Number(b.dataset.d)); }; });
+}
+function weekLeft() {
+  var n = new Date(), p = new Date(n.toLocaleString('en-US', { timeZone: 'Europe/Paris' })), off = n - p;
+  var d = new Date(p); var dw = (d.getDay() + 6) % 7; d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - dw + 7);
+  return dur((d - p) / 1000 + 0 * off);
+}
+function openDuel(id) {
+  var d = S.duels.find(function (x) { return x.id === id; });
+  if (!d) return viewDuel(id);
+  if (d.act === 'play') return play(d.id);
+  if (d.act === 'accept') return accept(d);
+  if (d.status === 'done') return result(d);
+  if (d.act === 'wait') return waiting(d);
+  return home();
+}
+async function viewDuel(id) {
+  loading();
+  var r = await api('view', { id: id });
+  if (!r.ok) { toast(errT(r)); return home(); }
+  var d = r.duel;
+  if (d.act === 'play') return play(d.id);
+  if (d.act === 'accept') return accept(d);
+  if (d.status === 'done') return result(d);
+  if (d.act === 'wait') return waiting(d);
+  toast(t('e_gone')); return home();
+}
+
+/* ---------- create a challenge ---------- */
+var C = { cur: 'cash', stake: 500, to: null, mode: 'any' };
+async function create(target) {
+  if (target) { C.to = target; C.mode = 'find'; } else if (target === undefined && C.mode !== 'find') { C.to = null; }
+  var m = S.me || {}, st = S.stakes || { cash: [100, 500, 1000, 5000], mct: [5, 10, 25, 50] };
+  if (C.cur === 'mct' && m.mct_ok) C.cur = 'cash';
+  var list = st[C.cur]; if (list.indexOf(C.stake) < 0) C.stake = list[1] || list[0];
+  var bal = C.cur === 'cash' ? m.cash : m.mct;
+  var pot = C.stake * 2 * (C.cur === 'mct' ? 0.95 : 1);
+  var opp = C.mode === 'find' && C.to ? '<div class="big o">' + (C.to.photo ? '<img src="' + esc(C.to.photo) + '" alt="">' : esc(String(C.to.name).charAt(0).toUpperCase())) + '</div><b>' + esc(C.to.name) + '</b><small>' + C.to.wins + ' ' + t('wins') + '</small>'
+    : '<div class="big o q">?</div><b>' + t('your_friend') + '</b><small>' + t('gets') + '</small>';
+  screen(
+    '<div class="hdr"><h1 class="disp">' + t('new_ch') + '</h1></div>' +
+    '<section class="card vs"><div class="side"><div class="big">' + (m.photo ? '<img src="' + esc(m.photo) + '" alt="">' : esc(String(m.name || '?').charAt(0).toUpperCase())) + '</div><b>' + t('you') + '</b><small>' + (m.wins || 0) + ' ' + t('wins') + '</small></div><div class="x disp">VS</div><div class="side">' + opp + '</div></section>' +
+    '<div class="seg"><button data-m="any" class="' + (C.mode === 'any' ? 'on' : '') + '">' + t('opp_any') + '</button><button data-m="find" class="' + (C.mode === 'find' ? 'on' : '') + '">' + t('opp_find') + '</button></div>' +
+    (C.mode === 'find' ? '<div class="find"><input id="q" placeholder="' + t('find_ph') + '" autocomplete="off" autocapitalize="off" spellcheck="false" value="' + esc(C.to ? (C.to.q || '') : '') + '"><button id="qf">' + t('find_b') + '</button></div>' : '') +
+    '<p class="lbl">' + t('stake') + '</p>' +
+    '<div class="seg"><button data-c="cash" class="' + (C.cur === 'cash' ? 'on' : '') + '">' + t('cur_cash') + ' · ' + short(m.cash) + '</button><button data-c="mct" class="' + (C.cur === 'mct' ? 'on' : '') + '"' + (m.mct_ok ? ' style="opacity:.5"' : '') + '>' + t('cur_mct') + ' · ' + short(m.mct) + '</button></div>' +
+    '<div class="grid4">' + list.map(function (v) { return '<button class="st' + (v === C.stake ? ' on' : '') + '" data-s="' + v + '"' + (v > bal ? ' disabled' : '') + '>' + (C.cur === 'cash' ? '$' + short(v) : v) + '</button>'; }).join('') + '</div>' +
+    '<div class="sum"><span>' + t('winner_takes') + '</span><b>' + money(pot, C.cur) + '</b></div>' +
+    (C.cur === 'mct' ? '<div class="sum" style="font-size:12px"><span>' + t('burn_note') + '</span></div>' : '') +
+    '<div class="rules"><div>' + IC.chart + '<span>' + t('r1') + '</span></div><div>' + IC.clock + '<span>' + t('r2') + '</span></div><div>' + IC.bolt + '<span>' + t('r3') + '</span></div></div>' +
+    '<button class="btn p" id="go"' + (C.stake > bal || (C.mode === 'find' && !C.to) ? ' disabled' : '') + '>' + IC.sw + t('go_first') + '</button>',
+    { back: true, full: true }
+  );
+  document.querySelectorAll('[data-m]').forEach(function (b) { b.onclick = function () { hp(); C.mode = b.dataset.m; if (C.mode === 'any') C.to = null; create(null); }; });
+  document.querySelectorAll('[data-c]').forEach(function (b) { b.onclick = function () { hp(); if (b.dataset.c === 'mct' && m.mct_ok) { toast(errT({ error: m.mct_ok })); return; } C.cur = b.dataset.c; create(null); }; });
+  document.querySelectorAll('[data-s]').forEach(function (b) { b.onclick = function () { hp(); SFX.tap(); C.stake = Number(b.dataset.s); create(null); }; });
+  var qf = $('#qf');
+  if (qf) {
+    var q = $('#q');
+    var find = async function () { var v = q.value.trim(); if (!v) return; qf.disabled = true; var r = await api('player', { q: v }); qf.disabled = false;
+      if (!r.ok) { hp('err'); toast(errT(r)); return; }
+      if (r.p.me) { hp('err'); toast(t('e_self')); return; }
+      if (r.p.no_ch) { hp('err'); toast(t('e_no_ch')); return; }
+      hp('ok'); C.to = r.p; C.to.q = v; create(null); };
+    qf.onclick = find; q.onkeydown = function (e) { if (e.key === 'Enter') find(); };
+  }
+  $('#go').onclick = async function () {
+    if (BUSY) return; BUSY = true; var b = this; b.disabled = true; hp('medium');
+    var r = await api('create', { cur: C.cur, stake: C.stake, to: C.mode === 'find' && C.to ? C.to.id : null });
+    BUSY = false;
+    if (!r.ok) { b.disabled = false; hp('err'); toast(errT(r)); return; }
+    S.me = null; C.mode = 'any'; C.to = null;
+    play(r.duel.id, r.duel);
+  };
+}
+
+/* ---------- random opponent ---------- */
+var RS = 500;
+function random() {
+  var m = S.me || {}, list = (S.stakes && S.stakes.random) || [100, 500, 1000];
+  if (list.indexOf(RS) < 0) RS = list[1];
+  screen(
+    '<div class="hdr"><h1 class="disp">' + t('ch_random') + '</h1></div>' +
+    '<section class="card vs"><div class="side"><div class="big">' + (m.photo ? '<img src="' + esc(m.photo) + '" alt="">' : esc(String(m.name || '?').charAt(0).toUpperCase())) + '</div><b>' + t('you') + '</b><small>' + short(m.cash) + ' $</small></div><div class="x disp">VS</div><div class="side"><div class="big o q">' + IC.dice.replace('width="20" height="20"', 'width="34" height="34"') + '</div><b>???</b><small>' + t('rand_left', { n: m.rand_left == null ? 10 : m.rand_left }) + '</small></div></section>' +
+    '<p style="margin:0;color:var(--mu2);font-size:14px;line-height:1.45">' + t('rand_s') + '</p>' +
+    '<p class="lbl">' + t('stake') + '</p>' +
+    '<div class="grid3">' + list.map(function (v) { return '<button class="st' + (v === RS ? ' on' : '') + '" data-s="' + v + '"' + (v > m.cash ? ' disabled' : '') + '>$' + short(v) + '</button>'; }).join('') + '</div>' +
+    '<div class="sum"><span>' + t('winner_takes') + '</span><b>' + money(RS * 2, 'cash') + '</b></div>' +
+    '<div style="flex:1"></div>' +
+    '<button class="btn p" id="go"' + (RS > m.cash || m.rand_left === 0 ? ' disabled' : '') + '>' + IC.bolt.replace('#2EE6FF', 'currentColor') + t('start') + '</button>',
+    { back: true, full: true }
+  );
+  document.querySelectorAll('[data-s]').forEach(function (b) { b.onclick = function () { hp(); SFX.tap(); RS = Number(b.dataset.s); random(); }; });
+  $('#go').onclick = async function () {
+    if (BUSY) return; BUSY = true; this.disabled = true; hp('medium');
+    var r = await api('create', { cur: 'cash', stake: RS, kind: 'random' });
+    BUSY = false;
+    if (!r.ok) { this.disabled = false; hp('err'); toast(errT(r)); return; }
+    S.me = null; play(r.duel.id, r.duel);
+  };
+}
+
+/* ---------- accept ---------- */
+function accept(d) {
+  var m = S.me || {};
+  screen(
+    '<div style="height:10px"></div>' +
+    '<section class="card vs"><div class="side"><div class="big o">' + (d.a_photo ? '<img src="' + esc(d.a_photo) + '" alt="">' : esc(String(d.a_name || '?').charAt(0).toUpperCase())) + '</div><b>' + esc(d.a_name) + '</b><small>?/5</small></div><div class="x disp">VS</div><div class="side"><div class="big">' + (m.photo ? '<img src="' + esc(m.photo) + '" alt="">' : esc(String(m.name || '?').charAt(0).toUpperCase())) + '</div><b>' + t('you') + '</b><small>' + (m.wins || 0) + ' ' + t('wins') + '</small></div></section>' +
+    '<div style="text-align:center"><h1 class="disp" style="margin:6px 0 6px;font-size:30px">' + t('acc_h', { n: esc(d.a_name) }) + '</h1><p style="margin:0;color:var(--mu2)">' + t('acc_s') + '</p></div>' +
+    '<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--mu)">' + t('stake') + '</span><b class="disp" style="font-size:24px">' + money(d.stake, d.cur) + '</b></div>' +
+    '<div class="sum"><span>' + t('winner_takes') + '</span><b>' + money(d.stake * 2 * (d.cur === 'mct' ? 0.95 : 1), d.cur) + '</b></div>' +
+    '<div class="rules"><div>' + IC.chart + '<span>' + t('r1') + '</span></div><div>' + IC.clock + '<span>' + t('d_left', { t: dur(d.expires - Date.now() / 1000) }) + '</span></div><div>' + IC.bolt + '<span>' + t('r3') + '</span></div></div>' +
+    '<div style="flex:1"></div>' +
+    '<div class="stack"><button class="btn p" id="ok">' + IC.sw + t('acc_b') + '</button><button class="btn o" id="no">' + t('later') + '</button></div>',
+    { back: true, full: true }
+  );
+  $('#no').onclick = function () { hp(); home(); };
+  $('#ok').onclick = async function () {
+    if (BUSY) return; BUSY = true; this.disabled = true; hp('medium');
+    var r = await api('accept', { id: d.id });
+    BUSY = false;
+    if (!r.ok) { this.disabled = false; hp('err'); toast(errT(r)); if (r.error === 'gone' || r.error === 'taken') setTimeout(home, 1200); return; }
+    S.me = null; play(d.id, r.duel);
+  };
+}
+
+/* ---------- play ---------- */
+var P = null;
+function chartSvg(c, next, up) {
+  var all = next ? c.concat([next]) : c, lo = Infinity, hi = -Infinity;
+  all.forEach(function (k) { lo = Math.min(lo, k[2]); hi = Math.max(hi, k[1]); });
+  var pad = (hi - lo) * 0.12 || 1; lo -= pad; hi += pad;
+  var W = 346, H = 280, cw = 12, st = 16.4, x0 = 6, y = function (v) { return 10 + (hi - v) / (hi - lo) * (H - 20); };
+  var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="chart">';
+  [0.25, 0.5, 0.75].forEach(function (f) { s += '<line x1="0" y1="' + (H * f) + '" x2="' + W + '" y2="' + (H * f) + '" stroke="#221E3D"/>'; });
+  c.forEach(function (k, i) {
+    var x = x0 + i * st, col = k[3] >= k[0] ? '#3EE69A' : '#FF5A6E', top = y(Math.max(k[0], k[3])), bot = y(Math.min(k[0], k[3]));
+    s += '<g class="cnd" style="animation-delay:' + (i * 35) + 'ms"><line x1="' + (x + cw / 2) + '" y1="' + y(k[1]) + '" x2="' + (x + cw / 2) + '" y2="' + y(k[2]) + '" stroke="' + col + '" stroke-width="2"/><rect x="' + x + '" y="' + top + '" width="' + cw + '" height="' + Math.max(2.5, bot - top) + '" rx="2.5" fill="' + col + '"/></g>';
+  });
+  var nx = x0 + 14 * st + 4;
+  var last = c[c.length - 1][3];
+  s += '<line x1="0" y1="' + y(last) + '" x2="' + W + '" y2="' + y(last) + '" stroke="#2EE6FF" stroke-dasharray="4 4" opacity=".55"/>';
+  if (next) {
+    var col2 = up ? '#3EE69A' : '#FF5A6E', t2 = y(Math.max(next[0], next[3])), b2 = y(Math.min(next[0], next[3]));
+    s += '<g class="cnd" style="animation-duration:.5s"><line x1="' + (nx + cw / 2) + '" y1="' + y(next[1]) + '" x2="' + (nx + cw / 2) + '" y2="' + y(next[2]) + '" stroke="' + col2 + '" stroke-width="2.5"/><rect x="' + nx + '" y="' + t2 + '" width="' + cw + '" height="' + Math.max(3, b2 - t2) + '" rx="2.5" fill="' + col2 + '"/></g>';
+  } else {
+    s += '<g class="qbox"><rect x="' + (nx - 6) + '" y="8" width="' + (W - nx + 4) + '" height="' + (H - 16) + '" rx="12" fill="#1D1838" stroke="#3A3462" stroke-width="1.5" stroke-dasharray="6 6"/><text x="' + (nx - 6 + (W - nx + 4) / 2) + '" y="' + (H / 2 + 14) + '" text-anchor="middle" fill="#8A84B0" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="40">?</text></g>';
+  }
+  return s + '</svg>';
+}
+function ring(left) {
+  var f = Math.max(0, Math.min(1, left / 10000)), C2 = 119.4;
+  var col = left < 3000 ? '#FF5A6E' : '#FFD24A';
+  return '<svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19" fill="none" stroke="#2A2547" stroke-width="4"/><circle cx="22" cy="22" r="19" fill="none" stroke="' + col + '" stroke-width="4" stroke-linecap="round" stroke-dasharray="' + C2 + '" stroke-dashoffset="' + (C2 * (1 - f)) + '" transform="rotate(-90 22 22)"/><text x="22" y="28" text-anchor="middle" fill="' + col + '" font-family="Inter, sans-serif" font-weight="800" font-size="16">' + Math.ceil(left / 1000) + '</text></svg>';
+}
+async function play(id, d0) {
+  P = { id: id, res: [], d: d0 || null, stop: false };
+  back(false); nav(false);
+  var view = d0;
+  if (!view) { var v = await api('view', { id: id }); view = v.ok ? v.duel : null; P.d = view; }
+  for (;;) {
+    if (P.stop) return;
+    var r = await api('round', { id: id });
+    if (!r.ok) {
+      if (r.error === 'over' || r.error === 'notyours') { var vv = await api('view', { id: id }); if (vv.ok) return after(vv.duel); }
+      hp('err'); toast(errT(r)); return home();
+    }
+    var pick = await roundUi(r, view);
+    if (P.stop) return;
+    var a = await api('answer', { id: id, pick: pick });
+    if (!a.ok) { hp('err'); toast(errT(a)); return home(); }
+    P.res[r.i] = a.right;
+    await reveal(r, a, pick);
+    if (a.last) return after(a.duel);
+  }
+}
+function playHead(r, view) {
+  var m = S.me || {}, opp = view ? (view.me === 'b' ? { name: view.a_name, photo: view.a_photo } : view.opp || {}) : {};
+  var oname = opp.name ? (view && view.opp && view.opp.ghost ? t('ghost_of', { n: opp.name }) : opp.name) : t('your_friend');
+  var dots = ''; for (var i = 0; i < 5; i++) dots += '<i class="' + (i < r.i ? (P.res[i] ? 'ok' : 'ko') : i === r.i ? 'cur' : '') + '"></i>';
+  return '<div class="ph"><div class="pl">' + av(m.name || t('you'), m.photo) + '<div><small>' + t('you') + '</small><div class="disp sc" style="color:var(--cy)" id="msc">' + (r.score || 0) + '</div></div></div>' +
+    '<div class="dots"><b>' + t('round_x', { i: r.i + 1 }) + '</b><div>' + dots + '</div></div>' +
+    '<div class="pl r">' + av(opp.name || '?', opp.photo, 'o') + '<div><small>' + esc(oname) + '</small><div class="disp sc" style="color:var(--or)">?</div></div></div></div>';
+}
+function roundUi(r, view) {
+  return new Promise(function (res) {
+    var c = r.chart.c, chg = (c[c.length - 1][3] / c[0][0] - 1) * 100;
+    screen(
+      playHead(r, view) +
+      '<section class="card chart" id="cc"><div class="ch-h"><div class="coin"><span class="ce">' + esc(r.chart.e || '') + '</span><div><b>$' + esc(r.chart.t) + '</b><small>14 × 5 min</small></div></div><div class="chg" style="color:' + (chg >= 0 ? 'var(--up)' : 'var(--dn)') + '">' + (chg >= 0 ? '+' : '') + chg.toFixed(1) + ' %</div></div>' +
+      '<div id="cv">' + chartSvg(c) + '</div><div class="q">' + t('q') + '</div></section>' +
+      '<div class="tm" id="tm">' + ring(r.left) + '<span>' + t('sl') + '</span></div>' +
+      '<div class="pd"><button class="u" id="pu">' + IC.up + '<b class="disp">' + t('pump') + '</b></button><button class="d" id="pdn">' + IC.dn + '<b class="disp">' + t('dump') + '</b></button></div>',
+      { full: true }
+    );
+    SFX.go();
+    var t0 = Date.now(), left0 = r.left, done = false, lastS = Math.ceil(left0 / 1000);
+    var iv = setInterval(function () {
+      var left = left0 - (Date.now() - t0);
+      var tm = $('#tm'); if (tm) tm.innerHTML = ring(Math.max(0, left)) + '<span>' + t('sl') + '</span>';
+      var s = Math.ceil(left / 1000); if (s !== lastS && s <= 3 && s > 0) { SFX.tick(); hp('light'); } lastS = s;
+      if (left <= 0) fin(null);
+    }, 100);
+    function fin(p) {
+      if (done) return; done = true; clearInterval(iv);
+      $('#pu').disabled = true; $('#pdn').disabled = true;
+      if (p) { hp('medium'); SFX.tap(); }
+      res(p);
+    }
+    $('#pu').onclick = function () { fin('up'); };
+    $('#pdn').onclick = function () { fin('down'); };
+  });
+}
+async function reveal(r, a, pick) {
+  var cv = $('#cv'), cc = $('#cc'), tm = $('#tm');
+  if (cv && a.next) cv.innerHTML = chartSvg(r.chart.c, a.next, a.up).replace(/class="cnd" style="animation-delay:\d+ms"/g, 'class=""');
+  if (cc) cc.classList.add(a.right ? 'ok' : 'ko');
+  var lbl = pick === null ? t('late') : a.right ? t('right') : t('wrong');
+  if (tm) tm.outerHTML = '<div class="res disp ' + (a.right ? 'ok' : 'ko') + '">' + lbl + (a.right ? ' +1' : '') + '</div>';
+  var sc = $('#msc'); if (sc) sc.textContent = a.score;
+  var b = a.up ? $('#pu') : $('#pdn'); if (b) { b.style.opacity = '1'; b.style.outline = '3px solid #fff'; b.style.outlineOffset = '3px'; }
+  if (a.right) { hp('ok'); SFX.ok(); } else { hp('err'); SFX.ko(); }
+  await sleep(a.last ? 1300 : 1500);
+}
+function after(d) {
+  S.me = null;
+  if (d.status === 'done') return result(d, true);
+  if (d.act === 'wait' || d.status === 'wait_b') return waiting(d, true);
+  return home();
+}
+
+/* ---------- waiting for the friend ---------- */
+function waiting(d, fresh) {
+  var link = APP + '?startapp=duel_' + d.id;
+  var named = d.opp && d.opp.id && d.opp.name;
+  screen(
+    '<div class="center" style="padding:20px 0 0;flex:0">' +
+    '<div class="trophy t" style="border-color:var(--cy);background:var(--cyb);color:var(--cy)">' + IC.sw.replace('width="20" height="20"', 'width="46" height="46"') + '</div>' +
+    '<h1 class="disp" style="margin:4px 0 0;font-size:34px">' + t('wait_h', { s: d.my_score }) + '</h1>' +
+    '<p style="margin:0;color:var(--mu2);line-height:1.45;max-width:320px">' + (named ? t('wait_s_to', { n: esc(d.opp.name) }) : t('wait_s_any')) + '</p></div>' +
+    '<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--mu)">' + t('stake') + '</span><b class="disp" style="font-size:22px">' + money(d.stake, d.cur) + '</b></div>' +
+    '<div class="rules"><div>' + IC.clock + '<span>' + t('d_left', { t: dur(d.expires - Date.now() / 1000) }) + '</span></div></div>' +
+    '<div style="flex:1"></div>' +
+    '<div class="stack">' + (named ? '' : '<button class="btn p" id="sh">' + IC.send + t('share_b') + '</button><button class="btn o" id="cp">' + t('copy_b') + '</button>') +
+    '<button class="btn o" id="hm">' + t('home') + '</button></div>',
+    { back: true, full: true }
+  );
+  if (fresh) hp('ok');
+  var sh = $('#sh'); if (sh) sh.onclick = function () { hp(); share(link, t('share_txt', { s: money(d.stake, d.cur) })); };
+  var cp = $('#cp'); if (cp) cp.onclick = function () { hp(); copy(link); };
+  $('#hm').onclick = function () { hp(); home(); };
+}
+
+/* ---------- result ---------- */
+function result(d, fresh) {
+  var meA = d.me === 'a', my = meA ? d.a_score : d.b_score, op = meA ? d.b_score : d.a_score;
+  var myMs = meA ? d.a_ms : d.b_ms, opMs = meA ? d.b_ms : d.a_ms;
+  var myR = (meA ? d.a_res : d.b_res) || [], opR = (meA ? d.b_res : d.a_res) || [];
+  var oppName = d.me === 'b' ? d.a_name : (d.opp && d.opp.name) || '?';
+  var oppLbl = d.opp && d.opp.ghost ? t('ghost_of', { n: oppName }) : oppName;
+  var net = d.tie ? 0 : d.win ? (d.kind === 'random' ? d.stake : d.stake * 2 - (d.burn || 0) - d.stake) : -d.stake;
+  var cells = function (arr) { var s = ''; for (var i = 0; i < 5; i++) s += '<i class="' + (arr[i] ? 'ok' : 'ko') + '">' + (arr[i] ? '✓' : '✕') + '</i>'; return s; };
+  var hdr = '<span></span>'; for (var i = 1; i <= 5; i++) hdr += '<span class="h">R' + i + '</span>';
+  screen(
+    '<div class="rs" style="display:flex;flex-direction:column;gap:16px">' +
+    '<div class="trophy ' + (d.tie ? 't' : d.win ? '' : 'l') + '" style="color:' + (d.tie ? 'var(--mu2)' : d.win ? 'var(--go)' : 'var(--dn)') + '">' + (d.win || d.tie ? IC.cup : IC.dn.replace('width="30" height="30"', 'width="46" height="46"')) + '</div>' +
+    '<div><h1 class="disp">' + (d.tie ? t('tie_h') : d.win ? t('win_h') : t('lose_h')) + '</h1>' +
+    '<div class="disp gain ' + (net > 0 ? 'w' : net < 0 ? 'l' : '') + '" style="margin-top:10px">' + (d.tie ? '<span style="font-size:16px;color:var(--mu2);font-family:Inter">' + t('tie_s') + '</span>' : (net > 0 ? '+' : '-') + money(Math.abs(net), d.cur)) + '</div>' +
+    (d.burn > 0 ? '<div style="font-size:12px;color:var(--mu);margin-top:4px">' + t('burned', { n: d.burn }) + '</div>' : '') + '</div>' +
+    '<div class="duo"><div class="m"><b>' + t('you') + '</b><span class="disp" style="color:var(--cy)">' + my + '/5</span><small>' + t('per_ans', { t: (myMs / 5000).toFixed(1) }) + '</small></div>' +
+    '<div><b>' + esc(oppLbl) + '</b><span class="disp" style="color:var(--or)">' + op + '/5</span><small>' + t('per_ans', { t: (opMs / 5000).toFixed(1) }) + '</small></div></div>' +
+    '<div class="rr"><div class="l">' + hdr + '</div><div class="l"><b>' + t('you') + '</b>' + cells(myR) + '</div><div class="l"><b>' + esc(oppName) + '</b>' + cells(opR) + '</div></div>' +
+    (d.opp && d.opp.ghost ? '<div style="font-size:12px;color:var(--mu)">' + t('ghost_note', { n: esc(oppName) }) + '</div>' : '') +
+    '</div><div style="flex:1"></div>' +
+    '<div class="stack">' +
+    (d.kind === 'random' ? '<button class="btn p" id="ag">' + IC.rpt + t('again') + '</button>'
+      : '<button class="btn p" id="rm">' + IC.rpt + (d.win ? t('rematch') : t('revenge')) + '</button>') +
+    (d.win ? '<button class="btn o" id="sw">' + IC.send + t('share_win') + '</button>' : '') +
+    '<button class="btn o" id="hm">' + t('home') + '</button></div>',
+    { back: true, full: true }
+  );
+  if (fresh) {
+    if (d.win) { SFX.win(); hp('ok'); confetti(); } else if (d.tie) { hp('warn'); } else { SFX.lose(); hp('err'); }
+  }
+  var ag = $('#ag'); if (ag) ag.onclick = function () { hp(); RS = d.stake; S.me = null; refreshMe().then(random); };
+  var rm = $('#rm'); if (rm) rm.onclick = async function () {
+    hp(); var tid = d.opp && d.opp.id;
+    await refreshMe();
+    C.cur = d.cur; C.stake = Number(d.stake);
+    if (tid) { var r = await api('player', { id: tid }); if (r.ok) { C.mode = 'find'; C.to = r.p; return create(r.p); } }
+    C.mode = 'any'; C.to = null; create();
+  };
+  var sw = $('#sw'); if (sw) sw.onclick = function () { hp(); share(APP + '?startapp=src_win', t('win_txt', { s: money(Math.abs(net), d.cur) })); };
+  $('#hm').onclick = function () { hp(); home(); };
+}
+async function refreshMe() { var r = await api('home'); if (r.ok) { S.me = r.me; S.duels = r.duels || []; S.stakes = r.stakes; } }
+
+/* ---------- confetti ---------- */
+function confetti() {
+  var cv = $('#cf'); cv.hidden = false; var x = cv.getContext('2d'), W = cv.width = innerWidth, H = cv.height = innerHeight;
+  var cols = ['#2EE6FF', '#FFD24A', '#3EE69A', '#FF9A3C', '#FF5A6E', '#F4F1FF'], ps = [];
+  for (var i = 0; i < 140; i++) ps.push({ x: W / 2 + (Math.random() - 0.5) * 80, y: H * 0.32, vx: (Math.random() - 0.5) * 13, vy: -Math.random() * 13 - 4, r: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.3, w: 5 + Math.random() * 6, h: 8 + Math.random() * 8, c: cols[i % cols.length] });
+  var t0 = performance.now();
+  (function f(n) {
+    x.clearRect(0, 0, W, H);
+    ps.forEach(function (p) { p.vy += 0.32; p.vx *= 0.99; p.x += p.vx; p.y += p.vy; p.r += p.vr; x.save(); x.translate(p.x, p.y); x.rotate(p.r); x.fillStyle = p.c; x.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); x.restore(); });
+    if (n - t0 < 3200) requestAnimationFrame(f); else { x.clearRect(0, 0, W, H); cv.hidden = true; }
+  })(t0);
+}
+
+/* ---------- ranking ---------- */
+async function rank() {
+  S.tab = 'rank'; loading(); nav(true);
+  var r = await api('rank', { scope: S.rankScope });
+  if (!r.ok) return fail(r);
+  var top = r.top || [], p = [top[1], top[0], top[2]];
+  var podium = top.length ? '<section class="pod">' + p.map(function (x, i) {
+    var cls = ['p2', 'p1', 'p3'][i]; if (!x) return '<div class="' + cls + '"></div>';
+    return '<div class="' + cls + '">' + (cls === 'p1' ? '<svg width="26" height="20" viewBox="0 0 26 20" aria-hidden="true"><path d="M2 18 L4 5 L9 11 L13 2 L17 11 L22 5 L24 18 Z" fill="#FFD24A"/></svg>' : '') + av(x.name, x.photo) + '<b class="n">' + esc(x.name) + '</b><div class="bar"><span class="disp">' + x.rk + '</span><small>' + x.wins + ' ' + t('wins') + '</small></div></div>';
+  }).join('') + '</section>' : '<div class="empty">' + t('rank_empty') + '</div>';
+  var rest = top.slice(3).map(function (x) { return '<div class="row" style="padding:10px 14px"><span class="rk">' + x.rk + '</span>' + av(x.name, x.photo).replace('class="av ', 'style="width:34px;height:34px;font-size:13px" class="av ') + '<span class="who"><b>' + esc(x.name) + '</b></span><b>' + x.wins + '</b></div>'; }).join('');
+  var me = r.me || {};
+  screen(
+    '<div class="sh" style="margin:0"><h1 class="disp" style="margin:0;font-size:26px">' + t('nav_rank') + '</h1><span>' + (S.rankScope === 'week' ? t('ends_in', { t: dur(r.ends - Date.now() / 1000) }) : '') + '</span></div>' +
+    '<div class="seg"><button data-sc="week" class="' + (S.rankScope === 'week' ? 'on' : '') + '">' + t('week') + '</button><button data-sc="all" class="' + (S.rankScope === 'all' ? 'on' : '') + '">' + t('all') + '</button></div>' +
+    podium + '<div class="stack">' + rest + '</div>' +
+    (S.rankScope === 'week' ? '<div class="note">' + IC.cupS + '<span>' + t('rank_rule') + '</span></div>' : '') +
+    '<div style="flex:1"></div>' +
+    '<div class="row mine"><span class="rk" style="color:var(--cy);width:30px">' + (me.rk || '-') + '</span>' + av((S.me && S.me.name) || t('you'), S.me && S.me.photo) + '<span class="who"><b>' + t('you_rank') + '</b><small>' + (me.rk ? '' : t('no_rank')) + '</small></span><b>' + (me.wins || 0) + '</b></div>'
+  );
+  document.querySelectorAll('[data-sc]').forEach(function (b) { b.onclick = function () { hp(); S.rankScope = b.dataset.sc; rank(); }; });
+}
+
+/* ---------- profile ---------- */
+var BADGE = { trade: 'Trader', creator: 'Creator', x10: 'x10', week: 'Top week', sponsor: 'Sponsor', whale: 'Whale', rug: 'Rug', ton: 'TON' };
+async function profile() {
+  S.tab = 'prof'; loading(); nav(true);
+  var r = await api('profile');
+  if (!r.ok) return fail(r);
+  var m = r.mct || {}, du = r.duel || {}, wr = du.played ? Math.round(100 * du.wins / du.played) : 0;
+  var badges = (m.badges || []).map(function (b) { return '<span' + (b === 'rug' ? ' style="background:var(--dnb);color:#FF8A99"' : b === 'whale' ? ' style="background:var(--gob);color:var(--go)"' : '') + '>' + esc(BADGE[b] || b) + '</span>'; }).join('') + (du.wins > 0 ? '<span style="background:var(--cyb);color:var(--cy)">Duelist</span>' : '');
+  screen(
+    '<section class="pf">' + av(m.name, m.photo) + '<div style="flex:1;min-width:0"><div class="disp" style="font-size:24px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(m.name || '') + '</div><div class="badges">' + badges + '</div></div></section>' +
+    '<div class="note">' + IC.link + '<span>' + t('linked') + '</span></div>' +
+    '<section class="card" style="display:flex;flex-direction:column;gap:12px"><div class="sh" style="margin:0"><h2>' + t('duels_h') + '</h2><span>' + (du.rank ? '#' + du.rank + ' · ' + t('week') : '') + '</span></div>' +
+    '<div class="stat"><div><div class="disp" style="color:var(--up)">' + (du.wins || 0) + '</div><small>' + t('w') + '</small></div><div><div class="disp">' + wr + ' %</div><small>' + t('wr') + '</small></div><div><div class="disp" style="color:var(--go)">' + (du.streak || 0) + '</div><small>' + t('st') + '</small></div></div>' +
+    '<div class="sum"><span>' + t('won_total') + '</span><b>' + money(du.won_cash) + (du.won_mct > 0 ? ' · ' + money(du.won_mct, 'mct') : '') + '</b></div></section>' +
+    '<section class="card" style="display:flex;flex-direction:column;gap:12px;border-color:var(--go)"><div class="sh" style="margin:0"><h2>Meme Coin Tycoon</h2></div>' +
+    '<div class="stat2"><div><small>' + t('worth') + '</small><div class="disp">' + money(m.worth) + '</div></div><div><small>$MCT</small><div class="disp" style="color:var(--go)">' + short(r.tok) + '</div></div><div><small>' + t('coins') + '</small><div class="disp">' + (m.coins_n || 0) + '</div></div><div><small>' + t('trades') + '</small><div class="disp">' + (m.trades || 0) + '</div></div></div>' +
+    '<button class="btn g" id="om">' + t('open_mct') + IC.ext + '</button></section>' +
+    '<div class="tg"><span>' + t('refuse') + '</span><button class="sw' + (du.no_ch ? ' on' : '') + '" id="nc" aria-label="' + t('refuse') + '"></button></div>' +
+    '<div class="tg"><span>' + t('sound') + '</span><button class="sw' + (SND ? ' on' : '') + '" id="sd" aria-label="' + t('sound') + '"></button></div>' +
+    '<div class="tg" style="flex-direction:column;align-items:stretch"><span>' + t('lang') + '</span><div class="lgs">' + LANGS.map(function (l) { return '<button data-l="' + l + '" class="' + (l === LANG ? 'on' : '') + '">' + l.toUpperCase() + '</button>'; }).join('') + '</div></div>' +
+    '<div class="foot">MCT Duel · by @jeremstyke</div>'
+  );
+  $('#om').onclick = function () { hp(); openTg(MCT); };
+  $('#nc').onclick = async function () { hp(); var on = !this.classList.contains('on'); this.classList.toggle('on', on); var x = await api('no_ch', { on: on }); if (!x.ok) { this.classList.toggle('on', !on); toast(errT(x)); } };
+  $('#sd').onclick = function () { SND = !SND; this.classList.toggle('on', SND); try { localStorage.setItem('mctd_snd', SND ? '1' : '0'); } catch (e) {} if (SND) SFX.ok(); hp(); };
+  document.querySelectorAll('[data-l]').forEach(function (b) { b.onclick = function () { hp(); LANG = b.dataset.l; try { localStorage.setItem('mctd_lang', LANG); } catch (e) {} applyDir(); profile(); }; });
+}
+
+/* ---------- errors and start ---------- */
+function fail(r) {
+  if (r && r.error === 'nouser') {
+    screen('<div class="center"><div class="trophy t" style="border-color:var(--go);background:var(--gob);color:var(--go)">' + IC.cup + '</div><h1 class="disp" style="margin:0;font-size:28px">' + t('nouser_h') + '</h1><p style="margin:0;color:var(--mu2);line-height:1.5;max-width:320px">' + t('nouser_s') + '</p><button class="btn g" id="om" style="max-width:320px">' + t('nouser_b') + IC.ext + '</button></div>', { full: true });
+    $('#om').onclick = function () { hp(); openTg(MCT); };
+    return;
+  }
+  screen('<div class="center"><h1 class="disp" style="margin:0;font-size:24px">' + (r && r.error === 'auth' ? t('tg_only') : errT(r)) + '</h1><button class="btn p" id="rt" style="max-width:260px">' + t('retry') + '</button></div>', { full: true });
+  $('#rt').onclick = function () { location.reload(); };
+}
+async function start() {
+  try { if (tw) { tw.ready(); tw.expand(); try { tw.setHeaderColor('#0D0B1A'); tw.setBackgroundColor('#0D0B1A'); } catch (e) {} try { if (tw.disableVerticalSwipes) tw.disableVerticalSwipes(); } catch (e) {} } } catch (e) {}
+  if (!tw || !tw.initData) return fail({ error: 'auth' });
+  var sp = String((tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '');
+  var r = await api('home');
+  if (!r.ok) return fail(r);
+  S.me = r.me; S.duels = r.duels || []; S.stakes = r.stakes;
+  var m;
+  if ((m = /^(duel|res)_(\d+)$/.exec(sp))) return viewDuel(Number(m[2]));
+  if ((m = /^vs_(\d+)$/.exec(sp))) {
+    var p = await api('player', { id: Number(m[1]) });
+    if (p.ok && !p.p.me) { if (p.p.no_ch) { toast(t('e_no_ch')); return home(false); } C.mode = 'find'; C.to = p.p; return create(p.p); }
+  }
+  home(false);
+}
+start();
+})();
+</script>
+</body>
+</html>
