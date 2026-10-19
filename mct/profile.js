@@ -128,6 +128,8 @@
       document.getElementById('pfs').onclick = async () => {
         const v = i.value.trim(); if (v.length < 2) { tst(T.e_nick); return; }
         let r = null; try { r = await tonCall({ action: 'prof_nick', nick: v }); } catch (e) {}
+        // 20 oct 2026 (Jeremy): the first nickname change is free, the next ones cost 10 stars (+$1,000 bonus)
+        if (r && r.error === 'nickpay' && window.mctNickPay) { window.mctNickPay(() => { const s = document.getElementById('pfs'); if (s) s.click(); }); return; }
         if (r && r.ok) { hp('ok'); tst(T.sent); show(0); } else tst(T['e_' + ((r && r.error) || '')] || T.err);
       };
     };
@@ -169,6 +171,20 @@
       r.style.cursor = 'pointer'; r.onclick = () => { hp(); show(id); };
     });
   }
+  // 20 oct 2026 (Jeremy): pay 10 stars for a new nickname (invoice from mct-fr 'nickpay'), then the nickname is sent again by itself
+  window.mctNickPay = (retry) => {
+    const ed = document.getElementById('pfedit'); if (!ed || document.getElementById('pfpay')) return;
+    let lg = 'en'; try { lg = (0, eval)('typeof LANG !== "undefined" ? LANG : "en"'); } catch (e) {}
+    const X = { en: ['Your free nickname change is used. A new nickname costs 10 ⭐, with $1,000 of cash as a bonus.', '✏️ New nickname · 10 ⭐', 'Payment received, your nickname is sent!'], fr: ['Ton changement de pseudo gratuit est déjà utilisé. Un nouveau pseudo coûte 10 ⭐, avec 1 000 $ de cash offerts.', '✏️ Nouveau pseudo · 10 ⭐', 'Paiement reçu, ton pseudo est envoyé !'], es: ['Ya usaste tu cambio de apodo gratis. Un apodo nuevo cuesta 10 ⭐, con $1,000 de cash de regalo.', '✏️ Nuevo apodo · 10 ⭐', 'Pago recibido, tu apodo se ha enviado.'], id: ['Ganti nama gratis sudah dipakai. Nama baru seharga 10 ⭐, dengan bonus $1,000.', '✏️ Nama baru · 10 ⭐', 'Pembayaran diterima, nama dikirim!'], ru: ['Бесплатная смена ника уже использована. Новый ник стоит 10 ⭐ и даёт $1,000 бонусом.', '✏️ Новый ник · 10 ⭐', 'Оплата получена, ник отправлен!'], ar: ['استخدمت تغيير الاسم المجاني. الاسم الجديد بـ 10 ⭐ مع 1000$ هدية.', '✏️ اسم جديد · 10 ⭐', 'تم الدفع، أُرسل اسمك!'], fa: ['تغییر رایگان نام استفاده شده. نام جدید 10 ⭐ است، با 1000$ هدیه.', '✏️ نام جدید · 10 ⭐', 'پرداخت انجام شد، نام ارسال شد!'] }; const T2 = X[lg] || X.en;
+    const box = document.createElement('div'); box.id = 'pfpay'; box.innerHTML = '<p class="pnote"></p><button class="btn" style="margin:0 0 12px;width:100%"></button>';
+    box.querySelector('p').textContent = T2[0]; const btn = box.querySelector('button'); btn.textContent = T2[1]; ed.appendChild(box);
+    btn.onclick = async () => {
+      btn.disabled = true; const tg = window.Telegram && Telegram.WebApp;
+      let r = null; try { r = await fetch('https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-fr', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ initData: tg && tg.initData, action: 'nickpay' }) }).then((x) => x.json()); } catch (e) {}
+      btn.disabled = false; if (!r || !r.ok || !r.link) { tst(L().err); return; }
+      tg.openInvoice(r.link, (st) => { if (st === 'paid') { tst(T2[2]); box.remove(); setTimeout(retry, 4000); } });
+    };
+  };
   window.mctProfile = (pid) => show(pid || 0); // used by the contests (rank.js)
   // 17 oct 2026: tap a player anywhere to see his profile (and add him as a friend): the coin creator on a coin page,
   // the referral ranking (the contests, friends and diamond lists already open it)
