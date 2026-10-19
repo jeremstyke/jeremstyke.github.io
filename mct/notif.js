@@ -53,8 +53,59 @@
     d.addEventListener('touchstart', (e) => { y0 = e.touches[0].clientY; }, { passive: true });
     d.addEventListener('touchmove', (e) => { if (y0 != null && e.touches[0].clientY - y0 < -25) { clearTimeout(t); y0 = null; close(); } }, { passive: true });
   }
+  // 19 oct 2026 (Jeremy): a small floating bell keeps every notification: a red dot with the number of new ones,
+  // a tap opens the list (the 40 latest), a tap on one opens what it is about. Hidden under a coin page (the sheet covers it).
+  const BX = { en: { h: '🔔 Notifications', none: 'No notifications yet.', close: 'Close' }, fr: { h: '🔔 Notifications', none: 'Aucune notification pour l\'instant.', close: 'Fermer' },
+    id: { h: '🔔 Notifikasi', none: 'Belum ada notifikasi.', close: 'Tutup' }, ar: { h: '🔔 الإشعارات', none: 'لا توجد إشعارات بعد.', close: 'إغلاق' } };
+  const bst = document.createElement('style');
+  bst.textContent = '#nbell{position:fixed;right:12px;bottom:calc(var(--tab,68px) + 72px + env(safe-area-inset-bottom));z-index:12;width:46px;height:46px;border-radius:50%;border:2px solid rgba(255,212,59,.75);'
+    + 'background:rgba(40,20,80,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 6px 18px rgba(0,0,0,.45);display:grid;place-items:center;font-size:22px;cursor:pointer;padding:0;color:inherit}'
+    + '#nbell.ring{animation:nbr 1s ease-in-out 2}@keyframes nbr{0%,100%{transform:rotate(0)}20%{transform:rotate(-18deg)}40%{transform:rotate(14deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(4deg)}}'
+    + '#nbell b{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 5px;box-sizing:border-box;border-radius:10px;background:#ff3b5c;color:#fff;font-size:12px;line-height:20px;text-align:center;font-weight:800}'
+    + '#nbl{position:fixed;inset:0;z-index:96;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center}'
+    + '#nbl .pn{width:100%;max-width:520px;max-height:78vh;overflow:auto;background:#1d1238;border-radius:22px 22px 0 0;padding:14px 14px calc(18px + env(safe-area-inset-bottom));box-sizing:border-box}'
+    + '#nbl .ph{display:flex;justify-content:space-between;align-items:center;margin:0 2px 10px}#nbl .ph b{font-size:18px}#nbl .ph button{border:0;background:rgba(255,255,255,.1);color:inherit;border-radius:999px;padding:6px 12px;font:inherit;font-size:13px}'
+    + '#nbl .it{display:flex;gap:10px;padding:10px 6px;border-top:1px solid rgba(255,255,255,.07);cursor:pointer}#nbl .it .ic{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:19px;background:rgba(255,212,59,.15)}'
+    + '#nbl .it .tx{flex:1;min-width:0;font-size:13.5px;line-height:1.35}#nbl .it small{display:block;opacity:.6;font-size:11.5px;margin-top:2px}#nbl .it.nw .ic{background:linear-gradient(140deg,#ffd43b,#ff9a3c)}#nbl .it.nw .tx{font-weight:600}';
+  document.head.appendChild(bst);
+  const bell = (() => {
+    let list = [], seenB = -1, el = null;
+    try { const v = localStorage.getItem('mct_bell'); if (v !== null) seenB = Number(v) || 0; } catch (e) {}
+    const save = () => { try { localStorage.setItem('mct_bell', String(seenB)); } catch (e) {} };
+    function draw() {
+      if (!document.body) return;
+      if (!el) { el = document.createElement('button'); el.id = 'nbell'; el.type = 'button'; el.setAttribute('aria-label', 'Notifications'); el.onclick = panel; document.body.appendChild(el); }
+      const n = list.filter((x) => x.id > seenB).length;
+      el.innerHTML = '🔔' + (n ? '<b>' + (n > 9 ? '9+' : n) + '</b>' : '');
+    }
+    function panel() {
+      try { tg().HapticFeedback.impactOccurred('light'); } catch (e) {}
+      const T = BX[lg()] || BX.en, nw = seenB;
+      const d = document.createElement('div'); d.id = 'nbl';
+      d.innerHTML = '<div class="pn" role="dialog" aria-modal="true"><div class="ph"><b>' + ec(T.h) + '</b><button type="button">' + ec(T.close) + '</button></div>'
+        + (list.length ? list.map((x, i) => '<div class="it' + (x.id > nw ? ' nw' : '') + '" data-i="' + i + '"><span class="ic">' + ec(icon(x.text)) + '</span><span class="tx">' + rich(strip(x.text)) + '<small>' + ec(ago(x.at)) + '</small></span></div>').join('')
+          : '<p style="opacity:.7;text-align:center;margin:24px 0">' + ec(T.none) + '</p>') + '</div>';
+      const close = () => d.remove();
+      d.onclick = (e) => { if (e.target === d) close(); };
+      d.querySelector('.ph button').onclick = close;
+      d.querySelectorAll('[data-i]').forEach((it) => it.onclick = () => { const x = list[Number(it.dataset.i)]; close(); if (x) open(x.url); });
+      document.body.appendChild(d);
+      if (list.length) { seenB = Math.max(seenB, list[0].id); save(); draw(); call('mon_notifread'); }
+    }
+    return {
+      update(l) {
+        const before = list.filter((x) => x.id > seenB).length;
+        list = l.slice(0, 40);
+        // the first time, only the notifications not read yet count as new
+        if (seenB < 0) { const rd = list.filter((x) => x.read).map((x) => x.id); seenB = rd.length ? Math.max(...rd) : 0; save(); }
+        draw();
+        if (el && list.filter((x) => x.id > seenB).length > before) { el.classList.remove('ring'); void el.offsetWidth; el.classList.add('ring'); }
+      },
+    };
+  })();
   async function check() {
     const r = await call('mon_notif'); if (!r || !r.ok) return;
+    bell.update(r.list || []);
     const fresh = (r.list || []).filter((x) => !x.read && x.id > seen);
     if (!fresh.length) return;
     seen = Math.max(seen, ...fresh.map((x) => x.id));
