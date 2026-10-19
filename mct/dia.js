@@ -40,6 +40,14 @@
   };
   const lg = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] ? l : 'en'; };
   const L = () => TX[lg()];
+  // 19 oct 2026 (Jeremy): anti-cheat messages (pause after a wrong check, daily cap, money under review)
+  const AX = {
+    id: { wait: (s) => 'Salah. Tunggu ' + s + ' detik sebelum mencoba lagi.', cap: 'Batas harian tercapai (20.000 ketukan). Kembali besok!', review: 'Berlianmu sedang diperiksa. Uangmu aman, tunggu sebentar.' },
+    en: { wait: (s) => 'Wrong one. Wait ' + s + ' s before trying again.', cap: 'Daily limit reached (20,000 taps). Come back tomorrow!', review: 'Your diamond is being checked. Your money is safe, please wait.' },
+    fr: { wait: (s) => 'Pas le bon. Attends ' + s + ' s avant de réessayer.', cap: 'Limite du jour atteinte (20 000 tapes). Reviens demain !', review: 'Ton diamant est en cours de vérification. Ton argent est en sécurité, patiente un peu.' },
+    ar: { wait: (s) => 'ليست هي. انتظر ' + s + ' ث قبل المحاولة مجددًا.', cap: 'تم بلوغ الحد اليومي (20,000 ضغطة). عُد غدًا!', review: 'ماستك قيد المراجعة. أموالك في أمان، انتظر قليلًا.' }
+  };
+  const AXL = () => AX[lg()] || AX.en;
   const hp = (k) => { try { haptic(k); } catch (e) {} };
   const tst = (m) => { try { toast(m); } catch (e) {} };
   const ec = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
@@ -156,6 +164,7 @@
     await flush();
     let r = null; try { r = await claimCall(); } catch (e) {}
     CLAIMING = false;
+    if (r && r.error === 'review') { tst(AXL().review); cb.disabled = false; nums(); return; }
     if (!r || !r.ok) { tst(T.err); cb.disabled = false; nums(); return; }
     if (r.state) S = r.state;
     try { Telegram.WebApp.HapticFeedback.notificationOccurred('success'); } catch (e) {}
@@ -182,7 +191,7 @@
     };
     el.querySelectorAll('[data-dck]').forEach((b) => b.onclick = async () => {
       hp(); let r = null; try { r = await call({ action: 'dia_check', a: Number(b.dataset.dck) }); } catch (e) {}
-      if (r && r.state) S = r.state; if (r && !r.ok) tst(T.wrong);
+      if (r && r.state) S = r.state; if (r && !r.ok) tst(r.wait ? AXL().wait(r.wait) : T.wrong);
       area();
     });
   }
@@ -194,6 +203,7 @@
     BUSY = false;
     if (r && r.state) S = r.state; else if (!r) Q += n;
     if (r && r.error === 'check') Q = 0;
+    if (r && (r.error === 'locked' || r.error === 'cap')) { Q = 0; tst(r.error === 'cap' ? AXL().cap : AXL().wait(r.wait || 30)); }
     if (r && r.error === 'off') S.on = false;
     if ((r && r.state && (r.state.check || r.state.paused)) || (r && r.error === 'off')) { if (r.error === 'off') paint(); else area(); return; }
     nums();
