@@ -13,6 +13,22 @@
       con: '🏆 Kontes berlian minggu ini', ends: 'Berakhir dalam', you: 'kamu', nobody: 'Belum ada: jadilah yang pertama!', rank: 'Peringkatmu', prizes: 'Hadiah Senin dalam TON',
       wal: '👛 Dompet TON-ku', err: 'Masalah koneksi, coba lagi.', close: 'Tutup',
     },
+    fa: {
+      t: 'الماس', mine: 'در الماس من', claim: (v) => '➕ افزودن ' + v + ' به موجودی من', claim0: '➕ افزودن به موجودی من', solde: (v) => '👛 موجودی TON من: ' + v, added: (v) => '✅ ' + v + ' به موجودی‌ات اضافه شد', none: 'هنوز چیزی در الماس نیست، ضربه بزن!', today: 'امروز', taps: 'ضربه', rate: (n) => 'نرخ امروز: ' + n + ' ضربه = 0.01 دلار',
+      lead: 'روی الماس ضربه بزن، هر 50 ضربه جابه‌جا می‌شود', pay: 'درآمدت در الماس منتظر است: «افزودن به موجودی» را بزن تا آن را بگیری. موجودی‌ات هر روز از 0.10 دلار به کیف پول TON تو پرداخت می‌شود.',
+      check: 'بررسی سریع: روی 💎 بزن', wrong: 'اشتباه بود، دوباره امتحان کن', paused: 'الماس تا ماه بعد استراحت می‌کند. زود برگرد!', off: 'الماس فعلاً بسته است.',
+      bon: 'جایزه عضویت', bm: '📢 کانال Meme Coin Tycoon', bj: '📢 کانال Jeremstyke', bq: '🧠 کانال Crypto Quiz Daily', join: 'عضویت', on: '✅ +10 %', recheck: '🔄 عضو شدم',
+      con: '🏆 مسابقه الماس هفته', ends: 'پایان تا', you: 'تو', nobody: 'هنوز کسی نیست: اولی باش!', rank: 'رتبه تو', prizes: 'جوایز دوشنبه به TON',
+      wal: '👛 کیف پول TON من', err: 'مشکل اتصال، دوباره امتحان کن.', close: 'بستن',
+    },
+    ru: {
+      t: 'Алмаз', mine: 'В моём алмазе', claim: (v) => '➕ Добавить ' + v + ' на баланс', claim0: '➕ Добавить на баланс', solde: (v) => '👛 Мой баланс TON: ' + v, added: (v) => '✅ ' + v + ' добавлено на баланс', none: 'В алмазе пока пусто, продолжай нажимать!', today: 'Сегодня', taps: 'нажатий', rate: (n) => 'Курс дня: ' + n + ' нажатий = $0.01',
+      lead: 'Нажимай на алмаз, он перемещается каждые 50 нажатий', pay: 'Твой заработок ждёт в алмазе: нажми «Добавить на баланс», чтобы забрать. Баланс выплачивается каждый день от $0.10 на твой кошелёк TON.',
+      check: 'Быстрая проверка: нажми на 💎', wrong: 'Не тот, попробуй ещё', paused: 'Алмаз отдыхает до следующего месяца. Возвращайся скоро!', off: 'Алмаз пока закрыт.',
+      bon: 'Бонус подписчика', bm: '📢 Канал Meme Coin Tycoon', bj: '📢 Канал Jeremstyke', bq: '🧠 Канал Crypto Quiz Daily', join: 'Подписаться', on: '✅ +10 %', recheck: '🔄 Я подписался',
+      con: '🏆 Конкурс алмаза недели', ends: 'До конца', you: 'ты', nobody: 'Пока никого: будь первым!', rank: 'Твоё место', prizes: 'Призы в понедельник в TON',
+      wal: '👛 Мой кошелёк TON', err: 'Проблема с соединением, попробуй ещё раз.', close: 'Закрыть',
+    },
     en: {
       t: 'Diamond', mine: 'In my diamond', claim: (v) => '➕ Add ' + v + ' to my balance', claim0: '➕ Add to my balance', solde: (v) => '👛 My TON balance: ' + v, added: (v) => '✅ ' + v + ' added to your balance', none: 'Nothing in your diamond yet, keep tapping!', today: 'Today', taps: 'taps', rate: (n) => 'Rate of the day: ' + n + ' taps = $0.01',
       lead: 'Tap the diamond, it moves every 50 taps', pay: 'Your earnings wait in the diamond: tap "Add to my balance" to get them. Your balance is paid every day from $0.10 to your TON wallet.',
@@ -43,7 +59,7 @@
   // 19 oct 2026 (Jeremy): anti-cheat messages (pause after a wrong check, daily cap, money under review)
   const AX = {
     id: { wait: (s) => 'Salah. Tunggu ' + s + ' detik sebelum mencoba lagi.', cap: 'Batas harian tercapai (20.000 ketukan). Kembali besok!', review: 'Berlianmu sedang diperiksa. Uangmu aman, tunggu sebentar.' },
-    en: { wait: (s) => 'Wrong one. Wait ' + s + ' s before trying again.', cap: 'Daily limit reached (20,000 taps). Come back tomorrow!', review: 'Your diamond is being checked. Your money is safe, please wait.' },
+    fa: { wait: (s) => 'اشتباه بود. ' + s + ' ثانیه صبر کن و دوباره امتحان کن.', cap: 'به سقف روزانه رسیدی (20,000 ضربه). فردا برگرد!', review: 'الماس تو در حال بررسی است. پولت امن است، لطفاً صبر کن.' }, ru: { wait: (s) => 'Не тот. Подожди ' + s + ' с и попробуй снова.', cap: 'Дневной лимит достигнут (20,000 нажатий). Возвращайся завтра!', review: 'Твой алмаз проверяется. Деньги в безопасности, подожди немного.' }, en: { wait: (s) => 'Wrong one. Wait ' + s + ' s before trying again.', cap: 'Daily limit reached (20,000 taps). Come back tomorrow!', review: 'Your diamond is being checked. Your money is safe, please wait.' },
     fr: { wait: (s) => 'Pas le bon. Attends ' + s + ' s avant de réessayer.', cap: 'Limite du jour atteinte (20 000 tapes). Reviens demain !', review: 'Ton diamant est en cours de vérification. Ton argent est en sécurité, patiente un peu.' },
     ar: { wait: (s) => 'ليست هي. انتظر ' + s + ' ث قبل المحاولة مجددًا.', cap: 'تم بلوغ الحد اليومي (20,000 ضغطة). عُد غدًا!', review: 'ماستك قيد المراجعة. أموالك في أمان، انتظر قليلًا.' }
   };
