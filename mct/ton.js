@@ -366,3 +366,64 @@ function crshFill(el) {
   };
 }
 new MutationObserver(() => { document.querySelectorAll('#crsh:not([data-done])').forEach(crshFill); }).observe(document.body, { childList: true, subtree: true });
+// 19 oct 2026 (Jeremy): the position card and the sale estimate showed the value at the current price, before the price impact
+// of the sale, the 2 % burn, the blockchain fee and the creator fee: a player could see a gain and lose money when selling.
+// Both now show what the sale would really bring (same formula as the server, mct_sell), and the real result against the cost.
+(() => {
+  const TX = ({
+    fr: { net: (m) => 'Tu recevras ≈ ' + m + ' après frais', res: 'résultat', pos: 'si tu vends tout maintenant, frais inclus' },
+    id: { net: (m) => 'Kamu akan menerima ≈ ' + m + ' setelah fee', res: 'hasil', pos: 'jika kamu jual semua sekarang, termasuk fee' },
+    ar: { net: (m) => 'ستحصل على ≈ ' + m + ' بعد الرسوم', res: 'النتيجة', pos: 'إذا بعت الكل الآن، شاملة الرسوم' },
+  });
+  const tx = () => TX[LANG] || { net: (m) => 'You will get ≈ ' + m + ' after fees', res: 'result', pos: 'if you sell everything now, fees included' };
+  const netOf = (c, q) => {
+    if (!(q > 0)) return 0;
+    let g;
+    if (c.real) g = q * c.price * (c.id === 102 ? 0.98 : 0.995);
+    else { const sold = soldOf(c), hy = c.hype || 1, qs = Math.min(q, sold) * 0.98; g = (P0 * qs + A * (2 * sold * qs - qs * qs) / 2) * hy; }
+    if (c.chain && c.chain.fee) g -= g * Number(c.chain.fee) / 100;
+    if (!c.real && !c.mine) g -= g * Number(c.cfee ?? 0.5) / 100;
+    return Math.max(0, g);
+  };
+  const qOfGross = (c, hold, v) => {
+    if (c.real) return Math.min(hold.qty, v / (c.price * (c.id === 102 ? 0.98 : 0.995)));
+    const sold = soldOf(c), hy = c.hype || 1, bb = P0 + A * sold, d = bb * bb - 2 * A * v / hy;
+    return d <= 0 ? hold.qty : Math.min(hold.qty, (bb - Math.sqrt(d)) / A / 0.98);
+  };
+  let busy = false;
+  const fix = () => {
+    busy = false;
+    let cc, hold;
+    try { if (typeof COIN === 'undefined' || !COIN || !COIN.coin || !COIN.hold) return; cc = COIN.coin; hold = COIN.hold; } catch (e) { return; }
+    if (!(Number(hold.qty) > 0)) return;
+    const cost = Number(hold.cost || 0);
+    // the position card: real value if everything is sold now
+    const pos = document.querySelector('.pos.num');
+    if (pos && pos.children[0] && pos.children[0].textContent.indexOf('$' + cc.ticker) >= 0) {
+      const box = pos.children[1], b = box && box.querySelector('b'), dv = box && box.querySelector('div');
+      if (b && dv) {
+        const net = netOf(cc, Number(hold.qty)), t1 = money(net), t2 = smoney(net - cost), cl = net >= cost ? 'up' : 'down';
+        if (b.textContent !== t1) b.textContent = t1;
+        if (dv.textContent !== t2) dv.textContent = t2;
+        if (dv.className !== cl) dv.className = cl;
+        let n = box.querySelector('.netn');
+        if (!n) { n = document.createElement('small'); n.className = 'netn'; n.style.cssText = 'display:block;font-size:11px;opacity:.65;margin-top:2px'; box.appendChild(n); }
+        if (n.textContent !== tx().pos) n.textContent = tx().pos;
+      }
+    }
+    // the sale estimate: what the player will really get, and the result
+    const es = document.getElementById('es'), sa = document.getElementById('sa');
+    if (es && sa && document.getElementById('dosell')) {
+      const v = parseFloat(String(sa.value).replace(',', '.')) || 0, q = v > 0 ? qOfGross(cc, hold, v) : 0;
+      let w = document.getElementById('esnet');
+      if (!w) { w = document.createElement('div'); w.id = 'esnet'; w.className = 'num'; w.style.cssText = 'font-size:13px;font-weight:700;margin:-4px 0 10px;text-align:center'; es.after(w); }
+      if (!(q > 0)) { if (w.textContent) w.textContent = ''; return; }
+      const net = netOf(cc, q), part = cost * q / Number(hold.qty), r = net - part;
+      const txt = tx().net(money(net)) + ' · ' + tx().res + ' ' + smoney(r);
+      if (w.textContent !== txt) w.textContent = txt;
+      const col = r >= 0 ? '#7dff6b' : '#ff6b81'; if (w.style.color !== col) w.style.color = col;
+    }
+  };
+  new MutationObserver(() => { if (!busy) { busy = true; requestAnimationFrame(fix); } }).observe(document.body, { childList: true, subtree: true, characterData: true });
+  document.addEventListener('input', (e) => { if (e.target && e.target.id === 'sa') { busy = true; requestAnimationFrame(fix); } }, true);
+})();
