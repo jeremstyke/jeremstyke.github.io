@@ -226,6 +226,9 @@
     h += '<button class="btn ghost" id="clhelp" style="width:100%;margin:0 0 4px"' + (c.helped ? ' disabled' : '') + '>' + ec(c.helped ? T.helped : pr ? T.helpp : T.help) + '</button><small style="display:block;text-align:center;margin:0 0 12px;opacity:.7">' + ec(T.helps) + '</small>';
     // 18 oct 2026 (Jeremy): the clan blockchain: its fees go to the clan, its launch grant comes from the pot
     if (c.chain) h += '<div class="cc"><b>' + ec(T.chh) + '</b><div class="crow"><span>' + ec(c.chain.emoji) + ' <b>' + ec(c.chain.name) + '</b><small>' + ec(T.chinfo(c.chain.fee, usd(c.chain.grant), c.chain.coins, usd(c.chain.earned))) + '</small></span></div>'
+      // 19 oct 2026 (Jeremy): where the clan coin lives, and the chief can move it onto the clan blockchain (free)
+      + (c.coin && c.coin.chain ? (c.coin.chain.id === c.chain.id ? '<small style="margin:6px 0;color:#4ff0b7">✅ $' + ec(c.coin.ticker) + ((typeof LANG !== 'undefined' && LANG === 'fr') ? ' est sur cette blockchain : ses frais vont au clan' : ' is on this blockchain: its fees go to the clan') + '</small>'
+        : '<small style="margin:6px 0">🪙 $' + ec(c.coin.ticker) + ((typeof LANG !== 'undefined' && LANG === 'fr') ? ' est sur ' : ' is on ') + ec(c.coin.chain.emoji + ' ' + c.coin.chain.name) + '</small>' + (chief ? '<button class="cb" id="chmv" style="width:100%;margin:0 0 6px">' + ec(((typeof LANG !== 'undefined' && LANG === 'fr') ? '⛓️ Déplacer $' : '⛓️ Move $') + c.coin.ticker + ((typeof LANG !== 'undefined' && LANG === 'fr') ? ' sur ' : ' onto ') + c.chain.name + ((typeof LANG !== 'undefined' && LANG === 'fr') ? ' (gratuit)' : ' (free)')) + '</button>' : '')) : '')
       + (chief ? '<small>' + ec(T.chfee) + '</small><select id="chfe" class="csel">' + [0.5, 1, 1.5, 2, 2.5, 3, 4, 5].map((x) => '<option value="' + x + '"' + (Number(c.chain.fee) === x ? ' selected' : '') + '>' + x + ' %</option>').join('') + (([0.5, 1, 1.5, 2, 2.5, 3, 4, 5].indexOf(Number(c.chain.fee)) < 0) ? '<option value="' + c.chain.fee + '" selected>' + c.chain.fee + ' %</option>' : '') + '</select><button class="cb g" id="chfeb">' + ec(T.chfeeb) + '</button>'
         + '<small style="margin-top:8px">' + ec(T.chgrant) + '</small><input id="chgr" type="number" inputmode="numeric" min="0" max="10000" value="' + Number(c.chain.grant || 0) + '"><button class="cb g" id="chgrb">' + ec(T.chgrantb) + '</button>' : '')
       + '<small style="margin-top:8px">' + ec(T.chnote) + '</small></div>';
@@ -265,6 +268,7 @@
         hp('ok'); tst(T.chok); show();
       };
     };
+    const chmv = b.querySelector('#chmv'); if (chmv) chmv.onclick = async () => { const ok = await act('clancoinchain', {}, chmv); if (ok) tst((typeof LANG !== 'undefined' && LANG === 'fr') ? '⛓️ Coin déplacé sur la blockchain du clan !' : '⛓️ Coin moved to the clan blockchain!'); };
     const chfb = b.querySelector('#chfeb'); if (chfb) chfb.onclick = async () => { const ok = await act('clanchainfee', { fee: Number(b.querySelector('#chfe').value) }, chfb); if (ok) tst(T.chsaved); };
     const chgb = b.querySelector('#chgrb'); if (chgb) chgb.onclick = async () => { const ok = await act('clanchaingrant', { grant: Number(b.querySelector('#chgr').value || 0) }, chgb); if (ok) tst(T.chsaved); };
     const lk = b.querySelector('#cllock'); if (lk) lk.onclick = () => act('clanlockjoin', {}, lk);
