@@ -9,7 +9,7 @@
       t: 'Berlian', mine: 'Di berlianku', claim: (v) => '➕ Tambahkan ' + v + ' ke saldoku', claim0: '➕ Tambahkan ke saldoku', solde: (v) => '👛 Saldo TON-ku: ' + v, added: (v) => '✅ ' + v + ' ditambahkan ke saldomu', none: 'Belum ada apa-apa di berlianmu, terus ketuk!', today: 'Hari ini', taps: 'ketukan', rate: (n) => 'Kurs hari ini: ' + n + ' ketukan = $0.01',
       lead: 'Ketuk berliannya, ia pindah setiap 50 ketukan', pay: 'Penghasilanmu menunggu di berlian: ketuk "Tambahkan ke saldoku" untuk mengambilnya. Saldomu dibayar setiap hari mulai $0.10 ke dompet TON-mu.',
       check: 'Cek singkat: ketuk 💎', wrong: 'Salah, coba lagi', paused: 'Berlian sedang istirahat sampai bulan depan. Sampai jumpa!', off: 'Berlian ditutup untuk sementara.',
-      bon: 'Bonus pelanggan', bm: '📢 Channel Meme Coin Tycoon', bj: '📢 Channel Jeremstyke', join: 'Gabung', on: '✅ +10 %', recheck: '🔄 Sudah gabung',
+      bon: 'Bonus pelanggan', bm: '📢 Channel Meme Coin Tycoon', bj: '📢 Channel Jeremstyke', bq: '🧠 Channel Crypto Quiz Daily', join: 'Gabung', on: '✅ +10 %', recheck: '🔄 Sudah gabung',
       con: '🏆 Kontes berlian minggu ini', ends: 'Berakhir dalam', you: 'kamu', nobody: 'Belum ada: jadilah yang pertama!', rank: 'Peringkatmu', prizes: 'Hadiah Senin dalam TON',
       wal: '👛 Dompet TON-ku', err: 'Masalah koneksi, coba lagi.', close: 'Tutup',
     },
@@ -17,7 +17,7 @@
       t: 'Diamond', mine: 'In my diamond', claim: (v) => '➕ Add ' + v + ' to my balance', claim0: '➕ Add to my balance', solde: (v) => '👛 My TON balance: ' + v, added: (v) => '✅ ' + v + ' added to your balance', none: 'Nothing in your diamond yet, keep tapping!', today: 'Today', taps: 'taps', rate: (n) => 'Rate of the day: ' + n + ' taps = $0.01',
       lead: 'Tap the diamond, it moves every 50 taps', pay: 'Your earnings wait in the diamond: tap "Add to my balance" to get them. Your balance is paid every day from $0.10 to your TON wallet.',
       check: 'Quick check: tap the 💎', wrong: 'Wrong one, try again', paused: 'The diamond is resting until next month. Come back soon!', off: 'The diamond is closed for now.',
-      bon: 'Subscriber bonus', bm: '📢 Meme Coin Tycoon channel', bj: '📢 Jeremstyke channel', join: 'Join', on: '✅ +10 %', recheck: '🔄 I joined',
+      bon: 'Subscriber bonus', bm: '📢 Meme Coin Tycoon channel', bj: '📢 Jeremstyke channel', bq: '🧠 Crypto Quiz Daily channel', join: 'Join', on: '✅ +10 %', recheck: '🔄 I joined',
       con: '🏆 Diamond contest of the week', ends: 'Ends in', you: 'you', nobody: 'Nobody yet: be the first!', rank: 'Your rank', prizes: 'Monday prizes in TON',
       wal: '👛 My TON wallet', err: 'Connection problem, try again.', close: 'Close',
     },
@@ -25,7 +25,7 @@
       t: 'Diamant', mine: 'Dans mon diamant', claim: (v) => '➕ Ajouter ' + v + ' à mon solde', claim0: '➕ Ajouter à mon solde', solde: (v) => '👛 Mon solde TON : ' + v, added: (v) => '✅ ' + v + ' ajouté à ton solde', none: 'Rien dans ton diamant pour l\'instant, continue de taper !', today: 'Aujourd\'hui', taps: 'tapes', rate: (n) => 'Taux du jour : ' + n + ' tapes = 0,01 $',
       lead: 'Tape le diamant, il bouge toutes les 50 tapes', pay: 'Tes gains restent dans le diamant : appuie sur "Ajouter à mon solde" pour les récupérer. Ton solde est payé chaque jour dès 0,10 $ sur ton portefeuille TON.',
       check: 'Petite vérification : touche le 💎', wrong: 'Pas le bon, réessaie', paused: 'Le diamant se repose jusqu\'au mois prochain. Reviens bientôt !', off: 'Le diamant est fermé pour le moment.',
-      bon: 'Bonus abonné', bm: '📢 Chaîne Meme Coin Tycoon', bj: '📢 Chaîne Jeremstyke', join: 'S\'abonner', on: '✅ +10 %', recheck: '🔄 Je suis abonné',
+      bon: 'Bonus abonné', bm: '📢 Chaîne Meme Coin Tycoon', bj: '📢 Chaîne Jeremstyke', bq: '🧠 Chaîne Crypto Quiz Daily', join: 'S\'abonner', on: '✅ +10 %', recheck: '🔄 Je suis abonné',
       con: '🏆 Concours du diamant de la semaine', ends: 'Fin dans', you: 'toi', nobody: 'Personne pour l\'instant : sois le premier !', rank: 'Ton rang', prizes: 'Gains du lundi en TON',
       wal: '👛 Mon portefeuille TON', err: 'Problème de connexion, réessaie.', close: 'Fermer',
     },
@@ -33,7 +33,7 @@
       t: 'الماسة', mine: 'في ماستي', claim: (v) => '➕ أضف ' + v + ' إلى رصيدي', claim0: '➕ أضف إلى رصيدي', solde: (v) => '👛 رصيد TON: ' + v, added: (v) => '✅ أُضيف ' + v + ' إلى رصيدك', none: 'لا شيء في ماستك بعد، واصل الضغط!', today: 'اليوم', taps: 'ضغطة', rate: (n) => 'سعر اليوم: ' + n + ' ضغطة = ‎0.01 $',
       lead: 'اضغط على الماسة، تتحرك كل 50 ضغطة', pay: 'أرباحك تبقى في الماسة: اضغط "أضف إلى رصيدي" لاستلامها. يُدفع رصيدك كل يوم ابتداءً من ‎0.10 $ إلى محفظة TON.',
       check: 'تحقق سريع: اضغط على 💎', wrong: 'ليست هي، حاول مرة أخرى', paused: 'الماسة في استراحة حتى الشهر القادم. عُد قريبًا!', off: 'الماسة مغلقة حاليًا.',
-      bon: 'مكافأة المشترك', bm: '📢 قناة Meme Coin Tycoon', bj: '📢 قناة Jeremstyke', join: 'اشترك', on: '✅ ‎+10 %', recheck: '🔄 اشتركت',
+      bon: 'مكافأة المشترك', bm: '📢 قناة Meme Coin Tycoon', bj: '📢 قناة Jeremstyke', bq: '🧠 قناة Crypto Quiz Daily', join: 'اشترك', on: '✅ ‎+10 %', recheck: '🔄 اشتركت',
       con: '🏆 مسابقة الماسة لهذا الأسبوع', ends: 'تنتهي خلال', you: 'أنت', nobody: 'لا أحد بعد: كن الأول!', rank: 'ترتيبك', prizes: 'جوائز يوم الاثنين بعملة TON',
       wal: '👛 محفظة TON', err: 'مشكلة في الاتصال، حاول مرة أخرى.', close: 'إغلاق',
     },
@@ -135,14 +135,16 @@
     const b = document.getElementById('dbody'); if (!b || !S) return;
     const T = L(), c = S.contest || {}, md = ['🥇', '🥈', '🥉'], pz = c.prizes || [];
     if (!S.on) { b.innerHTML = '<p class="dsm">' + ec(T.off) + '</p>'; return; }
-    const sub = (k, on, url) => '<div class="dsub"><span>' + ec(T[k]) + '</span>' + (on ? '<span class="dok">' + ec(T.on) + '</span>' : '<button class="btn" data-dj="' + url + '">' + ec(T.join) + ' +10 %</button>') + '</div>';
+    // 19 oct 2026 (Jeremy): + the quiz channel, +5 % (S.qz_pct)
+    const sub = (k, on, url, pc) => '<div class="dsub"><span>' + ec(T[k]) + '</span>' + (on ? '<span class="dok">' + ec(pc ? '✅ +' + pc + ' %' : T.on) + '</span>' : '<button class="btn" data-dj="' + url + '">' + ec(T.join) + ' +' + (pc || 10) + ' %</button>') + '</div>';
     const rows = (c.top || []).slice(0, 10).map((x, i) => '<div class="drow' + (x.me ? ' me' : '') + '"' + (x.pid ? ' data-pid="' + Number(x.pid) + '" style="cursor:pointer"' : '') + '><span>' + (md[i] || (i + 1) + '.') + ' ' + ec(x.name) + (x.me ? ' (' + ec(T.you) + ')' : '') + '</span><span>' + nf(x.n) + ' ' + ec(T.taps) + (i < 3 && pz[i] ? ' · ' + usd(pz[i]) : '') + '</span></div>').join('')
       || '<p class="dsm">' + ec(T.nobody) + '</p>';
     b.style.cssText = '';
     b.innerHTML = '<div class="dc dhero"><div class="dl">' + ec(T.mine) + '</div><div class="dbig"><span class="dgi">💎</span><span id="dusd"></span></div><div class="dbar"><i id="dbar"></i></div>'
       + (S && S.banned ? '<div style="margin:8px 0;padding:10px 12px;border-radius:12px;background:rgba(255,59,92,.14);border:1px solid rgba(255,59,92,.55);color:#ff8fa3;font-weight:700;font-size:13px">🚫 ' + ec(AXL().ban) + '</div>' : '') + '<button id="dclaim" type="button"></button><div id="dsolde"></div><div class="dmeta"><span id="dtoday"></span><span>' + ec(T.rate(nf(S.tpc))) + '</span></div><div id="darea"></div><p class="dnote">' + ec(T.pay) + '</p></div>'
       + (Number(S.sub_pct) > 0 ? '<div class="dc"><div class="dl">' + ec(T.bon) + '</div>' + sub('bm', S.sub_mct, 'https://t.me/memecointycoon') + sub('bj', S.sub_js, 'https://t.me/jeremstyke')
-        + (S.sub_mct && S.sub_js ? '' : '<button class="btn ghost" id="drc" style="width:100%;margin:8px 0 0">' + ec(T.recheck) + '</button>') + '</div>' : '')
+        + (S.qz_chat && Number(S.qz_pct) > 0 ? sub('bq', S.sub_qz, 'https://t.me/' + String(S.qz_chat).replace(/^@/, ''), Number(S.qz_pct)) : '')
+        + (S.sub_mct && S.sub_js && (S.sub_qz || !S.qz_chat) ? '' : '<button class="btn ghost" id="drc" style="width:100%;margin:8px 0 0">' + ec(T.recheck) + '</button>') + '</div>' : '')
       + (c.on ? '<div class="dc"><div class="dl">' + ec(T.con) + '</div><div class="dsm">' + ec(T.ends) + ' <b id="dcd">' + cd(c.ends) + '</b> · ' + ec(T.prizes) + ' : ' + pz.map((p) => usd(p)).join(' / ') + '</div>' + rows
         + (c.me && c.me.rank ? '<div class="dsm" style="margin-top:6px">' + ec(T.rank) + ' : <b>#' + c.me.rank + '</b> · ' + nf(c.me.n) + ' ' + ec(T.taps) + '</div>' : '') + '</div>' : '')
       + '<button class="btn ghost" id="dwal" style="width:100%">' + ec(T.wal) + '</button>';
