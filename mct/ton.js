@@ -562,6 +562,46 @@ new MutationObserver(() => { document.querySelectorAll('#crsh:not([data-done])')
       b.querySelector('#qzp').onclick = close;
     });
 })();
+// 20 oct 2026 (Jeremy): players did not understand that a mission is done by tapping it. Each unfinished mission now shows a "GO"
+// button, the header says "tap a mission to do it", and the trade missions scroll to the coins with a hint
+(() => {
+  try {
+    const TX = {
+      en: ['Tap a mission to do it', 'Tap a coin to trade it'],
+      fr: ['Touche une mission pour la faire', 'Touche un coin pour le trader'],
+      id: ['Ketuk misi untuk mengerjakannya', 'Ketuk koin untuk trading'],
+      ar: ['اضغط على مهمة لتنفيذها', 'اضغط على عملة لتداولها'],
+      es: ['Toca una misión para hacerla', 'Toca una moneda para operarla'],
+      fa: ['برای انجام یک ماموریت روی آن بزن', 'برای معامله روی یک کوین بزن'],
+      ru: ['Нажми на задание, чтобы выполнить его', 'Нажми на монету, чтобы торговать']
+    };
+    const tx = (i) => { let lg = 'en'; try { lg = (0, eval)('typeof LANG !== "undefined" ? LANG : "en"'); } catch (e) {} return (TX[lg] || TX.en)[i]; };
+    const GO = (0, eval)('typeof MSN_GO !== "undefined" ? MSN_GO : null');
+    const toCoins = () => { const m = document.getElementById('msn'); if (m) { const y = m.getBoundingClientRect().bottom + window.scrollY - 70; window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' }); } try { (0, eval)('toast')(tx(1)); } catch (e) {} };
+    if (GO) { GO.trade5 = toCoins; GO.vol2k = toCoins; }
+    const st = document.createElement('style');
+    st.textContent = '.msn-go{flex:none;margin-right:6px;padding:7px 12px;border-radius:999px;font-weight:900;font-size:13px;background:#2ee6ff;color:#0b0b1a;border:0;box-shadow:0 3px 0 #1a9fb3;animation:msnp 1.6s ease-in-out infinite}.msn-r[data-mk]{cursor:pointer}.msn-hint{display:block;padding:0 14px 6px;font-size:12px;color:#2ee6ff;font-weight:700}@keyframes msnp{50%{transform:scale(1.06)}}';
+    document.head.appendChild(st);
+    const orig = (0, eval)('typeof renderMissions === "function" ? renderMissions : null');
+    if (!orig) return;
+    window.renderMissions = function (ms) {
+      orig(ms);
+      try {
+        const el = document.getElementById('msn'); if (!el || !ms || !ms.missions) return;
+        let todo = 0;
+        el.querySelectorAll('.msn-r[data-mk]').forEach((r) => {
+          const m = ms.missions.find((x) => x.k === r.dataset.mk);
+          if (!m || m.done || m.claimed || r.querySelector('.msn-go')) return;
+          todo++;
+          const b = document.createElement('span'); b.className = 'msn-go'; b.textContent = 'GO ›';
+          const rb = r.querySelector('[data-mc]'); if (rb) r.insertBefore(b, rb); else r.appendChild(b);
+        });
+        const h = document.getElementById('msnh');
+        if (todo && h && !el.querySelector('.msn-hint')) { const s = document.createElement('small'); s.className = 'msn-hint'; s.textContent = '👉 ' + tx(0); h.insertAdjacentElement('afterend', s); }
+      } catch (e) {}
+    };
+  } catch (e) {}
+})();
 // 19 oct 2026 (Jeremy): the one-time mission "Join Crypto Quiz Daily" (+$200, server mct_bonus_missions 'quizch'): its label in every
 // language and its "go" action (open the channel)
 (() => {
