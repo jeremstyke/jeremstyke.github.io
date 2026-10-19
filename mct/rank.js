@@ -8,6 +8,16 @@
       plx: 'Total keuntungan trading terbaik sejak Senin (untung dikurangi rugi). Hanya trading yang dihitung, bukan bonus, tambang atau stars. Minimal 3 transaksi.', plme: (g, n) => 'Minggumu: ' + g + ' · ' + n + ' transaksi',
       rfx: 'Paling banyak teman yang benar-benar bermain (3 hari berbeda).', rfb: '👥 Undang temanku', dgx: 'Paling banyak ketukan berlian minggu ini.', dgb: '💎 Ketuk berlian', plb: '🪙 Ke pasar',
       u: { pl: '', rf: 'teman', dg: 'ketukan' } },
+    fa: { t: 'مسابقه‌های هفته', pl: '📈 سود', rf: '👥 دعوت‌کننده', dg: '💎 ضربه‌زن', ends: 'پایان تا', prizes: 'جوایز دوشنبه با TON واقعی', you: 'تو', rank: 'رتبه تو',
+      nobody: 'هنوز کسی نیست: اول شو!', err: 'مشکل اتصال، دوباره امتحان کن.', close: 'بستن',
+      plx: 'بیشترین سود کل معاملات از دوشنبه (سود منهای زیان). فقط معامله حساب می‌شود، نه جایزه، استخراج یا ستاره. حداقل 3 معامله.', plme: (g, n) => 'هفته تو: ' + g + ' · ' + n + ' معامله',
+      rfx: 'بیشترین دوستانی که واقعاً بازی می‌کنند (3 روز مختلف).', rfb: '👥 دعوت از دوستانم', dgx: 'بیشترین ضربه روی الماس در این هفته.', dgb: '💎 ضربه به الماس', plb: '🪙 رفتن به بازار',
+      u: { pl: '', rf: 'دوست', dg: 'ضربه' } },
+    ru: { t: 'Конкурсы недели', pl: '📈 Прибыль', rf: '👥 Реферер', dg: '💎 Тапер', ends: 'До конца', prizes: 'Призы в понедельник в настоящих TON', you: 'ты', rank: 'Твоё место',
+      nobody: 'Пока никого: займи первое место!', err: 'Проблема с соединением, попробуй ещё раз.', close: 'Закрыть',
+      plx: 'Лучший общий торговый результат с понедельника (прибыль минус убытки). Считается только торговля, не бонусы, майнинг или звёзды. Минимум 3 сделки.', plme: (g, n) => 'Твоя неделя: ' + g + ' · ' + n + ' сделок',
+      rfx: 'Больше всего друзей, которые реально играют (3 разных дня).', rfb: '👥 Пригласить друзей', dgx: 'Больше всего нажатий на алмаз за неделю.', dgb: '💎 Нажимать на алмаз', plb: '🪙 На рынок',
+      u: { pl: '', rf: 'друзей', dg: 'нажатий' } },
     en: { t: 'Contests of the week', pl: '📈 Gains', rf: '👥 Sponsor', dg: '💎 Tapper', ends: 'Ends in', prizes: 'Monday prizes in real TON', you: 'you', rank: 'Your rank',
       nobody: 'Nobody yet: take the lead!', err: 'Connection problem, try again.', close: 'Close',
       plx: 'The best total trading gain since Monday (gains minus losses). Only trading counts, not bonuses, mining or stars. At least 3 trades.', plme: (g, n) => 'Your week: ' + g + ' · ' + n + ' trades',
@@ -47,7 +57,7 @@
   // 16 oct 2026 (Jeremy): no button at the top: a "contests of the week" card at the top of the Leaders tab opens the three contests
   const CARD = {
     id: { t: '🏆 Kontes minggu ini', x: '3 kontes, TON asli untuk dimenangkan setiap Senin', b: 'Lihat' },
-    en: { t: '🏆 Contests of the week', x: '3 contests, real TON to win every Monday', b: 'See' },
+    fa: { t: '🏆 مسابقه‌های هفته', x: '3 مسابقه، هر دوشنبه TON واقعی ببر', b: 'دیدن' }, ru: { t: '🏆 Конкурсы недели', x: '3 конкурса, настоящие TON каждый понедельник', b: 'Смотреть' }, en: { t: '🏆 Contests of the week', x: '3 contests, real TON to win every Monday', b: 'See' },
     fr: { t: '🏆 Concours de la semaine', x: '3 concours, de vrais TON à gagner chaque lundi', b: 'Voir' },
     ar: { t: '🏆 مسابقات الأسبوع', x: '3 مسابقات، عملات TON حقيقية كل يوم اثنين', b: 'عرض' },
   };
