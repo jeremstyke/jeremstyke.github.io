@@ -58,8 +58,10 @@
   const BX = { en: { h: '🔔 Notifications', none: 'No notifications yet.', close: 'Close' }, fr: { h: '🔔 Notifications', none: 'Aucune notification pour l\'instant.', close: 'Fermer' },
     id: { h: '🔔 Notifikasi', none: 'Belum ada notifikasi.', close: 'Tutup' }, ar: { h: '🔔 الإشعارات', none: 'لا توجد إشعارات بعد.', close: 'إغلاق' } };
   const bst = document.createElement('style');
-  bst.textContent = '#nbell{position:fixed;right:12px;bottom:calc(var(--tab,68px) + 72px + env(safe-area-inset-bottom));z-index:12;width:46px;height:46px;border-radius:50%;border:2px solid rgba(255,212,59,.75);'
-    + 'background:rgba(40,20,80,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 6px 18px rgba(0,0,0,.45);display:grid;place-items:center;font-size:22px;cursor:pointer;padding:0;color:inherit}'
+  bst.textContent = '#nbell{position:fixed;right:12px;bottom:calc(var(--tab,68px) + 72px + env(safe-area-inset-bottom));z-index:12;width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(255,212,59,.35);'
+    + 'background:rgba(40,20,80,.18);box-shadow:none;display:grid;place-items:center;font-size:22px;cursor:pointer;padding:0;color:inherit;opacity:.45;transition:opacity .3s}'
+    // 19 oct 2026 (Jeremy): see-through bell so the bottom line of a page stays readable; full only when something is new
+    + '#nbell.on{opacity:1;background:rgba(40,20,80,.55);border-color:rgba(255,212,59,.75)}'
     + '#nbell.ring{animation:nbr 1s ease-in-out 2}@keyframes nbr{0%,100%{transform:rotate(0)}20%{transform:rotate(-18deg)}40%{transform:rotate(14deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(4deg)}}'
     + '#nbell b{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 5px;box-sizing:border-box;border-radius:10px;background:#ff3b5c;color:#fff;font-size:12px;line-height:20px;text-align:center;font-weight:800}'
     + '#nbl{position:fixed;inset:0;z-index:96;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center}'
@@ -76,7 +78,7 @@
       if (!document.body) return;
       if (!el) { el = document.createElement('button'); el.id = 'nbell'; el.type = 'button'; el.setAttribute('aria-label', 'Notifications'); el.onclick = panel; document.body.appendChild(el); }
       const n = list.filter((x) => x.id > seenB).length;
-      el.innerHTML = '🔔' + (n ? '<b>' + (n > 9 ? '9+' : n) + '</b>' : '');
+      el.innerHTML = '🔔' + (n ? '<b>' + (n > 9 ? '9+' : n) + '</b>' : ''); el.classList.toggle('on', !!n);
     }
     function panel() {
       try { tg().HapticFeedback.impactOccurred('light'); } catch (e) {}
