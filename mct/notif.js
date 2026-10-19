@@ -32,6 +32,7 @@
       if ((m = /(?:startapp=c_|[?&]c=)(\d+)/.exec(u))) return openCoin(Number(m[1]));
       if (/startapp=(?:clan|cl_)/.test(u) && window.mctClans) return window.mctClans();
       if ((m = /(?:[?&]v=|startapp=v_)([a-z]+)/.exec(u))) return go(m[1]);
+      if (/startapp=friends/.test(u) && window.mctFriends) return window.mctFriends(); // the friends list, with the gift to send back
       if (/startapp=(?:friends|r_)/.test(u)) return go('earn');
       if (/startapp=back/.test(u)) return go('market');
       if (/^https:\/\/t\.me\//i.test(u) && !/memecointycoonbot/i.test(u)) { try { tg().openTelegramLink(u); } catch (e) { location.href = u; } return; }
