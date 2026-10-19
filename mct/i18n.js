@@ -17,15 +17,13 @@
       window.__mctApply = function () {
         base();
         const lg = ev('LANG');
-        if (lg === 'fa' || lg === 'ru') {
-          document.documentElement.dir = lg === 'fa' ? 'rtl' : 'ltr';
-          const b = document.getElementById('lng'); if (b) b.textContent = lg === 'fa' ? '🌐 FA' : '🌐 RU';
-        }
+        if (lg === 'fa') document.documentElement.dir = 'rtl';
+        const b = document.getElementById('lng'); if (b) b.textContent = '🌐 ' + String(lg || 'en').toUpperCase();
       };
       ev('applyLang = window.__mctApply');
       const btn = document.getElementById('lng');
       // 19 oct 2026 (Jeremy): the language button opens a language picker (6 languages)
-      const LANGS = [['en', '🇬🇧', 'English'], ['fr', '🇫🇷', 'Français'], ['ar', '🌐', 'العربية'], ['fa', '🌐', 'فارسی'], ['id', '🇮🇩', 'Bahasa Indonesia'], ['ru', '🌐', 'Русский']];
+      const LANGS = [['en', 'EN', 'English'], ['fr', 'FR', 'Français'], ['ar', 'AR', 'العربية'], ['fa', 'FA', 'فارسی'], ['id', 'ID', 'Bahasa Indonesia'], ['ru', 'RU', 'Русский']]; // 19 oct 2026 (Jeremy): codes, no flags
       const pick = (nx) => {
         ev('LANG = ' + JSON.stringify(nx));
         try { localStorage.setItem('mct_lang', nx); } catch (e) {}
@@ -37,7 +35,7 @@
         d.style.cssText = 'position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:16px';
         d.innerHTML = '<div dir="ltr" style="width:100%;max-width:340px;background:#1d1238;border-radius:20px;padding:14px;box-shadow:0 10px 30px rgba(0,0,0,.5)">'
           + '<div style="font-weight:800;font-size:17px;margin:2px 4px 10px">🌍 Language</div>'
-          + LANGS.map((x) => '<button type="button" data-l="' + x[0] + '" style="display:flex;align-items:center;gap:10px;width:100%;margin:6px 0;padding:12px 14px;border-radius:14px;border:1px solid ' + (x[0] === cur ? 'rgba(255,212,59,.8)' : 'rgba(255,255,255,.12)') + ';background:' + (x[0] === cur ? 'rgba(255,212,59,.14)' : 'rgba(255,255,255,.05)') + ';color:inherit;font:inherit;font-size:16px;font-weight:700;cursor:pointer;text-align:left"><span style="font-size:20px">' + x[1] + '</span><span style="flex:1">' + x[2] + '</span>' + (x[0] === cur ? '✓' : '') + '</button>').join('')
+          + LANGS.map((x) => '<button type="button" data-l="' + x[0] + '" style="display:flex;align-items:center;gap:10px;width:100%;margin:6px 0;padding:12px 14px;border-radius:14px;border:1px solid ' + (x[0] === cur ? 'rgba(255,212,59,.8)' : 'rgba(255,255,255,.12)') + ';background:' + (x[0] === cur ? 'rgba(255,212,59,.14)' : 'rgba(255,255,255,.05)') + ';color:inherit;font:inherit;font-size:16px;font-weight:700;cursor:pointer;text-align:left"><span style="flex:none;min-width:34px;padding:3px 0;border-radius:8px;background:rgba(255,255,255,.1);font-size:13px;font-weight:800;text-align:center">' + x[1] + '</span><span style="flex:1">' + x[2] + '</span>' + (x[0] === cur ? '✓' : '') + '</button>').join('')
           + '</div>';
         d.onclick = (e) => { const b = e.target.closest && e.target.closest('[data-l]'); if (b) { d.remove(); if (b.dataset.l !== cur) pick(b.dataset.l); } else if (e.target === d) d.remove(); };
         document.body.appendChild(d);
