@@ -335,3 +335,20 @@
   const m = /^cl_(\d+)$/.exec(sp); if (m) LINK = Number(m[1]);
   if (sp === 'clan' || m) { let n = 0; const w = setInterval(() => { n++; let ok = false; try { ok = !!document.querySelector('nav.tb') && !!document.getElementById('view'); } catch (e) {} if (ok || n > 60) { clearInterval(w); if (ok) setTimeout(() => show(m ? m[1] : undefined), 600); } }, 250); }
 })();
+// 19 oct 2026 (Jeremy): the names of the new lines of the money journal (clan, creator fee and blockchain fee paid...) and of the
+// "name taken" message when a coin is created, added to the texts of the game page.
+(() => {
+  const N = {
+    en: { led: { cfee_paid: '👤 Creator fee paid', chainfee_paid: '⛓️ Blockchain fee paid', clan: '🛡️ Clan', insure: '🛡️ Loss insurance', dividend: '💵 $MCT dividend', game: '🎮 Mini-game', recharge: '💵 Recharge' }, err: { name_taken: 'This name is already taken by another coin. Pick another one.' } },
+    fr: { led: { cfee_paid: '👤 Frais créateur payés', chainfee_paid: '⛓️ Frais de blockchain payés', clan: '🛡️ Clan', insure: '🛡️ Assurance perte', dividend: '💵 Dividende $MCT', game: '🎮 Mini-jeu', recharge: '💵 Recharge' }, err: { name_taken: 'Ce nom est déjà pris par un autre coin. Choisis-en un autre.' } },
+    ar: { led: { cfee_paid: '👤 رسوم المنشئ المدفوعة', chainfee_paid: '⛓️ رسوم البلوكتشين المدفوعة', clan: '🛡️ العشيرة', insure: '🛡️ تأمين الخسارة', dividend: '💵 أرباح $MCT', game: '🎮 لعبة مصغرة', recharge: '💵 شحن' }, err: { name_taken: 'هذا الاسم مستخدم لعملة أخرى. اختر اسمًا آخر.' } },
+    id: { led: { cfee_paid: '👤 Fee pembuat dibayar', chainfee_paid: '⛓️ Fee blockchain dibayar', clan: '🛡️ Klan', insure: '🛡️ Asuransi rugi', dividend: '💵 Dividen $MCT', game: '🎮 Mini-game', recharge: '💵 Isi ulang' }, err: { name_taken: 'Nama ini sudah dipakai koin lain. Pilih nama lain.' } },
+  };
+  let n = 0;
+  const add = () => {
+    let G = null; try { G = (0, eval)('typeof L !== "undefined" ? L : null'); } catch (e) {}
+    if (!G || !G.en || !G.en.led_k) { if (++n < 20) setTimeout(add, 500); return; }
+    Object.keys(N).forEach((l) => { if (!G[l]) return; if (G[l].led_k) Object.assign(G[l].led_k, N[l].led); if (G[l].err) Object.assign(G[l].err, N[l].err); });
+  };
+  add();
+})();
