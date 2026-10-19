@@ -9,6 +9,13 @@
     id: { h: 'Pemain sedang sangat banyak!', s: 'Game sedang sangat ramai. Tunggu beberapa detik, nanti lanjut sendiri.', b: '🔄 Coba lagi', w: 'Uang dan koinmu aman.' },
     ar: { h: 'عدد كبير جدًا من اللاعبين الآن!', s: 'اللعبة مزدحمة جدًا حاليًا. انتظر بضع ثوانٍ، وستستمر تلقائيًا.', b: '🔄 أعد المحاولة', w: 'أموالك وعملاتك في أمان.' },
   };
+  // 19 oct 2026 (Jeremy): when the problem is the player's own connection, the screen says so (and not "so many players")
+  const TXN = {
+    en: { h: 'Your connection is slow', s: 'Your network is having trouble reaching the game. It continues by itself as soon as it gets better.', b: '🔄 Try again', w: 'Your money and your coins are safe.' },
+    fr: { h: 'Ta connexion est lente', s: 'Ton réseau a du mal à joindre le jeu. Ça repart tout seul dès qu\'il va mieux.', b: '🔄 Réessayer', w: 'Ton argent et tes coins sont en sécurité.' },
+    id: { h: 'Koneksimu lambat', s: 'Jaringanmu kesulitan menjangkau game. Akan lanjut sendiri saat membaik.', b: '🔄 Coba lagi', w: 'Uang dan koinmu aman.' },
+    ar: { h: 'اتصالك بطيء', s: 'شبكتك تواجه صعوبة في الوصول إلى اللعبة. ستستمر تلقائيًا عندما يتحسن الاتصال.', b: '🔄 أعد المحاولة', w: 'أموالك وعملاتك في أمان.' },
+  };
   const lg = () => {
     let l = ''; try { l = LANG; } catch (e) {}
     if (!l) { try { l = localStorage.getItem('mct_lang') || ''; } catch (e) {} }
@@ -36,8 +43,8 @@
   function show(kind) {
     if (ov || document.getElementById('mtov')) return; // the maintenance screen has priority
     if (!document.body) return;
-    shownAt = Date.now(); shownKind = kind === 'down' ? 'down' : 'slow'; if (!demo) note(0);
-    const T = TX[lg()];
+    shownAt = Date.now(); shownKind = kind === 'down' ? 'down' : kind === 'net' ? 'net' : 'slow'; if (!demo) note(0);
+    const T = (kind === 'net' ? TXN : TX)[lg()];
     if (!document.getElementById('busyst')) {
       const st = document.createElement('style'); st.id = 'busyst';
       st.textContent = '#busyov{position:fixed;inset:0;z-index:9998;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(120% 70% at 50% 0%,#4a1691 0%,#1a0638 65%);color:#f7f1ff;text-align:center;font-family:"Bricolage Grotesque",system-ui,sans-serif;animation:busyin .3s ease}'
@@ -54,6 +61,7 @@
     }
     ov = document.createElement('div'); ov.id = 'busyov'; ov.setAttribute('role', 'alert');
     ov.innerHTML = '<div class="bx"><span class="em">🚦</span><h2></h2><p></p><div class="dots"><i></i><i></i><i></i></div><button type="button"></button><small></small></div>';
+    if (kind === 'net') ov.querySelector('.em').textContent = '📶';
     ov.querySelector('h2').textContent = T.h; ov.querySelector('p').textContent = T.s;
     ov.querySelector('button').textContent = T.b; ov.querySelector('small').textContent = T.w;
     ov.querySelector('button').onclick = () => { try { window.Telegram.WebApp.HapticFeedback.impactOccurred('light'); } catch (e) {} location.reload(); };
@@ -125,7 +133,24 @@
         failAt = 0; if (!stuck()) { hide(); pill(false); }
       }
       return r;
-    }, (e) => { pending.delete(id); if (user && navigator.onLine !== false) { failAt = Date.now(); show('down'); } throw e; });
+    }, (e) => { pending.delete(id); if (user && navigator.onLine !== false) { failAt = Date.now(); judge('down'); } throw e; });
+  }
+  // 19 oct 2026 (Jeremy): before the big screen, a tiny file from GitHub (a fast network, not our server) is read: if it does not come
+  // within 2.5 s either, the player's own connection is the problem, and the screen says so (📶) instead of "so many players" (🚦)
+  // the test starts as soon as a call of the player takes more than 1.5 s, so the answer is ready when the 4 s are reached
+  let judging = false, probeAt = 0, netBad = null, probing = false;
+  function probe() {
+    if (probing || Date.now() - probeAt < 10000) return; probing = true;
+    const t0 = Date.now(); let done = false;
+    const fin = (bad) => { if (done) return; done = true; probing = false; probeAt = Date.now(); netBad = bad; };
+    setTimeout(() => fin(true), 2500);
+    of('https://jeremstyke.github.io/mct/_chk.txt?t=' + t0, { cache: 'no-store' }).then((r) => fin(!r.ok), () => fin(true));
+  }
+  function judge(kind) {
+    if (judging || ov) return;
+    if (netBad !== null && Date.now() - probeAt < 10000) { show(netBad ? 'net' : kind); return; }
+    judging = true; probe();
+    const w = setInterval(() => { if (probing) return; clearInterval(w); judging = false; if (kind === 'slow' && !stuck()) return; show(netBad ? 'net' : kind); }, 200);
   }
   // a call of the player that takes more than 4 s shows the screen; it goes away when the calls answer again
   setInterval(() => {
@@ -133,7 +158,8 @@
     // (body overflow hidden) while its video is shown and does not always give it back (app put in the background, other ad networks).
     // As soon as no video is on the screen, the page can scroll again.
     try { const bd = document.body, hl = document.documentElement; if (bd && !document.querySelector('.agx-rewarded-overlay,[data-agx-loading]')) { if (bd.style.overflow === 'hidden') bd.style.overflow = ''; if (hl.style.overflow === 'hidden') hl.style.overflow = ''; } } catch (e) {}
-    if (stuck()) { if (slowConn() && !ov) pill(true); else show('slow'); }
+    if ([...pending.values()].some((q) => q.user && Date.now() - q.t > 1500)) probe();
+    if (stuck()) { if (slowConn() && !ov) pill(true); else if (!ov) judge('slow'); }
     else { pill(false); if (ov && !demo && !failAt) hide(); }
     // after a failure, a light check every 10 s: as soon as the server answers again, the screen goes away
     if (ov && failAt && !pending.size && Date.now() - lastProbe > 10000) {
