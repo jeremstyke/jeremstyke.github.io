@@ -450,7 +450,7 @@ new MutationObserver(() => { document.querySelectorAll('#crsh:not([data-done])')
   try { window.api = w; } catch (e) {}
 })();
 // 19 oct 2026 (Jeremy): welcome pack, 1 Star once per player: $5,000 of cash + mining boost x2 for 24 h. A small card above the
-// earnings bar on the market. Closed with the cross = never shown again on this phone (Jeremy, 19 oct 2026). The invoice comes from mct-fr 'welcome' (TONLAST.welcome = still possible).
+// earnings bar on the market. Shown once to each new player: closed with the cross or bought = never shown again (Jeremy, 19 oct 2026). The invoice comes from mct-fr 'welcome' (TONLAST.welcome = still possible).
 (() => {
   const TX = ({
     fr: { t: 'Pack de bienvenue', s: '+5 000 $ et boost de minage x2 pendant 24 h', b: '1 ⭐', ok: '🎁 Pack activé : +5 000 $ et boost 24 h !', err: 'Achat impossible pour le moment.' },
@@ -480,7 +480,11 @@ new MutationObserver(() => { document.querySelectorAll('#crsh:not([data-done])')
     el = document.createElement('div'); el.id = 'welc';
     el.innerHTML = '<div class="wi"><span style="font-size:24px">🎁</span><div class="wt"><b></b><small></small></div><button class="wb" type="button"></button><button class="wx" type="button" aria-label="close">✕</button></div>';
     el.querySelector('b').textContent = T.t; el.querySelector('small').textContent = T.s; el.querySelector('.wb').textContent = T.b;
-    el.querySelector('.wx').onclick = () => { hid = true; try { localStorage.setItem('mct_wel_x', day()); } catch (e) {} show(); };
+    el.querySelector('.wx').onclick = () => {
+      hid = true; try { localStorage.setItem('mct_wel_x', day()); } catch (e) {} if (TONLAST) TONLAST.welcome = false; show();
+      // 19 oct 2026 (Jeremy): closed = never offered again, on any phone (the server remembers it)
+      fetch('https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-fr', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ initData: (tw && tw.initData) || '', action: 'welcome_close' }) }).catch(() => {});
+    };
     el.querySelector('.wb').onclick = async () => {
       if (busy) return; busy = true;
       try { haptic(); } catch (e) {}
