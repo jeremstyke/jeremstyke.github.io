@@ -533,7 +533,7 @@ new MutationObserver(() => { document.querySelectorAll('#crsh:not([data-done])')
       try { tw.HapticFeedback.notificationOccurred(r.right ? 'success' : 'error'); } catch (e) {}
       const rk = (x) => x && x.rank ? '#' + x.rank : '-', pt = (x) => x && x.pts != null ? x.pts + ' pts' : '0 pts';
       const ch = String(r.chat || '').replace(/^@/, '');
-      b.innerHTML = '<div class="qh">' + (r.again ? '🧠 Already answered' : r.right ? '✅ Right! +' + r.pts + ' points' : '❌ Not quite') + '</div>'
+      b.innerHTML = '<div class="qh">' + (r.again ? '🧠 Already answered' : r.right ? '✅ Right! +' + r.pts + ' points' : '❌ Not quite' + (r.pts ? ' · +' + r.pts + ' point' : '')) + '</div>'
         + '<p class="qq">' + es(r.q) + '</p>'
         + (r.right ? '' : '<p class="qa">Your answer: ' + es(r.mine) + '</p>')
         + '<p class="qa">Right answer: <b>' + es(r.letter) + '. ' + es(r.answer) + '</b></p>'
@@ -541,7 +541,19 @@ new MutationObserver(() => { document.querySelectorAll('#crsh:not([data-done])')
         + '<div class="qs"><div>Today<b>' + pt(r.day) + '</b>' + rk(r.day) + '</div><div>This week<b>' + pt(r.week) + '</b>' + rk(r.week) + '</div></div>'
         + (ch ? '<button class="q1" type="button" id="qzb">🧠 Next quiz on the channel</button>' : '')
         + '<button class="q2" type="button" id="qzp">🎮 Play Meme Coin Tycoon</button>';
-      const nb = b.querySelector('#qzb'); if (nb) nb.onclick = () => { try { tw.openTelegramLink('https://t.me/' + ch); } catch (e) {} close(); };
+      // back to the channel: the game closes, so the player lands on the channel (19 oct 2026, Jeremy)
+      const nb = b.querySelector('#qzb'); if (nb) nb.onclick = () => { try { tw.openTelegramLink('https://t.me/' + ch); } catch (e) {} close(); setTimeout(() => { try { tw.close(); } catch (e) {} }, 300); };
       b.querySelector('#qzp').onclick = close;
     });
+})();
+// 19 oct 2026 (Jeremy): the one-time mission "Join Crypto Quiz Daily" (+$200, server mct_bonus_missions 'quizch'): its label in every
+// language and its "go" action (open the channel)
+(() => {
+  try {
+    const LL = (0, eval)('typeof L !== "undefined" ? L : null');
+    const lab = { en: '🧠 Join Crypto Quiz Daily', fr: '🧠 Rejoins Crypto Quiz Daily', id: '🧠 Gabung Crypto Quiz Daily', ar: '🧠 انضم إلى Crypto Quiz Daily', es: '🧠 Únete a Crypto Quiz Daily' };
+    if (LL) Object.keys(LL).forEach((k) => { if (LL[k] && typeof LL[k] === 'object') LL[k].m_quizch = lab[k] || lab.en; });
+    const GO = (0, eval)('typeof MSN_GO !== "undefined" ? MSN_GO : null');
+    if (GO) GO.quizch = () => { try { tw.openTelegramLink('https://t.me/cryptoquizzdaily'); } catch (e) { location.href = 'https://t.me/cryptoquizzdaily'; } };
+  } catch (e) {}
 })();
