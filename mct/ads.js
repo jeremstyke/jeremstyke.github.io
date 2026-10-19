@@ -17,6 +17,26 @@
       sAllUp: 'Seluruh pasar akan pump sebentar lagi 🚀', sAllDn: 'Seluruh pasar akan turun sebentar lagi 📉', sNote: 'Tidak ada yang tahu pastinya kapan: 30 menit lagi atau besok. Giliranmu!',
       sOpen: '👀 Lihat', sPayT: 'Kamu sudah memakai bocoran gratis hari ini. Buka yang ini dengan 5 stars, atau kembali besok.', sPay: '⭐ Buka dengan 5 stars', sGo: (t) => 'Buka $' + t, sLim: 'Kamu sudah melihat bocoranmu hari ini. Kembali besok!',
     },
+    fa: {
+      bT: 'بوست x2 برای 1 ساعت', bX: 'استخراجت برای 1 ساعت دو برابر درآمد دارد.', bAd: '📺 یک ویدیو ببین (رایگان، روزی 1 بار)', bPay: '⭐ پرداخت 5 ستاره', bOk: '⚡ بوست x2 روشن شد!',
+      bLim: 'بوست رایگان امروزت را استفاده کردی. با ستاره بپرداز یا فردا برگرد.', bLim2: 'فقط روزی 1 بوست رایگان، و امروز استفاده‌اش کردی. برای بوست دوباره همین حالا: 5 ستاره. بوست رایگانت فردا برمی‌گردد.', later: 'بعداً',
+      noad: 'الان ویدیویی در دسترس نیست، کمی بعد امتحان کن.', err: 'مشکلی پیش آمد، دوباره امتحان کن.', no: 'نه، ممنون', ok: 'باشه',
+      iT: '🛟 بیمه', iX: (l, b) => 'در این فروش ' + l + ' ضرر کردی. یک ویدیو ببین و ' + b + ' (50 %) پس بگیر.', iAd: (b) => '📺 پس گرفتن ' + b,
+      iOk: (r) => '🛟 ' + r + ' به پولت اضافه شد!', iLim: 'امروز 3 بیمه‌ات را استفاده کردی.', iLate: 'دیر شد: بیمه تا 10 دقیقه بعد از فروش معتبر است.',
+      sT: '📰 خبر ویژه', sX: 'خبر بعدی را زودتر از همه ببین', sB: '📺 تماشا', sUp: (t) => '$' + t + ' به‌زودی خبر خوب می‌گیرد 🚀', sDn: (t) => '$' + t + ' به‌زودی خبر بد می‌گیرد 📉',
+      sAllUp: 'کل بازار به‌زودی پامپ می‌شود 🚀', sAllDn: 'کل بازار به‌زودی افت می‌کند 📉', sNote: 'کسی دقیقاً نمی‌داند کی: 30 دقیقه دیگر یا فردا. نوبت توست!',
+      sOpen: '👀 دیدن', sPayT: 'خبر ویژه رایگان امروز را دیدی. این یکی را با 5 ستاره باز کن، یا فردا برگرد.', sPay: '⭐ باز کردن با 5 ستاره', sGo: (t) => 'باز کردن $' + t, sLim: 'خبر ویژه امروزت را دیدی. فردا برگرد!',
+    },
+    ru: {
+      bT: 'Буст x2 на 1 час', bX: 'Твой майнинг приносит вдвое больше 1 час.', bAd: '📺 Посмотреть видео (бесплатно, 1 раз в день)', bPay: '⭐ Оплатить 5 звёзд', bOk: '⚡ Буст x2 включён!',
+      bLim: 'Бесплатный буст сегодня уже использован. Оплати звёздами или возвращайся завтра.', bLim2: 'Только 1 бесплатный буст в день, и сегодняшний уже использован. Чтобы бустануть сейчас: 5 звёзд. Бесплатный буст вернётся завтра.', later: 'Позже',
+      noad: 'Сейчас нет видео, попробуй чуть позже.', err: 'Что-то пошло не так, попробуй ещё раз.', no: 'Нет, спасибо', ok: 'OK',
+      iT: '🛟 Страховка', iX: (l, b) => 'Ты потерял ' + l + ' на этой продаже. Посмотри видео и верни ' + b + ' (50 %).', iAd: (b) => '📺 Вернуть ' + b,
+      iOk: (r) => '🛟 ' + r + ' добавлено к деньгам!', iLim: 'Ты использовал 3 страховки сегодня.', iLate: 'Поздно: страховка действует 10 минут после продажи.',
+      sT: '📰 Инсайд', sX: 'Узнай следующую новость раньше всех', sB: '📺 Смотреть', sUp: (t) => '$' + t + ' скоро получит хорошую новость 🚀', sDn: (t) => '$' + t + ' скоро получит плохую новость 📉',
+      sAllUp: 'Весь рынок скоро вырастет 🚀', sAllDn: 'Весь рынок скоро просядет 📉', sNote: 'Никто не знает точно когда: через 30 минут или завтра. Твой ход!',
+      sOpen: '👀 Смотреть', sPayT: 'Бесплатный инсайд сегодня уже использован. Открой этот за 5 звёзд или возвращайся завтра.', sPay: '⭐ Открыть за 5 звёзд', sGo: (t) => 'Открыть $' + t, sLim: 'Ты уже видел инсайд сегодня. Возвращайся завтра!',
+    },
     en: {
       bT: 'Boost x2 for 1 hour', bX: 'Your mining earns double for 1 hour.', bAd: '📺 Watch a video (free, 1 a day)', bPay: '⭐ Pay 5 stars', bOk: '⚡ Boost x2 on!',
       bLim: 'You used your free boost today. Pay with stars or come back tomorrow.', bLim2: 'Only 1 free boost a day, and you already used today\'s. To boost again now: 5 stars. Your free boost comes back tomorrow.', later: 'Later',
@@ -41,7 +61,7 @@
   // 19 oct 2026 (Jeremy): Premium players skip the videos (watch() returns at once), so they must not be told to watch one
   const PX = {
     fr: { iX: (l, b) => 'Tu as perdu ' + l + ' sur cette vente. 💎 Premium : récupère ' + b + ' (50 %) sans vidéo.', iAd: (b) => '🛟 Récupérer ' + b, bAd: '💎 Activer (Premium, sans vidéo)', sB: '👀 Voir' },
-    en: { iX: (l, b) => 'You lost ' + l + ' on this sale. 💎 Premium: get back ' + b + ' (50 %) with no video.', iAd: (b) => '🛟 Get back ' + b, bAd: '💎 Turn on (Premium, no video)', sB: '👀 See' },
+    fa: { iX: (l, b) => 'در این فروش ' + l + ' ضرر کردی. 💎 پریمیوم: ' + b + ' (50 %) را بدون ویدیو پس بگیر.', iAd: (b) => '🛟 پس گرفتن ' + b, bAd: '💎 روشن کردن (پریمیوم، بدون ویدیو)', sB: '👀 دیدن' }, ru: { iX: (l, b) => 'Ты потерял ' + l + ' на этой продаже. 💎 Премиум: верни ' + b + ' (50 %) без видео.', iAd: (b) => '🛟 Вернуть ' + b, bAd: '💎 Включить (Премиум, без видео)', sB: '👀 Смотреть' }, en: { iX: (l, b) => 'You lost ' + l + ' on this sale. 💎 Premium: get back ' + b + ' (50 %) with no video.', iAd: (b) => '🛟 Get back ' + b, bAd: '💎 Turn on (Premium, no video)', sB: '👀 See' },
     id: { iX: (l, b) => 'Kamu rugi ' + l + ' dari penjualan ini. 💎 Premium: dapatkan kembali ' + b + ' (50 %) tanpa video.', iAd: (b) => '🛟 Dapatkan kembali ' + b, bAd: '💎 Aktifkan (Premium, tanpa video)', sB: '👀 Lihat' },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} const t = TX[l] || TX.en; return window.MCTPREM ? Object.assign({}, t, PX[l] || PX.en) : t; };
