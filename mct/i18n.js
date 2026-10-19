@@ -24,11 +24,23 @@
       };
       ev('applyLang = window.__mctApply');
       const btn = document.getElementById('lng');
-      if (btn) btn.onclick = () => {
-        const nx = ({ en: 'fr', fr: 'ar', ar: 'fa', fa: 'id', id: 'ru', ru: 'en' })[ev('LANG')] || 'en';
+      // 19 oct 2026 (Jeremy): the language button opens a language picker (6 languages)
+      const LANGS = [['en', '🇬🇧', 'English'], ['fr', '🇫🇷', 'Français'], ['ar', '🌐', 'العربية'], ['fa', '🌐', 'فارسی'], ['id', '🇮🇩', 'Bahasa Indonesia'], ['ru', '🌐', 'Русский']];
+      const pick = (nx) => {
         ev('LANG = ' + JSON.stringify(nx));
         try { localStorage.setItem('mct_lang', nx); } catch (e) {}
         ev('(() => { try { haptic(); } catch (e) {} applyLang(); try { api("lang", { lang: LANG }); } catch (e) {} try { if (COIN) drawCoin(false); } catch (e) {} go(VIEW); })()');
+      };
+      if (btn) btn.onclick = () => {
+        try { ev('haptic()'); } catch (e) {}
+        const cur = ev('LANG'), d = document.createElement('div');
+        d.style.cssText = 'position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:16px';
+        d.innerHTML = '<div dir="ltr" style="width:100%;max-width:340px;background:#1d1238;border-radius:20px;padding:14px;box-shadow:0 10px 30px rgba(0,0,0,.5)">'
+          + '<div style="font-weight:800;font-size:17px;margin:2px 4px 10px">🌍 Language</div>'
+          + LANGS.map((x) => '<button type="button" data-l="' + x[0] + '" style="display:flex;align-items:center;gap:10px;width:100%;margin:6px 0;padding:12px 14px;border-radius:14px;border:1px solid ' + (x[0] === cur ? 'rgba(255,212,59,.8)' : 'rgba(255,255,255,.12)') + ';background:' + (x[0] === cur ? 'rgba(255,212,59,.14)' : 'rgba(255,255,255,.05)') + ';color:inherit;font:inherit;font-size:16px;font-weight:700;cursor:pointer;text-align:left"><span style="font-size:20px">' + x[1] + '</span><span style="flex:1">' + x[2] + '</span>' + (x[0] === cur ? '✓' : '') + '</button>').join('')
+          + '</div>';
+        d.onclick = (e) => { const b = e.target.closest && e.target.closest('[data-l]'); if (b) { d.remove(); if (b.dataset.l !== cur) pick(b.dataset.l); } else if (e.target === d) d.remove(); };
+        document.body.appendChild(d);
       };
       const w = want();
       if (w && ev('LANG') !== w) { ev('LANG = ' + JSON.stringify(w)); ev('(() => { applyLang(); try { go(VIEW); } catch (e) {} })()'); }
