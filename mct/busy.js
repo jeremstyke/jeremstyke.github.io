@@ -129,6 +129,10 @@
   }
   // a call of the player that takes more than 4 s shows the screen; it goes away when the calls answer again
   setInterval(() => {
+    // 19 oct 2026 (Jeremy): after a rewarded video the game sometimes could not scroll any more: the Ads Galaxy SDK blocks the page
+    // (body overflow hidden) while its video is shown and does not always give it back (app put in the background, other ad networks).
+    // As soon as no video is on the screen, the page can scroll again.
+    try { const bd = document.body, hl = document.documentElement; if (bd && !document.querySelector('.agx-rewarded-overlay,[data-agx-loading]')) { if (bd.style.overflow === 'hidden') bd.style.overflow = ''; if (hl.style.overflow === 'hidden') hl.style.overflow = ''; } } catch (e) {}
     if (stuck()) { if (slowConn() && !ov) pill(true); else show('slow'); }
     else { pill(false); if (ov && !demo && !failAt) hide(); }
     // after a failure, a light check every 10 s: as soon as the server answers again, the screen goes away
