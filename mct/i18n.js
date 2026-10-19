@@ -12,7 +12,7 @@
     try {
       const ev = (0, eval);
       const LL = ev('typeof L !== "undefined" ? L : null'); if (!LL) return;
-      Object.keys(window.MCT_I18N || {}).forEach((k) => { LL[k] = Object.assign({}, LL.en || {}, window.MCT_I18N[k]); });
+      Object.keys(window.MCT_I18N || {}).forEach((k) => { if (!LL[k]) LL[k] = Object.assign({}, LL.en || {}, window.MCT_I18N[k]); });
       const base = ev('typeof applyLang === "function" ? applyLang : null'); if (!base) return;
       window.__mctApply = function () {
         base();
