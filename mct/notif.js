@@ -5,7 +5,7 @@
 // from a link never started the bot, so they would get no phone notification at all).
 // Data from the Supabase function mct-ton (actions mon_notif and mon_notifread, mct_notif_api).
 (() => {
-  const TX = { en: { now: 'now', m: 'min', h: 'h', d: 'd' }, fr: { now: 'maintenant', m: 'min', h: 'h', d: 'j' }, id: { now: 'sekarang', m: 'mnt', h: 'j', d: 'h' }, ar: { now: 'الآن', m: 'د', h: 'س', d: 'ي' } };
+  const TX = { fa: { now: 'اکنون', m: 'دقیقه', h: 'ساعت', d: 'روز' }, ru: { now: 'сейчас', m: 'мин', h: 'ч', d: 'дн' }, en: { now: 'now', m: 'min', h: 'h', d: 'd' }, fr: { now: 'maintenant', m: 'min', h: 'h', d: 'j' }, id: { now: 'sekarang', m: 'mnt', h: 'j', d: 'h' }, ar: { now: 'الآن', m: 'د', h: 'س', d: 'ي' } };
   const lg = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] ? l : 'en'; };
   const call = async (a) => { try { return await tonCall({ action: a }); } catch (e) { return null; } };
   const tg = () => (window.Telegram && window.Telegram.WebApp) || {};
