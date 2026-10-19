@@ -4,7 +4,7 @@
 (() => {
   const BLOCK = 'task-53965', MAX = 3, USD = 50;
   const TX = {
-    en: { r: '+$' + USD + ' cash', h: (n) => '🎁 Bonus task: +$' + USD + ' (' + n + '/' + MAX + ' today)', ok: '🎁 +$' + USD + ' added!', go: 'Go', claim: 'Claim', done: 'Done' },
+    fa: { r: '+' + USD + ' دلار پول نقد', h: (n) => '🎁 کار جایزه‌دار: +' + USD + ' دلار (' + n + '/' + MAX + ' امروز)', ok: '🎁 +' + USD + ' دلار اضافه شد!', go: 'برو', claim: 'دریافت', done: 'انجام شد' }, ru: { r: '+$' + USD + ' деньгами', h: (n) => '🎁 Бонусное задание: +$' + USD + ' (' + n + '/' + MAX + ' сегодня)', ok: '🎁 +$' + USD + ' добавлено!', go: 'Вперёд', claim: 'Забрать', done: 'Готово' }, en: { r: '+$' + USD + ' cash', h: (n) => '🎁 Bonus task: +$' + USD + ' (' + n + '/' + MAX + ' today)', ok: '🎁 +$' + USD + ' added!', go: 'Go', claim: 'Claim', done: 'Done' },
     fr: { r: '+' + USD + ' $ de cash', h: (n) => '🎁 Tâche bonus : +' + USD + ' $ (' + n + '/' + MAX + ' aujourd\'hui)', ok: '🎁 +' + USD + ' $ ajoutés !', go: 'Go', claim: 'Récupérer', done: 'Fait' },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] || TX.en; };
