@@ -450,7 +450,7 @@ new MutationObserver(() => { document.querySelectorAll('#crsh:not([data-done])')
   try { window.api = w; } catch (e) {}
 })();
 // 19 oct 2026 (Jeremy): welcome pack, 1 Star once per player: $5,000 of cash + mining boost x2 for 24 h. A small card above the
-// earnings bar on the market. Closed with the cross = hidden until the next day (Jeremy, 19 oct 2026). The invoice comes from mct-fr 'welcome' (TONLAST.welcome = still possible).
+// earnings bar on the market. Closed with the cross = never shown again on this phone (Jeremy, 19 oct 2026). The invoice comes from mct-fr 'welcome' (TONLAST.welcome = still possible).
 (() => {
   const TX = ({
     fr: { t: 'Pack de bienvenue', s: '+5 000 $ et boost de minage x2 pendant 24 h', b: '1 ⭐', ok: '🎁 Pack activé : +5 000 $ et boost 24 h !', err: 'Achat impossible pour le moment.' },
@@ -459,7 +459,7 @@ new MutationObserver(() => { document.querySelectorAll('#crsh:not([data-done])')
   });
   const tx = () => TX[LANG] || { t: 'Welcome pack', s: '+$5,000 and mining boost x2 for 24 h', b: '1 ⭐', ok: '🎁 Pack activated: +$5,000 and 24 h boost!', err: 'Purchase not available right now.' };
   const day = () => new Date().toISOString().slice(0, 10);
-  let hid = false; try { hid = localStorage.getItem('mct_wel_x') === day(); } catch (e) {}
+  let hid = false; try { hid = !!localStorage.getItem('mct_wel_x'); } catch (e) {}
   let el = null, busy = false;
   const st = document.createElement('style');
   st.textContent = '#welc{position:fixed;left:0;right:0;bottom:calc(var(--tab,68px) + 64px + env(safe-area-inset-bottom));z-index:9;max-width:520px;margin:0 auto;padding:0 10px;box-sizing:border-box}'
