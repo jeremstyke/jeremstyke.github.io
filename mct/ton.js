@@ -257,6 +257,8 @@ let USDTB = null;
 const usdtGain = () => TONLAST && TONLAST.ok ? (({ fr: 'Mes gains : ', id: 'Penghasilanku: ', ar: 'أرباحي: ' })[LANG] || 'My earnings: ') + tonM(Number(TONLAST.balance || 0) + Number(TONLAST.paid || 0) + Number(TONLAST.waiting || 0)) : tonL().bh.replace(/^💵 /, '');
 function usdtWays() {
   const u = tonM((TONLAST && TONLAST.usd) || 0.05);
+  // 19 oct 2026 (Jeremy): a player caught cheating sees, in the scrolling bar, that he is excluded from payments
+  if (TONLAST && TONLAST.banned) return ({ fr: '🚫 Tu es exclu des paiements : notre anti-triche a détecté un bot ou un autoclicker. Tu ne recevras plus aucun paiement de notre part (amis, diamant, concours).', ar: '🚫 أنت مستبعد من المدفوعات: اكتشف نظام مكافحة الغش لدينا روبوتًا أو نقرًا آليًا. لن تتلقى أي دفعات منا بعد الآن (الأصدقاء، الماسة، المسابقات).', id: '🚫 Kamu dikeluarkan dari pembayaran: sistem anti-curang kami mendeteksi bot atau autoclicker. Kamu tidak akan menerima pembayaran lagi dari kami (teman, berlian, kontes).' })[LANG] || '🚫 You are excluded from payments: our anti-cheat detected a bot or an autoclicker. You will not receive any more payments from us (friends, diamond, contests).';
   return ({
     fr: '👥 Parrainage : ' + u + ' par ami qui joue 3 jours (+ 500 $ chacun dans le jeu) · 💎 Tape le diamant : de l\'argent à chaque tape · 🏆 Concours des gains : 1 $, 0,50 $ et 0,25 $ · 🏆 Concours des parrains : 1 $, 0,50 $ et 0,25 $ · 🏆 Concours du diamant : 1 $, 0,50 $ et 0,25 $ (les 3 payés chaque lundi) · 📣 Abonné à @jeremstyke et à @memecointycoon : 0,01 $ chacun tout de suite, puis tous les 30 jours · 💸 Payé en TON chaque jour',
     id: '👥 Undang teman: ' + u + ' per teman yang bermain 3 hari (+ $500 di game) · 💎 Ketuk berlian: uang di setiap ketukan · 🏆 Kontes keuntungan: $1, $0.50, $0.25 · 🏆 Kontes pengundang: $1, $0.50, $0.25 · 🏆 Kontes berlian: $1, $0.50, $0.25 (dibayar tiap Senin) · 📣 Langganan @jeremstyke dan @memecointycoon: masing-masing $0.01 langsung, lalu tiap 30 hari · 💸 Dibayar dalam TON tiap hari',
@@ -284,6 +286,7 @@ async function usdtBar() {
       + '#usdtb .ubi{display:flex;align-items:center;gap:8px;height:54px;padding:0 8px 0 12px;border-radius:14px;border:1px solid rgba(125,255,107,.5);background:linear-gradient(135deg,rgba(24,40,30,.97),rgba(18,22,44,.97));box-shadow:0 -4px 14px rgba(0,0,0,.3);cursor:pointer;box-sizing:border-box}'
       + '#usdtb .ubt{flex:1;min-width:0;overflow:hidden}#usdtb b{display:block;font-size:14px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
       + '#usdtb .ubw{display:block;overflow:hidden;white-space:nowrap;font-size:12.5px;line-height:1.4;opacity:.9}#usdtb .ubw span{display:inline-block;padding-left:100%;animation:ubscroll 70s linear infinite}'
+      + '#usdtb.ban .ubi{border-color:rgba(255,59,92,.65);background:linear-gradient(135deg,rgba(60,16,26,.97),rgba(18,22,44,.97))}#usdtb.ban .ubw{color:#ff8fa3;font-weight:700}#usdtb.ban .ubw span{animation-duration:30s}'
       + '@keyframes ubscroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}'
       + '#diatop{display:none!important}' // 17 oct 2026: the diamond is opened from the earnings bar now
       + '#usdtb .ubx{flex:none;width:36px;height:36px;border:0;border-radius:50%;font-size:18px;background:rgba(125,255,107,.18);cursor:pointer;padding:0}';
@@ -292,7 +295,7 @@ async function usdtBar() {
   const d = document.createElement('div'); d.id = 'usdtb';
   // 17 oct 2026 (Jeremy, 23h): the diamond moves from the top bar to this bar (the clans take its place at the top)
   d.innerHTML = '<div class="ubi"><span style="font-size:22px">💵</span><div class="ubt"><b class="ubm"></b><span class="ubw"><span></span></span></div><button class="ubx ubd" type="button" aria-label="Diamond" style="background:rgba(46,230,255,.18);border:1px solid rgba(46,230,255,.5)">💎</button></div>';
-  d.querySelector('.ubm').textContent = usdtGain(); d.querySelector('.ubw span').textContent = usdtWays(); d.dataset.l = LANG;
+  d.querySelector('.ubm').textContent = usdtGain(); d.querySelector('.ubw span').textContent = usdtWays(); d.dataset.l = LANG; if (TONLAST && TONLAST.banned) d.classList.add('ban');
   d.querySelector('.ubi').onclick = (e) => {
     try { haptic(); } catch (x) {}
     if (e && e.target && e.target.closest && e.target.closest('.ubd')) { const g = document.getElementById('diatop'); if (g) g.click(); return; }
