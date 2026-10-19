@@ -555,5 +555,9 @@ new MutationObserver(() => { document.querySelectorAll('#crsh:not([data-done])')
     if (LL) Object.keys(LL).forEach((k) => { if (LL[k] && typeof LL[k] === 'object') LL[k].m_quizch = lab[k] || lab.en; });
     const GO = (0, eval)('typeof MSN_GO !== "undefined" ? MSN_GO : null');
     if (GO) GO.quizch = () => { try { tw.openTelegramLink('https://t.me/cryptoquizzdaily'); } catch (e) { location.href = 'https://t.me/cryptoquizzdaily'; } };
+    // 19 oct 2026 (Jeremy): replaced by the one-time mission "Join Jeremstyke" (+$500, server 'joinjs')
+    const lj = { en: '📣 Join Jeremstyke', fr: '📣 Rejoins Jeremstyke', id: '📣 Gabung Jeremstyke', ar: '📣 انضم إلى Jeremstyke', es: '📣 Únete a Jeremstyke' };
+    if (LL) Object.keys(LL).forEach((k) => { if (LL[k] && typeof LL[k] === 'object') LL[k].m_joinjs = lj[k] || lj.en; });
+    if (GO) GO.joinjs = () => { try { tw.openTelegramLink('https://t.me/jeremstyke'); } catch (e) { location.href = 'https://t.me/jeremstyke'; } };
   } catch (e) {}
 })();
