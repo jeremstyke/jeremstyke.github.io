@@ -427,3 +427,25 @@ new MutationObserver(() => { document.querySelectorAll('#crsh:not([data-done])')
   new MutationObserver(() => { if (!busy) { busy = true; requestAnimationFrame(fix); } }).observe(document.body, { childList: true, subtree: true, characterData: true });
   document.addEventListener('input', (e) => { if (e.target && e.target.id === 'sa') { busy = true; requestAnimationFrame(fix); } }, true);
 })();
+// 19 oct 2026 (Jeremy): the portfolio ("Net worth", each coin, gains / losses) counted the coins at the current price. Now each coin is
+// counted at what selling it now would really bring, computed by the server exactly like a sale (mct-fr 'liq' = mct_liq): one request more
+// when the portfolio opens, sent at the same time as the others.
+(() => {
+  if (typeof api !== 'function' || api.__liq) return;
+  const orig = api;
+  const liq = async () => (await fetch('https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-fr', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ initData: (tw && tw.initData) || '', action: 'liq' }) })).json();
+  const w = async function (action, extra) {
+    if (action !== 'portfolio') return orig(action, extra);
+    const [r, l] = await Promise.all([orig(action, extra), liq().catch(() => null)]);
+    try {
+      const v = l && l.ok && l.v;
+      if (r && v && typeof v === 'object' && Array.isArray(r.holdings)) {
+        r.holdings.forEach((h) => { if (v[h.id] != null && isFinite(Number(v[h.id]))) h.value = Number(v[h.id]); });
+        r.holdings.sort((a, b) => b.value - a.value);
+      }
+    } catch (e) {}
+    return r;
+  };
+  w.__liq = 1;
+  try { window.api = w; } catch (e) {}
+})();
