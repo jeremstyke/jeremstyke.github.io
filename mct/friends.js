@@ -146,6 +146,8 @@
     if (!h || document.getElementById('pfadd') || !PID || PID === me()) return;
     const pid = PID, T = L(), x = document.createElement('button');
     x.id = 'pfadd'; x.className = 'btn'; x.style.cssText = 'width:100%;margin:10px 0 12px'; x.disabled = true; x.textContent = '⏳';
+    // 20 oct 2026 (Jeremy): challenge this player in MCT Duel (second mini app of the bot, start_param vs_<id>)
+    { let lg = 'en'; try { lg = (0, eval)('typeof LANG !== "undefined" ? LANG : "en"'); } catch (e) {} const dl = { en: '⚔️ Challenge to a duel', fr: '⚔️ Défier en duel', es: '⚔️ Retar a un duelo', id: '⚔️ Tantang duel', ru: '⚔️ Вызвать на дуэль', ar: '⚔️ تحدَّ في مبارزة', fa: '⚔️ دعوت به دوئل' }; const y = document.createElement('button'); y.id = 'pfduel'; y.className = 'btn ghost'; y.style.cssText = 'width:100%;margin:0 0 12px'; y.textContent = dl[lg] || dl.en; y.onclick = () => { hp('medium'); const u = 'https://t.me/Memecointycoonbot/Mctduel?startapp=vs_' + pid; try { tw.openTelegramLink(u); } catch (e) { location.href = u; } }; h.after(y); }
     h.after(x);
     const isF = (await friendIds()).has(pid), sent = ((D && D.requests && D.requests.out) || []).map(Number).includes(pid);
     if (PID !== pid) return;
