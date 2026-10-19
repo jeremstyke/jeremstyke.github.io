@@ -449,3 +449,55 @@ new MutationObserver(() => { document.querySelectorAll('#crsh:not([data-done])')
   w.__liq = 1;
   try { window.api = w; } catch (e) {}
 })();
+// 19 oct 2026 (Jeremy): welcome pack, 1 Star once per player: $5,000 of cash + mining boost x2 for 24 h. A small card above the
+// earnings bar on the market (closable for the day). The invoice comes from mct-fr 'welcome' (TONLAST.welcome = still possible).
+(() => {
+  const TX = ({
+    fr: { t: 'Pack de bienvenue', s: '+5 000 $ et boost de minage x2 pendant 24 h', b: '1 ⭐', ok: '🎁 Pack activé : +5 000 $ et boost 24 h !', err: 'Achat impossible pour le moment.' },
+    id: { t: 'Paket sambutan', s: '+$5.000 dan boost tambang x2 selama 24 jam', b: '1 ⭐', ok: '🎁 Paket aktif: +$5.000 dan boost 24 jam!', err: 'Pembelian tidak tersedia saat ini.' },
+    ar: { t: 'باقة الترحيب', s: '+5,000 $ وتعزيز التعدين x2 لمدة 24 ساعة', b: '1 ⭐', ok: '🎁 تم تفعيل الباقة: +5,000 $ وتعزيز 24 ساعة!', err: 'الشراء غير متاح حاليًا.' },
+  });
+  const tx = () => TX[LANG] || { t: 'Welcome pack', s: '+$5,000 and mining boost x2 for 24 h', b: '1 ⭐', ok: '🎁 Pack activated: +$5,000 and 24 h boost!', err: 'Purchase not available right now.' };
+  const day = () => new Date().toISOString().slice(0, 10);
+  let hid = false; try { hid = localStorage.getItem('mct_wel_x') === day(); } catch (e) {}
+  let el = null, busy = false;
+  const st = document.createElement('style');
+  st.textContent = '#welc{position:fixed;left:0;right:0;bottom:calc(var(--tab,68px) + 64px + env(safe-area-inset-bottom));z-index:9;max-width:520px;margin:0 auto;padding:0 10px;box-sizing:border-box}'
+    + '#welc .wi{display:flex;align-items:center;gap:10px;padding:9px 10px 9px 12px;border-radius:14px;border:1px solid rgba(255,212,59,.6);background:linear-gradient(135deg,rgba(60,40,10,.97),rgba(30,18,50,.97));box-shadow:0 -4px 14px rgba(0,0,0,.3)}'
+    + '#welc .wt{flex:1;min-width:0;line-height:1.3}#welc b{display:block;font-size:14px}#welc small{display:block;font-size:12px;opacity:.85}'
+    + '#welc .wb{flex:none;border:0;border-radius:999px;padding:8px 14px;font-weight:800;font-size:14px;background:linear-gradient(90deg,#ffd43b,#ff9a3c);color:#2a1700;cursor:pointer}'
+    + '#welc .wx{flex:none;border:0;background:transparent;color:inherit;opacity:.6;font-size:16px;padding:4px;cursor:pointer}'
+    // the page and the bell move up so the card hides nothing
+    + 'body.wel{padding-bottom:calc(var(--tab,68px) + 150px + env(safe-area-inset-bottom))!important}body.wel #nbell{bottom:calc(var(--tab,68px) + 136px + env(safe-area-inset-bottom))}';
+  document.head.appendChild(st);
+  const show = () => {
+    let want = false;
+    try { want = !hid && TONLAST && TONLAST.ok && TONLAST.welcome && typeof VIEW !== 'undefined' && VIEW === 'market' && !document.getElementById('nbl'); } catch (e) {}
+    document.body.classList.toggle('wel', !!want);
+    if (!want) { if (el) { el.remove(); el = null; } return; }
+    if (el && document.body.contains(el)) return;
+    const T = tx();
+    el = document.createElement('div'); el.id = 'welc';
+    el.innerHTML = '<div class="wi"><span style="font-size:24px">🎁</span><div class="wt"><b></b><small></small></div><button class="wb" type="button"></button><button class="wx" type="button" aria-label="close">✕</button></div>';
+    el.querySelector('b').textContent = T.t; el.querySelector('small').textContent = T.s; el.querySelector('.wb').textContent = T.b;
+    el.querySelector('.wx').onclick = () => { hid = true; try { localStorage.setItem('mct_wel_x', day()); } catch (e) {} show(); };
+    el.querySelector('.wb').onclick = async () => {
+      if (busy) return; busy = true;
+      try { haptic(); } catch (e) {}
+      let r = null;
+      try { r = await (await fetch('https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-fr', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ initData: (tw && tw.initData) || '', action: 'welcome' }) })).json(); } catch (e) {}
+      busy = false;
+      if (!r || !r.ok || !r.link) { try { toast(tx().err); } catch (e) {} if (r && r.error === 'done' && TONLAST) { TONLAST.welcome = false; show(); } return; }
+      try {
+        tw.openInvoice(r.link, (s) => {
+          if (s !== 'paid') return;
+          if (TONLAST) TONLAST.welcome = false; show();
+          try { toast(tx().ok); } catch (e) {}
+          setTimeout(() => { try { if (typeof loadMe === 'function') loadMe(); } catch (e) {} }, 2500);
+        });
+      } catch (e) { try { tw.openTelegramLink(r.link); } catch (x) {} }
+    };
+    document.body.appendChild(el);
+  };
+  setInterval(show, 1500);
+})();
