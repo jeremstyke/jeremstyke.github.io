@@ -1,5 +1,40 @@
 // 19 oct 2026 (Jeremy): Persian (fa, right to left) and Russian (ru, also shown for uk, be, kk) for Meme Coin Tycoon.
 // Loaded before the main script, merged into L (Object.assign(L, window.MCT_I18N)). A missing key falls back to English.
+// Once the page is parsed (the main script has run): merge into L, Persian right to left, the language button goes through the 6
+// languages, and a player whose Telegram is in Persian or Russian (or who chose it) gets it.
+(() => {
+  const want = () => {
+    let l = ''; try { l = localStorage.getItem('mct_lang') || ''; } catch (e) {}
+    if (!l) { try { l = ((window.Telegram && Telegram.WebApp.initDataUnsafe.user) || {}).language_code || ''; } catch (e) {} }
+    return /^fa/.test(l) ? 'fa' : /^(ru|uk|be|kk)/.test(l) ? 'ru' : '';
+  };
+  document.addEventListener('DOMContentLoaded', () => {
+    try {
+      const ev = (0, eval);
+      const LL = ev('typeof L !== "undefined" ? L : null'); if (!LL) return;
+      Object.keys(window.MCT_I18N || {}).forEach((k) => { LL[k] = Object.assign({}, LL.en || {}, window.MCT_I18N[k]); });
+      const base = ev('typeof applyLang === "function" ? applyLang : null'); if (!base) return;
+      window.__mctApply = function () {
+        base();
+        const lg = ev('LANG');
+        if (lg === 'fa' || lg === 'ru') {
+          document.documentElement.dir = lg === 'fa' ? 'rtl' : 'ltr';
+          const b = document.getElementById('lng'); if (b) b.textContent = lg === 'fa' ? '🌐 FA' : '🌐 RU';
+        }
+      };
+      ev('applyLang = window.__mctApply');
+      const btn = document.getElementById('lng');
+      if (btn) btn.onclick = () => {
+        const nx = ({ en: 'fr', fr: 'ar', ar: 'fa', fa: 'id', id: 'ru', ru: 'en' })[ev('LANG')] || 'en';
+        ev('LANG = ' + JSON.stringify(nx));
+        try { localStorage.setItem('mct_lang', nx); } catch (e) {}
+        ev('(() => { try { haptic(); } catch (e) {} applyLang(); try { api("lang", { lang: LANG }); } catch (e) {} try { if (COIN) drawCoin(false); } catch (e) {} go(VIEW); })()');
+      };
+      const w = want();
+      if (w && ev('LANG') !== w) { ev('LANG = ' + JSON.stringify(w)); ev('(() => { applyLang(); try { go(VIEW); } catch (e) {} })()'); }
+    } catch (e) {}
+  });
+})();
 window.MCT_I18N = {
   fa: {
     nav_market: 'بازار', nav_wallet: 'دارایی', nav_leaders: 'برترین‌ها', nav_mine: 'استخراج',
