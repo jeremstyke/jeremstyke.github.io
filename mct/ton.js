@@ -505,3 +505,43 @@ new MutationObserver(() => { document.querySelectorAll('#crsh:not([data-done])')
   };
   setInterval(show, 1500);
 })();
+// 19 oct 2026 (Jeremy): the crypto quiz channel. Its buttons A B C D open the game with startapp=qz_<id>_<n>: the answer is recorded by the
+// server (mct-fr 'quiz', read from the signed start_param) and the result shows here, with the points and the daily and weekly ranks.
+(() => {
+  let sp = ''; try { sp = String((tw && tw.initDataUnsafe && tw.initDataUnsafe.start_param) || ''); } catch (e) {}
+  if (!/^qz_\d+_\d$/.test(sp)) return;
+  try { if (sessionStorage.getItem('mct_qz') === sp) return; sessionStorage.setItem('mct_qz', sp); } catch (e) {}
+  const es = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  const st = document.createElement('style');
+  st.textContent = '#qzr{position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box}'
+    + '#qzr .qb{width:100%;max-width:420px;max-height:88vh;overflow:auto;background:#1d1238;border-radius:20px;padding:18px 16px;box-sizing:border-box;box-shadow:0 10px 30px rgba(0,0,0,.5)}'
+    + '#qzr .qh{font-size:22px;font-weight:800;margin:0 0 8px}#qzr .qq{font-weight:700;margin:0 0 10px;line-height:1.35}#qzr .qa{font-size:14px;line-height:1.45;margin:0 0 6px}'
+    + '#qzr .qe{font-size:13.5px;line-height:1.45;opacity:.85;margin:10px 0;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.06)}'
+    + '#qzr .qs{display:flex;gap:8px;margin:10px 0 14px}#qzr .qs div{flex:1;text-align:center;padding:8px 6px;border-radius:12px;background:rgba(255,212,59,.1);border:1px solid rgba(255,212,59,.35);font-size:12.5px}#qzr .qs b{display:block;font-size:16px}'
+    + '#qzr button{display:block;width:100%;border:0;border-radius:14px;padding:12px;font-weight:800;font-size:15px;cursor:pointer;margin-top:8px}#qzr .q1{background:linear-gradient(90deg,#ffd43b,#ff9a3c);color:#2a1700}#qzr .q2{background:rgba(255,255,255,.08);color:inherit}';
+  document.head.appendChild(st);
+  const d = document.createElement('div'); d.id = 'qzr';
+  d.innerHTML = '<div class="qb"><div class="qh">🧠 …</div></div>';
+  const put = () => { if (document.body) document.body.appendChild(d); else setTimeout(put, 100); };
+  put();
+  const close = () => d.remove();
+  d.onclick = (e) => { if (e.target === d) close(); };
+  fetch('https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-fr', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ initData: (tw && tw.initData) || '', action: 'quiz' }) })
+    .then((r) => r.json()).catch(() => null).then((r) => {
+      const b = d.querySelector('.qb');
+      if (!r || !r.ok) { b.innerHTML = '<div class="qh">🧠 Quiz</div><p class="qa">This quiz is not available any more.</p><button class="q2" type="button">OK</button>'; b.querySelector('button').onclick = close; return; }
+      try { tw.HapticFeedback.notificationOccurred(r.right ? 'success' : 'error'); } catch (e) {}
+      const rk = (x) => x && x.rank ? '#' + x.rank : '-', pt = (x) => x && x.pts != null ? x.pts + ' pts' : '0 pts';
+      const ch = String(r.chat || '').replace(/^@/, '');
+      b.innerHTML = '<div class="qh">' + (r.again ? '🧠 Already answered' : r.right ? '✅ Right! +' + r.pts + ' points' : '❌ Not quite') + '</div>'
+        + '<p class="qq">' + es(r.q) + '</p>'
+        + (r.right ? '' : '<p class="qa">Your answer: ' + es(r.mine) + '</p>')
+        + '<p class="qa">Right answer: <b>' + es(r.letter) + '. ' + es(r.answer) + '</b></p>'
+        + (r.expl ? '<div class="qe">💡 ' + es(r.expl) + '</div>' : '')
+        + '<div class="qs"><div>Today<b>' + pt(r.day) + '</b>' + rk(r.day) + '</div><div>This week<b>' + pt(r.week) + '</b>' + rk(r.week) + '</div></div>'
+        + (ch ? '<button class="q1" type="button" id="qzb">🧠 Next quiz on the channel</button>' : '')
+        + '<button class="q2" type="button" id="qzp">🎮 Play Meme Coin Tycoon</button>';
+      const nb = b.querySelector('#qzb'); if (nb) nb.onclick = () => { try { tw.openTelegramLink('https://t.me/' + ch); } catch (e) {} close(); };
+      b.querySelector('#qzp').onclick = close;
+    });
+})();
