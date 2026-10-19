@@ -47,6 +47,8 @@
     fr: { wait: (s) => 'Pas le bon. Attends ' + s + ' s avant de réessayer.', cap: 'Limite du jour atteinte (20 000 tapes). Reviens demain !', review: 'Ton diamant est en cours de vérification. Ton argent est en sécurité, patiente un peu.' },
     ar: { wait: (s) => 'ليست هي. انتظر ' + s + ' ث قبل المحاولة مجددًا.', cap: 'تم بلوغ الحد اليومي (20,000 ضغطة). عُد غدًا!', review: 'ماستك قيد المراجعة. أموالك في أمان، انتظر قليلًا.' }
   };
+  AX.id.ban = 'Kamu dikeluarkan dari pembayaran karena curang (bot atau autoclicker).'; AX.en.ban = 'You are excluded from payments for cheating (bot or autoclicker).';
+  AX.fr.ban = 'Tu es exclu des paiements pour triche (bot ou autoclicker).'; AX.ar.ban = 'أنت مستبعد من المدفوعات بسبب الغش (روبوت أو نقر آلي).';
   const AXL = () => AX[lg()] || AX.en;
   const hp = (k) => { try { haptic(k); } catch (e) {} };
   const tst = (m) => { try { toast(m); } catch (e) {} };
@@ -138,7 +140,7 @@
       || '<p class="dsm">' + ec(T.nobody) + '</p>';
     b.style.cssText = '';
     b.innerHTML = '<div class="dc dhero"><div class="dl">' + ec(T.mine) + '</div><div class="dbig"><span class="dgi">💎</span><span id="dusd"></span></div><div class="dbar"><i id="dbar"></i></div>'
-      + '<button id="dclaim" type="button"></button><div id="dsolde"></div><div class="dmeta"><span id="dtoday"></span><span>' + ec(T.rate(nf(S.tpc))) + '</span></div><div id="darea"></div><p class="dnote">' + ec(T.pay) + '</p></div>'
+      + (S && S.banned ? '<div style="margin:8px 0;padding:10px 12px;border-radius:12px;background:rgba(255,59,92,.14);border:1px solid rgba(255,59,92,.55);color:#ff8fa3;font-weight:700;font-size:13px">🚫 ' + ec(AXL().ban) + '</div>' : '') + '<button id="dclaim" type="button"></button><div id="dsolde"></div><div class="dmeta"><span id="dtoday"></span><span>' + ec(T.rate(nf(S.tpc))) + '</span></div><div id="darea"></div><p class="dnote">' + ec(T.pay) + '</p></div>'
       + (Number(S.sub_pct) > 0 ? '<div class="dc"><div class="dl">' + ec(T.bon) + '</div>' + sub('bm', S.sub_mct, 'https://t.me/memecointycoon') + sub('bj', S.sub_js, 'https://t.me/jeremstyke')
         + (S.sub_mct && S.sub_js ? '' : '<button class="btn ghost" id="drc" style="width:100%;margin:8px 0 0">' + ec(T.recheck) + '</button>') + '</div>' : '')
       + (c.on ? '<div class="dc"><div class="dl">' + ec(T.con) + '</div><div class="dsm">' + ec(T.ends) + ' <b id="dcd">' + cd(c.ends) + '</b> · ' + ec(T.prizes) + ' : ' + pz.map((p) => usd(p)).join(' / ') + '</div>' + rows
@@ -164,6 +166,7 @@
     await flush();
     let r = null; try { r = await claimCall(); } catch (e) {}
     CLAIMING = false;
+    if (r && r.error === 'banned') { tst('🚫 ' + AXL().ban); cb.disabled = false; nums(); return; }
     if (r && r.error === 'review') { tst(AXL().review); cb.disabled = false; nums(); return; }
     if (!r || !r.ok) { tst(T.err); cb.disabled = false; nums(); return; }
     if (r.state) S = r.state;
