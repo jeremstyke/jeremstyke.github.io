@@ -38,7 +38,13 @@
       sOpen: '👀 Voir', sPayT: 'Tu as utilisé ton scoop gratuit du jour. Débloque celui-ci pour 5 étoiles, ou reviens demain.', sPay: '⭐ Débloquer pour 5 étoiles', sGo: (t) => 'Voir $' + t, sLim: 'Tu as vu ton scoop du jour. Reviens demain !',
     },
   };
-  const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] || TX.en; };
+  // 19 oct 2026 (Jeremy): Premium players skip the videos (watch() returns at once), so they must not be told to watch one
+  const PX = {
+    fr: { iX: (l, b) => 'Tu as perdu ' + l + ' sur cette vente. 💎 Premium : récupère ' + b + ' (50 %) sans vidéo.', iAd: (b) => '🛟 Récupérer ' + b, bAd: '💎 Activer (Premium, sans vidéo)', sB: '👀 Voir' },
+    en: { iX: (l, b) => 'You lost ' + l + ' on this sale. 💎 Premium: get back ' + b + ' (50 %) with no video.', iAd: (b) => '🛟 Get back ' + b, bAd: '💎 Turn on (Premium, no video)', sB: '👀 See' },
+    id: { iX: (l, b) => 'Kamu rugi ' + l + ' dari penjualan ini. 💎 Premium: dapatkan kembali ' + b + ' (50 %) tanpa video.', iAd: (b) => '🛟 Dapatkan kembali ' + b, bAd: '💎 Aktifkan (Premium, tanpa video)', sB: '👀 Lihat' },
+  };
+  const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} const t = TX[l] || TX.en; return window.MCTPREM ? Object.assign({}, t, PX[l] || PX.en) : t; };
   const hp = (k) => { try { haptic(k); } catch (e) {} };
   const tst = (m) => { try { toast(m); } catch (e) {} };
   const mo = (n) => { try { return money(n); } catch (e) { return '$' + Number(n).toFixed(2); } };
