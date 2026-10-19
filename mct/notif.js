@@ -47,8 +47,8 @@
     if (busy || !Q.length) return;
     busy = true; const x = Q.shift();
     const d = document.createElement('div'); d.id = 'nbn'; d.setAttribute('role', 'status');
-    d.innerHTML = '<span class="ic">' + ec(icon(x.text)) + '</span><span class="tx"><span class="hd"><b>Meme Coin Tycoon</b><span>' + ec(ago(x.at)) + '</span></span><span class="bd">' + rich(strip(x.text)) + '</span></span>';
-    document.body.appendChild(d); buzz();
+    d.innerHTML = '<span class="ic">' + ec(icon(x.text)) + '</span><span class="tx"><span class="hd"><b>Meme Coin Tycoon</b><span>' + ec(ago(x.at)) + '</span></span><span class="bd">' + rich(strip(x.text)) + '</span>' + gbtn(x) + '</span>';
+    document.body.appendChild(d); buzz(); gwire(d);
     requestAnimationFrame(() => requestAnimationFrame(() => d.classList.add('on')));
     let done = false, y0 = null;
     const close = () => { if (done) return; done = true; d.classList.remove('on'); setTimeout(() => { d.remove(); busy = false; setTimeout(next, 400); }, 380); };
@@ -60,8 +60,17 @@
   }
   // 19 oct 2026 (Jeremy): a small floating bell keeps every notification: a red dot with the number of new ones,
   // a tap opens the list (the 40 latest), a tap on one opens what it is about. Hidden under a coin page (the sheet covers it).
-  const BX = { en: { h: '🔔 Notifications', none: 'No notifications yet.', close: 'Close' }, fr: { h: '🔔 Notifications', none: 'Aucune notification pour l\'instant.', close: 'Fermer' },
-    id: { h: '🔔 Notifikasi', none: 'Belum ada notifikasi.', close: 'Tutup' }, ar: { h: '🔔 الإشعارات', none: 'لا توجد إشعارات بعد.', close: 'إغلاق' } };
+  const BX = { en: { h: '🔔 Notifications', none: 'No notifications yet.', close: 'Close', gb: '🎁 Send $500 back', gok: '✅ Sent', gno: 'Already sent today' }, fr: { h: '🔔 Notifications', none: 'Aucune notification pour l\'instant.', close: 'Fermer', gb: '🎁 Renvoyer 500 $', gok: '✅ Envoyé', gno: 'Déjà envoyé aujourd\'hui' },
+    id: { h: '🔔 Notifikasi', none: 'Belum ada notifikasi.', close: 'Tutup', gb: '🎁 Kirim balik $500', gok: '✅ Terkirim', gno: 'Sudah dikirim hari ini' }, ar: { h: '🔔 الإشعارات', none: 'لا توجد إشعارات بعد.', close: 'إغلاق', gb: '🎁 أعد إرسال 500 $', gok: '✅ تم الإرسال', gno: 'أُرسلت اليوم' },
+    fa: { h: '🔔 اعلان‌ها', none: 'هنوز اعلانی نیست.', close: 'بستن', gb: '🎁 ۵۰۰ دلار پس بفرست', gok: '✅ ارسال شد', gno: 'امروز فرستاده شده' }, ru: { h: '🔔 Уведомления', none: 'Пока нет уведомлений.', close: 'Закрыть', gb: '🎁 Отправить $500 в ответ', gok: '✅ Отправлено', gno: 'Уже отправлено сегодня' } };
+  // 19 oct 2026 (Jeremy): a gift from a friend (startapp=friends_<id>) can be sent back in one tap, right from the notification
+  const gid = (x) => { const m = /startapp=friends_(\d+)/.exec(String((x && x.url) || '')); return m ? m[1] : null; };
+  const gbtn = (x) => gid(x) && window.mctGift ? '<button type="button" class="gb" data-g="' + gid(x) + '" style="display:block;margin-top:6px;border:0;border-radius:999px;padding:6px 12px;font:inherit;font-size:12.5px;font-weight:800;background:linear-gradient(90deg,#ffd43b,#ff9a3c);color:#2a1700;cursor:pointer">' + ec((BX[lg()] || BX.en).gb) + '</button>' : '';
+  const gwire = (root) => root.querySelectorAll('button.gb').forEach((b) => b.onclick = async (e) => {
+    e.stopPropagation(); if (b.disabled) return; b.disabled = true; try { tg().HapticFeedback.impactOccurred('medium'); } catch (x) {}
+    const r = await window.mctGift(b.dataset.g), T = BX[lg()] || BX.en;
+    b.textContent = r && r.ok ? T.gok : T.gno;
+  });
   const bst = document.createElement('style');
   bst.textContent = '#nbell{position:fixed;right:12px;bottom:calc(var(--tab,68px) + 72px + env(safe-area-inset-bottom));z-index:12;width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(255,212,59,.35);'
     + 'background:rgba(40,20,80,.18);box-shadow:none;display:grid;place-items:center;font-size:22px;cursor:pointer;padding:0;color:inherit;opacity:.45;transition:opacity .3s}'
@@ -90,11 +99,12 @@
       const T = BX[lg()] || BX.en, nw = seenB;
       const d = document.createElement('div'); d.id = 'nbl';
       d.innerHTML = '<div class="pn" role="dialog" aria-modal="true"><div class="ph"><b>' + ec(T.h) + '</b><button type="button">' + ec(T.close) + '</button></div>'
-        + (list.length ? list.map((x, i) => '<div class="it' + (x.id > nw ? ' nw' : '') + '" data-i="' + i + '"><span class="ic">' + ec(icon(x.text)) + '</span><span class="tx">' + rich(strip(x.text)) + '<small>' + ec(ago(x.at)) + '</small></span></div>').join('')
+        + (list.length ? list.map((x, i) => '<div class="it' + (x.id > nw ? ' nw' : '') + '" data-i="' + i + '"><span class="ic">' + ec(icon(x.text)) + '</span><span class="tx">' + rich(strip(x.text)) + '<small>' + ec(ago(x.at)) + '</small>' + gbtn(x) + '</span></div>').join('')
           : '<p style="opacity:.7;text-align:center;margin:24px 0">' + ec(T.none) + '</p>') + '</div>';
       const close = () => d.remove();
       d.onclick = (e) => { if (e.target === d) close(); };
       d.querySelector('.ph button').onclick = close;
+      gwire(d);
       d.querySelectorAll('[data-i]').forEach((it) => it.onclick = () => { const x = list[Number(it.dataset.i)]; close(); if (x) open(x.url); });
       document.body.appendChild(d);
       if (list.length) { seenB = Math.max(seenB, list[0].id); save(); draw(); call('mon_notifread'); }
