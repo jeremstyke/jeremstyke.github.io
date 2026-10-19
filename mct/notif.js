@@ -25,12 +25,16 @@
   document.head.appendChild(st);
 
   // what a notification opens inside the game: a coin, the clans, a screen, or just the game
+  // 19 oct 2026 (Jeremy): many links did nothing (?c=<coin>, startapp=friends, cl_<clan>, v_<screen>, other channels): all handled now
   function open(url) {
     const u = String(url || ''); let m;
     try {
-      if ((m = /startapp=c_(\d+)/.exec(u))) return openCoin(Number(m[1]));
-      if (/startapp=clan/.test(u) && window.mctClans) return window.mctClans();
-      if ((m = /[?&]v=([a-z]+)/.exec(u))) return go(m[1]);
+      if ((m = /(?:startapp=c_|[?&]c=)(\d+)/.exec(u))) return openCoin(Number(m[1]));
+      if (/startapp=(?:clan|cl_)/.test(u) && window.mctClans) return window.mctClans();
+      if ((m = /(?:[?&]v=|startapp=v_)([a-z]+)/.exec(u))) return go(m[1]);
+      if (/startapp=(?:friends|r_)/.test(u)) return go('earn');
+      if (/startapp=back/.test(u)) return go('market');
+      if (/^https:\/\/t\.me\//i.test(u) && !/memecointycoonbot/i.test(u)) { try { tg().openTelegramLink(u); } catch (e) { location.href = u; } return; }
     } catch (e) {}
   }
   // the first emoji of the text becomes the icon, like an app icon on a phone notification
