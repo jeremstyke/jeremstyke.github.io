@@ -118,6 +118,8 @@
     };
   }
   window.mctFriends = show;
+  // 19 oct 2026 (Jeremy): send a gift back in one tap from a notification (notif.js)
+  window.mctGift = (id) => call({ action: 'gift', id: String(id) }).catch(() => null);
 
   // 16 oct 2026 (Jeremy): "Add as friend" right on the profile of another player (leaderboard, contests, friends list)
   let PID = 0;
