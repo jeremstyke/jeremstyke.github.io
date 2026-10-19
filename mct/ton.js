@@ -553,13 +553,20 @@ new MutationObserver(() => { document.querySelectorAll('#crsh:not([data-done])')
 (() => {
   try {
     const LL = (0, eval)('typeof L !== "undefined" ? L : null');
-    const lab = { en: '🧠 Join Crypto Quiz Daily', fr: '🧠 Rejoins Crypto Quiz Daily', id: '🧠 Gabung Crypto Quiz Daily', ar: '🧠 انضم إلى Crypto Quiz Daily', es: '🧠 Únete a Crypto Quiz Daily' };
+    const lab = { en: '🧠 Join Crypto Quiz Daily', fr: '🧠 Rejoins Crypto Quiz Daily', id: '🧠 Gabung Crypto Quiz Daily', ar: '🧠 انضم إلى Crypto Quiz Daily', es: '🧠 Únete a Crypto Quiz Daily', fa: '🧠 به Crypto Quiz Daily بپیوند', ru: '🧠 Вступай в Crypto Quiz Daily' };
     if (LL) Object.keys(LL).forEach((k) => { if (LL[k] && typeof LL[k] === 'object') LL[k].m_quizch = lab[k] || lab.en; });
     const GO = (0, eval)('typeof MSN_GO !== "undefined" ? MSN_GO : null');
     if (GO) GO.quizch = () => { try { tw.openTelegramLink('https://t.me/cryptoquizzdaily'); } catch (e) { location.href = 'https://t.me/cryptoquizzdaily'; } };
     // 19 oct 2026 (Jeremy): replaced by the one-time mission "Join Jeremstyke" (+$500, server 'joinjs')
-    const lj = { en: '📣 Join Jeremstyke', fr: '📣 Rejoins Jeremstyke', id: '📣 Gabung Jeremstyke', ar: '📣 انضم إلى Jeremstyke', es: '📣 Únete a Jeremstyke' };
+    const lj = { en: '📣 Join Jeremstyke', fr: '📣 Rejoins Jeremstyke', id: '📣 Gabung Jeremstyke', ar: '📣 انضم إلى Jeremstyke', es: '📣 Únete a Jeremstyke', fa: '📣 به Jeremstyke بپیوند', ru: '📣 Подпишись на Jeremstyke' };
     if (LL) Object.keys(LL).forEach((k) => { if (LL[k] && typeof LL[k] === 'object') LL[k].m_joinjs = lj[k] || lj.en; });
     if (GO) GO.joinjs = () => { try { tw.openTelegramLink('https://t.me/jeremstyke'); } catch (e) { location.href = 'https://t.me/jeremstyke'; } };
+    // 19 oct 2026 (Jeremy): special mission of the day "Make your prediction on Daily Score" (server 'dsprono', checked in the base)
+    const ld = { en: '⚽ Make your prediction on Daily Score', fr: '⚽ Fais ton prono sur Daily Score', id: '⚽ Buat tebakanmu di Daily Score', ar: '⚽ قدّم توقعك على Daily Score', es: '⚽ Haz tu pronóstico en Daily Score', fa: '⚽ پیش‌بینی‌ات را در Daily Score ثبت کن', ru: '⚽ Сделай прогноз в Daily Score' };
+    if (LL) Object.keys(LL).forEach((k) => { if (LL[k] && typeof LL[k] === 'object') LL[k].m_dsprono = ld[k] || ld.en; });
+    if (GO) GO.dsprono = () => { const u = 'https://t.me/DailyScorefootbot/play?startapp=src_mctmsn'; try { tw.openTelegramLink(u); } catch (e) { location.href = u; } };
+    // 19 oct 2026 (Jeremy): 24 h without launching a coin after a rug pull (server error 'rugwait')
+    const lr = { en: '⚠️ You rugged a coin: you can launch a new one 24 h after.', fr: '⚠️ Tu as rug un coin : tu pourras en lancer un nouveau 24 h après.', id: '⚠️ Kamu melakukan rug pull: kamu bisa meluncurkan koin baru 24 jam setelahnya.', ar: '⚠️ قمت بسحب البساط من عملة: يمكنك إطلاق عملة جديدة بعد 24 ساعة.', fa: '⚠️ تو روی یک کوین راگ‌پول کردی: ۲۴ ساعت بعد می‌توانی کوین جدید بسازی.', ru: '⚠️ Ты сделал rug pull: новую монету можно запустить через 24 ч.' };
+    if (LL) Object.keys(LL).forEach((k) => { if (LL[k] && typeof LL[k] === 'object' && LL[k].err && typeof LL[k].err === 'object') LL[k].err.rugwait = lr[k] || lr.en; });
   } catch (e) {}
 })();
