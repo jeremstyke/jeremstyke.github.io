@@ -4,14 +4,14 @@
 // the page is reloaded after 30 s if the game never managed to load, and the server is checked again every 10 s. Loaded in <head>, before the game, so every call is watched.
 (() => {
   const TX = {
-    en: { h: 'So many players right now!', s: 'The game is very busy at the moment. Please wait a few seconds, it continues by itself.', b: '🔄 Try again', w: 'Your money and your coins are safe.' },
+    fa: { h: 'الان بازیکن‌ها خیلی زیادند!', s: 'بازی در این لحظه خیلی شلوغ است. لطفاً چند ثانیه صبر کن، خودش ادامه می‌دهد.', b: '🔄 دوباره امتحان کن', w: 'پول و کوین‌هایت امن هستند.' }, ru: { h: 'Сейчас очень много игроков!', s: 'Игра сейчас очень загружена. Подожди несколько секунд, она продолжится сама.', b: '🔄 Повторить', w: 'Твои деньги и монеты в безопасности.' }, en: { h: 'So many players right now!', s: 'The game is very busy at the moment. Please wait a few seconds, it continues by itself.', b: '🔄 Try again', w: 'Your money and your coins are safe.' },
     fr: { h: 'Trop de joueurs en même temps !', s: 'Le jeu est très demandé en ce moment. Patiente quelques secondes, ça repart tout seul.', b: '🔄 Réessayer', w: 'Ton argent et tes coins sont en sécurité.' },
     id: { h: 'Pemain sedang sangat banyak!', s: 'Game sedang sangat ramai. Tunggu beberapa detik, nanti lanjut sendiri.', b: '🔄 Coba lagi', w: 'Uang dan koinmu aman.' },
     ar: { h: 'عدد كبير جدًا من اللاعبين الآن!', s: 'اللعبة مزدحمة جدًا حاليًا. انتظر بضع ثوانٍ، وستستمر تلقائيًا.', b: '🔄 أعد المحاولة', w: 'أموالك وعملاتك في أمان.' },
   };
   // 19 oct 2026 (Jeremy): when the problem is the player's own connection, the screen says so (and not "so many players")
   const TXN = {
-    en: { h: 'Your connection is slow', s: 'Your network is having trouble reaching the game. It continues by itself as soon as it gets better.', b: '🔄 Try again', w: 'Your money and your coins are safe.' },
+    fa: { h: 'اتصال تو کند است', s: 'شبکه‌ات در رسیدن به بازی مشکل دارد. به محض بهتر شدن، خودش ادامه می‌دهد.', b: '🔄 دوباره امتحان کن', w: 'پول و کوین‌هایت امن هستند.' }, ru: { h: 'Медленное соединение', s: 'Твоя сеть с трудом соединяется с игрой. Всё продолжится само, как только станет лучше.', b: '🔄 Повторить', w: 'Твои деньги и монеты в безопасности.' }, en: { h: 'Your connection is slow', s: 'Your network is having trouble reaching the game. It continues by itself as soon as it gets better.', b: '🔄 Try again', w: 'Your money and your coins are safe.' },
     fr: { h: 'Ta connexion est lente', s: 'Ton réseau a du mal à joindre le jeu. Ça repart tout seul dès qu\'il va mieux.', b: '🔄 Réessayer', w: 'Ton argent et tes coins sont en sécurité.' },
     id: { h: 'Koneksimu lambat', s: 'Jaringanmu kesulitan menjangkau game. Akan lanjut sendiri saat membaik.', b: '🔄 Coba lagi', w: 'Uang dan koinmu aman.' },
     ar: { h: 'اتصالك بطيء', s: 'شبكتك تواجه صعوبة في الوصول إلى اللعبة. ستستمر تلقائيًا عندما يتحسن الاتصال.', b: '🔄 أعد المحاولة', w: 'أموالك وعملاتك في أمان.' },
@@ -21,7 +21,7 @@
     if (!l) { try { l = localStorage.getItem('mct_lang') || ''; } catch (e) {} }
     if (!l) { try { l = (window.Telegram.WebApp.initDataUnsafe.user || {}).language_code || ''; } catch (e) {} }
     l = String(l || navigator.language || 'en');
-    return /^fr/.test(l) ? 'fr' : /^ar/.test(l) ? 'ar' : /^(id|ms)/.test(l) ? 'id' : 'en';
+    return /^fr/.test(l) ? 'fr' : /^ar/.test(l) ? 'ar' : /^fa/.test(l) ? 'fa' : /^(ru|uk|be|kk)/.test(l) ? 'ru' : /^(id|ms)/.test(l) ? 'id' : 'en';
   };
   const watched = (u) => { const s = String((u && u.url) || u || ''); return s.indexOf('/mct/api') >= 0 || s.indexOf('/functions/v1/mct-ton') >= 0; };
 
