@@ -490,11 +490,13 @@ new MutationObserver(() => { document.querySelectorAll('#crsh:not([data-done])')
       try { haptic(); } catch (e) {}
       let r = null;
       try { r = await (await fetch('https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-fr', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ initData: (tw && tw.initData) || '', action: 'welcome' }) })).json(); } catch (e) {}
-      busy = false;
-      if (!r || !r.ok || !r.link) { try { toast(tx().err); } catch (e) {} if (r && r.error === 'done' && TONLAST) { TONLAST.welcome = false; show(); } return; }
+      // 19 oct 2026: the button stays locked while the invoice is open (a double tap opened 2 invoices and a player paid twice)
+      const wb = el && el.querySelector('.wb'), unlock = () => { busy = false; if (wb) { wb.disabled = false; wb.style.opacity = ''; } };
+      if (wb) { wb.disabled = true; wb.style.opacity = '.5'; }
+      if (!r || !r.ok || !r.link) { unlock(); try { toast(tx().err); } catch (e) {} if (r && r.error === 'done' && TONLAST) { TONLAST.welcome = false; show(); } return; }
       try {
         tw.openInvoice(r.link, (s) => {
-          if (s !== 'paid') return;
+          if (s !== 'paid' && s !== 'pending') { unlock(); return; }
           if (TONLAST) TONLAST.welcome = false; show();
           try { toast(tx().ok); } catch (e) {}
           setTimeout(() => { try { if (typeof loadMe === 'function') loadMe(); } catch (e) {} }, 2500);
