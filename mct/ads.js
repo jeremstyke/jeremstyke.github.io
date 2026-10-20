@@ -10,7 +10,7 @@
     id: {
       bT: 'Boost x2 selama 1 jam', bX: 'Tambangmu menghasilkan dua kali lipat selama 1 jam.', bAd: '📺 Tonton video (gratis, 1 per hari)', bPay: '⭐ Bayar 5 stars', bOk: '⚡ Boost x2 aktif!',
       bLim: 'Boost gratismu hari ini sudah dipakai. Bayar dengan stars atau kembali besok.', bLim2: 'Hanya 1 boost gratis per hari, dan hari ini sudah dipakai. Untuk boost lagi sekarang: 5 stars. Boost gratismu kembali besok.', later: 'Nanti',
-      noad: 'Belum ada video saat ini, coba lagi sebentar.', err: 'Terjadi kesalahan, coba lagi.', no: 'Tidak, terima kasih', ok: 'OK',
+      noad: 'Tidak ada video, coba lagi nanti.', err: 'Terjadi kesalahan, coba lagi.', no: 'Tidak, terima kasih', ok: 'OK',
       iT: '🛟 Asuransi', iX: (l, b) => 'Kamu rugi ' + l + ' dari penjualan ini. Tonton video dan dapatkan kembali ' + b + ' (50 %).', iAd: (b) => '📺 Dapatkan kembali ' + b,
       iOk: (r) => '🛟 ' + r + ' ditambahkan ke uangmu!', iLim: 'Kamu sudah memakai 3 asuransi hari ini.', iLate: 'Terlambat: asuransi hanya berlaku 10 menit setelah penjualan.',
       sT: '📰 Bocoran', sX: 'Lihat berita berikutnya sebelum orang lain', sB: '📺 Tonton', sUp: (t) => '$' + t + ' akan dapat kabar baik sebentar lagi 🚀', sDn: (t) => '$' + t + ' akan dapat kabar buruk sebentar lagi 📉',
@@ -20,7 +20,7 @@
     fa: {
       bT: 'بوست x2 برای 1 ساعت', bX: 'استخراجت برای 1 ساعت دو برابر درآمد دارد.', bAd: '📺 یک ویدیو ببین (رایگان، روزی 1 بار)', bPay: '⭐ پرداخت 5 ستاره', bOk: '⚡ بوست x2 روشن شد!',
       bLim: 'بوست رایگان امروزت را استفاده کردی. با ستاره بپرداز یا فردا برگرد.', bLim2: 'فقط روزی 1 بوست رایگان، و امروز استفاده‌اش کردی. برای بوست دوباره همین حالا: 5 ستاره. بوست رایگانت فردا برمی‌گردد.', later: 'بعداً',
-      noad: 'الان ویدیویی در دسترس نیست، کمی بعد امتحان کن.', err: 'مشکلی پیش آمد، دوباره امتحان کن.', no: 'نه، ممنون', ok: 'باشه',
+      noad: 'ویدیویی در دسترس نیست، بعدا دوباره امتحان کن.', err: 'مشکلی پیش آمد، دوباره امتحان کن.', no: 'نه، ممنون', ok: 'باشه',
       iT: '🛟 بیمه', iX: (l, b) => 'در این فروش ' + l + ' ضرر کردی. یک ویدیو ببین و ' + b + ' (50 %) پس بگیر.', iAd: (b) => '📺 پس گرفتن ' + b,
       iOk: (r) => '🛟 ' + r + ' به پولت اضافه شد!', iLim: 'امروز 3 بیمه‌ات را استفاده کردی.', iLate: 'دیر شد: بیمه تا 10 دقیقه بعد از فروش معتبر است.',
       sT: '📰 خبر ویژه', sX: 'خبر بعدی را زودتر از همه ببین', sB: '📺 تماشا', sUp: (t) => '$' + t + ' به‌زودی خبر خوب می‌گیرد 🚀', sDn: (t) => '$' + t + ' به‌زودی خبر بد می‌گیرد 📉',
@@ -30,7 +30,7 @@
     ru: {
       bT: 'Буст x2 на 1 час', bX: 'Твой майнинг приносит вдвое больше 1 час.', bAd: '📺 Посмотреть видео (бесплатно, 1 раз в день)', bPay: '⭐ Оплатить 5 звёзд', bOk: '⚡ Буст x2 включён!',
       bLim: 'Бесплатный буст сегодня уже использован. Оплати звёздами или возвращайся завтра.', bLim2: 'Только 1 бесплатный буст в день, и сегодняшний уже использован. Чтобы бустануть сейчас: 5 звёзд. Бесплатный буст вернётся завтра.', later: 'Позже',
-      noad: 'Сейчас нет видео, попробуй чуть позже.', err: 'Что-то пошло не так, попробуй ещё раз.', no: 'Нет, спасибо', ok: 'OK',
+      noad: 'Нет доступного видео, попробуй позже.', err: 'Что-то пошло не так, попробуй ещё раз.', no: 'Нет, спасибо', ok: 'OK',
       iT: '🛟 Страховка', iX: (l, b) => 'Ты потерял ' + l + ' на этой продаже. Посмотри видео и верни ' + b + ' (50 %).', iAd: (b) => '📺 Вернуть ' + b,
       iOk: (r) => '🛟 ' + r + ' добавлено к деньгам!', iLim: 'Ты использовал 3 страховки сегодня.', iLate: 'Поздно: страховка действует 10 минут после продажи.',
       sT: '📰 Инсайд', sX: 'Узнай следующую новость раньше всех', sB: '📺 Смотреть', sUp: (t) => '$' + t + ' скоро получит хорошую новость 🚀', sDn: (t) => '$' + t + ' скоро получит плохую новость 📉',
@@ -40,7 +40,7 @@
     en: {
       bT: 'Boost x2 for 1 hour', bX: 'Your mining earns double for 1 hour.', bAd: '📺 Watch a video (free, 1 a day)', bPay: '⭐ Pay 5 stars', bOk: '⚡ Boost x2 on!',
       bLim: 'You used your free boost today. Pay with stars or come back tomorrow.', bLim2: 'Only 1 free boost a day, and you already used today\'s. To boost again now: 5 stars. Your free boost comes back tomorrow.', later: 'Later',
-      noad: 'No video available right now, try again in a moment.', err: 'Something went wrong, try again.', no: 'No thanks', ok: 'OK',
+      noad: 'No video available, try again later.', err: 'Something went wrong, try again.', no: 'No thanks', ok: 'OK',
       iT: '🛟 Insurance', iX: (l, b) => 'You lost ' + l + ' on this sale. Watch a video and get back ' + b + ' (50 %).', iAd: (b) => '📺 Get back ' + b,
       iOk: (r) => '🛟 ' + r + ' added to your cash!', iLim: 'You used your 3 insurances today.', iLate: 'Too late: the insurance lasts 10 minutes after the sale.',
       sT: '📰 Scoop', sX: 'See the next news before everyone', sB: '📺 Watch', sUp: (t) => '$' + t + ' will get good news soon 🚀', sDn: (t) => '$' + t + ' will get bad news soon 📉',
@@ -50,7 +50,7 @@
     fr: {
       bT: 'Boost x2 pendant 1 heure', bX: 'Ton minage rapporte le double pendant 1 heure.', bAd: '📺 Regarder une vidéo (gratuit, 1 par jour)', bPay: '⭐ Payer 5 étoiles', bOk: '⚡ Boost x2 activé !',
       bLim: 'Tu as utilisé ton boost gratuit du jour. Paie en étoiles ou reviens demain.', bLim2: 'Il n\'y a qu\'un boost gratuit par jour, et tu as déjà utilisé celui d\'aujourd\'hui. Pour rebooster maintenant : 5 étoiles. Ton boost gratuit revient demain.', later: 'Plus tard',
-      noad: 'Pas de vidéo disponible pour le moment, réessaie dans un instant.', err: 'Une erreur est survenue, réessaie.', no: 'Non merci', ok: 'OK',
+      noad: 'Pas de vidéo disponible, réessaie plus tard.', err: 'Une erreur est survenue, réessaie.', no: 'Non merci', ok: 'OK',
       iT: '🛟 Assurance', iX: (l, b) => 'Tu as perdu ' + l + ' sur cette vente. Regarde une vidéo et récupère ' + b + ' (50 %).', iAd: (b) => '📺 Récupérer ' + b,
       iOk: (r) => '🛟 ' + r + ' ajoutés à ton cash !', iLim: 'Tu as utilisé tes 3 assurances du jour.', iLate: 'Trop tard : l\'assurance dure 10 minutes après la vente.',
       sT: '📰 Scoop', sX: 'Découvre la prochaine news avant tout le monde', sB: '📺 Voir', sUp: (t) => '$' + t + ' va bientôt avoir une bonne news 🚀', sDn: (t) => '$' + t + ' va bientôt avoir une mauvaise news 📉',
