@@ -50,7 +50,7 @@
     + '#frm .ftop{display:flex;align-items:center;justify-content:space-between;margin:0 0 10px}#frm .ftop b{font-size:18px}#frm .fx{background:none;border:0;color:inherit;font-size:22px;opacity:.7;cursor:pointer;padding:4px 8px}'
     + '#frm .frow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06)}#frm .frow:last-child{border-bottom:0}#frm .frow.me{color:#ffd43b}'
     + '#frm .fn{flex:1;min-width:0;cursor:pointer}#frm .fn b{display:block;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#frm .fn small{opacity:.75;font-size:12px}'
-    + '#frm .fg{flex:none;border:0;border-radius:10px;padding:8px 10px;font-weight:800;font-size:13px;background:var(--gold,#ffd43b);color:#1a1200;cursor:pointer}#frm .fg[disabled]{background:rgba(255,255,255,.1);color:inherit;opacity:.7}'
+    + '#frm .fd{flex:none;border:0;border-radius:10px;width:38px;height:36px;font-size:17px;background:rgba(46,230,255,.16);border:1px solid rgba(46,230,255,.5);cursor:pointer;margin-right:6px}#frm .fg{flex:none;border:0;border-radius:10px;padding:8px 10px;font-weight:800;font-size:13px;background:var(--gold,#ffd43b);color:#1a1200;cursor:pointer}#frm .fg[disabled]{background:rgba(255,255,255,.1);color:inherit;opacity:.7}'
     + '#frm .fk{width:26px;text-align:center;font-weight:800;flex:none}#frm .fsm{font-size:13px;opacity:.8;margin:6px 0 10px}#frm .fc{border:1px solid var(--line,rgba(255,255,255,.12));border-radius:16px;padding:6px 14px;margin:0 0 12px;background:rgba(255,255,255,.03)}';
   document.head.appendChild(st);
 
@@ -95,6 +95,7 @@
     const others = list.filter((x) => !x.me);
     const rows = list.map((x, i) => '<div class="frow' + (x.me ? ' me' : '') + '"><span class="fk">' + (['🥇', '🥈', '🥉'][i] || (i + 1)) + '</span>' + av(x)
       + '<span class="fn" data-pid="' + x.pid + '"><b>' + ec(x.name) + (x.dev ? ' <small>👨‍💻 ' + ec(T.dev) + '</small>' : '') + (x.me ? ' (' + ec(T.you) + ')' : '') + '</b><small>' + big(x.worth) + (x.active && !x.me ? ' · 🟢 ' + ec(T.on) : '') + '</small></span>'
+      + (x.me ? '' : '<button class="fd" data-d="' + x.pid + '" aria-label="Duel">⚔️</button>') /* 20 oct 2026 (Jeremy): challenge a friend to a duel from the list */
       + (x.me ? '' : '<button class="fg" data-g="' + x.pid + '"' + (x.gifted ? ' disabled' : '') + '>' + ec(x.gifted ? T.sent : T.gift(gift)) + '</button>') + '</div>').join('');
     // 16 oct 2026: friend requests received, to accept or refuse
     const rin = (D.requests && D.requests.in) || [];
@@ -111,6 +112,7 @@
       if (!r || !r.ok) { tst(T.err); x.parentNode.querySelectorAll('button').forEach((y) => { y.disabled = false; }); return; }
       tst(yes ? T.added(r.name || '') : T.ref); show();
     });
+    b.querySelectorAll('[data-d]').forEach((x) => x.onclick = (e) => { e.stopPropagation(); hp(); const u = 'https://t.me/Memecointycoonbot/Mctduel?startapp=vs_' + x.dataset.d; try { tw.openTelegramLink(u); } catch (er) { window.open(u, '_blank'); } });
     b.querySelectorAll('[data-g]').forEach((x) => x.onclick = async () => {
       if (x.disabled) return; hp('medium'); x.disabled = true;
       let r = null; try { r = await call({ action: 'gift', id: x.dataset.g }); } catch (e) {}
