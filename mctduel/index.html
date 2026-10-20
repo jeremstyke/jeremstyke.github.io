@@ -63,7 +63,7 @@ input{font:inherit;color:inherit}
 .amt{flex:none;font-weight:800;font-size:15px}.amt.w{color:var(--up)}.amt.l{color:var(--dn)}
 .note{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:16px;background:var(--s2);font-size:13px;color:var(--mu2);width:100%;text-align:left}
 .empty{padding:22px;text-align:center;color:var(--mu);font-size:14px;border:1.5px dashed var(--ln);border-radius:var(--r)}
-nav.tb{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:8px 12px calc(10px + env(safe-area-inset-bottom));border-top:1px solid #221E3D;background:rgba(15,12,31,.96);backdrop-filter:blur(10px)}
+nav.tb{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:8px 12px calc(10px + env(safe-area-inset-bottom));border-top:1px solid #221E3D;background:rgba(15,12,31,.96);backdrop-filter:blur(10px)}
 nav.tb[hidden],#cf[hidden]{display:none}
 nav.tb button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0;color:var(--mu);font-size:12px;font-weight:600}
 nav.tb button.on{color:var(--cy);font-weight:800}
@@ -343,8 +343,10 @@ function nav(on) {
   n.hidden = false;
   n.innerHTML = '<button data-t="duel" class="' + (S.tab === 'duel' ? 'on' : '') + '">' + IC.sw.replace('width="20" height="20"', 'width="22" height="22"') + t('nav_duel') + '</button>' +
     '<button data-t="rank" class="' + (S.tab === 'rank' ? 'on' : '') + '">' + IC.rank + t('nav_rank') + '</button>' +
-    '<button data-t="prof" class="' + (S.tab === 'prof' ? 'on' : '') + '">' + IC.user + t('nav_prof') + '</button>';
-  n.querySelectorAll('button').forEach(function (b) { b.onclick = function () { hp(); SFX.tap(); go(b.dataset.t); }; });
+    '<button data-t="prof" class="' + (S.tab === 'prof' ? 'on' : '') + '">' + IC.user + t('nav_prof') + '</button>' +
+    // 20 oct 2026 (Jeremy): a 4th tab to go back to Meme Coin Tycoon at any time
+    '<button data-t="mct" style="color:#ffd43b"><span style="font-size:20px;line-height:22px">🚀</span>MCT</button>';
+  n.querySelectorAll('button').forEach(function (b) { b.onclick = function () { hp(); SFX.tap(); if (b.dataset.t === 'mct') return openTg(MCT); go(b.dataset.t); }; });
 }
 function back(on, fn) {
   try {
