@@ -645,7 +645,7 @@ function askWrite() {
       o.innerHTML = '<div class="card" style="width:100%;max-width:440px;display:flex;flex-direction:column;gap:12px;margin-bottom:env(safe-area-inset-bottom);animation:in .25s ease both"><b class="disp" style="font-size:22px">' + esc(t('wa_h')) + '</b><p style="margin:0;color:var(--mu2);line-height:1.45;font-size:14px">' + esc(t('wa_s')) + '</p><button class="btn p" id="wa1">' + esc(t('wa_b')) + '</button><button class="btn o" id="wa0">' + esc(t('later')) + '</button></div>';
       document.body.appendChild(o);
       o.querySelector('#wa0').onclick = function () { hp(); o.remove(); };
-      o.querySelector('#wa1').onclick = function () { hp(); o.remove(); tw.requestWriteAccess(function (ok) { if (ok) { hp('ok'); toast(t('wa_ok')); } }); };
+      o.querySelector('#wa1').onclick = function () { hp(); o.remove(); tw.requestWriteAccess(function (ok) { if (ok) { hp('ok'); toast(t('wa_ok')); api('hello'); } }); };
     }, 1800);
   } catch (e) {}
 }
@@ -842,7 +842,7 @@ async function start() {
   var r = await api('home');
   if (!r.ok) return fail(r);
   S.me = r.me; S.duels = r.duels || []; S.stakes = r.stakes; S.friends = r.friends || S.friends || [];
-  if (r.welcome) setTimeout(function () { hp('ok'); toast(t('welcome_new')); }, 600);
+  if (r.welcome) { setTimeout(function () { hp('ok'); toast(t('welcome_new')); }, 600); askWrite(); } // 20 oct 2026: a new player is asked right away, so the bot chat shows up in his Telegram list
   var m;
   if ((m = /^(duel|res)_(\d+)$/.exec(sp))) return viewDuel(Number(m[2]));
   if ((m = /^vs_(\d+)$/.exec(sp))) {
