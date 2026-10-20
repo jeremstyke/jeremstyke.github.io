@@ -219,8 +219,6 @@ nav.tb button.on{color:var(--cy);font-weight:800}
 .shov{position:fixed;inset:0;z-index:70;background:rgba(5,4,12,.72);display:flex;align-items:flex-end;justify-content:center;padding:16px}
 .shc{width:100%;max-width:440px;display:flex;flex-direction:column;gap:14px;max-height:85vh;overflow:auto;margin-bottom:env(safe-area-inset-bottom);animation:in .25s ease both}
 :root{--tab:66px}
-nav.tb[hidden] ~ #adbar{display:none}
-body.hasad .scr{padding-bottom:calc(160px + env(safe-area-inset-bottom))}
 #earnbar{position:fixed;left:0;right:0;bottom:calc(var(--tab) + env(safe-area-inset-bottom));z-index:19;max-width:480px;margin:0 auto;padding:0 10px 6px;box-sizing:border-box}
 body.hasad #earnbar{bottom:calc(var(--tab) + 58px + env(safe-area-inset-bottom))}
 nav.tb[hidden] ~ #earnbar{display:none}
@@ -907,8 +905,7 @@ start();
 })();
 </script>
 <script>
-// 20 oct 2026 (Jeremy): the same ad banner as Meme Coin Tycoon above the menu (same ads, same Stars plans, same account), it comes
-// from the game's own module; it talks to the game's function mct-ton with the same Telegram identity
+// 20 oct 2026 (Jeremy): talks to the game's function mct-ton with the same Telegram identity (no ad banner in Duel, Jeremy's choice)
 window.tonCall = async function (body) { var w = window.Telegram && Telegram.WebApp; var r = await fetch('https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-ton', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(Object.assign({ initData: (w && w.initData) || '' }, body)) }); return r.json(); };
 try { if (!('LANG' in window)) Object.defineProperty(window, 'LANG', { get: function () { return document.documentElement.lang || 'en'; }, configurable: true }); } catch (e) {} // the banner speaks the language of Duel
 window.haptic = function (k) { try { Telegram.WebApp.HapticFeedback.impactOccurred(k === 'err' ? 'heavy' : 'light'); } catch (e) {} };
@@ -941,6 +938,5 @@ window.haptic = function (k) { try { Telegram.WebApp.HapticFeedback.impactOccurr
   new MutationObserver(function () { if (S) draw(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
 })();
 </script>
-<script src="https://cdn.jsdelivr.net/gh/jeremstyke/jeremstyke.github.io@253f787287127442b4fbb7255a7daaf4803c1f3a/mct/banner.js"></script>
 </body>
 </html>
