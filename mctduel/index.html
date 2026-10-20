@@ -219,16 +219,9 @@ nav.tb button.on{color:var(--cy);font-weight:800}
 .shov{position:fixed;inset:0;z-index:70;background:rgba(5,4,12,.72);display:flex;align-items:flex-end;justify-content:center;padding:16px}
 .shc{width:100%;max-width:440px;display:flex;flex-direction:column;gap:14px;max-height:85vh;overflow:auto;margin-bottom:env(safe-area-inset-bottom);animation:in .25s ease both}
 :root{--tab:66px}
-#earnbar{position:fixed;left:0;right:0;bottom:calc(var(--tab) + env(safe-area-inset-bottom));z-index:19;max-width:480px;margin:0 auto;padding:0 10px 6px;box-sizing:border-box}
-body.hasad #earnbar{bottom:calc(var(--tab) + 58px + env(safe-area-inset-bottom))}
-nav.tb[hidden] ~ #earnbar{display:none}
-#earnbar .ebi{display:flex;align-items:center;gap:8px;height:52px;padding:0 8px 0 12px;border-radius:14px;border:1px solid rgba(125,255,107,.5);background:linear-gradient(135deg,rgba(24,40,30,.97),rgba(18,22,44,.97));box-shadow:0 -4px 14px rgba(0,0,0,.3);cursor:pointer}
-#earnbar .ebt{flex:1;min-width:0;overflow:hidden}#earnbar b{display:block;font-size:14px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#earnbar .ebw{display:block;overflow:hidden;white-space:nowrap;font-size:12.5px;line-height:1.4;opacity:.9}#earnbar .ebw span{display:inline-block;padding-left:100%;animation:ebs 60s linear infinite}
-@keyframes ebs{to{transform:translateX(-100%)}}
-#earnbar .ebd{flex:none;width:36px;height:36px;border-radius:50%;font-size:18px;background:rgba(46,230,255,.18);border:1px solid rgba(46,230,255,.5)}
-body.eb .scr{padding-bottom:calc(158px + env(safe-area-inset-bottom))}
-body.eb.hasad .scr{padding-bottom:calc(216px + env(safe-area-inset-bottom))}
+nav.tb[hidden] ~ #usdtb{display:none}
+body.ub .scr{padding-bottom:calc(158px + env(safe-area-inset-bottom))}
+#usdtb{z-index:19 !important}
 </style>
 </head>
 <body>
@@ -909,65 +902,21 @@ start();
 window.tonCall = async function (body) { var w = window.Telegram && Telegram.WebApp; var r = await fetch('https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-ton', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(Object.assign({ initData: (w && w.initData) || '' }, body)) }); return r.json(); };
 try { if (!('LANG' in window)) Object.defineProperty(window, 'LANG', { get: function () { return document.documentElement.lang || 'en'; }, configurable: true }); } catch (e) {} // the banner speaks the language of Duel
 window.haptic = function (k) { try { Telegram.WebApp.HapticFeedback.impactOccurred(k === 'err' ? 'heavy' : 'light'); } catch (e) {} };
-// 20 oct 2026 (Jeremy): the same earnings bar as Meme Coin Tycoon above the menu (same TON balance, same account: what you earn
-// in one shows in the other). A tap opens the TON page of the game, the 💎 opens the diamond in the game.
-(function () {
-  var W = { en: ['My earnings: ', '👥 {u} in TON per friend who really plays (+$500 each in the game) · 💎 Tap the diamond in Meme Coin Tycoon · 🏆 3 weekly contests: $1, $0.50, $0.25 · 📣 Subscribe to @jeremstyke and @memecointycoon: $0.01 each · 💸 Paid in TON every day'],
-    fr: ['Mes gains : ', '👥 {u} en TON par ami qui joue vraiment (+ 500 $ chacun dans le jeu) · 💎 Tape le diamant dans Meme Coin Tycoon · 🏆 3 concours chaque semaine : 1 $, 0,50 $, 0,25 $ · 📣 Abonne-toi à @jeremstyke et @memecointycoon : 0,01 $ chacun · 💸 Payé en TON chaque jour'],
-    es: ['Mis ganancias: ', '👥 {u} en TON por cada amigo que juegue de verdad (+500 $ cada uno en el juego) · 💎 Toca el diamante en Meme Coin Tycoon · 🏆 3 concursos semanales: 1 $, 0,50 $, 0,25 $ · 📣 Suscríbete a @jeremstyke y @memecointycoon: 0,01 $ cada uno · 💸 Pagado en TON cada día'],
-    id: ['Penghasilanku: ', '👥 {u} dalam TON per teman yang benar-benar main (+$500 di game) · 💎 Ketuk berlian di Meme Coin Tycoon · 🏆 3 kontes mingguan: $1, $0.50, $0.25 · 📣 Langganan @jeremstyke dan @memecointycoon: masing-masing $0.01 · 💸 Dibayar dalam TON tiap hari'],
-    ru: ['Мой заработок: ', '👥 {u} в TON за каждого друга, который реально играет (+$500 каждому в игре) · 💎 Тапай алмаз в Meme Coin Tycoon · 🏆 3 еженедельных конкурса: $1, $0.50, $0.25 · 📣 Подпишись на @jeremstyke и @memecointycoon: по $0.01 · 💸 Выплаты в TON каждый день'],
-    ar: ['أرباحي: ', '👥 {u} بعملة TON عن كل صديق يلعب فعلًا (+500 $ لكل منكما في اللعبة) · 💎 اضغط على الماسة في Meme Coin Tycoon · 🏆 3 مسابقات أسبوعية: 1 $ و0.50 $ و0.25 $ · 📣 اشترك في @jeremstyke و@memecointycoon: 0.01 $ لكل منهما · 💸 الدفع بعملة TON كل يوم'],
-    fa: ['درآمد من: ', '👥 {u} به TON برای هر دوستی که واقعا بازی کند (+۵۰۰ دلار برای هر کدام در بازی) · 💎 در Meme Coin Tycoon روی الماس بزن · 🏆 ۳ مسابقه هفتگی: ۱ دلار، ۰٫۵۰ و ۰٫۲۵ · 📣 عضو @jeremstyke و @memecointycoon شو: هر کدام ۰٫۰۱ دلار · 💸 پرداخت با TON هر روز'] };
-  var S = null;
-  function lg() { var l = document.documentElement.lang || 'en'; return W[l] ? l : 'en'; }
-  function m(n) { var x = Number(n || 0).toFixed(2), l = lg(); return l === 'fr' || l === 'es' ? x.replace('.', ',') + ' $' : '$' + x; }
-  function open(u) { try { Telegram.WebApp.HapticFeedback.impactOccurred('light'); } catch (e) {} try { Telegram.WebApp.openTelegramLink(u); } catch (e) { location.href = u; } }
-  function draw() {
-    if (!S || !S.ok || !S.on) return;
-    var b = document.getElementById('earnbar'), L = W[lg()];
-    if (!b) { b = document.createElement('div'); b.id = 'earnbar'; document.body.appendChild(b); document.body.classList.add('eb'); }
-    b.dataset.l = lg();
-    b.innerHTML = '<div class="ebi"><span style="font-size:22px">💵</span><div class="ebt"><b></b><span class="ebw"><span></span></span></div><button class="ebd" type="button" aria-label="Diamond">💎</button></div>';
-    b.querySelector('b').textContent = L[0] + m(Number(S.balance || 0) + Number(S.paid || 0) + Number(S.waiting || 0));
-    b.querySelector('.ebw span').textContent = L[1].replace('{u}', m(S.usd || 0.05));
-    b.onclick = function (e) { if (e.target.closest('.ebd')) return open('https://t.me/Memecointycoonbot?startapp=src_dia_duel'); sheet(); };
-  }
-  // 20 oct 2026 (Jeremy): a tap on the bar opens the earnings sheet right here (same numbers as the TON page of Meme Coin Tycoon)
-  var P = {
-    en: { h: '💵 My TON earnings', tot: 'Earned in total', bal: 'To be paid', paid: 'Already paid', ok: 'Valid friends', pend: 'Friends playing', min: 'Paid in TON every day from {m}', w1: '✅ TON wallet added', w0: '👛 Add your TON wallet in Meme Coin Tycoon to get paid', how: 'How to earn', s1: '📤 Share your link: you and your friend get $500 in the game', s2: '🎮 Your friend plays: 5 duels in MCT Duel, or 5 trades on 3 different days in Meme Coin Tycoon', s3: '💎 You earn {u} in TON', s4: '💎 Tap the diamond and win the 3 weekly contests ($1, $0.50, $0.25)', inv: '📤 Invite a friend', dia: '💎 Tap the diamond', full: 'Full TON page', x: 'Close', txt: 'Challenge me on MCT Duel! Same 5 charts, pump or dump, best score takes the pot.' },
-    fr: { h: '💵 Mes gains en TON', tot: 'Gagné au total', bal: 'À payer', paid: 'Déjà payé', ok: 'Amis validés', pend: 'Amis en cours', min: 'Payé en TON chaque jour dès {m}', w1: '✅ Portefeuille TON ajouté', w0: '👛 Ajoute ton portefeuille TON dans Meme Coin Tycoon pour être payé', how: 'Comment gagner', s1: '📤 Partage ton lien : ton ami et toi recevez 500 $ dans le jeu', s2: '🎮 Ton ami joue : 5 duels dans MCT Duel, ou 5 échanges sur 3 jours différents dans Meme Coin Tycoon', s3: '💎 Tu gagnes {u} en TON', s4: '💎 Tape le diamant et gagne les 3 concours de la semaine (1 $, 0,50 $, 0,25 $)', inv: '📤 Inviter un ami', dia: '💎 Taper le diamant', full: 'Page TON complète', x: 'Fermer', txt: 'Défie-moi sur MCT Duel ! Les mêmes 5 graphiques, pump ou dump, le meilleur score rafle le pot.' },
-    es: { h: '💵 Mis ganancias en TON', tot: 'Ganado en total', bal: 'Por pagar', paid: 'Ya pagado', ok: 'Amigos válidos', pend: 'Amigos jugando', min: 'Pagado en TON cada día desde {m}', w1: '✅ Billetera TON añadida', w0: '👛 Añade tu billetera TON en Meme Coin Tycoon para cobrar', how: 'Cómo ganar', s1: '📤 Comparte tu enlace: tú y tu amigo reciben 500 $ en el juego', s2: '🎮 Tu amigo juega: 5 duelos en MCT Duel, o 5 trades en 3 días distintos en Meme Coin Tycoon', s3: '💎 Ganas {u} en TON', s4: '💎 Toca el diamante y gana los 3 concursos semanales (1 $, 0,50 $, 0,25 $)', inv: '📤 Invitar a un amigo', dia: '💎 Tocar el diamante', full: 'Página TON completa', x: 'Cerrar', txt: '¡Rétame en MCT Duel! Los mismos 5 gráficos, pump o dump, la mejor puntuación se lleva el bote.' },
-    id: { h: '💵 Penghasilan TON-ku', tot: 'Total didapat', bal: 'Akan dibayar', paid: 'Sudah dibayar', ok: 'Teman valid', pend: 'Teman sedang main', min: 'Dibayar dalam TON tiap hari mulai {m}', w1: '✅ Dompet TON ditambahkan', w0: '👛 Tambahkan dompet TON-mu di Meme Coin Tycoon agar dibayar', how: 'Cara mendapatkan', s1: '📤 Bagikan tautanmu: kamu dan temanmu dapat $500 di game', s2: '🎮 Temanmu bermain: 5 duel di MCT Duel, atau 5 transaksi di 3 hari berbeda di Meme Coin Tycoon', s3: '💎 Kamu dapat {u} dalam TON', s4: '💎 Ketuk berlian dan menangkan 3 kontes mingguan ($1, $0.50, $0.25)', inv: '📤 Undang teman', dia: '💎 Ketuk berlian', full: 'Halaman TON lengkap', x: 'Tutup', txt: 'Tantang aku di MCT Duel! 5 grafik yang sama, pump atau dump, skor terbaik ambil semua.' },
-    ru: { h: '💵 Мой заработок в TON', tot: 'Заработано всего', bal: 'К выплате', paid: 'Уже выплачено', ok: 'Засчитанные друзья', pend: 'Друзья в процессе', min: 'Выплаты в TON каждый день от {m}', w1: '✅ TON-кошелёк добавлен', w0: '👛 Добавь TON-кошелёк в Meme Coin Tycoon, чтобы получать выплаты', how: 'Как заработать', s1: '📤 Поделись ссылкой: ты и друг получите по $500 в игре', s2: '🎮 Друг играет: 5 дуэлей в MCT Duel или 5 сделок в 3 разных дня в Meme Coin Tycoon', s3: '💎 Ты получаешь {u} в TON', s4: '💎 Тапай алмаз и выигрывай 3 еженедельных конкурса ($1, $0.50, $0.25)', inv: '📤 Пригласить друга', dia: '💎 Тапать алмаз', full: 'Полная страница TON', x: 'Закрыть', txt: 'Вызови меня в MCT Duel! Те же 5 графиков, pump или dump, лучший счёт забирает банк.' },
-    ar: { h: '💵 أرباحي بعملة TON', tot: 'المجموع المكتسب', bal: 'للدفع', paid: 'مدفوع سابقًا', ok: 'أصدقاء مؤكدون', pend: 'أصدقاء يلعبون', min: 'الدفع بعملة TON كل يوم ابتداءً من {m}', w1: '✅ تمت إضافة محفظة TON', w0: '👛 أضف محفظة TON في Meme Coin Tycoon لتحصل على الدفع', how: 'كيف تربح', s1: '📤 شارك رابطك: تحصل أنت وصديقك على 500 $ في اللعبة', s2: '🎮 يلعب صديقك: 5 مبارزات في MCT Duel، أو 5 صفقات في 3 أيام مختلفة في Meme Coin Tycoon', s3: '💎 تربح {u} بعملة TON', s4: '💎 اضغط على الماسة واربح المسابقات الأسبوعية الثلاث (1 $ و0.50 $ و0.25 $)', inv: '📤 ادعُ صديقًا', dia: '💎 اضغط على الماسة', full: 'صفحة TON الكاملة', x: 'إغلاق', txt: 'تحدَّني في MCT Duel! نفس الرسوم الخمسة، pump أو dump، الأفضل يأخذ الرهان.' },
-    fa: { h: '💵 درآمد TON من', tot: 'کل درآمد', bal: 'قابل پرداخت', paid: 'پرداخت شده', ok: 'دوستان تایید شده', pend: 'دوستان در حال بازی', min: 'پرداخت با TON هر روز از {m}', w1: '✅ کیف پول TON اضافه شد', w0: '👛 کیف پول TON خود را در Meme Coin Tycoon اضافه کن تا پرداخت بگیری', how: 'چطور درآمد داشته باشی', s1: '📤 لینکت را بفرست: تو و دوستت هر کدام ۵۰۰ دلار در بازی می گیرید', s2: '🎮 دوستت بازی می کند: ۵ دوئل در MCT Duel، یا ۵ معامله در ۳ روز مختلف در Meme Coin Tycoon', s3: '💎 تو {u} به TON می گیری', s4: '💎 روی الماس بزن و ۳ مسابقه هفتگی را ببر (۱ دلار، ۰٫۵۰، ۰٫۲۵)', inv: '📤 دعوت از دوست', dia: '💎 زدن روی الماس', full: 'صفحه کامل TON', x: 'بستن', txt: 'در MCT Duel با من دوئل کن! همان ۵ نمودار، pump یا dump، بهترین امتیاز همه را می برد.' }
-  };
-  function sheet() {
-    if (!S) return;
-    var T = P[lg()] || P.en, o = document.createElement('div'); o.className = 'shov';
-    var uid = 0; try { uid = Telegram.WebApp.initDataUnsafe.user.id; } catch (e) {}
-    var link = 'https://t.me/Memecointycoonbot/Mctduel?startapp=vs_' + uid;
-    var row = function (k, v, c) { return '<div class="sum"><span>' + k + '</span><b' + (c ? ' style="color:' + c + '"' : '') + '>' + v + '</b></div>'; };
-    var tot = Number(S.balance || 0) + Number(S.paid || 0) + Number(S.waiting || 0);
-    o.innerHTML = '<div class="card shc"><b class="disp" style="font-size:22px">' + T.h + '</b>' +
-      '<div class="disp" style="font-size:40px;color:#7dff6b;line-height:1">' + m(tot) + '</div><small style="color:var(--mu);margin-top:-8px">' + T.tot + '</small>' +
-      row(T.bal, m(S.balance)) + row(T.paid, m(Number(S.paid || 0) + Number(S.waiting || 0))) + row(T.ok, String(S.valid || 0), 'var(--up)') + row(T.pend, String((S.all && S.all.pending && S.all.pending.n) || S.pending || 0)) +
-      '<div style="font-size:13px;color:var(--mu2);line-height:1.45">' + T.min.replace('{m}', m(S.min || 0.1)) + '<br>' + (S.wallet ? T.w1 : T.w0) + '</div>' +
-      '<b style="font-size:15px">' + T.how + '</b>' +
-      '<div class="rules" style="gap:8px"><div><span>' + T.s1 + '</span></div><div><span>' + T.s2 + '</span></div><div><span>' + T.s3.replace('{u}', m(S.usd || 0.05)) + '</span></div><div><span>' + T.s4 + '</span></div></div>' +
-      '<button class="btn p" id="eInv">' + T.inv + '</button><button class="btn o" id="eDia">' + T.dia + '</button><button class="btn o" id="eFull">' + T.full + '</button><button class="btn o" id="eX">' + T.x + '</button></div>';
-    document.body.appendChild(o);
-    o.onclick = function (e) { if (e.target === o) o.remove(); };
-    o.querySelector('#eX').onclick = function () { o.remove(); };
-    o.querySelector('#eInv').onclick = function () { open('https://t.me/share/url?url=' + encodeURIComponent(link) + '&text=' + encodeURIComponent(T.txt)); };
-    o.querySelector('#eDia').onclick = function () { open('https://t.me/Memecointycoonbot?startapp=src_dia_duel'); };
-    o.querySelector('#eFull').onclick = function () { open('https://t.me/Memecointycoonbot?startapp=v_earn'); };
-  }
-  function load() { if (!window.Telegram || !Telegram.WebApp.initData) return; window.tonCall({}).then(function (r) { S = r; draw(); }).catch(function () {}); }
-  setTimeout(load, 1200); setInterval(load, 300000);
-  new MutationObserver(function () { if (S) draw(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
-})();
+// 20 oct 2026 (Jeremy, 3h20): the earnings bar and the earnings sheet are the very same as in Meme Coin Tycoon: the game's own module
+// (mct/ton.js) is loaded below, with the few things of the game it needs. Same TON balance, same account.
+window.tw = window.Telegram && Telegram.WebApp;
+window.VIEW = 'duel';
+window.go = function () {};
+window.openCoin = function () {};
+window.t = function (k) { return k; };
+window.esc = function (v) { return String(v == null ? '' : v).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+window.money = function (n) { return '$' + Math.round(Number(n || 0)).toLocaleString('en-US'); };
+window.toast = function (m) { var d = document.createElement('div'); d.textContent = m; d.style.cssText = 'position:fixed;left:50%;bottom:150px;transform:translateX(-50%);z-index:10000;background:#1D1838;color:#F4F1FF;border:1px solid #3A3462;padding:10px 16px;border-radius:12px;font:600 14px Inter,sans-serif;max-width:86%;text-align:center'; document.body.appendChild(d); setTimeout(function () { d.remove(); }, 2600); };
+// the invite button of the sheet shares the player's MCT Duel link (the friend who comes with it becomes his referral)
+window.invite = function () { var id = 0; try { id = tw.initDataUnsafe.user.id; } catch (e) {} var l = 'https://t.me/Memecointycoonbot/Mctduel?startapp=vs_' + id; var fr = /^fr/.test(document.documentElement.lang); try { tw.openTelegramLink('https://t.me/share/url?url=' + encodeURIComponent(l) + '&text=' + encodeURIComponent(fr ? 'Défie-moi sur MCT Duel ! On gagne 500 $ chacun pour commencer.' : 'Challenge me on MCT Duel! We both get $500 to start.')); } catch (e) {} };
+// the 💎 of the bar clicks #diatop (the diamond of the game): here it opens the diamond in Meme Coin Tycoon
+(function () { var b = document.createElement('button'); b.id = 'diatop'; b.type = 'button'; b.style.display = 'none'; b.onclick = function () { try { tw.openTelegramLink('https://t.me/Memecointycoonbot?startapp=src_dia_duel'); } catch (e) {} }; document.body.appendChild(b); })();
 </script>
+<script src="https://cdn.jsdelivr.net/gh/jeremstyke/jeremstyke.github.io@7e89c84efd199ec9ce0c3361dc9d02ff43930e1b/mct/ton.js"></script>
 </body>
 </html>
