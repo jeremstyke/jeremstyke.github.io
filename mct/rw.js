@@ -74,7 +74,7 @@
   const L = () => TX[lg()];
   const hp = (k) => { try { haptic(k); } catch (e) {} };
   // 20 oct 2026 (Jeremy): no video available = no reward (it pushes to Premium, and it is rare): the player is told so, once
-  const NV = { en: 'No video available right now. Come back later, or go Premium 💎 (no videos)', fr: 'Pas de vidéo disponible pour le moment. Reviens plus tard, ou passe Premium 💎 (sans vidéo)', es: 'No hay vídeo disponible ahora. Vuelve más tarde o hazte Premium 💎 (sin vídeos)', id: 'Belum ada video saat ini. Coba lagi nanti, atau jadi Premium 💎 (tanpa video)', ru: 'Сейчас нет доступного видео. Загляни позже или стань Premium 💎 (без видео)', ar: 'لا يوجد فيديو متاح الآن. عد لاحقًا أو اشترك في بريميوم 💎 (بدون فيديو)', fa: 'فعلا ویدیویی در دسترس نیست. بعدا برگرد، یا پریمیوم 💎 بگیر (بدون ویدیو)' };
+  const NV = { en: 'No video available, try again later.', fr: 'Pas de vidéo disponible, réessaie plus tard.', es: 'No hay vídeo disponible, inténtalo más tarde.', id: 'Tidak ada video, coba lagi nanti.', ru: 'Нет доступного видео, попробуй позже.', ar: 'لا يوجد فيديو متاح، حاول لاحقًا.', fa: 'ویدیویی در دسترس نیست، بعدا دوباره امتحان کن.' };
   let noneAt = 0;
   const tst = (m) => { if (Date.now() - noneAt < 3000) { noneAt = 0; m = NV[lg()] || NV.en; } try { toast(m); } catch (e) {} };
   const mo = (n) => { try { return money(n); } catch (e) { return '$' + Number(n).toFixed(2); } };
