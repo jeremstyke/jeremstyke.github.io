@@ -753,13 +753,24 @@ async function rank() {
 }
 
 /* ---------- profile ---------- */
-var BADGE = { trade: 'Trader', creator: 'Creator', x10: 'x10', week: 'Top week', sponsor: 'Sponsor', whale: 'Whale', rug: 'Rug', ton: 'TON' };
+// 20 oct 2026 (Jeremy): the badges of Meme Coin Tycoon with the same emoji and words as in the game, in every language
+var BADGE = {
+  id: { trade: '🎯 Transaksi pertama', creator: '🪙 Kreator', x10: '🚀 Koin x10', week: '🔥 7 hari bermain', sponsor: '👥 Pengundang', sponsor5: '🤝 Pengundang super', tapper: '💎 Pengetuk', winner: '🏆 Juara kontes', paid: '💸 Dibayar dalam TON', whale: '🐋 Paus', supporter: '💎 Premium', duel: '⚔️ {n} duel dimenangkan', crown: '👑 Mahkota', rug: '⚠️ Rug' },
+  fa: { trade: '🎯 اولین معامله', creator: '🪙 سازنده', x10: '🚀 کوین x10', week: '🔥 7 روز بازی', sponsor: '👥 دعوت کننده', sponsor5: '🤝 دعوت کننده برتر', tapper: '💎 ضربه زن', winner: '🏆 برنده مسابقه', paid: '💸 پرداخت با TON', whale: '🐋 نهنگ', supporter: '💎 پریمیوم', duel: '⚔️ {n} دوئل برده', crown: '👑 تاج', rug: '⚠️ راگ' },
+  ru: { trade: '🎯 Первая сделка', creator: '🪙 Создатель', x10: '🚀 Монета x10', week: '🔥 7 дней в игре', sponsor: '👥 Реферер', sponsor5: '🤝 Суперреферер', tapper: '💎 Тапер', winner: '🏆 Победитель конкурса', paid: '💸 Получал TON', whale: '🐋 Кит', supporter: '💎 Премиум', duel: '⚔️ Побед в дуэлях: {n}', crown: '👑 Корона', rug: '⚠️ Рагпулл' },
+  en: { trade: '🎯 First trade', creator: '🪙 Creator', x10: '🚀 Coin x10', week: '🔥 7 days played', sponsor: '👥 Sponsor', sponsor5: '🤝 Super sponsor', tapper: '💎 Tapper', winner: '🏆 Contest winner', paid: '💸 Paid in TON', whale: '🐋 Whale', supporter: '💎 Premium', duel: '⚔️ {n} duels won', crown: '👑 Crown', rug: '⚠️ Rug' },
+  fr: { trade: '🎯 Premier trade', creator: '🪙 Créateur', x10: '🚀 Coin x10', week: '🔥 7 jours de jeu', sponsor: '👥 Parrain', sponsor5: '🤝 Super parrain', tapper: '💎 Tapeur', winner: '🏆 Gagnant de concours', paid: '💸 Payé en TON', whale: '🐋 Baleine', supporter: '💎 Premium', duel: '⚔️ {n} duels gagnés', crown: '👑 Couronne', rug: '⚠️ Rug' },
+  ar: { trade: '🎯 أول صفقة', creator: '🪙 منشئ', x10: '🚀 عملة x10', week: '🔥 7 أيام لعب', sponsor: '👥 داعٍ', sponsor5: '🤝 داعٍ ممتاز', tapper: '💎 ضاغط', winner: '🏆 فائز بمسابقة', paid: '💸 دُفع له TON', whale: '🐋 حوت', supporter: '💎 بريميوم', duel: '⚔️ {n} مبارزة فائزة', crown: '👑 تاج', rug: '⚠️ سحب البساط' },
+  es: { trade: '🎯 Primer trade', creator: '🪙 Creador', x10: '🚀 Moneda x10', week: '🔥 7 días jugados', sponsor: '👥 Padrino', sponsor5: '🤝 Súper padrino', tapper: '💎 Tapper', winner: '🏆 Ganador de concurso', paid: '💸 Pagado en TON', whale: '🐋 Ballena', supporter: '💎 Premium', crown: '👑 Corona', duel: '⚔️ {n} duelos ganados', rug: '⚠️ Rug' }
+};
 async function profile() {
   S.tab = 'prof'; loading(); nav(true);
   var r = await api('profile');
   if (!r.ok) return fail(r);
   var m = r.mct || {}, du = r.duel || {}, wr = du.played ? Math.round(100 * du.wins / du.played) : 0;
-  var badges = (m.badges || []).map(function (b) { return '<span' + (b === 'rug' ? ' style="background:var(--dnb);color:#FF8A99"' : b === 'whale' ? ' style="background:var(--gob);color:var(--go)"' : '') + '>' + esc(BADGE[b] || b) + '</span>'; }).join('') + (du.wins > 0 ? '<span style="background:var(--cyb);color:var(--cy)">Duelist</span>' : '');
+  var bl = (m.badges || []).slice(); if (du.wins > 0 && bl.indexOf('duel') < 0) bl.push('duel');
+  var BL = BADGE[LANG] || BADGE.en;
+  var badges = bl.map(function (b) { var tx = (BL[b] || BADGE.en[b] || b).replace('{n}', du.wins || 1); return '<span' + (b === 'rug' ? ' style="background:var(--dnb);color:#FF8A99"' : b === 'whale' ? ' style="background:var(--gob);color:var(--go)"' : b === 'duel' ? ' style="background:var(--cyb);color:var(--cy)"' : '') + '>' + esc(tx) + '</span>'; }).join('');
   screen(
     '<section class="pf">' + av(m.name, m.photo) + '<div style="flex:1;min-width:0"><div class="disp" style="font-size:24px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(m.name || '') + '</div><div class="badges">' + badges + '</div></div></section>' +
     '<div class="note">' + IC.link + '<span>' + t('linked') + '</span></div>' +
