@@ -218,6 +218,9 @@ nav.tb button.on{color:var(--cy);font-weight:800}
 .mctc .go{flex:none;padding:10px 14px;border-radius:12px;background:#ffd43b;color:#2b0a57;font-weight:800;font-size:14px;box-shadow:0 3px 0 #f59f00}
 .shov{position:fixed;inset:0;z-index:70;background:rgba(5,4,12,.72);display:flex;align-items:flex-end;justify-content:center;padding:16px}
 .shc{width:100%;max-width:440px;display:flex;flex-direction:column;gap:14px;max-height:85vh;overflow:auto;margin-bottom:env(safe-area-inset-bottom);animation:in .25s ease both}
+:root{--tab:66px}
+nav.tb[hidden] ~ #adbar{display:none}
+body.hasad .scr{padding-bottom:calc(160px + env(safe-area-inset-bottom))}
 </style>
 </head>
 <body>
@@ -893,5 +896,13 @@ async function start() {
 start();
 })();
 </script>
+<script>
+// 20 oct 2026 (Jeremy): the same ad banner as Meme Coin Tycoon above the menu (same ads, same Stars plans, same account), it comes
+// from the game's own module; it talks to the game's function mct-ton with the same Telegram identity
+window.tonCall = async function (body) { var w = window.Telegram && Telegram.WebApp; var r = await fetch('https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-ton', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(Object.assign({ initData: (w && w.initData) || '' }, body)) }); return r.json(); };
+try { if (!('LANG' in window)) Object.defineProperty(window, 'LANG', { get: function () { return document.documentElement.lang || 'en'; }, configurable: true }); } catch (e) {} // the banner speaks the language of Duel
+window.haptic = function (k) { try { Telegram.WebApp.HapticFeedback.impactOccurred(k === 'err' ? 'heavy' : 'light'); } catch (e) {} };
+</script>
+<script src="https://cdn.jsdelivr.net/gh/jeremstyke/jeremstyke.github.io@253f787287127442b4fbb7255a7daaf4803c1f3a/mct/banner.js"></script>
 </body>
 </html>
