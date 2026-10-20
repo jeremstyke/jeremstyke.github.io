@@ -619,6 +619,10 @@ new MutationObserver(() => { document.querySelectorAll('#crsh:not([data-done])')
     const ld = { en: '⚽ Make your prediction on Daily Score', fr: '⚽ Fais ton prono sur Daily Score', id: '⚽ Buat tebakanmu di Daily Score', ar: '⚽ قدّم توقعك على Daily Score', es: '⚽ Haz tu pronóstico en Daily Score', fa: '⚽ پیش‌بینی‌ات را در Daily Score ثبت کن', ru: '⚽ Сделай прогноз в Daily Score' };
     if (LL) Object.keys(LL).forEach((k) => { if (LL[k] && typeof LL[k] === 'object') LL[k].m_dsprono = ld[k] || ld.en; });
     if (GO) GO.dsprono = () => { const u = 'https://t.me/DailyScorefootbot/play?startapp=src_mctmsn'; try { tw.openTelegramLink(u); } catch (e) { location.href = u; } };
+    // 20 oct 2026 (Jeremy): special mission of the day "Play a duel in MCT Duel" (server 'duel', checked in the base)
+    const lw = { en: '⚔️ Play a duel in MCT Duel', fr: '⚔️ Joue un duel sur MCT Duel', id: '⚔️ Main satu duel di MCT Duel', ar: '⚔️ العب مبارزة في MCT Duel', es: '⚔️ Juega un duelo en MCT Duel', fa: '⚔️ یک دوئل در MCT Duel بازی کن', ru: '⚔️ Сыграй дуэль в MCT Duel' };
+    if (LL) Object.keys(LL).forEach((k) => { if (LL[k] && typeof LL[k] === 'object') LL[k].m_duel = lw[k] || lw.en; });
+    if (GO) GO.duel = () => { const u = 'https://t.me/Memecointycoonbot/Mctduel?startapp=src_mctmsn'; try { tw.openTelegramLink(u); } catch (e) { location.href = u; } };
     // 19 oct 2026 (Jeremy): 24 h without launching a coin after a rug pull (server error 'rugwait')
     const lr = { en: '⚠️ You rugged a coin: you can launch a new one 24 h after.', fr: '⚠️ Tu as rug un coin : tu pourras en lancer un nouveau 24 h après.', id: '⚠️ Kamu melakukan rug pull: kamu bisa meluncurkan koin baru 24 jam setelahnya.', ar: '⚠️ قمت بسحب البساط من عملة: يمكنك إطلاق عملة جديدة بعد 24 ساعة.', fa: '⚠️ تو روی یک کوین راگ‌پول کردی: ۲۴ ساعت بعد می‌توانی کوین جدید بسازی.', ru: '⚠️ Ты сделал rug pull: новую монету можно запустить через 24 ч.' };
     if (LL) Object.keys(LL).forEach((k) => { if (LL[k] && typeof LL[k] === 'object' && LL[k].err && typeof LL[k].err === 'object') LL[k].err.rugwait = lr[k] || lr.en; });
