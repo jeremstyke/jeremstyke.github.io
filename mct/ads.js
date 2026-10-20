@@ -79,8 +79,21 @@
     // 20 oct 2026 (Jeremy): Ads Galaxy down (its site does not answer): give up after 6 s instead of waiting forever ("no video available, try again later")
     setTimeout(() => { if (!window.showAdsGalaxy) { ld = null; ko(new Error('timeout')); } }, 6000);
   }));
+  // 20 oct 2026 (Jeremy): Adsgram first (rewarded block 55185), Ads Galaxy as backup
+  let agl = null;
+  const agSdk = () => agl || (agl = new Promise((ok, ko) => {
+    if (window.Adsgram) return ok();
+    const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js';
+    s.onload = ok; s.onerror = () => { agl = null; ko(new Error('load')); }; document.head.appendChild(s);
+    setTimeout(() => { if (!window.Adsgram) { agl = null; ko(new Error('timeout')); } }, 6000);
+  }));
+  async function agWatch() {
+    try { await agSdk(); const r = await window.Adsgram.init({ blockId: '55185' }).show(); return r && r.done === false ? 'skip' : 'ok'; }
+    catch (e) { return e && e.done === false && e.error === false ? 'skip' : 'none'; }
+  }
   async function watch() {
     if (window.MCTPREM) return true; // 17 oct 2026: Premium players skip the videos (prem.js)
+    const a = await agWatch(); if (a === 'ok') return true; if (a === 'skip') return false;
     try { await sdk(); const r = await window.showAdsGalaxy({ miniappId: AGX }); return !!(r && r.reward_eligible); } catch (e) { return false; }
   }
 
