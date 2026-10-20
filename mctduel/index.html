@@ -222,6 +222,13 @@ nav.tb button.on{color:var(--cy);font-weight:800}
 nav.tb[hidden] ~ #usdtb{display:none}
 body.ub .scr{padding-bottom:calc(158px + env(safe-area-inset-bottom))}
 #usdtb{z-index:19 !important}
+.pls{display:flex;flex-direction:column;gap:6px;max-height:300px;overflow:auto;padding:2px}
+.plr{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:14px;background:var(--s1);border:1px solid var(--ln);text-align:start}
+.plr.off{opacity:.45}.plr:active{transform:scale(.98)}
+.plr .av{flex:none;width:34px;height:34px;border-radius:50%;overflow:hidden;background:var(--s2);display:flex;align-items:center;justify-content:center;font-weight:800}
+.plr .av img{width:100%;height:100%;object-fit:cover}
+.plr b{flex:1;min-width:0;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.plr small{flex:none;font-size:12px;color:var(--mu)}
 </style>
 </head>
 <body>
@@ -405,7 +412,7 @@ async function home(fresh) {
     if (!S.me) loading();
     var r = await api('home');
     if (!r.ok) return fail(r);
-    S.me = r.me; S.duels = r.duels || []; S.stakes = r.stakes; S.friends = r.friends || S.friends || [];
+    S.me = r.me; S.duels = r.duels || []; S.stakes = r.stakes; S.friends = r.friends || S.friends || []; S.active = r.active || S.active || [];
   }
   var act = S.duels.filter(function (d) { return ['a_play', 'wait_b', 'b_play'].indexOf(d.status) >= 0; }).length;
   var rows = S.duels.length ? S.duels.map(duelRow).join('') : '<div class="empty">' + t('no_duels') + '</div>';
@@ -458,6 +465,8 @@ async function viewDuel(id) {
 
 /* ---------- create a challenge ---------- */
 var C = { cur: 'cash', stake: 500, to: null, mode: 'any' };
+// 20 oct 2026: friends first, then the players seen lately (each player once)
+function plist() { var seen = {}, out = []; (S.friends || []).forEach(function (p) { if (!seen[p.id]) { seen[p.id] = 1; out.push(Object.assign({ fr: 1 }, p)); } }); (S.active || []).forEach(function (p) { if (!seen[p.id]) { seen[p.id] = 1; out.push(p); } }); return out; }
 async function create(target) {
   if (target) { C.to = target; C.mode = 'find'; } else if (target === undefined && C.mode !== 'find') { C.to = null; }
   var m = S.me || {}, st = S.stakes || { cash: [100, 500, 1000, 5000], mct: [5, 10, 25, 50] };
@@ -473,6 +482,8 @@ async function create(target) {
     // 20 oct 2026 (Jeremy): challenge from a profile or a rematch, the opponent is already chosen: no 'anyone' / search options
     (C.lock && C.to ? '' : '<div class="seg"><button data-m="any" class="' + (C.mode === 'any' ? 'on' : '') + '">' + t('opp_any') + '</button><button data-m="find" class="' + (C.mode === 'find' ? 'on' : '') + '">' + t('opp_find') + '</button></div>') +
     (C.mode === 'find' && !(C.lock && C.to) ? '<div class="find"><input id="q" placeholder="' + t('find_ph') + '" autocomplete="off" autocapitalize="off" spellcheck="false" value="' + esc(C.to ? (C.to.q || '') : '') + '"><button id="qf">' + t('find_b') + '</button></div>' : '') +
+    // 20 oct 2026 (Jeremy): the list of Meme Coin Tycoon players (friends first, then the players seen lately), tap one to pick him
+    (C.mode === 'find' && !(C.lock && C.to) ? '<div class="pls" id="pls">' + plist().map(function (p, i) { return '<button class="plr' + (p.no_ch ? ' off' : '') + '" data-pi="' + i + '" data-n="' + esc(String(p.name || '').toLowerCase()) + '"><span class="av">' + (p.photo ? '<img src="' + esc(p.photo) + '" alt="">' : esc(String(p.name || '?').charAt(0).toUpperCase())) + '</span><b>' + esc(p.name || '') + '</b><small>' + (p.fr ? '👥 ' : '') + (p.wins || 0) + ' ' + t('wins') + '</small></button>'; }).join('') + '</div>' : '') +
     '<p class="lbl">' + t('stake') + '</p>' +
     '<div class="seg"><button data-c="cash" class="' + (C.cur === 'cash' ? 'on' : '') + '">' + t('cur_cash') + ' · ' + short(m.cash) + '</button><button data-c="mct" class="' + (C.cur === 'mct' ? 'on' : '') + '"' + (m.mct_ok ? ' style="opacity:.5"' : '') + '>' + t('cur_mct') + ' · ' + short(m.mct) + '</button></div>' +
     '<div class="grid4">' + list.map(function (v) { return '<button class="st' + (v === C.stake ? ' on' : '') + '" data-s="' + v + '"' + (v > bal ? ' disabled' : '') + '>' + (C.cur === 'cash' ? '$' + short(v) : v) + '</button>'; }).join('') + '</div>' +
@@ -495,6 +506,8 @@ async function create(target) {
       if (r.p.no_ch) { hp('err'); toast(t('e_no_ch')); return; }
       hp('ok'); C.to = r.p; C.to.q = v; create(null); };
     qf.onclick = find; q.onkeydown = function (e) { if (e.key === 'Enter') find(); };
+    q.oninput = function () { var v = q.value.trim().toLowerCase().replace(/^@/, ''); document.querySelectorAll('#pls .plr').forEach(function (el) { el.style.display = !v || el.dataset.n.indexOf(v) >= 0 ? '' : 'none'; }); };
+    document.querySelectorAll('#pls .plr').forEach(function (el) { el.onclick = function () { var p = plist()[Number(el.dataset.pi)]; if (!p) return; if (p.no_ch) { hp('err'); toast(t('e_no_ch')); return; } hp('ok'); C.to = { id: p.id, name: p.name, photo: p.photo, wins: p.wins }; create(null); }; });
   }
   $('#go').onclick = async function () {
     if (BUSY) return; BUSY = true; var b = this; b.disabled = true; hp('medium');
@@ -748,7 +761,7 @@ function result(d, fresh) {
   var sw = $('#sw'); if (sw) sw.onclick = function () { hp(); share(APP + '?startapp=src_win', t('win_txt', { s: money(Math.abs(net), d.cur) })); };
   $('#hm').onclick = function () { hp(); home(); };
 }
-async function refreshMe() { var r = await api('home'); if (r.ok) { S.me = r.me; S.duels = r.duels || []; S.stakes = r.stakes; S.friends = r.friends || S.friends || []; } }
+async function refreshMe() { var r = await api('home'); if (r.ok) { S.me = r.me; S.duels = r.duels || []; S.stakes = r.stakes; S.friends = r.friends || S.friends || []; S.active = r.active || S.active || []; } }
 
 /* ---------- confetti ---------- */
 function confetti() {
@@ -886,7 +899,7 @@ async function start() {
   var sp = String((tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '');
   var r = await api('home');
   if (!r.ok) return fail(r);
-  S.me = r.me; S.duels = r.duels || []; S.stakes = r.stakes; S.friends = r.friends || S.friends || [];
+  S.me = r.me; S.duels = r.duels || []; S.stakes = r.stakes; S.friends = r.friends || S.friends || []; S.active = r.active || S.active || [];
   if (r.welcome) { setTimeout(function () { hp('ok'); toast(t('welcome_new')); }, 600); askWrite(); } // 20 oct 2026: a new player is asked right away, so the bot chat shows up in his Telegram list
   var m;
   if ((m = /^(duel|res)_(\d+)$/.exec(sp))) return viewDuel(Number(m[2]));
