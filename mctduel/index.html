@@ -220,6 +220,7 @@ nav.tb button.on{color:var(--cy);font-weight:800}
 .shc{width:100%;max-width:440px;display:flex;flex-direction:column;gap:14px;max-height:85vh;overflow:auto;margin-bottom:env(safe-area-inset-bottom);animation:in .25s ease both}
 :root{--tab:66px}
 nav.tb[hidden] ~ #usdtb{display:none}
+body.ub.fs{padding-bottom:env(safe-area-inset-bottom)!important}
 body.ub .scr{padding-bottom:calc(158px + env(safe-area-inset-bottom))}
 #usdtb{z-index:19 !important}
 .pls{display:flex;flex-direction:column;gap:6px;max-height:300px;overflow:auto;padding:2px}
@@ -393,6 +394,7 @@ document.addEventListener('click', function (e) { var f = e.target && e.target.c
 function screen(html, opt) {
   opt = opt || {};
   $('#app').innerHTML = '<div class="scr' + (opt.full ? ' full' : '') + '">' + html + '</div>';
+  document.body.classList.toggle('fs', !!opt.full); // 20 oct 2026 (Jeremy): no empty space for the earnings bar on full screens (the bar is hidden there)
   nav(!opt.full); back(!!opt.back, opt.back === true ? null : opt.back);
   window.scrollTo(0, 0);
 }
