@@ -93,8 +93,21 @@
     setTimeout(() => { if (!window.showAdsGalaxy) { ld = null; ko(new Error('timeout')); } }, 6000);
   }));
   // 'ok' = watched (or Premium), 'skip' = closed before the end, 'none' = no video to show (no reward since 20 oct 2026, Jeremy: it pushes to Premium)
+  // 20 oct 2026 (Jeremy): Adsgram first (rewarded block 55185), Ads Galaxy as backup. 'ok' | 'skip' | 'none'
+  let agl = null;
+  const agSdk = () => agl || (agl = new Promise((ok, ko) => {
+    if (window.Adsgram) return ok();
+    const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js';
+    s.onload = ok; s.onerror = () => { agl = null; ko(new Error('load')); }; document.head.appendChild(s);
+    setTimeout(() => { if (!window.Adsgram) { agl = null; ko(new Error('timeout')); } }, 6000);
+  }));
+  async function agWatch() {
+    try { await agSdk(); const r = await window.Adsgram.init({ blockId: '55185' }).show(); return r && r.done === false ? 'skip' : 'ok'; }
+    catch (e) { return e && e.done === false && e.error === false ? 'skip' : 'none'; }
+  }
   async function watch() {
     if (prem()) return 'ok';
+    const a = await agWatch(); if (a !== 'none') return a;
     try { await sdk(); const r = await window.showAdsGalaxy({ miniappId: AGX }); return r && r.reward_eligible ? 'ok' : 'skip'; } catch (e) { return 'none'; }
   }
   async function watchN(n, btn) {
