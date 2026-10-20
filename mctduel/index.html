@@ -916,6 +916,8 @@ window.toast = function (m) { var d = document.createElement('div'); d.textConte
 window.invite = function () { var id = 0; try { id = tw.initDataUnsafe.user.id; } catch (e) {} var l = 'https://t.me/Memecointycoonbot/Mctduel?startapp=vs_' + id; var fr = /^fr/.test(document.documentElement.lang); try { tw.openTelegramLink('https://t.me/share/url?url=' + encodeURIComponent(l) + '&text=' + encodeURIComponent(fr ? 'Défie-moi sur MCT Duel ! On gagne 500 $ chacun pour commencer.' : 'Challenge me on MCT Duel! We both get $500 to start.')); } catch (e) {} };
 // the 💎 of the bar clicks #diatop (the diamond of the game): here it opens the diamond in Meme Coin Tycoon
 (function () { var b = document.createElement('button'); b.id = 'diatop'; b.type = 'button'; b.style.display = 'none'; b.onclick = function () { try { tw.openTelegramLink('https://t.me/Memecointycoonbot?startapp=src_dia_duel'); } catch (e) {} }; document.body.appendChild(b); })();
+// 20 oct 2026 (Jeremy, 8h20): the bar sits right on top of the Duel menu, whatever the menu's real height on the phone (it was cut at the bottom)
+(function () { function fix() { var n = document.getElementById('nav'), u = document.getElementById('usdtb'); if (n && u && !n.hidden && n.offsetHeight) u.style.bottom = n.offsetHeight + 'px'; } setInterval(fix, 400); window.addEventListener('resize', fix); })();
 </script>
 <script src="https://cdn.jsdelivr.net/gh/jeremstyke/jeremstyke.github.io@7e89c84efd199ec9ce0c3361dc9d02ff43930e1b/mct/ton.js"></script>
 </body>
