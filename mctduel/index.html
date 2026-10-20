@@ -221,6 +221,16 @@ nav.tb button.on{color:var(--cy);font-weight:800}
 :root{--tab:66px}
 nav.tb[hidden] ~ #adbar{display:none}
 body.hasad .scr{padding-bottom:calc(160px + env(safe-area-inset-bottom))}
+#earnbar{position:fixed;left:0;right:0;bottom:calc(var(--tab) + env(safe-area-inset-bottom));z-index:19;max-width:480px;margin:0 auto;padding:0 10px 6px;box-sizing:border-box}
+body.hasad #earnbar{bottom:calc(var(--tab) + 58px + env(safe-area-inset-bottom))}
+nav.tb[hidden] ~ #earnbar{display:none}
+#earnbar .ebi{display:flex;align-items:center;gap:8px;height:52px;padding:0 8px 0 12px;border-radius:14px;border:1px solid rgba(125,255,107,.5);background:linear-gradient(135deg,rgba(24,40,30,.97),rgba(18,22,44,.97));box-shadow:0 -4px 14px rgba(0,0,0,.3);cursor:pointer}
+#earnbar .ebt{flex:1;min-width:0;overflow:hidden}#earnbar b{display:block;font-size:14px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#earnbar .ebw{display:block;overflow:hidden;white-space:nowrap;font-size:12.5px;line-height:1.4;opacity:.9}#earnbar .ebw span{display:inline-block;padding-left:100%;animation:ebs 60s linear infinite}
+@keyframes ebs{to{transform:translateX(-100%)}}
+#earnbar .ebd{flex:none;width:36px;height:36px;border-radius:50%;font-size:18px;background:rgba(46,230,255,.18);border:1px solid rgba(46,230,255,.5)}
+body.eb .scr{padding-bottom:calc(158px + env(safe-area-inset-bottom))}
+body.eb.hasad .scr{padding-bottom:calc(216px + env(safe-area-inset-bottom))}
 </style>
 </head>
 <body>
@@ -902,6 +912,34 @@ start();
 window.tonCall = async function (body) { var w = window.Telegram && Telegram.WebApp; var r = await fetch('https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-ton', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(Object.assign({ initData: (w && w.initData) || '' }, body)) }); return r.json(); };
 try { if (!('LANG' in window)) Object.defineProperty(window, 'LANG', { get: function () { return document.documentElement.lang || 'en'; }, configurable: true }); } catch (e) {} // the banner speaks the language of Duel
 window.haptic = function (k) { try { Telegram.WebApp.HapticFeedback.impactOccurred(k === 'err' ? 'heavy' : 'light'); } catch (e) {} };
+// 20 oct 2026 (Jeremy): the same earnings bar as Meme Coin Tycoon above the menu (same TON balance, same account: what you earn
+// in one shows in the other). A tap opens the TON page of the game, the 💎 opens the diamond in the game.
+(function () {
+  var W = { en: ['My earnings: ', '👥 {u} in TON per friend who really plays (+$500 each in the game) · 💎 Tap the diamond in Meme Coin Tycoon · 🏆 3 weekly contests: $1, $0.50, $0.25 · 📣 Subscribe to @jeremstyke and @memecointycoon: $0.01 each · 💸 Paid in TON every day'],
+    fr: ['Mes gains : ', '👥 {u} en TON par ami qui joue vraiment (+ 500 $ chacun dans le jeu) · 💎 Tape le diamant dans Meme Coin Tycoon · 🏆 3 concours chaque semaine : 1 $, 0,50 $, 0,25 $ · 📣 Abonne-toi à @jeremstyke et @memecointycoon : 0,01 $ chacun · 💸 Payé en TON chaque jour'],
+    es: ['Mis ganancias: ', '👥 {u} en TON por cada amigo que juegue de verdad (+500 $ cada uno en el juego) · 💎 Toca el diamante en Meme Coin Tycoon · 🏆 3 concursos semanales: 1 $, 0,50 $, 0,25 $ · 📣 Suscríbete a @jeremstyke y @memecointycoon: 0,01 $ cada uno · 💸 Pagado en TON cada día'],
+    id: ['Penghasilanku: ', '👥 {u} dalam TON per teman yang benar-benar main (+$500 di game) · 💎 Ketuk berlian di Meme Coin Tycoon · 🏆 3 kontes mingguan: $1, $0.50, $0.25 · 📣 Langganan @jeremstyke dan @memecointycoon: masing-masing $0.01 · 💸 Dibayar dalam TON tiap hari'],
+    ru: ['Мой заработок: ', '👥 {u} в TON за каждого друга, который реально играет (+$500 каждому в игре) · 💎 Тапай алмаз в Meme Coin Tycoon · 🏆 3 еженедельных конкурса: $1, $0.50, $0.25 · 📣 Подпишись на @jeremstyke и @memecointycoon: по $0.01 · 💸 Выплаты в TON каждый день'],
+    ar: ['أرباحي: ', '👥 {u} بعملة TON عن كل صديق يلعب فعلًا (+500 $ لكل منكما في اللعبة) · 💎 اضغط على الماسة في Meme Coin Tycoon · 🏆 3 مسابقات أسبوعية: 1 $ و0.50 $ و0.25 $ · 📣 اشترك في @jeremstyke و@memecointycoon: 0.01 $ لكل منهما · 💸 الدفع بعملة TON كل يوم'],
+    fa: ['درآمد من: ', '👥 {u} به TON برای هر دوستی که واقعا بازی کند (+۵۰۰ دلار برای هر کدام در بازی) · 💎 در Meme Coin Tycoon روی الماس بزن · 🏆 ۳ مسابقه هفتگی: ۱ دلار، ۰٫۵۰ و ۰٫۲۵ · 📣 عضو @jeremstyke و @memecointycoon شو: هر کدام ۰٫۰۱ دلار · 💸 پرداخت با TON هر روز'] };
+  var S = null;
+  function lg() { var l = document.documentElement.lang || 'en'; return W[l] ? l : 'en'; }
+  function m(n) { var x = Number(n || 0).toFixed(2), l = lg(); return l === 'fr' || l === 'es' ? x.replace('.', ',') + ' $' : '$' + x; }
+  function open(u) { try { Telegram.WebApp.HapticFeedback.impactOccurred('light'); } catch (e) {} try { Telegram.WebApp.openTelegramLink(u); } catch (e) { location.href = u; } }
+  function draw() {
+    if (!S || !S.ok || !S.on) return;
+    var b = document.getElementById('earnbar'), L = W[lg()];
+    if (!b) { b = document.createElement('div'); b.id = 'earnbar'; document.body.appendChild(b); document.body.classList.add('eb'); }
+    b.dataset.l = lg();
+    b.innerHTML = '<div class="ebi"><span style="font-size:22px">💵</span><div class="ebt"><b></b><span class="ebw"><span></span></span></div><button class="ebd" type="button" aria-label="Diamond">💎</button></div>';
+    b.querySelector('b').textContent = L[0] + m(Number(S.balance || 0) + Number(S.paid || 0) + Number(S.waiting || 0));
+    b.querySelector('.ebw span').textContent = L[1].replace('{u}', m(S.usd || 0.05));
+    b.onclick = function (e) { if (e.target.closest('.ebd')) return open('https://t.me/Memecointycoonbot?startapp=src_dia_duel'); open('https://t.me/Memecointycoonbot?startapp=v_earn'); };
+  }
+  function load() { if (!window.Telegram || !Telegram.WebApp.initData) return; window.tonCall({}).then(function (r) { S = r; draw(); }).catch(function () {}); }
+  setTimeout(load, 1200); setInterval(load, 300000);
+  new MutationObserver(function () { if (S) draw(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+})();
 </script>
 <script src="https://cdn.jsdelivr.net/gh/jeremstyke/jeremstyke.github.io@253f787287127442b4fbb7255a7daaf4803c1f3a/mct/banner.js"></script>
 </body>
