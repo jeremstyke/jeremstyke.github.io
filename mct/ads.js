@@ -76,6 +76,8 @@
     if (window.showAdsGalaxy) return ok();
     const s = document.createElement('script'); s.src = 'https://app.adsgalaxy.online/sdk.js?id=' + AGX;
     s.onload = ok; s.onerror = () => { ld = null; ko(new Error('load')); }; document.head.appendChild(s);
+    // 20 oct 2026 (Jeremy): Ads Galaxy down (its site does not answer): give up after 6 s instead of waiting forever
+    setTimeout(() => { if (!window.showAdsGalaxy) { ld = null; ko(new Error('timeout')); } }, 6000);
   }));
   async function watch() {
     if (window.MCTPREM) return true; // 17 oct 2026: Premium players skip the videos (prem.js)
