@@ -626,7 +626,7 @@ function chartSvg(c, next, up) {
 }
 function ring(left, tot) {
   var f = Math.max(0, Math.min(1, left / (tot || 10000))), C2 = 119.4;
-  var col = left < 3000 ? '#FF5A6E' : '#FFD24A';
+  var col = left < (tot ? tot * 0.3 : 3000) ? '#FF5A6E' : '#FFD24A';
   return '<svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19" fill="none" stroke="#2A2547" stroke-width="4"/><circle cx="22" cy="22" r="19" fill="none" stroke="' + col + '" stroke-width="4" stroke-linecap="round" stroke-dasharray="' + C2 + '" stroke-dashoffset="' + (C2 * (1 - f)) + '" transform="rotate(-90 22 22)"/><text x="22" y="28" text-anchor="middle" fill="' + col + '" font-family="Inter, sans-serif" font-weight="800" font-size="16">' + Math.ceil(left / 1000) + '</text></svg>';
 }
 async function play(id, d0) {
@@ -795,9 +795,9 @@ function tpUi(r, view) {
   });
 }
 async function tpReveal(r, a, taps) {
-  var cc = $('#cc'), tm = $('#tm');
-  if (cc) cc.classList.add(a.right ? 'ok' : 'ko');
-  if (tm) tm.outerHTML = '<div class="res disp ' + (a.right ? 'ok' : 'ko') + '">' + (a.bot ? t('tp_bot') : t('tp_taps', { n: (taps || []).length }) + ' · ' + t('sn_pts', { p: a.pts || 0 })) + '</div>';
+  var cc = $('#cc'), tm = $('#tm'), good = !a.bot; // 20 oct 2026 (Jeremy): no red after a "Tap the coin" round, only for a robot rhythm
+  if (cc) cc.classList.add(good ? 'ok' : 'ko');
+  if (tm) tm.outerHTML = '<div class="res disp ' + (good ? 'ok' : 'ko') + '">' + (a.bot ? t('tp_bot') : t('tp_taps', { n: (taps || []).length }) + ' · ' + t('sn_pts', { p: a.pts || 0 })) + '</div>';
   var sc = $('#msc'); if (sc) sc.textContent = a.score;
   if (a.right) { hp('ok'); SFX.ok(); } else { hp('err'); SFX.ko(); }
   await sleep(a.last ? 1500 : 1700);
