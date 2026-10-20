@@ -265,7 +265,18 @@ var LANGS = ['en', 'fr', 'es', 'id', 'ru', 'ar', 'fa'];
   fa: { m_pd: '📈 پامپ یا دامپ', m_sn: '🎯 در قله بفروش', sn_r1: '۵ نمودار، برای هر دو یکسان، هر کدام ۱۰ ثانیه زنده', sn_r2: 'یک ضربه روی فروش: هرچه به قله نزدیک تر، امتیاز بیشتر (۰ تا ۱۰۰)', sn_r3: 'نفروختی = تا آخر نگه می داری، حتی با راگ', sn_tip: '💡 نکته: پامپ همیشه نمی ماند، اما هر افت کوچکی قله نیست', sn_q: 'قبل از دامپ بفروش!', sn_b: 'فروش', sn_hold: 'تا آخر نگه داشتی', sn_sold: 'فروخته شد', sn_top: 'قله', sn_pts: '{p} امتیاز' }
 }; Object.keys(X).forEach(function (l) { if (TX[l]) Object.keys(X[l]).forEach(function (k) { TX[l][k] = X[l][k]; }); }); })();
 var GM = 'pd';
-function gmSeg() { return '<div class="seg"><button data-g="pd" class="' + (GM === 'pd' ? 'on' : '') + '">' + t('m_pd') + '</button><button data-g="sn" class="' + (GM === 'sn' ? 'on' : '') + '">' + t('m_sn') + '</button></div>'; }
+// 20 oct 2026 (Jeremy): the 3rd duel type, "Tap the coin" (mode 'tp'), and short names for the 3 types
+(function () { var X = {
+  en: { m_tp: '👆 Tap the coin', s_pd: '📈 Pump/Dump', s_sn: '🎯 Top', s_tp: '👆 Tap', tp_r1: '5 rounds of 5 seconds: tap the coin, it jumps after each hit', tp_r2: 'Most hits wins (15 per second at most)', tp_r3: 'Auto-clickers and scripts score 0', tp_q: 'Tap the coin!', tp_taps: '{n} hits', tp_bot: '🤖 Robot rhythm: 0 pts' },
+  fr: { m_tp: '👆 Tape le coin', s_pd: '📈 Pump/Dump', s_sn: '🎯 Sommet', s_tp: '👆 Tape', tp_r1: '5 manches de 5 secondes : tape le coin, il saute après chaque touche', tp_r2: 'Le plus de touches gagne (15 par seconde maximum)', tp_r3: 'Auto-clickers et scripts : 0 point', tp_q: 'Tape le coin !', tp_taps: '{n} touches', tp_bot: '🤖 Rythme de robot : 0 pt' },
+  es: { m_tp: '👆 Toca la moneda', s_pd: '📈 Pump/Dump', s_sn: '🎯 Cima', s_tp: '👆 Toca', tp_r1: '5 rondas de 5 segundos: toca la moneda, salta tras cada toque', tp_r2: 'Gana quien más acierte (15 por segundo como máximo)', tp_r3: 'Autoclickers y scripts: 0 puntos', tp_q: '¡Toca la moneda!', tp_taps: '{n} toques', tp_bot: '🤖 Ritmo de robot: 0 pts' },
+  id: { m_tp: '👆 Tap koinnya', s_pd: '📈 Pump/Dump', s_sn: '🎯 Puncak', s_tp: '👆 Tap', tp_r1: '5 ronde 5 detik: tap koinnya, koin melompat setiap kena', tp_r2: 'Paling banyak kena menang (maks 15 per detik)', tp_r3: 'Auto-clicker dan script dapat 0', tp_q: 'Tap koinnya!', tp_taps: '{n} kena', tp_bot: '🤖 Ritme robot: 0 poin' },
+  ru: { m_tp: '👆 Тапни монету', s_pd: '📈 Памп/дамп', s_sn: '🎯 Пик', s_tp: '👆 Тап', tp_r1: '5 раундов по 5 секунд: тапай монету, она прыгает после каждого попадания', tp_r2: 'Побеждает больше попаданий (не больше 15 в секунду)', tp_r3: 'Автокликеры и скрипты получают 0', tp_q: 'Тапай монету!', tp_taps: '{n} попаданий', tp_bot: '🤖 Ритм робота: 0 очк.' },
+  ar: { m_tp: '👆 اضغط العملة', s_pd: '📈 صعود/هبوط', s_sn: '🎯 القمة', s_tp: '👆 اضغط', tp_r1: '5 جولات من 5 ثوانٍ: اضغط العملة، تقفز بعد كل إصابة', tp_r2: 'الأكثر إصابة يفوز (15 في الثانية كحد أقصى)', tp_r3: 'النقر الآلي والسكربتات = 0', tp_q: 'اضغط العملة!', tp_taps: '{n} إصابة', tp_bot: '🤖 إيقاع روبوت: 0 نقطة' },
+  fa: { m_tp: '👆 سکه را بزن', s_pd: '📈 پامپ/دامپ', s_sn: '🎯 قله', s_tp: '👆 بزن', tp_r1: '۵ دور ۵ ثانیه ای: سکه را بزن، بعد از هر ضربه جا عوض می کند', tp_r2: 'بیشترین ضربه برنده است (حداکثر ۱۵ در ثانیه)', tp_r3: 'کلیک خودکار و اسکریپت = ۰', tp_q: 'سکه را بزن!', tp_taps: '{n} ضربه', tp_bot: '🤖 ریتم ربات: ۰ امتیاز' }
+}; Object.keys(X).forEach(function (l) { if (TX[l]) Object.keys(X[l]).forEach(function (k) { TX[l][k] = X[l][k]; }); }); })();
+function gmSeg() { return '<div class="seg" style="grid-template-columns:repeat(3,1fr);font-size:13px">' + ['pd', 'sn', 'tp'].map(function (g) { return '<button data-g="' + g + '" class="' + (GM === g ? 'on' : '') + '">' + t('s_' + g) + '</button>'; }).join('') + '</div>'; }
+function tpRules() { return '<div class="rules"><div>' + IC.bolt + '<span>' + t('tp_r1') + '</span></div><div>' + IC.clock + '<span>' + t('tp_r2') + '</span></div><div style="color:var(--go)"><span>' + t('tp_r3') + '</span></div></div>'; }
 function gmBind(fn) { document.querySelectorAll('[data-g]').forEach(function (b) { b.onclick = function () { hp(); SFX.tap(); GM = b.dataset.g; fn(); }; }); }
 function snRules() { return '<div class="rules"><div>' + IC.chart + '<span>' + t('sn_r1') + '</span></div><div>' + IC.bolt + '<span>' + t('sn_r2') + '</span></div><div>' + IC.clock + '<span>' + t('sn_r3') + '</span></div><div style="color:var(--go)"><span>' + t('sn_tip') + '</span></div></div>'; }
 
@@ -416,10 +427,10 @@ function duelRow(d) {
     right = '<span class="pill or">' + t('play_b') + '</span>';
   } else {
     title = oppN ? t('d_wait', { n: esc(oppN) }) : t('d_wait_any');
-    sub = t('you') + ' ' + d.my_score + (d.mode === 'sn' ? ' pts' : '/5') + ' · ' + stake;
+    sub = t('you') + ' ' + d.my_score + (d.mode === 'sn' || d.mode === 'tp' ? ' pts' : '/5') + ' · ' + stake;
     right = '<span class="amt" style="color:var(--mu);font-size:13px;font-weight:600">' + dur(d.expires - Date.now() / 1000) + '</span>';
   }
-  if (d.mode === 'sn') sub = '🎯 ' + sub; // 20 oct 2026: "Sell the top" duel
+  if (d.mode === 'sn') sub = '🎯 ' + sub; else if (d.mode === 'tp') sub = '👆 ' + sub; // 20 oct 2026: "Sell the top" and "Tap the coin" duels
   return '<button class="row ' + cls + '" data-d="' + d.id + '">' + avh + '<span class="who"><b>' + title + '</b><small>' + sub + '</small></span>' + right + '</button>';
 }
 async function home(fresh) {
@@ -506,7 +517,7 @@ async function create(target) {
     '<div class="grid4">' + list.map(function (v) { return '<button class="st' + (v === C.stake ? ' on' : '') + '" data-s="' + v + '"' + (v > bal ? ' disabled' : '') + '>' + (C.cur === 'cash' ? '$' + short(v) : v) + '</button>'; }).join('') + '</div>' +
     '<div class="sum"><span>' + t('winner_takes') + '</span><b>' + money(pot, C.cur) + '</b></div>' +
     (C.cur === 'mct' ? '<div class="sum" style="font-size:12px"><span>' + t('burn_note') + '</span></div>' : '') +
-    (GM === 'sn' ? snRules() : '<div class="rules"><div>' + IC.chart + '<span>' + t('r1') + '</span></div><div>' + IC.clock + '<span>' + t('r2') + '</span></div><div>' + IC.bolt + '<span>' + t('r3') + '</span></div><div style="color:var(--go)"><span>' + t('tip') + '</span></div></div>') +
+    (GM === 'sn' ? snRules() : GM === 'tp' ? tpRules() : '<div class="rules"><div>' + IC.chart + '<span>' + t('r1') + '</span></div><div>' + IC.clock + '<span>' + t('r2') + '</span></div><div>' + IC.bolt + '<span>' + t('r3') + '</span></div><div style="color:var(--go)"><span>' + t('tip') + '</span></div></div>') +
     '<button class="btn p" id="go"' + (C.stake > bal || (C.mode === 'find' && !C.to) ? ' disabled' : '') + '>' + IC.sw + t('go_first') + '</button>',
     { back: true, full: true }
   );
@@ -546,7 +557,7 @@ function random() {
     '<div class="hdr"><h1 class="disp">' + t('ch_random') + '</h1></div>' +
     '<section class="card vs"><div class="side"><div class="big">' + (m.photo ? '<img src="' + esc(m.photo) + '" alt="">' : esc(String(m.name || '?').charAt(0).toUpperCase())) + '</div><b>' + t('you') + '</b><small>' + short(m.cash) + ' $</small></div><div class="x disp">VS</div><div class="side"><div class="big o q">' + IC.dice.replace('width="20" height="20"', 'width="34" height="34"') + '</div><b>???</b><small>' + t('rand_left', { n: m.rand_left == null ? 10 : m.rand_left }) + '</small></div></section>' +
     '<p style="margin:0;color:var(--mu2);font-size:14px;line-height:1.45">' + t('rand_s') + '</p>' +
-    gmSeg() + '<p style="margin:0;color:var(--go);font-size:13px;line-height:1.4">' + (GM === 'sn' ? t('sn_r2') : t('tip')) + '</p>' +
+    gmSeg() + '<p style="margin:0;color:var(--go);font-size:13px;line-height:1.4">' + (GM === 'sn' ? t('sn_r2') : GM === 'tp' ? t('tp_r1') : t('tip')) + '</p>' +
     '<p class="lbl">' + t('stake') + '</p>' +
     '<div class="grid3">' + list.map(function (v) { return '<button class="st' + (v === RS ? ' on' : '') + '" data-s="' + v + '"' + (v > m.cash ? ' disabled' : '') + '>$' + short(v) + '</button>'; }).join('') + '</div>' +
     '<div class="sum"><span>' + t('winner_takes') + '</span><b>' + money(RS * 2, 'cash') + '</b></div>' +
@@ -571,7 +582,7 @@ function accept(d) {
   screen(
     '<div style="height:10px"></div>' +
     '<section class="card vs"><div class="side"><div class="big o">' + (d.a_photo ? '<img src="' + esc(d.a_photo) + '" alt="">' : esc(String(d.a_name || '?').charAt(0).toUpperCase())) + '</div><b>' + esc(d.a_name) + '</b><small>?/5</small></div><div class="x disp">VS</div><div class="side"><div class="big">' + (m.photo ? '<img src="' + esc(m.photo) + '" alt="">' : esc(String(m.name || '?').charAt(0).toUpperCase())) + '</div><b>' + t('you') + '</b><small>' + (m.wins || 0) + ' ' + t('wins') + '</small></div></section>' +
-    '<div style="text-align:center"><h1 class="disp" style="margin:6px 0 6px;font-size:30px">' + t('acc_h', { n: esc(d.a_name) }) + '</h1><p style="margin:0;color:var(--mu2)">' + (d.mode === 'sn' ? t('m_sn') + ' · ' + t('sn_r2') : t('acc_s')) + '</p></div>' +
+    '<div style="text-align:center"><h1 class="disp" style="margin:6px 0 6px;font-size:30px">' + t('acc_h', { n: esc(d.a_name) }) + '</h1><p style="margin:0;color:var(--mu2)">' + (d.mode === 'sn' ? t('m_sn') + ' · ' + t('sn_r2') : d.mode === 'tp' ? t('m_tp') + ' · ' + t('tp_r1') : t('acc_s')) + '</p></div>' +
     '<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--mu)">' + t('stake') + '</span><b class="disp" style="font-size:24px">' + money(d.stake, d.cur) + '</b></div>' +
     '<div class="sum"><span>' + t('winner_takes') + '</span><b>' + money(d.stake * 2 * (d.cur === 'mct' ? 0.95 : 1), d.cur) + '</b></div>' +
     '<div class="rules"><div>' + IC.chart + '<span>' + t('r1') + '</span></div><div>' + IC.clock + '<span>' + t('d_left', { t: dur(d.expires - Date.now() / 1000) }) + '</span></div><div>' + IC.bolt + '<span>' + t('r3') + '</span></div><div style="color:var(--go)"><span>' + t('tip') + '</span></div></div>' +
@@ -613,8 +624,8 @@ function chartSvg(c, next, up) {
   }
   return s + '</svg>';
 }
-function ring(left) {
-  var f = Math.max(0, Math.min(1, left / 10000)), C2 = 119.4;
+function ring(left, tot) {
+  var f = Math.max(0, Math.min(1, left / (tot || 10000))), C2 = 119.4;
   var col = left < 3000 ? '#FF5A6E' : '#FFD24A';
   return '<svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19" fill="none" stroke="#2A2547" stroke-width="4"/><circle cx="22" cy="22" r="19" fill="none" stroke="' + col + '" stroke-width="4" stroke-linecap="round" stroke-dasharray="' + C2 + '" stroke-dashoffset="' + (C2 * (1 - f)) + '" transform="rotate(-90 22 22)"/><text x="22" y="28" text-anchor="middle" fill="' + col + '" font-family="Inter, sans-serif" font-weight="800" font-size="16">' + Math.ceil(left / 1000) + '</text></svg>';
 }
@@ -625,18 +636,19 @@ async function play(id, d0) {
   if (!view) { var v = await api('view', { id: id }); view = v.ok ? v.duel : null; P.d = view; }
   for (;;) {
     if (P.stop) return;
+    if (view && view.mode === 'tp') await tpCount(); // 20 oct 2026: 3, 2, 1 before each "Tap the coin" round
     var r = await api('round', { id: id });
     if (!r.ok) {
       if (r.error === 'over' || r.error === 'notyours') { var vv = await api('view', { id: id }); if (vv.ok) return after(vv.duel); }
       hp('err'); toast(errT(r)); return home();
     }
-    var sn = r.chart && r.chart.mode === 'sn'; // 20 oct 2026 (Jeremy): "Sell the top" round
-    var pick = sn ? await snUi(r, view) : await roundUi(r, view);
+    var sn = r.chart && r.chart.mode === 'sn', tp = r.chart && r.chart.mode === 'tp'; // 20 oct 2026 (Jeremy): "Sell the top" and "Tap the coin" rounds
+    var pick = tp ? await tpUi(r, view) : sn ? await snUi(r, view) : await roundUi(r, view);
     if (P.stop) return;
-    var a = await api('answer', sn ? { id: id, at: pick } : { id: id, pick: pick });
+    var a = await api('answer', tp ? { id: id, taps: pick } : sn ? { id: id, at: pick } : { id: id, pick: pick });
     if (!a.ok) { hp('err'); toast(errT(a)); return home(); }
     P.res[r.i] = a.right;
-    if (sn) await snReveal(r, a, pick); else await reveal(r, a, pick);
+    if (tp) await tpReveal(r, a, pick); else if (sn) await snReveal(r, a, pick); else await reveal(r, a, pick);
     if (a.last) return after(a.duel);
   }
 }
@@ -746,6 +758,50 @@ async function snReveal(r, a, pick) {
   if (a.right) { hp('ok'); SFX.ok(); } else { hp('err'); SFX.ko(); }
   await sleep(a.last ? 1600 : 1900);
 }
+// 20 oct 2026 (Jeremy): "Tap the coin": 5 seconds to hit a coin that jumps somewhere else after each hit (an auto-clicker on a fixed
+// spot gets nothing). The page sends the time of each hit; the base keeps 15 per second at most and gives 0 to a rhythm too even.
+async function tpCount() {
+  for (var i = 3; i > 0; i--) {
+    screen('<div class="center" style="flex:1;justify-content:center"><div class="disp" style="font-size:96px;color:var(--go)">' + i + '</div><p style="color:var(--mu2)">' + t('tp_q') + '</p></div>', { full: true });
+    try { SFX.tick(); } catch (e) {}
+    await sleep(550);
+  }
+}
+function tpUi(r, view) {
+  return new Promise(function (res) {
+    var gone = Math.max(0, 5000 - r.left), taps = [];
+    screen(
+      playHead(r, view) +
+      '<section class="card chart" id="cc"><div class="ch-h"><div class="coin"><span class="ce">' + esc(r.chart.e || '') + '</span><div><b>$' + esc(r.chart.t) + '</b><small>' + t('m_tp') + '</small></div></div><div class="chg disp" id="tc" style="color:var(--cy);font-size:28px">0</div></div>' +
+      '<div id="ar" style="position:relative;height:300px;touch-action:manipulation"><button id="tg" style="position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFE58A,#FFB020 60%,#C47A00);box-shadow:0 0 24px rgba(255,210,74,.55),inset 0 -4px 0 rgba(0,0,0,.25);font-size:44px;line-height:84px;text-align:center">' + esc(r.chart.e || '🪙') + '</button></div>' +
+      '<div class="q">' + t('tp_q') + '</div></section>' +
+      '<div class="tm" id="tm">' + ring(r.left, 5000) + '<span>' + t('sl') + '</span></div>',
+      { full: true }
+    );
+    SFX.go();
+    var t0 = Date.now() - gone, done = false, lastS = 99, ar = $('#ar'), tg = $('#tg');
+    function move() { var w = Math.max(0, ar.clientWidth - 84), h = Math.max(0, ar.clientHeight - 84); tg.style.left = (42 + Math.random() * w).toFixed(0) + 'px'; tg.style.top = (42 + Math.random() * h).toFixed(0) + 'px'; }
+    tg.addEventListener('pointerdown', function (ev) {
+      ev.preventDefault(); ev.stopPropagation(); if (done) return;
+      var el = Date.now() - t0; if (el > 5000) return;
+      taps.push(el); var tc = $('#tc'); if (tc) tc.textContent = taps.length; try { hp('light'); } catch (e) {} move();
+    });
+    var iv = setInterval(function () {
+      var left = 5000 - (Date.now() - t0);
+      var tm = $('#tm'); if (tm) tm.innerHTML = ring(Math.max(0, left), 5000) + '<span>' + t('sl') + '</span>';
+      var sec = Math.ceil(left / 1000); if (sec !== lastS && sec <= 2 && sec > 0) { SFX.tick(); } lastS = sec;
+      if (left <= 0 && !done) { done = true; clearInterval(iv); tg.disabled = true; res(taps); }
+    }, 50);
+  });
+}
+async function tpReveal(r, a, taps) {
+  var cc = $('#cc'), tm = $('#tm');
+  if (cc) cc.classList.add(a.right ? 'ok' : 'ko');
+  if (tm) tm.outerHTML = '<div class="res disp ' + (a.right ? 'ok' : 'ko') + '">' + (a.bot ? t('tp_bot') : t('tp_taps', { n: (taps || []).length }) + ' · ' + t('sn_pts', { p: a.pts || 0 })) + '</div>';
+  var sc = $('#msc'); if (sc) sc.textContent = a.score;
+  if (a.right) { hp('ok'); SFX.ok(); } else { hp('err'); SFX.ko(); }
+  await sleep(a.last ? 1500 : 1700);
+}
 // 20 oct 2026 (Jeremy): a player who came by a link may never have started the bot: after his first duel, Telegram asks him once
 // to let the bot write to him, so he gets the duel messages (challenged, won, lost)
 function askWrite() {
@@ -778,7 +834,7 @@ function waiting(d, fresh) {
   screen(
     '<div class="center" style="padding:20px 0 0;flex:0">' +
     '<div class="trophy t" style="border-color:var(--cy);background:var(--cyb);color:var(--cy)">' + IC.sw.replace('width="20" height="20"', 'width="46" height="46"') + '</div>' +
-    '<h1 class="disp" style="margin:4px 0 0;font-size:34px">' + (d.mode === 'sn' ? t('wait_h', { s: d.my_score }).replace('/5', ' pts') : t('wait_h', { s: d.my_score })) + '</h1>' +
+    '<h1 class="disp" style="margin:4px 0 0;font-size:34px">' + (d.mode === 'sn' || d.mode === 'tp' ? t('wait_h', { s: d.my_score }).replace('/5', ' pts') : t('wait_h', { s: d.my_score })) + '</h1>' +
     '<p style="margin:0;color:var(--mu2);line-height:1.45;max-width:320px">' + (rnd ? t('wait_s_rand') : named ? t('wait_s_to', { n: esc(d.opp.name) }) : t('wait_s_any')) + '</p></div>' +
     '<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--mu)">' + t('stake') + '</span><b class="disp" style="font-size:22px">' + money(d.stake, d.cur) + '</b></div>' +
     '<div class="rules"><div>' + IC.clock + '<span>' + t('d_left', { t: dur(d.expires - Date.now() / 1000) }) + '</span></div></div>' +
@@ -801,7 +857,7 @@ function result(d, fresh) {
   var oppName = d.me === 'b' ? d.a_name : (d.opp && d.opp.name) || '?';
   var oppLbl = d.opp && d.opp.ghost ? t('ghost_of', { n: oppName }) : oppName;
   var net = d.tie ? 0 : d.win ? (d.kind === 'random' ? d.stake : d.stake * 2 - (d.burn || 0) - d.stake) : -d.stake;
-  var sn = d.mode === 'sn', u5 = sn ? ' pts' : '/5';
+  var sn = d.mode === 'sn' || d.mode === 'tp', u5 = sn ? ' pts' : '/5';
   var cells = function (arr, pts) { var s = ''; for (var i = 0; i < 5; i++) s += sn ? '<i class="' + (arr[i] ? 'ok' : 'ko') + '" style="font-size:12px">' + ((pts && pts[i]) || 0) + '</i>' : '<i class="' + (arr[i] ? 'ok' : 'ko') + '">' + (arr[i] ? '✓' : '✕') + '</i>'; return s; };
   var hdr = '<span></span>'; for (var i = 1; i <= 5; i++) hdr += '<span class="h">R' + i + '</span>';
   screen(
