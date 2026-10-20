@@ -393,7 +393,7 @@ async function home(fresh) {
     '<div class="stack" id="dl">' + rows + '</div>' +
     '<button class="note" id="bRk">' + IC.cupS + '<span>' + t('rank_banner', { t: weekLeft() }) + '</span></button>'
   );
-  $('#bF').onclick = function () { hp(); SFX.tap(); C.mode = 'any'; C.to = null; create(null); };
+  $('#bF').onclick = function () { hp(); SFX.tap(); C.mode = 'any'; C.to = null; C.lock = false; create(null); };
   $('#bR').onclick = function () { hp(); SFX.tap(); random(); };
   $('#bRk').onclick = function () { hp(); go('rank'); };
   document.querySelectorAll('[data-d]').forEach(function (b) { b.onclick = function () { hp(); SFX.tap(); openDuel(Number(b.dataset.d)); }; });
@@ -438,8 +438,9 @@ async function create(target) {
   screen(
     '<div class="hdr"><h1 class="disp">' + t('new_ch') + '</h1></div>' +
     '<section class="card vs"><div class="side"><div class="big">' + (m.photo ? '<img src="' + esc(m.photo) + '" alt="">' : esc(String(m.name || '?').charAt(0).toUpperCase())) + '</div><b>' + t('you') + '</b><small>' + (m.wins || 0) + ' ' + t('wins') + '</small></div><div class="x disp">VS</div><div class="side">' + opp + '</div></section>' +
-    '<div class="seg"><button data-m="any" class="' + (C.mode === 'any' ? 'on' : '') + '">' + t('opp_any') + '</button><button data-m="find" class="' + (C.mode === 'find' ? 'on' : '') + '">' + t('opp_find') + '</button></div>' +
-    (C.mode === 'find' ? '<div class="find"><input id="q" placeholder="' + t('find_ph') + '" autocomplete="off" autocapitalize="off" spellcheck="false" value="' + esc(C.to ? (C.to.q || '') : '') + '"><button id="qf">' + t('find_b') + '</button></div>' : '') +
+    // 20 oct 2026 (Jeremy): challenge from a profile or a rematch, the opponent is already chosen: no 'anyone' / search options
+    (C.lock && C.to ? '' : '<div class="seg"><button data-m="any" class="' + (C.mode === 'any' ? 'on' : '') + '">' + t('opp_any') + '</button><button data-m="find" class="' + (C.mode === 'find' ? 'on' : '') + '">' + t('opp_find') + '</button></div>') +
+    (C.mode === 'find' && !(C.lock && C.to) ? '<div class="find"><input id="q" placeholder="' + t('find_ph') + '" autocomplete="off" autocapitalize="off" spellcheck="false" value="' + esc(C.to ? (C.to.q || '') : '') + '"><button id="qf">' + t('find_b') + '</button></div>' : '') +
     '<p class="lbl">' + t('stake') + '</p>' +
     '<div class="seg"><button data-c="cash" class="' + (C.cur === 'cash' ? 'on' : '') + '">' + t('cur_cash') + ' · ' + short(m.cash) + '</button><button data-c="mct" class="' + (C.cur === 'mct' ? 'on' : '') + '"' + (m.mct_ok ? ' style="opacity:.5"' : '') + '>' + t('cur_mct') + ' · ' + short(m.mct) + '</button></div>' +
     '<div class="grid4">' + list.map(function (v) { return '<button class="st' + (v === C.stake ? ' on' : '') + '" data-s="' + v + '"' + (v > bal ? ' disabled' : '') + '>' + (C.cur === 'cash' ? '$' + short(v) : v) + '</button>'; }).join('') + '</div>' +
@@ -467,7 +468,7 @@ async function create(target) {
     var r = await api('create', { cur: C.cur, stake: C.stake, to: C.mode === 'find' && C.to ? C.to.id : null });
     BUSY = false;
     if (!r.ok) { b.disabled = false; hp('err'); toast(errT(r)); return; }
-    S.me = null; C.mode = 'any'; C.to = null;
+    S.me = null; C.mode = 'any'; C.to = null; C.lock = false;
     play(r.duel.id, r.duel);
   };
 }
@@ -705,7 +706,7 @@ function result(d, fresh) {
     hp(); var tid = d.opp && d.opp.id;
     await refreshMe();
     C.cur = d.cur; C.stake = Number(d.stake);
-    if (tid) { var r = await api('player', { id: tid }); if (r.ok) { C.mode = 'find'; C.to = r.p; return create(r.p); } }
+    if (tid) { var r = await api('player', { id: tid }); if (r.ok) { C.mode = 'find'; C.to = r.p; C.lock = true; return create(r.p); } }
     C.mode = 'any'; C.to = null; create();
   };
   var bb = $('#bb'); if (bb) bb.onclick = async function () { hp(); bb.disabled = true; var r = await api('buyback', { id: d.id, free: !!d.bb_free }); bb.disabled = false; if (r.ok && r.free) { hp('ok'); SFX.win(); toast(t('bb_ok')); bb.remove(); S.me = null; return; } if (!r.ok || !r.link) { toast(errT(r)); return; } try { tw.openInvoice(r.link, function (st) { if (st === 'paid') { hp('ok'); SFX.win(); toast(t('bb_ok')); bb.remove(); S.me = null; } }); } catch (e) { toast(t('e_x')); } };
@@ -825,7 +826,7 @@ async function start() {
   if ((m = /^(duel|res)_(\d+)$/.exec(sp))) return viewDuel(Number(m[2]));
   if ((m = /^vs_(\d+)$/.exec(sp))) {
     var p = await api('player', { id: Number(m[1]) });
-    if (p.ok && !p.p.me) { if (p.p.no_ch) { toast(t('e_no_ch')); return home(false); } C.mode = 'find'; C.to = p.p; return create(p.p); }
+    if (p.ok && !p.p.me) { if (p.p.no_ch) { toast(t('e_no_ch')); return home(false); } C.mode = 'find'; C.to = p.p; C.lock = true; return create(p.p); }
   }
   home(false);
 }
