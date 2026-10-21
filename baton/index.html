@@ -337,6 +337,7 @@ nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:elli
       <div class="score"><small data-t="crew"></small><div class="big num" id="nFriends">0</div><div class="rate" data-t="crewSub"></div></div>
       <button class="btn gold" id="invite"></button>
       <button class="btn ghost" id="copy"></button>
+      <p class="foot" id="invRule"></p>
       <div class="list" id="friends"></div>
     </section>
 
@@ -516,6 +517,19 @@ ar:{holdTip:(x)=>'⏳ مرّرها قبل انتهاء الوقت: حتى +'+x+'
 fa:{holdTip:(x)=>'⏳ قبل از تمام شدن زمان ردش کن: تا +'+x+' $BATON',passTip:'وقتی زمان تمام شود خودش می‌رود و پاداشی نمی‌گیری.',ext:(h,s)=>'⏱️ '+h+' ساعت بیشتر نگه دار · '+s+' ⭐',extOk:'⏱️ چوب تمدید شد!',extLate:'دیر شد، چوب رفته.',extDone:'قبلاً یک بار تمدید شده.'}
 };
 for (const k in X11) Object.assign(X[k], X11[k]);
+const X12 = {
+en:{ruleHold:(x)=>'🏃 You hold a baton: the first newcomer who joins with your link takes it, and you win x5 (+'+x+' $BATON). Your chain goes on with them.',ruleExt:'🔒 Your baton is extended: nobody can take it. Newcomers with your link just add a link to your chain.',ruleNone:'🔗 Each newcomer who joins with your link adds a link to your chain and earns you 5,000 $BATON + 10 % of what they mine.'},
+fr:{ruleHold:(x)=>'🏃 Tu as un bâton : le premier nouveau qui arrive avec ton lien le récupère, et tu gagnes x5 (+'+x+' $BATON). Ta chaîne continue avec lui.',ruleExt:'🔒 Ton bâton est prolongé : personne ne peut te le prendre. Les nouveaux qui arrivent avec ton lien ajoutent juste un maillon à ta chaîne.',ruleNone:'🔗 Chaque nouveau qui arrive avec ton lien ajoute un maillon à ta chaîne et te rapporte 5 000 $BATON + 10 % de ce qu\'il mine.'},
+es:{ruleHold:(x)=>'🏃 Tienes un bastón: el primer nuevo que llegue con tu enlace se lo queda y ganas x5 (+'+x+' $BATON). Tu cadena sigue con él.',ruleExt:'🔒 Tu bastón está prolongado: nadie te lo puede quitar. Los nuevos con tu enlace solo añaden un eslabón a tu cadena.',ruleNone:'🔗 Cada nuevo que llega con tu enlace añade un eslabón a tu cadena y te da 5 000 $BATON + 10 % de lo que mine.'},
+pt:{ruleHold:(x)=>'🏃 Você tem um bastão: o primeiro novato que chegar com seu link fica com ele, e você ganha x5 (+'+x+' $BATON). Sua corrente continua com ele.',ruleExt:'🔒 Seu bastão está prolongado: ninguém pode tirá-lo. Novatos com seu link só adicionam um elo à sua corrente.',ruleNone:'🔗 Cada novato que chega com seu link adiciona um elo à sua corrente e te rende 5 000 $BATON + 10 % do que ele minerar.'},
+ru:{ruleHold:(x)=>'🏃 У тебя эстафета: первый новичок по твоей ссылке забирает её, а ты получаешь x5 (+'+x+' $BATON). Цепочка продолжается с ним.',ruleExt:'🔒 Эстафета продлена: никто её не заберёт. Новички по твоей ссылке просто добавляют звено в цепочку.',ruleNone:'🔗 Каждый новичок по твоей ссылке добавляет звено в твою цепочку и приносит 5 000 $BATON + 10 % от его добычи.'},
+uk:{ruleHold:(x)=>'🏃 У тебе естафета: перший новачок за твоїм посиланням забирає її, а ти отримуєш x5 (+'+x+' $BATON). Ланцюжок продовжується з ним.',ruleExt:'🔒 Естафету продовжено: ніхто її не забере. Новачки за твоїм посиланням просто додають ланку до ланцюжка.',ruleNone:'🔗 Кожен новачок за твоїм посиланням додає ланку до твого ланцюжка й приносить 5 000 $BATON + 10 % від його видобутку.'},
+tr:{ruleHold:(x)=>'🏃 Elinde bayrak var: linkinle gelen ilk yeni oyuncu onu alır ve sen x5 kazanırsın (+'+x+' $BATON). Zincirin onunla devam eder.',ruleExt:'🔒 Bayrağın uzatıldı: kimse onu alamaz. Linkinle gelenler sadece zincirine halka ekler.',ruleNone:'🔗 Linkinle gelen her yeni oyuncu zincirine bir halka ekler ve sana 5 000 $BATON + kazdığının %10\'unu kazandırır.'},
+id:{ruleHold:(x)=>'🏃 Kamu pegang tongkat: pemain baru pertama yang datang lewat linkmu mengambilnya, dan kamu dapat x5 (+'+x+' $BATON). Rantaimu lanjut bersamanya.',ruleExt:'🔒 Tongkatmu diperpanjang: tak ada yang bisa mengambilnya. Pemain baru lewat linkmu hanya menambah mata rantai.',ruleNone:'🔗 Setiap pemain baru lewat linkmu menambah mata rantai dan memberimu 5 000 $BATON + 10 % dari hasil tambangnya.'},
+ar:{ruleHold:(x)=>'🏃 معك عصا: أول لاعب جديد يصل عبر رابطك يأخذها، وتربح x5 (+'+x+' $BATON). وتستمر سلسلتك معه.',ruleExt:'🔒 عصاك ممددة: لا أحد يستطيع أخذها. الجدد عبر رابطك يضيفون حلقة لسلسلتك فقط.',ruleNone:'🔗 كل لاعب جديد عبر رابطك يضيف حلقة لسلسلتك ويربحك 5 000 $BATON + 10 % مما يعدّنه.'},
+fa:{ruleHold:(x)=>'🏃 چوب دست توست: اولین تازه‌واردی که با لینک تو بیاید آن را می‌گیرد و تو x5 می‌بری (+'+x+' $BATON). زنجیره‌ات با او ادامه می‌یابد.',ruleExt:'🔒 چوبت تمدید شده: هیچ‌کس نمی‌تواند آن را بگیرد. تازه‌واردها با لینک تو فقط یک حلقه به زنجیره‌ات اضافه می‌کنند.',ruleNone:'🔗 هر تازه‌واردی که با لینک تو بیاید یک حلقه به زنجیره‌ات اضافه می‌کند و ۵٬۰۰۰ $BATON + ۱۰٪ از استخراجش برایت می‌آورد.'}
+};
+for (const k in X12) Object.assign(X[k], X12[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -571,6 +585,7 @@ function render() {
     c.classList.add('off'); $('#holdT').textContent = T('none1'); $('#holdP').textContent = T('none2'); $('#timer').textContent = ''; $('#extBtn').hidden = true; $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
   }
   $('#dotHome').hidden = !S.holding;
+  $('#invRule').textContent = !S.holding ? T('ruleNone') : S.batons[0].extended ? T('ruleExt') : T('ruleHold', fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * 5));
   // chain
   const ch = S.chain;
   $('#chainCard').hidden = !ch;
