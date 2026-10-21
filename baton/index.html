@@ -615,7 +615,8 @@ $('#sheet').onclick = async (e) => {
   }
   doPass(k);
 };
-const opened = {};
+// 21 oct 2026: opening a bot closes Baton, so "already opened today" is remembered on the phone
+const opened = new Proxy({}, { get: (o, k) => o[k] || (() => { try { return localStorage.getItem('bt_op_' + String(k)) === new Date().toDateString(); } catch (e) { return false; } })(), set: (o, k, v) => { o[k] = v; try { localStorage.setItem('bt_op_' + String(k), new Date().toDateString()); } catch (e) {} return true; } });
 $('#upg').onclick = async (e) => {
   const b = e.target.closest('[data-up]'); if (!b) return; hap(); b.disabled = true;
   const r = await api('upgrade', { what: b.dataset.up });
@@ -625,6 +626,9 @@ $('#upg').onclick = async (e) => {
 $('#tasks').onclick = async (e) => {
   const b = e.target.closest('[data-task]'); if (!b) return; hap();
   const id = Number(b.dataset.task);
+  // partner links (InsideAds, Ads Galaxy...) cannot be checked: the reward is given on the tap, then the link opens
+  const tk = ((S && S.tasks) || []).find((x) => x.id === id) || {};
+  if (tk.kind === 'link') { b.disabled = true; const r = await api('task', { id }); if (r.ok) { hap('ok'); toast(T('reward', fmt(r.reward))); setState(r.state); } else b.disabled = false; if (b.dataset.url) openLink(b.dataset.url); return; }
   if (!opened[id]) { opened[id] = true; if (b.dataset.url) openLink(b.dataset.url); setTimeout(render, 600); return; }
   b.disabled = true;
   const r = await api('task', { id });
