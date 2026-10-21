@@ -264,6 +264,7 @@ nav.tabs button[aria-current="page"] svg{filter:drop-shadow(0 0 6px rgba(47,141,
 .sd.nx{border:1.5px dashed #56c8ff}
 [hidden]{display:none!important}
 .timer:empty{display:none}
+.demo{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:35;background:linear-gradient(180deg,#5aa9ff,#1667e8);color:#fff;font-weight:800;font-size:14px;padding:11px 18px;border-radius:999px;text-decoration:none;box-shadow:0 0 24px rgba(47,141,255,.6);white-space:nowrap;max-width:94%;overflow:hidden;text-overflow:ellipsis}
 .crewtot span{display:flex;flex-direction:column;gap:3px}.crewtot small{font-size:11.5px;color:var(--mute)}
 .tip{display:block;margin-top:7px;font-size:13px;font-weight:700;color:#bfe2ff;line-height:1.35}
 .mult{display:flex;flex-direction:column;align-items:flex-end;line-height:1}.mult .pg{font-family:var(--body);font-size:12px;font-weight:800;color:var(--gain);margin-top:4px;text-shadow:none}
@@ -476,6 +477,10 @@ ar:{bSub:(n)=>'+'+n+' % بفضل قناة Jeremstyke على تيليجرام'},
 fa:{bSub:(n)=>'+'+n+' % به لطف کانال تلگرام Jeremstyke'}
 };
 for (const k in X8) Object.assign(X[k], X8[k]);
+const X9 = {
+en:{demo:'▶ Preview · Open in Telegram to play'},fr:{demo:'▶ Aperçu · Ouvre dans Telegram pour jouer'},es:{demo:'▶ Vista previa · Abre en Telegram para jugar'},pt:{demo:'▶ Prévia · Abra no Telegram para jogar'},ru:{demo:'▶ Превью · Открой в Telegram, чтобы играть'},uk:{demo:'▶ Попередній перегляд · Відкрий у Telegram, щоб грати'},tr:{demo:'▶ Önizleme · Oynamak için Telegram\'da aç'},id:{demo:'▶ Pratinjau · Buka di Telegram untuk main'},ar:{demo:'▶ معاينة · افتح في تيليجرام لتلعب'},fa:{demo:'▶ پیش‌نمایش · برای بازی در تلگرام باز کن'}
+};
+for (const k in X9) Object.assign(X[k], X9[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -739,6 +744,19 @@ function nudge() {
 }
 
 (async () => {
+  // 21 oct 2026: outside Telegram (a browser, an ad network reviewer) a live preview instead of an empty page
+  if (!(tg && tg.initData)) {
+    const n0 = Math.floor(Date.now() / 1000);
+    $('#loader').hidden = true;
+    setState({ ok: true, demo: true, pts: 18420.5, rate: 224, pending: 312, harvest_at: n0 - 5400, full_at: n0 + 9000, tank_h: 4, holding: true, batons: [{ id: 0, expires: n0 + 7200 }],
+      chain: { links: 9, starter: 'Jeremstyke', runners: [{ n: 'Aa', me: false }, { n: 'No', me: false }, { n: 'Genesis', me: false }, { n: 'Walter', me: false }, { n: 'You', me: true }] },
+      bonus: 29, perk: 10, streak: 3, streak_live: 3, streak_today: true, streak_next: 4, streak_pts: 200, streak_cap: 30, drill: 5, tank: 1, grip: 0, hold_h: 4, pass_base: 120,
+      costs: { drill: 29160, tank: 50000, grip: 80000, next_rate: 258, next_tank: 6 }, record: 9, friends: 6, uid: 0,
+      tasks: [{ id: 6, kind: 'daily_mct', title: '1 trade on Meme Coin Tycoon', sub: 'Buy or sell any memecoin today', reward: 300, done: false }, { id: 1, kind: 'join', title: 'Join Jeremstyke', reward: 500, done: true, perk: 10 }] });
+    const dm = document.createElement('a'); dm.className = 'demo'; dm.href = 'https://t.me/PassTheBatonBot/play'; dm.textContent = T('demo'); document.body.appendChild(dm);
+    setInterval(tick, 1000);
+    return;
+  }
   // 21 oct 2026: a network hiccup at opening is retried 3 times, then a retry button instead of an empty page
   let r = await api('state');
   for (let i = 0; i < 3 && r && !r.ok && r.error === 'other'; i++) { await new Promise((ok) => setTimeout(ok, 1500)); r = await api('state'); }
