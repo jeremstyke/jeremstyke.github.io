@@ -718,9 +718,11 @@ function nudge() {
 }
 
 (async () => {
-  const r = await api('state');
+  // 21 oct 2026: a network hiccup at opening is retried 3 times, then a retry button instead of an empty page
+  let r = await api('state');
+  for (let i = 0; i < 3 && r && !r.ok && r.error === 'other'; i++) { await new Promise((ok) => setTimeout(ok, 1500)); r = await api('state'); }
   $('#loader').hidden = true;
-  if (!r.ok) { if (r.error !== 'maint') toast(errMsg(r)); return; }
+  if (!r.ok) { if (r.error !== 'maint') { toast(errMsg(r)); const ld = $('#loader'); ld.innerHTML = '<button class="btn gold" style="width:auto;padding:0 28px" onclick="location.reload()">↻</button>'; ld.hidden = false; } return; }
   setState(r);
   if ((!LS.get('bt_tuto') && (S.pts || 0) < 1000) || ((tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '') === 'tuto') { LS.set('bt_tuto', '1'); tutorial(); }
   $('#helpBtn').onclick = () => { hap(); tutorial(); };
