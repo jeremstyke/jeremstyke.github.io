@@ -191,6 +191,8 @@ nav.tabs button[aria-current="page"] svg{filter:drop-shadow(0 0 6px rgba(255,197
 #tasks .sec{margin:8px 4px 0}
 .chip.g{cursor:pointer}
 .sheet .row .t b,#tasks .row .t b{white-space:normal;overflow:visible}
+.pill{display:flex;align-items:center;min-height:42px;padding:0 12px;border-radius:12px;background:rgba(62,230,160,.14);border:1px solid rgba(62,230,160,.35);color:var(--gain);font-weight:800;font-size:14px;white-space:nowrap}
+.row.on{border-color:rgba(62,230,160,.28)}
 </style>
 </head>
 <body>
@@ -303,6 +305,19 @@ id:{t1h:'Tambang tiap 4 jam',t1p:'Tambangmu terisi sendiri. Kembali dan panen $B
 ar:{t1h:'عدّن كل 4 ساعات',t1p:'منجمك يمتلئ وحده. عد واجمع $BATON.',t2h:'مرّر العصا',t2p:'ما دامت معك، منجمك أسرع مرتين. مرّرها لصديق خلال 8 ساعات: هو يربح وأنت تربح.',t3h:'كبّر السلسلة',t3p:'كل تمريرة تضيف حلقة. كلما طالت السلسلة، عدّن الجميع أسرع.',next:'التالي',start:'لنبدأ',passNow:'مرّر العصا لصديق',daily:'كل يوم',once:'مرة واحدة',bonusH:'مكافأتك',bChain:(n)=>'+'+n+' % من سلسلتك (حلقات آخر 24 ساعة)',bSub:(n)=>'+'+n+' % من قنوات تيليجرام التي تتابعها',bTip:'مرّر العصا وانضم إلى القنوات لرفعها.',newS:'شخص لا يلعب بعد. تربح 5× أكثر.',friendS:'صديق يلعب بالفعل. تربح 3× أكثر.',randS:'أي لاعب نشط.',unlock:'الخزان والمقبض يُفتحان في المستوى 3',shareH:'اربح 5,000 $BATON',shareP:'ادعُ صديقًا: يبدأ بعصاك وتحصل على 10 % من كل ما يعدّنه.',later:'لاحقًا'},
 fa:{t1h:'هر ۴ ساعت استخراج',t1p:'معدنت خودش پر می‌شود. برگرد و $BATON برداشت کن.',t2h:'چوب را رد کن',t2p:'تا وقتی دست توست، معدنت ۲ برابر سریع‌تر است. ظرف ۸ ساعت به یک دوست بده: او می‌برد، تو هم می‌بری.',t3h:'زنجیره را بلند کن',t3p:'هر پاس یک حلقه اضافه می‌کند. زنجیره بلندتر، استخراج همه سریع‌تر.',next:'بعدی',start:'شروع',passNow:'چوب را به یک دوست بده',daily:'هر روز',once:'فقط یک بار',bonusH:'پاداش تو',bChain:(n)=>'+'+n+' % از زنجیره‌ات (حلقه‌های ۲۴ ساعت اخیر)',bSub:(n)=>'+'+n+' % از کانال‌های تلگرامی که دنبال می‌کنی',bTip:'برای بالا بردنش چوب را رد کن و عضو کانال‌ها شو.',newS:'کسی که هنوز بازی نمی‌کند. ۵ برابر بیشتر می‌بری.',friendS:'دوستی که بازی می‌کند. ۳ برابر بیشتر.',randS:'هر بازیکن فعال.',unlock:'مخزن و دسته در سطح ۳ باز می‌شوند',shareH:'۵,۰۰۰ $BATON ببر',shareP:'یک دوست دعوت کن: با چوب تو شروع می‌کند و ۱۰٪ از همه استخراجش مال توست.',later:'بعداً'}
 };
+const X2 = {
+en:{subs:'Stay subscribed',subS:(n)=>'+'+n+' % mining while subscribed',active:'Active'},
+fr:{subs:'Reste abonné',subS:(n)=>'+'+n+' % de minage tant que tu es abonné',active:'Actif'},
+es:{subs:'Sigue suscrito',subS:(n)=>'+'+n+' % de minado mientras sigas suscrito',active:'Activo'},
+pt:{subs:'Continue inscrito',subS:(n)=>'+'+n+' % de mineração enquanto seguir inscrito',active:'Ativo'},
+ru:{subs:'Оставайся подписан',subS:(n)=>'+'+n+' % к добыче, пока ты подписан',active:'Активен'},
+uk:{subs:'Залишайся підписаним',subS:(n)=>'+'+n+' % до видобутку, поки ти підписаний',active:'Активний'},
+tr:{subs:'Abone kal',subS:(n)=>'Abone kaldıkça +'+n+' % kazım',active:'Aktif'},
+id:{subs:'Tetap berlangganan',subS:(n)=>'+'+n+' % tambang selama berlangganan',active:'Aktif'},
+ar:{subs:'ابقَ مشتركًا',subS:(n)=>'+'+n+' % تعدين ما دمت مشتركًا',active:'مفعّل'},
+fa:{subs:'عضو بمان',subS:(n)=>'+'+n+' % استخراج تا وقتی عضو هستی',active:'فعال'}
+};
+for (const k in X2) Object.assign(X[k], X2[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -375,8 +390,10 @@ function render() {
   $('#upg').innerHTML = up.filter((u) => u.k === 'drill' || S.drill >= 3).map((u) => '<div class="row"><div class="t"><b>' + u.t + '</b><span>' + esc(u.s || T('max')) + '</span></div>' + (u.c == null ? '<button class="sm done" disabled>' + T('max') + '</button>' : '<button class="sm" data-up="' + u.k + '"' + (S.pts < u.c ? ' disabled' : '') + '>' + fmt(u.c) + '</button>') + '</div>').join('') + (S.drill < 3 ? '<p class="foot">🔒 ' + T('unlock') + '</p>' : '');
   // tasks
   const trow = (t) => '<div class="row"><div class="t"><b>' + esc(t.title) + '</b><span>' + esc(t.sub || '') + '</span></div><span class="r">+' + fmt(t.reward) + '</span>' + (t.done ? '<button class="sm done" disabled>' + T('done') + '</button>' : '<button class="sm" data-task="' + t.id + '" data-url="' + esc(t.url || '') + '">' + (opened[t.id] ? T('claim') : T('go')) + '</button>') + '</div>';
-  const dl = S.tasks.filter((t) => /^daily_/.test(t.kind)), on1 = S.tasks.filter((t) => !/^daily_/.test(t.kind));
-  $('#tasks').innerHTML = (dl.length ? '<div class="sec">' + T('daily') + '</div>' + dl.map(trow).join('') : '') + (on1.length ? '<div class="sec">' + T('once') + '</div>' + on1.map(trow).join('') : '');
+  const srow = (t) => '<div class="row' + (t.done ? ' on' : '') + '"><div class="t"><b>' + esc(t.title) + '</b><span>' + T('subS', t.perk || 10) + (t.done ? '' : ' · +' + fmt(t.reward) + ' $BATON') + '</span></div>' + (t.done ? '<span class="pill">✓ ' + T('active') + '</span>' : '<button class="sm" data-task="' + t.id + '" data-url="' + esc(t.url || '') + '">' + (opened[t.id] ? T('claim') : T('go')) + '</button>') + '</div>';
+  const dl = S.tasks.filter((t) => /^daily_/.test(t.kind)), sb = S.tasks.filter((t) => t.kind === 'join'), on1 = S.tasks.filter((t) => !/^daily_/.test(t.kind) && t.kind !== 'join');
+  const sec = (h, list, f) => list.length ? '<div class="sec">' + h + '</div>' + list.map(f).join('') : '';
+  $('#tasks').innerHTML = sec(T('daily'), dl, trow) + sec('📢 ' + T('subs'), sb, srow) + sec(T('once'), on1, trow);
   $('#dotTasks').hidden = !S.tasks.some((t) => !t.done);
   $('#nFriends').textContent = fmt(S.friends);
   tick();
