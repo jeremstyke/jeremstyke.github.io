@@ -262,6 +262,8 @@ nav.tabs button[aria-current="page"] svg{filter:drop-shadow(0 0 6px rgba(47,141,
 .sd b{font-family:var(--display);font-size:18px}.sd span{font-size:9.5px;color:var(--mute);overflow:hidden;text-overflow:ellipsis}
 .sd.on{background:linear-gradient(180deg,#5aa9ff,#1667e8);border-color:transparent;box-shadow:0 0 12px rgba(47,141,255,.5)}.sd.on span{color:#dbeaff}
 .sd.nx{border:1.5px dashed #56c8ff}
+[hidden]{display:none!important}
+.timer:empty{display:none}
 .maint{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:24px max(20px,env(safe-area-inset-right,0px)) 24px max(20px,env(safe-area-inset-left,0px));background:radial-gradient(70% 50% at 50% 35%,rgba(47,141,255,.3),transparent 70%),#050a18}
 .mspin{width:34px;height:34px;border-radius:50%;border:3px solid rgba(80,150,255,.25);border-top-color:#2f8dff;animation:spin 1s linear infinite;margin-top:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -483,7 +485,7 @@ function render() {
     $('#passBtn').hidden = false; $('#passBtn').textContent = '→  ' + T('pass');
     $('#moreBat').hidden = S.batons.length < 2; $('#moreBat').textContent = T('more', S.batons.length - 1);
   } else {
-    c.classList.add('off'); $('#holdT').textContent = T('none1'); $('#holdP').textContent = T('none2'); $('#timer').textContent = ''; $('#passBtn').hidden = true; $('#moreBat').hidden = true;
+    c.classList.add('off'); $('#holdT').textContent = T('none1'); $('#holdP').textContent = T('none2'); $('#timer').textContent = ''; $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
   }
   $('#dotHome').hidden = !S.holding;
   // chain
@@ -547,6 +549,7 @@ function closeSheet() { $('#scrim').hidden = true; }
 $('#scrim').onclick = (e) => { if (e.target.id === 'scrim') closeSheet(); };
 $('#passBtn').onclick = () => {
   hap();
+  if (!S || !S.holding) return $('#invite').onclick();  // no baton in hand: the button invites a friend instead
   sheet('<h3>' + T('who') + '</h3>' +
     '<button class="opt" data-k="new"><span class="t"><b>' + T('newP') + '</b><span>' + T('newS') + '</span></span><span class="mult x5">x5</span></button>' +
     '<button class="opt" data-k="friend"><span class="t"><b>' + T('friendP') + '</b><span>' + T('friendS') + '</span></span><span class="mult">x3</span></button>' +
