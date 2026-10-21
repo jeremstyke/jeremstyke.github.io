@@ -262,6 +262,9 @@ nav.tabs button[aria-current="page"] svg{filter:drop-shadow(0 0 6px rgba(47,141,
 .sd b{font-family:var(--display);font-size:18px}.sd span{font-size:9.5px;color:var(--mute);overflow:hidden;text-overflow:ellipsis}
 .sd.on{background:linear-gradient(180deg,#5aa9ff,#1667e8);border-color:transparent;box-shadow:0 0 12px rgba(47,141,255,.5)}.sd.on span{color:#dbeaff}
 .sd.nx{border:1.5px dashed #56c8ff}
+.maint{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:24px max(20px,env(safe-area-inset-right,0px)) 24px max(20px,env(safe-area-inset-left,0px));background:radial-gradient(70% 50% at 50% 35%,rgba(47,141,255,.3),transparent 70%),#050a18}
+.mspin{width:34px;height:34px;border-radius:50%;border:3px solid rgba(80,150,255,.25);border-top-color:#2f8dff;animation:spin 1s linear infinite;margin-top:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
 .score .big{max-width:100%;overflow-wrap:anywhere}
 #p-rank .big,#p-tasks .big,#p-friends .big{font-size:clamp(38px,12.5vw,60px);line-height:1.05}
 nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10.5px}
@@ -416,6 +419,19 @@ ar:{sH:(n)=>'السلسلة: '+n+' يوم',sDone:(x)=>'اليوم: +'+x+' تم �
 fa:{sH:(n)=>'پیاپی: '+n+' روز',sDone:(x)=>'امروز: +'+x+' دریافت شد',sTomorrow:(x)=>'فردا برگرد برای +'+x,sNext:(x)=>'امروز برداشت کن و +'+x+' $BATON بگیر',sRule:(c,x)=>'روزی حداقل یک بار برداشت کن. یک روز جا بیندازی، پیاپی از ۱ شروع می‌شود. پاداش هر روز بیشتر می‌شود تا روز '+c+' (+'+x+').'}
 };
 for (const k in X4) Object.assign(X[k], X4[k]);
+const X5 = {
+en:{mH:'Quick update in progress',mP:'Baton is back in a few minutes. Your mine keeps filling up in the meantime.'},
+fr:{mH:'Petite mise à jour en cours',mP:'Baton revient dans quelques minutes. Ta mine continue de se remplir pendant ce temps.'},
+es:{mH:'Actualización en curso',mP:'Baton vuelve en unos minutos. Tu mina sigue llenándose mientras tanto.'},
+pt:{mH:'Atualização em andamento',mP:'O Baton volta em alguns minutos. Sua mina continua enchendo enquanto isso.'},
+ru:{mH:'Идёт обновление',mP:'Baton вернётся через несколько минут. Шахта тем временем продолжает заполняться.'},
+uk:{mH:'Триває оновлення',mP:'Baton повернеться за кілька хвилин. Шахта тим часом далі заповнюється.'},
+tr:{mH:'Kısa bir güncelleme yapılıyor',mP:'Baton birkaç dakika içinde geri dönüyor. Bu arada madenin dolmaya devam ediyor.'},
+id:{mH:'Pembaruan sedang berlangsung',mP:'Baton kembali dalam beberapa menit. Tambangmu tetap terisi selama itu.'},
+ar:{mH:'تحديث سريع جارٍ',mP:'يعود Baton خلال دقائق. منجمك يستمر في الامتلاء خلال ذلك.'},
+fa:{mH:'به‌روزرسانی کوتاه در جریان است',mP:'Baton تا چند دقیقه دیگر برمی‌گردد. معدنت در این مدت همچنان پر می‌شود.'}
+};
+for (const k in X5) Object.assign(X[k], X5[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -437,7 +453,9 @@ let S = null, got = 0, fetchedAt = 0;
 async function api(action, body) {
   try {
     const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ initData: (tg && tg.initData) || '', action }, body || {})) });
-    return await r.json();
+    const j = await r.json();
+    if (j && j.error === 'maint') maint();
+    return j;
   } catch (e) { return { ok: false, error: 'other' }; }
 }
 function toast(t) { const el = $('#toast'); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => { el.hidden = true; }, 2600); }
@@ -649,6 +667,16 @@ document.querySelector('.chip.g').onclick = () => {
       + (today ? '<button class="btn ghost" data-k="keep">OK</button>' : '<button class="btn mint" data-k="harv">⛏️ ' + T('harvest') + '</button>'));
   };
 })();
+// 21 oct 2026: maintenance screen (the server answers error 'maint'); it checks again every 15 s and reloads when Baton is back
+function maint() {
+  if (document.querySelector('.maint')) return;
+  const el = document.createElement('div'); el.className = 'maint';
+  el.innerHTML = '<div class="tcard"><div class="tic">🛠️</div><h2>' + T('mH') + '</h2><p>' + T('mP') + '</p><div class="mspin"></div></div>';
+  document.body.appendChild(el); $('#loader').hidden = true;
+  setInterval(async () => {
+    try { const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ initData: (tg && tg.initData) || '', action: 'state' }) }).then((x) => x.json()); if (r && r.ok) location.reload(); } catch (e) {}
+  }, 15000);
+}
 let nudged = false;
 function nudge() {
   if (nudged || !S || S.friends > 0) return; nudged = true;
@@ -658,7 +686,7 @@ function nudge() {
 (async () => {
   const r = await api('state');
   $('#loader').hidden = true;
-  if (!r.ok) { toast(errMsg(r)); return; }
+  if (!r.ok) { if (r.error !== 'maint') toast(errMsg(r)); return; }
   setState(r);
   if ((!LS.get('bt_tuto') && (S.pts || 0) < 1000) || ((tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '') === 'tuto') { LS.set('bt_tuto', '1'); tutorial(); }
   $('#helpBtn').onclick = () => { hap(); tutorial(); };
