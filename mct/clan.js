@@ -287,6 +287,7 @@
     h += '<button class="ghost" id="clleave" style="width:100%;opacity:.7">' + ec(T.leave) + '</button>';
     b.innerHTML = h;
     const sc = b.querySelector('#clsc'); if (sc) sc.onclick = () => { hp(); closeIt(); try { openCoin(c.coin.id); } catch (e) {} };
+    try { if (window.mctWar) window.mctWar.mount(b); } catch (e) {} // 21 oct 2026 (Jeremy): clan wars
     b.querySelector('#clinv').onclick = () => { hp(); try { shareGame('clan', c.id, c.link, T.invmsg(c.emoji + ' ' + c.name)); } catch (e) { try { tw.openTelegramLink('https://t.me/share/url?url=' + encodeURIComponent(c.link) + '&text=' + encodeURIComponent(T.invmsg(c.name))); } catch (x) {} } };
     const act = async (a, body, btn) => { hp(); if (btn) btn.disabled = true; const q = await call(a, body); if (btn) btn.disabled = false; if (!q || !q.ok) { hp('err'); tst(errOf(q)); return false; } hp('ok'); show(); return true; };
     b.querySelectorAll('[data-acc]').forEach((x) => x.onclick = () => act('clanaccept', { uid: Number(x.dataset.acc) }, x));
@@ -397,4 +398,159 @@
     Object.keys(N).forEach((l) => { if (!G[l]) return; if (G[l].led_k) Object.assign(G[l].led_k, N[l].led); if (G[l].err) Object.assign(G[l].err, N[l].err); });
   };
   add();
+})();
+
+// 21 oct 2026 (Jeremy): clan wars. A card in the clan page ("⚔️ Combattre": challenge another clan, accept a challenge, the board of
+// the duels with the live score) and, during a war, a bar on the game screen when a duel is waiting for the player.
+// The duels are played in MCT Duel (free, kind 'war'). Data: mct-ton actions mon_clanwar... (SQL mct_clan_war_api).
+(() => {
+  const TXW = {
+    fr: { h: '⚔️ Guerre de clan', fight: '⚔️ Combattre', x: 'Défie un autre clan : X contre X, 24 h de duels gratuits dans MCT Duel. Le clan qui gagne le plus de duels rafle les deux mises (moins 5 %).',
+      notchief: 'Seul le chef peut lancer une guerre de clan.', pick: '1. Le clan adverse', stake: '2. La mise (prise dans la cagnotte : ', champs: (n) => '3. Tes ' + n + ' champion' + (n > 1 ? 's' : ''),
+      go: '⚔️ Lancer la guerre', wait: (b) => 'Défi envoyé à ' + b + '. Son chef a 12 h pour accepter.', cancel: 'Annuler le défi', inc: (a) => a + ' défie ton clan !',
+      incx: (s, n) => 'Mise : ' + s + ' chacun · ' + n + ' contre ' + n + ' · 24 h de duels', acc: '✅ Accepter la guerre', ref: 'Refuser', pend: 'Ton chef doit répondre au défi.',
+      left: (t) => 'Fin dans ' + t, play: '▶ Jouer', hist: 'Dernières guerres', won: '🏆 Victoire', lost: 'Défaite', tie: 'Égalité', busy: 'en guerre', vs: 'contre',
+      pot: (p) => 'Le gagnant rafle ' + p, none: 'Aucun autre clan disponible pour le moment.', sel: (k, n) => k + ' / ' + n + ' choisis', you: 'toi',
+      bar: (a, s, b) => '⚔️ ' + a + ' ' + s + ' ' + b + ' · Ton duel t\'attend', ok: '⚔️ Défi envoyé !', okacc: '⚔️ La guerre commence !',
+      e: { pot: 'Pas assez d\'argent dans la cagnotte du clan.', team: 'Choisis exactement le bon nombre de champions.', busy: 'Ton clan est déjà en guerre.', busy2: 'Ce clan est déjà en guerre.', chief: 'Seul le chef peut faire ça.', gone: 'Ce défi n\'existe plus.', noclan2: 'Ce clan n\'existe plus.', bad: 'Choix incomplet.' } },
+    en: { h: '⚔️ Clan war', fight: '⚔️ Fight', x: 'Challenge another clan: X vs X, 24 h of free duels in MCT Duel. The clan that wins the most duels takes both stakes (minus 5 %).',
+      notchief: 'Only the chief can start a clan war.', pick: '1. The enemy clan', stake: '2. The stake (from the pot: ', champs: (n) => '3. Your ' + n + ' champion' + (n > 1 ? 's' : ''),
+      go: '⚔️ Start the war', wait: (b) => 'Challenge sent to ' + b + '. Their chief has 12 h to accept.', cancel: 'Cancel the challenge', inc: (a) => a + ' challenges your clan!',
+      incx: (s, n) => 'Stake: ' + s + ' each · ' + n + ' vs ' + n + ' · 24 h of duels', acc: '✅ Accept the war', ref: 'Refuse', pend: 'Your chief has to answer the challenge.',
+      left: (t) => 'Ends in ' + t, play: '▶ Play', hist: 'Last wars', won: '🏆 Victory', lost: 'Defeat', tie: 'Tie', busy: 'at war', vs: 'vs',
+      pot: (p) => 'The winner takes ' + p, none: 'No other clan available for now.', sel: (k, n) => k + ' / ' + n + ' picked', you: 'you',
+      bar: (a, s, b) => '⚔️ ' + a + ' ' + s + ' ' + b + ' · Your duel is waiting', ok: '⚔️ Challenge sent!', okacc: '⚔️ The war begins!',
+      e: { pot: 'Not enough money in the clan pot.', team: 'Pick exactly the right number of champions.', busy: 'Your clan is already at war.', busy2: 'This clan is already at war.', chief: 'Only the chief can do that.', gone: 'This challenge is gone.', noclan2: 'This clan is gone.', bad: 'Incomplete choice.' } },
+    id: { h: '⚔️ Perang klan', fight: '⚔️ Bertarung', x: 'Tantang klan lain: X lawan X, 24 jam duel gratis di MCT Duel. Klan yang menang duel terbanyak membawa kedua taruhan (dikurangi 5 %).',
+      notchief: 'Hanya ketua yang bisa memulai perang klan.', pick: '1. Klan lawan', stake: '2. Taruhan (dari kas: ', champs: (n) => '3. ' + n + ' jagoanmu',
+      go: '⚔️ Mulai perang', wait: (b) => 'Tantangan dikirim ke ' + b + '. Ketuanya punya 12 jam untuk menerima.', cancel: 'Batalkan tantangan', inc: (a) => a + ' menantang klanmu!',
+      incx: (s, n) => 'Taruhan: ' + s + ' masing-masing · ' + n + ' lawan ' + n + ' · 24 jam duel', acc: '✅ Terima perang', ref: 'Tolak', pend: 'Ketuamu harus menjawab tantangan.',
+      left: (t) => 'Berakhir dalam ' + t, play: '▶ Main', hist: 'Perang terakhir', won: '🏆 Menang', lost: 'Kalah', tie: 'Seri', busy: 'sedang perang', vs: 'lawan',
+      pot: (p) => 'Pemenang membawa ' + p, none: 'Belum ada klan lain yang tersedia.', sel: (k, n) => k + ' / ' + n + ' dipilih', you: 'kamu',
+      bar: (a, s, b) => '⚔️ ' + a + ' ' + s + ' ' + b + ' · Duelmu menunggu', ok: '⚔️ Tantangan dikirim!', okacc: '⚔️ Perang dimulai!',
+      e: { pot: 'Uang di kas klan tidak cukup.', team: 'Pilih jumlah jagoan yang tepat.', busy: 'Klanmu sedang berperang.', busy2: 'Klan ini sedang berperang.', chief: 'Hanya ketua yang bisa.', gone: 'Tantangan ini sudah tidak ada.', noclan2: 'Klan ini sudah tidak ada.', bad: 'Pilihan belum lengkap.' } },
+    ru: { h: '⚔️ Война кланов', fight: '⚔️ В бой', x: 'Брось вызов другому клану: X против X, 24 ч бесплатных дуэлей в MCT Duel. Клан, выигравший больше дуэлей, забирает обе ставки (минус 5 %).',
+      notchief: 'Только глава может начать войну кланов.', pick: '1. Клан-соперник', stake: '2. Ставка (из казны: ', champs: (n) => '3. Твои чемпионы: ' + n,
+      go: '⚔️ Начать войну', wait: (b) => 'Вызов отправлен клану ' + b + '. У главы 12 ч, чтобы принять.', cancel: 'Отменить вызов', inc: (a) => a + ' бросает вызов твоему клану!',
+      incx: (s, n) => 'Ставка: ' + s + ' с каждого · ' + n + ' против ' + n + ' · 24 ч дуэлей', acc: '✅ Принять войну', ref: 'Отказать', pend: 'Глава должен ответить на вызов.',
+      left: (t) => 'Конец через ' + t, play: '▶ Играть', hist: 'Последние войны', won: '🏆 Победа', lost: 'Поражение', tie: 'Ничья', busy: 'воюет', vs: 'против',
+      pot: (p) => 'Победитель забирает ' + p, none: 'Пока нет других кланов.', sel: (k, n) => 'выбрано ' + k + ' / ' + n, you: 'ты',
+      bar: (a, s, b) => '⚔️ ' + a + ' ' + s + ' ' + b + ' · Твоя дуэль ждёт', ok: '⚔️ Вызов отправлен!', okacc: '⚔️ Война началась!',
+      e: { pot: 'В казне клана недостаточно денег.', team: 'Выбери нужное число чемпионов.', busy: 'Твой клан уже воюет.', busy2: 'Этот клан уже воюет.', chief: 'Это может только глава.', gone: 'Этого вызова больше нет.', noclan2: 'Этого клана больше нет.', bad: 'Выбор не завершён.' } },
+    fa: { h: '⚔️ جنگ کلن', fight: '⚔️ نبرد', x: 'کلن دیگری را به چالش بکش: X در برابر X، ۲۴ ساعت دوئل رایگان در MCT Duel. کلنی که بیشترین دوئل را ببرد هر دو شرط را می‌برد (منهای ۵٪).',
+      notchief: 'فقط رئیس می‌تواند جنگ کلن را شروع کند.', pick: '۱. کلن حریف', stake: '۲. شرط (از صندوق: ', champs: (n) => '۳. ' + n + ' قهرمان تو',
+      go: '⚔️ شروع جنگ', wait: (b) => 'چالش برای ' + b + ' فرستاده شد. رئیس آن ۱۲ ساعت وقت دارد.', cancel: 'لغو چالش', inc: (a) => a + ' کلن تو را به چالش کشید!',
+      incx: (s, n) => 'شرط: ' + s + ' هر کدام · ' + n + ' در برابر ' + n + ' · ۲۴ ساعت دوئل', acc: '✅ قبول جنگ', ref: 'رد', pend: 'رئیس تو باید به چالش پاسخ دهد.',
+      left: (t) => 'پایان تا ' + t, play: '▶ بازی', hist: 'آخرین جنگ‌ها', won: '🏆 پیروزی', lost: 'شکست', tie: 'مساوی', busy: 'در جنگ', vs: 'در برابر',
+      pot: (p) => 'برنده می‌برد ' + p, none: 'فعلاً کلن دیگری در دسترس نیست.', sel: (k, n) => k + ' / ' + n + ' انتخاب شد', you: 'تو',
+      bar: (a, s, b) => '⚔️ ' + a + ' ' + s + ' ' + b + ' · دوئلت منتظر است', ok: '⚔️ چالش فرستاده شد!', okacc: '⚔️ جنگ شروع شد!',
+      e: { pot: 'پول کافی در صندوق کلن نیست.', team: 'دقیقاً تعداد درست قهرمان را انتخاب کن.', busy: 'کلن تو در حال جنگ است.', busy2: 'این کلن در حال جنگ است.', chief: 'فقط رئیس می‌تواند.', gone: 'این چالش دیگر وجود ندارد.', noclan2: 'این کلن دیگر وجود ندارد.', bad: 'انتخاب کامل نیست.' } }
+  };
+  const lgw = () => { let l = 'en'; try { l = (typeof LANG !== 'undefined' && LANG) || 'en'; } catch (e) {} return TXW[l] ? l : 'en'; };
+  const W = () => TXW[lgw()];
+  const ecw = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  const usdw = (n) => { const s = Number(n || 0).toLocaleString(lgw() === 'fr' ? 'fr-FR' : 'en-US', { maximumFractionDigits: 0 }); return lgw() === 'fr' ? s + ' $' : '$' + s; };
+  const hpw = (k) => { try { hp(k); } catch (e) {} };
+  const tsw = (m) => { try { tst(m); } catch (e) {} };
+  const callw = async (a, b) => { try { return await tonCall(Object.assign({ action: 'mon_' + a }, b || {})); } catch (e) { return null; } };
+  const lbl = (c) => (c.emoji ? c.emoji + ' ' : '') + c.name;
+  const MODE = { pd: '📈', sn: '🎯', tp: '👆' };
+  const tleft = (ts) => { const s = Math.max(0, Number(ts || 0) - Date.now() / 1000); const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60); return h ? h + ' h ' + String(m).padStart(2, '0') : m + ' min'; };
+  const openDuel = (id) => { hpw(); const u = 'https://t.me/Memecointycoonbot/Mctduel?startapp=duel_' + id; try { tw.openTelegramLink(u); } catch (e) { try { Telegram.WebApp.openTelegramLink(u); } catch (x) { location.href = u; } } };
+  const st = document.createElement('style');
+  st.textContent = '.cwar .cwsc{display:flex;align-items:center;justify-content:center;gap:12px;margin:8px 0 4px;font-weight:900;font-size:16px}.cwar .cwsc b{font-size:28px;color:#ffd43b}'
+    + '.cwar .cwd{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid rgba(255,255,255,.07);font-size:13.5px}.cwar .cwd .n{flex:1;min-width:0}.cwar .cwd .n span{opacity:.6}'
+    + '.cwar .cwd.me{background:rgba(255,212,59,.07);border-radius:10px;padding:8px}.cwar .chip{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:inherit;font-weight:700;font-size:13px;margin:0 6px 6px 0;cursor:pointer}'
+    + '.cwar .chip[aria-pressed=true]{border:2px solid #ffd43b;background:rgba(255,212,59,.12)}.cwar .chip:disabled{opacity:.4}.cwar .cwl{font-weight:800;font-size:13px;margin:10px 0 4px}'
+    + '#cwbar{position:fixed;left:12px;right:12px;bottom:calc(var(--tab,68px) + 14px + env(safe-area-inset-bottom));z-index:9000;display:flex;align-items:center;gap:8px;padding:11px 12px;border-radius:16px;background:linear-gradient(135deg,#ff5a5a,#ff9a3c);color:#fff;font-weight:800;font-size:13.5px;box-shadow:0 8px 24px rgba(0,0,0,.35);cursor:pointer}'
+    + '#cwbar span{flex:1;min-width:0}#cwbar button{border:0;background:rgba(0,0,0,.2);color:#fff;border-radius:999px;width:28px;height:28px;font-weight:900;cursor:pointer;flex:none}';
+  document.head.appendChild(st);
+
+  // the card in the clan page, right under the clan header
+  async function mount(b) {
+    if (!b) return;
+    const box = document.createElement('div'); box.className = 'cc cwar'; box.id = 'cwar'; box.innerHTML = '<b>' + ecw(W().h) + '</b><div style="text-align:center;padding:10px 0;opacity:.6">⏳</div>';
+    const first = b.querySelector('.cc'); if (first && first.nextSibling) b.insertBefore(box, first.nextSibling); else b.appendChild(box);
+    const r = await callw('clanwar');
+    if (!document.body.contains(box)) return;
+    if (!r || !r.ok) { box.remove(); return; }
+    draw(box, r);
+  }
+  function draw(box, r) {
+    const T = W(), w = r.war;
+    let h = '<b>' + ecw(T.h) + '</b>';
+    if (w && (w.status === 'live' || w.status === 'ending')) {
+      h += '<div class="cwsc"><span>' + ecw(lbl(w.a)) + '</span><b>' + w.a_pts + ' - ' + w.b_pts + '</b><span>' + ecw(lbl(w.b)) + '</span></div>'
+        + '<small style="text-align:center">' + ecw(T.left(tleft(w.ends))) + ' · ' + ecw(T.pot(usdw(w.stake * 2 * 0.95))) + '</small>';
+      h += (w.duels || []).map((d) => {
+        const res = d.over ? (d.winner === d.a.id ? '🟢 - 🔴' : d.winner === d.b.id ? '🔴 - 🟢' : '🤝') : (d.a.done ? '✅' : '⏳') + ' ' + (d.b.done ? '✅' : '⏳');
+        return '<div class="cwd' + (d.me ? ' me' : '') + '"><span>' + (MODE[d.mode] || '📈') + '</span><span class="n">' + ecw(d.a.name) + ' <span>' + ecw(T.vs) + '</span> ' + ecw(d.b.name) + '</span>'
+          + (d.play ? '<button class="cb" data-wd="' + d.id + '">' + ecw(T.play) + '</button>' : '<small style="display:inline;opacity:.8">' + res + '</small>') + '</div>';
+      }).join('');
+    } else if (w && w.status === 'pending') {
+      if (r.side === 'a') {
+        h += '<small style="margin:6px 0">' + ecw(T.wait(lbl(w.b))) + '</small><small>' + ecw(T.incx(usdw(w.stake), w.size)) + '</small>'
+          + (r.chief ? '<button class="cb g" id="cwcancel" style="width:100%;margin-top:8px">' + ecw(T.cancel) + '</button>' : '');
+      } else {
+        h += '<small style="margin:6px 0;font-weight:800;color:#ffd43b">' + ecw(T.inc(lbl(w.a))) + '</small><small>' + ecw(T.incx(usdw(w.stake), w.size)) + ' · ' + ecw(T.left(tleft(w.accept_by))) + '</small>';
+        if (r.chief) {
+          h += '<div class="cwl">' + ecw(T.champs(w.size)) + ' <small style="display:inline" id="cwsel"></small></div><div id="cwteam">' + (r.members || []).map((m) => '<button class="chip" data-wm="' + m.id + '"' + (m.banned ? ' disabled' : '') + ' aria-pressed="false">' + ecw(m.name) + '</button>').join('') + '</div>'
+            + '<div style="display:flex;gap:6px;margin-top:6px"><button class="cb" id="cwacc" style="flex:1">' + ecw(T.acc) + '</button><button class="cb r" id="cwref">' + ecw(T.ref) + '</button></div>';
+        } else h += '<small style="margin-top:6px">' + ecw(T.pend) + '</small>';
+      }
+    } else {
+      h += '<small style="margin:4px 0 8px">' + ecw(T.x) + '</small>';
+      if (r.chief) h += '<button class="cb" id="cwgo" style="width:100%">' + ecw(T.fight) + '</button><div id="cwform"></div>';
+      else h += '<small style="opacity:.7">' + ecw(T.notchief) + '</small>';
+    }
+    if ((r.history || []).length) h += '<div class="cwl">' + ecw(T.hist) + '</div>' + r.history.map((x) => '<div class="cwd"><span class="n">' + ecw(x.vs) + '</span><small style="display:inline">' + x.mine + ' - ' + x.their + ' · ' + ecw(x.tie ? T.tie : x.win ? T.won : T.lost) + '</small></div>').join('');
+    box.innerHTML = h;
+    box.querySelectorAll('[data-wd]').forEach((x) => x.onclick = () => openDuel(x.dataset.wd));
+    const again = async () => { const q = await callw('clanwar'); if (q && q.ok && document.body.contains(box)) draw(box, q); };
+    const act = async (a, body, btn, okm) => { hpw(); if (btn) btn.disabled = true; const q = await callw(a, body); if (btn) btn.disabled = false; if (!q || !q.ok) { hpw('err'); tsw((q && q.error && T.e[q.error]) || T.e.bad); return; } hpw('ok'); if (okm) tsw(okm); again(); };
+    const picker = (wrap, need, out, sel) => {
+      sel = sel || new Set(); const upd = () => { if (out) out.textContent = T.sel(sel.size, need); };
+      wrap.querySelectorAll('[data-wm]').forEach((x) => x.onclick = () => { hpw(); const id = Number(x.dataset.wm); if (sel.has(id)) sel.delete(id); else if (sel.size < need) sel.add(id); x.setAttribute('aria-pressed', String(sel.has(id))); upd(); });
+      upd(); return sel;
+    };
+    const cancel = box.querySelector('#cwcancel'); if (cancel) cancel.onclick = () => act('clanwarcancel', {}, cancel);
+    const ref = box.querySelector('#cwref'); if (ref) ref.onclick = () => act('clanwarrefuse', {}, ref);
+    const acc = box.querySelector('#cwacc');
+    if (acc) { const sel = picker(box.querySelector('#cwteam'), w.size, box.querySelector('#cwsel')); acc.onclick = () => { if (sel.size !== w.size) return tsw(T.e.team); act('clanwaraccept', { team: [...sel] }, acc, T.okacc); }; }
+    const go = box.querySelector('#cwgo');
+    if (go) go.onclick = () => {
+      hpw(); go.remove();
+      const f = box.querySelector('#cwform'); const tg = (r.targets || []);
+      let tgt = null, stake = null, sel = new Set();
+      const paint = () => {
+        const t = tg.find((x) => x.id === tgt), need = t ? t.size : 0;
+        f.innerHTML = '<div class="cwl">' + ecw(T.pick) + '</div>' + (tg.length ? tg.map((x) => '<button class="chip" data-wt="' + x.id + '"' + (x.busy ? ' disabled' : '') + ' aria-pressed="' + (tgt === x.id) + '">' + ecw(lbl(x)) + ' · ' + x.size + 'v' + x.size + (x.busy ? ' · ' + ecw(T.busy) : '') + '</button>').join('') : '<small>' + ecw(T.none) + '</small>')
+          + '<div class="cwl">' + ecw(T.stake) + usdw(r.treasury) + ')</div>' + (r.stakes || []).map((s) => '<button class="chip" data-ws="' + s + '"' + (s > r.treasury ? ' disabled' : '') + ' aria-pressed="' + (stake === s) + '">' + usdw(s) + '</button>').join('')
+          + (t ? '<div class="cwl">' + ecw(T.champs(need)) + ' <small style="display:inline" id="cwsel2"></small></div><div id="cwteam2">' + (r.members || []).map((m) => '<button class="chip" data-wm="' + m.id + '"' + (m.banned ? ' disabled' : '') + ' aria-pressed="' + sel.has(m.id) + '">' + ecw(m.name) + '</button>').join('') + '</div>' : '')
+          + (t && stake ? '<small style="margin:6px 0">' + ecw(T.pot(usdw(stake * 2 * 0.95))) + '</small>' : '')
+          + '<button class="cb" id="cwlaunch" style="width:100%;margin-top:8px"' + (t && stake ? '' : ' disabled') + '>' + ecw(T.go) + '</button>';
+        f.querySelectorAll('[data-wt]').forEach((x) => x.onclick = () => { hpw(); tgt = Number(x.dataset.wt); const t2 = tg.find((y) => y.id === tgt); if (t2 && sel.size > t2.size) sel = new Set([...sel].slice(0, t2.size)); paint(); });
+        f.querySelectorAll('[data-ws]').forEach((x) => x.onclick = () => { hpw(); stake = Number(x.dataset.ws); paint(); });
+        const tw2 = f.querySelector('#cwteam2');
+        if (tw2) picker(tw2, need, f.querySelector('#cwsel2'), sel);
+        const l = f.querySelector('#cwlaunch'); if (l) l.onclick = () => { if (sel.size !== need) return tsw(T.e.team); act('clanwarnew', { clan: tgt, stake: stake, team: [...sel] }, l, T.ok); };
+      };
+      paint();
+    };
+  }
+
+  // the bar on the game screen during a war, when a duel is waiting for this player (checked at start and every 5 minutes)
+  async function bar() {
+    const r = await callw('clanwar');
+    const old = document.getElementById('cwbar');
+    const w = r && r.ok && r.war, d = w && w.status === 'live' && (w.duels || []).find((x) => x.play);
+    if (!d) { if (old) old.remove(); return; }
+    if (sessionStorage && (() => { try { return sessionStorage.getItem('cwbar_off') === String(w.id); } catch (e) { return false; } })()) return;
+    const T = W(), el = old || document.createElement('div'); el.id = 'cwbar';
+    el.innerHTML = '<span>' + ecw(T.bar(w.a.emoji || '', w.a_pts + ' - ' + w.b_pts, w.b.emoji || '')) + ' ›</span><button aria-label="x">✕</button>';
+    el.onclick = (e) => { if (e.target.tagName === 'BUTTON') { e.stopPropagation(); try { sessionStorage.setItem('cwbar_off', String(w.id)); } catch (x) {} el.remove(); return; } openDuel(d.id); };
+    if (!old) document.body.appendChild(el);
+  }
+  window.mctWar = { mount };
+  setTimeout(bar, 4000); setInterval(bar, 300000);
 })();
