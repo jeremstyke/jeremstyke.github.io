@@ -553,7 +553,11 @@ function render() {
   const srow = (t) => '<div class="row' + (t.done ? ' on' : '') + '"><div class="t"><b>' + esc(t.title) + '</b><span>' + T('subS', t.perk || 10) + (t.done ? '' : ' · +' + fmt(t.reward) + ' $BATON') + '</span></div>' + (t.done ? '<span class="pill">✓ ' + T('active') + '</span>' : '<button class="sm" data-task="' + t.id + '" data-url="' + esc(t.url || '') + '">' + (opened[t.id] ? T('claim') : T('go')) + '</button>') + '</div>';
   const dl = S.tasks.filter((t) => /^daily_/.test(t.kind)), sb = S.tasks.filter((t) => t.kind === 'join'), on1 = S.tasks.filter((t) => !/^daily_/.test(t.kind) && t.kind !== 'join');
   const sec = (h, list, f) => list.length ? '<div class="sec">' + h + '</div>' + list.map(f).join('') : '';
-  $('#tasks').innerHTML = sec(T('daily'), dl, trow) + sec('📢 ' + T('subs'), sb, srow) + sec(T('once'), on1, trow);
+  // 21 oct 2026: tasks still to do come first (newest first), and a block with something to do goes above the finished ones
+  const srt = (l) => l.sort((x, y) => (x.done - y.done) || (y.id - x.id));
+  const secs = [[T('daily'), srt(dl), trow], ['📢 ' + T('subs'), srt(sb), srow], [T('once'), srt(on1), trow]];
+  secs.sort((x, y) => x[1].every((t) => t.done) - y[1].every((t) => t.done));
+  $('#tasks').innerHTML = secs.map((z) => sec(z[0], z[1], z[2])).join('');
   $('#dotTasks').hidden = !S.tasks.some((t) => !t.done);
   $('#nFriends').textContent = fmt(S.friends);
   tick();
