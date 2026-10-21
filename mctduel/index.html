@@ -290,6 +290,19 @@ function pickLang() {
 }
 var LANG = pickLang();
 function t(k, o) { var s = (TX[LANG] && TX[LANG][k]) || TX.en[k] || k; if (o) Object.keys(o).forEach(function (x) { s = s.split('{' + x + '}').join(o[x]); }); return s; }
+// 21 oct 2026 (Jeremy): clan war duels (free, launched from the clan page of Meme Coin Tycoon; each champion plays when he wants)
+var WX = {
+  fr: { war_tag: '⚔️ Guerre de clan', war_back: '⚔️ Retour à la guerre', war_pt: '+1 point pour ton clan !', war_nopt: 'Pas de point pour ton clan cette fois' },
+  en: { war_tag: '⚔️ Clan war', war_back: '⚔️ Back to the war', war_pt: '+1 point for your clan!', war_nopt: 'No point for your clan this time' },
+  es: { war_tag: '⚔️ Guerra de clanes', war_back: '⚔️ Volver a la guerra', war_pt: '¡+1 punto para tu clan!', war_nopt: 'Ningún punto para tu clan esta vez' },
+  id: { war_tag: '⚔️ Perang klan', war_back: '⚔️ Kembali ke perang', war_pt: '+1 poin untuk klanmu!', war_nopt: 'Tidak ada poin untuk klanmu kali ini' },
+  ru: { war_tag: '⚔️ Война кланов', war_back: '⚔️ Назад к войне', war_pt: '+1 очко твоему клану!', war_nopt: 'На этот раз без очка для клана' },
+  ar: { war_tag: '⚔️ حرب العشائر', war_back: '⚔️ العودة إلى الحرب', war_pt: '+1 نقطة لعشيرتك!', war_nopt: 'لا نقطة لعشيرتك هذه المرة' },
+  fa: { war_tag: '⚔️ جنگ کلن', war_back: '⚔️ بازگشت به جنگ', war_pt: '+۱ امتیاز برای کلنت!', war_nopt: 'این بار امتیازی برای کلنت نیست' }
+};
+Object.keys(WX).forEach(function (l) { if (TX[l]) Object.keys(WX[l]).forEach(function (k) { TX[l][k] = WX[l][k]; }); });
+var WARURL = 'https://t.me/Memecointycoonbot?startapp=clan';
+function warLbl(d) { return d.war ? '⚔️ ' + d.war.a + ' ' + d.war.a_pts + ' - ' + d.war.b_pts + ' ' + d.war.b : t('war_tag'); }
 function applyDir() { document.documentElement.lang = LANG; document.documentElement.dir = (LANG === 'ar' || LANG === 'fa') ? 'rtl' : 'ltr'; }
 applyDir();
 
@@ -408,7 +421,7 @@ function chipsHtml() {
 }
 function duelRow(d) {
   var on = d.opp && d.opp.name ? (d.opp.ghost ? t('ghost_of', { n: d.opp.name }) : d.opp.name) : null;
-  var stake = money(d.stake, d.cur), title, sub = stake, right = '', cls = '', avh;
+  var stake = d.kind === 'war' ? esc(warLbl(d)) : money(d.stake, d.cur), title, sub = stake, right = '', cls = '', avh;
   var meA = d.me === 'a';
   var oppN = d.me === 'b' ? d.a_name : on;
   var oppP = d.me === 'b' ? d.a_photo : (d.opp && d.opp.photo);
@@ -419,6 +432,7 @@ function duelRow(d) {
     sub = my + ' - ' + op + ' · ' + stake;
     var net = d.tie ? 0 : d.win ? (d.kind === 'random' ? d.stake : d.stake * 2 - (d.burn || 0) - d.stake) : -d.stake;
     right = '<span class="amt ' + (net > 0 ? 'w' : net < 0 ? 'l' : '') + '">' + (net > 0 ? '+' : net < 0 ? '-' : '') + money(Math.abs(net), d.cur) + '</span>';
+    if (d.kind === 'war') right = '<span class="amt ' + (d.win ? 'w' : d.tie ? '' : 'l') + '">⚔️</span>';
   } else if (d.status === 'expired') {
     title = t('d_exp'); sub = stake;
   } else if (d.act === 'play') {
@@ -838,14 +852,15 @@ function waiting(d, fresh) {
     '<div class="trophy t" style="border-color:var(--cy);background:var(--cyb);color:var(--cy)">' + IC.sw.replace('width="20" height="20"', 'width="46" height="46"') + '</div>' +
     '<h1 class="disp" style="margin:4px 0 0;font-size:34px">' + (d.mode === 'sn' || d.mode === 'tp' ? t('wait_h', { s: d.my_score }).replace('/5', ' pts') : t('wait_h', { s: d.my_score })) + '</h1>' +
     '<p style="margin:0;color:var(--mu2);line-height:1.45;max-width:320px">' + (rnd ? t('wait_s_rand') : named ? t('wait_s_to', { n: esc(d.opp.name) }) : t('wait_s_any')) + '</p></div>' +
-    '<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--mu)">' + t('stake') + '</span><b class="disp" style="font-size:22px">' + money(d.stake, d.cur) + '</b></div>' +
+    (d.kind === 'war' ? '<div class="card" style="text-align:center;font-weight:800">' + esc(warLbl(d)) + '</div>' : '<div class="card" style="display:flex;justify-content:space-between;align-items:center"><span style="color:var(--mu)">' + t('stake') + '</span><b class="disp" style="font-size:22px">' + money(d.stake, d.cur) + '</b></div>') +
     '<div class="rules"><div>' + IC.clock + '<span>' + t('d_left', { t: dur(d.expires - Date.now() / 1000) }) + '</span></div></div>' +
     '<div style="flex:1"></div>' +
     '<div class="stack">' + (named || rnd ? '' : '<button class="btn p" id="sh">' + IC.send + t('share_b') + '</button><button class="btn o" id="cp">' + t('copy_b') + '</button>') +
-    '<button class="btn o" id="hm">' + t('home') + '</button></div>',
+    (d.kind === 'war' ? '<button class="btn p" id="wb">' + t('war_back') + '</button>' : '') + '<button class="btn o" id="hm">' + t('home') + '</button></div>',
     { back: true, full: true }
   );
   if (fresh) hp('ok');
+  var wb = $('#wb'); if (wb) wb.onclick = function () { hp(); openTg(WARURL); };
   var sh = $('#sh'); if (sh) sh.onclick = function () { hp(); share(link, t('share_txt', { s: money(d.stake, d.cur) })); };
   var cp = $('#cp'); if (cp) cp.onclick = function () { hp(); copy(link); };
   $('#hm').onclick = function () { hp(); home(); };
@@ -866,7 +881,7 @@ function result(d, fresh) {
     '<div class="rs" style="display:flex;flex-direction:column;gap:16px">' +
     '<div class="trophy ' + (d.tie ? 't' : d.win ? '' : 'l') + '" style="color:' + (d.tie ? 'var(--mu2)' : d.win ? 'var(--go)' : 'var(--dn)') + '">' + (d.win || d.tie ? IC.cup : IC.dn.replace('width="30" height="30"', 'width="46" height="46"')) + '</div>' +
     '<div><h1 class="disp">' + (d.tie ? t('tie_h') : d.win ? t('win_h') : t('lose_h')) + '</h1>' +
-    '<div class="disp gain ' + (net > 0 ? 'w' : net < 0 ? 'l' : '') + '" style="margin-top:10px">' + (d.tie ? '<span style="font-size:16px;color:var(--mu2);font-family:Inter">' + t('tie_s') + '</span>' : (net > 0 ? '+' : '-') + money(Math.abs(net), d.cur)) + '</div>' +
+    '<div class="disp gain ' + (net > 0 ? 'w' : net < 0 ? 'l' : '') + '" style="margin-top:10px">' + (d.kind === 'war' ? '<span style="font-size:18px;font-family:Inter">' + (d.win ? t('war_pt') : t('war_nopt')) + '</span>' : d.tie ? '<span style="font-size:16px;color:var(--mu2);font-family:Inter">' + t('tie_s') + '</span>' : (net > 0 ? '+' : '-') + money(Math.abs(net), d.cur)) + '</div>' +
     (d.burn > 0 ? '<div style="font-size:12px;color:var(--mu);margin-top:4px">' + t('burned', { n: d.burn }) + '</div>' : '') + '</div>' +
     '<div class="duo"><div class="m"><b>' + t('you') + '</b><span class="disp" style="color:var(--cy)">' + my + u5 + '</span><small>' + t('per_ans', { t: (myMs / 5000).toFixed(1) }) + '</small></div>' +
     '<div><b>' + esc(oppLbl) + '</b><span class="disp" style="color:var(--or)">' + op + u5 + '</span><small>' + t('per_ans', { t: (opMs / 5000).toFixed(1) }) + '</small></div></div>' +
@@ -874,7 +889,7 @@ function result(d, fresh) {
     (d.opp && d.opp.ghost ? '<div style="font-size:12px;color:var(--mu)">' + t('ghost_note', { n: esc(oppName) }) + '</div>' : '') +
     '</div><div style="flex:1"></div>' +
     '<div class="stack">' +
-    (d.kind === 'random' ? '<button class="btn p" id="ag">' + IC.rpt + t('again') + '</button>'
+    (d.kind === 'war' ? '<button class="btn p" id="wb">' + t('war_back') + '</button>' : d.kind === 'random' ? '<button class="btn p" id="ag">' + IC.rpt + t('again') + '</button>'
       : '<button class="btn p" id="rm">' + IC.rpt + (d.win ? t('rematch') : t('revenge')) + '</button>') +
     (d.bb ? '<button class="btn g" id="bb">' + (d.bb_free ? t('bb_free') : t('bb_b', { n: d.bb })) + '</button>' : '') +
     (d.win ? '<button class="btn o" id="sw">' + IC.send + t('share_win') + '</button>' : '') +
@@ -895,6 +910,7 @@ function result(d, fresh) {
   };
   var bb = $('#bb'); if (bb) bb.onclick = async function () { hp(); bb.disabled = true; var r = await api('buyback', { id: d.id, free: !!d.bb_free }); bb.disabled = false; if (r.ok && r.free) { hp('ok'); SFX.win(); toast(t('bb_ok')); bb.remove(); S.me = null; return; } if (!r.ok || !r.link) { toast(errT(r)); return; } try { tw.openInvoice(r.link, function (st) { if (st === 'paid') { hp('ok'); SFX.win(); toast(t('bb_ok')); bb.remove(); S.me = null; } }); } catch (e) { toast(t('e_x')); } };
   var gm = $('#gm'); if (gm) gm.onclick = function () { hp(); openTg(MCT); };
+  var wb = $('#wb'); if (wb) wb.onclick = function () { hp(); openTg(WARURL); };
   var sw = $('#sw'); if (sw) sw.onclick = function () { hp(); share(APP + '?startapp=src_win', t('win_txt', { s: money(Math.abs(net), d.cur) })); };
   $('#hm').onclick = function () { hp(); home(); };
 }
