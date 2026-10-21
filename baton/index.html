@@ -195,12 +195,75 @@ nav.tabs button[aria-current="page"] svg{filter:drop-shadow(0 0 6px rgba(255,197
 .row.on{border-color:rgba(62,230,160,.28)}
 .conv{font-size:12px;color:var(--mute);margin-top:8px;max-width:32ch;text-align:center;line-height:1.35}
 </style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@600;800;900&display=swap');
+/* 21 oct 2026 (Jeremy): new logo style - deep night, electric Telegram blue, white, neon glow */
+:root{--night:#050a18;--lane:#0b1530;--lane2:#13224a;--chalk:#f2f7ff;--mute:#8aa3d6;--baton:#2f8dff;--flame:#56c8ff;--gain:#5fd4ff;--display:'Outfit','Big Shoulders Display',system-ui,sans-serif;--neon:0 0 18px rgba(47,141,255,.55)}
+body{background:var(--night)}
+.app{background:radial-gradient(80% 40% at 50% -8%,rgba(47,141,255,.35) 0%,transparent 70%),radial-gradient(60% 35% at 100% 40%,rgba(86,200,255,.10) 0%,transparent 70%),radial-gradient(70% 40% at 0% 90%,rgba(30,90,255,.14) 0%,transparent 70%),linear-gradient(180deg,#071230 0%,#050a18 55%,#03060f 100%)}
+.app::before{background:repeating-radial-gradient(ellipse 140% 60% at 50% 115%,transparent 0 46px,rgba(80,150,255,.07) 46px 48px)}
+.brand{font-family:var(--display);font-weight:900;letter-spacing:0;text-transform:none;font-size:27px;background:linear-gradient(180deg,#fff 35%,#a9cfff);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 10px rgba(47,141,255,.55))}
+.chip{background:rgba(47,141,255,.10);border:1px solid rgba(80,160,255,.28)}
+.chip b{color:#7cc4ff}.chip.g b{color:var(--gain)}
+.score small,.sec,.card h2{color:#8fb3ff}
+.score .big{font-family:var(--display);font-weight:900;background:linear-gradient(180deg,#ffffff 0%,#d8e9ff 50%,#4aa3ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(47,141,255,.6))}
+.score .rate{color:var(--gain);background:rgba(47,141,255,.12);border-color:rgba(86,200,255,.35)}
+.conv{color:#7f98c8}
+.card{background:linear-gradient(180deg,rgba(40,90,200,.14),rgba(10,20,50,.35));border:1px solid rgba(80,150,255,.22);box-shadow:0 10px 30px rgba(0,0,0,.45),inset 0 1px 0 rgba(160,200,255,.08)}
+.batonCard{background:radial-gradient(120% 140% at 0% 0%,rgba(47,141,255,.45) 0%,rgba(47,141,255,.10) 42%,transparent 65%),linear-gradient(160deg,#0d2257 0%,#0a1430 70%);border:1.5px solid rgba(70,150,255,.65);box-shadow:0 0 0 1px rgba(47,141,255,.15),0 0 34px rgba(47,141,255,.35),inset 0 1px 0 rgba(180,215,255,.15)}
+.batonCard::after{background:linear-gradient(115deg,transparent 40%,rgba(200,230,255,.12) 50%,transparent 60%)}
+.batonCard.off{background:linear-gradient(180deg,rgba(40,90,200,.10),rgba(10,20,50,.3));border-color:rgba(80,150,255,.2);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.stick .rod{width:20px;height:76px;border-radius:10px;background:linear-gradient(180deg,transparent 0 16%,#fff 16% 22%,transparent 22% 78%,#fff 78% 84%,transparent 84%),linear-gradient(90deg,#0b4fd6,#2f8dff 40%,#9fd0ff 52%,#2f8dff 66%,#0b4fd6);box-shadow:0 0 22px rgba(47,141,255,.8),0 0 4px #fff}
+.stick .fire{display:none}
+.stick::before{background:radial-gradient(circle,rgba(47,141,255,.45) 0%,transparent 65%)}
+.stick::after{background:#bfe2ff;box-shadow:-14px 10px 0 -1px #56c8ff,10px 14px 0 -1px #ffffff,-6px -2px 0 0 #2f8dff}
+.hold h3{font-family:var(--display);font-weight:900;text-transform:none;font-size:30px;text-shadow:0 0 16px rgba(47,141,255,.6)}
+.hold p b{color:#7cc4ff}
+.timer{color:#bfe2ff;background:rgba(0,10,40,.45);border-color:rgba(86,170,255,.4);box-shadow:inset 0 0 10px rgba(47,141,255,.2)}
+.timer.low{color:#ff7a90}
+.btn.gold,.sm{background:linear-gradient(180deg,#5aa9ff 0%,#2f8dff 50%,#1667e8 100%);color:#fff;box-shadow:0 0 22px rgba(47,141,255,.55),inset 0 1px 0 rgba(255,255,255,.45),inset 0 -3px 0 rgba(0,40,140,.45);text-shadow:0 1px 0 rgba(0,30,100,.4)}
+.btn.mint{background:linear-gradient(180deg,#8fe6ff 0%,#4cc8ff 50%,#1f9fe0 100%);color:#03203a;box-shadow:0 0 22px rgba(76,200,255,.45),inset 0 1px 0 rgba(255,255,255,.5),inset 0 -3px 0 rgba(0,70,120,.35)}
+.btn.mint[disabled]{background:rgba(76,200,255,.10);color:#7fd7ff;box-shadow:inset 0 0 0 1px rgba(76,200,255,.3)}
+.btn.ghost{background:rgba(47,141,255,.08);border:1px solid rgba(80,150,255,.28)}
+.sm.done,.sm[disabled]{background:rgba(80,150,255,.08);color:var(--mute);box-shadow:none;text-shadow:none}
+.ring{background:conic-gradient(from -90deg,#1667e8 0%,#2f8dff calc(var(--p)*.5%),#bfe2ff calc(var(--p)*1%),rgba(80,150,255,.10) 0);box-shadow:0 0 30px rgba(47,141,255,.4)}
+.ring>div{background:radial-gradient(circle at 50% 35%,#13265a,#08112b)}
+.av.me{background:#2f8dff!important;color:#fff;box-shadow:0 0 18px rgba(47,141,255,.8)}
+.bar{background:repeating-linear-gradient(90deg,#2f8dff 0 6px,#bfe2ff 6px 12px);background-size:24px 4px}
+.record{background:linear-gradient(90deg,rgba(47,141,255,.18),rgba(47,141,255,.04));border:1px solid rgba(80,150,255,.35)}
+.record b{color:#7cc4ff;font-family:var(--display)}
+.row{background:linear-gradient(180deg,rgba(40,90,200,.12),rgba(10,20,50,.3));border:1px solid rgba(80,150,255,.18)}
+.row .r{color:var(--gain)}
+.row.me{outline-color:#2f8dff}
+.rank.g{color:#7cc4ff}
+.pill{background:rgba(76,200,255,.12);border-color:rgba(76,200,255,.4);color:#7fd7ff}
+.row.on{border-color:rgba(76,200,255,.35)}
+nav.tabs{background:rgba(5,10,28,.9);border-top:1px solid rgba(80,150,255,.2)}
+nav.tabs button[aria-current="page"]{color:#7cc4ff}
+nav.tabs button[aria-current="page"]::before{background:rgba(47,141,255,.15);box-shadow:inset 0 0 0 1px rgba(80,160,255,.4),0 0 14px rgba(47,141,255,.3)}
+nav.tabs button[aria-current="page"] svg{filter:drop-shadow(0 0 6px rgba(47,141,255,.9))}
+.dot{background:#2f8dff;box-shadow:0 0 8px #2f8dff}
+.seg button[aria-pressed="true"]{background:rgba(47,141,255,.2);color:#fff}
+.sheet{background:linear-gradient(180deg,#0f2150,#070f26);border-top:1px solid rgba(80,150,255,.35);box-shadow:0 -10px 40px rgba(47,141,255,.2)}
+.sheet h3,.tcard h2{font-family:var(--display);font-weight:900;text-transform:none}
+.opt{background:rgba(47,141,255,.08);border:1px solid rgba(80,150,255,.22)}
+.mult{color:#7cc4ff;font-family:var(--display)}.mult.x5{color:#56c8ff;text-shadow:0 0 12px rgba(86,200,255,.7)}
+.tuto{background:radial-gradient(70% 50% at 50% 35%,rgba(47,141,255,.32),transparent 70%),rgba(3,7,20,.97)}
+.tic{filter:drop-shadow(0 0 26px rgba(47,141,255,.8))}
+.tcard h2{background:linear-gradient(180deg,#fff,#9fcbff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tdots i.on{background:#2f8dff;box-shadow:0 0 8px #2f8dff}
+.loader{background:radial-gradient(60% 40% at 50% 45%,rgba(47,141,255,.3),transparent 70%),#050a18}
+.loader div{font-family:var(--display);text-transform:none;color:#fff;text-shadow:0 0 30px rgba(47,141,255,.9)}
+.toast{background:#eaf3ff;color:#06122e;box-shadow:0 0 24px rgba(47,141,255,.5)}
+.foot,.foot a{color:#6f87b8}
+.chip svg{stroke:#7cc4ff}
+</style>
 </head>
 <body>
 <div class="loader" id="loader"><div>BATON</div></div>
 <div class="app">
   <header class="top">
-    <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="13" y="6" width="6" height="22" rx="3" fill="#ffc531" transform="rotate(28 16 17)"/><path d="M22 2c3 3 3 7 0 9-1-2-3-2-3-4 0-2 2-3 3-5z" fill="#ff6a2a"/></svg>Baton</div>
+    <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14.5" fill="#06122e" stroke="#2f8dff" stroke-width="2"/><text x="16" y="22" text-anchor="middle" font-family="Outfit,system-ui,sans-serif" font-weight="900" font-size="17" fill="#fff">B</text><rect x="7" y="15" width="18" height="4" rx="2" fill="#2f8dff" transform="rotate(-35 16 17)"/></svg>Baton</div>
     <div class="chips"><button class="chip" id="helpBtn" aria-label="Help" style="font-weight:800;min-width:34px;justify-content:center">?</button><div class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff6a2a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2c4 4 6 7 6 11a6 6 0 01-12 0c0-3 2-5 3-6 0 2 1 3 2 3 0-3 0-5 1-8z"/></svg><b class="num" id="streak">0</b></div><div class="chip g"><b class="num" id="bonusChip">+0%</b></div></div>
   </header>
 
@@ -276,7 +339,7 @@ nav.tabs button[aria-current="page"] svg{filter:drop-shadow(0 0 6px rgba(255,197
 const API = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/baton';
 const BOT = 'PassTheBatonBot';
 const tg = window.Telegram && Telegram.WebApp;
-try { tg.ready(); tg.expand(); tg.setHeaderColor('#0b1626'); tg.setBackgroundColor('#0b1626'); if (tg.disableVerticalSwipes) tg.disableVerticalSwipes(); } catch (e) {}
+try { tg.ready(); tg.expand(); tg.setHeaderColor('#050a18'); tg.setBackgroundColor('#050a18'); if (tg.disableVerticalSwipes) tg.disableVerticalSwipes(); } catch (e) {}
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const hap = (k) => { try { k === 'ok' ? tg.HapticFeedback.notificationOccurred('success') : k === 'err' ? tg.HapticFeedback.notificationOccurred('error') : tg.HapticFeedback.impactOccurred('light'); } catch (e) {} };
@@ -345,7 +408,7 @@ const nf = new Intl.NumberFormat(LANG === 'fa' ? 'fa-IR' : LANG, { maximumFracti
 const fmt = (n) => nf.format(Math.floor(Number(n) || 0));
 const dur = (s) => { s = Math.max(0, Math.floor(s)); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60); return h ? h + ' h ' + String(m).padStart(2, '0') : m + ' min'; };
 const clock = (s) => { s = Math.max(0, Math.floor(s)); return Math.floor(s / 3600) + ':' + String(Math.floor(s % 3600 / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); };
-const hues = ['#ffc531', '#3ee6a0', '#7cc4ff', '#ff9ec4', '#c9a7ff', '#ffb27a'];
+const hues = ['#2f8dff', '#56c8ff', '#9fd0ff', '#7a8cff', '#4cc8ff', '#b4c8ff'];
 const hueOf = (s) => { let h = 0; for (const c of String(s)) h = (h * 31 + c.charCodeAt(0)) >>> 0; return hues[h % hues.length]; };
 const init = (s) => esc(String(s || '?').trim().charAt(0).toUpperCase() || '?');
 
@@ -391,7 +454,7 @@ function render() {
     $('#chainBy').innerHTML = T('chainBy', esc(ch.starter)); $('#links').textContent = fmt(ch.links);
     let h = '';
     if (ch.links > ch.runners.length) h += '<div class="link"><div class="av" style="background:#2a3f5f;color:#8fa5c4">+' + fmt(ch.links - ch.runners.length) + '</div><div class="bar"></div></div>';
-    ch.runners.forEach((r, i) => { h += '<div class="link"><div class="av' + (r.me ? ' me' : '') + '" style="background:' + (r.me ? '#ffc531' : hueOf(r.n)) + '" title="' + esc(r.n) + '">' + init(r.n) + '</div>' + (i < ch.runners.length - 1 ? '<div class="bar"></div>' : '') + '</div>'; });
+    ch.runners.forEach((r, i) => { h += '<div class="link"><div class="av' + (r.me ? ' me' : '') + '" style="background:' + (r.me ? '#2f8dff' : hueOf(r.n)) + '" title="' + esc(r.n) + '">' + init(r.n) + '</div>' + (i < ch.runners.length - 1 ? '<div class="bar"></div>' : '') + '</div>'; });
     const el = $('#chain'); el.innerHTML = h; el.scrollLeft = document.documentElement.dir === 'rtl' ? -el.scrollWidth : el.scrollWidth;
   }
   $('#lvl').textContent = T('lvl', S.drill);
