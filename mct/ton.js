@@ -147,6 +147,14 @@ function tonTiles(s, L) {
 const tonPromo = (s) => s && s.promo_until && Date.parse(s.promo_until) > Date.now() ? (({ fr: '🔥 Cette semaine seulement (jusqu\'à dimanche minuit), puis 0,05 $', ar: '🔥 هذا الأسبوع فقط (حتى منتصف ليل الأحد)، ثم 0.05 $', id: '🔥 Hanya minggu ini (sampai Minggu tengah malam), lalu $0.05' })[LANG] || '🔥 This week only (until Sunday midnight), then $0.05') : '';
 // 19 oct 2026 (Jeremy): a player caught cheating (s.banned) sees that he is excluded from payments
 const tonBan = (s) => s && s.banned ? '<div style="margin:0 0 12px;padding:11px 13px;border-radius:14px;background:rgba(255,59,92,.14);border:1px solid rgba(255,59,92,.55);color:#ff8fa3;font-weight:700;font-size:13.5px;line-height:1.4">' + (({ fr: '🚫 Tu es exclu des paiements : notre anti-triche a détecté un bot ou un autoclicker. Tu ne recevras plus aucun paiement de notre part (amis, diamant, concours).', ar: '🚫 أنت مستبعد من المدفوعات: اكتشف نظام مكافحة الغش لدينا روبوتًا أو نقرًا آليًا. لن تتلقى أي دفعات منا بعد الآن (الأصدقاء، الماسة، المسابقات).', id: '🚫 Kamu dikeluarkan dari pembayaran: sistem anti-curang kami mendeteksi bot atau autoclicker. Kamu tidak akan menerima pembayaran lagi dari kami (teman, berlian, kontes).' })[LANG] || '🚫 You are excluded from payments: our anti-cheat detected a bot or an autoclicker. You will not receive any more payments from us (friends, diamond, contests).') + '</div>' : '';
+// 21 oct 2026 (Jeremy): the public payment proofs (every TON payout, checkable on Tonviewer; Adsgram asked for them), opened inside the game
+const MCTPRF = { fr: ['💸 Preuves de paiement : tous les paiements envoyés', 'Voir'], fa: ['💸 اثبات پرداخت: همه پرداخت‌های ارسال‌شده', 'دیدن'], ru: ['💸 Доказательства выплат: все отправленные выплаты', 'Смотреть'], id: ['💸 Bukti pembayaran: semua pembayaran terkirim', 'Lihat'], ar: ['💸 إثباتات الدفع: كل المدفوعات المرسلة', 'عرض'], es: ['💸 Pruebas de pago: todos los pagos enviados', 'Ver'] };
+window.mctProofs = function () {
+  try { haptic(); } catch (e) {}
+  const d = document.createElement('div'); d.style.cssText = 'position:fixed;inset:0;z-index:100000;background:#1a0638;display:flex;flex-direction:column';
+  d.innerHTML = '<div style="display:flex;justify-content:flex-end;padding:8px 10px"><button style="border:0;border-radius:999px;padding:8px 14px;font-weight:800;background:#fff;color:#111;cursor:pointer">✕</button></div><iframe src="/mct/proofs" style="flex:1;border:0;width:100%"></iframe>';
+  d.querySelector('button').onclick = () => d.remove(); document.body.appendChild(d);
+};
 function earnAllHtml(s) {
   const u = tonM(s.usd || 0.05), m = tonM(s.min || 0.1), K = (a, b, c) => tonM(a) + ', ' + tonM(b) + (LANG === 'fr' ? ' et ' : ' and ') + tonM(c);
   const T = ({
@@ -160,7 +168,7 @@ function earnAllHtml(s) {
     + row(T.f + (tonPromo(s) ? '<br><b style="color:#ffd43b">' + tonPromo(s) + '</b>' : '')) + row(T.d) + row(T.cg + K(1, 0.5, 0.25) + T.wk) + row(T.cp + K(1, 0.5, 0.25) + T.wk) + row(T.cd + K(1, 0.5, 0.25) + T.wk, T.cb, 'tonrk')
     // 17 oct 2026: already subscribed: it says so (no button)
     + (s.sub ? row('✅ ' + T.js.replace(/^📣 /, '') + ' · ' + T.ok) : row(T.js, T.jb, 'tonjs'))
-    + (s.subm ? row('✅ ' + T.mc.replace(/^📣 /, '') + ' · ' + T.ok) : row(T.mc, T.jb, 'tonmc')) + row(T.pay) + `</div>`;
+    + (s.subm ? row('✅ ' + T.mc.replace(/^📣 /, '') + ' · ' + T.ok) : row(T.mc, T.jb, 'tonmc')) + row(T.pay) + row((MCTPRF[LANG] || ['💸 Payment proofs: every payout sent', 'See'])[0], (MCTPRF[LANG] || ['', 'See'])[1], 'tonpf') + `</div>`;
 }
 async function tonPage() {
   if (!tw || !tw.initData) return;
@@ -191,6 +199,7 @@ async function tonPage() {
   const trk = d.querySelector('#tonrk'); if (trk) trk.onclick = () => { try { haptic(); } catch (x) {} close(); if (typeof window.mctRanks === 'function') window.mctRanks(); };
   const tmc = d.querySelector('#tonmc'); if (tmc) tmc.onclick = () => { try { haptic(); } catch (x) {} gameOpen('https://t.me/memecointycoon'); };
   const tjs = d.querySelector('#tonjs'); if (tjs) tjs.onclick = () => { try { haptic(); } catch (x) {} gameOpen('https://t.me/jeremstyke'); };
+  const tpf = d.querySelector('#tonpf'); if (tpf) tpf.onclick = () => { window.mctProofs(); };
   if (d.querySelector('#tonds')) d.querySelector('#tonds').onclick = () => { try { haptic(); } catch (x) {} gameOpen('https://t.me/DailyScorefootbot/play?startapp=src_mctsheet'); };
   const myLink = 'https://t.me/Memecointycoonbot?startapp=r_' + ((tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.id) || '');
   const myMsg = LANG === 'fr' ? '🚀 Joue à Meme Coin Tycoon avec moi sur Telegram : on gagne 500 $ chacun pour commencer 👉 ' + myLink + '\n\n(Pas encore Telegram ? Installe-le, puis reclique sur ce lien.)' : '🚀 Play Meme Coin Tycoon with me on Telegram: we both get $500 to start 👉 ' + myLink + '\n\n(No Telegram yet? Install it, then tap this link again.)';
