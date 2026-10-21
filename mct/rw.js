@@ -107,8 +107,9 @@
   }
   async function watch() {
     if (prem()) return 'ok';
-    const a = await agWatch(); if (a !== 'none') return a;
-    try { await sdk(); const r = await window.showAdsGalaxy({ miniappId: AGX }); return r && r.reward_eligible ? 'ok' : 'skip'; } catch (e) { return 'none'; }
+    // 21 oct 2026 (Jeremy): Ads Galaxy works again: it goes first (it pays), Adsgram (still in test) as backup
+    try { await sdk(); const r = await window.showAdsGalaxy({ miniappId: AGX }); return r && r.reward_eligible ? 'ok' : 'skip'; } catch (e) {}
+    return agWatch();
   }
   async function watchN(n, btn) {
     for (let i = 0; i < n; i++) {
