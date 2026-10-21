@@ -155,6 +155,8 @@ window.mctProofs = function () {
   d.innerHTML = '<div style="display:flex;justify-content:flex-end;padding:8px 10px"><button style="border:0;border-radius:999px;padding:8px 14px;font-weight:800;background:#fff;color:#111;cursor:pointer">✕</button></div><iframe src="/mct/proofs" style="flex:1;border:0;width:100%"></iframe>';
   d.querySelector('button').onclick = () => d.remove(); document.body.appendChild(d);
 };
+// 21 oct 2026 (Jeremy): links t.me/Memecointycoonbot?startapp=proofs (channel posts) open the payment proofs right away
+try { const sp0 = String((window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.start_param) || ''); if (sp0 === 'proofs') setTimeout(() => window.mctProofs(), 2500); } catch (e) {}
 function earnAllHtml(s) {
   const u = tonM(s.usd || 0.05), m = tonM(s.min || 0.1), K = (a, b, c) => tonM(a) + ', ' + tonM(b) + (LANG === 'fr' ? ' et ' : ' and ') + tonM(c);
   const T = ({
