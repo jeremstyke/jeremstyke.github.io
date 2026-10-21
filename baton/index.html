@@ -264,6 +264,7 @@ nav.tabs button[aria-current="page"] svg{filter:drop-shadow(0 0 6px rgba(47,141,
 .sd.nx{border:1.5px dashed #56c8ff}
 [hidden]{display:none!important}
 .timer:empty{display:none}
+.crewtot span{display:flex;flex-direction:column;gap:3px}.crewtot small{font-size:11.5px;color:var(--mute)}
 .tip{display:block;margin-top:7px;font-size:13px;font-weight:700;color:#bfe2ff;line-height:1.35}
 .mult{display:flex;flex-direction:column;align-items:flex-end;line-height:1}.mult .pg{font-family:var(--body);font-size:12px;font-weight:800;color:var(--gain);margin-top:4px;text-shadow:none}
 .maint{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:24px max(20px,env(safe-area-inset-right,0px)) 24px max(20px,env(safe-area-inset-left,0px));background:radial-gradient(70% 50% at 50% 35%,rgba(47,141,255,.3),transparent 70%),#050a18}
@@ -449,6 +450,19 @@ ar:{holdTip:(x)=>'⏳ مرّرها قبل 0:00: حتى +'+x+' $BATON',passTip:'�
 fa:{holdTip:(x)=>'⏳ قبل از 0:00 ردش کن: تا +'+x+' $BATON',passTip:'در 0:00 خودش می‌رود و پاداشی نمی‌گیری.',t2p:'تا وقتی دست توست، معدنت ۲ برابر سریع‌تر است. قبل از تمام شدن زمان ردش کن تا پاداش بگیری.'}
 };
 for (const k in X6) Object.assign(X[k], X6[k]);
+const X7 = {
+en:{crewEarned:'Earned with your crew',crewSplit:(a,b)=>a+' invite bonuses · '+b+' from their mining (10 %)'},
+fr:{crewEarned:'Gagné grâce à ton équipe',crewSplit:(a,b)=>a+' de bonus d\'invitation · '+b+' de leur minage (10 %)'},
+es:{crewEarned:'Ganado con tu equipo',crewSplit:(a,b)=>a+' de bonus por invitar · '+b+' de su minado (10 %)'},
+pt:{crewEarned:'Ganho com sua equipe',crewSplit:(a,b)=>a+' de bônus de convite · '+b+' da mineração deles (10 %)'},
+ru:{crewEarned:'Заработано с командой',crewSplit:(a,b)=>a+' бонусов за приглашения · '+b+' с их добычи (10 %)'},
+uk:{crewEarned:'Зароблено з командою',crewSplit:(a,b)=>a+' бонусів за запрошення · '+b+' з їхнього видобутку (10 %)'},
+tr:{crewEarned:'Ekibinle kazandığın',crewSplit:(a,b)=>a+' davet bonusu · kazımlarından '+b+' (%10)'},
+id:{crewEarned:'Didapat dari timmu',crewSplit:(a,b)=>a+' bonus undangan · '+b+' dari tambang mereka (10 %)'},
+ar:{crewEarned:'ربحته مع فريقك',crewSplit:(a,b)=>a+' مكافآت دعوة · '+b+' من تعدينهم (10 %)'},
+fa:{crewEarned:'درآمد از تیمت',crewSplit:(a,b)=>a+' پاداش دعوت · '+b+' از استخراج آن‌ها (۱۰٪)'}
+};
+for (const k in X7) Object.assign(X[k], X7[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -623,7 +637,8 @@ $('#invite').onclick = () => { hap(); openLink('https://t.me/share/url?url=' + e
 $('#copy').onclick = async () => { hap(); try { await navigator.clipboard.writeText(myLink()); toast(T('copied')); } catch (e) { toast(myLink()); } };
 async function loadFriends() {
   const r = await api('friends'); if (!r.ok) return;
-  $('#friends').innerHTML = r.list.length ? r.list.map((x) => '<div class="row"><span class="av" style="background:' + hueOf(x.name) + '">' + init(x.name) + '</span><div class="t"><b>' + esc(x.name) + '</b><span>' + (x.sponsor ? T('sponsor') : x.holding ? T('holding') : T('mined', fmt(x.mined))) + '</span></div>' + (x.earned ? '<span class="r">+' + fmt(x.earned) + '</span>' : '') + '</div>').join('') : '<div class="empty">' + T('noFriends') + '</div>';
+  const tot = '<div class="record crewtot"><span>' + T('crewEarned') + '<small>' + T('crewSplit', fmt((r.earned_total || 0) - (r.earned_ref || 0)), fmt(r.earned_ref || 0)) + '</small></span><b class="num">+' + fmt(r.earned_total || 0) + '</b></div>';
+  $('#friends').innerHTML = tot + (r.list.length ? r.list.map((x) => '<div class="row"><span class="av" style="background:' + hueOf(x.name) + '">' + init(x.name) + '</span><div class="t"><b>' + esc(x.name) + '</b><span>' + (x.sponsor ? T('sponsor') : x.holding ? T('holding') : T('mined', fmt(x.mined))) + '</span></div>' + (x.earned ? '<span class="r">+' + fmt(x.earned) + '</span>' : '') + '</div>').join('') : '<div class="empty">' + T('noFriends') + '</div>');
 }
 let rankMode = 'chains';
 async function loadRanks() {
