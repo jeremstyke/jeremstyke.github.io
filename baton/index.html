@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Baton</title>
+<!-- 21 oct 2026 (Jeremy): Baton, by @jeremstyke. Mini app of @PassTheBatonBot: a mine that fills every 4 h and a baton passed between players.
+     All the logic is on the server (Supabase function "baton" + SQL bt_*); this page only shows and asks. 10 languages, like Meme Coin Tycoon's players. -->
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Figtree:wght@400;600;800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{
+  --night:#0b1626; --lane:#13243a; --lane2:#1b3150; --chalk:#e9f1ff; --mute:#8fa5c4;
+  --baton:#ffc531; --flame:#ff6a2a; --gain:#3ee6a0; --warn:#ff4d6d;
+  --display:'Big Shoulders Display',Impact,'Arial Narrow',sans-serif;
+  --body:'Figtree',system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:var(--night);color:var(--chalk);font-family:var(--body);font-size:15px;overscroll-behavior:none;-webkit-user-select:none;user-select:none}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+button:focus-visible{outline:2px solid var(--baton);outline-offset:3px;border-radius:12px}
+.num{font-variant-numeric:tabular-nums}
+.app{max-width:520px;margin:0 auto;height:100%;display:flex;flex-direction:column;position:relative;
+  background:radial-gradient(120% 50% at 50% -8%,#1d3a63 0%,transparent 60%),repeating-linear-gradient(90deg,transparent 0 24.6%,rgba(233,241,255,.03) 24.6% 25%),var(--night)}
+.top{padding:calc(10px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 6px max(16px,env(safe-area-inset-left,0px));display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{display:flex;align-items:center;gap:8px;font-family:var(--display);font-weight:900;font-size:26px;letter-spacing:.05em;text-transform:uppercase}
+.brand svg{width:28px;height:28px}
+.chips{display:flex;gap:6px}
+.chip{display:flex;align-items:center;gap:5px;background:rgba(19,36,58,.9);border:1px solid rgba(233,241,255,.06);border-radius:999px;padding:6px 11px;font-size:13px;font-weight:700}
+.chip b{color:var(--flame)} .chip.g b{color:var(--gain)}
+main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:4px max(16px,env(safe-area-inset-right,0px)) 18px max(16px,env(safe-area-inset-left,0px))}
+.panel{display:flex;flex-direction:column;gap:14px}
+.panel[hidden]{display:none!important}
+.score{text-align:center;padding:4px 0 2px}
+.score small{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.score .big{font-family:var(--display);font-weight:900;font-size:68px;line-height:1;margin-top:2px}
+.score .big span{color:var(--baton);font-size:.6em}
+.score .rate{font-family:var(--mono);font-size:13px;color:var(--gain);margin-top:2px}
+.card{background:var(--lane);border-radius:24px;padding:16px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;border:1px solid rgba(233,241,255,.05)}
+.card h2,.sec{margin:0;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);font-weight:700}
+.batonCard{background:radial-gradient(140% 120% at 0% 0%,rgba(255,106,42,.28) 0%,transparent 55%),linear-gradient(160deg,#2b1c10 0%,var(--lane) 65%)}
+.batonCard.off{background:var(--lane)}
+.batonRow{display:flex;align-items:center;gap:14px}
+.stick{width:96px;height:96px;flex:none;position:relative;display:grid;place-items:center}
+.stick .rod{width:18px;height:72px;border-radius:9px;background:linear-gradient(90deg,#c98d00,var(--baton) 45%,#fff2bf 55%,var(--baton) 70%,#c98d00);transform:rotate(28deg);box-shadow:0 0 26px rgba(255,197,49,.5)}
+.stick .fire{position:absolute;top:0;right:16px;width:32px;height:40px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:radial-gradient(circle at 50% 70%,#fff3c4 0 18%,var(--baton) 30%,var(--flame) 62%,transparent 70%);animation:flick 1.1s infinite ease-in-out alternate;transform-origin:50% 90%}
+.off .stick{opacity:.35} .off .stick .rod{box-shadow:none} .off .fire{display:none}
+@keyframes flick{0%{transform:scale(1,1) rotate(-4deg)}50%{transform:scale(.9,1.12) rotate(3deg)}100%{transform:scale(1.05,.95) rotate(-2deg)}}
+.hold{flex:1;min-width:0}
+.hold h3{margin:0;font-family:var(--display);font-weight:900;font-size:30px;line-height:1;text-transform:uppercase}
+.hold p{margin:5px 0 0;color:var(--mute);font-size:14px;line-height:1.35}
+.hold p b{color:var(--baton)}
+.timer{font-family:var(--mono);font-size:22px;color:var(--baton);margin-top:6px}
+.timer.low{color:var(--warn)}
+.more{font-size:13px;color:var(--mute);text-align:center}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;border-radius:17px;font-weight:800;font-size:16px;padding:0 18px;width:100%}
+.btn.gold{background:linear-gradient(180deg,#ffd45c,var(--baton));color:#241600;box-shadow:0 6px 18px rgba(255,197,49,.25)}
+.btn.mint{background:var(--gain);color:#032a1c}
+.btn.ghost{background:var(--lane2);color:var(--chalk)}
+.btn:active{transform:translateY(1px)}
+.btn[disabled]{opacity:.45;cursor:default;box-shadow:none}
+.chain{display:flex;align-items:center;overflow-x:auto;padding:4px 2px;scrollbar-width:none}
+.chain::-webkit-scrollbar{display:none}
+.link{flex:none;display:flex;align-items:center}
+.av{width:36px;height:36px;border-radius:18px;display:grid;place-items:center;font-weight:800;font-size:13px;color:#08121f;border:2px solid var(--night);flex:none}
+.av.me{outline:2px solid var(--baton);outline-offset:1px;background:var(--baton)}
+.bar{width:16px;height:3px;background:linear-gradient(90deg,var(--baton),var(--flame))}
+.meta{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--mute);flex-wrap:wrap}
+.meta b{color:var(--chalk);font-family:var(--mono);font-weight:500}
+.mineRow{display:flex;align-items:center;gap:16px}
+.ring{width:104px;height:104px;flex:none;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--gain) calc(var(--p)*1%),var(--lane2) 0);transition:background .4s}
+.ring>div{width:84px;height:84px;border-radius:50%;background:var(--lane);display:grid;place-items:center;text-align:center;font-family:var(--mono);font-size:11px;color:var(--mute);line-height:1.15}
+.ring b{display:block;font-family:var(--display);font-size:24px;color:var(--chalk);font-weight:900}
+.mineInfo{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.mineInfo strong{font-size:17px}
+.mineInfo span{color:var(--mute);font-size:13px}
+.record{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--lane);border-radius:18px;padding:12px 16px;font-size:14px}
+.record b{font-family:var(--display);font-weight:900;font-size:28px;color:var(--baton)}
+.list{display:flex;flex-direction:column;gap:8px}
+.row{display:flex;align-items:center;gap:12px;background:var(--lane);border-radius:18px;padding:12px 14px;min-height:64px}
+.row .t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.row .t b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .t span{color:var(--mute);font-size:13px}
+.row .r{font-family:var(--mono);font-size:13px;color:var(--gain);white-space:nowrap}
+.row.me{outline:2px solid var(--baton)}
+.sm{background:var(--baton);color:#241600;font-weight:800;border-radius:12px;padding:0 14px;min-height:42px;font-size:14px;white-space:nowrap}
+.sm.done,.sm[disabled]{background:var(--lane2);color:var(--mute)}
+.rank{font-family:var(--display);font-weight:900;font-size:24px;width:30px;text-align:center;color:var(--mute)}
+.rank.g{color:var(--baton)}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--lane);border-radius:14px;padding:4px;gap:4px}
+.seg button{min-height:40px;border-radius:10px;font-weight:700;color:var(--mute)}
+.seg button[aria-pressed="true"]{background:var(--lane2);color:var(--chalk)}
+.empty{color:var(--mute);text-align:center;padding:18px;font-size:14px;background:var(--lane);border-radius:18px}
+nav.tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));background:rgba(19,36,58,.97);border-top:1px solid rgba(233,241,255,.07);padding:6px max(6px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-left,0px))}
+nav.tabs button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0;font-size:11px;font-weight:700;color:var(--mute);position:relative}
+nav.tabs button[aria-current="page"]{color:var(--baton)}
+nav.tabs svg{width:23px;height:23px}
+.dot{position:absolute;top:6px;left:calc(50% + 8px);width:9px;height:9px;border-radius:5px;background:var(--flame)}
+.dot[hidden]{display:none}
+.scrim{position:fixed;inset:0;background:rgba(3,8,16,.62);display:flex;align-items:flex-end;justify-content:center;z-index:20}
+.scrim[hidden]{display:none}
+.sheet{width:100%;max-width:520px;max-height:86%;overflow-y:auto;background:var(--lane);border-radius:26px 26px 0 0;padding:20px max(16px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:12px;animation:up .22s ease-out}
+@keyframes up{from{transform:translateY(40px);opacity:.4}}
+.sheet h3{margin:0;font-family:var(--display);font-weight:900;font-size:30px;text-transform:uppercase}
+.opt{display:flex;align-items:center;gap:12px;background:var(--lane2);border-radius:18px;padding:12px 14px;text-align:start;width:100%;min-height:64px}
+.opt .t{flex:1;display:flex;flex-direction:column;gap:2px}
+.opt .t span{font-size:13px;color:var(--mute)}
+.mult{font-family:var(--display);font-weight:900;font-size:28px;color:var(--baton)}
+.mult.x5{color:var(--flame)}
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--chalk);color:#08121f;font-weight:800;padding:12px 18px;border-radius:999px;font-size:14px;z-index:30;max-width:92%;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.toast[hidden]{display:none}
+.loader{position:fixed;inset:0;display:grid;place-items:center;background:var(--night);z-index:40}
+.loader[hidden]{display:none}
+.loader div{font-family:var(--display);font-weight:900;font-size:40px;letter-spacing:.06em;color:var(--baton);animation:pulse 1s infinite alternate}
+@keyframes pulse{to{opacity:.4}}
+.burst{animation:pop .5s ease-out}
+@keyframes pop{30%{transform:scale(1.08)}}
+.foot{font-size:12px;color:var(--mute);text-align:center;padding-top:4px}
+.foot a{color:var(--mute)}
+[dir="rtl"] .bar{background:linear-gradient(270deg,var(--baton),var(--flame))}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="loader" id="loader"><div>BATON</div></div>
+<div class="app">
+  <header class="top">
+    <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="13" y="6" width="6" height="22" rx="3" fill="#ffc531" transform="rotate(28 16 17)"/><path d="M22 2c3 3 3 7 0 9-1-2-3-2-3-4 0-2 2-3 3-5z" fill="#ff6a2a"/></svg>Baton</div>
+    <div class="chips"><div class="chip"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff6a2a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2c4 4 6 7 6 11a6 6 0 01-12 0c0-3 2-5 3-6 0 2 1 3 2 3 0-3 0-5 1-8z"/></svg><b class="num" id="streak">0</b></div><div class="chip g"><b class="num" id="bonusChip">+0%</b></div></div>
+  </header>
+
+  <main>
+    <section class="panel" id="p-home">
+      <div class="score"><small data-t="your"></small><div class="big num" id="bal">0</div><div class="rate num" id="rate"></div></div>
+
+      <div class="card batonCard" id="batonCard">
+        <div class="batonRow">
+          <div class="stick" aria-hidden="true"><div class="rod"></div><div class="fire"></div></div>
+          <div class="hold"><h3 id="holdT"></h3><p id="holdP"></p><div class="timer num" id="timer"></div></div>
+        </div>
+        <button class="btn gold" id="passBtn"></button>
+        <div class="more" id="moreBat" hidden></div>
+      </div>
+
+      <div class="card" id="chainCard" hidden>
+        <div class="meta"><span id="chainBy"></span><span><b id="links">0</b> <span data-t="links"></span></span></div>
+        <div class="chain" id="chain"></div>
+      </div>
+
+      <div class="card">
+        <h2 data-t="mine"></h2>
+        <div class="mineRow">
+          <div class="ring" id="ring" style="--p:0"><div><b class="num" id="ready">0</b><span data-t="ready"></span></div></div>
+          <div class="mineInfo"><strong id="lvl"></strong><span id="fillTxt"></span><button class="btn mint" id="harvest"></button></div>
+        </div>
+      </div>
+
+      <div class="record"><span data-t="record"></span><b class="num" id="record">0</b></div>
+      <p class="foot" data-t="airdrop"></p>
+    </section>
+
+    <section class="panel" id="p-mine" hidden>
+      <div class="score"><small data-t="upgrade"></small><div class="big num" id="lvBig"></div><div class="rate num" id="rate2"></div></div>
+      <div class="list" id="upg"></div>
+    </section>
+
+    <section class="panel" id="p-tasks" hidden>
+      <div class="score"><small data-t="earnMore"></small><div class="big" data-t="tasks"></div></div>
+      <div class="list" id="tasks"></div>
+    </section>
+
+    <section class="panel" id="p-friends" hidden>
+      <div class="score"><small data-t="crew"></small><div class="big num" id="nFriends">0</div><div class="rate" data-t="crewSub"></div></div>
+      <button class="btn gold" id="invite"></button>
+      <button class="btn ghost" id="copy"></button>
+      <div class="list" id="friends"></div>
+    </section>
+
+    <section class="panel" id="p-rank" hidden>
+      <div class="score"><small data-t="week"></small><div class="big" data-t="ranks"></div></div>
+      <div class="seg"><button id="sChains" aria-pressed="true" data-t="chains"></button><button id="sMiners" aria-pressed="false" data-t="miners"></button></div>
+      <div class="list" id="ranks"></div>
+    </section>
+  </main>
+
+  <nav class="tabs">
+    <button data-p="home" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="10" y="3" width="4" height="18" rx="2" transform="rotate(28 12 12)"/></svg><span data-t="tHome"></span><span class="dot" id="dotHome" hidden></span></button>
+    <button data-p="mine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4l6 6M4 20l9-9M15 3l6 6-3 3-6-6z"/></svg><span data-t="tMine"></span></button>
+    <button data-p="tasks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3 8-8M20 12v7a2 2 0 01-2 2H6a2 2 0 01-2-2V5a2 2 0 012-2h9"/></svg><span data-t="tTasks"></span><span class="dot" id="dotTasks" hidden></span></button>
+    <button data-p="friends"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0M16 4.5a3.5 3.5 0 010 7M18 14a6 6 0 013.5 6"/></svg><span data-t="tFriends"></span></button>
+    <button data-p="rank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 01-10 0zM17 6h3v2a3 3 0 01-3 3M7 6H4v2a3 3 0 003 3"/></svg><span data-t="tRanks"></span></button>
+  </nav>
+</div>
+
+<div class="scrim" id="scrim" hidden><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(() => {
+'use strict';
+const API = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/baton';
+const BOT = 'PassTheBatonBot';
+const tg = window.Telegram && Telegram.WebApp;
+try { tg.ready(); tg.expand(); tg.setHeaderColor('#0b1626'); tg.setBackgroundColor('#0b1626'); if (tg.disableVerticalSwipes) tg.disableVerticalSwipes(); } catch (e) {}
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const hap = (k) => { try { k === 'ok' ? tg.HapticFeedback.notificationOccurred('success') : k === 'err' ? tg.HapticFeedback.notificationOccurred('error') : tg.HapticFeedback.impactOccurred('light'); } catch (e) {} };
+
+// ---------- 10 languages ----------
+const L = {
+en:{your:'Your $BATON',perH:'/ hour',hold1:'You hold the baton',hold2:(h)=>'Your mine runs <b>x2</b>. Pass it within '+h+' h.',none1:'No baton right now',none2:'A new baton comes tomorrow, or when someone passes you one.',pass:'Pass the baton',more:(n)=>'+ '+n+' more baton(s) in hand',links:'links',chainBy:(n)=>'Chain started by <b>'+n+'</b>',mine:'Your mine',ready:'ready',lvl:(n)=>'Level '+n+' drill',fullIn:(t)=>'Full in '+t,full:'Full: harvest now!',harvest:'Harvest',empty:'Mining…',record:'Longest chain this week',airdrop:'Airdrop planned. $BATON counts, no date or value guaranteed. by @jeremstyke',upgrade:'Upgrade your mine',lvShort:(n)=>'Lv '+n,drill:'Faster drill',drillS:(a,b)=>a+' → '+b+' / hour',tank:'Bigger tank',tankS:(a,b)=>'Fills in '+b+' h instead of '+a+' h',grip:'Steel grip',gripS:(a,b)=>a+' h → '+b+' h to pass the baton',max:'Max',earnMore:'Earn more',tasks:'Tasks',go:'Go',claim:'Claim',done:'Done',crew:'Your crew',crewSub:'You earn 10 % of what they mine',invite:'Invite a friend · +2,000',copy:'Copy my link',copied:'Link copied',noFriends:'No friends yet. Invite one: +2,000 $BATON at their first harvest.',holding:'Holds a baton now',mined:(n)=>n+' mined',sponsor:'Invited you',week:'This week',ranks:'Rankings',chains:'Chains',miners:'Miners',chainOf:(n)=>'Chain of '+n,running:'Still running',stopped:'Stopped',tHome:'Baton',tMine:'Mine',tTasks:'Tasks',tFriends:'Friends',tRanks:'Ranks',who:'Who gets the baton?',newP:'Someone new',newS:'Send a link. They join, you get x5.',friendP:'A friend',friendS:'Pick from your crew',randP:'A random runner',randS:'It goes to an active player',keep:'Keep it for now',pick:'Pick a friend',noPick:'No friend can take it (they are already in this chain). Invite someone new!',passed:(g,m,n)=>'Baton passed to '+n+' · +'+g+' $BATON (x'+m+')',linkReady:'Link ready: send it to a friend who does not play yet',shareTxt:'🔥 I am passing you my baton! Take it on Baton and we both win $BATON.',inviteTxt:'🔥 Join my crew on Baton: mine $BATON every 4 hours and pass the baton!',harvested:(n)=>'+'+n+' $BATON harvested',streakB:(d,n)=>'Day '+d+' streak: +'+n,upgraded:'Upgraded!',reward:(n)=>'+'+n+' $BATON',err:{funds:'Not enough $BATON',empty:'Your mine is still empty',nobody:'No runner available right now, try a friend or someone new',not_joined:'Join the channel first, then tap Claim',late:'Too late: this baton has gone',friend:'This player is not in your crew',in_chain:'Already in this chain',auth:'Open Baton from Telegram',other:'Something went wrong, try again'}},
+fr:{your:'Tes $BATON',perH:'/ heure',hold1:'Tu as le bâton',hold2:(h)=>'Ta mine tourne <b>x2</b>. Passe-le dans les '+h+' h.',none1:'Pas de bâton pour l\'instant',none2:'Un nouveau bâton arrive demain, ou quand quelqu\'un te passe le sien.',pass:'Passer le bâton',more:(n)=>'+ '+n+' autre(s) bâton(s) en main',links:'maillons',chainBy:(n)=>'Chaîne lancée par <b>'+n+'</b>',mine:'Ta mine',ready:'prêts',lvl:(n)=>'Foreuse niveau '+n,fullIn:(t)=>'Pleine dans '+t,full:'Pleine : récolte !',harvest:'Récolter',empty:'Minage…',record:'Plus longue chaîne de la semaine',airdrop:'Airdrop prévu. Les $BATON comptent, sans date ni valeur garanties. by @jeremstyke',upgrade:'Améliore ta mine',lvShort:(n)=>'Niv. '+n,drill:'Foreuse plus rapide',drillS:(a,b)=>a+' → '+b+' / heure',tank:'Réservoir plus grand',tankS:(a,b)=>'Se remplit en '+b+' h au lieu de '+a+' h',grip:'Poignée en acier',gripS:(a,b)=>a+' h → '+b+' h pour passer le bâton',max:'Max',earnMore:'Gagne plus',tasks:'Tâches',go:'Aller',claim:'Réclamer',done:'Fait',crew:'Ton équipe',crewSub:'Tu touches 10 % de ce qu\'ils minent',invite:'Inviter un ami · +2 000',copy:'Copier mon lien',copied:'Lien copié',noFriends:'Pas encore d\'amis. Invites-en un : +2 000 $BATON à sa première récolte.',holding:'A un bâton en ce moment',mined:(n)=>n+' minés',sponsor:'T\'a invité',week:'Cette semaine',ranks:'Classements',chains:'Chaînes',miners:'Mineurs',chainOf:(n)=>'Chaîne de '+n,running:'En cours',stopped:'Arrêtée',tHome:'Bâton',tMine:'Mine',tTasks:'Tâches',tFriends:'Amis',tRanks:'Classement',who:'À qui le bâton ?',newP:'Quelqu\'un de nouveau',newS:'Envoie un lien. Il rejoint, tu gagnes x5.',friendP:'Un ami',friendS:'Choisis dans ton équipe',randP:'Un coureur au hasard',randS:'Il part chez un joueur actif',keep:'Le garder pour l\'instant',pick:'Choisis un ami',noPick:'Aucun ami ne peut le prendre (ils sont déjà dans cette chaîne). Invite quelqu\'un de nouveau !',passed:(g,m,n)=>'Bâton passé à '+n+' · +'+g+' $BATON (x'+m+')',linkReady:'Lien prêt : envoie-le à un ami qui ne joue pas encore',shareTxt:'🔥 Je te passe mon bâton ! Prends-le sur Baton et on gagne tous les deux des $BATON.',inviteTxt:'🔥 Rejoins mon équipe sur Baton : mine des $BATON toutes les 4 heures et passe le bâton !',harvested:(n)=>'+'+n+' $BATON récoltés',streakB:(d,n)=>'Série jour '+d+' : +'+n,upgraded:'Amélioré !',reward:(n)=>'+'+n+' $BATON',err:{funds:'Pas assez de $BATON',empty:'Ta mine est encore vide',nobody:'Aucun coureur dispo pour l\'instant, essaie un ami ou quelqu\'un de nouveau',not_joined:'Rejoins d\'abord la chaîne, puis appuie sur Réclamer',late:'Trop tard : ce bâton est parti',friend:'Ce joueur n\'est pas dans ton équipe',in_chain:'Déjà dans cette chaîne',auth:'Ouvre Baton depuis Telegram',other:'Un souci, réessaie'}},
+es:{your:'Tus $BATON',perH:'/ hora',hold1:'Tienes el bastón',hold2:(h)=>'Tu mina va <b>x2</b>. Pásalo en menos de '+h+' h.',none1:'Ahora no tienes bastón',none2:'Mañana llega uno nuevo, o cuando alguien te pase el suyo.',pass:'Pasar el bastón',more:(n)=>'+ '+n+' bastón(es) más',links:'eslabones',chainBy:(n)=>'Cadena iniciada por <b>'+n+'</b>',mine:'Tu mina',ready:'listos',lvl:(n)=>'Taladro nivel '+n,fullIn:(t)=>'Llena en '+t,full:'¡Llena: cosecha ya!',harvest:'Cosechar',empty:'Minando…',record:'Cadena más larga de la semana',airdrop:'Airdrop previsto. Los $BATON cuentan, sin fecha ni valor garantizados. by @jeremstyke',upgrade:'Mejora tu mina',lvShort:(n)=>'Nv '+n,drill:'Taladro más rápido',drillS:(a,b)=>a+' → '+b+' / hora',tank:'Depósito más grande',tankS:(a,b)=>'Se llena en '+b+' h en vez de '+a+' h',grip:'Mango de acero',gripS:(a,b)=>a+' h → '+b+' h para pasar el bastón',max:'Máx',earnMore:'Gana más',tasks:'Tareas',go:'Ir',claim:'Reclamar',done:'Hecho',crew:'Tu equipo',crewSub:'Ganas el 10 % de lo que minan',invite:'Invitar a un amigo · +2.000',copy:'Copiar mi enlace',copied:'Enlace copiado',noFriends:'Aún no tienes amigos. Invita a uno: +2.000 $BATON en su primera cosecha.',holding:'Tiene un bastón ahora',mined:(n)=>n+' minados',sponsor:'Te invitó',week:'Esta semana',ranks:'Clasificación',chains:'Cadenas',miners:'Mineros',chainOf:(n)=>'Cadena de '+n,running:'En curso',stopped:'Parada',tHome:'Bastón',tMine:'Mina',tTasks:'Tareas',tFriends:'Amigos',tRanks:'Ranking',who:'¿Para quién es el bastón?',newP:'Alguien nuevo',newS:'Envía un enlace. Se une y ganas x5.',friendP:'Un amigo',friendS:'Elige de tu equipo',randP:'Un corredor al azar',randS:'Va a un jugador activo',keep:'Quedármelo por ahora',pick:'Elige un amigo',noPick:'Ningún amigo puede tomarlo (ya están en esta cadena). ¡Invita a alguien nuevo!',passed:(g,m,n)=>'Bastón pasado a '+n+' · +'+g+' $BATON (x'+m+')',linkReady:'Enlace listo: envíalo a un amigo que aún no juega',shareTxt:'🔥 ¡Te paso mi bastón! Tómalo en Baton y ganamos $BATON los dos.',inviteTxt:'🔥 Únete a mi equipo en Baton: mina $BATON cada 4 horas y pasa el bastón.',harvested:(n)=>'+'+n+' $BATON cosechados',streakB:(d,n)=>'Racha día '+d+': +'+n,upgraded:'¡Mejorado!',reward:(n)=>'+'+n+' $BATON',err:{funds:'No tienes suficientes $BATON',empty:'Tu mina aún está vacía',nobody:'No hay corredores ahora, prueba con un amigo o alguien nuevo',not_joined:'Únete primero al canal y luego toca Reclamar',late:'Demasiado tarde: este bastón ya se fue',friend:'Este jugador no está en tu equipo',in_chain:'Ya está en esta cadena',auth:'Abre Baton desde Telegram',other:'Algo falló, inténtalo de nuevo'}},
+pt:{your:'Seus $BATON',perH:'/ hora',hold1:'Você está com o bastão',hold2:(h)=>'Sua mina roda <b>x2</b>. Passe em até '+h+' h.',none1:'Sem bastão agora',none2:'Um novo bastão chega amanhã, ou quando alguém passar o dele.',pass:'Passar o bastão',more:(n)=>'+ '+n+' bastão(ões) na mão',links:'elos',chainBy:(n)=>'Corrente iniciada por <b>'+n+'</b>',mine:'Sua mina',ready:'prontos',lvl:(n)=>'Broca nível '+n,fullIn:(t)=>'Cheia em '+t,full:'Cheia: colha agora!',harvest:'Colher',empty:'Minerando…',record:'Maior corrente da semana',airdrop:'Airdrop previsto. Os $BATON contam, sem data ou valor garantidos. by @jeremstyke',upgrade:'Melhore sua mina',lvShort:(n)=>'Nv '+n,drill:'Broca mais rápida',drillS:(a,b)=>a+' → '+b+' / hora',tank:'Tanque maior',tankS:(a,b)=>'Enche em '+b+' h em vez de '+a+' h',grip:'Pegada de aço',gripS:(a,b)=>a+' h → '+b+' h para passar o bastão',max:'Máx',earnMore:'Ganhe mais',tasks:'Tarefas',go:'Ir',claim:'Resgatar',done:'Feito',crew:'Sua equipe',crewSub:'Você ganha 10 % do que eles mineram',invite:'Convidar amigo · +2.000',copy:'Copiar meu link',copied:'Link copiado',noFriends:'Ainda sem amigos. Convide um: +2.000 $BATON na primeira colheita dele.',holding:'Com um bastão agora',mined:(n)=>n+' minerados',sponsor:'Te convidou',week:'Esta semana',ranks:'Rankings',chains:'Correntes',miners:'Mineradores',chainOf:(n)=>'Corrente de '+n,running:'Em andamento',stopped:'Parada',tHome:'Bastão',tMine:'Mina',tTasks:'Tarefas',tFriends:'Amigos',tRanks:'Ranking',who:'Para quem vai o bastão?',newP:'Alguém novo',newS:'Envie um link. Ele entra, você ganha x5.',friendP:'Um amigo',friendS:'Escolha da sua equipe',randP:'Um corredor aleatório',randS:'Vai para um jogador ativo',keep:'Ficar com ele por enquanto',pick:'Escolha um amigo',noPick:'Nenhum amigo pode pegá-lo (já estão nesta corrente). Convide alguém novo!',passed:(g,m,n)=>'Bastão passado para '+n+' · +'+g+' $BATON (x'+m+')',linkReady:'Link pronto: envie para um amigo que ainda não joga',shareTxt:'🔥 Estou te passando meu bastão! Pegue no Baton e ganhamos $BATON juntos.',inviteTxt:'🔥 Entre na minha equipe no Baton: minere $BATON a cada 4 horas e passe o bastão!',harvested:(n)=>'+'+n+' $BATON colhidos',streakB:(d,n)=>'Sequência dia '+d+': +'+n,upgraded:'Melhorado!',reward:(n)=>'+'+n+' $BATON',err:{funds:'$BATON insuficientes',empty:'Sua mina ainda está vazia',nobody:'Nenhum corredor disponível agora, tente um amigo ou alguém novo',not_joined:'Entre no canal primeiro e toque em Resgatar',late:'Tarde demais: este bastão já foi',friend:'Este jogador não está na sua equipe',in_chain:'Já está nesta corrente',auth:'Abra o Baton pelo Telegram',other:'Algo deu errado, tente de novo'}},
+ru:{your:'Твои $BATON',perH:'/ час',hold1:'Эстафета у тебя',hold2:(h)=>'Твоя шахта работает <b>x2</b>. Передай её в течение '+h+' ч.',none1:'Сейчас эстафеты нет',none2:'Новая придёт завтра или когда кто-то передаст тебе свою.',pass:'Передать эстафету',more:(n)=>'+ ещё '+n+' в руках',links:'звеньев',chainBy:(n)=>'Цепочку начал(а) <b>'+n+'</b>',mine:'Твоя шахта',ready:'готово',lvl:(n)=>'Бур, уровень '+n,fullIn:(t)=>'Заполнится через '+t,full:'Заполнена: собирай!',harvest:'Собрать',empty:'Добыча…',record:'Самая длинная цепочка недели',airdrop:'Планируется аирдроп. $BATON засчитываются, дата и стоимость не гарантируются. by @jeremstyke',upgrade:'Улучши шахту',lvShort:(n)=>'Ур. '+n,drill:'Быстрее бур',drillS:(a,b)=>a+' → '+b+' / час',tank:'Больше бак',tankS:(a,b)=>'Заполняется за '+b+' ч вместо '+a+' ч',grip:'Стальная рукоять',gripS:(a,b)=>a+' ч → '+b+' ч на передачу',max:'Макс',earnMore:'Заработай больше',tasks:'Задания',go:'Перейти',claim:'Забрать',done:'Готово',crew:'Твоя команда',crewSub:'Ты получаешь 10 % от их добычи',invite:'Пригласить друга · +2 000',copy:'Скопировать ссылку',copied:'Ссылка скопирована',noFriends:'Пока нет друзей. Пригласи: +2 000 $BATON после их первого сбора.',holding:'Сейчас с эстафетой',mined:(n)=>'добыто '+n,sponsor:'Пригласил(а) тебя',week:'Эта неделя',ranks:'Рейтинги',chains:'Цепочки',miners:'Шахтёры',chainOf:(n)=>'Цепочка '+n,running:'Продолжается',stopped:'Остановлена',tHome:'Эстафета',tMine:'Шахта',tTasks:'Задания',tFriends:'Друзья',tRanks:'Рейтинг',who:'Кому передать?',newP:'Новичку',newS:'Отправь ссылку. Он заходит, ты получаешь x5.',friendP:'Другу',friendS:'Выбери из команды',randP:'Случайному бегуну',randS:'Уйдёт активному игроку',keep:'Пока оставить',pick:'Выбери друга',noPick:'Никто из друзей не может её взять (они уже в цепочке). Пригласи новичка!',passed:(g,m,n)=>'Передано: '+n+' · +'+g+' $BATON (x'+m+')',linkReady:'Ссылка готова: отправь другу, который ещё не играет',shareTxt:'🔥 Передаю тебе эстафету! Забери её в Baton, и мы оба получим $BATON.',inviteTxt:'🔥 Вступай в мою команду в Baton: добывай $BATON каждые 4 часа и передавай эстафету!',harvested:(n)=>'+'+n+' $BATON собрано',streakB:(d,n)=>'Серия, день '+d+': +'+n,upgraded:'Улучшено!',reward:(n)=>'+'+n+' $BATON',err:{funds:'Недостаточно $BATON',empty:'Шахта ещё пуста',nobody:'Сейчас нет свободных бегунов, попробуй друга или новичка',not_joined:'Сначала вступи в канал, потом нажми «Забрать»',late:'Поздно: эстафета ушла',friend:'Этого игрока нет в твоей команде',in_chain:'Уже в этой цепочке',auth:'Открой Baton из Telegram',other:'Что-то пошло не так, попробуй ещё раз'}},
+uk:{your:'Твої $BATON',perH:'/ год',hold1:'Естафета в тебе',hold2:(h)=>'Твоя шахта працює <b>x2</b>. Передай її протягом '+h+' год.',none1:'Зараз естафети немає',none2:'Нова прийде завтра або коли хтось передасть тобі свою.',pass:'Передати естафету',more:(n)=>'+ ще '+n+' в руках',links:'ланок',chainBy:(n)=>'Ланцюжок почав(ла) <b>'+n+'</b>',mine:'Твоя шахта',ready:'готово',lvl:(n)=>'Бур, рівень '+n,fullIn:(t)=>'Заповниться за '+t,full:'Заповнена: збирай!',harvest:'Зібрати',empty:'Видобуток…',record:'Найдовший ланцюжок тижня',airdrop:'Планується аірдроп. $BATON зараховуються, дата й вартість не гарантуються. by @jeremstyke',upgrade:'Покращ шахту',lvShort:(n)=>'Рів. '+n,drill:'Швидший бур',drillS:(a,b)=>a+' → '+b+' / год',tank:'Більший бак',tankS:(a,b)=>'Заповнюється за '+b+' год замість '+a+' год',grip:'Сталеве руків\'я',gripS:(a,b)=>a+' год → '+b+' год на передачу',max:'Макс',earnMore:'Заробляй більше',tasks:'Завдання',go:'Перейти',claim:'Забрати',done:'Готово',crew:'Твоя команда',crewSub:'Ти отримуєш 10 % від їхнього видобутку',invite:'Запросити друга · +2 000',copy:'Скопіювати посилання',copied:'Посилання скопійовано',noFriends:'Поки немає друзів. Запроси: +2 000 $BATON після їхнього першого збору.',holding:'Зараз з естафетою',mined:(n)=>'видобуто '+n,sponsor:'Запросив(ла) тебе',week:'Цей тиждень',ranks:'Рейтинги',chains:'Ланцюжки',miners:'Шахтарі',chainOf:(n)=>'Ланцюжок '+n,running:'Триває',stopped:'Зупинено',tHome:'Естафета',tMine:'Шахта',tTasks:'Завдання',tFriends:'Друзі',tRanks:'Рейтинг',who:'Кому передати?',newP:'Новачку',newS:'Надішли посилання. Він заходить, ти отримуєш x5.',friendP:'Другу',friendS:'Обери з команди',randP:'Випадковому бігуну',randS:'Піде активному гравцю',keep:'Поки залишити',pick:'Обери друга',noPick:'Ніхто з друзів не може її взяти (вони вже в ланцюжку). Запроси новачка!',passed:(g,m,n)=>'Передано: '+n+' · +'+g+' $BATON (x'+m+')',linkReady:'Посилання готове: надішли другу, який ще не грає',shareTxt:'🔥 Передаю тобі естафету! Забери її в Baton, і ми обидва отримаємо $BATON.',inviteTxt:'🔥 Приєднуйся до моєї команди в Baton: видобувай $BATON кожні 4 години й передавай естафету!',harvested:(n)=>'+'+n+' $BATON зібрано',streakB:(d,n)=>'Серія, день '+d+': +'+n,upgraded:'Покращено!',reward:(n)=>'+'+n+' $BATON',err:{funds:'Недостатньо $BATON',empty:'Шахта ще порожня',nobody:'Зараз немає вільних бігунів, спробуй друга або новачка',not_joined:'Спершу приєднайся до каналу, потім натисни «Забрати»',late:'Запізно: естафета пішла',friend:'Цього гравця немає в твоїй команді',in_chain:'Вже в цьому ланцюжку',auth:'Відкрий Baton з Telegram',other:'Щось пішло не так, спробуй ще раз'}},
+tr:{your:'$BATON bakiyen',perH:'/ saat',hold1:'Bayrak sende',hold2:(h)=>'Madenin <b>x2</b> çalışıyor. '+h+' saat içinde devret.',none1:'Şu an bayrak yok',none2:'Yarın yeni bir bayrak gelir ya da biri sana kendininkini verir.',pass:'Bayrağı devret',more:(n)=>'+ elinde '+n+' bayrak daha',links:'halka',chainBy:(n)=>'Zinciri başlatan: <b>'+n+'</b>',mine:'Madenin',ready:'hazır',lvl:(n)=>'Matkap seviye '+n,fullIn:(t)=>t+' sonra dolu',full:'Dolu: şimdi topla!',harvest:'Topla',empty:'Kazılıyor…',record:'Haftanın en uzun zinciri',airdrop:'Airdrop planlanıyor. $BATON sayılır, tarih ve değer garanti edilmez. by @jeremstyke',upgrade:'Madenini geliştir',lvShort:(n)=>'Sv '+n,drill:'Daha hızlı matkap',drillS:(a,b)=>a+' → '+b+' / saat',tank:'Daha büyük depo',tankS:(a,b)=>a+' saat yerine '+b+' saatte dolar',grip:'Çelik sap',gripS:(a,b)=>'Devretmek için '+a+' → '+b+' saat',max:'Maks',earnMore:'Daha fazla kazan',tasks:'Görevler',go:'Git',claim:'Al',done:'Tamam',crew:'Ekibin',crewSub:'Kazdıklarının %10\'u senin',invite:'Arkadaş davet et · +2.000',copy:'Bağlantımı kopyala',copied:'Bağlantı kopyalandı',noFriends:'Henüz arkadaş yok. Birini davet et: ilk toplamasında +2.000 $BATON.',holding:'Şu an bayrak onda',mined:(n)=>n+' kazıldı',sponsor:'Seni davet etti',week:'Bu hafta',ranks:'Sıralamalar',chains:'Zincirler',miners:'Madenciler',chainOf:(n)=>n+' zinciri',running:'Devam ediyor',stopped:'Durdu',tHome:'Bayrak',tMine:'Maden',tTasks:'Görevler',tFriends:'Arkadaşlar',tRanks:'Sıralama',who:'Bayrak kime?',newP:'Yeni biri',newS:'Bağlantı gönder. Katılır, x5 kazanırsın.',friendP:'Bir arkadaş',friendS:'Ekibinden seç',randP:'Rastgele bir koşucu',randS:'Aktif bir oyuncuya gider',keep:'Şimdilik bende kalsın',pick:'Bir arkadaş seç',noPick:'Hiçbir arkadaşın alamaz (zaten bu zincirdeler). Yeni birini davet et!',passed:(g,m,n)=>n+' kişisine devredildi · +'+g+' $BATON (x'+m+')',linkReady:'Bağlantı hazır: henüz oynamayan bir arkadaşına gönder',shareTxt:'🔥 Bayrağımı sana devrediyorum! Baton\'da al, ikimiz de $BATON kazanalım.',inviteTxt:'🔥 Baton\'da ekibime katıl: her 4 saatte $BATON kaz ve bayrağı devret!',harvested:(n)=>'+'+n+' $BATON toplandı',streakB:(d,n)=>'Seri gün '+d+': +'+n,upgraded:'Geliştirildi!',reward:(n)=>'+'+n+' $BATON',err:{funds:'Yeterli $BATON yok',empty:'Madenin henüz boş',nobody:'Şu an uygun koşucu yok, bir arkadaş ya da yeni birini dene',not_joined:'Önce kanala katıl, sonra Al\'a dokun',late:'Çok geç: bu bayrak gitti',friend:'Bu oyuncu ekibinde değil',in_chain:'Zaten bu zincirde',auth:'Baton\'u Telegram\'dan aç',other:'Bir sorun oldu, tekrar dene'}},
+id:{your:'$BATON kamu',perH:'/ jam',hold1:'Kamu memegang tongkat',hold2:(h)=>'Tambangmu berjalan <b>x2</b>. Oper dalam '+h+' jam.',none1:'Belum ada tongkat',none2:'Tongkat baru datang besok, atau saat seseorang mengopernya padamu.',pass:'Oper tongkat',more:(n)=>'+ '+n+' tongkat lagi di tangan',links:'mata rantai',chainBy:(n)=>'Rantai dimulai oleh <b>'+n+'</b>',mine:'Tambangmu',ready:'siap',lvl:(n)=>'Bor level '+n,fullIn:(t)=>'Penuh dalam '+t,full:'Penuh: panen sekarang!',harvest:'Panen',empty:'Menambang…',record:'Rantai terpanjang minggu ini',airdrop:'Airdrop direncanakan. $BATON dihitung, tanpa jaminan tanggal atau nilai. by @jeremstyke',upgrade:'Tingkatkan tambangmu',lvShort:(n)=>'Lv '+n,drill:'Bor lebih cepat',drillS:(a,b)=>a+' → '+b+' / jam',tank:'Tangki lebih besar',tankS:(a,b)=>'Penuh dalam '+b+' jam, bukan '+a+' jam',grip:'Pegangan baja',gripS:(a,b)=>a+' → '+b+' jam untuk mengoper',max:'Maks',earnMore:'Dapatkan lebih',tasks:'Tugas',go:'Buka',claim:'Klaim',done:'Selesai',crew:'Timmu',crewSub:'Kamu dapat 10 % dari hasil tambang mereka',invite:'Undang teman · +2.000',copy:'Salin tautanku',copied:'Tautan disalin',noFriends:'Belum ada teman. Undang satu: +2.000 $BATON di panen pertamanya.',holding:'Sedang memegang tongkat',mined:(n)=>n+' ditambang',sponsor:'Mengundangmu',week:'Minggu ini',ranks:'Peringkat',chains:'Rantai',miners:'Penambang',chainOf:(n)=>'Rantai '+n,running:'Masih berjalan',stopped:'Berhenti',tHome:'Tongkat',tMine:'Tambang',tTasks:'Tugas',tFriends:'Teman',tRanks:'Peringkat',who:'Untuk siapa tongkatnya?',newP:'Orang baru',newS:'Kirim tautan. Dia bergabung, kamu dapat x5.',friendP:'Teman',friendS:'Pilih dari timmu',randP:'Pelari acak',randS:'Pergi ke pemain aktif',keep:'Simpan dulu',pick:'Pilih teman',noPick:'Tidak ada teman yang bisa mengambilnya (sudah di rantai ini). Undang orang baru!',passed:(g,m,n)=>'Tongkat dioper ke '+n+' · +'+g+' $BATON (x'+m+')',linkReady:'Tautan siap: kirim ke teman yang belum bermain',shareTxt:'🔥 Aku mengoper tongkatku padamu! Ambil di Baton dan kita berdua dapat $BATON.',inviteTxt:'🔥 Gabung timku di Baton: tambang $BATON tiap 4 jam dan oper tongkatnya!',harvested:(n)=>'+'+n+' $BATON dipanen',streakB:(d,n)=>'Hari beruntun '+d+': +'+n,upgraded:'Ditingkatkan!',reward:(n)=>'+'+n+' $BATON',err:{funds:'$BATON tidak cukup',empty:'Tambangmu masih kosong',nobody:'Belum ada pelari, coba teman atau orang baru',not_joined:'Gabung ke channel dulu, lalu ketuk Klaim',late:'Terlambat: tongkat ini sudah pergi',friend:'Pemain ini bukan anggota timmu',in_chain:'Sudah di rantai ini',auth:'Buka Baton dari Telegram',other:'Terjadi kesalahan, coba lagi'}},
+ar:{your:'رصيدك من $BATON',perH:'/ ساعة',hold1:'العصا معك',hold2:(h)=>'منجمك يعمل <b>x2</b>. مرّرها خلال '+h+' ساعات.',none1:'لا عصا الآن',none2:'تصل عصا جديدة غدًا، أو عندما يمرّر لك أحدهم عصاه.',pass:'مرّر العصا',more:(n)=>'+ '+n+' عصا أخرى معك',links:'حلقة',chainBy:(n)=>'سلسلة بدأها <b>'+n+'</b>',mine:'منجمك',ready:'جاهز',lvl:(n)=>'مثقاب مستوى '+n,fullIn:(t)=>'يمتلئ خلال '+t,full:'ممتلئ: اجمع الآن!',harvest:'اجمع',empty:'جارٍ التعدين…',record:'أطول سلسلة هذا الأسبوع',airdrop:'إيردروب مخطط له. تُحتسب $BATON، دون ضمان للتاريخ أو القيمة. by @jeremstyke',upgrade:'طوّر منجمك',lvShort:(n)=>'م '+n,drill:'مثقاب أسرع',drillS:(a,b)=>a+' → '+b+' / ساعة',tank:'خزان أكبر',tankS:(a,b)=>'يمتلئ في '+b+' ساعات بدل '+a,grip:'مقبض فولاذي',gripS:(a,b)=>a+' → '+b+' ساعات لتمرير العصا',max:'الأقصى',earnMore:'اربح أكثر',tasks:'المهام',go:'اذهب',claim:'استلم',done:'تم',crew:'فريقك',crewSub:'تحصل على 10 % مما يعدّنونه',invite:'ادعُ صديقًا · +2,000',copy:'انسخ رابطي',copied:'تم نسخ الرابط',noFriends:'لا أصدقاء بعد. ادعُ واحدًا: +2,000 $BATON عند أول جمع له.',holding:'معه عصا الآن',mined:(n)=>n+' مُعدَّنة',sponsor:'دعاك',week:'هذا الأسبوع',ranks:'التصنيفات',chains:'السلاسل',miners:'المعدّنون',chainOf:(n)=>'سلسلة '+n,running:'مستمرة',stopped:'متوقفة',tHome:'العصا',tMine:'المنجم',tTasks:'المهام',tFriends:'الأصدقاء',tRanks:'الترتيب',who:'لمن العصا؟',newP:'شخص جديد',newS:'أرسل رابطًا. ينضم، وتربح x5.',friendP:'صديق',friendS:'اختر من فريقك',randP:'عدّاء عشوائي',randS:'تذهب إلى لاعب نشط',keep:'احتفظ بها الآن',pick:'اختر صديقًا',noPick:'لا يمكن لأي صديق أخذها (هم في هذه السلسلة). ادعُ شخصًا جديدًا!',passed:(g,m,n)=>'مُرّرت العصا إلى '+n+' · +'+g+' $BATON (x'+m+')',linkReady:'الرابط جاهز: أرسله لصديق لا يلعب بعد',shareTxt:'🔥 أمرّر لك عصاي! خذها في Baton ونربح $BATON معًا.',inviteTxt:'🔥 انضم إلى فريقي في Baton: عدّن $BATON كل 4 ساعات ومرّر العصا!',harvested:(n)=>'تم جمع +'+n+' $BATON',streakB:(d,n)=>'سلسلة اليوم '+d+': +'+n,upgraded:'تم التطوير!',reward:(n)=>'+'+n+' $BATON',err:{funds:'لا يكفي $BATON',empty:'منجمك ما زال فارغًا',nobody:'لا عدّاء متاح الآن، جرّب صديقًا أو شخصًا جديدًا',not_joined:'انضم إلى القناة أولًا ثم اضغط استلم',late:'متأخر: ذهبت هذه العصا',friend:'هذا اللاعب ليس في فريقك',in_chain:'موجود في هذه السلسلة',auth:'افتح Baton من تيليجرام',other:'حدث خطأ، حاول مجددًا'}},
+fa:{your:'$BATON تو',perH:'/ ساعت',hold1:'چوب دست توست',hold2:(h)=>'معدنت <b>x2</b> کار می‌کند. ظرف '+h+' ساعت ردش کن.',none1:'الان چوبی نداری',none2:'فردا چوب تازه می‌رسد، یا وقتی کسی چوبش را به تو بدهد.',pass:'چوب را رد کن',more:(n)=>'+ '+n+' چوب دیگر در دست',links:'حلقه',chainBy:(n)=>'زنجیره‌ای که <b>'+n+'</b> شروع کرد',mine:'معدن تو',ready:'آماده',lvl:(n)=>'مته سطح '+n,fullIn:(t)=>'پر می‌شود تا '+t,full:'پر است: برداشت کن!',harvest:'برداشت',empty:'در حال استخراج…',record:'بلندترین زنجیره این هفته',airdrop:'ایردراپ در برنامه است. $BATON حساب می‌شود، بدون تضمین تاریخ یا ارزش. by @jeremstyke',upgrade:'معدنت را ارتقا بده',lvShort:(n)=>'سطح '+n,drill:'مته سریع‌تر',drillS:(a,b)=>a+' ← '+b+' / ساعت',tank:'مخزن بزرگ‌تر',tankS:(a,b)=>'در '+b+' ساعت پر می‌شود به جای '+a,grip:'دسته فولادی',gripS:(a,b)=>a+' ← '+b+' ساعت برای رد کردن',max:'حداکثر',earnMore:'بیشتر بگیر',tasks:'مأموریت‌ها',go:'برو',claim:'دریافت',done:'انجام شد',crew:'تیم تو',crewSub:'۱۰٪ از استخراج آن‌ها مال توست',invite:'دعوت دوست · +2,000',copy:'کپی لینک من',copied:'لینک کپی شد',noFriends:'هنوز دوستی نداری. یکی را دعوت کن: +2,000 $BATON در اولین برداشتش.',holding:'الان چوب دارد',mined:(n)=>n+' استخراج',sponsor:'تو را دعوت کرد',week:'این هفته',ranks:'رتبه‌بندی',chains:'زنجیره‌ها',miners:'معدنچی‌ها',chainOf:(n)=>'زنجیره '+n,running:'ادامه دارد',stopped:'متوقف',tHome:'چوب',tMine:'معدن',tTasks:'مأموریت',tFriends:'دوستان',tRanks:'رتبه',who:'چوب به چه کسی برسد؟',newP:'یک نفر تازه',newS:'لینک بفرست. بیاید، x5 می‌گیری.',friendP:'یک دوست',friendS:'از تیمت انتخاب کن',randP:'یک دونده تصادفی',randS:'به یک بازیکن فعال می‌رسد',keep:'فعلاً نگهش دار',pick:'یک دوست انتخاب کن',noPick:'هیچ دوستی نمی‌تواند بگیرد (در این زنجیره هستند). یک نفر تازه دعوت کن!',passed:(g,m,n)=>'چوب به '+n+' رسید · +'+g+' $BATON (x'+m+')',linkReady:'لینک آماده است: برای دوستی که هنوز بازی نمی‌کند بفرست',shareTxt:'🔥 چوبم را به تو می‌دهم! در Baton بگیرش تا هر دو $BATON ببریم.',inviteTxt:'🔥 به تیم من در Baton بپیوند: هر ۴ ساعت $BATON استخراج کن و چوب را رد کن!',harvested:(n)=>'+'+n+' $BATON برداشت شد',streakB:(d,n)=>'روز '+d+' پیاپی: +'+n,upgraded:'ارتقا یافت!',reward:(n)=>'+'+n+' $BATON',err:{funds:'$BATON کافی نیست',empty:'معدنت هنوز خالی است',nobody:'الان دونده‌ای نیست، یک دوست یا نفر تازه را امتحان کن',not_joined:'اول به کانال بپیوند، بعد دریافت را بزن',late:'دیر شد: این چوب رفت',friend:'این بازیکن در تیمت نیست',in_chain:'در این زنجیره هست',auth:'Baton را از تلگرام باز کن',other:'مشکلی پیش آمد، دوباره امتحان کن'}}
+};
+const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
+const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
+const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
+const T = (k, ...a) => { const v = L[LANG][k] !== undefined ? L[LANG][k] : L.en[k]; return typeof v === 'function' ? v(...a) : v; };
+const errMsg = (r) => (L[LANG].err[r && r.error] || L.en.err[r && r.error] || T('err').other);
+document.documentElement.lang = LANG;
+if (LANG === 'ar' || LANG === 'fa') document.documentElement.dir = 'rtl';
+document.querySelectorAll('[data-t]').forEach((el) => { el.textContent = T(el.dataset.t); });
+const nf = new Intl.NumberFormat(LANG === 'fa' ? 'fa-IR' : LANG, { maximumFractionDigits: 0 });
+const fmt = (n) => nf.format(Math.floor(Number(n) || 0));
+const dur = (s) => { s = Math.max(0, Math.floor(s)); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60); return h ? h + ' h ' + String(m).padStart(2, '0') : m + ' min'; };
+const clock = (s) => { s = Math.max(0, Math.floor(s)); return Math.floor(s / 3600) + ':' + String(Math.floor(s % 3600 / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); };
+const hues = ['#ffc531', '#3ee6a0', '#7cc4ff', '#ff9ec4', '#c9a7ff', '#ffb27a'];
+const hueOf = (s) => { let h = 0; for (const c of String(s)) h = (h * 31 + c.charCodeAt(0)) >>> 0; return hues[h % hues.length]; };
+const init = (s) => esc(String(s || '?').trim().charAt(0).toUpperCase() || '?');
+
+let S = null, got = 0, fetchedAt = 0;
+async function api(action, body) {
+  try {
+    const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ initData: (tg && tg.initData) || '', action }, body || {})) });
+    return await r.json();
+  } catch (e) { return { ok: false, error: 'other' }; }
+}
+function toast(t) { const el = $('#toast'); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => { el.hidden = true; }, 2600); }
+function setState(s) { if (!s || !s.ok) return; S = s; fetchedAt = Date.now(); render(); }
+function openLink(u) { try { /^https:\/\/t\.me\//.test(u) ? tg.openTelegramLink(u) : tg.openLink(u); } catch (e) { window.open(u, '_blank'); } }
+
+function now() { return Date.now() / 1000; }
+function pendingNow() {
+  if (!S) return 0;
+  const n = now(), t0 = fetchedAt / 1000, end = Math.min(n, S.full_at);
+  const extra = Math.max(0, end - Math.max(t0, S.harvest_at)) / 3600 * S.rate * (S.holding ? 2 : 1);
+  return S.pending + extra;
+}
+function render() {
+  if (!S) return;
+  $('#streak').textContent = S.streak || 0;
+  $('#bonusChip').textContent = '+' + (S.bonus || 0) + '%';
+  $('#rate').textContent = '+ ' + S.rate + ' ' + T('perH') + (S.holding ? '  ×2' : '');
+  $('#record').textContent = fmt(S.record);
+  // baton
+  const c = $('#batonCard');
+  if (S.holding) {
+    c.classList.remove('off');
+    $('#holdT').textContent = T('hold1'); $('#holdP').innerHTML = T('hold2', Math.round(S.hold_h));
+    $('#passBtn').hidden = false; $('#passBtn').textContent = '→  ' + T('pass');
+    $('#moreBat').hidden = S.batons.length < 2; $('#moreBat').textContent = T('more', S.batons.length - 1);
+  } else {
+    c.classList.add('off'); $('#holdT').textContent = T('none1'); $('#holdP').textContent = T('none2'); $('#timer').textContent = ''; $('#passBtn').hidden = true; $('#moreBat').hidden = true;
+  }
+  $('#dotHome').hidden = !S.holding;
+  // chain
+  const ch = S.chain;
+  $('#chainCard').hidden = !ch;
+  if (ch) {
+    $('#chainBy').innerHTML = T('chainBy', esc(ch.starter)); $('#links').textContent = fmt(ch.links);
+    let h = '';
+    if (ch.links > ch.runners.length) h += '<div class="link"><div class="av" style="background:#2a3f5f;color:#8fa5c4">+' + fmt(ch.links - ch.runners.length) + '</div><div class="bar"></div></div>';
+    ch.runners.forEach((r, i) => { h += '<div class="link"><div class="av' + (r.me ? ' me' : '') + '" style="background:' + (r.me ? '#ffc531' : hueOf(r.n)) + '" title="' + esc(r.n) + '">' + init(r.n) + '</div>' + (i < ch.runners.length - 1 ? '<div class="bar"></div>' : '') + '</div>'; });
+    const el = $('#chain'); el.innerHTML = h; el.scrollLeft = document.documentElement.dir === 'rtl' ? -el.scrollWidth : el.scrollWidth;
+  }
+  $('#lvl').textContent = T('lvl', S.drill);
+  // upgrades
+  const up = [
+    { k: 'drill', t: T('drill'), s: T('drillS', S.rate, S.costs.next_rate), c: S.costs.drill },
+    { k: 'tank', t: T('tank'), s: S.costs.next_tank != null ? T('tankS', S.tank_h, S.costs.next_tank) : '', c: S.costs.tank },
+    { k: 'grip', t: T('grip'), s: S.costs.grip != null ? T('gripS', S.hold_h, S.hold_h + 1) : '', c: S.costs.grip }];
+  $('#lvBig').textContent = T('lvShort', S.drill); $('#rate2').textContent = S.rate + ' $BATON ' + T('perH');
+  $('#upg').innerHTML = up.map((u) => '<div class="row"><div class="t"><b>' + u.t + '</b><span>' + esc(u.s || T('max')) + '</span></div>' + (u.c == null ? '<button class="sm done" disabled>' + T('max') + '</button>' : '<button class="sm" data-up="' + u.k + '"' + (S.pts < u.c ? ' disabled' : '') + '>' + fmt(u.c) + '</button>') + '</div>').join('');
+  // tasks
+  $('#tasks').innerHTML = S.tasks.map((t) => '<div class="row"><div class="t"><b>' + esc(t.title) + '</b><span>' + esc(t.sub || '') + '</span></div><span class="r">+' + fmt(t.reward) + '</span>' + (t.done ? '<button class="sm done" disabled>' + T('done') + '</button>' : '<button class="sm" data-task="' + t.id + '" data-url="' + esc(t.url || '') + '">' + (opened[t.id] ? T('claim') : T('go')) + '</button>') + '</div>').join('');
+  $('#dotTasks').hidden = !S.tasks.some((t) => !t.done);
+  $('#nFriends').textContent = fmt(S.friends);
+  tick();
+}
+function tick() {
+  if (!S) return;
+  const p = pendingNow();
+  const bal = (S.pts || 0);
+  $('#bal').innerHTML = fmt(bal) + '<span>.' + String(Math.floor(bal % 1 * 10)) + '</span>';
+  const span = Math.max(1, S.full_at - S.harvest_at), el = Math.min(span, now() - S.harvest_at);
+  $('#ring').style.setProperty('--p', Math.round(el / span * 100));
+  $('#ready').textContent = fmt(p);
+  const left = S.full_at - now();
+  $('#fillTxt').textContent = left > 0 ? T('fullIn', dur(left)) : T('full');
+  const hb = $('#harvest'); hb.textContent = p >= 1 ? T('harvest') + ' · ' + fmt(p) : T('empty'); hb.disabled = p < 1;
+  if (S.holding && S.batons[0]) { const l = S.batons[0].expires - now(); const tm = $('#timer'); tm.textContent = clock(l); tm.classList.toggle('low', l < 3600); if (l <= 0) refresh(); }
+}
+async function refresh() { const r = await api('state'); if (r && r.ok) setState(r); }
+
+// ---------- actions ----------
+$('#harvest').onclick = async () => {
+  hap(); const b = $('#harvest'); b.disabled = true;
+  const r = await api('harvest');
+  if (!r.ok) { hap('err'); toast(errMsg(r)); b.disabled = false; return; }
+  hap('ok'); setState(r.state);
+  const el = $('#bal'); el.classList.remove('burst'); void el.offsetWidth; el.classList.add('burst');
+  toast(T('harvested', fmt(r.amount)) + (r.streak_bonus > 0 ? ' · ' + T('streakB', r.streak, fmt(r.streak_bonus)) : ''));
+};
+function sheet(html) { $('#sheet').innerHTML = html; $('#scrim').hidden = false; }
+function closeSheet() { $('#scrim').hidden = true; }
+$('#scrim').onclick = (e) => { if (e.target.id === 'scrim') closeSheet(); };
+$('#passBtn').onclick = () => {
+  hap();
+  sheet('<h3>' + T('who') + '</h3>' +
+    '<button class="opt" data-k="new"><span class="t"><b>' + T('newP') + '</b><span>' + T('newS') + '</span></span><span class="mult x5">x5</span></button>' +
+    '<button class="opt" data-k="friend"><span class="t"><b>' + T('friendP') + '</b><span>' + T('friendS') + '</span></span><span class="mult">x3</span></button>' +
+    '<button class="opt" data-k="random"><span class="t"><b>' + T('randP') + '</b><span>' + T('randS') + '</span></span><span class="mult">x1</span></button>' +
+    '<button class="btn ghost" data-k="keep">' + T('keep') + '</button>');
+};
+async function doPass(kind, to) {
+  const b = S && S.batons[0]; if (!b) return;
+  const r = await api('pass', { baton: b.id, kind, to });
+  if (!r.ok) { hap('err'); toast(errMsg(r)); return; }
+  if (kind === 'new') {
+    const link = 'https://t.me/' + BOT + '/play?startapp=' + r.start;
+    openLink('https://t.me/share/url?url=' + encodeURIComponent(link) + '&text=' + encodeURIComponent(T('shareTxt')));
+    toast(T('linkReady')); closeSheet(); setState(r.state); return;
+  }
+  hap('ok'); closeSheet(); setState(r.state);
+  toast(T('passed', fmt(r.gain), r.mult, r.to));
+}
+$('#sheet').onclick = async (e) => {
+  const o = e.target.closest('[data-k]'); const f = e.target.closest('[data-f]');
+  if (f) { hap(); return doPass('friend', Number(f.dataset.f)); }
+  if (!o) return;
+  hap(); const k = o.dataset.k;
+  if (k === 'keep') return closeSheet();
+  if (k === 'friend') {
+    const r = await api('friends');
+    const inChain = new Set(((S.chain && S.chain.runners) || []).map((x) => x.n));
+    const list = (r.list || []).filter((x) => !inChain.has(x.name));
+    sheet('<h3>' + T('pick') + '</h3>' + (list.length ? list.map((x) => '<button class="opt" data-f="' + x.id + '"><span class="av" style="background:' + hueOf(x.name) + '">' + init(x.name) + '</span><span class="t"><b>' + esc(x.name) + '</b><span>' + (x.holding ? T('holding') : T('mined', fmt(x.mined))) + '</span></span><span class="mult">x3</span></button>').join('') : '<div class="empty">' + T('noPick') + '</div><button class="opt" data-k="new"><span class="t"><b>' + T('newP') + '</b><span>' + T('newS') + '</span></span><span class="mult x5">x5</span></button>') + '<button class="btn ghost" data-k="keep">' + T('keep') + '</button>');
+    return;
+  }
+  doPass(k);
+};
+const opened = {};
+$('#upg').onclick = async (e) => {
+  const b = e.target.closest('[data-up]'); if (!b) return; hap(); b.disabled = true;
+  const r = await api('upgrade', { what: b.dataset.up });
+  if (!r.ok) { hap('err'); toast(errMsg(r)); b.disabled = false; return; }
+  hap('ok'); toast(T('upgraded')); setState(r.state);
+};
+$('#tasks').onclick = async (e) => {
+  const b = e.target.closest('[data-task]'); if (!b) return; hap();
+  const id = Number(b.dataset.task);
+  if (!opened[id]) { opened[id] = true; if (b.dataset.url) openLink(b.dataset.url); setTimeout(render, 600); return; }
+  b.disabled = true;
+  const r = await api('task', { id });
+  if (!r.ok) { hap('err'); toast(errMsg(r)); b.disabled = false; return; }
+  hap('ok'); toast(T('reward', fmt(r.reward))); setState(r.state);
+};
+const myLink = () => 'https://t.me/' + BOT + '/play?startapp=r' + (S ? S.uid : user.id || '');
+$('#invite').textContent = T('invite'); $('#copy').textContent = T('copy');
+$('#invite').onclick = () => { hap(); openLink('https://t.me/share/url?url=' + encodeURIComponent(myLink()) + '&text=' + encodeURIComponent(T('inviteTxt'))); };
+$('#copy').onclick = async () => { hap(); try { await navigator.clipboard.writeText(myLink()); toast(T('copied')); } catch (e) { toast(myLink()); } };
+async function loadFriends() {
+  const r = await api('friends'); if (!r.ok) return;
+  $('#friends').innerHTML = r.list.length ? r.list.map((x) => '<div class="row"><span class="av" style="background:' + hueOf(x.name) + '">' + init(x.name) + '</span><div class="t"><b>' + esc(x.name) + '</b><span>' + (x.sponsor ? T('sponsor') : x.holding ? T('holding') : T('mined', fmt(x.mined))) + '</span></div>' + (x.earned ? '<span class="r">+' + fmt(x.earned) + '</span>' : '') + '</div>').join('') : '<div class="empty">' + T('noFriends') + '</div>';
+}
+let rankMode = 'chains';
+async function loadRanks() {
+  const r = await api('ranks'); if (!r.ok) return;
+  const rows = rankMode === 'chains'
+    ? r.chains.map((c, i) => '<div class="row' + (c.me ? ' me' : '') + '"><span class="rank' + (i < 3 ? ' g' : '') + '">' + (i + 1) + '</span><div class="t"><b>' + esc(T('chainOf', c.starter)) + '</b><span>' + (c.stopped ? T('stopped') : T('running')) + '</span></div><span class="r">' + fmt(c.links) + ' ' + T('links') + '</span></div>')
+    : r.miners.map((m, i) => '<div class="row' + (m.me ? ' me' : '') + '"><span class="rank' + (i < 3 ? ' g' : '') + '">' + (i + 1) + '</span><span class="av" style="background:' + hueOf(m.name) + '">' + init(m.name) + '</span><div class="t"><b>' + esc(m.name) + '</b></div><span class="r">' + fmt(m.pts) + '</span></div>');
+  $('#ranks').innerHTML = rows.join('') || '<div class="empty">…</div>';
+}
+$('#sChains').onclick = () => { rankMode = 'chains'; $('#sChains').setAttribute('aria-pressed', 'true'); $('#sMiners').setAttribute('aria-pressed', 'false'); loadRanks(); };
+$('#sMiners').onclick = () => { rankMode = 'miners'; $('#sMiners').setAttribute('aria-pressed', 'true'); $('#sChains').setAttribute('aria-pressed', 'false'); loadRanks(); };
+function go(p) {
+  document.querySelectorAll('nav.tabs button').forEach((x) => x.toggleAttribute('aria-current', x.dataset.p === p));
+  document.querySelectorAll('nav.tabs button[aria-current]').forEach((x) => x.setAttribute('aria-current', 'page'));
+  document.querySelectorAll('.panel').forEach((x) => { x.hidden = x.id !== 'p-' + p; });
+  document.querySelector('main').scrollTop = 0;
+  if (p === 'friends') loadFriends();
+  if (p === 'rank') loadRanks();
+}
+document.querySelectorAll('nav.tabs button').forEach((b) => { b.onclick = () => { hap(); go(b.dataset.p); }; });
+
+(async () => {
+  const r = await api('state');
+  $('#loader').hidden = true;
+  if (!r.ok) { toast(errMsg(r)); return; }
+  setState(r);
+  const sp = (tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '';
+  if (sp === 'friends') go('friends');
+  setInterval(tick, 1000);
+  setInterval(refresh, 60000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh(); });
+})();
+})();
+</script>
+</body>
+</html>
