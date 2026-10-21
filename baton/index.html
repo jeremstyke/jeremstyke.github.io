@@ -124,6 +124,64 @@ nav.tabs svg{width:23px;height:23px}
 [dir="rtl"] .bar{background:linear-gradient(270deg,var(--baton),var(--flame))}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+<style>
+/* 21 oct 2026 (Jeremy): "plus jolie" - night stadium polish layer */
+.app{background:
+  radial-gradient(90% 38% at 50% -6%,rgba(255,197,49,.20) 0%,transparent 70%),
+  radial-gradient(70% 30% at 100% 30%,rgba(124,196,255,.10) 0%,transparent 70%),
+  radial-gradient(80% 40% at 0% 85%,rgba(255,106,42,.10) 0%,transparent 70%),
+  linear-gradient(180deg,#0d1b30 0%,#0a1322 60%,#08101c 100%)}
+.app::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background:repeating-radial-gradient(ellipse 140% 60% at 50% 115%,transparent 0 46px,rgba(233,241,255,.045) 46px 48px)}
+.app>*{position:relative;z-index:1}
+.brand{background:linear-gradient(180deg,#fff 30%,#ffd76a);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 10px rgba(255,197,49,.25))}
+.chip{background:rgba(255,255,255,.06);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.09)}
+.score .big{background:linear-gradient(180deg,#ffffff 0%,#ffe9a6 55%,#ffc531 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 24px rgba(255,197,49,.35));font-size:76px}
+.score .big span{color:inherit}
+.score .rate{display:inline-flex;margin:6px auto 0;padding:5px 12px;border-radius:999px;background:rgba(62,230,160,.10);border:1px solid rgba(62,230,160,.25)}
+.score{display:flex;flex-direction:column;align-items:center}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);box-shadow:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.06);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.batonCard{background:radial-gradient(120% 140% at 0% 0%,rgba(255,106,42,.45) 0%,rgba(255,106,42,.10) 40%,transparent 65%),linear-gradient(160deg,#3a2210 0%,#1a2236 70%);border:1px solid rgba(255,170,60,.35);box-shadow:0 14px 40px rgba(255,106,42,.18),inset 0 1px 0 rgba(255,220,150,.15)}
+.batonCard::after{content:"";position:absolute;inset:-40% -10% auto auto;width:60%;height:120%;background:linear-gradient(115deg,transparent 40%,rgba(255,240,200,.10) 50%,transparent 60%);animation:sweep 5s ease-in-out infinite;pointer-events:none}
+.batonCard.off::after{display:none}
+@keyframes sweep{0%,60%{transform:translateX(-160%)}100%{transform:translateX(160%)}}
+.batonCard.off{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border-color:rgba(255,255,255,.08);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.stick::before{content:"";position:absolute;inset:6px;border-radius:50%;background:radial-gradient(circle,rgba(255,197,49,.35) 0%,transparent 65%);animation:breathe 2.4s ease-in-out infinite}
+.off .stick::before{display:none}
+@keyframes breathe{50%{transform:scale(1.15);opacity:.6}}
+.stick::after{content:"";position:absolute;top:2px;right:6px;width:4px;height:4px;border-radius:50%;background:#ffd76a;box-shadow:-14px 10px 0 -1px #ff9a3c,10px 14px 0 -1px #ffe9a6,-6px -2px 0 0 #ffb347;animation:spark 1.6s ease-out infinite}
+.off .stick::after{display:none}
+@keyframes spark{0%{transform:translateY(8px);opacity:0}30%{opacity:1}100%{transform:translateY(-14px);opacity:0}}
+.stick .rod{animation:wobble 3s ease-in-out infinite}
+@keyframes wobble{50%{transform:rotate(22deg) translateY(-3px)}}
+.hold h3{letter-spacing:.02em;text-shadow:0 2px 14px rgba(255,140,40,.35)}
+.timer{display:inline-block;padding:3px 10px;border-radius:10px;background:rgba(0,0,0,.28);border:1px solid rgba(255,197,49,.25)}
+.btn{position:relative;overflow:hidden;border-radius:18px;letter-spacing:.01em}
+.btn.gold{background:linear-gradient(180deg,#ffe07a 0%,#ffc531 55%,#f2a400 100%);box-shadow:0 8px 22px rgba(255,170,30,.40),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -3px 0 rgba(150,90,0,.35)}
+.btn.mint{background:linear-gradient(180deg,#6ff5bf 0%,#3ee6a0 55%,#1fbf7d 100%);box-shadow:0 8px 22px rgba(62,230,160,.30),inset 0 1px 0 rgba(255,255,255,.5),inset 0 -3px 0 rgba(0,90,50,.3)}
+.btn.gold::after,.btn.mint:not([disabled])::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);animation:shine 3.2s ease-in-out infinite}
+@keyframes shine{0%,55%{left:-60%}100%{left:130%}}
+.btn.mint[disabled]{background:rgba(62,230,160,.12);color:var(--gain);box-shadow:inset 0 0 0 1px rgba(62,230,160,.25);opacity:1}
+.btn.ghost{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10)}
+.ring{width:112px;height:112px;background:conic-gradient(from -90deg,#1fbf7d 0%,#3ee6a0 calc(var(--p)*.5%),#b8ffe2 calc(var(--p)*1%),rgba(255,255,255,.07) 0);box-shadow:0 0 28px rgba(62,230,160,.25)}
+.ring>div{width:90px;height:90px;background:radial-gradient(circle at 50% 35%,#1d3350,#101d31);box-shadow:inset 0 2px 8px rgba(0,0,0,.4)}
+.av{box-shadow:0 0 0 2px rgba(255,255,255,.08),0 4px 12px rgba(0,0,0,.35)}
+.av.me{box-shadow:0 0 18px rgba(255,197,49,.6)}
+.bar{height:4px;border-radius:2px;background:repeating-linear-gradient(90deg,var(--baton) 0 6px,var(--flame) 6px 12px);background-size:24px 4px;animation:flow 1s linear infinite}
+@keyframes flow{to{background-position:24px 0}}
+.record{background:linear-gradient(90deg,rgba(255,197,49,.14),rgba(255,197,49,.03));border:1px solid rgba(255,197,49,.22)}
+.row{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.07)}
+.sm{background:linear-gradient(180deg,#ffe07a,#ffc531);box-shadow:0 4px 12px rgba(255,170,30,.3)}
+.sm.done,.sm[disabled]{background:rgba(255,255,255,.06);box-shadow:none}
+nav.tabs{background:rgba(10,18,32,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid rgba(255,255,255,.08)}
+nav.tabs button[aria-current="page"]::before{content:"";position:absolute;inset:3px 10%;border-radius:14px;background:rgba(255,197,49,.12);box-shadow:inset 0 0 0 1px rgba(255,197,49,.25);z-index:-1}
+nav.tabs button{z-index:0}
+nav.tabs button[aria-current="page"] svg{filter:drop-shadow(0 0 6px rgba(255,197,49,.6))}
+.sheet{background:linear-gradient(180deg,#1b2d48,#111d31);border-top:1px solid rgba(255,255,255,.1)}
+.opt{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+.loader{background:radial-gradient(60% 40% at 50% 45%,rgba(255,197,49,.18),transparent 70%),#0a1322}
+.loader div{text-shadow:0 0 30px rgba(255,197,49,.6)}
+</style>
 </head>
 <body>
 <div class="loader" id="loader"><div>BATON</div></div>
