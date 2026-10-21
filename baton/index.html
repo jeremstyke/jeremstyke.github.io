@@ -264,6 +264,8 @@ nav.tabs button[aria-current="page"] svg{filter:drop-shadow(0 0 6px rgba(47,141,
 .sd.nx{border:1.5px dashed #56c8ff}
 [hidden]{display:none!important}
 .timer:empty{display:none}
+.tip{display:block;margin-top:7px;font-size:13px;font-weight:700;color:#bfe2ff;line-height:1.35}
+.mult{display:flex;flex-direction:column;align-items:flex-end;line-height:1}.mult .pg{font-family:var(--body);font-size:12px;font-weight:800;color:var(--gain);margin-top:4px;text-shadow:none}
 .maint{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:24px max(20px,env(safe-area-inset-right,0px)) 24px max(20px,env(safe-area-inset-left,0px));background:radial-gradient(70% 50% at 50% 35%,rgba(47,141,255,.3),transparent 70%),#050a18}
 .mspin{width:34px;height:34px;border-radius:50%;border:3px solid rgba(80,150,255,.25);border-top-color:#2f8dff;animation:spin 1s linear infinite;margin-top:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -434,6 +436,19 @@ ar:{mH:'تحديث سريع جارٍ',mP:'يعود Baton خلال دقائق. م
 fa:{mH:'به‌روزرسانی کوتاه در جریان است',mP:'Baton تا چند دقیقه دیگر برمی‌گردد. معدنت در این مدت همچنان پر می‌شود.'}
 };
 for (const k in X5) Object.assign(X[k], X5[k]);
+const X6 = {
+en:{holdTip:(x)=>'⏳ Pass it before 0:00: up to +'+x+' $BATON',passTip:'At 0:00 it leaves on its own and you get no bonus.',t2p:'While you hold it, your mine runs 2× faster. Pass it before the timer ends to win a bonus.'},
+fr:{holdTip:(x)=>'⏳ Passe-le avant 0:00 : jusqu\'à +'+x+' $BATON',passTip:'À 0:00, il part tout seul et tu n\'as pas de bonus.',t2p:'Tant que tu l\'as, ta mine va 2× plus vite. Passe-le avant la fin du chrono pour gagner un bonus.'},
+es:{holdTip:(x)=>'⏳ Pásalo antes de 0:00: hasta +'+x+' $BATON',passTip:'A las 0:00 se va solo y no ganas bonus.',t2p:'Mientras lo tienes, tu mina va 2× más rápido. Pásalo antes de que acabe el tiempo para ganar un bonus.'},
+pt:{holdTip:(x)=>'⏳ Passe antes de 0:00: até +'+x+' $BATON',passTip:'Em 0:00 ele vai embora sozinho e você não ganha bônus.',t2p:'Enquanto estiver com ele, sua mina vai 2× mais rápido. Passe antes do fim do tempo para ganhar um bônus.'},
+ru:{holdTip:(x)=>'⏳ Передай до 0:00: до +'+x+' $BATON',passTip:'В 0:00 она уйдёт сама, и ты не получишь бонус.',t2p:'Пока эстафета у тебя, шахта работает в 2 раза быстрее. Передай её до конца таймера и получи бонус.'},
+uk:{holdTip:(x)=>'⏳ Передай до 0:00: до +'+x+' $BATON',passTip:'О 0:00 вона піде сама, і ти не отримаєш бонус.',t2p:'Поки естафета в тебе, шахта працює вдвічі швидше. Передай її до кінця таймера й отримай бонус.'},
+tr:{holdTip:(x)=>'⏳ 0:00\'dan önce devret: +'+x+' $BATON\'a kadar',passTip:'0:00\'da kendiliğinden gider ve bonus alamazsın.',t2p:'Sende olduğu sürece madenin 2× hızlı çalışır. Süre bitmeden devret, bonus kazan.'},
+id:{holdTip:(x)=>'⏳ Oper sebelum 0:00: hingga +'+x+' $BATON',passTip:'Di 0:00 tongkat pergi sendiri dan kamu tidak dapat bonus.',t2p:'Selama kamu pegang, tambangmu 2× lebih cepat. Oper sebelum waktu habis untuk dapat bonus.'},
+ar:{holdTip:(x)=>'⏳ مرّرها قبل 0:00: حتى +'+x+' $BATON',passTip:'عند 0:00 تذهب وحدها ولا تحصل على مكافأة.',t2p:'ما دامت معك، منجمك أسرع مرتين. مرّرها قبل انتهاء الوقت لتربح مكافأة.'},
+fa:{holdTip:(x)=>'⏳ قبل از 0:00 ردش کن: تا +'+x+' $BATON',passTip:'در 0:00 خودش می‌رود و پاداشی نمی‌گیری.',t2p:'تا وقتی دست توست، معدنت ۲ برابر سریع‌تر است. قبل از تمام شدن زمان ردش کن تا پاداش بگیری.'}
+};
+for (const k in X6) Object.assign(X[k], X6[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -481,7 +496,7 @@ function render() {
   const c = $('#batonCard');
   if (S.holding) {
     c.classList.remove('off');
-    $('#holdT').textContent = T('hold1'); $('#holdP').innerHTML = T('hold2', Math.round(S.hold_h));
+    $('#holdT').textContent = T('hold1'); $('#holdP').innerHTML = T('hold2', Math.round(S.hold_h)) + '<small class="tip">' + T('holdTip', fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * 5)) + '</small>';
     $('#passBtn').hidden = false; $('#passBtn').textContent = '→  ' + T('pass');
     $('#moreBat').hidden = S.batons.length < 2; $('#moreBat').textContent = T('more', S.batons.length - 1);
   } else {
@@ -550,10 +565,11 @@ $('#scrim').onclick = (e) => { if (e.target.id === 'scrim') closeSheet(); };
 $('#passBtn').onclick = () => {
   hap();
   if (!S || !S.holding) return $('#invite').onclick();  // no baton in hand: the button invites a friend instead
-  sheet('<h3>' + T('who') + '</h3>' +
-    '<button class="opt" data-k="new"><span class="t"><b>' + T('newP') + '</b><span>' + T('newS') + '</span></span><span class="mult x5">x5</span></button>' +
-    '<button class="opt" data-k="friend"><span class="t"><b>' + T('friendP') + '</b><span>' + T('friendS') + '</span></span><span class="mult">x3</span></button>' +
-    '<button class="opt" data-k="random"><span class="t"><b>' + T('randP') + '</b><span>' + T('randS') + '</span></span><span class="mult">x1</span></button>' +
+  const pg = (m) => '<small class="pg">+' + fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * m) + '</small>';
+  sheet('<h3>' + T('who') + '</h3><p class="foot" style="text-align:start;margin:0">' + T('passTip') + '</p>' +
+    '<button class="opt" data-k="new"><span class="t"><b>' + T('newP') + '</b><span>' + T('newS') + '</span></span><span class="mult x5">x5' + pg(5) + '</span></button>' +
+    '<button class="opt" data-k="friend"><span class="t"><b>' + T('friendP') + '</b><span>' + T('friendS') + '</span></span><span class="mult">x3' + pg(3) + '</span></button>' +
+    '<button class="opt" data-k="random"><span class="t"><b>' + T('randP') + '</b><span>' + T('randS') + '</span></span><span class="mult">x1' + pg(1) + '</span></button>' +
     '<button class="btn ghost" data-k="keep">' + T('keep') + '</button>');
 };
 async function doPass(kind, to) {
