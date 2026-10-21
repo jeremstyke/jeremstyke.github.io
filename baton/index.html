@@ -193,6 +193,7 @@ nav.tabs button[aria-current="page"] svg{filter:drop-shadow(0 0 6px rgba(255,197
 .sheet .row .t b,#tasks .row .t b{white-space:normal;overflow:visible}
 .pill{display:flex;align-items:center;min-height:42px;padding:0 12px;border-radius:12px;background:rgba(62,230,160,.14);border:1px solid rgba(62,230,160,.35);color:var(--gain);font-weight:800;font-size:14px;white-space:nowrap}
 .row.on{border-color:rgba(62,230,160,.28)}
+.conv{font-size:12px;color:var(--mute);margin-top:8px;max-width:32ch;text-align:center;line-height:1.35}
 </style>
 </head>
 <body>
@@ -205,7 +206,7 @@ nav.tabs button[aria-current="page"] svg{filter:drop-shadow(0 0 6px rgba(255,197
 
   <main>
     <section class="panel" id="p-home">
-      <div class="score"><small data-t="your"></small><div class="big num" id="bal">0</div><div class="rate num" id="rate"></div></div>
+      <div class="score"><small data-t="your"></small><div class="big num" id="bal">0</div><div class="rate num" id="rate"></div><div class="conv" data-t="conv"></div></div>
 
       <div class="card batonCard" id="batonCard">
         <div class="batonRow">
@@ -318,6 +319,19 @@ ar:{subs:'ابقَ مشتركًا',subS:(n)=>'+'+n+' % تعدين ما دمت م
 fa:{subs:'عضو بمان',subS:(n)=>'+'+n+' % استخراج تا وقتی عضو هستی',active:'فعال'}
 };
 for (const k in X2) Object.assign(X[k], X2[k]);
+const X3 = {
+en:{conv:'Points, converted into real tokens at the airdrop based on your share.',t4h:'The airdrop',t4p:'Your $BATON are points. At the airdrop they turn into real tokens, at a rate announced that day, based on your share of all points.'},
+fr:{conv:'Des points, convertis en vrais tokens à l\'airdrop selon ta part.',t4h:'L\'airdrop',t4p:'Tes $BATON sont des points. À l\'airdrop, ils seront convertis en vrais tokens selon un taux annoncé ce jour-là, proportionnel à ta part de tous les points.'},
+es:{conv:'Puntos que se convierten en tokens reales en el airdrop, según tu parte.',t4h:'El airdrop',t4p:'Tus $BATON son puntos. En el airdrop se convertirán en tokens reales, a una tasa anunciada ese día, según tu parte de todos los puntos.'},
+pt:{conv:'Pontos convertidos em tokens reais no airdrop, conforme sua parte.',t4h:'O airdrop',t4p:'Seus $BATON são pontos. No airdrop, eles viram tokens reais, a uma taxa anunciada nesse dia, proporcional à sua parte de todos os pontos.'},
+ru:{conv:'Это очки: на аирдропе они станут настоящими токенами по твоей доле.',t4h:'Аирдроп',t4p:'Твои $BATON это очки. На аирдропе они превратятся в настоящие токены по курсу, объявленному в тот день, пропорционально твоей доле всех очков.'},
+uk:{conv:'Це бали: на аірдропі вони стануть справжніми токенами за твоєю часткою.',t4h:'Аірдроп',t4p:'Твої $BATON це бали. На аірдропі вони перетворяться на справжні токени за курсом, оголошеним того дня, пропорційно твоїй частці всіх балів.'},
+tr:{conv:'Puanlar, airdropta payına göre gerçek tokena dönüşür.',t4h:'Airdrop',t4p:'$BATON\'ların puandır. Airdropta, o gün açıklanacak bir oranla, tüm puanlardaki payına göre gerçek tokena dönüşür.'},
+id:{conv:'Poin, dikonversi jadi token asli saat airdrop sesuai bagianmu.',t4h:'Airdrop',t4p:'$BATON-mu adalah poin. Saat airdrop, poin jadi token asli dengan rasio yang diumumkan hari itu, sesuai bagianmu dari semua poin.'},
+ar:{conv:'نقاط تتحول إلى توكنات حقيقية عند الإيردروب حسب حصتك.',t4h:'الإيردروب',t4p:'رصيدك من $BATON نقاط. عند الإيردروب تتحول إلى توكنات حقيقية بسعر يُعلن في ذلك اليوم، حسب حصتك من مجموع النقاط.'},
+fa:{conv:'امتیاز است؛ در ایردراپ به نسبت سهمت به توکن واقعی تبدیل می‌شود.',t4h:'ایردراپ',t4p:'$BATON تو امتیاز است. در ایردراپ با نرخی که همان روز اعلام می‌شود، به نسبت سهمت از کل امتیازها به توکن واقعی تبدیل می‌شود.'}
+};
+for (const k in X3) Object.assign(X[k], X3[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -509,7 +523,7 @@ document.querySelectorAll('nav.tabs button').forEach((b) => { b.onclick = () => 
 // ---------- 21 oct 2026: tutorial, bonus explainer, invite nudge ----------
 const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
 function tutorial() {
-  const steps = [['⛏️', 't1h', 't1p'], ['🔥', 't2h', 't2p'], ['🔗', 't3h', 't3p']];
+  const steps = [['⛏️', 't1h', 't1p'], ['🔥', 't2h', 't2p'], ['🔗', 't3h', 't3p'], ['🪂', 't4h', 't4p']];
   let i = 0;
   const el = document.createElement('div'); el.className = 'tuto'; document.body.appendChild(el);
   const draw = () => {
