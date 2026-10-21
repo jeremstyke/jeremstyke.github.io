@@ -302,6 +302,7 @@ nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:elli
           <div class="hold"><h3 id="holdT"></h3><p id="holdP"></p><div class="timer num" id="timer"></div></div>
         </div>
         <button class="btn gold" id="passBtn"></button>
+        <button class="btn ghost" id="extBtn" hidden></button>
         <div class="more" id="moreBat" hidden></div>
       </div>
 
@@ -502,6 +503,19 @@ ar:{lTag:'عدّن $BATON كل 4 ساعات. مرّر العصا وابنِ أط
 fa:{lTag:'هر ۴ ساعت $BATON استخراج کن. چوب را رد کن و بلندترین زنجیره را بساز.',lPlay:'بازی در تلگرام'}
 };
 for (const k in X10) Object.assign(X[k], X10[k]);
+const X11 = {
+en:{holdTip:(x)=>'⏳ Pass it before the timer ends: up to +'+x+' $BATON',passTip:'When the timer hits zero, it leaves on its own and you get no bonus.',ext:(h,s)=>'⏱️ Keep it '+h+' h longer · '+s+' ⭐',extOk:'⏱️ Baton extended!',extLate:'Too late, this baton is gone.',extDone:'Already extended once.'},
+fr:{holdTip:(x)=>'⏳ Passe-le avant la fin du chrono : jusqu\'à +'+x+' $BATON',passTip:'Quand le chrono arrive à zéro, il part tout seul et tu n\'as pas de bonus.',ext:(h,s)=>'⏱️ Garder '+h+' h de plus · '+s+' ⭐',extOk:'⏱️ Bâton prolongé !',extLate:'Trop tard, ce bâton est parti.',extDone:'Déjà prolongé une fois.'},
+es:{holdTip:(x)=>'⏳ Pásalo antes de que acabe el tiempo: hasta +'+x+' $BATON',passTip:'Cuando el tiempo llega a cero, se va solo y no ganas bonus.',ext:(h,s)=>'⏱️ Quedártelo '+h+' h más · '+s+' ⭐',extOk:'⏱️ ¡Bastón prolongado!',extLate:'Demasiado tarde, este bastón se fue.',extDone:'Ya prolongado una vez.'},
+pt:{holdTip:(x)=>'⏳ Passe antes do fim do tempo: até +'+x+' $BATON',passTip:'Quando o tempo chega a zero, ele vai embora sozinho e você não ganha bônus.',ext:(h,s)=>'⏱️ Ficar '+h+' h a mais · '+s+' ⭐',extOk:'⏱️ Bastão prolongado!',extLate:'Tarde demais, este bastão já foi.',extDone:'Já prolongado uma vez.'},
+ru:{holdTip:(x)=>'⏳ Передай до конца таймера: до +'+x+' $BATON',passTip:'Когда таймер дойдёт до нуля, эстафета уйдёт сама, и ты не получишь бонус.',ext:(h,s)=>'⏱️ Оставить ещё на '+h+' ч · '+s+' ⭐',extOk:'⏱️ Эстафета продлена!',extLate:'Слишком поздно, эстафета ушла.',extDone:'Уже продлена один раз.'},
+uk:{holdTip:(x)=>'⏳ Передай до кінця таймера: до +'+x+' $BATON',passTip:'Коли таймер дійде до нуля, естафета піде сама, і ти не отримаєш бонус.',ext:(h,s)=>'⏱️ Залишити ще на '+h+' год · '+s+' ⭐',extOk:'⏱️ Естафету продовжено!',extLate:'Запізно, естафета пішла.',extDone:'Вже продовжено один раз.'},
+tr:{holdTip:(x)=>'⏳ Süre bitmeden devret: +'+x+' $BATON\'a kadar',passTip:'Süre sıfırlanınca kendiliğinden gider ve bonus alamazsın.',ext:(h,s)=>'⏱️ '+h+' saat daha tut · '+s+' ⭐',extOk:'⏱️ Bayrak uzatıldı!',extLate:'Çok geç, bu bayrak gitti.',extDone:'Zaten bir kez uzatıldı.'},
+id:{holdTip:(x)=>'⏳ Oper sebelum waktu habis: hingga +'+x+' $BATON',passTip:'Saat waktu habis, tongkat pergi sendiri dan kamu tidak dapat bonus.',ext:(h,s)=>'⏱️ Simpan '+h+' jam lagi · '+s+' ⭐',extOk:'⏱️ Tongkat diperpanjang!',extLate:'Terlambat, tongkat sudah pergi.',extDone:'Sudah diperpanjang sekali.'},
+ar:{holdTip:(x)=>'⏳ مرّرها قبل انتهاء الوقت: حتى +'+x+' $BATON',passTip:'عندما ينتهي الوقت تذهب وحدها ولا تحصل على مكافأة.',ext:(h,s)=>'⏱️ احتفظ بها '+h+' س إضافية · '+s+' ⭐',extOk:'⏱️ تم تمديد العصا!',extLate:'فات الأوان، العصا ذهبت.',extDone:'تم التمديد مرة من قبل.'},
+fa:{holdTip:(x)=>'⏳ قبل از تمام شدن زمان ردش کن: تا +'+x+' $BATON',passTip:'وقتی زمان تمام شود خودش می‌رود و پاداشی نمی‌گیری.',ext:(h,s)=>'⏱️ '+h+' ساعت بیشتر نگه دار · '+s+' ⭐',extOk:'⏱️ چوب تمدید شد!',extLate:'دیر شد، چوب رفته.',extDone:'قبلاً یک بار تمدید شده.'}
+};
+for (const k in X11) Object.assign(X[k], X11[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -551,9 +565,10 @@ function render() {
     c.classList.remove('off');
     $('#holdT').textContent = T('hold1'); $('#holdP').innerHTML = T('hold2', Math.round(S.hold_h)) + '<small class="tip">' + T('holdTip', fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * 5)) + '</small>';
     $('#passBtn').hidden = false; $('#passBtn').textContent = '→  ' + T('pass');
+    $('#extBtn').hidden = !!S.batons[0].extended || !S.ext_stars; $('#extBtn').textContent = T('ext', S.ext_h || 4, S.ext_stars || 10);
     $('#moreBat').hidden = S.batons.length < 2; $('#moreBat').textContent = T('more', S.batons.length - 1);
   } else {
-    c.classList.add('off'); $('#holdT').textContent = T('none1'); $('#holdP').textContent = T('none2'); $('#timer').textContent = ''; $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
+    c.classList.add('off'); $('#holdT').textContent = T('none1'); $('#holdP').textContent = T('none2'); $('#timer').textContent = ''; $('#extBtn').hidden = true; $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
   }
   $('#dotHome').hidden = !S.holding;
   // chain
@@ -628,6 +643,16 @@ $('#passBtn').onclick = () => {
     '<button class="opt" data-k="friend"><span class="t"><b>' + T('friendP') + '</b><span>' + T('friendS') + '</span></span><span class="mult">x3' + pg(3) + '</span></button>' +
     '<button class="opt" data-k="random"><span class="t"><b>' + T('randP') + '</b><span>' + T('randS') + '</span></span><span class="mult">x1' + pg(1) + '</span></button>' +
     '<button class="btn ghost" data-k="keep">' + T('keep') + '</button>');
+};
+// 22 oct 2026: keep the baton in hand 4 h longer for 10 Stars (once per baton); the bot's webhook applies the payment
+$('#extBtn').onclick = async () => {
+  hap();
+  const b = S && S.batons[0]; if (!b) return;
+  const r = await api('extend', { baton: b.id });
+  if (!r || !r.ok) { hap('err'); toast(r && r.error === 'late' ? T('extLate') : r && r.error === 'done' ? T('extDone') : errMsg(r || {})); return; }
+  try {
+    tg.openInvoice(r.link, (st) => { if (st === 'paid') { hap('ok'); toast(T('extOk')); setTimeout(refresh, 1500); setTimeout(refresh, 5000); } });
+  } catch (e) { openLink(r.link); }
 };
 async function doPass(kind, to) {
   const b = S && S.batons[0]; if (!b) return;
