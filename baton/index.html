@@ -463,6 +463,19 @@ ar:{crewEarned:'ربحته مع فريقك',crewSplit:(a,b)=>a+' مكافآت د
 fa:{crewEarned:'درآمد از تیمت',crewSplit:(a,b)=>a+' پاداش دعوت · '+b+' از استخراج آن‌ها (۱۰٪)'}
 };
 for (const k in X7) Object.assign(X[k], X7[k]);
+const X8 = {
+en:{bSub:(n)=>'+'+n+' % thanks to the Jeremstyke Telegram channel'},
+fr:{bSub:(n)=>'+'+n+' % grâce à la chaîne Telegram de Jeremstyke'},
+es:{bSub:(n)=>'+'+n+' % gracias al canal de Telegram de Jeremstyke'},
+pt:{bSub:(n)=>'+'+n+' % graças ao canal do Telegram do Jeremstyke'},
+ru:{bSub:(n)=>'+'+n+' % благодаря Telegram-каналу Jeremstyke'},
+uk:{bSub:(n)=>'+'+n+' % завдяки Telegram-каналу Jeremstyke'},
+tr:{bSub:(n)=>'Jeremstyke Telegram kanalı sayesinde +'+n+' %'},
+id:{bSub:(n)=>'+'+n+' % berkat channel Telegram Jeremstyke'},
+ar:{bSub:(n)=>'+'+n+' % بفضل قناة Jeremstyke على تيليجرام'},
+fa:{bSub:(n)=>'+'+n+' % به لطف کانال تلگرام Jeremstyke'}
+};
+for (const k in X8) Object.assign(X[k], X8[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
