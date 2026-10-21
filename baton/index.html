@@ -482,7 +482,10 @@ function tick() {
   if (!S) return;
   const p = pendingNow();
   const bal = (S.pts || 0);
-  $('#bal').innerHTML = fmt(bal) + '<span>.' + String(Math.floor(bal % 1 * 10)) + '</span>';
+  // 21 oct 2026: big balances stay on one line (12 345 then 1,23 M), the decimal only under 1 000
+  const balEl = $('#bal');
+  balEl.innerHTML = bal >= 1e6 ? esc(new Intl.NumberFormat(LANG === 'fa' ? 'fa-IR' : LANG, { notation: 'compact', maximumFractionDigits: 2 }).format(bal)) : fmt(bal) + (bal < 1000 ? '<span>.' + String(Math.floor(bal % 1 * 10)) + '</span>' : '');
+  const bl = balEl.textContent.length; balEl.style.fontSize = bl > 8 ? '48px' : bl > 6 ? '60px' : '';
   const span = Math.max(1, S.full_at - S.harvest_at), el = Math.min(span, now() - S.harvest_at);
   $('#ring').style.setProperty('--p', Math.round(el / span * 100));
   $('#ready').textContent = fmt(p);
