@@ -555,7 +555,7 @@ function render() {
   const sec = (h, list, f) => list.length ? '<div class="sec">' + h + '</div>' + list.map(f).join('') : '';
   // 21 oct 2026: tasks still to do come first (newest first), and a block with something to do goes above the finished ones
   const srt = (l) => l.sort((x, y) => (x.done - y.done) || (y.id - x.id));
-  const secs = [[T('daily'), srt(dl), trow], ['📢 ' + T('subs'), srt(sb), srow], [T('once'), srt(on1), trow]];
+  const secs = [[T('daily'), srt(dl), trow], ['📢 ' + T('subs'), srt(sb), srow], [T('once'), srt(on1.filter((t) => !t.done)), trow]];  // one-time tasks already done disappear
   secs.sort((x, y) => x[1].every((t) => t.done) - y[1].every((t) => t.done));
   $('#tasks').innerHTML = secs.map((z) => sec(z[0], z[1], z[2])).join('');
   $('#dotTasks').hidden = !S.tasks.some((t) => !t.done);
