@@ -35,6 +35,7 @@
       if (/startapp=friends/.test(u) && window.mctFriends) return window.mctFriends(); // the friends list, with the gift to send back
       if (/startapp=(?:friends|r_)/.test(u)) return go('earn');
       if (/startapp=back/.test(u)) return go('market');
+      if (/startapp=prem/.test(u) && window.mctPremium) return window.mctPremium(); // 21 oct 2026 (Jeremy): the Premium offer notification opens the Premium page
       // 20 oct 2026 (Jeremy): a MCT Duel notification opens MCT Duel (on the right duel), it did nothing before
       if (/memecointycoonbot\/mctduel/i.test(u)) { try { tg().openTelegramLink(u); } catch (e) { location.href = u; } return; }
       if (/^https:\/\/t\.me\//i.test(u) && !/memecointycoonbot/i.test(u)) { try { tg().openTelegramLink(u); } catch (e) { location.href = u; } return; }
