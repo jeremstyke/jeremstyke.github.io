@@ -257,6 +257,11 @@ nav.tabs button[aria-current="page"] svg{filter:drop-shadow(0 0 6px rgba(47,141,
 .toast{background:#eaf3ff;color:#06122e;box-shadow:0 0 24px rgba(47,141,255,.5)}
 .foot,.foot a{color:#6f87b8}
 .chip svg{stroke:#7cc4ff}
+.sdays{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.sd{background:rgba(47,141,255,.08);border:1px solid rgba(80,150,255,.2);border-radius:12px;padding:8px 0;text-align:center;display:flex;flex-direction:column;gap:2px;min-width:0}
+.sd b{font-family:var(--display);font-size:18px}.sd span{font-size:9.5px;color:var(--mute);overflow:hidden;text-overflow:ellipsis}
+.sd.on{background:linear-gradient(180deg,#5aa9ff,#1667e8);border-color:transparent;box-shadow:0 0 12px rgba(47,141,255,.5)}.sd.on span{color:#dbeaff}
+.sd.nx{border:1.5px dashed #56c8ff}
 .score .big{max-width:100%;overflow-wrap:anywhere}
 #p-rank .big,#p-tasks .big,#p-friends .big{font-size:clamp(38px,12.5vw,60px);line-height:1.05}
 nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10.5px}
@@ -398,6 +403,19 @@ ar:{conv:'نقاط تتحول إلى توكنات حقيقية عند الإير
 fa:{conv:'امتیاز است؛ در ایردراپ به نسبت سهمت به توکن واقعی تبدیل می‌شود.',t4h:'ایردراپ',t4p:'$BATON تو امتیاز است. در ایردراپ با نرخی که همان روز اعلام می‌شود، به نسبت سهمت از کل امتیازها به توکن واقعی تبدیل می‌شود.'}
 };
 for (const k in X3) Object.assign(X[k], X3[k]);
+const X4 = {
+en:{sH:(n)=>'Streak: '+n+(n===1?' day':' days'),sDone:(x)=>'Today: +'+x+' received',sTomorrow:(x)=>'Come back tomorrow for +'+x,sNext:(x)=>'Harvest today to get +'+x+' $BATON',sRule:(c,x)=>'Harvest at least once a day. Miss a day and your streak goes back to 1. The bonus grows every day up to day '+c+' (+'+x+').'},
+fr:{sH:(n)=>'Série : '+n+' jour'+(n>1?'s':''),sDone:(x)=>'Aujourd\'hui : +'+x+' reçus',sTomorrow:(x)=>'Reviens demain pour +'+x,sNext:(x)=>'Récolte aujourd\'hui pour gagner +'+x+' $BATON',sRule:(c,x)=>'Récolte au moins une fois par jour. Un jour manqué et la série repart à 1. Le bonus grandit chaque jour jusqu\'au jour '+c+' (+'+x+').'},
+es:{sH:(n)=>'Racha: '+n+' día'+(n===1?'':'s'),sDone:(x)=>'Hoy: +'+x+' recibidos',sTomorrow:(x)=>'Vuelve mañana por +'+x,sNext:(x)=>'Cosecha hoy para ganar +'+x+' $BATON',sRule:(c,x)=>'Cosecha al menos una vez al día. Si fallas un día, la racha vuelve a 1. El bonus crece cada día hasta el día '+c+' (+'+x+').'},
+pt:{sH:(n)=>'Sequência: '+n+(n===1?' dia':' dias'),sDone:(x)=>'Hoje: +'+x+' recebidos',sTomorrow:(x)=>'Volte amanhã por +'+x,sNext:(x)=>'Colha hoje para ganhar +'+x+' $BATON',sRule:(c,x)=>'Colha pelo menos uma vez por dia. Perdeu um dia, a sequência volta a 1. O bônus cresce todo dia até o dia '+c+' (+'+x+').'},
+ru:{sH:(n)=>'Серия: '+n+' дн.',sDone:(x)=>'Сегодня: +'+x+' получено',sTomorrow:(x)=>'Возвращайся завтра за +'+x,sNext:(x)=>'Собери сегодня и получи +'+x+' $BATON',sRule:(c,x)=>'Собирай хотя бы раз в день. Пропустишь день, и серия начнётся с 1. Бонус растёт каждый день до дня '+c+' (+'+x+').'},
+uk:{sH:(n)=>'Серія: '+n+' дн.',sDone:(x)=>'Сьогодні: +'+x+' отримано',sTomorrow:(x)=>'Повертайся завтра за +'+x,sNext:(x)=>'Збери сьогодні й отримай +'+x+' $BATON',sRule:(c,x)=>'Збирай хоча б раз на день. Пропустиш день, і серія почнеться з 1. Бонус росте щодня до дня '+c+' (+'+x+').'},
+tr:{sH:(n)=>'Seri: '+n+' gün',sDone:(x)=>'Bugün: +'+x+' alındı',sTomorrow:(x)=>'Yarın gel, +'+x+' kazan',sNext:(x)=>'Bugün topla, +'+x+' $BATON kazan',sRule:(c,x)=>'Günde en az bir kez topla. Bir gün kaçırırsan seri 1\'e döner. Bonus her gün artar, '+c+'. güne kadar (+'+x+').'},
+id:{sH:(n)=>'Beruntun: '+n+' hari',sDone:(x)=>'Hari ini: +'+x+' diterima',sTomorrow:(x)=>'Kembali besok untuk +'+x,sNext:(x)=>'Panen hari ini untuk dapat +'+x+' $BATON',sRule:(c,x)=>'Panen minimal sekali sehari. Lewat sehari, beruntun kembali ke 1. Bonus naik tiap hari sampai hari ke-'+c+' (+'+x+').'},
+ar:{sH:(n)=>'السلسلة: '+n+' يوم',sDone:(x)=>'اليوم: +'+x+' تم استلامها',sTomorrow:(x)=>'عد غدًا لتحصل على +'+x,sNext:(x)=>'اجمع اليوم لتحصل على +'+x+' $BATON',sRule:(c,x)=>'اجمع مرة واحدة على الأقل يوميًا. إذا فاتك يوم تعود السلسلة إلى 1. تزداد المكافأة كل يوم حتى اليوم '+c+' (+'+x+').'},
+fa:{sH:(n)=>'پیاپی: '+n+' روز',sDone:(x)=>'امروز: +'+x+' دریافت شد',sTomorrow:(x)=>'فردا برگرد برای +'+x,sNext:(x)=>'امروز برداشت کن و +'+x+' $BATON بگیر',sRule:(c,x)=>'روزی حداقل یک بار برداشت کن. یک روز جا بیندازی، پیاپی از ۱ شروع می‌شود. پاداش هر روز بیشتر می‌شود تا روز '+c+' (+'+x+').'}
+};
+for (const k in X4) Object.assign(X[k], X4[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -435,7 +453,7 @@ function pendingNow() {
 }
 function render() {
   if (!S) return;
-  $('#streak').textContent = S.streak || 0;
+  $('#streak').textContent = S.streak_live != null ? S.streak_live : (S.streak || 0);
   $('#bonusChip').textContent = '+' + (S.bonus || 0) + '%';
   $('#rate').textContent = '+ ' + S.rate + ' ' + T('perH') + (S.holding ? '  ×2' : '');
   $('#record').textContent = fmt(S.record);
@@ -536,6 +554,7 @@ $('#sheet').onclick = async (e) => {
   hap(); const k = o.dataset.k;
   if (k === 'keep') return closeSheet();
   if (k === 'invite') { closeSheet(); return $('#invite').onclick(); }
+  if (k === 'harv') { closeSheet(); return $('#harvest').onclick(); }
   if (k === 'friend') {
     const r = await api('friends');
     const inChain = new Set(((S.chain && S.chain.runners) || []).map((x) => x.n));
@@ -614,6 +633,22 @@ document.querySelector('.chip.g').onclick = () => {
   const perk = S.perk || 0, chain = Math.max(0, (S.bonus || 0) - perk);
   sheet('<h3>' + T('bonusH') + ' +' + (S.bonus || 0) + '%</h3><div class="row"><div class="t"><b>🔗 ' + T('bChain', chain) + '</b></div></div><div class="row"><div class="t"><b>📢 ' + T('bSub', perk) + '</b></div></div><p class="foot">' + T('bTip') + '</p><button class="btn ghost" data-k="keep">OK</button>');
 };
+// 21 oct 2026: the streak flame opens its explanation (7 days around today, today's and tomorrow's bonus)
+(() => {
+  const sk = $('#streak').closest('.chip'); sk.style.cursor = 'pointer';
+  sk.onclick = () => {
+    if (!S) return; hap();
+    const p = S.streak_pts || 200, cap = S.streak_cap || 30, bon = (d) => p * Math.min(d, cap);
+    const live = S.streak_live || 0, today = !!S.streak_today, nx = today ? live + 1 : (S.streak_next || 1);
+    const start = Math.max(1, nx - 3), days = [];
+    for (let d = start; d < start + 7; d++) days.push('<div class="sd' + (d < nx ? ' on' : '') + (d === nx ? ' nx' : '') + '"><b>' + d + '</b><span>+' + fmt(bon(d)) + '</span></div>');
+    sheet('<div class="tic" style="text-align:center">🔥</div><h3 style="text-align:center">' + T('sH', live) + '</h3><div class="sdays">' + days.join('') + '</div>'
+      + (today ? '<div class="row on"><div class="t"><b>✓ ' + T('sDone', fmt(bon(live))) + '</b><span>' + T('sTomorrow', fmt(bon(live + 1))) + '</span></div></div>'
+               : '<div class="row"><div class="t"><b>' + T('sNext', fmt(bon(nx))) + '</b></div></div>')
+      + '<p class="foot">' + T('sRule', cap, fmt(bon(cap))) + '</p>'
+      + (today ? '<button class="btn ghost" data-k="keep">OK</button>' : '<button class="btn mint" data-k="harv">⛏️ ' + T('harvest') + '</button>'));
+  };
+})();
 let nudged = false;
 function nudge() {
   if (nudged || !S || S.friends > 0) return; nudged = true;
