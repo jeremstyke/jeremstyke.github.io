@@ -728,6 +728,8 @@ function nudge() {
   $('#loader').hidden = true;
   if (!r.ok) { if (r.error !== 'maint') { toast(errMsg(r)); const ld = $('#loader'); ld.innerHTML = '<button class="btn gold" style="width:auto;padding:0 28px" onclick="location.reload()">↻</button>'; ld.hidden = false; } return; }
   setState(r);
+  // 21 oct 2026: ask once to let @PassTheBatonBot send messages (players who came by a link never pressed Start)
+  try { if (tg && tg.requestWriteAccess && !LS.get('bt_wa')) setTimeout(() => { try { tg.requestWriteAccess((ok) => LS.set('bt_wa', ok ? '1' : '0')); } catch (e) {} }, 2500); } catch (e) {}
   if ((!LS.get('bt_tuto') && (S.pts || 0) < 1000) || ((tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '') === 'tuto') { LS.set('bt_tuto', '1'); tutorial(); }
   $('#helpBtn').onclick = () => { hap(); tutorial(); };
   const sp = (tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '';
