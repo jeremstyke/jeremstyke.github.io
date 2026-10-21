@@ -93,8 +93,9 @@
   }
   async function watch() {
     if (window.MCTPREM) return true; // 17 oct 2026: Premium players skip the videos (prem.js)
-    const a = await agWatch(); if (a === 'ok') return true; if (a === 'skip') return false;
-    try { await sdk(); const r = await window.showAdsGalaxy({ miniappId: AGX }); return !!(r && r.reward_eligible); } catch (e) { return false; }
+    // 21 oct 2026 (Jeremy): Ads Galaxy works again: it goes first (it pays), Adsgram (still in test) as backup
+    try { await sdk(); const r = await window.showAdsGalaxy({ miniappId: AGX }); return !!(r && r.reward_eligible); } catch (e) {}
+    return (await agWatch()) === 'ok';
   }
 
   // a small sheet from the bottom of the screen
