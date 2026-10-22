@@ -108,9 +108,7 @@
   async function watch() {
     if (prem()) return 'ok';
     // 22 oct 2026 (17h59, Jeremy): Adsgram first (rewarded block 55242), Ads Galaxy as backup when Adsgram has no video
-    const a = await agWatch(); if (a !== 'none') return a;
-    try { await sdk(); const r = await window.showAdsGalaxy({ miniappId: AGX }); return r && r.reward_eligible ? 'ok' : 'skip'; } catch (e) {}
-    return 'none';
+    return agWatch();  // 18h56 (Jeremy): Adsgram only, no more Ads Galaxy
   }
   async function watchN(n, btn) {
     for (let i = 0; i < n; i++) {
