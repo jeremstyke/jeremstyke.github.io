@@ -580,6 +580,20 @@ ar:{bBaton:(n)=>'+'+n+' % بفضل عصاك المسافرة (1 % لكل يد)'}
 fa:{bBaton:(n)=>'+'+n+'٪ به لطف چوبت که در سفر است (۱٪ برای هر دست)'}
 };
 for (const k in X22) Object.assign(X[k], X22[k]);
+// 22 oct 2026 (Jeremy): "your crew" instead of "a friend" when passing the baton
+const X23 = {
+en:{friendP:'Someone from your crew',friendS:'A crew member who has no baton and never held this one.',pick:'Pick a crew member',eBusy:'This crew member already holds a baton.',noPick:'Nobody in your crew can take it (they already held it or already have one). Invite someone new!'},
+fr:{friendP:'Quelqu\'un de ton équipe',friendS:'Un membre de ton équipe qui n\'a pas de bâton et n\'a jamais tenu celui-ci.',pick:'Choisis dans ton équipe',eBusy:'Ce membre de ton équipe a déjà un bâton.',noPick:'Personne dans ton équipe ne peut le prendre (ils l\'ont déjà tenu ou en ont déjà un). Invite quelqu\'un de nouveau !'},
+es:{friendP:'Alguien de tu equipo',friendS:'Un miembro de tu equipo sin bastón que nunca tuvo este.',pick:'Elige en tu equipo',eBusy:'Este miembro de tu equipo ya tiene un bastón.',noPick:'Nadie de tu equipo puede tomarlo (ya lo tuvieron o ya tienen uno). ¡Invita a alguien nuevo!'},
+pt:{friendP:'Alguém da sua equipe',friendS:'Um membro da sua equipe sem bastão que nunca teve este.',pick:'Escolha na sua equipe',eBusy:'Este membro da sua equipe já tem um bastão.',noPick:'Ninguém da sua equipe pode pegar (já tiveram ou já têm um). Convide alguém novo!'},
+ru:{friendP:'Кто-то из твоей команды',friendS:'Участник команды без эстафеты, который ещё не держал эту.',pick:'Выбери из команды',eBusy:'У этого участника команды уже есть эстафета.',noPick:'Никто из команды не может её взять (уже держали или уже держат). Пригласи новичка!'},
+uk:{friendP:'Хтось із твоєї команди',friendS:'Учасник команди без естафети, який ще не тримав цю.',pick:'Обери з команди',eBusy:'У цього учасника команди вже є естафета.',noPick:'Ніхто з команди не може її взяти (уже тримали або вже мають). Запроси новачка!'},
+tr:{friendP:'Ekibinden biri',friendS:'Bayrağı olmayan ve bunu hiç tutmamış bir ekip üyesi.',pick:'Ekibinden seç',eBusy:'Bu ekip üyesinin zaten bir bayrağı var.',noPick:'Ekibinden kimse alamaz (zaten tuttular ya da ellerinde var). Yeni birini davet et!'},
+id:{friendP:'Seseorang dari timmu',friendS:'Anggota tim yang belum pegang tongkat dan belum pernah memegang yang ini.',pick:'Pilih dari timmu',eBusy:'Anggota tim ini sudah pegang tongkat.',noPick:'Tak ada anggota tim yang bisa mengambilnya (sudah pernah atau sedang pegang). Undang orang baru!'},
+ar:{friendP:'شخص من فريقك',friendS:'عضو في فريقك ليس معه عصا ولم يحمل هذه من قبل.',pick:'اختر من فريقك',eBusy:'هذا العضو من فريقك معه عصا بالفعل.',noPick:'لا أحد في فريقك يستطيع أخذها (حملوها أو معهم عصا). ادعُ شخصًا جديدًا!'},
+fa:{friendP:'کسی از تیمت',friendS:'عضوی از تیمت که چوب ندارد و این یکی را هم نداشته.',pick:'از تیمت انتخاب کن',eBusy:'این عضو تیمت از قبل چوب دارد.',noPick:'هیچ‌کس در تیمت نمی‌تواند آن را بگیرد (قبلاً داشته‌اند یا الان دارند). یک تازه‌وارد دعوت کن!'}
+};
+for (const k in X23) Object.assign(X[k], X23[k]);
 // 22 oct 2026 (Jeremy): full FAQ behind the "?" button (the tutorial stays one tap away)
 const FAQ = {
 en:{h:'Help',tuto:'▶ Replay the tutorial',more:'Another question? Write to us:',q:[
@@ -588,10 +602,10 @@ en:{h:'Help',tuto:'▶ Replay the tutorial',more:'Another question? Write to us:
 ['Why did my mine stop?','It fills up in 4 h, then waits for you. Harvest it to start it again.'],
 ['How do I get a baton?','You get one every day when you open the game, if your hands are free. Someone can also pass you theirs.'],
 ['What does a baton do?','While you hold it, your mine runs 2× faster. You have 4 h to pass it.'],
-['Who can I pass it to?','Someone new with your link (x5), a friend (x3), or a random player (x1). A player who already holds a baton, or who already held this one, cannot get it.'],
+['Who can I pass it to?','Someone new with your link (x5), someone from your crew (x3), or a random player (x1). A player who already holds a baton, or who already held this one, cannot get it.'],
 ['How much does a pass pay?','120 $BATON × the number of hands the baton went through × the bonus (x5, x3 or x1). The more it travelled, the more it pays.'],
 ['What if I do not pass it?','When the timer hits zero, you drop the baton: its trip ends and you get no bonus.'],
-['Why can I not pick a friend?','They already hold a baton or already held this one. Send your link to someone new instead.'],
+['Why can I not pick someone from my crew?','They already hold a baton or already held this one. Send your link to someone new instead.'],
 ['Can I keep my baton longer?','Yes: +4 h for 10 ⭐, once per baton.'],
 ['What do I get for inviting a friend?','5,000 $BATON at their first harvest and 10 % of everything they mine. If they join while you hold a baton, they take it and you get the x5 bonus.'],
 ['What is the % bonus?','+1 % mining per hand of the baton you started, as long as it is travelling (up to +100 %), and +10 % for each Telegram channel you join, as long as you stay subscribed.'],
@@ -605,10 +619,10 @@ fr:{h:'Aide',tuto:'▶ Revoir le tutoriel',more:'Une autre question ? Écris-nou
 ['Pourquoi ma mine s\'est arrêtée ?','Elle se remplit en 4 h, puis elle t\'attend. Récolte-la pour la relancer.'],
 ['Comment j\'ai un bâton ?','Tu en reçois un chaque jour en ouvrant le jeu, si tu n\'en tiens pas déjà un. Quelqu\'un peut aussi te passer le sien.'],
 ['À quoi sert le bâton ?','Tant que tu l\'as, ta mine va 2× plus vite. Tu as 4 h pour le passer.'],
-['À qui je peux le passer ?','À quelqu\'un de nouveau avec ton lien (x5), à un ami (x3) ou à un joueur au hasard (x1). Un joueur qui tient déjà un bâton, ou qui a déjà tenu celui-ci, ne peut pas le recevoir.'],
+['À qui je peux le passer ?','À quelqu\'un de nouveau avec ton lien (x5), à quelqu\'un de ton équipe (x3) ou à un joueur au hasard (x1). Un joueur qui tient déjà un bâton, ou qui a déjà tenu celui-ci, ne peut pas le recevoir.'],
 ['Combien rapporte une passe ?','120 $BATON × le nombre de mains par lesquelles le bâton est passé × le bonus (x5, x3 ou x1). Plus il a voyagé, plus il rapporte.'],
 ['Et si je ne le passe pas ?','Quand le chrono arrive à zéro, tu laisses tomber le bâton : son voyage s\'arrête et tu n\'as pas de bonus.'],
-['Pourquoi je ne peux pas choisir un ami ?','Il tient déjà un bâton ou il a déjà tenu celui-ci. Envoie plutôt ton lien à quelqu\'un de nouveau.'],
+['Pourquoi je ne peux pas choisir quelqu\'un de mon équipe ?','Il tient déjà un bâton ou il a déjà tenu celui-ci. Envoie plutôt ton lien à quelqu\'un de nouveau.'],
 ['Je peux garder mon bâton plus longtemps ?','Oui : +4 h pour 10 ⭐, une fois par bâton.'],
 ['Qu\'est-ce que je gagne en invitant un ami ?','5 000 $BATON à sa première récolte et 10 % de tout ce qu\'il mine. S\'il arrive pendant que tu tiens un bâton, il le prend et tu gagnes le bonus x5.'],
 ['C\'est quoi le bonus en % ?','+1 % de minage par main du bâton que tu as lancé, tant qu\'il voyage (jusqu\'à +100 %), et +10 % par chaîne Telegram rejointe, tant que tu restes abonné.'],
@@ -785,6 +799,8 @@ ar:{ruleHold:(x)=>'🏃 معك عصا: أول لاعب جديد يصل عبر ر
 fa:{ruleHold:(x)=>'🏃 چوب دست توست: اولین تازه‌واردی که با لینک تو بیاید آن را می‌گیرد و تو x5 می‌بری (+'+x+' $BATON). زنجیره‌ات با او ادامه می‌یابد.',ruleExt:'🔒 چوبت تمدید شده: هیچ‌کس نمی‌تواند آن را بگیرد. تازه‌واردها با لینک تو فقط یک حلقه به زنجیره‌ات اضافه می‌کنند.',ruleNone:'🔗 هر تازه‌واردی که با لینک تو بیاید یک حلقه به زنجیره‌ات اضافه می‌کند و ۵٬۰۰۰ $BATON + ۱۰٪ از استخراجش برایت می‌آورد.'}
 };
 for (const k in X12) Object.assign(X[k], X12[k]);
+// 22 oct 2026: the newest texts win over the older X11 / X12 blocks defined further down
+for (const o of [X19, X20, X21, X22, X23]) for (const k in o) Object.assign(X[k], o[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
