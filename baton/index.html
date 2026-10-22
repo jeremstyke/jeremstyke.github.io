@@ -1135,8 +1135,9 @@ id:{conv:'🛒 1 juta $BATON = 1 $ USDT · Toko',airdrop:'🛒 Tukar $BATON-mu d
 ar:{conv:'🛒 مليون $BATON = 1 $ USDT · المتجر',airdrop:'🛒 بدّل $BATON بـ USDT في المتجر. by @jeremstyke',t4h:'المتجر',t4p:'بدّل $BATON بـ USDT: مليون = 1 $، تُرسل تلقائيًا إلى محفظة TON الخاصة بك.',shopH:'🛒 المتجر',shopS:'بدّل $BATON بـ USDT، تُرسل تلقائيًا إلى محفظة TON الخاصة بك.',have:(a)=>'لديك '+a+' $BATON',cAge:(a,b)=>'حساب عمره أكثر من '+b+' يومًا ('+a+'/'+b+')',cPass:(a,b)=>''+b+' عصي مُمرّرة ('+a+'/'+b+')',cWeek:(a)=>'سحب واحد كل '+a+' أيام',cNext:(a)=>'السحب التالي: '+a+'',addrL:'عنوان محفظة TON الخاصة بك (لـ USDT)',go:'بدّل',goPick:'اختر مبلغًا',okPaid:'✅ تم! USDT في الطريق إليك.',okReview:'✅ أُرسل! سيُراجع قبل الدفع.',sWait:'قيد التنفيذ',sPaid:'مدفوع',sRefused:'مرفوض',eAddr:'عنوان TON هذا غير صالح',eAge:'يجب أن يكون عمر حسابك 14 يومًا على الأقل',ePass:'مرّر 10 عصي على الأقل أولًا',eWeek:'سحب واحد أسبوعيًا',eFunds:'لا يوجد $BATON كافٍ',eOff:'المتجر مغلق حاليًا',hist:'عمليات السحب'},
 fa:{conv:'🛒 ۱ میلیون $BATON = ۱ $ USDT · فروشگاه',airdrop:'🛒 $BATON هایت را در فروشگاه با USDT عوض کن. by @jeremstyke',t4h:'فروشگاه',t4p:'$BATON هایت را با USDT عوض کن: ۱ میلیون = ۱ $، خودکار به کیف پول TON تو.',shopH:'🛒 فروشگاه',shopS:'$BATON هایت را با USDT عوض کن، خودکار به کیف پول TON تو می‌رسد.',have:(a)=>''+a+' $BATON داری',cAge:(a,b)=>'حساب بیش از '+b+' روز ('+a+'/'+b+')',cPass:(a,b)=>''+b+' چوب ردشده ('+a+'/'+b+')',cWeek:(a)=>'هر '+a+' روز یک برداشت',cNext:(a)=>'برداشت بعدی: '+a+'',addrL:'آدرس کیف پول TON تو (برای USDT)',go:'عوض کن',goPick:'یک مبلغ انتخاب کن',okPaid:'✅ انجام شد! USDT در راه است.',okReview:'✅ ارسال شد! قبل از پرداخت بررسی می‌شود.',sWait:'در حال انجام',sPaid:'پرداخت شد',sRefused:'رد شد',eAddr:'این آدرس TON معتبر نیست',eAge:'حسابت باید حداقل ۱۴ روز باشد',ePass:'اول حداقل ۱۰ چوب رد کن',eWeek:'هفته‌ای یک برداشت',eFunds:'$BATON کافی نیست',eOff:'فروشگاه فعلاً بسته است',hist:'برداشت‌های تو'}
 };
+const X45 = {en:{tcGo:'👛 Connect my wallet',tcOn:'👛 Wallet connected'}, fr:{tcGo:'👛 Connecter mon wallet',tcOn:'👛 Wallet connecté'}, es:{tcGo:'👛 Conectar mi wallet',tcOn:'👛 Wallet conectada'}, pt:{tcGo:'👛 Conectar minha wallet',tcOn:'👛 Wallet conectada'}, ru:{tcGo:'👛 Подключить кошелёк',tcOn:'👛 Кошелёк подключён'}, uk:{tcGo:'👛 Підключити гаманець',tcOn:'👛 Гаманець підключено'}, tr:{tcGo:'👛 Cüzdanımı bağla',tcOn:'👛 Cüzdan bağlandı'}, id:{tcGo:'👛 Hubungkan wallet',tcOn:'👛 Wallet terhubung'}, ar:{tcGo:'👛 اربط محفظتي',tcOn:'👛 المحفظة مربوطة'}, fa:{tcGo:'👛 اتصال کیف پول',tcOn:'👛 کیف پول وصل شد'}};  // 22 oct 2026 (17h39): TON Connect
 // 22 oct 2026: the newest texts win over the older X11 / X12 blocks defined further down
-for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33, X34, X35, X36, X37, X38, X39, X40, X41, X42, X43, X44]) for (const k in o) Object.assign(X[k], o[k]);
+for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33, X34, X35, X36, X37, X38, X39, X40, X41, X42, X43, X44, X45]) for (const k in o) Object.assign(X[k], o[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -1320,7 +1321,16 @@ const tonOk = (a) => {  // a TON address, with its checksum (CRC16), so a typo n
   return b[34] === (crc >> 8) && b[35] === (crc & 0xff);
 };
 const SHOPERR = { addr: 'eAddr', shop_age: 'eAge', shop_passes: 'ePass', shop_week: 'eWeek', funds: 'eFunds', off: 'eOff' };
-let SH = null, shopPick = -1;
+let SH = null, shopPick = -1, TC = null;
+// 22 oct 2026 (Jeremy, 17h39): the wallet in one tap with TON Connect (Tonkeeper, Telegram Wallet...), the address field stays as a fallback
+async function tcInit() {
+  if (TC) return TC;
+  if (!window.TON_CONNECT_UI) await new Promise((ok, ko) => { const sc = document.createElement('script'); sc.src = 'https://unpkg.com/@tonconnect/ui@2.0.9/dist/tonconnect-ui.min.js'; sc.onload = ok; sc.onerror = ko; document.head.appendChild(sc); });
+  TC = new TON_CONNECT_UI.TonConnectUI({ manifestUrl: 'https://jeremstyke.github.io/baton/tonconnect-manifest.json', actionsConfiguration: { twaReturnUrl: 'https://t.me/PassTheBatonBot/play' } });
+  TC.onStatusChange((w) => { if (w && w.account && SH) { SH.addr = tcAddr(w); SH.tc = true; if ($('#shAddr')) shopDraw(); } });
+  return TC;
+}
+const tcAddr = (w) => { try { return TON_CONNECT_UI.toUserFriendlyAddress(w.account.address); } catch (e) { return w.account.address; } };
 function shopDraw() {
   const r = SH; if (!r) return;
   const pts = (S && S.pts) || 0, okAge = r.days >= r.min_days, okPass = r.passes >= r.min_passes, okWeek = !r.next_at;
@@ -1332,6 +1342,7 @@ function shopDraw() {
     '<div class="shHave">' + T('have', fmt(pts)) + '</div>' +
     r.items.map((it, i) => '<button class="opt shItem' + (shopPick === i ? ' on' : '') + '" data-shop="' + i + '"' + (pts < it[0] ? ' disabled' : '') + '><span class="t"><b>' + fmt(it[0]) + ' $BATON</b></span><span class="mult">' + it[1] + ' $</span></button>').join('') +
     '<div class="shConds">' + cond(okAge, T('cAge', Math.min(r.days, r.min_days), r.min_days)) + cond(okPass, T('cPass', Math.min(r.passes, r.min_passes), r.min_passes)) + cond(okWeek, okWeek ? T('cWeek', r.every_days) : T('cNext', when)) + '</div>' +
+    '<button class="btn ghost" data-k="tcgo">' + (r.tc ? T('tcOn') : T('tcGo')) + '</button>' +
     '<label class="shL" for="shAddr">' + T('addrL') + '</label><input id="shAddr" class="shIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="UQ…" value="' + esc(r.addr || '') + '">' +
     '<button class="btn gold" data-k="shopgo"' + (can && shopPick >= 0 ? '' : ' disabled') + '>' + (shopPick >= 0 ? T('go') + ' · ' + r.items[shopPick][1] + ' $' : T('goPick')) + '</button>' +
     (r.orders.length ? '<div class="pachh">' + T('hist') + '</div>' + r.orders.map((o) => '<div class="shOrd"><span>' + new Date(o.at * 1000).toLocaleDateString(LANG === 'fa' ? 'fa-IR' : LANG, { day: 'numeric', month: 'short' }) + ' · ' + o.usd + ' $</span><b class="s-' + o.status + '">' + T(st[o.status] || 'sWait') + '</b></div>').join('') : '') +
@@ -1345,6 +1356,12 @@ async function openShop() {
 $('#sheet').addEventListener('click', async (e) => {
   const it = e.target.closest('[data-shop]');
   if (it && !it.disabled) { hap(); const a = $('#shAddr') ? $('#shAddr').value : ''; shopPick = Number(it.dataset.shop); SH.addr = a; shopDraw(); return; }
+  const tcb = e.target.closest('[data-k="tcgo"]');
+  if (tcb) {
+    e.stopPropagation(); hap();
+    try { const tc = await tcInit(); if (tc.wallet && tc.wallet.account) { SH.addr = tcAddr(tc.wallet); SH.tc = true; shopDraw(); } else tc.openModal(); } catch (err) { toast(errMsg({})); }
+    return;
+  }
   const go = e.target.closest('[data-k="shopgo"]'); if (!go || go.disabled) return;
   e.stopPropagation();
   const addr = ($('#shAddr').value || '').trim();
