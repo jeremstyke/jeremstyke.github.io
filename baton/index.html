@@ -306,6 +306,11 @@ nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:elli
         <div class="more" id="moreBat" hidden></div>
       </div>
 
+      <div class="card" id="myChain" hidden>
+        <div class="meta"><span id="myH"></span><span><b id="myLinks">0</b> <span data-t="links"></span></span></div>
+        <div class="foot" id="myAt" style="text-align:start;margin:0"></div>
+      </div>
+
       <div class="card" id="chainCard" hidden>
         <div class="meta"><span id="chainBy"></span><span><b id="links">0</b> <span data-t="links"></span></span></div>
         <div class="chain" id="chain"></div>
@@ -530,6 +535,19 @@ ar:{ruleHold:(x)=>'🏃 معك عصا: أول لاعب جديد يصل عبر ر
 fa:{ruleHold:(x)=>'🏃 چوب دست توست: اولین تازه‌واردی که با لینک تو بیاید آن را می‌گیرد و تو x5 می‌بری (+'+x+' $BATON). زنجیره‌ات با او ادامه می‌یابد.',ruleExt:'🔒 چوبت تمدید شده: هیچ‌کس نمی‌تواند آن را بگیرد. تازه‌واردها با لینک تو فقط یک حلقه به زنجیره‌ات اضافه می‌کنند.',ruleNone:'🔗 هر تازه‌واردی که با لینک تو بیاید یک حلقه به زنجیره‌ات اضافه می‌کند و ۵٬۰۰۰ $BATON + ۱۰٪ از استخراجش برایت می‌آورد.'}
 };
 for (const k in X12) Object.assign(X[k], X12[k]);
+const X13 = {
+en:{myH:'🏁 <b>Your chain</b>',myAt:(w)=>'🏃 The baton is with <b>'+w+'</b>. Your chain grows even without you, and each link gives you +1 % mining.',myNone:'Nobody holds its baton right now. Invite a friend to restart it.',fromBy:(n)=>'🏃 Baton in hand: chain of <b>'+n+'</b>'},
+fr:{myH:'🏁 <b>Ta chaîne</b>',myAt:(w)=>'🏃 Le bâton est chez <b>'+w+'</b>. Ta chaîne grandit même sans toi, et chaque maillon te donne +1 % de minage.',myNone:'Personne n\'a son bâton en ce moment. Invite un ami pour la relancer.',fromBy:(n)=>'🏃 Bâton en main : chaîne de <b>'+n+'</b>'},
+es:{myH:'🏁 <b>Tu cadena</b>',myAt:(w)=>'🏃 El bastón lo tiene <b>'+w+'</b>. Tu cadena crece incluso sin ti, y cada eslabón te da +1 % de minería.',myNone:'Nadie tiene su bastón ahora. Invita a un amigo para reactivarla.',fromBy:(n)=>'🏃 Bastón en mano: cadena de <b>'+n+'</b>'},
+pt:{myH:'🏁 <b>Sua corrente</b>',myAt:(w)=>'🏃 O bastão está com <b>'+w+'</b>. Sua corrente cresce mesmo sem você, e cada elo te dá +1 % de mineração.',myNone:'Ninguém está com o bastão agora. Convide um amigo para reativá-la.',fromBy:(n)=>'🏃 Bastão na mão: corrente de <b>'+n+'</b>'},
+ru:{myH:'🏁 <b>Твоя цепочка</b>',myAt:(w)=>'🏃 Эстафета у <b>'+w+'</b>. Цепочка растёт и без тебя, а каждое звено даёт тебе +1 % добычи.',myNone:'Сейчас ни у кого нет её эстафеты. Пригласи друга, чтобы перезапустить.',fromBy:(n)=>'🏃 Эстафета в руках: цепочка <b>'+n+'</b>'},
+uk:{myH:'🏁 <b>Твій ланцюжок</b>',myAt:(w)=>'🏃 Естафета в <b>'+w+'</b>. Ланцюжок росте й без тебе, а кожна ланка дає тобі +1 % видобутку.',myNone:'Зараз ні в кого немає її естафети. Запроси друга, щоб перезапустити.',fromBy:(n)=>'🏃 Естафета в руках: ланцюжок <b>'+n+'</b>'},
+tr:{myH:'🏁 <b>Zincirin</b>',myAt:(w)=>'🏃 Bayrak <b>'+w+'</b> elinde. Zincirin sensiz de büyür ve her halka sana +%1 kazı verir.',myNone:'Şu an bayrağı kimsede yok. Yeniden başlatmak için bir arkadaşını davet et.',fromBy:(n)=>'🏃 Elindeki bayrak: <b>'+n+'</b> zinciri'},
+id:{myH:'🏁 <b>Rantaimu</b>',myAt:(w)=>'🏃 Tongkat ada di <b>'+w+'</b>. Rantaimu tumbuh tanpamu, dan tiap mata rantai memberimu +1 % tambang.',myNone:'Tak ada yang pegang tongkatnya sekarang. Undang teman untuk menghidupkannya.',fromBy:(n)=>'🏃 Tongkat di tangan: rantai <b>'+n+'</b>'},
+ar:{myH:'🏁 <b>سلسلتك</b>',myAt:(w)=>'🏃 العصا مع <b>'+w+'</b>. سلسلتك تكبر حتى بدونك، وكل حلقة تمنحك +1 % تعدين.',myNone:'لا أحد يحمل عصاها الآن. ادعُ صديقًا لإعادة إطلاقها.',fromBy:(n)=>'🏃 العصا في يدك: سلسلة <b>'+n+'</b>'},
+fa:{myH:'🏁 <b>زنجیرهٔ تو</b>',myAt:(w)=>'🏃 چوب دست <b>'+w+'</b> است. زنجیره‌ات حتی بدون تو بزرگ می‌شود و هر حلقه +۱٪ استخراج به تو می‌دهد.',myNone:'الان چوبش دست کسی نیست. یک دوست دعوت کن تا دوباره راه بیفتد.',fromBy:(n)=>'🏃 چوب در دست: زنجیرهٔ <b>'+n+'</b>'}
+};
+for (const k in X13) Object.assign(X[k], X13[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -587,10 +605,13 @@ function render() {
   $('#dotHome').hidden = !S.holding;
   $('#invRule').textContent = !S.holding ? T('ruleNone') : S.batons[0].extended ? T('ruleExt') : T('ruleHold', fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * 5));
   // chain
+  // 22 oct 2026: the player's own chain gets its own card when the baton in hand belongs to another chain
+  const mc = S.my_chain; $('#myChain').hidden = !mc || (S.chain && S.chain.id === mc.id);
+  if (mc) { $('#myH').innerHTML = T('myH'); $('#myLinks').textContent = fmt(mc.links); $('#myAt').innerHTML = mc.at ? T('myAt', esc(mc.at)) : T('myNone'); }
   const ch = S.chain;
   $('#chainCard').hidden = !ch;
   if (ch) {
-    $('#chainBy').innerHTML = T('chainBy', esc(ch.starter)); $('#links').textContent = fmt(ch.links);
+    $('#chainBy').innerHTML = (S.holding && S.my_chain && S.my_chain.id !== ch.id ? T('fromBy', esc(ch.starter)) : T('chainBy', esc(ch.starter))); $('#links').textContent = fmt(ch.links);
     let h = '';
     if (ch.links > ch.runners.length) h += '<div class="link"><div class="av" style="background:#2a3f5f;color:#8fa5c4">+' + fmt(ch.links - ch.runners.length) + '</div><div class="bar"></div></div>';
     ch.runners.forEach((r, i) => { h += '<div class="link"><div class="av' + (r.me ? ' me' : '') + '" style="background:' + (r.me ? '#2f8dff' : hueOf(r.n)) + '" title="' + esc(r.n) + '">' + init(r.n) + '</div>' + (i < ch.runners.length - 1 ? '<div class="bar"></div>' : '') + '</div>'; });
