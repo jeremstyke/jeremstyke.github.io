@@ -30,6 +30,28 @@
         let n = 0; const w = setInterval(() => { if (window.Adsgram) { clearInterval(w); go(); } else if (++n > 20) clearInterval(w); }, 300);
       } catch (e) {}
     }
+    // 22 oct 2026 (18h49, Jeremy): the interstitial comes after the first buy or sell of the session instead of at opening,
+    // at most once every 30 minutes, never in a new player's first 3 days, never for Premium
+    try {
+      const ls = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
+      if (!ls('mct_first_seen')) ls('mct_first_seen', ls('mct_bt_pop10') || ls('mct_bt_pop') ? '1' : String(Date.now()));  // players already here count as old
+      let done = false;
+      const of = window.fetch;
+      window.fetch = async function (u, o) {
+        const r = await of.apply(this, arguments);
+        try {
+          if (!done && String(u).indexOf('/mct/api') >= 0 && o && typeof o.body === 'string' && /"action":"(buy|sell)"/.test(o.body)) {
+            r.clone().json().then((j) => {
+              if (done || !j || j.error || j.ok === false || window.MCTPREM) return;
+              if (Date.now() - Number(ls('mct_first_seen') || 0) < 3 * 86400000) return;
+              if (Date.now() - Number(ls('mct_int_at') || 0) < 30 * 60000) return;
+              done = true; ls('mct_int_at', String(Date.now())); setTimeout(adInt, 1200);  // let the trade's toast show first
+            }).catch(() => {});
+          }
+        } catch (e) {}
+        return r;
+      };
+    } catch (e) {}
     function popup() {
       if (document.getElementById('btpop')) return;
       // 22 oct 2026 (16h23, Jeremy): never for Premium players (prem.js sets window.MCTPREM once it knows)
@@ -41,7 +63,7 @@
       if (document.querySelector('#maint:not([hidden]), .maint:not([hidden])')) return;  // never over the maintenance screen (no popup, no ad)
       const K = own ? 'mct_bt_pop11o' : 'mct_bt_pop10';
       let seen = 0; try { seen = Number(localStorage.getItem(K) || 0); } catch (e) { seen = Date.now(); }
-      if (Date.now() - seen < 24 * 3600000) { adInt(); return; }  // 18h45 (Jeremy): the Baton popup was already shown today: an Adsgram interstitial instead
+      if (Date.now() - seen < 24 * 3600000) return;
       try { localStorage.setItem(K, String(Date.now())); } catch (e) {}
       if (document.querySelector('#maint:not([hidden]), .maint:not([hidden])')) return;  // never over the maintenance screen
       set();
