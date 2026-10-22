@@ -318,6 +318,7 @@ nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:elli
           <div class="hold"><h3 id="holdT"></h3><p id="holdP"></p><div class="timer num" id="timer"></div></div>
         </div>
         <button class="btn gold" id="passBtn"></button>
+        <button class="btn ghost" id="vidBtn" hidden></button>
         <button class="btn ghost" id="extBtn" hidden></button>
         <div class="more" id="moreBat" hidden></div>
       </div>
@@ -901,8 +902,21 @@ id:{adH:'🎁 Tugas sponsor',adR:'+500 $BATON',adGo:'Ayo',adClaim:'Klaim',adDone
 ar:{adH:'🎁 مهمة برعاية',adR:'+500 $BATON',adGo:'اذهب',adClaim:'استلم',adDone:'تم',adOk:'أُضيفت +500 $BATON!'},
 fa:{adH:'🎁 مأموریت اسپانسری',adR:'+500 $BATON',adGo:'برو',adClaim:'دریافت',adDone:'انجام شد',adOk:'+500 $BATON اضافه شد!'}
 };
+// 22 oct 2026 (Jeremy): a rewarded video (Adsgram block 55429) adds 1 hour to the baton in hand, 4 times per baton
+const X31 = {
+en:{vid:(n,m)=>'📺 Watch a video: +1 h on your baton ('+n+'/'+m+')',vidOk:'+1 h added to your baton!',vidNo:'No video available right now, try again later.'},
+fr:{vid:(n,m)=>'📺 Regarde une vidéo : +1 h sur ton bâton ('+n+'/'+m+')',vidOk:'+1 h ajoutée à ton bâton !',vidNo:'Pas de vidéo disponible pour l\'instant, réessaie plus tard.'},
+es:{vid:(n,m)=>'📺 Mira un vídeo: +1 h para tu bastón ('+n+'/'+m+')',vidOk:'¡+1 h añadida a tu bastón!',vidNo:'No hay vídeo disponible ahora, inténtalo más tarde.'},
+pt:{vid:(n,m)=>'📺 Veja um vídeo: +1 h no seu bastão ('+n+'/'+m+')',vidOk:'+1 h adicionada ao seu bastão!',vidNo:'Nenhum vídeo disponível agora, tente mais tarde.'},
+ru:{vid:(n,m)=>'📺 Видео: +1 ч к твоей эстафете ('+n+'/'+m+')',vidOk:'+1 ч добавлен к твоей эстафете!',vidNo:'Сейчас нет видео, попробуй позже.'},
+uk:{vid:(n,m)=>'📺 Відео: +1 год до твоєї естафети ('+n+'/'+m+')',vidOk:'+1 год додано до твоєї естафети!',vidNo:'Зараз немає відео, спробуй пізніше.'},
+tr:{vid:(n,m)=>'📺 Video izle: bayrağına +1 saat ('+n+'/'+m+')',vidOk:'Bayrağına +1 saat eklendi!',vidNo:'Şu an video yok, sonra tekrar dene.'},
+id:{vid:(n,m)=>'📺 Tonton video: +1 jam untuk tongkatmu ('+n+'/'+m+')',vidOk:'+1 jam ditambahkan ke tongkatmu!',vidNo:'Belum ada video sekarang, coba lagi nanti.'},
+ar:{vid:(n,m)=>'📺 شاهد فيديو: +1 ساعة لعصاك ('+n+'/'+m+')',vidOk:'أُضيفت +1 ساعة إلى عصاك!',vidNo:'لا يوجد فيديو الآن، حاول لاحقًا.'},
+fa:{vid:(n,m)=>'📺 ویدیو ببین: +۱ ساعت برای چوبت ('+n+'/'+m+')',vidOk:'+۱ ساعت به چوبت اضافه شد!',vidNo:'الان ویدیویی نیست، بعداً دوباره امتحان کن.'}
+};
 // 22 oct 2026: the newest texts win over the older X11 / X12 blocks defined further down
-for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30]) for (const k in o) Object.assign(X[k], o[k]);
+for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31]) for (const k in o) Object.assign(X[k], o[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -953,9 +967,10 @@ function render() {
     $('#holdT').textContent = T('hold1'); $('#holdP').innerHTML = T('hold2', Math.round(S.hold_h)) + '<small class="tip">' + T('holdTip', fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * 5)) + '</small>';
     $('#passBtn').hidden = false; $('#passBtn').textContent = '→  ' + T('pass');
     $('#extBtn').hidden = !!S.batons[0].extended || !S.ext_stars; $('#extBtn').textContent = T('ext', S.ext_h || 4, S.ext_stars || 10);
+    { const nv = S.batons[0].vids || 0; $('#vidBtn').hidden = nv >= 4 || !(tg && tg.initData); $('#vidBtn').textContent = T('vid', nv, 4); }  // 22 oct 2026: +1 h per video, 4 per baton
     $('#moreBat').hidden = S.batons.length < 2; $('#moreBat').textContent = T('more', S.batons.length - 1);
   } else {
-    c.classList.add('off'); $('#holdT').textContent = T('none1'); $('#holdP').textContent = T('none2'); $('#timer').textContent = ''; $('#extBtn').hidden = true; $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
+    c.classList.add('off'); $('#holdT').textContent = T('none1'); $('#holdP').textContent = T('none2'); $('#timer').textContent = ''; $('#extBtn').hidden = true; $('#vidBtn').hidden = true; $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
   }
   $('#dotHome').hidden = !S.holding;
   $('#invRule').textContent = !S.holding ? T('ruleNone') : S.batons[0].extended ? T('ruleExt') : T('ruleHold', fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * 5));
@@ -1034,6 +1049,17 @@ $('#passBtn').onclick = () => {
     '<button class="btn ghost" data-k="keep">' + T('keep') + '</button>');
 };
 // 22 oct 2026: keep the baton in hand 4 h longer for 10 Stars (once per baton); the bot's webhook applies the payment
+// 22 oct 2026 (Jeremy): rewarded video, Adsgram block 55429. Adsgram calls the reward URL (GET ?ads=rw), which adds 1 hour
+// to the baton in hand (4 per baton, bt_ads_reward); here we only show the video and refresh the timer.
+$('#vidBtn').onclick = async () => {
+  hap(); const b = $('#vidBtn'); b.disabled = true;
+  try {
+    if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
+    await window.Adsgram.init({ blockId: '55429' }).show();
+    hap('ok'); toast(T('vidOk')); [2000, 6000].forEach((ms) => setTimeout(refresh, ms));
+  } catch (e) { toast(T('vidNo')); }
+  b.disabled = false;
+};
 $('#extBtn').onclick = async () => {
   hap();
   const b = S && S.batons[0]; if (!b) return;
