@@ -35,7 +35,7 @@
     try {
       const ls = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
       if (!ls('mct_first_seen')) ls('mct_first_seen', ls('mct_bt_pop10') || ls('mct_bt_pop') ? '1' : String(Date.now()));  // players already here count as old
-      let done = false;
+      let done = true;  // 21h16 (Jeremy): the interstitial is back at opening, no more after the first trade
       const of = window.fetch;
       window.fetch = async function (u, o) {
         const r = await of.apply(this, arguments);
@@ -63,7 +63,7 @@
       if (document.querySelector('#maint:not([hidden]), .maint:not([hidden])')) return;  // never over the maintenance screen (no popup, no ad)
       const K = own ? 'mct_bt_pop11o' : 'mct_bt_pop10';
       let seen = 0; try { seen = Number(localStorage.getItem(K) || 0); } catch (e) { seen = Date.now(); }
-      if (Date.now() - seen < 24 * 3600000) return;
+      if (seen) { if (!window.MCTPREM) adInt(); return; }  // 21h16 (Jeremy): the Baton popup only once ever, then an Adsgram interstitial at each opening (never for Premium)
       try { localStorage.setItem(K, String(Date.now())); } catch (e) {}
       if (document.querySelector('#maint:not([hidden]), .maint:not([hidden])')) return;  // never over the maintenance screen
       set();
