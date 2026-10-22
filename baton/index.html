@@ -362,6 +362,7 @@ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
     <section class="panel" id="p-tasks" hidden>
       <div class="score"><small data-t="earnMore"></small><div class="big" data-t="tasks"></div></div>
       <div class="list" id="adtask" hidden></div>
+      <div class="list" id="vidTask" hidden></div>
       <div class="list" id="tasks"></div>
     </section>
 
@@ -995,8 +996,21 @@ id:{passTip:'Kalau waktu habis, tongkat jatuh: kamu simpan yang sudah didapat, t
 ar:{passTip:'إذا انتهى الوقت تسقط العصا: تحتفظ بما ربحته منها، لكن دون مكافأة.',hold1:'🏃 العصا معك!',hold2b:(r)=>'تربحك <b>'+r+' $BATON / ساعة</b> ما دامت معك.',earnNow:(x)=>'💰 +'+x+' $BATON ربحتها من هذه العصا',holdTip:(x)=>'⏳ مرّرها قبل انتهاء الوقت: +'+x+' لشخص جديد',rateNo:(r)=>''+r+' $BATON / ساعة عندما تكون معك عصا',ruleHold:(x)=>'🏃 مرّر عصاك لشخص جديد: +'+x+' $BATON.',ruleNone:'🔗 كل لاعب جديد عبر رابطك: +5 000 $BATON عندما يحمل أول عصا، و10 % مما يربحه.',mined:(n)=>'+'+n+' مكتسبة',miners:'اللاعبون',newS:'شخص لا يلعب بعد، عبر رابطك. أكبر مكافأة.',passed:(g,m,to)=>'✅ مُرّرت إلى '+to+': +'+g+' $BATON',t1h:'عصا كل يوم',t1p:'افتح اللعبة كل يوم واحصل على عصا. ويمكن لغيرك أيضًا أن يمرّر لك عصاه.',t2h:'تربحك $BATON',t2p:'ما دامت معك، تربح 300 $BATON في الساعة.',t3h:'مرّرها',t3p:'قبل انتهاء الوقت: +5 000 لشخص جديد، +3 000 لفريقك، +1 000 للاعب عشوائي. إذا سقطت، تحتفظ فقط بما ربحته منها.',pHeld:'عصي محمولة',a3:'25 عصا مُمرّرة',a4:'50 عصا مُمرّرة',a9:'25 عصا محمولة'},
 fa:{passTip:'اگر زمان تمام شود چوب می‌افتد: آنچه آورده برایت می‌ماند، اما پاداشی نیست.',hold1:'🏃 چوب دست توست!',hold2b:(r)=>'تا وقتی دست توست، <b>'+r+' $BATON در ساعت</b> برایت می‌آورد.',earnNow:(x)=>'💰 +'+x+' $BATON از این چوب',holdTip:(x)=>'⏳ قبل از پایان زمان ردش کن: +'+x+' برای یک تازه‌وارد',rateNo:(r)=>''+r+' $BATON در ساعت وقتی چوب داری',ruleHold:(x)=>'🏃 چوبت را به یک تازه‌وارد بده: +'+x+' $BATON.',ruleNone:'🔗 هر تازه‌واردی که با لینک تو بیاید: +۵٬۰۰۰ $BATON وقتی اولین چوبش را نگه دارد، و ۱۰٪ از درآمدش.',mined:(n)=>'+'+n+' به‌دست‌آمده',miners:'بازیکنان',newS:'کسی که هنوز بازی نمی‌کند، با لینک تو. بزرگ‌ترین پاداش.',passed:(g,m,to)=>'✅ به '+to+' داده شد: +'+g+' $BATON',t1h:'هر روز یک چوب',t1p:'هر روز بازی را باز کن و یک چوب بگیر. دیگران هم می‌توانند چوبشان را به تو بدهند.',t2h:'برایت $BATON می‌آورد',t2p:'تا وقتی دست توست، ساعتی ۳۰۰ $BATON می‌گیری.',t3h:'ردش کن',t3p:'قبل از پایان زمان: +۵٬۰۰۰ برای تازه‌وارد، +۳٬۰۰۰ برای تیمت، +۱٬۰۰۰ برای بازیکن تصادفی. اگر بیفتد، فقط چیزی که آورده برایت می‌ماند.',pHeld:'چوب‌های نگه‌داشته',a3:'۲۵ چوب ردشده',a4:'۵۰ چوب ردشده',a9:'۲۵ چوب نگه‌داشته'}
 };
+// 22 oct 2026 (Jeremy, 13h35): a Tasks-tab video pays +100 $BATON, 10 a day
+const X36 = {
+en:{vtH:'📺 Watch a video',vtS:(n,m)=>''+n+'/'+m+' today',vtGo:'Watch',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'Come back tomorrow'},
+fr:{vtH:'📺 Regarde une vidéo',vtS:(n,m)=>''+n+'/'+m+' aujourd\'hui',vtGo:'Regarder',vtOk:(x)=>'+'+x+' $BATON !',vtTm:'Reviens demain'},
+es:{vtH:'📺 Mira un vídeo',vtS:(n,m)=>''+n+'/'+m+' hoy',vtGo:'Ver',vtOk:(x)=>'¡+'+x+' $BATON!',vtTm:'Vuelve mañana'},
+pt:{vtH:'📺 Veja um vídeo',vtS:(n,m)=>''+n+'/'+m+' hoje',vtGo:'Ver',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'Volte amanhã'},
+ru:{vtH:'📺 Посмотри видео',vtS:(n,m)=>''+n+'/'+m+' сегодня',vtGo:'Смотреть',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'Возвращайся завтра'},
+uk:{vtH:'📺 Подивись відео',vtS:(n,m)=>''+n+'/'+m+' сьогодні',vtGo:'Дивитися',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'Повертайся завтра'},
+tr:{vtH:'📺 Video izle',vtS:(n,m)=>'bugün '+n+'/'+m+'',vtGo:'İzle',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'Yarın tekrar gel'},
+id:{vtH:'📺 Tonton video',vtS:(n,m)=>''+n+'/'+m+' hari ini',vtGo:'Tonton',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'Kembali besok'},
+ar:{vtH:'📺 شاهد فيديو',vtS:(n,m)=>''+n+'/'+m+' اليوم',vtGo:'شاهد',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'عد غدًا'},
+fa:{vtH:'📺 یک ویدیو ببین',vtS:(n,m)=>'امروز '+n+'/'+m+'',vtGo:'تماشا',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'فردا برگرد'}
+};
 // 22 oct 2026: the newest texts win over the older X11 / X12 blocks defined further down
-for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33, X34, X35]) for (const k in o) Object.assign(X[k], o[k]);
+for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33, X34, X35, X36]) for (const k in o) Object.assign(X[k], o[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -1087,7 +1101,11 @@ function render() {
   const secs = [[T('daily'), srt(dl), trow], ['📢 ' + T('subs'), srt(sb), srow], [T('once'), srt(on1.filter((t) => !t.done)), trow]];  // one-time tasks already done disappear
   secs.sort((x, y) => x[1].every((t) => t.done) - y[1].every((t) => t.done));
   $('#tasks').innerHTML = secs.map((z) => sec(z[0], z[1], z[2])).join('');
-  $('#dotTasks').hidden = !S.tasks.some((t) => !t.done) && !window.__adt;  // 22 oct 2026: an Adsgram task waiting also lights the dot
+  { const vt = $('#vidTask'), nv = S.vids_day || 0, mv = S.vids_max || 10, full = nv >= mv;  // 22 oct 2026: +100 $BATON per video, 10 a day
+    vt.hidden = !(tg && tg.initData) || S.vids_max == null;
+    vt.innerHTML = '<div class="row"><div class="t"><b>' + T('vtH') + '</b><span>' + T('vtS', nv, mv) + '</span></div><span class="r">+' + fmt(S.vid_reward || 100) + '</span>' + (full ? '<button class="sm done" disabled>' + T('vtTm') + '</button>' : '<button class="sm" id="vtBtn">' + T('vtGo') + '</button>') + '</div>';
+    window.__vt = !vt.hidden && !full; }
+  $('#dotTasks').hidden = !S.tasks.some((t) => !t.done) && !window.__adt && !window.__vt;  // 22 oct 2026: an Adsgram task waiting also lights the dot
   $('#nFriends').textContent = fmt(S.friends);
   tick();
 }
@@ -1136,17 +1154,19 @@ $('#passBtn').onclick = () => {
 // 22 oct 2026: keep the baton in hand 4 h longer for 10 Stars (once per baton); the bot's webhook applies the payment
 // 22 oct 2026 (Jeremy): rewarded video, Adsgram block 55429. Adsgram calls the reward URL (GET ?ads=rw), which adds 1 hour
 // to the baton in hand (4 per baton, bt_ads_reward); here we only show the video and refresh the timer.
-async function playVid(b) {
+async function playVid(b, mode) {
   hap(); b.disabled = true;
   try {
+    await api('vid', { mode: mode || 'baton' });  // tells the server which reward this video pays
     if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
     await window.Adsgram.init({ blockId: '55429' }).show();
-    hap('ok'); toast(S && S.holding ? T('vidOk') : T('boostOk')); [2000, 6000].forEach((ms) => setTimeout(refresh, ms));
+    hap('ok'); toast(mode === 'pts' ? T('vtOk', fmt(S.vid_reward || 100)) : T('vidOk')); [2000, 6000].forEach((ms) => setTimeout(refresh, ms));
   } catch (e) { toast(T('vidNo')); }
   b.disabled = false; setTimeout(refresh, 300);
 }
 $('#vidBtn').onclick = () => playVid($('#vidBtn'));
 $('#boostBtn').onclick = () => playVid($('#boostBtn'));
+$('#vidTask').onclick = (e) => { const b = e.target.closest('#vtBtn'); if (b) playVid(b, 'pts'); };
 $('#extBtn').onclick = async () => {
   hap();
   const b = S && S.batons[0]; if (!b) return;
