@@ -1,10 +1,13 @@
-// 22 oct 2026 (Jeremy): the game is refocused on buying / selling, coin creation and blockchains.
-// Hidden here: the thin $MCT bar at the top of the market (price, value, "📺 +10 $MCT" video). $MCT itself stays in the coin list
-// and on its own coin page. To bring the bar back, remove this file from the page (mct_app).
+// 22 oct 2026 (Jeremy): the game is refocused on buying / selling, coin creation and blockchains. Hidden here:
+// - the thin $MCT bar at the top of the market (price, value, "📺 +10 $MCT" video); $MCT stays in the coin list and on its own page;
+// - the clans (tab of the Leaders page, button, clan sheet, clan ranking): clans are closed, their coins and blockchains
+//   now belong to their former chiefs (server side: ds_config 'mct_clans_off');
+// - the duels (⚔️ buttons in the friends list and on a player's profile): MCT Duel is closed (ds_config 'mct_duels_off').
+// To bring something back, remove its selector here (and switch the server flag off).
 (function () {
   try {
     const st = document.createElement('style');
-    st.textContent = '#tokc{display:none!important}';
+    st.textContent = '#tokc,[data-clb],#clrk,#clantop,#clm,button.fd[data-d],#pfduel{display:none!important}';
     document.head.appendChild(st);
   } catch (e) { console.error('hide', e); }
 })();
