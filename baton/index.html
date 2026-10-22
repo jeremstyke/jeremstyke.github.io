@@ -532,6 +532,20 @@ ar:{links:'يد',chainBy:(n)=>'🏃 أطلق العصا <b>'+n+'</b>',chainOf:(n
 fa:{links:'دست',chainBy:(n)=>'🏃 چوب را <b>'+n+'</b> راه انداخت',chainOf:(n)=>'راه‌انداز: '+n,stopped:'متوقف',running:'در راه',record:'طولانی‌ترین سفر هفته (دست)',chains:'چوب‌ها',t3h:'بگذار سفر کند',t3p:'هر پاس یک دست اضافه می‌کند. هرچه چوب بیشتر سفر کرده باشد، برای کسی که ردش می‌کند بیشتر می‌ارزد.',ruleNone:'🔗 هر تازه‌واردی که با لینک تو بیاید ۵٬۰۰۰ $BATON + ۱۰٪ از استخراجش برایت می‌آورد.',ruleHold:(x)=>'🏃 چوب دست توست: اولین تازه‌واردی که با لینک تو بیاید آن را می‌گیرد و تو x5 می‌بری (+'+x+' $BATON).',fIn:'قبلاً این چوب را داشته',noPick:'هیچ دوستی نمی‌تواند آن را بگیرد (قبلاً داشته‌اند یا الان دارند). یک تازه‌وارد دعوت کن!',bTip:'چوب را نگه دار و در کانال‌های تلگرام عضو شو تا بالا برود.'}
 };
 for (const k in X19) Object.assign(X[k], X19[k]);
+// 22 oct 2026 (Jeremy): a dropped baton stops
+const X20 = {
+en:{passTip:'If the timer hits zero, you drop the baton: its trip ends and you get no bonus.'},
+fr:{passTip:'Si le chrono arrive à zéro, tu laisses tomber le bâton : son voyage s\'arrête et tu n\'as pas de bonus.'},
+es:{passTip:'Si el tiempo llega a cero, se te cae el bastón: su viaje termina y no ganas bonus.'},
+pt:{passTip:'Se o tempo chegar a zero, você deixa o bastão cair: a viagem dele acaba e você não ganha bônus.'},
+ru:{passTip:'Если таймер дойдёт до нуля, ты уронишь эстафету: её путь закончится, и бонуса не будет.'},
+uk:{passTip:'Якщо таймер дійде до нуля, ти впустиш естафету: її подорож закінчиться, і бонусу не буде.'},
+tr:{passTip:'Süre sıfırlanırsa bayrağı düşürürsün: yolculuğu biter ve bonus alamazsın.'},
+id:{passTip:'Jika waktu habis, tongkatmu jatuh: perjalanannya berakhir dan kamu tidak dapat bonus.'},
+ar:{passTip:'إذا انتهى الوقت، تسقط العصا منك: تنتهي رحلتها ولا تحصل على مكافأة.'},
+fa:{passTip:'اگر زمان تمام شود، چوب از دستت می‌افتد: سفرش تمام می‌شود و پاداشی نمی‌گیری.'}
+};
+for (const k in X20) Object.assign(X[k], X20[k]);
 const X11 = {
 en:{holdTip:(x)=>'⏳ Pass it before the timer ends: up to +'+x+' $BATON',passTip:'When the timer hits zero, it leaves on its own and you get no bonus.',ext:(h,s)=>'⏱️ Keep it '+h+' h longer · '+s+' ⭐',extOk:'⏱️ Baton extended!',extLate:'Too late, this baton is gone.',extDone:'Already extended once.'},
 fr:{holdTip:(x)=>'⏳ Passe-le avant la fin du chrono : jusqu\'à +'+x+' $BATON',passTip:'Quand le chrono arrive à zéro, il part tout seul et tu n\'as pas de bonus.',ext:(h,s)=>'⏱️ Garder '+h+' h de plus · '+s+' ⭐',extOk:'⏱️ Bâton prolongé !',extLate:'Trop tard, ce bâton est parti.',extDone:'Déjà prolongé une fois.'},
