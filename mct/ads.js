@@ -88,13 +88,12 @@
     setTimeout(() => { if (!window.Adsgram) { agl = null; ko(new Error('timeout')); } }, 6000);
   }));
   async function agWatch() {
-    try { await agSdk(); const r = await window.Adsgram.init({ blockId: '55185' }).show(); return r && r.done === false ? 'skip' : 'ok'; }
+    try { await agSdk(); const r = await window.Adsgram.init({ blockId: '55242' }).show(); return r && r.done === false ? 'skip' : 'ok'; }
     catch (e) { return e && e.done === false && e.error === false ? 'skip' : 'none'; }
   }
   async function watch() {
     if (window.MCTPREM) return true; // 17 oct 2026: Premium players skip the videos (prem.js)
-    // 21 oct 2026 (Jeremy): Ads Galaxy works again: it goes first (it pays), Adsgram (still in test) as backup
-    try { await sdk(); const r = await window.showAdsGalaxy({ miniappId: AGX }); return !!(r && r.reward_eligible); } catch (e) {}
+    // 22 oct 2026 (18h56, Jeremy): every rewarded video of Meme Coin Tycoon goes through Adsgram (block 55242), no more Ads Galaxy
     return (await agWatch()) === 'ok';
   }
 
