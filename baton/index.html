@@ -1622,7 +1622,7 @@ function nudge() {
         box.hidden = false; window.__adt = true; $('#dotTasks').hidden = false;
         const tk = box.querySelector('adsgram-task');
         // 22 oct 2026 (18h32, Jeremy): sponsored tasks are unlimited; when Adsgram has none right now, try again in 10 minutes (it used to stay hidden until the app was reopened)
-        ['onBannerNotFound', 'onError', 'onTooLongSession'].forEach((ev) => tk.addEventListener(ev, () => { gone(); clearTimeout(window.__adtR); window.__adtR = setTimeout(build, 30000);  // hidden, asked again every 30 s }));
+        ['onBannerNotFound', 'onError', 'onTooLongSession'].forEach((ev) => tk.addEventListener(ev, () => { gone(); clearTimeout(window.__adtR); window.__adtR = setTimeout(build, 30000); }));  // hidden, asked again every 30 s
         const gift = () => {
           if (Date.now() - last < 3000) return; last = Date.now(); hap('ok'); toast(T('adOk')); [3000, 10000].forEach((ms) => setTimeout(refresh, ms));
           setTimeout(build, 2500);  // let the widget show its "done" state, then pause
