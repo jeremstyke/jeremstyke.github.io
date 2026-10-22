@@ -1289,14 +1289,25 @@ function nudge() {
       const st = document.createElement('style');
       st.textContent = '#adtask .adt{display:block;padding:12px 14px;border-radius:18px;background:rgba(47,141,255,.08);border:1px solid rgba(255,212,59,.45)}#adtask .adh{font-weight:800;font-size:13px;color:#ffd43b;margin:0 0 6px}#adtask adsgram-task{display:block}#adtask .tb{display:inline-block;padding:7px 14px;border-radius:99px;background:#ffd43b;color:#08121f;font-weight:800;font-size:13px}';
       document.head.appendChild(st);
-      box.innerHTML = '<div class="adt"><div class="adh">' + esc(T('adH')) + '</div><adsgram-task data-block-id="task-55373"><span slot="reward">' + esc(T('adR')) + '</span><div slot="button" class="tb">' + esc(T('adGo')) + '</div><div slot="claim" class="tb">' + esc(T('adClaim')) + '</div><div slot="done" class="tb">✓ ' + esc(T('adDone')) + '</div></adsgram-task></div>';
-      box.hidden = false; window.__adt = true; $('#dotTasks').hidden = false;
-      const tk = box.querySelector('adsgram-task');
-      const gone = () => { box.hidden = true; window.__adt = false; $('#dotTasks').hidden = !(S && S.tasks.some((t) => !t.done)); };
-      ['onBannerNotFound', 'onError', 'onTooLongSession'].forEach((ev) => tk.addEventListener(ev, gone));
+      // 22 oct 2026 (Jeremy, 12h35): after each task the box goes away for 10 minutes (kept on the phone), then Adsgram loads a new one
       let last = 0;
-      const gift = () => { if (Date.now() - last < 3000) return; last = Date.now(); hap('ok'); toast(T('adOk')); [3000, 10000].forEach((ms) => setTimeout(refresh, ms)); };
-      tk.addEventListener('reward', gift); tk.addEventListener('onReward', gift);
+      const pausedUntil = () => { try { return Number(localStorage.getItem('bt_adt_pause') || 0); } catch (e) { return 0; } };
+      const gone = () => { box.hidden = true; box.innerHTML = ''; window.__adt = false; $('#dotTasks').hidden = !(S && S.tasks.some((t) => !t.done)); };
+      function build() {
+        const wait = pausedUntil() - Date.now();
+        if (wait > 0) { gone(); setTimeout(build, wait + 1000); return; }
+        box.innerHTML = '<div class="adt"><div class="adh">' + esc(T('adH')) + '</div><adsgram-task data-block-id="task-55373"><span slot="reward">' + esc(T('adR')) + '</span><div slot="button" class="tb">' + esc(T('adGo')) + '</div><div slot="claim" class="tb">' + esc(T('adClaim')) + '</div><div slot="done" class="tb">✓ ' + esc(T('adDone')) + '</div></adsgram-task></div>';
+        box.hidden = false; window.__adt = true; $('#dotTasks').hidden = false;
+        const tk = box.querySelector('adsgram-task');
+        ['onBannerNotFound', 'onError', 'onTooLongSession'].forEach((ev) => tk.addEventListener(ev, gone));
+        const gift = () => {
+          if (Date.now() - last < 3000) return; last = Date.now(); hap('ok'); toast(T('adOk')); [3000, 10000].forEach((ms) => setTimeout(refresh, ms));
+          try { localStorage.setItem('bt_adt_pause', String(Date.now() + 10 * 60000)); } catch (e) {}
+          setTimeout(build, 2500);  // let the widget show its "done" state, then pause
+        };
+        tk.addEventListener('reward', gift); tk.addEventListener('onReward', gift);
+      }
+      build();
     } catch (e) { console.error('adtask', e); }
   })();
   const sp = (tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '';
