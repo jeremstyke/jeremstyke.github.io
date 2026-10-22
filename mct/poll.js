@@ -32,7 +32,7 @@
       o.querySelector('#pollx').onclick = () => o.remove();
     }
     function form() {
-      const t = T(), opts = (ST && ST.opts) || ['clans', 'duels', 'vault', 'wars', 'burn', 'banner', 'insure', 'scoop', 'premium'];
+      const t = T(), opts = (ST && ST.opts) || ['clans', 'duels', 'vault', 'wars', 'burn', 'insure', 'scoop'];
       const o = overlay('<h3 style="margin:0;font-size:20px">' + t.h + '</h3><p style="margin:0;opacity:.85;font-size:14px;line-height:1.4">' + t.p + '</p>' +
         opts.map((k) => '<label style="display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:12px;background:rgba(255,255,255,.06);font-size:15px"><input type="checkbox" value="' + k + '" style="width:20px;height:20px">' + t.o[k] + '</label>').join('') +
         '<button id="polls" style="margin-top:6px;padding:13px;border:0;border-radius:14px;background:#ffd43b;color:#1a0638;font-weight:800;font-size:16px">' + t.send + ' · +$' + ((ST && ST.reward) || 200) + '</button>');
