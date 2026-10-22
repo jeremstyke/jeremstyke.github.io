@@ -21,6 +21,15 @@
     const get = () => { try { return Number(localStorage.getItem('mct_bt_pop10') || 0); } catch (e) { return Date.now(); } };
     const set = () => { try { localStorage.setItem('mct_bt_pop10', String(Date.now())); } catch (e) {} };
     let tries = 0;
+    // 22 oct 2026 (18h45, Jeremy): at opening, when the Baton popup is not shown, an Adsgram interstitial (block int-55508). Never for Premium.
+    function adInt() {
+      try {
+        const go = () => { try { window.Adsgram.init({ blockId: 'int-55508' }).show().catch(() => {}); } catch (e) {} };
+        if (window.Adsgram) return go();
+        if (!document.querySelector('script[src*="sad.adsgram.ai"]')) { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; document.head.appendChild(s); }
+        let n = 0; const w = setInterval(() => { if (window.Adsgram) { clearInterval(w); go(); } else if (++n > 20) clearInterval(w); }, 300);
+      } catch (e) {}
+    }
     function popup() {
       if (document.getElementById('btpop')) return;
       // 22 oct 2026 (16h23, Jeremy): never for Premium players (prem.js sets window.MCTPREM once it knows)
@@ -31,7 +40,7 @@
       // 18h43: Jeremy sees each new version once (his own key), everyone else once every 24 h
       const K = own ? 'mct_bt_pop11o' : 'mct_bt_pop10';
       let seen = 0; try { seen = Number(localStorage.getItem(K) || 0); } catch (e) { seen = Date.now(); }
-      if (Date.now() - seen < 24 * 3600000) return;
+      if (Date.now() - seen < 24 * 3600000) { adInt(); return; }  // 18h45 (Jeremy): the Baton popup was already shown today: an Adsgram interstitial instead
       try { localStorage.setItem(K, String(Date.now())); } catch (e) {}
       if (document.querySelector('#maint:not([hidden]), .maint:not([hidden])')) return;  // never over the maintenance screen
       set();
