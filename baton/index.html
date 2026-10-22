@@ -1237,7 +1237,7 @@ function render() {
   const srt = (l) => l.sort((x, y) => (x.done - y.done) || (y.id - x.id));
   // 22 oct 2026 (17h06, Jeremy): what is left to do first, everything already done at the very bottom
   const todo = (l) => srt(l.filter((t) => !t.done));
-  const secs = [[T('daily'), todo(dl), trow], [T('once'), todo(on1), trow]];
+  const secs = [[T('daily'), srt(dl), trow], [T('once'), todo(on1), trow]];  // 22 oct 2026 (21h08, Jeremy): the 2 daily tasks always stay visible (done today = greyed until tomorrow)
   $('#subTasks').innerHTML = sec('📢 ' + T('subs'), srt(sb), srow);  // (17h09) the channel stays visible, with its Active badge  // 22 oct 2026 (17h08, Jeremy): the channels to join come first, above the sponsored task
   // 22 oct 2026 (17h11, Jeremy): the tasks already done sit at the bottom in a closed list you can open, with what they earned
   $('#tasks').innerHTML = secs.map((z) => sec(z[0], z[1], z[2])).join('')  // 22 oct 2026 (19h24, Jeremy): done tasks just disappear
