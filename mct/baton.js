@@ -43,7 +43,7 @@
           if (!done && String(u).indexOf('/mct/api') >= 0 && o && typeof o.body === 'string' && /"action":"(buy|sell)"/.test(o.body)) {
             r.clone().json().then((j) => {
               if (done || !j || j.error || j.ok === false || window.MCTPREM) return;
-              if (Date.now() - Number(ls('mct_first_seen') || 0) < 3 * 86400000) return;
+              // 18h51 (Jeremy): no rule for new players, the only exclusion is Premium
               if (Date.now() - Number(ls('mct_int_at') || 0) < 30 * 60000) return;
               done = true; ls('mct_int_at', String(Date.now())); setTimeout(adInt, 1200);  // let the trade's toast show first
             }).catch(() => {});
