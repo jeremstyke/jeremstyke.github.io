@@ -346,6 +346,7 @@ nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:elli
 
     <section class="panel" id="p-tasks" hidden>
       <div class="score"><small data-t="earnMore"></small><div class="big" data-t="tasks"></div></div>
+      <div class="list" id="adtask" hidden></div>
       <div class="list" id="tasks"></div>
     </section>
 
@@ -887,8 +888,21 @@ id:{weekEnd:(x)=>'Minggu berakhir dalam '+x+'',dU:'h',hU:'j'},
 ar:{weekEnd:(x)=>'ينتهي الأسبوع خلال '+x+'',dU:'ي',hU:'س'},
 fa:{weekEnd:(x)=>'هفته تا '+x+' دیگر تمام می‌شود',dU:'روز',hU:'ساعت'}
 };
+// 22 oct 2026 (Jeremy): Adsgram sponsored tasks (block task-55373) at the top of the Tasks tab
+const X30 = {
+en:{adH:'🎁 Sponsored task',adR:'+500 $BATON',adGo:'Go',adClaim:'Claim',adDone:'Done',adOk:'+500 $BATON added!'},
+fr:{adH:'🎁 Tâche sponsorisée',adR:'+500 $BATON',adGo:'Go',adClaim:'Récupérer',adDone:'Fait',adOk:'+500 $BATON ajoutés !'},
+es:{adH:'🎁 Tarea patrocinada',adR:'+500 $BATON',adGo:'Ir',adClaim:'Reclamar',adDone:'Hecho',adOk:'¡+500 $BATON añadidos!'},
+pt:{adH:'🎁 Tarefa patrocinada',adR:'+500 $BATON',adGo:'Ir',adClaim:'Resgatar',adDone:'Feito',adOk:'+500 $BATON adicionados!'},
+ru:{adH:'🎁 Спонсорское задание',adR:'+500 $BATON',adGo:'Вперёд',adClaim:'Забрать',adDone:'Готово',adOk:'+500 $BATON начислено!'},
+uk:{adH:'🎁 Спонсорське завдання',adR:'+500 $BATON',adGo:'Вперед',adClaim:'Забрати',adDone:'Готово',adOk:'+500 $BATON нараховано!'},
+tr:{adH:'🎁 Sponsorlu görev',adR:'+500 $BATON',adGo:'Git',adClaim:'Al',adDone:'Tamam',adOk:'+500 $BATON eklendi!'},
+id:{adH:'🎁 Tugas sponsor',adR:'+500 $BATON',adGo:'Ayo',adClaim:'Klaim',adDone:'Selesai',adOk:'+500 $BATON ditambahkan!'},
+ar:{adH:'🎁 مهمة برعاية',adR:'+500 $BATON',adGo:'اذهب',adClaim:'استلم',adDone:'تم',adOk:'أُضيفت +500 $BATON!'},
+fa:{adH:'🎁 مأموریت اسپانسری',adR:'+500 $BATON',adGo:'برو',adClaim:'دریافت',adDone:'انجام شد',adOk:'+500 $BATON اضافه شد!'}
+};
 // 22 oct 2026: the newest texts win over the older X11 / X12 blocks defined further down
-for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29]) for (const k in o) Object.assign(X[k], o[k]);
+for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30]) for (const k in o) Object.assign(X[k], o[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -1223,6 +1237,26 @@ function nudge() {
   try { if (tg && tg.requestWriteAccess && !LS.get('bt_wa')) setTimeout(() => { try { tg.requestWriteAccess((ok) => LS.set('bt_wa', ok ? '1' : '0')); } catch (e) {} }, 2500); } catch (e) {}
   if ((!LS.get('bt_tuto') && (S.pts || 0) < 1000) || ((tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '') === 'tuto') { LS.set('bt_tuto', '1'); tutorial(); }
   $('#helpBtn').onclick = () => { hap(); faq(); };  // 22 oct 2026: FAQ first, tutorial one tap away
+  // 22 oct 2026 (Jeremy): Adsgram sponsored tasks (block task-55373), built once above the task list (the list itself is redrawn
+  // at every refresh, which would reset the Adsgram widget). Adsgram calls the reward URL of the baton function (GET ?ads=task),
+  // which credits 500 $BATON (30 a day at most, bt_ads_reward); here we only show it and refresh the balance.
+  (function adTask() {
+    try {
+      const box = $('#adtask'); if (!box || !(tg && tg.initData)) return;
+      const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.async = true; document.head.appendChild(s);
+      const st = document.createElement('style');
+      st.textContent = '#adtask .adt{display:block;padding:12px 14px;border-radius:18px;background:rgba(47,141,255,.08);border:1px solid rgba(255,212,59,.45)}#adtask .adh{font-weight:800;font-size:13px;color:#ffd43b;margin:0 0 6px}#adtask adsgram-task{display:block}#adtask .tb{display:inline-block;padding:7px 14px;border-radius:99px;background:#ffd43b;color:#08121f;font-weight:800;font-size:13px}';
+      document.head.appendChild(st);
+      box.innerHTML = '<div class="adt"><div class="adh">' + esc(T('adH')) + '</div><adsgram-task data-block-id="task-55373"><span slot="reward">' + esc(T('adR')) + '</span><div slot="button" class="tb">' + esc(T('adGo')) + '</div><div slot="claim" class="tb">' + esc(T('adClaim')) + '</div><div slot="done" class="tb">✓ ' + esc(T('adDone')) + '</div></adsgram-task></div>';
+      box.hidden = false;
+      const tk = box.querySelector('adsgram-task');
+      const gone = () => { box.hidden = true; };
+      ['onBannerNotFound', 'onError', 'onTooLongSession'].forEach((ev) => tk.addEventListener(ev, gone));
+      let last = 0;
+      const gift = () => { if (Date.now() - last < 3000) return; last = Date.now(); hap('ok'); toast(T('adOk')); [3000, 10000].forEach((ms) => setTimeout(refresh, ms)); };
+      tk.addEventListener('reward', gift); tk.addEventListener('onReward', gift);
+    } catch (e) { console.error('adtask', e); }
+  })();
   const sp = (tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '';
   if (sp === 'friends') go('friends');
   else if (/^p\d{1,15}$/.test(sp)) openProfile(Number(sp.slice(1)));  // 22 oct 2026: a message from a player opens his profile
