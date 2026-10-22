@@ -1441,7 +1441,18 @@ function nudge() {
   setState(r);
   // 21 oct 2026: ask once to let @PassTheBatonBot send messages (players who came by a link never pressed Start)
   try { if (tg && tg.requestWriteAccess && !LS.get('bt_wa')) setTimeout(() => { try { tg.requestWriteAccess((ok) => LS.set('bt_wa', ok ? '1' : '0')); } catch (e) {} }, 2500); } catch (e) {}
+  const firstOpen = !LS.get('bt_tuto') && !LS.get('bt_open1'); LS.set('bt_open1', '1');  // 22 oct 2026: the very first visit (tutorial)
   if ((!LS.get('bt_tuto') && (S.pts || 0) < 1000) || ((tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '') === 'tuto') { LS.set('bt_tuto', '1'); tutorial(); }
+  // 22 oct 2026 (Jeremy, 15h52): Adsgram interstitial (block int-55461) when the game opens; never on the very first visit,
+  // never for the no-ads players (S.noads, later), and not twice within 10 minutes (Telegram sometimes reloads the app)
+  (function inter() {
+    try {
+      if (firstOpen || S.noads || !(tg && tg.initData) || Date.now() - Number(LS.get('bt_int') || 0) < 10 * 60000) return;
+      const go = () => { try { LS.set('bt_int', String(Date.now())); window.Adsgram.init({ blockId: 'int-55461' }).show().catch(() => {}); } catch (e) {} };
+      let n = 0; const wait = () => { if (window.Adsgram) go(); else if (n++ < 40) setTimeout(wait, 250); };  // the Adsgram script is loaded once, by the task block below
+      wait();
+    } catch (e) {}
+  })();
   $('#helpBtn').onclick = () => { hap(); faq(); };  // 22 oct 2026: FAQ first, tutorial one tap away
   // 22 oct 2026 (Jeremy): Adsgram sponsored tasks (block task-55373), built once above the task list (the list itself is redrawn
   // at every refresh, which would reset the Adsgram widget). Adsgram calls the reward URL of the baton function (GET ?ads=task),
