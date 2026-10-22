@@ -1,3 +1,4 @@
+
 // 22 oct 2026 (Jeremy): Meme Coin Tycoon promotes Baton (@PassTheBatonBot):
 // the daily mission "pass a baton on Baton" (checked by the server) and, since 16h15, a full-screen Baton popup
 // once every 24 hours (it replaces the Baton card at the top of the market). The link brings newcomers into Jeremy's crew
@@ -5,10 +6,10 @@
 (function () {
   try {
     const S = {
-      en: { m_baton: '🏃 Pass a baton on Baton', bp_tag: 'NEW GAME', bp_h: 'Hold the baton, earn $BATON', bp_1: '💰 300 $BATON every hour while you hold it', bp_2: '⏳ Pass it before the timer ends: up to +5,000', bp_3: '🛒 Shop: 1 million $BATON = 1 $ in USDT', bp_b: '🏃 Play Baton', bp_x: 'Later' },
-      fr: { m_baton: '🏃 Passe un bâton sur Baton', bp_tag: 'NOUVEAU JEU', bp_h: 'Tiens le bâton, gagne des $BATON', bp_1: '💰 300 $BATON par heure tant que tu le tiens', bp_2: '⏳ Passe-le avant la fin du chrono : jusqu\'à +5 000', bp_3: '🛒 Boutique : 1 million de $BATON = 1 $ en USDT', bp_b: '🏃 Jouer à Baton', bp_x: 'Plus tard' },
-      ar: { m_baton: '🏃 مرّر عصا في Baton', bp_tag: 'لعبة جديدة', bp_h: 'احمل العصا واربح $BATON', bp_1: '💰 300 $BATON كل ساعة ما دامت معك', bp_2: '⏳ مرّرها قبل انتهاء الوقت: حتى +5 000', bp_3: '🛒 المتجر: مليون $BATON = 1 $ USDT', bp_b: '🏃 العب Baton', bp_x: 'لاحقًا' },
-      id: { m_baton: '🏃 Oper tongkat di Baton', bp_tag: 'GAME BARU', bp_h: 'Pegang tongkat, dapatkan $BATON', bp_1: '💰 300 $BATON per jam selama kamu memegangnya', bp_2: '⏳ Oper sebelum waktu habis: hingga +5 000', bp_3: '🛒 Toko: 1 juta $BATON = 1 $ USDT', bp_b: '🏃 Main Baton', bp_x: 'Nanti' }
+      en: { m_baton: '🏃 Pass a baton on Baton', bp_tag: 'NEW GAME', bp_h: 'Earn real money with Baton', bp_1: '💰 300 $BATON every hour while you hold it', bp_2: '⏳ Pass it before the timer ends: up to +5,000', bp_3: '💵 Real money: 1 million $BATON = 1 $ in USDT, sent to your wallet', bp_b: '🏃 Play Baton', bp_n: '⚠️ On Sunday 1 November, the TON referral program and the diamond end. Commissions already earned will be paid from $0.01. The weekly contests go on, now paid in $MCT (1,000 / 500 / 250).', bp_x: 'Later' },
+      fr: { m_baton: '🏃 Passe un bâton sur Baton', bp_tag: 'NOUVEAU JEU', bp_h: 'Gagne de l\'argent réel avec Baton', bp_1: '💰 300 $BATON par heure tant que tu le tiens', bp_2: '⏳ Passe-le avant la fin du chrono : jusqu\'à +5 000', bp_3: '💵 De l\'argent réel : 1 million de $BATON = 1 $ en USDT, versé sur ton wallet', bp_b: '🏃 Jouer à Baton', bp_n: '⚠️ Le dimanche 1er novembre, le parrainage TON et le diamant prennent fin. Les commissions déjà gagnées seront payées dès 0,01 $. Les concours de la semaine continuent, payés en $MCT (1 000 / 500 / 250).', bp_x: 'Plus tard' },
+      ar: { m_baton: '🏃 مرّر عصا في Baton', bp_tag: 'لعبة جديدة', bp_h: 'اربح مالًا حقيقيًا مع Baton', bp_1: '💰 300 $BATON كل ساعة ما دامت معك', bp_2: '⏳ مرّرها قبل انتهاء الوقت: حتى +5 000', bp_3: '💵 مال حقيقي: مليون $BATON = 1 $ USDT تُرسل إلى محفظتك', bp_b: '🏃 العب Baton', bp_n: '⚠️ يوم الأحد 1 نوفمبر ينتهي برنامج الإحالة TON والماسة. العمولات المكتسبة ستُدفع ابتداءً من 0.01 $. تستمر المسابقات الأسبوعية بجوائز $MCT (1000 / 500 / 250).', bp_x: 'لاحقًا' },
+      id: { m_baton: '🏃 Oper tongkat di Baton', bp_tag: 'GAME BARU', bp_h: 'Dapatkan uang sungguhan dengan Baton', bp_1: '💰 300 $BATON per jam selama kamu memegangnya', bp_2: '⏳ Oper sebelum waktu habis: hingga +5 000', bp_3: '💵 Uang sungguhan: 1 juta $BATON = 1 $ USDT, dikirim ke dompetmu', bp_b: '🏃 Main Baton', bp_n: '⚠️ Minggu 1 November, program referral TON dan berlian berakhir. Komisi yang sudah didapat dibayar mulai $0.01. Kontes mingguan tetap ada, dibayar dalam $MCT (1.000 / 500 / 250).', bp_x: 'Nanti' }
     };
     for (const k in S) if (typeof L === 'object' && L[k]) Object.assign(L[k], S[k]);
     const URL = 'https://t.me/PassTheBatonBot/play?startapp=src_mctpop';
@@ -17,14 +18,16 @@
     const lang = () => { try { return (typeof LANG === 'string' && S[LANG]) ? LANG : 'en'; } catch (e) { return 'en'; } };
     const txt = (k) => (S[lang()] || S.en)[k] || S.en[k];
     const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-    const get = () => { try { return Number(localStorage.getItem('mct_bt_pop') || 0); } catch (e) { return Date.now(); } };
-    const set = () => { try { localStorage.setItem('mct_bt_pop', String(Date.now())); } catch (e) {} };
+    const get = () => { try { return Number(localStorage.getItem('mct_bt_pop10') || 0); } catch (e) { return Date.now(); } };
+    const set = () => { try { localStorage.setItem('mct_bt_pop10', String(Date.now())); } catch (e) {} };
     let tries = 0;
     function popup() {
       if (Date.now() - get() < 24 * 3600000 || document.getElementById('btpop')) return;
       // 22 oct 2026 (16h23, Jeremy): never for Premium players (prem.js sets window.MCTPREM once it knows)
       if (typeof window.MCTPREM === 'undefined' && tries++ < 20) { setTimeout(popup, 500); return; }
-      if (window.MCTPREM) return;
+      // 22 oct 2026 (18h06, Jeremy): the new "real money" text is shown once to everyone (new key), and to Jeremy too so he can see it
+      let own = false; try { own = String(ME.uid) === '7057960224'; } catch (e) {}
+      if (window.MCTPREM && !own) return;
       if (document.querySelector('#maint:not([hidden]), .maint:not([hidden])')) return;  // never over the maintenance screen
       set();
       const rtl = lang() === 'ar';
@@ -37,6 +40,7 @@
         '<div style="font-size:17px;font-weight:800;margin:6px 0 16px;color:#ffc531">' + esc(txt('bp_h')) + '</div>' +
         '<div style="display:flex;flex-direction:column;gap:8px;text-align:' + (rtl ? 'right' : 'left') + ';font-size:14px;line-height:1.35;margin-bottom:18px">' +
         ['bp_1', 'bp_2', 'bp_3'].map((k) => '<div style="padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.05)">' + esc(txt(k)) + '</div>').join('') + '</div>' +
+        '<div style="margin:-6px 0 14px;padding:10px 12px;border-radius:14px;border:1px solid rgba(255,197,49,.45);background:rgba(255,197,49,.08);font-size:13px;line-height:1.4;text-align:start">' + esc(txt('bp_n')) + '</div>' +
         '<button id="btpop_go" style="width:100%;min-height:52px;border:0;border-radius:16px;background:linear-gradient(180deg,#3f9bff,#1f6fe0);color:#fff;font-weight:800;font-size:17px;cursor:pointer">' + esc(txt('bp_b')) + '</button>' +
         '<button id="btpop_x" style="margin-top:8px;width:100%;min-height:40px;border:0;background:none;color:rgba(233,241,255,.6);font-size:14px;cursor:pointer">' + esc(txt('bp_x')) + '</button></div>';
       document.body.appendChild(el);
@@ -54,12 +58,12 @@
 (function () {
   try {
     const N = {
-      en: ['⏳ The referral program and the diamond stop on Sunday 1 November.', '🏃 Keep earning USDT on Baton', 'Play'],
-      fr: ['⏳ Le parrainage et le diamant s\'arrêtent le dimanche 1er novembre.', '🏃 Continue de gagner des USDT sur Baton', 'Jouer'],
-      ar: ['⏳ برنامج الإحالة والماسة يتوقفان يوم الأحد 1 نوفمبر.', '🏃 واصل ربح USDT على Baton', 'العب'],
-      id: ['⏳ Program referral dan berlian berhenti hari Minggu 1 November.', '🏃 Terus dapatkan USDT di Baton', 'Main'],
-      ru: ['⏳ Реферальная программа и алмаз закрываются в воскресенье, 1 ноября.', '🏃 Продолжай зарабатывать USDT в Baton', 'Играть'],
-      fa: ['⏳ برنامه دعوت و الماس یکشنبه ۱ نوامبر تمام می‌شوند.', '🏃 در Baton همچنان USDT بگیر', 'بازی']
+      en: ['⏳ The referral program and the diamond stop on Sunday 1 November. Commissions already earned are paid from $0.01.', '🏃 Keep earning USDT on Baton', 'Play'],
+      fr: ['⏳ Le parrainage et le diamant s\'arrêtent le dimanche 1er novembre. Les commissions déjà gagnées sont payées dès 0,01 $.', '🏃 Continue de gagner des USDT sur Baton', 'Jouer'],
+      ar: ['⏳ برنامج الإحالة والماسة يتوقفان يوم الأحد 1 نوفمبر. العمولات المكتسبة تُدفع ابتداءً من 0.01 $.', '🏃 واصل ربح USDT على Baton', 'العب'],
+      id: ['⏳ Program referral dan berlian berhenti hari Minggu 1 November. Komisi yang sudah didapat dibayar mulai $0.01.', '🏃 Terus dapatkan USDT di Baton', 'Main'],
+      ru: ['⏳ Реферальная программа и алмаз закрываются в воскресенье, 1 ноября. Заработанные комиссии выплатим от $0.01.', '🏃 Продолжай зарабатывать USDT в Baton', 'Играть'],
+      fa: ['⏳ برنامه دعوت و الماس یکشنبه ۱ نوامبر تمام می‌شوند. کمیسیون‌های به‌دست‌آمده از ۰٫۰۱ دلار پرداخت می‌شوند.', '🏃 در Baton همچنان USDT بگیر', 'بازی']
     };
     const lg = () => { try { return (typeof LANG === 'string' && N[LANG]) ? LANG : 'en'; } catch (e) { return 'en'; } };
     const esc2 = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
