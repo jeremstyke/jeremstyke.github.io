@@ -132,6 +132,18 @@
       if (ts && !ts.querySelector('.btend')) { const g = ts.querySelector('.grab'); g ? g.insertAdjacentElement('afterend', note()) : ts.prepend(note()); }
       const db = document.querySelector('#diam .dbox');
       if (db && !db.querySelector('.btend')) { const t = db.querySelector('.dtop'); t ? t.insertAdjacentElement('afterend', note()) : db.prepend(note()); }
+      // 22 oct 2026 (22h13, Jeremy): the payout waiting to be sent is shown as such (the app counted it with "paid"), so players know it is on its way
+      if (ts && !ts.querySelector('.btwait')) {
+        let wt = 0; try { wt = Number((TONLAST && TONLAST.waiting) || 0); } catch (e) {}
+        if (wt > 0) {
+          let m = lg() === 'fr' ? wt.toFixed(3).replace('.', ',') + ' $' : '$' + wt.toFixed(3); try { if (typeof tonM === 'function') m = tonM(wt); } catch (e) {}
+          const W = { fr: '⏳ ' + m + ' en cours d\'envoi vers ton wallet. Le bot te prévient dès que c\'est parti.', es: '⏳ ' + m + ' en camino a tu wallet. El bot te avisa en cuanto salga.', ru: '⏳ ' + m + ' отправляется на твой кошелёк. Бот сообщит, как только платёж уйдёт.', ar: '⏳ ' + m + ' في الطريق إلى محفظتك. سيخبرك البوت فور إرسالها.', id: '⏳ ' + m + ' sedang dikirim ke dompetmu. Bot akan memberi tahu begitu terkirim.', fa: '⏳ ' + m + ' در راه کیف پولت است. ربات به محض ارسال خبرت می‌کند.' };
+          const el = document.createElement('div'); el.className = 'btwait';
+          el.style.cssText = 'margin:0 0 12px;padding:10px 14px;border-radius:14px;border:1px solid rgba(255,212,59,.5);background:rgba(255,212,59,.1);font-size:13px;font-weight:700;line-height:1.35;color:#ffe9a3;text-align:start';
+          el.textContent = W[lg()] || ('⏳ ' + m + ' on its way to your wallet. The bot tells you as soon as it is sent.');
+          const en = ts.querySelector('.btend'); en ? en.insertAdjacentElement('afterend', el) : ts.prepend(el);
+        }
+      }
     }
     new MutationObserver(put).observe(document.body, { childList: true, subtree: true });
   } catch (e) { console.error('baton end notice', e); }
