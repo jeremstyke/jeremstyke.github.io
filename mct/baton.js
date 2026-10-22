@@ -1,5 +1,5 @@
 // 22 oct 2026 (Jeremy): bridge from Meme Coin Tycoon to Baton (@PassTheBatonBot), without mixing the two games:
-// a small 🏃 button in the header that opens Baton, and the daily mission "pass a baton on Baton" (checked by the server).
+// only the daily mission "pass a baton on Baton" (checked by the server); tapping it opens Baton. No button in the header.
 (function () {
   try {
     const S = {
@@ -10,14 +10,6 @@
     };
     for (const k in S) if (L[k]) Object.assign(L[k], S[k]);
     const URL = 'https://t.me/PassTheBatonBot/play?startapp=src_mct';
-    const open = () => { try { tw.openTelegramLink(URL); } catch (e) { location.href = URL; } };
-    if (typeof MSN_GO === 'object') MSN_GO.baton = open;
-    const f = document.getElementById('faqtop');
-    if (f && !document.getElementById('btntop')) {
-      const b = document.createElement('button');
-      b.className = 'lng'; b.id = 'btntop'; b.textContent = '🏃'; b.setAttribute('aria-label', 'Baton');
-      b.onclick = () => { try { haptic(); } catch (e) {} open(); };
-      f.parentNode.insertBefore(b, f);
-    }
+    if (typeof MSN_GO === 'object') MSN_GO.baton = () => { try { tw.openTelegramLink(URL); } catch (e) { location.href = URL; } };
   } catch (e) { console.error('baton bridge', e); }
 })();
