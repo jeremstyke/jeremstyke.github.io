@@ -548,6 +548,20 @@ ar:{myH:'🏁 <b>سلسلتك</b>',myAt:(w)=>'🏃 العصا مع <b>'+w+'</b>.
 fa:{myH:'🏁 <b>زنجیرهٔ تو</b>',myAt:(w)=>'🏃 چوب دست <b>'+w+'</b> است. زنجیره‌ات حتی بدون تو بزرگ می‌شود و هر حلقه +۱٪ استخراج به تو می‌دهد.',myNone:'الان چوبش دست کسی نیست. یک دوست دعوت کن تا دوباره راه بیفتد.',fromBy:(n)=>'🏃 چوب در دست: زنجیرهٔ <b>'+n+'</b>'}
 };
 for (const k in X13) Object.assign(X[k], X13[k]);
+// 22 oct 2026 (Jeremy): rules simplified to 3 (one baton at a time, two ways to pass, one chain on screen)
+const X14 = {
+en:{t1h:'Harvest every 4 h',t1p:'Your mine fills up in 4 h. Come back to collect your $BATON.',t2p:'When you hold the baton, your mine runs 2× faster. Pass it before the timer ends: x5 bonus if it goes to someone new.',t3p:'The more hands the baton goes through, the faster everyone who held it mines (+1 % per hand).',randP:'A player',randS:'Any active player. x1 bonus.',newS:'Send them a link. x5 bonus.'},
+fr:{t1h:'Récolte toutes les 4 h',t1p:'Ta mine se remplit en 4 h. Reviens récolter tes $BATON.',t2p:'Quand tu as le bâton, ta mine va 2× plus vite. Passe-le avant la fin du chrono : bonus x5 si c\'est à quelqu\'un de nouveau.',t3p:'Plus le bâton passe de mains, plus tous ceux qui l\'ont tenu minent vite (+1 % par main).',randP:'Un joueur',randS:'N\'importe quel joueur actif. Bonus x1.',newS:'Envoie-lui un lien. Bonus x5.'},
+es:{t1h:'Recolecta cada 4 h',t1p:'Tu mina se llena en 4 h. Vuelve a recoger tus $BATON.',t2p:'Cuando tienes el bastón, tu mina va 2× más rápido. Pásalo antes de que acabe el tiempo: bonus x5 si es a alguien nuevo.',t3p:'Cuantas más manos pasa el bastón, más rápido minan todos los que lo tuvieron (+1 % por mano).',randP:'Un jugador',randS:'Cualquier jugador activo. Bonus x1.',newS:'Envíale un enlace. Bonus x5.'},
+pt:{t1h:'Colete a cada 4 h',t1p:'Sua mina enche em 4 h. Volte para coletar seus $BATON.',t2p:'Quando você tem o bastão, sua mina vai 2× mais rápido. Passe antes do fim do tempo: bônus x5 se for para alguém novo.',t3p:'Quanto mais mãos o bastão passa, mais rápido mineram todos que o seguraram (+1 % por mão).',randP:'Um jogador',randS:'Qualquer jogador ativo. Bônus x1.',newS:'Mande um link. Bônus x5.'},
+ru:{t1h:'Собирай каждые 4 ч',t1p:'Шахта заполняется за 4 ч. Возвращайся за своими $BATON.',t2p:'Пока эстафета у тебя, шахта работает в 2 раза быстрее. Передай её до конца таймера: бонус x5, если новичку.',t3p:'Чем больше рук прошла эстафета, тем быстрее добывают все, кто её держал (+1 % за руку).',randP:'Игроку',randS:'Любому активному игроку. Бонус x1.',newS:'Отправь ему ссылку. Бонус x5.'},
+uk:{t1h:'Збирай кожні 4 год',t1p:'Шахта наповнюється за 4 год. Повертайся по свої $BATON.',t2p:'Поки естафета в тебе, шахта працює вдвічі швидше. Передай її до кінця таймера: бонус x5, якщо новачку.',t3p:'Що більше рук пройшла естафета, то швидше видобувають усі, хто її тримав (+1 % за руку).',randP:'Гравцеві',randS:'Будь-якому активному гравцеві. Бонус x1.',newS:'Надішли йому посилання. Бонус x5.'},
+tr:{t1h:'Her 4 saatte topla',t1p:'Maden 4 saatte dolar. $BATON\'larını toplamaya gel.',t2p:'Bayrak sendeyken maden 2× hızlı çalışır. Süre bitmeden devret: yeni birine giderse x5 bonus.',t3p:'Bayrak ne kadar çok elden geçerse, onu tutan herkes o kadar hızlı kazar (el başına +%1).',randP:'Bir oyuncu',randS:'Herhangi bir aktif oyuncu. x1 bonus.',newS:'Ona bir link gönder. x5 bonus.'},
+id:{t1h:'Panen tiap 4 jam',t1p:'Tambangmu penuh dalam 4 jam. Kembali untuk ambil $BATON.',t2p:'Saat kamu pegang tongkat, tambangmu 2× lebih cepat. Oper sebelum waktu habis: bonus x5 jika ke orang baru.',t3p:'Makin banyak tangan dilewati tongkat, makin cepat semua yang pernah memegangnya menambang (+1 % per tangan).',randP:'Seorang pemain',randS:'Pemain aktif mana saja. Bonus x1.',newS:'Kirimi dia link. Bonus x5.'},
+ar:{t1h:'اجمع كل 4 ساعات',t1p:'منجمك يمتلئ في 4 ساعات. عد لتجمع $BATON.',t2p:'عندما تكون العصا معك، منجمك أسرع مرتين. مرّرها قبل انتهاء الوقت: مكافأة x5 إذا كانت لشخص جديد.',t3p:'كلما مرّت العصا بأيدٍ أكثر، عدّن كل من حملها أسرع (+1 % لكل يد).',randP:'لاعب',randS:'أي لاعب نشط. مكافأة x1.',newS:'أرسل له رابطًا. مكافأة x5.'},
+fa:{t1h:'هر ۴ ساعت برداشت کن',t1p:'معدنت در ۴ ساعت پر می‌شود. برگرد و $BATON هایت را بردار.',t2p:'وقتی چوب دست توست، معدنت ۲ برابر سریع‌تر است. قبل از تمام شدن زمان ردش کن: پاداش x5 اگر به یک تازه‌وارد بدهی.',t3p:'هرچه چوب از دست‌های بیشتری بگذرد، همهٔ کسانی که آن را داشته‌اند سریع‌تر استخراج می‌کنند (+۱٪ برای هر دست).',randP:'یک بازیکن',randS:'هر بازیکن فعال. پاداش x1.',newS:'برایش لینک بفرست. پاداش x5.'}
+};
+for (const k in X14) Object.assign(X[k], X14[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -598,7 +612,7 @@ function render() {
     $('#holdT').textContent = T('hold1'); $('#holdP').innerHTML = T('hold2', Math.round(S.hold_h)) + '<small class="tip">' + T('holdTip', fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * 5)) + '</small>';
     $('#passBtn').hidden = false; $('#passBtn').textContent = '→  ' + T('pass');
     $('#extBtn').hidden = !!S.batons[0].extended || !S.ext_stars; $('#extBtn').textContent = T('ext', S.ext_h || 4, S.ext_stars || 10);
-    $('#moreBat').hidden = S.batons.length < 2; $('#moreBat').textContent = T('more', S.batons.length - 1);
+    $('#moreBat').hidden = true; $('#moreBat').textContent = T('more', S.batons.length - 1);
   } else {
     c.classList.add('off'); $('#holdT').textContent = T('none1'); $('#holdP').textContent = T('none2'); $('#timer').textContent = ''; $('#extBtn').hidden = true; $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
   }
@@ -606,12 +620,12 @@ function render() {
   $('#invRule').textContent = !S.holding ? T('ruleNone') : S.batons[0].extended ? T('ruleExt') : T('ruleHold', fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * 5));
   // chain
   // 22 oct 2026: the player's own chain gets its own card when the baton in hand belongs to another chain
-  const mc = S.my_chain; $('#myChain').hidden = !mc || (S.chain && S.chain.id === mc.id);
+  const mc = S.my_chain; $('#myChain').hidden = true;  // 22 oct 2026: one chain on screen only (rules simplified)
   if (mc) { $('#myH').innerHTML = T('myH'); $('#myLinks').textContent = fmt(mc.links); $('#myAt').innerHTML = mc.at ? T('myAt', esc(mc.at)) : T('myNone'); }
   const ch = S.chain;
   $('#chainCard').hidden = !ch;
   if (ch) {
-    $('#chainBy').innerHTML = (S.holding && S.my_chain && S.my_chain.id !== ch.id ? T('fromBy', esc(ch.starter)) : T('chainBy', esc(ch.starter))); $('#links').textContent = fmt(ch.links);
+    $('#chainBy').innerHTML = T('chainBy', esc(ch.starter)); $('#links').textContent = fmt(ch.links);
     let h = '';
     if (ch.links > ch.runners.length) h += '<div class="link"><div class="av" style="background:#2a3f5f;color:#8fa5c4">+' + fmt(ch.links - ch.runners.length) + '</div><div class="bar"></div></div>';
     ch.runners.forEach((r, i) => { h += '<div class="link"><div class="av' + (r.me ? ' me' : '') + '" style="background:' + (r.me ? '#2f8dff' : hueOf(r.n)) + '" title="' + esc(r.n) + '">' + init(r.n) + '</div>' + (i < ch.runners.length - 1 ? '<div class="bar"></div>' : '') + '</div>'; });
@@ -676,7 +690,6 @@ $('#passBtn').onclick = () => {
   const pg = (m) => '<small class="pg">+' + fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * m) + '</small>';
   sheet('<h3>' + T('who') + '</h3><p class="foot" style="text-align:start;margin:0">' + T('passTip') + '</p>' +
     '<button class="opt" data-k="new"><span class="t"><b>' + T('newP') + '</b><span>' + T('newS') + '</span></span><span class="mult x5">x5' + pg(5) + '</span></button>' +
-    '<button class="opt" data-k="friend"><span class="t"><b>' + T('friendP') + '</b><span>' + T('friendS') + '</span></span><span class="mult">x3' + pg(3) + '</span></button>' +
     '<button class="opt" data-k="random"><span class="t"><b>' + T('randP') + '</b><span>' + T('randS') + '</span></span><span class="mult">x1' + pg(1) + '</span></button>' +
     '<button class="btn ghost" data-k="keep">' + T('keep') + '</button>');
 };
