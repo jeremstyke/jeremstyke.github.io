@@ -72,8 +72,5 @@
     // 22 oct 2026: the poll notification opens the app with startapp=poll, so open the poll (or its results) straight away
     const SP = String((window.Telegram && Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.start_param) || '');
     if (SP === 'poll') (async () => { let r = null; try { r = await call('mon_poll'); } catch (e) {} if (r && r.ok) { ST = r; if (r.voted) results(r); else form(); } })();
-    // 22 oct 2026: the poll notification opens the app with startapp=poll, so open the poll (or its results) straight away
-    const SP = String((window.Telegram && Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.start_param) || '');
-    if (SP === 'poll') (async () => { let r = null; try { r = await call('mon_poll'); } catch (e) {} if (r && r.ok) { ST = r; if (r.voted) results(r); else form(); } })();
   } catch (e) { console.error('poll', e); }
 })();
