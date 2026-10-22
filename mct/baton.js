@@ -19,8 +19,12 @@
     const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
     const get = () => { try { return Number(localStorage.getItem('mct_bt_pop') || 0); } catch (e) { return Date.now(); } };
     const set = () => { try { localStorage.setItem('mct_bt_pop', String(Date.now())); } catch (e) {} };
+    let tries = 0;
     function popup() {
       if (Date.now() - get() < 24 * 3600000 || document.getElementById('btpop')) return;
+      // 22 oct 2026 (16h23, Jeremy): never for Premium players (prem.js sets window.MCTPREM once it knows)
+      if (typeof window.MCTPREM === 'undefined' && tries++ < 20) { setTimeout(popup, 500); return; }
+      if (window.MCTPREM) return;
       if (document.querySelector('#maint:not([hidden]), .maint:not([hidden])')) return;  // never over the maintenance screen
       set();
       const rtl = lang() === 'ar';
