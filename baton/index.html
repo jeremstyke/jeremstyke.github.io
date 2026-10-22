@@ -1035,8 +1035,21 @@ id:{shareP:'Undang seseorang ke timmu: +5 000 $BATON saat dia mengoper tongkat p
 ar:{shareP:'ادعُ شخصًا إلى فريقك: +5 000 $BATON عندما يمرّر أول عصا، و10 % من كل ما يربحه.',sNext:(x)=>'افتح اللعبة اليوم لتحصل على +'+x+' $BATON',sRule:(c,x)=>'افتح اللعبة مرة واحدة على الأقل يوميًا. إذا فاتك يوم تعود السلسلة إلى 1. تزداد المكافأة كل يوم حتى اليوم '+c+' (+'+x+').',mP:'Baton يعود خلال دقائق.',lTag:'احمل العصا، اربح $BATON، ومرّرها قبل انتهاء الوقت.',ruleExt:'🔒 تم تمديد عصاك: تبقى لك حتى انتهاء الوقت.',noFriends:'لا أحد في فريقك بعد. ادعُ شخصًا: +5 000 $BATON عندما يمرّر أول عصا.'},
 fa:{shareP:'کسی را به تیمت دعوت کن: +۵٬۰۰۰ $BATON وقتی اولین چوبش را رد کند، و ۱۰٪ از همه درآمدش.',sNext:(x)=>'امروز بازی را باز کن و +'+x+' $BATON بگیر',sRule:(c,x)=>'روزی حداقل یک بار بازی را باز کن. یک روز جا بیندازی، پیاپی از ۱ شروع می‌شود. پاداش هر روز بیشتر می‌شود تا روز '+c+' (+'+x+').',mP:'Baton تا چند دقیقه دیگر برمی‌گردد.',lTag:'چوب را نگه دار، $BATON بگیر، قبل از پایان زمان ردش کن.',ruleExt:'🔒 چوبت تمدید شد: تا پایان زمان مال توست.',noFriends:'هنوز کسی در تیمت نیست. کسی را دعوت کن: +۵٬۰۰۰ $BATON وقتی اولین چوبش را رد کند.'}
 };
+// 22 oct 2026 (14h58): nobody in the crew: the crew option is greyed out
+const X39 = {
+en:{crewNone:'Nobody in your crew yet'},
+fr:{crewNone:'Personne dans ton équipe pour l\'instant'},
+es:{crewNone:'Aún no hay nadie en tu equipo'},
+pt:{crewNone:'Ninguém na sua equipe ainda'},
+ru:{crewNone:'В твоей команде пока никого'},
+uk:{crewNone:'У твоїй команді поки нікого'},
+tr:{crewNone:'Ekibinde henüz kimse yok'},
+id:{crewNone:'Belum ada siapa pun di timmu'},
+ar:{crewNone:'لا أحد في فريقك بعد'},
+fa:{crewNone:'هنوز کسی در تیمت نیست'}
+};
 // 22 oct 2026: the newest texts win over the older X11 / X12 blocks defined further down
-for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33, X34, X35, X36, X37, X38]) for (const k in o) Object.assign(X[k], o[k]);
+for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33, X34, X35, X36, X37, X38, X39]) for (const k in o) Object.assign(X[k], o[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -1173,7 +1186,8 @@ $('#passBtn').onclick = () => {
   const pg = (m) => '+' + fmt(m === 5 ? S.pass_new : m === 3 ? S.pass_friend : S.pass_random);  // 22 oct 2026: fixed bonuses
   sheet('<h3>' + T('who') + '</h3><p class="foot" style="text-align:start;margin:0">' + T('passTip') + '</p>' +
     '<button class="opt" data-k="new"><span class="t"><b>' + T('newP') + '</b><span>' + T('newS') + '</span></span><span class="mult x5">' + pg(5) + '</span></button>' +
-    '<button class="opt" data-k="friend"><span class="t"><b>' + T('friendP') + '</b><span>' + T('friendS') + '</span></span><span class="mult">' + pg(3) + '</span></button>' +
+    (S.crew_n === 0 ? '<div class="opt" style="opacity:.45"><span class="t"><b>' + T('friendP') + '</b><span>' + T('crewNone') + '</span></span><span class="mult">' + pg(3) + '</span></div>'
+      : '<button class="opt" data-k="friend"><span class="t"><b>' + T('friendP') + '</b><span>' + T('friendS') + '</span></span><span class="mult">' + pg(3) + '</span></button>') +
     '<button class="opt" data-k="random"><span class="t"><b>' + T('randP') + '</b><span>' + T('randS') + '</span></span><span class="mult">' + pg(1) + '</span></button>' +
     '<button class="btn ghost" data-k="keep">' + T('keep') + '</button>');
 };
