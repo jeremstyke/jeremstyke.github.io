@@ -606,6 +606,20 @@ ar:{hold2:()=>'🌍 دورك! منجمك يعمل <b>x2</b>.',t2h:'عصا واح
 fa:{hold2:()=>'🌍 نوبت توست! معدنت <b>x2</b> کار می‌کند.',t2h:'یک چوب دور دنیا می‌چرخد',t2p:'در کل بازی فقط یک چوب هست. وقتی به تو برسد، معدنت ۲ برابر سریع‌تر است: ظرف یک ساعت ردش کن تا پاداش بگیری.',t3h:'دور را بزرگ کن',t3p:'هر دست مهم است. یک تازه‌وارد بیاور: پاداش x5.',fIn:'در این دور آن را داشته',ruleNone:'🔗 هر تازه‌واردی که با لینک تو بیاید ۵٬۰۰۰ $BATON + ۱۰٪ از استخراجش برایت می‌آورد.',ruleHold:(x)=>'🏃 چوب دست توست: اولین تازه‌واردی که با لینک تو بیاید آن را می‌گیرد و تو x5 می‌بری (+'+x+' $BATON).',chains:'پاس‌دهنده‌ها',miners:'معدنچی‌ها',wTour:(n)=>'🌍 <b>دور دنیا شمارهٔ '+n+'</b>',wAt:(n)=>'🏃 چوب الان دست <b>'+n+'</b> است.',wMe:'🏃 <b>چوب دست توست!</b>',wDone:(a,b)=>a+' / '+b+' بازیکن آن را داشته‌اند',wHeld:'✓ تو هم',wSoon:'نوبتت می‌رسد',wNone1:'هنوز نوبت تو نیست',wNone2:'وقتی کسی چوب را به تو بدهد می‌رسد. ربات خبرت می‌کند.',wNone2h:'در این دور آن را داشته‌ای. در دور بعد برمی‌گردد.',wReserve:(s)=>'⭐ رزرو نوبت · '+s+' ⭐',wQueued:(n)=>'⭐ رزرو شد · نفر '+n+' در صف',wPaid:'⭐ رزرو شد! چوب در پاس تصادفی بعدی به تو می‌رسد.',nPass:(n)=>n+' پاس'}
 };
 for (const k in X17) Object.assign(X[k], X17[k]);
+// 22 oct 2026 (Jeremy): amounts instead of multipliers
+const X18 = {
+en:{newS:'Send them your link. The biggest bonus.',friendS:'A friend who has not had it yet.',randS:'Any player who has not had it yet.',t3p:'Every hand counts. Bring someone new: the biggest bonus.',ruleHold:(x)=>'🏃 You hold the baton: the first newcomer who joins with your link takes it, and you win +'+x+' $BATON.'},
+fr:{newS:'Envoie-lui ton lien. Le plus gros bonus.',friendS:'Un ami qui ne l\'a pas encore eu.',randS:'Un joueur qui ne l\'a pas encore eu.',t3p:'Chaque main compte. Amène quelqu\'un de nouveau : le plus gros bonus.',ruleHold:(x)=>'🏃 Tu as le bâton : le premier nouveau qui arrive avec ton lien le récupère, et tu gagnes +'+x+' $BATON.'},
+es:{newS:'Envíale tu enlace. El bonus más grande.',friendS:'Un amigo que aún no lo tuvo.',randS:'Un jugador que aún no lo tuvo.',t3p:'Cada mano cuenta. Trae a alguien nuevo: el bonus más grande.',ruleHold:(x)=>'🏃 Tienes el bastón: el primer nuevo que llegue con tu enlace se lo queda y ganas +'+x+' $BATON.'},
+pt:{newS:'Mande seu link. O maior bônus.',friendS:'Um amigo que ainda não teve.',randS:'Um jogador que ainda não teve.',t3p:'Cada mão conta. Traga alguém novo: o maior bônus.',ruleHold:(x)=>'🏃 Você tem o bastão: o primeiro novato que chegar com seu link fica com ele, e você ganha +'+x+' $BATON.'},
+ru:{newS:'Отправь ему свою ссылку. Самый большой бонус.',friendS:'Другу, у которого её ещё не было.',randS:'Игроку, у которого её ещё не было.',t3p:'Каждая рука важна. Приведи новичка: самый большой бонус.',ruleHold:(x)=>'🏃 Эстафета у тебя: первый новичок по твоей ссылке забирает её, а ты получаешь +'+x+' $BATON.'},
+uk:{newS:'Надішли йому своє посилання. Найбільший бонус.',friendS:'Другові, у якого її ще не було.',randS:'Гравцеві, у якого її ще не було.',t3p:'Кожна рука важлива. Приведи новачка: найбільший бонус.',ruleHold:(x)=>'🏃 Естафета в тебе: перший новачок за твоїм посиланням забирає її, а ти отримуєш +'+x+' $BATON.'},
+tr:{newS:'Ona linkini gönder. En büyük bonus.',friendS:'Henüz tutmamış bir arkadaş.',randS:'Henüz tutmamış bir oyuncu.',t3p:'Her el önemli. Yeni birini getir: en büyük bonus.',ruleHold:(x)=>'🏃 Bayrak sende: linkinle gelen ilk yeni oyuncu onu alır ve sen +'+x+' $BATON kazanırsın.'},
+id:{newS:'Kirimi dia linkmu. Bonus terbesar.',friendS:'Teman yang belum pernah memegangnya.',randS:'Pemain yang belum pernah memegangnya.',t3p:'Setiap tangan berarti. Ajak orang baru: bonus terbesar.',ruleHold:(x)=>'🏃 Kamu pegang tongkat: pemain baru pertama lewat linkmu mengambilnya, dan kamu dapat +'+x+' $BATON.'},
+ar:{newS:'أرسل له رابطك. أكبر مكافأة.',friendS:'صديق لم يحملها بعد.',randS:'لاعب لم يحملها بعد.',t3p:'كل يد مهمة. ادعُ شخصًا جديدًا: أكبر مكافأة.',ruleHold:(x)=>'🏃 العصا معك: أول لاعب جديد عبر رابطك يأخذها، وتربح +'+x+' $BATON.'},
+fa:{newS:'لینکت را برایش بفرست. بزرگ‌ترین پاداش.',friendS:'دوستی که هنوز آن را نداشته.',randS:'بازیکنی که هنوز آن را نداشته.',t3p:'هر دست مهم است. یک تازه‌وارد بیاور: بزرگ‌ترین پاداش.',ruleHold:(x)=>'🏃 چوب دست توست: اولین تازه‌واردی که با لینک تو بیاید آن را می‌گیرد و تو +'+x+' $BATON می‌بری.'}
+};
+for (const k in X18) Object.assign(X[k], X18[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -736,9 +750,9 @@ $('#passBtn').onclick = () => {
   if (!S || !S.holding) return $('#invite').onclick();  // no baton in hand: the button invites a friend instead
   const pg = (m) => '<small class="pg">+' + fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * m) + '</small>';
   sheet('<h3>' + T('who') + '</h3><p class="foot" style="text-align:start;margin:0">' + T('passTip') + '</p>' +
-    '<button class="opt" data-k="new"><span class="t"><b>' + T('newP') + '</b><span>' + T('newS') + '</span></span><span class="mult x5">x5' + pg(5) + '</span></button>' +
-    '<button class="opt" data-k="friend"><span class="t"><b>' + T('friendP') + '</b><span>' + T('friendS') + '</span></span><span class="mult">x3' + pg(3) + '</span></button>' +
-    '<button class="opt" data-k="random"><span class="t"><b>' + T('randP') + '</b><span>' + T('randS') + '</span></span><span class="mult">x1' + pg(1) + '</span></button>' +
+    '<button class="opt" data-k="new"><span class="t"><b>' + T('newP') + '</b><span>' + T('newS') + '</span></span><span class="mult x5">' + amt(5) + '</span></button>' +
+    '<button class="opt" data-k="friend"><span class="t"><b>' + T('friendP') + '</b><span>' + T('friendS') + '</span></span><span class="mult">' + amt(3) + '</span></button>' +
+    '<button class="opt" data-k="random"><span class="t"><b>' + T('randP') + '</b><span>' + T('randS') + '</span></span><span class="mult">' + amt(1) + '</span></button>' +
     '<button class="btn ghost" data-k="keep">' + T('keep') + '</button>');
 };
 // 22 oct 2026: keep the baton in hand 4 h longer for 10 Stars (once per baton); the bot's webhook applies the payment
@@ -757,6 +771,8 @@ $('#extBtn').onclick = async () => {
     tg.openInvoice(r.link, (st) => { if (st === 'paid') { hap('ok'); toast(T('extOk')); setTimeout(refresh, 1500); setTimeout(refresh, 5000); } });
   } catch (e) { openLink(r.link); }
 };
+// 22 oct 2026 (Jeremy): show what a pass brings, not a multiplier
+const amt = (m) => '+' + fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * m);
 function confetti() {  // 22 oct 2026: a little party when the baton leaves your hands
   const cols = ['#2f8dff', '#7fd0ff', '#ffffff', '#ffb02e', '#4be3a0'];
   for (let i = 0; i < 46; i++) { const d = document.createElement('i'); d.className = 'cf'; d.style.left = Math.random() * 100 + 'vw'; d.style.background = cols[i % cols.length]; d.style.animationDelay = Math.random() * .4 + 's'; d.style.animationDuration = 1.2 + Math.random() * .9 + 's'; document.body.appendChild(d); setTimeout(() => d.remove(), 2600); }
@@ -771,7 +787,7 @@ async function doPass(kind, to) {
     toast(T('linkReady')); closeSheet(); setState(r.state); return;
   }
   hap('ok'); closeSheet(); setState(r.state); confetti();
-  toast(T('passed', fmt(r.gain), r.mult, r.to));
+  toast(T('passed', fmt(r.gain), r.mult, r.to).replace(/\s*\(x\d+\)\s*$/, ''));  // amounts only, no multipliers (22 oct 2026)
 }
 $('#sheet').onclick = async (e) => {
   const o = e.target.closest('[data-k]'); const f = e.target.closest('[data-f]');
@@ -786,7 +802,7 @@ $('#sheet').onclick = async (e) => {
     // 22 oct 2026: every friend is listed; those who already hold a baton or are already in this chain are shown greyed, with the reason
     const all = r.list || []; const list = all.filter((x) => !x.in_chain && !x.holding); const off = all.filter((x) => x.in_chain || x.holding);
     const offH = off.map((x) => '<div class="opt" style="opacity:.45;pointer-events:none"><span class="av" style="background:' + hueOf(x.name) + '">' + init(x.name) + '</span><span class="t"><b>' + esc(x.name) + '</b><span>' + (x.holding ? T('fBusy') : T('fIn')) + '</span></span></div>').join('');
-    sheet('<h3>' + T('pick') + '</h3>' + (list.length ? list.map((x) => '<button class="opt" data-f="' + x.id + '"><span class="av" style="background:' + hueOf(x.name) + '">' + init(x.name) + '</span><span class="t"><b>' + esc(x.name) + '</b><span>' + T('mined', fmt(x.mined)) + '</span></span><span class="mult">x3</span></button>').join('') + offH : '<div class="empty">' + T('noPick') + '</div><button class="opt" data-k="new"><span class="t"><b>' + T('newP') + '</b><span>' + T('newS') + '</span></span><span class="mult x5">x5</span></button>') + '<button class="btn ghost" data-k="keep">' + T('keep') + '</button>');
+    sheet('<h3>' + T('pick') + '</h3>' + (list.length ? list.map((x) => '<button class="opt" data-f="' + x.id + '"><span class="av" style="background:' + hueOf(x.name) + '">' + init(x.name) + '</span><span class="t"><b>' + esc(x.name) + '</b><span>' + T('mined', fmt(x.mined)) + '</span></span><span class="mult">' + amt(3) + '</span></button>').join('') + offH : '<div class="empty">' + T('noPick') + '</div><button class="opt" data-k="new"><span class="t"><b>' + T('newP') + '</b><span>' + T('newS') + '</span></span><span class="mult x5">' + amt(5) + '</span></button>') + '<button class="btn ghost" data-k="keep">' + T('keep') + '</button>');
     return;
   }
   doPass(k);
