@@ -298,6 +298,8 @@ nav.tabs button[aria-current="page"] svg{filter:drop-shadow(0 0 6px rgba(47,141,
 .score .big{max-width:100%;overflow-wrap:anywhere}
 #p-rank .big,#p-tasks .big,#p-friends .big{font-size:clamp(38px,12.5vw,60px);line-height:1.05}
 nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10.5px}
+/* 22 oct 2026 (Jeremy, 12h55): simpler game: no hands, no Stars extension, no baton video, no "longest trip", rankings by miners only */
+#extBtn,#vidBtn,#moreBat,#chainCard,.record,#sChains{display:none!important}
 </style>
 </head>
 <body>
@@ -311,6 +313,15 @@ nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:elli
   <main>
     <section class="panel" id="p-home">
       <div class="score"><small data-t="your"></small><div class="big num" id="bal">0</div><div class="rate num" id="rate"></div><div class="conv" data-t="conv"></div></div>
+
+<!-- 22 oct 2026 (Jeremy, 12h55): simpler game: the mine comes first; the baton card only shows when a baton is in hand -->
+      <div class="card" id="mineCard">
+        <h2 data-t="mine"></h2>
+        <div class="mineRow">
+          <div class="ring" id="ring" style="--p:0"><div><b class="num" id="ready">0</b><span data-t="ready"></span></div></div>
+          <div class="mineInfo"><strong id="lvl"></strong><span id="fillTxt"></span><button class="btn mint" id="harvest"></button></div>
+        </div>
+      </div>
 
       <div class="card batonCard" id="batonCard">
         <div class="batonRow">
@@ -328,13 +339,6 @@ nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:elli
         <div class="chain" id="chain"></div>
       </div>
 
-      <div class="card">
-        <h2 data-t="mine"></h2>
-        <div class="mineRow">
-          <div class="ring" id="ring" style="--p:0"><div><b class="num" id="ready">0</b><span data-t="ready"></span></div></div>
-          <div class="mineInfo"><strong id="lvl"></strong><span id="fillTxt"></span><button class="btn mint" id="harvest"></button></div>
-        </div>
-      </div>
 
       <div class="record"><span data-t="record"></span><b class="num" id="record">0</b></div>
       <p class="foot" data-t="airdrop"></p>
@@ -362,7 +366,7 @@ nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:elli
 
     <section class="panel" id="p-rank" hidden>
       <div class="score"><small data-t="week"></small><div class="big" data-t="ranks"></div></div>
-      <div class="seg"><button id="sChains" aria-pressed="true" data-t="chains"></button><button id="sMiners" aria-pressed="false" data-t="miners"></button></div>
+      <div class="seg"><button id="sChains" aria-pressed="false" data-t="chains"></button><button id="sMiners" aria-pressed="true" data-t="miners"></button></div>
       <div class="list" id="ranks"></div>
     </section>
   </main>
@@ -942,8 +946,21 @@ id:{boostBaton:'⚡ Tongkatmu sudah membuat tambang x2'},
 ar:{boostBaton:'⚡ عصاك تشغّل منجمك x2 بالفعل'},
 fa:{boostBaton:'⚡ چوبت همین الان معدنت را x2 می‌کند'}
 };
+// 22 oct 2026 (Jeremy, 12h55): simpler game: the mine first, the baton as a small bonus
+const X34 = {
+en:{hold1:'🏃 Someone passed you a baton!',hold2:()=>'Your mine runs <b>x2</b> while you hold it. Pass it on before the timer ends to win a bonus.'},
+fr:{hold1:'🏃 On t\'a passé un bâton !',hold2:()=>'Ta mine tourne <b>x2</b> tant que tu l\'as. Passe-le à ton tour avant la fin du chrono pour gagner un bonus.'},
+es:{hold1:'🏃 ¡Te pasaron un bastón!',hold2:()=>'Tu mina va <b>x2</b> mientras lo tengas. Pásalo antes de que acabe el tiempo para ganar un bonus.'},
+pt:{hold1:'🏃 Passaram um bastão para você!',hold2:()=>'Sua mina roda <b>x2</b> enquanto estiver com ele. Passe adiante antes do fim do tempo para ganhar um bônus.'},
+ru:{hold1:'🏃 Тебе передали эстафету!',hold2:()=>'Пока она у тебя, шахта работает <b>x2</b>. Передай её дальше до конца таймера и получи бонус.'},
+uk:{hold1:'🏃 Тобі передали естафету!',hold2:()=>'Поки вона в тебе, шахта працює <b>x2</b>. Передай її далі до кінця таймера й отримай бонус.'},
+tr:{hold1:'🏃 Sana bir bayrak devredildi!',hold2:()=>'Elinde olduğu sürece madenin <b>x2</b> çalışır. Süre bitmeden devret, bonus kazan.'},
+id:{hold1:'🏃 Kamu dapat tongkat!',hold2:()=>'Tambangmu jalan <b>x2</b> selama kamu memegangnya. Oper sebelum waktu habis untuk dapat bonus.'},
+ar:{hold1:'🏃 مرّر لك أحدهم عصا!',hold2:()=>'منجمك يعمل <b>x2</b> ما دامت معك. مرّرها قبل انتهاء الوقت لتربح مكافأة.'},
+fa:{hold1:'🏃 یکی چوب را به تو داد!',hold2:()=>'تا وقتی چوب دست توست معدنت <b>x2</b> کار می‌کند. قبل از پایان زمان ردش کن و پاداش بگیر.'}
+};
 // 22 oct 2026: the newest texts win over the older X11 / X12 blocks defined further down
-for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33]) for (const k in o) Object.assign(X[k], o[k]);
+for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33, X34]) for (const k in o) Object.assign(X[k], o[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -990,14 +1007,14 @@ function render() {
   // baton
   const c = $('#batonCard');
   if (S.holding) {
-    c.classList.remove('off');
+    c.classList.remove('off'); c.hidden = false;
     $('#holdT').textContent = T('hold1'); $('#holdP').innerHTML = T('hold2', Math.round(S.hold_h)) + '<small class="tip">' + T('holdTip', fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * 5)) + '</small>';
     $('#passBtn').hidden = false; $('#passBtn').textContent = '→  ' + T('pass');
     $('#extBtn').hidden = !!S.batons[0].extended || !S.ext_stars; $('#extBtn').textContent = T('ext', S.ext_h || 4, S.ext_stars || 10);
     { const nv = S.batons[0].vids || 0; $('#vidBtn').hidden = nv >= 4 || !(tg && tg.initData); $('#vidBtn').textContent = T('vid', nv, 4); }  // 22 oct 2026: +1 h per video, 4 per baton
     $('#moreBat').hidden = S.batons.length < 2; $('#moreBat').textContent = T('more', S.batons.length - 1);
   } else {
-    c.classList.add('off'); $('#holdT').textContent = T('none1'); $('#holdP').textContent = T('none2'); $('#timer').textContent = ''; $('#extBtn').hidden = true; $('#vidBtn').hidden = true; $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
+    c.classList.add('off'); c.hidden = true; $('#holdT').textContent = T('none1'); $('#holdP').textContent = T('none2'); $('#timer').textContent = ''; $('#extBtn').hidden = true; $('#vidBtn').hidden = true; $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
   }
   $('#dotHome').hidden = !S.holding;
   $('#invRule').textContent = !S.holding ? T('ruleNone') : S.batons[0].extended ? T('ruleExt') : T('ruleHold', fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * 5));
@@ -1023,7 +1040,7 @@ function render() {
     { k: 'tank', t: T('tank'), s: S.costs.next_tank != null ? T('tankS', S.tank_h, S.costs.next_tank) : '', c: S.costs.tank },
     { k: 'grip', t: T('grip'), s: S.costs.grip != null ? T('gripS', S.hold_h, S.hold_h + 1) : '', c: S.costs.grip }];
   $('#lvBig').textContent = T('lvShort', S.drill); $('#rate2').textContent = S.rate + ' $BATON ' + T('perH');
-  $('#upg').innerHTML = up.filter((u) => u.k === 'drill' || S.drill >= 3).map((u) => '<div class="row"><div class="t"><b>' + u.t + '</b><span>' + esc(u.s || T('max')) + '</span></div>' + (u.c == null ? '<button class="sm done" disabled>' + T('max') + '</button>' : '<button class="sm" data-up="' + u.k + '"' + (S.pts < u.c ? ' disabled' : '') + '>' + fmt(u.c) + '</button>') + '</div>').join('') + (S.drill < 3 ? '<p class="foot">🔒 ' + T('unlock') + '</p>' : '');
+  $('#upg').innerHTML = up.filter((u) => u.k !== 'grip' && (u.k === 'drill' || S.drill >= 3)).map((u) => '<div class="row"><div class="t"><b>' + u.t + '</b><span>' + esc(u.s || T('max')) + '</span></div>' + (u.c == null ? '<button class="sm done" disabled>' + T('max') + '</button>' : '<button class="sm" data-up="' + u.k + '"' + (S.pts < u.c ? ' disabled' : '') + '>' + fmt(u.c) + '</button>') + '</div>').join('') + (S.drill < 3 ? '<p class="foot">🔒 ' + T('unlock') + '</p>' : '');
   // tasks
   const trow = (t) => '<div class="row"><div class="t"><b>' + esc(t.title) + '</b><span>' + esc(t.sub || '') + '</span></div><span class="r">+' + fmt(t.reward) + '</span>' + (t.done ? '<button class="sm done" disabled>' + T('done') + '</button>' : '<button class="sm" data-task="' + t.id + '" data-url="' + esc(t.url || '') + '">' + (opened[t.id] ? T('claim') : T('go')) + '</button>') + '</div>';
   const srow = (t) => '<div class="row' + (t.done ? ' on' : '') + '"><div class="t"><b>' + esc(t.title) + '</b><span>' + T('subS', t.perk || 10) + (t.done ? '' : ' · +' + fmt(t.reward) + ' $BATON') + '</span></div>' + (t.done ? '<span class="pill">✓ ' + T('active') + '</span>' : '<button class="sm" data-task="' + t.id + '" data-url="' + esc(t.url || '') + '">' + (opened[t.id] ? T('claim') : T('go')) + '</button>') + '</div>';
@@ -1163,7 +1180,7 @@ async function loadFriends() {
   const tot = '<div class="record crewtot"><span>' + T('crewEarned') + '<small>' + T('crewSplit', fmt((r.earned_total || 0) - (r.earned_ref || 0)), fmt(r.earned_ref || 0)) + '</small></span><b class="num">+' + fmt(r.earned_total || 0) + '</b></div>';
   $('#friends').innerHTML = tot + (r.list.length ? r.list.map((x) => '<div class="row" data-pid="' + x.id + '"><span class="av" style="background:' + hueOf(x.name) + '">' + init(x.name) + '</span><div class="t"><b>' + esc(x.name) + '</b><span>' + (x.sponsor ? T('sponsor') : x.holding ? T('holding') : T('mined', fmt(x.mined))) + '</span></div>' + (x.earned ? '<span class="r">+' + fmt(x.earned) + '</span>' : '') + '</div>').join('') : '<div class="empty">' + T('noFriends') + '</div>');
 }
-let rankMode = 'chains';
+let rankMode = 'miners';  // 22 oct 2026: simpler game, the miners ranking only
 async function loadRanks() {
   const r = await api('ranks'); if (!r.ok) return;
   const rows = rankMode === 'chains'
