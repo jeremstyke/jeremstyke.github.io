@@ -1115,8 +1115,9 @@ id:{chains:'Tim',miners:'Pemain',recr:(n)=>n+' rekrutan',teamsS:'Teman undangan 
 ar:{chains:'الفرق',miners:'اللاعبون',recr:(n)=>n+' مجندين',teamsS:'أصدقاء مدعوون مرّروا أول عصا هذا الأسبوع.',teamsNo:'لا مجندين هذا الأسبوع بعد. كن الأول!'},
 fa:{chains:'تیم‌ها',miners:'بازیکنان',recr:(n)=>n+' عضو جدید',teamsS:'دوستان دعوت‌شده‌ای که این هفته اولین چوبشان را رد کردند.',teamsNo:'هنوز این هفته عضو جدیدی نیست. اولین باش!'}
 };
+const X43 = {en:{subS:(n)=>'+'+n+' % earnings while subscribed',doneH:'✅ Already done'}, fr:{subS:(n)=>'+'+n+' % de gains tant que tu es abonné',doneH:'✅ Déjà faites'}, es:{subS:(n)=>'+'+n+' % de ganancias mientras sigas suscrito',doneH:'✅ Ya hechas'}, pt:{subS:(n)=>'+'+n+' % de ganhos enquanto seguir inscrito',doneH:'✅ Já feitas'}, ru:{subS:(n)=>'+'+n+' % к заработку, пока ты подписан',doneH:'✅ Уже выполнено'}, uk:{subS:(n)=>'+'+n+' % до заробітку, поки ти підписаний',doneH:'✅ Уже виконано'}, tr:{subS:(n)=>'Abone kaldıkça kazancına +'+n+' %',doneH:'✅ Tamamlananlar'}, id:{subS:(n)=>'+'+n+' % hasil selama berlangganan',doneH:'✅ Sudah selesai'}, ar:{subS:(n)=>'+'+n+' % أرباح ما دمت مشتركًا',doneH:'✅ تمّت بالفعل'}, fa:{subS:(n)=>'+'+n+' % درآمد تا وقتی عضو هستی',doneH:'✅ انجام‌شده'}};  // 22 oct 2026 (17h06): done tasks at the bottom
 // 22 oct 2026: the newest texts win over the older X11 / X12 blocks defined further down
-for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33, X34, X35, X36, X37, X38, X39, X40, X41, X42]) for (const k in o) Object.assign(X[k], o[k]);
+for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33, X34, X35, X36, X37, X38, X39, X40, X41, X42, X43]) for (const k in o) Object.assign(X[k], o[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -1204,9 +1205,11 @@ function render() {
   const sec = (h, list, f) => list.length ? '<div class="sec">' + h + '</div>' + list.map(f).join('') : '';
   // 21 oct 2026: tasks still to do come first (newest first), and a block with something to do goes above the finished ones
   const srt = (l) => l.sort((x, y) => (x.done - y.done) || (y.id - x.id));
-  const secs = [[T('daily'), srt(dl), trow], ['📢 ' + T('subs'), srt(sb), srow], [T('once'), srt(on1.filter((t) => !t.done)), trow]];  // one-time tasks already done disappear
-  secs.sort((x, y) => x[1].every((t) => t.done) - y[1].every((t) => t.done));
-  $('#tasks').innerHTML = secs.map((z) => sec(z[0], z[1], z[2])).join('');
+  // 22 oct 2026 (17h06, Jeremy): what is left to do first, everything already done at the very bottom
+  const todo = (l) => srt(l.filter((t) => !t.done));
+  const secs = [[T('daily'), todo(dl), trow], ['📢 ' + T('subs'), todo(sb), srow], [T('once'), todo(on1), trow]];
+  const doneL = srt(S.tasks.filter((t) => t.done));
+  $('#tasks').innerHTML = secs.map((z) => sec(z[0], z[1], z[2])).join('') + sec(T('doneH'), doneL, (t) => (t.kind === 'join' ? srow(t) : trow(t)));
   { const vt = $('#vidTask'), nv = S.vids_day || 0, mv = S.vids_max || 10, full = nv >= mv;  // 22 oct 2026: +100 $BATON per video, 10 a day
     vt.hidden = !(tg && tg.initData) || S.vids_max == null;  // 22 oct 2026 (16h20, Jeremy): 5 videos a day
     vt.innerHTML = '<div class="row"><div class="t"><b>' + T('vtH') + '</b><span>' + T('vtS', nv, mv) + '</span></div><span class="r">+' + fmt(S.vid_reward || 100) + '</span>' + (full ? '<button class="sm done" disabled>' + T('vtTm') + '</button>' : '<button class="sm" id="vtBtn">' + T('vtGo') + '</button>') + '</div>';
