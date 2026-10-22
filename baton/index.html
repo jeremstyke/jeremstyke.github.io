@@ -594,11 +594,24 @@ ar:{friendP:'شخص من فريقك',friendS:'عضو في فريقك ليس مع
 fa:{friendP:'کسی از تیمت',friendS:'عضوی از تیمت که چوب ندارد و این یکی را هم نداشته.',pick:'از تیمت انتخاب کن',eBusy:'این عضو تیمت از قبل چوب دارد.',noPick:'هیچ‌کس در تیمت نمی‌تواند آن را بگیرد (قبلاً داشته‌اند یا الان دارند). یک تازه‌وارد دعوت کن!'}
 };
 for (const k in X23) Object.assign(X[k], X23[k]);
+// 22 oct 2026 (Jeremy): "crew" everywhere instead of "friends"
+const X24 = {
+en:{tFriends:'Crew',invite:'Invite to your crew · +5,000',noFriends:'No one in your crew yet. Invite someone: +5,000 $BATON at their first harvest.',linkReady:'Link ready: send it to someone who does not play yet',nobody:'No runner available right now, try your crew or someone new',passNow:'Pass the baton',shareP:'Invite someone to your crew: they start with your baton and you get 10 % of everything they mine.'},
+fr:{tFriends:'Équipe',invite:'Inviter dans ton équipe · +5 000',noFriends:'Personne dans ton équipe pour l\'instant. Invites-en un : +5 000 $BATON à sa première récolte.',linkReady:'Lien prêt : envoie-le à quelqu\'un qui ne joue pas encore',nobody:'Aucun coureur dispo pour l\'instant, essaie ton équipe ou quelqu\'un de nouveau',passNow:'Passer le bâton',shareP:'Invite quelqu\'un dans ton équipe : il démarre avec ton bâton et tu touches 10 % de tout ce qu\'il mine.'},
+es:{tFriends:'Equipo',invite:'Invitar a tu equipo · +5 000',noFriends:'Aún no hay nadie en tu equipo. Invita a alguien: +5 000 $BATON en su primera recolección.',linkReady:'Enlace listo: envíalo a alguien que aún no juega',nobody:'No hay corredores disponibles ahora, prueba con tu equipo o alguien nuevo',passNow:'Pasar el bastón',shareP:'Invita a alguien a tu equipo: empieza con tu bastón y ganas el 10 % de todo lo que mine.'},
+pt:{tFriends:'Equipe',invite:'Convidar para sua equipe · +5 000',noFriends:'Ninguém na sua equipe ainda. Convide alguém: +5 000 $BATON na primeira coleta dele.',linkReady:'Link pronto: mande para alguém que ainda não joga',nobody:'Nenhum corredor disponível agora, tente sua equipe ou alguém novo',passNow:'Passar o bastão',shareP:'Convide alguém para sua equipe: ele começa com seu bastão e você ganha 10 % de tudo o que ele minerar.'},
+ru:{tFriends:'Команда',invite:'Пригласить в команду · +5 000',noFriends:'В твоей команде пока никого. Пригласи кого-нибудь: +5 000 $BATON после его первого сбора.',linkReady:'Ссылка готова: отправь её тому, кто ещё не играет',nobody:'Сейчас нет свободных игроков, попробуй свою команду или новичка',passNow:'Передать эстафету',shareP:'Пригласи кого-нибудь в команду: он начнёт с твоей эстафетой, а ты получишь 10 % от всей его добычи.'},
+uk:{tFriends:'Команда',invite:'Запросити в команду · +5 000',noFriends:'У твоїй команді поки нікого. Запроси когось: +5 000 $BATON після його першого збору.',linkReady:'Посилання готове: надішли його тому, хто ще не грає',nobody:'Зараз немає вільних гравців, спробуй свою команду або новачка',passNow:'Передати естафету',shareP:'Запроси когось у команду: він почне з твоєю естафетою, а ти отримаєш 10 % від усього його видобутку.'},
+tr:{tFriends:'Ekip',invite:'Ekibine davet et · +5 000',noFriends:'Ekibinde henüz kimse yok. Birini davet et: ilk toplamasında +5 000 $BATON.',linkReady:'Link hazır: henüz oynamayan birine gönder',nobody:'Şu an uygun oyuncu yok, ekibini ya da yeni birini dene',passNow:'Bayrağı devret',shareP:'Ekibine birini davet et: senin bayrağınla başlar ve kazdığı her şeyin %10\'u senin olur.'},
+id:{tFriends:'Tim',invite:'Undang ke timmu · +5 000',noFriends:'Belum ada anggota tim. Undang seseorang: +5 000 $BATON saat panen pertamanya.',linkReady:'Link siap: kirim ke orang yang belum bermain',nobody:'Belum ada pemain tersedia, coba timmu atau orang baru',passNow:'Oper tongkat',shareP:'Undang seseorang ke timmu: dia mulai dengan tongkatmu dan kamu dapat 10 % dari semua hasil tambangnya.'},
+ar:{tFriends:'الفريق',invite:'ادعُ إلى فريقك · +5 000',noFriends:'لا أحد في فريقك بعد. ادعُ شخصًا: +5 000 $BATON عند أول جمع له.',linkReady:'الرابط جاهز: أرسله لشخص لا يلعب بعد',nobody:'لا يوجد لاعب متاح الآن، جرّب فريقك أو شخصًا جديدًا',passNow:'مرّر العصا',shareP:'ادعُ شخصًا إلى فريقك: يبدأ بعصاك وتحصل على 10 % من كل ما يعدّنه.'},
+fa:{tFriends:'تیم',invite:'دعوت به تیمت · +5 000',noFriends:'هنوز کسی در تیمت نیست. یکی را دعوت کن: ۵٬۰۰۰ $BATON در اولین برداشتش.',linkReady:'لینک آماده است: برای کسی بفرست که هنوز بازی نمی‌کند',nobody:'الان بازیکنی در دسترس نیست، تیمت یا یک تازه‌وارد را امتحان کن',passNow:'چوب را رد کن',shareP:'کسی را به تیمت دعوت کن: با چوب تو شروع می‌کند و ۱۰٪ از همهٔ استخراجش مال توست.'}
+};
 // 22 oct 2026 (Jeremy): full FAQ behind the "?" button (the tutorial stays one tap away)
 const FAQ = {
 en:{h:'Help',tuto:'▶ Replay the tutorial',more:'Another question? Write to us:',q:[
 ['What is Baton?','A Telegram game: you mine $BATON points and you pass batons from hand to hand.'],
-['How do I earn $BATON?','Harvest your mine, pass batons, do the tasks, invite friends (you get 10 % of what they mine) and keep your daily streak.'],
+['How do I earn $BATON?','Harvest your mine, pass batons, do the tasks, grow your crew (you get 10 % of what they mine) and keep your daily streak.'],
 ['Why did my mine stop?','It fills up in 4 h, then waits for you. Harvest it to start it again.'],
 ['How do I get a baton?','You get one every day when you open the game, if your hands are free. Someone can also pass you theirs.'],
 ['What does a baton do?','While you hold it, your mine runs 2× faster. You have 4 h to pass it.'],
@@ -607,7 +620,7 @@ en:{h:'Help',tuto:'▶ Replay the tutorial',more:'Another question? Write to us:
 ['What if I do not pass it?','When the timer hits zero, you drop the baton: its trip ends and you get no bonus.'],
 ['Why can I not pick someone from my crew?','They already hold a baton or already held this one. Send your link to someone new instead.'],
 ['Can I keep my baton longer?','Yes: +4 h for 10 ⭐, once per baton.'],
-['What do I get for inviting a friend?','5,000 $BATON at their first harvest and 10 % of everything they mine. If they join while you hold a baton, they take it and you get the x5 bonus.'],
+['What do I get for inviting someone to my crew?','5,000 $BATON at their first harvest and 10 % of everything they mine. If they join while you hold a baton, they take it and you get the x5 bonus.'],
 ['What is the % bonus?','+1 % mining per hand of the baton you started, as long as it is travelling (up to +100 %), and +10 % for each Telegram channel you join, as long as you stay subscribed.'],
 ['What are upgrades?','The drill makes you mine faster. The tank (a mine that lasts longer) and the grip (a baton kept longer) unlock at drill level 3.'],
 ['What is the 🔥 streak?','Harvest every day: each day in a row adds a bonus.'],
@@ -615,7 +628,7 @@ en:{h:'Help',tuto:'▶ Replay the tutorial',more:'Another question? Write to us:
 ['Are $BATON worth money?','They are points. An airdrop is planned: they would be turned into tokens based on your share of all points. No date or value is guaranteed.']]},
 fr:{h:'Aide',tuto:'▶ Revoir le tutoriel',more:'Une autre question ? Écris-nous :',q:[
 ['C\'est quoi Baton ?','Un jeu Telegram : tu mines des points $BATON et tu fais passer des bâtons de main en main.'],
-['Comment je gagne des $BATON ?','Récolte ta mine, passe des bâtons, fais les tâches, invite des amis (tu touches 10 % de ce qu\'ils minent) et garde ta série quotidienne.'],
+['Comment je gagne des $BATON ?','Récolte ta mine, passe des bâtons, fais les tâches, agrandis ton équipe (tu touches 10 % de ce qu\'ils minent) et garde ta série quotidienne.'],
 ['Pourquoi ma mine s\'est arrêtée ?','Elle se remplit en 4 h, puis elle t\'attend. Récolte-la pour la relancer.'],
 ['Comment j\'ai un bâton ?','Tu en reçois un chaque jour en ouvrant le jeu, si tu n\'en tiens pas déjà un. Quelqu\'un peut aussi te passer le sien.'],
 ['À quoi sert le bâton ?','Tant que tu l\'as, ta mine va 2× plus vite. Tu as 4 h pour le passer.'],
@@ -624,7 +637,7 @@ fr:{h:'Aide',tuto:'▶ Revoir le tutoriel',more:'Une autre question ? Écris-nou
 ['Et si je ne le passe pas ?','Quand le chrono arrive à zéro, tu laisses tomber le bâton : son voyage s\'arrête et tu n\'as pas de bonus.'],
 ['Pourquoi je ne peux pas choisir quelqu\'un de mon équipe ?','Il tient déjà un bâton ou il a déjà tenu celui-ci. Envoie plutôt ton lien à quelqu\'un de nouveau.'],
 ['Je peux garder mon bâton plus longtemps ?','Oui : +4 h pour 10 ⭐, une fois par bâton.'],
-['Qu\'est-ce que je gagne en invitant un ami ?','5 000 $BATON à sa première récolte et 10 % de tout ce qu\'il mine. S\'il arrive pendant que tu tiens un bâton, il le prend et tu gagnes le bonus x5.'],
+['Qu\'est-ce que je gagne en invitant quelqu\'un dans mon équipe ?','5 000 $BATON à sa première récolte et 10 % de tout ce qu\'il mine. S\'il arrive pendant que tu tiens un bâton, il le prend et tu gagnes le bonus x5.'],
 ['C\'est quoi le bonus en % ?','+1 % de minage par main du bâton que tu as lancé, tant qu\'il voyage (jusqu\'à +100 %), et +10 % par chaîne Telegram rejointe, tant que tu restes abonné.'],
 ['C\'est quoi les améliorations ?','La foreuse te fait miner plus vite. Le réservoir (mine qui dure plus longtemps) et la poignée (bâton gardé plus longtemps) se débloquent au niveau 3 de la foreuse.'],
 ['C\'est quoi la série 🔥 ?','Récolte chaque jour : chaque jour d\'affilée ajoute un bonus.'],
@@ -800,7 +813,7 @@ fa:{ruleHold:(x)=>'🏃 چوب دست توست: اولین تازه‌واردی
 };
 for (const k in X12) Object.assign(X[k], X12[k]);
 // 22 oct 2026: the newest texts win over the older X11 / X12 blocks defined further down
-for (const o of [X19, X20, X21, X22, X23]) for (const k in o) Object.assign(X[k], o[k]);
+for (const o of [X19, X20, X21, X22, X23, X24]) for (const k in o) Object.assign(X[k], o[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
