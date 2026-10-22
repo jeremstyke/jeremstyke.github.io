@@ -1137,7 +1137,9 @@ fa:{conv:'🛒 ۱ میلیون $BATON = ۱ $ USDT · فروشگاه',airdrop:'�
 };
 const X45 = {en:{tcGo:'👛 Connect my wallet',tcOn:'👛 Wallet connected'}, fr:{tcGo:'👛 Connecter mon wallet',tcOn:'👛 Wallet connecté'}, es:{tcGo:'👛 Conectar mi wallet',tcOn:'👛 Wallet conectada'}, pt:{tcGo:'👛 Conectar minha wallet',tcOn:'👛 Wallet conectada'}, ru:{tcGo:'👛 Подключить кошелёк',tcOn:'👛 Кошелёк подключён'}, uk:{tcGo:'👛 Підключити гаманець',tcOn:'👛 Гаманець підключено'}, tr:{tcGo:'👛 Cüzdanımı bağla',tcOn:'👛 Cüzdan bağlandı'}, id:{tcGo:'👛 Hubungkan wallet',tcOn:'👛 Wallet terhubung'}, ar:{tcGo:'👛 اربط محفظتي',tcOn:'👛 المحفظة مربوطة'}, fa:{tcGo:'👛 اتصال کیف پول',tcOn:'👛 کیف پول وصل شد'}};  // 22 oct 2026 (17h39): TON Connect
 // 22 oct 2026: the newest texts win over the older X11 / X12 blocks defined further down
-for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33, X34, X35, X36, X37, X38, X39, X40, X41, X42, X43, X44, X45]) for (const k in o) Object.assign(X[k], o[k]);
+// 22 oct 2026 (18h20, Jeremy): the Tasks video has no daily limit, one every 10 minutes
+const X46 = {en:{vtU:'Unlimited · one every 10 min',vtW:(t)=>'⏳ '+t}, fr:{vtU:'Illimité · une toutes les 10 min',vtW:(t)=>'⏳ '+t}, es:{vtU:'Ilimitado · uno cada 10 min',vtW:(t)=>'⏳ '+t}, pt:{vtU:'Ilimitado · um a cada 10 min',vtW:(t)=>'⏳ '+t}, ru:{vtU:'Без лимита · раз в 10 мин',vtW:(t)=>'⏳ '+t}, uk:{vtU:'Без ліміту · раз на 10 хв',vtW:(t)=>'⏳ '+t}, tr:{vtU:'Sınırsız · 10 dakikada bir',vtW:(t)=>'⏳ '+t}, id:{vtU:'Tanpa batas · satu tiap 10 menit',vtW:(t)=>'⏳ '+t}, ar:{vtU:'بلا حدود · فيديو كل 10 دقائق',vtW:(t)=>'⏳ '+t}, fa:{vtU:'نامحدود · هر ۱۰ دقیقه یکی',vtW:(t)=>'⏳ '+t}};
+for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33, X34, X35, X36, X37, X38, X39, X40, X41, X42, X43, X44, X45, X46]) for (const k in o) Object.assign(X[k], o[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -1232,9 +1234,11 @@ function render() {
   // 22 oct 2026 (17h11, Jeremy): the tasks already done sit at the bottom in a closed list you can open, with what they earned
   const doneL = srt(on1.concat(dl).filter((t) => t.done)), wasOpen = !!document.querySelector('.doneBox[open]');  // a refresh keeps it open
   $('#tasks').innerHTML = secs.map((z) => sec(z[0], z[1], z[2])).join('') + (doneL.length ? '<details class="doneBox"' + (wasOpen ? ' open' : '') + '><summary><span>' + T('doneH') + ' (' + doneL.length + ')</span><b>' + T('tEarn', fmt(S.tasks_earned || 0)) + '</b></summary>' + doneL.map(trow).join('') + '</details>' : '');
-  { const vt = $('#vidTask'), nv = S.vids_day || 0, mv = S.vids_max || 10, full = nv >= mv;  // 22 oct 2026: +100 $BATON per video, 10 a day
+  { const vt = $('#vidTask'), nv = S.vids_day || 0, mv = S.vids_max || 10, vw = () => Math.ceil((S.vid_next || 0) - Date.now() / 1000), full = vw() > 0;  // 18h20: one every 10 min, no limit
+    const mmss = (s) => Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');  // 22 oct 2026: +100 $BATON per video, 10 a day
     vt.hidden = !(tg && tg.initData) || S.vids_max == null;  // 22 oct 2026 (16h20, Jeremy): 5 videos a day
-    vt.innerHTML = '<div class="row"><div class="t"><b>' + T('vtH') + '</b><span>' + T('vtS', nv, mv) + '</span></div><span class="r">+' + fmt(S.vid_reward || 100) + '</span>' + (full ? '<button class="sm done" disabled>' + T('vtTm') + '</button>' : '<button class="sm" id="vtBtn">' + T('vtGo') + '</button>') + '</div>';
+    vt.innerHTML = '<div class="row"><div class="t"><b>' + T('vtH') + '</b><span>' + T('vtU') + '</span></div><span class="r">+' + fmt(S.vid_reward || 100) + '</span>' + (full ? '<button class="sm done" disabled>' + T('vtW', mmss(vw())) + '</button>' : '<button class="sm" id="vtBtn">' + T('vtGo') + '</button>') + '</div>';
+    clearInterval(window.__vtI); if (full) window.__vtI = setInterval(() => { const bb = vt.querySelector('button'); if (!bb) return clearInterval(window.__vtI); const s = vw(); if (s > 0) { bb.textContent = T('vtW', mmss(s)); return; } clearInterval(window.__vtI); bb.outerHTML = '<button class="sm" id="vtBtn">' + T('vtGo') + '</button>'; window.__vt = true; }, 1000);
     window.__vt = !vt.hidden && !full; }
   $('#dotTasks').hidden = !S.tasks.some((t) => !t.done) && !window.__adt && !window.__vt;  // 22 oct 2026: an Adsgram task waiting also lights the dot
   $('#nFriends').textContent = fmt(S.friends);
