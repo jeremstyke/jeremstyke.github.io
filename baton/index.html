@@ -126,6 +126,15 @@ nav.tabs svg{width:23px;height:23px}
 .burst{animation:pop .5s ease-out}
 @keyframes pop{30%{transform:scale(1.08)}}
 .foot{font-size:12px;color:var(--mute);text-align:center;padding-top:4px}
+/* 22 oct 2026: player profile */
+[data-pid]:not([data-pid=""]){cursor:pointer}
+.phead{display:flex;align-items:center;gap:14px}.phead .av{width:60px;height:60px;border-radius:30px;font-size:22px;overflow:hidden}.phead .av img{width:100%;height:100%;object-fit:cover}
+.phead .t{display:flex;flex-direction:column;gap:4px;min-width:0}.phead b{font-size:20px;overflow-wrap:anywhere}.phead span{font-size:13px;color:var(--mute)}
+.ptag{display:inline-block;padding:2px 8px;border-radius:10px;background:rgba(47,141,255,.18);color:#9fd0ff;font-size:12px;font-weight:700;margin-inline-end:6px}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.pst{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:14px;background:rgba(47,141,255,.08);border:1px solid rgba(80,150,255,.22);min-width:0}.pst b{font-size:18px}.pst span{font-size:12px;color:var(--mute)}
+.phold{text-align:center;font-size:14px;font-weight:700;padding:6px 0}
+.pachh{display:flex;justify-content:space-between;font-weight:800;font-size:15px;padding-top:4px}.pachh span{color:var(--mute);font-weight:700}
+.pach{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.pa{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;border-radius:14px;background:rgba(47,141,255,.1);border:1px solid rgba(80,150,255,.28);text-align:center;font-size:11px;line-height:1.25}.pa i{font-style:normal;font-size:24px}.pa.off{opacity:.35;filter:grayscale(1)}
 .foot a{color:var(--mute)}
 [dir="rtl"] .bar{background:linear-gradient(270deg,var(--baton),var(--flame))}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -825,8 +834,21 @@ id:{ruleHold:()=>'🏃 Kamu pegang tongkat: untuk memberikannya ke orang baru, k
 ar:{ruleHold:()=>'🏃 معك عصا: لتعطيها لشخص جديد، اضغط «مرّر العصا» ثم «شخص جديد» (أكبر مكافأة).'},
 fa:{ruleHold:()=>'🏃 چوب دست توست: برای دادنش به یک تازه‌وارد، «چوب را رد کن» و بعد «یک تازه‌وارد» را بزن (بزرگ‌ترین پاداش).'}
 };
+// 22 oct 2026 (Jeremy): player profiles (tap a player anywhere)
+const X26 = {
+en:{pYou:'That\'s you',pCrew:'In your crew',pSince:(d)=>'Playing since '+d+'',pEarned:'$BATON earned',pPasses:'Batons passed',pTrip:'Longest trip of his baton',pTeam:'Players invited',pWeek:'Rank this week',pStreak:'Day streak',pHold:'🏃 Holding a baton right now',pNoHold:'No baton in hand right now',pAch:'Achievements',a1:'First pass',a2:'10 batons passed',a3:'A baton at 10 hands',a4:'A baton at 25 hands',a5:'First player invited',a6:'10 players invited',a7:'7 days in a row',a8:'Weekly podium',a9:'Drill level 5',a10:'100,000 $BATON',a11:'10 batons held'},
+fr:{pYou:'C\'est toi',pCrew:'Dans ton équipe',pSince:(d)=>'Joue depuis le '+d+'',pEarned:'$BATON gagnés',pPasses:'Bâtons passés',pTrip:'Plus long voyage de son bâton',pTeam:'Joueurs invités',pWeek:'Classement de la semaine',pStreak:'Jours d\'affilée',pHold:'🏃 A un bâton en ce moment',pNoHold:'Pas de bâton en main en ce moment',pAch:'Succès',a1:'Première passe',a2:'10 bâtons passés',a3:'Un bâton à 10 mains',a4:'Un bâton à 25 mains',a5:'Premier joueur invité',a6:'10 joueurs invités',a7:'7 jours d\'affilée',a8:'Podium de la semaine',a9:'Foreuse niveau 5',a10:'100 000 $BATON',a11:'10 bâtons tenus'},
+es:{pYou:'Eres tú',pCrew:'En tu equipo',pSince:(d)=>'Juega desde el '+d+'',pEarned:'$BATON ganados',pPasses:'Bastones pasados',pTrip:'Viaje más largo de su bastón',pTeam:'Jugadores invitados',pWeek:'Puesto esta semana',pStreak:'Días seguidos',pHold:'🏃 Tiene un bastón ahora mismo',pNoHold:'Sin bastón en mano ahora',pAch:'Logros',a1:'Primer pase',a2:'10 bastones pasados',a3:'Un bastón a 10 manos',a4:'Un bastón a 25 manos',a5:'Primer jugador invitado',a6:'10 jugadores invitados',a7:'7 días seguidos',a8:'Podio semanal',a9:'Taladro nivel 5',a10:'100 000 $BATON',a11:'10 bastones tenidos'},
+pt:{pYou:'É você',pCrew:'Na sua equipe',pSince:(d)=>'Joga desde '+d+'',pEarned:'$BATON ganhos',pPasses:'Bastões passados',pTrip:'Viagem mais longa do bastão dele',pTeam:'Jogadores convidados',pWeek:'Posição da semana',pStreak:'Dias seguidos',pHold:'🏃 Está com um bastão agora',pNoHold:'Sem bastão na mão agora',pAch:'Conquistas',a1:'Primeiro passe',a2:'10 bastões passados',a3:'Um bastão com 10 mãos',a4:'Um bastão com 25 mãos',a5:'Primeiro jogador convidado',a6:'10 jogadores convidados',a7:'7 dias seguidos',a8:'Pódio da semana',a9:'Broca nível 5',a10:'100 000 $BATON',a11:'10 bastões segurados'},
+ru:{pYou:'Это ты',pCrew:'В твоей команде',pSince:(d)=>'Играет с '+d+'',pEarned:'$BATON заработано',pPasses:'Передано эстафет',pTrip:'Самое длинное путешествие его эстафеты',pTeam:'Приглашено игроков',pWeek:'Место за неделю',pStreak:'Дней подряд',pHold:'🏃 Сейчас держит эстафету',pNoHold:'Сейчас без эстафеты',pAch:'Достижения',a1:'Первая передача',a2:'10 эстафет передано',a3:'Эстафета на 10 руках',a4:'Эстафета на 25 руках',a5:'Первый приглашённый',a6:'10 приглашённых',a7:'7 дней подряд',a8:'Подиум недели',a9:'Бур 5 уровня',a10:'100 000 $BATON',a11:'10 эстафет в руках'},
+uk:{pYou:'Це ти',pCrew:'У твоїй команді',pSince:(d)=>'Грає з '+d+'',pEarned:'$BATON зароблено',pPasses:'Передано естафет',pTrip:'Найдовша подорож його естафети',pTeam:'Запрошено гравців',pWeek:'Місце за тиждень',pStreak:'Днів поспіль',pHold:'🏃 Зараз тримає естафету',pNoHold:'Зараз без естафети',pAch:'Досягнення',a1:'Перша передача',a2:'10 естафет передано',a3:'Естафета на 10 руках',a4:'Естафета на 25 руках',a5:'Перший запрошений',a6:'10 запрошених',a7:'7 днів поспіль',a8:'Подіум тижня',a9:'Бур 5 рівня',a10:'100 000 $BATON',a11:'10 естафет у руках'},
+tr:{pYou:'Bu sensin',pCrew:'Ekibinde',pSince:(d)=>''+d+' tarihinden beri oynuyor',pEarned:'Kazanılan $BATON',pPasses:'Devredilen bayrak',pTrip:'Bayrağının en uzun yolculuğu',pTeam:'Davet edilen oyuncu',pWeek:'Bu haftaki sıra',pStreak:'Üst üste gün',pHold:'🏃 Şu an elinde bayrak var',pNoHold:'Şu an elinde bayrak yok',pAch:'Başarılar',a1:'İlk devir',a2:'10 bayrak devredildi',a3:'10 elde bir bayrak',a4:'25 elde bir bayrak',a5:'İlk davet edilen oyuncu',a6:'10 oyuncu davet edildi',a7:'Üst üste 7 gün',a8:'Haftanın podyumu',a9:'Matkap seviye 5',a10:'100 000 $BATON',a11:'10 bayrak tutuldu'},
+id:{pYou:'Ini kamu',pCrew:'Di timmu',pSince:(d)=>'Main sejak '+d+'',pEarned:'$BATON didapat',pPasses:'Tongkat dioper',pTrip:'Perjalanan terpanjang tongkatnya',pTeam:'Pemain diundang',pWeek:'Peringkat minggu ini',pStreak:'Hari berturut-turut',pHold:'🏃 Sedang memegang tongkat',pNoHold:'Tidak memegang tongkat sekarang',pAch:'Pencapaian',a1:'Operan pertama',a2:'10 tongkat dioper',a3:'Tongkat di 10 tangan',a4:'Tongkat di 25 tangan',a5:'Pemain pertama diundang',a6:'10 pemain diundang',a7:'7 hari berturut-turut',a8:'Podium mingguan',a9:'Bor level 5',a10:'100 000 $BATON',a11:'10 tongkat dipegang'},
+ar:{pYou:'هذا أنت',pCrew:'في فريقك',pSince:(d)=>'يلعب منذ '+d+'',pEarned:'$BATON مكتسبة',pPasses:'عصي مُمرّرة',pTrip:'أطول رحلة لعصاه',pTeam:'لاعبون مدعوون',pWeek:'الترتيب هذا الأسبوع',pStreak:'أيام متتالية',pHold:'🏃 معه عصا الآن',pNoHold:'لا عصا معه الآن',pAch:'الإنجازات',a1:'أول تمريرة',a2:'10 عصي مُمرّرة',a3:'عصا عبر 10 أيدٍ',a4:'عصا عبر 25 يدًا',a5:'أول لاعب مدعو',a6:'10 لاعبين مدعوين',a7:'7 أيام متتالية',a8:'منصة الأسبوع',a9:'مثقاب المستوى 5',a10:'100 000 $BATON',a11:'10 عصي محمولة'},
+fa:{pYou:'این تویی',pCrew:'در تیم تو',pSince:(d)=>'از '+d+' بازی می‌کند',pEarned:'$BATON به‌دست‌آمده',pPasses:'چوب‌های ردشده',pTrip:'طولانی‌ترین سفر چوبش',pTeam:'بازیکنان دعوت‌شده',pWeek:'رتبهٔ این هفته',pStreak:'روزهای پشت‌سرهم',pHold:'🏃 الان چوب دستش است',pNoHold:'الان چوبی در دست ندارد',pAch:'دستاوردها',a1:'اولین پاس',a2:'۱۰ چوب ردشده',a3:'چوبی با ۱۰ دست',a4:'چوبی با ۲۵ دست',a5:'اولین بازیکن دعوت‌شده',a6:'۱۰ بازیکن دعوت‌شده',a7:'۷ روز پشت‌سرهم',a8:'سکوی هفته',a9:'مته سطح ۵',a10:'۱۰۰٬۰۰۰ $BATON',a11:'۱۰ چوب در دست'}
+};
 // 22 oct 2026: the newest texts win over the older X11 / X12 blocks defined further down
-for (const o of [X19, X20, X21, X22, X23, X24, X25]) for (const k in o) Object.assign(X[k], o[k]);
+for (const o of [X19, X20, X21, X22, X23, X24, X25, X26]) for (const k in o) Object.assign(X[k], o[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -891,7 +913,7 @@ function render() {
     $('#chainBy').innerHTML = S.holding ? (ch.starter === S.name ? T('myHold') : T('chainBy', esc(ch.starter))) : mine ? (S.my_chain.at ? T('myOn', esc(S.my_chain.at)) : T('myDrop')) : T('lastHeld', esc(ch.starter)); $('#links').textContent = fmt(ch.links);
     let h = '';
     if (ch.links > ch.runners.length) h += '<div class="link"><div class="av" style="background:#2a3f5f;color:#8fa5c4">+' + fmt(ch.links - ch.runners.length) + '</div><div class="bar"></div></div>';
-    ch.runners.forEach((r, i) => { h += '<div class="link"><div class="av' + (r.me ? ' me' : '') + '" style="background:' + (r.me ? '#2f8dff' : hueOf(r.n)) + '" title="' + esc(r.n) + '">' + init(r.n) + '</div>' + (i < ch.runners.length - 1 ? '<div class="bar"></div>' : '') + '</div>'; });
+    ch.runners.forEach((r, i) => { h += '<div class="link"><div data-pid="' + (r.id || '') + '" class="av' + (r.me ? ' me' : '') + '" style="background:' + (r.me ? '#2f8dff' : hueOf(r.n)) + '" title="' + esc(r.n) + '">' + init(r.n) + '</div>' + (i < ch.runners.length - 1 ? '<div class="bar"></div>' : '') + '</div>'; });
     const el = $('#chain'); el.innerHTML = h; el.scrollLeft = document.documentElement.dir === 'rtl' ? -el.scrollWidth : el.scrollWidth;
   }
   $('#lvl').textContent = T('lvl', S.drill);
@@ -1026,16 +1048,40 @@ $('#copy').onclick = async () => { hap(); try { await navigator.clipboard.writeT
 async function loadFriends() {
   const r = await api('friends'); if (!r.ok) return;
   const tot = '<div class="record crewtot"><span>' + T('crewEarned') + '<small>' + T('crewSplit', fmt((r.earned_total || 0) - (r.earned_ref || 0)), fmt(r.earned_ref || 0)) + '</small></span><b class="num">+' + fmt(r.earned_total || 0) + '</b></div>';
-  $('#friends').innerHTML = tot + (r.list.length ? r.list.map((x) => '<div class="row"><span class="av" style="background:' + hueOf(x.name) + '">' + init(x.name) + '</span><div class="t"><b>' + esc(x.name) + '</b><span>' + (x.sponsor ? T('sponsor') : x.holding ? T('holding') : T('mined', fmt(x.mined))) + '</span></div>' + (x.earned ? '<span class="r">+' + fmt(x.earned) + '</span>' : '') + '</div>').join('') : '<div class="empty">' + T('noFriends') + '</div>');
+  $('#friends').innerHTML = tot + (r.list.length ? r.list.map((x) => '<div class="row" data-pid="' + x.id + '"><span class="av" style="background:' + hueOf(x.name) + '">' + init(x.name) + '</span><div class="t"><b>' + esc(x.name) + '</b><span>' + (x.sponsor ? T('sponsor') : x.holding ? T('holding') : T('mined', fmt(x.mined))) + '</span></div>' + (x.earned ? '<span class="r">+' + fmt(x.earned) + '</span>' : '') + '</div>').join('') : '<div class="empty">' + T('noFriends') + '</div>');
 }
 let rankMode = 'chains';
 async function loadRanks() {
   const r = await api('ranks'); if (!r.ok) return;
   const rows = rankMode === 'chains'
-    ? r.chains.map((c, i) => '<div class="row' + (c.me ? ' me' : '') + '"><span class="rank' + (i < 3 ? ' g' : '') + '">' + (i + 1) + '</span><div class="t"><b>' + esc(T('chainOf', c.starter)) + '</b><span>' + (c.stopped ? T('stopped') : T('running')) + '</span></div><span class="r">' + fmt(c.links) + ' ' + T('links') + '</span></div>')
-    : r.miners.map((m, i) => '<div class="row' + (m.me ? ' me' : '') + '"><span class="rank' + (i < 3 ? ' g' : '') + '">' + (i + 1) + '</span><span class="av" style="background:' + hueOf(m.name) + '">' + init(m.name) + '</span><div class="t"><b>' + esc(m.name) + '</b></div><span class="r">' + fmt(m.pts) + '</span></div>');
+    ? r.chains.map((c, i) => '<div class="row' + (c.me ? ' me' : '') + '" data-pid="' + (c.sid || '') + '"><span class="rank' + (i < 3 ? ' g' : '') + '">' + (i + 1) + '</span><div class="t"><b>' + esc(T('chainOf', c.starter)) + '</b><span>' + (c.stopped ? T('stopped') : T('running')) + '</span></div><span class="r">' + fmt(c.links) + ' ' + T('links') + '</span></div>')
+    : r.miners.map((m, i) => '<div class="row' + (m.me ? ' me' : '') + '" data-pid="' + (m.id || '') + '"><span class="rank' + (i < 3 ? ' g' : '') + '">' + (i + 1) + '</span><span class="av" style="background:' + hueOf(m.name) + '">' + init(m.name) + '</span><div class="t"><b>' + esc(m.name) + '</b></div><span class="r">' + fmt(m.pts) + '</span></div>');
   $('#ranks').innerHTML = rows.join('') || '<div class="empty">…</div>';
 }
+// 22 oct 2026 (Jeremy): tap a player (team, rankings, the hands of a baton) to see his profile
+// achievements, worked out from the profile stats
+const ACH = [['🏃', (p) => p.passes >= 1], ['🔟', (p) => p.passes >= 10], ['🧭', (p) => p.trip >= 10], ['🌍', (p) => p.trip >= 25], ['🤝', (p) => p.team >= 1], ['👥', (p) => p.team >= 10],
+  ['🔥', (p) => p.best_streak >= 7], ['🏆', (p) => p.week && p.week <= 3], ['⛏️', (p) => p.drill >= 5], ['💰', (p) => p.pts >= 100000], ['✋', (p) => p.held >= 10]];
+function achH(p) {
+  const got = ACH.filter((a) => a[1](p)).length;
+  return '<div class="pachh">' + T('pAch') + '<span>' + got + '/' + ACH.length + '</span></div><div class="pach">' + ACH.map((a, i) => '<div class="pa' + (a[1](p) ? '' : ' off') + '"><i>' + a[0] + '</i>' + T('a' + (i + 1)) + '</div>').join('') + '</div>';
+}
+async function openProfile(id) {
+  sheet('<div class="empty">…</div>');
+  const p = await api('profile', { id });
+  if (!p || !p.ok) { closeSheet(); return; }
+  const d = new Date(p.since * 1000).toLocaleDateString(LANG === 'fa' ? 'fa-IR' : LANG, { day: 'numeric', month: 'short' });
+  const st = (v, l) => '<div class="pst"><b class="num">' + v + '</b><span>' + l + '</span></div>';
+  const av = '<span class="av" style="background:' + hueOf(p.name) + '">' + (p.photo && /^https:\/\//.test(p.photo) ? '<img src="' + esc(p.photo) + '" alt="" onerror="this.remove()">' : '') + init(p.name) + '</span>';
+  sheet('<div class="phead">' + av + '<div class="t"><b>' + esc(p.name) + '</b><span>' + (p.me ? '<i class="ptag">' + T('pYou') + '</i>' : p.crew ? '<i class="ptag">' + T('pCrew') + '</i>' : '') + T('pSince', d) + '</span></div></div>' +
+    '<div class="pgrid">' + st(fmt(p.pts), T('pEarned')) + st(p.week ? '#' + fmt(p.week) : '-', T('pWeek')) + st(fmt(p.passes), T('pPasses')) + st(fmt(p.trip) + ' ' + T('links'), T('pTrip')) + st(fmt(p.team), T('pTeam')) + st(fmt(p.streak), T('pStreak')) + '</div>' +
+    '<div class="phold">' + (p.holding ? T('pHold') : T('pNoHold')) + '</div>' + achH(p) + '<p class="foot">' + T('lvl', p.drill) + '</p>' +
+    '<button class="btn ghost" data-k="keep">OK</button>');
+}
+document.addEventListener('click', (e) => {
+  const el = e.target.closest('[data-pid]'); if (!el || !el.dataset.pid || el.closest('#sheet')) return;
+  hap(); openProfile(Number(el.dataset.pid));
+});
 $('#sChains').onclick = () => { rankMode = 'chains'; $('#sChains').setAttribute('aria-pressed', 'true'); $('#sMiners').setAttribute('aria-pressed', 'false'); loadRanks(); };
 $('#sMiners').onclick = () => { rankMode = 'miners'; $('#sMiners').setAttribute('aria-pressed', 'true'); $('#sChains').setAttribute('aria-pressed', 'false'); loadRanks(); };
 function go(p) {
