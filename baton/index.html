@@ -308,6 +308,7 @@ nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:elli
 #p-rank .row.top2{border-color:rgba(200,214,229,.4)}#p-rank .row.top3{border-color:rgba(205,127,50,.45)}
 #p-rank .row .r{font-weight:800}
 nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+.upRow{display:flex;align-items:center;gap:12px}.upRow .t{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}.upRow .t b{font-size:16px}.upRow .t span{font-size:13px;opacity:.75}
 .earn{margin-top:8px;font-weight:800;color:#ffd43b;font-size:15px}
 </style>
 </head>
@@ -342,6 +343,9 @@ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
         <button class="btn ghost" id="extBtn" hidden></button>
         <div class="more" id="moreBat" hidden></div>
       </div>
+
+      <!-- 22 oct 2026 (Jeremy, 15h55): upgrade the baton -->
+      <div class="card upCard" id="upCard" hidden><div class="upRow"><div class="t"><b id="upT"></b><span id="upS"></span></div><button class="sm" id="upBtn"></button></div></div>
 
       <div class="card" id="chainCard" hidden>
         <div class="meta"><span id="chainBy"></span><span><b id="links">0</b> <span data-t="links"></span></span></div>
@@ -841,6 +845,8 @@ for (const k in FAQ41) { const f = FAQ[k] && FAQ[k].q; if (!f || f.length !== 9)
 // 22 oct 2026 (15h37, Jeremy): a baton always lasts 4 h (no video hour, no Stars)
 const FAQ42 = {en:'In Tasks, a video pays +100 $BATON (10 a day).', fr:'Dans Tâches, une vidéo rapporte +100 $BATON (10 par jour).', es:'En Tareas, un vídeo da +100 $BATON (10 al día).', pt:'Em Tarefas, um vídeo rende +100 $BATON (10 por dia).', ru:'В Заданиях видео даёт +100 $BATON (10 в день).', uk:'У Завданнях відео дає +100 $BATON (10 на день).', tr:'Görevler\'de bir video +100 $BATON kazandırır (günde 10).', id:'Di Tugas, satu video memberi +100 $BATON (10 per hari).', ar:'في المهام، يمنح الفيديو +100 $BATON (10 يوميًا).', fa:'در وظایف، هر ویدیو +۱۰۰ $BATON می‌دهد (روزی ۱۰ بار).'};
 for (const k in FAQ42) { const f = FAQ[k] && FAQ[k].q; if (!f || f.length !== 10) continue; f[5] = [f[5][0], FAQ42[k]]; f.splice(6, 1); }
+const FAQ43 = {en:'300 $BATON per hour at the start, up to 600 when you upgrade your baton, plus 10 % for each Telegram channel you joined. You have 4 hours.', fr:'300 $BATON par heure au départ, jusqu\'à 600 en améliorant ton bâton, plus 10 % par chaîne Telegram rejointe. Tu as 4 heures.', es:'300 $BATON por hora al inicio, hasta 600 si mejoras tu bastón, más 10 % por cada canal de Telegram al que te unas. Tienes 4 horas.', pt:'300 $BATON por hora no início, até 600 melhorando seu bastão, mais 10 % por canal do Telegram em que você entrou. Você tem 4 horas.', ru:'300 $BATON в час в начале, до 600 после улучшения эстафеты, плюс 10 % за каждый канал Telegram. У тебя 4 часа.', uk:'300 $BATON на годину на початку, до 600 після покращення естафети, плюс 10 % за кожен канал Telegram. У тебе 4 години.', tr:'Başta saatte 300 $BATON, bayrağını geliştirerek 600\'e kadar, katıldığın her Telegram kanalı için +%10. 4 saatin var.', id:'300 $BATON per jam di awal, sampai 600 jika tongkatmu ditingkatkan, plus 10 % per kanal Telegram yang kamu ikuti. Kamu punya 4 jam.', ar:'300 $BATON في الساعة في البداية، حتى 600 عند تطوير عصاك، مع 10 % لكل قناة تيليجرام انضممت إليها. لديك 4 ساعات.', fa:'در شروع ساعتی ۳۰۰ $BATON، با ارتقای چوبت تا ۶۰۰، به‌علاوه ۱۰٪ برای هر کانال تلگرامی که عضو شدی. ۴ ساعت وقت داری.'};  // 22 oct 2026 (15h55): baton levels
+for (const k in FAQ43) { const f = FAQ[k] && FAQ[k].q; if (f && f[2]) f[2] = [f[2][0], FAQ43[k]]; }
 function faq() {
   const f = FAQ[LANG] || FAQ.en;
   sheet('<h3>' + f.h + '</h3><button class="btn ghost" data-k="tuto">' + f.tuto + '</button>' +
@@ -1081,8 +1087,21 @@ id:{passTip:'Kalau waktu habis, tongkat jatuh: kamu hanya menyimpan separuh dari
 ar:{passTip:'إذا انتهى الوقت تسقط العصا: تحتفظ بنصف ما ربحته منها فقط، ودون مكافأة.',t3p:'قبل انتهاء الوقت: +5 000 لشخص جديد، +3 000 لفريقك، +1 000 للاعب عشوائي. إذا سقطت، تحتفظ بنصف ما ربحته منها فقط.'},
 fa:{passTip:'اگر زمان تمام شود چوب می‌افتد: فقط نصف آنچه آورده برایت می‌ماند، و پاداشی نیست.',t3p:'قبل از پایان زمان: +۵٬۰۰۰ برای تازه‌وارد، +۳٬۰۰۰ برای تیمت، +۱٬۰۰۰ برای بازیکن تصادفی. اگر بیفتد، فقط نصف آنچه آورده برایت می‌ماند.'}
 };
+// 22 oct 2026 (Jeremy, 15h55): upgrade the baton to earn more per hour
+const X41 = {
+en:{upT:(l)=>'⬆️ Baton level '+l+'',upS:(a,b)=>''+a+' → '+b+' $BATON / h',upMax:(a)=>'Max level: '+a+' $BATON / h',upOk:(l)=>'Baton level '+l+'!'},
+fr:{upT:(l)=>'⬆️ Bâton niveau '+l+'',upS:(a,b)=>''+a+' → '+b+' $BATON / h',upMax:(a)=>'Niveau max : '+a+' $BATON / h',upOk:(l)=>'Bâton niveau '+l+' !'},
+es:{upT:(l)=>'⬆️ Bastón nivel '+l+'',upS:(a,b)=>''+a+' → '+b+' $BATON / h',upMax:(a)=>'Nivel máx.: '+a+' $BATON / h',upOk:(l)=>'¡Bastón nivel '+l+'!'},
+pt:{upT:(l)=>'⬆️ Bastão nível '+l+'',upS:(a,b)=>''+a+' → '+b+' $BATON / h',upMax:(a)=>'Nível máx.: '+a+' $BATON / h',upOk:(l)=>'Bastão nível '+l+'!'},
+ru:{upT:(l)=>'⬆️ Эстафета, уровень '+l+'',upS:(a,b)=>''+a+' → '+b+' $BATON / ч',upMax:(a)=>'Макс. уровень: '+a+' $BATON / ч',upOk:(l)=>'Эстафета, уровень '+l+'!'},
+uk:{upT:(l)=>'⬆️ Естафета, рівень '+l+'',upS:(a,b)=>''+a+' → '+b+' $BATON / год',upMax:(a)=>'Макс. рівень: '+a+' $BATON / год',upOk:(l)=>'Естафета, рівень '+l+'!'},
+tr:{upT:(l)=>'⬆️ Bayrak seviyesi '+l+'',upS:(a,b)=>''+a+' → '+b+' $BATON / saat',upMax:(a)=>'Maks. seviye: '+a+' $BATON / saat',upOk:(l)=>'Bayrak seviyesi '+l+'!'},
+id:{upT:(l)=>'⬆️ Tongkat level '+l+'',upS:(a,b)=>''+a+' → '+b+' $BATON / jam',upMax:(a)=>'Level maks: '+a+' $BATON / jam',upOk:(l)=>'Tongkat level '+l+'!'},
+ar:{upT:(l)=>'⬆️ العصا المستوى '+l+'',upS:(a,b)=>''+a+' ← '+b+' $BATON / ساعة',upMax:(a)=>'أقصى مستوى: '+a+' $BATON / ساعة',upOk:(l)=>'العصا المستوى '+l+'!'},
+fa:{upT:(l)=>'⬆️ چوب سطح '+l+'',upS:(a,b)=>''+a+' ← '+b+' $BATON در ساعت',upMax:(a)=>'سطح حداکثر: '+a+' $BATON در ساعت',upOk:(l)=>'چوب سطح '+l+'!'}
+};
 // 22 oct 2026: the newest texts win over the older X11 / X12 blocks defined further down
-for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33, X34, X35, X36, X37, X38, X39, X40]) for (const k in o) Object.assign(X[k], o[k]);
+for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33, X34, X35, X36, X37, X38, X39, X40, X41]) for (const k in o) Object.assign(X[k], o[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -1179,6 +1198,12 @@ function render() {
     window.__vt = !vt.hidden && !full; }
   $('#dotTasks').hidden = !S.tasks.some((t) => !t.done) && !window.__adt && !window.__vt;  // 22 oct 2026: an Adsgram task waiting also lights the dot
   $('#nFriends').textContent = fmt(S.friends);
+  if (S.blvl_rates) {  // 22 oct 2026: baton level card
+    const l = S.blvl || 1, R = S.blvl_rates, C = S.blvl_costs, mx = l >= R.length, ub = $('#upBtn');
+    $('#upCard').hidden = false; $('#upT').textContent = T('upT', l);
+    $('#upS').textContent = mx ? T('upMax', fmt(R[l - 1])) : T('upS', fmt(R[l - 1]), fmt(R[l]));
+    ub.hidden = mx; if (!mx) { ub.textContent = fmt(C[l]); ub.disabled = (S.pts || 0) < C[l]; }
+  }
   tick();
 }
 function tick() {
@@ -1239,6 +1264,12 @@ async function playVid(b, mode) {
 }
 $('#vidBtn').onclick = () => playVid($('#vidBtn'));
 $('#boostBtn').onclick = () => playVid($('#boostBtn'));
+$('#upBtn').onclick = async () => {  // 22 oct 2026: upgrade the baton (paid in $BATON)
+  hap(); const b = $('#upBtn'); b.disabled = true;
+  const r = await api('blvl');
+  if (!r || !r.ok) { hap('err'); toast(errMsg(r)); b.disabled = false; return; }
+  hap('ok'); setState(r.state); toast(T('upOk', r.level));
+};
 $('#vidTask').onclick = (e) => { const b = e.target.closest('#vtBtn'); if (b) playVid(b, 'pts'); };
 $('#extBtn').onclick = async () => {
   hap();
