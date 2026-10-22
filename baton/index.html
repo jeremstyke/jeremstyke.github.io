@@ -1210,9 +1210,8 @@ function render() {
   // 22 oct 2026 (17h06, Jeremy): what is left to do first, everything already done at the very bottom
   const todo = (l) => srt(l.filter((t) => !t.done));
   const secs = [[T('daily'), todo(dl), trow], [T('once'), todo(on1), trow]];
-  $('#subTasks').innerHTML = sec('📢 ' + T('subs'), todo(sb), srow);  // 22 oct 2026 (17h08, Jeremy): the channels to join come first, above the sponsored task
-  const doneL = srt(S.tasks.filter((t) => t.done));
-  $('#tasks').innerHTML = secs.map((z) => sec(z[0], z[1], z[2])).join('') + sec(T('doneH'), doneL, (t) => (t.kind === 'join' ? srow(t) : trow(t)));
+  $('#subTasks').innerHTML = sec('📢 ' + T('subs'), srt(sb), srow);  // (17h09) the channel stays visible, with its Active badge  // 22 oct 2026 (17h08, Jeremy): the channels to join come first, above the sponsored task
+  $('#tasks').innerHTML = secs.map((z) => sec(z[0], z[1], z[2])).join('');  // (17h09, Jeremy) one-time tasks already done disappear
   { const vt = $('#vidTask'), nv = S.vids_day || 0, mv = S.vids_max || 10, full = nv >= mv;  // 22 oct 2026: +100 $BATON per video, 10 a day
     vt.hidden = !(tg && tg.initData) || S.vids_max == null;  // 22 oct 2026 (16h20, Jeremy): 5 videos a day
     vt.innerHTML = '<div class="row"><div class="t"><b>' + T('vtH') + '</b><span>' + T('vtS', nv, mv) + '</span></div><span class="r">+' + fmt(S.vid_reward || 100) + '</span>' + (full ? '<button class="sm done" disabled>' + T('vtTm') + '</button>' : '<button class="sm" id="vtBtn">' + T('vtGo') + '</button>') + '</div>';
