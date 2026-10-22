@@ -1003,7 +1003,7 @@ function render() {
   const secs = [[T('daily'), srt(dl), trow], ['📢 ' + T('subs'), srt(sb), srow], [T('once'), srt(on1.filter((t) => !t.done)), trow]];  // one-time tasks already done disappear
   secs.sort((x, y) => x[1].every((t) => t.done) - y[1].every((t) => t.done));
   $('#tasks').innerHTML = secs.map((z) => sec(z[0], z[1], z[2])).join('');
-  $('#dotTasks').hidden = !S.tasks.some((t) => !t.done);
+  $('#dotTasks').hidden = !S.tasks.some((t) => !t.done) && !window.__adt;  // 22 oct 2026: an Adsgram task waiting also lights the dot
   $('#nFriends').textContent = fmt(S.friends);
   tick();
 }
@@ -1274,9 +1274,9 @@ function nudge() {
       st.textContent = '#adtask .adt{display:block;padding:12px 14px;border-radius:18px;background:rgba(47,141,255,.08);border:1px solid rgba(255,212,59,.45)}#adtask .adh{font-weight:800;font-size:13px;color:#ffd43b;margin:0 0 6px}#adtask adsgram-task{display:block}#adtask .tb{display:inline-block;padding:7px 14px;border-radius:99px;background:#ffd43b;color:#08121f;font-weight:800;font-size:13px}';
       document.head.appendChild(st);
       box.innerHTML = '<div class="adt"><div class="adh">' + esc(T('adH')) + '</div><adsgram-task data-block-id="task-55373"><span slot="reward">' + esc(T('adR')) + '</span><div slot="button" class="tb">' + esc(T('adGo')) + '</div><div slot="claim" class="tb">' + esc(T('adClaim')) + '</div><div slot="done" class="tb">✓ ' + esc(T('adDone')) + '</div></adsgram-task></div>';
-      box.hidden = false;
+      box.hidden = false; window.__adt = true; $('#dotTasks').hidden = false;
       const tk = box.querySelector('adsgram-task');
-      const gone = () => { box.hidden = true; };
+      const gone = () => { box.hidden = true; window.__adt = false; $('#dotTasks').hidden = !(S && S.tasks.some((t) => !t.done)); };
       ['onBannerNotFound', 'onError', 'onTooLongSession'].forEach((ev) => tk.addEventListener(ev, gone));
       let last = 0;
       const gift = () => { if (Date.now() - last < 3000) return; last = Date.now(); hap('ok'); toast(T('adOk')); [3000, 10000].forEach((ms) => setTimeout(refresh, ms)); };
