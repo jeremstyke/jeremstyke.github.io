@@ -6,10 +6,10 @@
 (function () {
   try {
     const S = {
-      en: { m_baton: '🏃 Pass a baton on Baton', bp_tag: 'NEW GAME', bp_h: 'Earn real money with Baton', bp_1: '💰 300 $BATON every hour while you hold it', bp_2: '⏳ Pass it before the timer ends: up to +5,000', bp_3: '💵 Real money: 1 million $BATON = 1 $ in USDT, sent to your wallet', bp_b: '🏃 Play Baton', bp_n: '⚠️ On Sunday 1 November, the TON referral program and the diamond end. Commissions already earned will be paid from $0.01. The weekly contests go on, now paid in $MCT (1,000 / 500 / 250).', bp_x: 'Later' },
-      fr: { m_baton: '🏃 Passe un bâton sur Baton', bp_tag: 'NOUVEAU JEU', bp_h: 'Gagne de l\'argent réel avec Baton', bp_1: '💰 300 $BATON par heure tant que tu le tiens', bp_2: '⏳ Passe-le avant la fin du chrono : jusqu\'à +5 000', bp_3: '💵 De l\'argent réel : 1 million de $BATON = 1 $ en USDT, versé sur ton wallet', bp_b: '🏃 Jouer à Baton', bp_n: '⚠️ Le dimanche 1er novembre, le parrainage TON et le diamant prennent fin. Les commissions déjà gagnées seront payées dès 0,01 $. Les concours de la semaine continuent, payés en $MCT (1 000 / 500 / 250).', bp_x: 'Plus tard' },
-      ar: { m_baton: '🏃 مرّر عصا في Baton', bp_tag: 'لعبة جديدة', bp_h: 'اربح مالًا حقيقيًا مع Baton', bp_1: '💰 300 $BATON كل ساعة ما دامت معك', bp_2: '⏳ مرّرها قبل انتهاء الوقت: حتى +5 000', bp_3: '💵 مال حقيقي: مليون $BATON = 1 $ USDT تُرسل إلى محفظتك', bp_b: '🏃 العب Baton', bp_n: '⚠️ يوم الأحد 1 نوفمبر ينتهي برنامج الإحالة TON والماسة. العمولات المكتسبة ستُدفع ابتداءً من 0.01 $. تستمر المسابقات الأسبوعية بجوائز $MCT (1000 / 500 / 250).', bp_x: 'لاحقًا' },
-      id: { m_baton: '🏃 Oper tongkat di Baton', bp_tag: 'GAME BARU', bp_h: 'Dapatkan uang sungguhan dengan Baton', bp_1: '💰 300 $BATON per jam selama kamu memegangnya', bp_2: '⏳ Oper sebelum waktu habis: hingga +5 000', bp_3: '💵 Uang sungguhan: 1 juta $BATON = 1 $ USDT, dikirim ke dompetmu', bp_b: '🏃 Main Baton', bp_n: '⚠️ Minggu 1 November, program referral TON dan berlian berakhir. Komisi yang sudah didapat dibayar mulai $0.01. Kontes mingguan tetap ada, dibayar dalam $MCT (1.000 / 500 / 250).', bp_x: 'Nanti' }
+      en: { m_baton: '🏃 Pass a baton on Baton', bp_tag: 'NEW GAME', bp_h: 'Earn real money with Baton', bp_1: '💰 300 $BATON every hour while you hold it', bp_2: '⏳ Pass it before the timer ends: up to +5,000', bp_3: '💵 Real money: 1 million $BATON = 1 $ in USDT, sent to your wallet', bp_b: '🏃 Play Baton', bp_n: '⚠️ On Meme Coin Tycoon, the TON referral program, the diamond and the TON payouts end on Sunday 1 November. Commissions already earned will be paid from $0.01. The weekly contests go on, now paid in $MCT (1,000 / 500 / 250).', bp_x: 'Later' },
+      fr: { m_baton: '🏃 Passe un bâton sur Baton', bp_tag: 'NOUVEAU JEU', bp_h: 'Gagne de l\'argent réel avec Baton', bp_1: '💰 300 $BATON par heure tant que tu le tiens', bp_2: '⏳ Passe-le avant la fin du chrono : jusqu\'à +5 000', bp_3: '💵 De l\'argent réel : 1 million de $BATON = 1 $ en USDT, versé sur ton wallet', bp_b: '🏃 Jouer à Baton', bp_n: '⚠️ Sur Meme Coin Tycoon, le parrainage TON, le diamant et les versements en TON s\'arrêtent le dimanche 1er novembre. Les commissions déjà gagnées seront payées dès 0,01 $. Les concours de la semaine continuent, payés en $MCT (1 000 / 500 / 250).', bp_x: 'Plus tard' },
+      ar: { m_baton: '🏃 مرّر عصا في Baton', bp_tag: 'لعبة جديدة', bp_h: 'اربح مالًا حقيقيًا مع Baton', bp_1: '💰 300 $BATON كل ساعة ما دامت معك', bp_2: '⏳ مرّرها قبل انتهاء الوقت: حتى +5 000', bp_3: '💵 مال حقيقي: مليون $BATON = 1 $ USDT تُرسل إلى محفظتك', bp_b: '🏃 العب Baton', bp_n: '⚠️ في Meme Coin Tycoon، تنتهي الإحالة TON والماسة ودفعات TON يوم الأحد 1 نوفمبر. العمولات المكتسبة ستُدفع ابتداءً من 0.01 $. تستمر المسابقات الأسبوعية بجوائز $MCT (1000 / 500 / 250).', bp_x: 'لاحقًا' },
+      id: { m_baton: '🏃 Oper tongkat di Baton', bp_tag: 'GAME BARU', bp_h: 'Dapatkan uang sungguhan dengan Baton', bp_1: '💰 300 $BATON per jam selama kamu memegangnya', bp_2: '⏳ Oper sebelum waktu habis: hingga +5 000', bp_3: '💵 Uang sungguhan: 1 juta $BATON = 1 $ USDT, dikirim ke dompetmu', bp_b: '🏃 Main Baton', bp_n: '⚠️ Di Meme Coin Tycoon, referral TON, berlian, dan pembayaran TON berakhir Minggu 1 November. Komisi yang sudah didapat dibayar mulai $0.01. Kontes mingguan tetap ada, dibayar dalam $MCT (1.000 / 500 / 250).', bp_x: 'Nanti' }
     };
     for (const k in S) if (typeof L === 'object' && L[k]) Object.assign(L[k], S[k]);
     const URL = 'https://t.me/PassTheBatonBot/play?startapp=src_mctpop';
@@ -22,12 +22,17 @@
     const set = () => { try { localStorage.setItem('mct_bt_pop10', String(Date.now())); } catch (e) {} };
     let tries = 0;
     function popup() {
-      if (Date.now() - get() < 24 * 3600000 || document.getElementById('btpop')) return;
+      if (document.getElementById('btpop')) return;
       // 22 oct 2026 (16h23, Jeremy): never for Premium players (prem.js sets window.MCTPREM once it knows)
       if (typeof window.MCTPREM === 'undefined' && tries++ < 20) { setTimeout(popup, 500); return; }
       // 22 oct 2026 (18h06, Jeremy): the new "real money" text is shown once to everyone (new key), and to Jeremy too so he can see it
       let own = false; try { own = String(ME.uid) === '7057960224'; } catch (e) {}
       if (window.MCTPREM && !own) return;
+      // 18h43: Jeremy sees each new version once (his own key), everyone else once every 24 h
+      const K = own ? 'mct_bt_pop11o' : 'mct_bt_pop10';
+      let seen = 0; try { seen = Number(localStorage.getItem(K) || 0); } catch (e) { seen = Date.now(); }
+      if (Date.now() - seen < 24 * 3600000) return;
+      try { localStorage.setItem(K, String(Date.now())); } catch (e) {}
       if (document.querySelector('#maint:not([hidden]), .maint:not([hidden])')) return;  // never over the maintenance screen
       set();
       const rtl = lang() === 'ar';
