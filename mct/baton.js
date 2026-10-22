@@ -1,4 +1,5 @@
 
+// 22 oct 2026 (23h35, Jeremy): the game is renamed "Pass The Baton" in the popup, the mission and the TON sheet notice.
 // 22 oct 2026 (Jeremy): Meme Coin Tycoon promotes Baton (@PassTheBatonBot):
 // the daily mission "pass a baton on Baton" (checked by the server) and, since 16h15, a full-screen Baton popup
 // once every 24 hours (it replaces the Baton card at the top of the market). The link brings newcomers into Jeremy's crew
@@ -6,10 +7,10 @@
 (function () {
   try {
     const S = {
-      en: { m_baton: '🏃 Pass a baton on Baton', bp_tag: 'NEW GAME', bp_h: 'Earn real money with Baton', bp_1: '💰 300 $BATON every hour while you hold it', bp_2: '⏳ Pass it before the timer ends: up to +5,000', bp_3: '💵 Real money: 1 million $BATON = 1 $ in USDT, sent to your wallet', bp_b: '🏃 Play Baton', bp_n: '⚠️ On Meme Coin Tycoon, the TON referral program, the diamond and the TON payouts end on Sunday 1 November. Commissions already earned will be paid from $0.01. The weekly contests go on, now paid in $MCT (1,000 / 500 / 250).', bp_x: 'Later' },
-      fr: { m_baton: '🏃 Passe un bâton sur Baton', bp_tag: 'NOUVEAU JEU', bp_h: 'Gagne de l\'argent réel avec Baton', bp_1: '💰 300 $BATON par heure tant que tu le tiens', bp_2: '⏳ Passe-le avant la fin du chrono : jusqu\'à +5 000', bp_3: '💵 De l\'argent réel : 1 million de $BATON = 1 $ en USDT, versé sur ton wallet', bp_b: '🏃 Jouer à Baton', bp_n: '⚠️ Sur Meme Coin Tycoon, le parrainage TON, le diamant et les versements en TON s\'arrêtent le dimanche 1er novembre. Les commissions déjà gagnées seront payées dès 0,01 $. Les concours de la semaine continuent, payés en $MCT (1 000 / 500 / 250).', bp_x: 'Plus tard' },
-      ar: { m_baton: '🏃 مرّر عصا في Baton', bp_tag: 'لعبة جديدة', bp_h: 'اربح مالًا حقيقيًا مع Baton', bp_1: '💰 300 $BATON كل ساعة ما دامت معك', bp_2: '⏳ مرّرها قبل انتهاء الوقت: حتى +5 000', bp_3: '💵 مال حقيقي: مليون $BATON = 1 $ USDT تُرسل إلى محفظتك', bp_b: '🏃 العب Baton', bp_n: '⚠️ في Meme Coin Tycoon، تنتهي الإحالة TON والماسة ودفعات TON يوم الأحد 1 نوفمبر. العمولات المكتسبة ستُدفع ابتداءً من 0.01 $. تستمر المسابقات الأسبوعية بجوائز $MCT (1000 / 500 / 250).', bp_x: 'لاحقًا' },
-      id: { m_baton: '🏃 Oper tongkat di Baton', bp_tag: 'GAME BARU', bp_h: 'Dapatkan uang sungguhan dengan Baton', bp_1: '💰 300 $BATON per jam selama kamu memegangnya', bp_2: '⏳ Oper sebelum waktu habis: hingga +5 000', bp_3: '💵 Uang sungguhan: 1 juta $BATON = 1 $ USDT, dikirim ke dompetmu', bp_b: '🏃 Main Baton', bp_n: '⚠️ Di Meme Coin Tycoon, referral TON, berlian, dan pembayaran TON berakhir Minggu 1 November. Komisi yang sudah didapat dibayar mulai $0.01. Kontes mingguan tetap ada, dibayar dalam $MCT (1.000 / 500 / 250).', bp_x: 'Nanti' }
+      en: { m_baton: '🏃 Pass a baton on Pass The Baton', bp_tag: 'NEW GAME', bp_h: 'Earn real money with Pass The Baton', bp_1: '💰 300 $BATON every hour while you hold it', bp_2: '⏳ Pass it before the timer ends: up to +10,000', bp_3: '💵 Real money: 1 million $BATON = 1 $ in USDT, sent to your wallet', bp_b: '🏃 Play Pass The Baton', bp_n: '⚠️ On Meme Coin Tycoon, the TON referral program, the diamond and the TON payouts end on Sunday 1 November. Commissions already earned will be paid from $0.01. The weekly contests go on, now paid in $MCT (1,000 / 500 / 250).', bp_x: 'Later' },
+      fr: { m_baton: '🏃 Passe un bâton sur Pass The Baton', bp_tag: 'NOUVEAU JEU', bp_h: 'Gagne de l\'argent réel avec Pass The Baton', bp_1: '💰 300 $BATON par heure tant que tu le tiens', bp_2: '⏳ Passe-le avant la fin du chrono : jusqu\'à +10 000', bp_3: '💵 De l\'argent réel : 1 million de $BATON = 1 $ en USDT, versé sur ton wallet', bp_b: '🏃 Jouer à Pass The Baton', bp_n: '⚠️ Sur Meme Coin Tycoon, le parrainage TON, le diamant et les versements en TON s\'arrêtent le dimanche 1er novembre. Les commissions déjà gagnées seront payées dès 0,01 $. Les concours de la semaine continuent, payés en $MCT (1 000 / 500 / 250).', bp_x: 'Plus tard' },
+      ar: { m_baton: '🏃 مرّر عصا في Pass The Baton', bp_tag: 'لعبة جديدة', bp_h: 'اربح مالًا حقيقيًا مع Pass The Baton', bp_1: '💰 300 $BATON كل ساعة ما دامت معك', bp_2: '⏳ مرّرها قبل انتهاء الوقت: حتى +10 000', bp_3: '💵 مال حقيقي: مليون $BATON = 1 $ USDT تُرسل إلى محفظتك', bp_b: '🏃 العب Pass The Baton', bp_n: '⚠️ في Meme Coin Tycoon، تنتهي الإحالة TON والماسة ودفعات TON يوم الأحد 1 نوفمبر. العمولات المكتسبة ستُدفع ابتداءً من 0.01 $. تستمر المسابقات الأسبوعية بجوائز $MCT (1000 / 500 / 250).', bp_x: 'لاحقًا' },
+      id: { m_baton: '🏃 Oper tongkat di Pass The Baton', bp_tag: 'GAME BARU', bp_h: 'Dapatkan uang sungguhan dengan Pass The Baton', bp_1: '💰 300 $BATON per jam selama kamu memegangnya', bp_2: '⏳ Oper sebelum waktu habis: hingga +10 000', bp_3: '💵 Uang sungguhan: 1 juta $BATON = 1 $ USDT, dikirim ke dompetmu', bp_b: '🏃 Main Pass The Baton', bp_n: '⚠️ Di Meme Coin Tycoon, referral TON, berlian, dan pembayaran TON berakhir Minggu 1 November. Komisi yang sudah didapat dibayar mulai $0.01. Kontes mingguan tetap ada, dibayar dalam $MCT (1.000 / 500 / 250).', bp_x: 'Nanti' }
     };
     for (const k in S) if (typeof L === 'object' && L[k]) Object.assign(L[k], S[k]);
     const URL = 'https://t.me/PassTheBatonBot/play?startapp=src_mctpop';
@@ -73,7 +74,7 @@
       el.innerHTML = '<div style="width:100%;max-width:360px;border-radius:26px;padding:26px 22px 18px;background:radial-gradient(90% 60% at 50% 0%,rgba(47,141,255,.38),transparent 70%),#0b1626;border:1px solid rgba(80,150,255,.35);box-shadow:0 20px 60px rgba(0,0,0,.6);color:#e9f1ff;text-align:center;font-family:inherit">' +
         '<div style="display:inline-block;padding:4px 10px;border-radius:99px;background:#ffc531;color:#08121f;font-weight:800;font-size:11px;letter-spacing:.08em">' + esc(txt('bp_tag')) + '</div>' +
         '<div style="font-size:56px;line-height:1;margin:14px 0 4px">🏃</div>' +
-        '<div style="font-size:34px;font-weight:900;letter-spacing:.02em">BATON</div>' +
+        '<div style="font-size:34px;font-weight:900;letter-spacing:.02em;line-height:1.05"><span style="display:block;font-size:13px;letter-spacing:.32em;color:#8fc0ff">PASS THE</span>BATON</div>' +
         '<div style="font-size:17px;font-weight:800;margin:6px 0 16px;color:#ffc531">' + esc(txt('bp_h')) + '</div>' +
         '<div style="display:flex;flex-direction:column;gap:8px;text-align:' + (rtl ? 'right' : 'left') + ';font-size:14px;line-height:1.35;margin-bottom:18px">' +
         ['bp_1', 'bp_2', 'bp_3'].map((k) => '<div style="padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.05)">' + esc(txt(k)) + '</div>').join('') + '</div>' +
@@ -95,12 +96,12 @@
 (function () {
   try {
     const N = {
-      en: ['⏳ The referral program and the diamond stop on Sunday 1 November. Commissions already earned are paid from $0.01.', '🏃 Keep earning USDT on Baton', 'Play'],
-      fr: ['⏳ Le parrainage et le diamant s\'arrêtent le dimanche 1er novembre. Les commissions déjà gagnées sont payées dès 0,01 $.', '🏃 Continue de gagner des USDT sur Baton', 'Jouer'],
-      ar: ['⏳ برنامج الإحالة والماسة يتوقفان يوم الأحد 1 نوفمبر. العمولات المكتسبة تُدفع ابتداءً من 0.01 $.', '🏃 واصل ربح USDT على Baton', 'العب'],
-      id: ['⏳ Program referral dan berlian berhenti hari Minggu 1 November. Komisi yang sudah didapat dibayar mulai $0.01.', '🏃 Terus dapatkan USDT di Baton', 'Main'],
-      ru: ['⏳ Реферальная программа и алмаз закрываются в воскресенье, 1 ноября. Заработанные комиссии выплатим от $0.01.', '🏃 Продолжай зарабатывать USDT в Baton', 'Играть'],
-      fa: ['⏳ برنامه دعوت و الماس یکشنبه ۱ نوامبر تمام می‌شوند. کمیسیون‌های به‌دست‌آمده از ۰٫۰۱ دلار پرداخت می‌شوند.', '🏃 در Baton همچنان USDT بگیر', 'بازی']
+      en: ['⏳ The referral program and the diamond stop on Sunday 1 November. Commissions already earned are paid from $0.01.', '🏃 Keep earning USDT on Pass The Baton', 'Play'],
+      fr: ['⏳ Le parrainage et le diamant s\'arrêtent le dimanche 1er novembre. Les commissions déjà gagnées sont payées dès 0,01 $.', '🏃 Continue de gagner des USDT sur Pass The Baton', 'Jouer'],
+      ar: ['⏳ برنامج الإحالة والماسة يتوقفان يوم الأحد 1 نوفمبر. العمولات المكتسبة تُدفع ابتداءً من 0.01 $.', '🏃 واصل ربح USDT على Pass The Baton', 'العب'],
+      id: ['⏳ Program referral dan berlian berhenti hari Minggu 1 November. Komisi yang sudah didapat dibayar mulai $0.01.', '🏃 Terus dapatkan USDT di Pass The Baton', 'Main'],
+      ru: ['⏳ Реферальная программа и алмаз закрываются в воскресенье, 1 ноября. Заработанные комиссии выплатим от $0.01.', '🏃 Продолжай зарабатывать USDT в Pass The Baton', 'Играть'],
+      fa: ['⏳ برنامه دعوت و الماس یکشنبه ۱ نوامبر تمام می‌شوند. کمیسیون‌های به‌دست‌آمده از ۰٫۰۱ دلار پرداخت می‌شوند.', '🏃 در Pass The Baton همچنان USDT بگیر', 'بازی']
     };
     const lg = () => { try { return (typeof LANG === 'string' && N[LANG]) ? LANG : 'en'; } catch (e) { return 'en'; } };
     const esc2 = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
