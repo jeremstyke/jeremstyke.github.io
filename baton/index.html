@@ -1278,7 +1278,7 @@ async function openProfile(id) {
   sheet('<div class="phead">' + av + '<div class="t"><b>' + esc(p.name) + '</b><span>' + (p.me ? '<i class="ptag">' + T('pYou') + '</i>' : p.crew ? '<i class="ptag">' + T('pCrew') + '</i>' : '') + T('pSince', d) + '</span></div></div>' +
     '<div class="pgrid">' + st(fmt(p.pts), T('pEarned')) + st(p.week ? '#' + fmt(p.week) : '-', T('pWeek')) + st(fmt(p.passes), T('pPasses')) + st(fmt(p.held), T('pHeld')) + st(fmt(p.team), T('pTeam')) + st(fmt(p.streak), T('pStreak')) + '</div>' +
     '<div class="phold">' + (p.holding ? T('pHold') : T('pNoHold')) + '</div>' +
-    (p.me ? '' : '<div class="pachh">' + T('sayH') + '</div>' + (p.can_say ? '<div class="psay">' + ['baton', 'swap', 'thx', 'forget', 'drop', 'hi', 'gg'].map((k) => '<button data-say="' + k + '" data-to="' + p.id + '">' + T('say_' + k) + '</button>').join('') + '</div>' : '<p class="foot" style="text-align:start">' + T('sayWait') + '</p>')) + achH(p) +
+    (p.me ? '' : '<div class="pachh">' + T('sayH') + '</div>' + (p.can_say ? '<div class="psay">' + ['baton', 'swap', 'thx', 'hi', 'gg'].map((k) => '<button data-say="' + k + '" data-to="' + p.id + '">' + T('say_' + k) + '</button>').join('') + '</div>' : '<p class="foot" style="text-align:start">' + T('sayWait') + '</p>')) + achH(p) +
     '<button class="btn ghost" data-k="keep">OK</button>');
 }
 $('#sheet').addEventListener('click', async (e) => {
