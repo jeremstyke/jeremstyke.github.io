@@ -342,6 +342,7 @@ nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:elli
 
     <section class="panel" id="p-mine" hidden>
       <div class="score"><small data-t="upgrade"></small><div class="big num" id="lvBig"></div><div class="rate num" id="rate2"></div></div>
+      <button class="btn ghost" id="boostBtn" hidden style="margin-bottom:12px"></button>
       <div class="list" id="upg"></div>
     </section>
 
@@ -928,8 +929,21 @@ id:{boost:(n,m)=>'📺 Tonton video: tambang x2 selama 1 jam ('+n+'/'+m+')',boos
 ar:{boost:(n,m)=>'📺 شاهد فيديو: تعدين x2 لمدة ساعة ('+n+'/'+m+')',boostOn:(t)=>'⚡ تعدين x2 حتى '+t+'',boostOk:'⚡ تعدين x2 لمدة ساعة!'},
 fa:{boost:(n,m)=>'📺 ویدیو ببین: استخراج x2 به مدت ۱ ساعت ('+n+'/'+m+')',boostOn:(t)=>'⚡ استخراج x2 تا '+t+'',boostOk:'⚡ استخراج x2 به مدت ۱ ساعت!'}
 };
+// 22 oct 2026 (Jeremy): the x2 mining video lives in the Mine tab
+const X33 = {
+en:{boostBaton:'⚡ Your baton already runs your mine x2'},
+fr:{boostBaton:'⚡ Ton bâton fait déjà tourner ta mine x2'},
+es:{boostBaton:'⚡ Tu bastón ya hace ir tu mina x2'},
+pt:{boostBaton:'⚡ Seu bastão já faz sua mina rodar x2'},
+ru:{boostBaton:'⚡ Эстафета уже ускоряет шахту x2'},
+uk:{boostBaton:'⚡ Естафета вже прискорює шахту x2'},
+tr:{boostBaton:'⚡ Bayrağın madenini zaten x2 çalıştırıyor'},
+id:{boostBaton:'⚡ Tongkatmu sudah membuat tambang x2'},
+ar:{boostBaton:'⚡ عصاك تشغّل منجمك x2 بالفعل'},
+fa:{boostBaton:'⚡ چوبت همین الان معدنت را x2 می‌کند'}
+};
 // 22 oct 2026: the newest texts win over the older X11 / X12 blocks defined further down
-for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32]) for (const k in o) Object.assign(X[k], o[k]);
+for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33]) for (const k in o) Object.assign(X[k], o[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -983,10 +997,7 @@ function render() {
     { const nv = S.batons[0].vids || 0; $('#vidBtn').hidden = nv >= 4 || !(tg && tg.initData); $('#vidBtn').textContent = T('vid', nv, 4); }  // 22 oct 2026: +1 h per video, 4 per baton
     $('#moreBat').hidden = S.batons.length < 2; $('#moreBat').textContent = T('more', S.batons.length - 1);
   } else {
-    c.classList.add('off'); $('#holdT').textContent = T('none1'); $('#holdP').textContent = T('none2'); $('#timer').textContent = ''; $('#extBtn').hidden = true;
-    { const vb = $('#vidBtn'), on = S.boost_until && S.boost_until * 1000 > Date.now(), nb = S.boosts || 0;  // 22 oct 2026: no baton: the video gives mining x2 for 1 h
-      vb.hidden = !(tg && tg.initData) || (!on && nb >= 3); vb.disabled = !!on;
-      vb.textContent = on ? T('boostOn', new Date(S.boost_until * 1000).toLocaleTimeString(LANG === 'fa' ? 'fa-IR' : LANG, { hour: '2-digit', minute: '2-digit' })) : T('boost', nb, 3); } $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
+    c.classList.add('off'); $('#holdT').textContent = T('none1'); $('#holdP').textContent = T('none2'); $('#timer').textContent = ''; $('#extBtn').hidden = true; $('#vidBtn').hidden = true; $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
   }
   $('#dotHome').hidden = !S.holding;
   $('#invRule').textContent = !S.holding ? T('ruleNone') : S.batons[0].extended ? T('ruleExt') : T('ruleHold', fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * 5));
@@ -1002,6 +1013,10 @@ function render() {
     const el = $('#chain'); el.innerHTML = h; el.scrollLeft = document.documentElement.dir === 'rtl' ? -el.scrollWidth : el.scrollWidth;
   }
   $('#lvl').textContent = T('lvl', S.drill);
+  // 22 oct 2026 (Jeremy): Mine tab: a video gives mining x2 for 1 h (3 a day); with a baton in hand the mine already runs x2
+  { const vb = $('#boostBtn'), on = S.boost_until && S.boost_until * 1000 > Date.now(), nb = S.boosts || 0;
+    vb.hidden = !(tg && tg.initData) || (!S.holding && !on && nb >= 3); vb.disabled = !!(S.holding || on);
+    vb.textContent = S.holding ? T('boostBaton') : on ? T('boostOn', new Date(S.boost_until * 1000).toLocaleTimeString(LANG === 'fa' ? 'fa-IR' : LANG, { hour: '2-digit', minute: '2-digit' })) : T('boost', nb, 3); }
   // upgrades
   const up = [
     { k: 'drill', t: T('drill'), s: T('drillS', S.rate, S.costs.next_rate), c: S.costs.drill },
@@ -1067,15 +1082,17 @@ $('#passBtn').onclick = () => {
 // 22 oct 2026: keep the baton in hand 4 h longer for 10 Stars (once per baton); the bot's webhook applies the payment
 // 22 oct 2026 (Jeremy): rewarded video, Adsgram block 55429. Adsgram calls the reward URL (GET ?ads=rw), which adds 1 hour
 // to the baton in hand (4 per baton, bt_ads_reward); here we only show the video and refresh the timer.
-$('#vidBtn').onclick = async () => {
-  hap(); const b = $('#vidBtn'); b.disabled = true;
+async function playVid(b) {
+  hap(); b.disabled = true;
   try {
     if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
     await window.Adsgram.init({ blockId: '55429' }).show();
     hap('ok'); toast(S && S.holding ? T('vidOk') : T('boostOk')); [2000, 6000].forEach((ms) => setTimeout(refresh, ms));
   } catch (e) { toast(T('vidNo')); }
   b.disabled = false; setTimeout(refresh, 300);
-};
+}
+$('#vidBtn').onclick = () => playVid($('#vidBtn'));
+$('#boostBtn').onclick = () => playVid($('#boostBtn'));
 $('#extBtn').onclick = async () => {
   hap();
   const b = S && S.batons[0]; if (!b) return;
