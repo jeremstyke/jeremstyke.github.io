@@ -915,8 +915,21 @@ id:{vid:(n,m)=>'📺 Tonton video: +1 jam untuk tongkatmu ('+n+'/'+m+')',vidOk:'
 ar:{vid:(n,m)=>'📺 شاهد فيديو: +1 ساعة لعصاك ('+n+'/'+m+')',vidOk:'أُضيفت +1 ساعة إلى عصاك!',vidNo:'لا يوجد فيديو الآن، حاول لاحقًا.'},
 fa:{vid:(n,m)=>'📺 ویدیو ببین: +۱ ساعت برای چوبت ('+n+'/'+m+')',vidOk:'+۱ ساعت به چوبت اضافه شد!',vidNo:'الان ویدیویی نیست، بعداً دوباره امتحان کن.'}
 };
+// 22 oct 2026 (Jeremy): without a baton in hand, the same video gives mining x2 for 1 hour (3 a day)
+const X32 = {
+en:{boost:(n,m)=>'📺 Watch a video: mining x2 for 1 h ('+n+'/'+m+')',boostOn:(t)=>'⚡ Mining x2 until '+t+'',boostOk:'⚡ Mining x2 for 1 hour!'},
+fr:{boost:(n,m)=>'📺 Regarde une vidéo : minage x2 pendant 1 h ('+n+'/'+m+')',boostOn:(t)=>'⚡ Minage x2 jusqu\'à '+t+'',boostOk:'⚡ Minage x2 pendant 1 heure !'},
+es:{boost:(n,m)=>'📺 Mira un vídeo: minería x2 durante 1 h ('+n+'/'+m+')',boostOn:(t)=>'⚡ Minería x2 hasta las '+t+'',boostOk:'⚡ ¡Minería x2 durante 1 hora!'},
+pt:{boost:(n,m)=>'📺 Veja um vídeo: mineração x2 por 1 h ('+n+'/'+m+')',boostOn:(t)=>'⚡ Mineração x2 até '+t+'',boostOk:'⚡ Mineração x2 por 1 hora!'},
+ru:{boost:(n,m)=>'📺 Видео: добыча x2 на 1 ч ('+n+'/'+m+')',boostOn:(t)=>'⚡ Добыча x2 до '+t+'',boostOk:'⚡ Добыча x2 на 1 час!'},
+uk:{boost:(n,m)=>'📺 Відео: видобуток x2 на 1 год ('+n+'/'+m+')',boostOn:(t)=>'⚡ Видобуток x2 до '+t+'',boostOk:'⚡ Видобуток x2 на 1 годину!'},
+tr:{boost:(n,m)=>'📺 Video izle: 1 saat x2 kazı ('+n+'/'+m+')',boostOn:(t)=>'⚡ '+t+' saatine kadar x2 kazı',boostOk:'⚡ 1 saat boyunca x2 kazı!'},
+id:{boost:(n,m)=>'📺 Tonton video: tambang x2 selama 1 jam ('+n+'/'+m+')',boostOn:(t)=>'⚡ Tambang x2 sampai '+t+'',boostOk:'⚡ Tambang x2 selama 1 jam!'},
+ar:{boost:(n,m)=>'📺 شاهد فيديو: تعدين x2 لمدة ساعة ('+n+'/'+m+')',boostOn:(t)=>'⚡ تعدين x2 حتى '+t+'',boostOk:'⚡ تعدين x2 لمدة ساعة!'},
+fa:{boost:(n,m)=>'📺 ویدیو ببین: استخراج x2 به مدت ۱ ساعت ('+n+'/'+m+')',boostOn:(t)=>'⚡ استخراج x2 تا '+t+'',boostOk:'⚡ استخراج x2 به مدت ۱ ساعت!'}
+};
 // 22 oct 2026: the newest texts win over the older X11 / X12 blocks defined further down
-for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31]) for (const k in o) Object.assign(X[k], o[k]);
+for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32]) for (const k in o) Object.assign(X[k], o[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -958,7 +971,7 @@ function render() {
   if (!S) return;
   $('#streak').textContent = S.streak_live != null ? S.streak_live : (S.streak || 0);
   $('#bonusChip').textContent = '+' + (S.bonus || 0) + '%';
-  $('#rate').textContent = '+ ' + S.rate + ' ' + T('perH') + (S.holding ? '  ×2' : '');
+  $('#rate').textContent = '+ ' + S.rate + ' ' + T('perH') + (S.holding || (S.boost_until && S.boost_until * 1000 > Date.now()) ? '  ×2' : '');
   $('#record').textContent = fmt(S.record);
   // baton
   const c = $('#batonCard');
@@ -970,7 +983,10 @@ function render() {
     { const nv = S.batons[0].vids || 0; $('#vidBtn').hidden = nv >= 4 || !(tg && tg.initData); $('#vidBtn').textContent = T('vid', nv, 4); }  // 22 oct 2026: +1 h per video, 4 per baton
     $('#moreBat').hidden = S.batons.length < 2; $('#moreBat').textContent = T('more', S.batons.length - 1);
   } else {
-    c.classList.add('off'); $('#holdT').textContent = T('none1'); $('#holdP').textContent = T('none2'); $('#timer').textContent = ''; $('#extBtn').hidden = true; $('#vidBtn').hidden = true; $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
+    c.classList.add('off'); $('#holdT').textContent = T('none1'); $('#holdP').textContent = T('none2'); $('#timer').textContent = ''; $('#extBtn').hidden = true;
+    { const vb = $('#vidBtn'), on = S.boost_until && S.boost_until * 1000 > Date.now(), nb = S.boosts || 0;  // 22 oct 2026: no baton: the video gives mining x2 for 1 h
+      vb.hidden = !(tg && tg.initData) || (!on && nb >= 3); vb.disabled = !!on;
+      vb.textContent = on ? T('boostOn', new Date(S.boost_until * 1000).toLocaleTimeString(LANG === 'fa' ? 'fa-IR' : LANG, { hour: '2-digit', minute: '2-digit' })) : T('boost', nb, 3); } $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
   }
   $('#dotHome').hidden = !S.holding;
   $('#invRule').textContent = !S.holding ? T('ruleNone') : S.batons[0].extended ? T('ruleExt') : T('ruleHold', fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * 5));
@@ -1056,9 +1072,9 @@ $('#vidBtn').onclick = async () => {
   try {
     if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
     await window.Adsgram.init({ blockId: '55429' }).show();
-    hap('ok'); toast(T('vidOk')); [2000, 6000].forEach((ms) => setTimeout(refresh, ms));
+    hap('ok'); toast(S && S.holding ? T('vidOk') : T('boostOk')); [2000, 6000].forEach((ms) => setTimeout(refresh, ms));
   } catch (e) { toast(T('vidNo')); }
-  b.disabled = false;
+  b.disabled = false; setTimeout(refresh, 300);
 };
 $('#extBtn').onclick = async () => {
   hap();
