@@ -102,14 +102,15 @@
     setTimeout(() => { if (!window.Adsgram) { agl = null; ko(new Error('timeout')); } }, 6000);
   }));
   async function agWatch() {
-    try { await agSdk(); const r = await window.Adsgram.init({ blockId: '55185' }).show(); return r && r.done === false ? 'skip' : 'ok'; }
+    try { await agSdk(); const r = await window.Adsgram.init({ blockId: '55242' }).show(); return r && r.done === false ? 'skip' : 'ok'; }
     catch (e) { return e && e.done === false && e.error === false ? 'skip' : 'none'; }
   }
   async function watch() {
     if (prem()) return 'ok';
-    // 21 oct 2026 (Jeremy): Ads Galaxy works again: it goes first (it pays), Adsgram (still in test) as backup
+    // 22 oct 2026 (17h59, Jeremy): Adsgram first (rewarded block 55242), Ads Galaxy as backup when Adsgram has no video
+    const a = await agWatch(); if (a !== 'none') return a;
     try { await sdk(); const r = await window.showAdsGalaxy({ miniappId: AGX }); return r && r.reward_eligible ? 'ok' : 'skip'; } catch (e) {}
-    return agWatch();
+    return 'none';
   }
   async function watchN(n, btn) {
     for (let i = 0; i < n; i++) {
