@@ -1232,8 +1232,7 @@ function render() {
   const secs = [[T('daily'), todo(dl), trow], [T('once'), todo(on1), trow]];
   $('#subTasks').innerHTML = sec('📢 ' + T('subs'), srt(sb), srow);  // (17h09) the channel stays visible, with its Active badge  // 22 oct 2026 (17h08, Jeremy): the channels to join come first, above the sponsored task
   // 22 oct 2026 (17h11, Jeremy): the tasks already done sit at the bottom in a closed list you can open, with what they earned
-  const doneL = srt(on1.concat(dl).filter((t) => t.done)), wasOpen = !!document.querySelector('.doneBox[open]');  // a refresh keeps it open
-  $('#tasks').innerHTML = secs.map((z) => sec(z[0], z[1], z[2])).join('') + (doneL.length ? '<details class="doneBox"' + (wasOpen ? ' open' : '') + '><summary><span>' + T('doneH') + ' (' + doneL.length + ')</span><b>' + T('tEarn', fmt(S.tasks_earned || 0)) + '</b></summary>' + doneL.map(trow).join('') + '</details>' : '');
+  $('#tasks').innerHTML = secs.map((z) => sec(z[0], z[1], z[2])).join('');  // 22 oct 2026 (19h24, Jeremy): no more "already done" list nor total, done tasks just disappear
   { const vt = $('#vidTask'), nv = S.vids_day || 0, mv = S.vids_max || 10, full = nv >= mv;  // 18h32 (Jeremy): 10 videos a day  // 22 oct 2026: +100 $BATON per video, 10 a day
     vt.hidden = !(tg && tg.initData) || S.vids_max == null;  // 22 oct 2026 (16h20, Jeremy): 5 videos a day
     vt.innerHTML = '<div class="row"><div class="t"><b>' + T('vtH') + '</b><span>' + T('vtS', nv, mv) + '</span></div><span class="r">+' + fmt(S.vid_reward || 100) + '</span>' + (full ? '<button class="sm done" disabled>' + T('vtTm') + '</button>' : '<button class="sm" id="vtBtn">' + T('vtGo') + '</button>') + '</div>';
