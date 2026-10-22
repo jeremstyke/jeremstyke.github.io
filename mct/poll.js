@@ -1,22 +1,22 @@
 // 22 oct 2026 (Jeremy): in-game poll before refocusing Meme Coin Tycoon on buying / selling, coin creation and blockchains.
-// A compact card above the daily missions until the player votes (+$200 once); the answers are counted by the server
+// A compact card above the daily missions until the player votes (+$200 once), then a button to see the results; the answers are counted by the server
 // (mct-ton function, actions 'mon_poll' / 'mon_pollvote', handled in SQL by mct_poll_api).
 (function () {
   try {
     const TXT = {
-      en: { card: '🗳️ Poll: help us make the game simpler', h: '🗳️ We are simplifying the game', p: 'The core stays: buy, sell, create coins and blockchains, mining, real cryptos, the diamond. Tick what you want to KEEP on top of that:', send: 'Send', thx: 'Thanks! Results so far', votes: (n) => n + ' votes', close: 'Close',
+      en: { res: '📊 Poll results', card: '🗳️ Poll: help us make the game simpler', h: '🗳️ We are simplifying the game', p: 'The core stays: buy, sell, create coins and blockchains, mining, real cryptos, the diamond. Tick what you want to KEEP on top of that:', send: 'Send', thx: 'Thanks! Results so far', votes: (n) => n + ' votes', close: 'Close',
         o: { clans: 'Clans', duels: 'Duels', vault: 'Vault (lock a coin)', wars: 'Clan wars', burn: 'Coin burn (stars)', banner: 'Ad banner (stars)', insure: 'Insurance (video)', scoop: 'News scoop (video)', premium: 'Premium' } },
-      fr: { card: '🗳️ Sondage : aide-nous à simplifier le jeu', h: '🗳️ On simplifie le jeu', p: 'Le cœur reste : acheter, vendre, créer des coins et des blockchains, le minage, les vraies cryptos, le diamant. Coche ce que tu veux GARDER en plus :', send: 'Envoyer', thx: 'Merci ! Résultats pour l\'instant', votes: (n) => n + ' votes', close: 'Fermer',
+      fr: { res: '📊 Résultats du sondage', card: '🗳️ Sondage : aide-nous à simplifier le jeu', h: '🗳️ On simplifie le jeu', p: 'Le cœur reste : acheter, vendre, créer des coins et des blockchains, le minage, les vraies cryptos, le diamant. Coche ce que tu veux GARDER en plus :', send: 'Envoyer', thx: 'Merci ! Résultats pour l\'instant', votes: (n) => n + ' votes', close: 'Fermer',
         o: { clans: 'Clans', duels: 'Duels', vault: 'Coffre (bloquer un coin)', wars: 'Guerres de clans', burn: 'Brûlage de coin (étoiles)', banner: 'Bannière pub (étoiles)', insure: 'Assurance (vidéo)', scoop: 'Scoop des news (vidéo)', premium: 'Premium' } },
-      id: { card: '🗳️ Polling: bantu kami menyederhanakan game', h: '🗳️ Kami menyederhanakan game', p: 'Inti game tetap: beli, jual, buat koin dan blockchain, menambang, kripto asli, berlian. Centang yang ingin kamu PERTAHANKAN:', send: 'Kirim', thx: 'Terima kasih! Hasil sementara', votes: (n) => n + ' suara', close: 'Tutup',
+      id: { res: '📊 Hasil polling', card: '🗳️ Polling: bantu kami menyederhanakan game', h: '🗳️ Kami menyederhanakan game', p: 'Inti game tetap: beli, jual, buat koin dan blockchain, menambang, kripto asli, berlian. Centang yang ingin kamu PERTAHANKAN:', send: 'Kirim', thx: 'Terima kasih! Hasil sementara', votes: (n) => n + ' suara', close: 'Tutup',
         o: { clans: 'Klan', duels: 'Duel', vault: 'Brankas (kunci koin)', wars: 'Perang klan', burn: 'Bakar koin (bintang)', banner: 'Banner iklan (bintang)', insure: 'Asuransi (video)', scoop: 'Bocoran berita (video)', premium: 'Premium' } },
-      ar: { card: '🗳️ استطلاع: ساعدنا في تبسيط اللعبة', h: '🗳️ نحن نبسّط اللعبة', p: 'الأساس باقٍ: الشراء، البيع، إنشاء العملات والبلوكتشين، التعدين، العملات الحقيقية، الماسة. اختر ما تريد الإبقاء عليه أيضًا:', send: 'إرسال', thx: 'شكرًا! النتائج حتى الآن', votes: (n) => n + ' صوت', close: 'إغلاق',
+      ar: { res: '📊 نتائج الاستطلاع', card: '🗳️ استطلاع: ساعدنا في تبسيط اللعبة', h: '🗳️ نحن نبسّط اللعبة', p: 'الأساس باقٍ: الشراء، البيع، إنشاء العملات والبلوكتشين، التعدين، العملات الحقيقية، الماسة. اختر ما تريد الإبقاء عليه أيضًا:', send: 'إرسال', thx: 'شكرًا! النتائج حتى الآن', votes: (n) => n + ' صوت', close: 'إغلاق',
         o: { clans: 'العشائر', duels: 'المبارزات', vault: 'الخزنة (قفل عملة)', wars: 'حروب العشائر', burn: 'حرق عملة (نجوم)', banner: 'لافتة إعلانية (نجوم)', insure: 'التأمين (فيديو)', scoop: 'سبق الأخبار (فيديو)', premium: 'بريميوم' } }
     };
     const T = () => TXT[(typeof LANG === 'string' && TXT[LANG]) ? LANG : 'en'];
     const call = async (action, extra) => (await fetch('https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-ton', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(Object.assign({ app: 'mct', initData: (window.Telegram && Telegram.WebApp.initData) || '', action }, extra || {})) })).json();
+    // 22 oct 2026: the state always comes from the server, so a player who voted keeps a button to see the results
     let ST = null, LOADING = false;
-    try { if (localStorage.getItem('mct_poll_done') === '1') ST = { voted: true }; } catch (e) {}
 
     function overlay(html) {
       let o = document.getElementById('pollov');
@@ -46,16 +46,24 @@
           try { if (r.cash != null && typeof setCash === 'function') setCash(r.cash); } catch (er) {}
           try { if (typeof haptic === 'function') haptic('ok'); } catch (er) {}
           const c = document.getElementById('pollcard'); if (c) c.remove();
+          card();
           results(r);
         } catch (er) { b.disabled = false; }
       };
     }
     function card() {
-      if (ST && ST.voted) return;
+      if (!ST) return;
       const m = document.getElementById('msn');
       if (!m || document.getElementById('pollcard')) return;
       const t = T(), d = document.createElement('button');
       d.id = 'pollcard';
+      if (ST.voted) {
+        d.style.cssText = 'width:100%;display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 0 10px;padding:10px 14px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.05);color:#fff;font-weight:700;font-size:14px;text-align:start';
+        d.innerHTML = '<span>' + t.res + '</span><b style="opacity:.7;white-space:nowrap">' + t.votes(ST.total || 0) + '</b>';
+        d.onclick = async () => { try { if (typeof haptic === 'function') haptic(); } catch (e) {} try { const r = await call('mon_poll'); if (r && r.ok) ST = r; } catch (e) {} results(ST); };
+        m.parentNode.insertBefore(d, m);
+        return;
+      }
       d.style.cssText = 'width:100%;display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 0 10px;padding:11px 14px;border:1px solid rgba(255,212,59,.35);border-radius:14px;background:rgba(255,212,59,.08);color:#fff;font-weight:700;font-size:14px;text-align:start';
       d.innerHTML = '<span>' + t.card + '</span><b style="color:#ffd43b;white-space:nowrap">+$' + ((ST && ST.reward) || 200) + '</b>';
       d.onclick = () => { try { if (typeof haptic === 'function') haptic(); } catch (e) {} form(); };
@@ -65,12 +73,17 @@
       if (ST || LOADING) return; LOADING = true;
       try { const r = await call('mon_poll'); if (r && r.ok) { ST = r; if (r.voted) { try { localStorage.setItem('mct_poll_done', '1'); } catch (e) {} } } } catch (e) {}
       LOADING = false; card();
+      // 22 oct 2026: players who have not voted see the poll once a day when they open the game
+      try {
+        const today = new Date().toISOString().slice(0, 10);
+        if (ST && !ST.voted && SP !== 'poll' && localStorage.getItem('mct_poll_pop') !== today) { localStorage.setItem('mct_poll_pop', today); setTimeout(() => { if (!document.getElementById('pollov')) form(); }, 2500); }
+      } catch (e) {}
     }
     const view = document.getElementById('view');
     if (view) new MutationObserver(() => { if (document.getElementById('msn') && !document.getElementById('pollcard')) { if (ST) card(); else load(); } }).observe(view, { childList: true, subtree: true });
-    load();
     // 22 oct 2026: the poll notification opens the app with startapp=poll, so open the poll (or its results) straight away
     const SP = String((window.Telegram && Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.start_param) || '');
+    load();
     if (SP === 'poll') (async () => { let r = null; try { r = await call('mon_poll'); } catch (e) {} if (r && r.ok) { ST = r; if (r.voted) results(r); else form(); } })();
   } catch (e) { console.error('poll', e); }
 })();
