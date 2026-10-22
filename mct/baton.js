@@ -38,6 +38,7 @@
       let own = false; try { own = String(ME.uid) === '7057960224'; } catch (e) {}
       if (window.MCTPREM && !own) return;
       // 18h43: Jeremy sees each new version once (his own key), everyone else once every 24 h
+      if (document.querySelector('#maint:not([hidden]), .maint:not([hidden])')) return;  // never over the maintenance screen (no popup, no ad)
       const K = own ? 'mct_bt_pop11o' : 'mct_bt_pop10';
       let seen = 0; try { seen = Number(localStorage.getItem(K) || 0); } catch (e) { seen = Date.now(); }
       if (Date.now() - seen < 24 * 3600000) { adInt(); return; }  // 18h45 (Jeremy): the Baton popup was already shown today: an Adsgram interstitial instead
