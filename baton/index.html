@@ -847,7 +847,8 @@ const FAQ42 = {en:'In Tasks, a video pays +100 $BATON (10 a day).', fr:'Dans Tâ
 for (const k in FAQ42) { const f = FAQ[k] && FAQ[k].q; if (!f || f.length !== 10) continue; f[5] = [f[5][0], FAQ42[k]]; f.splice(6, 1); }
 const FAQ43 = {en:'300 $BATON per hour at the start, up to 600 when you upgrade your baton, plus 10 % for each Telegram channel you joined. You have 4 hours.', fr:'300 $BATON par heure au départ, jusqu\'à 600 en améliorant ton bâton, plus 10 % par chaîne Telegram rejointe. Tu as 4 heures.', es:'300 $BATON por hora al inicio, hasta 600 si mejoras tu bastón, más 10 % por cada canal de Telegram al que te unas. Tienes 4 horas.', pt:'300 $BATON por hora no início, até 600 melhorando seu bastão, mais 10 % por canal do Telegram em que você entrou. Você tem 4 horas.', ru:'300 $BATON в час в начале, до 600 после улучшения эстафеты, плюс 10 % за каждый канал Telegram. У тебя 4 часа.', uk:'300 $BATON на годину на початку, до 600 після покращення естафети, плюс 10 % за кожен канал Telegram. У тебе 4 години.', tr:'Başta saatte 300 $BATON, bayrağını geliştirerek 600\'e kadar, katıldığın her Telegram kanalı için +%10. 4 saatin var.', id:'300 $BATON per jam di awal, sampai 600 jika tongkatmu ditingkatkan, plus 10 % per kanal Telegram yang kamu ikuti. Kamu punya 4 jam.', ar:'300 $BATON في الساعة في البداية، حتى 600 عند تطوير عصاك، مع 10 % لكل قناة تيليجرام انضممت إليها. لديك 4 ساعات.', fa:'در شروع ساعتی ۳۰۰ $BATON، با ارتقای چوبت تا ۶۰۰، به‌علاوه ۱۰٪ برای هر کانال تلگرامی که عضو شدی. ۴ ساعت وقت داری.'};  // 22 oct 2026 (15h55): baton levels
 for (const k in FAQ43) { const f = FAQ[k] && FAQ[k].q; if (f && f[2]) f[2] = [f[2][0], FAQ43[k]]; }
-for (const k in FAQ42) { const f = FAQ[k] && FAQ[k].q; if (f && f.length === 9) f.splice(5, 1); }  // 22 oct 2026 (16h18): no more videos
+const FAQ45 = {en:'In Tasks, a video pays +100 $BATON (5 a day).', fr:'Dans Tâches, une vidéo rapporte +100 $BATON (5 par jour).', es:'En Tareas, un vídeo da +100 $BATON (5 al día).', pt:'Em Tarefas, um vídeo rende +100 $BATON (5 por dia).', ru:'В Заданиях видео даёт +100 $BATON (5 в день).', uk:'У Завданнях відео дає +100 $BATON (5 на день).', tr:'Görevler\'de bir video +100 $BATON kazandırır (günde 5).', id:'Di Tugas, satu video memberi +100 $BATON (5 per hari).', ar:'في المهام، يمنح الفيديو +100 $BATON (5 يوميًا).', fa:'در وظایف، هر ویدیو +۱۰۰ $BATON می‌دهد (روزی ۵ بار).'};  // 22 oct 2026 (16h20): 5 videos a day
+for (const k in FAQ45) { const f = FAQ[k] && FAQ[k].q; if (f && f[5]) f[5] = [f[5][0], FAQ45[k]]; }
 function faq() {
   const f = FAQ[LANG] || FAQ.en;
   sheet('<h3>' + f.h + '</h3><button class="btn ghost" data-k="tuto">' + f.tuto + '</button>' +
@@ -1194,7 +1195,7 @@ function render() {
   secs.sort((x, y) => x[1].every((t) => t.done) - y[1].every((t) => t.done));
   $('#tasks').innerHTML = secs.map((z) => sec(z[0], z[1], z[2])).join('');
   { const vt = $('#vidTask'), nv = S.vids_day || 0, mv = S.vids_max || 10, full = nv >= mv;  // 22 oct 2026: +100 $BATON per video, 10 a day
-    vt.hidden = true;  // 22 oct 2026 (16h18, Jeremy): no more video task, only the Adsgram sponsored tasks
+    vt.hidden = !(tg && tg.initData) || S.vids_max == null;  // 22 oct 2026 (16h20, Jeremy): 5 videos a day
     vt.innerHTML = '<div class="row"><div class="t"><b>' + T('vtH') + '</b><span>' + T('vtS', nv, mv) + '</span></div><span class="r">+' + fmt(S.vid_reward || 100) + '</span>' + (full ? '<button class="sm done" disabled>' + T('vtTm') + '</button>' : '<button class="sm" id="vtBtn">' + T('vtGo') + '</button>') + '</div>';
     window.__vt = !vt.hidden && !full; }
   $('#dotTasks').hidden = !S.tasks.some((t) => !t.done) && !window.__adt && !window.__vt;  // 22 oct 2026: an Adsgram task waiting also lights the dot
