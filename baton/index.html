@@ -135,6 +135,7 @@ nav.tabs svg{width:23px;height:23px}
 .phold{text-align:center;font-size:14px;font-weight:700;padding:6px 0}
 .pachh{display:flex;justify-content:space-between;font-weight:800;font-size:15px;padding-top:4px}.pachh span{color:var(--mute);font-weight:700}
 .pach{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.pa{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;border-radius:14px;background:rgba(47,141,255,.1);border:1px solid rgba(80,150,255,.28);text-align:center;font-size:11px;line-height:1.25}.pa i{font-style:normal;font-size:24px}.pa.off{opacity:.35;filter:grayscale(1)}
+.psay{display:flex;flex-wrap:wrap;gap:6px}.psay button{padding:9px 12px;border-radius:14px;background:rgba(47,141,255,.14);border:1px solid rgba(80,150,255,.3);color:inherit;font-weight:700;font-size:13px}.psay button:disabled{opacity:.5}
 .foot a{color:var(--mute)}
 [dir="rtl"] .bar{background:linear-gradient(270deg,var(--baton),var(--flame))}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -847,8 +848,21 @@ id:{pYou:'Ini kamu',pCrew:'Di timmu',pSince:(d)=>'Main sejak '+d+'',pEarned:'$BA
 ar:{pYou:'هذا أنت',pCrew:'في فريقك',pSince:(d)=>'يلعب منذ '+d+'',pEarned:'$BATON مكتسبة',pPasses:'عصي مُمرّرة',pTrip:'أطول رحلة لعصاه',pTeam:'لاعبون مدعوون',pWeek:'الترتيب هذا الأسبوع',pStreak:'أيام متتالية',pHold:'🏃 معه عصا الآن',pNoHold:'لا عصا معه الآن',pAch:'الإنجازات',a1:'أول تمريرة',a2:'10 عصي مُمرّرة',a3:'عصا عبر 10 أيدٍ',a4:'عصا عبر 25 يدًا',a5:'أول لاعب مدعو',a6:'10 لاعبين مدعوين',a7:'7 أيام متتالية',a8:'منصة الأسبوع',a9:'مثقاب المستوى 5',a10:'100 000 $BATON',a11:'10 عصي محمولة'},
 fa:{pYou:'این تویی',pCrew:'در تیم تو',pSince:(d)=>'از '+d+' بازی می‌کند',pEarned:'$BATON به‌دست‌آمده',pPasses:'چوب‌های ردشده',pTrip:'طولانی‌ترین سفر چوبش',pTeam:'بازیکنان دعوت‌شده',pWeek:'رتبهٔ این هفته',pStreak:'روزهای پشت‌سرهم',pHold:'🏃 الان چوب دستش است',pNoHold:'الان چوبی در دست ندارد',pAch:'دستاوردها',a1:'اولین پاس',a2:'۱۰ چوب ردشده',a3:'چوبی با ۱۰ دست',a4:'چوبی با ۲۵ دست',a5:'اولین بازیکن دعوت‌شده',a6:'۱۰ بازیکن دعوت‌شده',a7:'۷ روز پشت‌سرهم',a8:'سکوی هفته',a9:'مته سطح ۵',a10:'۱۰۰٬۰۰۰ $BATON',a11:'۱۰ چوب در دست'}
 };
+// 22 oct 2026 (Jeremy): ready-made messages sent from a profile
+const X27 = {
+en:{sayH:'Send a message',say_hi:'👋 Hi',say_gg:'👏 Well done',say_thx:'🙏 Thanks',say_baton:'🏃 Your next baton?',say_mine:'⛏️ Harvest your mine',sayOk:'Message sent!',sayWait:'You already wrote to this player, try again in a few hours.'},
+fr:{sayH:'Lui envoyer un message',say_hi:'👋 Salut',say_gg:'👏 Bravo',say_thx:'🙏 Merci',say_baton:'🏃 Ton prochain bâton ?',say_mine:'⛏️ Récolte ta mine',sayOk:'Message envoyé !',sayWait:'Tu lui as déjà écrit, réessaie dans quelques heures.'},
+es:{sayH:'Enviarle un mensaje',say_hi:'👋 Hola',say_gg:'👏 Bravo',say_thx:'🙏 Gracias',say_baton:'🏃 ¿Tu próximo bastón?',say_mine:'⛏️ Cosecha tu mina',sayOk:'¡Mensaje enviado!',sayWait:'Ya le escribiste, inténtalo de nuevo en unas horas.'},
+pt:{sayH:'Enviar uma mensagem',say_hi:'👋 Oi',say_gg:'👏 Parabéns',say_thx:'🙏 Obrigado',say_baton:'🏃 Seu próximo bastão?',say_mine:'⛏️ Colha sua mina',sayOk:'Mensagem enviada!',sayWait:'Você já escreveu para ele, tente de novo em algumas horas.'},
+ru:{sayH:'Отправить сообщение',say_hi:'👋 Привет',say_gg:'👏 Молодец',say_thx:'🙏 Спасибо',say_baton:'🏃 Твою следующую эстафету?',say_mine:'⛏️ Собери шахту',sayOk:'Сообщение отправлено!',sayWait:'Ты уже писал этому игроку, попробуй через несколько часов.'},
+uk:{sayH:'Надіслати повідомлення',say_hi:'👋 Привіт',say_gg:'👏 Молодець',say_thx:'🙏 Дякую',say_baton:'🏃 Твою наступну естафету?',say_mine:'⛏️ Збери шахту',sayOk:'Повідомлення надіслано!',sayWait:'Ти вже писав цьому гравцю, спробуй за кілька годин.'},
+tr:{sayH:'Mesaj gönder',say_hi:'👋 Selam',say_gg:'👏 Bravo',say_thx:'🙏 Teşekkürler',say_baton:'🏃 Sıradaki bayrağın?',say_mine:'⛏️ Madenini topla',sayOk:'Mesaj gönderildi!',sayWait:'Bu oyuncuya zaten yazdın, birkaç saat sonra tekrar dene.'},
+id:{sayH:'Kirim pesan',say_hi:'👋 Hai',say_gg:'👏 Keren',say_thx:'🙏 Terima kasih',say_baton:'🏃 Tongkatmu berikutnya?',say_mine:'⛏️ Panen tambangmu',sayOk:'Pesan terkirim!',sayWait:'Kamu sudah menulis ke pemain ini, coba lagi beberapa jam lagi.'},
+ar:{sayH:'أرسل له رسالة',say_hi:'👋 مرحبًا',say_gg:'👏 أحسنت',say_thx:'🙏 شكرًا',say_baton:'🏃 عصاك القادمة؟',say_mine:'⛏️ اجمع منجمك',sayOk:'أُرسلت الرسالة!',sayWait:'راسلت هذا اللاعب بالفعل، حاول بعد بضع ساعات.'},
+fa:{sayH:'برایش پیام بفرست',say_hi:'👋 سلام',say_gg:'👏 آفرین',say_thx:'🙏 ممنون',say_baton:'🏃 چوب بعدی‌ات؟',say_mine:'⛏️ معدنت را برداشت کن',sayOk:'پیام فرستاده شد!',sayWait:'قبلاً به این بازیکن پیام دادی، چند ساعت بعد دوباره امتحان کن.'}
+};
 // 22 oct 2026: the newest texts win over the older X11 / X12 blocks defined further down
-for (const o of [X19, X20, X21, X22, X23, X24, X25, X26]) for (const k in o) Object.assign(X[k], o[k]);
+for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27]) for (const k in o) Object.assign(X[k], o[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -1075,9 +1089,17 @@ async function openProfile(id) {
   const av = '<span class="av" style="background:' + hueOf(p.name) + '">' + (p.photo && /^https:\/\//.test(p.photo) ? '<img src="' + esc(p.photo) + '" alt="" onerror="this.remove()">' : '') + init(p.name) + '</span>';
   sheet('<div class="phead">' + av + '<div class="t"><b>' + esc(p.name) + '</b><span>' + (p.me ? '<i class="ptag">' + T('pYou') + '</i>' : p.crew ? '<i class="ptag">' + T('pCrew') + '</i>' : '') + T('pSince', d) + '</span></div></div>' +
     '<div class="pgrid">' + st(fmt(p.pts), T('pEarned')) + st(p.week ? '#' + fmt(p.week) : '-', T('pWeek')) + st(fmt(p.passes), T('pPasses')) + st(fmt(p.trip) + ' ' + T('links'), T('pTrip')) + st(fmt(p.team), T('pTeam')) + st(fmt(p.streak), T('pStreak')) + '</div>' +
-    '<div class="phold">' + (p.holding ? T('pHold') : T('pNoHold')) + '</div>' + achH(p) + '<p class="foot">' + T('lvl', p.drill) + '</p>' +
+    '<div class="phold">' + (p.holding ? T('pHold') : T('pNoHold')) + '</div>' +
+    (p.me ? '' : '<div class="pachh">' + T('sayH') + '</div>' + (p.can_say ? '<div class="psay">' + ['hi', 'gg', 'thx', 'baton', 'mine'].map((k) => '<button data-say="' + k + '" data-to="' + p.id + '">' + T('say_' + k) + '</button>').join('') + '</div>' : '<p class="foot" style="text-align:start">' + T('sayWait') + '</p>')) + achH(p) + '<p class="foot">' + T('lvl', p.drill) + '</p>' +
     '<button class="btn ghost" data-k="keep">OK</button>');
 }
+$('#sheet').addEventListener('click', async (e) => {
+  const b = e.target.closest('[data-say]'); if (!b) return;
+  hap(); const box = b.parentNode; box.querySelectorAll('button').forEach((x) => { x.disabled = true; });
+  const r = await api('say', { to: Number(b.dataset.to), kind: b.dataset.say });
+  if (r && r.ok) { hap('ok'); toast(T('sayOk')); box.outerHTML = '<p class="foot" style="text-align:start">✅ ' + T('sayOk') + '</p>'; }
+  else { hap('err'); toast(r && r.error === 'say_wait' ? T('sayWait') : errMsg(r)); box.querySelectorAll('button').forEach((x) => { x.disabled = false; }); }
+});
 document.addEventListener('click', (e) => {
   const el = e.target.closest('[data-pid]'); if (!el || !el.dataset.pid || el.closest('#sheet')) return;
   hap(); openProfile(Number(el.dataset.pid));
@@ -1175,6 +1197,7 @@ function nudge() {
   $('#helpBtn').onclick = () => { hap(); faq(); };  // 22 oct 2026: FAQ first, tutorial one tap away
   const sp = (tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '';
   if (sp === 'friends') go('friends');
+  else if (/^p\d{1,15}$/.test(sp)) openProfile(Number(sp.slice(1)));  // 22 oct 2026: a message from a player opens his profile
   setInterval(tick, 1000);
   setInterval(refresh, 60000);
   document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh(); });
