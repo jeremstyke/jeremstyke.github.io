@@ -48,3 +48,35 @@
     setTimeout(popup, 2500);  // after the app has drawn its first screen
   } catch (e) { console.error('baton bridge', e); }
 })();
+
+// 22 oct 2026 (Jeremy, 17h49): the TON referral program and the diamond stop on Sunday 1 November 2026; a notice in both sheets
+// (the TON referral sheet #tonsheet and the diamond #diam), with a button to Baton where USDT can still be earned
+(function () {
+  try {
+    const N = {
+      en: ['⏳ The referral program and the diamond stop on Sunday 1 November.', '🏃 Keep earning USDT on Baton', 'Play'],
+      fr: ['⏳ Le parrainage et le diamant s\'arrêtent le dimanche 1er novembre.', '🏃 Continue de gagner des USDT sur Baton', 'Jouer'],
+      ar: ['⏳ برنامج الإحالة والماسة يتوقفان يوم الأحد 1 نوفمبر.', '🏃 واصل ربح USDT على Baton', 'العب'],
+      id: ['⏳ Program referral dan berlian berhenti hari Minggu 1 November.', '🏃 Terus dapatkan USDT di Baton', 'Main'],
+      ru: ['⏳ Реферальная программа и алмаз закрываются в воскресенье, 1 ноября.', '🏃 Продолжай зарабатывать USDT в Baton', 'Играть'],
+      fa: ['⏳ برنامه دعوت و الماس یکشنبه ۱ نوامبر تمام می‌شوند.', '🏃 در Baton همچنان USDT بگیر', 'بازی']
+    };
+    const lg = () => { try { return (typeof LANG === 'string' && N[LANG]) ? LANG : 'en'; } catch (e) { return 'en'; } };
+    const esc2 = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    function note() {
+      const x = N[lg()];
+      const el = document.createElement('div'); el.className = 'btend';
+      el.style.cssText = 'margin:8px 0 12px;padding:12px 14px;border-radius:14px;border:1px solid rgba(80,160,255,.6);background:linear-gradient(135deg,rgba(47,141,255,.28),rgba(30,90,200,.12));text-align:start;color:#e9f1ff';
+      el.innerHTML = '<div style="font-weight:800;font-size:14px;line-height:1.35">' + esc2(x[0]) + '</div><div style="display:flex;align-items:center;gap:10px;margin-top:8px"><span style="flex:1;font-size:13px">' + esc2(x[1]) + '</span><button type="button" style="border:0;border-radius:999px;padding:8px 14px;font-weight:800;background:#2f8dff;color:#fff;cursor:pointer">' + esc2(x[2]) + '</button></div>';
+      el.querySelector('button').onclick = (e) => { e.stopPropagation(); try { if (typeof haptic === 'function') haptic(); } catch (er) {} try { tw.openTelegramLink('https://t.me/PassTheBatonBot/play?startapp=src_mctend'); } catch (er) {} };
+      return el;
+    }
+    function put() {
+      const ts = document.querySelector('#tonsheet .tsx');
+      if (ts && !ts.querySelector('.btend')) { const g = ts.querySelector('.grab'); g ? g.insertAdjacentElement('afterend', note()) : ts.prepend(note()); }
+      const db = document.querySelector('#diam .dbox');
+      if (db && !db.querySelector('.btend')) { const t = db.querySelector('.dtop'); t ? t.insertAdjacentElement('afterend', note()) : db.prepend(note()); }
+    }
+    new MutationObserver(put).observe(document.body, { childList: true, subtree: true });
+  } catch (e) { console.error('baton end notice', e); }
+})();
