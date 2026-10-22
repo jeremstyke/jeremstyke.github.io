@@ -299,7 +299,14 @@ nav.tabs button[aria-current="page"] svg{filter:drop-shadow(0 0 6px rgba(47,141,
 #p-rank .big,#p-tasks .big,#p-friends .big{font-size:clamp(38px,12.5vw,60px);line-height:1.05}
 nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10.5px}
 /* 22 oct 2026 (Jeremy, 12h55): simpler game: no hands, no Stars extension, no baton video, no "longest trip", rankings by miners only */
-#extBtn,#moreBat,#chainCard,.record,#sChains,#mineCard,#p-mine,nav.tabs button[data-p="mine"]{display:none!important}
+#extBtn,#moreBat,#chainCard,.record,#sChains,#mineCard,#p-mine,nav.tabs button[data-p="mine"],#p-rank .seg{display:none!important}
+/* 22 oct 2026 (13h35): rankings centered, medals for the top 3, the countdown as a pill */
+#p-rank .score{text-align:center}
+#p-rank .wk{display:flex;justify-content:center;margin:0 0 4px}#p-rank .wk span{background:var(--lane);border-radius:999px;padding:7px 14px;font-size:13px;color:var(--mute);font-weight:700}
+#p-rank .rank.m{font-size:24px;min-width:32px;text-align:center}
+#p-rank .row.top1{border-color:rgba(255,212,59,.55);background:linear-gradient(90deg,rgba(255,212,59,.13),transparent 70%)}
+#p-rank .row.top2{border-color:rgba(200,214,229,.4)}#p-rank .row.top3{border-color:rgba(205,127,50,.45)}
+#p-rank .row .r{font-weight:800}
 nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
 .earn{margin-top:8px;font-weight:800;color:#ffd43b;font-size:15px}
 </style>
@@ -1215,9 +1222,9 @@ async function loadRanks() {
   const r = await api('ranks'); if (!r.ok) return;
   const rows = rankMode === 'chains'
     ? r.chains.map((c, i) => '<div class="row' + (c.me ? ' me' : '') + '" data-pid="' + (c.sid || '') + '"><span class="rank' + (i < 3 ? ' g' : '') + '">' + (i + 1) + '</span><div class="t"><b>' + esc(T('chainOf', c.starter)) + '</b><span>' + (c.stopped ? T('stopped') : T('running')) + '</span></div><span class="r">' + fmt(c.links) + ' ' + T('links') + '</span></div>')
-    : r.miners.map((m, i) => '<div class="row' + (m.me ? ' me' : '') + '" data-pid="' + (m.id || '') + '"><span class="rank' + (i < 3 ? ' g' : '') + '">' + (i + 1) + '</span><span class="av" style="background:' + hueOf(m.name) + '">' + init(m.name) + '</span><div class="t"><b>' + esc(m.name) + '</b></div><span class="r">' + fmt(m.pts) + '</span></div>');
+    : r.miners.map((m, i) => '<div class="row' + (m.me ? ' me' : '') + (i < 3 ? ' top' + (i + 1) : '') + '" data-pid="' + (m.id || '') + '"><span class="rank' + (i < 3 ? ' m' : '') + '">' + (i < 3 ? ['🥇', '🥈', '🥉'][i] : i + 1) + '</span><span class="av" style="background:' + hueOf(m.name) + '">' + init(m.name) + '</span><div class="t"><b>' + esc(m.name) + '</b></div><span class="r">' + fmt(m.pts) + '</span></div>');
   let wk = '';
-  if (r.week_end) { const s = Math.max(0, r.week_end - Math.floor(Date.now() / 1000)), dd = Math.floor(s / 86400), hh = Math.floor(s % 86400 / 3600); wk = '<p class="foot">⏳ ' + T('weekEnd', (dd ? dd + ' ' + T('dU') + ' ' : '') + hh + ' ' + T('hU')) + '</p>'; }
+  if (r.week_end) { const s = Math.max(0, r.week_end - Math.floor(Date.now() / 1000)), dd = Math.floor(s / 86400), hh = Math.floor(s % 86400 / 3600); wk = '<div class="wk"><span>⏳ ' + T('weekEnd', (dd ? dd + ' ' + T('dU') + ' ' : '') + hh + ' ' + T('hU')) + '</span></div>'; }
   $('#ranks').innerHTML = wk + (rows.join('') || '<div class="empty">…</div>');
 }
 // 22 oct 2026 (Jeremy): tap a player (team, rankings, the hands of a baton) to see his profile
