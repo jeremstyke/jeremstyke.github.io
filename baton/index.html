@@ -566,6 +566,20 @@ ar:{myOn:(w)=>'🏁 عصاك مع <b>'+w+'</b>',myDrop:'🏁 سقطت عصاك �
 fa:{myOn:(w)=>'🏁 چوبت دست <b>'+w+'</b> است',myDrop:'🏁 آخرین چوبت افتاد',lastHeld:(n)=>'آخرین چوبی که داشتی · راه‌انداز <b>'+n+'</b>'}
 };
 for (const k in X21) Object.assign(X[k], X21[k]);
+// 22 oct 2026 (Jeremy): +1 % per hand of your own baton while it travels
+const X22 = {
+en:{bBaton:(n)=>'+'+n+' % thanks to your baton on the move (1 % per hand)'},
+fr:{bBaton:(n)=>'+'+n+' % grâce à ton bâton qui voyage (1 % par main)'},
+es:{bBaton:(n)=>'+'+n+' % gracias a tu bastón en viaje (1 % por mano)'},
+pt:{bBaton:(n)=>'+'+n+' % graças ao seu bastão viajando (1 % por mão)'},
+ru:{bBaton:(n)=>'+'+n+' % благодаря твоей эстафете в пути (1 % за руку)'},
+uk:{bBaton:(n)=>'+'+n+' % завдяки твоїй естафеті в дорозі (1 % за руку)'},
+tr:{bBaton:(n)=>'+%'+n+' yoldaki bayrağın sayesinde (el başına %1)'},
+id:{bBaton:(n)=>'+'+n+' % berkat tongkatmu yang berkelana (1 % per tangan)'},
+ar:{bBaton:(n)=>'+'+n+' % بفضل عصاك المسافرة (1 % لكل يد)'},
+fa:{bBaton:(n)=>'+'+n+'٪ به لطف چوبت که در سفر است (۱٪ برای هر دست)'}
+};
+for (const k in X22) Object.assign(X[k], X22[k]);
 // 22 oct 2026 (Jeremy): full FAQ behind the "?" button (the tutorial stays one tap away)
 const FAQ = {
 en:{h:'Help',tuto:'▶ Replay the tutorial',more:'Another question? Write to us:',q:[
@@ -580,7 +594,7 @@ en:{h:'Help',tuto:'▶ Replay the tutorial',more:'Another question? Write to us:
 ['Why can I not pick a friend?','They already hold a baton or already held this one. Send your link to someone new instead.'],
 ['Can I keep my baton longer?','Yes: +4 h for 10 ⭐, once per baton.'],
 ['What do I get for inviting a friend?','5,000 $BATON at their first harvest and 10 % of everything they mine. If they join while you hold a baton, they take it and you get the x5 bonus.'],
-['What is the % bonus?','+10 % mining for each Telegram channel you join, as long as you stay subscribed.'],
+['What is the % bonus?','+1 % mining per hand of the baton you started, as long as it is travelling (up to +100 %), and +10 % for each Telegram channel you join, as long as you stay subscribed.'],
 ['What are upgrades?','The drill makes you mine faster. The tank (a mine that lasts longer) and the grip (a baton kept longer) unlock at drill level 3.'],
 ['What is the 🔥 streak?','Harvest every day: each day in a row adds a bonus.'],
 ['How do the rankings work?','Batons: the longest trips of the week (since Monday). Miners: the most $BATON earned over 7 days.'],
@@ -597,7 +611,7 @@ fr:{h:'Aide',tuto:'▶ Revoir le tutoriel',more:'Une autre question ? Écris-nou
 ['Pourquoi je ne peux pas choisir un ami ?','Il tient déjà un bâton ou il a déjà tenu celui-ci. Envoie plutôt ton lien à quelqu\'un de nouveau.'],
 ['Je peux garder mon bâton plus longtemps ?','Oui : +4 h pour 10 ⭐, une fois par bâton.'],
 ['Qu\'est-ce que je gagne en invitant un ami ?','5 000 $BATON à sa première récolte et 10 % de tout ce qu\'il mine. S\'il arrive pendant que tu tiens un bâton, il le prend et tu gagnes le bonus x5.'],
-['C\'est quoi le bonus en % ?','+10 % de minage par chaîne Telegram rejointe, tant que tu restes abonné.'],
+['C\'est quoi le bonus en % ?','+1 % de minage par main du bâton que tu as lancé, tant qu\'il voyage (jusqu\'à +100 %), et +10 % par chaîne Telegram rejointe, tant que tu restes abonné.'],
 ['C\'est quoi les améliorations ?','La foreuse te fait miner plus vite. Le réservoir (mine qui dure plus longtemps) et la poignée (bâton gardé plus longtemps) se débloquent au niveau 3 de la foreuse.'],
 ['C\'est quoi la série 🔥 ?','Récolte chaque jour : chaque jour d\'affilée ajoute un bonus.'],
 ['Comment marchent les classements ?','Bâtons : les plus longs voyages de la semaine (depuis lundi). Mineurs : le plus de $BATON gagnés sur 7 jours.'],
@@ -614,7 +628,7 @@ es:{h:'Ayuda',tuto:'▶ Ver el tutorial',more:'¿Otra pregunta? Escríbenos:',q:
 ['¿Por qué no puedo elegir a un amigo?','Ya tiene un bastón o ya tuvo este. Envía tu enlace a alguien nuevo.'],
 ['¿Puedo quedarme el bastón más tiempo?','Sí: +4 h por 10 ⭐, una vez por bastón.'],
 ['¿Qué gano invitando a un amigo?','5 000 $BATON en su primera recolección y el 10 % de todo lo que mine. Si llega mientras tienes un bastón, se lo queda y ganas el bonus x5.'],
-['¿Qué es el bonus en %?','+10 % de minería por cada canal de Telegram al que te unas, mientras sigas suscrito.'],
+['¿Qué es el bonus en %?','+1 % de minería por cada mano del bastón que lanzaste, mientras siga viajando (hasta +100 %), y +10 % por cada canal de Telegram al que te unas, mientras sigas suscrito.'],
 ['¿Qué son las mejoras?','El taladro te hace minar más rápido. El depósito y el agarre se desbloquean en el nivel 3 del taladro.'],
 ['¿Qué es la racha 🔥?','Recolecta cada día: cada día seguido suma un bonus.'],
 ['¿Cómo funcionan las clasificaciones?','Bastones: los viajes más largos de la semana (desde el lunes). Mineros: más $BATON ganados en 7 días.'],
@@ -631,7 +645,7 @@ pt:{h:'Ajuda',tuto:'▶ Ver o tutorial',more:'Outra pergunta? Fale com a gente:'
 ['Por que não posso escolher um amigo?','Ele já tem um bastão ou já teve este. Mande seu link para alguém novo.'],
 ['Posso ficar mais tempo com o bastão?','Sim: +4 h por 10 ⭐, uma vez por bastão.'],
 ['O que ganho convidando um amigo?','5 000 $BATON na primeira coleta dele e 10 % de tudo o que ele minerar. Se ele chegar enquanto você tem um bastão, ele fica com ele e você ganha o bônus x5.'],
-['O que é o bônus em %?','+10 % de mineração por canal do Telegram em que você entrar, enquanto continuar inscrito.'],
+['O que é o bônus em %?','+1 % de mineração por mão do bastão que você lançou, enquanto ele viajar (até +100 %), e +10 % por canal do Telegram em que você entrar, enquanto continuar inscrito.'],
 ['O que são as melhorias?','A broca faz você minerar mais rápido. O tanque e a empunhadura são liberados no nível 3 da broca.'],
 ['O que é a sequência 🔥?','Colete todo dia: cada dia seguido soma um bônus.'],
 ['Como funcionam os rankings?','Bastões: as viagens mais longas da semana (desde segunda). Mineradores: mais $BATON ganhos em 7 dias.'],
@@ -648,7 +662,7 @@ ru:{h:'Помощь',tuto:'▶ Пройти обучение снова',more:'�
 ['Почему нельзя выбрать друга?','У него уже есть эстафета или он уже держал эту. Отправь ссылку новичку.'],
 ['Можно держать эстафету дольше?','Да: +4 ч за 10 ⭐, один раз на эстафету.'],
 ['Что я получу за приглашение друга?','5 000 $BATON после его первого сбора и 10 % от всей его добычи. Если он придёт, пока у тебя эстафета, он её заберёт, а ты получишь бонус x5.'],
-['Что такое бонус в %?','+10 % к добыче за каждый канал Telegram, на который ты подписан.'],
+['Что такое бонус в %?','+1 % к добыче за каждую руку твоей эстафеты, пока она в пути (до +100 %), и +10 % за каждый канал Telegram, на который ты подписан.'],
 ['Что такое улучшения?','Бур ускоряет добычу. Бак и рукоять открываются на 3-м уровне бура.'],
 ['Что такое серия 🔥?','Собирай каждый день: каждый день подряд добавляет бонус.'],
 ['Как работают рейтинги?','Эстафеты: самые длинные путешествия недели (с понедельника). Шахтёры: больше всего $BATON за 7 дней.'],
@@ -665,7 +679,7 @@ uk:{h:'Допомога',tuto:'▶ Пройти навчання знову',mor
 ['Чому не можна обрати друга?','Він уже має естафету або вже тримав цю. Надішли посилання новачку.'],
 ['Можна тримати естафету довше?','Так: +4 год за 10 ⭐, один раз на естафету.'],
 ['Що я отримаю за запрошення друга?','5 000 $BATON після його першого збору і 10 % від усього його видобутку. Якщо він прийде, поки в тебе естафета, він її забере, а ти отримаєш бонус x5.'],
-['Що таке бонус у %?','+10 % до видобутку за кожен канал Telegram, на який ти підписаний.'],
+['Що таке бонус у %?','+1 % до видобутку за кожну руку твоєї естафети, поки вона в дорозі (до +100 %), і +10 % за кожен канал Telegram, на який ти підписаний.'],
 ['Що таке покращення?','Бур прискорює видобуток. Бак і руків\'я відкриваються на 3-му рівні бура.'],
 ['Що таке серія 🔥?','Збирай щодня: кожен день поспіль додає бонус.'],
 ['Як працюють рейтинги?','Естафети: найдовші подорожі тижня (з понеділка). Шахтарі: найбільше $BATON за 7 днів.'],
@@ -682,7 +696,7 @@ tr:{h:'Yardım',tuto:'▶ Eğitimi tekrar izle',more:'Başka bir sorun mu var? B
 ['Neden bir arkadaş seçemiyorum?','Elinde zaten bayrak var ya da bunu zaten tuttu. Linkini yeni birine gönder.'],
 ['Bayrağı daha uzun tutabilir miyim?','Evet: 10 ⭐ karşılığında +4 saat, bayrak başına bir kez.'],
 ['Arkadaş davet edince ne kazanırım?','İlk toplamasında 5 000 $BATON ve kazdığı her şeyin %10\'u. Sen bayrağı tutarken gelirse bayrağı alır ve sen x5 bonusu kazanırsın.'],
-['% bonus nedir?','Katıldığın her Telegram kanalı için, abone kaldığın sürece +%10 kazı.'],
+['% bonus nedir?','Başlattığın bayrak yolda olduğu sürece her el için +%1 kazı (en fazla +%100) ve katıldığın her Telegram kanalı için, abone kaldığın sürece +%10.'],
 ['Geliştirmeler nedir?','Matkap daha hızlı kazmanı sağlar. Depo ve tutamak, matkap 3. seviyede açılır.'],
 ['🔥 serisi nedir?','Her gün topla: üst üste her gün bir bonus ekler.'],
 ['Sıralamalar nasıl çalışır?','Bayraklar: haftanın en uzun yolculukları (pazartesiden beri). Madenciler: 7 günde en çok $BATON kazananlar.'],
@@ -699,7 +713,7 @@ id:{h:'Bantuan',tuto:'▶ Ulangi tutorial',more:'Ada pertanyaan lain? Tulis ke k
 ['Kenapa tidak bisa memilih teman?','Dia sudah memegang tongkat atau sudah pernah memegang yang ini. Kirim linkmu ke orang baru.'],
 ['Bisa pegang tongkat lebih lama?','Bisa: +4 jam untuk 10 ⭐, sekali per tongkat.'],
 ['Apa yang kudapat jika mengundang teman?','5 000 $BATON saat panen pertamanya dan 10 % dari semua hasil tambangnya. Jika dia datang saat kamu memegang tongkat, dia mengambilnya dan kamu dapat bonus x5.'],
-['Apa itu bonus %?','+10 % tambang untuk setiap kanal Telegram yang kamu ikuti, selama tetap berlangganan.'],
+['Apa itu bonus %?','+1 % tambang per tangan dari tongkat yang kamu mulai, selama masih berkelana (hingga +100 %), dan +10 % untuk setiap kanal Telegram yang kamu ikuti, selama tetap berlangganan.'],
 ['Apa itu peningkatan?','Bor membuatmu menambang lebih cepat. Tangki dan pegangan terbuka di level bor 3.'],
 ['Apa itu runtutan 🔥?','Panen setiap hari: setiap hari berturut-turut menambah bonus.'],
 ['Bagaimana peringkat bekerja?','Tongkat: perjalanan terpanjang minggu ini (sejak Senin). Penambang: $BATON terbanyak dalam 7 hari.'],
@@ -716,7 +730,7 @@ ar:{h:'مساعدة',tuto:'▶ أعد مشاهدة الشرح',more:'سؤال آ
 ['لماذا لا أستطيع اختيار صديق؟','معه عصا بالفعل أو حمل هذه من قبل. أرسل رابطك لشخص جديد.'],
 ['هل يمكنني الاحتفاظ بالعصا أطول؟','نعم: +4 ساعات مقابل 10 ⭐، مرة واحدة لكل عصا.'],
 ['ماذا أربح عند دعوة صديق؟','5 000 $BATON عند أول جمع له و10 % من كل ما يعدّنه. إذا وصل وأنت تحمل عصا، يأخذها وتربح مكافأة x5.'],
-['ما هي المكافأة بالنسبة المئوية؟','+10 % تعدين لكل قناة تيليجرام تنضم إليها، ما دمت مشتركًا.'],
+['ما هي المكافأة بالنسبة المئوية؟','+1 % تعدين لكل يد مرت بها العصا التي أطلقتها ما دامت تسافر (حتى +100 %)، و+10 % لكل قناة تيليجرام تنضم إليها ما دمت مشتركًا.'],
 ['ما هي التحسينات؟','المثقاب يجعلك تعدّن أسرع. الخزان والمقبض يُفتحان عند المستوى 3 للمثقاب.'],
 ['ما هي السلسلة 🔥؟','اجمع كل يوم: كل يوم متتالٍ يضيف مكافأة.'],
 ['كيف تعمل التصنيفات؟','العصي: أطول رحلات الأسبوع (منذ الإثنين). المعدّنون: الأكثر ربحًا لـ $BATON خلال 7 أيام.'],
@@ -733,7 +747,7 @@ fa:{h:'راهنما',tuto:'▶ دیدن دوبارهٔ آموزش',more:'سؤا�
 ['چرا نمی‌توانم دوستی را انتخاب کنم؟','او از قبل چوب دارد یا همین را قبلاً داشته. لینکت را برای یک تازه‌وارد بفرست.'],
 ['می‌توانم چوب را بیشتر نگه دارم؟','بله: ۴ ساعت بیشتر با ۱۰ ⭐، یک بار برای هر چوب.'],
 ['با دعوت دوست چه می‌گیرم؟','۵٬۰۰۰ $BATON در اولین برداشتش و ۱۰٪ از همهٔ استخراجش. اگر وقتی چوب دست توست بیاید، آن را می‌گیرد و تو پاداش x5 می‌گیری.'],
-['پاداش درصدی چیست؟','۱۰٪+ استخراج برای هر کانال تلگرامی که عضوش شوی، تا وقتی عضو بمانی.'],
+['پاداش درصدی چیست؟','۱٪+ استخراج برای هر دستِ چوبی که راه انداختی، تا وقتی در سفر است (تا ۱۰۰٪+)، و ۱۰٪+ برای هر کانال تلگرامی که عضوش شوی، تا وقتی عضو بمانی.'],
 ['ارتقاها چیست؟','مته سرعت استخراجت را بالا می‌برد. مخزن و دسته در سطح ۳ مته باز می‌شوند.'],
 ['زنجیرهٔ 🔥 چیست؟','هر روز برداشت کن: هر روز پیاپی یک پاداش اضافه می‌کند.'],
 ['رتبه‌بندی‌ها چطور کار می‌کنند؟','چوب‌ها: طولانی‌ترین سفرهای هفته (از دوشنبه). معدنچی‌ها: بیشترین $BATON در ۷ روز.'],
@@ -1015,7 +1029,7 @@ function tutorial() {
 document.querySelector('.chip.g').onclick = () => {
   if (!S) return; hap();
   const perk = S.perk || 0, chain = Math.max(0, (S.bonus || 0) - perk);
-  sheet('<h3>' + T('bonusH') + ' +' + (S.bonus || 0) + '%</h3><div class="row"><div class="t"><b>📢 ' + T('bSub', perk) + '</b></div></div><p class="foot">' + T('bTip') + '</p><button class="btn ghost" data-k="keep">OK</button>');
+  sheet('<h3>' + T('bonusH') + ' +' + (S.bonus || 0) + '%</h3>' + (chain > 0 ? '<div class="row"><div class="t"><b>🏃 ' + T('bBaton', chain) + '</b></div></div>' : '') + '<div class="row"><div class="t"><b>📢 ' + T('bSub', perk) + '</b></div></div><p class="foot">' + T('bTip') + '</p><button class="btn ghost" data-k="keep">OK</button>');
 };
 // 21 oct 2026: the streak flame opens its explanation (7 days around today, today's and tomorrow's bonus)
 (() => {
