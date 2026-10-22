@@ -861,8 +861,21 @@ id:{sayH:'Kirim pesan',say_hi:'👋 Hai',say_gg:'👏 Keren',say_thx:'🙏 Terim
 ar:{sayH:'أرسل له رسالة',say_hi:'👋 مرحبًا',say_gg:'👏 أحسنت',say_thx:'🙏 شكرًا',say_baton:'🏃 عصاك القادمة؟',say_mine:'⛏️ اجمع منجمك',sayOk:'أُرسلت الرسالة!',sayWait:'راسلت هذا اللاعب بالفعل، حاول بعد بضع ساعات.'},
 fa:{sayH:'برایش پیام بفرست',say_hi:'👋 سلام',say_gg:'👏 آفرین',say_thx:'🙏 ممنون',say_baton:'🏃 چوب بعدی‌ات؟',say_mine:'⛏️ معدنت را برداشت کن',sayOk:'پیام فرستاده شد!',sayWait:'قبلاً به این بازیکن پیام دادی، چند ساعت بعد دوباره امتحان کن.'}
 };
+// 22 oct 2026 (Jeremy): two more ready-made messages about the baton
+const X28 = {
+en:{say_forget:'⏳ Don\'t forget my baton',say_drop:'😱 Oh no, my baton!'},
+fr:{say_forget:'⏳ N\'oublie pas mon bâton',say_drop:'😱 Oh non, mon bâton !'},
+es:{say_forget:'⏳ No olvides mi bastón',say_drop:'😱 ¡Oh no, mi bastón!'},
+pt:{say_forget:'⏳ Não esqueça meu bastão',say_drop:'😱 Ah não, meu bastão!'},
+ru:{say_forget:'⏳ Не забудь мою эстафету',say_drop:'😱 О нет, моя эстафета!'},
+uk:{say_forget:'⏳ Не забудь мою естафету',say_drop:'😱 О ні, моя естафета!'},
+tr:{say_forget:'⏳ Bayrağımı unutma',say_drop:'😱 Olamaz, bayrağım!'},
+id:{say_forget:'⏳ Jangan lupa tongkatku',say_drop:'😱 Oh tidak, tongkatku!'},
+ar:{say_forget:'⏳ لا تنسَ عصاي',say_drop:'😱 أوه لا، عصاي!'},
+fa:{say_forget:'⏳ چوبم را فراموش نکن',say_drop:'😱 وای نه، چوبم!'}
+};
 // 22 oct 2026: the newest texts win over the older X11 / X12 blocks defined further down
-for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27]) for (const k in o) Object.assign(X[k], o[k]);
+for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28]) for (const k in o) Object.assign(X[k], o[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -1090,7 +1103,7 @@ async function openProfile(id) {
   sheet('<div class="phead">' + av + '<div class="t"><b>' + esc(p.name) + '</b><span>' + (p.me ? '<i class="ptag">' + T('pYou') + '</i>' : p.crew ? '<i class="ptag">' + T('pCrew') + '</i>' : '') + T('pSince', d) + '</span></div></div>' +
     '<div class="pgrid">' + st(fmt(p.pts), T('pEarned')) + st(p.week ? '#' + fmt(p.week) : '-', T('pWeek')) + st(fmt(p.passes), T('pPasses')) + st(fmt(p.trip) + ' ' + T('links'), T('pTrip')) + st(fmt(p.team), T('pTeam')) + st(fmt(p.streak), T('pStreak')) + '</div>' +
     '<div class="phold">' + (p.holding ? T('pHold') : T('pNoHold')) + '</div>' +
-    (p.me ? '' : '<div class="pachh">' + T('sayH') + '</div>' + (p.can_say ? '<div class="psay">' + ['hi', 'gg', 'thx', 'baton', 'mine'].map((k) => '<button data-say="' + k + '" data-to="' + p.id + '">' + T('say_' + k) + '</button>').join('') + '</div>' : '<p class="foot" style="text-align:start">' + T('sayWait') + '</p>')) + achH(p) + '<p class="foot">' + T('lvl', p.drill) + '</p>' +
+    (p.me ? '' : '<div class="pachh">' + T('sayH') + '</div>' + (p.can_say ? '<div class="psay">' + ['hi', 'gg', 'thx', 'baton', 'forget', 'drop', 'mine'].map((k) => '<button data-say="' + k + '" data-to="' + p.id + '">' + T('say_' + k) + '</button>').join('') + '</div>' : '<p class="foot" style="text-align:start">' + T('sayWait') + '</p>')) + achH(p) + '<p class="foot">' + T('lvl', p.drill) + '</p>' +
     '<button class="btn ghost" data-k="keep">OK</button>');
 }
 $('#sheet').addEventListener('click', async (e) => {
