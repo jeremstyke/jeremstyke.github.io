@@ -299,7 +299,7 @@ nav.tabs button[aria-current="page"] svg{filter:drop-shadow(0 0 6px rgba(47,141,
 #p-rank .big,#p-tasks .big,#p-friends .big{font-size:clamp(38px,12.5vw,60px);line-height:1.05}
 nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10.5px}
 /* 22 oct 2026 (Jeremy, 12h55): simpler game: no hands, no Stars extension, no baton video, no "longest trip", rankings by miners only */
-#vidBtn,#extBtn,#moreBat,#chainCard,.record,#sChains,#mineCard,#p-mine,nav.tabs button[data-p="mine"],#p-rank .seg{display:none!important}
+#vidBtn,#extBtn,#moreBat,#chainCard,.record,#mineCard,#p-mine,nav.tabs button[data-p="mine"]{display:none!important}
 /* 22 oct 2026 (13h35): rankings centered, medals for the top 3, the countdown as a pill */
 #p-rank .score{text-align:center}
 #p-rank .wk{display:flex;justify-content:center;margin:0 0 4px}#p-rank .wk span{background:var(--lane);border-radius:999px;padding:7px 14px;font-size:13px;color:var(--mute);font-weight:700}
@@ -380,7 +380,7 @@ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
 
     <section class="panel" id="p-rank" hidden>
       <div class="score"><small data-t="week"></small><div class="big" data-t="ranks"></div></div>
-      <div class="seg"><button id="sChains" aria-pressed="false" data-t="chains"></button><button id="sMiners" aria-pressed="true" data-t="miners"></button></div>
+      <div class="seg"><button id="sMiners" aria-pressed="true" data-t="miners"></button><button id="sChains" aria-pressed="false" data-t="chains"></button></div>
       <div class="list" id="ranks"></div>
     </section>
   </main>
@@ -1102,8 +1102,21 @@ id:{upT:(l)=>'⬆️ Tongkat level '+l+'',upS:(a,b)=>''+a+' → '+b+' $BATON / j
 ar:{upT:(l)=>'⬆️ العصا المستوى '+l+'',upS:(a,b)=>''+a+' ← '+b+' $BATON / ساعة',upMax:(a)=>'أقصى مستوى: '+a+' $BATON / ساعة',upOk:(l)=>'العصا المستوى '+l+'!'},
 fa:{upT:(l)=>'⬆️ چوب سطح '+l+'',upS:(a,b)=>''+a+' ← '+b+' $BATON در ساعت',upMax:(a)=>'سطح حداکثر: '+a+' $BATON در ساعت',upOk:(l)=>'چوب سطح '+l+'!'}
 };
+// 22 oct 2026 (Jeremy, 17h00): weekly ranking of the biggest crews (recruits who passed their first baton)
+const X42 = {
+en:{chains:'Crews',miners:'Players',recr:(n)=>n+' recruits',teamsS:'Friends invited who passed their first baton this week.',teamsNo:'No recruits this week yet. Be the first!'},
+fr:{chains:'Équipes',miners:'Joueurs',recr:(n)=>n+' recrues',teamsS:'Amis invités qui ont passé leur premier bâton cette semaine.',teamsNo:'Aucune recrue cette semaine. Sois le premier !'},
+es:{chains:'Equipos',miners:'Jugadores',recr:(n)=>n+' reclutas',teamsS:'Amigos invitados que pasaron su primer bastón esta semana.',teamsNo:'Aún no hay reclutas esta semana. ¡Sé el primero!'},
+pt:{chains:'Equipes',miners:'Jogadores',recr:(n)=>n+' recrutas',teamsS:'Amigos convidados que passaram o primeiro bastão nesta semana.',teamsNo:'Nenhum recruta nesta semana. Seja o primeiro!'},
+ru:{chains:'Команды',miners:'Игроки',recr:(n)=>n+' новичков',teamsS:'Приглашённые друзья, передавшие первую эстафету на этой неделе.',teamsNo:'На этой неделе новичков пока нет. Будь первым!'},
+uk:{chains:'Команди',miners:'Гравці',recr:(n)=>n+' новачків',teamsS:'Запрошені друзі, які передали першу естафету цього тижня.',teamsNo:'Цього тижня новачків ще немає. Будь першим!'},
+tr:{chains:'Ekipler',miners:'Oyuncular',recr:(n)=>n+' yeni üye',teamsS:'Bu hafta ilk bayrağını devreden davetli arkadaşlar.',teamsNo:'Bu hafta henüz yeni üye yok. İlk sen ol!'},
+id:{chains:'Tim',miners:'Pemain',recr:(n)=>n+' rekrutan',teamsS:'Teman undangan yang mengoper tongkat pertamanya minggu ini.',teamsNo:'Belum ada rekrutan minggu ini. Jadilah yang pertama!'},
+ar:{chains:'الفرق',miners:'اللاعبون',recr:(n)=>n+' مجندين',teamsS:'أصدقاء مدعوون مرّروا أول عصا هذا الأسبوع.',teamsNo:'لا مجندين هذا الأسبوع بعد. كن الأول!'},
+fa:{chains:'تیم‌ها',miners:'بازیکنان',recr:(n)=>n+' عضو جدید',teamsS:'دوستان دعوت‌شده‌ای که این هفته اولین چوبشان را رد کردند.',teamsNo:'هنوز این هفته عضو جدیدی نیست. اولین باش!'}
+};
 // 22 oct 2026: the newest texts win over the older X11 / X12 blocks defined further down
-for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33, X34, X35, X36, X37, X38, X39, X40, X41]) for (const k in o) Object.assign(X[k], o[k]);
+for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33, X34, X35, X36, X37, X38, X39, X40, X41, X42]) for (const k in o) Object.assign(X[k], o[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -1346,6 +1359,14 @@ async function loadFriends() {
 let rankMode = 'miners';  // 22 oct 2026: simpler game, the miners ranking only
 async function loadRanks() {
   const r = await api('ranks'); if (!r.ok) return;
+  // 22 oct 2026 (17h00): the second tab is now the crews of the week
+  if (rankMode === 'chains') {
+    const tr = (r.teams || []).map((m, i) => '<div class="row' + (m.me ? ' me' : '') + (i < 3 ? ' top' + (i + 1) : '') + '" data-pid="' + (m.id || '') + '"><span class="rank' + (i < 3 ? ' m' : '') + '">' + (i < 3 ? ['🥇', '🥈', '🥉'][i] : i + 1) + '</span><span class="av" style="background:' + hueOf(m.name) + '">' + init(m.name) + '</span><div class="t"><b>' + esc(m.name) + '</b></div><span class="r">' + T('recr', fmt(m.n)) + '</span></div>');
+    let wk2 = '';
+    if (r.week_end) { const s = Math.max(0, r.week_end - Math.floor(Date.now() / 1000)), dd = Math.floor(s / 86400), hh = Math.floor(s % 86400 / 3600); wk2 = '<div class="wk"><span>⏳ ' + T('weekEnd', (dd ? dd + ' ' + T('dU') + ' ' : '') + hh + ' ' + T('hU')) + '</span></div>'; }
+    $('#ranks').innerHTML = wk2 + '<p class="foot">' + T('teamsS') + '</p>' + (tr.join('') || '<div class="empty">' + T('teamsNo') + '</div>');
+    return;
+  }
   const rows = rankMode === 'chains'
     ? r.chains.map((c, i) => '<div class="row' + (c.me ? ' me' : '') + '" data-pid="' + (c.sid || '') + '"><span class="rank' + (i < 3 ? ' g' : '') + '">' + (i + 1) + '</span><div class="t"><b>' + esc(T('chainOf', c.starter)) + '</b><span>' + (c.stopped ? T('stopped') : T('running')) + '</span></div><span class="r">' + fmt(c.links) + ' ' + T('links') + '</span></div>')
     : r.miners.map((m, i) => '<div class="row' + (m.me ? ' me' : '') + (i < 3 ? ' top' + (i + 1) : '') + '" data-pid="' + (m.id || '') + '"><span class="rank' + (i < 3 ? ' m' : '') + '">' + (i < 3 ? ['🥇', '🥈', '🥉'][i] : i + 1) + '</span><span class="av" style="background:' + hueOf(m.name) + '">' + init(m.name) + '</span><div class="t"><b>' + esc(m.name) + '</b></div><span class="r">' + fmt(m.pts) + '</span></div>');
