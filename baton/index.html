@@ -105,6 +105,12 @@ nav.tabs svg{width:23px;height:23px}
 .scrim[hidden]{display:none}
 .sheet{width:100%;max-width:520px;max-height:86%;overflow-y:auto;background:var(--lane);border-radius:26px 26px 0 0;padding:20px max(16px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:12px;animation:up .22s ease-out}
 @keyframes up{from{transform:translateY(40px);opacity:.4}}
+.faq{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 14px}
+.faq summary{cursor:pointer;font-weight:700;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';float:right;opacity:.6}
+.faq[open] summary::after{content:'-'}
+.faq p{margin:8px 0 0;color:var(--mute);line-height:1.45}
 .sheet h3{margin:0;font-family:var(--display);font-weight:900;font-size:30px;text-transform:uppercase}
 .opt{display:flex;align-items:center;gap:12px;background:var(--lane2);border-radius:18px;padding:12px 14px;text-align:start;width:100%;min-height:64px}
 .opt .t{flex:1;display:flex;flex-direction:column;gap:2px}
@@ -560,6 +566,185 @@ ar:{myOn:(w)=>'🏁 عصاك مع <b>'+w+'</b>',myDrop:'🏁 سقطت عصاك �
 fa:{myOn:(w)=>'🏁 چوبت دست <b>'+w+'</b> است',myDrop:'🏁 آخرین چوبت افتاد',lastHeld:(n)=>'آخرین چوبی که داشتی · راه‌انداز <b>'+n+'</b>'}
 };
 for (const k in X21) Object.assign(X[k], X21[k]);
+// 22 oct 2026 (Jeremy): full FAQ behind the "?" button (the tutorial stays one tap away)
+const FAQ = {
+en:{h:'Help',tuto:'▶ Replay the tutorial',more:'Another question? Write to us:',q:[
+['What is Baton?','A Telegram game: you mine $BATON points and you pass batons from hand to hand.'],
+['How do I earn $BATON?','Harvest your mine, pass batons, do the tasks, invite friends (you get 10 % of what they mine) and keep your daily streak.'],
+['Why did my mine stop?','It fills up in 4 h, then waits for you. Harvest it to start it again.'],
+['How do I get a baton?','You get one every day when you open the game, if your hands are free. Someone can also pass you theirs.'],
+['What does a baton do?','While you hold it, your mine runs 2× faster. You have 4 h to pass it.'],
+['Who can I pass it to?','Someone new with your link (x5), a friend (x3), or a random player (x1). A player who already holds a baton, or who already held this one, cannot get it.'],
+['How much does a pass pay?','120 $BATON × the number of hands the baton went through × the bonus (x5, x3 or x1). The more it travelled, the more it pays.'],
+['What if I do not pass it?','When the timer hits zero, you drop the baton: its trip ends and you get no bonus.'],
+['Why can I not pick a friend?','They already hold a baton or already held this one. Send your link to someone new instead.'],
+['Can I keep my baton longer?','Yes: +4 h for 10 ⭐, once per baton.'],
+['What do I get for inviting a friend?','5,000 $BATON at their first harvest and 10 % of everything they mine. If they join while you hold a baton, they take it and you get the x5 bonus.'],
+['What is the % bonus?','+10 % mining for each Telegram channel you join, as long as you stay subscribed.'],
+['What are upgrades?','The drill makes you mine faster. The tank (a mine that lasts longer) and the grip (a baton kept longer) unlock at drill level 3.'],
+['What is the 🔥 streak?','Harvest every day: each day in a row adds a bonus.'],
+['How do the rankings work?','Batons: the longest trips of the week (since Monday). Miners: the most $BATON earned over 7 days.'],
+['Are $BATON worth money?','They are points. An airdrop is planned: they would be turned into tokens based on your share of all points. No date or value is guaranteed.']]},
+fr:{h:'Aide',tuto:'▶ Revoir le tutoriel',more:'Une autre question ? Écris-nous :',q:[
+['C\'est quoi Baton ?','Un jeu Telegram : tu mines des points $BATON et tu fais passer des bâtons de main en main.'],
+['Comment je gagne des $BATON ?','Récolte ta mine, passe des bâtons, fais les tâches, invite des amis (tu touches 10 % de ce qu\'ils minent) et garde ta série quotidienne.'],
+['Pourquoi ma mine s\'est arrêtée ?','Elle se remplit en 4 h, puis elle t\'attend. Récolte-la pour la relancer.'],
+['Comment j\'ai un bâton ?','Tu en reçois un chaque jour en ouvrant le jeu, si tu n\'en tiens pas déjà un. Quelqu\'un peut aussi te passer le sien.'],
+['À quoi sert le bâton ?','Tant que tu l\'as, ta mine va 2× plus vite. Tu as 4 h pour le passer.'],
+['À qui je peux le passer ?','À quelqu\'un de nouveau avec ton lien (x5), à un ami (x3) ou à un joueur au hasard (x1). Un joueur qui tient déjà un bâton, ou qui a déjà tenu celui-ci, ne peut pas le recevoir.'],
+['Combien rapporte une passe ?','120 $BATON × le nombre de mains par lesquelles le bâton est passé × le bonus (x5, x3 ou x1). Plus il a voyagé, plus il rapporte.'],
+['Et si je ne le passe pas ?','Quand le chrono arrive à zéro, tu laisses tomber le bâton : son voyage s\'arrête et tu n\'as pas de bonus.'],
+['Pourquoi je ne peux pas choisir un ami ?','Il tient déjà un bâton ou il a déjà tenu celui-ci. Envoie plutôt ton lien à quelqu\'un de nouveau.'],
+['Je peux garder mon bâton plus longtemps ?','Oui : +4 h pour 10 ⭐, une fois par bâton.'],
+['Qu\'est-ce que je gagne en invitant un ami ?','5 000 $BATON à sa première récolte et 10 % de tout ce qu\'il mine. S\'il arrive pendant que tu tiens un bâton, il le prend et tu gagnes le bonus x5.'],
+['C\'est quoi le bonus en % ?','+10 % de minage par chaîne Telegram rejointe, tant que tu restes abonné.'],
+['C\'est quoi les améliorations ?','La foreuse te fait miner plus vite. Le réservoir (mine qui dure plus longtemps) et la poignée (bâton gardé plus longtemps) se débloquent au niveau 3 de la foreuse.'],
+['C\'est quoi la série 🔥 ?','Récolte chaque jour : chaque jour d\'affilée ajoute un bonus.'],
+['Comment marchent les classements ?','Bâtons : les plus longs voyages de la semaine (depuis lundi). Mineurs : le plus de $BATON gagnés sur 7 jours.'],
+['Les $BATON valent de l\'argent ?','Ce sont des points. Un airdrop est prévu : ils seraient convertis en tokens selon ta part de tous les points. Aucune date ni valeur n\'est garantie.']]},
+es:{h:'Ayuda',tuto:'▶ Ver el tutorial',more:'¿Otra pregunta? Escríbenos:',q:[
+['¿Qué es Baton?','Un juego de Telegram: minas puntos $BATON y pasas bastones de mano en mano.'],
+['¿Cómo gano $BATON?','Recolecta tu mina, pasa bastones, haz las tareas, invita amigos (ganas el 10 % de lo que minan) y mantén tu racha diaria.'],
+['¿Por qué se paró mi mina?','Se llena en 4 h y luego te espera. Recolecta para reiniciarla.'],
+['¿Cómo consigo un bastón?','Recibes uno cada día al abrir el juego, si no tienes ya uno. Alguien también puede pasarte el suyo.'],
+['¿Para qué sirve el bastón?','Mientras lo tienes, tu mina va 2× más rápido. Tienes 4 h para pasarlo.'],
+['¿A quién puedo pasarlo?','A alguien nuevo con tu enlace (x5), a un amigo (x3) o a un jugador al azar (x1). Quien ya tiene un bastón, o ya tuvo este, no puede recibirlo.'],
+['¿Cuánto da un pase?','120 $BATON × el número de manos por las que pasó el bastón × el bonus (x5, x3 o x1). Cuanto más viaja, más da.'],
+['¿Y si no lo paso?','Cuando el tiempo llega a cero, se te cae el bastón: su viaje termina y no ganas bonus.'],
+['¿Por qué no puedo elegir a un amigo?','Ya tiene un bastón o ya tuvo este. Envía tu enlace a alguien nuevo.'],
+['¿Puedo quedarme el bastón más tiempo?','Sí: +4 h por 10 ⭐, una vez por bastón.'],
+['¿Qué gano invitando a un amigo?','5 000 $BATON en su primera recolección y el 10 % de todo lo que mine. Si llega mientras tienes un bastón, se lo queda y ganas el bonus x5.'],
+['¿Qué es el bonus en %?','+10 % de minería por cada canal de Telegram al que te unas, mientras sigas suscrito.'],
+['¿Qué son las mejoras?','El taladro te hace minar más rápido. El depósito y el agarre se desbloquean en el nivel 3 del taladro.'],
+['¿Qué es la racha 🔥?','Recolecta cada día: cada día seguido suma un bonus.'],
+['¿Cómo funcionan las clasificaciones?','Bastones: los viajes más largos de la semana (desde el lunes). Mineros: más $BATON ganados en 7 días.'],
+['¿Los $BATON valen dinero?','Son puntos. Hay un airdrop previsto: se convertirían en tokens según tu parte de todos los puntos. Sin fecha ni valor garantizados.']]},
+pt:{h:'Ajuda',tuto:'▶ Ver o tutorial',more:'Outra pergunta? Fale com a gente:',q:[
+['O que é o Baton?','Um jogo do Telegram: você minera pontos $BATON e passa bastões de mão em mão.'],
+['Como ganho $BATON?','Colete sua mina, passe bastões, faça as tarefas, convide amigos (você ganha 10 % do que eles mineram) e mantenha sua sequência diária.'],
+['Por que minha mina parou?','Ela enche em 4 h e depois espera por você. Colete para reiniciar.'],
+['Como consigo um bastão?','Você recebe um por dia ao abrir o jogo, se ainda não tiver um. Alguém também pode passar o dele.'],
+['Para que serve o bastão?','Enquanto estiver com ele, sua mina vai 2× mais rápido. Você tem 4 h para passá-lo.'],
+['Para quem posso passar?','Para alguém novo com seu link (x5), um amigo (x3) ou um jogador aleatório (x1). Quem já tem um bastão, ou já teve este, não pode recebê-lo.'],
+['Quanto rende um passe?','120 $BATON × o número de mãos por onde o bastão passou × o bônus (x5, x3 ou x1). Quanto mais viajou, mais rende.'],
+['E se eu não passar?','Quando o tempo chega a zero, você deixa o bastão cair: a viagem acaba e você não ganha bônus.'],
+['Por que não posso escolher um amigo?','Ele já tem um bastão ou já teve este. Mande seu link para alguém novo.'],
+['Posso ficar mais tempo com o bastão?','Sim: +4 h por 10 ⭐, uma vez por bastão.'],
+['O que ganho convidando um amigo?','5 000 $BATON na primeira coleta dele e 10 % de tudo o que ele minerar. Se ele chegar enquanto você tem um bastão, ele fica com ele e você ganha o bônus x5.'],
+['O que é o bônus em %?','+10 % de mineração por canal do Telegram em que você entrar, enquanto continuar inscrito.'],
+['O que são as melhorias?','A broca faz você minerar mais rápido. O tanque e a empunhadura são liberados no nível 3 da broca.'],
+['O que é a sequência 🔥?','Colete todo dia: cada dia seguido soma um bônus.'],
+['Como funcionam os rankings?','Bastões: as viagens mais longas da semana (desde segunda). Mineradores: mais $BATON ganhos em 7 dias.'],
+['Os $BATON valem dinheiro?','São pontos. Há um airdrop previsto: seriam convertidos em tokens conforme sua parte de todos os pontos. Sem data nem valor garantidos.']]},
+ru:{h:'Помощь',tuto:'▶ Пройти обучение снова',more:'Другой вопрос? Напиши нам:',q:[
+['Что такое Baton?','Игра в Telegram: ты добываешь очки $BATON и передаёшь эстафеты из рук в руки.'],
+['Как заработать $BATON?','Собирай шахту, передавай эстафеты, выполняй задания, приглашай друзей (10 % от их добычи) и держи ежедневную серию.'],
+['Почему шахта остановилась?','Она заполняется за 4 ч и ждёт тебя. Собери, чтобы запустить снова.'],
+['Как получить эстафету?','Каждый день при входе в игру, если у тебя её ещё нет. Её также может передать другой игрок.'],
+['Что даёт эстафета?','Пока она у тебя, шахта работает в 2 раза быстрее. У тебя 4 ч, чтобы её передать.'],
+['Кому можно передать?','Новичку по твоей ссылке (x5), другу (x3) или случайному игроку (x1). Тот, у кого уже есть эстафета или кто уже держал эту, получить её не может.'],
+['Сколько приносит передача?','120 $BATON × число рук, через которые прошла эстафета × бонус (x5, x3 или x1). Чем дальше она прошла, тем больше приносит.'],
+['А если не передать?','Когда таймер дойдёт до нуля, ты уронишь эстафету: её путь закончится, бонуса не будет.'],
+['Почему нельзя выбрать друга?','У него уже есть эстафета или он уже держал эту. Отправь ссылку новичку.'],
+['Можно держать эстафету дольше?','Да: +4 ч за 10 ⭐, один раз на эстафету.'],
+['Что я получу за приглашение друга?','5 000 $BATON после его первого сбора и 10 % от всей его добычи. Если он придёт, пока у тебя эстафета, он её заберёт, а ты получишь бонус x5.'],
+['Что такое бонус в %?','+10 % к добыче за каждый канал Telegram, на который ты подписан.'],
+['Что такое улучшения?','Бур ускоряет добычу. Бак и рукоять открываются на 3-м уровне бура.'],
+['Что такое серия 🔥?','Собирай каждый день: каждый день подряд добавляет бонус.'],
+['Как работают рейтинги?','Эстафеты: самые длинные путешествия недели (с понедельника). Шахтёры: больше всего $BATON за 7 дней.'],
+['$BATON стоят денег?','Это очки. Планируется аирдроп: их обменяют на токены по твоей доле от всех очков. Дата и стоимость не гарантируются.']]},
+uk:{h:'Допомога',tuto:'▶ Пройти навчання знову',more:'Інше питання? Напиши нам:',q:[
+['Що таке Baton?','Гра в Telegram: ти видобуваєш очки $BATON і передаєш естафети з рук у руки.'],
+['Як заробити $BATON?','Збирай шахту, передавай естафети, виконуй завдання, запрошуй друзів (10 % від їхнього видобутку) і тримай щоденну серію.'],
+['Чому шахта зупинилася?','Вона наповнюється за 4 год і чекає на тебе. Збери, щоб запустити знову.'],
+['Як отримати естафету?','Щодня при вході в гру, якщо в тебе її ще немає. Її також може передати інший гравець.'],
+['Що дає естафета?','Поки вона в тебе, шахта працює вдвічі швидше. У тебе 4 год, щоб її передати.'],
+['Кому можна передати?','Новачку за твоїм посиланням (x5), другові (x3) або випадковому гравцеві (x1). Хто вже має естафету чи вже тримав цю, отримати її не може.'],
+['Скільки дає передача?','120 $BATON × кількість рук, через які пройшла естафета × бонус (x5, x3 або x1). Що далі вона пройшла, то більше дає.'],
+['А якщо не передати?','Коли таймер дійде до нуля, ти впустиш естафету: її подорож закінчиться, бонусу не буде.'],
+['Чому не можна обрати друга?','Він уже має естафету або вже тримав цю. Надішли посилання новачку.'],
+['Можна тримати естафету довше?','Так: +4 год за 10 ⭐, один раз на естафету.'],
+['Що я отримаю за запрошення друга?','5 000 $BATON після його першого збору і 10 % від усього його видобутку. Якщо він прийде, поки в тебе естафета, він її забере, а ти отримаєш бонус x5.'],
+['Що таке бонус у %?','+10 % до видобутку за кожен канал Telegram, на який ти підписаний.'],
+['Що таке покращення?','Бур прискорює видобуток. Бак і руків\'я відкриваються на 3-му рівні бура.'],
+['Що таке серія 🔥?','Збирай щодня: кожен день поспіль додає бонус.'],
+['Як працюють рейтинги?','Естафети: найдовші подорожі тижня (з понеділка). Шахтарі: найбільше $BATON за 7 днів.'],
+['$BATON коштують грошей?','Це очки. Планується аірдроп: їх обміняють на токени за твоєю часткою від усіх очок. Дата й вартість не гарантуються.']]},
+tr:{h:'Yardım',tuto:'▶ Eğitimi tekrar izle',more:'Başka bir sorun mu var? Bize yaz:',q:[
+['Baton nedir?','Bir Telegram oyunu: $BATON puanı kazar ve bayrakları elden ele geçirirsin.'],
+['Nasıl $BATON kazanırım?','Madenini topla, bayrak devret, görevleri yap, arkadaş davet et (kazdıklarının %10\'u senin) ve günlük serini koru.'],
+['Madenim neden durdu?','4 saatte dolar, sonra seni bekler. Yeniden başlatmak için topla.'],
+['Nasıl bayrak alırım?','Elinde yoksa, oyunu açtığında her gün bir tane alırsın. Biri de sana kendininkini devredebilir.'],
+['Bayrak ne işe yarar?','Sende olduğu sürece madenin 2× hızlı çalışır. Devretmek için 4 saatin var.'],
+['Kime devredebilirim?','Linkinle yeni birine (x5), bir arkadaşa (x3) ya da rastgele bir oyuncuya (x1). Elinde zaten bayrak olan ya da bunu zaten tutmuş biri alamaz.'],
+['Bir devir ne kazandırır?','120 $BATON × bayrağın geçtiği el sayısı × bonus (x5, x3 veya x1). Ne kadar çok gezdiyse o kadar çok kazandırır.'],
+['Devretmezsem ne olur?','Süre sıfırlanınca bayrağı düşürürsün: yolculuğu biter ve bonus alamazsın.'],
+['Neden bir arkadaş seçemiyorum?','Elinde zaten bayrak var ya da bunu zaten tuttu. Linkini yeni birine gönder.'],
+['Bayrağı daha uzun tutabilir miyim?','Evet: 10 ⭐ karşılığında +4 saat, bayrak başına bir kez.'],
+['Arkadaş davet edince ne kazanırım?','İlk toplamasında 5 000 $BATON ve kazdığı her şeyin %10\'u. Sen bayrağı tutarken gelirse bayrağı alır ve sen x5 bonusu kazanırsın.'],
+['% bonus nedir?','Katıldığın her Telegram kanalı için, abone kaldığın sürece +%10 kazı.'],
+['Geliştirmeler nedir?','Matkap daha hızlı kazmanı sağlar. Depo ve tutamak, matkap 3. seviyede açılır.'],
+['🔥 serisi nedir?','Her gün topla: üst üste her gün bir bonus ekler.'],
+['Sıralamalar nasıl çalışır?','Bayraklar: haftanın en uzun yolculukları (pazartesiden beri). Madenciler: 7 günde en çok $BATON kazananlar.'],
+['$BATON para eder mi?','Bunlar puan. Bir airdrop planlanıyor: tüm puanlardaki payına göre tokene çevrilecek. Tarih ve değer garanti değil.']]},
+id:{h:'Bantuan',tuto:'▶ Ulangi tutorial',more:'Ada pertanyaan lain? Tulis ke kami:',q:[
+['Apa itu Baton?','Game Telegram: kamu menambang poin $BATON dan mengoper tongkat dari tangan ke tangan.'],
+['Bagaimana dapat $BATON?','Panen tambangmu, oper tongkat, kerjakan tugas, undang teman (kamu dapat 10 % dari hasil tambang mereka) dan jaga runtutan harianmu.'],
+['Kenapa tambangku berhenti?','Tambang penuh dalam 4 jam lalu menunggumu. Panen untuk menjalankannya lagi.'],
+['Bagaimana dapat tongkat?','Kamu dapat satu tiap hari saat membuka game, jika belum memegang tongkat. Orang lain juga bisa mengoper miliknya.'],
+['Apa gunanya tongkat?','Selama kamu memegangnya, tambangmu 2× lebih cepat. Kamu punya 4 jam untuk mengopernya.'],
+['Ke siapa bisa kuoper?','Ke orang baru lewat linkmu (x5), ke teman (x3), atau ke pemain acak (x1). Yang sudah memegang tongkat, atau sudah pernah memegang yang ini, tidak bisa menerimanya.'],
+['Berapa hasil satu operan?','120 $BATON × jumlah tangan yang dilewati tongkat × bonus (x5, x3 atau x1). Makin jauh berkelana, makin besar hasilnya.'],
+['Kalau tidak kuoper?','Saat waktu habis, tongkatmu jatuh: perjalanannya berakhir dan kamu tidak dapat bonus.'],
+['Kenapa tidak bisa memilih teman?','Dia sudah memegang tongkat atau sudah pernah memegang yang ini. Kirim linkmu ke orang baru.'],
+['Bisa pegang tongkat lebih lama?','Bisa: +4 jam untuk 10 ⭐, sekali per tongkat.'],
+['Apa yang kudapat jika mengundang teman?','5 000 $BATON saat panen pertamanya dan 10 % dari semua hasil tambangnya. Jika dia datang saat kamu memegang tongkat, dia mengambilnya dan kamu dapat bonus x5.'],
+['Apa itu bonus %?','+10 % tambang untuk setiap kanal Telegram yang kamu ikuti, selama tetap berlangganan.'],
+['Apa itu peningkatan?','Bor membuatmu menambang lebih cepat. Tangki dan pegangan terbuka di level bor 3.'],
+['Apa itu runtutan 🔥?','Panen setiap hari: setiap hari berturut-turut menambah bonus.'],
+['Bagaimana peringkat bekerja?','Tongkat: perjalanan terpanjang minggu ini (sejak Senin). Penambang: $BATON terbanyak dalam 7 hari.'],
+['Apakah $BATON bernilai uang?','Itu poin. Airdrop direncanakan: poin akan diubah menjadi token sesuai bagianmu dari semua poin. Tanpa jaminan tanggal maupun nilai.']]},
+ar:{h:'مساعدة',tuto:'▶ أعد مشاهدة الشرح',more:'سؤال آخر؟ راسلنا:',q:[
+['ما هي Baton؟','لعبة على تيليجرام: تعدّن نقاط $BATON وتمرّر العصي من يد إلى يد.'],
+['كيف أربح $BATON؟','اجمع منجمك، مرّر العصي، أنجز المهام، ادعُ أصدقاءك (تحصل على 10 % مما يعدّنون) وحافظ على سلسلة أيامك.'],
+['لماذا توقف منجمي؟','يمتلئ في 4 ساعات ثم ينتظرك. اجمعه ليعمل من جديد.'],
+['كيف أحصل على عصا؟','تحصل على واحدة كل يوم عند فتح اللعبة إن لم تكن تحمل واحدة. ويمكن لأحدهم أيضًا أن يمرّر لك عصاه.'],
+['ما فائدة العصا؟','ما دامت معك، منجمك أسرع مرتين. لديك 4 ساعات لتمريرها.'],
+['لمن أمرّرها؟','لشخص جديد عبر رابطك (x5)، لصديق (x3)، أو للاعب عشوائي (x1). من يحمل عصا بالفعل، أو حمل هذه من قبل، لا يمكنه استلامها.'],
+['كم تربحني التمريرة؟','120 $BATON × عدد الأيدي التي مرت بها العصا × المكافأة (x5 أو x3 أو x1). كلما سافرت أكثر، ربحت أكثر.'],
+['وإذا لم أمرّرها؟','عندما ينتهي الوقت تسقط العصا منك: تنتهي رحلتها ولا تحصل على مكافأة.'],
+['لماذا لا أستطيع اختيار صديق؟','معه عصا بالفعل أو حمل هذه من قبل. أرسل رابطك لشخص جديد.'],
+['هل يمكنني الاحتفاظ بالعصا أطول؟','نعم: +4 ساعات مقابل 10 ⭐، مرة واحدة لكل عصا.'],
+['ماذا أربح عند دعوة صديق؟','5 000 $BATON عند أول جمع له و10 % من كل ما يعدّنه. إذا وصل وأنت تحمل عصا، يأخذها وتربح مكافأة x5.'],
+['ما هي المكافأة بالنسبة المئوية؟','+10 % تعدين لكل قناة تيليجرام تنضم إليها، ما دمت مشتركًا.'],
+['ما هي التحسينات؟','المثقاب يجعلك تعدّن أسرع. الخزان والمقبض يُفتحان عند المستوى 3 للمثقاب.'],
+['ما هي السلسلة 🔥؟','اجمع كل يوم: كل يوم متتالٍ يضيف مكافأة.'],
+['كيف تعمل التصنيفات؟','العصي: أطول رحلات الأسبوع (منذ الإثنين). المعدّنون: الأكثر ربحًا لـ $BATON خلال 7 أيام.'],
+['هل لـ $BATON قيمة مالية؟','إنها نقاط. هناك إيردروب مخطط: ستتحول إلى توكنات حسب حصتك من كل النقاط. لا تاريخ ولا قيمة مضمونان.']]},
+fa:{h:'راهنما',tuto:'▶ دیدن دوبارهٔ آموزش',more:'سؤال دیگری داری؟ برایمان بنویس:',q:[
+['Baton چیست؟','یک بازی تلگرامی: امتیاز $BATON استخراج می‌کنی و چوب‌ها را دست به دست می‌کنی.'],
+['چطور $BATON به دست بیاورم؟','معدنت را برداشت کن، چوب پاس بده، مأموریت‌ها را انجام بده، دوستانت را دعوت کن (۱۰٪ استخراجشان مال توست) و زنجیرهٔ روزانه‌ات را حفظ کن.'],
+['چرا معدنم متوقف شد؟','در ۴ ساعت پر می‌شود و منتظرت می‌ماند. برداشت کن تا دوباره کار کند.'],
+['چطور چوب بگیرم؟','هر روز با باز کردن بازی یکی می‌گیری، اگر از قبل چوبی نداشته باشی. کسی هم می‌تواند چوبش را به تو بدهد.'],
+['چوب به چه درد می‌خورد؟','تا وقتی دست توست، معدنت ۲ برابر سریع‌تر است. ۴ ساعت وقت داری ردش کنی.'],
+['به چه کسی پاسش بدهم؟','به یک تازه‌وارد با لینکت (x5)، به یک دوست (x3) یا به یک بازیکن تصادفی (x1). کسی که چوب دارد یا قبلاً همین را داشته، نمی‌تواند آن را بگیرد.'],
+['هر پاس چقدر می‌ارزد؟','۱۲۰ $BATON × تعداد دست‌هایی که چوب از آن‌ها گذشته × پاداش (x5، x3 یا x1). هرچه بیشتر سفر کرده، بیشتر می‌ارزد.'],
+['اگر پاسش ندهم؟','وقتی زمان تمام شود، چوب از دستت می‌افتد: سفرش تمام می‌شود و پاداشی نمی‌گیری.'],
+['چرا نمی‌توانم دوستی را انتخاب کنم؟','او از قبل چوب دارد یا همین را قبلاً داشته. لینکت را برای یک تازه‌وارد بفرست.'],
+['می‌توانم چوب را بیشتر نگه دارم؟','بله: ۴ ساعت بیشتر با ۱۰ ⭐، یک بار برای هر چوب.'],
+['با دعوت دوست چه می‌گیرم؟','۵٬۰۰۰ $BATON در اولین برداشتش و ۱۰٪ از همهٔ استخراجش. اگر وقتی چوب دست توست بیاید، آن را می‌گیرد و تو پاداش x5 می‌گیری.'],
+['پاداش درصدی چیست؟','۱۰٪+ استخراج برای هر کانال تلگرامی که عضوش شوی، تا وقتی عضو بمانی.'],
+['ارتقاها چیست؟','مته سرعت استخراجت را بالا می‌برد. مخزن و دسته در سطح ۳ مته باز می‌شوند.'],
+['زنجیرهٔ 🔥 چیست؟','هر روز برداشت کن: هر روز پیاپی یک پاداش اضافه می‌کند.'],
+['رتبه‌بندی‌ها چطور کار می‌کنند؟','چوب‌ها: طولانی‌ترین سفرهای هفته (از دوشنبه). معدنچی‌ها: بیشترین $BATON در ۷ روز.'],
+['آیا $BATON ارزش پولی دارد؟','این‌ها امتیازند. ایردراپی برنامه‌ریزی شده: بر اساس سهمت از کل امتیازها به توکن تبدیل می‌شوند. تاریخ و ارزش تضمین نشده است.']]}
+};
+function faq() {
+  const f = FAQ[LANG] || FAQ.en;
+  sheet('<h3>' + f.h + '</h3><button class="btn ghost" data-k="tuto">' + f.tuto + '</button>' +
+    f.q.map((x) => '<details class="faq"><summary>' + esc(x[0]) + '</summary><p>' + esc(x[1]) + '</p></details>').join('') +
+    '<p class="foot" style="margin:0">' + f.more + ' <a href="#" data-k="contact">t.me/jeremstyke</a></p>');
+}
 const X11 = {
 en:{holdTip:(x)=>'⏳ Pass it before the timer ends: up to +'+x+' $BATON',passTip:'When the timer hits zero, it leaves on its own and you get no bonus.',ext:(h,s)=>'⏱️ Keep it '+h+' h longer · '+s+' ⭐',extOk:'⏱️ Baton extended!',extLate:'Too late, this baton is gone.',extDone:'Already extended once.'},
 fr:{holdTip:(x)=>'⏳ Passe-le avant la fin du chrono : jusqu\'à +'+x+' $BATON',passTip:'Quand le chrono arrive à zéro, il part tout seul et tu n\'as pas de bonus.',ext:(h,s)=>'⏱️ Garder '+h+' h de plus · '+s+' ⭐',extOk:'⏱️ Bâton prolongé !',extLate:'Trop tard, ce bâton est parti.',extDone:'Déjà prolongé une fois.'},
@@ -745,6 +930,8 @@ $('#sheet').onclick = async (e) => {
   hap(); const k = o.dataset.k;
   if (k === 'keep') return closeSheet();
   if (k === 'invite') { closeSheet(); return $('#invite').onclick(); }
+  if (k === 'tuto') { closeSheet(); return tutorial(); }
+  if (k === 'contact') { e.preventDefault(); return openLink('https://t.me/jeremstyke?direct'); }
   if (k === 'harv') { closeSheet(); return $('#harvest').onclick(); }
   if (k === 'friend') {
     const r = await api('friends');
@@ -883,7 +1070,7 @@ function nudge() {
   // 21 oct 2026: ask once to let @PassTheBatonBot send messages (players who came by a link never pressed Start)
   try { if (tg && tg.requestWriteAccess && !LS.get('bt_wa')) setTimeout(() => { try { tg.requestWriteAccess((ok) => LS.set('bt_wa', ok ? '1' : '0')); } catch (e) {} }, 2500); } catch (e) {}
   if ((!LS.get('bt_tuto') && (S.pts || 0) < 1000) || ((tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '') === 'tuto') { LS.set('bt_tuto', '1'); tutorial(); }
-  $('#helpBtn').onclick = () => { hap(); tutorial(); };
+  $('#helpBtn').onclick = () => { hap(); faq(); };  // 22 oct 2026: FAQ first, tutorial one tap away
   const sp = (tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '';
   if (sp === 'friends') go('friends');
   setInterval(tick, 1000);
