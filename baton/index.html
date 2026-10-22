@@ -821,6 +821,9 @@ ar:[['ما هي Baton؟','لعبة تيليجرام يتبادل فيها الل
 fa:[['Baton چیست؟','یک بازی تلگرامی که در آن چوب دست‌به‌دست می‌شود: تا وقتی دست توست برایت $BATON می‌آورد.'],['چطور چوب بگیرم؟','هر روز با باز کردن بازی یکی می‌گیری. دیگران هم می‌توانند چوبشان را به تو بدهند.'],['چقدر درآمد دارد؟','ساعتی ۳۰۰ $BATON تا وقتی دست توست، به‌علاوه ۱۰٪ برای هر کانال تلگرامی که عضو شدی. ۴ ساعت وقت داری.'],['چرا ردش کنم؟','رد کردن پاداش دارد: +۵٬۰۰۰ برای تازه‌وارد (با لینک تو)، +۳٬۰۰۰ برای یکی از تیمت، +۱٬۰۰۰ برای بازیکن تصادفی.'],['اگر زمان تمام شود؟','چوب می‌افتد: آنچه آورده برایت می‌ماند، اما پاداشی نمی‌گیری.'],['ویدیو چه فایده‌ای دارد؟','۱ ساعت به زمان اضافه می‌کند، ۴ بار برای هر چوب.'],['تیم من چیست؟','دوستانی که دعوت می‌کنی. +۵٬۰۰۰ $BATON وقتی اولین چوبشان را رد کنند، و ۱۰٪ از همه درآمدشان.'],['رتبه‌بندی چطور کار می‌کند؟','بازیکنانی که این هفته بیشترین $BATON را گرفتند. هر دوشنبه همه از صفر شروع می‌کنند.'],['ارزش $BATON چقدر است؟','این‌ها امتیازند. یک ایردراپ برنامه‌ریزی شده: بر اساس سهمت از همه امتیازها به توکن واقعی تبدیل می‌شوند. بدون تضمین تاریخ یا ارزش.']]
 };
 for (const k in FAQ35) if (FAQ[k]) FAQ[k].q = FAQ35[k];
+// 22 oct 2026 (15h15): a dropped baton only pays half
+const FAQ40 = {en:'The baton falls: you only keep half of what it earned you, and you get no bonus.', fr:'Le bâton tombe : tu ne gardes que la moitié de ce qu\'il t\'a rapporté, et pas de bonus.', es:'El bastón se cae: solo te quedas con la mitad de lo que te dio, y sin bonus.', pt:'O bastão cai: você fica só com metade do que ele rendeu, e sem bônus.', ru:'Эстафета упадёт: у тебя останется только половина заработанного, и бонуса не будет.', uk:'Естафета впаде: у тебе залишиться лише половина заробленого, і бонусу не буде.', tr:'Bayrak düşer: kazandırdığının sadece yarısını tutarsın ve bonus alamazsın.', id:'Tongkat jatuh: kamu hanya menyimpan separuh dari yang didapat, tanpa bonus.', ar:'تسقط العصا: تحتفظ بنصف ما ربحته منها فقط، ودون مكافأة.', fa:'چوب می‌افتد: فقط نصف آنچه آورده برایت می‌ماند، و پاداشی نمی‌گیری.'};
+for (const k in FAQ40) if (FAQ[k] && FAQ[k].q[4]) FAQ[k].q[4] = [FAQ[k].q[4][0], FAQ40[k]];
 function faq() {
   const f = FAQ[LANG] || FAQ.en;
   sheet('<h3>' + f.h + '</h3><button class="btn ghost" data-k="tuto">' + f.tuto + '</button>' +
@@ -1048,8 +1051,21 @@ id:{crewNone:'Belum ada siapa pun di timmu'},
 ar:{crewNone:'لا أحد في فريقك بعد'},
 fa:{crewNone:'هنوز کسی در تیمت نیست'}
 };
+// 22 oct 2026 (Jeremy, 15h15): a dropped baton only pays half of what it earned
+const X40 = {
+en:{passTip:'If the timer hits zero, the baton falls: you only keep half of what it earned you, and no bonus.',t3p:'Before the timer ends: +5,000 to someone new, +3,000 to your crew, +1,000 to a random player. If it falls, you only keep half of what it earned you.'},
+fr:{passTip:'Si le chrono arrive à zéro, le bâton tombe : tu ne gardes que la moitié de ce qu\'il t\'a rapporté, et pas de bonus.',t3p:'Avant la fin du chrono : +5 000 à un nouveau, +3 000 à ton équipe, +1 000 au hasard. S\'il tombe, tu ne gardes que la moitié de ce qu\'il t\'a rapporté.'},
+es:{passTip:'Si el tiempo llega a cero, el bastón se cae: solo te quedas con la mitad de lo que te dio, y sin bonus.',t3p:'Antes de que acabe el tiempo: +5 000 a alguien nuevo, +3 000 a tu equipo, +1 000 al azar. Si se cae, solo te quedas con la mitad de lo que te dio.'},
+pt:{passTip:'Se o tempo chegar a zero, o bastão cai: você fica só com metade do que ele rendeu, e sem bônus.',t3p:'Antes do fim do tempo: +5 000 para alguém novo, +3 000 para sua equipe, +1 000 ao acaso. Se ele cair, você fica só com metade do que ele rendeu.'},
+ru:{passTip:'Если таймер дойдёт до нуля, эстафета упадёт: у тебя останется только половина заработанного, и без бонуса.',t3p:'До конца таймера: +5 000 за новичка, +3 000 за члена команды, +1 000 за случайного игрока. Если она упадёт, у тебя останется только половина того, что она принесла.'},
+uk:{passTip:'Якщо таймер дійде до нуля, естафета впаде: у тебе залишиться лише половина заробленого, і без бонусу.',t3p:'До кінця таймера: +5 000 за новачка, +3 000 за члена команди, +1 000 за випадкового гравця. Якщо вона впаде, у тебе залишиться лише половина того, що вона принесла.'},
+tr:{passTip:'Süre sıfırlanırsa bayrak düşer: kazandırdığının sadece yarısını tutarsın, bonus yok.',t3p:'Süre bitmeden: yeni birine +5 000, ekibine +3 000, rastgele birine +1 000. Düşerse kazandırdığının sadece yarısını tutarsın.'},
+id:{passTip:'Kalau waktu habis, tongkat jatuh: kamu hanya menyimpan separuh dari yang didapat, tanpa bonus.',t3p:'Sebelum waktu habis: +5 000 ke orang baru, +3 000 ke timmu, +1 000 ke pemain acak. Kalau jatuh, kamu hanya menyimpan separuh dari yang didapat.'},
+ar:{passTip:'إذا انتهى الوقت تسقط العصا: تحتفظ بنصف ما ربحته منها فقط، ودون مكافأة.',t3p:'قبل انتهاء الوقت: +5 000 لشخص جديد، +3 000 لفريقك، +1 000 للاعب عشوائي. إذا سقطت، تحتفظ بنصف ما ربحته منها فقط.'},
+fa:{passTip:'اگر زمان تمام شود چوب می‌افتد: فقط نصف آنچه آورده برایت می‌ماند، و پاداشی نیست.',t3p:'قبل از پایان زمان: +۵٬۰۰۰ برای تازه‌وارد، +۳٬۰۰۰ برای تیمت، +۱٬۰۰۰ برای بازیکن تصادفی. اگر بیفتد، فقط نصف آنچه آورده برایت می‌ماند.'}
+};
 // 22 oct 2026: the newest texts win over the older X11 / X12 blocks defined further down
-for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33, X34, X35, X36, X37, X38, X39]) for (const k in o) Object.assign(X[k], o[k]);
+for (const o of [X19, X20, X21, X22, X23, X24, X25, X26, X27, X28, X29, X30, X31, X32, X33, X34, X35, X36, X37, X38, X39, X40]) for (const k in o) Object.assign(X[k], o[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
