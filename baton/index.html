@@ -204,9 +204,10 @@ nav.tabs button[aria-current="page"] svg{filter:drop-shadow(0 0 6px rgba(255,197
 .tcard p{margin:0 0 4px;color:#c9d6ea;font-size:17px;line-height:1.45;max-width:34ch}
 .tdots{display:flex;gap:8px;margin:4px 0 8px}.tdots i{width:8px;height:8px;border-radius:4px;background:rgba(255,255,255,.2);transition:width .2s}.tdots i.on{width:24px;background:var(--baton)}
 @keyframes fade{from{opacity:0}}
-#tasks .sec{margin:8px 4px 0}
+#tasks .sec,#subTasks .sec{margin:8px 4px 0}
+#subTasks:empty{display:none}
 .chip.g{cursor:pointer}
-.sheet .row .t b,#tasks .row .t b{white-space:normal;overflow:visible}
+.sheet .row .t b,#tasks .row .t b,#subTasks .row .t b{white-space:normal;overflow:visible}
 .pill{display:flex;align-items:center;min-height:42px;padding:0 12px;border-radius:12px;background:rgba(62,230,160,.14);border:1px solid rgba(62,230,160,.35);color:var(--gain);font-weight:800;font-size:14px;white-space:nowrap}
 .row.on{border-color:rgba(62,230,160,.28)}
 .conv{font-size:12px;color:var(--mute);margin-top:8px;max-width:32ch;text-align:center;line-height:1.35}
@@ -365,6 +366,7 @@ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
 
     <section class="panel" id="p-tasks" hidden>
       <div class="score"><small data-t="earnMore"></small><div class="big" data-t="tasks"></div></div>
+      <div class="list" id="subTasks"></div>
       <div class="list" id="adtask" hidden></div>
       <div class="list" id="vidTask" hidden></div>
       <div class="list" id="tasks"></div>
@@ -1207,7 +1209,8 @@ function render() {
   const srt = (l) => l.sort((x, y) => (x.done - y.done) || (y.id - x.id));
   // 22 oct 2026 (17h06, Jeremy): what is left to do first, everything already done at the very bottom
   const todo = (l) => srt(l.filter((t) => !t.done));
-  const secs = [[T('daily'), todo(dl), trow], ['📢 ' + T('subs'), todo(sb), srow], [T('once'), todo(on1), trow]];
+  const secs = [[T('daily'), todo(dl), trow], [T('once'), todo(on1), trow]];
+  $('#subTasks').innerHTML = sec('📢 ' + T('subs'), todo(sb), srow);  // 22 oct 2026 (17h08, Jeremy): the channels to join come first, above the sponsored task
   const doneL = srt(S.tasks.filter((t) => t.done));
   $('#tasks').innerHTML = secs.map((z) => sec(z[0], z[1], z[2])).join('') + sec(T('doneH'), doneL, (t) => (t.kind === 'join' ? srow(t) : trow(t)));
   { const vt = $('#vidTask'), nv = S.vids_day || 0, mv = S.vids_max || 10, full = nv >= mv;  // 22 oct 2026: +100 $BATON per video, 10 a day
@@ -1288,6 +1291,7 @@ $('#upBtn').onclick = async () => {  // 22 oct 2026: upgrade the baton (paid in 
   if (!r || !r.ok) { hap('err'); toast(errMsg(r)); b.disabled = false; return; }
   hap('ok'); setState(r.state); toast(T('upOk', r.level));
 };
+$('#subTasks').onclick = (e) => $('#tasks').onclick(e);  // 22 oct 2026: same buttons as the task list
 $('#vidTask').onclick = (e) => { const b = e.target.closest('#vtBtn'); if (b) playVid(b, 'pts'); };
 $('#extBtn').onclick = async () => {
   hap();
