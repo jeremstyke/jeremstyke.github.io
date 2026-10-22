@@ -5,10 +5,10 @@
 (function () {
   try {
     const S = {
-      en: { m_baton: '🏃 Pass a baton on Baton', bp_tag: 'NEW GAME', bp_h: 'Hold the baton, earn $BATON', bp_1: '💰 300 $BATON every hour while you hold it', bp_2: '⏳ Pass it before the timer ends: up to +5,000', bp_3: '🎁 A free baton every day · 🪂 Airdrop planned', bp_b: '🏃 Play Baton', bp_x: 'Later' },
-      fr: { m_baton: '🏃 Passe un bâton sur Baton', bp_tag: 'NOUVEAU JEU', bp_h: 'Tiens le bâton, gagne des $BATON', bp_1: '💰 300 $BATON par heure tant que tu le tiens', bp_2: '⏳ Passe-le avant la fin du chrono : jusqu\'à +5 000', bp_3: '🎁 Un bâton gratuit chaque jour · 🪂 Airdrop prévu', bp_b: '🏃 Jouer à Baton', bp_x: 'Plus tard' },
-      ar: { m_baton: '🏃 مرّر عصا في Baton', bp_tag: 'لعبة جديدة', bp_h: 'احمل العصا واربح $BATON', bp_1: '💰 300 $BATON كل ساعة ما دامت معك', bp_2: '⏳ مرّرها قبل انتهاء الوقت: حتى +5 000', bp_3: '🎁 عصا مجانية كل يوم · 🪂 إيردروب مخطط له', bp_b: '🏃 العب Baton', bp_x: 'لاحقًا' },
-      id: { m_baton: '🏃 Oper tongkat di Baton', bp_tag: 'GAME BARU', bp_h: 'Pegang tongkat, dapatkan $BATON', bp_1: '💰 300 $BATON per jam selama kamu memegangnya', bp_2: '⏳ Oper sebelum waktu habis: hingga +5 000', bp_3: '🎁 Tongkat gratis tiap hari · 🪂 Airdrop direncanakan', bp_b: '🏃 Main Baton', bp_x: 'Nanti' }
+      en: { m_baton: '🏃 Pass a baton on Baton', bp_tag: 'NEW GAME', bp_h: 'Hold the baton, earn $BATON', bp_1: '💰 300 $BATON every hour while you hold it', bp_2: '⏳ Pass it before the timer ends: up to +5,000', bp_3: '🛒 Shop: 1 million $BATON = 1 $ in USDT', bp_b: '🏃 Play Baton', bp_x: 'Later' },
+      fr: { m_baton: '🏃 Passe un bâton sur Baton', bp_tag: 'NOUVEAU JEU', bp_h: 'Tiens le bâton, gagne des $BATON', bp_1: '💰 300 $BATON par heure tant que tu le tiens', bp_2: '⏳ Passe-le avant la fin du chrono : jusqu\'à +5 000', bp_3: '🛒 Boutique : 1 million de $BATON = 1 $ en USDT', bp_b: '🏃 Jouer à Baton', bp_x: 'Plus tard' },
+      ar: { m_baton: '🏃 مرّر عصا في Baton', bp_tag: 'لعبة جديدة', bp_h: 'احمل العصا واربح $BATON', bp_1: '💰 300 $BATON كل ساعة ما دامت معك', bp_2: '⏳ مرّرها قبل انتهاء الوقت: حتى +5 000', bp_3: '🛒 المتجر: مليون $BATON = 1 $ USDT', bp_b: '🏃 العب Baton', bp_x: 'لاحقًا' },
+      id: { m_baton: '🏃 Oper tongkat di Baton', bp_tag: 'GAME BARU', bp_h: 'Pegang tongkat, dapatkan $BATON', bp_1: '💰 300 $BATON per jam selama kamu memegangnya', bp_2: '⏳ Oper sebelum waktu habis: hingga +5 000', bp_3: '🛒 Toko: 1 juta $BATON = 1 $ USDT', bp_b: '🏃 Main Baton', bp_x: 'Nanti' }
     };
     for (const k in S) if (typeof L === 'object' && L[k]) Object.assign(L[k], S[k]);
     const URL = 'https://t.me/PassTheBatonBot/play?startapp=src_mctpop';
