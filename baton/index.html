@@ -111,6 +111,9 @@ nav.tabs svg{width:23px;height:23px}
 .opt .t span{font-size:13px;color:var(--mute)}
 .mult{font-family:var(--display);font-weight:900;font-size:28px;color:var(--baton)}
 .mult.x5{color:var(--flame)}
+.cf{position:fixed;top:-12px;width:8px;height:14px;border-radius:2px;z-index:40;pointer-events:none;animation:cf 1.6s ease-in forwards}
+@keyframes cf{to{transform:translateY(105vh) rotate(720deg);opacity:.2}}
+.myBig{font-size:30px;font-weight:900;color:var(--chalk);line-height:1}
 .toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--chalk);color:#08121f;font-weight:800;padding:12px 18px;border-radius:999px;font-size:14px;z-index:30;max-width:92%;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.45)}
 .toast[hidden]{display:none}
 .loader{position:fixed;inset:0;display:grid;place-items:center;background:var(--night);z-index:40}
@@ -296,6 +299,11 @@ nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:elli
     <section class="panel" id="p-home">
       <div class="score"><small data-t="your"></small><div class="big num" id="bal">0</div><div class="rate num" id="rate"></div><div class="conv" data-t="conv"></div></div>
 
+      <div class="card" id="myChain" hidden>
+        <div class="meta"><span id="myH"></span><span class="myBig num"><span id="myLinks">0</span> <small data-t="links" style="font-size:13px;font-weight:600;color:var(--mute)"></small></span></div>
+        <div class="foot" id="myAt" style="text-align:start;margin:0"></div>
+      </div>
+
       <div class="card batonCard" id="batonCard">
         <div class="batonRow">
           <div class="stick" aria-hidden="true"><div class="rod"></div><div class="fire"></div></div>
@@ -304,11 +312,6 @@ nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:elli
         <button class="btn gold" id="passBtn"></button>
         <button class="btn ghost" id="extBtn" hidden></button>
         <div class="more" id="moreBat" hidden></div>
-      </div>
-
-      <div class="card" id="myChain" hidden>
-        <div class="meta"><span id="myH"></span><span><b id="myLinks">0</b> <span data-t="links"></span></span></div>
-        <div class="foot" id="myAt" style="text-align:start;margin:0"></div>
       </div>
 
       <div class="card" id="chainCard" hidden>
@@ -575,6 +578,19 @@ ar:{friendS:'صديق ليس معه عصا. مكافأة x3.',fBusy:'معه عص
 fa:{friendS:'دوستی که چوب ندارد. پاداش x3.',fBusy:'از قبل چوب دارد',fIn:'از قبل در این زنجیره است'}
 };
 for (const k in X15) Object.assign(X[k], X15[k]);
+const X16 = {
+en:{holdAt:(t,x)=>'⏳ Pass it before <b>'+t+'</b>: up to +'+x+' $BATON',myAt2:(w)=>'🏃 Right now the baton is with <b>'+w+'</b>.'},
+fr:{holdAt:(t,x)=>'⏳ Passe-le avant <b>'+t+'</b> : jusqu\'à +'+x+' $BATON',myAt2:(w)=>'🏃 En ce moment, le bâton est chez <b>'+w+'</b>.'},
+es:{holdAt:(t,x)=>'⏳ Pásalo antes de las <b>'+t+'</b>: hasta +'+x+' $BATON',myAt2:(w)=>'🏃 Ahora mismo el bastón lo tiene <b>'+w+'</b>.'},
+pt:{holdAt:(t,x)=>'⏳ Passe antes das <b>'+t+'</b>: até +'+x+' $BATON',myAt2:(w)=>'🏃 Agora o bastão está com <b>'+w+'</b>.'},
+ru:{holdAt:(t,x)=>'⏳ Передай до <b>'+t+'</b>: до +'+x+' $BATON',myAt2:(w)=>'🏃 Сейчас эстафета у <b>'+w+'</b>.'},
+uk:{holdAt:(t,x)=>'⏳ Передай до <b>'+t+'</b>: до +'+x+' $BATON',myAt2:(w)=>'🏃 Зараз естафета в <b>'+w+'</b>.'},
+tr:{holdAt:(t,x)=>'⏳ <b>'+t+'</b> öncesi devret: +'+x+' $BATON\'a kadar',myAt2:(w)=>'🏃 Şu an bayrak <b>'+w+'</b> elinde.'},
+id:{holdAt:(t,x)=>'⏳ Oper sebelum <b>'+t+'</b>: hingga +'+x+' $BATON',myAt2:(w)=>'🏃 Saat ini tongkat ada di <b>'+w+'</b>.'},
+ar:{holdAt:(t,x)=>'⏳ مرّرها قبل <b>'+t+'</b>: حتى +'+x+' $BATON',myAt2:(w)=>'🏃 العصا الآن مع <b>'+w+'</b>.'},
+fa:{holdAt:(t,x)=>'⏳ قبل از <b>'+t+'</b> ردش کن: تا +'+x+' $BATON',myAt2:(w)=>'🏃 الان چوب دست <b>'+w+'</b> است.'}
+};
+for (const k in X16) Object.assign(X[k], X16[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -622,9 +638,9 @@ function render() {
   const c = $('#batonCard');
   if (S.holding) {
     c.classList.remove('off');
-    $('#holdT').textContent = T('hold1'); $('#holdP').innerHTML = T('hold2', Math.round(S.hold_h)) + '<small class="tip">' + T('holdTip', fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * 5)) + '</small>';
+    $('#holdT').textContent = T('hold1'); $('#holdP').innerHTML = T('hold2', Math.round(S.hold_h)) + '<small class="tip">' + T('holdAt', new Date(S.batons[0].expires * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * 5)) + '</small>';
     $('#passBtn').hidden = false; $('#passBtn').textContent = '→  ' + T('pass');
-    $('#extBtn').hidden = !!S.batons[0].extended || !S.ext_stars; $('#extBtn').textContent = T('ext', S.ext_h || 4, S.ext_stars || 10);
+    $('#extBtn').hidden = !!S.batons[0].extended || !S.ext_stars || S.batons[0].expires - now() > 3600; $('#extBtn').textContent = T('ext', S.ext_h || 4, S.ext_stars || 10);
     $('#moreBat').hidden = true; $('#moreBat').textContent = T('more', S.batons.length - 1);
   } else {
     c.classList.add('off'); $('#holdT').textContent = T('none1'); $('#holdP').textContent = T('none2'); $('#timer').textContent = ''; $('#extBtn').hidden = true; $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
@@ -633,12 +649,12 @@ function render() {
   $('#invRule').textContent = !S.holding ? T('ruleNone') : S.batons[0].extended ? T('ruleExt') : T('ruleHold', fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * 5));
   // chain
   // 22 oct 2026: the player's own chain gets its own card when the baton in hand belongs to another chain
-  const mc = S.my_chain; $('#myChain').hidden = true;  // 22 oct 2026: one chain on screen only (rules simplified)
-  if (mc) { $('#myH').innerHTML = T('myH'); $('#myLinks').textContent = fmt(mc.links); $('#myAt').innerHTML = mc.at ? T('myAt', esc(mc.at)) : T('myNone'); }
+  const mc = S.my_chain; const own = !!(mc && S.chain && S.chain.id === mc.id); $('#myChain').hidden = !mc || (own && S.holding);  // 22 oct 2026: own chain always on top; the baton's chain below only when it is someone else's
+  if (mc) { $('#myH').innerHTML = T('myH'); $('#myLinks').textContent = fmt(mc.links); $('#myAt').innerHTML = mc.at ? T('myAt2', esc(mc.at)) : T('myNone'); }
   const ch = S.chain;
-  $('#chainCard').hidden = !ch;
+  $('#chainCard').hidden = !ch || (own && !S.holding);
   if (ch) {
-    $('#chainBy').innerHTML = T('chainBy', esc(ch.starter)); $('#links').textContent = fmt(ch.links);
+    $('#chainBy').innerHTML = own ? T('myH') : S.holding ? T('fromBy', esc(ch.starter)) : T('chainBy', esc(ch.starter)); $('#links').textContent = fmt(ch.links);
     let h = '';
     if (ch.links > ch.runners.length) h += '<div class="link"><div class="av" style="background:#2a3f5f;color:#8fa5c4">+' + fmt(ch.links - ch.runners.length) + '</div><div class="bar"></div></div>';
     ch.runners.forEach((r, i) => { h += '<div class="link"><div class="av' + (r.me ? ' me' : '') + '" style="background:' + (r.me ? '#2f8dff' : hueOf(r.n)) + '" title="' + esc(r.n) + '">' + init(r.n) + '</div>' + (i < ch.runners.length - 1 ? '<div class="bar"></div>' : '') + '</div>'; });
@@ -680,7 +696,7 @@ function tick() {
   const left = S.full_at - now();
   $('#fillTxt').textContent = left > 0 ? T('fullIn', dur(left)) : T('full');
   const hb = $('#harvest'); hb.textContent = p >= 1 ? T('harvest') + ' · ' + fmt(p) : T('empty'); hb.disabled = p < 1;
-  if (S.holding && S.batons[0]) { const l = S.batons[0].expires - now(); const tm = $('#timer'); tm.textContent = clock(l); tm.classList.toggle('low', l < 3600); if (l <= 0) refresh(); }
+  if (S.holding && S.batons[0]) { const l = S.batons[0].expires - now(); const tm = $('#timer'); tm.textContent = clock(l); tm.classList.toggle('low', l < 3600); if (l < 3600 && !S.batons[0].extended && S.ext_stars) $('#extBtn').hidden = false; if (l <= 0) refresh(); }
 }
 async function refresh() { const r = await api('state'); if (r && r.ok) setState(r); }
 
@@ -717,6 +733,10 @@ $('#extBtn').onclick = async () => {
     tg.openInvoice(r.link, (st) => { if (st === 'paid') { hap('ok'); toast(T('extOk')); setTimeout(refresh, 1500); setTimeout(refresh, 5000); } });
   } catch (e) { openLink(r.link); }
 };
+function confetti() {  // 22 oct 2026: a little party when the baton leaves your hands
+  const cols = ['#2f8dff', '#7fd0ff', '#ffffff', '#ffb02e', '#4be3a0'];
+  for (let i = 0; i < 46; i++) { const d = document.createElement('i'); d.className = 'cf'; d.style.left = Math.random() * 100 + 'vw'; d.style.background = cols[i % cols.length]; d.style.animationDelay = Math.random() * .4 + 's'; d.style.animationDuration = 1.2 + Math.random() * .9 + 's'; document.body.appendChild(d); setTimeout(() => d.remove(), 2600); }
+}
 async function doPass(kind, to) {
   const b = S && S.batons[0]; if (!b) return;
   const r = await api('pass', { baton: b.id, kind, to });
@@ -726,7 +746,7 @@ async function doPass(kind, to) {
     openLink('https://t.me/share/url?url=' + encodeURIComponent(link) + '&text=' + encodeURIComponent(T('shareTxt')));
     toast(T('linkReady')); closeSheet(); setState(r.state); return;
   }
-  hap('ok'); closeSheet(); setState(r.state);
+  hap('ok'); closeSheet(); setState(r.state); confetti();
   toast(T('passed', fmt(r.gain), r.mult, r.to));
 }
 $('#sheet').onclick = async (e) => {
