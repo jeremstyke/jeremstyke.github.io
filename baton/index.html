@@ -299,7 +299,7 @@ nav.tabs button[aria-current="page"] svg{filter:drop-shadow(0 0 6px rgba(47,141,
 #p-rank .big,#p-tasks .big,#p-friends .big{font-size:clamp(38px,12.5vw,60px);line-height:1.05}
 nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10.5px}
 /* 22 oct 2026 (Jeremy, 12h55): simpler game: no hands, no Stars extension, no baton video, no "longest trip", rankings by miners only */
-#moreBat,#chainCard,.record,#sChains,#mineCard,#p-mine,nav.tabs button[data-p="mine"],#p-rank .seg{display:none!important}
+#vidBtn,#extBtn,#moreBat,#chainCard,.record,#sChains,#mineCard,#p-mine,nav.tabs button[data-p="mine"],#p-rank .seg{display:none!important}
 /* 22 oct 2026 (13h35): rankings centered, medals for the top 3, the countdown as a pill */
 #p-rank .score{text-align:center}
 #p-rank .wk{display:flex;justify-content:center;margin:0 0 4px}#p-rank .wk span{background:var(--lane);border-radius:999px;padding:7px 14px;font-size:13px;color:var(--mute);font-weight:700}
@@ -838,6 +838,9 @@ ar:['في الصفحة الرئيسية، يضيف ساعة إلى الوقت (4
 fa:['در صفحه اصلی، ۱ ساعت به زمان اضافه می‌کند (۴ بار برای هر چوب). در وظایف، +۱۰۰ $BATON می‌دهد (روزی ۱۰ بار).','می‌توانم چوب را بیشتر نگه دارم؟','بله: هر ویدیو +۱ ساعت (۴ بار)، و +۴ ساعت با ۵۰ ⭐ (یک بار برای هر چوب).','دوستانی که دعوت می‌کنی، و کسی که تو را دعوت کرده. +۵٬۰۰۰ $BATON وقتی دوست دعوت‌شده اولین چوبش را رد کند، و ۱۰٪ از همه درآمدش.']
 };
 for (const k in FAQ41) { const f = FAQ[k] && FAQ[k].q; if (!f || f.length !== 9) continue; const a = FAQ41[k]; f[5] = [f[5][0], a[0]]; f[6] = [f[6][0], a[3]]; f.splice(6, 0, [a[1], a[2]]); }
+// 22 oct 2026 (15h37, Jeremy): a baton always lasts 4 h (no video hour, no Stars)
+const FAQ42 = {en:'In Tasks, a video pays +100 $BATON (10 a day).', fr:'Dans Tâches, une vidéo rapporte +100 $BATON (10 par jour).', es:'En Tareas, un vídeo da +100 $BATON (10 al día).', pt:'Em Tarefas, um vídeo rende +100 $BATON (10 por dia).', ru:'В Заданиях видео даёт +100 $BATON (10 в день).', uk:'У Завданнях відео дає +100 $BATON (10 на день).', tr:'Görevler\'de bir video +100 $BATON kazandırır (günde 10).', id:'Di Tugas, satu video memberi +100 $BATON (10 per hari).', ar:'في المهام، يمنح الفيديو +100 $BATON (10 يوميًا).', fa:'در وظایف، هر ویدیو +۱۰۰ $BATON می‌دهد (روزی ۱۰ بار).'};
+for (const k in FAQ42) { const f = FAQ[k] && FAQ[k].q; if (!f || f.length !== 10) continue; f[5] = [f[5][0], FAQ42[k]]; f.splice(6, 1); }
 function faq() {
   const f = FAQ[LANG] || FAQ.en;
   sheet('<h3>' + f.h + '</h3><button class="btn ghost" data-k="tuto">' + f.tuto + '</button>' +
