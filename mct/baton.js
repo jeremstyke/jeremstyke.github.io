@@ -112,7 +112,22 @@
       el.querySelector('button').onclick = (e) => { e.stopPropagation(); try { if (typeof haptic === 'function') haptic(); } catch (er) {} try { tw.openTelegramLink('https://t.me/PassTheBatonBot/play?startapp=src_mctend'); } catch (er) {} };
       return el;
     }
+    // 22 oct 2026 (20h24, Jeremy): no more $0.01 for subscribing to the 2 channels (new subscribers): the app's texts lose the "$0.01" part
+    let stT = 0;
+    function strip() {
+      if (Date.now() - stT < 800) { clearTimeout(window.__stT); window.__stT = setTimeout(strip, 850); return; } stT = Date.now();
+      try {
+        const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT); let n;
+        while ((n = w.nextNode())) {
+          const t = n.nodeValue; if (!t || !/0[.,]01/.test(t) || t.indexOf('📣') < 0) continue;
+          let v = t.replace(/\s*·\s*📣[^·]*0[.,]01[^·]*?(?=\s*·|$)/g, '');
+          if (/^\s*📣/.test(v) && /0[.,]01/.test(v)) v = v.indexOf(' · ') >= 0 ? v.slice(v.indexOf(' · ') + 3) : v.replace(/\s*[:：].*$/, '');
+          if (v !== t) n.nodeValue = v;
+        }
+      } catch (e) {}
+    }
     function put() {
+      strip();
       const ts = document.querySelector('#tonsheet .tsx');
       if (ts && !ts.querySelector('.btend')) { const g = ts.querySelector('.grab'); g ? g.insertAdjacentElement('afterend', note()) : ts.prepend(note()); }
       const db = document.querySelector('#diam .dbox');
