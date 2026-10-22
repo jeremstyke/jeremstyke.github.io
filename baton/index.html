@@ -304,6 +304,12 @@ nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:elli
         <div class="foot" id="myAt" style="text-align:start;margin:0"></div>
       </div>
 
+      <div class="card" id="chainCard" hidden>
+        <div class="meta"><span id="chainBy"></span><span class="myBig num"><span id="links">0</span> <small data-t="links" style="font-size:13px;font-weight:600;color:var(--mute)"></small></span></div>
+        <div class="foot" id="worldAt" style="text-align:start;margin:0"></div>
+        <div class="chain" id="chain"></div>
+      </div>
+
       <div class="card batonCard" id="batonCard">
         <div class="batonRow">
           <div class="stick" aria-hidden="true"><div class="rod"></div><div class="fire"></div></div>
@@ -314,11 +320,6 @@ nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:elli
         <div class="more" id="moreBat" hidden></div>
       </div>
 
-      <div class="card" id="chainCard" hidden>
-        <div class="meta"><span id="chainBy"></span><span><b id="links">0</b> <span data-t="links"></span></span></div>
-        <div class="chain" id="chain"></div>
-      </div>
-
       <div class="card">
         <h2 data-t="mine"></h2>
         <div class="mineRow">
@@ -327,7 +328,7 @@ nav.tabs button span:not(.dot){max-width:100%;overflow:hidden;text-overflow:elli
         </div>
       </div>
 
-      <div class="record"><span data-t="record"></span><b class="num" id="record">0</b></div>
+      <div class="record" hidden><span data-t="record"></span><b class="num" id="record">0</b></div>
       <p class="foot" data-t="airdrop"></p>
     </section>
 
@@ -591,6 +592,20 @@ ar:{holdAt:(t,x)=>'⏳ مرّرها قبل <b>'+t+'</b>: حتى +'+x+' $BATON',m
 fa:{holdAt:(t,x)=>'⏳ قبل از <b>'+t+'</b> ردش کن: تا +'+x+' $BATON',myAt2:(w)=>'🏃 الان چوب دست <b>'+w+'</b> است.'}
 };
 for (const k in X16) Object.assign(X[k], X16[k]);
+// 22 oct 2026 (Jeremy): one baton goes around the world
+const X17 = {
+en:{links:'hands',hold2:()=>'🌍 Your turn! Your mine runs <b>x2</b>.',t2h:'One baton goes around the world',t2p:'There is only one baton in the whole game. When it reaches you, your mine runs 2× faster: pass it within the hour to win a bonus.',t3h:'Grow the tour',t3p:'Every hand counts. Bring someone new: x5 bonus.',fIn:'Already had it this tour',ruleNone:'🔗 Each newcomer who joins with your link earns you 5,000 $BATON + 10 % of what they mine.',ruleHold:(x)=>'🏃 You hold the baton: the first newcomer who joins with your link takes it, and you win x5 (+'+x+' $BATON).',chains:'Passers',miners:'Miners',wTour:(n)=>'🌍 <b>World tour #'+n+'</b>',wAt:(n)=>'🏃 The baton is with <b>'+n+'</b> right now.',wMe:'🏃 <b>The baton is with you!</b>',wDone:(a,b)=>a+' / '+b+' players held it',wHeld:'✓ you did',wSoon:'your turn will come',wNone1:'Not your turn yet',wNone2:'The baton comes to you when someone passes it. The bot will tell you.',wNone2h:'You already held it this tour. It will come back in the next one.',wReserve:(s)=>'⭐ Reserve my turn · '+s+' ⭐',wQueued:(n)=>'⭐ Reserved · #'+n+' in line',wPaid:'⭐ Reserved! The baton comes to you on its next random pass.',nPass:(n)=>n+' passes'},
+fr:{links:'mains',hold2:()=>'🌍 C\'est ton tour ! Ta mine tourne <b>x2</b>.',t2h:'Un seul bâton fait le tour du monde',t2p:'Il n\'y a qu\'un bâton dans tout le jeu. Quand il arrive chez toi, ta mine va 2× plus vite : passe-le dans l\'heure pour gagner un bonus.',t3h:'Fais grandir le tour',t3p:'Chaque main compte. Amène quelqu\'un de nouveau : bonus x5.',fIn:'L\'a déjà eu dans ce tour',ruleNone:'🔗 Chaque nouveau qui arrive avec ton lien te rapporte 5 000 $BATON + 10 % de ce qu\'il mine.',ruleHold:(x)=>'🏃 Tu as le bâton : le premier nouveau qui arrive avec ton lien le récupère, et tu gagnes x5 (+'+x+' $BATON).',chains:'Passeurs',miners:'Mineurs',wTour:(n)=>'🌍 <b>Tour du monde n°'+n+'</b>',wAt:(n)=>'🏃 Le bâton est chez <b>'+n+'</b> en ce moment.',wMe:'🏃 <b>Le bâton est chez toi !</b>',wDone:(a,b)=>a+' / '+b+' joueurs l\'ont tenu',wHeld:'✓ toi aussi',wSoon:'ton tour viendra',wNone1:'Pas ton tour pour l\'instant',wNone2:'Le bâton arrivera chez toi quand quelqu\'un te le passera. Le bot te préviendra.',wNone2h:'Tu l\'as déjà eu dans ce tour. Il reviendra au prochain.',wReserve:(s)=>'⭐ Réserver mon tour · '+s+' ⭐',wQueued:(n)=>'⭐ Réservé · n°'+n+' dans la file',wPaid:'⭐ C\'est réservé ! Le bâton viendra chez toi à sa prochaine passe au hasard.',nPass:(n)=>n+' passes'},
+es:{links:'manos',hold2:()=>'🌍 ¡Es tu turno! Tu mina va <b>x2</b>.',t2h:'Un solo bastón da la vuelta al mundo',t2p:'Solo hay un bastón en todo el juego. Cuando te llega, tu mina va 2× más rápido: pásalo en menos de una hora para ganar un bonus.',t3h:'Haz crecer la vuelta',t3p:'Cada mano cuenta. Trae a alguien nuevo: bonus x5.',fIn:'Ya lo tuvo en esta vuelta',ruleNone:'🔗 Cada nuevo que llega con tu enlace te da 5 000 $BATON + 10 % de lo que mine.',ruleHold:(x)=>'🏃 Tienes el bastón: el primer nuevo que llegue con tu enlace se lo queda y ganas x5 (+'+x+' $BATON).',chains:'Pasadores',miners:'Mineros',wTour:(n)=>'🌍 <b>Vuelta al mundo n.º '+n+'</b>',wAt:(n)=>'🏃 El bastón lo tiene <b>'+n+'</b> ahora.',wMe:'🏃 <b>¡Tienes el bastón!</b>',wDone:(a,b)=>a+' / '+b+' jugadores lo tuvieron',wHeld:'✓ tú también',wSoon:'tu turno llegará',wNone1:'Aún no es tu turno',wNone2:'El bastón te llegará cuando alguien te lo pase. El bot te avisará.',wNone2h:'Ya lo tuviste en esta vuelta. Volverá en la próxima.',wReserve:(s)=>'⭐ Reservar mi turno · '+s+' ⭐',wQueued:(n)=>'⭐ Reservado · n.º '+n+' en la fila',wPaid:'⭐ ¡Reservado! El bastón te llegará en su próximo pase al azar.',nPass:(n)=>n+' pases'},
+pt:{links:'mãos',hold2:()=>'🌍 É a sua vez! Sua mina vai <b>x2</b>.',t2h:'Um só bastão dá a volta ao mundo',t2p:'Só existe um bastão em todo o jogo. Quando chega a você, sua mina vai 2× mais rápido: passe em até uma hora para ganhar um bônus.',t3h:'Aumente a volta',t3p:'Cada mão conta. Traga alguém novo: bônus x5.',fIn:'Já teve nesta volta',ruleNone:'🔗 Cada novato que chega com seu link te rende 5 000 $BATON + 10 % do que ele minerar.',ruleHold:(x)=>'🏃 Você tem o bastão: o primeiro novato que chegar com seu link fica com ele, e você ganha x5 (+'+x+' $BATON).',chains:'Passadores',miners:'Mineradores',wTour:(n)=>'🌍 <b>Volta ao mundo nº '+n+'</b>',wAt:(n)=>'🏃 O bastão está com <b>'+n+'</b> agora.',wMe:'🏃 <b>O bastão está com você!</b>',wDone:(a,b)=>a+' / '+b+' jogadores já tiveram',wHeld:'✓ você também',wSoon:'sua vez vai chegar',wNone1:'Ainda não é sua vez',wNone2:'O bastão chegará quando alguém passar para você. O bot vai avisar.',wNone2h:'Você já teve nesta volta. Ele volta na próxima.',wReserve:(s)=>'⭐ Reservar minha vez · '+s+' ⭐',wQueued:(n)=>'⭐ Reservado · nº '+n+' na fila',wPaid:'⭐ Reservado! O bastão virá para você no próximo passe aleatório.',nPass:(n)=>n+' passes'},
+ru:{hold2:()=>'🌍 Твоя очередь! Шахта работает <b>x2</b>.',t2h:'Одна эстафета обходит весь мир',t2p:'Во всей игре только одна эстафета. Когда она у тебя, шахта работает в 2 раза быстрее: передай её в течение часа и получи бонус.',t3h:'Расти круг',t3p:'Каждая рука важна. Приведи новичка: бонус x5.',fIn:'Уже держал в этом круге',ruleNone:'🔗 Каждый новичок по твоей ссылке приносит 5 000 $BATON + 10 % от его добычи.',ruleHold:(x)=>'🏃 Эстафета у тебя: первый новичок по твоей ссылке забирает её, а ты получаешь x5 (+'+x+' $BATON).',chains:'Передающие',miners:'Шахтёры',wTour:(n)=>'🌍 <b>Кругосветка №'+n+'</b>',wAt:(n)=>'🏃 Сейчас эстафета у <b>'+n+'</b>.',wMe:'🏃 <b>Эстафета у тебя!</b>',wDone:(a,b)=>a+' / '+b+' игроков держали её',wHeld:'✓ и ты',wSoon:'твоя очередь придёт',wNone1:'Пока не твоя очередь',wNone2:'Эстафета придёт, когда кто-то передаст её тебе. Бот сообщит.',wNone2h:'Ты уже держал её в этом круге. Она вернётся в следующем.',wReserve:(s)=>'⭐ Занять очередь · '+s+' ⭐',wQueued:(n)=>'⭐ Забронировано · №'+n+' в очереди',wPaid:'⭐ Готово! Эстафета придёт к тебе при следующей случайной передаче.',nPass:(n)=>n+' передач'},
+uk:{hold2:()=>'🌍 Твоя черга! Шахта працює <b>x2</b>.',t2h:'Одна естафета обходить увесь світ',t2p:'У всій грі лише одна естафета. Коли вона в тебе, шахта працює вдвічі швидше: передай її протягом години й отримай бонус.',t3h:'Рости коло',t3p:'Кожна рука важлива. Приведи новачка: бонус x5.',fIn:'Уже тримав у цьому колі',ruleNone:'🔗 Кожен новачок за твоїм посиланням приносить 5 000 $BATON + 10 % від його видобутку.',ruleHold:(x)=>'🏃 Естафета в тебе: перший новачок за твоїм посиланням забирає її, а ти отримуєш x5 (+'+x+' $BATON).',chains:'Передавачі',miners:'Шахтарі',wTour:(n)=>'🌍 <b>Навколосвітка №'+n+'</b>',wAt:(n)=>'🏃 Зараз естафета в <b>'+n+'</b>.',wMe:'🏃 <b>Естафета в тебе!</b>',wDone:(a,b)=>a+' / '+b+' гравців тримали її',wHeld:'✓ і ти',wSoon:'твоя черга прийде',wNone1:'Поки не твоя черга',wNone2:'Естафета прийде, коли хтось передасть її тобі. Бот повідомить.',wNone2h:'Ти вже тримав її в цьому колі. Вона повернеться в наступному.',wReserve:(s)=>'⭐ Забронювати чергу · '+s+' ⭐',wQueued:(n)=>'⭐ Заброньовано · №'+n+' у черзі',wPaid:'⭐ Готово! Естафета прийде до тебе за наступної випадкової передачі.',nPass:(n)=>n+' передач'},
+tr:{hold2:()=>'🌍 Sıra sende! Maden <b>x2</b> çalışıyor.',t2h:'Tek bir bayrak dünyayı dolaşıyor',t2p:'Tüm oyunda tek bir bayrak var. Sana geldiğinde madenin 2× hızlı çalışır: bonus için bir saat içinde devret.',t3h:'Turu büyüt',t3p:'Her el önemli. Yeni birini getir: x5 bonus.',fIn:'Bu turda zaten tuttu',ruleNone:'🔗 Linkinle gelen her yeni oyuncu sana 5 000 $BATON + kazdığının %10\'unu kazandırır.',ruleHold:(x)=>'🏃 Bayrak sende: linkinle gelen ilk yeni oyuncu onu alır ve sen x5 kazanırsın (+'+x+' $BATON).',chains:'Devredenler',miners:'Madenciler',wTour:(n)=>'🌍 <b>Dünya turu #'+n+'</b>',wAt:(n)=>'🏃 Bayrak şu an <b>'+n+'</b> elinde.',wMe:'🏃 <b>Bayrak sende!</b>',wDone:(a,b)=>a+' / '+b+' oyuncu tuttu',wHeld:'✓ sen de',wSoon:'sıran gelecek',wNone1:'Henüz sıran değil',wNone2:'Biri sana devrettiğinde bayrak gelir. Bot haber verir.',wNone2h:'Bu turda zaten tuttun. Bir sonraki turda geri gelir.',wReserve:(s)=>'⭐ Sıramı ayırt · '+s+' ⭐',wQueued:(n)=>'⭐ Ayrıldı · sırada #'+n,wPaid:'⭐ Ayrıldı! Bayrak bir sonraki rastgele devirde sana gelir.',nPass:(n)=>n+' devir'},
+id:{hold2:()=>'🌍 Giliranmu! Tambangmu <b>x2</b>.',t2h:'Satu tongkat keliling dunia',t2p:'Hanya ada satu tongkat di seluruh game. Saat sampai padamu, tambangmu 2× lebih cepat: oper dalam satu jam untuk dapat bonus.',t3h:'Perbesar putaran',t3p:'Setiap tangan berarti. Ajak orang baru: bonus x5.',fIn:'Sudah memegangnya di putaran ini',ruleNone:'🔗 Setiap pemain baru lewat linkmu memberimu 5 000 $BATON + 10 % dari hasil tambangnya.',ruleHold:(x)=>'🏃 Kamu pegang tongkat: pemain baru pertama lewat linkmu mengambilnya, dan kamu dapat x5 (+'+x+' $BATON).',chains:'Pengoper',miners:'Penambang',wTour:(n)=>'🌍 <b>Keliling dunia #'+n+'</b>',wAt:(n)=>'🏃 Tongkat sedang di <b>'+n+'</b>.',wMe:'🏃 <b>Tongkat ada padamu!</b>',wDone:(a,b)=>a+' / '+b+' pemain sudah memegangnya',wHeld:'✓ kamu juga',wSoon:'giliranmu akan tiba',wNone1:'Belum giliranmu',wNone2:'Tongkat akan datang saat seseorang mengopernya padamu. Bot akan memberi tahu.',wNone2h:'Kamu sudah memegangnya di putaran ini. Ia kembali di putaran berikutnya.',wReserve:(s)=>'⭐ Pesan giliranku · '+s+' ⭐',wQueued:(n)=>'⭐ Dipesan · antrean #'+n,wPaid:'⭐ Dipesan! Tongkat datang padamu di operan acak berikutnya.',nPass:(n)=>n+' operan'},
+ar:{hold2:()=>'🌍 دورك! منجمك يعمل <b>x2</b>.',t2h:'عصا واحدة تدور حول العالم',t2p:'هناك عصا واحدة فقط في اللعبة كلها. عندما تصلك، منجمك أسرع مرتين: مرّرها خلال ساعة لتربح مكافأة.',t3h:'كبّر الجولة',t3p:'كل يد مهمة. ادعُ شخصًا جديدًا: مكافأة x5.',fIn:'حملها في هذه الجولة',ruleNone:'🔗 كل لاعب جديد عبر رابطك يربحك 5 000 $BATON + 10 % مما يعدّنه.',ruleHold:(x)=>'🏃 العصا معك: أول لاعب جديد عبر رابطك يأخذها، وتربح x5 (+'+x+' $BATON).',chains:'الممرّرون',miners:'المعدّنون',wTour:(n)=>'🌍 <b>جولة حول العالم رقم '+n+'</b>',wAt:(n)=>'🏃 العصا الآن مع <b>'+n+'</b>.',wMe:'🏃 <b>العصا معك!</b>',wDone:(a,b)=>a+' / '+b+' لاعبًا حملوها',wHeld:'✓ وأنت أيضًا',wSoon:'سيأتي دورك',wNone1:'ليس دورك بعد',wNone2:'ستصلك العصا عندما يمرّرها لك أحد. سيخبرك البوت.',wNone2h:'حملتها في هذه الجولة. ستعود في الجولة القادمة.',wReserve:(s)=>'⭐ احجز دوري · '+s+' ⭐',wQueued:(n)=>'⭐ محجوز · رقم '+n+' في الطابور',wPaid:'⭐ تم الحجز! ستصلك العصا في التمريرة العشوائية القادمة.',nPass:(n)=>n+' تمريرة'},
+fa:{hold2:()=>'🌍 نوبت توست! معدنت <b>x2</b> کار می‌کند.',t2h:'یک چوب دور دنیا می‌چرخد',t2p:'در کل بازی فقط یک چوب هست. وقتی به تو برسد، معدنت ۲ برابر سریع‌تر است: ظرف یک ساعت ردش کن تا پاداش بگیری.',t3h:'دور را بزرگ کن',t3p:'هر دست مهم است. یک تازه‌وارد بیاور: پاداش x5.',fIn:'در این دور آن را داشته',ruleNone:'🔗 هر تازه‌واردی که با لینک تو بیاید ۵٬۰۰۰ $BATON + ۱۰٪ از استخراجش برایت می‌آورد.',ruleHold:(x)=>'🏃 چوب دست توست: اولین تازه‌واردی که با لینک تو بیاید آن را می‌گیرد و تو x5 می‌بری (+'+x+' $BATON).',chains:'پاس‌دهنده‌ها',miners:'معدنچی‌ها',wTour:(n)=>'🌍 <b>دور دنیا شمارهٔ '+n+'</b>',wAt:(n)=>'🏃 چوب الان دست <b>'+n+'</b> است.',wMe:'🏃 <b>چوب دست توست!</b>',wDone:(a,b)=>a+' / '+b+' بازیکن آن را داشته‌اند',wHeld:'✓ تو هم',wSoon:'نوبتت می‌رسد',wNone1:'هنوز نوبت تو نیست',wNone2:'وقتی کسی چوب را به تو بدهد می‌رسد. ربات خبرت می‌کند.',wNone2h:'در این دور آن را داشته‌ای. در دور بعد برمی‌گردد.',wReserve:(s)=>'⭐ رزرو نوبت · '+s+' ⭐',wQueued:(n)=>'⭐ رزرو شد · نفر '+n+' در صف',wPaid:'⭐ رزرو شد! چوب در پاس تصادفی بعدی به تو می‌رسد.',nPass:(n)=>n+' پاس'}
+};
+for (const k in X17) Object.assign(X[k], X17[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -640,21 +655,24 @@ function render() {
     c.classList.remove('off');
     $('#holdT').textContent = T('hold1'); $('#holdP').innerHTML = T('hold2', Math.round(S.hold_h)) + '<small class="tip">' + T('holdAt', new Date(S.batons[0].expires * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * 5)) + '</small>';
     $('#passBtn').hidden = false; $('#passBtn').textContent = '→  ' + T('pass');
-    $('#extBtn').hidden = !!S.batons[0].extended || !S.ext_stars || S.batons[0].expires - now() > 3600; $('#extBtn').textContent = T('ext', S.ext_h || 4, S.ext_stars || 10);
+    $('#extBtn').hidden = true;  // 22 oct 2026: no extension with a world baton (it would block everybody)
     $('#moreBat').hidden = true; $('#moreBat').textContent = T('more', S.batons.length - 1);
   } else {
-    c.classList.add('off'); $('#holdT').textContent = T('none1'); $('#holdP').textContent = T('none2'); $('#timer').textContent = ''; $('#extBtn').hidden = true; $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
+    c.classList.add('off'); $('#holdT').textContent = T('wNone1'); $('#holdP').textContent = S.world && S.world.held ? T('wNone2h') : T('wNone2'); $('#timer').textContent = '';
+    $('#extBtn').hidden = !S.world; if (S.world) { $('#extBtn').disabled = !!S.world.queued; $('#extBtn').textContent = S.world.queued ? T('wQueued', S.world.queue || 1) : T('wReserve', S.world.stars || 10); } $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
   }
   $('#dotHome').hidden = !S.holding;
   $('#invRule').textContent = !S.holding ? T('ruleNone') : S.batons[0].extended ? T('ruleExt') : T('ruleHold', fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * 5));
   // chain
   // 22 oct 2026: the player's own chain gets its own card when the baton in hand belongs to another chain
-  const mc = S.my_chain; const own = !!(mc && S.chain && S.chain.id === mc.id); $('#myChain').hidden = !mc || (own && S.holding);  // 22 oct 2026: own chain always on top; the baton's chain below only when it is someone else's
+  const mc = S.my_chain; const own = !!(mc && S.chain && S.chain.id === mc.id); $('#myChain').hidden = true;  // 22 oct 2026: world baton, the tour card replaces it  // 22 oct 2026: own chain always on top; the baton's chain below only when it is someone else's
   if (mc) { $('#myH').innerHTML = T('myH'); $('#myLinks').textContent = fmt(mc.links); $('#myAt').innerHTML = mc.at ? T('myAt2', esc(mc.at)) : T('myNone'); }
   const ch = S.chain;
-  $('#chainCard').hidden = !ch || (own && !S.holding);
+  const w = S.world;  // 22 oct 2026 (Jeremy): one baton goes around the world
+  $('#chainCard').hidden = !ch;
   if (ch) {
-    $('#chainBy').innerHTML = own ? T('myH') : S.holding ? T('fromBy', esc(ch.starter)) : T('chainBy', esc(ch.starter)); $('#links').textContent = fmt(ch.links);
+    $('#chainBy').innerHTML = w ? T('wTour', w.tour || 1) : T('chainBy', esc(ch.starter)); $('#links').textContent = fmt(ch.links);
+    $('#worldAt').innerHTML = !w ? '' : (w.at_me ? T('wMe') : w.at ? T('wAt', esc(w.at)) : '') + '<br>' + T('wDone', fmt(w.done), fmt(Math.max(w.total, w.done))) + ' · ' + (w.held ? T('wHeld') : T('wSoon'));
     let h = '';
     if (ch.links > ch.runners.length) h += '<div class="link"><div class="av" style="background:#2a3f5f;color:#8fa5c4">+' + fmt(ch.links - ch.runners.length) + '</div><div class="bar"></div></div>';
     ch.runners.forEach((r, i) => { h += '<div class="link"><div class="av' + (r.me ? ' me' : '') + '" style="background:' + (r.me ? '#2f8dff' : hueOf(r.n)) + '" title="' + esc(r.n) + '">' + init(r.n) + '</div>' + (i < ch.runners.length - 1 ? '<div class="bar"></div>' : '') + '</div>'; });
@@ -667,7 +685,7 @@ function render() {
     { k: 'tank', t: T('tank'), s: S.costs.next_tank != null ? T('tankS', S.tank_h, S.costs.next_tank) : '', c: S.costs.tank },
     { k: 'grip', t: T('grip'), s: S.costs.grip != null ? T('gripS', S.hold_h, S.hold_h + 1) : '', c: S.costs.grip }];
   $('#lvBig').textContent = T('lvShort', S.drill); $('#rate2').textContent = S.rate + ' $BATON ' + T('perH');
-  $('#upg').innerHTML = up.filter((u) => u.k === 'drill' || S.drill >= 3).map((u) => '<div class="row"><div class="t"><b>' + u.t + '</b><span>' + esc(u.s || T('max')) + '</span></div>' + (u.c == null ? '<button class="sm done" disabled>' + T('max') + '</button>' : '<button class="sm" data-up="' + u.k + '"' + (S.pts < u.c ? ' disabled' : '') + '>' + fmt(u.c) + '</button>') + '</div>').join('') + (S.drill < 3 ? '<p class="foot">🔒 ' + T('unlock') + '</p>' : '');
+  $('#upg').innerHTML = up.filter((u) => u.k === 'drill' || (S.drill >= 3 && u.k !== 'grip')).map((u) => '<div class="row"><div class="t"><b>' + u.t + '</b><span>' + esc(u.s || T('max')) + '</span></div>' + (u.c == null ? '<button class="sm done" disabled>' + T('max') + '</button>' : '<button class="sm" data-up="' + u.k + '"' + (S.pts < u.c ? ' disabled' : '') + '>' + fmt(u.c) + '</button>') + '</div>').join('') + (S.drill < 3 ? '<p class="foot">🔒 ' + T('unlock') + '</p>' : '');
   // tasks
   const trow = (t) => '<div class="row"><div class="t"><b>' + esc(t.title) + '</b><span>' + esc(t.sub || '') + '</span></div><span class="r">+' + fmt(t.reward) + '</span>' + (t.done ? '<button class="sm done" disabled>' + T('done') + '</button>' : '<button class="sm" data-task="' + t.id + '" data-url="' + esc(t.url || '') + '">' + (opened[t.id] ? T('claim') : T('go')) + '</button>') + '</div>';
   const srow = (t) => '<div class="row' + (t.done ? ' on' : '') + '"><div class="t"><b>' + esc(t.title) + '</b><span>' + T('subS', t.perk || 10) + (t.done ? '' : ' · +' + fmt(t.reward) + ' $BATON') + '</span></div>' + (t.done ? '<span class="pill">✓ ' + T('active') + '</span>' : '<button class="sm" data-task="' + t.id + '" data-url="' + esc(t.url || '') + '">' + (opened[t.id] ? T('claim') : T('go')) + '</button>') + '</div>';
@@ -696,7 +714,7 @@ function tick() {
   const left = S.full_at - now();
   $('#fillTxt').textContent = left > 0 ? T('fullIn', dur(left)) : T('full');
   const hb = $('#harvest'); hb.textContent = p >= 1 ? T('harvest') + ' · ' + fmt(p) : T('empty'); hb.disabled = p < 1;
-  if (S.holding && S.batons[0]) { const l = S.batons[0].expires - now(); const tm = $('#timer'); tm.textContent = clock(l); tm.classList.toggle('low', l < 3600); if (l < 3600 && !S.batons[0].extended && S.ext_stars) $('#extBtn').hidden = false; if (l <= 0) refresh(); }
+  if (S.holding && S.batons[0]) { const l = S.batons[0].expires - now(); const tm = $('#timer'); tm.textContent = clock(l); tm.classList.toggle('low', l < 3600); if (l <= 0) refresh(); }
 }
 async function refresh() { const r = await api('state'); if (r && r.ok) setState(r); }
 
@@ -726,6 +744,12 @@ $('#passBtn').onclick = () => {
 // 22 oct 2026: keep the baton in hand 4 h longer for 10 Stars (once per baton); the bot's webhook applies the payment
 $('#extBtn').onclick = async () => {
   hap();
+  if (S && !S.holding) {  // 22 oct 2026: reserve my turn (Stars)
+    const q = await api('reserve');
+    if (!q || !q.ok) { hap('err'); toast(q && q.error === 'queued' ? T('wQueued', (S.world && S.world.queue) || 1) : errMsg(q || {})); return; }
+    try { tg.openInvoice(q.link, (st) => { if (st === 'paid') { hap('ok'); confetti(); toast(T('wPaid')); setTimeout(refresh, 1500); setTimeout(refresh, 5000); } }); } catch (e) { openLink(q.link); }
+    return;
+  }
   const b = S && S.batons[0]; if (!b) return;
   const r = await api('extend', { baton: b.id });
   if (!r || !r.ok) { hap('err'); toast(r && r.error === 'late' ? T('extLate') : r && r.error === 'done' ? T('extDone') : errMsg(r || {})); return; }
@@ -796,11 +820,11 @@ async function loadFriends() {
   const tot = '<div class="record crewtot"><span>' + T('crewEarned') + '<small>' + T('crewSplit', fmt((r.earned_total || 0) - (r.earned_ref || 0)), fmt(r.earned_ref || 0)) + '</small></span><b class="num">+' + fmt(r.earned_total || 0) + '</b></div>';
   $('#friends').innerHTML = tot + (r.list.length ? r.list.map((x) => '<div class="row"><span class="av" style="background:' + hueOf(x.name) + '">' + init(x.name) + '</span><div class="t"><b>' + esc(x.name) + '</b><span>' + (x.sponsor ? T('sponsor') : x.holding ? T('holding') : T('mined', fmt(x.mined))) + '</span></div>' + (x.earned ? '<span class="r">+' + fmt(x.earned) + '</span>' : '') + '</div>').join('') : '<div class="empty">' + T('noFriends') + '</div>');
 }
-let rankMode = 'chains';
+let rankMode = 'chains';  // 'chains' now shows the best passers (22 oct 2026)
 async function loadRanks() {
   const r = await api('ranks'); if (!r.ok) return;
   const rows = rankMode === 'chains'
-    ? r.chains.map((c, i) => '<div class="row' + (c.me ? ' me' : '') + '"><span class="rank' + (i < 3 ? ' g' : '') + '">' + (i + 1) + '</span><div class="t"><b>' + esc(T('chainOf', c.starter)) + '</b><span>' + (c.stopped ? T('stopped') : T('running')) + '</span></div><span class="r">' + fmt(c.links) + ' ' + T('links') + '</span></div>')
+    ? (r.passers || []).map((m, i) => '<div class="row' + (m.me ? ' me' : '') + '"><span class="rank' + (i < 3 ? ' g' : '') + '">' + (i + 1) + '</span><span class="av" style="background:' + hueOf(m.name) + '">' + init(m.name) + '</span><div class="t"><b>' + esc(m.name) + '</b></div><span class="r">' + T('nPass', fmt(m.n)) + '</span></div>')
     : r.miners.map((m, i) => '<div class="row' + (m.me ? ' me' : '') + '"><span class="rank' + (i < 3 ? ' g' : '') + '">' + (i + 1) + '</span><span class="av" style="background:' + hueOf(m.name) + '">' + init(m.name) + '</span><div class="t"><b>' + esc(m.name) + '</b></div><span class="r">' + fmt(m.pts) + '</span></div>');
   $('#ranks').innerHTML = rows.join('') || '<div class="empty">…</div>';
 }
