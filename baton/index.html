@@ -562,6 +562,19 @@ ar:{t1h:'اجمع كل 4 ساعات',t1p:'منجمك يمتلئ في 4 ساعا�
 fa:{t1h:'هر ۴ ساعت برداشت کن',t1p:'معدنت در ۴ ساعت پر می‌شود. برگرد و $BATON هایت را بردار.',t2p:'وقتی چوب دست توست، معدنت ۲ برابر سریع‌تر است. قبل از تمام شدن زمان ردش کن: پاداش x5 اگر به یک تازه‌وارد بدهی.',t3p:'هرچه چوب از دست‌های بیشتری بگذرد، همهٔ کسانی که آن را داشته‌اند سریع‌تر استخراج می‌کنند (+۱٪ برای هر دست).',randP:'یک بازیکن',randS:'هر بازیکن فعال. پاداش x1.',newS:'برایش لینک بفرست. پاداش x5.'}
 };
 for (const k in X14) Object.assign(X[k], X14[k]);
+const X15 = {
+en:{friendS:'A friend without a baton. x3 bonus.',fBusy:'Already holds a baton',fIn:'Already in this chain'},
+fr:{friendS:'Un ami qui n\'a pas de bâton. Bonus x3.',fBusy:'A déjà un bâton',fIn:'Déjà dans cette chaîne'},
+es:{friendS:'Un amigo sin bastón. Bonus x3.',fBusy:'Ya tiene un bastón',fIn:'Ya está en esta cadena'},
+pt:{friendS:'Um amigo sem bastão. Bônus x3.',fBusy:'Já tem um bastão',fIn:'Já está nesta corrente'},
+ru:{friendS:'Другу без эстафеты. Бонус x3.',fBusy:'Уже держит эстафету',fIn:'Уже в этой цепочке'},
+uk:{friendS:'Другові без естафети. Бонус x3.',fBusy:'Уже тримає естафету',fIn:'Уже в цьому ланцюжку'},
+tr:{friendS:'Bayrağı olmayan bir arkadaş. x3 bonus.',fBusy:'Zaten bir bayrağı var',fIn:'Zaten bu zincirde'},
+id:{friendS:'Teman yang belum pegang tongkat. Bonus x3.',fBusy:'Sudah pegang tongkat',fIn:'Sudah di rantai ini'},
+ar:{friendS:'صديق ليس معه عصا. مكافأة x3.',fBusy:'معه عصا بالفعل',fIn:'موجود في هذه السلسلة'},
+fa:{friendS:'دوستی که چوب ندارد. پاداش x3.',fBusy:'از قبل چوب دارد',fIn:'از قبل در این زنجیره است'}
+};
+for (const k in X15) Object.assign(X[k], X15[k]);
 const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const lc = String(user.language_code || navigator.language || 'en').toLowerCase();
 const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^ru|^be|^kk/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
@@ -690,6 +703,7 @@ $('#passBtn').onclick = () => {
   const pg = (m) => '<small class="pg">+' + fmt((S.pass_base || 120) * ((S.chain && S.chain.links) || 1) * m) + '</small>';
   sheet('<h3>' + T('who') + '</h3><p class="foot" style="text-align:start;margin:0">' + T('passTip') + '</p>' +
     '<button class="opt" data-k="new"><span class="t"><b>' + T('newP') + '</b><span>' + T('newS') + '</span></span><span class="mult x5">x5' + pg(5) + '</span></button>' +
+    '<button class="opt" data-k="friend"><span class="t"><b>' + T('friendP') + '</b><span>' + T('friendS') + '</span></span><span class="mult">x3' + pg(3) + '</span></button>' +
     '<button class="opt" data-k="random"><span class="t"><b>' + T('randP') + '</b><span>' + T('randS') + '</span></span><span class="mult">x1' + pg(1) + '</span></button>' +
     '<button class="btn ghost" data-k="keep">' + T('keep') + '</button>');
 };
@@ -725,9 +739,10 @@ $('#sheet').onclick = async (e) => {
   if (k === 'harv') { closeSheet(); return $('#harvest').onclick(); }
   if (k === 'friend') {
     const r = await api('friends');
-    const inChain = new Set(((S.chain && S.chain.runners) || []).map((x) => x.n));
-    const list = (r.list || []).filter((x) => !inChain.has(x.name));
-    sheet('<h3>' + T('pick') + '</h3>' + (list.length ? list.map((x) => '<button class="opt" data-f="' + x.id + '"><span class="av" style="background:' + hueOf(x.name) + '">' + init(x.name) + '</span><span class="t"><b>' + esc(x.name) + '</b><span>' + (x.holding ? T('holding') : T('mined', fmt(x.mined))) + '</span></span><span class="mult">x3</span></button>').join('') : '<div class="empty">' + T('noPick') + '</div><button class="opt" data-k="new"><span class="t"><b>' + T('newP') + '</b><span>' + T('newS') + '</span></span><span class="mult x5">x5</span></button>') + '<button class="btn ghost" data-k="keep">' + T('keep') + '</button>');
+    // 22 oct 2026: every friend is listed; those who already hold a baton or are already in this chain are shown greyed, with the reason
+    const all = r.list || []; const list = all.filter((x) => !x.in_chain && !x.holding); const off = all.filter((x) => x.in_chain || x.holding);
+    const offH = off.map((x) => '<div class="opt" style="opacity:.45;pointer-events:none"><span class="av" style="background:' + hueOf(x.name) + '">' + init(x.name) + '</span><span class="t"><b>' + esc(x.name) + '</b><span>' + (x.holding ? T('fBusy') : T('fIn')) + '</span></span></div>').join('');
+    sheet('<h3>' + T('pick') + '</h3>' + (list.length ? list.map((x) => '<button class="opt" data-f="' + x.id + '"><span class="av" style="background:' + hueOf(x.name) + '">' + init(x.name) + '</span><span class="t"><b>' + esc(x.name) + '</b><span>' + T('mined', fmt(x.mined)) + '</span></span><span class="mult">x3</span></button>').join('') + offH : '<div class="empty">' + T('noPick') + '</div><button class="opt" data-k="new"><span class="t"><b>' + T('newP') + '</b><span>' + T('newS') + '</span></span><span class="mult x5">x5</span></button>') + '<button class="btn ghost" data-k="keep">' + T('keep') + '</button>');
     return;
   }
   doPass(k);
