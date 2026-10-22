@@ -546,6 +546,20 @@ ar:{passTip:'إذا انتهى الوقت، تسقط العصا منك: تنته
 fa:{passTip:'اگر زمان تمام شود، چوب از دستت می‌افتد: سفرش تمام می‌شود و پاداشی نمی‌گیری.'}
 };
 for (const k in X20) Object.assign(X[k], X20[k]);
+// 22 oct 2026 (Jeremy): without a baton in hand, say clearly whose baton the card shows and where it is
+const X21 = {
+en:{myOn:(w)=>'🏁 Your baton is with <b>'+w+'</b>',myDrop:'🏁 Your last baton fell',lastHeld:(n)=>'Last baton you held · started by <b>'+n+'</b>'},
+fr:{myOn:(w)=>'🏁 Ton bâton est chez <b>'+w+'</b>',myDrop:'🏁 Ton dernier bâton est tombé',lastHeld:(n)=>'Dernier bâton tenu · lancé par <b>'+n+'</b>'},
+es:{myOn:(w)=>'🏁 Tu bastón lo tiene <b>'+w+'</b>',myDrop:'🏁 Tu último bastón se cayó',lastHeld:(n)=>'Último bastón que tuviste · lanzado por <b>'+n+'</b>'},
+pt:{myOn:(w)=>'🏁 Seu bastão está com <b>'+w+'</b>',myDrop:'🏁 Seu último bastão caiu',lastHeld:(n)=>'Último bastão que você segurou · lançado por <b>'+n+'</b>'},
+ru:{myOn:(w)=>'🏁 Твоя эстафета у <b>'+w+'</b>',myDrop:'🏁 Твоя последняя эстафета упала',lastHeld:(n)=>'Последняя эстафета · запустил <b>'+n+'</b>'},
+uk:{myOn:(w)=>'🏁 Твоя естафета в <b>'+w+'</b>',myDrop:'🏁 Твоя остання естафета впала',lastHeld:(n)=>'Остання естафета · запустив <b>'+n+'</b>'},
+tr:{myOn:(w)=>'🏁 Bayrağın <b>'+w+'</b> elinde',myDrop:'🏁 Son bayrağın düştü',lastHeld:(n)=>'Son tuttuğun bayrak · başlatan <b>'+n+'</b>'},
+id:{myOn:(w)=>'🏁 Tongkatmu ada di <b>'+w+'</b>',myDrop:'🏁 Tongkat terakhirmu jatuh',lastHeld:(n)=>'Tongkat terakhir yang kamu pegang · dimulai oleh <b>'+n+'</b>'},
+ar:{myOn:(w)=>'🏁 عصاك مع <b>'+w+'</b>',myDrop:'🏁 سقطت عصاك الأخيرة',lastHeld:(n)=>'آخر عصا حملتها · أطلقها <b>'+n+'</b>'},
+fa:{myOn:(w)=>'🏁 چوبت دست <b>'+w+'</b> است',myDrop:'🏁 آخرین چوبت افتاد',lastHeld:(n)=>'آخرین چوبی که داشتی · راه‌انداز <b>'+n+'</b>'}
+};
+for (const k in X21) Object.assign(X[k], X21[k]);
 const X11 = {
 en:{holdTip:(x)=>'⏳ Pass it before the timer ends: up to +'+x+' $BATON',passTip:'When the timer hits zero, it leaves on its own and you get no bonus.',ext:(h,s)=>'⏱️ Keep it '+h+' h longer · '+s+' ⭐',extOk:'⏱️ Baton extended!',extLate:'Too late, this baton is gone.',extDone:'Already extended once.'},
 fr:{holdTip:(x)=>'⏳ Passe-le avant la fin du chrono : jusqu\'à +'+x+' $BATON',passTip:'Quand le chrono arrive à zéro, il part tout seul et tu n\'as pas de bonus.',ext:(h,s)=>'⏱️ Garder '+h+' h de plus · '+s+' ⭐',extOk:'⏱️ Bâton prolongé !',extLate:'Trop tard, ce bâton est parti.',extDone:'Déjà prolongé une fois.'},
@@ -632,7 +646,8 @@ function render() {
   const ch = S.chain;
   $('#chainCard').hidden = !ch;
   if (ch) {
-    $('#chainBy').innerHTML = T('chainBy', esc(ch.starter)); $('#links').textContent = fmt(ch.links);
+    const mine = !S.holding && S.my_chain && S.my_chain.id === ch.id;
+    $('#chainBy').innerHTML = S.holding ? T('chainBy', esc(ch.starter)) : mine ? (S.my_chain.at ? T('myOn', esc(S.my_chain.at)) : T('myDrop')) : T('lastHeld', esc(ch.starter)); $('#links').textContent = fmt(ch.links);
     let h = '';
     if (ch.links > ch.runners.length) h += '<div class="link"><div class="av" style="background:#2a3f5f;color:#8fa5c4">+' + fmt(ch.links - ch.runners.length) + '</div><div class="bar"></div></div>';
     ch.runners.forEach((r, i) => { h += '<div class="link"><div class="av' + (r.me ? ' me' : '') + '" style="background:' + (r.me ? '#2f8dff' : hueOf(r.n)) + '" title="' + esc(r.n) + '">' + init(r.n) + '</div>' + (i < ch.runners.length - 1 ? '<div class="bar"></div>' : '') + '</div>'; });
