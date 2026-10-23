@@ -163,11 +163,11 @@
       const F = fr(), usd = Number(b.usd || 0), wait = Number(b.waiting || 0);
       let money = '';
       if (wait > 0) money = '<p style="margin:14px 0 0;font-size:15px;line-height:1.45">' + (F ? '⏳ ' + wait.toFixed(2).replace('.', ',') + ' $ en cours d\'envoi sur ton wallet TON.' : '⏳ $' + wait.toFixed(2) + ' is on its way to your TON wallet.') + '</p>';
-      else if (usd > 0) money = '<p style="margin:14px 0 8px;font-size:15px;line-height:1.45">' + (F ? '💰 Il te reste ' + usd.toFixed(2).replace('.', ',') + ' $ gagnés avant la suspension. Ajoute ton wallet TON pour les recevoir :' : '💰 You still have $' + usd.toFixed(2) + ' earned before the suspension. Add your TON wallet to receive it:') + '</p>'
+      else if (usd > 0) money = '<p style="margin:14px 0 8px;font-size:15px;line-height:1.45">' + (F ? '💰 ' + usd.toFixed(2).replace('.', ',') + ' $ à recevoir : ajoute ton wallet TON ci-dessous.' : '💰 $' + usd.toFixed(2) + ' to receive: add your TON wallet below.') + '</p>'
         + '<input id="banaddr" placeholder="UQ…" autocomplete="off" autocapitalize="off" spellcheck="false" value="' + esc3(b.wallet || '') + '" style="width:100%;box-sizing:border-box;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:inherit;font-size:14px">'
         + '<button id="bango" style="margin-top:10px;width:100%;min-height:48px;border:0;border-radius:14px;background:#2f8dff;color:#fff;font-weight:800;font-size:16px">' + (F ? 'Recevoir mon argent' : 'Get my money') + '</button><p id="banmsg" style="margin:8px 0 0;font-size:13px;opacity:.8"></p>';
       el.innerHTML = '<div style="width:100%;max-width:380px"><div style="font-size:54px">🚫</div><h2 style="margin:10px 0 6px;font-size:22px">' + (F ? 'Compte suspendu' : 'Account suspended') + '</h2>'
-        + '<p style="margin:0;font-size:15px;line-height:1.45;opacity:.85">' + (F ? 'Ton compte a été suspendu pour non-respect des règles.' : 'Your account has been suspended for breaking the rules.') + '</p>' + money + '</div>';
+        + '<p style="margin:0;font-size:15px;line-height:1.45;opacity:.85">' + (F ? 'Motif : insultes.<br>Les sommes gagnées ont été payées si tu avais ajouté ton wallet. Sinon, ajoute-le.' : 'Reason: insults.<br>What you earned has been paid if you had added your wallet. If not, add it.') + '</p>' + money + '</div>';
       const go = el.querySelector('#bango');
       if (go) go.onclick = async () => {
         const addr = (el.querySelector('#banaddr').value || '').trim(); const m = el.querySelector('#banmsg'); go.disabled = true;
