@@ -425,6 +425,8 @@ draw(0);
   let r = null; for (let k = 0; k < 3 && !r; k++) { r = await api('state').catch(() => null); if (!r) await new Promise(x => setTimeout(x, 1000)) }
   if (!r) { toast(tr('t_err')); return }
   take(r);
+  // 24 oct 2026 (Jeremy): ask once if the bot may write to the player (needed for the "machine full" messages when he never pressed /start)
+  if (ST && ST.me.write_ok == null && TW && TW.requestWriteAccess) setTimeout(() => { try { TW.requestWriteAccess(ok => { api('write', { ok: !!ok }).then(take).catch(() => {}) }) } catch (e) {} }, 1500);
   const sp = (TW && TW.initDataUnsafe && TW.initDataUnsafe.start_param) || '';
   if (sp === 'friends') go('fr');
 })();
