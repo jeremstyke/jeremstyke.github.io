@@ -253,6 +253,8 @@ const NP = {
  fa:{comps:'قطعات',p_cool:'خنک‌کننده',p_oc:'اورکلاک',p_bat:'باتری',e_spd:'+{n}٪ سرعت در هر سطح',e_bat:'+{n} ساعت به هر جلسه در هر سطح',t_part:'✅ {m} سطح {n}!',avail:'{n} ارتقا موجود است'},
 };
 Object.keys(NP).forEach(k => Object.assign(I[k], NP[k]));
+// 24 oct 2026 (Jeremy): RIGZ divided by 144 (a laptop mines 1 RIGZ per 4 h); the friend bonus is now 1 RIGZ
+Object.keys(I).forEach(k => ['fr_p', 'share_txt'].forEach(t => { I[k][t] = I[k][t].replace(/\+100 RIGZ|\+۱۰۰ RIGZ/, k === 'fa' ? '+۱ RIGZ' : '+1 RIGZ') }));
 Object.keys(NT).forEach(k => Object.assign(I[k], NT[k]));
 const L = I[LANG];
 const tr = (k, v) => String(L[k] || I.en[k] || k).replace(/\{(\w)\}/g, (_, x) => v && v[x] !== undefined ? v[x] : '');
@@ -260,6 +262,8 @@ document.querySelectorAll('[data-t]').forEach(e => e.textContent = tr(e.dataset.
 const EMO = ['💻', '🖥️', '🎮', '🧩', '🔥', '🏭'];
 const nf = new Intl.NumberFormat(LANG === 'fa' ? 'fa-IR' : LANG, { maximumFractionDigits: 0 });
 const fmt = v => nf.format(Math.floor(v));
+const nf2 = new Intl.NumberFormat(LANG === 'fa' ? 'fa-IR' : LANG, { maximumFractionDigits: 2 });
+const fmt2 = v => nf2.format(Math.floor(Number(v) * 100 + 1e-6) / 100);  // 24 oct 2026: RIGZ are scarce (0.25 an hour), so 2 decimals
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const $ = id => document.getElementById(id);
 function toast(t) { const e = $('toast'); e.textContent = t; e.classList.add('show'); clearTimeout(e._t); e._t = setTimeout(() => e.classList.remove('show'), 2000) }
@@ -327,22 +331,22 @@ const _draw = draw; draw = function (t) { drawn = t; _draw(t) };
 function render() {
   if (!ST) return;
   const m = ST.me, v = shown(), i = Math.floor(v), t0 = now();
-  $('num').textContent = fmt(i); $('dec').textContent = (LANG === 'en' ? '.' : ',') + (v - i).toFixed(4).slice(2);
+  $('num').textContent = fmt(i); $('dec').textContent = (LANG === 'en' ? '.' : ',') + (v - i).toFixed(5).slice(2);
   const boosted = m.boost_end && t0 < T(m.boost_end), run = running(), done = m.start_at && !run, b = $('main');
-  $('rate').innerHTML = '⚡ ' + fmt(Number(m.rate) * (boosted ? 2 : 1)) + ' / h' + (boosted ? ' <b class="x2">x2</b>' : '');
+  $('rate').innerHTML = '⚡ ' + fmt2(Number(m.rate) * (boosted ? 2 : 1)) + ' / h' + (boosted ? ' <b class="x2">x2</b>' : '');
   $('scene').className = 'scene' + (run ? ' on' : '') + (run && boosted ? ' boost' : '');
   $('bar').style.width = (m.start_at ? Math.min(1, (t0 - T(m.start_at)) / SES()) * 100 : 0) + '%';
   if (run) { const r = T(m.start_at) + SES() - t0, h = Math.floor(r / 3600e3), mn = Math.floor(r % 3600e3 / 6e4), s = Math.floor(r % 6e4 / 1e3);
     $('sess').textContent = tr('run', { t: h + 'h ' + String(mn).padStart(2, '0') + 'm ' + String(s).padStart(2, '0') + 's' }); b.className = 'btn run'; b.textContent = tr('b_run') }
-  else if (done) { $('sess').textContent = tr('done'); b.className = 'btn claim'; b.textContent = tr('b_claim', { n: fmt(mined()) }) }
+  else if (done) { $('sess').textContent = tr('done'); b.className = 'btn claim'; b.textContent = tr('b_claim', { n: fmt2(mined()) }) }
   else { $('sess').textContent = tr('off'); b.className = 'btn'; b.textContent = tr('b_start') }
   $('lvlN').textContent = m.tier + 1; $('lvlT').textContent = L.m[m.tier]; $('mname').textContent = EMO[m.tier] + ' ' + L.m[m.tier];
-  const nx = tiers()[m.tier + 1], nc = buyable(v); $('upS').textContent = nc ? tr('avail', { n: nc }) : nx ? '→ ' + fmt(nx[1]) + ' RIGZ' : tr('max'); $('upB').classList.toggle('can', nc > 0);
+  const nx = tiers()[m.tier + 1], nc = buyable(v); $('upS').textContent = nc ? tr('avail', { n: nc }) : nx ? '→ ' + fmt2(nx[1]) + ' RIGZ' : tr('max'); $('upB').classList.toggle('can', nc > 0);
   $('boB').hidden = ST.cfg.boost_on === false; $('bdg').hidden = !m.unread; $('bdg').textContent = m.unread > 9 ? '9+' : m.unread;
   $('boB').classList.toggle('on', !!boosted);
   $('boS').textContent = boosted ? tr('bon', { m: Math.ceil((T(m.boost_end) - t0) / 6e4) }) : m.boost_left > 0 ? tr('bsub') + ' · ' + m.boost_left + '/' + 6 : tr('bnone');
   if (!$('pg-up').hidden) buildUp();
-  $('dp').textContent = fmt(v) + ' RIGZ';
+  $('dp').textContent = fmt2(v) + ' RIGZ';
   const tot = Math.max(1, Number(ST.total) + mined());
   $('dsh').textContent = (v / tot * 100).toFixed(3).replace('.', LANG === 'en' ? '.' : ',') + ' %';
   $('drk').textContent = '#' + fmt(m.rank); $('dmn').textContent = fmt(ST.players);
@@ -357,7 +361,7 @@ function coinFly(big) { const s = $('scene').getBoundingClientRect(), n = $('num
   e.animate([{ transform: 'translate(0,0) scale(.3)', opacity: 0 }, { transform: `translate(${side}px,${up}px) scale(1)`, opacity: 1, offset: .35 }, { transform: `translate(${tx - x}px,${ty - y}px) scale(.6)`, opacity: .3 }], { duration: 1100, easing: 'cubic-bezier(.5,0,.3,1)' }).onfinish = () => { e.remove(); $('num').parentElement.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.07)' }, { transform: 'scale(1)' }], { duration: 180 }) } }
 function plus() { const s = $('scene').getBoundingClientRect(); const e = document.createElement('div'); e.className = 'fx';
   e.style.cssText += `left:${s.left + s.width * (.25 + Math.random() * .5)}px;top:${s.top + s.height * .3}px;font:700 13px JetBrains Mono,monospace;color:#39ff9f;text-shadow:0 0 8px #39ff9f`;
-  e.textContent = '+' + (rateAt(now()) / 3600 * .7).toFixed(3); document.body.appendChild(e);
+  e.textContent = '+' + (rateAt(now()) / 3600 * .7).toFixed(5); document.body.appendChild(e);
   e.animate([{ transform: 'translateY(0)', opacity: 0 }, { opacity: 1, offset: .2 }, { transform: 'translateY(-40px)', opacity: 0 }], { duration: 1200 }).onfinish = () => e.remove() }
 setInterval(() => { if (!running() || $('pg-mine').hidden || document.hidden) return; plus(); if (Math.random() < .5) coinFly() }, 700);
 function confetti() { const s = $('scene').getBoundingClientRect(); const e = document.createElement('div'); e.className = 'fx'; const c = ['#39ff9f', '#22d3ee', '#ff4fd8', '#ffc83d'][Math.random() * 4 | 0];
@@ -376,7 +380,7 @@ $('main').onclick = async () => {
   if (running()) { toast(tr('t_run')); return }
   if (ST.me.start_at) {
     const r = await act('claim'); if (!r || !r.ok) return;
-    for (let k = 0; k < 20; k++) setTimeout(() => coinFly(true), k * 45); haptic('heavy'); toast(tr('t_claim', { n: fmt(r.gain || 0) })); return;
+    for (let k = 0; k < 20; k++) setTimeout(() => coinFly(true), k * 45); haptic('heavy'); toast(tr('t_claim', { n: fmt2(r.gain || 0) })); return;
   }
   const r = await act('start'); if (!r || !r.ok) return;
   haptic('medium'); toast(tr('t_start')); $('flash').animate([{ opacity: 0 }, { opacity: .12 }, { opacity: 0 }], { duration: 300 });
@@ -384,9 +388,9 @@ $('main').onclick = async () => {
 async function upgrade() {
   if (!ST) return; const nx = tiers()[ST.me.tier + 1];
   if (!nx) { toast(tr('max')); return }
-  if (shown() < nx[1]) { toast(tr('t_need', { n: fmt(nx[1]) })); return }
+  if (shown() < nx[1]) { toast(tr('t_need', { n: fmt2(nx[1]) })); return }
   const old = ST.me.tier; const r = await act('upgrade');
-  if (!r || !r.ok) { if (r && r.error === 'funds') toast(tr('t_need', { n: fmt(r.cost) })); return }
+  if (!r || !r.ok) { if (r && r.error === 'funds') toast(tr('t_need', { n: fmt2(r.cost) })); return }
   haptic('heavy'); _draw(old);
   const m = $('svg');
   m.animate([{ transform: 'scale(1)', opacity: 1 }, { transform: 'scale(.6) translateY(30px)', opacity: 0 }], { duration: 250 }).onfinish = () => {
@@ -416,8 +420,8 @@ function partCost(p) { const c = ST.cfg.parts && ST.cfg.parts[p]; const l = ST.m
 function buyable(v) { if (!ST) return 0; let n = 0; const nx = tiers()[ST.me.tier + 1]; if (nx && v >= nx[1]) n++; PARTS.forEach(([p]) => { const c = partCost(p); if (c != null && v >= c) n++ }); return n }
 async function buyPart(p) {
   const c = partCost(p); if (c == null) { toast(tr('max')); return }
-  if (shown() < c) { toast(tr('t_need', { n: fmt(c) })); return }
-  const r = await act('part', { p }); if (!r || !r.ok) { if (r && r.error === 'funds') toast(tr('t_need', { n: fmt(r.cost) })); return }
+  if (shown() < c) { toast(tr('t_need', { n: fmt2(c) })); return }
+  const r = await act('part', { p }); if (!r || !r.ok) { if (r && r.error === 'funds') toast(tr('t_need', { n: fmt2(r.cost) })); return }
   haptic('heavy'); for (let k = 0; k < 14; k++) confetti(); toast(tr('t_part', { m: tr('p_' + p), n: r.lvl }));
 }
 let lastBuild = '';
@@ -427,18 +431,18 @@ function buildUp() {
   const pc = ST.cfg.parts || {};
   const parts = PARTS.map(([p, ic]) => { const c = pc[p]; if (!c) return ''; const l = ST.me[p] || 0, mx = c.cost.length, cost = partCost(p);
     const eff = p === 'bat' ? tr('e_bat', { n: c.h }) : tr('e_spd', { n: c.pct });
-    return `<div class="it ${cost != null && v >= cost ? 'can' : ''}" data-p="${p}"><div class="r" style="font-size:22px">${ic}</div><div class="n">${esc(tr('p_' + p))}<span class="lv">${Array.from({ length: mx }, (_, i) => `<i class="${i < l ? 'f' : ''}"></i>`).join('')}</span><div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">${eff}</div></div><div class="p">${cost == null ? '✓' : fmt(cost)}</div></div>` }).join('');
-  $('upl').innerHTML = `<div class="ph">${tr('comps')}</div>` + parts + `<div class="ph">${tr('n_mach')}</div>` + tiers().map((t, i) => `<div class="it ${i === cur ? 'cur' : i > cur + 1 ? 'lock' : ''}" data-i="${i}"><div class="r" style="font-size:22px">${i > cur + 1 ? '🔒' : EMO[i]}</div><div class="n">${esc(L.m[i])}<div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">⚡ ${fmt(t[0])} / h</div></div><div class="p">${i <= cur ? (i === cur ? tr('cur') : '✓') : fmt(t[1])}</div></div>`).join('');
+    return `<div class="it ${cost != null && v >= cost ? 'can' : ''}" data-p="${p}"><div class="r" style="font-size:22px">${ic}</div><div class="n">${esc(tr('p_' + p))}<span class="lv">${Array.from({ length: mx }, (_, i) => `<i class="${i < l ? 'f' : ''}"></i>`).join('')}</span><div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">${eff}</div></div><div class="p">${cost == null ? '✓' : fmt2(cost)}</div></div>` }).join('');
+  $('upl').innerHTML = `<div class="ph">${tr('comps')}</div>` + parts + `<div class="ph">${tr('n_mach')}</div>` + tiers().map((t, i) => `<div class="it ${i === cur ? 'cur' : i > cur + 1 ? 'lock' : ''}" data-i="${i}"><div class="r" style="font-size:22px">${i > cur + 1 ? '🔒' : EMO[i]}</div><div class="n">${esc(L.m[i])}<div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">⚡ ${fmt2(t[0])} / h</div></div><div class="p">${i <= cur ? (i === cur ? tr('cur') : '✓') : fmt2(t[1])}</div></div>`).join('');
   $('upl').querySelectorAll('.it').forEach(el => el.onclick = () => { if (el.dataset.p) buyPart(el.dataset.p); else if (+el.dataset.i === cur + 1) upgrade() });
 }
 const link = () => 'https://t.me/' + BOT + '?startapp=r' + (ST ? ST.me.id : '');
 $('inv').textContent = tr('invite');
 $('inv').onclick = () => { const u = 'https://t.me/share/url?url=' + encodeURIComponent(link()) + '&text=' + encodeURIComponent(tr('share_txt')); try { TW.openTelegramLink(u) } catch (e) { window.open(u) } };
 $('copy').onclick = async () => { try { await navigator.clipboard.writeText(link()); toast(tr('t_copied')) } catch (e) { toast(link()) } };
-async function loadFriends() { const r = await api('friends').catch(() => null); if (!r || !r.ok) return; $('frpts').textContent = fmt(r.ref_pts) + ' RIGZ';
-  $('frl').innerHTML = r.list.length ? r.list.map(f => `<div class="it"><div class="r" style="font-size:20px">${EMO[f.t] || '👤'}</div><div class="n">${esc(f.n)}</div><div class="p">+${fmt(f.g)}</div></div>`).join('') : `<p class="sub" style="text-align:center;margin-top:20px">${tr('fr_none')}</p>` }
+async function loadFriends() { const r = await api('friends').catch(() => null); if (!r || !r.ok) return; $('frpts').textContent = fmt2(r.ref_pts) + ' RIGZ';
+  $('frl').innerHTML = r.list.length ? r.list.map(f => `<div class="it"><div class="r" style="font-size:20px">${EMO[f.t] || '👤'}</div><div class="n">${esc(f.n)}</div><div class="p">+${fmt2(f.g)}</div></div>`).join('') : `<p class="sub" style="text-align:center;margin-top:20px">${tr('fr_none')}</p>` }
 async function loadTop() { const r = await api('top').catch(() => null); if (!r || !r.ok) return;
-  $('topl').innerHTML = r.top.map((p, i) => `<div class="it ${p.me ? 'me' : ''}"><div class="r">${i < 3 ? '<span class="medal">' + ['🥇', '🥈', '🥉'][i] + '</span>' : i + 1}</div><div class="n">${EMO[p.t] || ''} ${esc(p.n)}</div><div class="p">${fmt(p.p)}</div></div>`).join('') }
+  $('topl').innerHTML = r.top.map((p, i) => `<div class="it ${p.me ? 'me' : ''}"><div class="r">${i < 3 ? '<span class="medal">' + ['🥇', '🥈', '🥉'][i] + '</span>' : i + 1}</div><div class="n">${EMO[p.t] || ''} ${esc(p.n)}</div><div class="p">${fmt2(p.p)}</div></div>`).join('') }
 function go(p) { document.querySelectorAll('.nav button').forEach(x => x.classList.toggle('on', x.dataset.p === p)); ['mine', 'up', 'fr', 'drop'].forEach(q => $('pg-' + q).hidden = q !== p);
   if (p === 'fr') loadFriends(); if (p === 'drop') loadTop(); }
 document.querySelectorAll('.nav button').forEach(b => b.onclick = () => { go(b.dataset.p); haptic() });
@@ -449,7 +453,7 @@ $('bell').onclick = async () => {
   haptic(); $('ntl').innerHTML = ''; $('sheet').hidden = false;
   const r = await api('notifs').catch(() => null); if (!r || !r.ok) return;
   if (ST) ST.me.unread = 0;
-  $('ntl').innerHTML = r.list.length ? r.list.map(x => `<div class="nt"><div style="flex:1">${esc(tr('nf_' + x.k, { n: x.d.n !== undefined ? (typeof x.d.n === 'number' ? fmt(x.d.n) : x.d.n) : '', b: fmt(x.d.b || 0) }))}<small>${ago(x.at)}</small></div></div>`).join('') : `<p class="sub" style="text-align:center">${tr('notif_none')}</p>`;
+  $('ntl').innerHTML = r.list.length ? r.list.map(x => `<div class="nt"><div style="flex:1">${esc(tr('nf_' + x.k, { n: x.d.n !== undefined ? (typeof x.d.n === 'number' ? fmt2(x.d.n) : x.d.n) : '', b: fmt2(x.d.b || 0) }))}<small>${ago(x.at)}</small></div></div>`).join('') : `<p class="sub" style="text-align:center">${tr('notif_none')}</p>`;
 };
 $('sheet').onclick = e => { if (e.target === $('sheet')) $('sheet').hidden = true };
 
