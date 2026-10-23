@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Rig Rush</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:0}
+body{margin:0}
+[hidden]{display:none!important}
+
+:root{--bg:#060a12;--fg:#eaf6ff;--mut:#8aa0b8;--neo:#39ff9f;--cy:#22d3ee;--pk:#ff4fd8;--gold:#ffc83d;--card:rgba(160,220,255,.06);--line:rgba(160,220,255,.12);color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:var(--bg);color:var(--fg);font-family:'Nunito',system-ui,sans-serif;overflow:hidden;user-select:none}
+#bgc{position:fixed;inset:0;z-index:0}
+.app{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;padding-block:12px 0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));max-width:480px;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.lvl{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);padding:5px 12px 5px 5px;border-radius:99px;font-size:13px;font-weight:800;min-width:0}
+.av{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--neo),var(--cy));display:grid;place-items:center;font-family:'Lilita One',sans-serif;font-size:14px;color:#03261a;flex:none}
+.drop{display:flex;align-items:center;gap:6px;background:linear-gradient(90deg,rgba(255,200,61,.2),rgba(255,79,216,.15));border:1px solid rgba(255,200,61,.4);padding:7px 12px;border-radius:99px;font-size:12px;font-weight:800;color:var(--gold);animation:glow 3s ease-in-out infinite;flex:none}
+@keyframes glow{50%{box-shadow:0 0 18px rgba(255,200,61,.4)}}
+.bal{text-align:center;margin-top:12px}
+.bal small{color:var(--mut);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800}
+.num{font-family:'Lilita One',sans-serif;font-size:clamp(40px,12vw,54px);line-height:1.1;color:var(--gold);text-shadow:0 3px 0 #a35a00,0 0 24px rgba(255,180,40,.4);font-variant-numeric:tabular-nums;display:flex;justify-content:center;align-items:center;gap:8px}
+.num .dec{font-size:.45em;color:#ffe3a3;text-shadow:none;opacity:.85;align-self:flex-end;margin-bottom:.35em;margin-left:-6px}
+.coin{width:.82em;height:.82em;flex:none}
+.rate{display:inline-flex;gap:6px;align-items:center;font-size:14px;font-weight:800;color:var(--neo);font-family:'JetBrains Mono',monospace}
+.rate b.x2{background:var(--pk);color:#fff;border-radius:6px;padding:1px 6px;font-size:11px;font-family:'Nunito';animation:pop .6s}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.3)}}
+.stage{position:relative;flex:1;min-height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.mname{font-family:'Lilita One',sans-serif;font-size:18px;color:var(--cy);letter-spacing:.03em;text-shadow:0 0 12px rgba(34,211,238,.5);margin-bottom:4px}
+.scene{width:min(92vw,380px);max-width:100%;aspect-ratio:320/220;position:relative}
+.scene svg{width:100%;height:100%;overflow:visible}
+/* machine animations */
+.fan{transform-box:fill-box;transform-origin:center;animation:spin .5s linear infinite;animation-play-state:paused}
+.on .fan{animation-play-state:running}
+.boost .fan{animation-duration:.22s}
+@keyframes spin{to{transform:rotate(360deg)}}
+.led{opacity:.15}
+.on .led{animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.2}0%{opacity:1}}
+.scr{fill:#05110c;transition:fill .4s}
+.on .scr{fill:#062a1c}
+.code{opacity:0;transition:opacity .4s}
+.on .code{opacity:1}
+.code g{animation:scroll 3s linear infinite}
+.boost .code g{animation-duration:1.4s}
+@keyframes scroll{to{transform:translateY(-60px)}}
+.rgb{filter:saturate(.2) brightness(.5);transition:filter .4s}
+.on .rgb{filter:none;animation:hue 4s linear infinite}
+@keyframes hue{to{filter:hue-rotate(360deg)}}
+.glowp{opacity:0;transition:opacity .5s}
+.on .glowp{opacity:1;animation:breath 2s ease-in-out infinite}
+@keyframes breath{50%{opacity:.55}}
+.off-txt{opacity:1}.on .off-txt{opacity:0}
+#mach{transform-box:view-box;transform-origin:160px 190px}
+.on #mach{animation:hum .18s linear infinite}
+@keyframes hum{50%{transform:translateY(.4px)}}
+.barw{width:min(70vw,260px);height:10px;border-radius:99px;background:rgba(160,220,255,.08);overflow:hidden;border:1px solid var(--line);margin-top:10px}
+.barw i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--cy),var(--neo));box-shadow:0 0 12px rgba(57,255,159,.7);transition:width .5s linear}
+.sess{text-align:center;font-weight:800;font-size:14px;color:var(--mut);margin:12px 0 10px}
+.fx{position:fixed;pointer-events:none;z-index:5}
+.btn{width:100%;border:0;border-radius:18px;padding:16px;font:400 20px 'Lilita One',sans-serif;letter-spacing:.02em;color:#03261a;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(180deg,#8dffc8,#39ff9f 55%,#14c47a);box-shadow:0 5px 0 #0b7a4b,0 12px 28px rgba(57,255,159,.3),inset 0 2px 0 rgba(255,255,255,.5);transition:transform .1s,box-shadow .1s}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #0b7a4b,inset 0 2px 0 rgba(255,255,255,.5)}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);transform:translateX(-100%);animation:shine 2.8s infinite}
+@keyframes shine{60%,100%{transform:translateX(100%)}}
+.btn.claim{background:linear-gradient(180deg,#ffe08a,#ffc83d 55%,#f08c00);color:#3a1d00;box-shadow:0 5px 0 #a35200,0 12px 30px rgba(255,200,61,.4),inset 0 2px 0 rgba(255,255,255,.5);animation:bounce 1.1s infinite}
+@keyframes bounce{50%{transform:translateY(-3px)}}
+.btn.run{background:rgba(160,220,255,.07);box-shadow:inset 0 0 0 1px var(--line);color:var(--mut)}
+.btn.run::after{display:none}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.mini{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:11px;display:flex;gap:10px;align-items:center;cursor:pointer;transition:transform .12s,border-color .2s;min-width:0}
+.mini:active{transform:scale(.96)}
+.mini .ic{font-size:22px;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none}
+.mini .t{font-weight:800;font-size:14px}
+.mini .s{font-size:11px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700}
+.up .ic{background:linear-gradient(135deg,rgba(57,255,159,.3),rgba(34,211,238,.25))}
+.up.can{border-color:var(--neo);animation:canup 1.6s infinite}
+@keyframes canup{50%{box-shadow:0 0 16px rgba(57,255,159,.45)}}
+.bo .ic{background:linear-gradient(135deg,rgba(255,79,216,.35),rgba(255,200,61,.25))}
+.bo.on{border-color:var(--pk);box-shadow:0 0 18px rgba(255,79,216,.4)}
+.nav{display:flex;justify-content:space-around;margin-top:12px;padding:8px 0 calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.nav button{background:none;border:0;color:var(--mut);font:800 11px 'Nunito',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 14px;border-radius:12px}
+.nav button span{font-size:20px;transition:transform .2s}
+.nav button.on{color:var(--fg)}
+.nav button.on span{transform:translateY(-2px) scale(1.15);filter:drop-shadow(0 0 8px var(--neo))}
+.page{flex:1;display:flex;flex-direction:column;min-height:0}
+.page[hidden]{display:none!important}
+.list{overflow:auto;flex:1;display:flex;flex-direction:column;gap:8px;margin-top:14px;padding-bottom:8px}
+h2{margin:16px 0 4px;font:400 28px 'Lilita One',sans-serif;color:var(--neo);text-wrap:balance}
+.sub{color:var(--mut);font-size:14px;line-height:1.45;margin:0;font-weight:700}
+.it{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;animation:in .4s both}
+@keyframes in{from{opacity:0;transform:translateY(12px)}}
+.it .r{font-weight:800;width:26px;color:var(--mut);text-align:center}
+.it .n{flex:1;font-weight:800;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.it .p{color:var(--gold);font-weight:800;font-size:14px}
+.it.me{border-color:var(--neo);background:rgba(57,255,159,.08)}
+.it.lock{opacity:.45}
+.it.cur{border-color:var(--cy);background:rgba(34,211,238,.1)}
+.medal{font-size:20px}
+.big{font:400 36px 'Lilita One',sans-serif;color:var(--gold);margin:10px 0;text-shadow:0 3px 0 #a35a00}
+.toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0px));transform:translate(-50%,-150%);background:#0f1a2a;border:1px solid var(--line);padding:10px 16px;border-radius:14px;font-weight:800;font-size:14px;z-index:9;transition:transform .35s cubic-bezier(.2,1.4,.4,1);white-space:nowrap}
+.toast.show{transform:translate(-50%,0)}
+.stat{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;font-weight:700}
+.demo-x{position:fixed;right:max(10px,env(safe-area-inset-right,0px));top:calc(56px + env(safe-area-inset-top,0px));font-size:10px;color:var(--mut);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:4px 7px;z-index:3;cursor:pointer;font-weight:800}
+.flash{position:fixed;inset:0;background:#fff;pointer-events:none;z-index:7;opacity:0}
+
+.cover{position:fixed;inset:0;z-index:20;background:var(--bg);display:grid;place-items:center;text-align:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px))}
+.cover[hidden]{display:none!important}
+.tr{display:flex;gap:8px;align-items:center;flex:none}
+.bell{position:relative;width:38px;height:38px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:18px;cursor:pointer}
+.bell b{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--pk);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;box-shadow:0 0 10px var(--pk);animation:ring 1.6s infinite}
+.bell b[hidden]{display:none!important}
+@keyframes ring{0%,100%{transform:scale(1)}10%{transform:scale(1.25)}20%{transform:scale(1)}}
+.row:has(#boB[hidden]){grid-template-columns:1fr}
+.sheet{position:fixed;inset:0;z-index:15;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;backdrop-filter:blur(4px)}
+.sheet[hidden]{display:none!important}
+.sheet>div{width:100%;max-width:480px;margin:0 auto;max-height:75vh;display:flex;flex-direction:column;background:linear-gradient(180deg,#0f1a2a,#060a12);border-radius:24px 24px 0 0;border-top:1px solid var(--line);padding:18px max(16px,env(safe-area-inset-right,0px)) calc(18px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));animation:up .35s cubic-bezier(.2,1.2,.4,1)}
+@keyframes up{from{transform:translateY(100%)}}
+.nt{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:14px;background:var(--card);border:1px solid var(--line);font-weight:700;font-size:14px;line-height:1.4}
+.nt small{display:block;color:var(--mut);font-size:11px;margin-top:2px}
+</style>
+</head>
+<body>
+<canvas id="bgc"></canvas>
+<div class="app" id="app">
+  <div class="top">
+    <div class="lvl"><div class="av" id="lvlN">1</div><div id="lvlT" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></div></div>
+    <div class="tr"><div class="bell" id="bell">🔔<b id="bdg" hidden>0</b></div><div class="drop" id="dropChip">🪂 AIRDROP</div></div>
+  </div>
+
+  <div class="page" id="pg-mine">
+    <div class="bal"><small data-t="coins"></small>
+      <div class="num"><svg class="coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.5" fill="#ffc83d" stroke="#a35a00" stroke-width="2"/><circle cx="12" cy="12" r="7" fill="none" stroke="#ffe9a8" stroke-width="1.5"/><text x="12" y="16.3" text-anchor="middle" font-size="11" font-family="Lilita One,sans-serif" fill="#a35a00">R</text></svg><span id="num">0</span><span class="dec" id="dec"></span></div>
+      <div class="rate" id="rate"></div>
+    </div>
+    <div class="stage" id="stage">
+      <div class="mname" id="mname"></div>
+      <div class="scene" id="scene"><svg viewBox="0 0 320 220" id="svg"></svg></div>
+      <div class="barw"><i id="bar"></i></div>
+    </div>
+    <div class="sess" id="sess"></div>
+    <button class="btn" id="main"></button>
+    <div class="row">
+      <div class="mini up" id="upB"><div class="ic">🛠️</div><div style="min-width:0"><div class="t" data-t="upgrade"></div><div class="s" id="upS"></div></div></div>
+      <div class="mini bo" id="boB"><div class="ic">🎬</div><div style="min-width:0"><div class="t">Boost x2</div><div class="s" id="boS"></div></div></div>
+    </div>
+  </div>
+
+  <div class="page" id="pg-up" hidden>
+    <h2 data-t="mach_h"></h2>
+    <p class="sub" data-t="mach_p"></p>
+    <div class="list" id="upl"></div>
+  </div>
+
+  <div class="page" id="pg-fr" hidden>
+    <h2 data-t="fr_h"></h2>
+    <p class="sub" data-t="fr_p"></p>
+    <div class="stat"><span data-t="from_fr"></span><b id="frpts" style="color:var(--gold)">0</b></div>
+    <div style="display:flex;gap:8px;margin-top:12px"><button class="btn" id="inv" style="flex:1"></button><button class="btn run" id="copy" style="width:64px;flex:none;padding:16px 0">📋</button></div>
+    <div class="list" id="frl"></div>
+  </div>
+
+  <div class="page" id="pg-drop" hidden>
+    <h2>🪂 Airdrop</h2>
+    <p class="sub" data-t="drop_p"></p>
+    <div class="big" id="dp">0</div>
+    <div class="stat"><span data-t="share"></span><b id="dsh">0 %</b></div>
+    <div class="stat"><span data-t="rank"></span><b id="drk">-</b></div>
+    <div class="stat"><span data-t="miners"></span><b id="dmn">-</b></div>
+    <div class="stat"><span data-t="wallet"></span><b id="wal" style="color:var(--cy);cursor:pointer"></b></div>
+    <h2 style="font-size:20px;margin-top:18px" data-t="top"></h2>
+    <div class="list" id="topl"></div>
+  </div>
+
+  <div class="nav">
+    <button class="on" data-p="mine"><span>⚡</span><i data-t="n_mine" style="font-style:normal"></i></button>
+    <button data-p="up"><span>🖥️</span><i data-t="n_mach" style="font-style:normal"></i></button>
+    <button data-p="fr"><span>👥</span><i data-t="n_fr" style="font-style:normal"></i></button>
+    <button data-p="drop"><span>🪂</span>Airdrop</button>
+  </div>
+</div>
+<div class="cover" id="cover" hidden><div><div style="font-size:54px" id="cvI">🛠️</div><h2 id="cvT" style="color:var(--fg)"></h2><p class="sub" id="cvP"></p></div></div>
+<div class="sheet" id="sheet" hidden><div><h2 style="margin-top:0" data-t="notif_h"></h2><div class="list" id="ntl"></div></div></div>
+<div class="toast" id="toast"></div>
+<div class="flash" id="flash"></div>
+
+<script>
+// 23 oct 2026 (Jeremy): Rig Rush mini app. Everything is decided by the server (rigrush edge function + rr_api);
+// the counter is only animated here with the same formula as rr_mined.
+const API = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/rigrush';
+const BOT = 'RigRushBot';
+const TW = window.Telegram && Telegram.WebApp;
+try { TW.ready(); TW.expand(); TW.setHeaderColor('#060a12'); TW.setBackgroundColor('#060a12'); TW.disableVerticalSwipes && TW.disableVerticalSwipes(); } catch (e) {}
+const lc = String((TW && TW.initDataUnsafe && TW.initDataUnsafe.user && TW.initDataUnsafe.user.language_code) || navigator.language || 'en').toLowerCase();
+const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^(ru|be|kk)/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
+if (LANG === 'ar' || LANG === 'fa') document.documentElement.dir = 'rtl';
+const I = {
+ en:{coins:'Your RIGZ',off:'💤 Machine off',run:'⏳ Mining: {t} left',done:'🎉 Session complete!',b_start:'⚡ Turn on the machine',b_run:'⚡ Mining…',b_claim:'💰 Collect {n} RIGZ',upgrade:'Upgrade',max:'Max level 🏆',bsub:'1 video · 1 h',bon:'Active · {m} min',bnone:'No video left today',n_mine:'Mine',n_mach:'Machines',n_fr:'Friends',mach_h:'Your machines',mach_p:'Each machine mines faster than the last. Unlock them with your RIGZ.',cur:'Current',fr_h:'Mine with your friends',fr_p:'+100 RIGZ for you and your friend, then 10 % of everything they mine, forever.',from_fr:'Earned from friends',invite:'✈️ Invite friends',fr_none:'No friends yet. Share your link!',drop_p:'A TON pot will be shared between all miners based on their RIGZ. Date and amount announced soon.',share:'Your estimated share',rank:'Your rank',miners:'Miners',wallet:'TON wallet',connect:'Connect',top:'🏆 Top miners',t_start:'⚡ Mining started for 4 h',t_run:'⚡ Your machine is mining, come back later',t_claim:'💰 +{n} RIGZ',t_need:'You need {n} RIGZ',t_unlock:'🎉 {m} unlocked!',t_boost:'🎬 x2 boost: the fans go wild!',t_bact:'🔥 Boost already active',t_off:'💤 Turn on the machine first',t_soon:'🎬 Videos coming very soon',t_err:'Connection error, try again',t_copied:'🔗 Link copied',t_wal:'✅ Wallet connected',maint:'Maintenance',maint_p:'Back in a few minutes.',ban:'Account suspended',ban_p:'This account can no longer play.',open_tg:'Open Rig Rush in Telegram',share_txt:'⚡ I mine $RIGZ on Rig Rush! Join me and get +100 RIGZ for the airdrop 🪂',m:['Old laptop','Desktop PC','RGB gaming PC','3-GPU rig','6-GPU rig','Mining farm']},
+ fr:{coins:'Tes RIGZ',off:'💤 Machine éteinte',run:'⏳ Minage : encore {t}',done:'🎉 Session terminée !',b_start:'⚡ Allumer la machine',b_run:'⚡ Ça mine…',b_claim:'💰 Récupérer {n} RIGZ',upgrade:'Améliorer',max:'Niveau max 🏆',bsub:'1 vidéo · 1 h',bon:'Actif · {m} min',bnone:'Plus de vidéo aujourd\'hui',n_mine:'Miner',n_mach:'Machines',n_fr:'Amis',mach_h:'Tes machines',mach_p:'Chaque machine mine plus vite que la précédente. Débloque-les avec tes RIGZ.',cur:'Actuelle',fr_h:'Mine avec tes amis',fr_p:'+100 RIGZ pour toi et ton ami, puis 10 % de tout ce qu\'il mine, pour toujours.',from_fr:'Gagné grâce à tes amis',invite:'✈️ Inviter des amis',fr_none:'Pas encore d\'amis. Partage ton lien !',drop_p:'Une cagnotte en TON sera partagée entre tous les mineurs selon leurs RIGZ. Date et montant annoncés bientôt.',share:'Ta part estimée',rank:'Ton classement',miners:'Mineurs',wallet:'Wallet TON',connect:'Connecter',top:'🏆 Top mineurs',t_start:'⚡ Minage lancé pour 4 h',t_run:'⚡ Ta machine mine, reviens plus tard',t_claim:'💰 +{n} RIGZ',t_need:'Il te faut {n} RIGZ',t_unlock:'🎉 {m} débloqué !',t_boost:'🎬 Boost x2 : les ventilos s\'emballent !',t_bact:'🔥 Boost déjà actif',t_off:'💤 Allume la machine d\'abord',t_soon:'🎬 Les vidéos arrivent très bientôt',t_err:'Erreur de connexion, réessaie',t_copied:'🔗 Lien copié',t_wal:'✅ Wallet connecté',maint:'Maintenance',maint_p:'De retour dans quelques minutes.',ban:'Compte suspendu',ban_p:'Ce compte ne peut plus jouer.',open_tg:'Ouvre Rig Rush dans Telegram',share_txt:'⚡ Je mine des $RIGZ sur Rig Rush ! Rejoins-moi et gagne +100 RIGZ pour l\'airdrop 🪂',m:['Vieux laptop','PC de bureau','PC gamer RGB','Rig 3 GPU','Rig 6 GPU','Ferme de minage']},
+ es:{coins:'Tus RIGZ',off:'💤 Máquina apagada',run:'⏳ Minando: quedan {t}',done:'🎉 ¡Sesión terminada!',b_start:'⚡ Encender la máquina',b_run:'⚡ Minando…',b_claim:'💰 Recoger {n} RIGZ',upgrade:'Mejorar',max:'Nivel máximo 🏆',bsub:'1 vídeo · 1 h',bon:'Activo · {m} min',bnone:'No quedan vídeos hoy',n_mine:'Minar',n_mach:'Máquinas',n_fr:'Amigos',mach_h:'Tus máquinas',mach_p:'Cada máquina mina más rápido que la anterior. Desbloquéalas con tus RIGZ.',cur:'Actual',fr_h:'Mina con tus amigos',fr_p:'+100 RIGZ para ti y tu amigo, y luego el 10 % de todo lo que mine, para siempre.',from_fr:'Ganado con tus amigos',invite:'✈️ Invitar amigos',fr_none:'Aún no tienes amigos. ¡Comparte tu enlace!',drop_p:'Un bote en TON se repartirá entre todos los mineros según sus RIGZ. Fecha y monto pronto.',share:'Tu parte estimada',rank:'Tu puesto',miners:'Mineros',wallet:'Wallet TON',connect:'Conectar',top:'🏆 Top mineros',t_start:'⚡ Minería iniciada por 4 h',t_run:'⚡ Tu máquina está minando, vuelve más tarde',t_claim:'💰 +{n} RIGZ',t_need:'Necesitas {n} RIGZ',t_unlock:'🎉 ¡{m} desbloqueado!',t_boost:'🎬 Boost x2: ¡los ventiladores enloquecen!',t_bact:'🔥 Boost ya activo',t_off:'💤 Enciende la máquina primero',t_soon:'🎬 Los vídeos llegan muy pronto',t_err:'Error de conexión, inténtalo de nuevo',t_copied:'🔗 Enlace copiado',t_wal:'✅ Wallet conectada',maint:'Mantenimiento',maint_p:'Volvemos en unos minutos.',ban:'Cuenta suspendida',ban_p:'Esta cuenta ya no puede jugar.',open_tg:'Abre Rig Rush en Telegram',share_txt:'⚡ ¡Mino $RIGZ en Rig Rush! Únete y gana +100 RIGZ para el airdrop 🪂',m:['Portátil viejo','PC de escritorio','PC gamer RGB','Rig 3 GPU','Rig 6 GPU','Granja de minería']},
+ pt:{coins:'Seus RIGZ',off:'💤 Máquina desligada',run:'⏳ Minerando: faltam {t}',done:'🎉 Sessão concluída!',b_start:'⚡ Ligar a máquina',b_run:'⚡ Minerando…',b_claim:'💰 Coletar {n} RIGZ',upgrade:'Melhorar',max:'Nível máximo 🏆',bsub:'1 vídeo · 1 h',bon:'Ativo · {m} min',bnone:'Sem vídeos hoje',n_mine:'Minerar',n_mach:'Máquinas',n_fr:'Amigos',mach_h:'Suas máquinas',mach_p:'Cada máquina minera mais rápido que a anterior. Desbloqueie com seus RIGZ.',cur:'Atual',fr_h:'Minere com seus amigos',fr_p:'+100 RIGZ para você e seu amigo, depois 10 % de tudo o que ele minerar, para sempre.',from_fr:'Ganho com amigos',invite:'✈️ Convidar amigos',fr_none:'Ainda sem amigos. Compartilhe seu link!',drop_p:'Um prêmio em TON será dividido entre todos os mineradores conforme seus RIGZ. Data e valor em breve.',share:'Sua parte estimada',rank:'Sua posição',miners:'Mineradores',wallet:'Carteira TON',connect:'Conectar',top:'🏆 Top mineradores',t_start:'⚡ Mineração iniciada por 4 h',t_run:'⚡ Sua máquina está minerando, volte mais tarde',t_claim:'💰 +{n} RIGZ',t_need:'Você precisa de {n} RIGZ',t_unlock:'🎉 {m} desbloqueado!',t_boost:'🎬 Boost x2: as ventoinhas enlouquecem!',t_bact:'🔥 Boost já ativo',t_off:'💤 Ligue a máquina primeiro',t_soon:'🎬 Vídeos chegando em breve',t_err:'Erro de conexão, tente de novo',t_copied:'🔗 Link copiado',t_wal:'✅ Carteira conectada',maint:'Manutenção',maint_p:'Voltamos em alguns minutos.',ban:'Conta suspensa',ban_p:'Esta conta não pode mais jogar.',open_tg:'Abra o Rig Rush no Telegram',share_txt:'⚡ Eu minero $RIGZ no Rig Rush! Entre e ganhe +100 RIGZ para o airdrop 🪂',m:['Notebook velho','PC de mesa','PC gamer RGB','Rig 3 GPU','Rig 6 GPU','Fazenda de mineração']},
+ ru:{coins:'Твои RIGZ',off:'💤 Машина выключена',run:'⏳ Майнинг: осталось {t}',done:'🎉 Сессия завершена!',b_start:'⚡ Включить машину',b_run:'⚡ Майним…',b_claim:'💰 Забрать {n} RIGZ',upgrade:'Улучшить',max:'Макс. уровень 🏆',bsub:'1 видео · 1 ч',bon:'Активно · {m} мин',bnone:'Видео на сегодня закончились',n_mine:'Майнинг',n_mach:'Машины',n_fr:'Друзья',mach_h:'Твои машины',mach_p:'Каждая машина майнит быстрее предыдущей. Открывай их за RIGZ.',cur:'Текущая',fr_h:'Майни с друзьями',fr_p:'+100 RIGZ тебе и другу, а потом 10 % от всего, что он намайнит, навсегда.',from_fr:'Заработано с друзей',invite:'✈️ Пригласить друзей',fr_none:'Пока нет друзей. Поделись ссылкой!',drop_p:'Призовой фонд в TON разделят между всеми майнерами по их RIGZ. Дата и сумма скоро.',share:'Твоя примерная доля',rank:'Твоё место',miners:'Майнеры',wallet:'TON кошелёк',connect:'Подключить',top:'🏆 Топ майнеров',t_start:'⚡ Майнинг запущен на 4 ч',t_run:'⚡ Машина майнит, возвращайся позже',t_claim:'💰 +{n} RIGZ',t_need:'Нужно {n} RIGZ',t_unlock:'🎉 {m} открыт!',t_boost:'🎬 Буст x2: вентиляторы ревут!',t_bact:'🔥 Буст уже активен',t_off:'💤 Сначала включи машину',t_soon:'🎬 Видео скоро появятся',t_err:'Ошибка соединения, попробуй ещё',t_copied:'🔗 Ссылка скопирована',t_wal:'✅ Кошелёк подключён',maint:'Техработы',maint_p:'Вернёмся через несколько минут.',ban:'Аккаунт заблокирован',ban_p:'Этот аккаунт больше не может играть.',open_tg:'Открой Rig Rush в Telegram',share_txt:'⚡ Я майню $RIGZ в Rig Rush! Присоединяйся и получи +100 RIGZ для airdrop 🪂',m:['Старый ноутбук','Настольный ПК','Игровой ПК RGB','Риг 3 GPU','Риг 6 GPU','Майнинг-ферма']},
+ uk:{coins:'Твої RIGZ',off:'💤 Машина вимкнена',run:'⏳ Майнинг: лишилось {t}',done:'🎉 Сесію завершено!',b_start:'⚡ Увімкнути машину',b_run:'⚡ Майнимо…',b_claim:'💰 Забрати {n} RIGZ',upgrade:'Покращити',max:'Макс. рівень 🏆',bsub:'1 відео · 1 год',bon:'Активно · {m} хв',bnone:'Відео на сьогодні скінчились',n_mine:'Майнинг',n_mach:'Машини',n_fr:'Друзі',mach_h:'Твої машини',mach_p:'Кожна машина майнить швидше за попередню. Відкривай їх за RIGZ.',cur:'Поточна',fr_h:'Майни з друзями',fr_p:'+100 RIGZ тобі й другу, а потім 10 % від усього, що він намайнить, назавжди.',from_fr:'Зароблено з друзів',invite:'✈️ Запросити друзів',fr_none:'Поки немає друзів. Поділись посиланням!',drop_p:'Призовий фонд у TON розділять між усіма майнерами за їхніми RIGZ. Дата й сума незабаром.',share:'Твоя орієнтовна частка',rank:'Твоє місце',miners:'Майнери',wallet:'TON гаманець',connect:'Підключити',top:'🏆 Топ майнерів',t_start:'⚡ Майнинг запущено на 4 год',t_run:'⚡ Машина майнить, повертайся пізніше',t_claim:'💰 +{n} RIGZ',t_need:'Потрібно {n} RIGZ',t_unlock:'🎉 {m} відкрито!',t_boost:'🎬 Буст x2: вентилятори ревуть!',t_bact:'🔥 Буст вже активний',t_off:'💤 Спочатку увімкни машину',t_soon:'🎬 Відео незабаром',t_err:'Помилка з\'єднання, спробуй ще',t_copied:'🔗 Посилання скопійовано',t_wal:'✅ Гаманець підключено',maint:'Техроботи',maint_p:'Повернемося за кілька хвилин.',ban:'Акаунт заблоковано',ban_p:'Цей акаунт більше не може грати.',open_tg:'Відкрий Rig Rush у Telegram',share_txt:'⚡ Я майню $RIGZ у Rig Rush! Приєднуйся й отримай +100 RIGZ для airdrop 🪂',m:['Старий ноутбук','Настільний ПК','Ігровий ПК RGB','Риг 3 GPU','Риг 6 GPU','Майнінг-ферма']},
+ tr:{coins:'RIGZ\'lerin',off:'💤 Makine kapalı',run:'⏳ Kazılıyor: {t} kaldı',done:'🎉 Oturum bitti!',b_start:'⚡ Makineyi çalıştır',b_run:'⚡ Kazılıyor…',b_claim:'💰 {n} RIGZ topla',upgrade:'Yükselt',max:'Maks. seviye 🏆',bsub:'1 video · 1 sa',bon:'Aktif · {m} dk',bnone:'Bugün video kalmadı',n_mine:'Kaz',n_mach:'Makineler',n_fr:'Arkadaşlar',mach_h:'Makinelerin',mach_p:'Her makine öncekinden hızlı kazar. RIGZ ile aç.',cur:'Mevcut',fr_h:'Arkadaşlarınla kaz',fr_p:'Sana ve arkadaşına +100 RIGZ, sonra kazdığı her şeyin %10\'u, sonsuza dek.',from_fr:'Arkadaşlardan kazanılan',invite:'✈️ Arkadaş davet et',fr_none:'Henüz arkadaş yok. Linkini paylaş!',drop_p:'TON ödül havuzu tüm madenciler arasında RIGZ\'lerine göre paylaşılacak. Tarih ve miktar yakında.',share:'Tahmini payın',rank:'Sıralaman',miners:'Madenciler',wallet:'TON cüzdan',connect:'Bağla',top:'🏆 En iyi madenciler',t_start:'⚡ Kazım 4 saatliğine başladı',t_run:'⚡ Makinen kazıyor, sonra gel',t_claim:'💰 +{n} RIGZ',t_need:'{n} RIGZ gerekiyor',t_unlock:'🎉 {m} açıldı!',t_boost:'🎬 x2 boost: fanlar çıldırdı!',t_bact:'🔥 Boost zaten aktif',t_off:'💤 Önce makineyi çalıştır',t_soon:'🎬 Videolar çok yakında',t_err:'Bağlantı hatası, tekrar dene',t_copied:'🔗 Link kopyalandı',t_wal:'✅ Cüzdan bağlandı',maint:'Bakım',maint_p:'Birkaç dakika içinde dönüyoruz.',ban:'Hesap askıya alındı',ban_p:'Bu hesap artık oynayamaz.',open_tg:'Rig Rush\'ı Telegram\'da aç',share_txt:'⚡ Rig Rush\'ta $RIGZ kazıyorum! Katıl, airdrop için +100 RIGZ kazan 🪂',m:['Eski dizüstü','Masaüstü PC','RGB oyuncu PC','3 GPU rig','6 GPU rig','Madencilik çiftliği']},
+ id:{coins:'RIGZ kamu',off:'💤 Mesin mati',run:'⏳ Menambang: sisa {t}',done:'🎉 Sesi selesai!',b_start:'⚡ Nyalakan mesin',b_run:'⚡ Menambang…',b_claim:'💰 Ambil {n} RIGZ',upgrade:'Tingkatkan',max:'Level maks 🏆',bsub:'1 video · 1 jam',bon:'Aktif · {m} mnt',bnone:'Video hari ini habis',n_mine:'Tambang',n_mach:'Mesin',n_fr:'Teman',mach_h:'Mesinmu',mach_p:'Setiap mesin menambang lebih cepat. Buka dengan RIGZ kamu.',cur:'Sekarang',fr_h:'Menambang bersama teman',fr_p:'+100 RIGZ untukmu dan temanmu, lalu 10 % dari semua yang ia tambang, selamanya.',from_fr:'Didapat dari teman',invite:'✈️ Undang teman',fr_none:'Belum ada teman. Bagikan link-mu!',drop_p:'Hadiah TON akan dibagi ke semua penambang sesuai RIGZ mereka. Tanggal dan jumlah segera.',share:'Perkiraan bagianmu',rank:'Peringkatmu',miners:'Penambang',wallet:'Dompet TON',connect:'Hubungkan',top:'🏆 Penambang teratas',t_start:'⚡ Penambangan dimulai 4 jam',t_run:'⚡ Mesinmu menambang, kembali nanti',t_claim:'💰 +{n} RIGZ',t_need:'Butuh {n} RIGZ',t_unlock:'🎉 {m} terbuka!',t_boost:'🎬 Boost x2: kipas menggila!',t_bact:'🔥 Boost sudah aktif',t_off:'💤 Nyalakan mesin dulu',t_soon:'🎬 Video segera hadir',t_err:'Gagal terhubung, coba lagi',t_copied:'🔗 Link disalin',t_wal:'✅ Dompet terhubung',maint:'Pemeliharaan',maint_p:'Kembali dalam beberapa menit.',ban:'Akun ditangguhkan',ban_p:'Akun ini tidak bisa bermain lagi.',open_tg:'Buka Rig Rush di Telegram',share_txt:'⚡ Aku menambang $RIGZ di Rig Rush! Gabung dan dapat +100 RIGZ untuk airdrop 🪂',m:['Laptop tua','PC desktop','PC gaming RGB','Rig 3 GPU','Rig 6 GPU','Ladang tambang']},
+ ar:{coins:'رصيدك RIGZ',off:'💤 الجهاز متوقف',run:'⏳ التعدين: بقي {t}',done:'🎉 انتهت الجلسة!',b_start:'⚡ شغّل الجهاز',b_run:'⚡ جارٍ التعدين…',b_claim:'💰 اجمع {n} RIGZ',upgrade:'ترقية',max:'أعلى مستوى 🏆',bsub:'فيديو · ساعة',bon:'مفعّل · {m} د',bnone:'لا فيديوهات اليوم',n_mine:'تعدين',n_mach:'الأجهزة',n_fr:'الأصدقاء',mach_h:'أجهزتك',mach_p:'كل جهاز يعدّن أسرع من السابق. افتحها بـ RIGZ.',cur:'الحالي',fr_h:'عدّن مع أصدقائك',fr_p:'+100 RIGZ لك ولصديقك، ثم 10 % من كل ما يعدّنه، للأبد.',from_fr:'ربحك من الأصدقاء',invite:'✈️ ادعُ أصدقاءك',fr_none:'لا أصدقاء بعد. شارك رابطك!',drop_p:'ستُوزّع جائزة TON على كل المعدّنين حسب RIGZ. التاريخ والمبلغ قريبًا.',share:'حصتك التقديرية',rank:'ترتيبك',miners:'المعدّنون',wallet:'محفظة TON',connect:'ربط',top:'🏆 أفضل المعدّنين',t_start:'⚡ بدأ التعدين لمدة 4 ساعات',t_run:'⚡ جهازك يعدّن، عد لاحقًا',t_claim:'💰 +{n} RIGZ',t_need:'تحتاج {n} RIGZ',t_unlock:'🎉 تم فتح {m}!',t_boost:'🎬 تعزيز x2: المراوح تجنّ!',t_bact:'🔥 التعزيز مفعّل',t_off:'💤 شغّل الجهاز أولًا',t_soon:'🎬 الفيديوهات قريبًا',t_err:'خطأ في الاتصال، حاول مجددًا',t_copied:'🔗 تم نسخ الرابط',t_wal:'✅ تم ربط المحفظة',maint:'صيانة',maint_p:'نعود خلال دقائق.',ban:'الحساب موقوف',ban_p:'لم يعد بإمكان هذا الحساب اللعب.',open_tg:'افتح Rig Rush في تيليجرام',share_txt:'⚡ أعدّن $RIGZ في Rig Rush! انضم واحصل على +100 RIGZ للـ airdrop 🪂',m:['حاسوب قديم','حاسوب مكتبي','حاسوب ألعاب RGB','منصة 3 GPU','منصة 6 GPU','مزرعة تعدين']},
+ fa:{coins:'RIGZهای تو',off:'💤 دستگاه خاموش است',run:'⏳ استخراج: {t} مانده',done:'🎉 جلسه تمام شد!',b_start:'⚡ روشن کردن دستگاه',b_run:'⚡ در حال استخراج…',b_claim:'💰 برداشت {n} RIGZ',upgrade:'ارتقا',max:'حداکثر سطح 🏆',bsub:'۱ ویدیو · ۱ ساعت',bon:'فعال · {m} دقیقه',bnone:'امروز ویدیویی نمانده',n_mine:'استخراج',n_mach:'دستگاه‌ها',n_fr:'دوستان',mach_h:'دستگاه‌های تو',mach_p:'هر دستگاه سریع‌تر از قبلی استخراج می‌کند. با RIGZ بازشان کن.',cur:'فعلی',fr_h:'با دوستانت استخراج کن',fr_p:'+۱۰۰ RIGZ برای تو و دوستت، بعد ۱۰٪ از هر چه استخراج کند، برای همیشه.',from_fr:'درآمد از دوستان',invite:'✈️ دعوت دوستان',fr_none:'هنوز دوستی نداری. لینکت را بفرست!',drop_p:'جایزه TON بین همه ماینرها بر اساس RIGZ تقسیم می‌شود. تاریخ و مبلغ به‌زودی.',share:'سهم تقریبی تو',rank:'رتبه تو',miners:'ماینرها',wallet:'کیف پول TON',connect:'اتصال',top:'🏆 برترین ماینرها',t_start:'⚡ استخراج برای ۴ ساعت شروع شد',t_run:'⚡ دستگاهت در حال استخراج است، بعدا بیا',t_claim:'💰 +{n} RIGZ',t_need:'به {n} RIGZ نیاز داری',t_unlock:'🎉 {m} باز شد!',t_boost:'🎬 بوست x2: فن‌ها دیوانه شدند!',t_bact:'🔥 بوست فعال است',t_off:'💤 اول دستگاه را روشن کن',t_soon:'🎬 ویدیوها به‌زودی',t_err:'خطای اتصال، دوباره امتحان کن',t_copied:'🔗 لینک کپی شد',t_wal:'✅ کیف پول متصل شد',maint:'تعمیرات',maint_p:'چند دقیقه دیگر برمی‌گردیم.',ban:'حساب مسدود شد',ban_p:'این حساب دیگر نمی‌تواند بازی کند.',open_tg:'Rig Rush را در تلگرام باز کن',share_txt:'⚡ من در Rig Rush توکن $RIGZ استخراج می‌کنم! بیا و +۱۰۰ RIGZ برای ایردراپ بگیر 🪂',m:['لپ‌تاپ قدیمی','کامپیوتر رومیزی','کامپیوتر گیمینگ RGB','ریگ ۳ GPU','ریگ ۶ GPU','مزرعه ماینینگ']},
+};
+const NT = {
+ en:{notif_h:'🔔 Notifications',notif_none:'Nothing yet.',nf_full:'💰 Your machine finished mining: {n} RIGZ to collect.',nf_friend:'👥 {n} joined with your link: +{b} RIGZ, and 10 % of what they mine.',nf_join:'🎁 You joined with {n}\'s link: +{b} RIGZ.',nf_welcome:'👋 Welcome to Rig Rush! Turn on your machine to start mining.'},
+ fr:{notif_h:'🔔 Notifications',notif_none:'Rien pour l\'instant.',nf_full:'💰 Ta machine a fini de miner : {n} RIGZ à récupérer.',nf_friend:'👥 {n} a rejoint avec ton lien : +{b} RIGZ, et 10 % de ce qu\'il mine.',nf_join:'🎁 Tu as rejoint avec le lien de {n} : +{b} RIGZ.',nf_welcome:'👋 Bienvenue dans Rig Rush ! Allume ta machine pour commencer à miner.'},
+ es:{notif_h:'🔔 Notificaciones',notif_none:'Nada por ahora.',nf_full:'💰 Tu máquina terminó de minar: {n} RIGZ por recoger.',nf_friend:'👥 {n} se unió con tu enlace: +{b} RIGZ y el 10 % de lo que mine.',nf_join:'🎁 Te uniste con el enlace de {n}: +{b} RIGZ.',nf_welcome:'👋 ¡Bienvenido a Rig Rush! Enciende tu máquina para empezar a minar.'},
+ pt:{notif_h:'🔔 Notificações',notif_none:'Nada por enquanto.',nf_full:'💰 Sua máquina terminou de minerar: {n} RIGZ para coletar.',nf_friend:'👥 {n} entrou com seu link: +{b} RIGZ e 10 % do que ele minerar.',nf_join:'🎁 Você entrou com o link de {n}: +{b} RIGZ.',nf_welcome:'👋 Bem-vindo ao Rig Rush! Ligue sua máquina para começar a minerar.'},
+ ru:{notif_h:'🔔 Уведомления',notif_none:'Пока ничего.',nf_full:'💰 Машина закончила майнинг: {n} RIGZ ждут тебя.',nf_friend:'👥 {n} присоединился по твоей ссылке: +{b} RIGZ и 10 % от его добычи.',nf_join:'🎁 Ты пришёл по ссылке {n}: +{b} RIGZ.',nf_welcome:'👋 Добро пожаловать в Rig Rush! Включи машину, чтобы начать майнинг.'},
+ uk:{notif_h:'🔔 Сповіщення',notif_none:'Поки нічого.',nf_full:'💰 Машина завершила майнинг: {n} RIGZ чекають на тебе.',nf_friend:'👥 {n} приєднався за твоїм посиланням: +{b} RIGZ і 10 % від його видобутку.',nf_join:'🎁 Ти прийшов за посиланням {n}: +{b} RIGZ.',nf_welcome:'👋 Ласкаво просимо до Rig Rush! Увімкни машину, щоб почати майнинг.'},
+ tr:{notif_h:'🔔 Bildirimler',notif_none:'Henüz bir şey yok.',nf_full:'💰 Makinen kazmayı bitirdi: toplanacak {n} RIGZ.',nf_friend:'👥 {n} linkinle katıldı: +{b} RIGZ ve kazdığının %10\'u.',nf_join:'🎁 {n} linkiyle katıldın: +{b} RIGZ.',nf_welcome:'👋 Rig Rush\'a hoş geldin! Kazmaya başlamak için makineni çalıştır.'},
+ id:{notif_h:'🔔 Notifikasi',notif_none:'Belum ada apa-apa.',nf_full:'💰 Mesinmu selesai menambang: {n} RIGZ siap diambil.',nf_friend:'👥 {n} bergabung lewat link-mu: +{b} RIGZ dan 10 % dari tambangnya.',nf_join:'🎁 Kamu bergabung lewat link {n}: +{b} RIGZ.',nf_welcome:'👋 Selamat datang di Rig Rush! Nyalakan mesinmu untuk mulai menambang.'},
+ ar:{notif_h:'🔔 الإشعارات',notif_none:'لا شيء بعد.',nf_full:'💰 انتهى جهازك من التعدين: {n} RIGZ بانتظارك.',nf_friend:'👥 انضم {n} عبر رابطك: +{b} RIGZ و10 % مما يعدّنه.',nf_join:'🎁 انضممت عبر رابط {n}: +{b} RIGZ.',nf_welcome:'👋 مرحبًا بك في Rig Rush! شغّل جهازك لتبدأ التعدين.'},
+ fa:{notif_h:'🔔 اعلان‌ها',notif_none:'فعلا چیزی نیست.',nf_full:'💰 دستگاهت استخراج را تمام کرد: {n} RIGZ برای برداشت.',nf_friend:'👥 {n} با لینک تو آمد: +{b} RIGZ و ۱۰٪ از استخراجش.',nf_join:'🎁 با لینک {n} آمدی: +{b} RIGZ.',nf_welcome:'👋 به Rig Rush خوش آمدی! دستگاهت را روشن کن تا استخراج شروع شود.'},
+};
+Object.keys(NT).forEach(k => Object.assign(I[k], NT[k]));
+const L = I[LANG];
+const tr = (k, v) => String(L[k] || I.en[k] || k).replace(/\{(\w)\}/g, (_, x) => v && v[x] !== undefined ? v[x] : '');
+document.querySelectorAll('[data-t]').forEach(e => e.textContent = tr(e.dataset.t));
+const EMO = ['💻', '🖥️', '🎮', '🧩', '🔥', '🏭'];
+const nf = new Intl.NumberFormat(LANG === 'fa' ? 'fa-IR' : LANG, { maximumFractionDigits: 0 });
+const fmt = v => nf.format(Math.floor(v));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const $ = id => document.getElementById(id);
+function toast(t) { const e = $('toast'); e.textContent = t; e.classList.add('show'); clearTimeout(e._t); e._t = setTimeout(() => e.classList.remove('show'), 2000) }
+function haptic(k) { try { TW.HapticFeedback.impactOccurred(k || 'light') } catch (e) {} }
+
+// ---------- server ----------
+let ST = null, OFF = 0, busy = false;
+async function api(action, body) {
+  const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ initData: (TW && TW.initData) || '', action, ...(body || {}) }) });
+  return r.json();
+}
+function cover(icon, title, p) { $('cvI').textContent = icon; $('cvT').textContent = title; $('cvP').textContent = p; $('cover').hidden = false }
+function take(r) {
+  if (!r) return false;
+  if (r.error === 'maint') { cover('🛠️', tr('maint'), tr('maint_p')); return false }
+  if (r.error === 'banned') { cover('🚫', tr('ban'), tr('ban_p')); return false }
+  if (r.error === 'auth') { cover('✈️', 'Rig Rush', tr('open_tg')); return false }
+  if (r.me) { ST = r; OFF = new Date(r.now).getTime() - Date.now(); if (r.me.tier !== drawn) draw(r.me.tier); buildUp(); }
+  return true;
+}
+const now = () => Date.now() + OFF;
+const T = s => s ? new Date(s).getTime() : 0;
+const tiers = () => ST ? ST.cfg.tiers : [[36, 0]];
+const SES = () => (ST ? ST.cfg.session_h : 4) * 3600e3;
+function rateAt(t) { const m = ST.me; return tiers()[m.tier][0] * (m.boost_end && t < T(m.boost_end) && t >= T(m.boost_at) ? 2 : 1) }
+function mined() {  // same formula as rr_mined
+  const m = ST && ST.me; if (!m || !m.start_at || !m.seg_at) return 0;
+  const e = Math.min(now(), T(m.start_at) + SES()), s = T(m.seg_at); if (e <= s) return 0;
+  let h = (e - s) / 3600e3, bh = 0;
+  if (m.boost_end && m.boost_at) bh = Math.max(0, (Math.min(e, T(m.boost_end)) - Math.max(s, T(m.boost_at))) / 3600e3);
+  return tiers()[m.tier][0] * (h + bh);
+}
+const running = () => ST && ST.me.start_at && now() < T(ST.me.start_at) + SES();
+const shown = () => (ST ? Number(ST.me.pts) : 0) + mined();
+</script>
+<script>
+// ---------- machine drawings ----------
+const fan=(cx,cy,r,col='#9fb3c8')=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#0b131d" stroke="#2a3a4d" stroke-width="1.5"/><g class="fan">${[0,72,144,216,288].map(a=>`<path d="M${cx} ${cy} q${r*.25} ${-r*.55} ${r*.05} ${-r*.85} q${-r*.35} ${r*.2} ${-r*.05} ${r*.85}z" fill="${col}" opacity=".85" transform="rotate(${a} ${cx} ${cy})"/>`).join('')}<circle cx="${cx}" cy="${cy}" r="${r*.22}" fill="#2a3a4d"/></g>`;
+const led=(x,y,c,d=0)=>`<circle class="led" cx="${x}" cy="${y}" r="2" fill="${c}" style="animation-delay:${d}s;filter:drop-shadow(0 0 3px ${c})"/>`;
+let cid=0;
+function screen(x,y,w,h){const id='c'+(cid++);let t='';for(let i=0;i<14;i++){const s=Array.from({length:Math.max(4,Math.floor(w/7))},()=>'0123456789abcdef'[Math.random()*16|0]).join('');t+=`<text x="${x+4}" y="${y+10+i*10}" font-size="7" font-family="JetBrains Mono,monospace" fill="${i%5==2?'#ffc83d':'#39ff9f'}">${i%5==2?'✓ block found':'0x'+s}</text>`}
+  return `<clipPath id="${id}"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3"/></clipPath><rect class="scr" x="${x}" y="${y}" width="${w}" height="${h}" rx="3" stroke="#1e2b3a" stroke-width="2"/><g class="code" clip-path="url(#${id})"><g>${t}${t.replace(/y="(\d+)"/g,(m,v)=>`y="${+v+140}"`)}</g></g><text class="off-txt" x="${x+w/2}" y="${y+h/2+3}" text-anchor="middle" font-size="8" fill="#2c3e52" font-family="Nunito">OFF</text>`}
+function gpu(x,y,w=70){return `<g><rect x="${x}" y="${y}" width="${w}" height="26" rx="4" fill="#1c2633" stroke="#35485e" stroke-width="1.5"/><rect class="rgb" x="${x}" y="${y}" width="${w}" height="3" rx="1.5" fill="#ff4fd8"/>${fan(x+w*.28,y+14,10)}${fan(x+w*.72,y+14,10)}${led(x+w-5,y+22,'#39ff9f',Math.random())}</g>`}
+const desk=`<rect x="10" y="190" width="300" height="10" rx="3" fill="#1a2433"/><rect x="24" y="200" width="10" height="20" fill="#121a26"/><rect x="286" y="200" width="10" height="20" fill="#121a26"/><ellipse class="glowp" cx="160" cy="192" rx="120" ry="6" fill="#39ff9f" fill-opacity=".22" style="filter:blur(3px)"/>`;
+var draw=function(t){cid=0;let g='';
+ if(t===0){g=`${screen(108,98,104,70)}<path d="M104 94 h112 v78 h-112z" fill="none" stroke="#3a4a5e" stroke-width="5" stroke-linejoin="round"/><path d="M84 176 h152 l10 14 h-172z" fill="#3a4a5e"/><rect x="140" y="181" width="40" height="4" rx="2" fill="#26323f"/>${led(226,184,'#39ff9f')}<path d="M232 120 q10 -6 6 -18" stroke="#8aa0b8" stroke-width="2" fill="none" class="glowp"/>`}
+ if(t===1){g=`<rect x="70" y="100" width="130" height="80" rx="5" fill="#1e2b3a"/>${screen(76,106,118,68)}<rect x="126" y="180" width="18" height="8" fill="#2a3a4d"/><rect x="110" y="186" width="50" height="4" rx="2" fill="#2a3a4d"/>
+  <rect x="214" y="96" width="62" height="94" rx="6" fill="#1c2633" stroke="#35485e" stroke-width="2"/>${fan(245,150,18)}${led(224,106,'#39ff9f')}${led(232,106,'#22d3ee',.3)}<rect x="222" y="114" width="46" height="4" rx="2" fill="#2a3a4d"/>`}
+ if(t===2){g=`<rect x="40" y="92" width="150" height="88" rx="5" fill="#1e2b3a"/>${screen(46,98,138,76)}<rect class="rgb" x="40" y="178" width="150" height="3" fill="#ff4fd8"/><rect x="106" y="181" width="18" height="6" fill="#2a3a4d"/><rect x="90" y="186" width="50" height="4" rx="2" fill="#2a3a4d"/>
+  <rect x="200" y="66" width="86" height="124" rx="8" fill="#141c27" stroke="#35485e" stroke-width="2"/><rect x="206" y="72" width="74" height="112" rx="5" fill="#0a1018" stroke="#5a7a9a" stroke-width="1" opacity=".9"/>
+  <g class="rgb"><rect x="206" y="72" width="74" height="112" rx="5" fill="none" stroke="#22d3ee" stroke-width="2"/></g>${fan(243,94,15,'#ff4fd8')}${fan(243,128,15,'#22d3ee')}${gpu(212,150,62)}`}
+ if(t===3||t===4){const rows=t===3?1:2;g=`<rect x="34" y="${t===3?100:56}" width="252" height="${t===3?90:134}" rx="4" fill="none" stroke="#5a6b80" stroke-width="5"/><rect x="34" y="${t===3?100:56}" width="252" height="6" fill="#5a6b80"/>`;
+  for(let r=0;r<rows;r++)for(let k=0;k<3;k++)g+=gpu(46+k*80,(t===3?118:72+r*60),70);
+  g+=`<rect x="120" y="${t===3?156:196-28}" width="80" height="20" rx="3" fill="#232f3d" stroke="#35485e"/><text x="160" y="${t===3?170:182}" text-anchor="middle" font-size="9" fill="#8aa0b8" font-family="Nunito" font-weight="800">PSU 1600W</text>${led(194,t===3?166:178,'#39ff9f')}
+  <path class="rgb" d="M34 ${t===3?190:190} h252" stroke="#ff4fd8" stroke-width="3"/>`;
+  if(t===4)g+=`<rect x="0" y="40" width="320" height="150" fill="url(#heat)" class="glowp"/>`}
+ if(t===5){g='';for(let k=0;k<3;k++){const x=26+k*98;g+=`<rect x="${x}" y="40" width="80" height="150" rx="4" fill="#121a26" stroke="#35485e" stroke-width="2"/>`;
+   for(let s=0;s<5;s++){const y=48+s*28;g+=`<rect x="${x+6}" y="${y}" width="68" height="22" rx="2" fill="#1c2633" stroke="#2a3a4d"/>${fan(x+18,y+11,8)}${fan(x+38,y+11,8)}`+led(x+58,y+7,'#39ff9f',Math.random())+led(x+66,y+7,'#22d3ee',Math.random())+led(x+58,y+15,'#ff4fd8',Math.random())+led(x+66,y+15,'#39ff9f',Math.random())}}
+  g+=`<path class="rgb" d="M20 32 h280" stroke="#22d3ee" stroke-width="3"/>`}
+ $('svg').innerHTML=`<defs><linearGradient id="heat" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff7a3d" stop-opacity=".18"/><stop offset="1" stop-color="#ff7a3d" stop-opacity="0"/></linearGradient></defs>${desk}<g id="mach">${g}</g>`}
+
+
+let drawn = -1;
+const _draw = draw; draw = function (t) { drawn = t; _draw(t) };
+function render() {
+  if (!ST) return;
+  const m = ST.me, v = shown(), i = Math.floor(v), t0 = now();
+  $('num').textContent = fmt(i); $('dec').textContent = (LANG === 'en' ? '.' : ',') + (v - i).toFixed(4).slice(2);
+  const boosted = m.boost_end && t0 < T(m.boost_end), run = running(), done = m.start_at && !run, b = $('main');
+  $('rate').innerHTML = '⚡ ' + fmt(tiers()[m.tier][0] * (boosted ? 2 : 1)) + ' / h' + (boosted ? ' <b class="x2">x2</b>' : '');
+  $('scene').className = 'scene' + (run ? ' on' : '') + (run && boosted ? ' boost' : '');
+  $('bar').style.width = (m.start_at ? Math.min(1, (t0 - T(m.start_at)) / SES()) * 100 : 0) + '%';
+  if (run) { const r = T(m.start_at) + SES() - t0, h = Math.floor(r / 3600e3), mn = Math.floor(r % 3600e3 / 6e4), s = Math.floor(r % 6e4 / 1e3);
+    $('sess').textContent = tr('run', { t: h + 'h ' + String(mn).padStart(2, '0') + 'm ' + String(s).padStart(2, '0') + 's' }); b.className = 'btn run'; b.textContent = tr('b_run') }
+  else if (done) { $('sess').textContent = tr('done'); b.className = 'btn claim'; b.textContent = tr('b_claim', { n: fmt(mined()) }) }
+  else { $('sess').textContent = tr('off'); b.className = 'btn'; b.textContent = tr('b_start') }
+  $('lvlN').textContent = m.tier + 1; $('lvlT').textContent = L.m[m.tier]; $('mname').textContent = EMO[m.tier] + ' ' + L.m[m.tier];
+  const nx = tiers()[m.tier + 1]; $('upS').textContent = nx ? '→ ' + fmt(nx[1]) + ' RIGZ' : tr('max'); $('upB').classList.toggle('can', !!nx && v >= nx[1]);
+  $('boB').hidden = ST.cfg.boost_on === false; $('bdg').hidden = !m.unread; $('bdg').textContent = m.unread > 9 ? '9+' : m.unread;
+  $('boB').classList.toggle('on', !!boosted);
+  $('boS').textContent = boosted ? tr('bon', { m: Math.ceil((T(m.boost_end) - t0) / 6e4) }) : m.boost_left > 0 ? tr('bsub') + ' · ' + m.boost_left + '/' + 6 : tr('bnone');
+  $('dp').textContent = fmt(v) + ' RIGZ';
+  const tot = Math.max(1, Number(ST.total) + mined());
+  $('dsh').textContent = (v / tot * 100).toFixed(3).replace('.', LANG === 'en' ? '.' : ',') + ' %';
+  $('drk').textContent = '#' + fmt(m.rank); $('dmn').textContent = fmt(ST.players);
+  $('wal').textContent = m.wallet ? m.wallet.slice(0, 6) + '…' + m.wallet.slice(-4) : tr('connect');
+}
+// coins popping from the machine to the counter
+const COIN = s => '<svg width="' + s + '" height="' + s + '" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.5" fill="#ffc83d" stroke="#a35a00" stroke-width="2"/><circle cx="12" cy="12" r="6.5" fill="none" stroke="#ffe9a8" stroke-width="1.5"/></svg>';
+function coinFly(big) { const s = $('scene').getBoundingClientRect(), n = $('num').getBoundingClientRect();
+  const x = s.left + s.width * (.3 + Math.random() * .4), y = s.top + s.height * .4, tx = n.left + n.width / 2, ty = n.top + n.height / 2;
+  const e = document.createElement('div'); e.className = 'fx'; e.innerHTML = COIN(big ? 22 : 16); e.style.left = x + 'px'; e.style.top = y + 'px'; document.body.appendChild(e);
+  const up = -50 - Math.random() * 50, side = (Math.random() - .5) * 80;
+  e.animate([{ transform: 'translate(0,0) scale(.3)', opacity: 0 }, { transform: `translate(${side}px,${up}px) scale(1)`, opacity: 1, offset: .35 }, { transform: `translate(${tx - x}px,${ty - y}px) scale(.6)`, opacity: .3 }], { duration: 1100, easing: 'cubic-bezier(.5,0,.3,1)' }).onfinish = () => { e.remove(); $('num').parentElement.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.07)' }, { transform: 'scale(1)' }], { duration: 180 }) } }
+function plus() { const s = $('scene').getBoundingClientRect(); const e = document.createElement('div'); e.className = 'fx';
+  e.style.cssText += `left:${s.left + s.width * (.25 + Math.random() * .5)}px;top:${s.top + s.height * .3}px;font:700 13px JetBrains Mono,monospace;color:#39ff9f;text-shadow:0 0 8px #39ff9f`;
+  e.textContent = '+' + (rateAt(now()) / 3600 * .7).toFixed(3); document.body.appendChild(e);
+  e.animate([{ transform: 'translateY(0)', opacity: 0 }, { opacity: 1, offset: .2 }, { transform: 'translateY(-40px)', opacity: 0 }], { duration: 1200 }).onfinish = () => e.remove() }
+setInterval(() => { if (!running() || $('pg-mine').hidden || document.hidden) return; plus(); if (Math.random() < .5) coinFly() }, 700);
+function confetti() { const s = $('scene').getBoundingClientRect(); const e = document.createElement('div'); e.className = 'fx'; const c = ['#39ff9f', '#22d3ee', '#ff4fd8', '#ffc83d'][Math.random() * 4 | 0];
+  e.style.cssText += `left:${s.left + s.width / 2}px;top:${s.top + s.height / 2}px;width:7px;height:11px;background:${c};border-radius:2px`; document.body.appendChild(e);
+  const dx = (Math.random() - .5) * 340, dy = -120 - Math.random() * 160;
+  e.animate([{ transform: 'translate(0,0) rotate(0)', opacity: 1 }, { transform: `translate(${dx * .6}px,${dy}px) rotate(300deg)`, opacity: 1, offset: .45 }, { transform: `translate(${dx}px,${dy + 260}px) rotate(720deg)`, opacity: 0 }], { duration: 1500, easing: 'cubic-bezier(.2,.6,.4,1)' }).onfinish = () => e.remove() }
+
+// ---------- actions ----------
+async function act(action, body) {
+  if (busy) return null; busy = true;
+  try { const r = await api(action, body); take(r); return r } catch (e) { toast(tr('t_err')); return null } finally { busy = false }
+}
+$('scene').onclick = () => { if (running()) { coinFly(true); haptic() } else { haptic(); toast(tr('t_off')) } };
+$('main').onclick = async () => {
+  if (!ST) return;
+  if (running()) { toast(tr('t_run')); return }
+  if (ST.me.start_at) {
+    const r = await act('claim'); if (!r || !r.ok) return;
+    for (let k = 0; k < 20; k++) setTimeout(() => coinFly(true), k * 45); haptic('heavy'); toast(tr('t_claim', { n: fmt(r.gain || 0) })); return;
+  }
+  const r = await act('start'); if (!r || !r.ok) return;
+  haptic('medium'); toast(tr('t_start')); $('flash').animate([{ opacity: 0 }, { opacity: .12 }, { opacity: 0 }], { duration: 300 });
+};
+async function upgrade() {
+  if (!ST) return; const nx = tiers()[ST.me.tier + 1];
+  if (!nx) { toast(tr('max')); return }
+  if (shown() < nx[1]) { toast(tr('t_need', { n: fmt(nx[1]) })); return }
+  const old = ST.me.tier; const r = await act('upgrade');
+  if (!r || !r.ok) { if (r && r.error === 'funds') toast(tr('t_need', { n: fmt(r.cost) })); return }
+  haptic('heavy'); _draw(old);
+  const m = $('svg');
+  m.animate([{ transform: 'scale(1)', opacity: 1 }, { transform: 'scale(.6) translateY(30px)', opacity: 0 }], { duration: 250 }).onfinish = () => {
+    draw(ST.me.tier); $('flash').animate([{ opacity: 0 }, { opacity: .6 }, { opacity: 0 }], { duration: 450 });
+    m.animate([{ transform: 'translateY(-60px) scale(1.1)', opacity: 0 }, { transform: 'translateY(6px) scale(.97)', opacity: 1, offset: .7 }, { transform: 'translateY(0) scale(1)' }], { duration: 550, easing: 'cubic-bezier(.2,1.3,.4,1)' });
+    for (let k = 0; k < 26; k++) confetti(); toast(tr('t_unlock', { m: L.m[ST.me.tier] }));
+  };
+}
+$('upB').onclick = upgrade;
+let AD = null;
+$('boB').onclick = async () => {
+  if (!ST) return; const m = ST.me;
+  if (m.boost_end && now() < T(m.boost_end)) { toast(tr('t_bact')); return }
+  if (m.boost_left <= 0) { toast(tr('bnone')); return }
+  if (!ST.cfg.ads_block) { toast(tr('t_soon')); return }
+  try {
+    if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s) });
+    AD = AD || window.Adsgram.init({ blockId: String(ST.cfg.ads_block) });
+    const res = await AD.show();
+    if (res && res.done === false) return;
+  } catch (e) { return }
+  // the boost is given by the server when Adsgram confirms the video: ask a few times
+  for (let k = 0; k < 6; k++) { await new Promise(r => setTimeout(r, 1200)); const r = await api('state'); take(r); if (ST.me.boost_end && now() < T(ST.me.boost_end)) { haptic('heavy'); toast(tr('t_boost')); return } }
+};
+function buildUp() {
+  if (!ST) return; const cur = ST.me.tier;
+  $('upl').innerHTML = tiers().map((t, i) => `<div class="it ${i === cur ? 'cur' : i > cur + 1 ? 'lock' : ''}" data-i="${i}"><div class="r" style="font-size:22px">${i > cur + 1 ? '🔒' : EMO[i]}</div><div class="n">${esc(L.m[i])}<div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">⚡ ${fmt(t[0])} / h</div></div><div class="p">${i <= cur ? (i === cur ? tr('cur') : '✓') : fmt(t[1])}</div></div>`).join('');
+  $('upl').querySelectorAll('.it').forEach(el => el.onclick = () => { if (+el.dataset.i === cur + 1) upgrade() });
+}
+const link = () => 'https://t.me/' + BOT + '?startapp=r' + (ST ? ST.me.id : '');
+$('inv').textContent = tr('invite');
+$('inv').onclick = () => { const u = 'https://t.me/share/url?url=' + encodeURIComponent(link()) + '&text=' + encodeURIComponent(tr('share_txt')); try { TW.openTelegramLink(u) } catch (e) { window.open(u) } };
+$('copy').onclick = async () => { try { await navigator.clipboard.writeText(link()); toast(tr('t_copied')) } catch (e) { toast(link()) } };
+async function loadFriends() { const r = await api('friends').catch(() => null); if (!r || !r.ok) return; $('frpts').textContent = fmt(r.ref_pts) + ' RIGZ';
+  $('frl').innerHTML = r.list.length ? r.list.map(f => `<div class="it"><div class="r" style="font-size:20px">${EMO[f.t] || '👤'}</div><div class="n">${esc(f.n)}</div><div class="p">+${fmt(f.g)}</div></div>`).join('') : `<p class="sub" style="text-align:center;margin-top:20px">${tr('fr_none')}</p>` }
+async function loadTop() { const r = await api('top').catch(() => null); if (!r || !r.ok) return;
+  $('topl').innerHTML = r.top.map((p, i) => `<div class="it ${p.me ? 'me' : ''}"><div class="r">${i < 3 ? '<span class="medal">' + ['🥇', '🥈', '🥉'][i] + '</span>' : i + 1}</div><div class="n">${EMO[p.t] || ''} ${esc(p.n)}</div><div class="p">${fmt(p.p)}</div></div>`).join('') }
+function go(p) { document.querySelectorAll('.nav button').forEach(x => x.classList.toggle('on', x.dataset.p === p)); ['mine', 'up', 'fr', 'drop'].forEach(q => $('pg-' + q).hidden = q !== p);
+  if (p === 'fr') loadFriends(); if (p === 'drop') loadTop(); }
+document.querySelectorAll('.nav button').forEach(b => b.onclick = () => { go(b.dataset.p); haptic() });
+$('dropChip').onclick = () => go('drop');
+// ---------- notifications ----------
+function ago(t) { const s = Math.max(0, (now() - T(t)) / 1000); try { const rf = new Intl.RelativeTimeFormat(LANG, { numeric: 'auto' }); return s < 3600 ? rf.format(-Math.round(s / 60), 'minute') : s < 86400 ? rf.format(-Math.round(s / 3600), 'hour') : rf.format(-Math.round(s / 86400), 'day') } catch (e) { return '' } }
+$('bell').onclick = async () => {
+  haptic(); $('ntl').innerHTML = ''; $('sheet').hidden = false;
+  const r = await api('notifs').catch(() => null); if (!r || !r.ok) return;
+  if (ST) ST.me.unread = 0;
+  $('ntl').innerHTML = r.list.length ? r.list.map(x => `<div class="nt"><div style="flex:1">${esc(tr('nf_' + x.k, { n: x.d.n !== undefined ? (typeof x.d.n === 'number' ? fmt(x.d.n) : x.d.n) : '', b: fmt(x.d.b || 0) }))}<small>${ago(x.at)}</small></div></div>`).join('') : `<p class="sub" style="text-align:center">${tr('notif_none')}</p>`;
+};
+$('sheet').onclick = e => { if (e.target === $('sheet')) $('sheet').hidden = true };
+
+// ---------- TON wallet (for the airdrop) ----------
+let TC = null;
+$('wal').onclick = async () => {
+  try {
+    if (!window.TON_CONNECT_UI) await new Promise((ok, ko) => { const sc = document.createElement('script'); sc.src = 'https://unpkg.com/@tonconnect/ui@2.0.9/dist/tonconnect-ui.min.js'; sc.onload = ok; sc.onerror = ko; document.head.appendChild(sc) });
+    TC = TC || new TON_CONNECT_UI.TonConnectUI({ manifestUrl: 'https://jeremstyke.github.io/rigrush/tonconnect-manifest.json', actionsConfiguration: { twaReturnUrl: 'https://t.me/' + BOT } });
+    TC.onStatusChange(async w => { if (w && w.account && w.account.address) { const r = await act('wallet', { addr: w.account.address }); if (r && r.ok) toast(tr('t_wal')) } });
+    if (TC.connected && TC.account) { const r = await act('wallet', { addr: TC.account.address }); if (r && r.ok) toast(tr('t_wal')); return }
+    await TC.openModal();
+  } catch (e) { toast(tr('t_err')) }
+};
+
+// ---------- start ----------
+draw(0);
+(async () => {
+  let r = null; for (let k = 0; k < 3 && !r; k++) { r = await api('state').catch(() => null); if (!r) await new Promise(x => setTimeout(x, 1000)) }
+  if (!r) { toast(tr('t_err')); return }
+  take(r);
+  const sp = (TW && TW.initDataUnsafe && TW.initDataUnsafe.start_param) || '';
+  if (sp === 'friends') go('fr');
+})();
+setInterval(async () => { if (document.hidden || busy) return; const r = await api('state').catch(() => null); if (r && r.me) take(r) }, 60000);
+(function loop() { render(); requestAnimationFrame(loop) })();
+
+// background: dark room with a soft neon grid and floating bits
+const c=$('bgc'),x=c.getContext('2d');let W,H,D=[];function rs(){W=c.width=innerWidth*devicePixelRatio;H=c.height=innerHeight*devicePixelRatio;D=Array.from({length:40},()=>({x:Math.random()*W,y:Math.random()*H,v:Math.random()*.4+.1,s:Math.random()<.5?'0':'1',p:Math.random()*6}))}rs();addEventListener('resize',rs);
+(function bg(t){const g=x.createRadialGradient(W/2,H*.45,0,W/2,H*.45,W*1.1);g.addColorStop(0,'#0e2433');g.addColorStop(.5,'#08111c');g.addColorStop(1,'#04070c');x.fillStyle=g;x.fillRect(0,0,W,H);
+  x.strokeStyle='rgba(57,255,159,.05)';x.lineWidth=1;const step=36*devicePixelRatio,off=(t/40)%step;for(let yy=H*.62+off;yy<H;yy+=step){x.beginPath();x.moveTo(0,yy);x.lineTo(W,yy);x.stroke()}
+  x.font=(11*devicePixelRatio)+'px JetBrains Mono, monospace';for(const d of D){d.y-=d.v*devicePixelRatio;if(d.y<0){d.y=H;d.x=Math.random()*W}x.globalAlpha=.12+.18*Math.abs(Math.sin(t/900+d.p));x.fillStyle='#39ff9f';x.fillText(d.s,d.x,d.y)}x.globalAlpha=1;requestAnimationFrame(bg)})(0);
+</script>
+</body>
+</html>
