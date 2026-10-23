@@ -1730,6 +1730,8 @@ function nudge() {
   let r = await api('state');
   for (let i = 0; i < 3 && r && !r.ok && r.error === 'other'; i++) { await new Promise((ok) => setTimeout(ok, 1500)); r = await api('state'); }
   $('#loader').hidden = true;
+  // 23 oct 2026 (Jeremy): a banned player sees a "suspended" screen
+  if (!r.ok && r.error === 'banned') { const F = LANG === 'fr'; document.body.innerHTML = '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px));background:#070f26;color:#e9f1ff;text-align:center;font-family:system-ui,sans-serif"><div style="max-width:380px"><div style="font-size:54px">🚫</div><h2 style="margin:10px 0 6px">' + (F ? 'Compte suspendu' : 'Account suspended') + '</h2><p style="margin:0;opacity:.85;line-height:1.45">' + (F ? 'Ton compte a été suspendu pour non-respect des règles.' : 'Your account has been suspended for breaking the rules.') + '</p></div></div>'; return; }
   if (!r.ok) { if (r.error !== 'maint') { toast(errMsg(r)); const ld = $('#loader'); ld.innerHTML = '<button class="btn gold" style="width:auto;padding:0 28px" onclick="location.reload()">↻</button>'; ld.hidden = false; } return; }
   setState(r);
   // 21 oct 2026: ask once to let @PassTheBatonBot send messages (players who came by a link never pressed Start)
