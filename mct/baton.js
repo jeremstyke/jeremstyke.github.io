@@ -149,3 +149,43 @@
     new MutationObserver(put).observe(document.body, { childList: true, subtree: true });
   } catch (e) { console.error('baton end notice', e); }
 })();
+
+// 23 oct 2026 (Jeremy): a banned player sees a "suspended" screen; if he still had money earned before the ban, he can add his TON wallet to get it
+(function () {
+  try {
+    const fr = () => { try { return typeof LANG === 'string' && LANG === 'fr'; } catch (e) { return false; } };
+    const esc3 = (x) => String(x == null ? '' : x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    let shown = false;
+    function banScreen(b) {
+      b = b || {};
+      let el = document.getElementById('banscr'); if (!el) { el = document.createElement('div'); el.id = 'banscr'; document.body.appendChild(el); }
+      el.style.cssText = 'position:fixed;inset:0;z-index:1000000;display:flex;align-items:center;justify-content:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px));background:#0b0716;color:#f3eefe;font-family:inherit;text-align:center';
+      const F = fr(), usd = Number(b.usd || 0), wait = Number(b.waiting || 0);
+      let money = '';
+      if (wait > 0) money = '<p style="margin:14px 0 0;font-size:15px;line-height:1.45">' + (F ? '⏳ ' + wait.toFixed(2).replace('.', ',') + ' $ en cours d\'envoi sur ton wallet TON.' : '⏳ $' + wait.toFixed(2) + ' is on its way to your TON wallet.') + '</p>';
+      else if (usd > 0) money = '<p style="margin:14px 0 8px;font-size:15px;line-height:1.45">' + (F ? '💰 Il te reste ' + usd.toFixed(2).replace('.', ',') + ' $ gagnés avant la suspension. Ajoute ton wallet TON pour les recevoir :' : '💰 You still have $' + usd.toFixed(2) + ' earned before the suspension. Add your TON wallet to receive it:') + '</p>'
+        + '<input id="banaddr" placeholder="UQ…" autocomplete="off" autocapitalize="off" spellcheck="false" value="' + esc3(b.wallet || '') + '" style="width:100%;box-sizing:border-box;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:inherit;font-size:14px">'
+        + '<button id="bango" style="margin-top:10px;width:100%;min-height:48px;border:0;border-radius:14px;background:#2f8dff;color:#fff;font-weight:800;font-size:16px">' + (F ? 'Recevoir mon argent' : 'Get my money') + '</button><p id="banmsg" style="margin:8px 0 0;font-size:13px;opacity:.8"></p>';
+      el.innerHTML = '<div style="width:100%;max-width:380px"><div style="font-size:54px">🚫</div><h2 style="margin:10px 0 6px;font-size:22px">' + (F ? 'Compte suspendu' : 'Account suspended') + '</h2>'
+        + '<p style="margin:0;font-size:15px;line-height:1.45;opacity:.85">' + (F ? 'Ton compte a été suspendu pour non-respect des règles.' : 'Your account has been suspended for breaking the rules.') + '</p>' + money + '</div>';
+      const go = el.querySelector('#bango');
+      if (go) go.onclick = async () => {
+        const addr = (el.querySelector('#banaddr').value || '').trim(); const m = el.querySelector('#banmsg'); go.disabled = true;
+        try {
+          const r = await window.__banFetch('/mct/api', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ initData: (window.Telegram && Telegram.WebApp && Telegram.WebApp.initData) || '', action: 'ban_wallet', addr }) }).then((x) => x.json());
+          if (r && r.ok) banScreen(r); else { m.textContent = F ? 'Adresse TON invalide.' : 'Invalid TON address.'; go.disabled = false; }
+        } catch (e) { m.textContent = F ? 'Erreur, réessaie.' : 'Error, try again.'; go.disabled = false; }
+      };
+    }
+    const of2 = window.fetch; window.__banFetch = of2;
+    window.fetch = async function (u, o) {
+      const r = await of2.apply(this, arguments);
+      try {
+        if (r.status === 403 && String(u).indexOf('/mct/api') >= 0) r.clone().json().then((j) => { if (j && j.error === 'banned' && !shown) { shown = true; banScreen(j.ban); } }).catch(() => {});
+      } catch (e) {}
+      return r;
+    };
+    // the game may have asked the server before this file was loaded: one light check after 3 s (a normal player gets an unknown-action answer)
+    setTimeout(() => { if (!shown) try { window.fetch('/mct/api', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ initData: (window.Telegram && Telegram.WebApp && Telegram.WebApp.initData) || '', action: 'ban_check' }) }).catch(() => {}); } catch (e) {} }, 3000);
+  } catch (e) { console.error('ban screen', e); }
+})();
