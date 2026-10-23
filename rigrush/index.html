@@ -6,7 +6,7 @@
 <title>Rig Rush</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;800&family=JetBrains+Mono:wght@500&family=Russo+One&display=swap" rel="stylesheet">
 <style>
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:0}
 body{margin:0}
@@ -111,6 +111,22 @@ h2{margin:16px 0 4px;font:400 28px 'Lilita One',sans-serif;color:var(--neo);text
 
 .cover{position:fixed;inset:0;z-index:20;background:var(--bg);display:grid;place-items:center;text-align:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px))}
 .cover[hidden]{display:none!important}
+/* 24 oct 2026 (Jeremy): Matrix style */
+#bgc{opacity:.6}
+.brand{text-align:center;margin-top:8px;font:400 34px/1 'Russo One',sans-serif;font-style:italic;letter-spacing:.03em;transform:skewX(-8deg)}
+.brand .a{background:linear-gradient(180deg,#fff 0%,#d8e1ea 42%,#6f7f8f 52%,#f2f6fa 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #0d2a1b) drop-shadow(0 0 10px rgba(255,255,255,.15))}
+.brand .b{color:#39ff9f;text-shadow:0 0 10px rgba(57,255,159,.9),0 0 28px rgba(57,255,159,.45)}
+.num{color:#eafff3;text-shadow:0 0 18px rgba(57,255,159,.55),0 2px 0 #0b3d26}
+.num .dec{color:#9dffcf}
+.coin{filter:drop-shadow(0 0 8px rgba(57,255,159,.8))}
+.scene::before{content:"";position:absolute;inset:6% 2% -4%;border-radius:50%;background:radial-gradient(closest-side,rgba(57,255,159,.22),transparent 75%);opacity:.35;transition:opacity .5s;pointer-events:none}
+.scene.on::before{opacity:1;animation:breath 2.2s ease-in-out infinite}
+.mini,.lvl,.it,.stat{border-color:rgba(57,255,159,.18)}
+.btn{box-shadow:0 5px 0 #0b7a4b,0 0 26px rgba(57,255,159,.35),inset 0 2px 0 rgba(255,255,255,.5)}
+.stage{min-height:200px}
+.ph{font:400 16px 'Russo One',sans-serif;color:var(--cy);letter-spacing:.06em;text-transform:uppercase;margin:6px 2px 0}
+.lv{display:inline-flex;gap:3px;margin-left:6px;vertical-align:middle}.lv i{width:7px;height:7px;border-radius:2px;background:rgba(57,255,159,.15)}.lv i.f{background:var(--neo);box-shadow:0 0 6px var(--neo)}
+.it.can{border-color:var(--neo);box-shadow:0 0 14px rgba(57,255,159,.25)}
 .tr{display:flex;gap:8px;align-items:center;flex:none}
 .bell{position:relative;width:38px;height:38px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:18px;cursor:pointer}
 .bell b{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--pk);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;box-shadow:0 0 10px var(--pk);animation:ring 1.6s infinite}
@@ -134,8 +150,9 @@ h2{margin:16px 0 4px;font:400 28px 'Lilita One',sans-serif;color:var(--neo);text
   </div>
 
   <div class="page" id="pg-mine">
+    <div class="brand"><span class="a">RIG</span> <span class="b">RUSH</span></div>
     <div class="bal"><small data-t="coins"></small>
-      <div class="num"><svg class="coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.5" fill="#ffc83d" stroke="#a35a00" stroke-width="2"/><circle cx="12" cy="12" r="7" fill="none" stroke="#ffe9a8" stroke-width="1.5"/><text x="12" y="16.3" text-anchor="middle" font-size="11" font-family="Lilita One,sans-serif" fill="#a35a00">R</text></svg><span id="num">0</span><span class="dec" id="dec"></span></div>
+      <div class="num"><svg class="coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.5" fill="#06261a" stroke="#39ff9f" stroke-width="1.6"/><circle cx="12" cy="12" r="7.6" fill="none" stroke="#39ff9f" stroke-width=".8" opacity=".6"/><text x="12.4" y="16.2" text-anchor="middle" font-size="11" font-style="italic" font-family="Russo One,sans-serif" fill="#7dffc0">R</text></svg><span id="num">0</span><span class="dec" id="dec"></span></div>
       <div class="rate" id="rate"></div>
     </div>
     <div class="stage" id="stage">
@@ -223,6 +240,19 @@ const NT = {
  ar:{notif_h:'🔔 الإشعارات',notif_none:'لا شيء بعد.',nf_full:'💰 انتهى جهازك من التعدين: {n} RIGZ بانتظارك.',nf_friend:'👥 انضم {n} عبر رابطك: +{b} RIGZ و10 % مما يعدّنه.',nf_join:'🎁 انضممت عبر رابط {n}: +{b} RIGZ.',nf_welcome:'👋 مرحبًا بك في Rig Rush! شغّل جهازك لتبدأ التعدين.'},
  fa:{notif_h:'🔔 اعلان‌ها',notif_none:'فعلا چیزی نیست.',nf_full:'💰 دستگاهت استخراج را تمام کرد: {n} RIGZ برای برداشت.',nf_friend:'👥 {n} با لینک تو آمد: +{b} RIGZ و ۱۰٪ از استخراجش.',nf_join:'🎁 با لینک {n} آمدی: +{b} RIGZ.',nf_welcome:'👋 به Rig Rush خوش آمدی! دستگاهت را روشن کن تا استخراج شروع شود.'},
 };
+const NP = {
+ en:{comps:'Components',p_cool:'Cooling',p_oc:'Overclock',p_bat:'Battery',e_spd:'+{n} % speed per level',e_bat:'+{n} h per session per level',t_part:'✅ {m} level {n}!',avail:'{n} upgrade(s) available'},
+ fr:{comps:'Composants',p_cool:'Refroidissement',p_oc:'Overclock',p_bat:'Batterie',e_spd:'+{n} % de vitesse par niveau',e_bat:'+{n} h par session par niveau',t_part:'✅ {m} niveau {n} !',avail:'{n} amélioration(s) dispo'},
+ es:{comps:'Componentes',p_cool:'Refrigeración',p_oc:'Overclock',p_bat:'Batería',e_spd:'+{n} % de velocidad por nivel',e_bat:'+{n} h por sesión por nivel',t_part:'✅ ¡{m} nivel {n}!',avail:'{n} mejora(s) disponible(s)'},
+ pt:{comps:'Componentes',p_cool:'Refrigeração',p_oc:'Overclock',p_bat:'Bateria',e_spd:'+{n} % de velocidade por nível',e_bat:'+{n} h por sessão por nível',t_part:'✅ {m} nível {n}!',avail:'{n} melhoria(s) disponível(is)'},
+ ru:{comps:'Компоненты',p_cool:'Охлаждение',p_oc:'Разгон',p_bat:'Батарея',e_spd:'+{n} % скорости за уровень',e_bat:'+{n} ч к сессии за уровень',t_part:'✅ {m}: уровень {n}!',avail:'Доступно улучшений: {n}'},
+ uk:{comps:'Компоненти',p_cool:'Охолодження',p_oc:'Розгін',p_bat:'Батарея',e_spd:'+{n} % швидкості за рівень',e_bat:'+{n} год до сесії за рівень',t_part:'✅ {m}: рівень {n}!',avail:'Доступно покращень: {n}'},
+ tr:{comps:'Bileşenler',p_cool:'Soğutma',p_oc:'Hız aşırtma',p_bat:'Batarya',e_spd:'Seviye başına +%{n} hız',e_bat:'Seviye başına oturuma +{n} sa',t_part:'✅ {m} seviye {n}!',avail:'{n} yükseltme hazır'},
+ id:{comps:'Komponen',p_cool:'Pendingin',p_oc:'Overclock',p_bat:'Baterai',e_spd:'+{n} % kecepatan per level',e_bat:'+{n} jam per sesi per level',t_part:'✅ {m} level {n}!',avail:'{n} peningkatan tersedia'},
+ ar:{comps:'المكوّنات',p_cool:'التبريد',p_oc:'كسر السرعة',p_bat:'البطارية',e_spd:'+{n} % سرعة لكل مستوى',e_bat:'+{n} ساعة للجلسة لكل مستوى',t_part:'✅ {m} المستوى {n}!',avail:'{n} ترقية متاحة'},
+ fa:{comps:'قطعات',p_cool:'خنک‌کننده',p_oc:'اورکلاک',p_bat:'باتری',e_spd:'+{n}٪ سرعت در هر سطح',e_bat:'+{n} ساعت به هر جلسه در هر سطح',t_part:'✅ {m} سطح {n}!',avail:'{n} ارتقا موجود است'},
+};
+Object.keys(NP).forEach(k => Object.assign(I[k], NP[k]));
 Object.keys(NT).forEach(k => Object.assign(I[k], NT[k]));
 const L = I[LANG];
 const tr = (k, v) => String(L[k] || I.en[k] || k).replace(/\{(\w)\}/g, (_, x) => v && v[x] !== undefined ? v[x] : '');
@@ -253,14 +283,14 @@ function take(r) {
 const now = () => Date.now() + OFF;
 const T = s => s ? new Date(s).getTime() : 0;
 const tiers = () => ST ? ST.cfg.tiers : [[36, 0]];
-const SES = () => (ST ? ST.cfg.session_h : 4) * 3600e3;
-function rateAt(t) { const m = ST.me; return tiers()[m.tier][0] * (m.boost_end && t < T(m.boost_end) && t >= T(m.boost_at) ? 2 : 1) }
+const SES = () => (ST ? Number(ST.me.sess_h || ST.cfg.session_h) : 4) * 3600e3;
+function rateAt(t) { const m = ST.me; return Number(m.rate) * (m.boost_end && t < T(m.boost_end) && t >= T(m.boost_at) ? 2 : 1) }
 function mined() {  // same formula as rr_mined
   const m = ST && ST.me; if (!m || !m.start_at || !m.seg_at) return 0;
   const e = Math.min(now(), T(m.start_at) + SES()), s = T(m.seg_at); if (e <= s) return 0;
   let h = (e - s) / 3600e3, bh = 0;
   if (m.boost_end && m.boost_at) bh = Math.max(0, (Math.min(e, T(m.boost_end)) - Math.max(s, T(m.boost_at))) / 3600e3);
-  return tiers()[m.tier][0] * (h + bh);
+  return Number(ST.me.rate) * (h + bh);
 }
 const running = () => ST && ST.me.start_at && now() < T(ST.me.start_at) + SES();
 const shown = () => (ST ? Number(ST.me.pts) : 0) + mined();
@@ -299,7 +329,7 @@ function render() {
   const m = ST.me, v = shown(), i = Math.floor(v), t0 = now();
   $('num').textContent = fmt(i); $('dec').textContent = (LANG === 'en' ? '.' : ',') + (v - i).toFixed(4).slice(2);
   const boosted = m.boost_end && t0 < T(m.boost_end), run = running(), done = m.start_at && !run, b = $('main');
-  $('rate').innerHTML = '⚡ ' + fmt(tiers()[m.tier][0] * (boosted ? 2 : 1)) + ' / h' + (boosted ? ' <b class="x2">x2</b>' : '');
+  $('rate').innerHTML = '⚡ ' + fmt(Number(m.rate) * (boosted ? 2 : 1)) + ' / h' + (boosted ? ' <b class="x2">x2</b>' : '');
   $('scene').className = 'scene' + (run ? ' on' : '') + (run && boosted ? ' boost' : '');
   $('bar').style.width = (m.start_at ? Math.min(1, (t0 - T(m.start_at)) / SES()) * 100 : 0) + '%';
   if (run) { const r = T(m.start_at) + SES() - t0, h = Math.floor(r / 3600e3), mn = Math.floor(r % 3600e3 / 6e4), s = Math.floor(r % 6e4 / 1e3);
@@ -307,10 +337,11 @@ function render() {
   else if (done) { $('sess').textContent = tr('done'); b.className = 'btn claim'; b.textContent = tr('b_claim', { n: fmt(mined()) }) }
   else { $('sess').textContent = tr('off'); b.className = 'btn'; b.textContent = tr('b_start') }
   $('lvlN').textContent = m.tier + 1; $('lvlT').textContent = L.m[m.tier]; $('mname').textContent = EMO[m.tier] + ' ' + L.m[m.tier];
-  const nx = tiers()[m.tier + 1]; $('upS').textContent = nx ? '→ ' + fmt(nx[1]) + ' RIGZ' : tr('max'); $('upB').classList.toggle('can', !!nx && v >= nx[1]);
+  const nx = tiers()[m.tier + 1], nc = buyable(v); $('upS').textContent = nc ? tr('avail', { n: nc }) : nx ? '→ ' + fmt(nx[1]) + ' RIGZ' : tr('max'); $('upB').classList.toggle('can', nc > 0);
   $('boB').hidden = ST.cfg.boost_on === false; $('bdg').hidden = !m.unread; $('bdg').textContent = m.unread > 9 ? '9+' : m.unread;
   $('boB').classList.toggle('on', !!boosted);
   $('boS').textContent = boosted ? tr('bon', { m: Math.ceil((T(m.boost_end) - t0) / 6e4) }) : m.boost_left > 0 ? tr('bsub') + ' · ' + m.boost_left + '/' + 6 : tr('bnone');
+  if (!$('pg-up').hidden) buildUp();
   $('dp').textContent = fmt(v) + ' RIGZ';
   const tot = Math.max(1, Number(ST.total) + mined());
   $('dsh').textContent = (v / tot * 100).toFixed(3).replace('.', LANG === 'en' ? '.' : ',') + ' %';
@@ -318,7 +349,7 @@ function render() {
   $('wal').textContent = m.wallet ? m.wallet.slice(0, 6) + '…' + m.wallet.slice(-4) : tr('connect');
 }
 // coins popping from the machine to the counter
-const COIN = s => '<svg width="' + s + '" height="' + s + '" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.5" fill="#ffc83d" stroke="#a35a00" stroke-width="2"/><circle cx="12" cy="12" r="6.5" fill="none" stroke="#ffe9a8" stroke-width="1.5"/></svg>';
+const COIN = s => '<svg width="' + s + '" height="' + s + '" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.5" fill="#06261a" stroke="#39ff9f" stroke-width="2"/><text x="12.4" y="16.2" text-anchor="middle" font-size="11" font-style="italic" font-family="Russo One,sans-serif" fill="#7dffc0">R</text></svg>';
 function coinFly(big) { const s = $('scene').getBoundingClientRect(), n = $('num').getBoundingClientRect();
   const x = s.left + s.width * (.3 + Math.random() * .4), y = s.top + s.height * .4, tx = n.left + n.width / 2, ty = n.top + n.height / 2;
   const e = document.createElement('div'); e.className = 'fx'; e.innerHTML = COIN(big ? 22 : 16); e.style.left = x + 'px'; e.style.top = y + 'px'; document.body.appendChild(e);
@@ -364,7 +395,7 @@ async function upgrade() {
     for (let k = 0; k < 26; k++) confetti(); toast(tr('t_unlock', { m: L.m[ST.me.tier] }));
   };
 }
-$('upB').onclick = upgrade;
+$('upB').onclick = () => go('up');
 let AD = null;
 $('boB').onclick = async () => {
   if (!ST) return; const m = ST.me;
@@ -380,10 +411,25 @@ $('boB').onclick = async () => {
   // the boost is given by the server when Adsgram confirms the video: ask a few times
   for (let k = 0; k < 6; k++) { await new Promise(r => setTimeout(r, 1200)); const r = await api('state'); take(r); if (ST.me.boost_end && now() < T(ST.me.boost_end)) { haptic('heavy'); toast(tr('t_boost')); return } }
 };
+const PARTS = [['cool', '❄️'], ['oc', '⚡'], ['bat', '🔋']];
+function partCost(p) { const c = ST.cfg.parts && ST.cfg.parts[p]; const l = ST.me[p] || 0; return c && l < c.cost.length ? c.cost[l] : null }
+function buyable(v) { if (!ST) return 0; let n = 0; const nx = tiers()[ST.me.tier + 1]; if (nx && v >= nx[1]) n++; PARTS.forEach(([p]) => { const c = partCost(p); if (c != null && v >= c) n++ }); return n }
+async function buyPart(p) {
+  const c = partCost(p); if (c == null) { toast(tr('max')); return }
+  if (shown() < c) { toast(tr('t_need', { n: fmt(c) })); return }
+  const r = await act('part', { p }); if (!r || !r.ok) { if (r && r.error === 'funds') toast(tr('t_need', { n: fmt(r.cost) })); return }
+  haptic('heavy'); for (let k = 0; k < 14; k++) confetti(); toast(tr('t_part', { m: tr('p_' + p), n: r.lvl }));
+}
+let lastBuild = '';
 function buildUp() {
-  if (!ST) return; const cur = ST.me.tier;
-  $('upl').innerHTML = tiers().map((t, i) => `<div class="it ${i === cur ? 'cur' : i > cur + 1 ? 'lock' : ''}" data-i="${i}"><div class="r" style="font-size:22px">${i > cur + 1 ? '🔒' : EMO[i]}</div><div class="n">${esc(L.m[i])}<div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">⚡ ${fmt(t[0])} / h</div></div><div class="p">${i <= cur ? (i === cur ? tr('cur') : '✓') : fmt(t[1])}</div></div>`).join('');
-  $('upl').querySelectorAll('.it').forEach(el => el.onclick = () => { if (+el.dataset.i === cur + 1) upgrade() });
+  if (!ST) return; const cur = ST.me.tier, v = shown();
+  const key = JSON.stringify([cur, ST.me.cool, ST.me.oc, ST.me.bat, buyable(v)]); if (key === lastBuild && $('upl').innerHTML) return; lastBuild = key;
+  const pc = ST.cfg.parts || {};
+  const parts = PARTS.map(([p, ic]) => { const c = pc[p]; if (!c) return ''; const l = ST.me[p] || 0, mx = c.cost.length, cost = partCost(p);
+    const eff = p === 'bat' ? tr('e_bat', { n: c.h }) : tr('e_spd', { n: c.pct });
+    return `<div class="it ${cost != null && v >= cost ? 'can' : ''}" data-p="${p}"><div class="r" style="font-size:22px">${ic}</div><div class="n">${esc(tr('p_' + p))}<span class="lv">${Array.from({ length: mx }, (_, i) => `<i class="${i < l ? 'f' : ''}"></i>`).join('')}</span><div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">${eff}</div></div><div class="p">${cost == null ? '✓' : fmt(cost)}</div></div>` }).join('');
+  $('upl').innerHTML = `<div class="ph">${tr('comps')}</div>` + parts + `<div class="ph">${tr('n_mach')}</div>` + tiers().map((t, i) => `<div class="it ${i === cur ? 'cur' : i > cur + 1 ? 'lock' : ''}" data-i="${i}"><div class="r" style="font-size:22px">${i > cur + 1 ? '🔒' : EMO[i]}</div><div class="n">${esc(L.m[i])}<div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">⚡ ${fmt(t[0])} / h</div></div><div class="p">${i <= cur ? (i === cur ? tr('cur') : '✓') : fmt(t[1])}</div></div>`).join('');
+  $('upl').querySelectorAll('.it').forEach(el => el.onclick = () => { if (el.dataset.p) buyPart(el.dataset.p); else if (+el.dataset.i === cur + 1) upgrade() });
 }
 const link = () => 'https://t.me/' + BOT + '?startapp=r' + (ST ? ST.me.id : '');
 $('inv').textContent = tr('invite');
@@ -433,11 +479,11 @@ draw(0);
 setInterval(async () => { if (document.hidden || busy) return; const r = await api('state').catch(() => null); if (r && r.me) take(r) }, 60000);
 (function loop() { render(); requestAnimationFrame(loop) })();
 
-// background: dark room with a soft neon grid and floating bits
-const c=$('bgc'),x=c.getContext('2d');let W,H,D=[];function rs(){W=c.width=innerWidth*devicePixelRatio;H=c.height=innerHeight*devicePixelRatio;D=Array.from({length:40},()=>({x:Math.random()*W,y:Math.random()*H,v:Math.random()*.4+.1,s:Math.random()<.5?'0':'1',p:Math.random()*6}))}rs();addEventListener('resize',rs);
-(function bg(t){const g=x.createRadialGradient(W/2,H*.45,0,W/2,H*.45,W*1.1);g.addColorStop(0,'#0e2433');g.addColorStop(.5,'#08111c');g.addColorStop(1,'#04070c');x.fillStyle=g;x.fillRect(0,0,W,H);
-  x.strokeStyle='rgba(57,255,159,.05)';x.lineWidth=1;const step=36*devicePixelRatio,off=(t/40)%step;for(let yy=H*.62+off;yy<H;yy+=step){x.beginPath();x.moveTo(0,yy);x.lineTo(W,yy);x.stroke()}
-  x.font=(11*devicePixelRatio)+'px JetBrains Mono, monospace';for(const d of D){d.y-=d.v*devicePixelRatio;if(d.y<0){d.y=H;d.x=Math.random()*W}x.globalAlpha=.12+.18*Math.abs(Math.sin(t/900+d.p));x.fillStyle='#39ff9f';x.fillText(d.s,d.x,d.y)}x.globalAlpha=1;requestAnimationFrame(bg)})(0);
+// background: Matrix digital rain (24 oct 2026, Jeremy)
+const c=$('bgc'),x=c.getContext('2d');let W,H,FS,COLS=[];const CH='アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホ0123456789$RIGZ';
+function rs(){const d=Math.min(2,devicePixelRatio||1);W=c.width=innerWidth*d;H=c.height=innerHeight*d;FS=15*d;COLS=Array.from({length:Math.ceil(W/FS)},()=>({y:-Math.random()*H,v:.5+Math.random()*.9}));x.fillStyle='#04070c';x.fillRect(0,0,W,H)}rs();addEventListener('resize',rs);
+let rainT=0;(function bg(t){requestAnimationFrame(bg);if(document.hidden||t-rainT<50)return;rainT=t;x.fillStyle='rgba(4,7,12,.13)';x.fillRect(0,0,W,H);x.font=FS+'px JetBrains Mono, monospace';
+  for(let i=0;i<COLS.length;i++){const col=COLS[i];x.fillStyle='rgba(57,255,159,.35)';x.fillText(CH[Math.random()*CH.length|0],i*FS,col.y-FS);x.fillStyle='rgba(200,255,225,.75)';x.fillText(CH[Math.random()*CH.length|0],i*FS,col.y);col.y+=FS*col.v;if(col.y>H&&Math.random()>.97)col.y=-Math.random()*H*.3}})(0);
 </script>
 </body>
 </html>
