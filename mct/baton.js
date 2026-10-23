@@ -162,12 +162,16 @@
       el.style.cssText = 'position:fixed;inset:0;z-index:1000000;display:flex;align-items:center;justify-content:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px));background:#0b0716;color:#f3eefe;font-family:inherit;text-align:center';
       const F = fr(), usd = Number(b.usd || 0), wait = Number(b.waiting || 0);
       let money = '';
+      // 23 oct 2026 (Jeremy): what he was already paid, with the wallet on Tonviewer as proof
+      const pt = Number(b.paid_ton || 0), pu = Number(b.paid_usd || 0);
+      const paid = pt > 0 ? '<p style="margin:14px 0 0;font-size:15px;line-height:1.45">✅ ' + (F ? 'Déjà payé : ' + pt.toFixed(3).replace('.', ',') + ' TON (' + pu.toFixed(2).replace('.', ',') + ' $)' : 'Already paid: ' + pt.toFixed(3) + ' TON ($' + pu.toFixed(2) + ')')
+        + '<br><a href="https://tonviewer.com/' + encodeURIComponent(b.paid_addr || '') + '" onclick="try{Telegram.WebApp.openLink(this.href);return false}catch(e){}" style="color:#7cc4ff">🔎 ' + (F ? 'Voir les paiements sur Tonviewer' : 'See the payments on Tonviewer') + '</a></p>' : '';
       if (wait > 0) money = '<p style="margin:14px 0 0;font-size:15px;line-height:1.45">' + (F ? '⏳ ' + wait.toFixed(2).replace('.', ',') + ' $ en cours d\'envoi sur ton wallet TON.' : '⏳ $' + wait.toFixed(2) + ' is on its way to your TON wallet.') + '</p>';
       else if (usd > 0) money = '<p style="margin:14px 0 8px;font-size:15px;line-height:1.45">' + (F ? '💰 ' + usd.toFixed(2).replace('.', ',') + ' $ à recevoir : ajoute ton wallet TON ci-dessous.' : '💰 $' + usd.toFixed(2) + ' to receive: add your TON wallet below.') + '</p>'
         + '<input id="banaddr" placeholder="UQ…" autocomplete="off" autocapitalize="off" spellcheck="false" value="' + esc3(b.wallet || '') + '" style="width:100%;box-sizing:border-box;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:inherit;font-size:14px">'
         + '<button id="bango" style="margin-top:10px;width:100%;min-height:48px;border:0;border-radius:14px;background:#2f8dff;color:#fff;font-weight:800;font-size:16px">' + (F ? 'Recevoir mon argent' : 'Get my money') + '</button><p id="banmsg" style="margin:8px 0 0;font-size:13px;opacity:.8"></p>';
       el.innerHTML = '<div style="width:100%;max-width:380px"><div style="font-size:54px">🚫</div><h2 style="margin:10px 0 6px;font-size:22px">' + (F ? 'Compte suspendu' : 'Account suspended') + '</h2>'
-        + '<p style="margin:0;font-size:15px;line-height:1.45;opacity:.85">' + (F ? 'Motif : insultes.<br>Les sommes gagnées ont été payées si tu avais ajouté ton wallet. Sinon, ajoute-le.' : 'Reason: insults.<br>What you earned has been paid if you had added your wallet. If not, add it.') + '</p>' + money + '</div>';
+        + '<p style="margin:0;font-size:15px;line-height:1.45;opacity:.85">' + (F ? 'Motif : insultes.<br>Les sommes gagnées ont été payées si tu avais ajouté ton wallet. Sinon, ajoute-le.' : 'Reason: insults.<br>What you earned has been paid if you had added your wallet. If not, add it.') + '</p>' + paid + money + '</div>';
       const go = el.querySelector('#bango');
       if (go) go.onclick = async () => {
         const addr = (el.querySelector('#banaddr').value || '').trim(); const m = el.querySelector('#banmsg'); go.disabled = true;
