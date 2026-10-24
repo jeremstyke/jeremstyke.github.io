@@ -124,7 +124,9 @@ body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#0407
 .scene.on::before{opacity:1;animation:breath 2.2s ease-in-out infinite}
 .mini,.lvl,.it,.stat{border-color:rgba(57,255,159,.18)}
 .btn{box-shadow:0 5px 0 #0b7a4b,0 0 26px rgba(57,255,159,.35),inset 0 2px 0 rgba(255,255,255,.5)}
-.stage{min-height:200px}
+.stage{min-height:0;justify-content:flex-end;overflow:hidden} /* 24 oct 2026 (Jeremy, 3h33): on a real phone the machine went over the texts */
+.scene{width:min(92vw,380px,max(150px,calc((100vh - 470px) * 1.45)))}
+@media (max-height:780px){.brand{font-size:28px;margin-top:4px}.bal{margin-top:6px}.num{font-size:42px}.mname{font-size:16px}.sess{margin:8px 0 8px}.btn{padding:13px}.row{margin-top:8px}.nav{margin-top:8px}}
 .ph{font:400 16px 'Russo One',sans-serif;color:var(--cy);letter-spacing:.06em;text-transform:uppercase;margin:6px 2px 0}
 .lv{display:inline-flex;gap:3px;margin-left:6px;vertical-align:middle}.lv i{width:7px;height:7px;border-radius:2px;background:rgba(57,255,159,.15)}.lv i.f{background:var(--neo);box-shadow:0 0 6px var(--neo)}
 .it.can{border-color:var(--neo);box-shadow:0 0 14px rgba(57,255,159,.25)}
