@@ -137,7 +137,11 @@ body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#0407
 .bell b{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--pk);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;box-shadow:0 0 10px var(--pk);animation:ring 1.6s infinite}
 .bell b[hidden]{display:none!important}
 @keyframes ring{0%,100%{transform:scale(1)}10%{transform:scale(1.25)}20%{transform:scale(1)}}
-.row:has(#boB[hidden]){grid-template-columns:1fr}
+/* 24 oct 2026: the row now holds Upgrade + the free chest */
+.stk{display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:800;color:#ffb36b;background:rgba(255,122,61,.12);border:1px solid rgba(255,140,61,.4);cursor:pointer}
+.mini.ch.can{border-color:var(--gold);box-shadow:0 0 16px rgba(255,200,61,.35)}
+.mini.ch.can .ic{animation:bounce 1.1s infinite}
+.mini.ch.can .s{color:var(--gold)}
 .sheet{position:fixed;inset:0;z-index:15;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;backdrop-filter:blur(4px)}
 .sheet[hidden]{display:none!important}
 .sheet>div{width:100%;max-width:480px;margin:0 auto;max-height:75vh;display:flex;flex-direction:column;background:linear-gradient(180deg,#0f1a2a,#060a12);border-radius:24px 24px 0 0;border-top:1px solid var(--line);padding:18px max(16px,env(safe-area-inset-right,0px)) calc(18px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));animation:up .35s cubic-bezier(.2,1.2,.4,1)}
@@ -181,6 +185,7 @@ body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#0407
     <div class="bal"><small data-t="coins"></small>
       <div class="num"><svg class="coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.5" fill="#06261a" stroke="#39ff9f" stroke-width="1.6"/><circle cx="12" cy="12" r="7.6" fill="none" stroke="#39ff9f" stroke-width=".8" opacity=".6"/><text x="12.4" y="16.2" text-anchor="middle" font-size="11" font-style="italic" font-family="Russo One,sans-serif" fill="#7dffc0">R</text></svg><span id="num">0</span><span class="dec" id="dec"></span></div>
       <div class="rate" id="rate"></div>
+      <div><span class="stk" id="stk" hidden></span></div>
     </div>
     <div class="stage" id="stage">
       <div class="mname" id="mname"></div>
@@ -191,6 +196,7 @@ body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#0407
     <button class="btn" id="main"></button>
     <div class="row">
       <div class="mini up" id="upB"><div class="ic">🛠️</div><div style="min-width:0"><div class="t" data-t="upgrade"></div><div class="s" id="upS"></div></div></div>
+      <div class="mini ch" id="chB"><div class="ic">🎁</div><div style="min-width:0"><div class="t" id="chT"></div><div class="s" id="chS"></div></div></div>
       <div class="mini bo" id="boB" hidden><div class="ic">🎬</div><div style="min-width:0"><div class="t">Boost x2</div><div class="s" id="boS"></div></div></div>
     </div>
   </div>
@@ -331,9 +337,12 @@ const NC = {
 };
 Object.keys(NC).forEach(k => Object.assign(I[k], NC[k]));
 Object.keys(NR).forEach(k => Object.assign(I[k], NR[k]));
+// 24 oct 2026 (Jeremy): players come back more often: 2 h sessions, battery +20 min per level, daily streak, free chest every 4 h
+const NS = {"en": {"e_bat": "+{n} min per session per level", "t_start": "⚡ Mining started for {n}", "ch_t": "Free chest", "ch_ok": "Ready, open it!", "ch_w": "Next in {t}", "t_chest": "🎁 +{n} RIGZ from the chest!", "stk": "🔥 Day {d} · +{p} %", "stk_i": "Come back every day: +5 % mining per day in a row, up to +35 %. Miss a day and it starts again."}, "fr": {"e_bat": "+{n} min par session par niveau", "t_start": "⚡ Minage lancé pour {n}", "ch_t": "Coffre gratuit", "ch_ok": "Prêt, ouvre-le !", "ch_w": "Prochain dans {t}", "t_chest": "🎁 +{n} RIGZ dans le coffre !", "stk": "🔥 Jour {d} · +{p} %", "stk_i": "Reviens chaque jour : +5 % de minage par jour d'affilée, jusqu'à +35 %. Un jour raté et ça repart à zéro."}, "es": {"e_bat": "+{n} min por sesión por nivel", "t_start": "⚡ Minado iniciado por {n}", "ch_t": "Cofre gratis", "ch_ok": "¡Listo, ábrelo!", "ch_w": "Próximo en {t}", "t_chest": "🎁 ¡+{n} RIGZ del cofre!", "stk": "🔥 Día {d} · +{p} %", "stk_i": "Vuelve cada día: +5 % de minado por día seguido, hasta +35 %. Si fallas un día, vuelve a empezar."}, "pt": {"e_bat": "+{n} min por sessão por nível", "t_start": "⚡ Mineração iniciada por {n}", "ch_t": "Baú grátis", "ch_ok": "Pronto, abra!", "ch_w": "Próximo em {t}", "t_chest": "🎁 +{n} RIGZ do baú!", "stk": "🔥 Dia {d} · +{p} %", "stk_i": "Volte todo dia: +5 % de mineração por dia seguido, até +35 %. Perdeu um dia, recomeça."}, "ru": {"e_bat": "+{n} мин к сессии за уровень", "t_start": "⚡ Майнинг запущен на {n}", "ch_t": "Бесплатный сундук", "ch_ok": "Готов, открывай!", "ch_w": "Следующий через {t}", "t_chest": "🎁 +{n} RIGZ из сундука!", "stk": "🔥 День {d} · +{p} %", "stk_i": "Заходи каждый день: +5 % к майнингу за каждый день подряд, до +35 %. Пропустишь день, и серия начнётся заново."}, "uk": {"e_bat": "+{n} хв до сесії за рівень", "t_start": "⚡ Майнинг запущено на {n}", "ch_t": "Безкоштовна скриня", "ch_ok": "Готова, відкривай!", "ch_w": "Наступна через {t}", "t_chest": "🎁 +{n} RIGZ зі скрині!", "stk": "🔥 День {d} · +{p} %", "stk_i": "Заходь щодня: +5 % до майнингу за кожен день поспіль, до +35 %. Пропустиш день, і серія почнеться знову."}, "tr": {"e_bat": "Seviye başına oturuma +{n} dk", "t_start": "⚡ Kazım {n} için başladı", "ch_t": "Bedava sandık", "ch_ok": "Hazır, aç!", "ch_w": "Sonraki: {t}", "t_chest": "🎁 Sandıktan +{n} RIGZ!", "stk": "🔥 {d}. gün · +%{p}", "stk_i": "Her gün gel: üst üste her gün için +%5 kazım, en fazla +%35. Bir gün kaçırırsan sıfırlanır."}, "id": {"e_bat": "+{n} menit per sesi per level", "t_start": "⚡ Menambang dimulai selama {n}", "ch_t": "Peti gratis", "ch_ok": "Siap, buka!", "ch_w": "Berikutnya {t}", "t_chest": "🎁 +{n} RIGZ dari peti!", "stk": "🔥 Hari {d} · +{p} %", "stk_i": "Kembali setiap hari: +5 % tambang per hari berturut-turut, hingga +35 %. Lewat sehari, mulai lagi dari awal."}, "ar": {"e_bat": "+{n} دقيقة للجلسة لكل مستوى", "t_start": "⚡ بدأ التعدين لمدة {n}", "ch_t": "صندوق مجاني", "ch_ok": "جاهز، افتحه!", "ch_w": "التالي بعد {t}", "t_chest": "🎁 +{n} RIGZ من الصندوق!", "stk": "🔥 اليوم {d} · +{p} %", "stk_i": "عُد كل يوم: +5 % تعدين لكل يوم متتالٍ، حتى +35 %. إذا فوّت يومًا تبدأ من جديد."}, "fa": {"e_bat": "+{n} دقیقه به هر جلسه در هر سطح", "t_start": "⚡ استخراج برای {n} شروع شد", "ch_t": "صندوق رایگان", "ch_ok": "آماده است، بازش کن!", "ch_w": "بعدی تا {t}", "t_chest": "🎁 +{n} RIGZ از صندوق!", "stk": "🔥 روز {d} · +{p}٪", "stk_i": "هر روز برگرد: برای هر روز پشت سر هم +۵٪ استخراج، تا +۳۵٪. یک روز غیبت و از اول شروع می‌شود."}};
 Object.keys(NU).forEach(k => Object.assign(I[k], NU[k]));
 Object.keys(NM).forEach(k => Object.assign(I[k], NM[k]));
 Object.keys(NP).forEach(k => Object.assign(I[k], NP[k]));
+Object.keys(NS).forEach(k => Object.assign(I[k], NS[k]));  // 24 oct 2026: after NP, which also sets e_bat
 // 24 oct 2026 (Jeremy): RIGZ divided by 144 (a laptop mines 1 RIGZ per 4 h); the friend bonus is now 1 RIGZ
 Object.keys(I).forEach(k => ['fr_p', 'share_txt'].forEach(t => { I[k][t] = I[k][t].replace(/\+100 RIGZ|\+۱۰۰ RIGZ/, k === 'fa' ? '+۱ RIGZ' : '+1 RIGZ') }));
 Object.keys(NT).forEach(k => Object.assign(I[k], NT[k]));
@@ -424,7 +433,9 @@ function render() {
   else { $('sess').textContent = tr('off'); b.className = 'btn'; b.textContent = tr('b_start') }
   $('lvlN').textContent = m.tier + 1; $('lvlT').textContent = L.m[m.tier]; $('mname').textContent = EMO[m.tier] + ' ' + L.m[m.tier];
   const nx = tiers()[m.tier + 1], nc = buyable(v); $('upS').textContent = nc ? tr('avail', { n: nc }) : nx ? '→ ' + fmt2(nx[1]) + ' RIGZ' : tr('max'); $('upB').classList.toggle('can', nc > 0);
-  $('boB').hidden = ST.cfg.boost_on !== true;  /* 24 oct 2026 (Jeremy): no boost until Adsgram is set up */ $('bdg').hidden = !m.unread; $('bdg').textContent = m.unread > 9 ? '9+' : m.unread;
+  $('boB').hidden = ST.cfg.boost_on !== true;
+  { const cl = chestLeft(); $('chT').textContent = tr('ch_t'); $('chS').textContent = cl > 0 ? '⏳ ' + cdTxt(cl) : tr('ch_ok'); $('chB').classList.toggle('can', cl <= 0);
+    const sk = $('stk'); sk.hidden = !(m.streak > 0); if (m.streak > 0) sk.textContent = tr('stk', { d: m.streak, p: m.streak_pct }); }  /* 24 oct 2026 (Jeremy): no boost until Adsgram is set up */ $('bdg').hidden = !m.unread; $('bdg').textContent = m.unread > 9 ? '9+' : m.unread;
   $('boB').classList.toggle('on', !!boosted);
   $('boS').textContent = boosted ? tr('bon', { m: Math.ceil((T(m.boost_end) - t0) / 6e4) }) : m.boost_left > 0 ? tr('bsub') + ' · ' + m.boost_left + '/' + 6 : tr('bnone');
   if (!$('pg-up').hidden) buildUp();
@@ -466,7 +477,7 @@ $('main').onclick = async () => {
     for (let k = 0; k < 20; k++) setTimeout(() => coinFly(true), k * 45); haptic('heavy'); toast(tr('t_claim', { n: fmt2(r.gain || 0) })); return;
   }
   const r = await act('start'); if (!r || !r.ok) return;
-  haptic('medium'); toast(tr('t_start')); $('flash').animate([{ opacity: 0 }, { opacity: .12 }, { opacity: 0 }], { duration: 300 });
+  haptic('medium'); toast(tr('t_start', { n: durTxt(Number(ST.me.sess_h || 2)) })); $('flash').animate([{ opacity: 0 }, { opacity: .12 }, { opacity: 0 }], { duration: 300 });
 };
 async function upgrade() {
   if (!ST) return; const nx = tiers()[ST.me.tier + 1];
@@ -484,6 +495,16 @@ async function upgrade() {
   };
 }
 $('upB').onclick = () => go('up');
+// 24 oct 2026 (Jeremy): free chest every 4 h and daily streak
+const durTxt = h => { const t = Math.round(h * 60); return Math.floor(t / 60) + 'h' + (t % 60 ? String(t % 60).padStart(2, '0') : '') };
+const cdTxt = ms => { const s = Math.ceil(ms / 1000), h = Math.floor(s / 3600), mn = Math.floor(s % 3600 / 60); return h + 'h ' + String(mn).padStart(2, '0') + 'm ' + String(s % 60).padStart(2, '0') + 's' };
+const chestLeft = () => ST && ST.me.chest_at ? T(ST.me.chest_at) + Number(ST.cfg.chest_h || 4) * 3600e3 - now() : 0;
+$('chB').onclick = async () => {
+  if (!ST || busy) return; haptic(); const cl = chestLeft();
+  if (cl > 0) { toast(tr('ch_w', { t: cdTxt(cl) })); return }
+  const r = await act('chest'); if (r && r.chest != null) { for (let k = 0; k < 14; k++) setTimeout(() => coinFly(true), k * 50); haptic('heavy'); toast(tr('t_chest', { n: fmt2(r.chest) })) }
+};
+$('stk').onclick = () => { haptic(); toast(tr('stk_i')) };
 let AD = null;
 $('boB').onclick = async () => {
   if (!ST) return; const m = ST.me;
@@ -521,7 +542,7 @@ function buildUp() {
   const pc = ST.cfg.parts || {};
   const nextLock = PARTS.filter(([p]) => pc[p] && !unlocked(p)).map(([p]) => pc[p].unlock).sort((a, b) => a - b)[0];
   const parts = PARTS.map(([p, ic]) => { const c = pc[p]; if (!c || !unlocked(p)) return ''; const l = ST.me[p] || 0, mx = c.max, cost = partCost(p), cap = cost != null && capped(p);
-    const eff = p === 'bat' ? tr('e_bat', { n: c.h }) : tr('e_spd', { n: c.pct });
+    const eff = p === 'bat' ? tr('e_bat', { n: c.min || c.h * 60 }) : tr('e_spd', { n: c.pct });
     return `<div class="it ${cost != null && !cap && v >= cost ? 'can' : ''}${cap ? ' lock' : ''}" data-p="${p}"><div class="r" style="font-size:22px">${ic}</div><div class="n">${esc(tr('p_' + p))}<span class="lv">${Array.from({ length: mx }, (_, i) => `<i class="${i < l ? 'f' : ''}"></i>`).join('')}</span><div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">${eff}</div></div><div class="p">${cost == null ? '✓' : cap ? '🔒 ' + esc(tr('t_capshort', { n: l + 1 })) : fmt2(cost)}</div></div>` }).join('');
   $('upl').innerHTML = `<div class="ph">${tr('comps')}</div>` + parts + (nextLock != null ? `<div class="it lock"><div class="r" style="font-size:22px">🎁</div><div class="n w">${esc(tr('t_newpart', { n: nextLock + 1 }))}</div></div>` : '') + `<div class="ph">${tr('n_mach')}</div>` + tiers().slice(0, cur + 3).map((t, i) => `<div class="it ${i === cur ? 'cur' : i > cur + 1 ? 'lock' : ''}" data-i="${i}"><div class="r" style="font-size:22px">${i > cur + 1 ? '🔒' : EMO[i]}</div><div class="n">${esc(L.m[i])}<div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">⚡ ${fmt2(t[0])} / h</div></div><div class="p">${i <= cur ? (i === cur ? tr('cur') : '✓') : i === cur + 1 && ST.me.parts_ready === false ? '🔧 ' + esc(tr('t_partsshort')) : fmt2(t[1])}</div></div>`).join('') + (tiers().length > cur + 3 ? `<div class="it lock"><div class="r" style="font-size:22px">❓</div><div class="n w">${esc(tr('t_more', { n: tiers().length - cur - 3 }))}</div></div>` : '');
   $('upl').querySelectorAll('.it').forEach(el => el.onclick = () => { if (el.dataset.p) buyPart(el.dataset.p); else if (+el.dataset.i === cur + 1) upgrade() });
@@ -559,6 +580,8 @@ const FAQ = {
  ar:[['كيف أعدّن؟','اضغط "شغّل الجهاز". يعدّن 4 ساعات (أكثر مع البطارية) حتى والتطبيق مغلق. ثم عد واجمع RIGZ وابدأ من جديد.'],['كيف أعدّن أسرع؟','طوّر مكوّناتك ثم اشترِ الجهاز التالي. لشرائه يجب أن تكون كل المكوّنات المفتوحة في أقصى مستوى.'],['لماذا المكوّن مقفل؟','المكوّنات الجديدة تُفتح مع أجهزة أفضل، ولا يمكن للمكوّن تجاوز مستوى جهازك + 1.'],['ما فائدة RIGZ؟','تنفقها على الترقيات. كل ما ربحته يُحتسب في الـ airdrop حتى ما أنفقته: الترقية لا تُفقدك ترتيبك.'],['ما هو الـ airdrop؟','جائزة TON تُقسّم بين كل المعدّنين حسب RIGZ المربوحة. سيُعلن التاريخ والمبلغ. اربط محفظة TON في تبويب Airdrop.'],['كيف يعمل الأصدقاء؟','شارك رابطك: تحصلان معًا على +1 RIGZ، ثم تحصل على 10 % من كل ما يعدّنه للأبد.'],['هل سأُبلَّغ عندما يمتلئ جهازي؟','نعم، يرسل لك البوت رسالة عند انتهاء الجلسة.']],
  fa:[['چطور استخراج کنم؟','روی «روشن کردن دستگاه» بزن. ۴ ساعت استخراج می‌کند (با باتری بیشتر)، حتی وقتی برنامه بسته است. بعد برگرد، RIGZ را بردار و دوباره شروع کن.'],['چطور سریع‌تر استخراج کنم؟','قطعه‌هایت را ارتقا بده، بعد دستگاه بعدی را بخر. برای خرید، همه قطعه‌های باز باید در حداکثر باشند.'],['چرا یک قطعه قفل است؟','قطعه‌های جدید با دستگاه‌های بهتر باز می‌شوند و یک قطعه نمی‌تواند از سطح دستگاه + ۱ بالاتر برود.'],['RIGZ به چه درد می‌خورد؟','آن را خرج ارتقا می‌کنی. همه درآمدت برای ایردراپ حساب می‌شود، حتی آنچه خرج کردی: ارتقا رتبه‌ات را کم نمی‌کند.'],['ایردراپ چیست؟','یک جایزه TON که بین همه ماینرها بر اساس RIGZ به‌دست‌آمده تقسیم می‌شود. تاریخ و مبلغ اعلام می‌شود. کیف پول TON را در تب Airdrop وصل کن.'],['دوستان چطور کار می‌کنند؟','لینکت را بفرست: هر دو +۱ RIGZ می‌گیرید، بعد ۱۰٪ از هر چه او استخراج کند برای همیشه مال توست.'],['وقتی دستگاه پر شد خبردار می‌شوم؟','بله، ربات در پایان جلسه به تو پیام می‌دهد.']],
 };
+// 24 oct 2026: sessions last 2 h now; streak and chest explained
+Object.keys(FAQ).forEach(k => { FAQ[k][0][1] = FAQ[k][0][1].replace(/4|۴/, k === 'fa' ? '۲' : '2'); FAQ[k].splice(1, 0, ...({"en": [["What is the daily streak?", "Open the game every day: +5 % mining per day in a row, up to +35 % on day 7. Miss a day and it starts again at +5 %."], ["What is the free chest?", "Every 4 hours a free chest gives you 5 to 15 minutes of mining at your current speed. Open it as soon as it is ready."]], "fr": [["C'est quoi la série ?", "Ouvre le jeu chaque jour : +5 % de minage par jour d'affilée, jusqu'à +35 % au 7e jour. Un jour raté et elle repart à +5 %."], ["C'est quoi le coffre gratuit ?", "Toutes les 4 heures, un coffre gratuit te donne 5 à 15 minutes de minage à ta vitesse actuelle. Ouvre-le dès qu'il est prêt."]], "es": [["¿Qué es la racha?", "Abre el juego cada día: +5 % de minado por día seguido, hasta +35 % el día 7. Si fallas un día, vuelve a +5 %."], ["¿Qué es el cofre gratis?", "Cada 4 horas un cofre gratis te da de 5 a 15 minutos de minado a tu velocidad actual. Ábrelo en cuanto esté listo."]], "pt": [["O que é a sequência?", "Abra o jogo todo dia: +5 % de mineração por dia seguido, até +35 % no 7º dia. Perdeu um dia, volta a +5 %."], ["O que é o baú grátis?", "A cada 4 horas um baú grátis te dá de 5 a 15 minutos de mineração na sua velocidade atual. Abra assim que estiver pronto."]], "ru": [["Что такое серия?", "Заходи в игру каждый день: +5 % к майнингу за каждый день подряд, до +35 % на 7-й день. Пропустишь день, и серия начнётся с +5 %."], ["Что за бесплатный сундук?", "Каждые 4 часа бесплатный сундук даёт от 5 до 15 минут майнинга на твоей текущей скорости. Открывай, как только он готов."]], "uk": [["Що таке серія?", "Заходь у гру щодня: +5 % до майнингу за кожен день поспіль, до +35 % на 7-й день. Пропустиш день, і серія почнеться з +5 %."], ["Що за безкоштовна скриня?", "Кожні 4 години безкоштовна скриня дає від 5 до 15 хвилин майнингу на твоїй поточній швидкості. Відкривай, щойно вона готова."]], "tr": [["Seri nedir?", "Oyunu her gün aç: üst üste her gün için +%5 kazım, 7. günde +%35'e kadar. Bir gün kaçırırsan +%5'ten yeniden başlar."], ["Bedava sandık nedir?", "Her 4 saatte bir bedava sandık, mevcut hızınla 5 ila 15 dakikalık kazım verir. Hazır olunca hemen aç."]], "id": [["Apa itu streak harian?", "Buka game setiap hari: +5 % tambang per hari berturut-turut, hingga +35 % di hari ke-7. Lewat sehari, mulai lagi dari +5 %."], ["Apa itu peti gratis?", "Setiap 4 jam, peti gratis memberimu 5 sampai 15 menit tambang dengan kecepatanmu saat ini. Buka begitu siap."]], "ar": [["ما هي السلسلة اليومية؟", "افتح اللعبة كل يوم: +5 % تعدين لكل يوم متتالٍ، حتى +35 % في اليوم السابع. إذا فوّت يومًا تعود إلى +5 %."], ["ما هو الصندوق المجاني؟", "كل 4 ساعات يمنحك صندوق مجاني من 5 إلى 15 دقيقة تعدين بسرعتك الحالية. افتحه فور جاهزيته."]], "fa": [["سری روزانه چیست؟", "هر روز بازی را باز کن: برای هر روز پشت سر هم +۵٪ استخراج، تا +۳۵٪ در روز هفتم. یک روز غیبت و از +۵٪ دوباره شروع می‌شود."], ["صندوق رایگان چیست؟", "هر ۴ ساعت یک صندوق رایگان ۵ تا ۱۵ دقیقه استخراج با سرعت فعلی‌ات به تو می‌دهد. به محض آماده شدن بازش کن."]]}[k] || [])) });
 $('faqB').onclick = () => { haptic(); $('faql').innerHTML = (FAQ[LANG] || FAQ.en).map(([q, a]) => `<details class="faq"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join(''); $('faqS').hidden = false };
 $('faqS').onclick = e => { if (e.target === $('faqS')) $('faqS').hidden = true };
 $('sheet').onclick = e => { if (e.target === $('sheet')) $('sheet').hidden = true };
@@ -583,8 +606,9 @@ function landing() {
   const T = fr ? {
     tag: 'Le jeu de <b>minage idle</b> dans Telegram. Branche ta machine, mine des <b>RIGZ</b> et monte ton empire, du vieux laptop au data center.',
     cta: 'Jouer sur Telegram', sm: 'Gratuit · rien à télécharger · s\'ouvre dans Telegram', how: 'Comment ça marche',
-    s: [['⛏️', 'Lance le minage', 'Un appui suffit : ta machine mine des RIGZ pendant 4 heures, même quand l\'app est fermée.'],
+    s: [['⛏️', 'Lance le minage', 'Un appui suffit : ta machine mine des RIGZ pendant 2 heures, même quand l\'app est fermée.'],
         ['💰', 'Récupère tes RIGZ', 'Reviens quand la session est finie, encaisse et relance. Le bot te prévient quand ta machine est pleine.'],
+        ['🎁', 'Coffre et série', 'Un coffre gratuit toutes les 4 heures et jusqu\'à +35 % de minage si tu reviens chaque jour.'],
         ['🔧', 'Améliore ta machine', '10 composants (refroidissement, GPU, batterie, panneaux solaires...) et 12 machines à débloquer.'],
         ['👥', 'Invite tes amis', '+1 RIGZ par ami et 10 % de tout ce qu\'il mine, à vie.'],
         ['🪂', 'Airdrop RIGZ', 'Tout ce que tu gagnes compte pour l\'airdrop. Le classement montre les meilleurs mineurs.']],
@@ -592,8 +616,9 @@ function landing() {
   } : {
     tag: 'The <b>idle mining game</b> inside Telegram. Plug in your machine, mine <b>RIGZ</b> and grow your empire, from an old laptop to a data center.',
     cta: 'Play on Telegram', sm: 'Free · nothing to download · opens in Telegram', how: 'How it works',
-    s: [['⛏️', 'Start mining', 'One tap: your machine mines RIGZ for 4 hours, even when the app is closed.'],
+    s: [['⛏️', 'Start mining', 'One tap: your machine mines RIGZ for 2 hours, even when the app is closed.'],
         ['💰', 'Claim your RIGZ', 'Come back when the session ends, claim and start again. The bot tells you when your machine is full.'],
+        ['🎁', 'Chest and streak', 'A free chest every 4 hours and up to +35 % mining when you come back every day.'],
         ['🔧', 'Upgrade your rig', '10 components (cooling, GPU, battery, solar panels...) and 12 machines to unlock.'],
         ['👥', 'Invite friends', '+1 RIGZ per friend and 10% of everything they mine, forever.'],
         ['🪂', 'RIGZ airdrop', 'Everything you earn counts for the airdrop. The leaderboard shows the top miners.']],
