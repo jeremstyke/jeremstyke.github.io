@@ -364,7 +364,7 @@ $('buy').onclick = async () => {
 $('proofs').onclick = (e) => { e.preventDefault(); try { TW.openLink('https://jeremstyke.github.io/payouts/') } catch (x) { location.href = 'https://jeremstyke.github.io/payouts/' } };
 
 // ---------- friends ----------
-const link = () => 'https://t.me/' + BOT + '?startapp=r' + (ST ? ST.me.id : '');
+const link = () => 'https://t.me/' + BOT + '/Play?startapp=r' + (ST ? ST.me.id : '');
 $('share').onclick = () => { haptic(); const u = 'https://t.me/share/url?url=' + encodeURIComponent(link()) + '&text=' + encodeURIComponent(tr('share_txt')); try { TW.openTelegramLink(u) } catch (e) { window.open(u, '_blank') } };
 $('copy').onclick = async () => { haptic(); try { await navigator.clipboard.writeText(link()); toast(tr('copied')) } catch (e) { toast(link()) } };
 $('aInv').onclick = () => go('vFr');
@@ -397,7 +397,7 @@ function landing() {
   const S = fr ? [['👆', 'Tape sur le diamant', 'Chaque tap te rapporte des 💎. Ton énergie se recharge toute seule.'], ['🛒', 'Échange contre des USDT', '500 000 💎 = 1 $ en USDT, envoyés automatiquement sur ton wallet TON.'], ['🔥', 'Reviens chaque jour', 'Un coffre gratuit toutes les 4 heures et jusqu\'à +35 % avec ta série.'], ['👥', 'Invite tes amis', '10 % de tout ce qu\'ils tapent, pour toujours.']]
     : [['👆', 'Tap the diamond', 'Every tap gives you 💎. Your energy refills by itself.'], ['🛒', 'Trade for USDT', '500,000 💎 = $1 in USDT, sent automatically to your TON wallet.'], ['🔥', 'Come back every day', 'A free chest every 4 hours and up to +35 % with your streak.'], ['👥', 'Invite friends', '10 % of everything they tap, forever.']];
   const d = document.createElement('div'); d.className = 'land';
-  d.innerHTML = '<div class="in"><h1>Tap the Diamond</h1><div class="g">' + gemSVG('l') + '</div><p></p><a class="btn blue" href="https://t.me/' + BOT + '?startapp=src_web"></a><div class="st"></div><p><a href="https://jeremstyke.github.io/payouts/"></a></p><p>by <a href="https://t.me/jeremstyke">@jeremstyke</a></p></div>';
+  d.innerHTML = '<div class="in"><h1>Tap the Diamond</h1><div class="g">' + gemSVG('l') + '</div><p></p><a class="btn blue" href="https://t.me/' + BOT + '/Play?startapp=src_web"></a><div class="st"></div><p><a href="https://jeremstyke.github.io/payouts/"></a></p><p>by <a href="https://t.me/jeremstyke">@jeremstyke</a></p></div>';
   d.querySelector('p').textContent = fr ? 'Le jeu de tap dans Telegram où tes 💎 deviennent de vrais USDT.' : 'The tap game inside Telegram where your 💎 become real USDT.';
   d.querySelector('a.btn').textContent = fr ? 'Jouer sur Telegram' : 'Play on Telegram'; d.querySelector('a.btn').style.textDecoration = 'none';
   d.querySelector('.st').innerHTML = S.map(() => '<div class="s"><i></i><div><b></b><span></span></div></div>').join('');
