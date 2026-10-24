@@ -1,3 +1,37 @@
+// 24 oct 2026 (Jeremy): the same "Compte bloqué" screen in every game, current and future, because each of them loads this file.
+// The reason comes from the server (ban_reason_pub): dup = 3rd account on the same IP in a game, cheat, insults_cheat, insults.
+// Each game can also call window.JSBan() itself when its API answers 'banned'.
+(function () {
+  if (window.JSBan) return;
+  var cs0 = document.currentScript;
+  if (((cs0 && cs0.dataset && cs0.dataset.from) || window.JER_FROM) === 'mct') return;  // MCT has its own screen (with the wallet form)
+  var TW = window.Telegram && window.Telegram.WebApp;
+  var shown = false;
+  function render(reason) {
+    if (shown) return; shown = true;
+    var lc = String((TW && TW.initDataUnsafe && TW.initDataUnsafe.user && TW.initDataUnsafe.user.language_code) || navigator.language || 'en');
+    var F = /^fr/i.test(lc);
+    var txt = reason === 'dup' ? (F ? '🤖 L\'IA a détecté plusieurs comptes sur la même IP et le même téléphone.<br>2 comptes maximum par IP.' : '🤖 The AI detected several accounts on the same IP and the same phone.<br>2 accounts per IP at most.')
+      : (F ? (reason === 'cheat' ? '🤖 Détecté par notre IA anti-triche.<br>Motif : triche.<br>Même téléphone et même adresse IP sur plusieurs comptes.' : reason === 'insults_cheat' ? 'Motif : insultes et triche.<br>Même téléphone et même adresse IP sur plusieurs comptes.' : 'Motif : insultes.')
+          : (reason === 'cheat' ? '🤖 Detected by our anti-cheat AI.<br>Reason: cheating.<br>Same phone and same IP address on several accounts.' : reason === 'insults_cheat' ? 'Reason: insults and cheating.<br>Same phone and same IP address on several accounts.' : 'Reason: insults.'))
+        + '<br>' + (F ? 'Les sommes gagnées ont été payées si tu avais ajouté ton wallet. Sinon, ajoute-le dans Meme Coin Tycoon.' : 'What you earned has been paid if you had added your wallet. If not, add it in Meme Coin Tycoon.');
+    var el = document.createElement('div'); el.id = 'jsban';
+    el.style.cssText = 'position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px));background:#0b0716;color:#f3eefe;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;text-align:center';
+    el.innerHTML = '<div style="width:100%;max-width:380px"><div style="font-size:54px">🚫</div><h2 style="margin:10px 0 6px;font-size:22px">' + (F ? 'Compte bloqué' : 'Account blocked') + '</h2><p style="margin:0;font-size:15px;line-height:1.45;opacity:.85">' + txt + '</p></div>';
+    var put = function () { document.body.appendChild(el); var t = document.querySelector('.jgt'); if (t) t.remove(); };
+    if (document.body) put(); else document.addEventListener('DOMContentLoaded', put);
+  }
+  function check(cb) {
+    var id = TW && TW.initDataUnsafe && TW.initDataUnsafe.user && TW.initDataUnsafe.user.id;
+    if (!id) { cb && cb(null); return; }
+    fetch('https://txvrlvcxfnylnrpdrxtt.supabase.co/rest/v1/rpc/ban_reason_pub', { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: 'sb_publishable_7aA-njoU5fU2ialO0ExwQQ_REHjAEIe' }, body: JSON.stringify({ p_uid: id }) })
+      .then(function (r) { return r.ok ? r.json() : null; }).then(function (x) { cb && cb(x); }).catch(function () { cb && cb(null); });
+  }
+  // called by a game when its API says 'banned': the screen shows at once, the reason is fetched
+  window.JSBan = function (reason) { if (reason) return render(reason); check(function (x) { render(x || 'insults'); }); };
+  // and checked by itself at every opening, so a future game needs nothing more than this script
+  if (TW && TW.initData) check(function (x) { if (x) render(x); });
+})();
 // 24 oct 2026 (Jeremy): "My other games", shared by every Jeremstyke mini app. One file: a new game is added here once and shows up in all of them.
 // Each game loads it with <script src="https://jeremstyke.github.io/games.js" data-from="rr"></script> (rr, mct, bt, ds...).
 // A small 🎮 tab on the right edge opens a sheet with the other games; the links carry src_xg_<from> so each game sees where its players come from.
