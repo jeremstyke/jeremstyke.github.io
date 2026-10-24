@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Rig Rush</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<!-- 24 oct 2026: loaded early so the phone print goes with the first API call (anti multi-accounts) -->
+<script src="https://jeremstyke.github.io/games.js" data-from="rr"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;800&family=JetBrains+Mono:wght@500&family=Russo+One&display=swap" rel="stylesheet">
 <style>
@@ -677,6 +679,6 @@ function rs(){const d=Math.min(2,devicePixelRatio||1);W=c.width=innerWidth*d;H=c
 let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(document.hidden||t-rainT<50)return;rainT=t;x.fillStyle='rgba(4,7,12,.13)';x.fillRect(0,0,W,H);x.font=FS+'px JetBrains Mono, monospace';
   for(let i=0;i<COLS.length;i++){const col=COLS[i];x.fillStyle='rgba(57,255,159,.3)';x.fillText(CH[Math.random()*CH.length|0],i*FS*2.2,col.y-FS);x.fillStyle='rgba(170,255,210,.55)';x.fillText(CH[Math.random()*CH.length|0],i*FS*2.2,col.y);col.y+=FS*col.v;if(col.y>H&&Math.random()>.97)col.y=-Math.random()*H*.3}})(0);
 </script>
-<script src="https://jeremstyke.github.io/games.js" data-from="rr"></script>
+<!-- games.js: loaded in <head> -->
 </body>
 </html>
