@@ -255,6 +255,20 @@ const NP = {
  ar:{comps:'المكوّنات',p_cool:'التبريد',p_oc:'كسر السرعة',p_bat:'البطارية',e_spd:'+{n} % سرعة لكل مستوى',e_bat:'+{n} ساعة للجلسة لكل مستوى',t_part:'✅ {m} المستوى {n}!',avail:'{n} ترقية متاحة'},
  fa:{comps:'قطعات',p_cool:'خنک‌کننده',p_oc:'اورکلاک',p_bat:'باتری',e_spd:'+{n}٪ سرعت در هر سطح',e_bat:'+{n} ساعت به هر جلسه در هر سطح',t_part:'✅ {m} سطح {n}!',avail:'{n} ارتقا موجود است'},
 };
+// 24 oct 2026 (Jeremy, 3h36): 12 machines, 3 more components
+const NM = {
+ en:{p_gpu:'Graphics cards',p_psu:'Power supply',p_soft:'Mining software',t_cap:'You need a level {n} machine first',t_capshort:'Lvl {n}',m:['Old laptop','Gaming laptop','Desktop PC','RGB gaming PC','1-GPU rig','3-GPU rig','6-GPU rig','12-GPU rig','ASIC rack','Server room','Mining farm','Data center']},
+ fr:{p_gpu:'Cartes graphiques',p_psu:'Alimentation',p_soft:'Logiciel de minage',t_cap:'Il te faut d\'abord une machine niveau {n}',t_capshort:'Niv. {n}',m:['Vieux laptop','Laptop gamer','PC de bureau','PC gamer RGB','Rig 1 GPU','Rig 3 GPU','Rig 6 GPU','Rig 12 GPU','Baie ASIC','Salle serveurs','Ferme de minage','Data center']},
+ es:{p_gpu:'Tarjetas gráficas',p_psu:'Fuente de poder',p_soft:'Software de minería',t_cap:'Primero necesitas una máquina nivel {n}',t_capshort:'Niv. {n}',m:['Portátil viejo','Portátil gamer','PC de escritorio','PC gamer RGB','Rig 1 GPU','Rig 3 GPU','Rig 6 GPU','Rig 12 GPU','Rack ASIC','Sala de servidores','Granja de minería','Centro de datos']},
+ pt:{p_gpu:'Placas de vídeo',p_psu:'Fonte',p_soft:'Software de mineração',t_cap:'Primeiro você precisa de uma máquina nível {n}',t_capshort:'Nív. {n}',m:['Notebook velho','Notebook gamer','PC de mesa','PC gamer RGB','Rig 1 GPU','Rig 3 GPU','Rig 6 GPU','Rig 12 GPU','Rack ASIC','Sala de servidores','Fazenda de mineração','Data center']},
+ ru:{p_gpu:'Видеокарты',p_psu:'Блок питания',p_soft:'Майнинг-софт',t_cap:'Сначала нужна машина уровня {n}',t_capshort:'Ур. {n}',m:['Старый ноутбук','Игровой ноутбук','Настольный ПК','Игровой ПК RGB','Риг 1 GPU','Риг 3 GPU','Риг 6 GPU','Риг 12 GPU','Стойка ASIC','Серверная','Майнинг-ферма','Дата-центр']},
+ uk:{p_gpu:'Відеокарти',p_psu:'Блок живлення',p_soft:'Майнінг-софт',t_cap:'Спочатку потрібна машина рівня {n}',t_capshort:'Рів. {n}',m:['Старий ноутбук','Ігровий ноутбук','Настільний ПК','Ігровий ПК RGB','Риг 1 GPU','Риг 3 GPU','Риг 6 GPU','Риг 12 GPU','Стійка ASIC','Серверна','Майнінг-ферма','Дата-центр']},
+ tr:{p_gpu:'Ekran kartları',p_psu:'Güç kaynağı',p_soft:'Madencilik yazılımı',t_cap:'Önce {n}. seviye makine gerekiyor',t_capshort:'Sv. {n}',m:['Eski dizüstü','Oyuncu dizüstü','Masaüstü PC','RGB oyuncu PC','1 GPU rig','3 GPU rig','6 GPU rig','12 GPU rig','ASIC rafı','Sunucu odası','Madencilik çiftliği','Veri merkezi']},
+ id:{p_gpu:'Kartu grafis',p_psu:'Catu daya',p_soft:'Software tambang',t_cap:'Butuh mesin level {n} dulu',t_capshort:'Lv. {n}',m:['Laptop tua','Laptop gaming','PC desktop','PC gaming RGB','Rig 1 GPU','Rig 3 GPU','Rig 6 GPU','Rig 12 GPU','Rak ASIC','Ruang server','Ladang tambang','Pusat data']},
+ ar:{p_gpu:'بطاقات الرسوم',p_psu:'مزوّد الطاقة',p_soft:'برنامج التعدين',t_cap:'تحتاج أولًا جهازًا من المستوى {n}',t_capshort:'م. {n}',m:['حاسوب قديم','حاسوب ألعاب محمول','حاسوب مكتبي','حاسوب ألعاب RGB','منصة 1 GPU','منصة 3 GPU','منصة 6 GPU','منصة 12 GPU','رف ASIC','غرفة خوادم','مزرعة تعدين','مركز بيانات']},
+ fa:{p_gpu:'کارت گرافیک',p_psu:'منبع تغذیه',p_soft:'نرم‌افزار ماینینگ',t_cap:'اول به دستگاه سطح {n} نیاز داری',t_capshort:'سطح {n}',m:['لپ‌تاپ قدیمی','لپ‌تاپ گیمینگ','کامپیوتر رومیزی','کامپیوتر گیمینگ RGB','ریگ ۱ GPU','ریگ ۳ GPU','ریگ ۶ GPU','ریگ ۱۲ GPU','رک ASIC','اتاق سرور','مزرعه ماینینگ','دیتاسنتر']},
+};
+Object.keys(NM).forEach(k => Object.assign(I[k], NM[k]));
 Object.keys(NP).forEach(k => Object.assign(I[k], NP[k]));
 // 24 oct 2026 (Jeremy): RIGZ divided by 144 (a laptop mines 1 RIGZ per 4 h); the friend bonus is now 1 RIGZ
 Object.keys(I).forEach(k => ['fr_p', 'share_txt'].forEach(t => { I[k][t] = I[k][t].replace(/\+100 RIGZ|\+۱۰۰ RIGZ/, k === 'fa' ? '+۱ RIGZ' : '+1 RIGZ') }));
@@ -262,7 +276,8 @@ Object.keys(NT).forEach(k => Object.assign(I[k], NT[k]));
 const L = I[LANG];
 const tr = (k, v) => String(L[k] || I.en[k] || k).replace(/\{(\w)\}/g, (_, x) => v && v[x] !== undefined ? v[x] : '');
 document.querySelectorAll('[data-t]').forEach(e => e.textContent = tr(e.dataset.t));
-const EMO = ['💻', '🖥️', '🎮', '🧩', '🔥', '🏭'];
+const EMO = ['💻', '🎮', '🖥️', '🌈', '🧩', '🧩', '🔥', '🔥', '⚙️', '🗄️', '🏭', '🌐'];  // 24 oct 2026: 12 machines
+const DRAW = [0, 0, 1, 2, 3, 3, 4, 4, 5, 5, 5, 5];  // which drawing each machine uses
 const nf = new Intl.NumberFormat(LANG === 'fa' ? 'fa-IR' : LANG, { maximumFractionDigits: 0 });
 const fmt = v => nf.format(Math.floor(v));
 const nf2 = new Intl.NumberFormat(LANG === 'fa' ? 'fa-IR' : LANG, { maximumFractionDigits: 2 });
@@ -330,7 +345,7 @@ var draw=function(t){cid=0;let g='';
 
 
 let drawn = -1;
-const _draw = draw; draw = function (t) { drawn = t; _draw(t) };
+const _draw = draw; draw = function (t) { drawn = t; _draw(DRAW[t] == null ? 5 : DRAW[t]) };
 function render() {
   if (!ST) return;
   const m = ST.me, v = shown(), i = Math.floor(v), t0 = now();
@@ -394,7 +409,7 @@ async function upgrade() {
   if (shown() < nx[1]) { toast(tr('t_need', { n: fmt2(nx[1]) })); return }
   const old = ST.me.tier; const r = await act('upgrade');
   if (!r || !r.ok) { if (r && r.error === 'funds') toast(tr('t_need', { n: fmt2(r.cost) })); return }
-  haptic('heavy'); _draw(old);
+  haptic('heavy'); _draw(DRAW[old] == null ? 5 : DRAW[old]);
   const m = $('svg');
   m.animate([{ transform: 'scale(1)', opacity: 1 }, { transform: 'scale(.6) translateY(30px)', opacity: 0 }], { duration: 250 }).onfinish = () => {
     draw(ST.me.tier); $('flash').animate([{ opacity: 0 }, { opacity: .6 }, { opacity: 0 }], { duration: 450 });
@@ -418,23 +433,27 @@ $('boB').onclick = async () => {
   // the boost is given by the server when Adsgram confirms the video: ask a few times
   for (let k = 0; k < 6; k++) { await new Promise(r => setTimeout(r, 1200)); const r = await api('state'); take(r); if (ST.me.boost_end && now() < T(ST.me.boost_end)) { haptic('heavy'); toast(tr('t_boost')); return } }
 };
-const PARTS = [['cool', '❄️'], ['oc', '⚡'], ['bat', '🔋']];
-function partCost(p) { const c = ST.cfg.parts && ST.cfg.parts[p]; const l = ST.me[p] || 0; return c && l < c.cost.length ? c.cost[l] : null }
-function buyable(v) { if (!ST) return 0; let n = 0; const nx = tiers()[ST.me.tier + 1]; if (nx && v >= nx[1]) n++; PARTS.forEach(([p]) => { const c = partCost(p); if (c != null && v >= c) n++ }); return n }
+// 24 oct 2026 (Jeremy, 3h36): 6 components x up to 10 levels; a component can't go above (machine level + 1)
+const PICON = { cool: '❄️', psu: '🔌', soft: '💾', oc: '⚡', gpu: '🎴', bat: '🔋' };
+const PARTS = new Proxy([], { get: (t, k) => { const a = ((ST && ST.cfg.part_order) || ['cool', 'oc', 'bat']).map(p => [p, PICON[p] || '🛠️']); return typeof a[k] === 'function' ? a[k].bind(a) : a[k] } });
+function partCost(p) { const c = ST.cfg.parts && ST.cfg.parts[p]; const l = ST.me[p] || 0; if (!c || l >= c.max) return null; return Math.round(c.base * Math.pow(c.mult, l) * 100) / 100 }
+const capped = p => (ST.me[p] || 0) >= ST.me.tier + 1;
+function buyable(v) { if (!ST) return 0; let n = 0; const nx = tiers()[ST.me.tier + 1]; if (nx && v >= nx[1]) n++; PARTS.forEach(([p]) => { const c = partCost(p); if (c != null && !capped(p) && v >= c) n++ }); return n }
 async function buyPart(p) {
   const c = partCost(p); if (c == null) { toast(tr('max')); return }
+  if (capped(p)) { toast(tr('t_cap', { n: (ST.me[p] || 0) + 1 })); return }
   if (shown() < c) { toast(tr('t_need', { n: fmt2(c) })); return }
-  const r = await act('part', { p }); if (!r || !r.ok) { if (r && r.error === 'funds') toast(tr('t_need', { n: fmt2(r.cost) })); return }
+  const r = await act('part', { p }); if (!r || !r.ok) { if (r && r.error === 'funds') toast(tr('t_need', { n: fmt2(r.cost) })); if (r && r.error === 'cap') toast(tr('t_cap', { n: (r.need || 0) + 1 })); return }
   haptic('heavy'); for (let k = 0; k < 14; k++) confetti(); toast(tr('t_part', { m: tr('p_' + p), n: r.lvl }));
 }
 let lastBuild = '';
 function buildUp() {
   if (!ST) return; const cur = ST.me.tier, v = shown();
-  const key = JSON.stringify([cur, ST.me.cool, ST.me.oc, ST.me.bat, buyable(v)]); if (key === lastBuild && $('upl').innerHTML) return; lastBuild = key;
+  const key = JSON.stringify([cur, ST.me.cool, ST.me.oc, ST.me.bat, ST.me.gpu, ST.me.psu, ST.me.soft, buyable(v)]); if (key === lastBuild && $('upl').innerHTML) return; lastBuild = key;
   const pc = ST.cfg.parts || {};
-  const parts = PARTS.map(([p, ic]) => { const c = pc[p]; if (!c) return ''; const l = ST.me[p] || 0, mx = c.cost.length, cost = partCost(p);
+  const parts = PARTS.map(([p, ic]) => { const c = pc[p]; if (!c) return ''; const l = ST.me[p] || 0, mx = c.max, cost = partCost(p), cap = cost != null && capped(p);
     const eff = p === 'bat' ? tr('e_bat', { n: c.h }) : tr('e_spd', { n: c.pct });
-    return `<div class="it ${cost != null && v >= cost ? 'can' : ''}" data-p="${p}"><div class="r" style="font-size:22px">${ic}</div><div class="n">${esc(tr('p_' + p))}<span class="lv">${Array.from({ length: mx }, (_, i) => `<i class="${i < l ? 'f' : ''}"></i>`).join('')}</span><div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">${eff}</div></div><div class="p">${cost == null ? '✓' : fmt2(cost)}</div></div>` }).join('');
+    return `<div class="it ${cost != null && !cap && v >= cost ? 'can' : ''}${cap ? ' lock' : ''}" data-p="${p}"><div class="r" style="font-size:22px">${ic}</div><div class="n">${esc(tr('p_' + p))}<span class="lv">${Array.from({ length: mx }, (_, i) => `<i class="${i < l ? 'f' : ''}"></i>`).join('')}</span><div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">${eff}</div></div><div class="p">${cost == null ? '✓' : cap ? '🔒 ' + esc(tr('t_capshort', { n: l + 1 })) : fmt2(cost)}</div></div>` }).join('');
   $('upl').innerHTML = `<div class="ph">${tr('comps')}</div>` + parts + `<div class="ph">${tr('n_mach')}</div>` + tiers().map((t, i) => `<div class="it ${i === cur ? 'cur' : i > cur + 1 ? 'lock' : ''}" data-i="${i}"><div class="r" style="font-size:22px">${i > cur + 1 ? '🔒' : EMO[i]}</div><div class="n">${esc(L.m[i])}<div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">⚡ ${fmt2(t[0])} / h</div></div><div class="p">${i <= cur ? (i === cur ? tr('cur') : '✓') : fmt2(t[1])}</div></div>`).join('');
   $('upl').querySelectorAll('.it').forEach(el => el.onclick = () => { if (el.dataset.p) buyPart(el.dataset.p); else if (+el.dataset.i === cur + 1) upgrade() });
 }
