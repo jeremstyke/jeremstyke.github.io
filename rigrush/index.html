@@ -293,6 +293,19 @@ const NR = {
  ar:{t_parts:'🔧 طوّر كل مكوّناتك أولًا',t_partsshort:'المكوّنات أولًا'},
  fa:{t_parts:'🔧 اول همه قطعه‌هایت را ارتقا بده',t_partsshort:'اول قطعه‌ها'},
 };
+const NC = {
+ en:{p_ram:'RAM',p_water:'Water cooling',p_net:'Fiber internet',p_solar:'Solar panels'},
+ fr:{p_ram:'Mémoire RAM',p_water:'Watercooling',p_net:'Fibre optique',p_solar:'Panneaux solaires'},
+ es:{p_ram:'Memoria RAM',p_water:'Refrigeración líquida',p_net:'Fibra óptica',p_solar:'Paneles solares'},
+ pt:{p_ram:'Memória RAM',p_water:'Water cooler',p_net:'Fibra óptica',p_solar:'Painéis solares'},
+ ru:{p_ram:'Оперативная память',p_water:'Водяное охлаждение',p_net:'Оптоволокно',p_solar:'Солнечные панели'},
+ uk:{p_ram:'Оперативна пам\'ять',p_water:'Водяне охолодження',p_net:'Оптоволокно',p_solar:'Сонячні панелі'},
+ tr:{p_ram:'RAM bellek',p_water:'Sıvı soğutma',p_net:'Fiber internet',p_solar:'Güneş panelleri'},
+ id:{p_ram:'Memori RAM',p_water:'Pendingin air',p_net:'Internet fiber',p_solar:'Panel surya'},
+ ar:{p_ram:'ذاكرة RAM',p_water:'تبريد مائي',p_net:'ألياف ضوئية',p_solar:'ألواح شمسية'},
+ fa:{p_ram:'حافظه RAM',p_water:'خنک‌کننده آبی',p_net:'فیبر نوری',p_solar:'پنل خورشیدی'},
+};
+Object.keys(NC).forEach(k => Object.assign(I[k], NC[k]));
 Object.keys(NR).forEach(k => Object.assign(I[k], NR[k]));
 Object.keys(NU).forEach(k => Object.assign(I[k], NU[k]));
 Object.keys(NM).forEach(k => Object.assign(I[k], NM[k]));
@@ -463,7 +476,7 @@ $('boB').onclick = async () => {
   for (let k = 0; k < 6; k++) { await new Promise(r => setTimeout(r, 1200)); const r = await api('state'); take(r); if (ST.me.boost_end && now() < T(ST.me.boost_end)) { haptic('heavy'); toast(tr('t_boost')); return } }
 };
 // 24 oct 2026 (Jeremy, 3h36): 6 components x up to 10 levels; a component can't go above (machine level + 1)
-const PICON = { cool: '❄️', psu: '🔌', soft: '💾', oc: '⚡', gpu: '🎴', bat: '🔋' };
+const PICON = { cool: '❄️', psu: '🔌', soft: '💾', oc: '⚡', gpu: '🎴', bat: '🔋', ram: '💽', water: '💧', net: '📡', solar: '☀️' };  // 24 oct 2026 (10h10): 4 late-game components
 const PARTS = new Proxy([], { get: (t, k) => { const a = ((ST && ST.cfg.part_order) || ['cool', 'oc', 'bat']).map(p => [p, PICON[p] || '🛠️']); return typeof a[k] === 'function' ? a[k].bind(a) : a[k] } });
 function partCost(p) { const c = ST.cfg.parts && ST.cfg.parts[p]; const l = ST.me[p] || 0; if (!c || l >= c.max) return null; return Math.round(c.base * Math.pow(c.mult, l) * 100) / 100 }
 const capped = p => (ST.me[p] || 0) >= ST.me.tier + 1;
@@ -480,7 +493,7 @@ async function buyPart(p) {
 let lastBuild = '';
 function buildUp() {
   if (!ST) return; const cur = ST.me.tier, v = shown();
-  const key = JSON.stringify([cur, ST.me.parts_ready, ST.me.cool, ST.me.oc, ST.me.bat, ST.me.gpu, ST.me.psu, ST.me.soft, buyable(v)]); if (key === lastBuild && $('upl').innerHTML) return; lastBuild = key;
+  const key = JSON.stringify([cur, ST.me.parts_ready, PARTS.map(([p]) => ST.me[p]), buyable(v)]); if (key === lastBuild && $('upl').innerHTML) return; lastBuild = key;
   const pc = ST.cfg.parts || {};
   const nextLock = PARTS.filter(([p]) => pc[p] && !unlocked(p)).map(([p]) => pc[p].unlock).sort((a, b) => a - b)[0];
   const parts = PARTS.map(([p, ic]) => { const c = pc[p]; if (!c || !unlocked(p)) return ''; const l = ST.me[p] || 0, mx = c.max, cost = partCost(p), cap = cost != null && capped(p);
