@@ -112,7 +112,8 @@ h2{margin:16px 0 4px;font:400 28px 'Lilita One',sans-serif;color:var(--neo);text
 .cover{position:fixed;inset:0;z-index:20;background:var(--bg);display:grid;place-items:center;text-align:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px))}
 .cover[hidden]{display:none!important}
 /* 24 oct 2026 (Jeremy): Matrix style */
-#bgc{opacity:.22} /* 24 oct 2026 (Jeremy, 3h22): the rain was too strong, you could not see anything */
+#bgc{display:none} /* 24 oct 2026 (Jeremy, 3h28): no more Matrix rain */
+body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#04070c 100%) fixed}
 .brand{text-align:center;margin-top:8px;font:400 34px/1 'Russo One',sans-serif;font-style:italic;letter-spacing:.03em;transform:skewX(-8deg)}
 .brand .a{background:linear-gradient(180deg,#fff 0%,#d8e1ea 42%,#6f7f8f 52%,#f2f6fa 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #0d2a1b) drop-shadow(0 0 10px rgba(255,255,255,.15))}
 .brand .b{color:#39ff9f;text-shadow:0 0 10px rgba(57,255,159,.9),0 0 28px rgba(57,255,159,.45)}
@@ -486,7 +487,7 @@ setInterval(async () => { if (document.hidden || busy) return; const r = await a
 // background: Matrix digital rain (24 oct 2026, Jeremy)
 const c=$('bgc'),x=c.getContext('2d');let W,H,FS,COLS=[];const CH='アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホ0123456789$RIGZ';
 function rs(){const d=Math.min(2,devicePixelRatio||1);W=c.width=innerWidth*d;H=c.height=innerHeight*d;FS=15*d;COLS=Array.from({length:Math.ceil(W/(FS*2.2))},()=>({y:-Math.random()*H,v:.3+Math.random()*.5}));x.fillStyle='#04070c';x.fillRect(0,0,W,H)}rs();addEventListener('resize',rs);
-let rainT=0;(function bg(t){requestAnimationFrame(bg);if(document.hidden||t-rainT<50)return;rainT=t;x.fillStyle='rgba(4,7,12,.13)';x.fillRect(0,0,W,H);x.font=FS+'px JetBrains Mono, monospace';
+let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(document.hidden||t-rainT<50)return;rainT=t;x.fillStyle='rgba(4,7,12,.13)';x.fillRect(0,0,W,H);x.font=FS+'px JetBrains Mono, monospace';
   for(let i=0;i<COLS.length;i++){const col=COLS[i];x.fillStyle='rgba(57,255,159,.3)';x.fillText(CH[Math.random()*CH.length|0],i*FS*2.2,col.y-FS);x.fillStyle='rgba(170,255,210,.55)';x.fillText(CH[Math.random()*CH.length|0],i*FS*2.2,col.y);col.y+=FS*col.v;if(col.y>H&&Math.random()>.97)col.y=-Math.random()*H*.3}})(0);
 </script>
 </body>
