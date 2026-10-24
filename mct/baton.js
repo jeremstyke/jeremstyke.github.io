@@ -64,7 +64,11 @@
       if (document.querySelector('#maint:not([hidden]), .maint:not([hidden])')) return;  // never over the maintenance screen (no popup, no ad)
       const K = own ? 'mct_bt_pop11o' : 'mct_bt_pop10';
       let seen = 0; try { seen = Number(localStorage.getItem(K) || 0); } catch (e) { seen = Date.now(); }
-      if (seen) { if (!window.MCTPREM) adInt(); return; }  // 21h16 (Jeremy): the Baton popup only once ever, then an Adsgram interstitial at each opening (never for Premium)
+      if (seen) {  /* 24 oct 2026 (10h19, Jeremy): one hour at least between two opening interstitials */
+        let last = 0; try { last = Number(localStorage.getItem('mct_int_open') || 0); } catch (e) {}
+        if (!window.MCTPREM && Date.now() - last >= 3600000) { try { localStorage.setItem('mct_int_open', String(Date.now())); } catch (e) {} adInt(); }
+        return;
+      }  // 21h16 (Jeremy): the Baton popup only once ever, then an Adsgram interstitial at each opening (never for Premium)
       try { localStorage.setItem(K, String(Date.now())); } catch (e) {}
       if (document.querySelector('#maint:not([hidden]), .maint:not([hidden])')) return;  // never over the maintenance screen
       set();
