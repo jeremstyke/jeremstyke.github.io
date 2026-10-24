@@ -1742,7 +1742,7 @@ function nudge() {
   // never for the no-ads players (S.noads, later), and once every 24 hours at most (Jeremy, 15h54)
   (function inter() {
     try {
-      if (firstOpen || S.noads || !(tg && tg.initData) || Date.now() - Number(LS.get('bt_int') || 0) < 24 * 3600000) return;
+      if (firstOpen || S.noads || !(tg && tg.initData) || Date.now() - Number(LS.get('bt_int') || 0) < 3600000) return;  // 24 oct 2026 (10h19, Jeremy): one hour at least between two (was 24 h)
       const go = () => { try { LS.set('bt_int', String(Date.now())); window.Adsgram.init({ blockId: 'int-55461' }).show().catch(() => {}); } catch (e) {} };
       let n = 0; const wait = () => { if (window.Adsgram) go(); else if (n++ < 40) setTimeout(wait, 250); };  // the Adsgram script is loaded once, by the task block below
       wait();
