@@ -203,3 +203,5 @@
     setTimeout(() => { if (!shown) try { window.fetch('/mct/api', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ initData: (window.Telegram && Telegram.WebApp && Telegram.WebApp.initData) || '', action: 'ban_check' }) }).catch(() => {}); } catch (e) {} }, 3000);
   } catch (e) { console.error('ban screen', e); }
 })();
+// 24 oct 2026 (Jeremy): "My other games" tab shared by all the mini apps
+(function () { try { const s = document.createElement('script'); s.src = 'https://jeremstyke.github.io/games.js'; s.dataset.from = 'mct'; document.head.appendChild(s); } catch (e) {} })();
