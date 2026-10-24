@@ -167,7 +167,7 @@ body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#0407
     <button class="btn" id="main"></button>
     <div class="row">
       <div class="mini up" id="upB"><div class="ic">🛠️</div><div style="min-width:0"><div class="t" data-t="upgrade"></div><div class="s" id="upS"></div></div></div>
-      <div class="mini bo" id="boB"><div class="ic">🎬</div><div style="min-width:0"><div class="t">Boost x2</div><div class="s" id="boS"></div></div></div>
+      <div class="mini bo" id="boB" hidden><div class="ic">🎬</div><div style="min-width:0"><div class="t">Boost x2</div><div class="s" id="boS"></div></div></div>
     </div>
   </div>
 
@@ -360,7 +360,7 @@ function render() {
   else { $('sess').textContent = tr('off'); b.className = 'btn'; b.textContent = tr('b_start') }
   $('lvlN').textContent = m.tier + 1; $('lvlT').textContent = L.m[m.tier]; $('mname').textContent = EMO[m.tier] + ' ' + L.m[m.tier];
   const nx = tiers()[m.tier + 1], nc = buyable(v); $('upS').textContent = nc ? tr('avail', { n: nc }) : nx ? '→ ' + fmt2(nx[1]) + ' RIGZ' : tr('max'); $('upB').classList.toggle('can', nc > 0);
-  $('boB').hidden = ST.cfg.boost_on === false; $('bdg').hidden = !m.unread; $('bdg').textContent = m.unread > 9 ? '9+' : m.unread;
+  $('boB').hidden = ST.cfg.boost_on !== true;  /* 24 oct 2026 (Jeremy): no boost until Adsgram is set up */ $('bdg').hidden = !m.unread; $('bdg').textContent = m.unread > 9 ? '9+' : m.unread;
   $('boB').classList.toggle('on', !!boosted);
   $('boS').textContent = boosted ? tr('bon', { m: Math.ceil((T(m.boost_end) - t0) / 6e4) }) : m.boost_left > 0 ? tr('bsub') + ' · ' + m.boost_left + '/' + 6 : tr('bnone');
   if (!$('pg-up').hidden) buildUp();
