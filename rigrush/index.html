@@ -377,7 +377,7 @@ function cover(icon, title, p) { $('cvI').textContent = icon; $('cvT').textConte
 function take(r) {
   if (!r) return false;
   if (r.error === 'maint') { cover('🛠️', tr('maint'), tr('maint_p')); return false }
-  if (r.error === 'banned') { cover('🚫', tr('ban'), tr('ban_p')); return false }
+  if (r.error === 'banned') { if (window.JSBan) JSBan(); /* 24 oct 2026: same screen in every game (games.js) */ cover('🚫', tr('ban'), tr('ban_p')); return false }
   if (r.error === 'auth') { cover('✈️', 'Rig Rush', tr('open_tg')); return false }
   if (r.me) { ST = r; OFF = new Date(r.now).getTime() - Date.now(); if (r.me.tier !== drawn) draw(r.me.tier); buildUp(); }
   return true;
