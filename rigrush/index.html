@@ -142,6 +142,10 @@ body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#0407
 .mini.ch.can{border-color:var(--gold);box-shadow:0 0 16px rgba(255,200,61,.35)}
 .mini.ch.can .ic{animation:bounce 1.1s infinite}
 .mini.ch.can .s{color:var(--gold)}
+/* 24 oct 2026: +10 % for following @jeremstyke */
+.subc{display:block;text-align:center;margin-top:10px;padding:10px 12px;border-radius:14px;font-weight:800;font-size:14px;color:#cfe9ff;background:linear-gradient(90deg,rgba(34,158,217,.22),rgba(34,211,238,.12));border:1px solid rgba(80,180,255,.5);cursor:pointer}
+.subc b{color:#fff}
+.stk.sb{color:#8fd3ff;background:rgba(34,158,217,.14);border-color:rgba(80,180,255,.45);margin-left:6px}
 .sheet{position:fixed;inset:0;z-index:15;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;backdrop-filter:blur(4px)}
 .sheet[hidden]{display:none!important}
 .sheet>div{width:100%;max-width:480px;margin:0 auto;max-height:75vh;display:flex;flex-direction:column;background:linear-gradient(180deg,#0f1a2a,#060a12);border-radius:24px 24px 0 0;border-top:1px solid var(--line);padding:18px max(16px,env(safe-area-inset-right,0px)) calc(18px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));animation:up .35s cubic-bezier(.2,1.2,.4,1)}
@@ -185,7 +189,7 @@ body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#0407
     <div class="bal"><small data-t="coins"></small>
       <div class="num"><svg class="coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.5" fill="#06261a" stroke="#39ff9f" stroke-width="1.6"/><circle cx="12" cy="12" r="7.6" fill="none" stroke="#39ff9f" stroke-width=".8" opacity=".6"/><text x="12.4" y="16.2" text-anchor="middle" font-size="11" font-style="italic" font-family="Russo One,sans-serif" fill="#7dffc0">R</text></svg><span id="num">0</span><span class="dec" id="dec"></span></div>
       <div class="rate" id="rate"></div>
-      <div><span class="stk" id="stk" hidden></span></div>
+      <div><span class="stk" id="stk" hidden></span><span class="stk sb" id="sbc" hidden></span></div>
     </div>
     <div class="stage" id="stage">
       <div class="mname" id="mname"></div>
@@ -194,6 +198,7 @@ body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#0407
     </div>
     <div class="sess" id="sess"></div>
     <button class="btn" id="main"></button>
+    <div class="subc" id="subB" hidden></div>
     <div class="row">
       <div class="mini up" id="upB"><div class="ic">🛠️</div><div style="min-width:0"><div class="t" data-t="upgrade"></div><div class="s" id="upS"></div></div></div>
       <div class="mini ch" id="chB"><div class="ic">🎁</div><div style="min-width:0"><div class="t" id="chT"></div><div class="s" id="chS"></div></div></div>
@@ -342,7 +347,9 @@ const NS = {"en": {"e_bat": "+{n} min per session per level", "t_start": "⚡ Mi
 Object.keys(NU).forEach(k => Object.assign(I[k], NU[k]));
 Object.keys(NM).forEach(k => Object.assign(I[k], NM[k]));
 Object.keys(NP).forEach(k => Object.assign(I[k], NP[k]));
-Object.keys(NS).forEach(k => Object.assign(I[k], NS[k]));  // 24 oct 2026: after NP, which also sets e_bat
+Object.keys(NS).forEach(k => Object.assign(I[k], NS[k]));
+const NB = {"en": {"sub_cta": "📢 Join <b>@jeremstyke</b>: <b>+10 %</b> mining", "sub_chip": "📢 +10 %", "t_sub_ok": "✅ +10 % mining unlocked!", "t_sub_no": "📢 Join @jeremstyke, then come back here", "sub_i": "+10 % mining while you follow @jeremstyke. Leave the channel and the bonus stops."}, "fr": {"sub_cta": "📢 Abonne-toi à <b>@jeremstyke</b> : <b>+10 %</b> de minage", "sub_chip": "📢 +10 %", "t_sub_ok": "✅ +10 % de minage activé !", "t_sub_no": "📢 Abonne-toi à @jeremstyke, puis reviens ici", "sub_i": "+10 % de minage tant que tu es abonné à @jeremstyke. Si tu quittes la chaîne, le bonus s'arrête."}, "es": {"sub_cta": "📢 Únete a <b>@jeremstyke</b>: <b>+10 %</b> de minado", "sub_chip": "📢 +10 %", "t_sub_ok": "✅ ¡+10 % de minado activado!", "t_sub_no": "📢 Únete a @jeremstyke y vuelve aquí", "sub_i": "+10 % de minado mientras sigas a @jeremstyke. Si sales del canal, el bono se detiene."}, "pt": {"sub_cta": "📢 Entre em <b>@jeremstyke</b>: <b>+10 %</b> de mineração", "sub_chip": "📢 +10 %", "t_sub_ok": "✅ +10 % de mineração ativado!", "t_sub_no": "📢 Entre em @jeremstyke e volte aqui", "sub_i": "+10 % de mineração enquanto você seguir @jeremstyke. Se sair do canal, o bônus para."}, "ru": {"sub_cta": "📢 Подпишись на <b>@jeremstyke</b>: <b>+10 %</b> к майнингу", "sub_chip": "📢 +10 %", "t_sub_ok": "✅ +10 % к майнингу активировано!", "t_sub_no": "📢 Подпишись на @jeremstyke и возвращайся сюда", "sub_i": "+10 % к майнингу, пока ты подписан на @jeremstyke. Отпишешься, и бонус пропадёт."}, "uk": {"sub_cta": "📢 Підпишись на <b>@jeremstyke</b>: <b>+10 %</b> до майнингу", "sub_chip": "📢 +10 %", "t_sub_ok": "✅ +10 % до майнингу активовано!", "t_sub_no": "📢 Підпишись на @jeremstyke і повертайся сюди", "sub_i": "+10 % до майнингу, поки ти підписаний на @jeremstyke. Відпишешся, і бонус зникне."}, "tr": {"sub_cta": "📢 <b>@jeremstyke</b> kanalına katıl: <b>+%10</b> kazım", "sub_chip": "📢 +%10", "t_sub_ok": "✅ +%10 kazım açıldı!", "t_sub_no": "📢 @jeremstyke kanalına katıl, sonra buraya dön", "sub_i": "@jeremstyke takip ettiğin sürece +%10 kazım. Kanaldan çıkarsan bonus durur."}, "id": {"sub_cta": "📢 Gabung <b>@jeremstyke</b>: <b>+10 %</b> tambang", "sub_chip": "📢 +10 %", "t_sub_ok": "✅ +10 % tambang aktif!", "t_sub_no": "📢 Gabung @jeremstyke, lalu kembali ke sini", "sub_i": "+10 % tambang selama kamu mengikuti @jeremstyke. Keluar dari kanal dan bonus berhenti."}, "ar": {"sub_cta": "📢 اشترك في <b>@jeremstyke</b>: <b>+10 %</b> تعدين", "sub_chip": "📢 +10 %", "t_sub_ok": "✅ تم تفعيل +10 % تعدين!", "t_sub_no": "📢 اشترك في @jeremstyke ثم عد إلى هنا", "sub_i": "+10 % تعدين ما دمت مشتركًا في @jeremstyke. إذا غادرت القناة يتوقف المكافأة."}, "fa": {"sub_cta": "📢 در <b>@jeremstyke</b> عضو شو: <b>+۱۰٪</b> استخراج", "sub_chip": "📢 +۱۰٪", "t_sub_ok": "✅ +۱۰٪ استخراج فعال شد!", "t_sub_no": "📢 در @jeremstyke عضو شو و بعد برگرد اینجا", "sub_i": "تا وقتی عضو @jeremstyke هستی +۱۰٪ استخراج. اگر از کانال خارج شوی، پاداش قطع می‌شود."}};  // 24 oct 2026: +10 % for following @jeremstyke
+Object.keys(NB).forEach(k => Object.assign(I[k], NB[k]));  // 24 oct 2026: after NP, which also sets e_bat
 // 24 oct 2026 (Jeremy): RIGZ divided by 144 (a laptop mines 1 RIGZ per 4 h); the friend bonus is now 1 RIGZ
 Object.keys(I).forEach(k => ['fr_p', 'share_txt'].forEach(t => { I[k][t] = I[k][t].replace(/\+100 RIGZ|\+۱۰۰ RIGZ/, k === 'fa' ? '+۱ RIGZ' : '+1 RIGZ') }));
 Object.keys(NT).forEach(k => Object.assign(I[k], NT[k]));
@@ -435,6 +442,7 @@ function render() {
   const nx = tiers()[m.tier + 1], nc = buyable(v); $('upS').textContent = nc ? tr('avail', { n: nc }) : nx ? '→ ' + fmt2(nx[1]) + ' RIGZ' : tr('max'); $('upB').classList.toggle('can', nc > 0);
   $('boB').hidden = ST.cfg.boost_on !== true;
   { const cl = chestLeft(); $('chT').textContent = tr('ch_t'); $('chS').textContent = cl > 0 ? '⏳ ' + cdTxt(cl) : tr('ch_ok'); $('chB').classList.toggle('can', cl <= 0);
+    const sb = $('sbc'), su = $('subB'); sb.hidden = !m.sub; su.hidden = !!m.sub; if (m.sub) sb.textContent = tr('sub_chip'); else if (su.dataset.l !== LANG) { su.innerHTML = tr('sub_cta'); su.dataset.l = LANG }
     const sk = $('stk'); sk.hidden = !(m.streak > 0); if (m.streak > 0) sk.textContent = tr('stk', { d: m.streak, p: m.streak_pct }); }  /* 24 oct 2026 (Jeremy): no boost until Adsgram is set up */ $('bdg').hidden = !m.unread; $('bdg').textContent = m.unread > 9 ? '9+' : m.unread;
   $('boB').classList.toggle('on', !!boosted);
   $('boS').textContent = boosted ? tr('bon', { m: Math.ceil((T(m.boost_end) - t0) / 6e4) }) : m.boost_left > 0 ? tr('bsub') + ' · ' + m.boost_left + '/' + 6 : tr('bnone');
@@ -505,6 +513,13 @@ $('chB').onclick = async () => {
   const r = await act('chest'); if (r && r.chest != null) { for (let k = 0; k < 14; k++) setTimeout(() => coinFly(true), k * 50); haptic('heavy'); toast(tr('t_chest', { n: fmt2(r.chest) })) }
 };
 $('stk').onclick = () => { haptic(); toast(tr('stk_i')) };
+// 24 oct 2026 (Jeremy): +10 % mining while subscribed to @jeremstyke; checked again when he comes back to the app
+let subWait = 0;
+const subCheck = async (say) => { const was = ST && ST.me.sub; const r = await act('sub'); if (!r || !r.me) return; if (r.me.sub && !was) { haptic('heavy'); toast(tr('t_sub_ok')) } else if (!r.me.sub && say) toast(tr('t_sub_no')) };
+$('subB').onclick = () => { haptic(); subWait = Date.now(); try { TW.openTelegramLink('https://t.me/jeremstyke') } catch (e) { window.open('https://t.me/jeremstyke', '_blank') } };
+$('sbc').onclick = () => { haptic(); toast(tr('sub_i')) };
+document.addEventListener('visibilitychange', () => { if (!document.hidden && subWait && Date.now() - subWait > 1500) { subWait = 0; setTimeout(() => subCheck(true), 600) } });
+try { TW && TW.onEvent && TW.onEvent('activated', () => { if (subWait && Date.now() - subWait > 1500) { subWait = 0; setTimeout(() => subCheck(true), 600) } }) } catch (e) {}
 let AD = null;
 $('boB').onclick = async () => {
   if (!ST) return; const m = ST.me;
@@ -582,6 +597,7 @@ const FAQ = {
 };
 // 24 oct 2026: sessions last 2 h now; streak and chest explained
 Object.keys(FAQ).forEach(k => { FAQ[k][0][1] = FAQ[k][0][1].replace(/4|۴/, k === 'fa' ? '۲' : '2'); FAQ[k].splice(1, 0, ...({"en": [["What is the daily streak?", "Open the game every day: +5 % mining per day in a row, up to +35 % on day 7. Miss a day and it starts again at +5 %."], ["What is the free chest?", "Every 4 hours a free chest gives you 5 to 15 minutes of mining at your current speed. Open it as soon as it is ready."]], "fr": [["C'est quoi la série ?", "Ouvre le jeu chaque jour : +5 % de minage par jour d'affilée, jusqu'à +35 % au 7e jour. Un jour raté et elle repart à +5 %."], ["C'est quoi le coffre gratuit ?", "Toutes les 4 heures, un coffre gratuit te donne 5 à 15 minutes de minage à ta vitesse actuelle. Ouvre-le dès qu'il est prêt."]], "es": [["¿Qué es la racha?", "Abre el juego cada día: +5 % de minado por día seguido, hasta +35 % el día 7. Si fallas un día, vuelve a +5 %."], ["¿Qué es el cofre gratis?", "Cada 4 horas un cofre gratis te da de 5 a 15 minutos de minado a tu velocidad actual. Ábrelo en cuanto esté listo."]], "pt": [["O que é a sequência?", "Abra o jogo todo dia: +5 % de mineração por dia seguido, até +35 % no 7º dia. Perdeu um dia, volta a +5 %."], ["O que é o baú grátis?", "A cada 4 horas um baú grátis te dá de 5 a 15 minutos de mineração na sua velocidade atual. Abra assim que estiver pronto."]], "ru": [["Что такое серия?", "Заходи в игру каждый день: +5 % к майнингу за каждый день подряд, до +35 % на 7-й день. Пропустишь день, и серия начнётся с +5 %."], ["Что за бесплатный сундук?", "Каждые 4 часа бесплатный сундук даёт от 5 до 15 минут майнинга на твоей текущей скорости. Открывай, как только он готов."]], "uk": [["Що таке серія?", "Заходь у гру щодня: +5 % до майнингу за кожен день поспіль, до +35 % на 7-й день. Пропустиш день, і серія почнеться з +5 %."], ["Що за безкоштовна скриня?", "Кожні 4 години безкоштовна скриня дає від 5 до 15 хвилин майнингу на твоїй поточній швидкості. Відкривай, щойно вона готова."]], "tr": [["Seri nedir?", "Oyunu her gün aç: üst üste her gün için +%5 kazım, 7. günde +%35'e kadar. Bir gün kaçırırsan +%5'ten yeniden başlar."], ["Bedava sandık nedir?", "Her 4 saatte bir bedava sandık, mevcut hızınla 5 ila 15 dakikalık kazım verir. Hazır olunca hemen aç."]], "id": [["Apa itu streak harian?", "Buka game setiap hari: +5 % tambang per hari berturut-turut, hingga +35 % di hari ke-7. Lewat sehari, mulai lagi dari +5 %."], ["Apa itu peti gratis?", "Setiap 4 jam, peti gratis memberimu 5 sampai 15 menit tambang dengan kecepatanmu saat ini. Buka begitu siap."]], "ar": [["ما هي السلسلة اليومية؟", "افتح اللعبة كل يوم: +5 % تعدين لكل يوم متتالٍ، حتى +35 % في اليوم السابع. إذا فوّت يومًا تعود إلى +5 %."], ["ما هو الصندوق المجاني؟", "كل 4 ساعات يمنحك صندوق مجاني من 5 إلى 15 دقيقة تعدين بسرعتك الحالية. افتحه فور جاهزيته."]], "fa": [["سری روزانه چیست؟", "هر روز بازی را باز کن: برای هر روز پشت سر هم +۵٪ استخراج، تا +۳۵٪ در روز هفتم. یک روز غیبت و از +۵٪ دوباره شروع می‌شود."], ["صندوق رایگان چیست؟", "هر ۴ ساعت یک صندوق رایگان ۵ تا ۱۵ دقیقه استخراج با سرعت فعلی‌ات به تو می‌دهد. به محض آماده شدن بازش کن."]]}[k] || [])) });
+Object.keys(FAQ).forEach(k => { const q = {"en": ["How do I get +10 %?", "Follow the @jeremstyke channel: +10 % mining for as long as you stay subscribed."], "fr": ["Comment avoir +10 % ?", "Abonne-toi à la chaîne @jeremstyke : +10 % de minage tant que tu restes abonné."], "es": ["¿Cómo consigo +10 %?", "Sigue el canal @jeremstyke: +10 % de minado mientras sigas suscrito."], "pt": ["Como ganho +10 %?", "Siga o canal @jeremstyke: +10 % de mineração enquanto continuar inscrito."], "ru": ["Как получить +10 %?", "Подпишись на канал @jeremstyke: +10 % к майнингу, пока ты подписан."], "uk": ["Як отримати +10 %?", "Підпишись на канал @jeremstyke: +10 % до майнингу, поки ти підписаний."], "tr": ["+%10 nasıl alırım?", "@jeremstyke kanalını takip et: abone kaldığın sürece +%10 kazım."], "id": ["Bagaimana dapat +10 %?", "Ikuti kanal @jeremstyke: +10 % tambang selama kamu tetap berlangganan."], "ar": ["كيف أحصل على +10 %؟", "اشترك في قناة @jeremstyke: +10 % تعدين ما دمت مشتركًا."], "fa": ["چطور +۱۰٪ بگیرم؟", "کانال @jeremstyke را دنبال کن: تا وقتی عضو هستی +۱۰٪ استخراج."]}[k]; if (q) FAQ[k].splice(3, 0, q) });
 $('faqB').onclick = () => { haptic(); $('faql').innerHTML = (FAQ[LANG] || FAQ.en).map(([q, a]) => `<details class="faq"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join(''); $('faqS').hidden = false };
 $('faqS').onclick = e => { if (e.target === $('faqS')) $('faqS').hidden = true };
 $('sheet').onclick = e => { if (e.target === $('sheet')) $('sheet').hidden = true };
@@ -608,7 +624,7 @@ function landing() {
     cta: 'Jouer sur Telegram', sm: 'Gratuit · rien à télécharger · s\'ouvre dans Telegram', how: 'Comment ça marche',
     s: [['⛏️', 'Lance le minage', 'Un appui suffit : ta machine mine des RIGZ pendant 2 heures, même quand l\'app est fermée.'],
         ['💰', 'Récupère tes RIGZ', 'Reviens quand la session est finie, encaisse et relance. Le bot te prévient quand ta machine est pleine.'],
-        ['🎁', 'Coffre et série', 'Un coffre gratuit toutes les 4 heures et jusqu\'à +35 % de minage si tu reviens chaque jour.'],
+        ['🎁', 'Coffre, série et bonus', 'Un coffre gratuit toutes les 4 heures, jusqu\'à +35 % de minage si tu reviens chaque jour, et +10 % si tu es abonné à @jeremstyke.'],
         ['🔧', 'Améliore ta machine', '10 composants (refroidissement, GPU, batterie, panneaux solaires...) et 12 machines à débloquer.'],
         ['👥', 'Invite tes amis', '+1 RIGZ par ami et 10 % de tout ce qu\'il mine, à vie.'],
         ['🪂', 'Airdrop RIGZ', 'Tout ce que tu gagnes compte pour l\'airdrop. Le classement montre les meilleurs mineurs.']],
@@ -618,7 +634,7 @@ function landing() {
     cta: 'Play on Telegram', sm: 'Free · nothing to download · opens in Telegram', how: 'How it works',
     s: [['⛏️', 'Start mining', 'One tap: your machine mines RIGZ for 2 hours, even when the app is closed.'],
         ['💰', 'Claim your RIGZ', 'Come back when the session ends, claim and start again. The bot tells you when your machine is full.'],
-        ['🎁', 'Chest and streak', 'A free chest every 4 hours and up to +35 % mining when you come back every day.'],
+        ['🎁', 'Chest, streak and bonus', 'A free chest every 4 hours, up to +35 % mining when you come back every day, and +10 % when you follow @jeremstyke.'],
         ['🔧', 'Upgrade your rig', '10 components (cooling, GPU, battery, solar panels...) and 12 machines to unlock.'],
         ['👥', 'Invite friends', '+1 RIGZ per friend and 10% of everything they mine, forever.'],
         ['🪂', 'RIGZ airdrop', 'Everything you earn counts for the airdrop. The leaderboard shows the top miners.']],
