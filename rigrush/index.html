@@ -281,6 +281,19 @@ const NU = {
  ar:{t_newpart:'مكوّن جديد عند جهاز المستوى {n}',t_more:'??? {n} أجهزة أخرى لاكتشافها'},
  fa:{t_newpart:'قطعه جدید در دستگاه سطح {n}',t_more:'??? {n} دستگاه دیگر برای کشف'},
 };
+const NR = {
+ en:{t_parts:'🔧 Upgrade all your components first',t_partsshort:'Components first'},
+ fr:{t_parts:'🔧 Améliore d\'abord tous tes composants',t_partsshort:'Composants d\'abord'},
+ es:{t_parts:'🔧 Primero mejora todos tus componentes',t_partsshort:'Componentes primero'},
+ pt:{t_parts:'🔧 Primeiro melhore todos os seus componentes',t_partsshort:'Componentes antes'},
+ ru:{t_parts:'🔧 Сначала улучши все компоненты',t_partsshort:'Сначала компоненты'},
+ uk:{t_parts:'🔧 Спочатку покращ усі компоненти',t_partsshort:'Спершу компоненти'},
+ tr:{t_parts:'🔧 Önce tüm bileşenlerini yükselt',t_partsshort:'Önce bileşenler'},
+ id:{t_parts:'🔧 Tingkatkan semua komponenmu dulu',t_partsshort:'Komponen dulu'},
+ ar:{t_parts:'🔧 طوّر كل مكوّناتك أولًا',t_partsshort:'المكوّنات أولًا'},
+ fa:{t_parts:'🔧 اول همه قطعه‌هایت را ارتقا بده',t_partsshort:'اول قطعه‌ها'},
+};
+Object.keys(NR).forEach(k => Object.assign(I[k], NR[k]));
 Object.keys(NU).forEach(k => Object.assign(I[k], NU[k]));
 Object.keys(NM).forEach(k => Object.assign(I[k], NM[k]));
 Object.keys(NP).forEach(k => Object.assign(I[k], NP[k]));
@@ -420,9 +433,10 @@ $('main').onclick = async () => {
 async function upgrade() {
   if (!ST) return; const nx = tiers()[ST.me.tier + 1];
   if (!nx) { toast(tr('max')); return }
+  if (ST.me.parts_ready === false) { toast(tr('t_parts')); go('up'); return }  // 24 oct 2026 (3h59): every component first
   if (shown() < nx[1]) { toast(tr('t_need', { n: fmt2(nx[1]) })); return }
   const old = ST.me.tier; const r = await act('upgrade');
-  if (!r || !r.ok) { if (r && r.error === 'funds') toast(tr('t_need', { n: fmt2(r.cost) })); return }
+  if (!r || !r.ok) { if (r && r.error === 'funds') toast(tr('t_need', { n: fmt2(r.cost) })); if (r && r.error === 'parts') toast(tr('t_parts')); return }
   haptic('heavy'); _draw(DRAW[old] == null ? 5 : DRAW[old]);
   const m = $('svg');
   m.animate([{ transform: 'scale(1)', opacity: 1 }, { transform: 'scale(.6) translateY(30px)', opacity: 0 }], { duration: 250 }).onfinish = () => {
@@ -453,7 +467,7 @@ const PARTS = new Proxy([], { get: (t, k) => { const a = ((ST && ST.cfg.part_ord
 function partCost(p) { const c = ST.cfg.parts && ST.cfg.parts[p]; const l = ST.me[p] || 0; if (!c || l >= c.max) return null; return Math.round(c.base * Math.pow(c.mult, l) * 100) / 100 }
 const capped = p => (ST.me[p] || 0) >= ST.me.tier + 1;
 const unlocked = p => ST.me.tier >= ((ST.cfg.parts[p] || {}).unlock || 0);  // 24 oct 2026 (3h50): components unlock one by one with the machines
-function buyable(v) { if (!ST) return 0; let n = 0; const nx = tiers()[ST.me.tier + 1]; if (nx && v >= nx[1]) n++; PARTS.forEach(([p]) => { const c = partCost(p); if (c != null && unlocked(p) && !capped(p) && v >= c) n++ }); return n }
+function buyable(v) { if (!ST) return 0; let n = 0; const nx = tiers()[ST.me.tier + 1]; if (nx && ST.me.parts_ready !== false && v >= nx[1]) n++; PARTS.forEach(([p]) => { const c = partCost(p); if (c != null && unlocked(p) && !capped(p) && v >= c) n++ }); return n }
 async function buyPart(p) {
   const c = partCost(p); if (c == null) { toast(tr('max')); return }
   if (!unlocked(p)) return;
@@ -465,13 +479,13 @@ async function buyPart(p) {
 let lastBuild = '';
 function buildUp() {
   if (!ST) return; const cur = ST.me.tier, v = shown();
-  const key = JSON.stringify([cur, ST.me.cool, ST.me.oc, ST.me.bat, ST.me.gpu, ST.me.psu, ST.me.soft, buyable(v)]); if (key === lastBuild && $('upl').innerHTML) return; lastBuild = key;
+  const key = JSON.stringify([cur, ST.me.parts_ready, ST.me.cool, ST.me.oc, ST.me.bat, ST.me.gpu, ST.me.psu, ST.me.soft, buyable(v)]); if (key === lastBuild && $('upl').innerHTML) return; lastBuild = key;
   const pc = ST.cfg.parts || {};
   const nextLock = PARTS.filter(([p]) => pc[p] && !unlocked(p)).map(([p]) => pc[p].unlock).sort((a, b) => a - b)[0];
   const parts = PARTS.map(([p, ic]) => { const c = pc[p]; if (!c || !unlocked(p)) return ''; const l = ST.me[p] || 0, mx = c.max, cost = partCost(p), cap = cost != null && capped(p);
     const eff = p === 'bat' ? tr('e_bat', { n: c.h }) : tr('e_spd', { n: c.pct });
     return `<div class="it ${cost != null && !cap && v >= cost ? 'can' : ''}${cap ? ' lock' : ''}" data-p="${p}"><div class="r" style="font-size:22px">${ic}</div><div class="n">${esc(tr('p_' + p))}<span class="lv">${Array.from({ length: mx }, (_, i) => `<i class="${i < l ? 'f' : ''}"></i>`).join('')}</span><div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">${eff}</div></div><div class="p">${cost == null ? '✓' : cap ? '🔒 ' + esc(tr('t_capshort', { n: l + 1 })) : fmt2(cost)}</div></div>` }).join('');
-  $('upl').innerHTML = `<div class="ph">${tr('comps')}</div>` + parts + (nextLock != null ? `<div class="it lock"><div class="r" style="font-size:22px">🎁</div><div class="n w">${esc(tr('t_newpart', { n: nextLock + 1 }))}</div></div>` : '') + `<div class="ph">${tr('n_mach')}</div>` + tiers().slice(0, cur + 3).map((t, i) => `<div class="it ${i === cur ? 'cur' : i > cur + 1 ? 'lock' : ''}" data-i="${i}"><div class="r" style="font-size:22px">${i > cur + 1 ? '🔒' : EMO[i]}</div><div class="n">${esc(L.m[i])}<div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">⚡ ${fmt2(t[0])} / h</div></div><div class="p">${i <= cur ? (i === cur ? tr('cur') : '✓') : fmt2(t[1])}</div></div>`).join('') + (tiers().length > cur + 3 ? `<div class="it lock"><div class="r" style="font-size:22px">❓</div><div class="n w">${esc(tr('t_more', { n: tiers().length - cur - 3 }))}</div></div>` : '');
+  $('upl').innerHTML = `<div class="ph">${tr('comps')}</div>` + parts + (nextLock != null ? `<div class="it lock"><div class="r" style="font-size:22px">🎁</div><div class="n w">${esc(tr('t_newpart', { n: nextLock + 1 }))}</div></div>` : '') + `<div class="ph">${tr('n_mach')}</div>` + tiers().slice(0, cur + 3).map((t, i) => `<div class="it ${i === cur ? 'cur' : i > cur + 1 ? 'lock' : ''}" data-i="${i}"><div class="r" style="font-size:22px">${i > cur + 1 ? '🔒' : EMO[i]}</div><div class="n">${esc(L.m[i])}<div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">⚡ ${fmt2(t[0])} / h</div></div><div class="p">${i <= cur ? (i === cur ? tr('cur') : '✓') : i === cur + 1 && ST.me.parts_ready === false ? '🔧 ' + esc(tr('t_partsshort')) : fmt2(t[1])}</div></div>`).join('') + (tiers().length > cur + 3 ? `<div class="it lock"><div class="r" style="font-size:22px">❓</div><div class="n w">${esc(tr('t_more', { n: tiers().length - cur - 3 }))}</div></div>` : '');
   $('upl').querySelectorAll('.it').forEach(el => el.onclick = () => { if (el.dataset.p) buyPart(el.dataset.p); else if (+el.dataset.i === cur + 1) upgrade() });
 }
 const link = () => 'https://t.me/' + BOT + '?startapp=r' + (ST ? ST.me.id : '');
