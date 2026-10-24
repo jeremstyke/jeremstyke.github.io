@@ -1,3 +1,28 @@
+// 24 oct 2026 (Jeremy): print of the phone (screen, system, graphics chip...), the same for every Telegram account opened on that phone.
+// Added as ?jfp= to each game's API calls; the server only blocks a 3rd account with the SAME IP AND the SAME phone in a game.
+(function () {
+  if (window.JSFP) return;
+  var cs1 = document.currentScript;
+  if (((cs1 && cs1.dataset && cs1.dataset.from) || window.JER_FROM) === 'mct') return;  // MCT sends its own print
+  var p = [];
+  try {
+    var s = window.screen || {}, n = navigator, tw = window.Telegram && window.Telegram.WebApp;
+    p.push(n.userAgent || '', n.platform || '', Math.max(s.width || 0, s.height || 0) + 'x' + Math.min(s.width || 0, s.height || 0), s.colorDepth || '', window.devicePixelRatio || '',
+      n.hardwareConcurrency || '', n.deviceMemory || '', n.maxTouchPoints || '', (Intl.DateTimeFormat().resolvedOptions().timeZone) || '', (n.languages || [n.language]).join(','), (tw && tw.platform) || '');
+    try { var c = document.createElement('canvas').getContext('webgl'); var d = c && c.getExtension('WEBGL_debug_renderer_info'); if (c) p.push(d ? c.getParameter(d.UNMASKED_RENDERER_WEBGL) : c.getParameter(c.RENDERER), c.getParameter(c.MAX_TEXTURE_SIZE)); } catch (e) {}
+  } catch (e) {}
+  var str = p.join('|'), h1 = 0x811c9dc5, h2 = 0x01000193;
+  for (var i = 0; i < str.length; i++) { var k = str.charCodeAt(i); h1 = Math.imul(h1 ^ k, 16777619); h2 = Math.imul(h2 ^ k, 2246822519); }
+  window.JSFP = ((h1 >>> 0).toString(16) + (h2 >>> 0).toString(16)).slice(0, 16);
+  var of = window.fetch; if (!of) return;
+  window.fetch = function (u, o) {
+    try {
+      if (typeof u === 'string' && /txvrlvcxfnylnrpdrxtt\.supabase\.co\/functions\/v1\/|pote-ia-bot-en-production\.up\.railway\.app\/(?!mct)|^\/ds\//.test(u) && u.indexOf('jfp=') < 0)
+        u = u + (u.indexOf('?') < 0 ? '?' : '&') + 'jfp=' + window.JSFP;
+    } catch (e) {}
+    return of.call(window, u, o);
+  };
+})();
 // 24 oct 2026 (Jeremy): the same "Compte bloqué" screen in every game, current and future, because each of them loads this file.
 // The reason comes from the server (ban_reason_pub): dup = 3rd account on the same IP in a game, cheat, insults_cheat, insults.
 // Each game can also call window.JSBan() itself when its API answers 'banned'.
