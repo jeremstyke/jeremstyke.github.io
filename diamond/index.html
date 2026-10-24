@@ -142,6 +142,7 @@ a{color:var(--facet);font-weight:600;text-decoration:none}
     <div class="items" id="items"></div>
     <div class="card" style="margin-top:12px"><ul class="rules" id="rules"></ul></div>
     <div class="card"><b data-t="wallet"></b><div class="sub" style="margin:4px 0 0;font-size:14px" data-t="wallet_s"></div>
+      <button class="btn blue" id="wcon" style="margin-top:12px"></button>
       <input class="addr" id="addr" placeholder="UQ…" autocomplete="off" autocapitalize="off" spellcheck="false">
       <button class="btn" id="buy"></button><div class="msg" id="sMsg"></div></div>
     <p class="sub" style="text-align:center"><a href="https://jeremstyke.github.io/payouts/" id="proofs" data-t="proofs"></a></p>
@@ -186,6 +187,7 @@ const I = {
     e_addr: 'This is not a TON wallet address.', e_funds: 'Not enough 💎 yet.', e_shop_age: 'Your account is too new.', e_shop_taps: 'Not enough taps yet.', e_shop_week: 'One withdrawal per week.', e_off: 'The shop is closed for now.', e_other: 'Error, try again.',
     ok_order: 'Withdrawal sent: you will get the USDT within minutes.', ok_review: 'Withdrawal received: it will be checked, then paid.', last: (u, s) => 'Last withdrawal: $' + u + ' · ' + s,
     st: { pending: 'on its way', paying: 'on its way', paid: 'paid ✅', review: 'being checked', refused: 'refused' },
+    wcon: '🔗 Connect my wallet in 1 tap', wcon_ok: (a) => '✅ Wallet connected: ' + a, w_err: 'Could not open the wallet, paste your address below.', t_bot: '🤖 Auto-clicker detected: these taps do not count.', t_block: (m) => '🤖 Auto-clicker detected: taps blocked for ' + m + ' min.', t_cap: (n) => 'Daily limit reached (' + fmt(n) + ' taps). Come back tomorrow!',
     maint: 'Maintenance', maint_p: 'Tap the Diamond is being improved. Come back in a few minutes.', auth: 'Open Tap the Diamond from Telegram.', share_txt: '💎 I tap a diamond and get real USDT. Join me on Tap the Diamond:' },
   fr: { chest: 'Coffre gratuit', chest_ok: 'Ouvre-le', invite: 'Invite tes amis', invite_s: '10 % de leurs taps', shop: 'Boutique', shop_s: 'Échange tes 💎 contre de vrais USDT, envoyés automatiquement sur ton wallet TON.',
     to1: 'Vers ton premier 1 $', wallet: 'Ton wallet TON', wallet_s: 'L\'adresse qui recevra les USDT (Tonkeeper, Wallet Telegram...).', buy: (u) => 'Retirer ' + usd(u, 0) + ' en USDT',
@@ -199,6 +201,7 @@ const I = {
     e_addr: 'Ce n\'est pas une adresse de wallet TON.', e_funds: 'Pas encore assez de 💎.', e_shop_age: 'Ton compte est trop récent.', e_shop_taps: 'Pas encore assez de taps.', e_shop_week: 'Un retrait par semaine.', e_off: 'La boutique est fermée pour le moment.', e_other: 'Erreur, réessaie.',
     ok_order: 'Retrait envoyé : tu reçois les USDT dans quelques minutes.', ok_review: 'Retrait reçu : il sera vérifié, puis payé.', last: (u, s) => 'Dernier retrait : ' + u + ' $ · ' + s,
     st: { pending: 'en route', paying: 'en route', paid: 'payé ✅', review: 'en vérification', refused: 'refusé' },
+    wcon: '🔗 Connecter mon wallet en 1 clic', wcon_ok: (a) => '✅ Wallet connecté : ' + a, w_err: 'Impossible d\'ouvrir le wallet, colle ton adresse ci-dessous.', t_bot: '🤖 Auto-clicker détecté : ces taps ne comptent pas.', t_block: (m) => '🤖 Auto-clicker détecté : taps bloqués pendant ' + m + ' min.', t_cap: (n) => 'Limite du jour atteinte (' + fmt(n) + ' taps). Reviens demain !',
     maint: 'Maintenance', maint_p: 'Tap the Diamond est en cours d\'amélioration. Reviens dans quelques minutes.', auth: 'Ouvre Tap the Diamond depuis Telegram.', share_txt: '💎 Je tape sur un diamant et je gagne de vrais USDT. Rejoins-moi sur Tap the Diamond :' }
 };
 const LANG = /^fr/i.test((TW && TW.initDataUnsafe && TW.initDataUnsafe.user && TW.initDataUnsafe.user.language_code) || navigator.language || '') ? 'fr' : 'en';
@@ -253,6 +256,15 @@ async function api(action, body) {
 
 // ---------- taps: counted here, sent in batches, the server keeps the truth ----------
 let gems = 0, energy = 0, eMax = 1000, eRegen = 2, perTap = 1, pending = 0, sending = false, lastSync = Date.now();
+let marks = [], synth = false, blockedUntil = 0, capped = false;
+function robotic() {
+  if (synth) return true;
+  if (marks.length < 25) return false;
+  const iv = []; for (let i = 1; i < marks.length; i++) iv.push(marks[i][0] - marks[i - 1][0]);
+  const m = iv.reduce((a, b) => a + b, 0) / iv.length, sd = Math.sqrt(iv.reduce((a, b) => a + (b - m) * (b - m), 0) / iv.length);
+  const xs = marks.map((p) => p[1]), ys = marks.map((p) => p[2]), spread = Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys));
+  return sd < 4 || spread < 1;
+}
 function shown() { return gems + pending * perTap }
 function paintBal() {
   $('bal').innerHTML = gemMini + fmt(shown());
@@ -272,6 +284,11 @@ gemEl.addEventListener('pointerdown', (ev) => {
   ev.preventDefault();
   if (!ST) return;
   if (energy < 1) { haptic('rigid'); toast(tr('empty')); return }
+  if (blockedUntil > Date.now()) { haptic('rigid'); toast(tr('t_block', Math.ceil((blockedUntil - Date.now()) / 60000))); return }
+  if (capped) { toast(tr('t_cap', ST.cfg.day_cap || 20000)); return }
+  // 25 oct 2026 (Jeremy): anti auto-clicker: a human never taps at a perfectly regular rhythm, nor always on the very same pixel
+  if (ev.isTrusted === false) synth = true;
+  marks.push([performance.now(), ev.clientX, ev.clientY]); if (marks.length > 40) marks.shift();
   energy -= 1; pending += 1;
   haptic('light');
   gemEl.classList.add('hit'); setTimeout(() => gemEl.classList.remove('hit'), 90);
@@ -290,8 +307,16 @@ async function flush() {
   if (sending || pending < 1) return;
   sending = true; const n = pending; pending = 0;
   try {
-    const r = await api('tap', { n });
+    const bot = robotic(); if (bot) { marks = []; synth = false }
+    const r = await api('tap', bot ? { n, bot: true } : { n });
     if (r && r.ok) { gems = r.gems; if (r.took < n) energy = r.energy; lastSync = Date.now() }
+    else if (r && r.error) {
+      if ('gems' in r) gems = r.gems; if ('energy' in r) energy = r.energy;
+      if (r.error === 'bot') { haptic('rigid'); toast(tr('t_bot')) }
+      else if (r.error === 'bot_block') { blockedUntil = new Date(r.until).getTime(); haptic('rigid'); toast(tr('t_block', Math.ceil((blockedUntil - Date.now()) / 60000))) }
+      else if (r.error === 'day_cap') { capped = true; toast(tr('t_cap', ST.cfg.day_cap || 20000)) }
+      else pending += n;
+    }
     else if (r === null) {} else pending += n;
   } catch (e) { pending += n }
   sending = false; paintBal(); paintEnergy();
@@ -360,6 +385,27 @@ $('buy').onclick = async () => {
   if (r && r.ok) { ST = r.state; paint(); haptic('heavy'); msg.className = 'msg ok'; msg.textContent = r.review ? tr('ok_review') : tr('ok_order') }
   else if (r) { if (r.state) { ST = r.state; paint() } msg.className = 'msg ko'; msg.textContent = tr('e_' + r.error) || tr('e_other') }
   else paintShop();
+};
+// 25 oct 2026 (Jeremy): the wallet in 1 tap (TON Connect: Telegram Wallet, Tonkeeper...); pasting the address still works
+let TC = null;
+async function tcLoad() {
+  if (!window.TON_CONNECT_UI) await new Promise((ok, ko) => { const sc = document.createElement('script'); sc.src = 'https://unpkg.com/@tonconnect/ui@2.0.9/dist/tonconnect-ui.min.js'; sc.onload = ok; sc.onerror = ko; document.head.appendChild(sc) });
+  if (!TC) {
+    TC = new TON_CONNECT_UI.TonConnectUI({ manifestUrl: 'https://jeremstyke.github.io/diamond/tonconnect-manifest.json', actionsConfiguration: { twaReturnUrl: 'https://t.me/' + BOT + '/Play' } });
+    TC.onStatusChange((w) => { if (w && w.account && w.account.address) useWallet(w.account.address) });
+  }
+  return TC;
+}
+function useWallet(raw) {
+  let a = raw; try { a = TON_CONNECT_UI.toUserFriendlyAddress(raw) } catch (e) {}
+  $('addr').value = a; try { localStorage.setItem('td_addr', a) } catch (e) {}
+  const m = $('sMsg'); m.className = 'msg ok'; m.textContent = tr('wcon_ok', a.slice(0, 6) + '…' + a.slice(-4)); haptic('medium');
+}
+$('wcon').textContent = tr('wcon');
+$('wcon').onclick = async () => {
+  haptic();
+  try { const t = await tcLoad(); if (t.connected && t.account) { useWallet(t.account.address); return } await t.openModal() }
+  catch (e) { const m = $('sMsg'); m.className = 'msg ko'; m.textContent = tr('w_err') }
 };
 $('proofs').onclick = (e) => { e.preventDefault(); try { TW.openLink('https://jeremstyke.github.io/payouts/') } catch (x) { location.href = 'https://jeremstyke.github.io/payouts/' } };
 
