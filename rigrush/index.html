@@ -391,9 +391,10 @@ function render() {
   $('boB').classList.toggle('on', !!boosted);
   $('boS').textContent = boosted ? tr('bon', { m: Math.ceil((T(m.boost_end) - t0) / 6e4) }) : m.boost_left > 0 ? tr('bsub') + ' · ' + m.boost_left + '/' + 6 : tr('bnone');
   if (!$('pg-up').hidden) buildUp();
-  $('dp').textContent = fmt2(v) + ' RIGZ';
+  const ev = Number(m.earned || 0) + mined();  // 24 oct 2026 (4h09): the airdrop counts everything earned, upgrades never cost places
+  $('dp').textContent = fmt2(ev) + ' RIGZ';
   const tot = Math.max(1, Number(ST.total) + mined());
-  $('dsh').textContent = (v / tot * 100).toFixed(3).replace('.', LANG === 'en' ? '.' : ',') + ' %';
+  $('dsh').textContent = (ev / tot * 100).toFixed(3).replace('.', LANG === 'en' ? '.' : ',') + ' %';
   $('drk').textContent = '#' + fmt(m.rank); $('dmn').textContent = fmt(ST.players);
   $('wal').textContent = m.wallet ? m.wallet.slice(0, 6) + '…' + m.wallet.slice(-4) : tr('connect');
 }
