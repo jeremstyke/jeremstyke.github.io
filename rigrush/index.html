@@ -130,6 +130,7 @@ body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#0407
 .ph{font:400 16px 'Russo One',sans-serif;color:var(--cy);letter-spacing:.06em;text-transform:uppercase;margin:6px 2px 0}
 .lv{display:inline-flex;gap:3px;margin-left:6px;vertical-align:middle}.lv i{width:7px;height:7px;border-radius:2px;background:rgba(57,255,159,.15)}.lv i.f{background:var(--neo);box-shadow:0 0 6px var(--neo)}
 .it.can{border-color:var(--neo);box-shadow:0 0 14px rgba(57,255,159,.25)}
+.it .n .lv{display:flex;margin:4px 0 2px}.it .n.w{white-space:normal}
 .tr{display:flex;gap:8px;align-items:center;flex:none}
 .bell{position:relative;width:38px;height:38px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:18px;cursor:pointer}
 .bell b{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--pk);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;box-shadow:0 0 10px var(--pk);animation:ring 1.6s infinite}
@@ -268,6 +269,19 @@ const NM = {
  ar:{p_gpu:'بطاقات الرسوم',p_psu:'مزوّد الطاقة',p_soft:'برنامج التعدين',t_cap:'تحتاج أولًا جهازًا من المستوى {n}',t_capshort:'م. {n}',m:['حاسوب قديم','حاسوب ألعاب محمول','حاسوب مكتبي','حاسوب ألعاب RGB','منصة 1 GPU','منصة 3 GPU','منصة 6 GPU','منصة 12 GPU','رف ASIC','غرفة خوادم','مزرعة تعدين','مركز بيانات']},
  fa:{p_gpu:'کارت گرافیک',p_psu:'منبع تغذیه',p_soft:'نرم‌افزار ماینینگ',t_cap:'اول به دستگاه سطح {n} نیاز داری',t_capshort:'سطح {n}',m:['لپ‌تاپ قدیمی','لپ‌تاپ گیمینگ','کامپیوتر رومیزی','کامپیوتر گیمینگ RGB','ریگ ۱ GPU','ریگ ۳ GPU','ریگ ۶ GPU','ریگ ۱۲ GPU','رک ASIC','اتاق سرور','مزرعه ماینینگ','دیتاسنتر']},
 };
+const NU = {
+ en:{t_newpart:'New component at machine level {n}',t_more:'??? {n} more machines to discover'},
+ fr:{t_newpart:'Nouveau composant : machine niveau {n}',t_more:'??? encore {n} machines à découvrir'},
+ es:{t_newpart:'Nuevo componente con la máquina nivel {n}',t_more:'??? {n} máquinas más por descubrir'},
+ pt:{t_newpart:'Novo componente na máquina nível {n}',t_more:'??? mais {n} máquinas para descobrir'},
+ ru:{t_newpart:'Новый компонент на машине уровня {n}',t_more:'??? ещё {n} машин впереди'},
+ uk:{t_newpart:'Новий компонент на машині рівня {n}',t_more:'??? ще {n} машин попереду'},
+ tr:{t_newpart:'{n}. seviye makinede yeni bileşen',t_more:'??? keşfedilecek {n} makine daha'},
+ id:{t_newpart:'Komponen baru di mesin level {n}',t_more:'??? {n} mesin lagi untuk ditemukan'},
+ ar:{t_newpart:'مكوّن جديد عند جهاز المستوى {n}',t_more:'??? {n} أجهزة أخرى لاكتشافها'},
+ fa:{t_newpart:'قطعه جدید در دستگاه سطح {n}',t_more:'??? {n} دستگاه دیگر برای کشف'},
+};
+Object.keys(NU).forEach(k => Object.assign(I[k], NU[k]));
 Object.keys(NM).forEach(k => Object.assign(I[k], NM[k]));
 Object.keys(NP).forEach(k => Object.assign(I[k], NP[k]));
 // 24 oct 2026 (Jeremy): RIGZ divided by 144 (a laptop mines 1 RIGZ per 4 h); the friend bonus is now 1 RIGZ
@@ -438,9 +452,11 @@ const PICON = { cool: '❄️', psu: '🔌', soft: '💾', oc: '⚡', gpu: '🎴
 const PARTS = new Proxy([], { get: (t, k) => { const a = ((ST && ST.cfg.part_order) || ['cool', 'oc', 'bat']).map(p => [p, PICON[p] || '🛠️']); return typeof a[k] === 'function' ? a[k].bind(a) : a[k] } });
 function partCost(p) { const c = ST.cfg.parts && ST.cfg.parts[p]; const l = ST.me[p] || 0; if (!c || l >= c.max) return null; return Math.round(c.base * Math.pow(c.mult, l) * 100) / 100 }
 const capped = p => (ST.me[p] || 0) >= ST.me.tier + 1;
-function buyable(v) { if (!ST) return 0; let n = 0; const nx = tiers()[ST.me.tier + 1]; if (nx && v >= nx[1]) n++; PARTS.forEach(([p]) => { const c = partCost(p); if (c != null && !capped(p) && v >= c) n++ }); return n }
+const unlocked = p => ST.me.tier >= ((ST.cfg.parts[p] || {}).unlock || 0);  // 24 oct 2026 (3h50): components unlock one by one with the machines
+function buyable(v) { if (!ST) return 0; let n = 0; const nx = tiers()[ST.me.tier + 1]; if (nx && v >= nx[1]) n++; PARTS.forEach(([p]) => { const c = partCost(p); if (c != null && unlocked(p) && !capped(p) && v >= c) n++ }); return n }
 async function buyPart(p) {
   const c = partCost(p); if (c == null) { toast(tr('max')); return }
+  if (!unlocked(p)) return;
   if (capped(p)) { toast(tr('t_cap', { n: (ST.me[p] || 0) + 1 })); return }
   if (shown() < c) { toast(tr('t_need', { n: fmt2(c) })); return }
   const r = await act('part', { p }); if (!r || !r.ok) { if (r && r.error === 'funds') toast(tr('t_need', { n: fmt2(r.cost) })); if (r && r.error === 'cap') toast(tr('t_cap', { n: (r.need || 0) + 1 })); return }
@@ -451,10 +467,11 @@ function buildUp() {
   if (!ST) return; const cur = ST.me.tier, v = shown();
   const key = JSON.stringify([cur, ST.me.cool, ST.me.oc, ST.me.bat, ST.me.gpu, ST.me.psu, ST.me.soft, buyable(v)]); if (key === lastBuild && $('upl').innerHTML) return; lastBuild = key;
   const pc = ST.cfg.parts || {};
-  const parts = PARTS.map(([p, ic]) => { const c = pc[p]; if (!c) return ''; const l = ST.me[p] || 0, mx = c.max, cost = partCost(p), cap = cost != null && capped(p);
+  const nextLock = PARTS.filter(([p]) => pc[p] && !unlocked(p)).map(([p]) => pc[p].unlock).sort((a, b) => a - b)[0];
+  const parts = PARTS.map(([p, ic]) => { const c = pc[p]; if (!c || !unlocked(p)) return ''; const l = ST.me[p] || 0, mx = c.max, cost = partCost(p), cap = cost != null && capped(p);
     const eff = p === 'bat' ? tr('e_bat', { n: c.h }) : tr('e_spd', { n: c.pct });
     return `<div class="it ${cost != null && !cap && v >= cost ? 'can' : ''}${cap ? ' lock' : ''}" data-p="${p}"><div class="r" style="font-size:22px">${ic}</div><div class="n">${esc(tr('p_' + p))}<span class="lv">${Array.from({ length: mx }, (_, i) => `<i class="${i < l ? 'f' : ''}"></i>`).join('')}</span><div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">${eff}</div></div><div class="p">${cost == null ? '✓' : cap ? '🔒 ' + esc(tr('t_capshort', { n: l + 1 })) : fmt2(cost)}</div></div>` }).join('');
-  $('upl').innerHTML = `<div class="ph">${tr('comps')}</div>` + parts + `<div class="ph">${tr('n_mach')}</div>` + tiers().map((t, i) => `<div class="it ${i === cur ? 'cur' : i > cur + 1 ? 'lock' : ''}" data-i="${i}"><div class="r" style="font-size:22px">${i > cur + 1 ? '🔒' : EMO[i]}</div><div class="n">${esc(L.m[i])}<div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">⚡ ${fmt2(t[0])} / h</div></div><div class="p">${i <= cur ? (i === cur ? tr('cur') : '✓') : fmt2(t[1])}</div></div>`).join('');
+  $('upl').innerHTML = `<div class="ph">${tr('comps')}</div>` + parts + (nextLock != null ? `<div class="it lock"><div class="r" style="font-size:22px">🎁</div><div class="n w">${esc(tr('t_newpart', { n: nextLock + 1 }))}</div></div>` : '') + `<div class="ph">${tr('n_mach')}</div>` + tiers().slice(0, cur + 3).map((t, i) => `<div class="it ${i === cur ? 'cur' : i > cur + 1 ? 'lock' : ''}" data-i="${i}"><div class="r" style="font-size:22px">${i > cur + 1 ? '🔒' : EMO[i]}</div><div class="n">${esc(L.m[i])}<div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">⚡ ${fmt2(t[0])} / h</div></div><div class="p">${i <= cur ? (i === cur ? tr('cur') : '✓') : fmt2(t[1])}</div></div>`).join('') + (tiers().length > cur + 3 ? `<div class="it lock"><div class="r" style="font-size:22px">❓</div><div class="n w">${esc(tr('t_more', { n: tiers().length - cur - 3 }))}</div></div>` : '');
   $('upl').querySelectorAll('.it').forEach(el => el.onclick = () => { if (el.dataset.p) buyPart(el.dataset.p); else if (+el.dataset.i === cur + 1) upgrade() });
 }
 const link = () => 'https://t.me/' + BOT + '?startapp=r' + (ST ? ST.me.id : '');
