@@ -7,6 +7,8 @@
 <!-- 21 oct 2026 (Jeremy): Baton, by @jeremstyke. Mini app of @PassTheBatonBot: a mine that fills every 4 h and a baton passed between players.
      All the logic is on the server (Supabase function "baton" + SQL bt_*); this page only shows and asks. 10 languages, like Meme Coin Tycoon's players. -->
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<!-- 24 oct 2026: loaded early so the phone print goes with the first API call (anti multi-accounts) -->
+<script src="https://jeremstyke.github.io/games.js" data-from="bt"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Figtree:wght@400;600;800&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
@@ -1793,6 +1795,6 @@ function nudge() {
 })();
 })();
 </script>
-<script src="https://jeremstyke.github.io/games.js" data-from="bt"></script>
+<!-- games.js: loaded in <head> -->
 </body>
 </html>
