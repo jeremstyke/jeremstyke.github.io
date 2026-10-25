@@ -236,3 +236,51 @@
   new MutationObserver(() => { if (!q) q = requestAnimationFrame(() => { q = 0; card(); }); }).observe(document.body, { childList: true, subtree: true });
   card();
 })();
+
+// 25 oct 2026 (20h, Jeremy): Adsgram Task block task-56017 on the market, right under the daily missions.
+// The player does the partner task, Adsgram calls the reward URL (Supabase function mct-adreward) and he gets in-game cash
+// ($300, no daily cap: mct_ad_reward). Hidden when Adsgram has no task to show.
+(() => {
+  const BLOCK = 'task-56017';
+  const TT = {
+    fr: { h: '🤝 Mission partenaire', r: '+300 $', go: 'Go', claim: 'Récupérer', done: 'Fait ✅', ok: '💵 +300 $ ajoutés à ton cash !' },
+    id: { h: '🤝 Misi partner', r: '+$300', go: 'Mulai', claim: 'Klaim', done: 'Selesai ✅', ok: '💵 +$300 ditambahkan ke uangmu!' },
+    en: { h: '🤝 Partner mission', r: '+$300', go: 'Go', claim: 'Claim', done: 'Done ✅', ok: '💵 +$300 added to your cash!' },
+  };
+  const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TT[l] || TT.en; };
+  let sdk = null, gone = false;
+  const load = () => sdk || (sdk = new Promise((ok, ko) => {
+    if (window.Adsgram) return ok();
+    const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js';
+    s.onload = ok; s.onerror = () => { sdk = null; ko(new Error('load')); }; document.head.appendChild(s);
+  }));
+  function put() {
+    if (gone) return;
+    let v = ''; try { v = VIEW; } catch (e) {}
+    if (v !== 'market' || document.getElementById('agtask')) return;
+    const msn = document.getElementById('msn'); if (!msn || !msn.parentNode) return;
+    const T = L(), w = document.createElement('div');
+    w.id = 'agtask'; w.className = 'msn'; w.hidden = true;
+    w.style.cssText = 'padding:12px 14px';
+    w.innerHTML = '<b style="display:block;font-size:15px;margin-bottom:8px">' + T.h + '</b>'
+      + '<adsgram-task data-block-id="' + BLOCK + '" style="--adsgram-task-font-size:15px;--adsgram-task-icon-size:40px;--adsgram-task-button-width:84px;display:block">'
+      + '<span slot="reward" style="color:#3ddc97;font-weight:800">' + T.r + '</span>'
+      + '<div slot="button" style="background:#3ddc97;color:#06150e;font-weight:800;border-radius:10px;padding:8px 0;text-align:center">' + T.go + '</div>'
+      + '<div slot="claim" style="background:#ff9f43;color:#1a0d00;font-weight:800;border-radius:10px;padding:8px 0;text-align:center">' + T.claim + '</div>'
+      + '<div slot="done" style="color:#8fa197;font-weight:700;text-align:center">' + T.done + '</div>'
+      + '</adsgram-task>';
+    msn.parentNode.insertBefore(w, msn.nextSibling);
+    const el = w.querySelector('adsgram-task');
+    el.addEventListener('onBannerNotFound', () => { w.remove(); gone = true; });  // no task for this player: nothing shown until the app reopens
+    el.addEventListener('onError', () => { w.remove(); });
+    el.addEventListener('reward', () => {
+      try { haptic('ok'); } catch (e) {}
+      try { toast(T.ok); } catch (e) {}
+      setTimeout(() => { try { if (VIEW === 'market') market(); } catch (e) {} }, 2500);  // the cash comes from the server (reward URL)
+    });
+    load().then(() => { if (document.body.contains(w)) w.hidden = false; }).catch(() => w.remove());
+  }
+  let q = 0;
+  new MutationObserver(() => { if (!q) q = requestAnimationFrame(() => { q = 0; put(); }); }).observe(document.body, { childList: true, subtree: true });
+  put();
+})();
