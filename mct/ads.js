@@ -93,8 +93,9 @@
   }
   async function watch() {
     if (window.MCTPREM) return true; // 17 oct 2026: Premium players skip the videos (prem.js)
-    // 22 oct 2026 (18h56, Jeremy): every rewarded video of Meme Coin Tycoon goes through Adsgram (block 55242), no more Ads Galaxy
-    return (await agWatch()) === 'ok';
+    // 25 oct 2026 (3h45, Jeremy): Adsgram first (block 55242), Ads Galaxy (game 135) as backup when Adsgram has no video
+    const a = await agWatch(); if (a !== 'none') return a === 'ok';
+    try { await sdk(); const r = await window.showAdsGalaxy({ miniappId: AGX }); return !!(r && r.reward_eligible); } catch (e) { return false; }
   }
 
   // a small sheet from the bottom of the screen
