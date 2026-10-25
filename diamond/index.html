@@ -116,11 +116,21 @@ a{color:var(--facet);font-weight:600;text-decoration:none}
 .land .st{display:grid;gap:10px;text-align:left}
 .land .s{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 15px}
 .land .s i{font-style:normal;font-size:24px}.land .s b{display:block}.land .s span{color:var(--mut);font-size:14.5px}
+.faqb{position:absolute;top:max(10px,env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--fg);font:800 17px inherit;cursor:pointer;z-index:3}
+.sheet{position:fixed;inset:0;z-index:45;background:rgba(5,6,20,.6);display:flex;align-items:flex-end;justify-content:center}
+.sheet[hidden]{display:none}
+.sheet .in{width:100%;max-width:560px;max-height:86vh;overflow-y:auto;background:var(--velvet2);border-radius:22px 22px 0 0;padding:18px max(16px,env(safe-area-inset-left,0px)) calc(18px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.sheet h3{margin:0 0 10px;font-size:22px}
+.sheet details{border-bottom:1px solid var(--line);padding:12px 0}
+.sheet summary{font-weight:700;cursor:pointer;list-style:none}.sheet summary::-webkit-details-marker{display:none}
+.sheet summary::after{content:'+';float:right;color:var(--mut)}.sheet details[open] summary::after{content:'−'}
+.sheet details p{margin:8px 0 0;color:var(--mut);line-height:1.5}
 @media (prefers-reduced-motion:reduce){.spark,.sweep{animation:none}}
 </style>
 </head>
 <body>
 <div id="app">
+  <button class="faqb" id="faqB" aria-label="FAQ">?</button>
   <section class="view" id="vTap">
     <div class="bal"><div class="n" id="bal">0</div><div class="u" id="usd"></div>
       <div class="chips"><span class="chip" id="cStk" hidden></span><button class="chip go" id="cSub" hidden></button><span class="chip" id="cBon" hidden></span></div></div>
@@ -161,6 +171,7 @@ a{color:var(--facet);font-weight:600;text-decoration:none}
     <div class="card" id="topL"></div>
   </section>
 
+  <div class="sheet" id="faqS" hidden><div class="in"><h3>❓ FAQ</h3><div id="faqL"></div></div></div>
   <nav>
     <button data-v="vTap" class="on"><span>💎</span><b data-t="n_tap"></b></button>
     <button data-v="vShop"><span>🛒</span><b data-t="n_shop"></b></button>
@@ -428,6 +439,41 @@ async function loadTop() {
   const med = ['🥇', '🥈', '🥉'];
   r.top.forEach((p, i) => { const d = document.createElement('div'); d.className = 'li' + (p.me ? ' me' : ''); d.innerHTML = '<span class="r"></span><span class="nm"></span><b></b>'; d.children[0].textContent = med[i] || (i + 1); d.children[1].textContent = p.name; d.children[2].textContent = fmt(p.n); el.appendChild(d) });
 }
+
+// ---------- FAQ (25 oct 2026, Jeremy) : numbers taken from the live config ----------
+function faq() {
+  const c = ST ? ST.cfg : { e_max: 1000, e_regen_s: 2, shop_items: [[500000, 1], [2500000, 5]], shop_min_days: 7, shop_min_taps: 50000, shop_every_days: 7, chest_h: 4, streak_pct: 5, streak_max: 7, sub_pct: 10, ref_pct: 10, invite_bonus: 2000, invite_taps: 5000, day_cap: 20000 };
+  const it = c.shop_items[0], mins = Math.round(c.e_max * c.e_regen_s / 60), mx = c.streak_pct * c.streak_max, cap = c.day_cap || 20000;
+  return LANG === 'fr' ? [
+    ['Comment gagner des 💎 ?', 'Tape sur le diamant : chaque tap te rapporte des 💎 et utilise 1 ⚡. Ton énergie (' + fmt(c.e_max) + ' ⚡) se recharge toute seule en ' + mins + ' minutes environ.'],
+    ['Combien valent mes 💎 ?', fmt(it[0]) + ' 💎 = ' + usd(it[1], 0) + ' en USDT. La valeur de ton solde s\'affiche sous ton nombre de 💎.'],
+    ['Comment retirer mes USDT ?', 'Dans la Boutique : connecte ton wallet en 1 clic (Wallet Telegram, Tonkeeper...) ou colle ton adresse TON, puis choisis ' + usd(it[1], 0) + ' ou ' + usd(c.shop_items[1][1], 0) + '. Il faut un compte de plus de ' + c.shop_min_days + ' jours, ' + fmt(c.shop_min_taps) + ' taps au total, et un retrait tous les ' + c.shop_every_days + ' jours.'],
+    ['En combien de temps je reçois l\'argent ?', 'En général en quelques minutes, automatiquement, en USDT sur ton wallet TON. Certains retraits sont vérifiés à la main avant d\'être payés.'],
+    ['C\'est vraiment payé ?', 'Oui. Tous les paiements de mes jeux sont publics, avec leur transaction sur la blockchain : jeremstyke.github.io/payouts'],
+    ['Comment gagner plus ?', 'Joue chaque jour : +' + c.streak_pct + ' % par jour d\'affilée, jusqu\'à +' + mx + ' %. Abonne-toi à @jeremstyke : +' + c.sub_pct + ' %. Ouvre le coffre gratuit toutes les ' + c.chest_h + ' heures.'],
+    ['Comment marchent les amis ?', 'Partage ton lien (onglet Amis) : tu touches ' + c.ref_pct + ' % de tout ce que ton ami gagne en tapant, à vie. Quand il atteint ' + fmt(c.invite_taps) + ' taps, vous gagnez ' + fmt(c.invite_bonus) + ' 💎 chacun.'],
+    ['Il y a une limite ?', 'Oui : ' + fmt(cap) + ' taps par jour et par compte. Le compteur repart à minuit (heure de Paris).'],
+    ['Auto-clicker et multi-comptes ?', 'Interdits. Les taps trop réguliers ne comptent pas et peuvent bloquer les taps pendant 1 heure. Au-delà de 2 comptes sur le même téléphone et la même connexion, le compte est bloqué.'],
+    ['Une question ?', 'Écris-moi : t.me/jeremstyke?direct']
+  ] : [
+    ['How do I earn 💎?', 'Tap the diamond: every tap gives you 💎 and uses 1 ⚡. Your energy (' + fmt(c.e_max) + ' ⚡) refills by itself in about ' + mins + ' minutes.'],
+    ['What are my 💎 worth?', fmt(it[0]) + ' 💎 = ' + usd(it[1], 0) + ' in USDT. The value of your balance is shown under your 💎.'],
+    ['How do I withdraw my USDT?', 'In the Shop: connect your wallet in 1 tap (Telegram Wallet, Tonkeeper...) or paste your TON address, then choose ' + usd(it[1], 0) + ' or ' + usd(c.shop_items[1][1], 0) + '. You need an account older than ' + c.shop_min_days + ' days, ' + fmt(c.shop_min_taps) + ' taps in total, and one withdrawal every ' + c.shop_every_days + ' days.'],
+    ['How long until I get paid?', 'Usually a few minutes, automatically, in USDT to your TON wallet. Some withdrawals are checked by hand before being paid.'],
+    ['Is it really paid?', 'Yes. Every payout of my games is public, with its blockchain transaction: jeremstyke.github.io/payouts'],
+    ['How do I earn more?', 'Play every day: +' + c.streak_pct + ' % per day in a row, up to +' + mx + ' %. Follow @jeremstyke: +' + c.sub_pct + ' %. Open the free chest every ' + c.chest_h + ' hours.'],
+    ['How do friends work?', 'Share your link (Friends tab): you get ' + c.ref_pct + ' % of everything your friend earns by tapping, forever. When they reach ' + fmt(c.invite_taps) + ' taps, you both get ' + fmt(c.invite_bonus) + ' 💎.'],
+    ['Is there a limit?', 'Yes: ' + fmt(cap) + ' taps per day and per account. It resets at midnight (Paris time).'],
+    ['Auto-clickers and multiple accounts?', 'Not allowed. Taps that are too regular do not count and can block tapping for 1 hour. More than 2 accounts on the same phone and connection: the account is blocked.'],
+    ['A question?', 'Write to me: t.me/jeremstyke?direct']
+  ];
+}
+$('faqB').onclick = () => {
+  haptic(); const el = $('faqL'); el.innerHTML = '';
+  faq().forEach(([q, a]) => { const d = document.createElement('details'); d.innerHTML = '<summary></summary><p></p>'; d.firstChild.textContent = q; d.lastChild.textContent = a; el.appendChild(d) });
+  $('faqS').hidden = false;
+};
+$('faqS').onclick = (e) => { if (e.target === $('faqS')) $('faqS').hidden = true };
 
 // ---------- navigation ----------
 function go(v) {
