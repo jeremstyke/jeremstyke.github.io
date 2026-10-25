@@ -89,7 +89,7 @@
   }));
   async function agWatch() {
     try { await agSdk(); const r = await window.Adsgram.init({ blockId: '55242' }).show(); return r && r.done === false ? 'skip' : 'ok'; }
-    catch (e) { return (!e || e.state === 'load' || /no ad|no banner/i.test(String(e.description || ''))) ? 'none' : 'skip'; }  // 25 oct 2026 (11h30): 'none' (then Ads Galaxy) only when Adsgram had no video
+    catch (e) { return (!e || !('done' in Object(e)) || e.state === 'load' || /no ad|no banner/i.test(String(e.description || ''))) ? 'none' : 'skip'; }  // 25 oct 2026 (11h30): 'none' (then Ads Galaxy) only when Adsgram had no video
   }
   async function watch() {
     if (window.MCTPREM) return true; // 17 oct 2026: Premium players skip the videos (prem.js)
