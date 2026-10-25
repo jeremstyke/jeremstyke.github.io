@@ -342,7 +342,7 @@ function paint() {
   gems = m.gems; energy = m.energy; eMax = c.e_max; eRegen = c.e_regen_s; perTap = c.gem_tap * (1 + m.bonus / 100);
   paintBal(); paintEnergy();
   $('cStk').hidden = !(m.streak > 0); $('cStk').textContent = tr('streak', m.streak);
-  $('cBon').hidden = !(m.bonus > 0) || m.streak > 0; $('cBon').textContent = tr('bonus', m.bonus); if (m.streak > 0 && m.bonus > 0) $('cStk').textContent += '  ·  +' + m.bonus + ' %';
+  $('cBon').hidden = !(m.bonus > 0) || m.streak > 0; $('cBon').textContent = tr('bonus', m.bonus); if (m.streak > 0) $('cStk').textContent += '  ·  +' + Math.min(m.streak, c.streak_max) * c.streak_pct + ' %';  // 25 oct 2026: only the streak's share (the @jeremstyke +10 % has its own chip)
   // 25 oct 2026 (Jeremy): @jeremstyke always on the home screen: a button to join, or ✅ once subscribed
   $('cSub').hidden = false; $('cSub').textContent = m.sub ? tr('sub_ok', c.sub_pct) : tr('sub', c.sub_pct); $('cSub').classList.toggle('go', !m.sub);
   paintChest(); paintShop();
