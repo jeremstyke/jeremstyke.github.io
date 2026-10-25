@@ -694,7 +694,7 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
     // 25 oct 2026 (4h40, Jeremy): test, Jeremy sees it at every opening until 5h00 (Paris)
     var TEST = ((TWg.initDataUnsafe && TWg.initDataUnsafe.user && TWg.initDataUnsafe.user.id) === 7057960224) && now < Date.parse('2026-10-25T04:00:00Z');
     if (!TEST && !last) { save(); return; }            // first visit: no ad, the clock starts
-    if (!TEST && now - last < 3600000) return;         // at most once an hour
+    // 25 oct 2026 (22h51, Jeremy): at every opening, no time limit (still never on the first visit)
     save();
     var URL = 'https://www.instant-gaming.com/?igr=jeremymultigaming';
     var lc = String((TWg.initDataUnsafe && TWg.initDataUnsafe.user && TWg.initDataUnsafe.user.language_code) || navigator.language || 'en');
