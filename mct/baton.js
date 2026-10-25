@@ -31,7 +31,7 @@
           if (window.showAdsGalaxy) return run();
           const s = document.createElement('script'); s.src = 'https://app.adsgalaxy.online/sdk.js?id=135'; s.onload = run; document.head.appendChild(s);
         } catch (e) {} };
-        const go = () => { try { window.Adsgram.init({ blockId: 'int-55508' }).show().catch((e) => { if (!(e && e.done === false && e.error === false)) agx(); }); } catch (e) { agx(); } };
+        const go = () => { try { window.Adsgram.init({ blockId: 'int-55508' }).show().catch((e) => { if (!e || e.error !== false) agx(); });  // 25 oct 2026 (11h30): Ads Galaxy only when Adsgram really had no ad (an error), never after an Adsgram ad was shown } catch (e) { agx(); } };
         if (window.Adsgram) return go();
         if (!document.querySelector('script[src*="sad.adsgram.ai"]')) { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; document.head.appendChild(s); }
         let n = 0; const w = setInterval(() => { if (window.Adsgram) { clearInterval(w); go(); } else if (++n > 20) { clearInterval(w); agx(); } }, 300);
