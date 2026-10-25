@@ -25,10 +25,16 @@
     // 22 oct 2026 (18h45, Jeremy): at opening, when the Baton popup is not shown, an Adsgram interstitial (block int-55508). Never for Premium.
     function adInt() {
       try {
-        const go = () => { try { window.Adsgram.init({ blockId: 'int-55508' }).show().catch(() => {}); } catch (e) {} };
+        // 25 oct 2026 (3h45, Jeremy): when Adsgram has no ad, an Ads Galaxy video (game 135) takes over
+        const agx = () => { try {
+          const run = () => { try { window.showAdsGalaxy({ miniappId: 135 }).catch(() => {}); } catch (e) {} };
+          if (window.showAdsGalaxy) return run();
+          const s = document.createElement('script'); s.src = 'https://app.adsgalaxy.online/sdk.js?id=135'; s.onload = run; document.head.appendChild(s);
+        } catch (e) {} };
+        const go = () => { try { window.Adsgram.init({ blockId: 'int-55508' }).show().catch((e) => { if (!(e && e.done === false && e.error === false)) agx(); }); } catch (e) { agx(); } };
         if (window.Adsgram) return go();
         if (!document.querySelector('script[src*="sad.adsgram.ai"]')) { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; document.head.appendChild(s); }
-        let n = 0; const w = setInterval(() => { if (window.Adsgram) { clearInterval(w); go(); } else if (++n > 20) clearInterval(w); }, 300);
+        let n = 0; const w = setInterval(() => { if (window.Adsgram) { clearInterval(w); go(); } else if (++n > 20) { clearInterval(w); agx(); } }, 300);
       } catch (e) {}
     }
     // 22 oct 2026 (18h49, Jeremy): the interstitial comes after the first buy or sell of the session instead of at opening,
