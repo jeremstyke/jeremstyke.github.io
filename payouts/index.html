@@ -59,13 +59,13 @@ footer{color:var(--mut);font-size:13px;text-align:center}
 <script>
 const T = {
   en: { h1: 'Payout proofs', lead: 'Every payout sent to the players of my Telegram games, live from our database. Each line links to its transaction on the TON blockchain, so anyone can check it.',
-    paid: 'paid to players', n: 'payouts', wallets: 'different wallets', ver: 'checked on the blockchain', payer: 'All payouts are sent from this wallet:', seeall: 'See every outgoing payment on Tonscan ↗',
+    paid: 'paid to players', n: 'payouts', wallets: 'different wallets', ver: 'checked on the blockchain', payer: 'All payouts are sent from this wallet:', seeall: 'See every outgoing payment on the TON explorer ↗',
     all: 'All payouts', c_date: 'Date', c_app: 'App', c_amt: 'Amount', c_to: 'To wallet', c_tx: 'Transaction', view: 'View ↗', pend: 'being checked', more: 'Show more',
     ap: (n, u, f, l) => n + ' payouts · $' + u + ' · from ' + f + ' to ' + l,
     note: 'Wallets are shortened and no player names are shown, to protect privacy. A payout marked "being checked" was just sent: its transaction link appears within a few minutes.',
     q: 'Questions:', err: 'Could not load the data, please refresh.' },
   fr: { h1: 'Preuves de paiement', lead: 'Tous les paiements envoyés aux joueurs de mes jeux Telegram, en direct depuis notre base. Chaque ligne renvoie à sa transaction sur la blockchain TON : tout le monde peut vérifier.',
-    paid: 'payés aux joueurs', n: 'paiements', wallets: 'wallets différents', ver: 'vérifiés sur la blockchain', payer: 'Tous les paiements partent de ce wallet :', seeall: 'Voir tous les paiements sortants sur Tonscan ↗',
+    paid: 'payés aux joueurs', n: 'paiements', wallets: 'wallets différents', ver: 'vérifiés sur la blockchain', payer: 'Tous les paiements partent de ce wallet :', seeall: 'Voir tous les paiements sortants sur l\'explorateur TON ↗',
     all: 'Tous les paiements', c_date: 'Date', c_app: 'Jeu', c_amt: 'Montant', c_to: 'Wallet', c_tx: 'Transaction', view: 'Voir ↗', pend: 'en vérification', more: 'Voir plus',
     ap: (n, u, f, l) => n + ' paiements · ' + u + ' $ · du ' + f + ' au ' + l,
     note: 'Les wallets sont raccourcis et aucun nom de joueur n\'est affiché, pour protéger la vie privée. Un paiement « en vérification » vient d\'être envoyé : le lien de sa transaction apparaît en quelques minutes.',
@@ -90,11 +90,11 @@ function render() {
     .map(([a, b]) => '<div class="st"><b>' + esc(a) + '</b><small>' + esc(b) + '</small></div>').join('');
   const py = D.payers || [];
   $('payer').hidden = !py.length;
-  $('payer').innerHTML = '<div>' + esc(t.payer) + '</div>' + py.map((a) => '<code>' + esc(a) + '</code><a href="https://tonscan.org/address/' + encodeURIComponent(a) + '" target="_blank" rel="noopener">' + esc(t.seeall) + '</a>').join('');
+  $('payer').innerHTML = '<div>' + esc(t.payer) + '</div>' + py.map((a) => '<code>' + esc(a) + '</code><a href="https://explorer.toncoin.org/account?account=' + encodeURIComponent(a) + '" target="_blank" rel="noopener">' + esc(t.seeall) + '</a>').join('');
   $('apps').innerHTML = (D.apps || []).map((a) => '<div class="app"><h3>' + esc(a.app) + '</h3><p>' + esc(t.ap(a.n, num(a.usd, 2), day(a.first), day(a.last))) + '</p></div>').join('');
   const rows = (D.rows || []).slice(0, shown);
   $('rows').innerHTML = rows.map((r) => '<tr><td>' + esc(tm(r.at)) + '</td><td>' + esc(r.app) + '</td><td>' + esc(num(r.amt, r.cur === 'TON' ? 3 : 2) + ' ' + r.cur) + ' <span class="pend">($' + esc(num(r.usd, 2)) + ')</span></td><td class="m">' + esc(r.to) + '</td><td>'
-    + (r.tx ? '<a href="https://tonscan.org/tx/' + encodeURIComponent(b64u(r.tx)) + '" target="_blank" rel="noopener">' + esc(t.view) + '</a>' : '<span class="pend">' + esc(t.pend) + '</span>') + '</td></tr>').join('');
+    + (r.tx ? '<a href="https://actonscan.com/tx/' + encodeURIComponent(r.tx) + '?network=mainnet" target="_blank" rel="noopener">' + esc(t.view) + '</a>' : '<span class="pend">' + esc(t.pend) + '</span>') + '</td></tr>').join('');
   $('more').hidden = (D.rows || []).length <= shown; $('more').textContent = t.more;
 }
 document.querySelectorAll('.lang button').forEach((b) => b.onclick = () => { L = b.dataset.l; render(); });
