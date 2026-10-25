@@ -69,6 +69,7 @@ button.chip{cursor:pointer}
 .act .e{font-size:24px}.act small{display:block;color:var(--mut);font-weight:400;font-size:12.5px;margin-top:2px}
 .act.ready{border-color:rgba(245,199,106,.6);background:rgba(245,199,106,.1)}
 .act:disabled{opacity:.55}
+.proofs{display:block;text-align:center;margin-top:10px;font-size:14px;color:var(--usdt)}
 
 /* nav */
 nav{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:8px 0 max(10px,env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);margin:0 -4px}
@@ -142,6 +143,7 @@ a{color:var(--facet);font-weight:600;text-decoration:none}
         <button class="act" id="aChest"><span class="e">🎁</span><span><span data-t="chest"></span><small id="chT"></small></span></button>
         <button class="act" id="aInv"><span class="e">👥</span><span><span data-t="invite"></span><small data-t="invite_s"></small></span></button>
       </div>
+      <a href="https://jeremstyke.github.io/payouts/" class="proofs" id="proofs2" data-t="proofs_all"></a>
     </div>
   </section>
 
@@ -189,7 +191,7 @@ const I = {
   en: { chest: 'Free chest', chest_ok: 'Open it now', invite: 'Invite friends', invite_s: '10 % of their taps', shop: 'Shop', shop_s: 'Trade your 💎 for real USDT, sent automatically to your TON wallet.',
     to1: 'To your first $1', wallet: 'Your TON wallet', wallet_s: 'The address that will receive the USDT (Tonkeeper, Telegram Wallet...).', buy: (u) => 'Withdraw ' + usd(u, 0) + ' in USDT',
     r_age: (d, n) => 'Account older than ' + n + ' days (' + d + ' days now)', r_taps: (t, n) => fmt(n) + ' taps in total (' + fmt(t) + ' now)', r_week: (n) => 'One withdrawal every ' + n + ' days',
-    proofs: '✅ See all public payout proofs', friends: 'Friends', fr_s: (p, b, t) => 'You get ' + p + ' % of everything your friends tap, forever. +' + fmt(b) + ' 💎 for both of you when a friend reaches ' + fmt(t) + ' taps.',
+    proofs: '✅ See all public payout proofs', proofs_all: '✅ Payout proofs of all players', friends: 'Friends', fr_s: (p, b, t) => 'You get ' + p + ' % of everything your friends tap, forever. +' + fmt(b) + ' 💎 for both of you when a friend reaches ' + fmt(t) + ' taps.',
     fr_earned: 'Earned from friends', share: 'Invite a friend', copy: 'Copy my link', copied: 'Link copied', no_fr: 'No friends yet. Your link is above.',
     top: 'Top tappers', top_s: 'This week. A new week starts every Monday.', you: 'You', no_top: 'Nobody has tapped this week yet. Be the first.',
     n_tap: 'Tap', n_shop: 'Shop', n_fr: 'Friends', n_top: 'Top', full: 'Full', refill: (t) => 'Full in ' + t, empty: 'No energy: it refills by itself',
@@ -203,7 +205,7 @@ const I = {
   fr: { chest: 'Coffre gratuit', chest_ok: 'Ouvre-le', invite: 'Invite tes amis', invite_s: '10 % de leurs taps', shop: 'Boutique', shop_s: 'Échange tes 💎 contre de vrais USDT, envoyés automatiquement sur ton wallet TON.',
     to1: 'Vers ton premier 1 $', wallet: 'Ton wallet TON', wallet_s: 'L\'adresse qui recevra les USDT (Tonkeeper, Wallet Telegram...).', buy: (u) => 'Retirer ' + usd(u, 0) + ' en USDT',
     r_age: (d, n) => 'Compte de plus de ' + n + ' jours (' + d + ' pour l\'instant)', r_taps: (t, n) => fmt(n) + ' taps au total (' + fmt(t) + ' pour l\'instant)', r_week: (n) => 'Un retrait tous les ' + n + ' jours',
-    proofs: '✅ Voir toutes les preuves de paiement', friends: 'Amis', fr_s: (p, b, t) => 'Tu touches ' + p + ' % de tout ce que tapent tes amis, pour toujours. +' + fmt(b) + ' 💎 pour vous deux quand un ami atteint ' + fmt(t) + ' taps.',
+    proofs: '✅ Voir toutes les preuves de paiement', proofs_all: '✅ Preuves de paiement de tous les joueurs', friends: 'Amis', fr_s: (p, b, t) => 'Tu touches ' + p + ' % de tout ce que tapent tes amis, pour toujours. +' + fmt(b) + ' 💎 pour vous deux quand un ami atteint ' + fmt(t) + ' taps.',
     fr_earned: 'Gagné grâce à tes amis', share: 'Inviter un ami', copy: 'Copier mon lien', copied: 'Lien copié', no_fr: 'Pas encore d\'amis. Ton lien est juste au-dessus.',
     top: 'Meilleurs tapeurs', top_s: 'Cette semaine. Une nouvelle semaine commence chaque lundi.', you: 'Toi', no_top: 'Personne n\'a encore tapé cette semaine. Sois le premier.',
     n_tap: 'Taper', n_shop: 'Boutique', n_fr: 'Amis', n_top: 'Top', full: 'Plein', refill: (t) => 'Plein dans ' + t, empty: 'Plus d\'énergie : elle se recharge toute seule',
@@ -419,7 +421,7 @@ $('wcon').onclick = async () => {
   try { const t = await tcLoad(); if (t.connected && t.account) { useWallet(t.account.address); return } await t.openModal() }
   catch (e) { const m = $('sMsg'); m.className = 'msg ko'; m.textContent = tr('w_err') }
 };
-$('proofs').onclick = (e) => { e.preventDefault(); try { TW.openLink('https://jeremstyke.github.io/payouts/') } catch (x) { location.href = 'https://jeremstyke.github.io/payouts/' } };
+$('proofs').onclick = $('proofs2').onclick = (e) => { e.preventDefault(); haptic(); try { TW.openLink('https://jeremstyke.github.io/payouts/') } catch (x) { location.href = 'https://jeremstyke.github.io/payouts/' } };
 
 // ---------- friends ----------
 const link = () => 'https://t.me/' + BOT + '/Play?startapp=r' + (ST ? ST.me.id : '');
@@ -487,8 +489,8 @@ document.querySelectorAll('nav button').forEach((b) => b.onclick = () => go(b.da
 // ---------- outside Telegram: what the game is, and a button to open it there ----------
 function landing() {
   const fr = LANG === 'fr';
-  const S = fr ? [['👆', 'Tape sur le diamant', 'Chaque tap te rapporte des 💎. Ton énergie se recharge toute seule.'], ['🛒', 'Échange contre des USDT', '500 000 💎 = 1 $ en USDT, envoyés automatiquement sur ton wallet TON.'], ['🔥', 'Reviens chaque jour', 'Un coffre gratuit toutes les 4 heures et jusqu\'à +35 % avec ta série.'], ['👥', 'Invite tes amis', '10 % de tout ce qu\'ils tapent, pour toujours.']]
-    : [['👆', 'Tap the diamond', 'Every tap gives you 💎. Your energy refills by itself.'], ['🛒', 'Trade for USDT', '500,000 💎 = $1 in USDT, sent automatically to your TON wallet.'], ['🔥', 'Come back every day', 'A free chest every 4 hours and up to +35 % with your streak.'], ['👥', 'Invite friends', '10 % of everything they tap, forever.']];
+  const S = fr ? [['👆', 'Tape sur le diamant', 'Chaque tap te rapporte des 💎. Ton énergie se recharge toute seule.'], ['🛒', 'Échange contre des USDT', '500 000 💎 = 1 $ en USDT, envoyés automatiquement sur ton wallet TON.'], ['🔥', 'Reviens chaque jour', 'Un coffre gratuit toutes les 4 heures et jusqu\'à +20 % avec ta série.'], ['👥', 'Invite tes amis', '10 % de tout ce qu\'ils tapent, pour toujours.']]
+    : [['👆', 'Tap the diamond', 'Every tap gives you 💎. Your energy refills by itself.'], ['🛒', 'Trade for USDT', '500,000 💎 = $1 in USDT, sent automatically to your TON wallet.'], ['🔥', 'Come back every day', 'A free chest every 4 hours and up to +20 % with your streak.'], ['👥', 'Invite friends', '10 % of everything they tap, forever.']];
   const d = document.createElement('div'); d.className = 'land';
   d.innerHTML = '<div class="in"><h1>Tap the Diamond</h1><div class="g">' + gemSVG('l') + '</div><p></p><a class="btn blue" href="https://t.me/' + BOT + '/Play?startapp=src_web"></a><div class="st"></div><p><a href="https://jeremstyke.github.io/payouts/"></a></p><p>by <a href="https://t.me/jeremstyke">@jeremstyke</a></p></div>';
   d.querySelector('p').textContent = fr ? 'Le jeu de tap dans Telegram où tes 💎 deviennent de vrais USDT.' : 'The tap game inside Telegram where your 💎 become real USDT.';
