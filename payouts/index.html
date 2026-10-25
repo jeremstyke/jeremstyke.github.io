@@ -73,6 +73,8 @@ const T = {
 };
 let L = /^fr/i.test(navigator.language || '') ? 'fr' : 'en', D = null, shown = 50;
 const $ = (id) => document.getElementById(id);
+// 25 oct 2026: Tonscan shows a transaction by its hash in base64url (we store it in hex)
+const b64u = (h) => { try { return btoa(String(h).match(/../g).map((x) => String.fromCharCode(parseInt(x, 16))).join('')).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); } catch (e) { return h; } };
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const day = (d) => new Date(d).toLocaleDateString(L === 'fr' ? 'fr-FR' : 'en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 const tm = (d) => new Date(d).toLocaleString(L === 'fr' ? 'fr-FR' : 'en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
@@ -92,7 +94,7 @@ function render() {
   $('apps').innerHTML = (D.apps || []).map((a) => '<div class="app"><h3>' + esc(a.app) + '</h3><p>' + esc(t.ap(a.n, num(a.usd, 2), day(a.first), day(a.last))) + '</p></div>').join('');
   const rows = (D.rows || []).slice(0, shown);
   $('rows').innerHTML = rows.map((r) => '<tr><td>' + esc(tm(r.at)) + '</td><td>' + esc(r.app) + '</td><td>' + esc(num(r.amt, r.cur === 'TON' ? 3 : 2) + ' ' + r.cur) + ' <span class="pend">($' + esc(num(r.usd, 2)) + ')</span></td><td class="m">' + esc(r.to) + '</td><td>'
-    + (r.tx ? '<a href="https://tonscan.org/tx/' + encodeURIComponent(r.tx) + '" target="_blank" rel="noopener">' + esc(t.view) + '</a>' : '<span class="pend">' + esc(t.pend) + '</span>') + '</td></tr>').join('');
+    + (r.tx ? '<a href="https://tonscan.org/tx/' + encodeURIComponent(b64u(r.tx)) + '" target="_blank" rel="noopener">' + esc(t.view) + '</a>' : '<span class="pend">' + esc(t.pend) + '</span>') + '</td></tr>').join('');
   $('more').hidden = (D.rows || []).length <= shown; $('more').textContent = t.more;
 }
 document.querySelectorAll('.lang button').forEach((b) => b.onclick = () => { L = b.dataset.l; render(); });
