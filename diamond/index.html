@@ -182,7 +182,7 @@ const I = {
     fr_earned: 'Earned from friends', share: 'Invite a friend', copy: 'Copy my link', copied: 'Link copied', no_fr: 'No friends yet. Your link is above.',
     top: 'Top tappers', top_s: 'This week. A new week starts every Monday.', you: 'You', no_top: 'Nobody has tapped this week yet. Be the first.',
     n_tap: 'Tap', n_shop: 'Shop', n_fr: 'Friends', n_top: 'Top', full: 'Full', refill: (t) => 'Full in ' + t, empty: 'No energy: it refills by itself',
-    streak: (d) => '🔥 ' + d + (d > 1 ? ' days' : ' day'), bonus: (p) => '+' + p + ' % per tap', sub: (p) => '📢 @jeremstyke +' + p + ' %',
+    streak: (d) => '🔥 ' + d + (d > 1 ? ' days' : ' day'), bonus: (p) => '+' + p + ' % per tap', sub: (p) => '📢 @jeremstyke +' + p + ' %', sub_ok: (p) => '✅ @jeremstyke +' + p + ' %',
     t_chest: (n) => '🎁 +' + fmt(n) + ' 💎', t_sub_ok: '✅ +10 % unlocked', t_sub_no: 'Follow @jeremstyke first, then come back',
     e_addr: 'This is not a TON wallet address.', e_funds: 'Not enough 💎 yet.', e_shop_age: 'Your account is too new.', e_shop_taps: 'Not enough taps yet.', e_shop_week: 'One withdrawal per week.', e_off: 'The shop is closed for now.', e_other: 'Error, try again.',
     ok_order: 'Withdrawal sent: you will get the USDT within minutes.', ok_review: 'Withdrawal received: it will be checked, then paid.', last: (u, s) => 'Last withdrawal: $' + u + ' · ' + s,
@@ -196,7 +196,7 @@ const I = {
     fr_earned: 'Gagné grâce à tes amis', share: 'Inviter un ami', copy: 'Copier mon lien', copied: 'Lien copié', no_fr: 'Pas encore d\'amis. Ton lien est juste au-dessus.',
     top: 'Meilleurs tapeurs', top_s: 'Cette semaine. Une nouvelle semaine commence chaque lundi.', you: 'Toi', no_top: 'Personne n\'a encore tapé cette semaine. Sois le premier.',
     n_tap: 'Taper', n_shop: 'Boutique', n_fr: 'Amis', n_top: 'Top', full: 'Plein', refill: (t) => 'Plein dans ' + t, empty: 'Plus d\'énergie : elle se recharge toute seule',
-    streak: (d) => '🔥 ' + d + (d > 1 ? ' jours' : ' jour'), bonus: (p) => '+' + p + ' % par tap', sub: (p) => '📢 @jeremstyke +' + p + ' %',
+    streak: (d) => '🔥 ' + d + (d > 1 ? ' jours' : ' jour'), bonus: (p) => '+' + p + ' % par tap', sub: (p) => '📢 @jeremstyke +' + p + ' %', sub_ok: (p) => '✅ @jeremstyke +' + p + ' %',
     t_chest: (n) => '🎁 +' + fmt(n) + ' 💎', t_sub_ok: '✅ +10 % activé', t_sub_no: 'Abonne-toi d\'abord à @jeremstyke, puis reviens',
     e_addr: 'Ce n\'est pas une adresse de wallet TON.', e_funds: 'Pas encore assez de 💎.', e_shop_age: 'Ton compte est trop récent.', e_shop_taps: 'Pas encore assez de taps.', e_shop_week: 'Un retrait par semaine.', e_off: 'La boutique est fermée pour le moment.', e_other: 'Erreur, réessaie.',
     ok_order: 'Retrait envoyé : tu reçois les USDT dans quelques minutes.', ok_review: 'Retrait reçu : il sera vérifié, puis payé.', last: (u, s) => 'Dernier retrait : ' + u + ' $ · ' + s,
@@ -332,7 +332,8 @@ function paint() {
   paintBal(); paintEnergy();
   $('cStk').hidden = !(m.streak > 0); $('cStk').textContent = tr('streak', m.streak);
   $('cBon').hidden = !(m.bonus > 0) || m.streak > 0; $('cBon').textContent = tr('bonus', m.bonus); if (m.streak > 0 && m.bonus > 0) $('cStk').textContent += '  ·  +' + m.bonus + ' %';
-  $('cSub').hidden = !!m.sub; $('cSub').textContent = tr('sub', c.sub_pct);
+  // 25 oct 2026 (Jeremy): @jeremstyke always on the home screen: a button to join, or ✅ once subscribed
+  $('cSub').hidden = false; $('cSub').textContent = m.sub ? tr('sub_ok', c.sub_pct) : tr('sub', c.sub_pct); $('cSub').classList.toggle('go', !m.sub);
   paintChest(); paintShop();
   $('frS').textContent = tr('fr_s', c.ref_pct, c.invite_bonus, c.invite_taps); $('frG').innerHTML = gemMini.replace('<svg', '<svg style="width:22px;height:22px;vertical-align:-3px;margin-right:6px"') + fmt(m.ref_gems);
   $('myR').textContent = m.week_taps > 0 ? '#' + m.rank : '-'; $('myW').textContent = fmt(m.week_taps);
@@ -353,7 +354,7 @@ $('aChest').onclick = async () => {
 
 // ---------- @jeremstyke +10 % ----------
 let subWait = 0;
-$('cSub').onclick = () => { haptic(); subWait = Date.now(); try { TW.openTelegramLink('https://t.me/jeremstyke') } catch (e) { window.open('https://t.me/jeremstyke', '_blank') } };
+$('cSub').onclick = () => { haptic(); if (ST && ST.me.sub) { toast(tr('t_sub_ok')); return } subWait = Date.now(); try { TW.openTelegramLink('https://t.me/jeremstyke') } catch (e) { window.open('https://t.me/jeremstyke', '_blank') } };
 const subBack = async () => { if (subWait && Date.now() - subWait > 1500) { subWait = 0; const was = ST && ST.me.sub; const r = await api('sub'); if (r && r.ok) { ST = r; paint(); if (r.me.sub && !was) { haptic('heavy'); toast(tr('t_sub_ok')) } else if (!r.me.sub) toast(tr('t_sub_no')) } } };
 document.addEventListener('visibilitychange', () => { if (!document.hidden) setTimeout(subBack, 600) });
 try { TW.onEvent('activated', () => setTimeout(subBack, 600)) } catch (e) {}
@@ -459,6 +460,8 @@ else (async () => {
   if (!r) return;
   if (!r.ok) { cover('💎', 'Tap the Diamond', tr('auth')); return }
   ST = r; paint();
+  // 25 oct 2026 (Jeremy): players who open the game from a link never started the bot: ask once to let it write to them (payouts, friends)
+  try { const u = TW.initDataUnsafe && TW.initDataUnsafe.user; if (u && !u.allows_write_to_pm && TW.requestWriteAccess) setTimeout(() => TW.requestWriteAccess(), 1200) } catch (e) {}
   const sp = (TW.initDataUnsafe && TW.initDataUnsafe.start_param) || '';
   if (sp === 'friends') go('vFr'); else if (sp === 'shop') go('vShop');
 })();
