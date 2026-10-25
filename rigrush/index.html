@@ -534,53 +534,79 @@ const sw = (k, v) => String((SW[LANG] || SW.en)[k] || SW.en[k]).replace(/\{(\w)\
 document.querySelectorAll('[data-t="drop_p"]').forEach((e) => { e.textContent = sw('drop'); });
 setTimeout(() => { try { const fq = FAQ[LANG] || FAQ.en; const i = fq.findIndex((x) => /airdrop/i.test(x[0])); const it = [sw('fq'), sw('drop')]; if (i >= 0) fq.splice(i, 1, it); else fq.push(it); } catch (e) {} }, 0);  // FAQ is declared further down
 const BT_URL = 'https://t.me/PassTheBatonBot/play?startapp=src_rrswap';
+// 26 oct 2026 (0h15, Jeremy): Rig Rush is now only about earning $BATON: the Airdrop tab becomes the Exchange tab,
+// and the daily exchange limit grows with the machine (2,000 $BATON at level 1, +1,000 per level).
+const SW2 = {
+  en: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "Exchange {n} RIGZ → {b} $MCT", okm: "🔄 +{b} $MCT added on Meme Coin Tycoon!", nomct: "Open Meme Coin Tycoon once first, then come back", openm: "🚀 Open Meme Coin Tycoon", pm: "$BATON: cashed out in USDT on Pass The Baton. $MCT: the official coin of Meme Coin Tycoon, my trading game.", nav: 'Exchange', chip: '🔄 $BATON', capl: 'Your daily limit (machine {m})', next: 'Next machine: {n} $BATON a day', maxl: 'Top machine reached 🏆', why: 'A better machine mines faster AND raises your daily exchange limit.' },
+  fr: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "Échanger {n} RIGZ → {b} $MCT", okm: "🔄 +{b} $MCT ajoutés sur Meme Coin Tycoon !", nomct: "Ouvre d’abord Meme Coin Tycoon une fois, puis reviens", openm: "🚀 Ouvrir Meme Coin Tycoon", pm: "$BATON : se retirent en USDT sur Pass The Baton. $MCT : le coin officiel de Meme Coin Tycoon, mon jeu de trading.", nav: 'Échanger', chip: '🔄 $BATON', capl: 'Ta limite par jour (machine {m})', next: 'Machine suivante : {n} $BATON par jour', maxl: 'Meilleure machine atteinte 🏆', why: 'Une meilleure machine mine plus vite ET augmente ta limite d’échange par jour.' },
+  es: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "Cambiar {n} RIGZ → {b} $MCT", okm: "🔄 ¡+{b} $MCT añadidos en Meme Coin Tycoon!", nomct: "Abre Meme Coin Tycoon una vez y vuelve", openm: "🚀 Abrir Meme Coin Tycoon", pm: "$BATON: se retiran en USDT en Pass The Baton. $MCT: la moneda oficial de Meme Coin Tycoon, mi juego de trading.", nav: 'Cambiar', chip: '🔄 $BATON', capl: 'Tu límite diario (máquina {m})', next: 'Siguiente máquina: {n} $BATON al día', maxl: 'Mejor máquina alcanzada 🏆', why: 'Una máquina mejor mina más rápido Y sube tu límite diario de cambio.' },
+  pt: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "Trocar {n} RIGZ → {b} $MCT", okm: "🔄 +{b} $MCT adicionados no Meme Coin Tycoon!", nomct: "Abra o Meme Coin Tycoon uma vez e volte", openm: "🚀 Abrir Meme Coin Tycoon", pm: "$BATON: sacados em USDT no Pass The Baton. $MCT: a moeda oficial do Meme Coin Tycoon, meu jogo de trading.", nav: 'Trocar', chip: '🔄 $BATON', capl: 'Seu limite diário (máquina {m})', next: 'Próxima máquina: {n} $BATON por dia', maxl: 'Melhor máquina alcançada 🏆', why: 'Uma máquina melhor minera mais rápido E aumenta seu limite diário de troca.' },
+  ru: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "Обменять {n} RIGZ → {b} $MCT", okm: "🔄 +{b} $MCT зачислены в Meme Coin Tycoon!", nomct: "Сначала один раз открой Meme Coin Tycoon и вернись", openm: "🚀 Открыть Meme Coin Tycoon", pm: "$BATON выводятся в USDT в Pass The Baton. $MCT - официальная монета Meme Coin Tycoon, моей трейдинг-игры.", nav: 'Обмен', chip: '🔄 $BATON', capl: 'Твой лимит в день (машина {m})', next: 'Следующая машина: {n} $BATON в день', maxl: 'Лучшая машина 🏆', why: 'Машина лучше майнит быстрее И повышает дневной лимит обмена.' },
+  uk: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "Обміняти {n} RIGZ → {b} $MCT", okm: "🔄 +{b} $MCT зараховано в Meme Coin Tycoon!", nomct: "Спочатку один раз відкрий Meme Coin Tycoon і повернись", openm: "🚀 Відкрити Meme Coin Tycoon", pm: "$BATON виводяться в USDT у Pass The Baton. $MCT - офіційна монета Meme Coin Tycoon, моєї трейдинг-гри.", nav: 'Обмін', chip: '🔄 $BATON', capl: 'Твій ліміт на день (машина {m})', next: 'Наступна машина: {n} $BATON на день', maxl: 'Найкраща машина 🏆', why: 'Краща машина майнить швидше І підвищує денний ліміт обміну.' },
+  tr: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "{n} RIGZ → {b} $MCT takas et", okm: "🔄 Meme Coin Tycoon'a +{b} $MCT eklendi!", nomct: "Önce Meme Coin Tycoon'u bir kez aç, sonra geri gel", openm: "🚀 Meme Coin Tycoon'u aç", pm: "$BATON: Pass The Baton'da USDT olarak çekilir. $MCT: trading oyunum Meme Coin Tycoon'un resmi coini.", nav: 'Takas', chip: '🔄 $BATON', capl: 'Günlük limitin (makine {m})', next: 'Sonraki makine: günde {n} $BATON', maxl: 'En iyi makineye ulaştın 🏆', why: 'Daha iyi bir makine daha hızlı kazar VE günlük takas limitini artırır.' },
+  id: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "Tukar {n} RIGZ → {b} $MCT", okm: "🔄 +{b} $MCT ditambahkan di Meme Coin Tycoon!", nomct: "Buka Meme Coin Tycoon sekali dulu, lalu kembali", openm: "🚀 Buka Meme Coin Tycoon", pm: "$BATON: ditarik jadi USDT di Pass The Baton. $MCT: koin resmi Meme Coin Tycoon, game tradingku.", nav: 'Tukar', chip: '🔄 $BATON', capl: 'Batas harianmu (mesin {m})', next: 'Mesin berikutnya: {n} $BATON per hari', maxl: 'Mesin terbaik tercapai 🏆', why: 'Mesin yang lebih baik menambang lebih cepat DAN menaikkan batas tukar harianmu.' },
+  ar: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "استبدل {n} RIGZ ← {b} $MCT", okm: "🔄 تمت إضافة {b} $MCT في Meme Coin Tycoon!", nomct: "افتح Meme Coin Tycoon مرة أولًا ثم عد", openm: "🚀 افتح Meme Coin Tycoon", pm: "$BATON: تُسحب بعملة USDT في Pass The Baton. ‏$MCT: العملة الرسمية للعبة التداول Meme Coin Tycoon.", nav: 'استبدال', chip: '🔄 $BATON', capl: 'حدك اليومي (الجهاز {m})', next: 'الجهاز التالي: {n} $BATON يوميًا', maxl: 'وصلت لأفضل جهاز 🏆', why: 'جهاز أفضل يعدّن أسرع ويرفع حد الاستبدال اليومي.' },
+  fa: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "تبدیل {n} RIGZ ← {b} $MCT", okm: "🔄 {b} $MCT به Meme Coin Tycoon اضافه شد!", nomct: "اول یک بار Meme Coin Tycoon را باز کن، بعد برگرد", openm: "🚀 باز کردن Meme Coin Tycoon", pm: "$BATON: در Pass The Baton به USDT برداشت می‌شود. $MCT: کوین رسمی Meme Coin Tycoon، بازی ترید من.", nav: 'تبدیل', chip: '🔄 $BATON', capl: 'سقف روزانه تو (دستگاه {m})', next: 'دستگاه بعدی: روزانه {n} $BATON', maxl: 'به بهترین دستگاه رسیدی 🏆', why: 'دستگاه بهتر سریع‌تر استخراج می‌کند و سقف تبدیل روزانه را هم بالا می‌برد.' },
+};
+Object.keys(SW2).forEach((k) => Object.assign(SW[k], SW2[k], { h: '🔄 RIGZ → $BATON · $MCT' }));
 (function swapInit() {
+  // the card on the mining screen leads to the Exchange tab
   const row = document.querySelector('#pg-mine .row') || document.querySelector('.row'); if (!row) return;
   const c = document.createElement('div'); c.className = 'mini sw'; c.id = 'swB'; c.style.gridColumn = '1 / -1'; c.hidden = true;
   c.innerHTML = '<div class="ic">🔄</div><div style="min-width:0"><div class="t" id="swT"></div><div class="s" id="swS"></div></div>';
   row.appendChild(c);
   const st = document.createElement('style');
-  st.textContent = '.mini.sw .ic{background:rgba(47,141,255,.18)}.mini.sw.can{border-color:#2f8dff;box-shadow:0 0 16px rgba(47,141,255,.35)}#swSh .amt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}#swSh .amt button{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:12px;padding:10px 0;font:800 14px inherit;cursor:pointer}#swSh .amt button.on{border-color:#2f8dff;color:#7cb8ff}#swSh .note{color:var(--mut);font-size:13px;margin:6px 0}#swSh .go2{background:linear-gradient(180deg,#7cb8ff,#2f8dff);color:#fff;box-shadow:0 5px 0 #1a5bb0}';
+  st.textContent = '.mini.sw .ic{background:rgba(47,141,255,.18)}.mini.sw.can{border-color:#2f8dff;box-shadow:0 0 16px rgba(47,141,255,.35)}#swPg .amt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}#swPg .amt button{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:12px;padding:10px 0;font:800 14px inherit;cursor:pointer}#swPg .amt button.on{border-color:#2f8dff;color:#7cb8ff}#swPg .note{color:var(--mut);font-size:13px;margin:4px 0}#pg-drop{overflow-y:auto;padding-bottom:8px}#swPg .go2{background:linear-gradient(180deg,#7cb8ff,#2f8dff);color:#fff;box-shadow:0 5px 0 #1a5bb0}';
   document.head.appendChild(st);
-  const sh = document.createElement('div'); sh.className = 'sheet'; sh.id = 'swSh'; sh.hidden = true;
-  sh.innerHTML = '<div><h2 style="margin-top:0" id="swH"></h2><div class="note" id="swP"></div><div class="note" id="swC"></div><div class="note" id="swBal" style="color:var(--gold);font-weight:800"></div><div class="note" id="swL"></div><div class="amt" id="swA"></div><button class="btn go2" id="swGo"></button><button class="btn" id="swOpen" style="margin-top:10px;background:var(--card);color:var(--fg);box-shadow:none;font-size:16px"></button></div>';
-  document.body.appendChild(sh);
-  sh.onclick = (e) => { if (e.target === sh) sh.hidden = true; };
-  let N = 0;
+  // the Airdrop tab becomes the Exchange tab: the airdrop lines are hidden (kept in the page, the game still writes into them), the top miners stay
+  const pg = $('pg-drop');
+  [...pg.children].forEach((e) => { if (e.id !== 'topl' && !(e.tagName === 'H2' && e.dataset.t === 'top')) e.hidden = true; });
+  const box = document.createElement('div'); box.id = 'swPg';
+  box.innerHTML = '<h2 id="swH" style="margin-top:0"></h2><p class="sub" id="swP"></p><div class="big" id="swBal"></div>'
+    + '<div class="amt" id="swTo" style="grid-template-columns:1fr 1fr"></div><div class="note" id="swPm"></div><div class="stat"><span id="swCapL"></span><b id="swCap" style="color:#7cb8ff"></b></div><div class="stat"><span id="swLeftL"></span><b id="swLeft"></b></div>'
+    + '<div class="note" id="swNext"></div><div class="note" id="swC"></div><div class="amt" id="swA"></div><button class="btn go2" id="swGo"></button>'
+    + '<button class="btn" id="swOpen" style="margin-top:10px;background:var(--card);color:var(--fg);box-shadow:none;font-size:16px"></button>';
+  pg.insertBefore(box, pg.firstChild);
+  const navB = document.querySelector('.nav button[data-p="drop"]'); if (navB) navB.innerHTML = '<span>🔄</span>' + sw('nav');
+  const chip = $('dropChip'); if (chip) chip.textContent = sw('chip');
+  let N = 0, TO = 'bt';  // 26 oct 2026: target, $BATON (bt) or $MCT (mct)
+  const MCT_URL = 'https://t.me/Memecointycoonbot?startapp=src_rrswap';
   const S = () => ST && ST.swap;
   const maxN = () => { const s = S(); if (!s) return 0; return Math.max(0, Math.min(Math.floor(shown() * 100) / 100, Math.floor(s.left / s.rate * 100) / 100)); };
+  const durLeft = (t) => { const ms = Math.max(0, new Date(t).getTime() - now()); const h = Math.ceil(ms / 3600e3); return h >= 24 ? Math.ceil(h / 24) + (LANG === 'fr' ? ' j' : ' d') : h + ' h'; };
   function paint() {
     const s = S(); if (!s || !s.on) { c.hidden = true; return; } c.hidden = false;
     $('swT').textContent = sw('t');
     $('swS').textContent = !s.age_ok ? sw('age', { d: durLeft(s.unlock_at) }) : s.left <= 0 ? sw('cap') : sw('s', { r: fmt(s.rate) }) + ' · ' + sw('left', { n: fmt(s.left) });
     c.classList.toggle('can', s.age_ok && !s.excluded && s.left > 0 && shown() >= s.min);
+    if (!pg.hidden) page();
   }
-  const durLeft = (t) => { const ms = Math.max(0, new Date(t).getTime() - now()); const h = Math.ceil(ms / 3600e3); return h >= 24 ? Math.ceil(h / 24) + (LANG === 'fr' ? ' j' : ' d') : h + ' h'; };
-  function sheet() {
-    const s = S(); if (!s) return;
-    $('swH').textContent = sw('h'); $('swP').textContent = sw('p'); $('swC').textContent = sw('choice');
-    $('swBal').textContent = sw('bal', { n: fmt2(shown()) }); $('swL').textContent = sw('left', { n: fmt(s.left) });
-    const mx = maxN(), opts = [s.min, Math.max(s.min, Math.floor(mx / 2)), mx].filter((v, i, a) => v >= s.min && v <= mx && a.indexOf(v) === i);
+  let lastKey = '';
+  function page() {
+    const s = S(); if (!s) return; const m = ST.me;
+    $('swH').textContent = sw('h'); $('swP').hidden = true;
+    $('swBal').textContent = fmt2(shown()) + ' RIGZ';
+    $('swCapL').textContent = sw('capl', { m: (EMO[m.tier] || '') + ' ' + (L.m[m.tier] || m.tier + 1) }); $('swCap').textContent = fmt(s.cap) + ' $BATON';
+    $('swLeftL').textContent = sw('left', { n: '§' }).split('§')[0].replace(/[\s:：]+$/, ''); $('swLeft').textContent = fmt(s.left) + ' $BATON';
+    const hasNext = m.tier + 1 < tiers().length; $('swNext').textContent = (hasNext ? sw('next', { n: fmt(s.cap + s.step) }) : sw('maxl')) + ' · ' + sw('why');
+    $('swC').textContent = s.excluded ? sw('ex') : !s.age_ok ? sw('age', { d: durLeft(s.unlock_at) }) : ''; $('swC').hidden = !$('swC').textContent;
+    $('swOpen').textContent = TO === 'mct' ? sw('openm') : sw('open'); $('swPm').textContent = sw('pm');
+    if ($('swTo').dataset.to !== TO + LANG) { $('swTo').dataset.to = TO + LANG; $('swTo').innerHTML = ['bt', 'mct'].map((t) => `<button data-to="${t}" class="${t === TO ? 'on' : ''}">${sw(t === 'bt' ? 'tb' : 'tm')}</button>`).join(''); $('swTo').querySelectorAll('button').forEach((b) => b.onclick = () => { haptic(); TO = b.dataset.to; lastKey = ''; page(); }); }
+    const mx = (s.age_ok && !s.excluded) ? maxN() : 0, opts = [s.min, Math.max(s.min, Math.floor(mx / 2)), mx].filter((v, i, a) => v >= s.min && v <= mx && a.indexOf(v) === i);
     if (!opts.includes(N)) N = opts[opts.length - 1] || 0;
-    $('swA').innerHTML = opts.map((v) => `<button data-n="${v}" class="${v === N ? 'on' : ''}">${fmt2(v)}</button>`).join('');
-    $('swA').querySelectorAll('button').forEach((b) => b.onclick = () => { haptic(); N = Number(b.dataset.n); sheet(); });
-    const g = $('swGo'); g.disabled = !N; g.style.opacity = N ? 1 : .5; g.textContent = N ? sw('go', { n: fmt2(N), b: fmt(N * s.rate) }) : (shown() < s.min ? sw('min', { n: s.min }) : sw('cap'));
-    $('swOpen').textContent = sw('open');
+    const key = opts.join('|') + '#' + N;  // the buttons are rebuilt only when they change (the page repaints every second)
+    if (key !== lastKey) { lastKey = key; $('swA').innerHTML = opts.map((v) => `<button data-n="${v}" class="${v === N ? 'on' : ''}">${fmt2(v)}</button>`).join(''); $('swA').querySelectorAll('button').forEach((b) => b.onclick = () => { haptic(); N = Number(b.dataset.n); page(); }); }
+    const g = $('swGo'); g.disabled = !N; g.style.opacity = N ? 1 : .5;
+    g.textContent = N ? (TO === 'mct' ? sw('gom', { n: fmt2(N), b: fmt(N * (s.mct_rate || 5)) }) : sw('go', { n: fmt2(N), b: fmt(N * s.rate) })) : s.excluded ? sw('ex') : !s.age_ok ? sw('age', { d: durLeft(s.unlock_at) }) : s.left <= 0 ? sw('cap') : sw('min', { n: s.min });
   }
-  c.onclick = () => {
-    const s = S(); if (!s) return; haptic();
-    if (s.excluded) { toast(sw('ex')); return; }
-    if (!s.age_ok) { toast(sw('age', { d: durLeft(s.unlock_at) })); return; }
-    sheet(); sh.hidden = false;
-  };
-  $('swOpen').onclick = () => { haptic(); try { TW.openTelegramLink(BT_URL); } catch (e) { window.open(BT_URL, '_blank'); } };
+  c.onclick = () => { haptic(); go('drop'); page(); };
+  $('swOpen').onclick = () => { haptic(); const u = TO === 'mct' ? MCT_URL : BT_URL; try { TW.openTelegramLink(u); } catch (e) { window.open(u, '_blank'); } };
   $('swGo').onclick = async () => {
     const s = S(); if (!s || !N) return;
-    const had = s.has_bt; const r = await act('swap', { n: N });
-    if (!r || !r.ok) { const e = r && r.error; toast(e === 'swap_cap' ? sw('cap') : e === 'swap_min' ? sw('min', { n: s.min }) : e === 'funds' ? sw('funds') : e === 'excluded' ? sw('ex') : e === 'swap_age' ? sw('age', { d: durLeft(s.unlock_at) }) : tr('t_err')); sheet(); return; }
-    haptic('heavy'); for (let k = 0; k < 12; k++) setTimeout(() => { try { coinFly(true); } catch (er) {} }, k * 50);
-    toast(had ? sw('ok', { b: fmt(r.baton) }) : sw('okp', { b: fmt(r.baton) }));
-    N = 0; sheet(); paint();
+    const had = s.has_bt; const r = await act('swap', { n: N, to: TO });
+    if (!r || !r.ok) { const e = r && r.error; toast(e === 'swap_cap' ? sw('cap') : e === 'swap_min' ? sw('min', { n: s.min }) : e === 'funds' ? sw('funds') : e === 'excluded' ? sw('ex') : e === 'swap_age' ? sw('age', { d: durLeft(s.unlock_at) }) : e === 'no_mct' ? sw('nomct') : tr('t_err')); page(); return; }
+    haptic('heavy'); toast(r.mct != null ? sw('okm', { b: fmt2(r.mct) }) : had ? sw('ok', { b: fmt(r.baton) }) : sw('okp', { b: fmt(r.baton) }));
+    N = 0; lastKey = ''; page(); paint();
   };
   setInterval(paint, 1000);
 })();
