@@ -67,10 +67,11 @@
       if (seen) {  /* 24 oct 2026 (10h19, Jeremy): one hour at least between two opening interstitials */
         let last = 0; try { last = Number(localStorage.getItem('mct_int_open') || 0); } catch (e) {}
         if (!last) { try { localStorage.setItem('mct_int_open', String(Date.now())); } catch (e) {} return; }  /* never on the first visit */
-        // 25 oct 2026 (2h35, Jeremy): no more interstitial at opening in Meme Coin Tycoon
+        if (!window.MCTPREM && Date.now() - last >= 3600000) { try { localStorage.setItem('mct_int_open', String(Date.now())); } catch (e) {} adInt(); }
         return;
       }  // 21h16 (Jeremy): the Baton popup only once ever, then an Adsgram interstitial at each opening (never for Premium)
       try { localStorage.setItem(K, String(Date.now())); } catch (e) {}
+      return;  // 25 oct 2026 (2h36, Jeremy): no more Pass The Baton popup (the opening interstitial stays)
       if (document.querySelector('#maint:not([hidden]), .maint:not([hidden])')) return;  // never over the maintenance screen
       set();
       const rtl = lang() === 'ar';
