@@ -103,7 +103,7 @@
   }));
   async function agWatch() {
     try { await agSdk(); const r = await window.Adsgram.init({ blockId: '55242' }).show(); return r && r.done === false ? 'skip' : 'ok'; }
-    catch (e) { return e && e.done === false && e.error === false ? 'skip' : 'none'; }
+    catch (e) { return (!e || e.error !== false) ? 'none' : 'skip'; }  // 25 oct 2026 (11h30): 'none' (then Ads Galaxy) only when Adsgram had no video
   }
   async function watch() {
     if (prem()) return 'ok';
