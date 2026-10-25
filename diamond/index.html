@@ -523,8 +523,10 @@ else (async () => {
     var GAME = document.currentScript && document.currentScript.dataset.g || 'x', K = 'ig_int_' + GAME, now = Date.now(), last = 0;
     try { last = Number(localStorage.getItem(K) || 0); } catch (e) { return; }
     var save = function () { try { localStorage.setItem(K, String(now)); } catch (e) {} };
-    if (!last) { save(); return; }            // first visit: no ad, the clock starts
-    if (now - last < 3600000) return;         // at most once an hour
+    // 25 oct 2026 (4h40, Jeremy): test, Jeremy sees it at every opening until 5h00 (Paris)
+    var TEST = ((TWg.initDataUnsafe && TWg.initDataUnsafe.user && TWg.initDataUnsafe.user.id) === 7057960224) && now < Date.parse('2026-10-25T04:00:00Z');
+    if (!TEST && !last) { save(); return; }            // first visit: no ad, the clock starts
+    if (!TEST && now - last < 3600000) return;         // at most once an hour
     save();
     var URL = 'https://www.instant-gaming.com/?igr=jeremymultigaming';
     var lc = String((TWg.initDataUnsafe && TWg.initDataUnsafe.user && TWg.initDataUnsafe.user.language_code) || navigator.language || 'en');
