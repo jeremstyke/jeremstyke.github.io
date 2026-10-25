@@ -1777,8 +1777,8 @@ function nudge() {
         ['onBannerNotFound', 'onError', 'onTooLongSession'].forEach((ev) => tk.addEventListener(ev, () => { gone(); clearTimeout(window.__adtR); window.__adtR = setTimeout(build, 30000); }));  // hidden, asked again every 30 s
         const gift = () => {
           if (Date.now() - last < 3000) return; last = Date.now(); hap('ok'); toast(T('adOk')); [3000, 10000].forEach((ms) => setTimeout(refresh, ms));
-          try { localStorage.setItem('bt_adt_pause', String(Date.now() + 10 * 60000)); } catch (e) {}
-          setTimeout(build, 2500);  // let the widget show its "done" state, then pause
+          try { localStorage.removeItem('bt_adt_pause'); } catch (e) {}  // 25 oct 2026 (22h48, Jeremy): no more 10-minute pause, the next task comes right away
+          setTimeout(build, 2500);  // let the widget show its "done" state, then load the next task
         };
         tk.addEventListener('reward', gift); tk.addEventListener('onReward', gift);
       }
