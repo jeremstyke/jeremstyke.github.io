@@ -514,5 +514,43 @@ else (async () => {
   if (sp === 'friends') go('vFr'); else if (sp === 'shop') go('vShop');
 })();
 </script>
+<script data-g="td">
+// 25 oct 2026 (Jeremy): no ad network here yet: an Instant Gaming interstitial (affiliate link) at opening,
+// at most once an hour and never on the first visit. To be replaced by the Adsgram interstitial once the game is approved.
+(function () {
+  try {
+    var TWg = window.Telegram && window.Telegram.WebApp; if (!TWg || !TWg.initData) return;
+    var GAME = document.currentScript && document.currentScript.dataset.g || 'x', K = 'ig_int_' + GAME, now = Date.now(), last = 0;
+    try { last = Number(localStorage.getItem(K) || 0); } catch (e) { return; }
+    var save = function () { try { localStorage.setItem(K, String(now)); } catch (e) {} };
+    if (!last) { save(); return; }            // first visit: no ad, the clock starts
+    if (now - last < 3600000) return;         // at most once an hour
+    save();
+    var URL = 'https://www.instant-gaming.com/?igr=jeremymultigaming';
+    var lc = String((TWg.initDataUnsafe && TWg.initDataUnsafe.user && TWg.initDataUnsafe.user.language_code) || navigator.language || 'en');
+    var T = /^fr/i.test(lc) ? ['Partenaire', '🎮 Tes jeux vidéo moins chers', 'EA FC, GTA, Call of Duty et des milliers de jeux PC et consoles, jusqu’à -90 %.', 'Voir les offres', 'Fermer']
+      : /^es/i.test(lc) ? ['Socio', '🎮 Tus videojuegos más baratos', 'EA FC, GTA, Call of Duty y miles de juegos de PC y consola, hasta -90 %.', 'Ver ofertas', 'Cerrar']
+      : /^pt/i.test(lc) ? ['Parceiro', '🎮 Seus jogos mais baratos', 'EA FC, GTA, Call of Duty e milhares de jogos de PC e console, até -90 %.', 'Ver ofertas', 'Fechar']
+      : ['Partner', '🎮 Your video games for less', 'EA FC, GTA, Call of Duty and thousands of PC and console games, up to -90 %.', 'See deals', 'Close'];
+    function show() {
+      if (document.querySelector('#jsban, .cover:not([hidden]), #cover:not([hidden]), .land')) return;  // never over the blocked or maintenance screens
+      var d = document.createElement('div'); d.id = 'igint';
+      d.style.cssText = 'position:fixed;inset:0;z-index:2147482000;display:flex;align-items:center;justify-content:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px));background:rgba(6,6,14,.86);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif';
+      d.innerHTML = '<div style="width:100%;max-width:360px;border-radius:24px;padding:22px 20px 16px;background:linear-gradient(160deg,#2a1406,#141018 60%);border:1px solid rgba(255,84,0,.45);box-shadow:0 20px 60px rgba(0,0,0,.6);color:#fff;text-align:center">'
+        + '<div style="display:inline-block;padding:3px 10px;border-radius:99px;background:rgba(255,84,0,.18);color:#ff8a4c;font-weight:700;font-size:12px"></div>'
+        + '<div style="font-size:24px;font-weight:800;margin:14px 0 6px;line-height:1.2"></div><div style="color:#c9c3d6;font-size:15px;line-height:1.45"></div>'
+        + '<a style="display:block;margin-top:18px;padding:15px;border-radius:14px;background:#ff5400;color:#fff;font-weight:800;font-size:17px;text-decoration:none" href="' + URL + '" target="_blank" rel="noopener sponsored"></a>'
+        + '<button style="margin-top:10px;width:100%;padding:11px;border:0;background:none;color:#9a93a8;font:600 14px inherit;cursor:pointer"></button></div>';
+      var c = d.firstChild; c.children[0].textContent = T[0] + ' · Instant Gaming'; c.children[1].textContent = T[1]; c.children[2].textContent = T[2]; c.children[3].textContent = T[3];
+      var x = c.children[4], n = 3; x.disabled = true; x.textContent = T[4] + ' (' + n + ')';
+      var tm = setInterval(function () { n--; if (n <= 0) { clearInterval(tm); x.disabled = false; x.textContent = '✕ ' + T[4]; } else x.textContent = T[4] + ' (' + n + ')'; }, 1000);
+      x.onclick = function () { d.remove(); };
+      c.children[3].onclick = function (e) { e.preventDefault(); try { TWg.openLink(URL); } catch (er) { window.open(URL, '_blank'); } d.remove(); };
+      document.body.appendChild(d);
+    }
+    setTimeout(show, 1500);
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
