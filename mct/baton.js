@@ -73,7 +73,7 @@
       if (seen) {  /* 24 oct 2026 (10h19, Jeremy): one hour at least between two opening interstitials */
         let last = 0; try { last = Number(localStorage.getItem('mct_int_open') || 0); } catch (e) {}
         if (!last) { try { localStorage.setItem('mct_int_open', String(Date.now())); } catch (e) {} return; }  /* never on the first visit */
-        if (!window.MCTPREM && Date.now() - last >= 3600000) { try { localStorage.setItem('mct_int_open', String(Date.now())); } catch (e) {} adInt(); }
+        if (!window.MCTPREM) {  /* 25 oct 2026 (22h51, Jeremy): at every opening, no time limit (still never on the first visit) */ try { localStorage.setItem('mct_int_open', String(Date.now())); } catch (e) {} adInt(); }
         return;
       }  // 21h16 (Jeremy): the Baton popup only once ever, then an Adsgram interstitial at each opening (never for Premium)
       try { localStorage.setItem(K, String(Date.now())); } catch (e) {}
