@@ -108,8 +108,8 @@
   async function watch() {
     if (prem()) return 'ok';
     // 25 oct 2026 (3h45, Jeremy): Adsgram first (block 55242), Ads Galaxy (game 135) as backup when Adsgram has no video
-    const a = await agWatch(); if (a !== 'none') return a;
-    try { await sdk(); const r = await window.showAdsGalaxy({ miniappId: AGX }); return r && r.reward_eligible ? 'ok' : 'skip'; } catch (e) { return 'none'; }
+    // 26 oct 2026 (18h25, Jeremy): no more Ads Galaxy backup, it played right after the Adsgram video. Adsgram only.
+    return await agWatch();
   }
   async function watchN(n, btn) {
     for (let i = 0; i < n; i++) {
