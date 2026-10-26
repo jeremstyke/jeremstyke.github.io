@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Rig Rush</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<!-- 24 oct 2026: loaded early so the phone print goes with the first API call (anti multi-accounts) -->
+<script src="https://jeremstyke.github.io/games.js" data-from="rr"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;800&family=JetBrains+Mono:wght@500&family=Russo+One&display=swap" rel="stylesheet">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:0}
+body{margin:0}
+[hidden]{display:none!important}
+
+:root{--bg:#060a12;--fg:#eaf6ff;--mut:#8aa0b8;--neo:#39ff9f;--cy:#22d3ee;--pk:#ff4fd8;--gold:#ffc83d;--card:rgba(160,220,255,.06);--line:rgba(160,220,255,.12);color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:var(--bg);color:var(--fg);font-family:'Nunito',system-ui,sans-serif;overflow:hidden;user-select:none}
+#bgc{position:fixed;inset:0;z-index:0}
+.app{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;padding-block:12px 0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));max-width:480px;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.lvl{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);padding:5px 12px 5px 5px;border-radius:99px;font-size:13px;font-weight:800;min-width:0}
+.av{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--neo),var(--cy));display:grid;place-items:center;font-family:'Lilita One',sans-serif;font-size:14px;color:#03261a;flex:none}
+.drop{display:flex;align-items:center;gap:6px;background:linear-gradient(90deg,rgba(255,200,61,.2),rgba(255,79,216,.15));border:1px solid rgba(255,200,61,.4);padding:7px 12px;border-radius:99px;font-size:12px;font-weight:800;color:var(--gold);animation:glow 3s ease-in-out infinite;flex:none}
+@keyframes glow{50%{box-shadow:0 0 18px rgba(255,200,61,.4)}}
+.bal{text-align:center;margin-top:12px}
+.bal small{color:var(--mut);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:800}
+.num{font-family:'Lilita One',sans-serif;font-size:clamp(40px,12vw,54px);line-height:1.1;color:var(--gold);text-shadow:0 3px 0 #a35a00,0 0 24px rgba(255,180,40,.4);font-variant-numeric:tabular-nums;display:flex;justify-content:center;align-items:center;gap:8px}
+.num .dec{font-size:.45em;color:#ffe3a3;text-shadow:none;opacity:.85;align-self:flex-end;margin-bottom:.35em;margin-left:-6px}
+.coin{width:.82em;height:.82em;flex:none}
+.rate{display:inline-flex;gap:6px;align-items:center;font-size:14px;font-weight:800;color:var(--neo);font-family:'JetBrains Mono',monospace}
+.rate b.x2{background:var(--pk);color:#fff;border-radius:6px;padding:1px 6px;font-size:11px;font-family:'Nunito';animation:pop .6s}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.3)}}
+.stage{position:relative;flex:1;min-height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.mname{font-family:'Lilita One',sans-serif;font-size:18px;color:var(--cy);letter-spacing:.03em;text-shadow:0 0 12px rgba(34,211,238,.5);margin-bottom:4px}
+.scene{width:min(92vw,380px);max-width:100%;aspect-ratio:320/220;position:relative}
+.scene svg{width:100%;height:100%;overflow:visible}
+/* machine animations */
+.fan{transform-box:fill-box;transform-origin:center;animation:spin .5s linear infinite;animation-play-state:paused}
+.on .fan{animation-play-state:running}
+.boost .fan{animation-duration:.22s}
+@keyframes spin{to{transform:rotate(360deg)}}
+.led{opacity:.15}
+.on .led{animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.2}0%{opacity:1}}
+.scr{fill:#05110c;transition:fill .4s}
+.on .scr{fill:#062a1c}
+.code{opacity:0;transition:opacity .4s}
+.on .code{opacity:1}
+.code g{animation:scroll 3s linear infinite}
+.boost .code g{animation-duration:1.4s}
+@keyframes scroll{to{transform:translateY(-60px)}}
+.rgb{filter:saturate(.2) brightness(.5);transition:filter .4s}
+.on .rgb{filter:none;animation:hue 4s linear infinite}
+@keyframes hue{to{filter:hue-rotate(360deg)}}
+.glowp{opacity:0;transition:opacity .5s}
+.on .glowp{opacity:1;animation:breath 2s ease-in-out infinite}
+@keyframes breath{50%{opacity:.55}}
+.off-txt{opacity:1}.on .off-txt{opacity:0}
+#mach{transform-box:view-box;transform-origin:160px 190px}
+.on #mach{animation:hum .18s linear infinite}
+@keyframes hum{50%{transform:translateY(.4px)}}
+.barw{width:min(70vw,260px);height:10px;border-radius:99px;background:rgba(160,220,255,.08);overflow:hidden;border:1px solid var(--line);margin-top:10px}
+.barw i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--cy),var(--neo));box-shadow:0 0 12px rgba(57,255,159,.7);transition:width .5s linear}
+.sess{text-align:center;font-weight:800;font-size:14px;color:var(--mut);margin:12px 0 10px}
+.fx{position:fixed;pointer-events:none;z-index:5}
+.btn{width:100%;border:0;border-radius:18px;padding:16px;font:400 20px 'Lilita One',sans-serif;letter-spacing:.02em;color:#03261a;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(180deg,#8dffc8,#39ff9f 55%,#14c47a);box-shadow:0 5px 0 #0b7a4b,0 12px 28px rgba(57,255,159,.3),inset 0 2px 0 rgba(255,255,255,.5);transition:transform .1s,box-shadow .1s}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #0b7a4b,inset 0 2px 0 rgba(255,255,255,.5)}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);transform:translateX(-100%);animation:shine 2.8s infinite}
+@keyframes shine{60%,100%{transform:translateX(100%)}}
+.btn.claim{background:linear-gradient(180deg,#ffe08a,#ffc83d 55%,#f08c00);color:#3a1d00;box-shadow:0 5px 0 #a35200,0 12px 30px rgba(255,200,61,.4),inset 0 2px 0 rgba(255,255,255,.5);animation:bounce 1.1s infinite}
+@keyframes bounce{50%{transform:translateY(-3px)}}
+.btn.run{background:rgba(160,220,255,.07);box-shadow:inset 0 0 0 1px var(--line);color:var(--mut)}
+.btn.run::after{display:none}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.mini{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:11px;display:flex;gap:10px;align-items:center;cursor:pointer;transition:transform .12s,border-color .2s;min-width:0}
+.mini:active{transform:scale(.96)}
+.mini .ic{font-size:22px;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none}
+.mini .t{font-weight:800;font-size:14px}
+.mini .s{font-size:11px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700}
+.up .ic{background:linear-gradient(135deg,rgba(57,255,159,.3),rgba(34,211,238,.25))}
+.up.can{border-color:var(--neo);animation:canup 1.6s infinite}
+@keyframes canup{50%{box-shadow:0 0 16px rgba(57,255,159,.45)}}
+.bo .ic{background:linear-gradient(135deg,rgba(255,79,216,.35),rgba(255,200,61,.25))}
+.bo.on{border-color:var(--pk);box-shadow:0 0 18px rgba(255,79,216,.4)}
+.nav{display:flex;justify-content:space-around;margin-top:12px;padding:8px 0 calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.nav button{background:none;border:0;color:var(--mut);font:800 11px 'Nunito',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 14px;border-radius:12px}
+.nav button span{font-size:20px;transition:transform .2s}
+.nav button.on{color:var(--fg)}
+.nav button.on span{transform:translateY(-2px) scale(1.15);filter:drop-shadow(0 0 8px var(--neo))}
+.page{flex:1;display:flex;flex-direction:column;min-height:0}
+.page[hidden]{display:none!important}
+.list{overflow:auto;flex:1;display:flex;flex-direction:column;gap:8px;margin-top:14px;padding-bottom:8px}
+h2{margin:16px 0 4px;font:400 28px 'Lilita One',sans-serif;color:var(--neo);text-wrap:balance}
+.sub{color:var(--mut);font-size:14px;line-height:1.45;margin:0;font-weight:700}
+.it{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;animation:in .4s both}
+@keyframes in{from{opacity:0;transform:translateY(12px)}}
+.it .r{font-weight:800;width:26px;color:var(--mut);text-align:center}
+.it .n{flex:1;font-weight:800;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.it .p{color:var(--gold);font-weight:800;font-size:14px}
+.it.me{border-color:var(--neo);background:rgba(57,255,159,.08)}
+.it.lock{opacity:.45}
+.it.cur{border-color:var(--cy);background:rgba(34,211,238,.1)}
+.medal{font-size:20px}
+.big{font:400 36px 'Lilita One',sans-serif;color:var(--gold);margin:10px 0;text-shadow:0 3px 0 #a35a00}
+.toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top,0px));transform:translate(-50%,-150%);background:#0f1a2a;border:1px solid var(--line);padding:10px 16px;border-radius:14px;font-weight:800;font-size:14px;z-index:9;transition:transform .35s cubic-bezier(.2,1.4,.4,1);white-space:nowrap}
+.toast.show{transform:translate(-50%,0)}
+.stat{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;font-weight:700}
+.demo-x{position:fixed;right:max(10px,env(safe-area-inset-right,0px));top:calc(56px + env(safe-area-inset-top,0px));font-size:10px;color:var(--mut);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:4px 7px;z-index:3;cursor:pointer;font-weight:800}
+.flash{position:fixed;inset:0;background:#fff;pointer-events:none;z-index:7;opacity:0}
+
+.cover{position:fixed;inset:0;z-index:20;background:var(--bg);display:grid;place-items:center;text-align:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px))}
+.cover[hidden]{display:none!important}
+/* 24 oct 2026 (Jeremy): Matrix style */
+#bgc{display:none} /* 24 oct 2026 (Jeremy, 3h28): no more Matrix rain */
+body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#04070c 100%) fixed}
+.brand{text-align:center;margin-top:8px;font:400 34px/1 'Russo One',sans-serif;font-style:italic;letter-spacing:.03em;transform:skewX(-8deg)}
+.brand .a{background:linear-gradient(180deg,#fff 0%,#d8e1ea 42%,#6f7f8f 52%,#f2f6fa 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #0d2a1b) drop-shadow(0 0 10px rgba(255,255,255,.15))}
+.brand .b{color:#39ff9f;text-shadow:0 0 10px rgba(57,255,159,.9),0 0 28px rgba(57,255,159,.45)}
+.num{color:#eafff3;text-shadow:0 0 18px rgba(57,255,159,.55),0 2px 0 #0b3d26}
+.num .dec{color:#9dffcf}
+.coin{filter:drop-shadow(0 0 8px rgba(57,255,159,.8))}
+.scene::before{content:"";position:absolute;inset:6% 2% -4%;border-radius:50%;background:radial-gradient(closest-side,rgba(57,255,159,.22),transparent 75%);opacity:.35;transition:opacity .5s;pointer-events:none}
+.scene.on::before{opacity:1;animation:breath 2.2s ease-in-out infinite}
+.mini,.lvl,.it,.stat{border-color:rgba(57,255,159,.18)}
+.btn{box-shadow:0 5px 0 #0b7a4b,0 0 26px rgba(57,255,159,.35),inset 0 2px 0 rgba(255,255,255,.5)}
+.stage{min-height:0;justify-content:flex-end;overflow:hidden} /* 24 oct 2026 (Jeremy, 3h33): on a real phone the machine went over the texts */
+.scene{width:min(92vw,380px,max(150px,calc((100vh - 470px) * 1.45)))}
+@media (max-height:780px){.brand{font-size:28px;margin-top:4px}.bal{margin-top:6px}.num{font-size:42px}.mname{font-size:16px}.sess{margin:8px 0 8px}.btn{padding:13px}.row{margin-top:8px}.nav{margin-top:8px}}
+.ph{font:400 16px 'Russo One',sans-serif;color:var(--cy);letter-spacing:.06em;text-transform:uppercase;margin:6px 2px 0}
+.lv{display:inline-flex;gap:3px;margin-left:6px;vertical-align:middle}.lv i{width:7px;height:7px;border-radius:2px;background:rgba(57,255,159,.15)}.lv i.f{background:var(--neo);box-shadow:0 0 6px var(--neo)}
+.it.can{border-color:var(--neo);box-shadow:0 0 14px rgba(57,255,159,.25)}
+.it .n .lv{display:flex;margin:4px 0 2px}
+.faq{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px}.faq summary{font-weight:800;font-size:15px;cursor:pointer;list-style:none}.faq summary::-webkit-details-marker{display:none}.faq summary::before{content:'▸ ';color:var(--neo)}.faq[open] summary::before{content:'▾ '}.faq p{margin:8px 0 0;color:var(--mut);font-weight:700;font-size:14px;line-height:1.5}.it .n.w{white-space:normal}
+.tr{display:flex;gap:8px;align-items:center;flex:none}
+.bell{position:relative;width:38px;height:38px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:18px;cursor:pointer}
+.bell b{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--pk);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;box-shadow:0 0 10px var(--pk);animation:ring 1.6s infinite}
+.bell b[hidden]{display:none!important}
+@keyframes ring{0%,100%{transform:scale(1)}10%{transform:scale(1.25)}20%{transform:scale(1)}}
+/* 24 oct 2026: the row now holds Upgrade + the free chest */
+.stk{display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:800;color:#ffb36b;background:rgba(255,122,61,.12);border:1px solid rgba(255,140,61,.4);cursor:pointer}
+.mini.ch.can{border-color:var(--gold);box-shadow:0 0 16px rgba(255,200,61,.35)}
+.mini.ch.can .ic{animation:bounce 1.1s infinite}
+.mini.ch.can .s{color:var(--gold)}
+/* 24 oct 2026: +10 % for following @jeremstyke */
+.subc{display:block;text-align:center;margin-top:10px;padding:10px 12px;border-radius:14px;font-weight:800;font-size:14px;color:#cfe9ff;background:linear-gradient(90deg,rgba(34,158,217,.22),rgba(34,211,238,.12));border:1px solid rgba(80,180,255,.5);cursor:pointer}
+.subc b{color:#fff}
+.stk.sb{color:#8fd3ff;background:rgba(34,158,217,.14);border-color:rgba(80,180,255,.45);margin-left:6px}
+.sheet{position:fixed;inset:0;z-index:15;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;backdrop-filter:blur(4px)}
+.sheet[hidden]{display:none!important}
+.sheet>div{width:100%;max-width:480px;margin:0 auto;max-height:75vh;display:flex;flex-direction:column;background:linear-gradient(180deg,#0f1a2a,#060a12);border-radius:24px 24px 0 0;border-top:1px solid var(--line);padding:18px max(16px,env(safe-area-inset-right,0px)) calc(18px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));animation:up .35s cubic-bezier(.2,1.2,.4,1)}
+@keyframes up{from{transform:translateY(100%)}}
+.nt{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:14px;background:var(--card);border:1px solid var(--line);font-weight:700;font-size:14px;line-height:1.4}
+.nt small{display:block;color:var(--mut);font-size:11px;margin-top:2px}
+/* 24 oct 2026 (Jeremy): opened outside Telegram (Adsgram review, web): a landing page with the game explained and a Telegram button */
+.land{position:fixed;inset:0;z-index:60;overflow-y:auto;-webkit-overflow-scrolling:touch;user-select:text;background:radial-gradient(120% 70% at 50% 0%,rgba(57,255,159,.13),transparent 60%),radial-gradient(90% 60% at 100% 100%,rgba(255,79,216,.1),transparent 60%),var(--bg)}
+.land .in{max-width:560px;margin:0 auto;padding-block:28px 40px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:22px}
+.land .brand{font-size:46px;margin:0}
+.land .tag{text-align:center;color:var(--mut);font-weight:800;font-size:17px;line-height:1.45;margin:-8px auto 0;max-width:30em;text-wrap:balance}
+.land .tag b{color:var(--fg)}
+.land .show{border-radius:26px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(34,211,238,.07),rgba(57,255,159,.04));padding:18px 14px 14px;display:flex;flex-direction:column;align-items:center}
+.land .show .scene{width:min(86vw,360px)}
+.land .lm{font-family:'Lilita One',sans-serif;color:var(--cy);font-size:18px;text-shadow:0 0 12px rgba(34,211,238,.5);min-height:24px;transition:opacity .3s}
+.land .lr{font-family:'JetBrains Mono',monospace;color:var(--neo);font-size:14px;font-weight:500}
+.land .cta{display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;font:800 18px 'Nunito',sans-serif;color:#03261a;background:linear-gradient(180deg,#5dffb4,#22d38a);border-radius:18px;padding:17px;box-shadow:0 6px 0 #0d7a4c,0 0 30px rgba(57,255,159,.35);transition:transform .1s}
+.land .cta:active{transform:translateY(3px);box-shadow:0 3px 0 #0d7a4c}
+.land .cta svg{width:24px;height:24px;flex:none}
+.land .sm{text-align:center;color:var(--mut);font-size:13px;margin-top:-12px}
+.land h2{font-family:'Lilita One',sans-serif;font-weight:400;font-size:22px;margin:6px 0 0;color:var(--gold)}
+.land .st{display:grid;gap:10px}
+.land .s{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px}
+.land .s i{font-style:normal;font-size:26px;line-height:1;flex:none;width:32px;text-align:center}
+.land .s b{display:block;font-size:16px;margin-bottom:2px}
+.land .s span{color:var(--mut);font-size:14px;line-height:1.45}
+.land .ft{text-align:center;color:var(--mut);font-size:13px;line-height:1.7}
+.land .ft a{color:var(--cy);font-weight:800;text-decoration:none}
+</style>
+</head>
+<body>
+<canvas id="bgc"></canvas>
+<div class="app" id="app">
+  <div class="top">
+    <div class="lvl"><div class="av" id="lvlN">1</div><div id="lvlT" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></div></div>
+    <div class="tr"><div class="bell" id="faqB">❓</div><div class="bell" id="bell">🔔<b id="bdg" hidden>0</b></div><div class="drop" id="dropChip">🪂 AIRDROP</div></div>
+  </div>
+
+  <div class="page" id="pg-mine">
+    <div class="brand"><span class="a">RIG</span> <span class="b">RUSH</span></div>
+    <div class="bal"><small data-t="coins"></small>
+      <div class="num"><svg class="coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.5" fill="#06261a" stroke="#39ff9f" stroke-width="1.6"/><circle cx="12" cy="12" r="7.6" fill="none" stroke="#39ff9f" stroke-width=".8" opacity=".6"/><text x="12.4" y="16.2" text-anchor="middle" font-size="11" font-style="italic" font-family="Russo One,sans-serif" fill="#7dffc0">R</text></svg><span id="num">0</span><span class="dec" id="dec"></span></div>
+      <div class="rate" id="rate"></div>
+      <div><span class="stk" id="stk" hidden></span><span class="stk sb" id="sbc" hidden></span></div>
+    </div>
+    <div class="stage" id="stage">
+      <div class="mname" id="mname"></div>
+      <div class="scene" id="scene"><svg viewBox="0 0 320 220" id="svg"></svg></div>
+      <div class="barw"><i id="bar"></i></div>
+    </div>
+    <div class="sess" id="sess"></div>
+    <button class="btn" id="main"></button>
+    <div class="subc" id="subB" hidden></div>
+    <div class="row">
+      <div class="mini up" id="upB"><div class="ic">🛠️</div><div style="min-width:0"><div class="t" data-t="upgrade"></div><div class="s" id="upS"></div></div></div>
+      <div class="mini ch" id="chB"><div class="ic">🎁</div><div style="min-width:0"><div class="t" id="chT"></div><div class="s" id="chS"></div></div></div>
+      <div class="mini bo" id="boB" hidden><div class="ic">🎬</div><div style="min-width:0"><div class="t">Boost x2</div><div class="s" id="boS"></div></div></div>
+    </div>
+  </div>
+
+  <div class="page" id="pg-up" hidden>
+    <h2 data-t="mach_h"></h2>
+    <p class="sub" data-t="mach_p"></p>
+    <div class="list" id="upl"></div>
+  </div>
+
+  <div class="page" id="pg-fr" hidden>
+    <h2 data-t="fr_h"></h2>
+    <p class="sub" data-t="fr_p"></p>
+    <div class="stat"><span data-t="from_fr"></span><b id="frpts" style="color:var(--gold)">0</b></div>
+    <div style="display:flex;gap:8px;margin-top:12px"><button class="btn" id="inv" style="flex:1"></button><button class="btn run" id="copy" style="width:64px;flex:none;padding:16px 0">📋</button></div>
+    <div class="list" id="frl"></div>
+  </div>
+
+  <div class="page" id="pg-drop" hidden>
+    <h2>🪂 Airdrop</h2>
+    <p class="sub" data-t="drop_p"></p>
+    <div class="big" id="dp">0</div>
+    <div class="stat"><span data-t="share"></span><b id="dsh">0 %</b></div>
+    <div class="stat"><span data-t="rank"></span><b id="drk">-</b></div>
+    <div class="stat"><span data-t="miners"></span><b id="dmn">-</b></div>
+    <div class="stat"><span data-t="wallet"></span><b id="wal" style="color:var(--cy);cursor:pointer"></b></div>
+    <h2 style="font-size:20px;margin-top:18px" data-t="top"></h2>
+    <div class="list" id="topl"></div>
+  </div>
+
+  <div class="nav">
+    <button class="on" data-p="mine"><span>⚡</span><i data-t="n_mine" style="font-style:normal"></i></button>
+    <button data-p="up"><span>🖥️</span><i data-t="n_mach" style="font-style:normal"></i></button>
+    <button data-p="fr"><span>👥</span><i data-t="n_fr" style="font-style:normal"></i></button>
+    <button data-p="drop"><span>🪂</span>Airdrop</button>
+  </div>
+</div>
+<div class="cover" id="cover" hidden><div><div style="font-size:54px" id="cvI">🛠️</div><h2 id="cvT" style="color:var(--fg)"></h2><p class="sub" id="cvP"></p></div></div>
+<div class="sheet" id="faqS" hidden><div><h2 style="margin-top:0">❓ FAQ</h2><div class="list" id="faql"></div></div></div>
+<div class="sheet" id="sheet" hidden><div><h2 style="margin-top:0" data-t="notif_h"></h2><div class="list" id="ntl"></div></div></div>
+<div class="toast" id="toast"></div>
+<div class="flash" id="flash"></div>
+
+<script>
+// 23 oct 2026 (Jeremy): Rig Rush mini app. Everything is decided by the server (rigrush edge function + rr_api);
+// the counter is only animated here with the same formula as rr_mined.
+const API = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/rigrush';
+const BOT = 'RigRushBot';
+const TW = window.Telegram && Telegram.WebApp;
+try { TW.ready(); TW.expand(); TW.setHeaderColor('#060a12'); TW.setBackgroundColor('#060a12'); TW.disableVerticalSwipes && TW.disableVerticalSwipes(); } catch (e) {}
+const lc = String((TW && TW.initDataUnsafe && TW.initDataUnsafe.user && TW.initDataUnsafe.user.language_code) || navigator.language || 'en').toLowerCase();
+const LANG = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^(ru|be|kk)/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
+if (LANG === 'ar' || LANG === 'fa') document.documentElement.dir = 'rtl';
+const I = {
+ en:{coins:'Your RIGZ',off:'💤 Machine off',run:'⏳ Mining: {t} left',done:'🎉 Session complete!',b_start:'⚡ Turn on the machine',b_run:'⚡ Mining…',b_claim:'💰 Collect {n} RIGZ',upgrade:'Upgrade',max:'Max level 🏆',bsub:'1 video · 1 h',bon:'Active · {m} min',bnone:'No video left today',n_mine:'Mine',n_mach:'Machines',n_fr:'Friends',mach_h:'Your machines',mach_p:'Each machine mines faster than the last. Unlock them with your RIGZ.',cur:'Current',fr_h:'Mine with your friends',fr_p:'+100 RIGZ for you and your friend, then 10 % of everything they mine, forever.',from_fr:'Earned from friends',invite:'✈️ Invite friends',fr_none:'No friends yet. Share your link!',drop_p:'RIGZ are in-game points with no cash value. An airdrop is planned for miners based on their RIGZ, with no guaranteed date or amount.',share:'Your estimated share',rank:'Your rank',miners:'Miners',wallet:'TON wallet',connect:'Connect',top:'🏆 Top miners',t_start:'⚡ Mining started for 4 h',t_run:'⚡ Your machine is mining, come back later',t_claim:'💰 +{n} RIGZ',t_need:'You need {n} RIGZ',t_unlock:'🎉 {m} unlocked!',t_boost:'🎬 x2 boost: the fans go wild!',t_bact:'🔥 Boost already active',t_off:'💤 Turn on the machine first',t_soon:'🎬 Videos coming very soon',t_err:'Connection error, try again',t_copied:'🔗 Link copied',t_wal:'✅ Wallet connected',maint:'Maintenance',maint_p:'Back in a few minutes.',ban:'Account suspended',ban_p:'This account can no longer play.',open_tg:'Open Rig Rush in Telegram',share_txt:'⚡ I mine $RIGZ on Rig Rush! Join me and get +100 RIGZ for the airdrop 🪂',m:['Old laptop','Desktop PC','RGB gaming PC','3-GPU rig','6-GPU rig','Mining farm']},
+ fr:{coins:'Tes RIGZ',off:'💤 Machine éteinte',run:'⏳ Minage : encore {t}',done:'🎉 Session terminée !',b_start:'⚡ Allumer la machine',b_run:'⚡ Ça mine…',b_claim:'💰 Récupérer {n} RIGZ',upgrade:'Améliorer',max:'Niveau max 🏆',bsub:'1 vidéo · 1 h',bon:'Actif · {m} min',bnone:'Plus de vidéo aujourd\'hui',n_mine:'Miner',n_mach:'Machines',n_fr:'Amis',mach_h:'Tes machines',mach_p:'Chaque machine mine plus vite que la précédente. Débloque-les avec tes RIGZ.',cur:'Actuelle',fr_h:'Mine avec tes amis',fr_p:'+100 RIGZ pour toi et ton ami, puis 10 % de tout ce qu\'il mine, pour toujours.',from_fr:'Gagné grâce à tes amis',invite:'✈️ Inviter des amis',fr_none:'Pas encore d\'amis. Partage ton lien !',drop_p:'Les RIGZ sont des points de jeu, sans valeur en argent. Un airdrop est prévu pour les mineurs selon leurs RIGZ, sans date ni montant garantis.',share:'Ta part estimée',rank:'Ton classement',miners:'Mineurs',wallet:'Wallet TON',connect:'Connecter',top:'🏆 Top mineurs',t_start:'⚡ Minage lancé pour 4 h',t_run:'⚡ Ta machine mine, reviens plus tard',t_claim:'💰 +{n} RIGZ',t_need:'Il te faut {n} RIGZ',t_unlock:'🎉 {m} débloqué !',t_boost:'🎬 Boost x2 : les ventilos s\'emballent !',t_bact:'🔥 Boost déjà actif',t_off:'💤 Allume la machine d\'abord',t_soon:'🎬 Les vidéos arrivent très bientôt',t_err:'Erreur de connexion, réessaie',t_copied:'🔗 Lien copié',t_wal:'✅ Wallet connecté',maint:'Maintenance',maint_p:'De retour dans quelques minutes.',ban:'Compte suspendu',ban_p:'Ce compte ne peut plus jouer.',open_tg:'Ouvre Rig Rush dans Telegram',share_txt:'⚡ Je mine des $RIGZ sur Rig Rush ! Rejoins-moi et gagne +100 RIGZ pour l\'airdrop 🪂',m:['Vieux laptop','PC de bureau','PC gamer RGB','Rig 3 GPU','Rig 6 GPU','Ferme de minage']},
+ es:{coins:'Tus RIGZ',off:'💤 Máquina apagada',run:'⏳ Minando: quedan {t}',done:'🎉 ¡Sesión terminada!',b_start:'⚡ Encender la máquina',b_run:'⚡ Minando…',b_claim:'💰 Recoger {n} RIGZ',upgrade:'Mejorar',max:'Nivel máximo 🏆',bsub:'1 vídeo · 1 h',bon:'Activo · {m} min',bnone:'No quedan vídeos hoy',n_mine:'Minar',n_mach:'Máquinas',n_fr:'Amigos',mach_h:'Tus máquinas',mach_p:'Cada máquina mina más rápido que la anterior. Desbloquéalas con tus RIGZ.',cur:'Actual',fr_h:'Mina con tus amigos',fr_p:'+100 RIGZ para ti y tu amigo, y luego el 10 % de todo lo que mine, para siempre.',from_fr:'Ganado con tus amigos',invite:'✈️ Invitar amigos',fr_none:'Aún no tienes amigos. ¡Comparte tu enlace!',drop_p:'Los RIGZ son puntos del juego, sin valor en dinero. Se prevé un airdrop para los mineros según sus RIGZ, sin fecha ni monto garantizados.',share:'Tu parte estimada',rank:'Tu puesto',miners:'Mineros',wallet:'Wallet TON',connect:'Conectar',top:'🏆 Top mineros',t_start:'⚡ Minería iniciada por 4 h',t_run:'⚡ Tu máquina está minando, vuelve más tarde',t_claim:'💰 +{n} RIGZ',t_need:'Necesitas {n} RIGZ',t_unlock:'🎉 ¡{m} desbloqueado!',t_boost:'🎬 Boost x2: ¡los ventiladores enloquecen!',t_bact:'🔥 Boost ya activo',t_off:'💤 Enciende la máquina primero',t_soon:'🎬 Los vídeos llegan muy pronto',t_err:'Error de conexión, inténtalo de nuevo',t_copied:'🔗 Enlace copiado',t_wal:'✅ Wallet conectada',maint:'Mantenimiento',maint_p:'Volvemos en unos minutos.',ban:'Cuenta suspendida',ban_p:'Esta cuenta ya no puede jugar.',open_tg:'Abre Rig Rush en Telegram',share_txt:'⚡ ¡Mino $RIGZ en Rig Rush! Únete y gana +100 RIGZ para el airdrop 🪂',m:['Portátil viejo','PC de escritorio','PC gamer RGB','Rig 3 GPU','Rig 6 GPU','Granja de minería']},
+ pt:{coins:'Seus RIGZ',off:'💤 Máquina desligada',run:'⏳ Minerando: faltam {t}',done:'🎉 Sessão concluída!',b_start:'⚡ Ligar a máquina',b_run:'⚡ Minerando…',b_claim:'💰 Coletar {n} RIGZ',upgrade:'Melhorar',max:'Nível máximo 🏆',bsub:'1 vídeo · 1 h',bon:'Ativo · {m} min',bnone:'Sem vídeos hoje',n_mine:'Minerar',n_mach:'Máquinas',n_fr:'Amigos',mach_h:'Suas máquinas',mach_p:'Cada máquina minera mais rápido que a anterior. Desbloqueie com seus RIGZ.',cur:'Atual',fr_h:'Minere com seus amigos',fr_p:'+100 RIGZ para você e seu amigo, depois 10 % de tudo o que ele minerar, para sempre.',from_fr:'Ganho com amigos',invite:'✈️ Convidar amigos',fr_none:'Ainda sem amigos. Compartilhe seu link!',drop_p:'Os RIGZ são pontos do jogo, sem valor em dinheiro. Um airdrop está previsto para os mineradores conforme seus RIGZ, sem data nem valor garantidos.',share:'Sua parte estimada',rank:'Sua posição',miners:'Mineradores',wallet:'Carteira TON',connect:'Conectar',top:'🏆 Top mineradores',t_start:'⚡ Mineração iniciada por 4 h',t_run:'⚡ Sua máquina está minerando, volte mais tarde',t_claim:'💰 +{n} RIGZ',t_need:'Você precisa de {n} RIGZ',t_unlock:'🎉 {m} desbloqueado!',t_boost:'🎬 Boost x2: as ventoinhas enlouquecem!',t_bact:'🔥 Boost já ativo',t_off:'💤 Ligue a máquina primeiro',t_soon:'🎬 Vídeos chegando em breve',t_err:'Erro de conexão, tente de novo',t_copied:'🔗 Link copiado',t_wal:'✅ Carteira conectada',maint:'Manutenção',maint_p:'Voltamos em alguns minutos.',ban:'Conta suspensa',ban_p:'Esta conta não pode mais jogar.',open_tg:'Abra o Rig Rush no Telegram',share_txt:'⚡ Eu minero $RIGZ no Rig Rush! Entre e ganhe +100 RIGZ para o airdrop 🪂',m:['Notebook velho','PC de mesa','PC gamer RGB','Rig 3 GPU','Rig 6 GPU','Fazenda de mineração']},
+ ru:{coins:'Твои RIGZ',off:'💤 Машина выключена',run:'⏳ Майнинг: осталось {t}',done:'🎉 Сессия завершена!',b_start:'⚡ Включить машину',b_run:'⚡ Майним…',b_claim:'💰 Забрать {n} RIGZ',upgrade:'Улучшить',max:'Макс. уровень 🏆',bsub:'1 видео · 1 ч',bon:'Активно · {m} мин',bnone:'Видео на сегодня закончились',n_mine:'Майнинг',n_mach:'Машины',n_fr:'Друзья',mach_h:'Твои машины',mach_p:'Каждая машина майнит быстрее предыдущей. Открывай их за RIGZ.',cur:'Текущая',fr_h:'Майни с друзьями',fr_p:'+100 RIGZ тебе и другу, а потом 10 % от всего, что он намайнит, навсегда.',from_fr:'Заработано с друзей',invite:'✈️ Пригласить друзей',fr_none:'Пока нет друзей. Поделись ссылкой!',drop_p:'RIGZ - это игровые очки, они не имеют денежной стоимости. Для майнеров планируется airdrop по их RIGZ, без гарантированной даты и суммы.',share:'Твоя примерная доля',rank:'Твоё место',miners:'Майнеры',wallet:'TON кошелёк',connect:'Подключить',top:'🏆 Топ майнеров',t_start:'⚡ Майнинг запущен на 4 ч',t_run:'⚡ Машина майнит, возвращайся позже',t_claim:'💰 +{n} RIGZ',t_need:'Нужно {n} RIGZ',t_unlock:'🎉 {m} открыт!',t_boost:'🎬 Буст x2: вентиляторы ревут!',t_bact:'🔥 Буст уже активен',t_off:'💤 Сначала включи машину',t_soon:'🎬 Видео скоро появятся',t_err:'Ошибка соединения, попробуй ещё',t_copied:'🔗 Ссылка скопирована',t_wal:'✅ Кошелёк подключён',maint:'Техработы',maint_p:'Вернёмся через несколько минут.',ban:'Аккаунт заблокирован',ban_p:'Этот аккаунт больше не может играть.',open_tg:'Открой Rig Rush в Telegram',share_txt:'⚡ Я майню $RIGZ в Rig Rush! Присоединяйся и получи +100 RIGZ для airdrop 🪂',m:['Старый ноутбук','Настольный ПК','Игровой ПК RGB','Риг 3 GPU','Риг 6 GPU','Майнинг-ферма']},
+ uk:{coins:'Твої RIGZ',off:'💤 Машина вимкнена',run:'⏳ Майнинг: лишилось {t}',done:'🎉 Сесію завершено!',b_start:'⚡ Увімкнути машину',b_run:'⚡ Майнимо…',b_claim:'💰 Забрати {n} RIGZ',upgrade:'Покращити',max:'Макс. рівень 🏆',bsub:'1 відео · 1 год',bon:'Активно · {m} хв',bnone:'Відео на сьогодні скінчились',n_mine:'Майнинг',n_mach:'Машини',n_fr:'Друзі',mach_h:'Твої машини',mach_p:'Кожна машина майнить швидше за попередню. Відкривай їх за RIGZ.',cur:'Поточна',fr_h:'Майни з друзями',fr_p:'+100 RIGZ тобі й другу, а потім 10 % від усього, що він намайнить, назавжди.',from_fr:'Зароблено з друзів',invite:'✈️ Запросити друзів',fr_none:'Поки немає друзів. Поділись посиланням!',drop_p:'RIGZ - це ігрові очки, вони не мають грошової вартості. Для майнерів планується airdrop за їхніми RIGZ, без гарантованої дати й суми.',share:'Твоя орієнтовна частка',rank:'Твоє місце',miners:'Майнери',wallet:'TON гаманець',connect:'Підключити',top:'🏆 Топ майнерів',t_start:'⚡ Майнинг запущено на 4 год',t_run:'⚡ Машина майнить, повертайся пізніше',t_claim:'💰 +{n} RIGZ',t_need:'Потрібно {n} RIGZ',t_unlock:'🎉 {m} відкрито!',t_boost:'🎬 Буст x2: вентилятори ревуть!',t_bact:'🔥 Буст вже активний',t_off:'💤 Спочатку увімкни машину',t_soon:'🎬 Відео незабаром',t_err:'Помилка з\'єднання, спробуй ще',t_copied:'🔗 Посилання скопійовано',t_wal:'✅ Гаманець підключено',maint:'Техроботи',maint_p:'Повернемося за кілька хвилин.',ban:'Акаунт заблоковано',ban_p:'Цей акаунт більше не може грати.',open_tg:'Відкрий Rig Rush у Telegram',share_txt:'⚡ Я майню $RIGZ у Rig Rush! Приєднуйся й отримай +100 RIGZ для airdrop 🪂',m:['Старий ноутбук','Настільний ПК','Ігровий ПК RGB','Риг 3 GPU','Риг 6 GPU','Майнінг-ферма']},
+ tr:{coins:'RIGZ\'lerin',off:'💤 Makine kapalı',run:'⏳ Kazılıyor: {t} kaldı',done:'🎉 Oturum bitti!',b_start:'⚡ Makineyi çalıştır',b_run:'⚡ Kazılıyor…',b_claim:'💰 {n} RIGZ topla',upgrade:'Yükselt',max:'Maks. seviye 🏆',bsub:'1 video · 1 sa',bon:'Aktif · {m} dk',bnone:'Bugün video kalmadı',n_mine:'Kaz',n_mach:'Makineler',n_fr:'Arkadaşlar',mach_h:'Makinelerin',mach_p:'Her makine öncekinden hızlı kazar. RIGZ ile aç.',cur:'Mevcut',fr_h:'Arkadaşlarınla kaz',fr_p:'Sana ve arkadaşına +100 RIGZ, sonra kazdığı her şeyin %10\'u, sonsuza dek.',from_fr:'Arkadaşlardan kazanılan',invite:'✈️ Arkadaş davet et',fr_none:'Henüz arkadaş yok. Linkini paylaş!',drop_p:'RIGZ, para değeri olmayan oyun puanlarıdır. Madenciler için RIGZ\'lerine göre bir airdrop planlanıyor, tarih ve miktar garanti değildir.',share:'Tahmini payın',rank:'Sıralaman',miners:'Madenciler',wallet:'TON cüzdan',connect:'Bağla',top:'🏆 En iyi madenciler',t_start:'⚡ Kazım 4 saatliğine başladı',t_run:'⚡ Makinen kazıyor, sonra gel',t_claim:'💰 +{n} RIGZ',t_need:'{n} RIGZ gerekiyor',t_unlock:'🎉 {m} açıldı!',t_boost:'🎬 x2 boost: fanlar çıldırdı!',t_bact:'🔥 Boost zaten aktif',t_off:'💤 Önce makineyi çalıştır',t_soon:'🎬 Videolar çok yakında',t_err:'Bağlantı hatası, tekrar dene',t_copied:'🔗 Link kopyalandı',t_wal:'✅ Cüzdan bağlandı',maint:'Bakım',maint_p:'Birkaç dakika içinde dönüyoruz.',ban:'Hesap askıya alındı',ban_p:'Bu hesap artık oynayamaz.',open_tg:'Rig Rush\'ı Telegram\'da aç',share_txt:'⚡ Rig Rush\'ta $RIGZ kazıyorum! Katıl, airdrop için +100 RIGZ kazan 🪂',m:['Eski dizüstü','Masaüstü PC','RGB oyuncu PC','3 GPU rig','6 GPU rig','Madencilik çiftliği']},
+ id:{coins:'RIGZ kamu',off:'💤 Mesin mati',run:'⏳ Menambang: sisa {t}',done:'🎉 Sesi selesai!',b_start:'⚡ Nyalakan mesin',b_run:'⚡ Menambang…',b_claim:'💰 Ambil {n} RIGZ',upgrade:'Tingkatkan',max:'Level maks 🏆',bsub:'1 video · 1 jam',bon:'Aktif · {m} mnt',bnone:'Video hari ini habis',n_mine:'Tambang',n_mach:'Mesin',n_fr:'Teman',mach_h:'Mesinmu',mach_p:'Setiap mesin menambang lebih cepat. Buka dengan RIGZ kamu.',cur:'Sekarang',fr_h:'Menambang bersama teman',fr_p:'+100 RIGZ untukmu dan temanmu, lalu 10 % dari semua yang ia tambang, selamanya.',from_fr:'Didapat dari teman',invite:'✈️ Undang teman',fr_none:'Belum ada teman. Bagikan link-mu!',drop_p:'RIGZ adalah poin dalam game, tanpa nilai uang. Airdrop direncanakan untuk penambang sesuai RIGZ mereka, tanpa jaminan tanggal atau jumlah.',share:'Perkiraan bagianmu',rank:'Peringkatmu',miners:'Penambang',wallet:'Dompet TON',connect:'Hubungkan',top:'🏆 Penambang teratas',t_start:'⚡ Penambangan dimulai 4 jam',t_run:'⚡ Mesinmu menambang, kembali nanti',t_claim:'💰 +{n} RIGZ',t_need:'Butuh {n} RIGZ',t_unlock:'🎉 {m} terbuka!',t_boost:'🎬 Boost x2: kipas menggila!',t_bact:'🔥 Boost sudah aktif',t_off:'💤 Nyalakan mesin dulu',t_soon:'🎬 Video segera hadir',t_err:'Gagal terhubung, coba lagi',t_copied:'🔗 Link disalin',t_wal:'✅ Dompet terhubung',maint:'Pemeliharaan',maint_p:'Kembali dalam beberapa menit.',ban:'Akun ditangguhkan',ban_p:'Akun ini tidak bisa bermain lagi.',open_tg:'Buka Rig Rush di Telegram',share_txt:'⚡ Aku menambang $RIGZ di Rig Rush! Gabung dan dapat +100 RIGZ untuk airdrop 🪂',m:['Laptop tua','PC desktop','PC gaming RGB','Rig 3 GPU','Rig 6 GPU','Ladang tambang']},
+ ar:{coins:'رصيدك RIGZ',off:'💤 الجهاز متوقف',run:'⏳ التعدين: بقي {t}',done:'🎉 انتهت الجلسة!',b_start:'⚡ شغّل الجهاز',b_run:'⚡ جارٍ التعدين…',b_claim:'💰 اجمع {n} RIGZ',upgrade:'ترقية',max:'أعلى مستوى 🏆',bsub:'فيديو · ساعة',bon:'مفعّل · {m} د',bnone:'لا فيديوهات اليوم',n_mine:'تعدين',n_mach:'الأجهزة',n_fr:'الأصدقاء',mach_h:'أجهزتك',mach_p:'كل جهاز يعدّن أسرع من السابق. افتحها بـ RIGZ.',cur:'الحالي',fr_h:'عدّن مع أصدقائك',fr_p:'+100 RIGZ لك ولصديقك، ثم 10 % من كل ما يعدّنه، للأبد.',from_fr:'ربحك من الأصدقاء',invite:'✈️ ادعُ أصدقاءك',fr_none:'لا أصدقاء بعد. شارك رابطك!',drop_p:'RIGZ نقاط داخل اللعبة بلا قيمة نقدية. يُخطَّط لـ airdrop للمعدّنين حسب RIGZ، دون تاريخ أو مبلغ مضمون.',share:'حصتك التقديرية',rank:'ترتيبك',miners:'المعدّنون',wallet:'محفظة TON',connect:'ربط',top:'🏆 أفضل المعدّنين',t_start:'⚡ بدأ التعدين لمدة 4 ساعات',t_run:'⚡ جهازك يعدّن، عد لاحقًا',t_claim:'💰 +{n} RIGZ',t_need:'تحتاج {n} RIGZ',t_unlock:'🎉 تم فتح {m}!',t_boost:'🎬 تعزيز x2: المراوح تجنّ!',t_bact:'🔥 التعزيز مفعّل',t_off:'💤 شغّل الجهاز أولًا',t_soon:'🎬 الفيديوهات قريبًا',t_err:'خطأ في الاتصال، حاول مجددًا',t_copied:'🔗 تم نسخ الرابط',t_wal:'✅ تم ربط المحفظة',maint:'صيانة',maint_p:'نعود خلال دقائق.',ban:'الحساب موقوف',ban_p:'لم يعد بإمكان هذا الحساب اللعب.',open_tg:'افتح Rig Rush في تيليجرام',share_txt:'⚡ أعدّن $RIGZ في Rig Rush! انضم واحصل على +100 RIGZ للـ airdrop 🪂',m:['حاسوب قديم','حاسوب مكتبي','حاسوب ألعاب RGB','منصة 3 GPU','منصة 6 GPU','مزرعة تعدين']},
+ fa:{coins:'RIGZهای تو',off:'💤 دستگاه خاموش است',run:'⏳ استخراج: {t} مانده',done:'🎉 جلسه تمام شد!',b_start:'⚡ روشن کردن دستگاه',b_run:'⚡ در حال استخراج…',b_claim:'💰 برداشت {n} RIGZ',upgrade:'ارتقا',max:'حداکثر سطح 🏆',bsub:'۱ ویدیو · ۱ ساعت',bon:'فعال · {m} دقیقه',bnone:'امروز ویدیویی نمانده',n_mine:'استخراج',n_mach:'دستگاه‌ها',n_fr:'دوستان',mach_h:'دستگاه‌های تو',mach_p:'هر دستگاه سریع‌تر از قبلی استخراج می‌کند. با RIGZ بازشان کن.',cur:'فعلی',fr_h:'با دوستانت استخراج کن',fr_p:'+۱۰۰ RIGZ برای تو و دوستت، بعد ۱۰٪ از هر چه استخراج کند، برای همیشه.',from_fr:'درآمد از دوستان',invite:'✈️ دعوت دوستان',fr_none:'هنوز دوستی نداری. لینکت را بفرست!',drop_p:'RIGZ امتیاز درون بازی است و ارزش پولی ندارد. یک ایردراپ برای ماینرها بر اساس RIGZ برنامه‌ریزی شده، بدون تاریخ یا مبلغ تضمین‌شده.',share:'سهم تقریبی تو',rank:'رتبه تو',miners:'ماینرها',wallet:'کیف پول TON',connect:'اتصال',top:'🏆 برترین ماینرها',t_start:'⚡ استخراج برای ۴ ساعت شروع شد',t_run:'⚡ دستگاهت در حال استخراج است، بعدا بیا',t_claim:'💰 +{n} RIGZ',t_need:'به {n} RIGZ نیاز داری',t_unlock:'🎉 {m} باز شد!',t_boost:'🎬 بوست x2: فن‌ها دیوانه شدند!',t_bact:'🔥 بوست فعال است',t_off:'💤 اول دستگاه را روشن کن',t_soon:'🎬 ویدیوها به‌زودی',t_err:'خطای اتصال، دوباره امتحان کن',t_copied:'🔗 لینک کپی شد',t_wal:'✅ کیف پول متصل شد',maint:'تعمیرات',maint_p:'چند دقیقه دیگر برمی‌گردیم.',ban:'حساب مسدود شد',ban_p:'این حساب دیگر نمی‌تواند بازی کند.',open_tg:'Rig Rush را در تلگرام باز کن',share_txt:'⚡ من در Rig Rush توکن $RIGZ استخراج می‌کنم! بیا و +۱۰۰ RIGZ برای ایردراپ بگیر 🪂',m:['لپ‌تاپ قدیمی','کامپیوتر رومیزی','کامپیوتر گیمینگ RGB','ریگ ۳ GPU','ریگ ۶ GPU','مزرعه ماینینگ']},
+};
+const NT = {
+ en:{notif_h:'🔔 Notifications',notif_none:'Nothing yet.',nf_full:'💰 Your machine finished mining: {n} RIGZ to collect.',nf_friend:'👥 {n} joined with your link: +{b} RIGZ, and 10 % of what they mine.',nf_join:'🎁 You joined with {n}\'s link: +{b} RIGZ.',nf_welcome:'👋 Welcome to Rig Rush! Turn on your machine to start mining.'},
+ fr:{notif_h:'🔔 Notifications',notif_none:'Rien pour l\'instant.',nf_full:'💰 Ta machine a fini de miner : {n} RIGZ à récupérer.',nf_friend:'👥 {n} a rejoint avec ton lien : +{b} RIGZ, et 10 % de ce qu\'il mine.',nf_join:'🎁 Tu as rejoint avec le lien de {n} : +{b} RIGZ.',nf_welcome:'👋 Bienvenue dans Rig Rush ! Allume ta machine pour commencer à miner.'},
+ es:{notif_h:'🔔 Notificaciones',notif_none:'Nada por ahora.',nf_full:'💰 Tu máquina terminó de minar: {n} RIGZ por recoger.',nf_friend:'👥 {n} se unió con tu enlace: +{b} RIGZ y el 10 % de lo que mine.',nf_join:'🎁 Te uniste con el enlace de {n}: +{b} RIGZ.',nf_welcome:'👋 ¡Bienvenido a Rig Rush! Enciende tu máquina para empezar a minar.'},
+ pt:{notif_h:'🔔 Notificações',notif_none:'Nada por enquanto.',nf_full:'💰 Sua máquina terminou de minerar: {n} RIGZ para coletar.',nf_friend:'👥 {n} entrou com seu link: +{b} RIGZ e 10 % do que ele minerar.',nf_join:'🎁 Você entrou com o link de {n}: +{b} RIGZ.',nf_welcome:'👋 Bem-vindo ao Rig Rush! Ligue sua máquina para começar a minerar.'},
+ ru:{notif_h:'🔔 Уведомления',notif_none:'Пока ничего.',nf_full:'💰 Машина закончила майнинг: {n} RIGZ ждут тебя.',nf_friend:'👥 {n} присоединился по твоей ссылке: +{b} RIGZ и 10 % от его добычи.',nf_join:'🎁 Ты пришёл по ссылке {n}: +{b} RIGZ.',nf_welcome:'👋 Добро пожаловать в Rig Rush! Включи машину, чтобы начать майнинг.'},
+ uk:{notif_h:'🔔 Сповіщення',notif_none:'Поки нічого.',nf_full:'💰 Машина завершила майнинг: {n} RIGZ чекають на тебе.',nf_friend:'👥 {n} приєднався за твоїм посиланням: +{b} RIGZ і 10 % від його видобутку.',nf_join:'🎁 Ти прийшов за посиланням {n}: +{b} RIGZ.',nf_welcome:'👋 Ласкаво просимо до Rig Rush! Увімкни машину, щоб почати майнинг.'},
+ tr:{notif_h:'🔔 Bildirimler',notif_none:'Henüz bir şey yok.',nf_full:'💰 Makinen kazmayı bitirdi: toplanacak {n} RIGZ.',nf_friend:'👥 {n} linkinle katıldı: +{b} RIGZ ve kazdığının %10\'u.',nf_join:'🎁 {n} linkiyle katıldın: +{b} RIGZ.',nf_welcome:'👋 Rig Rush\'a hoş geldin! Kazmaya başlamak için makineni çalıştır.'},
+ id:{notif_h:'🔔 Notifikasi',notif_none:'Belum ada apa-apa.',nf_full:'💰 Mesinmu selesai menambang: {n} RIGZ siap diambil.',nf_friend:'👥 {n} bergabung lewat link-mu: +{b} RIGZ dan 10 % dari tambangnya.',nf_join:'🎁 Kamu bergabung lewat link {n}: +{b} RIGZ.',nf_welcome:'👋 Selamat datang di Rig Rush! Nyalakan mesinmu untuk mulai menambang.'},
+ ar:{notif_h:'🔔 الإشعارات',notif_none:'لا شيء بعد.',nf_full:'💰 انتهى جهازك من التعدين: {n} RIGZ بانتظارك.',nf_friend:'👥 انضم {n} عبر رابطك: +{b} RIGZ و10 % مما يعدّنه.',nf_join:'🎁 انضممت عبر رابط {n}: +{b} RIGZ.',nf_welcome:'👋 مرحبًا بك في Rig Rush! شغّل جهازك لتبدأ التعدين.'},
+ fa:{notif_h:'🔔 اعلان‌ها',notif_none:'فعلا چیزی نیست.',nf_full:'💰 دستگاهت استخراج را تمام کرد: {n} RIGZ برای برداشت.',nf_friend:'👥 {n} با لینک تو آمد: +{b} RIGZ و ۱۰٪ از استخراجش.',nf_join:'🎁 با لینک {n} آمدی: +{b} RIGZ.',nf_welcome:'👋 به Rig Rush خوش آمدی! دستگاهت را روشن کن تا استخراج شروع شود.'},
+};
+const NP = {
+ en:{comps:'Components',p_cool:'Cooling',p_oc:'Overclock',p_bat:'Battery',e_spd:'+{n} % speed per level',e_bat:'+{n} h per session per level',t_part:'✅ {m} level {n}!',avail:'{n} upgrade(s) available'},
+ fr:{comps:'Composants',p_cool:'Refroidissement',p_oc:'Overclock',p_bat:'Batterie',e_spd:'+{n} % de vitesse par niveau',e_bat:'+{n} h par session par niveau',t_part:'✅ {m} niveau {n} !',avail:'{n} amélioration(s) dispo'},
+ es:{comps:'Componentes',p_cool:'Refrigeración',p_oc:'Overclock',p_bat:'Batería',e_spd:'+{n} % de velocidad por nivel',e_bat:'+{n} h por sesión por nivel',t_part:'✅ ¡{m} nivel {n}!',avail:'{n} mejora(s) disponible(s)'},
+ pt:{comps:'Componentes',p_cool:'Refrigeração',p_oc:'Overclock',p_bat:'Bateria',e_spd:'+{n} % de velocidade por nível',e_bat:'+{n} h por sessão por nível',t_part:'✅ {m} nível {n}!',avail:'{n} melhoria(s) disponível(is)'},
+ ru:{comps:'Компоненты',p_cool:'Охлаждение',p_oc:'Разгон',p_bat:'Батарея',e_spd:'+{n} % скорости за уровень',e_bat:'+{n} ч к сессии за уровень',t_part:'✅ {m}: уровень {n}!',avail:'Доступно улучшений: {n}'},
+ uk:{comps:'Компоненти',p_cool:'Охолодження',p_oc:'Розгін',p_bat:'Батарея',e_spd:'+{n} % швидкості за рівень',e_bat:'+{n} год до сесії за рівень',t_part:'✅ {m}: рівень {n}!',avail:'Доступно покращень: {n}'},
+ tr:{comps:'Bileşenler',p_cool:'Soğutma',p_oc:'Hız aşırtma',p_bat:'Batarya',e_spd:'Seviye başına +%{n} hız',e_bat:'Seviye başına oturuma +{n} sa',t_part:'✅ {m} seviye {n}!',avail:'{n} yükseltme hazır'},
+ id:{comps:'Komponen',p_cool:'Pendingin',p_oc:'Overclock',p_bat:'Baterai',e_spd:'+{n} % kecepatan per level',e_bat:'+{n} jam per sesi per level',t_part:'✅ {m} level {n}!',avail:'{n} peningkatan tersedia'},
+ ar:{comps:'المكوّنات',p_cool:'التبريد',p_oc:'كسر السرعة',p_bat:'البطارية',e_spd:'+{n} % سرعة لكل مستوى',e_bat:'+{n} ساعة للجلسة لكل مستوى',t_part:'✅ {m} المستوى {n}!',avail:'{n} ترقية متاحة'},
+ fa:{comps:'قطعات',p_cool:'خنک‌کننده',p_oc:'اورکلاک',p_bat:'باتری',e_spd:'+{n}٪ سرعت در هر سطح',e_bat:'+{n} ساعت به هر جلسه در هر سطح',t_part:'✅ {m} سطح {n}!',avail:'{n} ارتقا موجود است'},
+};
+// 24 oct 2026 (Jeremy, 3h36): 12 machines, 3 more components
+const NM = {
+ en:{p_gpu:'Graphics cards',p_psu:'Power supply',p_soft:'Mining software',t_cap:'You need a level {n} machine first',t_capshort:'Lvl {n}',m:['Old laptop','Gaming laptop','Desktop PC','RGB gaming PC','1-GPU rig','3-GPU rig','6-GPU rig','12-GPU rig','ASIC rack','Server room','Mining farm','Data center']},
+ fr:{p_gpu:'Cartes graphiques',p_psu:'Alimentation',p_soft:'Logiciel de minage',t_cap:'Il te faut d\'abord une machine niveau {n}',t_capshort:'Niv. {n}',m:['Vieux laptop','Laptop gamer','PC de bureau','PC gamer RGB','Rig 1 GPU','Rig 3 GPU','Rig 6 GPU','Rig 12 GPU','Baie ASIC','Salle serveurs','Ferme de minage','Data center']},
+ es:{p_gpu:'Tarjetas gráficas',p_psu:'Fuente de poder',p_soft:'Software de minería',t_cap:'Primero necesitas una máquina nivel {n}',t_capshort:'Niv. {n}',m:['Portátil viejo','Portátil gamer','PC de escritorio','PC gamer RGB','Rig 1 GPU','Rig 3 GPU','Rig 6 GPU','Rig 12 GPU','Rack ASIC','Sala de servidores','Granja de minería','Centro de datos']},
+ pt:{p_gpu:'Placas de vídeo',p_psu:'Fonte',p_soft:'Software de mineração',t_cap:'Primeiro você precisa de uma máquina nível {n}',t_capshort:'Nív. {n}',m:['Notebook velho','Notebook gamer','PC de mesa','PC gamer RGB','Rig 1 GPU','Rig 3 GPU','Rig 6 GPU','Rig 12 GPU','Rack ASIC','Sala de servidores','Fazenda de mineração','Data center']},
+ ru:{p_gpu:'Видеокарты',p_psu:'Блок питания',p_soft:'Майнинг-софт',t_cap:'Сначала нужна машина уровня {n}',t_capshort:'Ур. {n}',m:['Старый ноутбук','Игровой ноутбук','Настольный ПК','Игровой ПК RGB','Риг 1 GPU','Риг 3 GPU','Риг 6 GPU','Риг 12 GPU','Стойка ASIC','Серверная','Майнинг-ферма','Дата-центр']},
+ uk:{p_gpu:'Відеокарти',p_psu:'Блок живлення',p_soft:'Майнінг-софт',t_cap:'Спочатку потрібна машина рівня {n}',t_capshort:'Рів. {n}',m:['Старий ноутбук','Ігровий ноутбук','Настільний ПК','Ігровий ПК RGB','Риг 1 GPU','Риг 3 GPU','Риг 6 GPU','Риг 12 GPU','Стійка ASIC','Серверна','Майнінг-ферма','Дата-центр']},
+ tr:{p_gpu:'Ekran kartları',p_psu:'Güç kaynağı',p_soft:'Madencilik yazılımı',t_cap:'Önce {n}. seviye makine gerekiyor',t_capshort:'Sv. {n}',m:['Eski dizüstü','Oyuncu dizüstü','Masaüstü PC','RGB oyuncu PC','1 GPU rig','3 GPU rig','6 GPU rig','12 GPU rig','ASIC rafı','Sunucu odası','Madencilik çiftliği','Veri merkezi']},
+ id:{p_gpu:'Kartu grafis',p_psu:'Catu daya',p_soft:'Software tambang',t_cap:'Butuh mesin level {n} dulu',t_capshort:'Lv. {n}',m:['Laptop tua','Laptop gaming','PC desktop','PC gaming RGB','Rig 1 GPU','Rig 3 GPU','Rig 6 GPU','Rig 12 GPU','Rak ASIC','Ruang server','Ladang tambang','Pusat data']},
+ ar:{p_gpu:'بطاقات الرسوم',p_psu:'مزوّد الطاقة',p_soft:'برنامج التعدين',t_cap:'تحتاج أولًا جهازًا من المستوى {n}',t_capshort:'م. {n}',m:['حاسوب قديم','حاسوب ألعاب محمول','حاسوب مكتبي','حاسوب ألعاب RGB','منصة 1 GPU','منصة 3 GPU','منصة 6 GPU','منصة 12 GPU','رف ASIC','غرفة خوادم','مزرعة تعدين','مركز بيانات']},
+ fa:{p_gpu:'کارت گرافیک',p_psu:'منبع تغذیه',p_soft:'نرم‌افزار ماینینگ',t_cap:'اول به دستگاه سطح {n} نیاز داری',t_capshort:'سطح {n}',m:['لپ‌تاپ قدیمی','لپ‌تاپ گیمینگ','کامپیوتر رومیزی','کامپیوتر گیمینگ RGB','ریگ ۱ GPU','ریگ ۳ GPU','ریگ ۶ GPU','ریگ ۱۲ GPU','رک ASIC','اتاق سرور','مزرعه ماینینگ','دیتاسنتر']},
+};
+const NU = {
+ en:{t_newpart:'New component at machine level {n}',t_more:'??? {n} more machines to discover'},
+ fr:{t_newpart:'Nouveau composant : machine niveau {n}',t_more:'??? encore {n} machines à découvrir'},
+ es:{t_newpart:'Nuevo componente con la máquina nivel {n}',t_more:'??? {n} máquinas más por descubrir'},
+ pt:{t_newpart:'Novo componente na máquina nível {n}',t_more:'??? mais {n} máquinas para descobrir'},
+ ru:{t_newpart:'Новый компонент на машине уровня {n}',t_more:'??? ещё {n} машин впереди'},
+ uk:{t_newpart:'Новий компонент на машині рівня {n}',t_more:'??? ще {n} машин попереду'},
+ tr:{t_newpart:'{n}. seviye makinede yeni bileşen',t_more:'??? keşfedilecek {n} makine daha'},
+ id:{t_newpart:'Komponen baru di mesin level {n}',t_more:'??? {n} mesin lagi untuk ditemukan'},
+ ar:{t_newpart:'مكوّن جديد عند جهاز المستوى {n}',t_more:'??? {n} أجهزة أخرى لاكتشافها'},
+ fa:{t_newpart:'قطعه جدید در دستگاه سطح {n}',t_more:'??? {n} دستگاه دیگر برای کشف'},
+};
+const NR = {
+ en:{t_parts:'🔧 Upgrade all your components first',t_partsshort:'Components first'},
+ fr:{t_parts:'🔧 Améliore d\'abord tous tes composants',t_partsshort:'Composants d\'abord'},
+ es:{t_parts:'🔧 Primero mejora todos tus componentes',t_partsshort:'Componentes primero'},
+ pt:{t_parts:'🔧 Primeiro melhore todos os seus componentes',t_partsshort:'Componentes antes'},
+ ru:{t_parts:'🔧 Сначала улучши все компоненты',t_partsshort:'Сначала компоненты'},
+ uk:{t_parts:'🔧 Спочатку покращ усі компоненти',t_partsshort:'Спершу компоненти'},
+ tr:{t_parts:'🔧 Önce tüm bileşenlerini yükselt',t_partsshort:'Önce bileşenler'},
+ id:{t_parts:'🔧 Tingkatkan semua komponenmu dulu',t_partsshort:'Komponen dulu'},
+ ar:{t_parts:'🔧 طوّر كل مكوّناتك أولًا',t_partsshort:'المكوّنات أولًا'},
+ fa:{t_parts:'🔧 اول همه قطعه‌هایت را ارتقا بده',t_partsshort:'اول قطعه‌ها'},
+};
+const NC = {
+ en:{p_ram:'RAM',p_water:'Water cooling',p_net:'Fiber internet',p_solar:'Solar panels'},
+ fr:{p_ram:'Mémoire RAM',p_water:'Watercooling',p_net:'Fibre optique',p_solar:'Panneaux solaires'},
+ es:{p_ram:'Memoria RAM',p_water:'Refrigeración líquida',p_net:'Fibra óptica',p_solar:'Paneles solares'},
+ pt:{p_ram:'Memória RAM',p_water:'Water cooler',p_net:'Fibra óptica',p_solar:'Painéis solares'},
+ ru:{p_ram:'Оперативная память',p_water:'Водяное охлаждение',p_net:'Оптоволокно',p_solar:'Солнечные панели'},
+ uk:{p_ram:'Оперативна пам\'ять',p_water:'Водяне охолодження',p_net:'Оптоволокно',p_solar:'Сонячні панелі'},
+ tr:{p_ram:'RAM bellek',p_water:'Sıvı soğutma',p_net:'Fiber internet',p_solar:'Güneş panelleri'},
+ id:{p_ram:'Memori RAM',p_water:'Pendingin air',p_net:'Internet fiber',p_solar:'Panel surya'},
+ ar:{p_ram:'ذاكرة RAM',p_water:'تبريد مائي',p_net:'ألياف ضوئية',p_solar:'ألواح شمسية'},
+ fa:{p_ram:'حافظه RAM',p_water:'خنک‌کننده آبی',p_net:'فیبر نوری',p_solar:'پنل خورشیدی'},
+};
+Object.keys(NC).forEach(k => Object.assign(I[k], NC[k]));
+Object.keys(NR).forEach(k => Object.assign(I[k], NR[k]));
+// 24 oct 2026 (Jeremy): players come back more often: 2 h sessions, battery +20 min per level, daily streak, free chest every 4 h
+const NS = {"en": {"e_bat": "+{n} min per session per level", "t_start": "⚡ Mining started for {n}", "ch_t": "Free chest", "ch_ok": "Ready, open it!", "ch_w": "Next in {t}", "t_chest": "🎁 +{n} RIGZ from the chest!", "stk": "🔥 Day {d} · +{p} %", "stk_i": "Come back every day: +5 % mining per day in a row, up to +35 %. Miss a day and it starts again."}, "fr": {"e_bat": "+{n} min par session par niveau", "t_start": "⚡ Minage lancé pour {n}", "ch_t": "Coffre gratuit", "ch_ok": "Prêt, ouvre-le !", "ch_w": "Prochain dans {t}", "t_chest": "🎁 +{n} RIGZ dans le coffre !", "stk": "🔥 Jour {d} · +{p} %", "stk_i": "Reviens chaque jour : +5 % de minage par jour d'affilée, jusqu'à +35 %. Un jour raté et ça repart à zéro."}, "es": {"e_bat": "+{n} min por sesión por nivel", "t_start": "⚡ Minado iniciado por {n}", "ch_t": "Cofre gratis", "ch_ok": "¡Listo, ábrelo!", "ch_w": "Próximo en {t}", "t_chest": "🎁 ¡+{n} RIGZ del cofre!", "stk": "🔥 Día {d} · +{p} %", "stk_i": "Vuelve cada día: +5 % de minado por día seguido, hasta +35 %. Si fallas un día, vuelve a empezar."}, "pt": {"e_bat": "+{n} min por sessão por nível", "t_start": "⚡ Mineração iniciada por {n}", "ch_t": "Baú grátis", "ch_ok": "Pronto, abra!", "ch_w": "Próximo em {t}", "t_chest": "🎁 +{n} RIGZ do baú!", "stk": "🔥 Dia {d} · +{p} %", "stk_i": "Volte todo dia: +5 % de mineração por dia seguido, até +35 %. Perdeu um dia, recomeça."}, "ru": {"e_bat": "+{n} мин к сессии за уровень", "t_start": "⚡ Майнинг запущен на {n}", "ch_t": "Бесплатный сундук", "ch_ok": "Готов, открывай!", "ch_w": "Следующий через {t}", "t_chest": "🎁 +{n} RIGZ из сундука!", "stk": "🔥 День {d} · +{p} %", "stk_i": "Заходи каждый день: +5 % к майнингу за каждый день подряд, до +35 %. Пропустишь день, и серия начнётся заново."}, "uk": {"e_bat": "+{n} хв до сесії за рівень", "t_start": "⚡ Майнинг запущено на {n}", "ch_t": "Безкоштовна скриня", "ch_ok": "Готова, відкривай!", "ch_w": "Наступна через {t}", "t_chest": "🎁 +{n} RIGZ зі скрині!", "stk": "🔥 День {d} · +{p} %", "stk_i": "Заходь щодня: +5 % до майнингу за кожен день поспіль, до +35 %. Пропустиш день, і серія почнеться знову."}, "tr": {"e_bat": "Seviye başına oturuma +{n} dk", "t_start": "⚡ Kazım {n} için başladı", "ch_t": "Bedava sandık", "ch_ok": "Hazır, aç!", "ch_w": "Sonraki: {t}", "t_chest": "🎁 Sandıktan +{n} RIGZ!", "stk": "🔥 {d}. gün · +%{p}", "stk_i": "Her gün gel: üst üste her gün için +%5 kazım, en fazla +%35. Bir gün kaçırırsan sıfırlanır."}, "id": {"e_bat": "+{n} menit per sesi per level", "t_start": "⚡ Menambang dimulai selama {n}", "ch_t": "Peti gratis", "ch_ok": "Siap, buka!", "ch_w": "Berikutnya {t}", "t_chest": "🎁 +{n} RIGZ dari peti!", "stk": "🔥 Hari {d} · +{p} %", "stk_i": "Kembali setiap hari: +5 % tambang per hari berturut-turut, hingga +35 %. Lewat sehari, mulai lagi dari awal."}, "ar": {"e_bat": "+{n} دقيقة للجلسة لكل مستوى", "t_start": "⚡ بدأ التعدين لمدة {n}", "ch_t": "صندوق مجاني", "ch_ok": "جاهز، افتحه!", "ch_w": "التالي بعد {t}", "t_chest": "🎁 +{n} RIGZ من الصندوق!", "stk": "🔥 اليوم {d} · +{p} %", "stk_i": "عُد كل يوم: +5 % تعدين لكل يوم متتالٍ، حتى +35 %. إذا فوّت يومًا تبدأ من جديد."}, "fa": {"e_bat": "+{n} دقیقه به هر جلسه در هر سطح", "t_start": "⚡ استخراج برای {n} شروع شد", "ch_t": "صندوق رایگان", "ch_ok": "آماده است، بازش کن!", "ch_w": "بعدی تا {t}", "t_chest": "🎁 +{n} RIGZ از صندوق!", "stk": "🔥 روز {d} · +{p}٪", "stk_i": "هر روز برگرد: برای هر روز پشت سر هم +۵٪ استخراج، تا +۳۵٪. یک روز غیبت و از اول شروع می‌شود."}};
+Object.keys(NU).forEach(k => Object.assign(I[k], NU[k]));
+Object.keys(NM).forEach(k => Object.assign(I[k], NM[k]));
+Object.keys(NP).forEach(k => Object.assign(I[k], NP[k]));
+Object.keys(NS).forEach(k => Object.assign(I[k], NS[k]));
+const NB = {"en": {"sub_cta": "📢 Join <b>@jeremstyke</b>: <b>+10 %</b> mining", "sub_chip": "📢 +10 %", "t_sub_ok": "✅ +10 % mining unlocked!", "t_sub_no": "📢 Join @jeremstyke, then come back here", "sub_i": "+10 % mining while you follow @jeremstyke. Leave the channel and the bonus stops."}, "fr": {"sub_cta": "📢 Abonne-toi à <b>@jeremstyke</b> : <b>+10 %</b> de minage", "sub_chip": "📢 +10 %", "t_sub_ok": "✅ +10 % de minage activé !", "t_sub_no": "📢 Abonne-toi à @jeremstyke, puis reviens ici", "sub_i": "+10 % de minage tant que tu es abonné à @jeremstyke. Si tu quittes la chaîne, le bonus s'arrête."}, "es": {"sub_cta": "📢 Únete a <b>@jeremstyke</b>: <b>+10 %</b> de minado", "sub_chip": "📢 +10 %", "t_sub_ok": "✅ ¡+10 % de minado activado!", "t_sub_no": "📢 Únete a @jeremstyke y vuelve aquí", "sub_i": "+10 % de minado mientras sigas a @jeremstyke. Si sales del canal, el bono se detiene."}, "pt": {"sub_cta": "📢 Entre em <b>@jeremstyke</b>: <b>+10 %</b> de mineração", "sub_chip": "📢 +10 %", "t_sub_ok": "✅ +10 % de mineração ativado!", "t_sub_no": "📢 Entre em @jeremstyke e volte aqui", "sub_i": "+10 % de mineração enquanto você seguir @jeremstyke. Se sair do canal, o bônus para."}, "ru": {"sub_cta": "📢 Подпишись на <b>@jeremstyke</b>: <b>+10 %</b> к майнингу", "sub_chip": "📢 +10 %", "t_sub_ok": "✅ +10 % к майнингу активировано!", "t_sub_no": "📢 Подпишись на @jeremstyke и возвращайся сюда", "sub_i": "+10 % к майнингу, пока ты подписан на @jeremstyke. Отпишешься, и бонус пропадёт."}, "uk": {"sub_cta": "📢 Підпишись на <b>@jeremstyke</b>: <b>+10 %</b> до майнингу", "sub_chip": "📢 +10 %", "t_sub_ok": "✅ +10 % до майнингу активовано!", "t_sub_no": "📢 Підпишись на @jeremstyke і повертайся сюди", "sub_i": "+10 % до майнингу, поки ти підписаний на @jeremstyke. Відпишешся, і бонус зникне."}, "tr": {"sub_cta": "📢 <b>@jeremstyke</b> kanalına katıl: <b>+%10</b> kazım", "sub_chip": "📢 +%10", "t_sub_ok": "✅ +%10 kazım açıldı!", "t_sub_no": "📢 @jeremstyke kanalına katıl, sonra buraya dön", "sub_i": "@jeremstyke takip ettiğin sürece +%10 kazım. Kanaldan çıkarsan bonus durur."}, "id": {"sub_cta": "📢 Gabung <b>@jeremstyke</b>: <b>+10 %</b> tambang", "sub_chip": "📢 +10 %", "t_sub_ok": "✅ +10 % tambang aktif!", "t_sub_no": "📢 Gabung @jeremstyke, lalu kembali ke sini", "sub_i": "+10 % tambang selama kamu mengikuti @jeremstyke. Keluar dari kanal dan bonus berhenti."}, "ar": {"sub_cta": "📢 اشترك في <b>@jeremstyke</b>: <b>+10 %</b> تعدين", "sub_chip": "📢 +10 %", "t_sub_ok": "✅ تم تفعيل +10 % تعدين!", "t_sub_no": "📢 اشترك في @jeremstyke ثم عد إلى هنا", "sub_i": "+10 % تعدين ما دمت مشتركًا في @jeremstyke. إذا غادرت القناة يتوقف المكافأة."}, "fa": {"sub_cta": "📢 در <b>@jeremstyke</b> عضو شو: <b>+۱۰٪</b> استخراج", "sub_chip": "📢 +۱۰٪", "t_sub_ok": "✅ +۱۰٪ استخراج فعال شد!", "t_sub_no": "📢 در @jeremstyke عضو شو و بعد برگرد اینجا", "sub_i": "تا وقتی عضو @jeremstyke هستی +۱۰٪ استخراج. اگر از کانال خارج شوی، پاداش قطع می‌شود."}};  // 24 oct 2026: +10 % for following @jeremstyke
+Object.keys(NB).forEach(k => Object.assign(I[k], NB[k]));  // 24 oct 2026: after NP, which also sets e_bat
+// 24 oct 2026 (Jeremy): RIGZ divided by 144 (a laptop mines 1 RIGZ per 4 h); the friend bonus is now 1 RIGZ
+Object.keys(I).forEach(k => ['fr_p', 'share_txt'].forEach(t => { I[k][t] = I[k][t].replace(/\+100 RIGZ|\+۱۰۰ RIGZ/, k === 'fa' ? '+۱ RIGZ' : '+1 RIGZ') }));
+Object.keys(NT).forEach(k => Object.assign(I[k], NT[k]));
+const L = I[LANG];
+const tr = (k, v) => String(L[k] || I.en[k] || k).replace(/\{(\w)\}/g, (_, x) => v && v[x] !== undefined ? v[x] : '');
+document.querySelectorAll('[data-t]').forEach(e => e.textContent = tr(e.dataset.t));
+const EMO = ['💻', '🎮', '🖥️', '🌈', '🧩', '🧩', '🔥', '🔥', '⚙️', '🗄️', '🏭', '🌐'];  // 24 oct 2026: 12 machines
+const DRAW = [0, 0, 1, 2, 3, 3, 4, 4, 5, 5, 5, 5];  // which drawing each machine uses
+const nf = new Intl.NumberFormat(LANG === 'fa' ? 'fa-IR' : LANG, { maximumFractionDigits: 0 });
+const fmt = v => nf.format(Math.floor(v));
+const nf2 = new Intl.NumberFormat(LANG === 'fa' ? 'fa-IR' : LANG, { maximumFractionDigits: 2 });
+const fmt2 = v => nf2.format(Math.floor(Number(v) * 100 + 1e-6) / 100);  // 24 oct 2026: RIGZ are scarce (0.25 an hour), so 2 decimals
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const $ = id => document.getElementById(id);
+function toast(t) { const e = $('toast'); e.textContent = t; e.classList.add('show'); clearTimeout(e._t); e._t = setTimeout(() => e.classList.remove('show'), 2000) }
+function haptic(k) { try { TW.HapticFeedback.impactOccurred(k || 'light') } catch (e) {} }
+
+// ---------- server ----------
+let ST = null, OFF = 0, busy = false;
+async function api(action, body) {
+  const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ initData: (TW && TW.initData) || '', action, ...(body || {}) }) });
+  return r.json();
+}
+function cover(icon, title, p) { $('cvI').textContent = icon; $('cvT').textContent = title; $('cvP').textContent = p; $('cover').hidden = false }
+function take(r) {
+  if (!r) return false;
+  if (r.error === 'maint') { cover('🛠️', tr('maint'), tr('maint_p')); return false }
+  if (r.error === 'banned') { if (window.JSBan) JSBan(); /* 24 oct 2026: same screen in every game (games.js) */ cover('🚫', tr('ban'), tr('ban_p')); return false }
+  if (r.error === 'auth') { cover('✈️', 'Rig Rush', tr('open_tg')); return false }
+  if (r.me) { ST = r; OFF = new Date(r.now).getTime() - Date.now(); if (r.me.tier !== drawn) draw(r.me.tier); buildUp(); }
+  return true;
+}
+const now = () => Date.now() + OFF;
+const T = s => s ? new Date(s).getTime() : 0;
+const tiers = () => ST ? ST.cfg.tiers : [[36, 0]];
+const SES = () => (ST ? Number(ST.me.sess_h || ST.cfg.session_h) : 4) * 3600e3;
+function rateAt(t) { const m = ST.me; return Number(m.rate) * (m.boost_end && t < T(m.boost_end) && t >= T(m.boost_at) ? 2 : 1) }
+function mined() {  // same formula as rr_mined
+  const m = ST && ST.me; if (!m || !m.start_at || !m.seg_at) return 0;
+  const e = Math.min(now(), T(m.start_at) + SES()), s = T(m.seg_at); if (e <= s) return 0;
+  let h = (e - s) / 3600e3, bh = 0;
+  if (m.boost_end && m.boost_at) bh = Math.max(0, (Math.min(e, T(m.boost_end)) - Math.max(s, T(m.boost_at))) / 3600e3);
+  return Number(ST.me.rate) * (h + bh);
+}
+const running = () => ST && ST.me.start_at && now() < T(ST.me.start_at) + SES();
+const shown = () => (ST ? Number(ST.me.pts) : 0) + mined();
+</script>
+<script>
+// ---------- machine drawings ----------
+const fan=(cx,cy,r,col='#9fb3c8')=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#0b131d" stroke="#2a3a4d" stroke-width="1.5"/><g class="fan">${[0,72,144,216,288].map(a=>`<path d="M${cx} ${cy} q${r*.25} ${-r*.55} ${r*.05} ${-r*.85} q${-r*.35} ${r*.2} ${-r*.05} ${r*.85}z" fill="${col}" opacity=".85" transform="rotate(${a} ${cx} ${cy})"/>`).join('')}<circle cx="${cx}" cy="${cy}" r="${r*.22}" fill="#2a3a4d"/></g>`;
+const led=(x,y,c,d=0)=>`<circle class="led" cx="${x}" cy="${y}" r="2" fill="${c}" style="animation-delay:${d}s;filter:drop-shadow(0 0 3px ${c})"/>`;
+let cid=0;
+function screen(x,y,w,h){const id='c'+(cid++);let t='';for(let i=0;i<14;i++){const s=Array.from({length:Math.max(4,Math.floor(w/7))},()=>'0123456789abcdef'[Math.random()*16|0]).join('');t+=`<text x="${x+4}" y="${y+10+i*10}" font-size="7" font-family="JetBrains Mono,monospace" fill="${i%5==2?'#ffc83d':'#39ff9f'}">${i%5==2?'✓ block found':'0x'+s}</text>`}
+  return `<clipPath id="${id}"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3"/></clipPath><rect class="scr" x="${x}" y="${y}" width="${w}" height="${h}" rx="3" stroke="#1e2b3a" stroke-width="2"/><g class="code" clip-path="url(#${id})"><g>${t}${t.replace(/y="(\d+)"/g,(m,v)=>`y="${+v+140}"`)}</g></g><text class="off-txt" x="${x+w/2}" y="${y+h/2+3}" text-anchor="middle" font-size="8" fill="#2c3e52" font-family="Nunito">OFF</text>`}
+function gpu(x,y,w=70){return `<g><rect x="${x}" y="${y}" width="${w}" height="26" rx="4" fill="#1c2633" stroke="#35485e" stroke-width="1.5"/><rect class="rgb" x="${x}" y="${y}" width="${w}" height="3" rx="1.5" fill="#ff4fd8"/>${fan(x+w*.28,y+14,10)}${fan(x+w*.72,y+14,10)}${led(x+w-5,y+22,'#39ff9f',Math.random())}</g>`}
+const desk=`<rect x="10" y="190" width="300" height="10" rx="3" fill="#1a2433"/><rect x="24" y="200" width="10" height="20" fill="#121a26"/><rect x="286" y="200" width="10" height="20" fill="#121a26"/><ellipse class="glowp" cx="160" cy="192" rx="120" ry="6" fill="#39ff9f" fill-opacity=".22" style="filter:blur(3px)"/>`;
+var draw=function(t){cid=0;let g='';
+ if(t===0){g=`${screen(108,98,104,70)}<path d="M104 94 h112 v78 h-112z" fill="none" stroke="#3a4a5e" stroke-width="5" stroke-linejoin="round"/><path d="M84 176 h152 l10 14 h-172z" fill="#3a4a5e"/><rect x="140" y="181" width="40" height="4" rx="2" fill="#26323f"/>${led(226,184,'#39ff9f')}<path d="M232 120 q10 -6 6 -18" stroke="#8aa0b8" stroke-width="2" fill="none" class="glowp"/>`}
+ if(t===1){g=`<rect x="70" y="100" width="130" height="80" rx="5" fill="#1e2b3a"/>${screen(76,106,118,68)}<rect x="126" y="180" width="18" height="8" fill="#2a3a4d"/><rect x="110" y="186" width="50" height="4" rx="2" fill="#2a3a4d"/>
+  <rect x="214" y="96" width="62" height="94" rx="6" fill="#1c2633" stroke="#35485e" stroke-width="2"/>${fan(245,150,18)}${led(224,106,'#39ff9f')}${led(232,106,'#22d3ee',.3)}<rect x="222" y="114" width="46" height="4" rx="2" fill="#2a3a4d"/>`}
+ if(t===2){g=`<rect x="40" y="92" width="150" height="88" rx="5" fill="#1e2b3a"/>${screen(46,98,138,76)}<rect class="rgb" x="40" y="178" width="150" height="3" fill="#ff4fd8"/><rect x="106" y="181" width="18" height="6" fill="#2a3a4d"/><rect x="90" y="186" width="50" height="4" rx="2" fill="#2a3a4d"/>
+  <rect x="200" y="66" width="86" height="124" rx="8" fill="#141c27" stroke="#35485e" stroke-width="2"/><rect x="206" y="72" width="74" height="112" rx="5" fill="#0a1018" stroke="#5a7a9a" stroke-width="1" opacity=".9"/>
+  <g class="rgb"><rect x="206" y="72" width="74" height="112" rx="5" fill="none" stroke="#22d3ee" stroke-width="2"/></g>${fan(243,94,15,'#ff4fd8')}${fan(243,128,15,'#22d3ee')}${gpu(212,150,62)}`}
+ if(t===3||t===4){const rows=t===3?1:2;g=`<rect x="34" y="${t===3?100:56}" width="252" height="${t===3?90:134}" rx="4" fill="none" stroke="#5a6b80" stroke-width="5"/><rect x="34" y="${t===3?100:56}" width="252" height="6" fill="#5a6b80"/>`;
+  for(let r=0;r<rows;r++)for(let k=0;k<3;k++)g+=gpu(46+k*80,(t===3?118:72+r*60),70);
+  g+=`<rect x="120" y="${t===3?156:196-28}" width="80" height="20" rx="3" fill="#232f3d" stroke="#35485e"/><text x="160" y="${t===3?170:182}" text-anchor="middle" font-size="9" fill="#8aa0b8" font-family="Nunito" font-weight="800">PSU 1600W</text>${led(194,t===3?166:178,'#39ff9f')}
+  <path class="rgb" d="M34 ${t===3?190:190} h252" stroke="#ff4fd8" stroke-width="3"/>`;
+  if(t===4)g+=`<rect x="0" y="40" width="320" height="150" fill="url(#heat)" class="glowp"/>`}
+ if(t===5){g='';for(let k=0;k<3;k++){const x=26+k*98;g+=`<rect x="${x}" y="40" width="80" height="150" rx="4" fill="#121a26" stroke="#35485e" stroke-width="2"/>`;
+   for(let s=0;s<5;s++){const y=48+s*28;g+=`<rect x="${x+6}" y="${y}" width="68" height="22" rx="2" fill="#1c2633" stroke="#2a3a4d"/>${fan(x+18,y+11,8)}${fan(x+38,y+11,8)}`+led(x+58,y+7,'#39ff9f',Math.random())+led(x+66,y+7,'#22d3ee',Math.random())+led(x+58,y+15,'#ff4fd8',Math.random())+led(x+66,y+15,'#39ff9f',Math.random())}}
+  g+=`<path class="rgb" d="M20 32 h280" stroke="#22d3ee" stroke-width="3"/>`}
+ $('svg').innerHTML=`<defs><linearGradient id="heat" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff7a3d" stop-opacity=".18"/><stop offset="1" stop-color="#ff7a3d" stop-opacity="0"/></linearGradient></defs>${desk}<g id="mach">${g}</g>`}
+
+
+let drawn = -1;
+const _draw = draw; draw = function (t) { drawn = t; _draw(DRAW[t] == null ? 5 : DRAW[t]) };
+function render() {
+  if (!ST) return;
+  const m = ST.me, v = shown(), i = Math.floor(v), t0 = now();
+  $('num').textContent = fmt(i); $('dec').textContent = (LANG === 'en' ? '.' : ',') + (v - i).toFixed(5).slice(2);
+  const boosted = m.boost_end && t0 < T(m.boost_end), run = running(), done = m.start_at && !run, b = $('main');
+  $('rate').innerHTML = '⚡ ' + fmt2(Number(m.rate) * (boosted ? 2 : 1)) + ' / h' + (boosted ? ' <b class="x2">x2</b>' : '');
+  $('scene').className = 'scene' + (run ? ' on' : '') + (run && boosted ? ' boost' : '');
+  $('bar').style.width = (m.start_at ? Math.min(1, (t0 - T(m.start_at)) / SES()) * 100 : 0) + '%';
+  if (run) { const r = T(m.start_at) + SES() - t0, h = Math.floor(r / 3600e3), mn = Math.floor(r % 3600e3 / 6e4), s = Math.floor(r % 6e4 / 1e3);
+    $('sess').textContent = tr('run', { t: h + 'h ' + String(mn).padStart(2, '0') + 'm ' + String(s).padStart(2, '0') + 's' }); b.className = 'btn run'; b.textContent = tr('b_run') }
+  else if (done) { $('sess').textContent = tr('done'); b.className = 'btn claim'; b.textContent = tr('b_claim', { n: fmt2(mined()) }) }
+  else { $('sess').textContent = tr('off'); b.className = 'btn'; b.textContent = tr('b_start') }
+  $('lvlN').textContent = m.tier + 1; $('lvlT').textContent = L.m[m.tier]; $('mname').textContent = EMO[m.tier] + ' ' + L.m[m.tier];
+  const nx = tiers()[m.tier + 1], nc = buyable(v); $('upS').textContent = nc ? tr('avail', { n: nc }) : nx ? '→ ' + fmt2(nx[1]) + ' RIGZ' : tr('max'); $('upB').classList.toggle('can', nc > 0);
+  $('boB').hidden = ST.cfg.boost_on !== true;
+  { const cl = chestLeft(); $('chT').textContent = tr('ch_t'); $('chS').textContent = cl > 0 ? '⏳ ' + cdTxt(cl) : tr('ch_ok'); $('chB').classList.toggle('can', cl <= 0);
+    const sb = $('sbc'), su = $('subB'); sb.hidden = !m.sub; su.hidden = !!m.sub; if (m.sub) sb.textContent = tr('sub_chip'); else if (su.dataset.l !== LANG) { su.innerHTML = tr('sub_cta'); su.dataset.l = LANG }
+    const sk = $('stk'); sk.hidden = !(m.streak > 0); if (m.streak > 0) sk.textContent = tr('stk', { d: m.streak, p: m.streak_pct }); }  /* 24 oct 2026 (Jeremy): no boost until Adsgram is set up */ $('bdg').hidden = !m.unread; $('bdg').textContent = m.unread > 9 ? '9+' : m.unread;
+  $('boB').classList.toggle('on', !!boosted);
+  $('boS').textContent = boosted ? tr('bon', { m: Math.ceil((T(m.boost_end) - t0) / 6e4) }) : m.boost_left > 0 ? tr('bsub') + ' · ' + m.boost_left + '/' + 6 : tr('bnone');
+  if (!$('pg-up').hidden) buildUp();
+  const ev = Number(m.earned || 0) + mined();  // 24 oct 2026 (4h09): the airdrop counts everything earned, upgrades never cost places
+  $('dp').textContent = fmt2(ev) + ' RIGZ';
+  const tot = Math.max(1, Number(ST.total) + mined());
+  $('dsh').textContent = (ev / tot * 100).toFixed(3).replace('.', LANG === 'en' ? '.' : ',') + ' %';
+  $('drk').textContent = '#' + fmt(m.rank); $('dmn').textContent = fmt(ST.players);
+  $('wal').textContent = m.wallet ? m.wallet.slice(0, 6) + '…' + m.wallet.slice(-4) : tr('connect');
+}
+// coins popping from the machine to the counter
+const COIN = s => '<svg width="' + s + '" height="' + s + '" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.5" fill="#06261a" stroke="#39ff9f" stroke-width="2"/><text x="12.4" y="16.2" text-anchor="middle" font-size="11" font-style="italic" font-family="Russo One,sans-serif" fill="#7dffc0">R</text></svg>';
+function coinFly(big) { const s = $('scene').getBoundingClientRect(), n = $('num').getBoundingClientRect();
+  const x = s.left + s.width * (.3 + Math.random() * .4), y = s.top + s.height * .4, tx = n.left + n.width / 2, ty = n.top + n.height / 2;
+  const e = document.createElement('div'); e.className = 'fx'; e.innerHTML = COIN(big ? 22 : 16); e.style.left = x + 'px'; e.style.top = y + 'px'; document.body.appendChild(e);
+  const up = -50 - Math.random() * 50, side = (Math.random() - .5) * 80;
+  e.animate([{ transform: 'translate(0,0) scale(.3)', opacity: 0 }, { transform: `translate(${side}px,${up}px) scale(1)`, opacity: 1, offset: .35 }, { transform: `translate(${tx - x}px,${ty - y}px) scale(.6)`, opacity: .3 }], { duration: 1100, easing: 'cubic-bezier(.5,0,.3,1)' }).onfinish = () => { e.remove(); $('num').parentElement.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.07)' }, { transform: 'scale(1)' }], { duration: 180 }) } }
+function plus() { const s = $('scene').getBoundingClientRect(); const e = document.createElement('div'); e.className = 'fx';
+  e.style.cssText += `left:${s.left + s.width * (.25 + Math.random() * .5)}px;top:${s.top + s.height * .3}px;font:700 13px JetBrains Mono,monospace;color:#39ff9f;text-shadow:0 0 8px #39ff9f`;
+  e.textContent = '+' + (rateAt(now()) / 3600 * .7).toFixed(5); document.body.appendChild(e);
+  e.animate([{ transform: 'translateY(0)', opacity: 0 }, { opacity: 1, offset: .2 }, { transform: 'translateY(-40px)', opacity: 0 }], { duration: 1200 }).onfinish = () => e.remove() }
+setInterval(() => { if (!running() || $('pg-mine').hidden || document.hidden) return; plus(); if (Math.random() < .5) coinFly() }, 700);
+function confetti() { const s = $('scene').getBoundingClientRect(); const e = document.createElement('div'); e.className = 'fx'; const c = ['#39ff9f', '#22d3ee', '#ff4fd8', '#ffc83d'][Math.random() * 4 | 0];
+  e.style.cssText += `left:${s.left + s.width / 2}px;top:${s.top + s.height / 2}px;width:7px;height:11px;background:${c};border-radius:2px`; document.body.appendChild(e);
+  const dx = (Math.random() - .5) * 340, dy = -120 - Math.random() * 160;
+  e.animate([{ transform: 'translate(0,0) rotate(0)', opacity: 1 }, { transform: `translate(${dx * .6}px,${dy}px) rotate(300deg)`, opacity: 1, offset: .45 }, { transform: `translate(${dx}px,${dy + 260}px) rotate(720deg)`, opacity: 0 }], { duration: 1500, easing: 'cubic-bezier(.2,.6,.4,1)' }).onfinish = () => e.remove() }
+
+// ---------- actions ----------
+async function act(action, body) {
+  if (busy) return null; busy = true;
+  try { const r = await api(action, body); take(r); return r } catch (e) { toast(tr('t_err')); return null } finally { busy = false }
+}
+$('scene').onclick = () => { if (running()) { coinFly(true); haptic() } else { haptic(); toast(tr('t_off')) } };
+$('main').onclick = async () => {
+  if (!ST) return;
+  if (running()) { toast(tr('t_run')); return }
+  if (ST.me.start_at) {
+    const r = await act('claim'); if (!r || !r.ok) return;
+    for (let k = 0; k < 20; k++) setTimeout(() => coinFly(true), k * 45); haptic('heavy'); toast(tr('t_claim', { n: fmt2(r.gain || 0) })); return;
+  }
+  const r = await act('start'); if (!r || !r.ok) return;
+  haptic('medium'); toast(tr('t_start', { n: durTxt(Number(ST.me.sess_h || 2)) })); $('flash').animate([{ opacity: 0 }, { opacity: .12 }, { opacity: 0 }], { duration: 300 });
+};
+async function upgrade() {
+  if (!ST) return; const nx = tiers()[ST.me.tier + 1];
+  if (!nx) { toast(tr('max')); return }
+  if (ST.me.parts_ready === false) { toast(tr('t_parts')); go('up'); return }  // 24 oct 2026 (3h59): every component first
+  if (shown() < nx[1]) { toast(tr('t_need', { n: fmt2(nx[1]) })); return }
+  const old = ST.me.tier; const r = await act('upgrade');
+  if (!r || !r.ok) { if (r && r.error === 'funds') toast(tr('t_need', { n: fmt2(r.cost) })); if (r && r.error === 'parts') toast(tr('t_parts')); return }
+  haptic('heavy'); _draw(DRAW[old] == null ? 5 : DRAW[old]);
+  const m = $('svg');
+  m.animate([{ transform: 'scale(1)', opacity: 1 }, { transform: 'scale(.6) translateY(30px)', opacity: 0 }], { duration: 250 }).onfinish = () => {
+    draw(ST.me.tier); $('flash').animate([{ opacity: 0 }, { opacity: .6 }, { opacity: 0 }], { duration: 450 });
+    m.animate([{ transform: 'translateY(-60px) scale(1.1)', opacity: 0 }, { transform: 'translateY(6px) scale(.97)', opacity: 1, offset: .7 }, { transform: 'translateY(0) scale(1)' }], { duration: 550, easing: 'cubic-bezier(.2,1.3,.4,1)' });
+    for (let k = 0; k < 26; k++) confetti(); toast(tr('t_unlock', { m: L.m[ST.me.tier] }));
+  };
+}
+$('upB').onclick = () => go('up');
+// 24 oct 2026 (Jeremy): free chest every 4 h and daily streak
+const durTxt = h => { const t = Math.round(h * 60); return Math.floor(t / 60) + 'h' + (t % 60 ? String(t % 60).padStart(2, '0') : '') };
+const cdTxt = ms => { const s = Math.ceil(ms / 1000), h = Math.floor(s / 3600), mn = Math.floor(s % 3600 / 60); return h + 'h ' + String(mn).padStart(2, '0') + 'm ' + String(s % 60).padStart(2, '0') + 's' };
+const chestLeft = () => ST && ST.me.chest_at ? T(ST.me.chest_at) + Number(ST.cfg.chest_h || 4) * 3600e3 - now() : 0;
+$('chB').onclick = async () => {
+  if (!ST || busy) return; haptic(); const cl = chestLeft();
+  if (cl > 0) { toast(tr('ch_w', { t: cdTxt(cl) })); return }
+  const r = await act('chest'); if (r && r.chest != null) { for (let k = 0; k < 14; k++) setTimeout(() => coinFly(true), k * 50); haptic('heavy'); toast(tr('t_chest', { n: fmt2(r.chest) })) }
+};
+$('stk').onclick = () => { haptic(); toast(tr('stk_i')) };
+// 25 oct 2026 (23h55, Jeremy): exchange RIGZ for $BATON on Pass The Baton (where they are cashed out in USDT).
+// 1 RIGZ = 500 $BATON, 5,000 $BATON a day at most, account older than 1 day (server: rr_api 'swap', rr_cfg swap_days).
+const SW = {
+  en: { fq: "Can I exchange my RIGZ?", drop: "RIGZ can be exchanged for $BATON on Pass The Baton (1 RIGZ = 500 $BATON, up to 5,000 $BATON a day, account older than 1 day), where $BATON are cashed out in USDT. An airdrop is also planned, with no guaranteed date or amount.", t: 'Exchange for $BATON', s: '1 RIGZ = {r} $BATON', h: '🔄 RIGZ → $BATON', p: 'Trade your RIGZ for $BATON on Pass The Baton, my game where $BATON are cashed out in USDT (1,000,000 $BATON = 1 USDT).', left: 'Left today: {n} $BATON', bal: 'Your RIGZ: {n}', go: 'Exchange {n} RIGZ → {b} $BATON', open: '🏃 Open Pass The Baton', ok: '🔄 +{b} $BATON added on Pass The Baton!', okp: '🔄 +{b} $BATON are waiting for you on Pass The Baton: open it to get them!', age: '🔒 Exchange opens in {d}', cap: 'Daily limit reached, come back tomorrow', min: 'At least {n} RIGZ', funds: 'Not enough RIGZ', ex: 'Exchange is not available for this account', choice: 'Your call: upgrade your machine to mine faster, or exchange now.' },
+  fr: { fq: "Je peux échanger mes RIGZ ?", drop: "Les RIGZ s’échangent en $BATON sur Pass The Baton (1 RIGZ = 500 $BATON, jusqu’à 5 000 $BATON par jour, compte de plus de 1 jour), où les $BATON se retirent en USDT. Un airdrop est aussi prévu, sans date ni montant garantis.", t: 'Échanger en $BATON', s: '1 RIGZ = {r} $BATON', h: '🔄 RIGZ → $BATON', p: 'Échange tes RIGZ contre des $BATON sur Pass The Baton, mon jeu où les $BATON se retirent en USDT (1 000 000 $BATON = 1 USDT).', left: 'Reste aujourd’hui : {n} $BATON', bal: 'Tes RIGZ : {n}', go: 'Échanger {n} RIGZ → {b} $BATON', open: '🏃 Ouvrir Pass The Baton', ok: '🔄 +{b} $BATON ajoutés sur Pass The Baton !', okp: '🔄 +{b} $BATON t’attendent sur Pass The Baton : ouvre-le pour les récupérer !', age: '🔒 L’échange s’ouvre dans {d}', cap: 'Limite du jour atteinte, reviens demain', min: 'Au moins {n} RIGZ', funds: 'Pas assez de RIGZ', ex: 'L’échange n’est pas disponible pour ce compte', choice: 'À toi de choisir : améliorer ta machine pour miner plus vite, ou échanger tout de suite.' },
+  es: { fq: "¿Puedo cambiar mis RIGZ?", drop: "Los RIGZ se cambian por $BATON en Pass The Baton (1 RIGZ = 500 $BATON, hasta 5.000 $BATON al día, cuenta de más de 1 día), donde los $BATON se retiran en USDT. También se prevé un airdrop, sin fecha ni monto garantizados.", t: 'Cambiar por $BATON', s: '1 RIGZ = {r} $BATON', h: '🔄 RIGZ → $BATON', p: 'Cambia tus RIGZ por $BATON en Pass The Baton, mi juego donde los $BATON se retiran en USDT (1.000.000 $BATON = 1 USDT).', left: 'Quedan hoy: {n} $BATON', bal: 'Tus RIGZ: {n}', go: 'Cambiar {n} RIGZ → {b} $BATON', open: '🏃 Abrir Pass The Baton', ok: '🔄 ¡+{b} $BATON añadidos en Pass The Baton!', okp: '🔄 +{b} $BATON te esperan en Pass The Baton: ¡ábrelo para recibirlos!', age: '🔒 El cambio se abre en {d}', cap: 'Límite diario alcanzado, vuelve mañana', min: 'Mínimo {n} RIGZ', funds: 'No tienes suficientes RIGZ', ex: 'El cambio no está disponible para esta cuenta', choice: 'Tú decides: mejorar tu máquina para minar más rápido, o cambiar ahora.' },
+  pt: { fq: "Posso trocar meus RIGZ?", drop: "Os RIGZ são trocados por $BATON no Pass The Baton (1 RIGZ = 500 $BATON, até 5.000 $BATON por dia, conta com mais de 1 dia), onde os $BATON são sacados em USDT. Um airdrop também está previsto, sem data nem valor garantidos.", t: 'Trocar por $BATON', s: '1 RIGZ = {r} $BATON', h: '🔄 RIGZ → $BATON', p: 'Troque seus RIGZ por $BATON no Pass The Baton, meu jogo onde os $BATON são sacados em USDT (1.000.000 $BATON = 1 USDT).', left: 'Restam hoje: {n} $BATON', bal: 'Seus RIGZ: {n}', go: 'Trocar {n} RIGZ → {b} $BATON', open: '🏃 Abrir Pass The Baton', ok: '🔄 +{b} $BATON adicionados no Pass The Baton!', okp: '🔄 +{b} $BATON esperam por você no Pass The Baton: abra para pegar!', age: '🔒 A troca abre em {d}', cap: 'Limite do dia atingido, volte amanhã', min: 'Mínimo de {n} RIGZ', funds: 'RIGZ insuficientes', ex: 'A troca não está disponível para esta conta', choice: 'Você escolhe: melhorar a máquina para minerar mais rápido, ou trocar agora.' },
+  ru: { fq: "Можно обменять RIGZ?", drop: "RIGZ обмениваются на $BATON в Pass The Baton (1 RIGZ = 500 $BATON, до 5 000 $BATON в день, аккаунту больше 1 дня), где $BATON выводятся в USDT. Также планируется airdrop, без гарантированной даты и суммы.", t: 'Обменять на $BATON', s: '1 RIGZ = {r} $BATON', h: '🔄 RIGZ → $BATON', p: 'Обменивай RIGZ на $BATON в Pass The Baton, моей игре, где $BATON выводятся в USDT (1 000 000 $BATON = 1 USDT).', left: 'Осталось сегодня: {n} $BATON', bal: 'Твои RIGZ: {n}', go: 'Обменять {n} RIGZ → {b} $BATON', open: '🏃 Открыть Pass The Baton', ok: '🔄 +{b} $BATON зачислены в Pass The Baton!', okp: '🔄 +{b} $BATON ждут тебя в Pass The Baton: открой, чтобы получить!', age: '🔒 Обмен откроется через {d}', cap: 'Дневной лимит исчерпан, приходи завтра', min: 'Минимум {n} RIGZ', funds: 'Недостаточно RIGZ', ex: 'Обмен недоступен для этого аккаунта', choice: 'Выбор за тобой: улучшить машину и майнить быстрее или обменять сейчас.' },
+  uk: { fq: "Чи можна обміняти RIGZ?", drop: "RIGZ обмінюються на $BATON у Pass The Baton (1 RIGZ = 500 $BATON, до 5 000 $BATON на день, акаунту більше 1 дня), де $BATON виводяться в USDT. Також планується airdrop, без гарантованої дати та суми.", t: 'Обміняти на $BATON', s: '1 RIGZ = {r} $BATON', h: '🔄 RIGZ → $BATON', p: 'Обмінюй RIGZ на $BATON у Pass The Baton, моїй грі, де $BATON виводяться в USDT (1 000 000 $BATON = 1 USDT).', left: 'Залишилось сьогодні: {n} $BATON', bal: 'Твої RIGZ: {n}', go: 'Обміняти {n} RIGZ → {b} $BATON', open: '🏃 Відкрити Pass The Baton', ok: '🔄 +{b} $BATON зараховано в Pass The Baton!', okp: '🔄 +{b} $BATON чекають на тебе в Pass The Baton: відкрий, щоб отримати!', age: '🔒 Обмін відкриється через {d}', cap: 'Денний ліміт вичерпано, приходь завтра', min: 'Мінімум {n} RIGZ', funds: 'Недостатньо RIGZ', ex: 'Обмін недоступний для цього акаунта', choice: 'Вибір за тобою: покращити машину й майнити швидше або обміняти зараз.' },
+  tr: { fq: "RIGZ'lerimi takas edebilir miyim?", drop: "RIGZ, Pass The Baton'da $BATON ile takas edilir (1 RIGZ = 500 $BATON, günde en fazla 5.000 $BATON, 1 günden eski hesap); orada $BATON USDT olarak çekilir. Ayrıca tarihi ve miktarı garanti edilmeyen bir airdrop planlanıyor.", t: '$BATON ile takas et', s: '1 RIGZ = {r} $BATON', h: '🔄 RIGZ → $BATON', p: 'RIGZ\'lerini Pass The Baton\'da $BATON ile takas et; orada $BATON USDT olarak çekilir (1.000.000 $BATON = 1 USDT).', left: 'Bugün kalan: {n} $BATON', bal: 'RIGZ\'lerin: {n}', go: '{n} RIGZ → {b} $BATON takas et', open: '🏃 Pass The Baton\'u aç', ok: '🔄 Pass The Baton\'a +{b} $BATON eklendi!', okp: '🔄 +{b} $BATON seni Pass The Baton\'da bekliyor: almak için aç!', age: '🔒 Takas {d} sonra açılır', cap: 'Günlük limit doldu, yarın gel', min: 'En az {n} RIGZ', funds: 'Yeterli RIGZ yok', ex: 'Bu hesap için takas kullanılamıyor', choice: 'Seçim senin: daha hızlı kazmak için makineni geliştir ya da şimdi takas et.' },
+  id: { fq: "Bisakah RIGZ saya ditukar?", drop: "RIGZ bisa ditukar ke $BATON di Pass The Baton (1 RIGZ = 500 $BATON, hingga 5.000 $BATON per hari, akun lebih dari 1 hari), tempat $BATON ditarik jadi USDT. Airdrop juga direncanakan, tanpa tanggal atau jumlah yang dijamin.", t: 'Tukar ke $BATON', s: '1 RIGZ = {r} $BATON', h: '🔄 RIGZ → $BATON', p: 'Tukar RIGZ-mu dengan $BATON di Pass The Baton, gameku tempat $BATON bisa ditarik jadi USDT (1.000.000 $BATON = 1 USDT).', left: 'Sisa hari ini: {n} $BATON', bal: 'RIGZ-mu: {n}', go: 'Tukar {n} RIGZ → {b} $BATON', open: '🏃 Buka Pass The Baton', ok: '🔄 +{b} $BATON ditambahkan di Pass The Baton!', okp: '🔄 +{b} $BATON menunggumu di Pass The Baton: buka untuk mengambilnya!', age: '🔒 Penukaran dibuka dalam {d}', cap: 'Batas harian tercapai, kembali besok', min: 'Minimal {n} RIGZ', funds: 'RIGZ tidak cukup', ex: 'Penukaran tidak tersedia untuk akun ini', choice: 'Kamu yang pilih: tingkatkan mesin agar menambang lebih cepat, atau tukar sekarang.' },
+  ar: { fq: "هل يمكنني استبدال RIGZ؟", drop: "يمكن استبدال RIGZ بـ $BATON في Pass The Baton (1 RIGZ = 500 $BATON، حتى 5٬000 $BATON يوميًا، لحساب أقدم من يوم واحد)، حيث تُسحب $BATON بعملة USDT. ومن المخطط أيضًا airdrop، دون تاريخ أو مبلغ مضمون.", t: 'استبدل بـ $BATON', s: '1 RIGZ = {r} $BATON', h: '🔄 RIGZ → $BATON', p: 'استبدل RIGZ بـ $BATON في Pass The Baton، لعبتي حيث تُسحب $BATON بعملة USDT (1٬000٬000 $BATON = 1 USDT).', left: 'المتبقي اليوم: {n} $BATON', bal: 'رصيدك من RIGZ: {n}', go: 'استبدل {n} RIGZ ← {b} $BATON', open: '🏃 افتح Pass The Baton', ok: '🔄 تمت إضافة {b} $BATON في Pass The Baton!', okp: '🔄 {b} $BATON بانتظارك في Pass The Baton: افتحه لاستلامها!', age: '🔒 يفتح الاستبدال بعد {d}', cap: 'تم بلوغ الحد اليومي، عد غدًا', min: '{n} RIGZ على الأقل', funds: 'RIGZ غير كافية', ex: 'الاستبدال غير متاح لهذا الحساب', choice: 'القرار لك: طوّر جهازك لتعدّن أسرع، أو استبدل الآن.' },
+  fa: { fq: "می‌توانم RIGZ را تبدیل کنم؟", drop: "RIGZ در Pass The Baton به $BATON تبدیل می‌شود (1 RIGZ = 500 $BATON، تا 5٬000 $BATON در روز، حساب بیش از ۱ روز)، و در آنجا $BATON به USDT برداشت می‌شود. یک ایردراپ هم برنامه‌ریزی شده، بدون تاریخ یا مقدار تضمین‌شده.", t: 'تبدیل به $BATON', s: '1 RIGZ = {r} $BATON', h: '🔄 RIGZ → $BATON', p: 'RIGZهایت را در Pass The Baton به $BATON تبدیل کن؛ بازی‌ای که در آن $BATON به USDT برداشت می‌شود (1٬000٬000 $BATON = 1 USDT).', left: 'باقی‌مانده امروز: {n} $BATON', bal: 'RIGZ تو: {n}', go: 'تبدیل {n} RIGZ ← {b} $BATON', open: '🏃 باز کردن Pass The Baton', ok: '🔄 {b} $BATON به Pass The Baton اضافه شد!', okp: '🔄 {b} $BATON در Pass The Baton منتظرت است: بازش کن تا بگیری!', age: '🔒 تبدیل {d} دیگر باز می‌شود', cap: 'سقف روزانه پر شد، فردا برگرد', min: 'حداقل {n} RIGZ', funds: 'RIGZ کافی نیست', ex: 'تبدیل برای این حساب در دسترس نیست', choice: 'انتخاب با توست: دستگاهت را ارتقا بده تا سریع‌تر استخراج کنی، یا همین حالا تبدیل کن.' },
+};
+const sw = (k, v) => String((SW[LANG] || SW.en)[k] || SW.en[k]).replace(/\{(\w)\}/g, (_, x) => v && v[x] !== undefined ? v[x] : '');
+// the RIGZ are no longer 'points with no cash value': the airdrop text and the FAQ say how they turn into USDT
+document.querySelectorAll('[data-t="drop_p"]').forEach((e) => { e.textContent = sw('drop'); });
+setTimeout(() => { try { const fq = FAQ[LANG] || FAQ.en; const i = fq.findIndex((x) => /airdrop/i.test(x[0])); const it = [sw('fq'), sw('drop')]; if (i >= 0) fq.splice(i, 1, it); else fq.push(it); } catch (e) {} }, 0);  // FAQ is declared further down
+const BT_URL = 'https://t.me/PassTheBatonBot/play?startapp=src_rrswap';
+// 26 oct 2026 (0h15, Jeremy): Rig Rush is now only about earning $BATON: the Airdrop tab becomes the Exchange tab,
+// and the daily exchange limit grows with the machine (2,000 $BATON at level 1, +1,000 per level).
+const SW2 = {
+  en: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "Exchange {n} RIGZ → {b} $MCT", okm: "🔄 +{b} $MCT added on Meme Coin Tycoon!", nomct: "Open Meme Coin Tycoon once first, then come back", openm: "🚀 Open Meme Coin Tycoon", pm: "$BATON: cashed out in USDT on Pass The Baton. $MCT: the official coin of Meme Coin Tycoon, my trading game.", nav: 'Exchange', chip: '🔄 $BATON', capl: 'Your daily limit (machine {m})', next: 'Next machine: {n} $BATON a day', maxl: 'Top machine reached 🏆', why: 'A better machine mines faster AND raises your daily exchange limit.' },
+  fr: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "Échanger {n} RIGZ → {b} $MCT", okm: "🔄 +{b} $MCT ajoutés sur Meme Coin Tycoon !", nomct: "Ouvre d’abord Meme Coin Tycoon une fois, puis reviens", openm: "🚀 Ouvrir Meme Coin Tycoon", pm: "$BATON : se retirent en USDT sur Pass The Baton. $MCT : le coin officiel de Meme Coin Tycoon, mon jeu de trading.", nav: 'Échanger', chip: '🔄 $BATON', capl: 'Ta limite par jour (machine {m})', next: 'Machine suivante : {n} $BATON par jour', maxl: 'Meilleure machine atteinte 🏆', why: 'Une meilleure machine mine plus vite ET augmente ta limite d’échange par jour.' },
+  es: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "Cambiar {n} RIGZ → {b} $MCT", okm: "🔄 ¡+{b} $MCT añadidos en Meme Coin Tycoon!", nomct: "Abre Meme Coin Tycoon una vez y vuelve", openm: "🚀 Abrir Meme Coin Tycoon", pm: "$BATON: se retiran en USDT en Pass The Baton. $MCT: la moneda oficial de Meme Coin Tycoon, mi juego de trading.", nav: 'Cambiar', chip: '🔄 $BATON', capl: 'Tu límite diario (máquina {m})', next: 'Siguiente máquina: {n} $BATON al día', maxl: 'Mejor máquina alcanzada 🏆', why: 'Una máquina mejor mina más rápido Y sube tu límite diario de cambio.' },
+  pt: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "Trocar {n} RIGZ → {b} $MCT", okm: "🔄 +{b} $MCT adicionados no Meme Coin Tycoon!", nomct: "Abra o Meme Coin Tycoon uma vez e volte", openm: "🚀 Abrir Meme Coin Tycoon", pm: "$BATON: sacados em USDT no Pass The Baton. $MCT: a moeda oficial do Meme Coin Tycoon, meu jogo de trading.", nav: 'Trocar', chip: '🔄 $BATON', capl: 'Seu limite diário (máquina {m})', next: 'Próxima máquina: {n} $BATON por dia', maxl: 'Melhor máquina alcançada 🏆', why: 'Uma máquina melhor minera mais rápido E aumenta seu limite diário de troca.' },
+  ru: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "Обменять {n} RIGZ → {b} $MCT", okm: "🔄 +{b} $MCT зачислены в Meme Coin Tycoon!", nomct: "Сначала один раз открой Meme Coin Tycoon и вернись", openm: "🚀 Открыть Meme Coin Tycoon", pm: "$BATON выводятся в USDT в Pass The Baton. $MCT - официальная монета Meme Coin Tycoon, моей трейдинг-игры.", nav: 'Обмен', chip: '🔄 $BATON', capl: 'Твой лимит в день (машина {m})', next: 'Следующая машина: {n} $BATON в день', maxl: 'Лучшая машина 🏆', why: 'Машина лучше майнит быстрее И повышает дневной лимит обмена.' },
+  uk: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "Обміняти {n} RIGZ → {b} $MCT", okm: "🔄 +{b} $MCT зараховано в Meme Coin Tycoon!", nomct: "Спочатку один раз відкрий Meme Coin Tycoon і повернись", openm: "🚀 Відкрити Meme Coin Tycoon", pm: "$BATON виводяться в USDT у Pass The Baton. $MCT - офіційна монета Meme Coin Tycoon, моєї трейдинг-гри.", nav: 'Обмін', chip: '🔄 $BATON', capl: 'Твій ліміт на день (машина {m})', next: 'Наступна машина: {n} $BATON на день', maxl: 'Найкраща машина 🏆', why: 'Краща машина майнить швидше І підвищує денний ліміт обміну.' },
+  tr: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "{n} RIGZ → {b} $MCT takas et", okm: "🔄 Meme Coin Tycoon'a +{b} $MCT eklendi!", nomct: "Önce Meme Coin Tycoon'u bir kez aç, sonra geri gel", openm: "🚀 Meme Coin Tycoon'u aç", pm: "$BATON: Pass The Baton'da USDT olarak çekilir. $MCT: trading oyunum Meme Coin Tycoon'un resmi coini.", nav: 'Takas', chip: '🔄 $BATON', capl: 'Günlük limitin (makine {m})', next: 'Sonraki makine: günde {n} $BATON', maxl: 'En iyi makineye ulaştın 🏆', why: 'Daha iyi bir makine daha hızlı kazar VE günlük takas limitini artırır.' },
+  id: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "Tukar {n} RIGZ → {b} $MCT", okm: "🔄 +{b} $MCT ditambahkan di Meme Coin Tycoon!", nomct: "Buka Meme Coin Tycoon sekali dulu, lalu kembali", openm: "🚀 Buka Meme Coin Tycoon", pm: "$BATON: ditarik jadi USDT di Pass The Baton. $MCT: koin resmi Meme Coin Tycoon, game tradingku.", nav: 'Tukar', chip: '🔄 $BATON', capl: 'Batas harianmu (mesin {m})', next: 'Mesin berikutnya: {n} $BATON per hari', maxl: 'Mesin terbaik tercapai 🏆', why: 'Mesin yang lebih baik menambang lebih cepat DAN menaikkan batas tukar harianmu.' },
+  ar: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "استبدل {n} RIGZ ← {b} $MCT", okm: "🔄 تمت إضافة {b} $MCT في Meme Coin Tycoon!", nomct: "افتح Meme Coin Tycoon مرة أولًا ثم عد", openm: "🚀 افتح Meme Coin Tycoon", pm: "$BATON: تُسحب بعملة USDT في Pass The Baton. ‏$MCT: العملة الرسمية للعبة التداول Meme Coin Tycoon.", nav: 'استبدال', chip: '🔄 $BATON', capl: 'حدك اليومي (الجهاز {m})', next: 'الجهاز التالي: {n} $BATON يوميًا', maxl: 'وصلت لأفضل جهاز 🏆', why: 'جهاز أفضل يعدّن أسرع ويرفع حد الاستبدال اليومي.' },
+  fa: { tb: "🏃 $BATON", tm: "🚀 $MCT", gom: "تبدیل {n} RIGZ ← {b} $MCT", okm: "🔄 {b} $MCT به Meme Coin Tycoon اضافه شد!", nomct: "اول یک بار Meme Coin Tycoon را باز کن، بعد برگرد", openm: "🚀 باز کردن Meme Coin Tycoon", pm: "$BATON: در Pass The Baton به USDT برداشت می‌شود. $MCT: کوین رسمی Meme Coin Tycoon، بازی ترید من.", nav: 'تبدیل', chip: '🔄 $BATON', capl: 'سقف روزانه تو (دستگاه {m})', next: 'دستگاه بعدی: روزانه {n} $BATON', maxl: 'به بهترین دستگاه رسیدی 🏆', why: 'دستگاه بهتر سریع‌تر استخراج می‌کند و سقف تبدیل روزانه را هم بالا می‌برد.' },
+};
+Object.keys(SW2).forEach((k) => Object.assign(SW[k], SW2[k], { h: '🔄 RIGZ → $BATON · $MCT' }));
+(function swapInit() {
+  // the card on the mining screen leads to the Exchange tab
+  const row = document.querySelector('#pg-mine .row') || document.querySelector('.row'); if (!row) return;
+  const c = document.createElement('div'); c.className = 'mini sw'; c.id = 'swB'; c.style.gridColumn = '1 / -1'; c.hidden = true;
+  c.innerHTML = '<div class="ic">🔄</div><div style="min-width:0"><div class="t" id="swT"></div><div class="s" id="swS"></div></div>';
+  row.appendChild(c);
+  const st = document.createElement('style');
+  st.textContent = '.mini.sw .ic{background:rgba(47,141,255,.18)}.mini.sw.can{border-color:#2f8dff;box-shadow:0 0 16px rgba(47,141,255,.35)}#swPg .amt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}#swPg .amt button{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:12px;padding:10px 0;font:800 14px inherit;cursor:pointer}#swPg .amt button.on{border-color:#2f8dff;color:#7cb8ff}#swPg .note{color:var(--mut);font-size:13px;margin:4px 0}#pg-drop{overflow-y:auto;padding-bottom:8px}#swPg .go2{background:linear-gradient(180deg,#7cb8ff,#2f8dff);color:#fff;box-shadow:0 5px 0 #1a5bb0}';
+  document.head.appendChild(st);
+  // the Airdrop tab becomes the Exchange tab: the airdrop lines are hidden (kept in the page, the game still writes into them), the top miners stay
+  const pg = $('pg-drop');
+  [...pg.children].forEach((e) => { if (e.id !== 'topl' && !(e.tagName === 'H2' && e.dataset.t === 'top')) e.hidden = true; });
+  const box = document.createElement('div'); box.id = 'swPg';
+  box.innerHTML = '<h2 id="swH" style="margin-top:0"></h2><p class="sub" id="swP"></p><div class="big" id="swBal"></div>'
+    + '<div class="amt" id="swTo" style="grid-template-columns:1fr 1fr"></div><div class="note" id="swPm"></div><div class="stat"><span id="swCapL"></span><b id="swCap" style="color:#7cb8ff"></b></div><div class="stat"><span id="swLeftL"></span><b id="swLeft"></b></div>'
+    + '<div class="note" id="swNext"></div><div class="note" id="swC"></div><div class="amt" id="swA"></div><button class="btn go2" id="swGo"></button>'
+    + '<button class="btn" id="swOpen" style="margin-top:10px;background:var(--card);color:var(--fg);box-shadow:none;font-size:16px"></button>';
+  pg.insertBefore(box, pg.firstChild);
+  const navB = document.querySelector('.nav button[data-p="drop"]'); if (navB) navB.innerHTML = '<span>🔄</span>' + sw('nav');
+  const chip = $('dropChip'); if (chip) chip.textContent = sw('chip');
+  let N = 0, TO = 'bt';  // 26 oct 2026: target, $BATON (bt) or $MCT (mct)
+  const MCT_URL = 'https://t.me/Memecointycoonbot?startapp=src_rrswap';
+  const S = () => ST && ST.swap;
+  const maxN = () => { const s = S(); if (!s) return 0; return Math.max(0, Math.min(Math.floor(shown() * 100) / 100, Math.floor(s.left / s.rate * 100) / 100)); };
+  const durLeft = (t) => { const ms = Math.max(0, new Date(t).getTime() - now()); const h = Math.ceil(ms / 3600e3); return h >= 24 ? Math.ceil(h / 24) + (LANG === 'fr' ? ' j' : ' d') : h + ' h'; };
+  function paint() {
+    const s = S(); if (!s || !s.on) { c.hidden = true; return; } c.hidden = false;
+    $('swT').textContent = sw('t');
+    $('swS').textContent = !s.age_ok ? sw('age', { d: durLeft(s.unlock_at) }) : s.left <= 0 ? sw('cap') : sw('s', { r: fmt(s.rate) }) + ' · ' + sw('left', { n: fmt(s.left) });
+    c.classList.toggle('can', s.age_ok && !s.excluded && s.left > 0 && shown() >= s.min);
+    if (!pg.hidden) page();
+  }
+  let lastKey = '';
+  function page() {
+    const s = S(); if (!s) return; const m = ST.me;
+    $('swH').textContent = sw('h'); $('swP').hidden = true;
+    $('swBal').textContent = fmt2(shown()) + ' RIGZ';
+    $('swCapL').textContent = sw('capl', { m: (EMO[m.tier] || '') + ' ' + (L.m[m.tier] || m.tier + 1) }); $('swCap').textContent = fmt(s.cap) + ' $BATON';
+    $('swLeftL').textContent = sw('left', { n: '§' }).split('§')[0].replace(/[\s:：]+$/, ''); $('swLeft').textContent = fmt(s.left) + ' $BATON';
+    const hasNext = m.tier + 1 < tiers().length; $('swNext').textContent = (hasNext ? sw('next', { n: fmt(s.cap + s.step) }) : sw('maxl')) + ' · ' + sw('why');
+    $('swC').textContent = s.excluded ? sw('ex') : !s.age_ok ? sw('age', { d: durLeft(s.unlock_at) }) : ''; $('swC').hidden = !$('swC').textContent;
+    $('swOpen').textContent = TO === 'mct' ? sw('openm') : sw('open'); $('swPm').textContent = sw('pm');
+    if ($('swTo').dataset.to !== TO + LANG) { $('swTo').dataset.to = TO + LANG; $('swTo').innerHTML = ['bt', 'mct'].map((t) => `<button data-to="${t}" class="${t === TO ? 'on' : ''}">${sw(t === 'bt' ? 'tb' : 'tm')}</button>`).join(''); $('swTo').querySelectorAll('button').forEach((b) => b.onclick = () => { haptic(); TO = b.dataset.to; lastKey = ''; page(); }); }
+    const mx = (s.age_ok && !s.excluded) ? maxN() : 0, opts = [s.min, Math.max(s.min, Math.floor(mx / 2)), mx].filter((v, i, a) => v >= s.min && v <= mx && a.indexOf(v) === i);
+    if (!opts.includes(N)) N = opts[opts.length - 1] || 0;
+    const key = opts.join('|') + '#' + N;  // the buttons are rebuilt only when they change (the page repaints every second)
+    if (key !== lastKey) { lastKey = key; $('swA').innerHTML = opts.map((v) => `<button data-n="${v}" class="${v === N ? 'on' : ''}">${fmt2(v)}</button>`).join(''); $('swA').querySelectorAll('button').forEach((b) => b.onclick = () => { haptic(); N = Number(b.dataset.n); page(); }); }
+    const g = $('swGo'); g.disabled = !N; g.style.opacity = N ? 1 : .5;
+    g.textContent = N ? (TO === 'mct' ? sw('gom', { n: fmt2(N), b: fmt(N * (s.mct_rate || 5)) }) : sw('go', { n: fmt2(N), b: fmt(N * s.rate) })) : s.excluded ? sw('ex') : !s.age_ok ? sw('age', { d: durLeft(s.unlock_at) }) : s.left <= 0 ? sw('cap') : sw('min', { n: s.min });
+  }
+  c.onclick = () => { haptic(); go('drop'); page(); };
+  $('swOpen').onclick = () => { haptic(); const u = TO === 'mct' ? MCT_URL : BT_URL; try { TW.openTelegramLink(u); } catch (e) { window.open(u, '_blank'); } };
+  $('swGo').onclick = async () => {
+    const s = S(); if (!s || !N) return;
+    const had = s.has_bt; const r = await act('swap', { n: N, to: TO });
+    if (!r || !r.ok) { const e = r && r.error; toast(e === 'swap_cap' ? sw('cap') : e === 'swap_min' ? sw('min', { n: s.min }) : e === 'funds' ? sw('funds') : e === 'excluded' ? sw('ex') : e === 'swap_age' ? sw('age', { d: durLeft(s.unlock_at) }) : e === 'no_mct' ? sw('nomct') : tr('t_err')); page(); return; }
+    haptic('heavy'); toast(r.mct != null ? sw('okm', { b: fmt2(r.mct) }) : had ? sw('ok', { b: fmt(r.baton) }) : sw('okp', { b: fmt(r.baton) }));
+    N = 0; lastKey = ''; page(); paint();
+  };
+  setInterval(paint, 1000);
+})();
+// 24 oct 2026 (Jeremy): +10 % mining while subscribed to @jeremstyke; checked again when he comes back to the app
+let subWait = 0;
+const subCheck = async (say) => { const was = ST && ST.me.sub; const r = await act('sub'); if (!r || !r.me) return; if (r.me.sub && !was) { haptic('heavy'); toast(tr('t_sub_ok')) } else if (!r.me.sub && say) toast(tr('t_sub_no')) };
+$('subB').onclick = () => { haptic(); subWait = Date.now(); try { TW.openTelegramLink('https://t.me/jeremstyke') } catch (e) { window.open('https://t.me/jeremstyke', '_blank') } };
+$('sbc').onclick = () => { haptic(); toast(tr('sub_i')) };
+document.addEventListener('visibilitychange', () => { if (!document.hidden && subWait && Date.now() - subWait > 1500) { subWait = 0; setTimeout(() => subCheck(true), 600) } });
+try { TW && TW.onEvent && TW.onEvent('activated', () => { if (subWait && Date.now() - subWait > 1500) { subWait = 0; setTimeout(() => subCheck(true), 600) } }) } catch (e) {}
+let AD = null;
+$('boB').onclick = async () => {
+  if (!ST) return; const m = ST.me;
+  if (m.boost_end && now() < T(m.boost_end)) { toast(tr('t_bact')); return }
+  if (m.boost_left <= 0) { toast(tr('bnone')); return }
+  if (!ST.cfg.ads_block) { toast(tr('t_soon')); return }
+  try {
+    if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s) });
+    AD = AD || window.Adsgram.init({ blockId: String(ST.cfg.ads_block) });
+    const res = await AD.show();
+    if (res && res.done === false) return;
+  } catch (e) { return }
+  // the boost is given by the server when Adsgram confirms the video: ask a few times
+  for (let k = 0; k < 6; k++) { await new Promise(r => setTimeout(r, 1200)); const r = await api('state'); take(r); if (ST.me.boost_end && now() < T(ST.me.boost_end)) { haptic('heavy'); toast(tr('t_boost')); return } }
+};
+// 24 oct 2026 (Jeremy, 3h36): 6 components x up to 10 levels; a component can't go above (machine level + 1)
+const PICON = { cool: '❄️', psu: '🔌', soft: '💾', oc: '⚡', gpu: '🎴', bat: '🔋', ram: '💽', water: '💧', net: '📡', solar: '☀️' };  // 24 oct 2026 (10h10): 4 late-game components
+const PARTS = new Proxy([], { get: (t, k) => { const a = ((ST && ST.cfg.part_order) || ['cool', 'oc', 'bat']).map(p => [p, PICON[p] || '🛠️']); return typeof a[k] === 'function' ? a[k].bind(a) : a[k] } });
+function partCost(p) { const c = ST.cfg.parts && ST.cfg.parts[p]; const l = ST.me[p] || 0; if (!c || l >= c.max) return null; return Math.round(c.base * Math.pow(c.mult, l) * 100) / 100 }
+const capped = p => (ST.me[p] || 0) >= ST.me.tier + 1;
+const unlocked = p => ST.me.tier >= ((ST.cfg.parts[p] || {}).unlock || 0);  // 24 oct 2026 (3h50): components unlock one by one with the machines
+function buyable(v) { if (!ST) return 0; let n = 0; const nx = tiers()[ST.me.tier + 1]; if (nx && ST.me.parts_ready !== false && v >= nx[1]) n++; PARTS.forEach(([p]) => { const c = partCost(p); if (c != null && unlocked(p) && !capped(p) && v >= c) n++ }); return n }
+async function buyPart(p) {
+  const c = partCost(p); if (c == null) { toast(tr('max')); return }
+  if (!unlocked(p)) return;
+  if (capped(p)) { toast(tr('t_cap', { n: (ST.me[p] || 0) + 1 })); return }
+  if (shown() < c) { toast(tr('t_need', { n: fmt2(c) })); return }
+  const r = await act('part', { p }); if (!r || !r.ok) { if (r && r.error === 'funds') toast(tr('t_need', { n: fmt2(r.cost) })); if (r && r.error === 'cap') toast(tr('t_cap', { n: (r.need || 0) + 1 })); return }
+  haptic('heavy'); for (let k = 0; k < 14; k++) confetti(); toast(tr('t_part', { m: tr('p_' + p), n: r.lvl }));
+}
+let lastBuild = '';
+function buildUp() {
+  if (!ST) return; const cur = ST.me.tier, v = shown();
+  const key = JSON.stringify([cur, ST.me.parts_ready, PARTS.map(([p]) => ST.me[p]), buyable(v)]); if (key === lastBuild && $('upl').innerHTML) return; lastBuild = key;
+  const pc = ST.cfg.parts || {};
+  const nextLock = PARTS.filter(([p]) => pc[p] && !unlocked(p)).map(([p]) => pc[p].unlock).sort((a, b) => a - b)[0];
+  const parts = PARTS.map(([p, ic]) => { const c = pc[p]; if (!c || !unlocked(p)) return ''; const l = ST.me[p] || 0, mx = c.max, cost = partCost(p), cap = cost != null && capped(p);
+    const eff = p === 'bat' ? tr('e_bat', { n: c.min || c.h * 60 }) : tr('e_spd', { n: c.pct });
+    return `<div class="it ${cost != null && !cap && v >= cost ? 'can' : ''}${cap ? ' lock' : ''}" data-p="${p}"><div class="r" style="font-size:22px">${ic}</div><div class="n">${esc(tr('p_' + p))}<span class="lv">${Array.from({ length: mx }, (_, i) => `<i class="${i < l ? 'f' : ''}"></i>`).join('')}</span><div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">${eff}</div></div><div class="p">${cost == null ? '✓' : cap ? '🔒 ' + esc(tr('t_capshort', { n: l + 1 })) : fmt2(cost)}</div></div>` }).join('');
+  $('upl').innerHTML = `<div class="ph">${tr('comps')}</div>` + parts + (nextLock != null ? `<div class="it lock"><div class="r" style="font-size:22px">🎁</div><div class="n w">${esc(tr('t_newpart', { n: nextLock + 1 }))}</div></div>` : '') + `<div class="ph">${tr('n_mach')}</div>` + tiers().slice(0, cur + 3).map((t, i) => `<div class="it ${i === cur ? 'cur' : i > cur + 1 ? 'lock' : ''}" data-i="${i}"><div class="r" style="font-size:22px">${i > cur + 1 ? '🔒' : EMO[i]}</div><div class="n">${esc(L.m[i])}<div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">⚡ ${fmt2(t[0])} / h</div></div><div class="p">${i <= cur ? (i === cur ? tr('cur') : '✓') : i === cur + 1 && ST.me.parts_ready === false ? '🔧 ' + esc(tr('t_partsshort')) : fmt2(t[1])}</div></div>`).join('') + (tiers().length > cur + 3 ? `<div class="it lock"><div class="r" style="font-size:22px">❓</div><div class="n w">${esc(tr('t_more', { n: tiers().length - cur - 3 }))}</div></div>` : '');
+  $('upl').querySelectorAll('.it').forEach(el => el.onclick = () => { if (el.dataset.p) buyPart(el.dataset.p); else if (+el.dataset.i === cur + 1) upgrade() });
+}
+const link = () => 'https://t.me/' + BOT + '?startapp=r' + (ST ? ST.me.id : '');
+$('inv').textContent = tr('invite');
+$('inv').onclick = () => { const u = 'https://t.me/share/url?url=' + encodeURIComponent(link()) + '&text=' + encodeURIComponent(tr('share_txt')); try { TW.openTelegramLink(u) } catch (e) { window.open(u) } };
+$('copy').onclick = async () => { try { await navigator.clipboard.writeText(link()); toast(tr('t_copied')) } catch (e) { toast(link()) } };
+async function loadFriends() { const r = await api('friends').catch(() => null); if (!r || !r.ok) return; $('frpts').textContent = fmt2(r.ref_pts) + ' RIGZ';
+  $('frl').innerHTML = r.list.length ? r.list.map(f => `<div class="it"><div class="r" style="font-size:20px">${EMO[f.t] || '👤'}</div><div class="n">${esc(f.n)}</div><div class="p">+${fmt2(f.g)}</div></div>`).join('') : `<p class="sub" style="text-align:center;margin-top:20px">${tr('fr_none')}</p>` }
+async function loadTop() { const r = await api('top').catch(() => null); if (!r || !r.ok) return;
+  $('topl').innerHTML = r.top.map((p, i) => `<div class="it ${p.me ? 'me' : ''}"><div class="r">${i < 3 ? '<span class="medal">' + ['🥇', '🥈', '🥉'][i] + '</span>' : i + 1}</div><div class="n">${EMO[p.t] || ''} ${esc(p.n)}</div><div class="p">${fmt2(p.p)}</div></div>`).join('') }
+function go(p) { document.querySelectorAll('.nav button').forEach(x => x.classList.toggle('on', x.dataset.p === p)); ['mine', 'up', 'fr', 'drop'].forEach(q => $('pg-' + q).hidden = q !== p);
+  if (p === 'fr') loadFriends(); if (p === 'drop') loadTop(); }
+document.querySelectorAll('.nav button').forEach(b => b.onclick = () => { go(b.dataset.p); haptic() });
+$('dropChip').onclick = () => go('drop');
+// ---------- notifications ----------
+function ago(t) { const s = Math.max(0, (now() - T(t)) / 1000); try { const rf = new Intl.RelativeTimeFormat(LANG, { numeric: 'auto' }); return s < 3600 ? rf.format(-Math.round(s / 60), 'minute') : s < 86400 ? rf.format(-Math.round(s / 3600), 'hour') : rf.format(-Math.round(s / 86400), 'day') } catch (e) { return '' } }
+$('bell').onclick = async () => {
+  haptic(); $('ntl').innerHTML = ''; $('sheet').hidden = false;
+  const r = await api('notifs').catch(() => null); if (!r || !r.ok) return;
+  if (ST) ST.me.unread = 0;
+  $('ntl').innerHTML = r.list.length ? r.list.map(x => `<div class="nt"><div style="flex:1">${esc(tr('nf_' + x.k, { n: x.d.n !== undefined ? (typeof x.d.n === 'number' ? fmt2(x.d.n) : x.d.n) : '', b: fmt2(x.d.b || 0) }))}<small>${ago(x.at)}</small></div></div>`).join('') : `<p class="sub" style="text-align:center">${tr('notif_none')}</p>`;
+};
+// 24 oct 2026 (Jeremy, 10h14): FAQ behind the ❓ button
+const FAQ = {
+ en:[['How do I mine?','Tap "Turn on the machine". It mines for 4 hours (more with the battery), even when the app is closed. Then come back, collect your RIGZ and start again.'],['How do I mine faster?','Upgrade your components, then buy the next machine. To get the next machine, every unlocked component must be at its maximum.'],['Why is a component locked?','New components unlock with better machines, and a component cannot go above your machine level + 1.'],['What are RIGZ for?','You spend them on upgrades. Everything you earned counts for the airdrop, even what you spent, so upgrading never costs you places.'],['What is the airdrop?','RIGZ are in-game points with no cash value. An airdrop is planned for miners based on their RIGZ, with no guaranteed date or amount.'],['How do friends work?','Share your link: you both get +1 RIGZ, then you get 10 % of everything they mine, forever.'],['Will I be told when my machine is full?','Yes, the bot sends you a message when your session is over.']],
+ fr:[['Comment miner ?','Appuie sur « Allumer la machine ». Elle mine pendant 4 heures (plus avec la batterie), même appli fermée. Reviens ensuite récupérer tes RIGZ et relance.'],['Comment miner plus vite ?','Améliore tes composants, puis achète la machine suivante. Pour l\'acheter, tous tes composants débloqués doivent être au maximum.'],['Pourquoi un composant est verrouillé ?','Les nouveaux composants se débloquent avec de meilleures machines, et un composant ne peut pas dépasser le niveau de ta machine + 1.'],['À quoi servent les RIGZ ?','Tu les dépenses en améliorations. Tout ce que tu as gagné compte pour l\'airdrop, même ce que tu as dépensé : améliorer ne te fait jamais perdre de places.'],['C\'est quoi l\'airdrop ?','Les RIGZ sont des points de jeu, sans valeur en argent. Un airdrop est prévu pour les mineurs selon leurs RIGZ, sans date ni montant garantis.'],['Comment marchent les amis ?','Partage ton lien : vous gagnez chacun +1 RIGZ, puis tu touches 10 % de tout ce qu\'il mine, pour toujours.'],['Je suis prévenu quand ma machine est pleine ?','Oui, le bot t\'envoie un message à la fin de ta session.']],
+ es:[['¿Cómo mino?','Toca "Encender la máquina". Mina durante 4 horas (más con la batería), incluso con la app cerrada. Luego vuelve, recoge tus RIGZ y empieza de nuevo.'],['¿Cómo mino más rápido?','Mejora tus componentes y luego compra la siguiente máquina. Para comprarla, todos los componentes desbloqueados deben estar al máximo.'],['¿Por qué un componente está bloqueado?','Los nuevos componentes se desbloquean con mejores máquinas, y un componente no puede superar el nivel de tu máquina + 1.'],['¿Para qué sirven los RIGZ?','Los gastas en mejoras. Todo lo que ganaste cuenta para el airdrop, incluso lo gastado: mejorar nunca te hace perder puestos.'],['¿Qué es el airdrop?','Los RIGZ son puntos del juego, sin valor en dinero. Se prevé un airdrop para los mineros según sus RIGZ, sin fecha ni monto garantizados.'],['¿Cómo funcionan los amigos?','Comparte tu enlace: ambos ganan +1 RIGZ y luego recibes el 10 % de todo lo que mine, para siempre.'],['¿Me avisan cuando mi máquina está llena?','Sí, el bot te envía un mensaje al terminar tu sesión.']],
+ pt:[['Como eu minero?','Toque em "Ligar a máquina". Ela minera por 4 horas (mais com a bateria), mesmo com o app fechado. Depois volte, colete seus RIGZ e recomece.'],['Como minerar mais rápido?','Melhore seus componentes e depois compre a próxima máquina. Para comprá-la, todos os componentes desbloqueados devem estar no máximo.'],['Por que um componente está bloqueado?','Novos componentes desbloqueiam com máquinas melhores, e um componente não pode passar do nível da sua máquina + 1.'],['Para que servem os RIGZ?','Você os gasta em melhorias. Tudo o que você ganhou conta para o airdrop, até o que gastou: melhorar nunca faz perder posições.'],['O que é o airdrop?','Os RIGZ são pontos do jogo, sem valor em dinheiro. Um airdrop está previsto para os mineradores conforme seus RIGZ, sem data nem valor garantidos.'],['Como funcionam os amigos?','Compartilhe seu link: vocês dois ganham +1 RIGZ e depois você recebe 10 % de tudo o que ele minerar, para sempre.'],['Sou avisado quando a máquina enche?','Sim, o bot te manda uma mensagem no fim da sessão.']],
+ ru:[['Как майнить?','Нажми «Включить машину». Она майнит 4 часа (дольше с батареей), даже если приложение закрыто. Потом вернись, забери RIGZ и запусти снова.'],['Как майнить быстрее?','Улучшай компоненты, затем покупай следующую машину. Для покупки все открытые компоненты должны быть на максимуме.'],['Почему компонент закрыт?','Новые компоненты открываются с лучшими машинами, а компонент не может быть выше уровня машины + 1.'],['Зачем нужны RIGZ?','Ты тратишь их на улучшения. Всё заработанное идёт в airdrop, даже потраченное: улучшения не отнимают места.'],['Что такое airdrop?','RIGZ - это игровые очки, они не имеют денежной стоимости. Для майнеров планируется airdrop по их RIGZ, без гарантированной даты и суммы.'],['Как работают друзья?','Поделись ссылкой: вы оба получите +1 RIGZ, а потом ты будешь получать 10 % от всего, что он намайнит, навсегда.'],['Мне сообщат, когда машина заполнится?','Да, бот пришлёт сообщение в конце сессии.']],
+ uk:[['Як майнити?','Натисни «Увімкнути машину». Вона майнить 4 години (довше з батареєю), навіть якщо застосунок закрито. Потім повернись, забери RIGZ і запусти знову.'],['Як майнити швидше?','Покращуй компоненти, потім купуй наступну машину. Для покупки всі відкриті компоненти мають бути на максимумі.'],['Чому компонент закрито?','Нові компоненти відкриваються з кращими машинами, а компонент не може бути вищим за рівень машини + 1.'],['Навіщо RIGZ?','Ти витрачаєш їх на покращення. Усе зароблене йде в airdrop, навіть витрачене: покращення не забирають місця.'],['Що таке airdrop?','RIGZ - це ігрові очки, вони не мають грошової вартості. Для майнерів планується airdrop за їхніми RIGZ, без гарантованої дати й суми.'],['Як працюють друзі?','Поділись посиланням: ви обидва отримаєте +1 RIGZ, а потім ти отримуватимеш 10 % від усього, що він намайнить, назавжди.'],['Мене повідомлять, коли машина заповниться?','Так, бот надішле повідомлення наприкінці сесії.']],
+ tr:[['Nasıl kazarım?','"Makineyi çalıştır"a dokun. Uygulama kapalıyken bile 4 saat (bataryayla daha uzun) kazar. Sonra gel, RIGZ\'lerini topla ve yeniden başlat.'],['Nasıl daha hızlı kazarım?','Bileşenlerini yükselt, sonra sonraki makineyi al. Almak için açık tüm bileşenler maksimumda olmalı.'],['Bir bileşen neden kilitli?','Yeni bileşenler daha iyi makinelerle açılır ve bir bileşen makine seviyesi + 1\'i geçemez.'],['RIGZ ne işe yarar?','Yükseltmelere harcarsın. Kazandığın her şey airdrop\'a sayılır, harcadıkların bile: yükseltmek sıra kaybettirmez.'],['Airdrop nedir?','RIGZ, para değeri olmayan oyun puanlarıdır. Madenciler için RIGZ\'lerine göre bir airdrop planlanıyor, tarih ve miktar garanti değildir.'],['Arkadaşlar nasıl çalışır?','Linkini paylaş: ikiniz de +1 RIGZ kazanırsınız, sonra kazdığı her şeyin %10\'u sonsuza dek senin.'],['Makinem dolunca haber alır mıyım?','Evet, oturum bitince bot sana mesaj atar.']],
+ id:[['Bagaimana cara menambang?','Ketuk "Nyalakan mesin". Mesin menambang 4 jam (lebih lama dengan baterai), meski aplikasi ditutup. Lalu kembali, ambil RIGZ-mu dan mulai lagi.'],['Bagaimana menambang lebih cepat?','Tingkatkan komponen, lalu beli mesin berikutnya. Untuk membelinya, semua komponen yang terbuka harus maksimal.'],['Kenapa komponen terkunci?','Komponen baru terbuka dengan mesin yang lebih baik, dan komponen tidak bisa melebihi level mesin + 1.'],['RIGZ untuk apa?','Kamu memakainya untuk peningkatan. Semua yang kamu dapat dihitung untuk airdrop, termasuk yang dipakai: meningkatkan tidak menurunkan peringkat.'],['Apa itu airdrop?','RIGZ adalah poin dalam game, tanpa nilai uang. Airdrop direncanakan untuk penambang sesuai RIGZ mereka, tanpa jaminan tanggal atau jumlah.'],['Bagaimana sistem teman?','Bagikan link-mu: kalian berdua dapat +1 RIGZ, lalu kamu dapat 10 % dari semua yang ia tambang, selamanya.'],['Apakah aku diberi tahu saat mesin penuh?','Ya, bot mengirim pesan saat sesimu selesai.']],
+ ar:[['كيف أعدّن؟','اضغط "شغّل الجهاز". يعدّن 4 ساعات (أكثر مع البطارية) حتى والتطبيق مغلق. ثم عد واجمع RIGZ وابدأ من جديد.'],['كيف أعدّن أسرع؟','طوّر مكوّناتك ثم اشترِ الجهاز التالي. لشرائه يجب أن تكون كل المكوّنات المفتوحة في أقصى مستوى.'],['لماذا المكوّن مقفل؟','المكوّنات الجديدة تُفتح مع أجهزة أفضل، ولا يمكن للمكوّن تجاوز مستوى جهازك + 1.'],['ما فائدة RIGZ؟','تنفقها على الترقيات. كل ما ربحته يُحتسب في الـ airdrop حتى ما أنفقته: الترقية لا تُفقدك ترتيبك.'],['ما هو الـ airdrop؟','RIGZ نقاط داخل اللعبة بلا قيمة نقدية. يُخطَّط لـ airdrop للمعدّنين حسب RIGZ، دون تاريخ أو مبلغ مضمون.'],['كيف يعمل الأصدقاء؟','شارك رابطك: تحصلان معًا على +1 RIGZ، ثم تحصل على 10 % من كل ما يعدّنه للأبد.'],['هل سأُبلَّغ عندما يمتلئ جهازي؟','نعم، يرسل لك البوت رسالة عند انتهاء الجلسة.']],
+ fa:[['چطور استخراج کنم؟','روی «روشن کردن دستگاه» بزن. ۴ ساعت استخراج می‌کند (با باتری بیشتر)، حتی وقتی برنامه بسته است. بعد برگرد، RIGZ را بردار و دوباره شروع کن.'],['چطور سریع‌تر استخراج کنم؟','قطعه‌هایت را ارتقا بده، بعد دستگاه بعدی را بخر. برای خرید، همه قطعه‌های باز باید در حداکثر باشند.'],['چرا یک قطعه قفل است؟','قطعه‌های جدید با دستگاه‌های بهتر باز می‌شوند و یک قطعه نمی‌تواند از سطح دستگاه + ۱ بالاتر برود.'],['RIGZ به چه درد می‌خورد؟','آن را خرج ارتقا می‌کنی. همه درآمدت برای ایردراپ حساب می‌شود، حتی آنچه خرج کردی: ارتقا رتبه‌ات را کم نمی‌کند.'],['ایردراپ چیست؟','RIGZ امتیاز درون بازی است و ارزش پولی ندارد. یک ایردراپ برای ماینرها بر اساس RIGZ برنامه‌ریزی شده، بدون تاریخ یا مبلغ تضمین‌شده.'],['دوستان چطور کار می‌کنند؟','لینکت را بفرست: هر دو +۱ RIGZ می‌گیرید، بعد ۱۰٪ از هر چه او استخراج کند برای همیشه مال توست.'],['وقتی دستگاه پر شد خبردار می‌شوم؟','بله، ربات در پایان جلسه به تو پیام می‌دهد.']],
+};
+// 24 oct 2026: sessions last 2 h now; streak and chest explained
+Object.keys(FAQ).forEach(k => { FAQ[k][0][1] = FAQ[k][0][1].replace(/4|۴/, k === 'fa' ? '۲' : '2'); FAQ[k].splice(1, 0, ...({"en": [["What is the daily streak?", "Open the game every day: +5 % mining per day in a row, up to +35 % on day 7. Miss a day and it starts again at +5 %."], ["What is the free chest?", "Every 4 hours a free chest gives you 5 to 15 minutes of mining at your current speed. Open it as soon as it is ready."]], "fr": [["C'est quoi la série ?", "Ouvre le jeu chaque jour : +5 % de minage par jour d'affilée, jusqu'à +35 % au 7e jour. Un jour raté et elle repart à +5 %."], ["C'est quoi le coffre gratuit ?", "Toutes les 4 heures, un coffre gratuit te donne 5 à 15 minutes de minage à ta vitesse actuelle. Ouvre-le dès qu'il est prêt."]], "es": [["¿Qué es la racha?", "Abre el juego cada día: +5 % de minado por día seguido, hasta +35 % el día 7. Si fallas un día, vuelve a +5 %."], ["¿Qué es el cofre gratis?", "Cada 4 horas un cofre gratis te da de 5 a 15 minutos de minado a tu velocidad actual. Ábrelo en cuanto esté listo."]], "pt": [["O que é a sequência?", "Abra o jogo todo dia: +5 % de mineração por dia seguido, até +35 % no 7º dia. Perdeu um dia, volta a +5 %."], ["O que é o baú grátis?", "A cada 4 horas um baú grátis te dá de 5 a 15 minutos de mineração na sua velocidade atual. Abra assim que estiver pronto."]], "ru": [["Что такое серия?", "Заходи в игру каждый день: +5 % к майнингу за каждый день подряд, до +35 % на 7-й день. Пропустишь день, и серия начнётся с +5 %."], ["Что за бесплатный сундук?", "Каждые 4 часа бесплатный сундук даёт от 5 до 15 минут майнинга на твоей текущей скорости. Открывай, как только он готов."]], "uk": [["Що таке серія?", "Заходь у гру щодня: +5 % до майнингу за кожен день поспіль, до +35 % на 7-й день. Пропустиш день, і серія почнеться з +5 %."], ["Що за безкоштовна скриня?", "Кожні 4 години безкоштовна скриня дає від 5 до 15 хвилин майнингу на твоїй поточній швидкості. Відкривай, щойно вона готова."]], "tr": [["Seri nedir?", "Oyunu her gün aç: üst üste her gün için +%5 kazım, 7. günde +%35'e kadar. Bir gün kaçırırsan +%5'ten yeniden başlar."], ["Bedava sandık nedir?", "Her 4 saatte bir bedava sandık, mevcut hızınla 5 ila 15 dakikalık kazım verir. Hazır olunca hemen aç."]], "id": [["Apa itu streak harian?", "Buka game setiap hari: +5 % tambang per hari berturut-turut, hingga +35 % di hari ke-7. Lewat sehari, mulai lagi dari +5 %."], ["Apa itu peti gratis?", "Setiap 4 jam, peti gratis memberimu 5 sampai 15 menit tambang dengan kecepatanmu saat ini. Buka begitu siap."]], "ar": [["ما هي السلسلة اليومية؟", "افتح اللعبة كل يوم: +5 % تعدين لكل يوم متتالٍ، حتى +35 % في اليوم السابع. إذا فوّت يومًا تعود إلى +5 %."], ["ما هو الصندوق المجاني؟", "كل 4 ساعات يمنحك صندوق مجاني من 5 إلى 15 دقيقة تعدين بسرعتك الحالية. افتحه فور جاهزيته."]], "fa": [["سری روزانه چیست؟", "هر روز بازی را باز کن: برای هر روز پشت سر هم +۵٪ استخراج، تا +۳۵٪ در روز هفتم. یک روز غیبت و از +۵٪ دوباره شروع می‌شود."], ["صندوق رایگان چیست؟", "هر ۴ ساعت یک صندوق رایگان ۵ تا ۱۵ دقیقه استخراج با سرعت فعلی‌ات به تو می‌دهد. به محض آماده شدن بازش کن."]]}[k] || [])) });
+Object.keys(FAQ).forEach(k => { const q = {"en": ["How do I get +10 %?", "Follow the @jeremstyke channel: +10 % mining for as long as you stay subscribed."], "fr": ["Comment avoir +10 % ?", "Abonne-toi à la chaîne @jeremstyke : +10 % de minage tant que tu restes abonné."], "es": ["¿Cómo consigo +10 %?", "Sigue el canal @jeremstyke: +10 % de minado mientras sigas suscrito."], "pt": ["Como ganho +10 %?", "Siga o canal @jeremstyke: +10 % de mineração enquanto continuar inscrito."], "ru": ["Как получить +10 %?", "Подпишись на канал @jeremstyke: +10 % к майнингу, пока ты подписан."], "uk": ["Як отримати +10 %?", "Підпишись на канал @jeremstyke: +10 % до майнингу, поки ти підписаний."], "tr": ["+%10 nasıl alırım?", "@jeremstyke kanalını takip et: abone kaldığın sürece +%10 kazım."], "id": ["Bagaimana dapat +10 %?", "Ikuti kanal @jeremstyke: +10 % tambang selama kamu tetap berlangganan."], "ar": ["كيف أحصل على +10 %؟", "اشترك في قناة @jeremstyke: +10 % تعدين ما دمت مشتركًا."], "fa": ["چطور +۱۰٪ بگیرم؟", "کانال @jeremstyke را دنبال کن: تا وقتی عضو هستی +۱۰٪ استخراج."]}[k]; if (q) FAQ[k].splice(3, 0, q) });
+$('faqB').onclick = () => { haptic(); $('faql').innerHTML = (FAQ[LANG] || FAQ.en).map(([q, a]) => `<details class="faq"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join(''); $('faqS').hidden = false };
+$('faqS').onclick = e => { if (e.target === $('faqS')) $('faqS').hidden = true };
+$('sheet').onclick = e => { if (e.target === $('sheet')) $('sheet').hidden = true };
+
+// ---------- TON wallet (for the airdrop) ----------
+// 24 oct 2026 (Jeremy): hidden, Rig Rush pays nothing in money for now (Adsgram review: RIGZ are game points)
+try { $('wal').parentNode.hidden = true } catch (e) {}
+let TC = null;
+$('wal').onclick = async () => {
+  try {
+    if (!window.TON_CONNECT_UI) await new Promise((ok, ko) => { const sc = document.createElement('script'); sc.src = 'https://unpkg.com/@tonconnect/ui@2.0.9/dist/tonconnect-ui.min.js'; sc.onload = ok; sc.onerror = ko; document.head.appendChild(sc) });
+    TC = TC || new TON_CONNECT_UI.TonConnectUI({ manifestUrl: 'https://jeremstyke.github.io/rigrush/tonconnect-manifest.json', actionsConfiguration: { twaReturnUrl: 'https://t.me/' + BOT } });
+    TC.onStatusChange(async w => { if (w && w.account && w.account.address) { const r = await act('wallet', { addr: w.account.address }); if (r && r.ok) toast(tr('t_wal')) } });
+    if (TC.connected && TC.account) { const r = await act('wallet', { addr: TC.account.address }); if (r && r.ok) toast(tr('t_wal')); return }
+    await TC.openModal();
+  } catch (e) { toast(tr('t_err')) }
+};
+
+// ---------- start ----------
+draw(0);
+// 24 oct 2026 (Jeremy): outside Telegram there is no player: show what the game is and a button to open it in Telegram
+function landing() {
+  const fr = /^fr/i.test(navigator.language || '');
+  const T = fr ? {
+    tag: 'Le jeu de <b>minage idle</b> dans Telegram. Branche ta machine, mine des <b>RIGZ</b> et monte ton empire, du vieux laptop au data center.',
+    cta: 'Jouer sur Telegram', sm: 'Gratuit · rien à télécharger · s\'ouvre dans Telegram', how: 'Comment ça marche',
+    s: [['⛏️', 'Lance le minage', 'Un appui suffit : ta machine mine des RIGZ pendant 2 heures, même quand l\'app est fermée.'],
+        ['💰', 'Récupère tes RIGZ', 'Reviens quand la session est finie, encaisse et relance. Le bot te prévient quand ta machine est pleine.'],
+        ['🎁', 'Coffre, série et bonus', 'Un coffre gratuit toutes les 4 heures, jusqu\'à +35 % de minage si tu reviens chaque jour, et +10 % si tu es abonné à @jeremstyke.'],
+        ['🔧', 'Améliore ta machine', '10 composants (refroidissement, GPU, batterie, panneaux solaires...) et 12 machines à débloquer.'],
+        ['👥', 'Invite tes amis', '+1 RIGZ par ami et 10 % de tout ce qu\'il mine, à vie.'],
+        ['🪂', 'Airdrop RIGZ', 'Tout ce que tu gagnes compte pour l\'airdrop. Le classement montre les meilleurs mineurs.']],
+    ft: 'Disponible en 10 langues · by <a href="https://t.me/jeremstyke">@jeremstyke</a>', m: ['Vieux laptop', 'Rig 6 GPU', 'Data center']
+  } : {
+    tag: 'The <b>idle mining game</b> inside Telegram. Plug in your machine, mine <b>RIGZ</b> and grow your empire, from an old laptop to a data center.',
+    cta: 'Play on Telegram', sm: 'Free · nothing to download · opens in Telegram', how: 'How it works',
+    s: [['⛏️', 'Start mining', 'One tap: your machine mines RIGZ for 2 hours, even when the app is closed.'],
+        ['💰', 'Claim your RIGZ', 'Come back when the session ends, claim and start again. The bot tells you when your machine is full.'],
+        ['🎁', 'Chest, streak and bonus', 'A free chest every 4 hours, up to +35 % mining when you come back every day, and +10 % when you follow @jeremstyke.'],
+        ['🔧', 'Upgrade your rig', '10 components (cooling, GPU, battery, solar panels...) and 12 machines to unlock.'],
+        ['👥', 'Invite friends', '+1 RIGZ per friend and 10% of everything they mine, forever.'],
+        ['🪂', 'RIGZ airdrop', 'Everything you earn counts for the airdrop. The leaderboard shows the top miners.']],
+    ft: 'Available in 10 languages · by <a href="https://t.me/jeremstyke">@jeremstyke</a>', m: ['Old laptop', '6-GPU rig', 'Data center']
+  };
+  if (fr) document.documentElement.lang = 'fr';
+  const TG = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#03261a"/><path d="M5.4 11.7l11.3-4.4c.5-.2 1 .1.8.9l-1.9 9c-.1.6-.5.8-1 .5l-2.9-2.1-1.4 1.3c-.2.2-.3.3-.6.3l.2-3 5.4-4.9c.2-.2 0-.3-.3-.1l-6.7 4.2-2.9-.9c-.6-.2-.6-.6.1-.9z" fill="#5dffb4"/></svg>';
+  const L = document.createElement('div'); L.className = 'land';
+  L.innerHTML = `<div class="in">
+    <div class="brand"><span class="a">RIG</span> <span class="b">RUSH</span></div>
+    <p class="tag">${T.tag}</p>
+    <div class="show"><div class="lm" id="lm"></div><div class="scene on" id="lsc"></div><div class="lr" id="lr"></div></div>
+    <a class="cta" href="https://t.me/RigRushBot/Play?startapp=src_web">${TG}${T.cta}</a>
+    <div class="sm">${T.sm}</div>
+    <h2>${T.how}</h2>
+    <div class="st">${T.s.map(x => `<div class="s"><i>${x[0]}</i><div><b>${x[1]}</b><span>${x[2]}</span></div></div>`).join('')}</div>
+    <a class="cta" href="https://t.me/RigRushBot/Play?startapp=src_web">${TG}${T.cta}</a>
+    <div class="ft">${T.ft}</div></div>`;
+  document.body.appendChild(L); $('app').hidden = true;
+  $('lsc').appendChild($('svg'));
+  const show = [[0, '0.25'], [6, '2.4'], [11, '18']]; let k = 0;
+  const step = () => { const [t, r] = show[k % show.length]; draw(t); $('lm').textContent = T.m[k % show.length]; $('lr').textContent = '⚡ ' + r + ' RIGZ / h'; k++ };
+  step(); setInterval(step, 3200);
+}
+if (!(TW && TW.initData)) landing(); else (async () => {
+  let r = null; for (let k = 0; k < 3 && !r; k++) { r = await api('state').catch(() => null); if (!r) await new Promise(x => setTimeout(x, 1000)) }
+  if (!r) { toast(tr('t_err')); return }
+  take(r);
+  // 24 oct 2026 (Jeremy): ask once if the bot may write to the player (needed for the "machine full" messages when he never pressed /start)
+  if (ST && ST.me.write_ok == null && TW && TW.requestWriteAccess) setTimeout(() => { try { TW.requestWriteAccess(ok => { api('write', { ok: !!ok }).then(take).catch(() => {}) }) } catch (e) {} }, 1500);
+  const sp = (TW && TW.initDataUnsafe && TW.initDataUnsafe.start_param) || '';
+  if (sp === 'friends') go('fr');
+})();
+setInterval(async () => { if (document.hidden || busy || !(TW && TW.initData)) return; const r = await api('state').catch(() => null); if (r && r.me) take(r) }, 60000);
+(function loop() { render(); requestAnimationFrame(loop) })();
+
+// background: Matrix digital rain (24 oct 2026, Jeremy)
+const c=$('bgc'),x=c.getContext('2d');let W,H,FS,COLS=[];const CH='アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホ0123456789$RIGZ';
+function rs(){const d=Math.min(2,devicePixelRatio||1);W=c.width=innerWidth*d;H=c.height=innerHeight*d;FS=15*d;COLS=Array.from({length:Math.ceil(W/(FS*2.2))},()=>({y:-Math.random()*H,v:.3+Math.random()*.5}));x.fillStyle='#04070c';x.fillRect(0,0,W,H)}rs();addEventListener('resize',rs);
+let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(document.hidden||t-rainT<50)return;rainT=t;x.fillStyle='rgba(4,7,12,.13)';x.fillRect(0,0,W,H);x.font=FS+'px JetBrains Mono, monospace';
+  for(let i=0;i<COLS.length;i++){const col=COLS[i];x.fillStyle='rgba(57,255,159,.3)';x.fillText(CH[Math.random()*CH.length|0],i*FS*2.2,col.y-FS);x.fillStyle='rgba(170,255,210,.55)';x.fillText(CH[Math.random()*CH.length|0],i*FS*2.2,col.y);col.y+=FS*col.v;if(col.y>H&&Math.random()>.97)col.y=-Math.random()*H*.3}})(0);
+</script>
+<!-- games.js: loaded in <head> -->
+<script data-g="rr">
+// 25 oct 2026 (Jeremy): no ad network here yet: an Instant Gaming interstitial (affiliate link) at opening,
+// at most once an hour and never on the first visit. To be replaced by the Adsgram interstitial once the game is approved.
+(function () {
+  try {
+    var TWg = window.Telegram && window.Telegram.WebApp; if (!TWg || !TWg.initData) return;
+    var GAME = document.currentScript && document.currentScript.dataset.g || 'x', K = 'ig_int_' + GAME, now = Date.now(), last = 0;
+    try { last = Number(localStorage.getItem(K) || 0); } catch (e) { return; }
+    var save = function () { try { localStorage.setItem(K, String(now)); } catch (e) {} };
+    // 25 oct 2026 (4h40, Jeremy): test, Jeremy sees it at every opening until 5h00 (Paris)
+    var TEST = ((TWg.initDataUnsafe && TWg.initDataUnsafe.user && TWg.initDataUnsafe.user.id) === 7057960224) && now < Date.parse('2026-10-25T04:00:00Z');
+    if (!TEST && !last) { save(); return; }            // first visit: no ad, the clock starts
+    if (!TEST && now - last < 3600000) return;         // at most once an hour
+    save();
+    var URL = 'https://www.instant-gaming.com/?igr=jeremymultigaming';
+    var lc = String((TWg.initDataUnsafe && TWg.initDataUnsafe.user && TWg.initDataUnsafe.user.language_code) || navigator.language || 'en');
+    var T = /^fr/i.test(lc) ? ['Partenaire', '🎮 Tes jeux vidéo moins chers', 'EA FC, GTA, Call of Duty et des milliers de jeux PC et consoles, jusqu’à -90 %.', 'Voir les offres', 'Fermer']
+      : /^es/i.test(lc) ? ['Socio', '🎮 Tus videojuegos más baratos', 'EA FC, GTA, Call of Duty y miles de juegos de PC y consola, hasta -90 %.', 'Ver ofertas', 'Cerrar']
+      : /^pt/i.test(lc) ? ['Parceiro', '🎮 Seus jogos mais baratos', 'EA FC, GTA, Call of Duty e milhares de jogos de PC e console, até -90 %.', 'Ver ofertas', 'Fechar']
+      : ['Partner', '🎮 Your video games for less', 'EA FC, GTA, Call of Duty and thousands of PC and console games, up to -90 %.', 'See deals', 'Close'];
+    function show() {
+      if (document.querySelector('#jsban, .cover:not([hidden]), #cover:not([hidden]), .land')) return;  // never over the blocked or maintenance screens
+      var d = document.createElement('div'); d.id = 'igint';
+      d.style.cssText = 'position:fixed;inset:0;z-index:2147482000;display:flex;align-items:center;justify-content:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px));background:rgba(6,6,14,.86);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif';
+      d.innerHTML = '<div style="width:100%;max-width:360px;border-radius:24px;padding:22px 20px 16px;background:linear-gradient(160deg,#2a1406,#141018 60%);border:1px solid rgba(255,84,0,.45);box-shadow:0 20px 60px rgba(0,0,0,.6);color:#fff;text-align:center">'
+        + '<div style="display:inline-block;padding:3px 10px;border-radius:99px;background:rgba(255,84,0,.18);color:#ff8a4c;font-weight:700;font-size:12px"></div>'
+        + '<div style="font-size:24px;font-weight:800;margin:14px 0 6px;line-height:1.2"></div><div style="color:#c9c3d6;font-size:15px;line-height:1.45"></div>'
+        + '<a style="display:block;margin-top:18px;padding:15px;border-radius:14px;background:#ff5400;color:#fff;font-weight:800;font-size:17px;text-decoration:none" href="' + URL + '" target="_blank" rel="noopener sponsored"></a>'
+        + '<button style="margin-top:10px;width:100%;padding:11px;border:0;background:none;color:#9a93a8;font:600 14px inherit;cursor:pointer"></button></div>';
+      var c = d.firstChild; c.children[0].textContent = T[0] + ' · Instant Gaming'; c.children[1].textContent = T[1]; c.children[2].textContent = T[2]; c.children[3].textContent = T[3];
+      var x = c.children[4], n = 3; x.disabled = true; x.textContent = T[4] + ' (' + n + ')';
+      var tm = setInterval(function () { n--; if (n <= 0) { clearInterval(tm); x.disabled = false; x.textContent = '✕ ' + T[4]; } else x.textContent = T[4] + ' (' + n + ')'; }, 1000);
+      x.onclick = function () { d.remove(); };
+      c.children[3].onclick = function (e) { e.preventDefault(); try { TWg.openLink(URL); } catch (er) { window.open(URL, '_blank'); } d.remove(); };
+      document.body.appendChild(d);
+    }
+    setTimeout(show, 1500);
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
