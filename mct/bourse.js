@@ -18,6 +18,7 @@
       mine: 'Mes actions', all: 'Tous les actifs', kind: { stock: 'Action', crypto: 'Crypto', mat: 'Matière première' }, closed: 'fermé',
       buy: 'Acheter', sell: 'Vendre', sellAll: 'Tout vendre', max: 'Max', amount: 'Montant en $', cash: 'Ton cash', have: 'Tu possèdes', pl: 'Plus-value',
       bought: (q, n) => '✅ Acheté : ' + q + ' ' + n, sold: (a) => '✅ Vendu : +' + a,
+      pfH: '📈 Mes actions en bourse', pfE: 'Place ton cash sur Apple, Bitcoin, l’or… et touche des $BATON chaque soir.', pfB: 'Investir', pfV: (v, g) => 'Valeur : ' + v + ' · ' + g,
       err: { cash: 'Pas assez de cash', stale: 'Cours trop ancien, réessaie dans un instant', none: 'Tu n’en as pas', small: 'Montant trop petit', soon: 'Bientôt disponible', x: 'Problème de connexion, réessaie' },
     },
     en: {
@@ -27,6 +28,7 @@
       mine: 'My shares', all: 'All assets', kind: { stock: 'Stock', crypto: 'Crypto', mat: 'Commodity' }, closed: 'closed',
       buy: 'Buy', sell: 'Sell', sellAll: 'Sell all', max: 'Max', amount: 'Amount in $', cash: 'Your cash', have: 'You own', pl: 'Gain',
       bought: (q, n) => '✅ Bought: ' + q + ' ' + n, sold: (a) => '✅ Sold: +' + a,
+      pfH: '📈 My stock market shares', pfE: 'Put your cash in Apple, Bitcoin, gold… and earn $BATON every evening.', pfB: 'Invest', pfV: (v, g) => 'Value: ' + v + ' · ' + g,
       err: { cash: 'Not enough cash', stale: 'Price too old, try again in a moment', none: 'You do not own any', small: 'Amount too small', soon: 'Coming soon', x: 'Connection problem, try again' },
     },
   };
@@ -129,6 +131,30 @@
     const bt = document.getElementById('bsbt');
     if (bt) bt.onclick = () => { hp(); try { tw.openTelegramLink(BATON); } catch (e) { location.href = BATON; } };
   }
+
+  // ---------- 18h25: a card at the top of the Portfolio ("📈 My stock market shares" / "Invest") ----------
+  function pfCard() {
+    let c = document.getElementById('bspf');
+    if (view() !== 'portfolio') { if (c) c.remove(); return; }
+    const v = document.getElementById('view'); if (!v) return;
+    if (!S && !loading && Date.now() - lastLoad > 60000) { paintQuiet(); }
+    const T = L(), tot = S ? S.pos.reduce((a, p) => a + Number(p.value), 0) : 0, g = S ? S.pos.reduce((a, p) => a + Number(p.value) - Number(p.cost), 0) : 0;
+    const d = (S && S.div) || {};
+    const sub = S && S.pos.length ? T.pfV(usd(tot), '<span style="color:' + (g >= 0 ? '#4ff0b7' : '#ff5d8f') + '">' + (g >= 0 ? '+' : '') + usd(g) + '</span>') + (Number(d.next) > 0 && !S.banned ? ' · 🏃 +' + kpi(d.ready > 0 ? d.ready : d.next) + ' $BATON' : '') : T.pfE;
+    const k = sub + lg();
+    if (!c || !c.isConnected) {
+      c = document.createElement('button'); c.id = 'bspf'; c.type = 'button'; c.className = 'bsdiv';
+      c.style.cssText = 'width:100%;text-align:left;color:inherit;cursor:pointer;flex-direction:row;align-items:center';
+      c.onclick = () => { hp(); ON = true; try { go('market'); } catch (e) {} setTimeout(seg, 300); };
+      const h = v.querySelector('h1'); if (h) h.insertAdjacentElement('afterend', c); else v.prepend(c);
+    }
+    if (c.dataset.k !== k) { c.dataset.k = k; c.innerHTML = '<span style="flex:1;min-width:0"><b style="display:block">' + T.pfH + '</b><small>' + sub + '</small></span><span class="bb">' + T.pfB + '</span>'; }
+  }
+  async function paintQuiet() {
+    loading = true; const r = await call({ action: 'state' }); loading = false; lastLoad = Date.now();
+    if (r && r.ok) S = r;
+  }
+  setInterval(pfCard, 1000);
 
   // ---------- buy / sell sheet ----------
   function trade(sym) {
