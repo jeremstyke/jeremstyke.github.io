@@ -24,7 +24,9 @@
   function card() {
     let c = document.getElementById('btcard');
     if (view() !== 'market') { if (c) c.remove(); return; }
-    const m = document.getElementById('msn'); if (!m || !m.firstElementChild) return;  // under the missions, once they are shown
+    const ms = document.getElementById('msn'); if (!ms || !ms.firstElementChild) return;  // under the missions, once they are shown
+    // 26 oct 2026 (23h30): and under the Adsgram task block (#agtask, ads.js), which stays first: it is what earns the most
+    const ag = document.getElementById('agtask'), m = ag && ag.parentNode === ms.parentNode ? ag : ms;
     const T = L(), k = T.h;
     if (!c || !c.isConnected || c.previousElementSibling !== m) {
       if (c) c.remove();
