@@ -147,11 +147,14 @@
     const d = (S && S.div) || {};
     const sub = S && S.pos.length ? T.pfV(usd(tot), '<span style="color:' + (g >= 0 ? '#4ff0b7' : '#ff5d8f') + '">' + (g >= 0 ? '+' : '') + usd(g) + '</span>') + (DIV_ON && Number(d.next) > 0 && !S.banned ? ' · 🏃 +' + kpi(d.ready > 0 ? d.ready : d.next) + ' $BATON' : '') : T.pfE;
     const k = sub + lg();
+    const h2 = v.querySelector('h2');  // 26 oct 2026 (18h46, Jeremy): right above "Your coins" (the first section title of the Portfolio)
+    if (!h2) return;
     if (!c || !c.isConnected) {
       c = document.createElement('button'); c.id = 'bspf'; c.type = 'button'; c.className = 'bsdiv';
       c.style.cssText = 'width:100%;text-align:left;color:inherit;cursor:pointer;flex-direction:row;align-items:center';
       c.onclick = () => { hp(); open(); };
-      const h = v.querySelector('h1'); if (h) h.insertAdjacentElement('afterend', c); else v.prepend(c);
+      c.style.marginTop = '14px';
+      h2.insertAdjacentElement('beforebegin', c);
     }
     if (c.dataset.k !== k) { c.dataset.k = k; c.innerHTML = '<span style="flex:1;min-width:0"><b style="display:block">' + T.pfH + '</b><small>' + sub + '</small></span><span class="bb">' + T.pfB + '</span>'; }
   }
