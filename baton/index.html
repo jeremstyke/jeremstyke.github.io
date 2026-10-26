@@ -1787,6 +1787,8 @@ function nudge() {
   })();
   const sp = (tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '';
   if (sp === 'friends') go('friends');
+  // 26 oct 2026 (23h05, Jeremy): links from Meme Coin Tycoon ("Earn $BATON by playing" card) open the Tasks tab directly
+  else if (/tasks/.test(sp)) go('tasks');
   else if (/^p\d{1,15}$/.test(sp)) openProfile(Number(sp.slice(1)));
   else if (/^q[bt]\d{1,15}$/.test(sp)) openAsk(sp[1], Number(sp.slice(2)));
   // 26 oct 2026 (21h55, Jeremy): "🙏 Say thanks" button of the "X passed you the baton" message: the thank you is sent right away
