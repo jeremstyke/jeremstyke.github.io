@@ -18,7 +18,7 @@
       mine: 'Mes actions', all: 'Tous les actifs', kind: { stock: 'Action', crypto: 'Crypto', mat: 'Matière première' }, closed: 'fermé',
       buy: 'Acheter', sell: 'Vendre', sellAll: 'Tout vendre', max: 'Max', amount: 'Montant en $', cash: 'Ton cash', have: 'Tu possèdes', pl: 'Plus-value',
       bought: (q, n) => '✅ Acheté : ' + q + ' ' + n, sold: (a) => '✅ Vendu : +' + a,
-      pfH: '📈 Investir en bourse', pfE: 'Apple, Tesla, Bitcoin, l’or… aux vrais cours, et des $BATON chaque soir.', pfB: 'Investir', title: '📈 Bourse', tot: 'Tes actions', back: '← Portefeuille', pfV: (v, g) => 'Valeur : ' + v + ' · ' + g,
+      pfH: '📈 Investir en bourse', pfE: 'Apple, Tesla, Bitcoin, l’or… aux vrais cours, avec ton cash du jeu.', pfB: 'Investir', title: '📈 Bourse', tot: 'Tes actions', back: '← Portefeuille', pfV: (v, g) => 'Valeur : ' + v + ' · ' + g,
       err: { cash: 'Pas assez de cash', stale: 'Cours trop ancien, réessaie dans un instant', none: 'Tu n’en as pas', small: 'Montant trop petit', soon: 'Bientôt disponible', x: 'Problème de connexion, réessaie' },
     },
     en: {
@@ -28,7 +28,7 @@
       mine: 'My shares', all: 'All assets', kind: { stock: 'Stock', crypto: 'Crypto', mat: 'Commodity' }, closed: 'closed',
       buy: 'Buy', sell: 'Sell', sellAll: 'Sell all', max: 'Max', amount: 'Amount in $', cash: 'Your cash', have: 'You own', pl: 'Gain',
       bought: (q, n) => '✅ Bought: ' + q + ' ' + n, sold: (a) => '✅ Sold: +' + a,
-      pfH: '📈 Invest in the stock market', pfE: 'Apple, Tesla, Bitcoin, gold… at real prices, and $BATON every evening.', pfB: 'Invest', title: '📈 Stock market', tot: 'Your shares', back: '← Portfolio', pfV: (v, g) => 'Value: ' + v + ' · ' + g,
+      pfH: '📈 Invest in the stock market', pfE: 'Apple, Tesla, Bitcoin, gold… at real prices, with your game cash.', pfB: 'Invest', title: '📈 Stock market', tot: 'Your shares', back: '← Portfolio', pfV: (v, g) => 'Value: ' + v + ' · ' + g,
       err: { cash: 'Not enough cash', stale: 'Price too old, try again in a moment', none: 'You do not own any', small: 'Amount too small', soon: 'Coming soon', x: 'Connection problem, try again' },
     },
   };
@@ -48,6 +48,7 @@
     catch (e) { return { ok: false, error: 'x' }; }
   }
   const cashUp = (c) => { try { setCash(c); } catch (e) {} };
+  const DIV_ON = false;  // 26 oct 2026 (18h41, Jeremy): the $BATON dividends are off for now (cron mct_bs_dividends unscheduled)
   let S = null, SEL = null, busy = false, loading = false, lastLoad = 0;
   const asset = (s) => (S && S.assets || []).find((a) => a.sym === s);
   const pos = (s) => (S && S.pos || []).find((p) => p.sym === s);
@@ -116,7 +117,7 @@
     let h = '<div class="bw"><button class="bk" type="button">' + T.back + '</button><h1>' + T.title + '</h1>'
       + '<div class="hero"><span><small>' + T.tot + '</small><b class="num">' + usd(tot) + '</b>' + (S.pos.length ? ' <span class="chip ' + (g >= 0 ? 'up' : 'down') + '">' + (g >= 0 ? '+' : '') + usd(g) + '</span>' : '') + '</span>'
       + '<span style="text-align:right"><small>' + T.cash + '</small><b class="num" style="font-size:18px">' + usd(S.cash) + '</b></span></div>';
-    if (!S.banned) {
+    if (DIV_ON && !S.banned) {  // 26 oct 2026 (18h41, Jeremy): no link with Pass The Baton for now (no dividend card)
       const line = Number(d.ready) > 0 ? T.divT(kpi(d.ready)) : Number(d.next) > 0 ? T.divW(kpi(d.next)) : T.divT0;
       h += '<div class="bsdiv"><b>' + T.divH + '</b><small>' + T.divS(d.per || 10, kpi(d.cap || 1000)) + '</small>'
         + '<div class="bl"><span class="bn">' + line + (Number(d.total) > 0 ? '<br><small>' + T.divL(kpi(d.total)) + '</small>' : '') + '</span><button class="bb" type="button" id="bsbt">' + T.divB + '</button></div></div>';
@@ -144,7 +145,7 @@
     load(false);
     const T = L(), tot = S ? S.pos.reduce((a, p) => a + Number(p.value), 0) : 0, g = S ? S.pos.reduce((a, p) => a + Number(p.value) - Number(p.cost), 0) : 0;
     const d = (S && S.div) || {};
-    const sub = S && S.pos.length ? T.pfV(usd(tot), '<span style="color:' + (g >= 0 ? '#4ff0b7' : '#ff5d8f') + '">' + (g >= 0 ? '+' : '') + usd(g) + '</span>') + (Number(d.next) > 0 && !S.banned ? ' · 🏃 +' + kpi(d.ready > 0 ? d.ready : d.next) + ' $BATON' : '') : T.pfE;
+    const sub = S && S.pos.length ? T.pfV(usd(tot), '<span style="color:' + (g >= 0 ? '#4ff0b7' : '#ff5d8f') + '">' + (g >= 0 ? '+' : '') + usd(g) + '</span>') + (DIV_ON && Number(d.next) > 0 && !S.banned ? ' · 🏃 +' + kpi(d.ready > 0 ? d.ready : d.next) + ' $BATON' : '') : T.pfE;
     const k = sub + lg();
     if (!c || !c.isConnected) {
       c = document.createElement('button'); c.id = 'bspf'; c.type = 'button'; c.className = 'bsdiv';
