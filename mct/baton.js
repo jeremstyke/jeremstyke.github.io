@@ -26,7 +26,8 @@
     function adInt() {
       try {
         // 25 oct 2026 (3h45, Jeremy): when Adsgram has no ad, an Ads Galaxy video (game 135) takes over
-        const agx = () => { try {
+        const agx = () => {};  /* 26 oct 2026 (18h25, Jeremy): no more Ads Galaxy backup, it played right after the Adsgram ad */
+        const agxOld = () => { try {
           const run = () => { try { window.showAdsGalaxy({ miniappId: 135 }).catch(() => {}); } catch (e) {} };
           if (window.showAdsGalaxy) return run();
           const s = document.createElement('script'); s.src = 'https://app.adsgalaxy.online/sdk.js?id=135'; s.onload = run; document.head.appendChild(s);
