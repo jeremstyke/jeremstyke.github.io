@@ -7,7 +7,7 @@
   const tw = window.Telegram && Telegram.WebApp;
   const FN = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-bourse';
   const BATON = 'https://t.me/PassTheBatonBot/play?startapp=src_mctbs';
-  const lg = () => { let l = 'en'; try { l = LANG; } catch (e) {} return l === 'fr' ? 'fr' : 'en'; };
+  const lg = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] ? l : 'en'; };  // 26 oct 2026 (19h22): the 6 languages of the game
   const TX = {
     fr: {
       note: 'Les vrais cours, mis à jour toutes les 5 min · frais 0,25 % par ordre',
@@ -29,8 +29,51 @@
       pfH: '📈 Invest in the stock market', pfE: 'Apple, Tesla, Bitcoin, gold… at real prices, with your game cash.', pfB: 'Invest', title: '📈 Stock market', tot: 'Your shares', back: '← Portfolio', pfV: (v, g) => 'Value: ' + v + ' · ' + g,
       err: { cash: 'Not enough cash', stale: 'Price too old, try again in a moment', none: 'You do not own any', small: 'Amount too small', soon: 'Coming soon', x: 'Connection problem, try again' },
     },
+    ru: {
+      note: 'Реальные котировки, обновление каждые 5 мин · комиссия 0,25% за сделку',
+      divH: '🏃 Твои акции приносят $BATON', divS: (p, c) => 'Каждый вечер в 20:00 (Париж): 1 $BATON за каждые $' + p + ' в акциях, которые ты держишь не меньше 20 ч (макс. ' + c + ' в день), на Pass The Baton.',
+      divT: (n) => 'Сегодня вечером: +' + n + ' $BATON', divT0: 'Купи акцию, чтобы получить первый дивиденд', divW: (n) => 'Завтра: +' + n + ' $BATON', divL: (n) => 'Уже получено: ' + n + ' $BATON', divB: 'Открыть Baton',
+      mine: 'Мои акции', all: 'Все активы', kind: { stock: 'Акция', crypto: 'Крипто', mat: 'Сырьё' }, closed: 'закрыто',
+      buy: 'Купить', sell: 'Продать', sellAll: 'Продать всё', max: 'Макс', amount: 'Сумма в $', cash: 'Твои деньги', have: 'У тебя', pl: 'Прибыль',
+      bought: (q, n) => '✅ Куплено: ' + q + ' ' + n, sold: (a) => '✅ Продано: +' + a,
+      pfH: '📈 Инвестировать на бирже', pfE: 'Apple, Tesla, Bitcoin, золото… по реальным ценам, на игровые деньги.', pfB: 'Инвестировать', title: '📈 Биржа', tot: 'Твои акции', back: '← Портфель', pfV: (v, g) => 'Стоимость: ' + v + ' · ' + g,
+      err: { cash: 'Не хватает денег', stale: 'Цена устарела, попробуй через минуту', none: 'У тебя их нет', small: 'Слишком маленькая сумма', soon: 'Скоро', x: 'Проблема с соединением, попробуй ещё раз' },
+    },
+    ar: {
+      note: 'أسعار حقيقية، تُحدَّث كل 5 دقائق · رسوم 0.25% على كل أمر',
+      divH: '🏃 أسهمك تكسب $BATON', divS: (p, c) => 'كل مساء الساعة 20:00 (باريس): 1 $BATON لكل $' + p + ' من الأسهم المحتفظ بها 20 ساعة على الأقل (حد أقصى ' + c + ' يوميًا)، على Pass The Baton.',
+      divT: (n) => 'الليلة: +' + n + ' $BATON', divT0: 'اشترِ سهمًا لتحصل على أول توزيع أرباح', divW: (n) => 'غدًا: +' + n + ' $BATON', divL: (n) => 'استلمت حتى الآن: ' + n + ' $BATON', divB: 'افتح Baton',
+      mine: 'أسهمي', all: 'كل الأصول', kind: { stock: 'سهم', crypto: 'عملة رقمية', mat: 'سلعة' }, closed: 'مغلق',
+      buy: 'شراء', sell: 'بيع', sellAll: 'بيع الكل', max: 'الكل', amount: 'المبلغ بالدولار', cash: 'رصيدك', have: 'تملك', pl: 'الربح',
+      bought: (q, n) => '✅ تم الشراء: ' + q + ' ' + n, sold: (a) => '✅ تم البيع: +' + a,
+      pfH: '📈 استثمر في البورصة', pfE: 'Apple وTesla وBitcoin والذهب… بأسعار حقيقية، برصيدك في اللعبة.', pfB: 'استثمر', title: '📈 البورصة', tot: 'أسهمك', back: '→ المحفظة', pfV: (v, g) => 'القيمة: ' + v + ' · ' + g,
+      err: { cash: 'رصيدك غير كافٍ', stale: 'السعر قديم، حاول بعد لحظة', none: 'لا تملك منه شيئًا', small: 'المبلغ صغير جدًا', soon: 'قريبًا', x: 'مشكلة في الاتصال، حاول مجددًا' },
+    },
+    fa: {
+      note: 'قیمت‌های واقعی، به‌روزرسانی هر ۵ دقیقه · کارمزد ۰٫۲۵٪ برای هر سفارش',
+      divH: '🏃 سهام تو $BATON می‌سازد', divS: (p, c) => 'هر شب ساعت ۲۰:۰۰ (پاریس): ۱ $BATON به ازای هر ' + p + ' دلار سهامی که حداقل ۲۰ ساعت نگه داشته‌ای (حداکثر ' + c + ' در روز)، در Pass The Baton.',
+      divT: (n) => 'امشب: +' + n + ' $BATON', divT0: 'یک سهم بخر تا اولین سود را بگیری', divW: (n) => 'فردا: +' + n + ' $BATON', divL: (n) => 'دریافت‌شده تا حالا: ' + n + ' $BATON', divB: 'باز کردن Baton',
+      mine: 'سهام من', all: 'همه دارایی‌ها', kind: { stock: 'سهم', crypto: 'رمزارز', mat: 'کالا' }, closed: 'بسته',
+      buy: 'خرید', sell: 'فروش', sellAll: 'فروش همه', max: 'همه', amount: 'مبلغ به دلار', cash: 'پول تو', have: 'داری', pl: 'سود',
+      bought: (q, n) => '✅ خریده شد: ' + q + ' ' + n, sold: (a) => '✅ فروخته شد: +' + a,
+      pfH: '📈 سرمایه‌گذاری در بورس', pfE: 'Apple، Tesla، Bitcoin، طلا… با قیمت واقعی، با پول بازی.', pfB: 'سرمایه‌گذاری', title: '📈 بورس', tot: 'سهام تو', back: '→ پرتفوی', pfV: (v, g) => 'ارزش: ' + v + ' · ' + g,
+      err: { cash: 'پول کافی نداری', stale: 'قیمت قدیمی است، کمی بعد دوباره امتحان کن', none: 'از این سهم نداری', small: 'مبلغ خیلی کم است', soon: 'به‌زودی', x: 'مشکل اتصال، دوباره امتحان کن' },
+    },
+    id: {
+      note: 'Harga asli, diperbarui setiap 5 menit · biaya 0,25% per order',
+      divH: '🏃 Sahammu menghasilkan $BATON', divS: (p, c) => 'Setiap malam pukul 20:00 (Paris): 1 $BATON per $' + p + ' saham yang kamu simpan minimal 20 jam (maks ' + c + ' per hari), di Pass The Baton.',
+      divT: (n) => 'Malam ini: +' + n + ' $BATON', divT0: 'Beli saham untuk dapat dividen pertamamu', divW: (n) => 'Besok: +' + n + ' $BATON', divL: (n) => 'Sudah diterima: ' + n + ' $BATON', divB: 'Buka Baton',
+      mine: 'Sahamku', all: 'Semua aset', kind: { stock: 'Saham', crypto: 'Kripto', mat: 'Komoditas' }, closed: 'tutup',
+      buy: 'Beli', sell: 'Jual', sellAll: 'Jual semua', max: 'Maks', amount: 'Jumlah dalam $', cash: 'Uangmu', have: 'Kamu punya', pl: 'Untung',
+      bought: (q, n) => '✅ Dibeli: ' + q + ' ' + n, sold: (a) => '✅ Dijual: +' + a,
+      pfH: '📈 Investasi di bursa saham', pfE: 'Apple, Tesla, Bitcoin, emas… dengan harga asli, pakai uang game-mu.', pfB: 'Investasi', title: '📈 Bursa saham', tot: 'Sahammu', back: '← Portofolio', pfV: (v, g) => 'Nilai: ' + v + ' · ' + g,
+      err: { cash: 'Uangmu tidak cukup', stale: 'Harga sudah lama, coba lagi sebentar', none: 'Kamu tidak punya', small: 'Jumlah terlalu kecil', soon: 'Segera hadir', x: 'Masalah koneksi, coba lagi' },
+    },
   };
   const L = () => TX[lg()];
+  // gold and oil have a translated name (the others are brand names)
+  const NM = { GOLD: { fr: 'Or', en: 'Gold', ru: 'Золото', ar: 'الذهب', fa: 'طلا', id: 'Emas' }, OIL: { fr: 'Pétrole', en: 'Oil', ru: 'Нефть', ar: 'النفط', fa: 'نفت', id: 'Minyak' } };
+  const nm = (a) => (a && NM[a.sym] && NM[a.sym][lg()]) || (a && a.name) || '';
   const COL = { AAPL: '#c9d1d9', TSLA: '#ff5d5d', BTC: '#f7931a', GOLD: '#ffd43b', NVDA: '#76d13d', ETH: '#8c9eff', OIL: '#b8875a', AMZN: '#ff9f43', MSFT: '#2ee6ff', TON: '#2f9bff', SOL: '#b18cff', SPY: '#4ff0b7' };
   const hp = (k) => { try { haptic(k); } catch (e) {} };
   const tst = (m) => { try { toast(m); } catch (e) {} };
@@ -105,7 +148,7 @@
     try { tw.BackButton.offClick(close); tw.BackButton.hide(); } catch (e) {}
   }
   function row(a, right) {
-    return '<button class="row" data-bsa="' + ec(a.sym) + '">' + med(a) + '<div class="who"><b>' + ec(a.name) + (a.live ? '' : '<span class="bsk">' + L().closed + '</span>') + '</b><small>' + right.sub + '</small></div>'
+    return '<button class="row" data-bsa="' + ec(a.sym) + '">' + med(a) + '<div class="who"><b>' + ec(nm(a)) + (a.live ? '' : '<span class="bsk">' + L().closed + '</span>') + '</b><small>' + right.sub + '</small></div>'
       + '<div class="px num"><b>' + right.top + '</b><span class="chip ' + (right.up ? 'up' : 'down') + '">' + right.chip + '</span></div></button>';
   }
   function draw() {
@@ -158,11 +201,22 @@
   }
   setInterval(pfCard, 1000);
 
+  // 26 oct 2026 (19h22, Jeremy): a link whose start_param contains "bourse" (t.me/Memecointycoonbot?startapp=src_bourse_...) opens the
+  // Bourse page directly, once the game is ready (Portfolio behind it, so the back button lands there)
+  (() => {
+    let sp = ''; try { sp = String((tw && tw.initDataUnsafe && tw.initDataUnsafe.start_param) || ''); } catch (e) {}
+    if (!/bourse/i.test(sp)) return;
+    let n = 0; const w = setInterval(() => {
+      n++; let ok = false; try { ok = !!document.querySelector('nav.tb') && !!document.getElementById('view') && typeof go === 'function' && ME && ME.uid && VIEW !== 'welcome'; } catch (e) {}  // a brand new player finishes the welcome screen first
+      if (ok || n > 60) { clearInterval(w); if (ok) { try { go('portfolio'); } catch (e) {} setTimeout(open, 400); } }
+    }, 250);
+  })();
+
   // ---------- buy / sell sheet ----------
   function trade(sym) {
     SEL = sym; let s = document.getElementById('bst'); if (!s) { s = document.createElement('div'); s.id = 'bst'; document.body.appendChild(s); }
     const T = L(), a = asset(sym), p = pos(sym), u = Number(a.chg) >= 0, g = p ? Number(p.value) - Number(p.cost) : 0;
-    s.innerHTML = '<div class="tb2"><div class="th">' + med(a) + '<span><b>' + ec(a.name) + '</b><small>' + ec(a.sym) + ' · ' + T.kind[a.kind] + (a.live ? '' : ' · ' + T.closed) + '</small></span></div>'
+    s.innerHTML = '<div class="tb2"><div class="th">' + med(a) + '<span><b>' + ec(nm(a)) + '</b><small>' + ec(a.sym) + ' · ' + T.kind[a.kind] + (a.live ? '' : ' · ' + T.closed) + '</small></span></div>'
       + '<div><span class="big num">' + px(a.price) + '</span> <span class="chip ' + (u ? 'up' : 'down') + '">' + pc(a.chg) + '</span></div>'
       + spark(a.spark, u)
       + (p ? '<div class="sm" style="text-align:left">' + T.have + ' : <b>' + qf(p.qty) + ' ' + ec(sym) + '</b> = ' + usd(p.value) + ' · ' + T.pl + ' : <b style="color:' + (g >= 0 ? '#4ff0b7' : '#ff5d8f') + '">' + (g >= 0 ? '+' : '') + usd(g) + '</b></div>' : '')
@@ -186,7 +240,7 @@
       const r = await call({ action: side, sym: SEL, usd: amt, all: !!all });
       if (r && r.ok) {
         hp('ok'); const a = asset(SEL) || {};
-        tst(side === 'buy' ? T.bought(qf(r.done.qty), a.name || SEL) : T.sold(usd(r.done.net)));
+        tst(side === 'buy' ? T.bought(qf(r.done.qty), nm(a) || SEL) : T.sold(usd(r.done.net)));
         const s = document.getElementById('bst'); if (s) s.remove();
         S = r; lastLoad = Date.now(); cashUp(r.cash); draw();
       } else { hp('err'); tst(T.err[(r && r.error)] || T.err.x); }
