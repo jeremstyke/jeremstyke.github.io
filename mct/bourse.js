@@ -3,10 +3,8 @@
 // Portfolio ("📈 Invest in the stock market") as a full page, with the real logos of the brands and cryptos. Real prices refreshed every 5 minutes (stocks, gold, oil, crypto), 0.25% fee per order.
 // Link with Pass The Baton: every evening at 20:00 (Paris), shares held for at least 20 h pay a dividend in $BATON on Baton.
 (() => {
-  const TESTERS = [7057960224, 8844440894];  // 26 oct 2026 (18h46, Jeremy): Doriane too
+  // 26 oct 2026 (19h11, Jeremy): open to every player (no more testers list; the server switch is ds_config 'mct_bs_cfg'.open)
   const tw = window.Telegram && Telegram.WebApp;
-  const UID = Number((tw && tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.id) || 0);
-  if (!TESTERS.includes(UID)) return;
   const FN = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-bourse';
   const BATON = 'https://t.me/PassTheBatonBot/play?startapp=src_mctbs';
   const lg = () => { let l = 'en'; try { l = LANG; } catch (e) {} return l === 'fr' ? 'fr' : 'en'; };
