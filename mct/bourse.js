@@ -1,6 +1,6 @@
 // 26 oct 2026 (Jeremy): the "Bourse" of Meme Coin Tycoon, owner-only test for now (edge function mct-bourse answers only the testers
-// of ds_config 'mct_bs_cfg'). 18h20: it lives INSIDE the Market, as a "📈 Bourse" filter next to Hot / New / Top..., and uses the
-// game's own cash. Real prices refreshed every 5 minutes (stocks, gold, oil, crypto), 0.25% fee per order.
+// of ds_config 'mct_bs_cfg'). It uses the game's own cash. 18h35: no longer in the Market; it opens from a card at the top of the
+// Portfolio ("📈 Invest in the stock market") as a full page, with the real logos of the brands and cryptos. Real prices refreshed every 5 minutes (stocks, gold, oil, crypto), 0.25% fee per order.
 // Link with Pass The Baton: every evening at 20:00 (Paris), shares held for at least 20 h pay a dividend in $BATON on Baton.
 (() => {
   const TESTERS = [7057960224];
@@ -12,23 +12,23 @@
   const lg = () => { let l = 'en'; try { l = LANG; } catch (e) {} return l === 'fr' ? 'fr' : 'en'; };
   const TX = {
     fr: {
-      seg: '📈 Bourse', note: 'Les vrais cours, mis à jour toutes les 5 min · frais 0,25 % par ordre',
+      note: 'Les vrais cours, mis à jour toutes les 5 min · frais 0,25 % par ordre',
       divH: '🏃 Tes actions rapportent des $BATON', divS: (p, c) => 'Chaque soir à 20h : 1 $BATON par ' + p + ' $ d’actions gardées au moins 20 h (max ' + c + ' par jour), versés sur Pass The Baton.',
       divT: (n) => 'Ce soir : +' + n + ' $BATON', divT0: 'Achète une action pour toucher ton premier dividende', divW: (n) => 'Demain : +' + n + ' $BATON', divL: (n) => 'Déjà reçus : ' + n + ' $BATON', divB: 'Ouvrir Baton',
       mine: 'Mes actions', all: 'Tous les actifs', kind: { stock: 'Action', crypto: 'Crypto', mat: 'Matière première' }, closed: 'fermé',
       buy: 'Acheter', sell: 'Vendre', sellAll: 'Tout vendre', max: 'Max', amount: 'Montant en $', cash: 'Ton cash', have: 'Tu possèdes', pl: 'Plus-value',
       bought: (q, n) => '✅ Acheté : ' + q + ' ' + n, sold: (a) => '✅ Vendu : +' + a,
-      pfH: '📈 Mes actions en bourse', pfE: 'Place ton cash sur Apple, Bitcoin, l’or… et touche des $BATON chaque soir.', pfB: 'Investir', pfV: (v, g) => 'Valeur : ' + v + ' · ' + g,
+      pfH: '📈 Investir en bourse', pfE: 'Apple, Tesla, Bitcoin, l’or… aux vrais cours, et des $BATON chaque soir.', pfB: 'Investir', title: '📈 Bourse', tot: 'Tes actions', back: '← Portefeuille', pfV: (v, g) => 'Valeur : ' + v + ' · ' + g,
       err: { cash: 'Pas assez de cash', stale: 'Cours trop ancien, réessaie dans un instant', none: 'Tu n’en as pas', small: 'Montant trop petit', soon: 'Bientôt disponible', x: 'Problème de connexion, réessaie' },
     },
     en: {
-      seg: '📈 Stocks', note: 'Real prices, updated every 5 min · 0.25% fee per order',
+      note: 'Real prices, updated every 5 min · 0.25% fee per order',
       divH: '🏃 Your shares earn $BATON', divS: (p, c) => 'Every evening at 20:00 (Paris): 1 $BATON per $' + p + ' of shares held for at least 20 h (max ' + c + ' a day), paid on Pass The Baton.',
       divT: (n) => 'Tonight: +' + n + ' $BATON', divT0: 'Buy a share to get your first dividend', divW: (n) => 'Tomorrow: +' + n + ' $BATON', divL: (n) => 'Received so far: ' + n + ' $BATON', divB: 'Open Baton',
       mine: 'My shares', all: 'All assets', kind: { stock: 'Stock', crypto: 'Crypto', mat: 'Commodity' }, closed: 'closed',
       buy: 'Buy', sell: 'Sell', sellAll: 'Sell all', max: 'Max', amount: 'Amount in $', cash: 'Your cash', have: 'You own', pl: 'Gain',
       bought: (q, n) => '✅ Bought: ' + q + ' ' + n, sold: (a) => '✅ Sold: +' + a,
-      pfH: '📈 My stock market shares', pfE: 'Put your cash in Apple, Bitcoin, gold… and earn $BATON every evening.', pfB: 'Invest', pfV: (v, g) => 'Value: ' + v + ' · ' + g,
+      pfH: '📈 Invest in the stock market', pfE: 'Apple, Tesla, Bitcoin, gold… at real prices, and $BATON every evening.', pfB: 'Invest', title: '📈 Stock market', tot: 'Your shares', back: '← Portfolio', pfV: (v, g) => 'Value: ' + v + ' · ' + g,
       err: { cash: 'Not enough cash', stale: 'Price too old, try again in a moment', none: 'You do not own any', small: 'Amount too small', soon: 'Coming soon', x: 'Connection problem, try again' },
     },
   };
@@ -48,7 +48,7 @@
     catch (e) { return { ok: false, error: 'x' }; }
   }
   const cashUp = (c) => { try { setCash(c); } catch (e) {} };
-  let S = null, ON = false, SEL = null, busy = false, loading = false, lastLoad = 0;
+  let S = null, SEL = null, busy = false, loading = false, lastLoad = 0;
   const asset = (s) => (S && S.assets || []).find((a) => a.sym === s);
   const pos = (s) => (S && S.pos || []).find((p) => p.sym === s);
   const view = () => { try { return VIEW; } catch (e) { return ''; } };
@@ -60,6 +60,10 @@
     + '.bsdiv .bn{font-weight:800;color:#4ff0b7;flex:1;min-width:140px}.bsdiv .bb{border:0;border-radius:10px;padding:7px 12px;font-weight:800;background:#4ff0b7;color:#0d2a22;cursor:pointer;white-space:nowrap}'
     + '.bsh{margin:14px 2px 4px;font-size:12px;letter-spacing:.8px;text-transform:uppercase;color:var(--mute);font-weight:800}'
     + '.bsk{font-size:10px;font-weight:800;border-radius:6px;padding:1px 5px;margin-left:4px;background:rgba(255,255,255,.12);vertical-align:2px}'
+    + '.med.bslg{background:#fff!important;overflow:hidden;padding:5px;box-sizing:border-box}.med.bslg img{width:100%;height:100%;object-fit:contain;display:block}'
+    + '#bsx{position:fixed;inset:0;z-index:9990;background:var(--night,#1a0638);overflow-y:auto;-webkit-overflow-scrolling:touch;padding:calc(10px + env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));box-sizing:border-box}'
+    + '#bsx .bw{max-width:520px;margin:0 auto}#bsx .bk{background:none;border:0;color:var(--mute);font-weight:800;padding:6px 0;cursor:pointer;font-size:14px}'
+    + '#bsx .hero{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;margin:6px 0 14px}#bsx .hero small{color:var(--mute);font-size:12px;display:block}#bsx .hero b{font-size:28px}'
     + '#bst{position:fixed;inset:0;z-index:9995;background:rgba(5,3,15,.78);display:flex;align-items:flex-end;justify-content:center}'
     + '#bst .tb2{width:100%;max-width:520px;max-height:92vh;overflow:auto;background:var(--night,#1a0638);border:1px solid var(--line,rgba(255,255,255,.14));border-radius:22px 22px 0 0;padding:16px 16px calc(20px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:10px;box-sizing:border-box}'
     + '#bst .th{display:flex;align-items:center;gap:10px}#bst .th b{font-size:19px;display:block}#bst .th small{color:var(--mute)}#bst .big{font-size:26px;font-weight:800}'
@@ -76,44 +80,42 @@
     const pts = p.map((v, i) => (i * (w - 2) / (p.length - 1) + 1).toFixed(1) + ',' + (h - 3 - ((v - mn) / r) * (h - 6)).toFixed(1)).join(' ');
     return '<svg width="100%" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="' + (up ? '#4ff0b7' : '#ff5d8f') + '" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" points="' + pts + '"/></svg>';
   }
-  const med = (a) => '<span class="med" style="--c:' + (COL[a.sym] || '#ffd43b') + '">' + ec(a.em) + '</span>';
+  // the real logo (brand or crypto) on a white disc; the emoji if there is none (gold, oil) or if the image does not load
+  const med = (a) => a.logo
+    ? '<span class="med bslg"><img src="' + ec(a.logo) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="var p=this.parentNode;p.classList.remove(\'bslg\');p.style.setProperty(\'--c\',\'' + (COL[a.sym] || '#ffd43b') + '\');p.textContent=\'' + ec(a.em) + '\'"></span>'
+    : '<span class="med" style="--c:' + (COL[a.sym] || '#ffd43b') + '">' + ec(a.em) + '</span>';
 
-  // ---------- the "📈 Bourse" filter in the Market ----------
-  document.addEventListener('click', (e) => { const b = e.target && e.target.closest && e.target.closest('.seg [data-s]'); if (b) ON = false; }, true);
-  function seg() {
-    if (view() !== 'market') return;
-    const g = document.querySelector('#view .seg'); if (!g) return;
-    let b = g.querySelector('[data-bs]');
-    if (!b) {
-      b = document.createElement('button'); b.type = 'button'; b.dataset.bs = '1'; b.textContent = L().seg;
-      b.onclick = () => { hp(); ON = true; paint(true); };
-      g.appendChild(b);
-    }
-    if (ON) {
-      g.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-      const l = document.getElementById('list');
-      if (l && !l.querySelector('[data-bsl]')) paint(false);
-    } else b.setAttribute('aria-pressed', 'false');
+  // ---------- the Bourse page, opened from the Portfolio ----------
+  async function load(fresh) {
+    if (loading || (!fresh && S && Date.now() - lastLoad < 60000)) return;
+    loading = true; const r = await call({ action: 'state' }); loading = false; lastLoad = Date.now();
+    if (r && r.ok) { S = r; cashUp(r.cash); if (document.getElementById('bsx')) draw(); } else if (document.getElementById('bsx')) tst(L().err[(r && r.error) || 'x'] || L().err.x);
   }
-  setInterval(seg, 700); seg();
-
-  async function paint(fresh) {
-    const l = document.getElementById('list'); if (!l) return;
-    if (S) draw(); else l.innerHTML = '<div data-bsl="1"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>';
-    if ((fresh || Date.now() - lastLoad > 60000) && !loading) {
-      loading = true;
-      const r = await call({ action: 'state' }); loading = false; lastLoad = Date.now();
-      if (r && r.ok) { S = r; cashUp(r.cash); if (ON && view() === 'market') draw(); } else tst(L().err[(r && r.error) || 'x'] || L().err.x);
-    }
+  let timer = null;
+  function open() {
+    let x = document.getElementById('bsx');
+    if (!x) { x = document.createElement('div'); x.id = 'bsx'; document.body.appendChild(x); }
+    if (S) draw(); else x.innerHTML = '<div class="bw"><button class="bk" type="button">' + L().back + '</button><h1>' + L().title + '</h1><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>';
+    const bk = x.querySelector('.bk'); if (bk) bk.onclick = close;
+    try { tw.BackButton.show(); tw.BackButton.onClick(close); } catch (e) {}
+    load(true);
+    clearInterval(timer); timer = setInterval(() => { if (!document.getElementById('bst')) load(true); }, 60000);
+  }
+  function close() {
+    const x = document.getElementById('bsx'); if (x) x.remove(); clearInterval(timer);
+    try { tw.BackButton.offClick(close); tw.BackButton.hide(); } catch (e) {}
   }
   function row(a, right) {
     return '<button class="row" data-bsa="' + ec(a.sym) + '">' + med(a) + '<div class="who"><b>' + ec(a.name) + (a.live ? '' : '<span class="bsk">' + L().closed + '</span>') + '</b><small>' + right.sub + '</small></div>'
       + '<div class="px num"><b>' + right.top + '</b><span class="chip ' + (right.up ? 'up' : 'down') + '">' + right.chip + '</span></div></button>';
   }
   function draw() {
-    const l = document.getElementById('list'); if (!l || !S) return;
+    const x = document.getElementById('bsx'); if (!x || !S) return;
     const T = L(), d = S.div || {};
-    let h = '<div data-bsl="1"><p class="hint">' + T.note + '</p>';
+    const tot = S.pos.reduce((m, p) => m + Number(p.value), 0), g = S.pos.reduce((m, p) => m + Number(p.value) - Number(p.cost), 0);
+    let h = '<div class="bw"><button class="bk" type="button">' + T.back + '</button><h1>' + T.title + '</h1>'
+      + '<div class="hero"><span><small>' + T.tot + '</small><b class="num">' + usd(tot) + '</b>' + (S.pos.length ? ' <span class="chip ' + (g >= 0 ? 'up' : 'down') + '">' + (g >= 0 ? '+' : '') + usd(g) + '</span>' : '') + '</span>'
+      + '<span style="text-align:right"><small>' + T.cash + '</small><b class="num" style="font-size:18px">' + usd(S.cash) + '</b></span></div>';
     if (!S.banned) {
       const line = Number(d.ready) > 0 ? T.divT(kpi(d.ready)) : Number(d.next) > 0 ? T.divW(kpi(d.next)) : T.divT0;
       h += '<div class="bsdiv"><b>' + T.divH + '</b><small>' + T.divS(d.per || 10, kpi(d.cap || 1000)) + '</small>'
@@ -121,23 +123,25 @@
     }
     if (S.pos.length) {
       h += '<div class="bsh">' + T.mine + '</div>' + S.pos.map((p) => {
-        const a = asset(p.sym) || { sym: p.sym, name: p.sym, em: '📈' }, g = Number(p.value) - Number(p.cost);
-        return row(a, { sub: qf(p.qty) + ' ' + ec(p.sym), top: usd(p.value), up: g >= 0, chip: (g >= 0 ? '+' : '') + usd(g) });
+        const a = asset(p.sym) || { sym: p.sym, name: p.sym, em: '📈' }, pg = Number(p.value) - Number(p.cost);
+        return row(a, { sub: qf(p.qty) + ' ' + ec(p.sym), top: usd(p.value), up: pg >= 0, chip: (pg >= 0 ? '+' : '') + usd(pg) });
       }).join('');
     }
-    h += '<div class="bsh">' + T.all + '</div>' + S.assets.map((a) => row(a, { sub: ec(a.sym) + ' · ' + T.kind[a.kind], top: px(a.price), up: Number(a.chg) >= 0, chip: pc(a.chg) })).join('') + '</div>';
-    l.innerHTML = h;
-    l.querySelectorAll('[data-bsa]').forEach((b) => b.onclick = () => { hp(); trade(b.dataset.bsa); });
+    h += '<div class="bsh">' + T.all + '</div>' + S.assets.map((a) => row(a, { sub: ec(a.sym) + ' · ' + T.kind[a.kind], top: px(a.price), up: Number(a.chg) >= 0, chip: pc(a.chg) })).join('')
+      + '<p class="hint" style="margin-top:12px">' + T.note + '</p></div>';
+    const y = x.scrollTop; x.innerHTML = h; x.scrollTop = y;
+    x.querySelector('.bk').onclick = close;
+    x.querySelectorAll('[data-bsa]').forEach((b) => b.onclick = () => { hp(); trade(b.dataset.bsa); });
     const bt = document.getElementById('bsbt');
     if (bt) bt.onclick = () => { hp(); try { tw.openTelegramLink(BATON); } catch (e) { location.href = BATON; } };
   }
 
-  // ---------- 18h25: a card at the top of the Portfolio ("📈 My stock market shares" / "Invest") ----------
+  // ---------- the card at the top of the Portfolio: "📈 Invest in the stock market" ----------
   function pfCard() {
     let c = document.getElementById('bspf');
     if (view() !== 'portfolio') { if (c) c.remove(); return; }
     const v = document.getElementById('view'); if (!v) return;
-    if (!S && !loading && Date.now() - lastLoad > 60000) { paintQuiet(); }
+    load(false);
     const T = L(), tot = S ? S.pos.reduce((a, p) => a + Number(p.value), 0) : 0, g = S ? S.pos.reduce((a, p) => a + Number(p.value) - Number(p.cost), 0) : 0;
     const d = (S && S.div) || {};
     const sub = S && S.pos.length ? T.pfV(usd(tot), '<span style="color:' + (g >= 0 ? '#4ff0b7' : '#ff5d8f') + '">' + (g >= 0 ? '+' : '') + usd(g) + '</span>') + (Number(d.next) > 0 && !S.banned ? ' · 🏃 +' + kpi(d.ready > 0 ? d.ready : d.next) + ' $BATON' : '') : T.pfE;
@@ -145,14 +149,10 @@
     if (!c || !c.isConnected) {
       c = document.createElement('button'); c.id = 'bspf'; c.type = 'button'; c.className = 'bsdiv';
       c.style.cssText = 'width:100%;text-align:left;color:inherit;cursor:pointer;flex-direction:row;align-items:center';
-      c.onclick = () => { hp(); ON = true; try { go('market'); } catch (e) {} setTimeout(seg, 300); };
+      c.onclick = () => { hp(); open(); };
       const h = v.querySelector('h1'); if (h) h.insertAdjacentElement('afterend', c); else v.prepend(c);
     }
     if (c.dataset.k !== k) { c.dataset.k = k; c.innerHTML = '<span style="flex:1;min-width:0"><b style="display:block">' + T.pfH + '</b><small>' + sub + '</small></span><span class="bb">' + T.pfB + '</span>'; }
-  }
-  async function paintQuiet() {
-    loading = true; const r = await call({ action: 'state' }); loading = false; lastLoad = Date.now();
-    if (r && r.ok) S = r;
   }
   setInterval(pfCard, 1000);
 
@@ -186,7 +186,7 @@
         hp('ok'); const a = asset(SEL) || {};
         tst(side === 'buy' ? T.bought(qf(r.done.qty), a.name || SEL) : T.sold(usd(r.done.net)));
         const s = document.getElementById('bst'); if (s) s.remove();
-        S = r; lastLoad = Date.now(); cashUp(r.cash); if (ON && view() === 'market') draw();
+        S = r; lastLoad = Date.now(); cashUp(r.cash); draw();
       } else { hp('err'); tst(T.err[(r && r.error)] || T.err.x); }
     } finally { busy = false; }
   }
