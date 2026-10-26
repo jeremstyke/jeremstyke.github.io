@@ -241,7 +241,7 @@
 // The player does the partner task, Adsgram calls the reward URL (Supabase function mct-adreward) and he gets in-game cash
 // (mct_ad_reward, amount in ds_config mct_adreward_usd). Hidden when Adsgram has no task to show.
 // 26 oct 2026 (23h30, Jeremy): the tasks are what earns the most: $600 (was $300, more than a video, less than the 1,000 ⭐ pack),
-// and the block also shows in the Portfolio (under the Bourse card) and in the "Out of cash?" sheet.
+// and the block also shows in the "Out of cash?" sheet.
 (() => {
   const BLOCK = 'task-56017';
   const TT = {
@@ -287,8 +287,7 @@
     let v = ''; try { v = VIEW; } catch (e) {}
     // the market, right under the daily missions
     if (v === 'market' && !document.getElementById('agtask')) { const msn = document.getElementById('msn'); if (msn && msn.parentNode) block('agtask', msn); }
-    // the Portfolio, under the "Invest in the stock market" card
-    if (v === 'portfolio' && !document.getElementById('agtask2')) { const c = document.getElementById('bspf'); if (c && c.parentNode) block('agtask2', c); }
+    // 26 oct 2026 (23h43, Jeremy): no more partner mission in the Portfolio
     // the "Out of cash?" sheet, under its title
     const sh = document.getElementById('cssh');
     if (sh && !document.getElementById('agtask3')) { const hd = sh.querySelector('.hd'); if (hd) { block('agtask3', hd); const w = document.getElementById('agtask3'); if (w) w.style.margin = '0 0 10px'; } }
