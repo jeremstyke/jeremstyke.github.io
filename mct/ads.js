@@ -94,8 +94,8 @@
   async function watch() {
     if (window.MCTPREM) return true; // 17 oct 2026: Premium players skip the videos (prem.js)
     // 25 oct 2026 (3h45, Jeremy): Adsgram first (block 55242), Ads Galaxy (game 135) as backup when Adsgram has no video
-    const a = await agWatch(); if (a !== 'none') return a === 'ok';
-    try { await sdk(); const r = await window.showAdsGalaxy({ miniappId: AGX }); return !!(r && r.reward_eligible); } catch (e) { return false; }
+    // 26 oct 2026 (18h25, Jeremy): no more Ads Galaxy backup, it played right after the Adsgram video. Adsgram only.
+    return (await agWatch()) === 'ok';
   }
 
   // a small sheet from the bottom of the screen
