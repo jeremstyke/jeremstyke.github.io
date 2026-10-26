@@ -19,7 +19,9 @@
   let ON = false, DATA = null, at = 0, loading = false;
 
   const st = document.createElement('style');
-  st.textContent = '.exnew{font-size:10px;font-weight:800;border-radius:6px;padding:1px 5px;margin-left:4px;background:#4ff0b7;color:#0d2a22;vertical-align:2px}';
+  // 26 oct 2026 (22h52, Jeremy): with 6 filters the bar was too tight (labels stuck together): now it scrolls sideways, each filter with its own room
+  st.textContent = '#view .seg{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;gap:2px}#view .seg::-webkit-scrollbar{display:none}#view .seg button{flex:0 0 auto;padding:8px 13px}'
+    + '.exnew{font-size:10px;font-weight:800;border-radius:6px;padding:1px 5px;margin-left:4px;background:#4ff0b7;color:#0d2a22;vertical-align:2px}';
   document.head.appendChild(st);
 
   async function load() {
@@ -56,6 +58,7 @@
     }
     if (ON) {
       g.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      if (!b.dataset.sc) { b.dataset.sc = '1'; try { b.scrollIntoView({ block: 'nearest', inline: 'center' }); } catch (e) {} }
       const l = document.getElementById('list');
       if (l && !l.querySelector('[data-exl]')) { draw(); if (Date.now() - at > 60000) load(); }
     } else b.setAttribute('aria-pressed', 'false');
