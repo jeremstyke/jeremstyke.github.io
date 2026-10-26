@@ -3,7 +3,7 @@
 // Portfolio ("📈 Invest in the stock market") as a full page, with the real logos of the brands and cryptos. Real prices refreshed every 5 minutes (stocks, gold, oil, crypto), 0.25% fee per order.
 // Link with Pass The Baton: every evening at 20:00 (Paris), shares held for at least 20 h pay a dividend in $BATON on Baton.
 (() => {
-  const TESTERS = [7057960224];
+  const TESTERS = [7057960224, 8844440894];  // 26 oct 2026 (18h46, Jeremy): Doriane too
   const tw = window.Telegram && Telegram.WebApp;
   const UID = Number((tw && tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.id) || 0);
   if (!TESTERS.includes(UID)) return;
