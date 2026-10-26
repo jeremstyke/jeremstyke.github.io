@@ -239,13 +239,18 @@
 
 // 25 oct 2026 (20h, Jeremy): Adsgram Task block task-56017 on the market, right under the daily missions.
 // The player does the partner task, Adsgram calls the reward URL (Supabase function mct-adreward) and he gets in-game cash
-// ($300, no daily cap: mct_ad_reward). Hidden when Adsgram has no task to show.
+// (mct_ad_reward, amount in ds_config mct_adreward_usd). Hidden when Adsgram has no task to show.
+// 26 oct 2026 (23h30, Jeremy): the tasks are what earns the most: $600 (was $300, more than a video, less than the 1,000 ⭐ pack),
+// and the block also shows in the Portfolio (under the Bourse card) and in the "Out of cash?" sheet.
 (() => {
   const BLOCK = 'task-56017';
   const TT = {
-    fr: { h: '🤝 Mission partenaire', r: '+300 $', go: 'Go', claim: 'Récupérer', done: 'Fait ✅', ok: '💵 +300 $ ajoutés à ton cash !' },
-    id: { h: '🤝 Misi partner', r: '+$300', go: 'Mulai', claim: 'Klaim', done: 'Selesai ✅', ok: '💵 +$300 ditambahkan ke uangmu!' },
-    en: { h: '🤝 Partner mission', r: '+$300', go: 'Go', claim: 'Claim', done: 'Done ✅', ok: '💵 +$300 added to your cash!' },
+    fr: { h: '🤝 Mission partenaire', r: '+600 $', go: 'Go', claim: 'Récupérer', done: 'Fait ✅', ok: '💵 +600 $ ajoutés à ton cash !' },
+    id: { h: '🤝 Misi partner', r: '+$600', go: 'Mulai', claim: 'Klaim', done: 'Selesai ✅', ok: '💵 +$600 ditambahkan ke uangmu!' },
+    ru: { h: '🤝 Задание партнёра', r: '+$600', go: 'Go', claim: 'Забрать', done: 'Готово ✅', ok: '💵 +$600 добавлено к твоим деньгам!' },
+    ar: { h: '🤝 مهمة شريك', r: '+$600', go: 'ابدأ', claim: 'استلم', done: 'تم ✅', ok: '💵 تمت إضافة $600 إلى أموالك!' },
+    fa: { h: '🤝 مأموریت همکار', r: '+600 دلار', go: 'برو', claim: 'دریافت', done: 'انجام شد ✅', ok: '💵 600 دلار به پولت اضافه شد!' },
+    en: { h: '🤝 Partner mission', r: '+$600', go: 'Go', claim: 'Claim', done: 'Done ✅', ok: '💵 +$600 added to your cash!' },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TT[l] || TT.en; };
   let sdk = null, gone = false;
@@ -254,13 +259,9 @@
     const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js';
     s.onload = ok; s.onerror = () => { sdk = null; ko(new Error('load')); }; document.head.appendChild(s);
   }));
-  function put() {
-    if (gone) return;
-    let v = ''; try { v = VIEW; } catch (e) {}
-    if (v !== 'market' || document.getElementById('agtask')) return;
-    const msn = document.getElementById('msn'); if (!msn || !msn.parentNode) return;
+  function block(id, after) {
     const T = L(), w = document.createElement('div');
-    w.id = 'agtask'; w.className = 'msn'; w.hidden = true;
+    w.id = id; w.className = 'msn'; w.hidden = true;
     w.style.cssText = 'padding:12px 14px';
     w.innerHTML = '<b style="display:block;font-size:15px;margin-bottom:8px">' + T.h + '</b>'
       + '<adsgram-task data-block-id="' + BLOCK + '" style="--adsgram-task-font-size:15px;--adsgram-task-icon-size:40px;--adsgram-task-button-width:84px;display:block">'
@@ -269,16 +270,28 @@
       + '<div slot="claim" style="background:#ff9f43;color:#1a0d00;font-weight:800;border-radius:10px;padding:8px 0;text-align:center">' + T.claim + '</div>'
       + '<div slot="done" style="color:#8fa197;font-weight:700;text-align:center">' + T.done + '</div>'
       + '</adsgram-task>';
-    msn.parentNode.insertBefore(w, msn.nextSibling);
+    after.parentNode.insertBefore(w, after.nextSibling);
     const el = w.querySelector('adsgram-task');
-    el.addEventListener('onBannerNotFound', () => { w.remove(); gone = true; });  // no task for this player: nothing shown until the app reopens
+    el.addEventListener('onBannerNotFound', () => { gone = true; document.querySelectorAll('.agtk').forEach((x) => x.remove()); w.remove(); });  // no task for this player: nothing shown until the app reopens
     el.addEventListener('onError', () => { w.remove(); });
     el.addEventListener('reward', () => {
       try { haptic('ok'); } catch (e) {}
       try { toast(T.ok); } catch (e) {}
-      setTimeout(() => { try { if (VIEW === 'market') market(); } catch (e) {} }, 2500);  // the cash comes from the server (reward URL)
+      setTimeout(() => { try { if (VIEW === 'market') market(); else if (typeof loadMe === 'function') loadMe(); } catch (e) {} }, 2500);  // the cash comes from the server (reward URL)
     });
+    w.classList.add('agtk');
     load().then(() => { if (document.body.contains(w)) w.hidden = false; }).catch(() => w.remove());
+  }
+  function put() {
+    if (gone) return;
+    let v = ''; try { v = VIEW; } catch (e) {}
+    // the market, right under the daily missions
+    if (v === 'market' && !document.getElementById('agtask')) { const msn = document.getElementById('msn'); if (msn && msn.parentNode) block('agtask', msn); }
+    // the Portfolio, under the "Invest in the stock market" card
+    if (v === 'portfolio' && !document.getElementById('agtask2')) { const c = document.getElementById('bspf'); if (c && c.parentNode) block('agtask2', c); }
+    // the "Out of cash?" sheet, under its title
+    const sh = document.getElementById('cssh');
+    if (sh && !document.getElementById('agtask3')) { const hd = sh.querySelector('.hd'); if (hd) { block('agtask3', hd); const w = document.getElementById('agtask3'); if (w) w.style.margin = '0 0 10px'; } }
   }
   let q = 0;
   new MutationObserver(() => { if (!q) q = requestAnimationFrame(() => { q = 0; put(); }); }).observe(document.body, { childList: true, subtree: true });
