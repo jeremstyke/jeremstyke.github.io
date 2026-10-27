@@ -245,12 +245,12 @@
 (() => {
   const BLOCK = 'task-56017';
   const TT = {
-    fr: { h: '🤝 Mission partenaire', r: '+600 $', go: 'Go', claim: 'Récupérer', done: 'Fait ✅', ok: '💵 +600 $ ajoutés à ton cash !' },
-    id: { h: '🤝 Misi partner', r: '+$600', go: 'Mulai', claim: 'Klaim', done: 'Selesai ✅', ok: '💵 +$600 ditambahkan ke uangmu!' },
-    ru: { h: '🤝 Задание партнёра', r: '+$600', go: 'Go', claim: 'Забрать', done: 'Готово ✅', ok: '💵 +$600 добавлено к твоим деньгам!' },
-    ar: { h: '🤝 مهمة شريك', r: '+$600', go: 'ابدأ', claim: 'استلم', done: 'تم ✅', ok: '💵 تمت إضافة $600 إلى أموالك!' },
-    fa: { h: '🤝 مأموریت همکار', r: '+600 دلار', go: 'برو', claim: 'دریافت', done: 'انجام شد ✅', ok: '💵 600 دلار به پولت اضافه شد!' },
-    en: { h: '🤝 Partner mission', r: '+$600', go: 'Go', claim: 'Claim', done: 'Done ✅', ok: '💵 +$600 added to your cash!' },
+    fr: { h: '🤝 Mission partenaire', r: '+600 $ · +1 000 $BATON', go: 'Go', claim: 'Récupérer', done: 'Fait ✅', ok: '💵 +600 $ ajoutés à ton cash, et +1 000 $BATON sur Pass The Baton !' },
+    id: { h: '🤝 Misi partner', r: '+$600 · +1,000 $BATON', go: 'Mulai', claim: 'Klaim', done: 'Selesai ✅', ok: '💵 +$600 ditambahkan ke uangmu, dan +1,000 $BATON di Pass The Baton!' },
+    ru: { h: '🤝 Задание партнёра', r: '+$600 · +1,000 $BATON', go: 'Go', claim: 'Забрать', done: 'Готово ✅', ok: '💵 +$600 к твоим деньгам и +1,000 $BATON в Pass The Baton!' },
+    ar: { h: '🤝 مهمة شريك', r: '+$600 · +1,000 $BATON', go: 'ابدأ', claim: 'استلم', done: 'تم ✅', ok: '💵 تمت إضافة $600 إلى أموالك و1,000 $BATON في Pass The Baton!' },
+    fa: { h: '🤝 مأموریت همکار', r: '+600 دلار · +1,000 $BATON', go: 'برو', claim: 'دریافت', done: 'انجام شد ✅', ok: '💵 600 دلار به پولت و 1,000 $BATON در Pass The Baton اضافه شد!' },
+    en: { h: '🤝 Partner mission', r: '+$600 · +1,000 $BATON', go: 'Go', claim: 'Claim', done: 'Done ✅', ok: '💵 +$600 added to your cash, and +1,000 $BATON on Pass The Baton!' },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TT[l] || TT.en; };
   let sdk = null, gone = false;
