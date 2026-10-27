@@ -150,7 +150,7 @@
         const D = { en: '💎 Tap the diamond is coming back in its own mini app in a few days. Stay tuned!', fr: '💎 Le diamant revient dans sa propre mini app dans quelques jours. Reste connecté !', es: '💎 El diamante vuelve en su propia mini app en unos días. ¡Atento!', ar: '💎 الماسة ستعود في تطبيق مصغّر خاص بها خلال أيام قليلة. ترقّبوا!', id: '💎 Berlian akan kembali di mini app khusus dalam beberapa hari. Nantikan!', ru: '💎 Алмаз вернётся в отдельном мини-приложении через несколько дней. Следи за новостями!', fa: '💎 الماس چند روز دیگر در مینی‌اپ مخصوص خودش برمی‌گردد. منتظر باش!' };
         const de = document.createElement('div'); de.className = 'btdia'; de.textContent = D[lg()] || D.en;
         de.style.cssText = 'margin:0 0 12px;padding:12px 14px;border-radius:14px;border:1px solid rgba(124,196,255,.6);background:rgba(124,196,255,.12);font-size:14px;font-weight:800;line-height:1.4;color:#eaf6ff';
-        nn.insertAdjacentElement('afterend', de); }
+        /* 27 oct 2026 (Jeremy): this notice is no longer shown */ void de; }
       // 22 oct 2026 (22h13, Jeremy): the payout waiting to be sent is shown as such (the app counted it with "paid"), so players know it is on its way
       if (ts && !ts.querySelector('.btwait')) {
         let wt = 0; try { wt = Number((TONLAST && TONLAST.waiting) || 0); } catch (e) {}
