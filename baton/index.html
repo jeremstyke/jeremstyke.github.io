@@ -1308,7 +1308,7 @@ function render() {
       const bn = b0.boost_n || 0, bc = bn ? ' · ' + bn + '/' + (b0.vid_max || 4) : '';  // 27 oct 2026: x2, x2.5, x3, x3.5, x4
       const xm = (m) => 'x' + String(m || 2).replace('.', LANG === 'fr' ? ',' : '.');
       // 27 oct 2026 (Jeremy): during a boost, the next video can be watched at once (it replaces the boost with the next multiplier)
-      const lab = (s) => { const now2 = T('x2On', mm(s)).replace('x2', xm(b0.boost_mult)); return b0.next_mult ? '<span style="display:block">' + esc(T('x2Go').replace('x2', xm(b0.next_mult))) + '</span><small style="display:block;font-size:12px;font-weight:600;opacity:.7;margin-top:3px">' + esc(now2 + bc) + '</small>' : esc(now2); };
+      const lab = (s) => { const now2 = T('x2On', mm(s)).replace('x2', xm(b0.boost_mult)); return b0.next_mult ? '<span style="display:flex;flex-direction:column;align-items:center;width:100%"><span>' + esc(T('x2Go').replace('x2', xm(b0.next_mult))) + '</span><small style="font-size:12px;font-weight:600;opacity:.7;margin-top:3px">' + esc(now2 + bc) + '</small></span>' : esc(now2); };
       if (xl() > 0) { vb.disabled = !b0.next_mult; vb.innerHTML = lab(xl()); window.__x2I = setInterval(() => { const s = xl(); if (s <= 0) { clearInterval(window.__x2I); vb.hidden = true; refresh(); if (b0.next_mult) toast('🔥 ' + T('x2Go').replace('x2', xm(b0.next_mult))); } else vb.innerHTML = lab(s); }, 1000); }  // 27 oct 2026: when a boost ends, the next one is offered at once
       else { vb.disabled = false; vb.textContent = T('x2Go').replace('x2', xm(b0.next_mult)) + bc; } }
     $('#moreBat').hidden = S.batons.length < 2; $('#moreBat').textContent = T('more', S.batons.length - 1);
