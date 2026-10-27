@@ -307,12 +307,12 @@
   // 27 oct 2026 (19h36, Jeremy): the Portfolio shows the $BATON won on Meme Coin Tycoon (missions, contests, referrals: server mct_bs_mine 'bt'),
   // with a link to Pass The Baton where they are
   const BTL = {
-    en: ['$BATON won on Meme Coin Tycoon', 'They are on Pass The Baton, our other game', 'Win $BATON on Meme Coin Tycoon', 'Missions, contests and friends: they go to Pass The Baton', 'Open'],
-    fr: ['$BATON gagnés sur Meme Coin Tycoon', 'Ils sont sur Pass The Baton, notre autre jeu', 'Gagne des $BATON sur Meme Coin Tycoon', 'Missions, concours et amis : ils arrivent sur Pass The Baton', 'Ouvrir'],
-    ru: ['$BATON, выигранные в Meme Coin Tycoon', 'Они в Pass The Baton, нашей другой игре', 'Выигрывай $BATON в Meme Coin Tycoon', 'Миссии, конкурсы и друзья: они идут в Pass The Baton', 'Открыть'],
-    ar: ['$BATON المربوحة في Meme Coin Tycoon', 'موجودة في Pass The Baton، لعبتنا الأخرى', 'اربح $BATON في Meme Coin Tycoon', 'المهام والمسابقات والأصدقاء: تذهب إلى Pass The Baton', 'افتح'],
-    fa: ['$BATON بردهشده در Meme Coin Tycoon', 'در Pass The Baton هستند، بازی دیگر ما', 'در Meme Coin Tycoon $BATON ببر', 'مأموریت‌ها، مسابقه‌ها و دوستان: به Pass The Baton می‌روند', 'باز کن'],
-    id: ['$BATON yang dimenangkan di Meme Coin Tycoon', 'Ada di Pass The Baton, game kami yang lain', 'Menangkan $BATON di Meme Coin Tycoon', 'Misi, kontes, dan teman: masuk ke Pass The Baton', 'Buka'],
+    en: ['$BATON won on Meme Coin Tycoon', 'Real money: swap them for USDT on Pass The Baton, our other game', 'Win $BATON on Meme Coin Tycoon', 'Missions, contests, friends: real money, swapped for USDT on Pass The Baton', 'Open'],
+    fr: ['$BATON gagnés sur Meme Coin Tycoon', 'De l\'argent réel : échange-les contre des USDT sur Pass The Baton, notre autre jeu', 'Gagne des $BATON sur Meme Coin Tycoon', 'Missions, concours, amis : de l\'argent réel, échangeable en USDT sur Pass The Baton', 'Ouvrir'],
+    ru: ['$BATON, выигранные в Meme Coin Tycoon', 'Реальные деньги: обменяй их на USDT в Pass The Baton, нашей другой игре', 'Выигрывай $BATON в Meme Coin Tycoon', 'Миссии, конкурсы, друзья: реальные деньги, обмен на USDT в Pass The Baton', 'Открыть'],
+    ar: ['$BATON المربوحة في Meme Coin Tycoon', 'مال حقيقي: استبدلها بـ USDT في Pass The Baton، لعبتنا الأخرى', 'اربح $BATON في Meme Coin Tycoon', 'المهام والمسابقات والأصدقاء: مال حقيقي يُستبدل بـ USDT في Pass The Baton', 'افتح'],
+    fa: ['$BATON بردهشده در Meme Coin Tycoon', 'پول واقعی: در Pass The Baton، بازی دیگر ما، با USDT عوضشان کن', 'در Meme Coin Tycoon $BATON ببر', 'مأموریت‌ها، مسابقه‌ها، دوستان: پول واقعی، قابل تبدیل به USDT در Pass The Baton', 'باز کن'],
+    id: ['$BATON yang dimenangkan di Meme Coin Tycoon', 'Uang sungguhan: tukar dengan USDT di Pass The Baton, game kami yang lain', 'Menangkan $BATON di Meme Coin Tycoon', 'Misi, kontes, teman: uang sungguhan, bisa ditukar USDT di Pass The Baton', 'Buka'],
   };
   let BT = null, btAt = 0;
   async function btLoad() {
