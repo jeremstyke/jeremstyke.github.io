@@ -1946,5 +1946,69 @@ function nudge() {
   } catch (e) {}
 })();
 </script>
+<script>
+// 27 oct 2026 (23h26, Jeremy): "Where do my $BATON come from": a button under the balance opens a sheet with the $BATON won
+// by source (Pass The Baton, friends, tasks, Daily Score, Meme Coin Tycoon...), what was spent and withdrawn, and the last lines (SQL bt_gains).
+(function () {
+  const G = {
+    en: { b: '📊 Where do my $BATON come from? ›', h: '📊 My $BATON', won: 'Won in total', last: 'Latest', spent: '⬆️ Spent on upgrades', shop: '🛒 Withdrawn in USDT', pend: '⏳ Waiting', close: 'Close', err: 'Connection problem, try again.', c: { baton: '🏃 Baton held and passed, streak', friends: '👥 Friends and crew', tasks: '✅ Tasks and videos', contest: '🏆 Weekly contest', ds: '⚽ Daily Score', mct: '📈 Meme Coin Tycoon', games: '🎮 Other games', bonus: '🎁 Bonus', spent: '⬆️ Upgrade', shop: '🛒 Withdrawal' } },
+    fr: { b: '📊 D\'où viennent mes $BATON ? ›', h: '📊 Mes $BATON', won: 'Gagnés au total', last: 'Derniers gains', spent: '⬆️ Dépensés en améliorations', shop: '🛒 Retirés en USDT', pend: '⏳ En attente', close: 'Fermer', err: 'Problème de connexion, réessaie.', c: { baton: '🏃 Bâton tenu et passé, série', friends: '👥 Amis et équipe', tasks: '✅ Tâches et vidéos', contest: '🏆 Concours de la semaine', ds: '⚽ Daily Score', mct: '📈 Meme Coin Tycoon', games: '🎮 Autres jeux', bonus: '🎁 Bonus', spent: '⬆️ Amélioration', shop: '🛒 Retrait' } },
+    es: { b: '📊 ¿De dónde vienen mis $BATON? ›', h: '📊 Mis $BATON', won: 'Ganados en total', last: 'Últimos', spent: '⬆️ Gastados en mejoras', shop: '🛒 Retirados en USDT', pend: '⏳ En espera', close: 'Cerrar', err: 'Problema de conexión, inténtalo de nuevo.', c: { baton: '🏃 Bastón llevado y pasado, racha', friends: '👥 Amigos y equipo', tasks: '✅ Tareas y vídeos', contest: '🏆 Concurso semanal', ds: '⚽ Daily Score', mct: '📈 Meme Coin Tycoon', games: '🎮 Otros juegos', bonus: '🎁 Bonus', spent: '⬆️ Mejora', shop: '🛒 Retiro' } },
+    pt: { b: '📊 De onde vêm meus $BATON? ›', h: '📊 Meus $BATON', won: 'Ganhos no total', last: 'Últimos', spent: '⬆️ Gastos em melhorias', shop: '🛒 Sacados em USDT', pend: '⏳ Pendente', close: 'Fechar', err: 'Problema de conexão, tente de novo.', c: { baton: '🏃 Bastão segurado e passado, sequência', friends: '👥 Amigos e equipe', tasks: '✅ Tarefas e vídeos', contest: '🏆 Concurso semanal', ds: '⚽ Daily Score', mct: '📈 Meme Coin Tycoon', games: '🎮 Outros jogos', bonus: '🎁 Bônus', spent: '⬆️ Melhoria', shop: '🛒 Saque' } },
+    ru: { b: '📊 Откуда мои $BATON? ›', h: '📊 Мои $BATON', won: 'Всего заработано', last: 'Последние', spent: '⬆️ Потрачено на улучшения', shop: '🛒 Выведено в USDT', pend: '⏳ В ожидании', close: 'Закрыть', err: 'Проблема с соединением, попробуй ещё раз.', c: { baton: '🏃 Эстафета и передачи, серия', friends: '👥 Друзья и команда', tasks: '✅ Задания и видео', contest: '🏆 Конкурс недели', ds: '⚽ Daily Score', mct: '📈 Meme Coin Tycoon', games: '🎮 Другие игры', bonus: '🎁 Бонус', spent: '⬆️ Улучшение', shop: '🛒 Вывод' } },
+    uk: { b: '📊 Звідки мої $BATON? ›', h: '📊 Мої $BATON', won: 'Всього зароблено', last: 'Останні', spent: '⬆️ Витрачено на покращення', shop: '🛒 Виведено в USDT', pend: '⏳ Очікує', close: 'Закрити', err: 'Проблема зʼєднання, спробуй ще.', c: { baton: '🏃 Естафета й передачі, серія', friends: '👥 Друзі й команда', tasks: '✅ Завдання й відео', contest: '🏆 Конкурс тижня', ds: '⚽ Daily Score', mct: '📈 Meme Coin Tycoon', games: '🎮 Інші ігри', bonus: '🎁 Бонус', spent: '⬆️ Покращення', shop: '🛒 Виведення' } },
+    tr: { b: '📊 $BATON\'larım nereden geliyor? ›', h: '📊 $BATON\'larım', won: 'Toplam kazanılan', last: 'Son kazançlar', spent: '⬆️ Geliştirmelere harcanan', shop: '🛒 USDT olarak çekilen', pend: '⏳ Bekleyen', close: 'Kapat', err: 'Bağlantı sorunu, tekrar dene.', c: { baton: '🏃 Bayrak tutma ve devir, seri', friends: '👥 Arkadaşlar ve ekip', tasks: '✅ Görevler ve videolar', contest: '🏆 Haftalık yarışma', ds: '⚽ Daily Score', mct: '📈 Meme Coin Tycoon', games: '🎮 Diğer oyunlar', bonus: '🎁 Bonus', spent: '⬆️ Geliştirme', shop: '🛒 Çekim' } },
+    id: { b: '📊 Dari mana $BATON-ku? ›', h: '📊 $BATON-ku', won: 'Total didapat', last: 'Terbaru', spent: '⬆️ Dipakai untuk upgrade', shop: '🛒 Ditarik dalam USDT', pend: '⏳ Menunggu', close: 'Tutup', err: 'Masalah koneksi, coba lagi.', c: { baton: '🏃 Tongkat dipegang dan dioper, runtutan', friends: '👥 Teman dan tim', tasks: '✅ Tugas dan video', contest: '🏆 Kontes mingguan', ds: '⚽ Daily Score', mct: '📈 Meme Coin Tycoon', games: '🎮 Game lain', bonus: '🎁 Bonus', spent: '⬆️ Upgrade', shop: '🛒 Penarikan' } },
+    ar: { b: '📊 من أين تأتي $BATON الخاصة بي؟ ›', h: '📊 $BATON الخاصة بي', won: 'المجموع المكتسب', last: 'الأحدث', spent: '⬆️ أُنفقت على التطوير', shop: '🛒 سُحبت بـ USDT', pend: '⏳ قيد الانتظار', close: 'إغلاق', err: 'مشكلة في الاتصال، حاول مجددًا.', c: { baton: '🏃 حمل العصا وتمريرها، السلسلة', friends: '👥 الأصدقاء والفريق', tasks: '✅ المهام والفيديوهات', contest: '🏆 مسابقة الأسبوع', ds: '⚽ Daily Score', mct: '📈 Meme Coin Tycoon', games: '🎮 ألعاب أخرى', bonus: '🎁 مكافأة', spent: '⬆️ تطوير', shop: '🛒 سحب' } },
+    fa: { b: '📊 $BATONهای من از کجا می‌آیند؟ ›', h: '📊 $BATONهای من', won: 'مجموع به‌دست‌آمده', last: 'آخرین‌ها', spent: '⬆️ خرج ارتقا', shop: '🛒 برداشت به USDT', pend: '⏳ در انتظار', close: 'بستن', err: 'مشکل اتصال، دوباره امتحان کن.', c: { baton: '🏃 نگه‌داشتن و رد کردن چوب، سری', friends: '👥 دوستان و تیم', tasks: '✅ وظایف و ویدیوها', contest: '🏆 مسابقهٔ هفته', ds: '⚽ Daily Score', mct: '📈 Meme Coin Tycoon', games: '🎮 بازی‌های دیگر', bonus: '🎁 پاداش', spent: '⬆️ ارتقا', shop: '🛒 برداشت' } }
+  };
+  try {
+    const tw = window.Telegram && window.Telegram.WebApp;
+    if (!tw || !tw.initData) return;
+    const lc = String((tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || 'en').toLowerCase();
+    const L = G[/^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^(ru|be|kk)/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en'];
+    const nf = (n) => Math.round(Number(n) || 0).toLocaleString('fr-FR').replace(/ | /g, ' ');
+    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+    const st = document.createElement('style');
+    st.textContent = '#gnBtn{display:block;margin:10px auto 0;padding:7px 14px;border-radius:99px;border:1px solid rgba(255,212,59,.45);background:rgba(255,212,59,.1);color:#ffd43b;font-weight:800;font-size:13px;cursor:pointer}'
+      + '#gnSh{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center}'
+      + '#gnSh .gb{width:100%;max-width:520px;max-height:86vh;overflow:auto;background:#0b1430;border-radius:22px 22px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));box-sizing:border-box;color:#fff}'
+      + '#gnSh h3{margin:0 0 4px;font-size:18px}#gnSh .gt{font-size:28px;font-weight:900;color:#ffd43b;margin:2px 0 12px}#gnSh .gl{font-size:12px;opacity:.7;text-transform:uppercase;letter-spacing:.04em;margin:14px 0 6px}'
+      + '#gnSh .gr{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid rgba(255,255,255,.08);font-size:14px}#gnSh .gr b{white-space:nowrap}#gnSh .gr .neg{color:#ff8fa3}#gnSh .gr .pos{color:#7dff6b}'
+      + '#gnSh .gr small{opacity:.6;font-size:12px;margin-left:6px}#gnSh .gx{display:block;width:100%;margin-top:14px;padding:12px;border-radius:14px;border:0;background:rgba(255,255,255,.1);color:#fff;font-weight:800;font-size:14px}';
+    document.head.appendChild(st);
+    async function open() {
+      try { tw.HapticFeedback.impactOccurred('light'); } catch (e) {}
+      const d = document.createElement('div'); d.id = 'gnSh';
+      d.innerHTML = '<div class="gb"><h3>' + esc(L.h) + '</h3><div style="text-align:center;padding:24px 0">⏳</div></div>';
+      d.onclick = (e) => { if (e.target === d) d.remove(); };
+      document.body.appendChild(d);
+      let r = null;
+      try { r = await fetch('https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/baton', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ initData: tw.initData, action: 'gains' }) }).then((x) => x.json()); } catch (e) {}
+      const box = d.querySelector('.gb'); if (!box) return;
+      if (!r || !r.ok) { box.innerHTML = '<h3>' + esc(L.h) + '</h3><p>' + esc(L.err) + '</p><button class="gx">' + esc(L.close) + '</button>'; box.querySelector('.gx').onclick = () => d.remove(); return; }
+      const cats = Object.entries(r.cats || {}).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]);
+      const tot = cats.reduce((s, [, v]) => s + v, 0);
+      const day = (t) => new Date(t * 1000).toLocaleDateString(undefined, { day: '2-digit', month: '2-digit' });
+      box.innerHTML = '<h3>' + esc(L.h) + '</h3><div class="gt">' + nf(tot) + ' $BATON</div><div class="gl">' + esc(L.won) + '</div>'
+        + cats.map(([k, v]) => '<div class="gr"><span>' + esc(L.c[k] || k) + '</span><b class="pos">+' + nf(v) + '</b></div>').join('')
+        + (r.pending > 0 ? '<div class="gr"><span>' + esc(L.pend) + '</span><b>' + nf(r.pending) + '</b></div>' : '')
+        + (r.spent > 0 ? '<div class="gr"><span>' + esc(L.spent) + '</span><b class="neg">-' + nf(r.spent) + '</b></div>' : '')
+        + (r.shop > 0 ? '<div class="gr"><span>' + esc(L.shop) + '</span><b class="neg">-' + nf(r.shop) + '</b></div>' : '')
+        + '<div class="gl">' + esc(L.last) + '</div>'
+        + (r.recent || []).map((x) => '<div class="gr"><span>' + esc(L.c[x.c] || x.c) + '<small>' + day(x.t) + '</small></span><b class="' + (x.a < 0 ? 'neg' : 'pos') + '">' + (x.a > 0 ? '+' : '') + nf(x.a) + '</b></div>').join('')
+        + '<button class="gx">' + esc(L.close) + '</button>';
+      box.querySelector('.gx').onclick = () => d.remove();
+    }
+    const place = () => {
+      if (document.getElementById('gnBtn')) return;
+      const sc = document.querySelector('#p-home .score'); if (!sc) return;
+      const b = document.createElement('button'); b.id = 'gnBtn'; b.type = 'button'; b.textContent = L.b; b.onclick = open;
+      sc.appendChild(b);
+    };
+    place(); setInterval(place, 1500);
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
