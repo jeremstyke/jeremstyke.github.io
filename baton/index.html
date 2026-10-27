@@ -1810,6 +1810,8 @@ function nudge() {
       { const bc = $('#batonCard'); if (bc && !$('#p-home').hidden) { box.style.marginTop = '12px'; bc.insertAdjacentElement('afterend', box); } }  // 27 oct 2026: shown on the home screen first
     } catch (e) { console.error('adtask', e); }
   })();
+  // 27 oct 2026 (Jeremy): what the Rig tab (rig.js, a separate file) needs from the game, which lives inside this closure
+  window.BT = { api, go, hap, toast, refresh, errMsg, tg, get S() { return S; }, get lang() { return LANG; } };
   const sp = (tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '';
   if (sp === 'friends') go('friends');
   // 26 oct 2026 (23h05, Jeremy): links from Meme Coin Tycoon ("Earn $BATON by playing" card) open the Tasks tab directly
