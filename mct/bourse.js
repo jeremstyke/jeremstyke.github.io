@@ -316,12 +316,15 @@
   };
   let BT = null, btAt = 0;
   async function btLoad() {
-    if (Date.now() - btAt < 120000) return;
+    if (Date.now() - btAt < 15000) return;  // 27 oct 2026 (21h06): refreshed often, a Task's $BATON show up within seconds
     btAt = Date.now(); const r = await call({ action: 'mine' });
     if (r && r.bt != null) BT = Number(r.bt);
   }
+  let btView = '';
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) btAt = 0; });
   function btCard() {
     let c = document.getElementById('bsbt');
+    if (btView !== view()) { btView = view(); if (btView === 'portfolio') btAt = 0; }  // fresh total each time the Portfolio opens
     if (view() !== 'portfolio') { if (c) c.remove(); return; }
     const v = document.getElementById('view'); if (!v) return;
     btLoad();
