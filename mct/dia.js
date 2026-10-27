@@ -77,6 +77,10 @@
   const open = (u) => { try { Telegram.WebApp.openTelegramLink(u); } catch (e) { location.href = u; } };
 
   let S = null, Q = 0, BUSY = false, TIMER = null, CNT = 0, POS = { x: 50, y: 50 };
+  // 27 oct 2026 (Jeremy, a player's report): the counter went backwards. Two causes, both fixed here:
+  // 1. the taps being sent (INF) were no longer shown while the server answered; 2. the taps faster than the server's limit
+  // (6 a second, 5 seconds of credit, mct_dia_add) were shown, then dropped by the server. Now the same limit is applied here.
+  let INF = 0, TOK = 30, TOKT = Date.now();
 
   const st = document.createElement('style');
   st.textContent = '#diatop{padding:4px 8px;font-size:15px;line-height:1}'
@@ -133,12 +137,12 @@
 
   function nums() {
     if (!S) return;
-    const tpc = Number(S.tpc || 5000), pend = Number(S.pending_taps || 0) + Q;
-    const bal = Number(S.balance || 0) + Q / tpc * 0.01;
+    const tpc = Number(S.tpc || 5000), pend = Number(S.pending_taps || 0) + Q + INF;
+    const bal = Number(S.balance || 0) + (Q + INF) / tpc * 0.01;
     const u = document.getElementById('dusd'), b = document.getElementById('dbar'), n = document.getElementById('dtoday');
     if (u) u.textContent = usd(bal, bal < 1 ? 4 : 2);
     if (b) b.style.width = Math.min(100, (pend % tpc) / tpc * 100).toFixed(1) + '%';
-    if (n) n.textContent = L().today + ' : ' + nf(Number(S.today || 0) + Q) + ' ' + L().taps;
+    if (n) n.textContent = L().today + ' : ' + nf(Number(S.today || 0) + Q + INF) + ' ' + L().taps;
     // what "Add to my balance" moves now: the diamond + the taps, by steps of $0.0001 (17 oct 2026: at any time, not only full cents)
     const unit = Math.max(1, Math.floor(tpc / 100));
     const pot = Number(S.claim || 0) - Math.floor(Number(S.pending_taps || 0) / unit) * 0.0001, can = Math.max(0, pot + Math.floor(pend / unit) * 0.0001);
@@ -203,7 +207,7 @@
     nums();
     const g = document.getElementById('dgem');
     if (g) g.onpointerdown = (ev) => {
-      ev.preventDefault(); Q++; CNT++;
+      ev.preventDefault(); const tn = Date.now(); TOK = Math.min(30, TOK + (tn - TOKT) / 1000 * 6); TOKT = tn; if (TOK >= 1) { TOK -= 1; Q++; } CNT++;
       g.style.transform = 'translate(-50%,-50%) scale(.9)'; setTimeout(() => { g.style.transform = 'translate(-50%,-50%)'; }, 70);
       if (CNT % 10 === 0) hp();
       if (CNT % 50 === 0) { POS = { x: 20 + Math.random() * 60, y: 22 + Math.random() * 56 }; g.style.left = POS.x + '%'; g.style.top = POS.y + '%'; }
@@ -219,9 +223,9 @@
 
   async function flush() {
     TIMER = null; if (BUSY || !Q) return; BUSY = true;
-    const n = Q; Q = 0; let r = null;
+    const n = Q; Q = 0; INF = n; let r = null;
     try { r = await call({ action: 'dia_tap', n }); } catch (e) {}
-    BUSY = false;
+    BUSY = false; INF = 0;
     if (r && r.state) S = r.state; else if (!r) Q += n;
     if (r && r.error === 'check') Q = 0;
     if (r && (r.error === 'locked' || r.error === 'cap')) { Q = 0; tst(r.error === 'cap' ? AXL().cap : AXL().wait(r.wait || 30)); }
