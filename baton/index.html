@@ -429,7 +429,8 @@ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
           + '<div style="display:flex;gap:8px"><button class="btn ghost" id="prG" style="flex:1;margin:0">' + t[2] + '</button><button class="btn ghost" id="prC" style="flex:1;margin:0">' + t[3] + '</button></div>';
         // 27 oct 2026 (14h26, Jeremy): the same card at the top of the Tasks tab too (it is a task)
         const tk = document.getElementById('subTasks');
-        if (tk) { const c2 = el.cloneNode(true); c2.id = 'promoCard2'; c2.querySelectorAll('[id]').forEach((x) => { x.id += '2'; }); tk.parentNode.insertBefore(c2, tk); }
+        // 27 oct 2026 (19h38, Jeremy): removed from the Tasks tab (the card stays in the Friends tab)
+        if (false && tk) { const c2 = el.cloneNode(true); c2.id = 'promoCard2'; c2.querySelectorAll('[id]').forEach((x) => { x.id += '2'; }); tk.parentNode.insertBefore(c2, tk); }
         [['prG', 'https://t.me/PassTheBatonBot?startgroup=promo'], ['prC', 'https://t.me/PassTheBatonBot?startchannel=promo&admin=post_messages']].forEach(([id, u]) => {
           [id, id + '2'].forEach((k) => { const b = document.getElementById(k); if (b) b.onclick = () => go(u); });
         });
