@@ -359,5 +359,12 @@
     if (LL) Object.keys(LL).forEach((k) => { if (LL[k] && typeof LL[k] === 'object') LL[k].m_bourse = lb[k] || lb.en; });
     const GO = (0, eval)('typeof MSN_GO !== "undefined" ? MSN_GO : null');
     if (GO) GO.bourse = () => { try { go('portfolio'); } catch (e) {} setTimeout(open, 300); };
+    // 27 oct 2026 (13h43, Jeremy): a friend who really plays also pays +10,000 $BATON on Pass The Baton (server mct_tok_ref): shown on the invite texts
+    const RB = { en: ' · +10,000 $BATON per friend', fr: ' · +10 000 $BATON par ami', ru: ' · +10 000 $BATON за друга', ar: ' · ‎+10,000 $BATON لكل صديق', fa: ' · ‎+10,000 $BATON برای هر دوست', id: ' · +10.000 $BATON per teman', es: ' · +10.000 $BATON por amigo' };
+    if (LL) Object.keys(LL).forEach((k) => {
+      const o = LL[k]; if (!o || typeof o !== 'object' || o._rb) return; o._rb = true; const sx = RB[k] || RB.en;
+      if (typeof o.inv_t === 'function') { const f = o.inv_t; o.inv_t = (...a) => f(...a) + sx; }
+      ['inv_tile', 'cs_inv_s'].forEach((key) => { if (typeof o[key] === 'string') o[key] += sx; });
+    });
   } catch (e) {}
 })();
