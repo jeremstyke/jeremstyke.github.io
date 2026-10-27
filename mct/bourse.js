@@ -81,32 +81,32 @@
       S: { tech: '💻 Tech', finance: '🏦 Finance', health: '💊 Santé', consumer: '🛍️ Conso', energy: '⚡ Énergie', industry: '🏭 Industrie', auto: '🚗 Auto', media: '🎬 Médias', crypto: '🪙 Crypto', intl: '🌍 Monde', etf: '📊 ETF', mat: '🥇 Matières' },
       prize: (a, b, c, t) => '🏆 Chaque semaine, les 3 meilleurs investisseurs gagnent <b>' + a + '</b>, <b>' + b + '</b> et <b>' + c + ' $BATON</b> sur Pass The Baton. Fin dans ' + t + '.',
       rule: (n, m) => 'Classement au % gagné sur tes actions cette semaine. Pour y entrer : ' + n + ' ordres cette semaine et ' + m + ' investis.',
-      rMe: (r, p) => 'Toi : #' + r + ' (' + p + ')', rNot: (k, n) => 'Tes ordres cette semaine : ' + k + '/' + n, rNone: 'Personne pour l’instant : passe 3 ordres pour entrer au classement !', d: 'j' },
+      rMe: (r, p) => 'Toi : #' + r + ' (' + p + ')', rNot: (k, n) => 'Tes ordres cette semaine : ' + k + '/' + n, rNone: 'Personne pour l’instant : passe 3 ordres pour entrer au classement !', d: 'j', prize2: (a, b) => '4e au 10e : <b>' + a + '</b> chacun · tous les autres classés : <b>' + b + ' $BATON</b>.' },
     en: { tMk: '📈 Market', tRk: '🏆 Ranking', search: 'Search a company or a ticker…', all2: 'All', gain: '📈 Gainers', lose: '📉 Losers', more: (n) => 'Show more (' + n + ')', none: 'Nothing found.',
       S: { tech: '💻 Tech', finance: '🏦 Finance', health: '💊 Health', consumer: '🛍️ Consumer', energy: '⚡ Energy', industry: '🏭 Industry', auto: '🚗 Auto', media: '🎬 Media', crypto: '🪙 Crypto', intl: '🌍 World', etf: '📊 ETF', mat: '🥇 Commodities' },
       prize: (a, b, c, t) => '🏆 Every week, the 3 best investors win <b>' + a + '</b>, <b>' + b + '</b> and <b>' + c + ' $BATON</b> on Pass The Baton. Ends in ' + t + '.',
       rule: (n, m) => 'Ranked by the % earned on your shares this week. To enter: ' + n + ' orders this week and ' + m + ' invested.',
-      rMe: (r, p) => 'You: #' + r + ' (' + p + ')', rNot: (k, n) => 'Your orders this week: ' + k + '/' + n, rNone: 'Nobody yet: make 3 orders to enter the ranking!', d: 'd' },
+      rMe: (r, p) => 'You: #' + r + ' (' + p + ')', rNot: (k, n) => 'Your orders this week: ' + k + '/' + n, rNone: 'Nobody yet: make 3 orders to enter the ranking!', d: 'd', prize2: (a, b) => '4th to 10th: <b>' + a + '</b> each · every other ranked player: <b>' + b + ' $BATON</b>.' },
     ru: { tMk: '📈 Рынок', tRk: '🏆 Рейтинг', search: 'Поиск компании или тикера…', all2: 'Все', gain: '📈 Растут', lose: '📉 Падают', more: (n) => 'Показать ещё (' + n + ')', none: 'Ничего не найдено.',
       S: { tech: '💻 Техно', finance: '🏦 Финансы', health: '💊 Здоровье', consumer: '🛍️ Потребит.', energy: '⚡ Энергия', industry: '🏭 Индустрия', auto: '🚗 Авто', media: '🎬 Медиа', crypto: '🪙 Крипто', intl: '🌍 Мир', etf: '📊 ETF', mat: '🥇 Сырьё' },
       prize: (a, b, c, t) => '🏆 Каждую неделю 3 лучших инвестора получают <b>' + a + '</b>, <b>' + b + '</b> и <b>' + c + ' $BATON</b> в Pass The Baton. Конец через ' + t + '.',
       rule: (n, m) => 'Рейтинг по % прибыли на акциях за неделю. Чтобы попасть: ' + n + ' сделки за неделю и ' + m + ' вложено.',
-      rMe: (r, p) => 'Ты: #' + r + ' (' + p + ')', rNot: (k, n) => 'Твои сделки за неделю: ' + k + '/' + n, rNone: 'Пока никого: сделай 3 сделки, чтобы попасть в рейтинг!', d: 'д' },
+      rMe: (r, p) => 'Ты: #' + r + ' (' + p + ')', rNot: (k, n) => 'Твои сделки за неделю: ' + k + '/' + n, rNone: 'Пока никого: сделай 3 сделки, чтобы попасть в рейтинг!', d: 'д', prize2: (a, b) => '4-10 места: по <b>' + a + '</b> · все остальные в рейтинге: <b>' + b + ' $BATON</b>.' },
     ar: { tMk: '📈 السوق', tRk: '🏆 الترتيب', search: 'ابحث عن شركة أو رمز…', all2: 'الكل', gain: '📈 الأكثر ارتفاعًا', lose: '📉 الأكثر انخفاضًا', more: (n) => 'عرض المزيد (' + n + ')', none: 'لا نتائج.',
       S: { tech: '💻 تقنية', finance: '🏦 مالية', health: '💊 صحة', consumer: '🛍️ استهلاك', energy: '⚡ طاقة', industry: '🏭 صناعة', auto: '🚗 سيارات', media: '🎬 إعلام', crypto: '🪙 كريبتو', intl: '🌍 العالم', etf: '📊 صناديق', mat: '🥇 سلع' },
       prize: (a, b, c, t) => '🏆 كل أسبوع يفوز أفضل 3 مستثمرين بـ <b>' + a + '</b> و<b>' + b + '</b> و<b>' + c + ' $BATON</b> في Pass The Baton. ينتهي بعد ' + t + '.',
       rule: (n, m) => 'الترتيب حسب نسبة الربح على أسهمك هذا الأسبوع. للدخول: ' + n + ' أوامر هذا الأسبوع و' + m + ' مستثمرة.',
-      rMe: (r, p) => 'أنت: #' + r + ' (' + p + ')', rNot: (k, n) => 'أوامرك هذا الأسبوع: ' + k + '/' + n, rNone: 'لا أحد بعد: نفّذ 3 أوامر لدخول الترتيب!', d: 'ي' },
+      rMe: (r, p) => 'أنت: #' + r + ' (' + p + ')', rNot: (k, n) => 'أوامرك هذا الأسبوع: ' + k + '/' + n, rNone: 'لا أحد بعد: نفّذ 3 أوامر لدخول الترتيب!', d: 'ي', prize2: (a, b) => 'من الرابع إلى العاشر: <b>' + a + '</b> لكل واحد · كل المصنّفين الآخرين: <b>' + b + ' $BATON</b>.' },
     fa: { tMk: '📈 بازار', tRk: '🏆 رتبه‌بندی', search: 'جستجوی شرکت یا نماد…', all2: 'همه', gain: '📈 در حال رشد', lose: '📉 در حال افت', more: (n) => 'بیشتر (' + n + ')', none: 'چیزی پیدا نشد.',
       S: { tech: '💻 فناوری', finance: '🏦 مالی', health: '💊 سلامت', consumer: '🛍️ مصرفی', energy: '⚡ انرژی', industry: '🏭 صنعت', auto: '🚗 خودرو', media: '🎬 رسانه', crypto: '🪙 کریپتو', intl: '🌍 جهان', etf: '📊 صندوق', mat: '🥇 کالا' },
       prize: (a, b, c, t) => '🏆 هر هفته ۳ سرمایه‌گذار برتر <b>' + a + '</b>، <b>' + b + '</b> و <b>' + c + ' $BATON</b> در Pass The Baton می‌برند. پایان تا ' + t + '.',
       rule: (n, m) => 'رتبه بر اساس درصد سود سهام تو در این هفته. برای ورود: ' + n + ' سفارش در این هفته و ' + m + ' سرمایه‌گذاری.',
-      rMe: (r, p) => 'تو: #' + r + ' (' + p + ')', rNot: (k, n) => 'سفارش‌های این هفته: ' + k + '/' + n, rNone: 'هنوز کسی نیست: ۳ سفارش ثبت کن تا وارد رتبه‌بندی شوی!', d: 'روز' },
+      rMe: (r, p) => 'تو: #' + r + ' (' + p + ')', rNot: (k, n) => 'سفارش‌های این هفته: ' + k + '/' + n, rNone: 'هنوز کسی نیست: ۳ سفارش ثبت کن تا وارد رتبه‌بندی شوی!', d: 'روز', prize2: (a, b) => 'نفر ۴ تا ۱۰: هر کدام <b>' + a + '</b> · بقیه رتبه‌ها: <b>' + b + ' $BATON</b>.' },
     id: { tMk: '📈 Pasar', tRk: '🏆 Peringkat', search: 'Cari perusahaan atau kode…', all2: 'Semua', gain: '📈 Naik', lose: '📉 Turun', more: (n) => 'Lihat lagi (' + n + ')', none: 'Tidak ditemukan.',
       S: { tech: '💻 Teknologi', finance: '🏦 Keuangan', health: '💊 Kesehatan', consumer: '🛍️ Konsumen', energy: '⚡ Energi', industry: '🏭 Industri', auto: '🚗 Otomotif', media: '🎬 Media', crypto: '🪙 Kripto', intl: '🌍 Dunia', etf: '📊 ETF', mat: '🥇 Komoditas' },
       prize: (a, b, c, t) => '🏆 Setiap minggu, 3 investor terbaik memenangkan <b>' + a + '</b>, <b>' + b + '</b> dan <b>' + c + ' $BATON</b> di Pass The Baton. Berakhir dalam ' + t + '.',
       rule: (n, m) => 'Peringkat berdasarkan % untung sahammu minggu ini. Untuk masuk: ' + n + ' order minggu ini dan ' + m + ' diinvestasikan.',
-      rMe: (r, p) => 'Kamu: #' + r + ' (' + p + ')', rNot: (k, n) => 'Ordermu minggu ini: ' + k + '/' + n, rNone: 'Belum ada: buat 3 order untuk masuk peringkat!', d: 'h' },
+      rMe: (r, p) => 'Kamu: #' + r + ' (' + p + ')', rNot: (k, n) => 'Ordermu minggu ini: ' + k + '/' + n, rNone: 'Belum ada: buat 3 order untuk masuk peringkat!', d: 'h', prize2: (a, b) => 'Peringkat 4 sampai 10: masing-masing <b>' + a + '</b> · semua peserta lain: <b>' + b + ' $BATON</b>.' },
   };
   const L2 = () => TX2[lg()] || TX2.en;
   const SECS = ['tech', 'finance', 'health', 'consumer', 'energy', 'industry', 'auto', 'media', 'crypto', 'intl', 'etf', 'mat'];
@@ -223,7 +223,7 @@
     const T2 = L2(), r = RK;
     if (!r) return '<div class="skel"></div><div class="skel"></div>';
     const pz = r.prizes || [100000, 50000, 25000], left = Math.max(0, Number(r.end || 0) - Date.now() / 1000), dd = Math.floor(left / 86400), hh = Math.floor(left % 86400 / 3600);
-    let h = '<div class="bsprz">' + T2.prize(kpi(pz[0]), kpi(pz[1]), kpi(pz[2]), (dd ? dd + ' ' + T2.d + ' ' : '') + hh + ' h') + '<br><small style="color:var(--mute)">' + T2.rule(r.need || 3, usd(r.min_inv || 100)) + '</small></div>';
+    let h = '<div class="bsprz">' + T2.prize(kpi(pz[0]), kpi(pz[1]), kpi(pz[2]), (dd ? dd + ' ' + T2.d + ' ' : '') + hh + ' h') + (pz.length > 3 || r.rest ? '<br>' + T2.prize2(kpi(pz[3] || 10000), kpi(r.rest || 1000)) : '') + '<br><small style="color:var(--mute)">' + T2.rule(r.need || 3, usd(r.min_inv || 100)) + '</small></div>';
     h += '<p class="hint" style="margin:0 0 8px;font-weight:800">' + (r.me ? T2.rMe(r.me.rank, pc(r.me.pct)) : T2.rNot(Math.min(r.mine || 0, r.need || 3), r.need || 3)) + '</p>';
     const top = r.top || [];
     h += top.length ? top.map((x) => '<div class="row' + (x.me ? ' bsme' : '') + '"><span class="bsrk">' + (['🥇', '🥈', '🥉'][x.rank - 1] || x.rank) + '</span><div class="who"><b>' + ec(x.name) + '</b><small>' + (Number(x.gain) >= 0 ? '+' : '') + usd(x.gain) + '</small></div><div class="px num"><span class="chip ' + (Number(x.pct) >= 0 ? 'up' : 'down') + '">' + pc(x.pct) + '</span></div></div>').join('') : '<p class="hint">' + T2.rNone + '</p>';
