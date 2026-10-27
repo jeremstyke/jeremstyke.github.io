@@ -70,7 +70,7 @@
 #p-rig .rg-card small{display:block;color:var(--mute);font-size:12px;margin-top:3px}
 #p-rig .rg-tot{text-align:center;color:var(--mute);font-size:12px;margin:16px 0 8px}
 .tabs button[data-p="rig"] .rgt{font-size:20px;line-height:1}
-nav.tabs{grid-template-columns:repeat(6,minmax(0,1fr))!important}nav.tabs button{font-size:10px}`;
+nav.tabs{display:flex!important}nav.tabs button{flex:1 1 0;min-width:0;font-size:10px}nav.tabs button[hidden]{display:none!important}`;  // 27 oct 2026: the tabs share the width whatever their number
   document.head.appendChild(st);
 
   const fmtT = (s) => { s = Math.max(0, Math.floor(s)); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60; return (h ? h + ' h ' : '') + String(m).padStart(2, '0') + ' min ' + String(x).padStart(2, '0') + ' s'; };
