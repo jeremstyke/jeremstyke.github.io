@@ -350,4 +350,14 @@
       } else { hp('err'); tst(T.err[(r && r.error)] || T.err.x); }
     } finally { busy = false; }
   }
+
+  // 27 oct 2026 (Jeremy): mission of the day "Buy a share in the Bourse" (server mct_bonus_missions 'bourse', $1,000 + 10 $MCT):
+  // its label in every language, and its GO opens the Bourse page
+  try {
+    const LL = (0, eval)('typeof L !== "undefined" ? L : null');
+    const lb = { en: '📈 Buy a share in the Stock market', fr: '📈 Achète une action en Bourse', ru: '📈 Купи акцию на бирже', ar: '📈 اشترِ سهمًا في البورصة', fa: '📈 یک سهم در بورس بخر', id: '📈 Beli satu saham di bursa', es: '📈 Compra una acción en la Bolsa' };
+    if (LL) Object.keys(LL).forEach((k) => { if (LL[k] && typeof LL[k] === 'object') LL[k].m_bourse = lb[k] || lb.en; });
+    const GO = (0, eval)('typeof MSN_GO !== "undefined" ? MSN_GO : null');
+    if (GO) GO.bourse = () => { try { go('portfolio'); } catch (e) {} setTimeout(open, 300); };
+  } catch (e) {}
 })();
