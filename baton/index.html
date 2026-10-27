@@ -1307,7 +1307,9 @@ function render() {
       clearInterval(window.__x2I); vb.hidden = !(tg && tg.initData) || (!!b0.boosted && xl() <= 0);  // 22h39: up to 4 x2 per baton (boosted = all 4 used)
       const bn = b0.boost_n || 0, bc = bn ? ' · ' + bn + '/' + (b0.vid_max || 4) : '';  // 27 oct 2026: x2, x2.5, x3, x3.5, x4
       const xm = (m) => 'x' + String(m || 2).replace('.', LANG === 'fr' ? ',' : '.');
-      if (xl() > 0) { vb.disabled = true; vb.textContent = T('x2On', mm(xl())).replace('x2', xm(b0.boost_mult)); window.__x2I = setInterval(() => { const s = xl(); if (s <= 0) { clearInterval(window.__x2I); vb.hidden = true; refresh(); if (b0.next_mult) toast('🔥 ' + T('x2Go').replace('x2', xm(b0.next_mult))); } else vb.textContent = T('x2On', mm(s)).replace('x2', xm(b0.boost_mult)); }, 1000); }  // 27 oct 2026: when a boost ends, the next one is offered at once
+      // 27 oct 2026 (Jeremy): during a boost, the next video can be watched at once (it replaces the boost with the next multiplier)
+      const lab = (s) => (b0.next_mult ? T('x2Go').replace('x2', xm(b0.next_mult)) + bc + '  ·  ' : '') + T('x2On', mm(s)).replace('x2', xm(b0.boost_mult));
+      if (xl() > 0) { vb.disabled = !b0.next_mult; vb.textContent = lab(xl()); window.__x2I = setInterval(() => { const s = xl(); if (s <= 0) { clearInterval(window.__x2I); vb.hidden = true; refresh(); if (b0.next_mult) toast('🔥 ' + T('x2Go').replace('x2', xm(b0.next_mult))); } else vb.textContent = lab(s); }, 1000); }  // 27 oct 2026: when a boost ends, the next one is offered at once
       else { vb.disabled = false; vb.textContent = T('x2Go').replace('x2', xm(b0.next_mult)) + bc; } }
     $('#moreBat').hidden = S.batons.length < 2; $('#moreBat').textContent = T('more', S.batons.length - 1);
   } else {
