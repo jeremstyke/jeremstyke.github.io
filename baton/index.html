@@ -1261,6 +1261,25 @@ async function api(action, body) {
   } catch (e) { return { ok: false, error: 'other' }; }
 }
 function toast(t) { const el = $('#toast'); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => { el.hidden = true; }, 2600); }
+// 27 oct 2026 (Jeremy): where the baton in hand comes from: passed by a player, the baton of the day, or the 2nd baton (video)
+const BO = {
+  en: { pass: (n) => '🤝 Passed by <b>' + n + '</b>', daily: '🌅 Your baton of the day', extra: '📺 Your 2nd baton (video)' },
+  fr: { pass: (n) => '🤝 Passé par <b>' + n + '</b>', daily: '🌅 Ton bâton du jour', extra: '📺 Ton 2e bâton (vidéo)' },
+  es: { pass: (n) => '🤝 Te lo pasó <b>' + n + '</b>', daily: '🌅 Tu bastón del día', extra: '📺 Tu 2.º bastón (vídeo)' },
+  pt: { pass: (n) => '🤝 Passado por <b>' + n + '</b>', daily: '🌅 Seu bastão do dia', extra: '📺 Seu 2º bastão (vídeo)' },
+  ru: { pass: (n) => '🤝 Передал(а) <b>' + n + '</b>', daily: '🌅 Твоя эстафета дня', extra: '📺 Твоя 2-я эстафета (видео)' },
+  uk: { pass: (n) => '🤝 Передав(ла) <b>' + n + '</b>', daily: '🌅 Твоя естафета дня', extra: '📺 Твоя 2-га естафета (відео)' },
+  tr: { pass: (n) => '🤝 <b>' + n + '</b> verdi', daily: '🌅 Günün bayrağı', extra: '📺 2. bayrağın (video)' },
+  id: { pass: (n) => '🤝 Dioper oleh <b>' + n + '</b>', daily: '🌅 Tongkat harianmu', extra: '📺 Tongkat ke-2 (video)' },
+  ar: { pass: (n) => '🤝 مرّرها لك <b>' + n + '</b>', daily: '🌅 عصا اليوم', extra: '📺 عصاك الثانية (فيديو)' },
+  fa: { pass: (n) => '🤝 از طرف <b>' + n + '</b>', daily: '🌅 چوب امروزت', extra: '📺 چوب دومت (ویدیو)' },
+};
+function boOrigin(b) {
+  if (!b) return '';
+  const t = BO[LANG] || BO.en, k = b.origin || (b.giver ? 'pass' : 'daily');
+  const s = k === 'pass' && b.giver ? (b.giver_id ? '<span data-pid="' + Number(b.giver_id) + '" style="cursor:pointer">' + t.pass(esc(b.giver)) + '</span>' : t.pass(esc(b.giver))) : k === 'extra' ? t.extra : t.daily;
+  return '<span style="display:block;margin:0 0 4px;font-size:13px;color:var(--baton)">' + s + '</span>';
+}
 function setState(s) { if (!s || !s.ok) return; S = s; fetchedAt = Date.now(); render(); }
 function openLink(u) { try { /^https:\/\/t\.me\//.test(u) ? tg.openTelegramLink(u) : tg.openLink(u); } catch (e) { window.open(u, '_blank'); } }
 
@@ -1281,7 +1300,7 @@ function render() {
   const c = $('#batonCard');
   if (S.holding) {
     c.classList.remove('off'); c.hidden = false;
-    $('#holdT').textContent = T('hold1'); $('#holdP').innerHTML = T('hold2b', fmt(S.hold_rate)) + '<div class="earn" id="earnNow"></div><small class="tip">' + T('holdTip', fmt(S.pass_new)) + '</small>';
+    $('#holdT').textContent = T('hold1'); $('#holdP').innerHTML = boOrigin(S.batons[0]) + T('hold2b', fmt(S.hold_rate)) + '<div class="earn" id="earnNow"></div><small class="tip">' + T('holdTip', fmt(S.pass_new)) + '</small>';
     $('#passBtn').hidden = false; $('#passBtn').textContent = '→  ' + T('pass');
     $('#extBtn').hidden = !!S.batons[0].extended || !S.ext_stars; $('#extBtn').textContent = T('ext', S.ext_h || 4, S.ext_stars || 10);
     { const b0 = S.batons[0], vb = $('#vidBtn'), xl = () => Math.ceil((b0.boost_until || 0) - Date.now() / 1000), mm = (s) => Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');  // 22 oct 2026 (20h02, Jeremy): one video = earnings x2 for 1 h, once per baton
