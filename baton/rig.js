@@ -69,7 +69,8 @@
 #p-rig .rg-card{padding:14px;border-radius:14px;background:var(--lane);margin-bottom:8px}
 #p-rig .rg-card small{display:block;color:var(--mute);font-size:12px;margin-top:3px}
 #p-rig .rg-tot{text-align:center;color:var(--mute);font-size:12px;margin:16px 0 8px}
-.tabs button[data-p="rig"] .rgt{font-size:20px;line-height:1}`;
+.tabs button[data-p="rig"] .rgt{font-size:20px;line-height:1}
+nav.tabs{grid-template-columns:repeat(6,minmax(0,1fr))!important}nav.tabs button{font-size:10px}`;
   document.head.appendChild(st);
 
   const fmtT = (s) => { s = Math.max(0, Math.floor(s)); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60; return (h ? h + ' h ' : '') + String(m).padStart(2, '0') + ' min ' + String(x).padStart(2, '0') + ' s'; };
