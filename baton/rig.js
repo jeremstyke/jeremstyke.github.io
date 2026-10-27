@@ -3,6 +3,10 @@
 // 4 h sessions, the hours holding a baton mine x2, a rewarded video doubles a finished session (Adsgram 55429, mode 'rig'),
 // machines and parts paid in $BATON (they pay back in 30+ days), a free chest every day.
 (() => {
+  // 27 oct 2026: the game's code is inside a closure; it shares what the Rig needs through window.BT (baton/index.html)
+  const B = () => window.BT || {};
+  const api = (a, b) => B().api(a, b), go = (p) => B().go(p), hap = (k) => B().hap && B().hap(k), toast = (t) => B().toast && B().toast(t);
+  const refresh = () => B().refresh && B().refresh(), errMsg = (r) => (B().errMsg ? B().errMsg(r) : '⚠️');
   const X = {
     fr: { tab: 'Rig', h: 'Mon rig', rate: (n) => n + ' $BATON / h', start: '⛏️ Lancer le minage (4 h)', running: 'Minage en cours', left: (t) => 'Encore ' + t,
       done: '✅ Session terminée', claim: (n) => 'Récupérer +' + n, x2: (n) => '📺 x2 avec une vidéo : +' + n, mined: 'Miné',
@@ -24,7 +28,7 @@
       M: ['Old PC', 'Gaming PC', 'GPU Rig', 'Server rack', 'Mining farm', 'Datacenter'], P: ['CPU', 'Graphics card', 'RAM', 'Cooling'] },
   };
   const ME = ['🖥️', '💻', '🎛️', '🗄️', '🏭', '🌐'], PE = ['⚙️', '🎮', '🧠', '❄️'];
-  const Lg = () => { let l = 'en'; try { l = LANG; } catch (e) {} return X[l] || (String(l).startsWith('fr') ? X.fr : X.en); };
+  const Lg = () => { let l = 'en'; try { l = B().lang || 'en'; } catch (e) {} return X[l] || (String(l).startsWith('fr') ? X.fr : X.en); };
   const nf = (n) => Math.round(Number(n) || 0).toLocaleString('fr-FR').replace(/ | /g, ' ');
   const hp = (k) => { try { hap(k); } catch (e) {} };
   const say = (t) => { try { toast(t); } catch (e) {} };
@@ -159,11 +163,11 @@
     b.onclick = () => { hp(); go('rig'); draw(); load(); };
     nav.addEventListener('click', (e) => { if (!e.target.closest('[data-p="rig"]')) b.removeAttribute('aria-current'); });
     timer = setInterval(tick, 1000);
-    let sp = ''; try { sp = String((tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || ''); } catch (e) {}
+    let sp = ''; try { const tg = B().tg; sp = String((tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || ''); } catch (e) {}
     if (sp === 'rig') { go('rig'); draw(); }
   }
   let n = 0; const w = setInterval(() => {
-    n++; let ok = false; try { ok = typeof api === 'function' && typeof go === 'function' && !!S; } catch (e) {}
+    n++; let ok = false; try { ok = !!window.BT && !!B().S; } catch (e) {}
     if (ok || n > 80) { clearInterval(w); if (ok) boot(); }
   }, 250);
 })();
