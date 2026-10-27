@@ -1305,9 +1305,10 @@ function render() {
     $('#extBtn').hidden = !!S.batons[0].extended || !S.ext_stars; $('#extBtn').textContent = T('ext', S.ext_h || 4, S.ext_stars || 10);
     { const b0 = S.batons[0], vb = $('#vidBtn'), xl = () => Math.ceil((b0.boost_until || 0) - Date.now() / 1000), mm = (s) => Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');  // 22 oct 2026 (20h02, Jeremy): one video = earnings x2 for 1 h, once per baton
       clearInterval(window.__x2I); vb.hidden = !(tg && tg.initData) || (!!b0.boosted && xl() <= 0);  // 22h39: up to 4 x2 per baton (boosted = all 4 used)
-      const bn = b0.boost_n || 0, bc = bn ? ' · ' + bn + '/4' : '';
-      if (xl() > 0) { vb.disabled = true; vb.textContent = T('x2On', mm(xl())); window.__x2I = setInterval(() => { const s = xl(); if (s <= 0) { clearInterval(window.__x2I); vb.hidden = true; } else vb.textContent = T('x2On', mm(s)); }, 1000); }
-      else { vb.disabled = false; vb.textContent = T('x2Go') + bc; } }
+      const bn = b0.boost_n || 0, bc = bn ? ' · ' + bn + '/' + (b0.vid_max || 4) : '';  // 27 oct 2026: x2, x2.5, x3, x3.5, x4
+      const xm = (m) => 'x' + String(m || 2).replace('.', LANG === 'fr' ? ',' : '.');
+      if (xl() > 0) { vb.disabled = true; vb.textContent = T('x2On', mm(xl())).replace('x2', xm(b0.boost_mult)); window.__x2I = setInterval(() => { const s = xl(); if (s <= 0) { clearInterval(window.__x2I); vb.hidden = true; } else vb.textContent = T('x2On', mm(s)).replace('x2', xm(b0.boost_mult)); }, 1000); }
+      else { vb.disabled = false; vb.textContent = T('x2Go').replace('x2', xm(b0.next_mult)) + bc; } }
     $('#moreBat').hidden = S.batons.length < 2; $('#moreBat').textContent = T('more', S.batons.length - 1);
   } else {
     c.classList.add('off'); c.hidden = false; $('#holdT').textContent = T('none1'); $('#holdP').innerHTML = esc(T('none2')) + '<br><b class="nextB" id="nextB"></b>'; $('#timer').textContent = ''; $('#extBtn').hidden = true; $('#vidBtn').hidden = true; $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
@@ -1389,7 +1390,7 @@ function tick() {
   const left = S.full_at - now();
   $('#fillTxt').textContent = left > 0 ? T('fullIn', dur(left)) : T('full');
   const hb = $('#harvest'); hb.textContent = p >= 1 ? T('harvest') + ' · ' + fmt(p) : T('empty'); hb.disabled = p < 1;
-  if (S.holding && S.batons[0] && $('#earnNow')) { const b0 = S.batons[0], e = Math.min(now(), b0.expires), g = b0.got || now(), bu = b0.boost_until || 0, on = bu > now(), r = (S.hold_rate || 0) / (on ? 2 : 1), xo = bu ? Math.min(Math.max(0, e - g), Math.max(0, ((b0.boost_n || 1) - 1) * 3600) + Math.max(0, Math.min(e, bu) - Math.max(g, bu - 3600))) : 0; $('#earnNow').textContent = T('earnNow', fmt(Math.max(0, e - g + xo) / 3600 * r)); }  // 20h06: the x2 hour counts double (hold_rate is already x2 while it runs)
+  if (S.holding && S.batons[0] && $('#earnNow')) { const b0 = S.batons[0], e = Math.min(now(), b0.expires), t0 = fetchedAt / 1000; $('#earnNow').textContent = T('earnNow', fmt((Number(b0.earned) || 0) + Math.max(0, e - t0) / 3600 * (S.hold_rate || 0))); }  // 27 oct 2026: the server gives what the baton earned (each boost with its multiplier)  // 20h06: the x2 hour counts double (hold_rate is already x2 while it runs)
   if (S.holding && S.batons[0]) { const l = S.batons[0].expires - now(); const tm = $('#timer'); tm.textContent = clock(l); tm.classList.toggle('low', l < 3600); if (l <= 0) refresh(); }
 }
 async function refresh() { const r = await api('state'); if (r && r.ok) setState(r); }
@@ -1427,7 +1428,7 @@ async function playVid(b, mode) {
     await api('vid', { mode: mode || 'baton' });  // tells the server which reward this video pays
     if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
     await window.Adsgram.init({ blockId: '55429' }).show();
-    hap('ok'); toast(mode === 'pts' ? T('vtOk', fmt(S.vid_reward || 100)) : mode === 'x2' ? T('x2Ok') : mode === 'extra' ? T('exOk') : T('vidOk')); [2000, 6000].forEach((ms) => setTimeout(refresh, ms));
+    hap('ok'); toast(mode === 'pts' ? T('vtOk', fmt(S.vid_reward || 100)) : mode === 'x2' ? T('x2On', '60:00').replace('x2', 'x' + String((S.batons[0] && S.batons[0].next_mult) || 2).replace('.', LANG === 'fr' ? ',' : '.')) : mode === 'extra' ? T('exOk') : T('vidOk')); [2000, 6000].forEach((ms) => setTimeout(refresh, ms));
   } catch (e) { toast(T('vidNo')); }
   b.disabled = false; setTimeout(refresh, 300);
 }
