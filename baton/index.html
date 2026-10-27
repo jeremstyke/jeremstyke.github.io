@@ -404,6 +404,33 @@ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
       <button class="btn gold" id="invite"></button>
       <div class="shr"><button class="btn ghost" id="invWa"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="#25d366" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.2 1.2z"/></svg><span data-t="invWa"></span></button><button class="btn ghost" id="invMore" style="display:none"><span>📤</span><span data-t="invMore"></span></button><button class="btn ghost" id="copy" style="display:none"></button></div>
       <p class="foot" id="invRule"></p>
+      <!-- 27 oct 2026 (14h10, Jeremy): a group or channel owner adds the bot in 2 taps: it posts a daily promo with his invite link
+           (server bt_promo_chat / bt_promo_post); after 3 days in a chat of 100+ members: +50,000 $BATON and the partner status (20 %). -->
+      <div id="promoCard" style="border:1px solid rgba(255,212,59,.45);background:linear-gradient(135deg,rgba(255,212,59,.14),rgba(255,212,59,.03));border-radius:16px;padding:12px 14px;margin:10px 0"></div>
+      <script>
+      (() => {
+        const tw = window.Telegram && Telegram.WebApp;
+        const lc = String((tw && tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || 'en').slice(0, 2);
+        const X = {
+          en: ['📣 You have a group or a channel?', 'Add the bot: it promotes the game by itself with your link. +50,000 $BATON and 20 % of what your players earn (100 members min.).', '👥 My group', '📢 My channel'],
+          fr: ['📣 Tu as un groupe ou un canal ?', 'Ajoute le bot : il fait la promo tout seul avec ton lien. +50 000 $BATON et 20 % de ce que gagnent tes joueurs (100 membres min.).', '👥 Mon groupe', '📢 Mon canal'],
+          es: ['📣 ¿Tienes un grupo o un canal?', 'Añade el bot: promociona el juego solo con tu enlace. +50.000 $BATON y el 20 % de lo que ganan tus jugadores (mín. 100 miembros).', '👥 Mi grupo', '📢 Mi canal'],
+          pt: ['📣 Você tem um grupo ou canal?', 'Adicione o bot: ele divulga o jogo sozinho com seu link. +50.000 $BATON e 20 % do que seus jogadores ganham (mín. 100 membros).', '👥 Meu grupo', '📢 Meu canal'],
+          ru: ['📣 У тебя есть группа или канал?', 'Добавь бота: он сам рекламирует игру с твоей ссылкой. +50 000 $BATON и 20 % от заработка твоих игроков (от 100 участников).', '👥 Моя группа', '📢 Мой канал'],
+          uk: ['📣 Маєш групу чи канал?', 'Додай бота: він сам рекламує гру з твоїм посиланням. +50 000 $BATON і 20 % від заробітку твоїх гравців (від 100 учасників).', '👥 Моя група', '📢 Мій канал'],
+          tr: ['📣 Bir grubun ya da kanalın mı var?', 'Botu ekle: oyunu senin linkinle kendisi tanıtır. +50.000 $BATON ve oyuncularının kazancının %20\'si (en az 100 üye).', '👥 Grubum', '📢 Kanalım'],
+          id: ['📣 Punya grup atau channel?', 'Tambahkan bot: ia mempromosikan game sendiri dengan link-mu. +50.000 $BATON dan 20 % dari penghasilan pemainmu (min. 100 anggota).', '👥 Grupku', '📢 Channel-ku'],
+          ar: ['📣 لديك مجموعة أو قناة؟', 'أضف البوت: يروّج للعبة وحده برابطك. ‎+50,000 $BATON و20 % مما يربحه لاعبوك (100 عضو على الأقل).', '👥 مجموعتي', '📢 قناتي'],
+          fa: ['📣 گروه یا کانال داری؟', 'ربات را اضافه کن: خودش با لینک تو بازی را تبلیغ می‌کند. ‎+50,000 $BATON و ۲۰٪ از درآمد بازیکنانت (حداقل ۱۰۰ عضو).', '👥 گروه من', '📢 کانال من'],
+        };
+        const t = X[lc] || X.en, el = document.getElementById('promoCard');
+        const go = (u) => { try { tw.HapticFeedback.impactOccurred('light'); } catch (e) {} try { tw.openTelegramLink(u); } catch (e) { location.href = u; } };
+        el.innerHTML = '<b style="display:block;font-size:15px">' + t[0] + '</b><small style="display:block;opacity:.85;margin:4px 0 10px;line-height:1.4">' + t[1] + '</small>'
+          + '<div style="display:flex;gap:8px"><button class="btn ghost" id="prG" style="flex:1;margin:0">' + t[2] + '</button><button class="btn ghost" id="prC" style="flex:1;margin:0">' + t[3] + '</button></div>';
+        document.getElementById('prG').onclick = () => go('https://t.me/PassTheBatonBot?startgroup=promo');
+        document.getElementById('prC').onclick = () => go('https://t.me/PassTheBatonBot?startchannel=promo&admin=post_messages');
+      })();
+      </script>
       <div class="list" id="friends"></div>
     </section>
 
