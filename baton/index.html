@@ -442,6 +442,35 @@ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
           const h = el.querySelector('b'); if (h) h.prepend(b);
         }, 250);
       })();
+      // 27 oct 2026 (14h22, Jeremy): welcome bonus +10,000 for a player who came with an invite link or a promo, unlocked by his first pass
+      // (server bt_welcome_wait / bt_hold_pay): a banner above the baton until it is paid
+      (() => {
+        const tw = window.Telegram && Telegram.WebApp;
+        const lc = String((tw && tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || 'en').slice(0, 2);
+        const W = {
+          en: (a) => '🎁 <b>' + a + ' $BATON welcome bonus</b> waiting for you: pass your first baton to unlock it!',
+          fr: (a) => '🎁 <b>' + a + ' $BATON de bienvenue</b> t\'attendent : passe ton premier bâton pour les débloquer !',
+          es: (a) => '🎁 <b>' + a + ' $BATON de bienvenida</b> te esperan: ¡pasa tu primer testigo para desbloquearlos!',
+          pt: (a) => '🎁 <b>' + a + ' $BATON de boas-vindas</b> esperam por você: passe seu primeiro bastão para desbloquear!',
+          ru: (a) => '🎁 <b>' + a + ' $BATON приветственный бонус</b> ждёт тебя: передай первую эстафету, чтобы получить!',
+          uk: (a) => '🎁 <b>' + a + ' $BATON вітальний бонус</b> чекає на тебе: передай першу естафету, щоб отримати!',
+          tr: (a) => '🎁 <b>' + a + ' $BATON hoş geldin bonusu</b> seni bekliyor: açmak için ilk bayrağını pas ver!',
+          id: (a) => '🎁 <b>' + a + ' $BATON bonus sambutan</b> menunggumu: oper tongkat pertamamu untuk membukanya!',
+          ar: (a) => '🎁 <b>' + a + ' $BATON مكافأة ترحيب</b> بانتظارك: مرّر أول عصا لفتحها!',
+          fa: (a) => '🎁 <b>' + a + ' $BATON جایزه خوش‌آمد</b> منتظر توست: اولین چوبت را پاس بده تا باز شود!',
+        };
+        let n = 0; const w = setInterval(async () => {
+          if (!window.BT || !BT.api) { if (++n > 40) clearInterval(w); return; }
+          clearInterval(w);
+          let r = null; try { r = await BT.api('welcome'); } catch (e) {}
+          const card = document.getElementById('batonCard');
+          if (!r || !r.ok || !r.wait || !card || document.getElementById('welBan')) return;
+          const d = document.createElement('div'); d.id = 'welBan';
+          d.style.cssText = 'border:1px solid rgba(255,212,59,.5);background:linear-gradient(135deg,rgba(255,212,59,.18),rgba(255,212,59,.04));border-radius:14px;padding:10px 12px;margin:0 0 10px;font-size:14px;line-height:1.4';
+          d.innerHTML = (W[lc] || W.en)(Number(r.amount || 10000).toLocaleString(lc === 'en' ? 'en-US' : 'fr-FR').replace(/ /g, ' '));
+          card.parentNode.insertBefore(d, card);
+        }, 250);
+      })();
       </script>
       <div class="list" id="friends"></div>
     </section>
