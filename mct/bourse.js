@@ -304,6 +304,44 @@
   }
   setInterval(pfCard, 1000);
 
+  // 27 oct 2026 (19h36, Jeremy): the Portfolio shows the $BATON won on Meme Coin Tycoon (missions, contests, referrals: server mct_bs_mine 'bt'),
+  // with a link to Pass The Baton where they are
+  const BTL = {
+    en: ['$BATON won on Meme Coin Tycoon', 'They are on Pass The Baton, our other game', 'Win $BATON on Meme Coin Tycoon', 'Missions, contests and friends: they go to Pass The Baton', 'Open'],
+    fr: ['$BATON gagnés sur Meme Coin Tycoon', 'Ils sont sur Pass The Baton, notre autre jeu', 'Gagne des $BATON sur Meme Coin Tycoon', 'Missions, concours et amis : ils arrivent sur Pass The Baton', 'Ouvrir'],
+    ru: ['$BATON, выигранные в Meme Coin Tycoon', 'Они в Pass The Baton, нашей другой игре', 'Выигрывай $BATON в Meme Coin Tycoon', 'Миссии, конкурсы и друзья: они идут в Pass The Baton', 'Открыть'],
+    ar: ['$BATON المربوحة في Meme Coin Tycoon', 'موجودة في Pass The Baton، لعبتنا الأخرى', 'اربح $BATON في Meme Coin Tycoon', 'المهام والمسابقات والأصدقاء: تذهب إلى Pass The Baton', 'افتح'],
+    fa: ['$BATON بردهشده در Meme Coin Tycoon', 'در Pass The Baton هستند، بازی دیگر ما', 'در Meme Coin Tycoon $BATON ببر', 'مأموریت‌ها، مسابقه‌ها و دوستان: به Pass The Baton می‌روند', 'باز کن'],
+    id: ['$BATON yang dimenangkan di Meme Coin Tycoon', 'Ada di Pass The Baton, game kami yang lain', 'Menangkan $BATON di Meme Coin Tycoon', 'Misi, kontes, dan teman: masuk ke Pass The Baton', 'Buka'],
+  };
+  let BT = null, btAt = 0;
+  async function btLoad() {
+    if (Date.now() - btAt < 120000) return;
+    btAt = Date.now(); const r = await call({ action: 'mine' });
+    if (r && r.bt != null) BT = Number(r.bt);
+  }
+  function btCard() {
+    let c = document.getElementById('bsbt');
+    if (view() !== 'portfolio') { if (c) c.remove(); return; }
+    const v = document.getElementById('view'); if (!v) return;
+    btLoad();
+    if (BT == null) return;
+    const X = BTL[lg()] || BTL.en, k = BT + lg();
+    const pf = document.getElementById('bspf'), h2 = v.querySelector('h2');
+    if (!pf && !h2) return;
+    if (!c || !c.isConnected) {
+      c = document.createElement('button'); c.id = 'bsbt'; c.type = 'button'; c.className = 'bsdiv';
+      c.style.cssText = 'width:100%;text-align:left;color:inherit;cursor:pointer;flex-direction:row;align-items:center;margin-top:10px;background:linear-gradient(135deg,rgba(47,141,255,.30),rgba(30,90,200,.14));border-color:rgba(80,160,255,.6)';
+      c.onclick = () => { hp(); const u = 'https://t.me/PassTheBatonBot/play?startapp=src_mctpf'; try { tw.openTelegramLink(u); } catch (e) { location.href = u; } };
+      if (pf) pf.insertAdjacentElement('afterend', c); else h2.insertAdjacentElement('beforebegin', c);
+    }
+    if (c.dataset.k !== k) {
+      c.dataset.k = k;
+      c.innerHTML = '<span style="flex:1;min-width:0"><b style="display:block">🏃 ' + (BT > 0 ? kpi(BT) + ' ' + X[0] : X[2]) + '</b><small>' + (BT > 0 ? X[1] : X[3]) + '</small></span><span class="bb">' + X[4] + ' ›</span>';
+    }
+  }
+  setInterval(btCard, 1000);
+
   // 26 oct 2026 (19h22, Jeremy): a link whose start_param contains "bourse" (t.me/Memecointycoonbot?startapp=src_bourse_...) opens the
   // Bourse page directly, once the game is ready (Portfolio behind it, so the back button lands there)
   (() => {
