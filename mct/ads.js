@@ -88,8 +88,10 @@
     setTimeout(() => { if (!window.Adsgram) { agl = null; ko(new Error('timeout')); } }, 6000);
   }));
   async function agWatch() {
-    try { await agSdk(); const r = await window.Adsgram.init({ blockId: '55242' }).show(); return r && r.done === false ? 'skip' : 'ok'; }
-    catch (e) { return (!e || !('done' in Object(e)) || e.state === 'load' || /no ad|no banner/i.test(String(e.description || ''))) ? 'none' : 'skip'; }  // 25 oct 2026 (11h30): 'none' (then Ads Galaxy) only when Adsgram had no video
+    // 27 oct 2026 (Jeremy): a player watched the whole video and was told "no video available": a video that was shown now always counts
+    // (the free boost is once a day and checked by the server); only "Adsgram had no video at all" fails
+    try { await agSdk(); await window.Adsgram.init({ blockId: '55242' }).show(); return 'ok'; }
+    catch (e) { return (!e || !('done' in Object(e)) || e.state === 'load' || /no ad|no banner/i.test(String(e.description || ''))) ? 'none' : 'ok'; }  // 25 oct 2026 (11h30): 'none' (then Ads Galaxy) only when Adsgram had no video
   }
   async function watch() {
     if (window.MCTPREM) return true; // 17 oct 2026: Premium players skip the videos (prem.js)
