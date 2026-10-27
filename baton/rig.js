@@ -109,7 +109,8 @@ nav.tabs{grid-template-columns:repeat(6,minmax(0,1fr))!important}nav.tabs button
       h += '<div class="rg-row"><span class="e">' + ME[m] + '</span><div class="w"><b>' + T.M[m] + '</b><small style="color:var(--mute);font-size:12px">⛏️ ' + T.rate(nf(R.next_rate)) + (ok ? '' : ' · ' + T.machNeed(R.need_parts)) + '</small></div>'
         + '<button class="rg-up' + (can ? '' : ' no') + '" data-rgp="0">' + T.up(nf(R.machine_cost)) + '</button></div>';
     }
-    h += '<h3>' + T.chest + '</h3>' + (R.chest ? '<button class="rg-btn alt" id="rgChest">🎁 ' + T.chestB + '</button>' : '<div class="rg-card"><small>' + T.chestDone + '</small></div>');
+    // 27 oct 2026 (Jeremy): no daily chest for now (bt_rig_cfg chest_on), the section only shows when it is on and ready
+    if (R.chest) h += '<h3>' + T.chest + '</h3><button class="rg-btn alt" id="rgChest">🎁 ' + T.chestB + '</button>';
     h += '<p class="rg-tot">' + T.tot(nf(R.total), R.sessions) + '</p>';
     p.innerHTML = h;
     const on = (id, f) => { const b = document.getElementById(id); if (b) b.onclick = () => f(b); };
