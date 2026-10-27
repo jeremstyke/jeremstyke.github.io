@@ -429,6 +429,18 @@ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
           + '<div style="display:flex;gap:8px"><button class="btn ghost" id="prG" style="flex:1;margin:0">' + t[2] + '</button><button class="btn ghost" id="prC" style="flex:1;margin:0">' + t[3] + '</button></div>';
         document.getElementById('prG').onclick = () => go('https://t.me/PassTheBatonBot?startgroup=promo');
         document.getElementById('prC').onclick = () => go('https://t.me/PassTheBatonBot?startchannel=promo&admin=post_messages');
+        // 27 oct 2026 (14h18, Jeremy): one-time task +10,000 (server bt_promo_task): a badge on the card until it is done
+        const DONE = { en: '✅ Done', fr: '✅ Fait', es: '✅ Hecho', pt: '✅ Feito', ru: '✅ Готово', uk: '✅ Готово', tr: '✅ Tamam', id: '✅ Selesai', ar: '✅ تم', fa: '✅ انجام شد' };
+        let n = 0; const w = setInterval(async () => {
+          if (!window.BT || !BT.api) { if (++n > 40) clearInterval(w); return; }
+          clearInterval(w);
+          let r = null; try { r = await BT.api('promo_task'); } catch (e) {}
+          if (!r || !r.ok) return;
+          const b = document.createElement('span');
+          b.style.cssText = 'float:right;font-size:12px;font-weight:800;padding:3px 8px;border-radius:8px;' + (r.done ? 'background:rgba(255,255,255,.1)' : 'background:#ffd43b;color:#2a2205');
+          b.textContent = r.done ? (DONE[lc] || DONE.en) : '+' + Number(r.bonus || 10000).toLocaleString(lc === 'en' ? 'en-US' : 'fr-FR').replace(/ /g, ' ');
+          const h = el.querySelector('b'); if (h) h.prepend(b);
+        }, 250);
       })();
       </script>
       <div class="list" id="friends"></div>
