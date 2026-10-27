@@ -1435,6 +1435,7 @@ async function playVid(b, mode) {
       // 27 oct 2026 (Jeremy): the boost comes from Adsgram's confirmation to the server (reward URL), sometimes a few seconds later:
       // wait for it (up to 20 s) before saying it is on, instead of announcing it at once
       toast(LANG === 'fr' ? '⏳ Validation de la vidéo…' : '⏳ Checking the video…');
+      try { await api('vid_ok'); } catch (x) {}  // 27 oct 2026 (Jeremy): the video ended fully here: the game confirms the boost itself (bt_vid_ok) when Adsgram is late
       let ok = false;
       for (let i = 0; i < 10 && !ok; i++) { await new Promise((r) => setTimeout(r, 2000)); try { await refresh(); } catch (x) {} const c = S && S.batons[0]; ok = !!c && String(c.boost_n) + ':' + c.boost_until !== b4; }
       if (ok) { hap('ok'); toast(T('x2On', '60:00').replace('x2', 'x' + nm)); }
