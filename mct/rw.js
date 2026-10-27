@@ -11,9 +11,9 @@
   const TX = {
     fa: {
       rT: '💵 شارژ', rS: 'ویدیو روزی یک بار، به‌علاوه روزی یک بسته ستاره (حداکثر 10,000 دلار در هفته). پول خریده‌شده در رتبه‌بندی حساب نمی‌شود.', rC: (a) => 'فقط ' + a + ' دلار در این هفته مانده', rC0: 'سقف هفتگی پر شد · دوشنبه برمی‌گردد', rV: '📺 +500 دلار با یک ویدیو', rVp: '💎 +500 دلار (پریمیوم)', rVs: 'رایگان · روزی یک بار، زیر 1,000 دلار', rVr: 'فقط وقتی کمتر از 1,000 دلار داری', rVd: 'امروز گرفته شده', rP: (a) => '+' + a + ' دلار', rD: 'شروع', rDw: 'بسته امروز گرفته شده · فردا برگرد', rM: 'معامله خوب', rL: '+33 % بیشتر', rX: '🔥 بهترین ارزش', rOk: (a) => '💵 +' + a + ' دلار اضافه شد!',
-      vid: '📺 دیدن ویدیو', vid2: '📺 دیدن 2 ویدیو (حدود 30 ثانیه)', prem: '💎 بگیر (پریمیوم، بدون ویدیو)', no: 'نه، ممنون', next: '📺 یک ویدیوی دیگر…',
+      vid: '📺 دیدن ویدیو', vid2: '📺 دیدن یک ویدیو', prem: '💎 بگیر (پریمیوم، بدون ویدیو)', no: 'نه، ممنون', next: '📺 یک ویدیوی دیگر…',
       bT: 'جایزه‌ات را دو برابر کن!', bX: (a) => 'یک ویدیوی کوتاه ببین و ' + a + ' بیشتر بگیر.', bOk: (a) => '🎁 +' + a + ' اضافه شد!',
-      mT: 'برداشتت را دو برابر کن!', mX: (q) => '2 ویدیوی کوتاه ببین و ' + q + ' بیشتر بگیر.', mOk: (q) => '⛏️ +' + q + ' به کوین‌هایت اضافه شد!',
+      mT: 'برداشتت را دو برابر کن!', mX: (q) => 'یک ویدیوی کوتاه ببین و ' + q + ' بیشتر بگیر.', mOk: (q) => '⛏️ +' + q + ' به کوین‌هایت اضافه شد!',
       cO: '📺 +300 دلار با یک ویدیو', cOs: 'روزی یک بار', cOk: '💵 +300 دلار اضافه شد!',
       dB: '📺 ضربه x2 برای 30 ثانیه', dBp: '💎 ضربه x2 برای 30 ثانیه (پریمیوم)', dOn: (s) => '⚡ x2 برای ' + s + ' ثانیه دیگر', dW: (s) => '📺 ضربه x2 دوباره تا ' + s, dOk: '⚡ ضربه‌هایت 30 ثانیه دو برابر حساب می‌شوند!',
       kOk: '🛡️ +200 دلار برای کلنت!',
@@ -21,9 +21,9 @@
     },
     ru: {
       rT: '💵 Пополнение', rS: 'Видео раз в день плюс один пак звёзд в день (до $10,000 в неделю). Купленные деньги не учитываются в рейтингах.', rC: (a) => 'На этой неделе осталось $' + a, rC0: 'Недельный лимит исчерпан · снова в понедельник', rV: '📺 +$500 за видео', rVp: '💎 +$500 (Премиум)', rVs: 'Бесплатно · раз в день, при балансе меньше $1,000', rVr: 'Только если у тебя меньше $1,000', rVd: 'Сегодня уже получено', rP: (a) => '+$' + a, rD: 'Стартовый', rDw: 'Пак сегодня уже куплен · возвращайся завтра', rM: 'Выгодно', rL: '+33 % больше', rX: '🔥 Лучшая цена', rOk: (a) => '💵 +$' + a + ' добавлено!',
-      vid: '📺 Посмотреть видео', vid2: '📺 Посмотреть 2 видео (около 30 с)', prem: '💎 Забрать (Премиум, без видео)', no: 'Нет, спасибо', next: '📺 Ещё одно видео…',
+      vid: '📺 Посмотреть видео', vid2: '📺 Посмотреть видео', prem: '💎 Забрать (Премиум, без видео)', no: 'Нет, спасибо', next: '📺 Ещё одно видео…',
       bT: 'Удвой свой бонус!', bX: (a) => 'Посмотри короткое видео и получи ещё ' + a + '.', bOk: (a) => '🎁 +' + a + ' добавлено!',
-      mT: 'Удвой добычу!', mX: (q) => 'Посмотри 2 коротких видео и получи ещё ' + q + '.', mOk: (q) => '⛏️ +' + q + ' добавлено к монетам!',
+      mT: 'Удвой добычу!', mX: (q) => 'Посмотри 1 короткое видео и получи ещё ' + q + '.', mOk: (q) => '⛏️ +' + q + ' добавлено к монетам!',
       cO: '📺 +$300 за видео', cOs: 'Раз в день', cOk: '💵 +$300 добавлено!',
       dB: '📺 Нажатия x2 на 30 с', dBp: '💎 Нажатия x2 на 30 с (Премиум)', dOn: (s) => '⚡ x2 ещё ' + s + ' с', dW: (s) => '📺 Нажатия x2 снова через ' + s, dOk: '⚡ Твои нажатия считаются вдвойне 30 секунд!',
       kOk: '🛡️ +$200 твоему клану!',
@@ -31,9 +31,9 @@
     },
     en: {
       rT: '💵 Recharge', rS: 'The video once a day, plus one Stars pack a day ($10,000 a week at most). Bought cash does not count in the rankings.', rC: (a) => 'Only $' + a + ' left this week', rC0: 'Weekly limit reached · back on Monday', rV: '📺 +$500 with a video', rVp: '💎 +$500 (Premium)', rVs: 'Free · once a day, under $1,000', rVr: 'Only when you have less than $1,000', rVd: 'Already taken today', rP: (a) => '+$' + a, rD: 'Starter', rDw: 'Pack taken today · come back tomorrow', rM: 'Good deal', rL: '+33 % more', rX: '🔥 Best value', rOk: (a) => '💵 +$' + a + ' added!',
-      vid: '📺 Watch a video', vid2: '📺 Watch 2 videos (about 30 s)', prem: '💎 Take it (Premium, no video)', no: 'No thanks', next: '📺 One more video…',
+      vid: '📺 Watch a video', vid2: '📺 Watch a video', prem: '💎 Take it (Premium, no video)', no: 'No thanks', next: '📺 One more video…',
       bT: 'Double your bonus!', bX: (a) => 'Watch a short video and get ' + a + ' more.', bOk: (a) => '🎁 +' + a + ' added!',
-      mT: 'Double your harvest!', mX: (q) => 'Watch 2 short videos and get ' + q + ' more.', mOk: (q) => '⛏️ +' + q + ' added to your coins!',
+      mT: 'Double your harvest!', mX: (q) => 'Watch 1 short video and get ' + q + ' more.', mOk: (q) => '⛏️ +' + q + ' added to your coins!',
       cO: '📺 +$300 with a video', cOs: 'Once a day', cOk: '💵 +$300 added!',
       dB: '📺 Taps x2 for 30 s', dBp: '💎 Taps x2 for 30 s (Premium)', dOn: (s) => '⚡ x2 for ' + s + ' more seconds', dW: (s) => '📺 Taps x2 again in ' + s, dOk: '⚡ Your taps count double for 30 seconds!',
       kOk: '🛡️ +$200 for your clan!',
@@ -41,9 +41,9 @@
     },
     fr: {
       rT: '💵 Recharger', rS: 'La vidéo 1 fois par jour, plus 1 pack d\'étoiles par jour (10 000 $ par semaine au maximum). Le cash acheté ne compte pas au classement.', rC: (a) => 'Plus que ' + a + ' $ cette semaine', rC0: 'Limite de la semaine atteinte · retour lundi', rV: '📺 +500 $ avec une vidéo', rVp: '💎 +500 $ (Premium)', rVs: 'Gratuit · 1 fois par jour, sous 1 000 $', rVr: 'Seulement quand tu as moins de 1 000 $', rVd: 'Déjà pris aujourd\'hui', rP: (a) => '+' + a + ' $', rD: 'Le petit pack', rDw: 'Pack déjà pris aujourd\'hui · reviens demain', rM: 'Bonne affaire', rL: '+33 % en plus', rX: '🔥 Le meilleur prix', rOk: (a) => '💵 +' + a + ' $ ajoutés !',
-      vid: '📺 Regarder une vidéo', vid2: '📺 Regarder 2 vidéos (environ 30 s)', prem: '💎 Prendre (Premium, sans vidéo)', no: 'Non merci', next: '📺 Encore une vidéo…',
+      vid: '📺 Regarder une vidéo', vid2: '📺 Regarder une vidéo', prem: '💎 Prendre (Premium, sans vidéo)', no: 'Non merci', next: '📺 Encore une vidéo…',
       bT: 'Double ton bonus !', bX: (a) => 'Regarde une courte vidéo et reçois encore ' + a + '.', bOk: (a) => '🎁 +' + a + ' ajoutés !',
-      mT: 'Double ta récolte !', mX: (q) => 'Regarde 2 courtes vidéos et reçois encore ' + q + '.', mOk: (q) => '⛏️ +' + q + ' ajoutés à tes coins !',
+      mT: 'Double ta récolte !', mX: (q) => 'Regarde 1 courte vidéo et reçois encore ' + q + '.', mOk: (q) => '⛏️ +' + q + ' ajoutés à tes coins !',
       cO: '📺 +300 $ avec une vidéo', cOs: '1 fois par jour', cOk: '💵 +300 $ ajoutés !',
       dB: '📺 Tapes x2 pendant 30 s', dBp: '💎 Tapes x2 pendant 30 s (Premium)', dOn: (s) => '⚡ x2 encore ' + s + ' secondes', dW: (s) => '📺 Tapes x2 de nouveau dans ' + s, dOk: '⚡ Tes tapes comptent double pendant 30 secondes !',
       kOk: '🛡️ +200 $ pour ton clan !',
@@ -51,9 +51,9 @@
     },
     id: {
       rT: '💵 Isi ulang', rS: 'Video 1 kali sehari, plus 1 paket bintang per hari (maks. $10,000 per minggu). Uang yang dibeli tidak dihitung di peringkat.', rC: (a) => 'Tersisa $' + a + ' minggu ini', rC0: 'Batas mingguan tercapai · kembali Senin', rV: '📺 +$500 dengan video', rVp: '💎 +$500 (Premium)', rVs: 'Gratis · 1 kali sehari, di bawah $1,000', rVr: 'Hanya saat uangmu kurang dari $1,000', rVd: 'Sudah diambil hari ini', rP: (a) => '+$' + a, rD: 'Paket kecil', rDw: 'Paket sudah diambil hari ini · kembali besok', rM: 'Hemat', rL: '+33 % lebih', rX: '🔥 Harga terbaik', rOk: (a) => '💵 +$' + a + ' ditambahkan!',
-      vid: '📺 Tonton video', vid2: '📺 Tonton 2 video (sekitar 30 dtk)', prem: '💎 Ambil (Premium, tanpa video)', no: 'Tidak, terima kasih', next: '📺 Satu video lagi…',
+      vid: '📺 Tonton video', vid2: '📺 Tonton video', prem: '💎 Ambil (Premium, tanpa video)', no: 'Tidak, terima kasih', next: '📺 Satu video lagi…',
       bT: 'Gandakan bonusmu!', bX: (a) => 'Tonton video singkat dan dapatkan ' + a + ' lagi.', bOk: (a) => '🎁 +' + a + ' ditambahkan!',
-      mT: 'Gandakan hasil tambangmu!', mX: (q) => 'Tonton 2 video singkat dan dapatkan ' + q + ' lagi.', mOk: (q) => '⛏️ +' + q + ' ditambahkan ke koinmu!',
+      mT: 'Gandakan hasil tambangmu!', mX: (q) => 'Tonton 1 video singkat dan dapatkan ' + q + ' lagi.', mOk: (q) => '⛏️ +' + q + ' ditambahkan ke koinmu!',
       cO: '📺 +$300 dengan video', cOs: '1 kali sehari', cOk: '💵 +$300 ditambahkan!',
       dB: '📺 Ketukan x2 selama 30 dtk', dBp: '💎 Ketukan x2 selama 30 dtk (Premium)', dOn: (s) => '⚡ x2 masih ' + s + ' detik', dW: (s) => '📺 Ketukan x2 lagi dalam ' + s, dOk: '⚡ Ketukanmu dihitung dua kali selama 30 detik!',
       kOk: '🛡️ +$200 untuk klanmu!',
@@ -61,9 +61,9 @@
     },
     ar: {
       rT: '💵 شحن', rS: 'الفيديو مرة يوميًا، وحزمة نجوم واحدة يوميًا (10000$ أسبوعيًا كحد أقصى). المال المشترى لا يُحسب في الترتيب.', rC: (a) => 'متبقٍ ' + a + '$ هذا الأسبوع', rC0: 'تم بلوغ حد الأسبوع · عد يوم الاثنين', rV: '📺 +500$ مع فيديو', rVp: '💎 +500$ (بريميوم)', rVs: 'مجانًا · مرة يوميًا، تحت 1000$', rVr: 'فقط عندما يكون لديك أقل من 1000$', rVd: 'تم أخذها اليوم', rP: (a) => '+' + a + '$', rD: 'الحزمة الصغيرة', rDw: 'تم أخذ حزمة اليوم · عد غدًا', rM: 'صفقة جيدة', rL: '+33 % أكثر', rX: '🔥 أفضل سعر', rOk: (a) => '💵 أُضيفت +' + a + '$!',
-      vid: '📺 شاهد فيديو', vid2: '📺 شاهد فيديوهين (حوالي 30 ث)', prem: '💎 خذها (بريميوم، بدون فيديو)', no: 'لا شكرًا', next: '📺 فيديو آخر…',
+      vid: '📺 شاهد فيديو', vid2: '📺 شاهد فيديو', prem: '💎 خذها (بريميوم، بدون فيديو)', no: 'لا شكرًا', next: '📺 فيديو آخر…',
       bT: 'ضاعف مكافأتك!', bX: (a) => 'شاهد فيديو قصيرًا واحصل على ' + a + ' إضافية.', bOk: (a) => '🎁 أُضيفت +' + a + '!',
-      mT: 'ضاعف حصادك!', mX: (q) => 'شاهد فيديوهين قصيرين واحصل على ' + q + ' إضافية.', mOk: (q) => '⛏️ أُضيفت +' + q + ' إلى عملاتك!',
+      mT: 'ضاعف حصادك!', mX: (q) => 'شاهد فيديو قصيرًا واحصل على ' + q + ' إضافية.', mOk: (q) => '⛏️ أُضيفت +' + q + ' إلى عملاتك!',
       cO: '📺 +300$ مع فيديو', cOs: 'مرة يوميًا', cOk: '💵 أُضيفت +300$!',
       dB: '📺 نقرات x2 لمدة 30 ث', dBp: '💎 نقرات x2 لمدة 30 ث (بريميوم)', dOn: (s) => '⚡ x2 لمدة ' + s + ' ثانية', dW: (s) => '📺 x2 مجددًا بعد ' + s, dOk: '⚡ نقراتك تُحسب مضاعفة لمدة 30 ثانية!',
       kOk: '🛡️ +200$ لعشيرتك!',
@@ -102,8 +102,9 @@
     setTimeout(() => { if (!window.Adsgram) { agl = null; ko(new Error('timeout')); } }, 6000);
   }));
   async function agWatch() {
-    try { await agSdk(); const r = await window.Adsgram.init({ blockId: '55242' }).show(); return r && r.done === false ? 'skip' : 'ok'; }
-    catch (e) { return (!e || !('done' in Object(e)) || e.state === 'load' || /no ad|no banner/i.test(String(e.description || ''))) ? 'none' : 'skip'; }  // 25 oct 2026 (11h30): 'none' (then Ads Galaxy) only when Adsgram had no video
+    // 27 oct 2026 (Jeremy): a player watched the whole video and got no reward: a video that was shown now always counts
+    try { await agSdk(); await window.Adsgram.init({ blockId: '55242' }).show(); return 'ok'; }
+    catch (e) { return (!e || !('done' in Object(e)) || e.state === 'load' || /no ad|no banner/i.test(String(e.description || ''))) ? 'none' : 'ok'; }  // 25 oct 2026 (11h30): 'none' (then Ads Galaxy) only when Adsgram had no video
   }
   async function watch() {
     if (prem()) return 'ok';
@@ -156,7 +157,7 @@
     const d = sheet('⛏️', T.mT, T.mX(q + ' (≈ ' + mo(st.mine.val) + ')'), T.vid2);
     d.querySelector('#rwy').onclick = async (ev) => {
       const b = ev.currentTarget; b.disabled = true; b.textContent = '⏳';
-      if (!(await watchN(2, b))) { close(); return tst(T.skip); }
+      if (!(await watchN(1, b))) { close(); return tst(T.skip); }  // 27 oct 2026 (Jeremy): 1 video (the 2nd one in a row was often refused by Adsgram)
       const r = await call('mine'); close();
       if (!r || !r.ok) { hp('err'); return tst(errOf(r)); }
       hp('ok'); tst(T.mOk(q)); try { if (VIEW === 'mine') mine(); } catch (e) {}
