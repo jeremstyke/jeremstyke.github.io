@@ -1429,8 +1429,17 @@ async function playVid(b, mode) {
   try {
     await api('vid', { mode: mode || 'baton' });  // tells the server which reward this video pays
     if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
+    const nm = String((S.batons[0] && S.batons[0].next_mult) || 2).replace('.', LANG === 'fr' ? ',' : '.'), b4 = S.batons[0] ? String(S.batons[0].boost_n) + ':' + S.batons[0].boost_until : '';
     await window.Adsgram.init({ blockId: '55429' }).show();
-    hap('ok'); toast(mode === 'pts' ? T('vtOk', fmt(S.vid_reward || 100)) : mode === 'x2' ? T('x2On', '60:00').replace('x2', 'x' + String((S.batons[0] && S.batons[0].next_mult) || 2).replace('.', LANG === 'fr' ? ',' : '.')) : mode === 'extra' ? T('exOk') : T('vidOk')); [2000, 6000].forEach((ms) => setTimeout(refresh, ms));
+    if (mode === 'x2') {
+      // 27 oct 2026 (Jeremy): the boost comes from Adsgram's confirmation to the server (reward URL), sometimes a few seconds later:
+      // wait for it (up to 20 s) before saying it is on, instead of announcing it at once
+      toast(LANG === 'fr' ? '⏳ Validation de la vidéo…' : '⏳ Checking the video…');
+      let ok = false;
+      for (let i = 0; i < 10 && !ok; i++) { await new Promise((r) => setTimeout(r, 2000)); try { await refresh(); } catch (x) {} const c = S && S.batons[0]; ok = !!c && String(c.boost_n) + ':' + c.boost_until !== b4; }
+      if (ok) { hap('ok'); toast(T('x2On', '60:00').replace('x2', 'x' + nm)); }
+      else { hap('err'); toast(LANG === 'fr' ? '⚠️ Adsgram n\'a pas validé la vidéo. Réessaie dans un instant.' : '⚠️ Adsgram did not confirm the video. Try again in a moment.'); }
+    } else { hap('ok'); toast(mode === 'pts' ? T('vtOk', fmt(S.vid_reward || 100)) : mode === 'extra' ? T('exOk') : T('vidOk')); [2000, 6000, 12000].forEach((ms) => setTimeout(refresh, ms)); }
   } catch (e) { toast(T('vidNo')); }
   b.disabled = false; setTimeout(refresh, 300);
 }
