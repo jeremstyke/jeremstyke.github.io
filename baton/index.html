@@ -1875,6 +1875,7 @@ function nudge() {
       function build() {
         const wait = pausedUntil() - Date.now();  // 22 oct 2026 (19h03, Jeremy): one task every 10 minutes
         if (wait > 0) { gone(); setTimeout(build, wait + 1000); return; }
+        if (typeof S !== 'undefined' && S && S.adtLeft === 0) { gone(); setTimeout(build, 600000); return; }  // 27 oct 2026 (Jeremy): 10 sponsored tasks a day
         box.innerHTML = '<div class="adt"><div class="adh">' + esc(T('adH')) + '</div><adsgram-task data-block-id="task-55373"><span slot="reward">' + esc(T('adR')) + '</span><div slot="button" class="tb">' + esc(T('adGo')) + '</div><div slot="claim" class="tb">' + esc(T('adClaim')) + '</div><div slot="done" class="tb">✓ ' + esc(T('adDone')) + '</div></adsgram-task></div>';
         box.hidden = false; window.__adt = true; $('#dotTasks').hidden = false; window.__adtAt = Date.now();
         // 23 oct 2026 (00h36, Jeremy): a task stuck in its loading state: it is loaded again each time the Tasks tab is opened (after 1 minute)
