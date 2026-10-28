@@ -247,12 +247,12 @@
 (() => {
   const BLOCK = 'task-56017';
   const TT = {
-    fr: { h: '🤝 Mission partenaire', r: '+600 $ · +1 000 $BATON', go: 'Go', claim: 'Récupérer', done: 'Fait ✅', ok: '💵 +600 $ ajoutés à ton cash, et +1 000 $BATON sur Pass The Baton !' },
-    id: { h: '🤝 Misi partner', r: '+$600 · +1,000 $BATON', go: 'Mulai', claim: 'Klaim', done: 'Selesai ✅', ok: '💵 +$600 ditambahkan ke uangmu, dan +1,000 $BATON di Pass The Baton!' },
-    ru: { h: '🤝 Задание партнёра', r: '+$600 · +1,000 $BATON', go: 'Go', claim: 'Забрать', done: 'Готово ✅', ok: '💵 +$600 к твоим деньгам и +1,000 $BATON в Pass The Baton!' },
-    ar: { h: '🤝 مهمة شريك', r: '+$600 · +1,000 $BATON', go: 'ابدأ', claim: 'استلم', done: 'تم ✅', ok: '💵 تمت إضافة $600 إلى أموالك و1,000 $BATON في Pass The Baton!' },
-    fa: { h: '🤝 مأموریت همکار', r: '+600 دلار · +1,000 $BATON', go: 'برو', claim: 'دریافت', done: 'انجام شد ✅', ok: '💵 600 دلار به پولت و 1,000 $BATON در Pass The Baton اضافه شد!' },
-    en: { h: '🤝 Partner mission', r: '+$600 · +1,000 $BATON', go: 'Go', claim: 'Claim', done: 'Done ✅', ok: '💵 +$600 added to your cash, and +1,000 $BATON on Pass The Baton!' },
+    fr: { h: '🤝 Mission partenaire', r: '+600 $ · +1 000 $BATON', go: 'Go', claim: 'Récupérer', done: 'Fait ✅', wait: 'Prochaine mission dans', ok: '💵 +600 $ ajoutés à ton cash, et +1 000 $BATON sur Pass The Baton !' },
+    id: { h: '🤝 Misi partner', r: '+$600 · +1,000 $BATON', go: 'Mulai', claim: 'Klaim', done: 'Selesai ✅', wait: 'Misi berikutnya dalam', ok: '💵 +$600 ditambahkan ke uangmu, dan +1,000 $BATON di Pass The Baton!' },
+    ru: { h: '🤝 Задание партнёра', r: '+$600 · +1,000 $BATON', go: 'Go', claim: 'Забрать', done: 'Готово ✅', wait: 'Следующее задание через', ok: '💵 +$600 к твоим деньгам и +1,000 $BATON в Pass The Baton!' },
+    ar: { h: '🤝 مهمة شريك', r: '+$600 · +1,000 $BATON', go: 'ابدأ', claim: 'استلم', done: 'تم ✅', wait: 'المهمة التالية بعد', ok: '💵 تمت إضافة $600 إلى أموالك و1,000 $BATON في Pass The Baton!' },
+    fa: { h: '🤝 مأموریت همکار', r: '+600 دلار · +1,000 $BATON', go: 'برو', claim: 'دریافت', done: 'انجام شد ✅', wait: 'مأموریت بعدی تا', ok: '💵 600 دلار به پولت و 1,000 $BATON در Pass The Baton اضافه شد!' },
+    en: { h: '🤝 Partner mission', r: '+$600 · +1,000 $BATON', go: 'Go', claim: 'Claim', done: 'Done ✅', wait: 'Next mission in', ok: '💵 +$600 added to your cash, and +1,000 $BATON on Pass The Baton!' },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TT[l] || TT.en; };
   let sdk = null, gone = false;
@@ -265,6 +265,16 @@
     const T = L(), w = document.createElement('div');
     w.id = id; w.className = 'msn'; w.hidden = true;
     w.style.cssText = 'padding:12px 14px';
+    // 28 oct 2026 (12h36, Jeremy): 5 minutes between two partner missions (the server refuses earlier ones): a countdown in the meantime
+    const until = (() => { try { return Number(localStorage.getItem('mct_agt_until') || 0); } catch (e) { return 0; } })();
+    if (until > Date.now()) {
+      w.innerHTML = '<b style="display:block;font-size:15px;margin-bottom:6px">' + T.h + '</b><div style="color:#8fa197;font-weight:700">⏳ ' + (T.wait || 'Next mission in') + ' <span class="agc"></span></div>';
+      after.parentNode.insertBefore(w, after.nextSibling); w.hidden = false;
+      const c = w.querySelector('.agc');
+      const tick = () => { const s = Math.max(0, Math.ceil((until - Date.now()) / 1000)); if (c) c.textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); if (s <= 0 || !document.body.contains(w)) { clearInterval(iv); w.remove(); } };
+      const iv = setInterval(tick, 1000); tick();
+      return;
+    }
     w.innerHTML = '<b style="display:block;font-size:15px;margin-bottom:8px">' + T.h + '</b>'
       + '<adsgram-task data-block-id="' + BLOCK + '" style="--adsgram-task-font-size:15px;--adsgram-task-icon-size:40px;--adsgram-task-button-width:84px;display:block">'
       + '<span slot="reward" style="color:#3ddc97;font-weight:800">' + T.r + '</span>'
@@ -277,6 +287,7 @@
     el.addEventListener('onBannerNotFound', () => { gone = true; document.querySelectorAll('.agtk').forEach((x) => x.remove()); w.remove(); });  // no task for this player: nothing shown until the app reopens
     el.addEventListener('onError', () => { w.remove(); });
     el.addEventListener('reward', () => {
+      try { localStorage.setItem('mct_agt_until', String(Date.now() + 300000)); } catch (e) {}  // 28 oct 2026: next one in 5 minutes
       try { haptic('ok'); } catch (e) {}
       try { toast(T.ok); } catch (e) {}
       setTimeout(() => { try { if (VIEW === 'market') market(); else if (typeof loadMe === 'function') loadMe(); } catch (e) {} }, 2500);  // the cash comes from the server (reward URL)
