@@ -1941,7 +1941,7 @@ function nudge() {
     document.head.appendChild(st);
     const row = (name, txt, url) => '<div class="gr"><div class="gt"><b>' + name + '</b><span>' + txt + '</span></div><button class="gb" data-u="' + url + '">' + g[5] + '</button></div>';
     box.className = 'card';
-    box.innerHTML = '<div class="gh">' + g[0] + '</div>' + row(g[1], g[2], 'https://t.me/DailyScorefootbot?startapp=src_btgames') + row(g[3], g[4], 'https://t.me/Memecointycoonbot?startapp=src_btgames');
+    box.innerHTML = '<div class="gh">' + g[0] + '</div>' + /* 28 oct 2026: no more $BATON on Daily Score */ row(g[3], g[4], 'https://t.me/Memecointycoonbot?startapp=src_btgames');
     box.querySelectorAll('[data-u]').forEach((b) => b.onclick = () => { try { tw.HapticFeedback.impactOccurred('light'); } catch (e) {} try { tw.openTelegramLink(b.dataset.u); } catch (e) { location.href = b.dataset.u; } });
   } catch (e) {}
 })();
