@@ -1527,16 +1527,21 @@ function render() {
         }
       } } }
   // 28 oct 2026 (14h12, Jeremy): "Monetag sponsored task" (rewarded popup) in the Sponsor sub-tab: +1 500 $BATON, 10 a day, 30 s between two
+  // 28 oct 2026 (16h19, Jeremy): same look as the Adsgram sponsored tasks (yellow card, countdown text while waiting, done text)
   { const mp = $('#mtpTask'), fr = LANG === 'fr';
     if (mp) { clearInterval(window.__mpI); { const at = $('#adtask'); if (at && at.nextElementSibling !== mp) at.after(mp); }  /* right under the Adsgram tasks */ mp.hidden = !(tg && tg.initData) || S.mtgZone == null;
       if (!mp.hidden) {
         const n = Number(S.mtpDay) || 0, m = Number(S.mtpMax) || 10, full = n >= m;
-        mp.innerHTML = '<div class="row"><div class="t"><b>🎁 ' + (fr ? 'Tâches Monetag' : 'Monetag tasks') + '</b><span>' + T('vtS', n, m) + '</span></div><span class="r">+' + fmt(S.mtpReward || 1500) + '</span>' + (full ? '<button class="sm done" disabled>' + T('vtTm') + '</button>' : '<button class="sm" id="mpBtn">Go</button>') + '</div>';
-        const b = mp.querySelector('#mpBtn');
-        if (b) {
-          const aw = () => Math.ceil(((Number(S.mtpNext) || 0) - Date.now()) / 1000);
-          const tk = () => { const w = aw(); if (w <= 0) { clearInterval(window.__mpI); if (!b.dataset.busy) { b.disabled = false; b.textContent = 'Go'; } return; } b.disabled = true; b.textContent = '⏳ 0:' + String(w).padStart(2, '0'); };
-          if (aw() > 0) { tk(); window.__mpI = setInterval(tk, 1000); }
+        const head = '<div class="adt"><div class="adh">🎁 ' + (fr ? 'Tâches sponsorisées Monetag' : 'Monetag sponsored tasks') + '</div>';
+        const aw = () => Math.ceil(((Number(S.mtpNext) || 0) - Date.now()) / 1000);
+        if (full) mp.innerHTML = head + '<div class="adw">✅ ' + (fr ? 'Tes ' + m + ' tâches Monetag du jour sont faites, reviens demain' : 'Your ' + m + ' Monetag tasks of the day are done, come back tomorrow') + '</div></div>';
+        else if (aw() > 0) {
+          mp.innerHTML = head + '<div class="adw">⏳ ' + (fr ? 'Prochaine tâche sponsorisée dans' : 'Next sponsored task in') + ' <b class="mpc"></b></div></div>';
+          const tk = () => { const w = aw(), c = mp.querySelector('.mpc'); if (w <= 0) { clearInterval(window.__mpI); render(); return; } if (c) c.textContent = Math.floor(w / 60) + ':' + String(w % 60).padStart(2, '0'); };
+          tk(); window.__mpI = setInterval(tk, 1000);
+        } else {
+          mp.innerHTML = head + '<div style="display:flex;align-items:center;gap:10px"><div style="flex:1;min-width:0"><b style="display:block">🌐 ' + (fr ? 'Visite un site partenaire' : 'Visit a partner site') + '</b><span style="font-size:12px;opacity:.8">+' + fmt(S.mtpReward || 1500) + ' $BATON · ' + T('vtS', n, m) + '</span></div><button class="tb" id="mpBtn" type="button">' + (fr ? 'Go' : 'Go') + '</button></div></div>';
+          const b = mp.querySelector('#mpBtn');
           b.onclick = async () => {
             if (aw() > 0) return; hap(); b.disabled = true; b.dataset.busy = '1';
             const fn = 'show_' + S.mtgZone; let ok = false;
@@ -1548,7 +1553,7 @@ function render() {
               const x = await api('mtp_task', {});
               if (x && x.ok) { hap('ok'); toast(T('vtOk', fmt(x.reward || 1500))); if (x.state) setState(x.state); return; }
             }
-            b.removeAttribute('data-busy'); b.disabled = false; hap('err'); toast(({ fr: 'Pas de tâche disponible, réessaie plus tard', es: 'No hay tareas disponibles, inténtalo más tarde', pt: 'Nenhuma tarefa disponível, tente mais tarde', ru: 'Нет доступных заданий, попробуй позже', uk: 'Немає доступних завдань, спробуй пізніше', tr: 'Uygun görev yok, sonra tekrar dene', id: 'Tidak ada tugas tersedia, coba lagi nanti', ar: 'لا توجد مهام متاحة، حاول لاحقاً', fa: 'مأموریتی در دسترس نیست، بعداً امتحان کن' })[LANG] || 'No task available, try again later');  /* 28 oct 2026 (15h34, Jeremy) */
+            b.removeAttribute('data-busy'); b.disabled = false; hap('err'); toast(({ fr: 'Pas de tâche disponible, réessaie plus tard', es: 'No hay tareas disponibles, inténtalo más tarde', pt: 'Nenhuma tarefa disponível, tente mais tarde', ru: 'Нет доступных заданий, попробуй позже', uk: 'Немає доступних завдань, спробуй пізніше', tr: 'Uygun görev yok, sonra tekrar dene', id: 'Tidak ada tugas tersedia, coba lagi nanti', ar: 'لا توجد مهام متاحة، حاول لاحقاً', fa: 'مأموریتی در دسترس نیست، بعداً امتحان کن' })[LANG] || 'No task available, try again later');
           };
         }
       } } }
@@ -2052,7 +2057,7 @@ function nudge() {
       const box = $('#adtask'); if (!box || !(tg && tg.initData)) return;
       const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.async = true; document.head.appendChild(s);
       const st = document.createElement('style');
-      st.textContent = '#adtask .adt{display:block;padding:12px 14px;border-radius:18px;background:rgba(255,130,47,.08);border:1px solid rgba(255,212,59,.45)}#adtask .adh{font-weight:800;font-size:13px;color:#ffd43b;margin:0 0 6px}#adtask adsgram-task{display:block}#adtask .adw{font-size:14px;font-weight:700;opacity:.9}#adtask .adw b{color:#ffd43b;font-variant-numeric:tabular-nums}#adtask .tb{display:inline-block;padding:7px 14px;border-radius:99px;background:#ffd43b;color:#17091e;font-weight:800;font-size:13px}';
+      st.textContent = '#adtask .adt,#mtpTask .adt{display:block;padding:12px 14px;border-radius:18px;background:rgba(255,130,47,.08);border:1px solid rgba(255,212,59,.45)}#adtask .adh,#mtpTask .adh{font-weight:800;font-size:13px;color:#ffd43b;margin:0 0 6px}#adtask adsgram-task,#mtpTask adsgram-task{display:block}#adtask .adw,#mtpTask .adw{font-size:14px;font-weight:700;opacity:.9}#adtask .adw b,#mtpTask .adw b{color:#ffd43b;font-variant-numeric:tabular-nums}#adtask .tb,#mtpTask .tb{display:inline-block;padding:7px 14px;border-radius:99px;background:#ffd43b;color:#17091e;font-weight:800;font-size:13px}#mtpTask button.tb{border:0;cursor:pointer}#mtpTask button.tb:disabled{opacity:.6}';
       document.head.appendChild(st);
       // 22 oct 2026 (Jeremy, 12h35): after each task the box goes away for 10 minutes (kept on the phone), then Adsgram loads a new one
       let last = 0;
