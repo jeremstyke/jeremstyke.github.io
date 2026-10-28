@@ -1383,8 +1383,14 @@ function render() {
       const xm = (m) => 'x' + String(m || 2).replace('.', LANG === 'fr' ? ',' : '.');
       // 27 oct 2026 (Jeremy): during a boost, the next video can be watched at once (it replaces the boost with the next multiplier)
       const lab = (s) => { const now2 = T('x2On', mm(s)).replace('x2', xm(b0.boost_mult)); return b0.next_mult ? '<span style="display:flex;flex-direction:column;align-items:center;width:100%"><span>' + esc(T('x2Go').replace('x2', xm(b0.next_mult))) + '</span><small style="font-size:12px;font-weight:600;opacity:.7;margin-top:3px">' + esc(now2 + bc) + '</small></span>' : esc(now2); };
-      if (xl() > 0) { vb.disabled = !b0.next_mult; vb.innerHTML = lab(xl()); window.__x2I = setInterval(() => { const s = xl(); if (s <= 0) { clearInterval(window.__x2I); vb.hidden = true; refresh(); if (b0.next_mult) toast('🔥 ' + T('x2Go').replace('x2', xm(b0.next_mult))); } else vb.innerHTML = lab(s); }, 1000); }  // 27 oct 2026: when a boost ends, the next one is offered at once
-      else { vb.disabled = false; vb.textContent = T('x2Go').replace('x2', xm(b0.next_mult)) + bc; } }
+      if (xl() > 0) { vb.disabled = !b0.next_mult; vb.innerHTML = lab(xl()); window.__x2I = setInterval(() => { const s = xl(); if (s <= 0) { clearInterval(window.__x2I); vb.hidden = true; refresh(); if (b0.next_mult) toast('🔥 ' + T('x2Go').replace('x2', xm(b0.next_mult))); } else if (!vb.dataset.bw) vb.innerHTML = lab(s); }, 1000); }  // 27 oct 2026: when a boost ends, the next one is offered at once
+      else { vb.disabled = false; vb.textContent = T('x2Go').replace('x2', xm(b0.next_mult)) + bc; }
+      // 28 oct 2026 (9h58, Jeremy): 1 minute between two boost videos, with a small countdown on the button (server: S.bstNext)
+      clearInterval(window.__bwI); delete vb.dataset.bw;
+      const bwt = () => { const w = Math.ceil((Math.max((window.__bstAt || 0) + 60000, Number(S.bstNext) || 0) - Date.now()) / 1000);
+        if (w > 0 && !vb.hidden) { vb.dataset.bw = '1'; vb.disabled = true; vb.innerHTML = '<span style="display:flex;flex-direction:column;align-items:center;width:100%"><span>⏳ ' + esc(LANG === 'fr' ? 'Prochain boost dans ' : 'Next boost in ') + mm(w) + '</span>' + (xl() > 0 ? '<small style="font-size:12px;font-weight:600;opacity:.7;margin-top:3px">' + esc(T('x2On', mm(xl())).replace('x2', xm(b0.boost_mult)) + bc) + '</small>' : '') + '</span>'; return true; }
+        if (vb.dataset.bw) { clearInterval(window.__bwI); delete vb.dataset.bw; render(); } return false; };
+      if (bwt()) window.__bwI = setInterval(bwt, 1000); }
     $('#moreBat').hidden = S.batons.length < 2; $('#moreBat').textContent = T('more', S.batons.length - 1);
   } else {
     c.classList.add('off'); c.hidden = false; $('#holdT').textContent = T('none1'); $('#holdP').innerHTML = esc(T('none2')) + '<br><b class="nextB" id="nextB"></b>'; $('#timer').textContent = ''; $('#extBtn').hidden = true; $('#vidBtn').hidden = true; $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
@@ -1500,7 +1506,7 @@ $('#passBtn').onclick = () => {
 // to the baton in hand (4 per baton, bt_ads_reward); here we only show the video and refresh the timer.
 async function playVid(b, mode) {
   // 28 oct 2026 (9h52, Jeremy): 1 minute at least between two boost videos (the server refuses earlier ones too)
-  if (mode === 'x2') { const w = 60000 - (Date.now() - (window.__bstAt || 0)); if (w > 0) { hap('err'); toast((LANG === 'fr' ? '⏳ Prochain boost possible dans ' : '⏳ Next boost possible in ') + Math.ceil(w / 1000) + ' s'); return; } }
+  if (mode === 'x2') { const w = Math.max((window.__bstAt || 0) + 60000, Number(S && S.bstNext) || 0) - Date.now(); if (w > 0) { hap('err'); toast((LANG === 'fr' ? '⏳ Prochain boost possible dans ' : '⏳ Next boost possible in ') + Math.ceil(w / 1000) + ' s'); return; } }
   hap(); b.disabled = true;
   try {
     await api('vid', { mode: mode || 'baton' });  // tells the server which reward this video pays
