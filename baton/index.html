@@ -1546,7 +1546,7 @@ function render() {
               const x = await api('mtp_task', {});
               if (x && x.ok) { hap('ok'); toast(T('vtOk', fmt(x.reward || 1500))); if (x.state) setState(x.state); return; }
             }
-            b.removeAttribute('data-busy'); b.disabled = false; hap('err'); toast(T('vidNo'));
+            b.removeAttribute('data-busy'); b.disabled = false; hap('err'); toast(({ fr: 'Pas de tâche disponible, réessaie plus tard', es: 'No hay tareas disponibles, inténtalo más tarde', pt: 'Nenhuma tarefa disponível, tente mais tarde', ru: 'Нет доступных заданий, попробуй позже', uk: 'Немає доступних завдань, спробуй пізніше', tr: 'Uygun görev yok, sonra tekrar dene', id: 'Tidak ada tugas tersedia, coba lagi nanti', ar: 'لا توجد مهام متاحة، حاول لاحقاً', fa: 'مأموریتی در دسترس نیست، بعداً امتحان کن' })[LANG] || 'No task available, try again later');  /* 28 oct 2026 (15h34, Jeremy) */
           };
         }
       } } }
