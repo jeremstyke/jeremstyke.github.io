@@ -400,8 +400,8 @@ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
         .tksub button.on{background:var(--baton,#ffc531);color:#1a1300;opacity:1;box-shadow:0 4px 14px -6px rgba(255,197,49,.8)}
         .tkn{display:inline-block;min-width:17px;height:17px;line-height:17px;padding:0 5px;margin-left:3px;border-radius:99px;background:#ff4d6d;color:#fff;font-size:10.5px;font-weight:900;vertical-align:1px;box-sizing:border-box}.tksub button.on .tkn{background:#1a1300;color:#ffd75a}
         #p-tasks[data-sub="sp"] #vidTask,#p-tasks[data-sub="sp"] #subTasks,#p-tasks[data-sub="sp"] #tasks{display:none!important}
-        #p-tasks[data-sub="vid"] #spTasks,#p-tasks[data-sub="vid"] #adtask,#p-tasks[data-sub="vid"] #subTasks,#p-tasks[data-sub="vid"] #tasks{display:none!important}
-        #p-tasks[data-sub="ms"] #spTasks,#p-tasks[data-sub="ms"] #adtask,#p-tasks[data-sub="ms"] #vidTask{display:none!important}
+        #p-tasks[data-sub="vid"] #spTasks,#p-tasks[data-sub="vid"] #spTasks2,#p-tasks[data-sub="vid"] #adtask,#p-tasks[data-sub="vid"] #subTasks,#p-tasks[data-sub="vid"] #tasks{display:none!important}
+        #p-tasks[data-sub="ms"] #spTasks,#p-tasks[data-sub="ms"] #spTasks2,#p-tasks[data-sub="ms"] #adtask,#p-tasks[data-sub="ms"] #vidTask{display:none!important}
       </style>
       <div id="gamesCard" style="display:none!important"></div><!-- 28 oct 2026 (11h39, Jeremy): no more "games that earn $BATON" card -->
       <div class="list" id="subTasks"></div>
@@ -1444,7 +1444,7 @@ function render() {
   $('#subTasks').innerHTML = sec('📢 ' + T('subs'), srt(sb), srow);
   // 28 oct 2026 (11h05, Jeremy): client tasks in "Sponsored tasks": a channel or group to join (checked by @Batoncheckbot,
   // +reward at once, +hold after hold_days if still subscribed) or a mini app / bot to open (paid on the tap, it cannot be checked)
-  { let sp = $('#spTasks'); if (!sp) { sp = document.createElement('div'); sp.id = 'spTasks'; sp.className = 'list'; $('#gamesCard').before(sp); $('#adtask') && sp.after($('#adtask'));  /* 28 oct 2026 (11h39, Jeremy): sponsored tasks at the top of the tab */ sp.onclick = (e) => $('#tasks').onclick(e); }
+  { let sp = $('#spTasks'); if (!sp) { sp = document.createElement('div'); sp.id = 'spTasks'; sp.className = 'list'; $('#gamesCard').before(sp); $('#adtask') && sp.after($('#adtask')); const sp2 = document.createElement('div'); sp2.id = 'spTasks2'; sp2.className = 'list'; ($('#adtask') || sp).after(sp2); sp2.onclick = (e) => $('#tasks').onclick(e);  /* 28 oct 2026 (11h39, Jeremy): sponsored tasks at the top of the tab */ sp.onclick = (e) => $('#tasks').onclick(e); }
     const fr = LANG === 'fr', spl = S.tasks.filter((t) => (t.kind === 'sub' && (!t.done || t.hstat === 'wait')) || (t.kind === 'click' && !t.done));
     const prow = (t) => {
       let line, right;
@@ -1456,7 +1456,9 @@ function render() {
     };
     // 28 oct 2026 (11h17, Jeremy): anyone can buy subscribers or visits from here: it opens @Batoncheckbot (Stars, fully automatic)
     const buy = '<div class="row"><div class="t"><b>📣 ' + (fr ? 'Booste ta chaîne' : 'Boost your channel') + '</b><span>' + (fr ? 'Ta chaîne, ton groupe ou ton appli : abonnés réels ou visites, en ⭐ Stars' : 'Your channel, group or app: real subscribers or visits, in ⭐ Stars') + '</span></div><button class="sm" id="spBuy">' + (fr ? 'Acheter' : 'Buy') + '</button></div>';
-    sp.innerHTML = '<div class="sec">⭐ ' + (fr ? 'Tâches sponsorisées' : 'Sponsored tasks') + '</div>' + srt(spl).map(prow).join('') + buy;
+    // 28 oct 2026 (13h19, Jeremy): order of the Sponsor sub-tab: buy (Boost your channel), then the Adsgram task, then the tasks paid by clients
+    sp.innerHTML = buy;
+    const sp2 = $('#spTasks2'); if (sp2) sp2.innerHTML = spl.length ? '<div class="sec">🤝 ' + (fr ? 'Tâches partenaires' : 'Partner tasks') + '</div>' + srt(spl).map(prow).join('') : '';
     // 28 oct 2026 (12h53, Jeremy): sub-tabs (sponsored / videos / missions), the last one chosen is remembered
     { const tk = $('#tkSub'), pt = $('#p-tasks'), lab = fr ? { sp: '⭐ Sponsor', vid: '📺 Vidéos', ms: '✅ Missions' } : { sp: '⭐ Sponsored', vid: '📺 Videos', ms: '✅ Missions' };
       const setSub = (k) => { pt.dataset.sub = k; tk.querySelectorAll('[data-s]').forEach((b) => b.classList.toggle('on', b.dataset.s === k)); try { localStorage.setItem('bt_tsub', k); } catch (e) {} };
