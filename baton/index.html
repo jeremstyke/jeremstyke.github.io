@@ -1981,13 +1981,14 @@ function nudge() {
   // never for the no-ads players (S.noads, later), and once every 24 hours at most (Jeremy, 15h54)
   (function inter() {
     try {
-      if (firstOpen || S.noads || !(tg && tg.initData) || Date.now() - Number(LS.get('bt_int') || 0) < 3600000) return;  // 24 oct 2026 (10h19, Jeremy): one hour at least between two (was 24 h)
+      const force = !!S.mtgForce;  // 28 oct 2026 (13h45, Jeremy): a Monetag interstitial forced once from the server (to see it)
+      if (!force && (firstOpen || S.noads || !(tg && tg.initData) || Date.now() - Number(LS.get('bt_int') || 0) < 3600000)) return;  // 24 oct 2026 (10h19, Jeremy): one hour at least between two (was 24 h)
       const go = () => { try { LS.set('bt_int', String(Date.now())); window.Adsgram.init({ blockId: 'int-55461' }).show().catch(() => {}); } catch (e) {} };
       let n = 0; const wait = () => { if (window.Adsgram) go(); else if (n++ < 40) setTimeout(wait, 250); };  // the Adsgram script is loaded once, by the task block below
       // 28 oct 2026 (13h38, Jeremy): 1 opening interstitial out of 5 on Monetag (In-App Interstitial, one ad only), Adsgram otherwise or if Monetag fails
       const k = (Number(LS.get('bt_intn')) || 0) + 1; LS.set('bt_intn', String(k));
-      if (k % 5 === 0 && S.mtgZone != null) {
-        LS.set('bt_int', String(Date.now()));
+      if ((force || k % 5 === 0) && S.mtgZone != null) {
+        LS.set('bt_int', String(Date.now())); if (force) { try { api('mtg_forced', {}); } catch (e) {} }
         const fn = 'show_' + S.mtgZone;
         const mshow = () => { try { const r = window[fn]({ type: 'inApp', inAppSettings: { frequency: 1, capping: 1, interval: 30, timeout: 0, everyPage: false } }); if (r && r.catch) r.catch(() => {}); } catch (e) { wait(); } };
         if (window[fn]) mshow();
