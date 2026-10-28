@@ -2033,14 +2033,16 @@ function nudge() {
       win: 'Gagné !', lose: 'Perdu', draw: 'Match nul', nopay: 'Plus de gains aujourd\'hui',
       dbl: (n) => '🎬 Doubler : +' + n + ' $BATON', dblOk: (n) => '✅ Doublé : +' + n + ' $BATON', again: 'Rejouer', back: '‹ Jeux',
       pr: (w, d, l) => 'Victoire +' + w + ' · Nul +' + d + ' · Défaite +' + l, left: (n) => n + ' partie' + (n > 1 ? 's' : '') + ' payée' + (n > 1 ? 's' : '') + ' restante' + (n > 1 ? 's' : '') + ' aujourd\'hui',
-      err: 'Erreur, réessaie', noVid: 'Pas de vidéo pour le moment'
+      err: 'Erreur, réessaie', noVid: 'Pas de vidéo pour le moment',
+      unl: '🎬 Regarde une vidéo : partie payée', free: 'Rejouer sans gain', nog: 'Partie sans gain', over: 'Tes 10 parties payées du jour sont jouées · 1 vidéo = 1 partie payée en plus'
     } : {
       tab: 'Games', h: '🎮 Games', sub: 'Play and win $BATON', play: 'Play', soon: 'More games coming soon',
       tN: 'Tic-tac-toe', tD: 'Line up 3 batons before the AI', you: 'You', ai: 'AI', turn: 'Your turn', aiT: 'The AI is thinking...',
       win: 'You win!', lose: 'You lose', draw: 'Draw', nopay: 'No more prizes today',
       dbl: (n) => '🎬 Double it: +' + n + ' $BATON', dblOk: (n) => '✅ Doubled: +' + n + ' $BATON', again: 'Play again', back: '‹ Games',
       pr: (w, d, l) => 'Win +' + w + ' · Draw +' + d + ' · Loss +' + l, left: (n) => n + ' paid game' + (n > 1 ? 's' : '') + ' left today',
-      err: 'Error, try again', noVid: 'No video right now'
+      err: 'Error, try again', noVid: 'No video right now',
+      unl: '🎬 Watch a video: paid game', free: 'Play again with no prize', nog: 'No prize game', over: 'Your 10 paid games of the day are played · 1 video = 1 more paid game'
     };
     const call = (action, body) => fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ initData: tw.initData, action }, body || {})) }).then((r) => r.json()).catch(() => null);
     const hap = (k) => { try { k ? tw.HapticFeedback.notificationOccurred(k) : tw.HapticFeedback.impactOccurred('light'); } catch (e) {} };
@@ -2101,15 +2103,17 @@ function nudge() {
       }).join('');
       prev = b; intro = false;
       const res = G.status === 'win' ? X.win : G.status === 'lose' ? X.lose : G.status === 'draw' ? X.draw : '';
-      const ms = play ? '<div class="ms">' + (busy ? X.aiT : X.turn) + '</div>'
+      const extra = !(G.wins_left > 0) && !G.unlocked, fresh = b === '.........';  // 28 oct 2026 (8h13): past the 10 paid games, a video unlocks one more
+      const ms = play ? '<div class="ms">' + (busy ? X.aiT : X.turn) + (extra ? '<span class="amt" style="font-size:12px;opacity:.6">' + X.nog + '</span>' : '') + '</div>' + (extra && fresh && !busy ? '<button class="bt gold" data-k="unl">' + X.unl + '</button>' : '')
         : '<div class="ms' + (G.status === 'lose' ? ' lo' : '') + '">' + res + (G.paid > 0 ? '<span class="amt">+' + nf(G.doubled ? G.paid * 2 : G.paid) + ' $BATON</span>' : '<span class="amt" style="font-size:13px;opacity:.7">' + X.nopay + '</span>') + '</div>';
       box.innerHTML = '<div class="hd"><button class="bk" data-k="list">' + X.back + '</button><h3>' + X.tN + '</h3><button class="x" data-k="close">✕</button></div>'
         + '<div class="vs"><span class="p1' + (play ? ' on' : '') + '">' + bat(GOLD) + X.you + '</span><i>VS</i><span class="p2">' + bat(BLUE) + X.ai + '</span></div>'
         + '<div class="bd' + (intro ? ' in' : '') + '">' + cells + '</div>' + ms
         + (!play && G.paid > 0 && !G.doubled ? '<button class="bt gold" data-k="dbl">' + X.dbl(G.paid) + '</button>' : '')
         + (!play && G.doubled ? '<div class="ft" style="opacity:.9;color:#7dff6b">' + X.dblOk(G.paid) + '</div>' : '')
-        + (!play ? '<button class="bt ' + (G.paid > 0 && !G.doubled ? 'gh' : 'gold') + '" data-k="new">' + X.again + '</button>' : '')
-        + '<div class="ft">' + X.pr(nf(G.reward || 1000), nf(G.draw_reward || 500), nf(G.lose_reward || 200)) + '<br>' + X.left(G.wins_left) + '</div>';
+        + (!play && !(G.wins_left > 0) ? '<button class="bt ' + (G.paid > 0 && !G.doubled ? 'gh' : 'gold') + '" data-k="unl">' + X.unl + '</button>' : '')
+        + (!play ? '<button class="bt ' + ((G.paid > 0 && !G.doubled) || !(G.wins_left > 0) ? 'gh' : 'gold') + '" data-k="new">' + (G.wins_left > 0 ? X.again : X.free) + '</button>' : '')
+        + '<div class="ft">' + X.pr(nf(G.reward || 1000), nf(G.draw_reward || 500), nf(G.lose_reward || 200)) + '<br>' + (G.wins_left > 0 ? X.left(G.wins_left) : X.over) + '</div>';
     }
     async function act(a, body) {
       if (busy) return null; busy = true; if (a === 'ttt_move') draw();
@@ -2130,6 +2134,12 @@ function nudge() {
       G = r; prev = G.board || '.........';
       if (!G.board || G.status !== 'play') { prev = '.........'; await act('ttt_new'); } else draw();
     }
+    // a rewarded video (Adsgram 55429); throws when there is no video
+    async function watch() {
+      await call('vid', { mode: 'ttt' });
+      if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
+      await window.Adsgram.init({ blockId: '55429' }).show();
+    }
     async function onClick(e) {
       if (e.target === sh) { close(); return; }
       const c = e.target.closest('[data-c]'), k = e.target.closest('[data-k]'), g = e.target.closest('[data-g]');
@@ -2144,6 +2154,12 @@ function nudge() {
       if (k.dataset.k === 'close') { close(); return; }
       if (k.dataset.k === 'list') { hap(); full(false); list(); return; }
       if (k.dataset.k === 'new') { hap(); prev = '.........'; await act('ttt_new'); return; }
+      if (k.dataset.k === 'unl') {
+        hap(); k.disabled = true;
+        try { await watch(); prev = '.........'; const r = await act('ttt_unlock'); if (r) hap('success'); }
+        catch (x) { k.disabled = false; try { tw.showAlert(X.noVid); } catch (e) {} }
+        return;
+      }
       if (k.dataset.k === 'dbl') {
         hap(); k.disabled = true;
         try {
