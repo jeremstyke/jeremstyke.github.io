@@ -393,6 +393,15 @@ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
 
     <section class="panel" id="p-tasks" hidden>
       <div class="score"><small data-t="earnMore"></small><div class="big" data-t="tasks"></div></div>
+      <div class="tksub" id="tkSub"><button type="button" data-s="sp"></button><button type="button" data-s="vid"></button><button type="button" data-s="ms"></button></div>
+      <style>/* 28 oct 2026 (12h53, Jeremy): sub-tabs in Tasks: sponsored, videos, missions */
+        .tksub{display:flex;gap:6px;margin:2px 0 14px;padding:4px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+        .tksub button{flex:1;min-width:0;border:0;border-radius:10px;padding:9px 4px;background:transparent;color:inherit;font-weight:800;font-size:13px;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .tksub button.on{background:var(--baton,#ffc531);color:#1a1300;opacity:1;box-shadow:0 4px 14px -6px rgba(255,197,49,.8)}
+        #p-tasks[data-sub="sp"] #vidTask,#p-tasks[data-sub="sp"] #subTasks,#p-tasks[data-sub="sp"] #tasks{display:none!important}
+        #p-tasks[data-sub="vid"] #spTasks,#p-tasks[data-sub="vid"] #adtask,#p-tasks[data-sub="vid"] #subTasks,#p-tasks[data-sub="vid"] #tasks{display:none!important}
+        #p-tasks[data-sub="ms"] #spTasks,#p-tasks[data-sub="ms"] #adtask,#p-tasks[data-sub="ms"] #vidTask{display:none!important}
+      </style>
       <div id="gamesCard" style="display:none!important"></div><!-- 28 oct 2026 (11h39, Jeremy): no more "games that earn $BATON" card -->
       <div class="list" id="subTasks"></div>
       <div class="list" id="adtask" hidden></div>
@@ -1150,16 +1159,16 @@ fa:{passTip:'اگر زمان تمام شود چوب می‌افتد: آنچه آ
 };
 // 22 oct 2026 (Jeremy, 13h35): a Tasks-tab video pays +250 $BATON, 10 a day
 const X36 = {
-en:{vtH:'📺 Watch a video · Adsgram',vtS:(n,m)=>''+n+'/'+m+' today',vtGo:'Watch',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'Come back tomorrow'},
-fr:{vtH:'📺 Regarde une vidéo · Adsgram',vtS:(n,m)=>''+n+'/'+m+' aujourd\'hui',vtGo:'Regarder',vtOk:(x)=>'+'+x+' $BATON !',vtTm:'Reviens demain'},
-es:{vtH:'📺 Mira un vídeo · Adsgram',vtS:(n,m)=>''+n+'/'+m+' hoy',vtGo:'Ver',vtOk:(x)=>'¡+'+x+' $BATON!',vtTm:'Vuelve mañana'},
-pt:{vtH:'📺 Veja um vídeo · Adsgram',vtS:(n,m)=>''+n+'/'+m+' hoje',vtGo:'Ver',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'Volte amanhã'},
-ru:{vtH:'📺 Посмотри видео · Adsgram',vtS:(n,m)=>''+n+'/'+m+' сегодня',vtGo:'Смотреть',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'Возвращайся завтра'},
-uk:{vtH:'📺 Подивись відео · Adsgram',vtS:(n,m)=>''+n+'/'+m+' сьогодні',vtGo:'Дивитися',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'Повертайся завтра'},
-tr:{vtH:'📺 Video izle · Adsgram',vtS:(n,m)=>'bugün '+n+'/'+m+'',vtGo:'İzle',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'Yarın tekrar gel'},
-id:{vtH:'📺 Tonton video · Adsgram',vtS:(n,m)=>''+n+'/'+m+' hari ini',vtGo:'Tonton',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'Kembali besok'},
-ar:{vtH:'📺 شاهد فيديو · Adsgram',vtS:(n,m)=>''+n+'/'+m+' اليوم',vtGo:'شاهد',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'عد غدًا'},
-fa:{vtH:'📺 یک ویدیو ببین · Adsgram',vtS:(n,m)=>'امروز '+n+'/'+m+'',vtGo:'تماشا',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'فردا برگرد'}
+en:{vtH:'📺 Adsgram video',vtS:(n,m)=>''+n+'/'+m+' today',vtGo:'Watch',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'Come back tomorrow'},
+fr:{vtH:'📺 Vidéo Adsgram',vtS:(n,m)=>''+n+'/'+m+' aujourd\'hui',vtGo:'Regarder',vtOk:(x)=>'+'+x+' $BATON !',vtTm:'Reviens demain'},
+es:{vtH:'📺 Vídeo Adsgram',vtS:(n,m)=>''+n+'/'+m+' hoy',vtGo:'Ver',vtOk:(x)=>'¡+'+x+' $BATON!',vtTm:'Vuelve mañana'},
+pt:{vtH:'📺 Vídeo Adsgram',vtS:(n,m)=>''+n+'/'+m+' hoje',vtGo:'Ver',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'Volte amanhã'},
+ru:{vtH:'📺 Видео Adsgram',vtS:(n,m)=>''+n+'/'+m+' сегодня',vtGo:'Смотреть',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'Возвращайся завтра'},
+uk:{vtH:'📺 Відео Adsgram',vtS:(n,m)=>''+n+'/'+m+' сьогодні',vtGo:'Дивитися',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'Повертайся завтра'},
+tr:{vtH:'📺 Adsgram videosu',vtS:(n,m)=>'bugün '+n+'/'+m+'',vtGo:'İzle',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'Yarın tekrar gel'},
+id:{vtH:'📺 Video Adsgram',vtS:(n,m)=>''+n+'/'+m+' hari ini',vtGo:'Tonton',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'Kembali besok'},
+ar:{vtH:'📺 فيديو Adsgram',vtS:(n,m)=>''+n+'/'+m+' اليوم',vtGo:'شاهد',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'عد غدًا'},
+fa:{vtH:'📺 ویدیو Adsgram',vtS:(n,m)=>'امروز '+n+'/'+m+'',vtGo:'تماشا',vtOk:(x)=>'+'+x+' $BATON!',vtTm:'فردا برگرد'}
 };
 // 22 oct 2026 (Jeremy, 14h05): ready-made messages for the simple game (ask for a baton, swap, thanks)
 const X37 = {
@@ -1447,11 +1456,16 @@ function render() {
     // 28 oct 2026 (11h17, Jeremy): anyone can buy subscribers or visits from here: it opens @Batoncheckbot (Stars, fully automatic)
     const buy = '<div class="row"><div class="t"><b>📣 ' + (fr ? 'Booste ta chaîne' : 'Boost your channel') + '</b><span>' + (fr ? 'Ta chaîne, ton groupe ou ton appli : abonnés réels ou visites, en ⭐ Stars' : 'Your channel, group or app: real subscribers or visits, in ⭐ Stars') + '</span></div><button class="sm" id="spBuy">' + (fr ? 'Acheter' : 'Buy') + '</button></div>';
     sp.innerHTML = '<div class="sec">⭐ ' + (fr ? 'Tâches sponsorisées' : 'Sponsored tasks') + '</div>' + srt(spl).map(prow).join('') + buy;
+    // 28 oct 2026 (12h53, Jeremy): sub-tabs (sponsored / videos / missions), the last one chosen is remembered
+    { const tk = $('#tkSub'), pt = $('#p-tasks'), lab = fr ? { sp: '⭐ Sponsor', vid: '📺 Vidéos', ms: '✅ Missions' } : { sp: '⭐ Sponsored', vid: '📺 Videos', ms: '✅ Missions' };
+      const setSub = (k) => { pt.dataset.sub = k; tk.querySelectorAll('[data-s]').forEach((b) => b.classList.toggle('on', b.dataset.s === k)); try { localStorage.setItem('bt_tsub', k); } catch (e) {} };
+      tk.querySelectorAll('[data-s]').forEach((b) => { b.textContent = lab[b.dataset.s]; });
+      if (!tk.dataset.init) { tk.dataset.init = '1'; tk.onclick = (e) => { const b = e.target.closest('[data-s]'); if (!b) return; hap(); setSub(b.dataset.s); }; let k0 = 'sp'; try { k0 = localStorage.getItem('bt_tsub') || 'sp'; } catch (e) {} setSub(['sp', 'vid', 'ms'].includes(k0) ? k0 : 'sp'); } }
     const bb = sp.querySelector('#spBuy'); if (bb) bb.onclick = (e) => { e.stopPropagation(); hap(); try { tg.openTelegramLink('https://t.me/Batoncheckbot?start=buy'); } catch (x) { openLink('https://t.me/Batoncheckbot?start=buy'); } }; }  // (17h09) the channel stays visible, with its Active badge  // 22 oct 2026 (17h08, Jeremy): the channels to join come first, above the sponsored task
   // 22 oct 2026 (17h11, Jeremy): the tasks already done sit at the bottom in a closed list you can open, with what they earned
   $('#tasks').innerHTML = secs.map((z) => sec(z[0], z[1], z[2])).join('');  // 22 oct 2026 (19h24, Jeremy): done tasks just disappear
   // 23 oct 2026 (00h12, Jeremy): the total earned with the tasks sits at the top of the tab
-  { let tt = $('#tTotTop'); if (!tt) { tt = document.createElement('div'); tt.id = 'tTotTop'; tt.className = 'tTot'; $('#subTasks').before(tt); }
+  { let tt = $('#tTotTop'); if (!tt) { tt = document.createElement('div'); tt.id = 'tTotTop'; tt.className = 'tTot'; $('#tkSub').before(tt); }
     tt.innerHTML = '<span>' + T('tTot') + '</span><b>+' + fmt(S.tasks_earned || 0) + ' $BATON</b>'; }  // 19h29 (Jeremy): a total counter of what tasks earned
   { const vt = $('#vidTask'), nv = S.vids_day || 0, mv = S.vids_max || 10, full = nv >= mv;  // 18h32 (Jeremy): 10 videos a day  // 22 oct 2026: +250 $BATON per video, 10 a day
     vt.hidden = !(tg && tg.initData) || S.vids_max == null;  // 22 oct 2026 (16h20, Jeremy): 5 videos a day
