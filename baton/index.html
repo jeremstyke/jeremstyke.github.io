@@ -2016,84 +2016,141 @@ function nudge() {
 })();
 </script>
 <script>
-// 28 oct 2026 (7h39, Jeremy): tic-tac-toe against the AI, test version shown only to the players listed on the server (ds_config bt_ttt.users).
-// The game is played on the server (bt_ttt_api: the AI answers there), a win pays $BATON, doubled once with a rewarded video (Adsgram 55429, mode 'ttt').
+// 28 oct 2026 (Jeremy): "Jeux" tab in the bottom menu, right after Tasks. It opens a list of games (more will be added);
+// the first one is tic-tac-toe against the AI, played with batons (the player's batons are gold, the AI's are blue).
+// The game is played on the server (bt_ttt_api), test version shown only to the players listed in ds_config bt_ttt.users.
+// Win +1000, draw +500, loss +200 $BATON (day_max paid games a day), any paid game doubled once with a video (Adsgram 55429, mode 'ttt').
 (function () {
   try {
     const tw = window.Telegram && window.Telegram.WebApp; if (!tw || !tw.initData) return;
     const FN = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/baton';
     const fr = /^fr/.test(String((tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || ''));
-    const X = fr ? { tab: 'Jeux', b: '🎮 Morpion contre l\'IA', h: '🎮 Morpion', you: 'Tu joues ❌, l\'IA joue ⭕', win: (n) => '🎉 Gagné ! +' + n + ' $BATON', winNo: '🎉 Gagné ! (plus de gains aujourd\'hui)', lose: '😕 Perdu, l\'IA a gagné', loseP: (n) => '😕 Perdu, l\'IA a gagné · +' + n + ' $BATON', draw: '🤝 Match nul', turn: 'À toi de jouer', again: '🔄 Nouvelle partie', dbl: (n) => '🎬 Doubler : +' + n + ' $BATON', dblOk: (n) => '✅ Doublé ! +' + n + ' $BATON', left: (n, r, l) => n + ' partie' + (n > 1 ? 's' : '') + ' payée' + (n > 1 ? 's' : '') + ' aujourd\'hui · victoire +' + r + ' · défaite +' + l, close: 'Fermer', err: 'Erreur, réessaie', noVid: 'Pas de vidéo pour le moment' }
-      : { tab: 'Games', b: '🎮 Tic-tac-toe vs AI', h: '🎮 Tic-tac-toe', you: 'You play ❌, the AI plays ⭕', win: (n) => '🎉 You win! +' + n + ' $BATON', winNo: '🎉 You win! (no more prizes today)', lose: '😕 You lose, the AI won', loseP: (n) => '😕 You lose, the AI won · +' + n + ' $BATON', draw: '🤝 Draw', turn: 'Your turn', again: '🔄 New game', dbl: (n) => '🎬 Double it: +' + n + ' $BATON', dblOk: (n) => '✅ Doubled! +' + n + ' $BATON', left: (n, r, l) => n + ' paid game' + (n > 1 ? 's' : '') + ' left today · win +' + r + ' · loss +' + l, close: 'Close', err: 'Error, try again', noVid: 'No video right now' };
+    const X = fr ? {
+      tab: 'Jeux', h: '🎮 Jeux', sub: 'Joue et gagne des $BATON', play: 'Jouer', soon: 'D\'autres jeux arrivent bientôt',
+      tN: 'Morpion', tD: 'Aligne 3 bâtons avant l\'IA', you: 'Toi', ai: 'IA', turn: 'À toi de jouer', aiT: 'L\'IA réfléchit...',
+      win: 'Gagné !', lose: 'Perdu', draw: 'Match nul', nopay: 'Plus de gains aujourd\'hui',
+      dbl: (n) => '🎬 Doubler : +' + n + ' $BATON', dblOk: (n) => '✅ Doublé : +' + n + ' $BATON', again: 'Rejouer', back: '‹ Jeux',
+      pr: (w, d, l) => 'Victoire +' + w + ' · Nul +' + d + ' · Défaite +' + l, left: (n) => n + ' partie' + (n > 1 ? 's' : '') + ' payée' + (n > 1 ? 's' : '') + ' restante' + (n > 1 ? 's' : '') + ' aujourd\'hui',
+      err: 'Erreur, réessaie', noVid: 'Pas de vidéo pour le moment'
+    } : {
+      tab: 'Games', h: '🎮 Games', sub: 'Play and win $BATON', play: 'Play', soon: 'More games coming soon',
+      tN: 'Tic-tac-toe', tD: 'Line up 3 batons before the AI', you: 'You', ai: 'AI', turn: 'Your turn', aiT: 'The AI is thinking...',
+      win: 'You win!', lose: 'You lose', draw: 'Draw', nopay: 'No more prizes today',
+      dbl: (n) => '🎬 Double it: +' + n + ' $BATON', dblOk: (n) => '✅ Doubled: +' + n + ' $BATON', again: 'Play again', back: '‹ Games',
+      pr: (w, d, l) => 'Win +' + w + ' · Draw +' + d + ' · Loss +' + l, left: (n) => n + ' paid game' + (n > 1 ? 's' : '') + ' left today',
+      err: 'Error, try again', noVid: 'No video right now'
+    };
     const call = (action, body) => fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ initData: tw.initData, action }, body || {})) }).then((r) => r.json()).catch(() => null);
     const hap = (k) => { try { k ? tw.HapticFeedback.notificationOccurred(k) : tw.HapticFeedback.impactOccurred('light'); } catch (e) {} };
+    const nf = (n) => Math.round(Number(n) || 0).toLocaleString('fr-FR').replace(/ | /g, ' ');
+    // one baton, the same shape as the app icon; gold for the player, blue for the AI
+    const bat = (c, cls) => '<svg class="' + (cls || '') + '" viewBox="0 0 24 24" aria-hidden="true"><rect x="9.6" y="1.8" width="4.8" height="20.4" rx="2.4" transform="rotate(28 12 12)" fill="' + c + '"/><rect x="10.6" y="3" width="1.4" height="17" rx=".7" transform="rotate(28 12 12)" fill="rgba(255,255,255,.45)"/></svg>';
+    const GOLD = '#ffc531', BLUE = '#4da8ff';
     const st = document.createElement('style');
-    st.textContent = 'nav.tabs.g5{grid-template-columns:repeat(5,minmax(0,1fr))!important}'
-      + '#tttSh{position:fixed;inset:0;z-index:61;background:rgba(0,0,0,.65);display:flex;align-items:flex-end;justify-content:center}'
-      + '#tttSh .tb{width:100%;max-width:520px;background:#0b1430;border-radius:22px 22px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));box-sizing:border-box;color:#fff;text-align:center}'
-      + '#tttSh h3{margin:0 0 4px;font-size:18px}#tttSh .ts{font-size:13px;opacity:.75;margin:0 0 12px}'
-      + '#tttSh .tg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:300px;margin:0 auto}'
-      + '#tttSh .tc{aspect-ratio:1;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);font-size:44px;color:#fff;display:grid;place-items:center;padding:0}'
-      + '#tttSh .tc:disabled{opacity:1}#tttSh .tm{min-height:24px;margin:14px 0 6px;font-weight:800;font-size:16px}'
-      + '#tttSh .tbtn{display:block;width:100%;margin-top:10px;padding:12px;border-radius:14px;border:0;font-weight:800;font-size:15px}'
-      + '#tttSh .gold{background:#ffd43b;color:#08121f}#tttSh .gh{background:rgba(255,255,255,.1);color:#fff}#tttSh .tl{font-size:12px;opacity:.6;margin-top:10px}';
+    st.textContent = 'nav.tabs.g5{grid-template-columns:repeat(5,minmax(0,1fr))!important}#gmTab[aria-current="page"]{color:var(--baton,#ffc531)}'
+      + '#gmSh{position:fixed;inset:0;z-index:61;background:rgba(2,6,18,.7);display:flex;align-items:flex-end;justify-content:center;animation:gmF .18s ease}'
+      + '#gmSh .gp{width:100%;max-width:520px;max-height:92vh;overflow:auto;background:radial-gradient(120% 60% at 50% 0%,#17306b 0%,#0b1430 60%);border-radius:24px 24px 0 0;border-top:1px solid rgba(120,170,255,.25);padding:16px 16px calc(18px + env(safe-area-inset-bottom));box-sizing:border-box;color:#fff;animation:gmU .22s ease}'
+      + '@keyframes gmF{from{opacity:0}}@keyframes gmU{from{transform:translateY(40px);opacity:.4}}'
+      + '#gmSh .hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}#gmSh .hd h3{margin:0;font-size:20px;font-weight:900}#gmSh .hd small{display:block;font-size:12px;opacity:.65;font-weight:600}'
+      + '#gmSh .x{width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.1);color:#fff;font-size:18px;line-height:34px;padding:0}#gmSh .bk{border:0;background:rgba(255,255,255,.1);color:#fff;border-radius:99px;padding:7px 12px;font-weight:800;font-size:13px}'
+      + '#gmSh .gcard{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px;border-radius:18px;border:1px solid rgba(255,197,49,.35);background:linear-gradient(135deg,rgba(255,197,49,.14),rgba(77,168,255,.1));color:#fff;margin-bottom:10px}'
+      + '#gmSh .gcard .ic{flex:0 0 58px;height:58px;border-radius:14px;background:#0a1734;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:6px;box-sizing:border-box}#gmSh .gcard .ic svg{width:100%;height:100%}'
+      + '#gmSh .gcard .tx{flex:1;min-width:0}#gmSh .gcard b{font-size:16px}#gmSh .gcard .tx div{font-size:12.5px;opacity:.75;margin-top:2px}#gmSh .gcard .tx em{display:block;font-style:normal;font-size:12px;color:#ffd76a;margin-top:4px;font-weight:700}'
+      + '#gmSh .gcard .go{flex:0 0 auto;background:#ffc531;color:#1a1300;border-radius:99px;padding:8px 14px;font-weight:900;font-size:13px}#gmSh .soon{text-align:center;font-size:12.5px;opacity:.5;margin:14px 0 2px}'
+      + '#gmSh .vs{display:flex;align-items:center;justify-content:center;gap:14px;margin:2px 0 12px;font-weight:800;font-size:14px}#gmSh .vs span{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid transparent}'
+      + '#gmSh .vs span.on{border-color:currentColor;box-shadow:0 0 12px -2px currentColor}#gmSh .vs svg{width:22px;height:22px}#gmSh .vs .p1{color:#ffc531}#gmSh .vs .p2{color:#4da8ff}#gmSh .vs i{opacity:.4;font-style:normal;font-size:12px}'
+      + '#gmSh .bd{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;max-width:310px;margin:0 auto;padding:9px;border-radius:22px;background:rgba(3,10,30,.55);box-shadow:inset 0 0 0 1px rgba(120,170,255,.18)}'
+      + '#gmSh .cl{aspect-ratio:1;border-radius:15px;border:0;background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.03));box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);padding:14%;display:grid;place-items:center}'
+      + '#gmSh .cl:not(:disabled):active{transform:scale(.95)}#gmSh .cl svg{width:100%;height:100%;filter:drop-shadow(0 0 8px var(--gw))}#gmSh .cl.nw svg{animation:gmP .28s cubic-bezier(.3,1.6,.6,1)}'
+      + '@keyframes gmP{from{transform:scale(.2) rotate(-40deg);opacity:0}}#gmSh .cl.wl{background:linear-gradient(160deg,rgba(255,197,49,.35),rgba(255,197,49,.1));box-shadow:inset 0 0 0 2px #ffc531}#gmSh .cl.wl.ai{background:linear-gradient(160deg,rgba(77,168,255,.35),rgba(77,168,255,.1));box-shadow:inset 0 0 0 2px #4da8ff}'
+      + '#gmSh .ms{min-height:26px;margin:14px 0 4px;text-align:center;font-weight:900;font-size:17px}#gmSh .ms .amt{display:block;font-size:26px;color:#ffd43b;margin-top:2px}#gmSh .ms.lo .amt{color:#9fc8ff}'
+      + '#gmSh .bt{display:block;width:100%;margin-top:10px;padding:13px;border-radius:15px;border:0;font-weight:900;font-size:15px}#gmSh .gold{background:linear-gradient(180deg,#ffd75a,#ffb300);color:#1a1300;box-shadow:0 6px 18px -6px rgba(255,190,40,.7)}#gmSh .gh{background:rgba(255,255,255,.1);color:#fff}'
+      + '#gmSh .ft{text-align:center;font-size:12px;opacity:.6;margin-top:12px}';
     document.head.appendChild(st);
-    let G = null, busy = false, box = null;
-    const sym = (c) => c === 'X' ? '❌' : c === 'O' ? '⭕' : '';
+    let sh = null, box = null, G = null, busy = false, prev = '.........';
+    const LINES = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+    const winLine = (b) => { for (const l of LINES) { if (b[l[0]] !== '.' && b[l[0]] === b[l[1]] && b[l[1]] === b[l[2]]) return l; } return null; };
+    function close() { if (sh) sh.remove(); sh = null; box = null; const t = document.getElementById('gmTab'); if (t) t.removeAttribute('aria-current'); }
+    function openSheet() {
+      close(); hap();
+      sh = document.createElement('div'); sh.id = 'gmSh'; box = document.createElement('div'); box.className = 'gp'; sh.appendChild(box); document.body.appendChild(sh);
+      sh.onclick = onClick; const t = document.getElementById('gmTab'); if (t) t.setAttribute('aria-current', 'page');
+    }
+    // the list of games; add new games here
+    function list() {
+      const ic = [GOLD, BLUE, '', '', GOLD, BLUE, BLUE, '', GOLD].map((c) => c ? bat(c) : '<span></span>').join('');
+      box.innerHTML = '<div class="hd"><div><h3>' + X.h + '</h3><small>' + X.sub + '</small></div><button class="x" data-k="close">✕</button></div>'
+        + '<button class="gcard" data-g="ttt"><div class="ic">' + ic + '</div><div class="tx"><b>' + X.tN + '</b><div>' + X.tD + '</div><em>' + X.pr(1000, 500, 200) + '</em></div><span class="go">' + X.play + '</span></button>'
+        + '<div class="soon">' + X.soon + '</div>';
+    }
     function draw() {
       if (!box || !G) return;
-      const b = G.board || '.........', play = G.status === 'play';
-      const msg = G.status === 'win' ? (G.paid > 0 ? X.win(G.paid) : X.winNo) : G.status === 'lose' ? (G.paid > 0 ? X.loseP(G.paid) : X.lose) : G.status === 'draw' ? X.draw : X.turn;
-      box.innerHTML = '<h3>' + X.h + '</h3><p class="ts">' + X.you + '</p><div class="tg">'
-        + [...b].map((c, i) => '<button class="tc" data-c="' + (i + 1) + '"' + (c !== '.' || !play ? ' disabled' : '') + '>' + sym(c) + '</button>').join('') + '</div>'
-        + '<div class="tm">' + msg + '</div>'
-        + (!play && G.paid > 0 && !G.doubled ? '<button class="tbtn gold" data-k="dbl">' + X.dbl(G.paid) + '</button>' : '')
-        + (!play ? '<button class="tbtn ' + (G.paid > 0 && !G.doubled ? 'gh' : 'gold') + '" data-k="new">' + X.again + '</button>' : '')
-        + '<button class="tbtn gh" data-k="close">' + X.close + '</button>'
-        + '<div class="tl">' + X.left(G.wins_left, G.reward, G.lose_reward || 200) + '</div>';
+      const b = G.board || '.........', play = G.status === 'play', wl = winLine(b) || [];
+      const cells = [...b].map((c, i) => {
+        const nw = c !== '.' && prev[i] === '.';
+        return '<button class="cl' + (nw ? ' nw' : '') + (wl.includes(i) ? ' wl' + (c === 'O' ? ' ai' : '') : '') + '" data-c="' + (i + 1) + '" style="--gw:' + (c === 'O' ? 'rgba(77,168,255,.7)' : 'rgba(255,197,49,.7)') + '"' + (c !== '.' || !play ? ' disabled' : '') + '>' + (c === 'X' ? bat(GOLD) : c === 'O' ? bat(BLUE) : '') + '</button>';
+      }).join('');
+      prev = b;
+      const res = G.status === 'win' ? X.win : G.status === 'lose' ? X.lose : G.status === 'draw' ? X.draw : '';
+      const ms = play ? '<div class="ms">' + (busy ? X.aiT : X.turn) + '</div>'
+        : '<div class="ms' + (G.status === 'lose' ? ' lo' : '') + '">' + res + (G.paid > 0 ? '<span class="amt">+' + nf(G.doubled ? G.paid * 2 : G.paid) + ' $BATON</span>' : '<span class="amt" style="font-size:13px;opacity:.7">' + X.nopay + '</span>') + '</div>';
+      box.innerHTML = '<div class="hd"><button class="bk" data-k="list">' + X.back + '</button><h3>' + X.tN + '</h3><button class="x" data-k="close">✕</button></div>'
+        + '<div class="vs"><span class="p1' + (play ? ' on' : '') + '">' + bat(GOLD) + X.you + '</span><i>VS</i><span class="p2">' + bat(BLUE) + X.ai + '</span></div>'
+        + '<div class="bd">' + cells + '</div>' + ms
+        + (!play && G.paid > 0 && !G.doubled ? '<button class="bt gold" data-k="dbl">' + X.dbl(G.paid) + '</button>' : '')
+        + (!play && G.doubled ? '<div class="ft" style="opacity:.9;color:#7dff6b">' + X.dblOk(G.paid) + '</div>' : '')
+        + (!play ? '<button class="bt ' + (G.paid > 0 && !G.doubled ? 'gh' : 'gold') + '" data-k="new">' + X.again + '</button>' : '')
+        + '<div class="ft">' + X.pr(nf(G.reward || 1000), nf(G.draw_reward || 500), nf(G.lose_reward || 200)) + '<br>' + X.left(G.wins_left) + '</div>';
     }
     async function act(a, body) {
-      if (busy) return; busy = true;
+      if (busy) return null; busy = true; if (a === 'ttt_move') draw();
       const r = await call(a, body); busy = false;
-      if (!r || !r.ok) { try { tw.showAlert(X.err); } catch (e) {} return null; }
+      if (!r || !r.ok) { try { tw.showAlert(X.err); } catch (e) {} draw(); return null; }
       G = r; draw(); return r;
     }
-    async function open() {
-      hap();
-      const d = document.createElement('div'); d.id = 'tttSh'; box = document.createElement('div'); box.className = 'tb'; box.textContent = '⏳'; d.appendChild(box); document.body.appendChild(d);
-      d.onclick = async (e) => {
-        if (e.target === d) { d.remove(); return; }
-        const c = e.target.closest('[data-c]'), k = e.target.closest('[data-k]');
-        if (c && G && G.status === 'play') { hap(); const r = await act('ttt_move', { cell: Number(c.dataset.c) }); if (r && r.status === 'win') hap('success'); else if (r && r.status === 'lose') hap('error'); return; }
-        if (!k) return;
-        if (k.dataset.k === 'close') { d.remove(); return; }
-        if (k.dataset.k === 'new') { hap(); await act('ttt_new'); return; }
-        if (k.dataset.k === 'dbl') {
-          hap(); k.disabled = true;
-          try {
-            await call('vid', { mode: 'ttt' });
-            if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
-            await window.Adsgram.init({ blockId: '55429' }).show();
-            const r = await act('ttt_double', { id: G.id });
-            if (r) { hap('success'); const m = box.querySelector('.tm'); if (m) m.textContent = X.dblOk(r.got); }
-          } catch (x) { k.disabled = false; try { tw.showAlert(X.noVid); } catch (e) {} }
-        }
-      };
-      const r = await call('ttt_state');
-      if (!r || !r.ok) { d.remove(); return; }
-      G = r; if (!G.board || G.status !== 'play') await act('ttt_new'); else draw();
+    async function ttt() {
+      box.innerHTML = '<div style="text-align:center;padding:60px 0;font-size:28px">⏳</div>';
+      const r = await call('ttt_state'); if (!r || !r.ok) { list(); return; }
+      G = r; prev = G.board || '.........';
+      if (!G.board || G.status !== 'play') { prev = '.........'; await act('ttt_new'); } else draw();
     }
-    // the button only shows when the server says this player can play (test version)
+    async function onClick(e) {
+      if (e.target === sh) { close(); return; }
+      const c = e.target.closest('[data-c]'), k = e.target.closest('[data-k]'), g = e.target.closest('[data-g]');
+      if (g && g.dataset.g === 'ttt') { hap(); ttt(); return; }
+      if (c && G && G.status === 'play' && !busy) {
+        hap(); const i = Number(c.dataset.c) - 1; G.board = G.board.slice(0, i) + 'X' + G.board.slice(i + 1);
+        const r = await act('ttt_move', { cell: i + 1 });
+        if (r && r.status === 'win') hap('success'); else if (r && r.status === 'lose') hap('error'); else if (r && r.status === 'draw') hap('warning');
+        return;
+      }
+      if (!k) return;
+      if (k.dataset.k === 'close') { close(); return; }
+      if (k.dataset.k === 'list') { hap(); list(); return; }
+      if (k.dataset.k === 'new') { hap(); prev = '.........'; await act('ttt_new'); return; }
+      if (k.dataset.k === 'dbl') {
+        hap(); k.disabled = true;
+        try {
+          await call('vid', { mode: 'ttt' });
+          if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
+          await window.Adsgram.init({ blockId: '55429' }).show();
+          const r = await act('ttt_double', { id: G.id });
+          if (r) hap('success');
+        } catch (x) { k.disabled = false; try { tw.showAlert(X.noVid); } catch (e) {} }
+      }
+    }
+    // the tab only shows when the server says this player can play (test version); placed right after Tasks
     call('ttt_state').then((r) => {
       if (!r || !r.ok) return;
-      // 28 oct 2026 (7h46, Jeremy): win +1000, loss +200, any paid game doubled once with a video.
-      // 28 oct 2026 (7h45, Jeremy): a "Jeux" button in the bottom menu, same look as the other tabs
       const place = () => {
-        if (document.getElementById('tttTab')) return;
+        if (document.getElementById('gmTab')) return;
         const nav = document.querySelector('nav.tabs'); if (!nav) return;
-        const b = document.createElement('button'); b.id = 'tttTab'; b.type = 'button';
+        const b = document.createElement('button'); b.id = 'gmTab'; b.type = 'button';
         b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="7" width="19" height="11" rx="5.5"/><path d="M7.5 10.5v4M5.5 12.5h4"/><circle cx="15.5" cy="11.5" r=".6" fill="currentColor"/><circle cx="17.5" cy="13.5" r=".6" fill="currentColor"/></svg><span>' + X.tab + '</span>';
-        b.onclick = open; nav.classList.add('g5'); nav.appendChild(b);
+        b.onclick = () => { openSheet(); list(); };
+        const tk = nav.querySelector('button[data-p="tasks"]');
+        if (tk) tk.insertAdjacentElement('afterend', b); else nav.appendChild(b);
+        nav.classList.add('g5');
       };
       place(); setInterval(place, 1500);
     });
