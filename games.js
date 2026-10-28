@@ -74,8 +74,7 @@
     // 25 oct 2026 (Jeremy): Tap the Diamond
     // 25 oct 2026 (23h08, Jeremy): Tap the Diamond closed, removed from the list
     // 26 oct 2026 (8h00, Jeremy): Rig Rush closed, removed from the list
-    { id: 'ds', e: '⚽', n: 'Daily Score', u: 'https://t.me/DailyScorefootbot/play?startapp=src_xg_', c: '#7bd88f',
-      d: { en: 'Predict the score of the match of the day', fr: 'Pronostique le score du match du jour', es: 'Predice el marcador del partido del día', pt: 'Palpite o placar do jogo do dia', ru: 'Угадай счёт матча дня', uk: 'Вгадай рахунок матчу дня', tr: 'Günün maçının skorunu tahmin et', id: 'Tebak skor pertandingan hari ini', ar: 'توقّع نتيجة مباراة اليوم', fa: 'نتیجه بازی روز را پیش‌بینی کن', de: 'Tippe das Ergebnis des Spiels des Tages', it: 'Pronostica il risultato della partita del giorno' } }
+    // 28 oct 2026 (Jeremy): Daily Score taken out of the list
   ];
   // 24 oct 2026 (Jeremy): my channels too, under the games
   var C = [
