@@ -1951,8 +1951,8 @@ function nudge() {
 // by source (Pass The Baton, friends, tasks, Daily Score, Meme Coin Tycoon...), what was spent and withdrawn, and the last lines (SQL bt_gains).
 (function () {
   const G = {
-    en: { b: '📊 Where do my $BATON come from? ›', h: '📊 My $BATON', won: 'Won in total', last: 'Latest', spent: '⬆️ Spent on upgrades', shop: '🛒 Withdrawn in USDT', pend: '⏳ Waiting', close: 'Close', err: 'Connection problem, try again.', c: { baton: '🏃 Baton held and passed, streak', friends: '👥 Friends and crew', tasks: '✅ Tasks and videos', contest: '🏆 Weekly contest', ds: '⚽ Daily Score', mct: '📈 Meme Coin Tycoon', games: '🎮 Other games', bonus: '🎁 Bonus', spent: '⬆️ Upgrade', shop: '🛒 Withdrawal' } },
-    fr: { b: '📊 D\'où viennent mes $BATON ? ›', h: '📊 Mes $BATON', won: 'Gagnés au total', last: 'Derniers gains', spent: '⬆️ Dépensés en améliorations', shop: '🛒 Retirés en USDT', pend: '⏳ En attente', close: 'Fermer', err: 'Problème de connexion, réessaie.', c: { baton: '🏃 Bâton tenu et passé, série', friends: '👥 Amis et équipe', tasks: '✅ Tâches et vidéos', contest: '🏆 Concours de la semaine', ds: '⚽ Daily Score', mct: '📈 Meme Coin Tycoon', games: '🎮 Autres jeux', bonus: '🎁 Bonus', spent: '⬆️ Amélioration', shop: '🛒 Retrait' } },
+    en: { b: '📊 Where do my $BATON come from? ›', h: '📊 My $BATON', won: 'Won in total', last: 'Latest', spent: '⬆️ Spent on upgrades', shop: '🛒 Withdrawn in USDT', pend: '⏳ Waiting', close: 'Close', err: 'Connection problem, try again.', c: { baton: '🏃 Baton held and passed, streak', friends: '👥 Friends and crew', tasks: '✅ Tasks and videos', contest: '🏆 Weekly contest', ds: '⚽ Daily Score', mct: '📈 Meme Coin Tycoon', games: '🎮 Games', bonus: '🎁 Bonus', spent: '⬆️ Upgrade', shop: '🛒 Withdrawal' } },
+    fr: { b: '📊 D\'où viennent mes $BATON ? ›', h: '📊 Mes $BATON', won: 'Gagnés au total', last: 'Derniers gains', spent: '⬆️ Dépensés en améliorations', shop: '🛒 Retirés en USDT', pend: '⏳ En attente', close: 'Fermer', err: 'Problème de connexion, réessaie.', c: { baton: '🏃 Bâton tenu et passé, série', friends: '👥 Amis et équipe', tasks: '✅ Tâches et vidéos', contest: '🏆 Concours de la semaine', ds: '⚽ Daily Score', mct: '📈 Meme Coin Tycoon', games: '🎮 Jeux', bonus: '🎁 Bonus', spent: '⬆️ Amélioration', shop: '🛒 Retrait' } },
     es: { b: '📊 ¿De dónde vienen mis $BATON? ›', h: '📊 Mis $BATON', won: 'Ganados en total', last: 'Últimos', spent: '⬆️ Gastados en mejoras', shop: '🛒 Retirados en USDT', pend: '⏳ En espera', close: 'Cerrar', err: 'Problema de conexión, inténtalo de nuevo.', c: { baton: '🏃 Bastón llevado y pasado, racha', friends: '👥 Amigos y equipo', tasks: '✅ Tareas y vídeos', contest: '🏆 Concurso semanal', ds: '⚽ Daily Score', mct: '📈 Meme Coin Tycoon', games: '🎮 Otros juegos', bonus: '🎁 Bonus', spent: '⬆️ Mejora', shop: '🛒 Retiro' } },
     pt: { b: '📊 De onde vêm meus $BATON? ›', h: '📊 Meus $BATON', won: 'Ganhos no total', last: 'Últimos', spent: '⬆️ Gastos em melhorias', shop: '🛒 Sacados em USDT', pend: '⏳ Pendente', close: 'Fechar', err: 'Problema de conexão, tente de novo.', c: { baton: '🏃 Bastão segurado e passado, sequência', friends: '👥 Amigos e equipe', tasks: '✅ Tarefas e vídeos', contest: '🏆 Concurso semanal', ds: '⚽ Daily Score', mct: '📈 Meme Coin Tycoon', games: '🎮 Outros jogos', bonus: '🎁 Bônus', spent: '⬆️ Melhoria', shop: '🛒 Saque' } },
     ru: { b: '📊 Откуда мои $BATON? ›', h: '📊 Мои $BATON', won: 'Всего заработано', last: 'Последние', spent: '⬆️ Потрачено на улучшения', shop: '🛒 Выведено в USDT', pend: '⏳ В ожидании', close: 'Закрыть', err: 'Проблема с соединением, попробуй ещё раз.', c: { baton: '🏃 Эстафета и передачи, серия', friends: '👥 Друзья и команда', tasks: '✅ Задания и видео', contest: '🏆 Конкурс недели', ds: '⚽ Daily Score', mct: '📈 Meme Coin Tycoon', games: '🎮 Другие игры', bonus: '🎁 Бонус', spent: '⬆️ Улучшение', shop: '🛒 Вывод' } },
@@ -1972,7 +1972,9 @@ function nudge() {
     // 28 oct 2026 (7h52, Jeremy): where in Meme Coin Tycoon the $BATON were won
     const WD = /^fr/.test(lc) ? { mct_task: 'Mission partenaire', mct_ref: 'Parrainage d\'un ami', mct_ref_prize: 'Concours meilleur parrain', mct_week_prize: 'Concours meilleurs joueurs', mct_bourse_prize: 'Concours Bourse', other: 'Autre' }
       : { mct_task: 'Partner mission', mct_ref: 'Friend referral', mct_ref_prize: 'Best sponsor contest', mct_week_prize: 'Best players contest', mct_bourse_prize: 'Stock market contest', other: 'Other' };
-    const WK = (k) => (/^mct/.test(String(k || '')) ? (WD[k] || WD.other) : '');
+    // 28 oct 2026 (8h02, Jeremy): and which game (tic-tac-toe, Tap the Diamond, Rig Rush)
+    const GD = { ttt: /^fr/.test(lc) ? 'Morpion' : 'Tic-tac-toe', td: 'Tap the Diamond', rr: 'Rig Rush', rig: 'Rig Rush' };
+    const WK = (k) => { k = String(k || ''); if (/^mct/.test(k)) return WD[k] || WD.other; const p = k.split('_')[0]; return GD[p] || ''; };
     const st = document.createElement('style');
     st.textContent = '#gnBtn{display:block;margin:10px auto 0;padding:7px 14px;border-radius:99px;border:1px solid rgba(255,212,59,.45);background:rgba(255,212,59,.1);color:#ffd43b;font-weight:800;font-size:13px;cursor:pointer}'
       + '#gnSh{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center}'
@@ -1996,7 +1998,7 @@ function nudge() {
       const day = (t) => new Date(t * 1000).toLocaleDateString(undefined, { day: '2-digit', month: '2-digit' });
       box.innerHTML = '<h3>' + esc(L.h) + '</h3><div class="gt">' + nf(tot) + ' $BATON</div><div class="gl">' + esc(L.won) + '</div>'
         + cats.map(([k, v]) => '<div class="gr"><span>' + esc(L.c[k] || k) + '</span><b class="pos">+' + nf(v) + '</b></div>'
-          + (k === 'mct' ? Object.entries(r.mct || {}).filter(([, a]) => a > 0).sort((a, b) => b[1] - a[1]).map(([w, a]) => '<div class="gr" style="padding-left:16px;font-size:13px;opacity:.85;border-top:0"><span>↳ ' + esc(WK(w)) + '</span><b>+' + nf(a) + '</b></div>').join('') : '')).join('')
+          + ((k === 'mct' || k === 'games') ? Object.entries(Object.entries(r[k] || {}).reduce((o, [w, a]) => { const n = WK(w) || WD.other; o[n] = (o[n] || 0) + a; return o; }, {})).filter(([, a]) => a > 0).sort((a, b) => b[1] - a[1]).map(([w, a]) => '<div class="gr" style="padding-left:16px;font-size:13px;opacity:.85;border-top:0"><span>↳ ' + esc(w) + '</span><b>+' + nf(a) + '</b></div>').join('') : '')).join('')
         + (r.pending > 0 ? '<div class="gr"><span>' + esc(L.pend) + '</span><b>' + nf(r.pending) + '</b></div>' : '')
         + (r.spent > 0 ? '<div class="gr"><span>' + esc(L.spent) + '</span><b class="neg">-' + nf(r.spent) + '</b></div>' : '')
         + (r.shop > 0 ? '<div class="gr"><span>' + esc(L.shop) + '</span><b class="neg">-' + nf(r.shop) + '</b></div>' : '')
@@ -2065,9 +2067,16 @@ function nudge() {
       + '@keyframes gmP{from{transform:scale(.2) rotate(-40deg);opacity:0}}#gmSh .cl.wl{background:linear-gradient(160deg,rgba(255,197,49,.35),rgba(255,197,49,.1));box-shadow:inset 0 0 0 2px #ffc531}#gmSh .cl.wl.ai{background:linear-gradient(160deg,rgba(77,168,255,.35),rgba(77,168,255,.1));box-shadow:inset 0 0 0 2px #4da8ff}'
       + '#gmSh .ms{min-height:26px;margin:14px 0 4px;text-align:center;font-weight:900;font-size:17px}#gmSh .ms .amt{display:block;font-size:26px;color:#ffd43b;margin-top:2px}#gmSh .ms.lo .amt{color:#9fc8ff}'
       + '#gmSh .bt{display:block;width:100%;margin-top:10px;padding:13px;border-radius:15px;border:0;font-weight:900;font-size:15px}#gmSh .gold{background:linear-gradient(180deg,#ffd75a,#ffb300);color:#1a1300;box-shadow:0 6px 18px -6px rgba(255,190,40,.7)}#gmSh .gh{background:rgba(255,255,255,.1);color:#fff}'
-      + '#gmSh .ft{text-align:center;font-size:12px;opacity:.6;margin-top:12px}';
+      + '#gmSh .ft{text-align:center;font-size:12px;opacity:.6;margin-top:12px}'
+      /* 28 oct 2026 (7h59, Jeremy): a game opens full screen with an animation */
+      + '#gmSh.full{align-items:stretch;background:#050b1c}#gmSh.full .gp{max-width:none;height:100%;max-height:none;border-radius:0;border:0;display:flex;flex-direction:column;justify-content:center;padding:calc(14px + env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) calc(18px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));animation:gmZ .42s cubic-bezier(.2,1.25,.4,1)}'
+      + '#gmSh.full .gp>*{width:100%;max-width:420px;margin-left:auto;margin-right:auto}#gmSh.full .hd{position:absolute;left:0;right:0;top:calc(12px + env(safe-area-inset-top));max-width:none;padding:0 16px;box-sizing:border-box}#gmSh.full .bd{max-width:360px}'
+      + '@keyframes gmZ{0%{transform:scale(.55) translateY(30%);opacity:0;border-radius:40px}60%{opacity:1}100%{transform:none}}'
+      + '#gmSh.full .vs{animation:gmV .5s .15s backwards cubic-bezier(.2,1.4,.4,1)}@keyframes gmV{from{transform:translateY(-16px) scale(.8);opacity:0}}'
+      + '#gmSh.full .bd.in .cl{animation:gmC .38s backwards cubic-bezier(.2,1.5,.4,1)}@keyframes gmC{from{transform:scale(.3);opacity:0}}'
+      + [0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => '#gmSh.full .bd.in .cl:nth-child(' + (i + 1) + '){animation-delay:' + (0.18 + ((i % 3) + Math.floor(i / 3)) * 0.06).toFixed(2) + 's}').join('');
     document.head.appendChild(st);
-    let sh = null, box = null, G = null, busy = false, prev = '.........';
+    let sh = null, box = null, G = null, busy = false, prev = '.........', intro = false;
     const LINES = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
     const winLine = (b) => { for (const l of LINES) { if (b[l[0]] !== '.' && b[l[0]] === b[l[1]] && b[l[1]] === b[l[2]]) return l; } return null; };
     function close() { if (sh) sh.remove(); sh = null; box = null; const t = document.getElementById('gmTab'); if (t) t.removeAttribute('aria-current'); }
@@ -2090,13 +2099,13 @@ function nudge() {
         const nw = c !== '.' && prev[i] === '.';
         return '<button class="cl' + (nw ? ' nw' : '') + (wl.includes(i) ? ' wl' + (c === 'O' ? ' ai' : '') : '') + '" data-c="' + (i + 1) + '" style="--gw:' + (c === 'O' ? 'rgba(77,168,255,.7)' : 'rgba(255,197,49,.7)') + '"' + (c !== '.' || !play ? ' disabled' : '') + '>' + (c === 'X' ? bat(GOLD) : c === 'O' ? bat(BLUE) : '') + '</button>';
       }).join('');
-      prev = b;
+      prev = b; intro = false;
       const res = G.status === 'win' ? X.win : G.status === 'lose' ? X.lose : G.status === 'draw' ? X.draw : '';
       const ms = play ? '<div class="ms">' + (busy ? X.aiT : X.turn) + '</div>'
         : '<div class="ms' + (G.status === 'lose' ? ' lo' : '') + '">' + res + (G.paid > 0 ? '<span class="amt">+' + nf(G.doubled ? G.paid * 2 : G.paid) + ' $BATON</span>' : '<span class="amt" style="font-size:13px;opacity:.7">' + X.nopay + '</span>') + '</div>';
       box.innerHTML = '<div class="hd"><button class="bk" data-k="list">' + X.back + '</button><h3>' + X.tN + '</h3><button class="x" data-k="close">✕</button></div>'
         + '<div class="vs"><span class="p1' + (play ? ' on' : '') + '">' + bat(GOLD) + X.you + '</span><i>VS</i><span class="p2">' + bat(BLUE) + X.ai + '</span></div>'
-        + '<div class="bd">' + cells + '</div>' + ms
+        + '<div class="bd' + (intro ? ' in' : '') + '">' + cells + '</div>' + ms
         + (!play && G.paid > 0 && !G.doubled ? '<button class="bt gold" data-k="dbl">' + X.dbl(G.paid) + '</button>' : '')
         + (!play && G.doubled ? '<div class="ft" style="opacity:.9;color:#7dff6b">' + X.dblOk(G.paid) + '</div>' : '')
         + (!play ? '<button class="bt ' + (G.paid > 0 && !G.doubled ? 'gh' : 'gold') + '" data-k="new">' + X.again + '</button>' : '')
@@ -2108,7 +2117,14 @@ function nudge() {
       if (!r || !r.ok) { try { tw.showAlert(X.err); } catch (e) {} draw(); return null; }
       G = r; draw(); return r;
     }
+    // full screen, with a fresh panel so the opening animation plays
+    function full(on) {
+      if (!sh) return;
+      const nb = document.createElement('div'); nb.className = 'gp'; sh.replaceChild(nb, box); box = nb;
+      sh.classList.toggle('full', on); if (on) { try { tw.expand(); } catch (e) {} }
+    }
     async function ttt() {
+      full(true); intro = true;
       box.innerHTML = '<div style="text-align:center;padding:60px 0;font-size:28px">⏳</div>';
       const r = await call('ttt_state'); if (!r || !r.ok) { list(); return; }
       G = r; prev = G.board || '.........';
@@ -2126,7 +2142,7 @@ function nudge() {
       }
       if (!k) return;
       if (k.dataset.k === 'close') { close(); return; }
-      if (k.dataset.k === 'list') { hap(); list(); return; }
+      if (k.dataset.k === 'list') { hap(); full(false); list(); return; }
       if (k.dataset.k === 'new') { hap(); prev = '.........'; await act('ttt_new'); return; }
       if (k.dataset.k === 'dbl') {
         hap(); k.disabled = true;
