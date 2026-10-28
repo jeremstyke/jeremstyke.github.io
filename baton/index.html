@@ -2218,7 +2218,7 @@ function nudge() {
     let sh = null, box = null, G = null, busy = false, prev = '.........', intro = false;
     const LINES = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
     const winLine = (b) => { for (const l of LINES) { if (b[l[0]] !== '.' && b[l[0]] === b[l[1]] && b[l[1]] === b[l[2]]) return l; } return null; };
-    function close() { try { stopDuel(); } catch (e) {} try { tw.enableVerticalSwipes(); } catch (e) {} if (sh) sh.remove(); sh = null; box = null; const t = document.getElementById('gmTab'); if (t) t.removeAttribute('aria-current'); }
+    function close() { try { if (window.__gmDot) window.__gmDot(); } catch (e) {} try { stopDuel(); } catch (e) {} try { tw.enableVerticalSwipes(); } catch (e) {} if (sh) sh.remove(); sh = null; box = null; const t = document.getElementById('gmTab'); if (t) t.removeAttribute('aria-current'); }
     function openSheet() {
       close(); hap();
       sh = document.createElement('div'); sh.id = 'gmSh'; box = document.createElement('div'); box.className = 'gp'; sh.appendChild(box); document.body.appendChild(sh);
@@ -2688,11 +2688,14 @@ function nudge() {
         if (document.getElementById('gmTab')) return;
         const nav = document.querySelector('nav.tabs'); if (!nav) return;
         const b = document.createElement('button'); b.id = 'gmTab'; b.type = 'button';
-        b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="7" width="19" height="11" rx="5.5"/><path d="M7.5 10.5v4M5.5 12.5h4"/><circle cx="15.5" cy="11.5" r=".6" fill="currentColor"/><circle cx="17.5" cy="13.5" r=".6" fill="currentColor"/></svg><span>' + X.tab + '</span>';
+        b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="7" width="19" height="11" rx="5.5"/><path d="M7.5 10.5v4M5.5 12.5h4"/><circle cx="15.5" cy="11.5" r=".6" fill="currentColor"/><circle cx="17.5" cy="13.5" r=".6" fill="currentColor"/></svg><span>' + X.tab + '</span><span class="dot" id="gmDot" hidden></span>';  // 28 oct 2026 (13h15): dot while plays are left today
         b.onclick = () => { openSheet(); list(); };
         const tk = nav.querySelector('button[data-p="tasks"]');
         if (tk) tk.insertAdjacentElement('afterend', b); else nav.appendChild(b);
         nav.classList.add('g5');
+        // 28 oct 2026 (13h15, Jeremy): the dot on the Games tab stays as long as one of the games still has plays left today
+        const gdot = async () => { const g = await call('games_left'); const d = document.getElementById('gmDot'); if (!d || !g || !g.ok) return; d.hidden = !(((g.ttt || 0) + (g.spin || 0) + (g.scratch || 0) + (g.flip || 0)) > 0); };
+        window.__gmDot = gdot; gdot(); clearInterval(window.__gmDotI); window.__gmDotI = setInterval(gdot, 60000);
         // 28 oct 2026 (9h36, Jeremy): a link with startapp=games opens the Games list directly (announcement)
         if (!window.__gmAuto && ((tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '') === 'games') { window.__gmAuto = true; setTimeout(() => { openSheet(); list(); }, 900); }
         // 28 oct 2026 (Jeremy): a challenge link (startapp=d<code>) opens the challenge directly
