@@ -398,6 +398,7 @@ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
         .tksub{display:flex;gap:6px;margin:2px 0 14px;padding:4px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
         .tksub button{flex:1;min-width:0;border:0;border-radius:10px;padding:9px 4px;background:transparent;color:inherit;font-weight:800;font-size:13px;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
         .tksub button.on{background:var(--baton,#ffc531);color:#1a1300;opacity:1;box-shadow:0 4px 14px -6px rgba(255,197,49,.8)}
+        .tkn{display:inline-block;min-width:17px;height:17px;line-height:17px;padding:0 5px;margin-left:3px;border-radius:99px;background:#ff4d6d;color:#fff;font-size:10.5px;font-weight:900;vertical-align:1px;box-sizing:border-box}.tksub button.on .tkn{background:#1a1300;color:#ffd75a}
         #p-tasks[data-sub="sp"] #vidTask,#p-tasks[data-sub="sp"] #subTasks,#p-tasks[data-sub="sp"] #tasks{display:none!important}
         #p-tasks[data-sub="vid"] #spTasks,#p-tasks[data-sub="vid"] #adtask,#p-tasks[data-sub="vid"] #subTasks,#p-tasks[data-sub="vid"] #tasks{display:none!important}
         #p-tasks[data-sub="ms"] #spTasks,#p-tasks[data-sub="ms"] #adtask,#p-tasks[data-sub="ms"] #vidTask{display:none!important}
@@ -1459,8 +1460,14 @@ function render() {
     // 28 oct 2026 (12h53, Jeremy): sub-tabs (sponsored / videos / missions), the last one chosen is remembered
     { const tk = $('#tkSub'), pt = $('#p-tasks'), lab = fr ? { sp: '⭐ Sponsor', vid: '📺 Vidéos', ms: '✅ Missions' } : { sp: '⭐ Sponsored', vid: '📺 Videos', ms: '✅ Missions' };
       const setSub = (k) => { pt.dataset.sub = k; tk.querySelectorAll('[data-s]').forEach((b) => b.classList.toggle('on', b.dataset.s === k)); try { localStorage.setItem('bt_tsub', k); } catch (e) {} };
-      tk.querySelectorAll('[data-s]').forEach((b) => { b.textContent = lab[b.dataset.s]; });
-      if (!tk.dataset.init) { tk.dataset.init = '1'; tk.onclick = (e) => { const b = e.target.closest('[data-s]'); if (!b) return; hap(); setSub(b.dataset.s); }; let k0 = 'sp'; try { k0 = localStorage.getItem('bt_tsub') || 'sp'; } catch (e) {} setSub(['sp', 'vid', 'ms'].includes(k0) ? k0 : 'sp'); } }
+      // 28 oct 2026 (13h07, Jeremy): a red counter on each sub-tab when something is left to do there
+      const badge = () => { if (!S || !S.tasks) return; const n = {
+          sp: S.tasks.filter((t) => (t.kind === 'sub' || t.kind === 'click') && !t.done).length + (window.__adt ? 1 : 0),
+          vid: Math.max(0, (Number(S.vids_max) || 0) - (Number(S.vids_day) || 0)),
+          ms: S.tasks.filter((t) => !['sub', 'click'].includes(t.kind) && !t.done).length };
+        tk.querySelectorAll('[data-s]').forEach((b) => { const k = b.dataset.s; b.innerHTML = lab[k] + (n[k] > 0 ? ' <span class="tkn">' + n[k] + '</span>' : ''); }); };
+      badge();
+      if (!tk.dataset.init) { clearInterval(window.__tkI); window.__tkI = setInterval(badge, 2000); tk.dataset.init = '1'; tk.onclick = (e) => { const b = e.target.closest('[data-s]'); if (!b) return; hap(); setSub(b.dataset.s); }; let k0 = 'sp'; try { k0 = localStorage.getItem('bt_tsub') || 'sp'; } catch (e) {} setSub(['sp', 'vid', 'ms'].includes(k0) ? k0 : 'sp'); } }
     const bb = sp.querySelector('#spBuy'); if (bb) bb.onclick = (e) => { e.stopPropagation(); hap(); try { tg.openTelegramLink('https://t.me/Batoncheckbot?start=buy'); } catch (x) { openLink('https://t.me/Batoncheckbot?start=buy'); } }; }  // (17h09) the channel stays visible, with its Active badge  // 22 oct 2026 (17h08, Jeremy): the channels to join come first, above the sponsored task
   // 22 oct 2026 (17h11, Jeremy): the tasks already done sit at the bottom in a closed list you can open, with what they earned
   $('#tasks').innerHTML = secs.map((z) => sec(z[0], z[1], z[2])).join('');  // 22 oct 2026 (19h24, Jeremy): done tasks just disappear
