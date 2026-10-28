@@ -318,3 +318,21 @@
     const a = document.getElementById('darea'); if (a && !document.getElementById('drw')) diaBtn(a); else diaDraw();
   }, 700);
 })();
+
+// 28 oct 2026 (21h31, Jeremy): Monetag In-App Interstitial when the game opens (zone 12143182): never on the very first visit,
+// never for Premium players, one per hour at most
+(function () {
+  try {
+    const tw = window.Telegram && Telegram.WebApp; if (!tw || !tw.initData) return;
+    let first = false, last = 0;
+    try { first = !localStorage.getItem('mct_open1'); localStorage.setItem('mct_open1', '1'); last = Number(localStorage.getItem('mct_int') || 0); } catch (e) { return; }
+    if (first || Date.now() - last < 3600000) return;
+    setTimeout(() => {
+      if (window.MCTPREM) return;  // Premium: no ads
+      try { localStorage.setItem('mct_int', String(Date.now())); } catch (e) {}
+      const fn = 'show_12143182';
+      const go = () => { try { const r = window[fn]({ type: 'inApp', inAppSettings: { frequency: 1, capping: 1, interval: 30, timeout: 0, everyPage: false } }); if (r && r.catch) r.catch(() => {}); } catch (e) {} };
+      if (window[fn]) go(); else { const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', '12143182'); s.setAttribute('data-sdk', fn); s.onload = () => { if (window[fn]) go(); }; document.head.appendChild(s); }
+    }, 4000);
+  } catch (e) {}
+})();
