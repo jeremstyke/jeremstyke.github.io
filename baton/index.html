@@ -1609,14 +1609,15 @@ $('#passBtn').onclick = () => {
 // When Ads Galaxy has no ad, Adsgram takes over at once; a video closed too early on Ads Galaxy counts as no video (never two ads in a row).
 window.__showRw = async function () {
   let n = 0; try { n = Number(localStorage.getItem('bt_rwn') || 0) + 1; localStorage.setItem('bt_rwn', String(n)); } catch (e) { n = 1 + Math.floor(Math.random() * 5); }
-  if (false && n % 5 === 0) {  /* 28 oct 2026 (12h31, Jeremy): off, Pass The Baton is not registered at Ads Galaxy (only Meme Coin Tycoon is) */
-    let r = null;
+  /* 28 oct 2026 (14h08, Jeremy): 1 rewarded video out of 5 on Monetag (rewarded interstitial, zone S.mtgZone), Adsgram otherwise or when Monetag has nothing.
+     Monetag does not call the server: the app confirms the video once (agx_ok, which pays the reward the 'vid' call asked for, once). */
+  if (n % 5 === 0 && typeof S !== 'undefined' && S && S.mtgZone != null) {
+    const fn = 'show_' + S.mtgZone; let ok = false;
     try {
-      if (!window.showAdsGalaxy) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://app.adsgalaxy.online/sdk.js?id=135'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
-      r = await window.showAdsGalaxy({ miniappId: 135 });
-    } catch (e) { r = null; }
-    if (r && r.reward_eligible) { window.__rvAt = Date.now(); await api('agx_ok', { rid: String(r.request_id || '') }); return 'agx'; }
-    if (r) throw new Error('agx_skip');
+      if (!window[fn]) await new Promise((res, rej) => { const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(S.mtgZone)); s.setAttribute('data-sdk', fn); s.onload = res; s.onerror = rej; document.head.appendChild(s); setTimeout(() => rej(new Error('timeout')), 8000); });
+      await window[fn](); ok = true;
+    } catch (e) { ok = false; }
+    if (ok) { window.__rvAt = Date.now(); await api('agx_ok', { rid: 'mt' + Date.now() + Math.random().toString(36).slice(2, 8) }); return 'mtg'; }
   }
   if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
   await window.Adsgram.init({ blockId: '55429' }).show();
