@@ -255,6 +255,9 @@
     en: { h: '🤝 Partner mission', r: '+$100 · +1,000 $BATON', go: 'Go', claim: 'Claim', done: 'Done ✅', wait: 'Next mission in', ok: '💵 +$100 added to your cash, and +1,000 $BATON on Pass The Baton!' },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TT[l] || TT.en; };
+  // 28 oct 2026 (18h, Jeremy): 5 partner missions a day at most: once done, the block says so instead of offering more
+  const AGF = { fr: (m) => '✅ Tes ' + m + ' missions du jour sont faites, reviens demain', en: (m) => '✅ Your ' + m + ' missions of the day are done, come back tomorrow', id: (m) => '✅ ' + m + ' misi hari ini selesai, kembali besok', ru: (m) => '✅ Все ' + m + ' заданий на сегодня выполнены, возвращайся завтра', ar: (m) => '✅ أنجزت مهامك الـ' + m + ' لهذا اليوم، عد غدًا', fa: (m) => '✅ ' + m + ' مأموریت امروزت انجام شد، فردا برگرد' };
+  const agtFull = (m) => { let l = 'en'; try { l = LANG; } catch (e) {} return (AGF[l] || AGF.en)(m); };
   let sdk = null, gone = false;
   const load = () => sdk || (sdk = new Promise((ok, ko) => {
     if (window.Adsgram) return ok();
@@ -283,6 +286,14 @@
       + '<div slot="done" style="color:#8fa197;font-weight:700;text-align:center">' + T.done + '</div>'
       + '</adsgram-task>';
     after.parentNode.insertBefore(w, after.nextSibling);
+    // 28 oct 2026 (18h, Jeremy): the server says how many partner missions are left today and when the next one comes (limit and countdown)
+    try { tonCall({ action: 'mon_agt' }).then((g) => {
+      if (!g || !g.ok || !document.body.contains(w)) return;
+      const mx = Number(g.max || 5), dn = Number(g.done || 0);
+      if (dn >= mx) { w.innerHTML = '<b style="display:block;font-size:15px;margin-bottom:6px">' + T.h + '</b><div style="color:#8fa197;font-weight:700">' + agtFull(mx) + '</div>'; w.hidden = false; return; }
+      if (Number(g.next) > Date.now() + 2000) { try { localStorage.setItem('mct_agt_until', String(g.next)); } catch (e) {} w.remove(); put(); return; }
+      const hb = w.querySelector('b'); if (hb) hb.textContent = T.h + ' · ' + dn + '/' + mx;
+    }).catch(() => {}); } catch (e) {}
     const el = w.querySelector('adsgram-task');
     el.addEventListener('onBannerNotFound', () => { gone = true; document.querySelectorAll('.agtk').forEach((x) => x.remove()); w.remove(); });  // no task for this player: nothing shown until the app reopens
     el.addEventListener('onError', () => { w.remove(); });
