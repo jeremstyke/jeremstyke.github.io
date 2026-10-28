@@ -2145,6 +2145,7 @@ function nudge() {
       + '#gmSh .hub{position:absolute;left:50%;top:50%;width:22%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#1d3a80,#0a1734);box-shadow:0 0 0 4px #ffc531,0 0 20px rgba(255,197,49,.65);display:grid;place-items:center;padding:4%;box-sizing:border-box}#gmSh .hub svg{width:100%;height:100%}'
       + '#gmSh .win{animation:gmW .6s cubic-bezier(.2,1.6,.4,1)}@keyframes gmW{from{transform:scale(.3);opacity:0}}#gmSh .gcard .ic.sw{display:block;padding:2px;background:none}#gmSh .gcard .ic.sw svg{width:100%;height:100%}#gmSh .ms .jk{display:block;color:#ff7ad1;font-size:14px;letter-spacing:.12em}'
       /* 28 oct 2026 (10h05, Jeremy): challenge a friend */
+      + '#gmSh.full.lst .gp{justify-content:flex-start;overflow-y:auto}#gmSh.full.lst .hd{position:static;padding:0;margin-bottom:14px}#gmSh.full.lst .hd h3{font-size:24px}'
       + '#gmSh .gcard .gl{display:inline-block;margin-top:6px;padding:2px 9px;border-radius:99px;background:rgba(125,255,107,.13);color:#8dff7d;font-size:11.5px;font-weight:800}#gmSh .gcard .gl.z{background:rgba(255,95,122,.15);color:#ffa3b1}'
       + '#gmSh .drow{display:flex;justify-content:space-between;align-items:center;width:100%;padding:11px 14px;margin-top:8px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#fff;font-weight:800;font-size:14px}#gmSh .drow b{color:#ffd43b}'
       + '#gmSh .dhero,#gmSh.full .gp .dhero{width:min(120px,32vw);margin:6px auto 4px}#gmSh .dhero svg{width:100%;height:auto;display:block;filter:drop-shadow(0 0 22px rgba(255,95,122,.45))}#gmSh .dhero.pulse{animation:gmPl 1.6s ease-in-out infinite}@keyframes gmPl{50%{transform:scale(1.07)}}'
@@ -2169,6 +2170,7 @@ function nudge() {
     }
     // the list of games; add new games here
     function list() {
+      full(true); sh.classList.add('lst');  // 28 oct 2026 (10h45, Jeremy): the Games page opens full screen too, not as a popup
       const ic = [GOLD, BLUE, '', '', GOLD, BLUE, BLUE, '', GOLD].map((c) => c ? bat(c) : '<span></span>').join('');
       box.innerHTML = '<div class="hd"><div><h3>' + X.h + '</h3><small>' + X.sub + '</small></div><button class="x" data-k="close">✕</button></div>'
         + '<button class="gcard" data-g="ttt"><div class="ic">' + ic + '</div><div class="tx"><b>' + X.tN + '</b><div>' + X.tD + '</div><em>' + X.pr(1000, 500, 200) + '</em></div><span class="go">' + X.play + '</span></button>'
@@ -2222,7 +2224,7 @@ function nudge() {
     function full(on) {
       if (!sh) return;
       const nb = document.createElement('div'); nb.className = 'gp'; sh.replaceChild(nb, box); box = nb;
-      sh.classList.toggle('full', on); if (on) { try { tw.expand(); } catch (e) {} }
+      sh.classList.toggle('full', on); sh.classList.remove('lst'); if (on) { try { tw.expand(); } catch (e) {} }
     }
     async function ttt() {
       full(true); intro = true;
