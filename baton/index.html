@@ -1440,7 +1440,11 @@ function render() {
   { const vt = $('#vidTask'), nv = S.vids_day || 0, mv = S.vids_max || 10, full = nv >= mv;  // 18h32 (Jeremy): 10 videos a day  // 22 oct 2026: +250 $BATON per video, 10 a day
     vt.hidden = !(tg && tg.initData) || S.vids_max == null;  // 22 oct 2026 (16h20, Jeremy): 5 videos a day
     vt.innerHTML = '<div class="row"><div class="t"><b>' + T('vtH') + '</b><span>' + T('vtS', nv, mv) + '</span></div><span class="r">+' + fmt(S.vid_reward || 100) + '</span>' + (full ? '<button class="sm done" disabled>' + T('vtTm') + '</button>' : '<button class="sm" id="vtBtn">' + T('vtGo') + '</button>') + '</div>';
-    window.__vt = !vt.hidden && !full; }
+    window.__vt = !vt.hidden && !full;
+    // 28 oct 2026 (10h24, Jeremy): 30 seconds between two videos, with a small countdown on the button (server: S.vtNext)
+    clearInterval(window.__vtI);
+    const vw = () => Math.ceil((Math.max((window.__vtAt || 0) + 30000, Number(S.vtNext) || 0) - Date.now()) / 1000), vb2 = vt.querySelector('#vtBtn');
+    if (vb2 && vw() > 0) { const tk = () => { const w = vw(); if (w <= 0) { clearInterval(window.__vtI); vb2.disabled = false; vb2.textContent = T('vtGo'); return; } vb2.disabled = true; vb2.textContent = '⏳ 0:' + String(w).padStart(2, '0'); }; tk(); window.__vtI = setInterval(tk, 1000); } }
   $('#dotTasks').hidden = !S.tasks.some((t) => !t.done) && !window.__adt && !window.__vt;  // 22 oct 2026: an Adsgram task waiting also lights the dot
   $('#nFriends').textContent = fmt(S.friends);
   if (S.blvl_rates) {  // 22 oct 2026: baton level card
@@ -1522,7 +1526,7 @@ async function playVid(b, mode) {
       for (let i = 0; i < 10 && !ok; i++) { await new Promise((r) => setTimeout(r, 2000)); try { await refresh(); } catch (x) {} const c = S && S.batons[0]; ok = !!c && String(c.boost_n) + ':' + c.boost_until !== b4; }
       if (ok) { window.__bstAt = Date.now(); hap('ok'); toast(T('x2On', '60:00').replace('x2', 'x' + nm)); }
       else { hap('err'); toast(LANG === 'fr' ? '⚠️ Adsgram n\'a pas validé la vidéo. Réessaie dans un instant.' : '⚠️ Adsgram did not confirm the video. Try again in a moment.'); }
-    } else { hap('ok'); toast(mode === 'pts' ? T('vtOk', fmt(S.vid_reward || 100)) : mode === 'extra' ? T('exOk') : T('vidOk')); [2000, 6000, 12000].forEach((ms) => setTimeout(refresh, ms)); }
+    } else { if (mode === 'pts') window.__vtAt = Date.now(); hap('ok'); toast(mode === 'pts' ? T('vtOk', fmt(S.vid_reward || 100)) : mode === 'extra' ? T('exOk') : T('vidOk')); [2000, 6000, 12000].forEach((ms) => setTimeout(refresh, ms)); }
   } catch (e) { toast(T('vidNo')); }
   b.disabled = false; setTimeout(refresh, 300);
 }
