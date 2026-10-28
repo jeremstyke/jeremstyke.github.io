@@ -188,6 +188,7 @@
   // 5. short of cash: one more choice in the "Out of cash?" sheet of the game
   async function cashOpt(sh) {
     if (sh.dataset.rw) return; sh.dataset.rw = '1';
+    if (!prem()) return;  // 28 oct 2026 (16h12, Jeremy): no more recharge video (the Stars packs instead); the free daily recharge stays for Premium
     const st = await call('state'); if (!st || !st.cash || !document.body.contains(sh)) return;
     const T = L(), b = document.createElement('button'); b.className = 'cso'; b.type = 'button';
     b.innerHTML = '<span class="e">' + (prem() ? '💎' : '📺') + '</span><span class="w"><b>' + ec(T.cO.replace(/^\S+ /, '')) + '</b><small>' + ec(T.cOs) + '</small></span><span class="go">›</span>';
@@ -231,7 +232,7 @@
     d.style.cssText = 'position:fixed;inset:0;z-index:60;background:rgba(5,3,15,.72);display:flex;align-items:flex-end;justify-content:center';
     d.innerHTML = '<div style="width:100%;max-width:520px;max-height:88vh;overflow:auto;background:var(--night,#140c2c);border:1px solid var(--line,rgba(255,255,255,.12));border-radius:22px 22px 0 0;padding:20px 16px calc(22px + env(safe-area-inset-bottom))">'
       + '<h2 style="margin:0 0 4px;text-align:center">' + ec(T.rT) + '</h2><p class="hint" style="margin:0 0 14px;text-align:center">' + ec(T.rS) + '</p>'
-      + row('v', prem() ? '💎' : '📺', (prem() ? T.rVp : T.rV).replace(/^\S+ /, ''), vidWhy, vidOk)
+      + (prem() ? row('v', '💎', T.rVp.replace(/^\S+ /, ''), vidWhy, vidOk) : '')  // 28 oct 2026 (16h12, Jeremy): no more recharge video, Premium keeps its free recharge
       + PACKS.map((p) => row(p[0], '⭐', T.rP(nfmt(p[2])) + ' · ' + p[1] + ' ⭐', why(p), dayOk && p[2] <= left)).join('')
       + '<button class="ghost" id="rwn" style="width:100%;margin-top:10px">' + ec(T.no) + '</button></div>';
     d.onclick = (ev) => { if (ev.target === d) close(); };
