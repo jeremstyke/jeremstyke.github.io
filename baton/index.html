@@ -399,7 +399,7 @@ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
         .tksub button{flex:1;min-width:0;border:0;border-radius:10px;padding:9px 4px;background:transparent;color:inherit;font-weight:800;font-size:13px;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
         .tksub button.on{background:var(--baton,#ffc531);color:#1a1300;opacity:1;box-shadow:0 4px 14px -6px rgba(255,197,49,.8)}
         .tkn{display:inline-block;min-width:17px;height:17px;line-height:17px;padding:0 5px;margin-left:3px;border-radius:99px;background:#ff4d6d;color:#fff;font-size:10.5px;font-weight:900;vertical-align:1px;box-sizing:border-box}.tksub button.on .tkn{background:#1a1300;color:#ffd75a}
-        #p-tasks[data-sub="sp"] #vidTask,#p-tasks[data-sub="sp"] #subTasks,#p-tasks[data-sub="sp"] #tasks{display:none!important}
+        #p-tasks[data-sub="sp"] #vidTask,#p-tasks[data-sub="sp"] #agxTask,#p-tasks[data-sub="ms"] #agxTask,#p-tasks[data-sub="sp"] #subTasks,#p-tasks[data-sub="sp"] #tasks{display:none!important}
         #p-tasks[data-sub="vid"] #spTasks,#p-tasks[data-sub="vid"] #spTasks2,#p-tasks[data-sub="vid"] #adtask,#p-tasks[data-sub="vid"] #subTasks,#p-tasks[data-sub="vid"] #tasks{display:none!important}
         #p-tasks[data-sub="ms"] #spTasks,#p-tasks[data-sub="ms"] #spTasks2,#p-tasks[data-sub="ms"] #adtask,#p-tasks[data-sub="ms"] #vidTask{display:none!important}
       </style>
@@ -407,6 +407,7 @@ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
       <div class="list" id="subTasks"></div>
       <div class="list" id="adtask" hidden></div>
       <div class="list" id="vidTask" hidden></div>
+      <div class="list" id="agxTask" hidden></div>
       <div class="list" id="tasks"></div>
     </section>
 
@@ -1465,7 +1466,7 @@ function render() {
       // 28 oct 2026 (13h07, Jeremy): a red counter on each sub-tab when something is left to do there
       const badge = () => { if (!S || !S.tasks) return; const n = {
           sp: S.tasks.filter((t) => (t.kind === 'sub' || t.kind === 'click') && !t.done).length + Math.max(0, Number(S.adtLeft) || 0),  // 13h15: the sponsored tasks left today (10 a day), even during the 30 s wait
-          vid: Math.max(0, (Number(S.vids_max) || 0) - (Number(S.vids_day) || 0)),
+          vid: Math.max(0, (Number(S.vids_max) || 0) - (Number(S.vids_day) || 0)) + (S.agxId != null ? Math.max(0, (Number(S.agxMax) || 0) - (Number(S.agxDay) || 0)) : 0),
           ms: S.tasks.filter((t) => !['sub', 'click'].includes(t.kind) && !t.done).length };
         tk.querySelectorAll('[data-s]').forEach((b) => { const k = b.dataset.s; b.innerHTML = lab[k] + (n[k] > 0 ? ' <span class="tkn">' + n[k] + '</span>' : ''); });
         // 28 oct 2026 (13h15, Jeremy): the dot on the Tasks tab stays as long as something of the day is left to do
@@ -1486,6 +1487,33 @@ function render() {
     clearInterval(window.__vtI);
     const vw = () => Math.ceil((Math.max((window.__vtAt || 0) + 30000, Number(S.vtNext) || 0, (window.__rvAt || 0) + 30000, Number(S.rvNext) || 0) - Date.now()) / 1000), vb2 = vt.querySelector('#vtBtn');
     if (vb2 && vw() > 0) { const tk = () => { const w = vw(); if (w <= 0) { clearInterval(window.__vtI); vb2.disabled = false; vb2.textContent = T('vtGo'); return; } vb2.disabled = true; vb2.textContent = '⏳ 0:' + String(w).padStart(2, '0'); }; tk(); window.__vtI = setInterval(tk, 1000); } }
+  // 28 oct 2026 (13h23, Jeremy): "Ads Galaxy video" in the Videos sub-tab: +50 $BATON a video, 10 a day (shown once Ads Galaxy gave Baton its mini app id)
+  { const ax = $('#agxTask'), fr = LANG === 'fr';
+    if (ax) { clearInterval(window.__axI); ax.hidden = !(tg && tg.initData) || S.agxId == null;
+      if (!ax.hidden) {
+        const n = Number(S.agxDay) || 0, m = Number(S.agxMax) || 10, full = n >= m;
+        ax.innerHTML = '<div class="row"><div class="t"><b>📺 ' + (fr ? 'Vidéo Ads Galaxy' : 'Ads Galaxy video') + '</b><span>' + T('vtS', n, m) + '</span></div><span class="r">+' + fmt(S.agxReward || 50) + '</span>' + (full ? '<button class="sm done" disabled>' + T('vtTm') + '</button>' : '<button class="sm" id="axBtn">' + T('vtGo') + '</button>') + '</div>';
+        const b = ax.querySelector('#axBtn');
+        if (b) {
+          const aw = () => Math.ceil((Math.max((window.__rvAt || 0) + 30000, Number(S.rvNext) || 0) - Date.now()) / 1000);
+          const tk = () => { const w = aw(); if (w <= 0) { clearInterval(window.__axI); if (!b.dataset.busy) { b.disabled = false; b.textContent = T('vtGo'); } return; } b.disabled = true; b.textContent = '⏳ 0:' + String(w).padStart(2, '0'); };
+          if (aw() > 0) { tk(); window.__axI = setInterval(tk, 1000); }
+          b.onclick = async () => {
+            if (aw() > 0) return; hap(); b.disabled = true; b.dataset.busy = '1';
+            let r = null;
+            try {
+              if (!window.showAdsGalaxy) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://app.adsgalaxy.online/sdk.js?id=' + S.agxId; s.onload = ok; s.onerror = ko; document.head.appendChild(s); setTimeout(() => ko(new Error('timeout')), 6000); });
+              r = await window.showAdsGalaxy({ miniappId: Number(S.agxId) });
+            } catch (e) { r = null; }
+            if (r && r.reward_eligible) {
+              window.__rvAt = Date.now();
+              const x = await api('agx_vid', { rid: String(r.request_id || ('ax' + Date.now())) });
+              if (x && x.ok) { hap('ok'); toast(T('vtOk', fmt(x.reward || 50))); if (x.state) setState(x.state); return; }
+            }
+            b.removeAttribute('data-busy'); b.disabled = false; hap('err'); toast(T('vidNo'));
+          };
+        }
+      } } }
   $('#dotTasks').hidden = !S.tasks.some((t) => !t.done) && !window.__adt && !window.__vt;  // 22 oct 2026: an Adsgram task waiting also lights the dot
   $('#nFriends').textContent = fmt(S.friends);
   if (S.blvl_rates) {  // 22 oct 2026: baton level card
