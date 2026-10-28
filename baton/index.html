@@ -2034,6 +2034,7 @@ function nudge() {
       dbl: (n) => '🎬 Doubler : +' + n + ' $BATON', dblOk: (n) => '✅ Doublé : +' + n + ' $BATON', again: 'Rejouer', back: '‹ Jeux',
       pr: (w, d, l) => 'Victoire +' + w + ' · Nul +' + d + ' · Défaite +' + l, left: (n) => n + ' partie' + (n > 1 ? 's' : '') + ' payée' + (n > 1 ? 's' : '') + ' restante' + (n > 1 ? 's' : '') + ' aujourd\'hui',
       err: 'Erreur, réessaie', noVid: 'Pas de vidéo pour le moment',
+      mN: 'Meme Coin Tycoon', mD: 'Trade des memecoins, gagne des $BATON', mPr: 'Concours chaque semaine · jusqu\'à 100 000 $BATON', open: 'Ouvrir',
       scN: 'Grattage', scD: 'Gratte et trouve 3 montants identiques', scPr: 'Jusqu\'à 2 500 $BATON · 3 tickets gratuits par jour', scBuy: '🎟️ NOUVEAU TICKET', scV: '🎬 Regarde une vidéo : 1 ticket', scAll: 'Tout gratter', scHint: 'Gratte avec ton doigt', scLose: 'Pas de chance cette fois', scNone: 'Plus de tickets aujourd\'hui, reviens demain', scHere: 'GRATTE ICI',
       tkL: (n) => n + ' ticket' + (n > 1 ? 's' : '') + ' gratuit' + (n > 1 ? 's' : '') + ' restant' + (n > 1 ? 's' : ''), tkV: (n) => n + ' ticket' + (n > 1 ? 's' : '') + ' vidéo restant' + (n > 1 ? 's' : '') + ' aujourd\'hui',
       flN: 'Pile ou face', flD: 'Double ta mise ou perds-la', flPr: '1 chance sur 2 · 20 lancers par jour', fH: 'FACE', fT: 'PILE', bal: 'Ton solde', stk: 'Ta mise', pickT: 'Choisis ton côté', flWin: (n) => 'Gagné ! +' + n + ' $BATON', flLose: (n) => 'Perdu · -' + n + ' $BATON', flLeft: (n) => n + ' lancer' + (n > 1 ? 's' : '') + ' restant' + (n > 1 ? 's' : '') + ' aujourd\'hui', flFunds: 'Pas assez de $BATON pour cette mise', flNone: 'Plus de lancers aujourd\'hui, reviens demain',
@@ -2047,6 +2048,7 @@ function nudge() {
       dbl: (n) => '🎬 Double it: +' + n + ' $BATON', dblOk: (n) => '✅ Doubled: +' + n + ' $BATON', again: 'Play again', back: '‹ Games',
       pr: (w, d, l) => 'Win +' + w + ' · Draw +' + d + ' · Loss +' + l, left: (n) => n + ' paid game' + (n > 1 ? 's' : '') + ' left today',
       err: 'Error, try again', noVid: 'No video right now',
+      mN: 'Meme Coin Tycoon', mD: 'Trade memecoins, win $BATON', mPr: 'Weekly contests · up to 100,000 $BATON', open: 'Open',
       scN: 'Scratch card', scD: 'Scratch and find 3 matching amounts', scPr: 'Up to 2,500 $BATON · 3 free tickets a day', scBuy: '🎟️ NEW TICKET', scV: '🎬 Watch a video: 1 ticket', scAll: 'Scratch all', scHint: 'Scratch with your finger', scLose: 'No luck this time', scNone: 'No more tickets today, come back tomorrow', scHere: 'SCRATCH HERE',
       tkL: (n) => n + ' free ticket' + (n > 1 ? 's' : '') + ' left', tkV: (n) => n + ' video ticket' + (n > 1 ? 's' : '') + ' left today',
       flN: 'Heads or tails', flD: 'Double your stake or lose it', flPr: '50/50 · 20 flips a day', fH: 'HEADS', fT: 'TAILS', bal: 'Your balance', stk: 'Your stake', pickT: 'Pick your side', flWin: (n) => 'You win! +' + n + ' $BATON', flLose: (n) => 'You lose · -' + n + ' $BATON', flLeft: (n) => n + ' flip' + (n > 1 ? 's' : '') + ' left today', flFunds: 'Not enough $BATON for this stake', flNone: 'No more flips today, come back tomorrow',
@@ -2060,6 +2062,28 @@ function nudge() {
     // one baton, the same shape as the app icon; gold for the player, blue for the AI
     const bat = (c, cls) => '<svg class="' + (cls || '') + '" viewBox="0 0 24 24" aria-hidden="true"><rect x="9.6" y="1.8" width="4.8" height="20.4" rx="2.4" transform="rotate(28 12 12)" fill="' + c + '"/><rect x="10.6" y="3" width="1.4" height="17" rx=".7" transform="rotate(28 12 12)" fill="rgba(255,255,255,.45)"/></svg>';
     const GOLD = '#ffc531', BLUE = '#4da8ff';
+    // 28 oct 2026 (8h58, Jeremy): nicer pictures for the coin and the scratch ticket (drawn in SVG)
+    let svgN = 0;
+    function coinSvg(side) {
+      const id = 'cg' + (++svgN), h = side === 'h';
+      const st = h ? ['#fff6c8', '#ffc531', '#a86f00', '#7a4f00', '#fff2b0'] : ['#e6f4ff', '#4da8ff', '#16488c', '#0e3266', '#d6ecff'];
+      return '<svg viewBox="0 0 100 100" aria-hidden="true"><defs><radialGradient id="' + id + '" cx="35%" cy="28%" r="80%"><stop offset="0" stop-color="' + st[0] + '"/><stop offset=".45" stop-color="' + st[1] + '"/><stop offset="1" stop-color="' + st[2] + '"/></radialGradient></defs>'
+        + '<circle cx="50" cy="50" r="49" fill="' + st[3] + '"/><circle cx="50" cy="50" r="46" fill="url(#' + id + ')"/>'
+        + '<circle cx="50" cy="50" r="43" fill="none" stroke="' + st[4] + '" stroke-opacity=".55" stroke-width="3" stroke-dasharray="1.6 2.6"/>'
+        + '<circle cx="50" cy="50" r="37" fill="none" stroke="' + st[3] + '" stroke-opacity=".45" stroke-width="1.4"/>'
+        + (h ? '<g transform="rotate(28 50 47)"><rect x="45" y="25" width="10" height="44" rx="5" fill="' + st[3] + '" opacity=".85"/><rect x="47" y="28" width="2.6" height="36" rx="1.3" fill="#fff" opacity=".45"/></g>'
+          : '<text x="50" y="60" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="30" fill="' + st[3] + '">$B</text>')
+        + '<ellipse cx="36" cy="28" rx="16" ry="8" fill="#fff" opacity=".22" transform="rotate(-30 36 28)"/></svg>';
+    }
+    function ticketSvg() {
+      const id = 'tg' + (++svgN);
+      return '<svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="' + id + '" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe680"/><stop offset=".55" stop-color="#ffb21c"/><stop offset="1" stop-color="#ff8400"/></linearGradient><linearGradient id="' + id + 's" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef0f4"/><stop offset=".5" stop-color="#a3abb7"/><stop offset="1" stop-color="#dde1e6"/></linearGradient></defs>'
+        + '<path d="M10 8h44a4 4 0 0 1 4 4v14a6 6 0 0 0 0 12v14a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V38a6 6 0 0 0 0-12V12a4 4 0 0 1 4-4z" fill="url(#' + id + ')"/>'
+        + '<rect x="14" y="15" width="36" height="34" rx="5" fill="url(#' + id + 's)"/>'
+        + '<path d="M17 40c6-8 10 2 16-7s10 3 14-6" fill="none" stroke="#fff3c4" stroke-width="6" stroke-linecap="round"/>'
+        + '<text x="32" y="38" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="11" fill="#a35d00">$B</text>'
+        + '<path d="M52 8l1.4 3.2L57 12l-3.2 1.4L52 17l-1.4-3.6L47 12l3.6-.8z" fill="#fff"/></svg>';
+    }
     const st = document.createElement('style');
     st.textContent = 'nav.tabs.g5{grid-template-columns:repeat(5,minmax(0,1fr))!important}#gmTab[aria-current="page"]{color:var(--baton,#ffc531)}'
       + '#gmSh{position:fixed;inset:0;z-index:61;background:rgba(2,6,18,.7);display:flex;align-items:flex-end;justify-content:center;animation:gmF .18s ease}'
@@ -2081,12 +2105,12 @@ function nudge() {
       + '#gmSh .bt{display:block;width:100%;margin-top:10px;padding:13px;border-radius:15px;border:0;font-weight:900;font-size:15px}#gmSh .gold{background:linear-gradient(180deg,#ffd75a,#ffb300);color:#1a1300;box-shadow:0 6px 18px -6px rgba(255,190,40,.7)}#gmSh .gh{background:rgba(255,255,255,.1);color:#fff}'
       + '#gmSh .ft{text-align:center;font-size:12px;opacity:.6;margin-top:12px}'
       /* 28 oct 2026 (8h41, Jeremy): scratch card and heads or tails */
-      + '#gmSh .tkt{position:relative;box-sizing:border-box;border-radius:20px;padding:14px;background:linear-gradient(145deg,#ffd75a,#ff9f1c);box-shadow:0 10px 30px -10px rgba(255,170,30,.6)}#gmSh .tkt h4{margin:0 0 10px;text-align:center;color:#2a1600;font-size:17px;font-weight:900;letter-spacing:.08em}'
-      + '#gmSh .sg{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;border-radius:14px;background:#fff7e0;padding:8px}#gmSh .sc{aspect-ratio:1.15;border-radius:10px;background:#fff;display:grid;place-items:center;align-content:center;color:#2a1600;font-weight:900;font-size:22px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}'
-      + '#gmSh .sc small{display:block;font-size:10px;opacity:.6;font-weight:800}#gmSh .sc.hit{background:#2a1600;color:#ffd43b;box-shadow:0 0 0 3px #ffd43b,0 0 18px rgba(255,212,59,.8);animation:gmW .5s cubic-bezier(.2,1.6,.4,1)}#gmSh canvas.scv{position:absolute;inset:0;width:100%;height:100%;border-radius:14px;touch-action:none;cursor:grab}'
-      + '#gmSh .coin{width:min(170px,44vw);aspect-ratio:1;margin:8px auto 4px;position:relative;transform-style:preserve-3d;transition:transform 1.9s cubic-bezier(.2,.75,.25,1)}#gmSh .cf{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:grid;place-items:center;align-content:center;font-weight:900;font-size:20px;letter-spacing:.1em}'
-      + '#gmSh .cf.h{background:radial-gradient(circle at 35% 30%,#fff3b0,#ffc531 45%,#c98d00);color:#3a2400;box-shadow:inset 0 0 0 7px rgba(255,255,255,.35),0 0 30px rgba(255,197,49,.5)}#gmSh .cf.t{transform:rotateY(180deg);background:radial-gradient(circle at 35% 30%,#d6ecff,#4da8ff 45%,#1d5fb0);color:#06203f;box-shadow:inset 0 0 0 7px rgba(255,255,255,.35),0 0 30px rgba(77,168,255,.5)}#gmSh .cf svg{width:46%;height:46%}#gmSh .cf b{font-size:40px;line-height:1}'
-      + '#gmSh.full .gp .coin{width:min(170px,44vw)}#gmSh .chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px 0 2px}#gmSh .chip{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;border-radius:99px;padding:8px 14px;font-weight:900;font-size:14px}#gmSh .chip.on{background:#ffc531;color:#1a1300;border-color:#ffc531}#gmSh .chip:disabled{opacity:.35}'
+      + '#gmSh .tkt{position:relative;box-sizing:border-box;border-radius:18px;padding:14px 18px 16px;background:repeating-linear-gradient(135deg,rgba(255,255,255,.07) 0 10px,transparent 10px 20px),linear-gradient(145deg,#ffe27a,#ffb21c 55%,#ff8a00);-webkit-mask:radial-gradient(circle 11px at 0 50%,transparent 97%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% 50%,transparent 97%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 11px at 0 50%,transparent 97%,#000) left/51% 100% no-repeat,radial-gradient(circle 11px at 100% 50%,transparent 97%,#000) right/51% 100% no-repeat}'
+      + '#gmSh .tkh{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;color:#2a1600}#gmSh .tkh b{font-size:19px;font-weight:900;letter-spacing:.06em}#gmSh .tkh small{display:block;font-size:11px;font-weight:800;opacity:.7;letter-spacing:0}#gmSh .tkh span{flex:0 0 auto;background:#2a1600;color:#ffd43b;border-radius:99px;padding:5px 10px;font-size:11px;font-weight:900;letter-spacing:.04em}'
+      + '#gmSh .sg{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;border-radius:14px;background:#fff7e0;padding:8px}#gmSh .sc{aspect-ratio:1.1;border-radius:10px;background:linear-gradient(180deg,#fff,#fff4d6);display:grid;place-items:center;align-content:center;gap:1px;color:#2a1600;font-weight:900;font-size:21px;box-shadow:inset 0 0 0 1px rgba(120,70,0,.15)}#gmSh .sc svg{width:20px;height:20px}#gmSh .sc.cov{background:linear-gradient(135deg,#eef0f4,#a3abb7 55%,#dde1e6);color:rgba(60,66,78,.45);font-size:18px}'
+      + '#gmSh .sc small{display:block;font-size:10px;opacity:.6;font-weight:800}#gmSh .sc.hit{background:radial-gradient(circle at 50% 35%,#4a2a00,#2a1600);color:#ffd43b;box-shadow:0 0 0 3px #ffd43b,0 0 18px rgba(255,212,59,.8);animation:gmW .5s cubic-bezier(.2,1.6,.4,1)}#gmSh canvas.scv{position:absolute;inset:0;width:100%;height:100%;border-radius:14px;touch-action:none;cursor:grab}'
+      + '#gmSh .cw{position:relative;width:min(180px,46vw);margin:14px auto 0;perspective:700px}#gmSh .cw.fly{animation:gmJ 1.9s cubic-bezier(.3,.6,.4,1)}@keyframes gmJ{0%{transform:translateY(0)}45%{transform:translateY(-80px)}100%{transform:translateY(0)}}#gmSh .csh{width:min(120px,30vw);height:12px;margin:10px auto 0;border-radius:50%;background:rgba(0,0,0,.5);filter:blur(5px)}#gmSh .cw.fly+.csh{animation:gmS 1.9s cubic-bezier(.3,.6,.4,1)}@keyframes gmS{45%{transform:scale(.45);opacity:.4}}#gmSh .coin{width:100%;aspect-ratio:1;position:relative;transform-style:preserve-3d;transition:transform 1.9s cubic-bezier(.2,.75,.25,1)}#gmSh .cf{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;-webkit-backface-visibility:hidden}#gmSh .cf svg{width:100%;height:100%;display:block;filter:drop-shadow(0 0 22px var(--cg))}#gmSh .cf.h{--cg:rgba(255,197,49,.55)}#gmSh .cf.t{--cg:rgba(77,168,255,.55);transform:rotateY(180deg)}'
+      + '#gmSh.full .gp .cw{width:min(180px,46vw)}#gmSh.full .gp .csh{width:min(120px,30vw)}#gmSh .mc{display:inline-block;width:22px;height:22px;vertical-align:-6px;margin-right:8px}#gmSh .mc svg{width:100%;height:100%}#gmSh .chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px 0 2px}#gmSh .chip{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;border-radius:99px;padding:8px 14px;font-weight:900;font-size:14px}#gmSh .chip.on{background:#ffc531;color:#1a1300;border-color:#ffc531}#gmSh .chip:disabled{opacity:.35}'
       + '#gmSh .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}#gmSh .two .bt{margin-top:10px}#gmSh .blu{background:linear-gradient(180deg,#7cc4ff,#2f8dff);color:#04172f;box-shadow:0 6px 18px -6px rgba(47,141,255,.7)}#gmSh .lbl{text-align:center;font-size:12px;opacity:.65;text-transform:uppercase;letter-spacing:.08em;margin-top:10px}#gmSh .balx{text-align:center;font-weight:900;font-size:15px;color:#ffd43b}'
       /* 28 oct 2026 (8h26, Jeremy): Lucky Spin wheel */
       + '#gmSh .wh{position:relative;width:min(300px,76vw);aspect-ratio:1;margin:4px auto 2px;max-width:100%}#gmSh .wl{width:100%;height:100%;display:block;transition:transform 4.4s cubic-bezier(.12,.8,.16,1);filter:drop-shadow(0 0 24px rgba(77,168,255,.35))}'
@@ -2104,7 +2128,7 @@ function nudge() {
     let sh = null, box = null, G = null, busy = false, prev = '.........', intro = false;
     const LINES = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
     const winLine = (b) => { for (const l of LINES) { if (b[l[0]] !== '.' && b[l[0]] === b[l[1]] && b[l[1]] === b[l[2]]) return l; } return null; };
-    function close() { if (sh) sh.remove(); sh = null; box = null; const t = document.getElementById('gmTab'); if (t) t.removeAttribute('aria-current'); }
+    function close() { try { tw.enableVerticalSwipes(); } catch (e) {} if (sh) sh.remove(); sh = null; box = null; const t = document.getElementById('gmTab'); if (t) t.removeAttribute('aria-current'); }
     function openSheet() {
       close(); hap();
       sh = document.createElement('div'); sh.id = 'gmSh'; box = document.createElement('div'); box.className = 'gp'; sh.appendChild(box); document.body.appendChild(sh);
@@ -2116,8 +2140,9 @@ function nudge() {
       box.innerHTML = '<div class="hd"><div><h3>' + X.h + '</h3><small>' + X.sub + '</small></div><button class="x" data-k="close">✕</button></div>'
         + '<button class="gcard" data-g="ttt"><div class="ic">' + ic + '</div><div class="tx"><b>' + X.tN + '</b><div>' + X.tD + '</div><em>' + X.pr(1000, 500, 200) + '</em></div><span class="go">' + X.play + '</span></button>'
         + '<button class="gcard" data-g="spin"><div class="ic sw">' + wheel([100, 500, 200, 1000, 100, 300, 5000, 200], true) + '</div><div class="tx"><b>' + X.sN + '</b><div>' + X.sD + '</div><em>' + X.sPr + '</em></div><span class="go">' + X.play + '</span></button>'
-        + '<button class="gcard" data-g="scratch"><div class="ic sw" style="display:grid;place-items:center;font-size:34px;background:linear-gradient(145deg,#ffd75a,#ff9f1c)">🎟️</div><div class="tx"><b>' + X.scN + '</b><div>' + X.scD + '</div><em>' + X.scPr + '</em></div><span class="go">' + X.play + '</span></button>'
-        + '<button class="gcard" data-g="flip"><div class="ic sw" style="display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3b0,#ffc531 45%,#c98d00);padding:12px">' + bat('#3a2400') + '</div><div class="tx"><b>' + X.flN + '</b><div>' + X.flD + '</div><em>' + X.flPr + '</em></div><span class="go">' + X.play + '</span></button>'
+        + '<button class="gcard" data-g="scratch"><div class="ic sw">' + ticketSvg() + '</div><div class="tx"><b>' + X.scN + '</b><div>' + X.scD + '</div><em>' + X.scPr + '</em></div><span class="go">' + X.play + '</span></button>'
+        + '<button class="gcard" data-g="flip"><div class="ic sw">' + coinSvg('h') + '</div><div class="tx"><b>' + X.flN + '</b><div>' + X.flD + '</div><em>' + X.flPr + '</em></div><span class="go">' + X.play + '</span></button>'
+        + '<button class="gcard" data-g="mct"><div class="ic sw"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0d2a1c"/><path d="M10 46 L22 34 L30 40 L44 22 L54 28" fill="none" stroke="#3ee6a0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M46 18 L56 18 L56 28" fill="none" stroke="#3ee6a0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="18" r="8" fill="#ffc531"/><text x="18" y="22" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="10" fill="#5a3a00">$</text></svg></div><div class="tx"><b>' + X.mN + '</b><div>' + X.mD + '</div><em>' + X.mPr + '</em></div><span class="go">' + X.open + '</span></button>'
         + '<div class="soon">' + X.soon + '</div>';
     }
     function draw() {
@@ -2207,20 +2232,21 @@ function nudge() {
       hap(r.prize >= 1000 ? 'success' : null); drawSpin();
     }
     // 28 oct 2026 (8h41, Jeremy): scratch card. The server draws the ticket (bt_scratch_api) and credits it; scratching only reveals it.
-    let SCS = null, TK = null;
+    let SCS = null, TK = null, scBusy = false;
+    const tkHead = () => '<div class="tkh"><div><b>' + X.scN.toUpperCase() + '</b><small>' + X.scD + '</small></div><span>JACKPOT ' + nf((SCS && SCS.top) || 2500) + '</span></div>';
     function drawScratch() {
       if (!box || !SCS) return;
       const can = SCS.free_left > 0, canV = !can && SCS.vid_left > 0;
       let h = '<div class="hd"><button class="bk" data-k="list">' + X.back + '</button><h3>' + X.scN + '</h3><button class="x" data-k="close">✕</button></div>';
       if (TK) {
-        h += '<div class="tkt"><h4>🎟️ ' + X.scN.toUpperCase() + '</h4><div class="sg">' + TK.grid.map((v) => '<div class="sc' + (TK.revealed && TK.prize > 0 && Number(v) === Number(TK.prize) ? ' hit' : '') + '">' + nf(v) + '<small>$BATON</small></div>').join('')
+        h += '<div class="tkt">' + tkHead() + '<div class="sg">' + TK.grid.map((v) => { const hit = TK.revealed && TK.prize > 0 && Number(v) === Number(TK.prize); return '<div class="sc' + (hit ? ' hit' : '') + '">' + bat(hit ? '#ffd43b' : '#c98d00') + nf(v) + '<small>$BATON</small></div>'; }).join('')
           + (TK.revealed ? '' : '<canvas class="scv"></canvas>') + '</div></div>';
         if (!TK.revealed) h += '<div class="ft" style="opacity:.8">' + X.scHint + '</div><button class="bt gh" data-k="scall">' + X.scAll + '</button>';
         else h += (TK.prize > 0 ? '<div class="ms win">' + X.youWon + '<span class="amt">+' + nf(TK.doubled ? TK.prize * 2 : TK.prize) + ' $BATON</span></div>' : '<div class="ms lo">' + X.scLose + '</div>')
           + (TK.prize > 0 && !TK.doubled ? '<button class="bt gold" data-k="scdbl">' + X.dbl(nf(TK.prize)) + '</button>' : '')
           + (TK.prize > 0 && TK.doubled ? '<div class="ft" style="opacity:.9;color:#7dff6b">' + X.dblOk(nf(TK.prize)) + '</div>' : '');
       } else {
-        h += '<div class="tkt"><h4>🎟️ ' + X.scN.toUpperCase() + '</h4><div class="sg">' + [0, 1, 2, 3, 4, 5].map(() => '<div class="sc" style="background:linear-gradient(135deg,#d9dde3,#8e96a3);color:#5b6370">?</div>').join('') + '</div></div><div class="ms">' + X.scD + '</div>';
+        h += '<div class="tkt">' + tkHead() + '<div class="sg">' + [0, 1, 2, 3, 4, 5].map(() => '<div class="sc cov">$B</div>').join('') + '</div></div>';
       }
       if (!TK || TK.revealed) {
         const gold = !(TK && TK.prize > 0 && !TK.doubled);
@@ -2236,8 +2262,14 @@ function nudge() {
       cv.width = Math.max(1, Math.round(r.width * d)); cv.height = Math.max(1, Math.round(r.height * d));
       const gr = ctx.createLinearGradient(0, 0, cv.width, cv.height); gr.addColorStop(0, '#e3e6eb'); gr.addColorStop(0.5, '#9aa2ae'); gr.addColorStop(1, '#d6dae0');
       ctx.fillStyle = gr; ctx.fillRect(0, 0, cv.width, cv.height);
-      ctx.fillStyle = 'rgba(60,66,78,.55)'; ctx.font = '900 ' + Math.round(15 * d) + 'px system-ui,sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      for (let y = 0; y < 3; y++) for (let x = 0; x < 2; x++) ctx.fillText(X.scHere, cv.width * (x * 0.5 + 0.25), cv.height * (y * 0.33 + 0.17));
+      const shn = ctx.createLinearGradient(0, 0, cv.width, 0); shn.addColorStop(0.3, 'rgba(255,255,255,0)'); shn.addColorStop(0.45, 'rgba(255,255,255,.55)'); shn.addColorStop(0.6, 'rgba(255,255,255,0)');
+      ctx.fillStyle = shn; ctx.fillRect(0, 0, cv.width, cv.height);
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = 'rgba(70,78,92,.22)'; ctx.font = '900 ' + Math.round(13 * d) + 'px system-ui,sans-serif';
+      for (let y = 0, row = 0; y < cv.height + 40 * d; y += 34 * d, row++) for (let x = (row % 2) * 26 * d; x < cv.width + 40 * d; x += 52 * d) ctx.fillText('$B', x, y);
+      for (let i = 0; i < 22; i++) { ctx.fillStyle = 'rgba(255,255,255,' + (0.4 + Math.random() * 0.5) + ')'; ctx.beginPath(); ctx.arc(Math.random() * cv.width, Math.random() * cv.height, (0.8 + Math.random() * 1.6) * d, 0, Math.PI * 2); ctx.fill(); }
+      const pw = Math.min(cv.width * 0.7, 210 * d), ph = 40 * d, px = (cv.width - pw) / 2, py = (cv.height - ph) / 2;
+      ctx.fillStyle = 'rgba(30,36,48,.82)'; ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(px, py, pw, ph, ph / 2); else ctx.rect(px, py, pw, ph); ctx.fill();
+      ctx.fillStyle = '#ffd43b'; ctx.font = '900 ' + Math.round(15 * d) + 'px system-ui,sans-serif'; ctx.fillText('👆 ' + X.scHere, cv.width / 2, cv.height / 2 + d);
       ctx.globalCompositeOperation = 'destination-out';
       let down = false, n = 0, done = false;
       const at = (e) => { const b = cv.getBoundingClientRect(); return [(e.clientX - b.left) * d, (e.clientY - b.top) * d]; };
@@ -2251,18 +2283,22 @@ function nudge() {
       cv.addEventListener('pointermove', (e) => { if (down) rub(e); });
       cv.addEventListener('pointerup', () => { down = false; check(); });
       cv.addEventListener('pointercancel', () => { down = false; });
+      // 28 oct 2026 (8h55): touch too (Telegram on phones), without letting the page or the mini app scroll
+      const tt = (e) => { e.preventDefault(); for (const t of e.changedTouches) rub(t); };
+      cv.addEventListener('touchstart', tt, { passive: false }); cv.addEventListener('touchmove', tt, { passive: false });
+      cv.addEventListener('touchend', (e) => { e.preventDefault(); check(); }, { passive: false });
     }
     function reveal() { if (!TK || TK.revealed) return; TK.revealed = true; hap(TK.prize >= 1000 ? 'success' : TK.prize > 0 ? 'warning' : 'error'); drawScratch(); }
     async function scratchView() {
-      full(true); TK = null;
+      full(true); TK = null; try { tw.disableVerticalSwipes(); } catch (e) {}
       box.innerHTML = '<div style="text-align:center;padding:60px 0;font-size:28px">⏳</div>';
       const r = await call('scratch_state'); if (!r || !r.ok) { full(false); list(); return; }
       SCS = r; drawScratch();
     }
     async function buyTicket(vid) {
-      if (busy) return; busy = true;
-      const r = await call('scratch_go', { vid: !!vid }); busy = false;
-      if (!r || !r.ok) { if (r && r.free_left !== undefined) SCS = r; drawScratch(); try { tw.showAlert(X.err); } catch (e) {} return; }
+      if (scBusy) return; scBusy = true;  // 28 oct 2026 (8h55): its own lock, and the reason shown when it fails
+      const r = await call('scratch_go', { vid: !!vid }); scBusy = false;
+      if (!r || !r.ok) { if (r && r.free_left !== undefined) SCS = r; drawScratch(); try { tw.showAlert(X.err + ' (' + ((r && r.error) || 'net') + ')'); } catch (e) {} return; }
       hap(); SCS = r; TK = { id: r.id, grid: r.grid, prize: Number(r.prize), doubled: false, revealed: false }; drawScratch();
     }
     // 28 oct 2026 (8h41, Jeremy): heads or tails with the player's own $BATON (bt_flip_api, fair 50/50 drawn on the server, fixed stakes)
@@ -2273,10 +2309,10 @@ function nudge() {
       if (!stakes.includes(FST)) FST = stakes[0];
       box.innerHTML = '<div class="hd"><button class="bk" data-k="list">' + X.back + '</button><h3>' + X.flN + '</h3><button class="x" data-k="close">✕</button></div>'
         + '<div class="lbl">' + X.bal + '</div><div class="balx">' + nf(FS.pts) + ' $BATON</div>'
-        + '<div class="coin" style="transform:rotateY(' + coinRot + 'deg)"><div class="cf h">' + bat('#3a2400') + '<span>' + X.fH + '</span></div><div class="cf t"><b>$B</b><span>' + X.fT + '</span></div></div>'
+        + '<div class="cw"><div class="coin" style="transform:rotateY(' + coinRot + 'deg)"><div class="cf h">' + coinSvg('h') + '</div><div class="cf t">' + coinSvg('t') + '</div></div></div><div class="csh"></div>'
         + (flipping ? '<div class="ms">...</div>' : FR ? '<div class="ms win' + (FR.won ? '' : ' lo') + '">' + (FR.won ? X.flWin(nf(FR.stake)) : X.flLose(nf(FR.stake))) + '</div>' : '<div class="ms">' + X.flD + '</div>')
         + (FS.left > 0 ? '<div class="lbl">' + X.stk + '</div><div class="chips">' + stakes.map((s) => '<button class="chip' + (s === FST ? ' on' : '') + '" data-st="' + s + '"' + (s > FS.pts || flipping ? ' disabled' : '') + '>' + nf(s) + '</button>').join('') + '</div>'
-          + '<div class="lbl">' + X.pickT + '</div><div class="two"><button class="bt gold" data-f="h"' + (flipping ? ' disabled' : '') + '>' + X.fH + '</button><button class="bt blu" data-f="t"' + (flipping ? ' disabled' : '') + '>' + X.fT + '</button></div>'
+          + '<div class="lbl">' + X.pickT + '</div><div class="two"><button class="bt gold" data-f="h"' + (flipping ? ' disabled' : '') + '><span class="mc">' + coinSvg('h') + '</span>' + X.fH + '</button><button class="bt blu" data-f="t"' + (flipping ? ' disabled' : '') + '><span class="mc">' + coinSvg('t') + '</span>' + X.fT + '</button></div>'
           : '<div class="ms" style="font-size:14px;opacity:.7">' + X.flNone + '</div>')
         + '<div class="ft">' + X.flLeft(FS.left) + '</div>';
     }
@@ -2293,7 +2329,7 @@ function nudge() {
       const r = await call('flip_go', { stake: FST, pick });
       if (!r || !r.ok) { flipping = false; if (r && r.pts !== undefined) FS.pts = r.pts; drawFlip(); try { tw.showAlert(r && r.error === 'funds' ? X.flFunds : X.err); } catch (e) {} return; }
       const want = r.result === 'h' ? 0 : 180, target = coinRot + 1800 + ((want - (coinRot % 360)) + 360) % 360;
-      const c = box.querySelector('.coin'); requestAnimationFrame(() => { if (c) c.style.transform = 'rotateY(' + target + 'deg)'; });
+      const c = box.querySelector('.coin'), cw = box.querySelector('.cw'); if (cw) cw.classList.add('fly'); requestAnimationFrame(() => { if (c) c.style.transform = 'rotateY(' + target + 'deg)'; });
       await new Promise((ok) => setTimeout(ok, 2000));
       coinRot = target; flipping = false; FR = r; FS = Object.assign(FS, { pts: r.pts, left: r.left, stakes: r.stakes || FS.stakes });
       hap(r.won ? 'success' : 'error'); drawFlip();
@@ -2310,6 +2346,7 @@ function nudge() {
       if (g && g.dataset.g === 'ttt') { hap(); ttt(); return; }
       if (g && g.dataset.g === 'spin') { hap(); spinView(); return; }
       if (g && g.dataset.g === 'scratch') { hap(); scratchView(); return; }
+      if (g && g.dataset.g === 'mct') { hap(); const u = 'https://t.me/Memecointycoonbot?startapp=src_btjeux'; try { tw.openTelegramLink(u); } catch (x) { location.href = u; } return; }  // 28 oct 2026 (9h06, Jeremy): Meme Coin Tycoon in the Games list
       if (g && g.dataset.g === 'flip') { hap(); flipView(); return; }
       const stb = e.target.closest('[data-st]'), fb = e.target.closest('[data-f]');
       if (stb && !stb.disabled) { hap(); FST = Number(stb.dataset.st); drawFlip(); return; }
