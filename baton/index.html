@@ -1444,7 +1444,10 @@ function render() {
       else right = '<button class="sm" data-task="' + t.id + '" data-url="' + esc(t.url || '') + '">' + (t.kind === 'sub' && opened[t.id] ? T('claim') : T('go')) + '</button>';
       return '<div class="row' + (t.done ? ' on' : '') + '"><div class="t"><b>' + esc(t.title) + '</b><span>' + line + '</span></div>' + right + '</div>';
     };
-    sp.innerHTML = sec('⭐ ' + (fr ? 'Tâches sponsorisées' : 'Sponsored tasks'), srt(spl), prow); }  // (17h09) the channel stays visible, with its Active badge  // 22 oct 2026 (17h08, Jeremy): the channels to join come first, above the sponsored task
+    // 28 oct 2026 (11h17, Jeremy): anyone can buy subscribers or visits from here: it opens @Batoncheckbot (Stars, fully automatic)
+    const buy = '<div class="row"><div class="t"><b>📣 ' + (fr ? 'Booste ta chaîne ou ton appli' : 'Boost your channel or app') + '</b><span>' + (fr ? 'Des abonnés réels ou des visites, payés en ⭐ Stars' : 'Real subscribers or visits, paid in ⭐ Stars') + '</span></div><button class="sm" id="spBuy">' + (fr ? 'Acheter' : 'Buy') + '</button></div>';
+    sp.innerHTML = '<div class="sec">⭐ ' + (fr ? 'Tâches sponsorisées' : 'Sponsored tasks') + '</div>' + srt(spl).map(prow).join('') + buy;
+    const bb = sp.querySelector('#spBuy'); if (bb) bb.onclick = (e) => { e.stopPropagation(); hap(); try { tg.openTelegramLink('https://t.me/Batoncheckbot?start=buy'); } catch (x) { openLink('https://t.me/Batoncheckbot?start=buy'); } }; }  // (17h09) the channel stays visible, with its Active badge  // 22 oct 2026 (17h08, Jeremy): the channels to join come first, above the sponsored task
   // 22 oct 2026 (17h11, Jeremy): the tasks already done sit at the bottom in a closed list you can open, with what they earned
   $('#tasks').innerHTML = secs.map((z) => sec(z[0], z[1], z[2])).join('');  // 22 oct 2026 (19h24, Jeremy): done tasks just disappear
   // 23 oct 2026 (00h12, Jeremy): the total earned with the tasks sits at the top of the tab
