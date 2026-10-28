@@ -2745,13 +2745,29 @@ function nudge() {
         if (DD && DD.status === 'play') { try { tw.showConfirm(DX.quitQ, (ok) => { if (ok) go(); }); } catch (x) { go(); } } else go();
         return true;
       }
+      // 28 oct 2026 (22h26, Jeremy): an interstitial when a rematch starts (asked or accepted) in the online tic-tac-toe:
+      // 3 minutes at least between two, never for no-ads players; about 1 out of 5 on Monetag, Adsgram (int-55461) otherwise or if Monetag fails
+      const rmInt = () => { try {
+        if (typeof S !== 'undefined' && S && S.noads) return;
+        let last = 0; try { last = Number(localStorage.getItem('bt_int_rm') || 0); } catch (e) {}
+        if (Date.now() - last < 180000) return;
+        try { localStorage.setItem('bt_int_rm', String(Date.now())); } catch (e) {}
+        const z = (typeof S !== 'undefined' && S && S.mtgZone) || 12140447, fn = 'show_' + z;
+        const ag = () => { const go = () => { try { window.Adsgram.init({ blockId: 'int-55461' }).show().catch(() => {}); } catch (e) {} }; if (window.Adsgram) return go(); const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = go; document.head.appendChild(s); };
+        if (Math.random() < 0.2) {
+          const ms = () => { try { const r = window[fn]({ type: 'inApp', inAppSettings: { frequency: 1, capping: 1, interval: 30, timeout: 0, everyPage: false } }); if (r && r.catch) r.catch(() => {}); } catch (e) { ag(); } };
+          if (window[fn]) return ms();
+          const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(z)); s.setAttribute('data-sdk', fn); s.onload = () => { if (window[fn]) ms(); else ag(); }; s.onerror = () => ag(); document.head.appendChild(s); return;
+        }
+        ag();
+      } catch (e) {} };
       if (kk === 'drm' && DD) {
         hap(); k.disabled = true;
         const r = await call('duel_new', { stake: DD.stake, rematch: DD.code }); k.disabled = false;
         if (!r || !r.ok) { const er = r && r.error; try { tw.showAlert(er === 'funds' ? DX.funds(nf(DD.stake), nf(DD.pts)) : er === 'too_many' ? DX.much : X.err); } catch (x) {} return true; }
-        duelView(r.code, false); return true;
+        duelView(r.code, false); rmInt(); return true;
       }
-      if (kk === 'drmgo' && DD && DD.rematch) { hap(); duelView(DD.rematch, false); return true; }
+      if (kk === 'drmgo' && DD && DD.rematch) { hap(); duelView(DD.rematch, false); rmInt(); return true; }
       return false;
     }
     // 28 oct 2026 (11h33, Jeremy): the 30 s between two videos show as a countdown right on the video buttons of the games
