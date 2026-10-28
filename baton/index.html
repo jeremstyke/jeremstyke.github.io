@@ -1855,7 +1855,7 @@ function nudge() {
   // 21 oct 2026: ask once to let @PassTheBatonBot send messages (players who came by a link never pressed Start)
   try { if (tg && tg.requestWriteAccess && !LS.get('bt_wa')) setTimeout(() => { try { tg.requestWriteAccess((ok) => LS.set('bt_wa', ok ? '1' : '0')); } catch (e) {} }, 2500); } catch (e) {}
   const firstOpen = !LS.get('bt_tuto') && !LS.get('bt_open1'); LS.set('bt_open1', '1');  // 22 oct 2026: the very first visit (tutorial)
-  if ((!LS.get('bt_tuto') && (S.pts || 0) < 1000) || ((tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '') === 'tuto') { LS.set('bt_tuto', '1'); tutorial(); }
+  if ((!LS.get('bt_tuto') && (S.pts || 0) < 1000 && !/^d[0-9a-f]{8}$/.test((tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '')) || ((tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '') === 'tuto') { LS.set('bt_tuto', '1'); tutorial(); }
   // 22 oct 2026 (Jeremy, 15h52): Adsgram interstitial (block int-55461) when the game opens; never on the very first visit,
   // never for the no-ads players (S.noads, later), and once every 24 hours at most (Jeremy, 15h54)
   (function inter() {
@@ -1887,6 +1887,7 @@ function nudge() {
         box.innerHTML = '<div class="adt"><div class="adh">' + esc(T('adH')) + '</div><div class="adw">⏳ ' + (fr ? 'Prochaine tâche sponsorisée dans' : 'Next sponsored task in') + ' <b class="adc"></b></div></div>';
         box.hidden = false;
         const c = box.querySelector('.adc');
+        if (until - Date.now() > 3600000) { box.querySelector('.adw').textContent = fr ? '✅ Tes 10 tâches sponsorisées du jour sont faites, reviens demain' : '✅ Your 10 sponsored tasks of the day are done, come back tomorrow'; return; }  // 28 oct 2026: 10 a day
         const tick = () => { const s = Math.max(0, Math.ceil((until - Date.now()) / 1000)); if (c) c.textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); if (s <= 0) { clearInterval(window.__adtCd); build(); } };
         tick(); window.__adtCd = setInterval(tick, 1000);
       }
@@ -1905,7 +1906,7 @@ function nudge() {
         ['onBannerNotFound', 'onError', 'onTooLongSession'].forEach((ev) => tk.addEventListener(ev, () => { gone(); clearTimeout(window.__adtR); window.__adtR = setTimeout(build, 30000); }));  // hidden, asked again every 30 s
         const gift = () => {
           if (Date.now() - last < 3000) return; last = Date.now(); hap('ok'); toast(T('adOk')); [3000, 10000].forEach((ms) => setTimeout(refresh, ms));
-          try { localStorage.setItem('bt_adt_pause', String(Date.now() + 300000)); } catch (e) {}  // 28 oct 2026 (9h26, Jeremy): one task every 5 minutes, then a countdown (was: the next task right away)
+          try { localStorage.setItem('bt_adt_pause', String(Date.now() + 30000)); } catch (e) {}  // 28 oct 2026 (10h16, Jeremy): one task every 30 seconds, 10 a day (was 5 minutes), then a countdown (was: the next task right away)
           setTimeout(build, 2500);  // let the widget show its "done" state, then load the next task
         };
         tk.addEventListener('reward', gift); tk.addEventListener('onReward', gift);
@@ -1992,7 +1993,7 @@ function nudge() {
     const WD = /^fr/.test(lc) ? { mct_task: 'Mission partenaire', mct_ref: 'Parrainage d\'un ami', mct_ref_prize: 'Concours meilleur parrain', mct_week_prize: 'Concours meilleurs joueurs', mct_bourse_prize: 'Concours Bourse', other: 'Autre' }
       : { mct_task: 'Partner mission', mct_ref: 'Friend referral', mct_ref_prize: 'Best sponsor contest', mct_week_prize: 'Best players contest', mct_bourse_prize: 'Stock market contest', other: 'Other' };
     // 28 oct 2026 (8h02, Jeremy): and which game (tic-tac-toe, Tap the Diamond, Rig Rush)
-    const GD = { ttt: /^fr/.test(lc) ? 'Morpion' : 'Tic-tac-toe', td: 'Tap the Diamond', rr: 'Rig Rush', rig: 'Rig Rush', spin: 'Lucky Spin', scratch: /^fr/.test(lc) ? 'Grattage' : 'Scratch card', flip: /^fr/.test(lc) ? 'Pile ou face' : 'Heads or tails' };
+    const GD = { ttt: /^fr/.test(lc) ? 'Morpion' : 'Tic-tac-toe', td: 'Tap the Diamond', rr: 'Rig Rush', rig: 'Rig Rush', spin: 'Lucky Spin', scratch: /^fr/.test(lc) ? 'Grattage' : 'Scratch card', flip: /^fr/.test(lc) ? 'Pile ou face' : 'Heads or tails', duel: /^fr/.test(lc) ? 'Défi morpion' : 'Tic-tac-toe challenge' };
     const WK = (k) => { k = String(k || ''); if (/^mct/.test(k)) return WD[k] || WD.other; const p = k.split('_')[0]; return GD[p] || ''; };
     const st = document.createElement('style');
     st.textContent = '#gnBtn{display:block;margin:10px auto 0;padding:7px 14px;border-radius:99px;border:1px solid rgba(255,212,59,.45);background:rgba(255,212,59,.1);color:#ffd43b;font-weight:800;font-size:13px;cursor:pointer}'
@@ -2136,6 +2137,11 @@ function nudge() {
       + '#gmSh .pt{position:absolute;left:50%;top:-8px;transform:translateX(-50%);width:0;height:0;border-left:15px solid transparent;border-right:15px solid transparent;border-top:28px solid #fff;z-index:2;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6))}'
       + '#gmSh .hub{position:absolute;left:50%;top:50%;width:22%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#1d3a80,#0a1734);box-shadow:0 0 0 4px #ffc531,0 0 20px rgba(255,197,49,.65);display:grid;place-items:center;padding:4%;box-sizing:border-box}#gmSh .hub svg{width:100%;height:100%}'
       + '#gmSh .win{animation:gmW .6s cubic-bezier(.2,1.6,.4,1)}@keyframes gmW{from{transform:scale(.3);opacity:0}}#gmSh .gcard .ic.sw{display:block;padding:2px;background:none}#gmSh .gcard .ic.sw svg{width:100%;height:100%}#gmSh .ms .jk{display:block;color:#ff7ad1;font-size:14px;letter-spacing:.12em}'
+      /* 28 oct 2026 (10h05, Jeremy): challenge a friend */
+      + '#gmSh .drow{display:flex;justify-content:space-between;align-items:center;width:100%;padding:11px 14px;margin-top:8px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#fff;font-weight:800;font-size:14px}#gmSh .drow b{color:#ffd43b}'
+      + '#gmSh .dhero,#gmSh.full .gp .dhero{width:min(120px,32vw);margin:6px auto 4px}#gmSh .dhero svg{width:100%;height:auto;display:block;filter:drop-shadow(0 0 22px rgba(255,95,122,.45))}#gmSh .dhero.pulse{animation:gmPl 1.6s ease-in-out infinite}@keyframes gmPl{50%{transform:scale(1.07)}}'
+      + '#gmSh .dpot,#gmSh.full .gp .dpot{display:flex;align-items:center;justify-content:center;gap:6px;margin:0 auto 10px;width:max-content;max-width:100%;padding:5px 14px;border-radius:99px;background:rgba(255,197,49,.12);border:1px solid rgba(255,197,49,.4);color:#ffd43b;font-weight:900;font-size:14px}#gmSh .dpot svg{width:18px;height:18px}#gmSh .dpot.fr{color:#9fc8ff;background:rgba(77,168,255,.1);border-color:rgba(77,168,255,.4)}'
+      + '#gmSh .dtm{display:inline-block;min-width:44px;margin-left:6px;padding:2px 8px;border-radius:99px;background:rgba(255,255,255,.1);font-size:14px}#gmSh .dtm.hot{background:#ff5f7a;color:#fff}'
       /* 28 oct 2026 (7h59, Jeremy): a game opens full screen with an animation */
       + '#gmSh.full{align-items:stretch;background:#050b1c}#gmSh.full .gp{max-width:none;height:100%;max-height:none;border-radius:0;border:0;display:flex;flex-direction:column;justify-content:center;padding:calc(14px + env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) calc(18px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));animation:gmZ .42s cubic-bezier(.2,1.25,.4,1)}'
       + '#gmSh.full .gp>*{width:100%;max-width:420px;margin-left:auto;margin-right:auto}#gmSh.full .hd{position:absolute;left:0;right:0;top:calc(12px + env(safe-area-inset-top));max-width:none;padding:0 16px;box-sizing:border-box}#gmSh.full .bd{max-width:360px}'
@@ -2147,7 +2153,7 @@ function nudge() {
     let sh = null, box = null, G = null, busy = false, prev = '.........', intro = false;
     const LINES = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
     const winLine = (b) => { for (const l of LINES) { if (b[l[0]] !== '.' && b[l[0]] === b[l[1]] && b[l[1]] === b[l[2]]) return l; } return null; };
-    function close() { try { tw.enableVerticalSwipes(); } catch (e) {} if (sh) sh.remove(); sh = null; box = null; const t = document.getElementById('gmTab'); if (t) t.removeAttribute('aria-current'); }
+    function close() { try { stopDuel(); } catch (e) {} try { tw.enableVerticalSwipes(); } catch (e) {} if (sh) sh.remove(); sh = null; box = null; const t = document.getElementById('gmTab'); if (t) t.removeAttribute('aria-current'); }
     function openSheet() {
       close(); hap();
       sh = document.createElement('div'); sh.id = 'gmSh'; box = document.createElement('div'); box.className = 'gp'; sh.appendChild(box); document.body.appendChild(sh);
@@ -2158,6 +2164,7 @@ function nudge() {
       const ic = [GOLD, BLUE, '', '', GOLD, BLUE, BLUE, '', GOLD].map((c) => c ? bat(c) : '<span></span>').join('');
       box.innerHTML = '<div class="hd"><div><h3>' + X.h + '</h3><small>' + X.sub + '</small></div><button class="x" data-k="close">✕</button></div>'
         + '<button class="gcard" data-g="ttt"><div class="ic">' + ic + '</div><div class="tx"><b>' + X.tN + '</b><div>' + X.tD + '</div><em>' + X.pr(1000, 500, 200) + '</em></div><span class="go">' + X.play + '</span></button>'
+        + '<button class="gcard" data-g="duel"><div class="ic sw">' + dIcon() + '</div><div class="tx"><b>' + DX.n + '</b><div>' + DX.d + '</div><em>' + DX.pr + '</em></div><span class="go">' + X.play + '</span></button>'
         + '<button class="gcard" data-g="spin"><div class="ic sw">' + wheel([100, 500, 200, 1000, 100, 300, 5000, 200], true) + '</div><div class="tx"><b>' + X.sN + '</b><div>' + X.sD + '</div><em>' + X.sPr + '</em></div><span class="go">' + X.play + '</span></button>'
         + '<button class="gcard" data-g="scratch"><div class="ic sw">' + ticketSvg() + '</div><div class="tx"><b>' + X.scN + '</b><div>' + X.scD + '</div><em>' + X.scPr + '</em></div><span class="go">' + X.play + '</span></button>'
         + '<button class="gcard" data-g="flip"><div class="ic sw">' + coinSvg('h') + '</div><div class="tx"><b>' + X.flN + '</b><div>' + X.flD + '</div><em>' + X.flPr + '</em></div><span class="go">' + X.play + '</span></button>'
@@ -2352,6 +2359,169 @@ function nudge() {
       coinRot = target; flipping = false; FR = r; FS = Object.assign(FS, { pts: r.pts, left: r.left, stakes: r.stakes || FS.stakes });
       hap(r.won ? 'success' : 'error'); drawFlip();
     }
+    // 28 oct 2026 (10h05, Jeremy): "Défie un ami" au morpion. Each player stakes $BATON (or 0 for a friendly game), the winner takes the pot
+    // minus 10 %, a draw gives the stakes back (bt_duel_api). The challenge is a link (startapp=d<code>); a newcomer joins the crew of the one who sent it.
+    const DX = fr ? {
+      n: 'Défie un ami', d: 'Morpion à 2 : le gagnant prend les $BATON', pr: 'Mise ce que tu veux · le gagnant rafle le pot', h: '⚔️ Défie un ami',
+      stk: 'Ta mise', friendly: 'Amical', pot: (n) => n > 0 ? 'Le gagnant prend ' + nf(n) + ' $BATON' : 'Pour le plaisir, sans mise', potL: 'pour le gagnant', send: '⚔️ ENVOYER LE DÉFI',
+      bal: (n) => 'Ton solde : ' + n + ' $BATON', open: 'Tes défis en cours', rec: (w, l, d) => 'Ton bilan : ' + w + ' V · ' + l + ' D · ' + d + ' N',
+      waitT: 'En attente de ton ami...', waitS: 'Envoie-lui le lien : le défi commence dès qu\'il l\'ouvre.', reshare: '📤 Envoyer le lien', cancel: 'Annuler le défi',
+      inv: (n) => n + ' te défie au morpion !', acc: (s) => s > 0 ? '⚔️ ACCEPTER · MISE ' + nf(s) + ' $BATON' : '⚔️ ACCEPTER LE DÉFI', funds: (s, p) => 'Il te faut ' + s + ' $BATON pour accepter, tu en as ' + p + '.',
+      taken: 'Ce défi a déjà été pris', self: 'C\'est ton propre défi : envoie le lien à un ami', you: 'Toi', yourT: 'À toi de jouer', oppT: (n) => n + ' réfléchit...', quit: 'Abandonner',
+      quitQ: 'Abandonner la partie ? Ta mise ira à ton adversaire.', win: 'Gagné !', lose: 'Perdu', draw: 'Match nul', back: 'Mises rendues', time: 'Temps écoulé', left: (n) => n + ' a abandonné',
+      rm: '🔁 REVANCHE', rmIn: (n) => '⚔️ ' + n + ' veut sa revanche !', rmAcc: '⚔️ VOIR LA REVANCHE', home: '‹ Défis', canc: 'Défi annulé, ta mise t\'a été rendue', exp: 'Personne n\'a pris ce défi, ta mise t\'a été rendue',
+      share: (s) => s > 0 ? '⚔️ Je te défie au morpion sur Pass The Baton ! On mise ' + nf(s) + ' $BATON chacun, le gagnant rafle tout. Tu relèves le défi ?' : '⚔️ Je te défie au morpion sur Pass The Baton ! Tu relèves le défi ?',
+      much: 'Tu as déjà 5 défis en attente', sec: (n) => n + ' s', vs: 'VS'
+    } : {
+      n: 'Challenge a friend', d: 'Tic-tac-toe for 2: the winner takes the $BATON', pr: 'Stake what you want · the winner takes the pot', h: '⚔️ Challenge a friend',
+      stk: 'Your stake', friendly: 'Friendly', pot: (n) => n > 0 ? 'The winner takes ' + nf(n) + ' $BATON' : 'Just for fun, no stake', potL: 'for the winner', send: '⚔️ SEND THE CHALLENGE',
+      bal: (n) => 'Your balance: ' + n + ' $BATON', open: 'Your open challenges', rec: (w, l, d) => 'Your record: ' + w + ' W · ' + l + ' L · ' + d + ' D',
+      waitT: 'Waiting for your friend...', waitS: 'Send them the link: the game starts as soon as they open it.', reshare: '📤 Send the link', cancel: 'Cancel the challenge',
+      inv: (n) => n + ' challenges you at tic-tac-toe!', acc: (s) => s > 0 ? '⚔️ ACCEPT · STAKE ' + nf(s) + ' $BATON' : '⚔️ ACCEPT THE CHALLENGE', funds: (s, p) => 'You need ' + s + ' $BATON to accept, you have ' + p + '.',
+      taken: 'This challenge was already taken', self: 'This is your own challenge: send the link to a friend', you: 'You', yourT: 'Your turn', oppT: (n) => n + ' is thinking...', quit: 'Give up',
+      quitQ: 'Give up the game? Your stake goes to your opponent.', win: 'You win!', lose: 'You lose', draw: 'Draw', back: 'Stakes given back', time: 'Time is up', left: (n) => n + ' gave up',
+      rm: '🔁 REMATCH', rmIn: (n) => '⚔️ ' + n + ' wants a rematch!', rmAcc: '⚔️ SEE THE REMATCH', home: '‹ Challenges', canc: 'Challenge cancelled, your stake was given back', exp: 'Nobody took this challenge, your stake was given back',
+      share: (s) => s > 0 ? '⚔️ I challenge you at tic-tac-toe on Pass The Baton! We each stake ' + nf(s) + ' $BATON, the winner takes it all. Are you in?' : '⚔️ I challenge you at tic-tac-toe on Pass The Baton! Are you in?',
+      much: 'You already have 5 challenges waiting', sec: (n) => n + ' s', vs: 'VS'
+    };
+    let DM = null, DS = 0, DC = null, DD = null, DT = null, dPrev = '.........', dSig = '', dBusy = false;
+    const esc2 = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const dLink = (c) => 'https://t.me/PassTheBatonBot/play?startapp=d' + c;
+    function dShare(d) { const u = 'https://t.me/share/url?url=' + encodeURIComponent(dLink(d.code)) + '&text=' + encodeURIComponent(DX.share(d.stake)); try { tw.openTelegramLink(u); } catch (e) { location.href = u; } }
+    function dIcon() { return '<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0a1734"/><g transform="rotate(-35 32 32)"><rect x="28" y="8" width="8" height="48" rx="4" fill="#ffc531"/><rect x="30" y="11" width="2" height="40" rx="1" fill="#fff" opacity=".45"/></g><g transform="rotate(35 32 32)"><rect x="28" y="8" width="8" height="48" rx="4" fill="#4da8ff"/><rect x="30" y="11" width="2" height="40" rx="1" fill="#fff" opacity=".45"/></g><circle cx="32" cy="32" r="7" fill="#ff5f7a"/><text x="32" y="35.5" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="9" fill="#fff">VS</text></svg>'; }
+    async function duelHome() {
+      full(true); DC = null;
+      box.innerHTML = '<div style="text-align:center;padding:60px 0;font-size:28px">⏳</div>';
+      const r = await call('duel_mine'); if (!r || !r.ok) { list(); return; }
+      DM = r; if (!(DM.stakes || []).includes(DS)) DS = 0; drawHome();
+    }
+    function drawHome() {
+      if (!box || !DM) return;
+      const pot = Math.floor(DS * 2 * (100 - (DM.fee || 10)) / 100), rc = DM.record || {};
+      const op = (DM.open || []).map((o) => '<button class="drow" data-dc="' + esc2(o.code) + '"><span>' + (o.status === 'wait' ? '⏳' : o.mine ? '🟡' : '🔵') + ' ' + (o.opp ? esc2(o.opp) : DX.waitT) + '</span><b>' + (o.stake > 0 ? nf(o.stake) + ' $B' : DX.friendly) + '</b></button>').join('');
+      box.innerHTML = '<div class="hd"><button class="bk" data-k="list">' + X.back + '</button><h3>' + DX.n + '</h3><button class="x" data-k="close">✕</button></div>'
+        + '<div class="dhero">' + dIcon() + '</div>'
+        + '<div class="lbl">' + DX.stk + '</div><div class="chips">' + (DM.stakes || [0]).map((s) => '<button class="chip' + (s === DS ? ' on' : '') + '" data-ds="' + s + '"' + (s > (DM.pts || 0) ? ' disabled' : '') + '>' + (s > 0 ? nf(s) : DX.friendly) + '</button>').join('') + '</div>'
+        + '<div class="ms" style="margin-top:12px">' + (DS > 0 ? '<span class="amt">' + nf(pot) + ' $BATON</span><span style="font-size:13px;opacity:.75;font-weight:700">' + DX.potL + '</span>' : '<span style="font-size:14px;opacity:.8">' + DX.pot(0) + '</span>') + '</div>'
+        + '<button class="bt gold" data-k="dgo">' + DX.send + '</button>'
+        + '<div class="ft">' + DX.bal(nf(DM.pts)) + ((rc.w || rc.l || rc.d) ? '<br>' + DX.rec(rc.w || 0, rc.l || 0, rc.d || 0) : '') + '</div>'
+        + (op ? '<div class="lbl" style="margin-top:16px">' + DX.open + '</div>' + op : '');
+    }
+    function stopDuel() { clearInterval(DT); DT = null; }
+    async function duelView(code, first) {
+      if (first !== false) full(true);
+      stopDuel(); DC = code; DD = null; dSig = ''; dPrev = '.........';
+      box.innerHTML = '<div style="text-align:center;padding:60px 0;font-size:28px">⏳</div>';
+      const r = await call('duel_get', { code }); if (DC !== code) return;
+      if (!r || !r.ok) { try { tw.showAlert(X.err); } catch (e) {} duelHome(); return; }
+      setD(r); const myBox = box;
+      DT = setInterval(async () => {
+        if (!sh || box !== myBox || DC !== code) { stopDuel(); return; }
+        tickD();
+        if (dBusy || (DD && /^(done|cancel|expired)$/.test(DD.status) && DD.rematch)) return;
+        if (DD && /^(cancel|expired)$/.test(DD.status)) return;
+        const r2 = await call('duel_get', { code }); if (r2 && r2.ok && DC === code && !dBusy) setD(r2);
+      }, 1300);
+    }
+    function setD(r) {
+      const was = DD; DD = r; DD._at = Date.now();
+      if (was && was.status === 'play' && r.status === 'done') hap(r.win === true ? 'success' : r.win === false ? 'error' : 'warning');
+      if (was && was.status === 'wait' && r.status === 'play') hap('success');
+      if (was && !was.mine && r.mine) hap();
+      const sig = [r.status, r.board, r.mine, r.rematch, r.opp].join('|');
+      if (sig !== dSig) { dSig = sig; drawD(); } else tickD();
+    }
+    function tickD() {
+      const el = box && box.querySelector('#dTm'); if (!el || !DD || DD.status !== 'play') return;
+      const s = Math.max(0, Math.ceil((DD.left || 0) - (Date.now() - DD._at) / 1000)); el.textContent = DX.sec(s); el.classList.toggle('hot', s <= 10);
+    }
+    function drawD() {
+      const d = DD; if (!box || !d) return;
+      const hd = '<div class="hd"><button class="bk" data-k="dhome">' + DX.home + '</button><h3>' + DX.n + '</h3><button class="x" data-k="close">✕</button></div>';
+      const stakeTx = d.stake > 0 ? '<div class="dpot">' + bat(GOLD) + ' ' + nf(d.pot) + ' $BATON</div>' : '<div class="dpot fr">' + DX.friendly + '</div>';
+      if (d.status === 'wait') {
+        if (d.host) {
+          box.innerHTML = hd + '<div class="dhero pulse">' + dIcon() + '</div><div class="ms">' + DX.waitT + '<span class="amt" style="font-size:13px;opacity:.7;font-weight:700">' + DX.waitS + '</span></div>' + stakeTx
+            + '<button class="bt gold" data-k="dshare">' + DX.reshare + '</button><button class="bt gh" data-k="dquit">' + DX.cancel + '</button>';
+        } else {
+          const poor = (d.pts || 0) < d.stake;
+          box.innerHTML = hd + '<div class="dhero">' + dIcon() + '</div><div class="ms">' + esc2(DX.inv(d.host_name)) + '</div>' + stakeTx
+            + (d.stake > 0 ? '<div class="ft" style="opacity:.8">' + DX.pot(d.pot) + '</div>' : '')
+            + (!d.for_me ? '<div class="ft">' + DX.taken + '</div>' : poor ? '<div class="ft" style="color:#ff9b9b;opacity:1">' + DX.funds(nf(d.stake), nf(d.pts)) + '</div><button class="bt gold" data-k="dhome">' + DX.send + '</button>'
+              : '<button class="bt gold" data-k="djoin">' + DX.acc(d.stake) + '</button>');
+        }
+        return;
+      }
+      if (d.status === 'cancel' || d.status === 'expired') {
+        box.innerHTML = hd + '<div class="ms" style="margin-top:40px">' + (d.status === 'cancel' ? DX.canc : DX.exp) + '</div><button class="bt gold" data-k="dhome">' + DX.send + '</button>';
+        return;
+      }
+      if (d.me === '') { box.innerHTML = hd + '<div class="ms" style="margin-top:40px">' + DX.taken + '</div><button class="bt gold" data-k="dhome">' + DX.send + '</button>'; return; }
+      const b = d.board || '.........', play = d.status === 'play', wl = winLine(b) || [];
+      const cells = [...b].map((c, i) => {
+        const mine = c === d.me, nw = c !== '.' && dPrev[i] === '.';
+        return '<button class="cl' + (nw ? ' nw' : '') + (wl.includes(i) ? ' wl' + (mine ? '' : ' ai') : '') + '" data-dm="' + (i + 1) + '" style="--gw:' + (mine ? 'rgba(255,197,49,.7)' : 'rgba(77,168,255,.7)') + '"' + (c !== '.' || !play || !d.mine ? ' disabled' : '') + '>' + (c === '.' ? '' : bat(mine ? GOLD : BLUE)) + '</button>';
+      }).join('');
+      dPrev = b;
+      let ms;
+      if (play) ms = '<div class="ms">' + (d.mine ? DX.yourT : esc2(DX.oppT(d.opp))) + ' <span id="dTm" class="dtm"></span></div>';
+      else {
+        const why = d.reason === 'time' ? DX.time : d.reason === 'quit' && d.win ? esc2(DX.left(d.opp)) : '';
+        ms = '<div class="ms' + (d.win === false ? ' lo' : '') + '">' + (d.win === true ? DX.win : d.win === false ? DX.lose : DX.draw) + (why ? '<span style="display:block;font-size:12px;opacity:.65">' + why + '</span>' : '')
+          + (d.stake > 0 ? '<span class="amt">' + (d.win === true ? '+' + nf(d.pot) + ' $BATON' : d.win === false ? '-' + nf(d.stake) + ' $BATON' : DX.back) + '</span>' : '') + '</div>';
+      }
+      const rmIn = !play && d.rematch;
+      box.innerHTML = hd
+        + '<div class="vs"><span class="p1' + (play && d.mine ? ' on' : '') + '">' + bat(GOLD) + DX.you + '</span><i>' + DX.vs + '</i><span class="p2' + (play && !d.mine ? ' on' : '') + '">' + bat(BLUE) + esc2(d.opp || '?') + '</span></div>'
+        + stakeTx + '<div class="bd">' + cells + '</div>' + ms
+        + (play ? '<button class="bt gh" data-k="dquit" style="padding:9px;font-size:13px;opacity:.75">' + DX.quit + '</button>' : '')
+        + (rmIn ? '<button class="bt gold" data-k="drmgo">' + DX.rmAcc + '</button>' : '')
+        + (!play && !rmIn ? '<button class="bt gold" data-k="drm">' + DX.rm + '</button>' : '')
+        + (!play ? '<button class="bt gh" data-k="dhome">' + DX.home + '</button>' : '');
+      tickD();
+    }
+    async function dAct(a, body) {
+      if (dBusy) return null; dBusy = true;
+      const r = await call(a, Object.assign({ code: DC }, body || {})); dBusy = false;
+      if (r && r.code && r.code !== DC) return r;
+      if (r && r.board !== undefined) setD(r);
+      if (!r || !r.ok) { const e = r && r.error; try { tw.showAlert(e === 'funds' ? DX.funds(nf((DD && DD.stake) || DS), nf((r && r.pts) || 0)) : e === 'taken' ? DX.taken : e === 'self' ? DX.self : e === 'too_many' ? DX.much : X.err); } catch (x) {} return null; }
+      return r;
+    }
+    async function dClick(e) {
+      const ds = e.target.closest('[data-ds]'), dc = e.target.closest('[data-dc]'), dm = e.target.closest('[data-dm]'), k = e.target.closest('[data-k]');
+      if (ds && !ds.disabled) { hap(); DS = Number(ds.dataset.ds); drawHome(); return true; }
+      if (dc) { hap(); duelView(dc.dataset.dc); return true; }
+      if (dm && !dm.disabled && DD && DD.mine && !dBusy) {
+        hap(); const i = Number(dm.dataset.dm) - 1;
+        DD = Object.assign({}, DD, { board: DD.board.slice(0, i) + DD.me + DD.board.slice(i + 1), mine: false, left: DD.move_s, _at: Date.now() }); dSig = ''; drawD();
+        await dAct('duel_move', { cell: i + 1 }); return true;
+      }
+      if (!k) return false;
+      const kk = k.dataset.k;
+      if (kk === 'dhome') { hap(); stopDuel(); duelHome(); return true; }
+      if (kk === 'dshare') { hap(); if (DD) dShare(DD); return true; }
+      if (kk === 'dgo') {
+        hap(); k.disabled = true; const r = await call('duel_new', { stake: DS }); k.disabled = false;
+        if (!r || !r.ok) { const er = r && r.error; try { tw.showAlert(er === 'funds' ? DX.funds(nf(DS), nf(DM && DM.pts)) : er === 'too_many' ? DX.much : X.err); } catch (x) {} return true; }
+        hap('success'); dShare(r); duelView(r.code, false); return true;
+      }
+      if (kk === 'djoin') { hap(); k.disabled = true; const r = await dAct('duel_join'); if (!r) k.disabled = false; return true; }
+      if (kk === 'dquit') {
+        hap();
+        const go = async () => { const r = await dAct('duel_quit'); if (r && r.status === 'cancel') duelHome(); };
+        if (DD && DD.status === 'play') { try { tw.showConfirm(DX.quitQ, (ok) => { if (ok) go(); }); } catch (x) { go(); } } else go();
+        return true;
+      }
+      if (kk === 'drm' && DD) {
+        hap(); k.disabled = true;
+        const r = await call('duel_new', { stake: DD.stake, rematch: DD.code }); k.disabled = false;
+        if (!r || !r.ok) { const er = r && r.error; try { tw.showAlert(er === 'funds' ? DX.funds(nf(DD.stake), nf(DD.pts)) : er === 'too_many' ? DX.much : X.err); } catch (x) {} return true; }
+        duelView(r.code, false); return true;
+      }
+      if (kk === 'drmgo' && DD && DD.rematch) { hap(); duelView(DD.rematch, false); return true; }
+      return false;
+    }
     // a rewarded video (Adsgram 55429); throws when there is no video
     async function watch() {
       await call('vid', { mode: 'ttt' });
@@ -2360,6 +2530,8 @@ function nudge() {
     }
     async function onClick(e) {
       if (e.target === sh) { close(); return; }
+      if (e.target.closest('[data-g="duel"]')) { hap(); duelHome(); return; }
+      if (await dClick(e)) return;
       const c = e.target.closest('[data-c]'), k = e.target.closest('[data-k]'), g = e.target.closest('[data-g]');
       if (g && g.dataset.g === 'ttt') { hap(); ttt(); return; }
       if (g && g.dataset.g === 'spin') { hap(); spinView(); return; }
@@ -2433,6 +2605,8 @@ function nudge() {
         nav.classList.add('g5');
         // 28 oct 2026 (9h36, Jeremy): a link with startapp=games opens the Games list directly (announcement)
         if (!window.__gmAuto && ((tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '') === 'games') { window.__gmAuto = true; setTimeout(() => { openSheet(); list(); }, 900); }
+        // 28 oct 2026 (Jeremy): a challenge link (startapp=d<code>) opens the challenge directly
+        { const dsp = (tw.initDataUnsafe && tw.initDataUnsafe.start_param) || ''; if (!window.__gmAuto && /^d[0-9a-f]{8}$/.test(dsp)) { window.__gmAuto = true; setTimeout(() => { openSheet(); duelView(dsp.slice(1)); }, 700); } }
       };
       place(); setInterval(place, 1500);
     });
