@@ -1973,7 +1973,7 @@ function nudge() {
     const WD = /^fr/.test(lc) ? { mct_task: 'Mission partenaire', mct_ref: 'Parrainage d\'un ami', mct_ref_prize: 'Concours meilleur parrain', mct_week_prize: 'Concours meilleurs joueurs', mct_bourse_prize: 'Concours Bourse', other: 'Autre' }
       : { mct_task: 'Partner mission', mct_ref: 'Friend referral', mct_ref_prize: 'Best sponsor contest', mct_week_prize: 'Best players contest', mct_bourse_prize: 'Stock market contest', other: 'Other' };
     // 28 oct 2026 (8h02, Jeremy): and which game (tic-tac-toe, Tap the Diamond, Rig Rush)
-    const GD = { ttt: /^fr/.test(lc) ? 'Morpion' : 'Tic-tac-toe', td: 'Tap the Diamond', rr: 'Rig Rush', rig: 'Rig Rush', spin: 'Lucky Spin' };
+    const GD = { ttt: /^fr/.test(lc) ? 'Morpion' : 'Tic-tac-toe', td: 'Tap the Diamond', rr: 'Rig Rush', rig: 'Rig Rush', spin: 'Lucky Spin', scratch: /^fr/.test(lc) ? 'Grattage' : 'Scratch card', flip: /^fr/.test(lc) ? 'Pile ou face' : 'Heads or tails' };
     const WK = (k) => { k = String(k || ''); if (/^mct/.test(k)) return WD[k] || WD.other; const p = k.split('_')[0]; return GD[p] || ''; };
     const st = document.createElement('style');
     st.textContent = '#gnBtn{display:block;margin:10px auto 0;padding:7px 14px;border-radius:99px;border:1px solid rgba(255,212,59,.45);background:rgba(255,212,59,.1);color:#ffd43b;font-weight:800;font-size:13px;cursor:pointer}'
@@ -2018,7 +2018,7 @@ function nudge() {
 })();
 </script>
 <script>
-// 28 oct 2026 (Jeremy): "Jeux" tab in the bottom menu (tic-tac-toe and Lucky Spin), right after Tasks. It opens a list of games (more will be added);
+// 28 oct 2026 (Jeremy): "Jeux" tab in the bottom menu (tic-tac-toe, Lucky Spin, scratch card, heads or tails), right after Tasks. It opens a list of games (more will be added);
 // the first one is tic-tac-toe against the AI, played with batons (the player's batons are gold, the AI's are blue).
 // The game is played on the server (bt_ttt_api), test version shown only to the players listed in ds_config bt_ttt.users.
 // Win +1000, draw +500, loss +200 $BATON (day_max paid games a day), any paid game doubled once with a video (Adsgram 55429, mode 'ttt').
@@ -2034,6 +2034,9 @@ function nudge() {
       dbl: (n) => '🎬 Doubler : +' + n + ' $BATON', dblOk: (n) => '✅ Doublé : +' + n + ' $BATON', again: 'Rejouer', back: '‹ Jeux',
       pr: (w, d, l) => 'Victoire +' + w + ' · Nul +' + d + ' · Défaite +' + l, left: (n) => n + ' partie' + (n > 1 ? 's' : '') + ' payée' + (n > 1 ? 's' : '') + ' restante' + (n > 1 ? 's' : '') + ' aujourd\'hui',
       err: 'Erreur, réessaie', noVid: 'Pas de vidéo pour le moment',
+      scN: 'Grattage', scD: 'Gratte et trouve 3 montants identiques', scPr: 'Jusqu\'à 2 500 $BATON · 3 tickets gratuits par jour', scBuy: '🎟️ NOUVEAU TICKET', scV: '🎬 Regarde une vidéo : 1 ticket', scAll: 'Tout gratter', scHint: 'Gratte avec ton doigt', scLose: 'Pas de chance cette fois', scNone: 'Plus de tickets aujourd\'hui, reviens demain', scHere: 'GRATTE ICI',
+      tkL: (n) => n + ' ticket' + (n > 1 ? 's' : '') + ' gratuit' + (n > 1 ? 's' : '') + ' restant' + (n > 1 ? 's' : ''), tkV: (n) => n + ' ticket' + (n > 1 ? 's' : '') + ' vidéo restant' + (n > 1 ? 's' : '') + ' aujourd\'hui',
+      flN: 'Pile ou face', flD: 'Double ta mise ou perds-la', flPr: '1 chance sur 2 · 20 lancers par jour', fH: 'FACE', fT: 'PILE', bal: 'Ton solde', stk: 'Ta mise', pickT: 'Choisis ton côté', flWin: (n) => 'Gagné ! +' + n + ' $BATON', flLose: (n) => 'Perdu · -' + n + ' $BATON', flLeft: (n) => n + ' lancer' + (n > 1 ? 's' : '') + ' restant' + (n > 1 ? 's' : '') + ' aujourd\'hui', flFunds: 'Pas assez de $BATON pour cette mise', flNone: 'Plus de lancers aujourd\'hui, reviens demain',
       sN: 'Lucky Spin', sD: 'Tourne la roue, jusqu\'à 5 000 $BATON', sPr: '3 tours gratuits par jour', spin: 'TOURNER LA ROUE', spinV: '🎬 Regarde une vidéo : 1 tour', noSpin: 'Plus de tours aujourd\'hui, reviens demain',
       freeL: (n) => n + ' tour' + (n > 1 ? 's' : '') + ' gratuit' + (n > 1 ? 's' : '') + ' restant' + (n > 1 ? 's' : ''), vidL: (n) => n + ' tour' + (n > 1 ? 's' : '') + ' vidéo restant' + (n > 1 ? 's' : '') + ' aujourd\'hui', jack: 'JACKPOT !', youWon: 'Tu gagnes',
       unl: '🎬 Regarde une vidéo : partie payée', free: 'Rejouer sans gain', nog: 'Partie sans gain', over: 'Tes 10 parties payées du jour sont jouées · 1 vidéo = 1 partie payée en plus'
@@ -2044,6 +2047,9 @@ function nudge() {
       dbl: (n) => '🎬 Double it: +' + n + ' $BATON', dblOk: (n) => '✅ Doubled: +' + n + ' $BATON', again: 'Play again', back: '‹ Games',
       pr: (w, d, l) => 'Win +' + w + ' · Draw +' + d + ' · Loss +' + l, left: (n) => n + ' paid game' + (n > 1 ? 's' : '') + ' left today',
       err: 'Error, try again', noVid: 'No video right now',
+      scN: 'Scratch card', scD: 'Scratch and find 3 matching amounts', scPr: 'Up to 2,500 $BATON · 3 free tickets a day', scBuy: '🎟️ NEW TICKET', scV: '🎬 Watch a video: 1 ticket', scAll: 'Scratch all', scHint: 'Scratch with your finger', scLose: 'No luck this time', scNone: 'No more tickets today, come back tomorrow', scHere: 'SCRATCH HERE',
+      tkL: (n) => n + ' free ticket' + (n > 1 ? 's' : '') + ' left', tkV: (n) => n + ' video ticket' + (n > 1 ? 's' : '') + ' left today',
+      flN: 'Heads or tails', flD: 'Double your stake or lose it', flPr: '50/50 · 20 flips a day', fH: 'HEADS', fT: 'TAILS', bal: 'Your balance', stk: 'Your stake', pickT: 'Pick your side', flWin: (n) => 'You win! +' + n + ' $BATON', flLose: (n) => 'You lose · -' + n + ' $BATON', flLeft: (n) => n + ' flip' + (n > 1 ? 's' : '') + ' left today', flFunds: 'Not enough $BATON for this stake', flNone: 'No more flips today, come back tomorrow',
       sN: 'Lucky Spin', sD: 'Spin the wheel, up to 5,000 $BATON', sPr: '3 free spins a day', spin: 'SPIN THE WHEEL', spinV: '🎬 Watch a video: 1 spin', noSpin: 'No more spins today, come back tomorrow',
       freeL: (n) => n + ' free spin' + (n > 1 ? 's' : '') + ' left', vidL: (n) => n + ' video spin' + (n > 1 ? 's' : '') + ' left today', jack: 'JACKPOT!', youWon: 'You win',
       unl: '🎬 Watch a video: paid game', free: 'Play again with no prize', nog: 'No prize game', over: 'Your 10 paid games of the day are played · 1 video = 1 more paid game'
@@ -2074,6 +2080,14 @@ function nudge() {
       + '#gmSh .ms{min-height:26px;margin:14px 0 4px;text-align:center;font-weight:900;font-size:17px}#gmSh .ms .amt{display:block;font-size:26px;color:#ffd43b;margin-top:2px}#gmSh .ms.lo .amt{color:#9fc8ff}'
       + '#gmSh .bt{display:block;width:100%;margin-top:10px;padding:13px;border-radius:15px;border:0;font-weight:900;font-size:15px}#gmSh .gold{background:linear-gradient(180deg,#ffd75a,#ffb300);color:#1a1300;box-shadow:0 6px 18px -6px rgba(255,190,40,.7)}#gmSh .gh{background:rgba(255,255,255,.1);color:#fff}'
       + '#gmSh .ft{text-align:center;font-size:12px;opacity:.6;margin-top:12px}'
+      /* 28 oct 2026 (8h41, Jeremy): scratch card and heads or tails */
+      + '#gmSh .tkt{position:relative;box-sizing:border-box;border-radius:20px;padding:14px;background:linear-gradient(145deg,#ffd75a,#ff9f1c);box-shadow:0 10px 30px -10px rgba(255,170,30,.6)}#gmSh .tkt h4{margin:0 0 10px;text-align:center;color:#2a1600;font-size:17px;font-weight:900;letter-spacing:.08em}'
+      + '#gmSh .sg{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;border-radius:14px;background:#fff7e0;padding:8px}#gmSh .sc{aspect-ratio:1.15;border-radius:10px;background:#fff;display:grid;place-items:center;align-content:center;color:#2a1600;font-weight:900;font-size:22px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}'
+      + '#gmSh .sc small{display:block;font-size:10px;opacity:.6;font-weight:800}#gmSh .sc.hit{background:#2a1600;color:#ffd43b;box-shadow:0 0 0 3px #ffd43b,0 0 18px rgba(255,212,59,.8);animation:gmW .5s cubic-bezier(.2,1.6,.4,1)}#gmSh canvas.scv{position:absolute;inset:0;width:100%;height:100%;border-radius:14px;touch-action:none;cursor:grab}'
+      + '#gmSh .coin{width:min(170px,44vw);aspect-ratio:1;margin:8px auto 4px;position:relative;transform-style:preserve-3d;transition:transform 1.9s cubic-bezier(.2,.75,.25,1)}#gmSh .cf{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:grid;place-items:center;align-content:center;font-weight:900;font-size:20px;letter-spacing:.1em}'
+      + '#gmSh .cf.h{background:radial-gradient(circle at 35% 30%,#fff3b0,#ffc531 45%,#c98d00);color:#3a2400;box-shadow:inset 0 0 0 7px rgba(255,255,255,.35),0 0 30px rgba(255,197,49,.5)}#gmSh .cf.t{transform:rotateY(180deg);background:radial-gradient(circle at 35% 30%,#d6ecff,#4da8ff 45%,#1d5fb0);color:#06203f;box-shadow:inset 0 0 0 7px rgba(255,255,255,.35),0 0 30px rgba(77,168,255,.5)}#gmSh .cf svg{width:46%;height:46%}#gmSh .cf b{font-size:40px;line-height:1}'
+      + '#gmSh.full .gp .coin{width:min(170px,44vw)}#gmSh .chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px 0 2px}#gmSh .chip{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;border-radius:99px;padding:8px 14px;font-weight:900;font-size:14px}#gmSh .chip.on{background:#ffc531;color:#1a1300;border-color:#ffc531}#gmSh .chip:disabled{opacity:.35}'
+      + '#gmSh .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}#gmSh .two .bt{margin-top:10px}#gmSh .blu{background:linear-gradient(180deg,#7cc4ff,#2f8dff);color:#04172f;box-shadow:0 6px 18px -6px rgba(47,141,255,.7)}#gmSh .lbl{text-align:center;font-size:12px;opacity:.65;text-transform:uppercase;letter-spacing:.08em;margin-top:10px}#gmSh .balx{text-align:center;font-weight:900;font-size:15px;color:#ffd43b}'
       /* 28 oct 2026 (8h26, Jeremy): Lucky Spin wheel */
       + '#gmSh .wh{position:relative;width:min(300px,76vw);aspect-ratio:1;margin:4px auto 2px;max-width:100%}#gmSh .wl{width:100%;height:100%;display:block;transition:transform 4.4s cubic-bezier(.12,.8,.16,1);filter:drop-shadow(0 0 24px rgba(77,168,255,.35))}'
       + '#gmSh .pt{position:absolute;left:50%;top:-8px;transform:translateX(-50%);width:0;height:0;border-left:15px solid transparent;border-right:15px solid transparent;border-top:28px solid #fff;z-index:2;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6))}'
@@ -2102,6 +2116,8 @@ function nudge() {
       box.innerHTML = '<div class="hd"><div><h3>' + X.h + '</h3><small>' + X.sub + '</small></div><button class="x" data-k="close">✕</button></div>'
         + '<button class="gcard" data-g="ttt"><div class="ic">' + ic + '</div><div class="tx"><b>' + X.tN + '</b><div>' + X.tD + '</div><em>' + X.pr(1000, 500, 200) + '</em></div><span class="go">' + X.play + '</span></button>'
         + '<button class="gcard" data-g="spin"><div class="ic sw">' + wheel([100, 500, 200, 1000, 100, 300, 5000, 200], true) + '</div><div class="tx"><b>' + X.sN + '</b><div>' + X.sD + '</div><em>' + X.sPr + '</em></div><span class="go">' + X.play + '</span></button>'
+        + '<button class="gcard" data-g="scratch"><div class="ic sw" style="display:grid;place-items:center;font-size:34px;background:linear-gradient(145deg,#ffd75a,#ff9f1c)">🎟️</div><div class="tx"><b>' + X.scN + '</b><div>' + X.scD + '</div><em>' + X.scPr + '</em></div><span class="go">' + X.play + '</span></button>'
+        + '<button class="gcard" data-g="flip"><div class="ic sw" style="display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3b0,#ffc531 45%,#c98d00);padding:12px">' + bat('#3a2400') + '</div><div class="tx"><b>' + X.flN + '</b><div>' + X.flD + '</div><em>' + X.flPr + '</em></div><span class="go">' + X.play + '</span></button>'
         + '<div class="soon">' + X.soon + '</div>';
     }
     function draw() {
@@ -2190,6 +2206,98 @@ function nudge() {
       clearInterval(tick); spinRot = target; S = r; SL = { id: r.id, prize: r.prize, doubled: false }; spinning = false;
       hap(r.prize >= 1000 ? 'success' : null); drawSpin();
     }
+    // 28 oct 2026 (8h41, Jeremy): scratch card. The server draws the ticket (bt_scratch_api) and credits it; scratching only reveals it.
+    let SCS = null, TK = null;
+    function drawScratch() {
+      if (!box || !SCS) return;
+      const can = SCS.free_left > 0, canV = !can && SCS.vid_left > 0;
+      let h = '<div class="hd"><button class="bk" data-k="list">' + X.back + '</button><h3>' + X.scN + '</h3><button class="x" data-k="close">✕</button></div>';
+      if (TK) {
+        h += '<div class="tkt"><h4>🎟️ ' + X.scN.toUpperCase() + '</h4><div class="sg">' + TK.grid.map((v) => '<div class="sc' + (TK.revealed && TK.prize > 0 && Number(v) === Number(TK.prize) ? ' hit' : '') + '">' + nf(v) + '<small>$BATON</small></div>').join('')
+          + (TK.revealed ? '' : '<canvas class="scv"></canvas>') + '</div></div>';
+        if (!TK.revealed) h += '<div class="ft" style="opacity:.8">' + X.scHint + '</div><button class="bt gh" data-k="scall">' + X.scAll + '</button>';
+        else h += (TK.prize > 0 ? '<div class="ms win">' + X.youWon + '<span class="amt">+' + nf(TK.doubled ? TK.prize * 2 : TK.prize) + ' $BATON</span></div>' : '<div class="ms lo">' + X.scLose + '</div>')
+          + (TK.prize > 0 && !TK.doubled ? '<button class="bt gold" data-k="scdbl">' + X.dbl(nf(TK.prize)) + '</button>' : '')
+          + (TK.prize > 0 && TK.doubled ? '<div class="ft" style="opacity:.9;color:#7dff6b">' + X.dblOk(nf(TK.prize)) + '</div>' : '');
+      } else {
+        h += '<div class="tkt"><h4>🎟️ ' + X.scN.toUpperCase() + '</h4><div class="sg">' + [0, 1, 2, 3, 4, 5].map(() => '<div class="sc" style="background:linear-gradient(135deg,#d9dde3,#8e96a3);color:#5b6370">?</div>').join('') + '</div></div><div class="ms">' + X.scD + '</div>';
+      }
+      if (!TK || TK.revealed) {
+        const gold = !(TK && TK.prize > 0 && !TK.doubled);
+        h += can ? '<button class="bt ' + (gold ? 'gold' : 'gh') + '" data-k="scgo">' + X.scBuy + '</button>'
+          : canV ? '<button class="bt ' + (gold ? 'gold' : 'gh') + '" data-k="scgov">' + X.scV + '</button>' : '<div class="ms" style="font-size:14px;opacity:.7">' + X.scNone + '</div>';
+      }
+      h += '<div class="ft">' + (can ? X.tkL(SCS.free_left) + '<br>' : '') + X.tkV(SCS.vid_left) + '</div>';
+      box.innerHTML = h;
+      const cv = box.querySelector('canvas.scv'); if (cv) scratchable(cv);
+    }
+    function scratchable(cv) {
+      const r = cv.getBoundingClientRect(), d = window.devicePixelRatio || 1, ctx = cv.getContext('2d');
+      cv.width = Math.max(1, Math.round(r.width * d)); cv.height = Math.max(1, Math.round(r.height * d));
+      const gr = ctx.createLinearGradient(0, 0, cv.width, cv.height); gr.addColorStop(0, '#e3e6eb'); gr.addColorStop(0.5, '#9aa2ae'); gr.addColorStop(1, '#d6dae0');
+      ctx.fillStyle = gr; ctx.fillRect(0, 0, cv.width, cv.height);
+      ctx.fillStyle = 'rgba(60,66,78,.55)'; ctx.font = '900 ' + Math.round(15 * d) + 'px system-ui,sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      for (let y = 0; y < 3; y++) for (let x = 0; x < 2; x++) ctx.fillText(X.scHere, cv.width * (x * 0.5 + 0.25), cv.height * (y * 0.33 + 0.17));
+      ctx.globalCompositeOperation = 'destination-out';
+      let down = false, n = 0, done = false;
+      const at = (e) => { const b = cv.getBoundingClientRect(); return [(e.clientX - b.left) * d, (e.clientY - b.top) * d]; };
+      const rub = (e) => { const [x, y] = at(e); ctx.beginPath(); ctx.arc(x, y, 24 * d, 0, Math.PI * 2); ctx.fill(); if (++n % 5 === 0) { hap(); check(); } };
+      const check = () => {
+        if (done) return; const im = ctx.getImageData(0, 0, cv.width, cv.height).data; let clear = 0, tot = 0;
+        for (let i = 3; i < im.length; i += 4 * 24) { tot++; if (im[i] < 40) clear++; }
+        if (clear / tot > 0.55) { done = true; reveal(); }
+      };
+      cv.addEventListener('pointerdown', (e) => { down = true; try { cv.setPointerCapture(e.pointerId); } catch (x) {} rub(e); });
+      cv.addEventListener('pointermove', (e) => { if (down) rub(e); });
+      cv.addEventListener('pointerup', () => { down = false; check(); });
+      cv.addEventListener('pointercancel', () => { down = false; });
+    }
+    function reveal() { if (!TK || TK.revealed) return; TK.revealed = true; hap(TK.prize >= 1000 ? 'success' : TK.prize > 0 ? 'warning' : 'error'); drawScratch(); }
+    async function scratchView() {
+      full(true); TK = null;
+      box.innerHTML = '<div style="text-align:center;padding:60px 0;font-size:28px">⏳</div>';
+      const r = await call('scratch_state'); if (!r || !r.ok) { full(false); list(); return; }
+      SCS = r; drawScratch();
+    }
+    async function buyTicket(vid) {
+      if (busy) return; busy = true;
+      const r = await call('scratch_go', { vid: !!vid }); busy = false;
+      if (!r || !r.ok) { if (r && r.free_left !== undefined) SCS = r; drawScratch(); try { tw.showAlert(X.err); } catch (e) {} return; }
+      hap(); SCS = r; TK = { id: r.id, grid: r.grid, prize: Number(r.prize), doubled: false, revealed: false }; drawScratch();
+    }
+    // 28 oct 2026 (8h41, Jeremy): heads or tails with the player's own $BATON (bt_flip_api, fair 50/50 drawn on the server, fixed stakes)
+    let FS = null, FST = 100, FR = null, coinRot = 0, flipping = false;
+    function drawFlip() {
+      if (!box || !FS) return;
+      const stakes = FS.stakes || [100, 500, 1000, 5000];
+      if (!stakes.includes(FST)) FST = stakes[0];
+      box.innerHTML = '<div class="hd"><button class="bk" data-k="list">' + X.back + '</button><h3>' + X.flN + '</h3><button class="x" data-k="close">✕</button></div>'
+        + '<div class="lbl">' + X.bal + '</div><div class="balx">' + nf(FS.pts) + ' $BATON</div>'
+        + '<div class="coin" style="transform:rotateY(' + coinRot + 'deg)"><div class="cf h">' + bat('#3a2400') + '<span>' + X.fH + '</span></div><div class="cf t"><b>$B</b><span>' + X.fT + '</span></div></div>'
+        + (flipping ? '<div class="ms">...</div>' : FR ? '<div class="ms win' + (FR.won ? '' : ' lo') + '">' + (FR.won ? X.flWin(nf(FR.stake)) : X.flLose(nf(FR.stake))) + '</div>' : '<div class="ms">' + X.flD + '</div>')
+        + (FS.left > 0 ? '<div class="lbl">' + X.stk + '</div><div class="chips">' + stakes.map((s) => '<button class="chip' + (s === FST ? ' on' : '') + '" data-st="' + s + '"' + (s > FS.pts || flipping ? ' disabled' : '') + '>' + nf(s) + '</button>').join('') + '</div>'
+          + '<div class="lbl">' + X.pickT + '</div><div class="two"><button class="bt gold" data-f="h"' + (flipping ? ' disabled' : '') + '>' + X.fH + '</button><button class="bt blu" data-f="t"' + (flipping ? ' disabled' : '') + '>' + X.fT + '</button></div>'
+          : '<div class="ms" style="font-size:14px;opacity:.7">' + X.flNone + '</div>')
+        + '<div class="ft">' + X.flLeft(FS.left) + '</div>';
+    }
+    async function flipView() {
+      full(true); FR = null; flipping = false;
+      box.innerHTML = '<div style="text-align:center;padding:60px 0;font-size:28px">⏳</div>';
+      const r = await call('flip_state'); if (!r || !r.ok) { full(false); list(); return; }
+      FS = r; drawFlip();
+    }
+    async function doFlip(pick) {
+      if (flipping) return;
+      if (FST > FS.pts) { try { tw.showAlert(X.flFunds); } catch (e) {} return; }
+      flipping = true; FR = null; drawFlip(); hap();
+      const r = await call('flip_go', { stake: FST, pick });
+      if (!r || !r.ok) { flipping = false; if (r && r.pts !== undefined) FS.pts = r.pts; drawFlip(); try { tw.showAlert(r && r.error === 'funds' ? X.flFunds : X.err); } catch (e) {} return; }
+      const want = r.result === 'h' ? 0 : 180, target = coinRot + 1800 + ((want - (coinRot % 360)) + 360) % 360;
+      const c = box.querySelector('.coin'); requestAnimationFrame(() => { if (c) c.style.transform = 'rotateY(' + target + 'deg)'; });
+      await new Promise((ok) => setTimeout(ok, 2000));
+      coinRot = target; flipping = false; FR = r; FS = Object.assign(FS, { pts: r.pts, left: r.left, stakes: r.stakes || FS.stakes });
+      hap(r.won ? 'success' : 'error'); drawFlip();
+    }
     // a rewarded video (Adsgram 55429); throws when there is no video
     async function watch() {
       await call('vid', { mode: 'ttt' });
@@ -2201,6 +2309,11 @@ function nudge() {
       const c = e.target.closest('[data-c]'), k = e.target.closest('[data-k]'), g = e.target.closest('[data-g]');
       if (g && g.dataset.g === 'ttt') { hap(); ttt(); return; }
       if (g && g.dataset.g === 'spin') { hap(); spinView(); return; }
+      if (g && g.dataset.g === 'scratch') { hap(); scratchView(); return; }
+      if (g && g.dataset.g === 'flip') { hap(); flipView(); return; }
+      const stb = e.target.closest('[data-st]'), fb = e.target.closest('[data-f]');
+      if (stb && !stb.disabled) { hap(); FST = Number(stb.dataset.st); drawFlip(); return; }
+      if (fb && !fb.disabled) { doFlip(fb.dataset.f); return; }
       if (c && G && G.status === 'play' && !busy) {
         hap(); const i = Number(c.dataset.c) - 1; G.board = G.board.slice(0, i) + 'X' + G.board.slice(i + 1);
         const r = await act('ttt_move', { cell: i + 1 });
@@ -2212,6 +2325,18 @@ function nudge() {
       if (k.dataset.k === 'list') { hap(); full(false); list(); return; }
       if (k.dataset.k === 'new') { hap(); prev = '.........'; await act('ttt_new'); return; }
       if (k.dataset.k === 'spin') { doSpin(false); return; }
+      if (k.dataset.k === 'scgo') { buyTicket(false); return; }
+      if (k.dataset.k === 'scall') { hap(); reveal(); return; }
+      if (k.dataset.k === 'scgov' || k.dataset.k === 'scdbl') {
+        hap(); k.disabled = true;
+        try {
+          await watch();
+          if (k.dataset.k === 'scgov') { await buyTicket(true); return; }
+          const r = await call('scratch_double', { id: TK && TK.id });
+          if (r && r.ok) { TK.doubled = true; hap('success'); drawScratch(); } else { try { tw.showAlert(X.err); } catch (e) {} k.disabled = false; }
+        } catch (x) { k.disabled = false; try { tw.showAlert(X.noVid); } catch (e) {} }
+        return;
+      }
       if (k.dataset.k === 'spinv' || k.dataset.k === 'sdbl') {
         hap(); k.disabled = true;
         try {
