@@ -323,6 +323,7 @@
 // never for Premium players, one per hour at most
 (function () {
   try {
+    return;  /* 28 oct 2026 (21h33, Jeremy): Meme Coin Tycoon already has its opening interstitial (baton.js, adInt): Monetag is added there instead */
     const tw = window.Telegram && Telegram.WebApp; if (!tw || !tw.initData) return;
     let first = false, last = 0;
     try { first = !localStorage.getItem('mct_open1'); localStorage.setItem('mct_open1', '1'); last = Number(localStorage.getItem('mct_int') || 0); } catch (e) { return; }
