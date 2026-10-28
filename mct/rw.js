@@ -101,7 +101,17 @@
     s.onload = ok; s.onerror = () => { agl = null; ko(new Error('load')); }; document.head.appendChild(s);
     setTimeout(() => { if (!window.Adsgram) { agl = null; ko(new Error('timeout')); } }, 6000);
   }));
+  // 28 oct 2026 (21h31, Jeremy): about 1 video out of 5 on Monetag (rewarded interstitial, zone 12143182), drawn at random over all players;
+  // Adsgram as before for the others, or when Monetag has no ad
+  async function mtgWatch() {
+    const fn = 'show_12143182';
+    try {
+      if (!window[fn]) await new Promise((res, rej) => { const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', '12143182'); s.setAttribute('data-sdk', fn); s.onload = res; s.onerror = rej; document.head.appendChild(s); setTimeout(() => rej(new Error('timeout')), 8000); });
+      await window[fn](); return true;
+    } catch (e) { return false; }
+  }
   async function agWatch() {
+    if (Math.random() < 0.2 && await mtgWatch()) return 'ok';
     // 27 oct 2026 (Jeremy): a player watched the whole video and got no reward: a video that was shown now always counts
     try { await agSdk(); await window.Adsgram.init({ blockId: '55242' }).show(); return 'ok'; }
     catch (e) { return (!e || !('done' in Object(e)) || e.state === 'load' || /no ad|no banner/i.test(String(e.description || ''))) ? 'none' : 'ok'; }  // 25 oct 2026 (11h30): 'none' (then Ads Galaxy) only when Adsgram had no video
