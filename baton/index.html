@@ -1867,15 +1867,26 @@ function nudge() {
       const box = $('#adtask'); if (!box || !(tg && tg.initData)) return;
       const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.async = true; document.head.appendChild(s);
       const st = document.createElement('style');
-      st.textContent = '#adtask .adt{display:block;padding:12px 14px;border-radius:18px;background:rgba(47,141,255,.08);border:1px solid rgba(255,212,59,.45)}#adtask .adh{font-weight:800;font-size:13px;color:#ffd43b;margin:0 0 6px}#adtask adsgram-task{display:block}#adtask .tb{display:inline-block;padding:7px 14px;border-radius:99px;background:#ffd43b;color:#08121f;font-weight:800;font-size:13px}';
+      st.textContent = '#adtask .adt{display:block;padding:12px 14px;border-radius:18px;background:rgba(47,141,255,.08);border:1px solid rgba(255,212,59,.45)}#adtask .adh{font-weight:800;font-size:13px;color:#ffd43b;margin:0 0 6px}#adtask adsgram-task{display:block}#adtask .adw{font-size:14px;font-weight:700;opacity:.9}#adtask .adw b{color:#ffd43b;font-variant-numeric:tabular-nums}#adtask .tb{display:inline-block;padding:7px 14px;border-radius:99px;background:#ffd43b;color:#08121f;font-weight:800;font-size:13px}';
       document.head.appendChild(st);
       // 22 oct 2026 (Jeremy, 12h35): after each task the box goes away for 10 minutes (kept on the phone), then Adsgram loads a new one
       let last = 0;
       const pausedUntil = () => { try { return Number(localStorage.getItem('bt_adt_pause') || 0); } catch (e) { return 0; } };
       const gone = () => { box.hidden = true; box.innerHTML = ''; window.__adt = false; $('#dotTasks').hidden = !(S && S.tasks.some((t) => !t.done)); };
+      function waitCard(until) {
+        clearInterval(window.__adtCd); clearTimeout(window.__adtR); window.__adt = false;
+        const fr = /^fr/.test(String(LANG || ''));
+        box.innerHTML = '<div class="adt"><div class="adh">' + esc(T('adH')) + '</div><div class="adw">⏳ ' + (fr ? 'Prochaine tâche sponsorisée dans' : 'Next sponsored task in') + ' <b class="adc"></b></div></div>';
+        box.hidden = false;
+        const c = box.querySelector('.adc');
+        const tick = () => { const s = Math.max(0, Math.ceil((until - Date.now()) / 1000)); if (c) c.textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); if (s <= 0) { clearInterval(window.__adtCd); build(); } };
+        tick(); window.__adtCd = setInterval(tick, 1000);
+      }
       function build() {
-        const wait = pausedUntil() - Date.now();  // 22 oct 2026 (19h03, Jeremy): one task every 10 minutes
-        if (wait > 0) { gone(); setTimeout(build, wait + 1000); return; }
+        // 28 oct 2026 (9h26, Jeremy): one paid task every 5 minutes (server: bt_ads_reward, S.adtNext): a countdown shows when the next one comes
+        const until = Math.max(pausedUntil(), (typeof S !== 'undefined' && S && Number(S.adtNext)) || 0);
+        if (until - Date.now() > 0) { waitCard(until); return; }
+        clearInterval(window.__adtCd);
         if (typeof S !== 'undefined' && S && S.adtLeft === 0) { gone(); setTimeout(build, 600000); return; }  // 27 oct 2026 (Jeremy): 10 sponsored tasks a day
         box.innerHTML = '<div class="adt"><div class="adh">' + esc(T('adH')) + '</div><adsgram-task data-block-id="task-55373"><span slot="reward">' + esc(T('adR')) + '</span><div slot="button" class="tb">' + esc(T('adGo')) + '</div><div slot="claim" class="tb">' + esc(T('adClaim')) + '</div><div slot="done" class="tb">✓ ' + esc(T('adDone')) + '</div></adsgram-task></div>';
         box.hidden = false; window.__adt = true; $('#dotTasks').hidden = false; window.__adtAt = Date.now();
@@ -1886,7 +1897,7 @@ function nudge() {
         ['onBannerNotFound', 'onError', 'onTooLongSession'].forEach((ev) => tk.addEventListener(ev, () => { gone(); clearTimeout(window.__adtR); window.__adtR = setTimeout(build, 30000); }));  // hidden, asked again every 30 s
         const gift = () => {
           if (Date.now() - last < 3000) return; last = Date.now(); hap('ok'); toast(T('adOk')); [3000, 10000].forEach((ms) => setTimeout(refresh, ms));
-          try { localStorage.removeItem('bt_adt_pause'); } catch (e) {}  // 25 oct 2026 (22h48, Jeremy): no more 10-minute pause, the next task comes right away
+          try { localStorage.setItem('bt_adt_pause', String(Date.now() + 300000)); } catch (e) {}  // 28 oct 2026 (9h26, Jeremy): one task every 5 minutes, then a countdown (was: the next task right away)
           setTimeout(build, 2500);  // let the widget show its "done" state, then load the next task
         };
         tk.addEventListener('reward', gift); tk.addEventListener('onReward', gift);
