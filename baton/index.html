@@ -2424,6 +2424,8 @@ function nudge() {
         const tk = nav.querySelector('button[data-p="tasks"]');
         if (tk) tk.insertAdjacentElement('afterend', b); else nav.appendChild(b);
         nav.classList.add('g5');
+        // 28 oct 2026 (9h36, Jeremy): a link with startapp=games opens the Games list directly (announcement)
+        if (!window.__gmAuto && ((tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '') === 'games') { window.__gmAuto = true; setTimeout(() => { openSheet(); list(); }, 900); }
       };
       place(); setInterval(place, 1500);
     });
