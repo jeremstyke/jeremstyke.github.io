@@ -2192,7 +2192,10 @@ function nudge() {
       : { mct_task: 'Partner mission', mct_ref: 'Friend referral', mct_ref_prize: 'Best sponsor contest', mct_week_prize: 'Best players contest', mct_bourse_prize: 'Stock market contest', other: 'Other' };
     // 28 oct 2026 (8h02, Jeremy): and which game (tic-tac-toe, Tap the Diamond, Rig Rush)
     const GD = { ttt: /^fr/.test(lc) ? 'Morpion' : 'Tic-tac-toe', td: 'Tap the Diamond', rr: 'Rig Rush', rig: 'Rig Rush', spin: 'Lucky Spin', scratch: /^fr/.test(lc) ? 'Grattage' : 'Scratch card', flip: /^fr/.test(lc) ? 'Pile ou face' : 'Heads or tails', duel: /^fr/.test(lc) ? 'Défi morpion' : 'Tic-tac-toe challenge' };
-    const WK = (k) => { k = String(k || ''); if (/^mct/.test(k)) return WD[k] || WD.other; const p = k.split('_')[0]; return GD[p] || ''; };
+    // 28 oct 2026 (21h41, Jeremy): and where in Daily Score
+    const DSD = /^fr/.test(lc) ? { ds_main: 'Pronos du match du jour', ds_match: 'Pronos (anciens matchs)', ds_week_prize: 'Classement de la semaine', ds_ref: 'Amis invités', ds_task: 'Tâches sponsorisées', other: 'Autre' }
+      : { ds_main: 'Match of the day predictions', ds_match: 'Predictions (older matches)', ds_week_prize: 'Weekly ranking', ds_ref: 'Invited friends', ds_task: 'Sponsored tasks', other: 'Other' };
+    const WK = (k) => { k = String(k || ''); if (/^ds/.test(k)) return DSD[k] || DSD.other; if (/^mct/.test(k)) return WD[k] || WD.other; const p = k.split('_')[0]; return GD[p] || ''; };
     const st = document.createElement('style');
     st.textContent = '#gnBtn{display:block;margin:10px auto 0;padding:7px 14px;border-radius:99px;border:1px solid rgba(255,212,59,.45);background:rgba(255,212,59,.1);color:#ffd43b;font-weight:800;font-size:13px;cursor:pointer}'
       + '#gnSh{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center}'
@@ -2216,7 +2219,7 @@ function nudge() {
       const day = (t) => new Date(t * 1000).toLocaleDateString(undefined, { day: '2-digit', month: '2-digit' });
       box.innerHTML = '<h3>' + esc(L.h) + '</h3><div class="gt">' + nf(tot) + ' $BATON</div><div class="gl">' + esc(L.won) + '</div>'
         + cats.map(([k, v]) => '<div class="gr"><span>' + esc(L.c[k] || k) + '</span><b class="pos">+' + nf(v) + '</b></div>'
-          + ((k === 'mct' || k === 'games') ? Object.entries(Object.entries(r[k] || {}).reduce((o, [w, a]) => { const n = WK(w) || WD.other; o[n] = (o[n] || 0) + a; return o; }, {})).filter(([, a]) => a > 0).sort((a, b) => b[1] - a[1]).map(([w, a]) => '<div class="gr" style="padding-left:16px;font-size:13px;opacity:.85;border-top:0"><span>↳ ' + esc(w) + '</span><b>+' + nf(a) + '</b></div>').join('') : '')).join('')
+          + ((k === 'mct' || k === 'games' || k === 'ds') ? Object.entries(Object.entries(r[k] || {}).reduce((o, [w, a]) => { const n = WK(w) || WD.other; o[n] = (o[n] || 0) + a; return o; }, {})).filter(([, a]) => a > 0).sort((a, b) => b[1] - a[1]).map(([w, a]) => '<div class="gr" style="padding-left:16px;font-size:13px;opacity:.85;border-top:0"><span>↳ ' + esc(w) + '</span><b>+' + nf(a) + '</b></div>').join('') : '')).join('')
         + (r.pending > 0 ? '<div class="gr"><span>' + esc(L.pend) + '</span><b>' + nf(r.pending) + '</b></div>' : '')
         + (r.spent > 0 ? '<div class="gr"><span>' + esc(L.spent) + '</span><b class="neg">-' + nf(r.spent) + '</b></div>' : '')
         + (r.shop > 0 ? '<div class="gr"><span>' + esc(L.shop) + '</span><b class="neg">-' + nf(r.shop) + '</b></div>' : '')
