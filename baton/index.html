@@ -2067,7 +2067,7 @@ function nudge() {
       flN: 'Pile ou face', flD: 'Double ta mise ou perds-la', flPr: '1 chance sur 2 · 10 lancers par jour', fH: 'FACE', fT: 'PILE', bal: 'Ton solde', stk: 'Ta mise', pickT: 'Choisis ton côté', flWin: (n) => 'Gagné ! +' + n + ' $BATON', flLose: (n) => 'Perdu · -' + n + ' $BATON', flLeft: (n) => n + ' lancer' + (n > 1 ? 's' : '') + ' restant' + (n > 1 ? 's' : '') + ' aujourd\'hui', flFunds: 'Pas assez de $BATON pour cette mise', flNone: 'Plus de lancers aujourd\'hui, reviens demain',
       sN: 'Lucky Spin', sD: 'Tourne la roue, jusqu\'à 5 000 $BATON', sPr: '10 tours gratuits par jour', spin: 'TOURNER LA ROUE', spinV: '🎬 Regarde une vidéo : 1 tour', noSpin: 'Plus de tours aujourd\'hui, reviens demain',
       freeL: (n) => n + ' tour' + (n > 1 ? 's' : '') + ' gratuit' + (n > 1 ? 's' : '') + ' restant' + (n > 1 ? 's' : ''), vidL: (n) => n + ' tour' + (n > 1 ? 's' : '') + ' vidéo restant' + (n > 1 ? 's' : '') + ' aujourd\'hui', jack: 'JACKPOT !', youWon: 'Tu gagnes',
-      unl: '🎬 Regarde une vidéo : partie payée', free: 'Rejouer sans gain', nog: 'Partie sans gain', over: 'Tes 10 parties payées du jour sont jouées, reviens demain'
+      unl: '🎬 Regarde une vidéo : partie payée', free: 'Rejouer sans gain', nog: 'Partie sans gain', over: 'Tes 10 parties du jour sont jouées, reviens demain'
     } : {
       tab: 'Games', h: '🎮 Games', sub: 'Play and win $BATON', play: 'Play', soon: 'More games coming soon',
       tN: 'Tic-tac-toe', tD: 'Line up 3 batons before the AI', you: 'You', ai: 'AI', turn: 'Your turn', aiT: 'The AI is thinking...',
@@ -2081,7 +2081,7 @@ function nudge() {
       flN: 'Heads or tails', flD: 'Double your stake or lose it', flPr: '50/50 · 10 flips a day', fH: 'HEADS', fT: 'TAILS', bal: 'Your balance', stk: 'Your stake', pickT: 'Pick your side', flWin: (n) => 'You win! +' + n + ' $BATON', flLose: (n) => 'You lose · -' + n + ' $BATON', flLeft: (n) => n + ' flip' + (n > 1 ? 's' : '') + ' left today', flFunds: 'Not enough $BATON for this stake', flNone: 'No more flips today, come back tomorrow',
       sN: 'Lucky Spin', sD: 'Spin the wheel, up to 5,000 $BATON', sPr: '10 free spins a day', spin: 'SPIN THE WHEEL', spinV: '🎬 Watch a video: 1 spin', noSpin: 'No more spins today, come back tomorrow',
       freeL: (n) => n + ' free spin' + (n > 1 ? 's' : '') + ' left', vidL: (n) => n + ' video spin' + (n > 1 ? 's' : '') + ' left today', jack: 'JACKPOT!', youWon: 'You win',
-      unl: '🎬 Watch a video: paid game', free: 'Play again with no prize', nog: 'No prize game', over: 'Your 10 paid games of the day are played, come back tomorrow'
+      unl: '🎬 Watch a video: paid game', free: 'Play again with no prize', nog: 'No prize game', over: 'Your 10 games of the day are played, come back tomorrow'
     };
     const call = (action, body) => fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ initData: tw.initData, action }, body || {})) }).then((r) => r.json()).catch(() => null);
     const hap = (k) => { try { k ? tw.HapticFeedback.notificationOccurred(k) : tw.HapticFeedback.impactOccurred('light'); } catch (e) {} };
@@ -2207,12 +2207,14 @@ function nudge() {
         + '<div class="bd' + (intro ? ' in' : '') + '">' + cells + '</div>' + ms
         + (!play && G.paid > 0 && !G.doubled ? '<button class="bt gold" data-k="dbl">' + X.dbl(G.paid) + '</button>' : '')
         + (!play && G.doubled ? '<div class="ft" style="opacity:.9;color:#7dff6b">' + X.dblOk(G.paid) + '</div>' : '')
-        + (!play ? '<button class="bt ' + ((G.paid > 0 && !G.doubled) || !(G.wins_left > 0) ? 'gh' : 'gold') + '" data-k="new">' + (G.wins_left > 0 ? X.again : X.free) + '</button>' : '')
+        + (!play && G.wins_left > 0 ? '<button class="bt ' + (G.paid > 0 && !G.doubled ? 'gh' : 'gold') + '" data-k="new">' + X.again + '</button>' : '')
+        + (!play && !(G.wins_left > 0) ? '<button class="bt gh" disabled style="opacity:.75">🔒 ' + X.over + '</button>' : '')  // 28 oct 2026 (10h40, Jeremy): no game without a prize after the 10 of the day
         + '<div class="ft">' + X.pr(nf(G.reward || 1000), nf(G.draw_reward || 500), nf(G.lose_reward || 200)) + '<br>' + (G.wins_left > 0 ? X.left(G.wins_left) : X.over) + '</div>';
     }
     async function act(a, body) {
       if (busy) return null; busy = true; if (a === 'ttt_move') draw();
       const r = await call(a, body); busy = false;
+      if (r && r.error === 'over') { G = r; if (G.status === 'play') { G.status = 'over'; G.paid = 0; } draw(); return null; }  // 28 oct 2026: the 10 games of the day are played
       if (!r || !r.ok) { try { tw.showAlert(X.err); } catch (e) {} draw(); return null; }
       G = r; draw(); return r;
     }
