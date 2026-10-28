@@ -110,6 +110,15 @@
     if (prem()) return 'ok';
     // 25 oct 2026 (3h45, Jeremy): Adsgram first (block 55242), Ads Galaxy (game 135) as backup when Adsgram has no video
     // 26 oct 2026 (18h25, Jeremy): no more Ads Galaxy backup, it played right after the Adsgram video. Adsgram only.
+    // 28 oct 2026 (12h31, Jeremy): 1 video out of 5 on Ads Galaxy (game 135), Adsgram for the others. When Ads Galaxy has no video,
+    // Adsgram takes over; a video closed too early on Ads Galaxy counts as skipped (never two ads in a row).
+    let n = 0; try { n = Number(localStorage.getItem('mct_rwn') || 0) + 1; localStorage.setItem('mct_rwn', String(n)); } catch (e) { n = 1 + Math.floor(Math.random() * 5); }
+    if (n % 5 === 0) {
+      let r = null;
+      try { await sdk(); r = await window.showAdsGalaxy({ miniappId: AGX }); } catch (e) { r = null; }
+      if (r && r.reward_eligible) return 'ok';
+      if (r) return 'skip';
+    }
     return await agWatch();
   }
   async function watchN(n, btn) {
