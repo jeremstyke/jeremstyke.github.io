@@ -2354,6 +2354,21 @@ function nudge() {
         + '<button class="gcard" data-g="scratch"><div class="ic sw">' + ticketSvg() + '</div><div class="tx"><b>' + X.scN + '</b><div>' + X.scD + '</div><em>' + X.scPr + '</em></div><span class="go">' + X.play + '</span></button>'
         + '<button class="gcard" data-g="flip"><div class="ic sw">' + coinSvg('h') + '</div><div class="tx"><b>' + X.flN + '</b><div>' + X.flD + '</div><em>' + X.flPr + '</em></div><span class="go">' + X.play + '</span></button>'
         + '<button class="gcard" data-g="mct"><div class="ic sw"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0d2a1c"/><path d="M10 46 L22 34 L30 40 L44 22 L54 28" fill="none" stroke="#3ee6a0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M46 18 L56 18 L56 28" fill="none" stroke="#3ee6a0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="18" r="8" fill="#ffc531"/><text x="18" y="22" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="10" fill="#5a3a00">$</text></svg></div><div class="tx"><b>' + X.mN + '</b><div>' + X.mD + '</div><em>' + X.mPr + '</em></div><span class="go">' + X.open + '</span></button>'
+        + (() => {  /* 28 oct 2026 (17h20, Jeremy): Daily Score in the Games list */
+          const DG = { en: ['Daily Score', 'Guess the score of the match, win $BATON', '+5,000 exact score · +1,000 right result · +500 per prediction'],
+            fr: ['Daily Score', 'Devine le score du match, gagne des $BATON', '+5 000 score exact · +1 000 bon résultat · +500 par prono'],
+            es: ['Daily Score', 'Adivina el resultado del partido, gana $BATON', '+5.000 resultado exacto · +1.000 acierto · +500 por pronóstico'],
+            pt: ['Daily Score', 'Acerte o placar do jogo, ganhe $BATON', '+5.000 placar exato · +1.000 resultado certo · +500 por palpite'],
+            ru: ['Daily Score', 'Угадай счёт матча, выигрывай $BATON', '+5 000 точный счёт · +1 000 исход · +500 за прогноз'],
+            uk: ['Daily Score', 'Вгадай рахунок матчу, вигравай $BATON', '+5 000 точний рахунок · +1 000 результат · +500 за прогноз'],
+            tr: ['Daily Score', 'Maçın skorunu tahmin et, $BATON kazan', '+5.000 tam skor · +1.000 doğru sonuç · tahmin başına +500'],
+            id: ['Daily Score', 'Tebak skor pertandingan, menangkan $BATON', '+5.000 skor tepat · +1.000 hasil benar · +500 per tebakan'],
+            ar: ['Daily Score', 'خمّن نتيجة المباراة واربح $BATON', '‎+5,000 نتيجة دقيقة · ‎+1,000 نتيجة صحيحة · ‎+500 لكل توقع'],
+            fa: ['Daily Score', 'نتیجهٔ بازی را حدس بزن و $BATON ببر', '‎+5,000 نتیجهٔ دقیق · ‎+1,000 نتیجهٔ درست · ‎+500 برای هر پیش‌بینی'] };
+          let lg = 'en'; try { lg = String(LANG || 'en'); } catch (e) { lg = fr ? 'fr' : 'en'; }
+          const q = DG[lg] || DG.en;
+          return '<button class="gcard" data-g="ds"><div class="ic sw"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#123a22"/><circle cx="32" cy="32" r="19" fill="#ffffff"/><path d="M32 22 L41 28.5 L37.5 39 L26.5 39 L23 28.5 Z" fill="#1a1a1a"/><path d="M32 13 V22 M41 28.5 L50 25 M37.5 39 L43 47 M26.5 39 L21 47 M23 28.5 L14 25" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="tx"><b>' + q[0] + '</b><div>' + q[1] + '</div><em>' + q[2] + '</em></div><span class="go">' + X.open + '</span></button>';
+        })()
         + '<div class="soon">' + X.soon + '</div>';
       // 28 oct 2026 (10h35, Jeremy): how many plays are left today, on each game card
       const lb = box;
@@ -2747,6 +2762,7 @@ function nudge() {
       if (g && g.dataset.g === 'ttt') { hap(); ttt(); return; }
       if (g && g.dataset.g === 'spin') { hap(); spinView(); return; }
       if (g && g.dataset.g === 'scratch') { hap(); scratchView(); return; }
+      if (g && g.dataset.g === 'ds') { hap(); const u = 'https://t.me/DailyScorefootbot/play?startapp=src_btjeux'; try { tw.openTelegramLink(u); } catch (x) { location.href = u; } return; }  // 28 oct 2026 (17h20, Jeremy): Daily Score in the Games list
       if (g && g.dataset.g === 'mct') { hap(); const u = 'https://t.me/Memecointycoonbot?startapp=src_btjeux'; try { tw.openTelegramLink(u); } catch (x) { location.href = u; } return; }  // 28 oct 2026 (9h06, Jeremy): Meme Coin Tycoon in the Games list
       if (g && g.dataset.g === 'flip') { hap(); flipView(); return; }
       const stb = e.target.closest('[data-st]'), fb = e.target.closest('[data-f]');
