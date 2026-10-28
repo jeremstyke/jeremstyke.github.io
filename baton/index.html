@@ -393,7 +393,7 @@ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
 
     <section class="panel" id="p-tasks" hidden>
       <div class="score"><small data-t="earnMore"></small><div class="big" data-t="tasks"></div></div>
-      <div id="gamesCard"></div>
+      <div id="gamesCard" style="display:none!important"></div><!-- 28 oct 2026 (11h39, Jeremy): no more "games that earn $BATON" card -->
       <div class="list" id="subTasks"></div>
       <div class="list" id="adtask" hidden></div>
       <div class="list" id="vidTask" hidden></div>
@@ -1434,7 +1434,7 @@ function render() {
   $('#subTasks').innerHTML = sec('📢 ' + T('subs'), srt(sb), srow);
   // 28 oct 2026 (11h05, Jeremy): client tasks in "Sponsored tasks": a channel or group to join (checked by @Batoncheckbot,
   // +reward at once, +hold after hold_days if still subscribed) or a mini app / bot to open (paid on the tap, it cannot be checked)
-  { let sp = $('#spTasks'); if (!sp) { sp = document.createElement('div'); sp.id = 'spTasks'; sp.className = 'list'; $('#adtask').before(sp); sp.onclick = (e) => $('#tasks').onclick(e); }
+  { let sp = $('#spTasks'); if (!sp) { sp = document.createElement('div'); sp.id = 'spTasks'; sp.className = 'list'; $('#gamesCard').before(sp); $('#adtask') && sp.after($('#adtask'));  /* 28 oct 2026 (11h39, Jeremy): sponsored tasks at the top of the tab */ sp.onclick = (e) => $('#tasks').onclick(e); }
     const fr = LANG === 'fr', spl = S.tasks.filter((t) => (t.kind === 'sub' && (!t.done || t.hstat === 'wait')) || (t.kind === 'click' && !t.done));
     const prow = (t) => {
       let line, right;
@@ -1445,7 +1445,7 @@ function render() {
       return '<div class="row' + (t.done ? ' on' : '') + '"><div class="t"><b>' + esc(t.title) + '</b><span>' + line + '</span></div>' + right + '</div>';
     };
     // 28 oct 2026 (11h17, Jeremy): anyone can buy subscribers or visits from here: it opens @Batoncheckbot (Stars, fully automatic)
-    const buy = '<div class="row"><div class="t"><b>📣 ' + (fr ? 'Booste ta chaîne ou ton appli' : 'Boost your channel or app') + '</b><span>' + (fr ? 'Des abonnés réels ou des visites, payés en ⭐ Stars' : 'Real subscribers or visits, paid in ⭐ Stars') + '</span></div><button class="sm" id="spBuy">' + (fr ? 'Acheter' : 'Buy') + '</button></div>';
+    const buy = '<div class="row"><div class="t"><b>📣 ' + (fr ? 'Booste ta chaîne' : 'Boost your channel') + '</b><span>' + (fr ? 'Ta chaîne, ton groupe ou ton appli : abonnés réels ou visites, en ⭐ Stars' : 'Your channel, group or app: real subscribers or visits, in ⭐ Stars') + '</span></div><button class="sm" id="spBuy">' + (fr ? 'Acheter' : 'Buy') + '</button></div>';
     sp.innerHTML = '<div class="sec">⭐ ' + (fr ? 'Tâches sponsorisées' : 'Sponsored tasks') + '</div>' + srt(spl).map(prow).join('') + buy;
     const bb = sp.querySelector('#spBuy'); if (bb) bb.onclick = (e) => { e.stopPropagation(); hap(); try { tg.openTelegramLink('https://t.me/Batoncheckbot?start=buy'); } catch (x) { openLink('https://t.me/Batoncheckbot?start=buy'); } }; }  // (17h09) the channel stays visible, with its Active badge  // 22 oct 2026 (17h08, Jeremy): the channels to join come first, above the sponsored task
   // 22 oct 2026 (17h11, Jeremy): the tasks already done sit at the bottom in a closed list you can open, with what they earned
@@ -1787,7 +1787,7 @@ $('#sChains').onclick = () => { rankMode = 'chains'; $('#sChains').setAttribute(
 $('#sMiners').onclick = () => { rankMode = 'miners'; $('#sMiners').setAttribute('aria-pressed', 'true'); $('#sChains').setAttribute('aria-pressed', 'false'); loadRanks(); };
 function go(p) {
   // 27 oct 2026 (Jeremy): the sponsored task also shows on the home screen, under the baton card (it moves between the two tabs)
-  { const ab = document.getElementById('adtask'); if (ab) { if (p === 'tasks') {  /* 28 oct 2026 (9h45, Jeremy): the sponsored task only in Tasks, no more on the home screen */ const vt = document.getElementById('vidTask'); if (vt && ab.nextElementSibling !== vt) { ab.style.marginTop = ''; vt.insertAdjacentElement('beforebegin', ab); } } } }
+  { const ab = document.getElementById('adtask'); if (ab) { if (p === 'tasks') {  /* 28 oct 2026 (9h45, Jeremy): the sponsored task only in Tasks, no more on the home screen */ const sp = document.getElementById('spTasks'); if (sp && sp.nextElementSibling !== ab) { ab.style.marginTop = ''; sp.after(ab); }  /* 28 oct 2026 (11h39, Jeremy): right under the sponsored tasks, at the top */ } } }
   if (p === 'tasks' && window.__adtRe) { try { window.__adtRe(); } catch (e) {} }
   document.querySelectorAll('nav.tabs button').forEach((x) => x.toggleAttribute('aria-current', x.dataset.p === p));
   document.querySelectorAll('nav.tabs button[aria-current]').forEach((x) => x.setAttribute('aria-current', 'page'));
