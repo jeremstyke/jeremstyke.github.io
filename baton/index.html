@@ -2042,6 +2042,28 @@ function nudge() {
   $('#loader').hidden = true;
   // 23 oct 2026 (Jeremy): a banned player sees a "suspended" screen
   if (!r.ok && r.error === 'banned') { if (window.JSBan) { JSBan(); return; } /* 24 oct 2026: same screen in every game (games.js) */ const F = LANG === 'fr'; document.body.innerHTML = '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px));background:#1b0a23;color:#fff2e9;text-align:center;font-family:system-ui,sans-serif"><div style="max-width:380px"><div style="font-size:54px">🚫</div><h2 style="margin:10px 0 6px">' + (F ? 'Compte bloqué' : 'Account blocked') + '</h2><p style="margin:0;opacity:.85;line-height:1.45">' + (F ? 'Motif : insultes.<br>Les sommes gagnées ont été payées si tu avais ajouté ton wallet. Sinon, ajoute-le dans Meme Coin Tycoon.' : 'Reason: insults.<br>What you earned has been paid if you had added your wallet. If not, add it in Meme Coin Tycoon.') + '</p></div></div>'; return; }
+  // 28 oct 2026 (23h55, Jeremy): to play, every player (new or old) must be in the Club @passthebatonclub
+  if (!r.ok && r.error === 'club') {
+    const CG = {
+      en: ['Join the Club to play', 'Pass The Baton is played with the Club: players, help, live withdrawals and a daily gift of 1,000 to 10,000 $BATON.', '👥 Join the Club', '✅ I joined', '🎁 Every day in the group: 1,000 to 10,000 $BATON to win!'],
+      fr: ['Rejoins le Club pour jouer', 'Pass The Baton se joue avec le Club : des joueurs, de l\'aide, les retraits en direct et un cadeau chaque jour de 1 000 à 10 000 $BATON.', '👥 Rejoindre le Club', '✅ C\'est fait', '🎁 Chaque jour dans le groupe : 1 000 à 10 000 $BATON à gagner !'],
+      es: ['Únete al Club para jugar', 'Pass The Baton se juega con el Club: jugadores, ayuda, retiros en vivo y un regalo diario de 1.000 a 10.000 $BATON.', '👥 Unirme al Club', '✅ Ya me uní', '🎁 Cada día en el grupo: ¡de 1.000 a 10.000 $BATON para ganar!'],
+      pt: ['Entre no Club para jogar', 'Pass The Baton se joga com o Club: jogadores, ajuda, saques ao vivo e um presente diário de 1.000 a 10.000 $BATON.', '👥 Entrar no Club', '✅ Já entrei', '🎁 Todo dia no grupo: de 1.000 a 10.000 $BATON para ganhar!'],
+      ru: ['Вступи в Club, чтобы играть', 'В Pass The Baton играют вместе с Club: игроки, помощь, выводы в прямом эфире и ежедневный подарок от 1 000 до 10 000 $BATON.', '👥 Вступить в Club', '✅ Я вступил', '🎁 Каждый день в группе: от 1 000 до 10 000 $BATON в подарок!'],
+      uk: ['Вступи до Club, щоб грати', 'У Pass The Baton грають разом із Club: гравці, допомога, виведення наживо і щоденний подарунок від 1 000 до 10 000 $BATON.', '👥 Вступити до Club', '✅ Я вступив', '🎁 Щодня в групі: від 1 000 до 10 000 $BATON у подарунок!'],
+      tr: ['Oynamak için Club\'a katıl', 'Pass The Baton, Club ile oynanır: oyuncular, yardım, canlı çekimler ve her gün 1.000 ile 10.000 $BATON arası hediye.', '👥 Club\'a katıl', '✅ Katıldım', '🎁 Her gün grupta: 1.000 ile 10.000 $BATON arası kazan!'],
+      id: ['Gabung Club untuk bermain', 'Pass The Baton dimainkan bersama Club: pemain, bantuan, penarikan langsung dan hadiah harian 1.000 sampai 10.000 $BATON.', '👥 Gabung Club', '✅ Sudah gabung', '🎁 Setiap hari di grup: 1.000 sampai 10.000 $BATON untuk dimenangkan!'],
+      ar: ['انضم إلى Club لتلعب', 'تُلعب Pass The Baton مع Club: لاعبون، مساعدة، سحوبات مباشرة وهدية يومية من 1,000 إلى 10,000 $BATON.', '👥 انضم إلى Club', '✅ انضممت', '🎁 كل يوم في المجموعة: من 1,000 إلى 10,000 $BATON للفوز!'],
+      fa: ['برای بازی عضو Club شو', 'Pass The Baton با Club بازی می‌شود: بازیکنان، کمک، برداشت‌های زنده و هدیه روزانه ۱٬۰۰۰ تا ۱۰٬۰۰۰ $BATON.', '👥 عضویت در Club', '✅ عضو شدم', '🎁 هر روز در گروه: ۱٬۰۰۰ تا ۱۰٬۰۰۰ $BATON برای بردن!'],
+    }[LANG] || null;
+    const C = CG || ['Join the Club to play', '', '👥 Join the Club', '✅ I joined', ''];
+    const el = document.createElement('div'); el.className = 'maint';
+    el.innerHTML = '<div style="max-width:360px;text-align:center;color:#fff2e9"><div style="font-size:56px">🏃</div><h2 style="margin:10px 0 8px">' + C[0] + '</h2><div style="margin:0 0 12px;padding:12px 14px;border-radius:14px;background:rgba(255,200,80,.16);border:1px solid rgba(255,200,80,.5);font-weight:800;font-size:16px;line-height:1.35;color:#ffd98a">' + C[4] + '</div><p style="margin:0 0 18px;opacity:.85;line-height:1.45">' + C[1] + '</p><button class="btn gold" id="cgJoin" style="margin-bottom:10px">' + C[2] + '</button><button class="btn" id="cgOk">' + C[3] + '</button></div>';
+    document.body.appendChild(el);
+    el.querySelector('#cgJoin').onclick = () => { hap(); openLink('https://t.me/passthebatonclub'); };
+    el.querySelector('#cgOk').onclick = () => { hap(); location.reload(); };
+    return;
+  }
   if (!r.ok) { if (r.error !== 'maint') { toast(errMsg(r)); const ld = $('#loader'); ld.innerHTML = '<button class="btn gold" style="width:auto;padding:0 28px" onclick="location.reload()">↻</button>'; ld.hidden = false; } return; }
   setState(r);
   // 21 oct 2026: ask once to let @PassTheBatonBot send messages (players who came by a link never pressed Start)
