@@ -1524,6 +1524,24 @@ $('#passBtn').onclick = () => {
 // 22 oct 2026: keep the baton in hand 4 h longer for 10 Stars (once per baton); the bot's webhook applies the payment
 // 22 oct 2026 (Jeremy): rewarded video, Adsgram block 55429. Adsgram calls the reward URL (GET ?ads=rw), which adds 1 hour
 // to the baton in hand (4 per baton, bt_ads_reward); here we only show the video and refresh the timer.
+// 28 oct 2026 (12h26, Jeremy): 1 rewarded video out of 5 comes from Ads Galaxy (mini app 135, the code of Meme Coin Tycoon), Adsgram otherwise.
+// When Ads Galaxy has no ad, Adsgram takes over at once; a video closed too early on Ads Galaxy counts as no video (never two ads in a row).
+window.__showRw = async function () {
+  let n = 0; try { n = Number(localStorage.getItem('bt_rwn') || 0) + 1; localStorage.setItem('bt_rwn', String(n)); } catch (e) { n = 1 + Math.floor(Math.random() * 5); }
+  if (n % 5 === 0) {
+    let r = null;
+    try {
+      if (!window.showAdsGalaxy) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://app.adsgalaxy.online/sdk.js?id=135'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
+      r = await window.showAdsGalaxy({ miniappId: 135 });
+    } catch (e) { r = null; }
+    if (r && r.reward_eligible) { window.__rvAt = Date.now(); await api('agx_ok', { rid: String(r.request_id || '') }); return 'agx'; }
+    if (r) throw new Error('agx_skip');
+  }
+  if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
+  await window.Adsgram.init({ blockId: '55429' }).show();
+  window.__rvAt = Date.now();
+  return 'adsgram';
+};
 async function playVid(b, mode) {
   // 28 oct 2026 (9h52, Jeremy): 1 minute at least between two boost videos (the server refuses earlier ones too)
   { const w = Math.max((window.__rvAt || 0) + 30000, Number(S && S.rvNext) || 0) - Date.now(); if (w > 0) { hap('err'); toast((LANG === 'fr' ? '⏳ Prochaine vidéo dans ' : '⏳ Next video in ') + Math.ceil(w / 1000) + ' s'); return; } }  // 28 oct 2026 (10h30, Jeremy): 30 s between two videos, everywhere
@@ -1534,8 +1552,7 @@ async function playVid(b, mode) {
     if (vr && vr.error === 'wait') { hap('err'); toast((LANG === 'fr' ? '⏳ Prochaine vidéo dans ' : '⏳ Next video in ') + Math.max(1, Math.ceil(((Number(vr.next) || 0) - Date.now()) / 1000)) + ' s'); b.disabled = false; return; }
     if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
     const nm = String((S.batons[0] && S.batons[0].next_mult) || 2).replace('.', LANG === 'fr' ? ',' : '.'), b4 = S.batons[0] ? String(S.batons[0].boost_n) + ':' + S.batons[0].boost_until : '';
-    await window.Adsgram.init({ blockId: '55429' }).show();
-    window.__rvAt = Date.now();
+    await window.__showRw();
     if (mode === 'x2') {
       // 27 oct 2026 (Jeremy): the boost comes from Adsgram's confirmation to the server (reward URL), sometimes a few seconds later:
       // wait for it (up to 20 s) before saying it is on, instead of announcing it at once
@@ -2578,8 +2595,7 @@ function nudge() {
       const v = await call('vid', { mode: 'ttt' });
       if (v && v.error === 'wait') { try { tw.showAlert((fr ? '⏳ Prochaine vidéo dans ' : '⏳ Next video in ') + Math.max(1, Math.ceil(((Number(v.next) || 0) - Date.now()) / 1000)) + ' s'); } catch (e) {} throw { wait: true }; }
       if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
-      await window.Adsgram.init({ blockId: '55429' }).show();
-      window.__rvAt = Date.now();
+      await window.__showRw();  // 28 oct 2026: Adsgram, or Ads Galaxy 1 time out of 5
     }
     async function onClick(e) {
       if (e.target === sh) { close(); return; }
