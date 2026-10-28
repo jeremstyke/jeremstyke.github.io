@@ -2010,5 +2010,86 @@ function nudge() {
   } catch (e) {}
 })();
 </script>
+<script>
+// 28 oct 2026 (7h39, Jeremy): tic-tac-toe against the AI, test version shown only to the players listed on the server (ds_config bt_ttt.users).
+// The game is played on the server (bt_ttt_api: the AI answers there), a win pays $BATON, doubled once with a rewarded video (Adsgram 55429, mode 'ttt').
+(function () {
+  try {
+    const tw = window.Telegram && window.Telegram.WebApp; if (!tw || !tw.initData) return;
+    const FN = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/baton';
+    const fr = /^fr/.test(String((tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || ''));
+    const X = fr ? { b: '🎮 Morpion contre l\'IA', h: '🎮 Morpion', you: 'Tu joues ❌, l\'IA joue ⭕', win: (n) => '🎉 Gagné ! +' + n + ' $BATON', winNo: '🎉 Gagné ! (plus de gains aujourd\'hui)', lose: '😕 Perdu, l\'IA a gagné', draw: '🤝 Match nul', turn: 'À toi de jouer', again: '🔄 Nouvelle partie', dbl: (n) => '🎬 Doubler : +' + n + ' $BATON', dblOk: (n) => '✅ Doublé ! +' + n + ' $BATON', left: (n, r) => n + ' victoire' + (n > 1 ? 's' : '') + ' payée' + (n > 1 ? 's' : '') + ' aujourd\'hui · +' + r + ' $BATON chacune', close: 'Fermer', err: 'Erreur, réessaie', noVid: 'Pas de vidéo pour le moment' }
+      : { b: '🎮 Tic-tac-toe vs AI', h: '🎮 Tic-tac-toe', you: 'You play ❌, the AI plays ⭕', win: (n) => '🎉 You win! +' + n + ' $BATON', winNo: '🎉 You win! (no more prizes today)', lose: '😕 You lose, the AI won', draw: '🤝 Draw', turn: 'Your turn', again: '🔄 New game', dbl: (n) => '🎬 Double it: +' + n + ' $BATON', dblOk: (n) => '✅ Doubled! +' + n + ' $BATON', left: (n, r) => n + ' paid win' + (n > 1 ? 's' : '') + ' left today · +' + r + ' $BATON each', close: 'Close', err: 'Error, try again', noVid: 'No video right now' };
+    const call = (action, body) => fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ initData: tw.initData, action }, body || {})) }).then((r) => r.json()).catch(() => null);
+    const hap = (k) => { try { k ? tw.HapticFeedback.notificationOccurred(k) : tw.HapticFeedback.impactOccurred('light'); } catch (e) {} };
+    const st = document.createElement('style');
+    st.textContent = '#tttBtn{display:block;margin:8px auto 0;padding:7px 14px;border-radius:99px;border:1px solid rgba(80,160,255,.6);background:rgba(47,141,255,.18);color:#cfe3ff;font-weight:800;font-size:13px}'
+      + '#tttSh{position:fixed;inset:0;z-index:61;background:rgba(0,0,0,.65);display:flex;align-items:flex-end;justify-content:center}'
+      + '#tttSh .tb{width:100%;max-width:520px;background:#0b1430;border-radius:22px 22px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));box-sizing:border-box;color:#fff;text-align:center}'
+      + '#tttSh h3{margin:0 0 4px;font-size:18px}#tttSh .ts{font-size:13px;opacity:.75;margin:0 0 12px}'
+      + '#tttSh .tg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:300px;margin:0 auto}'
+      + '#tttSh .tc{aspect-ratio:1;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);font-size:44px;color:#fff;display:grid;place-items:center;padding:0}'
+      + '#tttSh .tc:disabled{opacity:1}#tttSh .tm{min-height:24px;margin:14px 0 6px;font-weight:800;font-size:16px}'
+      + '#tttSh .tbtn{display:block;width:100%;margin-top:10px;padding:12px;border-radius:14px;border:0;font-weight:800;font-size:15px}'
+      + '#tttSh .gold{background:#ffd43b;color:#08121f}#tttSh .gh{background:rgba(255,255,255,.1);color:#fff}#tttSh .tl{font-size:12px;opacity:.6;margin-top:10px}';
+    document.head.appendChild(st);
+    let G = null, busy = false, box = null;
+    const sym = (c) => c === 'X' ? '❌' : c === 'O' ? '⭕' : '';
+    function draw() {
+      if (!box || !G) return;
+      const b = G.board || '.........', play = G.status === 'play';
+      const msg = G.status === 'win' ? (G.paid > 0 ? X.win(G.paid) : X.winNo) : G.status === 'lose' ? X.lose : G.status === 'draw' ? X.draw : X.turn;
+      box.innerHTML = '<h3>' + X.h + '</h3><p class="ts">' + X.you + '</p><div class="tg">'
+        + [...b].map((c, i) => '<button class="tc" data-c="' + (i + 1) + '"' + (c !== '.' || !play ? ' disabled' : '') + '>' + sym(c) + '</button>').join('') + '</div>'
+        + '<div class="tm">' + msg + '</div>'
+        + (G.status === 'win' && G.paid > 0 && !G.doubled ? '<button class="tbtn gold" data-k="dbl">' + X.dbl(G.paid) + '</button>' : '')
+        + (!play ? '<button class="tbtn ' + (G.status === 'win' && G.paid > 0 && !G.doubled ? 'gh' : 'gold') + '" data-k="new">' + X.again + '</button>' : '')
+        + '<button class="tbtn gh" data-k="close">' + X.close + '</button>'
+        + '<div class="tl">' + X.left(G.wins_left, G.reward) + '</div>';
+    }
+    async function act(a, body) {
+      if (busy) return; busy = true;
+      const r = await call(a, body); busy = false;
+      if (!r || !r.ok) { try { tw.showAlert(X.err); } catch (e) {} return null; }
+      G = r; draw(); return r;
+    }
+    async function open() {
+      hap();
+      const d = document.createElement('div'); d.id = 'tttSh'; box = document.createElement('div'); box.className = 'tb'; box.textContent = '⏳'; d.appendChild(box); document.body.appendChild(d);
+      d.onclick = async (e) => {
+        if (e.target === d) { d.remove(); return; }
+        const c = e.target.closest('[data-c]'), k = e.target.closest('[data-k]');
+        if (c && G && G.status === 'play') { hap(); const r = await act('ttt_move', { cell: Number(c.dataset.c) }); if (r && r.status === 'win') hap('success'); else if (r && r.status === 'lose') hap('error'); return; }
+        if (!k) return;
+        if (k.dataset.k === 'close') { d.remove(); return; }
+        if (k.dataset.k === 'new') { hap(); await act('ttt_new'); return; }
+        if (k.dataset.k === 'dbl') {
+          hap(); k.disabled = true;
+          try {
+            await call('vid', { mode: 'ttt' });
+            if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
+            await window.Adsgram.init({ blockId: '55429' }).show();
+            const r = await act('ttt_double', { id: G.id });
+            if (r) { hap('success'); const m = box.querySelector('.tm'); if (m) m.textContent = X.dblOk(r.got); }
+          } catch (x) { k.disabled = false; try { tw.showAlert(X.noVid); } catch (e) {} }
+        }
+      };
+      const r = await call('ttt_state');
+      if (!r || !r.ok) { d.remove(); return; }
+      G = r; if (!G.board || G.status !== 'play') await act('ttt_new'); else draw();
+    }
+    // the button only shows when the server says this player can play (test version)
+    call('ttt_state').then((r) => {
+      if (!r || !r.ok) return;
+      const place = () => {
+        if (document.getElementById('tttBtn')) return;
+        const sc = document.querySelector('#p-home .score'); if (!sc) return;
+        const b = document.createElement('button'); b.id = 'tttBtn'; b.type = 'button'; b.textContent = X.b; b.onclick = open; sc.appendChild(b);
+      };
+      place(); setInterval(place, 1500);
+    });
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
