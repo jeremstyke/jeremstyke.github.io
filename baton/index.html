@@ -1528,7 +1528,7 @@ $('#passBtn').onclick = () => {
 // When Ads Galaxy has no ad, Adsgram takes over at once; a video closed too early on Ads Galaxy counts as no video (never two ads in a row).
 window.__showRw = async function () {
   let n = 0; try { n = Number(localStorage.getItem('bt_rwn') || 0) + 1; localStorage.setItem('bt_rwn', String(n)); } catch (e) { n = 1 + Math.floor(Math.random() * 5); }
-  if (n % 5 === 0) {
+  if (false && n % 5 === 0) {  /* 28 oct 2026 (12h31, Jeremy): off, Pass The Baton is not registered at Ads Galaxy (only Meme Coin Tycoon is) */
     let r = null;
     try {
       if (!window.showAdsGalaxy) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://app.adsgalaxy.online/sdk.js?id=135'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
