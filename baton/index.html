@@ -2145,6 +2145,7 @@ function nudge() {
       + '#gmSh .hub{position:absolute;left:50%;top:50%;width:22%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#1d3a80,#0a1734);box-shadow:0 0 0 4px #ffc531,0 0 20px rgba(255,197,49,.65);display:grid;place-items:center;padding:4%;box-sizing:border-box}#gmSh .hub svg{width:100%;height:100%}'
       + '#gmSh .win{animation:gmW .6s cubic-bezier(.2,1.6,.4,1)}@keyframes gmW{from{transform:scale(.3);opacity:0}}#gmSh .gcard .ic.sw{display:block;padding:2px;background:none}#gmSh .gcard .ic.sw svg{width:100%;height:100%}#gmSh .ms .jk{display:block;color:#ff7ad1;font-size:14px;letter-spacing:.12em}'
       /* 28 oct 2026 (10h05, Jeremy): challenge a friend */
+      + '#gmSh .gcard .gl{display:inline-block;margin-top:6px;padding:2px 9px;border-radius:99px;background:rgba(125,255,107,.13);color:#8dff7d;font-size:11.5px;font-weight:800}#gmSh .gcard .gl.z{background:rgba(255,95,122,.15);color:#ffa3b1}'
       + '#gmSh .drow{display:flex;justify-content:space-between;align-items:center;width:100%;padding:11px 14px;margin-top:8px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#fff;font-weight:800;font-size:14px}#gmSh .drow b{color:#ffd43b}'
       + '#gmSh .dhero,#gmSh.full .gp .dhero{width:min(120px,32vw);margin:6px auto 4px}#gmSh .dhero svg{width:100%;height:auto;display:block;filter:drop-shadow(0 0 22px rgba(255,95,122,.45))}#gmSh .dhero.pulse{animation:gmPl 1.6s ease-in-out infinite}@keyframes gmPl{50%{transform:scale(1.07)}}'
       + '#gmSh .dpot,#gmSh.full .gp .dpot{display:flex;align-items:center;justify-content:center;gap:6px;margin:0 auto 10px;width:max-content;max-width:100%;padding:5px 14px;border-radius:99px;background:rgba(255,197,49,.12);border:1px solid rgba(255,197,49,.4);color:#ffd43b;font-weight:900;font-size:14px}#gmSh .dpot svg{width:18px;height:18px}#gmSh .dpot.fr{color:#9fc8ff;background:rgba(77,168,255,.1);border-color:rgba(77,168,255,.4)}'
@@ -2177,6 +2178,17 @@ function nudge() {
         + '<button class="gcard" data-g="flip"><div class="ic sw">' + coinSvg('h') + '</div><div class="tx"><b>' + X.flN + '</b><div>' + X.flD + '</div><em>' + X.flPr + '</em></div><span class="go">' + X.play + '</span></button>'
         + '<button class="gcard" data-g="mct"><div class="ic sw"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0d2a1c"/><path d="M10 46 L22 34 L30 40 L44 22 L54 28" fill="none" stroke="#3ee6a0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M46 18 L56 18 L56 28" fill="none" stroke="#3ee6a0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="18" r="8" fill="#ffc531"/><text x="18" y="22" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="900" font-size="10" fill="#5a3a00">$</text></svg></div><div class="tx"><b>' + X.mN + '</b><div>' + X.mD + '</div><em>' + X.mPr + '</em></div><span class="go">' + X.open + '</span></button>'
         + '<div class="soon">' + X.soon + '</div>';
+      // 28 oct 2026 (10h35, Jeremy): how many plays are left today, on each game card
+      const lb = box;
+      call('games_left').then((g) => {
+        if (!g || !g.ok || box !== lb) return;
+        ['ttt', 'spin', 'scratch', 'flip'].forEach((k) => {
+          const c = box.querySelector('[data-g="' + k + '"] .tx'); if (!c || g[k] == null) return;
+          const n = g[k], el = document.createElement('span'); el.className = 'gl' + (n > 0 ? '' : ' z');
+          el.textContent = n > 0 ? (fr ? n + '/' + (g[k + '_max'] || 10) + ' restantes aujourd\'hui' : n + '/' + (g[k + '_max'] || 10) + ' left today') : (fr ? '0/' + (g[k + '_max'] || 10) + ' · reviens demain' : '0/' + (g[k + '_max'] || 10) + ' · come back tomorrow');
+          c.appendChild(el);
+        });
+      });
     }
     function draw() {
       if (!box || !G) return;
