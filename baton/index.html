@@ -1664,7 +1664,8 @@ window.__showRw = async function () {
   let n = 0; try { n = Number(localStorage.getItem('bt_rwn') || 0) + 1; localStorage.setItem('bt_rwn', String(n)); } catch (e) { n = 1 + Math.floor(Math.random() * 5); }
   /* 28 oct 2026 (14h08, Jeremy): 1 rewarded video out of 5 on Monetag (rewarded interstitial, zone S.mtgZone), Adsgram otherwise or when Monetag has nothing.
      Monetag does not call the server: the app confirms the video once (agx_ok, which pays the reward the 'vid' call asked for, once). */
-  if (Math.random() < 0.2 && typeof S !== 'undefined' && S && S.mtgZone != null) {  /* 28 oct 2026 (15h29, Jeremy): about 1 video out of 5 over all players, drawn at random (no counter per player) */
+  const pref = window.__rwPref; window.__rwPref = null;  // 28 oct 2026 (23h25): the boost tells which network to use ('ag' or 'mtg')
+  if ((pref === 'mtg' || (pref !== 'ag' && Math.random() < 0.2)) && typeof S !== 'undefined' && S && S.mtgZone != null) {  /* 28 oct 2026 (15h29, Jeremy): about 1 video out of 5 over all players, drawn at random (no counter per player) */
     const fn = 'show_' + S.mtgZone; let ok = false;
     try {
       if (!window[fn]) await new Promise((res, rej) => { const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(S.mtgZone)); s.setAttribute('data-sdk', fn); s.onload = res; s.onerror = rej; document.head.appendChild(s); setTimeout(() => rej(new Error('timeout')), 8000); });
@@ -1680,13 +1681,15 @@ window.__showRw = async function () {
 async function playVid(b, mode) {
   // 28 oct 2026 (9h52, Jeremy): 1 minute at least between two boost videos (the server refuses earlier ones too)
   { const w = Math.max((window.__rvAt || 0) + 30000, Number(S && S.rvNext) || 0) - Date.now(); if (w > 0) { hap('err'); toast((LANG === 'fr' ? '⏳ Prochaine vidéo dans ' : '⏳ Next video in ') + Math.ceil(w / 1000) + ' s'); return; } }  // 28 oct 2026 (10h30, Jeremy): 30 s between two videos, everywhere
-  if (mode === 'x2') { const w = Math.max((window.__bstAt || 0) + 60000, Number(S && S.bstNext) || 0) - Date.now(); if (w > 0) { hap('err'); toast((LANG === 'fr' ? '⏳ Prochain boost possible dans ' : '⏳ Next boost possible in ') + Math.ceil(w / 1000) + ' s'); return; } }
+  if (mode === 'x2') { const w = Math.max((window.__bstAt || 0) + 30000, Number(S && S.bstNext) || 0) - Date.now();  /* 28 oct 2026 (23h25, Jeremy): 30 s between two boost videos */ if (w > 0) { hap('err'); toast((LANG === 'fr' ? '⏳ Prochain boost possible dans ' : '⏳ Next boost possible in ') + Math.ceil(w / 1000) + ' s'); return; } }
   hap(); b.disabled = true;
   try {
     const vr = await api('vid', { mode: mode || 'baton' });  // tells the server which reward this video pays
     if (vr && vr.error === 'wait') { hap('err'); toast((LANG === 'fr' ? '⏳ Prochaine vidéo dans ' : '⏳ Next video in ') + Math.max(1, Math.ceil(((Number(vr.next) || 0) - Date.now()) / 1000)) + ' s'); b.disabled = false; return; }
     if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
     const nm = String((S.batons[0] && S.batons[0].next_mult) || 2).replace('.', LANG === 'fr' ? ',' : '.'), b4 = S.batons[0] ? String(S.batons[0].boost_n) + ':' + S.batons[0].boost_until : '';
+    // 28 oct 2026 (23h25, Jeremy): the boost steps alternate between the two ad networks: x2 Adsgram, x2.5 Monetag, x3 Adsgram, x3.5 Monetag, x4 Adsgram
+    if (mode === 'x2') { const bc = S && S.batons && S.batons[0], act = !!(bc && bc.boost_until && Number(bc.boost_until) * (Number(bc.boost_until) < 1e12 ? 1000 : 1) > Date.now()); window.__rwPref = act && Math.round(((Number(bc.next_mult) || 2) - 2) * 2) % 2 === 1 ? 'mtg' : 'ag'; }
     await window.__showRw();
     if (mode === 'x2') {
       // 27 oct 2026 (Jeremy): the boost comes from Adsgram's confirmation to the server (reward URL), sometimes a few seconds later:
