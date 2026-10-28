@@ -1387,7 +1387,7 @@ function render() {
       else { vb.disabled = false; vb.textContent = T('x2Go').replace('x2', xm(b0.next_mult)) + bc; }
       // 28 oct 2026 (9h58, Jeremy): 1 minute between two boost videos, with a small countdown on the button (server: S.bstNext)
       clearInterval(window.__bwI); delete vb.dataset.bw;
-      const bwt = () => { const w = Math.ceil((Math.max((window.__bstAt || 0) + 60000, Number(S.bstNext) || 0) - Date.now()) / 1000);
+      const bwt = () => { const w = Math.ceil((Math.max((window.__bstAt || 0) + 60000, Number(S.bstNext) || 0, (window.__rvAt || 0) + 30000, Number(S.rvNext) || 0) - Date.now()) / 1000);
         if (w > 0 && !vb.hidden) { vb.dataset.bw = '1'; vb.disabled = true; vb.innerHTML = '<span style="display:flex;flex-direction:column;align-items:center;width:100%"><span>⏳ ' + esc(LANG === 'fr' ? 'Prochain boost dans ' : 'Next boost in ') + mm(w) + '</span>' + (xl() > 0 ? '<small style="font-size:12px;font-weight:600;opacity:.7;margin-top:3px">' + esc(T('x2On', mm(xl())).replace('x2', xm(b0.boost_mult)) + bc) + '</small>' : '') + '</span>'; return true; }
         if (vb.dataset.bw) { clearInterval(window.__bwI); delete vb.dataset.bw; render(); } return false; };
       if (bwt()) window.__bwI = setInterval(bwt, 1000); }
@@ -1443,7 +1443,7 @@ function render() {
     window.__vt = !vt.hidden && !full;
     // 28 oct 2026 (10h24, Jeremy): 30 seconds between two videos, with a small countdown on the button (server: S.vtNext)
     clearInterval(window.__vtI);
-    const vw = () => Math.ceil((Math.max((window.__vtAt || 0) + 30000, Number(S.vtNext) || 0) - Date.now()) / 1000), vb2 = vt.querySelector('#vtBtn');
+    const vw = () => Math.ceil((Math.max((window.__vtAt || 0) + 30000, Number(S.vtNext) || 0, (window.__rvAt || 0) + 30000, Number(S.rvNext) || 0) - Date.now()) / 1000), vb2 = vt.querySelector('#vtBtn');
     if (vb2 && vw() > 0) { const tk = () => { const w = vw(); if (w <= 0) { clearInterval(window.__vtI); vb2.disabled = false; vb2.textContent = T('vtGo'); return; } vb2.disabled = true; vb2.textContent = '⏳ 0:' + String(w).padStart(2, '0'); }; tk(); window.__vtI = setInterval(tk, 1000); } }
   $('#dotTasks').hidden = !S.tasks.some((t) => !t.done) && !window.__adt && !window.__vt;  // 22 oct 2026: an Adsgram task waiting also lights the dot
   $('#nFriends').textContent = fmt(S.friends);
@@ -1510,13 +1510,16 @@ $('#passBtn').onclick = () => {
 // to the baton in hand (4 per baton, bt_ads_reward); here we only show the video and refresh the timer.
 async function playVid(b, mode) {
   // 28 oct 2026 (9h52, Jeremy): 1 minute at least between two boost videos (the server refuses earlier ones too)
+  { const w = Math.max((window.__rvAt || 0) + 30000, Number(S && S.rvNext) || 0) - Date.now(); if (w > 0) { hap('err'); toast((LANG === 'fr' ? '⏳ Prochaine vidéo dans ' : '⏳ Next video in ') + Math.ceil(w / 1000) + ' s'); return; } }  // 28 oct 2026 (10h30, Jeremy): 30 s between two videos, everywhere
   if (mode === 'x2') { const w = Math.max((window.__bstAt || 0) + 60000, Number(S && S.bstNext) || 0) - Date.now(); if (w > 0) { hap('err'); toast((LANG === 'fr' ? '⏳ Prochain boost possible dans ' : '⏳ Next boost possible in ') + Math.ceil(w / 1000) + ' s'); return; } }
   hap(); b.disabled = true;
   try {
-    await api('vid', { mode: mode || 'baton' });  // tells the server which reward this video pays
+    const vr = await api('vid', { mode: mode || 'baton' });  // tells the server which reward this video pays
+    if (vr && vr.error === 'wait') { hap('err'); toast((LANG === 'fr' ? '⏳ Prochaine vidéo dans ' : '⏳ Next video in ') + Math.max(1, Math.ceil(((Number(vr.next) || 0) - Date.now()) / 1000)) + ' s'); b.disabled = false; return; }
     if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
     const nm = String((S.batons[0] && S.batons[0].next_mult) || 2).replace('.', LANG === 'fr' ? ',' : '.'), b4 = S.batons[0] ? String(S.batons[0].boost_n) + ':' + S.batons[0].boost_until : '';
     await window.Adsgram.init({ blockId: '55429' }).show();
+    window.__rvAt = Date.now();
     if (mode === 'x2') {
       // 27 oct 2026 (Jeremy): the boost comes from Adsgram's confirmation to the server (reward URL), sometimes a few seconds later:
       // wait for it (up to 20 s) before saying it is on, instead of announcing it at once
@@ -2528,9 +2531,13 @@ function nudge() {
     }
     // a rewarded video (Adsgram 55429); throws when there is no video
     async function watch() {
-      await call('vid', { mode: 'ttt' });
+      // 28 oct 2026 (10h30, Jeremy): 30 s between two videos, everywhere in the app
+      const w0 = (window.__rvAt || 0) + 30000 - Date.now(); if (w0 > 0) { try { tw.showAlert((fr ? '⏳ Prochaine vidéo dans ' : '⏳ Next video in ') + Math.ceil(w0 / 1000) + ' s'); } catch (e) {} throw { wait: true }; }
+      const v = await call('vid', { mode: 'ttt' });
+      if (v && v.error === 'wait') { try { tw.showAlert((fr ? '⏳ Prochaine vidéo dans ' : '⏳ Next video in ') + Math.max(1, Math.ceil(((Number(v.next) || 0) - Date.now()) / 1000)) + ' s'); } catch (e) {} throw { wait: true }; }
       if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
       await window.Adsgram.init({ blockId: '55429' }).show();
+      window.__rvAt = Date.now();
     }
     async function onClick(e) {
       if (e.target === sh) { close(); return; }
@@ -2565,7 +2572,7 @@ function nudge() {
           if (k.dataset.k === 'scgov') { await buyTicket(true); return; }
           const r = await call('scratch_double', { id: TK && TK.id });
           if (r && r.ok) { TK.doubled = true; hap('success'); drawScratch(); } else { try { tw.showAlert(X.err); } catch (e) {} k.disabled = false; }
-        } catch (x) { k.disabled = false; try { tw.showAlert(X.noVid); } catch (e) {} }
+        } catch (x) { k.disabled = false; if (!(x && x.wait)) try { tw.showAlert(X.noVid); } catch (e) {} }
         return;
       }
       if (k.dataset.k === 'spinv' || k.dataset.k === 'sdbl') {
@@ -2575,24 +2582,22 @@ function nudge() {
           if (k.dataset.k === 'spinv') { await doSpin(true); return; }
           const r = await call('spin_double', { id: SL && SL.id });
           if (r && r.ok) { SL.doubled = true; hap('success'); drawSpin(); } else { try { tw.showAlert(X.err); } catch (e) {} k.disabled = false; }
-        } catch (x) { k.disabled = false; try { tw.showAlert(X.noVid); } catch (e) {} }
+        } catch (x) { k.disabled = false; if (!(x && x.wait)) try { tw.showAlert(X.noVid); } catch (e) {} }
         return;
       }
       if (k.dataset.k === 'unl') {
         hap(); k.disabled = true;
         try { await watch(); prev = '.........'; const r = await act('ttt_unlock'); if (r) hap('success'); }
-        catch (x) { k.disabled = false; try { tw.showAlert(X.noVid); } catch (e) {} }
+        catch (x) { k.disabled = false; if (!(x && x.wait)) try { tw.showAlert(X.noVid); } catch (e) {} }
         return;
       }
       if (k.dataset.k === 'dbl') {
         hap(); k.disabled = true;
         try {
-          await call('vid', { mode: 'ttt' });
-          if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s); });
-          await window.Adsgram.init({ blockId: '55429' }).show();
+          await watch();
           const r = await act('ttt_double', { id: G.id });
           if (r) hap('success');
-        } catch (x) { k.disabled = false; try { tw.showAlert(X.noVid); } catch (e) {} }
+        } catch (x) { k.disabled = false; if (!(x && x.wait)) try { tw.showAlert(X.noVid); } catch (e) {} }
       }
     }
     // the tab only shows when the server says this player can play (test version); placed right after Tasks
