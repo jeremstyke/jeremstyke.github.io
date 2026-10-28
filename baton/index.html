@@ -1460,8 +1460,10 @@ function render() {
     const prow = (t) => {
       let line, right;
       if (t.kind === 'sub' && t.hold) line = '+' + fmt(t.reward) + (fr ? ' tout de suite · +' : ' now · +') + fmt(t.hold) + (fr ? ' après ' + (t.hold_days || 7) + ' j si tu restes abonné' : ' after ' + (t.hold_days || 7) + ' days if you stay subscribed');
-      else line = (t.sub ? esc(t.sub) + ' · ' : '') + '+' + fmt(t.reward) + ' $BATON';
+      else line = (t.sub ? esc(t.sub) + ' · ' : '') + '+' + fmt(t.reward) + ' $BATON' + (t.kind === 'click' ? (fr ? ' · reste 30 s' : ' · stay 30 s') : '');
+      if (!window.__ckI) window.__ckI = setInterval(() => { document.querySelectorAll('[data-ck]').forEach((x) => { const w = Math.ceil((Number(LS.get('ck_' + x.dataset.ck) || 0) + 30000 - Date.now()) / 1000); const s = w > 0 ? '⏳ ' + w + ' s' : T('claim'); if (x.textContent !== s) x.textContent = s; }); }, 1000);
       if (t.done) { const dd = Math.max(1, Math.ceil(((t.hdue || 0) - Date.now() / 1000) / 86400)); right = '<span class="pill">⏳ +' + fmt(t.hold) + (fr ? ' dans ' + dd + ' j' : ' in ' + dd + ' d') + '</span>'; }
+      else if (t.kind === 'click' && Number(LS.get('ck_' + t.id) || 0)) { const w = Math.ceil((Number(LS.get('ck_' + t.id)) + 30000 - Date.now()) / 1000); right = '<button class="sm" data-task="' + t.id + '" data-url="' + esc(t.url || '') + '" data-ck="' + t.id + '">' + (w > 0 ? '⏳ ' + w + ' s' : T('claim')) + '</button>'; }  /* 28 oct 2026 (15h59): 30 s on the visit */
       else right = '<button class="sm" data-task="' + t.id + '" data-url="' + esc(t.url || '') + '">' + (t.kind === 'sub' && opened[t.id] ? T('claim') : T('go')) + '</button>';
       return '<div class="row' + (t.done ? ' on' : '') + '"><div class="t"><b>' + esc(t.title) + '</b><span>' + line + '</span></div>' + right + '</div>';
     };
@@ -1823,7 +1825,16 @@ $('#tasks').onclick = async (e) => {
   // partner links (InsideAds, Ads Galaxy...) cannot be checked: the reward is given on the tap, then the link opens
   const tk = ((S && S.tasks) || []).find((x) => x.id === id) || {};
   // 23 oct 2026 (01h34, Jeremy): the reward shows first, the link opens 1.5 s later (a website leaves Telegram and the toast was never seen)
-  if (tk.kind === 'link' || tk.kind === 'click') { b.disabled = true; const r = await api('task', { id }); if (r.ok) { hap('ok'); toast(T('reward', fmt(r.reward))); setState(r.state); } else b.disabled = false; const u = b.dataset.url; if (u) setTimeout(() => openLink(u), r && r.ok ? 1500 : 0); return; }
+  // 28 oct 2026 (15h59, Jeremy): a visit (mini app, bot or website) pays after 30 seconds on it: 1st tap opens it (the server starts the clock), the 2nd tap claims
+  if (tk.kind === 'click') { const ck = 'ck_' + id, t0 = Number(LS.get(ck) || 0), u = b.dataset.url, fr = LANG === 'fr';
+    if (!t0) { const r = await api('task_open', { id }); LS.set(ck, String(r && r.ok && r.next ? r.next - 30000 : Date.now())); if (u) openLink(u); render(); return; }
+    const w = Math.ceil((t0 + 30000 - Date.now()) / 1000);
+    if (w > 0) { hap('err'); toast((fr ? '⏳ Reste encore ' + w + ' s sur la page, puis reviens' : '⏳ Stay ' + w + ' more s on the page, then come back')); return; }
+    b.disabled = true; const r = await api('task', { id });
+    if (r && r.ok) { hap('ok'); toast(T('reward', fmt(r.reward))); setState(r.state); }
+    else { b.disabled = false; if (r && r.error === 'wait') { if (r.next) LS.set(ck, String(r.next - 30000)); else LS.set(ck, ''); hap('err'); toast(fr ? '⏳ Ouvre le lien et reste 30 s dessus' : '⏳ Open the link and stay 30 s on it'); render(); } }
+    return; }
+  if (tk.kind === 'link') { b.disabled = true; const r = await api('task', { id }); if (r.ok) { hap('ok'); toast(T('reward', fmt(r.reward))); setState(r.state); } else b.disabled = false; const u = b.dataset.url; if (u) setTimeout(() => openLink(u), r && r.ok ? 1500 : 0); return; }
   if (!opened[id]) { opened[id] = true; if (b.dataset.url) openLink(b.dataset.url); setTimeout(render, 600); return; }
   b.disabled = true;
   const r = await api('task', { id });
