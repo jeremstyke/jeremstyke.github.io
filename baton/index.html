@@ -2142,6 +2142,8 @@ function nudge() {
   window.BT = { api, go, hap, toast, refresh, errMsg, tg, get S() { return S; }, get lang() { return LANG; } };
   const sp = (tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '';
   if (sp === 'friends') go('friends');
+  // 29 oct 2026 (0h04, Jeremy): the Club's daily gift opens here (startapp=gift): claimed, shown, balance refreshed
+  else if (sp === 'gift') api('clubgift').then((r) => { if (r && r.ok) { hap('ok'); refresh(); } else hap('err'); const t = (r && r.msg) || T('err').other; try { tg.showAlert(t); } catch (e) { toast(t); } }).catch(() => {});
   // 26 oct 2026 (23h05, Jeremy): links from Meme Coin Tycoon ("Earn $BATON by playing" card) open the Tasks tab directly
   else if (/tasks/.test(sp)) go('tasks');
   // 27 oct 2026 (Jeremy): the bot's "x2 is waiting" / "next boost" messages open the game on the video button
