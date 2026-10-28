@@ -2561,6 +2561,16 @@ function nudge() {
       if (kk === 'drmgo' && DD && DD.rematch) { hap(); duelView(DD.rematch, false); return true; }
       return false;
     }
+    // 28 oct 2026 (11h33, Jeremy): the 30 s between two videos show as a countdown right on the video buttons of the games
+    setInterval(() => {
+      if (!box) return;
+      const S0 = window.BT && window.BT.S, w = Math.ceil((Math.max((window.__rvAt || 0) + 30000, Number(S0 && S0.rvNext) || 0) - Date.now()) / 1000);
+      box.querySelectorAll('[data-k]').forEach((b) => {
+        if (!['dbl', 'sdbl', 'scdbl', 'spinv', 'scgov'].includes(b.dataset.k)) return;
+        if (w > 0) { if (b.dataset.lab === undefined) b.dataset.lab = b.innerHTML; b.disabled = true; b.innerHTML = '⏳ ' + (fr ? 'Vidéo dans ' : 'Video in ') + '0:' + String(w).padStart(2, '0'); }
+        else if (b.dataset.lab !== undefined) { b.innerHTML = b.dataset.lab; b.removeAttribute('data-lab'); b.disabled = false; }
+      });
+    }, 500);
     // a rewarded video (Adsgram 55429); throws when there is no video
     async function watch() {
       // 28 oct 2026 (10h30, Jeremy): 30 s between two videos, everywhere in the app
