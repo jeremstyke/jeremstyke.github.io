@@ -33,6 +33,16 @@
           const s = document.createElement('script'); s.src = 'https://app.adsgalaxy.online/sdk.js?id=135'; s.onload = run; document.head.appendChild(s);
         } catch (e) {} };
         const go = () => { try { window.Adsgram.init({ blockId: 'int-55508' }).show().catch((e) => { if (!e || !('done' in Object(e)) || e.state === 'load' || /no ad|no banner/i.test(String(e.description || ''))) agx(); }); } catch (e) { agx(); } };  /* 25 oct 2026 (11h30): Ads Galaxy only when Adsgram had no ad to show, never after an Adsgram ad */
+        // 28 oct 2026 (21h33, Jeremy): 1 opening interstitial out of 5 on Monetag (In-App Interstitial, zone 12143182), drawn at random over all players;
+        // Adsgram (int-55508) for the others, or when Monetag fails
+        const adsg = () => { if (window.Adsgram) return go(); if (!document.querySelector('script[src*="sad.adsgram.ai"]')) { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; document.head.appendChild(s); } let n = 0; const w = setInterval(() => { if (window.Adsgram) { clearInterval(w); go(); } else if (++n > 20) { clearInterval(w); agx(); } }, 300); };
+        if (Math.random() < 0.2) {
+          const fn = 'show_12143182';
+          const ms = () => { try { const r = window[fn]({ type: 'inApp', inAppSettings: { frequency: 1, capping: 1, interval: 30, timeout: 0, everyPage: false } }); if (r && r.catch) r.catch(() => {}); } catch (e) { adsg(); } };
+          if (window[fn]) return ms();
+          const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', '12143182'); s.setAttribute('data-sdk', fn); s.onload = () => { if (window[fn]) ms(); else adsg(); }; s.onerror = () => adsg(); document.head.appendChild(s);
+          return;
+        }
         if (window.Adsgram) return go();
         if (!document.querySelector('script[src*="sad.adsgram.ai"]')) { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; document.head.appendChild(s); }
         let n = 0; const w = setInterval(() => { if (window.Adsgram) { clearInterval(w); go(); } else if (++n > 20) { clearInterval(w); agx(); } }, 300);
