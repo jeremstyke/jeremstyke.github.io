@@ -1973,7 +1973,7 @@ function nudge() {
     const WD = /^fr/.test(lc) ? { mct_task: 'Mission partenaire', mct_ref: 'Parrainage d\'un ami', mct_ref_prize: 'Concours meilleur parrain', mct_week_prize: 'Concours meilleurs joueurs', mct_bourse_prize: 'Concours Bourse', other: 'Autre' }
       : { mct_task: 'Partner mission', mct_ref: 'Friend referral', mct_ref_prize: 'Best sponsor contest', mct_week_prize: 'Best players contest', mct_bourse_prize: 'Stock market contest', other: 'Other' };
     // 28 oct 2026 (8h02, Jeremy): and which game (tic-tac-toe, Tap the Diamond, Rig Rush)
-    const GD = { ttt: /^fr/.test(lc) ? 'Morpion' : 'Tic-tac-toe', td: 'Tap the Diamond', rr: 'Rig Rush', rig: 'Rig Rush' };
+    const GD = { ttt: /^fr/.test(lc) ? 'Morpion' : 'Tic-tac-toe', td: 'Tap the Diamond', rr: 'Rig Rush', rig: 'Rig Rush', spin: 'Lucky Spin' };
     const WK = (k) => { k = String(k || ''); if (/^mct/.test(k)) return WD[k] || WD.other; const p = k.split('_')[0]; return GD[p] || ''; };
     const st = document.createElement('style');
     st.textContent = '#gnBtn{display:block;margin:10px auto 0;padding:7px 14px;border-radius:99px;border:1px solid rgba(255,212,59,.45);background:rgba(255,212,59,.1);color:#ffd43b;font-weight:800;font-size:13px;cursor:pointer}'
@@ -2018,7 +2018,7 @@ function nudge() {
 })();
 </script>
 <script>
-// 28 oct 2026 (Jeremy): "Jeux" tab in the bottom menu, right after Tasks. It opens a list of games (more will be added);
+// 28 oct 2026 (Jeremy): "Jeux" tab in the bottom menu (tic-tac-toe and Lucky Spin), right after Tasks. It opens a list of games (more will be added);
 // the first one is tic-tac-toe against the AI, played with batons (the player's batons are gold, the AI's are blue).
 // The game is played on the server (bt_ttt_api), test version shown only to the players listed in ds_config bt_ttt.users.
 // Win +1000, draw +500, loss +200 $BATON (day_max paid games a day), any paid game doubled once with a video (Adsgram 55429, mode 'ttt').
@@ -2034,6 +2034,8 @@ function nudge() {
       dbl: (n) => '🎬 Doubler : +' + n + ' $BATON', dblOk: (n) => '✅ Doublé : +' + n + ' $BATON', again: 'Rejouer', back: '‹ Jeux',
       pr: (w, d, l) => 'Victoire +' + w + ' · Nul +' + d + ' · Défaite +' + l, left: (n) => n + ' partie' + (n > 1 ? 's' : '') + ' payée' + (n > 1 ? 's' : '') + ' restante' + (n > 1 ? 's' : '') + ' aujourd\'hui',
       err: 'Erreur, réessaie', noVid: 'Pas de vidéo pour le moment',
+      sN: 'Lucky Spin', sD: 'Tourne la roue, jusqu\'à 5 000 $BATON', sPr: '3 tours gratuits par jour', spin: 'TOURNER LA ROUE', spinV: '🎬 Regarde une vidéo : 1 tour', noSpin: 'Plus de tours aujourd\'hui, reviens demain',
+      freeL: (n) => n + ' tour' + (n > 1 ? 's' : '') + ' gratuit' + (n > 1 ? 's' : '') + ' restant' + (n > 1 ? 's' : ''), vidL: (n) => n + ' tour' + (n > 1 ? 's' : '') + ' vidéo restant' + (n > 1 ? 's' : '') + ' aujourd\'hui', jack: 'JACKPOT !', youWon: 'Tu gagnes',
       unl: '🎬 Regarde une vidéo : partie payée', free: 'Rejouer sans gain', nog: 'Partie sans gain', over: 'Tes 10 parties payées du jour sont jouées · 1 vidéo = 1 partie payée en plus'
     } : {
       tab: 'Games', h: '🎮 Games', sub: 'Play and win $BATON', play: 'Play', soon: 'More games coming soon',
@@ -2042,6 +2044,8 @@ function nudge() {
       dbl: (n) => '🎬 Double it: +' + n + ' $BATON', dblOk: (n) => '✅ Doubled: +' + n + ' $BATON', again: 'Play again', back: '‹ Games',
       pr: (w, d, l) => 'Win +' + w + ' · Draw +' + d + ' · Loss +' + l, left: (n) => n + ' paid game' + (n > 1 ? 's' : '') + ' left today',
       err: 'Error, try again', noVid: 'No video right now',
+      sN: 'Lucky Spin', sD: 'Spin the wheel, up to 5,000 $BATON', sPr: '3 free spins a day', spin: 'SPIN THE WHEEL', spinV: '🎬 Watch a video: 1 spin', noSpin: 'No more spins today, come back tomorrow',
+      freeL: (n) => n + ' free spin' + (n > 1 ? 's' : '') + ' left', vidL: (n) => n + ' video spin' + (n > 1 ? 's' : '') + ' left today', jack: 'JACKPOT!', youWon: 'You win',
       unl: '🎬 Watch a video: paid game', free: 'Play again with no prize', nog: 'No prize game', over: 'Your 10 paid games of the day are played · 1 video = 1 more paid game'
     };
     const call = (action, body) => fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ initData: tw.initData, action }, body || {})) }).then((r) => r.json()).catch(() => null);
@@ -2070,6 +2074,11 @@ function nudge() {
       + '#gmSh .ms{min-height:26px;margin:14px 0 4px;text-align:center;font-weight:900;font-size:17px}#gmSh .ms .amt{display:block;font-size:26px;color:#ffd43b;margin-top:2px}#gmSh .ms.lo .amt{color:#9fc8ff}'
       + '#gmSh .bt{display:block;width:100%;margin-top:10px;padding:13px;border-radius:15px;border:0;font-weight:900;font-size:15px}#gmSh .gold{background:linear-gradient(180deg,#ffd75a,#ffb300);color:#1a1300;box-shadow:0 6px 18px -6px rgba(255,190,40,.7)}#gmSh .gh{background:rgba(255,255,255,.1);color:#fff}'
       + '#gmSh .ft{text-align:center;font-size:12px;opacity:.6;margin-top:12px}'
+      /* 28 oct 2026 (8h26, Jeremy): Lucky Spin wheel */
+      + '#gmSh .wh{position:relative;width:min(300px,76vw);aspect-ratio:1;margin:4px auto 2px;max-width:100%}#gmSh .wl{width:100%;height:100%;display:block;transition:transform 4.4s cubic-bezier(.12,.8,.16,1);filter:drop-shadow(0 0 24px rgba(77,168,255,.35))}'
+      + '#gmSh .pt{position:absolute;left:50%;top:-8px;transform:translateX(-50%);width:0;height:0;border-left:15px solid transparent;border-right:15px solid transparent;border-top:28px solid #fff;z-index:2;filter:drop-shadow(0 3px 6px rgba(0,0,0,.6))}'
+      + '#gmSh .hub{position:absolute;left:50%;top:50%;width:22%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#1d3a80,#0a1734);box-shadow:0 0 0 4px #ffc531,0 0 20px rgba(255,197,49,.65);display:grid;place-items:center;padding:4%;box-sizing:border-box}#gmSh .hub svg{width:100%;height:100%}'
+      + '#gmSh .win{animation:gmW .6s cubic-bezier(.2,1.6,.4,1)}@keyframes gmW{from{transform:scale(.3);opacity:0}}#gmSh .gcard .ic.sw{display:block;padding:2px;background:none}#gmSh .gcard .ic.sw svg{width:100%;height:100%}#gmSh .ms .jk{display:block;color:#ff7ad1;font-size:14px;letter-spacing:.12em}'
       /* 28 oct 2026 (7h59, Jeremy): a game opens full screen with an animation */
       + '#gmSh.full{align-items:stretch;background:#050b1c}#gmSh.full .gp{max-width:none;height:100%;max-height:none;border-radius:0;border:0;display:flex;flex-direction:column;justify-content:center;padding:calc(14px + env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) calc(18px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));animation:gmZ .42s cubic-bezier(.2,1.25,.4,1)}'
       + '#gmSh.full .gp>*{width:100%;max-width:420px;margin-left:auto;margin-right:auto}#gmSh.full .hd{position:absolute;left:0;right:0;top:calc(12px + env(safe-area-inset-top));max-width:none;padding:0 16px;box-sizing:border-box}#gmSh.full .bd{max-width:360px}'
@@ -2092,6 +2101,7 @@ function nudge() {
       const ic = [GOLD, BLUE, '', '', GOLD, BLUE, BLUE, '', GOLD].map((c) => c ? bat(c) : '<span></span>').join('');
       box.innerHTML = '<div class="hd"><div><h3>' + X.h + '</h3><small>' + X.sub + '</small></div><button class="x" data-k="close">✕</button></div>'
         + '<button class="gcard" data-g="ttt"><div class="ic">' + ic + '</div><div class="tx"><b>' + X.tN + '</b><div>' + X.tD + '</div><em>' + X.pr(1000, 500, 200) + '</em></div><span class="go">' + X.play + '</span></button>'
+        + '<button class="gcard" data-g="spin"><div class="ic sw">' + wheel([100, 500, 200, 1000, 100, 300, 5000, 200], true) + '</div><div class="tx"><b>' + X.sN + '</b><div>' + X.sD + '</div><em>' + X.sPr + '</em></div><span class="go">' + X.play + '</span></button>'
         + '<div class="soon">' + X.soon + '</div>';
     }
     function draw() {
@@ -2134,6 +2144,52 @@ function nudge() {
       G = r; prev = G.board || '.........';
       if (!G.board || G.status !== 'play') { prev = '.........'; await act('ttt_new'); } else draw();
     }
+    // 28 oct 2026 (8h26, Jeremy): Lucky Spin. The server draws the prize (bt_spin_api), the wheel turns to it.
+    const SC = ['#ffc531', '#17306b', '#4da8ff', '#0f1f47'];
+    function wheel(segs, mini) {
+      const n = segs.length, R = 140, a = 360 / n, P = (deg, r) => { const t = deg * Math.PI / 180; return (r * Math.sin(t)).toFixed(2) + ',' + (-r * Math.cos(t)).toFixed(2); };
+      let h = '<svg viewBox="-160 -160 320 320" class="' + (mini ? '' : 'wl') + '"' + (mini ? '' : ' style="transform:rotate(' + spinRot + 'deg)"') + ' aria-hidden="true"><circle r="156" fill="#0a1734" stroke="#ffc531" stroke-width="6"/>';
+      segs.forEach((v, i) => {
+        const jk = v >= 5000, c = jk ? '#ff5fb4' : SC[i % 4], tc = (jk || i % 2 === 0) ? '#140c00' : '#fff';
+        h += '<path d="M0,0 L' + P(i * a - a / 2, R) + ' A' + R + ',' + R + ' 0 0 1 ' + P(i * a + a / 2, R) + ' Z" fill="' + c + '" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>';
+        if (!mini) h += '<text transform="rotate(' + (i * a) + ') translate(0,-96)" text-anchor="middle" dominant-baseline="middle" font-size="' + (jk ? 25 : 22) + '" font-weight="900" fill="' + tc + '" font-family="system-ui,sans-serif">' + nf(v) + '</text>';
+      });
+      for (let i = 0; i < 16; i++) h += '<circle cx="' + P(i * 22.5, 148).split(',')[0] + '" cy="' + P(i * 22.5, 148).split(',')[1] + '" r="' + (mini ? 6 : 4) + '" fill="' + (i % 2 ? '#fff6d0' : '#ffc531') + '"/>';
+      return h + '</svg>';
+    }
+    let S = null, SL = null, spinRot = 0, spinning = false;
+    function drawSpin() {
+      if (!box || !S) return;
+      const segs = S.segs || [], can = S.free_left > 0, canV = !can && S.vid_left > 0;
+      const res = SL ? '<div class="ms win">' + (SL.prize >= 5000 ? '<span class="jk">' + X.jack + '</span>' : '') + X.youWon + '<span class="amt">+' + nf(SL.doubled ? SL.prize * 2 : SL.prize) + ' $BATON</span></div>' : '<div class="ms">' + X.sD + '</div>';
+      box.innerHTML = '<div class="hd"><button class="bk" data-k="list">' + X.back + '</button><h3>' + X.sN + '</h3><button class="x" data-k="close">✕</button></div>'
+        + '<div class="wh"><div class="pt"></div>' + wheel(segs) + '<div class="hub">' + bat(GOLD) + '</div></div>' + (spinning ? '<div class="ms">...</div>' : res)
+        + (!spinning && SL && !SL.doubled ? '<button class="bt gold" data-k="sdbl">' + X.dbl(nf(SL.prize)) + '</button>' : '')
+        + (!spinning && SL && SL.doubled ? '<div class="ft" style="opacity:.9;color:#7dff6b">' + X.dblOk(nf(SL.prize)) + '</div>' : '')
+        + (can ? '<button class="bt ' + (SL && !SL.doubled ? 'gh' : 'gold') + '" data-k="spin"' + (spinning ? ' disabled' : '') + '>' + X.spin + '</button>'
+          : canV ? '<button class="bt ' + (SL && !SL.doubled ? 'gh' : 'gold') + '" data-k="spinv"' + (spinning ? ' disabled' : '') + '>' + X.spinV + '</button>' : '<div class="ms" style="font-size:14px;opacity:.7">' + X.noSpin + '</div>')
+        + '<div class="ft">' + (can ? X.freeL(S.free_left) + '<br>' : '') + X.vidL(S.vid_left) + '</div>';
+    }
+    async function spinView() {
+      full(true); SL = null; spinning = false;
+      box.innerHTML = '<div style="text-align:center;padding:60px 0;font-size:28px">⏳</div>';
+      const r = await call('spin_state'); if (!r || !r.ok) { full(false); list(); return; }
+      S = r; drawSpin();
+    }
+    async function doSpin(vid) {
+      if (spinning) return; spinning = true; drawSpin();
+      const r = await call('spin_go', { vid: !!vid });
+      if (!r || !r.ok) { spinning = false; if (r && r.free_left !== undefined) S = r; drawSpin(); try { tw.showAlert(X.err); } catch (e) {} return; }
+      hap();
+      const n = (S.segs || []).length || 8, a = 360 / n, jit = (Math.random() - 0.5) * a * 0.6;
+      const target = spinRot + 360 * 6 + ((((360 - r.seg * a) - (spinRot % 360)) % 360) + 360) % 360 + jit;
+      const w = box.querySelector('.wl');
+      requestAnimationFrame(() => { if (w) w.style.transform = 'rotate(' + target + 'deg)'; });
+      let k = 0; const tick = setInterval(() => { if (++k > 18) clearInterval(tick); else hap(); }, 150 + k * 20);
+      await new Promise((ok) => setTimeout(ok, 4500));
+      clearInterval(tick); spinRot = target; S = r; SL = { id: r.id, prize: r.prize, doubled: false }; spinning = false;
+      hap(r.prize >= 1000 ? 'success' : null); drawSpin();
+    }
     // a rewarded video (Adsgram 55429); throws when there is no video
     async function watch() {
       await call('vid', { mode: 'ttt' });
@@ -2144,6 +2200,7 @@ function nudge() {
       if (e.target === sh) { close(); return; }
       const c = e.target.closest('[data-c]'), k = e.target.closest('[data-k]'), g = e.target.closest('[data-g]');
       if (g && g.dataset.g === 'ttt') { hap(); ttt(); return; }
+      if (g && g.dataset.g === 'spin') { hap(); spinView(); return; }
       if (c && G && G.status === 'play' && !busy) {
         hap(); const i = Number(c.dataset.c) - 1; G.board = G.board.slice(0, i) + 'X' + G.board.slice(i + 1);
         const r = await act('ttt_move', { cell: i + 1 });
@@ -2154,6 +2211,17 @@ function nudge() {
       if (k.dataset.k === 'close') { close(); return; }
       if (k.dataset.k === 'list') { hap(); full(false); list(); return; }
       if (k.dataset.k === 'new') { hap(); prev = '.........'; await act('ttt_new'); return; }
+      if (k.dataset.k === 'spin') { doSpin(false); return; }
+      if (k.dataset.k === 'spinv' || k.dataset.k === 'sdbl') {
+        hap(); k.disabled = true;
+        try {
+          await watch();
+          if (k.dataset.k === 'spinv') { await doSpin(true); return; }
+          const r = await call('spin_double', { id: SL && SL.id });
+          if (r && r.ok) { SL.doubled = true; hap('success'); drawSpin(); } else { try { tw.showAlert(X.err); } catch (e) {} k.disabled = false; }
+        } catch (x) { k.disabled = false; try { tw.showAlert(X.noVid); } catch (e) {} }
+        return;
+      }
       if (k.dataset.k === 'unl') {
         hap(); k.disabled = true;
         try { await watch(); prev = '.........'; const r = await act('ttt_unlock'); if (r) hap('success'); }
