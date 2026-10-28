@@ -1756,7 +1756,7 @@ $('#sChains').onclick = () => { rankMode = 'chains'; $('#sChains').setAttribute(
 $('#sMiners').onclick = () => { rankMode = 'miners'; $('#sMiners').setAttribute('aria-pressed', 'true'); $('#sChains').setAttribute('aria-pressed', 'false'); loadRanks(); };
 function go(p) {
   // 27 oct 2026 (Jeremy): the sponsored task also shows on the home screen, under the baton card (it moves between the two tabs)
-  { const ab = document.getElementById('adtask'); if (ab) { if (p === 'home') { const bc = document.getElementById('batonCard'); if (bc && ab.previousElementSibling !== bc) { ab.style.marginTop = '12px'; bc.insertAdjacentElement('afterend', ab); } } else if (p === 'tasks') { const vt = document.getElementById('vidTask'); if (vt && ab.nextElementSibling !== vt) { ab.style.marginTop = ''; vt.insertAdjacentElement('beforebegin', ab); } } } }
+  { const ab = document.getElementById('adtask'); if (ab) { if (p === 'tasks') {  /* 28 oct 2026 (9h45, Jeremy): the sponsored task only in Tasks, no more on the home screen */ const vt = document.getElementById('vidTask'); if (vt && ab.nextElementSibling !== vt) { ab.style.marginTop = ''; vt.insertAdjacentElement('beforebegin', ab); } } } }
   if (p === 'tasks' && window.__adtRe) { try { window.__adtRe(); } catch (e) {} }
   document.querySelectorAll('nav.tabs button').forEach((x) => x.toggleAttribute('aria-current', x.dataset.p === p));
   document.querySelectorAll('nav.tabs button[aria-current]').forEach((x) => x.setAttribute('aria-current', 'page'));
@@ -1903,7 +1903,7 @@ function nudge() {
         tk.addEventListener('reward', gift); tk.addEventListener('onReward', gift);
       }
       build();
-      { const bc = $('#batonCard'); if (bc && !$('#p-home').hidden) { box.style.marginTop = '12px'; bc.insertAdjacentElement('afterend', box); } }  // 27 oct 2026: shown on the home screen first
+      // 28 oct 2026 (9h45, Jeremy): it stays in Tasks (it was moved to the home screen on 27 oct)
     } catch (e) { console.error('adtask', e); }
   })();
   // 27 oct 2026 (Jeremy): what the Rig tab (rig.js, a separate file) needs from the game, which lives inside this closure
