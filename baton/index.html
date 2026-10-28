@@ -2018,12 +2018,12 @@ function nudge() {
     const tw = window.Telegram && window.Telegram.WebApp; if (!tw || !tw.initData) return;
     const FN = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/baton';
     const fr = /^fr/.test(String((tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || ''));
-    const X = fr ? { b: '🎮 Morpion contre l\'IA', h: '🎮 Morpion', you: 'Tu joues ❌, l\'IA joue ⭕', win: (n) => '🎉 Gagné ! +' + n + ' $BATON', winNo: '🎉 Gagné ! (plus de gains aujourd\'hui)', lose: '😕 Perdu, l\'IA a gagné', draw: '🤝 Match nul', turn: 'À toi de jouer', again: '🔄 Nouvelle partie', dbl: (n) => '🎬 Doubler : +' + n + ' $BATON', dblOk: (n) => '✅ Doublé ! +' + n + ' $BATON', left: (n, r) => n + ' victoire' + (n > 1 ? 's' : '') + ' payée' + (n > 1 ? 's' : '') + ' aujourd\'hui · +' + r + ' $BATON chacune', close: 'Fermer', err: 'Erreur, réessaie', noVid: 'Pas de vidéo pour le moment' }
-      : { b: '🎮 Tic-tac-toe vs AI', h: '🎮 Tic-tac-toe', you: 'You play ❌, the AI plays ⭕', win: (n) => '🎉 You win! +' + n + ' $BATON', winNo: '🎉 You win! (no more prizes today)', lose: '😕 You lose, the AI won', draw: '🤝 Draw', turn: 'Your turn', again: '🔄 New game', dbl: (n) => '🎬 Double it: +' + n + ' $BATON', dblOk: (n) => '✅ Doubled! +' + n + ' $BATON', left: (n, r) => n + ' paid win' + (n > 1 ? 's' : '') + ' left today · +' + r + ' $BATON each', close: 'Close', err: 'Error, try again', noVid: 'No video right now' };
+    const X = fr ? { tab: 'Jeux', b: '🎮 Morpion contre l\'IA', h: '🎮 Morpion', you: 'Tu joues ❌, l\'IA joue ⭕', win: (n) => '🎉 Gagné ! +' + n + ' $BATON', winNo: '🎉 Gagné ! (plus de gains aujourd\'hui)', lose: '😕 Perdu, l\'IA a gagné', loseP: (n) => '😕 Perdu, l\'IA a gagné · +' + n + ' $BATON', draw: '🤝 Match nul', turn: 'À toi de jouer', again: '🔄 Nouvelle partie', dbl: (n) => '🎬 Doubler : +' + n + ' $BATON', dblOk: (n) => '✅ Doublé ! +' + n + ' $BATON', left: (n, r, l) => n + ' partie' + (n > 1 ? 's' : '') + ' payée' + (n > 1 ? 's' : '') + ' aujourd\'hui · victoire +' + r + ' · défaite +' + l, close: 'Fermer', err: 'Erreur, réessaie', noVid: 'Pas de vidéo pour le moment' }
+      : { tab: 'Games', b: '🎮 Tic-tac-toe vs AI', h: '🎮 Tic-tac-toe', you: 'You play ❌, the AI plays ⭕', win: (n) => '🎉 You win! +' + n + ' $BATON', winNo: '🎉 You win! (no more prizes today)', lose: '😕 You lose, the AI won', loseP: (n) => '😕 You lose, the AI won · +' + n + ' $BATON', draw: '🤝 Draw', turn: 'Your turn', again: '🔄 New game', dbl: (n) => '🎬 Double it: +' + n + ' $BATON', dblOk: (n) => '✅ Doubled! +' + n + ' $BATON', left: (n, r, l) => n + ' paid game' + (n > 1 ? 's' : '') + ' left today · win +' + r + ' · loss +' + l, close: 'Close', err: 'Error, try again', noVid: 'No video right now' };
     const call = (action, body) => fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ initData: tw.initData, action }, body || {})) }).then((r) => r.json()).catch(() => null);
     const hap = (k) => { try { k ? tw.HapticFeedback.notificationOccurred(k) : tw.HapticFeedback.impactOccurred('light'); } catch (e) {} };
     const st = document.createElement('style');
-    st.textContent = '#tttBtn{display:block;margin:8px auto 0;padding:7px 14px;border-radius:99px;border:1px solid rgba(80,160,255,.6);background:rgba(47,141,255,.18);color:#cfe3ff;font-weight:800;font-size:13px}'
+    st.textContent = 'nav.tabs.g5{grid-template-columns:repeat(5,minmax(0,1fr))!important}'
       + '#tttSh{position:fixed;inset:0;z-index:61;background:rgba(0,0,0,.65);display:flex;align-items:flex-end;justify-content:center}'
       + '#tttSh .tb{width:100%;max-width:520px;background:#0b1430;border-radius:22px 22px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));box-sizing:border-box;color:#fff;text-align:center}'
       + '#tttSh h3{margin:0 0 4px;font-size:18px}#tttSh .ts{font-size:13px;opacity:.75;margin:0 0 12px}'
@@ -2038,14 +2038,14 @@ function nudge() {
     function draw() {
       if (!box || !G) return;
       const b = G.board || '.........', play = G.status === 'play';
-      const msg = G.status === 'win' ? (G.paid > 0 ? X.win(G.paid) : X.winNo) : G.status === 'lose' ? X.lose : G.status === 'draw' ? X.draw : X.turn;
+      const msg = G.status === 'win' ? (G.paid > 0 ? X.win(G.paid) : X.winNo) : G.status === 'lose' ? (G.paid > 0 ? X.loseP(G.paid) : X.lose) : G.status === 'draw' ? X.draw : X.turn;
       box.innerHTML = '<h3>' + X.h + '</h3><p class="ts">' + X.you + '</p><div class="tg">'
         + [...b].map((c, i) => '<button class="tc" data-c="' + (i + 1) + '"' + (c !== '.' || !play ? ' disabled' : '') + '>' + sym(c) + '</button>').join('') + '</div>'
         + '<div class="tm">' + msg + '</div>'
-        + (G.status === 'win' && G.paid > 0 && !G.doubled ? '<button class="tbtn gold" data-k="dbl">' + X.dbl(G.paid) + '</button>' : '')
-        + (!play ? '<button class="tbtn ' + (G.status === 'win' && G.paid > 0 && !G.doubled ? 'gh' : 'gold') + '" data-k="new">' + X.again + '</button>' : '')
+        + (!play && G.paid > 0 && !G.doubled ? '<button class="tbtn gold" data-k="dbl">' + X.dbl(G.paid) + '</button>' : '')
+        + (!play ? '<button class="tbtn ' + (G.paid > 0 && !G.doubled ? 'gh' : 'gold') + '" data-k="new">' + X.again + '</button>' : '')
         + '<button class="tbtn gh" data-k="close">' + X.close + '</button>'
-        + '<div class="tl">' + X.left(G.wins_left, G.reward) + '</div>';
+        + '<div class="tl">' + X.left(G.wins_left, G.reward, G.lose_reward || 200) + '</div>';
     }
     async function act(a, body) {
       if (busy) return; busy = true;
@@ -2081,10 +2081,14 @@ function nudge() {
     // the button only shows when the server says this player can play (test version)
     call('ttt_state').then((r) => {
       if (!r || !r.ok) return;
+      // 28 oct 2026 (7h46, Jeremy): win +1000, loss +200, any paid game doubled once with a video.
+      // 28 oct 2026 (7h45, Jeremy): a "Jeux" button in the bottom menu, same look as the other tabs
       const place = () => {
-        if (document.getElementById('tttBtn')) return;
-        const sc = document.querySelector('#p-home .score'); if (!sc) return;
-        const b = document.createElement('button'); b.id = 'tttBtn'; b.type = 'button'; b.textContent = X.b; b.onclick = open; sc.appendChild(b);
+        if (document.getElementById('tttTab')) return;
+        const nav = document.querySelector('nav.tabs'); if (!nav) return;
+        const b = document.createElement('button'); b.id = 'tttTab'; b.type = 'button';
+        b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="7" width="19" height="11" rx="5.5"/><path d="M7.5 10.5v4M5.5 12.5h4"/><circle cx="15.5" cy="11.5" r=".6" fill="currentColor"/><circle cx="17.5" cy="13.5" r=".6" fill="currentColor"/></svg><span>' + X.tab + '</span>';
+        b.onclick = open; nav.classList.add('g5'); nav.appendChild(b);
       };
       place(); setInterval(place, 1500);
     });
