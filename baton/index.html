@@ -400,12 +400,13 @@ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
         .tksub button.on{background:var(--baton,#ffc531);color:#1a1300;opacity:1;box-shadow:0 4px 14px -6px rgba(255,197,49,.8)}
         .tkn{display:inline-block;min-width:17px;height:17px;line-height:17px;padding:0 5px;margin-left:3px;border-radius:99px;background:#ff4d6d;color:#fff;font-size:10.5px;font-weight:900;vertical-align:1px;box-sizing:border-box}.tksub button.on .tkn{background:#1a1300;color:#ffd75a}
         #p-tasks[data-sub="sp"] #vidTask,#p-tasks[data-sub="sp"] #agxTask,#p-tasks[data-sub="ms"] #agxTask,#p-tasks[data-sub="sp"] #mtgTask,#p-tasks[data-sub="ms"] #mtgTask,#p-tasks[data-sub="sp"] #subTasks,#p-tasks[data-sub="sp"] #tasks{display:none!important}
-        #p-tasks[data-sub="vid"] #spTasks,#p-tasks[data-sub="vid"] #spTasks2,#p-tasks[data-sub="vid"] #adtask,#p-tasks[data-sub="vid"] #subTasks,#p-tasks[data-sub="vid"] #tasks{display:none!important}
-        #p-tasks[data-sub="ms"] #spTasks,#p-tasks[data-sub="ms"] #spTasks2,#p-tasks[data-sub="ms"] #adtask,#p-tasks[data-sub="ms"] #vidTask{display:none!important}
+        #p-tasks[data-sub="vid"] #spTasks,#p-tasks[data-sub="vid"] #spTasks2,#p-tasks[data-sub="vid"] #adtask,#p-tasks[data-sub="vid"] #mtpTask,#p-tasks[data-sub="vid"] #subTasks,#p-tasks[data-sub="vid"] #tasks{display:none!important}
+        #p-tasks[data-sub="ms"] #spTasks,#p-tasks[data-sub="ms"] #spTasks2,#p-tasks[data-sub="ms"] #adtask,#p-tasks[data-sub="ms"] #mtpTask,#p-tasks[data-sub="ms"] #vidTask{display:none!important}
       </style>
       <div id="gamesCard" style="display:none!important"></div><!-- 28 oct 2026 (11h39, Jeremy): no more "games that earn $BATON" card -->
       <div class="list" id="subTasks"></div>
       <div class="list" id="adtask" hidden></div>
+      <div class="list" id="mtpTask" hidden></div>
       <div class="list" id="vidTask" hidden></div>
       <div class="list" id="agxTask" hidden></div>
       <div class="list" id="mtgTask" hidden></div>
@@ -1466,7 +1467,7 @@ function render() {
       const setSub = (k) => { pt.dataset.sub = k; tk.querySelectorAll('[data-s]').forEach((b) => b.classList.toggle('on', b.dataset.s === k)); try { localStorage.setItem('bt_tsub', k); } catch (e) {} };
       // 28 oct 2026 (13h07, Jeremy): a red counter on each sub-tab when something is left to do there
       const badge = () => { if (!S || !S.tasks) return; const n = {
-          sp: S.tasks.filter((t) => (t.kind === 'sub' || t.kind === 'click') && !t.done).length + Math.max(0, Number(S.adtLeft) || 0),  // 13h15: the sponsored tasks left today (10 a day), even during the 30 s wait
+          sp: S.tasks.filter((t) => (t.kind === 'sub' || t.kind === 'click') && !t.done).length + Math.max(0, Number(S.adtLeft) || 0) + (S.mtgZone != null ? Math.max(0, (Number(S.mtpMax) || 0) - (Number(S.mtpDay) || 0)) : 0),  // 13h15: the sponsored tasks left today (10 a day), even during the 30 s wait
           vid: Math.max(0, (Number(S.vids_max) || 0) - (Number(S.vids_day) || 0)) + (S.agxId != null ? Math.max(0, (Number(S.agxMax) || 0) - (Number(S.agxDay) || 0)) : 0) + (S.mtgZone != null ? Math.max(0, (Number(S.mtgMax) || 0) - (Number(S.mtgDay) || 0)) : 0),
           ms: S.tasks.filter((t) => !['sub', 'click'].includes(t.kind) && !t.done).length };
         tk.querySelectorAll('[data-s]').forEach((b) => { const k = b.dataset.s; b.innerHTML = lab[k] + (n[k] > 0 ? ' <span class="tkn">' + n[k] + '</span>' : ''); });
@@ -1510,6 +1511,32 @@ function render() {
               window.__rvAt = Date.now();
               const x = await api('agx_vid', { rid: String(r.request_id || ('ax' + Date.now())) });
               if (x && x.ok) { hap('ok'); toast(T('vtOk', fmt(x.reward || 50))); if (x.state) setState(x.state); return; }
+            }
+            b.removeAttribute('data-busy'); b.disabled = false; hap('err'); toast(T('vidNo'));
+          };
+        }
+      } } }
+  // 28 oct 2026 (14h12, Jeremy): "Monetag sponsored task" (rewarded popup) in the Sponsor sub-tab: +1 500 $BATON, 10 a day, 30 s between two
+  { const mp = $('#mtpTask'), fr = LANG === 'fr';
+    if (mp) { clearInterval(window.__mpI); { const at = $('#adtask'); if (at && at.nextElementSibling !== mp) at.after(mp); }  /* right under the Adsgram tasks */ mp.hidden = !(tg && tg.initData) || S.mtgZone == null;
+      if (!mp.hidden) {
+        const n = Number(S.mtpDay) || 0, m = Number(S.mtpMax) || 10, full = n >= m;
+        mp.innerHTML = '<div class="row"><div class="t"><b>🎁 ' + (fr ? 'Tâches Monetag' : 'Monetag tasks') + '</b><span>' + T('vtS', n, m) + '</span></div><span class="r">+' + fmt(S.mtpReward || 1500) + '</span>' + (full ? '<button class="sm done" disabled>' + T('vtTm') + '</button>' : '<button class="sm" id="mpBtn">Go</button>') + '</div>';
+        const b = mp.querySelector('#mpBtn');
+        if (b) {
+          const aw = () => Math.ceil(((Number(S.mtpNext) || 0) - Date.now()) / 1000);
+          const tk = () => { const w = aw(); if (w <= 0) { clearInterval(window.__mpI); if (!b.dataset.busy) { b.disabled = false; b.textContent = 'Go'; } return; } b.disabled = true; b.textContent = '⏳ 0:' + String(w).padStart(2, '0'); };
+          if (aw() > 0) { tk(); window.__mpI = setInterval(tk, 1000); }
+          b.onclick = async () => {
+            if (aw() > 0) return; hap(); b.disabled = true; b.dataset.busy = '1';
+            const fn = 'show_' + S.mtgZone; let ok = false;
+            try {
+              if (!window[fn]) await new Promise((res, rej) => { const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(S.mtgZone)); s.setAttribute('data-sdk', fn); s.onload = res; s.onerror = rej; document.head.appendChild(s); setTimeout(() => rej(new Error('timeout')), 8000); });
+              await window[fn]('pop'); ok = true;
+            } catch (e) { ok = false; }
+            if (ok) {
+              const x = await api('mtp_task', {});
+              if (x && x.ok) { hap('ok'); toast(T('vtOk', fmt(x.reward || 1500))); if (x.state) setState(x.state); return; }
             }
             b.removeAttribute('data-busy'); b.disabled = false; hap('err'); toast(T('vidNo'));
           };
