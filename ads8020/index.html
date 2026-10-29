@@ -61,6 +61,7 @@ nav button.on{color:var(--acc);background:rgba(47,224,138,.08)}
 <nav id="nav" hidden>
   <button data-t="earn"><i>💰</i><span data-l="tEarn"></span></button>
   <button data-t="adv"><i>📣</i><span data-l="tAdv"></span></button>
+  <button data-t="aff"><i>🤝</i><span data-l="tAff"></span></button>
   <button data-t="bal"><i>👛</i><span data-l="tBal"></span></button>
   <button data-t="adm" id="navAdm" hidden><i>🛠️</i>Admin</button>
 </nav>
@@ -74,7 +75,8 @@ const user = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
 const SP = (tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '';
 const FR = /^fr/.test(String(user.language_code || navigator.language || ''));
 const L = FR ? {
-  tEarn: 'Gagner', tAdv: 'Annoncer', tBal: 'Solde', sub: 'La régie qui reverse 80 % aux chaînes et groupes',
+  tEarn: 'Gagner', tAdv: 'Annoncer', tBal: 'Solde', tAff: 'Affiliation',
+  affH: 'Programme d\'affiliation : 15 %', affP: 'Invite des chaînes et des groupes avec ton lien. Tu touches 15 % de la commission de 80/20 Ads sur tout ce qu\'ils gagnent, à vie, sans limite de filleuls. Tes gains d\'affiliation arrivent sur ton solde (bloqués 7 jours, comme les autres).', affEarned: 'Gagné en affiliation', affChats: 'Chaînes et groupes validés de tes filleuls', affList: 'Tes filleuls', affNone: 'Personne pour l\'instant : partage ton lien !', affHow: 'Exemple : un filleul gagne 100 $ avec ses pubs, tu touches 3,75 $ en plus, sans rien lui retirer.', sub: 'La régie qui reverse 80 % aux chaînes et groupes',
   launch: '🚀 Lancement le 1er janvier 2027. Inscris tes chaînes et groupes dès maintenant : tu gagnes dès le premier jour.',
   earnH: 'Gagne avec ta chaîne ou ton groupe', earnP: 'Ajoute le bot en admin (100 membres minimum). Les pubs sont publiées pour toi (2 par jour par défaut, supprimées après 24 h) et tu gagnes 80 % de chaque clic.', refLine: '🤝 Parrainage : invite d\'autres chaînes et groupes, tu touches 15 % de la commission de 80/20 Ads sur tout ce qu\'ils gagnent, à vie.', refGo: '🤝 Mon lien de parrainage',
   addChan: '📢 Ajouter à ma chaîne', addGroup: '👥 Ajouter à mon groupe', myChats: 'Mes chaînes et groupes', noChats: 'Aucune pour l\'instant.',
@@ -97,7 +99,8 @@ const L = FR ? {
   waitH: 'Les pubs ouvrent le 1er janvier 2027', waitP: 'Tu ne paieras que les vrais clics (un clic compté par compte Telegram), en étoiles ou en USDT, avec ciblage par thème. Inscris-toi pour être prévenu dès l\'ouverture.', waitBtn: '🔔 Me prévenir à l\'ouverture', waitOk: '✅ C\'est noté : tu recevras un message du bot le 1er janvier.',
   rules: 'Pas d\'arnaque, pas de contenu adulte ni de paris. Les pubs refusées sont remboursées sur ton solde.',
 } : {
-  tEarn: 'Earn', tAdv: 'Advertise', tBal: 'Balance', sub: 'The ad network that gives 80 % to channels and groups',
+  tEarn: 'Earn', tAdv: 'Advertise', tBal: 'Balance', tAff: 'Affiliate',
+  affH: 'Affiliate program: 15 %', affP: 'Invite channels and groups with your link. You get 15 % of 80/20 Ads\' commission on everything they earn, for life, with no limit. Your affiliate earnings land on your balance (held 7 days, like the rest).', affEarned: 'Earned as affiliate', affChats: 'Approved channels and groups of your referrals', affList: 'Your referrals', affNone: 'Nobody yet: share your link!', affHow: 'Example: a referral earns $100 with ads, you get $3.75 on top, without taking anything from them.', sub: 'The ad network that gives 80 % to channels and groups',
   launch: '🚀 Launch on January 1st, 2027. Register your channels and groups now: you earn from day one.',
   earnH: 'Earn with your channel or group', earnP: 'Add the bot as admin (100 members minimum). Ads are posted for you (2 a day by default, deleted after 24 h) and you earn 80 % of every click.', refLine: '🤝 Referral program: invite other channels and groups, you get 15 % of 80/20 Ads\' commission on everything they earn, for life.', refGo: '🤝 My referral link',
   addChan: '📢 Add to my channel', addGroup: '👥 Add to my group', myChats: 'My channels and groups', noChats: 'None yet.',
@@ -160,7 +163,7 @@ async function load() {
 function draw() {
   document.querySelectorAll('nav button').forEach((b) => b.classList.toggle('on', b.dataset.t === TAB));
   const head = '<div class="top"><div class="logo">80/20</div><div><h1>80/20 Ads</h1><div class="sub">' + esc(L.sub) + '</div></div></div>' + (S.cfg && !S.cfg.live ? '<div class="banner">' + esc(L.launch) + '</div>' : '');
-  $('#app').innerHTML = head + ({ earn: earnV, adv: advV, bal: balV, adm: admV }[TAB] || earnV)();
+  $('#app').innerHTML = head + ({ earn: earnV, adv: advV, aff: affV, bal: balV, adm: admV }[TAB] || earnV)();
   bind();
   window.scrollTo(0, 0);
 }
@@ -211,13 +214,22 @@ const starsOf = (b) => Math.ceil((Number(b) || 0) * Number((S.cfg && S.cfg.star_
 
 function balV() {
   const b = S.bal || {}; const me = S.me || {}; const min = (S.cfg && S.cfg.min_withdraw) || 2;
-  const ref = 'https://t.me/' + S.bot + '?start=r' + S.uid;
   return '<div class="card hero"><div class="muted small">' + esc(L.avail) + '</div><div class="big">' + money(b.avail) + '</div>'
     + '<div class="grid2" style="margin-top:8px"><div class="stat"><b>' + money(b.pending) + '</b><span>' + esc(L.pending) + '</span></div><div class="stat"><b>' + money(b.total) + '</b><span>' + esc(L.total) + '</span></div></div>'
     + '<label>' + esc(L.wallet) + '</label><input id="wal" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="UQ…" value="' + esc(me.wallet || '') + '"><button class="btn ghost" data-k="savewal">' + esc(L.save) + '</button>'
     + '<button class="btn go" data-k="withdraw"' + (Number(b.avail) >= min ? '' : ' disabled') + '>' + esc(L.withdraw(min)) + '</button></div>'
     + ((S.wd || []).length ? '<h2>' + esc(L.wdH) + '</h2><div class="card">' + S.wd.map((w) => '<div class="row" style="padding:4px 0"><span>' + new Date(w.at * 1000).toLocaleDateString(FR ? 'fr-FR' : 'en-US') + ' · ' + money(w.usd) + '</span>' + pill(w.status === 'paid' ? 'done' : w.status === 'wait' ? 'pending' : 'refused') + '</div>').join('') + '</div>' : '')
-    + '<h2>' + esc(L.refH) + '</h2><div class="card"><div class="muted small">' + esc(L.refP) + '</div><div class="copy" data-copy="' + esc(ref) + '" style="margin-top:8px">🔗 ' + esc(ref) + '</div><div class="small muted" style="margin-top:6px">' + S.refs + ' ' + esc(L.refs) + '</div><button class="btn go" data-k="share">' + esc(L.share) + '</button></div>';
+    ;
+}
+
+// 29 oct 2026 (16h30, Jeremy): the Affiliation tab (15 % of the platform's commission on what the invited channels and groups earn)
+function affV() {
+  const a = S.aff || {}; const ref = 'https://t.me/' + S.bot + '?start=r' + S.uid;
+  return '<div class="card hero"><h2 style="margin-top:0">' + esc(L.affH) + '</h2><div class="muted">' + esc(L.affP) + '</div><div class="small muted" style="margin-top:6px">' + esc(L.affHow) + '</div>'
+    + '<div class="copy" data-copy="' + esc(ref) + '" style="margin-top:10px">🔗 ' + esc(ref) + '</div><button class="btn go" data-k="share">' + esc(L.share) + '</button></div>'
+    + '<div class="grid2"><div class="stat"><b>' + money(a.earned) + '</b><span>' + esc(L.affEarned) + '</span></div><div class="stat"><b>' + S.refs + '</b><span>' + esc(L.refs) + '</span></div></div>'
+    + '<div class="stat" style="margin-top:8px"><b>' + (a.chats || 0) + '</b><span>' + esc(L.affChats) + '</span></div>'
+    + '<h2>' + esc(L.affList) + '</h2>' + ((a.list || []).length ? '<div class="card">' + a.list.map((x) => '<div class="row" style="padding:5px 0"><span style="min-width:0">' + esc(x.name || '?') + (x.username ? ' <span class="muted small">@' + esc(x.username) + '</span>' : '') + '<br><span class="small muted">' + x.chats + ' 📢 · ' + new Date(x.at * 1000).toLocaleDateString(FR ? 'fr-FR' : 'en-US') + '</span></span><b>' + money(x.earned) + '</b></div>').join('') + '</div>' : '<div class="card muted">' + esc(L.affNone) + '</div>');
 }
 
 function admV() {
@@ -279,7 +291,7 @@ function bind() {
   document.querySelectorAll('[data-adm]').forEach((b) => { b.onclick = async () => { hap(); b.disabled = true; await api(b.dataset.adm, { id: Number(b.dataset.id), ok: b.dataset.ok === '1' }); load(); }; });
   document.querySelectorAll('[data-k]').forEach((b) => { b.onclick = async () => {
     const k = b.dataset.k, id = Number(b.dataset.id || 0);
-    if (k === 'gobal') { hap(); TAB = 'bal'; return draw(); }
+    if (k === 'gobal') { hap(); TAB = 'aff'; return draw(); }
     if (k === 'advwait') { hap('success'); await api('adv_wait'); S.me = Object.assign({}, S.me, { adv_waitlist: true }); toast(L.waitOk); return draw(); }
     if (k === 'addchan') return openUrl(addLinks().chan);
     if (k === 'addgroup') return openUrl(addLinks().group);
