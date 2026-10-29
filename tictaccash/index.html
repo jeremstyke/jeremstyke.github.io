@@ -142,7 +142,7 @@ const L = FR ? {
   winsT: 'victoires', streakT: 'série', bestT: 'record', topH: '🏆 Top du jour', noTop: 'Personne pour l\'instant : sois le premier !',
   searching: 'Recherche d\'un adversaire…', searchS: (s) => s + ' s · un bot te défie si personne n\'arrive', cancel: 'Annuler',
   you: 'Toi', bot: 'Bot', yourTurn: 'À toi de jouer !', theirTurn: 'Il réfléchit…', prize: (a, m) => 'Victoire = <b>+' + a + ' $</b>' + (m > 1 ? ' (série x' + m + ')' : ''),
-  win: 'VICTOIRE !', lose: 'Perdu', drawT: 'Match nul', again: '🎮 Rejouer', home: 'Accueil', noPay: { fast: 'Partie trop rapide : pas de gain.', cap: 'Plafond du jour atteint : reviens demain !', same: 'Déjà 2 parties payées contre ce joueur aujourd\'hui.', ip: 'Même réseau que ton adversaire : pas de gain.', banned: 'Compte exclu des gains.', blocked: 'Compte exclu des gains.' },
+  win: 'VICTOIRE !', lose: 'Perdu', drawT: 'Match nul', again: '🎮 Rejouer', home: 'Accueil', noPay: { fast: 'Coups trop rapides : pas de gain.', cap: 'Plafond du jour atteint : reviens demain !', same: 'Déjà 2 parties payées contre ce joueur aujourd\'hui.', ip: 'Même réseau que ton adversaire : pas de gain.', banned: 'Compte exclu des gains.', blocked: 'Compte exclu des gains.' },
   forfeit: 'Abandonner', waitFriend: 'Envoie ce lien à ton ami : la partie démarre dès qu\'il clique.', share: '📤 Envoyer le défi', shareT: '❌⭕ Je te défie au morpion sur Tic Tac Cash ! Le gagnant gagne des USDT 💸',
   friendsH: 'Invite tes amis', friendsP: 'Tu touches 10 % de tout ce que gagnent tes amis, à vie. Ça ne leur enlève rien.', refs: 'amis invités', refEarn: 'gagnés grâce à eux', shareRef: '📤 Inviter des amis', refT: '❌⭕ Joue au morpion et gagne des USDT à chaque victoire !',
   walletH: 'Ton solde', today: 'Gagné aujourd\'hui', cap: (c) => 'plafond ' + c + ' $ / jour', total: 'Gagné en tout', walletL: 'Ton adresse TON (pour recevoir les USDT)', save: 'Enregistrer', withdraw: (m) => '💸 Retirer (dès ' + m + ' $)', wdH: 'Mes retraits',
@@ -157,7 +157,7 @@ const L = FR ? {
   winsT: 'wins', streakT: 'streak', bestT: 'best', topH: '🏆 Top of the day', noTop: 'Nobody yet: be the first!',
   searching: 'Finding an opponent…', searchS: (s) => s + ' s · a bot takes you on if nobody comes', cancel: 'Cancel',
   you: 'You', bot: 'Bot', yourTurn: 'Your turn!', theirTurn: 'Thinking…', prize: (a, m) => 'Win = <b>+$' + a + '</b>' + (m > 1 ? ' (streak x' + m + ')' : ''),
-  win: 'YOU WIN!', lose: 'You lost', drawT: 'Draw', again: '🎮 Play again', home: 'Home', noPay: { fast: 'Game too fast: no earnings.', cap: 'Daily cap reached: come back tomorrow!', same: 'Already 2 paid games against this player today.', ip: 'Same network as your opponent: no earnings.', banned: 'Account excluded from earnings.', blocked: 'Account excluded from earnings.' },
+  win: 'YOU WIN!', lose: 'You lost', drawT: 'Draw', again: '🎮 Play again', home: 'Home', noPay: { fast: 'Moves too fast: no earnings.', cap: 'Daily cap reached: come back tomorrow!', same: 'Already 2 paid games against this player today.', ip: 'Same network as your opponent: no earnings.', banned: 'Account excluded from earnings.', blocked: 'Account excluded from earnings.' },
   forfeit: 'Give up', waitFriend: 'Send this link to your friend: the game starts as soon as they tap it.', share: '📤 Send the challenge', shareT: '❌⭕ I challenge you to tic-tac-toe on Tic Tac Cash! The winner earns USDT 💸',
   friendsH: 'Invite your friends', friendsP: 'You get 10% of everything your friends earn, for life. It takes nothing from them.', refs: 'friends invited', refEarn: 'earned through them', shareRef: '📤 Invite friends', refT: '❌⭕ Play tic-tac-toe and earn USDT with every win!',
   walletH: 'Your balance', today: 'Earned today', cap: (c) => 'cap $' + c + ' / day', total: 'Earned in total', walletL: 'Your TON address (to receive USDT)', save: 'Save', withdraw: (m) => '💸 Withdraw (from $' + m + ')', wdH: 'My withdrawals',
@@ -178,7 +178,7 @@ function faqItems(c) {
     ['Combien de temps pour jouer ?', '15 secondes par coup (l\'anneau autour de l\'avatar se vide). Si le temps est écoulé, tu perds la partie. Abandonner donne aussi la victoire à l\'adversaire.'],
     ['Le coffre du jour', 'Un coffre gratuit à ouvrir chaque jour. Plus tu reviens de jours de suite, plus il rapporte : de ' + u(c.chest[0]) + ' $ le 1er jour à ' + u(c.chest[6]) + ' $ le 7e. Si tu rates un jour, ça repart au jour 1.'],
     ['Il y a une limite par jour ?', Number(c.day_cap) > 0 ? 'Oui : tu peux gagner jusqu\'à ' + usd(c.day_cap, 2) + ' $ par jour avec les parties.' : 'Non : joue autant que tu veux, chaque partie gagnée te rapporte.'],
-    ['Pourquoi une partie ne m\'a rien rapporté ?', 'Une partie ne rapporte rien si elle a duré moins de ' + c.min_secs + ' secondes, ou si vous êtes sur le même réseau internet (anti-triche). La raison s\'affiche à la fin de la partie.'],
+    ['Pourquoi une partie ne m\'a rien rapporté ?', 'Une partie ne rapporte rien si tu as joué trop vite (moins de ' + c.min_secs + ' seconde par coup), ou si vous êtes sur le même réseau internet (anti-triche). La raison s\'affiche à la fin de la partie.'],
     ['Plusieurs comptes ?', '2 comptes maximum par réseau et par téléphone. Les comptes en trop peuvent jouer, mais ne gagnent rien. Les tricheurs sont exclus des gains.'],
     ['Le parrainage', 'Invite tes amis avec ton lien (onglet Amis) : tu touches ' + Math.round(c.ref_share * 100) + ' % de tout ce qu\'ils gagnent, à vie. Ça ne leur enlève rien.'],
     ['Comment retirer mes USDT ?', 'Dans l\'onglet Portefeuille : enregistre ton adresse TON (Tonkeeper, Telegram Wallet…), puis retire dès ' + c.min_withdraw + ' $. Il faut avoir joué au moins ' + c.min_days + ' jours différents avant le premier retrait. Chaque retrait est vérifié puis envoyé en USDT sur le réseau TON. Un seul retrait en cours à la fois.'],
@@ -193,7 +193,7 @@ function faqItems(c) {
     ['How long do I have to play?', '15 seconds per move (the ring around the avatar empties). When time runs out, you lose the game. Giving up also gives the win to your opponent.'],
     ['The daily chest', 'A free chest to open every day. The more days in a row, the more it pays: from $' + u(c.chest[0]) + ' on day 1 to $' + u(c.chest[6]) + ' on day 7. Miss a day and it goes back to day 1.'],
     ['Is there a daily limit?', Number(c.day_cap) > 0 ? 'Yes: you can earn up to $' + usd(c.day_cap, 2) + ' a day from games.' : 'No: play as much as you want, every game you win pays.'],
-    ['Why did a game pay nothing?', 'A game pays nothing if it lasted less than ' + c.min_secs + ' seconds, or if you are both on the same internet network (anti-cheat). The reason shows at the end of the game.'],
+    ['Why did a game pay nothing?', 'A game pays nothing if you played too fast (under ' + c.min_secs + ' second per move), or if you are both on the same internet network (anti-cheat). The reason shows at the end of the game.'],
     ['Several accounts?', '2 accounts at most per network and phone. Extra accounts can play but earn nothing. Cheaters are excluded from earnings.'],
     ['Referral', 'Invite your friends with your link (Friends tab): you get ' + Math.round(c.ref_share * 100) + '% of everything they earn, for life. It takes nothing from them.'],
     ['How do I withdraw my USDT?', 'In the Wallet tab: save your TON address (Tonkeeper, Telegram Wallet…), then withdraw from $' + c.min_withdraw + '. You must have played on at least ' + c.min_days + ' different days before your first withdrawal. Each withdrawal is checked, then sent in USDT on the TON network. One pending withdrawal at a time.'],
@@ -203,7 +203,7 @@ function faqItems(c) {
 }
 function faq() {
   hap();
-  const c = Object.assign({ win: 0.002, draw: 0.0005, streak3: 2, streak5: 3, ai_after: 10, chest: [0.001, 0, 0, 0, 0, 0, 0.01], day_cap: 0.1, min_secs: 8, same_opp: 2, ref_share: 0.1, min_withdraw: 1, min_days: 3, ad_every: 2 }, (S && S.cfg) || {});
+  const c = Object.assign({ win: 0.002, draw: 0.0005, streak3: 2, streak5: 3, ai_after: 10, chest: [0.001, 0, 0, 0, 0, 0, 0.01], day_cap: 0.1, min_secs: 1, same_opp: 2, ref_share: 0.1, min_withdraw: 1, min_days: 3, ad_every: 2 }, (S && S.cfg) || {});
   const d = document.createElement('div'); d.className = 'over';
   d.innerHTML = '<div class="faq"><div class="row" style="margin-bottom:6px"><b class="f" style="font-size:22px">' + (FR ? '❓ Règles et FAQ' : '❓ Rules and FAQ') + '</b><button class="qbtn" data-x="1">✕</button></div>'
     + faqItems(c).map((q, i) => '<details' + (i === 0 ? ' open' : '') + '><summary>' + esc(q[0]) + '</summary><p>' + esc(q[1]) + '</p></details>').join('') + '</div>';
