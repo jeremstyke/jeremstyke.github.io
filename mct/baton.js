@@ -36,7 +36,7 @@
         // 28 oct 2026 (21h33, Jeremy): 1 opening interstitial out of 5 on Monetag (In-App Interstitial, zone 12143182), drawn at random over all players;
         // Adsgram (int-55508) for the others, or when Monetag fails
         const adsg = () => { if (window.Adsgram) return go(); if (!document.querySelector('script[src*="sad.adsgram.ai"]')) { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; document.head.appendChild(s); } let n = 0; const w = setInterval(() => { if (window.Adsgram) { clearInterval(w); go(); } else if (++n > 20) { clearInterval(w); agx(); } }, 300); };
-        if (Math.random() < 0.2) {
+        if (false) {  // 29 oct 2026 (23h15, Jeremy): no more Monetag, Adsgram only
           const fn = 'show_12143182';
           const ms = () => { try { const r = window[fn]({ type: 'inApp', inAppSettings: { frequency: 1, capping: 1, interval: 30, timeout: 0, everyPage: false } }); if (r && r.catch) r.catch(() => {}); } catch (e) { adsg(); } };
           if (window[fn]) return ms();
