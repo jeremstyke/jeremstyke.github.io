@@ -418,7 +418,11 @@ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
       <div class="list" id="vidTask" hidden></div>
       <div class="list" id="agxTask" hidden></div>
       <div class="list" id="mtgTask" hidden></div>
-      <style>/* 29 oct 2026 (22h16, Jeremy): no more Monetag task nor Monetag videos in Tasks */#mtpTask,#mtgTask{display:none!important}</style>
+      <style>/* 29 oct 2026 (22h16, Jeremy): no more Monetag task nor Monetag videos in Tasks */#mtpTask,#mtgTask{display:none!important}
+        /* 29 oct 2026 (23h00, Jeremy): one single list in Tasks, no more sub-tabs: Adsgram task, video, missions, partners, then "Boost your channel" */
+        #tkSub{display:none!important}
+        #p-tasks:not([hidden]){display:flex;flex-direction:column}
+        #p-tasks>.score{order:0}#p-tasks>#adtask{order:1}#p-tasks>#vidTask{order:2}#p-tasks>#agxTask{order:3}#p-tasks>#tasks{order:4}#p-tasks>#subTasks{order:5}#p-tasks>#spTasks2{order:6}#p-tasks>#spTasks{order:7;margin-top:14px}#p-tasks>*{order:8}</style>
       <div class="list" id="tasks"></div>
     </section>
 
@@ -1486,7 +1490,7 @@ function render() {
     const sp2 = $('#spTasks2'); if (sp2) sp2.innerHTML = spl.length ? '<div class="sec">🤝 ' + (fr ? 'Tâches partenaires' : 'Partner tasks') + '</div>' + srt(spl).map(prow).join('') : '';
     // 28 oct 2026 (12h53, Jeremy): sub-tabs (sponsored / videos / missions), the last one chosen is remembered
     { const tk = $('#tkSub'), pt = $('#p-tasks'), lab = fr ? { sp: '⭐ Sponsor', vid: '📺 Vidéos', ms: '✅ Missions' } : { sp: '⭐ Sponsored', vid: '📺 Videos', ms: '✅ Missions' };
-      const setSub = (k) => { pt.dataset.sub = k; tk.querySelectorAll('[data-s]').forEach((b) => b.classList.toggle('on', b.dataset.s === k)); try { localStorage.setItem('bt_tsub', k); } catch (e) {} };
+      const setSub = (k) => { pt.dataset.sub = 'all'; tk.querySelectorAll('[data-s]').forEach((b) => b.classList.toggle('on', b.dataset.s === k)); try { localStorage.setItem('bt_tsub', k); } catch (e) {} };
       // 28 oct 2026 (13h07, Jeremy): a red counter on each sub-tab when something is left to do there
       const badge = () => { if (!S || !S.tasks) return; const n = {
           sp: S.tasks.filter((t) => (t.kind === 'sub' || t.kind === 'click') && !t.done).length + Math.max(0, Number(S.adtLeft) || 0) + (S.mtgZone != null ? Math.max(0, (Number(S.mtpMax) || 0) - (Number(S.mtpDay) || 0)) : 0),  // 13h15: the sponsored tasks left today (1,000 a day), even during the 30 s wait
