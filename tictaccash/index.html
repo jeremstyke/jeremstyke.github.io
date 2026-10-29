@@ -341,8 +341,11 @@ async function move(cell) {
   G.busy = true; hap();
   // the move shows at once, the server confirms
   const nb = v.board.split(''); nb[cell - 1] = v.me; render(Object.assign({}, v, { board: nb.join(''), turn: v.me === 'X' ? 'O' : 'X' }));
+  const t0 = Date.now();
   const r = await api('move', { id: G.id, cell });
-  G.busy = false; if (r && r.ok) render(r);
+  // 29 oct 2026 (17h33, Jeremy): the bot answered at the same time as the player; it now "thinks" 0.7 to 1.3 s
+  if (r && r.ok && v.mode === 'ai' && r.winner !== v.me) { const w = 700 + Math.random() * 600 - (Date.now() - t0); if (w > 0) await new Promise((ok) => setTimeout(ok, w)); }
+  G.busy = false; if (r && r.ok && G && G.v) render(r);
 }
 function waitFriend(v) {
   const link = 'https://t.me/' + BOT + '?startapp=g' + v.code;
