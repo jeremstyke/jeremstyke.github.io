@@ -152,6 +152,7 @@ const L = FR ? {
   st: { wait: 'En cours', paid: 'Payé', refused: 'Refusé' }, copied: 'Copié !', saved: '✅ Enregistré',
   err: { wallet: 'Adresse TON invalide (ou à enregistrer d\'abord).', min: 'Il faut au moins 1 $ pour retirer.', days: 'Joue au moins 3 jours différents avant ton premier retrait.', waiting: 'Un retrait est déjà en cours.', banned: 'Compte exclu des gains.', gone: 'Ce défi n\'existe plus.', full: 'Ce défi a déjà commencé.', auth: 'Ouvre le jeu depuis Telegram.' },
   chestWin: (a) => '🎁 +' + a + ' $ !', dbl: (a) => '📺 Doubler avec une vidéo (+' + a + ' $)', dblOk: '💸 Gains doublés !', noVid: 'Pas de vidéo dispo, réessaie plus tard.',
+  async: '⏳ Tour par tour', asyncS: '24 h par coup, joue quand tu veux', myGames: '⏳ Mes parties tour par tour', yourMove: 'À toi de jouer', theirMove: 'Son tour', waitOpp: 'Recherche d\'un adversaire', asyncWaitH: 'Partie créée !', asyncWaitP: 'Le prochain joueur qui lance une partie tour par tour te rejoint. Le bot te préviendra quand ce sera ton tour.', back: '🏠 Retour', asyncTheir: 'Son tour : le bot te préviendra quand il aura joué.', hLeft: (h) => h + ' h pour jouer', won: 'Gagnée', lost: 'Perdue', drawn: 'Nul', asyncMax: 'Tu as déjà 10 parties en cours : termine-en une d\'abord.',
 } : {
   tPlay: 'Play', tFriends: 'Friends', tWallet: 'Wallet', tag: 'The tic-tac-toe that pays in USDT', online: (n) => n + ' online',
   classic: 'Classic', classicS: 'Get 3 in a row', three: '3 pieces', threeS: 'The oldest one vanishes', play: 'PLAY', friend: '🤝 Challenge a friend',
@@ -167,6 +168,7 @@ const L = FR ? {
   st: { wait: 'Pending', paid: 'Paid', refused: 'Refused' }, copied: 'Copied!', saved: '✅ Saved',
   err: { wallet: 'Invalid TON address (or save one first).', min: 'You need at least $1 to withdraw.', days: 'Play on at least 3 different days before your first withdrawal.', waiting: 'A withdrawal is already pending.', banned: 'Account excluded from earnings.', gone: 'This challenge is gone.', full: 'This challenge already started.', auth: 'Open the game from Telegram.' },
   chestWin: (a) => '🎁 +$' + a + '!', dbl: (a) => '📺 Double it with a video (+$' + a + ')', dblOk: '💸 Earnings doubled!', noVid: 'No video right now, try again later.',
+  async: '⏳ Turn-based', asyncS: '24 h per move, play whenever you want', myGames: '⏳ My turn-based games', yourMove: 'Your move', theirMove: 'Their move', waitOpp: 'Looking for an opponent', asyncWaitH: 'Game created!', asyncWaitP: 'The next player who starts a turn-based game joins you. The bot will tell you when it is your turn.', back: '🏠 Back', asyncTheir: 'Their move: the bot will tell you when they have played.', hLeft: (h) => h + ' h to play', won: 'Won', lost: 'Lost', drawn: 'Draw', asyncMax: 'You already have 10 games going: finish one first.',
 };
 // 29 oct 2026 (17h08, Jeremy): the FAQ with every rule (the numbers come from the server's settings)
 function faqItems(c) {
@@ -178,6 +180,7 @@ function faqItems(c) {
     ['C\'est quoi les séries ?', 'Enchaîne les victoires : à partir de 3 victoires de suite, chaque victoire rapporte x' + c.streak3 + ', et à partir de 5 de suite, x' + c.streak5 + '. Une défaite remet ta série à zéro.'],
     ['Contre qui je joue ?', 'Contre de vrais joueurs du monde entier. Si personne n\'est disponible au bout de ' + c.ai_after + ' secondes, tu affrontes un bot (affiché 🤖 Bot) : ces parties rapportent aussi. Tu peux aussi défier un ami avec un lien.'],
     ['Combien de temps pour jouer ?', '15 secondes par coup (l\'anneau autour de l\'avatar se vide). Si le temps est écoulé, tu perds la partie. Abandonner donne aussi la victoire à l\'adversaire.'],
+    ['C\'est quoi le mode « Tour par tour » ?', 'Tu joues contre un vrai joueur sans être connectés en même temps : chacun a 24 h pour jouer son coup, et le bot te prévient quand c\'est ton tour. Tu peux avoir jusqu\'à ' + (c.async_max || 10) + ' parties en même temps. Les gains sont les mêmes. Sans coup joué en 24 h, la partie est perdue.'],
     ['Le coffre du jour', 'Un coffre gratuit à ouvrir chaque jour. Plus tu reviens de jours de suite, plus il rapporte : de ' + u(c.chest[0]) + ' $ le 1er jour à ' + u(c.chest[6]) + ' $ le 7e. Si tu rates un jour, ça repart au jour 1.'],
     ['Il y a une limite par jour ?', Number(c.day_cap) > 0 ? 'Oui : tu peux gagner jusqu\'à ' + usd(c.day_cap, 2) + ' $ par jour avec les parties.' : 'Non : joue autant que tu veux, chaque partie gagnée te rapporte.'],
     ['Pourquoi une partie ne m\'a rien rapporté ?', 'Une partie ne rapporte rien si tu as joué trop vite (moins de ' + c.min_secs + ' seconde par coup), ou si vous êtes sur le même réseau internet (anti-triche). La raison s\'affiche à la fin de la partie.'],
@@ -193,6 +196,7 @@ function faqItems(c) {
     ['What are streaks?', 'Chain wins: from 3 wins in a row, each win pays x' + c.streak3 + ', and from 5 in a row, x' + c.streak5 + '. A loss resets your streak.'],
     ['Who do I play against?', 'Real players from all over the world. If nobody is available after ' + c.ai_after + ' seconds, you face a bot (shown as 🤖 Bot): those games pay too. You can also challenge a friend with a link.'],
     ['How long do I have to play?', '15 seconds per move (the ring around the avatar empties). When time runs out, you lose the game. Giving up also gives the win to your opponent.'],
+    ['What is "Turn-based" mode?', 'You play a real player without being online at the same time: each has 24 h to play a move, and the bot tells you when it is your turn. You can have up to ' + (c.async_max || 10) + ' games at once. Earnings are the same. No move in 24 h and the game is lost.'],
     ['The daily chest', 'A free chest to open every day. The more days in a row, the more it pays: from $' + u(c.chest[0]) + ' on day 1 to $' + u(c.chest[6]) + ' on day 7. Miss a day and it goes back to day 1.'],
     ['Is there a daily limit?', Number(c.day_cap) > 0 ? 'Yes: you can earn up to $' + usd(c.day_cap, 2) + ' a day from games.' : 'No: play as much as you want, every game you win pays.'],
     ['Why did a game pay nothing?', 'A game pays nothing if you played too fast (under ' + c.min_secs + ' second per move), or if you are both on the same internet network (anti-cheat). The reason shows at the end of the game.'],
@@ -236,6 +240,7 @@ async function load() {
   if (!r || !r.ok) { $('#app').innerHTML = '<div class="card center" style="margin-top:30vh">' + esc((L.err[r && r.error]) || 'Error') + '</div>'; return; }
   S = r;
   if (S.game && !G) return openGame(S.game);
+  if (/^a\d+$/.test(SP) && !window.__aopen) { window.__aopen = true; return openGame(Number(SP.slice(1))); }  // 29 oct 2026: the bot's "your turn" button
   if (/^g[0-9a-f]{8}$/.test(SP) && !window.__joined) { window.__joined = true; const j = await api('join', { code: SP.slice(1) }); if (j && j.ok) return openGame(j.game); toast(L.err[j && j.error] || '…'); }
   $('#nav').hidden = false; draw(); openAd();
 }
@@ -271,11 +276,33 @@ function homeV() {
     + '<div class="seg"><button data-var="classic" class="' + (VAR === 'classic' ? 'on' : '') + '"><b>' + esc(L.classic) + '</b><small>' + esc(L.classicS) + '</small></button><button data-var="three" class="' + (VAR === 'three' ? 'on' : '') + '"><b>' + esc(L.three) + '</b><small>' + esc(L.threeS) + '</small></button></div>'
     + '<button class="btn play f" data-k="play">' + esc(L.play) + '</button>'
     + '<button class="btn ghost f" data-k="friend">' + esc(L.friend) + '</button>'
+    // 29 oct 2026 (19h25, Jeremy): turn-based games (24 h per move, the bot pings the player), up to 10 at once
+    + '<button class="btn ghost f" data-k="async">' + esc(L.async) + '<small style="display:block;font:500 12px Inter,system-ui,sans-serif;opacity:.7;margin-top:2px">' + esc(L.asyncS) + '</small></button>'
+    + asyncList()
     + '<div class="card" style="margin-top:14px"><div class="stats"><div><b>' + (me.wins || 0) + '</b><span>' + esc(L.winsT) + '</span></div><div><b>🔥 ' + (me.streak || 0) + '</b><span>' + esc(L.streakT) + '</span></div><div><b>' + (me.best || 0) + '</b><span>' + esc(L.bestT) + '</span></div></div></div>'
     + '<div class="card chest' + (me.chest_ok ? ' ready' : '') + '"><div class="ic">🎁</div><div style="flex:1;min-width:0"><b class="f" style="font-size:16px">' + esc(L.chestH) + '</b><div class="mut sm">' + esc(L.chestS(Math.max(1, d))) + '</div><div class="dots">' + [1, 2, 3, 4, 5, 6, 7].map((i) => '<i class="' + (i <= (me.chest_streak || 0) ? 'on' : '') + '"></i>').join('') + '</div></div>'
     + '<button class="btn gold f" data-k="chest" style="width:auto;margin:0;padding:10px 14px;font-size:15px"' + (me.chest_ok ? '' : ' disabled') + '>' + esc(me.chest_ok ? L.open : '✓') + '</button></div>'
     + '<div class="card"><div class="h">' + esc(L.topH) + '</div>' + (top.length ? top.map((t, i) => '<div class="lb' + (t.me ? ' me' : '') + '"><span class="n f ' + (i < 3 ? 'g' + (i + 1) : '') + '">' + (i + 1) + '</span><span class="nm">' + esc(t.name || '?') + '</span><span class="money">+' + usd(t.usd, 4) + ' $</span></div>').join('') : '<div class="mut sm">' + esc(L.noTop) + '</div>') + '</div>'
     + '<div class="mut sm center">' + esc(L.rules) + '</div><button class="btn ghost f" data-k="faq" style="font-size:15px;padding:11px;margin-top:12px">' + (FR ? '❓ Règles et FAQ' : '❓ Rules and FAQ') + '</button>';
+}
+function asyncList() {
+  const a = (S && S.async) || []; if (!a.length) return '';
+  return '<div class="card" style="margin-top:14px"><div class="h">' + esc(L.myGames) + '</div>' + a.map((g) => {
+    const st = g.status === 'wait' ? '<span class="pill wait">' + esc(L.waitOpp) + '</span>'
+      : g.status === 'done' ? '<span class="pill ' + (g.winner === g.me ? 'ok' : g.winner === 'D' ? 'wait' : 'bad') + '">' + esc(g.winner === g.me ? L.won : g.winner === 'D' ? L.drawn : L.lost) + '</span>'
+      : g.my_turn ? '<span class="pill ok">' + esc(L.yourMove) + '</span>' : '<span class="pill wait">' + esc(L.theirMove) + '</span>';
+    const sub = g.status === 'play' ? L.hLeft(Math.max(1, Math.ceil(g.left / 3600))) : (g.variant === 'three' ? L.three : L.classic);
+    return '<button class="lb" data-k="ag" data-id="' + g.id + '" style="width:100%;background:none;border:0;color:inherit;font:inherit;text-align:left;cursor:pointer"><span class="nm">' + esc(g.opp || '…') + '<br><span class="mut sm">' + esc(sub) + '</span></span>' + st + '</button>';
+  }).join('') + '</div>';
+}
+async function asyncFind() {
+  hap(); const r = await api('afind', { variant: VAR });
+  if (r && r.ok) return openGame(r.game);
+  toast(r && r.error === 'async_max' ? L.asyncMax : 'Error');
+}
+function asyncWait(v) {
+  $('#app').innerHTML = '<div class="radar"><i></i><i></i><i></i>' + avatar(user.first_name, user.photo_url) + '</div><div class="center"><div class="h" style="font-size:22px">' + esc(L.asyncWaitH) + '</div><div class="mut" style="margin:8px 0 22px">' + esc(L.asyncWaitP) + '</div><button class="btn ghost f" data-k="aback" style="max-width:220px;margin:0 auto">' + esc(L.back) + '</button></div>';
+  $('[data-k="aback"]').onclick = async () => { hap(); stopPoll(); G = null; await refresh(); draw(); };
 }
 function friendsV() {
   const link = 'https://t.me/' + BOT + '?start=r' + S.uid;
@@ -326,7 +353,7 @@ const LINES = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8],
 function render(v) {
   if (!v || !v.ok) return;
   const prev = G && G.v; G.v = v;
-  if (v.status === 'wait') return waitFriend(v);
+  if (v.status === 'wait') return v.mode === 'async' ? asyncWait(v) : waitFriend(v);
   const me = v.me, opp = me === 'X' ? 'O' : 'X', myTurn = v.status === 'play' && v.turn === me;
   const b = v.board.split('');
   let win = []; LINES.forEach((l) => { if (b[l[0]] !== '.' && b[l[0]] === b[l[1]] && b[l[1]] === b[l[2]]) win = l; });
@@ -336,15 +363,17 @@ function render(v) {
   const before = prev && prev.board ? prev.board : '';
   if (before && before !== v.board) hap();
   const cfg = S.cfg || {}; const st = (S.me && S.me.streak) || 0; const mult = st + 1 >= 5 ? cfg.streak5 : st + 1 >= 3 ? cfg.streak3 : 1;
-  const ring = (side) => { const on = v.status === 'play' && v.turn === side; const p = on ? Math.max(0, v.left) / 15 : 1; return '<svg class="ring" viewBox="0 0 62 62"><circle cx="31" cy="31" r="28" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="4"/><circle cx="31" cy="31" r="28" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-dasharray="' + (176 * p).toFixed(1) + ' 176"/></svg>'; };
+  const ring = (side) => { const on = v.status === 'play' && v.turn === side; const p = on ? Math.max(0, v.left) / (v.mode === 'async' ? 86400 : 15) : 1; return '<svg class="ring" viewBox="0 0 62 62"><circle cx="31" cy="31" r="28" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="4"/><circle cx="31" cy="31" r="28" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-dasharray="' + (176 * p).toFixed(1) + ' 176"/></svg>'; };
   const oppName = v.opp ? (v.opp.ai ? '🤖 ' + L.bot : v.opp.name) : '…';
   const pcard = (side, name, photo, isMe) => '<div class="pl ' + (side === 'X' ? 'px' : 'po') + (v.status === 'play' && v.turn === side ? ' turn' : '') + '"><div class="tm">' + ring(side) + avatar(name, photo) + '</div><div class="nm">' + esc(isMe ? L.you : name) + '</div><div style="width:22px;height:22px">' + (side === 'X' ? X_SVG() : O_SVG()) + '</div></div>';
   $('#app').innerHTML = '<div class="players">' + pcard(me, user.first_name, user.photo_url, true) + '<div class="vs f">VS</div>' + pcard(opp, oppName, v.opp && v.opp.photo, false) + '</div>'
     + '<div class="prize">' + L.prize(usd((cfg.win || 0.002) * mult, 4), mult) + '</div>'
     + '<div class="board">' + b.map((c, i) => '<div class="cell' + (win.includes(i) ? ' win' : '') + (i === old ? ' old' : '') + '" data-c="' + (i + 1) + '">' + (c === 'X' ? X_SVG(before[i] !== 'X') : c === 'O' ? O_SVG(before[i] !== 'O') : '') + '</div>').join('') + '</div>'
-    + '<div class="hint" style="color:' + (myTurn ? 'var(--' + (me === 'X' ? 'x' : 'o') + ')' : 'var(--mut)') + '">' + esc(v.status === 'play' ? (myTurn ? L.yourTurn : L.theirTurn) : '') + '</div>'
+    + '<div class="hint" style="color:' + (myTurn ? 'var(--' + (me === 'X' ? 'x' : 'o') + ')' : 'var(--mut)') + '">' + esc(v.status === 'play' ? (myTurn ? L.yourTurn : (v.mode === 'async' ? L.asyncTheir : L.theirTurn)) : '') + '</div>'
+    + (v.mode === 'async' && v.status === 'play' ? '<button class="btn ghost f" data-k="aback" style="font-size:14px;padding:10px;max-width:200px;margin:18px auto 0">' + esc(L.back) + '</button>' : '')
     + (v.status === 'play' ? '<button class="btn ghost f" data-k="forfeit" style="font-size:14px;padding:10px;max-width:160px;margin:18px auto 0">' + esc(L.forfeit) + '</button>' : '');
   document.querySelectorAll('.cell').forEach((c) => { c.onclick = () => move(Number(c.dataset.c)); });
+  const ab = $('[data-k="aback"]'); if (ab) ab.onclick = async () => { hap(); stopPoll(); G = null; await refresh(); draw(); };
   const ff = $('[data-k="forfeit"]'); if (ff) ff.onclick = async () => { hap('warning'); const r = await api('forfeit', { id: G.id }); render(r); };
   if (v.status === 'done' && !G.shown) { G.shown = true; stopPoll(); setTimeout(() => result(v), 650); }
 }
@@ -393,7 +422,7 @@ function result(v) {
   };
   if (amt > 0) { const t0 = performance.now(); const step = (t) => { const p = Math.min(1, (t - t0) / 900); const el = d.querySelector('#cnt'); if (el) el.textContent = usd(amt * p, 4) + ' $'; if (p < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); }
   games++; const mode = v.mode;
-  d.querySelector('#again').onclick = async () => { d.remove(); G = null; await maybeAd(mode); await refresh(); search(); };
+  d.querySelector('#again').onclick = async () => { d.remove(); G = null; await maybeAd(mode); await refresh(); if (mode === 'async') asyncFind(); else search(); };
   d.querySelector('#home').onclick = async () => { d.remove(); G = null; await maybeAd(mode); TAB = 'home'; load(); };
 }
 async function refresh() { const r = await api('state', { jfp: JFP }); if (r && r.ok) S = r; }
@@ -427,6 +456,8 @@ function bind() {
     const k = b.dataset.k;
     if (k === 'faq') return faq();
     if (k === 'play') return search();
+    if (k === 'async') return asyncFind();
+    if (k === 'ag') { hap(); return openGame(Number(b.dataset.id)); }
     if (k === 'friend') { hap(); const r = await api('friend', { variant: VAR }); if (r && r.ok) openGame(r.game); return; }
     if (k === 'chest') { b.disabled = true; const r = await api('chest'); if (r && r.ok) { hap('success'); confetti(['🪙', '✨', '🎁']); toast(L.chestWin(usd(r.usd, 4))); await refresh(); draw(); } else b.disabled = false; return; }
     if (k === 'shareref') { const link = 'https://t.me/' + BOT + '?start=r' + S.uid; return openTg('https://t.me/share/url?url=' + encodeURIComponent(link) + '&text=' + encodeURIComponent(L.refT)); }
