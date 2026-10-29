@@ -1652,9 +1652,9 @@ $('#passBtn').onclick = () => {
     '<button class="opt" data-k="new"><span class="t"><b>' + T('newP') + '</b><span>' + T('newS') + '</span></span><span class="mult x5">' + pg(5) + '<small class="pg">' + T('newPct') + '</small></span></button>' +
     (S.crew_n === 0 ? '<div class="opt" style="opacity:.45"><span class="t"><b>' + T('friendP') + '</b><span>' + T('crewNone') + '</span></span><span class="mult">' + pg(3) + '</span></div>'
       : '<button class="opt" data-k="friend"><span class="t"><b>' + T('friendP') + '</b><span>' + T('friendS') + '</span></span><span class="mult">' + pg(3) + '</span></button>') +
-    '<button class="opt" data-k="random"><span class="t"><b>' + T('randP') + '</b><span>' + T('randS') + '</span></span><span class="mult">' + pg(1) + '</span></button>' +
-    /* 29 oct 2026 (1h26, Jeremy): nobody to pass it to: post it in the Club, the first to tap takes it */
+    /* 29 oct 2026 (1h26, Jeremy): nobody to pass it to: post it in the Club, the first to tap takes it (above "random", 1h36) */
     '<button class="opt" data-k="club"><span class="t"><b>' + (LANG === 'fr' ? '📣 Le poster dans le Club' : '📣 Post it in the Club') + '</b><span>' + (LANG === 'fr' ? 'Le premier qui clique le prend' : 'The first to tap takes it') + '</span></span><span class="mult">+' + fmt(S.pass_club || 2000) + '</span></button>' +
+    '<button class="opt" data-k="random"><span class="t"><b>' + T('randP') + '</b><span>' + T('randS') + '</span></span><span class="mult">' + pg(1) + '</span></button>' +
     '<button class="btn ghost" data-k="keep">' + T('keep') + '</button>');
 };
 // 22 oct 2026: keep the baton in hand 4 h longer for 10 Stars (once per baton); the bot's webhook applies the payment
