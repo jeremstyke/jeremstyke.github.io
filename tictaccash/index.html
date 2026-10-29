@@ -399,7 +399,7 @@ async function refresh() { const r = await api('state', { jfp: JFP }); if (r && 
 let pvpGames = 0, skipAd = false;
 async function loadMtg() {
   const fn = 'show_' + MTG;
-  if (!window[fn]) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(MTG)); s.setAttribute('data-sdk', fn); s.onload = ok; s.onerror = ko; document.head.appendChild(s); setTimeout(ko, 8000); });
+  await (window.__mtgL || (window.__mtgL = new Promise((ok, ko) => { if (typeof window[fn] === 'function') return ok(); const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(MTG)); s.setAttribute('data-sdk', fn); s.onerror = () => { window.__mtgL = null; ko(new Error('load')); }; document.head.appendChild(s); const t0 = Date.now(), iv = setInterval(() => { if (typeof window[fn] === 'function') { clearInterval(iv); ok(); } else if (Date.now() - t0 > 12000) { clearInterval(iv); window.__mtgL = null; ko(new Error('timeout')); } }, 100); }))); /* 29 oct 2026: the SDK's onload fires before show_<zone> exists, wait for the function itself */
   return window[fn];
 }
 // a rewarded video (Monetag rewarded interstitial): true when it was watched to the end
@@ -413,7 +413,7 @@ async function maybeAd(mode) {
   else { pvpGames++; if (pvpGames % Number(c.ad_every || 2) !== 0) return; }
   try {
     const fn = 'show_' + MTG;
-    if (!window[fn]) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(MTG)); s.setAttribute('data-sdk', fn); s.onload = ok; s.onerror = ko; document.head.appendChild(s); setTimeout(ko, 8000); });
+    await (window.__mtgL || (window.__mtgL = new Promise((ok, ko) => { if (typeof window[fn] === 'function') return ok(); const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(MTG)); s.setAttribute('data-sdk', fn); s.onerror = () => { window.__mtgL = null; ko(new Error('load')); }; document.head.appendChild(s); const t0 = Date.now(), iv = setInterval(() => { if (typeof window[fn] === 'function') { clearInterval(iv); ok(); } else if (Date.now() - t0 > 12000) { clearInterval(iv); window.__mtgL = null; ko(new Error('timeout')); } }, 100); }))); /* 29 oct 2026: the SDK's onload fires before show_<zone> exists, wait for the function itself */
     if (window[fn]) await Promise.race([window[fn]({ ymid: String(user.id || '') }), new Promise((ok) => setTimeout(ok, 30000))]);
   } catch (e) {}
 }
