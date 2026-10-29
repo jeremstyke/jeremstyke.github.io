@@ -211,7 +211,7 @@ body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#0407
       <div class="mini up" id="upB"><div class="ic">🛠️</div><div style="min-width:0"><div class="t" data-t="upgrade"></div><div class="s" id="upS"></div></div></div>
       <div class="mini ch" id="chB"><div class="ic">🎁</div><div style="min-width:0"><div class="t" id="chT"></div><div class="s" id="chS"></div></div></div>
       <div class="mini bo" id="boB" hidden><div class="ic">🎬</div><div style="min-width:0"><div class="t">Boost x2</div><div class="s" id="boS"></div></div><div class="bc" id="boC"></div></div>
-      <div class="mini pp" id="ppB"><div class="ic">🎯</div><div style="min-width:0"><div class="t" id="ppT"></div><div class="s" id="ppS"></div></div><div class="bc" id="ppC">+15 min</div></div>
+      <div class="mini pp" id="ppB"><div class="ic">🎯</div><div style="min-width:0"><div class="t" id="ppT"></div><div class="s" id="ppS"></div></div><div class="bc" id="ppC">🎁 GO</div></div>
     </div>
   </div>
 
@@ -642,8 +642,8 @@ $('boB').onclick = async () => {
 };
 // 30 oct 2026 (0h39, Jeremy): sponsored task = Monetag rewarded popup (zone 12149624, 'pop'): +15 min of mining, 20 a day, 1 min between two (server rr_api 'pop')
 {
-  const PT = { fr: ['Tâche sponsorisée', 'Ouvre la pub : +15 min de minage', 'Pas de pub dispo, réessaie plus tard.', '⏳ Attends un peu avant la prochaine.', 'Plus de tâche aujourd\'hui, reviens demain.', 'RIGZ gagnés !'],
-    en: ['Sponsored task', 'Open the ad: +15 min of mining', 'No ad right now, try again later.', '⏳ Wait a bit before the next one.', 'No more tasks today, come back tomorrow.', 'RIGZ earned!'] };
+  const PT = { fr: ['Gagne des RIGZ gratuits', 'Regarde une pub, reviens ici : tu gagnes 15 min de minage', 'Pas de pub dispo, réessaie plus tard.', '⏳ Attends un peu avant la prochaine.', 'Plus de tâche aujourd\'hui, reviens demain.', 'RIGZ gagnés !'],
+    en: ['Earn free RIGZ', 'Watch an ad, come back here: you get 15 min of mining', 'No ad right now, try again later.', '⏳ Wait a bit before the next one.', 'No more tasks today, come back tomorrow.', 'RIGZ earned!'] };
   const P = PT[LANG] || PT.en;
   $('ppT').textContent = P[0]; $('ppS').textContent = P[1];
   let busy = false;
