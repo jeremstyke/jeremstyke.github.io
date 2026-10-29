@@ -149,7 +149,7 @@ const L = FR ? {
   rules: 'Victoire +0,002 $ · nul +0,0005 $ · 3 victoires de suite x2, 5 de suite x3. Retrait après 3 jours de jeu.',
   st: { wait: 'En cours', paid: 'Payé', refused: 'Refusé' }, copied: 'Copié !', saved: '✅ Enregistré',
   err: { wallet: 'Adresse TON invalide (ou à enregistrer d\'abord).', min: 'Il faut au moins 1 $ pour retirer.', days: 'Joue au moins 3 jours différents avant ton premier retrait.', waiting: 'Un retrait est déjà en cours.', banned: 'Compte exclu des gains.', gone: 'Ce défi n\'existe plus.', full: 'Ce défi a déjà commencé.', auth: 'Ouvre le jeu depuis Telegram.' },
-  chestWin: (a) => '🎁 +' + a + ' $ !',
+  chestWin: (a) => '🎁 +' + a + ' $ !', dbl: (a) => '📺 Doubler avec une vidéo (+' + a + ' $)', dblOk: '💸 Gains doublés !', noVid: 'Pas de vidéo dispo, réessaie plus tard.',
 } : {
   tPlay: 'Play', tFriends: 'Friends', tWallet: 'Wallet', tag: 'The tic-tac-toe that pays in USDT', online: (n) => n + ' online',
   classic: 'Classic', classicS: 'Get 3 in a row', three: '3 pieces', threeS: 'The oldest one vanishes', play: 'PLAY', friend: '🤝 Challenge a friend',
@@ -164,7 +164,7 @@ const L = FR ? {
   rules: 'Win +$0.002 · draw +$0.0005 · 3 wins in a row x2, 5 in a row x3. Withdraw after 3 days of play.',
   st: { wait: 'Pending', paid: 'Paid', refused: 'Refused' }, copied: 'Copied!', saved: '✅ Saved',
   err: { wallet: 'Invalid TON address (or save one first).', min: 'You need at least $1 to withdraw.', days: 'Play on at least 3 different days before your first withdrawal.', waiting: 'A withdrawal is already pending.', banned: 'Account excluded from earnings.', gone: 'This challenge is gone.', full: 'This challenge already started.', auth: 'Open the game from Telegram.' },
-  chestWin: (a) => '🎁 +$' + a + '!',
+  chestWin: (a) => '🎁 +$' + a + '!', dbl: (a) => '📺 Double it with a video (+$' + a + ')', dblOk: '💸 Earnings doubled!', noVid: 'No video right now, try again later.',
 };
 // 29 oct 2026 (17h08, Jeremy): the FAQ with every rule (the numbers come from the server's settings)
 function faqItems(c) {
@@ -363,8 +363,19 @@ function result(v) {
   const d = document.createElement('div'); d.className = 'over';
   d.innerHTML = '<div class="res"><div style="font-size:56px">' + (won ? '🏆' : dr ? '🤝' : '😵') + '</div><div class="big f" style="color:' + (won ? 'var(--gold)' : dr ? 'var(--o)' : 'var(--x)') + '">' + esc(won ? L.win : dr ? L.drawT : L.lose) + '</div>'
     + (amt > 0 ? '<div class="earn f"><span class="coin">$</span>+<span id="cnt">0</span></div>' + (pay.mult > 1 ? '<div class="mut sm">🔥 x' + pay.mult + '</div>' : '') : (pay.why ? '<div class="mut sm" style="margin:10px 0">' + esc(L.noPay[pay.why] || '') + '</div>' : ''))
+    + (amt > 0 ? '<button class="btn gold f" id="dbl" style="font-size:16px">' + esc(L.dbl(usd(amt, 4))) + '</button>' : '')
     + '<button class="btn play f" id="again">' + esc(L.again) + '</button><button class="btn ghost f" id="home" style="font-size:15px">' + esc(L.home) + '</button></div>';
   document.body.appendChild(d);
+  // 29 oct 2026 (17h27, Jeremy): a rewarded video doubles the game's earnings (once per game); it replaces the next interstitial
+  const db = d.querySelector('#dbl');
+  if (db) db.onclick = async () => {
+    hap(); db.disabled = true;
+    const seen = await rewarded();
+    if (!seen) { db.disabled = false; return toast(L.noVid); }
+    skipAd = true;
+    const r = await api('double', { id: v.id });
+    if (r && r.ok) { hap('success'); confetti(['💸', '🪙', '✨']); const el = d.querySelector('#cnt'); if (el) el.textContent = usd(r.total, 4) + ' $'; db.remove(); toast(L.dblOk); } else db.disabled = false;
+  };
   if (amt > 0) { const t0 = performance.now(); const step = (t) => { const p = Math.min(1, (t - t0) / 900); const el = d.querySelector('#cnt'); if (el) el.textContent = usd(amt * p, 4) + ' $'; if (p < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); }
   games++; const mode = v.mode;
   d.querySelector('#again').onclick = async () => { d.remove(); G = null; await maybeAd(mode); await refresh(); search(); };
@@ -372,8 +383,18 @@ function result(v) {
 }
 async function refresh() { const r = await api('state', { jfp: JFP }); if (r && r.ok) S = r; }
 // 29 oct 2026 (17h21, Jeremy): no daily cap any more, so an ad after every game against the bot (ad_every_ai), and every ad_every games against players (Monetag)
-let pvpGames = 0;
+let pvpGames = 0, skipAd = false;
+async function loadMtg() {
+  const fn = 'show_' + MTG;
+  if (!window[fn]) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(MTG)); s.setAttribute('data-sdk', fn); s.onload = ok; s.onerror = ko; document.head.appendChild(s); setTimeout(ko, 8000); });
+  return window[fn];
+}
+// a rewarded video (Monetag rewarded interstitial): true when it was watched to the end
+async function rewarded() {
+  try { const f = await loadMtg(); if (!f) return false; await f({ ymid: String(user.id || '') }); return true; } catch (e) { return false; }
+}
 async function maybeAd(mode) {
+  if (skipAd) { skipAd = false; return; }
   const c = (S && S.cfg) || {};
   if (mode === 'ai') { if (Number(c.ad_every_ai || 1) > 1 && games % Number(c.ad_every_ai) !== 0) return; }
   else { pvpGames++; if (pvpGames % Number(c.ad_every || 2) !== 0) return; }
