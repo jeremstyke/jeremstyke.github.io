@@ -109,6 +109,12 @@ input{width:100%;background:rgba(0,0,0,.3);border:1px solid var(--line);color:va
 .pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--card2)}
 .pill.ok{color:var(--green);background:rgba(62,240,160,.12)}.pill.wait{color:var(--gold);background:rgba(255,210,74,.12)}.pill.bad{color:var(--bad);background:rgba(255,107,107,.12)}
 .center{text-align:center}
+.qbtn{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--card2);color:var(--fg);font:700 16px Fredoka,system-ui,sans-serif;cursor:pointer;flex:none}
+.faq{width:100%;max-width:440px;max-height:84vh;overflow:auto;background:linear-gradient(160deg,#21184d,#120d2e);border:1px solid var(--line);border-radius:24px;padding:18px 16px;animation:pop .35s cubic-bezier(.2,1.4,.4,1);text-align:left;user-select:text}
+.faq details{border-bottom:1px solid var(--line);padding:11px 2px}.faq details:last-of-type{border:0}
+.faq summary{list-style:none;cursor:pointer;font:600 15px Fredoka,system-ui,sans-serif;display:flex;justify-content:space-between;gap:10px}.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--o);font-size:20px;line-height:1}.faq details[open] summary::after{content:"−"}
+.faq p{margin:8px 0 2px;color:#d6d0f5;font-size:14px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -160,6 +166,50 @@ const L = FR ? {
   err: { wallet: 'Invalid TON address (or save one first).', min: 'You need at least $1 to withdraw.', days: 'Play on at least 3 different days before your first withdrawal.', waiting: 'A withdrawal is already pending.', banned: 'Account excluded from earnings.', gone: 'This challenge is gone.', full: 'This challenge already started.', auth: 'Open the game from Telegram.' },
   chestWin: (a) => '🎁 +$' + a + '!',
 };
+// 29 oct 2026 (17h08, Jeremy): the FAQ with every rule (the numbers come from the server's settings)
+function faqItems(c) {
+  const u = (n) => usd(n, 4).replace(/0+$/, '').replace(/[.,]$/, '');
+  return FR ? [
+    ['Comment on joue ?', 'Chacun son tour, tu poses ton ❌ ou ton ⭕ sur le plateau. Le premier qui aligne 3 symboles (en ligne, en colonne ou en diagonale) gagne. Plateau plein sans alignement : match nul.'],
+    ['C\'est quoi le mode « 3 pions » ?', 'Chaque joueur n\'a que 3 pions sur le plateau. Quand tu poses le 4e, ton plus vieux pion disparaît (il est grisé juste avant). Il n\'y a presque jamais de match nul ! Après 30 coups sans alignement, c\'est nul.'],
+    ['Combien je gagne ?', 'Victoire : +' + u(c.win) + ' $. Match nul : +' + u(c.draw) + ' $. Défaite : 0 $. Les gains sont en USDT et arrivent tout de suite sur ton solde.'],
+    ['C\'est quoi les séries ?', 'Enchaîne les victoires : à partir de 3 victoires de suite, chaque victoire rapporte x' + c.streak3 + ', et à partir de 5 de suite, x' + c.streak5 + '. Une défaite remet ta série à zéro.'],
+    ['Contre qui je joue ?', 'Contre de vrais joueurs du monde entier. Si personne n\'est disponible au bout de ' + c.ai_after + ' secondes, tu affrontes un bot (affiché 🤖 Bot) : ces parties rapportent aussi. Tu peux aussi défier un ami avec un lien.'],
+    ['Combien de temps pour jouer ?', '15 secondes par coup (l\'anneau autour de l\'avatar se vide). Si le temps est écoulé, tu perds la partie. Abandonner donne aussi la victoire à l\'adversaire.'],
+    ['Le coffre du jour', 'Un coffre gratuit à ouvrir chaque jour. Plus tu reviens de jours de suite, plus il rapporte : de ' + u(c.chest[0]) + ' $ le 1er jour à ' + u(c.chest[6]) + ' $ le 7e. Si tu rates un jour, ça repart au jour 1.'],
+    ['Il y a une limite par jour ?', 'Oui : tu peux gagner jusqu\'à ' + usd(c.day_cap, 2) + ' $ par jour avec les parties. Au-delà, tu peux continuer à jouer pour le plaisir, sans gain jusqu\'au lendemain.'],
+    ['Pourquoi une partie ne m\'a rien rapporté ?', 'Une partie ne rapporte rien si elle a duré moins de ' + c.min_secs + ' secondes, si tu as déjà fait ' + c.same_opp + ' parties payées contre le même joueur aujourd\'hui, si vous êtes sur le même réseau internet, ou si le plafond du jour est atteint. La raison s\'affiche à la fin de la partie.'],
+    ['Plusieurs comptes ?', '2 comptes maximum par réseau et par téléphone. Les comptes en trop peuvent jouer, mais ne gagnent rien. Les tricheurs sont exclus des gains.'],
+    ['Le parrainage', 'Invite tes amis avec ton lien (onglet Amis) : tu touches ' + Math.round(c.ref_share * 100) + ' % de tout ce qu\'ils gagnent, à vie. Ça ne leur enlève rien.'],
+    ['Comment retirer mes USDT ?', 'Dans l\'onglet Portefeuille : enregistre ton adresse TON (Tonkeeper, Telegram Wallet…), puis retire dès ' + c.min_withdraw + ' $. Il faut avoir joué au moins ' + c.min_days + ' jours différents avant le premier retrait. Chaque retrait est vérifié puis envoyé en USDT sur le réseau TON. Un seul retrait en cours à la fois.'],
+    ['Pourquoi il y a des pubs ?', 'Ce sont les pubs qui paient tes gains. Une pub s\'affiche toutes les ' + c.ad_every + ' parties.'],
+    ['Une question ?', 'Écris-nous : t.me/jeremstyke?direct'],
+  ] : [
+    ['How do I play?', 'Take turns placing your ❌ or ⭕ on the board. The first to line up 3 (row, column or diagonal) wins. Full board without a line: draw.'],
+    ['What is "3 pieces" mode?', 'Each player only has 3 pieces on the board. When you place your 4th, your oldest piece vanishes (it is greyed out just before). Almost never a draw! After 30 moves without a line, it\'s a draw.'],
+    ['How much do I earn?', 'Win: +$' + u(c.win) + '. Draw: +$' + u(c.draw) + '. Loss: $0. Earnings are in USDT and land on your balance at once.'],
+    ['What are streaks?', 'Chain wins: from 3 wins in a row, each win pays x' + c.streak3 + ', and from 5 in a row, x' + c.streak5 + '. A loss resets your streak.'],
+    ['Who do I play against?', 'Real players from all over the world. If nobody is available after ' + c.ai_after + ' seconds, you face a bot (shown as 🤖 Bot): those games pay too. You can also challenge a friend with a link.'],
+    ['How long do I have to play?', '15 seconds per move (the ring around the avatar empties). When time runs out, you lose the game. Giving up also gives the win to your opponent.'],
+    ['The daily chest', 'A free chest to open every day. The more days in a row, the more it pays: from $' + u(c.chest[0]) + ' on day 1 to $' + u(c.chest[6]) + ' on day 7. Miss a day and it goes back to day 1.'],
+    ['Is there a daily limit?', 'Yes: you can earn up to $' + usd(c.day_cap, 2) + ' a day from games. After that you can keep playing for fun, with no earnings until the next day.'],
+    ['Why did a game pay nothing?', 'A game pays nothing if it lasted less than ' + c.min_secs + ' seconds, if you already played ' + c.same_opp + ' paid games against the same player today, if you are both on the same internet network, or if the daily limit is reached. The reason shows at the end of the game.'],
+    ['Several accounts?', '2 accounts at most per network and phone. Extra accounts can play but earn nothing. Cheaters are excluded from earnings.'],
+    ['Referral', 'Invite your friends with your link (Friends tab): you get ' + Math.round(c.ref_share * 100) + '% of everything they earn, for life. It takes nothing from them.'],
+    ['How do I withdraw my USDT?', 'In the Wallet tab: save your TON address (Tonkeeper, Telegram Wallet…), then withdraw from $' + c.min_withdraw + '. You must have played on at least ' + c.min_days + ' different days before your first withdrawal. Each withdrawal is checked, then sent in USDT on the TON network. One pending withdrawal at a time.'],
+    ['Why are there ads?', 'Ads pay for your earnings. An ad shows every ' + c.ad_every + ' games.'],
+    ['A question?', 'Write to us: t.me/jeremstyke?direct'],
+  ];
+}
+function faq() {
+  hap();
+  const c = Object.assign({ win: 0.002, draw: 0.0005, streak3: 2, streak5: 3, ai_after: 10, chest: [0.001, 0, 0, 0, 0, 0, 0.01], day_cap: 0.1, min_secs: 8, same_opp: 2, ref_share: 0.1, min_withdraw: 1, min_days: 3, ad_every: 2 }, (S && S.cfg) || {});
+  const d = document.createElement('div'); d.className = 'over';
+  d.innerHTML = '<div class="faq"><div class="row" style="margin-bottom:6px"><b class="f" style="font-size:22px">' + (FR ? '❓ Règles et FAQ' : '❓ Rules and FAQ') + '</b><button class="qbtn" data-x="1">✕</button></div>'
+    + faqItems(c).map((q, i) => '<details' + (i === 0 ? ' open' : '') + '><summary>' + esc(q[0]) + '</summary><p>' + esc(q[1]) + '</p></details>').join('') + '</div>';
+  d.onclick = (e) => { if (e.target === d || e.target.dataset.x) d.remove(); };
+  document.body.appendChild(d);
+}
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const usd = (n, d) => { const v = Number(n || 0); const s = v.toFixed(d != null ? d : v > 0 && v < 0.1 ? 4 : 2); return FR ? s.replace('.', ',') : s; };
@@ -190,7 +240,7 @@ async function load() {
 function header() {
   const b = (S && S.bal) || {};
   return '<div class="top"><div class="me">' + avatar(user.first_name, user.photo_url) + '<b class="f" style="font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(user.first_name || '') + '</b></div>'
-    + '<div class="bal"><span class="coin">$</span>' + usd(b.usd, 4) + '</div></div>';
+    + '<div style="display:flex;gap:8px;align-items:center"><button class="qbtn" data-k="faq" aria-label="FAQ">?</button><div class="bal"><span class="coin">$</span>' + usd(b.usd, 4) + '</div></div></div>';
 }
 function draw() {
   stopPoll();
@@ -213,7 +263,7 @@ function homeV() {
     + '<div class="card chest' + (me.chest_ok ? ' ready' : '') + '"><div class="ic">🎁</div><div style="flex:1;min-width:0"><b class="f" style="font-size:16px">' + esc(L.chestH) + '</b><div class="mut sm">' + esc(L.chestS(Math.max(1, d))) + '</div><div class="dots">' + [1, 2, 3, 4, 5, 6, 7].map((i) => '<i class="' + (i <= (me.chest_streak || 0) ? 'on' : '') + '"></i>').join('') + '</div></div>'
     + '<button class="btn gold f" data-k="chest" style="width:auto;margin:0;padding:10px 14px;font-size:15px"' + (me.chest_ok ? '' : ' disabled') + '>' + esc(me.chest_ok ? L.open : '✓') + '</button></div>'
     + '<div class="card"><div class="h">' + esc(L.topH) + '</div>' + (top.length ? top.map((t, i) => '<div class="lb' + (t.me ? ' me' : '') + '"><span class="n f ' + (i < 3 ? 'g' + (i + 1) : '') + '">' + (i + 1) + '</span><span class="nm">' + esc(t.name || '?') + '</span><span class="money">+' + usd(t.usd, 4) + ' $</span></div>').join('') : '<div class="mut sm">' + esc(L.noTop) + '</div>') + '</div>'
-    + '<div class="mut sm center">' + esc(L.rules) + '</div>';
+    + '<div class="mut sm center">' + esc(L.rules) + '</div><button class="btn ghost f" data-k="faq" style="font-size:15px;padding:11px;margin-top:12px">' + (FR ? '❓ Règles et FAQ' : '❓ Rules and FAQ') + '</button>';
 }
 function friendsV() {
   const link = 'https://t.me/' + BOT + '?start=r' + S.uid;
@@ -337,6 +387,7 @@ function bind() {
   document.querySelectorAll('[data-var]').forEach((b) => { b.onclick = () => { hap(); VAR = b.dataset.var; try { localStorage.setItem('ttc_var', VAR); } catch (e) {} document.querySelectorAll('[data-var]').forEach((x) => x.classList.toggle('on', x === b)); }; });
   document.querySelectorAll('[data-k]').forEach((b) => { b.onclick = async () => {
     const k = b.dataset.k;
+    if (k === 'faq') return faq();
     if (k === 'play') return search();
     if (k === 'friend') { hap(); const r = await api('friend', { variant: VAR }); if (r && r.ok) openGame(r.game); return; }
     if (k === 'chest') { b.disabled = true; const r = await api('chest'); if (r && r.ok) { hap('success'); confetti(['🪙', '✨', '🎁']); toast(L.chestWin(usd(r.usd, 4))); await refresh(); draw(); } else b.disabled = false; return; }
