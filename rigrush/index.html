@@ -453,7 +453,7 @@ function render() {
     const sk = $('stk'); sk.hidden = !(m.streak > 0); if (m.streak > 0) sk.textContent = tr('stk', { d: m.streak, p: m.streak_pct }); }  /* 24 oct 2026 (Jeremy): no boost until Adsgram is set up */ $('bdg').hidden = !m.unread; $('bdg').textContent = m.unread > 9 ? '9+' : m.unread;
   $('boB').classList.toggle('on', !!boosted);
   $('boS').textContent = boosted ? tr('bon', { m: Math.ceil((T(m.boost_end) - t0) / 6e4) }) : m.boost_left > 0 ? tr('bsub') : tr('bnone');
-  { const bc = $('boC'); if (bc) { bc.textContent = boosted ? '⚡ x2' : m.boost_left > 0 ? m.boost_left + '/6' : ''; bc.hidden = !bc.textContent; } }  // 30 oct 2026: the counter on the right
+  { const bc = $('boC'); if (bc) { bc.textContent = boosted ? '⚡ x2' : '';  /* 30 oct 2026 (0h36, Jeremy): no "6/6" counter, "no more boost today" only when none is left */ bc.hidden = !bc.textContent; } }  // 30 oct 2026: the counter on the right
   if (!$('pg-up').hidden) buildUp();
   const ev = Number(m.earned || 0) + mined();  // 24 oct 2026 (4h09): the airdrop counts everything earned, upgrades never cost places
   $('dp').textContent = fmt2(ev) + ' RIGZ';
