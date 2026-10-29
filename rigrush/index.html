@@ -861,5 +861,25 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
   } catch (e) {}
 })();
 </script>
+<script>
+// 29 oct 2026 (21h54, Jeremy): Monetag rewarded interstitial (zone 12149624) at opening, at most once an hour, never on the first visit
+(function () {
+  try {
+    var TWm = window.Telegram && window.Telegram.WebApp; if (!TWm || !TWm.initData) return;
+    var ZONE = 12149624, fn = 'show_' + ZONE, first = true, last = 0;
+    try { first = !localStorage.getItem('rr_mv'); localStorage.setItem('rr_mv', '1'); last = Number(localStorage.getItem('rr_mtg_at') || 0); } catch (e) { return; }
+    if (first || Date.now() - last < 3600e3) return;
+    try { localStorage.setItem('rr_mtg_at', String(Date.now())); } catch (e) {}
+    var go = function () {
+      if (document.querySelector('#jsban, #cover:not([hidden])')) return;  // never over the blocked or maintenance screens
+      try { window[fn]({ ymid: String((TWm.initDataUnsafe && TWm.initDataUnsafe.user && TWm.initDataUnsafe.user.id) || '') }).catch(function () {}); } catch (e) {}
+    };
+    var s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(ZONE)); s.setAttribute('data-sdk', fn);
+    document.head.appendChild(s);
+    // the SDK's onload fires before show_<zone> exists: wait for the function itself (12 s at most)
+    var t0 = Date.now(), iv = setInterval(function () { if (typeof window[fn] === 'function') { clearInterval(iv); setTimeout(go, 1500); } else if (Date.now() - t0 > 12000) clearInterval(iv); }, 150);
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
