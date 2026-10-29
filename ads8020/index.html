@@ -53,6 +53,15 @@ nav button.on{color:var(--acc);background:rgba(47,224,138,.08)}
 .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#24302b;color:var(--fg);padding:10px 16px;border-radius:12px;font-weight:600;z-index:20;max-width:90%;text-align:center}
 .copy{display:flex;gap:6px;align-items:center;background:var(--card2);border-radius:10px;padding:8px 10px;font-family:ui-monospace,monospace;font-size:12px;word-break:break-all;cursor:pointer}
 .center{text-align:center}
+.steps{display:flex;align-items:center;margin:4px 0 14px}.steps .st{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:var(--mut);min-width:64px}.steps .st i{font-style:normal;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--card2);border:1px solid var(--line);font-weight:800}.steps .st.on i{background:var(--acc);color:#06140d;border-color:var(--acc)}.steps .st.on{color:var(--fg);font-weight:700}.steps .st.done i{background:rgba(47,224,138,.18);color:var(--acc);border-color:var(--acc)}.steps .sl{flex:1;height:2px;background:var(--line);margin-bottom:18px}
+.cnt{float:right;color:var(--mut);font-size:12px}
+.tgwrap{background:linear-gradient(180deg,#0e1621,#17212b);border-radius:14px;padding:14px 12px}.tgp{background:#182533;border-radius:12px 12px 12px 4px;padding:10px 12px;max-width:100%}.tgh{display:flex;gap:8px;align-items:center;margin-bottom:6px}.tgh .av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#5ab3f0,#2a7ed0);display:grid;place-items:center;font-size:15px}.tgh b{display:block;font-size:14px;color:#6ab3f3}.tgh span{font-size:11px;color:#7f91a4}.tgt{white-space:pre-wrap;word-break:break-word;font-size:14.5px;color:#f5f5f5}.tgm{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:#7f91a4;margin-top:8px}.tgm span:first-child{font-style:italic}.tgb{margin-top:4px;background:rgba(90,179,240,.16);color:#8fd0ff;border-radius:10px;text-align:center;padding:9px;font-weight:700;font-size:14px}.tgb small{opacity:.7}
+.pills{display:flex;flex-wrap:wrap;gap:6px}.pl{padding:8px 14px;border-radius:12px;background:var(--card2);border:1px solid var(--line);font-weight:700;cursor:pointer}.pl.on{background:rgba(47,224,138,.15);border-color:var(--acc);color:var(--acc)}
+input[type=range]{padding:0;height:6px;accent-color:var(--acc);background:transparent;border:0;margin:10px 0 6px}
+.estim{background:radial-gradient(120% 140% at 100% 0%,rgba(255,209,102,.16),transparent 60%),var(--card2);border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:12px;text-align:center}.estim .big{color:var(--acc2);font-size:26px}
+.sum{background:var(--card2);border-radius:14px;padding:10px}.srow{display:flex;justify-content:space-between;padding:7px 4px;border-bottom:1px solid var(--line);font-size:14px}.srow:last-child{border:0}.srow span{color:var(--mut)}.sum .tgwrap{margin-bottom:8px}
+.tile{display:flex;gap:12px;align-items:center;background:var(--card2);border:1.5px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:8px;cursor:pointer}.tile i{font-style:normal;font-size:24px}.tile b{display:block}.tile span{color:var(--mut);font-size:13px}.tile.on{border-color:var(--acc);background:rgba(47,224,138,.08)}.tile.off{opacity:.4;pointer-events:none}
+.netc{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}.netc div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 6px;text-align:center}.netc b{display:block;font-size:20px;font-weight:900;color:var(--acc)}.netc span{font-size:11px;color:var(--mut)}
 .banner{background:linear-gradient(90deg,rgba(255,209,102,.18),rgba(255,209,102,.05));border:1px solid rgba(255,209,102,.4);border-radius:12px;padding:10px 12px;font-size:13px;margin-bottom:10px}
 </style>
 </head>
@@ -96,6 +105,9 @@ const L = FR ? {
   err: { text: 'Texte entre 10 et 900 caractères.', btn: 'Bouton entre 2 et 30 caractères.', link: 'Le lien doit commencer par https://', budget: 'Budget minimum 5 $.', cpc: 'Prix par clic entre 0,01 $ et 5 $.', funds: 'Solde insuffisant.', wallet: 'Adresse TON invalide (ou à enregistrer d\'abord).', min: 'Montant disponible trop faible.', waiting: 'Un retrait est déjà en cours.', drafts: 'Trop de pubs à payer : paie ou supprime-les d\'abord.', auth: 'Ouvre l\'appli depuis Telegram.' },
   opening: 'Ouverture du lien…', openNow: 'Ouvrir le lien', back: 'Retour à 80/20 Ads',
   pv: 'Aperçu',
+  s1: 'Contenu', s2: 'Ciblage', s3: 'Paiement', next: 'Continuer', prev: 'Retour', phText: 'Ex : 🚀 Rejoins la meilleure chaîne crypto francophone : des signaux gratuits chaque jour !', phBtn: 'Ex : Rejoindre', pvText: 'Ton texte apparaîtra ici…', pvChan: 'Une chaîne du réseau', pvSub: 'publication sponsorisée', pvBtn: 'Ton bouton',
+  cpcHint: 'Plus ton prix par clic est élevé, plus ta pub passe en priorité.', estH: 'Clics estimés', estNet: (c, m) => 'Diffusée sur ' + c + ' chaînes et groupes · ' + m.toLocaleString('fr-FR') + ' membres', allCats: 'Tous', payWith: 'Payer avec', pmStars: 'Étoiles Telegram', pmBal: 'Mon solde', payNow: 'Payer et envoyer', preview: '👀 Voir le formulaire (aperçu)',
+  netH: 'Le réseau 80/20 Ads', nChan: 'chaînes', nGroup: 'groupes', nMem: 'membres touchés',
   waitH: 'Les pubs ouvrent le 1er janvier 2027', waitP: 'Tu ne paieras que les vrais clics (un clic compté par compte Telegram), en étoiles ou en USDT, avec ciblage par thème. Inscris-toi pour être prévenu dès l\'ouverture.', waitBtn: '🔔 Me prévenir à l\'ouverture', waitOk: '✅ C\'est noté : tu recevras un message du bot le 1er janvier.',
   rules: 'Pas d\'arnaque, pas de contenu adulte ni de paris. Les pubs refusées sont remboursées sur ton solde.',
 } : {
@@ -120,6 +132,9 @@ const L = FR ? {
   err: { text: 'Text between 10 and 900 characters.', btn: 'Button between 2 and 30 characters.', link: 'The link must start with https://', budget: 'Minimum budget $5.', cpc: 'Price per click between $0.01 and $5.', funds: 'Not enough balance.', wallet: 'Invalid TON address (or save one first).', min: 'Available amount too low.', waiting: 'A withdrawal is already pending.', drafts: 'Too many ads to pay: pay or delete them first.', auth: 'Open the app from Telegram.' },
   opening: 'Opening the link…', openNow: 'Open the link', back: 'Back to 80/20 Ads',
   pv: 'Preview',
+  s1: 'Content', s2: 'Targeting', s3: 'Payment', next: 'Continue', prev: 'Back', phText: 'E.g. 🚀 Join the best crypto channel: free signals every day!', phBtn: 'E.g. Join now', pvText: 'Your text will show here…', pvChan: 'A channel of the network', pvSub: 'sponsored post', pvBtn: 'Your button',
+  cpcHint: 'The higher your price per click, the higher your ad\'s priority.', estH: 'Estimated clicks', estNet: (c, m) => 'Shown in ' + c + ' channels and groups · ' + m.toLocaleString('en-US') + ' members', allCats: 'All', payWith: 'Pay with', pmStars: 'Telegram Stars', pmBal: 'My balance', payNow: 'Pay and submit', preview: '👀 See the form (preview)',
+  netH: 'The 80/20 Ads network', nChan: 'channels', nGroup: 'groups', nMem: 'members reached',
   waitH: 'Ads open on January 1st, 2027', waitP: 'You will only pay for real clicks (one click counted per Telegram account), in Stars or USDT, with topic targeting. Sign up to be notified when it opens.', waitBtn: '🔔 Notify me at launch', waitOk: '✅ Done: the bot will message you on January 1st.',
   rules: 'No scams, no adult content, no gambling. Refused ads are refunded to your balance.',
 };
@@ -170,8 +185,10 @@ function draw() {
 const addLinks = () => ({ chan: 'https://t.me/' + S.bot + '?startchannel&admin=post_messages+delete_messages', group: 'https://t.me/' + S.bot + '?startgroup&admin=delete_messages' });
 
 function earnV() {
-  const ch = S.chats || [];
-  return '<div class="card hero"><h2 style="margin-top:0">' + esc(L.earnH) + '</h2><div class="muted">' + esc(L.earnP) + '</div>'
+  const ch = S.chats || []; const net = S.net || {};
+  // 29 oct 2026 (16h39, Jeremy): the network on the home screen (channels and groups registered, members in total)
+  return '<div class="small muted" style="margin:0 0 6px 2px">' + esc(L.netH) + '</div><div class="netc"><div><b>' + (net.channels || 0) + '</b><span>' + esc(L.nChan) + '</span></div><div><b>' + (net.groups || 0) + '</b><span>' + esc(L.nGroup) + '</span></div><div><b>' + Number(net.members || 0).toLocaleString(FR ? 'fr-FR' : 'en-US') + '</b><span>' + esc(L.nMem) + '</span></div></div>'
+    + '<div class="card hero"><h2 style="margin-top:0">' + esc(L.earnH) + '</h2><div class="muted">' + esc(L.earnP) + '</div>'
     + '<div class="grid2" style="margin-top:6px"><button class="btn go" data-k="addchan">' + esc(L.addChan) + '</button><button class="btn go" data-k="addgroup">' + esc(L.addGroup) + '</button></div>'
     + '<div class="banner" style="margin:12px 0 0">' + esc(L.refLine) + '</div><button class="btn ghost" data-k="gobal">' + esc(L.refGo) + '</button></div>'
     + '<h2>' + esc(L.myChats) + '</h2>'
@@ -185,22 +202,66 @@ function earnV() {
 }
 
 let F = { text: '', btn: '', link: '', budget: 10, cpc: 0.02, cats: [] };
-function advV() {
-  // 29 oct 2026 (16h28, Jeremy): before the launch, advertisers sign up for a reminder (16h34: for everyone, Jeremy too)
-  if (!(S.cfg && S.cfg.live)) return '<div class="card hero center"><div style="font-size:46px">📣</div><h2>' + esc(L.waitH) + '</h2><div class="muted">' + esc(L.waitP) + '</div>' + (S.me && S.me.adv_waitlist ? '<div class="banner" style="margin:12px 0 0">' + esc(L.waitOk) + '</div>' : '<button class="btn go" data-k="advwait">' + esc(L.waitBtn) + '</button>') + '</div>';
-  const ads = S.camps || [];
+// 29 oct 2026 (16h38, Jeremy): creating an ad is a 3-step flow (content with a live Telegram preview, targeting and budget, payment)
+let STEP = 1, PAYM = 'stars', PREV = false;
+const CATE = { crypto: '🪙', business: '💼', finance: '📈', games: '🎮', tech: '💻', entertainment: '🎬', education: '🎓', news: '📰', sport: '⚽', lifestyle: '✨' };
+function stepsBar() {
+  return '<div class="steps">' + [L.s1, L.s2, L.s3].map((t, i) => '<div class="st' + (STEP === i + 1 ? ' on' : STEP > i + 1 ? ' done' : '') + '"><i>' + (STEP > i + 1 ? '✓' : i + 1) + '</i><span>' + esc(t) + '</span></div>').join('<div class="sl"></div>') + '</div>';
+}
+function tgPrev() {
+  const txt = F.text ? esc(F.text) : '<span class="muted">' + esc(L.pvText) + '</span>';
+  let host = ''; try { host = F.link ? new URL(F.link).hostname.replace(/^www\./, '') : ''; } catch (e) {}
+  return '<div class="tgwrap"><div class="tgp"><div class="tgh"><div class="av">📢</div><div><b>' + esc(L.pvChan) + '</b><span>' + esc(L.pvSub) + '</span></div></div>'
+    + '<div class="tgt">' + txt + '</div><div class="tgm"><span>📢 Ad · 80/20 Ads</span><span>👁 1,2K · 12:00</span></div></div>'
+    + '<div class="tgb">' + esc(F.btn || L.pvBtn) + ' <small>↗</small></div>' + (host ? '<div class="small muted center" style="margin-top:6px">🔗 ' + esc(host) + '</div>' : '') + '</div>';
+}
+function advForm() {
   const n = Math.floor((Number(F.budget) || 0) / (Number(F.cpc) || 1));
-  return '<div class="card hero"><h2 style="margin-top:0">' + esc(L.advH) + '</h2><div class="muted small">' + esc(L.advP) + '</div>'
-    + '<label>' + esc(L.fText) + '</label><textarea id="fText" maxlength="900">' + esc(F.text) + '</textarea>'
-    + '<div class="grid2"><div><label>' + esc(L.fBtn) + '</label><input id="fBtn" maxlength="30" value="' + esc(F.btn) + '"></div><div><label>' + esc(L.fLink) + '</label><input id="fLink" inputmode="url" value="' + esc(F.link) + '"></div></div>'
-    + '<div class="grid2"><div><label>' + esc(L.fBudget) + '</label><input id="fBudget" inputmode="decimal" value="' + esc(F.budget) + '"></div><div><label>' + esc(L.fCpc) + '</label><input id="fCpc" inputmode="decimal" value="' + esc(F.cpc) + '"></div></div>'
-    + '<div class="small muted" style="margin-top:4px" id="est">' + esc(L.est(n)) + '</div>'
-    + '<label>' + esc(L.fCats) + '</label><div class="chips">' + CATS.map((k) => '<span class="chip' + (F.cats.includes(k) ? ' on' : '') + '" data-fc="' + k + '">' + esc(CATL[k]) + '</span>').join('') + '</div>'
-    + '<label>' + esc(L.pv) + '</label><div class="preview" id="pv">' + esc(F.text || '…') + '<div class="pb">' + esc(F.btn || '…') + '</div></div>'
-    + '<button class="btn go" data-k="paystars">' + esc(L.payStars(starsOf(F.budget))) + '</button>'
-    + '<button class="btn gold" data-k="payusdt">' + esc(L.payUsdt) + '</button>'
-    + (Number(S.bal && S.bal.avail) >= Number(F.budget) ? '<button class="btn ghost" data-k="paybal">' + esc(L.payBal) + '</button>' : '')
-    + '<div class="small muted" style="margin-top:8px">' + esc(L.rules) + '</div></div>'
+  const net = S.net || {};
+  let body = '';
+  if (STEP === 1) {
+    body = '<label>' + esc(L.fText) + '<span class="cnt" id="cnt">' + (F.text || '').length + '/900</span></label><textarea id="fText" maxlength="900" placeholder="' + esc(L.phText) + '">' + esc(F.text) + '</textarea>'
+      + '<label>' + esc(L.fBtn) + '</label><input id="fBtn" maxlength="30" placeholder="' + esc(L.phBtn) + '" value="' + esc(F.btn) + '">'
+      + '<label>' + esc(L.fLink) + '</label><input id="fLink" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="https://t.me/…" value="' + esc(F.link) + '">'
+      + '<label>' + esc(L.pv) + '</label><div id="pv">' + tgPrev() + '</div>'
+      + '<button class="btn go" data-k="next">' + esc(L.next) + ' →</button>';
+  } else if (STEP === 2) {
+    body = '<label>' + esc(L.fCats) + '</label><div class="chips">' + CATS.map((k) => '<span class="chip' + (F.cats.includes(k) ? ' on' : '') + '" data-fc="' + k + '">' + CATE[k] + ' ' + esc(CATL[k]) + '</span>').join('') + '</div>'
+      + '<label>' + esc(L.fBudget) + '</label><div class="pills">' + [5, 10, 25, 50, 100].map((v) => '<span class="pl' + (Number(F.budget) === v ? ' on' : '') + '" data-bud="' + v + '">' + money(v) + '</span>').join('') + '</div>'
+      + '<input id="fBudget" inputmode="decimal" value="' + esc(F.budget) + '" style="margin-top:8px">'
+      + '<label>' + esc(L.fCpc) + '<span class="cnt" id="cpcv">' + money(F.cpc) + '</span></label><input type="range" id="fCpc" min="0.01" max="0.20" step="0.01" value="' + esc(F.cpc) + '"><div class="small muted">' + esc(L.cpcHint) + '</div>'
+      + '<div class="estim"><div class="muted small">' + esc(L.estH) + '</div><div class="big" id="est">' + esc(L.est(n)) + '</div><div class="small muted">' + esc(L.estNet(net.channels + net.groups || 0, net.members || 0)) + '</div></div>'
+      + '<div class="grid2"><button class="btn ghost" data-k="prev">← ' + esc(L.prev) + '</button><button class="btn go" data-k="next">' + esc(L.next) + ' →</button></div>';
+  } else {
+    const canBal = Number(S.bal && S.bal.avail) >= Number(F.budget);
+    const tile = (k, ic, t, s, dis) => '<div class="tile' + (PAYM === k ? ' on' : '') + (dis ? ' off' : '') + '" data-pm="' + k + '"><i>' + ic + '</i><div><b>' + esc(t) + '</b><span>' + esc(s) + '</span></div></div>';
+    body = '<div class="sum">' + tgPrev()
+      + '<div class="srow"><span>' + esc(L.fBudget) + '</span><b>' + money(F.budget) + '</b></div><div class="srow"><span>' + esc(L.fCpc) + '</span><b>' + money(F.cpc) + '</b></div>'
+      + '<div class="srow"><span>' + esc(L.estH) + '</span><b>' + esc(L.est(n)) + '</b></div><div class="srow"><span>' + esc(L.cats) + '</span><b>' + (F.cats.length ? F.cats.map((k) => CATE[k]).join(' ') : esc(L.allCats)) + '</b></div></div>'
+      + '<label>' + esc(L.payWith) + '</label>'
+      + tile('stars', '⭐', L.pmStars, starsOf(F.budget) + ' ⭐', false) + tile('usdt', '💵', 'USDT (TON)', money(F.budget), false) + tile('bal', '👛', L.pmBal, money(S.bal && S.bal.avail), !canBal)
+      + '<div class="grid2"><button class="btn ghost" data-k="prev">← ' + esc(L.prev) + '</button><button class="btn go" data-k="paynow">' + esc(L.payNow) + '</button></div>'
+      + '<div class="small muted" style="margin-top:10px">' + esc(L.rules) + '</div>';
+  }
+  return '<div class="card hero"><h2 style="margin-top:0">' + esc(L.advH) + '</h2><div class="muted small" style="margin-bottom:10px">' + esc(L.advP) + '</div>' + stepsBar() + body + '</div>';
+}
+function stepOk() {
+  readF();
+  if (STEP === 1) {
+    if ((F.text || '').length < 10) return toast(L.err.text), false;
+    if ((F.btn || '').length < 2) return toast(L.err.btn), false;
+    if (!/^https:\/\/\S+$/.test(F.link || '')) return toast(L.err.link), false;
+  }
+  if (STEP === 2) {
+    if (!(Number(F.budget) >= Number((S.cfg && S.cfg.min_budget) || 5))) return toast(L.err.budget), false;
+  }
+  return true;
+}
+function advV() {
+  // 29 oct 2026 (16h28, Jeremy): before the launch, advertisers sign up for a reminder (16h34: for everyone, Jeremy too; 16h40: Jeremy can look at the form, the server refuses any ad)
+  const ads = S.camps || [];
+  if (!(S.cfg && S.cfg.live) && !PREV) return '<div class="card hero center"><div style="font-size:46px">📣</div><h2>' + esc(L.waitH) + '</h2><div class="muted">' + esc(L.waitP) + '</div>' + (S.me && S.me.adv_waitlist ? '<div class="banner" style="margin:12px 0 0">' + esc(L.waitOk) + '</div>' : '<button class="btn go" data-k="advwait">' + esc(L.waitBtn) + '</button>') + '</div>' + (S.owner ? '<button class="btn ghost" data-k="preview">' + esc(L.preview) + '</button>' : '');
+  return advForm()
     + '<h2>' + esc(L.myAds) + '</h2>'
     + (ads.length ? ads.map((c) => '<div class="card"><div class="row"><b style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(c.title) + '</b>' + pill(c.status) + '</div>'
       + '<div class="grid2" style="margin-top:8px"><div class="stat"><b>' + c.clicks + '</b><span>' + esc(L.clicks) + ' · ' + money(c.cpc) + '</span></div><div class="stat"><b>' + money(c.spent) + '</b><span>' + esc(L.spent) + ' / ' + money(c.budget) + '</span></div></div>'
@@ -257,10 +318,12 @@ function usdtSheet(r) {
 
 function readF() {
   const v = (id) => ($(id) ? $(id).value : '');
-  if ($('#fText')) { F.text = v('#fText').trim(); F.btn = v('#fBtn').trim(); F.link = v('#fLink').trim(); F.budget = v('#fBudget').replace(',', '.'); F.cpc = v('#fCpc').replace(',', '.'); }
+  if ($('#fText')) { F.text = v('#fText').trim(); F.btn = v('#fBtn').trim(); F.link = v('#fLink').trim(); }
+  if ($('#fBudget')) F.budget = v('#fBudget').replace(',', '.');
+  if ($('#fCpc')) F.cpc = v('#fCpc').replace(',', '.');
 }
 async function pay(kind, id) {
-  readF(); hap();
+  readF(); hap(); if (!id) STEP = 1;
   if (kind === 'stars') {
     const r = id ? await api('camp_pay', { id }) : await api('camp_new', F);
     if (!r || !r.ok) { hap('error'); return toast(errT(r)); }
@@ -283,14 +346,20 @@ async function pay(kind, id) {
 
 function bind() {
   document.querySelectorAll('[data-copy]').forEach((d) => { d.onclick = () => copy(d.dataset.copy); });
-  const up = () => { readF(); const n = Math.floor((Number(F.budget) || 0) / (Number(F.cpc) || 1)); if ($('#est')) $('#est').textContent = L.est(n); if ($('#pv')) $('#pv').innerHTML = esc(F.text || '…') + '<div class="pb">' + esc(F.btn || '…') + '</div>'; const ps = document.querySelector('[data-k="paystars"]'); if (ps) ps.textContent = L.payStars(starsOf(F.budget)); };
+  const up = () => { readF(); const n = Math.floor((Number(F.budget) || 0) / (Number(F.cpc) || 1)); if ($('#est')) $('#est').textContent = L.est(n); if ($('#pv')) $('#pv').innerHTML = tgPrev(); if ($('#cnt')) $('#cnt').textContent = (F.text || '').length + '/900'; if ($('#cpcv')) $('#cpcv').textContent = money(F.cpc); document.querySelectorAll('[data-bud]').forEach((p) => p.classList.toggle('on', Number(p.dataset.bud) === Number(F.budget))); };
   ['#fText', '#fBtn', '#fLink', '#fBudget', '#fCpc'].forEach((id) => { const e = $(id); if (e) e.oninput = up; });
+  document.querySelectorAll('[data-bud]').forEach((p) => { p.onclick = () => { hap(); $('#fBudget').value = p.dataset.bud; up(); }; });
+  document.querySelectorAll('[data-pm]').forEach((t) => { t.onclick = () => { hap(); PAYM = t.dataset.pm; document.querySelectorAll('[data-pm]').forEach((x) => x.classList.toggle('on', x === t)); }; });
   document.querySelectorAll('[data-fc]').forEach((c) => { c.onclick = () => { readF(); const k = c.dataset.fc; F.cats = F.cats.includes(k) ? F.cats.filter((x) => x !== k) : F.cats.concat(k); c.classList.toggle('on'); hap(); }; });
   document.querySelectorAll('[data-pd]').forEach((c) => { c.onclick = async () => { hap(); await api('chat_set', { chat_id: c.dataset.c, per_day: Number(c.dataset.pd) }); load(); }; });
   document.querySelectorAll('[data-cc]').forEach((c) => { c.onclick = async () => { hap(); const ch = S.chats.find((x) => String(x.chat_id) === c.dataset.c); const cur = (ch && ch.cats) || []; const k = c.dataset.cc; const cats = cur.includes(k) ? cur.filter((x) => x !== k) : cur.concat(k); ch.cats = cats; c.classList.toggle('on'); await api('chat_set', { chat_id: c.dataset.c, cats }); }; });
   document.querySelectorAll('[data-adm]').forEach((b) => { b.onclick = async () => { hap(); b.disabled = true; await api(b.dataset.adm, { id: Number(b.dataset.id), ok: b.dataset.ok === '1' }); load(); }; });
   document.querySelectorAll('[data-k]').forEach((b) => { b.onclick = async () => {
     const k = b.dataset.k, id = Number(b.dataset.id || 0);
+    if (k === 'next') { if (!stepOk()) { hap('error'); return; } hap(); STEP = Math.min(3, STEP + 1); return draw(); }
+    if (k === 'prev') { readF(); hap(); STEP = Math.max(1, STEP - 1); return draw(); }
+    if (k === 'preview') { hap(); PREV = true; STEP = 1; return draw(); }
+    if (k === 'paynow') { if (!(S.cfg && S.cfg.live)) { hap('error'); return toast(L.waitH); } return pay(PAYM); }
     if (k === 'gobal') { hap(); TAB = 'aff'; return draw(); }
     if (k === 'advwait') { hap('success'); await api('adv_wait'); S.me = Object.assign({}, S.me, { adv_waitlist: true }); toast(L.waitOk); return draw(); }
     if (k === 'addchan') return openUrl(addLinks().chan);
