@@ -94,6 +94,7 @@ const L = FR ? {
   err: { text: 'Texte entre 10 et 900 caractères.', btn: 'Bouton entre 2 et 30 caractères.', link: 'Le lien doit commencer par https://', budget: 'Budget minimum 5 $.', cpc: 'Prix par clic entre 0,01 $ et 5 $.', funds: 'Solde insuffisant.', wallet: 'Adresse TON invalide (ou à enregistrer d\'abord).', min: 'Montant disponible trop faible.', waiting: 'Un retrait est déjà en cours.', drafts: 'Trop de pubs à payer : paie ou supprime-les d\'abord.', auth: 'Ouvre l\'appli depuis Telegram.' },
   opening: 'Ouverture du lien…', openNow: 'Ouvrir le lien', back: 'Retour à 80/20 Ads',
   pv: 'Aperçu',
+  waitH: 'Les pubs ouvrent le 1er janvier 2027', waitP: 'Tu ne paieras que les vrais clics (un clic compté par compte Telegram), en étoiles ou en USDT, avec ciblage par thème. Inscris-toi pour être prévenu dès l\'ouverture.', waitBtn: '🔔 Me prévenir à l\'ouverture', waitOk: '✅ C\'est noté : tu recevras un message du bot le 1er janvier.',
   rules: 'Pas d\'arnaque, pas de contenu adulte ni de paris. Les pubs refusées sont remboursées sur ton solde.',
 } : {
   tEarn: 'Earn', tAdv: 'Advertise', tBal: 'Balance', sub: 'The ad network that gives 80 % to channels and groups',
@@ -116,6 +117,7 @@ const L = FR ? {
   err: { text: 'Text between 10 and 900 characters.', btn: 'Button between 2 and 30 characters.', link: 'The link must start with https://', budget: 'Minimum budget $5.', cpc: 'Price per click between $0.01 and $5.', funds: 'Not enough balance.', wallet: 'Invalid TON address (or save one first).', min: 'Available amount too low.', waiting: 'A withdrawal is already pending.', drafts: 'Too many ads to pay: pay or delete them first.', auth: 'Open the app from Telegram.' },
   opening: 'Opening the link…', openNow: 'Open the link', back: 'Back to 80/20 Ads',
   pv: 'Preview',
+  waitH: 'Ads open on January 1st, 2027', waitP: 'You will only pay for real clicks (one click counted per Telegram account), in Stars or USDT, with topic targeting. Sign up to be notified when it opens.', waitBtn: '🔔 Notify me at launch', waitOk: '✅ Done: the bot will message you on January 1st.',
   rules: 'No scams, no adult content, no gambling. Refused ads are refunded to your balance.',
 };
 const CATS = ['crypto', 'business', 'finance', 'games', 'tech', 'entertainment', 'education', 'news', 'sport', 'lifestyle'];
@@ -180,6 +182,8 @@ function earnV() {
 
 let F = { text: '', btn: '', link: '', budget: 10, cpc: 0.02, cats: [] };
 function advV() {
+  // 29 oct 2026 (16h28, Jeremy): before the launch, advertisers sign up for a reminder (Jeremy still sees the form, to test)
+  if (!(S.cfg && S.cfg.live) && !S.owner) return '<div class="card hero center"><div style="font-size:46px">📣</div><h2>' + esc(L.waitH) + '</h2><div class="muted">' + esc(L.waitP) + '</div>' + (S.me && S.me.adv_waitlist ? '<div class="banner" style="margin:12px 0 0">' + esc(L.waitOk) + '</div>' : '<button class="btn go" data-k="advwait">' + esc(L.waitBtn) + '</button>') + '</div>';
   const ads = S.camps || [];
   const n = Math.floor((Number(F.budget) || 0) / (Number(F.cpc) || 1));
   return '<div class="card hero"><h2 style="margin-top:0">' + esc(L.advH) + '</h2><div class="muted small">' + esc(L.advP) + '</div>'
@@ -274,6 +278,7 @@ function bind() {
   document.querySelectorAll('[data-adm]').forEach((b) => { b.onclick = async () => { hap(); b.disabled = true; await api(b.dataset.adm, { id: Number(b.dataset.id), ok: b.dataset.ok === '1' }); load(); }; });
   document.querySelectorAll('[data-k]').forEach((b) => { b.onclick = async () => {
     const k = b.dataset.k, id = Number(b.dataset.id || 0);
+    if (k === 'advwait') { hap('success'); await api('adv_wait'); S.me = Object.assign({}, S.me, { adv_waitlist: true }); toast(L.waitOk); return draw(); }
     if (k === 'addchan') return openUrl(addLinks().chan);
     if (k === 'addgroup') return openUrl(addLinks().group);
     if (k === 'paystars') return pay('stars');
