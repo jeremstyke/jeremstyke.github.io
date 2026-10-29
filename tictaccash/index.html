@@ -242,7 +242,7 @@ async function load() {
   if (S.game && !G) return openGame(S.game);
   if (/^a\d+$/.test(SP) && !window.__aopen) { window.__aopen = true; return openGame(Number(SP.slice(1))); }  // 29 oct 2026: the bot's "your turn" button
   if (/^g[0-9a-f]{8}$/.test(SP) && !window.__joined) { window.__joined = true; const j = await api('join', { code: SP.slice(1) }); if (j && j.ok) return openGame(j.game); toast(L.err[j && j.error] || '…'); }
-  $('#nav').hidden = false; draw(); openAd();
+  $('#nav').hidden = false; draw();  // 29 oct 2026 (21h03, Jeremy): no opening interstitial for now (openAd kept below)
 }
 // 29 oct 2026 (18h32, Jeremy): an interstitial when the game opens, never on the first visit, at most one an hour (his rule for all his mini apps)
 let openAdDone = false;
