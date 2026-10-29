@@ -180,7 +180,6 @@ function faqItems(c) {
     ['C\'est quoi les séries ?', 'Enchaîne les victoires : à partir de 3 victoires de suite, chaque victoire rapporte x' + c.streak3 + ', et à partir de 5 de suite, x' + c.streak5 + '. Une défaite remet ta série à zéro.'],
     ['Contre qui je joue ?', 'Contre de vrais joueurs du monde entier. Si personne n\'est disponible au bout de ' + c.ai_after + ' secondes, tu affrontes un bot (affiché 🤖 Bot) : ces parties rapportent aussi. Tu peux aussi défier un ami avec un lien.'],
     ['Combien de temps pour jouer ?', '15 secondes par coup (l\'anneau autour de l\'avatar se vide). Si le temps est écoulé, tu perds la partie. Abandonner donne aussi la victoire à l\'adversaire.'],
-    ['C\'est quoi le mode « Tour par tour » ?', 'Tu joues contre un vrai joueur sans être connectés en même temps : chacun a 24 h pour jouer son coup, et le bot te prévient quand c\'est ton tour. Tu peux avoir jusqu\'à ' + (c.async_max || 10) + ' parties en même temps. Les gains sont les mêmes. Sans coup joué en 24 h, la partie est perdue.'],
     ['Le coffre du jour', 'Un coffre gratuit à ouvrir chaque jour. Plus tu reviens de jours de suite, plus il rapporte : de ' + u(c.chest[0]) + ' $ le 1er jour à ' + u(c.chest[6]) + ' $ le 7e. Si tu rates un jour, ça repart au jour 1.'],
     ['Il y a une limite par jour ?', Number(c.day_cap) > 0 ? 'Oui : tu peux gagner jusqu\'à ' + usd(c.day_cap, 2) + ' $ par jour avec les parties.' : 'Non : joue autant que tu veux, chaque partie gagnée te rapporte.'],
     ['Pourquoi une partie ne m\'a rien rapporté ?', 'Une partie ne rapporte rien si tu as joué trop vite (moins de ' + c.min_secs + ' seconde par coup), ou si vous êtes sur le même réseau internet (anti-triche). La raison s\'affiche à la fin de la partie.'],
@@ -196,7 +195,6 @@ function faqItems(c) {
     ['What are streaks?', 'Chain wins: from 3 wins in a row, each win pays x' + c.streak3 + ', and from 5 in a row, x' + c.streak5 + '. A loss resets your streak.'],
     ['Who do I play against?', 'Real players from all over the world. If nobody is available after ' + c.ai_after + ' seconds, you face a bot (shown as 🤖 Bot): those games pay too. You can also challenge a friend with a link.'],
     ['How long do I have to play?', '15 seconds per move (the ring around the avatar empties). When time runs out, you lose the game. Giving up also gives the win to your opponent.'],
-    ['What is "Turn-based" mode?', 'You play a real player without being online at the same time: each has 24 h to play a move, and the bot tells you when it is your turn. You can have up to ' + (c.async_max || 10) + ' games at once. Earnings are the same. No move in 24 h and the game is lost.'],
     ['The daily chest', 'A free chest to open every day. The more days in a row, the more it pays: from $' + u(c.chest[0]) + ' on day 1 to $' + u(c.chest[6]) + ' on day 7. Miss a day and it goes back to day 1.'],
     ['Is there a daily limit?', Number(c.day_cap) > 0 ? 'Yes: you can earn up to $' + usd(c.day_cap, 2) + ' a day from games.' : 'No: play as much as you want, every game you win pays.'],
     ['Why did a game pay nothing?', 'A game pays nothing if you played too fast (under ' + c.min_secs + ' second per move), or if you are both on the same internet network (anti-cheat). The reason shows at the end of the game.'],
@@ -277,7 +275,7 @@ function homeV() {
     + '<button class="btn play f" data-k="play">' + esc(L.play) + '</button>'
     + '<button class="btn ghost f" data-k="friend">' + esc(L.friend) + '</button>'
     // 29 oct 2026 (19h25, Jeremy): turn-based games (24 h per move, the bot pings the player), up to 10 at once
-    + '<button class="btn ghost f" data-k="async">' + esc(L.async) + '<small style="display:block;font:500 12px Inter,system-ui,sans-serif;opacity:.7;margin-top:2px">' + esc(L.asyncS) + '</small></button>'
+    // 29 oct 2026 (23h48, Jeremy): no more turn-based button (the games already started stay in the list until they end)
     + asyncList()
     + '<div class="card" style="margin-top:14px"><div class="stats"><div><b>' + (me.wins || 0) + '</b><span>' + esc(L.winsT) + '</span></div><div><b>🔥 ' + (me.streak || 0) + '</b><span>' + esc(L.streakT) + '</span></div><div><b>' + (me.best || 0) + '</b><span>' + esc(L.bestT) + '</span></div></div></div>'
     + '<div class="card chest' + (me.chest_ok ? ' ready' : '') + '"><div class="ic">🎁</div><div style="flex:1;min-width:0"><b class="f" style="font-size:16px">' + esc(L.chestH) + '</b><div class="mut sm">' + esc(L.chestS(Math.max(1, d))) + '</div><div class="dots">' + [1, 2, 3, 4, 5, 6, 7].map((i) => '<i class="' + (i <= (me.chest_streak || 0) ? 'on' : '') + '"></i>').join('') + '</div></div>'
@@ -422,7 +420,7 @@ function result(v) {
   };
   if (amt > 0) { const t0 = performance.now(); const step = (t) => { const p = Math.min(1, (t - t0) / 900); const el = d.querySelector('#cnt'); if (el) el.textContent = usd(amt * p, 4) + ' $'; if (p < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); }
   games++; const mode = v.mode;
-  d.querySelector('#again').onclick = async () => { d.remove(); G = null; await maybeAd(mode); await refresh(); if (mode === 'async') asyncFind(); else search(); };
+  d.querySelector('#again').onclick = async () => { d.remove(); G = null; await maybeAd(mode); await refresh(); search(); };
   d.querySelector('#home').onclick = async () => { d.remove(); G = null; await maybeAd(mode); TAB = 'home'; load(); };
 }
 async function refresh() { const r = await api('state', { jfp: JFP }); if (r && r.ok) S = r; }
