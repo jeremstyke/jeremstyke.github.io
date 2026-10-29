@@ -97,7 +97,7 @@
     } catch (e) { return false; }
   }
   async function agWatch() {
-    if (Math.random() < 0.2 && await mtgWatch()) return 'ok';
+    if (false && await mtgWatch()) return 'ok';  // 29 oct 2026 (23h15, Jeremy): no more Monetag, Adsgram only
     // 27 oct 2026 (Jeremy): a player watched the whole video and was told "no video available": a video that was shown now always counts
     // (the free boost is once a day and checked by the server); only "Adsgram had no video at all" fails
     try { await agSdk(); await window.Adsgram.init({ blockId: '55242' }).show(); return 'ok'; }
