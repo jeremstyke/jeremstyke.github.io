@@ -781,6 +781,7 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
 // 25 oct 2026 (Jeremy): no ad network here yet: an Instant Gaming interstitial (affiliate link) at opening,
 // at most once an hour and never on the first visit. To be replaced by the Adsgram interstitial once the game is approved.
 (function () {
+  return;  // 29 oct 2026 (19h00, Jeremy): Instant Gaming interstitial removed
   try {
     var TWg = window.Telegram && window.Telegram.WebApp; if (!TWg || !TWg.initData) return;
     var GAME = document.currentScript && document.currentScript.dataset.g || 'x', K = 'ig_int_' + GAME, now = Date.now(), last = 0;
