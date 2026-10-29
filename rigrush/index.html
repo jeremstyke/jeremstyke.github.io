@@ -623,14 +623,14 @@ $('boB').onclick = async () => {
   if (m.boost_end && now() < T(m.boost_end)) { toast(tr('t_bact')); return }
   if (m.boost_left <= 0) { toast(tr('bnone')); return }
   if (!ST.cfg.ads_block) { toast(tr('t_soon')); return }
+  // 29 oct 2026 (21h55, Jeremy): the x2 boost is unlocked by a Monetag rewarded interstitial (zone 12149624), then the server gives it
+  const fn = 'show_12149624';
   try {
-    if (!window.Adsgram) await new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = ok; s.onerror = ko; document.head.appendChild(s) });
-    AD = AD || window.Adsgram.init({ blockId: String(ST.cfg.ads_block) });
-    const res = await AD.show();
-    if (res && res.done === false) return;
-  } catch (e) { return }
-  // the boost is given by the server when Adsgram confirms the video: ask a few times
-  for (let k = 0; k < 6; k++) { await new Promise(r => setTimeout(r, 1200)); const r = await api('state'); take(r); if (ST.me.boost_end && now() < T(ST.me.boost_end)) { haptic('heavy'); toast(tr('t_boost')); return } }
+    await (window.__mtgL || (window.__mtgL = new Promise((ok, ko) => { if (typeof window[fn] === 'function') return ok(); const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', '12149624'); s.setAttribute('data-sdk', fn); s.onerror = () => { window.__mtgL = null; ko(new Error('load')); }; document.head.appendChild(s); const t0 = Date.now(), iv = setInterval(() => { if (typeof window[fn] === 'function') { clearInterval(iv); ok(); } else if (Date.now() - t0 > 12000) { clearInterval(iv); window.__mtgL = null; ko(new Error('timeout')); } }, 100); })));
+    await window[fn]({ ymid: String((ST.me && ST.me.id) || '') });
+  } catch (e) { toast(LANG === 'fr' ? 'Pas de vidéo dispo, réessaie plus tard.' : 'No video right now, try again later.'); return }
+  const r = await api('boost'); take(r);
+  if (ST.me.boost_end && now() < T(ST.me.boost_end)) { haptic('heavy'); toast(tr('t_boost')); }
 };
 // 24 oct 2026 (Jeremy, 3h36): 6 components x up to 10 levels; a component can't go above (machine level + 1)
 const PICON = { cool: '❄️', psu: '🔌', soft: '💾', oc: '⚡', gpu: '🎴', bat: '🔋', ram: '💽', water: '💧', net: '📡', solar: '☀️' };  // 24 oct 2026 (10h10): 4 late-game components
