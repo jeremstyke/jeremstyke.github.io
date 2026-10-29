@@ -1414,7 +1414,7 @@ function render() {
       // 28 oct 2026 (9h58, Jeremy): 1 minute between two boost videos, with a small countdown on the button (server: S.bstNext)
       clearInterval(window.__bwI); delete vb.dataset.bw;
       const bwt = () => { const w = Math.ceil((Math.max((window.__bstAt || 0) + 60000, Number(S.bstNext) || 0, (window.__rvAt || 0) + 60000, Number(S.rvNext) || 0) - Date.now()) / 1000);
-        if (w > 0 && !vb.hidden) { vb.dataset.bw = '1'; vb.disabled = true; vb.innerHTML = '<span style="display:flex;flex-direction:column;align-items:center;width:100%"><span>⏳ ' + esc(LANG === 'fr' ? 'Prochain boost dans ' : 'Next boost in ') + mm(w) + '</span>' + (xl() > 0 ? '<small style="font-size:12px;font-weight:600;opacity:.7;margin-top:3px">' + esc(T('x2On', mm(xl())).replace('x2', xm(b0.boost_mult)) + bc) + '</small>' : '') + '</span>'; return true; }
+        if (w > 0 && !vb.hidden && !(xl() > 0)) { vb.dataset.bw = '1';  /* 29 oct 2026 (23h45, Jeremy): during the x2 hour, the button shows the time left of the boost, never "next boost in 1 min" */ vb.disabled = true; vb.innerHTML = '<span style="display:flex;flex-direction:column;align-items:center;width:100%"><span>⏳ ' + esc(LANG === 'fr' ? 'Prochain boost dans ' : 'Next boost in ') + mm(w) + '</span>' + (xl() > 0 ? '<small style="font-size:12px;font-weight:600;opacity:.7;margin-top:3px">' + esc(T('x2On', mm(xl())).replace('x2', xm(b0.boost_mult)) + bc) + '</small>' : '') + '</span>'; return true; }
         if (vb.dataset.bw) { clearInterval(window.__bwI); delete vb.dataset.bw; render(); } return false; };
       if (bwt()) window.__bwI = setInterval(bwt, 1000); }
     $('#moreBat').hidden = S.batons.length < 2; $('#moreBat').textContent = T('more', S.batons.length - 1);
