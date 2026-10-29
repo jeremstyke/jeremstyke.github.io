@@ -1790,6 +1790,7 @@ $('#sheet').addEventListener('click', async (e) => {
   if (!tonOk(addr)) { hap('err'); toast(T('eAddr')); return; }
   go.disabled = true;
   const r = await api('shop_buy', { item: shopPick, addr });
+  if (r && r.error === 'club') { hap('err'); toast(LANG === 'fr' ? '👥 Rejoins le Club pour retirer tes USDT, puis réessaie.' : '👥 Join the Club to withdraw your USDT, then try again.'); go.disabled = false; openLink('https://t.me/passthebatonclub'); return; }  // 29 oct 2026 (9h33, Jeremy)
   if (!r || !r.ok) { hap('err'); toast(r && SHOPERR[r.error] ? T(SHOPERR[r.error]) : errMsg(r)); go.disabled = false; return; }
   hap('ok'); toast(r.review ? T('okReview') : T('okPaid'));
   if (r.state) setState(r.state);
@@ -1828,6 +1829,7 @@ $('#sheet').onclick = async (e) => {
   hap(); const k = o.dataset.k;
   if (k === 'keep') return closeSheet();
   if (k === 'invite') { closeSheet(); return $('#invite').onclick(); }
+  if (k === 'joinclub') { closeSheet(); return openLink('https://t.me/passthebatonclub'); }  // 29 oct 2026 (9h33)
   if (k === 'askclub') {  // 29 oct 2026 (7h56, Jeremy)
     closeSheet(); const F = LANG === 'fr'; const r = await api('askclub');
     if (r && r.ok) { hap('ok'); toast(r.already ? (F ? '🙏 Ta demande est déjà dans le Club, patience !' : '🙏 Your request is already in the Club, hang on!') : (F ? '🙏 Demande postée dans le Club : le premier qui le veut te passe son bâton !' : '🙏 Request posted in the Club: someone will pass you their baton!')); }
@@ -2083,6 +2085,15 @@ function nudge() {
   }
   if (!r.ok) { if (r.error !== 'maint') { toast(errMsg(r)); const ld = $('#loader'); ld.innerHTML = '<button class="btn gold" style="width:auto;padding:0 28px" onclick="location.reload()">↻</button>'; ld.hidden = false; } return; }
   setState(r);
+  // 29 oct 2026 (9h33, Jeremy): the Club is no longer needed to play: a player outside it is invited once a day (it is needed to withdraw USDT)
+  if (r.club_in === false) {
+    const today = new Date().toISOString().slice(0, 10);
+    if (LS.get('bt_clubask') !== today) {
+      LS.set('bt_clubask', today);
+      const CJ = { fr: ['👥 Rejoins le Club', '🎁 Chaque jour dans le groupe : 1 000 à 10 000 $BATON à gagner !', 'Le Club est obligatoire pour retirer tes USDT. Tu y trouves aussi de l\'aide et des joueurs à qui passer ton bâton.', '👥 Rejoindre le Club', 'Plus tard'], es: ['👥 Únete al Club', '🎁 Cada día en el grupo: ¡de 1.000 a 10.000 $BATON para ganar!', 'El Club es obligatorio para retirar tus USDT. También encuentras ayuda y jugadores para pasar tu bastón.', '👥 Unirme al Club', 'Más tarde'], pt: ['👥 Entre no Club', '🎁 Todo dia no grupo: de 1.000 a 10.000 $BATON para ganhar!', 'O Club é obrigatório para sacar seus USDT. Você também encontra ajuda e jogadores para passar seu bastão.', '👥 Entrar no Club', 'Mais tarde'], ru: ['👥 Вступи в Club', '🎁 Каждый день в группе: от 1 000 до 10 000 $BATON в подарок!', 'Club нужен, чтобы выводить USDT. Там же помощь и игроки, которым можно передать эстафету.', '👥 Вступить в Club', 'Позже'], uk: ['👥 Вступи до Club', '🎁 Щодня в групі: від 1 000 до 10 000 $BATON у подарунок!', 'Club потрібен, щоб виводити USDT. Там також допомога і гравці, яким можна передати естафету.', '👥 Вступити до Club', 'Пізніше'], tr: ['👥 Club\'a katıl', '🎁 Her gün grupta: 1.000 ile 10.000 $BATON arası kazan!', 'USDT çekmek için Club zorunlu. Orada yardım ve bayrağını verebileceğin oyuncular da var.', '👥 Club\'a katıl', 'Sonra'], id: ['👥 Gabung Club', '🎁 Setiap hari di grup: 1.000 sampai 10.000 $BATON untuk dimenangkan!', 'Club wajib untuk menarik USDT. Di sana juga ada bantuan dan pemain untuk menerima tongkatmu.', '👥 Gabung Club', 'Nanti'], ar: ['👥 انضم إلى Club', '🎁 كل يوم في المجموعة: من 1,000 إلى 10,000 $BATON للفوز!', 'الانضمام إلى Club ضروري لسحب USDT. ستجد هناك أيضًا المساعدة ولاعبين لتمرير عصاك.', '👥 انضم إلى Club', 'لاحقًا'], fa: ['👥 عضو Club شو', '🎁 هر روز در گروه: ۱٬۰۰۰ تا ۱۰٬۰۰۰ $BATON برای بردن!', 'برای برداشت USDT عضویت در Club لازم است. آنجا کمک و بازیکنانی برای پاس دادن باتوم هم هست.', '👥 عضویت در Club', 'بعدا'] }[LANG] || ['👥 Join the Club', '🎁 Every day in the group: 1,000 to 10,000 $BATON to win!', 'The Club is needed to withdraw your USDT. You also find help there, and players to pass your baton to.', '👥 Join the Club', 'Later'];
+      setTimeout(() => sheet('<h3>' + CJ[0] + '</h3><div style="margin:0 0 10px;padding:12px 14px;border-radius:14px;background:rgba(255,200,80,.16);border:1px solid rgba(255,200,80,.5);font-weight:800;line-height:1.35;color:#ffd98a">' + CJ[1] + '</div><p class="foot" style="text-align:start;margin:0 0 12px">' + CJ[2] + '</p><button class="btn gold" data-k="joinclub">' + CJ[3] + '</button><button class="btn ghost" data-k="keep">' + CJ[4] + '</button>'), 1800);
+    }
+  }
   // 21 oct 2026: ask once to let @PassTheBatonBot send messages (players who came by a link never pressed Start)
   try { if (tg && tg.requestWriteAccess && !LS.get('bt_wa')) setTimeout(() => { try { tg.requestWriteAccess((ok) => LS.set('bt_wa', ok ? '1' : '0')); } catch (e) {} }, 2500); } catch (e) {}
   const firstOpen = !LS.get('bt_tuto') && !LS.get('bt_open1'); LS.set('bt_open1', '1');  // 22 oct 2026: the very first visit (tutorial)
