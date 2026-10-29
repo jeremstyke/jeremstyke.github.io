@@ -76,7 +76,7 @@ const FR = /^fr/.test(String(user.language_code || navigator.language || ''));
 const L = FR ? {
   tEarn: 'Gagner', tAdv: 'Annoncer', tBal: 'Solde', sub: 'La régie qui reverse 80 % aux chaînes et groupes',
   launch: '🚀 Lancement le 1er janvier 2027. Inscris tes chaînes et groupes dès maintenant : tu gagnes dès le premier jour.',
-  earnH: 'Gagne avec ta chaîne ou ton groupe', earnP: 'Ajoute le bot en admin (100 membres minimum). Les pubs sont publiées pour toi (2 par jour par défaut, supprimées après 24 h) et tu gagnes 80 % de chaque clic.',
+  earnH: 'Gagne avec ta chaîne ou ton groupe', earnP: 'Ajoute le bot en admin (100 membres minimum). Les pubs sont publiées pour toi (2 par jour par défaut, supprimées après 24 h) et tu gagnes 80 % de chaque clic.', refLine: '🤝 Parrainage : invite d\'autres chaînes et groupes, tu touches 15 % de la commission de 80/20 Ads sur tout ce qu\'ils gagnent, à vie.', refGo: '🤝 Mon lien de parrainage',
   addChan: '📢 Ajouter à ma chaîne', addGroup: '👥 Ajouter à mon groupe', myChats: 'Mes chaînes et groupes', noChats: 'Aucune pour l\'instant.',
   st: { pending: 'En attente', approved: 'Validé', refused: 'Refusé', removed: 'Retiré', draft: 'À payer', review: 'En vérification', active: 'Active', paused: 'En pause', done: 'Terminée', deleted: 'Supprimée' },
   members: 'membres', clicks: 'clics', earned: 'gagnés', perDay: 'Pubs par jour', cats: 'Thèmes', noPost: '⚠️ Le bot ne peut pas publier : donne-lui le droit de publier.',
@@ -99,7 +99,7 @@ const L = FR ? {
 } : {
   tEarn: 'Earn', tAdv: 'Advertise', tBal: 'Balance', sub: 'The ad network that gives 80 % to channels and groups',
   launch: '🚀 Launch on January 1st, 2027. Register your channels and groups now: you earn from day one.',
-  earnH: 'Earn with your channel or group', earnP: 'Add the bot as admin (100 members minimum). Ads are posted for you (2 a day by default, deleted after 24 h) and you earn 80 % of every click.',
+  earnH: 'Earn with your channel or group', earnP: 'Add the bot as admin (100 members minimum). Ads are posted for you (2 a day by default, deleted after 24 h) and you earn 80 % of every click.', refLine: '🤝 Referral program: invite other channels and groups, you get 15 % of 80/20 Ads\' commission on everything they earn, for life.', refGo: '🤝 My referral link',
   addChan: '📢 Add to my channel', addGroup: '👥 Add to my group', myChats: 'My channels and groups', noChats: 'None yet.',
   st: { pending: 'Pending', approved: 'Approved', refused: 'Refused', removed: 'Removed', draft: 'To pay', review: 'In review', active: 'Active', paused: 'Paused', done: 'Finished', deleted: 'Deleted' },
   members: 'members', clicks: 'clicks', earned: 'earned', perDay: 'Ads per day', cats: 'Topics', noPost: '⚠️ The bot cannot post: give it the right to post messages.',
@@ -169,7 +169,8 @@ const addLinks = () => ({ chan: 'https://t.me/' + S.bot + '?startchannel=a80&adm
 function earnV() {
   const ch = S.chats || [];
   return '<div class="card hero"><h2 style="margin-top:0">' + esc(L.earnH) + '</h2><div class="muted">' + esc(L.earnP) + '</div>'
-    + '<div class="grid2" style="margin-top:6px"><button class="btn go" data-k="addchan">' + esc(L.addChan) + '</button><button class="btn go" data-k="addgroup">' + esc(L.addGroup) + '</button></div></div>'
+    + '<div class="grid2" style="margin-top:6px"><button class="btn go" data-k="addchan">' + esc(L.addChan) + '</button><button class="btn go" data-k="addgroup">' + esc(L.addGroup) + '</button></div>'
+    + '<div class="banner" style="margin:12px 0 0">' + esc(L.refLine) + '</div><button class="btn ghost" data-k="gobal">' + esc(L.refGo) + '</button></div>'
     + '<h2>' + esc(L.myChats) + '</h2>'
     + (ch.length ? ch.map((c) => '<div class="card"><div class="row"><div style="min-width:0"><b>' + (c.kind === 'group' ? '👥 ' : '📢 ') + esc(c.title) + '</b><div class="small muted">' + (c.username ? '@' + esc(c.username) + ' · ' : '') + c.members + ' ' + esc(L.members) + '</div></div>' + pill(c.status) + '</div>'
       + (c.status === 'refused' && c.refuse_why === 'members' ? '<div class="small muted" style="margin-top:6px">' + esc(L.tooSmall) + '</div>' : '')
@@ -278,6 +279,7 @@ function bind() {
   document.querySelectorAll('[data-adm]').forEach((b) => { b.onclick = async () => { hap(); b.disabled = true; await api(b.dataset.adm, { id: Number(b.dataset.id), ok: b.dataset.ok === '1' }); load(); }; });
   document.querySelectorAll('[data-k]').forEach((b) => { b.onclick = async () => {
     const k = b.dataset.k, id = Number(b.dataset.id || 0);
+    if (k === 'gobal') { hap(); TAB = 'bal'; return draw(); }
     if (k === 'advwait') { hap('success'); await api('adv_wait'); S.me = Object.assign({}, S.me, { adv_waitlist: true }); toast(L.waitOk); return draw(); }
     if (k === 'addchan') return openUrl(addLinks().chan);
     if (k === 'addgroup') return openUrl(addLinks().group);
