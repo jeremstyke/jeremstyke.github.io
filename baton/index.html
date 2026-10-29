@@ -1557,7 +1557,7 @@ function render() {
             if (aw() > 0) return; hap(); b.disabled = true; b.dataset.busy = '1';
             const fn = 'show_' + S.mtgZone; let ok = false;
             try {
-              if (!window[fn]) await new Promise((res, rej) => { const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(S.mtgZone)); s.setAttribute('data-sdk', fn); s.onload = res; s.onerror = rej; document.head.appendChild(s); setTimeout(() => rej(new Error('timeout')), 8000); });
+              await (window.__mtgL || (window.__mtgL = new Promise((res, rej) => { if (typeof window[fn] === 'function') return res(); const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(S.mtgZone)); s.setAttribute('data-sdk', fn); s.onerror = () => { window.__mtgL = null; rej(new Error('load')); }; document.head.appendChild(s); const t0 = Date.now(), iv = setInterval(() => { if (typeof window[fn] === 'function') { clearInterval(iv); res(); } else if (Date.now() - t0 > 12000) { clearInterval(iv); window.__mtgL = null; rej(new Error('timeout')); } }, 100); }))); /* 29 oct 2026 (Jeremy): wait for show_<zone> itself, the first tap failed */
               await window[fn]('pop'); ok = true;
             } catch (e) { ok = false; }
             if (ok) {
@@ -1583,7 +1583,7 @@ function render() {
             if (aw() > 0) return; hap(); b.disabled = true; b.dataset.busy = '1';
             const fn = 'show_' + S.mtgZone; let ok = false;
             try {
-              if (!window[fn]) await new Promise((res, rej) => { const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(S.mtgZone)); s.setAttribute('data-sdk', fn); s.onload = res; s.onerror = rej; document.head.appendChild(s); setTimeout(() => rej(new Error('timeout')), 8000); });
+              await (window.__mtgL || (window.__mtgL = new Promise((res, rej) => { if (typeof window[fn] === 'function') return res(); const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(S.mtgZone)); s.setAttribute('data-sdk', fn); s.onerror = () => { window.__mtgL = null; rej(new Error('load')); }; document.head.appendChild(s); const t0 = Date.now(), iv = setInterval(() => { if (typeof window[fn] === 'function') { clearInterval(iv); res(); } else if (Date.now() - t0 > 12000) { clearInterval(iv); window.__mtgL = null; rej(new Error('timeout')); } }, 100); }))); /* 29 oct 2026 (Jeremy): wait for show_<zone> itself, the first tap failed */
               await window[fn]({ ymid: String((tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.id) || '') }); ok = true;
             } catch (e) { ok = false; }
             if (ok) {
@@ -1678,7 +1678,7 @@ window.__showRw = async function () {
   if ((pref === 'mtg' || (pref !== 'ag' && Math.random() < 0.5)) && typeof S !== 'undefined' && S && S.mtgZone != null) {  /* 29 oct 2026 (15h19, Jeremy): 1 video out of 2 on Monetag, drawn at random (was 1 out of 5) */
     const fn = 'show_' + S.mtgZone; let ok = false;
     try {
-      if (!window[fn]) await new Promise((res, rej) => { const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(S.mtgZone)); s.setAttribute('data-sdk', fn); s.onload = res; s.onerror = rej; document.head.appendChild(s); setTimeout(() => rej(new Error('timeout')), 8000); });
+      await (window.__mtgL || (window.__mtgL = new Promise((res, rej) => { if (typeof window[fn] === 'function') return res(); const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(S.mtgZone)); s.setAttribute('data-sdk', fn); s.onerror = () => { window.__mtgL = null; rej(new Error('load')); }; document.head.appendChild(s); const t0 = Date.now(), iv = setInterval(() => { if (typeof window[fn] === 'function') { clearInterval(iv); res(); } else if (Date.now() - t0 > 12000) { clearInterval(iv); window.__mtgL = null; rej(new Error('timeout')); } }, 100); }))); /* 29 oct 2026 (Jeremy): wait for show_<zone> itself, the first tap failed */
       await window[fn](); ok = true;
     } catch (e) { ok = false; }
     if (ok) { window.__rvAt = Date.now(); await api('agx_ok', { rid: 'mt' + Date.now() + Math.random().toString(36).slice(2, 8) }); return 'mtg'; }
