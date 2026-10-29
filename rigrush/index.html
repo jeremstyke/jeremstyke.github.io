@@ -180,6 +180,7 @@ body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#0407
 #boB{grid-column:1/-1;padding:13px 14px;background:linear-gradient(135deg,rgba(168,85,247,.24),rgba(57,255,159,.10));border-color:rgba(168,85,247,.6)}
 #boB .ic{background:rgba(168,85,247,.32)}#boB .t{font-size:16px}#boB .s{white-space:normal;font-size:12px}
 #boB .bc{margin-left:auto;flex:none;font-weight:900;font-size:13px;padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.12)}
+#ppB{grid-column:1/-1;padding:13px 14px;background:linear-gradient(135deg,rgba(255,200,61,.18),rgba(57,255,159,.08));border-color:rgba(255,200,61,.5)}#ppB .ic{background:rgba(255,200,61,.25)}#ppB .t{font-size:16px}#ppB .s{white-space:normal;font-size:12px}#ppB .bc{margin-left:auto;flex:none;font-weight:900;font-size:13px;padding:5px 11px;border-radius:99px;background:rgba(255,200,61,.2);color:var(--gold)}
 #boB.on{border-color:var(--gold);box-shadow:0 0 16px rgba(255,200,61,.35)}#boB.on .bc{background:var(--gold);color:#1a1300}
 </style>
 </head>
@@ -210,6 +211,7 @@ body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#0407
       <div class="mini up" id="upB"><div class="ic">🛠️</div><div style="min-width:0"><div class="t" data-t="upgrade"></div><div class="s" id="upS"></div></div></div>
       <div class="mini ch" id="chB"><div class="ic">🎁</div><div style="min-width:0"><div class="t" id="chT"></div><div class="s" id="chS"></div></div></div>
       <div class="mini bo" id="boB" hidden><div class="ic">🎬</div><div style="min-width:0"><div class="t">Boost x2</div><div class="s" id="boS"></div></div><div class="bc" id="boC"></div></div>
+      <div class="mini pp" id="ppB"><div class="ic">🎯</div><div style="min-width:0"><div class="t" id="ppT"></div><div class="s" id="ppS"></div></div><div class="bc" id="ppC">+15 min</div></div>
     </div>
   </div>
 
@@ -638,6 +640,27 @@ $('boB').onclick = async () => {
   const r = await api('boost'); take(r);
   if (ST.me.boost_end && now() < T(ST.me.boost_end)) { haptic('heavy'); toast(tr('t_boost')); }
 };
+// 30 oct 2026 (0h39, Jeremy): sponsored task = Monetag rewarded popup (zone 12149624, 'pop'): +15 min of mining, 20 a day, 1 min between two (server rr_api 'pop')
+{
+  const PT = { fr: ['Tâche sponsorisée', 'Ouvre la pub : +15 min de minage', 'Pas de pub dispo, réessaie plus tard.', '⏳ Attends un peu avant la prochaine.', 'Plus de tâche aujourd\'hui, reviens demain.', 'RIGZ gagnés !'],
+    en: ['Sponsored task', 'Open the ad: +15 min of mining', 'No ad right now, try again later.', '⏳ Wait a bit before the next one.', 'No more tasks today, come back tomorrow.', 'RIGZ earned!'] };
+  const P = PT[LANG] || PT.en;
+  $('ppT').textContent = P[0]; $('ppS').textContent = P[1];
+  let busy = false;
+  $('ppB').onclick = async () => {
+    if (busy || !ST) return; busy = true;
+    const fn = 'show_12149624';
+    try {
+      await (window.__mtgL || (window.__mtgL = new Promise((ok, ko) => { if (typeof window[fn] === 'function') return ok(); const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', '12149624'); s.setAttribute('data-sdk', fn); s.onerror = () => { window.__mtgL = null; ko(new Error('load')); }; document.head.appendChild(s); const t0 = Date.now(), iv = setInterval(() => { if (typeof window[fn] === 'function') { clearInterval(iv); ok(); } else if (Date.now() - t0 > 12000) { clearInterval(iv); window.__mtgL = null; ko(new Error('timeout')); } }, 100); })));
+      await window[fn]('pop');
+    } catch (e) { toast(P[2]); busy = false; return; }
+    const r = await api('pop'); take(r);
+    if (r && r.pop) { haptic('heavy'); toast('+' + nf2.format(r.pop) + ' ' + P[5]); }
+    else if (r && r.error === 'pop_wait') toast(P[3]);
+    else if (r && r.error === 'pop_limit') toast(P[4]);
+    busy = false;
+  };
+}
 // 24 oct 2026 (Jeremy, 3h36): 6 components x up to 10 levels; a component can't go above (machine level + 1)
 const PICON = { cool: '❄️', psu: '🔌', soft: '💾', oc: '⚡', gpu: '🎴', bat: '🔋', ram: '💽', water: '💧', net: '📡', solar: '☀️' };  // 24 oct 2026 (10h10): 4 late-game components
 const PARTS = new Proxy([], { get: (t, k) => { const a = ((ST && ST.cfg.part_order) || ['cool', 'oc', 'bat']).map(p => [p, PICON[p] || '🛠️']); return typeof a[k] === 'function' ? a[k].bind(a) : a[k] } });
