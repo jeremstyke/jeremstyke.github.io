@@ -231,7 +231,7 @@ const X_SVG = (anim) => '<svg viewBox="0 0 100 100"><path class="dx' + (anim ? '
 const O_SVG = (anim) => '<svg viewBox="0 0 100 100"><circle class="do' + (anim ? ' draw' : '') + '" cx="50" cy="50" r="29" fill="none" stroke-width="12" pathLength="100"/></svg>';
 
 let S = null, TAB = 'home', VAR = 'classic', G = null, poll = null, games = 0, lastBoard = '';
-try { VAR = localStorage.getItem('ttc_var') || 'classic'; } catch (e) {}
+// 29 oct 2026 (23h52, Jeremy): one single mode, the classic tic-tac-toe
 
 async function load() {
   const r = await api('state', { jfp: JFP });
@@ -271,7 +271,6 @@ function homeV() {
   return '<div class="logo"><h1 class="f"><span class="x">Tic</span> <span class="o">Tac</span> <span class="c">Cash</span></h1><p>' + esc(L.tag) + '</p>'
     + '<div class="mini">' + demo.split('').map((c) => '<span>' + (c === 'X' ? X_SVG() : c === 'O' ? O_SVG() : '') + '</span>').join('') + '</div>'
     + '<span class="live"><i></i>' + esc(L.online(Math.max(1, S.online || 1))) + '</span></div>'
-    + '<div class="seg"><button data-var="classic" class="' + (VAR === 'classic' ? 'on' : '') + '"><b>' + esc(L.classic) + '</b><small>' + esc(L.classicS) + '</small></button><button data-var="three" class="' + (VAR === 'three' ? 'on' : '') + '"><b>' + esc(L.three) + '</b><small>' + esc(L.threeS) + '</small></button></div>'
     + '<button class="btn play f" data-k="play">' + esc(L.play) + '</button>'
     + '<button class="btn ghost f" data-k="friend">' + esc(L.friend) + '</button>'
     // 29 oct 2026 (19h25, Jeremy): turn-based games (24 h per move, the bot pings the player), up to 10 at once
@@ -383,7 +382,7 @@ async function move(cell) {
   const t0 = Date.now();
   const r = await api('move', { id: G.id, cell });
   // 29 oct 2026 (17h33, Jeremy): the bot answered at the same time as the player; it now "thinks" 0.7 to 1.3 s
-  if (r && r.ok && v.mode === 'ai' && r.winner !== v.me) { const w = 700 + Math.random() * 600 - (Date.now() - t0); if (w > 0) await new Promise((ok) => setTimeout(ok, w)); }
+  if (r && r.ok && v.mode === 'ai' && r.winner !== v.me) { const w = 1300 + Math.random() * 1200 - (Date.now() - t0);  /* 29 oct 2026 (23h52, Jeremy): the bot thinks 1.3 to 2.5 s */ if (w > 0) await new Promise((ok) => setTimeout(ok, w)); }
   G.busy = false; if (r && r.ok && G && G.v) render(r);
 }
 function waitFriend(v) {
