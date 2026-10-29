@@ -653,7 +653,7 @@ $('boB').onclick = async () => {
       const act = () => { if (Date.now() - t0 > 5000) fin(res); };
       const to = setTimeout(() => fin(res), 20000);
       document.addEventListener('visibilitychange', vis); try { TW && TW.onEvent && TW.onEvent('activated', act); } catch (e) {}
-      Promise.resolve().then(() => window[fn]({ ymid: String((ST.me && ST.me.id) || '') })).then(() => fin(res), (e) => fin(() => rej(e)));
+      (() => { try { return Promise.resolve(window[fn]({ ymid: String((ST.me && ST.me.id) || '') })); } catch (e) { return Promise.reject(e); } })().then(() => fin(res), (e) => fin(() => rej(e)));
     });
   } catch (e) { failed = true; }
   if (failed) { window.__boBusy = false; $('boB').style.pointerEvents = ''; $('boB').style.opacity = ''; toast(LANG === 'fr' ? 'Pas de vidéo dispo, réessaie plus tard.' : 'No video right now, try again later.'); return }
