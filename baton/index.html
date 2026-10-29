@@ -2718,6 +2718,7 @@ function nudge() {
       if (d.status === 'wait') {
         if (d.host) {
           box.innerHTML = hd + '<div class="dhero pulse">' + dIcon() + '</div><div class="ms">' + DX.waitT + '<span class="amt" style="font-size:13px;opacity:.7;font-weight:700">' + DX.waitS + '</span></div>' + stakeTx
+            + '<button class="bt gold" data-k="dclub">' + (fr ? '📣 Trouver un adversaire dans le Club' : '📣 Find an opponent in the Club') + '</button>'  /* 29 oct 2026 (8h01, Jeremy) */
             + '<button class="bt gold" data-k="dshare">' + DX.reshare + '</button><button class="bt gh" data-k="dquit">' + DX.cancel + '</button>';
         } else {
           const poor = (d.pts || 0) < d.stake;
@@ -2777,6 +2778,12 @@ function nudge() {
       const kk = k.dataset.k;
       if (kk === 'dhome') { hap(); stopDuel(); duelHome(); return true; }
       if (kk === 'dshare') { hap(); if (DD) dShare(DD); return true; }
+      if (kk === 'dclub') {  // 29 oct 2026 (8h01, Jeremy): post the challenge in the Club, the first to tap plays
+        hap(); if (!DD) return true; k.disabled = true; const r = await call('duel_club', { code: DD.code }); k.disabled = false;
+        const m = r && r.ok ? (r.already ? (fr ? '📣 Ton défi est déjà posté dans le Club.' : '📣 Your challenge is already posted in the Club.') : (fr ? '📣 Défi posté dans le Club : le premier qui clique joue contre toi !' : '📣 Challenge posted in the Club: the first to tap plays you!'))
+          : r && r.error === 'wait' ? (fr ? '⏳ Un défi dans le Club toutes les 10 minutes maximum.' : '⏳ One challenge in the Club every 10 minutes at most.') : r && r.error === 'taken' ? DX.taken : X.err;
+        hap(r && r.ok ? 'success' : 'error'); try { tw.showAlert(m); } catch (x) {} return true;
+      }
       if (kk === 'dgo') {
         hap(); k.disabled = true; const r = await call('duel_new', { stake: DS }); k.disabled = false;
         if (!r || !r.ok) { const er = r && r.error; try { tw.showAlert(er === 'funds' ? DX.funds(nf(DS), nf(DM && DM.pts)) : er === 'too_many' ? DX.much : X.err); } catch (x) {} return true; }
