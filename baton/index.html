@@ -1642,6 +1642,8 @@ $('#harvest').onclick = async () => {
   toast(T('harvested', fmt(r.amount)) + (r.streak_bonus > 0 ? ' · ' + T('streakB', r.streak, fmt(r.streak_bonus)) : ''));
 };
 function sheet(html) { $('#sheet').innerHTML = html; $('#scrim').hidden = false; }
+// 29 oct 2026 (7h54, Jeremy): the $BATON won in the Club (daily gift, baton taken there) have their own line in "Where do my $BATON come from"
+const CLUBL = { fr: '👥 Club (cadeau du jour, bâtons)', es: '👥 Club (regalo diario, bastones)', pt: '👥 Club (presente diário, bastões)', ru: '👥 Club (ежедневный подарок, эстафеты)', uk: '👥 Club (щоденний подарунок, естафети)', tr: '👥 Club (günlük hediye, bayraklar)', id: '👥 Club (hadiah harian, tongkat)', ar: '👥 Club (الهدية اليومية، العصي)', fa: '👥 Club (هدیه روزانه، باتوم‌ها)' }[LANG] || '👥 Club (daily gift, batons)';
 function closeSheet() { $('#scrim').hidden = true; }
 $('#scrim').onclick = (e) => { if (e.target.id === 'scrim') closeSheet(); };
 $('#passBtn').onclick = () => {
@@ -2248,13 +2250,13 @@ function nudge() {
       const tot = cats.reduce((s, [, v]) => s + v, 0);
       const day = (t) => new Date(t * 1000).toLocaleDateString(undefined, { day: '2-digit', month: '2-digit' });
       box.innerHTML = '<h3>' + esc(L.h) + '</h3><div class="gt">' + nf(tot) + ' $BATON</div><div class="gl">' + esc(L.won) + '</div>'
-        + cats.map(([k, v]) => '<div class="gr"><span>' + esc(L.c[k] || k) + '</span><b class="pos">+' + nf(v) + '</b></div>'
+        + cats.map(([k, v]) => '<div class="gr"><span>' + esc(L.c[k] || (k === 'club' ? CLUBL : k)) + '</span><b class="pos">+' + nf(v) + '</b></div>'
           + ((k === 'mct' || k === 'games' || k === 'ds') ? Object.entries(Object.entries(r[k] || {}).reduce((o, [w, a]) => { const n = WK(w) || WD.other; o[n] = (o[n] || 0) + a; return o; }, {})).filter(([, a]) => a > 0).sort((a, b) => b[1] - a[1]).map(([w, a]) => '<div class="gr" style="padding-left:16px;font-size:13px;opacity:.85;border-top:0"><span>↳ ' + esc(w) + '</span><b>+' + nf(a) + '</b></div>').join('') : '')).join('')
         + (r.pending > 0 ? '<div class="gr"><span>' + esc(L.pend) + '</span><b>' + nf(r.pending) + '</b></div>' : '')
         + (r.spent > 0 ? '<div class="gr"><span>' + esc(L.spent) + '</span><b class="neg">-' + nf(r.spent) + '</b></div>' : '')
         + (r.shop > 0 ? '<div class="gr"><span>' + esc(L.shop) + '</span><b class="neg">-' + nf(r.shop) + '</b></div>' : '')
         + '<div class="gl">' + esc(L.last) + '</div>'
-        + (r.recent || []).map((x) => '<div class="gr"><span>' + esc(L.c[x.c] || x.c) + (WK(x.k) ? ' · ' + esc(WK(x.k)) : '') + '<small>' + day(x.t) + '</small></span><b class="' + (x.a < 0 ? 'neg' : 'pos') + '">' + (x.a > 0 ? '+' : '') + nf(x.a) + '</b></div>').join('')
+        + (r.recent || []).map((x) => '<div class="gr"><span>' + esc(L.c[x.c] || (x.c === 'club' ? CLUBL : x.c)) + (WK(x.k) ? ' · ' + esc(WK(x.k)) : '') + '<small>' + day(x.t) + '</small></span><b class="' + (x.a < 0 ? 'neg' : 'pos') + '">' + (x.a > 0 ? '+' : '') + nf(x.a) + '</b></div>').join('')
         + '<button class="gx">' + esc(L.close) + '</button>';
       box.querySelector('.gx').onclick = () => d.remove();
     }
