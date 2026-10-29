@@ -864,6 +864,7 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
 <script>
 // 29 oct 2026 (21h54, Jeremy): Monetag rewarded interstitial (zone 12149624) at opening, at most once an hour, never on the first visit
 (function () {
+  return;  // 30 oct 2026 (0h33, Jeremy): no more interstitial at opening
   try {
     var TWm = window.Telegram && window.Telegram.WebApp; if (!TWm || !TWm.initData) return;
     var ZONE = 12149624, fn = 'show_' + ZONE, first = true, last = 0;
