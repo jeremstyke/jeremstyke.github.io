@@ -175,7 +175,6 @@ function faqItems(c) {
   const u = (n) => usd(n, 4).replace(/0+$/, '').replace(/[.,]$/, '');
   return FR ? [
     ['Comment on joue ?', 'Chacun son tour, tu poses ton ❌ ou ton ⭕ sur le plateau. Le premier qui aligne 3 symboles (en ligne, en colonne ou en diagonale) gagne. Plateau plein sans alignement : match nul.'],
-    ['C\'est quoi le mode « 3 pions » ?', 'Chaque joueur n\'a que 3 pions sur le plateau. Quand tu poses le 4e, ton plus vieux pion disparaît (il est grisé juste avant). Il n\'y a presque jamais de match nul ! Après 30 coups sans alignement, c\'est nul.'],
     ['Combien je gagne ?', 'Victoire : +' + u(c.win) + ' $. Match nul : +' + u(c.draw) + ' $. Défaite : 0 $. Les gains sont en USDT et arrivent tout de suite sur ton solde.'],
     ['C\'est quoi les séries ?', 'Enchaîne les victoires : à partir de 3 victoires de suite, chaque victoire rapporte x' + c.streak3 + ', et à partir de 5 de suite, x' + c.streak5 + '. Une défaite remet ta série à zéro.'],
     ['Contre qui je joue ?', 'Contre de vrais joueurs du monde entier. Si personne n\'est disponible au bout de ' + c.ai_after + ' secondes, tu affrontes un bot (affiché 🤖 Bot) : ces parties rapportent aussi. Tu peux aussi défier un ami avec un lien.'],
@@ -190,7 +189,6 @@ function faqItems(c) {
     ['Une question ?', 'Écris-nous : t.me/jeremstyke?direct'],
   ] : [
     ['How do I play?', 'Take turns placing your ❌ or ⭕ on the board. The first to line up 3 (row, column or diagonal) wins. Full board without a line: draw.'],
-    ['What is "3 pieces" mode?', 'Each player only has 3 pieces on the board. When you place your 4th, your oldest piece vanishes (it is greyed out just before). Almost never a draw! After 30 moves without a line, it\'s a draw.'],
     ['How much do I earn?', 'Win: +$' + u(c.win) + '. Draw: +$' + u(c.draw) + '. Loss: $0. Earnings are in USDT and land on your balance at once.'],
     ['What are streaks?', 'Chain wins: from 3 wins in a row, each win pays x' + c.streak3 + ', and from 5 in a row, x' + c.streak5 + '. A loss resets your streak.'],
     ['Who do I play against?', 'Real players from all over the world. If nobody is available after ' + c.ai_after + ' seconds, you face a bot (shown as 🤖 Bot): those games pay too. You can also challenge a friend with a link.'],
