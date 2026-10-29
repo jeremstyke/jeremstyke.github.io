@@ -1405,7 +1405,7 @@ function render() {
     $('#extBtn').hidden = !!S.batons[0].extended || !S.ext_stars; $('#extBtn').textContent = T('ext', S.ext_h || 4, S.ext_stars || 10);
     { const b0 = S.batons[0], vb = $('#vidBtn'), xl = () => Math.ceil((b0.boost_until || 0) - Date.now() / 1000), mm = (s) => Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');  // 22 oct 2026 (20h02, Jeremy): one video = earnings x2 for 1 h, once per baton
       clearInterval(window.__x2I); vb.hidden = !(tg && tg.initData) || (!!b0.boosted && xl() <= 0);  // 22h39: up to 4 x2 per baton (boosted = all 4 used)
-      const bn = b0.boost_n || 0, bc = bn ? ' · ' + bn + '/' + (b0.vid_max || 4) : '';  // 27 oct 2026: x2, x2.5, x3, x3.5, x4
+      const bn = b0.boost_n || 0, bc = '';  /* 29 oct 2026 (23h25, Jeremy): the boost is x2 only, no more "1/4" counter */  // 27 oct 2026: x2, x2.5, x3, x3.5, x4
       const xm = (m) => 'x' + String(m || 2).replace('.', LANG === 'fr' ? ',' : '.');
       // 27 oct 2026 (Jeremy): during a boost, the next video can be watched at once (it replaces the boost with the next multiplier)
       const lab = (s) => { const now2 = T('x2On', mm(s)).replace('x2', xm(b0.boost_mult)); return b0.next_mult ? '<span style="display:flex;flex-direction:column;align-items:center;width:100%"><span>' + esc(T('x2Go').replace('x2', xm(b0.next_mult))) + '</span><small style="font-size:12px;font-weight:600;opacity:.7;margin-top:3px">' + esc(now2 + bc) + '</small></span>' : esc(now2); };
