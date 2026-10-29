@@ -418,7 +418,7 @@ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
       <div class="list" id="vidTask" hidden></div>
       <div class="list" id="agxTask" hidden></div>
       <div class="list" id="mtgTask" hidden></div>
-      <style>/* 29 oct 2026 (22h16, Jeremy): no more Monetag task nor Monetag videos in Tasks */#tkSub [data-s="vid"],#vidTask,#agxTask{display:none!important}/* 29 oct 2026 (22h39, Jeremy): no more videos in Tasks */#mtpTask,#mtgTask{display:none!important}</style>
+      <style>/* 29 oct 2026 (22h16, Jeremy): no more Monetag task nor Monetag videos in Tasks */#mtpTask,#mtgTask{display:none!important}</style>
       <div class="list" id="tasks"></div>
     </section>
 
@@ -1490,13 +1490,13 @@ function render() {
       // 28 oct 2026 (13h07, Jeremy): a red counter on each sub-tab when something is left to do there
       const badge = () => { if (!S || !S.tasks) return; const n = {
           sp: S.tasks.filter((t) => (t.kind === 'sub' || t.kind === 'click') && !t.done).length + Math.max(0, Number(S.adtLeft) || 0) + (S.mtgZone != null ? Math.max(0, (Number(S.mtpMax) || 0) - (Number(S.mtpDay) || 0)) : 0),  // 13h15: the sponsored tasks left today (1,000 a day), even during the 30 s wait
-          vid: 0 * Math.max(0, (Number(S.vids_max) || 0) - (Number(S.vids_day) || 0)) + (S.agxId != null ? Math.max(0, (Number(S.agxMax) || 0) - (Number(S.agxDay) || 0)) : 0) + (S.mtgZone != null ? Math.max(0, (Number(S.mtgMax) || 0) - (Number(S.mtgDay) || 0)) : 0),
+          vid: Math.max(0, (Number(S.vids_max) || 0) - (Number(S.vids_day) || 0)) + (S.agxId != null ? Math.max(0, (Number(S.agxMax) || 0) - (Number(S.agxDay) || 0)) : 0) + (S.mtgZone != null ? Math.max(0, (Number(S.mtgMax) || 0) - (Number(S.mtgDay) || 0)) : 0),
           ms: S.tasks.filter((t) => !['sub', 'click'].includes(t.kind) && !t.done).length };
         tk.querySelectorAll('[data-s]').forEach((b) => { const k = b.dataset.s; b.innerHTML = lab[k] + (n[k] > 0 ? ' <span class="tkn">' + n[k] + '</span>' : ''); });
         // 28 oct 2026 (13h15, Jeremy): the dot on the Tasks tab stays as long as something of the day is left to do
         const dt = $('#dotTasks'); if (dt) dt.hidden = !(n.sp + n.vid + n.ms > 0); };
       badge();
-      if (!tk.dataset.init) { clearInterval(window.__tkI); window.__tkI = setInterval(badge, 2000); tk.dataset.init = '1'; tk.onclick = (e) => { const b = e.target.closest('[data-s]'); if (!b) return; hap(); setSub(b.dataset.s); }; let k0 = 'sp'; try { k0 = localStorage.getItem('bt_tsub') || 'sp'; } catch (e) {} setSub(['sp', 'ms'].includes(k0) ? k0 : 'sp'); } }
+      if (!tk.dataset.init) { clearInterval(window.__tkI); window.__tkI = setInterval(badge, 2000); tk.dataset.init = '1'; tk.onclick = (e) => { const b = e.target.closest('[data-s]'); if (!b) return; hap(); setSub(b.dataset.s); }; let k0 = 'sp'; try { k0 = localStorage.getItem('bt_tsub') || 'sp'; } catch (e) {} setSub(['sp', 'vid', 'ms'].includes(k0) ? k0 : 'sp'); } }
     const bb = sp.querySelector('#spBuy'); if (bb) bb.onclick = (e) => { e.stopPropagation(); hap(); try { tg.openTelegramLink('https://t.me/Batoncheckbot?start=buy'); } catch (x) { openLink('https://t.me/Batoncheckbot?start=buy'); } }; }  // (17h09) the channel stays visible, with its Active badge  // 22 oct 2026 (17h08, Jeremy): the channels to join come first, above the sponsored task
   // 22 oct 2026 (17h11, Jeremy): the tasks already done sit at the bottom in a closed list you can open, with what they earned
   $('#tasks').innerHTML = secs.map((z) => sec(z[0], z[1], z[2])).join('');  // 22 oct 2026 (19h24, Jeremy): done tasks just disappear
