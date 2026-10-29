@@ -1675,7 +1675,7 @@ window.__showRw = async function () {
   /* 28 oct 2026 (14h08, Jeremy): 1 rewarded video out of 5 on Monetag (rewarded interstitial, zone S.mtgZone), Adsgram otherwise or when Monetag has nothing.
      Monetag does not call the server: the app confirms the video once (agx_ok, which pays the reward the 'vid' call asked for, once). */
   const pref = window.__rwPref; window.__rwPref = null;  // 28 oct 2026 (23h25): the boost tells which network to use ('ag' or 'mtg')
-  if ((pref === 'mtg' || (pref !== 'ag' && Math.random() < 0.2)) && typeof S !== 'undefined' && S && S.mtgZone != null) {  /* 28 oct 2026 (15h29, Jeremy): about 1 video out of 5 over all players, drawn at random (no counter per player) */
+  if ((pref === 'mtg' || (pref !== 'ag' && Math.random() < 0.5)) && typeof S !== 'undefined' && S && S.mtgZone != null) {  /* 29 oct 2026 (15h19, Jeremy): 1 video out of 2 on Monetag, drawn at random (was 1 out of 5) */
     const fn = 'show_' + S.mtgZone; let ok = false;
     try {
       if (!window[fn]) await new Promise((res, rej) => { const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(S.mtgZone)); s.setAttribute('data-sdk', fn); s.onload = res; s.onerror = rej; document.head.appendChild(s); setTimeout(() => rej(new Error('timeout')), 8000); });
@@ -2111,7 +2111,7 @@ function nudge() {
       let n = 0; const wait = () => { if (window.Adsgram) go(); else if (n++ < 40) setTimeout(wait, 250); };  // the Adsgram script is loaded once, by the task block below
       // 28 oct 2026 (13h38, Jeremy): 1 opening interstitial out of 5 on Monetag (In-App Interstitial, one ad only), Adsgram otherwise or if Monetag fails
       const k = (Number(LS.get('bt_intn')) || 0) + 1; LS.set('bt_intn', String(k));
-      if ((force || Math.random() < 0.2) && S.mtgZone != null) {  /* 28 oct 2026 (15h29, Jeremy): about 1 out of 5 over all players, at random */
+      if ((force || Math.random() < 0.5) && S.mtgZone != null) {  /* 29 oct 2026 (15h19, Jeremy): 1 out of 2 on Monetag, at random (was 1 out of 5) */
         LS.set('bt_int', String(Date.now())); if (force) { try { api('mtg_forced', {}); } catch (e) {} }
         const fn = 'show_' + S.mtgZone;
         const mshow = () => { try { const r = window[fn]({ type: 'inApp', inAppSettings: { frequency: 1, capping: 1, interval: 30, timeout: 0, everyPage: false } }); if (r && r.catch) r.catch(() => {}); } catch (e) { wait(); } };
@@ -2819,7 +2819,7 @@ function nudge() {
         try { localStorage.setItem('bt_int_rm', String(Date.now())); } catch (e) {}
         const z = (typeof S !== 'undefined' && S && S.mtgZone) || 12140447, fn = 'show_' + z;
         const ag = () => { const go = () => { try { window.Adsgram.init({ blockId: 'int-55461' }).show().catch(() => {}); } catch (e) {} }; if (window.Adsgram) return go(); const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = go; document.head.appendChild(s); };
-        if (Math.random() < 0.2) {
+        if (Math.random() < 0.5) {  // 29 oct 2026 (15h19, Jeremy): 1 out of 2 on Monetag, at random (was 1 out of 5)
           const ms = () => { try { const r = window[fn]({ type: 'inApp', inAppSettings: { frequency: 1, capping: 1, interval: 30, timeout: 0, everyPage: false } }); if (r && r.catch) r.catch(() => {}); } catch (e) { ag(); } };
           if (window[fn]) return ms();
           const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(z)); s.setAttribute('data-sdk', fn); s.onload = () => { if (window[fn]) ms(); else ag(); }; s.onerror = () => ag(); document.head.appendChild(s); return;
