@@ -111,7 +111,7 @@
     } catch (e) { return false; }
   }
   async function agWatch() {
-    if (Math.random() < 0.2 && await mtgWatch()) return 'ok';
+    if (false && await mtgWatch()) return 'ok';  // 29 oct 2026 (23h15, Jeremy): no more Monetag, Adsgram only
     // 27 oct 2026 (Jeremy): a player watched the whole video and got no reward: a video that was shown now always counts
     try { await agSdk(); await window.Adsgram.init({ blockId: '55242' }).show(); return 'ok'; }
     catch (e) { return (!e || !('done' in Object(e)) || e.state === 'load' || /no ad|no banner/i.test(String(e.description || ''))) ? 'none' : 'ok'; }  // 25 oct 2026 (11h30): 'none' (then Ads Galaxy) only when Adsgram had no video
