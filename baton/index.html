@@ -1648,7 +1648,13 @@ function closeSheet() { $('#scrim').hidden = true; }
 $('#scrim').onclick = (e) => { if (e.target.id === 'scrim') closeSheet(); };
 $('#passBtn').onclick = () => {
   hap();
-  if (!S || !S.holding) return $('#invite').onclick();  // no baton in hand: the button invites a friend instead
+  if (!S || !S.holding) {  // 29 oct 2026 (7h56, Jeremy): no baton in hand: ask the Club for one (a player passes his), or invite a friend
+    const F = LANG === 'fr';
+    return sheet('<h3>' + (F ? '🙏 Pas de bâton ?' : '🙏 No baton?') + '</h3>' +
+      '<button class="opt" data-k="askclub"><span class="t"><b>' + (F ? '🙏 Demander un bâton dans le Club' : '🙏 Ask the Club for a baton') + '</b><span>' + (F ? 'Un joueur du Club te passe le sien' : 'A Club player passes you theirs') + '</span></span></button>' +
+      '<button class="opt" data-k="invite"><span class="t"><b>' + (F ? '👥 Inviter un ami' : '👥 Invite a friend') + '</b><span>' + (F ? '+10 000 quand il passe son premier bâton' : '+10,000 when he passes his first baton') + '</span></span></button>' +
+      '<button class="btn ghost" data-k="keep">' + (F ? 'Fermer' : 'Close') + '</button>');
+  }
   const pg = (m) => '+' + fmt(m === 5 ? S.pass_new : m === 3 ? S.pass_friend : S.pass_random);  // 22 oct 2026: fixed bonuses
   sheet('<h3>' + T('who') + '</h3><p class="foot" style="text-align:start;margin:0">' + T('passTip') + '</p>' +
     '<button class="opt" data-k="new"><span class="t"><b>' + T('newP') + '</b><span>' + T('newS') + '</span></span><span class="mult x5">' + pg(5) + '<small class="pg">' + T('newPct') + '</small></span></button>' +
@@ -1822,6 +1828,12 @@ $('#sheet').onclick = async (e) => {
   hap(); const k = o.dataset.k;
   if (k === 'keep') return closeSheet();
   if (k === 'invite') { closeSheet(); return $('#invite').onclick(); }
+  if (k === 'askclub') {  // 29 oct 2026 (7h56, Jeremy)
+    closeSheet(); const F = LANG === 'fr'; const r = await api('askclub');
+    if (r && r.ok) { hap('ok'); toast(r.already ? (F ? '🙏 Ta demande est déjà dans le Club, patience !' : '🙏 Your request is already in the Club, hang on!') : (F ? '🙏 Demande postée dans le Club : le premier qui le veut te passe son bâton !' : '🙏 Request posted in the Club: someone will pass you their baton!')); }
+    else { hap('err'); toast(r && r.error === 'holding' ? (F ? 'Tu as déjà un bâton en main.' : 'You already hold a baton.') : errMsg(r || {})); }
+    return;
+  }
   if (k === 'tuto') { closeSheet(); return tutorial(); }
   if (k === 'contact') { e.preventDefault(); return openLink('https://t.me/jeremstyke?direct'); }
   if (k === 'harv') { closeSheet(); return $('#harvest').onclick(); }
