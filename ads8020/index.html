@@ -186,8 +186,8 @@ function earnV() {
 
 let F = { text: '', btn: '', link: '', budget: 10, cpc: 0.02, cats: [] };
 function advV() {
-  // 29 oct 2026 (16h28, Jeremy): before the launch, advertisers sign up for a reminder (Jeremy still sees the form, to test)
-  if (!(S.cfg && S.cfg.live) && !S.owner) return '<div class="card hero center"><div style="font-size:46px">📣</div><h2>' + esc(L.waitH) + '</h2><div class="muted">' + esc(L.waitP) + '</div>' + (S.me && S.me.adv_waitlist ? '<div class="banner" style="margin:12px 0 0">' + esc(L.waitOk) + '</div>' : '<button class="btn go" data-k="advwait">' + esc(L.waitBtn) + '</button>') + '</div>';
+  // 29 oct 2026 (16h28, Jeremy): before the launch, advertisers sign up for a reminder (16h34: for everyone, Jeremy too)
+  if (!(S.cfg && S.cfg.live)) return '<div class="card hero center"><div style="font-size:46px">📣</div><h2>' + esc(L.waitH) + '</h2><div class="muted">' + esc(L.waitP) + '</div>' + (S.me && S.me.adv_waitlist ? '<div class="banner" style="margin:12px 0 0">' + esc(L.waitOk) + '</div>' : '<button class="btn go" data-k="advwait">' + esc(L.waitBtn) + '</button>') + '</div>';
   const ads = S.camps || [];
   const n = Math.floor((Number(F.budget) || 0) / (Number(F.cpc) || 1));
   return '<div class="card hero"><h2 style="margin-top:0">' + esc(L.advH) + '</h2><div class="muted small">' + esc(L.advP) + '</div>'
