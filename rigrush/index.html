@@ -673,7 +673,7 @@ $('boB').onclick = async () => {
   let busy = false;
   // 30 oct 2026 (0h46, Jeremy): 1 minute between two clicks: the ad does not open before, and the button shows the countdown
   const lastAt = () => { try { return Number(localStorage.getItem('rr_pp_at') || 0); } catch (e) { return 0; } };
-  const left = () => Math.ceil((lastAt() + 60000 - Date.now()) / 1000);
+  const left = () => Math.ceil((lastAt() + 30000 - Date.now()) / 1000);  // 30 oct 2026 (0h55, Jeremy): 30 s between two (was 1 min)
   const ppLoad = () => window.__mtgL || (window.__mtgL = new Promise((ok, ko) => { const fn = 'show_12149624'; if (typeof window[fn] === 'function') return ok(); const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', '12149624'); s.setAttribute('data-sdk', fn); s.onerror = () => { window.__mtgL = null; ko(new Error('load')); }; document.head.appendChild(s); const t0 = Date.now(), iv = setInterval(() => { if (typeof window[fn] === 'function') { clearInterval(iv); ok(); } else if (Date.now() - t0 > 12000) { clearInterval(iv); window.__mtgL = null; ko(new Error('timeout')); } }, 100); }));
   setTimeout(() => { ppLoad().catch(() => {}); }, 1500);
   setInterval(() => { const s = left(); $('ppS').textContent = s > 0 ? '⏳ ' + s + ' s' : P[1]; $('ppB').style.opacity = s > 0 ? '.6' : ''; $('ppB').style.pointerEvents = s > 0 ? 'none' : ''; }, 1000);
