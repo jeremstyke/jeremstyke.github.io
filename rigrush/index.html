@@ -635,13 +635,32 @@ $('boB').onclick = async () => {
   if (m.boost_left <= 0) { toast(tr('bnone')); return }
   if (!ST.cfg.ads_block) { toast(tr('t_soon')); return }
   // 29 oct 2026 (21h55, Jeremy): the x2 boost is unlocked by a Monetag rewarded interstitial (zone 12149624), then the server gives it
+  // 30 oct 2026 (0h52, Jeremy): Monetag does not always say when the video is over: the boost is given when the video ends,
+  // or when the player comes back to the game (5 s at least after the tap), or after 20 s; one tap only, the button is locked meanwhile
   const fn = 'show_12149624';
+  if (typeof window[fn] !== 'function') {
+    if (!window.__mtgL) window.__mtgL = new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', '12149624'); s.setAttribute('data-sdk', fn); s.onerror = () => { window.__mtgL = null; ko(new Error('load')); }; document.head.appendChild(s); const t0 = Date.now(), iv = setInterval(() => { if (typeof window[fn] === 'function') { clearInterval(iv); ok(); } else if (Date.now() - t0 > 12000) { clearInterval(iv); window.__mtgL = null; ko(new Error('timeout')); } }, 100); });
+    window.__mtgL.catch(() => {});
+    toast(LANG === 'fr' ? '⏳ La vidéo se charge, réessaie dans 2 s' : '⏳ The video is loading, try again in 2 s'); return;
+  }
+  if (window.__boBusy) return; window.__boBusy = true; $('boB').style.pointerEvents = 'none'; $('boB').style.opacity = '.6';
+  const t0 = Date.now();
+  let failed = false;
   try {
-    await (window.__mtgL || (window.__mtgL = new Promise((ok, ko) => { if (typeof window[fn] === 'function') return ok(); const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', '12149624'); s.setAttribute('data-sdk', fn); s.onerror = () => { window.__mtgL = null; ko(new Error('load')); }; document.head.appendChild(s); const t0 = Date.now(), iv = setInterval(() => { if (typeof window[fn] === 'function') { clearInterval(iv); ok(); } else if (Date.now() - t0 > 12000) { clearInterval(iv); window.__mtgL = null; ko(new Error('timeout')); } }, 100); })));
-    await window[fn]({ ymid: String((ST.me && ST.me.id) || '') });
-  } catch (e) { toast(LANG === 'fr' ? 'Pas de vidéo dispo, réessaie plus tard.' : 'No video right now, try again later.'); return }
+    await new Promise((res, rej) => {
+      let done = false; const fin = (f) => { if (done) return; done = true; document.removeEventListener('visibilitychange', vis); try { TW && TW.offEvent && TW.offEvent('activated', act); } catch (e) {} clearTimeout(to); f(); };
+      const vis = () => { if (!document.hidden && Date.now() - t0 > 5000) fin(res); };
+      const act = () => { if (Date.now() - t0 > 5000) fin(res); };
+      const to = setTimeout(() => fin(res), 20000);
+      document.addEventListener('visibilitychange', vis); try { TW && TW.onEvent && TW.onEvent('activated', act); } catch (e) {}
+      Promise.resolve().then(() => window[fn]({ ymid: String((ST.me && ST.me.id) || '') })).then(() => fin(res), (e) => fin(() => rej(e)));
+    });
+  } catch (e) { failed = true; }
+  if (failed) { window.__boBusy = false; $('boB').style.pointerEvents = ''; $('boB').style.opacity = ''; toast(LANG === 'fr' ? 'Pas de vidéo dispo, réessaie plus tard.' : 'No video right now, try again later.'); return }
   const r = await api('boost'); take(r);
+  window.__boBusy = false; $('boB').style.pointerEvents = ''; $('boB').style.opacity = '';
   if (ST.me.boost_end && now() < T(ST.me.boost_end)) { haptic('heavy'); toast(tr('t_boost')); }
+  else toast(LANG === 'fr' ? 'Boost impossible pour l\'instant, réessaie.' : 'Boost not possible right now, try again.');
 };
 // 30 oct 2026 (0h39, Jeremy): sponsored task = Monetag rewarded popup (zone 12149624, 'pop'): +15 min of mining, 20 a day, 1 min between two (server rr_api 'pop')
 {
