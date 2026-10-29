@@ -2953,5 +2953,18 @@ function nudge() {
   } catch (e) {}
 })();
 </script>
+<style>/* 29 oct 2026 (22h25, Jeremy): one simple screen: the baton, its upgrade, the tasks (Adsgram, Club, name, bio), Invite and the shop; no more tabs */
+nav.tabs{display:none!important}
+#p-home[hidden],#p-tasks[hidden]{display:block!important}
+#p-mine,#p-friends,#p-rank{display:none!important}
+#tkSub,#vidTask,#agxTask,#mtgTask,#mtpTask,#spTasks2,#gamesCard,#gmHome{display:none!important}
+html #p-tasks[data-sub] #tasks,html #p-tasks[data-sub] #subTasks,html #p-tasks[data-sub] #spTasks{display:block!important}
+html #p-tasks[data-sub] #adtask:not([hidden]){display:block!important}
+#p-home .foot{margin-bottom:4px}
+</style>
+<script>
+// 29 oct 2026 (22h25, Jeremy): the Invite button moves to the home screen, under the baton (the Friends tab is gone)
+(function () { try { var m = function () { var inv = document.getElementById('invite'), a = document.getElementById('upCard') || document.getElementById('batonCard'); if (inv && a && inv.closest('#p-friends')) { a.after(inv); inv.style.margin = '0 0 14px'; } }; if (document.readyState !== 'loading') m(); else document.addEventListener('DOMContentLoaded', m); } catch (e) {} })();
+</script>
 </body>
 </html>
