@@ -2268,6 +2268,8 @@ function nudge() {
     const DSD = /^fr/.test(lc) ? { ds_main: 'Pronos du match du jour', ds_match: 'Pronos (anciens matchs)', ds_week_prize: 'Classement de la semaine', ds_ref: 'Amis invités', ds_task: 'Tâches sponsorisées', other: 'Autre' }
       : { ds_main: 'Match of the day predictions', ds_match: 'Predictions (older matches)', ds_week_prize: 'Weekly ranking', ds_ref: 'Invited friends', ds_task: 'Sponsored tasks', other: 'Other' };
     const WK = (k) => { k = String(k || ''); if (/^ds/.test(k)) return DSD[k] || DSD.other; if (/^mct/.test(k)) return WD[k] || WD.other; const p = k.split('_')[0]; return GD[p] || ''; };
+    // 29 oct 2026 (23h50, Jeremy): the label of the Club passes (it was missing: the sheet stayed on ⏳ for players with Club passes)
+    const CLUBL = ({ fr: '🏃 Passes dans le Club', es: '🏃 Pases en el Club', pt: '🏃 Passes no Club', ru: '🏃 Передачи в Club', uk: '🏃 Передачі в Club', tr: '🏃 Club\'a devirler', id: '🏃 Oper di Club', ar: '🏃 تمريرات في Club', fa: '🏃 پاس در Club' })[lc.slice(0, 2)] || '🏃 Passes in the Club';
     const st = document.createElement('style');
     st.textContent = '#gnBtn{display:block;margin:10px auto 0;padding:7px 14px;border-radius:99px;border:1px solid rgba(255,212,59,.45);background:rgba(255,212,59,.1);color:#ffd43b;font-weight:800;font-size:13px;cursor:pointer}'
       + '#gnSh{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center}'
