@@ -151,7 +151,7 @@ const L = FR ? {
   rules: 'Victoire +0,002 $ · nul +0,0005 $ · 3 victoires de suite x2, 5 de suite x3. Retrait après 3 jours de jeu.',
   st: { wait: 'En cours', paid: 'Payé', refused: 'Refusé' }, copied: 'Copié !', saved: '✅ Enregistré',
   err: { wallet: 'Adresse TON invalide (ou à enregistrer d\'abord).', min: 'Il faut au moins 1 $ pour retirer.', days: 'Joue au moins 3 jours différents avant ton premier retrait.', waiting: 'Un retrait est déjà en cours.', banned: 'Compte exclu des gains.', gone: 'Ce défi n\'existe plus.', full: 'Ce défi a déjà commencé.', auth: 'Ouvre le jeu depuis Telegram.' },
-  chestWin: (a) => '🎁 +' + a + ' $ !', dbl: (a) => '📺 Doubler avec une vidéo (+' + a + ' $)', dblOk: '💸 Gains doublés !', noVid: 'Pas de vidéo dispo, réessaie plus tard.',
+  chestWin: (a) => '🎁 +' + a + ' $ !', dbl: (a) => '📺 +25 % avec une vidéo (+' + a + ' $)', dblOk: '💸 +25 % ajoutés !', noVid: 'Pas de vidéo dispo, réessaie plus tard.',
   async: '⏳ Tour par tour', asyncS: '24 h par coup, joue quand tu veux', myGames: '⏳ Mes parties tour par tour', yourMove: 'À toi de jouer', theirMove: 'Son tour', waitOpp: 'Recherche d\'un adversaire', asyncWaitH: 'Partie créée !', asyncWaitP: 'Le prochain joueur qui lance une partie tour par tour te rejoint. Le bot te préviendra quand ce sera ton tour.', back: '🏠 Retour', asyncTheir: 'Son tour : le bot te préviendra quand il aura joué.', hLeft: (h) => h + ' h pour jouer', won: 'Gagnée', lost: 'Perdue', drawn: 'Nul', asyncMax: 'Tu as déjà 10 parties en cours : termine-en une d\'abord.',
 } : {
   tPlay: 'Play', tFriends: 'Friends', tWallet: 'Wallet', tag: 'The tic-tac-toe that pays in USDT', online: (n) => n + ' online',
@@ -167,7 +167,7 @@ const L = FR ? {
   rules: 'Win +$0.002 · draw +$0.0005 · 3 wins in a row x2, 5 in a row x3. Withdraw after 3 days of play.',
   st: { wait: 'Pending', paid: 'Paid', refused: 'Refused' }, copied: 'Copied!', saved: '✅ Saved',
   err: { wallet: 'Invalid TON address (or save one first).', min: 'You need at least $1 to withdraw.', days: 'Play on at least 3 different days before your first withdrawal.', waiting: 'A withdrawal is already pending.', banned: 'Account excluded from earnings.', gone: 'This challenge is gone.', full: 'This challenge already started.', auth: 'Open the game from Telegram.' },
-  chestWin: (a) => '🎁 +$' + a + '!', dbl: (a) => '📺 Double it with a video (+$' + a + ')', dblOk: '💸 Earnings doubled!', noVid: 'No video right now, try again later.',
+  chestWin: (a) => '🎁 +$' + a + '!', dbl: (a) => '📺 +25% with a video (+$' + a + ')', dblOk: '💸 +25% added!', noVid: 'No video right now, try again later.',
   async: '⏳ Turn-based', asyncS: '24 h per move, play whenever you want', myGames: '⏳ My turn-based games', yourMove: 'Your move', theirMove: 'Their move', waitOpp: 'Looking for an opponent', asyncWaitH: 'Game created!', asyncWaitP: 'The next player who starts a turn-based game joins you. The bot will tell you when it is your turn.', back: '🏠 Back', asyncTheir: 'Their move: the bot will tell you when they have played.', hLeft: (h) => h + ' h to play', won: 'Won', lost: 'Lost', drawn: 'Draw', asyncMax: 'You already have 10 games going: finish one first.',
 };
 // 29 oct 2026 (17h08, Jeremy): the FAQ with every rule (the numbers come from the server's settings)
@@ -402,7 +402,7 @@ function result(v) {
   const d = document.createElement('div'); d.className = 'over';
   d.innerHTML = '<div class="res"><div style="font-size:56px">' + (won ? '🏆' : dr ? '🤝' : '😵') + '</div><div class="big f" style="color:' + (won ? 'var(--gold)' : dr ? 'var(--o)' : 'var(--x)') + '">' + esc(won ? L.win : dr ? L.drawT : L.lose) + '</div>'
     + (amt > 0 ? '<div class="earn f"><span class="coin">$</span>+<span id="cnt">0</span></div>' + (pay.mult > 1 ? '<div class="mut sm">🔥 x' + pay.mult + '</div>' : '') : (pay.why ? '<div class="mut sm" style="margin:10px 0">' + esc(L.noPay[pay.why] || '') + '</div>' : ''))
-    + (amt > 0 ? '<button class="btn gold f" id="dbl" style="font-size:16px">' + esc(L.dbl(usd(amt, 4))) + '</button>' : '')
+    + (amt > 0 ? '<button class="btn gold f" id="dbl" style="font-size:16px">' + esc(L.dbl(usd(amt * Number((S && S.cfg && S.cfg.dbl_pct) || 0.25), 4))) + '</button>' : '')
     + '<button class="btn play f" id="again">' + esc(L.again) + '</button><button class="btn ghost f" id="home" style="font-size:15px">' + esc(L.home) + '</button></div>';
   document.body.appendChild(d);
   // 29 oct 2026 (17h27, Jeremy): a rewarded video doubles the game's earnings (once per game); it replaces the next interstitial
