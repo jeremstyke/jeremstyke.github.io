@@ -433,7 +433,7 @@ nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
       <p class="foot" id="invRule"></p>
       <!-- 27 oct 2026 (14h10, Jeremy): a group or channel owner adds the bot in 2 taps: it posts a daily promo with his invite link
            (server bt_promo_chat / bt_promo_post); after 3 days in a chat of 100+ members: +50,000 $BATON and the partner status (20 %). -->
-      <div id="promoCard" style="border:1px solid rgba(255,212,59,.45);background:linear-gradient(135deg,rgba(255,212,59,.14),rgba(255,212,59,.03));border-radius:16px;padding:12px 14px;margin:10px 0"></div>
+      <style>/* 29 oct 2026 (23h21, Jeremy): no more "add the bot to your group or channel" card */#promoCard,#promoCard2{display:none!important}</style><div id="promoCard" style="border:1px solid rgba(255,212,59,.45);background:linear-gradient(135deg,rgba(255,212,59,.14),rgba(255,212,59,.03));border-radius:16px;padding:12px 14px;margin:10px 0"></div>
       <script>
       (() => {
         const tw = window.Telegram && Telegram.WebApp;
