@@ -650,13 +650,20 @@ $('boB').onclick = async () => {
   const P = PT[LANG] || PT.en;
   $('ppT').textContent = P[0]; $('ppS').textContent = P[1];
   let busy = false;
+  // 30 oct 2026 (0h46, Jeremy): 1 minute between two clicks: the ad does not open before, and the button shows the countdown
+  const lastAt = () => { try { return Number(localStorage.getItem('rr_pp_at') || 0); } catch (e) { return 0; } };
+  const left = () => Math.ceil((lastAt() + 60000 - Date.now()) / 1000);
+  setInterval(() => { const s = left(); $('ppS').textContent = s > 0 ? '⏳ ' + s + ' s' : P[1]; $('ppB').style.opacity = s > 0 ? '.6' : ''; }, 1000);
   $('ppB').onclick = async () => {
-    if (busy || !ST) return; busy = true;
+    if (busy || !ST) return;
+    { const s = left(); if (s > 0) { toast((LANG === 'fr' ? '⏳ Prochaine pub dans ' : '⏳ Next ad in ') + s + ' s'); return; } }
+    busy = true;
     const fn = 'show_12149624';
     try {
       await (window.__mtgL || (window.__mtgL = new Promise((ok, ko) => { if (typeof window[fn] === 'function') return ok(); const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', '12149624'); s.setAttribute('data-sdk', fn); s.onerror = () => { window.__mtgL = null; ko(new Error('load')); }; document.head.appendChild(s); const t0 = Date.now(), iv = setInterval(() => { if (typeof window[fn] === 'function') { clearInterval(iv); ok(); } else if (Date.now() - t0 > 12000) { clearInterval(iv); window.__mtgL = null; ko(new Error('timeout')); } }, 100); })));
       await window[fn]('pop');
     } catch (e) { toast(P[2]); busy = false; return; }
+    try { localStorage.setItem('rr_pp_at', String(Date.now())); } catch (e) {}
     const r = await api('pop'); take(r);
     if (r && r.pop) {  // 30 oct 2026 (0h45, Jeremy): the gain stays on screen until tapped (the player was away on the ad page and missed the toast)
       haptic('heavy');
