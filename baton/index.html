@@ -1653,6 +1653,8 @@ $('#passBtn').onclick = () => {
     (S.crew_n === 0 ? '<div class="opt" style="opacity:.45"><span class="t"><b>' + T('friendP') + '</b><span>' + T('crewNone') + '</span></span><span class="mult">' + pg(3) + '</span></div>'
       : '<button class="opt" data-k="friend"><span class="t"><b>' + T('friendP') + '</b><span>' + T('friendS') + '</span></span><span class="mult">' + pg(3) + '</span></button>') +
     '<button class="opt" data-k="random"><span class="t"><b>' + T('randP') + '</b><span>' + T('randS') + '</span></span><span class="mult">' + pg(1) + '</span></button>' +
+    /* 29 oct 2026 (1h26, Jeremy): nobody to pass it to: post it in the Club, the first to tap takes it */
+    '<button class="opt" data-k="club"><span class="t"><b>' + (LANG === 'fr' ? '📣 Le poster dans le Club' : '📣 Post it in the Club') + '</b><span>' + (LANG === 'fr' ? 'Le premier qui clique le prend' : 'The first to tap takes it') + '</span></span><span class="mult">' + pg(1) + '</span></button>' +
     '<button class="btn ghost" data-k="keep">' + T('keep') + '</button>');
 };
 // 22 oct 2026: keep the baton in hand 4 h longer for 10 Stars (once per baton); the bot's webhook applies the payment
@@ -1807,6 +1809,7 @@ async function doPass(kind, to) {
     openLink('https://t.me/share/url?url=' + encodeURIComponent(link) + '&text=' + encodeURIComponent(T('shareTxt')));
     toast(T('linkReady')); closeSheet(); setState(r.state); return;
   }
+  if (kind === 'club') { hap('ok'); closeSheet(); if (r.state) setState(r.state); toast(r.already ? (LANG === 'fr' ? '📣 Ton bâton est déjà posté dans le Club.' : '📣 Your baton is already posted in the Club.') : (LANG === 'fr' ? '📣 Ton bâton est posté dans le Club : le premier qui clique le prend !' : '📣 Your baton is posted in the Club: the first to tap takes it!')); return; }  // 29 oct 2026
   hap('ok'); closeSheet(); setState(r.state);
   toast(T('passed', fmt((r.gain || 0) + (r.held || 0)), r.mult, r.to));
 }
