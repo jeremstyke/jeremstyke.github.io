@@ -847,5 +847,19 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
   } catch (e) {}
 })();
 </script>
+<script>
+// 29 oct 2026 (20h44, Jeremy): back to the airdrop, with no date announced for now: no more exchange for $BATON, the Airdrop tab is back
+(function () {
+  try {
+    var st = document.createElement('style'); st.textContent = '#swPg{display:none!important}.mini.sw{display:none!important}'; document.head.appendChild(st);
+    var pg = document.getElementById('pg-drop'); if (!pg) return;
+    [].slice.call(pg.children).forEach(function (e) { if (e.id !== 'swPg') e.hidden = false; });
+    var nb = document.querySelector('.nav button[data-p="drop"]'); if (nb) nb.innerHTML = '<span>🪂</span>Airdrop';
+    var ch = document.getElementById('dropChip'); if (ch) ch.textContent = '🪂 AIRDROP';
+    document.querySelectorAll('[data-t="drop_p"]').forEach(function (e) { e.textContent = tr('drop_p'); });
+    setTimeout(function () { try { var fq = FAQ[LANG] || FAQ.en; var i = fq.findIndex(function (x) { return x[0] === sw('fq'); }); var it = [LANG === 'fr' ? '🪂 Il y aura un airdrop ?' : '🪂 Will there be an airdrop?', tr('drop_p')]; if (i >= 0) fq.splice(i, 1, it); else fq.push(it); } catch (e) {} }, 60);
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
