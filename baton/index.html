@@ -1414,7 +1414,7 @@ function render() {
       if (bwt()) window.__bwI = setInterval(bwt, 1000); }
     $('#moreBat').hidden = S.batons.length < 2; $('#moreBat').textContent = T('more', S.batons.length - 1);
   } else {
-    c.classList.add('off'); c.hidden = false; $('#holdT').textContent = T('none1'); $('#holdP').innerHTML = esc(T('none2')) + '<br><b class="nextB" id="nextB"></b>'; $('#timer').textContent = ''; $('#extBtn').hidden = true; $('#vidBtn').hidden = true; $('#passBtn').hidden = false; $('#passBtn').textContent = '👥  ' + T('invite'); $('#moreBat').hidden = true;
+    c.classList.add('off'); c.hidden = false; $('#holdT').textContent = T('none1'); $('#holdP').innerHTML = esc(T('none2')) + '<br><b class="nextB" id="nextB"></b>'; $('#timer').textContent = ''; $('#extBtn').hidden = true; $('#vidBtn').hidden = true; $('#passBtn').hidden = false; $('#passBtn').textContent = '🙏  ' + ({ fr: 'Demander un bâton', es: 'Pedir un bastón', pt: 'Pedir um bastão', ru: 'Попросить эстафету', uk: 'Попросити естафету', tr: 'Bayrak iste', id: 'Minta tongkat', ar: 'اطلب عصا', fa: 'درخواست باتوم' }[LANG] || 'Ask for a baton'); $('#moreBat').hidden = true;  /* 29 oct 2026 (8h00, Jeremy): no baton: the button asks the Club (or invites) */
   }
   $('#dotHome').hidden = !S.holding;
   $('#invRule').textContent = !S.holding ? T('ruleNone') : S.batons[0].extended ? T('ruleExt') : T('ruleHold', fmt(S.pass_new));
