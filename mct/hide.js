@@ -6,12 +6,12 @@
 // - 11h45: less at the top of the market: the 🎓 guide banner and the ✨ "simpler game" card. Only the scoop card stays at the top
 //   (11h58: no News button there; the news stay under the daily missions, with "All the news").
 // - 30 oct 2026 (17h12, Jeremy): the daily missions (#msn) and the partner mission (#agtask) on the market (home); 17h13: the "🚀 $X took +160 %, sell now" card (#selb); 17h23: the "$BATON won" card of the Portfolio (#bsbt), replaced by a weekly message in the bot (mct_bt_week_msg).
-// - 17h58: the partner mission everywhere (also in the "Out of cash?" sheet: #agtask3).
+// - 17h58: the partner mission was hidden everywhere; 19h11: back on the market and in the "Out of cash?" sheet (game cash only, no $BATON).
 // To bring something back, remove its selector here (and switch the server flag off).
 (function () {
   try {
     const st = document.createElement('style');
-    st.textContent = '#tokc,[data-clb],#clrk,#clantop,#clm,button.fd[data-d],#pfduel,#stb,#simpl,#msn,#agtask,#agtask3,.agtk,#selb,#bsbt{display:none!important}';
+    st.textContent = '#tokc,[data-clb],#clrk,#clantop,#clm,button.fd[data-d],#pfduel,#stb,#simpl,#msn,#selb,#bsbt{display:none!important}';
     document.head.appendChild(st);
   } catch (e) { console.error('hide', e); }
 })();
