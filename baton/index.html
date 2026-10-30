@@ -2973,12 +2973,12 @@ function nudge() {
 // (10 tasks = +5,000 $BATON, bt_ads_reward) with its bar at the top of the Tasks tab, and a red dot on the Tasks tab while it is not reached.
 (function () {
   var TX = {
-    fr: { h: '🎯 Tâches sponsorisées', s: function (r) { return '+' + r + ' $BATON par tâche, en 1 clic'; }, g: function (d, g, b) { return 'Objectif du jour : ' + d + '/' + g + ' tâches = +' + b + ' $BATON'; }, ok: '✅ Objectif du jour atteint ! Continue : chaque tâche paie encore.', go: 'Faire des tâches ›' },
-    en: { h: '🎯 Sponsored tasks', s: function (r) { return '+' + r + ' $BATON per task, in 1 tap'; }, g: function (d, g, b) { return 'Goal of the day: ' + d + '/' + g + ' tasks = +' + b + ' $BATON'; }, ok: '✅ Goal of the day reached! Keep going: every task still pays.', go: 'Do tasks ›' }
+    fr: { h: function (r) { return '🎯 Gagne ' + r + ' $BATON par tâche'; }, g: function (d, g, b) { return 'Objectif du jour : ' + d + '/' + g + ' tâches → +' + b + ' $BATON de bonus'; }, ok: '✅ Objectif du jour atteint ! Chaque tâche paie encore.', go: 'Go' },
+    en: { h: function (r) { return '🎯 Earn ' + r + ' $BATON per task'; }, g: function (d, g, b) { return 'Goal of the day: ' + d + '/' + g + ' tasks → +' + b + ' $BATON bonus'; }, ok: '✅ Goal of the day reached! Every task still pays.', go: 'Go' }
   };
   var css = document.createElement('style');
-  css.textContent = '#tkHome{display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:18px;background:linear-gradient(135deg,rgba(62,230,160,.18),rgba(255,130,47,.10));border:1.5px solid rgba(62,230,160,.55);cursor:pointer;text-align:left;color:inherit;width:100%}'
-    + '#tkHome b{font-size:16px}#tkHome small{opacity:.85;font-size:13px}#tkHome .go{align-self:flex-start;background:#3ee6a0;color:#06150e;font-weight:800;border-radius:12px;padding:8px 14px;font-size:14px}'
+  css.textContent = '#tkHome{display:flex;flex-direction:row;align-items:center;gap:10px;padding:12px 14px;border-radius:18px;background:linear-gradient(135deg,rgba(62,230,160,.18),rgba(255,130,47,.10));border:1.5px solid rgba(62,230,160,.55);cursor:pointer;text-align:left;color:inherit;width:100%}'
+    + '#tkHome b{font-size:16px}#tkHome small{opacity:.85;font-size:13px}#tkHome .go{flex:none;background:#3ee6a0;color:#06150e;font-weight:800;border-radius:12px;padding:8px 14px;font-size:14px}'
     + '.tkBar{height:8px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden}.tkBar i{display:block;height:100%;background:linear-gradient(90deg,#3ee6a0,#ffc531);border-radius:99px;transition:width .4s}'
     + '#tkGoalBox{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border-radius:16px;background:rgba(62,230,160,.10);border:1px solid rgba(62,230,160,.4);margin:0 0 12px;order:0}#tkGoalBox small{font-size:13px;font-weight:700}'
     + 'nav button[data-p="tasks"]{position:relative}nav button[data-p="tasks"].tkDot::after{content:"";position:absolute;top:6px;right:calc(50% - 16px);width:9px;height:9px;border-radius:50%;background:#ff4d5e;box-shadow:0 0 0 2px var(--night,#17091e)}';
@@ -2995,7 +2995,7 @@ function nudge() {
       c.onclick = function () { try { B.hap(); } catch (e) {} B.go('tasks'); };
       sc.insertAdjacentElement('afterend', c);
     }
-    if (c && c.dataset.k !== key) { c.dataset.k = key; c.innerHTML = '<b>' + T.h + '</b><small>' + T.s(Number(S.tkReward).toLocaleString(B.lang === 'fr' ? 'fr-FR' : 'en-US')) + '</small><div class="tkBar"><i style="width:' + pct + '"></i></div><small>' + ln + '</small><span class="go">' + T.go + '</span>'; }
+    if (c && c.dataset.k !== key) { c.dataset.k = key; c.innerHTML = '<b style="flex:1;min-width:0">' + T.h(Number(S.tkReward).toLocaleString(B.lang === 'fr' ? 'fr-FR' : 'en-US')) + '</b><span class="go">' + T.go + '</span>';  /* 21h13 (Jeremy): one simple line on Home */ }
     // Tasks tab: the goal bar at the top
     var p = document.getElementById('p-tasks'), g = document.getElementById('tkGoalBox');
     if (p && !g) { g = document.createElement('div'); g.id = 'tkGoalBox'; var tt = document.getElementById('tTotTop'); if (tt && tt.parentNode === p) tt.insertAdjacentElement('afterend', g); else { var s2 = p.querySelector('.score'); if (s2) s2.insertAdjacentElement('afterend', g); else p.prepend(g); } }
