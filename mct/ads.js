@@ -308,7 +308,7 @@
     el.addEventListener('onBannerNotFound', () => { gone = true; document.querySelectorAll('.agtk').forEach((x) => x.remove()); w.remove(); });  // no task for this player: nothing shown until the app reopens
     el.addEventListener('onError', () => { w.remove(); });
     el.addEventListener('reward', () => {
-      try { localStorage.setItem('mct_agt_until', String(Date.now() + 300000)); } catch (e) {}  // 28 oct 2026: next one in 5 minutes
+      try { localStorage.setItem('mct_agt_until', String(Date.now() + 30000)); } catch (e) {}  // 30 oct 2026 (19h12): next one in 30 seconds (was 5 minutes)
       try { haptic('ok'); } catch (e) {}
       try { toast(T.ok); } catch (e) {}
       setTimeout(() => { try { if (VIEW === 'market') market(); else if (typeof loadMe === 'function') loadMe(); } catch (e) {} }, 2500);  // the cash comes from the server (reward URL)
