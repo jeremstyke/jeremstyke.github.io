@@ -192,6 +192,8 @@ body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#0407
 /* 30 oct 2026 (14h25, Jeremy): the active x2 must be obvious: glowing gold, not greyed out */
 @keyframes boPulse{0%,100%{box-shadow:0 0 10px rgba(255,200,61,.35)}50%{box-shadow:0 0 24px rgba(255,200,61,.8)}}
 #boB.on .t{color:var(--gold)}#boB.on .s{color:#fff}
+/* 30 oct 2026 (17h19, Jeremy): no more "Free RIGZ" tile (Monetag), the x2 boost on its own line */
+#ppB{display:none!important}#boB{grid-column:1/-1}
 </style>
 </head>
 <body>
@@ -641,36 +643,26 @@ $('boB').onclick = async () => {
   if (!ST) return; const m = ST.me;
   if (m.boost_end && now() < T(m.boost_end)) { toast(tr('t_bact')); return }
   if (m.boost_left <= 0) { toast(tr('bnone')); return }
-  if (window.__boLock && Date.now() < window.__boLock) { toast((LANG === 'fr' ? '⏳ Prochaine vidéo dans ' : '⏳ Next video in ') + Math.ceil((window.__boLock - Date.now()) / 1000) + ' s'); return }  /* 30 oct 2026 (11h45, Jeremy): 1 min after a failed x2 video */
-  if (!ST.cfg.ads_block) { toast(tr('t_soon')); return }
-  // 29 oct 2026 (21h55, Jeremy): the x2 boost is unlocked by a Monetag rewarded interstitial (zone 12149624), then the server gives it
-  // 30 oct 2026 (0h52, Jeremy): Monetag does not always say when the video is over: the boost is given when the video ends,
-  // or when the player comes back to the game (5 s at least after the tap), or after 20 s; one tap only, the button is locked meanwhile
-  const fn = 'show_12149624';
-  if (typeof window[fn] !== 'function') {
-    if (!window.__mtgL) window.__mtgL = new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', '12149624'); s.setAttribute('data-sdk', fn); s.onerror = () => { window.__mtgL = null; ko(new Error('load')); }; document.head.appendChild(s); const t0 = Date.now(), iv = setInterval(() => { if (typeof window[fn] === 'function') { clearInterval(iv); ok(); } else if (Date.now() - t0 > 12000) { clearInterval(iv); window.__mtgL = null; ko(new Error('timeout')); } }, 100); });
-    window.__mtgL.catch(() => {});
-    toast(LANG === 'fr' ? '⏳ La vidéo se charge, réessaie dans 2 s' : '⏳ The video is loading, try again in 2 s'); return;
-  }
+  if (window.__boLock && Date.now() < window.__boLock) { toast((LANG === 'fr' ? '⏳ Prochaine vidéo dans ' : '⏳ Next video in ') + Math.ceil((window.__boLock - Date.now()) / 1000) + ' s'); return }
+  // 30 oct 2026 (17h19, Jeremy): the x2 boost is unlocked by an Adsgram rewarded video (block 55777) instead of Monetag.
+  // Watched to the end = x2. Closed before the end = no x2 and 1 min to wait. Adsgram has no video = x2 anyway (the button always works).
   if (window.__boBusy) return; window.__boBusy = true; $('boB').style.pointerEvents = 'none'; $('boB').style.opacity = '.6';
-  const t0 = Date.now();
-  let failed = false;
+  let via = 'ad', ok = true;
   try {
-    await new Promise((res, rej) => {
-      let done = false; const fin = (f) => { if (done) return; done = true; document.removeEventListener('visibilitychange', vis); try { TW && TW.offEvent && TW.offEvent('activated', act); } catch (e) {} clearTimeout(to); f(); };
-      const vis = () => { if (!document.hidden && Date.now() - t0 > 5000) { window.__via = 'back'; fin(res); } };  /* 30 oct 2026 (11h45, Jeremy): 6 s of grace when coming back, so Monetag's confirmation is not lost */
-      const act = () => { if (Date.now() - t0 > 5000) { window.__via = 'back'; fin(res); } };
-      const to = setTimeout(() => { window.__via = 'time'; fin(res); }, 45000);  /* 30 oct 2026 (11h48, Jeremy): reward even without Monetag's confirmation (back after 5 s or 45 s) */
-      document.addEventListener('visibilitychange', vis); try { TW && TW.onEvent && TW.onEvent('activated', act); } catch (e) {}
-      (() => { try { return Promise.resolve(window[fn]({ ymid: String((ST.me && ST.me.id) || '') })); } catch (e) { return Promise.reject(e); } })().then(() => { window.__via = 'ad'; fin(res); }, () => { window.__via = 'err'; fin(res); } /* 30 oct 2026 (14h23, Jeremy): Monetag has no ad to show: the reward is given anyway */);
-    });
-  } catch (e) { failed = true; }
-  if (failed) { window.__boLock = Date.now() + 60000; window.__boBusy = false; $('boB').style.pointerEvents = ''; $('boB').style.opacity = ''; toast(LANG === 'fr' ? 'Pas de vidéo dispo, réessaie dans 1 min.' : 'No video right now, try again in 1 min.'); return }
-  const r = await api('boost', { via: window.__via || '' }); take(r);
+    await agLoad();
+    await window.Adsgram.init({ blockId: '55777' }).show();
+  } catch (e) {
+    if (e && e.done === false && e.state !== 'load' && !/no ad|no banner|not found/i.test(String(e.description || ''))) ok = false; else via = 'noad';
+  }
+  if (!ok) { window.__boLock = Date.now() + 60000; window.__boBusy = false; $('boB').style.pointerEvents = ''; $('boB').style.opacity = ''; toast(LANG === 'fr' ? 'Vidéo pas terminée : pas de x2. Réessaie dans 1 min.' : 'Video not finished: no x2. Try again in 1 min.'); return }
+  const r = await api('boost', { via }); take(r);
   window.__boBusy = false; $('boB').style.pointerEvents = ''; $('boB').style.opacity = '';
-  if (ST.me.boost_end && now() < T(ST.me.boost_end)) { haptic('heavy'); }
+  if (ST.me.boost_end && now() < T(ST.me.boost_end)) haptic('heavy');
   else toast(LANG === 'fr' ? 'Boost impossible pour l\'instant, réessaie.' : 'Boost not possible right now, try again.');
 };
+// the Adsgram SDK, loaded once the game is open so the video starts at once
+function agLoad() { return window.__agL || (window.__agL = new Promise((res, rej) => { if (window.Adsgram) return res(); const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = res; s.onerror = () => { window.__agL = null; rej(new Error('load')); }; document.head.appendChild(s); })); }
+setTimeout(() => { agLoad().catch(() => {}); }, 1500);
 // 30 oct 2026 (0h39, Jeremy): sponsored task = Monetag rewarded popup (zone 12149624, 'pop'): +15 min of mining, 20 a day, 1 min between two (server rr_api 'pop')
 {
   const PT = { fr: ['RIGZ gratuits', '1 vidéo = +15 min', 'Pas de pub dispo, réessaie plus tard.', '⏳ Attends un peu avant la prochaine.', 'Plus de tâche aujourd\'hui, reviens demain.', 'RIGZ gagnés !'],
