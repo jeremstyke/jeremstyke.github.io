@@ -749,7 +749,18 @@ $('inv').textContent = tr('invite');
 $('inv').onclick = () => { const u = 'https://t.me/share/url?url=' + encodeURIComponent(link()) + '&text=' + encodeURIComponent(tr('share_txt')); try { TW.openTelegramLink(u) } catch (e) { window.open(u) } };
 $('copy').onclick = async () => { try { await navigator.clipboard.writeText(link()); toast(tr('t_copied')) } catch (e) { toast(link()) } };
 async function loadFriends() { const r = await api('friends').catch(() => null); if (!r || !r.ok) return; $('frpts').textContent = fmt2(r.ref_pts) + ' RIGZ';
-  $('frl').innerHTML = r.list.length ? r.list.map(f => `<div class="it"><div class="r" style="font-size:20px">${EMO[f.t] || '👤'}</div><div class="n">${esc(f.n)}</div><div class="p">+${fmt2(f.g)}</div></div>`).join('') : `<p class="sub" style="text-align:center;margin-top:20px">${tr('fr_none')}</p>` }
+  /* 30 oct 2026 (12h35, Jeremy): button to nudge the friends that are not mining (the bot writes to them), once every 12 h; 💤 next to them */
+  const FR = LANG === 'fr', nl = r.nudge_left || 0;
+  const nb = r.idle > 0 ? `<button id="nudgeB" style="width:100%;margin:0 0 10px;padding:12px;border-radius:14px;border:1px solid rgba(255,200,61,.6);background:linear-gradient(135deg,rgba(255,200,61,.22),rgba(168,85,247,.12));color:inherit;font:inherit;font-weight:800;font-size:14px;${nl > 0 ? 'opacity:.55;filter:grayscale(1);' : ''}">${nl > 0 ? (FR ? '⏳ Prochaine relance dans ' : '⏳ Next nudge in ') + Math.ceil(nl / 3600) + ' h' : (FR ? '🔔 Relancer mes amis qui ne minent pas (' : '🔔 Nudge my friends who are not mining (') + r.idle + ')'}</button>` : '';
+  $('frl').innerHTML = r.list.length ? nb + r.list.map(f => `<div class="it"><div class="r" style="font-size:20px">${EMO[f.t] || '👤'}</div><div class="n">${esc(f.n)}${f.i ? ' 💤' : ''}</div><div class="p">+${fmt2(f.g)}</div></div>`).join('') : `<p class="sub" style="text-align:center;margin-top:20px">${tr('fr_none')}</p>`;
+  const b = $('nudgeB'); if (b) b.onclick = async () => {
+    if (nl > 0) { toast((FR ? '⏳ Tu pourras relancer dans ' : '⏳ You can nudge again in ') + Math.ceil(nl / 3600) + ' h'); return; }
+    b.style.pointerEvents = 'none'; haptic();
+    const x = await api('nudge').catch(() => null);
+    if (x && x.ok) toast(x.sent > 0 ? (FR ? '📨 ' + x.sent + ' amis relancés ! Tu gagnes +1 RIGZ quand ils allument leur machine.' : '📨 ' + x.sent + ' friends nudged! You get +1 RIGZ when they turn on their machine.') : (FR ? 'Tes amis ont déjà été relancés aujourd\'hui.' : 'Your friends were already nudged today.'));
+    else toast(FR ? '⏳ Réessaie plus tard.' : '⏳ Try again later.');
+    loadFriends();
+  }; }
 async function loadTop() { const r = await api('top').catch(() => null); if (!r || !r.ok) return;
   $('topl').innerHTML = r.top.map((p, i) => `<div class="it ${p.me ? 'me' : ''}"><div class="r">${i < 3 ? '<span class="medal">' + ['🥇', '🥈', '🥉'][i] + '</span>' : i + 1}</div><div class="n">${EMO[p.t] || ''} ${esc(p.n)}</div><div class="p">${fmt2(p.p)}</div></div>`).join('') }
 function go(p) { document.querySelectorAll('.nav button').forEach(x => x.classList.toggle('on', x.dataset.p === p)); ['mine', 'up', 'fr', 'drop'].forEach(q => $('pg-' + q).hidden = q !== p);
