@@ -741,7 +741,7 @@ function buildUp() {
   $('upl').innerHTML = `<div class="ph">${tr('comps')}</div>` + parts + (nextLock != null ? `<div class="it lock"><div class="r" style="font-size:22px">🎁</div><div class="n w">${esc(tr('t_newpart', { n: nextLock + 1 }))}</div></div>` : '') + `<div class="ph">${tr('n_mach')}</div>` + tiers().slice(0, cur + 3).map((t, i) => `<div class="it ${i === cur ? 'cur' : i > cur + 1 ? 'lock' : ''}" data-i="${i}"><div class="r" style="font-size:22px">${i > cur + 1 ? '🔒' : EMO[i]}</div><div class="n">${esc(L.m[i])}<div style="font-size:12px;color:var(--neo);font-family:JetBrains Mono,monospace">⚡ ${fmt2(t[0])} / h</div></div><div class="p">${i <= cur ? (i === cur ? tr('cur') : '✓') : i === cur + 1 && ST.me.parts_ready === false ? '🔧 ' + esc(tr('t_partsshort')) : fmt2(t[1])}</div></div>`).join('') + (tiers().length > cur + 3 ? `<div class="it lock"><div class="r" style="font-size:22px">❓</div><div class="n w">${esc(tr('t_more', { n: tiers().length - cur - 3 }))}</div></div>` : '');
   $('upl').querySelectorAll('.it').forEach(el => el.onclick = () => { if (el.dataset.p) buyPart(el.dataset.p); else if (+el.dataset.i === cur + 1) upgrade() });
 }
-const link = () => 'https://t.me/' + BOT + '?startapp=r' + (ST ? ST.me.id : '');
+const link = () => 'https://t.me/' + BOT + '?start=r' + (ST ? ST.me.id : '');  // 30 oct 2026 (10h45, Jeremy): invite links open the bot first (the bot can then write to the friend)
 $('inv').textContent = tr('invite');
 $('inv').onclick = () => { const u = 'https://t.me/share/url?url=' + encodeURIComponent(link()) + '&text=' + encodeURIComponent(tr('share_txt')); try { TW.openTelegramLink(u) } catch (e) { window.open(u) } };
 $('copy').onclick = async () => { try { await navigator.clipboard.writeText(link()); toast(tr('t_copied')) } catch (e) { toast(link()) } };
@@ -988,6 +988,17 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
       var ch = document.getElementById('dropChip'); if (ch) ch.textContent = '🪂 ' + (p >= 1000 ? (Math.floor(p / 100) / 10) + 'K' : p) + '/10K';
     };
     upd(); setInterval(upd, 3000);
+  } catch (e) {}
+})();
+</script>
+<script>
+// 30 oct 2026 (10h45, Jeremy): players who opened the game without the bot are asked (once) to allow the bot's messages
+(function () {
+  try {
+    var tw = window.Telegram && window.Telegram.WebApp; if (!tw || !tw.initData || !tw.requestWriteAccess) return;
+    var u = tw.initDataUnsafe && tw.initDataUnsafe.user; if (!u || u.allows_write_to_pm) return;
+    try { if (localStorage.getItem('rr_wa')) return; localStorage.setItem('rr_wa', '1'); } catch (e) {}
+    setTimeout(function () { try { tw.requestWriteAccess(function () {}); } catch (e) {} }, 2500);
   } catch (e) {}
 })();
 </script>
