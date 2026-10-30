@@ -259,9 +259,9 @@
   const TT = {
     fr: { h: '🤝 Mission partenaire', r: '+100 $', go: 'Go', claim: 'Récupérer', done: 'Fait ✅', wait: 'Prochaine mission dans', ok: '💵 +100 $ ajoutés à ton cash !' },
     id: { h: '🤝 Misi partner', r: '+$100', go: 'Mulai', claim: 'Klaim', done: 'Selesai ✅', wait: 'Misi berikutnya dalam', ok: '💵 +$100 ditambahkan ke uangmu!' },
-    ru: { h: '🤝 Задание партнёра', r: '+$100', go: 'Go', claim: 'Забрать', done: 'Готово ✅', wait: 'Следующее задание через', ok: '💵 +$100 к твоим деньгам и +1,000 $BATON в Pass The Baton!' },
-    ar: { h: '🤝 مهمة شريك', r: '+$100', go: 'ابدأ', claim: 'استلم', done: 'تم ✅', wait: 'المهمة التالية بعد', ok: '💵 تمت إضافة $100 إلى أموالك و1,000 $BATON في Pass The Baton!' },
-    fa: { h: '🤝 مأموریت همکار', r: '+100 دلار', go: 'برو', claim: 'دریافت', done: 'انجام شد ✅', wait: 'مأموریت بعدی تا', ok: '💵 100 دلار به پولت و 1,000 $BATON در Pass The Baton اضافه شد!' },
+    ru: { h: '🤝 Задание партнёра', r: '+$100', go: 'Go', claim: 'Забрать', done: 'Готово ✅', wait: 'Следующее задание через', ok: '💵 +$100 к твоим деньгам!' },
+    ar: { h: '🤝 مهمة شريك', r: '+$100', go: 'ابدأ', claim: 'استلم', done: 'تم ✅', wait: 'المهمة التالية بعد', ok: '💵 تمت إضافة $100 إلى أموالك!' },
+    fa: { h: '🤝 مأموریت همکار', r: '+100 دلار', go: 'برو', claim: 'دریافت', done: 'انجام شد ✅', wait: 'مأموریت بعدی تا', ok: '💵 100 دلار به پولت اضافه شد!' },
     en: { h: '🤝 Partner mission', r: '+$100', go: 'Go', claim: 'Claim', done: 'Done ✅', wait: 'Next mission in', ok: '💵 +$100 added to your cash!' },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TT[l] || TT.en; };
