@@ -10,7 +10,7 @@
   const AGX = 135;
   const TX = {
     fa: {
-      rT: '💵 شارژ', rS: 'ویدیو روزی یک بار، به‌علاوه روزی یک بسته ستاره (حداکثر 10,000 دلار در هفته). پول خریده‌شده در رتبه‌بندی حساب نمی‌شود.', rC: (a) => 'فقط ' + a + ' دلار در این هفته مانده', rC0: 'سقف هفتگی پر شد · دوشنبه برمی‌گردد', rV: '📺 +500 دلار با یک ویدیو', rVp: '💎 +500 دلار (پریمیوم)', rVs: 'رایگان · روزی یک بار، زیر 1,000 دلار', rVr: 'فقط وقتی کمتر از 1,000 دلار داری', rVd: 'امروز گرفته شده', rP: (a) => '+' + a + ' دلار', rD: 'شروع', rDw: 'بسته امروز گرفته شده · فردا برگرد', rM: 'معامله خوب', rL: '+33 % بیشتر', rX: '🔥 بهترین ارزش', rOk: (a) => '💵 +' + a + ' دلار اضافه شد!',
+      rT: '💵 شارژ', rS: 'ویدیو روزی یک بار، به‌علاوه روزی یک بسته ستاره (حداکثر 10,000 دلار در هفته). پول خریده‌شده در رتبه‌بندی حساب نمی‌شود.', rC: (a) => 'فقط ' + a + ' دلار در این هفته مانده', rC0: 'سقف هفتگی پر شد · دوشنبه برمی‌گردد', rV: '📺 +500 دلار با یک ویدیو', rVp: '💎 +500 دلار (پریمیوم)', rVs: 'رایگان · روزی یک بار، زیر 1,000 دلار', rVr: 'فقط وقتی کمتر از 1,000 دلار داری', rVd: 'امروز گرفته شده', rP: (a) => '+' + a + ' دلار', rD: 'شروع', rDw: 'بسته امروز گرفته شده · فردا برگرد', rM: 'معامله خوب', rL: '+40 % بیشتر', rX: '🔥 بهترین ارزش', rOk: (a) => '💵 +' + a + ' دلار اضافه شد!',
       vid: '📺 دیدن ویدیو', vid2: '📺 دیدن یک ویدیو', prem: '💎 بگیر (پریمیوم، بدون ویدیو)', no: 'نه، ممنون', next: '📺 یک ویدیوی دیگر…',
       bT: 'جایزه‌ات را دو برابر کن!', bX: (a) => 'یک ویدیوی کوتاه ببین و ' + a + ' بیشتر بگیر.', bOk: (a) => '🎁 +' + a + ' اضافه شد!',
       mT: 'برداشتت را دو برابر کن!', mX: (q) => 'یک ویدیوی کوتاه ببین و ' + q + ' بیشتر بگیر.', mOk: (q) => '⛏️ +' + q + ' به کوین‌هایت اضافه شد!',
@@ -20,7 +20,7 @@
       skip: 'ویدیو تمام نشد: این بار جایزه‌ای نیست.', late: 'برای این یکی دیر شد.', done: 'امروز گرفته شده. فردا برگرد!', wait: 'هنوز نه: هر 3 دقیقه یک x2.', rich: 'فقط وقتی پول کم داری.', err: 'مشکلی پیش آمد، دوباره امتحان کن.',
     },
     ru: {
-      rT: '💵 Пополнение', rS: 'Видео раз в день плюс один пак звёзд в день (до $10,000 в неделю). Купленные деньги не учитываются в рейтингах.', rC: (a) => 'На этой неделе осталось $' + a, rC0: 'Недельный лимит исчерпан · снова в понедельник', rV: '📺 +$500 за видео', rVp: '💎 +$500 (Премиум)', rVs: 'Бесплатно · раз в день, при балансе меньше $1,000', rVr: 'Только если у тебя меньше $1,000', rVd: 'Сегодня уже получено', rP: (a) => '+$' + a, rD: 'Стартовый', rDw: 'Пак сегодня уже куплен · возвращайся завтра', rM: 'Выгодно', rL: '+33 % больше', rX: '🔥 Лучшая цена', rOk: (a) => '💵 +$' + a + ' добавлено!',
+      rT: '💵 Пополнение', rS: 'Видео раз в день плюс один пак звёзд в день (до $10,000 в неделю). Купленные деньги не учитываются в рейтингах.', rC: (a) => 'На этой неделе осталось $' + a, rC0: 'Недельный лимит исчерпан · снова в понедельник', rV: '📺 +$500 за видео', rVp: '💎 +$500 (Премиум)', rVs: 'Бесплатно · раз в день, при балансе меньше $1,000', rVr: 'Только если у тебя меньше $1,000', rVd: 'Сегодня уже получено', rP: (a) => '+$' + a, rD: 'Стартовый', rDw: 'Пак сегодня уже куплен · возвращайся завтра', rM: 'Выгодно', rL: '+40 % больше', rX: '🔥 Лучшая цена', rOk: (a) => '💵 +$' + a + ' добавлено!',
       vid: '📺 Посмотреть видео', vid2: '📺 Посмотреть видео', prem: '💎 Забрать (Премиум, без видео)', no: 'Нет, спасибо', next: '📺 Ещё одно видео…',
       bT: 'Удвой свой бонус!', bX: (a) => 'Посмотри короткое видео и получи ещё ' + a + '.', bOk: (a) => '🎁 +' + a + ' добавлено!',
       mT: 'Удвой добычу!', mX: (q) => 'Посмотри 1 короткое видео и получи ещё ' + q + '.', mOk: (q) => '⛏️ +' + q + ' добавлено к монетам!',
@@ -30,7 +30,7 @@
       skip: 'Видео не досмотрено: в этот раз без награды.', late: 'Для этого уже поздно.', done: 'Сегодня уже получено. Возвращайся завтра!', wait: 'Пока нет: один x2 каждые 3 минуты.', rich: 'Только когда не хватает денег.', err: 'Что-то пошло не так, попробуй ещё раз.',
     },
     en: {
-      rT: '💵 Recharge', rS: 'The video once a day, plus one Stars pack a day ($10,000 a week at most). Bought cash does not count in the rankings.', rC: (a) => 'Only $' + a + ' left this week', rC0: 'Weekly limit reached · back on Monday', rV: '📺 +$500 with a video', rVp: '💎 +$500 (Premium)', rVs: 'Free · once a day, under $1,000', rVr: 'Only when you have less than $1,000', rVd: 'Already taken today', rP: (a) => '+$' + a, rD: 'Starter', rDw: 'Pack taken today · come back tomorrow', rM: 'Good deal', rL: '+33 % more', rX: '🔥 Best value', rOk: (a) => '💵 +$' + a + ' added!',
+      rT: '💵 Recharge', rS: 'The video once a day, plus one Stars pack a day ($10,000 a week at most). Bought cash does not count in the rankings.', rC: (a) => 'Only $' + a + ' left this week', rC0: 'Weekly limit reached · back on Monday', rV: '📺 +$500 with a video', rVp: '💎 +$500 (Premium)', rVs: 'Free · once a day, under $1,000', rVr: 'Only when you have less than $1,000', rVd: 'Already taken today', rP: (a) => '+$' + a, rD: 'Starter', rDw: 'Pack taken today · come back tomorrow', rM: 'Good deal', rL: '+40 % more', rX: '🔥 Best value', rOk: (a) => '💵 +$' + a + ' added!',
       vid: '📺 Watch a video', vid2: '📺 Watch a video', prem: '💎 Take it (Premium, no video)', no: 'No thanks', next: '📺 One more video…',
       bT: 'Double your bonus!', bX: (a) => 'Watch a short video and get ' + a + ' more.', bOk: (a) => '🎁 +' + a + ' added!',
       mT: 'Double your harvest!', mX: (q) => 'Watch 1 short video and get ' + q + ' more.', mOk: (q) => '⛏️ +' + q + ' added to your coins!',
@@ -40,7 +40,7 @@
       skip: 'The video was not finished: no reward this time.', late: 'Too late for this one.', done: 'Already taken today. Come back tomorrow!', wait: 'Not yet: one x2 every 3 minutes.', rich: 'Only when you are short of cash.', err: 'Something went wrong, try again.',
     },
     fr: {
-      rT: '💵 Recharger', rS: 'La vidéo 1 fois par jour, plus 1 pack d\'étoiles par jour (10 000 $ par semaine au maximum). Le cash acheté ne compte pas au classement.', rC: (a) => 'Plus que ' + a + ' $ cette semaine', rC0: 'Limite de la semaine atteinte · retour lundi', rV: '📺 +500 $ avec une vidéo', rVp: '💎 +500 $ (Premium)', rVs: 'Gratuit · 1 fois par jour, sous 1 000 $', rVr: 'Seulement quand tu as moins de 1 000 $', rVd: 'Déjà pris aujourd\'hui', rP: (a) => '+' + a + ' $', rD: 'Le petit pack', rDw: 'Pack déjà pris aujourd\'hui · reviens demain', rM: 'Bonne affaire', rL: '+33 % en plus', rX: '🔥 Le meilleur prix', rOk: (a) => '💵 +' + a + ' $ ajoutés !',
+      rT: '💵 Recharger', rS: 'La vidéo 1 fois par jour, plus 1 pack d\'étoiles par jour (10 000 $ par semaine au maximum). Le cash acheté ne compte pas au classement.', rC: (a) => 'Plus que ' + a + ' $ cette semaine', rC0: 'Limite de la semaine atteinte · retour lundi', rV: '📺 +500 $ avec une vidéo', rVp: '💎 +500 $ (Premium)', rVs: 'Gratuit · 1 fois par jour, sous 1 000 $', rVr: 'Seulement quand tu as moins de 1 000 $', rVd: 'Déjà pris aujourd\'hui', rP: (a) => '+' + a + ' $', rD: 'Le petit pack', rDw: 'Pack déjà pris aujourd\'hui · reviens demain', rM: 'Bonne affaire', rL: '+40 % en plus', rX: '🔥 Le meilleur prix', rOk: (a) => '💵 +' + a + ' $ ajoutés !',
       vid: '📺 Regarder une vidéo', vid2: '📺 Regarder une vidéo', prem: '💎 Prendre (Premium, sans vidéo)', no: 'Non merci', next: '📺 Encore une vidéo…',
       bT: 'Double ton bonus !', bX: (a) => 'Regarde une courte vidéo et reçois encore ' + a + '.', bOk: (a) => '🎁 +' + a + ' ajoutés !',
       mT: 'Double ta récolte !', mX: (q) => 'Regarde 1 courte vidéo et reçois encore ' + q + '.', mOk: (q) => '⛏️ +' + q + ' ajoutés à tes coins !',
@@ -50,7 +50,7 @@
       skip: 'Vidéo pas terminée : pas de récompense cette fois.', late: 'Trop tard pour celle-ci.', done: 'Déjà pris aujourd\'hui. Reviens demain !', wait: 'Pas encore : un x2 toutes les 3 minutes.', rich: 'Seulement quand tu manques de cash.', err: 'Une erreur est survenue, réessaie.',
     },
     id: {
-      rT: '💵 Isi ulang', rS: 'Video 1 kali sehari, plus 1 paket bintang per hari (maks. $10,000 per minggu). Uang yang dibeli tidak dihitung di peringkat.', rC: (a) => 'Tersisa $' + a + ' minggu ini', rC0: 'Batas mingguan tercapai · kembali Senin', rV: '📺 +$500 dengan video', rVp: '💎 +$500 (Premium)', rVs: 'Gratis · 1 kali sehari, di bawah $1,000', rVr: 'Hanya saat uangmu kurang dari $1,000', rVd: 'Sudah diambil hari ini', rP: (a) => '+$' + a, rD: 'Paket kecil', rDw: 'Paket sudah diambil hari ini · kembali besok', rM: 'Hemat', rL: '+33 % lebih', rX: '🔥 Harga terbaik', rOk: (a) => '💵 +$' + a + ' ditambahkan!',
+      rT: '💵 Isi ulang', rS: 'Video 1 kali sehari, plus 1 paket bintang per hari (maks. $10,000 per minggu). Uang yang dibeli tidak dihitung di peringkat.', rC: (a) => 'Tersisa $' + a + ' minggu ini', rC0: 'Batas mingguan tercapai · kembali Senin', rV: '📺 +$500 dengan video', rVp: '💎 +$500 (Premium)', rVs: 'Gratis · 1 kali sehari, di bawah $1,000', rVr: 'Hanya saat uangmu kurang dari $1,000', rVd: 'Sudah diambil hari ini', rP: (a) => '+$' + a, rD: 'Paket kecil', rDw: 'Paket sudah diambil hari ini · kembali besok', rM: 'Hemat', rL: '+40 % lebih', rX: '🔥 Harga terbaik', rOk: (a) => '💵 +$' + a + ' ditambahkan!',
       vid: '📺 Tonton video', vid2: '📺 Tonton video', prem: '💎 Ambil (Premium, tanpa video)', no: 'Tidak, terima kasih', next: '📺 Satu video lagi…',
       bT: 'Gandakan bonusmu!', bX: (a) => 'Tonton video singkat dan dapatkan ' + a + ' lagi.', bOk: (a) => '🎁 +' + a + ' ditambahkan!',
       mT: 'Gandakan hasil tambangmu!', mX: (q) => 'Tonton 1 video singkat dan dapatkan ' + q + ' lagi.', mOk: (q) => '⛏️ +' + q + ' ditambahkan ke koinmu!',
@@ -60,7 +60,7 @@
       skip: 'Video tidak selesai: tidak ada hadiah kali ini.', late: 'Terlambat untuk yang ini.', done: 'Sudah diambil hari ini. Kembali besok!', wait: 'Belum: satu x2 setiap 3 menit.', rich: 'Hanya saat uangmu habis.', err: 'Terjadi kesalahan, coba lagi.',
     },
     ar: {
-      rT: '💵 شحن', rS: 'الفيديو مرة يوميًا، وحزمة نجوم واحدة يوميًا (10000$ أسبوعيًا كحد أقصى). المال المشترى لا يُحسب في الترتيب.', rC: (a) => 'متبقٍ ' + a + '$ هذا الأسبوع', rC0: 'تم بلوغ حد الأسبوع · عد يوم الاثنين', rV: '📺 +500$ مع فيديو', rVp: '💎 +500$ (بريميوم)', rVs: 'مجانًا · مرة يوميًا، تحت 1000$', rVr: 'فقط عندما يكون لديك أقل من 1000$', rVd: 'تم أخذها اليوم', rP: (a) => '+' + a + '$', rD: 'الحزمة الصغيرة', rDw: 'تم أخذ حزمة اليوم · عد غدًا', rM: 'صفقة جيدة', rL: '+33 % أكثر', rX: '🔥 أفضل سعر', rOk: (a) => '💵 أُضيفت +' + a + '$!',
+      rT: '💵 شحن', rS: 'الفيديو مرة يوميًا، وحزمة نجوم واحدة يوميًا (10000$ أسبوعيًا كحد أقصى). المال المشترى لا يُحسب في الترتيب.', rC: (a) => 'متبقٍ ' + a + '$ هذا الأسبوع', rC0: 'تم بلوغ حد الأسبوع · عد يوم الاثنين', rV: '📺 +500$ مع فيديو', rVp: '💎 +500$ (بريميوم)', rVs: 'مجانًا · مرة يوميًا، تحت 1000$', rVr: 'فقط عندما يكون لديك أقل من 1000$', rVd: 'تم أخذها اليوم', rP: (a) => '+' + a + '$', rD: 'الحزمة الصغيرة', rDw: 'تم أخذ حزمة اليوم · عد غدًا', rM: 'صفقة جيدة', rL: '+40 % أكثر', rX: '🔥 أفضل سعر', rOk: (a) => '💵 أُضيفت +' + a + '$!',
       vid: '📺 شاهد فيديو', vid2: '📺 شاهد فيديو', prem: '💎 خذها (بريميوم، بدون فيديو)', no: 'لا شكرًا', next: '📺 فيديو آخر…',
       bT: 'ضاعف مكافأتك!', bX: (a) => 'شاهد فيديو قصيرًا واحصل على ' + a + ' إضافية.', bOk: (a) => '🎁 أُضيفت +' + a + '!',
       mT: 'ضاعف حصادك!', mX: (q) => 'شاهد فيديو قصيرًا واحصل على ' + q + ' إضافية.', mOk: (q) => '⛏️ أُضيفت +' + q + ' إلى عملاتك!',
@@ -215,7 +215,11 @@
 
   // 18 oct 2026 (Jeremy): everything in one recharge window (the game's rchBuy now opens it): the video (+$500, once a day, under $1,000,
   // free for Premium) and ONE Stars pack a day: 10 ⭐ $1,000, 25 ⭐ $3,000, 50 ⭐ $7,000, $10,000 a week at most (10h15, mct_recharge_pack)
-  const PACKS = [['s', 10, 1000, 'rD'], ['m', 25, 3000, 'rM'], ['l', 50, 7000, 'rX']];
+  const PACKS = [['s', 10, 1000, 'rD'], ['m', 25, 3000, 'rM'], ['l', 50, 7000, 'rL'], ['xl', 100, 16000, 'rX']];  /* 30 oct 2026 (17h, Jeremy): XL pack 100 ⭐ $16,000 (best value) */
+  // 30 oct 2026 (17h, Jeremy): the first Stars pack gives double cash (mct_recharge_pack); shown on every pack while it is possible
+  const FX = { fr: ['🎁 1er achat : cash doublé', 'x2'], en: ['🎁 First purchase: double cash', 'x2'], ru: ['🎁 Первая покупка: деньги x2', 'x2'], id: ['🎁 Pembelian pertama: uang x2', 'x2'], ar: ['🎁 أول شراء: المال مضاعف', 'x2'], fa: ['🎁 اولین خرید: پول دو برابر', 'x2'] };
+  // 30 oct 2026: the packs are unlimited (no more "1 pack a day, $10,000 a week")
+  const RS = { fr: 'Achète autant de packs que tu veux. Le cash acheté ne compte pas au classement.', en: 'Buy as many packs as you like. Bought cash does not count in the rankings.', ru: 'Покупай сколько угодно паков. Купленные деньги не учитываются в рейтингах.', id: 'Beli paket sebanyak yang kamu mau. Uang yang dibeli tidak dihitung di peringkat.', ar: 'اشترِ ما تشاء من الحزم. المال المشترى لا يُحتسب في الترتيب.', fa: 'هر چند بسته که بخواهی بخر. پول خریده‌شده در رتبه‌بندی حساب نمی‌شود.' };
   const nfmt = (n) => Number(n).toLocaleString(lg() === 'fr' ? 'fr-FR' : 'en-US');
   async function pay(pack, after) {
     let r = null; try { r = await api('recharge', { pack }); } catch (e) {}
@@ -241,9 +245,9 @@
     const d = document.createElement('div'); d.id = 'rwm';
     d.style.cssText = 'position:fixed;inset:0;z-index:60;background:rgba(5,3,15,.72);display:flex;align-items:flex-end;justify-content:center';
     d.innerHTML = '<div style="width:100%;max-width:520px;max-height:88vh;overflow:auto;background:var(--night,#140c2c);border:1px solid var(--line,rgba(255,255,255,.12));border-radius:22px 22px 0 0;padding:20px 16px calc(22px + env(safe-area-inset-bottom))">'
-      + '<h2 style="margin:0 0 4px;text-align:center">' + ec(T.rT) + '</h2><p class="hint" style="margin:0 0 14px;text-align:center">' + ec(T.rS) + '</p>'
+      + '<h2 style="margin:0 0 4px;text-align:center">' + ec(T.rT) + '</h2><p class="hint" style="margin:0 0 14px;text-align:center">' + ec(RS[lg()] || RS.en) + '</p>'
       + (prem() ? row('v', '💎', T.rVp.replace(/^\S+ /, ''), vidWhy, vidOk) : '')  // 28 oct 2026 (16h12, Jeremy): no more recharge video, Premium keeps its free recharge
-      + PACKS.map((p) => row(p[0], '⭐', T.rP(nfmt(p[2])) + ' · ' + p[1] + ' ⭐', why(p), dayOk && p[2] <= left)).join('')
+      + PACKS.map((p) => { const fx = ri && ri.first ? (FX[lg()] || FX.en) : null; return row(p[0], '⭐', T.rP(nfmt(p[2] * (fx ? 2 : 1))) + ' · ' + p[1] + ' ⭐', fx ? fx[0] : why(p), dayOk && p[2] <= left, fx ? fx[1] : ''); }).join('')
       + '<button class="ghost" id="rwn" style="width:100%;margin-top:10px">' + ec(T.no) + '</button></div>';
     d.onclick = (ev) => { if (ev.target === d) close(); };
     document.body.appendChild(d);
