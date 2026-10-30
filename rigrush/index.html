@@ -225,6 +225,8 @@ body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#0407
       <div class="mini bo" id="boB" hidden><div class="ic">🎬</div><div style="min-width:0"><div class="t">Boost x2</div><div class="s" id="boS"></div></div><div class="bc" id="boC"></div></div>
       <div class="mini pp" id="ppB"><div class="ic">🎯</div><div style="min-width:0"><div class="t" id="ppT"></div><div class="s" id="ppS"></div></div><div class="bc" id="ppC">🎁 GO</div></div>
     </div>
+    <!-- 30 oct 2026 (19h20, Jeremy): Adsgram sponsored tasks (block task-56937); the reward comes from the server (rigrush ?ads=task, rr_task_reward) -->
+    <div id="rrtask" hidden style="margin-top:10px;padding:12px 14px;border-radius:16px;background:var(--card);border:1.5px solid #3ddc97"></div>
   </div>
 
   <div class="page" id="pg-up" hidden>
@@ -1009,6 +1011,33 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
     var u = tw.initDataUnsafe && tw.initDataUnsafe.user; if (!u || u.allows_write_to_pm) return;
     try { if (localStorage.getItem('rr_wa')) return; localStorage.setItem('rr_wa', '1'); } catch (e) {}
     setTimeout(function () { try { tw.requestWriteAccess(function () {}); } catch (e) {} }, 2500);
+  } catch (e) {}
+})();
+</script>
+<script>
+// 30 oct 2026 (19h20, Jeremy): Adsgram sponsored tasks under the x2 boost: RIGZ worth 30 min of mining each, 20 a day, 30 s between two
+(function () {
+  try {
+    var box = document.getElementById('rrtask'); var tw = window.Telegram && Telegram.WebApp;
+    if (!box || !(tw && tw.initData)) return;
+    var fr = /^fr/i.test((tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || '');
+    var T = fr ? ['🎯 Tâches sponsorisées', '+30 min de minage', 'Go', 'Récupérer', 'Fait ✅', '⛏️ RIGZ ajoutés !'] : ['🎯 Sponsored tasks', '+30 min of mining', 'Go', 'Claim', 'Done ✅', '⛏️ RIGZ added!'];
+    box.innerHTML = '<b style="display:block;font-size:15px;margin-bottom:8px">' + T[0] + '</b>'
+      + '<adsgram-task data-block-id="task-56937" style="--adsgram-task-font-size:14px;--adsgram-task-icon-size:38px;--adsgram-task-button-width:80px;display:block">'
+      + '<span slot="reward" style="color:#3ddc97;font-weight:800">' + T[1] + '</span>'
+      + '<div slot="button" style="background:#3ddc97;color:#06150e;font-weight:800;border-radius:10px;padding:8px 0;text-align:center">' + T[2] + '</div>'
+      + '<div slot="claim" style="background:#ffc83d;color:#1a1300;font-weight:800;border-radius:10px;padding:8px 0;text-align:center">' + T[3] + '</div>'
+      + '<div slot="done" style="color:#8fa197;font-weight:700;text-align:center">' + T[4] + '</div></adsgram-task>';
+    var el = box.querySelector('adsgram-task');
+    el.addEventListener('onBannerNotFound', function () { box.hidden = true; });
+    el.addEventListener('onError', function () { box.hidden = true; });
+    el.addEventListener('reward', function () {
+      try { toast(T[5]); } catch (e) {}
+      setTimeout(function () { try { api('state').then(function (r) { try { take(r); } catch (e) {} }); } catch (e) {} }, 2500);  // the RIGZ come from the server (reward URL)
+    });
+    var show = function () { box.hidden = false; };
+    if (window.Adsgram) show();
+    else { var s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = show; s.onerror = function () { box.hidden = true; }; document.head.appendChild(s); }
   } catch (e) {}
 })();
 </script>
