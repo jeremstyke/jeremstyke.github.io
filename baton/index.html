@@ -3010,5 +3010,87 @@ function nudge() {
   setInterval(paint, 1000);
 })();
 </script>
+<script>
+// 30 oct 2026 (23h28, Jeremy): "The Last Click", a separate screen opened only from the Club's message (startapp=lc), never from the app's menus.
+// Each click = 1 Adsgram rewarded video; the click itself is counted by the server when Adsgram confirms the video (bt_ads_reward, mode 'lc').
+(function () {
+  var tw = window.Telegram && Telegram.WebApp;
+  var sp = (tw && tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '';
+  if (sp !== 'lc') return;
+  var TX = {
+    fr: { t: 'Le Dernier Clic', pot: 'Cagnotte', left: 'Temps restant', wait: 'En attente du premier clic', last: 'Dernier clic', nobody: 'personne', you: 'toi', mine: function (a, b) { return 'Tes clics : ' + a + '/' + b; }, btn: '⚡ Cliquer (1 vidéo)', btnWait: '⏳ Validation de la vidéo…', rules: 'Chaque clic remet le chrono à 10:00 et ajoute 1 000 $BATON à la cagnotte. Quand le chrono tombe à zéro, le dernier qui a cliqué gagne toute la cagnotte.', ok: '⚡ C\'est toi le dernier ! Garde un œil sur le chrono.', late: 'La vidéo est validée, ton clic arrive dans quelques secondes.', noVid: 'Vidéo pas terminée : clic non compté.', max: 'Tu as atteint 20 clics sur cette partie.', over: 'Partie terminée', won: function (n, p) { return '🏆 ' + n + ' a gagné ' + p + ' $BATON'; }, youWon: '🏆 C\'est toi ! Les $BATON sont sur ton solde.', next: 'Nouvelle partie dans', close: 'Fermer', game: '🏃 Ouvrir Pass The Baton' },
+    en: { t: 'The Last Click', pot: 'Pot', left: 'Time left', wait: 'Waiting for the first click', last: 'Last click', nobody: 'nobody yet', you: 'you', mine: function (a, b) { return 'Your clicks: ' + a + '/' + b; }, btn: '⚡ Click (1 video)', btnWait: '⏳ Checking the video…', rules: 'Each click resets the timer to 10:00 and adds 1,000 $BATON to the pot. When it reaches zero, the last one to click wins the whole pot.', ok: '⚡ You are the last one! Keep an eye on the timer.', late: 'Video confirmed, your click arrives in a few seconds.', noVid: 'Video not finished: click not counted.', max: 'You reached 20 clicks in this round.', over: 'Round over', won: function (n, p) { return '🏆 ' + n + ' won ' + p + ' $BATON'; }, youWon: '🏆 It\'s you! The $BATON are on your balance.', next: 'New round in', close: 'Close', game: '🏃 Open Pass The Baton' }
+  };
+  var css = document.createElement('style');
+  css.textContent = '#lcScr{position:fixed;inset:0;z-index:9000;background:radial-gradient(120% 70% at 50% 0%,#3b1658 0%,#140a20 60%);color:#fff7ef;display:flex;flex-direction:column;align-items:center;gap:18px;padding:calc(22px + env(safe-area-inset-top,0px)) max(18px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px));box-sizing:border-box;overflow-y:auto;text-align:center;font-family:inherit}'
+    + '#lcScr h1{margin:6px 0 0;font-size:28px;font-weight:900;letter-spacing:.5px}#lcScr .lb{font-size:13px;opacity:.75;text-transform:uppercase;letter-spacing:1px}'
+    + '#lcScr .pot{font-size:44px;font-weight:900;color:#ffc531;font-variant-numeric:tabular-nums;line-height:1}#lcScr .clk{font-size:64px;font-weight:900;font-variant-numeric:tabular-nums;line-height:1}#lcScr .clk.hot{color:#ff5a5f}'
+    + '#lcScr .card{width:100%;max-width:420px;display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12)}'
+    + '#lcBtn{width:100%;max-width:420px;min-height:64px;border:0;border-radius:20px;background:linear-gradient(180deg,#ffd45a,#ff9a2f);color:#2a1300;font-size:20px;font-weight:900;box-shadow:0 10px 30px rgba(255,154,47,.35)}#lcBtn:disabled{opacity:.55}'
+    + '#lcScr .rules{max-width:420px;font-size:13px;line-height:1.5;opacity:.8}#lcScr .lnk{background:none;border:0;color:#ffc531;font-weight:700;font-size:14px;min-height:44px}';
+  document.head.appendChild(css);
+  var L = function () { var B = window.BT; return TX[B && B.lang === 'fr' ? 'fr' : 'en']; };
+  var fmt = function (n) { var B = window.BT; return Math.round(Number(n) || 0).toLocaleString(B && B.lang === 'fr' ? 'fr-FR' : 'en-US'); };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var st = null, skew = 0, busy = false, scr = null;
+  function el() {
+    if (scr) return scr;
+    scr = document.createElement('div'); scr.id = 'lcScr'; scr.setAttribute('role', 'dialog'); scr.setAttribute('aria-label', L().t);
+    document.body.appendChild(scr); return scr;
+  }
+  function mmss(ms) { var s = Math.max(0, Math.ceil(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+  function draw() {
+    var T = L(), s = el(); if (!st) { s.innerHTML = '<h1>⚡ ' + esc(T.t) + '</h1><div class="lb">…</div>'; return; }
+    var now = Date.now() + skew;
+    if (!st.live) {
+      s.innerHTML = '<h1>⚡ ' + esc(T.t) + '</h1><div class="lb">' + esc(T.over) + '</div>'
+        + '<div class="card"><b style="font-size:18px">' + esc(st.me_won ? T.youWon : T.won(st.winner || '?', fmt(st.won))) + '</b></div>'
+        + '<div class="lb">' + esc(T.next) + '</div><div class="clk">' + mmss((st.next || now) - now) + '</div>'
+        + '<button class="lnk" id="lcGame">' + esc(T.game) + '</button>';
+    } else {
+      var left = st.ends ? st.ends - now : null, hot = left != null && left < 60000;
+      var full = st.mine >= st.max;
+      s.innerHTML = '<h1>⚡ ' + esc(T.t) + '</h1>'
+        + '<div><div class="lb">' + esc(T.pot) + '</div><div class="pot">' + fmt(st.pot) + ' $BATON</div></div>'
+        + '<div><div class="lb">' + esc(st.ends ? T.left : T.wait) + '</div><div class="clk' + (hot ? ' hot' : '') + '">' + (st.ends ? mmss(left) : '10:00') + '</div></div>'
+        + '<div class="card"><span>' + esc(T.last) + ' : <b>' + esc(st.last_me ? T.you : (st.last || T.nobody)) + '</b></span><small style="opacity:.75">' + esc(T.mine(st.mine, st.max)) + '</small></div>'
+        + '<button id="lcBtn" type="button"' + (busy || full ? ' disabled' : '') + '>' + esc(busy ? T.btnWait : full ? T.max : T.btn) + '</button>'
+        + '<p class="rules">' + esc(T.rules) + '</p>'
+        + '<button class="lnk" id="lcGame">' + esc(T.game) + '</button>';
+      var b = document.getElementById('lcBtn'); if (b) b.onclick = click;
+    }
+    var g = document.getElementById('lcGame'); if (g) g.onclick = function () { try { window.BT.hap(); } catch (e) {} if (scr) { scr.remove(); scr = null; } clearInterval(window.__lcT); clearInterval(window.__lcD); };
+  }
+  function load() {
+    var B = window.BT; if (!B) return Promise.resolve();
+    return B.api('lc').then(function (r) { if (r && r.ok) { st = r; if (r.now) skew = r.now - Date.now(); draw(); } return r; }).catch(function () {});
+  }
+  function click() {
+    var B = window.BT, T = L(); if (busy || !B || !st || !st.live) return;
+    busy = true; draw(); try { B.hap(); } catch (e) {}
+    var before = st.clicks;
+    B.api('vid', { mode: 'lc' }).then(function (vr) {
+      if (vr && vr.error === 'wait') { busy = false; draw(); B.toast((B.lang === 'fr' ? '⏳ Prochaine vidéo dans ' : '⏳ Next video in ') + Math.max(1, Math.ceil(((Number(vr.next) || 0) - Date.now()) / 1000)) + ' s'); return; }
+      return window.__showRw().then(function () {
+        var n = 0;
+        var w = setInterval(function () {
+          n++;
+          load().then(function () {
+            if (st && st.live && st.last_me && st.clicks > before) { clearInterval(w); busy = false; draw(); try { B.hap('ok'); } catch (e) {} B.toast(T.ok); }
+            else if (n >= 10) { clearInterval(w); busy = false; draw(); B.toast(T.late); }
+          });
+        }, 2000);
+      }, function () { busy = false; draw(); B.toast(T.noVid); });
+    }).catch(function () { busy = false; draw(); });
+  }
+  function start() {
+    if (!window.BT) { setTimeout(start, 300); return; }
+    draw(); load();
+    window.__lcT = setInterval(function () { if (!busy) load(); }, 3000);
+    window.__lcD = setInterval(draw, 1000);
+  }
+  start();
+})();
+</script>
 </body>
 </html>
