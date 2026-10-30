@@ -652,7 +652,7 @@ $('boB').onclick = async () => {
     await agLoad();
     await window.Adsgram.init({ blockId: '55777' }).show();
   } catch (e) {
-    if (e && e.done === false && e.state !== 'load' && !/no ad|no banner|not found/i.test(String(e.description || ''))) ok = false; else via = 'noad';
+    via = 'noad';  /* 30 oct 2026 (18h41, Jeremy): Adsgram showed "no video": the x2 is given anyway, whatever the reason */
   }
   if (!ok) { window.__boLock = Date.now() + 60000; window.__boBusy = false; $('boB').style.pointerEvents = ''; $('boB').style.opacity = ''; toast(LANG === 'fr' ? 'Vidéo pas terminée : pas de x2. Réessaie dans 1 min.' : 'Video not finished: no x2. Try again in 1 min.'); return }
   const r = await api('boost', { via }); take(r);
