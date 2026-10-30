@@ -666,8 +666,8 @@ $('boB').onclick = async () => {
 };
 // 30 oct 2026 (0h39, Jeremy): sponsored task = Monetag rewarded popup (zone 12149624, 'pop'): +15 min of mining, 20 a day, 1 min between two (server rr_api 'pop')
 {
-  const PT = { fr: ['RIGZ gratuits', '1 pub = +15 min', 'Pas de pub dispo, réessaie plus tard.', '⏳ Attends un peu avant la prochaine.', 'Plus de tâche aujourd\'hui, reviens demain.', 'RIGZ gagnés !'],
-    en: ['Free RIGZ', '1 ad = +15 min', 'No ad right now, try again later.', '⏳ Wait a bit before the next one.', 'No more tasks today, come back tomorrow.', 'RIGZ earned!'] };
+  const PT = { fr: ['RIGZ gratuits', '1 vidéo = +15 min', 'Pas de pub dispo, réessaie plus tard.', '⏳ Attends un peu avant la prochaine.', 'Plus de tâche aujourd\'hui, reviens demain.', 'RIGZ gagnés !'],
+    en: ['Free RIGZ', '1 video = +15 min', 'No ad right now, try again later.', '⏳ Wait a bit before the next one.', 'No more tasks today, come back tomorrow.', 'RIGZ earned!'] };
   const P = PT[LANG] || PT.en;
   $('ppT').textContent = P[0]; $('ppS').textContent = P[1];
   let busy = false;
@@ -686,7 +686,19 @@ $('boB').onclick = async () => {
     if (typeof window[fn] !== 'function') { ppLoad(); toast(LANG === 'fr' ? '⏳ La pub se charge, réessaie dans 2 s' : '⏳ The ad is loading, try again in 2 s'); return; }
     busy = true;
     try { localStorage.setItem('rr_pp_at', String(Date.now())); } catch (e) {}  // the minute starts now: no second tap
-    try { await window[fn]('pop'); }
+    // 30 oct 2026 (1h06, Jeremy): a simple rewarded video (rewarded interstitial) instead of the popup; the RIGZ come when the video ends,
+    // when the player comes back (5 s at least after the tap) or after 20 s, as for the boost (Monetag does not always say when it ends)
+    const t0 = Date.now();
+    try {
+      await new Promise((res, rej) => {
+        let done = false; const fin = (f) => { if (done) return; done = true; document.removeEventListener('visibilitychange', vis); try { TW && TW.offEvent && TW.offEvent('activated', act); } catch (e) {} clearTimeout(to); f(); };
+        const vis = () => { if (!document.hidden && Date.now() - t0 > 5000) fin(res); };
+        const act = () => { if (Date.now() - t0 > 5000) fin(res); };
+        const to = setTimeout(() => fin(res), 20000);
+        document.addEventListener('visibilitychange', vis); try { TW && TW.onEvent && TW.onEvent('activated', act); } catch (e) {}
+        (() => { try { return Promise.resolve(window[fn]({ ymid: String((ST.me && ST.me.id) || '') })); } catch (e) { return Promise.reject(e); } })().then(() => fin(res), (e) => fin(() => rej(e)));
+      });
+    }
     catch (e) { try { localStorage.removeItem('rr_pp_at'); } catch (x) {} toast(P[2]); busy = false; return; }
     const r = await api('pop'); take(r);
     if (r && r.pop) {  // 30 oct 2026 (0h45, Jeremy): the gain stays on screen until tapped (the player was away on the ad page and missed the toast)
