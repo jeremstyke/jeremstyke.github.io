@@ -659,7 +659,7 @@ $('boB').onclick = async () => {
       const act = () => { if (Date.now() - t0 > 5000) { window.__via = 'back'; fin(res); } };
       const to = setTimeout(() => { window.__via = 'time'; fin(res); }, 45000);  /* 30 oct 2026 (11h48, Jeremy): reward even without Monetag's confirmation (back after 5 s or 45 s) */
       document.addEventListener('visibilitychange', vis); try { TW && TW.onEvent && TW.onEvent('activated', act); } catch (e) {}
-      (() => { try { return Promise.resolve(window[fn]({ ymid: String((ST.me && ST.me.id) || '') })); } catch (e) { return Promise.reject(e); } })().then(() => { window.__via = 'ad'; fin(res); }, (e) => fin(() => rej(e)));
+      (() => { try { return Promise.resolve(window[fn]({ ymid: String((ST.me && ST.me.id) || '') })); } catch (e) { return Promise.reject(e); } })().then(() => { window.__via = 'ad'; fin(res); }, () => { window.__via = 'err'; fin(res); } /* 30 oct 2026 (14h23, Jeremy): Monetag has no ad to show: the reward is given anyway */);
     });
   } catch (e) { failed = true; }
   if (failed) { window.__boLock = Date.now() + 60000; window.__boBusy = false; $('boB').style.pointerEvents = ''; $('boB').style.opacity = ''; toast(LANG === 'fr' ? 'Pas de vidéo dispo, réessaie dans 1 min.' : 'No video right now, try again in 1 min.'); return }
@@ -700,7 +700,7 @@ $('boB').onclick = async () => {
         const act = () => { if (Date.now() - t0 > 5000) { window.__via = 'back'; fin(res); } };
         const to = setTimeout(() => { window.__via = 'time'; fin(res); }, 45000);  /* 30 oct 2026 (11h48, Jeremy): reward even without Monetag's confirmation (back after 5 s or 45 s) */
         document.addEventListener('visibilitychange', vis); try { TW && TW.onEvent && TW.onEvent('activated', act); } catch (e) {}
-        (() => { try { return Promise.resolve(window[fn]({ ymid: String((ST.me && ST.me.id) || '') })); } catch (e) { return Promise.reject(e); } })().then(() => { window.__via = 'ad'; fin(res); }, (e) => fin(() => rej(e)));
+        (() => { try { return Promise.resolve(window[fn]({ ymid: String((ST.me && ST.me.id) || '') })); } catch (e) { return Promise.reject(e); } })().then(() => { window.__via = 'ad'; fin(res); }, () => { window.__via = 'err'; fin(res); } /* 30 oct 2026 (14h23, Jeremy): Monetag has no ad to show: the reward is given anyway */);
       });
     }
     catch (e) { try { localStorage.removeItem('rr_pp_at'); } catch (x) {} toast(P[2]); busy = false; return; }
