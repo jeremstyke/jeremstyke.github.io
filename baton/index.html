@@ -3018,8 +3018,8 @@ function nudge() {
   var sp = (tw && tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '';
   if (sp !== 'lc') return;
   var TX = {
-    fr: { t: 'Le Dernier Clic', pot: 'Cagnotte', left: 'Temps restant', wait: 'En attente du premier clic', last: 'Dernier clic', nobody: 'personne', you: 'toi', mine: function (a, b) { return 'Tes clics : ' + a + '/' + b; }, btn: '⚡ Cliquer (1 vidéo)', btnWait: '⏳ Validation de la vidéo…', rules: 'Chaque clic remet le chrono à 10:00 et ajoute 1 000 $BATON à la cagnotte. Quand le chrono tombe à zéro, le dernier qui a cliqué gagne toute la cagnotte.', ok: '⚡ C\'est toi le dernier ! Garde un œil sur le chrono.', late: 'La vidéo est validée, ton clic arrive dans quelques secondes.', noVid: 'Vidéo pas terminée : clic non compté.', max: 'Tu as atteint 20 clics sur cette partie.', over: 'Partie terminée', won: function (n, p) { return '🏆 ' + n + ' a gagné ' + p + ' $BATON'; }, youWon: '🏆 C\'est toi ! Les $BATON sont sur ton solde.', next: 'Nouvelle partie dans', close: 'Fermer', game: '🏃 Ouvrir Pass The Baton' },
-    en: { t: 'The Last Click', pot: 'Pot', left: 'Time left', wait: 'Waiting for the first click', last: 'Last click', nobody: 'nobody yet', you: 'you', mine: function (a, b) { return 'Your clicks: ' + a + '/' + b; }, btn: '⚡ Click (1 video)', btnWait: '⏳ Checking the video…', rules: 'Each click resets the timer to 10:00 and adds 1,000 $BATON to the pot. When it reaches zero, the last one to click wins the whole pot.', ok: '⚡ You are the last one! Keep an eye on the timer.', late: 'Video confirmed, your click arrives in a few seconds.', noVid: 'Video not finished: click not counted.', max: 'You reached 20 clicks in this round.', over: 'Round over', won: function (n, p) { return '🏆 ' + n + ' won ' + p + ' $BATON'; }, youWon: '🏆 It\'s you! The $BATON are on your balance.', next: 'New round in', close: 'Close', game: '🏃 Open Pass The Baton' }
+    fr: { t: 'Le Dernier Clic', pot: 'Cagnotte', left: 'Temps restant', wait: 'En attente du premier clic', last: 'Dernier clic', nobody: 'personne', you: 'toi', mine: function (a, b) { return 'Tes clics : ' + a + '/' + b; }, btn: '⚡ Cliquer', btnWait: '⏳ …', rules: 'Chaque clic remet le chrono à 10:00 et ajoute 1 000 $BATON à la cagnotte. Quand le chrono tombe à zéro, le dernier qui a cliqué gagne toute la cagnotte.', ok: '⚡ C\'est toi le dernier ! Garde un œil sur le chrono.', late: 'La vidéo est validée, ton clic arrive dans quelques secondes.', noVid: 'Vidéo pas terminée : clic non compté.', max: 'Tu as atteint 20 clics sur cette partie.', over: 'Partie terminée', won: function (n, p) { return '🏆 ' + n + ' a gagné ' + p + ' $BATON'; }, youWon: '🏆 C\'est toi ! Les $BATON sont sur ton solde.', next: 'Nouvelle partie dans', close: 'Fermer', game: '🏃 Ouvrir Pass The Baton' },
+    en: { t: 'The Last Click', pot: 'Pot', left: 'Time left', wait: 'Waiting for the first click', last: 'Last click', nobody: 'nobody yet', you: 'you', mine: function (a, b) { return 'Your clicks: ' + a + '/' + b; }, btn: '⚡ Click', btnWait: '⏳ …', rules: 'Each click resets the timer to 10:00 and adds 1,000 $BATON to the pot. When it reaches zero, the last one to click wins the whole pot.', ok: '⚡ You are the last one! Keep an eye on the timer.', late: 'Video confirmed, your click arrives in a few seconds.', noVid: 'Video not finished: click not counted.', max: 'You reached 20 clicks in this round.', over: 'Round over', won: function (n, p) { return '🏆 ' + n + ' won ' + p + ' $BATON'; }, youWon: '🏆 It\'s you! The $BATON are on your balance.', next: 'New round in', close: 'Close', game: '🏃 Open Pass The Baton' }
   };
   var css = document.createElement('style');
   css.textContent = '#lcScr{position:fixed;inset:0;z-index:9000;background:radial-gradient(120% 70% at 50% 0%,#3b1658 0%,#140a20 60%);color:#fff7ef;display:flex;flex-direction:column;align-items:center;gap:18px;padding:calc(22px + env(safe-area-inset-top,0px)) max(18px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px));box-sizing:border-box;overflow-y:auto;text-align:center;font-family:inherit}'
@@ -3069,19 +3069,20 @@ function nudge() {
     var B = window.BT, T = L(); if (busy || !B || !st || !st.live) return;
     busy = true; draw(); try { B.hap(); } catch (e) {}
     var before = st.clicks;
-    B.api('vid', { mode: 'lc' }).then(function (vr) {
-      if (vr && vr.error === 'wait') { busy = false; draw(); B.toast((B.lang === 'fr' ? '⏳ Prochaine vidéo dans ' : '⏳ Next video in ') + Math.max(1, Math.ceil(((Number(vr.next) || 0) - Date.now()) / 1000)) + ' s'); return; }
-      return window.__showRw().then(function () {
-        var n = 0;
-        var w = setInterval(function () {
-          n++;
-          load().then(function () {
-            if (st && st.live && st.last_me && st.clicks > before) { clearInterval(w); busy = false; draw(); try { B.hap('ok'); } catch (e) {} B.toast(T.ok); }
-            else if (n >= 10) { clearInterval(w); busy = false; draw(); B.toast(T.late); }
-          });
-        }, 2000);
-      }, function () { busy = false; draw(); B.toast(T.noVid); });
-    }).catch(function () { busy = false; draw(); });
+    // 30 oct 2026 (23h37, Jeremy): one Adsgram interstitial per click (lighter than a rewarded video), then the click is counted
+    var go = function () {
+      B.api('lc_click').then(function (r) {
+        busy = false; if (r && r.state && r.state.ok) { st = r.state; }
+        if (r && r.ok) { try { B.hap('ok'); } catch (e) {} B.toast(T.ok); }
+        else if (r && r.error === 'wait') B.toast(B.lang === 'fr' ? '⏳ Attends 30 s entre deux clics.' : '⏳ Wait 30 s between two clicks.');
+        else if (r && r.error === 'max') B.toast(T.max);
+        else B.toast(B.lang === 'fr' ? 'Trop tard, la partie est finie !' : 'Too late, the round is over!');
+        draw();
+      }).catch(function () { busy = false; draw(); });
+    };
+    var show = function () { try { window.Adsgram.init({ blockId: 'int-55461' }).show().then(go, go); } catch (e) { go(); } };
+    if (window.Adsgram) show();
+    else { var s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = show; s.onerror = go; document.head.appendChild(s); }
   }
   function start() {
     if (!window.BT) { setTimeout(start, 300); return; }
