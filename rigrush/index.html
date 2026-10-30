@@ -651,15 +651,15 @@ $('boB').onclick = async () => {
   try {
     await new Promise((res, rej) => {
       let done = false; const fin = (f) => { if (done) return; done = true; document.removeEventListener('visibilitychange', vis); try { TW && TW.offEvent && TW.offEvent('activated', act); } catch (e) {} clearTimeout(to); f(); };
-      const vis = () => { if (!document.hidden && Date.now() - t0 > 5000) fin(res); };
-      const act = () => { if (Date.now() - t0 > 5000) fin(res); };
-      const to = setTimeout(() => fin(res), 20000);
+      const vis = () => { if (!document.hidden && Date.now() - t0 > 5000) { window.__via = 'back'; fin(res); } };
+      const act = () => { if (Date.now() - t0 > 5000) { window.__via = 'back'; fin(res); } };
+      const to = setTimeout(() => { window.__via = 'time'; fin(res); }, 20000);
       document.addEventListener('visibilitychange', vis); try { TW && TW.onEvent && TW.onEvent('activated', act); } catch (e) {}
-      (() => { try { return Promise.resolve(window[fn]({ ymid: String((ST.me && ST.me.id) || '') })); } catch (e) { return Promise.reject(e); } })().then(() => fin(res), (e) => fin(() => rej(e)));
+      (() => { try { return Promise.resolve(window[fn]({ ymid: String((ST.me && ST.me.id) || '') })); } catch (e) { return Promise.reject(e); } })().then(() => { window.__via = 'ad'; fin(res); }, (e) => fin(() => rej(e)));
     });
   } catch (e) { failed = true; }
   if (failed) { window.__boBusy = false; $('boB').style.pointerEvents = ''; $('boB').style.opacity = ''; toast(LANG === 'fr' ? 'Pas de vidéo dispo, réessaie plus tard.' : 'No video right now, try again later.'); return }
-  const r = await api('boost'); take(r);
+  const r = await api('boost', { via: window.__via || '' }); take(r);
   window.__boBusy = false; $('boB').style.pointerEvents = ''; $('boB').style.opacity = '';
   if (ST.me.boost_end && now() < T(ST.me.boost_end)) { haptic('heavy'); toast(tr('t_boost')); }
   else toast(LANG === 'fr' ? 'Boost impossible pour l\'instant, réessaie.' : 'Boost not possible right now, try again.');
@@ -692,15 +692,15 @@ $('boB').onclick = async () => {
     try {
       await new Promise((res, rej) => {
         let done = false; const fin = (f) => { if (done) return; done = true; document.removeEventListener('visibilitychange', vis); try { TW && TW.offEvent && TW.offEvent('activated', act); } catch (e) {} clearTimeout(to); f(); };
-        const vis = () => { if (!document.hidden && Date.now() - t0 > 5000) fin(res); };
-        const act = () => { if (Date.now() - t0 > 5000) fin(res); };
-        const to = setTimeout(() => fin(res), 20000);
+        const vis = () => { if (!document.hidden && Date.now() - t0 > 5000) { window.__via = 'back'; fin(res); } };
+        const act = () => { if (Date.now() - t0 > 5000) { window.__via = 'back'; fin(res); } };
+        const to = setTimeout(() => { window.__via = 'time'; fin(res); }, 20000);
         document.addEventListener('visibilitychange', vis); try { TW && TW.onEvent && TW.onEvent('activated', act); } catch (e) {}
-        (() => { try { return Promise.resolve(window[fn]({ ymid: String((ST.me && ST.me.id) || '') })); } catch (e) { return Promise.reject(e); } })().then(() => fin(res), (e) => fin(() => rej(e)));
+        (() => { try { return Promise.resolve(window[fn]({ ymid: String((ST.me && ST.me.id) || '') })); } catch (e) { return Promise.reject(e); } })().then(() => { window.__via = 'ad'; fin(res); }, (e) => fin(() => rej(e)));
       });
     }
     catch (e) { try { localStorage.removeItem('rr_pp_at'); } catch (x) {} toast(P[2]); busy = false; return; }
-    const r = await api('pop'); take(r);
+    const r = await api('pop', { via: window.__via || '' }); take(r);
     if (r && r.pop) {  // 30 oct 2026 (0h45, Jeremy): the gain stays on screen until tapped (the player was away on the ad page and missed the toast)
       haptic('heavy');
       const ov = document.createElement('div');
