@@ -652,14 +652,14 @@ $('boB').onclick = async () => {
   try {
     await new Promise((res, rej) => {
       let done = false; const fin = (f) => { if (done) return; done = true; document.removeEventListener('visibilitychange', vis); try { TW && TW.offEvent && TW.offEvent('activated', act); } catch (e) {} clearTimeout(to); f(); };
-      const vis = () => { if (!document.hidden && Date.now() - t0 > 5000) { setTimeout(() => { if (done) return; window.__via = 'back'; fin(() => rej(new Error('noad'))); }, 6000); } };  /* 30 oct 2026 (11h45, Jeremy): 6 s of grace when coming back, so Monetag's confirmation is not lost */
-      const act = () => { if (Date.now() - t0 > 5000) { setTimeout(() => { if (done) return; window.__via = 'back'; fin(() => rej(new Error('noad'))); }, 6000); } };
-      const to = setTimeout(() => { window.__via = 'time'; fin(() => rej(new Error('noad'))); }, 45000);  /* 30 oct 2026 (11h24, Jeremy): no reward without Monetag's confirmation */
+      const vis = () => { if (!document.hidden && Date.now() - t0 > 5000) { setTimeout(() => { if (done) return; window.__via = 'back'; fin(res); }, 6000); } };  /* 30 oct 2026 (11h45, Jeremy): 6 s of grace when coming back, so Monetag's confirmation is not lost */
+      const act = () => { if (Date.now() - t0 > 5000) { setTimeout(() => { if (done) return; window.__via = 'back'; fin(res); }, 6000); } };
+      const to = setTimeout(() => { window.__via = 'time'; fin(res); }, 45000);  /* 30 oct 2026 (11h48, Jeremy): reward even without Monetag's confirmation (back after 5 s or 45 s) */
       document.addEventListener('visibilitychange', vis); try { TW && TW.onEvent && TW.onEvent('activated', act); } catch (e) {}
       (() => { try { return Promise.resolve(window[fn]({ ymid: String((ST.me && ST.me.id) || '') })); } catch (e) { return Promise.reject(e); } })().then(() => { window.__via = 'ad'; fin(res); }, (e) => fin(() => rej(e)));
     });
   } catch (e) { failed = true; }
-  if (failed) { window.__boLock = Date.now() + 60000; window.__boBusy = false; $('boB').style.pointerEvents = ''; $('boB').style.opacity = ''; toast(LANG === 'fr' ? 'Vidéo pas terminée : pas de x2. Réessaie dans 1 min.' : 'Video not finished: no x2. Try again in 1 min.'); return }
+  if (failed) { window.__boLock = Date.now() + 60000; window.__boBusy = false; $('boB').style.pointerEvents = ''; $('boB').style.opacity = ''; toast(LANG === 'fr' ? 'Pas de vidéo dispo, réessaie dans 1 min.' : 'No video right now, try again in 1 min.'); return }
   const r = await api('boost', { via: window.__via || '' }); take(r);
   window.__boBusy = false; $('boB').style.pointerEvents = ''; $('boB').style.opacity = '';
   if (ST.me.boost_end && now() < T(ST.me.boost_end)) { haptic('heavy'); toast(tr('t_boost')); }
@@ -693,9 +693,9 @@ $('boB').onclick = async () => {
     try {
       await new Promise((res, rej) => {
         let done = false; const fin = (f) => { if (done) return; done = true; document.removeEventListener('visibilitychange', vis); try { TW && TW.offEvent && TW.offEvent('activated', act); } catch (e) {} clearTimeout(to); f(); };
-        const vis = () => { if (!document.hidden && Date.now() - t0 > 5000) { setTimeout(() => { if (done) return; window.__via = 'back'; fin(() => rej(new Error('noad'))); }, 6000); } };  /* 30 oct 2026 (11h45, Jeremy): 6 s of grace when coming back, so Monetag's confirmation is not lost */
-        const act = () => { if (Date.now() - t0 > 5000) { setTimeout(() => { if (done) return; window.__via = 'back'; fin(() => rej(new Error('noad'))); }, 6000); } };
-        const to = setTimeout(() => { window.__via = 'time'; fin(() => rej(new Error('noad'))); }, 45000);  /* 30 oct 2026 (11h24, Jeremy): no reward without Monetag's confirmation */
+        const vis = () => { if (!document.hidden && Date.now() - t0 > 5000) { setTimeout(() => { if (done) return; window.__via = 'back'; fin(res); }, 6000); } };  /* 30 oct 2026 (11h45, Jeremy): 6 s of grace when coming back, so Monetag's confirmation is not lost */
+        const act = () => { if (Date.now() - t0 > 5000) { setTimeout(() => { if (done) return; window.__via = 'back'; fin(res); }, 6000); } };
+        const to = setTimeout(() => { window.__via = 'time'; fin(res); }, 45000);  /* 30 oct 2026 (11h48, Jeremy): reward even without Monetag's confirmation (back after 5 s or 45 s) */
         document.addEventListener('visibilitychange', vis); try { TW && TW.onEvent && TW.onEvent('activated', act); } catch (e) {}
         (() => { try { return Promise.resolve(window[fn]({ ymid: String((ST.me && ST.me.id) || '') })); } catch (e) { return Promise.reject(e); } })().then(() => { window.__via = 'ad'; fin(res); }, (e) => fin(() => rej(e)));
       });
