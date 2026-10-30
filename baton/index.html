@@ -2117,10 +2117,10 @@ function nudge() {
   // 22 oct 2026 (Jeremy, 15h52): Adsgram interstitial (block int-55461) when the game opens; never on the very first visit,
   // never for the no-ads players (S.noads, later), and once every 24 hours at most (Jeremy, 15h54)
   (function inter() {
-    return;  // 29 oct 2026 (23h26, Jeremy): no more interstitial when the game opens
+    /* 30 oct 2026 (18h15, Jeremy): the opening interstitial is back, at every opening (still never on the very first visit) */
     try {
       const force = !!S.mtgForce;  // 28 oct 2026 (13h45, Jeremy): a Monetag interstitial forced once from the server (to see it)
-      if (!force && (firstOpen || S.noads || !(tg && tg.initData) || Date.now() - Number(LS.get('bt_int') || 0) < 3600000)) return;  // 24 oct 2026 (10h19, Jeremy): one hour at least between two (was 24 h)
+      if (!force && (firstOpen || S.noads || !(tg && tg.initData) || Date.now() - Number(LS.get('bt_int') || 0) < 0)) return;  // 24 oct 2026 (10h19, Jeremy): one hour at least between two (was 24 h)
       const go = () => { try { LS.set('bt_int', String(Date.now())); window.Adsgram.init({ blockId: 'int-55461' }).show().catch((e) => { if ((e && e.state === 'playing') || S.mtgZone == null) return; const fn = 'show_' + S.mtgZone; const m = () => { try { const r = window[fn]({ type: 'inApp', inAppSettings: { frequency: 1, capping: 1, interval: 30, timeout: 0, everyPage: false } }); if (r && r.catch) r.catch(() => {}); } catch (x) {} }; let i = 0; const t = () => { if (typeof window[fn] === 'function') m(); else if (i++ < 48) setTimeout(t, 250); }; if (typeof window[fn] !== 'function') { const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(S.mtgZone)); s.setAttribute('data-sdk', fn); document.head.appendChild(s); } t(); }); } catch (e) {} };  /* 29 oct 2026 (22h40, Jeremy): Monetag only when Adsgram has no ad */
       let n = 0; const wait = () => { if (window.Adsgram) go(); else if (n++ < 40) setTimeout(wait, 250); };  // the Adsgram script is loaded once, by the task block below
       // 28 oct 2026 (13h38, Jeremy): 1 opening interstitial out of 5 on Monetag (In-App Interstitial, one ad only), Adsgram otherwise or if Monetag fails
