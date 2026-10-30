@@ -186,6 +186,8 @@ body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#0407
 #boB,#ppB{grid-column:auto;padding:11px;background:var(--card)}#boB{border-color:rgba(168,85,247,.6)}#ppB{border-color:rgba(255,200,61,.55)}
 #boB .t,#ppB .t{font-size:14px}#boB .s,#ppB .s{white-space:nowrap;font-size:11px}#ppB .bc{display:none}#boB .bc{padding:3px 7px;font-size:11px}
 #boB.on{background:linear-gradient(135deg,rgba(255,200,61,.22),rgba(168,85,247,.12));border-color:var(--gold);box-shadow:0 0 14px rgba(255,200,61,.3)}#boB.on .s{color:var(--gold);font-weight:900;font-size:13px;font-variant-numeric:tabular-nums}
+/* 30 oct 2026 (12h15, Jeremy): while the x2 runs, the button is greyed out and not clickable */
+#boB.on{background:var(--card);border-color:rgba(255,255,255,.12);box-shadow:none;filter:grayscale(1);opacity:.55;pointer-events:none}
 </style>
 </head>
 <body>
@@ -459,7 +461,7 @@ function render() {
     const sk = $('stk'); sk.hidden = !(m.streak > 0); if (m.streak > 0) sk.textContent = tr('stk', { d: m.streak, p: m.streak_pct }); }  /* 24 oct 2026 (Jeremy): no boost until Adsgram is set up */ $('bdg').hidden = !m.unread; $('bdg').textContent = m.unread > 9 ? '9+' : m.unread;
   $('boB').classList.toggle('on', !!boosted);
   /* 30 oct 2026 (0h53, Jeremy): during the boost, the button shows a clean countdown (no more "Actif · X min") */
-  $('boS').textContent = boosted ? (() => { const s = Math.max(0, Math.floor((T(m.boost_end) - t0) / 1000)); return '⚡ x2 · ' + Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); })() : m.boost_left > 0 ? tr('bsub') : tr('bnone');
+  $('boS').textContent = boosted ? (() => { const s = Math.max(0, Math.floor((T(m.boost_end) - t0) / 1000)); return (LANG === 'fr' ? '⚡ x2 en cours · ' : '⚡ x2 active · ') + Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); })() : m.boost_left > 0 ? tr('bsub') : tr('bnone');
   { const bc = $('boC'); if (bc) { bc.textContent = '';  /* 30 oct 2026 (0h36, Jeremy): no "6/6" counter, "no more boost today" only when none is left */ bc.hidden = !bc.textContent; } }  // 30 oct 2026: the counter on the right
   if (!$('pg-up').hidden) buildUp();
   const ev = Number(m.earned || 0) + mined();  // 24 oct 2026 (4h09): the airdrop counts everything earned, upgrades never cost places
@@ -652,8 +654,8 @@ $('boB').onclick = async () => {
   try {
     await new Promise((res, rej) => {
       let done = false; const fin = (f) => { if (done) return; done = true; document.removeEventListener('visibilitychange', vis); try { TW && TW.offEvent && TW.offEvent('activated', act); } catch (e) {} clearTimeout(to); f(); };
-      const vis = () => { if (!document.hidden && Date.now() - t0 > 5000) { setTimeout(() => { if (done) return; window.__via = 'back'; fin(res); }, 6000); } };  /* 30 oct 2026 (11h45, Jeremy): 6 s of grace when coming back, so Monetag's confirmation is not lost */
-      const act = () => { if (Date.now() - t0 > 5000) { setTimeout(() => { if (done) return; window.__via = 'back'; fin(res); }, 6000); } };
+      const vis = () => { if (!document.hidden && Date.now() - t0 > 5000) { window.__via = 'back'; fin(res); } };  /* 30 oct 2026 (11h45, Jeremy): 6 s of grace when coming back, so Monetag's confirmation is not lost */
+      const act = () => { if (Date.now() - t0 > 5000) { window.__via = 'back'; fin(res); } };
       const to = setTimeout(() => { window.__via = 'time'; fin(res); }, 45000);  /* 30 oct 2026 (11h48, Jeremy): reward even without Monetag's confirmation (back after 5 s or 45 s) */
       document.addEventListener('visibilitychange', vis); try { TW && TW.onEvent && TW.onEvent('activated', act); } catch (e) {}
       (() => { try { return Promise.resolve(window[fn]({ ymid: String((ST.me && ST.me.id) || '') })); } catch (e) { return Promise.reject(e); } })().then(() => { window.__via = 'ad'; fin(res); }, (e) => fin(() => rej(e)));
@@ -662,7 +664,7 @@ $('boB').onclick = async () => {
   if (failed) { window.__boLock = Date.now() + 60000; window.__boBusy = false; $('boB').style.pointerEvents = ''; $('boB').style.opacity = ''; toast(LANG === 'fr' ? 'Pas de vidéo dispo, réessaie dans 1 min.' : 'No video right now, try again in 1 min.'); return }
   const r = await api('boost', { via: window.__via || '' }); take(r);
   window.__boBusy = false; $('boB').style.pointerEvents = ''; $('boB').style.opacity = '';
-  if (ST.me.boost_end && now() < T(ST.me.boost_end)) { haptic('heavy'); toast(tr('t_boost')); }
+  if (ST.me.boost_end && now() < T(ST.me.boost_end)) { haptic('heavy'); }
   else toast(LANG === 'fr' ? 'Boost impossible pour l\'instant, réessaie.' : 'Boost not possible right now, try again.');
 };
 // 30 oct 2026 (0h39, Jeremy): sponsored task = Monetag rewarded popup (zone 12149624, 'pop'): +15 min of mining, 20 a day, 1 min between two (server rr_api 'pop')
@@ -693,8 +695,8 @@ $('boB').onclick = async () => {
     try {
       await new Promise((res, rej) => {
         let done = false; const fin = (f) => { if (done) return; done = true; document.removeEventListener('visibilitychange', vis); try { TW && TW.offEvent && TW.offEvent('activated', act); } catch (e) {} clearTimeout(to); f(); };
-        const vis = () => { if (!document.hidden && Date.now() - t0 > 5000) { setTimeout(() => { if (done) return; window.__via = 'back'; fin(res); }, 6000); } };  /* 30 oct 2026 (11h45, Jeremy): 6 s of grace when coming back, so Monetag's confirmation is not lost */
-        const act = () => { if (Date.now() - t0 > 5000) { setTimeout(() => { if (done) return; window.__via = 'back'; fin(res); }, 6000); } };
+        const vis = () => { if (!document.hidden && Date.now() - t0 > 5000) { window.__via = 'back'; fin(res); } };  /* 30 oct 2026 (11h45, Jeremy): 6 s of grace when coming back, so Monetag's confirmation is not lost */
+        const act = () => { if (Date.now() - t0 > 5000) { window.__via = 'back'; fin(res); } };
         const to = setTimeout(() => { window.__via = 'time'; fin(res); }, 45000);  /* 30 oct 2026 (11h48, Jeremy): reward even without Monetag's confirmation (back after 5 s or 45 s) */
         document.addEventListener('visibilitychange', vis); try { TW && TW.onEvent && TW.onEvent('activated', act); } catch (e) {}
         (() => { try { return Promise.resolve(window[fn]({ ymid: String((ST.me && ST.me.id) || '') })); } catch (e) { return Promise.reject(e); } })().then(() => { window.__via = 'ad'; fin(res); }, (e) => fin(() => rej(e)));
