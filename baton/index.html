@@ -2986,7 +2986,9 @@ function nudge() {
   function paint() {
     var B = window.BT; if (!B) return; var S = B.S; if (!S || S.tkGoal == null) return;
     var T = TX[B.lang === 'fr' ? 'fr' : 'en'], d = Math.min(Number(S.tkDone) || 0, S.tkGoal), done = !!S.tkGoalDone || (Number(S.tkDone) || 0) >= S.tkGoal;
-    var pct = Math.round(d / S.tkGoal * 100) + '%', key = [S.tkDone, done, B.lang].join('|');
+    /* 21h21 (Jeremy): shown only when Adsgram really has a task for this player (the task block is built and not hidden) */
+    var ab = document.getElementById('adtask'), av = window.__adt === true && !!ab && !ab.hidden;
+    var pct = Math.round(d / S.tkGoal * 100) + '%', key = [S.tkDone, done, B.lang, av].join('|');
     var ln = done ? T.ok : T.g(d, S.tkGoal, Number(S.tkBonus).toLocaleString(B.lang === 'fr' ? 'fr-FR' : 'en-US'));
     // Home: right under the balance
     var home = document.getElementById('p-home'), sc = home && home.querySelector('.score'), c = document.getElementById('tkHome');
@@ -2995,13 +2997,15 @@ function nudge() {
       c.onclick = function () { try { B.hap(); } catch (e) {} B.go('tasks'); };
       sc.insertAdjacentElement('afterend', c);
     }
+    if (c) c.hidden = !av;
     if (c && c.dataset.k !== key) { c.dataset.k = key; c.innerHTML = '<b style="flex:1;min-width:0">' + T.h(Number(S.tkReward).toLocaleString(B.lang === 'fr' ? 'fr-FR' : 'en-US')) + '</b><span class="go">' + T.go + '</span>';  /* 21h13 (Jeremy): one simple line on Home */ }
     // Tasks tab: the goal bar at the top
     var p = document.getElementById('p-tasks'), g = document.getElementById('tkGoalBox');
     if (p && !g) { g = document.createElement('div'); g.id = 'tkGoalBox'; var tt = document.getElementById('tTotTop'); if (tt && tt.parentNode === p) tt.insertAdjacentElement('afterend', g); else { var s2 = p.querySelector('.score'); if (s2) s2.insertAdjacentElement('afterend', g); else p.prepend(g); } }
+    if (g) g.hidden = !av && !done;
     if (g && g.dataset.k !== key) { g.dataset.k = key; g.innerHTML = '<small>' + ln + '</small><div class="tkBar"><i style="width:' + pct + '"></i></div>'; }
     // red dot on the Tasks tab until the goal is reached
-    var nb = document.querySelector('nav button[data-p="tasks"]'); if (nb) nb.classList.toggle('tkDot', !done);
+    var nb = document.querySelector('nav button[data-p="tasks"]'); if (nb) nb.classList.toggle('tkDot', av && !done);
   }
   setInterval(paint, 1000);
 })();
