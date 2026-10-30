@@ -320,7 +320,8 @@
     if (gone) return;
     let v = ''; try { v = VIEW; } catch (e) {}
     // the market, right under the daily missions
-    if (v === 'market' && !document.getElementById('agtask')) { const msn = document.getElementById('msn'); if (msn && msn.parentNode) block('agtask', msn); }
+    /* 30 oct 2026 (19h15, Jeremy): at the very top of the market, so it is seen (the daily missions it followed are hidden) */
+    if (v === 'market' && !document.getElementById('agtask')) { const vw = document.getElementById('view'); const f = vw && vw.firstElementChild; if (f) { block('agtask', f); const w = document.getElementById('agtask'); if (w && vw.firstElementChild !== w) { vw.insertBefore(w, vw.firstElementChild); w.style.margin = '0 0 12px'; w.style.border = '1.5px solid #3ddc97'; w.style.borderRadius = '16px'; } } }
     // 26 oct 2026 (23h43, Jeremy): no more partner mission in the Portfolio
     // the "Out of cash?" sheet, under its title
     const sh = document.getElementById('cssh');
