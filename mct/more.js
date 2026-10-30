@@ -30,16 +30,25 @@
     + '#mrm .mo{display:flex;align-items:center;gap:12px;width:100%;text-align:left;color:inherit;padding:12px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--line,rgba(255,255,255,.1));margin-bottom:8px}'
     + '#mrm .mo b{display:block;font-size:15px}#mrm .mo small{display:block;color:var(--mute,#9a8fb8);font-size:12px;margin-top:2px;white-space:normal}'
     + '#mrm .mo .w{flex:1;min-width:0}#mrm .mo .go{color:var(--mute,#9a8fb8);font-size:20px}'
-    + '#mrm .cd{display:flex;gap:8px;margin:-2px 0 8px}#mrm .cd input{flex:1;min-width:0}';
+    + '#mrm .cd{display:flex;gap:8px;margin:-2px 0 8px}#mrm .cd input{flex:1;min-width:0}'
+    + '#mrm #msn{display:block!important;margin:0 0 10px}#mrm #msn:empty{display:none!important}';
   document.head.appendChild(st);
 
-  function close() { const d = document.getElementById('mrm'); if (d) d.remove(); }
+  // 31 oct 2026 (0h42, Jeremy): the daily missions are back, at the top of this sheet (still hidden on the market). The game's own
+  // renderMissions draws them in #msn: while the sheet is open, the hidden #msn of the market is renamed so the sheet gets them.
+  function close() { const d = document.getElementById('mrm'); if (d) d.remove(); const o = document.getElementById('msn_mk'); if (o) o.id = 'msn'; }
+  async function missions() {
+    const old = document.querySelector('#view #msn'); if (old) old.id = 'msn_mk';
+    let ms = null; try { ms = await G('api')('missions'); } catch (e) {}
+    if (!document.getElementById('mrm') || !ms) return;
+    try { G('renderMissions')(ms); } catch (e) {}
+  }
   function sheet() {
     hp(); close();
     const T = L(), ME = G('ME') || {};
     const row = (k, b, s) => '<button class="mo" type="button" data-k="' + k + '"><span class="w"><b>' + ec(b) + '</b>' + (s ? '<small>' + ec(s) + '</small>' : '') + '</span><span class="go">›</span></button>';
     const d = document.createElement('div'); d.id = 'mrm';
-    d.innerHTML = '<div class="mb"><h2>' + ec(T.title) + '</h2>'
+    d.innerHTML = '<div class="mb"><h2>' + ec(T.title) + '</h2><div id="msn"></div>'
       + row('rch', tt('rch_t'), T.rch)
       + row('prem', T.pr, T.prs)
       + row('fr', T.fr, T.frs)
@@ -52,8 +61,8 @@
       + row('faq', T.faq, T.faqs)
       + row('ct', T.ct, T.cts)
       + '<button class="ghost" id="mrx" style="width:100%;margin-top:6px">' + ec(T.close) + '</button></div>';
-    d.onclick = (e) => { if (e.target === d) close(); };
-    document.body.appendChild(d);
+    d.onclick = (e) => { if (e.target === d) { close(); return; } const mr = e.target.closest('[data-mk]'); if (mr && !e.target.closest('[data-mc]') && !mr.querySelector('.msn-ok')) setTimeout(close, 0); };
+    document.body.appendChild(d); missions();
     d.querySelector('#mrx').onclick = () => { hp(); close(); };
     d.querySelectorAll('[data-k]').forEach((b) => b.onclick = () => act(b.dataset.k, b));
     const cb = d.querySelector('#mrcb');
@@ -108,6 +117,12 @@
       while (n && (n.classList.contains('row') || n.classList.contains('field'))) { const nx = n.nextElementSibling; n.remove(); n = nx; }
     }
   }
+  // the red dot of the missions (a reward waiting) goes on the "More" tab instead of the market tab
+  setInterval(() => {
+    let w = 0; try { w = Number(G('MSN_W')) || 0; } catch (e) {}
+    const mk = document.querySelector('nav.tb button[data-v="market"]'); if (mk) mk.classList.remove('dot');
+    const mb = document.getElementById('mrb'); if (mb) mb.classList.toggle('dot', w > 0);
+  }, 1000);
   let q = 0;
   new MutationObserver(() => { if (!q) q = requestAnimationFrame(() => { q = 0; tab(); clean(); }); }).observe(document.body, { childList: true, subtree: true });
   tab(); clean();
