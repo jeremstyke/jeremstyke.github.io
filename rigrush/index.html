@@ -1322,50 +1322,56 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
 })();
 </script>
 <script>
-// 31 oct 2026 (23h12, Jeremy): Rig Rush in USDT. 23h19: the mine screen keeps only the mining PC and one small "Tasks" rectangle that shows one task
-// at a time and moves on to the next once it is done: sponsored task, then video, then x2 boost, then a task again. No more free chest.
-// "Upgrade" stays in the Machines tab. Under the balance, its value in dollars (1,000 RIGZ = 1 $). The FAQ and the landing page speak of USDT.
+// 31 oct 2026 (23h12, Jeremy): Rig Rush in USDT. 23h26: the mine screen keeps only the mining PC and one small "Tasks" button that opens a window
+// with every task one under the other (the x2 boost, the sponsored task, the video, later Jeremy's own tasks). No more free chest. "Upgrade" stays in the Machines tab.
+// Under the balance, its value in dollars (1,000 RIGZ = 1 $). The FAQ and the landing page speak of USDT, no more airdrop.
 (function () {
   try {
     var tw = window.Telegram && Telegram.WebApp; if (!(tw && tw.initData)) return;
     var lc = String((tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || 'en');
     var fr = /^fr/i.test(lc), loc = fr ? 'fr-FR' : 'en-US';
-    var TX = fr ? { bo: 'Boost x2 pendant 1 h', bs: '1 vidéo = minage x2', usd: function (v) { return '≈ ' + v + ' $ en USDT'; } }
-                : { bo: 'Boost x2 for 1 h', bs: '1 video = x2 mining', usd: function (v) { return '≈ $' + v + ' in USDT'; } };
+    var TX = fr ? { h: '🎯 Tâches', sub: 'Boost, tâches et vidéos : des RIGZ en plus', bo: 'Boost x2', close: 'Fermer', usd: function (v) { return '≈ ' + v + ' $ en USDT'; } }
+                : { h: '🎯 Tasks', sub: 'Boost, tasks and videos: extra RIGZ', bo: 'Boost x2', close: 'Close', usd: function (v) { return '≈ $' + v + ' in USDT'; } };
     var s = document.createElement('style');
     s.textContent = '#pg-mine .row{display:none!important}'
-      + '#rrtask{padding:8px 12px!important;margin-top:10px!important}#rrtask>b{display:none!important}'
-      + '#rrTbo{display:none;align-items:center;gap:10px;cursor:pointer}#rrtask.mBoost #rrTbo{display:flex!important}'
-      + '#rrtask.mBoost adsgram-task,#rrtask.mBoost #rrVid,#rrtask.mBoost #rrWait{display:none!important}'
-      + '#rrTbo .ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex:none;background:rgba(168,85,247,.25)}'
-      + '#rrTbo .tx{flex:1;min-width:0;display:flex;flex-direction:column}#rrTbo .tx b{font-size:14px}#rrTbo .tx small{color:#3ddc97;font-weight:800;font-size:13px}'
-      + '#rrTbo .gb{flex:none;width:80px;border:0;background:#3ddc97;color:#06150e;font-weight:800;border-radius:10px;padding:8px 0;font-size:14px;text-align:center}'
+      + '#rrTt{margin-top:10px;display:flex;align-items:center;gap:10px;width:100%;padding:11px 14px;border-radius:16px;background:var(--card);border:1.5px solid #3ddc97;color:inherit;font:inherit;text-align:left;cursor:pointer}'
+      + '#rrTt .ic{font-size:22px;flex:none}#rrTt .tx{flex:1;min-width:0;display:flex;flex-direction:column}#rrTt .tx b{font-size:15px}#rrTt .tx small{font-size:12px;opacity:.75;font-weight:700}'
+      + '#rrTt .go{flex:none;background:#3ddc97;color:#06150e;font-weight:900;border-radius:10px;padding:7px 14px;font-size:14px}'
+      + '#rrTs{position:fixed;inset:0;z-index:55;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center}'
+      + '#rrTs .pb{width:100%;max-width:480px;background:#0b1a14;border:1.5px solid #3ddc97;border-bottom:0;border-radius:22px 22px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px;color:#e8fff3;max-height:80vh;overflow-y:auto}'
+      + '#rrTs h3{margin:0 0 4px;font-size:19px}'
+      + '#rrTs .tr{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid rgba(255,255,255,.07);cursor:pointer}'
+      + '#rrTs .tr .ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex:none;font-size:17px;background:rgba(168,85,247,.25)}'
+      + '#rrTs .tr .tx{flex:1;min-width:0;display:flex;flex-direction:column}#rrTs .tr .tx b{font-size:14px}#rrTs .tr .tx small{font-size:12px;opacity:.75;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
+      + '#rrTs .tr .gb{flex:none;width:80px;text-align:center;border-radius:10px;padding:8px 0;font-weight:800;font-size:14px;background:rgba(255,255,255,.08)}#rrTs .tr.can .gb{background:#3ddc97;color:#06150e}'
+      + '#rrTs #rrtask{margin:0!important;padding:8px 0 0!important;border:0!important;border-top:1px solid rgba(255,255,255,.07)!important;background:transparent!important;border-radius:0!important}'
+      + '#rrTs #rrtask>b{display:none!important}'
+      + '#rrTs adsgram-task{display:block!important}#rrTs #rrVid{display:flex!important;padding-top:8px;border-top:1px solid rgba(255,255,255,.07)}#rrTs #rrWait{display:none!important}'
+      + '#rrTs .x{margin-top:8px;padding:12px;border-radius:14px;border:0;background:rgba(255,255,255,.1);color:inherit;font-weight:800;font-size:15px}'
       + '#rrUsd{font-size:13px;font-weight:800;color:#ffc83d;margin-top:2px}';
     document.head.appendChild(s);
     var $$ = function (id) { return document.getElementById(id); };
-    var get = function () { try { return localStorage.getItem('rr_tmode') || 'task'; } catch (e) { return 'task'; } };
-    var set = function (v) { try { localStorage.setItem('rr_tmode', v); } catch (e) {} };
-    function boostOk() {
-      var b = $$('boB'); if (!b || b.hidden || b.style.pointerEvents === 'none') return false;
-      try { var m = ST && ST.me; if (!m) return false; if (Number(m.boost_left) <= 0) return false; if (m.boost_end && new Date(m.boost_end).getTime() > Date.now()) return false; } catch (e) { return false; }
-      return true;
+    var tile = null, sheet = null, home = null;
+    function build() {
+      var task = $$('rrtask'); if (!task || tile) return;
+      home = task.parentNode;
+      tile = document.createElement('button'); tile.id = 'rrTt'; tile.type = 'button';
+      tile.innerHTML = '<span class="ic">🎯</span><span class="tx"><b>' + TX.h + '</b><small>' + TX.sub + '</small></span><span class="go">Go ›</span>';
+      home.insertBefore(tile, task);
+      sheet = document.createElement('div'); sheet.id = 'rrTs'; sheet.hidden = true;
+      sheet.innerHTML = '<div class="pb"><h3>' + TX.h + '</h3><div class="tr" id="rrTbo"><span class="ic">🎬</span><span class="tx"><b>' + TX.bo + '</b><small></small></span><span class="gb">⏳</span></div><div id="rrTlist"></div><button class="x" type="button">' + TX.close + '</button></div>';
+      document.body.appendChild(sheet);
+      $$('rrTlist').appendChild(task);
+      $$('rrTbo').onclick = function () { var b = $$('boB'); if (b) b.click(); };
+      sheet.querySelector('.x').onclick = function () { sheet.hidden = true; };
+      sheet.onclick = function (e) { if (e.target === sheet) sheet.hidden = true; };
+      tile.onclick = function () { try { tw.HapticFeedback.impactOccurred('light'); } catch (e) {} sheet.hidden = false; };
     }
-    var prev = get(), built = false;
     function paint() {
-      var box = $$('rrtask');
-      if (box && !built) {
-        built = true;
-        var r = document.createElement('div'); r.id = 'rrTbo';
-        r.innerHTML = '<span class="ic">🎬</span><span class="tx"><b>' + TX.bo + '</b><small>' + TX.bs + '</small></span><span class="gb">▶️ Go</span>';
-        r.onclick = function () { var b = $$('boB'); if (b) b.click(); };
-        box.insertBefore(r, box.firstChild);
-      }
-      // the turn: task -> video -> boost -> task
-      var m = get();
-      if (prev === 'video' && m === 'task' && boostOk()) { set('boost'); m = 'boost'; }
-      if (m === 'boost' && !boostOk()) { set('task'); m = 'task'; }
-      prev = m;
-      if (box) box.classList.toggle('mBoost', m === 'boost');
+      build(); if (!tile) return;
+      var bo = $$('boB'), bos = $$('boS'), r2 = $$('rrTbo');
+      if (r2) { r2.style.display = bo && !bo.hidden ? '' : 'none'; if (bos) r2.querySelector('small').textContent = bos.textContent;
+        var ok = bo && bo.style.pointerEvents !== 'none' && !/aujourd|today|⏳|actif|active/i.test(bos ? bos.textContent : ''); r2.classList.toggle('can', !!ok); r2.querySelector('.gb').textContent = ok ? '▶️ Go' : '⏳'; }
       var rate = $$('rate'); if (rate) { var u = $$('rrUsd'); if (!u) { u = document.createElement('div'); u.id = 'rrUsd'; rate.insertAdjacentElement('afterend', u); }
         var p = 0; try { p = Number(ST && ST.me && ST.me.pts) || 0; } catch (e) {} var t = TX.usd((p / 1000).toLocaleString(loc, { minimumFractionDigits: 2, maximumFractionDigits: 4 })); if (u.textContent !== t) u.textContent = t; }
     }
