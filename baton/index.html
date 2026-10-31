@@ -2999,7 +2999,9 @@ function nudge() {
     if (sc && !c) {
       c = document.createElement('button'); c.id = 'tkHome'; c.type = 'button';
       c.onclick = function () { try { B.hap(); } catch (e) {} B.go('tasks'); };
-      sc.insertAdjacentElement('afterend', c);
+      /* 31 oct 2026 (13h01, Jeremy): the top was too busy: the tasks line goes to the bottom of the home screen, above the factory button */
+      var rec = home.querySelector('.record'), fw = document.getElementById('facWrap');
+      if (fw) fw.insertAdjacentElement('beforebegin', c); else if (rec) rec.insertAdjacentElement('beforebegin', c); else sc.insertAdjacentElement('afterend', c);
     }
     if (c) c.hidden = !av;
     if (c && c.dataset.k !== key) { c.dataset.k = key; c.innerHTML = '<b style="flex:1;min-width:0">' + T.h(Number(S.tkReward).toLocaleString(B.lang === 'fr' ? 'fr-FR' : 'en-US')) + '</b><span class="go">' + T.go + '</span>';  /* 21h13 (Jeremy): one simple line on Home */ }
