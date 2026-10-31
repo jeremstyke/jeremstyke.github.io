@@ -1079,8 +1079,7 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
     try { mode = localStorage.getItem('rr_tmode') === 'video' ? 'video' : 'task'; } catch (e) {}
     function paint() {
       var m = mode;
-      if (m === 'task' && taskNone) m = 'video';
-      if (m === 'video' && vidNone && !taskNone) m = 'task';
+      m = taskNone ? 'video' : 'task';  // 31 oct 2026 (23h31, Jeremy): the sponsored task first, the video only when there is no task; 30 s between two
       if (taskNone && vidNone) { box.hidden = true; return; }
       var w = Math.ceil((waitUntil - Date.now()) / 1000);
       if (w > 0) { el.style.display = 'none'; vr.style.display = 'none'; wt.style.display = 'block'; wt.textContent = (fr ? '⏳ Prochaine tâche dans ' : '⏳ Next task in ') + w + ' s'; return; }
@@ -1346,7 +1345,7 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
       + '#rrTs .tr .gb{flex:none;width:80px;text-align:center;border-radius:10px;padding:8px 0;font-weight:800;font-size:14px;background:rgba(255,255,255,.08)}#rrTs .tr.can .gb{background:#3ddc97;color:#06150e}'
       + '#rrTs #rrtask{margin:0!important;padding:8px 0 0!important;border:0!important;border-top:1px solid rgba(255,255,255,.07)!important;background:transparent!important;border-radius:0!important}'
       + '#rrTs #rrtask>b{display:none!important}'
-      + '#rrTs adsgram-task{display:block!important}#rrTs #rrVid{display:flex!important;padding-top:8px;border-top:1px solid rgba(255,255,255,.07)}#rrTs #rrWait{display:none!important}'
+      + '#rrTs #rrWait{padding:14px 0}'
       + '#rrTs .x{margin-top:8px;padding:12px;border-radius:14px;border:0;background:rgba(255,255,255,.1);color:inherit;font-weight:800;font-size:15px}'
       + '#rrUsd{font-size:13px;font-weight:800;color:#ffc83d;margin-top:2px}';
     document.head.appendChild(s);
