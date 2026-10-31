@@ -1049,13 +1049,15 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
 </script>
 <script>
 // 30 oct 2026 (19h20, Jeremy): Adsgram sponsored tasks under the x2 boost: RIGZ worth 30 min of mining each, 20 a day, 30 s between two
+// 31 oct 2026 (20h15, Jeremy): the card alternates between a sponsored task and a video (Adsgram interstitial int-55773, server rr_api 'tvid'): same reward, same limits
 (function () {
   try {
     var box = document.getElementById('rrtask'); var tw = window.Telegram && Telegram.WebApp;
     if (!box || !(tw && tw.initData)) return;
     var fr = /^fr/i.test((tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || '');
-    var T = fr ? ['🎯 Tâches sponsorisées', '+30 min de minage', 'Go', 'Récupérer', 'Fait ✅', '⛏️ RIGZ ajoutés !'] : ['🎯 Sponsored tasks', '+30 min of mining', 'Go', 'Claim', 'Done ✅', '⛏️ RIGZ added!'];
-    // 31 oct 2026 (19h12, Jeremy): show the real RIGZ amount instead of "+30 min of mining" (same formula as rr_task_reward: 30 min at the current rate, 0.3/h minimum)
+    var T = fr ? ['🎯 Tâches sponsorisées', '', 'Go', 'Récupérer', 'Fait ✅', 'Regarde une vidéo', '▶️ Go', 'Pas de vidéo pour l\'instant, réessaie plus tard.', '⏳ Attends un peu avant la prochaine.', 'Plus de tâche aujourd\'hui, reviens demain.']
+      : ['🎯 Sponsored tasks', '', 'Go', 'Claim', 'Done ✅', 'Watch a video', '▶️ Go', 'No video right now, try again later.', '⏳ Wait a bit before the next one.', 'No more tasks today, come back tomorrow.'];
+    // 31 oct 2026 (19h12, Jeremy): show the real RIGZ amount (same formula as rr_task_reward: 30 min at the current rate, 0.3/h minimum)
     var amt = function () { var r = 0; try { r = Number(ST && ST.me && ST.me.rate) || 0; } catch (e) {} return Math.round(Math.max(r, 0.3) * 0.5 * 100) / 100; };
     var amtTx = function () { return '+' + amt().toLocaleString(fr ? 'fr-FR' : 'en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' RIGZ'; };
     T[1] = amtTx();
@@ -1064,16 +1066,44 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
       + '<span slot="reward" class="rrAmt" style="color:#3ddc97;font-weight:800">' + T[1] + '</span>'
       + '<div slot="button" style="background:#3ddc97;color:#06150e;font-weight:800;border-radius:10px;padding:8px 0;text-align:center">' + T[2] + '</div>'
       + '<div slot="claim" style="background:#ffc83d;color:#1a1300;font-weight:800;border-radius:10px;padding:8px 0;text-align:center">' + T[3] + '</div>'
-      + '<div slot="done" style="color:#8fa197;font-weight:700;text-align:center">' + T[4] + '</div></adsgram-task>';
-    var el = box.querySelector('adsgram-task');
+      + '<div slot="done" style="color:#8fa197;font-weight:700;text-align:center">' + T[4] + '</div></adsgram-task>'
+      + '<div id="rrVid" hidden style="display:flex;align-items:center;gap:10px"><div style="width:30px;height:30px;border-radius:8px;background:rgba(168,85,247,.25);display:grid;place-items:center;flex:none">🎬</div>'
+      + '<div style="flex:1;min-width:0;display:flex;flex-direction:column"><b style="font-size:14px">' + T[5] + '</b><span class="rrAmt" style="color:#3ddc97;font-weight:800;font-size:13px">' + T[1] + '</span></div>'
+      + '<button id="rrVidB" type="button" style="flex:none;width:80px;border:0;background:#3ddc97;color:#06150e;font-weight:800;border-radius:10px;padding:8px 0;font-size:14px">' + T[6] + '</button></div>';
+    var el = box.querySelector('adsgram-task'), vr = box.querySelector('#rrVid'), vb = box.querySelector('#rrVidB');
+    var mode = 'task', taskNone = false, vidNone = false;
+    try { mode = localStorage.getItem('rr_tmode') === 'video' ? 'video' : 'task'; } catch (e) {}
+    function paint() {
+      var m = mode;
+      if (m === 'task' && taskNone) m = 'video';
+      if (m === 'video' && vidNone && !taskNone) m = 'task';
+      if (taskNone && vidNone) { box.hidden = true; return; }
+      el.style.display = m === 'task' ? 'block' : 'none';
+      vr.hidden = m !== 'video'; vr.style.display = m === 'video' ? 'flex' : 'none';
+    }
+    function flip(to) { mode = to; try { localStorage.setItem('rr_tmode', to); } catch (e) {} paint(); }
+    function refresh() { setTimeout(function () { try { api('state').then(function (r) { try { take(r); } catch (e) {} }); } catch (e) {} }, 1500); }
     setInterval(function () { var t = amtTx(); box.querySelectorAll('.rrAmt').forEach(function (x) { if (x.textContent !== t) x.textContent = t; }); }, 2000);
-    el.addEventListener('onBannerNotFound', function () { box.hidden = true; });
-    el.addEventListener('onError', function () { box.hidden = true; });
+    el.addEventListener('onBannerNotFound', function () { taskNone = true; paint(); });
+    el.addEventListener('onError', function () { taskNone = true; paint(); });
     el.addEventListener('reward', function () {
       try { toast('⛏️ ' + amtTx() + (fr ? ' ajoutés !' : ' added!')); } catch (e) {}
-      setTimeout(function () { try { api('state').then(function (r) { try { take(r); } catch (e) {} }); } catch (e) {} }, 2500);  // the RIGZ come from the server (reward URL)
+      refresh();  // the RIGZ come from the server (reward URL)
+      setTimeout(function () { flip('video'); }, 1200);
     });
-    var show = function () { box.hidden = false; };
+    var busy = false;
+    vb.onclick = function () {
+      if (busy) return; busy = true; vb.style.opacity = '.6';
+      var done = function () { busy = false; vb.style.opacity = ''; };
+      agLoad().then(function () { return window.Adsgram.init({ blockId: 'int-55773' }).show(); }).then(function () {
+        return api('tvid').then(function (r) {
+          if (r && r.ok) { try { toast('⛏️ +' + Number(r.amount).toLocaleString(fr ? 'fr-FR' : 'en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' RIGZ' + (fr ? ' ajoutés !' : ' added!')); } catch (e) {} refresh(); flip('task'); }
+          else toast(r && r.error === 'limit' ? T[9] : r && r.error === 'wait' ? T[8] : T[7]);
+        });
+      }).catch(function () { toast(T[7]); vidNone = true; paint(); }).then(done, done);
+    };
+    paint();
+    var show = function () { box.hidden = false; paint(); };
     if (window.Adsgram) show();
     else { var s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = show; s.onerror = function () { box.hidden = true; }; document.head.appendChild(s); }
   } catch (e) {}
