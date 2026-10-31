@@ -9,7 +9,7 @@
     fr: { t: 'Baton Factory', crates: 'caisses', made: 'En attente', full: '⚠️ Entrepôt plein : récolte vite !', fullIn: function (h) { return 'Plein dans ' + h; },
       collect: function (n) { return '📦 Récolter +' + n; }, nothing: '⏳ Ça produit…', perh: '/h', tap: function (n, m) { return '👆 Tape l\'usine : +1 📦 (' + n + '/' + m + ' aujourd\'hui)'; }, tapDone: '👆 Tes mains sont fatiguées, reviens demain !',
       boost: function (n) { return '📺 Turbo x2 pendant 1 h (' + n + ')'; }, boostOn: function (s) { return '⚡ TURBO x2 · ' + s; }, boostNone: 'Plus de turbo aujourd\'hui',
-      mach: '⚙️ Machine', store: '🏬 Entrepôt', lv: 'niv.', max: 'MAX', cap: function (h) { return h + ' h de stock'; },
+      mach: '⚙️ Machine', store: '🏬 Entrepôt', lv: 'niv.', max: 'MAX', cap: function (h) { var m = Math.round(Number(h) * 60); return Math.floor(m / 60) + ' h' + (m % 60 ? ' ' + (m % 60) : '') + ' de stock'; },
       goal: '🎯 Prochain objectif', goalT: function (w, n) { return w + ' · encore ' + n + ' 📦'; }, goalOk: function (w) { return w + ' : c\'est prêt, améliore !'; },
       conv: '💱 Échanger contre des $BATON', convS: function (r, d, c) { return '1 📦 = ' + r + ' $BATON · aujourd\'hui ' + d + ' / ' + c; }, convB: function (n, b) { return 'Échanger ' + n + ' 📦 → +' + b + ' $BATON'; },
       friends: function (n) { return '👥 Ouvriers : +10 % de production par ami invité (' + n + '/10)'; }, tasks: function (n) { return '🎯 Chaque tâche sponsorisée = +' + n + ' 📦'; },
@@ -19,7 +19,7 @@
     en: { t: 'Baton Factory', crates: 'crates', made: 'Waiting', full: '⚠️ Warehouse full: collect now!', fullIn: function (h) { return 'Full in ' + h; },
       collect: function (n) { return '📦 Collect +' + n; }, nothing: '⏳ Producing…', perh: '/h', tap: function (n, m) { return '👆 Tap the factory: +1 📦 (' + n + '/' + m + ' today)'; }, tapDone: '👆 Your hands are tired, come back tomorrow!',
       boost: function (n) { return '📺 Turbo x2 for 1 h (' + n + ')'; }, boostOn: function (s) { return '⚡ TURBO x2 · ' + s; }, boostNone: 'No more turbo today',
-      mach: '⚙️ Machine', store: '🏬 Warehouse', lv: 'lvl', max: 'MAX', cap: function (h) { return h + ' h of stock'; },
+      mach: '⚙️ Machine', store: '🏬 Warehouse', lv: 'lvl', max: 'MAX', cap: function (h) { var m = Math.round(Number(h) * 60); return Math.floor(m / 60) + ' h' + (m % 60 ? ' ' + (m % 60) : '') + ' of stock'; },
       goal: '🎯 Next goal', goalT: function (w, n) { return w + ' · ' + n + ' 📦 to go'; }, goalOk: function (w) { return w + ': ready, upgrade it!'; },
       conv: '💱 Trade for $BATON', convS: function (r, d, c) { return '1 📦 = ' + r + ' $BATON · today ' + d + ' / ' + c; }, convB: function (n, b) { return 'Trade ' + n + ' 📦 → +' + b + ' $BATON'; },
       friends: function (n) { return '👥 Workers: +10% production per invited friend (' + n + '/10)'; }, tasks: function (n) { return '🎯 Each sponsored task = +' + n + ' 📦'; },
@@ -212,7 +212,7 @@
     else { E.goal.textContent = L.max; E.goalbar.style.width = '100%'; }
     E.ml.textContent = L.mach + ' · ' + L.lv + ' ' + st.lvl; E.ms.textContent = nf(st.rate) + L.perh + (st.lvl_cost != null ? ' → ' + nf(st.lvl_next_rate) + L.perh : '');
     E.l.textContent = st.lvl_cost != null ? nf(st.lvl_cost) + ' 📦' : L.max; E.l.disabled = busy || st.lvl_cost == null || crates < st.lvl_cost;
-    E.sl.textContent = L.store + ' · ' + L.lv + ' ' + st.store; E.ss.textContent = L.cap(st.cap_h) + (st.store_cost != null ? ' → ' + L.cap(st.cap_h + 2) : '');
+    E.sl.textContent = L.store + ' · ' + L.lv + ' ' + st.store; E.ss.textContent = L.cap(st.cap_h) + (st.store_cost != null ? ' → ' + L.cap(Number(st.cap_h) + 0.5) /* 16h44: +30 min per storage level */ : '');
     E.s.textContent = st.store_cost != null ? nf(st.store_cost) + ' 📦' : L.max; E.s.disabled = busy || st.store_cost == null || crates < st.store_cost;
     var convLeft = Math.max(0, st.day_cap - st.conv_today), convN = Math.min(Math.floor(st.crates), Math.ceil(convLeft / st.conv));
     E.vs.textContent = L.convS(st.conv, nf(st.conv_today), nf(st.day_cap));
