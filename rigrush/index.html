@@ -1125,9 +1125,9 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
   var lc = String((tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || 'en');
   var L = /^fr/.test(lc) ? 'fr' : /^(ru|be|kk)/.test(lc) ? 'ru' : 'en';
   var TX = {
-    fr: { h: '🗳️ Ton avis compte !', q: 'Pour la suite de Rig Rush, tu préfères quoi ?', usdt: ['💵 Des USDT', 'Échanger mes RIGZ contre des USDT, petit à petit'], airdrop: ['🪂 Un airdrop', 'Tout garder pour un gros airdrop plus tard'], both: ['⚖️ Les deux', 'Un peu d\'USDT maintenant + l\'airdrop'], thx: '✅ Merci, ton vote est enregistré !', res: 'Résultats', votes: 'votes', change: 'Tu peux changer ton vote quand tu veux.', close: 'Fermer' },
-    en: { h: '🗳️ Your opinion matters!', q: 'For the future of Rig Rush, what do you prefer?', usdt: ['💵 USDT', 'Swap my RIGZ for USDT, little by little'], airdrop: ['🪂 An airdrop', 'Keep everything for a big airdrop later'], both: ['⚖️ Both', 'A little USDT now + the airdrop'], thx: '✅ Thanks, your vote is saved!', res: 'Results', votes: 'votes', change: 'You can change your vote anytime.', close: 'Close' },
-    ru: { h: '🗳️ Твоё мнение важно!', q: 'Что ты предпочитаешь для Rig Rush дальше?', usdt: ['💵 USDT', 'Менять RIGZ на USDT понемногу'], airdrop: ['🪂 Airdrop', 'Копить всё для большого airdrop позже'], both: ['⚖️ И то, и другое', 'Немного USDT сейчас + airdrop'], thx: '✅ Спасибо, твой голос сохранён!', res: 'Результаты', votes: 'голосов', change: 'Ты можешь изменить голос в любой момент.', close: 'Закрыть' }
+    fr: { h: '🗳️ Ton avis compte !', q: 'Pour la suite de Rig Rush, tu préfères quoi ?', usdt: ['💵 Des USDT', 'Échanger mes RIGZ contre des USDT, petit à petit'], airdrop: ['🪂 Un airdrop', 'Tout garder pour un gros airdrop plus tard'], both: ['⚖️ Les deux', 'Un peu d\'USDT maintenant + l\'airdrop'], thx: '✅ Merci, ton vote est enregistré !', res: 'Résultats', votes: 'votes', change: 'Tu peux changer ton vote quand tu veux.', close: 'Fermer', rt: '📊 Résultats du sondage' },
+    en: { h: '🗳️ Your opinion matters!', q: 'For the future of Rig Rush, what do you prefer?', usdt: ['💵 USDT', 'Swap my RIGZ for USDT, little by little'], airdrop: ['🪂 An airdrop', 'Keep everything for a big airdrop later'], both: ['⚖️ Both', 'A little USDT now + the airdrop'], thx: '✅ Thanks, your vote is saved!', res: 'Results', votes: 'votes', change: 'You can change your vote anytime.', close: 'Close', rt: '📊 Poll results' },
+    ru: { h: '🗳️ Твоё мнение важно!', q: 'Что ты предпочитаешь для Rig Rush дальше?', usdt: ['💵 USDT', 'Менять RIGZ на USDT понемногу'], airdrop: ['🪂 Airdrop', 'Копить всё для большого airdrop позже'], both: ['⚖️ И то, и другое', 'Немного USDT сейчас + airdrop'], thx: '✅ Спасибо, твой голос сохранён!', res: 'Результаты', votes: 'голосов', change: 'Ты можешь изменить голос в любой момент.', close: 'Закрыть', rt: '📊 Результаты опроса' }
   }[L];
   var KEYS = ['usdt', 'airdrop', 'both'];
   var s = document.createElement('style');
@@ -1145,7 +1145,7 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
   function draw(r, voted) {
     if (!box) { box = document.createElement('div'); box.id = 'rrPoll'; document.body.appendChild(box); box.onclick = function (e) { if (e.target === box) close(); }; }
     var res = (r && r.res) || {}, tot = KEYS.reduce(function (a, k) { return a + (Number(res[k]) || 0); }, 0), mine = r && r.mine;
-    var h = '<div class="pb"><h3>' + (voted ? TX.thx : TX.h) + '</h3><p>' + TX.q + '</p>';
+    var h = '<div class="pb"><h3>' + (voted ? TX.thx : mine ? TX.rt : TX.h) + '</h3><p>' + TX.q + '</p>';
     KEYS.forEach(function (k) {
       var pc = tot ? Math.round((Number(res[k]) || 0) / tot * 100) : 0;
       h += '<button class="op' + (mine === k ? ' me' : '') + '" data-k="' + k + '">' + (mine ? '<i style="width:' + pc + '%"></i><span class="pc">' + pc + ' %</span>' : '') + '<b>' + TX[k][0] + '</b><small>' + TX[k][1] + '</small></button>';
@@ -1165,8 +1165,8 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
   setTimeout(function () {
     api('poll').then(function (r) {
       if (!r || !r.ok || !r.on) return; cur = r;
-      var seen = false; try { seen = localStorage.getItem('rr_poll1') === '1'; } catch (e) {}
-      if (sp === 'poll' || (!r.mine && !seen)) { try { localStorage.setItem('rr_poll1', '1'); } catch (e) {} draw(r, false); }
+      // 20h10 (Jeremy): no message to all players: the poll spreads little by little, and it shows at every opening (the vote, or the results once voted)
+      draw(r, false);
     }).catch(function () {});
   }, 2500);
 })();
