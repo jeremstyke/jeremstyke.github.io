@@ -73,8 +73,7 @@
       d: { en: 'Hold the baton, earn real USDT', fr: 'Garde le bâton, gagne de vrais USDT', es: 'Guarda el testigo y gana USDT reales', pt: 'Segure o bastão e ganhe USDT de verdade', ru: 'Держи эстафету и зарабатывай USDT', uk: 'Тримай естафету й заробляй USDT', tr: 'Bayrağı tut, gerçek USDT kazan', id: 'Pegang tongkat, dapatkan USDT asli', ar: 'احتفظ بالعصا واربح USDT حقيقية', fa: 'باتوم را نگه دار و USDT واقعی بگیر', de: 'Halte den Staffelstab, verdiene echte USDT', it: 'Tieni il testimone e guadagna USDT veri' } },
     // 29 oct 2026 (19h01, Jeremy): the 🎮 menu everywhere with all the games: Tic Tac Cash and Rig Rush (relaunched)
     // 30 oct 2026 (0h28, Jeremy): Tic Tac Cash closed
-    { id: 'rr', e: '💻', n: 'Rig Rush', u: 'https://t.me/RigRushBot?startapp=src_xg_', c: '#39ff88',
-      d: { en: 'Mine $RIGZ for the coming airdrop', fr: 'Mine des $RIGZ pour le futur airdrop', es: 'Mina $RIGZ para el próximo airdrop', pt: 'Minere $RIGZ para o próximo airdrop', ru: 'Майни $RIGZ для будущего airdrop', uk: 'Майни $RIGZ для майбутнього airdrop', tr: 'Gelecek airdrop için $RIGZ kaz', id: 'Tambang $RIGZ untuk airdrop mendatang', ar: 'عدّن $RIGZ للـ airdrop القادم', fa: 'برای ایردراپ آینده $RIGZ استخراج کن', de: 'Mine $RIGZ für den kommenden Airdrop', it: 'Mina $RIGZ per il prossimo airdrop' } },
+    // 1 nov 2026 (00h35, Jeremy): Rig Rush closed again (its RIGZ became $BATON), removed from the list
     // 25 oct 2026 (Jeremy): Tap the Diamond
     // 25 oct 2026 (23h08, Jeremy): Tap the Diamond closed, removed from the list
     // 26 oct 2026 (8h00, Jeremy): Rig Rush closed, removed from the list
