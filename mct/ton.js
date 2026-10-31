@@ -273,14 +273,13 @@ async function tonPlace() {
 let USDTB = null;
 // 17 oct 2026 (18h20): smaller, one line like Daily Score: my gains + everything that can be earned (scrolling), and 2 small buttons
 // 18 oct 2026 (Jeremy): the bar follows the player's language (it kept the language it was built in when he changed it)
-const usdtGain = () => BTNOW() ? (({ fr: 'Mes gains : ', id: 'Penghasilanku: ', ar: 'أرباحي: ' })[LANG] || 'My earnings: ') + Number((TONLAST && TONLAST.bt) || 0).toLocaleString(LANG === 'fr' ? 'fr-FR' : 'en-US', { maximumFractionDigits: 2 }) + ' RIGZ' : TONLAST && TONLAST.ok ? (({ fr: 'Mes gains : ', id: 'Penghasilanku: ', ar: 'أرباحي: ' })[LANG] || 'My earnings: ') + tonM(Number(TONLAST.balance || 0) + Number(TONLAST.paid || 0) + Number(TONLAST.waiting || 0)) : tonL().bh.replace(/^💵 /, '');
+const usdtGain = () => BTNOW() ? (({ fr: 'Mes gains : ', id: 'Penghasilanku: ', ar: 'أرباحي: ' })[LANG] || 'My earnings: ') + Number((TONLAST && TONLAST.bt) || 0).toLocaleString(LANG === 'fr' ? 'fr-FR' : 'en-US') + ' $BATON' : TONLAST && TONLAST.ok ? (({ fr: 'Mes gains : ', id: 'Penghasilanku: ', ar: 'أرباحي: ' })[LANG] || 'My earnings: ') + tonM(Number(TONLAST.balance || 0) + Number(TONLAST.paid || 0) + Number(TONLAST.waiting || 0)) : tonL().bh.replace(/^💵 /, '');
 function usdtWays() {
-  // 31 oct 2026 (23h, Jeremy): Meme Coin Tycoon pays RIGZ on Rig Rush (1,000 RIGZ = 1 USDT)
   if (BTNOW()) return ({
-    fr: '🎯 Mission partenaire : +1 RIGZ · 👥 Ami invité : +3 RIGZ · 🏆 Concours de la semaine : jusqu\'à 100 RIGZ · 💵 1 000 RIGZ = 1 $ en USDT sur Rig Rush · Touche ici pour les récupérer',
-    id: '🎯 Misi partner: +1 RIGZ · 👥 Teman diundang: +3 RIGZ · 🏆 Kontes mingguan: hingga 100 RIGZ · 💵 1.000 RIGZ = $1 dalam USDT di Rig Rush · Ketuk di sini untuk mengambilnya',
-    ar: '🎯 مهمة الشريك: ‎+1 RIGZ · 👥 صديق مدعو: ‎+3 RIGZ · 🏆 مسابقة الأسبوع: حتى 100 RIGZ · 💵 1,000 RIGZ = 1 $ USDT على Rig Rush · اضغط هنا لاستلامها',
-  })[LANG] || '🎯 Partner mission: +1 RIGZ · 👥 Invited friend: +3 RIGZ · 🏆 Weekly contest: up to 100 RIGZ · 💵 1,000 RIGZ = $1 in USDT on Rig Rush · Tap here to collect them';
+    fr: '🎯 Mission partenaire : +1 000 $BATON · 👥 Ami invité : +10 000 $BATON · 🏆 Concours de la semaine : jusqu\'à 100 000 $BATON · 💵 1 million de $BATON = 1 $ en USDT sur Pass The Baton · Touche ici pour les récupérer',
+    id: '🎯 Misi partner: +1.000 $BATON · 👥 Teman diundang: +10.000 $BATON · 🏆 Kontes mingguan: hingga 100.000 $BATON · 💵 1 juta $BATON = $1 dalam USDT di Pass The Baton · Ketuk di sini untuk mengambilnya',
+    ar: '🎯 مهمة الشريك: \u200e+1,000 $BATON · 👥 صديق مدعو: \u200e+10,000 $BATON · 🏆 مسابقة الأسبوع: حتى 100,000 $BATON · 💵 مليون $BATON = 1 $ USDT على Pass The Baton · اضغط هنا لاستلامها',
+  })[LANG] || '🎯 Partner mission: +1,000 $BATON · 👥 Invited friend: +10,000 $BATON · 🏆 Weekly contest: up to 100,000 $BATON · 💵 1 million $BATON = $1 in USDT on Pass The Baton · Tap here to collect them';
   const u = tonM((TONLAST && TONLAST.usd) || 0.05);
   // 19 oct 2026 (Jeremy): a player caught cheating sees, in the scrolling bar, that he is excluded from payments
   if (TONLAST && TONLAST.banned) return ({ fr: '🚫 Tu es exclu des paiements : notre anti-triche a détecté un bot ou un autoclicker. Tu ne recevras plus aucun paiement de notre part (amis, diamant, concours).', ar: '🚫 أنت مستبعد من المدفوعات: اكتشف نظام مكافحة الغش لدينا روبوتًا أو نقرًا آليًا. لن تتلقى أي دفعات منا بعد الآن (الأصدقاء، الماسة، المسابقات).', id: '🚫 Kamu dikeluarkan dari pembayaran: sistem anti-curang kami mendeteksi bot atau autoclicker. Kamu tidak akan menerima pembayaran lagi dari kami (teman, berlian, kontes).' })[LANG] || '🚫 You are excluded from payments: our anti-cheat detected a bot or an autoclicker. You will not receive any more payments from us (friends, diamond, contests).';
@@ -320,12 +319,12 @@ async function usdtBar() {
   const d = document.createElement('div'); d.id = 'usdtb';
   // 17 oct 2026 (Jeremy, 23h): the diamond moves from the top bar to this bar (the clans take its place at the top)
   d.innerHTML = '<div class="ubi"><span style="font-size:22px">💵</span><div class="ubt"><b class="ubm"></b><span class="ubw"><span></span></span></div><button class="ubx ubd" type="button" aria-label="Diamond" style="background:rgba(46,230,255,.18);border:1px solid rgba(46,230,255,.5)">💎</button></div>';
-  if (BTNOW()) d.innerHTML = '<div class="ubi" style="border-color:rgba(80,160,255,.6);background:linear-gradient(135deg,rgba(20,40,90,.97),rgba(18,22,44,.97))"><span style="font-size:22px">💻</span><div class="ubt"><b class="ubm"></b><span class="ubw"><span></span></span></div><span class="ubx" style="display:grid;place-items:center;background:rgba(47,141,255,.25);border:1px solid rgba(80,160,255,.6)">›</span></div>';
+  if (BTNOW()) d.innerHTML = '<div class="ubi" style="border-color:rgba(80,160,255,.6);background:linear-gradient(135deg,rgba(20,40,90,.97),rgba(18,22,44,.97))"><span style="font-size:22px">🏃</span><div class="ubt"><b class="ubm"></b><span class="ubw"><span></span></span></div><span class="ubx" style="display:grid;place-items:center;background:rgba(47,141,255,.25);border:1px solid rgba(80,160,255,.6)">›</span></div>';
   d.querySelector('.ubm').textContent = usdtGain(); d.querySelector('.ubw span').textContent = usdtWays(); d.dataset.l = LANG; if (TONLAST && TONLAST.banned && !BTNOW()) d.classList.add('ban');
   d.querySelector('.ubi').onclick = (e) => {
     try { haptic(); } catch (x) {}
     if (e && e.target && e.target.closest && e.target.closest('.ubd')) { const g = document.getElementById('diatop'); if (g) g.click(); return; }
-    if (BTNOW()) { const u = 'https://t.me/RigRushBot?startapp=shop'; try { tw.openTelegramLink(u); } catch (x) { location.href = u; } return; }
+    if (BTNOW()) { const u = 'https://t.me/PassTheBatonBot/play?startapp=src_mctbar'; try { tw.openTelegramLink(u); } catch (x) { location.href = u; } return; }
     tonPage();
   };
   document.body.appendChild(d); document.body.classList.add('ub'); USDTB = d;
