@@ -257,12 +257,12 @@
 (() => {
   const BLOCK = 'task-56017';
   const TT = {
-    fr: { h: '🤝 Mission partenaire', r: '+100 $ · +1 RIGZ', go: 'Go', claim: 'Récupérer', done: 'Fait ✅', wait: 'Prochaine mission dans', ok: '💵 +100 $ ajoutés à ton cash, et +1 RIGZ sur Rig Rush !' },
-    id: { h: '🤝 Misi partner', r: '+$100 · +1 RIGZ', go: 'Mulai', claim: 'Klaim', done: 'Selesai ✅', wait: 'Misi berikutnya dalam', ok: '💵 +$100 ditambahkan ke uangmu, dan +1 RIGZ di Rig Rush!' },
-    ru: { h: '🤝 Задание партнёра', r: '+$100 · +1 RIGZ', go: 'Go', claim: 'Забрать', done: 'Готово ✅', wait: 'Следующее задание через', ok: '💵 +$100 к твоим деньгам и +1 RIGZ в Rig Rush!' },
-    ar: { h: '🤝 مهمة شريك', r: '+$100 · +1 RIGZ', go: 'ابدأ', claim: 'استلم', done: 'تم ✅', wait: 'المهمة التالية بعد', ok: '💵 تمت إضافة $100 إلى أموالك و1 RIGZ في Rig Rush!' },
-    fa: { h: '🤝 مأموریت همکار', r: '+100 دلار · +1 RIGZ', go: 'برو', claim: 'دریافت', done: 'انجام شد ✅', wait: 'مأموریت بعدی تا', ok: '💵 100 دلار به پولت و 1 RIGZ در Rig Rush اضافه شد!' },
-    en: { h: '🤝 Partner mission', r: '+$100 · +1 RIGZ', go: 'Go', claim: 'Claim', done: 'Done ✅', wait: 'Next mission in', ok: '💵 +$100 added to your cash, and +1 RIGZ on Rig Rush!' },
+    fr: { h: '🤝 Mission partenaire', r: '+100 $ · +100 $BATON', go: 'Go', claim: 'Récupérer', done: 'Fait ✅', wait: 'Prochaine mission dans', ok: '💵 +100 $ ajoutés à ton cash, et +100 $BATON sur Pass The Baton !' },
+    id: { h: '🤝 Misi partner', r: '+$100 · +100 $BATON', go: 'Mulai', claim: 'Klaim', done: 'Selesai ✅', wait: 'Misi berikutnya dalam', ok: '💵 +$100 ditambahkan ke uangmu, dan +100 $BATON di Pass The Baton!' },
+    ru: { h: '🤝 Задание партнёра', r: '+$100 · +100 $BATON', go: 'Go', claim: 'Забрать', done: 'Готово ✅', wait: 'Следующее задание через', ok: '💵 +$100 к твоим деньгам и +100 $BATON в Pass The Baton!' },
+    ar: { h: '🤝 مهمة شريك', r: '+$100 · +100 $BATON', go: 'ابدأ', claim: 'استلم', done: 'تم ✅', wait: 'المهمة التالية بعد', ok: '💵 تمت إضافة $100 إلى أموالك و100 $BATON في Pass The Baton!' },
+    fa: { h: '🤝 مأموریت همکار', r: '+100 دلار · +100 $BATON', go: 'برو', claim: 'دریافت', done: 'انجام شد ✅', wait: 'مأموریت بعدی تا', ok: '💵 100 دلار به پولت و 100 $BATON در Pass The Baton اضافه شد!' },
+    en: { h: '🤝 Partner mission', r: '+$100 · +100 $BATON', go: 'Go', claim: 'Claim', done: 'Done ✅', wait: 'Next mission in', ok: '💵 +$100 added to your cash, and +100 $BATON on Pass The Baton!' },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TT[l] || TT.en; };
   // 28 oct 2026 (18h, Jeremy): 5 partner missions a day at most: once done, the block says so instead of offering more
