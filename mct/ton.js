@@ -276,10 +276,10 @@ let USDTB = null;
 const usdtGain = () => BTNOW() ? (({ fr: 'Mes gains : ', id: 'Penghasilanku: ', ar: 'أرباحي: ' })[LANG] || 'My earnings: ') + Number((TONLAST && TONLAST.bt) || 0).toLocaleString(LANG === 'fr' ? 'fr-FR' : 'en-US') + ' $BATON' : TONLAST && TONLAST.ok ? (({ fr: 'Mes gains : ', id: 'Penghasilanku: ', ar: 'أرباحي: ' })[LANG] || 'My earnings: ') + tonM(Number(TONLAST.balance || 0) + Number(TONLAST.paid || 0) + Number(TONLAST.waiting || 0)) : tonL().bh.replace(/^💵 /, '');
 function usdtWays() {
   if (BTNOW()) return ({
-    fr: '🎯 Mission partenaire : +1 000 $BATON · 👥 Ami invité : +10 000 $BATON · 🏆 Concours de la semaine : jusqu\'à 100 000 $BATON · 💵 1 million de $BATON = 1 $ en USDT sur Pass The Baton · Touche ici pour les récupérer',
-    id: '🎯 Misi partner: +1.000 $BATON · 👥 Teman diundang: +10.000 $BATON · 🏆 Kontes mingguan: hingga 100.000 $BATON · 💵 1 juta $BATON = $1 dalam USDT di Pass The Baton · Ketuk di sini untuk mengambilnya',
-    ar: '🎯 مهمة الشريك: \u200e+1,000 $BATON · 👥 صديق مدعو: \u200e+10,000 $BATON · 🏆 مسابقة الأسبوع: حتى 100,000 $BATON · 💵 مليون $BATON = 1 $ USDT على Pass The Baton · اضغط هنا لاستلامها',
-  })[LANG] || '🎯 Partner mission: +1,000 $BATON · 👥 Invited friend: +10,000 $BATON · 🏆 Weekly contest: up to 100,000 $BATON · 💵 1 million $BATON = $1 in USDT on Pass The Baton · Tap here to collect them';
+    fr: '🎯 Mission partenaire : +100 $BATON · 👥 Ami invité : +3 000 $BATON · 🏆 Concours de la semaine : jusqu\'à 100 000 $BATON · 💵 1 million de $BATON = 1 $ en USDT sur Pass The Baton · Touche ici pour voir tes gains',
+    id: '🎯 Misi partner: +100 $BATON · 👥 Teman diundang: +3.000 $BATON · 🏆 Kontes mingguan: hingga 100.000 $BATON · 💵 1 juta $BATON = $1 dalam USDT di Pass The Baton · Ketuk di sini untuk melihat penghasilanmu',
+    ar: '🎯 مهمة الشريك: \u200e+100 $BATON · 👥 صديق مدعو: \u200e+3,000 $BATON · 🏆 مسابقة الأسبوع: حتى 100,000 $BATON · 💵 مليون $BATON = 1 $ USDT على Pass The Baton · اضغط هنا لاستلامها',
+  })[LANG] || '🎯 Partner mission: +100 $BATON · 👥 Invited friend: +3,000 $BATON · 🏆 Weekly contest: up to 100,000 $BATON · 💵 1 million $BATON = $1 in USDT on Pass The Baton · Tap here to see your earnings';
   const u = tonM((TONLAST && TONLAST.usd) || 0.05);
   // 19 oct 2026 (Jeremy): a player caught cheating sees, in the scrolling bar, that he is excluded from payments
   if (TONLAST && TONLAST.banned) return ({ fr: '🚫 Tu es exclu des paiements : notre anti-triche a détecté un bot ou un autoclicker. Tu ne recevras plus aucun paiement de notre part (amis, diamant, concours).', ar: '🚫 أنت مستبعد من المدفوعات: اكتشف نظام مكافحة الغش لدينا روبوتًا أو نقرًا آليًا. لن تتلقى أي دفعات منا بعد الآن (الأصدقاء، الماسة، المسابقات).', id: '🚫 Kamu dikeluarkan dari pembayaran: sistem anti-curang kami mendeteksi bot atau autoclicker. Kamu tidak akan menerima pembayaran lagi dari kami (teman, berlian, kontes).' })[LANG] || '🚫 You are excluded from payments: our anti-cheat detected a bot or an autoclicker. You will not receive any more payments from us (friends, diamond, contests).';
@@ -324,7 +324,7 @@ async function usdtBar() {
   d.querySelector('.ubi').onclick = (e) => {
     try { haptic(); } catch (x) {}
     if (e && e.target && e.target.closest && e.target.closest('.ubd')) { const g = document.getElementById('diatop'); if (g) g.click(); return; }
-    if (BTNOW()) { const u = 'https://t.me/PassTheBatonBot/play?startapp=src_mctbar'; try { tw.openTelegramLink(u); } catch (x) { location.href = u; } return; }
+    if (BTNOW()) { btGains(); return; }  // 1 nov 2026 (00h40, Jeremy): a sheet with every way to earn $BATON first
     tonPage();
   };
   document.body.appendChild(d); document.body.classList.add('ub'); USDTB = d;
@@ -648,3 +648,64 @@ new MutationObserver(() => { document.querySelectorAll('#crsh:not([data-done])')
     if (LL) Object.keys(LL).forEach((k) => { if (LL[k] && typeof LL[k] === 'object' && LL[k].err && typeof LL[k].err === 'object') LL[k].err.rugwait = lr[k] || lr.en; });
   } catch (e) {}
 })();
+
+// 1 nov 2026 (00h40, Jeremy): the blue $BATON bar no longer jumps straight to Pass The Baton: it opens a sheet that explains every way to
+// earn $BATON in Meme Coin Tycoon (the real amounts of the server), with the button to Pass The Baton inside.
+function btGains() {
+  const old = document.getElementById('btgs'); if (old) old.remove();
+  const G = {
+    fr: { h: '🏃 Tes gains en $BATON', s: 'Tu as gagné {n} $BATON en jouant à Meme Coin Tycoon. Ils t\'attendent sur Pass The Baton.', l: [
+      ['🎯', 'Mission partenaire', '+100 $BATON à chaque mission (sur le Marché)'],
+      ['👥', 'Ami invité', '+3 000 $BATON quand ton ami commence à jouer'],
+      ['🏆', 'Concours de la semaine', '100 000 / 50 000 / 25 000 $BATON, 10 000 du 4e au 10e, 1 000 pour chaque joueur classé'],
+      ['📈', 'Bourse', 'Des dividendes chaque jour sur tes actions (jusqu\'à 1 000 $BATON) et un concours chaque semaine (jusqu\'à 50 000)']],
+      u: '💵 Sur Pass The Baton, échange tes $BATON contre de vrais USDT : 1 million de $BATON = 1 $.', b: '🏃 Récupérer mes $BATON sur Pass The Baton', x: 'Fermer' },
+    en: { h: '🏃 Your $BATON earnings', s: 'You earned {n} $BATON playing Meme Coin Tycoon. They are waiting for you on Pass The Baton.', l: [
+      ['🎯', 'Partner mission', '+100 $BATON for every mission (on the Market)'],
+      ['👥', 'Invited friend', '+3,000 $BATON when your friend starts playing'],
+      ['🏆', 'Weekly contest', '100,000 / 50,000 / 25,000 $BATON, 10,000 from 4th to 10th, 1,000 for every ranked player'],
+      ['📈', 'Stock market', 'Daily dividends on your shares (up to 1,000 $BATON) and a weekly contest (up to 50,000)']],
+      u: '💵 On Pass The Baton, trade your $BATON for real USDT: 1 million $BATON = $1.', b: '🏃 Collect my $BATON on Pass The Baton', x: 'Close' },
+    ru: { h: '🏃 Твои $BATON', s: 'Ты заработал {n} $BATON в Meme Coin Tycoon. Они ждут тебя в Pass The Baton.', l: [
+      ['🎯', 'Партнёрская миссия', '+100 $BATON за каждую миссию (на Рынке)'],
+      ['👥', 'Приглашённый друг', '+3 000 $BATON, когда друг начинает играть'],
+      ['🏆', 'Конкурс недели', '100 000 / 50 000 / 25 000 $BATON, 10 000 с 4-го по 10-е место, 1 000 каждому в рейтинге'],
+      ['📈', 'Биржа', 'Дивиденды каждый день (до 1 000 $BATON) и конкурс каждую неделю (до 50 000)']],
+      u: '💵 В Pass The Baton обменивай $BATON на настоящие USDT: 1 миллион $BATON = 1 $.', b: '🏃 Забрать мои $BATON в Pass The Baton', x: 'Закрыть' },
+    id: { h: '🏃 Penghasilan $BATON-mu', s: 'Kamu mendapat {n} $BATON dari Meme Coin Tycoon. Semuanya menunggumu di Pass The Baton.', l: [
+      ['🎯', 'Misi partner', '+100 $BATON tiap misi (di Pasar)'],
+      ['👥', 'Teman diundang', '+3.000 $BATON saat temanmu mulai bermain'],
+      ['🏆', 'Kontes mingguan', '100.000 / 50.000 / 25.000 $BATON, 10.000 untuk peringkat 4-10, 1.000 untuk setiap pemain berperingkat'],
+      ['📈', 'Bursa saham', 'Dividen tiap hari (hingga 1.000 $BATON) dan kontes tiap minggu (hingga 50.000)']],
+      u: '💵 Di Pass The Baton, tukar $BATON-mu dengan USDT asli: 1 juta $BATON = $1.', b: '🏃 Ambil $BATON-ku di Pass The Baton', x: 'Tutup' },
+    ar: { h: '🏃 أرباحك من $BATON', s: 'ربحت {n} $BATON في Meme Coin Tycoon. إنها بانتظارك في Pass The Baton.', l: [
+      ['🎯', 'مهمة الشريك', '+100 $BATON لكل مهمة (في السوق)'],
+      ['👥', 'صديق مدعو', '+3,000 $BATON عندما يبدأ صديقك اللعب'],
+      ['🏆', 'مسابقة الأسبوع', '100,000 / 50,000 / 25,000 $BATON، و10,000 من المركز 4 إلى 10، و1,000 لكل لاعب مصنف'],
+      ['📈', 'البورصة', 'أرباح يومية على أسهمك (حتى 1,000 $BATON) ومسابقة كل أسبوع (حتى 50,000)']],
+      u: '💵 في Pass The Baton، بدّل $BATON بعملة USDT حقيقية: مليون $BATON = 1 $.', b: '🏃 استلم $BATON في Pass The Baton', x: 'إغلاق' },
+    fa: { h: '🏃 درآمد $BATON تو', s: 'در Meme Coin Tycoon مقدار {n} $BATON به دست آوردی. در Pass The Baton منتظرت هستند.', l: [
+      ['🎯', 'مأموریت همکار', '+100 $BATON برای هر مأموریت (در بازار)'],
+      ['👥', 'دوست دعوت‌شده', '+3,000 $BATON وقتی دوستت بازی را شروع کند'],
+      ['🏆', 'مسابقه هفته', '100,000 / 50,000 / 25,000 $BATON، 10,000 برای رتبه ۴ تا ۱۰، 1,000 برای هر بازیکن رتبه‌دار'],
+      ['📈', 'بورس', 'سود روزانه سهام (تا 1,000 $BATON) و مسابقه هر هفته (تا 50,000)']],
+      u: '💵 در Pass The Baton، $BATON را با USDT واقعی عوض کن: یک میلیون $BATON = ۱ دلار.', b: '🏃 دریافت $BATON در Pass The Baton', x: 'بستن' },
+  };
+  const t = G[LANG] || G.en, rtl = LANG === 'ar' || LANG === 'fa';
+  const n = Number((TONLAST && TONLAST.bt) || 0).toLocaleString(LANG === 'fr' ? 'fr-FR' : 'en-US');
+  const e = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const el = document.createElement('div'); el.id = 'btgs'; if (rtl) el.dir = 'rtl';
+  el.style.cssText = 'position:fixed;inset:0;z-index:99990;display:flex;align-items:flex-end;justify-content:center;background:rgba(3,8,20,.72)';
+  el.innerHTML = '<div style="width:100%;max-width:520px;max-height:88vh;overflow-y:auto;box-sizing:border-box;padding:20px 16px calc(18px + env(safe-area-inset-bottom,0px));border-radius:22px 22px 0 0;border:1px solid rgba(80,160,255,.55);border-bottom:0;background:radial-gradient(90% 50% at 50% 0%,rgba(47,141,255,.30),transparent 70%),#0b1626;color:#e9f1ff;display:flex;flex-direction:column;gap:10px;text-align:start">'
+    + '<div style="font-size:19px;font-weight:900">' + e(t.h) + '</div>'
+    + '<div style="font-size:14px;line-height:1.45;opacity:.9">' + e(t.s.replace('{n}', n)) + '</div>'
+    + t.l.map((r) => '<div style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.05)"><span style="font-size:20px;line-height:1.2">' + r[0] + '</span><div style="min-width:0"><b style="display:block;font-size:14px">' + e(r[1]) + '</b><span style="font-size:13px;line-height:1.4;opacity:.85">' + e(r[2]) + '</span></div></div>').join('')
+    + '<div style="padding:10px 12px;border-radius:14px;border:1px solid rgba(255,197,49,.45);background:rgba(255,197,49,.08);font-size:13px;line-height:1.4">' + e(t.u) + '</div>'
+    + '<button id="btgs_go" type="button" style="width:100%;min-height:52px;border:0;border-radius:16px;background:linear-gradient(180deg,#3f9bff,#1f6fe0);color:#fff;font-weight:800;font-size:16px;cursor:pointer">' + e(t.b) + '</button>'
+    + '<button id="btgs_x" type="button" style="width:100%;min-height:40px;border:0;background:none;color:rgba(233,241,255,.6);font-size:14px;cursor:pointer">' + e(t.x) + '</button></div>';
+  document.body.appendChild(el);
+  const close = () => el.remove();
+  el.addEventListener('click', (ev) => { if (ev.target === el) close(); });
+  el.querySelector('#btgs_x').onclick = close;
+  el.querySelector('#btgs_go').onclick = () => { try { haptic(); } catch (x) {} close(); const u = 'https://t.me/PassTheBatonBot/play?startapp=src_mctbar'; try { tw.openTelegramLink(u); } catch (x) { location.href = u; } };
+}
