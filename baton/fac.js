@@ -257,6 +257,25 @@
     timer = setInterval(draw, 1000);
   }
   function close() { hap(); clearInterval(timer); if (taps) flush(); if (scr) { scr.remove(); scr = null; E = {}; beltKey = ''; } }
+  // 31 oct 2026 (12h56, Jeremy): a small "Factory" button in the app, on the home screen under the balance (only where the server says facOn)
+  setInterval(function () {
+    var b = B(); if (!b || !b.S) return;
+    var c = document.getElementById('facBtn');
+    if (!c) {
+      var home = document.getElementById('p-home'), after = home && (document.getElementById('tkHome') || home.querySelector('.score'));
+      if (!after) return;
+      var s = document.createElement('style');
+      s.textContent = '#facBtn{display:inline-flex;align-items:center;gap:6px;margin:8px auto 0;padding:6px 14px;border-radius:99px;border:1.5px solid rgba(255,197,49,.6);background:rgba(255,197,49,.12);color:inherit;font-weight:800;font-size:13px;cursor:pointer}'
+        + '#facWrap{display:flex;justify-content:center}';
+      document.head.appendChild(s);
+      var w = document.createElement('div'); w.id = 'facWrap';
+      c = document.createElement('button'); c.id = 'facBtn'; c.type = 'button';
+      c.textContent = b.lang === 'fr' ? '🏭 Mon usine' : '🏭 My factory';
+      c.onclick = function () { hap(); open(); };
+      w.appendChild(c); after.insertAdjacentElement('afterend', w);
+    }
+    c.parentNode.hidden = !b.S.facOn;
+  }, 1000);
   window.btFactory = open;
   // Baton Factory is its own mini app on the Pass The Baton bot: t.me/PassTheBatonBot/play?startapp=factory
   var tw = window.Telegram && Telegram.WebApp, sp = (tw && tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '';
