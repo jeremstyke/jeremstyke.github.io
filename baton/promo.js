@@ -2,6 +2,7 @@
 // of Tasks opens a sheet: what to promote (subscribers for a channel / group, or visits for a mini app, bot or website), the link,
 // the pack, paid in Stars (invoice of @PassTheBatonBot, bt_promo on the server), then "My campaigns".
 // 00h14: no more "1 million $BATON = 1 $ in USDT · Shop" line under the balance.
+// 00h46: the button sits right under the "Tasks" title (a full-width row), and any quantity can be bought, 50 by 50.
 (function () {
   try {
     var tw = window.Telegram && Telegram.WebApp; if (!(tw && tw.initData)) return;
@@ -19,7 +20,7 @@
       admCh: 'Pour vérifier tes abonnés, ajoute @PassTheBatonBot comme admin de ta chaîne (décoche tous les droits : il ne publie jamais rien), puis appuie sur Vérifier.',
       admGr: 'Pour vérifier tes abonnés, ajoute @PassTheBatonBot à ton groupe (il ne publie jamais rien), puis appuie sur Vérifier.',
       addCh: '➕ Ajouter le bot à ma chaîne', addGr: '➕ Ajouter le bot à mon groupe', check: '✅ Vérifier', notYet: 'Le bot n\'est pas encore admin. Ajoute-le puis réessaie.',
-      pick: 'Choisis ton pack', u: { sub: 'abonnés', click: 'visites' }, deliv: 'Livraison progressive selon les joueurs actifs.',
+      pick: 'Combien en veux-tu ? (par 50)', pay: function (n) { return 'Payer ' + n + ' ⭐'; }, u: { sub: 'abonnés', click: 'visites' }, deliv: 'Livraison progressive selon les joueurs actifs.',
       live: '🚀 C\'est parti ! Ta campagne est en ligne.', free: '🎁 Gratuit pour toi : campagne en ligne.',
       st: { live: '🟢 en cours', done: '✅ terminée', stopped: '⛔ arrêtée' }, kept: 'restés', err: { bad_sub: 'Chaîne ou groupe introuvable : il doit être public avec un @nom.', bad_click: 'Envoie le @nom de ton bot (il finit par « bot ») ou son lien t.me.', bad_web: 'L\'adresse doit commencer par https://', other: 'Oups, réessaie.' }
     } : {
@@ -34,7 +35,7 @@
       admCh: 'To check your subscribers, add @PassTheBatonBot as an admin of your channel (untick every right: it never posts anything), then tap Check.',
       admGr: 'To check your subscribers, add @PassTheBatonBot to your group (it never posts anything), then tap Check.',
       addCh: '➕ Add the bot to my channel', addGr: '➕ Add the bot to my group', check: '✅ Check', notYet: 'The bot is not an admin yet. Add it and try again.',
-      pick: 'Pick your pack', u: { sub: 'subscribers', click: 'visits' }, deliv: 'Delivered gradually by active players.',
+      pick: 'How many do you want? (50 by 50)', pay: function (n) { return 'Pay ' + n + ' ⭐'; }, u: { sub: 'subscribers', click: 'visits' }, deliv: 'Delivered gradually by active players.',
       live: '🚀 Live! Your campaign is running.', free: '🎁 Free for you: campaign live.',
       st: { live: '🟢 running', done: '✅ done', stopped: '⛔ stopped' }, kept: 'stayed', err: { bad_sub: 'Channel or group not found: it must be public with an @name.', bad_click: 'Send your bot\'s @username (it ends with "bot") or its t.me link.', bad_web: 'The address must start with https://', other: 'Oops, try again.' }
     };
@@ -48,7 +49,8 @@
     }
     var s = document.createElement('style');
     s.textContent = '[data-t="conv"]{display:none!important}#spTasks{display:none!important}'
-      + '#p-tasks>#prBtn{order:0;align-self:center;display:inline-flex;align-items:center;gap:6px;margin:0 auto 12px;padding:7px 14px;border-radius:99px;border:1px solid rgba(255,197,49,.45);background:rgba(255,197,49,.10);color:#ffd75a;font:inherit;font-weight:800;font-size:13px;cursor:pointer}'
+      + '#p-tasks>#prBtn{order:0;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;box-sizing:border-box;margin-top:10px;padding:12px 14px;border-radius:16px;border:1px solid rgba(255,197,49,.35);background:rgba(255,197,49,.08);color:#ffd75a;font:inherit;font-weight:800;font-size:13.5px;text-align:left;cursor:pointer}'
+      + '#prS .stp{display:flex;align-items:center;justify-content:center;gap:14px;margin:6px 0}#prS .stp button{width:48px;height:48px;border-radius:14px;border:1px solid rgba(255,197,49,.45);background:rgba(255,197,49,.10);color:#ffd75a;font:inherit;font-size:24px;font-weight:900;cursor:pointer}#prS .stp b{min-width:110px;text-align:center;font-size:26px}#prS .stp small{display:block;font-size:12px;opacity:.7;font-weight:700}'
       + '#prS{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.62);display:flex;align-items:flex-end;justify-content:center}'
       + '#prS .pb{width:100%;max-width:480px;max-height:86vh;overflow-y:auto;background:#1f1230;color:#fff3e6;border:1px solid rgba(255,197,49,.35);border-bottom:0;border-radius:22px 22px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:10px;box-sizing:border-box}'
       + '#prS h3{margin:0;font-size:18px}#prS p{margin:0;font-size:13.5px;line-height:1.45;opacity:.85}'
@@ -122,31 +124,37 @@
     }
     function packs(kind, o) {
       var show = function (c) {
-        var list = (c && c[kind]) || [];
+        var rate = Number((c && c[kind + '_rate']) || (kind === 'sub' ? 3 : 0.75)), max = Number((c && c.max) || 5000), q = 50;
         box.innerHTML = '<h3>' + esc(o.title) + '</h3><p>' + T.pick + ' · ' + T.deliv + '</p>'
-          + list.map(function (p, i) { return '<button class="pk" data-p="' + i + '"><span>' + nf(p[0]) + ' ' + T.u[kind] + '</span><em>' + nf(p[1]) + ' ⭐</em></button>'; }).join('')
-          + '<div class="er" id="prEr"></div>' + foot(true);
+          + '<div class="stp"><button type="button" data-d="-1">−</button><b id="prQ"></b><button type="button" data-d="1">+</button></div>'
+          + '<button class="go" id="prPay"></button><div class="er" id="prEr"></div>' + foot(true);
         wire(function () { target(kind, 'app'); });
-        box.querySelectorAll('[data-p]').forEach(function (b) {
-          b.onclick = function () {
-            hap(); b.disabled = true;
-            call('promo_pay', { id: o.id, pack: Number(b.dataset.p) }).then(function (r) {
-              b.disabled = false;
-              if (r && r.ok && r.free) { say(T.free); home(); return; }
-              if (!r || !r.ok || !r.link) { document.getElementById('prEr').textContent = T.err.other; return; }
-              tw.openInvoice(r.link, function (st) { if (st === 'paid') { say(T.live); home(); } });
-            });
-          };
-        });
+        var paint = function () {
+          document.getElementById('prQ').innerHTML = nf(q) + '<small>' + T.u[kind] + '</small>';
+          document.getElementById('prPay').textContent = T.pay(nf(Math.ceil(q * rate)));
+        };
+        box.querySelectorAll('[data-d]').forEach(function (b) { b.onclick = function () { hap(); q = Math.min(max, Math.max(50, q + 50 * Number(b.dataset.d))); paint(); }; });
+        paint();
+        var pay = document.getElementById('prPay');
+        pay.onclick = function () {
+          hap(); pay.disabled = true;
+          call('promo_pay', { id: o.id, qty: q }).then(function (r) {
+            pay.disabled = false;
+            if (r && r.ok && r.free) { say(T.free); home(); return; }
+            if (!r || !r.ok || !r.link) { document.getElementById('prEr').textContent = T.err.other; return; }
+            tw.openInvoice(r.link, function (st) { if (st === 'paid') { say(T.live); home(); } });
+          });
+        };
       };
       if (cfg) show(cfg); else call('promo').then(function (r) { cfg = r; show(r); });
     }
     // the button at the top of Tasks
     setInterval(function () {
       var pt = document.getElementById('p-tasks'); if (!pt || document.getElementById('prBtn')) return;
-      var b = document.createElement('button'); b.id = 'prBtn'; b.type = 'button'; b.textContent = T.btn + ' ›';
+      var sc = pt.querySelector('.score'); if (!sc) return;  // right under the "Tasks" title
+      var b = document.createElement('button'); b.id = 'prBtn'; b.type = 'button'; b.innerHTML = '<span>' + T.btn + '</span><span>›</span>';
       b.onclick = function () { hap(); open(); };
-      pt.insertBefore(b, pt.firstChild);
+      sc.insertAdjacentElement('afterend', b);
     }, 800);
     // opened from the bot ("My campaigns", "New campaign"): startapp=promo
     if (((tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '') === 'promo') setTimeout(open, 1500);
