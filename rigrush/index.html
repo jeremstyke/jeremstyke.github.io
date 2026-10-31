@@ -1388,6 +1388,64 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
   } catch (e) {}
 })();
 </script>
+<script>
+// 31 oct 2026 (23h35, Jeremy): two one-time tasks at the top of the Tasks window: @RigRushBot in the Telegram name (+5 RIGZ),
+// the referral link in the bio (+10 RIGZ). The server checks with getChat (rr_api 'social').
+(function () {
+  try {
+    var tw = window.Telegram && Telegram.WebApp; if (!(tw && tw.initData)) return;
+    var fr = /^fr/i.test((tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || '');
+    var T = fr ? {
+      n: 'Mets @RigRushBot dans ton nom', b: 'Ton lien d\'affiliation dans ta bio', v: 'Vérifier', cp: '📋 Copier',
+      ok: function (x) { return '✅ +' + x + ' RIGZ !'; }, copied: 'Lien copié ✅ Colle-le dans ta bio Telegram.',
+      nn: 'Pas encore trouvé : ajoute @RigRushBot à ton nom Telegram (Réglages > Modifier le profil), puis vérifie.',
+      nb: 'Pas encore trouvé : colle ton lien dans ta bio Telegram (Réglages > Modifier le profil > Bio), puis vérifie.',
+      chat: 'Ouvre d\'abord la conversation avec @RigRushBot et appuie sur Démarrer, puis réessaie.', err: 'Réessaie dans un instant.'
+    } : {
+      n: 'Put @RigRushBot in your name', b: 'Your referral link in your bio', v: 'Check', cp: '📋 Copy',
+      ok: function (x) { return '✅ +' + x + ' RIGZ!'; }, copied: 'Link copied ✅ Paste it in your Telegram bio.',
+      nn: 'Not found yet: add @RigRushBot to your Telegram name (Settings > Edit profile), then check.',
+      nb: 'Not found yet: paste your link in your Telegram bio (Settings > Edit profile > Bio), then check.',
+      chat: 'First open the chat with @RigRushBot and tap Start, then try again.', err: 'Try again in a moment.'
+    };
+    var s = document.createElement('style');
+    s.textContent = '#rrSoc .gb.v{background:#3ddc97;color:#06150e}#rrSoc .cp{flex:none;border:0;border-radius:10px;padding:8px 10px;font-weight:800;font-size:13px;background:rgba(255,255,255,.1);color:inherit}'
+      + '#rrSoc .tr .ic{background:rgba(61,220,151,.18)}#rrSoc .tr small{color:#3ddc97;opacity:1}';
+    document.head.appendChild(s);
+    var link = function () { var id = ''; try { id = (ST && ST.me && ST.me.id) || tw.initDataUnsafe.user.id; } catch (e) {} return 'https://t.me/RigRushBot?start=r' + id; };
+    function row(k, ic, t, amt, copy) {
+      var r = document.createElement('div'); r.className = 'tr'; r.id = 'rrSoc_' + k; r.style.cursor = 'default';
+      r.innerHTML = '<span class="ic">' + ic + '</span><span class="tx"><b>' + t + '</b><small>+' + amt + ' RIGZ</small></span>'
+        + (copy ? '<button type="button" class="cp">' + T.cp + '</button>' : '') + '<button type="button" class="gb v" style="border:0">' + T.v + '</button>';
+      if (copy) r.querySelector('.cp').onclick = function () {
+        var l = link(), done = function () { try { toast(T.copied); } catch (e) {} };
+        try { navigator.clipboard.writeText(l).then(done, function () { toast(l); }); } catch (e) { done(); }
+      };
+      var busy = false;
+      r.querySelector('.gb').onclick = function () {
+        if (busy) return; busy = true; var b = this; b.style.opacity = '.6';
+        api('social', { k: k }).then(function (x) {
+          if (x && x.ok) { toast(T.ok(x.amt)); r.remove(); setTimeout(function () { try { api('state').then(function (y) { try { take(y); } catch (e) {} }); } catch (e) {} }, 800); }
+          else if (x && x.error === 'done') r.remove();
+          else toast(x && x.error === 'notyet' ? (k === 'name' ? T.nn : T.nb) : x && x.error === 'chat' ? T.chat : T.err);
+        }).catch(function () { toast(T.err); }).then(function () { busy = false; b.style.opacity = ''; });
+      };
+      return r;
+    }
+    var tries = 0, iv = setInterval(function () {
+      var list = document.getElementById('rrTlist'); if (++tries > 60) clearInterval(iv); if (!list) return;
+      clearInterval(iv);
+      var box = document.createElement('div'); box.id = 'rrSoc';
+      box.appendChild(row('name', '✏️', T.n, 5, false));
+      box.appendChild(row('bio', '🔗', T.b, 10, true));
+      list.insertBefore(box, list.firstChild);
+      api('social', { k: 'st' }).then(function (x) {
+        (x && x.done || []).forEach(function (k) { var e = document.getElementById('rrSoc_' + k); if (e) e.remove(); });
+      }).catch(function () {});
+    }, 500);
+  } catch (e) {}
+})();
+</script>
 </body>
 
 
