@@ -258,19 +258,18 @@
   }
   function close() { hap(); clearInterval(timer); if (taps) flush(); if (scr) { scr.remove(); scr = null; E = {}; beltKey = ''; } }
   // 31 oct 2026 (12h56, Jeremy): a "Factory" entry in the app, on the home screen (only where the server says facOn).
-  // 16h20: made more visible: a big golden card right under the mine, with the crates waiting to be collected
+  // 16h20: made more visible: a golden card with the crates waiting to be collected. 16h28: toned down and moved under the baton cards (Pass The Baton stays first)
   var cardT = 0;
   setInterval(function () {
     var b = B(); if (!b || !b.S) return;
     var c = document.getElementById('facBtn');
     if (!c) {
-      var mine = document.getElementById('mineCard'); if (!mine) return;
+      var mine = document.getElementById('chainCard') || document.getElementById('batonCard'); if (!mine) return;
       var s = document.createElement('style');
-      s.textContent = '#facBtn{display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;margin:0 0 14px;border-radius:20px;border:2px solid #ffc531;background:linear-gradient(135deg,rgba(255,197,49,.28),rgba(255,130,47,.16));box-shadow:0 0 18px rgba(255,197,49,.25);color:inherit;text-align:left;cursor:pointer;animation:facGlow 2.4s ease-in-out infinite}'
-        + '@keyframes facGlow{50%{box-shadow:0 0 28px rgba(255,197,49,.5)}}'
-        + '#facBtn .ic{font-size:38px;line-height:1;flex:none}#facBtn .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}'
-        + '#facBtn .tx b{font-size:17px}#facBtn .tx small{font-size:13px;opacity:.9}'
-        + '#facBtn .go{flex:none;background:#ffc531;color:#2a1300;font-weight:900;border-radius:12px;padding:8px 14px;font-size:14px}';
+      s.textContent = '#facBtn{display:flex;align-items:center;gap:10px;width:100%;padding:10px 14px;margin:0 0 14px;border-radius:16px;border:1.5px solid rgba(255,197,49,.45);background:rgba(255,197,49,.08);color:inherit;text-align:left;cursor:pointer}'
+        + '#facBtn .ic{font-size:26px;line-height:1;flex:none}#facBtn .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}'
+        + '#facBtn .tx b{font-size:15px}#facBtn .tx small{font-size:12px;opacity:.8}'
+        + '#facBtn .go{flex:none;color:#ffc531;font-weight:800;font-size:14px}';
       document.head.appendChild(s);
       c = document.createElement('button'); c.id = 'facBtn'; c.type = 'button';
       c.innerHTML = '<span class="ic">🏭</span><span class="tx"><b>Baton Factory</b><small id="facBtnS"></small></span><span class="go"></span>';
@@ -280,7 +279,7 @@
     c.hidden = !b.S.facOn;
     if (!b.S.facOn) return;
     var fr = b.lang === 'fr';
-    c.querySelector('.go').textContent = fr ? 'Jouer' : 'Play';
+    c.querySelector('.go').textContent = fr ? 'Jouer ›' : 'Play ›';
     if (!scr && Date.now() - cardT > 60000) { cardT = Date.now(); load(); }
     var p = Math.floor(pend()), sm = document.getElementById('facBtnS');
     if (sm) sm.textContent = !st ? (fr ? 'Ton usine à caisses' : 'Your crate factory') : p >= 1 ? '📦 ' + nf(p) + (fr ? ' caisses à récolter' : ' crates to collect') : (fr ? '📦 Ton usine produit…' : '📦 Your factory is producing…');
