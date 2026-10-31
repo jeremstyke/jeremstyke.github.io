@@ -1396,13 +1396,13 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
     var tw = window.Telegram && Telegram.WebApp; if (!(tw && tw.initData)) return;
     var fr = /^fr/i.test((tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || '');
     var T = fr ? {
-      n: 'Mets @RigRushBot dans ton nom', b: 'Ton lien d\'affiliation dans ta bio', v: 'Vérifier', cp: '📋 Copier',
+      n: 'Mets @RigRushBot dans ton nom', b: 'Ton lien d\'affiliation dans ta bio', v: 'Vérifier', pct: '+10 % de minage', on: '✅ Actif', cp: '📋 Copier',
       ok: function (x) { return '✅ +' + x + ' RIGZ !'; }, copied: 'Lien copié ✅ Colle-le dans ta bio Telegram.',
       nn: 'Pas encore trouvé : ajoute @RigRushBot à ton nom Telegram (Réglages > Modifier le profil), puis vérifie.',
       nb: 'Pas encore trouvé : colle ton lien dans ta bio Telegram (Réglages > Modifier le profil > Bio), puis vérifie.',
       chat: 'Ouvre d\'abord la conversation avec @RigRushBot et appuie sur Démarrer, puis réessaie.', err: 'Réessaie dans un instant.'
     } : {
-      n: 'Put @RigRushBot in your name', b: 'Your referral link in your bio', v: 'Check', cp: '📋 Copy',
+      n: 'Put @RigRushBot in your name', b: 'Your referral link in your bio', v: 'Check', pct: '+10% mining', on: '✅ Active', cp: '📋 Copy',
       ok: function (x) { return '✅ +' + x + ' RIGZ!'; }, copied: 'Link copied ✅ Paste it in your Telegram bio.',
       nn: 'Not found yet: add @RigRushBot to your Telegram name (Settings > Edit profile), then check.',
       nb: 'Not found yet: paste your link in your Telegram bio (Settings > Edit profile > Bio), then check.',
@@ -1413,9 +1413,11 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
       + '#rrSoc .tr .ic{background:rgba(61,220,151,.18)}#rrSoc .tr small{color:#3ddc97;opacity:1}';
     document.head.appendChild(s);
     var link = function () { var id = ''; try { id = (ST && ST.me && ST.me.id) || tw.initDataUnsafe.user.id; } catch (e) {} return 'https://t.me/RigRushBot?start=r' + id; };
+    // 23h40 (Jeremy): +10 % mining while it is kept: the row stays, its button shows "Active"
+    function act(k, on) { var e = document.getElementById('rrSoc_' + k); if (!e) return; var g = e.querySelector('.gb'); g.textContent = on ? T.on : T.v; g.style.background = on ? 'rgba(61,220,151,.18)' : ''; g.style.color = on ? '#3ddc97' : ''; }
     function row(k, ic, t, amt, copy) {
       var r = document.createElement('div'); r.className = 'tr'; r.id = 'rrSoc_' + k; r.style.cursor = 'default';
-      r.innerHTML = '<span class="ic">' + ic + '</span><span class="tx"><b>' + t + '</b><small>+' + amt + ' RIGZ</small></span>'
+      r.innerHTML = '<span class="ic">' + ic + '</span><span class="tx"><b>' + t + '</b><small>+' + amt + ' RIGZ · ' + T.pct + '</small></span>'
         + (copy ? '<button type="button" class="cp">' + T.cp + '</button>' : '') + '<button type="button" class="gb v" style="border:0">' + T.v + '</button>';
       if (copy) r.querySelector('.cp').onclick = function () {
         var l = link(), done = function () { try { toast(T.copied); } catch (e) {} };
@@ -1425,8 +1427,8 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
       r.querySelector('.gb').onclick = function () {
         if (busy) return; busy = true; var b = this; b.style.opacity = '.6';
         api('social', { k: k }).then(function (x) {
-          if (x && x.ok) { toast(T.ok(x.amt)); r.remove(); setTimeout(function () { try { api('state').then(function (y) { try { take(y); } catch (e) {} }); } catch (e) {} }, 800); }
-          else if (x && x.error === 'done') r.remove();
+          if (x && x.ok) { toast(x.amt > 0 ? T.ok(x.amt) + ' ' + T.pct : T.on); act(k, true); setTimeout(function () { try { api('state').then(function (y) { try { take(y); } catch (e) {} }); } catch (e) {} }, 800); }
+          else if (x && x.error === 'done') act(k, true);
           else toast(x && x.error === 'notyet' ? (k === 'name' ? T.nn : T.nb) : x && x.error === 'chat' ? T.chat : T.err);
         }).catch(function () { toast(T.err); }).then(function () { busy = false; b.style.opacity = ''; });
       };
@@ -1440,7 +1442,7 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
       box.appendChild(row('bio', '🔗', T.b, 10, true));
       list.insertBefore(box, list.firstChild);
       api('social', { k: 'st' }).then(function (x) {
-        (x && x.done || []).forEach(function (k) { var e = document.getElementById('rrSoc_' + k); if (e) e.remove(); });
+        act('name', !!(x && x.name)); act('bio', !!(x && x.bio));
       }).catch(function () {});
     }, 500);
   } catch (e) {}
