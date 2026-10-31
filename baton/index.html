@@ -2222,6 +2222,7 @@ function nudge() {
   };
   try {
     const box = document.getElementById('gamesCard'); if (!box) return;
+    box.hidden = true; return;  // 31 oct 2026 (23h55, Jeremy): Meme Coin Tycoon pays RIGZ now (on Rig Rush), no more $BATON: the card is hidden
     const tw = window.Telegram && window.Telegram.WebApp;  // 27 oct 2026 (23h05): LANG and openLink live inside the game's own closure
     const lc = String((tw && tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || 'en').toLowerCase();
     const L2 = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^(ru|be|kk)/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
