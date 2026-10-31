@@ -1,7 +1,8 @@
 /* 31 oct 2026 (Jeremy): Baton Factory, an idle factory on the Pass The Baton bot, its own mini app opened with startapp=factory
    (only when the server says it is on for this player: bt_state facOn). 12h27: made fun to play: a living factory (smoke, gear,
    conveyor belt that speeds up with the machine), tap the factory to make crates by hand (+1 each, batched to the server, daily limit),
-   floating numbers, a "next goal" card and confetti on every upgrade. The crates buy upgrades or turn into $BATON (daily cap);
+   floating numbers, a "next goal" card and confetti on every upgrade. 12h44: more fun: a golden crate 🎁 shows up on the belt
+   now and then (tap it fast for a random bonus), tap combos, little sounds, and the building grows with the machine level. The crates buy upgrades or turn into $BATON (daily cap);
    a rewarded video = x2 for 1 h; every sponsored task of Pass The Baton = bonus crates. */
 (function () {
   var TX = {
@@ -14,7 +15,7 @@
       friends: function (n) { return '👥 Ouvriers : +10 % de production par ami invité (' + n + '/10)'; }, tasks: function (n) { return '🎯 Chaque tâche sponsorisée = +' + n + ' 📦'; },
       ok: { collect: function (n) { return '📦 +' + n + ' caisses !'; }, lvl: function (l) { return '⚙️ Machine niveau ' + l + ' !'; }, store: '🏬 Entrepôt agrandi !', conv: function (b) { return '💱 +' + b + ' $BATON sur ton solde !'; }, boost: '⚡ Turbo activé pendant 1 h !' },
       err: { crates: 'Pas assez de caisses.', cap: 'Limite d\'échange du jour atteinte.', min: 'Minimum 100 caisses.', max: 'Niveau maximum.', limit: 'Plus de turbo aujourd\'hui.', active: 'Le turbo est déjà actif.', novid: 'Vidéo pas terminée.', net: 'Problème de connexion.' },
-      game: '🏃 Ouvrir Pass The Baton', close: 'Fermer' },
+      game: '🏃 Ouvrir Pass The Baton', close: 'Fermer', gold: function (n) { return '🎁 CAISSE DORÉE +' + n + ' 📦 !'; }, combo: function (n) { return '🔥 COMBO x' + n; }, goldHint: '🎁 Une caisse dorée ! Tape-la vite !' },
     en: { t: 'Baton Factory', crates: 'crates', made: 'Waiting', full: '⚠️ Warehouse full: collect now!', fullIn: function (h) { return 'Full in ' + h; },
       collect: function (n) { return '📦 Collect +' + n; }, nothing: '⏳ Producing…', perh: '/h', tap: function (n, m) { return '👆 Tap the factory: +1 📦 (' + n + '/' + m + ' today)'; }, tapDone: '👆 Your hands are tired, come back tomorrow!',
       boost: function (n) { return '📺 Turbo x2 for 1 h (' + n + ')'; }, boostOn: function (s) { return '⚡ TURBO x2 · ' + s; }, boostNone: 'No more turbo today',
@@ -24,7 +25,7 @@
       friends: function (n) { return '👥 Workers: +10% production per invited friend (' + n + '/10)'; }, tasks: function (n) { return '🎯 Each sponsored task = +' + n + ' 📦'; },
       ok: { collect: function (n) { return '📦 +' + n + ' crates!'; }, lvl: function (l) { return '⚙️ Machine level ' + l + '!'; }, store: '🏬 Warehouse bigger!', conv: function (b) { return '💱 +' + b + ' $BATON on your balance!'; }, boost: '⚡ Turbo on for 1 hour!' },
       err: { crates: 'Not enough crates.', cap: 'Daily trade limit reached.', min: 'At least 100 crates.', max: 'Max level.', limit: 'No more turbo today.', active: 'Turbo is already on.', novid: 'Video not finished.', net: 'Connection problem.' },
-      game: '🏃 Open Pass The Baton', close: 'Close' }
+      game: '🏃 Open Pass The Baton', close: 'Close', gold: function (n) { return '🎁 GOLDEN CRATE +' + n + ' 📦!'; }, combo: function (n) { return '🔥 COMBO x' + n; }, goldHint: '🎁 A golden crate! Tap it fast!' }
   };
   var css = document.createElement('style');
   css.textContent = '#facScr{position:fixed;inset:0;z-index:9000;background:linear-gradient(180deg,#2a1d0c 0%,#15100a 55%);color:#fff7ea;overflow-y:auto;box-sizing:border-box;padding:calc(12px + env(safe-area-inset-top,0px)) max(14px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));font-family:inherit;-webkit-user-select:none;user-select:none}'
@@ -33,7 +34,7 @@
     + '#facScr .pill{display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:99px;background:rgba(255,197,49,.14);border:1px solid rgba(255,197,49,.4);font-weight:900;font-size:18px;color:#ffd45a;font-variant-numeric:tabular-nums}'
     + '#facScr .pill.pop{animation:fpop .4s ease}@keyframes fpop{40%{transform:scale(1.18)}}'
     + '#facScr .x{background:rgba(255,255,255,.1);border:0;color:inherit;width:38px;height:38px;border-radius:12px;font-size:17px}'
-    + '#facScr .scene{position:relative;height:230px;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#4a7bd1 0%,#8fb8f0 60%,#c9a46a 60%,#a27d47 100%);border:2px solid rgba(255,255,255,.12);cursor:pointer;touch-action:manipulation}'
+    + '#facScr .scene{position:relative;height:270px;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#4a7bd1 0%,#8fb8f0 60%,#c9a46a 60%,#a27d47 100%);border:2px solid rgba(255,255,255,.12);cursor:pointer;touch-action:manipulation}'
     + '#facScr .scene.boost{background:linear-gradient(180deg,#5b2a8a 0%,#c26fe0 60%,#c9a46a 60%,#a27d47 100%)}'
     + '#facScr .sun{position:absolute;top:16px;right:22px;width:34px;height:34px;border-radius:50%;background:#ffe27a;box-shadow:0 0 24px #ffe27a}'
     + '#facScr .bld{position:absolute;left:50%;bottom:58px;width:150px;height:96px;margin-left:-75px;background:#c2532f;border-radius:6px 6px 0 0;box-shadow:inset 0 -10px 0 rgba(0,0,0,.18);transition:transform .08s}'
@@ -50,7 +51,7 @@
     + '@keyframes fbelt{to{background-position:28px 0}}'
     + '#facScr .crate{position:absolute;bottom:40px;left:-30px;font-size:24px;animation:fmove 6s linear infinite}'
     + '@keyframes fmove{to{transform:translateX(calc(100vw + 60px))}}'
-    + '#facScr .hint{position:absolute;left:0;right:0;top:10px;text-align:center;font-size:13px;font-weight:800;text-shadow:0 1px 3px rgba(0,0,0,.6)}'
+    + '#facScr .hint{position:absolute;left:0;right:0;bottom:4px;text-align:center;font-size:13px;font-weight:800;text-shadow:0 1px 3px rgba(0,0,0,.6)}'
     + '#facScr .fl{position:absolute;font-weight:900;font-size:20px;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.6);pointer-events:none;animation:ffl .9s ease-out forwards}'
     + '@keyframes ffl{to{transform:translateY(-60px);opacity:0}}'
     + '#facScr .card{padding:14px;border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;gap:8px}'
@@ -63,9 +64,18 @@
     + '#facScr .up{border:0;border-radius:12px;padding:10px 12px;font-weight:900;background:#ffc531;color:#2a1300;white-space:nowrap;min-width:88px}#facScr .up:disabled{opacity:.4}'
     + '#facScr .goal{border-color:rgba(62,230,160,.45);background:rgba(62,230,160,.07)}#facScr .goal .bar i{background:linear-gradient(90deg,#3ee6a0,#ffc531)}'
     + '#facScr .note{font-size:13px;opacity:.8;line-height:1.55}'
+    + '#facScr .gold{position:absolute;bottom:46px;font-size:34px;filter:drop-shadow(0 0 10px #ffd45a) drop-shadow(0 0 4px #fff);animation:fgold 7s linear forwards,fbob .5s ease-in-out infinite alternate;z-index:3;cursor:pointer}'
+    + '@keyframes fgold{from{left:-40px}to{left:calc(100% + 40px)}}@keyframes fbob{to{margin-bottom:10px}}'
+    + '#facScr .combo{position:absolute;right:12px;top:36px;font-weight:900;font-size:22px;color:#ffd45a;text-shadow:0 2px 6px rgba(0,0,0,.6);transform:rotate(-6deg);pointer-events:none}'
+    + '#facScr .combo.hit{animation:fpop .25s ease}'
+    + '#facScr .lvb{position:absolute;top:-34px;left:50%;transform:translateX(-50%);background:#ffc531;color:#2a1300;font-weight:900;font-size:12px;padding:2px 8px;border-radius:99px;white-space:nowrap}'
+    + '#facScr .bld .win.r2{top:52px}#facScr .bld .win.r3{top:82px}'
     + '#facScr .cf{position:fixed;top:-30px;font-size:22px;pointer-events:none;animation:fcf 1.8s ease-in forwards;z-index:9001}@keyframes fcf{to{transform:translateY(110vh) rotate(540deg)}}';
   document.head.appendChild(css);
-  var st = null, t0 = 0, skew = 0, busy = false, scr = null, timer = null, taps = 0, tapT = null, tapLeft = 0, E = {};
+  var st = null, t0 = 0, skew = 0, busy = false, scr = null, timer = null, taps = 0, tapT = null, tapLeft = 0, E = {}, combo = 0, lastTap = 0, nextGold = 0, goldOn = false, AC = null;
+  // little sounds made on the fly (no file): started on the first tap
+  function snd(f, d, type, vol) { try { if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)(); var o = AC.createOscillator(), g = AC.createGain(); o.type = type || 'square'; o.frequency.value = f; g.gain.setValueAtTime(vol || .05, AC.currentTime); g.gain.exponentialRampToValueAtTime(.0001, AC.currentTime + (d || .08)); o.connect(g); g.connect(AC.destination); o.start(); o.stop(AC.currentTime + (d || .08)); } catch (e) {} }
+  function jingle(notes) { notes.forEach(function (f, i) { setTimeout(function () { snd(f, .12, 'triangle', .07); }, i * 90); }); }
   function B() { return window.BT; }
   function T() { var b = B(); return TX[b && b.lang === 'fr' ? 'fr' : 'en']; }
   function nf(n) { var b = B(); return Math.floor(Number(n) || 0).toLocaleString(b && b.lang === 'fr' ? 'fr-FR' : 'en-US'); }
@@ -98,7 +108,7 @@
     scr.innerHTML = '<div class="w"><div class="hd"><h1>🏭 ' + L.t + '</h1><div class="pill" id="fPill">📦 <span id="fCr">0</span></div><button class="x" id="fX" aria-label="' + L.close + '">✕</button></div>'
       + '<div class="scene" id="fScene" role="button" aria-label="tap"><div class="sun"></div><div class="hint" id="fHint"></div>'
       + '<div class="smoke"></div><div class="smoke s2"></div><div class="smoke s3"></div><div class="chim"></div>'
-      + '<div class="bld" id="fBld"><div class="win" style="left:16px"></div><div class="win" style="left:62px"></div><div class="win" style="right:16px"></div><div class="door"></div></div>'
+      + '<div class="bld" id="fBld"><div class="lvb" id="fLvb"></div><div class="win" style="left:16px"></div><div class="win" style="left:62px"></div><div class="win" style="right:16px"></div><div id="fWins"></div><div class="door"></div></div><div class="combo" id="fCombo"></div>'
       + '<div class="gear">⚙️</div><div class="belt" id="fBelt"></div><div id="fCrates"></div></div>'
       + '<div class="card"><div class="row"><div class="who"><div class="lb">' + L.made + '</div><b style="font-size:24px" id="fPend">+0 📦</b></div><b style="color:#ffc531;font-size:17px" id="fRate"></b></div>'
       + '<div class="bar"><i id="fBar"></i></div><small style="opacity:.8" id="fFull"></small>'
@@ -109,12 +119,12 @@
       + '<div class="card"><b>' + L.conv + '</b><small style="opacity:.8" id="fVS"></small><button class="ghost" id="fV"></button></div>'
       + '<div class="note" id="fNote"></div>'
       + '<button class="ghost" id="fG" style="border-color:rgba(255,255,255,.2);color:inherit;background:none">' + L.game + '</button></div>';
-    ['Pill', 'Cr', 'Scene', 'Hint', 'Bld', 'Belt', 'Crates', 'Pend', 'Rate', 'Bar', 'Full', 'C', 'B', 'Goal', 'GoalBar', 'ML', 'MS', 'L', 'SL', 'SS', 'S', 'VS', 'V', 'Note', 'G', 'X'].forEach(function (k) { E[k.toLowerCase()] = document.getElementById('f' + k); });
+    ['Lvb', 'Wins', 'Combo', 'Pill', 'Cr', 'Scene', 'Hint', 'Bld', 'Belt', 'Crates', 'Pend', 'Rate', 'Bar', 'Full', 'C', 'B', 'Goal', 'GoalBar', 'ML', 'MS', 'L', 'SL', 'SS', 'S', 'VS', 'V', 'Note', 'G', 'X'].forEach(function (k) { E[k.toLowerCase()] = document.getElementById('f' + k); });
     E.x.onclick = close; E.g.onclick = close;
-    E.c.onclick = function () { act('collect', null, function (r) { pop(); return T().ok.collect(nf(r.got)); }); };
+    E.c.onclick = function () { act('collect', null, function (r) { pop(); jingle([523, 659, 784]); return T().ok.collect(nf(r.got)); }); };
     E.b.onclick = boost;
-    E.l.onclick = function () { act('up_lvl', null, function (r) { confetti(); return T().ok.lvl(r.lvl); }); };
-    E.s.onclick = function () { act('up_store', null, function () { confetti(); return T().ok.store; }); };
+    E.l.onclick = function () { act('up_lvl', null, function (r) { confetti(); jingle([523, 659, 784, 1047]); beltKey = ''; return T().ok.lvl(r.lvl); }); };
+    E.s.onclick = function () { act('up_store', null, function () { confetti(); jingle([523, 659, 784, 1047]); return T().ok.store; }); };
     E.v.onclick = function () {
       var left = Math.max(0, st.day_cap - st.conv_today), n = Math.min(Math.floor(st.crates), Math.ceil(left / st.conv));
       act('convert', { n: n }, function (r) { try { B().refresh(); } catch (e) {} return T().ok.conv(nf(r.baton)); });
@@ -128,12 +138,36 @@
     var n = Math.min(6, 2 + Math.floor(lv / 3)), dur = Math.max(2.5, 7 - lv * 0.25) / (boost ? 2 : 1), h = '';
     for (var i = 0; i < n; i++) h += '<div class="crate" style="animation-duration:' + dur.toFixed(2) + 's;animation-delay:-' + (dur / n * i).toFixed(2) + 's">📦</div>';
     E.crates.innerHTML = h; E.belt.style.animationDuration = (0.9 / (boost ? 2 : 1)) + 's';
+    // the building grows with the machine: one more floor every 4 levels (up to 3)
+    var fl = Math.min(3, 1 + Math.floor((lv - 1) / 4)), hh = 66 + 30 * fl;
+    E.bld.style.height = hh + 'px'; E.lvb.textContent = (B() && B().lang === 'fr' ? 'Niv. ' : 'Lvl ') + lv;
+    var w = ''; for (var j = 2; j <= fl; j++) w += '<div class="win r' + j + '" style="left:16px"></div><div class="win r' + j + '" style="left:62px"></div><div class="win r' + j + '" style="right:16px"></div>';
+    E.wins.innerHTML = w;
+    var chim = scr.querySelector('.chim'); if (chim) chim.style.bottom = (58 + hh - 14) + 'px';
+    scr.querySelectorAll('.smoke').forEach(function (x) { x.style.bottom = (58 + hh + 32) + 'px'; });
+  }
+  function spawnGold() {
+    goldOn = true; nextGold = 0;
+    var g = document.createElement('div'); g.className = 'gold'; g.textContent = '🎁'; E.scene.appendChild(g);
+    E.hint.textContent = T().goldHint; snd(880, .15, 'triangle', .06);
+    var gone = setTimeout(function () { g.remove(); goldOn = false; }, 7000);
+    g.addEventListener('pointerdown', function (ev) {
+      ev.stopPropagation(); clearTimeout(gone); var r = g.getBoundingClientRect(); g.remove(); hap('success');
+      load('gold').then(function (x) {
+        goldOn = false;
+        if (x && x.gold) { floatAt(r.left + 10, r.top, T().gold(x.gold)); jingle([660, 880, 1100, 1320]); confetti(); pop(); }
+        draw();
+      });
+    });
   }
   function tap(e) {
     if (!st) return;
     if (tapLeft - taps <= 0) { toast(T().tapDone); return; }
     taps++; hap();
+    var tn = Date.now(); combo = tn - lastTap < 650 ? combo + 1 : 1; lastTap = tn;
+    snd(320 + Math.min(combo, 30) * 18, .06);
     floatAt(e.clientX, e.clientY, '+1 📦');
+    if (combo >= 5) { E.combo.textContent = T().combo(combo); E.combo.classList.remove('hit'); void E.combo.offsetWidth; E.combo.classList.add('hit'); }
     E.bld.style.transform = 'scale(.94,1.04)'; setTimeout(function () { E.bld.style.transform = ''; }, 80);
     E.cr.textContent = nf(Math.floor(st.crates) + taps);
     if (!tapT) tapT = setTimeout(flush, 1200);
@@ -154,6 +188,12 @@
     E.cr.textContent = nf(crates);
     E.scene.classList.toggle('boost', !!boostOn);
     belt();
+    if (Date.now() - lastTap > 1500 && E.combo.textContent) E.combo.textContent = '';
+    // the golden crate: once the server allows it, at a random moment, it rides the belt for 7 seconds
+    if (!goldOn && st.gold_left > 0) {
+      if (!nextGold) nextGold = Date.now() + Math.max(st.gold_in * 1000, 8000 + Math.random() * 25000);
+      if (Date.now() >= nextGold) spawnGold();
+    }
     var tl = Math.max(0, tapLeft - taps);
     E.hint.textContent = tl > 0 ? L.tap(st.tap_day - tl, st.tap_day) : L.tapDone;
     E.pend.textContent = '+' + nf(p) + ' 📦';
