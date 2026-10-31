@@ -1,75 +1,75 @@
 // 26 oct 2026 (Jeremy): the "Bourse" of Meme Coin Tycoon, owner-only test for now (edge function mct-bourse answers only the testers
 // of ds_config 'mct_bs_cfg'). It uses the game's own cash. 18h35: no longer in the Market; it opens from a card at the top of the
 // Portfolio ("📈 Invest in the stock market") as a full page, with the real logos of the brands and cryptos. Real prices refreshed every 5 minutes (stocks, gold, oil, crypto), 0.25% fee per order.
-// Link with Rig Rush: every evening at 20:00 (Paris), shares held for at least 20 h pay a dividend in RIGZ on Baton.
+// Link with Pass The Baton: every evening at 20:00 (Paris), shares held for at least 20 h pay a dividend in $BATON on Baton.
 // 27 oct 2026 (Jeremy): 250 assets (prices from st_assets), search, sector chips, "show more", and a weekly ranking of the Bourse:
-// the 3 best of the week win 100,000 / 50,000 / 25,000 RIGZ on Rig Rush (mct_bs_week_award, Sunday 23:55 Paris).
+// the 3 best of the week win 100,000 / 50,000 / 25,000 $BATON on Pass The Baton (mct_bs_week_award, Sunday 23:55 Paris).
 // The Portfolio card loads only the player's shares ('mine'); the curve of an asset is loaded when its sheet opens ('spark').
 (() => {
   // 26 oct 2026 (19h11, Jeremy): open to every player (no more testers list; the server switch is ds_config 'mct_bs_cfg'.open)
   const tw = window.Telegram && Telegram.WebApp;
   const FN = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-bourse';
-  const BATON = 'https://t.me/RigRushBot?startapp=shop';  // 31 oct 2026: RIGZ on Rig Rush
+  const BATON = 'https://t.me/PassTheBatonBot/play?startapp=src_mctbs';
   const lg = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] ? l : 'en'; };  // 26 oct 2026 (19h22): the 6 languages of the game
   const TX = {
     fr: {
       note: 'Les vrais cours, mis à jour toutes les 5 min · frais 0,25 % par ordre',
-      divH: '🏃 Tes actions rapportent des RIGZ', divS: (p, c) => 'Chaque soir à 20h : 1 RIGZ par ' + p + ' $ d’actions gardées au moins 20 h (max ' + c + ' par jour), versés sur Rig Rush.',
-      divT: (n) => 'Ce soir : +' + n + ' RIGZ', divT0: 'Achète une action pour toucher ton premier dividende', divW: (n) => 'Demain : +' + n + ' RIGZ', divL: (n) => 'Déjà reçus : ' + n + ' RIGZ', divB: 'Ouvrir Baton',
+      divH: '🏃 Tes actions rapportent des $BATON', divS: (p, c) => 'Chaque soir à 20h : 1 $BATON par ' + p + ' $ d’actions gardées au moins 20 h (max ' + c + ' par jour), versés sur Pass The Baton.',
+      divT: (n) => 'Ce soir : +' + n + ' $BATON', divT0: 'Achète une action pour toucher ton premier dividende', divW: (n) => 'Demain : +' + n + ' $BATON', divL: (n) => 'Déjà reçus : ' + n + ' $BATON', divB: 'Ouvrir Baton',
       mine: 'Mes actions', all: 'Tous les actifs', kind: { stock: 'Action', crypto: 'Crypto', mat: 'Matière première' }, closed: 'fermé',
       buy: 'Acheter', sell: 'Vendre', sellAll: 'Tout vendre', max: 'Max', amount: 'Montant en $', cash: 'Ton cash', have: 'Tu possèdes', pl: 'Plus-value',
       bought: (q, n) => '✅ Acheté : ' + q + ' ' + n, sold: (a) => '✅ Vendu : +' + a,
-      pfH: '📈 Investir en bourse', pfE: '250 actions : Apple, Tesla, Nvidia, l’or… aux vrais cours, avec ton cash du jeu. 🏆 Top 3 de la semaine : des RIGZ.', pfB: 'Investir', title: '📈 Bourse', tot: 'Tes actions', back: '← Portefeuille', pfV: (v, g) => 'Valeur : ' + v + ' · ' + g,
+      pfH: '📈 Investir en bourse', pfE: '250 actions : Apple, Tesla, Nvidia, l’or… aux vrais cours, avec ton cash du jeu. 🏆 Top 3 de la semaine : des $BATON.', pfB: 'Investir', title: '📈 Bourse', tot: 'Tes actions', back: '← Portefeuille', pfV: (v, g) => 'Valeur : ' + v + ' · ' + g,
       err: { cash: 'Pas assez de cash', stale: 'Cours trop ancien, réessaie dans un instant', none: 'Tu n’en as pas', small: 'Montant trop petit', soon: 'Bientôt disponible', x: 'Problème de connexion, réessaie' },
     },
     en: {
       note: 'Real prices, updated every 5 min · 0.25% fee per order',
-      divH: '🏃 Your shares earn RIGZ', divS: (p, c) => 'Every evening at 20:00 (Paris): 1 RIGZ per $' + p + ' of shares held for at least 20 h (max ' + c + ' a day), paid on Rig Rush.',
-      divT: (n) => 'Tonight: +' + n + ' RIGZ', divT0: 'Buy a share to get your first dividend', divW: (n) => 'Tomorrow: +' + n + ' RIGZ', divL: (n) => 'Received so far: ' + n + ' RIGZ', divB: 'Open Baton',
+      divH: '🏃 Your shares earn $BATON', divS: (p, c) => 'Every evening at 20:00 (Paris): 1 $BATON per $' + p + ' of shares held for at least 20 h (max ' + c + ' a day), paid on Pass The Baton.',
+      divT: (n) => 'Tonight: +' + n + ' $BATON', divT0: 'Buy a share to get your first dividend', divW: (n) => 'Tomorrow: +' + n + ' $BATON', divL: (n) => 'Received so far: ' + n + ' $BATON', divB: 'Open Baton',
       mine: 'My shares', all: 'All assets', kind: { stock: 'Stock', crypto: 'Crypto', mat: 'Commodity' }, closed: 'closed',
       buy: 'Buy', sell: 'Sell', sellAll: 'Sell all', max: 'Max', amount: 'Amount in $', cash: 'Your cash', have: 'You own', pl: 'Gain',
       bought: (q, n) => '✅ Bought: ' + q + ' ' + n, sold: (a) => '✅ Sold: +' + a,
-      pfH: '📈 Invest in the stock market', pfE: '250 stocks: Apple, Tesla, Nvidia, gold… at real prices, with your game cash. 🏆 Top 3 of the week: RIGZ.', pfB: 'Invest', title: '📈 Stock market', tot: 'Your shares', back: '← Portfolio', pfV: (v, g) => 'Value: ' + v + ' · ' + g,
+      pfH: '📈 Invest in the stock market', pfE: '250 stocks: Apple, Tesla, Nvidia, gold… at real prices, with your game cash. 🏆 Top 3 of the week: $BATON.', pfB: 'Invest', title: '📈 Stock market', tot: 'Your shares', back: '← Portfolio', pfV: (v, g) => 'Value: ' + v + ' · ' + g,
       err: { cash: 'Not enough cash', stale: 'Price too old, try again in a moment', none: 'You do not own any', small: 'Amount too small', soon: 'Coming soon', x: 'Connection problem, try again' },
     },
     ru: {
       note: 'Реальные котировки, обновление каждые 5 мин · комиссия 0,25% за сделку',
-      divH: '🏃 Твои акции приносят RIGZ', divS: (p, c) => 'Каждый вечер в 20:00 (Париж): 1 RIGZ за каждые $' + p + ' в акциях, которые ты держишь не меньше 20 ч (макс. ' + c + ' в день), на Rig Rush.',
-      divT: (n) => 'Сегодня вечером: +' + n + ' RIGZ', divT0: 'Купи акцию, чтобы получить первый дивиденд', divW: (n) => 'Завтра: +' + n + ' RIGZ', divL: (n) => 'Уже получено: ' + n + ' RIGZ', divB: 'Открыть Baton',
+      divH: '🏃 Твои акции приносят $BATON', divS: (p, c) => 'Каждый вечер в 20:00 (Париж): 1 $BATON за каждые $' + p + ' в акциях, которые ты держишь не меньше 20 ч (макс. ' + c + ' в день), на Pass The Baton.',
+      divT: (n) => 'Сегодня вечером: +' + n + ' $BATON', divT0: 'Купи акцию, чтобы получить первый дивиденд', divW: (n) => 'Завтра: +' + n + ' $BATON', divL: (n) => 'Уже получено: ' + n + ' $BATON', divB: 'Открыть Baton',
       mine: 'Мои акции', all: 'Все активы', kind: { stock: 'Акция', crypto: 'Крипто', mat: 'Сырьё' }, closed: 'закрыто',
       buy: 'Купить', sell: 'Продать', sellAll: 'Продать всё', max: 'Макс', amount: 'Сумма в $', cash: 'Твои деньги', have: 'У тебя', pl: 'Прибыль',
       bought: (q, n) => '✅ Куплено: ' + q + ' ' + n, sold: (a) => '✅ Продано: +' + a,
-      pfH: '📈 Инвестировать на бирже', pfE: '250 акций: Apple, Tesla, Nvidia, золото… по реальным ценам, на игровые деньги. 🏆 Топ-3 недели: RIGZ.', pfB: 'Инвестировать', title: '📈 Биржа', tot: 'Твои акции', back: '← Портфель', pfV: (v, g) => 'Стоимость: ' + v + ' · ' + g,
+      pfH: '📈 Инвестировать на бирже', pfE: '250 акций: Apple, Tesla, Nvidia, золото… по реальным ценам, на игровые деньги. 🏆 Топ-3 недели: $BATON.', pfB: 'Инвестировать', title: '📈 Биржа', tot: 'Твои акции', back: '← Портфель', pfV: (v, g) => 'Стоимость: ' + v + ' · ' + g,
       err: { cash: 'Не хватает денег', stale: 'Цена устарела, попробуй через минуту', none: 'У тебя их нет', small: 'Слишком маленькая сумма', soon: 'Скоро', x: 'Проблема с соединением, попробуй ещё раз' },
     },
     ar: {
       note: 'أسعار حقيقية، تُحدَّث كل 5 دقائق · رسوم 0.25% على كل أمر',
-      divH: '🏃 أسهمك تكسب RIGZ', divS: (p, c) => 'كل مساء الساعة 20:00 (باريس): 1 RIGZ لكل $' + p + ' من الأسهم المحتفظ بها 20 ساعة على الأقل (حد أقصى ' + c + ' يوميًا)، على Rig Rush.',
-      divT: (n) => 'الليلة: +' + n + ' RIGZ', divT0: 'اشترِ سهمًا لتحصل على أول توزيع أرباح', divW: (n) => 'غدًا: +' + n + ' RIGZ', divL: (n) => 'استلمت حتى الآن: ' + n + ' RIGZ', divB: 'افتح Baton',
+      divH: '🏃 أسهمك تكسب $BATON', divS: (p, c) => 'كل مساء الساعة 20:00 (باريس): 1 $BATON لكل $' + p + ' من الأسهم المحتفظ بها 20 ساعة على الأقل (حد أقصى ' + c + ' يوميًا)، على Pass The Baton.',
+      divT: (n) => 'الليلة: +' + n + ' $BATON', divT0: 'اشترِ سهمًا لتحصل على أول توزيع أرباح', divW: (n) => 'غدًا: +' + n + ' $BATON', divL: (n) => 'استلمت حتى الآن: ' + n + ' $BATON', divB: 'افتح Baton',
       mine: 'أسهمي', all: 'كل الأصول', kind: { stock: 'سهم', crypto: 'عملة رقمية', mat: 'سلعة' }, closed: 'مغلق',
       buy: 'شراء', sell: 'بيع', sellAll: 'بيع الكل', max: 'الكل', amount: 'المبلغ بالدولار', cash: 'رصيدك', have: 'تملك', pl: 'الربح',
       bought: (q, n) => '✅ تم الشراء: ' + q + ' ' + n, sold: (a) => '✅ تم البيع: +' + a,
-      pfH: '📈 استثمر في البورصة', pfE: '250 سهمًا: Apple وTesla وNvidia والذهب… بأسعار حقيقية، برصيدك في اللعبة. 🏆 أفضل 3 في الأسبوع: RIGZ.', pfB: 'استثمر', title: '📈 البورصة', tot: 'أسهمك', back: '→ المحفظة', pfV: (v, g) => 'القيمة: ' + v + ' · ' + g,
+      pfH: '📈 استثمر في البورصة', pfE: '250 سهمًا: Apple وTesla وNvidia والذهب… بأسعار حقيقية، برصيدك في اللعبة. 🏆 أفضل 3 في الأسبوع: $BATON.', pfB: 'استثمر', title: '📈 البورصة', tot: 'أسهمك', back: '→ المحفظة', pfV: (v, g) => 'القيمة: ' + v + ' · ' + g,
       err: { cash: 'رصيدك غير كافٍ', stale: 'السعر قديم، حاول بعد لحظة', none: 'لا تملك منه شيئًا', small: 'المبلغ صغير جدًا', soon: 'قريبًا', x: 'مشكلة في الاتصال، حاول مجددًا' },
     },
     fa: {
       note: 'قیمت‌های واقعی، به‌روزرسانی هر ۵ دقیقه · کارمزد ۰٫۲۵٪ برای هر سفارش',
-      divH: '🏃 سهام تو RIGZ می‌سازد', divS: (p, c) => 'هر شب ساعت ۲۰:۰۰ (پاریس): ۱ RIGZ به ازای هر ' + p + ' دلار سهامی که حداقل ۲۰ ساعت نگه داشته‌ای (حداکثر ' + c + ' در روز)، در Rig Rush.',
-      divT: (n) => 'امشب: +' + n + ' RIGZ', divT0: 'یک سهم بخر تا اولین سود را بگیری', divW: (n) => 'فردا: +' + n + ' RIGZ', divL: (n) => 'دریافت‌شده تا حالا: ' + n + ' RIGZ', divB: 'باز کردن Baton',
+      divH: '🏃 سهام تو $BATON می‌سازد', divS: (p, c) => 'هر شب ساعت ۲۰:۰۰ (پاریس): ۱ $BATON به ازای هر ' + p + ' دلار سهامی که حداقل ۲۰ ساعت نگه داشته‌ای (حداکثر ' + c + ' در روز)، در Pass The Baton.',
+      divT: (n) => 'امشب: +' + n + ' $BATON', divT0: 'یک سهم بخر تا اولین سود را بگیری', divW: (n) => 'فردا: +' + n + ' $BATON', divL: (n) => 'دریافت‌شده تا حالا: ' + n + ' $BATON', divB: 'باز کردن Baton',
       mine: 'سهام من', all: 'همه دارایی‌ها', kind: { stock: 'سهم', crypto: 'رمزارز', mat: 'کالا' }, closed: 'بسته',
       buy: 'خرید', sell: 'فروش', sellAll: 'فروش همه', max: 'همه', amount: 'مبلغ به دلار', cash: 'پول تو', have: 'داری', pl: 'سود',
       bought: (q, n) => '✅ خریده شد: ' + q + ' ' + n, sold: (a) => '✅ فروخته شد: +' + a,
-      pfH: '📈 سرمایه‌گذاری در بورس', pfE: '۲۵۰ سهم: Apple، Tesla، Nvidia، طلا… با قیمت واقعی، با پول بازی. 🏆 ۳ نفر برتر هفته: RIGZ.', pfB: 'سرمایه‌گذاری', title: '📈 بورس', tot: 'سهام تو', back: '→ پرتفوی', pfV: (v, g) => 'ارزش: ' + v + ' · ' + g,
+      pfH: '📈 سرمایه‌گذاری در بورس', pfE: '۲۵۰ سهم: Apple، Tesla، Nvidia، طلا… با قیمت واقعی، با پول بازی. 🏆 ۳ نفر برتر هفته: $BATON.', pfB: 'سرمایه‌گذاری', title: '📈 بورس', tot: 'سهام تو', back: '→ پرتفوی', pfV: (v, g) => 'ارزش: ' + v + ' · ' + g,
       err: { cash: 'پول کافی نداری', stale: 'قیمت قدیمی است، کمی بعد دوباره امتحان کن', none: 'از این سهم نداری', small: 'مبلغ خیلی کم است', soon: 'به‌زودی', x: 'مشکل اتصال، دوباره امتحان کن' },
     },
     id: {
       note: 'Harga asli, diperbarui setiap 5 menit · biaya 0,25% per order',
-      divH: '🏃 Sahammu menghasilkan RIGZ', divS: (p, c) => 'Setiap malam pukul 20:00 (Paris): 1 RIGZ per $' + p + ' saham yang kamu simpan minimal 20 jam (maks ' + c + ' per hari), di Rig Rush.',
-      divT: (n) => 'Malam ini: +' + n + ' RIGZ', divT0: 'Beli saham untuk dapat dividen pertamamu', divW: (n) => 'Besok: +' + n + ' RIGZ', divL: (n) => 'Sudah diterima: ' + n + ' RIGZ', divB: 'Buka Baton',
+      divH: '🏃 Sahammu menghasilkan $BATON', divS: (p, c) => 'Setiap malam pukul 20:00 (Paris): 1 $BATON per $' + p + ' saham yang kamu simpan minimal 20 jam (maks ' + c + ' per hari), di Pass The Baton.',
+      divT: (n) => 'Malam ini: +' + n + ' $BATON', divT0: 'Beli saham untuk dapat dividen pertamamu', divW: (n) => 'Besok: +' + n + ' $BATON', divL: (n) => 'Sudah diterima: ' + n + ' $BATON', divB: 'Buka Baton',
       mine: 'Sahamku', all: 'Semua aset', kind: { stock: 'Saham', crypto: 'Kripto', mat: 'Komoditas' }, closed: 'tutup',
       buy: 'Beli', sell: 'Jual', sellAll: 'Jual semua', max: 'Maks', amount: 'Jumlah dalam $', cash: 'Uangmu', have: 'Kamu punya', pl: 'Untung',
       bought: (q, n) => '✅ Dibeli: ' + q + ' ' + n, sold: (a) => '✅ Dijual: +' + a,
-      pfH: '📈 Investasi di bursa saham', pfE: '250 saham: Apple, Tesla, Nvidia, emas… dengan harga asli, pakai uang game-mu. 🏆 Top 3 minggu ini: RIGZ.', pfB: 'Investasi', title: '📈 Bursa saham', tot: 'Sahammu', back: '← Portofolio', pfV: (v, g) => 'Nilai: ' + v + ' · ' + g,
+      pfH: '📈 Investasi di bursa saham', pfE: '250 saham: Apple, Tesla, Nvidia, emas… dengan harga asli, pakai uang game-mu. 🏆 Top 3 minggu ini: $BATON.', pfB: 'Investasi', title: '📈 Bursa saham', tot: 'Sahammu', back: '← Portofolio', pfV: (v, g) => 'Nilai: ' + v + ' · ' + g,
       err: { cash: 'Uangmu tidak cukup', stale: 'Harga sudah lama, coba lagi sebentar', none: 'Kamu tidak punya', small: 'Jumlah terlalu kecil', soon: 'Segera hadir', x: 'Masalah koneksi, coba lagi' },
     },
   };
@@ -79,34 +79,34 @@
   const TX2 = {
     fr: { tMk: '📈 Marché', tRk: '🏆 Classement', search: 'Chercher une entreprise ou un code…', all2: 'Tout', gain: '📈 En hausse', lose: '📉 En baisse', more: (n) => 'Voir plus (' + n + ')', none: 'Rien trouvé.',
       S: { tech: '💻 Tech', finance: '🏦 Finance', health: '💊 Santé', consumer: '🛍️ Conso', energy: '⚡ Énergie', industry: '🏭 Industrie', auto: '🚗 Auto', media: '🎬 Médias', crypto: '🪙 Crypto', intl: '🌍 Monde', etf: '📊 ETF', mat: '🥇 Matières' },
-      prize: (a, b, c, t) => '🏆 Chaque semaine, les 3 meilleurs investisseurs gagnent <b>' + a + '</b>, <b>' + b + '</b> et <b>' + c + ' RIGZ</b> sur Rig Rush. Fin dans ' + t + '.',
+      prize: (a, b, c, t) => '🏆 Chaque semaine, les 3 meilleurs investisseurs gagnent <b>' + a + '</b>, <b>' + b + '</b> et <b>' + c + ' $BATON</b> sur Pass The Baton. Fin dans ' + t + '.',
       rule: (n, m) => 'Classement au % gagné sur tes actions cette semaine. Pour y entrer : ' + n + ' ordres cette semaine et ' + m + ' investis.',
-      rMe: (r, p) => 'Toi : #' + r + ' (' + p + ')', rNot: (k, n) => 'Tes ordres cette semaine : ' + k + '/' + n, rNone: 'Personne pour l’instant : passe 3 ordres pour entrer au classement !', d: 'j', prize2: (a, b) => '4e au 10e : <b>' + a + '</b> chacun · tous les autres classés : <b>' + b + ' RIGZ</b>.' },
+      rMe: (r, p) => 'Toi : #' + r + ' (' + p + ')', rNot: (k, n) => 'Tes ordres cette semaine : ' + k + '/' + n, rNone: 'Personne pour l’instant : passe 3 ordres pour entrer au classement !', d: 'j', prize2: (a, b) => '4e au 10e : <b>' + a + '</b> chacun · tous les autres classés : <b>' + b + ' $BATON</b>.' },
     en: { tMk: '📈 Market', tRk: '🏆 Ranking', search: 'Search a company or a ticker…', all2: 'All', gain: '📈 Gainers', lose: '📉 Losers', more: (n) => 'Show more (' + n + ')', none: 'Nothing found.',
       S: { tech: '💻 Tech', finance: '🏦 Finance', health: '💊 Health', consumer: '🛍️ Consumer', energy: '⚡ Energy', industry: '🏭 Industry', auto: '🚗 Auto', media: '🎬 Media', crypto: '🪙 Crypto', intl: '🌍 World', etf: '📊 ETF', mat: '🥇 Commodities' },
-      prize: (a, b, c, t) => '🏆 Every week, the 3 best investors win <b>' + a + '</b>, <b>' + b + '</b> and <b>' + c + ' RIGZ</b> on Rig Rush. Ends in ' + t + '.',
+      prize: (a, b, c, t) => '🏆 Every week, the 3 best investors win <b>' + a + '</b>, <b>' + b + '</b> and <b>' + c + ' $BATON</b> on Pass The Baton. Ends in ' + t + '.',
       rule: (n, m) => 'Ranked by the % earned on your shares this week. To enter: ' + n + ' orders this week and ' + m + ' invested.',
-      rMe: (r, p) => 'You: #' + r + ' (' + p + ')', rNot: (k, n) => 'Your orders this week: ' + k + '/' + n, rNone: 'Nobody yet: make 3 orders to enter the ranking!', d: 'd', prize2: (a, b) => '4th to 10th: <b>' + a + '</b> each · every other ranked player: <b>' + b + ' RIGZ</b>.' },
+      rMe: (r, p) => 'You: #' + r + ' (' + p + ')', rNot: (k, n) => 'Your orders this week: ' + k + '/' + n, rNone: 'Nobody yet: make 3 orders to enter the ranking!', d: 'd', prize2: (a, b) => '4th to 10th: <b>' + a + '</b> each · every other ranked player: <b>' + b + ' $BATON</b>.' },
     ru: { tMk: '📈 Рынок', tRk: '🏆 Рейтинг', search: 'Поиск компании или тикера…', all2: 'Все', gain: '📈 Растут', lose: '📉 Падают', more: (n) => 'Показать ещё (' + n + ')', none: 'Ничего не найдено.',
       S: { tech: '💻 Техно', finance: '🏦 Финансы', health: '💊 Здоровье', consumer: '🛍️ Потребит.', energy: '⚡ Энергия', industry: '🏭 Индустрия', auto: '🚗 Авто', media: '🎬 Медиа', crypto: '🪙 Крипто', intl: '🌍 Мир', etf: '📊 ETF', mat: '🥇 Сырьё' },
-      prize: (a, b, c, t) => '🏆 Каждую неделю 3 лучших инвестора получают <b>' + a + '</b>, <b>' + b + '</b> и <b>' + c + ' RIGZ</b> в Rig Rush. Конец через ' + t + '.',
+      prize: (a, b, c, t) => '🏆 Каждую неделю 3 лучших инвестора получают <b>' + a + '</b>, <b>' + b + '</b> и <b>' + c + ' $BATON</b> в Pass The Baton. Конец через ' + t + '.',
       rule: (n, m) => 'Рейтинг по % прибыли на акциях за неделю. Чтобы попасть: ' + n + ' сделки за неделю и ' + m + ' вложено.',
-      rMe: (r, p) => 'Ты: #' + r + ' (' + p + ')', rNot: (k, n) => 'Твои сделки за неделю: ' + k + '/' + n, rNone: 'Пока никого: сделай 3 сделки, чтобы попасть в рейтинг!', d: 'д', prize2: (a, b) => '4-10 места: по <b>' + a + '</b> · все остальные в рейтинге: <b>' + b + ' RIGZ</b>.' },
+      rMe: (r, p) => 'Ты: #' + r + ' (' + p + ')', rNot: (k, n) => 'Твои сделки за неделю: ' + k + '/' + n, rNone: 'Пока никого: сделай 3 сделки, чтобы попасть в рейтинг!', d: 'д', prize2: (a, b) => '4-10 места: по <b>' + a + '</b> · все остальные в рейтинге: <b>' + b + ' $BATON</b>.' },
     ar: { tMk: '📈 السوق', tRk: '🏆 الترتيب', search: 'ابحث عن شركة أو رمز…', all2: 'الكل', gain: '📈 الأكثر ارتفاعًا', lose: '📉 الأكثر انخفاضًا', more: (n) => 'عرض المزيد (' + n + ')', none: 'لا نتائج.',
       S: { tech: '💻 تقنية', finance: '🏦 مالية', health: '💊 صحة', consumer: '🛍️ استهلاك', energy: '⚡ طاقة', industry: '🏭 صناعة', auto: '🚗 سيارات', media: '🎬 إعلام', crypto: '🪙 كريبتو', intl: '🌍 العالم', etf: '📊 صناديق', mat: '🥇 سلع' },
-      prize: (a, b, c, t) => '🏆 كل أسبوع يفوز أفضل 3 مستثمرين بـ <b>' + a + '</b> و<b>' + b + '</b> و<b>' + c + ' RIGZ</b> في Rig Rush. ينتهي بعد ' + t + '.',
+      prize: (a, b, c, t) => '🏆 كل أسبوع يفوز أفضل 3 مستثمرين بـ <b>' + a + '</b> و<b>' + b + '</b> و<b>' + c + ' $BATON</b> في Pass The Baton. ينتهي بعد ' + t + '.',
       rule: (n, m) => 'الترتيب حسب نسبة الربح على أسهمك هذا الأسبوع. للدخول: ' + n + ' أوامر هذا الأسبوع و' + m + ' مستثمرة.',
-      rMe: (r, p) => 'أنت: #' + r + ' (' + p + ')', rNot: (k, n) => 'أوامرك هذا الأسبوع: ' + k + '/' + n, rNone: 'لا أحد بعد: نفّذ 3 أوامر لدخول الترتيب!', d: 'ي', prize2: (a, b) => 'من الرابع إلى العاشر: <b>' + a + '</b> لكل واحد · كل المصنّفين الآخرين: <b>' + b + ' RIGZ</b>.' },
+      rMe: (r, p) => 'أنت: #' + r + ' (' + p + ')', rNot: (k, n) => 'أوامرك هذا الأسبوع: ' + k + '/' + n, rNone: 'لا أحد بعد: نفّذ 3 أوامر لدخول الترتيب!', d: 'ي', prize2: (a, b) => 'من الرابع إلى العاشر: <b>' + a + '</b> لكل واحد · كل المصنّفين الآخرين: <b>' + b + ' $BATON</b>.' },
     fa: { tMk: '📈 بازار', tRk: '🏆 رتبه‌بندی', search: 'جستجوی شرکت یا نماد…', all2: 'همه', gain: '📈 در حال رشد', lose: '📉 در حال افت', more: (n) => 'بیشتر (' + n + ')', none: 'چیزی پیدا نشد.',
       S: { tech: '💻 فناوری', finance: '🏦 مالی', health: '💊 سلامت', consumer: '🛍️ مصرفی', energy: '⚡ انرژی', industry: '🏭 صنعت', auto: '🚗 خودرو', media: '🎬 رسانه', crypto: '🪙 کریپتو', intl: '🌍 جهان', etf: '📊 صندوق', mat: '🥇 کالا' },
-      prize: (a, b, c, t) => '🏆 هر هفته ۳ سرمایه‌گذار برتر <b>' + a + '</b>، <b>' + b + '</b> و <b>' + c + ' RIGZ</b> در Rig Rush می‌برند. پایان تا ' + t + '.',
+      prize: (a, b, c, t) => '🏆 هر هفته ۳ سرمایه‌گذار برتر <b>' + a + '</b>، <b>' + b + '</b> و <b>' + c + ' $BATON</b> در Pass The Baton می‌برند. پایان تا ' + t + '.',
       rule: (n, m) => 'رتبه بر اساس درصد سود سهام تو در این هفته. برای ورود: ' + n + ' سفارش در این هفته و ' + m + ' سرمایه‌گذاری.',
-      rMe: (r, p) => 'تو: #' + r + ' (' + p + ')', rNot: (k, n) => 'سفارش‌های این هفته: ' + k + '/' + n, rNone: 'هنوز کسی نیست: ۳ سفارش ثبت کن تا وارد رتبه‌بندی شوی!', d: 'روز', prize2: (a, b) => 'نفر ۴ تا ۱۰: هر کدام <b>' + a + '</b> · بقیه رتبه‌ها: <b>' + b + ' RIGZ</b>.' },
+      rMe: (r, p) => 'تو: #' + r + ' (' + p + ')', rNot: (k, n) => 'سفارش‌های این هفته: ' + k + '/' + n, rNone: 'هنوز کسی نیست: ۳ سفارش ثبت کن تا وارد رتبه‌بندی شوی!', d: 'روز', prize2: (a, b) => 'نفر ۴ تا ۱۰: هر کدام <b>' + a + '</b> · بقیه رتبه‌ها: <b>' + b + ' $BATON</b>.' },
     id: { tMk: '📈 Pasar', tRk: '🏆 Peringkat', search: 'Cari perusahaan atau kode…', all2: 'Semua', gain: '📈 Naik', lose: '📉 Turun', more: (n) => 'Lihat lagi (' + n + ')', none: 'Tidak ditemukan.',
       S: { tech: '💻 Teknologi', finance: '🏦 Keuangan', health: '💊 Kesehatan', consumer: '🛍️ Konsumen', energy: '⚡ Energi', industry: '🏭 Industri', auto: '🚗 Otomotif', media: '🎬 Media', crypto: '🪙 Kripto', intl: '🌍 Dunia', etf: '📊 ETF', mat: '🥇 Komoditas' },
-      prize: (a, b, c, t) => '🏆 Setiap minggu, 3 investor terbaik memenangkan <b>' + a + '</b>, <b>' + b + '</b> dan <b>' + c + ' RIGZ</b> di Rig Rush. Berakhir dalam ' + t + '.',
+      prize: (a, b, c, t) => '🏆 Setiap minggu, 3 investor terbaik memenangkan <b>' + a + '</b>, <b>' + b + '</b> dan <b>' + c + ' $BATON</b> di Pass The Baton. Berakhir dalam ' + t + '.',
       rule: (n, m) => 'Peringkat berdasarkan % untung sahammu minggu ini. Untuk masuk: ' + n + ' order minggu ini dan ' + m + ' diinvestasikan.',
-      rMe: (r, p) => 'Kamu: #' + r + ' (' + p + ')', rNot: (k, n) => 'Ordermu minggu ini: ' + k + '/' + n, rNone: 'Belum ada: buat 3 order untuk masuk peringkat!', d: 'h', prize2: (a, b) => 'Peringkat 4 sampai 10: masing-masing <b>' + a + '</b> · semua peserta lain: <b>' + b + ' RIGZ</b>.' },
+      rMe: (r, p) => 'Kamu: #' + r + ' (' + p + ')', rNot: (k, n) => 'Ordermu minggu ini: ' + k + '/' + n, rNone: 'Belum ada: buat 3 order untuk masuk peringkat!', d: 'h', prize2: (a, b) => 'Peringkat 4 sampai 10: masing-masing <b>' + a + '</b> · semua peserta lain: <b>' + b + ' $BATON</b>.' },
   };
   const L2 = () => TX2[lg()] || TX2.en;
   const SECS = ['tech', 'finance', 'health', 'consumer', 'energy', 'industry', 'auto', 'media', 'crypto', 'intl', 'etf', 'mat'];
@@ -128,7 +128,7 @@
     catch (e) { return { ok: false, error: 'x' }; }
   }
   const cashUp = (c) => { try { setCash(c); } catch (e) {} };
-  const DIV_ON = false;  // 26 oct 2026 (18h41, Jeremy): the RIGZ dividends are off for now (cron mct_bs_dividends unscheduled)
+  const DIV_ON = false;  // 26 oct 2026 (18h41, Jeremy): the $BATON dividends are off for now (cron mct_bs_dividends unscheduled)
   let S = null, SEL = null, busy = false, loading = false, lastLoad = 0;
   let MINE = null, mineAt = 0, Q = '', SEC = 'all', SHOWN = 40, TAB = 'mk', RK = null, rkAt = 0;
   const SPK = {};
@@ -222,8 +222,8 @@
   function rankHtml() {
     const T2 = L2(), r = RK;
     if (!r) return '<div class="skel"></div><div class="skel"></div>';
-    const pz = (r.prizes || [100000, 50000, 25000]).map(function (x) { return Number(x) / 1000; }),  /* 31 oct 2026: shown in RIGZ (1,000 RIGZ = 1 RIGZ) */ left = Math.max(0, Number(r.end || 0) - Date.now() / 1000), dd = Math.floor(left / 86400), hh = Math.floor(left % 86400 / 3600);
-    let h = '<div class="bsprz">' + T2.prize(kpi(pz[0]), kpi(pz[1]), kpi(pz[2]), (dd ? dd + ' ' + T2.d + ' ' : '') + hh + ' h') + (pz.length > 3 || r.rest ? '<br>' + T2.prize2(kpi(pz[3] || 10), kpi(Number(r.rest || 1000) / 1000)) : '') + '<br><small style="color:var(--mute)">' + T2.rule(r.need || 3, usd(r.min_inv || 100)) + '</small></div>';
+    const pz = r.prizes || [100000, 50000, 25000], left = Math.max(0, Number(r.end || 0) - Date.now() / 1000), dd = Math.floor(left / 86400), hh = Math.floor(left % 86400 / 3600);
+    let h = '<div class="bsprz">' + T2.prize(kpi(pz[0]), kpi(pz[1]), kpi(pz[2]), (dd ? dd + ' ' + T2.d + ' ' : '') + hh + ' h') + (pz.length > 3 || r.rest ? '<br>' + T2.prize2(kpi(pz[3] || 10000), kpi(r.rest || 1000)) : '') + '<br><small style="color:var(--mute)">' + T2.rule(r.need || 3, usd(r.min_inv || 100)) + '</small></div>';
     h += '<p class="hint" style="margin:0 0 8px;font-weight:800">' + (r.me ? T2.rMe(r.me.rank, pc(r.me.pct)) : T2.rNot(Math.min(r.mine || 0, r.need || 3), r.need || 3)) + '</p>';
     const top = r.top || [];
     h += top.length ? top.map((x) => '<div class="row' + (x.me ? ' bsme' : '') + '"><span class="bsrk">' + (['🥇', '🥈', '🥉'][x.rank - 1] || x.rank) + '</span><div class="who"><b>' + ec(x.name) + '</b><small>' + (Number(x.gain) >= 0 ? '+' : '') + usd(x.gain) + '</small></div><div class="px num"><span class="chip ' + (Number(x.pct) >= 0 ? 'up' : 'down') + '">' + pc(x.pct) + '</span></div></div>').join('') : '<p class="hint">' + T2.rNone + '</p>';
@@ -240,7 +240,7 @@
     if (TAB === 'rk') {
       h += rankHtml() + '</div>';
     } else {
-      if (DIV_ON && !S.banned) {  // 26 oct 2026 (18h41, Jeremy): no link with Rig Rush for now (no dividend card)
+      if (DIV_ON && !S.banned) {  // 26 oct 2026 (18h41, Jeremy): no link with Pass The Baton for now (no dividend card)
         const line = Number(d.ready) > 0 ? T.divT(kpi(d.ready)) : Number(d.next) > 0 ? T.divW(kpi(d.next)) : T.divT0;
         h += '<div class="bsdiv"><b>' + T.divH + '</b><small>' + T.divS(d.per || 10, kpi(d.cap || 1000)) + '</small>'
           + '<div class="bl"><span class="bn">' + line + (Number(d.total) > 0 ? '<br><small>' + T.divL(kpi(d.total)) + '</small>' : '') + '</span><button class="bb" type="button" id="bsbt">' + T.divB + '</button></div></div>';
@@ -289,7 +289,7 @@
     const D = S || MINE;
     const T = L(), tot = D ? D.pos.reduce((a, p) => a + Number(p.value), 0) : 0, g = D ? D.pos.reduce((a, p) => a + Number(p.value) - Number(p.cost), 0) : 0;
     const d = (D && D.div) || {};
-    const sub = D && D.pos.length ? T.pfV(usd(tot), '<span style="color:' + (g >= 0 ? '#4ff0b7' : '#ff5d8f') + '">' + (g >= 0 ? '+' : '') + usd(g) + '</span>') + (DIV_ON && Number(d.next) > 0 && !D.banned ? ' · 🏃 +' + kpi(d.ready > 0 ? d.ready : d.next) + ' RIGZ' : '') : T.pfE;
+    const sub = D && D.pos.length ? T.pfV(usd(tot), '<span style="color:' + (g >= 0 ? '#4ff0b7' : '#ff5d8f') + '">' + (g >= 0 ? '+' : '') + usd(g) + '</span>') + (DIV_ON && Number(d.next) > 0 && !D.banned ? ' · 🏃 +' + kpi(d.ready > 0 ? d.ready : d.next) + ' $BATON' : '') : T.pfE;
     const k = sub + lg();
     const h2 = v.querySelector('h2');  // 26 oct 2026 (18h46, Jeremy): right above "Your coins" (the first section title of the Portfolio)
     if (!h2) return;
@@ -304,19 +304,19 @@
   }
   setInterval(pfCard, 1000);
 
-  // 27 oct 2026 (19h36, Jeremy): the Portfolio shows the RIGZ won on Meme Coin Tycoon (missions, contests, referrals: server mct_bs_mine 'bt'),
-  // with a link to Rig Rush where they are
+  // 27 oct 2026 (19h36, Jeremy): the Portfolio shows the $BATON won on Meme Coin Tycoon (missions, contests, referrals: server mct_bs_mine 'bt'),
+  // with a link to Pass The Baton where they are
   const BTL = {
-    en: ['RIGZ won: real money in USDT', '🎯 Partner mission +1,000 · 👥 Invited friend +10,000 · 🏆 Weekly contests up to 100,000. They go to Rig Rush', 'Win RIGZ: real money in USDT', '🎯 Partner mission +1,000 · 👥 Invited friend +10,000 · 🏆 Weekly contests up to 100,000. They go to Rig Rush', 'Open'],
-    fr: ['RIGZ gagnés : de l\'argent réel en USDT', '🎯 Mission partenaire +1 000 · 👥 Ami invité +10 000 · 🏆 Concours de la semaine jusqu\'à 100 000. Ils arrivent sur Rig Rush', 'Gagne des RIGZ : de l\'argent réel en USDT', '🎯 Mission partenaire +1 000 · 👥 Ami invité +10 000 · 🏆 Concours de la semaine jusqu\'à 100 000. Ils arrivent sur Rig Rush', 'Ouvrir'],
-    ru: ['RIGZ выиграно: реальные деньги в USDT', '🎯 Миссия партнёра +1 000 · 👥 Приглашённый друг +10 000 · 🏆 Конкурсы недели до 100 000. Они идут в Rig Rush', 'Выигрывай RIGZ: реальные деньги в USDT', '🎯 Миссия партнёра +1 000 · 👥 Приглашённый друг +10 000 · 🏆 Конкурсы недели до 100 000. Они идут в Rig Rush', 'Открыть'],
-    ar: ['RIGZ مربوحة: مال حقيقي بـ USDT', '🎯 مهمة شريك \u200e+1,000 · 👥 صديق مدعو \u200e+10,000 · 🏆 مسابقات الأسبوع حتى 100,000. تذهب إلى Rig Rush', 'اربح RIGZ: مال حقيقي بـ USDT', '🎯 مهمة شريك \u200e+1,000 · 👥 صديق مدعو \u200e+10,000 · 🏆 مسابقات الأسبوع حتى 100,000. تذهب إلى Rig Rush', 'افتح'],
-    fa: ['RIGZ برده‌شده: پول واقعی به USDT', '🎯 مأموریت شریک \u200e+1,000 · 👥 دوست دعوت‌شده \u200e+10,000 · 🏆 مسابقه‌های هفته تا 100,000. به Rig Rush می‌روند', 'RIGZ ببر: پول واقعی به USDT', '🎯 مأموریت شریک \u200e+1,000 · 👥 دوست دعوت‌شده \u200e+10,000 · 🏆 مسابقه‌های هفته تا 100,000. به Rig Rush می‌روند', 'باز کن'],
-    id: ['RIGZ dimenangkan: uang sungguhan dalam USDT', '🎯 Misi partner +1.000 · 👥 Teman diundang +10.000 · 🏆 Kontes mingguan hingga 100.000. Masuk ke Rig Rush', 'Menangkan RIGZ: uang sungguhan dalam USDT', '🎯 Misi partner +1.000 · 👥 Teman diundang +10.000 · 🏆 Kontes mingguan hingga 100.000. Masuk ke Rig Rush', 'Buka'],
+    en: ['$BATON won: real money in USDT', '🎯 Partner mission +1,000 · 👥 Invited friend +10,000 · 🏆 Weekly contests up to 100,000. They go to Pass The Baton', 'Win $BATON: real money in USDT', '🎯 Partner mission +1,000 · 👥 Invited friend +10,000 · 🏆 Weekly contests up to 100,000. They go to Pass The Baton', 'Open'],
+    fr: ['$BATON gagnés : de l\'argent réel en USDT', '🎯 Mission partenaire +1 000 · 👥 Ami invité +10 000 · 🏆 Concours de la semaine jusqu\'à 100 000. Ils arrivent sur Pass The Baton', 'Gagne des $BATON : de l\'argent réel en USDT', '🎯 Mission partenaire +1 000 · 👥 Ami invité +10 000 · 🏆 Concours de la semaine jusqu\'à 100 000. Ils arrivent sur Pass The Baton', 'Ouvrir'],
+    ru: ['$BATON выиграно: реальные деньги в USDT', '🎯 Миссия партнёра +1 000 · 👥 Приглашённый друг +10 000 · 🏆 Конкурсы недели до 100 000. Они идут в Pass The Baton', 'Выигрывай $BATON: реальные деньги в USDT', '🎯 Миссия партнёра +1 000 · 👥 Приглашённый друг +10 000 · 🏆 Конкурсы недели до 100 000. Они идут в Pass The Baton', 'Открыть'],
+    ar: ['$BATON مربوحة: مال حقيقي بـ USDT', '🎯 مهمة شريك \u200e+1,000 · 👥 صديق مدعو \u200e+10,000 · 🏆 مسابقات الأسبوع حتى 100,000. تذهب إلى Pass The Baton', 'اربح $BATON: مال حقيقي بـ USDT', '🎯 مهمة شريك \u200e+1,000 · 👥 صديق مدعو \u200e+10,000 · 🏆 مسابقات الأسبوع حتى 100,000. تذهب إلى Pass The Baton', 'افتح'],
+    fa: ['$BATON برده‌شده: پول واقعی به USDT', '🎯 مأموریت شریک \u200e+1,000 · 👥 دوست دعوت‌شده \u200e+10,000 · 🏆 مسابقه‌های هفته تا 100,000. به Pass The Baton می‌روند', '$BATON ببر: پول واقعی به USDT', '🎯 مأموریت شریک \u200e+1,000 · 👥 دوست دعوت‌شده \u200e+10,000 · 🏆 مسابقه‌های هفته تا 100,000. به Pass The Baton می‌روند', 'باز کن'],
+    id: ['$BATON dimenangkan: uang sungguhan dalam USDT', '🎯 Misi partner +1.000 · 👥 Teman diundang +10.000 · 🏆 Kontes mingguan hingga 100.000. Masuk ke Pass The Baton', 'Menangkan $BATON: uang sungguhan dalam USDT', '🎯 Misi partner +1.000 · 👥 Teman diundang +10.000 · 🏆 Kontes mingguan hingga 100.000. Masuk ke Pass The Baton', 'Buka'],
   };
   let BT = null, btAt = 0;
   async function btLoad() {
-    if (Date.now() - btAt < 15000) return;  // 27 oct 2026 (21h06): refreshed often, a Task's RIGZ show up within seconds
+    if (Date.now() - btAt < 15000) return;  // 27 oct 2026 (21h06): refreshed often, a Task's $BATON show up within seconds
     btAt = Date.now(); const r = await call({ action: 'mine' });
     if (r && r.bt != null) BT = Number(r.bt);
   }
@@ -400,8 +400,8 @@
     if (LL) Object.keys(LL).forEach((k) => { if (LL[k] && typeof LL[k] === 'object') LL[k].m_bourse = lb[k] || lb.en; });
     const GO = (0, eval)('typeof MSN_GO !== "undefined" ? MSN_GO : null');
     if (GO) GO.bourse = () => { try { go('portfolio'); } catch (e) {} setTimeout(open, 300); };
-    // 27 oct 2026 (13h43, Jeremy): a friend who really plays also pays +10,000 RIGZ on Rig Rush (server mct_tok_ref): shown on the invite texts
-    const RB = { en: ' · +10,000 RIGZ per friend', fr: ' · +10 000 RIGZ par ami', ru: ' · +10 000 RIGZ за друга', ar: ' · ‎+10,000 RIGZ لكل صديق', fa: ' · ‎+10,000 RIGZ برای هر دوست', id: ' · +10.000 RIGZ per teman', es: ' · +10.000 RIGZ por amigo' };
+    // 27 oct 2026 (13h43, Jeremy): a friend who really plays also pays +10,000 $BATON on Pass The Baton (server mct_tok_ref): shown on the invite texts
+    const RB = { en: ' · +10,000 $BATON per friend', fr: ' · +10 000 $BATON par ami', ru: ' · +10 000 $BATON за друга', ar: ' · ‎+10,000 $BATON لكل صديق', fa: ' · ‎+10,000 $BATON برای هر دوست', id: ' · +10.000 $BATON per teman', es: ' · +10.000 $BATON por amigo' };
     if (LL) Object.keys(LL).forEach((k) => {
       const o = LL[k]; if (!o || typeof o !== 'object' || o._rb) return; o._rb = true; const sx = RB[k] || RB.en;
       if (typeof o.inv_t === 'function') { const f = o.inv_t; o.inv_t = (...a) => f(...a) + sx; }
