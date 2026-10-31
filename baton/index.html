@@ -3097,5 +3097,41 @@ function nudge() {
   start();
 })();
 </script>
+<script>
+/* 31 oct 2026 (10h16, Jeremy): one-time task "Add Pass The Baton to your home screen" (+home_reward $BATON), at the top of the Tasks tab.
+   Shown only when Telegram can add it and it is not there yet; Telegram's homeScreenAdded event (or status "added") pays it (bt_api 'home_add'). */
+(function () {
+  var tw = window.Telegram && Telegram.WebApp; if (!tw || !tw.isVersionAtLeast || !tw.isVersionAtLeast('8.0') || !tw.checkHomeScreenStatus) return;
+  var status = 'unknown', paying = false;
+  function L() { var B = window.BT; return B && B.lang === 'fr'; }
+  function nf(n) { return Number(n || 0).toLocaleString(L() ? 'fr-FR' : 'en-US'); }
+  function pay() {
+    var B = window.BT; if (!B || paying || (B.S && B.S.homeDone)) return; paying = true;
+    B.api('home_add').then(function (r) {
+      paying = false;
+      if (r && r.ok) { try { B.hap('ok'); } catch (e) {} B.toast((L() ? '📲 Merci ! +' : '📲 Thanks! +') + nf(r.reward) + ' $BATON'); try { B.refresh(); } catch (e) {} }
+      var x = document.getElementById('homeTask'); if (x) x.remove();
+    }).catch(function () { paying = false; });
+  }
+  try { tw.onEvent('homeScreenAdded', function () { status = 'added'; pay(); }); } catch (e) {}
+  function check() { try { tw.checkHomeScreenStatus(function (s) { status = s || 'unknown'; if (status === 'added') pay(); }); } catch (e) {} }
+  check();
+  function paint() {
+    var B = window.BT; if (!B || !B.S || B.S.homeReward == null) return;
+    var box = document.getElementById('homeTask');
+    if (B.S.homeDone || status !== 'missed') { if (box) box.remove(); return; }
+    var p = document.getElementById('p-tasks'); if (!p) return;
+    if (!box) {
+      box = document.createElement('button'); box.id = 'homeTask'; box.type = 'button';
+      box.style.cssText = 'display:flex;align-items:center;gap:12px;width:100%;text-align:left;color:inherit;padding:14px;margin:0 0 12px;border-radius:16px;border:1.5px solid rgba(255,197,49,.55);background:linear-gradient(135deg,rgba(255,197,49,.16),rgba(62,230,160,.08));cursor:pointer;font:inherit';
+      box.onclick = function () { try { B.hap(); } catch (e) {} try { tw.addToHomeScreen(); } catch (e) {} setTimeout(check, 4000); };
+      var g = document.getElementById('tkGoalBox'); if (g && g.parentNode === p) g.insertAdjacentElement('afterend', box); else p.prepend(box);
+    }
+    var k = [B.lang, B.S.homeReward].join('|'); if (box.dataset.k === k) return; box.dataset.k = k;
+    box.innerHTML = '<span style="font-size:30px">📲</span><span style="flex:1;min-width:0"><b style="display:block;font-size:15px">' + (L() ? 'Ajoute Pass The Baton à ton écran d\'accueil' : 'Add Pass The Baton to your home screen') + '</b><small style="opacity:.8">' + (L() ? 'Un tap, et le jeu s\'ouvre comme une appli' : 'One tap, and the game opens like an app') + '</small></span><b style="color:#ffc531;white-space:nowrap">+' + nf(B.S.homeReward) + '</b>';
+  }
+  setInterval(paint, 1000);
+})();
+</script>
 </body>
 </html>
