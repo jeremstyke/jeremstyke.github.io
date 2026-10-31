@@ -1055,5 +1055,30 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
   } catch (e) {}
 })();
 </script>
+<script>
+/* 31 oct 2026 (9h33, Jeremy): who can take part in the airdrop: only active miners (mined on 7 different days, machine on in the last 14 days).
+   The RIGZ stay on the balance; the conditions are shown on the Airdrop page. */
+(function () {
+  function paint() {
+    try {
+      if (typeof ST === 'undefined' || !ST || !ST.me || ST.me.ad_need == null) return;
+      var m = ST.me, anchor = document.getElementById('dmn'); if (!anchor) return;
+      var fr = (typeof LANG !== 'undefined' && LANG === 'fr');
+      var days = Number(m.ad_days) || 0, need = Number(m.ad_need) || 7, ad = Number(m.ad_active_d) || 14;
+      var recent = m.ad_last && (Date.now() - new Date(m.ad_last).getTime()) < ad * 86400000;
+      var ok1 = days >= need, ok = ok1 && recent;
+      var box = document.getElementById('adElig');
+      if (!box) { box = document.createElement('div'); box.id = 'adElig'; box.style.cssText = 'margin:12px 0;padding:12px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);font-size:14px;line-height:1.5'; anchor.parentNode.insertAdjacentElement('afterend', box); }
+      var key = [days, need, recent, fr].join('|'); if (box.dataset.k === key) return; box.dataset.k = key;
+      box.style.borderColor = ok ? 'rgba(62,230,160,.6)' : 'rgba(255,197,49,.5)';
+      box.innerHTML = '<b>' + (ok ? (fr ? '✅ Tu participes à l\'airdrop' : '✅ You are in the airdrop') : (fr ? '🎯 Pour participer à l\'airdrop' : '🎯 To take part in the airdrop')) + '</b><br>'
+        + (ok1 ? '✅ ' : '⏳ ') + (fr ? 'Miner ' + need + ' jours différents : ' : 'Mine on ' + need + ' different days: ') + '<b>' + Math.min(days, need) + '/' + need + '</b><br>'
+        + (recent ? '✅ ' : '⏳ ') + (fr ? 'Machine lancée dans les ' + ad + ' derniers jours' : 'Machine on in the last ' + ad + ' days') + '<br>'
+        + '<small style="opacity:.75">' + (fr ? 'Seuls les mineurs actifs reçoivent l\'airdrop. Tes RIGZ restent sur ton solde.' : 'Only active miners get the airdrop. Your RIGZ stay on your balance.') + '</small>';
+    } catch (e) {}
+  }
+  setInterval(paint, 1000);
+})();
+</script>
 </body>
 </html>
