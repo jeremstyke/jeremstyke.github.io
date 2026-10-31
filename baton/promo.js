@@ -20,7 +20,7 @@
       admCh: 'Pour vérifier tes abonnés, ajoute @PassTheBatonBot comme admin de ta chaîne (décoche tous les droits : il ne publie jamais rien), puis appuie sur Vérifier.',
       admGr: 'Pour vérifier tes abonnés, ajoute @PassTheBatonBot à ton groupe (il ne publie jamais rien), puis appuie sur Vérifier.',
       addCh: '➕ Ajouter le bot à ma chaîne', addGr: '➕ Ajouter le bot à mon groupe', check: '✅ Vérifier', notYet: 'Le bot n\'est pas encore admin. Ajoute-le puis réessaie.',
-      pick: 'Combien en veux-tu ? (par 50)', pay: function (n) { return 'Payer ' + n + ' ⭐'; }, u: { sub: 'abonnés', click: 'visites' }, deliv: 'Livraison progressive selon les joueurs actifs.',
+      pick: 'Ta campagne', pay: function (n) { return 'Payer ' + n + ' ⭐'; }, u: { sub: 'abonnés', click: 'visites' }, deliv: 'Livraison progressive selon les joueurs actifs.',
       live: '🚀 C\'est parti ! Ta campagne est en ligne.', free: '🎁 Gratuit pour toi : campagne en ligne.',
       st: { live: '🟢 en cours', done: '✅ terminée', stopped: '⛔ arrêtée' }, kept: 'restés', err: { bad_sub: 'Chaîne ou groupe introuvable : il doit être public avec un @nom.', bad_click: 'Envoie le @nom de ton bot (il finit par « bot ») ou son lien t.me.', bad_web: 'L\'adresse doit commencer par https://', other: 'Oups, réessaie.' }
     } : {
@@ -35,7 +35,7 @@
       admCh: 'To check your subscribers, add @PassTheBatonBot as an admin of your channel (untick every right: it never posts anything), then tap Check.',
       admGr: 'To check your subscribers, add @PassTheBatonBot to your group (it never posts anything), then tap Check.',
       addCh: '➕ Add the bot to my channel', addGr: '➕ Add the bot to my group', check: '✅ Check', notYet: 'The bot is not an admin yet. Add it and try again.',
-      pick: 'How many do you want? (50 by 50)', pay: function (n) { return 'Pay ' + n + ' ⭐'; }, u: { sub: 'subscribers', click: 'visits' }, deliv: 'Delivered gradually by active players.',
+      pick: 'Your campaign', pay: function (n) { return 'Pay ' + n + ' ⭐'; }, u: { sub: 'subscribers', click: 'visits' }, deliv: 'Delivered gradually by active players.',
       live: '🚀 Live! Your campaign is running.', free: '🎁 Free for you: campaign live.',
       st: { live: '🟢 running', done: '✅ done', stopped: '⛔ stopped' }, kept: 'stayed', err: { bad_sub: 'Channel or group not found: it must be public with an @name.', bad_click: 'Send your bot\'s @username (it ends with "bot") or its t.me link.', bad_web: 'The address must start with https://', other: 'Oops, try again.' }
     };
@@ -135,6 +135,8 @@
         };
         box.querySelectorAll('[data-d]').forEach(function (b) { b.onclick = function () { hap(); q = Math.min(max, Math.max(50, q + 50 * Number(b.dataset.d))); paint(); }; });
         paint();
+        // 00h51 (Jeremy): 50 at most for now (not enough players): just "50", no + / - buttons
+        if (max <= 50) box.querySelectorAll('[data-d]').forEach(function (b) { b.style.display = 'none'; });
         var pay = document.getElementById('prPay');
         pay.onclick = function () {
           hap(); pay.disabled = true;
