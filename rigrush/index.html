@@ -195,10 +195,38 @@ body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#0407
 /* 30 oct 2026 (17h19, Jeremy): no more "Free RIGZ" tile (Monetag), the x2 boost on its own line */
 #ppB{display:none!important}#boB{grid-column:1/-1}
 </style>
-<style>/* 31 oct 2026 (16h40, Jeremy): with the boost card and the sponsored tasks, the machine was squeezed to nothing on the phone: the mine page now scrolls and the machine keeps its size */
-#pg-mine{overflow-y:auto;-webkit-overflow-scrolling:touch}#pg-mine>*{flex-shrink:0}
-#pg-mine .stage{flex:none;min-height:0;overflow:visible;justify-content:center}
-#pg-mine .scene{width:min(66vw,260px)}</style>
+<style>/* 31 oct 2026 (16h47, Jeremy): everything fits on the screen again, no scrolling: the machine is sized to the room left,
+   the 3 tiles sit side by side when the x2 boost is on, the sponsored task is more compact, and the big title goes on small screens (the name is already at the top) */
+#pg-mine>*:not(.stage){flex-shrink:0}
+.row.r3{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.row.r3 .mini{flex-direction:column;text-align:center;gap:4px;padding:9px 6px;position:relative}
+.row.r3 .mini .ic{width:34px;height:34px;font-size:19px}
+.row.r3 .mini>div:not(.ic):not(.bc){width:100%}.row.r3 .mini .t{font-size:13px}.row.r3 .mini .s{font-size:10.5px;max-width:100%}
+.row.r3 .mini .bc{position:absolute;top:6px;right:6px;margin:0}
+.row.r3 #boB{grid-column:auto;padding:9px 6px}
+#rrtask{padding:8px 12px!important;margin-top:8px!important}
+#rrtask>b{font-size:13px!important;margin-bottom:2px!important}
+#rrtask adsgram-task{--adsgram-task-icon-size:30px!important;--adsgram-task-font-size:13px!important}
+@media (max-height:860px){#pg-mine .brand{display:none}}
+</style>
+<script>
+(function () {
+  function fit() {
+    var pg = document.getElementById('pg-mine'), st = document.getElementById('stage'), sc = document.getElementById('scene');
+    if (!pg || pg.hidden || !st || !sc || !st.clientWidth) return;
+    var row = pg.querySelector('.row');
+    if (row) { var n = 0; [].forEach.call(row.children, function (x) { if (x.offsetWidth) n++; }); row.classList.toggle('r3', n === 3); }
+    var mn = document.getElementById('mname'), bw = st.querySelector('.barw');
+    sc.style.width = '60px';
+    var free = st.clientHeight - (mn ? mn.offsetHeight + 4 : 0) - (bw ? bw.offsetHeight + 10 : 0) - 16;
+    var w = Math.max(110, Math.min(pg.clientWidth * 0.92, 380, free * 320 / 220));
+    sc.style.width = Math.floor(w) + 'px';
+  }
+  window.addEventListener('resize', fit);
+  setInterval(fit, 1000);
+  document.addEventListener('DOMContentLoaded', fit);
+})();
+</script>
 </head>
 <body>
 <canvas id="bgc"></canvas>
