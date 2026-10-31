@@ -11,7 +11,7 @@
       friends: function (n) { return '👥 Ouvriers : +10 % par ami invité (' + n + '/10)'; }, tasks: function (n) { return '🎯 Chaque tâche sponsorisée = +' + n + ' caisses'; },
       ok: { collect: function (n) { return '📦 +' + n + ' caisses !'; }, lvl: '⚙️ Machine améliorée !', store: '🏬 Entrepôt agrandi !', conv: function (b) { return '💱 +' + b + ' $BATON sur ton solde !'; }, boost: '⚡ x2 activé pendant 1 h !' },
       err: { crates: 'Pas assez de caisses.', cap: 'Limite du jour atteinte, reviens demain.', min: 'Minimum 100 caisses.', max: 'Niveau maximum.', limit: 'Plus de x2 aujourd\'hui.', active: 'Le x2 est déjà actif.', novid: 'Vidéo pas terminée.', net: 'Problème de connexion.' },
-      close: 'Fermer' },
+      close: 'Fermer', game: '🏃 Ouvrir Pass The Baton' },
     en: { t: 'Baton Factory', crates: 'crates', stock: 'Your stock', made: 'In production', full: '⚠️ Warehouse full: collect!', fullIn: function (h) { return 'Warehouse full in ' + h; },
       collect: function (n) { return '📦 Collect +' + n + ' crates'; }, nothing: '📦 Producing…', perh: '/h',
       boost: function (n) { return '📺 x2 for 1 h (' + n + ' left)'; }, boostOn: function (s) { return '⚡ x2 ACTIVE · ' + s; }, boostNone: 'No more x2 today', wait: 'Video playing…',
@@ -20,7 +20,7 @@
       friends: function (n) { return '👥 Workers: +10% per invited friend (' + n + '/10)'; }, tasks: function (n) { return '🎯 Each sponsored task = +' + n + ' crates'; },
       ok: { collect: function (n) { return '📦 +' + n + ' crates!'; }, lvl: '⚙️ Machine upgraded!', store: '🏬 Warehouse bigger!', conv: function (b) { return '💱 +' + b + ' $BATON on your balance!'; }, boost: '⚡ x2 on for 1 hour!' },
       err: { crates: 'Not enough crates.', cap: 'Daily limit reached, come back tomorrow.', min: 'At least 100 crates.', max: 'Max level.', limit: 'No more x2 today.', active: 'x2 is already on.', novid: 'Video not finished.', net: 'Connection problem.' },
-      close: 'Close' }
+      close: 'Close', game: '🏃 Open Pass The Baton' }
   };
   var css = document.createElement('style');
   css.textContent = '#facScr{position:fixed;inset:0;z-index:9000;background:radial-gradient(120% 70% at 50% 0%,#3b2a12 0%,#15100a 62%);color:#fff7ea;overflow-y:auto;box-sizing:border-box;padding:calc(16px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));font-family:inherit}'
@@ -80,7 +80,8 @@
       + (st.store_cost != null ? '<button class="up" id="facS"' + (busy || st.crates < st.store_cost ? ' disabled' : '') + '>' + nf(st.store_cost) + ' 📦</button>' : '<b style="color:#3ee6a0">' + L.max + '</b>') + '</div></div>'
       + '<div class="card"><b>' + L.conv + '</b><small style="opacity:.8">' + L.convS(st.conv, nf(st.conv_today), nf(st.day_cap)) + '</small>'
       + '<button class="ghost" id="facV"' + (busy || convN < st.min_conv || convLeft <= 0 ? ' disabled' : '') + '>' + L.convB(nf(convN), nf(Math.min(convN * st.conv, convLeft))) + '</button></div>'
-      + '<div class="note">' + L.friends(st.friends) + '<br>' + L.tasks(st.task_crates) + '</div></div>';
+      + '<div class="note">' + L.friends(st.friends) + '<br>' + L.tasks(st.task_crates) + '</div>'
+      + '<button class="ghost" id="facG" style="border-color:rgba(255,255,255,.2);color:inherit;background:none">' + L.game + '</button></div>';
     if (scr.dataset.h !== html) { scr.dataset.h = html; scr.innerHTML = html; bind(); }
   }
   function act(a, extra, okMsg) {
@@ -111,6 +112,7 @@
   function bind() {
     var g = function (id) { return document.getElementById(id); };
     if (g('facX')) g('facX').onclick = close;
+    if (g('facG')) g('facG').onclick = close;
     if (g('facC')) g('facC').onclick = function () { act('collect', null, function (r) { return T().ok.collect(nf(r.got)); }); };
     if (g('facB')) g('facB').onclick = boost;
     if (g('facL')) g('facL').onclick = function () { act('up_lvl', null, T().ok.lvl); };
@@ -130,16 +132,13 @@
   }
   function close() { hap(); clearInterval(timer); if (scr) { scr.remove(); scr = null; } }
   window.btFactory = open;
-  // the 🏭 button in the menu, only when the server says the factory is on for this player
-  setInterval(function () {
-    var b = B(); if (!b || !b.S) return;
-    var nav = document.querySelector('nav.tabs') || document.querySelector('nav'), btn = document.getElementById('facNav');
-    if (!b.S.facOn) { if (btn) btn.remove(); return; }
-    if (!nav || btn) return;
-    btn = document.createElement('button'); btn.id = 'facNav'; btn.type = 'button';
-    btn.innerHTML = '<span aria-hidden="true" style="font-size:20px;line-height:1">🏭</span><span>' + (b.lang === 'fr' ? 'Usine' : 'Factory') + '</span>';
-    var ref = nav.querySelector('button'); if (ref) btn.className = ref.className.replace(/\bon\b/, '').trim();
-    btn.addEventListener('click', function (e) { e.preventDefault(); e.stopImmediatePropagation(); open(); }, true);
-    nav.appendChild(btn);
-  }, 1000);
+  // 31 oct 2026 (12h25, Jeremy): no button in the menu any more: Baton Factory is its own mini app on the same bot,
+  // opened full screen with the link t.me/PassTheBatonBot/play?startapp=factory (only when the server says it is on for this player)
+  var tw = window.Telegram && Telegram.WebApp, sp = (tw && tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '';
+  if (sp === 'factory') {
+    var go = setInterval(function () {
+      var b = B(); if (!b || !b.S) return; clearInterval(go);
+      if (b.S.facOn) open(); else toast(b.lang === 'fr' ? '🏭 Baton Factory arrive bientôt !' : '🏭 Baton Factory is coming soon!');
+    }, 300);
+  }
 })();
