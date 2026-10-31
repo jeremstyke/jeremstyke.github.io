@@ -195,6 +195,10 @@ body{background:radial-gradient(120% 70% at 50% 40%,#0c2a1f 0%,#07130f 45%,#0407
 /* 30 oct 2026 (17h19, Jeremy): no more "Free RIGZ" tile (Monetag), the x2 boost on its own line */
 #ppB{display:none!important}#boB{grid-column:1/-1}
 </style>
+<style>/* 31 oct 2026 (16h40, Jeremy): with the boost card and the sponsored tasks, the machine was squeezed to nothing on the phone: the mine page now scrolls and the machine keeps its size */
+#pg-mine{overflow-y:auto;-webkit-overflow-scrolling:touch}#pg-mine>*{flex-shrink:0}
+#pg-mine .stage{flex:none;min-height:0;overflow:visible;justify-content:center}
+#pg-mine .scene{width:min(66vw,260px)}</style>
 </head>
 <body>
 <canvas id="bgc"></canvas>
