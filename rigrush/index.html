@@ -853,7 +853,7 @@ function landing() {
         ['🎁', 'Coffre, série et bonus', 'Un coffre gratuit toutes les 4 heures, jusqu\'à +35 % de minage si tu reviens chaque jour, et +10 % si tu es abonné à @jeremstyke.'],
         ['🔧', 'Améliore ta machine', '10 composants (refroidissement, GPU, batterie, panneaux solaires...) et 12 machines à débloquer.'],
         ['👥', 'Invite tes amis', '+1 RIGZ par ami et 10 % de tout ce qu\'il mine, à vie.'],
-        ['🪂', 'Airdrop RIGZ', 'Tout ce que tu gagnes compte pour l\'airdrop. Le classement montre les meilleurs mineurs.']],
+        ['💵', 'Retire en USDT', '1 000 RIGZ = 1 USDT : convertis tes RIGZ dans la Boutique et retire-les sur ton wallet TON.']],
     ft: 'Disponible en 10 langues · by <a href="https://t.me/jeremstyke">@jeremstyke</a>', m: ['Vieux laptop', 'Rig 6 GPU', 'Data center']
   } : {
     tag: 'The <b>idle mining game</b> inside Telegram. Plug in your machine, mine <b>RIGZ</b> and grow your empire, from an old laptop to a data center.',
@@ -863,7 +863,7 @@ function landing() {
         ['🎁', 'Chest, streak and bonus', 'A free chest every 4 hours, up to +35 % mining when you come back every day, and +10 % when you follow @jeremstyke.'],
         ['🔧', 'Upgrade your rig', '10 components (cooling, GPU, battery, solar panels...) and 12 machines to unlock.'],
         ['👥', 'Invite friends', '+1 RIGZ per friend and 10% of everything they mine, forever.'],
-        ['🪂', 'RIGZ airdrop', 'Everything you earn counts for the airdrop. The leaderboard shows the top miners.']],
+        ['💵', 'Cash out in USDT', '1,000 RIGZ = 1 USDT: convert your RIGZ in the Shop and withdraw them to your TON wallet.']],
     ft: 'Available in 10 languages · by <a href="https://t.me/jeremstyke">@jeremstyke</a>', m: ['Old laptop', '6-GPU rig', 'Data center']
   };
   if (fr) document.documentElement.lang = 'fr';
@@ -1320,7 +1320,67 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
   } catch (e) {}
 })();
 </script>
+<script>
+// 31 oct 2026 (23h12, Jeremy): Rig Rush in USDT. The mine screen keeps only the machine and one "Tasks" block: the free chest, the x2 boost and the
+// sponsored tasks / videos are rows of the same card ("Upgrade" stays in the Machines tab). Under the balance, its value in dollars (1,000 RIGZ = 1 $).
+// The FAQ and the landing page speak of USDT, no more airdrop.
+(function () {
+  try {
+    var tw = window.Telegram && Telegram.WebApp; if (!(tw && tw.initData)) return;
+    var lc = String((tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || 'en');
+    var fr = /^fr/i.test(lc), loc = fr ? 'fr-FR' : 'en-US';
+    var TX = fr ? { h: '🎯 Tâches', ch: 'Coffre gratuit', bo: 'Boost x2', usd: function (v) { return '≈ ' + v + ' $ en USDT'; } }
+                : { h: '🎯 Tasks', ch: 'Free chest', bo: 'Boost x2', usd: function (v) { return '≈ $' + v + ' in USDT'; } };
+    var s = document.createElement('style');
+    s.textContent = '#pg-mine .row{display:none!important}'
+      + '#rrT{margin-top:10px;padding:10px 12px;border-radius:16px;background:var(--card);border:1.5px solid #3ddc97;display:flex;flex-direction:column;gap:6px}'
+      + '#rrT>b{font-size:14px}'
+      + '#rrT .tr{display:flex;align-items:center;gap:10px;padding:6px 0;border-top:1px solid rgba(255,255,255,.06);cursor:pointer}'
+      + '#rrT .tr .ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex:none;font-size:17px;background:rgba(255,200,61,.15)}'
+      + '#rrT .tr .tx{flex:1;min-width:0;display:flex;flex-direction:column}#rrT .tr .tx b{font-size:14px}#rrT .tr .tx small{font-size:12px;opacity:.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700}'
+      + '#rrT .tr .gb{flex:none;width:80px;text-align:center;border-radius:10px;padding:8px 0;font-weight:800;font-size:14px;background:rgba(255,255,255,.08);color:inherit}'
+      + '#rrT .tr.can .gb{background:#3ddc97;color:#06150e}'
+      + '#rrT #rrtask{margin:0!important;padding:6px 0 0!important;border:0!important;border-top:1px solid rgba(255,255,255,.06)!important;background:transparent!important;border-radius:0!important}'
+      + '#rrT #rrtask>b{display:none!important}'
+      + '#rrUsd{font-size:13px;font-weight:800;color:#ffc83d;margin-top:2px}';
+    document.head.appendChild(s);
+    var $$ = function (id) { return document.getElementById(id); };
+    var box = null;
+    function row(id, ic, t, click) { var r = document.createElement('div'); r.className = 'tr'; r.id = id; r.innerHTML = '<span class="ic">' + ic + '</span><span class="tx"><b>' + t + '</b><small></small></span><span class="gb">Go</span>'; r.onclick = click; return r; }
+    function build() {
+      var task = $$('rrtask'); if (!task || box) return;
+      box = document.createElement('div'); box.id = 'rrT'; box.innerHTML = '<b>' + TX.h + '</b>';
+      box.appendChild(row('rrTch', '🎁', TX.ch, function () { var b = $$('chB'); if (b) b.click(); }));
+      box.appendChild(row('rrTbo', '🎬', TX.bo, function () { var b = $$('boB'); if (b) b.click(); }));
+      task.parentNode.insertBefore(box, task); box.appendChild(task);
+    }
+    function paint() {
+      build(); if (!box) return;
+      var ch = $$('chB'), chs = $$('chS'), r1 = $$('rrTch');
+      if (r1 && chs) { r1.querySelector('small').textContent = chs.textContent; var can = ch && ch.classList.contains('can'); r1.classList.toggle('can', !!can); r1.querySelector('.gb').textContent = can ? (fr ? 'Ouvrir' : 'Open') : '⏳'; }
+      var bo = $$('boB'), bos = $$('boS'), r2 = $$('rrTbo');
+      if (r2) { r2.style.display = bo && !bo.hidden ? '' : 'none'; if (bos) r2.querySelector('small').textContent = bos.textContent; var bc = $$('boC'); var ok = bo && bo.style.pointerEvents !== 'none' && !/aujourd|today|⏳|actif|active/i.test(bos ? bos.textContent : ''); r2.classList.toggle('can', !!ok); r2.querySelector('.gb').textContent = ok ? '▶️ Go' : '⏳'; }
+      // the balance in dollars
+      var rate = $$('rate'); if (rate) { var u = $$('rrUsd'); if (!u) { u = document.createElement('div'); u.id = 'rrUsd'; rate.insertAdjacentElement('afterend', u); }
+        var p = 0; try { p = Number(ST && ST.me && ST.me.pts) || 0; } catch (e) {} var t = TX.usd((p / 1000).toLocaleString(loc, { minimumFractionDigits: 2, maximumFractionDigits: 4 })); if (u.textContent !== t) u.textContent = t; }
+    }
+    setInterval(paint, 700); paint();
+    // FAQ: no more airdrop, the USDT shop instead
+    setTimeout(function () {
+      try {
+        var Q = { fr: ['💵 Comment gagner des USDT ?', 'Tes RIGZ valent de vrais USDT : 1 000 RIGZ = 1 USDT. Dans la Boutique, convertis-les quand tu veux et retire dès 1 USDT sur ton wallet TON (après 7 jours de minage).'],
+                  en: ['💵 How do I earn USDT?', 'Your RIGZ are worth real USDT: 1,000 RIGZ = 1 USDT. In the Shop, convert them anytime and withdraw from 1 USDT to your TON wallet (after 7 days of mining).'] };
+        Object.keys(FAQ).forEach(function (k) {
+          FAQ[k] = FAQ[k].filter(function (x) { return !/airdrop|\$BATON|ایردراپ|аирдроп/i.test(x[0] + ' ' + x[1]); });
+          FAQ[k].splice(1, 0, Q[k] || Q.en);
+        });
+      } catch (e) {}
+    }, 3000);
+  } catch (e) {}
+})();
+</script>
 </body>
+
 
 
 </html>
