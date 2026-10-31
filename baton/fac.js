@@ -258,7 +258,8 @@
   }
   function close() { hap(); clearInterval(timer); if (taps) flush(); if (scr) { scr.remove(); scr = null; E = {}; beltKey = ''; } }
   // 31 oct 2026 (12h56, Jeremy): a "Factory" entry in the app, on the home screen (only where the server says facOn).
-  // 16h20: made more visible: a golden card with the crates waiting to be collected. 16h28: toned down and moved under the baton cards (Pass The Baton stays first)
+  // 16h20: made more visible: a golden card with the crates waiting to be collected. 16h28: toned down and moved under the baton cards (Pass The Baton stays first).
+  // 16h33: prettier and more fun, same size: smoking factory, a tiny conveyor belt with crates, a fill bar, a "full" badge
   var cardT = 0;
   setInterval(function () {
     var b = B(); if (!b || !b.S) return;
@@ -266,13 +267,27 @@
     if (!c) {
       var mine = document.getElementById('chainCard') || document.getElementById('batonCard'); if (!mine) return;
       var s = document.createElement('style');
-      s.textContent = '#facBtn{display:flex;align-items:center;gap:10px;width:100%;padding:10px 14px;margin:0 0 14px;border-radius:16px;border:1.5px solid rgba(255,197,49,.45);background:rgba(255,197,49,.08);color:inherit;text-align:left;cursor:pointer}'
-        + '#facBtn .ic{font-size:26px;line-height:1;flex:none}#facBtn .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}'
-        + '#facBtn .tx b{font-size:15px}#facBtn .tx small{font-size:12px;opacity:.8}'
-        + '#facBtn .go{flex:none;color:#ffc531;font-weight:800;font-size:14px}';
+      s.textContent = '#facBtn{position:relative;overflow:hidden;display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px 18px;margin:0 0 14px;border-radius:18px;border:1.5px solid rgba(255,197,49,.4);background:linear-gradient(120deg,rgba(74,123,209,.22),rgba(255,197,49,.10) 60%,rgba(255,130,47,.14));color:inherit;text-align:left;cursor:pointer;transition:transform .12s}'
+        + '#facBtn:active{transform:scale(.97)}'
+        + '#facBtn .ic{position:relative;font-size:30px;line-height:1;flex:none;animation:fcBob 1.6s ease-in-out infinite}'
+        + '#facBtn .ic i{position:absolute;left:4px;top:-4px;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.55);animation:fcSmoke 2.2s linear infinite;font-style:normal}'
+        + '#facBtn .ic i+i{left:12px;animation-delay:1.1s}'
+        + '@keyframes fcBob{50%{transform:translateY(-2px) rotate(-3deg)}}'
+        + '@keyframes fcSmoke{from{transform:translate(0,0) scale(.6);opacity:.8}to{transform:translate(6px,-22px) scale(1.6);opacity:0}}'
+        + '#facBtn .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}'
+        + '#facBtn .tx b{font-size:15px;display:flex;align-items:center;gap:6px}#facBtn .tx small{font-size:12px;opacity:.85}'
+        + '#facBtn .bar{height:5px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden}#facBtn .bar u{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,#ffe27a,#ffc531,#f08a1c);transition:width .6s}'
+        + '#facBtn .full{display:none;font-size:10px;font-weight:900;color:#2a1300;background:#ffc531;border-radius:99px;padding:1px 7px;animation:fcPulse 1s ease-in-out infinite}'
+        + '#facBtn.isFull .full{display:inline-block}@keyframes fcPulse{50%{transform:scale(1.12)}}'
+        + '#facBtn .go{flex:none;background:#ffc531;color:#2a1300;font-weight:900;font-size:13px;border-radius:12px;padding:7px 12px;box-shadow:0 3px 0 #b8741a}'
+        + '#facBtn .belt{position:absolute;left:0;right:0;bottom:0;height:9px;background:repeating-linear-gradient(90deg,rgba(0,0,0,.35) 0 6px,rgba(255,255,255,.08) 6px 12px);background-size:24px 9px;animation:fcBelt .8s linear infinite}'
+        + '@keyframes fcBelt{to{background-position:24px 0}}'
+        + '#facBtn .cr{position:absolute;bottom:3px;font-size:11px;line-height:1;animation:fcRide 6s linear infinite}#facBtn .cr+.cr{animation-delay:-3s}'
+        + '@keyframes fcRide{from{left:-16px}to{left:calc(100% + 16px)}}';
       document.head.appendChild(s);
       c = document.createElement('button'); c.id = 'facBtn'; c.type = 'button';
-      c.innerHTML = '<span class="ic">🏭</span><span class="tx"><b>Baton Factory</b><small id="facBtnS"></small></span><span class="go"></span>';
+      c.innerHTML = '<span class="ic">🏭<i></i><i></i></span><span class="tx"><b>Baton Factory <span class="full"></span></b><small id="facBtnS"></small><span class="bar"><u></u></span></span><span class="go"></span>'
+        + '<span class="belt"></span><span class="cr">📦</span><span class="cr">📦</span>';
       c.onclick = function () { hap(); open(); };
       mine.insertAdjacentElement('afterend', c);
     }
@@ -280,8 +295,12 @@
     if (!b.S.facOn) return;
     var fr = b.lang === 'fr';
     c.querySelector('.go').textContent = fr ? 'Jouer ›' : 'Play ›';
+    c.querySelector('.full').textContent = fr ? 'PLEINE !' : 'FULL!';
     if (!scr && Date.now() - cardT > 60000) { cardT = Date.now(); load(); }
     var p = Math.floor(pend()), sm = document.getElementById('facBtnS');
+    var cap = st ? Number(st.rate) * Number(st.cap_h) : 0, full = !!st && now() >= Number(st.full_at);
+    c.classList.toggle('isFull', full);
+    c.querySelector('.bar u').style.width = (full ? 100 : cap > 0 ? Math.min(100, p / cap * 100) : 0) + '%';
     if (sm) sm.textContent = !st ? (fr ? 'Ton usine à caisses' : 'Your crate factory') : p >= 1 ? '📦 ' + nf(p) + (fr ? ' caisses à récolter' : ' crates to collect') : (fr ? '📦 Ton usine produit…' : '📦 Your factory is producing…');
   }, 1000);
   window.btFactory = open;
