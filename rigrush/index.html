@@ -1030,7 +1030,7 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
       var pc = Math.min(100, p / GOAL * 100);
       var bar = document.getElementById('goalBar'); if (bar) bar.style.width = Math.max(1.5, pc) + '%';
       var t = document.getElementById('goalN'); if (t) t.textContent = nf(p) + ' / ' + nf(GOAL) + (fr ? ' joueurs' : ' players');
-      var ch = document.getElementById('dropChip'); if (ch) ch.textContent = '🪂 ' + (p >= 1000 ? (Math.floor(p / 100) / 10) + 'K' : p) + '/10K';
+      var ch = window.__rrCash ? null : document.getElementById('dropChip'); if (ch) ch.textContent = '🪂 ' + (p >= 1000 ? (Math.floor(p / 100) / 10) + 'K' : p) + '/10K';
     };
     upd(); setInterval(upd, 3000);
   } catch (e) {}
@@ -1213,6 +1213,113 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
   }, 2500);
 })();
 </script>
+<script>
+// 31 oct 2026 (22h48, Jeremy): Rig Rush pays in USDT: the Airdrop tab becomes the USDT shop (1,000 RIGZ = 1 USDT).
+// Convert any amount of RIGZ into a USDT balance (the welcome RIGZ stay), withdraw from 1 USDT (server rr_cash, paid by bt-shop-pay).
+(function () {
+  try {
+    var tw = window.Telegram && Telegram.WebApp; if (!(tw && tw.initData)) return;
+    window.__rrCash = true;
+    var lc = String((tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || 'en');
+    var fr = /^fr/i.test(lc), loc = fr ? 'fr-FR' : 'en-US';
+    var TX = fr ? {
+      nav: 'Boutique', h: '💵 Boutique USDT', sub: 'Tes RIGZ valent de vrais USDT : <b>1 000 RIGZ = 1 USDT</b>. Convertis-les quand tu veux, retire dès 1 USDT.',
+      bal: 'Ton solde USDT', conv: '🔄 Convertir mes RIGZ', avail: function (n) { return 'Disponible : ' + n + ' RIGZ (les 5 RIGZ de bienvenue restent sur ton compte)'; },
+      get: 'Tu reçois', cbtn: '🔄 Convertir', max: 'Max', wd: '💸 Retirer mes USDT', min: function (m) { return 'Retrait minimum : ' + m + ' USDT, envoyé sur ton wallet TON (USDT sur TON).'; },
+      c1: function (d, n) { return 'Miner ' + n + ' jours différents : ' + d + '/' + n; }, c2: function (n) { return 'Machine lancée dans les ' + n + ' derniers jours'; },
+      c3: function (n) { return '1 retrait tous les ' + n + ' jours'; }, next: function (t) { return 'Prochain retrait possible le ' + t; },
+      addr: 'Adresse de ton wallet TON', wbtn: function (u) { return '💸 Retirer ' + u + ' USDT'; }, wlow: function (u) { return 'Encore ' + u + ' USDT avant de pouvoir retirer'; },
+      ok_c: function (u) { return '✅ +' + u + ' USDT sur ton solde !'; }, ok_w: '✅ Retrait demandé ! Tu reçois tes USDT sous 48 h.', ok_r: '✅ Retrait demandé ! Il est en vérification, tu reçois tes USDT sous 48 h.',
+      st: { pending: '⏳ en cours', paying: '⏳ en cours', review: '🔎 en vérification', paid: '✅ payé', refused: '❌ refusé' }, last: 'Dernier retrait',
+      err: { addr: 'Adresse de wallet invalide.', cash_min: 'Pas assez d\'USDT pour retirer.', cash_days: 'Il te faut encore des jours de minage.', cash_active: 'Lance ta machine pour pouvoir retirer.', cash_week: 'Un seul retrait tous les 7 jours.', cash_low: 'Il faut au moins 1 RIGZ à convertir.', user: 'Retrait impossible sur ce compte.', off: 'La boutique est fermée pour l\'instant.' }, net: 'Erreur de connexion, réessaie.'
+    } : {
+      nav: 'Shop', h: '💵 USDT Shop', sub: 'Your RIGZ are worth real USDT: <b>1,000 RIGZ = 1 USDT</b>. Convert them anytime, withdraw from 1 USDT.',
+      bal: 'Your USDT balance', conv: '🔄 Convert my RIGZ', avail: function (n) { return 'Available: ' + n + ' RIGZ (the 5 welcome RIGZ stay on your account)'; },
+      get: 'You get', cbtn: '🔄 Convert', max: 'Max', wd: '💸 Withdraw my USDT', min: function (m) { return 'Minimum withdrawal: ' + m + ' USDT, sent to your TON wallet (USDT on TON).'; },
+      c1: function (d, n) { return 'Mine on ' + n + ' different days: ' + d + '/' + n; }, c2: function (n) { return 'Machine on in the last ' + n + ' days'; },
+      c3: function (n) { return '1 withdrawal every ' + n + ' days'; }, next: function (t) { return 'Next withdrawal possible on ' + t; },
+      addr: 'Your TON wallet address', wbtn: function (u) { return '💸 Withdraw ' + u + ' USDT'; }, wlow: function (u) { return u + ' USDT more before you can withdraw'; },
+      ok_c: function (u) { return '✅ +' + u + ' USDT on your balance!'; }, ok_w: '✅ Withdrawal requested! You get your USDT within 48 h.', ok_r: '✅ Withdrawal requested! It is being checked, you get your USDT within 48 h.',
+      st: { pending: '⏳ in progress', paying: '⏳ in progress', review: '🔎 being checked', paid: '✅ paid', refused: '❌ refused' }, last: 'Last withdrawal',
+      err: { addr: 'Invalid wallet address.', cash_min: 'Not enough USDT to withdraw.', cash_days: 'You still need more mining days.', cash_active: 'Turn on your machine to withdraw.', cash_week: 'Only one withdrawal every 7 days.', cash_low: 'Convert at least 1 RIGZ.', user: 'Withdrawals are not possible on this account.', off: 'The shop is closed for now.' }, net: 'Connection error, try again.'
+    };
+    var usd = function (v) { v = Number(v) || 0; return v.toLocaleString(loc, { minimumFractionDigits: 2, maximumFractionDigits: v < 1 ? 4 : 2 }); };
+    var rz = function (v) { return (Math.floor((Number(v) || 0) * 100) / 100).toLocaleString(loc, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+    var s = document.createElement('style');
+    s.textContent = '#rrCash{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}#rrCash h2{margin:0}#rrCash .sub{margin:0}'
+      + '#rrCash .cb{border-radius:18px;border:1.5px solid rgba(61,220,151,.35);background:var(--card);padding:14px;display:flex;flex-direction:column;gap:10px}'
+      + '#rrCash .cb.money{border-color:#ffc83d;background:linear-gradient(135deg,rgba(255,200,61,.16),rgba(61,220,151,.08))}'
+      + '#rrCash .lbl{font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;font-weight:800}'
+      + '#rrCash .usd{font-family:"Lilita One",sans-serif;font-size:40px;color:#ffc83d;line-height:1}'
+      + '#rrCash .row2{display:flex;gap:8px;align-items:center}#rrCash input{flex:1;min-width:0;padding:12px;border-radius:12px;border:1.5px solid var(--line);background:rgba(0,0,0,.25);color:inherit;font:inherit;font-size:16px}'
+      + '#rrCash .chip{flex:none;padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);background:transparent;color:inherit;font-weight:800}'
+      + '#rrCash .go{padding:13px;border-radius:14px;border:0;background:#3ddc97;color:#06150e;font-weight:900;font-size:16px}#rrCash .go.gold{background:#ffc83d;color:#1a1300}#rrCash .go:disabled{opacity:.45}'
+      + '#rrCash .small{font-size:12.5px;opacity:.8;font-weight:700;line-height:1.45}#rrCash .cond{font-size:13.5px;font-weight:700;display:flex;flex-direction:column;gap:4px}';
+    document.head.appendChild(s);
+    var pg = document.getElementById('pg-drop'); if (!pg) return;
+    var box = document.createElement('div'); box.id = 'rrCash'; pg.insertBefore(box, pg.firstChild);
+    var C = null, busy = false, built = false, E = {};
+    function chrome() {
+      [].forEach.call(pg.children, function (e) { if (e.id === 'rrCash' || e.id === 'topl' || e.getAttribute('data-t') === 'top') return; if (e.style.display !== 'none') e.style.display = 'none'; });
+      var nb = document.querySelector('.nav button[data-p="drop"]'); var nh = '<span>💵</span>' + TX.nav; if (nb && nb.innerHTML !== nh) nb.innerHTML = nh;
+      var ch = document.getElementById('dropChip'); if (ch) { var p = 0; try { p = Number(ST && ST.me && ST.me.pts) || 0; } catch (e) {} var t = '💵 $' + usd((C ? Number(C.usdt) : 0) + p / 1000); if (ch.textContent !== t) ch.textContent = t; }
+    }
+    function build() {
+      built = true;
+      box.innerHTML = '<h2>' + TX.h + '</h2><p class="sub">' + TX.sub + '</p>'
+        + '<div class="cb money"><span class="lbl">' + TX.bal + '</span><div class="usd" id="cU">$0.00</div><div class="small" id="cV"></div></div>'
+        + '<div class="cb"><b>' + TX.conv + '</b><div class="small" id="cA"></div><div class="row2"><input id="cN" type="number" inputmode="decimal" min="1" step="0.01"><button class="chip" id="cMax">' + TX.max + '</button></div>'
+        + '<div class="small" id="cG"></div><button class="go" id="cGo">' + TX.cbtn + '</button></div>'
+        + '<div class="cb"><b>' + TX.wd + '</b><div class="small" id="cMin"></div><div class="cond" id="cC"></div><input id="cW" placeholder="' + TX.addr + '" autocomplete="off" autocapitalize="off" spellcheck="false">'
+        + '<button class="go gold" id="cWd"></button><div class="small" id="cL"></div></div>';
+      ['U', 'V', 'A', 'N', 'Max', 'G', 'Go', 'Min', 'C', 'W', 'Wd', 'L'].forEach(function (k) { E[k] = document.getElementById('c' + k); });
+      E.N.oninput = preview;
+      E.Max.onclick = function () { if (C) { E.N.value = Math.floor(Number(C.avail) * 100) / 100; preview(); } };
+      E.Go.onclick = function () {
+        if (busy || !C) return; var n = Number(E.N.value) || 0; busy = true;
+        api('convert', { n: n }).then(function (r) {
+          busy = false; if (r && r.ok) { var before = Number(C.usdt) || 0; C = r; E.N.value = ''; draw(); try { toast(TX.ok_c(usd((Number(r.usdt) || 0) - before))); } catch (e) {} try { api('state').then(function (x) { try { take(x); } catch (e) {} }); } catch (e) {} }
+          else toast((r && TX.err[r.error]) || TX.net);
+        }).catch(function () { busy = false; toast(TX.net); });
+      };
+      E.Wd.onclick = function () {
+        if (busy || !C) return; busy = true;
+        api('withdraw', { addr: E.W.value.trim() }).then(function (r) {
+          busy = false; if (r && r.ok) { C = r; draw(); toast(r.review ? TX.ok_r : TX.ok_w); try { tw.HapticFeedback.notificationOccurred('success'); } catch (e) {} }
+          else toast((r && TX.err[r.error]) || TX.net);
+        }).catch(function () { busy = false; toast(TX.net); });
+      };
+    }
+    function preview() { var n = Math.min(Number(E.N.value) || 0, C ? Number(C.avail) : 0); E.G.textContent = n > 0 ? TX.get + ' : ' + usd(n / (C ? Number(C.rate) : 1000)) + ' USDT' : ''; E.Go.disabled = !(n >= 1); }
+    function draw() {
+      if (!C) return; if (!built) build();
+      var u = Number(C.usdt) || 0, mn = Number(C.min) || 1;
+      E.U.textContent = '$' + usd(u);
+      E.V.textContent = rz(C.pts) + ' RIGZ ≈ $' + usd(Number(C.pts) / Number(C.rate));
+      E.A.textContent = TX.avail(rz(C.avail));
+      if (!E.N.value && Number(C.avail) >= 1) E.N.value = Math.floor(Number(C.avail) * 100) / 100;
+      preview();
+      E.Min.textContent = TX.min(mn);
+      var act = C.last && (Date.now() - new Date(C.last).getTime()) < Number(C.active_d) * 86400000;
+      var lines = [(Number(C.days) >= Number(C.need) ? '✅ ' : '⏳ ') + TX.c1(Math.min(Number(C.days), Number(C.need)), C.need), (act ? '✅ ' : '⏳ ') + TX.c2(C.active_d), (C.next ? '⏳ ' + TX.next(new Date(C.next).toLocaleDateString(loc, { day: 'numeric', month: 'long' })) : '✅ ' + TX.c3(C.every))];
+      E.C.innerHTML = lines.map(function (l) { return '<span>' + l + '</span>'; }).join('');
+      if (!E.W.value && C.wallet && !/^0:/.test(C.wallet)) E.W.value = C.wallet;
+      var w = Math.floor(u * 100) / 100;
+      E.Wd.textContent = w >= mn ? TX.wbtn(usd(w)) : TX.wlow(usd(Math.max(0, mn - u)));
+      E.Wd.disabled = !(w >= mn && Number(C.days) >= Number(C.need) && act && !C.next);
+      E.L.textContent = C.order ? TX.last + ' : ' + usd(C.order.usd) + ' USDT · ' + (TX.st[C.order.status] || C.order.status) : '';
+    }
+    function load() { api('cash').then(function (r) { if (r && r.ok) { C = r; draw(); chrome(); } }).catch(function () {}); }
+    var seen = false;
+    setInterval(function () { chrome(); var vis = !pg.hidden; if (vis && !seen) load(); seen = vis; }, 700);
+    setTimeout(load, 2000);
+    var sp = (tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '';
+    if (sp === 'shop') setTimeout(function () { try { go('drop'); } catch (e) {} }, 1500);
+    chrome();
+  } catch (e) {}
+})();
+</script>
 </body>
+
 
 </html>
