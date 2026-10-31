@@ -1118,5 +1118,59 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
   setInterval(paint, 1000);
 })();
 </script>
+<script>
+// 31 oct 2026 (20h03, Jeremy): poll "USDT, airdrop or both?": a card that opens once for players who have not voted (and always with startapp=poll); results after the vote
+(function () {
+  var tw = window.Telegram && Telegram.WebApp; if (!(tw && tw.initData)) return;
+  var lc = String((tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || 'en');
+  var L = /^fr/.test(lc) ? 'fr' : /^(ru|be|kk)/.test(lc) ? 'ru' : 'en';
+  var TX = {
+    fr: { h: '🗳️ Ton avis compte !', q: 'Pour la suite de Rig Rush, tu préfères quoi ?', usdt: ['💵 Des USDT', 'Échanger mes RIGZ contre des USDT, petit à petit'], airdrop: ['🪂 Un airdrop', 'Tout garder pour un gros airdrop plus tard'], both: ['⚖️ Les deux', 'Un peu d\'USDT maintenant + l\'airdrop'], thx: '✅ Merci, ton vote est enregistré !', res: 'Résultats', votes: 'votes', change: 'Tu peux changer ton vote quand tu veux.', close: 'Fermer' },
+    en: { h: '🗳️ Your opinion matters!', q: 'For the future of Rig Rush, what do you prefer?', usdt: ['💵 USDT', 'Swap my RIGZ for USDT, little by little'], airdrop: ['🪂 An airdrop', 'Keep everything for a big airdrop later'], both: ['⚖️ Both', 'A little USDT now + the airdrop'], thx: '✅ Thanks, your vote is saved!', res: 'Results', votes: 'votes', change: 'You can change your vote anytime.', close: 'Close' },
+    ru: { h: '🗳️ Твоё мнение важно!', q: 'Что ты предпочитаешь для Rig Rush дальше?', usdt: ['💵 USDT', 'Менять RIGZ на USDT понемногу'], airdrop: ['🪂 Airdrop', 'Копить всё для большого airdrop позже'], both: ['⚖️ И то, и другое', 'Немного USDT сейчас + airdrop'], thx: '✅ Спасибо, твой голос сохранён!', res: 'Результаты', votes: 'голосов', change: 'Ты можешь изменить голос в любой момент.', close: 'Закрыть' }
+  }[L];
+  var KEYS = ['usdt', 'airdrop', 'both'];
+  var s = document.createElement('style');
+  s.textContent = '#rrPoll{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center}'
+    + '#rrPoll .pb{width:100%;max-width:480px;background:#0b1a14;border:1.5px solid #3ddc97;border-bottom:0;border-radius:22px 22px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:10px;color:#e8fff3;font-family:Nunito,system-ui,sans-serif}'
+    + '#rrPoll h3{margin:0;font-size:20px}#rrPoll p{margin:0 0 4px;opacity:.85;font-weight:700}'
+    + '#rrPoll .op{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:2px;text-align:left;padding:12px 14px;border-radius:14px;border:1.5px solid rgba(61,220,151,.35);background:rgba(255,255,255,.04);color:inherit;font:inherit;cursor:pointer}'
+    + '#rrPoll .op b{font-size:16px;position:relative}#rrPoll .op small{opacity:.8;font-weight:700;position:relative}'
+    + '#rrPoll .op.me{border-color:#3ddc97;background:rgba(61,220,151,.14)}'
+    + '#rrPoll .op i{position:absolute;left:0;top:0;bottom:0;background:rgba(61,220,151,.18);transition:width .6s}'
+    + '#rrPoll .op .pc{position:absolute;right:14px;top:12px;font-weight:900;color:#3ddc97}'
+    + '#rrPoll .x{margin-top:4px;padding:12px;border-radius:14px;border:0;background:#3ddc97;color:#06150e;font-weight:900;font-size:15px}';
+  document.head.appendChild(s);
+  var box = null, cur = null;
+  function draw(r, voted) {
+    if (!box) { box = document.createElement('div'); box.id = 'rrPoll'; document.body.appendChild(box); box.onclick = function (e) { if (e.target === box) close(); }; }
+    var res = (r && r.res) || {}, tot = KEYS.reduce(function (a, k) { return a + (Number(res[k]) || 0); }, 0), mine = r && r.mine;
+    var h = '<div class="pb"><h3>' + (voted ? TX.thx : TX.h) + '</h3><p>' + TX.q + '</p>';
+    KEYS.forEach(function (k) {
+      var pc = tot ? Math.round((Number(res[k]) || 0) / tot * 100) : 0;
+      h += '<button class="op' + (mine === k ? ' me' : '') + '" data-k="' + k + '">' + (mine ? '<i style="width:' + pc + '%"></i><span class="pc">' + pc + ' %</span>' : '') + '<b>' + TX[k][0] + '</b><small>' + TX[k][1] + '</small></button>';
+    });
+    if (mine) h += '<p style="font-size:12px;opacity:.7;margin-top:2px">' + TX.res + ' : ' + tot + ' ' + TX.votes + ' · ' + TX.change + '</p>';
+    h += '<button class="x">' + TX.close + '</button></div>';
+    box.innerHTML = h;
+    box.querySelector('.x').onclick = close;
+    box.querySelectorAll('.op').forEach(function (b) { b.onclick = function () { vote(b.dataset.k); }; });
+  }
+  function close() { if (box) { box.remove(); box = null; } }
+  function vote(k) {
+    try { tw.HapticFeedback.impactOccurred('medium'); } catch (e) {}
+    api('poll', { choice: k }).then(function (r) { if (r && r.ok) { cur = r; draw(r, true); } }).catch(function () {});
+  }
+  var sp = (tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '';
+  setTimeout(function () {
+    api('poll').then(function (r) {
+      if (!r || !r.ok || !r.on) return; cur = r;
+      var seen = false; try { seen = localStorage.getItem('rr_poll1') === '1'; } catch (e) {}
+      if (sp === 'poll' || (!r.mine && !seen)) { try { localStorage.setItem('rr_poll1', '1'); } catch (e) {} draw(r, false); }
+    }).catch(function () {});
+  }, 2500);
+})();
+</script>
 </body>
+
 </html>
