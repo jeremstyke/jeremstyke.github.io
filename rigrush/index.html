@@ -1049,7 +1049,7 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
 </script>
 <script>
 // 30 oct 2026 (19h20, Jeremy): Adsgram sponsored tasks under the x2 boost: RIGZ worth 30 min of mining each, 20 a day, 30 s between two
-// 31 oct 2026 (20h15, Jeremy): the card alternates between a sponsored task and a video (Adsgram interstitial int-55773, server rr_api 'tvid'): same reward, same limits
+// 31 oct 2026 (20h15, Jeremy): the card alternates between a sponsored task and a video (Adsgram rewarded block 55777, reward given by Adsgram's reward URL through rr_boost): same reward, same limits
 (function () {
   try {
     var box = document.getElementById('rrtask'); var tw = window.Telegram && Telegram.WebApp;
@@ -1095,10 +1095,16 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
     vb.onclick = function () {
       if (busy) return; busy = true; vb.style.opacity = '.6';
       var done = function () { busy = false; vb.style.opacity = ''; };
-      agLoad().then(function () { return window.Adsgram.init({ blockId: 'int-55773' }).show(); }).then(function () {
-        return api('tvid').then(function (r) {
-          if (r && r.ok) { try { toast('⛏️ +' + Number(r.amount).toLocaleString(fr ? 'fr-FR' : 'en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' RIGZ' + (fr ? ' ajoutés !' : ' added!')); } catch (e) {} refresh(); flip('task'); }
-          else toast(r && r.error === 'limit' ? T[9] : r && r.error === 'wait' ? T[8] : T[7]);
+      // 21h12 (Jeremy): a real rewarded video (block 55777): the server notes the start ('tvid'), Adsgram's reward URL gives the RIGZ once the video is watched to the end
+      api('tvid').then(function (r) {
+        if (!r || !r.ok) { toast(r && r.error === 'limit' ? T[9] : r && r.error === 'wait' ? T[8] : T[7]); return; }
+        return agLoad().then(function () { return window.Adsgram.init({ blockId: '55777' }).show(); }).then(function () {
+          try { toast('⛏️ ' + amtTx() + (fr ? ' ajoutés !' : ' added!')); } catch (e) {}
+          setTimeout(function () { try { api('state').then(function (x) { try { take(x); } catch (e) {} }); } catch (e) {} }, 2500);
+          flip('task');
+        }, function () {
+          api('tvid', { cancel: true }).catch(function () {});
+          toast(fr ? 'Vidéo pas terminée : pas de RIGZ.' : 'Video not finished: no RIGZ.');
         });
       }).catch(function () { toast(T[7]); vidNone = true; paint(); }).then(done, done);
     };
