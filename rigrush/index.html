@@ -1125,6 +1125,7 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
 // 30 oct 2026 (19h22, Jeremy): Adsgram interstitial (block int-55773) at every opening of Rig Rush, never on the player's very first visit
 (function () {
   try {
+    return;  // 31 oct 2026 (23h03, Jeremy): no more interstitial at opening
     var tw = window.Telegram && Telegram.WebApp; if (!(tw && tw.initData)) return;
     var first = false; try { first = !localStorage.getItem('rr_open1'); localStorage.setItem('rr_open1', '1'); } catch (e) { return; }
     if (first) return;
