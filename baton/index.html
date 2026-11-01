@@ -1934,7 +1934,7 @@ async function loadRanks() {
   if (rankMode === 'chains') {
     const tr = (r.teams || []).map((m, i) => '<div class="row' + (m.me ? ' me' : '') + (i < 3 ? ' top' + (i + 1) : '') + '" data-pid="' + (m.id || '') + '"><span class="rank' + (i < 3 ? ' m' : '') + '">' + (i < 3 ? ['🥇', '🥈', '🥉'][i] : i + 1) + '</span><span class="av" style="background:' + hueOf(m.name) + '">' + init(m.name) + '</span><div class="t"><b>' + esc(m.name) + '</b></div><span class="r">' + T('recr', fmt(m.n)) + '</span></div>');
     let wk2 = '';
-    if (r.week_end) { const s = Math.max(0, r.week_end - Math.floor(Date.now() / 1000)), dd = Math.floor(s / 86400), hh = Math.floor(s % 86400 / 3600); wk2 = '<div class="wk"><span>⏳ ' + T('weekEnd', (dd ? dd + ' ' + T('dU') + ' ' : '') + hh + ' ' + T('hU')) + '</span></div>'; }
+    if (r.week_end) { const s = Math.max(0, r.week_end - Math.floor(Date.now() / 1000)), dd = Math.floor(s / 86400), hh = Math.floor(s % 86400 / 3600); wk2 = '<div class="wk"><span>⏳ ' + T('weekEnd', s < 3600 ? Math.max(1, Math.ceil(s / 60)) + ' min' /* 2 nov 2026 (0h, Jeremy): minutes in the last hour, it showed "0h" */ : (dd ? dd + ' ' + T('dU') + ' ' : '') + hh + ' ' + T('hU')) + '</span></div>'; }
     $('#ranks').innerHTML = wk2 + '<p class="foot">' + T('teamsS') + '</p>' + (tr.join('') || '<div class="empty">' + T('teamsNo') + '</div>');
     return;
   }
@@ -1942,7 +1942,7 @@ async function loadRanks() {
     ? r.chains.map((c, i) => '<div class="row' + (c.me ? ' me' : '') + '" data-pid="' + (c.sid || '') + '"><span class="rank' + (i < 3 ? ' g' : '') + '">' + (i + 1) + '</span><div class="t"><b>' + esc(T('chainOf', c.starter)) + '</b><span>' + (c.stopped ? T('stopped') : T('running')) + '</span></div><span class="r">' + fmt(c.links) + ' ' + T('links') + '</span></div>')
     : r.miners.map((m, i) => '<div class="row' + (m.me ? ' me' : '') + (i < 3 ? ' top' + (i + 1) : '') + '" data-pid="' + (m.id || '') + '"><span class="rank' + (i < 3 ? ' m' : '') + '">' + (i < 3 ? ['🥇', '🥈', '🥉'][i] : i + 1) + '</span><span class="av" style="background:' + hueOf(m.name) + '">' + init(m.name) + '</span><div class="t"><b>' + esc(m.name) + '</b>' + ((m.prize || (r.prizes ? (r.rest || 1000) : 0)) ? '<span>' + T('prizeR', fmt(m.prize || r.rest || 1000)) + '</span>' : '')  /* 28 oct 2026 (14h36, Jeremy): from #11, +1 000 shown too */ + '</div><span class="r">' + fmt(m.pts) + '</span></div>');
   let wk = '';
-  if (r.week_end) { const s = Math.max(0, r.week_end - Math.floor(Date.now() / 1000)), dd = Math.floor(s / 86400), hh = Math.floor(s % 86400 / 3600); wk = '<div class="wk"><span>⏳ ' + T('weekEnd', (dd ? dd + ' ' + T('dU') + ' ' : '') + hh + ' ' + T('hU')) + '</span></div>'; }
+  if (r.week_end) { const s = Math.max(0, r.week_end - Math.floor(Date.now() / 1000)), dd = Math.floor(s / 86400), hh = Math.floor(s % 86400 / 3600); wk = '<div class="wk"><span>⏳ ' + T('weekEnd', s < 3600 ? Math.max(1, Math.ceil(s / 60)) + ' min' /* 2 nov 2026 (0h, Jeremy): minutes in the last hour, it showed "0h" */ : (dd ? dd + ' ' + T('dU') + ' ' : '') + hh + ' ' + T('hU')) + '</span></div>'; }
   $('#ranks').innerHTML = wk + (rankMode === 'miners' && r.prizes ? '<p class="foot">' + T('prizeS') + '</p>' : '') + (rows.join('') || '<div class="empty">…</div>');
 }
 // 22 oct 2026 (Jeremy): tap a player (team, rankings, the hands of a baton) to see his profile
