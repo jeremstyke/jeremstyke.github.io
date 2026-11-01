@@ -53,7 +53,7 @@
     try {
       const ls = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
       if (!ls('mct_first_seen')) ls('mct_first_seen', ls('mct_bt_pop10') || ls('mct_bt_pop') ? '1' : String(Date.now()));  // players already here count as old
-      let done = true;  // 21h16 (Jeremy): the interstitial is back at opening, no more after the first trade
+      let done = false;  // 1 nov 2026 (16h57, Jeremy): back after a trade (no more at opening), 4 min at least between two. Was: 21h16 (Jeremy): the interstitial is back at opening, no more after the first trade
       const of = window.fetch;
       window.fetch = async function (u, o) {
         const r = await of.apply(this, arguments);
@@ -62,8 +62,8 @@
             r.clone().json().then((j) => {
               if (done || !j || j.error || j.ok === false || window.MCTPREM) return;
               // 18h51 (Jeremy): no rule for new players, the only exclusion is Premium
-              if (Date.now() - Number(ls('mct_int_at') || 0) < 30 * 60000) return;
-              done = true; ls('mct_int_at', String(Date.now())); setTimeout(adInt, 1200);  // let the trade's toast show first
+              if (Date.now() - Number(ls('mct_int_at') || 0) < 4 * 60000) return;
+              ls('mct_int_at', String(Date.now())); setTimeout(adInt, 1200);  // let the trade's toast show first
             }).catch(() => {});
           }
         } catch (e) {}
@@ -84,7 +84,7 @@
       if (seen) {  /* 24 oct 2026 (10h19, Jeremy): one hour at least between two opening interstitials */
         let last = 0; try { last = Number(localStorage.getItem('mct_int_open') || 0); } catch (e) {}
         if (!last) { try { localStorage.setItem('mct_int_open', String(Date.now())); } catch (e) {} return; }  /* never on the first visit */
-        if (!window.MCTPREM) {  /* 30 oct 2026 (18h15, Jeremy): at every opening (was once an hour) */ try { localStorage.setItem('mct_int_open', String(Date.now())); } catch (e) {} adInt(); }
+        if (!window.MCTPREM) {  /* 30 oct 2026 (18h15, Jeremy): at every opening (was once an hour) */ try { localStorage.setItem('mct_int_open', String(Date.now())); } catch (e) {} /* 1 nov 2026 (16h57, Jeremy): no more at opening, after a trade instead */ }
         return;
       }  // 21h16 (Jeremy): the Baton popup only once ever, then an Adsgram interstitial at each opening (never for Premium)
       try { localStorage.setItem(K, String(Date.now())); } catch (e) {}
