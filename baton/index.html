@@ -1845,10 +1845,19 @@ $('#sheet').onclick = async (e) => {
   hap(); const k = o.dataset.k;
   if (k === 'keep') return closeSheet();
   if (k === 'invite') { closeSheet(); return $('#invite').onclick(); }
-  if (k === 'joinclub') { closeSheet(); return openLink('https://t.me/passthebatonclub'); }  // 29 oct 2026 (9h33)
+  if (k === 'joinclub') { if (!$('#sheet [data-k="joinjs"]')) closeSheet(); return openLink('https://t.me/passthebatonclub'); }
+  if (k === 'joinjs') { return openLink('https://t.me/jeremstyke'); }  // 1 nov 2026 (14h26)  // 29 oct 2026 (9h33)
   if (k === 'askclub') {  // 29 oct 2026 (7h56, Jeremy)
     closeSheet(); const F = LANG === 'fr'; const r = await api('askclub');
     if (r && r.ok) { hap('ok'); toast(r.already ? (F ? '🙏 Ta demande est déjà dans le Club, patience !' : '🙏 Your request is already in the Club, hang on!') : (F ? '🙏 Demande postée dans le Club : le premier qui le veut te passe son bâton !' : '🙏 Request posted in the Club: someone will pass you their baton!')); }
+    else if (r && r.error === 'join') {  // 1 nov 2026 (14h26, Jeremy): asking needs the Club and @jeremstyke
+      hap('err'); const m = String(r.miss || '');
+      return sheet('<h3>' + (F ? '👥 Rejoins-nous d\'abord' : '👥 Join us first') + '</h3><p class="foot" style="text-align:start;margin:0">' + (F ? 'Pour demander un bâton au Club, tu dois être dans le Pass The Baton Club et abonné à Jeremstyke.' : 'To ask the Club for a baton, you must be in the Pass The Baton Club and subscribed to Jeremstyke.') + '</p>' +
+        (m.indexOf('club') >= 0 ? '<button class="opt" data-k="joinclub"><span class="t"><b>' + (F ? '👥 Rejoindre le Club' : '👥 Join the Club') + '</b><span>@passthebatonclub</span></span></button>' : '') +
+        (m.indexOf('jeremstyke') >= 0 ? '<button class="opt" data-k="joinjs"><span class="t"><b>' + (F ? '📢 S\'abonner à Jeremstyke' : '📢 Subscribe to Jeremstyke') + '</b><span>@jeremstyke</span></span></button>' : '') +
+        '<button class="btn" data-k="askclub">' + (F ? '✅ C\'est fait, demander mon bâton' : '✅ Done, ask for my baton') + '</button>' +
+        '<button class="btn ghost" data-k="keep">' + (F ? 'Fermer' : 'Close') + '</button>');
+    }
     else { hap('err'); toast(r && r.error === 'holding' ? (F ? 'Tu as déjà un bâton en main.' : 'You already hold a baton.') : errMsg(r || {})); }
     return;
   }
