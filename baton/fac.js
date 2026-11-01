@@ -101,8 +101,38 @@
     + '#facScr .wk{border-color:rgba(255,197,49,.35);background:linear-gradient(180deg,rgba(255,197,49,.10),rgba(255,197,49,.02))}#facScr .wk .lb{color:#ffd45a}'
     + '#facScr .wkr{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:12px;background:rgba(0,0,0,.18);font-size:14px}#facScr .wkr b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800}#facScr .wkr span{font-variant-numeric:tabular-nums;opacity:.9}#facScr .wkr.me{outline:1.5px solid #ffc531}'
     + '#facScr .usd{font-size:12.5px;color:#9fd0ff}'
+    // 1 nov 2026 (19h59, Jeremy): more "factory": steel plates with rivets, hazard stripes, stencil titles, gauges with ticks, a scoreboard for the ranking
+    + '#facScr{background:repeating-linear-gradient(45deg,rgba(255,255,255,.018) 0 2px,transparent 2px 9px),radial-gradient(120% 50% at 50% 0%,#3b3326 0%,#1b1a18 55%,#121212 100%)}'
+    + '#facScr h1,#facScr .lb,#facScr .card>b,#facScr .row b,#facScr .btn,#facScr .up,#facScr .wkr b{font-family:"Russo One",system-ui,sans-serif;font-weight:400;letter-spacing:.3px}'
+    + '#facScr h1{font-size:19px;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap}'
+    + '#facScr .card{position:relative;border-radius:14px;border:2px solid #4a4f58;background:radial-gradient(circle at 10px 10px,#8a919c 0 2.5px,#3a3f47 3px,transparent 3.5px),radial-gradient(circle at calc(100% - 10px) 10px,#8a919c 0 2.5px,#3a3f47 3px,transparent 3.5px),radial-gradient(circle at 10px calc(100% - 10px),#8a919c 0 2.5px,#3a3f47 3px,transparent 3.5px),radial-gradient(circle at calc(100% - 10px) calc(100% - 10px),#8a919c 0 2.5px,#3a3f47 3px,transparent 3.5px),linear-gradient(180deg,#34383f,#25282d);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -3px 0 rgba(0,0,0,.35),0 8px 20px rgba(0,0,0,.45);padding:18px 18px 16px}'
+    + '#facScr .card:before{content:"";position:absolute;left:24px;right:24px;top:-2px;height:5px;border-radius:0 0 4px 4px;background:repeating-linear-gradient(-45deg,#ffc531 0 8px,#1c1c1c 8px 16px);opacity:.9}'
+    + '#facScr .lb{font-size:12px;letter-spacing:2px;color:#ffc531;opacity:1;text-shadow:0 1px 0 #000}'
+    + '#facScr .row{padding:10px 12px;border-radius:10px;background:linear-gradient(180deg,#1e2125,#24282d);box-shadow:inset 0 2px 4px rgba(0,0,0,.5),inset 0 -1px 0 rgba(255,255,255,.05)}'
+    + '#facScr .card .row+.row{border-top:0;padding-top:10px;margin-top:2px}'
+    + '#facScr .w>.card:nth-child(3)>.row:first-child{background:none;box-shadow:none;padding:0}'
+    + '#facScr .bar{height:14px;border-radius:4px;background:#15171a;border:1px solid #4a4f58;box-shadow:inset 0 2px 3px rgba(0,0,0,.6);position:relative}'
+    + '#facScr .bar:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 9.5%,rgba(0,0,0,.45) 9.5% 10%);pointer-events:none}'
+    + '#facScr .bar i{border-radius:3px;background:repeating-linear-gradient(-45deg,rgba(0,0,0,.14) 0 6px,transparent 6px 12px),linear-gradient(90deg,#ffe27a,#ffc531 55%,#ff8a2f)}'
+    + '#facScr .btn{border-radius:12px;text-transform:uppercase;letter-spacing:.8px;font-size:17px;background:repeating-linear-gradient(-45deg,rgba(0,0,0,.06) 0 10px,transparent 10px 20px),linear-gradient(180deg,#ffd84f,#ffb21f);border:2px solid #7a4a0c;box-shadow:0 5px 0 #6b3f0a,0 10px 18px rgba(0,0,0,.4),inset 0 2px 0 rgba(255,255,255,.5)}'
+    + '#facScr .btn:active{box-shadow:0 2px 0 #6b3f0a,inset 0 2px 0 rgba(255,255,255,.5)}'
+    + '#facScr .ghost{border-radius:12px;border:2px solid #5a606a;background:linear-gradient(180deg,#2c3036,#212429);color:#ffd45a;box-shadow:0 3px 0 #15171a}'
+    + '#facScr .up{border-radius:10px;border:2px solid #7a4a0c;background:linear-gradient(180deg,#ffd84f,#ffb21f);box-shadow:0 4px 0 #6b3f0a;font-size:14px}'
+    + '#facScr .up:disabled{background:linear-gradient(180deg,#4a4f58,#3a3f47);border-color:#2a2e34;color:#aab0ba;box-shadow:0 3px 0 #1c1f23;opacity:1}'
+    + '#facScr .goal{border-color:#2f6b55}#facScr .goal:before{background:repeating-linear-gradient(-45deg,#3ee6a0 0 8px,#1c1c1c 8px 16px)}#facScr .goal .lb{color:#3ee6a0}'
+    + '#facScr .wk{border-color:#6b5a2a}'
+    + '#facScr .wkr{background:#0d0f11;border:1px solid #2c3036;border-radius:8px;box-shadow:inset 0 0 12px rgba(255,140,0,.06)}#facScr .wkr span{font-family:"Share Tech Mono",ui-monospace,monospace;color:#ffb21f;font-size:16px;text-shadow:0 0 6px rgba(255,170,0,.5)}'
+    + '#facScr .wkr.me{outline:2px solid #ffc531;outline-offset:-1px}'
+    + '#facScr .fconv{border-color:#3d5a7a}#facScr .fconv:before{background:repeating-linear-gradient(-45deg,#5aa8ff 0 8px,#1c1c1c 8px 16px)}'
+    + '#facScr .strk{border-radius:8px;background:#1a1410;border:1px solid #8a4a1a;color:#ffb070}'
+    + '#facScr .pill{border-radius:10px;background:#0d0f11;border:2px solid #4a4f58;font-family:"Share Tech Mono",ui-monospace,monospace;font-size:20px;color:#ffc531;text-shadow:0 0 8px rgba(255,197,49,.45)}'
+    + '#facScr #fPend{font-family:"Share Tech Mono",ui-monospace,monospace;font-size:30px!important;color:#ffd45a;text-shadow:0 0 10px rgba(255,197,49,.35)}'
+    + '#facScr #fRate{font-family:"Share Tech Mono",ui-monospace,monospace;padding:4px 10px;border-radius:8px;background:#0d0f11;border:1px solid #3a3f47}'
+    + '#facScr .note{padding:12px 14px;border-radius:12px;border:1px dashed #4a4f58;background:rgba(0,0,0,.2)}'
+    + '#facScr .x{border-radius:10px;background:#2c3036;border:2px solid #4a4f58}'
     + '#facScr .cf{position:fixed;top:-30px;font-size:22px;pointer-events:none;animation:fcf 1.8s ease-in forwards;z-index:9001}@keyframes fcf{to{transform:translateY(110vh) rotate(540deg)}}';
   document.head.appendChild(css);
+  try { if (!document.getElementById('facFont')) { var fl = document.createElement('link'); fl.id = 'facFont'; fl.rel = 'stylesheet'; fl.href = 'https://fonts.googleapis.com/css2?family=Russo+One&family=Share+Tech+Mono&display=swap'; document.head.appendChild(fl); } } catch (e) {}  // 1 nov 2026: factory fonts
   var st = null, t0 = 0, skew = 0, busy = false, scr = null, timer = null, taps = 0, tapT = null, tapLeft = 0, E = {}, combo = 0, lastTap = 0, nextGold = 0, goldOn = false, AC = null;
   // little sounds made on the fly (no file): started on the first tap
   function snd(f, d, type, vol) { try { if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)(); var o = AC.createOscillator(), g = AC.createGain(); o.type = type || 'square'; o.frequency.value = f; g.gain.setValueAtTime(vol || .05, AC.currentTime); g.gain.exponentialRampToValueAtTime(.0001, AC.currentTime + (d || .08)); o.connect(g); g.connect(AC.destination); o.start(); o.stop(AC.currentTime + (d || .08)); } catch (e) {} }
