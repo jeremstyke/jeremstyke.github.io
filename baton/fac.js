@@ -19,6 +19,7 @@
       streak: function (n) { return '🔥 ' + n + ' jour' + (n > 1 ? 's' : '') + ' d\'affilée' + (n > 1 ? ' · +' + ((n - 1) * 10) + ' % de production' : ''); }, streak0: '🔥 Récolte chaque jour : +10 % de production par jour d\'affilée (jusqu\'à +60 %)',
       week: '🏆 Classement de la semaine', weekS: function (a, b, c) { return 'Le plus de caisses gagne : 🥇 ' + a + ' · 🥈 ' + b + ' · 🥉 ' + c + ' $BATON, chaque lundi'; }, weekMe: function (r, m) { return 'Toi : ' + r + 'e · ' + m + ' 📦'; }, weekNone: 'Personne encore cette semaine : sois le premier !',
       usd: function (u) { return '≈ ' + u + ' $ en vrais USDT dans la boutique'; }, pass: function (n) { return '🏃 Chaque bâton passé = +' + n + ' 📦'; },
+      adT: '📢 Tâche sponsorisée', adR: function (n) { return '+' + n + ' 📦 et des $BATON'; }, adGoal: '🎯 10 tâches dans la journée = +500 📦 de bonus dans l\'usine', adGo: 'Faire', adClaim: 'Récupérer', adOk: function (n) { return '📢 Tâche faite : +' + n + ' 📦 !'; }, adWait: '⏳ Prochaine tâche sponsorisée dans', adDone: '✅ Tes tâches sponsorisées du jour sont faites, reviens demain', adNone: '⏳ Pas de tâche disponible pour l\'instant, nouvel essai dans 30 s',
       chT: '🎯 Défis du jour', chM: { collect: function (t) { return 'Récolte ' + t + ' fois'; }, tap: function (t) { return 'Tape ' + t + ' fois l\'usine'; }, gold: function (t) { return 'Attrape ' + t + ' caisses dorées'; }, up: function (t) { return 'Fais ' + t + ' amélioration' + (t > 1 ? 's' : ''); }, conv: function (t) { return 'Échange tes caisses ' + t + ' fois'; }, boost: function (t) { return 'Active le turbo ' + t + ' fois'; } }, chGet: function (n) { return '+' + n + ' 📦'; }, chest: function (n) { return '🎁 Coffre des 3 défis : +' + n + ' 📦'; }, chestOk: '✅ Coffre ouvert, nouveaux défis demain', chestLock: function (k) { return '🔒 Coffre : ' + k + '/3 défis'; },
       troT: '🏅 Trophées', troM: { made: function (t) { return t + ' caisses produites'; }, lvl: function (t) { return 'Machine niv. ' + t; }, store: function (t) { return 'Entrepôt niv. ' + t; }, belt: function (t) { return 'Tapis niv. ' + t; }, truck: function (t) { return 'Camion niv. ' + t; }, streak_best: function (t) { return t + ' jours d\'affilée'; }, gold_total: function (t) { return t + ' caisses dorées'; } }, troN: function (a, b) { return a + ' / ' + b + ' débloqués'; },
       game: '🏃 Ouvrir Pass The Baton', close: 'Fermer', gold: function (n) { return '🎁 CAISSE DORÉE +' + n + ' 📦 !'; }, combo: function (n) { return '🔥 COMBO x' + n; }, goldHint: '🎁 Une caisse dorée ! Tape-la vite !' },
@@ -35,6 +36,7 @@
       streak: function (n) { return '🔥 ' + n + ' day' + (n > 1 ? 's' : '') + ' in a row' + (n > 1 ? ' · +' + ((n - 1) * 10) + '% production' : ''); }, streak0: '🔥 Collect every day: +10% production per day in a row (up to +60%)',
       week: '🏆 Weekly ranking', weekS: function (a, b, c) { return 'Most crates wins: 🥇 ' + a + ' · 🥈 ' + b + ' · 🥉 ' + c + ' $BATON, every Monday'; }, weekMe: function (r, m) { return 'You: #' + r + ' · ' + m + ' 📦'; }, weekNone: 'Nobody yet this week: be the first!',
       usd: function (u) { return '≈ $' + u + ' in real USDT in the shop'; }, pass: function (n) { return '🏃 Each baton passed = +' + n + ' 📦'; },
+      adT: '📢 Sponsored task', adR: function (n) { return '+' + n + ' 📦 and $BATON'; }, adGoal: '🎯 10 tasks in a day = +500 📦 bonus in the factory', adGo: 'Do it', adClaim: 'Claim', adOk: function (n) { return '📢 Task done: +' + n + ' 📦!'; }, adWait: '⏳ Next sponsored task in', adDone: '✅ Your sponsored tasks of the day are done, come back tomorrow', adNone: '⏳ No task right now, trying again in 30 s',
       chT: '🎯 Daily challenges', chM: { collect: function (t) { return 'Collect ' + t + ' times'; }, tap: function (t) { return 'Tap the factory ' + t + ' times'; }, gold: function (t) { return 'Catch ' + t + ' golden crates'; }, up: function (t) { return 'Make ' + t + ' upgrade' + (t > 1 ? 's' : ''); }, conv: function (t) { return 'Trade your crates ' + t + ' time' + (t > 1 ? 's' : ''); }, boost: function (t) { return 'Turn on the turbo ' + t + ' time' + (t > 1 ? 's' : ''); } }, chGet: function (n) { return '+' + n + ' 📦'; }, chest: function (n) { return '🎁 3-challenge chest: +' + n + ' 📦'; }, chestOk: '✅ Chest opened, new challenges tomorrow', chestLock: function (k) { return '🔒 Chest: ' + k + '/3 challenges'; },
       troT: '🏅 Trophies', troM: { made: function (t) { return t + ' crates made'; }, lvl: function (t) { return 'Machine lvl ' + t; }, store: function (t) { return 'Warehouse lvl ' + t; }, belt: function (t) { return 'Belt lvl ' + t; }, truck: function (t) { return 'Truck lvl ' + t; }, streak_best: function (t) { return t + ' days in a row'; }, gold_total: function (t) { return t + ' golden crates'; } }, troN: function (a, b) { return a + ' / ' + b + ' unlocked'; },
       game: '🏃 Open Pass The Baton', close: 'Close', gold: function (n) { return '🎁 GOLDEN CRATE +' + n + ' 📦!'; }, combo: function (n) { return '🔥 COMBO x' + n; }, goldHint: '🎁 A golden crate! Tap it fast!' }
@@ -141,6 +143,7 @@
     + '#facScr .ftro{border-color:#6b5a2a}#facScr .trg{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}'
     + '#facScr .trt{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;border-radius:10px;text-align:center;background:#1a1c20;border:1px solid #2c3036;font-size:11.5px;line-height:1.25;min-width:0}#facScr .trt i{font-style:normal;font-size:24px;filter:grayscale(1) brightness(.6)}#facScr .trt small{font-family:"Share Tech Mono",ui-monospace,monospace;opacity:.7;font-size:11px}'
     + '#facScr .trt.got i{filter:none}#facScr .trt.got{border-color:#6b5a2a;background:linear-gradient(180deg,#2a2416,#1a1c20)}#facScr .trt.can{border:2px solid #ffc531;box-shadow:0 0 14px rgba(255,197,49,.35);cursor:pointer;animation:fpulse 1.4s ease-in-out infinite}#facScr .trt.can i{filter:none}#facScr .trt b{font-family:"Russo One",system-ui,sans-serif;font-weight:400;color:#ffc531;font-size:12px}'
+    + '#facScr .fad{border-color:#8a6a1a}#facScr .fad:before{background:repeating-linear-gradient(-45deg,#ff8a2f 0 8px,#1c1c1c 8px 16px)}#facScr .fad .lb{color:#ffb070}#facScr .fad adsgram-task{display:block}#facScr .fad small{opacity:.85;font-size:13px}#facScr .fad small b{font-family:"Share Tech Mono",ui-monospace,monospace;color:#ffc531}'
     + '#facScr .cf{position:fixed;top:-30px;font-size:22px;pointer-events:none;animation:fcf 1.8s ease-in forwards;z-index:9001}@keyframes fcf{to{transform:translateY(110vh) rotate(540deg)}}';
   document.head.appendChild(css);
   try { if (!document.getElementById('facFont')) { var fl = document.createElement('link'); fl.id = 'facFont'; fl.rel = 'stylesheet'; fl.href = 'https://fonts.googleapis.com/css2?family=Russo+One&family=Share+Tech+Mono&display=swap'; document.head.appendChild(fl); } } catch (e) {}  // 1 nov 2026: factory fonts
@@ -188,6 +191,7 @@
       + '<div class="bar"><i id="fBar"></i></div><small style="opacity:.8" id="fFull"></small>'
       + '<button class="btn" id="fC"></button><button class="ghost" id="fB"></button></div>'
       + '<div class="card goal"><div class="lb">' + L.goal + '</div><b id="fGoal"></b><div class="bar"><i id="fGoalBar"></i></div></div>'
+      + '<div class="card fad"><div class="lb">' + L.adT + '</div><div id="fAd"></div><small style="opacity:.75">' + L.adGoal + '</small></div>'
       + '<div class="card fch"><div class="lb">' + L.chT + '</div><div id="fChL" style="display:flex;flex-direction:column;gap:7px"></div><button class="ghost" id="fChB"></button></div>'
       + '<div class="card"><div class="row"><div class="who"><b id="fML"></b><small id="fMS"></small></div><button class="up" id="fL"></button></div>'
       + '<div class="row"><div class="who"><b id="fSL"></b><small id="fSS"></small></div><button class="up" id="fS"></button></div>'
@@ -198,7 +202,7 @@
       + '<div class="card ftro"><div class="lb">' + L.troT + '</div><small style="opacity:.8" id="fTN"></small><div class="trg" id="fTG"></div></div>'
       + '<div class="note" id="fNote"></div>'
       + '<button class="ghost" id="fG" style="border-color:rgba(255,255,255,.2);color:inherit;background:none">' + L.game + '</button></div>';
-    ['Lvb', 'Wins', 'Combo', 'Pill', 'Cr', 'Scene', 'Hint', 'Bld', 'Belt', 'Crates', 'Pend', 'Rate', 'Bar', 'Full', 'C', 'B', 'Goal', 'GoalBar', 'ML', 'MS', 'L', 'SL', 'SS', 'S', 'VS', 'V', 'Note', 'G', 'X', 'Stk', 'BL', 'BS', 'BU', 'TL', 'TS', 'TU', 'WS', 'WL', 'WM', 'US', 'ChL', 'ChB', 'TN', 'TG'].forEach(function (k) { E[k.toLowerCase()] = document.getElementById('f' + k); });
+    ['Lvb', 'Wins', 'Combo', 'Pill', 'Cr', 'Scene', 'Hint', 'Bld', 'Belt', 'Crates', 'Pend', 'Rate', 'Bar', 'Full', 'C', 'B', 'Goal', 'GoalBar', 'ML', 'MS', 'L', 'SL', 'SS', 'S', 'VS', 'V', 'Note', 'G', 'X', 'Stk', 'BL', 'BS', 'BU', 'TL', 'TS', 'TU', 'WS', 'WL', 'WM', 'US', 'ChL', 'ChB', 'TN', 'TG', 'Ad'].forEach(function (k) { E[k.toLowerCase()] = document.getElementById('f' + k); });
     E.x.onclick = close; E.g.onclick = close;
     E.c.onclick = function () { act('collect', null, function (r) { pop(); jingle([523, 659, 784]); return T().ok.collect(nf(r.got)); }); };
     E.b.onclick = boost;
@@ -216,6 +220,31 @@
       act('convert', { n: n }, function (r) { try { B().refresh(); } catch (e) {} return T().ok.conv(nf(r.baton)); });
     };
     E.scene.addEventListener('pointerdown', tap);
+    adBuild();
+  }
+  // 1 nov 2026 (20h19, Jeremy): the Adsgram sponsored task inside the factory too (same block as the Tasks tab, same limits: 10 a day, one every 30 s);
+  // each one gives crates (server: bt_ads_reward, fac_task_crates) on top of the usual $BATON
+  var adUntil = 0, adLast = 0;
+  function adBuild() {
+    var b = B(), L = T(); if (!E.ad || !b || !b.S) return;
+    var S = b.S, until = Math.max(Number(S.adtNext) || 0, (function () { try { return Number(localStorage.getItem('bt_adt_pause')) || 0; } catch (e) { return 0; } })());
+    if (S.adtLeft === 0) { adUntil = 0; E.ad.innerHTML = '<small>' + L.adDone + '</small>'; return; }
+    if (until > Date.now()) { adUntil = until; E.ad.innerHTML = '<small>' + L.adWait + ' <b id="fAdCd"></b></small>'; return; }
+    adUntil = 0;
+    var mk = function () {
+      if (!E.ad) return;
+      E.ad.innerHTML = '<adsgram-task data-block-id="task-55373"><span slot="reward">' + L.adR(nf(st ? st.task_crates : 100)) + '</span><div slot="button" class="up">' + L.adGo + '</div><div slot="claim" class="up">' + L.adClaim + '</div><div slot="done" class="up">✓</div></adsgram-task>';
+      var tk = E.ad.querySelector('adsgram-task');
+      ['onBannerNotFound', 'onError', 'onTooLongSession'].forEach(function (ev) { tk.addEventListener(ev, function () { if (E.ad) E.ad.innerHTML = '<small>' + T().adNone + '</small>'; setTimeout(adBuild, 30000); }); });
+      var gift = function () {
+        if (Date.now() - adLast < 3000) return; adLast = Date.now(); hap('success'); toast(T().adOk(nf(st ? st.task_crates : 100))); jingle([523, 659, 784]);
+        try { localStorage.setItem('bt_adt_pause', String(Date.now() + 60000)); } catch (e) {}
+        setTimeout(function () { try { B().refresh(); } catch (e) {} load().then(draw); }, 3000); setTimeout(adBuild, 4000);
+      };
+      tk.addEventListener('reward', gift); tk.addEventListener('onReward', gift);
+    };
+    if (window.customElements && customElements.get('adsgram-task')) mk();
+    else { if (!document.querySelector('script[src*="sad.adsgram.ai"]')) { var s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; document.head.appendChild(s); } var n = 0, w = setInterval(function () { if (window.customElements && customElements.get('adsgram-task')) { clearInterval(w); mk(); } else if (++n > 40) { clearInterval(w); if (E.ad) E.ad.innerHTML = '<small>' + T().adNone + '</small>'; setTimeout(adBuild, 30000); } }, 250); }
   }
   // the crates on the belt: more of them, faster, with a better machine
   var beltKey = '';
@@ -272,6 +301,7 @@
     if (!scr || !st || !E.cr) return;
     var L = T(), p = Math.floor(pend()), full = now() >= st.full_at, boostOn = st.boost_until && st.boost_until > now(), crates = Math.floor(st.crates) + taps;
     E.cr.textContent = nf(crates);
+    if (adUntil) { var cd = document.getElementById('fAdCd'), sl = Math.max(0, Math.ceil((adUntil - Date.now()) / 1000)); if (cd) cd.textContent = Math.floor(sl / 60) + ':' + String(sl % 60).padStart(2, '0'); if (sl <= 0) adBuild(); }
     E.scene.classList.toggle('boost', !!boostOn);
     belt();
     if (Date.now() - lastTap > 1500 && E.combo.textContent) E.combo.textContent = '';
