@@ -49,6 +49,8 @@
     }
     var s = document.createElement('style');
     s.textContent = '[data-t="conv"]{display:none!important}#spTasks{display:none!important}'
+      /* 1 nov 2026 (1h02, Jeremy): the partner tasks (paid by clients) at the top of Tasks, right under the Promote button */
+      + '#p-tasks>#spTasks2{order:0;margin-top:12px}'
       + '#p-tasks>#prBtn{order:0;display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;box-sizing:border-box;margin-top:10px;padding:12px 14px;border-radius:16px;border:1px solid rgba(255,197,49,.35);background:rgba(255,197,49,.08);color:#ffd75a;font:inherit;font-weight:800;font-size:13.5px;text-align:left;cursor:pointer}'
       + '#prS .stp{display:flex;align-items:center;justify-content:center;gap:14px;margin:6px 0}#prS .stp button{width:48px;height:48px;border-radius:14px;border:1px solid rgba(255,197,49,.45);background:rgba(255,197,49,.10);color:#ffd75a;font:inherit;font-size:24px;font-weight:900;cursor:pointer}#prS .stp b{min-width:110px;text-align:center;font-size:26px}#prS .stp small{display:block;font-size:12px;opacity:.7;font-weight:700}'
       + '#prS{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.62);display:flex;align-items:flex-end;justify-content:center}'
