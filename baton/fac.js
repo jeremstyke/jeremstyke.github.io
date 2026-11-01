@@ -19,6 +19,8 @@
       streak: function (n) { return '🔥 ' + n + ' jour' + (n > 1 ? 's' : '') + ' d\'affilée' + (n > 1 ? ' · +' + ((n - 1) * 10) + ' % de production' : ''); }, streak0: '🔥 Récolte chaque jour : +10 % de production par jour d\'affilée (jusqu\'à +60 %)',
       week: '🏆 Classement de la semaine', weekS: function (a, b, c) { return 'Le plus de caisses gagne : 🥇 ' + a + ' · 🥈 ' + b + ' · 🥉 ' + c + ' $BATON, chaque lundi'; }, weekMe: function (r, m) { return 'Toi : ' + r + 'e · ' + m + ' 📦'; }, weekNone: 'Personne encore cette semaine : sois le premier !',
       usd: function (u) { return '≈ ' + u + ' $ en vrais USDT dans la boutique'; }, pass: function (n) { return '🏃 Chaque bâton passé = +' + n + ' 📦'; },
+      chT: '🎯 Défis du jour', chM: { collect: function (t) { return 'Récolte ' + t + ' fois'; }, tap: function (t) { return 'Tape ' + t + ' fois l\'usine'; }, gold: function (t) { return 'Attrape ' + t + ' caisses dorées'; }, up: function (t) { return 'Fais ' + t + ' amélioration' + (t > 1 ? 's' : ''); }, conv: function (t) { return 'Échange tes caisses ' + t + ' fois'; }, boost: function (t) { return 'Active le turbo ' + t + ' fois'; } }, chGet: function (n) { return '+' + n + ' 📦'; }, chest: function (n) { return '🎁 Coffre des 3 défis : +' + n + ' 📦'; }, chestOk: '✅ Coffre ouvert, nouveaux défis demain', chestLock: function (k) { return '🔒 Coffre : ' + k + '/3 défis'; },
+      troT: '🏅 Trophées', troM: { made: function (t) { return t + ' caisses produites'; }, lvl: function (t) { return 'Machine niv. ' + t; }, store: function (t) { return 'Entrepôt niv. ' + t; }, belt: function (t) { return 'Tapis niv. ' + t; }, truck: function (t) { return 'Camion niv. ' + t; }, streak_best: function (t) { return t + ' jours d\'affilée'; }, gold_total: function (t) { return t + ' caisses dorées'; } }, troN: function (a, b) { return a + ' / ' + b + ' débloqués'; },
       game: '🏃 Ouvrir Pass The Baton', close: 'Fermer', gold: function (n) { return '🎁 CAISSE DORÉE +' + n + ' 📦 !'; }, combo: function (n) { return '🔥 COMBO x' + n; }, goldHint: '🎁 Une caisse dorée ! Tape-la vite !' },
     en: { t: 'Baton Factory', crates: 'crates', made: 'Waiting', full: '⚠️ Warehouse full: collect now!', fullIn: function (h) { return 'Full in ' + h; },
       collect: function (n) { return '📦 Collect +' + n; }, nothing: '⏳ Producing…', perh: '/h', tap: function (n, m) { return '👆 Tap the factory: +1 📦 (' + n + '/' + m + ' today)'; }, tapDone: '👆 Your hands are tired, come back tomorrow!',
@@ -33,6 +35,8 @@
       streak: function (n) { return '🔥 ' + n + ' day' + (n > 1 ? 's' : '') + ' in a row' + (n > 1 ? ' · +' + ((n - 1) * 10) + '% production' : ''); }, streak0: '🔥 Collect every day: +10% production per day in a row (up to +60%)',
       week: '🏆 Weekly ranking', weekS: function (a, b, c) { return 'Most crates wins: 🥇 ' + a + ' · 🥈 ' + b + ' · 🥉 ' + c + ' $BATON, every Monday'; }, weekMe: function (r, m) { return 'You: #' + r + ' · ' + m + ' 📦'; }, weekNone: 'Nobody yet this week: be the first!',
       usd: function (u) { return '≈ $' + u + ' in real USDT in the shop'; }, pass: function (n) { return '🏃 Each baton passed = +' + n + ' 📦'; },
+      chT: '🎯 Daily challenges', chM: { collect: function (t) { return 'Collect ' + t + ' times'; }, tap: function (t) { return 'Tap the factory ' + t + ' times'; }, gold: function (t) { return 'Catch ' + t + ' golden crates'; }, up: function (t) { return 'Make ' + t + ' upgrade' + (t > 1 ? 's' : ''); }, conv: function (t) { return 'Trade your crates ' + t + ' time' + (t > 1 ? 's' : ''); }, boost: function (t) { return 'Turn on the turbo ' + t + ' time' + (t > 1 ? 's' : ''); } }, chGet: function (n) { return '+' + n + ' 📦'; }, chest: function (n) { return '🎁 3-challenge chest: +' + n + ' 📦'; }, chestOk: '✅ Chest opened, new challenges tomorrow', chestLock: function (k) { return '🔒 Chest: ' + k + '/3 challenges'; },
+      troT: '🏅 Trophies', troM: { made: function (t) { return t + ' crates made'; }, lvl: function (t) { return 'Machine lvl ' + t; }, store: function (t) { return 'Warehouse lvl ' + t; }, belt: function (t) { return 'Belt lvl ' + t; }, truck: function (t) { return 'Truck lvl ' + t; }, streak_best: function (t) { return t + ' days in a row'; }, gold_total: function (t) { return t + ' golden crates'; } }, troN: function (a, b) { return a + ' / ' + b + ' unlocked'; },
       game: '🏃 Open Pass The Baton', close: 'Close', gold: function (n) { return '🎁 GOLDEN CRATE +' + n + ' 📦!'; }, combo: function (n) { return '🔥 COMBO x' + n; }, goldHint: '🎁 A golden crate! Tap it fast!' }
   };
   var css = document.createElement('style');
@@ -130,6 +134,13 @@
     + '#facScr #fRate{font-family:"Share Tech Mono",ui-monospace,monospace;padding:4px 10px;border-radius:8px;background:#0d0f11;border:1px solid #3a3f47}'
     + '#facScr .note{padding:12px 14px;border-radius:12px;border:1px dashed #4a4f58;background:rgba(0,0,0,.2)}'
     + '#facScr .x{border-radius:10px;background:#2c3036;border:2px solid #4a4f58}'
+    // 1 nov 2026 (20h11, Jeremy): daily challenges and trophies
+    + '#facScr .fch{border-color:#7a3a8a}#facScr .fch:before{background:repeating-linear-gradient(-45deg,#d07bff 0 8px,#1c1c1c 8px 16px)}#facScr .fch .lb{color:#e2a6ff}'
+    + '#facScr .chr{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border-radius:10px;background:linear-gradient(180deg,#1e2125,#24282d);box-shadow:inset 0 2px 4px rgba(0,0,0,.5)}#facScr .chr .top{display:flex;align-items:center;gap:10px}#facScr .chr .top span{flex:1;min-width:0;font-size:14px;font-weight:700}#facScr .chr small{font-family:"Share Tech Mono",ui-monospace,monospace;opacity:.85}'
+    + '#facScr .chr .bar{height:9px}#facScr .chr .bar i{background:linear-gradient(90deg,#b45cff,#e2a6ff)}#facScr .chr.done{opacity:.6}'
+    + '#facScr .ftro{border-color:#6b5a2a}#facScr .trg{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}'
+    + '#facScr .trt{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;border-radius:10px;text-align:center;background:#1a1c20;border:1px solid #2c3036;font-size:11.5px;line-height:1.25;min-width:0}#facScr .trt i{font-style:normal;font-size:24px;filter:grayscale(1) brightness(.6)}#facScr .trt small{font-family:"Share Tech Mono",ui-monospace,monospace;opacity:.7;font-size:11px}'
+    + '#facScr .trt.got i{filter:none}#facScr .trt.got{border-color:#6b5a2a;background:linear-gradient(180deg,#2a2416,#1a1c20)}#facScr .trt.can{border:2px solid #ffc531;box-shadow:0 0 14px rgba(255,197,49,.35);cursor:pointer;animation:fpulse 1.4s ease-in-out infinite}#facScr .trt.can i{filter:none}#facScr .trt b{font-family:"Russo One",system-ui,sans-serif;font-weight:400;color:#ffc531;font-size:12px}'
     + '#facScr .cf{position:fixed;top:-30px;font-size:22px;pointer-events:none;animation:fcf 1.8s ease-in forwards;z-index:9001}@keyframes fcf{to{transform:translateY(110vh) rotate(540deg)}}';
   document.head.appendChild(css);
   try { if (!document.getElementById('facFont')) { var fl = document.createElement('link'); fl.id = 'facFont'; fl.rel = 'stylesheet'; fl.href = 'https://fonts.googleapis.com/css2?family=Russo+One&family=Share+Tech+Mono&display=swap'; document.head.appendChild(fl); } } catch (e) {}  // 1 nov 2026: factory fonts
@@ -177,21 +188,27 @@
       + '<div class="bar"><i id="fBar"></i></div><small style="opacity:.8" id="fFull"></small>'
       + '<button class="btn" id="fC"></button><button class="ghost" id="fB"></button></div>'
       + '<div class="card goal"><div class="lb">' + L.goal + '</div><b id="fGoal"></b><div class="bar"><i id="fGoalBar"></i></div></div>'
+      + '<div class="card fch"><div class="lb">' + L.chT + '</div><div id="fChL" style="display:flex;flex-direction:column;gap:7px"></div><button class="ghost" id="fChB"></button></div>'
       + '<div class="card"><div class="row"><div class="who"><b id="fML"></b><small id="fMS"></small></div><button class="up" id="fL"></button></div>'
       + '<div class="row"><div class="who"><b id="fSL"></b><small id="fSS"></small></div><button class="up" id="fS"></button></div>'
       + '<div class="row"><div class="who"><b id="fBL"></b><small id="fBS"></small></div><button class="up" id="fBU"></button></div>'
       + '<div class="row"><div class="who"><b id="fTL"></b><small id="fTS"></small></div><button class="up" id="fTU"></button></div></div>'
       + '<div class="card wk"><div class="lb">' + L.week + '</div><small style="opacity:.8" id="fWS"></small><div id="fWL" style="display:flex;flex-direction:column;gap:6px"></div><small id="fWM" style="font-weight:800"></small></div>'
       + '<div class="card fconv"><b>' + L.conv + '</b><small style="opacity:.8" id="fVS"></small><small class="usd" id="fUS"></small><button class="ghost" id="fV"></button></div>'
+      + '<div class="card ftro"><div class="lb">' + L.troT + '</div><small style="opacity:.8" id="fTN"></small><div class="trg" id="fTG"></div></div>'
       + '<div class="note" id="fNote"></div>'
       + '<button class="ghost" id="fG" style="border-color:rgba(255,255,255,.2);color:inherit;background:none">' + L.game + '</button></div>';
-    ['Lvb', 'Wins', 'Combo', 'Pill', 'Cr', 'Scene', 'Hint', 'Bld', 'Belt', 'Crates', 'Pend', 'Rate', 'Bar', 'Full', 'C', 'B', 'Goal', 'GoalBar', 'ML', 'MS', 'L', 'SL', 'SS', 'S', 'VS', 'V', 'Note', 'G', 'X', 'Stk', 'BL', 'BS', 'BU', 'TL', 'TS', 'TU', 'WS', 'WL', 'WM', 'US'].forEach(function (k) { E[k.toLowerCase()] = document.getElementById('f' + k); });
+    ['Lvb', 'Wins', 'Combo', 'Pill', 'Cr', 'Scene', 'Hint', 'Bld', 'Belt', 'Crates', 'Pend', 'Rate', 'Bar', 'Full', 'C', 'B', 'Goal', 'GoalBar', 'ML', 'MS', 'L', 'SL', 'SS', 'S', 'VS', 'V', 'Note', 'G', 'X', 'Stk', 'BL', 'BS', 'BU', 'TL', 'TS', 'TU', 'WS', 'WL', 'WM', 'US', 'ChL', 'ChB', 'TN', 'TG'].forEach(function (k) { E[k.toLowerCase()] = document.getElementById('f' + k); });
     E.x.onclick = close; E.g.onclick = close;
     E.c.onclick = function () { act('collect', null, function (r) { pop(); jingle([523, 659, 784]); return T().ok.collect(nf(r.got)); }); };
     E.b.onclick = boost;
     E.l.onclick = function () { act('up_lvl', null, function (r) { confetti(); jingle([523, 659, 784, 1047]); beltKey = ''; return T().ok.lvl(r.lvl); }); };
     E.s.onclick = function () { act('up_store', null, function () { confetti(); jingle([523, 659, 784, 1047]); return T().ok.store; }); };
     // 1 nov 2026 (19h33, Jeremy): two more upgrades, the conveyor belt and the truck
+    // 1 nov 2026 (20h11, Jeremy): daily challenges, chest and trophies
+    E.chl.onclick = function (ev) { var b = ev.target.closest('[data-ch]'); if (!b) return; act('ch_claim', { id: b.getAttribute('data-ch') }, function (r) { pop(); jingle([523, 659, 784]); return T().ok.collect(nf(r.ch_got)); }); };
+    E.chb.onclick = function () { act('ch_chest', null, function (r) { confetti(); pop(); jingle([523, 659, 784, 1047, 1319]); return T().ok.collect(nf(r.ch_got)); }); };
+    E.tg.onclick = function (ev) { var b = ev.target.closest('[data-tro]'); if (!b) return; act('tro_claim', { id: b.getAttribute('data-tro') }, function (r) { confetti(); pop(); jingle([659, 880, 1100, 1320]); return '🏅 ' + T().ok.collect(nf(r.tro_got)); }); };
     E.bu.onclick = function () { act('up_belt', null, function () { confetti(); jingle([523, 659, 784, 1047]); return T().belt + ' ' + T().lv + ' ' + st.belt + ' !'; }); };
     E.tu.onclick = function () { act('up_truck', null, function () { confetti(); jingle([523, 659, 784, 1047]); return T().truck + ' ' + T().lv + ' ' + st.truck + ' !'; }); };
     E.v.onclick = function () {
@@ -296,6 +313,13 @@
       var wh = wl.length ? wl.map(function (w, i) { return '<div class="wkr' + (w.me ? ' me' : '') + '">' + (['🥇', '🥈', '🥉', '4.', '5.'][i] || '') + ' <b>' + esc(w.n) + '</b><span>' + nf(w.m) + ' 📦</span></div>'; }).join('') : '<small style="opacity:.75">' + L.weekNone + '</small>';
       if (E.wl.innerHTML !== wh) E.wl.innerHTML = wh;
       E.wm.textContent = st.week_me ? L.weekMe(st.week_rank, nf(st.week_me)) : '';
+      var chs = st.ch || [], chh = chs.map(function (c) { var done = Number(c.v) >= Number(c.t), f = L.chM[c.m] ? L.chM[c.m](c.t) : c.id;
+        return '<div class="chr' + (c.got ? ' done' : '') + '"><div class="top"><span>' + (c.got ? '✅ ' : '') + esc(f) + '</span>' + (c.got ? '' : done ? '<button class="up" data-ch="' + esc(c.id) + '">' + L.chGet(nf(c.rw)) + '</button>' : '<small>' + nf(c.v) + '/' + nf(c.t) + ' · +' + nf(c.rw) + ' 📦</small>') + '</div>' + (c.got ? '' : '<div class="bar"><i style="width:' + Math.min(100, Number(c.v) / Number(c.t) * 100).toFixed(0) + '%"></i></div>') + '</div>'; }).join('');
+      if (E.chl.innerHTML !== chh) E.chl.innerHTML = chh;
+      E.chb.textContent = st.ch_chest ? L.chestOk : (st.ch_n >= 3 ? L.chest(nf(st.ch_chest_rw)) : L.chestLock(st.ch_n || 0)); E.chb.disabled = busy || !!st.ch_chest || (st.ch_n || 0) < 3; E.chb.classList.toggle('on', !st.ch_chest && st.ch_n >= 3);
+      var tros = st.tro || [], ng = 0, trh = tros.map(function (t) { var can = !t.got && Number(t.v) >= Number(t.t); if (t.got) ng++; var nm = L.troM[t.k] ? L.troM[t.k](nf(t.t)) : t.id;
+        return '<div class="trt' + (t.got ? ' got' : can ? ' can' : '') + '"' + (can ? ' data-tro="' + esc(t.id) + '"' : '') + '><i>' + (t.got || can ? '🏅' : '🔒') + '</i>' + esc(nm) + (can ? '<b>+' + nf(t.r) + ' 📦</b>' : t.got ? '' : '<small>' + nf(t.v) + '/' + nf(t.t) + '</small>') + '</div>'; }).join('');
+      if (E.tg.innerHTML !== trh) E.tg.innerHTML = trh; E.tn.textContent = L.troN(ng, tros.length);
     }
     var convLeft = Math.max(0, st.day_cap - st.conv_today), convN = Math.min(Math.floor(st.crates), Math.ceil(convLeft / st.conv));
     E.vs.textContent = L.convS(st.conv, nf(st.conv_today), nf(st.day_cap));
