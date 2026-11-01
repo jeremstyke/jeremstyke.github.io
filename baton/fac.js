@@ -89,7 +89,7 @@
     + '#facScr .card .row+.row{padding-top:11px;border-top:1px solid rgba(255,255,255,.08)}'
     + '#facScr .up{border:0;border-radius:13px;padding:11px 12px;font-weight:900;background:linear-gradient(180deg,#ffe07a,#ffb43a);color:#2a1300;white-space:nowrap;min-width:92px;box-shadow:0 4px 0 #b8641c,inset 0 1px 0 rgba(255,255,255,.5)}#facScr .up:active{transform:translateY(2px);box-shadow:0 2px 0 #b8641c}#facScr .up:disabled{opacity:.38;box-shadow:none}'
     + '#facScr .goal{border-color:rgba(62,230,160,.4);background:linear-gradient(180deg,rgba(62,230,160,.12),rgba(62,230,160,.04))}#facScr .goal .lb{color:#7ff0c0}#facScr .goal .bar i{background:linear-gradient(90deg,#3ee6a0,#b8f06a,#ffc531);background-size:200% 100%}'
-    + '#facScr .conv{border-color:rgba(120,180,255,.3);background:linear-gradient(180deg,rgba(90,150,255,.12),rgba(90,150,255,.03))}'
+    + '#facScr .fconv{text-align:start;width:auto;border-color:rgba(120,180,255,.3);background:linear-gradient(180deg,rgba(90,150,255,.12),rgba(90,150,255,.03))}'
     + '#facScr .note{font-size:13px;opacity:.8;line-height:1.6;padding:2px 4px}'
     + '#facScr .gold{position:absolute;bottom:44px;font-size:34px;filter:drop-shadow(0 0 10px #ffd45a) drop-shadow(0 0 4px #fff);animation:fgold 7s linear forwards,fbob .5s ease-in-out infinite alternate;z-index:3;cursor:pointer}'
     + '@keyframes fgold{from{left:-40px}to{left:calc(100% + 40px)}}@keyframes fbob{to{margin-bottom:10px}}'
@@ -152,7 +152,7 @@
       + '<div class="row"><div class="who"><b id="fBL"></b><small id="fBS"></small></div><button class="up" id="fBU"></button></div>'
       + '<div class="row"><div class="who"><b id="fTL"></b><small id="fTS"></small></div><button class="up" id="fTU"></button></div></div>'
       + '<div class="card wk"><div class="lb">' + L.week + '</div><small style="opacity:.8" id="fWS"></small><div id="fWL" style="display:flex;flex-direction:column;gap:6px"></div><small id="fWM" style="font-weight:800"></small></div>'
-      + '<div class="card conv"><b>' + L.conv + '</b><small style="opacity:.8" id="fVS"></small><small class="usd" id="fUS"></small><button class="ghost" id="fV"></button></div>'
+      + '<div class="card fconv"><b>' + L.conv + '</b><small style="opacity:.8" id="fVS"></small><small class="usd" id="fUS"></small><button class="ghost" id="fV"></button></div>'
       + '<div class="note" id="fNote"></div>'
       + '<button class="ghost" id="fG" style="border-color:rgba(255,255,255,.2);color:inherit;background:none">' + L.game + '</button></div>';
     ['Lvb', 'Wins', 'Combo', 'Pill', 'Cr', 'Scene', 'Hint', 'Bld', 'Belt', 'Crates', 'Pend', 'Rate', 'Bar', 'Full', 'C', 'B', 'Goal', 'GoalBar', 'ML', 'MS', 'L', 'SL', 'SS', 'S', 'VS', 'V', 'Note', 'G', 'X', 'Stk', 'BL', 'BS', 'BU', 'TL', 'TS', 'TU', 'WS', 'WL', 'WM', 'US'].forEach(function (k) { E[k.toLowerCase()] = document.getElementById('f' + k); });
