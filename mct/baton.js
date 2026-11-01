@@ -57,6 +57,8 @@
       const of = window.fetch;
       window.fetch = async function (u, o) {
         const r = await of.apply(this, arguments);
+        // 2 nov 2026 (0h39, Jeremy): every buy or sell (memecoins, stock market) pays $BATON: a small toast after the trade's own toast
+        try { const us = String(u); if (us.indexOf('/mct/api') >= 0 || us.indexOf('mct-bourse') >= 0) r.clone().json().then((j) => { const bt = j && Number(j.baton); if (bt > 0) setTimeout(() => { try { toast('🏃 +' + bt + ' $BATON (Pass The Baton)'); } catch (e) {} }, 1800); }).catch(() => {}); } catch (e) {}
         try {
           if (!done && String(u).indexOf('/mct/api') >= 0 && o && typeof o.body === 'string' && /"action":"(buy|sell)"/.test(o.body)) {
             r.clone().json().then((j) => {
