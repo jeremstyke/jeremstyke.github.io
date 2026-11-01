@@ -241,6 +241,7 @@
       var gift = function () {
         if (Date.now() - adLast < 3000) return; adLast = Date.now(); hap('success'); toast(T().adOk(nf(crt))); jingle([523, 659, 784]);
         if (!own) try { localStorage.setItem('bt_adt_pause', String(Date.now() + 60000)); } catch (e) {}
+        if (own) { load('adtask').then(function () { draw(); setTimeout(adBuild, 2500); }); return; }  // 1 nov 2026 (22h28): no reward URL for the factory block, the app reports it
         setTimeout(function () { try { B().refresh(); } catch (e) {} load().then(draw); }, 3000); setTimeout(adBuild, 4000);
       };
       tk.addEventListener('reward', gift); tk.addEventListener('onReward', gift);
