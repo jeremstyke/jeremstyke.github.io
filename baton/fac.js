@@ -247,7 +247,11 @@
         busy = false;
         if (!r) toast(T().err.net);
         else if (r.ok === false) { hap('error'); toast(T().err[r.error] || T().err.net); }
-        else { hap('success'); toast(typeof okMsg === 'function' ? okMsg(r) : okMsg); }
+        else {
+          hap('success'); toast(typeof okMsg === 'function' ? okMsg(r) : okMsg);
+          // 1 nov 2026 (16h57, Jeremy): the interstitial comes after a harvest or a trade (no more at opening), 4 min at least between two
+          if (a === 'collect' || a === 'convert') setTimeout(function () { try { if (window.btInt) window.btInt(); } catch (e) {} }, 1500);
+        }
         draw();
       });
     };
