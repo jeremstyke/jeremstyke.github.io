@@ -1769,6 +1769,7 @@ function shopDraw() {
   const st = { wait: 'sWait', paid: 'sPaid', refused: 'sRefused', failed: 'sWait' };
   sheet('<h3>' + T('shopH') + '</h3><p class="foot" style="text-align:start;margin:0">' + T('shopS') + '</p>' +
     '<div class="shHave">' + T('have', fmt(pts)) + '</div>' +
+    /* 2 nov 2026 (0h40, Jeremy): a link to the public payment proofs */ '<button class="opt" data-k="proofs"><span class="t"><b>' + (LANG === 'fr' ? '🧾 Preuves de paiement' : '🧾 Payment proofs') + '</b><span>' + (LANG === 'fr' ? 'Tous les retraits déjà payés, vérifiables sur la blockchain' : 'Every withdrawal already paid, checkable on the blockchain') + '</span></span></button>' +
     r.items.map((it, i) => '<button class="opt shItem' + (shopPick === i ? ' on' : '') + '" data-shop="' + i + '"' + (pts < it[0] ? ' disabled' : '') + '><span class="t"><b>' + fmt(it[0]) + ' $BATON</b></span><span class="mult">' + it[1] + ' $</span></button>').join('') +
     '<div class="shConds">' + (okClub ? cond(true, CLC[0]) : '<div class="shc" data-k="joinclub" style="cursor:pointer;text-decoration:underline">⏳ ' + esc(CLC[1]) + '</div>') + cond(okAge, T('cAge', Math.min(r.days, r.min_days), r.min_days)) + (r.min_passes ? cond(okPass, T('cPass', Math.min(r.passes, r.min_passes), r.min_passes)) : '') + cond(okWeek, okWeek ? T('cWeek', r.every_days) : T('cNext', when)) + '</div>' +
     '<button class="btn ghost" data-k="tcgo">' + (r.tc ? T('tcOn') : T('tcGo')) + '</button>' +
@@ -1847,6 +1848,7 @@ $('#sheet').onclick = async (e) => {
   if (k === 'keep') return closeSheet();
   if (k === 'invite') { closeSheet(); return $('#invite').onclick(); }
   if (k === 'joinclub') { if (!$('#sheet [data-k="joinjs"]')) closeSheet(); return openLink('https://t.me/passthebatonclub'); }
+  if (k === 'proofs') { return openLink('https://jeremstyke.github.io/payouts'); }  // 2 nov 2026 (0h40)
   if (k === 'joinjs') { return openLink('https://t.me/jeremstyke'); }  // 1 nov 2026 (14h26)  // 29 oct 2026 (9h33)
   if (k === 'askclub') {  // 29 oct 2026 (7h56, Jeremy)
     closeSheet(); const F = LANG === 'fr'; const r = await api('askclub');
