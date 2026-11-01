@@ -162,6 +162,17 @@
       b.onclick = function () { hap(); open(); };
       sc.insertAdjacentElement('afterend', b);
     }, 800);
+    // 1 nov 2026 (5h58, Jeremy): the goal of the day, discreetly, right under the title of the sponsored tasks block: "10 tasks today = +5,000 $BATON · 3/10"
+    var ms = document.createElement('style'); ms.textContent = '.tkMini{font-size:12px;font-weight:700;opacity:.75;margin:-2px 0 8px}'; document.head.appendChild(ms);
+    setInterval(function () {
+      var B = window.BT, S = B && B.S, box = document.getElementById('adtask'); if (!S || S.tkGoal == null || !box) return;
+      var hd = box.querySelector('.adh'); if (!hd) return;
+      var g = Number(S.tkGoal) || 10, d = Math.min(Number(S.tkDone) || 0, g), b = nf(S.tkBonus || 5000), ok = !!S.tkGoalDone || d >= g;
+      var t = ok ? (fr ? '✅ Bonus du jour gagné : +' + b + ' $BATON' : '✅ Bonus of the day won: +' + b + ' $BATON')
+                 : (fr ? '🎯 ' + g + ' tâches aujourd\'hui = +' + b + ' $BATON · ' + d + '/' + g : '🎯 ' + g + ' tasks today = +' + b + ' $BATON · ' + d + '/' + g);
+      var m = hd.nextElementSibling; if (!m || !m.classList.contains('tkMini')) { m = document.createElement('div'); m.className = 'tkMini'; hd.insertAdjacentElement('afterend', m); }
+      if (m.textContent !== t) m.textContent = t;
+    }, 1000);
     // opened from the bot ("My campaigns", "New campaign"): startapp=promo
     if (((tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '') === 'promo') setTimeout(open, 1500);
   } catch (e) {}
