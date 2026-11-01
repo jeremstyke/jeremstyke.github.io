@@ -227,18 +227,20 @@
   var adUntil = 0, adLast = 0;
   function adBuild() {
     var b = B(), L = T(); if (!E.ad || !b || !b.S) return;
-    var S = b.S, until = Math.max(Number(S.adtNext) || 0, (function () { try { return Number(localStorage.getItem('bt_adt_pause')) || 0; } catch (e) { return 0; } })());
-    if (S.adtLeft === 0) { adUntil = 0; E.ad.innerHTML = '<small>' + L.adDone + '</small>'; return; }
+    // 1 nov 2026 (22h27, Jeremy): once the factory has its own Adsgram block (fac_ad_block), its task is independent from the Tasks tab: its own limits, paid in crates
+    var S = b.S, own = !!(st && st.ad_block), until = own ? (Number(st.ad_next) || 0) : Math.max(Number(S.adtNext) || 0, (function () { try { return Number(localStorage.getItem('bt_adt_pause')) || 0; } catch (e) { return 0; } })());
+    var blk = own ? String(st.ad_block) : 'task-55373', crt = own ? st.ad_crates : (st ? st.task_crates : 100);
+    if (own ? Number(st.ad_left) === 0 : S.adtLeft === 0) { adUntil = 0; E.ad.innerHTML = '<small>' + L.adDone + '</small>'; return; }
     if (until > Date.now()) { adUntil = until; E.ad.innerHTML = '<small>' + L.adWait + ' <b id="fAdCd"></b></small>'; return; }
     adUntil = 0;
     var mk = function () {
       if (!E.ad) return;
-      E.ad.innerHTML = '<adsgram-task data-block-id="task-55373"><span slot="reward">' + L.adR(nf(st ? st.task_crates : 100)) + '</span><div slot="button" class="ftb">' + L.adGo + '</div><div slot="claim" class="ftb">' + L.adClaim + '</div><div slot="done" class="ftb">✓</div></adsgram-task>';
+      E.ad.innerHTML = '<adsgram-task data-block-id="' + blk + '"><span slot="reward">' + (own ? '+' + nf(crt) + ' 📦' : L.adR(nf(crt))) + '</span><div slot="button" class="ftb">' + L.adGo + '</div><div slot="claim" class="ftb">' + L.adClaim + '</div><div slot="done" class="ftb">✓</div></adsgram-task>';
       var tk = E.ad.querySelector('adsgram-task');
       ['onBannerNotFound', 'onError', 'onTooLongSession'].forEach(function (ev) { tk.addEventListener(ev, function () { if (E.ad) E.ad.innerHTML = '<small>' + T().adNone + '</small>'; setTimeout(adBuild, 30000); }); });
       var gift = function () {
-        if (Date.now() - adLast < 3000) return; adLast = Date.now(); hap('success'); toast(T().adOk(nf(st ? st.task_crates : 100))); jingle([523, 659, 784]);
-        try { localStorage.setItem('bt_adt_pause', String(Date.now() + 60000)); } catch (e) {}
+        if (Date.now() - adLast < 3000) return; adLast = Date.now(); hap('success'); toast(T().adOk(nf(crt))); jingle([523, 659, 784]);
+        if (!own) try { localStorage.setItem('bt_adt_pause', String(Date.now() + 60000)); } catch (e) {}
         setTimeout(function () { try { B().refresh(); } catch (e) {} load().then(draw); }, 3000); setTimeout(adBuild, 4000);
       };
       tk.addEventListener('reward', gift); tk.addEventListener('onReward', gift);
