@@ -87,6 +87,7 @@
   function closeIt() { const d = document.getElementById('rkm'); if (d) d.remove(); }
   async function show(tab) {
     if (tab) TAB = tab;
+    if (TAB === 'dg') TAB = 'pl';  // 2 nov 2026 (0h15, Jeremy): no more diamond tab (Tap the Diamond is closed)
     let d = document.getElementById('rkm');
     if (!d) {
       d = document.createElement('div'); d.id = 'rkm';
@@ -118,7 +119,7 @@
     else if (TAB === 'pl' && c && c.mine) me = '<p class="rsm" style="margin:8px 0 0">' + ec(T.plme(big(c.mine.gain), c.mine.trades)) + '</p>';
     const act = TAB === 'pl' ? '<button class="btn" id="rka">' + ec(T.plb) + '</button>' : TAB === 'rf' ? '<button class="btn" id="rka">' + ec(T.rfb) + '</button>' : '<button class="btn" id="rka">' + ec(T.dgb) + '</button>';
     b.style.cssText = '';
-    b.innerHTML = '<div class="rtabs">' + ['pl', 'rf', 'dg'].map((k) => '<button data-rt="' + k + '" class="' + (k === TAB ? 'on' : '') + '">' + ec(T[k]) + '</button>').join('') + '</div>'
+    b.innerHTML = '<div class="rtabs">' + ['pl', 'rf'].map((k) => '<button data-rt="' + k + '" class="' + (k === TAB ? 'on' : '') + '">' + ec(T[k]) + '</button>').join('') + '</div>'
       + '<div class="rc"><p class="rsm">' + ec(TAB === 'pl' ? T.plx : TAB === 'rf' ? T.rfx : T.dgx) + '</p>'
       + (c && c.ends ? '<p class="rsm">' + ec(T.ends) + ' <b id="rkcd" data-end="' + ec(c.ends) + '">' + cd(c.ends) + '</b></p>' : '')
       + '<div class="rpz">' + pz.slice(0, 3).map((p, i) => '<span>' + md[i] + ' ' + (bt ? kb(p) : usd(p)) + '</span>').join('') + '</div><p class="rsm" style="margin:-4px 0 8px;font-size:12px">' + ec(bt ? (PZB[lg()] || PZB.en) : T.prizes) + '</p>'
