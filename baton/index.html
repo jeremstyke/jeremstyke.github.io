@@ -2185,7 +2185,7 @@ function nudge() {
         ['onBannerNotFound', 'onError', 'onTooLongSession'].forEach((ev) => tk.addEventListener(ev, () => { gone(); clearTimeout(window.__adtR); window.__adtR = setTimeout(build, 30000); }));  // hidden, asked again every 30 s
         const gift = () => {
           if (Date.now() - last < 3000) return; last = Date.now(); hap('ok'); toast(T('adOk')); [3000, 10000].forEach((ms) => setTimeout(refresh, ms));
-          try { localStorage.setItem('bt_adt_pause', String(Date.now() + 60000)); } catch (e) {}  // 28 oct 2026 (10h16, Jeremy): one task every 30 seconds, 10 a day (was 5 minutes), then a countdown (was: the next task right away)
+          try { localStorage.setItem('bt_adt_pause', String(Date.now() + 30000));  /* 1 nov 2026 (22h33, Jeremy): 30 s between two tasks */ } catch (e) {}  // 28 oct 2026 (10h16, Jeremy): one task every 30 seconds, 10 a day (was 5 minutes), then a countdown (was: the next task right away)
           setTimeout(build, 2500);  // let the widget show its "done" state, then load the next task
         };
         tk.addEventListener('reward', gift); tk.addEventListener('onReward', gift);
