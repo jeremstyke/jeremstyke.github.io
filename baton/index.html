@@ -1837,6 +1837,7 @@ async function doPass(kind, to) {
   if (kind === 'club') { hap('ok'); closeSheet(); if (r.state) setState(r.state); toast(r.already ? (LANG === 'fr' ? '📣 Ton bâton est déjà posté dans le Club.' : '📣 Your baton is already posted in the Club.') : (LANG === 'fr' ? '📣 Ton bâton est posté dans le Club : le premier qui clique le prend !' : '📣 Your baton is posted in the Club: the first to tap takes it!')); return; }  // 29 oct 2026
   hap('ok'); closeSheet(); setState(r.state);
   toast(T('passed', fmt((r.gain || 0) + (r.held || 0)), r.mult, r.to));
+  setTimeout(() => { try { window.btInt && window.btInt(); } catch (e) {} }, 1500);  // 1 nov 2026 (16h57, Jeremy)
 }
 $('#sheet').onclick = async (e) => {
   const o = e.target.closest('[data-k]'); const f = e.target.closest('[data-f]');
@@ -2125,11 +2126,12 @@ function nudge() {
   if ((!LS.get('bt_tuto') && (S.pts || 0) < 1000 && !/^d[0-9a-f]{8}$/.test((tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '')) || ((tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '') === 'tuto') { LS.set('bt_tuto', '1'); tutorial(); }
   // 22 oct 2026 (Jeremy, 15h52): Adsgram interstitial (block int-55461) when the game opens; never on the very first visit,
   // never for the no-ads players (S.noads, later), and once every 24 hours at most (Jeremy, 15h54)
-  (function inter() {
+  // 1 nov 2026 (16h57, Jeremy): no more interstitial at opening; it comes after a reward instead (a baton passed, a Factory harvest or trade), 4 min at least between two
+  window.btInt = function inter() {
     /* 30 oct 2026 (18h15, Jeremy): the opening interstitial is back, at every opening (still never on the very first visit) */
     try {
       const force = !!S.mtgForce;  // 28 oct 2026 (13h45, Jeremy): a Monetag interstitial forced once from the server (to see it)
-      if (!force && (firstOpen || S.noads || !(tg && tg.initData) || /* 30 oct 2026 (23h36, Jeremy): no opening ad when The Last Click is opened (its click is already a video) */ ((tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '') === 'lc' || Date.now() - Number(LS.get('bt_int') || 0) < 0)) return;  // 24 oct 2026 (10h19, Jeremy): one hour at least between two (was 24 h)
+      if (!force && (firstOpen || S.noads || !(tg && tg.initData) || /* 30 oct 2026 (23h36, Jeremy): no opening ad when The Last Click is opened (its click is already a video) */ ((tg.initDataUnsafe && tg.initDataUnsafe.start_param) || '') === 'lc' || Date.now() - Number(LS.get('bt_int') || 0) < 4 * 60000)) return;  // 24 oct 2026 (10h19, Jeremy): one hour at least between two (was 24 h)
       const go = () => { try { LS.set('bt_int', String(Date.now())); window.Adsgram.init({ blockId: 'int-55461' }).show().catch((e) => { if ((e && e.state === 'playing') || S.mtgZone == null) return; const fn = 'show_' + S.mtgZone; const m = () => { try { const r = window[fn]({ type: 'inApp', inAppSettings: { frequency: 1, capping: 1, interval: 30, timeout: 0, everyPage: false } }); if (r && r.catch) r.catch(() => {}); } catch (x) {} }; let i = 0; const t = () => { if (typeof window[fn] === 'function') m(); else if (i++ < 48) setTimeout(t, 250); }; if (typeof window[fn] !== 'function') { const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(S.mtgZone)); s.setAttribute('data-sdk', fn); document.head.appendChild(s); } t(); }); } catch (e) {} };  /* 29 oct 2026 (22h40, Jeremy): Monetag only when Adsgram has no ad */
       let n = 0; const wait = () => { if (window.Adsgram) go(); else if (n++ < 40) setTimeout(wait, 250); };  // the Adsgram script is loaded once, by the task block below
       // 28 oct 2026 (13h38, Jeremy): 1 opening interstitial out of 5 on Monetag (In-App Interstitial, one ad only), Adsgram otherwise or if Monetag fails
@@ -2142,7 +2144,7 @@ function nudge() {
         else { const s = document.createElement('script'); s.src = 'https://libtl.com/sdk.js'; s.setAttribute('data-zone', String(S.mtgZone)); s.setAttribute('data-sdk', fn); s.onload = () => { if (window[fn]) mshow(); else wait(); }; s.onerror = () => wait(); document.head.appendChild(s); }
       } else wait();
     } catch (e) {}
-  })();
+  };
   $('#helpBtn').onclick = () => { hap(); faq(); };  // 22 oct 2026: FAQ first, tutorial one tap away
   // 22 oct 2026 (Jeremy): Adsgram sponsored tasks (block task-55373), built once above the task list (the list itself is redrawn
   // at every refresh, which would reset the Adsgram widget). Adsgram calls the reward URL of the baton function (GET ?ads=task),
@@ -3147,6 +3149,6 @@ function nudge() {
 })();
 </script>
 <script src="promo.js?v=8"></script>
-<script src="fac.js?v=11"></script>
+<script src="fac.js?v=12"></script>
 </body>
 </html>
