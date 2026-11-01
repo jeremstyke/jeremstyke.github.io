@@ -126,7 +126,7 @@
       var show = function (c) {
         var rate = Number((c && c[kind + '_rate']) || (kind === 'sub' ? 3 : 0.75)), max = Number((c && c.max) || 5000), q = 50;
         box.innerHTML = '<h3>' + esc(o.title) + '</h3><p>' + T.pick + ' · ' + T.deliv + '</p>'
-          + '<div class="stp"><button type="button" data-d="-1">−</button><b id="prQ"></b><button type="button" data-d="1">+</button></div>'
+          + '<div class="stp"><b id="prQ"></b></div>'  /* 1 nov 2026 (1h01, Jeremy): no + / - buttons at all */
           + '<button class="go" id="prPay"></button><div class="er" id="prEr"></div>' + foot(true);
         wire(function () { target(kind, 'app'); });
         var paint = function () {
