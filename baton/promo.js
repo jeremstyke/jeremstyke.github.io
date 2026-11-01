@@ -9,7 +9,7 @@
     var API = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/baton';
     var fr = /^fr/i.test((tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || '');
     var T = fr ? {
-      btn: '📣 Promouvoir ta chaîne ou ton appli', h: '📣 Fais ta promo dans Pass The Baton',
+      btn: '📣 Promouvoir ta chaîne, appli ou site web', h: '📣 Fais ta promo dans Pass The Baton',
       intro: 'Ta tâche s\'affiche chez tous les joueurs. Paiement en ⭐ Stars, tout est automatique.',
       sub: '📢 Des abonnés', subS: 'Pour ta chaîne ou ton groupe public : de vrais abonnés, payés seulement s\'ils restent',
       click: '🎮 Des visites', clickS: 'Pour ta mini app, ton bot ou ton site : chaque joueur l\'ouvre 30 s',
@@ -24,7 +24,7 @@
       live: '🚀 C\'est parti ! Ta campagne est en ligne.', free: '🎁 Gratuit pour toi : campagne en ligne.',
       st: { live: '🟢 en cours', done: '✅ terminée', stopped: '⛔ arrêtée' }, kept: 'restés', err: { bad_sub: 'Chaîne ou groupe introuvable : il doit être public avec un @nom.', bad_click: 'Envoie le @nom de ton bot (il finit par « bot ») ou son lien t.me.', bad_web: 'L\'adresse doit commencer par https://', other: 'Oups, réessaie.' }
     } : {
-      btn: '📣 Promote your channel or app', h: '📣 Promote in Pass The Baton',
+      btn: '📣 Promote your channel, app or website', h: '📣 Promote in Pass The Baton',
       intro: 'Your task shows to every player. Paid in ⭐ Stars, fully automatic.',
       sub: '📢 Subscribers', subS: 'For your public channel or group: real subscribers, paid only if they stay',
       click: '🎮 Visits', clickS: 'For your mini app, bot or website: each player opens it 30 s',
