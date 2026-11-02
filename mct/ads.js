@@ -268,6 +268,10 @@
   // 28 oct 2026 (18h, Jeremy): 5 partner missions a day at most: once done, the block says so instead of offering more
   const AGF = { fr: (m) => '✅ Tes ' + m + ' missions du jour sont faites, reviens demain', en: (m) => '✅ Your ' + m + ' missions of the day are done, come back tomorrow', id: (m) => '✅ ' + m + ' misi hari ini selesai, kembali besok', ru: (m) => '✅ Все ' + m + ' заданий на сегодня выполнены, возвращайся завтра', ar: (m) => '✅ أنجزت مهامك الـ' + m + ' لهذا اليوم، عد غدًا', fa: (m) => '✅ ' + m + ' مأموریت امروزت انجام شد، فردا برگرد' };
   const agtFull = (m) => { let l = 'en'; try { l = LANG; } catch (e) {} return (AGF[l] || AGF.en)(m); };
+  // 2 nov 2026 (11h03, Jeremy): the next reward waiting (the 10th partner mission of the day: +5,000 $ and +5,000 $BATON)
+  const AGN = { fr: (k) => '🎁 Encore ' + k + ' mission' + (k > 1 ? 's' : '') + ' → +5 000 $ +5 000 $BATON', en: (k) => '🎁 ' + k + ' more mission' + (k > 1 ? 's' : '') + ' → +$5,000 +5,000 $BATON', id: (k) => '🎁 ' + k + ' misi lagi → +$5,000 +5,000 $BATON', ru: (k) => '🎁 Ещё ' + k + ' → +$5,000 +5,000 $BATON' };
+  const AGB = { fr: '🎯 Bonus du jour : +5 000 $ +5 000 $BATON !', en: '🎯 Daily bonus: +$5,000 +5,000 $BATON!', id: '🎯 Bonus harian: +$5,000 +5,000 $BATON!', ru: '🎯 Бонус дня: +$5,000 +5,000 $BATON!' };
+  const agtNx = (n, justDone) => { let l = 'en'; try { l = LANG; } catch (e) {} if (justDone && n === 10) return AGB[l] || AGB.en; if (n >= 10) return ''; return (AGN[l] || AGN.en)(10 - n); };
   let sdk = null, gone = false;
   const load = () => sdk || (sdk = new Promise((ok, ko) => {
     if (window.Adsgram) return ok();
@@ -302,7 +306,7 @@
       const mx = Number(g.max || 5), dn = Number(g.done || 0);
       if (dn >= mx) { w.innerHTML = '<b style="display:block;font-size:15px;margin-bottom:6px">' + T.h + '</b><div style="color:#8fa197;font-weight:700">' + agtFull(mx) + '</div>'; w.hidden = false; return; }
       if (Number(g.next) > Date.now() + 2000) { try { localStorage.setItem('mct_agt_until', String(g.next)); } catch (e) {} w.remove(); put(); return; }
-      const hb = w.querySelector('b'); if (hb) hb.textContent = T.h + ' · ' + dn + '/' + mx + (dn < 10 ? ' · 🎯 10 = +5K $ +5K $BATON' : '');  /* 2 nov 2026 (10h53, Jeremy): the goal of the day */
+      const hb = w.querySelector('b'); window.__agtDn = dn; if (hb) hb.textContent = T.h + ' · ' + dn + '/' + mx + (agtNx(dn) ? ' · ' + agtNx(dn) : '');  /* 2 nov 2026 (11h03, Jeremy): the next reward waiting */
     }).catch(() => {}); } catch (e) {}
     const el = w.querySelector('adsgram-task');
     el.addEventListener('onBannerNotFound', () => { gone = true; document.querySelectorAll('.agtk').forEach((x) => x.remove()); w.remove(); });  // no task for this player: nothing shown until the app reopens
@@ -310,7 +314,7 @@
     el.addEventListener('reward', () => {
       try { localStorage.setItem('mct_agt_until', String(Date.now() + 30000)); } catch (e) {}  // 30 oct 2026 (19h12): next one in 30 seconds (was 5 minutes)
       try { haptic('ok'); } catch (e) {}
-      try { toast(T.ok); } catch (e) {}
+      try { const nd = (window.__agtDn || 0) + 1, nx = agtNx(nd, true); window.__agtDn = nd; toast(T.ok + (nx ? ' · ' + nx : '')); } catch (e) {}
       setTimeout(() => { try { if (VIEW === 'market') market(); else if (typeof loadMe === 'function') loadMe(); } catch (e) {} }, 2500);  // the cash comes from the server (reward URL)
     });
     w.classList.add('agtk');
