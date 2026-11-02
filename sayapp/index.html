@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<title>SayApp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<!-- 2 nov 2026 (Jeremy): SayApp studio. Everything happens here: describe, build, try, change, subscribe, plug your bot. -->
+<style>
+:root{
+  --bg:#07070d;--bg2:#0e0e18;--card:rgba(255,255,255,.045);--card2:rgba(255,255,255,.08);--line:rgba(255,255,255,.09);
+  --fg:#f4f3ff;--mute:#a09fbd;--dim:#6d6c88;--v:#8b5cff;--c:#2fd6ff;--p:#ff5ca8;--g:#3ee08f;--y:#ffcc4d;--r:#ff6b6b;
+  --grad:linear-gradient(120deg,#8b5cff 0%,#5b7bff 45%,#2fd6ff 100%);
+  --gold:linear-gradient(120deg,#ffd76a,#ff9f43);
+  color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;overscroll-behavior:none}
+body{min-height:100vh;padding-bottom:calc(84px + env(safe-area-inset-bottom,0px));overflow-x:hidden}
+h1,h2,h3{font-family:Sora,Inter,system-ui,sans-serif;margin:0;letter-spacing:-.02em;text-wrap:balance}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+[hidden]{display:none!important}
+.aur{position:fixed;inset:-20% -30% auto;height:70vh;z-index:0;pointer-events:none;filter:blur(60px);opacity:.55}
+.aur i{position:absolute;border-radius:50%;animation:fl 14s ease-in-out infinite alternate}
+.aur i:nth-child(1){width:55vw;height:55vw;left:5%;top:10%;background:#6b3cff}
+.aur i:nth-child(2){width:45vw;height:45vw;right:5%;top:0;background:#1fb8ff;animation-delay:-5s}
+.aur i:nth-child(3){width:35vw;height:35vw;left:40%;top:35%;background:#ff4f9a;opacity:.6;animation-delay:-9s}
+@keyframes fl{to{transform:translate(8%,10%) scale(1.15)}}
+.wrap{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left,0px)) 0 max(16px,env(safe-area-inset-right,0px))}
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px 0 6px}
+.logo{display:flex;align-items:center;gap:9px;font:800 19px Sora,sans-serif;letter-spacing:-.03em}
+.logo b{width:30px;height:30px;border-radius:10px;background:var(--grad);display:grid;place-items:center;font-size:15px;box-shadow:0 6px 20px -6px #8b5cff}
+.plan{font-size:12px;font-weight:600;padding:6px 11px;border-radius:99px;background:var(--card2);border:1px solid var(--line);color:var(--mute)}
+.plan.pro{background:var(--gold);color:#2a1700;border:0}
+.hero{padding:26px 0 18px}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#cbbcff;background:rgba(139,92,255,.14);border:1px solid rgba(139,92,255,.3);padding:5px 10px;border-radius:99px;margin-bottom:14px}
+.hero h1{font-size:34px;line-height:1.08;font-weight:800}
+.hero h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mute);margin:10px 0 0;font-size:15.5px}
+.comp{position:relative;border-radius:22px;padding:1.5px;background:linear-gradient(140deg,rgba(139,92,255,.7),rgba(47,214,255,.35) 50%,rgba(255,255,255,.06));box-shadow:0 20px 50px -20px rgba(91,123,255,.55)}
+.comp .in{border-radius:21px;background:#0d0d18;padding:14px}
+textarea{width:100%;min-height:120px;resize:none;border:0;outline:0;background:transparent;color:var(--fg);font:16px/1.5 Inter,system-ui,sans-serif}
+textarea::placeholder{color:var(--dim)}
+.crow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px}
+.cnt{font-size:12px;color:var(--dim)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:14px 0 4px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;font-size:13px;padding:8px 12px;border-radius:99px;background:var(--card);border:1px solid var(--line);color:#dcdaf5;white-space:nowrap}
+.chip:active{transform:scale(.97)}
+.cta{width:100%;margin-top:14px;padding:16px;border-radius:16px;background:var(--grad);font:700 16px Sora,sans-serif;color:#fff;box-shadow:0 14px 30px -12px #6b6bff;position:relative;overflow:hidden}
+.cta:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-100%);animation:sh 3.2s infinite}
+@keyframes sh{60%,100%{transform:translateX(100%)}}
+.cta:disabled{opacity:.5}
+.cta.gold{background:var(--gold);color:#2a1700;box-shadow:0 14px 30px -12px #ff9f43}
+.ghost{width:100%;padding:14px;border-radius:14px;background:var(--card2);border:1px solid var(--line);font-weight:600}
+.quota{text-align:center;font-size:12.5px;color:var(--dim);margin-top:10px}
+.sec{margin-top:30px}
+.sec h3{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-bottom:12px;font-family:Inter,sans-serif;font-weight:600}
+.steps{display:grid;gap:10px}
+.st{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.st i{flex:0 0 34px;height:34px;border-radius:11px;display:grid;place-items:center;font-style:normal;background:var(--card2);font-size:17px}
+.st b{display:block;font-size:14.5px}
+.st span{font-size:13px;color:var(--mute)}
+.by{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.by button{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:14px;background:var(--card);border:1px solid var(--line);font-size:13px;font-weight:600}
+.empty{text-align:center;padding:50px 20px;color:var(--mute)}
+.empty div{font-size:44px;margin-bottom:10px}
+.apps{display:grid;gap:12px;padding-top:14px}
+.ac{padding:14px;border-radius:20px;background:var(--card);border:1px solid var(--line)}
+.ah{display:flex;gap:12px;align-items:center}
+.ico{flex:0 0 46px;height:46px;border-radius:14px;display:grid;place-items:center;font:800 19px Sora,sans-serif;color:#fff}
+.an{min-width:0;flex:1}
+.an b{display:block;font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.an span{display:block;font-size:12.5px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{font-size:11px;font-weight:700;padding:4px 8px;border-radius:99px;white-space:nowrap}
+.p-gen{background:rgba(47,214,255,.14);color:var(--c)}.p-demo{background:rgba(139,92,255,.16);color:#c3afff}.p-live{background:rgba(62,224,143,.14);color:var(--g)}.p-err{background:rgba(255,107,107,.14);color:var(--r)}
+.abtn{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px}
+.abtn button{padding:10px 6px;border-radius:12px;background:var(--card2);border:1px solid var(--line);font-size:12.5px;font-weight:600}
+.abtn button.hl{background:var(--gold);color:#2a1700;border:0}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;justify-content:center;gap:6px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(7,7,13,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid var(--line)}
+.tabs button{flex:1;max-width:220px;padding:11px;border-radius:14px;font-weight:600;color:var(--mute);display:flex;align-items:center;justify-content:center;gap:7px}
+.tabs button.on{background:var(--card2);color:var(--fg)}
+.badge{min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--grad);color:#fff;font-size:11px;display:inline-grid;place-items:center}
+/* building overlay */
+.ov{position:fixed;inset:0;z-index:20;background:rgba(5,5,10,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px max(20px,env(safe-area-inset-left,0px));text-align:center}
+.orb{width:150px;height:150px;border-radius:50%;position:relative;margin-bottom:28px}
+.orb:before,.orb:after{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,#8b5cff,#2fd6ff,#ff5ca8,#8b5cff);animation:spin 3s linear infinite;filter:blur(18px);opacity:.85}
+.orb:after{inset:14px;filter:none;background:radial-gradient(circle at 35% 30%,#2a2550,#0b0b16 70%);animation:none}
+.orb span{position:absolute;inset:0;display:grid;place-items:center;font-size:44px;z-index:2;animation:pulse 2s ease-in-out infinite}
+.orb.ok:before{background:conic-gradient(#3ee08f,#2fd6ff,#3ee08f)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{50%{transform:scale(1.12)}}
+.ov h2{font-size:24px}
+.ov p{color:var(--mute);margin:8px 0 0;max-width:340px}
+.bl{list-style:none;padding:0;margin:22px 0 0;text-align:left;display:grid;gap:10px;width:100%;max-width:300px}
+.bl li{display:flex;gap:10px;align-items:center;color:var(--dim);font-size:14px;transition:color .3s}
+.bl li i{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-style:normal;font-size:11px;flex:0 0 22px}
+.bl li.on{color:var(--fg)}.bl li.on i{border-color:var(--c);border-top-color:transparent;animation:spin 1s linear infinite}
+.bl li.dn{color:var(--mute)}.bl li.dn i{border:0;background:var(--g);color:#05210f;animation:none}
+.bar{width:100%;max-width:300px;height:6px;border-radius:9px;background:var(--card2);margin-top:22px;overflow:hidden}
+.bar b{display:block;height:100%;width:0;background:var(--grad);border-radius:9px;transition:width 1s linear}
+.ovb{display:grid;gap:10px;width:100%;max-width:320px;margin-top:24px}
+/* sheet */
+.shbg{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.6);opacity:0;transition:opacity .25s}
+.shbg.on{opacity:1}
+.sh{position:fixed;left:0;right:0;bottom:0;z-index:31;max-width:560px;margin:0 auto;background:#11111e;border:1px solid var(--line);border-bottom:0;border-radius:26px 26px 0 0;padding:10px max(18px,env(safe-area-inset-left,0px)) calc(20px + env(safe-area-inset-bottom,0px));transform:translateY(105%);transition:transform .32s cubic-bezier(.2,.9,.3,1);max-height:92vh;overflow-y:auto}
+.sh.on{transform:none}
+.grab{width:40px;height:5px;border-radius:9px;background:var(--line);margin:0 auto 14px}
+.sh h2{font-size:22px;margin-bottom:6px}
+.sh .sub{color:var(--mute);margin:0 0 16px}
+.field{border-radius:16px;background:#0a0a14;border:1px solid var(--line);padding:12px}
+.field textarea{min-height:96px}
+input.tk{width:100%;padding:14px;border-radius:14px;border:1px solid var(--line);background:#0a0a14;color:var(--fg);font:15px ui-monospace,Menlo,monospace;outline:0}
+input.tk:focus{border-color:var(--v)}
+.feat{display:grid;gap:10px;margin:6px 0 18px}
+.feat div{display:flex;gap:10px;align-items:flex-start;font-size:14.5px}
+.feat div i{font-style:normal;flex:0 0 22px;height:22px;border-radius:50%;background:rgba(62,224,143,.15);color:var(--g);display:grid;place-items:center;font-size:12px;font-weight:800}
+.price{display:flex;align-items:baseline;justify-content:center;gap:6px;padding:16px;border-radius:18px;background:linear-gradient(140deg,rgba(255,215,106,.12),rgba(255,159,67,.06));border:1px solid rgba(255,190,90,.3);margin-bottom:12px}
+.price b{font:800 32px Sora,sans-serif}
+.price span{color:var(--mute);font-size:13px}
+.prohead{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.prohead>div+div{flex:1;min-width:0}
+.prohead>div:first-child{flex:0 0 52px;width:52px;height:52px;border-radius:16px;background:var(--gold);display:grid;place-items:center;font-size:26px;box-shadow:0 10px 30px -10px #ff9f43}
+.ol{margin:0 0 14px;padding:0;list-style:none;display:grid;gap:10px;counter-reset:s}
+.ol li{counter-increment:s;display:flex;gap:10px;font-size:14px;color:#dcdaf5}
+.ol li:before{content:counter(s);flex:0 0 24px;height:24px;border-radius:8px;background:var(--card2);display:grid;place-items:center;font-weight:700;font-size:12px}
+.note{font-size:12px;color:var(--dim);text-align:center;margin-top:10px}
+/* preview */
+.pv{position:fixed;inset:0;z-index:40;background:#000;display:flex;flex-direction:column}
+.pvh{display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top,0px)) 12px 10px;background:#0d0d18;border-bottom:1px solid var(--line)}
+.pvh b{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px}
+.pvh button{padding:8px 12px;border-radius:10px;background:var(--card2);font-size:13px;font-weight:600}
+.pv iframe{flex:1;border:0;width:100%;background:#fff}
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);z-index:60;background:#1b1b2e;border:1px solid var(--line);padding:11px 16px;border-radius:14px;font-size:14px;opacity:0;transition:.25s;max-width:calc(100% - 32px);text-align:center;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.out{text-align:center;padding:90px 24px}
+.out h2{margin:16px 0 8px}
+.out p{color:var(--mute)}
+.out a{display:inline-block;margin-top:18px;padding:14px 22px;border-radius:14px;background:var(--grad);color:#fff;text-decoration:none;font-weight:700}
+.sk{height:76px;border-radius:20px;background:linear-gradient(90deg,var(--card) 25%,var(--card2) 50%,var(--card) 75%);background-size:200% 100%;animation:sk 1.4s infinite}
+@keyframes sk{to{background-position:-200% 0}}
+</style>
+</head>
+<body>
+<div class="aur"><i></i><i></i><i></i></div>
+
+<div class="wrap" id="outside" hidden>
+  <div class="out"><div class="logo" style="justify-content:center"><b>✦</b>SayApp</div><h2 data-t="outT"></h2><p data-t="outP"></p><a href="https://t.me/SayAppBuilderBot" data-t="outB"></a></div>
+</div>
+
+<div class="wrap" id="main" hidden>
+  <div class="top"><div class="logo"><b>✦</b>SayApp</div><div class="plan" id="plan"></div></div>
+
+  <section id="vCreate">
+    <div class="hero">
+      <div class="eyebrow">✦ <span data-t="eyebrow"></span></div>
+      <h1 data-t="h1"></h1>
+      <p data-t="sub"></p>
+    </div>
+    <div class="comp"><div class="in">
+      <textarea id="idea" maxlength="4000"></textarea>
+      <div class="crow"><span class="cnt" id="cnt">0 / 4000</span><span class="cnt" data-t="lang"></span></div>
+    </div></div>
+    <div class="chips" id="chips"></div>
+    <button class="cta" id="go"></button>
+    <div class="quota" id="quota"></div>
+
+    <div class="sec"><h3 data-t="howT"></h3><div class="steps" id="how"></div></div>
+    <div class="sec"><h3 data-t="byT"></h3>
+      <div class="by"><button data-link="https://t.me/Memecointycoonbot?startapp=src_sayapp">🚀 Meme Coin Tycoon</button><button data-link="https://t.me/PassTheBatonBot?startapp=src_sayapp">🏃 Pass The Baton</button></div>
+    </div>
+    <div class="note" style="margin:26px 0 8px">by @jeremstyke</div>
+  </section>
+
+  <section id="vApps" hidden><div class="apps" id="apps"></div></section>
+</div>
+
+<nav class="tabs" id="tabs" hidden>
+  <button id="tCreate" class="on">✦ <span data-t="tCreate"></span></button>
+  <button id="tApps">▦ <span data-t="tApps"></span> <span class="badge" id="nApps" hidden></span></button>
+</nav>
+
+<div class="ov" id="ov" hidden>
+  <div class="orb" id="orb"><span id="orbI">✦</span></div>
+  <h2 id="ovT"></h2>
+  <p id="ovP"></p>
+  <ul class="bl" id="bl"></ul>
+  <div class="bar" id="bar"><b id="barB"></b></div>
+  <div class="ovb" id="ovb"></div>
+</div>
+
+<div class="shbg" id="shbg" hidden></div>
+<div class="sh" id="sh"><div class="grab"></div><div id="shc"></div></div>
+
+<div class="pv" id="pv" hidden>
+  <div class="pvh"><button id="pvX">✕</button><b id="pvT"></b><button id="pvE">✏️</button></div>
+  <iframe id="pvF" allow="clipboard-write"></iframe>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  var API = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/sayapp?studio=1';
+  var PAGES = 'https://jeremstyke.github.io/sayapp/a/';
+  var tw = window.Telegram && window.Telegram.WebApp;
+  var $ = function (id) { return document.getElementById(id); };
+  var lang = 'en';
+  try { lang = /^fr/.test(tw.initDataUnsafe.user.language_code) ? 'fr' : 'en'; } catch (e) { lang = /^fr/.test(navigator.language || '') ? 'fr' : 'en'; }
+  document.documentElement.lang = lang;
+
+  var TX = {
+    fr: {
+      eyebrow: 'Ta mini app Telegram, sans coder', h1: 'Décris-la.<br><span>On la construit.</span>',
+      sub: 'Une idée, une phrase, et ta mini app Telegram est en ligne en 2 minutes. Teste-la, ajuste-la, puis lance-la sur ton propre bot.',
+      ph: 'Ex : un quiz foot de 10 questions avec un classement des joueurs, aux couleurs vert et blanc…',
+      lang: 'Dans ta langue', go: '✦ Construire mon appli', tCreate: 'Créer', tApps: 'Mes applis',
+      chips: [['⚽ Quiz foot', 'Un quiz foot de 10 questions avec un chrono, un score et un classement des joueurs, aux couleurs vert et blanc'], ['🍕 Menu de resto', 'Le menu de ma pizzeria avec des photos en emoji, les prix, un panier et un formulaire de commande envoyé au patron'], ['🪙 Jeu de tap', 'Un jeu où l\'on tape sur une pièce pour gagner des points, avec des améliorations, une récompense quotidienne et un classement'], ['📅 Réservation', 'Une appli de prise de rendez-vous pour mon salon de coiffure : choix du service, du jour et de l\'heure, envoi de la demande'], ['🎯 Sondage', 'Un sondage de 5 questions pour ma communauté avec les résultats en direct'], ['🧠 Personnalité', 'Un test de personnalité « Quel animal es-tu ? » avec 8 questions et un résultat à partager']],
+      howT: 'Comment ça marche', how: [['💬', 'Décris ton idée', 'En une phrase, comme à un ami.'], ['⚡', 'Démo en 2 minutes', 'Ton appli est construite et mise en ligne.'], ['✏️', 'Ajuste-la', 'Couleurs, textes, fonctions : demande, c\'est fait.'], ['🚀', 'Lance-la sur ton bot', 'Ton appli, ton nom, tes utilisateurs.']],
+      byT: 'Par le créateur de', free: 'Gratuit', pro: '⭐ Pro',
+      quotaL: function (n, m) { return n >= m ? 'Appli gratuite du jour utilisée · Passe Pro pour en créer plus' : 'Gratuit : ' + (m - n) + ' appli aujourd\'hui · 3 modifications par jour'; },
+      quotaP: 'Pro : applis et modifications illimitées',
+      outT: 'Ouvre SayApp dans Telegram', outP: 'SayApp fonctionne dans Telegram. Ouvre le bot pour créer ta mini app.', outB: 'Ouvrir @SayAppBuilderBot',
+      short: 'Décris ton idée un peu plus (une phrase suffit).',
+      bT: 'Construction en cours', bP: 'Ton appli prend vie. Tu peux fermer SayApp : je te préviens dans le chat quand elle est prête.',
+      eT: 'Modification en cours', eP: 'J\'applique tes changements. Environ 2 minutes.',
+      bs: ['Analyse de ton idée', 'Design de l\'interface', 'Écriture du code', 'Mise en ligne'],
+      okT: 'Ton appli est prête ✨', okP: function (t) { return '« ' + t + ' » est en ligne. Teste-la maintenant.'; },
+      try: '▶ Tester mon appli', change: '✏️ Modifier', launch: '🚀 Lancer', later: 'Plus tard',
+      refT: 'Impossible de construire ça', errT: 'Oups, un problème', errP: 'La construction a échoué. Réessaie dans une minute.', retry: 'Réessayer', close: 'Fermer',
+      empty: 'Aucune appli pour l\'instant.', emptyB: '✦ Créer ma première appli',
+      sGen: 'En construction', sDemo: 'Démo', sLive: 'En ligne', sErr: 'Échec', sRef: 'Refusée',
+      editT: 'Modifier ton appli', editP: 'Dis ce que tu veux changer, en une phrase.', editPh: 'Ex : mets le fond en noir et ajoute un bouton pour partager son score',
+      editChips: ['🎨 Autres couleurs', '🏆 Ajoute un classement', '🌍 Version anglaise', '✨ Plus d\'animations'],
+      editGo: '✦ Appliquer', editQ: function (n, m) { return n >= m ? 'Modifications gratuites du jour utilisées' : 'Gratuit : ' + (m - n) + ' modification(s) restante(s) aujourd\'hui'; },
+      proT: 'SayApp Pro', proP: 'Lance ton appli sur ton propre bot Telegram.',
+      feats: ['Ton appli sur ton bot, à ton nom', 'Bouton d\'ouverture et /start configurés pour toi', 'Hébergement et mises à jour inclus', 'Modifications illimitées', 'Données de tes utilisateurs et classements', 'Support direct avec le créateur'],
+      per: '/ mois', perN: 'Sans engagement · annulable à tout moment', subGo: function (p) { return '⭐ M\'abonner · ' + p + ' étoiles'; },
+      limT: 'Limite gratuite atteinte', limP: 'Passe Pro pour continuer sans limite, ou reviens demain.',
+      limPick: 'Choisis l\'appli à passer en Pro :',
+      tkT: 'Branche ton bot', tkP: 'Dernière étape, 2 minutes.', tkS: ['Ouvre @BotFather et envoie /newbot', 'Choisis un nom puis un nom d\'utilisateur', 'Copie le token qu\'il te donne et colle-le ici'],
+      tkBF: 'Ouvrir @BotFather', tkPh: '123456789:ABC…', tkGo: '🔌 Brancher mon bot', tkN: 'Ton token reste privé. Il sert uniquement à brancher ton appli.',
+      tkBad: 'Ce token ne marche pas. Vérifie-le dans @BotFather.',
+      liveT: 'Ton appli est en ligne 🎉', liveP: function (u) { return 'Tes utilisateurs l\'ouvrent sur @' + u + ' avec le bouton du menu ou /start.'; }, openBot: 'Ouvrir mon bot',
+      paidW: 'Paiement reçu, activation…', paidOk: 'Abonnement actif ⭐', inv: 'Paiement impossible pour le moment.',
+      busy: 'Une appli est déjà en construction.', noai: 'SayApp démarre, réessaie dans quelques minutes.', net: 'Connexion perdue, réessaie.',
+      onBot: 'Sur @', copy: 'Lien copié'
+    },
+    en: {
+      eyebrow: 'Your Telegram mini app, no code', h1: 'Say it.<br><span>We build it.</span>',
+      sub: 'One idea, one sentence, and your Telegram mini app is live in 2 minutes. Try it, tweak it, then launch it on your own bot.',
+      ph: 'E.g. a football quiz with 10 questions and a player leaderboard, in green and white…',
+      lang: 'In your language', go: '✦ Build my app', tCreate: 'Create', tApps: 'My apps',
+      chips: [['⚽ Football quiz', 'A football quiz with 10 questions, a timer, a score and a player leaderboard, in green and white'], ['🍕 Restaurant menu', 'The menu of my pizzeria with emoji pictures, prices, a cart and an order form sent to the owner'], ['🪙 Tap game', 'A game where you tap a coin to earn points, with upgrades, a daily reward and a leaderboard'], ['📅 Booking', 'A booking app for my hair salon: pick a service, a day and a time, then send the request'], ['🎯 Poll', 'A 5-question poll for my community with live results'], ['🧠 Personality', 'A "Which animal are you?" personality test with 8 questions and a shareable result']],
+      howT: 'How it works', how: [['💬', 'Describe your idea', 'In one sentence, like to a friend.'], ['⚡', 'Live demo in 2 minutes', 'Your app is built and put online.'], ['✏️', 'Tweak it', 'Colors, texts, features: just ask.'], ['🚀', 'Launch it on your bot', 'Your app, your name, your users.']],
+      byT: 'By the creator of', free: 'Free', pro: '⭐ Pro',
+      quotaL: function (n, m) { return n >= m ? 'Free app of the day used · Go Pro to build more' : 'Free: ' + (m - n) + ' app today · 3 changes per day'; },
+      quotaP: 'Pro: unlimited apps and changes',
+      outT: 'Open SayApp in Telegram', outP: 'SayApp runs inside Telegram. Open the bot to build your mini app.', outB: 'Open @SayAppBuilderBot',
+      short: 'Tell me a bit more about your idea (one sentence is enough).',
+      bT: 'Building your app', bP: 'Your app is coming to life. You can close SayApp: I will tell you in the chat when it is ready.',
+      eT: 'Updating your app', eP: 'Applying your changes. About 2 minutes.',
+      bs: ['Understanding your idea', 'Designing the interface', 'Writing the code', 'Going live'],
+      okT: 'Your app is ready ✨', okP: function (t) { return '"' + t + '" is live. Try it now.'; },
+      try: '▶ Try my app', change: '✏️ Change', launch: '🚀 Launch', later: 'Later',
+      refT: 'I can not build this', errT: 'Oops, something went wrong', errP: 'The build failed. Please try again in a minute.', retry: 'Try again', close: 'Close',
+      empty: 'No app yet.', emptyB: '✦ Build my first app',
+      sGen: 'Building', sDemo: 'Demo', sLive: 'Live', sErr: 'Failed', sRef: 'Refused',
+      editT: 'Change your app', editP: 'Say what you want to change, in one sentence.', editPh: 'E.g. make the background black and add a button to share the score',
+      editChips: ['🎨 Other colors', '🏆 Add a leaderboard', '🌍 French version', '✨ More animations'],
+      editGo: '✦ Apply', editQ: function (n, m) { return n >= m ? 'Free changes of the day used' : 'Free: ' + (m - n) + ' change(s) left today'; },
+      proT: 'SayApp Pro', proP: 'Launch your app on your own Telegram bot.',
+      feats: ['Your app on your bot, with your name', 'Open button and /start set up for you', 'Hosting and updates included', 'Unlimited changes', 'Your users\' data and leaderboards', 'Direct support from the creator'],
+      per: '/ month', perN: 'No commitment · cancel anytime', subGo: function (p) { return '⭐ Subscribe · ' + p + ' Stars'; },
+      limT: 'Free limit reached', limP: 'Go Pro to keep going without limits, or come back tomorrow.',
+      limPick: 'Pick the app to make Pro:',
+      tkT: 'Plug your bot', tkP: 'Last step, 2 minutes.', tkS: ['Open @BotFather and send /newbot', 'Choose a name, then a username', 'Copy the token it gives you and paste it here'],
+      tkBF: 'Open @BotFather', tkPh: '123456789:ABC…', tkGo: '🔌 Plug my bot', tkN: 'Your token stays private. It is only used to plug your app.',
+      tkBad: 'This token does not work. Check it in @BotFather.',
+      liveT: 'Your app is live 🎉', liveP: function (u) { return 'Your users open it on @' + u + ' with the menu button or /start.'; }, openBot: 'Open my bot',
+      paidW: 'Payment received, activating…', paidOk: 'Subscription active ⭐', inv: 'Payment is not available right now.',
+      busy: 'An app is already being built.', noai: 'SayApp is warming up, try again in a few minutes.', net: 'Connection lost, try again.',
+      onBot: 'On @', copy: 'Link copied'
+    }
+  };
+  var T = TX[lang];
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var hap = function (k) { try { var h = tw.HapticFeedback; if (k === 'ok') h.notificationOccurred('success'); else if (k === 'err') h.notificationOccurred('error'); else h.impactOccurred('light'); } catch (e) {} };
+  var toastT;
+  function toast(m) { var t = $('toast'); t.textContent = m; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('on'); }, 2800); }
+  function link(u) { try { tw.openTelegramLink(u); } catch (e) { location.href = u; } }
+  document.querySelectorAll('[data-t]').forEach(function (el) { var v = T[el.getAttribute('data-t')]; if (typeof v === 'string') el.innerHTML = v; });
+  document.querySelectorAll('[data-link]').forEach(function (el) { el.onclick = function () { link(el.getAttribute('data-link')); }; });
+
+  var initData = (tw && tw.initData) || '';
+  if (!initData) { $('outside').hidden = false; return; }
+  try { tw.ready(); tw.expand(); tw.setHeaderColor('#07070d'); tw.setBackgroundColor('#07070d'); tw.setBottomBarColor && tw.setBottomBarColor('#07070d'); } catch (e) {}
+  $('main').hidden = false; $('tabs').hidden = false;
+
+  function call(action, extra) {
+    var b = extra || {}; b.action = action; b.initData = initData;
+    return fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(b) })
+      .then(function (r) { return r.json(); }).catch(function () { return { ok: false, error: 'net' }; });
+  }
+
+  var S = { lim: null, apps: [], cur: null };
+  var COLORS = ['linear-gradient(135deg,#8b5cff,#5b7bff)', 'linear-gradient(135deg,#2fd6ff,#3b82f6)', 'linear-gradient(135deg,#ff5ca8,#ff8a5c)', 'linear-gradient(135deg,#3ee08f,#18a999)', 'linear-gradient(135deg,#ffcc4d,#ff8a3d)', 'linear-gradient(135deg,#a855f7,#ec4899)'];
+  var col = function (id) { var h = 0; for (var i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0; return COLORS[h % COLORS.length]; };
+  var sub = function (a) { return a && a.sub_until && new Date(a.sub_until).getTime() > Date.now(); };
+
+  // ---------- create view ----------
+  var idea = $('idea');
+  idea.placeholder = T.ph;
+  idea.oninput = function () { $('cnt').textContent = idea.value.length + ' / 4000'; };
+  $('go').textContent = T.go;
+  T.chips.forEach(function (c) { var b = document.createElement('button'); b.className = 'chip'; b.textContent = c[0]; b.onclick = function () { hap(); idea.value = c[1]; idea.oninput(); idea.focus(); }; $('chips').appendChild(b); });
+  $('how').innerHTML = T.how.map(function (h) { return '<div class="st"><i>' + h[0] + '</i><div><b>' + esc(h[1]) + '</b><span>' + esc(h[2]) + '</span></div></div>'; }).join('');
+  function paintTop() {
+    var L = S.lim; if (!L) return;
+    var p = $('plan'); p.className = 'plan' + (L.pro ? ' pro' : ''); p.textContent = L.pro ? T.pro : T.free;
+    $('quota').textContent = L.pro ? T.quotaP : T.quotaL(L.gens, L.freeGens);
+    var n = S.apps.filter(function (a) { return a.version > 0 || a.status === 'generating'; }).length;
+    $('nApps').hidden = !n; $('nApps').textContent = n;
+  }
+  $('go').onclick = function () {
+    var t = idea.value.trim();
+    if (t.length < 8) { hap('err'); toast(T.short); idea.focus(); return; }
+    if (S.lim && !S.lim.pro && S.lim.gens >= S.lim.freeGens) { hap('err'); return limitSheet(); }
+    hap(); $('go').disabled = true;
+    call('create', { prompt: t }).then(function (r) {
+      $('go').disabled = false;
+      if (r.ok) { idea.value = ''; idea.oninput(); S.lim && S.lim.gens++; startBuild(r.id, false); refresh(); return; }
+      fail(r);
+    });
+  };
+  function fail(r) {
+    hap('err');
+    if (r.error === 'limit') return limitSheet();
+    if (r.error === 'busy') { if (r.id) startBuild(r.id, false); return toast(T.busy); }
+    if (r.error === 'short') return toast(T.short);
+    toast(r.error === 'noai' ? T.noai : r.error === 'net' ? T.net : T.errP);
+  }
+
+  // ---------- tabs ----------
+  function tab(w) {
+    $('vCreate').hidden = w !== 'create'; $('vApps').hidden = w !== 'apps';
+    $('tCreate').classList.toggle('on', w === 'create'); $('tApps').classList.toggle('on', w === 'apps');
+    window.scrollTo(0, 0);
+  }
+  $('tCreate').onclick = function () { hap(); tab('create'); };
+  $('tApps').onclick = function () { hap(); tab('apps'); paintApps(); };
+
+  // ---------- apps view ----------
+  function status(a) {
+    if (a.status === 'generating') return ['p-gen', T.sGen];
+    if (a.bot_username && sub(a)) return ['p-live', T.sLive];
+    if (a.status === 'refused') return ['p-err', T.sRef];
+    if (a.status === 'error' && !a.version) return ['p-err', T.sErr];
+    return ['p-demo', T.sDemo];
+  }
+  function paintApps() {
+    var box = $('apps');
+    if (!S.loaded) { box.innerHTML = '<div class="sk"></div><div class="sk"></div>'; return; }
+    var list = S.apps.filter(function (a) { return a.version > 0 || a.status === 'generating'; });
+    if (!list.length) { box.innerHTML = '<div class="empty"><div>✦</div>' + esc(T.empty) + '<button class="cta" id="emp" style="margin-top:20px">' + esc(T.emptyB) + '</button></div>'; $('emp').onclick = function () { tab('create'); idea.focus(); }; return; }
+    box.innerHTML = list.map(function (a) {
+      var s = status(a), t = a.title || (a.prompt || '').slice(0, 40) || 'App', live = a.bot_username && sub(a);
+      return '<div class="ac" data-id="' + a.id + '"><div class="ah"><div class="ico" style="background:' + col(a.id) + '">' + esc(t.trim().charAt(0).toUpperCase()) + '</div><div class="an"><b>' + esc(t) + '</b><span>' + (a.bot_username ? esc(T.onBot + a.bot_username) : esc((a.prompt || '').slice(0, 80))) + '</span></div><span class="pill ' + s[0] + '">' + esc(s[1]) + '</span></div>' +
+        (a.status === 'generating' ? '' : '<div class="abtn">' + (a.version ? '<button data-a="try">▶ ' + esc(T.try.replace('▶ ', '').split(' ')[0]) + '</button>' : '<button data-a="retry">' + esc(T.retry) + '</button>') + '<button data-a="edit"' + (a.version ? '' : ' disabled style="opacity:.4"') + '>' + esc(T.change) + '</button>' + (live ? '<button data-a="bot" class="hl">@' + esc(a.bot_username).slice(0, 14) + '</button>' : '<button data-a="launch" class="hl"' + (a.version ? '' : ' disabled style="opacity:.4"') + '>' + esc(T.launch) + '</button>') + '</div>') + '</div>';
+    }).join('');
+    box.querySelectorAll('.ac').forEach(function (el) {
+      var a = S.apps.filter(function (x) { return x.id === el.getAttribute('data-id'); })[0];
+      if (a.status === 'generating') el.onclick = function () { startBuild(a.id, a.version > 0); };
+      el.querySelectorAll('button[data-a]').forEach(function (b) {
+        b.onclick = function (ev) {
+          ev.stopPropagation(); hap(); var k = b.getAttribute('data-a');
+          if (k === 'try') preview(a); else if (k === 'edit') editSheet(a); else if (k === 'launch') launch(a); else if (k === 'bot') link('https://t.me/' + a.bot_username);
+          else if (k === 'retry') { tab('create'); idea.value = a.prompt || ''; idea.oninput(); }
+        };
+      });
+    });
+  }
+
+  // ---------- data ----------
+  function refresh() {
+    return call('me').then(function (r) {
+      if (!r.ok) return r;
+      S.lim = r.lim; S.apps = r.apps || []; S.loaded = true; paintTop(); if (!$('vApps').hidden) paintApps(); return r;
+    });
+  }
+
+  // ---------- building overlay ----------
+  var bTimer = null, pTimer = null;
+  function startBuild(id, edit) {
+    closeSheet(); clearInterval(bTimer); clearInterval(pTimer);
+    var t0 = Date.now();
+    $('ov').hidden = false; $('orb').className = 'orb'; $('orbI').textContent = '✦';
+    $('ovT').textContent = edit ? T.eT : T.bT; $('ovP').textContent = edit ? T.eP : T.bP;
+    $('bl').hidden = false; $('bar').hidden = false; $('ovb').innerHTML = '';
+    $('bl').innerHTML = T.bs.map(function (s) { return '<li><i></i>' + esc(s) + '</li>'; }).join('');
+    var marks = [0, 12, 40, 95];
+    function tick() {
+      var s = (Date.now() - t0) / 1000, li = $('bl').children;
+      for (var i = 0; i < li.length; i++) { var on = s >= marks[i] && (i === li.length - 1 || s < marks[i + 1]), dn = i < li.length - 1 && s >= marks[i + 1]; li[i].className = dn ? 'dn' : on ? 'on' : ''; li[i].firstChild.textContent = dn ? '✓' : ''; }
+      $('barB').style.width = Math.min(95, s / 150 * 95) + '%';
+    }
+    tick(); bTimer = setInterval(tick, 1000);
+    pTimer = setInterval(function () {
+      call('app', { id: id }).then(function (r) {
+        if (!r.ok || !r.app || r.app.status === 'generating') return;
+        clearInterval(pTimer); clearInterval(bTimer); done(r.app); refresh();
+      });
+    }, 4000);
+    $('ovb').innerHTML = '<button class="ghost" id="ovHide">' + esc(T.later) + '</button>';
+    $('ovHide').onclick = function () { clearInterval(bTimer); clearInterval(pTimer); $('ov').hidden = true; tab('apps'); refresh(); };
+  }
+  function done(a) {
+    $('bl').hidden = true; $('bar').hidden = true;
+    if (a.status === 'refused' || (a.status !== 'error' && a.error)) {
+      hap('err'); $('orbI').textContent = '🚫'; $('ovT').textContent = T.refT; $('ovP').textContent = a.error || '';
+      $('ovb').innerHTML = '<button class="ghost" id="ovC">' + esc(T.close) + '</button>'; $('ovC').onclick = function () { $('ov').hidden = true; }; return;
+    }
+    if (a.status === 'error') {
+      hap('err'); $('orbI').textContent = '😕'; $('ovT').textContent = T.errT; $('ovP').textContent = T.errP;
+      $('ovb').innerHTML = '<button class="ghost" id="ovC">' + esc(T.close) + '</button>'; $('ovC').onclick = function () { $('ov').hidden = true; tab('apps'); }; return;
+    }
+    hap('ok'); $('orb').className = 'orb ok'; $('orbI').textContent = '🎉';
+    $('ovT').textContent = T.okT; $('ovP').textContent = T.okP(a.title || 'App');
+    $('ovb').innerHTML = '<button class="cta" id="ovTry">' + esc(T.try) + '</button><button class="ghost" id="ovEd">' + esc(T.change) + '</button>';
+    $('ovTry').onclick = function () { $('ov').hidden = true; preview(a); };
+    $('ovEd').onclick = function () { $('ov').hidden = true; editSheet(a); };
+  }
+
+  // ---------- preview ----------
+  function preview(a) {
+    S.cur = a; $('pvT').textContent = a.title || 'App';
+    $('pvF').src = PAGES + a.id + '/?v=' + a.version + '&t=' + Date.now();
+    $('pv').hidden = false; try { tw.BackButton.show(); } catch (e) {}
+  }
+  function closePv() { $('pv').hidden = true; $('pvF').src = 'about:blank'; try { tw.BackButton.hide(); } catch (e) {} }
+  $('pvX').onclick = closePv;
+  $('pvE').onclick = function () { var a = S.cur; closePv(); editSheet(a); };
+  try { tw.BackButton.onClick(function () { if (!$('pv').hidden) closePv(); else closeSheet(); }); } catch (e) {}
+
+  // ---------- sheets ----------
+  function openSheet(html) {
+    $('shc').innerHTML = html; $('shbg').hidden = false;
+    requestAnimationFrame(function () { $('shbg').classList.add('on'); $('sh').classList.add('on'); });
+    try { tw.BackButton.show(); } catch (e) {}
+  }
+  function closeSheet() {
+    $('shbg').classList.remove('on'); $('sh').classList.remove('on');
+    setTimeout(function () { $('shbg').hidden = true; }, 250);
+    try { if ($('pv').hidden) tw.BackButton.hide(); } catch (e) {}
+  }
+  $('shbg').onclick = closeSheet;
+
+  function editSheet(a) {
+    var L = S.lim || { edits: 0, freeEdits: 3, pro: false }, free = !L.pro && !sub(a);
+    openSheet('<h2>' + esc(T.editT) + '</h2><p class="sub">' + esc(a.title || '') + ' · ' + esc(T.editP) + '</p>' +
+      '<div class="field"><textarea id="edT" maxlength="2000" placeholder="' + esc(T.editPh) + '"></textarea></div>' +
+      '<div class="chips" id="edC"></div><button class="cta" id="edGo">' + esc(T.editGo) + '</button>' +
+      (free ? '<div class="quota">' + esc(T.editQ(L.edits, L.freeEdits)) + '</div>' : ''));
+    T.editChips.forEach(function (c) { var b = document.createElement('button'); b.className = 'chip'; b.textContent = c; b.onclick = function () { hap(); var t = $('edT'); t.value = (t.value ? t.value + ', ' : '') + c.replace(/^\S+\s/, ''); t.focus(); }; $('edC').appendChild(b); });
+    $('edGo').onclick = function () {
+      var t = $('edT').value.trim();
+      if (t.length < 4) { hap('err'); return toast(T.short); }
+      if (free && L.edits >= L.freeEdits) { hap('err'); return proSheet(a, true); }
+      $('edGo').disabled = true;
+      call('edit', { id: a.id, prompt: t }).then(function (r) {
+        if (r.ok) { if (S.lim) S.lim.edits++; startBuild(a.id, true); refresh(); return; }
+        $('edGo').disabled = false;
+        if (r.error === 'limit') return proSheet(a, true);
+        fail(r);
+      });
+    };
+  }
+
+  function proSheet(a, lim) {
+    var p = (S.lim && S.lim.price) || 1000;
+    openSheet('<div class="prohead"><div>⭐</div><div><h2>' + esc(lim ? T.limT : T.proT) + '</h2><p class="sub" style="margin:0">' + esc(lim ? T.limP : T.proP) + '</p></div></div>' +
+      '<div class="feat">' + T.feats.map(function (f) { return '<div><i>✓</i>' + esc(f) + '</div>'; }).join('') + '</div>' +
+      '<div class="price"><b>' + p.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US') + ' ⭐</b><span>' + esc(T.per) + '</span></div>' +
+      '<button class="cta gold" id="subGo">' + esc(T.subGo(p)) + '</button><div class="note">' + esc(T.perN) + '</div>');
+    $('subGo').onclick = function () {
+      hap(); $('subGo').disabled = true;
+      call('invoice', { id: a.id }).then(function (r) {
+        $('subGo').disabled = false;
+        if (!r.ok) { hap('err'); return toast(T.inv); }
+        try {
+          tw.openInvoice(r.link, function (st) {
+            if (st !== 'paid') return;
+            hap('ok'); toast(T.paidW);
+            var n = 0, iv = setInterval(function () {
+              call('app', { id: a.id }).then(function (q) {
+                if ((q.ok && sub(q.app)) || ++n > 10) { clearInterval(iv); toast(T.paidOk); refresh(); tokenSheet(q.app || a); }
+              });
+            }, 2000);
+          });
+        } catch (e) { link(r.link); }
+      });
+    };
+  }
+  function limitSheet() {
+    var list = S.apps.filter(function (a) { return a.version > 0; });
+    if (list.length === 1) return proSheet(list[0], true);
+    if (!list.length) { toast(T.limP); return; }
+    openSheet('<div class="prohead"><div>⭐</div><div><h2>' + esc(T.limT) + '</h2><p class="sub" style="margin:0">' + esc(T.limP) + '</p></div></div><p class="sub">' + esc(T.limPick) + '</p><div class="apps" id="lp"></div>');
+    list.slice(0, 6).forEach(function (a) {
+      var b = document.createElement('button'); b.className = 'ac'; b.style.textAlign = 'left'; b.style.width = '100%';
+      b.innerHTML = '<div class="ah"><div class="ico" style="background:' + col(a.id) + '">' + esc((a.title || 'A').charAt(0).toUpperCase()) + '</div><div class="an"><b>' + esc(a.title || 'App') + '</b></div></div>';
+      b.onclick = function () { proSheet(a, false); }; $('lp').appendChild(b);
+    });
+  }
+  function launch(a) {
+    if (a.bot_username && sub(a)) return link('https://t.me/' + a.bot_username);
+    if (sub(a) || (S.lim && S.lim.pro && sub(a))) return tokenSheet(a);
+    proSheet(a, false);
+  }
+  function tokenSheet(a) {
+    openSheet('<h2>' + esc(T.tkT) + '</h2><p class="sub">' + esc(T.tkP) + '</p><ol class="ol">' + T.tkS.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ol>' +
+      '<button class="ghost" id="tkBF" style="margin-bottom:12px">🤖 ' + esc(T.tkBF) + '</button>' +
+      '<input class="tk" id="tkI" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="' + esc(T.tkPh) + '">' +
+      '<button class="cta" id="tkGo">' + esc(T.tkGo) + '</button><div class="note">🔒 ' + esc(T.tkN) + '</div>');
+    $('tkBF').onclick = function () { link('https://t.me/BotFather'); };
+    $('tkGo').onclick = function () {
+      var v = $('tkI').value.trim();
+      if (!/^\d{6,12}:[A-Za-z0-9_-]{30,}$/.test(v)) { hap('err'); return toast(T.tkBad); }
+      $('tkGo').disabled = true;
+      call('plug', { id: a.id, token: v }).then(function (r) {
+        $('tkGo').disabled = false;
+        if (!r.ok) { hap('err'); return toast(r.error === 'sub' ? T.inv : T.tkBad); }
+        $('tkI').value = ''; hap('ok'); refresh();
+        openSheet('<div style="text-align:center;padding:10px 0"><div style="font-size:54px">🎉</div><h2 style="margin-top:8px">' + esc(T.liveT) + '</h2><p class="sub">' + esc(T.liveP(r.bot)) + '</p></div><button class="cta" id="lvGo">' + esc(T.openBot) + '</button>');
+        $('lvGo').onclick = function () { link('https://t.me/' + r.bot); };
+      });
+    };
+  }
+
+  // ---------- boot ----------
+  var q = new URLSearchParams(location.search), sp = '';
+  try { sp = tw.initDataUnsafe.start_param || ''; } catch (e) {}
+  if (q.get('idea')) { idea.value = q.get('idea'); idea.oninput(); }
+  if (q.get('tab') === 'apps') tab('apps');
+  paintApps();
+  refresh().then(function (r) {
+    if (!r || !r.ok) return toast(T.net);
+    var open = q.get('open') || (sp.indexOf('app_') === 0 ? sp.slice(4) : '');
+    var gen = S.apps.filter(function (a) { return a.status === 'generating'; })[0];
+    if (gen) return startBuild(gen.id, gen.version > 0);
+    if (open) { var a = S.apps.filter(function (x) { return x.id === open; })[0]; if (a) { tab('apps'); if (sub(a) && !a.bot_username) tokenSheet(a); } }
+  });
+})();
+</script>
+</body>
+</html>
