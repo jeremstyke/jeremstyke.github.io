@@ -2188,7 +2188,7 @@ function nudge() {
         // 22 oct 2026 (18h32, Jeremy): sponsored tasks are unlimited; when Adsgram has none right now, try again in 10 minutes (it used to stay hidden until the app was reopened)
         ['onBannerNotFound', 'onError', 'onTooLongSession'].forEach((ev) => tk.addEventListener(ev, () => { gone(); clearTimeout(window.__adtR); window.__adtR = setTimeout(build, 30000); }));  // hidden, asked again every 30 s
         const gift = () => {
-          if (Date.now() - last < 3000) return; last = Date.now(); hap('ok'); toast(T('adOk')); [3000, 10000].forEach((ms) => setTimeout(refresh, ms));
+          if (Date.now() - last < 3000) return; last = Date.now(); hap('ok'); toast(T('adOk') + (window.__tkNext && window.__tkNext() ? ' · ' + window.__tkNext() : '')); [3000, 10000].forEach((ms) => setTimeout(refresh, ms));
           try { localStorage.setItem('bt_adt_pause', String(Date.now() + 30000));  /* 1 nov 2026 (22h33, Jeremy): 30 s between two tasks */ } catch (e) {}  // 28 oct 2026 (10h16, Jeremy): one task every 30 seconds, 10 a day (was 5 minutes), then a countdown (was: the next task right away)
           setTimeout(build, 2500);  // let the widget show its "done" state, then load the next task
         };
@@ -2999,8 +2999,10 @@ function nudge() {
 // (10 tasks = +5,000 $BATON, bt_ads_reward) with its bar at the top of the Tasks tab, and a red dot on the Tasks tab while it is not reached.
 (function () {
   var TX = {
-    fr: { h: function (r) { return '🎯 Gagne ' + r + ' $BATON par tâche'; }, g: function (d, g, b) { return 'Objectif du jour : ' + d + '/' + g + ' tâches → +' + b + ' $BATON de bonus'; }, ok: '✅ Objectif du jour atteint ! Chaque tâche paie encore.', go: 'Go' },
-    en: { h: function (r) { return '🎯 Earn ' + r + ' $BATON per task'; }, g: function (d, g, b) { return 'Goal of the day: ' + d + '/' + g + ' tasks → +' + b + ' $BATON bonus'; }, ok: '✅ Goal of the day reached! Every task still pays.', go: 'Go' }
+    fr: { h: function (r) { return '🎯 Gagne ' + r + ' $BATON par tâche'; }, g: function (d, g, b) { return 'Objectif du jour : ' + d + '/' + g + ' tâches → +' + b + ' $BATON de bonus'; }, ok: '✅ Tous les bonus du jour sont gagnés ! Chaque tâche paie encore.', go: 'Go',
+      nx: function (k, b, n, g) { return '🎁 Prochaine récompense : encore ' + k + ' tâche' + (k > 1 ? 's' : '') + ' → +' + b + ' $BATON (' + n + '/' + g + ')'; } },
+    en: { h: function (r) { return '🎯 Earn ' + r + ' $BATON per task'; }, g: function (d, g, b) { return 'Goal of the day: ' + d + '/' + g + ' tasks → +' + b + ' $BATON bonus'; }, ok: '✅ All the bonuses of the day are won! Every task still pays.', go: 'Go',
+      nx: function (k, b, n, g) { return '🎁 Next reward: ' + k + ' more task' + (k > 1 ? 's' : '') + ' → +' + b + ' $BATON (' + n + '/' + g + ')'; } }
   };
   var css = document.createElement('style');
   css.textContent = '#tkHome{display:flex;flex-direction:row;align-items:center;gap:10px;padding:12px 14px;border-radius:18px;background:linear-gradient(135deg,rgba(62,230,160,.18),rgba(255,130,47,.10));border:1.5px solid rgba(62,230,160,.55);cursor:pointer;text-align:left;color:inherit;width:100%}'
@@ -3014,8 +3016,10 @@ function nudge() {
     var T = TX[B.lang === 'fr' ? 'fr' : 'en'], d = Math.min(Number(S.tkDone) || 0, S.tkGoal), done = !!S.tkGoalDone || (Number(S.tkDone) || 0) >= S.tkGoal;
     /* 21h21 (Jeremy): shown only when Adsgram really has a task for this player (the task block is built and not hidden) */
     var ab = document.getElementById('adtask'), av = window.__adt === true && !!ab && !ab.hidden;
-    var pct = Math.round(d / S.tkGoal * 100) + '%', key = [S.tkDone, done, B.lang, av].join('|');
-    var ln = done ? T.ok : T.g(d, S.tkGoal, Number(S.tkBonus).toLocaleString(B.lang === 'fr' ? 'fr-FR' : 'en-US'));
+    /* 2 nov 2026 (11h, Jeremy): always the next reward waiting for the player: the 10th task, then the 25th (tkGoal2), then nothing */
+    var n = Number(S.tkDone) || 0, g2 = Number(S.tkGoal2) || 0, tg = n < S.tkGoal ? S.tkGoal : (g2 > n ? g2 : 0), tb = tg === S.tkGoal ? S.tkBonus : S.tkBonus2;
+    var pct = (tg ? Math.round(Math.min(n, tg) / tg * 100) : 100) + '%', key = [S.tkDone, done, B.lang, av, tg].join('|');
+    var ln = tg ? T.nx(tg - n, Number(tb).toLocaleString(B.lang === 'fr' ? 'fr-FR' : 'en-US'), n, tg) : T.ok;
     // Home: right under the balance
     var home = document.getElementById('p-home'), sc = home && home.querySelector('.score'), c = document.getElementById('tkHome');
     if (sc && !c) {
@@ -3033,9 +3037,11 @@ function nudge() {
     if (g) g.hidden = !av && !done;
     if (g && g.dataset.k !== key) { g.dataset.k = key; g.innerHTML = '<small>' + ln + '</small><div class="tkBar"><i style="width:' + pct + '"></i></div>'; }
     // red dot on the Tasks tab until the goal is reached
-    var nb = document.querySelector('nav button[data-p="tasks"]'); if (nb) nb.classList.toggle('tkDot', av && !done);
+    var nb = document.querySelector('nav button[data-p="tasks"]');     if (nb) nb.classList.toggle('tkDot', av && !done);
   }
   setInterval(paint, 1000);
+  // 2 nov 2026 (11h, Jeremy): the toast after a sponsored task also says the next reward (the state is not refreshed yet: +1)
+  window.__tkNext = function () { try { var B = window.BT, S = B.S, T = TX[B.lang === 'fr' ? 'fr' : 'en'], n = (Number(S.tkDone) || 0) + 1, g2 = Number(S.tkGoal2) || 0, tg = n < S.tkGoal ? S.tkGoal : (g2 > n ? g2 : 0); if (!tg) return ''; return T.nx(tg - n, Number(tg === S.tkGoal ? S.tkBonus : S.tkBonus2).toLocaleString(B.lang === 'fr' ? 'fr-FR' : 'en-US'), n, tg); } catch (e) { return ''; } };
 })();
 </script>
 <script>
