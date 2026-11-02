@@ -167,9 +167,10 @@
     setInterval(function () {
       var B = window.BT, S = B && B.S, box = document.getElementById('adtask'); if (!S || S.tkGoal == null || !box) return;
       var hd = box.querySelector('.adh'); if (!hd) return;
-      var g = Number(S.tkGoal) || 10, d = Math.min(Number(S.tkDone) || 0, g), b = nf(S.tkBonus || 5000), ok = !!S.tkGoalDone || d >= g;
-      var t = ok ? (fr ? '✅ Bonus du jour gagné : +' + b + ' $BATON' : '✅ Bonus of the day won: +' + b + ' $BATON')
-                 : (fr ? '🎯 ' + g + ' tâches aujourd\'hui = +' + b + ' $BATON · ' + d + '/' + g : '🎯 ' + g + ' tasks today = +' + b + ' $BATON · ' + d + '/' + g);
+      /* 2 nov 2026 (13h01, Jeremy): the next reward waiting: the 10th task, then the 25th (tkGoal2) */
+      var g = Number(S.tkGoal) || 10, n = Number(S.tkDone) || 0, g2 = Number(S.tkGoal2) || 0, tg = n < g ? g : (g2 > n ? g2 : 0), k = tg - n, b = nf(tg === g ? (S.tkBonus || 5000) : (S.tkBonus2 || 10000));
+      var t = tg ? (fr ? '🎁 Prochaine récompense : encore ' + k + ' tâche' + (k > 1 ? 's' : '') + ' → +' + b + ' $BATON · ' + n + '/' + tg : '🎁 Next reward: ' + k + ' more task' + (k > 1 ? 's' : '') + ' → +' + b + ' $BATON · ' + n + '/' + tg)
+                 : (fr ? '✅ Tous les bonus du jour sont gagnés !' : '✅ All the bonuses of the day are won!');
       var m = hd.nextElementSibling; if (!m || !m.classList.contains('tkMini')) { m = document.createElement('div'); m.className = 'tkMini'; hd.insertAdjacentElement('afterend', m); }
       if (m.textContent !== t) m.textContent = t;
     }, 1000);
