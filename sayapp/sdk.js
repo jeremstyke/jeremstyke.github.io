@@ -71,6 +71,17 @@
     };
     bn.appendChild(rp);
   }
-  function boot() { call({ action: 'info' }).then(show); }
+  // 2 nov 2026 (18h19, Jeremy): every "Made with SayApp" in an app opens @SayAppBuilderBot with a source (src_app_<id>)
+  function madeLink() {
+    var U = 'https://t.me/SayAppBuilderBot?start=src_app_' + APP, els = document.querySelectorAll('body *');
+    for (var i = 0; i < els.length; i++) {
+      var e = els[i];
+      if (e.children.length === 0 && !e.getAttribute('data-sa') && /^\s*Made with SayApp\s*$/i.test(e.textContent || '')) {
+        e.setAttribute('data-sa', '1'); e.style.cursor = 'pointer'; e.style.textDecoration = 'underline';
+        e.addEventListener('click', function (ev) { ev.preventDefault(); try { tw.openTelegramLink(U); } catch (x) { location.href = U; } });
+      }
+    }
+  }
+  function boot() { call({ action: 'info' }).then(show); madeLink(); setTimeout(madeLink, 1500); setTimeout(madeLink, 5000); }
   if (document.body) boot(); else document.addEventListener('DOMContentLoaded', boot);
 })();
