@@ -1,4 +1,4 @@
-<!-- sayapp j88ff7t8 v1 -->
+<!-- sayapp j88ff7t8 v2 -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -27,7 +27,20 @@ main{padding:8px 16px}
 .bar{display:flex;align-items:center;justify-content:space-between;margin:8px 4px 12px}
 .prog{height:8px;border-radius:8px;background:rgba(255,255,255,.08);overflow:hidden;margin:0 4px 16px}
 .prog i{display:block;height:100%;background:linear-gradient(90deg,var(--yel),var(--accent));border-radius:8px;transition:width .4s ease}
-.boostTag{font-size:12px;font-weight:800;color:#1a0b33;background:var(--yel);padding:4px 10px;border-radius:999px;display:none}
+.timer{font-size:13px;font-weight:800;padding:5px 12px;border-radius:999px;background:rgba(34,211,238,.15);color:var(--cy);border:1px solid rgba(34,211,238,.35);transition:background .2s,color .2s;visibility:hidden}
+.timer.on{visibility:visible}
+.timer.hot{background:rgba(255,79,163,.2);color:var(--accent);border-color:rgba(255,79,163,.5);animation:pulse .5s ease infinite alternate}
+@keyframes pulse{to{transform:scale(1.08)}}
+.tbar{height:4px;border-radius:4px;background:rgba(255,255,255,.08);overflow:hidden;margin:0 24px 14px}
+.tbar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--cy),var(--accent));border-radius:4px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 4px 8px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);font-weight:700;font-size:14px;color:var(--mut)}
+.chip.on{background:var(--gM);color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(139,92,246,.45)}
+.opts.late .opt{opacity:.45;transform:scale(.98)}
+.in2{width:100%;padding:14px 16px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.12);color:#fff;font:inherit;font-size:16px;margin-bottom:10px;outline:none;transition:border-color .2s}
+.in2:focus{border-color:var(--main)}
+.in2::placeholder{color:rgba(184,169,230,.6)}
 .qwrap{transition:transform .28s ease,opacity .28s ease}
 .qwrap.out{transform:translateX(-40px) rotate(-3deg);opacity:0}
 .qwrap.in{transform:translateX(40px) rotate(3deg);opacity:0}
@@ -95,7 +108,8 @@ footer{text-align:center;color:rgba(184,169,230,.5);font-size:12px;padding:18px 
 </header>
 <main>
   <section class="view on" id="v-play">
-    <div class="bar"><div class="label" id="tToday">0 / 200</div><div class="boostTag" id="boostTag">x2</div></div>
+    <div class="chips" id="themes"></div>
+    <div class="bar"><div class="label" id="tToday">0 / 200</div><div class="timer" id="timer">⏱ 10s</div></div>
     <div class="prog"><i id="prog" style="width:0"></i></div>
     <div id="playZone"></div>
   </section>
@@ -109,8 +123,10 @@ footer{text-align:center;color:rgba(184,169,230,.5);font-size:12px;padding:18px 
     <div class="stats" id="stats"></div>
     <div class="card"><div class="label" id="tLang">Langue</div>
       <div class="seg"><button data-l="fr">🇫🇷 Français</button><button data-l="en">🇬🇧 English</button></div></div>
-    <div class="card"><div style="font-weight:800;font-size:17px" id="tBoost"></div><div style="color:var(--mut);font-size:14px;margin:4px 0 12px" id="tBoostSub"></div>
-      <button class="btn" id="adBtn" style="width:100%">🎬</button></div>
+    <div class="card"><div style="font-weight:800;font-size:17px" id="tSug"></div><div style="color:var(--mut);font-size:14px;margin:4px 0 12px" id="tSugSub"></div>
+      <input class="in2" id="sugA" maxlength="90"><input class="in2" id="sugB" maxlength="90">
+      <div class="chips" id="sugTh" style="margin-bottom:8px"></div>
+      <button class="btn" id="sugBtn" style="width:100%"></button></div>
   </section>
   <footer>Made with SayApp</footer>
 </main>
@@ -126,20 +142,28 @@ footer{text-align:center;color:rgba(184,169,230,.5);font-size:12px;padding:18px 
 window.addEventListener('load',async()=>{
 const tg=window.Telegram&&Telegram.WebApp;try{tg.ready();tg.expand()}catch(e){}
 const P=[["Avoir des doigts en spaghetti","Have spaghetti fingers","🍝"],["Éternuer des confettis","Sneeze confetti","🎉"],["Parler uniquement en rimes","Only speak in rhymes","🎤"],["Avoir un rire de dauphin","Have a dolphin laugh","🐬"],["Ne plus jamais manger de pizza","Never eat pizza again","🍕"],["Avoir Wi-Fi gratuit partout","Have free Wi-Fi everywhere","📶"],["Pouvoir parler aux chats","Be able to talk to cats","🐱"],["Être suivi par une musique épique","Have epic music follow you","🎺"],["Avoir des cheveux qui changent de couleur selon l'humeur","Have hair that changes color with your mood","🌈"],["Transpirer du sirop d'érable","Sweat maple syrup","🍁"],["Voler à 2 km/h","Fly at 1 mph","🕊️"],["Être invisible quand personne ne regarde","Be invisible only when nobody looks","👻"],["Vivre dans une maison en Lego","Live in a Lego house","🧱"],["Avoir un pingouin comme coloc","Have a penguin roommate","🐧"],["Crier à chaque fois que tu t'assois","Scream every time you sit down","😱"],["Avoir des genoux à l'envers","Have backwards knees","🦵"],["Lire dans les pensées des pigeons","Read pigeons' minds","🐦"],["Ne plus jamais avoir de batterie faible","Never have low battery again","🔋"],["Dormir 2 heures et être en forme","Sleep 2 hours and feel great","😴"],["Être le meilleur danseur du monde","Be the world's best dancer","💃"],["Avoir une voix d'hélium pour toujours","Have a helium voice forever","🎈"],["Ne pouvoir marcher qu'en crabe","Only walk sideways like a crab","🦀"],["Remonter le temps de 10 secondes","Rewind time by 10 seconds","⏪"],["Gagner une dispute à chaque fois","Win every argument","🏆"],["Avoir un bouton pause sur la vie","Have a pause button on life","⏸️"],["Sentir le croissant chaud en permanence","Always smell like warm croissants","🥐"],["Être un mème célèbre","Be a famous meme","🤳"],["Avoir une queue de chat","Have a cat tail","🐈"],["Ne jamais devoir faire la queue","Never wait in line again","🚶"],["Manger que des plats froids","Only eat cold food","🧊"],["Hoqueter pendant une heure par jour","Hiccup one hour a day","😮"],["Avoir des mains qui font pouet","Have squeaky hands","🦆"],["Vivre sans réseaux sociaux","Live without social media","📵"],["Savoir toutes les langues","Know every language","🌍"],["Être sponsorisé par une marque de chaussettes","Be sponsored by a sock brand","🧦"],["Avoir un dragon de la taille d'un hamster","Own a hamster-sized dragon","🐉"],["Tomber amoureux d'une salade","Fall in love with a salad","🥗"],["Avoir les oreilles qui bougent quand tu mens","Have ears that wiggle when you lie","👂"],["Chanter tout ce que tu dis","Sing everything you say","🎶"],["Être coincé dans un ascenseur avec ton ex","Be stuck in an elevator with your ex","🛗"],["Porter des Crocs à vie","Wear Crocs for life","👟"],["Avoir un majordome robot","Have a robot butler","🤖"],["Rencontrer un extraterrestre gentil","Meet a friendly alien","👽"],["Gagner au cache-cache pour toujours","Always win at hide and seek","🙈"],["Avoir un frigo qui se remplit tout seul","Have a self-filling fridge","🧀"],["Être poursuivi par une oie","Be chased by a goose","🪿"],["Avoir le hoquet en mode karaoké","Have karaoke hiccups","🎙️"],["Rire à chaque mauvaise nouvelle","Laugh at every bad news","🤣"],["Pouvoir te téléporter mais seulement aux toilettes","Teleport but only to bathrooms","🚽"],["Avoir des pieds en ventouses","Have suction cup feet","🐙"],["Ne jamais avoir froid","Never feel cold","🔥"],["Être ami avec un fantôme drôle","Befriend a funny ghost","👻"],["Avoir des sourcils de 10 cm","Have 4-inch eyebrows","🤨"],["Manger un citron entier chaque matin","Eat a whole lemon every morning","🍋"],["Voir 5 minutes dans le futur","See 5 minutes into the future","🔮"],["Être champion du monde de bâillement","Be world yawning champion","🥱"],["Avoir ta propre émission de cuisine ratée","Host your own failed cooking show","👨‍🍳"],["Avoir un cheval comme taxi","Have a horse as a taxi","🐴"],["Ne jamais perdre tes clés","Never lose your keys","🔑"],["Parler à ton toi d'il y a 10 ans","Talk to yourself from 10 years ago","🪞"],["Être géant 1 jour par semaine","Be a giant one day a week","🦒"],["Vivre dans un jeu vidéo","Live inside a video game","🎮"],["Avoir des chaussures qui couinent","Have squeaky shoes","👞"],["Être toujours 10 minutes en retard","Always be 10 minutes late","⏰"],["Avoir un clone qui fait tes devoirs","Have a clone do your chores","👯"],["Respirer sous l'eau","Breathe underwater","🐠"],["Avoir un fan-club de mamies","Have a fan club of grandmas","👵"],["Ne manger que des bonbons","Only eat candy","🍬"],["Être un pirate de l'espace","Be a space pirate","🏴‍☠️"],["Danser dès que tu entends ton prénom","Dance whenever you hear your name","🕺"]];
-const T={fr:{title:'Tu préfères ?',ask:'Tu préfères...',or:'OU',next:'Suivant →',share:'📤 Partager',skip:'Passer',today:"aujourd'hui",play:'Jouer',top:'Classement',me:'Profil',pct:'%',maj:'🙌 Comme la majorité ! +5 bonus',min:'😈 Rebelle, avis minoritaire !',done:'Tu as tout joué aujourd\'hui !',doneSub:'200 nouveaux dilemmes arrivent demain. En attendant, défie tes potes 😄',lbEmpty:'Personne encore... sois le premier !',score:'Points',total:'Dilemmes',streak:'Série (jours)',best:'Record série',lang:'Langue des dilemmes',boost:'⚡ Boost x2 pour 10 réponses',boostSub:'Regarde une courte vidéo pour doubler tes points',boostBtn:'🎬 Activer le boost',boostOn:'Boost actif !',noAd:'Pas de vidéo dispo, réessaie plus tard',invite:'🔥 Défier mes amis',player:'Joueur',lbErr:'Classement indisponible pour le moment',shareTxt:(a,b,c)=>`Tu préfères : "${a}" OU "${b}" ? Moi j'ai choisi "${c}" 😂 Et toi ?`,inviteTxt:s=>`J'ai ${s} points sur Tu préfères ? 🤪 Viens me battre !`},
-en:{title:'Would you rather?',ask:'Would you rather...',or:'OR',next:'Next →',share:'📤 Share',skip:'Skip',today:'today',play:'Play',top:'Ranking',me:'Profile',pct:'%',maj:'🙌 With the majority! +5 bonus',min:'😈 Rebel, minority pick!',done:'You played them all today!',doneSub:'200 new dilemmas tomorrow. Meanwhile, challenge your friends 😄',lbEmpty:'Nobody yet... be the first!',score:'Points',total:'Dilemmas',streak:'Streak (days)',best:'Best streak',lang:'Dilemma language',boost:'⚡ x2 boost for 10 answers',boostSub:'Watch a short video to double your points',boostBtn:'🎬 Activate boost',boostOn:'Boost active!',noAd:'No video available, try later',invite:'🔥 Challenge my friends',player:'Player',lbErr:'Ranking unavailable right now',shareTxt:(a,b,c)=>`Would you rather: "${a}" OR "${b}"? I picked "${c}" 😂 What about you?`,inviteTxt:s=>`I have ${s} points on Would you rather? 🤪 Come beat me!`}};
+P.forEach(p=>p[3]='abs');
+[["Recevoir une lettre d'amour par pigeon","Get a love letter by pigeon","🕊️","love"],["Te marier sur une montagne russe","Get married on a roller coaster","🎢","love"],["Que ton crush lise ton historique de recherche","Have your crush read your search history","🔍","love"],["Un premier rendez-vous au fast-food","A first date at a fast-food place","🍟","love"],["Envoyer 'je t'aime' à ton boss par erreur","Text 'I love you' to your boss by mistake","📱","love"],["Avoir une âme sœur qui ronfle très fort","Have a soulmate who snores very loud","😪","love"],["Être demandé en mariage en public","Get proposed to in public","💍","love"],["Ne jamais connaître le chagrin d'amour","Never know heartbreak","💔","love"],["Lire les pensées de ton crush pendant 1 heure","Read your crush's mind for 1 hour","💭","love"],["Vivre un amour de vacances inoubliable","Have an unforgettable summer fling","🏖️","love"],["Laisser ta mère choisir ton partenaire","Let your mom pick your partner","👩","love"],["Aller à un rendez-vous surprise organisé par tes potes","Go on a blind date set up by your friends","🙈","love"],["Écrire une chanson d'amour ratée","Write a terrible love song","🎸","love"],["Partager ton lit avec un chat jaloux","Share your bed with a jealous cat","😼","love"],["Recevoir des fleurs tous les jours","Get flowers every day","💐","love"],["Faire ta déclaration en karaoké","Confess your love at karaoke","🎤","love"],
+["Manger des pâtes à chaque repas","Eat pasta at every meal","🍝","food"],["Ne plus jamais manger de chocolat","Never eat chocolate again","🍫","food"],["Finir un burger géant de 3 kg","Finish a giant 6-pound burger","🍔","food"],["Avoir des sushis à volonté pour la vie","Have unlimited sushi for life","🍣","food"],["Mettre du ketchup sur tout","Put ketchup on everything","🍅","food"],["Boire uniquement de l'eau gazeuse","Only drink sparkling water","🫧","food"],["Avoir un chef étoilé personnel","Have a personal Michelin chef","👨‍🍳","food"],["Manger épicé niveau extrême tous les jours","Eat extreme spicy food every day","🌶️","food"],["Ne manger que des tacos","Only eat tacos","🌮","food"],["Manger une raclette tous les soirs d'hiver","Eat raclette every winter night","🧀","food"],["Manger une pizza à l'ananas chaque semaine","Eat pineapple pizza every week","🍍","food"],["Ne plus jamais boire de café","Never drink coffee again","☕","food"],["Avoir un petit-déj au lit chaque matin","Get breakfast in bed every morning","🥞","food"],["Avoir des frites infinies dans ta poche","Have infinite fries in your pocket","🍟","food"],["Ne manger que des légumes verts","Only eat green vegetables","🥦","food"],["Avoir une glace qui ne fond jamais","Have an ice cream that never melts","🍦","food"],
+["Ne plus jamais avoir de devoirs","Never have homework again","📚","school"],["Faire un exposé en pyjama","Give a presentation in pajamas","🩳","school"],["Avoir ton prof comme voisin","Have your teacher as a neighbor","🏠","school"],["Avoir 4 mois de vacances mais cours le samedi","Get 4-month summers but school on Saturdays","🏖️","school"],["Connaître toutes les réponses aux contrôles","Know every test answer","📝","school"],["Avoir ta mère comme prof principale","Have your mom as your main teacher","👩‍🏫","school"],["Avoir 2 heures de récré","Have a 2-hour recess","⚽","school"],["Être appelé au tableau chaque jour","Be called to the board every day","🧑‍🏫","school"],["Avoir une cantine 5 étoiles","Have a 5-star school cafeteria","🍽️","school"],["Rater le bus tous les matins","Miss the bus every morning","🚌","school"],["Adorer les maths plus que tout","Love math more than anything","➗","school"],["Faire tes devoirs avec un robot","Do homework with a robot","🤖","school"],["Rire nerveusement pendant chaque contrôle","Laugh nervously during every test","😅","school"],["Être le chouchou du prof","Be the teacher's pet","🍎","school"],["Commencer les cours à 11h","Start school at 11 am","⏰","school"],["Partir en sortie scolaire à Disneyland","Go on a school trip to Disneyland","🏰","school"]].forEach(p=>P.push(p));
+const TH=['all','love','food','school','abs'],THE={all:'🎲',love:'❤️',food:'🍔',school:'🎒',abs:'🤪'};
+const T={fr:{title:'Tu préfères ?',ask:'Tu préfères...',or:'OU',next:'Suivant →',share:'📤 Partager',skip:'Passer',today:"aujourd'hui",play:'Jouer',top:'Classement',me:'Profil',pct:'%',maj:'🙌 Comme la majorité ! +5 bonus',min:'😈 Rebelle, avis minoritaire !',done:'Tu as tout joué aujourd\'hui !',doneSub:'Change de thème ou reviens demain pour de nouveaux dilemmes. En attendant, défie tes potes 😄',lbEmpty:'Personne encore... sois le premier !',score:'Points',total:'Dilemmes',streak:'Série (jours)',best:'Record série',lang:'Langue des dilemmes',late:'⏰ Trop lent ! Pas de points cette fois',themes:{all:'Tout',love:'Amour',food:'Bouffe',school:'École',abs:'Absurde'},sugT:'💡 Propose ton dilemme',sugSub:'Les meilleures idées seront ajoutées au jeu',sugA:'Option 1, ex: Vivre sans musique',sugB:'Option 2, ex: Vivre sans films',sugBtn:'📨 Envoyer mon dilemme',sugOk:'Merci ! Ton dilemme est envoyé 🙌',sugErr:'Remplis les deux options',sugFail:'Envoi impossible, réessaie plus tard',invite:'🔥 Défier mes amis',player:'Joueur',lbErr:'Classement indisponible pour le moment',shareTxt:(a,b,c)=>`Tu préfères : "${a}" OU "${b}" ? Moi j'ai choisi "${c}" 😂 Et toi ?`,inviteTxt:s=>`J'ai ${s} points sur Tu préfères ? 🤪 Viens me battre !`},
+en:{title:'Would you rather?',ask:'Would you rather...',or:'OR',next:'Next →',share:'📤 Share',skip:'Skip',today:'today',play:'Play',top:'Ranking',me:'Profile',pct:'%',maj:'🙌 With the majority! +5 bonus',min:'😈 Rebel, minority pick!',done:'You played them all today!',doneSub:'Switch theme or come back tomorrow for new dilemmas. Meanwhile, challenge your friends 😄',lbEmpty:'Nobody yet... be the first!',score:'Points',total:'Dilemmas',streak:'Streak (days)',best:'Best streak',lang:'Dilemma language',late:'⏰ Too slow! No points this time',themes:{all:'All',love:'Love',food:'Food',school:'School',abs:'Absurd'},sugT:'💡 Suggest a dilemma',sugSub:'The best ideas will be added to the game',sugA:'Option 1, e.g. Live without music',sugB:'Option 2, e.g. Live without movies',sugBtn:'📨 Send my dilemma',sugOk:'Thanks! Your dilemma was sent 🙌',sugErr:'Fill in both options',sugFail:'Could not send, try again later',invite:'🔥 Challenge my friends',player:'Player',lbErr:'Ranking unavailable right now',shareTxt:(a,b,c)=>`Would you rather: "${a}" OR "${b}"? I picked "${c}" 😂 What about you?`,inviteTxt:s=>`I have ${s} points on Would you rather? 🤪 Come beat me!`}};
 const $=id=>document.getElementById(id);
 const DAILY=200;
 const dayStr=d=>d.toISOString().slice(0,10);
 const today=dayStr(new Date()),yest=dayStr(new Date(Date.now()-864e5));
 const hash=s=>{let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0};
 const rng=seed=>()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
-function buildDeck(day){const r=rng(hash(day)),seen=new Set(),d=[];while(d.length<DAILY){const a=Math.floor(r()*P.length),b=Math.floor(r()*P.length);if(a===b)continue;const k=Math.min(a,b)+'-'+Math.max(a,b);if(seen.has(k))continue;seen.add(k);d.push([a,b])}return d}
-const deck=buildDeck(today);
+function buildDeck(day,pool){const n=pool.length,max=Math.min(DAILY,n*(n-1)/2),r=rng(hash(day)),seen=new Set(),d=[];while(d.length<max){const a=pool[Math.floor(r()*n)],b=pool[Math.floor(r()*n)];if(a===b)continue;const k=Math.min(a,b)+'-'+Math.max(a,b);if(seen.has(k))continue;seen.add(k);d.push([a,b])}return d}
+const decks={};
+const deckOf=th=>decks[th]||(decks[th]=buildDeck(today+th,P.map((p,i)=>i).filter(i=>th==='all'||P[i][3]===th)));
+const D=()=>deckOf(S.th),pos=()=>S.pos[S.th]||0;
 const pctA=(a,b)=>22+hash(a*131+b*7+'x')%57;
-let S={score:0,total:0,day:today,done:0,streak:0,best:0,lastDay:'',lang:'fr',boost:0};
+let S={score:0,total:0,day:today,pos:{},th:'all',streak:0,best:0,lastDay:'',lang:'fr'};
 try{const s=await SayApp.get('wyr');if(s&&typeof s==='object')S=Object.assign(S,s)}catch(e){}
-if(S.day!==today){S.day=today;S.done=0}
+if(S.day!==today){S.day=today;S.pos={}}
+if(!S.pos||typeof S.pos!=='object')S.pos={};if(!TH.includes(S.th))S.th='all';delete S.boost;delete S.done;
 if(S.lastDay&&S.lastDay!==today&&S.lastDay!==yest)S.streak=0;
 const u=(window.SayApp&&SayApp.user)||{};
 let saveT=null,locked=false,shown=S.score;
@@ -149,37 +173,46 @@ function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clear
 function animScore(){const el=$('score'),from=shown,to=S.score,t0=performance.now();shown=to;const step=n=>{const k=Math.min(1,(n-t0)/500);el.textContent=Math.round(from+(to-from)*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)}
 function burst(x,y,txt){const f=document.createElement('div');f.className='float';f.textContent=txt;f.style.left=(x-24)+'px';f.style.top=(y-20)+'px';document.body.appendChild(f);setTimeout(()=>f.remove(),1000);
 const cols=['#FFD23F','#FF4FA3','#22D3EE','#8B5CF6','#FF8A5B','#4ADE80'];for(let i=0;i<26;i++){const c=document.createElement('div');c.className='conf';c.style.left=x+'px';c.style.top=y+'px';c.style.background=cols[i%6];const a=Math.random()*Math.PI*2,d=60+Math.random()*120;c.style.setProperty('--x',Math.cos(a)*d+'px');c.style.setProperty('--y',Math.sin(a)*d-40+'px');c.style.setProperty('--r',Math.random()*720+'deg');document.body.appendChild(c);setTimeout(()=>c.remove(),900)}}
-function texts(){const l=L();document.title=l.title;$('tTitle').textContent=l.title;$('nPlay').textContent=l.play;$('nTop').textContent=l.top;$('nMe').textContent=l.me;$('tLb').textContent=l.top;$('inviteBtn').textContent=l.invite;$('tLang').textContent=l.lang;$('tBoost').textContent=l.boost;$('tBoostSub').textContent=l.boostSub;$('adBtn').textContent=S.boost>0?l.boostOn+' ('+S.boost+')':l.boostBtn;$('tPlayer').textContent=l.player;
+function texts(){const l=L();document.title=l.title;$('tTitle').textContent=l.title;$('nPlay').textContent=l.play;$('nTop').textContent=l.top;$('nMe').textContent=l.me;$('tLb').textContent=l.top;$('inviteBtn').textContent=l.invite;$('tLang').textContent=l.lang;$('tSug').textContent=l.sugT;$('tSugSub').textContent=l.sugSub;$('sugA').placeholder=l.sugA;$('sugB').placeholder=l.sugB;$('sugBtn').textContent=l.sugBtn;renderChips();$('tPlayer').textContent=l.player;
 document.querySelectorAll('.seg button').forEach(b=>b.classList.toggle('on',b.dataset.l===S.lang));
-$('tToday').textContent=Math.min(S.done,DAILY)+' / '+DAILY+' '+l.today;$('prog').style.width=(Math.min(S.done,DAILY)/DAILY*100)+'%';
-const bt=$('boostTag');bt.style.display=S.boost>0?'block':'none';bt.textContent='⚡ x2 · '+S.boost}
+const n=D().length,p=Math.min(pos(),n);$('tToday').textContent=p+' / '+n+' '+l.today;$('prog').style.width=(n?p/n*100:0)+'%'}
+let chipLang='';
+function renderChips(){const l=L();if(chipLang!==S.lang){chipLang=S.lang;const h=(list,a)=>list.map(t=>`<button class="chip" data-${a}="${t}">${THE[t]} ${l.themes[t]}</button>`).join('');$('themes').innerHTML=h(TH,'t');$('sugTh').innerHTML=h(TH.slice(1),'g')}
+document.querySelectorAll('#themes .chip').forEach(b=>b.classList.toggle('on',b.dataset.t===S.th));document.querySelectorAll('#sugTh .chip').forEach(b=>b.classList.toggle('on',b.dataset.g===sugTh))}
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function opt(i,side){const li=S.lang==='fr'?0:1;return `<button class="opt ${side}" data-s="${side}"><div class="fill"></div><div class="t">${esc(P[i][li])}</div><div class="p"></div><div class="emo">${P[i][2]}</div></button>`}
 function renderQ(){const z=$('playZone'),l=L();texts();
-if(S.done>=DAILY){z.innerHTML=`<div class="card empty"><div class="big">🥳</div><h3>${l.done}</h3><p>${l.doneSub}</p><button class="btn yel" id="doneShare">${l.invite}</button></div>`;$('doneShare').onclick=invite;return}
-const [a,b]=deck[S.done];locked=false;
-z.innerHTML=`<div class="qwrap in" id="qw"><div class="ask">${l.ask}</div><div class="opts" id="opts">${opt(a,'a')}<div class="or">${l.or}</div>${opt(b,'b')}</div>
+stopTimer();
+if(pos()>=D().length){z.innerHTML=`<div class="card empty"><div class="big">🥳</div><h3>${l.done}</h3><p>${l.doneSub}</p><button class="btn yel" id="doneShare">${l.invite}</button></div>`;$('doneShare').onclick=invite;$('timer').classList.remove('on');return}
+const [a,b]=D()[pos()];locked=false;
+z.innerHTML=`<div class="qwrap in" id="qw"><div class="ask">${l.ask}</div><div class="tbar"><i id="tbar"></i></div><div class="opts" id="opts">${opt(a,'a')}<div class="or">${l.or}</div>${opt(b,'b')}</div>
 <div class="result"><div class="verdict" id="verdict"></div><div class="row" id="acts" style="display:none"><button class="btn ghost" id="shareBtn">${l.share}</button><button class="btn" id="nextBtn">${l.next}</button></div><button class="skip" id="skipBtn">${l.skip}</button></div></div>`;
 requestAnimationFrame(()=>requestAnimationFrame(()=>$('qw').classList.remove('in')));
 z.querySelectorAll('.opt').forEach(o=>o.onclick=e=>pick(o.dataset.s,e));
 $('skipBtn').onclick=()=>{SayApp.haptic('tap');next()};
 $('nextBtn').onclick=()=>{SayApp.haptic('tap');next()};
-$('shareBtn').onclick=()=>shareQ()}
-let lastPick='a';
-function pick(side,e){if(locked)return;locked=true;lastPick=side;const [a,b]=deck[S.done],pa=pctA(a,b),pb=100-pa,mine=side==='a'?pa:pb,maj=mine>=50;
+$('shareBtn').onclick=()=>shareQ();
+if($('v-play').classList.contains('on'))startTimer();else setTimer(10)}
+let lastPick='a',tmr=null,tLeft=10,sugTh='abs';
+function setTimer(v){const t=$('timer');t.textContent='⏱ '+v+'s';t.classList.add('on');t.classList.toggle('hot',v<=3&&v>0)}
+function stopTimer(){if(tmr){clearInterval(tmr);tmr=null}$('timer').classList.remove('hot');const b=$('tbar');if(b){b.style.width=getComputedStyle(b).width;b.style.transition='none'}}
+function startTimer(){stopTimer();tLeft=10;setTimer(tLeft);const b=$('tbar');if(b){b.style.transition='none';b.style.width='100%';void b.offsetWidth;b.style.transition='width 10s linear';b.style.width='0%'}
+tmr=setInterval(()=>{tLeft--;setTimer(Math.max(0,tLeft));if(tLeft<=3&&tLeft>0)SayApp.haptic('tap');if(tLeft<=0){stopTimer();timeUp()}},1000)}
+function timeUp(){if(locked||!$('opts'))return;locked=true;$('opts').classList.add('late');const v=$('verdict');v.textContent=L().late;v.classList.add('on');$('skipBtn').style.display='none';SayApp.haptic('error');const q=$('qw');setTimeout(()=>{if($('qw')===q)next()},1200)}
+function pick(side,e){if(locked)return;locked=true;stopTimer();lastPick=side;const [a,b]=D()[pos()],pa=pctA(a,b),pb=100-pa,mine=side==='a'?pa:pb,maj=mine>=50;
 const opts=$('opts');opts.classList.add('done');const oa=opts.querySelector('.opt.a'),ob=opts.querySelector('.opt.b');(side==='a'?oa:ob).classList.add('pick');
 oa.querySelector('.p').textContent=pa+'%';ob.querySelector('.p').textContent=pb+'%';
 requestAnimationFrame(()=>{oa.querySelector('.fill').style.width=pa+'%';ob.querySelector('.fill').style.width=pb+'%'});
-let pts=10+(maj?5:0);if(S.boost>0){pts*=2;S.boost--}
+let pts=10+(maj?5:0);
 S.score+=pts;S.total++;
 if(S.lastDay!==today){S.streak=S.lastDay===yest?S.streak+1:1;S.lastDay=today;S.best=Math.max(S.best,S.streak)}
 const v=$('verdict');v.textContent=maj?L().maj:L().min;v.classList.add('on');
 $('acts').style.display='flex';$('skipBtn').style.display='none';
 const r=(side==='a'?oa:ob).getBoundingClientRect();burst(e&&e.clientX?e.clientX:r.left+r.width/2,e&&e.clientY?e.clientY:r.top+r.height/2,'+'+pts);
 SayApp.haptic('ok');animScore();texts();save()}
-function next(){S.done++;save();const q=$('qw');if(q){q.classList.add('out');setTimeout(renderQ,260)}else renderQ()}
+function next(){stopTimer();S.pos[S.th]=pos()+1;save();const q=$('qw');if(q){q.classList.add('out');setTimeout(renderQ,260)}else renderQ()}
 function openShare(text){const url='https://t.me/share/url?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(text);try{tg.openTelegramLink(url)}catch(e){window.open(url,'_blank')}}
-function shareQ(){const [a,b]=deck[S.done],li=S.lang==='fr'?0:1,A=P[a][li],B=P[b][li];SayApp.haptic('tap');openShare(L().shareTxt(A,B,lastPick==='a'?A:B))}
+function shareQ(){const [a,b]=D()[pos()],li=S.lang==='fr'?0:1,A=P[a][li],B=P[b][li];SayApp.haptic('tap');openShare(L().shareTxt(A,B,lastPick==='a'?A:B))}
 function invite(){SayApp.haptic('tap');openShare(L().inviteTxt(S.score))}
 $('inviteBtn').onclick=invite;
 async function renderLB(){const ul=$('lb');ul.innerHTML='<div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div>';
@@ -189,11 +222,14 @@ if(!list.length){ul.innerHTML=`<div class="empty"><div class="big">🏆</div><p>
 const med=['🥇','🥈','🥉'];ul.innerHTML=list.map((p,i)=>{const n=p.name||'?';return `<li class="${p.me?'me':''}"><div class="r">${med[i]||i+1}</div><div class="av">${esc(n.charAt(0).toUpperCase())}</div><div class="n">${esc(n)}</div><div class="v">${Number(p.value)||0}</div></li>`}).join('')}
 function renderMe(){const l=L(),n=u.first_name||l.player;$('meName').textContent=n;$('meAv').textContent=n.charAt(0).toUpperCase();
 $('stats').innerHTML=[[l.score,S.score],[l.total,S.total],[l.streak,S.streak+' 🔥'],[l.best,S.best]].map(s=>`<div class="stat"><div class="label">${s[0]}</div><b>${s[1]}</b></div>`).join('');texts()}
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{SayApp.haptic('tap');document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+b.dataset.v));
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{SayApp.haptic('tap');const was=$('v-play').classList.contains('on');if(b.dataset.v==='play'){if(!was&&!locked&&$('qw'))setTimeout(startTimer,0)}else stopTimer();document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+b.dataset.v));
 if(b.dataset.v==='top')renderLB();if(b.dataset.v==='me')renderMe();window.scrollTo({top:0,behavior:'smooth'})});
 document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{if(S.lang===b.dataset.l)return;S.lang=b.dataset.l;SayApp.haptic('tap');save();renderMe();renderQ()});
-$('adBtn').onclick=async()=>{const btn=$('adBtn');if(btn.disabled)return;btn.disabled=true;btn.style.opacity=.6;let ok=false;try{ok=await SayApp.ad()}catch(e){}
-btn.disabled=false;btn.style.opacity=1;if(ok){S.boost+=10;SayApp.haptic('ok');toast(L().boostOn);save()}else{SayApp.haptic('error');toast(L().noAd)}renderMe()};
+$('themes').onclick=e=>{const b=e.target.closest('.chip');if(!b||b.dataset.t===S.th)return;S.th=b.dataset.t;SayApp.haptic('tap');save();renderQ()};
+$('sugTh').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;sugTh=b.dataset.g;SayApp.haptic('tap');renderChips()};
+$('sugBtn').onclick=async()=>{const btn=$('sugBtn'),A=$('sugA').value.trim(),B=$('sugB').value.trim();if(btn.disabled)return;if(A.length<3||B.length<3){SayApp.haptic('error');toast(L().sugErr);return}
+btn.disabled=true;btn.style.opacity=.6;let ok=false;try{await SayApp.submit({type:'dilemme',optionA:A,optionB:B,theme:sugTh,lang:S.lang,from:u.first_name||''});ok=true}catch(e){}
+btn.disabled=false;btn.style.opacity=1;if(ok){$('sugA').value='';$('sugB').value='';SayApp.haptic('ok');toast(L().sugOk);const r=btn.getBoundingClientRect();burst(r.left+r.width/2,r.top,'💡')}else{SayApp.haptic('error');toast(L().sugFail)}};
 $('score').textContent=S.score;
 renderQ();
 });
