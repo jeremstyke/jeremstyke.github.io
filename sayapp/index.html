@@ -87,6 +87,7 @@ textarea::placeholder{color:var(--dim)}
 .crup{display:block;margin:8px auto 0;font-size:13px;font-weight:700;color:#ffd76a;padding:6px 12px;border-radius:99px;background:rgba(255,215,106,.08);border:1px solid rgba(255,215,106,.25)}.plan{cursor:pointer}.plan.cr{background:linear-gradient(120deg,#8b5cff,#2fd6ff);color:#fff;border:0}
 .extra{display:grid;gap:8px;margin-bottom:12px}.xin{width:100%;padding:13px 14px;border-radius:14px;border:1px solid var(--line);background:#0d0d18;color:var(--fg);font:15px Inter,system-ui,sans-serif;outline:0}.xin:focus{border-color:var(--v)}.xl{margin:6px 0 0;font-size:12px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.08em}.cols{display:flex;gap:10px;flex-wrap:wrap}.col{width:38px;height:38px;border-radius:50%;border:2px solid transparent;box-shadow:inset 0 0 0 2px rgba(255,255,255,.15)}.col.on{border-color:#fff;transform:scale(1.08)}.col.auto{width:auto;padding:0 12px;border-radius:99px;background:var(--card2);font-size:12px;font-weight:700;color:var(--mute)}
 .price{flex-wrap:wrap}.price .then{flex-basis:100%;text-align:center;font-style:normal;font-size:14px;font-weight:700;color:#ffd76a;margin-top:2px}
+.tos{margin:12px 0 0;text-align:center;font-size:11.5px;color:var(--dim)}.tos a{color:var(--mute)}
 .abtn button.hl{background:var(--gold);color:#2a1700;border:0}
 .tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;justify-content:center;gap:6px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(7,7,13,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid var(--line)}
 .tabs button{flex:1;max-width:220px;padding:11px;border-radius:14px;font-weight:600;color:var(--mute);display:flex;align-items:center;justify-content:center;gap:7px}
@@ -180,6 +181,7 @@ input.tk:focus{border-color:var(--v)}
     <div class="quota" id="quota"></div>
     <button class="crup" id="crUp" hidden></button>
     <div class="trust" data-t="trust"></div>
+    <p class="tos" data-t="tos"></p>
 
     <div class="sec"><h3 data-t="howT"></h3><div class="steps" id="how"></div></div>
     <div class="sec"><h3 data-t="byT"></h3>
@@ -236,7 +238,7 @@ input.tk:focus{border-color:var(--v)}
       ],
       wNext: 'Continuer', wSkip: 'Passer', wStep: function (i, n) { return i + '/' + n; }, wLastQ: 'Ton appli', wLastS: 'Donne-lui un nom, une couleur, et raconte ton idée en une phrase.', wPh: 'Ton idée : ex. un quiz sur l\'OL, 10 questions de plus en plus dures', xName: 'Nom de l\'appli (facultatif)', xDesc: 'Description courte (facultatif)', xCol: 'Couleur principale', xAuto: 'Auto',
       mtT: '✏️ Nom et description', mtP: 'Gratuit : change le nom et la description affichés sur ton bot.', mtSave: 'Enregistrer', mtOk: 'Enregistré ✅',
-      lang: 'Dans ta langue', go: '✦ Construire mon appli', tCreate: 'Créer', tApps: 'Mes applis',
+      tos: 'En créant une appli, tu acceptes les <a href="#" id="tosL">conditions d\'utilisation</a>.', banned: 'Ton compte est suspendu. Écris à t.me/jeremstyke si c\'est une erreur.', lang: 'Dans ta langue', go: '✦ Construire mon appli', tCreate: 'Créer', tApps: 'Mes applis',
       chips: [['⚽ Quiz foot', 'Un quiz foot de 10 questions avec un chrono, un score et un classement des joueurs, aux couleurs vert et blanc'], ['🍕 Menu de resto', 'Le menu de ma pizzeria avec des photos en emoji, les prix, un panier et un formulaire de commande envoyé au patron'], ['🪙 Jeu de tap', 'Un jeu où l\'on tape sur une pièce pour gagner des points, avec des améliorations, une récompense quotidienne et un classement'], ['📅 Réservation', 'Une appli de prise de rendez-vous pour mon salon de coiffure : choix du service, du jour et de l\'heure, envoi de la demande'], ['🎯 Sondage', 'Un sondage de 5 questions pour ma communauté avec les résultats en direct'], ['🧠 Personnalité', 'Un test de personnalité « Quel animal es-tu ? » avec 8 questions et un résultat à partager']],
       howT: 'Comment ça marche', how: [['💬', 'Décris ton idée', 'En une phrase, comme à un ami.'], ['⚡', 'Démo en 2 minutes', 'Ton appli est construite et mise en ligne, on héberge tout pour toi.'], ['✏️', 'Ajuste-la', 'Couleurs, textes, fonctions : demande, c\'est fait.'], ['🚀', 'Lance-la sur ton bot', 'Ton appli, ton nom, tes utilisateurs.']],
       byT: 'Par le créateur de', free: 'Gratuit', pro: '⭐ Pro',
@@ -284,7 +286,7 @@ input.tk:focus{border-color:var(--v)}
       ],
       wNext: 'Continue', wSkip: 'Skip', wStep: function (i, n) { return i + '/' + n; }, wLastQ: 'Your app', wLastS: 'Give it a name, a color, and tell your idea in one sentence.', wPh: 'Your idea: e.g. a football quiz, 10 questions getting harder', xName: 'App name (optional)', xDesc: 'Short description (optional)', xCol: 'Main color', xAuto: 'Auto',
       mtT: '✏️ Name and description', mtP: 'Free: change the name and the description shown on your bot.', mtSave: 'Save', mtOk: 'Saved ✅',
-      lang: 'In your language', go: '✦ Build my app', tCreate: 'Create', tApps: 'My apps',
+      tos: 'By building an app, you accept the <a href="#" id="tosL">terms of use</a>.', banned: 'Your account is suspended. Write to t.me/jeremstyke if this is a mistake.', lang: 'In your language', go: '✦ Build my app', tCreate: 'Create', tApps: 'My apps',
       chips: [['⚽ Football quiz', 'A football quiz with 10 questions, a timer, a score and a player leaderboard, in green and white'], ['🍕 Restaurant menu', 'The menu of my pizzeria with emoji pictures, prices, a cart and an order form sent to the owner'], ['🪙 Tap game', 'A game where you tap a coin to earn points, with upgrades, a daily reward and a leaderboard'], ['📅 Booking', 'A booking app for my hair salon: pick a service, a day and a time, then send the request'], ['🎯 Poll', 'A 5-question poll for my community with live results'], ['🧠 Personality', 'A "Which animal are you?" personality test with 8 questions and a shareable result']],
       howT: 'How it works', how: [['💬', 'Describe your idea', 'In one sentence, like to a friend.'], ['⚡', 'Live demo in 2 minutes', 'Your app is built and put online, we host everything for you.'], ['✏️', 'Tweak it', 'Colors, texts, features: just ask.'], ['🚀', 'Launch it on your bot', 'Your app, your name, your users.']],
       byT: 'By the creator of', free: 'Free', pro: '⭐ Pro',
@@ -330,6 +332,7 @@ input.tk:focus{border-color:var(--v)}
   function toast(m) { var t = $('toast'); t.textContent = m; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('on'); }, 2800); }
   function link(u) { try { tw.openTelegramLink(u); } catch (e) { location.href = u; } }
   document.querySelectorAll('[data-t]').forEach(function (el) { var v = T[el.getAttribute('data-t')]; if (typeof v === 'string') el.innerHTML = v; });
+  setTimeout(function () { var tl = document.getElementById('tosL'); if (tl) tl.onclick = function (e) { e.preventDefault(); try { tw.openLink('https://jeremstyke.github.io/sayapp/terms.html'); } catch (x) { location.href = 'terms.html'; } }; }, 0);
   document.querySelectorAll('[data-link]').forEach(function (el) { el.onclick = function () { link(el.getAttribute('data-link')); }; });
 
   var initData = (tw && tw.initData) || '';
@@ -426,6 +429,7 @@ input.tk:focus{border-color:var(--v)}
     if (r.error === 'limit') return limitSheet();
     if (r.error === 'busy') { if (r.id) startBuild(r.id, false); return toast(T.busy); }
     if (r.error === 'short') return toast(T.short);
+    if (r.error === 'banned') return toast(T.banned);
     toast(r.error === 'noai' ? T.noai : r.error === 'net' ? T.net : T.errP);
   }
 
