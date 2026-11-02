@@ -131,6 +131,14 @@
       b.onclick = function () { x.remove(); done(true); };
     });
   }
+  // 2 nov 2026 (20h35, Jeremy): free demos show one SayApp ad (SayApp, Meme Coin Tycoon, Pass The Baton) at opening, at most once an hour per player
+  function demoAd(i) {
+    if (!i || !i.ok || i.pro || i.expired || i.banned || window.top !== window) return;
+    var k = 'sayapp_hd_' + APP, last = 0; try { last = Number(localStorage.getItem(k) || 0); } catch (e) {}
+    if (Date.now() - last < 3600000) return;
+    try { localStorage.setItem(k, String(Date.now())); } catch (e) {}
+    setTimeout(houseAd, 1500);
+  }
   function openAd() {
     if (!ADS || !ADS.open) return;
     var k = 'sayapp_ad_' + APP, last = 0; try { last = Number(localStorage.getItem(k) || 0); } catch (e) {}
@@ -138,6 +146,6 @@
     try { localStorage.setItem(k, String(Date.now())); } catch (e) {}
     setTimeout(function () { playAd(ADS.agi || ADS.ag); }, 1200);
   }
-  function boot() { adsReady = call({ action: 'info' }).then(function (i) { ADS = (i && i.ads) || null; show(i); openAd(); return i; }); madeLink(); setTimeout(madeLink, 1500); setTimeout(madeLink, 5000); }
+  function boot() { adsReady = call({ action: 'info' }).then(function (i) { ADS = (i && i.ads) || null; show(i); if (ADS && (ADS.ag || ADS.agx)) openAd(); else demoAd(i); return i; }); madeLink(); setTimeout(madeLink, 1500); setTimeout(madeLink, 5000); }
   if (document.body) boot(); else document.addEventListener('DOMContentLoaded', boot);
 })();
