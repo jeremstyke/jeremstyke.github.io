@@ -1,4 +1,4 @@
-<!-- sayapp 4v2t3sra v2 -->
+<!-- sayapp 4v2t3sra v3 -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -134,7 +134,7 @@ let cv=$('#cv'),ctx=cv.getContext('2d'),size=300,cell=20;
 let snake=[],dir={x:1,y:0},queue=[],fruit=null,score=0,shown=0,eaten=0,stepMs=150,acc=0,last=0;
 let running=false,paused=false,busy=false,usedContinue=false,dead=false,deadAt=0,cause='';
 let best=0,games=0,totalFruits=0,walls=false,parts=[],toastT;
-let rocks=[],level=1,slowUntil=0;
+let rocks=[],level=1,slowUntil=0,tick=0;
 const hap=k=>{try{SA.haptic(k)}catch(e){}};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -164,17 +164,29 @@ function placeFruit(noGold){
   }
   fruit={x:p.x,y:p.y,e:f.e,pts:f.pts,kind:f.kind,dur:f.dur,gold:f.kind!=='n',until:now+f.dur,born:now};
 }
-function addRocks(n){
+function addRocks(n,m){
   const h=snake[0],now=performance.now(),free=[];
   for(let x=0;x<N;x++)for(let y=0;y<N;y++){
-    if(Math.abs(x-h.x)+Math.abs(y-h.y)<4)continue;
+    if(Math.abs(x-h.x)+Math.abs(y-h.y)<(m?6:4))continue;
     if(snake.some(s=>s.x===x&&s.y===y)||rocks.some(r=>r.x===x&&r.y===y))continue;
     free.push({x,y});
   }
-  for(let i=0;i<n&&free.length&&rocks.length<30;i++){const c=free.splice(Math.random()*free.length|0,1)[0];rocks.push({x:c.x,y:c.y,born:now})}
+  for(let i=0;i<n&&free.length&&rocks.length<30;i++){const c=free.splice(Math.random()*free.length|0,1)[0],hz=Math.random()<.5,sg=Math.random()<.5?1:-1;rocks.push({x:c.x,y:c.y,born:now,m:!!m,dx:hz?sg:0,dy:hz?0:sg,ox:c.x,oy:c.y,mt:0})}
+}
+function moveRocks(now){
+  if(!running)return;
+  for(const r of rocks){
+    if(!r.m)continue;
+    const nx=r.x+r.dx,ny=r.y+r.dy,h=snake[0];
+    if(nx===h.x&&ny===h.y){r.ox=r.x;r.oy=r.y;r.x=nx;r.y=ny;r.mt=now;return die('Écrasé par un rocher mobile !')}
+    if(nx<0||ny<0||nx>=N||ny>=N||snake.some(s=>s.x===nx&&s.y===ny)||rocks.some(o=>o!==r&&o.x===nx&&o.y===ny)||(fruit&&fruit.x===nx&&fruit.y===ny)){r.dx=-r.dx;r.dy=-r.dy;continue}
+    r.ox=r.x;r.oy=r.y;r.x=nx;r.y=ny;r.mt=now;
+  }
 }
 function levelUp(){
   level++;addRocks(Math.min(3,1+Math.floor(level/2)));
+  if(level>=5&&rocks.filter(r=>r.m).length<6)addRocks(1,true);
+  if(level===5)toast('⚠️ Attention, les rochers commencent à bouger !');
   const l=$('#lv');l.textContent='⚡ Niveau '+level;l.classList.remove('pop');void l.offsetWidth;l.classList.add('pop');hap('ok');
 }
 function setDir(dx,dy){
@@ -199,6 +211,7 @@ function step(now){
     stepMs=Math.max(58,165-(level-1)*13-(eaten%5)*2);setScore();placeFruit();
   }else snake.pop();
   if(fruit&&fruit.gold&&now>fruit.until)placeFruit(true);
+  tick++;if(tick%2===0)moveRocks(now);
 }
 function die(c){
   running=false;dead=true;deadAt=performance.now();cause=c;hap('error');
@@ -227,9 +240,10 @@ function draw(t){
   ctx.fillStyle='rgba(255,255,255,.024)';
   for(let x=0;x<N;x++)for(let y=0;y<N;y++)if((x+y)%2)ctx.fillRect(x*cell,y*cell,cell,cell);
   for(const r of rocks){
-    const ra=Math.max(.05,Math.min(1,(t-r.born)/300)),rx=(r.x+.5)*cell,ry=(r.y+.5)*cell,sz=cell*.84*ra;
-    ctx.shadowColor='rgba(255,77,125,.55)';ctx.shadowBlur=10;ctx.fillStyle='#3a2340';rr(rx-sz/2,ry-sz/2,sz,sz,cell*.22*ra);ctx.fill();ctx.shadowBlur=0;
-    ctx.strokeStyle='rgba(255,77,125,.75)';ctx.lineWidth=1.5;ctx.stroke();ctx.fillStyle='rgba(255,255,255,.14)';ctx.fillRect(rx-sz*.3,ry-sz*.3,sz*.25,sz*.12);
+    const ra=Math.max(.05,Math.min(1,(t-r.born)/300)),mk=r.m?Math.min(1,(t-r.mt)/140):1,rx=(r.m?r.ox+(r.x-r.ox)*mk+.5:r.x+.5)*cell,ry=(r.m?r.oy+(r.y-r.oy)*mk+.5:r.y+.5)*cell,sz=cell*.84*ra;
+    ctx.shadowColor=r.m?'rgba(255,159,67,.75)':'rgba(255,77,125,.55)';ctx.shadowBlur=r.m?14:10;ctx.fillStyle=r.m?'#4a2a17':'#3a2340';rr(rx-sz/2,ry-sz/2,sz,sz,cell*.22*ra);ctx.fill();ctx.shadowBlur=0;
+    ctx.strokeStyle=r.m?'rgba(255,159,67,.95)':'rgba(255,77,125,.75)';ctx.lineWidth=1.5;ctx.stroke();ctx.fillStyle='rgba(255,255,255,.14)';ctx.fillRect(rx-sz*.3,ry-sz*.3,sz*.25,sz*.12);
+    if(r.m){ctx.fillStyle='#ffb366';ctx.beginPath();ctx.arc(rx+r.dx*sz*.26,ry+r.dy*sz*.26,cell*.09,0,7);ctx.fill()}
   }
   if(fruit){
     const cx=(fruit.x+.5)*cell,cy=(fruit.y+.5)*cell,b=1+Math.sin(t/220)*.07,ap=Math.min(1,(t-fruit.born)/220);
@@ -245,15 +259,25 @@ function draw(t){
     if(i>0){const n=snake[i-1];if(Math.abs(n.x-s.x)+Math.abs(n.y-s.y)===1){
       if(n.y===s.y)ctx.fillRect((Math.min(s.x,n.x)+.5)*cell,s.y*cell+p,cell,cell-2*p);
       else ctx.fillRect(s.x*cell+p,(Math.min(s.y,n.y)+.5)*cell,cell-2*p,cell)}}
-    if(i===0){ctx.shadowColor=blink?'rgba(255,77,109,.8)':'rgba(46,242,160,.75)';ctx.shadowBlur=16}
+    if(i===0){
+      const pl=1+Math.sin(t/180)*.05,hs=cell*1.08*pl,hcx=(s.x+.5)*cell,hcy=(s.y+.5)*cell;
+      ctx.fillStyle=blink?'rgba(255,77,109,.2)':'rgba(46,242,160,.18)';ctx.beginPath();ctx.arc(hcx,hcy,cell*(.95+Math.sin(t/180)*.08),0,7);ctx.fill();
+      ctx.shadowColor=blink?'rgba(255,77,109,.9)':'rgba(46,242,160,.95)';ctx.shadowBlur=24;ctx.fillStyle=blink?'#ff4d6d':'#8dffd0';
+      rr(hcx-hs/2,hcy-hs/2,hs,hs,hs*.38);ctx.fill();ctx.shadowBlur=0;ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();continue;
+    }
     rr(s.x*cell+p,s.y*cell+p,cell-2*p,cell-2*p,cell*.32);ctx.fill();ctx.shadowBlur=0;
   }
   if(L){
     const h=snake[0],cx=(h.x+.5)*cell,cy=(h.y+.5)*cell,px=-dir.y,py=dir.x;
+    if(!dead&&Math.sin(t/140)>0){
+      const tx=cx+dir.x*cell*.55,ty=cy+dir.y*cell*.55,fx=cx+dir.x*cell*.85,fy=cy+dir.y*cell*.85;
+      ctx.strokeStyle='#ff4d7d';ctx.lineWidth=2;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(fx,fy);
+      ctx.lineTo(fx+dir.x*cell*.1+px*cell*.1,fy+dir.y*cell*.1+py*cell*.1);ctx.moveTo(fx,fy);ctx.lineTo(fx+dir.x*cell*.1-px*cell*.1,fy+dir.y*cell*.1-py*cell*.1);ctx.stroke();
+    }
     for(const sd of[-1,1]){
       const ex=cx+dir.x*cell*.14+px*sd*cell*.2,ey=cy+dir.y*cell*.14+py*sd*cell*.2;
-      ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(ex,ey,cell*.13,0,7);ctx.fill();
-      ctx.fillStyle='#07131a';ctx.beginPath();ctx.arc(ex+dir.x*cell*.04,ey+dir.y*cell*.04,dead?cell*.03:cell*.066,0,7);ctx.fill();
+      ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(ex,ey,cell*.16,0,7);ctx.fill();
+      ctx.fillStyle='#07131a';ctx.beginPath();ctx.arc(ex+dir.x*cell*.05,ey+dir.y*cell*.05,dead?cell*.035:cell*.085,0,7);ctx.fill();
     }
   }
   parts=parts.filter(q=>q.life>0);
@@ -271,7 +295,7 @@ async function countdown(){
 }
 function showOverlay(kind,rec){
   const b=$('#ovBox');
-  if(kind==='start')b.innerHTML=`<div class="big-emo">🐍</div><h2>Prêt à croquer ?</h2><p>Tous les 5 fruits, tu passes au niveau suivant : ça accélère et des rochers apparaissent ! ⭐ 50 pts, 🍄 ralentit, 💎 100 pts.</p><button class="btn" data-act="start">▶ Jouer</button>`;
+  if(kind==='start')b.innerHTML=`<div class="big-emo">🐍</div><h2>Prêt à croquer ?</h2><p>Tous les 5 fruits, tu passes au niveau suivant : ça accélère et des rochers apparaissent, dès le niveau 5 certains bougent ! ⭐ 50 pts, 🍄 ralentit, 💎 100 pts.</p><button class="btn" data-act="start">▶ Jouer</button>`;
   else if(kind==='pause')b.innerHTML=`<div class="big-emo">⏸️</div><h2>Pause</h2><p>Ton serpent t'attend sagement.</p><button class="btn" data-act="resume">▶ Reprendre</button><button class="btn ghost" data-act="start">↻ Recommencer</button>`;
   else b.innerHTML=`${rec?'<div class="rec">🏆 Nouveau record !</div>':'<div class="big-emo">💥</div>'}<h2>${esc(cause)}</h2><div class="final">${score}</div><p>Niveau ${level} · Record : ${best} · ${eaten} fruit${eaten>1?'s':''} mangé${eaten>1?'s':''}</p><button class="btn" data-act="start">↻ Rejouer</button>${!usedContinue&&score>0?'<button class="btn ad" data-act="continue">🎬 Continuer avec une vidéo</button>':''}<button class="btn ghost" data-act="rank">Voir le classement</button>`;
   $('#ov').classList.add('show');
@@ -280,7 +304,7 @@ const hideOverlay=()=>$('#ov').classList.remove('show');
 function setPauseBtn(){$('#pauseBtn').classList.toggle('on',running&&!paused&&!busy)}
 async function startGame(){
   if(busy)return;busy=true;hideOverlay();dead=false;running=false;paused=false;
-  rocks=[];level=1;slowUntil=0;spawnSnake(4);score=0;eaten=0;stepMs=165;usedContinue=false;parts=[];placeFruit(true);setScore();games++;setPauseBtn();
+  rocks=[];level=1;slowUntil=0;tick=0;spawnSnake(4);score=0;eaten=0;stepMs=165;usedContinue=false;parts=[];placeFruit(true);setScore();games++;setPauseBtn();
   await countdown();acc=0;running=true;busy=false;setPauseBtn();
 }
 async function continueGame(btn){
