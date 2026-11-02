@@ -26,7 +26,7 @@ a{display:inline-block;margin-top:24px;padding:12px 20px;border-radius:14px;back
 <script>
 try { var tw = Telegram.WebApp; tw.ready(); tw.expand(); tw.setHeaderColor('#0b0a14'); tw.setBackgroundColor('#0b0a14'); } catch (e) {}
 var l = ((window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.user && Telegram.WebApp.initDataUnsafe.user.language_code) || navigator.language || 'en').slice(0, 2);
-if (l !== 'fr') { document.documentElement.lang = 'en'; document.getElementById('t').textContent = 'A big update is coming!'; document.getElementById('p').textContent = 'SayApp is back in a little while with lots of new features. Your apps and bots keep running normally.'; document.getElementById('l').innerHTML = '<li>🌍 A directory of members\'s apps</li><li>↩️ Undo a change</li><li>🖼️ Logo and welcome image for your bot</li><li>🗣️ 5 new languages</li>'; document.getElementById('a').textContent = 'A question? Write to us'; }
+if (l !== 'fr') { document.documentElement.lang = 'en'; document.getElementById('t').textContent = 'A big update is coming!'; document.getElementById('p').textContent = 'SayApp is back in a little while with lots of new features. Your apps and bots keep running normally.'; document.getElementById('l').innerHTML = '<li>🌍 The directory of members\' apps</li><li>↩️ Undo a change</li><li>🖼️ Logo and welcome image for your bot</li><li>🗣️ 5 new languages</li>'; document.getElementById('a').textContent = 'A question? Write to us'; }
 document.getElementById('a').onclick = function (e) { try { Telegram.WebApp.openTelegramLink(this.href); e.preventDefault(); } catch (x) {} };
 </script>
 </body>
