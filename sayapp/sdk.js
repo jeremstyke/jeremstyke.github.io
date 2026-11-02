@@ -43,6 +43,15 @@
     game: function (a, d) { var b = { action: 'g_' + a }; if (d) for (var k in d) b[k] = d[k]; return call(b); },
     // 2 nov 2026 (18h37, Jeremy): await SayApp.ad() plays a rewarded video of the owner's own ad network; true if watched
     // 2 nov 2026 (19h45, Jeremy): await SayApp.hasAd() is true when the owner saved an ad code (so a "Watch an ad" button can show only then)
+    // 2 nov 2026 (20h06, Jeremy): await SayApp.buy(item, title, stars) opens a Telegram Stars payment (Pro apps on their own bot), true once paid;
+    // await SayApp.purchases() lists what this player bought [{item, stars, at}]
+    buy: function (item, title, stars) {
+      return call({ action: 'buy', item: item, title: title, stars: stars }).then(function (r) {
+        if (!r || !r.ok) { try { tw.showAlert(r && r.error === 'pro' ? (fr ? 'Les achats seront disponibles quand cette appli sera lancée sur son bot.' : 'Purchases will be available once this app is launched on its bot.') : (fr ? 'Paiement indisponible, réessaie.' : 'Payment unavailable, try again.')); } catch (e) {} return false; }
+        return new Promise(function (ok) { try { tw.openInvoice(r.link, function (st) { if (st === 'paid') { try { tw.HapticFeedback.notificationOccurred('success'); } catch (e) {} } ok(st === 'paid'); }); } catch (e) { ok(false); } });
+      });
+    },
+    purchases: function () { return call({ action: 'purchases' }).then(function (r) { return (r && r.ok && r.rows) || []; }); },
     hasAd: function () { return (adsReady || Promise.resolve()).then(function () { return !!(ADS && (ADS.ag || ADS.agx)); }); },
     ad: function () { return (adsReady || Promise.resolve()).then(function () { return playAd(ADS && ADS.ag); }); },
     haptic: function (k) {
