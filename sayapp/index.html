@@ -92,6 +92,12 @@ textarea::placeholder{color:var(--dim)}
 .tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;justify-content:center;gap:6px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(7,7,13,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid var(--line)}
 .tabs button{flex:1;max-width:220px;padding:11px;border-radius:14px;font-weight:600;color:var(--mute);display:flex;align-items:center;justify-content:center;gap:7px}
 .tabs button.on{background:var(--card2);color:var(--fg)}
+/* 2 nov 2026 (16h56, Jeremy): Support tab */
+.sup{display:flex;flex-direction:column;gap:10px;padding-bottom:150px}.suph{display:flex;gap:12px;align-items:center;padding:14px;border-radius:18px;background:var(--card);border:1px solid var(--line);margin-bottom:6px}.suph b{flex:0 0 40px;height:40px;border-radius:13px;display:grid;place-items:center;background:var(--grad);font-size:18px;color:#fff}.suph div{min-width:0}.suph strong{display:block;font:700 15px Sora,sans-serif}.suph span{font-size:12.5px;color:var(--mute)}
+.msg{max-width:86%;padding:11px 14px;border-radius:18px;font-size:14.5px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere}.msg.u{align-self:flex-end;background:var(--grad);color:#fff;border-bottom-right-radius:6px}.msg.a{align-self:flex-start;background:var(--card2);border:1px solid var(--line);border-bottom-left-radius:6px}.msg.j{align-self:flex-start;background:rgba(62,224,143,.12);border:1px solid rgba(62,224,143,.35);border-bottom-left-radius:6px}.msg small{display:block;font-size:11px;color:var(--mute);margin-bottom:3px;font-weight:600}.msg.dots{color:var(--mute)}
+.sqs{display:flex;flex-wrap:wrap;gap:8px}.sqs button{font-size:13px;padding:9px 12px;border-radius:99px;background:var(--card);border:1px solid var(--line);color:#dcdaf5;text-align:left}
+.sbar{position:fixed;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom,0px));z-index:5;padding:8px max(16px,env(safe-area-inset-left,0px)) 8px max(16px,env(safe-area-inset-right,0px));background:rgba(7,7,13,.9);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}.sbar div{max-width:620px;margin:0 auto;display:flex;gap:8px;align-items:flex-end}.sbar textarea{flex:1;min-width:0;min-height:44px;max-height:120px;resize:none;padding:12px 14px;border-radius:16px;background:var(--card2);border:1px solid var(--line);color:var(--fg);font:15px Inter,sans-serif}.sbar button{flex:0 0 44px;height:44px;border-radius:14px;background:var(--grad);color:#fff;font-size:18px}
+.tabs button{white-space:nowrap;padding:11px 8px;gap:6px;font-size:14px}
 .badge{min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--grad);color:#fff;font-size:11px;display:inline-grid;place-items:center}
 /* building overlay */
 .ov{position:fixed;inset:0;z-index:20;background:rgba(5,5,10,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px max(20px,env(safe-area-inset-left,0px));text-align:center}
@@ -191,11 +197,13 @@ input.tk:focus{border-color:var(--v)}
   </section>
 
   <section id="vApps" hidden><div class="apps" id="apps"></div></section>
+  <section id="vSup" hidden><div class="sup" id="sup"></div><div class="sbar" id="sbar"><div><textarea id="sIn" rows="1" maxlength="1000"></textarea><button id="sGo">↑</button></div></div></section>
 </div>
 
 <nav class="tabs" id="tabs" hidden>
   <button id="tCreate" class="on">✦ <span data-t="tCreate"></span></button>
   <button id="tApps">▦ <span data-t="tApps"></span> <span class="badge" id="nApps" hidden></span></button>
+  <button id="tSup">💬 <span data-t="tSup"></span></button>
 </nav>
 
 <div class="ov" id="ov" hidden>
@@ -238,7 +246,7 @@ input.tk:focus{border-color:var(--v)}
       ],
       wNext: 'Continuer', wSkip: 'Passer', wStep: function (i, n) { return i + '/' + n; }, wLastQ: 'Ton appli', wLastS: 'Donne-lui un nom, une couleur, et raconte ton idée en une phrase.', wPh: 'Ton idée : ex. un quiz sur l\'OL, 10 questions de plus en plus dures', xName: 'Nom de l\'appli (facultatif)', xDesc: 'Description courte (facultatif)', xCol: 'Couleur principale', xAuto: 'Auto',
       mtT: '✏️ Nom et description', mtP: 'Gratuit : change le nom et la description affichés sur ton bot.', mtSave: 'Enregistrer', mtOk: 'Enregistré ✅',
-      tos: 'En créant une appli, tu acceptes les <a href="#" id="tosL">conditions d\'utilisation</a>.', banned: 'Ton compte est suspendu. Écris à t.me/jeremstyke si c\'est une erreur.', lang: 'Dans ta langue', go: '✦ Construire mon appli', tCreate: 'Créer', tApps: 'Mes applis',
+      tos: 'En créant une appli, tu acceptes les <a href="#" id="tosL">conditions d\'utilisation</a>.', banned: 'Ton compte est suspendu. Écris à t.me/jeremstyke si c\'est une erreur.', lang: 'Dans ta langue', go: '✦ Construire mon appli', tCreate: 'Créer', tApps: 'Mes applis', tSup: 'Support', supT: 'Support SayApp', supS: 'Réponse immédiate, 24 h/24. Jeremy prend le relais si besoin.', supHi: 'Salut ! Pose-moi ta question sur SayApp : créer une appli, la modifier, la lancer sur ton bot, les paiements...', supPh: 'Écris ta question...', supQ: ['Comment lancer mon appli sur mon bot ?', 'Mon appli a un bug', 'Quelle formule choisir ?', 'Comment annuler mon abonnement ?'], supAi: 'SayApp', supJ: 'Jeremy, fondateur', supHum: 'Transmis à Jeremy ✓', supLim: 'Beaucoup de questions aujourd\'hui. Reviens demain ou écris à t.me/jeremstyke?direct.',
       chips: [['⚽ Quiz foot', 'Un quiz foot de 10 questions avec un chrono, un score et un classement des joueurs, aux couleurs vert et blanc'], ['🍕 Menu de resto', 'Le menu de ma pizzeria avec des photos en emoji, les prix, un panier et un formulaire de commande envoyé au patron'], ['🪙 Jeu de tap', 'Un jeu où l\'on tape sur une pièce pour gagner des points, avec des améliorations, une récompense quotidienne et un classement'], ['📅 Réservation', 'Une appli de prise de rendez-vous pour mon salon de coiffure : choix du service, du jour et de l\'heure, envoi de la demande'], ['🎯 Sondage', 'Un sondage de 5 questions pour ma communauté avec les résultats en direct'], ['🧠 Personnalité', 'Un test de personnalité « Quel animal es-tu ? » avec 8 questions et un résultat à partager']],
       howT: 'Comment ça marche', how: [['💬', 'Décris ton idée', 'En une phrase, comme à un ami.'], ['⚡', 'Démo en 2 minutes', 'Ton appli est construite et mise en ligne, on héberge tout pour toi.'], ['✏️', 'Ajuste-la', 'Couleurs, textes, fonctions : demande, c\'est fait.'], ['🚀', 'Lance-la sur ton bot', 'Ton appli, ton nom, tes utilisateurs.']],
       byT: 'Par le créateur de', free: 'Gratuit', pro: '⭐ Pro',
@@ -286,7 +294,7 @@ input.tk:focus{border-color:var(--v)}
       ],
       wNext: 'Continue', wSkip: 'Skip', wStep: function (i, n) { return i + '/' + n; }, wLastQ: 'Your app', wLastS: 'Give it a name, a color, and tell your idea in one sentence.', wPh: 'Your idea: e.g. a football quiz, 10 questions getting harder', xName: 'App name (optional)', xDesc: 'Short description (optional)', xCol: 'Main color', xAuto: 'Auto',
       mtT: '✏️ Name and description', mtP: 'Free: change the name and the description shown on your bot.', mtSave: 'Save', mtOk: 'Saved ✅',
-      tos: 'By building an app, you accept the <a href="#" id="tosL">terms of use</a>.', banned: 'Your account is suspended. Write to t.me/jeremstyke if this is a mistake.', lang: 'In your language', go: '✦ Build my app', tCreate: 'Create', tApps: 'My apps',
+      tos: 'By building an app, you accept the <a href="#" id="tosL">terms of use</a>.', banned: 'Your account is suspended. Write to t.me/jeremstyke if this is a mistake.', lang: 'In your language', go: '✦ Build my app', tCreate: 'Create', tApps: 'My apps', tSup: 'Support', supT: 'SayApp support', supS: 'Instant answers, 24/7. Jeremy takes over when needed.', supHi: 'Hi! Ask me anything about SayApp: building an app, changing it, launching it on your bot, payments...', supPh: 'Type your question...', supQ: ['How do I launch my app on my bot?', 'My app has a bug', 'Which plan should I pick?', 'How do I cancel my subscription?'], supAi: 'SayApp', supJ: 'Jeremy, founder', supHum: 'Sent to Jeremy ✓', supLim: 'Lots of questions today. Come back tomorrow or write to t.me/jeremstyke?direct.',
       chips: [['⚽ Football quiz', 'A football quiz with 10 questions, a timer, a score and a player leaderboard, in green and white'], ['🍕 Restaurant menu', 'The menu of my pizzeria with emoji pictures, prices, a cart and an order form sent to the owner'], ['🪙 Tap game', 'A game where you tap a coin to earn points, with upgrades, a daily reward and a leaderboard'], ['📅 Booking', 'A booking app for my hair salon: pick a service, a day and a time, then send the request'], ['🎯 Poll', 'A 5-question poll for my community with live results'], ['🧠 Personality', 'A "Which animal are you?" personality test with 8 questions and a shareable result']],
       howT: 'How it works', how: [['💬', 'Describe your idea', 'In one sentence, like to a friend.'], ['⚡', 'Live demo in 2 minutes', 'Your app is built and put online, we host everything for you.'], ['✏️', 'Tweak it', 'Colors, texts, features: just ask.'], ['🚀', 'Launch it on your bot', 'Your app, your name, your users.']],
       byT: 'By the creator of', free: 'Free', pro: '⭐ Pro',
@@ -435,12 +443,40 @@ input.tk:focus{border-color:var(--v)}
 
   // ---------- tabs ----------
   function tab(w) {
-    $('vCreate').hidden = w !== 'create'; $('vApps').hidden = w !== 'apps';
-    $('tCreate').classList.toggle('on', w === 'create'); $('tApps').classList.toggle('on', w === 'apps');
+    $('vCreate').hidden = w !== 'create'; $('vApps').hidden = w !== 'apps'; $('vSup').hidden = w !== 'sup';
+    $('tCreate').classList.toggle('on', w === 'create'); $('tApps').classList.toggle('on', w === 'apps'); $('tSup').classList.toggle('on', w === 'sup');
     window.scrollTo(0, 0);
   }
   $('tCreate').onclick = function () { hap(); tab('create'); };
   $('tApps').onclick = function () { hap(); tab('apps'); paintApps(); };
+  // 2 nov 2026 (16h56, Jeremy): Support tab, answered by the AI, Jeremy takes over
+  var SUP = { rows: null, wait: false };
+  function supPaint() {
+    var h = '<div class="suph"><b>💬</b><div><strong>' + esc(T.supT) + '</strong><span>' + esc(T.supS) + '</span></div></div>';
+    h += '<div class="msg a"><small>' + esc(T.supAi) + '</small>' + esc(T.supHi) + '</div>';
+    (SUP.rows || []).forEach(function (m) { h += m.role === 'user' ? '<div class="msg u">' + esc(m.text) + '</div>' : '<div class="msg ' + (m.role === 'jeremy' ? 'j' : 'a') + '"><small>' + esc(m.role === 'jeremy' ? T.supJ : T.supAi) + '</small>' + esc(m.text) + (m.human ? '<small style="margin:6px 0 0">' + esc(T.supHum) + '</small>' : '') + '</div>'; });
+    if (SUP.wait) h += '<div class="msg a dots">…</div>';
+    if (!(SUP.rows || []).length && !SUP.wait) h += '<div class="sqs">' + T.supQ.map(function (q, k) { return '<button data-k="' + k + '">' + esc(q) + '</button>'; }).join('') + '</div>';
+    $('sup').innerHTML = h;
+    $('sup').querySelectorAll('.sqs button').forEach(function (b) { b.onclick = function () { supSend(T.supQ[+b.getAttribute('data-k')]); }; });
+    setTimeout(function () { window.scrollTo(0, document.body.scrollHeight); }, 30);
+  }
+  function supOpen() { tab('sup'); $('sbar').style.bottom = $('tabs').offsetHeight + 'px'; supPaint(); call('support').then(function (r) { if (r.ok) { SUP.rows = r.rows; supPaint(); } }); }
+  function supSend(q) {
+    q = String(q || '').trim(); if (q.length < 2 || SUP.wait) return;
+    hap(); SUP.rows = (SUP.rows || []).concat([{ role: 'user', text: q }]); SUP.wait = true; $('sIn').value = ''; $('sIn').style.height = ''; supPaint();
+    call('ask', { text: q }).then(function (r) {
+      SUP.wait = false;
+      if (r.ok) { hap('ok'); SUP.rows.push({ role: 'ai', text: r.answer, human: r.human }); }
+      else if (r.error === 'supLimit') SUP.rows.push({ role: 'ai', text: T.supLim });
+      else { SUP.rows.pop(); $('sIn').value = q; fail(r); }
+      supPaint();
+    });
+  }
+  $('sIn').placeholder = T.supPh;
+  $('sIn').oninput = function () { this.style.height = ''; this.style.height = Math.min(120, this.scrollHeight) + 'px'; };
+  $('sGo').onclick = function () { supSend($('sIn').value); };
+  $('tSup').onclick = function () { hap(); supOpen(); };
 
   // ---------- apps view ----------
   function status(a) {
@@ -717,6 +753,7 @@ input.tk:focus{border-color:var(--v)}
     var open = q.get('open') || (sp.indexOf('app_') === 0 ? sp.slice(4) : '');
     var gen = S.apps.filter(function (a) { return a.status === 'generating'; })[0];
     if (gen) return startBuild(gen.id, gen.version > 0);
+    if (q.get('tab') === 'support' || sp === 'support') return supOpen();
     if (open) { var a = S.apps.filter(function (x) { return x.id === open; })[0]; if (a) { tab('apps'); if (sub(a) && !a.bot_username) tokenSheet(a); else if (q.get('renew') && a.bot_username) manageSheet(a); } }
   });
 })();
