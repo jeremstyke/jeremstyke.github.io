@@ -1,4 +1,4 @@
-<!-- sayapp 4v2t3sra v1 -->
+<!-- sayapp 4v2t3sra v2 -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -52,6 +52,8 @@ section.active{display:block}
 .btn:disabled{opacity:.6}
 #cd{position:absolute;inset:0;display:grid;place-items:center;font-size:96px;font-weight:800;color:var(--main);text-shadow:0 0 40px rgba(46,242,160,.7);pointer-events:none}
 .pop{animation:pop .55s ease forwards}
+#lv{position:absolute;left:0;right:0;top:36%;text-align:center;font-size:30px;font-weight:800;color:var(--gold);text-shadow:0 0 30px rgba(255,201,60,.7);pointer-events:none;opacity:0}
+#lv.pop{animation-duration:1.3s}
 @keyframes pop{0%{opacity:0;transform:scale(1.8)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.7)}}
 .float{position:absolute;font-weight:800;font-size:18px;color:var(--main);text-shadow:0 2px 10px rgba(46,242,160,.6);pointer-events:none;transform:translate(-50%,-50%);animation:up .8s ease-out forwards}
 .float.g{color:var(--gold);font-size:22px;text-shadow:0 2px 12px rgba(255,201,60,.7)}
@@ -98,9 +100,9 @@ footer{text-align:center;font-size:11px;color:#4d5875;margin-top:20px;letter-spa
     <div class="stats">
       <div class="stat hl"><div class="lbl">Score</div><div class="val" id="scoreV">0</div></div>
       <div class="stat"><div class="lbl">Record</div><div class="val" id="bestV">0</div></div>
-      <div class="stat"><div class="lbl">Fruits</div><div class="val" id="fruitV">0</div></div>
+      <div class="stat"><div class="lbl">Niveau</div><div class="val" id="lvlV">1</div></div>
     </div>
-    <div id="boardWrap"><canvas id="cv"></canvas><div id="cd"></div><div id="ov"><div class="box" id="ovBox"></div></div></div>
+    <div id="boardWrap"><canvas id="cv"></canvas><div id="cd"></div><div id="lv"></div><div id="ov"><div class="box" id="ovBox"></div></div></div>
     <div class="bar" id="bar"><button class="chip" id="wallsBtn">🌀 Murs traversables</button><span class="hint">Swipe pour tourner</span></div>
     <div class="pad" id="pad">
       <button data-d="l" aria-label="Gauche"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -132,6 +134,7 @@ let cv=$('#cv'),ctx=cv.getContext('2d'),size=300,cell=20;
 let snake=[],dir={x:1,y:0},queue=[],fruit=null,score=0,shown=0,eaten=0,stepMs=150,acc=0,last=0;
 let running=false,paused=false,busy=false,usedContinue=false,dead=false,deadAt=0,cause='';
 let best=0,games=0,totalFruits=0,walls=false,parts=[],toastT;
+let rocks=[],level=1,slowUntil=0;
 const hap=k=>{try{SA.haptic(k)}catch(e){}};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -150,10 +153,29 @@ function resize(){
 }
 function spawnSnake(len){const y=Math.floor(N/2);snake=[];for(let i=0;i<len;i++)snake.push({x:Math.floor(N/2)+1-i,y});dir={x:1,y:0};queue=[]}
 function placeFruit(noGold){
-  const free=[];for(let x=0;x<N;x++)for(let y=0;y<N;y++)if(!snake.some(s=>s.x===x&&s.y===y))free.push({x,y});
+  const free=[];for(let x=0;x<N;x++)for(let y=0;y<N;y++)if(!snake.some(s=>s.x===x&&s.y===y)&&!rocks.some(r=>r.x===x&&r.y===y))free.push({x,y});
   if(!free.length){fruit=null;return}
-  const p=free[Math.random()*free.length|0],gold=!noGold&&eaten>2&&Math.random()<.16,now=performance.now();
-  fruit={x:p.x,y:p.y,e:gold?'⭐':FRUITS[Math.random()*FRUITS.length|0],gold,until:gold?now+6000:0,born:now};
+  const p=free[Math.random()*free.length|0],now=performance.now(),r=Math.random();
+  let f={e:FRUITS[Math.random()*FRUITS.length|0],pts:10+(level-1)*5,kind:'n',dur:0};
+  if(!noGold&&eaten>2){
+    if(level>=3&&r<.07)f={e:'💎',pts:100,kind:'gem',dur:5000};
+    else if(r<.2)f={e:'⭐',pts:50,kind:'gold',dur:6000};
+    else if(level>=2&&r<.32)f={e:'🍄',pts:20,kind:'slow',dur:7000};
+  }
+  fruit={x:p.x,y:p.y,e:f.e,pts:f.pts,kind:f.kind,dur:f.dur,gold:f.kind!=='n',until:now+f.dur,born:now};
+}
+function addRocks(n){
+  const h=snake[0],now=performance.now(),free=[];
+  for(let x=0;x<N;x++)for(let y=0;y<N;y++){
+    if(Math.abs(x-h.x)+Math.abs(y-h.y)<4)continue;
+    if(snake.some(s=>s.x===x&&s.y===y)||rocks.some(r=>r.x===x&&r.y===y))continue;
+    free.push({x,y});
+  }
+  for(let i=0;i<n&&free.length&&rocks.length<30;i++){const c=free.splice(Math.random()*free.length|0,1)[0];rocks.push({x:c.x,y:c.y,born:now})}
+}
+function levelUp(){
+  level++;addRocks(Math.min(3,1+Math.floor(level/2)));
+  const l=$('#lv');l.textContent='⚡ Niveau '+level;l.classList.remove('pop');void l.offsetWidth;l.classList.add('pop');hap('ok');
 }
 function setDir(dx,dy){
   if(!running||paused)return;
@@ -165,13 +187,16 @@ function step(now){
   if(queue.length)dir=queue.shift();
   const h={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
   if(h.x<0||h.y<0||h.x>=N||h.y>=N){if(walls)return die('Aïe, tu as foncé dans le mur !');h.x=(h.x+N)%N;h.y=(h.y+N)%N}
+  if(rocks.some(r=>r.x===h.x&&r.y===h.y))return die('Boum, un rocher sur ton chemin !');
   const grow=fruit&&h.x===fruit.x&&h.y===fruit.y,body=grow?snake:snake.slice(0,-1);
   if(body.some(s=>s.x===h.x&&s.y===h.y))return die('Tu t\'es mordu la queue !');
   snake.unshift(h);
   if(grow){
-    const pts=fruit.gold?50:10;score+=pts;eaten++;totalFruits++;
+    const pts=fruit.pts;score+=pts;eaten++;totalFruits++;
     burst(h.x,h.y,fruit.gold);floatTxt(h.x,h.y,'+'+pts,fruit.gold);hap(fruit.gold?'ok':'tap');
-    stepMs=Math.max(68,150-eaten*2.6);setScore();placeFruit();
+    if(fruit.kind==='slow'){slowUntil=now+5000;toast('🍄 Ralenti pendant 5 secondes')}
+    if(eaten%5===0)levelUp();
+    stepMs=Math.max(58,165-(level-1)*13-(eaten%5)*2);setScore();placeFruit();
   }else snake.pop();
   if(fruit&&fruit.gold&&now>fruit.until)placeFruit(true);
 }
@@ -186,7 +211,7 @@ function setScore(){
   const from=shown,to=score,t0=performance.now(),el=$('#scoreV');shown=to;
   (function f(t){const k=Math.min(1,(t-t0)/250);el.textContent=Math.round(from+(to-from)*k);if(k<1)requestAnimationFrame(f)})(t0);
   const p=el.parentElement;p.classList.remove('bump');void p.offsetWidth;p.classList.add('bump');
-  $('#fruitV').textContent=eaten;
+  $('#lvlV').textContent=level;
 }
 function burst(x,y,gold){
   const cx=(x+.5)*cell,cy=(y+.5)*cell,cols=gold?['#ffc93c','#fff1b8','#ffad33']:['#2ef2a0','#ff4d7d','#9dffd6','#ffd166'];
@@ -201,11 +226,16 @@ function draw(t){
   ctx.clearRect(0,0,size,size);
   ctx.fillStyle='rgba(255,255,255,.024)';
   for(let x=0;x<N;x++)for(let y=0;y<N;y++)if((x+y)%2)ctx.fillRect(x*cell,y*cell,cell,cell);
+  for(const r of rocks){
+    const ra=Math.max(.05,Math.min(1,(t-r.born)/300)),rx=(r.x+.5)*cell,ry=(r.y+.5)*cell,sz=cell*.84*ra;
+    ctx.shadowColor='rgba(255,77,125,.55)';ctx.shadowBlur=10;ctx.fillStyle='#3a2340';rr(rx-sz/2,ry-sz/2,sz,sz,cell*.22*ra);ctx.fill();ctx.shadowBlur=0;
+    ctx.strokeStyle='rgba(255,77,125,.75)';ctx.lineWidth=1.5;ctx.stroke();ctx.fillStyle='rgba(255,255,255,.14)';ctx.fillRect(rx-sz*.3,ry-sz*.3,sz*.25,sz*.12);
+  }
   if(fruit){
     const cx=(fruit.x+.5)*cell,cy=(fruit.y+.5)*cell,b=1+Math.sin(t/220)*.07,ap=Math.min(1,(t-fruit.born)/220);
-    const g=ctx.createRadialGradient(cx,cy,0,cx,cy,cell);g.addColorStop(0,fruit.gold?'rgba(255,201,60,.55)':'rgba(255,77,125,.35)');g.addColorStop(1,'rgba(0,0,0,0)');
+    const g=ctx.createRadialGradient(cx,cy,0,cx,cy,cell);g.addColorStop(0,fruit.kind==='slow'?'rgba(160,110,255,.55)':fruit.kind==='gem'?'rgba(90,200,255,.6)':fruit.gold?'rgba(255,201,60,.55)':'rgba(255,77,125,.35)');g.addColorStop(1,'rgba(0,0,0,0)');
     ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,cell,0,7);ctx.fill();
-    if(fruit.gold){const k=Math.max(0,(fruit.until-t)/6000);ctx.strokeStyle='rgba(255,201,60,.9)';ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,cell*.62,-Math.PI/2,-Math.PI/2+k*Math.PI*2);ctx.stroke()}
+    if(fruit.gold){const k=Math.max(0,(fruit.until-t)/fruit.dur);ctx.strokeStyle='rgba(255,201,60,.9)';ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,cell*.62,-Math.PI/2,-Math.PI/2+k*Math.PI*2);ctx.stroke()}
     ctx.save();ctx.translate(cx,cy);ctx.scale(b*ap,b*ap);ctx.font=(cell*.78)+'px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(fruit.e,0,cell*.05);ctx.restore();
   }
   const L=snake.length,p=cell*.1,blink=dead&&t-deadAt<720&&Math.floor((t-deadAt)/120)%2===0;
@@ -231,7 +261,7 @@ function draw(t){
   ctx.globalAlpha=1;
 }
 function loop(t){
-  if(running&&!paused){acc+=t-last;if(acc>500)acc=500;while(acc>=stepMs&&running){acc-=stepMs;step(t)}}
+  if(running&&!paused){acc+=t-last;if(acc>500)acc=500;const sp=t<slowUntil?stepMs*1.6:stepMs;while(acc>=sp&&running){acc-=sp;step(t)}}
   last=t;draw(t);requestAnimationFrame(loop);
 }
 async function countdown(){
@@ -241,23 +271,24 @@ async function countdown(){
 }
 function showOverlay(kind,rec){
   const b=$('#ovBox');
-  if(kind==='start')b.innerHTML=`<div class="big-emo">🐍</div><h2>Prêt à croquer ?</h2><p>Mange un max de fruits sans te mordre la queue. Le ⭐ vaut 50 points mais disparaît vite !</p><button class="btn" data-act="start">▶ Jouer</button>`;
+  if(kind==='start')b.innerHTML=`<div class="big-emo">🐍</div><h2>Prêt à croquer ?</h2><p>Tous les 5 fruits, tu passes au niveau suivant : ça accélère et des rochers apparaissent ! ⭐ 50 pts, 🍄 ralentit, 💎 100 pts.</p><button class="btn" data-act="start">▶ Jouer</button>`;
   else if(kind==='pause')b.innerHTML=`<div class="big-emo">⏸️</div><h2>Pause</h2><p>Ton serpent t'attend sagement.</p><button class="btn" data-act="resume">▶ Reprendre</button><button class="btn ghost" data-act="start">↻ Recommencer</button>`;
-  else b.innerHTML=`${rec?'<div class="rec">🏆 Nouveau record !</div>':'<div class="big-emo">💥</div>'}<h2>${esc(cause)}</h2><div class="final">${score}</div><p>Record : ${best} · ${eaten} fruit${eaten>1?'s':''} mangé${eaten>1?'s':''}</p><button class="btn" data-act="start">↻ Rejouer</button>${!usedContinue&&score>0?'<button class="btn ad" data-act="continue">🎬 Continuer avec une vidéo</button>':''}<button class="btn ghost" data-act="rank">Voir le classement</button>`;
+  else b.innerHTML=`${rec?'<div class="rec">🏆 Nouveau record !</div>':'<div class="big-emo">💥</div>'}<h2>${esc(cause)}</h2><div class="final">${score}</div><p>Niveau ${level} · Record : ${best} · ${eaten} fruit${eaten>1?'s':''} mangé${eaten>1?'s':''}</p><button class="btn" data-act="start">↻ Rejouer</button>${!usedContinue&&score>0?'<button class="btn ad" data-act="continue">🎬 Continuer avec une vidéo</button>':''}<button class="btn ghost" data-act="rank">Voir le classement</button>`;
   $('#ov').classList.add('show');
 }
 const hideOverlay=()=>$('#ov').classList.remove('show');
 function setPauseBtn(){$('#pauseBtn').classList.toggle('on',running&&!paused&&!busy)}
 async function startGame(){
   if(busy)return;busy=true;hideOverlay();dead=false;running=false;paused=false;
-  spawnSnake(4);score=0;eaten=0;stepMs=150;usedContinue=false;parts=[];placeFruit(true);setScore();games++;setPauseBtn();
+  rocks=[];level=1;slowUntil=0;spawnSnake(4);score=0;eaten=0;stepMs=165;usedContinue=false;parts=[];placeFruit(true);setScore();games++;setPauseBtn();
   await countdown();acc=0;running=true;busy=false;setPauseBtn();
 }
 async function continueGame(btn){
   if(busy)return;btn.disabled=true;btn.textContent='Chargement...';
   let ok=false;try{ok=await SA.ad()}catch(e){}
   if(!ok){btn.disabled=false;btn.textContent='🎬 Continuer avec une vidéo';toast('Aucune vidéo disponible pour le moment');return}
-  busy=true;usedContinue=true;hideOverlay();dead=false;spawnSnake(Math.min(snake.length,6));placeFruit(true);
+  busy=true;usedContinue=true;hideOverlay();dead=false;spawnSnake(Math.min(snake.length,6));
+  rocks=rocks.filter(r=>r.y!==Math.floor(N/2));slowUntil=0;placeFruit(true);
   await countdown();acc=0;running=true;busy=false;setPauseBtn();
 }
 function pause(){if(!running||paused||busy)return;paused=true;showOverlay('pause');setPauseBtn()}
