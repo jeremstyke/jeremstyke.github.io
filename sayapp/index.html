@@ -89,6 +89,7 @@ textarea::placeholder{color:var(--dim)}
 .price{flex-wrap:wrap}.price .then{flex-basis:100%;text-align:center;font-style:normal;font-size:14px;font-weight:700;color:#ffd76a;margin-top:2px}
 .tos{margin:12px 0 0;text-align:center;font-size:11.5px;color:var(--dim)}.tos a{color:var(--mute)}
 .abtn button.hl{background:var(--gold);color:#2a1700;border:0}
+.shr{width:100%;margin-top:8px;padding:10px;border-radius:12px;background:transparent;border:1px dashed var(--line);font-size:12.5px;font-weight:600;color:var(--fg)}
 .tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;justify-content:center;gap:6px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(7,7,13,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid var(--line)}
 .tabs button{flex:1;max-width:220px;padding:11px;border-radius:14px;font-weight:600;color:var(--mute);display:flex;align-items:center;justify-content:center;gap:7px}
 .tabs button.on{background:var(--card2);color:var(--fg)}
@@ -223,7 +224,7 @@ input.tk:focus{border-color:var(--v)}
 <div class="sh" id="sh"><div class="grab"></div><div id="shc"></div></div>
 
 <div class="pv" id="pv" hidden>
-  <div class="pvh"><button id="pvX">✕</button><b id="pvT"></b><button id="pvE">✏️</button></div>
+  <div class="pvh"><button id="pvX">✕</button><b id="pvT"></b><button id="pvS">📤</button><button id="pvE">✏️</button></div>
   <iframe id="pvF" allow="clipboard-write"></iframe>
 </div>
 
@@ -265,6 +266,7 @@ input.tk:focus{border-color:var(--v)}
       eT: 'Modification en cours', eP: 'J\'applique tes changements. Environ 2 minutes.',
       bs: ['Analyse de ton idée', 'Design de l\'interface', 'Écriture du code', 'Mise en ligne'],
       okT: 'Ton appli est prête ✨', okP: function (t) { return '« ' + t + ' » est en ligne. Teste-la maintenant.'; },
+      shr: '📤 Partager ma démo', shrT: function (t) { return '▶️ Teste mon appli « ' + t + ' », faite avec SayApp 👇'; },
       try: '▶ Tester mon appli', change: '✏️ Modifier', launch: '🚀 Lancer', later: 'Plus tard',
       rfTry: '✨ Construire avec des points', rfTryP: 'Je peux faire la même appli avec des points virtuels et un classement, sans argent réel.', refT: 'Impossible de construire ça', errT: 'Oups, un problème', errP: 'La construction a échoué. Réessaie dans une minute.', retry: 'Réessayer', close: 'Fermer',
       empty: 'Aucune appli pour l\'instant.', emptyB: '✦ Créer ma première appli',
@@ -316,6 +318,7 @@ input.tk:focus{border-color:var(--v)}
       eT: 'Updating your app', eP: 'Applying your changes. About 2 minutes.',
       bs: ['Understanding your idea', 'Designing the interface', 'Writing the code', 'Going live'],
       okT: 'Your app is ready ✨', okP: function (t) { return '"' + t + '" is live. Try it now.'; },
+      shr: '📤 Share my demo', shrT: function (t) { return '▶️ Try my app "' + t + '", made with SayApp 👇'; },
       try: '▶ Try my app', change: '✏️ Change', launch: '🚀 Launch', later: 'Later',
       rfTry: '✨ Build it with points', rfTryP: 'I can build the same app with virtual points and a leaderboard, no real money.', refT: 'I can not build this', errT: 'Oops, something went wrong', errP: 'The build failed. Please try again in a minute.', retry: 'Try again', close: 'Close',
       empty: 'No app yet.', emptyB: '✦ Build my first app',
@@ -613,7 +616,7 @@ input.tk:focus{border-color:var(--v)}
     box.innerHTML = list.map(function (a) {
       var s = status(a), t = a.title || (a.prompt || '').slice(0, 40) || 'App', live = a.bot_username && sub(a);
       return '<div class="ac" data-id="' + a.id + '"><div class="ah"><div class="ico" style="background:' + col(a.id) + '">' + esc(t.trim().charAt(0).toUpperCase()) + '</div><div class="an"><b>' + esc(t) + '</b><span>' + (a.bot_username ? esc(T.onBot + a.bot_username) : esc((a.prompt || '').slice(0, 80))) + '</span></div><span class="pill ' + s[0] + '">' + esc(s[1]) + '</span></div>' + (a.version && a.status !== 'generating' && a.ideas && a.ideas.length ? '<button class="idea" data-a="idea"><b>' + esc(T.ideaL) + '</b><span>' + esc(a.ideas[new Date().getDate() % a.ideas.length]) + '</span></button>' : '') + (a.version && daysLeft(a) !== null ? '<div class="exp' + (daysLeft(a) === 0 ? ' x' : '') + '">' + esc(daysLeft(a) === 0 ? T.expd : T.left(daysLeft(a))) + '</div>' : '') +
-        (a.status === 'generating' ? '' : '<div class="abtn">' + (a.version ? '<button data-a="try">▶ ' + esc(T.try.replace('▶ ', '').split(' ')[0]) + '</button>' : '<button data-a="retry">' + esc(T.retry) + '</button>') + '<button data-a="edit"' + (a.version ? '' : ' disabled style="opacity:.4"') + '>' + esc(T.change) + '</button>' + (live ? '<button data-a="bot" class="hl">' + esc(T.manage) + '</button>' : '<button data-a="launch" class="hl"' + (a.version ? '' : ' disabled style="opacity:.4"') + '>' + esc(T.launch) + '</button>') + '</div>') + '</div>';
+        (a.status === 'generating' ? '' : '<div class="abtn">' + (a.version ? '<button data-a="try">▶ ' + esc(T.try.replace('▶ ', '').split(' ')[0]) + '</button>' : '<button data-a="retry">' + esc(T.retry) + '</button>') + '<button data-a="edit"' + (a.version ? '' : ' disabled style="opacity:.4"') + '>' + esc(T.change) + '</button>' + (live ? '<button data-a="bot" class="hl">' + esc(T.manage) + '</button>' : '<button data-a="launch" class="hl"' + (a.version ? '' : ' disabled style="opacity:.4"') + '>' + esc(T.launch) + '</button>') + '</div>' + (a.version ? '<button data-a="share" class="shr">' + esc(T.shr) + '</button>' : '')) + '</div>';
     }).join('');
     box.querySelectorAll('.ac').forEach(function (el) {
       var a = S.apps.filter(function (x) { return x.id === el.getAttribute('data-id'); })[0];
@@ -621,7 +624,7 @@ input.tk:focus{border-color:var(--v)}
       el.querySelectorAll('button[data-a]').forEach(function (b) {
         b.onclick = function (ev) {
           ev.stopPropagation(); hap(); var k = b.getAttribute('data-a');
-          if (k === 'try') preview(a); else if (k === 'edit') editSheet(a); else if (k === 'launch') launch(a); else if (k === 'bot') manageSheet(a); else if (k === 'idea') editSheet(a, a.ideas[new Date().getDate() % a.ideas.length]);
+          if (k === 'try') preview(a); else if (k === 'edit') editSheet(a); else if (k === 'launch') launch(a); else if (k === 'bot') manageSheet(a); else if (k === 'idea') editSheet(a, a.ideas[new Date().getDate() % a.ideas.length]); else if (k === 'share') shareDemo(a);
           else if (k === 'retry') { tab('create'); idea.value = a.prompt || ''; idea.oninput(); }
         };
       });
@@ -693,6 +696,13 @@ input.tk:focus{border-color:var(--v)}
     $('pvF').src = PAGES + a.id + '/?v=' + a.version + '&t=' + Date.now();
     $('pv').hidden = false; try { tw.BackButton.show(); } catch (e) {}
   }
+  // 2 nov 2026 (19h39, Jeremy): share a demo: opens inside Telegram through SayApp (startapp=demo_<id>), or the owner's own bot once live
+  function shareDemo(a) {
+    if (!a) return;
+    var u = a.bot_username && sub(a) ? 'https://t.me/' + a.bot_username + '?start=share' : 'https://t.me/SayAppBuilderBot?startapp=demo_' + a.id;
+    link('https://t.me/share/url?url=' + encodeURIComponent(u) + '&text=' + encodeURIComponent(T.shrT(a.title || 'App')));
+  }
+  $('pvS').onclick = function () { hap(); shareDemo(S.cur); };
   function closePv() { $('pv').hidden = true; $('pvF').src = 'about:blank'; try { tw.BackButton.hide(); } catch (e) {} }
   $('pvX').onclick = closePv;
   $('pvE').onclick = function () { var a = S.cur; closePv(); editSheet(a); };
@@ -867,6 +877,7 @@ input.tk:focus{border-color:var(--v)}
   // ---------- boot ----------
   var q = new URLSearchParams(location.search), sp = '';
   try { sp = tw.initDataUnsafe.start_param || ''; } catch (e) {}
+  if (/^demo_[a-z0-9]{4,16}$/.test(sp)) { document.body.style.opacity = '0'; location.replace(PAGES + sp.slice(5) + '/?src=share'); }  // 2 nov 2026: a shared demo opens straight away
   if (q.get('idea')) { idea.value = q.get('idea'); idea.oninput(); W.i = T.wiz.length; wizRender(); }
   if (q.get('tab') === 'apps') tab('apps');
   paintApps();
