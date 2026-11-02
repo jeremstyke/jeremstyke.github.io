@@ -1828,6 +1828,12 @@ $('#extBtn').onclick = async () => {
 };
 async function doPass(kind, to) {
   const b = S && S.batons[0]; if (!b) return;
+  // 2 nov 2026 (23h25, Jeremy): posting the baton in the Club is confirmed first (Doriane lost hers without noticing)
+  if (kind === 'club') {
+    const m = LANG === 'fr' ? 'Tu vas donner ton bâton au Club : le premier qui clique le prend et tu ne l\'as plus. Continuer ?' : 'You are giving your baton to the Club: the first to tap takes it and you lose it. Continue?';
+    const yes = await new Promise((ok) => { try { tg.showConfirm(m, (y) => ok(!!y)); } catch (e) { ok(window.confirm(m)); } });
+    if (!yes) return;
+  }
   const r = await api('pass', { baton: b.id, kind, to });
   if (!r.ok) { hap('err'); toast(errMsg(r)); return; }
   if (kind === 'new') {
