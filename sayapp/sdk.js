@@ -77,7 +77,7 @@
     }
     css('#sayappB{position:fixed;left:50%;transform:translateX(-50%);top:calc(var(--sa-top,0px) + 6px);z-index:2147483646;height:30px;padding:0 5px 0 12px;display:flex;align-items:center;gap:6px;white-space:nowrap;background:rgba(12,12,24,.62);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.14);border-radius:99px;box-shadow:0 8px 24px -10px rgba(0,0,0,.6);color:#fff;font:600 11.5px Inter,system-ui,sans-serif;cursor:pointer;animation:sayappIn .5s cubic-bezier(.2,.9,.3,1.3)}#sayappB u{text-decoration:none;background:linear-gradient(120deg,#8b5cff,#2fd6ff);padding:4px 9px;border-radius:99px}#sayappB u#sayappS{background:rgba(255,255,255,.14)}@keyframes sayappIn{from{opacity:0;transform:translate(-50%,-12px)}}html{scroll-padding-top:calc(var(--sa-top,0px) + 42px)}body{margin-top:calc(var(--sa-top,0px) + 42px)!important}');
     var bn = document.createElement('div'); bn.id = 'sayappB';
-    bn.innerHTML = '✦ ' + (fr ? 'Démo SayApp' + (info.left ? ' · ' + info.left + ' j' : '') : 'SayApp demo' + (info.left ? ' · ' + info.left + 'd left' : '')) + ' <u>' + (fr ? 'Créer la mienne' : 'Make mine') + '</u> <u id="sayappS">📤 ' + (fr ? 'Partager' : 'Share') + '</u>';
+    bn.innerHTML = '✦ ' + (info.trial ? 'Made with SayApp' : fr ? 'Démo SayApp' + (info.left ? ' · ' + info.left + ' j' : '') : 'SayApp demo' + (info.left ? ' · ' + info.left + 'd left' : '')) + ' <u>' + (fr ? 'Créer la mienne' : 'Make mine') + '</u> <u id="sayappS">📤 ' + (fr ? 'Partager' : 'Share') + '</u>';
     bn.onclick = go; document.body.appendChild(bn);
     // 2 nov 2026 (19h58, Jeremy): anyone can share a demo with friends (it opens through SayApp: startapp=demo_<app>)
     document.getElementById('sayappS').onclick = function (ev) { ev.stopPropagation(); var u = 'https://t.me/SayAppBuilderBot?startapp=demo_' + APP; var t = (fr ? '▶️ Teste cette appli, faite avec SayApp 👇' : '▶️ Try this app, made with SayApp 👇'); var s = 'https://t.me/share/url?url=' + encodeURIComponent(u) + '&text=' + encodeURIComponent(t); try { tw.openTelegramLink(s); } catch (x) { location.href = s; } };
@@ -133,7 +133,7 @@
   }
   // 2 nov 2026 (20h35, Jeremy): free demos show one SayApp ad (SayApp, Meme Coin Tycoon, Pass The Baton) at opening, at most once an hour per player
   function demoAd(i) {
-    if (!i || !i.ok || i.pro || i.expired || i.banned || window.top !== window) return;
+    if (!i || !i.ok || i.pro || i.trial || i.expired || i.banned || window.top !== window) return;  // 2 nov 2026 (22h26): no SayApp ad at opening during the free month
     var k = 'sayapp_hd_' + APP, last = 0; try { last = Number(localStorage.getItem(k) || 0); } catch (e) {}
     if (Date.now() - last < 3600000) return;
     try { localStorage.setItem(k, String(Date.now())); } catch (e) {}
