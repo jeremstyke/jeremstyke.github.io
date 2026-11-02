@@ -2463,6 +2463,7 @@ function nudge() {
       full(true); sh.classList.add('lst');  // 28 oct 2026 (10h45, Jeremy): the Games page opens full screen too, not as a popup
       const ic = [GOLD, BLUE, '', '', GOLD, BLUE, BLUE, '', GOLD].map((c) => c ? bat(c) : '<span></span>').join('');
       box.innerHTML = '<div class="hd"><div><h3>' + X.h + '</h3><small>' + X.sub + '</small></div><button class="x" data-k="close">✕</button></div>'
+        + '<button class="gcard" data-g="lc"><div class="ic sw"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#3b1658"/><path d="M36 8 L16 36 H30 L26 56 L48 26 H34 Z" fill="#ffc531" stroke="#ff9a2f" stroke-width="2" stroke-linejoin="round"/></svg></div><div class="tx"><b>' + (fr ? 'Le Dernier Clic' : 'The Last Click') + '</b><div>' + (fr ? 'Le dernier à cliquer rafle la cagnotte' : 'The last one to click takes the pot') + '</div><em id="gLc">…</em></div><span class="go">' + X.play + '</span></button>'  // 2 nov 2026 (9h20, Jeremy)
         + '<button class="gcard" data-g="ttt"><div class="ic">' + ic + '</div><div class="tx"><b>' + X.tN + '</b><div>' + X.tD + '</div><em>' + X.pr(1000, 500, 200) + '</em></div><span class="go">' + X.play + '</span></button>'
         + '<button class="gcard" data-g="duel"><div class="ic sw">' + dIcon() + '</div><div class="tx"><b>' + DX.n + '</b><div>' + DX.d + '</div><em>' + DX.pr + '</em></div><span class="go">' + X.play + '</span></button>'
         + '<button class="gcard" data-g="spin"><div class="ic sw">' + wheel([100, 500, 200, 1000, 100, 300, 5000, 200], true) + '</div><div class="tx"><b>' + X.sN + '</b><div>' + X.sD + '</div><em>' + X.sPr + '</em></div><span class="go">' + X.play + '</span></button>'
@@ -2487,6 +2488,8 @@ function nudge() {
         + '<div class="soon">' + X.soon + '</div>';
       // 28 oct 2026 (10h35, Jeremy): how many plays are left today, on each game card
       const lb = box;
+      try { window.BT.api('lc').then((r) => { const e = box === lb && box.querySelector('#gLc'); if (!e || !r || !r.ok) return; const s = Math.max(0, Math.ceil(((r.ends || 0) - (r.now || Date.now())) / 1000));
+        e.textContent = r.live ? '💰 ' + Math.round(r.pot || 0).toLocaleString(fr ? 'fr-FR' : 'en-US') + ' $BATON' + (r.ends ? ' · ⏱ ' + Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0') : '') : (fr ? 'Nouvelle partie dans un instant' : 'New round in a moment'); }).catch(() => {}); } catch (e) {}
       call('games_left').then((g) => {
         if (!g || !g.ok || box !== lb) return;
         ['ttt', 'spin', 'scratch', 'flip'].forEach((k) => {
@@ -2897,6 +2900,7 @@ function nudge() {
       if (e.target.closest('[data-g="duel"]')) { hap(); duelHome(); return; }
       if (await dClick(e)) return;
       const c = e.target.closest('[data-c]'), k = e.target.closest('[data-k]'), g = e.target.closest('[data-g]');
+      if (g && g.dataset.g === 'lc') { hap(); close(); try { window.lcOpen(); } catch (e) {} return; }  // 2 nov 2026 (9h20, Jeremy)
       if (g && g.dataset.g === 'ttt') { hap(); ttt(); return; }
       if (g && g.dataset.g === 'spin') { hap(); spinView(); return; }
       if (g && g.dataset.g === 'scratch') { hap(); scratchView(); return; }
@@ -3040,7 +3044,7 @@ function nudge() {
 (function () {
   var tw = window.Telegram && Telegram.WebApp;
   var sp = (tw && tw.initDataUnsafe && tw.initDataUnsafe.start_param) || '';
-  if (sp !== 'lc') return;
+  var fromMenu = false;  // 2 nov 2026 (9h20, Jeremy): also opened from the Games menu of the app (window.lcOpen)
   var TX = {
     fr: { t: 'Le Dernier Clic', pot: 'Cagnotte', left: 'Temps restant', wait: 'En attente du premier clic', last: 'Dernier clic', nobody: 'personne', you: 'toi', mine: function (a, b) { return 'Tes clics : ' + a + '/' + b; }, btn: '⚡ Cliquer', btnWait: '⏳ …', rules: 'Chaque clic remet le chrono à 10:00 et ajoute 200 $BATON à la cagnotte. Quand le chrono tombe à zéro, le dernier qui a cliqué gagne toute la cagnotte. Il faut au moins 2 joueurs, sinon la cagnotte passe à la partie suivante.', ok: '⚡ C\'est toi le dernier ! Garde un œil sur le chrono.', late: 'La vidéo est validée, ton clic arrive dans quelques secondes.', noVid: 'Vidéo pas terminée : clic non compté.', max: 'Tu as atteint 20 clics sur cette partie.', over: 'Partie terminée', won: function (n, p) { return '🏆 ' + n + ' a gagné ' + p + ' $BATON'; }, youWon: '🏆 C\'est toi ! Les $BATON sont sur ton solde.', roll: function (p) { return '🤷 Pas de gagnant (il faut au moins 2 joueurs) : les ' + p + ' $BATON passent à la partie suivante !'; }, next: 'Nouvelle partie dans', close: 'Fermer', game: '🏃 Ouvrir Pass The Baton' },
     en: { t: 'The Last Click', pot: 'Pot', left: 'Time left', wait: 'Waiting for the first click', last: 'Last click', nobody: 'nobody yet', you: 'you', mine: function (a, b) { return 'Your clicks: ' + a + '/' + b; }, btn: '⚡ Click', btnWait: '⏳ …', rules: 'Each click resets the timer to 10:00 and adds 200 $BATON to the pot. When it reaches zero, the last one to click wins the whole pot. At least 2 players are needed, otherwise the pot rolls over to the next round.', ok: '⚡ You are the last one! Keep an eye on the timer.', late: 'Video confirmed, your click arrives in a few seconds.', noVid: 'Video not finished: click not counted.', max: 'You reached 20 clicks in this round.', over: 'Round over', won: function (n, p) { return '🏆 ' + n + ' won ' + p + ' $BATON'; }, youWon: '🏆 It\'s you! The $BATON are on your balance.', roll: function (p) { return '🤷 No winner (at least 2 players needed): the ' + p + ' $BATON roll over to the next round!'; }, next: 'New round in', close: 'Close', game: '🏃 Open Pass The Baton' }
@@ -3056,7 +3060,7 @@ function nudge() {
   var L = function () { var B = window.BT; return TX[B && B.lang === 'fr' ? 'fr' : 'en']; };
   var fmt = function (n) { var B = window.BT; return Math.round(Number(n) || 0).toLocaleString(B && B.lang === 'fr' ? 'fr-FR' : 'en-US'); };
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
-  var st = null, skew = 0, busy = false, scr = null;
+  var st = null, skew = 0, busy = false, scr = null, need = '';
   function el() {
     if (scr) return scr;
     scr = document.createElement('div'); scr.id = 'lcScr'; scr.setAttribute('role', 'dialog'); scr.setAttribute('aria-label', L().t);
@@ -3070,7 +3074,7 @@ function nudge() {
       s.innerHTML = '<h1>⚡ ' + esc(T.t) + '</h1><div class="lb">' + esc(T.over) + '</div>'
         + '<div class="card"><b style="font-size:18px">' + esc(st.rollover ? T.roll(fmt(st.won)) : st.me_won ? T.youWon : T.won(st.winner || '?', fmt(st.won))) + '</b></div>'
         + '<div class="lb">' + esc(T.next) + '</div><div class="clk">' + mmss((st.next || now) - now) + '</div>'
-        + '<button class="lnk" id="lcGame">' + esc(T.game) + '</button>';
+        + '<button class="lnk" id="lcGame">' + esc(fromMenu ? T.close : T.game) + '</button>';
     } else {
       var left = st.ends ? st.ends - now : null, hot = left != null && left < 60000;
       var full = st.mine >= st.max;
@@ -3078,10 +3082,14 @@ function nudge() {
         + '<div><div class="lb">' + esc(T.pot) + '</div><div class="pot">' + fmt(st.pot) + ' $BATON</div></div>'
         + '<div><div class="lb">' + esc(st.ends ? T.left : T.wait) + '</div><div class="clk' + (hot ? ' hot' : '') + '">' + (st.ends ? mmss(left) : '10:00') + '</div></div>'
         + '<div class="card"><span>' + esc(T.last) + ' : <b>' + esc(st.last_me ? T.you : (st.last || T.nobody)) + '</b></span><small style="opacity:.75">' + esc(T.mine(st.mine, st.max)) + '</small></div>'
+        + (need ? '<div class="card" style="gap:10px"><b>' + esc(window.BT.lang === 'fr' ? '👥 Pour cliquer, rejoins le Club et abonne-toi à Jeremstyke.' : '👥 To click, join the Club and subscribe to Jeremstyke.') + '</b>'
+          + (need.indexOf('club') >= 0 ? '<button class="lnk" data-u="https://t.me/passthebatonclub">' + esc(window.BT.lang === 'fr' ? '👥 Rejoindre le Club' : '👥 Join the Club') + '</button>' : '')
+          + (need.indexOf('jeremstyke') >= 0 ? '<button class="lnk" data-u="https://t.me/jeremstyke">' + esc(window.BT.lang === 'fr' ? '📢 S\'abonner à Jeremstyke' : '📢 Subscribe to Jeremstyke') + '</button>' : '') + '</div>' : '')
         + '<button id="lcBtn" type="button"' + (busy || full ? ' disabled' : '') + '>' + esc(busy ? T.btnWait : full ? T.max : T.btn) + '</button>'
         + '<p class="rules">' + esc(T.rules) + '</p>'
-        + '<button class="lnk" id="lcGame">' + esc(T.game) + '</button>';
+        + '<button class="lnk" id="lcGame">' + esc(fromMenu ? T.close : T.game) + '</button>';
       var b = document.getElementById('lcBtn'); if (b) b.onclick = click;
+      s.querySelectorAll('[data-u]').forEach(function (u) { u.onclick = function () { try { Telegram.WebApp.openTelegramLink(u.getAttribute('data-u')); } catch (e) {} }; });
     }
     var g = document.getElementById('lcGame'); if (g) g.onclick = function () { try { window.BT.hap(); } catch (e) {} if (scr) { scr.remove(); scr = null; } clearInterval(window.__lcT); clearInterval(window.__lcD); };
   }
@@ -3105,16 +3113,20 @@ function nudge() {
       }).catch(function () { busy = false; draw(); });
     };
     var show = function () { try { window.Adsgram.init({ blockId: 'int-55461' }).show().then(go, go); } catch (e) { go(); } };
-    if (window.Adsgram) show();
-    else { var s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = show; s.onerror = go; document.head.appendChild(s); }
+    var ad = function () { if (window.Adsgram) show();
+    else { var s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = show; s.onerror = go; document.head.appendChild(s); } };
+    // 2 nov 2026 (9h20, Jeremy): a click needs the Club and @jeremstyke, checked before the ad
+    B.api('lc_can').then(function (r) { var m = r && r.miss; if (m) { busy = false; need = String(m); draw(); return; } need = ''; ad(); }).catch(ad);
   }
   function start() {
     if (!window.BT) { setTimeout(start, 300); return; }
+    clearInterval(window.__lcT); clearInterval(window.__lcD);
     draw(); load();
     window.__lcT = setInterval(function () { if (!busy) load(); }, 3000);
     window.__lcD = setInterval(draw, 1000);
   }
-  start();
+  if (sp === 'lc') start();
+  window.lcOpen = function () { fromMenu = true; if (!scr) start(); };
 })();
 </script>
 <script>
