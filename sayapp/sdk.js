@@ -80,7 +80,7 @@
     bn.innerHTML = '✦ ' + (info.trial ? 'Made with SayApp' : fr ? 'Démo SayApp' + (info.left ? ' · ' + info.left + ' j' : '') : 'SayApp demo' + (info.left ? ' · ' + info.left + 'd left' : '')) + ' <u>' + (fr ? 'Créer la mienne' : 'Make mine') + '</u> <u id="sayappS">📤 ' + (fr ? 'Partager' : 'Share') + '</u>';
     bn.onclick = go; document.body.appendChild(bn);
     // 2 nov 2026 (19h58, Jeremy): anyone can share a demo with friends (it opens through SayApp: startapp=demo_<app>)
-    document.getElementById('sayappS').onclick = function (ev) { ev.stopPropagation(); var u = 'https://t.me/SayAppBuilderBot?startapp=demo_' + APP; var t = (fr ? '▶️ Teste cette appli, faite avec SayApp 👇' : '▶️ Try this app, made with SayApp 👇'); var s = 'https://t.me/share/url?url=' + encodeURIComponent(u) + '&text=' + encodeURIComponent(t); try { tw.openTelegramLink(s); } catch (x) { location.href = s; } };
+    document.getElementById('sayappS').onclick = function (ev) { ev.stopPropagation(); var u = info.bot ? 'https://t.me/' + info.bot + '?start=share' : 'https://t.me/SayAppBuilderBot?startapp=demo_' + APP; var t = (fr ? '▶️ Teste cette appli, faite avec SayApp 👇' : '▶️ Try this app, made with SayApp 👇'); var s = 'https://t.me/share/url?url=' + encodeURIComponent(u) + '&text=' + encodeURIComponent(t); try { tw.openTelegramLink(s); } catch (x) { location.href = s; } };
     // 2 nov 2026 (16h51, Jeremy): a discreet way to report an app
     var rp = document.createElement('i'); rp.textContent = '⚑'; rp.title = fr ? 'Signaler' : 'Report';
     rp.style.cssText = 'font-style:normal;margin-left:6px;opacity:.75;padding:2px 6px;border-radius:99px;background:rgba(0,0,0,.18)';
