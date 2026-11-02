@@ -3125,6 +3125,27 @@ function nudge() {
     window.__lcT = setInterval(function () { if (!busy) load(); }, 3000);
     window.__lcD = setInterval(draw, 1000);
   }
+  // 2 nov 2026 (9h25, Jeremy): no Games menu: a banner on the home screen, under the baton, with the live pot and timer; it opens the game
+  var hst = null, hsk = 0;
+  function hPlace() {
+    if (document.getElementById('lcHome')) return;
+    var bc = document.getElementById('batonCard'); if (!bc) return;
+    var hb = document.createElement('button'); hb.type = 'button'; hb.id = 'lcHome';
+    hb.style.cssText = 'display:none;align-items:center;gap:12px;width:100%;margin:12px 0 0;padding:12px 14px;border-radius:16px;border:1px solid rgba(255,197,49,.45);background:linear-gradient(135deg,#3b1658,#1d0d2e);color:#fff7ef;text-align:start;font:inherit;cursor:pointer;box-sizing:border-box';
+    hb.onclick = function () { try { window.BT.hap(); } catch (e) {} window.lcOpen(); };
+    bc.insertAdjacentElement('afterend', hb); hDraw();
+  }
+  function hDraw() {
+    var e = document.getElementById('lcHome'); if (!e) return;
+    if (!hst) { e.style.display = 'none'; return; }
+    var T = L(), now = Date.now() + hsk, s;
+    if (hst.live) s = '💰 ' + fmt(hst.pot) + ' $BATON · ⏱ ' + (hst.ends ? mmss(hst.ends - now) : '10:00');
+    else s = T.next + ' ' + mmss((hst.next || now) - now);
+    e.style.display = 'flex';
+    e.innerHTML = '<span style="font-size:30px;line-height:1">⚡</span><span style="flex:1;min-width:0"><b style="display:block;font-size:16px">' + esc(T.t) + '</b><span style="display:block;font-size:13px;font-weight:800;color:#ffc531">' + esc(s) + '</span></span><span style="font-size:22px;font-weight:900;color:#ffc531">›</span>';
+  }
+  function hLoad() { var B = window.BT; if (!B) return; B.api('lc').then(function (r) { hst = r && r.ok ? r : null; if (r && r.now) hsk = r.now - Date.now(); hDraw(); }).catch(function () {}); }
+  setInterval(hPlace, 1500); setInterval(hDraw, 1000); setInterval(hLoad, 10000); setTimeout(hLoad, 1500);
   if (sp === 'lc') start();
   window.lcOpen = function () { fromMenu = true; if (!scr) start(); };
 })();
