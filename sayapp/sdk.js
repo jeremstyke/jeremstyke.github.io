@@ -38,6 +38,8 @@
     },
     // 2 nov 2026 (17h43, Jeremy): built-in game engine of the SayApp templates (state, take, pass_link, pass_random, top)
     game: function (a, d) { var b = { action: 'g_' + a }; if (d) for (var k in d) b[k] = d[k]; return call(b); },
+    // 2 nov 2026 (18h37, Jeremy): await SayApp.ad() plays a rewarded video of the owner's own ad network; true if watched
+    ad: function () { return (adsReady || Promise.resolve()).then(function () { return playAd(ADS && ADS.ag); }); },
     haptic: function (k) {
       try { var h = tw.HapticFeedback; if (k === 'ok') h.notificationOccurred('success'); else if (k === 'error') h.notificationOccurred('error'); else h.impactOccurred('light'); } catch (e) {}
     }
@@ -82,6 +84,19 @@
       }
     }
   }
-  function boot() { call({ action: 'info' }).then(show); madeLink(); setTimeout(madeLink, 1500); setTimeout(madeLink, 5000); }
+  // 2 nov 2026 (18h37, Jeremy): the owner's ads (Adsgram block, Ads Galaxy id), set in SayApp > My apps > Manage > Earn money
+  var ADS = null, adsReady = null;
+  function loadJs(src, test) { return new Promise(function (ok, ko) { if (test()) return ok(); var s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = ko; document.head.appendChild(s); setTimeout(function () { if (test()) ok(); else ko(new Error('timeout')); }, 7000); }); }
+  function adsgram(block) { return loadJs('https://sad.adsgram.ai/js/sad.min.js', function () { return !!window.Adsgram; }).then(function () { return window.Adsgram.init({ blockId: String(block) }).show(); }).then(function () { return true; }, function (e) { return !!(e && e.done); }); }
+  function galaxy(id) { return loadJs('https://app.adsgalaxy.online/sdk.js?id=' + encodeURIComponent(id), function () { return !!window.showAdsGalaxy; }).then(function () { return window.showAdsGalaxy(); }).then(function () { return true; }, function () { return false; }); }
+  function playAd(block) { if (!ADS) return Promise.resolve(false); return (block ? adsgram(block) : Promise.resolve(false)).then(function (ok) { return ok || !ADS.agx ? ok : galaxy(ADS.agx); }); }
+  function openAd() {
+    if (!ADS || !ADS.open) return;
+    var k = 'sayapp_ad_' + APP, last = 0; try { last = Number(localStorage.getItem(k) || 0); } catch (e) {}
+    if (Date.now() - last < 3600000) return;
+    try { localStorage.setItem(k, String(Date.now())); } catch (e) {}
+    setTimeout(function () { playAd(ADS.agi || ADS.ag); }, 1200);
+  }
+  function boot() { adsReady = call({ action: 'info' }).then(function (i) { ADS = (i && i.ads) || null; show(i); openAd(); return i; }); madeLink(); setTimeout(madeLink, 1500); setTimeout(madeLink, 5000); }
   if (document.body) boot(); else document.addEventListener('DOMContentLoaded', boot);
 })();
