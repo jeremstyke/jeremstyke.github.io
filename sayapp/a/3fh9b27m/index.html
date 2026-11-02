@@ -1,4 +1,4 @@
-<!-- sayapp 3fh9b27m v2 -->
+<!-- sayapp 3fh9b27m v3 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,8 +46,8 @@ h2{font-size:26px;font-weight:800;letter-spacing:-.01em;margin-bottom:4px}
 .sub{color:var(--mut);font-size:14px;margin-bottom:20px;line-height:1.5}
 .card{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:12px;display:flex;align-items:center;gap:14px;box-shadow:0 10px 24px rgba(0,0,0,.35),0 1px 0 rgba(255,255,255,.04) inset}
 .ic{width:48px;height:48px;border-radius:16px;background:rgba(255,138,61,.13);display:flex;align-items:center;justify-content:center;font-size:24px;flex:none}
-.card .t{flex:1;min-width:0}.card .t b{display:block;font-size:15px;font-weight:600;margin-bottom:3px}
-.card .t small{color:var(--mut);font-size:12.5px;line-height:1.4;display:block}
+.card .t,.tkt .t,.tkb .t{flex:1;min-width:0}.card .t b,.tkt .t b,.tkb .t b{display:block;font-size:15px;font-weight:600;margin-bottom:3px}
+.card .t small,.tkt .t small,.tkb .t small{color:var(--mut);font-size:12.5px;line-height:1.4;display:block}
 .card .bar{height:5px;margin-top:8px}
 .btn{border:0;font-family:inherit;font-weight:700;font-size:13px;color:#2a1000;padding:12px 16px;min-height:44px;border-radius:14px;background:linear-gradient(180deg,var(--acc),var(--main));box-shadow:0 6px 16px rgba(255,138,61,.35);cursor:pointer;transition:transform .15s,opacity .15s;white-space:nowrap}
 .btn:active{transform:scale(.94)}
@@ -70,6 +70,15 @@ nav button.on{color:var(--acc);background:rgba(255,138,61,.12)}nav button.on em{
 nav button .dot{position:absolute;top:6px;right:28%;width:8px;height:8px;border-radius:50%;background:var(--main2);box-shadow:0 0 8px var(--main);display:none}
 #toast{position:fixed;left:50%;top:calc(var(--sa-top,0px) + 16px + env(safe-area-inset-top));transform:translate(-50%,-140px);background:#2a1d12;border:1px solid var(--main);color:var(--txt);padding:12px 18px;border-radius:16px;font-size:13.5px;font-weight:600;z-index:100;transition:transform .3s;max-width:90%;text-align:center;box-shadow:0 12px 30px rgba(0,0,0,.6)}
 #toast.on{transform:translate(-50%,0)}
+/* ticket */
+.tkt,.tkb{position:relative;display:flex;align-items:center;gap:14px;padding:16px;border-radius:20px;margin-bottom:12px;background:linear-gradient(120deg,#3d1e0a,#241209 60%,#1c120b);border:1.5px dashed rgba(255,190,110,.5);box-shadow:0 12px 28px rgba(0,0,0,.45),0 0 30px rgba(255,138,61,.18);animation:tk 2.6s ease-in-out infinite}
+.tkt:before,.tkt:after{content:"";position:absolute;top:50%;width:14px;height:14px;margin-top:-7px;border-radius:50%;background:var(--bg);border:1px solid rgba(255,190,110,.35)}
+.tkt:before{left:-8px}.tkt:after{right:-8px}
+@keyframes tk{50%{box-shadow:0 12px 28px rgba(0,0,0,.45),0 0 44px rgba(255,138,61,.38)}}
+.tkt.on{animation:none;background:linear-gradient(120deg,#12301f,#14201a 70%);border-color:rgba(91,227,160,.45);box-shadow:0 10px 24px rgba(0,0,0,.4)}
+.tkt .ok{font-size:22px;font-weight:800;color:var(--ok);padding-right:4px}
+.tkt .free{display:inline-block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#2a1000;background:var(--acc);padding:3px 8px;border-radius:99px;margin-left:6px;vertical-align:2px}
+.tkb{margin:16px 0 0;padding:12px 14px}.tkb .ic{width:40px;height:40px;font-size:20px}
 /* tournament */
 .seg{display:flex;gap:4px;padding:4px;border-radius:16px;background:var(--card);border:1px solid var(--line);margin-bottom:16px}
 .seg button{flex:1;border:0;font-family:inherit;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);background:none;padding:12px 0;border-radius:12px;cursor:pointer;transition:all .2s;min-height:44px}
@@ -103,6 +112,7 @@ nav button .dot{position:absolute;top:6px;right:28%;width:8px;height:8px;border-
     <div class="stage"><div id="coin"><span>₿</span></div></div>
     <div class="en"><span style="font-size:20px">⚡</span><div class="bar"><i id="ebar"></i></div><b id="etxt">0 / 0</b></div>
     <div class="lvl"><div class="row"><b id="lname">Level 1</b><span id="lnext"></span></div><div class="bar"><i id="lbar"></i></div></div>
+    <div class="tkb" id="tkb" style="display:none"><div class="ic">🎟️</div><div class="t"><b>Free weekly ticket</b><small>Claim it to join this week's tournament</small></div><button class="btn" data-a="ticket">Claim</button></div>
     <div class="foot">Points have no cash value<br>Made with SayApp</div>
   </section>
   <section class="view" id="v-tasks">
@@ -142,7 +152,7 @@ var today=function(){return new Date().toISOString().slice(0,10)};
 var yest=function(){return new Date(Date.now()-864e5).toISOString().slice(0,10)};
 // week id = Monday (UTC) of the current week
 var weekOf=function(t){var d=new Date(t),k=(d.getUTCDay()+6)%7;return new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate())-k*864e5).toISOString().slice(0,10)};
-var def={pts:0,total:0,taps:0,energy:500,ts:Date.now(),tapLvl:1,eLvl:1,rig:0,day:'',dp:{},cl:{},streak:0,last:'',wk:'',wp:0,wc:{},bd:[]};
+var def={pts:0,total:0,taps:0,energy:500,ts:Date.now(),tapLvl:1,eLvl:1,rig:0,day:'',dp:{},cl:{},streak:0,last:'',wk:'',wp:0,wc:{},bd:[],tk:''};
 var s=def;
 try{var saved=await SayApp.get('state');if(saved&&typeof saved==='object')s=Object.assign({},def,saved)}catch(e){}
 if(!s.wc||typeof s.wc!=='object')s.wc={};if(!Array.isArray(s.bd))s.bd=[];
@@ -156,7 +166,9 @@ var fmt=function(n){return Math.floor(n).toLocaleString('en-US')};
 var dirty=true,toastT;
 function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('on')},2800)}
 function hap(k){try{SayApp.haptic(k)}catch(e){}}
-function gain(n){s.pts+=n;s.total+=n;s.wp+=n}
+function hasTk(){return s.tk===s.wk}
+// weekly Hash only counts with a ticket
+function gain(n){s.pts+=n;s.total+=n;if(hasTk())s.wp+=n}
 // weekly tournament
 var TIERS=[{n:'Bronze',e:'🥉',g:1000,r:300},{n:'Silver',e:'🥈',g:5000,r:1000},{n:'Gold',e:'🥇',g:15000,r:3000}];
 var CH=[{n:'Champion',e:'👑'},{n:'Podium',e:'🥈'},{n:'Podium',e:'🥉'}];
@@ -175,6 +187,7 @@ function rollover(){
       }catch(e){}
     })();
   }
+  updTicket();
 }
 function endsIn(){
   var ms=Math.max(0,Date.parse(s.wk)+7*864e5-Date.now()),d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5),m=Math.floor(ms%36e5/6e4),sc=Math.floor(ms%6e4/1e3);
@@ -184,8 +197,16 @@ function badgeEmoji(){
   if(s.bd.length){var b=s.bd[s.bd.length-1];return CH[b.r-1].e}
   var e='';TIERS.forEach(function(t){if(s.wp>=t.g)e=t.e});return e;
 }
+function updTicket(){
+  var has=hasTk(),rd=TIERS.some(function(t,i){return s.wp>=t.g&&!s.wc[i]});
+  $('#tkb').style.display=has?'none':'flex';
+  $('#adot').style.display=(rd||!has)?'block':'none';
+}
 function renderWeek(){
-  var h='<div class="hero"><div class="label">Weekly tournament · ends in</div><div class="cd" id="cd">'+endsIn()+'</div>'+
+  var h;
+  if(hasTk())h='<div class="tkt on"><div class="ic">🎟️</div><div class="t"><b>Ticket active</b><small>You are in this week\'s tournament. Good luck!</small></div><span class="ok">✓</span></div>';
+  else h='<div class="tkt"><div class="ic">🎟️</div><div class="t"><b>Entry ticket<span class="free">Free</span></b><small>Claim your ticket to join this week. Hash only counts once you hold it.</small></div><button class="btn" data-a="ticket">Claim</button></div>';
+  h+='<div class="hero"><div class="label">Weekly tournament · ends in</div><div class="cd" id="cd">'+endsIn()+'</div>'+
   '<div class="wm"><div id="wmine">'+fmt(s.wp)+'<small>Hash this week</small></div><div>'+(wrank||'-')+'<small>Your rank</small></div></div></div><div class="tiers">';
   TIERS.forEach(function(t,i){
     var got=s.wp>=t.g,c=s.wc[i],btn;
@@ -199,9 +220,11 @@ function renderWeek(){
   s.bd.slice().reverse().forEach(function(b){h+='<div class="champ"><em>'+CH[b.r-1].e+'</em><div>'+CH[b.r-1].n+' #'+b.r+'<small>Week of '+b.w+'</small></div></div>'});
   h+='</div></div><div class="label" style="margin:0 0 10px">Weekly ranking</div>';
   $('#wk').innerHTML=h;
-  var rd=TIERS.some(function(t,i){return s.wp>=t.g&&!s.wc[i]});$('#adot').style.display=rd?'block':'none';
+  updTicket();
 }
 rollover();
+// players already ranked this week keep their spot
+if(s.wp>0&&!hasTk())s.tk=s.wk;
 var now=Date.now(),el=Math.max(0,(now-s.ts)/1000);
 s.energy=Math.min(maxE(),s.energy+el);
 var off=0;
@@ -298,7 +321,8 @@ frame();
 setInterval(function(){
   s.energy=Math.min(maxE(),s.energy+1);
   if(s.rig){gain(rate()/3600);checkLevel()}
-  rollover();
+  var wasTk=hasTk();rollover();
+  if(wasTk&&!hasTk()&&document.querySelector('#v-top.on')&&mode==='w')renderWeek();
   s.ts=Date.now();dirty=true;
   if(document.querySelector('#v-boost.on'))renderUps();
   if(document.querySelector('#v-top.on')&&mode==='w'){var c=$('#cd'),w=$('#wmine');if(c)c.textContent=endsIn();if(w&&w.firstChild)w.firstChild.nodeValue=fmt(s.wp)}
@@ -307,7 +331,14 @@ setInterval(function(){
 document.addEventListener('click',async function(e){
   var b=e.target.closest('[data-a]');if(!b)return;
   var a=b.dataset.a,id=b.dataset.id;
-  if(a==='claim'){
+  if(a==='ticket'){
+    if(hasTk())return;
+    s.tk=s.wk;dirty=true;hap('ok');
+    var rk=b.getBoundingClientRect();burst(rk.left+rk.width/2,rk.top+rk.height/2,34);
+    toast('🎟️ Ticket claimed! You are in this week\'s tournament');
+    renderWeek();
+    if(document.querySelector('#v-top.on')&&mode==='w')loadBoard();else save();
+  }else if(a==='claim'){
     var t=TASKS.filter(function(x){return x.id===id})[0];
     if(s.cl[id]||prog(t)<t.g)return;
     s.cl[id]=1;gain(t.r());dirty=true;hap('ok');
@@ -346,7 +377,7 @@ async function loadBoard(){
   var list=[];try{list=await SayApp.top(m==='w'?'wk_'+s.wk:'points',10)||[]}catch(e){}
   if(m!==mode)return;
   if(m==='w'){var mi=list.findIndex(function(r){return r.me});wrank=mi>=0?'#'+(mi+1):(s.wp>0?'10+':'-');renderWeek()}
-  if(!list.length){B.innerHTML='<div class="empty-s"><i>🏆</i>No miners ranked yet.<br>Keep tapping to be the first!</div>';return}
+  if(!list.length){B.innerHTML='<div class="empty-s"><i>🏆</i>No miners ranked yet.<br>'+(m==='w'&&!hasTk()?'Claim your free ticket to be the first!':'Keep tapping to be the first!')+'</div>';return}
   B.innerHTML=list.map(function(r,i){return '<div class="row2'+(r.me?' me':'')+'"><div class="rk">'+(i<3?['🥇','🥈','🥉'][i]:i+1)+'</div><div class="nm">'+String(r.name||'Miner').replace(/[<>&]/g,'')+(r.me?' (you)':'')+'</div><div class="vl">'+fmt(r.value)+'</div></div>'}).join('');
 }
 function setMode(m){
@@ -369,7 +400,7 @@ document.querySelectorAll('nav button').forEach(function(b){
 var saving=false;
 async function save(){
   if(saving)return;saving=true;
-  try{await SayApp.set('state',s);await SayApp.set('points',Math.floor(s.total));await SayApp.set('wk_'+s.wk,Math.floor(s.wp));dirty=false}catch(e){}
+  try{await SayApp.set('state',s);await SayApp.set('points',Math.floor(s.total));if(hasTk())await SayApp.set('wk_'+s.wk,Math.floor(s.wp));dirty=false}catch(e){}
   saving=false;
 }
 setInterval(function(){if(dirty)save()},6000);
