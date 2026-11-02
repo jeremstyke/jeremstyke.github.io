@@ -93,7 +93,7 @@ function render() {
   $('payer').innerHTML = '<div>' + esc(t.payer) + '</div>' + py.map((a) => '<code>' + esc(a) + '</code><a href="https://explorer.toncoin.org/account?account=' + encodeURIComponent(a) + '" target="_blank" rel="noopener">' + esc(t.seeall) + '</a>').join('');
   $('apps').innerHTML = (D.apps || []).map((a) => '<div class="app"><h3>' + esc(a.app) + '</h3><p>' + esc(t.ap(a.n, num(a.usd, 2), day(a.first), day(a.last))) + '</p></div>').join('');
   const rows = (D.rows || []).slice(0, shown);
-  $('rows').innerHTML = rows.map((r) => '<tr><td>' + esc(tm(r.at)) + '</td><td>' + esc(r.app) + '</td><td>' + esc(num(r.amt, r.cur === 'TON' ? 3 : 2) + ' ' + r.cur) + ' <span class="pend">($' + esc(num(r.usd, 2)) + ')</span></td><td class="m">' + esc(r.to) + '</td><td>'
+  $('rows').innerHTML = rows.map((r) => '<tr><td>' + esc(tm(r.at)) + '</td><td>' + esc(r.app) + '</td><td>' + esc(num(r.amt, r.cur === 'TON' || Number(r.amt) < 0.01 ? (Number(r.amt) < 0.001 ? 4 : 3) : 2) + ' ' + r.cur) + ' <span class="pend">(' + (Number(r.usd) > 0 ? '$' + esc(num(r.usd, 2)) : '&lt; $0.01') + ')</span></td><td class="m">' + esc(r.to) + '</td><td>'
     + (r.tx ? '<a href="https://actonscan.com/tx/' + encodeURIComponent(r.tx) + '?network=mainnet" target="_blank" rel="noopener">' + esc(t.view) + '</a>' : '<span class="pend">' + esc(t.pend) + '</span>') + '</td></tr>').join('');
   $('more').hidden = (D.rows || []).length <= shown; $('more').textContent = t.more;
 }
