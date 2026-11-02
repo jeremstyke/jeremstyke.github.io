@@ -241,6 +241,7 @@ input.tk:focus{border-color:var(--v)}
       editGo: '✦ Appliquer', editQ: function (n, m) { return n >= m ? 'Modifications gratuites du jour utilisées' : 'Gratuit : ' + (m - n) + ' modification(s) restante(s) aujourd\'hui'; },
       proT: 'SayApp Pro', proP: 'Lance ton appli sur ton propre bot Telegram.',
       feats: ['Ton appli sur ton bot, à ton nom', 'Bouton d\'ouverture et /start configurés pour toi', 'Hébergement et mises à jour inclus, ton appli n\'expire jamais', 'Modifications illimitées', 'Données de tes utilisateurs et classements', 'Support direct avec le créateur'],
+      introPer: '/ 1er mois', introN: function (p) { return 'Puis ' + p + ' ⭐ / mois si tu continues · sans engagement'; }, introGo: function (p) { return '⭐ Essayer 1 mois · ' + p + ' étoiles'; }, renT: '⭐ Ton offre 1er mois', renP: function (d) { return 'Elle se termine le ' + d + '. Passe à l\'abonnement pour garder ton appli en ligne.'; }, renGo: function (p) { return '⭐ Continuer · ' + p + ' étoiles / mois'; }, renOk: 'Abonnement actif ⭐',
       per: '/ mois', perN: 'Sans engagement · annulable à tout moment', subGo: function (p) { return '⭐ M\'abonner · ' + p + ' étoiles'; },
       limT: 'Limite gratuite atteinte', limP: 'Passe Pro pour continuer sans limite, ou reviens demain.',
       limPick: 'Choisis l\'appli à passer en Pro :',
@@ -281,6 +282,7 @@ input.tk:focus{border-color:var(--v)}
       editGo: '✦ Apply', editQ: function (n, m) { return n >= m ? 'Free changes of the day used' : 'Free: ' + (m - n) + ' change(s) left today'; },
       proT: 'SayApp Pro', proP: 'Launch your app on your own Telegram bot.',
       feats: ['Your app on your bot, with your name', 'Open button and /start set up for you', 'Hosting and updates included, your app never expires', 'Unlimited changes', 'Your users\' data and leaderboards', 'Direct support from the creator'],
+      introPer: '/ 1st month', introN: function (p) { return 'Then ' + p + ' ⭐ / month if you continue · no commitment'; }, introGo: function (p) { return '⭐ Try 1 month · ' + p + ' Stars'; }, renT: '⭐ Your 1st month offer', renP: function (d) { return 'It ends on ' + d + '. Subscribe to keep your app online.'; }, renGo: function (p) { return '⭐ Continue · ' + p + ' Stars / month'; }, renOk: 'Subscription active ⭐',
       per: '/ month', perN: 'No commitment · cancel anytime', subGo: function (p) { return '⭐ Subscribe · ' + p + ' Stars'; },
       limT: 'Free limit reached', limP: 'Go Pro to keep going without limits, or come back tomorrow.',
       limPick: 'Pick the app to make Pro:',
@@ -500,11 +502,11 @@ input.tk:focus{border-color:var(--v)}
   }
 
   function proSheet(a, lim) {
-    var p = (S.lim && S.lim.price) || 1000;
+    var p = (S.lim && S.lim.price) || 1000, intro = !!(S.lim && S.lim.intro && S.lim.introPrice), ip = intro ? S.lim.introPrice : p;  // 2 nov 2026 (15h02): 250 the 1st month, then 1000
     openSheet('<div class="prohead"><div>⭐</div><div><h2>' + esc(lim ? T.limT : T.proT) + '</h2><p class="sub" style="margin:0">' + esc(lim ? T.limP : T.proP) + '</p></div></div>' +
       '<div class="feat">' + T.feats.map(function (f) { return '<div><i>✓</i>' + esc(f) + '</div>'; }).join('') + '</div>' +
-      '<div class="price"><b>' + p.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US') + ' ⭐</b><span>' + esc(T.per) + '</span></div>' +
-      '<button class="cta gold" id="subGo">' + esc(T.subGo(p)) + '</button><div class="note">' + esc(T.perN) + '</div>');
+      '<div class="price"><b>' + ip.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US') + ' ⭐</b><span>' + esc(intro ? T.introPer : T.per) + '</span></div>' +
+      '<button class="cta gold" id="subGo">' + esc(intro ? T.introGo(ip) : T.subGo(p)) + '</button><div class="note">' + esc(intro ? T.introN(p.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US')) : T.perN) + '</div>');
     $('subGo').onclick = function () {
       hap(); $('subGo').disabled = true;
       call('invoice', { id: a.id }).then(function (r) {
@@ -566,10 +568,12 @@ input.tk:focus{border-color:var(--v)}
     openSheet('<div class="mg"><div class="ico" style="background:' + col(a.id) + '">' + esc(t.charAt(0).toUpperCase()) + '</div><div class="an"><h2 style="margin:0">' + esc(t) + '</h2><span>@' + esc(a.bot_username) + '</span></div></div>' +
       '<div class="stat"><div><b id="mgU">…</b><span>' + esc(T.users) + '</span></div><div><b>⭐</b><span>Pro</span></div></div>' +
       '<button class="ghost" id="mgBot">' + esc(T.openMyBot) + '</button>' +
+      (!a.sub_recurring && a.sub_until ? '<div class="blk"><h3>' + esc(T.renT) + '</h3><p>' + esc(T.renP(new Date(a.sub_until).toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-US'))) + '</p><button class="cta gold" id="renGo">' + esc(T.renGo(((S.lim && S.lim.price) || 1000).toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US'))) + '</button></div>' : '') +
       '<div class="blk"><h3>' + esc(T.bcT) + '</h3><p>' + esc(T.bcP) + '</p><div class="field"><textarea id="bcT" maxlength="1000" style="min-height:80px" placeholder="' + esc(T.bcPh) + '"></textarea></div><button class="cta" id="bcGo" disabled>…</button></div>' +
       '<div class="blk"><h3>' + esc(T.poT) + '</h3><p>' + esc(T.poP) + '</p><div class="field"><textarea id="poT" maxlength="1000" style="min-height:90px"></textarea></div><input id="poB" maxlength="40" placeholder="' + esc(T.poBtn) + '"><button class="cta" id="poGo">' + esc(T.poGo) + '</button></div>');
     $('poT').value = T.poDef(t); $('poB').value = '▶️ ' + t;
     $('mgBot').onclick = function () { link('https://t.me/' + a.bot_username); };
+    if ($('renGo')) $('renGo').onclick = function () { $('renGo').disabled = true; call('invoice', { id: a.id, renew: 1 }).then(function (r) { $('renGo').disabled = false; if (!r.ok) { hap('err'); return toast(T.inv); } try { tw.openInvoice(r.link, function (st) { if (st === 'paid') { hap('ok'); toast(T.renOk); closeSheet(); setTimeout(refresh, 2500); } }); } catch (e) { link(r.link); } }); };
     var users = 0;
     call('manage', { id: a.id }).then(function (r) {
       if (!r.ok) return;
@@ -609,7 +613,7 @@ input.tk:focus{border-color:var(--v)}
     var open = q.get('open') || (sp.indexOf('app_') === 0 ? sp.slice(4) : '');
     var gen = S.apps.filter(function (a) { return a.status === 'generating'; })[0];
     if (gen) return startBuild(gen.id, gen.version > 0);
-    if (open) { var a = S.apps.filter(function (x) { return x.id === open; })[0]; if (a) { tab('apps'); if (sub(a) && !a.bot_username) tokenSheet(a); } }
+    if (open) { var a = S.apps.filter(function (x) { return x.id === open; })[0]; if (a) { tab('apps'); if (sub(a) && !a.bot_username) tokenSheet(a); else if (q.get('renew') && a.bot_username) manageSheet(a); } }
   });
 })();
 </script>
