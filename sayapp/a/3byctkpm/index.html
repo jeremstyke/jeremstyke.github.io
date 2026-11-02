@@ -1,16 +1,16 @@
-<!-- sayapp 3byctkpm v1 -->
+<!-- sayapp 3byctkpm v2 -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>Coin Tap</title>
+<title>Coin Tap Pro</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --main:#ffb627;--main2:#ff7a18;--accent:#8b5cf6;--accent2:#c084fc;
   --bg:#0b0a12;--bg2:#14121f;--card:#1a1728;--line:rgba(255,255,255,.07);
-  --text:#f6f3ff;--muted:#9a93b5;--ok:#34d399;
+  --text:#f6f3ff;--muted:#9a93b5;--ok:#34d399;--green:#22c55e;--green2:#10b981;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden}
@@ -46,10 +46,11 @@ main{flex:1;overflow-y:auto;overflow-x:hidden;padding:8px 16px 16px;position:rel
 .energy .row b{font-size:16px}
 .bar{height:12px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden}
 .bar span{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--main));box-shadow:0 0 14px rgba(255,182,39,.6);transition:width .25s ease}
-.btn{border:0;font-family:inherit;font-weight:700;font-size:15px;color:#1b1206;background:linear-gradient(135deg,var(--main),var(--main2));padding:14px 18px;border-radius:16px;cursor:pointer;box-shadow:0 8px 24px rgba(255,122,24,.35);transition:transform .15s,opacity .15s;width:100%}
+.btn{border:0;font-family:inherit;font-weight:700;font-size:15px;color:#04210f;background:linear-gradient(135deg,#4ade80,var(--green2));padding:14px 18px;border-radius:16px;cursor:pointer;box-shadow:0 8px 24px rgba(34,197,94,.4);transition:transform .15s,opacity .15s;width:100%}
 .btn:active{transform:scale(.96)}
 .btn:disabled{opacity:.4;box-shadow:none}
-.btn.ghost{background:rgba(139,92,246,.15);color:var(--accent2);border:1px solid rgba(139,92,246,.35);box-shadow:none;margin-top:12px}
+.btn.ghost{background:linear-gradient(135deg,#4ade80,var(--green2));color:#04210f;border:0;box-shadow:0 8px 24px rgba(34,197,94,.4);margin-top:12px}
+.brand{text-align:center;font-size:28px;font-weight:800;letter-spacing:-.02em;margin-top:4px;background:linear-gradient(135deg,var(--main),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
 h2{font-size:24px;font-weight:800;margin:8px 0 4px}
 .sub{color:var(--muted);font-size:14px;margin-bottom:16px}
 .up{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px;margin-bottom:12px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
@@ -94,6 +95,7 @@ footer{text-align:center;font-size:11px;color:rgba(154,147,181,.5);padding:16px 
   </header>
   <main>
     <section class="view on" id="v-play">
+      <h1 class="brand">Coin Tap Pro</h1>
       <div class="score">
         <span class="label">Tes points</span>
         <div class="num"><i>🪙</i><span id="pts">0</span></div>
