@@ -52,8 +52,10 @@
       });
     },
     purchases: function () { return call({ action: 'purchases' }).then(function (r) { return (r && r.ok && r.rows) || []; }); },
-    hasAd: function () { return (adsReady || Promise.resolve()).then(function () { return !!(ADS && (ADS.ag || ADS.agx)); }); },
-    ad: function () { return (adsReady || Promise.resolve()).then(function () { return playAd(ADS && ADS.ag); }); },
+    // 2 nov 2026 (20h30, Jeremy): without the owner's own ad code, a SayApp rewarded ad (promo of Meme Coin Tycoon / Pass The Baton) plays instead,
+    // so every owner sees the "watch an ad" feature working; his own Adsgram / Ads Galaxy codes replace it as soon as they are saved
+    hasAd: function () { return (adsReady || Promise.resolve()).then(function () { return true; }); },
+    ad: function () { return (adsReady || Promise.resolve()).then(function () { return ADS && (ADS.ag || ADS.agx) ? playAd(ADS.ag) : houseAd(); }); },
     haptic: function (k) {
       try { var h = tw.HapticFeedback; if (k === 'ok') h.notificationOccurred('success'); else if (k === 'error') h.notificationOccurred('error'); else h.impactOccurred('light'); } catch (e) {}
     }
@@ -106,6 +108,27 @@
   function adsgram(block) { return loadJs('https://sad.adsgram.ai/js/sad.min.js', function () { return !!window.Adsgram; }).then(function () { return window.Adsgram.init({ blockId: String(block) }).show(); }).then(function () { return true; }, function (e) { return !!(e && e.done); }); }
   function galaxy(id) { return loadJs('https://app.adsgalaxy.online/sdk.js?id=' + encodeURIComponent(id), function () { return !!window.showAdsGalaxy; }).then(function () { return window.showAdsGalaxy(); }).then(function () { return true; }, function () { return false; }); }
   function playAd(block) { if (!ADS) return Promise.resolve(false); return (block ? adsgram(block) : Promise.resolve(false)).then(function (ok) { return ok || !ADS.agx ? ok : galaxy(ADS.agx); }); }
+  var HOUSE = [
+    { e: '📈', c1: '#1fd18b', c2: '#0b7a52', n: 'Meme Coin Tycoon', fr: 'Trade des memecoins, deviens le plus riche du classement.', en: 'Trade memecoins, become the richest player on the board.', u: 'https://t.me/Memecointycoonbot?startapp=src_sayapp_ad' },
+    { e: '🏃', c1: '#ffb23f', c2: '#ff6a2b', n: 'Pass The Baton', fr: 'Garde le bâton, gagne des points, passe-le à tes amis.', en: 'Hold the baton, earn points, pass it to your friends.', u: 'https://t.me/PassTheBatonBot/play?startapp=src_sayapp_ad' }
+  ];
+  function houseAd() {
+    return new Promise(function (done) {
+      var h = HOUSE[Math.floor(Math.random() * HOUSE.length)], left = 5;
+      css('#sayappH{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(5,5,12,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font-family:Inter,system-ui,-apple-system,sans-serif;animation:sayappF .25s ease}@keyframes sayappF{from{opacity:0}}#sayappH .k{width:100%;max-width:340px;border-radius:26px;overflow:hidden;background:#11111d;border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 80px -20px #000;color:#fff;text-align:center;animation:sayappU .35s cubic-bezier(.2,.9,.3,1.2)}@keyframes sayappU{from{transform:translateY(30px) scale(.96);opacity:0}}#sayappH .v{height:190px;display:grid;place-items:center;font-size:84px;position:relative}#sayappH .v i{position:absolute;top:12px;left:12px;font:700 10px Inter,sans-serif;letter-spacing:.12em;background:rgba(0,0,0,.35);padding:4px 8px;border-radius:99px;font-style:normal}#sayappH .v s{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:99px;display:grid;place-items:center;background:rgba(0,0,0,.4);font:700 13px Inter,sans-serif;text-decoration:none}#sayappH h3{margin:18px 18px 6px;font-size:21px}#sayappH p{margin:0 22px 18px;color:#a9a8c4;font-size:14px;line-height:1.45}#sayappH a{display:block;margin:0 18px 10px;padding:15px;border-radius:16px;color:#1a1000;font:800 16px Inter,sans-serif;text-decoration:none}#sayappH button{display:block;width:calc(100% - 36px);margin:0 18px 18px;padding:13px;border:0;border-radius:14px;background:rgba(255,255,255,.08);color:#fff;font:600 14px Inter,sans-serif}#sayappH button:disabled{opacity:.45}');
+      var x = document.createElement('div'); x.id = 'sayappH';
+      x.innerHTML = '<div class="k"><div class="v" style="background:linear-gradient(140deg,' + h.c1 + ',' + h.c2 + ')"><i>' + (fr ? 'PUB' : 'AD') + '</i><s id="sayappHc">' + left + '</s>' + h.e + '</div><h3>' + h.n + '</h3><p>' + (fr ? h.fr : h.en) + '</p><a href="#" style="background:linear-gradient(120deg,#ffd76a,#ff9f43)">▶️ ' + (fr ? 'Jouer gratuitement' : 'Play for free') + '</a><button disabled>' + (fr ? 'Récompense dans ' : 'Reward in ') + left + ' s</button></div>';
+      document.body.appendChild(x);
+      var b = x.querySelector('button'), cnt = document.getElementById('sayappHc');
+      x.querySelector('a').onclick = function (e) { e.preventDefault(); try { tw.openTelegramLink(h.u); } catch (z) { location.href = h.u; } };
+      var t = setInterval(function () {
+        left--; cnt.textContent = left > 0 ? left : '✓';
+        if (left > 0) { b.textContent = (fr ? 'Récompense dans ' : 'Reward in ') + left + ' s'; return; }
+        clearInterval(t); b.disabled = false; b.textContent = fr ? '🎁 Récupérer ma récompense' : '🎁 Claim my reward';
+      }, 1000);
+      b.onclick = function () { x.remove(); done(true); };
+    });
+  }
   function openAd() {
     if (!ADS || !ADS.open) return;
     var k = 'sayapp_ad_' + APP, last = 0; try { last = Number(localStorage.getItem(k) || 0); } catch (e) {}
