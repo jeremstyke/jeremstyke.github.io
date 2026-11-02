@@ -32,7 +32,20 @@
           if (window.showAdsGalaxy) return run();
           const s = document.createElement('script'); s.src = 'https://app.adsgalaxy.online/sdk.js?id=135'; s.onload = run; document.head.appendChild(s);
         } catch (e) {} };
-        const go = () => { try { window.Adsgram.init({ blockId: 'int-55508' }).show().catch((e) => { if (!e || !('done' in Object(e)) || e.state === 'load' || /no ad|no banner/i.test(String(e.description || ''))) agx(); }); } catch (e) { agx(); } };  /* 25 oct 2026 (11h30): Ads Galaxy only when Adsgram had no ad to show, never after an Adsgram ad */
+        // 2 nov 2026 (9h, Jeremy): after an interstitial, once a day, a small banner "no more ads with Premium" (non-Premium players only)
+        const upsell = () => { try {
+          if (window.MCTPREM || !window.mctPremium) return;
+          const d = new Date().toISOString().slice(0, 10); if (localStorage.getItem('mct_up_day') === d) return; localStorage.setItem('mct_up_day', d);
+          const T = { en: ['🚫 No more ads with Premium', 'See ⭐'], fr: ['🚫 Plus de pubs avec Premium', 'Voir ⭐'], id: ['🚫 Tanpa iklan dengan Premium', 'Lihat ⭐'], es: ['🚫 Sin anuncios con Premium', 'Ver ⭐'], ru: ['🚫 Без рекламы с Premium', 'Смотреть ⭐'], pt: ['🚫 Sem anúncios com Premium', 'Ver ⭐'] };
+          let lg = 'en'; try { if (typeof LANG === 'string' && T[LANG]) lg = LANG; } catch (e) {}
+          const t = T[lg], b = document.createElement('div');
+          b.style.cssText = 'position:fixed;left:12px;right:12px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:9999;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:#1b1530;color:#fff;border:1px solid #7c5cff;box-shadow:0 10px 30px rgba(0,0,0,.45);font:600 14px/1.3 system-ui,sans-serif';
+          b.innerHTML = '<span style="flex:1;min-width:0">' + t[0] + '</span><button style="border:0;border-radius:10px;padding:8px 12px;background:#7c5cff;color:#fff;font:700 13px system-ui,sans-serif;white-space:nowrap">' + t[1] + '</button><button aria-label="close" style="border:0;background:none;color:#aaa;font-size:20px;padding:0 2px">×</button>';
+          const bs = b.querySelectorAll('button'), close = () => { try { b.remove(); } catch (e) {} };
+          bs[0].onclick = () => { close(); try { window.mctPremium(); } catch (e) {} }; bs[1].onclick = close;
+          document.body.appendChild(b); setTimeout(close, 10000);
+        } catch (e) {} };
+        const go = () => { try { window.Adsgram.init({ blockId: 'int-55508' }).show().then(() => setTimeout(upsell, 400)).catch((e) => { if (!e || !('done' in Object(e)) || e.state === 'load' || /no ad|no banner/i.test(String(e.description || ''))) agx(); }); } catch (e) { agx(); } };  /* 25 oct 2026 (11h30): Ads Galaxy only when Adsgram had no ad to show, never after an Adsgram ad */
         // 28 oct 2026 (21h33, Jeremy): 1 opening interstitial out of 5 on Monetag (In-App Interstitial, zone 12143182), drawn at random over all players;
         // Adsgram (int-55508) for the others, or when Monetag fails
         const adsg = () => { if (window.Adsgram) return go(); if (!document.querySelector('script[src*="sad.adsgram.ai"]')) { const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; document.head.appendChild(s); } let n = 0; const w = setInterval(() => { if (window.Adsgram) { clearInterval(w); go(); } else if (++n > 20) { clearInterval(w); agx(); } }, 300); };
