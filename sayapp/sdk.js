@@ -11,7 +11,7 @@
   var cur = document.currentScript;
   var APP = (cur && cur.getAttribute('data-app')) || (function () { var m = location.pathname.match(/\/a\/([a-z0-9]+)/); return m ? m[1] : ''; })();
   var tw = window.Telegram && window.Telegram.WebApp;
-  try { tw.ready(); tw.expand(); } catch (e) {}
+  try { tw.ready(); tw.expand(); tw.disableVerticalSwipes && tw.disableVerticalSwipes(); } catch (e) {}  // 2 nov 2026: a swipe down does not close the app
   var user = (tw && tw.initDataUnsafe && tw.initDataUnsafe.user) || { id: 0, first_name: 'Guest' };
   var cache = {};
   function call(body) {
