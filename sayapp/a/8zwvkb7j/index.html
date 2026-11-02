@@ -1,4 +1,4 @@
-<!-- sayapp 8zwvkb7j v2 -->
+<!-- sayapp 8zwvkb7j v3 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,6 +72,7 @@ h2.t{font-size:28px;font-weight:800;letter-spacing:-.6px;margin:4px 4px 2px}
 .empty{text-align:center;padding:40px 20px;color:var(--mut)}.empty div{font-size:48px;margin-bottom:8px}
 .item{display:flex;gap:14px;align-items:center;background:var(--card);border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:var(--sh)}
 .ic{width:56px;height:56px;border-radius:18px;background:linear-gradient(145deg,#dcfce7,#bbf7d0);display:grid;place-items:center;font-size:28px;flex:none}
+.ic.ninja{background:linear-gradient(145deg,#ede9fe,#c4b5fd)}
 .item .tx{flex:1;min-width:0}.item h3{font-size:17px;font-weight:700}.item p{font-size:13px;color:var(--mut);line-height:1.3;margin-top:2px}
 .item .own{font-size:12px;color:var(--g2);font-weight:700;margin-top:4px}
 .buy{border:0;border-radius:14px;padding:12px 14px;font:700 15px 'Outfit',sans-serif;background:var(--ink);color:#fff;transition:transform .15s;cursor:pointer;white-space:nowrap}
@@ -103,7 +104,7 @@ footer{text-align:center;font-size:11px;color:#8aa093;margin-top:22px;letter-spa
       <div class="stat"><b id="sr">0</b><span>Runs</span></div>
       <div class="stat"><b id="st">0</b><span>LMN</span></div>
     </div>
-    <p class="how">Swipe left or right to change lane, swipe up or tap to jump, swipe down to slide under yellow gates.</p>
+    <p class="how">Swipe left or right to change lane, swipe up or tap to jump, swipe down to slide under yellow gates. Grab a 🚀 rocket to speed up and smash through everything for 5 seconds.</p>
   </section>
   <section class="view" id="v-rank">
     <h2 class="t">Leaderboard</h2>
@@ -112,8 +113,10 @@ footer{text-align:center;font-size:11px;color:#8aa093;margin-top:22px;letter-spa
   </section>
   <section class="view" id="v-shop">
     <h2 class="t">Boost shop</h2>
-    <div class="lbl">Spend your LMN tokens</div>
+    <div class="lbl">Spend your LMN tokens (virtual points)</div>
     <div id="shop"></div>
+    <div class="lbl" style="margin-top:18px">Runner skins</div>
+    <div id="skins"></div>
   </section>
   <footer>Points have no cash value<br>Made with SayApp</footer>
 </main>
@@ -129,7 +132,7 @@ footer{text-align:center;font-size:11px;color:#8aa093;margin-top:22px;letter-spa
 window.addEventListener('load',async()=>{
 const $=s=>document.querySelector(s);
 try{window.Telegram&&Telegram.WebApp&&(Telegram.WebApp.ready(),Telegram.WebApp.expand())}catch(e){}
-let S={coins:0,shield:0,x2:0,magnet:0,runs:0,lastDay:'',streak:0},best=0,wbest=0,dirty=false,cur='run',rtab='wk',rid=0,champ=false,champName='',champP=null;
+let S={coins:0,shield:0,x2:0,magnet:0,runs:0,lastDay:'',streak:0,skin:0,own1:false,cw:''},best=0,wbest=0,dirty=false,cur='run',rtab='wk',rid=0,champ=false,champName='',champP=null;
 const hap=t=>{try{SayApp.haptic(t)}catch(e){}};
 const uname=(SayApp.user&&SayApp.user.first_name)||'Runner';
 const DAY=864e5,dn=Math.floor(Date.now()/DAY),mon=dn-((dn+3)%7),WK='wk'+mon,PWK='wk'+(mon-7);
@@ -155,42 +158,55 @@ async function ranks(){
   document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.t===rtab));
   let list=[];try{list=await SayApp.top(rtab==='wk'?WK:'best',20)||[]}catch(e){}
   await champP;if(id!==rid)return;
-  const ban=rtab==='wk'?`<div class="champ"><div class="cr">👑</div><div class="tx"><small>Last week's champion</small><b>${champName?esc(champName)+(champ?' (you)':''):'Nobody yet'}</b></div><div class="rs">Resets in<br>${left()}</div></div>`:'';
+  const ban=rtab==='wk'?`<div class="champ"><div class="cr">👑</div><div class="tx"><small>Last week's champion · +500 LMN</small><b>${champName?esc(champName)+(champ?' (you)':''):'Nobody yet'}</b></div><div class="rs">Resets in<br>${left()}</div></div>`:'';
   if(!list.length){box.innerHTML=ban+'<div class="empty"><div>🏁</div><b>No runners yet</b><br>Be the first on the board. Go run!</div>';return}
   const med=['🥇','🥈','🥉'];
   box.innerHTML=ban+list.map((r,i)=>`<div class="row ${r.me?'me':''}"><div class="rk">${med[i]||i+1}</div><div class="av">${esc(String(r.name||'?').charAt(0).toUpperCase())}</div><div class="nm">${esc(r.name||'Runner')}${r.me?' (you)':''}${r.me&&champ?' 👑':''}</div><div class="vl">${Math.round(r.value)} <small>m</small></div></div>`).join('');
 }
 const ITEMS=[{k:'shield',ic:'🛡️',n:'Shield',d:'Absorbs one crash in your next run.',p:50},{k:'x2',ic:'⚡',n:'Double tokens',d:'Every token counts twice for one run.',p:80},{k:'magnet',ic:'🧲',n:'Magnet',d:'Pulls nearby tokens to you for 20 seconds.',p:60}];
+const SKINS=[{id:0,ic:'🟢',n:'Classic',d:'The original green runner.',p:0},{id:1,ic:'🥷',n:'Neon Ninja',d:'Purple suit with a flowing pink headband.',p:300}];
+const SKN=[{a:'#4ade80',b:'#16a34a',v:'#f59e0b',h:'#166534',l:'#14532d'},{a:'#c084fc',b:'#6d28d9',v:'#f472b6',h:'#1e1b4b',l:'#312e81'}];
+const owned=k=>k.id===0||S.own1;
 function shop(){
   $('#shop').innerHTML=ITEMS.map(i=>`<div class="item"><div class="ic">${i.ic}</div><div class="tx"><h3>${i.n}</h3><p>${i.d}</p><div class="own">Owned: ${S[i.k]||0}</div></div><button class="buy" data-k="${i.k}" ${S.coins<i.p?'disabled':''}>${i.p} L</button></div>`).join('');
-  document.querySelectorAll('.buy').forEach(b=>b.onclick=()=>{const i=ITEMS.find(x=>x.k===b.dataset.k);if(S.coins<i.p){hap('error');return}S.coins-=i.p;S[i.k]=(S[i.k]||0)+1;touch();hap('ok');toast(i.n+' added to your next run');ui();shop()});
+  document.querySelectorAll('#shop .buy').forEach(b=>b.onclick=()=>{const i=ITEMS.find(x=>x.k===b.dataset.k);if(S.coins<i.p){hap('error');return}S.coins-=i.p;S[i.k]=(S[i.k]||0)+1;touch();hap('ok');toast(i.n+' added to your next run');ui();shop()});
+  $('#skins').innerHTML=SKINS.map(k=>{const o=owned(k),eq=(S.skin||0)===k.id;
+    return `<div class="item"><div class="ic ${k.id?'ninja':''}">${k.ic}</div><div class="tx"><h3>${k.n}</h3><p>${k.d}</p><div class="own">${eq?'Equipped':o?'Unlocked':'Locked'}</div></div><button class="buy" data-s="${k.id}" ${eq||(!o&&S.coins<k.p)?'disabled':''}>${eq?'Equipped':o?'Equip':k.p+' L'}</button></div>`}).join('');
+  document.querySelectorAll('#skins .buy').forEach(b=>b.onclick=()=>{const k=SKINS[+b.dataset.s];
+    if(!owned(k)){if(S.coins<k.p){hap('error');return}S.coins-=k.p;S.own1=true;toast(k.n+' unlocked!')}else toast(k.n+' equipped');
+    S.skin=k.id;touch();flush();hap('ok');ui();shop()});
 }
 // game
 const cv=$('#cv'),ctx=cv.getContext('2d');let W=300,H=400,dpr=1;
 function size(){const r=$('#stage').getBoundingClientRect();if(!r.width)return;dpr=Math.min(2,window.devicePixelRatio||1);W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
 size();window.addEventListener('resize',size);
-let state='idle',objs=[],parts=[],off=0,dist=0,speed=.35,rc=0,tl=1,px=1,jh=0,jv=0,sl=0,magT=0,shieldOn=false,x2On=false,nextSp=0,shake=0,tt=0,adUsed=false,lastScore=0,gain=0;
+let state='idle',objs=[],parts=[],off=0,dist=0,speed=.35,rc=0,tl=1,px=1,jh=0,jv=0,sl=0,magT=0,speedT=0,shieldOn=false,x2On=false,nextSp=0,shake=0,tt=0,adUsed=false,lastScore=0,gain=0;
 const K=9;
 const jumpP=()=>H*.16,G=()=>18.9*jumpP();
 function overlay(h){const o=$('#ov');o.innerHTML=h;o.classList.remove('off')}
 // daily bonus
 const nextStreak=()=>S.lastDay===dayStr(Date.now()-DAY)?(S.streak||0)+1:1;
 const bonusFor=i=>i===7?100:20+(i-1)*10;
+function champBonus(){
+  overlay(`<div class="panel"><div class="tag">👑 Weekly champion</div><h2>You ruled last week</h2><p>You finished #1 on the leaderboard. Here is your champion bonus.</p><div class="big">+500</div><button class="btn" id="cc">Claim 500 LMN</button></div>`);
+  $('#cc').onclick=()=>{S.coins+=500;S.cw=PWK;touch();flush();hap('ok');toast('+500 LMN champion bonus!');ui();burst(W/2,H/2,'#fbbf24',26,'+500');startScreen()};
+}
 function daily(){
   const ns=nextStreak(),idx=(ns-1)%7+1,amt=bonusFor(idx);
   overlay(`<div class="panel"><div class="tag">🎁 Daily bonus</div><h2>Day ${ns} streak</h2><p>Come back every day, the reward grows until day 7.</p><div class="days">${[1,2,3,4,5,6,7].map(i=>`<i class="${i<idx?'done':i===idx?'now':''}">${i<idx?'✓':i===7?'🎁':i}</i>`).join('')}</div><button class="btn" id="claim">Claim +${amt} LMN</button></div>`);
   $('#claim').onclick=()=>{S.coins+=amt;S.lastDay=dayStr(Date.now());S.streak=ns;touch();flush();hap('ok');toast('+'+amt+' LMN daily bonus!');ui();burst(W/2,H/2,'#fbbf24',20,'+'+amt);startScreen()};
 }
 function startScreen(){
+  if(champ&&S.cw!==PWK){champBonus();return}
   if(S.lastDay!==dayStr(Date.now())){daily();return}
   overlay(`<div class="panel"><div class="tag">${champ?'👑 Champion '+esc(uname):'Hi '+esc(uname)}</div><h2>Ready to run?</h2><p>Dodge blocks, jump barriers, slide under gates and collect LMN tokens.</p><button class="btn" id="go">Start running</button></div>`);$('#go').onclick=start}
 function start(){
-  hap('tap');objs=[];parts=[];dist=0;rc=0;tl=1;px=1;jh=0;jv=0;sl=0;speed=.7;nextSp=.3;adUsed=false;
+  hap('tap');objs=[];parts=[];dist=0;rc=0;tl=1;px=1;jh=0;jv=0;sl=0;speed=.7;nextSp=.3;adUsed=false;speedT=0;
   shieldOn=false;x2On=false;magT=0;
   if(S.shield>0){S.shield--;shieldOn=true}if(S.x2>0){S.x2--;x2On=true}if(S.magnet>0){S.magnet--;magT=20}
   touch();badges();$('#ov').classList.add('off');state='run';$('#hs').textContent='0 m';$('#hc').textContent='0';
 }
-function badges(){$('#badges').innerHTML=(shieldOn?'<em>🛡️ Shield</em>':'')+(x2On?'<em>⚡ x2</em>':'')+(magT>0?'<em>🧲 '+Math.ceil(magT)+'s</em>':'')}
+function badges(){$('#badges').innerHTML=(shieldOn?'<em>🛡️ Shield</em>':'')+(x2On?'<em>⚡ x2</em>':'')+(magT>0?'<em>🧲 '+Math.ceil(magT)+'s</em>':'')+(speedT>0?'<em>🚀 Boost '+Math.ceil(speedT)+'s</em>':'')}
 function spawn(){
   const z=1.3,r=Math.random(),L=()=>Math.floor(Math.random()*3);
   const coins=(l,n,z0)=>{for(let i=0;i<n;i++)objs.push({t:'c',l,z:(z0||z)+i*.05})};
@@ -199,6 +215,7 @@ function spawn(){
   else if(r<.7){const a=L();objs.push({t:'r',l:a,z});if(Math.random()<.5)objs.push({t:'r',l:(a+1)%3,z});coins((a+2)%3,3)}
   else if(r<.88&&dist>40){const a=L();objs.push({t:'h',l:a,z});coins(a,3,z+.1)}
   else{const a=L(),b=(a+1+Math.floor(Math.random()*2))%3,c=3-a-b;objs.push({t:'b',l:a,z},{t:'b',l:b,z});coins(c,5)}
+  if(speedT<=0&&dist>25&&Math.random()<.13)objs.push({t:'p',l:L(),z:z+.2});
   nextSp=.32+Math.random()*.22;
 }
 function burst(x,y,c,n,txt){for(let i=0;i<n;i++){const a=Math.random()*6.28,v=40+Math.random()*90;parts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-40,l:1,c})}if(txt)parts.push({x,y:y-10,vx:0,vy:-60,l:1,t:txt})}
@@ -208,10 +225,11 @@ function step(dt){
   const run=state==='run'&&cur==='run';
   const sp=run?speed:.35;off+=sp*dt/.3;
   if(!run){px+=(1-px)*Math.min(1,dt*8);return}
-  speed=.7+Math.min(.9,dist/1500);dist+=speed*dt*12;
+  speed=(.7+Math.min(.9,dist/1500))*(speedT>0?1.4:1);dist+=speed*dt*12;
   px+=(tl-px)*Math.min(1,dt*14);
   if(sl>0)sl-=dt;
   if(magT>0){const c=Math.ceil(magT);magT-=dt;if(Math.ceil(magT)!==c)badges()}
+  if(speedT>0){const c=Math.ceil(speedT);speedT=Math.max(0,speedT-dt);if(Math.ceil(speedT)!==c)badges()}
   if(jh>0||jv>0){jh+=jv*dt;jv-=G()*dt;if(jh<=0){jh=0;jv=0}}
   nextSp-=speed*dt;if(nextSp<=0)spawn();
   const laneW=W*.92/3,py=H*.84;
@@ -219,9 +237,12 @@ function step(dt){
     if(o.d)continue;
     if(magT>0&&o.t==='c'&&o.z<.6&&o.z>0&&Math.abs(px-o.l)<1.6)o.l+=(px-o.l)*Math.min(1,dt*9);
     if(o.z<.08&&o.z>-.06&&Math.abs(px-o.l)<.55){
-      if(o.t==='c'){o.d=1;const v=x2On?2:1;rc+=v;const s=1/(1+Math.max(o.z,0)*K);burst(W/2+(o.l-1)*laneW*s,py-laneW*.3,'#fbbf24',6,'+'+v);if(tt-lastHap>.12){hap('tap');lastHap=tt}}
+      const s=1/(1+Math.max(o.z,0)*K),bx=W/2+(o.l-1)*laneW*s;
+      if(o.t==='c'){o.d=1;const v=x2On?2:1;rc+=v;burst(bx,py-laneW*.3,'#fbbf24',6,'+'+v);if(tt-lastHap>.12){hap('tap');lastHap=tt}}
+      else if(o.t==='p'){o.d=1;speedT=5;badges();hap('ok');burst(bx,py-laneW*.3,'#38bdf8',16,'Boost!')}
       else if(o.t==='r'&&jh>jumpP()*.4){}
       else if(o.t==='h'&&sl>0){}
+      else if(speedT>0){o.d=1;shake=.15;hap('tap');burst(bx,py-laneW*.3,'#38bdf8',10,'Smash!')}
       else{o.d=1;
         if(shieldOn){shieldOn=false;badges();hap('ok');shake=.25;burst(W/2+(px-1)*laneW,py-40,'#22c55e',18,'Saved!')}
         else{crash();return}
@@ -232,7 +253,7 @@ function step(dt){
   $('#hs').textContent=Math.floor(dist)+' m';$('#hc').textContent=rc;
 }
 function crash(){
-  state='over';hap('error');shake=.5;magT=0;sl=0;const laneW=W*.92/3;burst(W/2+(px-1)*laneW,H*.78,'#ef4444',24);
+  state='over';hap('error');shake=.5;magT=0;sl=0;speedT=0;const laneW=W*.92/3;burst(W/2+(px-1)*laneW,H*.78,'#ef4444',24);
   lastScore=Math.floor(dist);gain=rc;S.coins+=rc;S.runs++;
   const nb=lastScore>best;if(nb){best=lastScore;try{SayApp.set('best',best)}catch(e){}}
   if(lastScore>wbest){wbest=lastScore;try{SayApp.set(WK,wbest)}catch(e){}}
@@ -299,27 +320,36 @@ function draw(){
       ctx.fillStyle='#f59e0b';rr(x-w/2,by,w,bh,u*.08);ctx.fill();
       ctx.fillStyle='#1f2937';for(let i=0;i<4;i++)ctx.fillRect(x-w/2+w*(.1+i*.22),by,w*.1,bh);
       ctx.fillStyle='rgba(255,255,255,.4)';ctx.fillRect(x-w/2,by,w,bh*.18)}
+    else if(o.t==='p'){const cy=y-u*.4,pu=1+.12*Math.sin(tt*9);
+      ctx.fillStyle='rgba(56,189,248,.28)';ctx.beginPath();ctx.arc(x,cy,u*.34*pu,0,6.3);ctx.fill();
+      const gg=ctx.createRadialGradient(x-u*.06,cy-u*.06,1,x,cy,u*.26);gg.addColorStop(0,'#bae6fd');gg.addColorStop(1,'#0284c7');
+      ctx.fillStyle=gg;ctx.beginPath();ctx.arc(x,cy,u*.24,0,6.3);ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=Math.max(1,u*.03);ctx.stroke();
+      ctx.fillStyle='#fff';ctx.beginPath();ctx.moveTo(x+u*.04,cy-u*.17);ctx.lineTo(x-u*.09,cy+u*.02);ctx.lineTo(x-u*.01,cy+u*.02);ctx.lineTo(x-u*.05,cy+u*.17);ctx.lineTo(x+u*.09,cy-u*.03);ctx.lineTo(x+u*.01,cy-u*.03);ctx.closePath();ctx.fill()}
     else{const w=u*.92,h=u*.34;ctx.fillStyle='#ef4444';rr(x-w/2,y-h-u*.1,w,h,u*.08);ctx.fill();ctx.fillStyle='#fff';
       for(let i=0;i<4;i++)ctx.fillRect(x-w/2+w*(.1+i*.22),y-h-u*.1,w*.1,h);
       ctx.fillStyle='#64748b';ctx.fillRect(x-w/2+u*.05,y-u*.1,u*.07,u*.1);ctx.fillRect(x+w/2-u*.12,y-u*.1,u*.07,u*.1)}
     ctx.globalAlpha=1};
   sorted.filter(o=>o.z>=0).forEach(drawO);
   // player
-  const pxp=cx+(px-1)*laneW,u=laneW*.5,ph=jh,bob=state==='run'&&jh===0?Math.sin(tt*16)*u*.05:0;
+  const P=SKN[S.skin||0],pxp=cx+(px-1)*laneW,u=laneW*.5,ph=jh,bob=state==='run'&&jh===0?Math.sin(tt*16)*u*.05:0;
   ctx.save();
   if(sl>0){ctx.translate(pxp,py);ctx.scale(1.15,.5);ctx.translate(-pxp,-py)}
   ctx.fillStyle='rgba(15,36,23,.22)';ctx.beginPath();ctx.ellipse(pxp,py,u*.5*(1-ph/(H*.4)),u*.1,0,0,6.3);ctx.fill();
   const y=py-ph+bob,sw=state==='run'?Math.sin(tt*16)*u*.22:0;
-  ctx.lineCap='round';ctx.strokeStyle='#14532d';ctx.lineWidth=u*.16;
+  if(speedT>0){ctx.fillStyle='rgba(56,189,248,.25)';ctx.beginPath();ctx.arc(pxp,y-u*.8,u*1.2+Math.sin(tt*20)*3,0,6.3);ctx.fill()}
+  ctx.lineCap='round';ctx.strokeStyle=P.l;ctx.lineWidth=u*.16;
   ctx.beginPath();ctx.moveTo(pxp-u*.12,y-u*.5);ctx.lineTo(pxp-u*.12+sw,y);ctx.moveTo(pxp+u*.12,y-u*.5);ctx.lineTo(pxp+u*.12-sw,y);ctx.stroke();
-  g=ctx.createLinearGradient(0,y-u*1.2,0,y-u*.4);g.addColorStop(0,'#4ade80');g.addColorStop(1,'#16a34a');ctx.fillStyle=g;rr(pxp-u*.3,y-u*1.15,u*.6,u*.75,u*.2);ctx.fill();
-  ctx.fillStyle='#f59e0b';rr(pxp-u*.22,y-u*1.05,u*.44,u*.4,u*.1);ctx.fill();
+  g=ctx.createLinearGradient(0,y-u*1.2,0,y-u*.4);g.addColorStop(0,P.a);g.addColorStop(1,P.b);ctx.fillStyle=g;rr(pxp-u*.3,y-u*1.15,u*.6,u*.75,u*.2);ctx.fill();
+  ctx.fillStyle=P.v;rr(pxp-u*.22,y-u*1.05,u*.44,u*.4,u*.1);ctx.fill();
   ctx.fillStyle='#fde68a';ctx.beginPath();ctx.arc(pxp,y-u*1.4,u*.26,0,6.3);ctx.fill();
-  ctx.fillStyle='#166534';ctx.beginPath();ctx.arc(pxp,y-u*1.5,u*.27,3.14,6.28);ctx.fill();
+  ctx.fillStyle=P.h;ctx.beginPath();ctx.arc(pxp,y-u*1.5,u*.27,3.14,6.28);ctx.fill();
+  if(S.skin===1){ctx.fillStyle=P.v;ctx.fillRect(pxp-u*.27,y-u*1.52,u*.54,u*.08);
+    ctx.strokeStyle=P.v;ctx.lineWidth=u*.08;ctx.beginPath();ctx.moveTo(pxp+u*.24,y-u*1.48);ctx.quadraticCurveTo(pxp+u*.5,y-u*1.5+Math.sin(tt*14)*u*.12,pxp+u*.75,y-u*1.36+Math.sin(tt*14+1)*u*.16);ctx.stroke()}
   if(shieldOn){ctx.strokeStyle='rgba(34,197,94,.8)';ctx.fillStyle='rgba(34,197,94,.15)';ctx.lineWidth=3;ctx.beginPath();ctx.arc(pxp,y-u*.8,u*1.05,0,6.3);ctx.fill();ctx.stroke()}
   ctx.restore();
   if(magT>0&&state==='run'){ctx.strokeStyle='rgba(239,68,68,'+(.35+.25*Math.sin(tt*8))+')';ctx.lineWidth=2;ctx.setLineDash([6,6]);ctx.beginPath();ctx.arc(pxp,y-u*.8,u*1.5+Math.sin(tt*8)*3,0,6.3);ctx.stroke();ctx.setLineDash([])}
   sorted.filter(o=>o.z<0).forEach(drawO);
+  if(speedT>0&&state==='run'){ctx.strokeStyle='rgba(255,255,255,.6)';ctx.lineWidth=2;for(let i=0;i<10;i++){const xx=i*W/10+((i*37)%17),yy=(tt*900+i*83)%H;ctx.beginPath();ctx.moveTo(xx,yy);ctx.lineTo(xx,yy+40);ctx.stroke()}}
   for(const p of parts){ctx.globalAlpha=Math.max(0,p.l);if(p.t){ctx.fillStyle='#b45309';ctx.font='800 20px Outfit';ctx.textAlign='center';ctx.fillText(p.t,p.x,p.y)}else{ctx.fillStyle=p.c;ctx.beginPath();ctx.arc(p.x,p.y,4,0,6.3);ctx.fill()}}
   ctx.globalAlpha=1;ctx.restore();
 }
@@ -330,7 +360,7 @@ function loop(n){const dt=Math.min(.05,(n-last)/1000);last=n;
   if(cur==='run'){step(dt);draw()}
   requestAnimationFrame(loop)}
 ui();startScreen();requestAnimationFrame(loop);
-champP.then(()=>{if(state==='idle'&&!$('#go')===false)startScreen()});
+champP.then(()=>{if(state==='idle'&&$('#go'))startScreen()});
 });
 </script>
 </body>
