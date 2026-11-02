@@ -1,4 +1,4 @@
-<!-- sayapp 4v2t3sra v4 -->
+<!-- sayapp 4v2t3sra v5 -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -33,6 +33,11 @@ section.active{display:block}
 #boardWrap{position:relative;margin:0 auto;border-radius:22px;overflow:hidden;background:linear-gradient(160deg,#0f1729,#090e1a);box-shadow:0 0 0 1px rgba(46,242,160,.18),0 18px 40px rgba(0,0,0,.5),0 0 40px rgba(46,242,160,.08);touch-action:none;transition:box-shadow .3s}
 #boardWrap.walls{box-shadow:0 0 0 2px rgba(255,77,125,.55),0 18px 40px rgba(0,0,0,.5),0 0 34px rgba(255,77,125,.15)}
 #cv{display:block;width:100%;height:100%}
+html,body{overscroll-behavior:none}
+#fruitEl{position:absolute;transform:translate(-50%,-50%);pointer-events:none;line-height:1;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;filter:drop-shadow(0 3px 6px rgba(0,0,0,.45))}
+#fruitEl span{display:block;animation:fin .3s cubic-bezier(.2,.9,.3,1.4),bob 1.4s ease-in-out .3s infinite}
+@keyframes fin{from{transform:scale(0) rotate(-30deg)}to{transform:scale(1)}}
+@keyframes bob{50%{transform:scale(1.1) rotate(-6deg)}}
 .shake{animation:shake .45s ease}
 @keyframes shake{20%{transform:translateX(-8px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
 #ov{position:absolute;inset:0;display:grid;place-items:center;padding:20px;background:rgba(6,9,16,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .25s}
@@ -102,7 +107,7 @@ footer{text-align:center;font-size:11px;color:#4d5875;margin-top:20px;letter-spa
       <div class="stat"><div class="lbl">Record</div><div class="val" id="bestV">0</div></div>
       <div class="stat"><div class="lbl">Niveau</div><div class="val" id="lvlV">1</div></div>
     </div>
-    <div id="boardWrap"><canvas id="cv"></canvas><div id="cd"></div><div id="lv"></div><div id="ov"><div class="box" id="ovBox"></div></div></div>
+    <div id="boardWrap"><canvas id="cv"></canvas><div id="fruitEl"></div><div id="cd"></div><div id="lv"></div><div id="ov"><div class="box" id="ovBox"></div></div></div>
     <div class="bar" id="bar"><button class="chip" id="wallsBtn">🌀 Murs traversables</button><span class="hint">Swipe pour tourner</span></div>
     <div class="pad" id="pad">
       <button data-d="l" aria-label="Gauche"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -129,7 +134,8 @@ footer{text-align:center;font-size:11px;color:#4d5875;margin-top:20px;letter-spa
 window.addEventListener('load',async()=>{
 const SA=window.SayApp||{user:null,get:async()=>null,set:async()=>{},top:async()=>[],haptic:()=>{},ad:async()=>false};
 const $=s=>document.querySelector(s);
-const N=17,FRUITS=['🍎','🍓','🍊','🍇','🍒','🍉','🍑','🍍'];
+const N=17,FRUITS=['🍌','🍒','🍓','🍎','🍇','🍉','🍑','🍫','🐭','🍪','🧀','🍍'];
+const fe=document.getElementById('fruitEl');
 let cv=$('#cv'),ctx=cv.getContext('2d'),size=300,cell=20;
 let snake=[],dir={x:1,y:0},queue=[],fruit=null,score=0,shown=0,eaten=0,stepMs=150,acc=0,last=0;
 let running=false,paused=false,busy=false,usedContinue=false,dead=false,deadAt=0,cause='';
@@ -247,23 +253,25 @@ function draw(t){
   }
   if(fruit){
     const cx=(fruit.x+.5)*cell,cy=(fruit.y+.5)*cell,b=1+Math.sin(t/220)*.07,ap=Math.min(1,(t-fruit.born)/220);
-    const fc=fruit.kind==='slow'?['#c9a6ff','#7b4dff']:fruit.kind==='gem'?['#b8f0ff','#2fa8ff']:fruit.gold?['#fff1a8','#ffb21e']:['#fff27a','#ffb800'];
-    const g=ctx.createRadialGradient(cx,cy,0,cx,cy,cell*1.3);g.addColorStop(0,fc[1]+'aa');g.addColorStop(1,'rgba(0,0,0,0)');
-    ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,cell*1.3,0,7);ctx.fill();
-    const wp=(t%1100)/1100;ctx.globalAlpha=(1-wp)*.85*ap;ctx.strokeStyle=fc[0];ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,cell*(.45+wp*.75),0,7);ctx.stroke();ctx.globalAlpha=1;
-    const orb=cell*.46*b*ap,og=ctx.createRadialGradient(cx-orb*.35,cy-orb*.35,orb*.1,cx,cy,orb);og.addColorStop(0,'#ffffff');og.addColorStop(.35,fc[0]);og.addColorStop(1,fc[1]);
-    ctx.shadowColor=fc[1];ctx.shadowBlur=18;ctx.fillStyle=og;ctx.beginPath();ctx.arc(cx,cy,orb,0,7);ctx.fill();ctx.shadowBlur=0;
-    ctx.strokeStyle='#ffffff';ctx.lineWidth=2;ctx.stroke();
-    if(fruit.gold){const k=Math.max(0,(fruit.until-t)/fruit.dur);ctx.strokeStyle='rgba(255,201,60,.9)';ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,cell*.62,-Math.PI/2,-Math.PI/2+k*Math.PI*2);ctx.stroke()}
-    ctx.save();ctx.translate(cx,cy);ctx.scale(b*ap,b*ap);ctx.font=(cell*.62)+'px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(fruit.e,0,cell*.04);ctx.restore();
-  }
+    ctx.fillStyle='rgba(0,0,0,.28)';ctx.beginPath();ctx.ellipse(cx,cy+cell*.36,cell*.3*b*ap,cell*.09*ap,0,0,7);ctx.fill();
+    if(fruit.gold){
+      const fc=fruit.kind==='slow'?'rgba(170,130,255,':fruit.kind==='gem'?'rgba(80,190,255,':'rgba(255,201,60,';
+      const wp=(t%1100)/1100;ctx.globalAlpha=(1-wp)*.7*ap;ctx.strokeStyle=fc+'1)';ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,cell*(.5+wp*.6),0,7);ctx.stroke();ctx.globalAlpha=1;
+      const k=Math.max(0,(fruit.until-t)/fruit.dur);ctx.strokeStyle=fc+'.95)';ctx.lineWidth=2.5;ctx.lineCap='round';ctx.beginPath();ctx.arc(cx,cy,cell*.6,-Math.PI/2,-Math.PI/2+k*Math.PI*2);ctx.stroke();
+    }
+    const key=fruit.x+','+fruit.y+fruit.e+fruit.born+'|'+cell;
+    if(fe.dataset.k!==key){fe.dataset.k=key;fe.innerHTML='<span>'+fruit.e+'</span>';fe.style.left=cx+'px';fe.style.top=cy+'px';fe.style.fontSize=(cell*.86)+'px'}
+    fe.style.display='block';
+  }else{fe.style.display='none';fe.dataset.k=''}
   const L=snake.length,p=cell*.1,blink=dead&&t-deadAt<720&&Math.floor((t-deadAt)/120)%2===0;
   for(let i=L-1;i>=0;i--){
     const s=snake[i],k=L>1?i/(L-1):0;
     ctx.fillStyle=blink?'#ff4d6d':`hsl(${152+k*24},${90-k*15}%,${60-k*24}%)`;
     if(i>0){const n=snake[i-1];if(Math.abs(n.x-s.x)+Math.abs(n.y-s.y)===1){
       if(n.y===s.y)ctx.fillRect((Math.min(s.x,n.x)+.5)*cell,s.y*cell+p,cell,cell-2*p);
-      else ctx.fillRect(s.x*cell+p,(Math.min(s.y,n.y)+.5)*cell,cell-2*p,cell)}}
+      else ctx.fillRect(s.x*cell+p,(Math.min(s.y,n.y)+.5)*cell,cell-2*p,cell)}
+      else if(n.y===s.y&&Math.abs(n.x-s.x)===N-1){ctx.fillRect(0,s.y*cell+p,cell*.5,cell-2*p);ctx.fillRect((N-.5)*cell,s.y*cell+p,cell*.5,cell-2*p)}
+      else if(n.x===s.x&&Math.abs(n.y-s.y)===N-1){ctx.fillRect(s.x*cell+p,0,cell-2*p,cell*.5);ctx.fillRect(s.x*cell+p,(N-.5)*cell,cell-2*p,cell*.5)}}
     if(i===0){
       const pl=1+Math.sin(t/180)*.05,hs=cell*1.08*pl,hcx=(s.x+.5)*cell,hcy=(s.y+.5)*cell;
       ctx.fillStyle=blink?'rgba(255,77,109,.2)':'rgba(46,242,160,.18)';ctx.beginPath();ctx.arc(hcx,hcy,cell*(.95+Math.sin(t/180)*.08),0,7);ctx.fill();
@@ -363,6 +371,7 @@ bw.addEventListener('touchmove',e=>{
   if(Math.abs(dx)>Math.abs(dy))setDir(dx>0?1:-1,0);else setDir(0,dy>0?1:-1);
   sx=t.clientX;sy=t.clientY;
 },{passive:false});
+document.addEventListener('touchmove',e=>{if((running||busy)&&$('#play').classList.contains('active'))e.preventDefault()},{passive:false});
 document.addEventListener('visibilitychange',()=>{if(document.hidden)pause()});
 window.addEventListener('resize',()=>{if($('#play').classList.contains('active'))resize()});
 
