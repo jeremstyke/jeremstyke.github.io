@@ -1,4 +1,4 @@
-<!-- sayapp yxggxixj v1 -->
+<!-- sayapp yxggxixj v2 -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --y:#ffcc00;--y2:#ff9d00;--v:#8b5cff;--bg:#0a0a10;--c1:#14141d;--c2:#1d1d2b;--tx:#f6f4ec;--mu:#8d8a9c;--bad:#ff4d6d;
+  --y:#ffcc00;--y2:#ff9d00;--v:#8b5cff;--ice:#4de1ff;--bg:#0a0a10;--c1:#14141d;--c2:#1d1d2b;--tx:#f6f4ec;--mu:#8d8a9c;--bad:#ff4d6d;
   --sb:env(safe-area-inset-bottom,0px);--st:env(safe-area-inset-top,0px);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
@@ -21,10 +21,9 @@ h1{font-size:30px;font-weight:900;letter-spacing:-.02em;line-height:1}
 h1 span{background:linear-gradient(120deg,var(--y),var(--y2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .pill{display:flex;align-items:center;gap:8px;background:var(--c1);border:1px solid rgba(255,255,255,.07);border-radius:999px;padding:8px 14px;font-weight:700;font-size:15px;box-shadow:0 6px 20px rgba(0,0,0,.35)}
 .pill b{color:var(--y)}
-.tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--c1);border-radius:18px;padding:4px;position:relative;border:1px solid rgba(255,255,255,.06)}
-.tabs i{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:14px;background:linear-gradient(135deg,var(--y),var(--y2));box-shadow:0 6px 20px rgba(255,170,0,.35);transition:transform .25s cubic-bezier(.3,.8,.3,1)}
-.tabs.r i{transform:translateX(100%)}
-.tabs button{position:relative;z-index:1;background:none;border:0;color:var(--mu);font:700 15px 'Outfit',sans-serif;padding:12px;cursor:pointer;transition:color .2s,transform .15s}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);background:var(--c1);border-radius:18px;padding:4px;position:relative;border:1px solid rgba(255,255,255,.06)}
+.tabs i{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px) / 3);border-radius:14px;background:linear-gradient(135deg,var(--y),var(--y2));box-shadow:0 6px 20px rgba(255,170,0,.35);transition:transform .25s cubic-bezier(.3,.8,.3,1);transform:translateX(calc(var(--i,0) * 100%))}
+.tabs button{position:relative;z-index:1;background:none;border:0;color:var(--mu);font:700 15px 'Outfit',sans-serif;padding:12px 4px;cursor:pointer;transition:color .2s,transform .15s}
 .tabs button.on{color:#1a1200}
 .tabs button:active{transform:scale(.96)}
 .view{display:none;flex-direction:column;gap:16px;animation:in .3s ease}
@@ -32,39 +31,52 @@ h1 span{background:linear-gradient(120deg,var(--y),var(--y2));-webkit-background
 @keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .hud{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:8px}
 .card{background:linear-gradient(160deg,var(--c2),var(--c1));border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:12px 14px;box-shadow:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.05)}
-.card .v{font-size:30px;font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums}
+.card .v{font-size:30px;font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums;transition:color .2s}
 .card.main .v{color:var(--y);text-shadow:0 0 24px rgba(255,204,0,.45)}
 .card .v.bump{animation:bump .25s}
+.card.ice .v{color:var(--ice);text-shadow:0 0 20px rgba(77,225,255,.6)}
 @keyframes bump{50%{transform:scale(1.18)}}
 .bar{height:8px;border-radius:8px;background:var(--c1);overflow:hidden;border:1px solid rgba(255,255,255,.05)}
 .bar div{height:100%;width:100%;transform-origin:left;background:linear-gradient(90deg,var(--y2),var(--y));box-shadow:0 0 14px var(--y);transform:scaleX(1)}
-.arena{position:relative;height:min(52vh,400px);min-height:340px;border-radius:24px;overflow:hidden;border:1px solid rgba(255,204,0,.2);background:radial-gradient(circle at 50% 40%,rgba(255,204,0,.08),transparent 65%),linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px) 0 0/32px 32px,linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px) 0 0/32px 32px,#0f0f18;box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 40px rgba(255,204,0,.06);touch-action:manipulation}
+.bar.ice div{background:linear-gradient(90deg,#2aa9ff,var(--ice));box-shadow:0 0 14px var(--ice)}
+.arena{position:relative;height:min(52vh,400px);min-height:380px;border-radius:24px;overflow:hidden;border:1px solid rgba(255,204,0,.2);background:radial-gradient(circle at 50% 40%,rgba(255,204,0,.08),transparent 65%),linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px) 0 0/32px 32px,linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px) 0 0/32px 32px,#0f0f18;box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 40px rgba(255,204,0,.06);touch-action:manipulation;transition:border-color .3s,box-shadow .3s}
+.arena.frozen{border-color:rgba(77,225,255,.7);box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 50px rgba(77,225,255,.35),inset 0 0 60px rgba(77,225,255,.18)}
+.arena.hard{border-color:rgba(255,77,109,.35)}
 .arena.shake{animation:shake .35s}
 @keyframes shake{20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
 .arena.flash::after{content:"";position:absolute;inset:0;background:rgba(255,77,109,.28);animation:fl .35s forwards;pointer-events:none}
 @keyframes fl{to{opacity:0}}
+.fz{position:absolute;top:10px;left:50%;transform:translate(-50%,-8px);z-index:4;padding:6px 14px;border-radius:999px;background:rgba(77,225,255,.16);border:1px solid rgba(77,225,255,.6);color:var(--ice);font-weight:800;font-size:13px;letter-spacing:.06em;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;white-space:nowrap;box-shadow:0 0 24px rgba(77,225,255,.35)}
+.arena.frozen .fz{opacity:1;transform:translate(-50%,0)}
 .t{position:absolute;width:64px;height:64px;border:0;border-radius:50%;font-size:30px;display:grid;place-items:center;cursor:pointer;animation:pop .22s cubic-bezier(.3,1.6,.5,1);transition:transform .15s,opacity .2s}
 .t.z{background:radial-gradient(circle at 35% 30%,#fff3a6,var(--y) 55%,var(--y2));box-shadow:0 0 26px rgba(255,204,0,.65),0 6px 14px rgba(0,0,0,.4)}
 .t.g{background:radial-gradient(circle at 35% 30%,#e2d4ff,var(--v) 60%,#5a2ee0);box-shadow:0 0 30px rgba(139,92,255,.8),0 6px 14px rgba(0,0,0,.4)}
+.t.f{background:radial-gradient(circle at 35% 30%,#e6fbff,var(--ice) 55%,#1a8fe0);box-shadow:0 0 32px rgba(77,225,255,.85),0 6px 14px rgba(0,0,0,.4)}
 .t.b{background:radial-gradient(circle at 35% 30%,#ff9fb2,var(--bad) 60%,#a0153a);box-shadow:0 0 24px rgba(255,77,109,.6),0 6px 14px rgba(0,0,0,.4)}
 .t::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(255,255,255,.55);animation:ring var(--life) linear forwards}
 .t:active{transform:scale(.88)}
 .t.out{opacity:0;transform:scale(.4)}
 @keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
 @keyframes ring{from{transform:scale(1);opacity:.9}to{transform:scale(.55);opacity:0}}
-.fl{position:absolute;font-weight:900;font-size:24px;pointer-events:none;animation:up .8s ease-out forwards;text-shadow:0 2px 12px rgba(0,0,0,.6);z-index:3}
+.fl{position:absolute;font-weight:900;font-size:24px;pointer-events:none;animation:up .8s ease-out forwards;text-shadow:0 2px 12px rgba(0,0,0,.6);z-index:3;white-space:nowrap}
 @keyframes up{from{transform:translateY(0) scale(.7);opacity:1}to{transform:translateY(-60px) scale(1.2);opacity:0}}
 .pt{position:absolute;width:8px;height:8px;border-radius:50%;pointer-events:none;z-index:2}
-.ov{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;text-align:center;background:rgba(10,10,16,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:opacity .25s}
+.ov{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:16px 20px;text-align:center;background:rgba(10,10,16,.86);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:opacity .25s;overflow:auto}
 .ov.hide{opacity:0;pointer-events:none}
 .ov .big{font-size:64px;font-weight:900;color:var(--y);text-shadow:0 0 40px rgba(255,204,0,.6);line-height:1}
 .ov h2{font-size:26px;font-weight:900}
-.ov p{color:var(--mu);font-size:15px;line-height:1.5;max-width:280px}
-.legend{display:flex;gap:12px;font-size:13px;color:var(--mu);font-weight:600;flex-wrap:wrap;justify-content:center}
+.ov p{color:var(--mu);font-size:14px;line-height:1.45;max-width:290px}
+.legend{display:flex;gap:10px;font-size:13px;color:var(--mu);font-weight:600;flex-wrap:wrap;justify-content:center}
 .badge{background:linear-gradient(135deg,var(--v),#c06bff);padding:6px 14px;border-radius:999px;font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 0 24px rgba(139,92,255,.6);animation:bump .6s .2s}
-.btn{border:0;cursor:pointer;font:800 18px 'Outfit',sans-serif;color:#1a1200;padding:16px 36px;border-radius:18px;background:linear-gradient(135deg,var(--y),var(--y2));box-shadow:0 10px 30px rgba(255,170,0,.4),inset 0 1px 0 rgba(255,255,255,.5);transition:transform .15s;animation:glow 2s infinite}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--c1);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:4px;width:100%;max-width:290px}
+.seg button{border:0;background:none;color:var(--mu);font:700 14px 'Outfit',sans-serif;padding:10px 6px;border-radius:10px;cursor:pointer;transition:background .2s,color .2s,transform .15s}
+.seg button:active{transform:scale(.95)}
+.seg button.on{background:var(--y);color:#1a1200}
+.seg button.hd.on{background:linear-gradient(135deg,#ff4d6d,#ff8a3d);color:#fff;box-shadow:0 0 18px rgba(255,77,109,.5)}
+.btn{border:0;cursor:pointer;font:800 18px 'Outfit',sans-serif;color:#1a1200;padding:15px 36px;border-radius:18px;background:linear-gradient(135deg,var(--y),var(--y2));box-shadow:0 10px 30px rgba(255,170,0,.4),inset 0 1px 0 rgba(255,255,255,.5);transition:transform .15s;animation:glow 2s infinite}
 .btn:active{transform:scale(.95)}
 .btn.sec{background:var(--c2);color:var(--tx);box-shadow:none;border:1px solid rgba(255,255,255,.1);font-size:15px;padding:12px 24px;animation:none}
+.btn.w{width:100%;padding:14px 16px;font-size:16px}
 @keyframes glow{50%{box-shadow:0 10px 44px rgba(255,190,0,.65),inset 0 1px 0 rgba(255,255,255,.5)}}
 .list{display:flex;flex-direction:column;gap:8px}
 .row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;background:linear-gradient(160deg,var(--c2),var(--c1));border:1px solid rgba(255,255,255,.06);animation:in .35s both}
@@ -77,6 +89,20 @@ h1 span{background:linear-gradient(120deg,var(--y),var(--y2));-webkit-background
 @keyframes sh{to{background-position:-200% 0}}
 .empty{text-align:center;padding:40px 16px;color:var(--mu);line-height:1.6}
 .empty div{font-size:48px;margin-bottom:8px}
+.code{font-size:34px;font-weight:900;letter-spacing:.04em;margin:4px 0 12px;background:linear-gradient(120deg,var(--y),var(--v));-webkit-background-clip:text;background-clip:text;color:transparent;user-select:text;-webkit-user-select:text;word-break:break-all}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.card p{color:var(--mu);font-size:14px;line-height:1.5}
+.card p b{color:var(--tx)}
+.inp{display:flex;gap:8px;margin-top:12px}
+.inp input{flex:1;min-width:0;background:var(--bg);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px 14px;color:var(--tx);font:700 16px 'Outfit',sans-serif;outline:none;user-select:text;-webkit-user-select:text;text-transform:uppercase}
+.inp input:focus{border-color:var(--y)}
+.inp input:disabled{opacity:.5}
+.inp .btn{padding:12px 18px;font-size:15px;animation:none}
+.inp .btn:disabled{opacity:.45}
+.prog{height:6px;border-radius:6px;background:var(--bg);overflow:hidden;margin-top:10px}
+.prog div{height:100%;width:0;background:linear-gradient(90deg,var(--v),var(--y));transition:width .6s}
+.toast{position:fixed;left:50%;bottom:calc(24px + var(--sb));transform:translate(-50%,20px);background:var(--c2);border:1px solid rgba(255,204,0,.5);color:var(--tx);padding:12px 18px;border-radius:16px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:20;max-width:90vw;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
 footer{margin-top:auto;text-align:center;font-size:12px;color:var(--mu);opacity:.6;padding-top:8px}
 </style>
 </head>
@@ -86,28 +112,51 @@ footer{margin-top:auto;text-align:center;font-size:12px;color:var(--mu);opacity:
     <div><div class="lbl" id="hello">Bienvenue</div><h1>Zap<span>Rush</span> ⚡</h1></div>
     <div class="pill">🏆 <b id="best">0</b></div>
   </header>
-  <div class="tabs" id="tabs"><i></i><button class="on" data-v="play">Jouer</button><button data-v="rank">Classement</button></div>
+  <div class="tabs" id="tabs"><i></i><button class="on" data-v="play">Jouer</button><button data-v="rank">Classement</button><button data-v="ref">Amis</button></div>
 
   <section class="view on" id="v-play">
     <div class="hud">
       <div class="card main"><div class="lbl">Score</div><div class="v" id="score">0</div></div>
       <div class="card"><div class="lbl">Combo</div><div class="v" id="combo">x1</div></div>
-      <div class="card"><div class="lbl">Temps</div><div class="v" id="time">30</div></div>
+      <div class="card" id="tcard"><div class="lbl">Temps</div><div class="v" id="time">30</div></div>
     </div>
-    <div class="bar"><div id="bar"></div></div>
+    <div class="bar" id="barw"><div id="bar"></div></div>
     <div class="arena" id="arena">
+      <div class="fz" id="fz">❄️ Temps gelé</div>
       <div class="ov" id="ov"></div>
     </div>
     <div class="lbl" style="text-align:center">Les 5 touches d'affilée augmentent ton combo</div>
   </section>
 
   <section class="view" id="v-rank">
-    <div class="lbl">Top 20 des meilleurs scores</div>
+    <div class="seg" style="max-width:none"><button class="on" data-m="n">Normal</button><button class="hd" data-m="h">Difficile 🔥</button></div>
+    <div class="lbl" id="rtitle">Top 20 des meilleurs scores</div>
     <div class="list" id="list"></div>
+  </section>
+
+  <section class="view" id="v-ref">
+    <div class="card">
+      <div class="lbl">Ton code de parrainage</div>
+      <div class="code" id="code">ZAP0</div>
+      <div class="two"><button class="btn w" id="share">Inviter 🚀</button><button class="btn sec w" id="copy">Copier</button></div>
+    </div>
+    <div class="card">
+      <div class="lbl">J'ai un code d'ami</div>
+      <p style="margin-top:6px">Entre le code d'un ami et gagne <b>+100 points</b> de bienvenue. Une seule fois.</p>
+      <div class="inp"><input id="rin" placeholder="ZAP123456" maxlength="20"><button class="btn" id="rgo">Valider</button></div>
+      <p id="rst" style="margin-top:8px"></p>
+    </div>
+    <div class="two">
+      <div class="card"><div class="lbl">Zap Points</div><div class="v" id="pts" style="font-size:30px;font-weight:900;color:var(--y)">0</div></div>
+      <div class="card"><div class="lbl">Niveau</div><div class="v" id="lvl" style="font-size:22px;font-weight:900;margin-top:4px">Étincelle</div></div>
+    </div>
+    <div class="card"><div class="lbl" id="nxt">Prochain niveau</div><div class="prog"><div id="pg"></div></div></div>
+    <p class="lbl" style="text-align:center;line-height:1.6">Les points n'ont aucune valeur monétaire</p>
   </section>
 
   <footer>Made with SayApp</footer>
 </div>
+<div class="toast" id="toast"></div>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="yxggxixj"></script>
@@ -115,21 +164,32 @@ footer{margin-top:auto;text-align:center;font-size:12px;color:var(--mu);opacity:
 window.addEventListener('load', async function(){
   var $ = function(s){return document.querySelector(s)};
   try{ Telegram.WebApp.ready(); Telegram.WebApp.expand(); }catch(e){}
-  var DUR = 30;
-  var best = 0, games = 0, playing = false, score = 0, combo = 0, endAt = 0;
-  var tickId = null, spawnId = null;
+  var DUR = 30, FREEZE = 3000;
+  var bests = {n:0, h:0}, games = 0, total = 0, bonus = 0, refBy = '';
+  var mode = 'n', rankMode = 'n';
+  var playing = false, score = 0, combo = 0, endAt = 0, lastTick = 0, frozenUntil = 0;
+  var tickId = null, spawnId = null, toastId = null;
   var arena = $('#arena'), ov = $('#ov');
   var hap = function(k){ try{ SayApp.haptic(k); }catch(e){} };
   var esc = function(s){ var d = document.createElement('div'); d.textContent = s; return d.innerHTML; };
   var user = (window.SayApp && SayApp.user) || {};
+  var myCode = 'ZAP' + (user.id || '0000');
+  var keyOf = function(m){ return m === 'h' ? 'bestHard' : 'best'; };
   $('#hello').textContent = 'Salut, ' + (user.first_name || 'champion');
 
   try{
-    var b = await SayApp.get('best'); var g = await SayApp.get('games');
-    best = Number(b) || 0; games = Number(g) || 0;
+    var r1 = await SayApp.get('best'), r2 = await SayApp.get('bestHard'), r3 = await SayApp.get('games');
+    var r4 = await SayApp.get('total'), r5 = await SayApp.get('bonus'), r6 = await SayApp.get('refBy');
+    bests.n = Number(r1) || 0; bests.h = Number(r2) || 0; games = Number(r3) || 0;
+    total = Number(r4) || 0; bonus = Number(r5) || 0; refBy = r6 ? String(r6) : '';
   }catch(e){}
-  $('#best').textContent = best;
+  function showBest(){ $('#best').textContent = bests[mode]; }
+  showBest();
 
+  function toast(t){
+    var el = $('#toast'); el.textContent = t; el.classList.add('on');
+    clearTimeout(toastId); toastId = setTimeout(function(){ el.classList.remove('on'); }, 2600);
+  }
   function countTo(el, to, ms){
     var t0 = performance.now();
     (function f(n){
@@ -144,18 +204,32 @@ window.addEventListener('load', async function(){
     $('#score').textContent = score;
     $('#combo').textContent = 'x' + mult();
   }
+  function modeText(){
+    return mode === 'h' ? 'Mode difficile : deux fois plus de bombes, rythme rapide, points x2 et bombes à -10 !' : 'Tape un maximum d\'éclairs en 30 secondes. Fuis les bombes !';
+  }
 
-  function showOverlay(mode){
-    if(mode === 'start'){
-      ov.innerHTML = '<div style="font-size:56px">⚡</div><h2>Prêt à zapper ?</h2><p>Tape un maximum d\'éclairs en 30 secondes. Fuis les bombes !</p>' +
-        '<div class="legend"><span>⚡ +1</span><span>💎 +5</span><span>💣 -5</span></div><button class="btn" id="go">Jouer</button>';
+  function showOverlay(kind){
+    if(kind === 'start'){
+      ov.innerHTML = '<div style="font-size:40px;line-height:1">⚡</div><h2>Prêt à zapper ?</h2><p id="mt">' + modeText() + '</p>' +
+        '<div class="legend"><span>⚡ +1</span><span>💎 +5</span><span>❄️ gel 3s</span><span>💣 -5</span></div>' +
+        '<div class="seg"><button data-m="n" class="' + (mode === 'n' ? 'on' : '') + '">Normal</button><button data-m="h" class="hd ' + (mode === 'h' ? 'on' : '') + '">Difficile 🔥</button></div>' +
+        '<button class="btn" id="go">Jouer</button>';
+      ov.querySelectorAll('.seg button').forEach(function(b){
+        b.onclick = function(){
+          hap('tap'); mode = b.dataset.m; showBest();
+          ov.querySelectorAll('.seg button').forEach(function(x){ x.classList.toggle('on', x === b); });
+          $('#mt').textContent = modeText();
+        };
+      });
     }else{
-      var rec = mode === 'record';
-      ov.innerHTML = (rec ? '<div class="badge">Nouveau record</div>' : '<div class="lbl">Temps écoulé</div>') +
-        '<div class="big" id="fin">0</div><p>' + (rec ? 'Incroyable, tu t\'es dépassé !' : (score >= best * 0.8 && best ? 'Tout près de ton record de ' + best + ' !' : 'Ton record est de ' + best + '. Tu peux faire mieux !')) + '</p>' +
-        '<button class="btn" id="go">Rejouer</button><button class="btn sec" id="lb">Voir le classement</button>';
+      var rec = kind === 'record', bb = bests[mode];
+      ov.innerHTML = (rec ? '<div class="badge">Nouveau record' + (mode === 'h' ? ' 🔥' : '') + '</div>' : '<div class="lbl">Temps écoulé</div>') +
+        '<div class="big" id="fin">0</div><p>' + (rec ? 'Incroyable, tu t\'es dépassé !' : (score >= bb * 0.8 && bb ? 'Tout près de ton record de ' + bb + ' !' : 'Ton record est de ' + bb + '. Tu peux faire mieux !')) + '</p>' +
+        '<button class="btn" id="go">Rejouer</button><button class="btn sec" id="lb">Voir le classement</button>' +
+        '<div class="lbl" id="chg" style="cursor:pointer;text-decoration:underline">Changer de mode</div>';
       countTo($('#fin'), score, 800);
-      var lb = $('#lb'); if(lb) lb.onclick = function(){ hap('tap'); setTab('rank'); };
+      $('#lb').onclick = function(){ hap('tap'); rankMode = mode; setTab('rank'); };
+      $('#chg').onclick = function(){ hap('tap'); showOverlay('start'); };
     }
     ov.classList.remove('hide');
     $('#go').onclick = function(){ hap('tap'); start(); };
@@ -164,7 +238,7 @@ window.addEventListener('load', async function(){
   function float(x, y, txt, color){
     var f = document.createElement('div');
     f.className = 'fl'; f.textContent = txt; f.style.color = color;
-    f.style.left = Math.max(8, x - 10) + 'px'; f.style.top = y + 'px';
+    f.style.left = Math.max(8, x - 20) + 'px'; f.style.top = y + 'px';
     arena.appendChild(f); setTimeout(function(){ f.remove(); }, 850);
   }
   function burst(x, y, color){
@@ -178,16 +252,26 @@ window.addEventListener('load', async function(){
     }
   }
 
+  function pick(){
+    var r = Math.random(), hard = mode === 'h', frozen = performance.now() < frozenUntil;
+    var zT = hard ? 0.44 : 0.64, gT = hard ? 0.52 : 0.74, fT = hard ? 0.58 : 0.79;
+    if(r < zT) return 'z';
+    if(r < gT) return 'g';
+    if(r < fT) return frozen ? 'z' : 'f';
+    return 'b';
+  }
+
   function spawn(){
     if(!playing) return;
+    var hard = mode === 'h';
     var el_ = DUR - Math.max(0, (endAt - performance.now()) / 1000);
-    var r = Math.random(), kind = r < 0.68 ? 'z' : r < 0.78 ? 'g' : 'b';
+    var kind = pick();
     var w = arena.clientWidth, h = arena.clientHeight;
-    var life = Math.max(750, 1600 - el_ * 25);
+    var life = Math.max(hard ? 650 : 750, (hard ? 1350 : 1600) - el_ * 25);
     var t = document.createElement('button');
     t.className = 't ' + kind; t.style.setProperty('--life', life + 'ms');
-    t.textContent = kind === 'z' ? '⚡' : kind === 'g' ? '💎' : '💣';
-    var x = 8 + Math.random() * (w - 80), y = 8 + Math.random() * (h - 80);
+    t.textContent = {z:'⚡', g:'💎', f:'❄️', b:'💣'}[kind];
+    var x = 8 + Math.random() * (w - 80), y = 44 + Math.random() * (h - 120);
     t.style.left = x + 'px'; t.style.top = y + 'px';
     var done = false;
     t.addEventListener('pointerdown', function(ev){
@@ -195,12 +279,17 @@ window.addEventListener('load', async function(){
       if(done || !playing) return; done = true;
       var cx = x + 32, cy = y + 32;
       if(kind === 'b'){
-        score = Math.max(0, score - 5); combo = 0; hap('error');
-        float(cx, y, '-5', '#ff4d6d'); burst(cx, cy, '#ff4d6d');
+        var pen = hard ? 10 : 5;
+        score = Math.max(0, score - pen); combo = 0; hap('error');
+        float(cx, y, '-' + pen, '#ff4d6d'); burst(cx, cy, '#ff4d6d');
         arena.classList.remove('shake', 'flash'); void arena.offsetWidth; arena.classList.add('shake', 'flash');
+      }else if(kind === 'f'){
+        combo++; frozenUntil = performance.now() + FREEZE; hap('ok');
+        float(cx, y, '❄️ Gel 3s', '#4de1ff'); burst(cx, cy, '#4de1ff');
+        arena.classList.add('frozen'); $('#tcard').classList.add('ice'); $('#barw').classList.add('ice');
       }else{
         combo++;
-        var pts = (kind === 'g' ? 5 : 1) * mult();
+        var pts = (kind === 'g' ? 5 : 1) * mult() * (hard ? 2 : 1);
         score += pts; hap(kind === 'g' ? 'ok' : 'tap');
         float(cx, y, '+' + pts, kind === 'g' ? '#c9b3ff' : '#ffcc00');
         burst(cx, cy, kind === 'g' ? '#8b5cff' : '#ffcc00');
@@ -213,43 +302,64 @@ window.addEventListener('load', async function(){
       if(done) return; done = true; t.classList.add('out');
       setTimeout(function(){ t.remove(); }, 200);
     }, life);
-    spawnId = setTimeout(spawn, Math.max(300, 700 - el_ * 14) * (0.7 + Math.random() * 0.6));
+    var gap = hard ? 560 - el_ * 12 : 700 - el_ * 14;
+    spawnId = setTimeout(spawn, Math.max(hard ? 240 : 300, gap) * (0.7 + Math.random() * 0.6));
+  }
+
+  function unfreeze(){
+    arena.classList.remove('frozen'); $('#tcard').classList.remove('ice'); $('#barw').classList.remove('ice');
   }
 
   function start(){
     clearTimeout(spawnId); clearInterval(tickId);
     arena.querySelectorAll('.t,.fl,.pt').forEach(function(n){ n.remove(); });
-    score = 0; combo = 0; playing = true; hud();
-    endAt = performance.now() + DUR * 1000;
+    score = 0; combo = 0; playing = true; frozenUntil = 0; unfreeze(); hud();
+    arena.classList.toggle('hard', mode === 'h');
+    $('#time').textContent = DUR; $('#bar').style.transform = 'scaleX(1)';
+    lastTick = performance.now();
+    endAt = lastTick + DUR * 1000;
     ov.classList.add('hide');
     tickId = setInterval(function(){
-      var left = Math.max(0, (endAt - performance.now()) / 1000);
+      var now = performance.now();
+      if(now < frozenUntil){
+        endAt += now - lastTick;
+        $('#fz').textContent = '❄️ Temps gelé ' + Math.ceil((frozenUntil - now) / 1000) + 's';
+      }else if(arena.classList.contains('frozen')){
+        unfreeze();
+      }
+      lastTick = now;
+      var left = Math.max(0, (endAt - now) / 1000);
       $('#time').textContent = Math.ceil(left);
-      $('#bar').style.transform = 'scaleX(' + (left / DUR) + ')';
+      $('#bar').style.transform = 'scaleX(' + Math.min(1, left / DUR) + ')';
       if(left <= 0) end();
     }, 80);
     spawn();
   }
 
   async function end(){
-    playing = false; clearInterval(tickId); clearTimeout(spawnId);
+    playing = false; clearInterval(tickId); clearTimeout(spawnId); unfreeze();
     $('#time').textContent = '0'; $('#bar').style.transform = 'scaleX(0)';
     arena.querySelectorAll('.t').forEach(function(n){ n.remove(); });
-    var rec = score > best;
-    games++;
-    if(rec){ best = score; $('#best').textContent = best; hap('ok'); bump($('#best')); }
+    var rec = score > bests[mode], m = mode;
+    games++; total += score;
+    if(rec){ bests[m] = score; showBest(); hap('ok'); bump($('#best')); }
     showOverlay(rec ? 'record' : 'over');
+    renderRef();
     try{
-      if(rec) await SayApp.set('best', best);
+      if(rec) await SayApp.set(keyOf(m), bests[m]);
       await SayApp.set('games', games);
+      await SayApp.set('total', total);
     }catch(e){}
   }
 
   async function loadRank(){
     var list = $('#list');
+    document.querySelectorAll('#v-rank .seg button').forEach(function(b){ b.classList.toggle('on', b.dataset.m === rankMode); });
+    $('#rtitle').textContent = rankMode === 'h' ? 'Top 20 mode difficile 🔥' : 'Top 20 des meilleurs scores';
     list.innerHTML = '<div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div>';
-    var data = [];
-    try{ data = await SayApp.top('best', 20) || []; }catch(e){}
+    var data = [], asked = rankMode;
+    try{ data = await SayApp.top(keyOf(asked), 20) || []; }catch(e){}
+    if(asked !== rankMode) return;
     if(!data.length){
       list.innerHTML = '<div class="empty"><div>🏁</div>Personne n\'est encore au classement.<br>Lance une partie et prends la première place !</div>';
       return;
@@ -263,20 +373,86 @@ window.addEventListener('load', async function(){
     }).join('');
   }
 
+  /* Parrainage */
+  var LV = [[0, 'Étincelle'], [200, 'Éclair'], [800, 'Foudre'], [2000, 'Tempête'], [5000, 'Légende']];
+  function renderRef(){
+    $('#code').textContent = myCode;
+    var p = total + bonus, i = 0;
+    for(var k = 0; k < LV.length; k++) if(p >= LV[k][0]) i = k;
+    countTo($('#pts'), p, 500);
+    $('#lvl').textContent = LV[i][1];
+    var nx = LV[i + 1];
+    $('#nxt').textContent = nx ? 'Encore ' + (nx[0] - p) + ' pts pour ' + nx[1] : 'Niveau maximum atteint 👑';
+    $('#pg').style.width = (nx ? Math.round((p - LV[i][0]) / (nx[0] - LV[i][0]) * 100) : 100) + '%';
+    var inp = $('#rin'), go = $('#rgo');
+    if(refBy){
+      inp.value = 'ZAP' + refBy; inp.disabled = true; go.disabled = true;
+      $('#rst').textContent = '✅ Parrainage validé, +100 points offerts.';
+    }else{
+      inp.disabled = false; go.disabled = false; $('#rst').textContent = '';
+    }
+  }
+  async function redeem(raw){
+    if(refBy){ toast('Tu as déjà utilisé un code'); return; }
+    var m = String(raw || '').match(/\d+/);
+    if(!m){ hap('error'); toast('Code invalide, vérifie-le'); return; }
+    var id = m[0];
+    if(id === String(user.id)){ hap('error'); toast('Tu ne peux pas utiliser ton propre code'); return; }
+    refBy = id; bonus += 100; hap('ok');
+    renderRef(); toast('🎉 +100 points de bienvenue !');
+    try{
+      await SayApp.set('refBy', id); await SayApp.set('bonus', bonus);
+      await SayApp.submit({type:'parrainage', code:'ZAP' + id, filleul: user.first_name || '', filleulId: user.id || ''});
+    }catch(e){}
+  }
+  function shareText(){ return 'Viens zapper avec moi sur Zap Rush ⚡ Entre mon code ' + myCode + ' et gagne 100 points de bienvenue !'; }
+  $('#share').onclick = function(){
+    hap('tap');
+    var base = location.href.split('#')[0].split('?')[0];
+    var url = 'https://t.me/share/url?url=' + encodeURIComponent(base + '?ref=' + (user.id || '')) + '&text=' + encodeURIComponent(shareText());
+    try{ Telegram.WebApp.openTelegramLink(url); return; }catch(e){}
+    if(navigator.share){ navigator.share({text: shareText(), url: base}).catch(function(){}); }
+    else window.open(url, '_blank');
+  };
+  $('#copy').onclick = function(){
+    hap('tap');
+    var txt = shareText();
+    function fb(){
+      var ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); toast('Message copié ✅'); }catch(e){ toast('Copie impossible'); }
+      ta.remove();
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){ toast('Message copié ✅'); }, fb);
+    }else fb();
+  };
+  $('#rgo').onclick = function(){ hap('tap'); redeem($('#rin').value); };
+
+  var tabIdx = {play:0, rank:1, ref:2};
   function setTab(v){
     if(playing) return;
     document.querySelectorAll('#tabs button').forEach(function(b){ b.classList.toggle('on', b.dataset.v === v); });
-    $('#tabs').classList.toggle('r', v === 'rank');
-    $('#v-play').classList.toggle('on', v === 'play');
-    $('#v-rank').classList.toggle('on', v === 'rank');
+    $('#tabs').style.setProperty('--i', tabIdx[v]);
+    ['play', 'rank', 'ref'].forEach(function(n){ $('#v-' + n).classList.toggle('on', n === v); });
     if(v === 'rank') loadRank();
+    if(v === 'ref') renderRef();
   }
   document.querySelectorAll('#tabs button').forEach(function(b){
     b.onclick = function(){ hap('tap'); setTab(b.dataset.v); };
   });
+  document.querySelectorAll('#v-rank .seg button').forEach(function(b){
+    b.onclick = function(){ hap('tap'); rankMode = b.dataset.m; loadRank(); };
+  });
 
-  hud();
+  hud(); renderRef();
   showOverlay('start');
+
+  /* Code reçu via lien d'invitation */
+  try{
+    var sp = (Telegram.WebApp.initDataUnsafe || {}).start_param || new URLSearchParams(location.search).get('ref') || '';
+    var mm = String(sp).match(/(\d{3,})/);
+    if(mm && !refBy) redeem(mm[1]);
+  }catch(e){}
 });
 </script>
 </body>
