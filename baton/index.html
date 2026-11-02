@@ -3030,7 +3030,7 @@ function nudge() {
       if (fw) fw.insertAdjacentElement('beforebegin', c); else if (rec) rec.insertAdjacentElement('beforebegin', c); else sc.insertAdjacentElement('afterend', c);
     }
     if (c) c.hidden = !av;
-    if (c && c.dataset.k !== key) { c.dataset.k = key; c.innerHTML = '<b style="flex:1;min-width:0">' + T.h(Number(S.tkReward).toLocaleString(B.lang === 'fr' ? 'fr-FR' : 'en-US')) + '</b><span class="go">' + T.go + '</span>';  /* 21h13 (Jeremy): one simple line on Home */ }
+    if (c && c.dataset.k !== key) { c.dataset.k = key; c.innerHTML = '<b style="flex:1;min-width:0">' + (tg ? ln : T.h(Number(S.tkReward).toLocaleString(B.lang === 'fr' ? 'fr-FR' : 'en-US'))) + '</b><span class="go">' + T.go + '</span>';  /* 2 nov 2026 (12h56, Jeremy): Home shows the next reward waiting */  /* 21h13 (Jeremy): one simple line on Home */ }
     // Tasks tab: the goal bar at the top
     var p = document.getElementById('p-tasks'), g = document.getElementById('tkGoalBox');
     if (p && !g) { g = document.createElement('div'); g.id = 'tkGoalBox'; var tt = document.getElementById('tTotTop'); if (tt && tt.parentNode === p) tt.insertAdjacentElement('afterend', g); else { var s2 = p.querySelector('.score'); if (s2) s2.insertAdjacentElement('afterend', g); else p.prepend(g); } }
