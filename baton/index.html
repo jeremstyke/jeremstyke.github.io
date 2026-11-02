@@ -3129,7 +3129,7 @@ function nudge() {
   var hst = null, hsk = 0;
   function hPlace() {
     if (document.getElementById('lcHome')) return;
-    var bc = document.getElementById('batonCard'); if (!bc) return;
+    var bc = document.getElementById('upCard') || document.getElementById('batonCard'); if (!bc) return;  // 9h29: under the baton upgrade card
     var hb = document.createElement('button'); hb.type = 'button'; hb.id = 'lcHome';
     hb.style.cssText = 'display:none;align-items:center;gap:12px;width:100%;margin:12px 0 0;padding:12px 14px;border-radius:16px;border:1px solid rgba(255,197,49,.45);background:linear-gradient(135deg,#3b1658,#1d0d2e);color:#fff7ef;text-align:start;font:inherit;cursor:pointer;box-sizing:border-box';
     hb.onclick = function () { try { window.BT.hap(); } catch (e) {} window.lcOpen(); };
