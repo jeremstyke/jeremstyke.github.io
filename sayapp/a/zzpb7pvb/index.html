@@ -1,57 +1,62 @@
-<!-- sayapp zzpb7pvb v1 -->
+<!-- sayapp zzpb7pvb v2 -->
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>COIN RUSH</title>
-<!-- SayApp template "Pass the baton" (2 nov 2026). Engine: SayApp.game(state | take | pass_link | pass_random | top). Virtual points only. -->
+<!-- SayApp template "Pass the baton" (2 nov 2026), reskinned as Olympic torch + weekly contest. Engine: SayApp.game(state | take | pass_link | pass_random | top). Virtual points only. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--c:#2f80ff;--bg:#0b0a10;--card:rgba(255,255,255,.05);--card2:rgba(255,255,255,.09);--line:rgba(255,255,255,.09);--fg:#f6f4ff;--mute:#a6a3b8;--dim:#6f6c82;--good:#3ee08f;--warn:#ffcc4d;--tab:64px;color-scheme:dark}
+:root{--c:#2f80ff;--fl:#ff8a2b;--gold:#ffcc4d;--bg:#0b0a10;--card:rgba(255,255,255,.05);--card2:rgba(255,255,255,.09);--line:rgba(255,255,255,.09);--fg:#f6f4ff;--mute:#a6a3b8;--dim:#6f6c82;--good:#3ee08f;--warn:#ffcc4d;--tab:64px;color-scheme:dark}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--bg);color:var(--fg);font:15px/1.45 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 body{min-height:100vh;padding-bottom:calc(var(--tab) + 20px + env(safe-area-inset-bottom,0px));overscroll-behavior:none;-webkit-user-select:none;user-select:none}
-body::before{content:"";position:fixed;inset:-20% -20% auto;height:70vh;background:radial-gradient(60% 60% at 50% 0%,color-mix(in srgb,var(--c) 38%,transparent),transparent 70%);pointer-events:none;z-index:0}
+body::before{content:"";position:fixed;inset:-20% -20% auto;height:70vh;background:radial-gradient(60% 60% at 50% 0%,color-mix(in srgb,var(--c) 34%,transparent),transparent 70%);pointer-events:none;z-index:0}
 button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 main{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:14px max(16px,env(safe-area-inset-left,0px)) 0 max(16px,env(safe-area-inset-right,0px))}
 h1,h2,h3,.sora{font-family:Sora,Inter,sans-serif}
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
 .brand{display:flex;align-items:center;gap:10px;min-width:0}
-.brand i{flex:0 0 38px;height:38px;border-radius:12px;display:grid;place-items:center;font-style:normal;font-size:20px;background:linear-gradient(140deg,var(--c),color-mix(in srgb,var(--c) 45%,#000));box-shadow:0 8px 24px -8px var(--c)}
+.brand i{flex:0 0 38px;height:38px;border-radius:12px;display:grid;place-items:center;font-style:normal;font-size:20px;background:linear-gradient(140deg,var(--fl),color-mix(in srgb,var(--fl) 40%,#a00));box-shadow:0 8px 24px -8px var(--fl)}
 .brand h1{font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pill{flex:0 0 auto;padding:7px 12px;border-radius:99px;background:var(--card2);border:1px solid var(--line);font-weight:700;font-size:13px}
 .bal{text-align:center;margin:6px 0 18px}
 .bal small{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:600}
-.bal b{display:block;font:800 42px/1.1 Sora,sans-serif;margin-top:4px;background:linear-gradient(180deg,#fff,color-mix(in srgb,var(--c) 55%,#fff));-webkit-background-clip:text;background-clip:text;color:transparent}
+.bal b{display:block;font:800 42px/1.1 Sora,sans-serif;margin-top:4px;background:linear-gradient(180deg,#fff,color-mix(in srgb,var(--fl) 55%,#fff));-webkit-background-clip:text;background-clip:text;color:transparent}
 .bal span{font-size:13px;color:var(--mute)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:20px;position:relative;overflow:hidden}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:20px;position:relative;overflow:hidden;box-shadow:0 18px 40px -24px rgba(0,0,0,.8)}
 .hero{text-align:center;padding:24px 20px 20px}
 .ring{position:relative;width:200px;height:200px;margin:0 auto 14px}
-.ring::before{content:"";position:absolute;inset:-14px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--c) 26%,transparent),transparent)}
-.ring svg{position:relative;width:100%;height:100%;transform:rotate(-90deg)}
+.ring::before{content:"";position:absolute;inset:-14px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--fl) 30%,transparent),transparent);transition:opacity .3s}
+.idle .ring::before{background:radial-gradient(closest-side,color-mix(in srgb,var(--c) 22%,transparent),transparent)}
+.ring svg.r{position:relative;width:100%;height:100%;transform:rotate(-90deg)}
 .ring circle{fill:none;stroke-width:12}
 .ring .bg{stroke:rgba(255,255,255,.07)}
-.ring .fg{stroke:var(--c);stroke-linecap:round;transition:stroke-dashoffset .6s ease}
+.ring .fg{stroke:var(--fl);stroke-linecap:round;transition:stroke-dashoffset .6s ease}
+.idle .ring .fg{stroke:var(--c)}
 .ring .in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.baton{font-size:52px;line-height:1;animation:bob 2.4s ease-in-out infinite}
-.idle .baton{animation:none;filter:grayscale(.6);opacity:.55}
-@keyframes bob{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-6px) rotate(8deg)}}
+.torch{height:80px;width:auto;overflow:visible;transform-origin:50% 100%;animation:sway 2.6s ease-in-out infinite;filter:drop-shadow(0 0 14px rgba(255,138,43,.55))}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:fl 1.1s ease-in-out infinite alternate;transition:opacity .3s}
+.idle .torch{animation:none;filter:grayscale(.7);opacity:.6}
+.idle .flame{opacity:0}
+@keyframes sway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes fl{from{transform:scale(1,1) rotate(-2deg)}to{transform:scale(.92,1.1) rotate(2deg)}}
 .ring .tm{font:700 20px Sora,sans-serif;margin-top:8px;font-variant-numeric:tabular-nums}
-.ring .lb{font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.1em}
+.ring .lb{font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.1em;min-height:14px}
 .hero h2{font-size:21px;margin-bottom:6px}
 .hero p{color:var(--mute);font-size:14px;max-width:320px;margin:0 auto}
-.earn{display:inline-flex;gap:6px;align-items:center;margin-top:12px;padding:8px 14px;border-radius:99px;background:color-mix(in srgb,var(--c) 18%,transparent);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);font-weight:700;font-variant-numeric:tabular-nums}
+.earn{display:inline-flex;gap:6px;align-items:center;margin-top:12px;padding:8px 14px;border-radius:99px;background:color-mix(in srgb,var(--fl) 18%,transparent);border:1px solid color-mix(in srgb,var(--fl) 45%,transparent);font-weight:700;font-variant-numeric:tabular-nums}
 .acts{display:grid;gap:10px;margin-top:18px}
-.cta{width:100%;padding:16px;border-radius:16px;font:700 16px Sora,sans-serif;color:#fff;background:linear-gradient(120deg,var(--c),color-mix(in srgb,var(--c) 55%,#ff3d9a));box-shadow:0 14px 30px -12px var(--c);transition:transform .15s}
+.cta{width:100%;padding:16px;border-radius:16px;font:700 16px Sora,sans-serif;color:#fff;background:linear-gradient(120deg,var(--c),color-mix(in srgb,var(--fl) 85%,#ff3d6a));box-shadow:0 14px 30px -12px var(--fl);transition:transform .15s}
 .cta:active,.ghost:active,.tabs button:active{transform:scale(.97)}
 .cta:disabled{opacity:.5}
 .ghost{width:100%;padding:14px;border-radius:14px;background:var(--card2);border:1px solid var(--line);font-weight:600;transition:transform .15s}
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
-.st{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px;text-align:center}
-.st b{display:block;font:700 19px Sora,sans-serif}
-.st span{font-size:11.5px;color:var(--mute)}
+.st{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 6px;text-align:center;min-width:0}
+.st b{display:block;font:700 19px Sora,sans-serif;font-variant-numeric:tabular-nums}
+.st span{font-size:11.5px;color:var(--mute);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sec{margin-top:22px}
 .sec h3{font:600 12px Inter,sans-serif;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
 .rules{display:grid;gap:8px}
@@ -60,17 +65,26 @@ h1,h2,h3,.sora{font-family:Sora,Inter,sans-serif}
 .rule div{min-width:0;font-size:13.5px;color:var(--mute)}
 .rule b{display:block;color:var(--fg);font-size:14px}
 .row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:var(--card);border:1px solid var(--line);margin-bottom:8px}
-.row.me{border-color:color-mix(in srgb,var(--c) 60%,transparent);background:color-mix(in srgb,var(--c) 12%,transparent)}
+.row.me{border-color:color-mix(in srgb,var(--fl) 60%,transparent);background:color-mix(in srgb,var(--fl) 12%,transparent)}
 .row em{flex:0 0 30px;font:700 15px Sora,sans-serif;font-style:normal;color:var(--mute);text-align:center}
 .row span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
 .row b{font-variant-numeric:tabular-nums}
+.empty{text-align:center;color:var(--mute);font-size:14px;padding:24px 16px;border-radius:16px;border:1px dashed var(--line)}
+.wk{text-align:center;padding:24px 20px;background:linear-gradient(160deg,color-mix(in srgb,var(--fl) 20%,transparent),var(--card) 60%)}
+.wk .big{font-size:44px;filter:drop-shadow(0 0 16px rgba(255,204,77,.6))}
+.wk small{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-top:6px}
+.wk h2{font-size:24px;margin:4px 0 6px}
+.wk p{color:var(--mute);font-size:14px}
+.cd{margin-top:16px;font:800 30px Sora,sans-serif;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,#fff,var(--fl));-webkit-background-clip:text;background-clip:text;color:transparent}
+.cdl{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
 .inv{text-align:center;padding:26px 20px}
 .inv .big{font-size:46px}
 .inv h2{font-size:22px;margin:8px 0 6px}
 .inv p{color:var(--mute);font-size:14px}
 .code{margin:16px 0 4px;padding:12px;border-radius:14px;background:#0f0e16;border:1px dashed var(--line);font-size:12.5px;color:var(--mute);word-break:break-all}
-.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;gap:6px;justify-content:center;padding:8px max(16px,env(safe-area-inset-left,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-right,0px));background:rgba(11,10,16,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line)}
-.tabs button{flex:1;max-width:170px;padding:10px 6px;border-radius:14px;color:var(--mute);font-weight:600;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:2px;transition:transform .15s}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;gap:4px;justify-content:center;padding:8px max(12px,env(safe-area-inset-left,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-right,0px));background:rgba(11,10,16,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line)}
+.tabs button{flex:1;max-width:130px;min-width:0;padding:10px 2px;border-radius:14px;color:var(--mute);font-weight:600;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:2px;transition:transform .15s,background .2s}
+.tabs button span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tabs button i{font-style:normal;font-size:19px}
 .tabs button.on{background:var(--card2);color:var(--fg)}
 [hidden]{display:none!important}
@@ -78,21 +92,33 @@ h1,h2,h3,.sora{font-family:Sora,Inter,sans-serif}
 .toast.on{transform:translate(-50%,0)}
 .float{position:fixed;z-index:15;font:800 22px Sora,sans-serif;color:var(--good);pointer-events:none;animation:up 1.1s ease-out forwards}
 @keyframes up{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-70px)}}
-.skel{opacity:.35}
+.skel{opacity:.35;animation:pulse 1s ease-in-out infinite alternate}
+@keyframes pulse{to{opacity:.12}}
 .foot{text-align:center;color:var(--dim);font-size:11.5px;margin:24px 0 6px}
-.foot a{color:var(--mute);text-decoration:none}
 .note{text-align:center;color:var(--dim);font-size:11.5px;margin-top:10px}
 </style>
 </head>
 <body>
 <main>
-  <div class="top"><div class="brand"><i>🏃</i><h1 id="nm">COIN RUSH</h1></div><div class="pill" id="rank">#-</div></div>
+  <div class="top"><div class="brand"><i>🔥</i><h1 id="nm">COIN RUSH</h1></div><div class="pill" id="rank">#-</div></div>
 
   <section id="vHome">
     <div class="bal"><small id="lBal"></small><b id="bal">0</b><span>$BITHEIS</span></div>
     <div class="card hero" id="hero">
-      <div class="ring"><svg viewBox="0 0 200 200"><circle class="bg" cx="100" cy="100" r="88"/><circle class="fg" id="arc" cx="100" cy="100" r="88" stroke-dasharray="553" stroke-dashoffset="553"/></svg>
-        <div class="in"><div class="baton">🏃</div><div class="tm" id="tm">--:--</div><div class="lb" id="tmL"></div></div></div>
+      <div class="ring"><svg class="r" viewBox="0 0 200 200"><circle class="bg" cx="100" cy="100" r="88"/><circle class="fg" id="arc" cx="100" cy="100" r="88" stroke-dasharray="553" stroke-dashoffset="553"/></svg>
+        <div class="in">
+          <svg class="torch" viewBox="0 0 64 96" aria-hidden="true">
+            <defs>
+              <linearGradient id="gF" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff4d1a"/><stop offset=".55" stop-color="#ffa62b"/><stop offset="1" stop-color="#fff0a0"/></linearGradient>
+              <linearGradient id="gH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b8821f"/><stop offset=".5" stop-color="#ffe08a"/><stop offset="1" stop-color="#b8821f"/></linearGradient>
+            </defs>
+            <g class="flame"><path d="M32 2C36 14 50 22 48 40C47 52 40 58 32 58C24 58 17 52 16 40C15 30 22 26 24 16C28 20 29 24 30 26C32 18 31 10 32 2Z" fill="url(#gF)"/><path d="M32 28C35 36 40 40 39 47C38 53 35 55 32 55C29 55 26 53 25 47C25 41 30 36 32 28Z" fill="#fff4c2" opacity=".85"/></g>
+            <path d="M16 54H48L43 69H21Z" fill="url(#gH)"/>
+            <rect x="14" y="51" width="36" height="5" rx="2.5" fill="url(#gH)"/>
+            <rect x="28" y="69" width="8" height="25" rx="3" fill="url(#gH)"/>
+            <rect x="25" y="78" width="14" height="3" rx="1.5" fill="#8a5f12" opacity=".7"/>
+          </svg>
+          <div class="tm" id="tm">--:--</div><div class="lb" id="tmL"></div></div></div>
       <h2 id="hT"></h2><p id="hP"></p>
       <div class="earn" id="earn" hidden></div>
       <div class="acts" id="acts"></div>
@@ -100,6 +126,15 @@ h1,h2,h3,.sora{font-family:Sora,Inter,sans-serif}
     <div class="stats"><div class="st"><b id="sStreak">0</b><span id="lStreak"></span></div><div class="st"><b id="sPass">0</b><span id="lPass"></span></div><div class="st"><b id="sInv">0</b><span id="lInv"></span></div></div>
     <div class="sec"><h3 id="lHow"></h3><div class="rules" id="rules"></div></div>
     <p class="note" id="noCash"></p>
+  </section>
+
+  <section id="vWk" hidden>
+    <div class="card wk"><div class="big">🏅</div><small id="wkLbl"></small><h2 id="wkT"></h2><p id="wkP"></p>
+      <div class="cd" id="wkCd">--</div><div class="cdl" id="wkEndsL"></div></div>
+    <div class="stats"><div class="st"><b id="wkPts">0</b><span id="wkPtsL"></span></div><div class="st"><b id="wkRk">-</b><span id="wkRkL"></span></div><div class="st"><b id="wkTi">✨</b><span id="wkTn"></span></div></div>
+    <div class="sec"><h3 id="lPrize"></h3><div class="rules" id="prizes"></div></div>
+    <div class="sec"><h3 id="lWkTop"></h3><div id="wkList"></div></div>
+    <p class="note" id="wkNote"></p>
   </section>
 
   <section id="vTop" hidden><div class="sec" style="margin-top:4px"><h3 id="lTop"></h3><div id="topList"></div></div></section>
@@ -112,7 +147,7 @@ h1,h2,h3,.sora{font-family:Sora,Inter,sans-serif}
   <p class="foot">Made with SayApp</p>
 </main>
 
-<nav class="tabs"><button class="on" id="tHome"><i>🏃</i><span id="lHome"></span></button><button id="tTop"><i>🏆</i><span id="lRank"></span></button><button id="tInv"><i>🤝</i><span id="lInvT"></span></button></nav>
+<nav class="tabs"><button class="on" id="tHome"><i>🔥</i><span id="lHome"></span></button><button id="tWk"><i>🏅</i><span id="lWk"></span></button><button id="tTop"><i>🏆</i><span id="lRank"></span></button><button id="tInv"><i>🤝</i><span id="lInvT"></span></button></nav>
 <div class="toast" id="toast"></div>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -123,31 +158,42 @@ window.addEventListener('load', function () {
   var NAME = $('nm').textContent, TK = '$BITHEIS';
   var fr = /^fr/.test(String((SayApp.user && SayApp.user.language_code) || navigator.language || ''));
   var T = fr ? {
-    bal: 'Ton solde', streak: 'jours de suite', pass: 'passes', inv: 'invités', how: 'Comment ça marche', home: 'Bâton', rank: 'Classement', invT: 'Inviter',
-    holdT: 'Tu as le bâton !', holdP: function (r) { return 'Il te rapporte ' + r + ' ' + TK + ' par heure. Passe-le avant la fin du chrono pour tout garder.'; },
-    takeT: 'Ton bâton du jour t\'attend', takeP: function (b) { return 'Prends-le et gagne +' + b + ' ' + TK + ' de bonus de série.'; }, take: function (b) { return '🏃 Prendre mon bâton (+' + b + ')'; },
-    waitT: 'Pas de bâton pour l\'instant', waitP: 'Un nouveau bâton arrive demain. Un ami peut aussi te passer le sien.', left: 'restant', next: 'prochain',
-    pLink: '🤝 Passer à un ami', pRand: '🎲 Passer au hasard', live: function (n) { return '+' + n + ' ' + TK + ' gagnés'; },
-    r1: ['Un bâton par jour', 'Prends ton bâton chaque jour : ta série augmente ton bonus.'], r2: function (r, h) { return ['Garde-le, ça rapporte', r + ' ' + TK + ' par heure, pendant ' + h + ' h maximum.']; },
-    r3: ['Passe-le à temps', 'Passe-le avant la fin : +300. S\'il tombe, tu n\'en gardes que la moitié.'], r4: ['Invite tes amis', '+1000 ' + TK + ' pour chaque nouveau joueur qui arrive par toi.'],
-    welcome: 'Bienvenue ! +500 ' + TK + ' offerts 🎁', invited: 'Bienvenue ! +500 ' + TK + ' grâce à ton ami 🎁', got: 'On t\'a passé le bâton ! 🏃 Garde-le et gagne', taken: 'Trop tard, quelqu\'un a déjà pris ce bâton.', dropped: 'Ton bâton est tombé : tu as gardé la moitié.',
-    took: function (b) { return 'Bâton pris ! +' + b + ' ' + TK; }, passed: function (e) { return 'Bâton passé ! +' + e + ' ' + TK; }, nobody: 'Personne de libre pour l\'instant, passe-le à un ami.',
-    shareTxt: function (n) { return '🏃 Je te passe mon bâton dans ' + n + ' ! Attrape-le vite et gagne des ' + TK + '.'; }, invTxt: function (n) { return '🏃 Viens jouer à ' + n + ' avec moi, on gagne des ' + TK + ' en se passant le bâton !'; },
-    iT: 'Invite tes amis', iP: '+1000 ' + TK + ' pour toi et +500 pour ton ami à son arrivée.', share: '📨 Partager mon lien', copy: 'Copier le lien', copied: 'Lien copié ✅', topT: 'Meilleurs joueurs', you: 'toi', err: 'Oups, réessaie dans un instant.', noCash: 'Les ' + TK + ' sont des points du jeu, sans valeur en argent.'
+    bal: 'Ton solde', streak: 'jours de suite', pass: 'passes', inv: 'invités', how: 'Comment ça marche', home: 'Torche', rank: 'Classement', invT: 'Inviter', wk: 'Concours',
+    holdT: 'Tu portes la torche !', holdP: function (r) { return 'Elle te rapporte ' + r + ' ' + TK + ' par heure. Passe la flamme avant la fin du chrono pour tout garder.'; },
+    takeT: 'Ta torche du jour est prête', takeP: function (b) { return 'Allume-la et gagne +' + b + ' ' + TK + ' de bonus de série.'; }, take: function (b) { return '🔥 Allumer ma torche (+' + b + ')'; },
+    waitT: 'La flamme se repose', waitP: 'Une nouvelle torche s\'allume demain. Un ami peut aussi te passer la sienne.', left: 'restant', next: 'prochaine',
+    pLink: '🤝 Passer la flamme à un ami', pRand: '🎲 Passer à un coureur au hasard', live: function (n) { return '+' + n + ' ' + TK + ' gagnés'; },
+    r1: ['Une torche par jour', 'Allume ta torche chaque jour : ta série augmente ton bonus.'], r2: function (r, h) { return ['Porte-la, ça rapporte', r + ' ' + TK + ' par heure, pendant ' + h + ' h maximum.']; },
+    r3: ['Passe-la à temps', 'Passe la flamme avant la fin : +300. Si elle s\'éteint, tu n\'en gardes que la moitié.'], r4: ['Invite tes amis', '+1000 ' + TK + ' pour chaque nouveau joueur qui arrive par toi.'],
+    welcome: 'Bienvenue ! +500 ' + TK + ' offerts 🎁', invited: 'Bienvenue ! +500 ' + TK + ' grâce à ton ami 🎁', got: 'On t\'a passé la torche ! 🔥 Porte-la et gagne', taken: 'Trop tard, quelqu\'un a déjà pris cette torche.', dropped: 'Ta flamme s\'est éteinte : tu as gardé la moitié.',
+    took: function (b) { return 'Torche allumée ! +' + b + ' ' + TK; }, passed: function (e) { return 'Flamme passée ! +' + e + ' ' + TK; }, nobody: 'Personne de libre pour l\'instant, passe la flamme à un ami.',
+    shareTxt: function (n) { return '🔥 Je te passe ma torche olympique dans ' + n + ' ! Attrape-la vite et gagne des ' + TK + '.'; }, invTxt: function (n) { return '🔥 Viens courir dans ' + n + ' avec moi, on gagne des ' + TK + ' en se passant la torche !'; },
+    iT: 'Invite tes amis', iP: '+1000 ' + TK + ' pour toi et +500 pour ton ami à son arrivée.', share: '📨 Partager mon lien', copy: 'Copier le lien', copied: 'Lien copié ✅', topT: 'Meilleurs joueurs', you: 'toi', err: 'Oups, réessaie dans un instant.', noCash: 'Les ' + TK + ' sont des points du jeu, sans valeur en argent.',
+    wkLbl: 'Concours hebdomadaire', wkT: 'La Coupe de la Flamme', wkP: 'Gagne un maximum de ' + TK + ' avant dimanche minuit. Le classement repart à zéro chaque lundi.', wkEnds: 'avant la fin du concours', wkPtsL: 'tes points', wkRkL: 'ton rang',
+    lPrize: 'Titres de la semaine', lWkTop: 'Top de la semaine', wkEmpty: 'Personne n\'a encore marqué cette semaine. Sois le premier à allumer la flamme ! 🔥',
+    tiers: [['🥇', 'Flamme d\'Or'], ['🥈', 'Flamme d\'Argent'], ['🥉', 'Flamme de Bronze'], ['✨', 'Étincelle']],
+    prizes: [['🥇', 'Flamme d\'Or', 'Termine n°1 de la semaine.'], ['🥈', 'Flamme d\'Argent', 'Termine dans le top 3.'], ['🥉', 'Flamme de Bronze', 'Termine dans le top 10.']],
+    wkNote: 'Les titres sont honorifiques. Les points n\'ont aucune valeur en argent.'
   } : {
-    bal: 'Your balance', streak: 'day streak', pass: 'passes', inv: 'invited', how: 'How it works', home: 'Baton', rank: 'Ranking', invT: 'Invite',
-    holdT: 'You hold the baton!', holdP: function (r) { return 'It earns you ' + r + ' ' + TK + ' per hour. Pass it before the timer ends to keep it all.'; },
-    takeT: 'Your daily baton is waiting', takeP: function (b) { return 'Take it and get a +' + b + ' ' + TK + ' streak bonus.'; }, take: function (b) { return '🏃 Take my baton (+' + b + ')'; },
-    waitT: 'No baton right now', waitP: 'A new baton comes tomorrow. A friend can also pass you theirs.', left: 'left', next: 'next one',
-    pLink: '🤝 Pass to a friend', pRand: '🎲 Pass to a random player', live: function (n) { return '+' + n + ' ' + TK + ' earned'; },
-    r1: ['One baton a day', 'Take your baton every day: your streak raises your bonus.'], r2: function (r, h) { return ['Hold it, it pays', r + ' ' + TK + ' per hour, for up to ' + h + ' h.']; },
-    r3: ['Pass it in time', 'Pass it before the end: +300. If it falls, you only keep half.'], r4: ['Invite your friends', '+1000 ' + TK + ' for every new player who joins through you.'],
-    welcome: 'Welcome! +500 ' + TK + ' for you 🎁', invited: 'Welcome! +500 ' + TK + ' thanks to your friend 🎁', got: 'Someone passed you the baton! 🏃 Hold it and earn', taken: 'Too late, someone already took this baton.', dropped: 'Your baton fell: you kept half.',
-    took: function (b) { return 'Baton taken! +' + b + ' ' + TK; }, passed: function (e) { return 'Baton passed! +' + e + ' ' + TK; }, nobody: 'Nobody is free right now, pass it to a friend.',
-    shareTxt: function (n) { return '🏃 I am passing you my baton in ' + n + '! Grab it fast and earn ' + TK + '.'; }, invTxt: function (n) { return '🏃 Come play ' + n + ' with me, we earn ' + TK + ' by passing the baton!'; },
-    iT: 'Invite your friends', iP: '+1000 ' + TK + ' for you and +500 for your friend when they join.', share: '📨 Share my link', copy: 'Copy the link', copied: 'Link copied ✅', topT: 'Top players', you: 'you', err: 'Oops, try again in a moment.', noCash: TK + ' are game points with no cash value.'
+    bal: 'Your balance', streak: 'day streak', pass: 'passes', inv: 'invited', how: 'How it works', home: 'Torch', rank: 'Ranking', invT: 'Invite', wk: 'Contest',
+    holdT: 'You carry the torch!', holdP: function (r) { return 'It earns you ' + r + ' ' + TK + ' per hour. Pass the flame before the timer ends to keep it all.'; },
+    takeT: 'Your daily torch is ready', takeP: function (b) { return 'Light it and get a +' + b + ' ' + TK + ' streak bonus.'; }, take: function (b) { return '🔥 Light my torch (+' + b + ')'; },
+    waitT: 'The flame is resting', waitP: 'A new torch is lit tomorrow. A friend can also hand you theirs.', left: 'left', next: 'next one',
+    pLink: '🤝 Pass the flame to a friend', pRand: '🎲 Pass to a random runner', live: function (n) { return '+' + n + ' ' + TK + ' earned'; },
+    r1: ['One torch a day', 'Light your torch every day: your streak raises your bonus.'], r2: function (r, h) { return ['Carry it, it pays', r + ' ' + TK + ' per hour, for up to ' + h + ' h.']; },
+    r3: ['Pass it in time', 'Hand over the flame before the end: +300. If it goes out, you only keep half.'], r4: ['Invite your friends', '+1000 ' + TK + ' for every new player who joins through you.'],
+    welcome: 'Welcome! +500 ' + TK + ' for you 🎁', invited: 'Welcome! +500 ' + TK + ' thanks to your friend 🎁', got: 'Someone passed you the torch! 🔥 Carry it and earn', taken: 'Too late, someone already took this torch.', dropped: 'Your flame went out: you kept half.',
+    took: function (b) { return 'Torch lit! +' + b + ' ' + TK; }, passed: function (e) { return 'Flame passed! +' + e + ' ' + TK; }, nobody: 'Nobody is free right now, pass the flame to a friend.',
+    shareTxt: function (n) { return '🔥 I am passing you my Olympic torch in ' + n + '! Catch it fast and earn ' + TK + '.'; }, invTxt: function (n) { return '🔥 Come run ' + n + ' with me, we earn ' + TK + ' by passing the torch!'; },
+    iT: 'Invite your friends', iP: '+1000 ' + TK + ' for you and +500 for your friend when they join.', share: '📨 Share my link', copy: 'Copy the link', copied: 'Link copied ✅', topT: 'Top players', you: 'you', err: 'Oops, try again in a moment.', noCash: TK + ' are game points with no cash value.',
+    wkLbl: 'Weekly contest', wkT: 'The Flame Cup', wkP: 'Earn as many ' + TK + ' as you can before Sunday midnight. The board resets every Monday.', wkEnds: 'until the contest ends', wkPtsL: 'your points', wkRkL: 'your rank',
+    lPrize: 'Weekly titles', lWkTop: 'This week\'s top', wkEmpty: 'Nobody has scored yet this week. Be the first to light the flame! 🔥',
+    tiers: [['🥇', 'Golden Flame'], ['🥈', 'Silver Flame'], ['🥉', 'Bronze Flame'], ['✨', 'Rising Spark']],
+    prizes: [['🥇', 'Golden Flame', 'Finish #1 of the week.'], ['🥈', 'Silver Flame', 'Finish in the top 3.'], ['🥉', 'Bronze Flame', 'Finish in the top 10.']],
+    wkNote: 'Titles are for glory only. Points have no cash value.'
   };
   var S = null, skew = 0, busy = false, toastT;
+  var WK = null, wkBusy = false, wkSaved = -1, wkLast = 0, myRank = 0, WEEK = 604800000, MON = 345600000;
   var fmt = function (n) { return Number(n || 0).toLocaleString(fr ? 'fr-FR' : 'en-US'); };
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   function toast(m) { var t = $('toast'); t.textContent = m; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('on'); }, 2800); }
@@ -155,7 +201,51 @@ window.addEventListener('load', function () {
   function countTo(el, to) { var from = Number(el.getAttribute('data-v') || 0), t0 = performance.now(); el.setAttribute('data-v', to); (function step(t) { var k = Math.min(1, (t - t0) / 700), v = Math.round(from + (to - from) * (1 - Math.pow(1 - k, 3))); el.textContent = fmt(v); if (k < 1) requestAnimationFrame(step); })(t0); }
   function share(url, txt) { var u = 'https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(txt); try { tw.openTelegramLink(u); } catch (e) { location.href = u; } }
 
-  ['lBal:bal', 'lStreak:streak', 'lPass:pass', 'lInv:inv', 'lHow:how', 'lHome:home', 'lRank:rank', 'lInvT:invT', 'iT:iT', 'iP:iP', 'iShare:share', 'iCopy:copy', 'lTop:topT', 'noCash:noCash'].forEach(function (p) { var k = p.split(':'); $(k[0]).textContent = T[k[1]]; });
+  ['lBal:bal', 'lStreak:streak', 'lPass:pass', 'lInv:inv', 'lHow:how', 'lHome:home', 'lWk:wk', 'lRank:rank', 'lInvT:invT', 'iT:iT', 'iP:iP', 'iShare:share', 'iCopy:copy', 'lTop:topT', 'noCash:noCash',
+    'wkLbl:wkLbl', 'wkT:wkT', 'wkP:wkP', 'wkEndsL:wkEnds', 'wkPtsL:wkPtsL', 'wkRkL:wkRkL', 'lPrize:lPrize', 'lWkTop:lWkTop', 'wkNote:wkNote'].forEach(function (p) { var k = p.split(':'); $(k[0]).textContent = T[k[1]]; });
+  $('prizes').innerHTML = T.prizes.map(function (r) { return '<div class="rule"><i>' + r[0] + '</i><div><b>' + esc(r[1]) + '</b>' + esc(r[2]) + '</div></div>'; }).join('');
+
+  /* ---------- weekly contest (score = balance gained since Monday 00:00 UTC) ---------- */
+  function weekId() { return Math.floor((Date.now() + skew - MON) / WEEK); }
+  function wkLeft() { var n = Date.now() + skew; return Math.max(0, ((Math.floor((n - MON) / WEEK) + 1) * WEEK + MON - n) / 1000); }
+  function wkScore() { return WK && S ? Math.max(0, S.bal - WK.base) : 0; }
+  function tierOf(rk, p) { if (!rk || !p) return 3; return rk === 1 ? 0 : rk <= 3 ? 1 : rk <= 10 ? 2 : 3; }
+  function paintWk() {
+    var p = wkScore(), t = T.tiers[tierOf(myRank, p)];
+    $('wkPts').textContent = fmt(p); $('wkRk').textContent = myRank ? '#' + myRank : '-'; $('wkTi').textContent = t[0]; $('wkTn').textContent = t[1];
+  }
+  function wkSync(force) {
+    if (!S) return;
+    var w = weekId();
+    if (!WK) {
+      if (wkBusy) return; wkBusy = true;
+      Promise.resolve(SayApp.get('wkb')).then(function (v) {
+        if (!v || typeof v.w !== 'number' || v.w !== weekId()) { v = { w: weekId(), base: S.bal }; SayApp.set('wkb', v); }
+        WK = v; wkBusy = false; wkSync(true);
+      }).catch(function () { wkBusy = false; });
+      return;
+    }
+    if (WK.w !== w) { WK = { w: w, base: S.bal }; SayApp.set('wkb', WK); wkSaved = -1; myRank = 0; }
+    var p = wkScore();
+    if (p !== wkSaved && (force || Date.now() - wkLast > 5000)) { wkSaved = p; wkLast = Date.now(); SayApp.set('wk' + w, p); }
+    paintWk();
+  }
+  setInterval(function () { wkSync(false); }, 6000);
+  function loadWk() {
+    var key = 'wk' + weekId(), p = wkScore(), pre = Promise.resolve();
+    $('wkList').innerHTML = '<div class="row skel"><em>1</em><span>…</span></div><div class="row skel"><em>2</em><span>…</span></div><div class="row skel"><em>3</em><span>…</span></div>';
+    if (WK && S) { wkSaved = p; wkLast = Date.now(); pre = Promise.resolve(SayApp.set(key, p)); }
+    pre.catch(function () {}).then(function () { return SayApp.top(key, 20); }).then(function (l) {
+      l = (l || []).filter(function (x) { return x && Number(x.value) > 0; }); myRank = 0;
+      var html = l.map(function (x, i) {
+        if (x.me) myRank = i + 1;
+        return '<div class="row' + (x.me ? ' me' : '') + '"><em>' + (i < 3 ? ['🥇', '🥈', '🥉'][i] : i + 1) + '</em><span>' + esc(x.name) + (x.me ? ' (' + esc(T.you) + ')' : '') + '</span><b>' + fmt(x.value) + '</b></div>';
+      }).join('');
+      if (!myRank && p > 0 && l.length) html += '<div class="row me"><em>…</em><span>' + esc(T.you) + '</span><b>' + fmt(p) + '</b></div>';
+      $('wkList').innerHTML = html || '<div class="empty">' + esc(T.wkEmpty) + '</div>';
+      paintWk();
+    }).catch(function () { $('wkList').innerHTML = '<div class="empty">' + esc(T.err) + '</div>'; });
+  }
 
   function bonusFor(st) { return 100 * Math.min((S && S.streak ? S.streak : 0) + 1, 7); }
   function paint() {
@@ -180,6 +270,8 @@ window.addEventListener('load', function () {
     tick();
   }
   function tick() {
+    var wl = wkLeft(), dd = Math.floor(wl / 86400);
+    $('wkCd').textContent = (dd ? dd + (fr ? ' j ' : 'd ') : '') + String(Math.floor(wl % 86400 / 3600)).padStart(2, '0') + ':' + String(Math.floor(wl % 3600 / 60)).padStart(2, '0') + ':' + String(Math.floor(wl % 60)).padStart(2, '0');
     if (!S) return;
     var now = Date.now() + skew, arc = $('arc'), C = 553;
     if (S.hold_since) {
@@ -202,7 +294,7 @@ window.addEventListener('load', function () {
     $('invLink').textContent = r.invite;
     if (r.msg === 'welcome') toast(T.welcome); else if (r.msg === 'invited') toast(T.invited); else if (r.msg === 'got') { toast(T.got); SayApp.haptic('ok'); } else if (r.msg === 'taken') toast(T.taken); else if (r.msg === 'dropped') toast(T.dropped);
     if (prev !== null && r.bal > prev) floatUp('+' + fmt(r.bal - prev));
-    paint(); return true;
+    paint(); wkSync(false); return true;
   }
   function load(arg) { return SayApp.game('state', arg ? { arg: arg } : {}).then(apply); }
   function act(a) {
@@ -218,14 +310,15 @@ window.addEventListener('load', function () {
     });
   }
   function tab(w) {
-    ['Home', 'Top', 'Inv'].forEach(function (k) { $('v' + k).hidden = k !== w; $('t' + k).classList.toggle('on', k === w); });
+    ['Home', 'Wk', 'Top', 'Inv'].forEach(function (k) { $('v' + k).hidden = k !== w; $('t' + k).classList.toggle('on', k === w); });
     window.scrollTo(0, 0); SayApp.haptic('tap');
+    if (w === 'Wk') loadWk();
     if (w === 'Top') SayApp.game('top').then(function (r) {
       if (!r || !r.ok) return; apply(r);
       $('topList').innerHTML = (r.top || []).map(function (p, i) { return '<div class="row' + (p.me ? ' me' : '') + '"><em>' + (i < 3 ? ['🥇', '🥈', '🥉'][i] : i + 1) + '</em><span>' + esc(p.name) + (p.me ? ' (' + esc(T.you) + ')' : '') + '</span><b>' + fmt(p.bal) + '</b></div>'; }).join('');
     });
   }
-  $('tHome').onclick = function () { tab('Home'); }; $('tTop').onclick = function () { tab('Top'); }; $('tInv').onclick = function () { tab('Inv'); };
+  $('tHome').onclick = function () { tab('Home'); }; $('tWk').onclick = function () { tab('Wk'); }; $('tTop').onclick = function () { tab('Top'); }; $('tInv').onclick = function () { tab('Inv'); };
   $('iShare').onclick = function () { if (S) share(S.invite, T.invTxt(NAME)); };
   $('iCopy').onclick = function () { if (!S) return; try { navigator.clipboard.writeText(S.invite).then(function () { toast(T.copied); }); } catch (e) { toast(S.invite); } };
   var j = (new URLSearchParams(location.search).get('j') || '').toLowerCase();
