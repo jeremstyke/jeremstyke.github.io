@@ -1,4 +1,4 @@
-<!-- sayapp 4v2t3sra v5 -->
+<!-- sayapp 4v2t3sra v6 -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -252,7 +252,7 @@ function draw(t){
     if(r.m){ctx.fillStyle='#ffb366';ctx.beginPath();ctx.arc(rx+r.dx*sz*.26,ry+r.dy*sz*.26,cell*.09,0,7);ctx.fill()}
   }
   if(fruit){
-    const cx=(fruit.x+.5)*cell,cy=(fruit.y+.5)*cell,b=1+Math.sin(t/220)*.07,ap=Math.min(1,(t-fruit.born)/220);
+    const cx=(fruit.x+.5)*cell,cy=(fruit.y+.5)*cell,b=1+Math.sin(t/220)*.07,ap=Math.max(0,Math.min(1,(t-fruit.born)/220));
     ctx.fillStyle='rgba(0,0,0,.28)';ctx.beginPath();ctx.ellipse(cx,cy+cell*.36,cell*.3*b*ap,cell*.09*ap,0,0,7);ctx.fill();
     if(fruit.gold){
       const fc=fruit.kind==='slow'?'rgba(170,130,255,':fruit.kind==='gem'?'rgba(80,190,255,':'rgba(255,201,60,';
@@ -299,7 +299,7 @@ function draw(t){
 }
 function loop(t){
   if(running&&!paused){acc+=t-last;if(acc>500)acc=500;const sp=t<slowUntil?stepMs*1.6:stepMs;while(acc>=sp&&running){acc-=sp;step(t)}}
-  last=t;draw(t);requestAnimationFrame(loop);
+  last=t;requestAnimationFrame(loop);try{draw(t)}catch(e){ctx.globalAlpha=1;ctx.shadowBlur=0}
 }
 async function countdown(){
   const cd=$('#cd');
