@@ -1,0 +1,202 @@
+<!-- sayapp j88ff7t8 v1 -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Tu préfères ?</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#140B2E;--bg2:#1E1145;--card:#24154F;--main:#8B5CF6;--accent:#FF4FA3;--yel:#FFD23F;--cy:#22D3EE;--txt:#fff;--mut:#B8A9E6;
+--gA:linear-gradient(135deg,#FF8A5B,#FF4FA3);--gB:linear-gradient(135deg,#22D3EE,#6366F1);--gM:linear-gradient(135deg,#8B5CF6,#FF4FA3)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--txt);font-family:'Outfit',system-ui,-apple-system,sans-serif;font-size:16px;overflow-x:hidden}
+body{min-height:100vh;background:radial-gradient(circle at 15% 0%,#3B1D8A 0,transparent 45%),radial-gradient(circle at 100% 30%,#5B1150 0,transparent 40%),var(--bg);padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+button{font-family:inherit;border:0;cursor:pointer;color:inherit;transition:transform .15s,opacity .2s}
+button:active{transform:scale(.96)}
+header{padding:calc(var(--sa-top,0px) + 8px) 20px 8px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-weight:900;font-size:26px;letter-spacing:-.5px;line-height:1}
+.logo span{background:linear-gradient(90deg,var(--yel),var(--accent),var(--cy));-webkit-background-clip:text;background-clip:text;color:transparent}
+.pill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:8px 14px;border-radius:999px;font-weight:800;font-size:16px;box-shadow:0 0 20px rgba(255,210,63,.15)}
+.pill b{color:var(--yel)}
+.label{font-size:11px;text-transform:uppercase;letter-spacing:1.6px;color:var(--mut);font-weight:700}
+main{padding:8px 16px}
+.view{display:none;animation:fade .3s ease}
+.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.bar{display:flex;align-items:center;justify-content:space-between;margin:8px 4px 12px}
+.prog{height:8px;border-radius:8px;background:rgba(255,255,255,.08);overflow:hidden;margin:0 4px 16px}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--yel),var(--accent));border-radius:8px;transition:width .4s ease}
+.boostTag{font-size:12px;font-weight:800;color:#1a0b33;background:var(--yel);padding:4px 10px;border-radius:999px;display:none}
+.qwrap{transition:transform .28s ease,opacity .28s ease}
+.qwrap.out{transform:translateX(-40px) rotate(-3deg);opacity:0}
+.qwrap.in{transform:translateX(40px) rotate(3deg);opacity:0}
+.ask{text-align:center;font-weight:800;font-size:22px;margin-bottom:14px}
+.opts{position:relative;display:flex;flex-direction:column;gap:12px}
+.opt{position:relative;overflow:hidden;min-height:138px;border-radius:24px;padding:22px 20px;text-align:left;font-size:20px;font-weight:700;line-height:1.25;display:flex;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25)}
+.opt.a{background:var(--gA)}.opt.b{background:var(--gB)}
+.opt .fill{position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(0,0,0,.22);transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.opt .t{position:relative;z-index:1;flex:1;padding-right:8px}
+.opt .p{position:relative;z-index:1;font-size:30px;font-weight:900;opacity:0;transform:scale(.6);transition:all .35s ease .15s}
+.opt .emo{position:absolute;right:-6px;bottom:-14px;font-size:70px;opacity:.22;transform:rotate(-12deg)}
+.opts.done .opt .p{opacity:1;transform:none}
+.opts.done .opt{transform:scale(.98);opacity:.6}
+.opts.done .opt.pick{transform:scale(1);opacity:1;box-shadow:0 0 0 3px #fff,0 0 34px rgba(255,210,63,.55)}
+.or{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;width:56px;height:56px;border-radius:50%;background:var(--bg);border:3px solid var(--yel);display:grid;place-items:center;font-weight:900;font-size:16px;color:var(--yel);box-shadow:0 0 24px rgba(255,210,63,.5)}
+.result{min-height:112px;margin-top:16px;text-align:center}
+.verdict{font-weight:800;font-size:16px;margin-bottom:12px;opacity:0;transform:translateY(6px);transition:all .25s}
+.verdict.on{opacity:1;transform:none}
+.row{display:flex;gap:10px}
+.btn{flex:1;padding:16px;border-radius:18px;font-weight:800;font-size:16px;background:var(--gM);box-shadow:0 8px 24px rgba(139,92,246,.45)}
+.btn.ghost{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);box-shadow:none}
+.btn.yel{background:linear-gradient(135deg,var(--yel),#FF9F1C);color:#2a1200;box-shadow:0 8px 24px rgba(255,190,40,.35)}
+.skip{margin:0 auto;display:block;background:none;color:var(--mut);font-weight:600;font-size:15px;padding:12px 20px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.3);margin-bottom:14px}
+.empty{text-align:center;padding:36px 20px}
+.empty .big{font-size:64px;margin-bottom:8px}
+.empty h3{font-size:22px;font-weight:800;margin-bottom:6px}
+.empty p{color:var(--mut);font-size:15px;margin-bottom:18px}
+h2{font-size:26px;font-weight:900;margin:8px 4px 14px}
+.lb li{list-style:none;display:flex;align-items:center;gap:12px;padding:12px 8px;border-bottom:1px solid rgba(255,255,255,.06)}
+.lb li:last-child{border:0}
+.lb .r{width:32px;text-align:center;font-weight:900;font-size:18px;color:var(--mut)}
+.lb .av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--gM)}
+.lb .n{flex:1;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb .v{font-weight:900;color:var(--yel)}
+.lb li.me{background:rgba(255,210,63,.1);border-radius:14px;border:0}
+.sk{height:52px;border-radius:14px;margin:8px 0;background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(255,255,255,.12),rgba(255,255,255,.05));background-size:200% 100%;animation:sh 1.2s infinite}
+@keyframes sh{to{background-position:-200% 0}}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.stat{border-radius:20px;padding:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
+.stat b{display:block;font-size:28px;font-weight:900;margin-top:4px}
+.stat:nth-child(1) b{color:var(--yel)}.stat:nth-child(2) b{color:var(--cy)}.stat:nth-child(3) b{color:var(--accent)}.stat:nth-child(4) b{color:#A78BFA}
+.me-head{display:flex;align-items:center;gap:14px;margin:8px 4px 16px}
+.me-head .av{width:60px;height:60px;border-radius:50%;background:var(--gM);display:grid;place-items:center;font-size:26px;font-weight:900;box-shadow:0 0 24px rgba(255,79,163,.5)}
+.seg{display:flex;background:rgba(0,0,0,.25);border-radius:14px;padding:4px;margin-top:10px}
+.seg button{flex:1;padding:12px;border-radius:11px;background:none;font-weight:700;font-size:15px;color:var(--mut)}
+.seg button.on{background:var(--gM);color:#fff}
+nav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));display:flex;background:rgba(30,17,69,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:6px;z-index:20;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+nav button{flex:1;background:none;padding:10px 4px;border-radius:16px;font-size:12px;font-weight:700;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button span{font-size:22px}
+nav button.on{background:rgba(139,92,246,.25);color:#fff}
+footer{text-align:center;color:rgba(184,169,230,.5);font-size:12px;padding:18px 0 4px}
+.float{position:fixed;z-index:50;font-weight:900;font-size:26px;color:var(--yel);text-shadow:0 2px 12px rgba(0,0,0,.5);pointer-events:none;animation:up 1s ease forwards}
+@keyframes up{to{transform:translateY(-80px) scale(1.3);opacity:0}}
+.conf{position:fixed;z-index:49;width:10px;height:14px;border-radius:3px;pointer-events:none;animation:cf .9s ease-out forwards}
+@keyframes cf{to{transform:translate(var(--x),var(--y)) rotate(var(--r));opacity:0}}
+.toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:#fff;color:#1a0b33;font-weight:700;padding:12px 18px;border-radius:14px;opacity:0;transition:all .25s;z-index:60;max-width:88%;text-align:center;font-size:15px}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><span id="tTitle">Tu préfères ?</span></div>
+  <div class="pill">⭐ <b id="score">0</b></div>
+</header>
+<main>
+  <section class="view on" id="v-play">
+    <div class="bar"><div class="label" id="tToday">0 / 200</div><div class="boostTag" id="boostTag">x2</div></div>
+    <div class="prog"><i id="prog" style="width:0"></i></div>
+    <div id="playZone"></div>
+  </section>
+  <section class="view" id="v-top">
+    <h2 id="tLb">Classement</h2>
+    <div class="card"><ul class="lb" id="lb"></ul></div>
+    <button class="btn yel" id="inviteBtn" style="width:100%"></button>
+  </section>
+  <section class="view" id="v-me">
+    <div class="me-head"><div class="av" id="meAv">?</div><div><div class="label" id="tPlayer">Joueur</div><div style="font-size:22px;font-weight:800" id="meName">Toi</div></div></div>
+    <div class="stats" id="stats"></div>
+    <div class="card"><div class="label" id="tLang">Langue</div>
+      <div class="seg"><button data-l="fr">🇫🇷 Français</button><button data-l="en">🇬🇧 English</button></div></div>
+    <div class="card"><div style="font-weight:800;font-size:17px" id="tBoost"></div><div style="color:var(--mut);font-size:14px;margin:4px 0 12px" id="tBoostSub"></div>
+      <button class="btn" id="adBtn" style="width:100%">🎬</button></div>
+  </section>
+  <footer>Made with SayApp</footer>
+</main>
+<nav>
+  <button class="on" data-v="play"><span>🎲</span><em id="nPlay">Jouer</em></button>
+  <button data-v="top"><span>🏆</span><em id="nTop">Classement</em></button>
+  <button data-v="me"><span>😎</span><em id="nMe">Profil</em></button>
+</nav>
+<div class="toast" id="toast"></div>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="j88ff7t8" data-full="1"></script>
+<script>
+window.addEventListener('load',async()=>{
+const tg=window.Telegram&&Telegram.WebApp;try{tg.ready();tg.expand()}catch(e){}
+const P=[["Avoir des doigts en spaghetti","Have spaghetti fingers","🍝"],["Éternuer des confettis","Sneeze confetti","🎉"],["Parler uniquement en rimes","Only speak in rhymes","🎤"],["Avoir un rire de dauphin","Have a dolphin laugh","🐬"],["Ne plus jamais manger de pizza","Never eat pizza again","🍕"],["Avoir Wi-Fi gratuit partout","Have free Wi-Fi everywhere","📶"],["Pouvoir parler aux chats","Be able to talk to cats","🐱"],["Être suivi par une musique épique","Have epic music follow you","🎺"],["Avoir des cheveux qui changent de couleur selon l'humeur","Have hair that changes color with your mood","🌈"],["Transpirer du sirop d'érable","Sweat maple syrup","🍁"],["Voler à 2 km/h","Fly at 1 mph","🕊️"],["Être invisible quand personne ne regarde","Be invisible only when nobody looks","👻"],["Vivre dans une maison en Lego","Live in a Lego house","🧱"],["Avoir un pingouin comme coloc","Have a penguin roommate","🐧"],["Crier à chaque fois que tu t'assois","Scream every time you sit down","😱"],["Avoir des genoux à l'envers","Have backwards knees","🦵"],["Lire dans les pensées des pigeons","Read pigeons' minds","🐦"],["Ne plus jamais avoir de batterie faible","Never have low battery again","🔋"],["Dormir 2 heures et être en forme","Sleep 2 hours and feel great","😴"],["Être le meilleur danseur du monde","Be the world's best dancer","💃"],["Avoir une voix d'hélium pour toujours","Have a helium voice forever","🎈"],["Ne pouvoir marcher qu'en crabe","Only walk sideways like a crab","🦀"],["Remonter le temps de 10 secondes","Rewind time by 10 seconds","⏪"],["Gagner une dispute à chaque fois","Win every argument","🏆"],["Avoir un bouton pause sur la vie","Have a pause button on life","⏸️"],["Sentir le croissant chaud en permanence","Always smell like warm croissants","🥐"],["Être un mème célèbre","Be a famous meme","🤳"],["Avoir une queue de chat","Have a cat tail","🐈"],["Ne jamais devoir faire la queue","Never wait in line again","🚶"],["Manger que des plats froids","Only eat cold food","🧊"],["Hoqueter pendant une heure par jour","Hiccup one hour a day","😮"],["Avoir des mains qui font pouet","Have squeaky hands","🦆"],["Vivre sans réseaux sociaux","Live without social media","📵"],["Savoir toutes les langues","Know every language","🌍"],["Être sponsorisé par une marque de chaussettes","Be sponsored by a sock brand","🧦"],["Avoir un dragon de la taille d'un hamster","Own a hamster-sized dragon","🐉"],["Tomber amoureux d'une salade","Fall in love with a salad","🥗"],["Avoir les oreilles qui bougent quand tu mens","Have ears that wiggle when you lie","👂"],["Chanter tout ce que tu dis","Sing everything you say","🎶"],["Être coincé dans un ascenseur avec ton ex","Be stuck in an elevator with your ex","🛗"],["Porter des Crocs à vie","Wear Crocs for life","👟"],["Avoir un majordome robot","Have a robot butler","🤖"],["Rencontrer un extraterrestre gentil","Meet a friendly alien","👽"],["Gagner au cache-cache pour toujours","Always win at hide and seek","🙈"],["Avoir un frigo qui se remplit tout seul","Have a self-filling fridge","🧀"],["Être poursuivi par une oie","Be chased by a goose","🪿"],["Avoir le hoquet en mode karaoké","Have karaoke hiccups","🎙️"],["Rire à chaque mauvaise nouvelle","Laugh at every bad news","🤣"],["Pouvoir te téléporter mais seulement aux toilettes","Teleport but only to bathrooms","🚽"],["Avoir des pieds en ventouses","Have suction cup feet","🐙"],["Ne jamais avoir froid","Never feel cold","🔥"],["Être ami avec un fantôme drôle","Befriend a funny ghost","👻"],["Avoir des sourcils de 10 cm","Have 4-inch eyebrows","🤨"],["Manger un citron entier chaque matin","Eat a whole lemon every morning","🍋"],["Voir 5 minutes dans le futur","See 5 minutes into the future","🔮"],["Être champion du monde de bâillement","Be world yawning champion","🥱"],["Avoir ta propre émission de cuisine ratée","Host your own failed cooking show","👨‍🍳"],["Avoir un cheval comme taxi","Have a horse as a taxi","🐴"],["Ne jamais perdre tes clés","Never lose your keys","🔑"],["Parler à ton toi d'il y a 10 ans","Talk to yourself from 10 years ago","🪞"],["Être géant 1 jour par semaine","Be a giant one day a week","🦒"],["Vivre dans un jeu vidéo","Live inside a video game","🎮"],["Avoir des chaussures qui couinent","Have squeaky shoes","👞"],["Être toujours 10 minutes en retard","Always be 10 minutes late","⏰"],["Avoir un clone qui fait tes devoirs","Have a clone do your chores","👯"],["Respirer sous l'eau","Breathe underwater","🐠"],["Avoir un fan-club de mamies","Have a fan club of grandmas","👵"],["Ne manger que des bonbons","Only eat candy","🍬"],["Être un pirate de l'espace","Be a space pirate","🏴‍☠️"],["Danser dès que tu entends ton prénom","Dance whenever you hear your name","🕺"]];
+const T={fr:{title:'Tu préfères ?',ask:'Tu préfères...',or:'OU',next:'Suivant →',share:'📤 Partager',skip:'Passer',today:"aujourd'hui",play:'Jouer',top:'Classement',me:'Profil',pct:'%',maj:'🙌 Comme la majorité ! +5 bonus',min:'😈 Rebelle, avis minoritaire !',done:'Tu as tout joué aujourd\'hui !',doneSub:'200 nouveaux dilemmes arrivent demain. En attendant, défie tes potes 😄',lbEmpty:'Personne encore... sois le premier !',score:'Points',total:'Dilemmes',streak:'Série (jours)',best:'Record série',lang:'Langue des dilemmes',boost:'⚡ Boost x2 pour 10 réponses',boostSub:'Regarde une courte vidéo pour doubler tes points',boostBtn:'🎬 Activer le boost',boostOn:'Boost actif !',noAd:'Pas de vidéo dispo, réessaie plus tard',invite:'🔥 Défier mes amis',player:'Joueur',lbErr:'Classement indisponible pour le moment',shareTxt:(a,b,c)=>`Tu préfères : "${a}" OU "${b}" ? Moi j'ai choisi "${c}" 😂 Et toi ?`,inviteTxt:s=>`J'ai ${s} points sur Tu préfères ? 🤪 Viens me battre !`},
+en:{title:'Would you rather?',ask:'Would you rather...',or:'OR',next:'Next →',share:'📤 Share',skip:'Skip',today:'today',play:'Play',top:'Ranking',me:'Profile',pct:'%',maj:'🙌 With the majority! +5 bonus',min:'😈 Rebel, minority pick!',done:'You played them all today!',doneSub:'200 new dilemmas tomorrow. Meanwhile, challenge your friends 😄',lbEmpty:'Nobody yet... be the first!',score:'Points',total:'Dilemmas',streak:'Streak (days)',best:'Best streak',lang:'Dilemma language',boost:'⚡ x2 boost for 10 answers',boostSub:'Watch a short video to double your points',boostBtn:'🎬 Activate boost',boostOn:'Boost active!',noAd:'No video available, try later',invite:'🔥 Challenge my friends',player:'Player',lbErr:'Ranking unavailable right now',shareTxt:(a,b,c)=>`Would you rather: "${a}" OR "${b}"? I picked "${c}" 😂 What about you?`,inviteTxt:s=>`I have ${s} points on Would you rather? 🤪 Come beat me!`}};
+const $=id=>document.getElementById(id);
+const DAILY=200;
+const dayStr=d=>d.toISOString().slice(0,10);
+const today=dayStr(new Date()),yest=dayStr(new Date(Date.now()-864e5));
+const hash=s=>{let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0};
+const rng=seed=>()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+function buildDeck(day){const r=rng(hash(day)),seen=new Set(),d=[];while(d.length<DAILY){const a=Math.floor(r()*P.length),b=Math.floor(r()*P.length);if(a===b)continue;const k=Math.min(a,b)+'-'+Math.max(a,b);if(seen.has(k))continue;seen.add(k);d.push([a,b])}return d}
+const deck=buildDeck(today);
+const pctA=(a,b)=>22+hash(a*131+b*7+'x')%57;
+let S={score:0,total:0,day:today,done:0,streak:0,best:0,lastDay:'',lang:'fr',boost:0};
+try{const s=await SayApp.get('wyr');if(s&&typeof s==='object')S=Object.assign(S,s)}catch(e){}
+if(S.day!==today){S.day=today;S.done=0}
+if(S.lastDay&&S.lastDay!==today&&S.lastDay!==yest)S.streak=0;
+const u=(window.SayApp&&SayApp.user)||{};
+let saveT=null,locked=false,shown=S.score;
+function save(){if(saveT)return;saveT=setTimeout(async()=>{saveT=null;try{await SayApp.set('wyr',S);await SayApp.set('score',S.score)}catch(e){}},3000)}
+const L=()=>T[S.lang];
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('on'),2200)}
+function animScore(){const el=$('score'),from=shown,to=S.score,t0=performance.now();shown=to;const step=n=>{const k=Math.min(1,(n-t0)/500);el.textContent=Math.round(from+(to-from)*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)}
+function burst(x,y,txt){const f=document.createElement('div');f.className='float';f.textContent=txt;f.style.left=(x-24)+'px';f.style.top=(y-20)+'px';document.body.appendChild(f);setTimeout(()=>f.remove(),1000);
+const cols=['#FFD23F','#FF4FA3','#22D3EE','#8B5CF6','#FF8A5B','#4ADE80'];for(let i=0;i<26;i++){const c=document.createElement('div');c.className='conf';c.style.left=x+'px';c.style.top=y+'px';c.style.background=cols[i%6];const a=Math.random()*Math.PI*2,d=60+Math.random()*120;c.style.setProperty('--x',Math.cos(a)*d+'px');c.style.setProperty('--y',Math.sin(a)*d-40+'px');c.style.setProperty('--r',Math.random()*720+'deg');document.body.appendChild(c);setTimeout(()=>c.remove(),900)}}
+function texts(){const l=L();document.title=l.title;$('tTitle').textContent=l.title;$('nPlay').textContent=l.play;$('nTop').textContent=l.top;$('nMe').textContent=l.me;$('tLb').textContent=l.top;$('inviteBtn').textContent=l.invite;$('tLang').textContent=l.lang;$('tBoost').textContent=l.boost;$('tBoostSub').textContent=l.boostSub;$('adBtn').textContent=S.boost>0?l.boostOn+' ('+S.boost+')':l.boostBtn;$('tPlayer').textContent=l.player;
+document.querySelectorAll('.seg button').forEach(b=>b.classList.toggle('on',b.dataset.l===S.lang));
+$('tToday').textContent=Math.min(S.done,DAILY)+' / '+DAILY+' '+l.today;$('prog').style.width=(Math.min(S.done,DAILY)/DAILY*100)+'%';
+const bt=$('boostTag');bt.style.display=S.boost>0?'block':'none';bt.textContent='⚡ x2 · '+S.boost}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function opt(i,side){const li=S.lang==='fr'?0:1;return `<button class="opt ${side}" data-s="${side}"><div class="fill"></div><div class="t">${esc(P[i][li])}</div><div class="p"></div><div class="emo">${P[i][2]}</div></button>`}
+function renderQ(){const z=$('playZone'),l=L();texts();
+if(S.done>=DAILY){z.innerHTML=`<div class="card empty"><div class="big">🥳</div><h3>${l.done}</h3><p>${l.doneSub}</p><button class="btn yel" id="doneShare">${l.invite}</button></div>`;$('doneShare').onclick=invite;return}
+const [a,b]=deck[S.done];locked=false;
+z.innerHTML=`<div class="qwrap in" id="qw"><div class="ask">${l.ask}</div><div class="opts" id="opts">${opt(a,'a')}<div class="or">${l.or}</div>${opt(b,'b')}</div>
+<div class="result"><div class="verdict" id="verdict"></div><div class="row" id="acts" style="display:none"><button class="btn ghost" id="shareBtn">${l.share}</button><button class="btn" id="nextBtn">${l.next}</button></div><button class="skip" id="skipBtn">${l.skip}</button></div></div>`;
+requestAnimationFrame(()=>requestAnimationFrame(()=>$('qw').classList.remove('in')));
+z.querySelectorAll('.opt').forEach(o=>o.onclick=e=>pick(o.dataset.s,e));
+$('skipBtn').onclick=()=>{SayApp.haptic('tap');next()};
+$('nextBtn').onclick=()=>{SayApp.haptic('tap');next()};
+$('shareBtn').onclick=()=>shareQ()}
+let lastPick='a';
+function pick(side,e){if(locked)return;locked=true;lastPick=side;const [a,b]=deck[S.done],pa=pctA(a,b),pb=100-pa,mine=side==='a'?pa:pb,maj=mine>=50;
+const opts=$('opts');opts.classList.add('done');const oa=opts.querySelector('.opt.a'),ob=opts.querySelector('.opt.b');(side==='a'?oa:ob).classList.add('pick');
+oa.querySelector('.p').textContent=pa+'%';ob.querySelector('.p').textContent=pb+'%';
+requestAnimationFrame(()=>{oa.querySelector('.fill').style.width=pa+'%';ob.querySelector('.fill').style.width=pb+'%'});
+let pts=10+(maj?5:0);if(S.boost>0){pts*=2;S.boost--}
+S.score+=pts;S.total++;
+if(S.lastDay!==today){S.streak=S.lastDay===yest?S.streak+1:1;S.lastDay=today;S.best=Math.max(S.best,S.streak)}
+const v=$('verdict');v.textContent=maj?L().maj:L().min;v.classList.add('on');
+$('acts').style.display='flex';$('skipBtn').style.display='none';
+const r=(side==='a'?oa:ob).getBoundingClientRect();burst(e&&e.clientX?e.clientX:r.left+r.width/2,e&&e.clientY?e.clientY:r.top+r.height/2,'+'+pts);
+SayApp.haptic('ok');animScore();texts();save()}
+function next(){S.done++;save();const q=$('qw');if(q){q.classList.add('out');setTimeout(renderQ,260)}else renderQ()}
+function openShare(text){const url='https://t.me/share/url?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent(text);try{tg.openTelegramLink(url)}catch(e){window.open(url,'_blank')}}
+function shareQ(){const [a,b]=deck[S.done],li=S.lang==='fr'?0:1,A=P[a][li],B=P[b][li];SayApp.haptic('tap');openShare(L().shareTxt(A,B,lastPick==='a'?A:B))}
+function invite(){SayApp.haptic('tap');openShare(L().inviteTxt(S.score))}
+$('inviteBtn').onclick=invite;
+async function renderLB(){const ul=$('lb');ul.innerHTML='<div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div>';
+if(saveT){clearTimeout(saveT);saveT=null;try{await SayApp.set('wyr',S);await SayApp.set('score',S.score)}catch(e){}}
+let list=[];try{list=await SayApp.top('score',20)||[]}catch(e){ul.innerHTML=`<div class="empty"><div class="big">📡</div><p>${L().lbErr}</p></div>`;return}
+if(!list.length){ul.innerHTML=`<div class="empty"><div class="big">🏆</div><p>${L().lbEmpty}</p></div>`;return}
+const med=['🥇','🥈','🥉'];ul.innerHTML=list.map((p,i)=>{const n=p.name||'?';return `<li class="${p.me?'me':''}"><div class="r">${med[i]||i+1}</div><div class="av">${esc(n.charAt(0).toUpperCase())}</div><div class="n">${esc(n)}</div><div class="v">${Number(p.value)||0}</div></li>`}).join('')}
+function renderMe(){const l=L(),n=u.first_name||l.player;$('meName').textContent=n;$('meAv').textContent=n.charAt(0).toUpperCase();
+$('stats').innerHTML=[[l.score,S.score],[l.total,S.total],[l.streak,S.streak+' 🔥'],[l.best,S.best]].map(s=>`<div class="stat"><div class="label">${s[0]}</div><b>${s[1]}</b></div>`).join('');texts()}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{SayApp.haptic('tap');document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+b.dataset.v));
+if(b.dataset.v==='top')renderLB();if(b.dataset.v==='me')renderMe();window.scrollTo({top:0,behavior:'smooth'})});
+document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{if(S.lang===b.dataset.l)return;S.lang=b.dataset.l;SayApp.haptic('tap');save();renderMe();renderQ()});
+$('adBtn').onclick=async()=>{const btn=$('adBtn');if(btn.disabled)return;btn.disabled=true;btn.style.opacity=.6;let ok=false;try{ok=await SayApp.ad()}catch(e){}
+btn.disabled=false;btn.style.opacity=1;if(ok){S.boost+=10;SayApp.haptic('ok');toast(L().boostOn);save()}else{SayApp.haptic('error');toast(L().noAd)}renderMe()};
+$('score').textContent=S.score;
+renderQ();
+});
+</script>
+</body>
+</html>
