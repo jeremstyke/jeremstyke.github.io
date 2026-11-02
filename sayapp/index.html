@@ -328,6 +328,7 @@ input.tk:focus{border-color:var(--v)}
 
   var initData = (tw && tw.initData) || '';
   if (!initData) { $('outside').hidden = false; return; }
+  try { tw.disableVerticalSwipes && tw.disableVerticalSwipes(); } catch (e) {}  // 2 nov 2026 (15h30, Jeremy): a swipe down no longer closes SayApp
   try { tw.ready(); tw.expand(); tw.setHeaderColor('#07070d'); tw.setBackgroundColor('#07070d'); tw.setBottomBarColor && tw.setBottomBarColor('#07070d'); } catch (e) {}
   $('main').hidden = false; $('tabs').hidden = false;
 
@@ -347,7 +348,9 @@ input.tk:focus{border-color:var(--v)}
   // ---------- create view ----------
   var idea = $('idea');
   idea.placeholder = T.ph;
-  idea.oninput = function () { $('cnt').textContent = idea.value.length + ' / 4000'; };
+  // ask before closing while something is in progress (questions answered, text typed, app building)
+  function guard() { try { var busy = !$('ov').hidden || (typeof W !== 'undefined' && W.i > 0) || idea.value.trim().length > 0; if (busy) tw.enableClosingConfirmation(); else tw.disableClosingConfirmation(); } catch (e) {} }
+  idea.oninput = function () { $('cnt').textContent = idea.value.length + ' / 4000'; guard(); };
   $('go').textContent = T.go;
   T.chips.forEach(function (c) { var b = document.createElement('button'); b.className = 'chip'; b.textContent = c[0]; b.onclick = function () { hap(); idea.value = c[1]; idea.oninput(); idea.focus(); }; $('chips').appendChild(b); });
   $('how').innerHTML = T.how.map(function (h) { return '<div class="st"><i>' + h[0] + '</i><div><b>' + esc(h[1]) + '</b><span>' + esc(h[2]) + '</span></div></div>'; }).join('');
@@ -384,6 +387,7 @@ input.tk:focus{border-color:var(--v)}
       };
     });
   }
+  setInterval(guard, 1500);
   $('wNext').onclick = function () { hap(); W.i++; wizRender(); if (W.i >= T.wiz.length) setTimeout(function () { idea.focus(); }, 250); };
   $('wBack').onclick = function () { if (W.i > 0) { hap(); W.i--; wizRender(); } };
   function wizBrief() {
@@ -468,7 +472,7 @@ input.tk:focus{border-color:var(--v)}
     var t0 = Date.now();
     $('ov').hidden = false; $('orb').className = 'orb'; $('orbI').textContent = '✦';
     $('ovT').textContent = edit ? T.eT : T.bT; $('ovP').textContent = edit ? T.eP : T.bP;
-    $('bl').hidden = false; $('bar').hidden = false; $('ovb').innerHTML = '';
+    $('bl').hidden = false; $('bar').hidden = false; $('ovb').innerHTML = ''; try { tw.enableClosingConfirmation(); } catch (e) {}
     $('bl').innerHTML = T.bs.map(function (s) { return '<li><i></i>' + esc(s) + '</li>'; }).join('');
     var marks = [0, 12, 40, 95];
     function tick() {
@@ -487,6 +491,7 @@ input.tk:focus{border-color:var(--v)}
     $('ovHide').onclick = function () { clearInterval(bTimer); clearInterval(pTimer); $('ov').hidden = true; tab('apps'); refresh(); };
   }
   function done(a) {
+    try { tw.disableClosingConfirmation(); } catch (e) {}
     $('bl').hidden = true; $('bar').hidden = true;
     if (a.status === 'refused' || (a.status !== 'error' && a.error)) {
       hap('err'); $('orbI').textContent = '🚫'; $('ovT').textContent = T.refT; $('ovP').textContent = a.error || '';
