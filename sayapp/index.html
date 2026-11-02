@@ -79,6 +79,7 @@ textarea::placeholder{color:var(--dim)}
 .abtn{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px}
 .abtn button{padding:10px 6px;border-radius:12px;background:var(--card2);border:1px solid var(--line);font-size:12.5px;font-weight:600}
 .exp{margin-top:10px;font-size:12px;font-weight:600;color:#ffcf7a;background:rgba(255,190,90,.08);border:1px solid rgba(255,190,90,.2);padding:7px 10px;border-radius:10px}.exp.x{color:var(--r);background:rgba(255,107,107,.08);border-color:rgba(255,107,107,.25)}
+.mg{display:flex;align-items:center;gap:12px;margin-bottom:16px}.mg .ico{flex:0 0 52px;height:52px}.stat{display:flex;gap:10px;margin-bottom:16px}.stat div{flex:1;padding:12px;border-radius:14px;background:var(--card);border:1px solid var(--line);text-align:center}.stat b{display:block;font:800 22px Sora,sans-serif}.stat span{font-size:12px;color:var(--mute)}.blk{padding:14px;border-radius:18px;background:var(--card);border:1px solid var(--line);margin-top:12px}.blk h3{font-size:15px;margin-bottom:4px}.blk p{margin:0 0 10px;font-size:13px;color:var(--mute)}.blk input{width:100%;margin-top:8px;padding:12px;border-radius:12px;border:1px solid var(--line);background:#0a0a14;color:var(--fg);font:14px Inter,system-ui,sans-serif;outline:0}
 .abtn button.hl{background:var(--gold);color:#2a1700;border:0}
 .tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;justify-content:center;gap:6px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(7,7,13,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid var(--line)}
 .tabs button{flex:1;max-width:220px;padding:11px;border-radius:14px;font-weight:600;color:var(--mute);display:flex;align-items:center;justify-content:center;gap:7px}
@@ -247,7 +248,10 @@ input.tk:focus{border-color:var(--v)}
       liveT: 'Ton appli est en ligne 🎉', liveP: function (u) { return 'Tes utilisateurs l\'ouvrent sur @' + u + ' avec le bouton du menu ou /start.'; }, openBot: 'Ouvrir mon bot',
       paidW: 'Paiement reçu, activation…', paidOk: 'Abonnement actif ⭐', inv: 'Paiement impossible pour le moment.',
       busy: 'Une appli est déjà en construction.', noai: 'SayApp démarre, réessaie dans quelques minutes.', net: 'Connexion perdue, réessaie.',
-      onBot: 'Sur @', copy: 'Lien copié'
+      onBot: 'Sur @', copy: 'Lien copié',
+      manage: '⚙️ Gérer', users: 'utilisateurs', openMyBot: '🤖 Ouvrir mon bot',
+      bcT: '📣 Annonce à tes utilisateurs', bcP: 'Un message envoyé à tous les utilisateurs de ton bot, avec un bouton pour ouvrir l\'appli. 1 par jour.', bcPh: 'Ex : Nouveau quiz disponible ! Viens battre ton record 🏆', bcGo: function (n) { return '📣 Envoyer à ' + n + ' personne' + (n > 1 ? 's' : ''); }, bcWait: function (h) { return 'Prochaine annonce possible dans ' + h + ' h'; }, bcOk: 'Annonce en cours d\'envoi, je te préviens à la fin ✅', bcNone: 'Personne n\'a encore lancé ton bot.',
+      poT: '📰 Post pour ta chaîne', poP: 'Je t\'envoie un post prêt à transférer sur ta chaîne ou ton groupe, avec le bouton qui ouvre ton appli.', poDef: function (t) { return '🚀 ' + t + ' est disponible sur Telegram !\n\nOuvre-la en un clic, c\'est gratuit 👇'; }, poBtn: 'Texte du bouton', poGo: '📰 Recevoir le post', poOk: 'Post envoyé dans le chat SayApp. Transfère-le sur ta chaîne ✅'
     },
     en: {
       eyebrow: 'Your Telegram mini app, no code', h1: 'Say it.<br><span>We build it.</span>',
@@ -283,7 +287,10 @@ input.tk:focus{border-color:var(--v)}
       liveT: 'Your app is live 🎉', liveP: function (u) { return 'Your users open it on @' + u + ' with the menu button or /start.'; }, openBot: 'Open my bot',
       paidW: 'Payment received, activating…', paidOk: 'Subscription active ⭐', inv: 'Payment is not available right now.',
       busy: 'An app is already being built.', noai: 'SayApp is warming up, try again in a few minutes.', net: 'Connection lost, try again.',
-      onBot: 'On @', copy: 'Link copied'
+      onBot: 'On @', copy: 'Link copied',
+      manage: '⚙️ Manage', users: 'users', openMyBot: '🤖 Open my bot',
+      bcT: '📣 Announcement to your users', bcP: 'A message sent to all the users of your bot, with a button to open the app. 1 per day.', bcPh: 'E.g. New quiz available! Come beat your record 🏆', bcGo: function (n) { return '📣 Send to ' + n + ' ' + (n > 1 ? 'people' : 'person'); }, bcWait: function (h) { return 'Next announcement possible in ' + h + 'h'; }, bcOk: 'Announcement being sent, I will tell you when it is done ✅', bcNone: 'Nobody has started your bot yet.',
+      poT: '📰 Post for your channel', poP: 'I send you a post ready to forward to your channel or group, with the button that opens your app.', poDef: function (t) { return '🚀 ' + t + ' is now on Telegram!\n\nOpen it in one tap, it is free 👇'; }, poBtn: 'Button text', poGo: '📰 Get the post', poOk: 'Post sent in the SayApp chat. Forward it to your channel ✅'
     }
   };
   var T = TX[lang];
@@ -372,7 +379,7 @@ input.tk:focus{border-color:var(--v)}
     box.innerHTML = list.map(function (a) {
       var s = status(a), t = a.title || (a.prompt || '').slice(0, 40) || 'App', live = a.bot_username && sub(a);
       return '<div class="ac" data-id="' + a.id + '"><div class="ah"><div class="ico" style="background:' + col(a.id) + '">' + esc(t.trim().charAt(0).toUpperCase()) + '</div><div class="an"><b>' + esc(t) + '</b><span>' + (a.bot_username ? esc(T.onBot + a.bot_username) : esc((a.prompt || '').slice(0, 80))) + '</span></div><span class="pill ' + s[0] + '">' + esc(s[1]) + '</span></div>' + (a.version && daysLeft(a) !== null ? '<div class="exp' + (daysLeft(a) === 0 ? ' x' : '') + '">' + esc(daysLeft(a) === 0 ? T.expd : T.left(daysLeft(a))) + '</div>' : '') +
-        (a.status === 'generating' ? '' : '<div class="abtn">' + (a.version ? '<button data-a="try">▶ ' + esc(T.try.replace('▶ ', '').split(' ')[0]) + '</button>' : '<button data-a="retry">' + esc(T.retry) + '</button>') + '<button data-a="edit"' + (a.version ? '' : ' disabled style="opacity:.4"') + '>' + esc(T.change) + '</button>' + (live ? '<button data-a="bot" class="hl">@' + esc(a.bot_username).slice(0, 14) + '</button>' : '<button data-a="launch" class="hl"' + (a.version ? '' : ' disabled style="opacity:.4"') + '>' + esc(T.launch) + '</button>') + '</div>') + '</div>';
+        (a.status === 'generating' ? '' : '<div class="abtn">' + (a.version ? '<button data-a="try">▶ ' + esc(T.try.replace('▶ ', '').split(' ')[0]) + '</button>' : '<button data-a="retry">' + esc(T.retry) + '</button>') + '<button data-a="edit"' + (a.version ? '' : ' disabled style="opacity:.4"') + '>' + esc(T.change) + '</button>' + (live ? '<button data-a="bot" class="hl">' + esc(T.manage) + '</button>' : '<button data-a="launch" class="hl"' + (a.version ? '' : ' disabled style="opacity:.4"') + '>' + esc(T.launch) + '</button>') + '</div>') + '</div>';
     }).join('');
     box.querySelectorAll('.ac').forEach(function (el) {
       var a = S.apps.filter(function (x) { return x.id === el.getAttribute('data-id'); })[0];
@@ -380,7 +387,7 @@ input.tk:focus{border-color:var(--v)}
       el.querySelectorAll('button[data-a]').forEach(function (b) {
         b.onclick = function (ev) {
           ev.stopPropagation(); hap(); var k = b.getAttribute('data-a');
-          if (k === 'try') preview(a); else if (k === 'edit') editSheet(a); else if (k === 'launch') launch(a); else if (k === 'bot') link('https://t.me/' + a.bot_username);
+          if (k === 'try') preview(a); else if (k === 'edit') editSheet(a); else if (k === 'launch') launch(a); else if (k === 'bot') manageSheet(a);
           else if (k === 'retry') { tab('create'); idea.value = a.prompt || ''; idea.oninput(); }
         };
       });
@@ -539,6 +546,44 @@ input.tk:focus{border-color:var(--v)}
         $('tkI').value = ''; hap('ok'); refresh();
         openSheet('<div style="text-align:center;padding:10px 0"><div style="font-size:54px">🎉</div><h2 style="margin-top:8px">' + esc(T.liveT) + '</h2><p class="sub">' + esc(T.liveP(r.bot)) + '</p></div><button class="cta" id="lvGo">' + esc(T.openBot) + '</button>');
         $('lvGo').onclick = function () { link('https://t.me/' + r.bot); };
+      });
+    };
+  }
+
+  // ---------- Pro tools: users, announcement, channel post (2 nov 2026, 14h40) ----------
+  function manageSheet(a) {
+    var t = a.title || 'App';
+    openSheet('<div class="mg"><div class="ico" style="background:' + col(a.id) + '">' + esc(t.charAt(0).toUpperCase()) + '</div><div class="an"><h2 style="margin:0">' + esc(t) + '</h2><span>@' + esc(a.bot_username) + '</span></div></div>' +
+      '<div class="stat"><div><b id="mgU">…</b><span>' + esc(T.users) + '</span></div><div><b>⭐</b><span>Pro</span></div></div>' +
+      '<button class="ghost" id="mgBot">' + esc(T.openMyBot) + '</button>' +
+      '<div class="blk"><h3>' + esc(T.bcT) + '</h3><p>' + esc(T.bcP) + '</p><div class="field"><textarea id="bcT" maxlength="1000" style="min-height:80px" placeholder="' + esc(T.bcPh) + '"></textarea></div><button class="cta" id="bcGo" disabled>…</button></div>' +
+      '<div class="blk"><h3>' + esc(T.poT) + '</h3><p>' + esc(T.poP) + '</p><div class="field"><textarea id="poT" maxlength="1000" style="min-height:90px"></textarea></div><input id="poB" maxlength="40" placeholder="' + esc(T.poBtn) + '"><button class="cta" id="poGo">' + esc(T.poGo) + '</button></div>');
+    $('poT').value = T.poDef(t); $('poB').value = '▶️ ' + t;
+    $('mgBot').onclick = function () { link('https://t.me/' + a.bot_username); };
+    var users = 0;
+    call('manage', { id: a.id }).then(function (r) {
+      if (!r.ok) return;
+      users = r.users; $('mgU').textContent = users.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US');
+      var b = $('bcGo');
+      if (r.nextAt) { b.textContent = T.bcWait(Math.max(1, Math.ceil((r.nextAt - Date.now()) / 3600000))); return; }
+      if (!users) { b.textContent = T.bcNone; return; }
+      b.disabled = false; b.textContent = T.bcGo(users);
+    });
+    $('bcGo').onclick = function () {
+      var v = $('bcT').value.trim(); if (v.length < 3) { hap('err'); return toast(T.short); }
+      $('bcGo').disabled = true;
+      call('broadcast', { id: a.id, text: v }).then(function (r) {
+        if (r.ok) { hap('ok'); toast(T.bcOk); $('bcT').value = ''; $('bcGo').textContent = T.bcWait(20); return; }
+        hap('err'); if (r.error === 'wait') { $('bcGo').textContent = T.bcWait(Math.max(1, Math.ceil((r.nextAt - Date.now()) / 3600000))); return; }
+        $('bcGo').disabled = false; toast(T.net);
+      });
+    };
+    $('poGo').onclick = function () {
+      var v = $('poT').value.trim(); if (v.length < 3) { hap('err'); return toast(T.short); }
+      $('poGo').disabled = true;
+      call('post', { id: a.id, text: v, btn: $('poB').value.trim() }).then(function (r) {
+        $('poGo').disabled = false;
+        if (r.ok) { hap('ok'); toast(T.poOk); } else { hap('err'); toast(T.net); }
       });
     };
   }
