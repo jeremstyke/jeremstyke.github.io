@@ -269,9 +269,11 @@
   const AGF = { fr: (m) => '✅ Tes ' + m + ' missions du jour sont faites, reviens demain', en: (m) => '✅ Your ' + m + ' missions of the day are done, come back tomorrow', id: (m) => '✅ ' + m + ' misi hari ini selesai, kembali besok', ru: (m) => '✅ Все ' + m + ' заданий на сегодня выполнены, возвращайся завтра', ar: (m) => '✅ أنجزت مهامك الـ' + m + ' لهذا اليوم، عد غدًا', fa: (m) => '✅ ' + m + ' مأموریت امروزت انجام شد، فردا برگرد' };
   const agtFull = (m) => { let l = 'en'; try { l = LANG; } catch (e) {} return (AGF[l] || AGF.en)(m); };
   // 2 nov 2026 (11h03, Jeremy): the next reward waiting (the 10th partner mission of the day: +5,000 $ and +5,000 $BATON)
-  const AGN = { fr: (k) => '🎁 Encore ' + k + ' mission' + (k > 1 ? 's' : '') + ' → +5 000 $ +5 000 $BATON', en: (k) => '🎁 ' + k + ' more mission' + (k > 1 ? 's' : '') + ' → +$5,000 +5,000 $BATON', id: (k) => '🎁 ' + k + ' misi lagi → +$5,000 +5,000 $BATON', ru: (k) => '🎁 Ещё ' + k + ' → +$5,000 +5,000 $BATON' };
-  const AGB = { fr: '🎯 Bonus du jour : +5 000 $ +5 000 $BATON !', en: '🎯 Daily bonus: +$5,000 +5,000 $BATON!', id: '🎯 Bonus harian: +$5,000 +5,000 $BATON!', ru: '🎯 Бонус дня: +$5,000 +5,000 $BATON!' };
-  const agtNx = (n, justDone) => { let l = 'en'; try { l = LANG; } catch (e) {} if (justDone && n === 10) return AGB[l] || AGB.en; if (n >= 10) return ''; return (AGN[l] || AGN.en)(10 - n); };
+  const AGV = { fr: ['+5 000 $ +5 000 $BATON', '+10 000 $ +10 000 $BATON'], en: ['+$5,000 +5,000 $BATON', '+$10,000 +10,000 $BATON'] };  // 11h05: 2nd goal at the 25th
+  const AGN = { fr: (k, v) => '🎁 Encore ' + k + ' mission' + (k > 1 ? 's' : '') + ' → ' + v, en: (k, v) => '🎁 ' + k + ' more mission' + (k > 1 ? 's' : '') + ' → ' + v, id: (k, v) => '🎁 ' + k + ' misi lagi → ' + v, ru: (k, v) => '🎁 Ещё ' + k + ' → ' + v };
+  const AGB = { fr: (v) => '🎯 Bonus du jour : ' + v + ' !', en: (v) => '🎯 Daily bonus: ' + v + '!', id: (v) => '🎯 Bonus harian: ' + v + '!', ru: (v) => '🎯 Бонус дня: ' + v + '!' };
+  const agtNx = (n, justDone) => { let l = 'en'; try { l = LANG; } catch (e) {} const v = AGV[l] || AGV.en, bn = AGB[l] || AGB.en, nx = AGN[l] || AGN.en;
+    if (justDone && n === 10) return bn(v[0]); if (justDone && n === 25) return bn(v[1]); if (n < 10) return nx(10 - n, v[0]); if (n < 25) return nx(25 - n, v[1]); return ''; };
   let sdk = null, gone = false;
   const load = () => sdk || (sdk = new Promise((ok, ko) => {
     if (window.Adsgram) return ok();
