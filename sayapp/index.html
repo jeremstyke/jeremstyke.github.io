@@ -81,6 +81,7 @@ textarea::placeholder{color:var(--dim)}
 .exp{margin-top:10px;font-size:12px;font-weight:600;color:#ffcf7a;background:rgba(255,190,90,.08);border:1px solid rgba(255,190,90,.2);padding:7px 10px;border-radius:10px}.exp.x{color:var(--r);background:rgba(255,107,107,.08);border-color:rgba(255,107,107,.25)}
 .mg{display:flex;align-items:center;gap:12px;margin-bottom:16px}.mg .ico{flex:0 0 52px;height:52px}.stat{display:flex;gap:10px;margin-bottom:16px}.stat div{flex:1;padding:12px;border-radius:14px;background:var(--card);border:1px solid var(--line);text-align:center}.stat b{display:block;font:800 22px Sora,sans-serif}.stat span{font-size:12px;color:var(--mute)}.blk{padding:14px;border-radius:18px;background:var(--card);border:1px solid var(--line);margin-top:12px}.blk h3{font-size:15px;margin-bottom:4px}.blk p{margin:0 0 10px;font-size:13px;color:var(--mute)}.blk input{width:100%;margin-top:8px;padding:12px;border-radius:12px;border:1px solid var(--line);background:#0a0a14;color:var(--fg);font:14px Inter,system-ui,sans-serif;outline:0}
 .idea{display:flex;gap:8px;align-items:flex-start;width:100%;text-align:left;margin-top:10px;font-size:12.5px;line-height:1.4;color:#dcdaf5;background:rgba(139,92,255,.1);border:1px solid rgba(139,92,255,.28);padding:8px 10px;border-radius:10px}.idea b{color:#c3afff;white-space:nowrap}.ideas{display:grid;gap:8px;width:100%;max-width:320px;margin-top:18px;text-align:left}.ideas h4{margin:0;font:600 12px Inter,sans-serif;color:var(--dim);text-transform:uppercase;letter-spacing:.08em}.chip.dyn{border-radius:14px;white-space:normal;text-align:left;flex:0 0 auto;max-width:240px}
+.trust{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:14px}.trust span{font-size:12px;font-weight:600;color:#cfe9ff;background:rgba(47,214,255,.08);border:1px solid rgba(47,214,255,.22);padding:5px 10px;border-radius:99px}
 .abtn button.hl{background:var(--gold);color:#2a1700;border:0}
 .tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;justify-content:center;gap:6px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(7,7,13,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid var(--line)}
 .tabs button{flex:1;max-width:220px;padding:11px;border-radius:14px;font-weight:600;color:var(--mute);display:flex;align-items:center;justify-content:center;gap:7px}
@@ -169,6 +170,7 @@ input.tk:focus{border-color:var(--v)}
     <div class="chips" id="chips"></div>
     <button class="cta" id="go"></button>
     <div class="quota" id="quota"></div>
+    <div class="trust" data-t="trust"></div>
 
     <div class="sec"><h3 data-t="howT"></h3><div class="steps" id="how"></div></div>
     <div class="sec"><h3 data-t="byT"></h3>
@@ -219,9 +221,9 @@ input.tk:focus{border-color:var(--v)}
       eyebrow: 'Ta mini app Telegram, sans coder', h1: 'Décris-la.<br><span>On la construit.</span>',
       sub: 'Une idée, une phrase, et ta mini app Telegram est en ligne en 2 minutes. Teste-la, ajuste-la, puis lance-la sur ton propre bot.',
       ph: 'Ex : un quiz foot de 10 questions avec un classement des joueurs, aux couleurs vert et blanc…',
-      lang: 'Dans ta langue', go: '✦ Construire mon appli', tCreate: 'Créer', tApps: 'Mes applis',
+      trust: '<span>☁️ On héberge tout</span><span>🧩 Rien à installer</span><span>✍️ Sans coder</span>', lang: 'Dans ta langue', go: '✦ Construire mon appli', tCreate: 'Créer', tApps: 'Mes applis',
       chips: [['⚽ Quiz foot', 'Un quiz foot de 10 questions avec un chrono, un score et un classement des joueurs, aux couleurs vert et blanc'], ['🍕 Menu de resto', 'Le menu de ma pizzeria avec des photos en emoji, les prix, un panier et un formulaire de commande envoyé au patron'], ['🪙 Jeu de tap', 'Un jeu où l\'on tape sur une pièce pour gagner des points, avec des améliorations, une récompense quotidienne et un classement'], ['📅 Réservation', 'Une appli de prise de rendez-vous pour mon salon de coiffure : choix du service, du jour et de l\'heure, envoi de la demande'], ['🎯 Sondage', 'Un sondage de 5 questions pour ma communauté avec les résultats en direct'], ['🧠 Personnalité', 'Un test de personnalité « Quel animal es-tu ? » avec 8 questions et un résultat à partager']],
-      howT: 'Comment ça marche', how: [['💬', 'Décris ton idée', 'En une phrase, comme à un ami.'], ['⚡', 'Démo en 2 minutes', 'Ton appli est construite et mise en ligne.'], ['✏️', 'Ajuste-la', 'Couleurs, textes, fonctions : demande, c\'est fait.'], ['🚀', 'Lance-la sur ton bot', 'Ton appli, ton nom, tes utilisateurs.']],
+      howT: 'Comment ça marche', how: [['💬', 'Décris ton idée', 'En une phrase, comme à un ami.'], ['⚡', 'Démo en 2 minutes', 'Ton appli est construite et mise en ligne, on héberge tout pour toi.'], ['✏️', 'Ajuste-la', 'Couleurs, textes, fonctions : demande, c\'est fait.'], ['🚀', 'Lance-la sur ton bot', 'Ton appli, ton nom, tes utilisateurs.']],
       byT: 'Par le créateur de', free: 'Gratuit', pro: '⭐ Pro',
       quotaL: function (n, m, e) { return n >= m ? 'Appli gratuite du jour utilisée · Passe Pro pour en créer plus' : 'Gratuit : ' + (m - n) + ' appli aujourd\'hui · ' + e + ' modifications par jour'; },
       quotaP: 'Pro : applis et modifications illimitées',
@@ -260,9 +262,9 @@ input.tk:focus{border-color:var(--v)}
       eyebrow: 'Your Telegram mini app, no code', h1: 'Say it.<br><span>We build it.</span>',
       sub: 'One idea, one sentence, and your Telegram mini app is live in 2 minutes. Try it, tweak it, then launch it on your own bot.',
       ph: 'E.g. a football quiz with 10 questions and a player leaderboard, in green and white…',
-      lang: 'In your language', go: '✦ Build my app', tCreate: 'Create', tApps: 'My apps',
+      trust: '<span>☁️ We host everything</span><span>🧩 Nothing to install</span><span>✍️ No code</span>', lang: 'In your language', go: '✦ Build my app', tCreate: 'Create', tApps: 'My apps',
       chips: [['⚽ Football quiz', 'A football quiz with 10 questions, a timer, a score and a player leaderboard, in green and white'], ['🍕 Restaurant menu', 'The menu of my pizzeria with emoji pictures, prices, a cart and an order form sent to the owner'], ['🪙 Tap game', 'A game where you tap a coin to earn points, with upgrades, a daily reward and a leaderboard'], ['📅 Booking', 'A booking app for my hair salon: pick a service, a day and a time, then send the request'], ['🎯 Poll', 'A 5-question poll for my community with live results'], ['🧠 Personality', 'A "Which animal are you?" personality test with 8 questions and a shareable result']],
-      howT: 'How it works', how: [['💬', 'Describe your idea', 'In one sentence, like to a friend.'], ['⚡', 'Live demo in 2 minutes', 'Your app is built and put online.'], ['✏️', 'Tweak it', 'Colors, texts, features: just ask.'], ['🚀', 'Launch it on your bot', 'Your app, your name, your users.']],
+      howT: 'How it works', how: [['💬', 'Describe your idea', 'In one sentence, like to a friend.'], ['⚡', 'Live demo in 2 minutes', 'Your app is built and put online, we host everything for you.'], ['✏️', 'Tweak it', 'Colors, texts, features: just ask.'], ['🚀', 'Launch it on your bot', 'Your app, your name, your users.']],
       byT: 'By the creator of', free: 'Free', pro: '⭐ Pro',
       quotaL: function (n, m, e) { return n >= m ? 'Free app of the day used · Go Pro to build more' : 'Free: ' + (m - n) + ' app today · ' + e + ' changes per day'; },
       quotaP: 'Pro: unlimited apps and changes',
