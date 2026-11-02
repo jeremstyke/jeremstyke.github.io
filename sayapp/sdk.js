@@ -92,8 +92,15 @@
     bn.appendChild(rp);
   }
   // 2 nov 2026 (18h19, Jeremy): every "Made with SayApp" in an app opens @SayAppBuilderBot with a source (src_app_<id>)
-  function madeLink() {
+  function madeLink(last) {
     var U = 'https://t.me/SayAppBuilderBot?start=src_app_' + APP, els = document.querySelectorAll('body *');
+    // 2 nov 2026 (23h18, Jeremy): every app MUST say "Made with SayApp" (link to SayApp): a small tag is added when the app has none
+    if (last === true && !document.getElementById('sayappM') && !/Made with SayApp/i.test((document.body && document.body.innerText) || '')) {
+      var m = document.createElement('a'); m.id = 'sayappM'; m.href = U; m.textContent = '✦ Made with SayApp';
+      m.style.cssText = 'position:fixed;right:6px;bottom:calc(env(safe-area-inset-bottom,0px) + 4px);z-index:2147483645;padding:2px 7px;border-radius:99px;background:rgba(10,10,20,.55);color:#fff;font:600 10px Inter,system-ui,sans-serif;text-decoration:none;opacity:.7;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)';
+      m.addEventListener('click', function (ev) { ev.preventDefault(); try { tw.openTelegramLink(U); } catch (x) { location.href = U; } });
+      document.body.appendChild(m);
+    }
     for (var i = 0; i < els.length; i++) {
       var e = els[i];
       if (e.children.length === 0 && !e.getAttribute('data-sa') && /^\s*Made with SayApp\s*$/i.test(e.textContent || '')) {
@@ -146,6 +153,6 @@
     try { localStorage.setItem(k, String(Date.now())); } catch (e) {}
     setTimeout(function () { playAd(ADS.agi || ADS.ag); }, 1200);
   }
-  function boot() { adsReady = call({ action: 'info' }).then(function (i) { ADS = (i && i.ads) || null; show(i); if (ADS && (ADS.ag || ADS.agx)) openAd(); else demoAd(i); return i; }); madeLink(); setTimeout(madeLink, 1500); setTimeout(madeLink, 5000); }
+  function boot() { adsReady = call({ action: 'info' }).then(function (i) { ADS = (i && i.ads) || null; show(i); if (ADS && (ADS.ag || ADS.agx)) openAd(); else demoAd(i); return i; }); madeLink(); setTimeout(madeLink, 1500); setTimeout(function () { madeLink(true); }, 4000); }
   if (document.body) boot(); else document.addEventListener('DOMContentLoaded', boot);
 })();
