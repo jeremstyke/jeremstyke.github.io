@@ -80,6 +80,7 @@ textarea::placeholder{color:var(--dim)}
 .abtn button{padding:10px 6px;border-radius:12px;background:var(--card2);border:1px solid var(--line);font-size:12.5px;font-weight:600}
 .exp{margin-top:10px;font-size:12px;font-weight:600;color:#ffcf7a;background:rgba(255,190,90,.08);border:1px solid rgba(255,190,90,.2);padding:7px 10px;border-radius:10px}.exp.x{color:var(--r);background:rgba(255,107,107,.08);border-color:rgba(255,107,107,.25)}
 .mg{display:flex;align-items:center;gap:12px;margin-bottom:16px}.mg .ico{flex:0 0 52px;height:52px}.stat{display:flex;gap:10px;margin-bottom:16px}.stat div{flex:1;padding:12px;border-radius:14px;background:var(--card);border:1px solid var(--line);text-align:center}.stat b{display:block;font:800 22px Sora,sans-serif}.stat span{font-size:12px;color:var(--mute)}.blk{padding:14px;border-radius:18px;background:var(--card);border:1px solid var(--line);margin-top:12px}.blk h3{font-size:15px;margin-bottom:4px}.blk p{margin:0 0 10px;font-size:13px;color:var(--mute)}.blk input{width:100%;margin-top:8px;padding:12px;border-radius:12px;border:1px solid var(--line);background:#0a0a14;color:var(--fg);font:14px Inter,system-ui,sans-serif;outline:0}
+.idea{display:flex;gap:8px;align-items:flex-start;width:100%;text-align:left;margin-top:10px;font-size:12.5px;line-height:1.4;color:#dcdaf5;background:rgba(139,92,255,.1);border:1px solid rgba(139,92,255,.28);padding:8px 10px;border-radius:10px}.idea b{color:#c3afff;white-space:nowrap}.ideas{display:grid;gap:8px;width:100%;max-width:320px;margin-top:18px;text-align:left}.ideas h4{margin:0;font:600 12px Inter,sans-serif;color:var(--dim);text-transform:uppercase;letter-spacing:.08em}.chip.dyn{border-radius:14px;white-space:normal;text-align:left;flex:0 0 auto;max-width:240px}
 .abtn button.hl{background:var(--gold);color:#2a1700;border:0}
 .tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;justify-content:center;gap:6px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(7,7,13,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid var(--line)}
 .tabs button{flex:1;max-width:220px;padding:11px;border-radius:14px;font-weight:600;color:var(--mute);display:flex;align-items:center;justify-content:center;gap:7px}
@@ -235,6 +236,7 @@ input.tk:focus{border-color:var(--v)}
       empty: 'Aucune appli pour l\'instant.', emptyB: '✦ Créer ma première appli',
       sGen: 'En construction', sDemo: 'Démo', sExp: 'Expirée', left: function (d) { return 'Démo gratuite : expire dans ' + d + ' j'; }, expd: 'Démo expirée · passe Pro pour la remettre en ligne', sLive: 'En ligne', sErr: 'Échec', sRef: 'Refusée',
       editT: 'Modifier ton appli', editP: 'Dis ce que tu veux changer, en une phrase.', editPh: 'Ex : mets le fond en noir et ajoute un bouton pour partager son score',
+      ideaL: '💡 Idée', ideasT: '💡 Idées pour l\'améliorer', nextT: 'Et maintenant ?',
       editChips: ['🎨 Autres couleurs', '🏆 Ajoute un classement', '🌍 Version anglaise', '✨ Plus d\'animations'],
       editGo: '✦ Appliquer', editQ: function (n, m) { return n >= m ? 'Modifications gratuites du jour utilisées' : 'Gratuit : ' + (m - n) + ' modification(s) restante(s) aujourd\'hui'; },
       proT: 'SayApp Pro', proP: 'Lance ton appli sur ton propre bot Telegram.',
@@ -274,6 +276,7 @@ input.tk:focus{border-color:var(--v)}
       empty: 'No app yet.', emptyB: '✦ Build my first app',
       sGen: 'Building', sDemo: 'Demo', sExp: 'Expired', left: function (d) { return 'Free demo: expires in ' + d + 'd'; }, expd: 'Demo expired · go Pro to put it back online', sLive: 'Live', sErr: 'Failed', sRef: 'Refused',
       editT: 'Change your app', editP: 'Say what you want to change, in one sentence.', editPh: 'E.g. make the background black and add a button to share the score',
+      ideaL: '💡 Idea', ideasT: '💡 Ideas to improve it', nextT: 'What next?',
       editChips: ['🎨 Other colors', '🏆 Add a leaderboard', '🌍 French version', '✨ More animations'],
       editGo: '✦ Apply', editQ: function (n, m) { return n >= m ? 'Free changes of the day used' : 'Free: ' + (m - n) + ' change(s) left today'; },
       proT: 'SayApp Pro', proP: 'Launch your app on your own Telegram bot.',
@@ -378,7 +381,7 @@ input.tk:focus{border-color:var(--v)}
     if (!list.length) { box.innerHTML = '<div class="empty"><div>✦</div>' + esc(T.empty) + '<button class="cta" id="emp" style="margin-top:20px">' + esc(T.emptyB) + '</button></div>'; $('emp').onclick = function () { tab('create'); idea.focus(); }; return; }
     box.innerHTML = list.map(function (a) {
       var s = status(a), t = a.title || (a.prompt || '').slice(0, 40) || 'App', live = a.bot_username && sub(a);
-      return '<div class="ac" data-id="' + a.id + '"><div class="ah"><div class="ico" style="background:' + col(a.id) + '">' + esc(t.trim().charAt(0).toUpperCase()) + '</div><div class="an"><b>' + esc(t) + '</b><span>' + (a.bot_username ? esc(T.onBot + a.bot_username) : esc((a.prompt || '').slice(0, 80))) + '</span></div><span class="pill ' + s[0] + '">' + esc(s[1]) + '</span></div>' + (a.version && daysLeft(a) !== null ? '<div class="exp' + (daysLeft(a) === 0 ? ' x' : '') + '">' + esc(daysLeft(a) === 0 ? T.expd : T.left(daysLeft(a))) + '</div>' : '') +
+      return '<div class="ac" data-id="' + a.id + '"><div class="ah"><div class="ico" style="background:' + col(a.id) + '">' + esc(t.trim().charAt(0).toUpperCase()) + '</div><div class="an"><b>' + esc(t) + '</b><span>' + (a.bot_username ? esc(T.onBot + a.bot_username) : esc((a.prompt || '').slice(0, 80))) + '</span></div><span class="pill ' + s[0] + '">' + esc(s[1]) + '</span></div>' + (a.version && a.status !== 'generating' && a.ideas && a.ideas.length ? '<button class="idea" data-a="idea"><b>' + esc(T.ideaL) + '</b><span>' + esc(a.ideas[new Date().getDate() % a.ideas.length]) + '</span></button>' : '') + (a.version && daysLeft(a) !== null ? '<div class="exp' + (daysLeft(a) === 0 ? ' x' : '') + '">' + esc(daysLeft(a) === 0 ? T.expd : T.left(daysLeft(a))) + '</div>' : '') +
         (a.status === 'generating' ? '' : '<div class="abtn">' + (a.version ? '<button data-a="try">▶ ' + esc(T.try.replace('▶ ', '').split(' ')[0]) + '</button>' : '<button data-a="retry">' + esc(T.retry) + '</button>') + '<button data-a="edit"' + (a.version ? '' : ' disabled style="opacity:.4"') + '>' + esc(T.change) + '</button>' + (live ? '<button data-a="bot" class="hl">' + esc(T.manage) + '</button>' : '<button data-a="launch" class="hl"' + (a.version ? '' : ' disabled style="opacity:.4"') + '>' + esc(T.launch) + '</button>') + '</div>') + '</div>';
     }).join('');
     box.querySelectorAll('.ac').forEach(function (el) {
@@ -387,7 +390,7 @@ input.tk:focus{border-color:var(--v)}
       el.querySelectorAll('button[data-a]').forEach(function (b) {
         b.onclick = function (ev) {
           ev.stopPropagation(); hap(); var k = b.getAttribute('data-a');
-          if (k === 'try') preview(a); else if (k === 'edit') editSheet(a); else if (k === 'launch') launch(a); else if (k === 'bot') manageSheet(a);
+          if (k === 'try') preview(a); else if (k === 'edit') editSheet(a); else if (k === 'launch') launch(a); else if (k === 'bot') manageSheet(a); else if (k === 'idea') editSheet(a, a.ideas[new Date().getDate() % a.ideas.length]);
           else if (k === 'retry') { tab('create'); idea.value = a.prompt || ''; idea.oninput(); }
         };
       });
@@ -440,6 +443,11 @@ input.tk:focus{border-color:var(--v)}
     hap('ok'); $('orb').className = 'orb ok'; $('orbI').textContent = '🎉';
     $('ovT').textContent = T.okT; $('ovP').textContent = T.okP(a.title || 'App');
     $('ovb').innerHTML = '<button class="cta" id="ovTry">' + esc(T.try) + '</button><button class="ghost" id="ovEd">' + esc(T.change) + '</button>';
+    if (a.ideas && a.ideas.length) {
+      var box = document.createElement('div'); box.className = 'ideas'; box.innerHTML = '<h4>💡 ' + esc(T.nextT) + '</h4>';
+      a.ideas.slice(0, 3).forEach(function (i) { var b = document.createElement('button'); b.className = 'idea'; b.style.marginTop = '0'; b.innerHTML = '<span>' + esc(i) + '</span>'; b.onclick = function () { $('ov').hidden = true; editSheet(a, i); }; box.appendChild(b); });
+      $('ovb').appendChild(box);
+    }
     $('ovTry').onclick = function () { $('ov').hidden = true; preview(a); };
     $('ovEd').onclick = function () { $('ov').hidden = true; editSheet(a); };
   }
@@ -468,13 +476,15 @@ input.tk:focus{border-color:var(--v)}
   }
   $('shbg').onclick = closeSheet;
 
-  function editSheet(a) {
+  function editSheet(a, pre) {
     var L = S.lim || { edits: 0, freeEdits: 3, pro: false }, free = !L.pro && !sub(a);
     openSheet('<h2>' + esc(T.editT) + '</h2><p class="sub">' + esc(a.title || '') + ' · ' + esc(T.editP) + '</p>' +
       '<div class="field"><textarea id="edT" maxlength="2000" placeholder="' + esc(T.editPh) + '"></textarea></div>' +
-      '<div class="chips" id="edC"></div><button class="cta" id="edGo">' + esc(T.editGo) + '</button>' +
+      (a.ideas && a.ideas.length ? '<p class="sub" style="margin:14px 0 0;font-size:13px">' + esc(T.ideasT) + '</p>' : '') + '<div class="chips" id="edC"></div><button class="cta" id="edGo">' + esc(T.editGo) + '</button>' +
       (free ? '<div class="quota">' + esc(T.editQ(L.edits, L.freeEdits)) + '</div>' : ''));
-    T.editChips.forEach(function (c) { var b = document.createElement('button'); b.className = 'chip'; b.textContent = c; b.onclick = function () { hap(); var t = $('edT'); t.value = (t.value ? t.value + ', ' : '') + c.replace(/^\S+\s/, ''); t.focus(); }; $('edC').appendChild(b); });
+    if (pre) $('edT').value = pre;
+    if (a.ideas && a.ideas.length) a.ideas.forEach(function (c) { var b = document.createElement('button'); b.className = 'chip dyn'; b.textContent = c; b.onclick = function () { hap(); var t = $('edT'); t.value = (t.value ? t.value + ', ' : '') + c; t.focus(); }; $('edC').appendChild(b); });
+    else T.editChips.forEach(function (c) { var b = document.createElement('button'); b.className = 'chip'; b.textContent = c; b.onclick = function () { hap(); var t = $('edT'); t.value = (t.value ? t.value + ', ' : '') + c.replace(/^\S+\s/, ''); t.focus(); }; $('edC').appendChild(b); });
     $('edGo').onclick = function () {
       var t = $('edT').value.trim();
       if (t.length < 4) { hap('err'); return toast(T.short); }
