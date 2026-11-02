@@ -904,6 +904,9 @@ input.tk:focus{border-color:var(--v)}
     var gen = S.apps.filter(function (a) { return a.status === 'generating'; })[0];
     if (gen) return startBuild(gen.id, gen.version > 0);
     if (q.get('tab') === 'support' || sp === 'support') return supOpen();
+    // 2 nov 2026 (21h32, Jeremy): shortcuts from the bot menu: ready-made games, referral
+    if (q.get('go') === 'tpl' || sp === 'tpl') { tab('create'); return tplList(); }
+    if (q.get('go') === 'ref' || sp === 'ref') { supOpen(); return refSheet(); }
     if (open) { var a = S.apps.filter(function (x) { return x.id === open; })[0]; if (a) { tab('apps'); if (sub(a) && !a.bot_username) tokenSheet(a); else if (q.get('renew') && a.bot_username) manageSheet(a); } }
   });
 })();
