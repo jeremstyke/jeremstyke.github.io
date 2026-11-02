@@ -84,6 +84,9 @@ textarea::placeholder{color:var(--dim)}
 .trust{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:14px}.trust span{font-size:12px;font-weight:600;color:#cfe9ff;background:rgba(47,214,255,.08);border:1px solid rgba(47,214,255,.22);padding:5px 10px;border-radius:99px}
 .wiz{border-radius:22px;padding:16px;background:linear-gradient(160deg,rgba(139,92,255,.12),rgba(47,214,255,.05));border:1px solid rgba(139,92,255,.3);margin-bottom:14px}.wtop{display:flex;align-items:center;gap:10px;margin-bottom:12px}.wback{width:32px;height:32px;border-radius:10px;background:var(--card2);font-size:20px;line-height:1}.wback[disabled]{opacity:.25}.dots{display:flex;gap:5px;flex:1}.dots i{flex:1;height:4px;border-radius:9px;background:var(--card2)}.dots i.on{background:var(--grad)}.wstep{font-size:12px;color:var(--dim);font-weight:600}.wiz h2{font-size:20px}.wsub{margin:4px 0 14px;color:var(--mute);font-size:13.5px}.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}.opt{display:flex;align-items:center;gap:8px;padding:12px;border-radius:14px;background:var(--card);border:1px solid var(--line);text-align:left;font-size:13.5px;font-weight:600;min-width:0}.opt i{font-style:normal;font-size:20px}.opt span{min-width:0}.opt.on{border-color:transparent;background:linear-gradient(#141428,#141428) padding-box,var(--grad) border-box;border:1.5px solid transparent;box-shadow:0 8px 20px -12px #6b6bff}#wNext{margin-top:12px}.recap{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}.recap span{font-size:12px;padding:5px 9px;border-radius:99px;background:var(--card2);color:#dcdaf5}
 .launch{display:block;width:max-content;max-width:100%;margin:0 auto 8px;font-size:12px;font-weight:700;color:#2a1700;background:var(--gold);padding:5px 12px;border-radius:99px;box-shadow:0 6px 18px -8px #ff9f43}
+.crup{display:block;margin:8px auto 0;font-size:13px;font-weight:700;color:#ffd76a;padding:6px 12px;border-radius:99px;background:rgba(255,215,106,.08);border:1px solid rgba(255,215,106,.25)}.plan{cursor:pointer}.plan.cr{background:linear-gradient(120deg,#8b5cff,#2fd6ff);color:#fff;border:0}
+.extra{display:grid;gap:8px;margin-bottom:12px}.xin{width:100%;padding:13px 14px;border-radius:14px;border:1px solid var(--line);background:#0d0d18;color:var(--fg);font:15px Inter,system-ui,sans-serif;outline:0}.xin:focus{border-color:var(--v)}.xl{margin:6px 0 0;font-size:12px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.08em}.cols{display:flex;gap:10px;flex-wrap:wrap}.col{width:38px;height:38px;border-radius:50%;border:2px solid transparent;box-shadow:inset 0 0 0 2px rgba(255,255,255,.15)}.col.on{border-color:#fff;transform:scale(1.08)}.col.auto{width:auto;padding:0 12px;border-radius:99px;background:var(--card2);font-size:12px;font-weight:700;color:var(--mute)}
+.price{flex-wrap:wrap}.price .then{flex-basis:100%;text-align:center;font-style:normal;font-size:14px;font-weight:700;color:#ffd76a;margin-top:2px}
 .abtn button.hl{background:var(--gold);color:#2a1700;border:0}
 .tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;justify-content:center;gap:6px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(7,7,13,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid var(--line)}
 .tabs button{flex:1;max-width:220px;padding:11px;border-radius:14px;font-weight:600;color:var(--mute);display:flex;align-items:center;justify-content:center;gap:7px}
@@ -167,6 +170,7 @@ input.tk:focus{border-color:var(--v)}
     </div>
     <!-- 2 nov 2026 (15h27, Jeremy): guided questions first, so people explain what they want from the start -->
     <div class="wiz" id="wiz"><div class="wtop"><button id="wBack" class="wback">‹</button><div class="dots" id="wDots"></div><span class="wstep" id="wStep"></span></div><h2 id="wQ"></h2><p class="wsub" id="wSub"></p><div class="opts" id="wOpts"></div><button class="cta" id="wNext"></button></div>
+    <div class="extra" id="wExtra" hidden><input class="xin" id="xName" maxlength="40" autocomplete="off"><input class="xin" id="xDesc" maxlength="120" autocomplete="off"><p class="xl" id="xColL"></p><div class="cols" id="xCols"></div></div>
     <div class="comp"><div class="in">
       <textarea id="idea" maxlength="4000"></textarea>
       <div class="crow"><span class="cnt" id="cnt">0 / 4000</span><span class="cnt" data-t="lang"></span></div>
@@ -174,6 +178,7 @@ input.tk:focus{border-color:var(--v)}
     <div class="chips" id="chips"></div>
     <button class="cta" id="go"></button>
     <div class="quota" id="quota"></div>
+    <button class="crup" id="crUp" hidden></button>
     <div class="trust" data-t="trust"></div>
 
     <div class="sec"><h3 data-t="howT"></h3><div class="steps" id="how"></div></div>
@@ -226,12 +231,11 @@ input.tk:focus{border-color:var(--v)}
       sub: 'Une idée, une phrase, et ta mini app Telegram est en ligne en 2 minutes. Teste-la, ajuste-la, puis lance-la sur ton propre bot.',
       ph: 'Ex : un quiz foot de 10 questions avec un classement des joueurs, aux couleurs vert et blanc…',
       trust: '<span>☁️ On héberge tout</span><span>🧩 Rien à installer</span><span>✍️ Sans coder</span>', wiz: [
-        { q: 'Tu veux créer quoi ?', s: 'Choisis le type d\'appli.', o: [['🎮', 'Un jeu', 'a mini game'], ['🧠', 'Un quiz', 'a quiz'], ['🛍️', 'Menu ou boutique', 'a menu or a small shop with an order form'], ['📅', 'Réservation', 'a booking app'], ['🎯', 'Sondage ou vote', 'a poll or a vote'], ['📇', 'Carte de visite', 'a business card / links page'], ['🧰', 'Outil pratique', 'a handy tool (calculator, tracker, list...)'], ['✨', 'Autre chose', 'something else']] },
-        { q: 'C\'est pour qui ?', s: 'On adapte le ton et les textes.', o: [['📣', 'Ma chaîne ou communauté', 'the followers of my Telegram channel or community'], ['🏪', 'Mon commerce', 'the customers of my business'], ['🎉', 'Mes amis', 'my friends, for fun'], ['🎓', 'Mes élèves ou clients', 'my students or clients'], ['🙋', 'Pour moi', 'myself']] },
-        { q: 'Quel style ?', s: 'L\'ambiance de ton appli.', o: [['🌙', 'Sombre et moderne', 'dark and modern'], ['☀️', 'Clair et simple', 'light and clean'], ['🌈', 'Coloré et fun', 'colorful and fun'], ['💎', 'Élégant', 'elegant and premium'], ['👾', 'Rétro', 'retro pixel style'], ['🎲', 'Surprends-moi', 'your best choice']] },
-        { q: 'Avec quoi dedans ?', s: 'Plusieurs choix possibles, ou passe.', m: 1, o: [['🏆', 'Classement', 'a leaderboard'], ['🎁', 'Bonus du jour', 'a daily reward'], ['📩', 'Formulaire pour moi', 'a form whose answers are sent to me'], ['⏱️', 'Chrono', 'a timer'], ['🔗', 'Bouton partager', 'a share button to invite friends'], ['📊', 'Statistiques', 'personal stats for each user']] }
+        { q: 'Quelle mini app Telegram ?', s: 'Choisis ce qui ressemble le plus à ton idée.', o: [['🪙', 'Tap-to-earn', 'a tap-to-earn game: tap to earn points, levels, daily tasks'], ['🎁', 'Giveaway', 'a giveaway: people register, a winner is drawn'], ['👥', 'Parrainage', 'a referral contest: invite friends with a share link, leaderboard of the best inviters'], ['🧠', 'Quiz', 'a quiz with a score and a leaderboard'], ['🎮', 'Mini-jeu', 'a fun mini game with a leaderboard'], ['📅', 'Commandes ou RDV', 'orders or appointments: a catalog or time slots, requests sent to the owner (no payment)'], ['📝', 'Sondage ou formulaire', 'a poll or a form, answers sent to the owner'], ['🪪', 'Vitrine', 'a showcase page: presentation, links, contact'], ['✨', 'Autre', 'something else']] },
+        { q: 'Quel style ?', s: 'L\'ambiance de ton appli.', o: [['🌙', 'Sombre et moderne', 'dark and modern'], ['☀️', 'Clair et simple', 'light and clean'], ['🌈', 'Coloré et fun', 'colorful and fun'], ['💎', 'Élégant', 'elegant and premium'], ['👾', 'Rétro', 'retro pixel style'], ['🎲', 'Surprends-moi', 'your best choice']] }
       ],
-      wNext: 'Continuer', wSkip: 'Passer', wStep: function (i, n) { return i + '/' + n; }, wLastQ: 'Raconte ton idée', wLastS: 'Une phrase suffit : le thème, le nom, ce qui compte pour toi.', wPh: 'Ex : un quiz sur l\'OL, 10 questions de plus en plus dures, nommé « Quiz Gones »',
+      wNext: 'Continuer', wSkip: 'Passer', wStep: function (i, n) { return i + '/' + n; }, wLastQ: 'Ton appli', wLastS: 'Donne-lui un nom, une couleur, et raconte ton idée en une phrase.', wPh: 'Ton idée : ex. un quiz sur l\'OL, 10 questions de plus en plus dures', xName: 'Nom de l\'appli (facultatif)', xDesc: 'Description courte (facultatif)', xCol: 'Couleur principale', xAuto: 'Auto',
+      mtT: '✏️ Nom et description', mtP: 'Gratuit : change le nom et la description affichés sur ton bot.', mtSave: 'Enregistrer', mtOk: 'Enregistré ✅',
       lang: 'Dans ta langue', go: '✦ Construire mon appli', tCreate: 'Créer', tApps: 'Mes applis',
       chips: [['⚽ Quiz foot', 'Un quiz foot de 10 questions avec un chrono, un score et un classement des joueurs, aux couleurs vert et blanc'], ['🍕 Menu de resto', 'Le menu de ma pizzeria avec des photos en emoji, les prix, un panier et un formulaire de commande envoyé au patron'], ['🪙 Jeu de tap', 'Un jeu où l\'on tape sur une pièce pour gagner des points, avec des améliorations, une récompense quotidienne et un classement'], ['📅 Réservation', 'Une appli de prise de rendez-vous pour mon salon de coiffure : choix du service, du jour et de l\'heure, envoi de la demande'], ['🎯 Sondage', 'Un sondage de 5 questions pour ma communauté avec les résultats en direct'], ['🧠 Personnalité', 'Un test de personnalité « Quel animal es-tu ? » avec 8 questions et un résultat à partager']],
       howT: 'Comment ça marche', how: [['💬', 'Décris ton idée', 'En une phrase, comme à un ami.'], ['⚡', 'Démo en 2 minutes', 'Ton appli est construite et mise en ligne, on héberge tout pour toi.'], ['✏️', 'Ajuste-la', 'Couleurs, textes, fonctions : demande, c\'est fait.'], ['🚀', 'Lance-la sur ton bot', 'Ton appli, ton nom, tes utilisateurs.']],
@@ -255,7 +259,8 @@ input.tk:focus{border-color:var(--v)}
       proT: 'SayApp Pro', proP: 'Lance ton appli sur ton propre bot Telegram.',
       feats: ['Ton appli sur ton bot, à ton nom', 'Bouton d\'ouverture et /start configurés pour toi', 'Hébergement et mises à jour inclus, ton appli n\'expire jamais', 'Modifications illimitées', 'Données de tes utilisateurs et classements', 'Support direct avec le créateur'],
       introPer: '/ 1er mois', introN: function (p) { return 'Puis ' + p + ' ⭐ / mois si tu continues · sans engagement'; }, introGo: function (p) { return '⭐ Essayer 1 mois · ' + p + ' étoiles'; }, renT: '⭐ Ton offre 1er mois', renP: function (d) { return 'Elle se termine le ' + d + '. Passe à l\'abonnement pour garder ton appli en ligne.'; }, renGo: function (p) { return '⭐ Continuer · ' + p + ' étoiles / mois'; }, renOk: 'Abonnement actif ⭐',
-      launchB: '🚀 Offre de lancement · prix bloqué à vie', per: '/ mois', perN: 'Sans engagement · annulable à tout moment', subGo: function (p) { return '⭐ M\'abonner · ' + p + ' étoiles'; },
+      plCreator: '⚡ Créateur', crT: '⚡ SayApp Créateur', crP: 'Pour tester plein d\'idées chaque jour.', crFeats: function (g, e) { return [g + ' nouvelles applis par jour', e + ' modifications par jour', 'Tes démos n\'expirent pas', 'Des idées d\'amélioration pour chaque appli', 'Sans engagement, annulable à tout moment']; }, crGo: function (p) { return '⚡ Devenir Créateur · ' + p + ' étoiles / mois'; }, crOk: 'SayApp Créateur actif ⚡', crUp: function (g) { return '⚡ Passe Créateur : ' + g + ' applis par jour'; }, quotaC: function (n, m, e) { return '⚡ Créateur : ' + Math.max(0, m - n) + ' appli(s) restante(s) aujourd\'hui · ' + e + ' modifications par jour'; }, orPro: '🚀 Lancer une appli sur mon bot (Pro)', crOn: function (d) { return 'Actif jusqu\'au ' + d + '.'; }, crLimT: 'Limite du jour atteinte', crLimP: 'Tu as utilisé ta limite Créateur du jour. Reviens demain, ou lance une appli sur ton bot.', crLimFree: 'Passe Créateur pour tester plein d\'idées chaque jour, ou reviens demain.',
+      launchI: function (p) { return '🚀 Offre de lancement : ' + p + ' ⭐/mois, prix bloqué à vie'; }, thenP: function (p) { return 'puis ' + p + ' ⭐ par mois'; }, launchB: '🚀 Offre de lancement · prix bloqué à vie', per: '/ mois', perN: 'Sans engagement · annulable à tout moment', subGo: function (p) { return '⭐ M\'abonner · ' + p + ' étoiles'; },
       limT: 'Limite gratuite atteinte', limP: 'Passe Pro pour continuer sans limite, ou reviens demain.',
       limPick: 'Choisis l\'appli à passer en Pro :',
       tkT: 'Branche ton bot', tkP: 'Dernière étape, 2 minutes.', tkS: ['Ouvre @BotFather et envoie /newbot', 'Choisis un nom puis un nom d\'utilisateur', 'Copie le token qu\'il te donne et colle-le ici'],
@@ -274,12 +279,11 @@ input.tk:focus{border-color:var(--v)}
       sub: 'One idea, one sentence, and your Telegram mini app is live in 2 minutes. Try it, tweak it, then launch it on your own bot.',
       ph: 'E.g. a football quiz with 10 questions and a player leaderboard, in green and white…',
       trust: '<span>☁️ We host everything</span><span>🧩 Nothing to install</span><span>✍️ No code</span>', wiz: [
-        { q: 'What do you want to build?', s: 'Pick the type of app.', o: [['🎮', 'A game', 'a mini game'], ['🧠', 'A quiz', 'a quiz'], ['🛍️', 'Menu or shop', 'a menu or a small shop with an order form'], ['📅', 'Booking', 'a booking app'], ['🎯', 'Poll or vote', 'a poll or a vote'], ['📇', 'Business card', 'a business card / links page'], ['🧰', 'Handy tool', 'a handy tool (calculator, tracker, list...)'], ['✨', 'Something else', 'something else']] },
-        { q: 'Who is it for?', s: 'We adapt the tone and the texts.', o: [['📣', 'My channel or community', 'the followers of my Telegram channel or community'], ['🏪', 'My business', 'the customers of my business'], ['🎉', 'My friends', 'my friends, for fun'], ['🎓', 'My students or clients', 'my students or clients'], ['🙋', 'Myself', 'myself']] },
-        { q: 'Which style?', s: 'The vibe of your app.', o: [['🌙', 'Dark and modern', 'dark and modern'], ['☀️', 'Light and clean', 'light and clean'], ['🌈', 'Colorful and fun', 'colorful and fun'], ['💎', 'Elegant', 'elegant and premium'], ['👾', 'Retro', 'retro pixel style'], ['🎲', 'Surprise me', 'your best choice']] },
-        { q: 'What should it have?', s: 'Pick several, or skip.', m: 1, o: [['🏆', 'Leaderboard', 'a leaderboard'], ['🎁', 'Daily bonus', 'a daily reward'], ['📩', 'Form for me', 'a form whose answers are sent to me'], ['⏱️', 'Timer', 'a timer'], ['🔗', 'Share button', 'a share button to invite friends'], ['📊', 'Stats', 'personal stats for each user']] }
+        { q: 'Which Telegram mini app?', s: 'Pick what looks most like your idea.', o: [['🪙', 'Tap-to-earn', 'a tap-to-earn game: tap to earn points, levels, daily tasks'], ['🎁', 'Giveaway', 'a giveaway: people register, a winner is drawn'], ['👥', 'Referral', 'a referral contest: invite friends with a share link, leaderboard of the best inviters'], ['🧠', 'Quiz', 'a quiz with a score and a leaderboard'], ['🎮', 'Mini game', 'a fun mini game with a leaderboard'], ['📅', 'Orders or bookings', 'orders or appointments: a catalog or time slots, requests sent to the owner (no payment)'], ['📝', 'Poll or form', 'a poll or a form, answers sent to the owner'], ['🪪', 'Showcase', 'a showcase page: presentation, links, contact'], ['✨', 'Other', 'something else']] },
+        { q: 'Which style?', s: 'The vibe of your app.', o: [['🌙', 'Dark and modern', 'dark and modern'], ['☀️', 'Light and clean', 'light and clean'], ['🌈', 'Colorful and fun', 'colorful and fun'], ['💎', 'Elegant', 'elegant and premium'], ['👾', 'Retro', 'retro pixel style'], ['🎲', 'Surprise me', 'your best choice']] }
       ],
-      wNext: 'Continue', wSkip: 'Skip', wStep: function (i, n) { return i + '/' + n; }, wLastQ: 'Tell us your idea', wLastS: 'One sentence is enough: the theme, the name, what matters to you.', wPh: 'E.g. a football quiz, 10 questions getting harder, called "Goal Masters"',
+      wNext: 'Continue', wSkip: 'Skip', wStep: function (i, n) { return i + '/' + n; }, wLastQ: 'Your app', wLastS: 'Give it a name, a color, and tell your idea in one sentence.', wPh: 'Your idea: e.g. a football quiz, 10 questions getting harder', xName: 'App name (optional)', xDesc: 'Short description (optional)', xCol: 'Main color', xAuto: 'Auto',
+      mtT: '✏️ Name and description', mtP: 'Free: change the name and the description shown on your bot.', mtSave: 'Save', mtOk: 'Saved ✅',
       lang: 'In your language', go: '✦ Build my app', tCreate: 'Create', tApps: 'My apps',
       chips: [['⚽ Football quiz', 'A football quiz with 10 questions, a timer, a score and a player leaderboard, in green and white'], ['🍕 Restaurant menu', 'The menu of my pizzeria with emoji pictures, prices, a cart and an order form sent to the owner'], ['🪙 Tap game', 'A game where you tap a coin to earn points, with upgrades, a daily reward and a leaderboard'], ['📅 Booking', 'A booking app for my hair salon: pick a service, a day and a time, then send the request'], ['🎯 Poll', 'A 5-question poll for my community with live results'], ['🧠 Personality', 'A "Which animal are you?" personality test with 8 questions and a shareable result']],
       howT: 'How it works', how: [['💬', 'Describe your idea', 'In one sentence, like to a friend.'], ['⚡', 'Live demo in 2 minutes', 'Your app is built and put online, we host everything for you.'], ['✏️', 'Tweak it', 'Colors, texts, features: just ask.'], ['🚀', 'Launch it on your bot', 'Your app, your name, your users.']],
@@ -303,7 +307,8 @@ input.tk:focus{border-color:var(--v)}
       proT: 'SayApp Pro', proP: 'Launch your app on your own Telegram bot.',
       feats: ['Your app on your bot, with your name', 'Open button and /start set up for you', 'Hosting and updates included, your app never expires', 'Unlimited changes', 'Your users\' data and leaderboards', 'Direct support from the creator'],
       introPer: '/ 1st month', introN: function (p) { return 'Then ' + p + ' ⭐ / month if you continue · no commitment'; }, introGo: function (p) { return '⭐ Try 1 month · ' + p + ' Stars'; }, renT: '⭐ Your 1st month offer', renP: function (d) { return 'It ends on ' + d + '. Subscribe to keep your app online.'; }, renGo: function (p) { return '⭐ Continue · ' + p + ' Stars / month'; }, renOk: 'Subscription active ⭐',
-      launchB: '🚀 Launch offer · price locked for life', per: '/ month', perN: 'No commitment · cancel anytime', subGo: function (p) { return '⭐ Subscribe · ' + p + ' Stars'; },
+      plCreator: '⚡ Creator', crT: '⚡ SayApp Creator', crP: 'To test lots of ideas every day.', crFeats: function (g, e) { return [g + ' new apps per day', e + ' changes per day', 'Your demos never expire', 'Improvement ideas for each app', 'No commitment, cancel anytime']; }, crGo: function (p) { return '⚡ Become a Creator · ' + p + ' Stars / month'; }, crOk: 'SayApp Creator active ⚡', crUp: function (g) { return '⚡ Go Creator: ' + g + ' apps per day'; }, quotaC: function (n, m, e) { return '⚡ Creator: ' + Math.max(0, m - n) + ' app(s) left today · ' + e + ' changes per day'; }, orPro: '🚀 Launch an app on my bot (Pro)', crOn: function (d) { return 'Active until ' + d + '.'; }, crLimT: 'Daily limit reached', crLimP: 'You used your Creator limit for today. Come back tomorrow, or launch an app on your bot.', crLimFree: 'Go Creator to test lots of ideas every day, or come back tomorrow.',
+      launchI: function (p) { return '🚀 Launch offer: ' + p + ' ⭐/month, price locked for life'; }, thenP: function (p) { return 'then ' + p + ' ⭐ per month'; }, launchB: '🚀 Launch offer · price locked for life', per: '/ month', perN: 'No commitment · cancel anytime', subGo: function (p) { return '⭐ Subscribe · ' + p + ' Stars'; },
       limT: 'Free limit reached', limP: 'Go Pro to keep going without limits, or come back tomorrow.',
       limPick: 'Pick the app to make Pro:',
       tkT: 'Plug your bot', tkP: 'Last step, 2 minutes.', tkS: ['Open @BotFather and send /newbot', 'Choose a name, then a username', 'Copy the token it gives you and paste it here'],
@@ -344,7 +349,7 @@ input.tk:focus{border-color:var(--v)}
   var col = function (id) { var h = 0; for (var i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0; return COLORS[h % COLORS.length]; };
   var sub = function (a) { return a && a.sub_until && new Date(a.sub_until).getTime() > Date.now(); };
   // 2 nov 2026 (14h19): free demos expire after demoDays days (7)
-  var daysLeft = function (a) { if (sub(a) || (S.lim && S.lim.owner) || !a.created_at) return null; return Math.max(0, Math.ceil((new Date(a.created_at).getTime() + ((S.lim && S.lim.demoDays) || 7) * 86400000 - Date.now()) / 86400000)); };
+  var daysLeft = function (a) { if (sub(a) || (S.lim && (S.lim.owner || S.lim.creator)) || !a.created_at) return null; return Math.max(0, Math.ceil((new Date(a.created_at).getTime() + ((S.lim && S.lim.demoDays) || 7) * 86400000 - Date.now()) / 86400000)); };
 
   // ---------- create view ----------
   var idea = $('idea');
@@ -357,8 +362,10 @@ input.tk:focus{border-color:var(--v)}
   $('how').innerHTML = T.how.map(function (h) { return '<div class="st"><i>' + h[0] + '</i><div><b>' + esc(h[1]) + '</b><span>' + esc(h[2]) + '</span></div></div>'; }).join('');
   function paintTop() {
     var L = S.lim; if (!L) return;
-    var p = $('plan'); p.className = 'plan' + (L.pro ? ' pro' : ''); p.textContent = L.pro ? T.pro : T.free;
-    $('quota').textContent = L.pro ? T.quotaP : T.quotaL(L.gens, L.freeGens, L.freeEdits);
+    var p = $('plan'); p.className = 'plan' + (L.pro ? ' pro' : L.creator ? ' cr' : ''); p.textContent = L.pro ? T.pro : L.creator ? T.plCreator : T.free;
+    p.onclick = function () { if (!L.pro) { hap(); creatorSheet(false); } };
+    $('quota').textContent = L.pro ? T.quotaP : L.creator ? T.quotaC(L.gens, L.freeGens, L.freeEdits) : T.quotaL(L.gens, L.freeGens, L.freeEdits);
+    $('crUp').hidden = !!(L.pro || L.creator); $('crUp').textContent = T.crUp(L.creatorGens || 5); $('crUp').onclick = function () { hap(); creatorSheet(false); };
     var n = S.apps.filter(function (a) { return a.version > 0 || a.status === 'generating'; }).length;
     $('nApps').hidden = !n; $('nApps').textContent = n;
   }
@@ -369,7 +376,7 @@ input.tk:focus{border-color:var(--v)}
     $('wDots').innerHTML = T.wiz.concat([0]).map(function (x, k) { return '<i class="' + (k <= W.i ? 'on' : '') + '"></i>'; }).join('');
     $('wStep').textContent = T.wStep(Math.min(W.i + 1, n + 1), n + 1);
     $('wBack').disabled = W.i === 0;
-    document.querySelector('.comp').hidden = !last; $('go').hidden = !last; $('chips').hidden = true;
+    document.querySelector('.comp').hidden = !last; $('wExtra').hidden = !last; $('go').hidden = !last; $('chips').hidden = true;
     if (last) {
       $('wQ').textContent = T.wLastQ; $('wSub').textContent = T.wLastS; $('wNext').hidden = true; idea.placeholder = T.wPh;
       $('wOpts').className = 'recap';
@@ -392,20 +399,25 @@ input.tk:focus{border-color:var(--v)}
   $('wNext').onclick = function () { hap(); W.i++; wizRender(); if (W.i >= T.wiz.length) setTimeout(function () { idea.focus(); }, 250); };
   $('wBack').onclick = function () { if (W.i > 0) { hap(); W.i--; wizRender(); } };
   function wizBrief() {
-    var keys = ['App type', 'Audience', 'Visual style', 'Must have'], out = [];
+    var keys = ['Telegram mini app type', 'Visual style'], out = [];
     W.a.forEach(function (sel, k) { if (sel && sel.length) out.push(keys[k] + ': ' + sel.map(function (j) { return T.wiz[k].o[j][2]; }).join(', ')); });
     return out.join('\n');
   }
+  // name, description, color (2 nov 2026, 15h43)
+  $('xName').placeholder = T.xName; $('xDesc').placeholder = T.xDesc; $('xColL').textContent = T.xCol;
+  var COLS = [['', T.xAuto], ['#8b5cff', 'violet'], ['#2f80ff', 'blue'], ['#22c55e', 'green'], ['#ff8a3d', 'orange'], ['#ff4f9a', 'pink'], ['#ffcc00', 'yellow'], ['#111111', 'black']];
+  function paintCols() { $('xCols').innerHTML = COLS.map(function (c, k) { return c[0] ? '<button class="col' + (W.col === c[0] ? ' on' : '') + '" data-k="' + k + '" style="background:' + c[0] + '"></button>' : '<button class="col auto' + (!W.col ? ' on' : '') + '" data-k="0">' + esc(c[1]) + '</button>'; }).join(''); $('xCols').querySelectorAll('.col').forEach(function (b) { b.onclick = function () { hap(); var c = COLS[+b.getAttribute('data-k')]; W.col = c[0]; W.colN = c[1]; paintCols(); }; }); }
+  paintCols();
   wizRender();
   $('go').onclick = function () {
-    var own = idea.value.trim(), brief = wizBrief();
-    if (own.length < 3 && !brief) { hap('err'); toast(T.short); idea.focus(); return; }
-    var t = (brief ? brief + '\n' : '') + 'Idea (in the language the texts must use): ' + (own || T.wiz[0].o[(W.a[0] || [7])[0]][1]);
+    var own = idea.value.trim(), brief = wizBrief(), xn = $('xName').value.trim(), xd = $('xDesc').value.trim();
+    if (own.length < 3 && !brief && !xn) { hap('err'); toast(T.short); idea.focus(); return; }
+    var t = (xn ? 'App name (use it as the title): ' + xn + '\n' : '') + (xd ? 'Short description: ' + xd + '\n' : '') + (W.col ? 'Main color: ' + W.col + ' (' + W.colN + ')\n' : '') + (brief ? brief + '\n' : '') + 'Idea (in the language the texts must use): ' + (own || T.wiz[0].o[(W.a[0] || [7])[0]][1]);
     if (S.lim && !S.lim.pro && S.lim.gens >= S.lim.freeGens) { hap('err'); return limitSheet(); }
     hap(); $('go').disabled = true;
-    call('create', { prompt: t }).then(function (r) {
+    call('create', { prompt: t, name: xn, desc: xd }).then(function (r) {
       $('go').disabled = false;
-      if (r.ok) { idea.value = ''; idea.oninput(); W = { i: 0, a: [] }; wizRender(); S.lim && S.lim.gens++; startBuild(r.id, false); refresh(); return; }
+      if (r.ok) { idea.value = ''; idea.oninput(); $('xName').value = ''; $('xDesc').value = ''; W = { i: 0, a: [] }; paintCols(); wizRender(); S.lim && S.lim.gens++; startBuild(r.id, false); refresh(); return; }
       fail(r);
     });
   };
@@ -550,12 +562,12 @@ input.tk:focus{border-color:var(--v)}
     $('edGo').onclick = function () {
       var t = $('edT').value.trim();
       if (t.length < 4) { hap('err'); return toast(T.short); }
-      if (free && L.edits >= L.freeEdits) { hap('err'); return proSheet(a, true); }
+      if (free && L.edits >= L.freeEdits) { hap('err'); return limitSheet(); }
       $('edGo').disabled = true;
       call('edit', { id: a.id, prompt: t }).then(function (r) {
         if (r.ok) { if (S.lim) S.lim.edits++; startBuild(a.id, true); refresh(); return; }
         $('edGo').disabled = false;
-        if (r.error === 'limit') return proSheet(a, true);
+        if (r.error === 'limit') return limitSheet();
         fail(r);
       });
     };
@@ -565,7 +577,7 @@ input.tk:focus{border-color:var(--v)}
     var p = (S.lim && S.lim.price) || 1000, intro = !!(S.lim && S.lim.intro && S.lim.introPrice), ip = intro ? S.lim.introPrice : p;  // 2 nov 2026 (15h02): 250 the 1st month, then 1000
     openSheet('<div class="prohead"><div>⭐</div><div><h2>' + esc(lim ? T.limT : T.proT) + '</h2><p class="sub" style="margin:0">' + esc(lim ? T.limP : T.proP) + '</p></div></div>' +
       '<div class="feat">' + T.feats.map(function (f) { return '<div><i>✓</i>' + esc(f) + '</div>'; }).join('') + '</div>' +
-      '<div class="launch">' + esc(T.launchB) + '</div>' + '<div class="price"><b>' + ip.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US') + ' ⭐</b><span>' + esc(intro ? T.introPer : T.per) + '</span></div>' +
+      '<div class="launch">' + esc(intro ? T.launchI(p.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US')) : T.launchB) + '</div>' + '<div class="price"><b>' + ip.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US') + ' ⭐</b><span>' + esc(intro ? T.introPer : T.per) + '</span>' + (intro ? '<em class="then">' + esc(T.thenP(p.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US'))) + '</em>' : '') + '</div>' +
       '<button class="cta gold" id="subGo">' + esc(intro ? T.introGo(ip) : T.subGo(p)) + '</button><div class="note">' + esc(intro ? T.introN(p.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US')) : T.perN) + '</div>');
     $('subGo').onclick = function () {
       hap(); $('subGo').disabled = true;
@@ -586,10 +598,32 @@ input.tk:focus{border-color:var(--v)}
       });
     };
   }
-  function limitSheet() {
+  // 2 nov 2026 (15h34): the Creator plan (500 stars / month) to test lots of ideas; Pro (per app) stays the way to launch on a bot
+  function limitSheet() { creatorSheet(true); }
+  function creatorSheet(lim) {
+    var L = S.lim || {}, g = L.creatorGens || 5, e = L.creatorEdits || 30, p = L.creatorPrice || 500, fmt = function (x) { return Number(x).toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US'); };
+    if (L.creator) {
+      openSheet('<div class="prohead"><div>⚡</div><div><h2>' + esc(lim ? T.crLimT : T.crT) + '</h2><p class="sub" style="margin:0">' + esc(lim ? T.crLimP : T.crOn(new Date(L.creatorUntil).toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-US'))) + '</p></div></div><button class="cta gold" id="crPro">' + esc(T.orPro) + '</button>');
+      $('crPro').onclick = pickProSheet; return;
+    }
+    openSheet('<div class="prohead"><div>⚡</div><div><h2>' + esc(lim ? T.limT : T.crT) + '</h2><p class="sub" style="margin:0">' + esc(lim ? T.crLimFree : T.crP) + '</p></div></div>' +
+      '<div class="feat">' + T.crFeats(g, e).map(function (f) { return '<div><i>✓</i>' + esc(f) + '</div>'; }).join('') + '</div>' +
+      '<div class="price"><b>' + fmt(p) + ' ⭐</b><span>' + esc(T.per) + '</span></div>' +
+      '<button class="cta" id="crGo">' + esc(T.crGo(fmt(p))) + '</button><button class="ghost" id="crPro" style="margin-top:10px">' + esc(T.orPro) + '</button><div class="note">' + esc(T.perN) + '</div>');
+    $('crPro').onclick = pickProSheet;
+    $('crGo').onclick = function () {
+      hap(); $('crGo').disabled = true;
+      call('invoice', { plan: 'creator' }).then(function (r) {
+        $('crGo').disabled = false;
+        if (!r.ok) { hap('err'); return toast(T.inv); }
+        try { tw.openInvoice(r.link, function (st) { if (st !== 'paid') return; hap('ok'); toast(T.crOk); closeSheet(); setTimeout(refresh, 2000); setTimeout(refresh, 6000); }); } catch (e) { link(r.link); }
+      });
+    };
+  }
+  function pickProSheet() {
     var list = S.apps.filter(function (a) { return a.version > 0; });
-    if (list.length === 1) return proSheet(list[0], true);
-    if (!list.length) { toast(T.limP); return; }
+    if (list.length === 1) return proSheet(list[0], false);
+    if (!list.length) { closeSheet(); tab('create'); return; }
     openSheet('<div class="prohead"><div>⭐</div><div><h2>' + esc(T.limT) + '</h2><p class="sub" style="margin:0">' + esc(T.limP) + '</p></div></div><p class="sub">' + esc(T.limPick) + '</p><div class="apps" id="lp"></div>');
     list.slice(0, 6).forEach(function (a) {
       var b = document.createElement('button'); b.className = 'ac'; b.style.textAlign = 'left'; b.style.width = '100%';
@@ -628,11 +662,14 @@ input.tk:focus{border-color:var(--v)}
     openSheet('<div class="mg"><div class="ico" style="background:' + col(a.id) + '">' + esc(t.charAt(0).toUpperCase()) + '</div><div class="an"><h2 style="margin:0">' + esc(t) + '</h2><span>@' + esc(a.bot_username) + '</span></div></div>' +
       '<div class="stat"><div><b id="mgU">…</b><span>' + esc(T.users) + '</span></div><div><b>⭐</b><span>Pro</span></div></div>' +
       '<button class="ghost" id="mgBot">' + esc(T.openMyBot) + '</button>' +
+      '<div class="blk"><h3>' + esc(T.mtT) + '</h3><p>' + esc(T.mtP) + '</p><input class="xin" id="mtN" maxlength="40" placeholder="' + esc(T.xName) + '"><input class="xin" id="mtD" maxlength="120" placeholder="' + esc(T.xDesc) + '" style="margin-top:8px"><button class="cta" id="mtGo">' + esc(T.mtSave) + '</button></div>' +
       (!a.sub_recurring && a.sub_until ? '<div class="blk"><h3>' + esc(T.renT) + '</h3><p>' + esc(T.renP(new Date(a.sub_until).toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-US'))) + '</p><button class="cta gold" id="renGo">' + esc(T.renGo(((S.lim && S.lim.price) || 1000).toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-US'))) + '</button></div>' : '') +
       '<div class="blk"><h3>' + esc(T.bcT) + '</h3><p>' + esc(T.bcP) + '</p><div class="field"><textarea id="bcT" maxlength="1000" style="min-height:80px" placeholder="' + esc(T.bcPh) + '"></textarea></div><button class="cta" id="bcGo" disabled>…</button></div>' +
       '<div class="blk"><h3>' + esc(T.poT) + '</h3><p>' + esc(T.poP) + '</p><div class="field"><textarea id="poT" maxlength="1000" style="min-height:90px"></textarea></div><input id="poB" maxlength="40" placeholder="' + esc(T.poBtn) + '"><button class="cta" id="poGo">' + esc(T.poGo) + '</button></div>');
     $('poT').value = T.poDef(t); $('poB').value = '▶️ ' + t;
     $('mgBot').onclick = function () { link('https://t.me/' + a.bot_username); };
+    $('mtN').value = a.custom_name || a.title || ''; $('mtD').value = a.custom_desc || '';
+    $('mtGo').onclick = function () { $('mtGo').disabled = true; call('meta', { id: a.id, name: $('mtN').value.trim(), desc: $('mtD').value.trim() }).then(function (r) { $('mtGo').disabled = false; if (r.ok) { hap('ok'); toast(T.mtOk); refresh(); } else { hap('err'); toast(T.net); } }); };
     if ($('renGo')) $('renGo').onclick = function () { $('renGo').disabled = true; call('invoice', { id: a.id, renew: 1 }).then(function (r) { $('renGo').disabled = false; if (!r.ok) { hap('err'); return toast(T.inv); } try { tw.openInvoice(r.link, function (st) { if (st === 'paid') { hap('ok'); toast(T.renOk); closeSheet(); setTimeout(refresh, 2500); } }); } catch (e) { link(r.link); } }); };
     var users = 0;
     call('manage', { id: a.id }).then(function (r) {
