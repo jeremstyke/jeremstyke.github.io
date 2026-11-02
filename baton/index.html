@@ -1467,7 +1467,7 @@ function render() {
   const srt = (l) => l.sort((x, y) => (x.done - y.done) || (y.id - x.id));
   // 22 oct 2026 (17h06, Jeremy): what is left to do first, everything already done at the very bottom
   const todo = (l) => srt(l.filter((t) => !t.done));
-  const secs = [[T('daily'), srt(dl), trow], [T('once'), todo(on1), trow]];  // 22 oct 2026 (21h08, Jeremy): the 2 daily tasks always stay visible (done today = greyed until tomorrow)
+  const secs = [[T('once'), todo(on1), trow], [T('daily'), srt(dl), trow]];  // 2 nov 2026 (18h41, Jeremy): one-time tasks before the daily tasks  // 22 oct 2026 (21h08, Jeremy): the 2 daily tasks always stay visible (done today = greyed until tomorrow)
   $('#subTasks').innerHTML = sec('📢 ' + T('subs'), srt(sb), srow);
   // 28 oct 2026 (11h05, Jeremy): client tasks in "Sponsored tasks": a channel or group to join (checked by @Batoncheckbot,
   // +reward at once, +hold after hold_days if still subscribed) or a mini app / bot to open (paid on the tap, it cannot be checked)
