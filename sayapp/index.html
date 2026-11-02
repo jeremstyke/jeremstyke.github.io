@@ -249,7 +249,7 @@ input.tk:focus{border-color:var(--v)}
       bs: ['Analyse de ton idée', 'Design de l\'interface', 'Écriture du code', 'Mise en ligne'],
       okT: 'Ton appli est prête ✨', okP: function (t) { return '« ' + t + ' » est en ligne. Teste-la maintenant.'; },
       try: '▶ Tester mon appli', change: '✏️ Modifier', launch: '🚀 Lancer', later: 'Plus tard',
-      refT: 'Impossible de construire ça', errT: 'Oups, un problème', errP: 'La construction a échoué. Réessaie dans une minute.', retry: 'Réessayer', close: 'Fermer',
+      rfTry: '✨ Construire avec des points', rfTryP: 'Je peux faire la même appli avec des points virtuels et un classement, sans argent réel.', refT: 'Impossible de construire ça', errT: 'Oups, un problème', errP: 'La construction a échoué. Réessaie dans une minute.', retry: 'Réessayer', close: 'Fermer',
       empty: 'Aucune appli pour l\'instant.', emptyB: '✦ Créer ma première appli',
       sGen: 'En construction', sDemo: 'Démo', sExp: 'Expirée', left: function (d) { return 'Démo gratuite : expire dans ' + d + ' j'; }, expd: 'Démo expirée · passe Pro pour la remettre en ligne', sLive: 'En ligne', sErr: 'Échec', sRef: 'Refusée',
       editT: 'Modifier ton appli', editP: 'Dis ce que tu veux changer, en une phrase.', editPh: 'Ex : mets le fond en noir et ajoute un bouton pour partager son score',
@@ -297,7 +297,7 @@ input.tk:focus{border-color:var(--v)}
       bs: ['Understanding your idea', 'Designing the interface', 'Writing the code', 'Going live'],
       okT: 'Your app is ready ✨', okP: function (t) { return '"' + t + '" is live. Try it now.'; },
       try: '▶ Try my app', change: '✏️ Change', launch: '🚀 Launch', later: 'Later',
-      refT: 'I can not build this', errT: 'Oops, something went wrong', errP: 'The build failed. Please try again in a minute.', retry: 'Try again', close: 'Close',
+      rfTry: '✨ Build it with points', rfTryP: 'I can build the same app with virtual points and a leaderboard, no real money.', refT: 'I can not build this', errT: 'Oops, something went wrong', errP: 'The build failed. Please try again in a minute.', retry: 'Try again', close: 'Close',
       empty: 'No app yet.', emptyB: '✦ Build my first app',
       sGen: 'Building', sDemo: 'Demo', sExp: 'Expired', left: function (d) { return 'Free demo: expires in ' + d + 'd'; }, expd: 'Demo expired · go Pro to put it back online', sLive: 'Live', sErr: 'Failed', sRef: 'Refused',
       editT: 'Change your app', editP: 'Say what you want to change, in one sentence.', editPh: 'E.g. make the background black and add a button to share the score',
@@ -508,7 +508,10 @@ input.tk:focus{border-color:var(--v)}
     $('bl').hidden = true; $('bar').hidden = true;
     if (a.status === 'refused' || (a.status !== 'error' && a.error)) {
       hap('err'); $('orbI').textContent = '🚫'; $('ovT').textContent = T.refT; $('ovP').textContent = a.error || '';
-      $('ovb').innerHTML = '<button class="ghost" id="ovC">' + esc(T.close) + '</button>'; $('ovC').onclick = function () { $('ov').hidden = true; }; return;
+      $('ovb').innerHTML = (a.status === 'refused' && a.prompt ? '<button class="cta" id="ovRf">' + esc(T.rfTry) + '</button>' : '') + '<button class="ghost" id="ovC">' + esc(T.close) + '</button>'; $('ovC').onclick = function () { $('ov').hidden = true; };
+      // 2 nov 2026 (16h47): a refused idea can be rebuilt right away with virtual points (does not use the free app of the day)
+      if ($('ovRf')) { $('ovP').textContent = (a.error ? a.error + ' ' : '') + T.rfTryP; $('ovRf').onclick = function () { $('ovRf').disabled = true; call('create', { prompt: a.prompt + '\nIMPORTANT: build it with virtual points only, no real money, no crypto, no withdrawals.', name: a.custom_name || '', desc: a.custom_desc || '' }).then(function (r) { if (r.ok) { startBuild(r.id, false); refresh(); } else { $('ovRf').disabled = false; fail(r); } }); }; }
+      return;
     }
     if (a.status === 'error') {
       hap('err'); $('orbI').textContent = '😕'; $('ovT').textContent = T.errT; $('ovP').textContent = T.errP;
