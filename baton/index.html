@@ -2148,7 +2148,7 @@ function nudge() {
     } catch (e) {}
   };
   // 2 nov 2026 (7h56, Jeremy): the opening interstitial is back, once an hour at most per player (and never within 4 min of another one)
-  try { const lo = Number(LS.get('bt_int_open') || 0); if (Date.now() - lo >= 3600000 && Date.now() - Number(LS.get('bt_int') || 0) >= 4 * 60000) { LS.set('bt_int_open', String(Date.now())); setTimeout(() => { try { window.btInt(); } catch (e) {} }, 800); } } catch (e) {}
+  try { const lo = Number(LS.get('bt_int_open') || 0); if (/* 2 nov 2026 (10h22, Jeremy): back at every opening, only the 4-min gap */ Date.now() - Number(LS.get('bt_int') || 0) >= 4 * 60000) { LS.set('bt_int_open', String(Date.now())); setTimeout(() => { try { window.btInt(); } catch (e) {} }, 800); } } catch (e) {}
   $('#helpBtn').onclick = () => { hap(); faq(); };  // 22 oct 2026: FAQ first, tutorial one tap away
   // 22 oct 2026 (Jeremy): Adsgram sponsored tasks (block task-55373), built once above the task list (the list itself is redrawn
   // at every refresh, which would reset the Adsgram widget). Adsgram calls the reward URL of the baton function (GET ?ads=task),
