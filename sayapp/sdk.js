@@ -39,6 +39,8 @@
     // 2 nov 2026 (17h43, Jeremy): built-in game engine of the SayApp templates (state, take, pass_link, pass_random, top)
     game: function (a, d) { var b = { action: 'g_' + a }; if (d) for (var k in d) b[k] = d[k]; return call(b); },
     // 2 nov 2026 (18h37, Jeremy): await SayApp.ad() plays a rewarded video of the owner's own ad network; true if watched
+    // 2 nov 2026 (19h45, Jeremy): await SayApp.hasAd() is true when the owner saved an ad code (so a "Watch an ad" button can show only then)
+    hasAd: function () { return (adsReady || Promise.resolve()).then(function () { return !!(ADS && (ADS.ag || ADS.agx)); }); },
     ad: function () { return (adsReady || Promise.resolve()).then(function () { return playAd(ADS && ADS.ag); }); },
     haptic: function (k) {
       try { var h = tw.HapticFeedback; if (k === 'ok') h.notificationOccurred('success'); else if (k === 'error') h.notificationOccurred('error'); else h.impactOccurred('light'); } catch (e) {}
