@@ -1424,9 +1424,11 @@ input.tk:focus{border-color:var(--v)}
 
   function editSheet(a, pre) {
     var L = S.lim || { edits: 0, freeEdits: 3, pro: false }, free = !L.pro && !sub(a);
+    var ec = Number(L.editCost || 1), ecr = a.plan === 'credit';  // 3 nov 2026 (20h38, Jeremy): the cost shows before a change
     openSheet('<h2>' + esc(T.editT) + '</h2><p class="sub">' + esc(a.title || '') + ' · ' + esc(T.editP) + '</p>' +
       '<div class="field"><textarea id="edT" maxlength="2000" placeholder="' + esc(T.editPh) + '"></textarea></div>' +
-      (a.ideas && a.ideas.length ? '<p class="sub" style="margin:14px 0 0;font-size:13px">' + esc(T.ideasT) + '</p>' : '') + '<div class="chips" id="edC"></div><button class="cta" id="edGo">' + esc(T.editGo) + '</button>' +
+      (a.ideas && a.ideas.length ? '<p class="sub" style="margin:14px 0 0;font-size:13px">' + esc(T.ideasT) + '</p>' : '') + '<div class="chips" id="edC"></div><button class="cta" id="edGo">' + esc(T.editGo + (ecr ? ' · ' + NP.v2.replace('{e}', ec) : '')) + '</button>' +
+      (ecr ? '<div class="quota">' + esc(Number(L.credits || 0) === 1 ? NP.have.replace('{n}', 1).replace(/(cr[ée]dit|kredi)(o)?s\b/i, '$1$2').replace('кредитов', 'кредит') : NP.have.replace('{n}', Number(L.credits || 0))) + '</div>' : '') +
       (free ? '<div class="quota">' + esc(T.editQ(L.edits, L.freeEdits)) + '</div>' : ''));
     if (pre) $('edT').value = pre;
     if (a.ideas && a.ideas.length) a.ideas.forEach(function (c) { var b = document.createElement('button'); b.className = 'chip dyn'; b.textContent = c; b.onclick = function () { hap(); var t = $('edT'); t.value = (t.value ? t.value + ', ' : '') + c; t.focus(); }; $('edC').appendChild(b); });
