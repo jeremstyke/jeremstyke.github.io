@@ -1456,7 +1456,7 @@ input.tk:focus{border-color:var(--v)}
     return new Promise(function (ok, ko) { var off = t.onStatusChange(function (w) { if (w && w.account) { off(); ok(w.account); } }); t.openModal().catch(ko); });
   }
   function payUsdt(n, L, bt) {
-    var usd = Math.ceil(n / L.usdt.rate * 100) / 100, units = Math.round(usd * 1e6), USDT = 'EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs';
+    var usd = usdOf(n, L), units = Math.round(usd * 1e6), USDT = 'EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs';
     hap(); bt.disabled = true; var lab = bt.textContent; bt.textContent = PW.load;
     var done = function (msg, ok) { bt.disabled = false; bt.textContent = lab; if (msg) { hap(ok ? 'ok' : 'err'); toast(msg); } };
     tcReady().then(function (t) { return tcAccount(t).then(function (acc) {
@@ -1472,6 +1472,9 @@ input.tk:focus{border-color:var(--v)}
       });
     }); }).catch(function () { done(PW.err, false); });
   }
+  // 3 nov 2026 (20h15, Jeremy): USDT follows the Stars price list, at what a Star really brings (about 0.013 $)
+  var UQ = ({"fr": "Même grille de prix que les étoiles, mais sans la commission de Telegram : c'est moins cher pour toi. Crédités en 2 minutes environ.", "en": "Same price list as Stars, but without Telegram's fee: cheaper for you. Credited in about 2 minutes.", "es": "Misma tarifa que las Stars, pero sin la comisión de Telegram: más barato para ti. Acreditados en unos 2 minutos.", "pt": "Mesma tabela das Stars, mas sem a taxa do Telegram: mais barato para você. Creditados em cerca de 2 minutos.", "ru": "Те же цены, что и в Stars, но без комиссии Telegram: дешевле для тебя. Зачисление примерно за 2 минуты.", "id": "Daftar harga sama dengan Stars, tapi tanpa biaya Telegram: lebih murah untukmu. Masuk dalam sekitar 2 menit.", "tr": "Stars ile aynı fiyat listesi, ama Telegram komisyonu yok: senin için daha ucuz. Yaklaşık 2 dakikada yüklenir."})[lang] || "Same price list as Stars, but without Telegram's fee: cheaper for you. Credited in about 2 minutes.";
+  function usdOf(n, L) { return Math.ceil(crPrice(n, L) * ((L.usdt && L.usdt.perStar) || 0.013) * 100) / 100; }
   function crPrice(n, L) { var cv = (L.curve || [[1000, 10], [200, 11.4], [50, 12], [10, 15], [0, 17]]).slice().sort(function (x, y) { return y[0] - x[0]; }); var r = cv.filter(function (x) { return n >= x[0]; })[0] || [0, 17]; return Math.max(1, Math.round(n * r[1])); }
   function packSheet(a, nb, need) {
     var L = S.lim || {}, cc = L.createCost || 3, ec = L.editCost || 1, pc = (L.proCredits || [60])[0] || 60, QK = [1, 3, 10, 50, 220, 1000];
@@ -1482,13 +1485,13 @@ input.tk:focus{border-color:var(--v)}
       '<div class="crq">' + QK.map(function (q) { return '<button data-q="' + q + '">' + (q === 220 ? '⚡ ' : q === 1000 ? '👑 ' : '') + q + '</button>'; }).join('') + '</div>' +
       '<p class="crs" id="crS"></p><button class="cta gold" id="crGo"></button>' +
       '<p class="crh">' + esc(Number(L.credits || 0) === 1 ? NP.have.replace('{n}', 1).replace(/(cr[ée]dit|kredi)(o)?s\b/i, '$1$2').replace('кредитов', 'кредит') : NP.have.replace('{n}', Number(L.credits || 0))) + '</p>' +
-      (L.usdt ? '<button class="ghost" id="usT" style="margin-top:6px">' + esc(NP.usd) + '</button><div class="usd" id="usB" hidden><button class="cta" id="usW">' + esc(PW.btn) + '</button><p style="margin:8px 0 12px">' + esc(PW.fees) + '</p><h3>' + esc(PW.manual) + '</h3><p>' + esc(C2.uP.replace('{r}', L.usdt.rate)) + '</p><div class="kv"><div><small>' + esc(UA[0]) + '</small><code id="usV"></code></div><button id="usVc">' + esc(C2.copy) + '</button></div><div class="kv"><div><small>' + esc(C2.addr) + '</small><code id="usA">' + esc(L.usdt.addr) + '</code></div><button id="usAc">' + esc(C2.copy) + '</button></div><div class="kv"><div><small>' + esc(C2.memo) + '</small><code id="usM">' + esc(L.usdt.code) + '</code></div><button id="usMc">' + esc(C2.copy) + '</button></div><div class="w">' + esc(C2.warn) + '</div></div>' : ''));
+      (L.usdt ? '<button class="ghost" id="usT" style="margin-top:6px">' + esc(NP.usd) + '</button><div class="usd" id="usB" hidden><div class="crq" style="margin:0 0 12px">' + QK.slice(1).map(function (q) { return '<button data-q="' + q + '">' + q + ' · ' + usdOf(q, L).toFixed(2) + ' $</button>'; }).join('') + '</div><button class="cta" id="usW">' + esc(PW.btn) + '</button><p style="margin:8px 0 12px">' + esc(PW.fees) + '</p><h3>' + esc(PW.manual) + '</h3><p>' + esc(UQ) + '</p><div class="kv"><div><small>' + esc(UA[0]) + '</small><code id="usV"></code></div><button id="usVc">' + esc(C2.copy) + '</button></div><div class="kv"><div><small>' + esc(C2.addr) + '</small><code id="usA">' + esc(L.usdt.addr) + '</code></div><button id="usAc">' + esc(C2.copy) + '</button></div><div class="kv"><div><small>' + esc(C2.memo) + '</small><code id="usM">' + esc(L.usdt.code) + '</code></div><button id="usMc">' + esc(C2.copy) + '</button></div><div class="w">' + esc(C2.warn) + '</div></div>' : ''));
     var paint = function () {
       n = Math.max(1, Math.min(10000, Math.floor(n) || 1)); $('crI').value = n;
       var st = crPrice(n, L), per = Math.round(st / n * 10) / 10;
       $('crS').textContent = NP.per.replace('{p}', per.toLocaleString(LOC)) + ' · ' + NP.less;
       $('crGo').textContent = NP.pay.replace('{s}', st.toLocaleString(LOC));
-      if ($('usV') && L.usdt) $('usV').textContent = (Math.ceil(n / L.usdt.rate * 100) / 100).toFixed(2) + ' USDT  =  ' + n + ' ' + CR.cr;  // 3 nov 2026 (13h45): the USDT amount follows the chosen credits
+      if ($('usV') && L.usdt) $('usV').textContent = (usdOf(n, L)).toFixed(2) + ' USDT  =  ' + n + ' ' + CR.cr;  // 3 nov 2026 (13h45): the USDT amount follows the chosen credits
       document.querySelectorAll('.crq button').forEach(function (x) { x.classList.toggle('on', +x.getAttribute('data-q') === n); });
     };
     paint();
