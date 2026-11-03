@@ -1726,7 +1726,7 @@ input.tk:focus{border-color:var(--v)}
       if (!r.ok) return;
       // 2 nov 2026 (19h54, Jeremy): size of the app (active players) and the plan above when it is over
       var need = r.mau >= 100000 ? 2 : r.mau >= 10000 ? 1 : 0, tl = '';
-      if (r.mau >= 1000 || r.tier || r.overSince) {
+      if (a.plan !== 'credit' && (r.mau >= 1000 || r.tier > 0 || r.overSince)) {  // 3 nov 2026 (23h01, Jeremy): a credit app (tier -1) pays its Pro with credits by itself: no Stars plan block
         var dl = r.overSince ? Math.max(0, 7 - Math.floor((Date.now() - new Date(r.overSince).getTime()) / 86400000)) : 0;
         tl = '<div class="blk"><h3>' + esc(T.tiT) + '</h3><p>' + esc(T.tiP(r.mau.toLocaleString(LOC), r.tier)) + '</p>' +
           (r.overPaused ? '<div class="tier">' + esc(T.tiPaused) + '</div>' : need > (r.tier || 0) ? '<div class="tier">' + esc(T.tiOver(dl)) + '</div>' : '') +
