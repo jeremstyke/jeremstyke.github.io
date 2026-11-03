@@ -108,3 +108,10 @@ h2{font-size:clamp(28px,3.6vw,40px);font-weight:800;text-align:center;letter-spa
 @media (max-width:960px){.grid{grid-template-columns:1fr;gap:48px}.feats{grid-template-columns:repeat(2,1fr)}.nav{display:none}.lang{margin-left:auto}}
 @media (max-width:720px){.steps,.plans{grid-template-columns:1fr}.hero{padding:40px 0 56px}.sec{padding:60px 0}.plan.hot{order:-1}}
 @media (max-width:480px){.feats{grid-template-columns:1fr}.top .btn.sm{display:none}.btn.lg{width:100%;white-space:normal}.stats{gap:20px}}
+/* 3 nov 2026: examples made with SayApp, plans with credits */
+.exs{list-style:none;padding:0;margin:28px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.exc a{display:flex;flex-direction:column;align-items:flex-start;gap:8px;height:100%;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;color:inherit;text-decoration:none;box-shadow:var(--shadow)}
+.exc img{width:72px;height:72px;border-radius:18px;object-fit:cover}
+.exc h3{margin:6px 0 0}
+.exc p{margin:0;color:var(--mute);flex:1}
+.un{font-size:.55em;font-weight:700;color:var(--mute)}
