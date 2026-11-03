@@ -172,6 +172,34 @@ input.tk:focus{border-color:var(--v)}
 .pvh b{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px}
 .pvh button{padding:8px 12px;border-radius:10px;background:var(--card2);font-size:13px;font-weight:600}
 .pv iframe{flex:1;border:0;width:100%;background:#fff}
+/* 3 nov 2026 (05h55, Jeremy): new first screen */
+.nb{display:grid;gap:10px}
+.nbl{margin:4px 0 0;font:700 12px Inter,system-ui,sans-serif;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:8px}
+.nbl i{font-style:normal;display:grid;place-items:center;width:20px;height:20px;border-radius:7px;background:var(--grad);color:#fff;font-size:11px;letter-spacing:0}
+.nbt{display:flex;gap:8px;overflow-x:auto;margin:0 -16px;padding:2px 16px 4px;scrollbar-width:none}
+.nbt::-webkit-scrollbar{display:none}
+.pill{flex:0 0 auto;display:flex;align-items:center;gap:7px;padding:10px 14px;border-radius:14px;background:var(--card);border:1px solid var(--line);font-size:14px;font-weight:600;color:#e6e4fb;white-space:nowrap}
+.pill i{font-style:normal;font-size:17px}
+.pill.on{background:linear-gradient(#17172e,#17172e) padding-box,var(--grad) border-box;border:1.5px solid transparent;box-shadow:0 8px 20px -12px #6b6bff;color:#fff}
+.nb .chips{padding-top:2px}
+.nbo{border-radius:16px;background:var(--card);border:1px solid var(--line);padding:0 14px}
+.nbo summary{list-style:none;cursor:pointer;padding:13px 0;font-size:14px;font-weight:600;color:var(--mute);display:flex;justify-content:space-between}
+.nbo summary::-webkit-details-marker{display:none}
+.nbo summary::after{content:"+";color:#a98bff;font-size:18px;line-height:1}
+.nbo[open] summary::after{content:"\2212"}
+.nbo .extra{padding-bottom:14px;margin:0}
+.nb .cta{margin-top:4px}
+.exs{margin:6px 0 0;color:var(--mute);font-size:14px}
+.exr{display:flex;gap:12px;overflow-x:auto;margin:14px -16px 0;padding:2px 16px 8px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.exr::-webkit-scrollbar{display:none}
+.exc{flex:0 0 172px;scroll-snap-align:start;border-radius:20px;overflow:hidden;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column}
+.exc .im{aspect-ratio:4/3;position:relative}
+.exc .im .ic{position:absolute;inset:0;display:grid;place-items:center;font-size:66px;filter:drop-shadow(0 12px 22px rgba(0,0,0,.45))}
+.exc .im em{position:absolute;left:8px;top:8px;font:700 9.5px Inter,system-ui,sans-serif;letter-spacing:.08em;padding:4px 8px;border-radius:99px;background:rgba(0,0,0,.6);color:#fff;font-style:normal}
+.exc b{padding:10px 12px 0;font:700 15px Sora,Inter,system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.exc .bt{display:flex;flex-direction:column;gap:6px;padding:10px 10px 12px}
+.exc .bt button{flex:1;min-width:0;padding:9px 4px;border-radius:12px;font-size:12px;font-weight:700;background:var(--card2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.exc .bt button.p{background:var(--grad);color:#fff}
 .toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);z-index:60;background:#1b1b2e;border:1px solid var(--line);padding:11px 16px;border-radius:14px;font-size:14px;opacity:0;transition:.25s;max-width:calc(100% - 32px);text-align:center;pointer-events:none}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 .out{text-align:center;padding:90px 24px}
@@ -199,20 +227,26 @@ input.tk:focus{border-color:var(--v)}
       <p data-t="sub"></p>
     </div>
     <div class="tpls" hidden><button class="tpl" id="tplOpen"><i>⚡</i><div><b data-t="tplH"></b><span data-t="tplS"></span></div><em data-t="tbFast"></em></button></div>
-    <!-- 2 nov 2026 (15h27, Jeremy): guided questions first, so people explain what they want from the start -->
-    <div class="wiz" id="wiz"><div class="wtop"><button id="wBack" class="wback">‹</button><div class="dots" id="wDots"></div><span class="wstep" id="wStep"></span></div><h2 id="wQ"></h2><p class="wsub" id="wSub"></p><div class="opts" id="wOpts"></div><button class="cta" id="wNext"></button></div>
-    <div class="extra" id="wExtra" hidden><input class="xin" id="xName" maxlength="40" autocomplete="off"><input class="xin" id="xDesc" maxlength="120" autocomplete="off"><p class="xl" id="xColL"></p><div class="cols" id="xCols"></div><p class="xl" id="xLangL"></p><div class="cols" id="xLangM"></div><p class="xl" id="xLangL2"></p><div class="cols" id="xLangX"></div></div>
+    <!-- 3 nov 2026 (05h55, Jeremy): one simple page: type, idea, style, options folded; the old step-by-step questions stay hidden -->
+    <div class="wiz" id="wiz" hidden><div class="wtop"><button id="wBack" class="wback">‹</button><div class="dots" id="wDots"></div><span class="wstep" id="wStep"></span></div><h2 id="wQ"></h2><p class="wsub" id="wSub"></p><div class="opts" id="wOpts"></div><button class="cta" id="wNext"></button></div>
+    <div class="nb">
+    <p class="nbl"><i>1</i><span id="nxL1"></span></p><div class="nbt" id="nxType"></div>
+    <p class="nbl"><i>2</i><span id="nxL2"></span></p>
     <div class="comp"><div class="in">
       <textarea id="idea" maxlength="4000"></textarea>
       <div class="crow"><span class="cnt" id="cnt">0 / 4000</span><span class="cnt" data-t="lang"></span></div>
     </div></div>
     <div class="chips" id="chips"></div>
+    <p class="nbl"><i>3</i><span id="nxL3"></span></p><div class="nbt" id="nxStyle"></div>
+    <details class="nbo"><summary id="nxOpt"></summary><div class="extra" id="wExtra"><input class="xin" id="xName" maxlength="40" autocomplete="off"><input class="xin" id="xDesc" maxlength="120" autocomplete="off"><p class="xl" id="xColL"></p><div class="cols" id="xCols"></div><p class="xl" id="xLangL"></p><div class="cols" id="xLangM"></div><p class="xl" id="xLangL2"></p><div class="cols" id="xLangX"></div></div></details>
     <button class="cta" id="go"></button>
+    </div>
     <div class="quota" id="quota"></div>
     <button class="crup" id="crUp" hidden></button>
     <div class="trust" data-t="trust"></div>
     <p class="tos" data-t="tos"></p>
 
+    <div class="sec"><h3 id="exT"></h3><p class="exs" id="exS"></p><div class="exr" id="exR"></div></div>
     <div class="sec"><h3 data-t="howT"></h3><div class="steps" id="how"></div></div>
     <div class="sec"><h3 data-t="byT"></h3>
       <div class="by"><button data-link="https://t.me/Memecointycoonbot?startapp=src_sayapp">🚀 Meme Coin Tycoon</button><button data-link="https://t.me/PassTheBatonBot?startapp=src_sayapp">🏃 Pass The Baton</button></div>
@@ -248,7 +282,7 @@ input.tk:focus{border-color:var(--v)}
 <div class="sh" id="sh"><div class="grab"></div><div id="shc"></div></div>
 
 <div class="pv" id="pv" hidden>
-  <div class="pvh"><button id="pvX">✕</button><b id="pvT"></b><button id="pvS">📤</button><button id="pvE">✏️</button></div>
+  <div class="pvh"><button id="pvX">✕</button><b id="pvT"></b><button id="pvS">📤</button><button id="pvE">✏️</button><button id="pvM" hidden></button></div>
   <iframe id="pvF" allow="clipboard-write"></iframe>
 </div>
 
@@ -818,6 +852,22 @@ input.tk:focus{border-color:var(--v)}
   $('go').textContent = T.go;
   T.chips.forEach(function (c) { var b = document.createElement('button'); b.className = 'chip'; b.textContent = c[0]; b.onclick = function () { hap(); idea.value = c[1]; idea.oninput(); idea.focus(); }; $('chips').appendChild(b); });
   $('how').innerHTML = T.how.map(function (h) { return '<div class="st"><i>' + h[0] + '</i><div><b>' + esc(h[1]) + '</b><span>' + esc(h[2]) + '</span></div></div>'; }).join('');
+  // 3 nov 2026 (05h55, Jeremy): a simpler, more professional first screen, and real examples made with SayApp to try
+  var NX = ({"fr": {"h1": "Ton appli Telegram.<br><span>Prête en 2 minutes.</span>", "sub": "Choisis un type, décris ton idée en une phrase : l'IA la construit et la lance sur ton propre bot.", "t1": "Type d'appli", "t2": "Ton idée", "t3": "Style", "opt": "⚙️ Nom, couleur et langues (facultatif)", "ph": "Ex : un jeu de tap avec des niveaux, un bonus x2 en regardant une pub et un classement", "exT": "Exemples faits avec SayApp", "exS": "De vraies applis créées par l'IA. Ouvre-les, joue, puis crée la tienne.", "exTry": "▶ Essayer", "exSame": "✨ La même", "tags": ["JEU", "TAP-TO-EARN", "CONCOURS", "COMMANDES", "BOUTIQUE"], "same": ["Un jeu de serpent néon avec un record, une vitesse qui augmente, un classement et un bouton pour continuer en regardant une pub", "Un jeu de tap où l'on mine de l'or : niveaux, améliorations, énergie, bonus x2 en regardant une pub et classement", "Une roue de la fortune quotidienne avec des points, un tour bonus en regardant une pub, des invitations d'amis et la liste des gagnants", "L'appli de mon café : menu avec photos, panier, carte de fidélité et commande à emporter", "Une boutique de sneakers en édition limitée avec le compte à rebours du prochain drop, le choix des tailles et le paiement en étoiles"]}, "en": {"h1": "Your Telegram app.<br><span>Ready in 2 minutes.</span>", "sub": "Pick a type, describe your idea in one sentence: the AI builds it and launches it on your own bot.", "t1": "App type", "t2": "Your idea", "t3": "Style", "opt": "⚙️ Name, color and languages (optional)", "ph": "E.g. a tap game with levels, a x2 bonus for watching an ad and a leaderboard", "exT": "Made with SayApp", "exS": "Real apps built by the AI. Open them, play, then build yours.", "exTry": "▶ Try it", "exSame": "✨ Same for me", "tags": ["GAME", "TAP-TO-EARN", "GIVEAWAY", "ORDERS", "SHOP"], "same": ["A neon snake game with a best score, a speed that increases, a leaderboard and a button to continue by watching an ad", "A tap game where you mine gold: levels, upgrades, energy, a x2 bonus for watching an ad and a leaderboard", "A daily lucky wheel with points, a bonus spin for watching an ad, friend invites and the list of winners", "The app of my coffee shop: menu with pictures, cart, loyalty card and takeaway orders", "A limited-edition sneaker shop with a countdown to the next drop, size selection and payment in Stars"]}, "es": {"h1": "Tu app de Telegram.<br><span>Lista en 2 minutos.</span>", "sub": "Elige un tipo, describe tu idea en una frase: la IA la crea y la lanza en tu propio bot.", "t1": "Tipo de app", "t2": "Tu idea", "t3": "Estilo", "opt": "⚙️ Nombre, color e idiomas (opcional)", "ph": "Ej: un juego de tap con niveles, un bonus x2 viendo un anuncio y una clasificación", "exT": "Hechas con SayApp", "exS": "Apps reales creadas por la IA. Ábrelas, juega y luego crea la tuya.", "exTry": "▶ Probar", "exSame": "✨ Igual para mí", "tags": ["JUEGO", "TAP-TO-EARN", "SORTEO", "PEDIDOS", "TIENDA"], "same": ["Un juego de serpiente neón con récord, velocidad creciente, clasificación y un botón para continuar viendo un anuncio", "Un juego de tap donde minas oro: niveles, mejoras, energía, bonus x2 viendo un anuncio y clasificación", "Una ruleta diaria con puntos, un giro extra viendo un anuncio, invitaciones a amigos y la lista de ganadores", "La app de mi cafetería: menú con fotos, carrito, tarjeta de fidelidad y pedidos para llevar", "Una tienda de zapatillas de edición limitada con la cuenta atrás del próximo drop, elección de talla y pago en Stars"]}, "pt": {"h1": "Seu app no Telegram.<br><span>Pronto em 2 minutos.</span>", "sub": "Escolha um tipo, descreva sua ideia em uma frase: a IA cria o app e lança no seu próprio bot.", "t1": "Tipo de app", "t2": "Sua ideia", "t3": "Estilo", "opt": "⚙️ Nome, cor e idiomas (opcional)", "ph": "Ex: um jogo de tap com níveis, bônus x2 assistindo um anúncio e um ranking", "exT": "Feitos com SayApp", "exS": "Apps reais criados pela IA. Abra, jogue e depois crie o seu.", "exTry": "▶ Testar", "exSame": "✨ Quero igual", "tags": ["JOGO", "TAP-TO-EARN", "SORTEIO", "PEDIDOS", "LOJA"], "same": ["Um jogo da cobrinha neon com recorde, velocidade crescente, ranking e um botão para continuar assistindo um anúncio", "Um jogo de tap onde você minera ouro: níveis, melhorias, energia, bônus x2 assistindo um anúncio e ranking", "Uma roleta diária com pontos, um giro extra assistindo um anúncio, convites de amigos e a lista de ganhadores", "O app da minha cafeteria: cardápio com fotos, carrinho, cartão fidelidade e pedidos para viagem", "Uma loja de tênis de edição limitada com contagem regressiva do próximo drop, escolha de tamanho e pagamento em Stars"]}, "ru": {"h1": "Твоё приложение в Telegram.<br><span>Готово за 2 минуты.</span>", "sub": "Выбери тип, опиши идею одной фразой: ИИ создаст приложение и запустит его в твоём боте.", "t1": "Тип приложения", "t2": "Твоя идея", "t3": "Стиль", "opt": "⚙️ Название, цвет и языки (необязательно)", "ph": "Например: тапалка с уровнями, бонусом x2 за просмотр рекламы и рейтингом", "exT": "Сделано в SayApp", "exS": "Настоящие приложения, созданные ИИ. Открой, поиграй, а потом создай своё.", "exTry": "▶ Открыть", "exSame": "✨ Хочу такое же", "tags": ["ИГРА", "ТАПАЛКА", "РОЗЫГРЫШ", "ЗАКАЗЫ", "МАГАЗИН"], "same": ["Неоновая змейка с рекордом, растущей скоростью, рейтингом и кнопкой продолжить за просмотр рекламы", "Тапалка, где добываешь золото: уровни, улучшения, энергия, бонус x2 за просмотр рекламы и рейтинг", "Ежедневное колесо удачи с очками, дополнительным вращением за просмотр рекламы, приглашениями друзей и списком победителей", "Приложение моей кофейни: меню с фото, корзина, карта лояльности и заказы с собой", "Магазин лимитированных кроссовок с отсчётом до следующего дропа, выбором размера и оплатой в Stars"]}, "id": {"h1": "Aplikasi Telegram-mu.<br><span>Siap dalam 2 menit.</span>", "sub": "Pilih jenis, jelaskan idemu dalam satu kalimat: AI membuatnya dan meluncurkannya di botmu sendiri.", "t1": "Jenis aplikasi", "t2": "Idemu", "t3": "Gaya", "opt": "⚙️ Nama, warna, dan bahasa (opsional)", "ph": "Contoh: game tap dengan level, bonus x2 dengan menonton iklan, dan papan peringkat", "exT": "Dibuat dengan SayApp", "exS": "Aplikasi nyata buatan AI. Buka, mainkan, lalu buat milikmu.", "exTry": "▶ Coba", "exSame": "✨ Mau yang sama", "tags": ["GAME", "TAP-TO-EARN", "GIVEAWAY", "PESANAN", "TOKO"], "same": ["Game ular neon dengan rekor, kecepatan yang terus naik, papan peringkat, dan tombol lanjut dengan menonton iklan", "Game tap menambang emas: level, upgrade, energi, bonus x2 dengan menonton iklan, dan papan peringkat", "Roda keberuntungan harian dengan poin, putaran bonus dengan menonton iklan, undangan teman, dan daftar pemenang", "Aplikasi kedai kopiku: menu dengan foto, keranjang, kartu loyalitas, dan pesanan bawa pulang", "Toko sneaker edisi terbatas dengan hitung mundur drop berikutnya, pilihan ukuran, dan pembayaran dengan Stars"]}, "tr": {"h1": "Telegram uygulaman.<br><span>2 dakikada hazır.</span>", "sub": "Bir tür seç, fikrini tek cümleyle anlat: yapay zekâ onu oluşturur ve kendi botunda yayınlar.", "t1": "Uygulama türü", "t2": "Fikrin", "t3": "Stil", "opt": "⚙️ Ad, renk ve diller (isteğe bağlı)", "ph": "Örn: seviyeli bir tap oyunu, reklam izleyince x2 bonus ve sıralama", "exT": "SayApp ile yapıldı", "exS": "Yapay zekânın oluşturduğu gerçek uygulamalar. Aç, oyna, sonra kendininkini oluştur.", "exTry": "▶ Dene", "exSame": "✨ Aynısından", "tags": ["OYUN", "TAP-TO-EARN", "ÇEKİLİŞ", "SİPARİŞ", "MAĞAZA"], "same": ["Rekorlu, giderek hızlanan, sıralamalı ve reklam izleyerek devam etme butonlu neon yılan oyunu", "Altın kazdığın bir tap oyunu: seviyeler, geliştirmeler, enerji, reklam izleyince x2 bonus ve sıralama", "Puanlı günlük şans çarkı: reklam izleyince ekstra çevirme, arkadaş davetleri ve kazananlar listesi", "Kafemin uygulaması: fotoğraflı menü, sepet, sadakat kartı ve paket sipariş", "Bir sonraki drop için geri sayımlı, beden seçimli ve Stars ile ödemeli sınırlı sayıda sneaker mağazası"]}})[lang] || null; if (!NX) NX = ({"h1": "Your Telegram app.<br><span>Ready in 2 minutes.</span>", "sub": "Pick a type, describe your idea in one sentence: the AI builds it and launches it on your own bot.", "t1": "App type", "t2": "Your idea", "t3": "Style", "opt": "⚙️ Name, color and languages (optional)", "ph": "E.g. a tap game with levels, a x2 bonus for watching an ad and a leaderboard", "exT": "Made with SayApp", "exS": "Real apps built by the AI. Open them, play, then build yours.", "exTry": "▶ Try it", "exSame": "✨ Same for me", "tags": ["GAME", "TAP-TO-EARN", "GIVEAWAY", "ORDERS", "SHOP"], "same": ["A neon snake game with a best score, a speed that increases, a leaderboard and a button to continue by watching an ad", "A tap game where you mine gold: levels, upgrades, energy, a x2 bonus for watching an ad and a leaderboard", "A daily lucky wheel with points, a bonus spin for watching an ad, friend invites and the list of winners", "The app of my coffee shop: menu with pictures, cart, loyalty card and takeaway orders", "A limited-edition sneaker shop with a countdown to the next drop, size selection and payment in Stars"]});
+  var EXI = [['82fu9ah9', '🐍', 'Snake Neon', 4, 'radial-gradient(circle at 35% 35%,rgba(0,240,255,.45),transparent 55%),radial-gradient(circle at 70% 75%,rgba(255,45,170,.45),transparent 55%),#07071a'], ['5htgziz2', '⛏️', 'Gold Rush', 0, 'radial-gradient(circle at 50% 45%,rgba(255,200,60,.6),transparent 58%),linear-gradient(160deg,#3a2408,#140c02)'], ['kwegehkb', '🎡', 'Lucky Wheel', 1, 'radial-gradient(circle at 50% 45%,rgba(255,210,90,.45),transparent 52%),linear-gradient(160deg,#4a1a9c,#140733)'], ['fa6grndr', '☕', 'Café Bloom', 5, 'radial-gradient(circle at 50% 45%,rgba(255,255,255,.75),transparent 55%),linear-gradient(160deg,#f3e6d3,#caa77c)'], ['d6nxcii3', '👟', 'Sneaker Drop', 5, 'radial-gradient(circle at 50% 45%,rgba(200,255,60,.5),transparent 55%),linear-gradient(160deg,#1b1b1b,#050505)']];
+  try { document.querySelector('.hero h1').innerHTML = NX.h1; document.querySelector('.hero p').textContent = NX.sub; } catch (e) {}
+  $('nxL1').textContent = NX.t1; $('nxL2').textContent = NX.t2; $('nxL3').textContent = NX.t3; $('nxOpt').textContent = NX.opt; $('exT').textContent = NX.exT; $('exS').textContent = NX.exS; $('pvM').textContent = NX.exSame;
+  function paintNx() {
+    [['nxType', 0], ['nxStyle', 1]].forEach(function (p) {
+      var k = p[1], sel = (W.a[k] || [])[0], o = T.wiz[k].o;
+      $(p[0]).innerHTML = o.map(function (x, j) { return k === 0 && j === o.length - 1 ? '' : '<button class="pill' + (sel === j ? ' on' : '') + '" data-j="' + j + '"><i>' + x[0] + '</i>' + esc(x[1]) + '</button>'; }).join('');
+      $(p[0]).querySelectorAll('.pill').forEach(function (b) { b.onclick = function () { hap(); var j = +b.getAttribute('data-j'); W.a[k] = sel === j ? [] : [j]; paintNx(); }; });
+    });
+  }
+  $('exR').innerHTML = EXI.map(function (x, i) { return '<div class="exc"><div class="im" style="background:' + x[4] + '"><span class="ic">' + x[1] + '</span><em>' + esc(NX.tags[i]) + '</em></div><b>' + esc(x[2]) + '</b><div class="bt"><button data-i="' + i + '" data-a="try">' + esc(NX.exTry) + '</button><button class="p" data-i="' + i + '" data-a="same">' + esc(NX.exSame) + '</button></div></div>'; }).join('');
+  function sameAs(i) { W.a[0] = [EXI[i][3]]; idea.value = NX.same[i]; idea.oninput(); paintNx(); try { document.querySelector('.nb').scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {} }
+  $('exR').querySelectorAll('button').forEach(function (b) { b.onclick = function () { hap(); var i = +b.getAttribute('data-i'), x = EXI[i]; if (b.getAttribute('data-a') === 'same') return sameAs(i); preview({ id: x[0], title: x[1] + ' ' + x[2], version: 2, ex: i + 1 }); }; });
+  $('pvM').onclick = function () { var a = S.cur; closePv(); if (a && a.ex) sameAs(a.ex - 1); };
   function paintTop() {
     var L = S.lim; if (!L) return;
     var p = $('plan'); p.className = 'plan' + (L.pro ? ' pro' : L.creator ? ' cr' : ''); p.textContent = L.pro ? T.pro : L.paidOnly ? '⭐ ' + (({ fr: 'Passer Pro', en: 'Go Pro', id: 'Jadi Pro', ru: 'Перейти на Pro', es: 'Pasar a Pro', pt: 'Virar Pro', tr: 'Pro\'ya geç' })[lang] || 'Go Pro') : L.creator ? T.plCreator : T.free;
@@ -830,6 +880,7 @@ input.tk:focus{border-color:var(--v)}
   // ---------- guided questions (2 nov 2026, 15h27) ----------
   var W = { i: 0, a: [] };
   function wizRender() {
+    if (typeof NX !== 'undefined' && NX && $('nxType')) { document.querySelector('.comp').hidden = false; $('wExtra').hidden = false; $('go').hidden = false; $('chips').hidden = false; idea.placeholder = NX.ph; paintNx(); return; }
     var n = T.wiz.length, last = W.i >= n;
     $('wDots').innerHTML = T.wiz.concat([0]).map(function (x, k) { return '<i class="' + (k <= W.i ? 'on' : '') + '"></i>'; }).join('');
     $('wStep').textContent = T.wStep(Math.min(W.i + 1, n + 1), n + 1);
@@ -1178,6 +1229,7 @@ input.tk:focus{border-color:var(--v)}
   // ---------- preview ----------
   function preview(a) {
     S.cur = a; $('pvT').textContent = a.title || 'App';
+    $('pvS').hidden = $('pvE').hidden = !!a.ex; $('pvM').hidden = !a.ex;  // 3 nov 2026: an example made with SayApp: no share or edit, "Same for me" instead
     $('pvF').src = PAGES + a.id + '/?v=' + a.version + '&t=' + Date.now();
     $('pv').hidden = false; try { tw.BackButton.show(); } catch (e) {}
   }
