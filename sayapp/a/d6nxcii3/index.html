@@ -1,4 +1,4 @@
-<!-- sayapp d6nxcii3 v1 -->
+<!-- sayapp d6nxcii3 v2 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +35,17 @@ h1 em{font-style:normal;background:var(--lime);padding:0 6px;border-radius:8px}
 .cd div{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:10px 0;text-align:center}
 .cd b{display:block;font-size:24px;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
 .cd span{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#a5a7ab}
+.raf{position:relative;display:flex;align-items:center;gap:12px;margin-top:12px;padding:10px 10px 10px 14px;border-radius:18px;background:linear-gradient(135deg,rgba(198,255,26,.12),rgba(255,255,255,.04));border:1px solid rgba(198,255,26,.28)}
+.raf .el{flex:none}
+.raf .el span{display:block;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#a5a7ab;font-weight:600}
+.raf .el b{display:flex;align-items:center;gap:4px;font-size:24px;color:var(--lime);letter-spacing:-.5px;font-variant-numeric:tabular-nums;text-shadow:0 0 14px rgba(198,255,26,.5)}
+.raf .el b i{font-style:normal;font-size:18px;text-shadow:none}
+#ent{display:inline-block}
+#ent.bump{animation:pop .45s}
+.adb{flex:1;min-width:0;background:linear-gradient(135deg,var(--lime),var(--lime2));color:var(--ink);font-weight:700;font-size:13.5px;line-height:1.25;padding:12px 10px;border-radius:14px;box-shadow:0 6px 20px rgba(198,255,26,.35),inset 0 1px 0 rgba(255,255,255,.5);transition:transform .15s,opacity .2s,background .25s}
+.adb:active{transform:scale(.96)}
+.adb:disabled{opacity:.6}
+.adb.done{background:rgba(198,255,26,.1);color:var(--lime);box-shadow:inset 0 0 0 1px rgba(198,255,26,.35);opacity:1}
 .chips{display:flex;gap:8px;overflow-x:auto;margin:20px -16px 16px;padding:0 16px;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
 .chip{flex:none;padding:10px 16px;border-radius:999px;background:#fff;font-weight:600;font-size:14px;box-shadow:var(--sh);transition:transform .15s,background .2s,color .2s}
@@ -123,6 +134,7 @@ foot,.foot{display:block;text-align:center;font-size:11px;color:var(--mute);marg
       <div class="lbl"><span class="dot"></span><span data-t="next"></span></div>
       <h3 data-t="dropname"></h3>
       <div class="cd"><div><b id="cd-d">0</b><span data-t="d"></span></div><div><b id="cd-h">00</b><span data-t="h"></span></div><div><b id="cd-m">00</b><span data-t="m"></span></div><div><b id="cd-s">00</b><span data-t="s"></span></div></div>
+      <div class="raf"><div class="el"><span data-t="entries"></span><b><i>🎟️</i><span id="ent" style="font-size:24px;color:var(--lime);letter-spacing:-.5px;text-transform:none">1</span></b></div><button class="adb" id="rafbtn"></button></div>
     </div>
     <div class="chips" id="chips"></div>
     <div class="grid" id="grid"></div>
@@ -147,11 +159,11 @@ const L = {
  en:{hero:'Limited pairs.<br><em>Zero restocks.</em>',next:'Next drop',dropname:'Neon Orbit 02 drops in',d:'Days',h:'Hrs',m:'Min',s:'Sec',shop:'Shop',favs:'Favorites',orders:'My orders',favsT:'Saved pairs',ordersT:'My orders',
   new:'New drops',run:'Running',bb:'Basketball',life:'Lifestyle',left:'Only {n} left',inst:'{n} in stock',sold:'Sold out',story:'The story',size:'Select size (EU)',buy:'Buy with Stars',pick:'Pick your size first',
   paid:'Order confirmed, enjoy the heat',cancel:'Payment not completed',ef:'No saved pairs yet',efp:'Tap the heart on any sneaker to keep it here.',eo:'No orders yet',eop:'Your copped pairs will show up here.',browse:'Browse drops',
-  ships:'Confirmed, ships in 48h',spent:'Stars spent',pairs:'Pairs copped',sz:'Size',ltd:'Limited'},
+  ships:'Confirmed, ships in 48h',spent:'Stars spent',pairs:'Pairs copped',sz:'Size',ltd:'Limited',entries:'Your entries',adbtn:'🎬 Watch an ad: x2 raffle entries',x2on:'✓ x2 entries active',adload:'Loading...',adok:'Entries doubled for this drop',adno:'No ad available right now'},
  fr:{hero:'Paires limitées.<br><em>Zéro restock.</em>',next:'Prochain drop',dropname:'Neon Orbit 02 sort dans',d:'Jours',h:'H',m:'Min',s:'Sec',shop:'Boutique',favs:'Favoris',orders:'Commandes',favsT:'Paires sauvées',ordersT:'Mes commandes',
   new:'Nouveautés',run:'Running',bb:'Basket',life:'Lifestyle',left:'Plus que {n}',inst:'{n} en stock',sold:'Épuisé',story:"L'histoire",size:'Choisis ta taille (EU)',buy:'Acheter en Stars',pick:"Choisis d'abord ta taille",
   paid:'Commande confirmée, profite',cancel:'Paiement non finalisé',ef:'Aucun favori',efp:'Touche le cœur sur une paire pour la garder ici.',eo:'Aucune commande',eop:'Tes paires achetées apparaîtront ici.',browse:'Voir les drops',
-  ships:'Confirmée, expédiée sous 48h',spent:'Stars dépensées',pairs:'Paires achetées',sz:'Taille',ltd:'Limitée'}
+  ships:'Confirmée, expédiée sous 48h',spent:'Stars dépensées',pairs:'Paires achetées',sz:'Taille',ltd:'Limitée',entries:'Tes participations',adbtn:'🎬 Regarde une pub : x2 participations',x2on:'✓ x2 participations actif',adload:'Chargement...',adok:'Participations doublées pour ce drop',adno:'Aucune pub disponible pour le moment'}
 };
 const P = [
  {id:1,c:'new',n:'Volt Phantom 01',pr:450,st:3,col:['#111','#c6ff1a','#f2f2f2','#e9ffd0'],s:{en:'Born in a blacked-out studio in Seoul, the Phantom glows lime under streetlights. Knit upper, carbon plate, 300 pairs worldwide.',fr:'Née dans un studio plongé dans le noir à Séoul, la Phantom brille vert citron sous les lampadaires. Tige en maille, plaque carbone, 300 paires dans le monde.'}},
@@ -169,7 +181,7 @@ const P = [
 ];
 const SIZES=[38,39,40,41,42,43,44,45,46];
 const CATS=['new','run','bb','life'];
-let lang='en',cat='new',favs=[],orders=[],cur=null,size=null,favTimer=null;
+let lang='en',cat='new',favs=[],orders=[],cur=null,size=null,favTimer=null,raffle={drop:0,x2:false},adBusy=false;
 const $=s=>document.querySelector(s);
 const t=k=>(L[lang]&&L[lang][k]!=null?L[lang][k]:L.en[k]);
 const hap=x=>{try{SayApp.haptic(x)}catch(e){}};
@@ -214,7 +226,16 @@ function renderAll(){
  $('#hero').innerHTML=t('hero');
  document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('on',b.dataset.lang===lang));
  document.documentElement.lang=lang;
- renderShop();renderFavs();renderOrders();if(cur)renderSheet();}
+ renderShop();renderFavs();renderOrders();renderRaffle();if(cur)renderSheet();}
+function renderRaffle(){const x2=raffle.drop===target.getTime()&&!!raffle.x2;const el=$('#ent'),b=$('#rafbtn');if(!el||!b)return;
+ const v=String(x2?2:1);if(el.textContent!==v){el.textContent=v;el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump')}
+ if(adBusy)return;b.disabled=x2;b.classList.toggle('done',x2);b.textContent=x2?t('x2on'):t('adbtn');}
+async function watchAd(){const b=$('#rafbtn');if(adBusy||b.disabled)return;adBusy=true;b.disabled=true;b.textContent=t('adload');hap('tap');
+ let ok=false;try{ok=await SayApp.ad()}catch(e){ok=false}
+ adBusy=false;
+ if(ok===true){raffle={drop:target.getTime(),x2:true};try{await SayApp.set('raffle',raffle)}catch(e){}hap('ok');confetti();toast('✓ '+t('adok'))}
+ else{hap('error');toast(t('adno'))}
+ renderRaffle();}
 function renderSheet(){const p=cur,n=stockOf(p),f=favs.includes(p.id);
  $('#sheet').innerHTML=`<div class="hero" style="background:radial-gradient(circle at 50% 45%,#fff,${p.col[3]} 70%)">
  <div class="top"><button class="rb" id="back"><svg viewBox="0 0 24 24" fill="none" stroke="#0b0b0c" stroke-width="2.4" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -254,6 +275,7 @@ async function buy(){const p=cur;if(!p||stockOf(p)<1)return;
   hap('ok');confetti();toast('✓ '+t('paid'));size=null;renderSheet();renderShop();renderFavs();renderOrders();}
  else{hap('error');toast(t('cancel'))}}
 $('#buybtn').addEventListener('click',buy);
+$('#rafbtn').addEventListener('click',watchAd);
 document.addEventListener('click',e=>{const el=e.target.closest('[data-fav],[data-open],[data-tab],[data-cat],[data-size],[data-lang],#back');if(!el)return;
  if(el.id==='back')return closeP();
  if(el.dataset.fav){e.stopPropagation();return toggleFav(+el.dataset.fav,el)}
@@ -264,7 +286,7 @@ document.addEventListener('click',e=>{const el=e.target.closest('[data-fav],[dat
  if(el.dataset.lang){lang=el.dataset.lang;hap('tap');renderAll();try{SayApp.set('lang',lang)}catch(e){}}});
 function nextDrop(){const n=new Date(),d=new Date(n);d.setHours(18,0,0,0);d.setDate(d.getDate()+((6-d.getDay()+7)%7));if(d<=n)d.setDate(d.getDate()+7);return d}
 let target=nextDrop();const pad=x=>String(x).padStart(2,'0');
-function tick(){let ms=target-Date.now();if(ms<=0){target=nextDrop();ms=target-Date.now()}
+function tick(){let ms=target-Date.now();if(ms<=0){target=nextDrop();ms=target-Date.now();renderRaffle()}
  const s=Math.floor(ms/1000);$('#cd-d').textContent=Math.floor(s/86400);$('#cd-h').textContent=pad(Math.floor(s%86400/3600));
  $('#cd-m').textContent=pad(Math.floor(s%3600/60));$('#cd-s').textContent=pad(s%60);}
 tick();setInterval(tick,1000);
@@ -273,6 +295,7 @@ lang=L[tl]?tl:'en';
 renderAll();
 try{const [sl,sf,so]=await Promise.all([SayApp.get('lang'),SayApp.get('favs'),SayApp.get('orders')]);
  if(sl&&L[sl])lang=sl;if(Array.isArray(sf))favs=sf;if(Array.isArray(so))orders=so;}catch(e){}
+try{const sr=await SayApp.get('raffle');if(sr&&typeof sr==='object')raffle=sr;}catch(e){}
 try{const pur=await SayApp.purchases();let changed=false;
  if(Array.isArray(pur))P.forEach(p=>{const bought=pur.filter(x=>x.item==='snk_'+p.id);const have=orders.filter(o=>o.id===p.id).length;
   bought.slice(have).forEach(x=>{orders.push({id:p.id,size:'-',price:x.stars||p.pr,at:x.at?new Date(x.at).getTime()||Date.now():Date.now()});changed=true})});
