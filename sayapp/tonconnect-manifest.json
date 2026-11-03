@@ -1,1 +1,6 @@
-{"url":"https://jeremstyke.github.io/sayapp/","name":"SayApp","iconUrl":"https://jeremstyke.github.io/sayapp/icon-180.png"}
+{
+  "url": "https://jeremstyke.github.io/sayapp/",
+  "name": "SayApp",
+  "iconUrl": "https://jeremstyke.github.io/sayapp-builder/icon.png",
+  "termsOfUseUrl": "https://jeremstyke.github.io/sayapp/terms.html"
+}
