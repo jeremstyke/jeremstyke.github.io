@@ -196,6 +196,10 @@ input.tk:focus{border-color:var(--v)}
 .exc .im{aspect-ratio:4/3;position:relative}
 .exc .im .ic{position:absolute;inset:0;display:grid;place-items:center;font-size:66px;filter:drop-shadow(0 12px 22px rgba(0,0,0,.45))}
 .exc .im .lg{display:block;width:96px;height:96px;max-width:70%;border-radius:24px;object-fit:cover;box-shadow:0 10px 24px rgba(0,0,0,.45)}
+.lgg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+.lgg button{padding:0;border-radius:22px;overflow:hidden;border:2px solid var(--line);aspect-ratio:1;background:var(--card2)}
+.lgg button.on{border-color:#ffd76a;box-shadow:0 0 0 3px rgba(255,215,106,.35)}
+.lgg img{width:100%;height:100%;display:block}
 .exc .im em{position:absolute;left:8px;top:8px;font:700 9.5px Inter,system-ui,sans-serif;letter-spacing:.08em;padding:4px 8px;border-radius:99px;background:rgba(0,0,0,.6);color:#fff;font-style:normal}
 .exc b{padding:10px 12px 0;font:700 15px Sora,Inter,system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .exc .bt{display:flex;flex-direction:column;gap:6px;padding:10px 10px 12px}
@@ -1284,6 +1288,40 @@ input.tk:focus{border-color:var(--v)}
     try { tw.showConfirm(T.undoQ, function (y) { if (y) go(); }); } catch (e) { if (window.confirm(T.undoQ)) go(); }
   }
   // 3 nov 2026 (0h, Jeremy): pick an image, square for the logo, wide for the welcome image, sent as a light JPEG
+  // 3 nov 2026 (10h15, Jeremy): free logo drawn by the AI (3 SVG), the chosen one becomes the bot's photo (as a PNG)
+  var LG = ({"fr": {"btn": "✨ Créer mon logo avec l'IA (gratuit)", "t": "Ton logo, gratuit", "p": "L'IA dessine 3 logos pour ton appli. Touche celui que tu préfères : il devient la photo de ton bot.", "ph": "Une envie ? (couleurs, symbole...) facultatif", "go": "✨ Dessiner 3 logos", "again": "🔄 3 autres logos", "wait": "L'IA dessine tes logos… (environ 30 secondes)", "pick": "Touche un logo pour le mettre sur ton bot", "lim": "Tu as fait tes {n} séries du jour, reviens demain !", "left": "Encore {n} séries aujourd'hui", "set": "Mise en place…"}, "en": {"btn": "✨ Create my logo with AI (free)", "t": "Your logo, free", "p": "The AI draws 3 logos for your app. Tap the one you like: it becomes your bot's photo.", "ph": "Any wish? (colors, symbol...) optional", "go": "✨ Draw 3 logos", "again": "🔄 3 more logos", "wait": "The AI is drawing your logos… (about 30 seconds)", "pick": "Tap a logo to put it on your bot", "lim": "You made your {n} series for today, come back tomorrow!", "left": "{n} more series today", "set": "Setting it up…"}, "es": {"btn": "✨ Crear mi logo con IA (gratis)", "t": "Tu logo, gratis", "p": "La IA dibuja 3 logos para tu app. Toca el que prefieras: será la foto de tu bot.", "ph": "¿Alguna idea? (colores, símbolo...) opcional", "go": "✨ Dibujar 3 logos", "again": "🔄 3 logos más", "wait": "La IA está dibujando tus logos… (unos 30 segundos)", "pick": "Toca un logo para ponerlo en tu bot", "lim": "Ya hiciste tus {n} series de hoy, ¡vuelve mañana!", "left": "{n} series más hoy", "set": "Aplicando…"}, "pt": {"btn": "✨ Criar meu logo com IA (grátis)", "t": "Seu logo, grátis", "p": "A IA desenha 3 logos para o seu app. Toque no que preferir: ele vira a foto do seu bot.", "ph": "Alguma ideia? (cores, símbolo...) opcional", "go": "✨ Desenhar 3 logos", "again": "🔄 Mais 3 logos", "wait": "A IA está desenhando seus logos… (cerca de 30 segundos)", "pick": "Toque em um logo para colocá-lo no seu bot", "lim": "Você já fez suas {n} séries de hoje, volte amanhã!", "left": "Mais {n} séries hoje", "set": "Aplicando…"}, "ru": {"btn": "✨ Создать логотип с ИИ (бесплатно)", "t": "Твой логотип, бесплатно", "p": "ИИ нарисует 3 логотипа для твоего приложения. Нажми на понравившийся: он станет фото твоего бота.", "ph": "Пожелания? (цвета, символ...) необязательно", "go": "✨ Нарисовать 3 логотипа", "again": "🔄 Ещё 3 логотипа", "wait": "ИИ рисует логотипы… (около 30 секунд)", "pick": "Нажми на логотип, чтобы поставить его в бота", "lim": "Ты сделал {n} серий сегодня, возвращайся завтра!", "left": "Ещё {n} серий сегодня", "set": "Устанавливаю…"}, "id": {"btn": "✨ Buat logoku dengan AI (gratis)", "t": "Logomu, gratis", "p": "AI menggambar 3 logo untuk aplikasimu. Ketuk yang kamu suka: itu jadi foto botmu.", "ph": "Ada keinginan? (warna, simbol...) opsional", "go": "✨ Gambar 3 logo", "again": "🔄 3 logo lagi", "wait": "AI sedang menggambar logomu… (sekitar 30 detik)", "pick": "Ketuk logo untuk dipasang di botmu", "lim": "Kamu sudah membuat {n} seri hari ini, kembali besok!", "left": "{n} seri lagi hari ini", "set": "Memasang…"}, "tr": {"btn": "✨ Yapay zekâ ile logomu oluştur (ücretsiz)", "t": "Logon, ücretsiz", "p": "Yapay zekâ uygulaman için 3 logo çizer. Beğendiğine dokun: botunun fotoğrafı olur.", "ph": "Bir isteğin var mı? (renkler, sembol...) isteğe bağlı", "go": "✨ 3 logo çiz", "again": "🔄 3 logo daha", "wait": "Yapay zekâ logolarını çiziyor… (yaklaşık 30 saniye)", "pick": "Botuna koymak için bir logoya dokun", "lim": "Bugünkü {n} serini yaptın, yarın gel!", "left": "Bugün {n} seri daha", "set": "Ayarlanıyor…"}})[lang] || null; if (!LG) LG = ({"btn": "✨ Create my logo with AI (free)", "t": "Your logo, free", "p": "The AI draws 3 logos for your app. Tap the one you like: it becomes your bot's photo.", "ph": "Any wish? (colors, symbol...) optional", "go": "✨ Draw 3 logos", "again": "🔄 3 more logos", "wait": "The AI is drawing your logos… (about 30 seconds)", "pick": "Tap a logo to put it on your bot", "lim": "You made your {n} series for today, come back tomorrow!", "left": "{n} more series today", "set": "Setting it up…"});
+  function svgPng(svg, cb) {
+    var im = new Image();
+    im.onload = function () { try { var c = document.createElement('canvas'); c.width = c.height = 640; var x = c.getContext('2d'); x.fillStyle = '#ffffff'; x.fillRect(0, 0, 640, 640); x.drawImage(im, 0, 0, 640, 640); cb(c.toDataURL('image/png')); } catch (e) { cb(null); } };
+    im.onerror = function () { cb(null); };
+    im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  }
+  function logoSheet(a) {
+    openSheet('<div class="prohead"><div>✨</div><div><h2>' + esc(LG.t) + '</h2><p class="sub" style="margin:0">' + esc(LG.p) + '</p></div></div><input class="xin" id="lgH" maxlength="200" placeholder="' + esc(LG.ph) + '" style="margin-top:14px"><button class="cta" id="lgGo" style="margin-top:10px">' + esc(LG.go) + '</button><p class="xl" id="lgM" style="margin:12px 0 0;text-align:center"></p><div class="lgg" id="lgR"></div>');
+    $('lgGo').onclick = function () {
+      hap(); var g = $('lgGo'); g.disabled = true; $('lgR').innerHTML = ''; $('lgM').textContent = LG.wait;
+      call('logogen', { id: a.id, hint: $('lgH').value.trim() }).then(function (r) {
+        g.disabled = false;
+        if (!r.ok) { hap('err'); $('lgM').textContent = r.error === 'logolimit' ? LG.lim.replace('{n}', r.per || 5) : T.net; if (r.error === 'logolimit') g.disabled = true; return; }
+        hap('ok'); g.textContent = LG.again; $('lgM').textContent = LG.pick + (r.left >= 0 ? ' · ' + LG.left.replace('{n}', r.left) : '');
+        $('lgR').innerHTML = r.svgs.map(function (v, i) { return '<button data-i="' + i + '"><img alt="" src="data:image/svg+xml;charset=utf-8,' + encodeURIComponent(v) + '"></button>'; }).join('');
+        if (!r.left) g.disabled = true;
+        $('lgR').querySelectorAll('button').forEach(function (bt) {
+          bt.onclick = function () {
+            hap(); var all = $('lgR').querySelectorAll('button'); all.forEach(function (x) { x.disabled = true; x.classList.remove('on'); }); bt.classList.add('on'); $('lgM').textContent = LG.set;
+            svgPng(r.svgs[+bt.getAttribute('data-i')], function (png) {
+              if (!png) { all.forEach(function (x) { x.disabled = false; }); hap('err'); $('lgM').textContent = T.net; return; }
+              call('logo', { id: a.id, img: png }).then(function (q) {
+                all.forEach(function (x) { x.disabled = false; });
+                if (!q.ok) { hap('err'); $('lgM').textContent = q.error === 'img' ? T.imBad : T.net; return; }
+                hap('ok'); toast(T.imOk); $('lgM').textContent = T.imOk;
+              });
+            });
+          };
+        });
+      });
+    };
+  }
   function pickImg(square, cb) {
     var f = document.createElement('input'); f.type = 'file'; f.accept = 'image/*';
     f.onchange = function () {
@@ -1521,7 +1559,7 @@ input.tk:focus{border-color:var(--v)}
     openSheet('<div class="mg"><div class="ico" style="background:' + col(a.id) + '">' + esc(t.charAt(0).toUpperCase()) + '</div><div class="an"><h2 style="margin:0">' + esc(t) + '</h2><span>@' + esc(a.bot_username) + '</span></div></div>' +
       '<div class="stat"><div><b id="mgU">…</b><span>' + esc(T.users) + '</span></div><div><b>' + (a.trial ? '🎁' : '⭐') + '</b><span>' + esc(a.trial ? T.trRenT.replace(/^\S+\s/, '') : 'Pro') + '</span></div></div>' +
       '<button class="ghost" id="mgBot">' + esc(T.openMyBot) + '</button><div id="mgTier"></div>' +
-      '<div class="blk"><h3>' + esc(T.imT) + '</h3><p>' + esc(T.imP) + '</p><div class="supx" style="margin-top:10px"><button id="imLogo">' + esc(T.imLogo) + '</button><button id="imWel">' + esc(T.imWel) + '</button></div></div>' +
+      '<div class="blk"><h3>' + esc(T.imT) + '</h3><p>' + esc(T.imP) + '</p><div class="supx" style="margin-top:10px"><button id="imLogo">' + esc(T.imLogo) + '</button><button id="imWel">' + esc(T.imWel) + '</button></div><button class="cta" id="imGen" style="margin-top:10px">' + esc(LG.btn) + '</button></div>' +
       '<div class="blk"><h3>' + esc(T.mtT) + '</h3><p>' + esc(T.mtP) + '</p><input class="xin" id="mtN" maxlength="40" placeholder="' + esc(T.xName) + '"><input class="xin" id="mtD" maxlength="120" placeholder="' + esc(T.xDesc) + '" style="margin-top:8px"><p class="xl" style="margin:12px 0 6px">' + esc(T.mtShort) + '</p><input class="xin" id="mtS" maxlength="85"><p class="xl" style="margin:12px 0 6px">' + esc(T.mtLong) + '</p><textarea class="xin" id="mtL" maxlength="450" style="min-height:90px;resize:vertical"></textarea><p class="xl" style="margin:12px 0 6px">' + esc(T.mtWel) + '</p><textarea class="xin" id="mtW" maxlength="700" style="min-height:80px;resize:vertical"></textarea><p class="note" style="margin:6px 0 0">' + esc(T.mtHint) + '</p><button class="cta" id="mtGo">' + esc(T.mtSave) + '</button></div>' +
       (!a.sub_recurring && a.sub_until ? '<div class="blk"><h3>' + esc(a.trial ? T.trRenT : T.renT) + '</h3><p>' + esc((a.trial ? T.trRenP : T.renP)(new Date(a.sub_until).toLocaleDateString(LOC))) + '</p><button class="cta gold" id="renGo">' + esc(T.renGo(((S.lim && S.lim.price) || 1000).toLocaleString(LOC))) + '</button></div>' : '') +
       '<div class="blk"><h3>' + esc(T.mnT) + '</h3><p>' + esc(T.mnP) + '</p><input class="xin" id="mnAg" inputmode="numeric" maxlength="12" placeholder="' + esc(T.mnAg) + '"><input class="xin" id="mnAgi" inputmode="numeric" maxlength="12" placeholder="' + esc(T.mnAgi) + '" style="margin-top:8px"><input class="xin" id="mnAgx" inputmode="numeric" maxlength="12" placeholder="' + esc(T.mnAgx) + '" style="margin-top:8px"><label class="tg"><input type="checkbox" id="mnOpen"><span>' + esc(T.mnOpen) + '</span></label><button class="cta" id="mnGo">' + esc(T.mnSave) + '</button><button class="ghost" id="mnHow" style="margin-top:8px">' + esc(T.mnHow) + '</button><p style="margin:12px 0 0">' + esc(T.mnBuy) + '</p><p style="margin:14px 0 8px">' + esc(PY.t) + '</p><input class="xin" id="mnPay" type="url" inputmode="url" maxlength="300" placeholder="' + esc(PY.ph) + '"><button class="cta" id="mnPayGo" style="margin-top:8px">' + esc(PY.save) + '</button></div>' +
@@ -1535,6 +1573,7 @@ input.tk:focus{border-color:var(--v)}
     var up = function (kind, btn) { pickImg(kind === 'logo', function (d) { btn.disabled = true; toast(T.imWait); call(kind, { id: a.id, img: d }).then(function (r) { btn.disabled = false; if (!r.ok) { hap('err'); return toast(r.error === 'img' ? T.imBad : T.net); } hap('ok'); toast(T.imOk); btn.textContent = '✅ ' + (kind === 'logo' ? T.imLogo : T.imWel).replace(/^\S+\s/, ''); }); }); };
     $('imLogo').onclick = function () { hap(); up('logo', $('imLogo')); };
     $('imWel').onclick = function () { hap(); up('welcome', $('imWel')); };
+    $('imGen').onclick = function () { hap(); logoSheet(a); };
     $('mnHow').onclick = function () { var u = 'https://jeremstyke.github.io/sayapp/monetize.html' + (lang === 'fr' ? '' : '#en'); try { tw.openLink(u); } catch (e) { window.open(u); } };
     $('mnGo').onclick = function () { $('mnGo').disabled = true; call('ads', { id: a.id, ag: $('mnAg').value, agi: $('mnAgi').value, agx: $('mnAgx').value, open: $('mnOpen').checked, pay: $('mnPay').value.trim() }).then(function (r) { $('mnGo').disabled = false; if (r.ok) { hap('ok'); toast(T.mnOk); } else { hap('err'); toast(T.net); } }); };
     $('mnPayGo').onclick = function () { var v = $('mnPay').value.trim(); if (v && !/^https:\/\/\S{4,}$/.test(v)) { hap('err'); return toast(PY.ph); } $('mnPayGo').disabled = true; call('ads', { id: a.id, ag: $('mnAg').value, agi: $('mnAgi').value, agx: $('mnAgx').value, open: $('mnOpen').checked, pay: v }).then(function (r) { $('mnPayGo').disabled = false; if (r.ok) { hap('ok'); toast(PY.ok); } else { hap('err'); toast(T.net); } }); };
