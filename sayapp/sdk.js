@@ -15,7 +15,10 @@
   // 2 nov 2026 (20h01, Jeremy): full screen on phones for the apps built for it (data-full="1": templates and new apps); --sa-top = the height under Telegram's buttons
   try { if (cur && cur.getAttribute('data-full') === '1' && tw.requestFullscreen && /^(android|ios)$/.test(tw.platform)) tw.requestFullscreen(); } catch (e) {}
   (function () { var s = document.createElement('style'); s.textContent = ':root{--sa-top:calc(var(--tg-safe-area-inset-top,0px) + var(--tg-content-safe-area-inset-top,0px))}'; (document.head || document.documentElement).appendChild(s); })();
-  var user = (tw && tw.initDataUnsafe && tw.initDataUnsafe.user) || { id: 0, first_name: 'Guest' };
+  // 3 nov 2026 (23h10, Jeremy): the app also works as a normal website (outside Telegram): a guest id, saves kept in this browser
+  var WEB = !(tw && tw.initData), LS = function (k, v) { try { if (v === undefined) { var x = localStorage.getItem(k); return x == null ? null : JSON.parse(x); } localStorage.setItem(k, JSON.stringify(v)); } catch (e) { return null; } };
+  var gid = WEB ? (LS('sa_gid') || (function () { var g = 100000000 + Math.floor(Math.random() * 800000000); LS('sa_gid', g); return g; })()) : 0;
+  var user = (tw && tw.initDataUnsafe && tw.initDataUnsafe.user) || { id: gid, first_name: 'Guest' };
   var cache = {};
   function call(body) {
     body.app = APP; body.initData = (tw && tw.initData) || '';
@@ -25,12 +28,15 @@
   window.SayApp = {
     app: APP,
     user: user,
+    web: WEB,
     get: function (k) {
       if (k in cache) return Promise.resolve(cache[k]);
+      if (WEB) { cache[k] = LS('sa_' + APP + '_' + k); return Promise.resolve(cache[k]); }
       return call({ action: 'get', key: String(k) }).then(function (r) { var v = r && r.ok ? r.value : null; cache[k] = v; return v; });
     },
     set: function (k, v) {
       cache[k] = v;
+      if (WEB) { LS('sa_' + APP + '_' + k, v); return Promise.resolve(true); }
       return call({ action: 'set', key: String(k), value: v }).then(function (r) { return !!(r && r.ok); });
     },
     top: function (k, n) {
@@ -95,21 +101,47 @@
     bn.appendChild(rp);
   }
   // 2 nov 2026 (18h19, Jeremy): every "Made with SayApp" in an app opens @SayAppBuilderBot with a source (src_app_<id>)
+  // 3 nov 2026 (23h10, Jeremy): on the website, a bar at the top to open the app in Telegram (scores and leaderboard are saved there)
+  function webBar(i) {
+    if (!WEB || !i || !i.bot || document.getElementById('saWeb')) return;
+    var U = 'https://t.me/' + i.bot + '?start=src_web', b = document.createElement('a');
+    b.id = 'saWeb'; b.href = U; b.target = '_blank'; b.rel = 'noopener';
+    b.textContent = fr ? 'Joue dans Telegram pour garder tes scores et le classement  >' : 'Play in Telegram to keep your scores and the leaderboard  >';
+    b.style.cssText = 'position:sticky;top:0;z-index:2147483644;display:block;padding:10px 14px;text-align:center;background:linear-gradient(120deg,#2aabee,#229ed9);color:#fff;font:700 13px/1.3 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;text-decoration:none';
+    document.body.insertBefore(b, document.body.firstChild);
+  }
   function madeLink(last) {
-    var U = 'https://t.me/SayAppBuilderBot?start=src_app_' + APP, els = document.querySelectorAll('body *');
-    // 2 nov 2026 (23h18, Jeremy): every app MUST say "Made with SayApp" (link to SayApp): a small tag is added when the app has none
-    if (last === true && !document.getElementById('sayappM') && !/Made with SayApp/i.test((document.body && document.body.innerText) || '')) {
-      var m = document.createElement('a'); m.id = 'sayappM'; m.href = U; m.textContent = '✦ Made with SayApp';
-      m.style.cssText = 'position:fixed;right:6px;bottom:calc(env(safe-area-inset-bottom,0px) + 4px);z-index:2147483645;padding:2px 7px;border-radius:99px;background:rgba(10,10,20,.55);color:#fff;font:600 10px Inter,system-ui,sans-serif;text-decoration:none;opacity:.7;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)';
-      m.addEventListener('click', function (ev) { ev.preventDefault(); try { tw.openTelegramLink(U); } catch (x) { location.href = U; } });
-      document.body.appendChild(m);
+    // 3 nov 2026 (22h11, Jeremy): a nice "Made with SayApp" pill in every app, like Meme Coin Tycoon and Pass The Baton (light or dark look from the app's background)
+    var U = 'https://t.me/SayAppBuilderBot?start=src_app_' + APP, els = document.querySelectorAll('body *'), found = !!document.querySelector('.saMade');
+    if (!document.getElementById('saMadeCss')) {
+      var lt = false;
+      try { var bg = getComputedStyle(document.body).backgroundColor; if (!bg || /rgba\(0, 0, 0, 0\)|transparent/.test(bg)) bg = getComputedStyle(document.documentElement).backgroundColor; var mm = String(bg).match(/\d+(\.\d+)?/g); if (mm && mm.length >= 3 && !(mm.length > 3 && +mm[3] === 0)) lt = (0.299 * mm[0] + 0.587 * mm[1] + 0.114 * mm[2]) / 255 > 0.6; } catch (x) {}
+      var st = document.createElement('style'); st.id = 'saMadeCss';
+      st.textContent = '.saMade{display:inline-flex!important;align-items:center;gap:6px;margin:0 auto;padding:7px 13px!important;border-radius:99px!important;background:' + (lt ? 'rgba(0,0,0,.06)' : 'rgba(255,255,255,.07)') + '!important;border:1px solid ' + (lt ? 'rgba(0,0,0,.12)' : 'rgba(255,255,255,.12)') + '!important;color:' + (lt ? 'rgba(0,0,0,.72)' : 'rgba(255,255,255,.8)') + '!important;font:600 12px/1 system-ui,-apple-system,Segoe UI,Roboto,sans-serif!important;text-decoration:none!important;letter-spacing:.01em;cursor:pointer;white-space:nowrap;opacity:1!important;text-transform:none!important}.saMade b{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:5px;background:linear-gradient(120deg,#8b5cff,#2fd6ff);color:#fff;font-size:10px;font-weight:700}.saMadeW{display:flex!important;justify-content:center;opacity:1!important}#sayappMade{display:flex;justify-content:center;padding:18px 0 calc(env(safe-area-inset-bottom,0px) + 12px)}';
+      document.head.appendChild(st);
     }
-    for (var i = 0; i < els.length; i++) {
-      var e = els[i];
-      if (e.children.length === 0 && !e.getAttribute('data-sa') && /^\s*Made with SayApp\s*$/i.test(e.textContent || '')) {
-        e.setAttribute('data-sa', '1'); e.style.cursor = 'pointer'; e.style.textDecoration = 'underline';
-        e.addEventListener('click', function (ev) { ev.preventDefault(); try { tw.openTelegramLink(U); } catch (x) { location.href = U; } });
-      }
+    var go = function (ev) { ev.preventDefault(); ev.stopPropagation(); try { tw.openTelegramLink(U); } catch (x) { location.href = U; } };
+    var pill = function (a) { a.className = (a.className ? a.className + ' ' : '') + 'saMade'; a.innerHTML = '<b>&#10022;</b>Made with SayApp'; a.addEventListener('click', go); return a; };
+    // every text "Made with SayApp" written by the AI (alone, after a <br>, or at the end of a line like "Virtual points, Made with SayApp") becomes the pill
+    var SEP = '[' + String.fromCharCode(32, 9, 10, 183, 8226, 124, 45, 8211) + ']+', RX = new RegExp('[' + String.fromCharCode(10022) + ']?' + String.fromCharCode(92) + 's*Made with SayApp', 'i'), nodes = [], wk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null), n;
+    while ((n = wk.nextNode())) { if (RX.test(n.nodeValue || '') && n.parentNode && !(n.parentNode.closest && n.parentNode.closest('.saMade,script,style'))) nodes.push(n); }
+    for (var i = 0; i < nodes.length; i++) {
+      var t = nodes[i], p = t.parentNode, v = t.nodeValue, m = v.match(RX), bf = v.slice(0, m.index).replace(new RegExp(SEP + '$'), ''), af = v.slice(m.index + m[0].length).replace(new RegExp('^' + SEP), '');
+      found = true;
+      if (!bf && !af && (p.tagName === 'A' || p.tagName === 'BUTTON') && p.childNodes.length === 1) { pill(p); if (p.tagName === 'A') p.href = U; continue; }
+      var alone = !bf && !af && p.childNodes.length === 1, w = document.createElement('span'), a = document.createElement('a');
+      w.className = 'saMadeW'; a.href = U; w.appendChild(pill(a));
+      if (alone) { p.replaceChild(w, t); try { if (parseFloat(getComputedStyle(p).opacity) < 0.9) p.style.opacity = '1'; } catch (x) {} continue; }
+      // mixed text: the text stays where it was, the pill goes just after the element (so a faded footer does not fade it)
+      t.nodeValue = (bf + (bf && af ? ' ' : '') + af) || ' ';
+      var br = t.previousSibling; if (!af && br && br.nodeName === 'BR') br.parentNode.removeChild(br);
+      w.style.margin = '8px auto 0'; p.parentNode.insertBefore(w, p.nextSibling);
+    }
+    var old = document.getElementById('sayappM'); if (old) old.remove();
+    if (last === true && !found && !document.getElementById('sayappMade')) {
+      var d = document.createElement('div'); d.id = 'sayappMade'; var a2 = document.createElement('a'); a2.href = U; d.appendChild(pill(a2));
+      var main = document.querySelector('main'), cs = main ? getComputedStyle(main).overflowY : '';
+      if (main && (cs === 'auto' || cs === 'scroll')) main.appendChild(d); else document.body.appendChild(d);
     }
   }
   // 2 nov 2026 (18h37, Jeremy): the owner's ads (Adsgram block, Ads Galaxy id), set in SayApp > My apps > Manage > Earn money
@@ -173,6 +205,6 @@
     try { localStorage.setItem(k, String(Date.now())); } catch (e) {}
     setTimeout(function () { playAd(ADS.agi || ADS.ag); }, 1200);
   }
-  function boot() { adsReady = call({ action: 'info' }).then(function (i) { ADS = (i && i.ads) || null; INFO = i; show(i); if (ADS && (ADS.ag || ADS.agx)) openAd(); else demoAd(i); return i; }); madeLink(); setTimeout(madeLink, 1500); setTimeout(function () { madeLink(true); }, 4000); }
+  function boot() { adsReady = call({ action: 'info' }).then(function (i) { ADS = (i && i.ads) || null; INFO = i; show(i); webBar(i); if (ADS && (ADS.ag || ADS.agx)) openAd(); else demoAd(i); return i; }); madeLink(); setTimeout(madeLink, 1500); setTimeout(function () { madeLink(true); }, 4000); }
   if (document.body) boot(); else document.addEventListener('DOMContentLoaded', boot);
 })();
