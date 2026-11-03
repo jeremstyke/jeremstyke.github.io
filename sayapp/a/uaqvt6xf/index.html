@@ -1,4 +1,4 @@
-<!-- sayapp uaqvt6xf v1 -->
+<!-- sayapp uaqvt6xf v2 -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -41,8 +41,10 @@ svg{display:block}
 .badge{display:inline-block;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:700;background:rgba(46,242,160,.15);color:var(--acc)}
 .bar{height:8px;border-radius:9px;background:rgba(255,255,255,.08);overflow:hidden;margin:8px 0}
 .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--main),var(--acc));border-radius:9px;transition:width .4s}
-input{width:100%;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:14px;padding:14px;color:#fff;font:600 15px 'Sora',sans-serif;outline:none;margin-bottom:10px}
-input:focus{border-color:var(--main)}
+input,select{width:100%;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:14px;padding:14px;color:#fff;font:600 15px 'Sora',sans-serif;outline:none;margin-bottom:10px;-webkit-appearance:none;appearance:none}
+select option{background:#141628;color:#fff}
+input:focus,select:focus{border-color:var(--main)}
+.code{font-size:24px;font-weight:800;letter-spacing:.08em;text-align:center;padding:12px;border-radius:14px;background:rgba(139,92,255,.12);border:1px dashed rgba(139,92,255,.6);margin:10px 0}
 nav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));display:flex;background:rgba(20,22,40,.92);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:24px;padding:6px;box-shadow:0 10px 30px rgba(0,0,0,.5);z-index:20}
 nav button{flex:1;background:none;border:0;color:var(--mut);padding:8px 0;border-radius:18px;font:600 11px 'Sora',sans-serif;cursor:pointer;transition:all .2s}
 nav button span{display:block;font-size:20px;transition:transform .2s}
@@ -94,7 +96,7 @@ const NAMES=['Budi','Sari','Dimas','Rina','Agus','Wulan','Fajar','Putri','Bayu',
 const fmt=n=>Math.round(n).toLocaleString('id-ID');
 const pf=p=>p<1?p.toFixed(4):p<100?p.toFixed(2):fmt(p);
 const mmss=s=>{s=Math.ceil(s/1000);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
-const def=()=>({cash:10000,hold:{},px:{},custom:null,clan:null,ads:{day:DAY(),n:0,last:0,boostEnd:0,boostN:0,login:'',clanLogin:''},streak:0,lastLogin:'',lastTs:Date.now(),evt:0,donated:0});
+const def=()=>({cash:10000,hold:{},px:{},custom:null,clan:null,ads:{day:DAY(),n:0,last:0,boostEnd:0,boostN:0,login:'',clanLogin:''},streak:0,lastLogin:'',lastTs:Date.now(),evt:0,donated:0,ms:{},refBy:'',refPaid:0,psub:0,seenReq:0});
 let S=def(),tab='pasar',sel=null,pct=.5,dirty=false,busy=false;
 try{const o=await SayApp.get('state');if(o){S=Object.assign(def(),o);S.ads=Object.assign(def().ads,o.ads||{})}}catch(e){}
 const all=()=>S.custom?COINS.concat([S.custom]):COINS;
@@ -150,9 +152,48 @@ async function loadLB(){save();let r=[];try{r=await SayApp.top('worth',20)||[]}c
 const el=$('#lb');if(!el||tab!=='rank')return;
 if(!r.length){el.innerHTML='<div class="card" style="text-align:center"><div style="font-size:40px">🏜️</div><h3>Belum ada peringkat</h3><div class="mini">Mulai trading, kamu bisa jadi yang pertama!</div></div>';return}
 el.innerHTML=r.map((x,i)=>`<div class="rk ${x.me?'me':''}"><b class="n">${['🥇','🥈','🥉'][i]||i+1}</b><div class="grow"><b>${esc(x.name||'Anon')}${x.me?' (kamu)':''}</b></div><b>${fmt(x.value)} 🪙</b></div>`).join('')}
+/* misi, referral, partner */
+// Misi yang sudah lolos pengecekan admin. Format: {id:'m1',type:'channel'|'group'|'app',title:'Follow Info Cuan',link:'https://t.me/...',reward:1500}
+const MISSIONS=[];
+// Admin app: username Telegram (tanpa @) dan/atau ID Telegram pemilik app
+const ADMIN_USERS=['hellboardding'],ADMIN_IDS=[];
+const APP_LINK=''; // link mini app, mis. 'https://t.me/NamaBot/app' agar link undangan otomatis
+const ME=(SayApp&&SayApp.user)||{};
+const isAdmin=ADMIN_USERS.includes(String(ME.username||'').toLowerCase())||ADMIN_IDS.includes(ME.id);
+const MI={channel:'📢',group:'👥',app:'📱'},PEND={};
+V.misi=()=>{const code=ME.id?String(ME.id):'';let h=`<h2>🎯 Misi</h2>`;
+if(isAdmin)h+=`<div class="card" style="border-color:rgba(46,242,160,.5)"><div class="lbl">Panel Admin</div><h3 style="margin:4px 0">🔔 Pengajuan partner</h3><div class="mini" style="margin-bottom:10px">Detail link (tujuan misi dan bukti promosi) dikirim ke bot pemilik app. Misi yang lolos pengecekan ditambahkan ke daftar misi.</div><div id="adm" class="mini">Memuat pengajuan...</div></div>`;
+h+=MISSIONS.length?MISSIONS.map(m=>{const d=S.ms[m.id],p=PEND[m.id];let b;
+if(d)b=`<span class="badge">Selesai ✓</span>`;else if(p&&Date.now()<p)b=`<button class="btn s" disabled>Cek ${cd(p)}</button>`;else if(p)b=`<button class="btn s g" onclick="claimM('${m.id}')">Klaim</button>`;else b=`<button class="btn s" onclick="goM('${m.id}')">Mulai</button>`;
+return `<div class="card row"><div class="em">${MI[m.type]||'⭐'}</div><div class="grow"><h3>${esc(m.title)}</h3><div class="mini">+${fmt(m.reward)} 🪙 · cek otomatis</div></div>${b}</div>`}).join(''):`<div class="card" style="text-align:center"><div style="font-size:36px">🛰️</div><h3>Belum ada misi aktif</h3><div class="mini">Misi partner yang lolos pengecekan admin akan muncul di sini.</div></div>`;
+h+=`<div class="card"><div class="lbl">Undang teman</div><h3 style="margin:4px 0">👥 +1.000 🪙 per teman</h3><div class="mini">Teman masuk lewat linkmu atau memasukkan kode undanganmu.</div>${code?`<div class="code">${code}</div><div class="row" style="gap:8px"><button class="btn s" style="flex:1" onclick="shareRef()">📤 Bagikan</button><button class="btn s g" style="flex:1" onclick="copyRef()">📋 Salin kode</button></div>`:`<div class="mini" style="margin-top:10px">Buka app dari Telegram untuk mendapat kode.</div>`}<div class="mini" style="margin-top:12px">Teman diundang: <b id="refn">${S.refPaid}</b> · total ${fmt(S.refPaid*1000)} 🪙</div><div id="refl"></div>
+${!S.refBy&&code?`<div class="lbl" style="margin:14px 0 6px">Punya kode undangan?</div><input id="rc" inputmode="numeric" maxlength="15" placeholder="Masukkan kode teman"><button class="btn s" style="width:100%" onclick="useCode()">Pakai kode</button>`:''}</div>`;
+h+=`<div class="card" style="border-color:rgba(139,92,255,.5)"><div class="lbl">Partner</div><h3 style="margin:4px 0">🤝 Pasang misimu di sini</h3><div class="mini" style="margin-bottom:12px">Gratis, dengan timbal balik: promosikan MemeTycoon di grup, channel atau mini app milikmu. Misimu tampil setelah dicek admin.</div>${S.psub?`<div class="badge" style="margin-bottom:10px">⏳ Pengajuan terkirim ${new Date(S.psub).toLocaleDateString('id-ID')}, menunggu admin</div>`:''}<button class="btn" onclick="partnerSheet()">${S.psub?'Kirim pengajuan baru':'Ajukan Misi Partner'}</button></div>`;
+return h};
+window.goM=id=>{const m=MISSIONS.find(x=>x.id===id);if(!m)return;SayApp.haptic('tap');try{/^https:\/\/t\.me\//.test(m.link)?Telegram.WebApp.openTelegramLink(m.link):Telegram.WebApp.openLink(m.link)}catch(e){window.open(m.link,'_blank')}PEND[id]=Date.now()+10000;render()};
+window.claimM=id=>{const m=MISSIONS.find(x=>x.id===id);if(!m||S.ms[id]||!PEND[id]||Date.now()<PEND[id])return;S.ms[id]=1;S.cash+=m.reward;mark();head();SayApp.haptic('ok');pop('+'+fmt(m.reward)+' 🪙');toast('Misi selesai ✓');render()};
+async function applyRef(c){S.refBy=c;mark();try{await SayApp.set('ref_'+c,1)}catch(e){}}
+window.useCode=async()=>{const v=($('#rc').value||'').trim();if(!/^\d{3,15}$/.test(v)||v===String(ME.id)){SayApp.haptic('error');return toast('Kode tidak valid')}await applyRef(v);SayApp.haptic('ok');toast('Kode diterapkan! Temanmu dapat +1.000 🪙');render()};
+window.shareRef=()=>{const link=APP_LINK?APP_LINK+'?startapp=ref_'+ME.id:'',txt='Ayo main MemeTycoon, trading koin meme virtual! Kode undanganku: '+ME.id;
+const u='https://t.me/share/url?url='+encodeURIComponent(link||txt)+(link?'&text='+encodeURIComponent(txt):'');SayApp.haptic('tap');try{Telegram.WebApp.openTelegramLink(u)}catch(e){copyRef()}};
+window.copyRef=()=>{try{navigator.clipboard.writeText(String(ME.id));toast('Kode disalin 📋')}catch(e){toast('Kode: '+ME.id)}SayApp.haptic('tap')};
+async function loadRef(){if(!ME.id)return;let r=[];try{r=await SayApp.top('ref_'+ME.id,200)||[]}catch(e){}const f=r.filter(x=>!x.me&&x.value>0);
+if(f.length>S.refPaid){const k=f.length-S.refPaid,g=k*1000;S.cash+=g;S.refPaid=f.length;mark();head();SayApp.haptic('ok');pop('+'+fmt(g)+' 🪙');toast('🎉 '+k+' teman baru bergabung!')}
+const n=$('#refn');if(n)n.textContent=S.refPaid;const el=$('#refl');if(el&&f.length)el.innerHTML='<div style="margin-top:10px">'+f.slice(0,10).map(x=>`<div class="rk"><b class="n">🙂</b><div class="grow"><b>${esc(x.name||'Teman')}</b></div><span class="up">+1.000</span></div>`).join('')+'</div>'}
+async function loadAdm(){let r=[];try{r=await SayApp.top('partner_req',50)||[]}catch(e){}const old=S.seenReq,nb=r.filter(x=>x.value>old).length;
+if(nb){S.seenReq=r.reduce((a,x)=>Math.max(a,x.value||0),0);mark();SayApp.haptic('ok');toast('🔔 '+nb+' pengajuan partner baru!')}
+const el=$('#adm');if(!el)return;el.innerHTML=r.length?r.map(x=>`<div class="rk"><b class="n">📝</b><div class="grow"><b>${esc(x.name||'Anon')}</b><div class="mini">${new Date(x.value*1000).toLocaleString('id-ID')}</div></div>${x.value>old?'<span class="badge">baru</span>':''}</div>`).join(''):'Belum ada pengajuan partner.'}
+window.partnerSheet=()=>sh(`<h3>🤝 Ajukan Misi Partner</h3><div class="mini" style="margin:6px 0 14px">Syarat: promosikan MemeTycoon di grup, channel atau mini app milikmu, lalu kirim link buktinya. Misimu tampil setelah dicek admin.</div><div class="lbl" style="margin-bottom:6px">Jenis misi</div><select id="pk"><option value="channel">📢 Follow channel</option><option value="group">👥 Join grup</option><option value="app">📱 Buka mini app</option></select><input id="pn" maxlength="30" placeholder="Nama proyek, mis. Info Cuan ID"><input id="pl" placeholder="Link tujuan misi (https://t.me/...)"><div class="lbl" style="margin:4px 0 6px">Konfirmasi promosi</div><input id="pp" placeholder="Link postingan di grup/channel atau link mini app"><button class="btn" onclick="sendPartner()">Kirim untuk dicek</button>`);
+window.sendPartner=async()=>{if(busy)return;const k=$('#pk').value,n=$('#pn').value.trim(),l=$('#pl').value.trim(),p=$('#pp').value.trim(),ok=u=>/^https?:\/\/\S+\.\S+/.test(u);
+if(n.length<3){SayApp.haptic('error');return toast('Nama proyek minimal 3 huruf')}if(!ok(l)||!ok(p)){SayApp.haptic('error');return toast('Isi link yang valid (https://...)')}
+busy=true;try{await SayApp.submit({jenis:'🔔 Pengajuan misi partner baru',tipe:k,nama:n,link_misi:l,bukti_promosi:p,pengirim:'@'+(ME.username||'-'),nama_pengguna:ME.first_name||'',id:ME.id||''});await SayApp.set('partner_req',Math.floor(Date.now()/1000))}catch(e){busy=false;SayApp.haptic('error');return toast('Gagal mengirim, coba lagi')}
+busy=false;S.psub=Date.now();mark();closeSheet();SayApp.haptic('ok');pop('📨 Terkirim!','#8b5cff');toast('Terkirim! Admin akan mengecek promosimu');render()};
+async function refInit(){let sp='';try{sp=Telegram.WebApp.initDataUnsafe.start_param||''}catch(e){}
+if(!S.refBy&&ME.id&&/^ref_\d+$/.test(sp)&&sp.slice(4)!==String(ME.id)){await applyRef(sp.slice(4));toast('Kamu bergabung lewat undangan teman 🎉')}
+loadRef();if(isAdmin)loadAdm()}
 function render(){const v=$('#view');const y=scrollY;v.innerHTML=V[tab]();if(render.t!==tab){v.classList.remove('in');void v.offsetWidth;v.classList.add('in');render.t=tab}scrollTo(0,y);
-$('#nav').innerHTML=[['pasar','📈','Pasar'],['klan','🛡️','Klan'],['bonus','🎁','Bonus'],['rank','🏆','Peringkat']].map(t=>`<button class="${tab===t[0]?'on':''}" onclick="go('${t[0]}')"><span>${t[1]}</span>${t[2]}</button>`).join('');
-if(tab==='rank')loadLB()}
+$('#nav').innerHTML=[['pasar','📈','Pasar'],['klan','🛡️','Klan'],['bonus','🎁','Bonus'],['misi','🎯','Misi'],['rank','🏆','Peringkat']].map(t=>`<button class="${tab===t[0]?'on':''}" onclick="go('${t[0]}')"><span>${t[1]}</span>${t[2]}</button>`).join('');
+if(tab==='rank')loadLB();if(tab==='misi'){loadRef();if(isAdmin)loadAdm()}}
 window.go=t=>{tab=t;SayApp.haptic('tap');scrollTo(0,0);render()};
 /* sheet */
 const sh=h=>{$('#sb').innerHTML=h;$('#sheet').classList.add('show')};
@@ -193,6 +234,7 @@ window.adLogin=async()=>{if(S.ads.login===DAY())return;if(!await watch())return;
 window.adClan=async()=>{if(!S.clan||S.ads.clanLogin===DAY())return;if(!await watch())return;const g=1500+S.clan.members.length*100;S.clan.treasury+=g;S.ads.clanLogin=DAY();mark();SayApp.haptic('ok');pop('+'+fmt(g)+' kas klan','#8b5cff');render()};
 try{$('#hello').textContent='Halo, '+(SayApp.user&&SayApp.user.first_name||'Trader')}catch(e){}
 render();head();mark();
+refInit();
 });
 </script>
 </body>
