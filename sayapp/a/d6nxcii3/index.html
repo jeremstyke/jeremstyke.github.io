@@ -1,4 +1,4 @@
-<!-- sayapp d6nxcii3 v2 -->
+<!-- sayapp d6nxcii3 v3 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -157,13 +157,13 @@ foot,.foot{display:block;text-align:center;font-size:11px;color:var(--mute);marg
 window.addEventListener('load', async () => {
 const L = {
  en:{hero:'Limited pairs.<br><em>Zero restocks.</em>',next:'Next drop',dropname:'Neon Orbit 02 drops in',d:'Days',h:'Hrs',m:'Min',s:'Sec',shop:'Shop',favs:'Favorites',orders:'My orders',favsT:'Saved pairs',ordersT:'My orders',
-  new:'New drops',run:'Running',bb:'Basketball',life:'Lifestyle',left:'Only {n} left',inst:'{n} in stock',sold:'Sold out',story:'The story',size:'Select size (EU)',buy:'Buy with Stars',pick:'Pick your size first',
-  paid:'Order confirmed, enjoy the heat',cancel:'Payment not completed',ef:'No saved pairs yet',efp:'Tap the heart on any sneaker to keep it here.',eo:'No orders yet',eop:'Your copped pairs will show up here.',browse:'Browse drops',
-  ships:'Confirmed, ships in 48h',spent:'Stars spent',pairs:'Pairs copped',sz:'Size',ltd:'Limited',entries:'Your entries',adbtn:'🎬 Watch an ad: x2 raffle entries',x2on:'✓ x2 entries active',adload:'Loading...',adok:'Entries doubled for this drop',adno:'No ad available right now'},
+  new:'New drops',run:'Running',bb:'Basketball',life:'Lifestyle',left:'Only {n} left',inst:'{n} in stock',sold:'Sold out',story:'The story',size:'Select size (EU)',buy:'Pay',pick:'Pick your size first',
+  paid:'Order sent, complete your payment',cancel:'Payment not completed',ef:'No saved pairs yet',efp:'Tap the heart on any sneaker to keep it here.',eo:'No orders yet',eop:'Your copped pairs will show up here.',browse:'Browse drops',
+  ships:'Order received, ships in 48h',spent:'Total spent',pairs:'Pairs copped',sz:'Size',ltd:'Limited',entries:'Your entries',adbtn:'🎬 Watch an ad: x2 raffle entries',x2on:'✓ x2 entries active',adload:'Loading...',adok:'Entries doubled for this drop',adno:'No ad available right now'},
  fr:{hero:'Paires limitées.<br><em>Zéro restock.</em>',next:'Prochain drop',dropname:'Neon Orbit 02 sort dans',d:'Jours',h:'H',m:'Min',s:'Sec',shop:'Boutique',favs:'Favoris',orders:'Commandes',favsT:'Paires sauvées',ordersT:'Mes commandes',
-  new:'Nouveautés',run:'Running',bb:'Basket',life:'Lifestyle',left:'Plus que {n}',inst:'{n} en stock',sold:'Épuisé',story:"L'histoire",size:'Choisis ta taille (EU)',buy:'Acheter en Stars',pick:"Choisis d'abord ta taille",
-  paid:'Commande confirmée, profite',cancel:'Paiement non finalisé',ef:'Aucun favori',efp:'Touche le cœur sur une paire pour la garder ici.',eo:'Aucune commande',eop:'Tes paires achetées apparaîtront ici.',browse:'Voir les drops',
-  ships:'Confirmée, expédiée sous 48h',spent:'Stars dépensées',pairs:'Paires achetées',sz:'Taille',ltd:'Limitée',entries:'Tes participations',adbtn:'🎬 Regarde une pub : x2 participations',x2on:'✓ x2 participations actif',adload:'Chargement...',adok:'Participations doublées pour ce drop',adno:'Aucune pub disponible pour le moment'}
+  new:'Nouveautés',run:'Running',bb:'Basket',life:'Lifestyle',left:'Plus que {n}',inst:'{n} en stock',sold:'Épuisé',story:"L'histoire",size:'Choisis ta taille (EU)',buy:'Payer',pick:"Choisis d'abord ta taille",
+  paid:'Commande envoyée, finalise ton paiement',cancel:'Paiement non finalisé',ef:'Aucun favori',efp:'Touche le cœur sur une paire pour la garder ici.',eo:'Aucune commande',eop:'Tes paires achetées apparaîtront ici.',browse:'Voir les drops',
+  ships:'Commande reçue, expédiée sous 48h',spent:'Total dépensé',pairs:'Paires achetées',sz:'Taille',ltd:'Limitée',entries:'Tes participations',adbtn:'🎬 Regarde une pub : x2 participations',x2on:'✓ x2 participations actif',adload:'Chargement...',adok:'Participations doublées pour ce drop',adno:'Aucune pub disponible pour le moment'}
 };
 const P = [
  {id:1,c:'new',n:'Volt Phantom 01',pr:450,st:3,col:['#111','#c6ff1a','#f2f2f2','#e9ffd0'],s:{en:'Born in a blacked-out studio in Seoul, the Phantom glows lime under streetlights. Knit upper, carbon plate, 300 pairs worldwide.',fr:'Née dans un studio plongé dans le noir à Séoul, la Phantom brille vert citron sous les lampadaires. Tige en maille, plaque carbone, 300 paires dans le monde.'}},
@@ -180,6 +180,8 @@ const P = [
  {id:12,c:'life',n:'Metro Classic',pr:260,st:10,col:['#0b0b0c','#ffffff','#ffffff','#e8e8e8'],s:{en:'Black and white, no compromise. A modern take on the subway icon, cushioned for 20k steps a day.',fr:'Noir et blanc, sans compromis. Une version moderne de l’icône du métro, amortie pour 20 000 pas par jour.'}}
 ];
 const SIZES=[38,39,40,41,42,43,44,45,46];
+const EUR={1:219,2:189,3:249,4:169,5:159,6:179,7:229,8:209,9:219,10:139,11:149,12:129};
+const eur=p=>(EUR[p.id]||0)+' EUR';
 const CATS=['new','run','bb','life'];
 let lang='en',cat='new',favs=[],orders=[],cur=null,size=null,favTimer=null,raffle={drop:0,x2:false},adBusy=false;
 const $=s=>document.querySelector(s);
@@ -202,7 +204,7 @@ function card(p,i,big){const n=stockOf(p),f=favs.includes(p.id);
  <div class="pic" style="background:radial-gradient(circle at 50% 40%,#fff,${p.col[3]} 70%)">
  ${p.st<=3?`<span class="tagp">${t('ltd')}</span>`:''}
  <button class="heart${f?' on':''}" data-fav="${p.id}">${heartSvg}</button>${shoe(p)}</div>
- <div class="ci"><div class="n">${p.n}</div><div class="r"><span class="price">⭐ ${p.pr}</span>
+ <div class="ci"><div class="n">${p.n}</div><div class="r"><span class="price">${eur(p)}</span>
  ${n===0?`<span class="low">${t('sold')}</span>`:n<=5?`<span class="low">${t('left').replace('{n}',n)}</span>`:`<span class="ok">${t('inst').replace('{n}',n)}</span>`}</div></div></div>`}
 function renderShop(){
  $('#chips').innerHTML=CATS.map(c=>`<button class="chip${c===cat?' on':''}" data-cat="${c}">${t(c)}</button>`).join('');
@@ -213,11 +215,11 @@ function renderFavs(){const list=P.filter(p=>favs.includes(p.id));
  `<div class="empty"><div class="e">🤍</div><h3>${t('ef')}</h3><p>${t('efp')}</p><button class="btn" data-tab="shop">${t('browse')}</button></div>`;}
 function renderOrders(){
  if(!orders.length){$('#olist').innerHTML=`<div class="empty"><div class="e">📦</div><h3>${t('eo')}</h3><p>${t('eop')}</p><button class="btn" data-tab="shop">${t('browse')}</button></div>`;return}
- const spent=orders.reduce((s,o)=>s+(o.price||0),0);
- $('#olist').innerHTML=`<div class="stats"><div class="stat"><span class="lbl">${t('pairs')}</span><b class="num" data-v="${orders.length}">0</b></div><div class="stat"><span class="lbl">${t('spent')}</span><b class="num" data-v="${spent}">0</b></div></div>`+
+ const spent=orders.reduce((s,o)=>s+(EUR[o.id]||0),0);
+ $('#olist').innerHTML=`<div class="stats"><div class="stat"><span class="lbl">${t('pairs')}</span><b class="num" data-v="${orders.length}">0</b></div><div class="stat"><span class="lbl">${t('spent')}</span><b><span class="num" data-v="${spent}">0</span> EUR</b></div></div>`+
  orders.slice().reverse().map((o,i)=>{const p=P.find(x=>x.id===o.id);if(!p)return'';
  return `<div class="order" data-open="${p.id}" style="animation-delay:${i*50}ms"><div class="pic" style="background:${p.col[3]}">${shoe(p)}</div>
- <div style="min-width:0"><div class="n">${p.n}</div><div class="m">${t('sz')} EU ${o.size} · ⭐ ${o.price} · ${new Date(o.at).toLocaleDateString(lang==='fr'?'fr-FR':'en-GB',{day:'numeric',month:'short'})}</div>
+ <div style="min-width:0"><div class="n">${p.n}</div><div class="m">${t('sz')} EU ${o.size} · ${EUR[o.id]||o.price} EUR · ${new Date(o.at).toLocaleDateString(lang==='fr'?'fr-FR':'en-GB',{day:'numeric',month:'short'})}</div>
  <span class="st">✓ ${t('ships')}</span></div></div>`}).join('');
  document.querySelectorAll('.num').forEach(el=>animNum(el,+el.dataset.v));}
 function animNum(el,to){const t0=performance.now();const f=n=>{const k=Math.min(1,(n-t0)/700);el.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
@@ -241,12 +243,12 @@ function renderSheet(){const p=cur,n=stockOf(p),f=favs.includes(p.id);
  <div class="top"><button class="rb" id="back"><svg viewBox="0 0 24 24" fill="none" stroke="#0b0b0c" stroke-width="2.4" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button>
  <button class="rb${f?' on':''}" data-fav="${p.id}">${heartSvg}</button></div>${shoe(p,'shoe')}</div>
  <div class="body"><span class="lbl">${t(p.c)}</span><h2>${p.n}</h2>
- <div class="row"><span class="bigp">⭐ ${p.pr} Stars</span>
+ <div class="row"><span class="bigp">${eur(p)}</span>
  <span class="stock${n>5?' calm':''}">${n>0&&n<=5?'<span class="dot"></span>':''}${n===0?t('sold'):n<=5?t('left').replace('{n}',n):t('inst').replace('{n}',n)}</span></div>
  <div style="height:20px"></div><span class="lbl">${t('story')}</span><p class="story">${p.s[lang]||p.s.en}</p>
  <span class="lbl">${t('size')}</span><div class="sizes" id="sizes">${SIZES.map(s=>`<button class="sz${s===size?' on':''}" data-size="${s}" ${soldSize(p,s)||n===0?'disabled':''}>${s}</button>`).join('')}</div>
  <span class="foot">Made with SayApp</span></div>`;
- const bb=$('#buybtn');bb.textContent=n===0?t('sold'):`${t('buy')} · ⭐ ${p.pr}`;bb.disabled=n===0;}
+ const bb=$('#buybtn');bb.textContent=n===0?t('sold'):`${t('buy')} ${eur(p)}`;bb.disabled=n===0;}
 const TG=window.Telegram&&Telegram.WebApp;
 function openP(id){cur=P.find(p=>p.id===id);size=null;renderSheet();$('#sheet').scrollTop=0;
  $('#sheet').classList.add('on');$('#buybar').classList.add('on');hap('tap');
@@ -268,10 +270,11 @@ function toggleFav(id,btn){const i=favs.indexOf(id);if(i>=0)favs.splice(i,1);els
  renderFavs();clearTimeout(favTimer);favTimer=setTimeout(()=>{try{SayApp.set('favs',favs)}catch(e){}},1500);}
 async function buy(){const p=cur;if(!p||stockOf(p)<1)return;
  if(!size){hap('error');toast(t('pick'));const g=$('#sizes');g.classList.remove('shake');void g.offsetWidth;g.classList.add('shake');return}
- const bb=$('#buybtn');bb.disabled=true;let ok=false;
- try{ok=await SayApp.buy('snk_'+p.id,p.n+' - EU '+size,p.pr)}catch(e){ok=false}
+ const bb=$('#buybtn');bb.disabled=true;let ok=true;const label=p.n+' - EU '+size,amount=eur(p);
+ try{const r=await SayApp.pay(label,amount);if(r===false)ok=false}catch(e){ok=false}
  bb.disabled=false;
- if(ok){orders.push({id:p.id,size,price:p.pr,at:Date.now()});try{await SayApp.set('orders',orders)}catch(e){}
+ if(ok){try{await SayApp.submit({type:'order',product:p.n,size:'EU '+size,price:amount,user:(SayApp.user&&SayApp.user.first_name)||'',userId:(SayApp.user&&SayApp.user.id)||''})}catch(e){}
+  orders.push({id:p.id,size,price:EUR[p.id],at:Date.now()});try{await SayApp.set('orders',orders)}catch(e){}
   hap('ok');confetti();toast('✓ '+t('paid'));size=null;renderSheet();renderShop();renderFavs();renderOrders();}
  else{hap('error');toast(t('cancel'))}}
 $('#buybtn').addEventListener('click',buy);
