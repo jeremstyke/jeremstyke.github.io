@@ -1,4 +1,4 @@
-<!-- sayapp 5htgziz2 v1 -->
+<!-- sayapp 5htgziz2 v2 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -89,6 +89,16 @@ nav button.on span{transform:scale(1.12)}
 .dot{position:absolute;top:5px;right:calc(50% - 18px);width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);display:none}
 .toast{position:fixed;left:50%;top:calc(var(--sa-top,0px) + 64px);transform:translate(-50%,-20px);opacity:0;z-index:60;background:linear-gradient(135deg,#4a2c12,#2c1a0e);border:1px solid var(--gold);color:var(--txt);padding:12px 16px;border-radius:16px;font-weight:600;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.5);transition:.3s;width:max-content;max-width:88vw;text-align:center;pointer-events:none}
 .toast.on{opacity:1;transform:translate(-50%,0)}
+.adrow{display:flex;justify-content:center;align-items:center;min-height:46px;margin:-8px 0 12px}
+.adb{border:1px solid rgba(255,197,49,.55);cursor:pointer;font:800 15px Outfit,sans-serif;color:var(--gold3);background:linear-gradient(180deg,rgba(90,53,23,.95),rgba(44,26,14,.95));border-radius:999px;padding:11px 20px;display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 18px rgba(0,0,0,.4),0 0 18px rgba(255,197,49,.25),inset 0 1px 0 rgba(255,230,160,.2);transition:transform .15s,opacity .2s;position:relative;overflow:hidden}
+.adb:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,240,180,.28) 50%,transparent 70%);transform:translateX(-100%);animation:shine 2.8s ease-in-out infinite;pointer-events:none}
+@keyframes shine{60%,100%{transform:translateX(100%)}}
+.adb:active{transform:scale(.95)}.adb:disabled{opacity:.55}
+.adb.ref{display:none;width:100%;justify-content:center;margin-top:10px;color:#3a1d00;background:linear-gradient(180deg,var(--gold3),var(--gold) 50%,var(--gold2));border:0;border-radius:14px;box-shadow:0 4px 0 #A85A00,0 0 22px rgba(255,159,28,.45)}
+.badge{display:none;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;font-weight:800;font-size:15px;color:#3a1d00;background:linear-gradient(135deg,var(--gold3),var(--gold),var(--accent));box-shadow:0 0 0 2px rgba(255,229,138,.4),0 0 24px rgba(255,159,28,.7);animation:bglow 1.4s ease-in-out infinite;font-variant-numeric:tabular-nums}
+.badge.on{display:inline-flex}
+@keyframes bglow{50%{box-shadow:0 0 0 4px rgba(255,229,138,.25),0 0 40px rgba(255,107,61,.9);transform:scale(1.04)}}
+.stage.boost .glow{background:radial-gradient(circle,rgba(255,150,40,.85),rgba(255,107,61,.3) 50%,transparent 70%);animation-duration:1.2s}
 </style>
 </head>
 <body>
@@ -120,7 +130,8 @@ nav button.on span{transform:scale(1.12)}
         <path d="M148 64 l4 -10 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4z" fill="#fff" opacity=".9"/>
       </svg></div>
     </div>
-    <div class="card en"><div class="row"><b>⚡ <span id="enTxt">0/0</span></b><small class="lbl" id="enRate"></small></div><div class="bar"><i id="enBar"></i></div></div>
+    <div class="adrow"><button class="adb" id="boostBtn"></button><div class="badge" id="boostBadge"></div></div>
+    <div class="card en"><div class="row"><b>⚡ <span id="enTxt">0/0</span></b><small class="lbl" id="enRate"></small></div><div class="bar"><i id="enBar"></i></div><button class="adb ref" id="refBtn"></button></div>
     <div class="foot">Made with SayApp</div>
   </section>
   <section class="page" id="p-shop">
@@ -151,13 +162,13 @@ nav button.on span{transform:scale(1.12)}
 <script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="5htgziz2" data-full="1"></script>
 <script>
 const D={
-en:{balance:"Your gold",mine:"Mine",upgrades:"Upgrades",daily:"Daily",top:"Top",perTap:"+{n} / tap",perHour:"{n} / hour",refill:"+{n}/s",shopSub:"Invest your gold and dig faster. Prices grow with each level.",
+en:{balance:"Your gold",boost:"x2 gold, 60 s",boostOn:"x2 active",refillAd:"Refill energy",noAd:"No video available right now, try again later",boosted:"🔥 x2 gold for 60 s!",refilled:"⚡ Energy full!",mine:"Mine",upgrades:"Upgrades",daily:"Daily",top:"Top",perTap:"+{n} / tap",perHour:"{n} / hour",refill:"+{n}/s",shopSub:"Invest your gold and dig faster. Prices grow with each level.",
 tapN:"Multi-tap",tapD:"+1 gold per tap",energyN:"Bigger energy",energyD:"+250 max energy",refillN:"Faster refill",refillD:"+1 energy per second",autoN:"Auto-miner",autoD:"+1 gold per second, even offline",
 lv:"Lv {n}",next:"{n} to next",maxLv:"Max level reached",dailyTitle:"Daily chest",dailySub:"Come back every day. Miss a day and the streak restarts.",streak:"Streak: day {n} of 7",day:"Day {n}",
 claim:"Open chest",comeBack:"Next chest in",claimed:"Chest opened! +{n} gold",topTitle:"Richest miners",topSub:"Top 20 by total gold mined",empty:"No miners yet. Be the first to strike gold!",
 you:"You",notRanked:"Not in the top 20 yet, keep digging!",away:"⛏️ Your auto-miner dug {n} gold while you were away",noEnergy:"Out of energy, it refills over time ⚡",bought:"{u} upgraded!",levelUp:"🎉 New rank: {n}!",
 ranks:["Prospector","Digger","Miner","Foreman","Tycoon","Gold Baron"],err:"Leaderboard unavailable, try again later"},
-fr:{balance:"Ton or",mine:"Mine",upgrades:"Améliorations",daily:"Bonus",top:"Top",perTap:"+{n} / tap",perHour:"{n} / heure",refill:"+{n}/s",shopSub:"Investis ton or pour creuser plus vite. Les prix montent à chaque niveau.",
+fr:{balance:"Ton or",boost:"x2 or, 60 s",boostOn:"x2 actif",refillAd:"Recharger l'énergie",noAd:"Aucune vidéo disponible pour l'instant, réessaie plus tard",boosted:"🔥 x2 or pendant 60 s !",refilled:"⚡ Énergie pleine !",mine:"Mine",upgrades:"Améliorations",daily:"Bonus",top:"Top",perTap:"+{n} / tap",perHour:"{n} / heure",refill:"+{n}/s",shopSub:"Investis ton or pour creuser plus vite. Les prix montent à chaque niveau.",
 tapN:"Multi-tap",tapD:"+1 or par tap",energyN:"Grande énergie",energyD:"+250 d'énergie max",refillN:"Recharge rapide",refillD:"+1 énergie par seconde",autoN:"Mineur auto",autoD:"+1 or par seconde, même hors ligne",
 lv:"Niv {n}",next:"encore {n}",maxLv:"Niveau max atteint",dailyTitle:"Coffre du jour",dailySub:"Reviens chaque jour. Un jour manqué et la série recommence.",streak:"Série : jour {n} sur 7",day:"Jour {n}",
 claim:"Ouvrir le coffre",comeBack:"Prochain coffre dans",claimed:"Coffre ouvert ! +{n} or",topTitle:"Mineurs les plus riches",topSub:"Top 20 par or total extrait",empty:"Aucun mineur pour l'instant. Sois le premier à trouver de l'or !",
@@ -175,11 +186,25 @@ const fmt=v=>{v=Math.floor(v);if(v<1e4)return v.toLocaleString('en-US');const u=
 const tapVal=()=>1+S.lv.tap, maxE=()=>500+250*S.lv.energy, refill=()=>1+S.lv.refill, autoR=()=>S.lv.auto;
 const cost=u=>Math.floor(u.base*Math.pow(u.g,S.lv[u.id]));
 const today=()=>Math.floor(Date.now()/864e5);
+const mult=()=>Date.now()<(S.boost||0)?2:1;
+function adUI(){const left=(S.boost||0)-Date.now(),on=left>0;
+  $('boostBtn').style.display=on?'none':'inline-flex';$('boostBtn').textContent='🎬 '+t('boost');
+  $('boostBadge').classList.toggle('on',on);if(on)$('boostBadge').textContent='🔥 '+t('boostOn')+' · '+Math.ceil(left/1000)+' s';
+  $('stage').classList.toggle('boost',on);
+  $('refBtn').style.display=ready&&S.energy<tapVal()?'flex':'none';$('refBtn').textContent='🎬 '+t('refillAd')}
+let adBusy=false;
+async function watchAd(btn,fn){if(adBusy||!ready)return;adBusy=true;btn.disabled=true;H('tap');let ok=false;
+  try{ok=await SayApp.ad()}catch(e){ok=false}
+  adBusy=false;btn.disabled=false;
+  if(ok===true){fn();dirty=true;H('ok');const r=btn.getBoundingClientRect();sparks(r.left+r.width/2,r.top+r.height/2,30,120);save(true)}
+  else{H('error');toast(t('noAd'))}adUI()}
+$('boostBtn').addEventListener('click',()=>watchAd($('boostBtn'),()=>{S.boost=Date.now()+60000;toast(t('boosted'))}));
+$('refBtn').addEventListener('click',()=>watchAd($('refBtn'),()=>{S.energy=maxE();toast(t('refilled'))}));
 function rankOf(v){let i=0;RANKS.forEach((r,k)=>{if(v>=r)i=k});return i}
 let tt;function toast(m){const e=$('toast');e.textContent=m;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),2600)}
 function floatTxt(x,y,txt){const e=document.createElement('div');e.className='fl';e.textContent=txt;e.style.left=x+'px';e.style.top=y+'px';document.body.appendChild(e);setTimeout(()=>e.remove(),850)}
 function sparks(x,y,n,spread){for(let i=0;i<n;i++){const e=document.createElement('i');e.className='sp';const a=Math.random()*Math.PI*2,r=(spread||60)*(.5+Math.random());e.style.left=x+'px';e.style.top=y+'px';e.style.setProperty('--dx',Math.cos(a)*r+'px');e.style.setProperty('--dy',Math.sin(a)*r+'px');if(Math.random()<.4)e.style.background='radial-gradient(circle,#fff,#FF8A3D)';document.body.appendChild(e);setTimeout(()=>e.remove(),620)}}
-function applyLang(){document.documentElement.lang=L;document.querySelectorAll('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===L));buildShop();renderDaily();renderStatic();if(tab==='top')loadTop()}
+function applyLang(){document.documentElement.lang=L;document.querySelectorAll('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===L));buildShop();renderDaily();renderStatic();adUI();if(tab==='top')loadTop()}
 function renderStatic(){$('cTap').textContent='👆 '+t('perTap',tapVal());$('cAuto').textContent='⛏️ '+t('perHour',fmt(autoR()*3600));$('enRate').textContent=t('refill',refill())}
 function render(){
   $('gold').textContent=fmt(shown);
@@ -215,15 +240,15 @@ document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()
   document.querySelectorAll('.page').forEach(p=>p.classList.toggle('on',p.id==='p-'+tab));if(tab==='top')loadTop();if(tab==='daily')renderDaily();if(tab==='shop')buildShop()}));
 document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{L=b.dataset.l;S.lang=L;dirty=true;H('tap');applyLang()}));
 $('nug').addEventListener('pointerdown',e=>{e.preventDefault();if(!ready)return;const v=tapVal();
-  if(S.energy<v){H('error');$('nug').animate([{transform:'translateX(0)'},{transform:'translateX(-8px)'},{transform:'translateX(8px)'},{transform:'translateX(0)'}],{duration:250});toast(t('noEnergy'));return}
-  S.energy-=v;S.gold+=v;S.total+=v;dirty=true;H('tap');floatTxt(e.clientX,e.clientY,'+'+v);sparks(e.clientX,e.clientY,7,60);
+  if(S.energy<v){H('error');adUI();$('nug').animate([{transform:'translateX(0)'},{transform:'translateX(-8px)'},{transform:'translateX(8px)'},{transform:'translateX(0)'}],{duration:250});toast(t('noEnergy'));return}
+  S.energy-=v;const g=v*mult();S.gold+=g;S.total+=g;dirty=true;H('tap');floatTxt(e.clientX,e.clientY,'+'+g);sparks(e.clientX,e.clientY,g>v?12:7,60);
   $('nug').animate([{transform:'scale(1)'},{transform:'scale(.88)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:280,easing:'ease-out'})});
 let saving=false;
 async function save(force){if((!dirty&&!force)||saving||!ready)return;saving=true;dirty=false;S.last=Date.now();
   try{await SayApp.set('state',S);await SayApp.set('gold',Math.floor(S.total))}catch(e){dirty=true}saving=false}
 let lt=performance.now();
 function loop(now){const dt=Math.min((now-lt)/1000,1);lt=now;
-  if(ready){S.energy=Math.min(maxE(),S.energy+refill()*dt);const a=autoR()*dt;if(a){S.gold+=a;S.total+=a;dirty=true}}
+  if(ready){S.energy=Math.min(maxE(),S.energy+refill()*dt);const a=autoR()*dt*mult();if(a){S.gold+=a;S.total+=a;dirty=true}}
   shown+=(S.gold-shown)*Math.min(1,dt*12);if(Math.abs(S.gold-shown)<.5)shown=S.gold;render();requestAnimationFrame(loop)}
 window.addEventListener('load',async()=>{
   try{Telegram.WebApp.ready();Telegram.WebApp.expand()}catch(e){}
@@ -237,7 +262,7 @@ window.addEventListener('load',async()=>{
   rankIdx=rankOf(S.total);shown=S.gold;ready=true;
   if(earned>0){S.gold+=earned;S.total+=earned;dirty=true;setTimeout(()=>{toast(t('away',fmt(earned)));H('ok')},600)}
   applyLang();requestAnimationFrame(loop);
-  setInterval(()=>save(),4000);setInterval(()=>{updateShop();tickCd()},500);
+  setInterval(()=>save(),4000);setInterval(()=>{updateShop();tickCd();adUI()},500);
   setInterval(()=>{if(dInfo().claimed&&$('claim').disabled===false)renderDaily()},5000);
   setInterval(()=>{const c=dInfo().claimed;if(!c&&$('claim').disabled)renderDaily()},10000);
   document.addEventListener('visibilitychange',()=>{if(document.hidden)save(true)});
