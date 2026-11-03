@@ -90,7 +90,8 @@ textarea::placeholder{color:var(--dim)}
 .trust{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:14px}.trust span{font-size:12px;font-weight:600;color:#cfe9ff;background:rgba(47,214,255,.08);border:1px solid rgba(47,214,255,.22);padding:5px 10px;border-radius:99px}
 .wiz{border-radius:22px;padding:16px;background:linear-gradient(160deg,rgba(139,92,255,.12),rgba(47,214,255,.05));border:1px solid rgba(139,92,255,.3);margin-bottom:14px}.wtop{display:flex;align-items:center;gap:10px;margin-bottom:12px}.wback{width:32px;height:32px;border-radius:10px;background:var(--card2);font-size:20px;line-height:1}.wback[disabled]{opacity:.25}.dots{display:flex;gap:5px;flex:1}.dots i{flex:1;height:4px;border-radius:9px;background:var(--card2)}.dots i.on{background:var(--grad)}.wstep{font-size:12px;color:var(--dim);font-weight:600}.wiz h2{font-size:20px}.wsub{margin:4px 0 14px;color:var(--mute);font-size:13.5px}.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}.opt{display:flex;align-items:center;gap:8px;padding:12px;border-radius:14px;background:var(--card);border:1px solid var(--line);text-align:left;font-size:13.5px;font-weight:600;min-width:0}.opt i{font-style:normal;font-size:20px}.opt span{min-width:0}.opt.on{border-color:transparent;background:linear-gradient(#141428,#141428) padding-box,var(--grad) border-box;border:1.5px solid transparent;box-shadow:0 8px 20px -12px #6b6bff}#wNext{margin-top:12px}.recap{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}.recap span{font-size:12px;padding:5px 9px;border-radius:99px;background:var(--card2);color:#dcdaf5}
 .launch{display:block;width:max-content;max-width:100%;margin:0 auto 8px;font-size:12px;font-weight:700;color:#2a1700;background:var(--gold);padding:5px 12px;border-radius:99px;box-shadow:0 6px 18px -8px #ff9f43}
-.crup{display:block;margin:8px auto 0;font-size:13px;font-weight:700;color:#ffd76a;padding:6px 12px;border-radius:99px;background:rgba(255,215,106,.08);border:1px solid rgba(255,215,106,.25)}.plan{cursor:pointer}.plan.cr{background:linear-gradient(120deg,#8b5cff,#2fd6ff);color:#fff;border:0}
+.crup{display:block;margin:8px auto 0;font-size:13px;font-weight:700;color:#ffd76a;padding:6px 12px;border-radius:99px;background:rgba(255,215,106,.08);border:1px solid rgba(255,215,106,.25)}.plan{cursor:pointer}
+.lgl{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.lgl button{padding:14px;border-radius:14px;background:var(--card2);border:1px solid var(--line);font-weight:600;text-align:left;color:inherit}.lgl button.on{border-color:#6b6bff;background:var(--card)}.plan.cr{background:linear-gradient(120deg,#8b5cff,#2fd6ff);color:#fff;border:0}
 .extra{display:grid;gap:8px;margin-bottom:12px}.xin{width:100%;padding:13px 14px;border-radius:14px;border:1px solid var(--line);background:#0d0d18;color:var(--fg);font:15px Inter,system-ui,sans-serif;outline:0}.xin:focus{border-color:var(--v)}.xl{margin:6px 0 0;font-size:12px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.08em}.cols{display:flex;gap:10px;flex-wrap:wrap}.col{width:38px;height:38px;border-radius:50%;border:2px solid transparent;box-shadow:inset 0 0 0 2px rgba(255,255,255,.15)}.col.on{border-color:#fff;transform:scale(1.08)}.lg{height:34px;padding:0 11px;border-radius:99px;background:var(--card2);border:1.5px solid transparent;font-size:12.5px;font-weight:700;color:var(--mute)}.lg.on{border-color:#a98bff;color:#fff;background:rgba(139,92,255,.22)}
 .col.auto{width:auto;padding:0 12px;border-radius:99px;background:var(--card2);font-size:12px;font-weight:700;color:var(--mute)}
 .price{flex-wrap:wrap}.price .then{flex-basis:100%;text-align:center;font-style:normal;font-size:14px;font-weight:700;color:#ffd76a;margin-top:2px}
@@ -267,7 +268,7 @@ input.tk:focus{border-color:var(--v)}
 </div>
 
 <div class="wrap" id="main" hidden>
-  <div class="top"><div class="logo"><b>✦</b>SayApp</div><div class="plan" id="plan"></div></div>
+  <div class="top"><div class="logo"><b>✦</b>SayApp</div><div style="display:flex;gap:8px;align-items:center"><button class="plan" id="lgB"></button><div class="plan" id="plan"></div></div></div>
 
   <section id="vCreate">
     <div class="hero">
@@ -347,8 +348,12 @@ input.tk:focus{border-color:var(--v)}
   var lang = 'en';
   try { lang = String(tw.initDataUnsafe.user.language_code || '').slice(0, 2).toLowerCase(); } catch (e) { lang = String(navigator.language || '').slice(0, 2).toLowerCase(); }
   if (LANGS.indexOf(lang) < 0) lang = 'en';
+  // 3 nov 2026 (20h28, Jeremy): language picker at the top, choice remembered on this device
+  try { var lsv = localStorage.getItem('sa_lang'); if (lsv && LANGS.indexOf(lsv) >= 0) lang = lsv; } catch (e) {}
   var LOC = { fr: 'fr-FR', en: 'en-US', id: 'id-ID', ru: 'ru-RU', es: 'es-ES', pt: 'pt-BR', tr: 'tr-TR' }[lang] || 'en-US';
   document.documentElement.lang = lang;
+  var LGN = { fr: ['🇫🇷', 'Français'], en: ['🇬🇧', 'English'], es: ['🇪🇸', 'Español'], pt: ['🇧🇷', 'Português'], ru: ['🇷🇺', 'Русский'], id: ['🇮🇩', 'Indonesia'], tr: ['🇹🇷', 'Türkçe'] };
+  try { $('lgB').textContent = LGN[lang][0] + ' ' + lang.toUpperCase(); $('lgB').onclick = function () { openSheet('<h2>🌍 Language</h2><div class="lgl">' + ['fr', 'en', 'es', 'pt', 'ru', 'id', 'tr'].map(function (l) { return '<button data-l="' + l + '"' + (l === lang ? ' class="on"' : '') + '>' + LGN[l][0] + ' ' + LGN[l][1] + '</button>'; }).join('') + '</div>'); document.querySelectorAll('.lgl button').forEach(function (b) { b.onclick = function () { try { localStorage.setItem('sa_lang', b.getAttribute('data-l')); } catch (e) {} location.reload(); }; }); }; } catch (e) {}
 
   var TX = {
     fr: {
