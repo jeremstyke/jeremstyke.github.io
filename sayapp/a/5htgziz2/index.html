@@ -1,0 +1,247 @@
+<!-- sayapp 5htgziz2 v1 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Gold Rush</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#FFC531;--gold2:#FF9F1C;--gold3:#FFE58A;--accent:#FF6B3D;--bg:#140b05;--bg2:#24140a;--card:#2c1a0e;--card2:#3a2313;--line:rgba(255,197,49,.14);--txt:#FFF4DE;--mut:#C9A97E;--ok:#7BE38A}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{font-family:Outfit,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--txt);background:radial-gradient(120% 70% at 50% 35%,#4a2a10 0%,#24140a 45%,var(--bg) 100%);user-select:none;-webkit-user-select:none}
+body:before{content:"";position:fixed;inset:0;background:radial-gradient(2px 2px at 12% 20%,rgba(255,220,120,.5),transparent),radial-gradient(2px 2px at 82% 30%,rgba(255,220,120,.4),transparent),radial-gradient(1.5px 1.5px at 30% 75%,rgba(255,220,120,.4),transparent),radial-gradient(2px 2px at 70% 85%,rgba(255,220,120,.35),transparent);pointer-events:none}
+header{position:relative;z-index:5;display:flex;align-items:center;gap:10px;padding:calc(var(--sa-top,0px) + 8px) 16px 8px}
+.av{width:40px;height:40px;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--accent));display:grid;place-items:center;font-weight:800;color:#3a1d00;font-size:18px;box-shadow:0 4px 14px rgba(255,159,28,.35)}
+.who{flex:1;min-width:0}.who b{display:block;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.who span{font-size:12px;color:var(--gold);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.lang{display:flex;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:3px}
+.lang button{border:0;background:none;color:var(--mut);font:700 12px Outfit,sans-serif;padding:6px 9px;border-radius:9px;cursor:pointer;transition:.2s}
+.lang button.on{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#3a1d00}
+main{position:relative;height:calc(100% - 60px - var(--sa-top,0px));overflow:hidden}
+.page{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:4px 16px calc(96px + env(safe-area-inset-bottom));opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s}
+.page.on{opacity:1;transform:none;pointer-events:auto}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.bal{text-align:center;margin-top:4px}
+.bal .n{display:flex;align-items:center;justify-content:center;gap:10px;font-size:44px;font-weight:900;letter-spacing:-.02em;background:linear-gradient(180deg,#FFF6CF,var(--gold) 55%,var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 0 rgba(90,40,0,.6))}
+.coin{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFF3B0,var(--gold) 45%,#C77400);box-shadow:inset 0 -3px 0 rgba(120,60,0,.5),0 0 18px rgba(255,197,49,.5);flex:none}
+.chips{display:flex;gap:8px;justify-content:center;margin-top:8px}
+.chip{background:rgba(44,26,14,.8);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;color:var(--gold3)}
+.card{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,230,160,.08)}
+.lvc{margin-top:14px;padding:12px 16px}
+.row{display:flex;justify-content:space-between;align-items:center}
+.lvc b{font-size:16px}.lvc small{color:var(--mut);font-size:13px}
+.bar{height:10px;border-radius:99px;background:rgba(0,0,0,.4);margin-top:8px;overflow:hidden;box-shadow:inset 0 1px 2px rgba(0,0,0,.5)}
+.bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--gold2),var(--gold),var(--gold3));box-shadow:0 0 12px rgba(255,197,49,.6);transition:width .3s}
+.stage{position:relative;height:min(72vw,300px);display:grid;place-items:center;margin:8px 0}
+.rays{position:absolute;width:118%;aspect-ratio:1;max-width:400px;background:repeating-conic-gradient(rgba(255,210,90,.13) 0 10deg,transparent 10deg 24deg);-webkit-mask:radial-gradient(circle,#000 20%,transparent 66%);mask:radial-gradient(circle,#000 20%,transparent 66%);animation:spin 30s linear infinite}
+.glow{position:absolute;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,197,49,.55),rgba(255,140,0,.15) 50%,transparent 70%);animation:pulse 2.6s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{50%{transform:scale(1.1);opacity:.75}}
+#nug{position:relative;width:min(64vw,260px);cursor:pointer;touch-action:none;filter:drop-shadow(0 18px 20px rgba(0,0,0,.5)) drop-shadow(0 0 24px rgba(255,180,40,.35))}
+#nug svg{width:100%;display:block;animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px) rotate(-2deg)}}
+.tw{position:absolute;font-size:16px;animation:tw 2.2s ease-in-out infinite;pointer-events:none}
+@keyframes tw{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1)}}
+.en{padding:12px 16px}.en b{font-size:15px}
+.en .bar i{background:linear-gradient(90deg,#FF8A3D,#FFC531);transition:width .15s}
+.fl{position:fixed;z-index:50;font-size:30px;font-weight:900;color:var(--gold3);text-shadow:0 3px 0 #7a3f00,0 0 12px rgba(255,197,49,.8);pointer-events:none;animation:up .85s ease-out forwards;transform:translate(-50%,-50%)}
+@keyframes up{to{transform:translate(-50%,-150px) scale(1.3);opacity:0}}
+.sp{position:fixed;z-index:49;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle,#fff,var(--gold));box-shadow:0 0 8px var(--gold);pointer-events:none;animation:sp .6s ease-out forwards}
+@keyframes sp{to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
+h2{font-size:26px;font-weight:800;margin:6px 0 2px}.sub{color:var(--mut);font-size:15px;margin-bottom:16px}
+.up{display:flex;align-items:center;gap:12px;padding:14px;margin-bottom:12px}
+.ic{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:26px;background:linear-gradient(135deg,#5a3517,#3a2313);border:1px solid var(--line);flex:none}
+.up .tx{flex:1;min-width:0}.up b{font-size:16px}.up p{font-size:13px;color:var(--mut);margin-top:2px}
+.tag{display:inline-block;font-size:11px;font-weight:700;color:var(--gold);background:rgba(255,197,49,.12);border-radius:8px;padding:2px 7px;margin-left:6px;vertical-align:2px}
+.btn{border:0;cursor:pointer;font:800 14px Outfit,sans-serif;color:#3a1d00;background:linear-gradient(180deg,var(--gold3),var(--gold) 50%,var(--gold2));border-radius:14px;padding:10px 14px;box-shadow:0 4px 0 #A85A00,0 8px 18px rgba(255,159,28,.3);transition:transform .15s,filter .2s;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn:active{transform:translateY(3px) scale(.97);box-shadow:0 1px 0 #A85A00}
+.btn:disabled{filter:grayscale(.85) brightness(.6);box-shadow:0 4px 0 #3a2313}
+.btn .coin{width:16px;height:16px}
+.chest{text-align:center;padding:20px 16px;margin-bottom:14px}
+.chest .e{font-size:76px;display:inline-block;animation:bob 1.6s ease-in-out infinite;filter:drop-shadow(0 0 20px rgba(255,197,49,.5))}
+@keyframes bob{50%{transform:translateY(-8px) rotate(4deg)}}
+.days{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0}
+.d{border-radius:16px;padding:10px 4px;text-align:center;background:rgba(0,0,0,.25);border:1px solid var(--line);transition:.2s}
+.d small{display:block;font-size:11px;color:var(--mut);font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+.d b{display:block;font-size:14px;margin-top:4px}.d .x{font-size:20px}
+.d.done{background:rgba(123,227,138,.12);border-color:rgba(123,227,138,.35)}
+.d.now{background:linear-gradient(180deg,rgba(255,197,49,.3),rgba(255,159,28,.12));border-color:var(--gold);box-shadow:0 0 18px rgba(255,197,49,.3);transform:scale(1.04)}
+.d:last-child{grid-column:span 2}
+.big{width:100%;justify-content:center;padding:15px;font-size:17px;border-radius:16px}
+.cd{font-size:15px;color:var(--mut);margin-top:6px}.cd b{color:var(--gold3)}
+.lb{padding:6px}
+.lr{display:flex;align-items:center;gap:12px;padding:10px;border-radius:14px}
+.lr+.lr{margin-top:2px}
+.lr .r{width:30px;text-align:center;font-weight:800;color:var(--mut);font-size:15px}
+.lr .nm{flex:1;min-width:0;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lr .v{font-weight:800;color:var(--gold3);display:flex;align-items:center;gap:6px}.lr .v .coin{width:16px;height:16px}
+.lr.me{background:linear-gradient(90deg,rgba(255,197,49,.25),rgba(255,107,61,.12));border:1px solid rgba(255,197,49,.5)}
+.sk{height:44px;border-radius:14px;margin:4px;background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.09),rgba(255,255,255,.04));background-size:200% 100%;animation:sh 1.2s infinite}
+@keyframes sh{to{background-position:-200% 0}}
+.empty{text-align:center;padding:30px 16px;color:var(--mut)}.empty div{font-size:46px;margin-bottom:8px}
+.foot{text-align:center;font-size:11px;color:rgba(201,169,126,.5);margin-top:18px;letter-spacing:.05em}
+nav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:20;display:flex;background:rgba(36,20,10,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:22px;padding:6px;box-shadow:0 12px 30px rgba(0,0,0,.5)}
+nav button{flex:1;border:0;background:none;color:var(--mut);font:600 11px Outfit,sans-serif;padding:7px 0;border-radius:16px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative;transition:.2s}
+nav button span{font-size:21px;transition:transform .2s}
+nav button.on{color:#3a1d00;background:linear-gradient(180deg,var(--gold3),var(--gold))}
+nav button.on span{transform:scale(1.12)}
+.dot{position:absolute;top:5px;right:calc(50% - 18px);width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);display:none}
+.toast{position:fixed;left:50%;top:calc(var(--sa-top,0px) + 64px);transform:translate(-50%,-20px);opacity:0;z-index:60;background:linear-gradient(135deg,#4a2c12,#2c1a0e);border:1px solid var(--gold);color:var(--txt);padding:12px 16px;border-radius:16px;font-weight:600;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.5);transition:.3s;width:max-content;max-width:88vw;text-align:center;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<header>
+  <div class="av" id="av">⛏</div>
+  <div class="who"><b id="uname">Miner</b><span id="ulv">Prospector</span></div>
+  <div class="lang"><button data-l="en">EN</button><button data-l="fr">FR</button></div>
+</header>
+<main>
+  <section class="page on" id="p-mine">
+    <div class="bal"><div class="lbl" data-i="balance"></div><div class="n"><i class="coin"></i><span id="gold">0</span></div>
+      <div class="chips"><div class="chip" id="cTap"></div><div class="chip" id="cAuto"></div></div></div>
+    <div class="card lvc"><div class="row"><b id="lvName"></b><small id="lvNext"></small></div><div class="bar"><i id="lvBar"></i></div></div>
+    <div class="stage" id="stage">
+      <div class="rays"></div><div class="glow"></div>
+      <span class="tw" style="left:14%;top:18%">✨</span><span class="tw" style="right:12%;top:30%;animation-delay:.7s">✨</span><span class="tw" style="left:20%;bottom:14%;animation-delay:1.4s">⭐</span>
+      <div id="nug"><svg viewBox="0 0 200 180"><defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF3B0"/><stop offset=".45" stop-color="#FFC531"/><stop offset="1" stop-color="#D97A00"/></linearGradient>
+        <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE27A"/><stop offset="1" stop-color="#FFB020"/></linearGradient></defs>
+        <path d="M42 68 L72 30 L122 22 L166 50 L182 102 L152 150 L92 162 L36 136 L18 98 Z" fill="url(#g1)" stroke="#7A3F00" stroke-width="7" stroke-linejoin="round"/>
+        <polygon points="72,34 120,27 112,64 78,68" fill="#FFF0A0" opacity=".85"/>
+        <polygon points="120,27 162,52 140,80 112,64" fill="url(#g2)" opacity=".9"/>
+        <polygon points="78,68 112,64 140,80 128,118 86,116" fill="#FFD04A"/>
+        <polygon points="46,70 78,68 86,116 40,128 24,98" fill="#F5A623" opacity=".85"/>
+        <polygon points="140,80 176,104 150,145 128,118" fill="#D98200" opacity=".8"/>
+        <polygon points="86,116 128,118 150,145 94,156 42,132" fill="#C46E00" opacity=".75"/>
+        <ellipse cx="88" cy="46" rx="16" ry="7" fill="#fff" opacity=".8" transform="rotate(-14 88 46)"/>
+        <circle cx="66" cy="62" r="4" fill="#fff" opacity=".9"/>
+        <path d="M148 64 l4 -10 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4z" fill="#fff" opacity=".9"/>
+      </svg></div>
+    </div>
+    <div class="card en"><div class="row"><b>⚡ <span id="enTxt">0/0</span></b><small class="lbl" id="enRate"></small></div><div class="bar"><i id="enBar"></i></div></div>
+    <div class="foot">Made with SayApp</div>
+  </section>
+  <section class="page" id="p-shop">
+    <h2 data-i="upgrades"></h2><p class="sub" data-i="shopSub"></p>
+    <div id="shop"></div>
+    <div class="foot">Made with SayApp</div>
+  </section>
+  <section class="page" id="p-daily">
+    <h2 data-i="dailyTitle"></h2><p class="sub" data-i="dailySub"></p>
+    <div class="card chest"><div class="e" id="chestE">🎁</div><div class="lbl" style="margin-top:6px" id="streakTxt"></div>
+      <div class="days" id="days"></div><button class="btn big" id="claim"></button><div class="cd" id="cd"></div></div>
+    <div class="foot">Made with SayApp</div>
+  </section>
+  <section class="page" id="p-top">
+    <h2 data-i="topTitle"></h2><p class="sub" data-i="topSub"></p>
+    <div class="card lb" id="lb"></div>
+    <div class="foot">Made with SayApp</div>
+  </section>
+</main>
+<nav>
+  <button class="on" data-t="mine"><span>⛏️</span><em data-i="mine" style="font-style:normal"></em></button>
+  <button data-t="shop"><span>🛠️</span><em data-i="upgrades" style="font-style:normal"></em></button>
+  <button data-t="daily"><span>🎁</span><em data-i="daily" style="font-style:normal"></em><i class="dot" id="dDot"></i></button>
+  <button data-t="top"><span>🏆</span><em data-i="top" style="font-style:normal"></em></button>
+</nav>
+<div class="toast" id="toast"></div>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="5htgziz2" data-full="1"></script>
+<script>
+const D={
+en:{balance:"Your gold",mine:"Mine",upgrades:"Upgrades",daily:"Daily",top:"Top",perTap:"+{n} / tap",perHour:"{n} / hour",refill:"+{n}/s",shopSub:"Invest your gold and dig faster. Prices grow with each level.",
+tapN:"Multi-tap",tapD:"+1 gold per tap",energyN:"Bigger energy",energyD:"+250 max energy",refillN:"Faster refill",refillD:"+1 energy per second",autoN:"Auto-miner",autoD:"+1 gold per second, even offline",
+lv:"Lv {n}",next:"{n} to next",maxLv:"Max level reached",dailyTitle:"Daily chest",dailySub:"Come back every day. Miss a day and the streak restarts.",streak:"Streak: day {n} of 7",day:"Day {n}",
+claim:"Open chest",comeBack:"Next chest in",claimed:"Chest opened! +{n} gold",topTitle:"Richest miners",topSub:"Top 20 by total gold mined",empty:"No miners yet. Be the first to strike gold!",
+you:"You",notRanked:"Not in the top 20 yet, keep digging!",away:"⛏️ Your auto-miner dug {n} gold while you were away",noEnergy:"Out of energy, it refills over time ⚡",bought:"{u} upgraded!",levelUp:"🎉 New rank: {n}!",
+ranks:["Prospector","Digger","Miner","Foreman","Tycoon","Gold Baron"],err:"Leaderboard unavailable, try again later"},
+fr:{balance:"Ton or",mine:"Mine",upgrades:"Améliorations",daily:"Bonus",top:"Top",perTap:"+{n} / tap",perHour:"{n} / heure",refill:"+{n}/s",shopSub:"Investis ton or pour creuser plus vite. Les prix montent à chaque niveau.",
+tapN:"Multi-tap",tapD:"+1 or par tap",energyN:"Grande énergie",energyD:"+250 d'énergie max",refillN:"Recharge rapide",refillD:"+1 énergie par seconde",autoN:"Mineur auto",autoD:"+1 or par seconde, même hors ligne",
+lv:"Niv {n}",next:"encore {n}",maxLv:"Niveau max atteint",dailyTitle:"Coffre du jour",dailySub:"Reviens chaque jour. Un jour manqué et la série recommence.",streak:"Série : jour {n} sur 7",day:"Jour {n}",
+claim:"Ouvrir le coffre",comeBack:"Prochain coffre dans",claimed:"Coffre ouvert ! +{n} or",topTitle:"Mineurs les plus riches",topSub:"Top 20 par or total extrait",empty:"Aucun mineur pour l'instant. Sois le premier à trouver de l'or !",
+you:"Toi",notRanked:"Pas encore dans le top 20, continue de creuser !",away:"⛏️ Ton mineur auto a extrait {n} or pendant ton absence",noEnergy:"Plus d'énergie, elle se recharge avec le temps ⚡",bought:"{u} amélioré !",levelUp:"🎉 Nouveau rang : {n} !",
+ranks:["Prospecteur","Creuseur","Mineur","Contremaître","Magnat","Baron de l'or"],err:"Classement indisponible, réessaie plus tard"}};
+const RANKS=[0,1000,5000,20000,75000,250000];
+const DR=[100,250,500,1000,2000,3500,6000];
+const UP=[{id:'tap',ic:'👆',base:50,g:1.55},{id:'energy',ic:'🔋',base:80,g:1.5},{id:'refill',ic:'⏱️',base:120,g:1.6},{id:'auto',ic:'⛏️',base:200,g:1.65}];
+let S={gold:0,total:0,lv:{tap:0,energy:0,refill:0,auto:0},energy:500,last:Date.now(),daily:{streak:0,day:-1},lang:null};
+let L='en',dirty=false,shown=0,tab='mine',rankIdx=0,ready=false;
+const $=id=>document.getElementById(id);
+const t=(k,n)=>{let s=(D[L][k]!==undefined?D[L][k]:D.en[k]);return typeof s==='string'?s.replace('{n}',n).replace('{u}',n):s};
+const H=k=>{try{SayApp.haptic(k)}catch(e){}};
+const fmt=v=>{v=Math.floor(v);if(v<1e4)return v.toLocaleString('en-US');const u=[[1e9,'B'],[1e6,'M'],[1e3,'K']];for(const[d,s]of u)if(v>=d)return(v/d).toFixed(v/d<100?1:0).replace('.0','')+s;return ''+v};
+const tapVal=()=>1+S.lv.tap, maxE=()=>500+250*S.lv.energy, refill=()=>1+S.lv.refill, autoR=()=>S.lv.auto;
+const cost=u=>Math.floor(u.base*Math.pow(u.g,S.lv[u.id]));
+const today=()=>Math.floor(Date.now()/864e5);
+function rankOf(v){let i=0;RANKS.forEach((r,k)=>{if(v>=r)i=k});return i}
+let tt;function toast(m){const e=$('toast');e.textContent=m;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),2600)}
+function floatTxt(x,y,txt){const e=document.createElement('div');e.className='fl';e.textContent=txt;e.style.left=x+'px';e.style.top=y+'px';document.body.appendChild(e);setTimeout(()=>e.remove(),850)}
+function sparks(x,y,n,spread){for(let i=0;i<n;i++){const e=document.createElement('i');e.className='sp';const a=Math.random()*Math.PI*2,r=(spread||60)*(.5+Math.random());e.style.left=x+'px';e.style.top=y+'px';e.style.setProperty('--dx',Math.cos(a)*r+'px');e.style.setProperty('--dy',Math.sin(a)*r+'px');if(Math.random()<.4)e.style.background='radial-gradient(circle,#fff,#FF8A3D)';document.body.appendChild(e);setTimeout(()=>e.remove(),620)}}
+function applyLang(){document.documentElement.lang=L;document.querySelectorAll('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===L));buildShop();renderDaily();renderStatic();if(tab==='top')loadTop()}
+function renderStatic(){$('cTap').textContent='👆 '+t('perTap',tapVal());$('cAuto').textContent='⛏️ '+t('perHour',fmt(autoR()*3600));$('enRate').textContent=t('refill',refill())}
+function render(){
+  $('gold').textContent=fmt(shown);
+  const m=maxE();$('enTxt').textContent=Math.floor(S.energy)+' / '+m;$('enBar').style.width=(S.energy/m*100)+'%';
+  const r=rankOf(S.total),names=t('ranks');
+  if(r>rankIdx&&ready){toast(t('levelUp',names[r]));H('ok');const s=$('nug').getBoundingClientRect();sparks(s.left+s.width/2,s.top+s.height/2,30,140)}
+  rankIdx=r;$('lvName').textContent=names[r];$('ulv').textContent=names[r]+' · '+(r+1)+'/6';
+  if(r<RANKS.length-1){const a=RANKS[r],b=RANKS[r+1];$('lvBar').style.width=((S.total-a)/(b-a)*100)+'%';$('lvNext').textContent=t('next',fmt(b-S.total))}
+  else{$('lvBar').style.width='100%';$('lvNext').textContent=t('maxLv')}
+}
+function buildShop(){$('shop').innerHTML=UP.map(u=>`<div class="card up"><div class="ic">${u.ic}</div><div class="tx"><b>${t(u.id+'N')}</b><span class="tag">${t('lv',S.lv[u.id])}</span><p>${t(u.id+'D')}</p></div><button class="btn" data-u="${u.id}"><i class="coin"></i><span>${fmt(cost(u))}</span></button></div>`).join('');updateShop()}
+function updateShop(){document.querySelectorAll('[data-u]').forEach(b=>{const u=UP.find(x=>x.id===b.dataset.u);b.disabled=S.gold<cost(u)})}
+$('shop').addEventListener('click',e=>{const b=e.target.closest('[data-u]');if(!b)return;const u=UP.find(x=>x.id===b.dataset.u),c=cost(u);
+  if(S.gold<c){H('error');return}S.gold-=c;S.lv[u.id]++;dirty=true;H('ok');const r=b.getBoundingClientRect();sparks(r.left+r.width/2,r.top+r.height/2,14,70);
+  toast(t('bought',t(u.id+'N')));buildShop();renderStatic();setTimeout(()=>save(true),300)});
+function dInfo(){const d=S.daily,td=today();if(d.day===td)return{claimed:true,idx:d.streak-1};return{claimed:false,idx:d.day===td-1?(d.streak%7):0}}
+function renderDaily(){const inf=dInfo();
+  $('days').innerHTML=DR.map((v,i)=>{const done=i<inf.idx||(inf.claimed&&i===inf.idx),now=!inf.claimed&&i===inf.idx;return `<div class="d ${done?'done':''} ${now?'now':''}"><small>${t('day',i+1)}</small><div class="x">${done?'✅':i===6?'💰':'🪙'}</div><b>${fmt(v)}</b></div>`}).join('');
+  $('streakTxt').textContent=t('streak',inf.claimed?inf.idx+1:inf.idx+1);
+  $('claim').innerHTML=inf.claimed?'✅':'🎁 '+t('claim')+' · +'+fmt(DR[inf.idx]);$('claim').disabled=inf.claimed;
+  $('chestE').textContent=inf.claimed?'💰':'🎁';$('dDot').style.display=inf.claimed?'none':'block';tickCd()}
+function tickCd(){const inf=dInfo();if(!inf.claimed){$('cd').textContent='';return}const ms=(today()+1)*864e5-Date.now(),h=Math.floor(ms/36e5),m=Math.floor(ms%36e5/6e4),s=Math.floor(ms%6e4/1e3),p=x=>String(x).padStart(2,'0');$('cd').innerHTML=t('comeBack')+' <b>'+p(h)+':'+p(m)+':'+p(s)+'</b>'}
+$('claim').addEventListener('click',()=>{const inf=dInfo();if(inf.claimed)return;const v=DR[inf.idx];S.daily={streak:inf.idx+1,day:today()};S.gold+=v;S.total+=v;dirty=true;H('ok');
+  const r=$('chestE').getBoundingClientRect();sparks(r.left+r.width/2,r.top+r.height/2,40,160);floatTxt(r.left+r.width/2,r.top,'+'+fmt(v));toast(t('claimed',fmt(v)));renderDaily();save(true)});
+async function loadTop(){const lb=$('lb');lb.innerHTML='<div class="sk"></div>'.repeat(6);
+  try{await save(true);const list=await SayApp.top('gold',20);
+    if(!list||!list.length){lb.innerHTML=`<div class="empty"><div>⛏️</div>${t('empty')}</div>`;return}
+    const md=['🥇','🥈','🥉'];let h=list.map((p,i)=>`<div class="lr ${p.me?'me':''}"><div class="r">${md[i]||i+1}</div><div class="nm">${esc(p.me?p.name+' ('+t('you')+')':p.name)}</div><div class="v"><i class="coin"></i>${fmt(p.value)}</div></div>`).join('');
+    if(!list.some(p=>p.me))h+=`<div class="lr me"><div class="r">-</div><div class="nm">${t('notRanked')}</div><div class="v"><i class="coin"></i>${fmt(S.total)}</div></div>`;
+    lb.innerHTML=h}catch(e){lb.innerHTML=`<div class="empty"><div>🪨</div>${t('err')}</div>`}}
+function esc(s){return String(s||'Miner').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{tab=b.dataset.t;H('tap');document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('on',p.id==='p-'+tab));if(tab==='top')loadTop();if(tab==='daily')renderDaily();if(tab==='shop')buildShop()}));
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{L=b.dataset.l;S.lang=L;dirty=true;H('tap');applyLang()}));
+$('nug').addEventListener('pointerdown',e=>{e.preventDefault();if(!ready)return;const v=tapVal();
+  if(S.energy<v){H('error');$('nug').animate([{transform:'translateX(0)'},{transform:'translateX(-8px)'},{transform:'translateX(8px)'},{transform:'translateX(0)'}],{duration:250});toast(t('noEnergy'));return}
+  S.energy-=v;S.gold+=v;S.total+=v;dirty=true;H('tap');floatTxt(e.clientX,e.clientY,'+'+v);sparks(e.clientX,e.clientY,7,60);
+  $('nug').animate([{transform:'scale(1)'},{transform:'scale(.88)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:280,easing:'ease-out'})});
+let saving=false;
+async function save(force){if((!dirty&&!force)||saving||!ready)return;saving=true;dirty=false;S.last=Date.now();
+  try{await SayApp.set('state',S);await SayApp.set('gold',Math.floor(S.total))}catch(e){dirty=true}saving=false}
+let lt=performance.now();
+function loop(now){const dt=Math.min((now-lt)/1000,1);lt=now;
+  if(ready){S.energy=Math.min(maxE(),S.energy+refill()*dt);const a=autoR()*dt;if(a){S.gold+=a;S.total+=a;dirty=true}}
+  shown+=(S.gold-shown)*Math.min(1,dt*12);if(Math.abs(S.gold-shown)<.5)shown=S.gold;render();requestAnimationFrame(loop)}
+window.addEventListener('load',async()=>{
+  try{Telegram.WebApp.ready();Telegram.WebApp.expand()}catch(e){}
+  const u=(window.SayApp&&SayApp.user)||{};$('uname').textContent=u.first_name||'Miner';if(u.first_name)$('av').textContent=u.first_name[0].toUpperCase();
+  try{const s=await SayApp.get('state');if(s&&typeof s==='object'){S=Object.assign(S,s);S.lv=Object.assign({tap:0,energy:0,refill:0,auto:0},s.lv||{});S.daily=Object.assign({streak:0,day:-1},s.daily||{})}}catch(e){}
+  let code='';try{code=(Telegram.WebApp.initDataUnsafe.user||{}).language_code||u.language_code||''}catch(e){code=u.language_code||''}
+  L=S.lang||(String(code).startsWith('fr')?'fr':'en');
+  const el=Math.max(0,Math.min((Date.now()-(S.last||Date.now()))/1000,8*3600));
+  S.energy=Math.min(maxE(),(S.energy||0)+el*refill());
+  const earned=Math.floor(autoR()*el);
+  rankIdx=rankOf(S.total);shown=S.gold;ready=true;
+  if(earned>0){S.gold+=earned;S.total+=earned;dirty=true;setTimeout(()=>{toast(t('away',fmt(earned)));H('ok')},600)}
+  applyLang();requestAnimationFrame(loop);
+  setInterval(()=>save(),4000);setInterval(()=>{updateShop();tickCd()},500);
+  setInterval(()=>{if(dInfo().claimed&&$('claim').disabled===false)renderDaily()},5000);
+  setInterval(()=>{const c=dInfo().claimed;if(!c&&$('claim').disabled)renderDaily()},10000);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)save(true)});
+});
+</script>
+</body>
+</html>
