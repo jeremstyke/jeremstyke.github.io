@@ -54,6 +54,9 @@
     purchases: function () { return call({ action: 'purchases' }).then(function (r) { return (r && r.ok && r.rows) || []; }); },
     // 2 nov 2026 (20h30, Jeremy): without the owner's own ad code, a SayApp rewarded ad (promo of Meme Coin Tycoon / Pass The Baton) plays instead,
     // so every owner sees the "watch an ad" feature working; his own Adsgram / Ads Galaxy codes replace it as soon as they are saved
+    // 3 nov 2026 (07h, Jeremy): real products are paid with the owner's own payment link (Stars are for digital items only)
+    pay: function (label, amount) { return (adsReady || Promise.resolve()).then(function () { if (ADS && ADS.pay) { try { tw.openLink(ADS.pay); } catch (e) { window.open(ADS.pay); } return true; } return payDemo(label, amount); }); },
+    hasPay: function () { return (adsReady || Promise.resolve()).then(function () { return !!(ADS && ADS.pay); }); },
     hasAd: function () { return (adsReady || Promise.resolve()).then(function () { return true; }); },
     ad: function () { return (adsReady || Promise.resolve()).then(function () { return ADS && (ADS.ag || ADS.agx) ? playAd(ADS.ag) : houseAd(); }); },
     haptic: function (k) {
@@ -110,7 +113,21 @@
     }
   }
   // 2 nov 2026 (18h37, Jeremy): the owner's ads (Adsgram block, Ads Galaxy id), set in SayApp > My apps > Manage > Earn money
-  var ADS = null, adsReady = null;
+  var ADS = null, adsReady = null, INFO = null;
+  // 3 nov 2026 (07h, Jeremy): without a payment link: an example card in demos, a short notice in a live app
+  function payDemo(label, amount) {
+    if (INFO && (INFO.bot || INFO.trial) && SHOWCASE.indexOf(APP) < 0) { try { tw.showAlert(fr ? 'Le paiement en ligne n\'est pas encore activé. Ta commande est bien envoyée.' : 'Online payment is not set up yet. Your order has been sent.'); } catch (e) {} return Promise.resolve(false); }
+    return new Promise(function (done) {
+      css('#sayappP{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(5,5,12,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font-family:Inter,system-ui,-apple-system,sans-serif}#sayappP .k{width:100%;max-width:340px;border-radius:26px;overflow:hidden;background:#11111d;border:1px solid rgba(255,255,255,.1);color:#fff;text-align:center}#sayappP .v{height:150px;display:grid;place-items:center;font-size:70px;position:relative;background:linear-gradient(140deg,#2f80ff,#7c5cff)}#sayappP .v i{position:absolute;top:12px;left:12px;font:700 10px Inter,sans-serif;letter-spacing:.12em;background:rgba(0,0,0,.35);padding:4px 8px;border-radius:99px;font-style:normal}#sayappP h3{margin:18px 18px 6px;font-size:21px}#sayappP b{display:block;margin:0 18px 8px;font-size:15px;color:#ffd76a}#sayappP p{margin:0 22px 18px;color:#a9a8c4;font-size:14px;line-height:1.45}#sayappP a{display:block;margin:0 18px 10px;padding:15px;border-radius:16px;color:#1a1000;font:800 16px Inter,sans-serif;text-decoration:none;background:linear-gradient(120deg,#ffd76a,#ff9f43)}#sayappP button{display:block;width:calc(100% - 36px);margin:0 18px 18px;padding:13px;border:0;border-radius:14px;background:rgba(255,255,255,.08);color:#fff;font:600 14px Inter,sans-serif}');
+      var x = document.createElement('div'); x.id = 'sayappP';
+      var t = String(label || '').slice(0, 60) + (amount ? ' · ' + String(amount).slice(0, 30) : '');
+      x.innerHTML = '<div class="k"><div class="v"><i>' + (fr ? 'EXEMPLE · PAIEMENT' : 'EXAMPLE · PAYMENT') + '</i>💳</div><h3>' + (fr ? 'Ici, ton client paie' : 'Your customer pays here') + '</h3>' + (t ? '<b></b>' : '') + '<p>' + (fr ? 'Sur ton appli, ce bouton ouvre ton propre lien de paiement (PayPal, Stripe, SumUp…) et l\'argent arrive directement chez toi.' : 'In your app, this button opens your own payment link (PayPal, Stripe, SumUp…) and the money goes straight to you.') + '</p><a href="#">✨ ' + (fr ? 'Créer mon appli' : 'Build my app') + '</a><button>' + (fr ? 'Fermer' : 'Close') + '</button></div>';
+      if (t) x.querySelector('b').textContent = t;
+      document.body.appendChild(x);
+      x.querySelector('a').onclick = function (e) { e.preventDefault(); var u = 'https://t.me/SayAppBuilderBot?start=src_demo_pay_' + APP; try { tw.openTelegramLink(u); } catch (z) { location.href = u; } };
+      x.querySelector('button').onclick = function () { x.remove(); done(false); };
+    });
+  }
   function loadJs(src, test) { return new Promise(function (ok, ko) { if (test()) return ok(); var s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = ko; document.head.appendChild(s); setTimeout(function () { if (test()) ok(); else ko(new Error('timeout')); }, 7000); }); }
   function adsgram(block) { return loadJs('https://sad.adsgram.ai/js/sad.min.js', function () { return !!window.Adsgram; }).then(function () { return window.Adsgram.init({ blockId: String(block) }).show(); }).then(function () { return true; }, function (e) { return !!(e && e.done); }); }
   function galaxy(id) { return loadJs('https://app.adsgalaxy.online/sdk.js?id=' + encodeURIComponent(id), function () { return !!window.showAdsGalaxy; }).then(function () { return window.showAdsGalaxy(); }).then(function () { return true; }, function () { return false; }); }
@@ -156,6 +173,6 @@
     try { localStorage.setItem(k, String(Date.now())); } catch (e) {}
     setTimeout(function () { playAd(ADS.agi || ADS.ag); }, 1200);
   }
-  function boot() { adsReady = call({ action: 'info' }).then(function (i) { ADS = (i && i.ads) || null; show(i); if (ADS && (ADS.ag || ADS.agx)) openAd(); else demoAd(i); return i; }); madeLink(); setTimeout(madeLink, 1500); setTimeout(function () { madeLink(true); }, 4000); }
+  function boot() { adsReady = call({ action: 'info' }).then(function (i) { ADS = (i && i.ads) || null; INFO = i; show(i); if (ADS && (ADS.ag || ADS.agx)) openAd(); else demoAd(i); return i; }); madeLink(); setTimeout(madeLink, 1500); setTimeout(function () { madeLink(true); }, 4000); }
   if (document.body) boot(); else document.addEventListener('DOMContentLoaded', boot);
 })();
