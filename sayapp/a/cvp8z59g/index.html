@@ -1,0 +1,303 @@
+<!-- sayapp cvp8z59g v1 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<title>Crypto Brain</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060b20;--navy:#0d1838;--gold:#f5c451;--gold2:#d99a1e;--ok:#2fd18b;--bad:#ff5d6c;--txt:#eef2ff;--mut:#8f9bc4;--glass:rgba(255,255,255,.06);--line:rgba(255,255,255,.1)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--txt);font-family:Sora,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-size:15px;overflow-x:hidden}
+body{min-height:100vh;background:radial-gradient(600px 400px at 85% -10%,rgba(245,196,81,.16),transparent 60%),radial-gradient(500px 500px at -10% 30%,rgba(60,90,220,.25),transparent 60%),var(--bg)}
+.wrap{max-width:440px;margin:0 auto;padding:0 16px calc(24px + env(safe-area-inset-bottom))}
+header{display:flex;align-items:center;justify-content:space-between;padding:calc(var(--sa-top,0px) + 8px) 0 8px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:-.3px}
+.logo i{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-style:normal;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1203;font-size:18px;box-shadow:0 6px 20px rgba(245,196,81,.35)}
+.lang{display:flex;background:var(--glass);border:1px solid var(--line);border-radius:999px;padding:3px}
+.lang button{border:0;background:none;color:var(--mut);font:600 12px Sora,sans-serif;padding:6px 11px;border-radius:999px;cursor:pointer;transition:.2s}
+.lang button.on{background:var(--gold);color:#1a1203}
+.card{background:linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid var(--line);border-radius:22px;padding:20px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.08)}
+.screen{display:none}.screen.on{display:block;animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.lbl{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--mut);font-weight:600}
+.hero{text-align:center;margin-top:16px;padding:28px 20px}
+.orb{width:96px;height:96px;margin:0 auto 16px;border-radius:50%;display:grid;place-items:center;font-size:48px;background:radial-gradient(circle at 35% 30%,#ffe59a,var(--gold) 45%,var(--gold2));box-shadow:0 0 50px rgba(245,196,81,.45),0 0 0 8px rgba(245,196,81,.08);animation:float 4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-6px)}}
+h1{font-size:30px;font-weight:800;letter-spacing:-.8px;background:linear-gradient(90deg,#fff,#ffe3a0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mut);margin:8px auto 0;line-height:1.5;max-width:300px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px 0}
+.stat{background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:12px 6px;text-align:center}
+.stat b{display:block;font-size:20px;font-weight:700;color:var(--gold);margin-bottom:2px}
+.stat span{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--mut)}
+.btn{width:100%;border:0;border-radius:18px;padding:17px;font:700 16px Sora,sans-serif;cursor:pointer;transition:transform .15s,box-shadow .2s;color:#1a1203;background:linear-gradient(135deg,#ffe08a,var(--gold) 45%,var(--gold2));box-shadow:0 10px 30px rgba(245,196,81,.35),inset 0 1px 0 rgba(255,255,255,.6)}
+.btn:active,.ans:active,.lang button:active{transform:scale(.96)}
+.btn.ghost{background:var(--glass);color:var(--txt);border:1px solid var(--line);box-shadow:none}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.sec{margin-top:24px}.sec h3{font-size:17px;font-weight:700;margin:4px 0 12px}
+.lb{display:flex;flex-direction:column;gap:6px}
+.li{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:var(--glass);border:1px solid transparent}
+.li.me{border-color:rgba(245,196,81,.6);background:rgba(245,196,81,.12);box-shadow:0 0 20px rgba(245,196,81,.15)}
+.li .r{width:28px;text-align:center;font-weight:700;color:var(--mut)}
+.li .n{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li .v{font-weight:700;color:var(--gold)}
+.sk{height:46px;border-radius:14px;background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.1),rgba(255,255,255,.04));background-size:200% 100%;animation:sh 1.2s infinite}
+@keyframes sh{to{background-position:-200% 0}}
+.empty{text-align:center;color:var(--mut);padding:20px}
+.qtop{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+.pill{padding:7px 12px;border-radius:999px;background:var(--glass);border:1px solid var(--line);font-size:13px;font-weight:600}
+.pill.fire{color:var(--gold);border-color:rgba(245,196,81,.4);transition:transform .2s}
+.bar{height:5px;border-radius:5px;background:rgba(255,255,255,.08);margin:14px 0 4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold2),var(--gold));transition:width .4s ease;border-radius:5px}
+.ringw{position:relative;width:112px;height:112px;margin:16px auto 8px}
+.ringw svg{transform:rotate(-90deg)}
+.ringw .t{position:absolute;inset:0;display:grid;place-items:center;font-size:30px;font-weight:800}
+#ring{transition:stroke .3s}
+.qcard{margin-top:8px;min-height:110px;display:flex;align-items:center}
+.qcard p{font-size:18px;font-weight:600;line-height:1.45}
+.answers{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.ans{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:14px;border-radius:16px;border:1px solid var(--line);background:var(--glass);color:var(--txt);font:500 15px Sora,sans-serif;cursor:pointer;transition:transform .15s,background .25s,border-color .25s,opacity .25s}
+.ans em{flex:none;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-style:normal;font-weight:700;font-size:13px;background:rgba(255,255,255,.08);color:var(--gold)}
+.ans.ok{background:rgba(47,209,139,.16);border-color:var(--ok);animation:pop .3s}.ans.ok em{background:var(--ok);color:#03210f}
+.ans.bad{background:rgba(255,93,108,.16);border-color:var(--bad);animation:shake .35s}.ans.bad em{background:var(--bad);color:#fff}
+.ans.dim{opacity:.45}
+@keyframes pop{50%{transform:scale(1.03)}}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.fb{margin-top:12px;display:none;animation:in .25s}
+.fb.on{display:block}
+.fb .card{padding:16px}
+.fb h4{font-size:16px;margin-bottom:4px}
+.fb p{color:var(--mut);line-height:1.5;font-size:14px;margin-bottom:12px}
+.plus{position:fixed;font-weight:800;font-size:22px;color:var(--gold);pointer-events:none;text-shadow:0 0 18px rgba(245,196,81,.7);animation:up 1s ease forwards;z-index:9}
+@keyframes up{to{opacity:0;transform:translateY(-70px) scale(1.2)}}
+.res{text-align:center;margin-top:16px}
+.rank{font-size:56px;line-height:1;margin-bottom:8px}
+.rt{font-size:26px;font-weight:800;color:var(--gold)}
+.big{font-size:48px;font-weight:800;letter-spacing:-1.5px;margin:12px 0 4px;background:linear-gradient(90deg,#fff,#ffe3a0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cf{position:fixed;top:-12px;width:9px;height:14px;border-radius:2px;z-index:20;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.9}}
+footer{text-align:center;color:var(--mut);font-size:11px;opacity:.6;margin-top:28px;letter-spacing:.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="logo"><i>₿</i>Crypto Brain</div><div class="lang"><button data-l="en">EN</button><button data-l="fr">FR</button></div></header>
+
+<section id="home" class="screen on">
+ <div class="card hero">
+  <div class="orb">🧠</div>
+  <span class="lbl" data-i="daily"></span>
+  <h1>Crypto Brain</h1>
+  <p class="sub" data-i="tagline"></p>
+  <div class="stats">
+   <div class="stat"><b id="sBest">0</b><span data-i="best"></span></div>
+   <div class="stat"><b id="sDays">0</b><span data-i="days"></span></div>
+   <div class="stat"><b id="sPlayed">0</b><span data-i="played"></span></div>
+  </div>
+  <button class="btn" id="startBtn" data-i="start"></button>
+ </div>
+ <div class="sec"><span class="lbl" data-i="global"></span><h3 data-i="top20"></h3><div class="lb" id="lbHome"></div></div>
+</section>
+
+<section id="quiz" class="screen">
+ <div class="qtop"><span class="pill" id="qNum">1/10</span><span class="pill fire" id="qStreak">🔥 0</span><span class="pill" id="qScore">0</span></div>
+ <div class="bar"><i id="qBar"></i></div>
+ <div class="ringw"><svg width="112" height="112"><circle cx="56" cy="56" r="50" stroke="rgba(255,255,255,.08)" stroke-width="8" fill="none"/><circle id="ring" cx="56" cy="56" r="50" stroke="#f5c451" stroke-width="8" fill="none" stroke-linecap="round" stroke-dasharray="314.16" stroke-dashoffset="0"/></svg><div class="t" id="tNum">15</div></div>
+ <div class="card qcard"><p id="qText"></p></div>
+ <div class="answers" id="answers"></div>
+ <div class="fb" id="fb"><div class="card"><h4 id="fbT"></h4><p id="fbX"></p><button class="btn" id="nextBtn"></button></div></div>
+</section>
+
+<section id="result" class="screen">
+ <div class="card res">
+  <div class="rank" id="rIcon">🏆</div>
+  <span class="lbl" data-i="yourRank"></span>
+  <div class="rt" id="rTitle"></div>
+  <div class="big" id="rScore">0</div>
+  <span class="lbl" data-i="points"></span>
+  <div class="stats">
+   <div class="stat"><b id="rAcc">0%</b><span data-i="accuracy"></span></div>
+   <div class="stat"><b id="rCor">0/10</b><span data-i="correct"></span></div>
+   <div class="stat"><b id="rStr">0</b><span data-i="bestStreak"></span></div>
+  </div>
+  <button class="btn" id="shareBtn" data-i="share"></button>
+  <div class="row2"><button class="btn ghost" id="againBtn" data-i="again"></button><button class="btn ghost" id="homeBtn" data-i="home"></button></div>
+ </div>
+ <div class="sec"><span class="lbl" data-i="global"></span><h3 data-i="top20"></h3><div class="lb" id="lbRes"></div></div>
+</section>
+<footer>Made with SayApp</footer>
+</div>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="cvp8z59g" data-full="1"></script>
+<script>
+window.addEventListener('load',()=>{
+const QS=[
+["Who created Bitcoin?|Satoshi Nakamoto|Vitalik Buterin|Pavel Durov|Hal Finney|Satoshi Nakamoto is the pseudonym of Bitcoin's still unknown creator.","Qui a créé Bitcoin ?|Satoshi Nakamoto|Vitalik Buterin|Pavel Durov|Hal Finney|Satoshi Nakamoto est le pseudonyme du créateur de Bitcoin, toujours inconnu."],
+["What is the maximum supply of Bitcoin?|21 million|100 million|1 billion|Unlimited|The protocol caps Bitcoin at 21 million coins, the last ones around 2140.","Quelle est l'offre maximale de Bitcoin ?|21 millions|100 millions|1 milliard|Illimitée|Le protocole limite Bitcoin à 21 millions, les derniers vers 2140."],
+["When was the Bitcoin genesis block mined?|2009|2006|2011|2013|Block 0 was mined on January 3, 2009.","Quand le bloc genèse de Bitcoin a-t-il été miné ?|2009|2006|2011|2013|Le bloc 0 a été miné le 3 janvier 2009."],
+["What is the smallest unit of Bitcoin called?|A satoshi|A gwei|A nanoton|A bit-cent|1 satoshi = 0.00000001 BTC.","Comment s'appelle la plus petite unité de Bitcoin ?|Le satoshi|Le gwei|Le nanoton|Le bit-cent|1 satoshi = 0,00000001 BTC."],
+["How often does the Bitcoin halving happen?|Every 210,000 blocks|Every year|Every 1 million blocks|Every 10 years|About every 4 years, the miner reward is cut in half.","À quelle fréquence a lieu le halving ?|Tous les 210 000 blocs|Chaque année|Tous les 1 million de blocs|Tous les 10 ans|Environ tous les 4 ans, la récompense des mineurs est divisée par deux."],
+["What is Bitcoin's target time between blocks?|About 10 minutes|About 1 minute|About 1 hour|About 5 seconds|Difficulty adjusts every 2016 blocks to stay near 10 minutes.","Quel est le temps cible entre deux blocs Bitcoin ?|Environ 10 minutes|Environ 1 minute|Environ 1 heure|Environ 5 secondes|La difficulté s'ajuste tous les 2016 blocs pour rester proche de 10 minutes."],
+["On Bitcoin Pizza Day 2010, how much BTC paid for two pizzas?|10,000 BTC|100 BTC|1 BTC|50,000 BTC|Laszlo Hanyecz paid 10,000 BTC on May 22, 2010.","Au Bitcoin Pizza Day 2010, combien de BTC pour deux pizzas ?|10 000 BTC|100 BTC|1 BTC|50 000 BTC|Laszlo Hanyecz a payé 10 000 BTC le 22 mai 2010."],
+["Which consensus mechanism does Bitcoin use?|Proof of Work|Proof of Stake|Proof of Authority|Proof of History|Miners compete with computing power to add new blocks.","Quel mécanisme de consensus utilise Bitcoin ?|Preuve de travail|Preuve d'enjeu|Preuve d'autorité|Preuve d'historique|Les mineurs rivalisent en puissance de calcul pour ajouter les blocs."],
+["Which hash function secures Bitcoin mining?|SHA-256|MD5|Keccak-256|Scrypt|Miners repeatedly compute double SHA-256 hashes.","Quelle fonction de hachage sécurise le minage Bitcoin ?|SHA-256|MD5|Keccak-256|Scrypt|Les mineurs calculent sans fin des doubles hachages SHA-256."],
+["In which year was the Bitcoin whitepaper published?|2008|2004|2010|2012|It appeared on October 31, 2008 on a cryptography mailing list.","En quelle année le livre blanc de Bitcoin a-t-il été publié ?|2008|2004|2010|2012|Il est paru le 31 octobre 2008 sur une liste de diffusion de cryptographie."],
+["What is the Lightning Network?|A layer 2 for fast Bitcoin payments|A new altcoin|A mining pool|A hardware wallet|It settles many payments off-chain, anchored on Bitcoin.","Qu'est-ce que le Lightning Network ?|Une couche 2 pour payer vite en Bitcoin|Un nouvel altcoin|Un pool de minage|Un portefeuille matériel|Il règle des paiements hors chaîne, ancrés sur Bitcoin."],
+["What does a private key do?|It proves you own and can spend funds|It shows your public balance|It speeds up transfers|It names your wallet|Whoever holds the private key controls the coins.","À quoi sert une clé privée ?|Prouver que vous pouvez dépenser les fonds|Afficher votre solde public|Accélérer les transferts|Nommer votre portefeuille|Celui qui détient la clé privée contrôle les fonds."],
+["Someone in a chat asks for your seed phrase. What do you do?|Never share it|Share it if they are an admin|Share half of it|Send it by email instead|Your seed phrase is your wallet. Real support never asks for it.","Quelqu'un vous demande votre phrase secrète. Que faites-vous ?|Ne jamais la partager|La donner si c'est un admin|En donner la moitié|L'envoyer par e-mail|Votre phrase secrète, c'est votre portefeuille. Le vrai support ne la demande jamais."],
+["Where does the word HODL come from?|A typo in a 2013 forum post|An exchange acronym|A Bitcoin command|A Wall Street term|A user misspelled HOLD on Bitcointalk and it became a meme.","D'où vient le mot HODL ?|D'une faute de frappe en 2013 sur un forum|D'un sigle d'exchange|D'une commande Bitcoin|D'un terme de Wall Street|Un utilisateur a mal écrit HOLD sur Bitcointalk, c'est devenu un mème."],
+["What is a cold wallet?|A wallet kept offline|A wallet with no funds|A wallet on an exchange|A frozen account|Keeping keys offline protects them from online hacks.","Qu'est-ce qu'un cold wallet ?|Un portefeuille hors ligne|Un portefeuille vide|Un portefeuille sur un exchange|Un compte gelé|Garder ses clés hors ligne les protège des piratages."],
+["Who proposed Ethereum?|Vitalik Buterin|Satoshi Nakamoto|Charlie Lee|Changpeng Zhao|Vitalik Buterin described Ethereum in a 2013 whitepaper.","Qui a proposé Ethereum ?|Vitalik Buterin|Satoshi Nakamoto|Charlie Lee|Changpeng Zhao|Vitalik Buterin a décrit Ethereum dans un livre blanc en 2013."],
+["Since The Merge in 2022, Ethereum uses...|Proof of Stake|Proof of Work|Delegated mining|Proof of Space|The Merge cut Ethereum's energy use by more than 99%.","Depuis The Merge en 2022, Ethereum utilise...|La preuve d'enjeu|La preuve de travail|Le minage délégué|La preuve d'espace|The Merge a réduit la consommation d'Ethereum de plus de 99 %."],
+["What is a stablecoin?|A token pegged to an asset like the dollar|A coin that never changes code|A coin only for staking|A coin mined on stable servers|Stablecoins aim to keep a steady value, often 1 USD.","Qu'est-ce qu'un stablecoin ?|Un jeton indexé sur un actif comme le dollar|Une crypto au code figé|Une crypto réservée au staking|Une crypto minée sur des serveurs stables|Un stablecoin vise une valeur stable, souvent 1 USD."],
+["What is a smart contract?|Code that runs itself on a blockchain|A PDF signed online|A legal crypto license|An AI trading bot|It executes automatically when its conditions are met.","Qu'est-ce qu'un smart contract ?|Du code qui s'exécute seul sur une blockchain|Un PDF signé en ligne|Une licence crypto|Un bot de trading IA|Il s'exécute automatiquement quand ses conditions sont remplies."],
+["What does NFT stand for?|Non-Fungible Token|New Finance Technology|Network Fee Transfer|Non-Financial Trade|Each NFT is unique and not interchangeable one for one.","Que signifie NFT ?|Non-Fungible Token|New Finance Technology|Network Fee Transfer|Non-Financial Trade|Chaque NFT est unique et non interchangeable."],
+["What does DeFi mean?|Decentralized Finance|Digital Fiat|Defined Fees|Deferred Finance|DeFi offers lending and trading without a bank in the middle.","Que signifie DeFi ?|Finance décentralisée|Monnaie fiat numérique|Frais définis|Finance différée|La DeFi propose prêts et échanges sans banque au milieu."],
+["On Ethereum, what is gas?|The fee unit for computation|A mining reward|A type of token|A wallet backup|Every operation costs gas, paid in ETH.","Sur Ethereum, qu'est-ce que le gas ?|L'unité de frais de calcul|Une récompense de minage|Un type de jeton|Une sauvegarde de portefeuille|Chaque opération coûte du gas, payé en ETH."],
+["In crypto slang, a whale is...|Someone holding a huge amount|A new investor|A failed project|A slow transaction|Whales can move markets with big orders.","En argot crypto, une baleine c'est...|Quelqu'un qui détient énormément|Un nouvel investisseur|Un projet raté|Une transaction lente|Les baleines peuvent faire bouger le marché."],
+["What does FOMO mean?|Fear Of Missing Out|Fund Of Market Orders|First Order Market Open|Free Online Mining Offer|FOMO pushes people to buy in a hurry, often at the top.","Que signifie FOMO ?|Fear Of Missing Out, la peur de rater|Fund Of Market Orders|First Order Market Open|Free Online Mining Offer|Le FOMO pousse à acheter dans la précipitation, souvent au plus haut."],
+["What does DYOR mean?|Do Your Own Research|Double Your Original Return|Deposit Your Own Reserve|Don't Yield On Rallies|Always check a project yourself before trusting it.","Que signifie DYOR ?|Do Your Own Research, faites vos recherches|Double Your Original Return|Deposit Your Own Reserve|Don't Yield On Rallies|Vérifiez toujours un projet vous-même avant de lui faire confiance."],
+["What links blocks together in a blockchain?|The hash of the previous block|A central server|Email addresses|Random numbers|Changing one block breaks every hash that follows.","Qu'est-ce qui relie les blocs d'une blockchain ?|Le hash du bloc précédent|Un serveur central|Des adresses e-mail|Des nombres aléatoires|Modifier un bloc casse tous les hachages suivants."],
+["What is an altcoin?|Any crypto other than Bitcoin|A coin on old hardware|Only a stablecoin|Only a Bitcoin fork|Altcoins include ETH, TON, SOL and thousands more.","Qu'est-ce qu'un altcoin ?|Toute crypto autre que Bitcoin|Une crypto sur vieux matériel|Uniquement un stablecoin|Uniquement un fork de Bitcoin|Les altcoins incluent ETH, TON, SOL et des milliers d'autres."],
+["What is a CEX?|A centralized exchange|A crypto export tax|A cold exchange key|A code execution unit|On a CEX, a company holds your funds and runs the order book.","Qu'est-ce qu'un CEX ?|Un exchange centralisé|Une taxe crypto|Une clé d'échange froide|Une unité d'exécution|Sur un CEX, une entreprise détient vos fonds et gère le carnet d'ordres."],
+["What does TON stand for?|The Open Network|Token Of Nodes|Telegram Online Network|Transfer Over Net|Born as Telegram Open Network, it was renamed The Open Network.","Que signifie TON ?|The Open Network|Token Of Nodes|Telegram Online Network|Transfer Over Net|Né Telegram Open Network, il a été renommé The Open Network."],
+["Who originally designed TON?|Nikolai and Pavel Durov|Vitalik Buterin|Satoshi Nakamoto|Elon Musk|The Durov brothers published the TON design in 2018.","Qui a conçu TON à l'origine ?|Nikolai et Pavel Durov|Vitalik Buterin|Satoshi Nakamoto|Elon Musk|Les frères Durov ont publié la conception de TON en 2018."],
+["What is TON's native coin called?|Toncoin|Gram|TonCash|Telecoin|It was planned as Gram, then launched by the community as Toncoin.","Comment s'appelle la crypto native de TON ?|Toncoin|Gram|TonCash|Telecoin|Prévue sous le nom Gram, elle a été lancée par la communauté sous le nom Toncoin."],
+["How many nanotons are in 1 TON?|1 billion|1 million|100|1,000|Like satoshis for Bitcoin, nanotons are TON's smallest unit.","Combien de nanotons dans 1 TON ?|1 milliard|1 million|100|1 000|Comme le satoshi pour Bitcoin, le nanoton est la plus petite unité de TON."],
+["Which technique helps TON scale to millions of users?|Sharding|Halving|Mining pools|Hard forks|TON splits its workload across many shardchains.","Quelle technique aide TON à gérer des millions d'utilisateurs ?|Le sharding|Le halving|Les pools de minage|Les hard forks|TON répartit la charge sur de nombreuses shardchains."],
+["Which language was created for TON smart contracts?|FunC|Solidity|Rust|Move|FunC came first, Tact and Tolk were added later.","Quel langage a été créé pour les smart contracts TON ?|FunC|Solidity|Rust|Move|FunC est arrivé en premier, Tact et Tolk ensuite."],
+["Why did Telegram step back from TON in 2020?|A US SEC legal case|It ran out of servers|Bitcoin bought it|A hack|After the SEC lawsuit, the community took over TON.","Pourquoi Telegram s'est-il retiré de TON en 2020 ?|Un procès de la SEC américaine|Plus assez de serveurs|Bitcoin l'a racheté|Un piratage|Après le procès de la SEC, la communauté a repris TON."],
+["In which year was Telegram launched?|2013|2009|2016|2019|Pavel and Nikolai Durov launched Telegram in August 2013.","En quelle année Telegram a-t-il été lancé ?|2013|2009|2016|2019|Pavel et Nikolai Durov ont lancé Telegram en août 2013."],
+["What do you use to buy digital goods inside Telegram?|Telegram Stars|Durov Coins|Telegram Gems|Gram points|Stars pay for digital items in bots and Mini Apps.","Avec quoi achète-t-on des biens numériques dans Telegram ?|Les Telegram Stars|Les Durov Coins|Les Telegram Gems|Les points Gram|Les Stars paient les objets numériques dans les bots et Mini Apps."],
+["Where can you buy rare Telegram usernames?|Fragment|OpenSea|Telegraph|BotFather|Fragment auctions usernames and numbers, built on TON.","Où acheter des noms d'utilisateur Telegram rares ?|Fragment|OpenSea|Telegraph|BotFather|Fragment met aux enchères noms et numéros, sur TON."],
+["What is a Telegram Mini App?|A web app that runs inside Telegram|A sticker pack|A Telegram server|A paid channel|Mini Apps open instantly in Telegram, no install needed.","Qu'est-ce qu'une Mini App Telegram ?|Une appli web qui tourne dans Telegram|Un pack de stickers|Un serveur Telegram|Une chaîne payante|Les Mini Apps s'ouvrent dans Telegram, sans installation."],
+["What is Tonkeeper?|A self-custody TON wallet|A TON mining farm|A Telegram channel|A Bitcoin block explorer|With self-custody, only you hold your keys.","Qu'est-ce que Tonkeeper ?|Un portefeuille TON non custodial|Une ferme de minage TON|Une chaîne Telegram|Un explorateur de blocs Bitcoin|En non custodial, vous seul détenez vos clés."]
+];
+const D={
+en:{daily:"Daily quiz",tagline:"10 questions on Bitcoin, crypto, TON and Telegram. Beat the clock, build your streak.",best:"Best",days:"Day streak",played:"Rounds",start:"Start today's quiz",global:"Global",top20:"Top 20 brains",yourRank:"Your rank",points:"points",accuracy:"Accuracy",correct:"Correct",bestStreak:"Best streak",share:"Share my score",again:"Play again",home:"Home",ok:"Correct!",bad:"Not quite",time:"Time's up",next:"Next question",results:"See results",empty:"No scores yet. Be the first on the board!",you:"You",player:"Player",bonus:"streak bonus",shareTxt:"I scored {s} points ({c}/10) on Crypto Brain and earned the rank {r}. Can you beat me?",copied:"Copied to clipboard",ranks:["Newbie","Hodler","Whale","Satoshi"]},
+fr:{daily:"Quiz du jour",tagline:"10 questions sur Bitcoin, la crypto, TON et Telegram. Battez le chrono, enchaînez les séries.",best:"Record",days:"Jours d'affilée",played:"Parties",start:"Lancer le quiz du jour",global:"Mondial",top20:"Top 20 des cerveaux",yourRank:"Votre rang",points:"points",accuracy:"Précision",correct:"Bonnes",bestStreak:"Meilleure série",share:"Partager mon score",again:"Rejouer",home:"Accueil",ok:"Bonne réponse !",bad:"Raté",time:"Temps écoulé",next:"Question suivante",results:"Voir les résultats",empty:"Aucun score pour l'instant. Soyez le premier !",you:"Vous",player:"Joueur",bonus:"bonus série",shareTxt:"J'ai fait {s} points ({c}/10) sur Crypto Brain et obtenu le rang {r}. Tu peux me battre ?",copied:"Copié dans le presse-papiers",ranks:["Newbie","Hodler","Whale","Satoshi"]}
+};
+const $=id=>document.getElementById(id), tg=window.Telegram&&Telegram.WebApp, SA=window.SayApp;
+const hap=t=>{try{SA&&SA.haptic(t)}catch(e){}};
+let lang='en', stats={best:0,days:0,played:0,day:''};
+const T=k=>(D[lang]&&D[lang][k])||D.en[k];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+try{tg&&tg.ready();tg&&tg.expand()}catch(e){}
+
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-i]').forEach(e=>e.textContent=T(e.dataset.i));
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===lang));
+  if(cur>=0) refreshQ();
+  if($('result').classList.contains('on')) $('rTitle').textContent=T('ranks')[rankIdx()];
+}
+document.querySelectorAll('.lang button').forEach(b=>b.onclick=()=>{lang=b.dataset.l;hap('tap');applyLang();SA&&SA.set('lang',lang).catch(()=>{})});
+
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id===id));window.scrollTo(0,0)}
+function count(el,to,suf=''){const from=parseInt(el.textContent)||0,t0=performance.now();const f=n=>{const p=Math.min(1,(n-t0)/700),e=1-Math.pow(1-p,3);el.textContent=Math.round(from+(to-from)*e)+suf;if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+
+// Quiz state
+let round=[],cur=-1,order=[],score=0,streak=0,maxStreak=0,good=0,locked=false,fbState='',raf=0,tEnd=0;
+const DUR=15000, C=2*Math.PI*50;
+function parts(i){return QS[i][lang==='fr'?1:0].split('|')}
+function startRound(){
+  round=shuffle([...QS.keys()]).slice(0,10);cur=-1;score=0;streak=0;maxStreak=0;good=0;
+  $('qScore').textContent='0';$('qStreak').textContent='🔥 0';show('quiz');hap('tap');nextQ();
+}
+function nextQ(){
+  cur++;if(cur>=10)return finish();
+  locked=false;fbState='';order=shuffle([0,1,2,3]);
+  $('fb').classList.remove('on');$('qNum').textContent=(cur+1)+'/10';$('qBar').style.width=(cur*10)+'%';
+  const box=$('answers');box.innerHTML='';
+  order.forEach((o,p)=>{const b=document.createElement('button');b.className='ans';b.innerHTML='<em>'+'ABCD'[p]+'</em><span></span>';b.onclick=e=>answer(p,e);box.appendChild(b)});
+  refreshQ();tEnd=performance.now()+DUR;cancelAnimationFrame(raf);tick();
+}
+function refreshQ(){
+  if(cur<0||cur>=10)return;const s=parts(round[cur]);
+  $('qText').textContent=s[0];
+  [...$('answers').children].forEach((b,p)=>b.querySelector('span').textContent=s[1+order[p]]);
+  if(fbState){$('fbT').textContent=T(fbState);$('fbX').textContent=s[5];$('nextBtn').textContent=cur===9?T('results'):T('next')}
+}
+function tick(){
+  const left=Math.max(0,tEnd-performance.now()),r=$('ring');
+  r.style.strokeDashoffset=C*(1-left/DUR);r.style.stroke=left<5000?'#ff5d6c':'#f5c451';
+  $('tNum').textContent=Math.ceil(left/1000);
+  if(left<=0){answer(-1);return}
+  raf=requestAnimationFrame(tick);
+}
+function answer(p,ev){
+  if(locked)return;locked=true;cancelAnimationFrame(raf);
+  const left=Math.max(0,tEnd-performance.now()),btns=[...$('answers').children],ci=order.indexOf(0);
+  btns.forEach((b,i)=>{if(i===ci)b.classList.add('ok');else if(i!==p)b.classList.add('dim')});
+  if(p===ci){
+    streak++;good++;maxStreak=Math.max(maxStreak,streak);
+    const bonus=streak>=2?Math.min(100,25*(streak-1)):0,gain=100+Math.round(left/1000)*10+bonus;
+    score+=gain;fbState='ok';hap('ok');
+    const rc=ev&&ev.currentTarget?ev.currentTarget.getBoundingClientRect():{left:150,top:300,width:80};
+    floatTxt('+'+gain,rc.left+rc.width/2-30,rc.top);
+    if(bonus)setTimeout(()=>floatTxt('🔥 '+T('bonus'),rc.left+rc.width/2-70,rc.top-30),150);
+    count($('qScore'),score);
+  }else{
+    if(p>=0)btns[p].classList.add('bad');streak=0;fbState=p<0?'time':'bad';hap('error');
+  }
+  const st=$('qStreak');st.textContent='🔥 '+streak;st.style.transform='scale(1.2)';setTimeout(()=>st.style.transform='',200);
+  $('fb').classList.add('on');refreshQ();
+}
+function floatTxt(t,x,y){const d=document.createElement('div');d.className='plus';d.textContent=t;d.style.left=Math.max(8,x)+'px';d.style.top=y+'px';document.body.appendChild(d);setTimeout(()=>d.remove(),1000)}
+$('nextBtn').onclick=()=>{hap('tap');nextQ()};
+
+const rankIdx=()=>good>=10?3:good>=7?2:good>=4?1:0;
+async function finish(){
+  cur=-1;$('qBar').style.width='100%';
+  const ri=rankIdx();
+  $('rIcon').textContent=['🌱','💎','🐋','👑'][ri];$('rTitle').textContent=T('ranks')[ri];
+  $('rScore').textContent='0';$('rAcc').textContent='0%';$('rCor').textContent=good+'/10';$('rStr').textContent=maxStreak;
+  show('result');setTimeout(()=>{count($('rScore'),score);count($('rAcc'),good*10,'%')},200);
+  if(good===10){confetti();hap('ok')}
+  const today=new Date().toISOString().slice(0,10),y=new Date(Date.now()-864e5).toISOString().slice(0,10);
+  if(stats.day!==today){stats.days=stats.day===y?stats.days+1:1;stats.day=today}
+  stats.played++;const improved=score>stats.best;if(improved)stats.best=score;
+  renderStats();
+  try{await SA.set('stats',stats);if(improved)await SA.set('best',stats.best)}catch(e){}
+  loadLB('lbRes');
+}
+function confetti(){
+  const cols=['#f5c451','#ffe08a','#2fd18b','#6c8cff','#ffffff','#d99a1e'];
+  for(let i=0;i<90;i++){const c=document.createElement('div');c.className='cf';c.style.left=Math.random()*100+'vw';c.style.background=cols[i%cols.length];
+    c.style.animationDuration=(1.8+Math.random()*1.6)+'s';c.style.animationDelay=Math.random()*.6+'s';c.style.transform='rotate('+Math.random()*360+'deg)';
+    document.body.appendChild(c);setTimeout(()=>c.remove(),4200)}
+}
+function renderStats(){count($('sBest'),stats.best);count($('sDays'),stats.days);count($('sPlayed'),stats.played)}
+
+async function loadLB(id){
+  const el=$(id);el.innerHTML='<div class="sk"></div><div class="sk"></div><div class="sk"></div>';
+  let list=[];try{list=await SA.top('best',20)||[]}catch(e){}
+  if(!list.length){el.innerHTML='<div class="card empty">🏁 '+T('empty')+'</div>';return}
+  el.innerHTML=list.map((r,i)=>'<div class="li'+(r.me?' me':'')+'"><span class="r">'+(['🥇','🥈','🥉'][i]||(i+1))+'</span><span class="n">'+esc(r.name||T('player'))+(r.me?' · '+T('you'):'')+'</span><span class="v">'+(r.value||0)+'</span></div>').join('');
+}
+
+$('startBtn').onclick=startRound;$('againBtn').onclick=startRound;
+$('homeBtn').onclick=()=>{hap('tap');show('home');loadLB('lbHome')};
+$('shareBtn').onclick=async()=>{
+  hap('tap');const txt=T('shareTxt').replace('{s}',score).replace('{c}',good).replace('{r}',T('ranks')[rankIdx()]);
+  const url=location.origin+location.pathname;
+  try{if(tg&&tg.openTelegramLink){tg.openTelegramLink('https://t.me/share/url?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(txt));return}}catch(e){}
+  try{if(navigator.share){await navigator.share({text:txt,url});return}}catch(e){}
+  try{await navigator.clipboard.writeText(txt+' '+url);floatTxt(T('copied'),60,300)}catch(e){}
+};
+
+(async()=>{
+  const lc=((SA&&SA.user&&SA.user.language_code)||(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user&&tg.initDataUnsafe.user.language_code)||'en').slice(0,2);
+  lang=lc==='fr'?'fr':'en';
+  try{const l=await SA.get('lang');if(l==='en'||l==='fr')lang=l}catch(e){}
+  applyLang();
+  try{const s=await SA.get('stats');if(s&&typeof s==='object')stats=Object.assign(stats,s)}catch(e){}
+  renderStats();loadLB('lbHome');
+})();
+});
+</script>
+</body>
+</html>
