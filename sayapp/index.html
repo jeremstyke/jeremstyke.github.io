@@ -820,10 +820,10 @@ input.tk:focus{border-color:var(--v)}
   $('how').innerHTML = T.how.map(function (h) { return '<div class="st"><i>' + h[0] + '</i><div><b>' + esc(h[1]) + '</b><span>' + esc(h[2]) + '</span></div></div>'; }).join('');
   function paintTop() {
     var L = S.lim; if (!L) return;
-    var p = $('plan'); p.className = 'plan' + (L.pro ? ' pro' : L.creator ? ' cr' : ''); p.textContent = L.pro ? T.pro : L.creator ? T.plCreator : T.free;
+    var p = $('plan'); p.className = 'plan' + (L.pro ? ' pro' : L.creator ? ' cr' : ''); p.textContent = L.pro || L.paidOnly ? T.pro : L.creator ? T.plCreator : T.free;
     p.onclick = function () { if (!L.pro) { hap(); creatorSheet(false); } };
-    $('quota').textContent = L.pro ? T.quotaP : L.creator ? T.quotaC(L.gens, L.freeGens, L.freeEdits) : T.quotaL(L.gens, L.freeGens, Math.max(0, L.freeEdits - (L.edits || 0)));
-    $('crUp').hidden = !!(L.pro || L.creator); $('crUp').textContent = T.crUp(L.creatorGens || 5); $('crUp').onclick = function () { hap(); creatorSheet(false); };
+    $('quota').textContent = L.paidOnly && !L.pro ? PQ.quota.replace('{p}', Number(L.price || 1000).toLocaleString(LOC)) : L.pro ? T.quotaP : L.creator ? T.quotaC(L.gens, L.freeGens, L.freeEdits) : T.quotaL(L.gens, L.freeGens, Math.max(0, L.freeEdits - (L.edits || 0)));
+    $('crUp').hidden = !!(L.pro || L.creator || L.paidOnly); $('crUp').textContent = T.crUp(L.creatorGens || 5); $('crUp').onclick = function () { hap(); creatorSheet(false); };
     var n = S.apps.filter(function (a) { return a.version > 0 || a.status === 'generating'; }).length;
     $('nApps').hidden = !n; $('nApps').textContent = n;
   }
@@ -886,10 +886,11 @@ input.tk:focus{border-color:var(--v)}
     var own = idea.value.trim(), brief = wizBrief(), xn = $('xName').value.trim(), xd = $('xDesc').value.trim();
     if (own.length < 3 && !brief && !xn) { hap('err'); toast(T.short); idea.focus(); return; }
     var t = (xn ? 'App name (use it as the title): ' + xn + '\n' : '') + (xd ? 'Short description: ' + xd + '\n' : '') + (W.col ? 'Main color: ' + W.col + ' (' + W.colN + ')\n' : '') + (brief ? brief + '\n' : '') + langBrief() + '\n' + 'Idea: ' + (own || T.wiz[0].o[(W.a[0] || [7])[0]][1]);
-    if (S.lim && !S.lim.pro && S.lim.gens >= S.lim.freeGens) { hap('err'); return limitSheet(); }
+    if (S.lim && !S.lim.paidOnly && !S.lim.pro && S.lim.gens >= S.lim.freeGens) { hap('err'); return limitSheet(); }
     hap(); $('go').disabled = true;
     call('create', { prompt: t, name: xn, desc: xd }).then(function (r) {
       $('go').disabled = false;
+      if (r.ok && r.pay) return proSheet({ id: r.id, title: xn || '' }, false, true);  // 3 nov 2026 (4h36, Jeremy): paid from the start
       if (r.ok) { idea.value = ''; idea.oninput(); $('xName').value = ''; $('xDesc').value = ''; W = { i: 0, a: [], lm: W.lm, lx: [] }; paintCols(); paintLangs(); wizRender(); S.lim && S.lim.gens++; startBuild(r.id, false); refresh(); return; }
       fail(r);
     });
@@ -1262,10 +1263,11 @@ input.tk:focus{border-color:var(--v)}
     };
   }
 
-  function proSheet(a, lim) {
+  var PQ = ({"fr": {"quota": "⭐ SayApp Pro : {p} ⭐ par mois pour 1 appli, construite et lancée sur ton propre bot", "payP": "Ton idée est prête. Active SayApp Pro pour cette appli : l'IA la construit tout de suite, puis tu la lances sur ton propre bot."}, "en": {"quota": "⭐ SayApp Pro: {p} ⭐ a month for 1 app, built and launched on your own bot", "payP": "Your idea is ready. Activate SayApp Pro for this app: the AI builds it right away, then you launch it on your own bot."}, "id": {"quota": "⭐ SayApp Pro: {p} ⭐ per bulan untuk 1 aplikasi, dibuat dan diluncurkan di botmu sendiri", "payP": "Idemu sudah siap. Aktifkan SayApp Pro untuk aplikasi ini: AI langsung membuatnya, lalu kamu meluncurkannya di botmu sendiri."}, "ru": {"quota": "⭐ SayApp Pro: {p} ⭐ в месяц за 1 приложение, созданное и запущенное в твоём боте", "payP": "Идея готова. Активируй SayApp Pro для этого приложения: ИИ сразу его создаст, а потом ты запустишь его в своём боте."}, "es": {"quota": "⭐ SayApp Pro: {p} ⭐ al mes por 1 app, creada y lanzada en tu propio bot", "payP": "Tu idea está lista. Activa SayApp Pro para esta app: la IA la crea enseguida y luego la lanzas en tu propio bot."}, "pt": {"quota": "⭐ SayApp Pro: {p} ⭐ por mês para 1 app, criado e lançado no seu próprio bot", "payP": "Sua ideia está pronta. Ative o SayApp Pro para este app: a IA cria na hora e depois você lança no seu próprio bot."}, "tr": {"quota": "⭐ SayApp Pro: 1 uygulama için ayda {p} ⭐, kendi botunda oluşturulur ve yayınlanır", "payP": "Fikrin hazır. Bu uygulama için SayApp Pro'yu etkinleştir: yapay zekâ hemen oluşturur, sonra kendi botunda yayınlarsın."}})[lang] || null; if (!PQ) PQ = ({"quota": "⭐ SayApp Pro: {p} ⭐ a month for 1 app, built and launched on your own bot", "payP": "Your idea is ready. Activate SayApp Pro for this app: the AI builds it right away, then you launch it on your own bot."});
+  function proSheet(a, lim, nb) {
     var L0 = S.lim || {};  // 2 nov 2026 (23h03): founder prices for the first 100 customers
     var p = (S.lim && S.lim.price) || 1000, intro = !!(S.lim && S.lim.intro && S.lim.introPrice), ip = intro ? S.lim.introPrice : p;  // 2 nov 2026 (15h02): 250 the 1st month, then 1000
-    openSheet('<div class="prohead"><div>⭐</div><div><h2>' + esc(lim ? T.limT : T.proT) + '</h2><p class="sub" style="margin:0">' + esc(lim ? T.limP : T.proP) + '</p></div></div>' +
+    openSheet('<div class="prohead"><div>⭐</div><div><h2>' + esc(lim ? T.limT : T.proT + (a && a.title ? ' · ' + a.title : '')) + '</h2><p class="sub" style="margin:0">' + esc(nb ? PQ.payP : lim ? T.limP : T.proP) + '</p></div></div>' +
       '<div class="feat">' + T.feats.map(function (f) { return '<div><i>✓</i>' + esc(f) + '</div>'; }).join('') + '</div>' +
       '<div class="launch">' + esc(L0.founder ? T.fdL : intro ? T.launchI(p.toLocaleString(LOC)) : T.launchB) + '</div>' + '<div class="price">' + (L0.founder && L0.priceFull > ip ? '<s class="was">' + L0.priceFull.toLocaleString(LOC) + ' ⭐</s>' : '') + '<b>' + ip.toLocaleString(LOC) + ' ⭐</b><span>' + esc(intro ? T.introPer : T.per) + '</span>' + (intro ? '<em class="then">' + esc(T.thenP(p.toLocaleString(LOC))) + '</em>' : '') + '</div>' +
       (L0.founder && L0.founderLeft > 0 && !L0.isFounder ? '<div class="fdr">🔥 ' + esc(T.fdN(L0.founderLeft)) + '</div>' : '') + '<button class="cta gold" id="subGo">' + esc(intro ? T.introGo(ip) : T.subGo(p)) + '</button><div class="note">' + esc(intro ? T.introN(p.toLocaleString(LOC)) : T.perN) + '</div>');
@@ -1280,7 +1282,7 @@ input.tk:focus{border-color:var(--v)}
             hap('ok'); toast(T.paidW);
             var n = 0, iv = setInterval(function () {
               call('app', { id: a.id }).then(function (q) {
-                if ((q.ok && sub(q.app)) || ++n > 10) { clearInterval(iv); toast(T.paidOk); refresh(); if ((q.app || a).bot_username) closeSheet(); else botSheet(q.app || a); }
+                if ((q.ok && sub(q.app) && (!nb || q.app.status !== 'unpaid')) || ++n > 15) { clearInterval(iv); toast(T.paidOk); refresh(); if (nb) { try { idea.value = ''; idea.oninput(); $('xName').value = ''; $('xDesc').value = ''; } catch (e) {} return startBuild(a.id, false); } if ((q.app || a).bot_username) closeSheet(); else botSheet(q.app || a); }
               });
             }, 2000);
           });
@@ -1289,8 +1291,9 @@ input.tk:focus{border-color:var(--v)}
     };
   }
   // 2 nov 2026 (15h34): the Creator plan (500 stars / month) to test lots of ideas; Pro (per app) stays the way to launch on a bot
-  function limitSheet() { creatorSheet(true); }
+  function limitSheet() { pickProSheet(); }  // 3 nov 2026: paid only
   function creatorSheet(lim) {
+    if (S.lim && S.lim.paidOnly) return pickProSheet();  // 3 nov 2026: no more Creator
     var L = S.lim || {}, g = L.creatorGens || 5, e = L.creatorEdits || 30, p = L.creatorPrice || 500, fmt = function (x) { return Number(x).toLocaleString(LOC); };
     if (L.creator) {
       openSheet('<div class="prohead"><div>⚡</div><div><h2>' + esc(lim ? T.crLimT : T.crT) + '</h2><p class="sub" style="margin:0">' + esc(lim ? T.crLimP : T.crOn(new Date(L.creatorUntil).toLocaleDateString(LOC))) + '</p></div></div><button class="cta gold" id="crPro">' + esc(T.orPro) + '</button>');
