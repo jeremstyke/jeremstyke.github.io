@@ -1,4 +1,4 @@
-<!-- sayapp j88ff7t8 v5 -->
+<!-- sayapp j88ff7t8 v6 -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -17,6 +17,13 @@ button:active{transform:scale(.96)}
 header{padding:calc(var(--sa-top,0px) + 8px) 20px 8px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .logo{font-weight:900;font-size:26px;letter-spacing:-.5px;line-height:1}
 .logo span{background:linear-gradient(90deg,var(--yel),var(--accent),var(--cy));-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo{display:flex;align-items:center;gap:10px;min-width:0}
+.logo span{font-size:clamp(20px,6vw,26px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-bottom:2px}
+.mark{width:42px;height:42px;flex:0 0 42px;filter:drop-shadow(0 6px 16px rgba(255,79,163,.45)) drop-shadow(0 0 10px rgba(34,211,238,.25));animation:mpop .6s cubic-bezier(.2,1.4,.4,1) both;transition:transform .2s}
+.mark:active{transform:scale(.9) rotate(-8deg)}
+.mark .q{transform-origin:24px 24px;animation:mq 3s ease-in-out 1s infinite}
+@keyframes mpop{from{opacity:0;transform:scale(.4) rotate(-20deg)}to{opacity:1;transform:none}}
+@keyframes mq{0%,80%,100%{transform:none}86%{transform:rotate(-14deg) scale(1.08)}92%{transform:rotate(10deg) scale(1.08)}}
 .pill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:8px 14px;border-radius:999px;font-weight:800;font-size:16px;box-shadow:0 0 20px rgba(255,210,63,.15)}
 .pill b{color:var(--yel)}
 .label{font-size:11px;text-transform:uppercase;letter-spacing:1.6px;color:var(--mut);font-weight:700}
@@ -122,7 +129,7 @@ footer{text-align:center;color:rgba(184,169,230,.5);font-size:12px;padding:18px 
 </head>
 <body>
 <header>
-  <div class="logo"><span id="tTitle">Tu préfères ?</span></div>
+  <div class="logo"><svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lgA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF8A5B"/><stop offset="1" stop-color="#FF4FA3"/></linearGradient><linearGradient id="lgB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset="1" stop-color="#6366F1"/></linearGradient><clipPath id="lgC"><rect width="48" height="48" rx="14"/></clipPath></defs><g clip-path="url(#lgC)"><rect width="48" height="48" fill="url(#lgA)"/><path d="M31 0H48V48H17Z" fill="url(#lgB)"/><rect width="48" height="20" fill="#fff" opacity=".14"/></g><rect x=".75" y=".75" width="46.5" height="46.5" rx="13.5" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="1.5"/><g class="q"><circle cx="24" cy="24" r="11.5" fill="#140B2E" stroke="#FFD23F" stroke-width="2.5"/><text x="24" y="29.6" text-anchor="middle" font-family="Outfit,system-ui,sans-serif" font-weight="900" font-size="16" fill="#FFD23F">?</text></g></svg><span id="tTitle">Tu préfères ?</span></div>
   <div class="pill">⭐ <b id="score">0</b></div>
 </header>
 <main>
