@@ -1133,11 +1133,21 @@ input.tk:focus{border-color:var(--v)}
     });
   }
   // 2 nov 2026 (19h25, Jeremy): internal referral, paid every month while the referred person stays subscribed, withdrawal in USDT from 1 $
+  // 3 nov 2026 (20h25, Jeremy): the wallet showed 'from Baton' because Pass The Baton and SayApp share jeremstyke.github.io,
+  // so they shared the same TON Connect session. SayApp now keeps its own session under a 'sayapp_' prefix.
+  function mkTC() {
+    if (window.__saTC) return window.__saTC;
+    var pre = 'sayapp_', M = 'https://jeremstyke.github.io/sayapp/tonconnect-manifest.json';
+    var st = { setItem: function (k, v) { try { localStorage.setItem(pre + k, v); } catch (e) {} return Promise.resolve(); }, getItem: function (k) { var v = null; try { v = localStorage.getItem(pre + k); } catch (e) {} return Promise.resolve(v); }, removeItem: function (k) { try { localStorage.removeItem(pre + k); } catch (e) {} return Promise.resolve(); } };
+    var o = { manifestUrl: M };
+    try { if (TON_CONNECT_UI.TonConnect) o = { connector: new TON_CONNECT_UI.TonConnect({ manifestUrl: M, storage: st }) }; } catch (e) {}
+    window.__saTC = new TON_CONNECT_UI.TonConnectUI(o); return window.__saTC;
+  }
   var TC = null;
   function tcInit() {
     if (TC) return Promise.resolve(TC);
     return new Promise(function (ok, ko) { if (window.TON_CONNECT_UI) return ok(); var sc = document.createElement('script'); sc.src = 'https://unpkg.com/@tonconnect/ui@2.0.9/dist/tonconnect-ui.min.js'; sc.onload = ok; sc.onerror = ko; document.head.appendChild(sc); })
-      .then(function () { TC = new TON_CONNECT_UI.TonConnectUI({ manifestUrl: 'https://jeremstyke.github.io/sayapp/tonconnect-manifest.json' }); return TC; });
+      .then(function () { TC = mkTC(); return TC; });
   }
   function tcAddr(w) { try { return TON_CONNECT_UI.toUserFriendlyAddress(w.account.address); } catch (e) { return w.account.address; } }
   function refSheetOld() {
@@ -1449,7 +1459,7 @@ input.tk:focus{border-color:var(--v)}
     var p = [];
     if (!window.TON_CONNECT_UI) p.push(loadJs('https://unpkg.com/@tonconnect/ui@2.0.11/dist/tonconnect-ui.min.js'));
     if (!window.TonWeb) p.push(loadJs('https://unpkg.com/tonweb@0.0.66/dist/tonweb.js'));
-    return Promise.all(p).then(function () { if (!TCU) TCU = new TON_CONNECT_UI.TonConnectUI({ manifestUrl: 'https://jeremstyke.github.io/sayapp/tonconnect-manifest.json' }); return TCU; });
+    return Promise.all(p).then(function () { if (!TCU) TCU = mkTC(); return TCU; });
   }
   function tcAccount(t) {
     if (t.account) return Promise.resolve(t.account);
