@@ -1496,7 +1496,7 @@ input.tk:focus{border-color:var(--v)}
           (need > (r.tier || 0) ? (need === 1 ? '<button class="cta gold" id="tiGo">' + esc(T.tiGo1(Number(r.tier1).toLocaleString(LOC))) + '</button>' : '<button class="cta" id="tiJ">' + esc(T.tiGo2(Number(r.tier2).toLocaleString(LOC))) + '</button>') : '') + '</div>';
       }
       $('mgTier').innerHTML = tl;
-      if (r.texts) { $('mtS').value = r.texts.bot_short || ''; $('mtL').value = r.texts.bot_long || ''; $('mtW').value = r.texts.bot_welcome || ''; }
+      if (r.texts) { $('mtS').value = r.texts.bot_short || ''; $('mtL').value = r.texts.bot_long || ''; $('mtW').value = r.texts.bot_welcome || ''; if (!$('mtD').value && r.texts.bot_short) $('mtD').value = String(r.texts.bot_short).slice(0, 120); }
       if (r.logo && $('imLogo')) $('imLogo').textContent = '✅ ' + T.imLogo.replace(/^\S+\s/, '');
       if (r.welcome && $('imWel')) $('imWel').textContent = '✅ ' + T.imWel.replace(/^\S+\s/, '');
       if ($('tiGo')) $('tiGo').onclick = function () { $('tiGo').disabled = true; call('invoice', { id: a.id, tier: 1 }).then(function (x) { $('tiGo').disabled = false; if (!x.ok) { hap('err'); return toast(T.inv); } try { tw.openInvoice(x.link, function (st) { if (st === 'paid') { hap('ok'); toast(T.tiOk); closeSheet(); setTimeout(refresh, 2500); } }); } catch (e) { link(x.link); } }); };
