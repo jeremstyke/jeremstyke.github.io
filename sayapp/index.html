@@ -1116,18 +1116,21 @@ input.tk:focus{border-color:var(--v)}
     openSheet('<h2>' + esc(T.devT) + '</h2><p class="sub" id="devP">…</p><div id="devF"></div><div id="devL"></div>');
     call('devinfo').then(function (r) {
       if (!r.ok) { $('devP').textContent = T.net; return; }
-      var p = Number(r.price || 1500).toLocaleString(LOC);
-      $('devP').textContent = T.devP(p);
+      // 3 nov 2026 (21h25, Jeremy): the developer is paid with credits (Stars or USDT)
+      var dc = Number(r.credits || 0), p = dc ? dc.toLocaleString(LOC) : Number(r.price || 1500).toLocaleString(LOC), cw = function (x) { return dc ? x.replace('⭐', CR.cr) : x; };
+      $('devP').textContent = cw(T.devP(p));
       if (r.full) $('devF').innerHTML = '<div class="blk"><p>' + esc(T.devFull) + '</p></div>';
       else if (!pros.length) $('devF').innerHTML = '<div class="blk"><p>' + esc(T.devPro) + '</p></div>';
       else {
         $('devF').innerHTML = (pros.length > 1 ? '<select class="xin" id="devA">' + pros.map(function (a) { return '<option value="' + esc(a.id) + '">' + esc(a.title || a.id) + '</option>'; }).join('') + '</select>' : '') +
-          '<div class="field" style="margin-top:8px"><textarea id="devX" maxlength="2000" style="min-height:110px" placeholder="' + esc(T.devPh) + '"></textarea></div><button class="cta gold" id="devGo">' + esc(T.devGo(p)) + '</button>';
+          '<div class="field" style="margin-top:8px"><textarea id="devX" maxlength="2000" style="min-height:110px" placeholder="' + esc(T.devPh) + '"></textarea></div><button class="cta gold" id="devGo">' + esc(cw(T.devGo(p))) + '</button>' + (dc ? '<div class="quota">' + esc(Number((S.lim && S.lim.credits) || 0) === 1 ? NP.have.replace('{n}', 1).replace(/(cr[ée]dit|kredi)(o)?s\b/i, '$1$2').replace('кредитов', 'кредит') : NP.have.replace('{n}', Number((S.lim && S.lim.credits) || 0))) + '</div>' : '');
         $('devGo').onclick = function () {
           var v = $('devX').value.trim(); if (v.length < 15) { hap('err'); return toast(T.devShort); }
           $('devGo').disabled = true;
           call('dev', { id: $('devA') ? $('devA').value : pros[0].id, text: v }).then(function (x) {
             $('devGo').disabled = false;
+            if (x.ok && x.paid) { hap('ok'); toast(T.devOk); refresh(); return setTimeout(devSheet, 1200); }
+            if (!x.ok && x.error === 'credits') { hap('err'); return packSheet(null, false); }
             if (!x.ok) { hap('err'); return toast(x.error === 'full' ? T.devFull : x.error === 'sub' ? T.devPro : x.error === 'short' ? T.devShort : T.inv); }
             try { tw.openInvoice(x.link, function (st) { if (st === 'paid') { hap('ok'); toast(T.devOk); setTimeout(devSheet, 2500); } }); } catch (e) { link(x.link); }
           });
