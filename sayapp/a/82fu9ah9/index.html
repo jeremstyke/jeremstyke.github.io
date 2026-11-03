@@ -1,4 +1,4 @@
-<!-- sayapp 82fu9ah9 v1 -->
+<!-- sayapp 82fu9ah9 v2 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,6 +65,14 @@ footer{margin-top:auto;padding:12px 0 8px;font-size:11px;color:rgba(138,146,184,
 .two .val{font-size:40px}.cy{color:var(--cy);text-shadow:0 0 14px rgba(34,243,255,.6)}.gd{color:var(--gold);text-shadow:0 0 14px rgba(255,201,60,.5)}
 .nb{display:none;text-align:center;margin:-4px 0 14px;font-weight:700;color:var(--gold);letter-spacing:.14em;text-transform:uppercase;font-size:14px;animation:pop .5s .2s both}
 .nb.on{display:block}
+.adrow{display:flex;gap:12px;margin:0 0 14px}
+.adb{flex:1;min-width:0;height:56px;border-radius:18px;border:1px solid rgba(34,243,255,.55);background:linear-gradient(135deg,rgba(34,243,255,.16),rgba(143,123,255,.14));color:var(--txt);font:700 15px inherit;font-family:inherit;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 0 18px rgba(34,243,255,.25),inset 0 1px 0 rgba(255,255,255,.08);cursor:pointer;transition:transform .15s,opacity .2s;animation:pop .4s .1s both;backdrop-filter:blur(8px)}
+.adb.g{border-color:rgba(255,201,60,.6);background:linear-gradient(135deg,rgba(255,201,60,.18),rgba(255,43,214,.14));box-shadow:0 0 18px rgba(255,201,60,.25),inset 0 1px 0 rgba(255,255,255,.08)}
+.adb.g span:last-child{color:var(--gold);text-shadow:0 0 10px rgba(255,201,60,.6)}
+.adb:not(.g) span:last-child{color:var(--cy);text-shadow:0 0 10px rgba(34,243,255,.6)}
+.adb:active{transform:scale(.95)}.adb:disabled{opacity:.5;pointer-events:none}
+.adb .ai{font-size:18px}
+.adnote{text-align:center;font-size:13px;color:var(--mut);margin:-6px 0 12px;display:none}.adnote.on{display:block;animation:pop .3s both}
 h3{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);margin:20px 0 10px}
 .row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;font-size:15px;animation:pop .3s both}
 .row+.row{margin-top:4px}
@@ -122,6 +130,11 @@ h3{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)
     <div class="card"><div class="lbl" data-i="best"></div><div class="val gd" id="fb">0</div></div>
   </div>
   <div class="nb" id="nb" data-i="newbest"></div>
+  <div class="adrow" id="adrow">
+    <button class="adb" id="contBtn"><span class="ai">🎬</span><span data-i="cont"></span></button>
+    <button class="adb g" id="dblBtn"><span class="ai">🎬</span><span data-i="x2"></span></button>
+  </div>
+  <div class="adnote" id="adnote" data-i="noad"></div>
   <button class="btn" id="againBtn" data-i="again"></button>
   <h3 data-i="board"></h3>
   <div class="card" id="lb" style="padding:8px"></div>
@@ -131,11 +144,11 @@ h3{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)
 <script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="82fu9ah9" data-full="1"></script>
 <script>
 const D={
-en:{score:"Score",best:"Best",shield:"Shield",hint:"Swipe or use arrow keys to steer",tagline:"Eat, grow, glow. Don't bite yourself.",yourbest:"Your best",how:"How to play",t1:"Swipe or use arrow keys to steer",t2:"Golden apple: +5 points, hurry!",t3:"Shield: pass through yourself once",t4:"The longer you get, the faster you go",play:"Play",over:"Game over",newbest:"★ New best score ★",again:"Play again",board:"Global top 20",empty:"No scores yet. Be the first legend!",you:"you",notop:"Keep playing to enter the top 20",err:"Leaderboard unavailable right now",shieldUsed:"SHIELD!",player:"Player"},
-fr:{score:"Score",best:"Record",shield:"Bouclier",hint:"Glisse ou utilise les flèches pour diriger",tagline:"Mange, grandis, brille. Ne te mords pas.",yourbest:"Ton record",how:"Comment jouer",t1:"Glisse ou utilise les flèches pour diriger",t2:"Pomme dorée : +5 points, vite !",t3:"Bouclier : traverse ton corps une fois",t4:"Plus tu grandis, plus tu vas vite",play:"Jouer",over:"Partie finie",newbest:"★ Nouveau record ★",again:"Rejouer",board:"Top 20 mondial",empty:"Aucun score. Sois la première légende !",you:"toi",notop:"Continue pour entrer dans le top 20",err:"Classement indisponible pour le moment",shieldUsed:"BOUCLIER !",player:"Joueur"}};
+en:{score:"Score",best:"Best",shield:"Shield",hint:"Swipe or use arrow keys to steer",tagline:"Eat, grow, glow. Don't bite yourself.",yourbest:"Your best",how:"How to play",t1:"Swipe or use arrow keys to steer",t2:"Golden apple: +5 points, hurry!",t3:"Shield: pass through yourself once",t4:"The longer you get, the faster you go",play:"Play",over:"Game over",newbest:"★ New best score ★",again:"Play again",board:"Global top 20",empty:"No scores yet. Be the first legend!",you:"you",notop:"Keep playing to enter the top 20",err:"Leaderboard unavailable right now",shieldUsed:"SHIELD!",player:"Player",cont:"Continue",x2:"x2 score",noad:"No video available right now, try again later"},
+fr:{score:"Score",best:"Record",shield:"Bouclier",hint:"Glisse ou utilise les flèches pour diriger",tagline:"Mange, grandis, brille. Ne te mords pas.",yourbest:"Ton record",how:"Comment jouer",t1:"Glisse ou utilise les flèches pour diriger",t2:"Pomme dorée : +5 points, vite !",t3:"Bouclier : traverse ton corps une fois",t4:"Plus tu grandis, plus tu vas vite",play:"Jouer",over:"Partie finie",newbest:"★ Nouveau record ★",again:"Rejouer",board:"Top 20 mondial",empty:"Aucun score. Sois la première légende !",you:"toi",notop:"Continue pour entrer dans le top 20",err:"Classement indisponible pour le moment",shieldUsed:"BOUCLIER !",player:"Joueur",cont:"Continuer",x2:"Score x2",noad:"Aucune vidéo disponible, réessaie plus tard"}};
 const $=id=>document.getElementById(id);
 const S=window.SayApp||{get:async()=>null,set:async()=>{},top:async()=>[],haptic:()=>{},user:{}};
-let lang='en',sound=true,best=0;
+let lang='en',sound=true,best=0,revived=false,doubled=false,adBusy=false;
 const t=k=>(D[lang]&&D[lang][k])||D.en[k];
 function applyLang(){document.querySelectorAll('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));document.documentElement.lang=lang;document.querySelectorAll('[data-l]').forEach(s=>s.classList.toggle('on',s.dataset.l===lang))}
 function savePrefs(){S.set('prefs',{lang,sound}).catch(()=>{})}
@@ -149,7 +162,7 @@ function resize(){dpr=Math.min(window.devicePixelRatio||1,2);W=Math.round(cv.cli
 const rnd=n=>Math.floor(Math.random()*n),same=(a,b)=>a&&b&&a.x===b.x&&a.y===b.y;
 function occupied(c){return snake.some(p=>same(p,c))||same(c,food)||same(c,gold)||same(c,shieldItem)}
 function free(){let c,i=0;do{c={x:rnd(N),y:rnd(N)};i++}while(occupied(c)&&i<500);return c}
-function reset(){snake=[{x:7,y:9},{x:6,y:9},{x:5,y:9}];prev=snake.map(p=>({...p}));dir={x:1,y:0};queue=[];score=0;hasShield=false;gold=null;shieldItem=null;food=null;food=free();interval=150;parts=[];floats=[];setScore(0);updShield()}
+function reset(){snake=[{x:7,y:9},{x:6,y:9},{x:5,y:9}];prev=snake.map(p=>({...p}));dir={x:1,y:0};queue=[];score=0;hasShield=false;gold=null;shieldItem=null;food=null;food=free();interval=150;parts=[];floats=[];revived=false;doubled=false;setScore(0);updShield()}
 function setScore(v){const e=$('sc');e.textContent=v;e.classList.add('bump');setTimeout(()=>e.classList.remove('bump'),150)}
 function updShield(){$('shd').classList.toggle('on',hasShield)}
 function px(c){return{x:(c.x+.5)*cs,y:(c.y+.5)*cs}}
@@ -211,9 +224,27 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 async function showOver(){
   const nb=score>best;if(nb){best=score;$('bs').textContent=best;$('bs2').textContent=best}
   $('nb').classList.toggle('on',nb&&score>0);countUp($('fs'),score);countUp($('fb'),best);
-  $('over').classList.remove('hide');$('over').scrollTop=0;
-  const lb=$('lb');lb.innerHTML='<div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div>';
+  $('over').classList.remove('hide');$('over').scrollTop=0;updAdBtns();$('adnote').classList.remove('on');
   try{if(nb)await S.set('best',best)}catch(e){}
+  loadBoard();
+}
+function updAdBtns(){$('contBtn').style.display=(revived||doubled)?'none':'';$('dblBtn').style.display=(doubled||!score)?'none':'';$('adrow').style.display=((revived||doubled)&&(doubled||!score))?'none':'';$('contBtn').disabled=$('dblBtn').disabled=adBusy}
+async function watchAd(){if(adBusy)return false;adBusy=true;updAdBtns();$('adnote').classList.remove('on');hap('tap');let ok=false;try{ok=S.ad?await S.ad():false}catch(e){ok=false}adBusy=false;updAdBtns();if(ok!==true){$('adnote').classList.add('on');hap('error')}return ok===true}
+async function revive(){if(state!=='over'||revived||doubled||adBusy)return;if(!(await watchAd())||state!=='over')return;
+  revived=true;queue=[];prev=snake.map(p=>({...p}));
+  const safe=d=>{const c={x:snake[0].x+d.x,y:snake[0].y+d.y};return c.x>=0&&c.y>=0&&c.x<N&&c.y<N&&!snake.slice(0,-1).some(p=>same(p,c))};
+  const opts=Object.values(DIRS).filter(safe);
+  if(opts.length)dir=opts.find(d=>d.x===dir.x&&d.y===dir.y)||opts[0];else{hasShield=true}
+  updShield();flash=0;$('over').classList.add('hide');sfx.shield();hap('ok');burst(snake[0],'#22f3ff',30);float(snake[0],'🎬','#22f3ff');
+  state='play';lastTick=performance.now()+600}
+async function dbl(){if(state!=='over'||doubled||!score||adBusy)return;if(!(await watchAd()))return;
+  doubled=true;score*=2;setScore(score);sfx.gold();hap('ok');updAdBtns();
+  const nb=score>best;if(nb){best=score;$('bs').textContent=best;$('bs2').textContent=best;$('nb').classList.add('on')}
+  countUp($('fs'),score);countUp($('fb'),best);
+  try{if(nb)await S.set('best',best)}catch(e){}
+  loadBoard()}
+async function loadBoard(){
+  const lb=$('lb');lb.innerHTML='<div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div>';
   try{const list=(await S.top('best',20))||[];
     if(!list.length){lb.innerHTML=`<div class="empty">🐍 ${t('empty')}</div>`;return}
     const med=['🥇','🥈','🥉'];let me=false;
@@ -221,6 +252,7 @@ async function showOver(){
   }catch(e){lb.innerHTML=`<div class="empty">${t('err')}</div>`}
 }
 $('playBtn').onclick=play;$('againBtn').onclick=play;
+$('contBtn').onclick=revive;$('dblBtn').onclick=dbl;
 $('sndBtn').onclick=()=>{sound=!sound;$('sndBtn').textContent=sound?'🔊':'🔇';hap('tap');if(sound)sfx.start();savePrefs()};
 $('langBtn').onclick=()=>{lang=lang==='en'?'fr':'en';applyLang();hap('tap');savePrefs()};
 window.addEventListener('resize',resize);
