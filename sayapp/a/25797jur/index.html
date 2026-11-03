@@ -1,4 +1,4 @@
-<!-- sayapp 25797jur v1 -->
+<!-- sayapp 25797jur v2 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,6 +98,18 @@ nav button.on{color:var(--ink);background:var(--card);border-color:var(--k);box-
 .foot{text-align:center;font-size:11px;color:#5d5794;margin-top:24px;letter-spacing:1px}
 .skel{height:80px;background:linear-gradient(90deg,var(--card) 0,var(--card2) 50%,var(--card) 100%);background-size:200% 100%;animation:sh 1s steps(6) infinite;border:3px solid var(--k);border-radius:8px;margin-bottom:12px}
 @keyframes sh{to{background-position:-200% 0}}
+.pts{margin-top:16px;background:linear-gradient(135deg,#1e1950,#123a4a);border:3px solid var(--k);box-shadow:4px 4px 0 var(--k),0 0 20px rgba(62,232,255,.18);border-radius:8px;padding:14px}
+.ph{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+.plbl{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cy)}
+.pv{font-size:26px;font-weight:700;color:var(--acc);text-shadow:2px 2px 0 #000}
+.pv span{display:inline-block}
+.boost{display:none;background:var(--acc);color:#1a1400;border:2px solid var(--k);border-radius:4px;padding:4px 8px;font-weight:700;font-size:12px;animation:bob 1s steps(2) infinite}
+.pbtns{display:grid;gap:8px}
+.abtn{width:100%;background:linear-gradient(180deg,var(--cy),#1aa9c2);color:#04242b;border:3px solid var(--k);box-shadow:3px 3px 0 var(--k);border-radius:6px;padding:11px 12px;font:700 13px 'Space Grotesk',sans-serif;cursor:pointer;transition:transform .15s}
+.abtn.y{background:linear-gradient(180deg,var(--acc),#e0a800);color:#1a1400}
+.abtn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--k)}
+.abtn:disabled{opacity:.55;cursor:default}
+.pnote{font-size:11px;color:var(--mut);margin-top:10px;line-height:1.4}
 </style>
 </head>
 <body>
@@ -109,6 +121,9 @@ nav button.on{color:var(--ink);background:var(--card);border-color:var(--k);box-
 
 <section class="tab on" id="t-menu">
 <div class="hero"><h2 data-t="heroT"></h2><p data-t="heroP"></p><div class="big">🧁</div></div>
+<div class="pts"><div class="ph"><div><div class="plbl" data-t="ptsL"></div><div class="pv"><span id="ptsV">0</span> ⭐</div></div><div class="boost" id="boostTag"></div></div>
+<div class="pbtns"><button class="abtn" id="adX2"></button><button class="abtn y" id="adBonus"></button></div>
+<div class="pnote" data-t="ptsNote"></div></div>
 <div class="lbl" data-t="menu"></div>
 <div class="chips" id="cats"></div>
 <div id="list"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
@@ -141,8 +156,8 @@ nav button.on{color:var(--ink);background:var(--card);border-color:var(--k);box-
 <script>
 window.addEventListener('load',async()=>{
 const D={
-en:{tag:'Order ahead, skip the line',heroT:'Fresh from the oven',heroP:'Pick your treats, choose a pickup time, we prepare it for you.',menu:'Menu',all:'All',coffee:'Coffee',bakes:'Bakes',combo:'Combos',tMenu:'Menu',tBook:'Checkout',tOrders:'Orders',items:'items',checkout:'Checkout',summary:'Your order',total:'Total',payNote:'Pay at pickup, no online payment',day:'Pickup day',time:'Pickup time',details:'Your details',name:'Your name',contact:'Phone or @username',note:'Note (oat milk, no sugar...)',send:'Send order',sending:'Sending...',emptyT:'Your tray is empty',emptyP:'Add a few treats from the menu to start an order.',browse:'Browse menu',history:'My orders',noOrdT:'No orders yet',noOrdP:'Your sent requests will appear here.',sent:'Sent',needTime:'Pick a pickup time',needName:'Enter your name and contact',okT:'Order sent!',okBtn:'Awesome',okP:'Order {id} for {when}. We will confirm it shortly.',today:'Today',err:'Could not send, try again',x:'x'},
-ru:{tag:'Закажи заранее, без очереди',heroT:'Прямо из печи',heroP:'Выбери угощения и время, мы всё приготовим к твоему приходу.',menu:'Меню',all:'Все',coffee:'Кофе',bakes:'Выпечка',combo:'Комбо',tMenu:'Меню',tBook:'Заказ',tOrders:'История',items:'шт.',checkout:'Оформить',summary:'Твой заказ',total:'Итого',payNote:'Оплата при получении, без онлайн-оплаты',day:'День получения',time:'Время получения',details:'Твои данные',name:'Твоё имя',contact:'Телефон или @username',note:'Комментарий (овсяное молоко, без сахара...)',send:'Отправить заказ',sending:'Отправка...',emptyT:'Поднос пуст',emptyP:'Добавь что-нибудь из меню, чтобы начать заказ.',browse:'Открыть меню',history:'Мои заказы',noOrdT:'Заказов пока нет',noOrdP:'Здесь появятся отправленные заявки.',sent:'Отправлен',needTime:'Выбери время получения',needName:'Укажи имя и контакт',okT:'Заказ отправлен!',okBtn:'Отлично',okP:'Заказ {id} на {when}. Скоро подтвердим.',today:'Сегодня',err:'Не удалось отправить, попробуй ещё',x:'x'}};
+en:{tag:'Order ahead, skip the line',heroT:'Fresh from the oven',heroP:'Pick your treats, choose a pickup time, we prepare it for you.',menu:'Menu',all:'All',coffee:'Coffee',bakes:'Bakes',combo:'Combos',tMenu:'Menu',tBook:'Checkout',tOrders:'Orders',items:'items',checkout:'Checkout',summary:'Your order',total:'Total',payNote:'Pay at pickup, no online payment',day:'Pickup day',time:'Pickup time',details:'Your details',name:'Your name',contact:'Phone or @username',note:'Note (oat milk, no sugar...)',send:'Send order',sending:'Sending...',emptyT:'Your tray is empty',emptyP:'Add a few treats from the menu to start an order.',browse:'Browse menu',history:'My orders',noOrdT:'No orders yet',noOrdP:'Your sent requests will appear here.',sent:'Sent',needTime:'Pick a pickup time',needName:'Enter your name and contact',okT:'Order sent!',okBtn:'Awesome',okP:'Order {id} for {when}. We will confirm it shortly.',today:'Today',err:'Could not send, try again',x:'x',ptsL:'Pixel Points',ptsNote:'10 points per $1 ordered. Points have no cash value',adX2:'Watch an ad: x2 points, 1 min',x2on:'x2 active',adBonus:'Watch an ad: +500 points',bonusIn:'Next bonus in {m} min',noAd:'No video available right now',x2ok:'Points doubled for 1 minute!',bonusOk:'+500 points added!'},
+ru:{tag:'Закажи заранее, без очереди',heroT:'Прямо из печи',heroP:'Выбери угощения и время, мы всё приготовим к твоему приходу.',menu:'Меню',all:'Все',coffee:'Кофе',bakes:'Выпечка',combo:'Комбо',tMenu:'Меню',tBook:'Заказ',tOrders:'История',items:'шт.',checkout:'Оформить',summary:'Твой заказ',total:'Итого',payNote:'Оплата при получении, без онлайн-оплаты',day:'День получения',time:'Время получения',details:'Твои данные',name:'Твоё имя',contact:'Телефон или @username',note:'Комментарий (овсяное молоко, без сахара...)',send:'Отправить заказ',sending:'Отправка...',emptyT:'Поднос пуст',emptyP:'Добавь что-нибудь из меню, чтобы начать заказ.',browse:'Открыть меню',history:'Мои заказы',noOrdT:'Заказов пока нет',noOrdP:'Здесь появятся отправленные заявки.',sent:'Отправлен',needTime:'Выбери время получения',needName:'Укажи имя и контакт',okT:'Заказ отправлен!',okBtn:'Отлично',okP:'Заказ {id} на {when}. Скоро подтвердим.',today:'Сегодня',err:'Не удалось отправить, попробуй ещё',x:'x',ptsL:'Пиксель-очки',ptsNote:'10 очков за каждый $1 заказа. Очки не имеют денежной ценности',adX2:'Смотреть рекламу: x2 очки, 1 мин',x2on:'x2 активно',adBonus:'Смотреть рекламу: +500 очков',bonusIn:'Следующий бонус через {m} мин',noAd:'Видео сейчас недоступно',x2ok:'Очки удвоены на 1 минуту!',bonusOk:'+500 очков начислено!'}};
 const ITEMS=[
 {id:'esp',c:'coffee',e:'☕',p:2.5,en:['Pixel Espresso','Double shot, dark roast, bold crema'],ru:['Пиксель эспрессо','Двойной шот, тёмная обжарка']},
 {id:'lat',c:'coffee',e:'🥛',p:3.8,en:['8-Bit Latte','Silky milk with a heart of foam'],ru:['8-битный латте','Нежное молоко и пенка']},
@@ -164,6 +179,20 @@ const hap=k=>{try{SayApp.haptic(k)}catch(e){}};
 const nm=it=>it[S.lang]||it.en;
 const user=(window.SayApp&&SayApp.user)||{};
 S.name=user.first_name||'';
+const P={p:0,boost:0,bonus:0};
+const fmt=ms=>{const s=Math.ceil(ms/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+let adBusy=false;
+function renderPts(){const v=$('ptsV');if(!v)return;const n=Date.now();v.textContent=P.p.toLocaleString();
+ const bl=P.boost-n,x=$('adX2'),b=$('adBonus'),bt=$('boostTag');
+ bt.textContent=bl>0?'⚡ x2 · '+fmt(bl):'';bt.style.display=bl>0?'block':'none';
+ x.disabled=adBusy||bl>0;x.textContent=bl>0?'⚡ '+t('x2on')+' · '+fmt(bl):'📺 '+t('adX2');
+ const cd=P.bonus+3600000-n;b.disabled=adBusy||cd>0;b.textContent=cd>0?'⏳ '+t('bonusIn').replace('{m}',Math.ceil(cd/60000)):'🎁 '+t('adBonus')}
+function savePts(){try{SayApp.set('pts',P)}catch(e){}}
+async function watch(kind){if(adBusy)return;adBusy=true;renderPts();let ok=false;try{ok=await SayApp.ad()}catch(e){ok=false}adBusy=false;
+ if(!ok){hap('error');toast('📺 '+t('noAd'));renderPts();return}
+ if(kind==='x2'){P.boost=Date.now()+60000;toast('⚡ '+t('x2ok'))}else{P.bonus=Date.now();P.p+=500;toast('🎁 '+t('bonusOk'));confetti()}
+ hap('ok');savePts();renderPts();const v=$('ptsV');v.classList.remove('pop');void v.offsetWidth;v.classList.add('pop')}
+setInterval(renderPts,1000);
 function toast(m){const e=$('toast');e.textContent=m;e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),1800)}
 function cartCount(){return Object.values(S.cart).reduce((a,b)=>a+b,0)}
 function cartTotal(){return ITEMS.reduce((a,i)=>a+(S.cart[i.id]||0)*i.p,0)}
@@ -201,7 +230,7 @@ function renderBook(){const b=$('bookBody');const c=cartCount();
 function renderOrders(){const o=$('olist');
  if(!S.orders.length){o.innerHTML=`<div class="empty"><div class="e">📜</div><b>${t('noOrdT')}</b><p>${t('noOrdP')}</p></div>`;return}
  o.innerHTML=S.orders.map((r,k)=>`<div class="card ord" style="animation-delay:${k*40}ms"><div class="oh"><b>${esc(r.id)} · ${esc(r.when)}</b><span class="st">${t('sent')}</span></div><p>${r.items.map(i=>esc(i.e+' '+i.n+' x'+i.q)).join(', ')}</p><div class="row tot"><span>${t('total')}</span><span>${money(r.total)}</span></div></div>`).join('')}
-function renderAll(){applyTexts();renderCats();renderList();renderBar();renderBook();renderOrders()}
+function renderAll(){applyTexts();renderCats();renderList();renderBar();renderBook();renderOrders();renderPts()}
 function setTab(tb){S.tab=tb;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.tab===tb));
  document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('on',s.id==='t-'+tb));
  if(tb==='book')renderBook();if(tb==='orders')renderOrders();renderBar();window.scrollTo({top:0,behavior:'smooth'})}
@@ -224,6 +253,8 @@ document.addEventListener('click',async e=>{const el=e.target.closest('button');
  if(el.id==='goBook'){setTab('book');return}
  if(el.id==='toMenu'){setTab('menu');return}
  if(el.id==='okBtn'){$('ov').classList.remove('show');setTab('orders');return}
+ if(el.id==='adX2'){hap('tap');await watch('x2');return}
+ if(el.id==='adBonus'){hap('tap');await watch('bonus');return}
  if(el.id==='send'){await send(el)}});
 function keepForm(){const n=$('fName');if(!n)return;S.name=n.value;S.contact=$('fCon').value;S.note=$('fNote').value}
 async function send(btn){keepForm();
@@ -239,13 +270,16 @@ async function send(btn){keepForm();
  catch(err){hap('error');toast(t('err'));btn.disabled=false;btn.textContent='🚀 '+t('send');return}
  S.orders.unshift({id,when,items,total,at:Date.now()});S.orders=S.orders.slice(0,20);
  try{await SayApp.set('orders',S.orders)}catch(e){}
+ const earned=Math.round(total*10)*(P.boost>Date.now()?2:1);P.p+=earned;savePts();renderPts();
  S.cart={};S.time=null;S.note='';hap('ok');
- $('okP').textContent=t('okP').replace('{id}',id).replace('{when}',when);
+ $('okP').textContent=t('okP').replace('{id}',id).replace('{when}',when)+' ⭐ +'+earned;
  $('ov').classList.add('show');confetti();renderList();renderBar();renderBook();renderOrders()}
 
 renderAll();
 try{const o=await SayApp.get('orders');if(Array.isArray(o))S.orders=o}catch(e){}
 renderOrders();
+try{const p=await SayApp.get('pts');if(p&&typeof p==='object')Object.assign(P,p)}catch(e){}
+renderPts();
 });
 </script>
 </body>
