@@ -1013,7 +1013,7 @@ input.tk:focus{border-color:var(--v)}
   }
   function langBrief() {
     var nm = function (c) { var l = LANGS.filter(function (x) { return x[0] === c; })[0]; return l ? l[2] : c; };
-    return 'Main language: ' + nm(W.lm) + ' (write every text in it by default).' + (W.lx.length ? '\nAlso available in: ' + W.lx.map(nm).join(', ') + '. Put all texts in a small dictionary per language; pick the language from the player\'s Telegram language (window.Telegram.WebApp.initDataUnsafe.user.language_code, first 2 letters) when it is one of these, otherwise the main language; add a small discreet language switcher.' : '');
+    return 'Main language: ' + nm(W.lm) + ' (write every text in it by default).' + (W.lx.length ? '\nAlso available in: ' + W.lx.map(nm).join(', ') + '. Put all texts in a small dictionary per language; pick the language from the player\'s Telegram language (window.Telegram.WebApp.initDataUnsafe.user.language_code, first 2 letters) when it is one of these, otherwise the main language; add a clearly visible language switcher at the top of the screen (a small button with the current flag that opens the list of languages).' : '');
   }
   paintLangs();
   wizRender();
@@ -1330,6 +1330,7 @@ input.tk:focus{border-color:var(--v)}
     }, 1000);
   }
 
+  var LE = {"fr": ["Ton téléphone n'a pas pu préparer ce logo. Essaie un autre logo de la série.", "Telegram a refusé le logo"], "en": ["Your phone could not prepare this logo. Try another one from the series.", "Telegram refused the logo"], "es": ["Tu teléfono no pudo preparar este logo. Prueba otro de la serie.", "Telegram rechazó el logo"], "pt": ["Seu telefone não conseguiu preparar este logo. Tente outro da série.", "O Telegram recusou o logo"], "ru": ["Телефон не смог подготовить этот логотип. Попробуй другой из серии.", "Telegram отклонил логотип"], "id": ["Ponselmu tidak bisa menyiapkan logo ini. Coba logo lain dari seri ini.", "Telegram menolak logo"], "tr": ["Telefonun bu logoyu hazırlayamadı. Serideki başka bir logoyu dene.", "Telegram logoyu reddetti"]};
   var LC = {"fr": "+1 crédit chacune", "en": "+1 credit each", "es": "+1 crédito cada una", "pt": "+1 crédito cada", "ru": "+1 кредит за каждый", "id": "+1 kredit per bahasa", "tr": "dil başına +1 kredi"}, LXS = {"fr": ["🌍 Langues en plus", "Chaque langue en plus coûte 1 crédit. Il te manque {n} crédit(s).", "💳 Acheter des crédits", "Continuer avec la langue principale seulement"], "en": ["🌍 Extra languages", "Each extra language costs 1 credit. You are {n} credit(s) short.", "💳 Buy credits", "Continue with the main language only"], "es": ["🌍 Idiomas extra", "Cada idioma extra cuesta 1 crédito. Te faltan {n} crédito(s).", "💳 Comprar créditos", "Seguir solo con el idioma principal"], "pt": ["🌍 Idiomas extras", "Cada idioma extra custa 1 crédito. Faltam {n} crédito(s).", "💳 Comprar créditos", "Continuar só com o idioma principal"], "ru": ["🌍 Дополнительные языки", "Каждый дополнительный язык стоит 1 кредит. Не хватает: {n}.", "💳 Купить кредиты", "Продолжить только с основным языком"], "id": ["🌍 Bahasa tambahan", "Setiap bahasa tambahan 1 kredit. Kreditmu kurang {n}.", "💳 Beli kredit", "Lanjut hanya dengan bahasa utama"], "tr": ["🌍 Ek diller", "Her ek dil 1 kredi. {n} kredi eksik.", "💳 Kredi satın al", "Sadece ana dille devam et"]};
 
   // ---------- building overlay ----------
@@ -1412,11 +1413,17 @@ input.tk:focus{border-color:var(--v)}
   // 3 nov 2026 (0h, Jeremy): pick an image, square for the logo, wide for the welcome image, sent as a light JPEG
   // 3 nov 2026 (10h15, Jeremy): free logo drawn by the AI (3 SVG), the chosen one becomes the bot's photo (as a PNG)
   var LG = ({"fr": {"btn": "✨ Créer mon logo avec l'IA (gratuit)", "t": "Ton logo, gratuit", "p": "L'IA dessine 3 logos pour ton appli. Touche celui que tu préfères : il devient la photo de ton bot.", "ph": "Une envie ? (couleurs, symbole...) facultatif", "go": "✨ Dessiner 3 logos", "again": "🔄 3 autres logos", "wait": "L'IA dessine tes logos… (environ 30 secondes)", "pick": "Touche un logo pour le mettre sur ton bot", "lim": "Tu as fait tes {n} séries du jour, reviens demain !", "left": "Encore {n} séries aujourd'hui", "set": "Mise en place…"}, "en": {"btn": "✨ Create my logo with AI (free)", "t": "Your logo, free", "p": "The AI draws 3 logos for your app. Tap the one you like: it becomes your bot's photo.", "ph": "Any wish? (colors, symbol...) optional", "go": "✨ Draw 3 logos", "again": "🔄 3 more logos", "wait": "The AI is drawing your logos… (about 30 seconds)", "pick": "Tap a logo to put it on your bot", "lim": "You made your {n} series for today, come back tomorrow!", "left": "{n} more series today", "set": "Setting it up…"}, "es": {"btn": "✨ Crear mi logo con IA (gratis)", "t": "Tu logo, gratis", "p": "La IA dibuja 3 logos para tu app. Toca el que prefieras: será la foto de tu bot.", "ph": "¿Alguna idea? (colores, símbolo...) opcional", "go": "✨ Dibujar 3 logos", "again": "🔄 3 logos más", "wait": "La IA está dibujando tus logos… (unos 30 segundos)", "pick": "Toca un logo para ponerlo en tu bot", "lim": "Ya hiciste tus {n} series de hoy, ¡vuelve mañana!", "left": "{n} series más hoy", "set": "Aplicando…"}, "pt": {"btn": "✨ Criar meu logo com IA (grátis)", "t": "Seu logo, grátis", "p": "A IA desenha 3 logos para o seu app. Toque no que preferir: ele vira a foto do seu bot.", "ph": "Alguma ideia? (cores, símbolo...) opcional", "go": "✨ Desenhar 3 logos", "again": "🔄 Mais 3 logos", "wait": "A IA está desenhando seus logos… (cerca de 30 segundos)", "pick": "Toque em um logo para colocá-lo no seu bot", "lim": "Você já fez suas {n} séries de hoje, volte amanhã!", "left": "Mais {n} séries hoje", "set": "Aplicando…"}, "ru": {"btn": "✨ Создать логотип с ИИ (бесплатно)", "t": "Твой логотип, бесплатно", "p": "ИИ нарисует 3 логотипа для твоего приложения. Нажми на понравившийся: он станет фото твоего бота.", "ph": "Пожелания? (цвета, символ...) необязательно", "go": "✨ Нарисовать 3 логотипа", "again": "🔄 Ещё 3 логотипа", "wait": "ИИ рисует логотипы… (около 30 секунд)", "pick": "Нажми на логотип, чтобы поставить его в бота", "lim": "Ты сделал {n} серий сегодня, возвращайся завтра!", "left": "Ещё {n} серий сегодня", "set": "Устанавливаю…"}, "id": {"btn": "✨ Buat logoku dengan AI (gratis)", "t": "Logomu, gratis", "p": "AI menggambar 3 logo untuk aplikasimu. Ketuk yang kamu suka: itu jadi foto botmu.", "ph": "Ada keinginan? (warna, simbol...) opsional", "go": "✨ Gambar 3 logo", "again": "🔄 3 logo lagi", "wait": "AI sedang menggambar logomu… (sekitar 30 detik)", "pick": "Ketuk logo untuk dipasang di botmu", "lim": "Kamu sudah membuat {n} seri hari ini, kembali besok!", "left": "{n} seri lagi hari ini", "set": "Memasang…"}, "tr": {"btn": "✨ Yapay zekâ ile logomu oluştur (ücretsiz)", "t": "Logon, ücretsiz", "p": "Yapay zekâ uygulaman için 3 logo çizer. Beğendiğine dokun: botunun fotoğrafı olur.", "ph": "Bir isteğin var mı? (renkler, sembol...) isteğe bağlı", "go": "✨ 3 logo çiz", "again": "🔄 3 logo daha", "wait": "Yapay zekâ logolarını çiziyor… (yaklaşık 30 saniye)", "pick": "Botuna koymak için bir logoya dokun", "lim": "Bugünkü {n} serini yaptın, yarın gel!", "left": "Bugün {n} seri daha", "set": "Ayarlanıyor…"}})[lang] || null; if (!LG) LG = ({"btn": "✨ Create my logo with AI (free)", "t": "Your logo, free", "p": "The AI draws 3 logos for your app. Tap the one you like: it becomes your bot's photo.", "ph": "Any wish? (colors, symbol...) optional", "go": "✨ Draw 3 logos", "again": "🔄 3 more logos", "wait": "The AI is drawing your logos… (about 30 seconds)", "pick": "Tap a logo to put it on your bot", "lim": "You made your {n} series for today, come back tomorrow!", "left": "{n} more series today", "set": "Setting it up…"});
+  // 4 nov 2026 (20h35, Jeremy): logos that did not go through on some phones: 3 ways to load the SVG, and an explicit size
   function svgPng(svg, cb) {
-    var im = new Image();
-    im.onload = function () { try { var c = document.createElement('canvas'); c.width = c.height = 640; var x = c.getContext('2d'); x.fillStyle = '#ffffff'; x.fillRect(0, 0, 640, 640); x.drawImage(im, 0, 0, 640, 640); cb(c.toDataURL('image/png')); } catch (e) { cb(null); } };
-    im.onerror = function () { cb(null); };
-    im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    if (!/<svg[^>]*\swidth=/.test(svg)) svg = svg.replace('<svg', '<svg width="640" height="640"');
+    var ways = [function () { return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg); }, function () { try { return URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' })); } catch (e) { return null; } }, function () { try { return 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg))); } catch (e) { return null; } }], i = 0;
+    var next = function () {
+      if (i >= ways.length) return cb(null); var src = ways[i++](); if (!src) return next();
+      var im = new Image();
+      im.onload = function () { try { var c = document.createElement('canvas'); c.width = c.height = 640; var x = c.getContext('2d'); x.fillStyle = '#ffffff'; x.fillRect(0, 0, 640, 640); x.drawImage(im, 0, 0, 640, 640); var d = c.toDataURL('image/png'); if (!d || d.length < 3000) return next(); cb(d); } catch (e) { next(); } };
+      im.onerror = next; im.src = src;
+    };
+    next();
   }
   var MA = ({"fr": ["✨ Écrire avec l'IA", "✨ Textes proposés : vérifie, puis touche Enregistrer.", "L'IA écrit tes textes…"], "en": ["✨ Write with AI", "✨ Texts suggested: check them, then tap Save.", "The AI is writing your texts…"], "es": ["✨ Escribir con IA", "✨ Textos propuestos: revísalos y toca Guardar.", "La IA está escribiendo tus textos…"], "pt": ["✨ Escrever com IA", "✨ Textos sugeridos: confira e toque em Salvar.", "A IA está escrevendo seus textos…"], "ru": ["✨ Написать с ИИ", "✨ Тексты готовы: проверь и нажми Сохранить.", "ИИ пишет тексты…"], "id": ["✨ Tulis dengan AI", "✨ Teks disarankan: periksa, lalu ketuk Simpan.", "AI sedang menulis teksmu…"], "tr": ["✨ Yapay zekâ ile yaz", "✨ Metinler önerildi: kontrol et, sonra Kaydet'e dokun.", "Yapay zekâ metinlerini yazıyor…"]})[lang] || ["✨ Write with AI", "✨ Texts suggested: check them, then tap Save.", "The AI is writing your texts…"];
   // 3 nov 2026 (18h30, Jeremy): a new logo takes about a minute to be online (GitHub Pages): a logo that does not load yet is hidden and tried again
@@ -1456,11 +1463,11 @@ input.tk:focus{border-color:var(--v)}
           bt.onclick = function () {
             hap(); var all = $('lgR').querySelectorAll('button'); all.forEach(function (x) { x.disabled = true; x.classList.remove('on'); }); bt.classList.add('on'); $('lgM').textContent = LG.set;
             svgPng(r.svgs[+bt.getAttribute('data-i')], function (png) {
-              if (!png) { all.forEach(function (x) { x.disabled = false; }); hap('err'); $('lgM').textContent = T.net; return; }
+              if (!png) { all.forEach(function (x) { x.disabled = false; }); hap('err'); $('lgM').textContent = (LE[lang] || LE.en)[0]; return; }
               call('logo', { id: a.id, img: png }).then(function (q) {
                 all.forEach(function (x) { x.disabled = false; });
-                if (!q.ok) { hap('err'); $('lgM').textContent = q.error === 'img' ? T.imBad : T.net; return; }
-                hap('ok'); toast(T.imOk); $('lgM').textContent = T.imOk; if (q.logo) { a.logo_url = q.logo; refresh(); }
+                if (!q.ok) { hap('err'); $('lgM').textContent = q.error === 'img' ? T.imBad : q.error === 'tg' ? (LE[lang] || LE.en)[1] : T.net + (q.error ? ' (' + q.error + ')' : ''); return; }
+                hap('ok'); toast(T.imOk); $('lgM').textContent = T.imOk; if (q.logo) { a.logo_url = q.logo; refresh(); } finMark(a.id, 'l'); finBack(a);
               });
             });
           };
@@ -1745,7 +1752,7 @@ input.tk:focus{border-color:var(--v)}
             if (q.ok && q.app && q.app.bot_username) {
               clearInterval(iv); hap('ok'); refresh();
               openSheet('<div style="text-align:center;padding:10px 0"><div style="font-size:54px">🎉</div><h2 style="margin-top:8px">' + esc(T.liveT) + '</h2><p class="sub">' + esc(T.liveP(q.app.bot_username)) + '</p></div><button class="cta" id="lvGo">' + esc(T.openBot) + '</button><button class="ghost" id="lvNext" style="margin-top:10px">' + esc(T.nsGo) + '</button>');
-              $('lvNext').onclick = function () { hap(); manageSheet(q.app); };
+              $('lvNext').onclick = function () { hap(); finSheet(q.app); };  // 4 nov 2026 (20h25, Jeremy): guided finish after going online
               $('lvGo').onclick = function () { link('https://t.me/' + q.app.bot_username); };
             } else if (++n > 100) clearInterval(iv);
           });
@@ -1769,7 +1776,7 @@ input.tk:focus{border-color:var(--v)}
         if (!r.ok) { hap('err'); return toast(r.error === 'sub' ? T.inv : T.tkBad); }
         $('tkI').value = ''; hap('ok'); refresh();
         openSheet('<div style="text-align:center;padding:10px 0"><div style="font-size:54px">🎉</div><h2 style="margin-top:8px">' + esc(T.liveT) + '</h2><p class="sub">' + esc(T.liveP(r.bot)) + '</p></div><button class="cta" id="lvGo">' + esc(T.openBot) + '</button><button class="ghost" id="lvNext" style="margin-top:10px">' + esc(T.nsGo) + '</button>');
-        $('lvNext').onclick = function () { hap(); manageSheet(Object.assign({}, a, { bot_username: r.bot })); };
+        $('lvNext').onclick = function () { hap(); finSheet(Object.assign({}, a, { bot_username: r.bot })); };
         $('lvGo').onclick = function () { link('https://t.me/' + r.bot); };
       });
     };
@@ -1882,6 +1889,89 @@ input.tk:focus{border-color:var(--v)}
     box.insertBefore(d, box.firstChild); $('lnGo').onclick = function () { hap(); launch(a); };
   }
   var _paintApps = paintApps; paintApps = function () { _paintApps(); lnBanner(); };
+
+  // 4 nov 2026 (20h25, Jeremy): once the app is online on its bot, a guided finish: 1. logo, 2. welcome picture, 3. description
+  var FN = {"fr": {"t": "🎨 Termine ton appli", "p": "3 étapes pour une appli qui donne envie de jouer.", "s": ["✨ Créer le logo", "🖼️ Créer l'image d'accueil", "✍️ Écrire la description"], "later": "Plus tard", "ct": "🎨 Termine « {n} »", "cp": "Logo, image d'accueil et description : {k}/3 faits.", "cgo": "Continuer", "wt": "🖼️ Image d'accueil", "wp": "Elle s'affiche quand quelqu'un ouvre ton bot. On la fabrique avec ton logo et le nom de ton appli.", "use": "✅ Utiliser cette image", "own": "📷 Importer ma propre image", "play": "▶ Jouer", "dt": "✍️ Description de ton bot", "dp": "L'IA écrit la description et le message d'accueil de ton bot. Tu peux tout modifier avant d'enregistrer.", "dw": "✍️ L'IA écrit…", "ls": "Description courte (profil du bot)", "ll": "Description (avant de démarrer le bot)", "lw": "Message d'accueil", "save": "💾 Enregistrer", "ok": "✅ C'est fait !", "wait": "⏳ Un instant…"}, "en": {"t": "🎨 Finish your app", "p": "3 steps for an app people want to play.", "s": ["✨ Create the logo", "🖼️ Create the welcome picture", "✍️ Write the description"], "later": "Later", "ct": "🎨 Finish \"{n}\"", "cp": "Logo, welcome picture and description: {k}/3 done.", "cgo": "Continue", "wt": "🖼️ Welcome picture", "wp": "It shows when someone opens your bot. We make it with your logo and your app's name.", "use": "✅ Use this picture", "own": "📷 Upload my own picture", "play": "▶ Play", "dt": "✍️ Your bot's description", "dp": "The AI writes your bot's description and welcome message. You can change everything before saving.", "dw": "✍️ The AI is writing…", "ls": "Short description (bot profile)", "ll": "Description (before starting the bot)", "lw": "Welcome message", "save": "💾 Save", "ok": "✅ Done!", "wait": "⏳ One moment…"}, "es": {"t": "🎨 Termina tu app", "p": "3 pasos para una app que dé ganas de jugar.", "s": ["✨ Crear el logo", "🖼️ Crear la imagen de bienvenida", "✍️ Escribir la descripción"], "later": "Más tarde", "ct": "🎨 Termina «{n}»", "cp": "Logo, imagen de bienvenida y descripción: {k}/3 hechos.", "cgo": "Continuar", "wt": "🖼️ Imagen de bienvenida", "wp": "Aparece cuando alguien abre tu bot. La creamos con tu logo y el nombre de tu app.", "use": "✅ Usar esta imagen", "own": "📷 Subir mi propia imagen", "play": "▶ Jugar", "dt": "✍️ Descripción de tu bot", "dp": "La IA escribe la descripción y el mensaje de bienvenida de tu bot. Puedes cambiarlo todo antes de guardar.", "dw": "✍️ La IA escribe…", "ls": "Descripción corta (perfil del bot)", "ll": "Descripción (antes de iniciar el bot)", "lw": "Mensaje de bienvenida", "save": "💾 Guardar", "ok": "✅ ¡Hecho!", "wait": "⏳ Un momento…"}, "pt": {"t": "🎨 Termine seu app", "p": "3 passos para um app que dá vontade de jogar.", "s": ["✨ Criar o logo", "🖼️ Criar a imagem de boas-vindas", "✍️ Escrever a descrição"], "later": "Depois", "ct": "🎨 Termine «{n}»", "cp": "Logo, imagem de boas-vindas e descrição: {k}/3 feitos.", "cgo": "Continuar", "wt": "🖼️ Imagem de boas-vindas", "wp": "Aparece quando alguém abre seu bot. Nós a criamos com seu logo e o nome do seu app.", "use": "✅ Usar esta imagem", "own": "📷 Enviar minha própria imagem", "play": "▶ Jogar", "dt": "✍️ Descrição do seu bot", "dp": "A IA escreve a descrição e a mensagem de boas-vindas do seu bot. Você pode mudar tudo antes de salvar.", "dw": "✍️ A IA está escrevendo…", "ls": "Descrição curta (perfil do bot)", "ll": "Descrição (antes de iniciar o bot)", "lw": "Mensagem de boas-vindas", "save": "💾 Salvar", "ok": "✅ Pronto!", "wait": "⏳ Um instante…"}, "ru": {"t": "🎨 Доделай приложение", "p": "3 шага, чтобы в приложение хотелось играть.", "s": ["✨ Создать логотип", "🖼️ Создать приветственную картинку", "✍️ Написать описание"], "later": "Позже", "ct": "🎨 Доделай «{n}»", "cp": "Логотип, картинка и описание: готово {k}/3.", "cgo": "Продолжить", "wt": "🖼️ Приветственная картинка", "wp": "Её видят, когда открывают твоего бота. Мы делаем её из логотипа и названия приложения.", "use": "✅ Использовать", "own": "📷 Загрузить свою картинку", "play": "▶ Играть", "dt": "✍️ Описание бота", "dp": "ИИ напишет описание и приветствие бота. Всё можно изменить перед сохранением.", "dw": "✍️ ИИ пишет…", "ls": "Краткое описание (профиль бота)", "ll": "Описание (до запуска бота)", "lw": "Приветствие", "save": "💾 Сохранить", "ok": "✅ Готово!", "wait": "⏳ Секунду…"}, "id": {"t": "🎨 Selesaikan aplikasimu", "p": "3 langkah agar aplikasimu bikin orang ingin main.", "s": ["✨ Buat logo", "🖼️ Buat gambar sambutan", "✍️ Tulis deskripsi"], "later": "Nanti", "ct": "🎨 Selesaikan «{n}»", "cp": "Logo, gambar sambutan dan deskripsi: {k}/3 selesai.", "cgo": "Lanjut", "wt": "🖼️ Gambar sambutan", "wp": "Muncul saat seseorang membuka botmu. Kami membuatnya dari logo dan nama aplikasimu.", "use": "✅ Pakai gambar ini", "own": "📷 Unggah gambarku sendiri", "play": "▶ Main", "dt": "✍️ Deskripsi botmu", "dp": "AI menulis deskripsi dan pesan sambutan botmu. Kamu bisa mengubah semuanya sebelum menyimpan.", "dw": "✍️ AI sedang menulis…", "ls": "Deskripsi singkat (profil bot)", "ll": "Deskripsi (sebelum memulai bot)", "lw": "Pesan sambutan", "save": "💾 Simpan", "ok": "✅ Selesai!", "wait": "⏳ Sebentar…"}, "tr": {"t": "🎨 Uygulamanı tamamla", "p": "Oynamak istenen bir uygulama için 3 adım.", "s": ["✨ Logoyu oluştur", "🖼️ Karşılama görselini oluştur", "✍️ Açıklamayı yaz"], "later": "Sonra", "ct": "🎨 «{n}» uygulamasını tamamla", "cp": "Logo, karşılama görseli ve açıklama: {k}/3 tamam.", "cgo": "Devam et", "wt": "🖼️ Karşılama görseli", "wp": "Biri botunu açtığında görünür. Logon ve uygulamanın adıyla hazırlıyoruz.", "use": "✅ Bu görseli kullan", "own": "📷 Kendi görselimi yükle", "play": "▶ Oyna", "dt": "✍️ Botunun açıklaması", "dp": "Yapay zeka botunun açıklamasını ve karşılama mesajını yazar. Kaydetmeden önce her şeyi değiştirebilirsin.", "dw": "✍️ Yapay zeka yazıyor…", "ls": "Kısa açıklama (bot profili)", "ll": "Açıklama (botu başlatmadan önce)", "lw": "Karşılama mesajı", "save": "💾 Kaydet", "ok": "✅ Tamam!", "wait": "⏳ Bir saniye…"}};
+  function fnT() { return FN[lang] || FN.en; }
+  function finGet(id) { try { return JSON.parse(localStorage.getItem('sa_fin_' + id) || '{}') || {}; } catch (e) { return {}; } }
+  function finMark(id, k) { var f = finGet(id); f[k] = 1; try { localStorage.setItem('sa_fin_' + id, JSON.stringify(f)); } catch (e) {} }
+  function finDone(a) { var f = finGet(a.id); return [!!(a.logo_url || f.l), !!f.w, !!f.d]; }
+  function finSheet(a) {
+    window.__fin = a.id; var F = fnT(), d = finDone(a);
+    openSheet('<div class="prohead"><div>🎨</div><div><h2>' + esc(F.t) + '</h2><p class="sub" style="margin:0">' + esc(F.p) + '</p></div></div><div style="display:grid;gap:10px;margin-top:14px">' +
+      F.s.map(function (x, i) { return '<button class="' + (d[i] ? 'ghost' : (d.indexOf(false) === i ? 'cta' : 'ghost')) + '" id="fn' + i + '" style="text-align:left">' + (i + 1) + '. ' + esc(x) + (d[i] ? '  ✅' : '') + '</button>'; }).join('') +
+      '</div><button class="ghost" id="fnL" style="margin-top:14px">' + esc(F.later) + '</button>');
+    $('fn0').onclick = function () { hap(); logoSheet(a); };
+    $('fn1').onclick = function () { hap(); welSheet(a); };
+    $('fn2').onclick = function () { hap(); descSheet(a); };
+    $('fnL').onclick = function () { hap(); window.__fin = null; closeSheet(); paintApps(); };
+  }
+  function finBack(a) { if (window.__fin === a.id) setTimeout(function () { finSheet(a); }, 900); }
+  function welDraw(a, cb) {
+    var cv = document.createElement('canvas'); cv.width = 1280; cv.height = 640; var x = cv.getContext('2d');
+    var cs = String(col(a.id)).match(/#[0-9a-fA-F]{6}/g) || ['#8b5cff', '#2fd6ff'], F = fnT(), t = a.custom_name || a.title || 'App', ds = a.custom_desc || '';
+    var g = x.createLinearGradient(0, 0, 1280, 640); g.addColorStop(0, '#0b0c16'); g.addColorStop(1, '#151832'); x.fillStyle = g; x.fillRect(0, 0, 1280, 640);
+    var rg = x.createRadialGradient(330, 320, 20, 330, 320, 520); rg.addColorStop(0, cs[0] + 'aa'); rg.addColorStop(1, cs[0] + '00'); x.fillStyle = rg; x.fillRect(0, 0, 1280, 640);
+    var rg2 = x.createRadialGradient(1150, 80, 10, 1150, 80, 460); rg2.addColorStop(0, (cs[1] || cs[0]) + '66'); rg2.addColorStop(1, (cs[1] || cs[0]) + '00'); x.fillStyle = rg2; x.fillRect(0, 0, 1280, 640);
+    var rr = function (px, py, w, h, r) { x.beginPath(); x.moveTo(px + r, py); x.arcTo(px + w, py, px + w, py + h, r); x.arcTo(px + w, py + h, px, py + h, r); x.arcTo(px, py + h, px, py, r); x.arcTo(px, py, px + w, py, r); x.closePath(); };
+    var text = function () {
+      x.fillStyle = '#ffffff'; x.textBaseline = 'top'; var fs = 76; x.font = '800 ' + fs + 'px Inter, system-ui, sans-serif';
+      while (x.measureText(t).width > 640 && fs > 40) { fs -= 4; x.font = '800 ' + fs + 'px Inter, system-ui, sans-serif'; }
+      x.fillText(t, 560, 190);
+      x.fillStyle = 'rgba(255,255,255,.75)'; x.font = '500 30px Inter, system-ui, sans-serif';
+      var words = ds.split(/\s+/), line = '', y = 190 + fs + 26, n = 0;
+      for (var i = 0; i < words.length && n < 3; i++) { var tl = (line ? line + ' ' : '') + words[i]; if (x.measureText(tl).width > 640 && line) { x.fillText(line, 560, y); y += 42; n++; line = words[i]; } else line = tl; }
+      if (line && n < 3) { x.fillText(line, 560, y); y += 42; }
+      var bg = x.createLinearGradient(560, 0, 820, 0); bg.addColorStop(0, cs[0]); bg.addColorStop(1, cs[1] || cs[0]); x.fillStyle = bg; rr(560, Math.max(y + 22, 420), 230, 68, 34); x.fill();
+      x.fillStyle = '#fff'; x.font = '800 30px Inter, system-ui, sans-serif'; x.textBaseline = 'middle'; x.fillText(F.play, 598, Math.max(y + 22, 420) + 35);
+      try { cb(cv.toDataURL('image/jpeg', 0.9)); } catch (e) { cb(null); }
+    };
+    var tile = function () { var bg = x.createLinearGradient(110, 140, 470, 500); bg.addColorStop(0, cs[0]); bg.addColorStop(1, cs[1] || cs[0]); x.fillStyle = bg; rr(110, 140, 360, 360, 80); x.fill(); };
+    if (a.logo_url) {
+      var im = new Image(); im.crossOrigin = 'anonymous';
+      im.onload = function () { x.save(); rr(110, 140, 360, 360, 80); x.clip(); x.drawImage(im, 110, 140, 360, 360); x.restore(); text(); };
+      im.onerror = function () { tile(); x.fillStyle = '#fff'; x.font = '800 170px Inter, system-ui, sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(t.charAt(0).toUpperCase(), 290, 330); x.textAlign = 'left'; text(); };
+      im.src = a.logo_url;
+    } else { tile(); x.fillStyle = '#fff'; x.font = '800 170px Inter, system-ui, sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(t.charAt(0).toUpperCase(), 290, 330); x.textAlign = 'left'; text(); }
+  }
+  function welSheet(a) {
+    var F = fnT();
+    openSheet('<h2>' + esc(F.wt) + '</h2><p class="sub">' + esc(F.wp) + '</p><div id="wlP" style="margin:12px 0;border-radius:14px;overflow:hidden;aspect-ratio:2/1;background:#151832;display:grid;place-items:center;color:var(--dim)">' + esc(F.wait) + '</div><button class="cta" id="wlU" disabled>' + esc(F.use) + '</button><button class="ghost" id="wlO" style="margin-top:10px">' + esc(F.own) + '</button>');
+    var data = null;
+    welDraw(a, function (d) { data = d; if (!d) { $('wlP').textContent = T.net; return; } $('wlP').innerHTML = '<img alt="" src="' + d + '" style="width:100%;display:block">'; $('wlU').disabled = false; });
+    var send = function (d, bt) { bt.disabled = true; call('welcome', { id: a.id, img: d }).then(function (r) { bt.disabled = false; if (!r.ok) { hap('err'); return toast(r.error === 'img' ? T.imBad : T.net); } hap('ok'); toast(F.ok); finMark(a.id, 'w'); finBack(a); }); };
+    $('wlU').onclick = function () { hap(); if (data) send(data, $('wlU')); };
+    $('wlO').onclick = function () { hap(); pickImg(false, function (d) { send(d, $('wlO')); }); };
+  }
+  function descSheet(a) {
+    var F = fnT();
+    openSheet('<h2>' + esc(F.dt) + '</h2><p class="sub">' + esc(F.dp) + '</p><p class="xl" id="dsM" style="margin:10px 0">' + esc(F.dw) + '</p>' +
+      '<p class="xl" style="margin:10px 0 6px">' + esc(F.ls) + '</p><input class="xin" id="dsS" maxlength="120">' +
+      '<p class="xl" style="margin:10px 0 6px">' + esc(F.ll) + '</p><div class="field"><textarea id="dsL" maxlength="512" style="min-height:90px"></textarea></div>' +
+      '<p class="xl" style="margin:10px 0 6px">' + esc(F.lw) + '</p><div class="field"><textarea id="dsW" maxlength="700" style="min-height:90px"></textarea></div>' +
+      '<button class="cta" id="dsGo" style="margin-top:12px" disabled>' + esc(F.save) + '</button>');
+    var gen = null;
+    call('metagen', { id: a.id }).then(function (r) {
+      $('dsGo').disabled = false; if (!$('dsM')) return;
+      if (!r.ok) { $('dsM').textContent = ''; return; }
+      gen = r; $('dsM').textContent = ''; $('dsS').value = r.short || ''; $('dsL').value = r.long || ''; $('dsW').value = r.welcome || '';
+    });
+    $('dsGo').onclick = function () {
+      hap(); var bt = $('dsGo'); bt.disabled = true;
+      call('meta', { id: a.id, name: a.custom_name || a.title || '', desc: (gen && gen.desc) || a.custom_desc || '', short: $('dsS').value.trim(), long: $('dsL').value.trim(), welcome: $('dsW').value.trim() }).then(function (r) {
+        bt.disabled = false; if (!r.ok) { hap('err'); return toast(T.net); }
+        hap('ok'); toast(F.ok); finMark(a.id, 'd'); if (gen && gen.desc && !a.custom_desc) a.custom_desc = gen.desc; finBack(a);
+      });
+    };
+  }
+  function finBanner() {
+    var box = $('apps'); if (!box || !S.loaded || $('fnB') || $('lnB')) return;
+    var a = (S.apps || []).filter(function (x) { return x.bot_username && finDone(x).indexOf(false) >= 0; })[0]; if (!a) return;
+    var F = fnT(), k = finDone(a).filter(Boolean).length, d = document.createElement('div'); d.className = 'lnb'; d.id = 'fnB';
+    d.innerHTML = '<b>' + esc(F.ct.replace('{n}', a.custom_name || a.title || 'App')) + '</b><p>' + esc(F.cp.replace('{k}', k)) + '</p><button class="cta" id="fnGo">' + esc(F.cgo) + '</button>';
+    box.insertBefore(d, box.firstChild); $('fnGo').onclick = function () { hap(); finSheet(a); };
+  }
+  var _paintApps2 = paintApps; paintApps = function () { _paintApps2(); finBanner(); };
   function lnAuto() {
     var a = lnApp(); if (!a) return; var k = 'sa_ln_' + a.id, d = new Date().toISOString().slice(0, 10);
     try { if (localStorage.getItem(k) === d) return; localStorage.setItem(k, d); } catch (e) {}
