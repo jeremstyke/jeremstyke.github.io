@@ -219,6 +219,7 @@ input.tk:focus{border-color:var(--v)}
 .usd h3{margin:0 0 4px;font-size:15px}
 .usd p{margin:0 0 10px;font-size:12.5px;color:var(--mute)}
 #wbB .kv{display:flex;align-items:center;gap:8px;margin-top:8px}#wbB .kv div{flex:1;min-width:0}#wbB .kv small{display:block;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}#wbB .kv code{display:block;font:600 12.5px ui-monospace,Menlo,monospace;word-break:break-all;overflow-wrap:anywhere;user-select:all}#wbB .kv button{flex:none;padding:8px 12px;border-radius:12px;font-size:12px;font-weight:700;background:var(--card2)}#wbB{overflow:hidden}#wbW{min-height:76px;margin-top:10px;resize:vertical;font-size:14px}
+.lnb{padding:14px;border-radius:18px;margin-bottom:12px;background:linear-gradient(120deg,rgba(139,92,255,.22),rgba(47,214,255,.14));border:1px solid rgba(139,92,255,.45)}.lnb b{display:block;font-size:15px;margin-bottom:4px}.lnb p{margin:0 0 10px;font-size:13px;color:var(--mute)}
 .usd .kv{display:flex;align-items:center;gap:8px;margin-top:8px}
 .usd .kv div{flex:1;min-width:0}
 .usd .kv small{display:block;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
@@ -1792,6 +1793,26 @@ input.tk:focus{border-color:var(--v)}
     };
   }
 
+
+  // 4 nov 2026 (13h25, Jeremy): nobody launches their app on a bot: an automatic reminder (card in My apps + once a day when the studio opens)
+  var LN = {"fr": {"t": "🚀 « {n} » n'est pas encore en ligne", "p": "Lance-la sur ton propre bot : tes amis jouent directement dans Telegram, les scores et le classement sont gardés, et tu peux gagner de l'argent avec les pubs. Ça prend 2 minutes.", "go": "🚀 Lancer sur mon bot", "later": "Plus tard", "s": ["Touche « Lancer sur mon bot ».", "SayApp crée ton bot en 1 clic (ou tu colles le code donné par @BotFather).", "Partage le lien de ton bot : ton appli est en ligne !"]}, "en": {"t": "🚀 \"{n}\" is not online yet", "p": "Launch it on your own bot: your friends play right inside Telegram, scores and the leaderboard are kept, and you can earn money with ads. It takes 2 minutes.", "go": "🚀 Launch on my bot", "later": "Later", "s": ["Tap \"Launch on my bot\".", "SayApp creates your bot in 1 tap (or you paste the code from @BotFather).", "Share your bot's link: your app is online!"]}, "es": {"t": "🚀 «{n}» aún no está en línea", "p": "Lánzala en tu propio bot: tus amigos juegan directamente en Telegram, se guardan las puntuaciones y la clasificación, y puedes ganar dinero con anuncios. Son 2 minutos.", "go": "🚀 Lanzar en mi bot", "later": "Más tarde", "s": ["Toca «Lanzar en mi bot».", "SayApp crea tu bot en 1 toque (o pegas el código de @BotFather).", "Comparte el enlace de tu bot: ¡tu app está en línea!"]}, "pt": {"t": "🚀 «{n}» ainda não está no ar", "p": "Lance no seu próprio bot: seus amigos jogam direto no Telegram, as pontuações e o ranking ficam salvos, e você pode ganhar dinheiro com anúncios. Leva 2 minutos.", "go": "🚀 Lançar no meu bot", "later": "Depois", "s": ["Toque em «Lançar no meu bot».", "O SayApp cria seu bot em 1 toque (ou você cola o código do @BotFather).", "Compartilhe o link do seu bot: seu app está no ar!"]}, "ru": {"t": "🚀 «{n}» ещё не запущено", "p": "Запусти его в своём боте: друзья играют прямо в Telegram, очки и рейтинг сохраняются, а на рекламе можно зарабатывать. Это займёт 2 минуты.", "go": "🚀 Запустить в моём боте", "later": "Позже", "s": ["Нажми «Запустить в моём боте».", "SayApp создаст бота в 1 касание (или вставь код от @BotFather).", "Поделись ссылкой на бота: приложение в сети!"]}, "id": {"t": "🚀 \"{n}\" belum online", "p": "Luncurkan di bot milikmu: teman-temanmu main langsung di Telegram, skor dan papan peringkat tersimpan, dan kamu bisa dapat uang dari iklan. Hanya 2 menit.", "go": "🚀 Luncurkan di botku", "later": "Nanti", "s": ["Ketuk \"Luncurkan di botku\".", "SayApp membuat botmu dalam 1 ketuk (atau tempel kode dari @BotFather).", "Bagikan link botmu: aplikasimu online!"]}, "tr": {"t": "🚀 \"{n}\" henüz yayında değil", "p": "Kendi botunda yayınla: arkadaşların doğrudan Telegram'da oynar, skorlar ve sıralama saklanır, reklamlarla para kazanabilirsin. 2 dakika sürer.", "go": "🚀 Botumda yayınla", "later": "Sonra", "s": ["\"Botumda yayınla\"ya dokun.", "SayApp botunu 1 dokunuşta oluşturur (ya da @BotFather'dan aldığın kodu yapıştır).", "Botunun linkini paylaş: uygulaman yayında!"]}};
+  function lnApp() { return (S.apps || []).filter(function (a) { return a.version > 0 && a.status !== 'generating' && !a.bot_username; })[0]; }
+  function lnTxt() { return LN[lang] || LN.en; }
+  function lnBanner() {
+    var box = $('apps'), a = lnApp(); if (!box || !S.loaded || !a || $('lnB')) return;
+    var L = lnTxt(), d = document.createElement('div'); d.className = 'lnb'; d.id = 'lnB';
+    d.innerHTML = '<b>' + esc(L.t.replace('{n}', a.title || 'App')) + '</b><p>' + esc(L.p) + '</p><button class="cta" id="lnGo">' + esc(L.go) + '</button>';
+    box.insertBefore(d, box.firstChild); $('lnGo').onclick = function () { hap(); launch(a); };
+  }
+  var _paintApps = paintApps; paintApps = function () { _paintApps(); lnBanner(); };
+  function lnAuto() {
+    var a = lnApp(); if (!a) return; var k = 'sa_ln_' + a.id, d = new Date().toISOString().slice(0, 10);
+    try { if (localStorage.getItem(k) === d) return; localStorage.setItem(k, d); } catch (e) {}
+    var L = lnTxt();
+    openSheet('<div class="prohead"><div>🚀</div><div><h2>' + esc(L.t.replace('{n}', a.title || 'App')) + '</h2><p class="sub" style="margin:0">' + esc(L.p) + '</p></div></div><ol class="ol">' + L.s.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ol><button class="cta" id="lnS">' + esc(L.go) + '</button><button class="ghost" id="lnL" style="margin-top:10px">' + esc(L.later) + '</button>');
+    $('lnS').onclick = function () { hap(); launch(a); }; $('lnL').onclick = function () { hap(); closeSheet(); };
+  }
+
   // ---------- boot ----------
   var q = new URLSearchParams(location.search), sp = '';
   try { sp = tw.initDataUnsafe.start_param || ''; } catch (e) {}
@@ -1810,6 +1831,7 @@ input.tk:focus{border-color:var(--v)}
     if (q.get('go') === 'ref' || sp === 'ref') { supOpen(); return refSheet(); }
     if (q.get('packs') || sp === 'packs') return packSheet(null, false);  // 3 nov 2026: "Top up my credits" from the bot
     if (open) { var a = S.apps.filter(function (x) { return x.id === open; })[0]; if (a) { tab('apps'); if (sub(a) && !a.bot_username) botSheet(a); else if (q.get('renew') && a.bot_username) manageSheet(a); } }
+    if (!open) setTimeout(lnAuto, 1200);
   });
 })();
 </script>
