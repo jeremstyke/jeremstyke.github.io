@@ -101,14 +101,43 @@
     bn.appendChild(rp);
   }
   // 2 nov 2026 (18h19, Jeremy): every "Made with SayApp" in an app opens @SayAppBuilderBot with a source (src_app_<id>)
-  // 3 nov 2026 (23h10, Jeremy): on the website, a bar at the top to open the app in Telegram (scores and leaderboard are saved there)
+  // 4 nov 2026 (02h32, Jeremy): outside Telegram the app is not playable: a nice card over the blurred app sends people to the bot in Telegram
+  // (not in the SayApp studio preview, which loads the app in an iframe)
+  var GATE = {"fr": ["Cette appli se joue dans Telegram", "Ouvre-la dans Telegram pour jouer, garder ta progression et apparaître au classement.", "▶  Jouer dans Telegram", "Gratuit · aucun téléchargement"], "en": ["This app plays in Telegram", "Open it in Telegram to play, keep your progress and get on the leaderboard.", "▶  Play in Telegram", "Free · nothing to download"], "es": ["Esta app se juega en Telegram", "Ábrela en Telegram para jugar, guardar tu progreso y salir en la clasificación.", "▶  Jugar en Telegram", "Gratis · sin descargas"], "pt": ["Este app roda no Telegram", "Abra no Telegram para jogar, salvar seu progresso e entrar no ranking.", "▶  Jogar no Telegram", "Grátis · nada para baixar"], "ru": ["Это приложение работает в Telegram", "Открой его в Telegram, чтобы играть, сохранять прогресс и попасть в рейтинг.", "▶  Играть в Telegram", "Бесплатно · ничего скачивать не нужно"], "id": ["Aplikasi ini dimainkan di Telegram", "Buka di Telegram untuk bermain, menyimpan progres, dan masuk papan peringkat.", "▶  Main di Telegram", "Gratis · tanpa unduhan"], "tr": ["Bu uygulama Telegram'da oynanır", "Oynamak, ilerlemeni kaydetmek ve sıralamaya girmek için Telegram'da aç.", "▶  Telegram'da oyna", "Ücretsiz · indirme yok"]};
   function webBar(i) {
-    if (!WEB || !i || !i.bot || document.getElementById('saWeb')) return;
-    var U = 'https://t.me/' + i.bot + '?start=src_web', b = document.createElement('a');
-    b.id = 'saWeb'; b.href = U; b.target = '_blank'; b.rel = 'noopener';
-    b.textContent = fr ? 'Joue dans Telegram pour garder tes scores et le classement  >' : 'Play in Telegram to keep your scores and the leaderboard  >';
-    b.style.cssText = 'position:sticky;top:0;z-index:2147483644;display:block;padding:10px 14px;text-align:center;background:linear-gradient(120deg,#2aabee,#229ed9);color:#fff;font:700 13px/1.3 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;text-decoration:none';
-    document.body.insertBefore(b, document.body.firstChild);
+    if (!WEB || window.top !== window.self) return;
+    var U = i && i.bot ? 'https://t.me/' + i.bot + '?start=src_web' : 'https://t.me/SayAppBuilderBot?start=demo_' + APP, g = document.getElementById('saGate');
+    if (g) { g.querySelector('.saGo').href = U; return; }
+    var L = GATE[String(navigator.language || 'en').slice(0, 2).toLowerCase()] || GATE.en, nm = (document.title || '').trim() || 'Mini App';
+    var ic = document.querySelector('link[rel~="apple-touch-icon"],link[rel~="icon"]'), lg = ic && ic.href && !/^data:,?$/.test(ic.href) ? ic.href : '';
+    css('#saGate{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px));background:rgba(6,8,16,.55);-webkit-backdrop-filter:blur(18px) saturate(1.2);backdrop-filter:blur(18px) saturate(1.2);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#f4f5fb;animation:saGi .35s ease}' +
+      '@keyframes saGi{from{opacity:0}to{opacity:1}}#saGate .saC{width:100%;max-width:360px;padding:28px 22px 20px;border-radius:26px;text-align:center;background:linear-gradient(180deg,rgba(28,30,48,.92),rgba(14,15,26,.94));border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 80px -20px rgba(0,0,0,.7)}' +
+      '#saGate .saI{width:84px;height:84px;margin:0 auto 16px;border-radius:24px;display:grid;place-items:center;overflow:hidden;background:linear-gradient(135deg,#8b5cff,#2fd6ff);font-size:38px;font-weight:800;color:#fff;box-shadow:0 12px 30px -8px rgba(47,214,255,.45)}#saGate .saI img{width:100%;height:100%;object-fit:cover}' +
+      '#saGate h1{margin:0 0 4px;font-size:22px;line-height:1.2;font-weight:800;letter-spacing:-.01em;text-wrap:balance}#saGate .saS{margin:0 0 6px;font-size:13px;font-weight:700;color:#5fc8ff;text-transform:uppercase;letter-spacing:.06em}#saGate p{margin:0 0 20px;font-size:14.5px;line-height:1.5;color:rgba(244,245,251,.72)}' +
+      '#saGate .saGo{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;border-radius:16px;background:linear-gradient(120deg,#2aabee,#229ed9);color:#fff;font-size:16px;font-weight:800;text-decoration:none;box-shadow:0 10px 26px -8px rgba(42,171,238,.6)}#saGate .saGo:active{transform:scale(.98)}#saGate small{display:block;margin-top:10px;font-size:12px;color:rgba(244,245,251,.5)}' +
+      'html.saGated,html.saGated body{overflow:hidden!important}');
+    g = document.createElement('div'); g.id = 'saGate'; g.setAttribute('role', 'dialog'); g.setAttribute('aria-modal', 'true');
+    var c = document.createElement('div'); c.className = 'saC';
+    var ii = document.createElement('div'); ii.className = 'saI';
+    if (lg) { var im = document.createElement('img'); im.alt = ''; im.src = lg; im.onerror = function () { ii.textContent = nm.charAt(0).toUpperCase(); }; ii.appendChild(im); } else ii.textContent = nm.charAt(0).toUpperCase();
+    var h = document.createElement('h1'); h.textContent = nm;
+    var sb = document.createElement('div'); sb.className = 'saS'; sb.textContent = L[0];
+    var p = document.createElement('p'); p.textContent = L[1];
+    var go = document.createElement('a'); go.className = 'saGo'; go.href = U; go.rel = 'noopener'; go.textContent = L[2];
+    var sm = document.createElement('small'); sm.textContent = L[3];
+    var mw = document.createElement('a'); mw.className = 'saMade'; mw.style.marginTop = '18px'; mw.href = 'https://t.me/SayAppBuilderBot?start=src_web_' + APP; mw.rel = 'noopener'; mw.innerHTML = '<b>&#10022;</b>Made with SayApp';
+    c.appendChild(ii); c.appendChild(h); c.appendChild(sb); c.appendChild(p); c.appendChild(go); c.appendChild(sm); c.appendChild(mw); g.appendChild(c);
+    document.documentElement.className += ' saGated'; document.body.appendChild(g);
+  }
+  // 4 nov 2026 (02h39, Jeremy): under the first "Made with SayApp" of every app: SayApp only builds apps, the publisher runs its rewards and payments
+  var DIS = {"fr": "SayApp sert uniquement à créer des applications. Les récompenses, gains et paiements de cette appli sont gérés par son éditeur, pas par SayApp.", "en": "SayApp is only a tool to build apps. The rewards, earnings and payments of this app are managed by its publisher, not by SayApp.", "es": "SayApp solo sirve para crear aplicaciones. Las recompensas, ganancias y pagos de esta app los gestiona su editor, no SayApp.", "pt": "O SayApp serve apenas para criar aplicativos. As recompensas, ganhos e pagamentos deste app são geridos pelo seu editor, não pelo SayApp.", "ru": "SayApp служит только для создания приложений. Награды, заработок и выплаты этого приложения управляются его издателем, а не SayApp.", "id": "SayApp hanya alat untuk membuat aplikasi. Hadiah, penghasilan, dan pembayaran aplikasi ini dikelola oleh penerbitnya, bukan oleh SayApp.", "tr": "SayApp yalnızca uygulama oluşturmaya yarar. Bu uygulamanın ödülleri, kazançları ve ödemeleri SayApp tarafından değil, yayıncısı tarafından yönetilir.", "de": "SayApp dient nur zum Erstellen von Apps. Belohnungen, Gewinne und Zahlungen dieser App verwaltet ihr Herausgeber, nicht SayApp.", "it": "SayApp serve solo a creare app. Premi, guadagni e pagamenti di questa app sono gestiti dal suo editore, non da SayApp.", "ar": "SayApp مجرد أداة لإنشاء التطبيقات. المكافآت والأرباح والمدفوعات في هذا التطبيق يديرها ناشره، وليس SayApp."};
+  function addDis(el, a) {
+    if (!el || document.getElementById('saDis') || (el.closest && el.closest('#saGate'))) return;
+    var lg = String(user.language_code || navigator.language || 'en').slice(0, 2).toLowerCase(), nt = document.createElement('div');
+    nt.id = 'saDis'; nt.textContent = DIS[lg] || DIS.en;
+    var c = ''; try { c = getComputedStyle(a).color; } catch (x) {}
+    nt.style.cssText = 'display:block;max-width:320px;margin:8px auto 0;padding:0 12px;text-align:center;opacity:.6;font:500 10.5px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;text-transform:none;letter-spacing:0' + (c ? ';color:' + c : '');
+    el.parentNode.insertBefore(nt, el.nextSibling);
   }
   function madeLink(last) {
     // 3 nov 2026 (22h11, Jeremy): a nice "Made with SayApp" pill in every app, like Meme Coin Tycoon and Pass The Baton (light or dark look from the app's background)
@@ -128,20 +157,21 @@
     for (var i = 0; i < nodes.length; i++) {
       var t = nodes[i], p = t.parentNode, v = t.nodeValue, m = v.match(RX), bf = v.slice(0, m.index).replace(new RegExp(SEP + '$'), ''), af = v.slice(m.index + m[0].length).replace(new RegExp('^' + SEP), '');
       found = true;
-      if (!bf && !af && (p.tagName === 'A' || p.tagName === 'BUTTON') && p.childNodes.length === 1) { pill(p); if (p.tagName === 'A') p.href = U; continue; }
+      if (!bf && !af && (p.tagName === 'A' || p.tagName === 'BUTTON') && p.childNodes.length === 1) { pill(p); if (p.tagName === 'A') p.href = U; addDis(p, p); continue; }
       var alone = !bf && !af && p.childNodes.length === 1, w = document.createElement('span'), a = document.createElement('a');
       w.className = 'saMadeW'; a.href = U; w.appendChild(pill(a));
-      if (alone) { p.replaceChild(w, t); try { if (parseFloat(getComputedStyle(p).opacity) < 0.9) p.style.opacity = '1'; } catch (x) {} continue; }
+      if (alone) { p.replaceChild(w, t); try { if (parseFloat(getComputedStyle(p).opacity) < 0.9) p.style.opacity = '1'; } catch (x) {} addDis(w, a); continue; }
       // mixed text: the text stays where it was, the pill goes just after the element (so a faded footer does not fade it)
       t.nodeValue = (bf + (bf && af ? ' ' : '') + af) || ' ';
       var br = t.previousSibling; if (!af && br && br.nodeName === 'BR') br.parentNode.removeChild(br);
-      w.style.margin = '8px auto 0'; p.parentNode.insertBefore(w, p.nextSibling);
+      w.style.margin = '8px auto 0'; p.parentNode.insertBefore(w, p.nextSibling); addDis(w, a);
     }
     var old = document.getElementById('sayappM'); if (old) old.remove();
     if (last === true && !found && !document.getElementById('sayappMade')) {
-      var d = document.createElement('div'); d.id = 'sayappMade'; var a2 = document.createElement('a'); a2.href = U; d.appendChild(pill(a2));
+      var d = document.createElement('div'); d.id = 'sayappMade'; var a2 = document.createElement('a'); a2.href = U; d.appendChild(pill(a2)); d.style.flexDirection = 'column'; d.style.alignItems = 'center'; var dn = document.createElement('i'); d.appendChild(dn);
       var main = document.querySelector('main'), cs = main ? getComputedStyle(main).overflowY : '';
       if (main && (cs === 'auto' || cs === 'scroll')) main.appendChild(d); else document.body.appendChild(d);
+      addDis(dn, a2); dn.remove();
     }
   }
   // 2 nov 2026 (18h37, Jeremy): the owner's ads (Adsgram block, Ads Galaxy id), set in SayApp > My apps > Manage > Earn money
@@ -205,6 +235,6 @@
     try { localStorage.setItem(k, String(Date.now())); } catch (e) {}
     setTimeout(function () { playAd(ADS.agi || ADS.ag); }, 1200);
   }
-  function boot() { adsReady = call({ action: 'info' }).then(function (i) { ADS = (i && i.ads) || null; INFO = i; show(i); webBar(i); if (ADS && (ADS.ag || ADS.agx)) openAd(); else demoAd(i); return i; }); madeLink(); setTimeout(madeLink, 1500); setTimeout(function () { madeLink(true); }, 4000); }
+  function boot() { webBar(null); adsReady = call({ action: 'info' }).then(function (i) { ADS = (i && i.ads) || null; INFO = i; show(i); webBar(i); if (ADS && (ADS.ag || ADS.agx)) openAd(); else demoAd(i); return i; }); madeLink(); setTimeout(madeLink, 1500); setTimeout(function () { madeLink(true); }, 4000); }
   if (document.body) boot(); else document.addEventListener('DOMContentLoaded', boot);
 })();
