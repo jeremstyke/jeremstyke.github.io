@@ -1132,7 +1132,10 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
 // 30 oct 2026 (19h22, Jeremy): Adsgram interstitial (block int-55773) at every opening of Rig Rush, never on the player's very first visit
 (function () {
   try {
-    return;  // 31 oct 2026 (23h03, Jeremy): no more interstitial at opening
+    // 5 nov 2026 (00h57, Jeremy): back at opening, at random half Adsgram, half the SayApp promo (never on the first visit)
+    var tw0 = window.Telegram && Telegram.WebApp; if (!(tw0 && tw0.initData)) return;
+    try { if (!localStorage.getItem('rr_open1')) { localStorage.setItem('rr_open1', '1'); return; } } catch (e) { return; }
+    if (Math.random() < 0.5) { var lg0 = String(((tw0.initDataUnsafe || {}).user || {}).language_code || 'en').slice(0, 2); var run0 = function () { try { window.SayAppPromo.show({ src: 'rr', lang: lg0 }); } catch (e) {} }; if (window.SayAppPromo) run0(); else { var s0 = document.createElement('script'); s0.src = 'https://jeremstyke.github.io/sayapp/promo.js?v=1'; s0.onload = run0; document.head.appendChild(s0); } return; }
     var tw = window.Telegram && Telegram.WebApp; if (!(tw && tw.initData)) return;
     var first = false; try { first = !localStorage.getItem('rr_open1'); localStorage.setItem('rr_open1', '1'); } catch (e) { return; }
     if (first) return;
