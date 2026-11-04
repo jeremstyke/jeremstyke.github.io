@@ -57,6 +57,7 @@ textarea::placeholder{color:var(--dim)}
 .ghost{width:100%;padding:14px;border-radius:14px;background:var(--card2);border:1px solid var(--line);font-weight:600}
 .quota{text-align:center;font-size:12.5px;color:var(--dim);margin-top:10px}
 .usSpin{width:46px;height:46px;margin:6px auto 14px;border-radius:50%;border:4px solid rgba(255,255,255,.12);border-top-color:#2fd6ff;animation:usS 1s linear infinite}@keyframes usS{to{transform:rotate(360deg)}}.usOk{width:46px;height:46px;margin:6px auto 14px;border-radius:50%;background:#22c55e;display:grid;place-items:center}.usOk:after{content:'✓';color:#fff;font:800 24px Inter,sans-serif}
+.hum{display:block;margin:0 0 7px auto;padding:6px 12px;border-radius:99px;font-size:12.5px;font-weight:700;color:#ffd36b;background:rgba(255,197,49,.1);border:1px solid rgba(255,197,49,.35)}
 .madeN{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:7px 13px;border-radius:99px;font-size:13px;font-weight:700;color:#e9e4ff;background:rgba(139,92,255,.14);border:1px solid rgba(139,92,255,.38)}
 .sec{margin-top:30px}
 .sec h3{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-bottom:12px;font-family:Inter,sans-serif;font-weight:600}
@@ -315,7 +316,7 @@ input.tk:focus{border-color:var(--v)}
   <section id="vEarn" hidden><div class="earn" id="earn"></div></section>
   <section id="vDir" hidden><div class="earn" id="dir"></div></section>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="tabg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a98bff"/><stop offset="1" stop-color="#2fd6ff"/></linearGradient></defs></svg>
-  <section id="vSup" hidden><div class="sup" id="sup"></div><div class="sbar" id="sbar"><div><textarea id="sIn" rows="1" maxlength="1000"></textarea><button id="sGo">↑</button></div></div></section>
+  <section id="vSup" hidden><div class="sup" id="sup"></div><div class="sbar" id="sbar"><button class="hum" id="sHum"></button><div><textarea id="sIn" rows="1" maxlength="1000"></textarea><button id="sGo">↑</button></div></div></section>
 </div>
 
 <nav class="tabs" id="tabs" hidden>
@@ -1232,6 +1233,9 @@ input.tk:focus{border-color:var(--v)}
     });
   }
   $('sIn').placeholder = T.supPh;
+  // 4 nov 2026 (20h15, Jeremy): one tap to ask for a human: it opens a support ticket that Jeremy gets in the bot
+  var HM = {"fr": ["🙋 Parler à un humain", "Je veux parler à un humain, s'il te plaît."], "en": ["🙋 Talk to a human", "I'd like to talk to a human, please."], "es": ["🙋 Hablar con una persona", "Quiero hablar con un humano, por favor."], "pt": ["🙋 Falar com uma pessoa", "Quero falar com um humano, por favor."], "ru": ["🙋 Связаться с человеком", "Хочу поговорить с человеком, пожалуйста."], "id": ["🙋 Bicara dengan manusia", "Saya ingin bicara dengan manusia."], "tr": ["🙋 Bir insanla konuş", "Bir insanla konuşmak istiyorum, lütfen."]};
+  $('sHum').textContent = (HM[lang] || HM.en)[0]; $('sHum').onclick = function () { supSend((HM[lang] || HM.en)[1]); };
   $('sIn').oninput = function () { this.style.height = ''; this.style.height = Math.min(120, this.scrollHeight) + 'px'; };
   $('sGo').onclick = function () { supSend($('sIn').value); };
   $('tSup').onclick = function () { hap(); supOpen(); };
