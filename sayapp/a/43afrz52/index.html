@@ -1,0 +1,261 @@
+<!-- sayapp 43afrz52 v1 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Pixel Pummel</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --main:#8b5cff;--main2:#5b2bff;--accent:#ffd23f;--hot:#ff4fa3;--ok:#3dffa0;
+  --bg:#0b0820;--bg2:#140f33;--card:#1a1440;--line:#2c2366;--txt:#f3efff;--mut:#9d94c9;
+  --px:polygon(0 8px,4px 8px,4px 4px,8px 4px,8px 0,calc(100% - 8px) 0,calc(100% - 8px) 4px,calc(100% - 4px) 4px,calc(100% - 4px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 4px) calc(100% - 8px),calc(100% - 4px) calc(100% - 4px),calc(100% - 8px) calc(100% - 4px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 4px),4px calc(100% - 4px),4px calc(100% - 8px),0 calc(100% - 8px));
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow-x:hidden}
+body{font-family:'Space Grotesk',ui-monospace,system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:15px;
+  background-image:radial-gradient(circle at 50% -10%,rgba(139,92,255,.35),transparent 55%),linear-gradient(rgba(139,92,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,255,.06) 1px,transparent 1px);
+  background-size:100% 100%,16px 16px,16px 16px;user-select:none;-webkit-user-select:none}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px);z-index:99}
+.app{max-width:440px;margin:0 auto;min-height:100%;padding:0 16px calc(96px + env(safe-area-inset-bottom))}
+header{padding-top:calc(var(--sa-top,0px) + 8px);display:flex;align-items:center;justify-content:space-between;gap:8px;padding-bottom:8px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo svg{width:36px;height:28px;filter:drop-shadow(0 0 8px var(--main))}
+.logo b{font-size:20px;letter-spacing:1px;text-transform:uppercase;text-shadow:3px 3px 0 var(--main2)}
+.logo small{display:block;font-size:10px;color:var(--mut);letter-spacing:2px;text-transform:uppercase}
+.lang{background:var(--card);color:var(--accent);border:0;font:700 12px 'Space Grotesk';padding:8px 12px;clip-path:var(--px);letter-spacing:1px;cursor:pointer}
+.lab{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--mut);font-weight:700}
+.card{background:linear-gradient(180deg,var(--card),var(--bg2));clip-path:var(--px);padding:16px;margin-top:16px;position:relative}
+.hero{text-align:center;padding:24px 16px}
+.hero h1{font-size:30px;line-height:1.05;text-transform:uppercase;letter-spacing:1px;text-shadow:3px 3px 0 var(--main2),0 0 24px rgba(139,92,255,.6)}
+.hero p{color:var(--mut);margin-top:8px;line-height:1.4}
+.bigInv{width:140px;height:104px;margin:16px auto 8px;display:block;animation:bob 1.2s steps(2) infinite;filter:drop-shadow(0 0 16px var(--main))}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.stat{background:var(--card);clip-path:var(--px);padding:12px 8px;text-align:center}
+.stat b{display:block;font-size:22px;margin-top:4px;color:var(--accent)}
+.btn{display:block;width:100%;border:0;cursor:pointer;font:700 17px 'Space Grotesk';letter-spacing:2px;text-transform:uppercase;color:#1a0f00;
+  background:linear-gradient(180deg,#ffe57a,var(--accent) 50%,#f5a623);padding:18px;clip-path:var(--px);margin-top:16px;transition:transform .15s;box-shadow:inset 0 -6px 0 rgba(0,0,0,.25)}
+.btn:active{transform:scale(.96)}
+.btn.alt{background:linear-gradient(180deg,#a888ff,var(--main) 50%,var(--main2));color:#fff}
+.btn.ghost{background:var(--line);color:var(--txt);font-size:14px;padding:14px}
+.glow{animation:glow 1.6s ease-in-out infinite}
+@keyframes glow{50%{filter:brightness(1.15) drop-shadow(0 0 10px var(--accent))}}
+.sec{display:none;animation:fade .25s ease}
+.sec.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+input{width:100%;background:var(--bg);border:0;color:var(--txt);font:500 16px 'Space Grotesk';padding:14px;margin-top:8px;clip-path:var(--px);outline:none}
+input:focus{background:#221a52}
+.vs{text-align:center;font-weight:700;color:var(--hot);font-size:22px;margin:8px 0;text-shadow:2px 2px 0 #000}
+.row{display:flex;align-items:center;gap:12px;padding:12px;background:var(--card);clip-path:var(--px);margin-top:8px;animation:fade .3s ease both}
+.row .r{width:32px;text-align:center;font-weight:700;color:var(--mut)}
+.row .n{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .v{font-weight:700;color:var(--accent)}
+.row.me{background:linear-gradient(90deg,rgba(139,92,255,.5),var(--card))}
+.skel{height:48px;margin-top:8px;clip-path:var(--px);background:linear-gradient(90deg,var(--card),#251d58,var(--card));background-size:200% 100%;animation:sk 1.2s linear infinite}
+@keyframes sk{to{background-position:-200% 0}}
+.empty{text-align:center;color:var(--mut);padding:32px 16px;line-height:1.5}
+.empty div{font-size:40px;margin-bottom:8px}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:center;padding:8px 16px calc(8px + env(safe-area-inset-bottom));background:linear-gradient(0deg,var(--bg) 60%,transparent)}
+nav .in{display:flex;gap:8px;width:100%;max-width:408px;background:var(--bg2);padding:6px;clip-path:var(--px)}
+nav button{flex:1;border:0;background:none;color:var(--mut);font:700 11px 'Space Grotesk';letter-spacing:1.5px;text-transform:uppercase;padding:10px 4px;clip-path:var(--px);cursor:pointer;transition:transform .15s}
+nav button span{display:block;font-size:20px;margin-bottom:2px}
+nav button.on{background:var(--main);color:#fff}
+nav button:active{transform:scale(.94)}
+.foot{text-align:center;font-size:11px;color:#5e5690;margin-top:24px;letter-spacing:1px}
+.layer{position:fixed;inset:0;z-index:40;background:var(--bg);display:none;flex-direction:column;padding:calc(var(--sa-top,0px) + 8px) 16px calc(16px + env(safe-area-inset-bottom));
+  background-image:radial-gradient(circle at 50% 60%,rgba(139,92,255,.35),transparent 60%),linear-gradient(rgba(139,92,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,255,.07) 1px,transparent 1px);background-size:100% 100%,16px 16px,16px 16px}
+.layer.on{display:flex}
+.ptop{display:flex;justify-content:space-between;align-items:center;max-width:408px;width:100%;margin:0 auto}
+.x{width:40px;height:40px;border:0;background:var(--card);color:var(--txt);font-size:18px;clip-path:var(--px);cursor:pointer}
+.bar{height:16px;background:var(--card);clip-path:var(--px);margin:16px auto 0;max-width:408px;width:100%;overflow:hidden}
+.bar i{display:block;height:100%;width:100%;background:repeating-linear-gradient(90deg,var(--ok) 0 12px,#1fd47c 12px 16px);transform-origin:left;transition:background .2s}
+.bar i.low{background:repeating-linear-gradient(90deg,var(--hot) 0 12px,#d42e7d 12px 16px)}
+.pscore{text-align:center;margin-top:16px}
+.pscore b{font-size:64px;line-height:1;display:block;text-shadow:4px 4px 0 var(--main2),0 0 30px rgba(139,92,255,.7)}
+.combo{height:24px;margin-top:8px;text-align:center;font-weight:700;color:var(--accent);letter-spacing:2px;transition:transform .15s}
+.arena{flex:1;position:relative;display:flex;align-items:center;justify-content:center;touch-action:none;cursor:pointer}
+.arena svg{width:min(64vw,260px);height:auto;filter:drop-shadow(0 0 24px var(--main));transition:transform .08s}
+.arena.hit svg{transform:scale(.9)}
+.hint{text-align:center;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);animation:blink 1s steps(2) infinite;min-height:20px}
+@keyframes blink{50%{opacity:.2}}
+.fl{position:absolute;font-weight:700;font-size:22px;color:var(--accent);pointer-events:none;animation:up .6s ease-out forwards;text-shadow:2px 2px 0 #000}
+@keyframes up{to{transform:translateY(-70px);opacity:0}}
+.pp{position:absolute;width:8px;height:8px;pointer-events:none;animation:burst .5s ease-out forwards}
+@keyframes burst{to{transform:translate(var(--dx),var(--dy));opacity:0}}
+.cf{position:fixed;top:-12px;width:10px;height:10px;z-index:60;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translate(var(--dx),110vh) rotate(720deg)}}
+.modal{position:fixed;inset:0;z-index:50;background:rgba(5,3,18,.8);display:none;align-items:center;justify-content:center;padding:16px}
+.modal.on{display:flex}
+.mbox{width:100%;max-width:380px;background:linear-gradient(180deg,#241b5c,var(--bg2));clip-path:var(--px);padding:24px;text-align:center;animation:pop .3s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{transform:scale(.7);opacity:0}}
+.mbox h2{font-size:22px;text-transform:uppercase;letter-spacing:1px;text-shadow:2px 2px 0 var(--main2)}
+.mbox .num{font-size:72px;font-weight:700;color:var(--accent);line-height:1.1;margin:8px 0;text-shadow:4px 4px 0 #8a4b00}
+.mbox p{color:var(--mut);line-height:1.4}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="logo"><svg class="inv" viewBox="0 0 11 8"></svg><div><b>Pixel Pummel</b><small data-i="tag"></small></div></div>
+    <button class="lang" id="langBtn">EN</button>
+  </header>
+
+  <section class="sec on" id="s-solo">
+    <div class="card hero">
+      <h1 data-i="heroT"></h1>
+      <p data-i="heroP"></p>
+      <svg class="bigInv inv" viewBox="0 0 11 8"></svg>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="lab" data-i="best"></span><b id="stBest">0</b></div>
+      <div class="stat"><span class="lab" data-i="played"></span><b id="stPlayed">0</b></div>
+      <div class="stat"><span class="lab" data-i="last"></span><b id="stLast">-</b></div>
+    </div>
+    <button class="btn glow" id="playBtn" data-i="play"></button>
+    <button class="btn ghost" id="shareBtn" data-i="challenge"></button>
+  </section>
+
+  <section class="sec" id="s-duel">
+    <div class="card">
+      <span class="lab" data-i="duelL"></span>
+      <p style="color:var(--mut);margin-top:8px;line-height:1.4" data-i="duelP"></p>
+      <input id="n1" maxlength="14" data-ph="p1">
+      <div class="vs">VS</div>
+      <input id="n2" maxlength="14" data-ph="p2" style="margin-top:0">
+      <button class="btn alt" id="duelBtn" data-i="startDuel"></button>
+    </div>
+    <div class="card"><span class="lab" data-i="lastDuel"></span><p id="lastDuel" style="margin-top:8px;color:var(--mut)"></p></div>
+  </section>
+
+  <section class="sec" id="s-rank">
+    <div class="card" style="padding-bottom:12px"><span class="lab" data-i="world"></span><p style="color:var(--mut);margin-top:6px" data-i="worldP"></p></div>
+    <div id="board"></div>
+  </section>
+
+  <div class="foot">Made with SayApp</div>
+</div>
+
+<nav><div class="in">
+  <button class="on" data-tab="solo"><span>👾</span><em data-i="solo" style="font-style:normal"></em></button>
+  <button data-tab="duel"><span>⚔️</span><em data-i="duel" style="font-style:normal"></em></button>
+  <button data-tab="rank"><span>🏆</span><em data-i="rank" style="font-style:normal"></em></button>
+</div></nav>
+
+<div class="layer" id="play">
+  <div class="ptop"><button class="x" id="closeP">✕</button><span class="lab" id="pLabel"></span><span class="lab" id="pTime" style="color:var(--txt);font-size:16px">10.0</span></div>
+  <div class="bar"><i id="tbar"></i></div>
+  <div class="pscore"><span class="lab" data-i="score"></span><b id="pScore">0</b></div>
+  <div class="combo" id="pCombo"></div>
+  <div class="arena" id="arena"><svg class="inv" id="bigTap" viewBox="0 0 11 8"></svg></div>
+  <div class="hint" id="pHint"></div>
+</div>
+
+<div class="modal" id="res"><div class="mbox">
+  <h2 id="rT"></h2><div class="num" id="rN">0</div><p id="rP"></p>
+  <button class="btn" id="rB1"></button><button class="btn ghost" id="rB2"></button>
+</div></div>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="43afrz52" data-full="1"></script>
+<script>
+window.addEventListener('load',()=>{
+const S=window.SayApp||{user:{},get:async()=>null,set:async()=>{},top:async()=>[],haptic:()=>{}};
+const TG=window.Telegram&&Telegram.WebApp;try{TG&&TG.ready();TG&&TG.expand()}catch(e){}
+const T={
+en:{tag:'8-bit tap frenzy',heroT:'10 seconds. Tap like crazy.',heroP:'Smash the invader, chain fast taps for combos up to x4 and climb the world ranking.',best:'Best',played:'Games',last:'Last',play:'▶ Play',challenge:'⚔ Challenge a friend',solo:'Solo',duel:'Duel',rank:'Ranking',duelL:'Duel on one phone',duelP:'Two players, one phone. Each one gets 10 seconds, the highest score wins.',p1:'Player 1',p2:'Player 2',startDuel:'Start duel',lastDuel:'Last duel',noDuel:'No duel yet. Grab a friend!',world:'World ranking',worldP:'Best solo scores of all players.',score:'Score',tapStart:'Tap to start',turn:'turn',gameOver:'Game over',newBest:'New record!',tps:'taps/s',again:'Play again',close:'Close',next:'Go',nextTurn:'Pass the phone to',wins:'wins!',draw:'Draw!',rematch:'Rematch',loading:'Loading',empty:'No scores yet. Be the first legend!',you:'you',share:'I scored {n} in Pixel Pummel 👾 Can you beat me in 10 seconds?',combo:'COMBO'},
+fr:{tag:'Frénésie de tap 8-bit',heroT:'10 secondes. Tape comme un fou.',heroP:'Écrase l\'envahisseur, enchaîne les taps rapides pour des combos jusqu\'à x4 et grimpe au classement mondial.',best:'Record',played:'Parties',last:'Dernier',play:'▶ Jouer',challenge:'⚔ Défier un ami',solo:'Solo',duel:'Duel',rank:'Classement',duelL:'Duel sur un téléphone',duelP:'Deux joueurs, un téléphone. Chacun a 10 secondes, le plus gros score gagne.',p1:'Joueur 1',p2:'Joueur 2',startDuel:'Lancer le duel',lastDuel:'Dernier duel',noDuel:'Pas encore de duel. Trouve un ami !',world:'Classement mondial',worldP:'Meilleurs scores solo de tous les joueurs.',score:'Score',tapStart:'Tape pour commencer',turn:'à toi',gameOver:'Partie finie',newBest:'Nouveau record !',tps:'taps/s',again:'Rejouer',close:'Fermer',next:'Go',nextTurn:'Passe le téléphone à',wins:'gagne !',draw:'Égalité !',rematch:'Revanche',loading:'Chargement',empty:'Aucun score. Sois la première légende !',you:'toi',share:'J\'ai fait {n} sur Pixel Pummel 👾 Tu me bats en 10 secondes ?',combo:'COMBO'},
+es:{tag:'Locura de toques 8-bit',heroT:'10 segundos. Toca sin parar.',heroP:'Aplasta al invasor, encadena toques rápidos para combos hasta x4 y sube en el ranking mundial.',best:'Récord',played:'Partidas',last:'Última',play:'▶ Jugar',challenge:'⚔ Retar a un amigo',solo:'Solo',duel:'Duelo',rank:'Ranking',duelL:'Duelo en un móvil',duelP:'Dos jugadores, un móvil. Cada uno tiene 10 segundos, gana la mayor puntuación.',p1:'Jugador 1',p2:'Jugador 2',startDuel:'Empezar duelo',lastDuel:'Último duelo',noDuel:'Aún no hay duelos. ¡Busca un amigo!',world:'Ranking mundial',worldP:'Mejores puntuaciones solo de todos.',score:'Puntos',tapStart:'Toca para empezar',turn:'tu turno',gameOver:'Fin del juego',newBest:'¡Nuevo récord!',tps:'toques/s',again:'Otra vez',close:'Cerrar',next:'Vamos',nextTurn:'Pasa el móvil a',wins:'¡gana!',draw:'¡Empate!',rematch:'Revancha',loading:'Cargando',empty:'Sin puntuaciones. ¡Sé la primera leyenda!',you:'tú',share:'Hice {n} en Pixel Pummel 👾 ¿Me ganas en 10 segundos?',combo:'COMBO'},
+pt:{tag:'Frenesi de toques 8-bit',heroT:'10 segundos. Toque sem parar.',heroP:'Esmague o invasor, encadeie toques rápidos para combos até x4 e suba no ranking mundial.',best:'Recorde',played:'Partidas',last:'Última',play:'▶ Jogar',challenge:'⚔ Desafiar um amigo',solo:'Solo',duel:'Duelo',rank:'Ranking',duelL:'Duelo num celular',duelP:'Dois jogadores, um celular. Cada um tem 10 segundos, vence a maior pontuação.',p1:'Jogador 1',p2:'Jogador 2',startDuel:'Começar duelo',lastDuel:'Último duelo',noDuel:'Nenhum duelo ainda. Chame um amigo!',world:'Ranking mundial',worldP:'Melhores pontuações solo de todos.',score:'Pontos',tapStart:'Toque para começar',turn:'sua vez',gameOver:'Fim de jogo',newBest:'Novo recorde!',tps:'toques/s',again:'Jogar de novo',close:'Fechar',next:'Vai',nextTurn:'Passe o celular para',wins:'venceu!',draw:'Empate!',rematch:'Revanche',loading:'Carregando',empty:'Sem pontuações. Seja a primeira lenda!',you:'você',share:'Fiz {n} no Pixel Pummel 👾 Consegue me vencer em 10 segundos?',combo:'COMBO'}};
+const LANGS=['en','fr','es','pt'];
+let lc='en';try{lc=(TG.initDataUnsafe.user.language_code||'en').slice(0,2)}catch(e){}
+let lang=LANGS.includes(lc)?lc:'en';
+const t=k=>(T[lang][k]!=null?T[lang][k]:T.en[k]);
+const $=id=>document.getElementById(id);
+function i18n(){document.querySelectorAll('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));document.querySelectorAll('[data-ph]').forEach(e=>e.placeholder=t(e.dataset.ph));$('langBtn').textContent=lang.toUpperCase();document.documentElement.lang=lang;renderDuel();if(tab==='rank')loadBoard()}
+$('langBtn').onclick=()=>{lang=LANGS[(LANGS.indexOf(lang)+1)%4];S.haptic('tap');i18n()};
+
+// pixel invader
+const G=['00100000100','00010001000','00111111100','01101110110','11111111111','10111111101','10100000101','00011011000'];
+let svg='<defs><linearGradient id="ig" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c7b2ff"/><stop offset="1" stop-color="#8b5cff"/></linearGradient></defs>';
+G.forEach((r,y)=>[...r].forEach((c,x)=>{if(c==='1')svg+=`<rect x="${x}" y="${y}" width="1.02" height="1.02" fill="url(#ig)"/>`}));
+document.querySelectorAll('.inv').forEach(s=>s.innerHTML=svg);
+
+// stats
+let stats={best:0,played:0,last:null},duelLast=null;
+const setStats=()=>{$('stBest').textContent=stats.best;$('stPlayed').textContent=stats.played;$('stLast').textContent=stats.last==null?'-':stats.last};
+(async()=>{try{const s=await S.get('stats');if(s)stats=Object.assign(stats,s);const d=await S.get('duel');if(d)duelLast=d}catch(e){}setStats();renderDuel()})();
+const fn=(S.user&&S.user.first_name)||'';
+$('n1').value=fn;
+function renderDuel(){const el=$('lastDuel');if(!el)return;if(!duelLast){el.textContent=t('noDuel');return}const d=duelLast;el.innerHTML='';el.textContent=`${d.a} ${d.sa} - ${d.sb} ${d.b}`}
+
+// tabs
+let tab='solo';
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;S.haptic('tap');document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.sec').forEach(s=>s.classList.toggle('on',s.id==='s-'+tab));if(tab==='rank')loadBoard()});
+
+async function loadBoard(){const b=$('board');b.innerHTML='<div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div>';
+  let list=[];try{list=await S.top('best',20)||[]}catch(e){}
+  if(!list.length){b.innerHTML=`<div class="empty"><div>👾</div>${t('empty')}</div>`;return}
+  const md=['🥇','🥈','🥉'];b.innerHTML='';
+  list.forEach((p,i)=>{const r=document.createElement('div');r.className='row'+(p.me?' me':'');r.style.animationDelay=i*40+'ms';
+    r.innerHTML=`<span class="r">${md[i]||i+1}</span><span class="n"></span><span class="v">${p.value}</span>`;
+    r.querySelector('.n').textContent=(p.name||'???')+(p.me?' ('+t('you')+')':'');b.appendChild(r)})}
+
+// game
+const DUR=10000;let g={};
+const arena=$('arena'),play=$('play');
+function openPlay(mode,label){g={mode,running:false,done:false,score:0,taps:0,combo:0,last:0,end:0};
+  $('pLabel').textContent=label;$('pScore').textContent='0';$('pCombo').textContent='';$('pTime').textContent='10.0';
+  $('tbar').style.transform='scaleX(1)';$('tbar').classList.remove('low');$('pHint').textContent=t('tapStart');play.classList.add('on')}
+function loop(){if(!g.running)return;const rem=Math.max(0,g.end-performance.now());
+  $('tbar').style.transform=`scaleX(${rem/DUR})`;$('tbar').classList.toggle('low',rem<3000);$('pTime').textContent=(rem/1000).toFixed(1);
+  if(rem<=0)return finish();requestAnimationFrame(loop)}
+arena.addEventListener('pointerdown',e=>{e.preventDefault();if(g.done||!play.classList.contains('on'))return;
+  const now=performance.now();
+  if(!g.running){g.running=true;g.end=now+DUR;$('pHint').textContent='';requestAnimationFrame(loop)}
+  g.combo=(now-g.last<230)?g.combo+1:0;g.last=now;
+  const m=Math.min(4,1+Math.floor(g.combo/10));g.taps++;g.score+=m;
+  $('pScore').textContent=g.score;
+  const c=$('pCombo');c.textContent=m>1?`${t('combo')} x${m}`:'';c.style.transform='scale(1.2)';setTimeout(()=>c.style.transform='',120);
+  arena.classList.add('hit');setTimeout(()=>arena.classList.remove('hit'),70);
+  const r=arena.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+  const f=document.createElement('div');f.className='fl';f.textContent='+'+m;f.style.left=(x-10)+'px';f.style.top=(y-30)+'px';
+  if(m>1)f.style.color=['','','#3dffa0','#ff4fa3','#ffffff'][m];arena.appendChild(f);setTimeout(()=>f.remove(),600);
+  const cols=['#ffd23f','#8b5cff','#ff4fa3','#3dffa0'];
+  for(let i=0;i<5;i++){const p=document.createElement('div');p.className='pp';p.style.left=x+'px';p.style.top=y+'px';p.style.background=cols[i%4];
+    const a=Math.random()*6.28,d=30+Math.random()*50;p.style.setProperty('--dx',Math.cos(a)*d+'px');p.style.setProperty('--dy',Math.sin(a)*d+'px');arena.appendChild(p);setTimeout(()=>p.remove(),500)}
+  if(g.taps%2)S.haptic('tap')});
+$('closeP').onclick=()=>{g.running=false;g.done=true;play.classList.remove('on')};
+
+function countUp(el,to){const st=performance.now();(function f(n){const k=Math.min(1,(n-st)/700);el.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)})(st)}
+function confetti(){const cols=['#ffd23f','#8b5cff','#ff4fa3','#3dffa0'];for(let i=0;i<50;i++){const c=document.createElement('div');c.className='cf';c.style.left=Math.random()*100+'vw';c.style.background=cols[i%4];
+  c.style.setProperty('--dx',(Math.random()*120-60)+'px');c.style.animationDuration=(1.4+Math.random()*1.4)+'s';c.style.animationDelay=Math.random()*.4+'s';document.body.appendChild(c);setTimeout(()=>c.remove(),3400)}}
+function modal(title,num,txt,b1,f1,b2,f2){$('rT').textContent=title;countUp($('rN'),num);$('rP').textContent=txt;
+  $('rB1').textContent=b1;$('rB1').onclick=()=>{S.haptic('tap');$('res').classList.remove('on');f1()};
+  $('rB2').textContent=b2;$('rB2').onclick=()=>{S.haptic('tap');$('res').classList.remove('on');f2()};$('res').classList.add('on')}
+const closeAll=()=>play.classList.remove('on');
+let duel={a:'',b:'',sa:0};
+function finish(){g.running=false;g.done=true;$('pTime').textContent='0.0';$('tbar').style.transform='scaleX(0)';S.haptic('ok');
+  const sc=g.score,tps=(g.taps/10).toFixed(1);
+  setTimeout(()=>{
+    if(g.mode==='solo'){const nb=sc>stats.best;stats.played++;stats.last=sc;if(nb)stats.best=sc;setStats();
+      S.set('stats',stats).catch(()=>{});if(nb){S.set('best',sc).catch(()=>{});confetti()}
+      modal(nb?t('newBest'):t('gameOver'),sc,`${tps} ${t('tps')}  |  ${t('best')}: ${stats.best}`,t('again'),()=>openPlay('solo',t('solo')),t('challenge'),()=>{closeAll();share(sc)})}
+    else if(g.mode==='duelA'){duel.sa=sc;
+      modal(duel.a,sc,`${t('nextTurn')} ${duel.b}`,t('next')+' '+duel.b,()=>openPlay('duelB',duel.b+' - '+t('turn')),t('close'),closeAll)}
+    else{const sb=sc,sa=duel.sa;duelLast={a:duel.a,b:duel.b,sa,sb};S.set('duel',duelLast).catch(()=>{});renderDuel();
+      const w=sa===sb?t('draw'):`${sa>sb?duel.a:duel.b} ${t('wins')}`;confetti();
+      modal(w,Math.max(sa,sb),`${duel.a} ${sa} - ${sb} ${duel.b}`,t('rematch'),()=>openPlay('duelA',duel.a+' - '+t('turn')),t('close'),closeAll)}
+  },450)}
+$('playBtn').onclick=()=>{S.haptic('tap');openPlay('solo',t('solo'))};
+$('duelBtn').onclick=()=>{S.haptic('tap');duel.a=$('n1').value.trim()||t('p1');duel.b=$('n2').value.trim()||t('p2');openPlay('duelA',duel.a+' - '+t('turn'))};
+function share(n){const txt=t('share').replace('{n}',n==null?stats.best:n);const url=location.href.split('#')[0];
+  const link='https://t.me/share/url?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(txt);
+  try{TG&&TG.openTelegramLink?TG.openTelegramLink(link):window.open(link,'_blank')}catch(e){window.open(link,'_blank')}}
+$('shareBtn').onclick=()=>{S.haptic('tap');share()};
+i18n();
+});
+</script>
+</body>
+</html>
