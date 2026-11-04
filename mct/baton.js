@@ -88,7 +88,7 @@
     // 5 nov 2026 (00h22, Jeremy): one opening out of two shows the SayApp promo (sayapp/promo.js) instead of the ad
     function saPromoOr(fb) {
       let n = 0; try { n = Number(localStorage.getItem('mct_sa_n') || 0) + 1; localStorage.setItem('mct_sa_n', String(n)); } catch (e) {}
-      if (n % 2) return fb();
+      if (Math.random() < 0.5) return fb();  // 5 nov 2026 (00h57, Jeremy): at random, not every other time
       let lg = 'en'; try { lg = LANG; } catch (e) {}
       const run = () => { try { window.SayAppPromo.show({ src: 'mct', lang: lg }); } catch (e) { fb(); } };
       if (window.SayAppPromo) return run();
