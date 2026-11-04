@@ -56,6 +56,7 @@ textarea::placeholder{color:var(--dim)}
 .cta.gold{background:var(--gold);color:#2a1700;box-shadow:0 14px 30px -12px #ff9f43}
 .ghost{width:100%;padding:14px;border-radius:14px;background:var(--card2);border:1px solid var(--line);font-weight:600}
 .quota{text-align:center;font-size:12.5px;color:var(--dim);margin-top:10px}
+.usSpin{width:46px;height:46px;margin:6px auto 14px;border-radius:50%;border:4px solid rgba(255,255,255,.12);border-top-color:#2fd6ff;animation:usS 1s linear infinite}@keyframes usS{to{transform:rotate(360deg)}}.usOk{width:46px;height:46px;margin:6px auto 14px;border-radius:50%;background:#22c55e;display:grid;place-items:center}.usOk:after{content:'✓';color:#fff;font:800 24px Inter,sans-serif}
 .madeN{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:7px 13px;border-radius:99px;font-size:13px;font-weight:700;color:#e9e4ff;background:rgba(139,92,255,.14);border:1px solid rgba(139,92,255,.38)}
 .sec{margin-top:30px}
 .sec h3{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-bottom:12px;font-family:Inter,sans-serif;font-weight:600}
@@ -294,7 +295,8 @@ input.tk:focus{border-color:var(--v)}
     </div></div>
     <div class="chips" id="chips"></div>
     <p class="nbl"><i>3</i><span id="nxL3"></span></p><div class="nbt" id="nxStyle"></div>
-    <details class="nbo"><summary id="nxOpt"></summary><div class="extra" id="wExtra"><input class="xin" id="xName" maxlength="40" autocomplete="off"><input class="xin" id="xDesc" maxlength="120" autocomplete="off"><p class="xl" id="xColL"></p><div class="cols" id="xCols"></div><p class="xl" id="xLangL"></p><div class="cols" id="xLangM"></div><p class="xl" id="xLangL2"></p><div class="cols" id="xLangX"></div></div></details>
+    <p class="nbl"><i>4</i><span id="nxL4"></span></p><div class="nlg"><p class="xl" id="xLangL" style="margin-top:4px"></p><div class="cols" id="xLangM"></div><p class="xl" id="xLangL2"></p><div class="cols" id="xLangX"></div></div>
+    <details class="nbo"><summary id="nxOpt"></summary><div class="extra" id="wExtra"><input class="xin" id="xName" maxlength="40" autocomplete="off"><input class="xin" id="xDesc" maxlength="120" autocomplete="off"><p class="xl" id="xColL"></p><div class="cols" id="xCols"></div></div></details>
     <button class="cta" id="go"></button>
     </div>
     <div class="quota" id="quota"></div>
@@ -1026,8 +1028,8 @@ input.tk:focus{border-color:var(--v)}
     hap(); $('go').disabled = true;
     call('create', { prompt: t, name: xn, desc: xd }).then(function (r) {
       $('go').disabled = false;
-      if (r.ok && r.pay) { RES = { need: (S.lim && S.lim.createCost) || 3, go: function () { $('go').onclick(); } }; return packSheet({ id: r.id, title: xn || '' }, true); }  // 4 nov 2026 (19h50, Jeremy): after buying credits, the creation starts again by itself  // 3 nov 2026 (4h36, Jeremy): paid from the start
-      if (r.ok) { idea.value = ''; idea.oninput(); $('xName').value = ''; $('xDesc').value = ''; W = { i: 0, a: [], lm: W.lm, lx: [] }; paintCols(); paintLangs(); wizRender(); S.lim && S.lim.gens++; startBuild(r.id, false); refresh(); return; }
+      if (r.ok && r.pay) { var pp = { t: t, xn: xn, xd: xd, at: Date.now() }; pendSave(pp); RES = { need: (S.lim && S.lim.createCost) || 3, go: function () { pendGo(pp); } }; return packSheet({ id: r.id, title: xn || '' }, true); }  // 4 nov 2026 (19h50, Jeremy): after buying credits, the creation starts again by itself  // 3 nov 2026 (4h36, Jeremy): paid from the start
+      if (r.ok) { pendSave(null); idea.value = ''; idea.oninput(); $('xName').value = ''; $('xDesc').value = ''; W = { i: 0, a: [], lm: W.lm, lx: [] }; paintCols(); paintLangs(); wizRender(); S.lim && S.lim.gens++; startBuild(r.id, false); refresh(); return; }
       fail(r);
     });
   };
@@ -1270,7 +1272,7 @@ input.tk:focus{border-color:var(--v)}
   function refresh() {
     return call('me').then(function (r) {
       if (!r.ok) return r;
-      S.lim = r.lim; S.apps = r.apps || []; if (RES && Number((r.lim || {}).credits || 0) >= RES.need) { var rg = RES.go; RES = null; try { closeSheet(); } catch (e) {} toast(RSM[lang] || RSM.en); setTimeout(rg, 400); } if (r.made != null) paintMade(r.made); else if (!S.mdq) { S.mdq = 1; call('dir').then(function (d) { if (d && d.ok) paintMade(d.made); }, function () {}); } S.testers = r.testers || {}; S.loaded = true; paintTop(); if (!$('vApps').hidden) paintApps(); return r;
+      S.lim = r.lim; S.apps = r.apps || []; if (RES && Number((r.lim || {}).credits || 0) >= RES.need) { var rg = RES.go; RES = null; try { closeSheet(); } catch (e) {} toast(RSM[lang] || RSM.en); setTimeout(rg, 400); } else pendCheck(r); if (r.made != null) paintMade(r.made); else if (!S.mdq) { S.mdq = 1; call('dir').then(function (d) { if (d && d.ok) paintMade(d.made); }, function () {}); } S.testers = r.testers || {}; S.loaded = true; paintTop(); if (!$('vApps').hidden) paintApps(); return r;
     });
   }
 
@@ -1282,6 +1284,45 @@ input.tk:focus{border-color:var(--v)}
   var RES = null, resT = 0;
   var RSM = {"fr": "✅ Crédits reçus, on reprend là où tu en étais !", "en": "✅ Credits received, picking up where you left off!", "es": "✅ Créditos recibidos, ¡seguimos donde lo dejaste!", "pt": "✅ Créditos recebidos, continuando de onde você parou!", "ru": "✅ Кредиты получены, продолжаем с того места, где ты остановился!", "id": "✅ Kredit diterima, lanjut dari tempat terakhirmu!", "tr": "✅ Krediler geldi, kaldığın yerden devam ediyoruz!"};
   function resWait() { if (resT) clearInterval(resT); var k = 0; resT = setInterval(function () { if (!RES || ++k > 72) { clearInterval(resT); resT = 0; return; } refresh(); }, 5000); }
+
+  // 4 nov 2026 (19h55, Jeremy): the customer journey: languages in sight (step 4), a waiting creation kept until the credits arrive (even after a reload), a clear USDT waiting screen
+  var L4 = {"fr": "Langues", "en": "Languages", "es": "Idiomas", "pt": "Idiomas", "ru": "Языки", "id": "Bahasa", "tr": "Diller"}, OPT = {"fr": "⚙️ Nom et couleur (facultatif)", "en": "⚙️ Name and color (optional)", "es": "⚙️ Nombre y color (opcional)", "pt": "⚙️ Nome e cor (opcional)", "ru": "⚙️ Название и цвет (необязательно)", "id": "⚙️ Nama dan warna (opsional)", "tr": "⚙️ Ad ve renk (isteğe bağlı)"}, PD = {"fr": {"t": "🛠️ Ta création t'attend", "p": "Tu avais commencé : « {i} », avec tes réponses aux questions. Tes crédits sont là, on la lance ?", "b": "🚀 Lancer ma création · {c} crédits", "n": "Non, j'ai une autre idée"}, "en": {"t": "🛠️ Your creation is waiting", "p": "You had started: \"{i}\", with your answers to the questions. Your credits are here, shall we build it?", "b": "🚀 Build my creation · {c} credits", "n": "No, I have another idea"}, "es": {"t": "🛠️ Tu creación te espera", "p": "Habías empezado: «{i}», con tus respuestas a las preguntas. Tus créditos ya están, ¿la lanzamos?", "b": "🚀 Lanzar mi creación · {c} créditos", "n": "No, tengo otra idea"}, "pt": {"t": "🛠️ Sua criação está esperando", "p": "Você tinha começado: «{i}», com suas respostas às perguntas. Seus créditos chegaram, vamos criar?", "b": "🚀 Criar agora · {c} créditos", "n": "Não, tenho outra ideia"}, "ru": {"t": "🛠️ Твоё приложение ждёт", "p": "Ты начал: «{i}», с ответами на вопросы. Кредиты пришли, создаём?", "b": "🚀 Создать · {c} кредита", "n": "Нет, у меня другая идея"}, "id": {"t": "🛠️ Kreasimu menunggu", "p": "Kamu sudah mulai: «{i}», dengan jawabanmu atas pertanyaannya. Kreditmu sudah ada, kita buat sekarang?", "b": "🚀 Buat sekarang · {c} kredit", "n": "Tidak, aku punya ide lain"}, "tr": {"t": "🛠️ Uygulaman seni bekliyor", "p": "Başlamıştın: «{i}», sorulara verdiğin cevaplarla. Kredilerin geldi, oluşturalım mı?", "b": "🚀 Şimdi oluştur · {c} kredi", "n": "Hayır, başka bir fikrim var"}}, UW = {"fr": {"t": "Paiement envoyé ✅", "p": "On attend la confirmation de la blockchain TON, en général moins d'une minute. Tes crédits arrivent tout seuls, ton argent n'est pas perdu.", "e": "⏳ {s} s", "late": "Ça prend plus longtemps que d'habitude, mais ton paiement est bien sur la blockchain : tes crédits vont arriver. Si rien dans 15 minutes, écris au Support.", "ok": "+{n} crédits reçus !"}, "en": {"t": "Payment sent ✅", "p": "Waiting for the TON blockchain to confirm, usually under a minute. Your credits arrive by themselves, your money is not lost.", "e": "⏳ {s} s", "late": "It's taking longer than usual, but your payment is on the blockchain: your credits will arrive. If nothing after 15 minutes, write to Support.", "ok": "+{n} credits received!"}, "es": {"t": "Pago enviado ✅", "p": "Esperamos la confirmación de la blockchain TON, normalmente menos de un minuto. Tus créditos llegan solos, tu dinero no se ha perdido.", "e": "⏳ {s} s", "late": "Tarda más de lo habitual, pero tu pago está en la blockchain: tus créditos llegarán. Si no llega nada en 15 minutos, escribe a Soporte.", "ok": "¡+{n} créditos recibidos!"}, "pt": {"t": "Pagamento enviado ✅", "p": "Aguardando a confirmação da blockchain TON, geralmente menos de um minuto. Seus créditos chegam sozinhos, seu dinheiro não se perdeu.", "e": "⏳ {s} s", "late": "Está demorando mais que o normal, mas seu pagamento está na blockchain: seus créditos vão chegar. Se nada chegar em 15 minutos, fale com o Suporte.", "ok": "+{n} créditos recebidos!"}, "ru": {"t": "Платёж отправлен ✅", "p": "Ждём подтверждения блокчейна TON, обычно меньше минуты. Кредиты придут сами, твои деньги не потеряны.", "e": "⏳ {s} с", "late": "Это дольше обычного, но платёж уже в блокчейне: кредиты придут. Если через 15 минут ничего нет, напиши в Поддержку.", "ok": "+{n} кредитов получено!"}, "id": {"t": "Pembayaran terkirim ✅", "p": "Menunggu konfirmasi blockchain TON, biasanya kurang dari semenit. Kreditmu masuk sendiri, uangmu tidak hilang.", "e": "⏳ {s} dtk", "late": "Lebih lama dari biasanya, tapi pembayaranmu sudah di blockchain: kreditmu akan masuk. Jika tidak ada setelah 15 menit, hubungi Dukungan.", "ok": "+{n} kredit diterima!"}, "tr": {"t": "Ödeme gönderildi ✅", "p": "TON blokzincirinin onayını bekliyoruz, genelde bir dakikadan az. Kredilerin kendiliğinden gelir, paran kaybolmadı.", "e": "⏳ {s} sn", "late": "Normalden uzun sürüyor ama ödemen blokzincirde: kredilerin gelecek. 15 dakika içinde bir şey gelmezse Destek'e yaz.", "ok": "+{n} kredi alındı!"}};
+  try { $('nxL4').textContent = L4[lang] || L4.en; $('nxOpt').textContent = OPT[lang] || OPT.en; } catch (e) {}
+  function pendSave(p) { try { if (p) localStorage.setItem('sa_pend', JSON.stringify(p)); else localStorage.removeItem('sa_pend'); } catch (e) {} }
+  function pendGet() { try { var p = JSON.parse(localStorage.getItem('sa_pend') || 'null'); return p && p.t && Date.now() - p.at < 172800000 ? p : null; } catch (e) { return null; } }
+  function pendCheck(r) {
+    if (S.pendAsk) return; var p = pendGet(); if (!p) return; S.pendAsk = 1;
+    if ((r.apps || []).some(function (x) { return new Date(x.created_at).getTime() > p.at - 5000; })) return pendSave(null);  // already built (paid with Stars, the bot built it)
+    var L = r.lim || {}, cc = L.createCost || 3; if (Number(L.credits || 0) < cc) return;
+    var D = PD[lang] || PD.en, m = /Idea[^:]*:\s*([\s\S]*?)(\n|$)/.exec(p.t), i = (m ? m[1] : p.xn || '').trim(); if (i.length > 90) i = i.slice(0, 88) + '…';
+    openSheet('<h2>' + esc(D.t) + '</h2><p class="sub">' + esc(D.p.replace('{i}', i)) + '</p><button class="cta gold" id="pdGo">' + esc(D.b.replace('{c}', cc)) + '</button><button class="ghost" id="pdNo" style="margin-top:10px">' + esc(D.n) + '</button>');
+    $('pdGo').onclick = function () { hap(); closeSheet(); pendGo(p); };
+    $('pdNo').onclick = function () { hap(); pendSave(null); closeSheet(); };
+  }
+  function pendGo(p) {
+    call('create', { prompt: p.t, name: p.xn, desc: p.xd }).then(function (r) {
+      if (r.ok && r.pay) { RES = { need: (S.lim && S.lim.createCost) || 3, go: function () { pendGo(p); } }; return packSheet({ id: r.id, title: p.xn || '' }, true); }
+      if (r.ok) { pendSave(null); try { idea.value = ''; idea.oninput(); $('xName').value = ''; $('xDesc').value = ''; } catch (e) {} W = { i: 0, a: [], lm: W.lm, lx: [] }; paintCols(); paintLangs(); wizRender(); startBuild(r.id, false); refresh(); return; }
+      fail(r);
+    });
+  }
+  function usWait() {
+    var U = UW[lang] || UW.en, c0 = Number((S.lim || {}).credits || 0), t0 = Date.now(), k = 0;
+    openSheet('<div style="text-align:center;padding:8px 0 4px"><div class="usSpin" id="usWs"></div><h2>' + esc(U.t) + '</h2><p class="sub" id="usWp">' + esc(U.p) + '</p><p class="crs" id="usWt"></p></div>');
+    var iv = setInterval(function () {
+      var sec = Math.round((Date.now() - t0) / 1000); k++;
+      if ($('usWt')) $('usWt').textContent = U.e.replace('{s}', sec);
+      if (sec === 600 && $('usWp')) $('usWp').textContent = U.late;
+      if (sec > 1800) return clearInterval(iv);
+      if (k % 4) return;
+      var hadRes = !!RES;
+      refresh().then(function () {
+        var c = Number((S.lim || {}).credits || 0); if (c <= c0) return; clearInterval(iv); hap('ok');
+        var msg = U.ok.replace('{n}', c - c0);
+        if (!hadRes && $('usWp')) { $('usWp').textContent = msg; if ($('usWs')) $('usWs').className = 'usOk'; if ($('usWt')) $('usWt').textContent = ''; setTimeout(function () { if ($('usWp')) closeSheet(); }, 2200); } else if (!hadRes) toast(msg);
+      });
+    }, 1000);
+  }
 
   // ---------- building overlay ----------
   var bTimer = null, pTimer = null;
@@ -1531,7 +1572,7 @@ input.tk:focus{border-color:var(--v)}
         var f = new C(); f.bits.writeUint(0, 32); f.bits.writeString(L.usdt.code); c.refs.push(f);
         return c.toBoc(false).then(function (b) {
           return t.sendTransaction({ validUntil: Math.floor(Date.now() / 1000) + 600, messages: [{ address: new TW.utils.Address(jw.address).toString(true, true, true), amount: '50000000', payload: TW.utils.bytesToBase64(b) }] });
-        }).then(function () { done(PW.sent, true); setTimeout(refresh, 90000); setTimeout(refresh, 180000); resWait(); });
+        }).then(function () { done(null, true); usWait(); });
       });
     }); }).catch(function () { done(PW.err, false); });
   }
@@ -1581,7 +1622,7 @@ input.tk:focus{border-color:var(--v)}
               var k = 0, iv = setInterval(function () {
                 call('app', { id: a.id }).then(function (q) {
                   var go = q.ok && q.app && q.app.status !== 'unpaid';
-                  if (go || ++k > 15) { clearInterval(iv); refresh(); if (go) { try { idea.value = ''; idea.oninput(); $('xName').value = ''; $('xDesc').value = ''; } catch (e) {} return startBuild(a.id, false); } closeSheet(); }
+                  if (go || ++k > 15) { clearInterval(iv); refresh(); if (go) { pendSave(null); try { idea.value = ''; idea.oninput(); $('xName').value = ''; $('xDesc').value = ''; } catch (e) {} return startBuild(a.id, false); } closeSheet(); }
                 });
               }, 2000);
             } else setTimeout(function () { refresh(); closeSheet(); }, 1500);
@@ -1614,7 +1655,7 @@ input.tk:focus{border-color:var(--v)}
             hap('ok'); toast(T.paidW);
             var n = 0, iv = setInterval(function () {
               call('app', { id: a.id }).then(function (q) {
-                if ((q.ok && sub(q.app) && (!nb || q.app.status !== 'unpaid')) || ++n > 15) { clearInterval(iv); toast(T.paidOk); refresh(); if (nb) { try { idea.value = ''; idea.oninput(); $('xName').value = ''; $('xDesc').value = ''; } catch (e) {} return startBuild(a.id, false); } if ((q.app || a).bot_username) closeSheet(); else botSheet(q.app || a); }
+                if ((q.ok && sub(q.app) && (!nb || q.app.status !== 'unpaid')) || ++n > 15) { clearInterval(iv); toast(T.paidOk); refresh(); if (nb) { pendSave(null); try { idea.value = ''; idea.oninput(); $('xName').value = ''; $('xDesc').value = ''; } catch (e) {} return startBuild(a.id, false); } if ((q.app || a).bot_username) closeSheet(); else botSheet(q.app || a); }
               });
             }, 2000);
           });
