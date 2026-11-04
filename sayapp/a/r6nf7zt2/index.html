@@ -1,0 +1,292 @@
+<!-- sayapp r6nf7zt2 v1 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Nova Tap</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0716;--card:#150f2b;--card2:#1c1538;--line:rgba(255,255,255,.08);--main:#8b5cf6;--main2:#6d3df0;--acc:#fbbf24;--acc2:#f59e0b;--txt:#f4f1ff;--mut:#9b92c4;--ok:#34d399}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--txt);font-family:'Sora',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;overflow:hidden}
+body{background:radial-gradient(600px 400px at 50% -50px,rgba(139,92,246,.35),transparent),radial-gradient(500px 400px at 100% 100%,rgba(251,191,36,.12),transparent),var(--bg)}
+#app{height:100%;display:flex;flex-direction:column;max-width:480px;margin:0 auto;position:relative}
+header{padding:calc(var(--sa-top,0px) + 8px) 20px 8px;display:flex;justify-content:space-between;align-items:center}
+.hi{font-size:12px;color:var(--mut)}.hi b{display:block;color:var(--txt);font-size:15px;margin-top:2px}
+.chip{display:flex;gap:6px;align-items:center;background:var(--card);border:1px solid var(--line);padding:8px 12px;border-radius:99px;font-size:12px;font-weight:700}
+main{flex:1;overflow-y:auto;overflow-x:hidden;padding:8px 20px 24px;-webkit-overflow-scrolling:touch}
+.tab{display:none;animation:fade .25s ease}.tab.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);font-weight:600}
+h2{font-size:22px;font-weight:800;margin:4px 0 16px}
+.bal{text-align:center;margin:8px 0 4px}
+.bal .n{font-size:48px;font-weight:800;letter-spacing:-.02em;background:linear-gradient(180deg,#fff,#d9c9ff);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.bal .n small{font-size:14px;color:var(--acc);-webkit-text-fill-color:var(--acc);letter-spacing:.1em;margin-left:4px}
+.rate{font-size:12px;color:var(--mut);margin-top:2px}
+.prog{height:8px;background:var(--card);border-radius:9px;overflow:hidden;border:1px solid var(--line)}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--main),var(--acc));border-radius:9px;transition:width .25s}
+.lg{margin:12px 0 0;display:flex;justify-content:space-between;font-size:11px;color:var(--mut);margin-bottom:6px}
+.stage{position:relative;height:290px;display:flex;align-items:center;justify-content:center;margin:6px 0}
+.coin{width:236px;height:236px;border-radius:50%;border:0;position:relative;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none;
+background:radial-gradient(circle at 35% 28%,#ffe9a8 0,#fbbf24 34%,#c77a0a 78%,#8a4a05 100%);
+box-shadow:0 0 0 10px rgba(251,191,36,.12),0 0 0 22px rgba(139,92,246,.10),0 24px 70px rgba(139,92,246,.55),inset 0 -14px 28px rgba(120,60,0,.55),inset 0 10px 22px rgba(255,255,255,.45);
+transition:transform .12s cubic-bezier(.3,1.6,.5,1)}
+.coin:active,.coin.p{transform:scale(.94)}
+.coin svg{width:110px;height:110px;filter:drop-shadow(0 4px 6px rgba(120,60,0,.5));pointer-events:none}
+.coin.shake{animation:sh .3s}
+@keyframes sh{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.fx{position:fixed;pointer-events:none;font-weight:800;font-size:26px;color:#fff;text-shadow:0 2px 12px rgba(139,92,246,.9),0 0 4px var(--acc);animation:up .9s ease-out forwards;z-index:50}
+@keyframes up{to{transform:translateY(-110px) scale(1.2);opacity:0}}
+.dot{position:fixed;width:8px;height:8px;border-radius:50%;pointer-events:none;z-index:50}
+.en{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 14px}
+.en b{font-size:15px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.en .prog{flex:1;height:10px}.en .prog i{background:linear-gradient(90deg,#22d3ee,var(--main))}
+.card{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.row{display:flex;align-items:center;gap:12px}
+.ic{width:46px;height:46px;border-radius:14px;background:rgba(139,92,246,.18);display:grid;place-items:center;font-size:23px;flex:none}
+.grow{flex:1;min-width:0}.grow b{display:block;font-size:15px}.grow span{font-size:12px;color:var(--mut)}
+.btn{border:0;border-radius:14px;padding:11px 16px;font:700 13px 'Sora',system-ui;color:#1a1000;background:linear-gradient(180deg,var(--acc),var(--acc2));box-shadow:0 6px 18px rgba(251,191,36,.3);cursor:pointer;transition:transform .15s,opacity .15s;white-space:nowrap}
+.btn:active{transform:scale(.94)}.btn:disabled{opacity:.4;box-shadow:none;background:#3a3358;color:var(--mut)}
+.btn.pri{color:#fff;background:linear-gradient(180deg,var(--main),var(--main2));box-shadow:0 8px 24px rgba(109,61,240,.5)}
+.btn.big{width:100%;padding:15px;font-size:15px}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:14px 0}
+.day{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:8px 0;text-align:center;font-size:10px;color:var(--mut)}
+.day b{display:block;font-size:12px;color:var(--txt);margin-top:3px}
+.day.done{background:rgba(52,211,153,.12);border-color:rgba(52,211,153,.4)}.day.done b{color:var(--ok)}
+.day.cur{border-color:var(--acc);box-shadow:0 0 16px rgba(251,191,36,.35);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{transform:scale(1.07)}}
+.pill{display:inline-block;font-size:11px;color:var(--acc);font-weight:700;margin-top:3px}
+.mini{height:6px;margin-top:8px}
+.rk{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:var(--card);border:1px solid var(--line);margin-bottom:8px}
+.rk.me{border-color:var(--main);background:rgba(139,92,246,.16)}
+.rk .pos{width:28px;text-align:center;font-weight:800;color:var(--mut)}.rk .nm{flex:1;font-weight:600;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rk .v{font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums;font-size:14px}
+.sk{height:52px;border-radius:16px;margin-bottom:8px;background:linear-gradient(90deg,var(--card),var(--card2),var(--card));background-size:200% 100%;animation:sk 1.2s infinite}
+@keyframes sk{to{background-position:-200% 0}}
+.empty{text-align:center;color:var(--mut);padding:28px 10px;font-size:13px}
+.inv{background:linear-gradient(135deg,#5b2fd6,#9b5cf6 60%,#c084fc);border:0}
+.inv p{font-size:13px;opacity:.9;margin:6px 0 14px;line-height:1.5}
+.inv .btn{color:#2a1260;background:#fff;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+footer{text-align:center;font-size:11px;color:var(--mut);opacity:.6;padding:10px 0 4px}
+nav{display:flex;gap:4px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:rgba(14,9,32,.92);backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+nav button{flex:1;background:none;border:0;color:var(--mut);font:600 11px 'Sora',system-ui;padding:8px 0;border-radius:14px;display:flex;flex-direction:column;gap:3px;align-items:center;cursor:pointer;transition:all .2s}
+nav button span{font-size:21px;transition:transform .2s}
+nav button.on{color:#fff;background:rgba(139,92,246,.22)}nav button.on span{transform:translateY(-2px) scale(1.1)}
+#toast{position:fixed;left:50%;top:calc(var(--sa-top,0px) + 64px);transform:translate(-50%,-20px);background:#fff;color:#1b1038;padding:11px 18px;border-radius:99px;font-weight:700;font-size:13px;opacity:0;pointer-events:none;transition:all .25s;z-index:99;max-width:90%;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div id="app">
+<header>
+  <div class="hi">Welcome back<b id="uname">Player</b></div>
+  <div class="chip"><span id="lgI">🥉</span><span id="lgN">Bronze</span></div>
+</header>
+<main>
+<section class="tab on" id="t-tap">
+  <div class="bal"><div class="lbl">Your balance</div><div class="n"><span id="bal">0</span><small>NOVA</small></div><div class="rate" id="rate"></div></div>
+  <div class="lg"><span id="lgA">Bronze</span><span id="lgB">Silver at 5,000</span></div>
+  <div class="prog"><i id="lgBar"></i></div>
+  <div class="stage"><button class="coin" id="coin" aria-label="Tap"><svg viewBox="0 0 24 24" fill="#fff8e0"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.1 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z" stroke="#b8700a" stroke-width=".6" stroke-linejoin="round"/></svg></button></div>
+  <div class="en"><span style="font-size:20px">⚡</span><div class="prog"><i id="enBar"></i></div><b id="enTx">0/0</b></div>
+</section>
+
+<section class="tab" id="t-boost">
+  <h2>Boosts</h2>
+  <div id="boosts"></div>
+</section>
+
+<section class="tab" id="t-tasks">
+  <h2>Daily reward</h2>
+  <div class="card"><div class="row"><div class="ic">🎁</div><div class="grow"><b id="dTitle">Daily streak</b><span id="dSub"></span></div></div>
+  <div class="days" id="days"></div><button class="btn pri big" id="dBtn">Claim</button></div>
+  <h2 style="margin-top:22px">Tasks</h2>
+  <div id="tasks"></div>
+</section>
+
+<section class="tab" id="t-rank">
+  <h2>Leaderboard</h2>
+  <div id="rank"></div>
+  <div class="card inv" style="margin-top:18px"><div class="lbl" style="color:#fff;opacity:.8">Friends</div><b style="font-size:18px;display:block;margin-top:4px">Invite your crew 🚀</b>
+  <p>Share your link. Every friend who joins starts with +2,000 NOVA, and you earn +1,000 for your first invite.</p>
+  <button class="btn big" id="invBtn">Invite friends</button>
+  <button class="btn big" id="cpBtn" style="margin-top:8px;background:rgba(255,255,255,.18);color:#fff;box-shadow:none">Copy link</button></div>
+</section>
+<footer>Made with SayApp</footer>
+</main>
+<nav>
+  <button class="on" data-t="tap"><span>🪙</span>Tap</button>
+  <button data-t="boost"><span>🚀</span>Boosts</button>
+  <button data-t="tasks"><span>🎯</span>Earn</button>
+  <button data-t="rank"><span>🏆</span>Ranks</button>
+</nav>
+</div>
+<div id="toast"></div>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="r6nf7zt2" data-full="1"></script>
+<script>
+window.addEventListener('load', async function(){
+const $=s=>document.querySelector(s);
+const fmt=n=>Math.floor(n).toLocaleString('en-US');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const tg=window.Telegram&&Telegram.WebApp; try{tg&&tg.ready();tg&&tg.expand();}catch(e){}
+const LEAGUES=[['🥉','Bronze',0],['🥈','Silver',5000],['🥇','Gold',25000],['💎','Platinum',100000],['👑','Diamond',500000]];
+const BOOSTS=[
+ {id:'tap',ic:'👆',n:'Multitap',d:l=>'+1 NOVA per tap (now +'+(1+l)+')',base:200,max:10},
+ {id:'cap',ic:'🔋',n:'Energy tank',d:l=>'+150 max energy (now '+(500+150*l)+')',base:300,max:10},
+ {id:'reg',ic:'⚡',n:'Recharge speed',d:l=>'+1 energy per second (now '+(1+l)+'/s)',base:500,max:8},
+ {id:'min',ic:'🤖',n:'Auto-miner',d:l=>'Earns '+fmt(120*l)+' NOVA per hour, even offline',base:1000,max:10}
+];
+const TASKS=[
+ {id:'t1',ic:'👆',n:'Warm up',d:'Tap 100 times',goal:100,r:500,p:()=>S.taps},
+ {id:'t2',ic:'🔥',n:'Tap machine',d:'Tap 2,000 times',goal:2000,r:3000,p:()=>S.taps},
+ {id:'t3',ic:'🛠️',n:'First upgrade',d:'Buy any boost',goal:1,r:1000,p:()=>S.bought},
+ {id:'t4',ic:'💰',n:'Collector',d:'Earn 10,000 NOVA in total',goal:10000,r:2500,p:()=>S.t},
+ {id:'t5',ic:'📣',n:'Spread the word',d:'Invite a friend',goal:1,r:1000,p:()=>S.shared},
+ {id:'t6',ic:'📅',n:'Loyal player',d:'Reach a 3 day streak',goal:3,r:5000,p:()=>S.d.streak}
+];
+const DAILY=[500,1000,1500,2500,4000,6000,10000];
+let S={p:0,t:0,e:500,taps:0,bought:0,shared:0,ref:0,b:{tap:0,cap:0,reg:0,min:0},d:{last:'',streak:0},c:{},ts:Date.now()};
+let loaded=null; try{loaded=await SayApp.get('state');}catch(e){}
+const isNew=!loaded;
+if(loaded&&typeof loaded==='object'){S=Object.assign(S,loaded);S.b=Object.assign({tap:0,cap:0,reg:0,min:0},loaded.b||{});S.d=Object.assign({last:'',streak:0},loaded.d||{});S.c=loaded.c||{};}
+const maxE=()=>500+150*S.b.cap, regen=()=>1+S.b.reg, per=()=>1+S.b.tap, mine=()=>120*S.b.min;
+let disp=S.p,dirty=false,lastSave=0;
+const user=(window.SayApp&&SayApp.user)||{};
+$('#uname').textContent=user.first_name||'Player';
+function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>el.classList.remove('on'),2200);}
+function haptic(k){try{SayApp.haptic(k);}catch(e){}}
+function add(n){S.p+=n;S.t+=n;dirty=true;}
+// offline progress
+const away=Math.min((Date.now()-(S.ts||Date.now()))/1000,10800);
+if(!isNew&&away>5){S.e=Math.min(maxE(),S.e+away*regen());const g=Math.floor(mine()*away/3600);if(g>0){add(g);setTimeout(()=>toast('Auto-miner earned +'+fmt(g)+' while you were away'),600);}}
+// welcome via invite
+try{const sp=(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.start_param)||'';const q=new URLSearchParams(location.search).get('ref')||'';
+ const from=sp.indexOf('ref')===0?sp.slice(3).replace(/^_/,''):q;
+ if(isNew&&from&&String(from)!==String(user.id)&&!S.ref){S.ref=1;add(2000);setTimeout(()=>toast('Welcome gift: +2,000 NOVA 🎉'),900);SayApp.submit({type:'referral',from:from,user:user.first_name||''}).catch(()=>{});}}catch(e){}
+if(isNew)S.e=maxE();
+// render balance loop
+function loop(){disp+=(S.p-disp)*.25;if(Math.abs(S.p-disp)<.5)disp=S.p;$('#bal').textContent=fmt(disp);requestAnimationFrame(loop);}loop();
+function league(){let i=0;LEAGUES.forEach((l,k)=>{if(S.t>=l[2])i=k;});return i;}
+function hud(){
+ const i=league(),L=LEAGUES[i],N=LEAGUES[i+1];
+ $('#lgI').textContent=L[0];$('#lgN').textContent=L[1];$('#lgA').textContent=L[0]+' '+L[1];
+ if(N){$('#lgB').textContent=N[1]+' at '+fmt(N[2]);$('#lgBar').style.width=Math.min(100,(S.t-L[2])/(N[2]-L[2])*100)+'%';}
+ else{$('#lgB').textContent='Max league';$('#lgBar').style.width='100%';}
+ $('#enBar').style.width=(S.e/maxE()*100)+'%';$('#enTx').textContent=Math.floor(S.e)+'/'+maxE();
+ $('#rate').textContent='+'+per()+' per tap'+(mine()?'  ·  '+fmt(mine())+'/hour':'');
+}
+// tapping
+const coin=$('#coin');let lastH=0;
+coin.addEventListener('pointerdown',function(e){
+ e.preventDefault();coin.classList.add('p');setTimeout(()=>coin.classList.remove('p'),110);
+ const v=per();
+ if(S.e<v){coin.classList.remove('shake');void coin.offsetWidth;coin.classList.add('shake');if(Date.now()-lastH>600){haptic('error');toast('Out of energy, wait for a recharge ⚡');lastH=Date.now();}return;}
+ S.e-=v;add(v);S.taps++;
+ if(Date.now()-lastH>80){haptic('tap');lastH=Date.now();}
+ const f=document.createElement('div');f.className='fx';f.textContent='+'+v;f.style.left=(e.clientX-14+(Math.random()*30-15))+'px';f.style.top=(e.clientY-30)+'px';document.body.appendChild(f);setTimeout(()=>f.remove(),900);
+ for(let k=0;k<3;k++){const d=document.createElement('div');d.className='dot';d.style.cssText+='left:'+e.clientX+'px;top:'+e.clientY+'px;background:'+(k%2?'#fbbf24':'#a78bfa');document.body.appendChild(d);
+  const a=Math.random()*6.28,r=30+Math.random()*40;d.animate([{transform:'translate(0,0)',opacity:1},{transform:'translate('+Math.cos(a)*r+'px,'+(Math.sin(a)*r-20)+'px) scale(.2)',opacity:0}],{duration:520,easing:'ease-out'}).onfinish=()=>d.remove();}
+ hud();
+});
+coin.addEventListener('contextmenu',e=>e.preventDefault());
+// tick: regen + miner
+setInterval(function(){
+ let ch=false;
+ if(S.e<maxE()){S.e=Math.min(maxE(),S.e+regen()*.25);ch=true;}
+ if(mine()){add(mine()/3600*.25);ch=true;}
+ if(ch&&$('#t-tap').classList.contains('on'))hud();
+},250);
+// boosts
+function renderBoosts(){
+ $('#boosts').innerHTML=BOOSTS.map(b=>{const l=S.b[b.id],cost=Math.round(b.base*Math.pow(1.9,l)),mx=l>=b.max;
+  return '<div class="card"><div class="row"><div class="ic">'+b.ic+'</div><div class="grow"><b>'+b.n+' <span style="color:var(--acc)">Lv '+l+'</span></b><span>'+b.d(l)+'</span></div>'+
+  '<button class="btn" data-b="'+b.id+'" '+(mx||S.p<cost?'disabled':'')+'>'+(mx?'MAX':'🪙 '+fmt(cost))+'</button></div>'+
+  '<div class="prog mini"><i style="width:'+(l/b.max*100)+'%"></i></div></div>';}).join('');
+}
+$('#boosts').addEventListener('click',function(e){
+ const btn=e.target.closest('[data-b]');if(!btn)return;
+ const b=BOOSTS.find(x=>x.id===btn.dataset.b),l=S.b[b.id],cost=Math.round(b.base*Math.pow(1.9,l));
+ if(l>=b.max||S.p<cost){haptic('error');return;}
+ S.p-=cost;S.b[b.id]++;S.bought=1;if(b.id==='cap')S.e=Math.min(maxE(),S.e+150);dirty=true;
+ haptic('ok');toast(b.n+' upgraded to level '+S.b[b.id]+' ✨');renderBoosts();hud();save(true);
+});
+// daily
+const day=o=>new Date(Date.now()+o*864e5).toISOString().slice(0,10);
+function dailyState(){const can=S.d.last!==day(0);const next=can?(S.d.last===day(-1)?S.d.streak+1:1):S.d.streak;return{can,next};}
+function renderDaily(){
+ const st=dailyState(),idx=(Math.max(st.next,1)-1)%7;
+ $('#days').innerHTML=DAILY.map((r,i)=>{const done=st.can?i<idx:i<=idx,cur=st.can&&i===idx;
+  return '<div class="day'+(done?' done':'')+(cur?' cur':'')+'">D'+(i+1)+'<b>'+(done?'✓':(r>=1000?r/1000+'k':r))+'</b></div>';}).join('');
+ $('#dTitle').textContent=S.d.streak?S.d.streak+' day streak 🔥':'Start your streak';
+ $('#dSub').textContent=st.can?'Today: +'+fmt(DAILY[idx])+' NOVA':'Come back tomorrow for +'+fmt(DAILY[(idx+1)%7]);
+ $('#dBtn').disabled=!st.can;$('#dBtn').textContent=st.can?'Claim +'+fmt(DAILY[idx]):'Claimed today ✓';
+}
+$('#dBtn').onclick=function(){
+ const st=dailyState();if(!st.can)return;
+ const r=DAILY[(st.next-1)%7];S.d.streak=st.next;S.d.last=day(0);add(r);haptic('ok');confetti();toast('Daily reward: +'+fmt(r)+' NOVA 🎁');renderDaily();renderTasks();save(true);
+};
+// tasks
+function renderTasks(){
+ $('#tasks').innerHTML=TASKS.map(t=>{const p=Math.min(t.p(),t.goal),done=!!S.c[t.id],ready=p>=t.goal;
+  return '<div class="card"><div class="row"><div class="ic">'+t.ic+'</div><div class="grow"><b>'+t.n+'</b><span>'+t.d+'</span><br><span class="pill">+'+fmt(t.r)+' NOVA</span></div>'+
+  '<button class="btn'+(ready&&!done?' pri':'')+'" data-k="'+t.id+'" '+(done||!ready?'disabled':'')+'>'+(done?'Done ✓':ready?'Claim':fmt(p)+'/'+fmt(t.goal))+'</button></div>'+
+  (done||ready?'':'<div class="prog mini"><i style="width:'+(p/t.goal*100)+'%"></i></div>')+'</div>';}).join('');
+}
+$('#tasks').addEventListener('click',function(e){
+ const b=e.target.closest('[data-k]');if(!b)return;
+ const t=TASKS.find(x=>x.id===b.dataset.k);if(!t||S.c[t.id]||t.p()<t.goal)return;
+ S.c[t.id]=1;add(t.r);haptic('ok');confetti();toast('+'+fmt(t.r)+' NOVA claimed 🎯');renderTasks();save(true);
+});
+// ranks
+async function renderRank(){
+ const box=$('#rank');box.innerHTML='<div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div>';
+ let list=[];try{await SayApp.set('score',Math.floor(S.t));list=await SayApp.top('score',20)||[];}catch(e){}
+ if(!list.length){box.innerHTML='<div class="empty">🏁 No players yet.<br>Keep tapping, you could be first!</div>';return;}
+ const med=['🥇','🥈','🥉'];
+ box.innerHTML=list.map((r,i)=>'<div class="rk'+(r.me?' me':'')+'"><div class="pos">'+(med[i]||i+1)+'</div><div class="nm">'+esc(r.name||'Player')+(r.me?' (you)':'')+'</div><div class="v">'+fmt(r.value||0)+'</div></div>').join('');
+}
+// invite
+const link=()=>location.href.split('#')[0].split('?')[0]+'?ref='+(user.id||'');
+$('#invBtn').onclick=function(){
+ const txt='Join me on Nova Tap and start with +2,000 NOVA!';
+ const url='https://t.me/share/url?url='+encodeURIComponent(link())+'&text='+encodeURIComponent(txt);
+ try{if(tg&&tg.openTelegramLink)tg.openTelegramLink(url);else window.open(url,'_blank');}catch(e){window.open(url,'_blank');}
+ if(!S.shared){S.shared=1;dirty=true;toast('Great! Claim your invite task in Earn 🎯');}
+ haptic('ok');save(true);
+};
+$('#cpBtn').onclick=async function(){
+ try{await navigator.clipboard.writeText(link());toast('Link copied ✓');}catch(e){toast(link());}
+ haptic('tap');
+};
+// confetti
+function confetti(){
+ const cols=['#fbbf24','#8b5cf6','#22d3ee','#f472b6','#fff'];
+ for(let i=0;i<36;i++){const d=document.createElement('div');d.className='dot';d.style.cssText+='left:50%;top:40%;border-radius:2px;background:'+cols[i%5];document.body.appendChild(d);
+  const a=Math.random()*6.28,r=80+Math.random()*160;d.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:'translate('+Math.cos(a)*r+'px,'+(Math.sin(a)*r+120)+'px) rotate('+(Math.random()*720)+'deg)',opacity:0}],{duration:1100+Math.random()*400,easing:'cubic-bezier(.2,.8,.4,1)'}).onfinish=()=>d.remove();}
+}
+// tabs
+document.querySelectorAll('nav button').forEach(b=>b.onclick=function(){
+ document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x===b));
+ document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.id==='t-'+b.dataset.t));
+ $('main').scrollTop=0;haptic('tap');
+ if(b.dataset.t==='boost')renderBoosts();
+ if(b.dataset.t==='tasks'){renderDaily();renderTasks();}
+ if(b.dataset.t==='rank')renderRank();
+});
+// save
+async function save(force){
+ if(!dirty&&!force)return;if(!force&&Date.now()-lastSave<4000)return;
+ lastSave=Date.now();dirty=false;S.ts=Date.now();
+ try{await SayApp.set('state',S);await SayApp.set('score',Math.floor(S.t));}catch(e){}
+}
+setInterval(()=>save(false),5000);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)save(true);});
+hud();renderBoosts();renderDaily();renderTasks();
+if(isNew)save(true);
+});
+</script>
+</body>
+</html>
