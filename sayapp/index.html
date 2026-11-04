@@ -1005,7 +1005,7 @@ input.tk:focus{border-color:var(--v)}
   W.lm = LANGS.some(function (l) { return l[0] === lang; }) ? lang : 'en'; W.lx = [];
   function paintLangs() {
     if (!$('xLangM')) return;  // 4 nov 2026 (20h10, Jeremy): the languages are chosen after the idea, in the questions sheet
-    $('xLangL').textContent = T.xLang; $('xLangL2').textContent = T.xLang2;
+    $('xLangL').textContent = T.xLang; $('xLangL2').textContent = T.xLang2 + ' · ' + (LC[lang] || LC.en);  // 4 nov 2026 (20h20, Jeremy): the main language is included, each extra language costs 1 credit
     $('xLangM').innerHTML = LANGS.map(function (l) { return '<button class="lg' + (W.lm === l[0] ? ' on' : '') + '" data-l="' + l[0] + '">' + esc(l[1]) + '</button>'; }).join('');
     $('xLangX').innerHTML = LANGS.filter(function (l) { return l[0] !== W.lm; }).map(function (l) { return '<button class="lg' + (W.lx.indexOf(l[0]) >= 0 ? ' on' : '') + '" data-l="' + l[0] + '">' + esc(l[1]) + '</button>'; }).join('');
     $('xLangM').querySelectorAll('.lg').forEach(function (b) { b.onclick = function () { hap(); W.lm = b.getAttribute('data-l'); W.lx = W.lx.filter(function (x) { return x !== W.lm; }); paintLangs(); }; });
@@ -1026,6 +1026,8 @@ input.tk:focus{border-color:var(--v)}
     if (W.cq == null) { hap(); $('go').disabled = true; var goOn = function (ans) { W.cq = ans || ''; $('go').disabled = false; $('go').onclick(); };
       return call('clarify', { prompt: t, lang: lang }).then(function (r) { $('go').disabled = false; return cqSheet((r && r.ok && r.q) || [], goOn); }, function () { goOn(''); }); }
     if (W.cq) t += '\n\nThe creator answered these questions about the app (follow these choices):\n' + W.cq;
+    // 4 nov 2026 (20h20, Jeremy): extra languages cost 1 credit each: if the app itself is paid for but not its languages, say so before building
+    if (W.lx.length && S.lim) { var Lm = S.lim, base = Lm.freeApp ? 0 : (Lm.createCost || 3), cr0 = Number(Lm.credits || 0); if (cr0 >= base && cr0 < base + W.lx.length) { var X = LXS[lang] || LXS.en; hap('err'); openSheet('<h2>' + esc(X[0]) + '</h2><p class="sub">' + esc(X[1].replace('{n}', base + W.lx.length - cr0)) + '</p><button class="cta gold" id="lxB">' + esc(X[2]) + '</button><button class="ghost" id="lxN" style="margin-top:10px">' + esc(X[3]) + '</button>'); $('lxB').onclick = function () { hap(); packSheet(null, false); }; $('lxN').onclick = function () { hap(); W.lx = []; closeSheet(); $('go').onclick(); }; return; } }
     hap(); $('go').disabled = true;
     call('create', { prompt: t, name: xn, desc: xd }).then(function (r) {
       $('go').disabled = false;
@@ -1327,6 +1329,8 @@ input.tk:focus{border-color:var(--v)}
       });
     }, 1000);
   }
+
+  var LC = {"fr": "+1 crédit chacune", "en": "+1 credit each", "es": "+1 crédito cada una", "pt": "+1 crédito cada", "ru": "+1 кредит за каждый", "id": "+1 kredit per bahasa", "tr": "dil başına +1 kredi"}, LXS = {"fr": ["🌍 Langues en plus", "Chaque langue en plus coûte 1 crédit. Il te manque {n} crédit(s).", "💳 Acheter des crédits", "Continuer avec la langue principale seulement"], "en": ["🌍 Extra languages", "Each extra language costs 1 credit. You are {n} credit(s) short.", "💳 Buy credits", "Continue with the main language only"], "es": ["🌍 Idiomas extra", "Cada idioma extra cuesta 1 crédito. Te faltan {n} crédito(s).", "💳 Comprar créditos", "Seguir solo con el idioma principal"], "pt": ["🌍 Idiomas extras", "Cada idioma extra custa 1 crédito. Faltam {n} crédito(s).", "💳 Comprar créditos", "Continuar só com o idioma principal"], "ru": ["🌍 Дополнительные языки", "Каждый дополнительный язык стоит 1 кредит. Не хватает: {n}.", "💳 Купить кредиты", "Продолжить только с основным языком"], "id": ["🌍 Bahasa tambahan", "Setiap bahasa tambahan 1 kredit. Kreditmu kurang {n}.", "💳 Beli kredit", "Lanjut hanya dengan bahasa utama"], "tr": ["🌍 Ek diller", "Her ek dil 1 kredi. {n} kredi eksik.", "💳 Kredi satın al", "Sadece ana dille devam et"]};
 
   // ---------- building overlay ----------
   var bTimer = null, pTimer = null;
