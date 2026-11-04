@@ -56,6 +56,7 @@ textarea::placeholder{color:var(--dim)}
 .cta.gold{background:var(--gold);color:#2a1700;box-shadow:0 14px 30px -12px #ff9f43}
 .ghost{width:100%;padding:14px;border-radius:14px;background:var(--card2);border:1px solid var(--line);font-weight:600}
 .quota{text-align:center;font-size:12.5px;color:var(--dim);margin-top:10px}
+.madeN{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:7px 13px;border-radius:99px;font-size:13px;font-weight:700;color:#e9e4ff;background:rgba(139,92,255,.14);border:1px solid rgba(139,92,255,.38)}
 .sec{margin-top:30px}
 .sec h3{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin-bottom:12px;font-family:Inter,sans-serif;font-weight:600}
 .steps{display:grid;gap:10px}
@@ -279,6 +280,7 @@ input.tk:focus{border-color:var(--v)}
       <div class="eyebrow">✦ <span data-t="eyebrow"></span></div>
       <h1 data-t="h1"></h1>
       <p data-t="sub"></p>
+      <div class="madeN" id="madeN" hidden></div>
     </div>
     <div class="tpls" hidden><button class="tpl" id="tplOpen"><i>⚡</i><div><b data-t="tplH"></b><span data-t="tplS"></span></div><em data-t="tbFast"></em></button></div>
     <!-- 3 nov 2026 (05h55, Jeremy): one simple page: type, idea, style, options folded; the old step-by-step questions stay hidden -->
@@ -1268,9 +1270,13 @@ input.tk:focus{border-color:var(--v)}
   function refresh() {
     return call('me').then(function (r) {
       if (!r.ok) return r;
-      S.lim = r.lim; S.apps = r.apps || []; S.testers = r.testers || {}; S.loaded = true; paintTop(); if (!$('vApps').hidden) paintApps(); return r;
+      S.lim = r.lim; S.apps = r.apps || []; if (r.made != null) paintMade(r.made); else if (!S.mdq) { S.mdq = 1; call('dir').then(function (d) { if (d && d.ok) paintMade(d.made); }, function () {}); } S.testers = r.testers || {}; S.loaded = true; paintTop(); if (!$('vApps').hidden) paintApps(); return r;
     });
   }
+
+  // 4 nov 2026 (19h30, Jeremy): number of mini apps already created, on the home screen
+  var MD = {"fr": "🚀 {n} mini apps déjà créées avec SayApp", "en": "🚀 {n} mini apps already built with SayApp", "es": "🚀 {n} mini apps ya creadas con SayApp", "pt": "🚀 {n} mini apps já criados com SayApp", "ru": "🚀 Уже создано {n} мини-приложений в SayApp", "id": "🚀 {n} mini app sudah dibuat dengan SayApp", "tr": "🚀 SayApp ile {n} mini uygulama oluşturuldu"};
+  function paintMade(n) { var el = $('madeN'); if (!el) return; n = Number(n || 0); if (n < 1) { el.hidden = true; return; } var f = String(n); try { f = n.toLocaleString(lang); } catch (e) {} el.textContent = (MD[lang] || MD.en).replace('{n}', f); el.hidden = false; }
 
   // ---------- building overlay ----------
   var bTimer = null, pTimer = null;
