@@ -1026,7 +1026,7 @@ input.tk:focus{border-color:var(--v)}
     hap(); $('go').disabled = true;
     call('create', { prompt: t, name: xn, desc: xd }).then(function (r) {
       $('go').disabled = false;
-      if (r.ok && r.pay) return packSheet({ id: r.id, title: xn || '' }, true);  // 3 nov 2026 (4h36, Jeremy): paid from the start
+      if (r.ok && r.pay) { RES = { need: (S.lim && S.lim.createCost) || 3, go: function () { $('go').onclick(); } }; return packSheet({ id: r.id, title: xn || '' }, true); }  // 4 nov 2026 (19h50, Jeremy): after buying credits, the creation starts again by itself  // 3 nov 2026 (4h36, Jeremy): paid from the start
       if (r.ok) { idea.value = ''; idea.oninput(); $('xName').value = ''; $('xDesc').value = ''; W = { i: 0, a: [], lm: W.lm, lx: [] }; paintCols(); paintLangs(); wizRender(); S.lim && S.lim.gens++; startBuild(r.id, false); refresh(); return; }
       fail(r);
     });
@@ -1270,13 +1270,18 @@ input.tk:focus{border-color:var(--v)}
   function refresh() {
     return call('me').then(function (r) {
       if (!r.ok) return r;
-      S.lim = r.lim; S.apps = r.apps || []; if (r.made != null) paintMade(r.made); else if (!S.mdq) { S.mdq = 1; call('dir').then(function (d) { if (d && d.ok) paintMade(d.made); }, function () {}); } S.testers = r.testers || {}; S.loaded = true; paintTop(); if (!$('vApps').hidden) paintApps(); return r;
+      S.lim = r.lim; S.apps = r.apps || []; if (RES && Number((r.lim || {}).credits || 0) >= RES.need) { var rg = RES.go; RES = null; try { closeSheet(); } catch (e) {} toast(RSM[lang] || RSM.en); setTimeout(rg, 400); } if (r.made != null) paintMade(r.made); else if (!S.mdq) { S.mdq = 1; call('dir').then(function (d) { if (d && d.ok) paintMade(d.made); }, function () {}); } S.testers = r.testers || {}; S.loaded = true; paintTop(); if (!$('vApps').hidden) paintApps(); return r;
     });
   }
 
   // 4 nov 2026 (19h30, Jeremy): number of mini apps already created, on the home screen
   var MD = {"fr": "🚀 {n} mini apps déjà créées avec SayApp", "en": "🚀 {n} mini apps already built with SayApp", "es": "🚀 {n} mini apps ya creadas con SayApp", "pt": "🚀 {n} mini apps já criados com SayApp", "ru": "🚀 Уже создано {n} мини-приложений в SayApp", "id": "🚀 {n} mini app sudah dibuat dengan SayApp", "tr": "🚀 SayApp ile {n} mini uygulama oluşturuldu"};
   function paintMade(n) { var el = $('madeN'); if (!el) return; n = Number(n || 0); if (n < 1) { el.hidden = true; return; } var f = String(n); try { f = n.toLocaleString(lang); } catch (e) {} el.textContent = (MD[lang] || MD.en).replace('{n}', f); el.hidden = false; }
+
+  // 4 nov 2026 (19h50, Jeremy): what the user was doing when credits ran out (a creation or a change), started again once the credits arrive
+  var RES = null, resT = 0;
+  var RSM = {"fr": "✅ Crédits reçus, on reprend là où tu en étais !", "en": "✅ Credits received, picking up where you left off!", "es": "✅ Créditos recibidos, ¡seguimos donde lo dejaste!", "pt": "✅ Créditos recebidos, continuando de onde você parou!", "ru": "✅ Кредиты получены, продолжаем с того места, где ты остановился!", "id": "✅ Kredit diterima, lanjut dari tempat terakhirmu!", "tr": "✅ Krediler geldi, kaldığın yerden devam ediyoruz!"};
+  function resWait() { if (resT) clearInterval(resT); var k = 0; resT = setInterval(function () { if (!RES || ++k > 72) { clearInterval(resT); resT = 0; return; } refresh(); }, 5000); }
 
   // ---------- building overlay ----------
   var bTimer = null, pTimer = null;
@@ -1483,6 +1488,7 @@ input.tk:focus{border-color:var(--v)}
         $('edGo').disabled = false;
         if (r.error === 'prolimit') { hap('err'); toast(T.proLim); return devSheet(); }  // 2 nov 2026 (22h55): 40 changes per month on a Pro app
         if (r.error === 'limit') return limitSheet();
+        if (r.error === 'credits') RES = { need: (S.lim && S.lim.editCost) || 1, go: function () { call('edit', { id: a.id, prompt: t }).then(function (r2) { if (r2.ok) { if (S.lim) S.lim.edits++; startBuild(a.id, true); refresh(); return; } fail(r2); }); } };  // 4 nov 2026 (19h50, Jeremy): the change starts again by itself once the credits are there
         fail(r);
       });
     };
@@ -1525,7 +1531,7 @@ input.tk:focus{border-color:var(--v)}
         var f = new C(); f.bits.writeUint(0, 32); f.bits.writeString(L.usdt.code); c.refs.push(f);
         return c.toBoc(false).then(function (b) {
           return t.sendTransaction({ validUntil: Math.floor(Date.now() / 1000) + 600, messages: [{ address: new TW.utils.Address(jw.address).toString(true, true, true), amount: '50000000', payload: TW.utils.bytesToBase64(b) }] });
-        }).then(function () { done(PW.sent, true); setTimeout(refresh, 90000); setTimeout(refresh, 180000); });
+        }).then(function () { done(PW.sent, true); setTimeout(refresh, 90000); setTimeout(refresh, 180000); resWait(); });
       });
     }); }).catch(function () { done(PW.err, false); });
   }
@@ -1570,6 +1576,7 @@ input.tk:focus{border-color:var(--v)}
           tw.openInvoice(r.link, function (st) {
             if (st !== 'paid') return;
             hap('ok'); toast(nb ? CR.wait : CR.ok);
+            if (nb) RES = null; else resWait();  // 4 nov 2026 (19h50): the server builds a waiting app itself; a waiting change starts again here
             if (nb && a && a.id) {
               var k = 0, iv = setInterval(function () {
                 call('app', { id: a.id }).then(function (q) {
