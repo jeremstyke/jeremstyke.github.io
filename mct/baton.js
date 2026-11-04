@@ -85,6 +85,15 @@
         return r;
       };
     } catch (e) {}
+    // 5 nov 2026 (00h22, Jeremy): one opening out of two shows the SayApp promo (sayapp/promo.js) instead of the ad
+    function saPromoOr(fb) {
+      let n = 0; try { n = Number(localStorage.getItem('mct_sa_n') || 0) + 1; localStorage.setItem('mct_sa_n', String(n)); } catch (e) {}
+      if (n % 2) return fb();
+      let lg = 'en'; try { lg = LANG; } catch (e) {}
+      const run = () => { try { window.SayAppPromo.show({ src: 'mct', lang: lg }); } catch (e) { fb(); } };
+      if (window.SayAppPromo) return run();
+      const s = document.createElement('script'); s.src = 'https://jeremstyke.github.io/sayapp/promo.js?v=1'; s.onload = run; s.onerror = () => fb(); document.head.appendChild(s);
+    }
     function popup() {
       if (document.getElementById('btpop')) return;
       // 22 oct 2026 (16h23, Jeremy): never for Premium players (prem.js sets window.MCTPREM once it knows)
@@ -99,7 +108,7 @@
       if (seen) {  /* 24 oct 2026 (10h19, Jeremy): one hour at least between two opening interstitials */
         let last = 0; try { last = Number(localStorage.getItem('mct_int_open') || 0); } catch (e) {}
         if (!last) { try { localStorage.setItem('mct_int_open', String(Date.now())); } catch (e) {} return; }  /* never on the first visit */
-        if (/* 2 nov 2026 (10h43, Jeremy): back at every opening on Meme Coin Tycoon only (10h33: removed) */ !window.MCTPREM && /* 10h23: no opening ad when The Last Click is opened (its click is already an ad) */ (((window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe) || {}).start_param || '') !== 'lc') {  /* 2 nov 2026 (23h10, Jeremy): MCT revenue down again: an interstitial at EVERY opening, no more 4 min gap (was 8h36: 4 min at least between two) */ try { localStorage.setItem('mct_int_open', String(Date.now())); localStorage.setItem('mct_int_at', String(Date.now())); } catch (e) {} adInt(); }
+        if (/* 2 nov 2026 (10h43, Jeremy): back at every opening on Meme Coin Tycoon only (10h33: removed) */ !window.MCTPREM && /* 10h23: no opening ad when The Last Click is opened (its click is already an ad) */ (((window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe) || {}).start_param || '') !== 'lc') {  /* 2 nov 2026 (23h10, Jeremy): MCT revenue down again: an interstitial at EVERY opening, no more 4 min gap (was 8h36: 4 min at least between two) */ try { localStorage.setItem('mct_int_open', String(Date.now())); localStorage.setItem('mct_int_at', String(Date.now())); } catch (e) {} saPromoOr(adInt); }
         return;
       }  // 21h16 (Jeremy): the Baton popup only once ever, then an Adsgram interstitial at each opening (never for Premium)
       try { localStorage.setItem(K, String(Date.now())); } catch (e) {}
