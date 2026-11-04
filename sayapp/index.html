@@ -1096,10 +1096,10 @@ input.tk:focus{border-color:var(--v)}
       ec('eaPlan', '⭐', 'linear-gradient(140deg,#ff5ca8,#ff8a5c)', T.eaPlan, T.eaPlanS) +
       '<div class="egrid"><button id="eaGuide">📖 ' + esc(T.eaGuide) + '<small>Adsgram, Ads Galaxy</small></button><button id="eaTos">📄 ' + esc(T.eaTos) + '<small>SayApp</small></button></div>';
     $('eaRef').onclick = function () { hap(); refSheet(); };
-    $('eaMon').onclick = function () { hap(); var pros = S.apps.filter(function (a) { return sub(a) && a.bot_username; }); if (pros.length) manageSheet(pros[0]); else { var u = 'https://jeremstyke.github.io/sayapp/monetize.html' + (lang === 'fr' ? '' : '#en'); try { tw.openLink(u); } catch (e) { window.open(u); } } };
+    $('eaMon').onclick = function () { hap(); var pros = S.apps.filter(function (a) { return sub(a) && a.bot_username; }); if (pros.length) manageSheet(pros[0]); else { var u = 'https://jeremstyke.github.io/sayapp/monetize.html?lang=' + lang; try { tw.openLink(u); } catch (e) { window.open(u); } } };
     $('eaDev').onclick = function () { hap(); devSheet(); };
     $('eaPlan').onclick = function () { hap(); packSheet(null, false); };
-    $('eaGuide').onclick = function () { var u = 'https://jeremstyke.github.io/sayapp/monetize.html' + (lang === 'fr' ? '' : '#en'); try { tw.openLink(u); } catch (e) { window.open(u); } };
+    $('eaGuide').onclick = function () { var u = 'https://jeremstyke.github.io/sayapp/monetize.html?lang=' + lang; try { tw.openLink(u); } catch (e) { window.open(u); } };
     $('eaTos').onclick = function () { var u = 'https://jeremstyke.github.io/sayapp/terms.html?lang=' + lang; try { tw.openLink(u); } catch (e) { window.open(u); } };
   }
   // 2 nov 2026 (16h56, Jeremy): Support tab, answered by the AI, Jeremy takes over
@@ -1743,7 +1743,7 @@ input.tk:focus{border-color:var(--v)}
     if ($('axOpen')) $('axOpen').onclick = function () { hap(); link('https://t.me/Ads_Galaxy_bot?start=AGX7057960224'); };  // 3 nov 2026 (20h57, Jeremy): same guide for Ads Galaxy
     if ($('agOpen')) $('agOpen').onclick = function () { hap(); try { tw.openLink('https://partner.adsgram.ai/'); } catch (e) { window.open('https://partner.adsgram.ai/'); } };
     document.querySelectorAll('.agc').forEach(function (b) { b.onclick = function () { hap(); var v = b.getAttribute('data-v'); var ok = function () { b.textContent = C2.ok; setTimeout(function () { b.textContent = C2.copy; }, 1500); }; try { navigator.clipboard.writeText(v).then(ok, function () {}); } catch (e) {} }; });
-    $('mnHow').onclick = function () { var u = 'https://jeremstyke.github.io/sayapp/monetize.html' + (lang === 'fr' ? '' : '#en'); try { tw.openLink(u); } catch (e) { window.open(u); } };
+    $('mnHow').onclick = function () { var u = 'https://jeremstyke.github.io/sayapp/monetize.html?lang=' + lang; try { tw.openLink(u); } catch (e) { window.open(u); } };
     $('mnGo').onclick = function () { $('mnGo').disabled = true; call('ads', { id: a.id, ag: $('mnAg').value, agi: $('mnAgi').value, agx: $('mnAgx').value, open: $('mnOpen').checked, pay: $('mnPay').value.trim() }).then(function (r) { $('mnGo').disabled = false; if (r.ok) { hap('ok'); toast(T.mnOk); } else { hap('err'); toast(T.net); } }); };
     $('mnPayGo').onclick = function () { var v = $('mnPay').value.trim(); if (v && !/^https:\/\/\S{4,}$/.test(v)) { hap('err'); return toast(PY.ph); } $('mnPayGo').disabled = true; call('ads', { id: a.id, ag: $('mnAg').value, agi: $('mnAgi').value, agx: $('mnAgx').value, open: $('mnOpen').checked, pay: v }).then(function (r) { $('mnPayGo').disabled = false; if (r.ok) { hap('ok'); toast(PY.ok); } else { hap('err'); toast(T.net); } }); };
     var users = 0;
