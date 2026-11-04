@@ -64,6 +64,8 @@
     pay: function (label, amount) { return (adsReady || Promise.resolve()).then(function () { if (ADS && ADS.pay) { try { tw.openLink(ADS.pay); } catch (e) { window.open(ADS.pay); } return true; } return payDemo(label, amount); }); },
     hasPay: function () { return (adsReady || Promise.resolve()).then(function () { return !!(ADS && ADS.pay); }); },
     hasAd: function () { return (adsReady || Promise.resolve()).then(function () { return true; }); },
+    // 4 nov 2026 (23h45, Jeremy): interstitial of the owner (between two games), at most once every 2 minutes, nothing without his ad code
+    interstitial: function () { return (adsReady || Promise.resolve()).then(function () { if (!ADS || !(ADS.agi || ADS.ag || ADS.agx)) return false; var k = 'sayapp_it_' + APP, last = 0; try { last = Number(sessionStorage.getItem(k) || 0); } catch (e) {} if (Date.now() - last < 120000) return false; try { sessionStorage.setItem(k, String(Date.now())); } catch (e) {} return playAd(ADS.agi || ADS.ag); }).catch(function () { return false; }); },
     ad: function () { return (adsReady || Promise.resolve()).then(function () { return ADS && (ADS.ag || ADS.agx) ? playAd(ADS.ag) : true; }); },  // 4 nov 2026 (23h43, Jeremy): without the owner's own ad code, the reward is given right away, no SayApp promo
     haptic: function (k) {
       try { var h = tw.HapticFeedback; if (k === 'ok') h.notificationOccurred('success'); else if (k === 'error') h.notificationOccurred('error'); else h.impactOccurred('light'); } catch (e) {}
