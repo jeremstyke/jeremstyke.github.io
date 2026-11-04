@@ -1312,7 +1312,9 @@ input.tk:focus{border-color:var(--v)}
     }
     hap('ok'); $('orb').className = 'orb ok'; $('orbI').textContent = '🎉';
     $('ovT').textContent = T.okT; $('ovP').textContent = T.okP(a.title || 'App');
-    $('ovb').innerHTML = '<button class="cta" id="ovTry">' + esc(T.try) + '</button><button class="ghost" id="ovEd">' + esc(T.change) + '</button>';
+    // 4 nov 2026 (16h31, Jeremy): once built, the app offers right away to go online on the creator's own bot
+    $('ovb').innerHTML = (a.bot_username ? '' : '<button class="cta gold" id="ovLn" style="margin-bottom:10px">' + esc((LN[lang] || LN.en).go) + '</button>') + '<button class="cta" id="ovTry">' + esc(T.try) + '</button><button class="ghost" id="ovEd">' + esc(T.change) + '</button>';
+    if ($('ovLn')) $('ovLn').onclick = function () { hap(); $('ov').hidden = true; launch(a); };
     if (a.ideas && a.ideas.length) {
       var box = document.createElement('div'); box.className = 'ideas'; box.innerHTML = '<h4>💡 ' + esc(T.nextT) + '</h4>';
       a.ideas.slice(0, 3).forEach(function (i) { var b = document.createElement('button'); b.className = 'idea'; b.style.marginTop = '0'; b.innerHTML = '<span>' + esc(i) + '</span>'; b.onclick = function () { $('ov').hidden = true; editSheet(a, i); }; box.appendChild(b); });
