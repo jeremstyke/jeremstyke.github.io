@@ -1,4 +1,4 @@
-<!-- sayapp p46qk66g v1 -->
+<!-- sayapp p46qk66g v2 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +32,9 @@ main{padding:4px 16px calc(100px + env(safe-area-inset-bottom))}
 .panel{background:linear-gradient(165deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:24px;padding:20px;box-shadow:0 20px 40px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.04);margin-bottom:16px;position:relative;overflow:hidden}
 .btn{width:100%;padding:16px;border-radius:16px;font-size:16px;font-weight:800;color:#1A1205;background:linear-gradient(180deg,var(--gold2),var(--gold) 55%,var(--gold3));box-shadow:0 8px 24px rgba(233,185,73,.35),inset 0 1px 0 rgba(255,255,255,.5)}
 .btn.ghost{background:var(--card2);color:var(--gold2);border:1px solid var(--line);box-shadow:none}
+.btn.hard{margin-top:10px;color:#fff;background:linear-gradient(180deg,#F06A80,var(--ruby) 55%,#8E2234);box-shadow:0 8px 24px rgba(224,70,95,.35),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn.hard small{display:block;font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;opacity:.85;margin-top:2px}
+=======
 .row{display:flex;gap:8px}
 .cat{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:6px 10px;border-radius:99px;background:rgba(233,185,73,.12);color:var(--gold2);border:1px solid var(--line)}
 .timer{height:6px;border-radius:9px;background:rgba(255,255,255,.06);overflow:hidden;margin:14px 0 18px}
@@ -106,6 +109,7 @@ nav button.on{color:#1A1205;background:linear-gradient(180deg,var(--gold2),var(-
       <div class="hero"><div class="big">🧠</div><h2>Beat the clock</h2><p>12 seconds per question. Every right answer earns a spin ticket and chips. Faster answers pay more.</p></div>
       <div class="stats" style="margin:16px 0"><div class="stat"><b id="sAns">0</b><span>Answered</span></div><div class="stat"><b id="sAcc">0%</b><span>Accuracy</span></div><div class="stat"><b id="sBest">0</b><span>Best streak</span></div></div>
       <button class="btn" id="startQuiz">Start a round</button>
+      <button class="btn hard" id="startHard">⚡ Hard mode<small>6 seconds per question · double chips</small></button>
     </div>
     <div class="panel" id="quizBox" style="display:none">
       <div class="row" style="justify-content:space-between;align-items:center"><span class="cat" id="qCat"></span><span style="font-weight:700;color:var(--gold2)">🔥 <span id="qStreak">0</span></span></div>
@@ -214,9 +218,9 @@ const Q=[
 ['History','In which year did the Titanic sink?',['1912','1905','1921','1898']],
 ['History','Which civilization built Machu Picchu?',['Inca','Maya','Aztec','Olmec']]];
 const shuf=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
-let order=[],qi=0,streak=0,qActive=false,qStart=0,qRaf=0,locked=false;const QT=12000;
+let order=[],qi=0,streak=0,qActive=false,qStart=0,qRaf=0,locked=false,hard=false,QT=12000;
 function nextQ(){if(!order.length||qi>=order.length){order=shuf([...Q.keys()]);qi=0}
-  const [cat,txt,ans]=Q[order[qi++]];$('qCat').textContent=cat;$('qText').textContent=txt;$('qStreak').textContent=streak;
+  const [cat,txt,ans]=Q[order[qi++]];$('qCat').textContent=(hard?'⚡ Hard · ':'')+cat;$('qText').textContent=txt;$('qStreak').textContent=streak;
   const opts=shuf(ans.map((a,i)=>({a,ok:i===0})));const box=$('qCh');box.innerHTML='';
   opts.forEach((o,i)=>{const b=document.createElement('button');b.className='ch';b.innerHTML='<em>'+'ABCD'[i]+'</em>';b.appendChild(document.createTextNode(o.a));b._ok=o.ok;b.onclick=()=>answer(b);box.appendChild(b)});
   locked=false;qStart=performance.now();cancelAnimationFrame(qRaf);tick()}
@@ -224,12 +228,14 @@ function tick(){const p=Math.max(0,1-(performance.now()-qStart)/QT);$('qBar').st
   if(p<=0&&!locked){answer(null);return}if(qActive&&!locked)qRaf=requestAnimationFrame(tick)}
 function answer(b){if(locked)return;locked=true;cancelAnimationFrame(qRaf);S.answered++;
   const btns=[...$('qCh').children];btns.forEach(x=>{if(x._ok)x.classList.add('ok')});
-  if(b&&b._ok){const left=Math.max(0,QT-(performance.now()-qStart));const gain=5+Math.round(left/1000)*2;streak++;S.correct++;S.tickets++;S.chips+=gain;S.best=Math.max(S.best,streak);
+  if(b&&b._ok){const left=Math.max(0,QT-(performance.now()-qStart));const gain=(5+Math.round(left/1000)*2)*(hard?2:1);streak++;S.correct++;S.tickets++;S.chips+=gain;S.best=Math.max(S.best,streak);
     hap('ok');floatTxt('+'+gain+' 🪙 +1 🎟️',b);if(streak%5===0){confetti(30);toast('🔥 '+streak+' in a row!')}}
   else{if(b)b.classList.add('bad');streak=0;hap('error');if(!b)toast('⏰ Time is up')}
   $('qStreak').textContent=streak;hud();setTimeout(()=>{if(qActive)nextQ()},1200)}
 function stopQuiz(){qActive=false;cancelAnimationFrame(qRaf);$('quizBox').style.display='none';$('quizIntro').style.display='block';hud()}
-$('startQuiz').onclick=()=>{hap('tap');qActive=true;streak=0;$('quizIntro').style.display='none';$('quizBox').style.display='block';nextQ()};
+function startRound(h){hap('tap');hard=h;QT=h?6000:12000;qActive=true;streak=0;$('quizIntro').style.display='none';$('quizBox').style.display='block';nextQ()}
+$('startQuiz').onclick=()=>startRound(false);
+$('startHard').onclick=()=>startRound(true);
 $('stopQuiz').onclick=stopQuiz;
 
 /* SLOTS: EV = 0.963 x 10 chips per ticket */
