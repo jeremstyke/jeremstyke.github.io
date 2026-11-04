@@ -1,4 +1,4 @@
-<!-- sayapp 4v2t3sra v6 -->
+<!-- sayapp 4v2t3sra v7 -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -12,9 +12,14 @@
 html,body{background:var(--bg);color:var(--text);font-family:'Outfit',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:15px;overflow-x:hidden;-webkit-user-select:none;user-select:none}
 body{min-height:100vh;background:radial-gradient(600px 380px at 85% -10%,rgba(46,242,160,.13),transparent 60%),radial-gradient(500px 360px at -10% 30%,rgba(255,77,125,.08),transparent 60%),var(--bg)}
 header{padding:calc(var(--sa-top,0px) + 8px) 16px 8px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
 .logo{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,var(--main),var(--main2));box-shadow:0 8px 24px rgba(46,242,160,.35),inset 0 1px 0 rgba(255,255,255,.4)}
-h1{font-size:24px;font-weight:800;letter-spacing:-.5px;line-height:1}
+h1{font-size:17px;font-weight:800;letter-spacing:-.3px;line-height:1.15}
+.hr{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.lang{display:flex;padding:3px;border-radius:12px;background:var(--card);border:1px solid var(--line);box-shadow:0 6px 16px rgba(0,0,0,.25)}
+.lang button{border:0;background:transparent;color:var(--mut);font:700 12px 'Outfit',system-ui,sans-serif;letter-spacing:1px;padding:7px 9px;border-radius:9px;transition:transform .15s,background .2s,color .2s;cursor:pointer}
+.lang button.on{background:linear-gradient(135deg,var(--main),var(--main2));color:#04140d;box-shadow:0 4px 12px rgba(46,242,160,.3)}
+.lang button:active{transform:scale(.92)}
 #hello{font-size:13px;color:var(--mut);margin-top:4px}
 .icon-btn{width:42px;height:42px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--text);display:grid;place-items:center;opacity:0;transform:scale(.8);pointer-events:none;transition:.2s}
 .icon-btn.on{opacity:1;transform:scale(1);pointer-events:auto}
@@ -97,18 +102,19 @@ footer{text-align:center;font-size:11px;color:#4d5875;margin-top:20px;letter-spa
 </head>
 <body>
 <header>
-  <div class="brand"><div class="logo">🐍</div><div><h1>Snake</h1><div id="hello">Salut 👋</div></div></div>
-  <button class="icon-btn" id="pauseBtn" aria-label="Pause"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1.5"/><rect x="14" y="5" width="4" height="14" rx="1.5"/></svg></button>
+  <div class="brand"><div class="logo">🐍</div><div><h1 data-i="title">Snake : Mange, Grandis, Ne te mords pas</h1><div id="hello">Salut 👋</div></div></div>
+  <div class="hr"><div class="lang" id="langSw"><button data-l="fr" class="on">FR</button><button data-l="en">EN</button></div>
+  <button class="icon-btn" id="pauseBtn" aria-label="Pause"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1.5"/><rect x="14" y="5" width="4" height="14" rx="1.5"/></svg></button></div>
 </header>
 <main>
   <section id="play" class="active">
     <div class="stats">
-      <div class="stat hl"><div class="lbl">Score</div><div class="val" id="scoreV">0</div></div>
-      <div class="stat"><div class="lbl">Record</div><div class="val" id="bestV">0</div></div>
-      <div class="stat"><div class="lbl">Niveau</div><div class="val" id="lvlV">1</div></div>
+      <div class="stat hl"><div class="lbl" data-i="score">Score</div><div class="val" id="scoreV">0</div></div>
+      <div class="stat"><div class="lbl" data-i="best">Record</div><div class="val" id="bestV">0</div></div>
+      <div class="stat"><div class="lbl" data-i="lvl">Niveau</div><div class="val" id="lvlV">1</div></div>
     </div>
     <div id="boardWrap"><canvas id="cv"></canvas><div id="fruitEl"></div><div id="cd"></div><div id="lv"></div><div id="ov"><div class="box" id="ovBox"></div></div></div>
-    <div class="bar" id="bar"><button class="chip" id="wallsBtn">🌀 Murs traversables</button><span class="hint">Swipe pour tourner</span></div>
+    <div class="bar" id="bar"><button class="chip" id="wallsBtn">🌀 Murs traversables</button><span class="hint" data-i="hint">Swipe pour tourner</span></div>
     <div class="pad" id="pad">
       <button data-d="l" aria-label="Gauche"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
       <button data-d="u" aria-label="Haut"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15l7-7 7 7"/></svg></button>
@@ -117,15 +123,15 @@ footer{text-align:center;font-size:11px;color:#4d5875;margin-top:20px;letter-spa
     </div>
   </section>
   <section id="rank">
-    <div class="me-card"><div><div class="lbl">Ton record</div><div class="val" id="meBest">0</div></div><div><div class="lbl">Parties</div><div class="val" id="meGames">0</div></div><div><div class="lbl">Fruits</div><div class="val" id="meFruits">0</div></div></div>
-    <div class="sec-title">🏆 Meilleurs serpents</div>
+    <div class="me-card"><div><div class="lbl" data-i="myBest">Ton record</div><div class="val" id="meBest">0</div></div><div><div class="lbl" data-i="games">Parties</div><div class="val" id="meGames">0</div></div><div><div class="lbl" data-i="fruits">Fruits</div><div class="val" id="meFruits">0</div></div></div>
+    <div class="sec-title" data-i="top">🏆 Meilleurs serpents</div>
     <div id="rankList"></div>
   </section>
   <footer>Made with SayApp</footer>
 </main>
 <nav>
-  <button class="active" data-tab="play">🎮 Jouer</button>
-  <button data-tab="rank">🏆 Classement</button>
+  <button class="active" data-tab="play" data-i="play">🎮 Jouer</button>
+  <button data-tab="rank" data-i="rank">🏆 Classement</button>
 </nav>
 <div id="toast"></div>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -141,6 +147,37 @@ let snake=[],dir={x:1,y:0},queue=[],fruit=null,score=0,shown=0,eaten=0,stepMs=15
 let running=false,paused=false,busy=false,usedContinue=false,dead=false,deadAt=0,cause='';
 let best=0,games=0,totalFruits=0,walls=false,parts=[],toastT;
 let rocks=[],level=1,slowUntil=0,tick=0;
+let lang='fr',uname='',ovKind='start',ovRec=false;
+const L={
+fr:{title:'Snake : Mange, Grandis, Ne te mords pas',hi:'Salut',score:'Score',best:'Record',lvl:'Niveau',hint:'Swipe pour tourner',myBest:'Ton record',games:'Parties',fruits:'Fruits',top:'🏆 Meilleurs serpents',play:'🎮 Jouer',rank:'🏆 Classement',pause:'Pause',
+dRock:'Écrasé par un rocher mobile !',dWall:'Aïe, tu as foncé dans le mur !',dRock2:'Boum, un rocher sur ton chemin !',dSelf:"Tu t'es mordu la queue !",
+tMove:'⚠️ Attention, les rochers commencent à bouger !',tSlow:'🍄 Ralenti pendant 5 secondes',tNoAd:'Aucune vidéo disponible pour le moment',tEnd:'Termine la partie pour changer de mode',tWallsOn:'Attention, les murs sont mortels !',tWallsOff:'Tu peux traverser les murs',
+lvUp:'⚡ Niveau ',wallsOn:'🧱 Murs mortels',wallsOff:'🌀 Murs traversables',stT:'Prêt à croquer ?',
+stP:'Tous les 5 fruits, tu passes au niveau suivant : ça accélère et des rochers apparaissent, dès le niveau 5 certains bougent ! ⭐ 50 pts, 🍄 ralentit, 💎 100 pts.',
+playBtn:'▶ Jouer',psP:"Ton serpent t'attend sagement.",resume:'▶ Reprendre',restart:'↻ Recommencer',newRec:'🏆 Nouveau record !',replay:'↻ Rejouer',cont:'🎬 Continuer avec une vidéo',seeRank:'Voir le classement',loading:'Chargement...',
+over:(l,b,e)=>`Niveau ${l} · Record : ${b} · ${e} fruit${e>1?'s':''} mangé${e>1?'s':''}`,
+emptyT:'Le classement est vide',emptyP:'Fais une partie et deviens le premier serpent de la liste !',playNow:'Jouer maintenant',player:'Joueur',you:'toi'},
+en:{title:"Snake: Eat, Grow, Don't Bite",hi:'Hi',score:'Score',best:'Best',lvl:'Level',hint:'Swipe to turn',myBest:'Your best',games:'Games',fruits:'Fruits',top:'🏆 Top snakes',play:'🎮 Play',rank:'🏆 Leaderboard',pause:'Pause',
+dRock:'Crushed by a moving rock!',dWall:'Ouch, you hit the wall!',dRock2:'Boom, a rock in your way!',dSelf:'You bit your own tail!',
+tMove:'⚠️ Watch out, the rocks start moving!',tSlow:'🍄 Slowed down for 5 seconds',tNoAd:'No video available right now',tEnd:'Finish the game to change mode',tWallsOn:'Careful, walls are deadly!',tWallsOff:'You can go through walls',
+lvUp:'⚡ Level ',wallsOn:'🧱 Deadly walls',wallsOff:'🌀 Pass-through walls',stT:'Ready to munch?',
+stP:'Every 5 fruits you reach the next level: it speeds up and rocks appear, from level 5 some of them move! ⭐ 50 pts, 🍄 slows down, 💎 100 pts.',
+playBtn:'▶ Play',psP:'Your snake is waiting patiently.',resume:'▶ Resume',restart:'↻ Restart',newRec:'🏆 New record!',replay:'↻ Play again',cont:'🎬 Continue with a video',seeRank:'See the leaderboard',loading:'Loading...',
+over:(l,b,e)=>`Level ${l} · Best: ${b} · ${e} fruit${e>1?'s':''} eaten`,
+emptyT:'The leaderboard is empty',emptyP:'Play a game and become the first snake on the list!',playNow:'Play now',player:'Player',you:'you'}
+};
+const T=k=>{const d=L[lang]||L.fr;return d[k]!==undefined?d[k]:(L.fr[k]!==undefined?L.fr[k]:k)};
+try{const tw=window.Telegram&&Telegram.WebApp,u=tw&&tw.initDataUnsafe&&tw.initDataUnsafe.user;const c=String((u&&u.language_code)||(SA.user&&SA.user.language_code)||'').slice(0,2).toLowerCase();lang=c==='en'?'en':'fr'}catch(e){}
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-i]').forEach(el=>el.textContent=T(el.dataset.i));
+  document.querySelectorAll('#langSw button').forEach(b=>b.classList.toggle('on',b.dataset.l===lang));
+  $('#hello').textContent=T('hi')+(uname?' '+uname:'')+' 👋';
+  $('#pauseBtn').setAttribute('aria-label',T('pause'));
+  updWalls();
+  if($('#ov').classList.contains('show'))showOverlay(ovKind,ovRec);
+  if($('#rank').classList.contains('active'))loadRank();
+}
 const hap=k=>{try{SA.haptic(k)}catch(e){}};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -184,7 +221,7 @@ function moveRocks(now){
   for(const r of rocks){
     if(!r.m)continue;
     const nx=r.x+r.dx,ny=r.y+r.dy,h=snake[0];
-    if(nx===h.x&&ny===h.y){r.ox=r.x;r.oy=r.y;r.x=nx;r.y=ny;r.mt=now;return die('Écrasé par un rocher mobile !')}
+    if(nx===h.x&&ny===h.y){r.ox=r.x;r.oy=r.y;r.x=nx;r.y=ny;r.mt=now;return die('dRock')}
     if(nx<0||ny<0||nx>=N||ny>=N||snake.some(s=>s.x===nx&&s.y===ny)||rocks.some(o=>o!==r&&o.x===nx&&o.y===ny)||(fruit&&fruit.x===nx&&fruit.y===ny)){r.dx=-r.dx;r.dy=-r.dy;continue}
     r.ox=r.x;r.oy=r.y;r.x=nx;r.y=ny;r.mt=now;
   }
@@ -192,8 +229,8 @@ function moveRocks(now){
 function levelUp(){
   level++;addRocks(Math.min(3,1+Math.floor(level/2)));
   if(level>=5&&rocks.filter(r=>r.m).length<6)addRocks(1,true);
-  if(level===5)toast('⚠️ Attention, les rochers commencent à bouger !');
-  const l=$('#lv');l.textContent='⚡ Niveau '+level;l.classList.remove('pop');void l.offsetWidth;l.classList.add('pop');hap('ok');
+  if(level===5)toast(T('tMove'));
+  const l=$('#lv');l.textContent=T('lvUp')+level;l.classList.remove('pop');void l.offsetWidth;l.classList.add('pop');hap('ok');
 }
 function setDir(dx,dy){
   if(!running||paused)return;
@@ -204,15 +241,15 @@ function setDir(dx,dy){
 function step(now){
   if(queue.length)dir=queue.shift();
   const h={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
-  if(h.x<0||h.y<0||h.x>=N||h.y>=N){if(walls)return die('Aïe, tu as foncé dans le mur !');h.x=(h.x+N)%N;h.y=(h.y+N)%N}
-  if(rocks.some(r=>r.x===h.x&&r.y===h.y))return die('Boum, un rocher sur ton chemin !');
+  if(h.x<0||h.y<0||h.x>=N||h.y>=N){if(walls)return die('dWall');h.x=(h.x+N)%N;h.y=(h.y+N)%N}
+  if(rocks.some(r=>r.x===h.x&&r.y===h.y))return die('dRock2');
   const grow=fruit&&h.x===fruit.x&&h.y===fruit.y,body=grow?snake:snake.slice(0,-1);
-  if(body.some(s=>s.x===h.x&&s.y===h.y))return die('Tu t\'es mordu la queue !');
+  if(body.some(s=>s.x===h.x&&s.y===h.y))return die('dSelf');
   snake.unshift(h);
   if(grow){
     const pts=fruit.pts;score+=pts;eaten++;totalFruits++;
     burst(h.x,h.y,fruit.gold);floatTxt(h.x,h.y,'+'+pts,fruit.gold);hap(fruit.gold?'ok':'tap');
-    if(fruit.kind==='slow'){slowUntil=now+5000;toast('🍄 Ralenti pendant 5 secondes')}
+    if(fruit.kind==='slow'){slowUntil=now+5000;toast(T('tSlow'))}
     if(eaten%5===0)levelUp();
     stepMs=Math.max(58,165-(level-1)*13-(eaten%5)*2);setScore();placeFruit();
   }else snake.pop();
@@ -307,10 +344,10 @@ async function countdown(){
   cd.textContent='';cd.classList.remove('pop');
 }
 function showOverlay(kind,rec){
-  const b=$('#ovBox');
-  if(kind==='start')b.innerHTML=`<div class="big-emo">🐍</div><h2>Prêt à croquer ?</h2><p>Tous les 5 fruits, tu passes au niveau suivant : ça accélère et des rochers apparaissent, dès le niveau 5 certains bougent ! ⭐ 50 pts, 🍄 ralentit, 💎 100 pts.</p><button class="btn" data-act="start">▶ Jouer</button>`;
-  else if(kind==='pause')b.innerHTML=`<div class="big-emo">⏸️</div><h2>Pause</h2><p>Ton serpent t'attend sagement.</p><button class="btn" data-act="resume">▶ Reprendre</button><button class="btn ghost" data-act="start">↻ Recommencer</button>`;
-  else b.innerHTML=`${rec?'<div class="rec">🏆 Nouveau record !</div>':'<div class="big-emo">💥</div>'}<h2>${esc(cause)}</h2><div class="final">${score}</div><p>Niveau ${level} · Record : ${best} · ${eaten} fruit${eaten>1?'s':''} mangé${eaten>1?'s':''}</p><button class="btn" data-act="start">↻ Rejouer</button>${!usedContinue&&score>0?'<button class="btn ad" data-act="continue">🎬 Continuer avec une vidéo</button>':''}<button class="btn ghost" data-act="rank">Voir le classement</button>`;
+  ovKind=kind;ovRec=!!rec;const b=$('#ovBox');
+  if(kind==='start')b.innerHTML=`<div class="big-emo">🐍</div><h2>${T('stT')}</h2><p>${T('stP')}</p><button class="btn" data-act="start">${T('playBtn')}</button>`;
+  else if(kind==='pause')b.innerHTML=`<div class="big-emo">⏸️</div><h2>${T('pause')}</h2><p>${T('psP')}</p><button class="btn" data-act="resume">${T('resume')}</button><button class="btn ghost" data-act="start">${T('restart')}</button>`;
+  else b.innerHTML=`${rec?`<div class="rec">${T('newRec')}</div>`:'<div class="big-emo">💥</div>'}<h2>${esc(T(cause))}</h2><div class="final">${score}</div><p>${T('over')(level,best,eaten)}</p><button class="btn" data-act="start">${T('replay')}</button>${!usedContinue&&score>0?`<button class="btn ad" data-act="continue">${T('cont')}</button>`:''}<button class="btn ghost" data-act="rank">${T('seeRank')}</button>`;
   $('#ov').classList.add('show');
 }
 const hideOverlay=()=>$('#ov').classList.remove('show');
@@ -321,16 +358,16 @@ async function startGame(){
   await countdown();acc=0;running=true;busy=false;setPauseBtn();
 }
 async function continueGame(btn){
-  if(busy)return;btn.disabled=true;btn.textContent='Chargement...';
+  if(busy)return;btn.disabled=true;btn.textContent=T('loading');
   let ok=false;try{ok=await SA.ad()}catch(e){}
-  if(!ok){btn.disabled=false;btn.textContent='🎬 Continuer avec une vidéo';toast('Aucune vidéo disponible pour le moment');return}
+  if(!ok){btn.disabled=false;btn.textContent=T('cont');toast(T('tNoAd'));return}
   busy=true;usedContinue=true;hideOverlay();dead=false;spawnSnake(Math.min(snake.length,6));
   rocks=rocks.filter(r=>r.y!==Math.floor(N/2));slowUntil=0;placeFruit(true);
   await countdown();acc=0;running=true;busy=false;setPauseBtn();
 }
 function pause(){if(!running||paused||busy)return;paused=true;showOverlay('pause');setPauseBtn()}
 async function resume(){if(busy)return;busy=true;hideOverlay();await countdown();acc=0;paused=false;busy=false;setPauseBtn()}
-function updWalls(){$('#wallsBtn').textContent=walls?'🧱 Murs mortels':'🌀 Murs traversables';$('#boardWrap').classList.toggle('walls',walls)}
+function updWalls(){$('#wallsBtn').textContent=walls?T('wallsOn'):T('wallsOff');$('#boardWrap').classList.toggle('walls',walls)}
 function showTab(name){
   document.querySelectorAll('section').forEach(s=>s.classList.toggle('active',s.id===name));
   document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));
@@ -341,8 +378,8 @@ async function loadRank(){
   const list=$('#rankList');list.innerHTML='<div class="sk"></div>'.repeat(5);
   $('#meBest').textContent=best;$('#meGames').textContent=games;$('#meFruits').textContent=totalFruits;
   let rows=[];try{rows=(await SA.top('best',20))||[]}catch(e){}
-  if(!rows.length){list.innerHTML=`<div class="empty"><div class="eb">🏁</div><b>Le classement est vide</b><p>Fais une partie et deviens le premier serpent de la liste !</p><button class="btn" data-act="goplay">Jouer maintenant</button></div>`;return}
-  list.innerHTML=rows.map((r,i)=>{const n=r.name||'Joueur';return `<div class="row${r.me?' me':''}" style="animation-delay:${i*40}ms"><div class="pos">${i<3?['🥇','🥈','🥉'][i]:i+1}</div><div class="av">${esc(n.charAt(0).toUpperCase())}</div><div class="nm">${esc(n)}${r.me?'<span class="you">toi</span>':''}</div><div class="vl">${Number(r.value)||0}</div></div>`}).join('');
+  if(!rows.length){list.innerHTML=`<div class="empty"><div class="eb">🏁</div><b>${T('emptyT')}</b><p>${T('emptyP')}</p><button class="btn" data-act="goplay">${T('playNow')}</button></div>`;return}
+  list.innerHTML=rows.map((r,i)=>{const n=r.name||T('player');return `<div class="row${r.me?' me':''}" style="animation-delay:${i*40}ms"><div class="pos">${i<3?['🥇','🥈','🥉'][i]:i+1}</div><div class="av">${esc(n.charAt(0).toUpperCase())}</div><div class="nm">${esc(n)}${r.me?`<span class="you">${T('you')}</span>`:''}</div><div class="vl">${Number(r.value)||0}</div></div>`}).join('');
 }
 document.addEventListener('click',e=>{
   const a=e.target.closest('[data-act]');if(!a)return;const act=a.dataset.act;hap('tap');
@@ -352,8 +389,8 @@ document.addEventListener('click',e=>{
 document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{hap('tap');showTab(b.dataset.tab)}));
 $('#pauseBtn').addEventListener('click',()=>{hap('tap');pause()});
 $('#wallsBtn').addEventListener('click',()=>{
-  if(running||busy){toast('Termine la partie pour changer de mode');return}
-  walls=!walls;updWalls();hap('tap');toast(walls?'Attention, les murs sont mortels !':'Tu peux traverser les murs');
+  if(running||busy){toast(T('tEnd'));return}
+  walls=!walls;updWalls();hap('tap');toast(walls?T('tWallsOn'):T('tWallsOff'));
   try{SA.set('walls',walls)}catch(e){}
 });
 const D={l:[-1,0],r:[1,0],u:[0,-1],d:[0,1]};
@@ -375,14 +412,19 @@ document.addEventListener('touchmove',e=>{if((running||busy)&&$('#play').classLi
 document.addEventListener('visibilitychange',()=>{if(document.hidden)pause()});
 window.addEventListener('resize',()=>{if($('#play').classList.contains('active'))resize()});
 
+document.querySelectorAll('#langSw button').forEach(b=>b.addEventListener('click',()=>{
+  if(b.dataset.l===lang)return;lang=b.dataset.l;hap('tap');applyLang();
+  try{Promise.resolve(SA.set('lang',lang)).catch(()=>{})}catch(e){}
+}));
 resize();spawnSnake(4);placeFruit(true);updWalls();showOverlay('start');requestAnimationFrame(loop);
-const name=SA.user&&SA.user.first_name;$('#hello').textContent=name?'Salut '+name+' 👋':'Salut 👋';
+uname=(SA.user&&SA.user.first_name)||'';applyLang();
 try{
   best=Number(await SA.get('best'))||0;
   const st=await SA.get('stats');if(st){games=st.games||0;totalFruits=st.fruits||0}
   walls=!!(await SA.get('walls'));
+  const sl=await SA.get('lang');if(sl==='fr'||sl==='en')lang=sl;
 }catch(e){}
-$('#bestV').textContent=best;if(!running&&!busy)updWalls();
+$('#bestV').textContent=best;if(!running&&!busy)updWalls();applyLang();
 });
 </script>
 </body>
