@@ -64,7 +64,7 @@
     pay: function (label, amount) { return (adsReady || Promise.resolve()).then(function () { if (ADS && ADS.pay) { try { tw.openLink(ADS.pay); } catch (e) { window.open(ADS.pay); } return true; } return payDemo(label, amount); }); },
     hasPay: function () { return (adsReady || Promise.resolve()).then(function () { return !!(ADS && ADS.pay); }); },
     hasAd: function () { return (adsReady || Promise.resolve()).then(function () { return true; }); },
-    ad: function () { return (adsReady || Promise.resolve()).then(function () { return ADS && (ADS.ag || ADS.agx) ? playAd(ADS.ag) : houseAd(); }); },
+    ad: function () { return (adsReady || Promise.resolve()).then(function () { return ADS && (ADS.ag || ADS.agx) ? playAd(ADS.ag) : true; }); },  // 4 nov 2026 (23h43, Jeremy): without the owner's own ad code, the reward is given right away, no SayApp promo
     haptic: function (k) {
       try { var h = tw.HapticFeedback; if (k === 'ok') h.notificationOccurred('success'); else if (k === 'error') h.notificationOccurred('error'); else h.impactOccurred('light'); } catch (e) {}
     }
@@ -226,7 +226,7 @@
     var k = 'sayapp_hd_' + APP, last = 0; try { last = Number(localStorage.getItem(k) || 0); } catch (e) {}
     if (Date.now() - last < 3600000) return;
     try { localStorage.setItem(k, String(Date.now())); } catch (e) {}
-    setTimeout(houseAd, 1500);
+    return;  // 4 nov 2026 (23h43, Jeremy): no more SayApp promo at the opening of client apps
   }
   function openAd() {
     if (!ADS || !ADS.open) return;
