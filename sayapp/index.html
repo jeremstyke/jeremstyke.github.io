@@ -1805,7 +1805,7 @@ input.tk:focus{border-color:var(--v)}
   function manageSheet(a) {
     var t = a.title || 'App';
     openSheet('<div class="mg"><div class="ico" style="background:' + col(a.id) + '">' + (a.logo_url ? '<img alt="" src="' + esc(a.logo_url) + '">' : esc(t.charAt(0).toUpperCase())) + '</div><div class="an"><h2 style="margin:0">' + esc(t) + '</h2><span>@' + esc(a.bot_username) + '</span></div></div>' +
-      '<div class="stat"><div><b id="mgU">…</b><span>' + esc(T.users) + '</span></div><div><b>' + (a.trial ? '🎁' : '⭐') + '</b><span>' + esc(a.trial ? T.trRenT.replace(/^\S+\s/, '') : 'Pro') + '</span></div></div>' +
+      '<div class="stat"><div><b id="mgU">…</b><span>' + esc(T.users) + '</span></div><div><b>' + (a.trial ? '🎁' : '🟢') + '</b><span>' + esc(a.trial ? T.trRenT.replace(/^\S+\s/, '') : (({ fr: 'En ligne', en: 'Live', es: 'En línea', pt: 'No ar', ru: 'Онлайн', id: 'Online', tr: 'Yayında' })[lang] || 'Live')) + '</span></div></div>' +
       '<button class="ghost" id="mgBot">' + esc(T.openMyBot) + '</button><div id="mgTier"></div><div class="mgT">' + ((TBX[lang] || TBX.en).map(function (x, k) { return '<button data-t="' + k + '"' + (k === (window.__mgt || 0) ? ' class="on"' : '') + '>' + esc(x) + '</button>'; }).join('')) + '</div>' +
       '<div class="mgP" data-p="0">' +
       '<div class="blk"><h3>' + esc(T.imT) + '</h3><p>' + esc(T.imP) + '</p><div class="supx" style="margin-top:10px"><button id="imLogo">' + esc(T.imLogo) + '</button><button id="imWel">' + esc(T.imWel) + '</button></div><button class="cta" id="imGen" style="margin-top:10px">' + esc(LG.btn) + '</button></div>' +
