@@ -295,7 +295,6 @@ input.tk:focus{border-color:var(--v)}
     </div></div>
     <div class="chips" id="chips"></div>
     <p class="nbl"><i>3</i><span id="nxL3"></span></p><div class="nbt" id="nxStyle"></div>
-    <p class="nbl"><i>4</i><span id="nxL4"></span></p><div class="nlg"><p class="xl" id="xLangL" style="margin-top:4px"></p><div class="cols" id="xLangM"></div><p class="xl" id="xLangL2"></p><div class="cols" id="xLangX"></div></div>
     <details class="nbo"><summary id="nxOpt"></summary><div class="extra" id="wExtra"><input class="xin" id="xName" maxlength="40" autocomplete="off"><input class="xin" id="xDesc" maxlength="120" autocomplete="off"><p class="xl" id="xColL"></p><div class="cols" id="xCols"></div></div></details>
     <button class="cta" id="go"></button>
     </div>
@@ -1004,6 +1003,7 @@ input.tk:focus{border-color:var(--v)}
   var LANGS = [['fr', '🇫🇷 Français', 'French'], ['en', '🇬🇧 English', 'English'], ['es', '🇪🇸 Español', 'Spanish'], ['pt', '🇧🇷 Português', 'Portuguese'], ['ru', '🇷🇺 Русский', 'Russian'], ['id', '🇮🇩 Indonesia', 'Indonesian'], ['tr', '🇹🇷 Türkçe', 'Turkish'], ['de', '🇩🇪 Deutsch', 'German'], ['it', '🇮🇹 Italiano', 'Italian'], ['ar', '🇸🇦 العربية', 'Arabic'], ['hi', '🇮🇳 हिन्दी', 'Hindi']];
   W.lm = LANGS.some(function (l) { return l[0] === lang; }) ? lang : 'en'; W.lx = [];
   function paintLangs() {
+    if (!$('xLangM')) return;  // 4 nov 2026 (20h10, Jeremy): the languages are chosen after the idea, in the questions sheet
     $('xLangL').textContent = T.xLang; $('xLangL2').textContent = T.xLang2;
     $('xLangM').innerHTML = LANGS.map(function (l) { return '<button class="lg' + (W.lm === l[0] ? ' on' : '') + '" data-l="' + l[0] + '">' + esc(l[1]) + '</button>'; }).join('');
     $('xLangX').innerHTML = LANGS.filter(function (l) { return l[0] !== W.lm; }).map(function (l) { return '<button class="lg' + (W.lx.indexOf(l[0]) >= 0 ? ' on' : '') + '" data-l="' + l[0] + '">' + esc(l[1]) + '</button>'; }).join('');
@@ -1023,7 +1023,7 @@ input.tk:focus{border-color:var(--v)}
     if (S.lim && !S.lim.paidOnly && !S.lim.pro && S.lim.gens >= S.lim.freeGens) { hap('err'); return limitSheet(); }
     // 4 nov 2026 (16h29, Jeremy): the AI first asks 2 or 3 quick questions to refine the idea (once per app)
     if (W.cq == null) { hap(); $('go').disabled = true; var goOn = function (ans) { W.cq = ans || ''; $('go').disabled = false; $('go').onclick(); };
-      return call('clarify', { prompt: t, lang: lang }).then(function (r) { $('go').disabled = false; if (r && r.ok && r.q && r.q.length) return cqSheet(r.q, goOn); goOn(''); }, function () { goOn(''); }); }
+      return call('clarify', { prompt: t, lang: lang }).then(function (r) { $('go').disabled = false; return cqSheet((r && r.ok && r.q) || [], goOn); }, function () { goOn(''); }); }
     if (W.cq) t += '\n\nThe creator answered these questions about the app (follow these choices):\n' + W.cq;
     hap(); $('go').disabled = true;
     call('create', { prompt: t, name: xn, desc: xd }).then(function (r) {
@@ -1888,7 +1888,9 @@ input.tk:focus{border-color:var(--v)}
     var MU = {"fr": "Tu peux choisir plusieurs réponses.", "en": "You can pick several answers.", "es": "Puedes elegir varias respuestas.", "pt": "Você pode escolher várias respostas.", "ru": "Можно выбрать несколько ответов.", "id": "Kamu bisa memilih beberapa jawaban.", "tr": "Birden fazla cevap seçebilirsin."};
     var L = CQ[lang] || CQ.en, sel = qs.map(function () { return []; }), sent = false;
     openSheet('<h2>' + esc(L[0]) + '</h2><p class="sub">' + esc(L[1] + ' ' + (MU[lang] || MU.en)) + '</p>' + qs.map(function (x, i) { return '<p class="xl" style="margin:14px 0 8px;font-weight:700">' + esc(x.q) + '</p><div class="cqo" data-i="' + i + '">' + x.o.map(function (o, j) { return '<button data-j="' + j + '">' + esc(o) + '</button>'; }).join('') + '</div>'; }).join('') +
+      '<p class="xl" style="margin:18px 0 6px;font-weight:700">🌍 ' + esc(L4[lang] || L4.en) + '</p><p class="xl" id="xLangL"></p><div class="cols" id="xLangM"></div><p class="xl" id="xLangL2"></p><div class="cols" id="xLangX"></div>' +
       '<p class="xl" style="margin:14px 0 8px">' + esc(L[2]) + '</p><input class="xin" id="cqX" maxlength="200"><button class="cta" id="cqGo" style="margin-top:14px">' + esc(L[3]) + '</button><button class="ghost" id="cqSk" style="margin-top:10px">' + esc(L[4]) + '</button>');
+    paintLangs();
     document.querySelectorAll('.cqo button').forEach(function (b) { b.onclick = function () { hap(); var i = +b.parentNode.getAttribute('data-i'), j = +b.getAttribute('data-j'); var p = sel[i].indexOf(j); if (p >= 0) sel[i].splice(p, 1); else sel[i].push(j); b.parentNode.querySelectorAll('button').forEach(function (x, k) { x.className = sel[i].indexOf(k) >= 0 ? 'on' : ''; }); }; });
     var fin = function (skip) { if (sent) return; sent = true; var ans = skip ? '' : qs.map(function (x, i) { return sel[i].length ? '- ' + x.q + ' ' + sel[i].slice().sort(function (a, b) { return a - b; }).map(function (k) { return x.o[k]; }).join(' + ') : ''; }).filter(Boolean).join('\n'), ex = skip ? '' : $('cqX').value.trim(); if (ex) ans += (ans ? '\n' : '') + '- ' + ex; closeSheet(); cb(ans); };
     $('cqGo').onclick = function () { hap(); fin(false); }; $('cqSk').onclick = function () { hap(); fin(true); };
