@@ -1,4 +1,4 @@
-<!-- sayapp pngxtm2s v1 -->
+<!-- sayapp pngxtm2s v2 -->
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -78,6 +78,13 @@ nav{position:fixed;bottom:0;left:0;right:0;padding:8px 16px calc(8px + env(safe-
 .toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:var(--card2);border:1px solid var(--line);padding:12px 18px;border-radius:14px;opacity:0;transition:.25s;z-index:50;font-weight:600;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 .pt{position:fixed;width:8px;height:8px;border-radius:50%;pointer-events:none;z-index:60;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .7s}
+.alert{display:flex;gap:10px;align-items:center;background:linear-gradient(90deg,rgba(255,194,75,.18),rgba(255,194,75,.04));border:1px solid rgba(255,194,75,.35);color:var(--amber);border-radius:14px;padding:12px;margin-bottom:12px;font-weight:600;font-size:14px;line-height:1.5;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 4px rgba(255,194,75,.1)}}
+.mchart{display:flex;align-items:flex-end;gap:8px;height:140px;padding-top:8px}
+.mcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:6px;min-width:0}
+.mbar{width:100%;max-width:36px;border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,var(--main),var(--acc));height:0;transition:height .8s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 14px rgba(25,227,161,.3)}
+.mbar.z{background:var(--card2);box-shadow:none}
+.mcol b{font-size:12px}.mcol span{font-size:11px;color:var(--mut)}
 footer{text-align:center;font-size:11px;color:#4C566B;padding:8px 0 16px}
 </style>
 </head>
@@ -110,6 +117,13 @@ footer{text-align:center;font-size:11px;color:#4C566B;padding:8px 0 16px}
       <div class="f"><span class="lbl" data-t="price"></span><input id="iP" inputmode="decimal"></div>
       <div class="f"><span class="lbl">RSI (14)</span><input id="iR" inputmode="decimal"></div>
       <div class="f"><span class="lbl" data-t="volume"></span><div class="rowb" style="padding-top:8px"><input type="range" class="range" id="iV" min="40" max="300" step="5"><b class="num" id="vV" style="margin-inline-start:8px;min-width:48px"></b></div></div>
+      <div class="f"><span class="lbl" data-t="macdL"></span><input id="iM"></div>
+      <div class="f"><span class="lbl" data-t="macdS"></span><input id="iMs"></div>
+    </div>
+    <span class="lbl" data-t="risk"></span>
+    <div class="grid">
+      <div class="f"><span class="lbl" data-t="capital"></span><input id="iK" inputmode="decimal"></div>
+      <div class="f"><span class="lbl" data-t="riskP"></span><input id="iRk" inputmode="decimal"></div>
     </div>
     <button class="btn pri" id="goBtn" data-t="analyze"></button>
   </div>
@@ -133,6 +147,8 @@ window.addEventListener('load',async()=>{
 const T={
 en:{tag:'Support & resistance signal desk',market:'Market',crypto:'Crypto',forex:'Forex',pair:'Pair',tf:'Timeframe',school:'Trading school',classic:'Classic',fib:'Fibonacci',cam:'Camarilla',wood:'Woodie',candle:'Previous candle and live data',high:'High',low:'Low',close:'Close',price:'Current price',volume:'Volume vs avg',analyze:'⚡ Analyze setup',disc:'Educational analysis, not financial advice. You enter the prices, there is no live feed. Always manage your risk.',tAn:'Analyze',tHi:'History',tSt:'Stats',LONG:'LONG',SHORT:'SHORT',WAIT:'WAIT',conf:'Confidence',liq:'💧 Liquidity entering',lowliq:'Low liquidity',entry:'Entry',sl:'Stop loss',rr:'Risk : Reward',levels:'Key levels',now:'Price now',save:'💾 Save',send:'📩 Send to me',waitTxt:'No clear edge. Wait for a break above {a} or below {b}.',bad:'Check your numbers: High must be above Low',saved:'Saved to history',sent:'Recommendation sent',emptyH:'No signals yet',emptyHt:'Analyze a setup and save it to build your track record.',emptyS:'No closed trades',emptySt:'Mark your signals as TP or SL in History to see your win rate.',tp:'TP hit',slh:'SL hit',open:'Open',del:'Remove',win:'Win rate',total:'Signals',closed:'Closed',wins:'Wins',longs:'Longs',shorts:'Shorts',best:'Best school',bestp:'Most traded',reasons:'Why',rAbove:'Price above pivot',rBelow:'Price below pivot',rOS:'RSI oversold',rOB:'RSI overbought',rBull:'RSI bullish zone',rBear:'RSI bearish zone',rVol:'Volume spike confirms move',rNoVol:'Weak volume reduces confidence'},
 ar:{tag:'منصة إشارات الدعم والمقاومة',market:'السوق',crypto:'كريبتو',forex:'فوركس',pair:'الزوج',tf:'الإطار الزمني',school:'المدرسة',classic:'كلاسيكي',fib:'فيبوناتشي',cam:'كاماريلا',wood:'وودي',candle:'الشمعة السابقة والبيانات الحالية',high:'الأعلى',low:'الأدنى',close:'الإغلاق',price:'السعر الحالي',volume:'الحجم مقابل المتوسط',analyze:'⚡ حلّل الصفقة',disc:'تحليل تعليمي وليس نصيحة مالية. أنت تُدخل الأسعار، لا توجد بيانات مباشرة. أدِر مخاطرك دائماً.',tAn:'تحليل',tHi:'السجل',tSt:'الإحصائيات',LONG:'شراء',SHORT:'بيع',WAIT:'انتظار',conf:'الثقة',liq:'💧 دخول سيولة',lowliq:'سيولة ضعيفة',entry:'الدخول',sl:'وقف الخسارة',rr:'المخاطرة : العائد',levels:'المستويات الرئيسية',now:'السعر الآن',save:'💾 حفظ',send:'📩 أرسلها لي',waitTxt:'لا توجد أفضلية واضحة. انتظر اختراق {a} أو كسر {b}.',bad:'تحقق من الأرقام: يجب أن يكون الأعلى أكبر من الأدنى',saved:'تم الحفظ في السجل',sent:'تم إرسال التوصية',emptyH:'لا توجد إشارات بعد',emptyHt:'حلّل صفقة واحفظها لبناء سجلك.',emptyS:'لا توجد صفقات مغلقة',emptySt:'حدّد إشاراتك كهدف أو وقف في السجل لرؤية نسبة النجاح.',tp:'تحقق الهدف',slh:'ضرب الوقف',open:'مفتوحة',del:'حذف',win:'نسبة النجاح',total:'الإشارات',closed:'المغلقة',wins:'الرابحة',longs:'شراء',shorts:'بيع',best:'أفضل مدرسة',bestp:'الأكثر تداولاً',reasons:'الأسباب',rAbove:'السعر فوق المحور',rBelow:'السعر تحت المحور',rOS:'RSI في تشبع بيعي',rOB:'RSI في تشبع شرائي',rBull:'RSI في منطقة صاعدة',rBear:'RSI في منطقة هابطة',rVol:'ارتفاع الحجم يؤكد الحركة',rNoVol:'ضعف الحجم يقلل الثقة'}};
+Object.assign(T.en,{macdL:'MACD line',macdS:'Signal line',rMacdUp:'MACD above signal, bullish momentum',rMacdDn:'MACD below signal, bearish momentum',macdOk:'✅ MACD confirms',macdNo:'⚠️ MACD disagrees',risk:'Position sizing',capital:'Capital',riskP:'Risk %',size:'Position size',riskAmt:'Risk amount',units:'Units',value:'Position value',lev:'Leverage needed',nearS:'Price is approaching support {s} ({d}% away)',nearSt:'🔔 Alert: price near support',monthly:'Monthly win rate'});
+Object.assign(T.ar,{macdL:'خط MACD',macdS:'خط الإشارة',rMacdUp:'MACD فوق خط الإشارة، زخم صاعد',rMacdDn:'MACD تحت خط الإشارة، زخم هابط',macdOk:'✅ MACD يؤكد',macdNo:'⚠️ MACD يخالف',risk:'إدارة رأس المال',capital:'رأس المال',riskP:'المخاطرة %',size:'حجم الصفقة',riskAmt:'مبلغ المخاطرة',units:'الوحدات',value:'قيمة الصفقة',lev:'الرافعة المطلوبة',nearS:'السعر يقترب من الدعم {s} (على بعد {d}%)',nearSt:'🔔 تنبيه: السعر قرب الدعم',monthly:'نسبة النجاح الشهرية'});
 const TG=window.Telegram&&Telegram.WebApp;try{TG.ready();TG.expand()}catch(e){}
 const SA=window.SayApp||{get:async()=>null,set:async()=>{},submit:async()=>{},haptic:()=>{}};
 let lang='en';try{const lc=(TG.initDataUnsafe.user.language_code||'').slice(0,2);if(T[lc])lang=lc}catch(e){}
@@ -142,6 +158,8 @@ const PAIRS={crypto:{'BTC/USDT':[68450,66120,67680,67950],'ETH/USDT':[3620,3488,
 const TFS=['15m','1H','4H','1D'];
 let st={m:'crypto',pair:'BTC/USDT',tf:'4H',s:'classic'},cur=null,signals=[];
 try{signals=(await SA.get('signals'))||[]}catch(e){signals=[]}
+let rcfg={k:1000,r:1};try{rcfg=(await SA.get('riskcfg'))||rcfg}catch(e){}
+$('iK').value=rcfg.k;$('iRk').value=rcfg.r;
 function applyLang(){document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';$('flag').textContent=lang==='ar'?'🇸🇦':'🇬🇧';
 document.querySelectorAll('[data-t]').forEach(el=>el.textContent=t(el.dataset.t));
 document.querySelectorAll('.langmenu button').forEach(b=>b.classList.toggle('on',b.dataset.l===lang));
@@ -151,7 +169,7 @@ document.addEventListener('click',()=>$('langMenu').classList.remove('open'));
 document.querySelectorAll('.langmenu button').forEach(b=>b.onclick=()=>{lang=b.dataset.l;applyLang()});
 function toast(m){const e=$('toast');e.textContent=m;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),1800)}
 const fmt=v=>{const a=Math.abs(v);return v.toFixed(a>=1000?2:a>=100?2:a>=10?3:4)};
-function fill(){const d=PAIRS[st.m][st.pair];if(!d)return;$('iH').value=d[0];$('iL').value=d[1];$('iC').value=d[2];$('iP').value=d[3]}
+function fill(){const d=PAIRS[st.m][st.pair];if(!d)return;$('iH').value=d[0];$('iL').value=d[1];$('iC').value=d[2];$('iP').value=d[3];const g=d[2]-(d[0]+d[1])/2;$('iM').value=fmt(g*.6);$('iMs').value=fmt(g*.35)}
 function chips(){$('pairs').innerHTML=Object.keys(PAIRS[st.m]).map(p=>`<button class="chip ${p===st.pair?'on':''}" data-p="${p}">${p}</button>`).join('');
 $('pairs').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{st.pair=c.dataset.p;chips();fill();SA.haptic('tap')});
 $('tfs').innerHTML=TFS.map(x=>`<button class="chip ${x===st.tf?'on':''}" data-x="${x}">${x}</button>`).join('');
@@ -169,6 +187,7 @@ if(!H||!L||!C||!price||H<=L){SA.haptic('error');toast(t('bad'));return null}
 const lv=levels(H,L,C,st.s),R=H-L;let sc=0;const why=[];
 if(price>lv.P){sc+=1;why.push('rAbove')}else{sc-=1;why.push('rBelow')}
 if(rsi<30){sc+=1;why.push('rOS')}else if(rsi>70){sc-=1;why.push('rOB')}else if(rsi>=50){sc+=.5;why.push('rBull')}else{sc-=.5;why.push('rBear')}
+const mR=$('iM').value.trim(),mS=$('iMs').value.trim();let md=null;if(mR!==''&&mS!==''&&!isNaN(+mR)&&!isNaN(+mS)){md=Math.sign(+mR-+mS);if(md>0){sc+=.5;why.push('rMacdUp')}else if(md<0){sc-=.5;why.push('rMacdDn')}}
 const liq=vol>=150;if(liq){sc*=1.4;why.push('rVol')}else if(vol<80){sc*=.7;why.push('rNoVol')}
 const side=sc>.6?'LONG':sc<-.6?'SHORT':'WAIT';
 const all=Object.values(lv).sort((a,b)=>a-b);
@@ -177,28 +196,37 @@ let tps=[],sl=null;
 if(side==='LONG'){tps=up.slice(0,3);while(tps.length<3)tps.push((tps[tps.length-1]||price)+R*.5);sl=(dn[0]||price-R*.4)-R*.05}
 if(side==='SHORT'){tps=dn.slice(0,3);while(tps.length<3)tps.push((tps[tps.length-1]||price)-R*.5);sl=(up[0]||price+R*.4)+R*.05}
 const rr=sl?Math.abs(tps[0]-price)/Math.abs(price-sl):0;
-const conf=side==='WAIT'?Math.round(25+Math.abs(sc)*20):Math.min(92,Math.round(45+Math.abs(sc)*14+(liq?8:0)+(rr>=1.5?5:0)));
-return{id:Date.now(),pair:st.pair,m:st.m,tf:st.tf,s:st.s,side,price,tps,sl,rr,conf,liq,vol,lv,why,up:up[0],dn:dn[0],at:Date.now(),status:'open'}}
+const conf=side==='WAIT'?Math.round(25+Math.abs(sc)*20):Math.min(92,Math.round(45+Math.abs(sc)*14+(liq?8:0)+(rr>=1.5?5:0)+(md==null?0:((side==='LONG')===(md>0)&&md!==0?5:-6))));
+const near=dn[0]!=null&&(price-dn[0])<=R*.2,nd=dn[0]!=null?(price-dn[0])/price*100:0;
+const cap=+$('iK').value,rk=+$('iRk').value;const ps=side!=='WAIT'&&sl&&cap>0&&rk>0?{cap,rk,amt:cap*rk/100,units:cap*rk/100/Math.abs(price-sl),val:cap*rk/100/Math.abs(price-sl)*price}:null;
+return{md,near,nd,ps,id:Date.now(),pair:st.pair,m:st.m,tf:st.tf,s:st.s,side,price,tps,sl,rr,conf,liq,vol,lv,why,up:up[0],dn:dn[0],at:Date.now(),status:'open'}}
 function burst(el){const r=el.getBoundingClientRect();for(let i=0;i<18;i++){const p=document.createElement('div');p.className='pt';p.style.background=i%2?'var(--main)':'var(--acc)';p.style.left=(r.left+r.width/2)+'px';p.style.top=(r.top+r.height/2)+'px';document.body.appendChild(p);
 const a=Math.random()*Math.PI*2,d=50+Math.random()*80;requestAnimationFrame(()=>{p.style.transform=`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px) scale(.3)`;p.style.opacity=0});setTimeout(()=>p.remove(),750)}}
-$('goBtn').onclick=e=>{const r=analyze();if(!r)return;cur=r;burst(e.currentTarget);SA.haptic('ok');renderRes();setTimeout(()=>$('res').scrollIntoView({behavior:'smooth',block:'start'}),60)};
+$('goBtn').onclick=e=>{const r=analyze();if(!r)return;cur=r;const nk={k:+$('iK').value||0,r:+$('iRk').value||0};if(nk.k!==rcfg.k||nk.r!==rcfg.r){rcfg=nk;Promise.resolve(SA.set('riskcfg',nk)).catch(()=>{})}
+if(r.near)setTimeout(()=>{toast(t('nearSt'));SA.haptic('error')},450);burst(e.currentTarget);SA.haptic('ok');renderRes();setTimeout(()=>$('res').scrollIntoView({behavior:'smooth',block:'start'}),60)};
 function countUp(el,to,suf){let s=null;const f=ts=>{if(!s)s=ts;const k=Math.min(1,(ts-s)/700);el.textContent=Math.round(to*(1-Math.pow(1-k,3)))+suf;if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
-function renderRes(){const r=cur;const names={R3:'R3',R2:'R2',R1:'R1',P:'P',S1:'S1',S2:'S2',S3:'S3'};
+function extras(r){let mb='',al='',psH='';
+if(r.md!=null&&r.side!=='WAIT'){const ok=r.md!==0&&(r.side==='LONG')===(r.md>0);mb=`<span class="badge ${ok?'LONG':'SHORT'}">${ok?t('macdOk'):t('macdNo')}</span>`}
+if(r.near)al=`<div class="alert"><span style="font-size:20px">🔔</span><span>${t('nearS').replace('{s}','<b class="num">'+fmt(r.dn)+'</b>').replace('{d}','<span class="num">'+r.nd.toFixed(2)+'</span>')}</span></div>`;
+if(r.ps){const p=r.ps,u=p.units>=100?Math.round(p.units).toLocaleString('en'):p.units.toFixed(4),m=v=>v.toLocaleString('en',{maximumFractionDigits:2});
+psH=`<span class="lbl">${t('size')}</span><div class="tg"><div><span>${t('riskAmt')}</span><b>${m(p.amt)}</b></div><div><span>${t('units')}</span><b>${u}</b></div><div><span>${t('value')}</span><b>${m(p.val)}</b></div></div>${p.val>p.cap?`<p class="disc" style="margin:0 0 12px;text-align:start">${t('lev')} <b class="num">x${(p.val/p.cap).toFixed(1)}</b></p>`:''}`}
+return{mb,al,psH}}
+function renderRes(){const r=cur;const {mb,al,psH}=extras(r);const names={R3:'R3',R2:'R2',R1:'R1',P:'P',S1:'S1',S2:'S2',S3:'S3'};
 const rows=Object.entries(r.lv).sort((a,b)=>b[1]-a[1]);let lad='',placed=false;
 rows.forEach(([k,v])=>{if(!placed&&r.price>=v){lad+=`<div class="now"><span>▶ ${t('now')}</span><span class="num">${fmt(r.price)}</span></div>`;placed=true}
 lad+=`<div class="${k[0]==='R'?'r':k==='P'?'p':'s'}"><span>${names[k]}</span><span class="num">${fmt(v)}</span></div>`});
 if(!placed)lad+=`<div class="now"><span>▶ ${t('now')}</span><span class="num">${fmt(r.price)}</span></div>`;
 const body=r.side==='WAIT'?`<p style="line-height:1.6;margin-bottom:12px">${t('waitTxt').replace('{a}','<b class="num">'+fmt(r.up||r.price)+'</b>').replace('{b}','<b class="num">'+fmt(r.dn||r.price)+'</b>')}</p>`:
 `<div class="tg"><div><span>${t('entry')}</span><b>${fmt(r.price)}</b></div><div><span>${t('sl')}</span><b style="color:var(--red)">${fmt(r.sl)}</b></div><div><span>R:R</span><b>1 : ${r.rr.toFixed(2)}</b></div></div>
-<div class="tg">${r.tps.map((v,i)=>`<div><span>TP${i+1}</span><b style="color:var(--main)">${fmt(v)}</b></div>`).join('')}</div>`;
+<div class="tg">${r.tps.map((v,i)=>`<div><span>TP${i+1}</span><b style="color:var(--main)">${fmt(v)}</b></div>`).join('')}</div>${psH}`;
 $('res').innerHTML=`<div class="card" style="animation:fade .3s ease"><div class="rowb" style="margin-bottom:12px"><div><div style="font-size:20px;font-weight:700">${r.pair}</div><div style="font-size:12px;color:var(--mut)">${r.tf} · ${t(r.s)}</div></div><span class="badge ${r.side}">${r.side==='LONG'?'▲':r.side==='SHORT'?'▼':'⏸'} ${t(r.side)}</span></div>
 <div class="rowb"><span class="lbl" style="margin:0">${t('conf')}</span><b id="cfN">0%</b></div><div class="conf"><i id="cfB"></i></div>
-<div style="margin-bottom:12px"><span class="badge ${r.liq?'liq':'WAIT'}">${r.liq?t('liq'):(r.vol<80?t('lowliq'):r.vol+'% vol')}</span></div>
+<div style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap"><span class="badge ${r.liq?'liq':'WAIT'}">${r.liq?t('liq'):(r.vol<80?t('lowliq'):r.vol+'% vol')}</span>${mb}</div>${al}
 ${body}<span class="lbl">${t('levels')}</span><div class="ladder">${lad}</div>
 <span class="lbl">${t('reasons')}</span><div style="font-size:14px;line-height:1.8;margin-bottom:16px">${r.why.map(w=>'• '+t(w)).join('<br>')}</div>
 <div class="btns"><button class="btn sec2" id="svBtn" ${r.side==='WAIT'?'disabled':''}>${t('save')}</button><button class="btn pri" id="sdBtn">${t('send')}</button></div></div>`;
 requestAnimationFrame(()=>{$('cfB').style.width=r.conf+'%'});countUp($('cfN'),r.conf,'%');
-$('svBtn').onclick=async e=>{if(signals.some(x=>x.id===r.id)){toast(t('saved'));return}const {lv,why,...keep}=r;signals.unshift(keep);signals=signals.slice(0,60);burst(e.currentTarget);SA.haptic('ok');toast(t('saved'));renderHist();renderStats();try{await SA.set('signals',signals)}catch(x){}};
+$('svBtn').onclick=async e=>{if(signals.some(x=>x.id===r.id)){toast(t('saved'));return}const {lv,why,ps,nd,...keep}=r;signals.unshift(keep);signals=signals.slice(0,60);burst(e.currentTarget);SA.haptic('ok');toast(t('saved'));renderHist();renderStats();try{await SA.set('signals',signals)}catch(x){}};
 $('sdBtn').onclick=async()=>{try{await SA.submit({type:'signal',pair:r.pair,timeframe:r.tf,school:r.s,side:r.side,entry:fmt(r.price),tp:r.tps.map(fmt),sl:r.sl?fmt(r.sl):null,rr:r.rr.toFixed(2),confidence:r.conf+'%',liquidity:r.vol+'%'});SA.haptic('ok');toast(t('sent'))}catch(x){SA.haptic('error')}}}
 function renderHist(){if(!signals.length){$('hist').innerHTML=`<div class="card empty"><div class="e">🗂️</div><h3>${t('emptyH')}</h3><p>${t('emptyHt')}</p></div>`;return}
 $('hist').innerHTML=signals.map(s=>`<div class="hi"><div class="top"><div><div class="pair">${s.pair} <span class="badge ${s.side}" style="padding:3px 8px;font-size:11px">${t(s.side)}</span></div><div class="meta num">${new Date(s.at).toLocaleString(lang==='ar'?'ar':'en',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'})} · ${s.tf} · ${t(s.s)}</div></div><span class="st ${s.status}">${s.status==='tp'?t('tp'):s.status==='sl'?t('slh'):t('open')}</span></div>
@@ -207,6 +235,10 @@ $('hist').innerHTML=signals.map(s=>`<div class="hi"><div class="top"><div><div c
 $('hist').querySelectorAll('[data-a]').forEach(b=>b.onclick=async()=>{const id=+b.dataset.id,a=b.dataset.a;
 if(a==='del')signals=signals.filter(x=>x.id!==id);else{const s=signals.find(x=>x.id===id);if(s)s.status=a}
 SA.haptic(a==='sl'?'error':'ok');renderHist();renderStats();try{await SA.set('signals',signals)}catch(x){}})}
+function monthly(){const n=new Date(),cols=[];for(let i=5;i>=0;i--){const d=new Date(n.getFullYear(),n.getMonth()-i,1),y=d.getFullYear(),m=d.getMonth();
+const cl=signals.filter(s=>{const a=new Date(s.at);return s.status!=='open'&&a.getFullYear()===y&&a.getMonth()===m});const w=cl.filter(s=>s.status==='tp').length,wr=cl.length?Math.round(w/cl.length*100):null;
+cols.push(`<div class="mcol"><b class="num" style="color:${wr==null?'var(--mut)':wr>=50?'var(--main)':'var(--red)'}">${wr==null?'-':wr+'%'}</b><div class="mbar ${wr==null?'z':''}" data-h="${wr==null?4:Math.max(6,wr*.9)}"></div><span>${d.toLocaleString(lang==='ar'?'ar':'en',{month:'short'})}</span></div>`)}
+return`<div class="card"><span class="lbl">${t('monthly')}</span><div class="mchart">${cols.join('')}</div></div>`}
 function renderStats(){const cl=signals.filter(s=>s.status!=='open'),w=cl.filter(s=>s.status==='tp').length;
 if(!signals.length||!cl.length){$('stats').innerHTML=`<div class="card empty"><div class="e">🎯</div><h3>${t('emptyS')}</h3><p>${t('emptySt')}</p></div>`;return}
 const wr=Math.round(w/cl.length*100),C=2*Math.PI*50;
@@ -215,8 +247,8 @@ const best=Object.entries(by).sort((a,b)=>b[1].w/b[1].n-a[1].w/a[1].n)[0];
 const pc={};signals.forEach(s=>pc[s.pair]=(pc[s.pair]||0)+1);const bp=Object.entries(pc).sort((a,b)=>b[1]-a[1])[0];
 $('stats').innerHTML=`<div class="card"><span class="lbl">${t('win')}</span><div class="ring"><svg viewBox="0 0 120 120"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#7C5CFF"/><stop offset="1" stop-color="#19E3A1"/></linearGradient></defs><circle cx="60" cy="60" r="50" stroke="#0E131D" stroke-width="12" fill="none"/><circle id="rg" cx="60" cy="60" r="50" stroke="url(#g)" stroke-width="12" fill="none" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C}" style="transition:stroke-dashoffset 1s cubic-bezier(.2,.8,.2,1)"/></svg><div><div class="big num" id="wrN">0%</div><div style="color:var(--mut);font-size:13px"><span class="num">${w} / ${cl.length}</span> ${t('wins')}</div></div></div></div>
 <div class="card kp"><div><b class="num">${signals.length}</b><span>${t('total')}</span></div><div><b class="num">${cl.length}</b><span>${t('closed')}</span></div><div><b class="num" style="color:var(--main)">${signals.filter(s=>s.side==='LONG').length}</b><span>${t('longs')}</span></div><div><b class="num" style="color:var(--red)">${signals.filter(s=>s.side==='SHORT').length}</b><span>${t('shorts')}</span></div>
-<div><b style="font-size:17px">${t(best[0])}</b><span>${t('best')} · <span class="num">${Math.round(best[1].w/best[1].n*100)}%</span></span></div><div><b style="font-size:17px">${bp[0]}</b><span>${t('bestp')}</span></div></div>`;
-requestAnimationFrame(()=>requestAnimationFrame(()=>{const g=$('rg');if(g)g.style.strokeDashoffset=C*(1-wr/100)}));countUp($('wrN'),wr,'%')}
+<div><b style="font-size:17px">${t(best[0])}</b><span>${t('best')} · <span class="num">${Math.round(best[1].w/best[1].n*100)}%</span></span></div><div><b style="font-size:17px">${bp[0]}</b><span>${t('bestp')}</span></div></div>${monthly()}`;
+requestAnimationFrame(()=>requestAnimationFrame(()=>{const g=$('rg');if(g)g.style.strokeDashoffset=C*(1-wr/100);document.querySelectorAll('.mbar').forEach(b=>b.style.height=b.dataset.h+'px')}));countUp($('wrN'),wr,'%')}
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.sec').forEach(s=>s.classList.toggle('on',s.id==='s-'+b.dataset.tab));SA.haptic('tap');if(b.dataset.tab==='st')renderStats();window.scrollTo({top:0,behavior:'smooth'})});
 applyLang();
 });
