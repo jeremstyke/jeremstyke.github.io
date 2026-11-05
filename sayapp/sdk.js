@@ -208,13 +208,13 @@
   // 5 nov 2026 (01h40, Jeremy): SayApp ad network creative, interstitial ('int') or rewarded ('rw'), in the player's language
   var NETAD = {
     sa: { u: 'https://t.me/SayAppBuilderBot?start=src_sayapp_ad', c1: '#7c4dff', c2: '#22d3ee', g: '#a78bfa', ic: ['🎮', '🪙', '🧠', '🚀', '🏆'], lg: '✦',
-      t: { fr: ['Crée ta propre appli Telegram en 2 minutes', "Décris ton idée en une phrase. L'IA la construit et la met en ligne sur ton propre bot.", ['🆓 Gratuit 48 h pour essayer', '💰 Gagne de l\'argent : pubs et étoiles', '⚡ Sans coder, rien à installer'], '✨ Créer mon appli gratuitement'],
-        en: ['Build your own Telegram app in 2 minutes', 'Describe your idea in one sentence. The AI builds it and puts it live on your own bot.', ['🆓 Free for 48 h to try it', '💰 Earn money: ads and Stars', '⚡ No code, nothing to install'], '✨ Build my app for free'],
-        es: ['Crea tu propia app de Telegram en 2 minutos', 'Describe tu idea en una frase. La IA la crea y la publica en tu propio bot.', ['🆓 Gratis 48 h para probarla', '💰 Gana dinero: anuncios y Stars', '⚡ Sin programar, nada que instalar'], '✨ Crear mi app gratis'],
-        pt: ['Crie seu próprio app do Telegram em 2 minutos', 'Descreva sua ideia em uma frase. A IA cria e coloca no ar no seu próprio bot.', ['🆓 Grátis por 48 h para testar', '💰 Ganhe dinheiro: anúncios e Stars', '⚡ Sem programar, nada para instalar'], '✨ Criar meu app grátis'],
-        ru: ['Создай своё приложение Telegram за 2 минуты', 'Опиши идею одной фразой. ИИ создаст его и запустит в твоём боте.', ['🆓 48 ч бесплатно, чтобы попробовать', '💰 Зарабатывай: реклама и Stars', '⚡ Без кода и установки'], '✨ Создать приложение бесплатно'],
-        id: ['Buat aplikasi Telegram-mu dalam 2 menit', 'Jelaskan idemu dalam satu kalimat. AI membuatnya dan menayangkannya di botmu sendiri.', ['🆓 Gratis 48 jam untuk dicoba', '💰 Hasilkan uang: iklan dan Stars', '⚡ Tanpa coding, tanpa instalasi'], '✨ Buat aplikasiku gratis'],
-        tr: ['Kendi Telegram uygulamanı 2 dakikada yap', 'Fikrini tek cümleyle anlat. Yapay zekâ onu yapar ve kendi botunda yayına alır.', ['🆓 Denemek için 48 saat ücretsiz', '💰 Para kazan: reklamlar ve Stars', '⚡ Kod yok, kurulum yok'], '✨ Uygulamamı ücretsiz yap'] } },
+      t: { fr: ['Crée ta propre appli Telegram en 2 minutes', "Décris ton idée en une phrase. L'IA la construit et la met en ligne sur ton propre bot.", ['💰 Gagne de l\'argent : pubs et étoiles', '⚡ Sans coder, rien à installer'], '✨ Créer mon appli gratuitement'],
+        en: ['Build your own Telegram app in 2 minutes', 'Describe your idea in one sentence. The AI builds it and puts it live on your own bot.', ['💰 Earn money: ads and Stars', '⚡ No code, nothing to install'], '✨ Build my app for free'],
+        es: ['Crea tu propia app de Telegram en 2 minutos', 'Describe tu idea en una frase. La IA la crea y la publica en tu propio bot.', ['💰 Gana dinero: anuncios y Stars', '⚡ Sin programar, nada que instalar'], '✨ Crear mi app gratis'],
+        pt: ['Crie seu próprio app do Telegram em 2 minutos', 'Descreva sua ideia em uma frase. A IA cria e coloca no ar no seu próprio bot.', ['💰 Ganhe dinheiro: anúncios e Stars', '⚡ Sem programar, nada para instalar'], '✨ Criar meu app grátis'],
+        ru: ['Создай своё приложение Telegram за 2 минуты', 'Опиши идею одной фразой. ИИ создаст его и запустит в твоём боте.', ['💰 Зарабатывай: реклама и Stars', '⚡ Без кода и установки'], '✨ Создать приложение бесплатно'],
+        id: ['Buat aplikasi Telegram-mu dalam 2 menit', 'Jelaskan idemu dalam satu kalimat. AI membuatnya dan menayangkannya di botmu sendiri.', ['💰 Hasilkan uang: iklan dan Stars', '⚡ Tanpa coding, tanpa instalasi'], '✨ Buat aplikasiku gratis'],
+        tr: ['Kendi Telegram uygulamanı 2 dakikada yap', 'Fikrini tek cümleyle anlat. Yapay zekâ onu yapar ve kendi botunda yayına alır.', ['💰 Para kazan: reklamlar ve Stars', '⚡ Kod yok, kurulum yok'], '✨ Uygulamamı ücretsiz yap'] } },
     mct: { u: 'https://t.me/Memecointycoonbot?startapp=src_sayapp_ad', c1: '#16c784', c2: '#f5b70a', g: '#34d399', ic: ['📈', '🐸', '💎', '🚀', '🪙'], lg: '📈',
       t: { fr: ['Lance ton memecoin et deviens n°1', 'Crée ta crypto, fais-la grimper et domine le classement des tycoons.', ['🆓 Gratuit, sans vrai argent', '🏆 Classement mondial en direct', '🎁 Concours et bonus chaque jour'], '🚀 Jouer gratuitement'],
         en: ['Launch your memecoin and become #1', 'Create your coin, pump it and rule the tycoon leaderboard.', ['🆓 Free, no real money', '🏆 Live worldwide leaderboard', '🎁 Contests and daily bonuses'], '🚀 Play for free'],
@@ -233,11 +233,14 @@
         tr: ['Bayrağı tut, gerçek USDT kazan', 'Bayrağı kap, dayan ve yükselmek için arkadaşlarına pasla.', ['🆓 Ücretsiz, günde 1 dakika', '💵 USDT ile gerçek ödüller', '👥 Arkadaşlarla daha güzel'], '⚡ Ücretsiz oyna'] } }
   };
   var NETUI = { fr: ['SPONSORISÉ', 'Ta récompense arrive dans', 'Récupère ta récompense', '🎁 Récupérer ma récompense', 'Fermer'], en: ['SPONSORED', 'Your reward is coming in', 'Claim your reward', '🎁 Claim my reward', 'Close'], es: ['PATROCINADO', 'Tu recompensa llega en', 'Recoge tu recompensa', '🎁 Recoger mi recompensa', 'Cerrar'], pt: ['PATROCINADO', 'Sua recompensa chega em', 'Pegue sua recompensa', '🎁 Pegar minha recompensa', 'Fechar'], ru: ['РЕКЛАМА', 'Награда через', 'Забери награду', '🎁 Забрать награду', 'Закрыть'], id: ['SPONSOR', 'Hadiahmu datang dalam', 'Ambil hadiahmu', '🎁 Ambil hadiahku', 'Tutup'], tr: ['SPONSORLU', 'Ödülün geliyor:', 'Ödülünü al', '🎁 Ödülümü al', 'Kapat'] };
+  // 5 nov 2026 (13h35, Jeremy): the SayApp ad shows how many mini apps were created, instead of the free 48 h line
+  var MADETX = { fr: '🔥 {n} mini apps déjà créées', en: '🔥 {n} mini apps already built', es: '🔥 {n} mini apps ya creadas', pt: '🔥 {n} mini apps já criadas', ru: '🔥 Уже создано мини-приложений: {n}', id: '🔥 {n} mini app sudah dibuat', tr: '🔥 {n} mini uygulama oluşturuldu' };
   function houseAd(mode) {
     return new Promise(function (done) {
       if (document.getElementById('sayappH')) return done(mode !== 'int');
       var rw = mode !== 'int', lg = String(user.language_code || navigator.language || 'en').slice(0, 2).toLowerCase(), r = Math.random();
       var A = r < 0.8 ? NETAD.sa : r < 0.9 ? NETAD.mct : NETAD.ptb, L = A.t[lg] || A.t.en, U = NETUI[lg] || NETUI.en, left = rw ? 5 : 3, total = left;
+      if (A === NETAD.sa) { try { if (INFO && INFO.made) LS('sa_made', INFO.made); var mn = Number((INFO && INFO.made) || LS('sa_made') || 0), MT = MADETX[lg] || MADETX.en; L = [L[0], L[1], (mn > 0 ? [MT.replace('{n}', mn.toLocaleString('en'))] : []).concat(L[2]), L[3]]; } catch (z) {} }
       var hu = A.u.replace('src_sayapp_ad', 'src_sax_' + String(APP).replace(/[^a-z0-9]/gi, ''));
       var e = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
       if (!document.getElementById('sayappHcss')) { var st = document.createElement('style'); st.id = 'sayappHcss'; st.textContent =
