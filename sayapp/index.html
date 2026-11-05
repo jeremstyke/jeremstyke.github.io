@@ -1159,13 +1159,14 @@ input.tk:focus{border-color:var(--v)}
     call('devinfo').then(function (r) {
       if (!r.ok) { $('devP').textContent = T.net; return; }
       // 3 nov 2026 (21h25, Jeremy): the developer is paid with credits (Stars or USDT)
-      var dc = Number(r.credits || 0), p = dc ? dc.toLocaleString(LOC) : Number(r.price || 1500).toLocaleString(LOC), cw = function (x) { return dc ? x.replace('⭐', CR.cr) : x; };
+      var dc = Number(r.credits || 0), p = dc ? dc.toLocaleString(LOC) : (r.usd ? fmtUsd(r.usd) + ' $ · ' : '') + Number(r.price || 1500).toLocaleString(LOC),  /* 5 nov 2026 (00h52, Jeremy): 19.99 $, in USDT first */ cw = function (x) { return dc ? x.replace('⭐', CR.cr) : x; };
       $('devP').textContent = cw(T.devP(p));
       if (r.full) $('devF').innerHTML = '<div class="blk"><p>' + esc(T.devFull) + '</p></div>';
       else if (!pros.length) $('devF').innerHTML = '<div class="blk"><p>' + esc(T.devPro) + '</p></div>';
       else {
         $('devF').innerHTML = (pros.length > 1 ? '<select class="xin" id="devA">' + pros.map(function (a) { return '<option value="' + esc(a.id) + '">' + esc(a.title || a.id) + '</option>'; }).join('') + '</select>' : '') +
-          '<div class="field" style="margin-top:8px"><textarea id="devX" maxlength="2000" style="min-height:110px" placeholder="' + esc(T.devPh) + '"></textarea></div><button class="cta gold" id="devGo">' + esc(cw(T.devGo(p))) + '</button>' + (dc ? '<div class="quota">' + esc(Number((S.lim && S.lim.credits) || 0) === 1 ? NP.have.replace('{n}', 1).replace(/(cr[ée]dit|kredi)(o)?s\b/i, '$1$2').replace('кредитов', 'кредит') : NP.have.replace('{n}', Number((S.lim && S.lim.credits) || 0))) + '</div>' : '');
+          '<div class="field" style="margin-top:8px"><textarea id="devX" maxlength="2000" style="min-height:110px" placeholder="' + esc(T.devPh) + '"></textarea></div>' + (!dc && r.usd && S.lim && S.lim.usdt ? '<button class="cta" id="devU">💵 ' + esc(ofT().payU.replace('{u}', fmtUsd(r.usd))) + '</button>' : '') + '<button class="' + (!dc && r.usd && S.lim && S.lim.usdt ? 'ghost' : 'cta gold') + '" id="devGo" style="margin-top:8px">' + esc(cw(T.devGo(p))) + '</button>' + (dc ? '<div class="quota">' + esc(Number((S.lim && S.lim.credits) || 0) === 1 ? NP.have.replace('{n}', 1).replace(/(cr[ée]dit|kredi)(o)?s\b/i, '$1$2').replace('кредитов', 'кредит') : NP.have.replace('{n}', Number((S.lim && S.lim.credits) || 0))) + '</div>' : '');
+        if ($('devU')) $('devU').onclick = function () { var v = $('devX').value.trim(); if (v.length < 15) { hap('err'); return toast(T.devShort); } var bt = $('devU'); bt.disabled = true; call('dev', { id: $('devA') ? $('devA').value : pros[0].id, text: v, pay: 'usdt' }).then(function (x) { bt.disabled = false; if (!x.ok) { hap('err'); return toast(x.error === 'full' ? T.devFull : x.error === 'sub' ? T.devPro : x.error === 'short' ? T.devShort : T.inv); } payUsdt(0, S.lim, bt, Number(x.usd)); }); };
         $('devGo').onclick = function () {
           var v = $('devX').value.trim(); if (v.length < 15) { hap('err'); return toast(T.devShort); }
           $('devGo').disabled = true;
