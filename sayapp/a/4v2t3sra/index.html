@@ -1,4 +1,4 @@
-<!-- sayapp 4v2t3sra v10 -->
+<!-- sayapp 4v2t3sra v11 -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -33,6 +33,10 @@ section.active{display:block}
 .lbl{font-size:10.5px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--mut)}
 .val{font-size:22px;font-weight:800;margin-top:2px;font-variant-numeric:tabular-nums}
 .stat.hl .val{background:linear-gradient(90deg,var(--main),#9dffd6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat.hl{position:relative}
+.pwr{position:absolute;top:8px;right:8px;display:flex;gap:3px;pointer-events:none}
+.pwr span{display:grid;place-items:center;width:24px;height:24px;border-radius:8px;font-size:14px;background:rgba(140,235,255,.12);box-shadow:0 0 12px rgba(140,235,255,.35);animation:fin .3s cubic-bezier(.2,.9,.3,1.4),bob 1.4s ease-in-out .3s infinite}
+.pwr span.mg{background:rgba(255,90,90,.14);box-shadow:0 0 12px rgba(255,90,90,.4)}
 .bump{animation:bump .25s ease}
 @keyframes bump{50%{transform:scale(1.06)}}
 #boardWrap{position:relative;margin:0 auto;border-radius:22px;overflow:hidden;background:linear-gradient(160deg,#0f1729,#090e1a);box-shadow:0 0 0 1px rgba(46,242,160,.18),0 18px 40px rgba(0,0,0,.5),0 0 40px rgba(46,242,160,.08);touch-action:none;transition:box-shadow .3s}
@@ -125,7 +129,7 @@ footer{text-align:center;font-size:11px;color:#4d5875;margin-top:20px;letter-spa
 <main>
   <section id="play" class="active">
     <div class="stats">
-      <div class="stat hl"><div class="lbl" data-i="score">Score</div><div class="val" id="scoreV">0</div></div>
+      <div class="stat hl"><div class="lbl" data-i="score">Score</div><div class="val" id="scoreV">0</div><div class="pwr" id="pwr"></div></div>
       <div class="stat"><div class="lbl" data-i="best">Record</div><div class="val" id="bestV">0</div></div>
       <div class="stat"><div class="lbl" data-i="lvl">Niveau</div><div class="val" id="lvlV">1</div></div>
     </div>
@@ -163,12 +167,12 @@ window.addEventListener('load',async()=>{
 const SA=window.SayApp||{user:null,get:async()=>null,set:async()=>{},top:async()=>[],haptic:()=>{},ad:async()=>false};
 const $=s=>document.querySelector(s);
 const N=17,FRUITS=['🍌','🍒','🍓','🍎','🍇','🍉','🍑','🍫','🐭','🍪','🧀','🍍'];
-const fe=document.getElementById('fruitEl');
+const fe=document.getElementById('fruitEl'),pwEl=document.getElementById('pwr');
 let cv=$('#cv'),ctx=cv.getContext('2d'),size=300,cell=20;
 let snake=[],dir={x:1,y:0},queue=[],fruit=null,score=0,shown=0,eaten=0,stepMs=150,acc=0,last=0;
 let running=false,paused=false,busy=false,usedContinue=false,dead=false,deadAt=0,cause='';
 let best=0,games=0,totalFruits=0,walls=false,parts=[],toastT;
-let rocks=[],level=1,slowUntil=0,tick=0,shield=false;
+let rocks=[],level=1,slowUntil=0,tick=0,shield=false,magnetUntil=0;
 let lang='fr',uname='',ovKind='start',ovRec=false;
 const SKINS=[
 {id:'classic',head:'#8dffd0',glow:'46,242,160',body:k=>`hsl(${152+k*24},${90-k*15}%,${60-k*24}%)`},
@@ -186,9 +190,9 @@ const has=s=>(!s.need&&!s.stars)||(s.need&&prog(s)>=1)||owned.includes(s.id);
 const L={
 fr:{title:'Snake : Mange, Grandis, Ne te mords pas',hi:'Salut',score:'Score',best:'Record',lvl:'Niveau',hint:'Swipe pour tourner',myBest:'Ton record',games:'Parties',fruits:'Fruits',top:'🏆 Meilleurs serpents',play:'🎮 Jouer',rank:'🏆 Classement',pause:'Pause',
 dRock:'Écrasé par un rocher mobile !',dWall:'Aïe, tu as foncé dans le mur !',dRock2:'Boum, un rocher sur ton chemin !',dSelf:"Tu t'es mordu la queue !",
-tMove:'⚠️ Attention, les rochers commencent à bouger !',tShield:'🛡️ Bouclier activé : un rocher ne te fera rien',tShieldUsed:'🛡️ Bouclier utilisé, rocher pulvérisé !',tSlow:'🍄 Ralenti pendant 5 secondes',tNoAd:'Aucune vidéo disponible pour le moment',tEnd:'Termine la partie pour changer de mode',tWallsOn:'Attention, les murs sont mortels !',tWallsOff:'Tu peux traverser les murs',
+tMove:'⚠️ Attention, les rochers commencent à bouger !',tMagnet:'🧲 Aimant activé : les fruits viennent à toi pendant 5 secondes',tShield:'🛡️ Bouclier activé : un rocher ne te fera rien',tShieldUsed:'🛡️ Bouclier utilisé, rocher pulvérisé !',tSlow:'🍄 Ralenti pendant 5 secondes',tNoAd:'Aucune vidéo disponible pour le moment',tEnd:'Termine la partie pour changer de mode',tWallsOn:'Attention, les murs sont mortels !',tWallsOff:'Tu peux traverser les murs',
 lvUp:'⚡ Niveau ',wallsOn:'🧱 Murs mortels',wallsOff:'🌀 Murs traversables',stT:'Prêt à croquer ?',
-stP:'Tous les 8 fruits, tu passes au niveau suivant : ça accélère doucement et des rochers apparaissent, dès le niveau 7 certains bougent ! ⭐ 50 pts, 🍄 ralentit, 💎 100 pts, 🛡️ protège d\'un rocher.',
+stP:'Tous les 8 fruits, tu passes au niveau suivant : ça accélère doucement et des rochers apparaissent, dès le niveau 7 certains bougent ! ⭐ 50 pts, 🍄 ralentit, 💎 100 pts, 🛡️ protège d\'un rocher, 🧲 attire les fruits.',
 playBtn:'▶ Jouer',psP:"Ton serpent t'attend sagement.",resume:'▶ Reprendre',restart:'↻ Recommencer',newRec:'🏆 Nouveau record !',replay:'↻ Rejouer',cont:'🎬 Continuer avec une vidéo',seeRank:'Voir le classement',loading:'Chargement...',
 over:(l,b,e)=>`Niveau ${l} · Record : ${b} · ${e} fruit${e>1?'s':''} mangé${e>1?'s':''}`,
 emptyT:'Le classement est vide',emptyP:'Fais une partie et deviens le premier serpent de la liste !',playNow:'Jouer maintenant',player:'Joueur',you:'toi',
@@ -198,9 +202,9 @@ tEquip:'Skin équipé !',tBuyOk:'Merci ! Skin débloqué 🎉',tBuyKo:'Achat ann
 sk_classic:'Classique',sk_fire:'Lave',sk_ocean:'Océan',sk_candy:'Bonbon',sk_gold:'Or royal',sk_rainbow:'Arc-en-ciel',sk_galaxy:'Galaxie'},
 en:{title:"Snake: Eat, Grow, Don't Bite",hi:'Hi',score:'Score',best:'Best',lvl:'Level',hint:'Swipe to turn',myBest:'Your best',games:'Games',fruits:'Fruits',top:'🏆 Top snakes',play:'🎮 Play',rank:'🏆 Leaderboard',pause:'Pause',
 dRock:'Crushed by a moving rock!',dWall:'Ouch, you hit the wall!',dRock2:'Boom, a rock in your way!',dSelf:'You bit your own tail!',
-tMove:'⚠️ Watch out, the rocks start moving!',tShield:'🛡️ Shield on: one rock cannot hurt you',tShieldUsed:'🛡️ Shield used, rock smashed!',tSlow:'🍄 Slowed down for 5 seconds',tNoAd:'No video available right now',tEnd:'Finish the game to change mode',tWallsOn:'Careful, walls are deadly!',tWallsOff:'You can go through walls',
+tMove:'⚠️ Watch out, the rocks start moving!',tMagnet:'🧲 Magnet on: fruits come to you for 5 seconds',tShield:'🛡️ Shield on: one rock cannot hurt you',tShieldUsed:'🛡️ Shield used, rock smashed!',tSlow:'🍄 Slowed down for 5 seconds',tNoAd:'No video available right now',tEnd:'Finish the game to change mode',tWallsOn:'Careful, walls are deadly!',tWallsOff:'You can go through walls',
 lvUp:'⚡ Level ',wallsOn:'🧱 Deadly walls',wallsOff:'🌀 Pass-through walls',stT:'Ready to munch?',
-stP:'Every 8 fruits you reach the next level: it speeds up gently and rocks appear, from level 7 some of them move! ⭐ 50 pts, 🍄 slows down, 💎 100 pts, 🛡️ blocks one rock.',
+stP:'Every 8 fruits you reach the next level: it speeds up gently and rocks appear, from level 7 some of them move! ⭐ 50 pts, 🍄 slows down, 💎 100 pts, 🛡️ blocks one rock, 🧲 pulls the fruits.',
 playBtn:'▶ Play',psP:'Your snake is waiting patiently.',resume:'▶ Resume',restart:'↻ Restart',newRec:'🏆 New record!',replay:'↻ Play again',cont:'🎬 Continue with a video',seeRank:'See the leaderboard',loading:'Loading...',
 over:(l,b,e)=>`Level ${l} · Best: ${b} · ${e} fruit${e>1?'s':''} eaten`,
 emptyT:'The leaderboard is empty',emptyP:'Play a game and become the first snake on the list!',playNow:'Play now',player:'Player',you:'you',
@@ -271,6 +275,7 @@ function placeFruit(noGold){
     else if(r<.2)f={e:'⭐',pts:50,kind:'gold',dur:6000};
     else if(level>=2&&r<.32)f={e:'🍄',pts:20,kind:'slow',dur:7000};
     else if(level>=2&&!shield&&r<.42)f={e:'🛡️',pts:15,kind:'shield',dur:7000};
+    else if(level>=2&&r<.5)f={e:'🧲',pts:15,kind:'magnet',dur:7000};
   }
   fruit={x:p.x,y:p.y,e:f.e,pts:f.pts,kind:f.kind,dur:f.dur,gold:f.kind!=='n',until:now+f.dur,born:now};
 }
@@ -299,6 +304,17 @@ function levelUp(){
   if(level===7)toast(T('tMove'));
   const l=$('#lv');l.textContent=T('lvUp')+level;l.classList.remove('pop');void l.offsetWidth;l.classList.add('pop');hap('ok');
 }
+function pullFruit(){
+  const h=snake[0];let tx=h.x+dir.x,ty=h.y+dir.y;if(!walls){tx=(tx+N)%N;ty=(ty+N)%N}
+  const dx=tx-fruit.x,dy=ty-fruit.y;if(!dx&&!dy)return;
+  const sx=Math.sign(dx),sy=Math.sign(dy),opts=Math.abs(dx)>=Math.abs(dy)?[[sx,0],[0,sy]]:[[0,sy],[sx,0]];
+  for(const[ox,oy]of opts){
+    if(!ox&&!oy)continue;const nx=fruit.x+ox,ny=fruit.y+oy;
+    if(nx<0||ny<0||nx>=N||ny>=N)continue;
+    if(snake.some(s=>s.x===nx&&s.y===ny)||rocks.some(r=>r.x===nx&&r.y===ny))continue;
+    fruit.x=nx;fruit.y=ny;return;
+  }
+}
 function useShield(rock){
   if(!shield||!rock)return false;
   shield=false;rocks=rocks.filter(o=>o!==rock);
@@ -325,10 +341,12 @@ function step(now){
     burst(h.x,h.y,fruit.gold);floatTxt(h.x,h.y,'+'+pts,fruit.gold);hap(fruit.gold?'ok':'tap');
     if(fruit.kind==='slow'){slowUntil=now+5000;toast(T('tSlow'))}
     if(fruit.kind==='shield'){shield=true;toast(T('tShield'))}
+    if(fruit.kind==='magnet'){magnetUntil=now+5000;toast(T('tMagnet'))}
     if(eaten%8===0)levelUp();
     stepMs=Math.max(75,165-(level-1)*8-(eaten%8));setScore();placeFruit();
   }else snake.pop();
   if(fruit&&fruit.gold&&now>fruit.until)placeFruit(true);
+  if(fruit&&now<magnetUntil)pullFruit();
   tick++;if(tick%2===0)moveRocks(now);
 }
 function die(c){
@@ -367,14 +385,17 @@ function draw(t){
     const cx=(fruit.x+.5)*cell,cy=(fruit.y+.5)*cell,b=1+Math.sin(t/220)*.07,ap=Math.max(0,Math.min(1,(t-fruit.born)/220));
     ctx.fillStyle='rgba(0,0,0,.28)';ctx.beginPath();ctx.ellipse(cx,cy+cell*.36,cell*.3*b*ap,cell*.09*ap,0,0,7);ctx.fill();
     if(fruit.gold){
-      const fc=fruit.kind==='slow'?'rgba(170,130,255,':fruit.kind==='gem'?'rgba(80,190,255,':fruit.kind==='shield'?'rgba(46,242,160,':'rgba(255,201,60,';
+      const fc=fruit.kind==='magnet'?'rgba(255,90,90,':fruit.kind==='slow'?'rgba(170,130,255,':fruit.kind==='gem'?'rgba(80,190,255,':fruit.kind==='shield'?'rgba(46,242,160,':'rgba(255,201,60,';
       const wp=(t%1100)/1100;ctx.globalAlpha=(1-wp)*.7*ap;ctx.strokeStyle=fc+'1)';ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,cell*(.5+wp*.6),0,7);ctx.stroke();ctx.globalAlpha=1;
       const k=Math.max(0,(fruit.until-t)/fruit.dur);ctx.strokeStyle=fc+'.95)';ctx.lineWidth=2.5;ctx.lineCap='round';ctx.beginPath();ctx.arc(cx,cy,cell*.6,-Math.PI/2,-Math.PI/2+k*Math.PI*2);ctx.stroke();
     }
-    const key=fruit.x+','+fruit.y+fruit.e+fruit.born+'|'+cell;
-    if(fe.dataset.k!==key){fe.dataset.k=key;fe.innerHTML='<span>'+fruit.e+'</span>';fe.style.left=cx+'px';fe.style.top=cy+'px';fe.style.fontSize=(cell*.86)+'px'}
+    const key=fruit.e+fruit.born+'|'+cell,pk=fruit.x+','+fruit.y;
+    if(fe.dataset.k!==key){fe.dataset.k=key;fe.dataset.p='';fe.style.transition='none';fe.innerHTML='<span>'+fruit.e+'</span>';fe.style.fontSize=(cell*.86)+'px'}
+    if(fe.dataset.p!==pk){if(fe.dataset.p)fe.style.transition='left .12s linear,top .12s linear';fe.dataset.p=pk;fe.style.left=cx+'px';fe.style.top=cy+'px'}
     fe.style.display='block';
   }else{fe.style.display='none';fe.dataset.k=''}
+  const pw=(shield&&!dead?'s':'')+(!dead&&t<magnetUntil?'m':'');
+  if(pwEl.dataset.k!==pw){pwEl.dataset.k=pw;pwEl.innerHTML=(pw.includes('s')?'<span>🛡️</span>':'')+(pw.includes('m')?'<span class="mg">🧲</span>':'')}
   const L=snake.length,p=cell*.1,blink=dead&&t-deadAt<720&&Math.floor((t-deadAt)/120)%2===0;
   for(let i=L-1;i>=0;i--){
     const s=snake[i],k=L>1?i/(L-1):0;
@@ -431,7 +452,7 @@ const hideOverlay=()=>$('#ov').classList.remove('show');
 function setPauseBtn(){$('#pauseBtn').classList.toggle('on',running&&!paused&&!busy)}
 async function startGame(){
   if(busy)return;busy=true;hideOverlay();dead=false;running=false;paused=false;
-  rocks=[];level=1;slowUntil=0;tick=0;shield=false;spawnSnake(4);score=0;eaten=0;stepMs=165;usedContinue=false;parts=[];placeFruit(true);setScore();games++;setPauseBtn();
+  rocks=[];level=1;slowUntil=0;magnetUntil=0;tick=0;shield=false;spawnSnake(4);score=0;eaten=0;stepMs=165;usedContinue=false;parts=[];placeFruit(true);setScore();games++;setPauseBtn();
   await countdown();acc=0;running=true;busy=false;setPauseBtn();
 }
 async function continueGame(btn){
@@ -439,7 +460,7 @@ async function continueGame(btn){
   let ok=false;try{ok=await SA.ad()}catch(e){}
   if(!ok){btn.disabled=false;btn.textContent=T('cont');toast(T('tNoAd'));return}
   busy=true;usedContinue=true;hideOverlay();dead=false;spawnSnake(Math.min(snake.length,6));
-  rocks=rocks.filter(r=>r.y!==Math.floor(N/2));slowUntil=0;placeFruit(true);
+  rocks=rocks.filter(r=>r.y!==Math.floor(N/2));slowUntil=0;magnetUntil=0;placeFruit(true);
   await countdown();acc=0;running=true;busy=false;setPauseBtn();
 }
 function pause(){if(!running||paused||busy)return;paused=true;showOverlay('pause');setPauseBtn()}
