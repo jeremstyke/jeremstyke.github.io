@@ -1,4 +1,4 @@
-<!-- sayapp 4v2t3sra v11 -->
+<!-- sayapp 4v2t3sra v12 -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -96,7 +96,9 @@ html,body{overscroll-behavior:none}
 .empty .eb{font-size:44px;margin-bottom:8px}
 .empty p{color:var(--mut);margin:6px 0 16px;line-height:1.4}
 nav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));display:flex;gap:6px;padding:6px;background:rgba(17,26,44,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 40px rgba(0,0,0,.5);max-width:460px;margin:0 auto}
-nav button{flex:1;height:50px;border:0;border-radius:16px;background:transparent;color:var(--mut);font:600 14.5px 'Outfit',system-ui,sans-serif;display:flex;align-items:center;justify-content:center;gap:6px;transition:.2s}
+nav button{flex:1;min-width:0;height:54px;border:0;border-radius:16px;background:transparent;color:var(--mut);font:600 11.5px 'Outfit',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;transition:.2s;white-space:nowrap;overflow:hidden}
+nav .ni{font-size:19px;line-height:1}
+=======
 nav button.active{background:linear-gradient(135deg,rgba(46,242,160,.2),rgba(18,195,168,.1));color:var(--main)}
 nav button:active{transform:scale(.95)}
 footer{text-align:center;font-size:11px;color:#4d5875;margin-top:20px;letter-spacing:.5px}
@@ -116,6 +118,19 @@ footer{text-align:center;font-size:11px;color:#4d5875;margin-top:20px;letter-spa
 .sktag.lk{color:var(--mut)}
 .skbar{width:80%;height:5px;border-radius:9px;background:rgba(255,255,255,.07);overflow:hidden}
 .skbar b{display:block;height:100%;background:linear-gradient(90deg,var(--main),var(--main2));border-radius:9px}
+.achhead{background:linear-gradient(135deg,rgba(255,201,60,.16),rgba(255,159,67,.05));border:1px solid rgba(255,201,60,.28);border-radius:var(--r);padding:16px;margin-bottom:16px;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+#achN{background:linear-gradient(90deg,var(--gold),#ffe6a3);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:28px}
+.achbar{height:8px;border-radius:9px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:10px}
+.achbar b{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),#ff9f43);border-radius:9px;transition:width .6s ease}
+.achgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:24px}
+.bdg{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 6px 12px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(180deg,var(--card2),var(--card));color:var(--text);font-family:'Outfit',system-ui,sans-serif;min-width:0;animation:fade .3s ease both;transition:transform .15s;cursor:pointer}
+.bdg:active{transform:scale(.94)}
+.bdg .bi{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:24px;background:rgba(255,255,255,.05);filter:grayscale(1);opacity:.45}
+.bdg.on{border-color:rgba(255,201,60,.4)}
+.bdg.on .bi{filter:none;opacity:1;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.35),transparent 60%),linear-gradient(135deg,var(--gold),#ff9f43);box-shadow:0 0 18px rgba(255,201,60,.45)}
+.bdg .bn{font-size:12.5px;font-weight:700;text-align:center;line-height:1.2;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.bdg .skbar{width:70%}
+.bdg .ok{font-size:11px;font-weight:700;color:var(--gold)}
 #toast{position:fixed;left:50%;top:calc(var(--sa-top,0px) + 70px);transform:translate(-50%,-20px);opacity:0;background:var(--card2);border:1px solid var(--line);padding:12px 18px;border-radius:14px;font-weight:600;font-size:14px;transition:.25s;pointer-events:none;z-index:9;box-shadow:0 10px 30px rgba(0,0,0,.4);max-width:90vw;text-align:center}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 </style>
@@ -152,12 +167,20 @@ footer{text-align:center;font-size:11px;color:#4d5875;margin-top:20px;letter-spa
     <div class="sk-sub" data-i="skSub">Débloque des skins en jouant ou offre-toi les skins premium</div>
     <div class="skgrid" id="skinGrid"></div>
   </section>
+  <section id="ach">
+    <div class="sec-title" data-i="achTitle">🏅 Tes succès</div>
+    <div class="achhead"><div class="lbl" data-i="achCount">Badges débloqués</div><div class="val" id="achN">0/13</div><div class="achbar"><b id="achFill"></b></div></div>
+    <div class="achgrid" id="achGrid"></div>
+    <div class="sec-title" data-i="achTop">🏅 Classement des succès</div>
+    <div id="achRank"></div>
+  </section>
   <footer>Made with SayApp</footer>
 </main>
 <nav>
-  <button class="active" data-tab="play" data-i="play">🎮 Jouer</button>
-  <button data-tab="rank" data-i="rank">🏆 Classement</button>
-  <button data-tab="skins" data-i="skinsTab">🎨 Skins</button>
+  <button class="active" data-tab="play"><span class="ni">🎮</span><span data-i="navPlay">Jouer</span></button>
+  <button data-tab="rank"><span class="ni">🏆</span><span data-i="navRank">Classement</span></button>
+  <button data-tab="skins"><span class="ni">🎨</span><span data-i="navSkins">Skins</span></button>
+  <button data-tab="ach"><span class="ni">🏅</span><span data-i="navAch">Succès</span></button>
 </nav>
 <div id="toast"></div>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -184,6 +207,16 @@ const SKINS=[
 {id:'galaxy',stars:75,head:'#d9c8ff',glow:'160,110,255',body:(k,i,t)=>`hsl(${265+Math.sin(t/300+i*.6)*35},85%,${58-k*22}%)`}
 ];
 let skin='classic',owned=[],buying=false,knownUnl=null;
+let ax={lv:1,gem:0,sh:0,wb:0},knownAch=null;
+const ACH=[
+{id:'first',e:'🐣',v:()=>games,n:1},{id:'g10',e:'🎮',v:()=>games,n:10},{id:'g50',e:'🕹️',v:()=>games,n:50},
+{id:'f50',e:'🍎',v:()=>totalFruits,n:50},{id:'f500',e:'🍉',v:()=>totalFruits,n:500},
+{id:'s100',e:'⭐',v:()=>best,n:100},{id:'s500',e:'🔥',v:()=>best,n:500},{id:'s1000',e:'👑',v:()=>best,n:1000},
+{id:'l5',e:'⚡',v:()=>ax.lv,n:5},{id:'l10',e:'🚀',v:()=>ax.lv,n:10},
+{id:'gem',e:'💎',v:()=>ax.gem,n:1},{id:'sh',e:'🛡️',v:()=>ax.sh,n:1},{id:'wall',e:'🧱',v:()=>ax.wb,n:200}
+];
+const achDone=a=>(Number(a.v())||0)>=a.n;
+const achCount=()=>ACH.filter(achDone).length;
 const SK=()=>SKINS.find(s=>s.id===skin)||SKINS[0];
 const prog=s=>{if(!s.need)return 1;const v={best,fruits:totalFruits,games}[s.need[0]]||0;return Math.min(1,v/s.need[1])};
 const has=s=>(!s.need&&!s.stars)||(s.need&&prog(s)>=1)||owned.includes(s.id);
@@ -199,7 +232,9 @@ emptyT:'Le classement est vide',emptyP:'Fais une partie et deviens le premier se
 skinsTab:'🎨 Skins',skTitle:'🎨 Tes skins',skSub:'Débloque des skins en jouant ou offre-toi les skins premium',equipped:'Équipé',choose:'Choisir',
 need_best:n=>`Record ${n}`,need_fruits:n=>`${n} fruits`,need_games:n=>`${n} parties`,
 tEquip:'Skin équipé !',tBuyOk:'Merci ! Skin débloqué 🎉',tBuyKo:'Achat annulé',tLocked:'Continue de jouer pour le débloquer !',tNewSkin:'🎨 Nouveau skin débloqué :',
-sk_classic:'Classique',sk_fire:'Lave',sk_ocean:'Océan',sk_candy:'Bonbon',sk_gold:'Or royal',sk_rainbow:'Arc-en-ciel',sk_galaxy:'Galaxie'},
+sk_classic:'Classique',sk_fire:'Lave',sk_ocean:'Océan',sk_candy:'Bonbon',sk_gold:'Or royal',sk_rainbow:'Arc-en-ciel',sk_galaxy:'Galaxie',
+navPlay:'Jouer',navRank:'Classement',navSkins:'Skins',navAch:'Succès',achTitle:'🏅 Tes succès',achCount:'Badges débloqués',achTop:'🏅 Classement des succès',tAch:'🏅 Succès débloqué :',emptyAP:'Débloque ton premier badge et prends la tête !',
+achT:{first:['Premier pas','Joue ta première partie'],g10:['Habitué','Joue 10 parties'],g50:['Accro','Joue 50 parties'],f50:['Gourmand','Mange 50 fruits au total'],f500:['Glouton','Mange 500 fruits au total'],s100:['Bon départ','Atteins un record de 100'],s500:['Pro du serpent','Atteins un record de 500'],s1000:['Roi du Snake','Atteins un record de 1000'],l5:['Rapide','Atteins le niveau 5'],l10:['Supersonique','Atteins le niveau 10'],gem:['Chasseur de diamants','Mange un diamant 💎'],sh:['Intouchable','Pulvérise un rocher avec le bouclier'],wall:['Sans filet','Fais 200 points avec les murs mortels']}},
 en:{title:"Snake: Eat, Grow, Don't Bite",hi:'Hi',score:'Score',best:'Best',lvl:'Level',hint:'Swipe to turn',myBest:'Your best',games:'Games',fruits:'Fruits',top:'🏆 Top snakes',play:'🎮 Play',rank:'🏆 Leaderboard',pause:'Pause',
 dRock:'Crushed by a moving rock!',dWall:'Ouch, you hit the wall!',dRock2:'Boom, a rock in your way!',dSelf:'You bit your own tail!',
 tMove:'⚠️ Watch out, the rocks start moving!',tMagnet:'🧲 Magnet on: fruits come to you for 5 seconds',tShield:'🛡️ Shield on: one rock cannot hurt you',tShieldUsed:'🛡️ Shield used, rock smashed!',tSlow:'🍄 Slowed down for 5 seconds',tNoAd:'No video available right now',tEnd:'Finish the game to change mode',tWallsOn:'Careful, walls are deadly!',tWallsOff:'You can go through walls',
@@ -211,7 +246,9 @@ emptyT:'The leaderboard is empty',emptyP:'Play a game and become the first snake
 skinsTab:'🎨 Skins',skTitle:'🎨 Your skins',skSub:'Unlock skins by playing or treat yourself to premium skins',equipped:'Equipped',choose:'Choose',
 need_best:n=>`Best ${n}`,need_fruits:n=>`${n} fruits`,need_games:n=>`${n} games`,
 tEquip:'Skin equipped!',tBuyOk:'Thanks! Skin unlocked 🎉',tBuyKo:'Purchase cancelled',tLocked:'Keep playing to unlock it!',tNewSkin:'🎨 New skin unlocked:',
-sk_classic:'Classic',sk_fire:'Lava',sk_ocean:'Ocean',sk_candy:'Candy',sk_gold:'Royal gold',sk_rainbow:'Rainbow',sk_galaxy:'Galaxy'}
+sk_classic:'Classic',sk_fire:'Lava',sk_ocean:'Ocean',sk_candy:'Candy',sk_gold:'Royal gold',sk_rainbow:'Rainbow',sk_galaxy:'Galaxy',
+navPlay:'Play',navRank:'Ranking',navSkins:'Skins',navAch:'Badges',achTitle:'🏅 Your achievements',achCount:'Badges unlocked',achTop:'🏅 Achievements ranking',tAch:'🏅 Achievement unlocked:',emptyAP:'Unlock your first badge and take the lead!',
+achT:{first:['First steps','Play your first game'],g10:['Regular','Play 10 games'],g50:['Hooked','Play 50 games'],f50:['Hungry','Eat 50 fruits in total'],f500:['Glutton','Eat 500 fruits in total'],s100:['Good start','Reach a best of 100'],s500:['Snake pro','Reach a best of 500'],s1000:['Snake king','Reach a best of 1000'],l5:['Fast','Reach level 5'],l10:['Supersonic','Reach level 10'],gem:['Diamond hunter','Eat a diamond 💎'],sh:['Untouchable','Smash a rock with the shield'],wall:['No safety net','Score 200 with deadly walls']}}
 };
 const T=k=>{const d=L[lang]||L.fr;return d[k]!==undefined?d[k]:(L.fr[k]!==undefined?L.fr[k]:k)};
 try{const tw=window.Telegram&&Telegram.WebApp,u=tw&&tw.initDataUnsafe&&tw.initDataUnsafe.user;const c=String((u&&u.language_code)||(SA.user&&SA.user.language_code)||'').slice(0,2).toLowerCase();lang=c==='en'?'en':'fr'}catch(e){}
@@ -225,6 +262,7 @@ function applyLang(){
   if($('#ov').classList.contains('show'))showOverlay(ovKind,ovRec);
   if($('#rank').classList.contains('active'))loadRank();
   if($('#skins').classList.contains('active'))renderSkins();
+  if($('#ach').classList.contains('active'))renderAch();
 }
 function renderSkins(){
   $('#skinGrid').innerHTML=SKINS.map((s,i)=>{const ok=has(s),on=s.id===skin;
@@ -247,6 +285,23 @@ async function pickSkin(id){
 function checkUnlocks(){
   if(!knownUnl)return;const n=SKINS.filter(s=>s.need&&has(s)&&!knownUnl.includes(s.id));
   n.forEach(s=>knownUnl.push(s.id));if(n.length)setTimeout(()=>toast(T('tNewSkin')+' '+T('sk_'+n[0].id)),900);
+}
+function checkAch(){
+  if(!knownAch)return;const n=ACH.filter(a=>achDone(a)&&!knownAch.includes(a.id));
+  n.forEach(a=>knownAch.push(a.id));
+  if(n.length)setTimeout(()=>{toast(T('tAch')+' '+n[0].e+' '+T('achT')[n[0].id][0]);hap('ok')},1700);
+}
+function renderAch(){
+  const c=achCount(),d=T('achT');$('#achN').textContent=c+'/'+ACH.length;$('#achFill').style.width=Math.round(c/ACH.length*100)+'%';
+  $('#achGrid').innerHTML=ACH.map((a,i)=>{const v=Math.min(a.n,Number(a.v())||0),ok=v>=a.n;
+    return `<button class="bdg${ok?' on':''}" data-act="badge" data-id="${a.id}" style="animation-delay:${i*30}ms"><div class="bi">${a.e}</div><div class="bn">${d[a.id][0]}</div>${ok?'<span class="ok">✓</span>':`<div class="skbar"><b style="width:${Math.round(v/a.n*100)}%"></b></div>`}</button>`}).join('');
+  loadAchRank();
+}
+async function loadAchRank(){
+  const list=$('#achRank');list.innerHTML='<div class="sk"></div>'.repeat(3);
+  let rows=[];try{rows=((await SA.top('badges',20))||[]).filter(r=>Number(r.value)>0)}catch(e){}
+  if(!rows.length){list.innerHTML=`<div class="empty"><div class="eb">🏅</div><b>${T('emptyT')}</b><p>${T('emptyAP')}</p><button class="btn" data-act="goplay">${T('playNow')}</button></div>`;return}
+  list.innerHTML=rows.map((r,i)=>{const n=r.name||T('player');return `<div class="row${r.me?' me':''}" style="animation-delay:${i*40}ms"><div class="pos">${i<3?['🥇','🥈','🥉'][i]:i+1}</div><div class="av">${esc(n.charAt(0).toUpperCase())}</div><div class="nm">${esc(n)}${r.me?`<span class="you">${T('you')}</span>`:''}</div><div class="vl">🏅 ${Number(r.value)||0}</div></div>`}).join('');
 }
 const hap=k=>{try{SA.haptic(k)}catch(e){}};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
@@ -299,7 +354,7 @@ function moveRocks(now){
   }
 }
 function levelUp(){
-  level++;addRocks(Math.min(2,1+Math.floor(level/4)));
+  level++;if(level>ax.lv){ax.lv=level;checkAch()}addRocks(Math.min(2,1+Math.floor(level/4)));
   if(level>=7&&rocks.filter(r=>r.m).length<5)addRocks(1,true);
   if(level===7)toast(T('tMove'));
   const l=$('#lv');l.textContent=T('lvUp')+level;l.classList.remove('pop');void l.offsetWidth;l.classList.add('pop');hap('ok');
@@ -317,7 +372,7 @@ function pullFruit(){
 }
 function useShield(rock){
   if(!shield||!rock)return false;
-  shield=false;rocks=rocks.filter(o=>o!==rock);
+  shield=false;rocks=rocks.filter(o=>o!==rock);if(!ax.sh){ax.sh=1;checkAch()}
   burst(rock.x,rock.y,true);floatTxt(rock.x,rock.y,'🛡️',true);hap('ok');toast(T('tShieldUsed'));
   return true;
 }
@@ -342,6 +397,7 @@ function step(now){
     if(fruit.kind==='slow'){slowUntil=now+5000;toast(T('tSlow'))}
     if(fruit.kind==='shield'){shield=true;toast(T('tShield'))}
     if(fruit.kind==='magnet'){magnetUntil=now+5000;toast(T('tMagnet'))}
+    if(fruit.kind==='gem'&&!ax.gem){ax.gem=1;checkAch()}
     if(eaten%8===0)levelUp();
     stepMs=Math.max(75,165-(level-1)*8-(eaten%8));setScore();placeFruit();
   }else snake.pop();
@@ -353,9 +409,10 @@ function die(c){
   running=false;dead=true;deadAt=performance.now();cause=c;hap('error');
   const w=$('#boardWrap');w.classList.remove('shake');void w.offsetWidth;w.classList.add('shake');
   const rec=score>best&&score>0;if(rec){best=score;$('#bestV').textContent=best}
-  save();checkUnlocks();setPauseBtn();setTimeout(()=>showOverlay('over',rec),650);
+  if(walls&&score>ax.wb)ax.wb=score;
+  save();checkUnlocks();checkAch();setPauseBtn();setTimeout(()=>showOverlay('over',rec),650);
 }
-function save(){try{SA.set('best',best);SA.set('stats',{games,fruits:totalFruits})}catch(e){}}
+function save(){try{SA.set('best',best);SA.set('stats',{games,fruits:totalFruits});SA.set('ach',ax);SA.set('badges',achCount())}catch(e){}}
 function setScore(){
   const from=shown,to=score,t0=performance.now(),el=$('#scoreV');shown=to;
   (function f(t){const k=Math.min(1,(t-t0)/250);el.textContent=Math.round(from+(to-from)*k);if(k<1)requestAnimationFrame(f)})(t0);
@@ -469,7 +526,7 @@ function updWalls(){$('#wallsBtn').textContent=walls?T('wallsOn'):T('wallsOff');
 function showTab(name){
   document.querySelectorAll('section').forEach(s=>s.classList.toggle('active',s.id===name));
   document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));
-  if(name==='rank'){pause();loadRank()}else if(name==='skins'){pause();renderSkins()}else resize();
+  if(name==='rank'){pause();loadRank()}else if(name==='skins'){pause();renderSkins()}else if(name==='ach'){pause();renderAch()}else resize();
   window.scrollTo(0,0);
 }
 async function loadRank(){
@@ -484,6 +541,7 @@ document.addEventListener('click',e=>{
   if(act==='start')startGame();else if(act==='resume')resume();else if(act==='continue')continueGame(a);
   else if(act==='rank')showTab('rank');else if(act==='goplay'){showTab('play');if(!running&&!busy)startGame()}
   else if(act==='skin')pickSkin(a.dataset.id);
+  else if(act==='badge'){const b=ACH.find(x=>x.id===a.dataset.id);if(b){const d=T('achT')[b.id],v=Math.min(b.n,Number(b.v())||0);toast(b.e+' '+d[0]+' : '+d[1]+(v>=b.n?' ✓':' ('+v+'/'+b.n+')'))}}
 });
 document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{hap('tap');showTab(b.dataset.tab)}));
 $('#pauseBtn').addEventListener('click',()=>{hap('tap');pause()});
@@ -524,9 +582,11 @@ try{
   const sl=await SA.get('lang');if(sl==='fr'||sl==='en')lang=sl;
   const sv=await SA.get('skin');if(sv)skin=sv;
   const ow=await SA.get('owned');if(Array.isArray(ow))owned=ow;
+  const ac=await SA.get('ach');if(ac&&typeof ac==='object')ax=Object.assign(ax,ac);
 }catch(e){}
 try{if(SA.purchases){const ps=await SA.purchases();(ps||[]).forEach(p=>{const id=String(p.item||'').replace('skin_','');if(SKINS.some(s=>s.id===id)&&!owned.includes(id))owned.push(id)})}}catch(e){}
 if(!has(SK()))skin='classic';knownUnl=SKINS.filter(s=>s.need&&has(s)).map(s=>s.id);
+knownAch=ACH.filter(achDone).map(a=>a.id);try{Promise.resolve(SA.set('badges',knownAch.length)).catch(()=>{})}catch(e){}
 $('#bestV').textContent=best;if(!running&&!busy)updWalls();applyLang();
 });
 </script>
