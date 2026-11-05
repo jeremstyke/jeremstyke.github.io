@@ -65,8 +65,8 @@
     hasPay: function () { return (adsReady || Promise.resolve()).then(function () { return !!(ADS && ADS.pay); }); },
     hasAd: function () { return (adsReady || Promise.resolve()).then(function () { return true; }); },
     // 4 nov 2026 (23h45, Jeremy): interstitial of the owner (between two games), at most once every 2 minutes, nothing without his ad code
-    interstitial: function () { return (adsReady || Promise.resolve()).then(function () { var own = !!(ADS && (ADS.agi || ADS.ag || ADS.agx)), hs = !!(ADS && ADS.h) && (!own || Math.random() < 0.5); if (!own && !hs) return false; var k = 'sayapp_it_' + APP, last = 0; try { last = Number(sessionStorage.getItem(k) || 0); } catch (e) {} if (Date.now() - last < 120000) return false; try { sessionStorage.setItem(k, String(Date.now())); } catch (e) {} if (hs) return houseAd('int'); return playAd(ADS.agi || ADS.ag); }).catch(function () { return false; }); },
-    ad: function () { return (adsReady || Promise.resolve()).then(function () { return ADS && (ADS.ag || ADS.agx) ? playAd(ADS.ag) : ADS && ADS.h ? houseAd('rw') : true; }); },  // 5 nov 2026 (01h20, Jeremy): SayApp ad network (opt-in) when the owner has no code  // 4 nov 2026 (23h43, Jeremy): without the owner's own ad code, the reward is given right away, no SayApp promo
+    interstitial: function () { return (adsReady || Promise.resolve()).then(function () { var own = !!(ADS && (ADS.agi || ADS.ag || ADS.agx)), hs = !!(ADS && ADS.h && ADS.hi !== false) && (!own || Math.random() < 0.5); if (!own && !hs) return false; var k = 'sayapp_it_' + APP, last = 0; try { last = Number(sessionStorage.getItem(k) || 0); } catch (e) {} if (Date.now() - last < 120000) return false; try { sessionStorage.setItem(k, String(Date.now())); } catch (e) {} if (hs) return houseDue(false) ? houseAd('int') : false; return playAd(ADS.agi || ADS.ag); }).catch(function () { return false; }); },
+    ad: function () { return (adsReady || Promise.resolve()).then(function () { return ADS && (ADS.ag || ADS.agx) ? playAd(ADS.ag) : ADS && ADS.h && ADS.hr !== false ? houseAd('rw') : true; }); },  // 5 nov 2026 (01h20, Jeremy): SayApp ad network (opt-in) when the owner has no code  // 4 nov 2026 (23h43, Jeremy): without the owner's own ad code, the reward is given right away, no SayApp promo
     haptic: function (k) {
       try { var h = tw.HapticFeedback; if (k === 'ok') h.notificationOccurred('success'); else if (k === 'error') h.notificationOccurred('error'); else h.impactOccurred('light'); } catch (e) {}
     }
@@ -208,7 +208,7 @@
   function houseAd(mode) {
     return new Promise(function (done) {
       if (document.getElementById('sayappH')) return done(mode !== 'int');
-      var net = !!(ADS && ADS.h), h = !net && SHOWCASE.indexOf(APP) >= 0 ? EXAMPLE : Math.random() < (net ? 0.4 : 0.6) ? HOUSE[0] : HOUSE[1 + Math.floor(Math.random() * (HOUSE.length - 1))], left = mode === 'rw' || !mode ? 5 : 3, rw = mode === 'rw' || !mode;
+      var net = !!(ADS && ADS.h), h = !net && SHOWCASE.indexOf(APP) >= 0 ? EXAMPLE : Math.random() < (net ? 0.8 : 0.6) ? HOUSE[0] : HOUSE[1 + Math.floor(Math.random() * (HOUSE.length - 1))], left = mode === 'rw' || !mode ? 5 : 3, rw = mode === 'rw' || !mode;
       var hu = net ? h.u.replace('src_sayapp_ad', 'src_sax_' + String(APP).replace(/[^a-z0-9]/gi, '')) : h.u;
       css('#sayappH{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(5,5,12,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font-family:Inter,system-ui,-apple-system,sans-serif;animation:sayappF .25s ease}@keyframes sayappF{from{opacity:0}}#sayappH .k{width:100%;max-width:340px;border-radius:26px;overflow:hidden;background:#11111d;border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 80px -20px #000;color:#fff;text-align:center;animation:sayappU .35s cubic-bezier(.2,.9,.3,1.2)}@keyframes sayappU{from{transform:translateY(30px) scale(.96);opacity:0}}#sayappH .v{height:190px;display:grid;place-items:center;font-size:84px;position:relative}#sayappH .v i{position:absolute;top:12px;left:12px;font:700 10px Inter,sans-serif;letter-spacing:.12em;background:rgba(0,0,0,.35);padding:4px 8px;border-radius:99px;font-style:normal}#sayappH .v s{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:99px;display:grid;place-items:center;background:rgba(0,0,0,.4);font:700 13px Inter,sans-serif;text-decoration:none}#sayappH h3{margin:18px 18px 6px;font-size:21px}#sayappH p{margin:0 22px 18px;color:#a9a8c4;font-size:14px;line-height:1.45}#sayappH a{display:block;margin:0 18px 10px;padding:15px;border-radius:16px;color:#1a1000;font:800 16px Inter,sans-serif;text-decoration:none}#sayappH button{display:block;width:calc(100% - 36px);margin:0 18px 18px;padding:13px;border:0;border-radius:14px;background:rgba(255,255,255,.08);color:#fff;font:600 14px Inter,sans-serif}#sayappH button:disabled{opacity:.45}');
       var x = document.createElement('div'); x.id = 'sayappH';
@@ -233,11 +233,15 @@
     return;  // 4 nov 2026 (23h43, Jeremy): no more SayApp promo at the opening of client apps
   }
   // 5 nov 2026 (01h20, Jeremy): SayApp ad network (opt-in in Manage): a promo of SayApp, Meme Coin Tycoon or Pass The Baton at opening, once an hour per player
-  function houseOpen() {
-    if (window.top !== window) return;
-    var k = 'sayapp_ho_' + APP, last = 0; try { last = Number(localStorage.getItem(k) || 0); } catch (e) {}
-    if (Date.now() - last < 3600000) return;
+  // the owner picks the delay between two SayApp interstitials (ADS.hd minutes: 0 = each opening, 60, 360, 1440)
+  function houseDue(open) {
+    var hd = ADS && ADS.hd != null ? Number(ADS.hd) : 60, k = 'sayapp_ho_' + APP, last = 0; try { last = Number(localStorage.getItem(k) || 0); } catch (e) {}
+    if (Date.now() - last < (hd > 0 ? hd * 60000 : open ? 0 : 120000)) return false;
     try { localStorage.setItem(k, String(Date.now())); } catch (e) {}
+    return true;
+  }
+  function houseOpen() {
+    if (window.top !== window || !houseDue(true)) return;
     setTimeout(function () { houseAd('int'); }, 1200);
   }
   function openAd() {
@@ -247,6 +251,6 @@
     try { localStorage.setItem(k, String(Date.now())); } catch (e) {}
     setTimeout(function () { playAd(ADS.agi || ADS.ag); }, 1200);
   }
-  function boot() { webBar(null); adsReady = call({ action: 'info' }).then(function (i) { ADS = (i && i.ads) || null; INFO = i; show(i); webBar(i); if (ADS && ADS.h && (!(ADS.open && (ADS.ag || ADS.agx)) || Math.random() < 0.5)) houseOpen(); else if (ADS && (ADS.ag || ADS.agx)) openAd(); else demoAd(i); return i; }); madeLink(); setTimeout(madeLink, 1500); setTimeout(function () { madeLink(true); }, 4000); }
+  function boot() { webBar(null); adsReady = call({ action: 'info' }).then(function (i) { ADS = (i && i.ads) || null; INFO = i; show(i); webBar(i); if (ADS && ADS.h && ADS.hi !== false && (!(ADS.open && (ADS.ag || ADS.agx)) || Math.random() < 0.5)) houseOpen(); else if (ADS && (ADS.ag || ADS.agx)) openAd(); else demoAd(i); return i; }); madeLink(); setTimeout(madeLink, 1500); setTimeout(function () { madeLink(true); }, 4000); }
   if (document.body) boot(); else document.addEventListener('DOMContentLoaded', boot);
 })();
