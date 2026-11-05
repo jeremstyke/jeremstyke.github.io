@@ -1,4 +1,4 @@
-<!-- sayapp 4v2t3sra v12 -->
+<!-- sayapp 4v2t3sra v13 -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -63,6 +63,8 @@ html,body{overscroll-behavior:none}
 .btn:active{transform:scale(.96)}
 .btn.ghost{background:rgba(255,255,255,.06);color:var(--text);box-shadow:inset 0 0 0 1px var(--line);margin-top:8px}
 .btn.ad{background:linear-gradient(135deg,#ff7a9c,var(--accent));color:#fff;box-shadow:0 10px 26px rgba(255,77,125,.35);margin-top:8px}
+.btn.ad2{background:linear-gradient(135deg,#ffd76a,#ffad33);color:#2b1a00;box-shadow:0 10px 26px rgba(255,201,60,.35),inset 0 1px 0 rgba(255,255,255,.5);margin-top:8px}
+.rec.sr{margin:10px 0 0;background:rgba(140,235,255,.14);color:#aef0ff}
 .btn:disabled{opacity:.6}
 #cd{position:absolute;inset:0;display:grid;place-items:center;font-size:96px;font-weight:800;color:var(--main);text-shadow:0 0 40px rgba(46,242,160,.7);pointer-events:none}
 .pop{animation:pop .55s ease forwards}
@@ -196,7 +198,7 @@ let snake=[],dir={x:1,y:0},queue=[],fruit=null,score=0,shown=0,eaten=0,stepMs=15
 let running=false,paused=false,busy=false,usedContinue=false,dead=false,deadAt=0,cause='';
 let best=0,games=0,totalFruits=0,walls=false,parts=[],toastT;
 let rocks=[],level=1,slowUntil=0,tick=0,shield=false,magnetUntil=0;
-let lang='fr',uname='',ovKind='start',ovRec=false;
+let lang='fr',uname='',ovKind='start',ovRec=false,nextShield=false,lastAdAt=0;
 const SKINS=[
 {id:'classic',head:'#8dffd0',glow:'46,242,160',body:k=>`hsl(${152+k*24},${90-k*15}%,${60-k*24}%)`},
 {id:'fire',need:['best',150],head:'#ffd27a',glow:'255,140,50',body:k=>`hsl(${40-k*35},100%,${60-k*18}%)`},
@@ -226,7 +228,7 @@ dRock:'Écrasé par un rocher mobile !',dWall:'Aïe, tu as foncé dans le mur !'
 tMove:'⚠️ Attention, les rochers commencent à bouger !',tMagnet:'🧲 Aimant activé : les fruits viennent à toi pendant 5 secondes',tShield:'🛡️ Bouclier activé : un rocher ne te fera rien',tShieldUsed:'🛡️ Bouclier utilisé, rocher pulvérisé !',tSlow:'🍄 Ralenti pendant 5 secondes',tNoAd:'Aucune vidéo disponible pour le moment',tEnd:'Termine la partie pour changer de mode',tWallsOn:'Attention, les murs sont mortels !',tWallsOff:'Tu peux traverser les murs',
 lvUp:'⚡ Niveau ',wallsOn:'🧱 Murs mortels',wallsOff:'🌀 Murs traversables',stT:'Prêt à croquer ?',
 stP:'Tous les 8 fruits, tu passes au niveau suivant : ça accélère doucement et des rochers apparaissent, dès le niveau 7 certains bougent ! ⭐ 50 pts, 🍄 ralentit, 💎 100 pts, 🛡️ protège d\'un rocher, 🧲 attire les fruits.',
-playBtn:'▶ Jouer',psP:"Ton serpent t'attend sagement.",resume:'▶ Reprendre',restart:'↻ Recommencer',newRec:'🏆 Nouveau record !',replay:'↻ Rejouer',cont:'🎬 Continuer avec une vidéo',seeRank:'Voir le classement',loading:'Chargement...',
+playBtn:'▶ Jouer',psP:"Ton serpent t'attend sagement.",resume:'▶ Reprendre',restart:'↻ Recommencer',newRec:'🏆 Nouveau record !',replay:'↻ Rejouer',cont:'🎬 Continuer avec une vidéo',shieldAd:'🎬 Vidéo : bouclier offert 🛡️',shieldReady:'🛡️ Bouclier prêt pour la prochaine partie',tShieldAd:'🛡️ Bouclier gardé pour ta prochaine partie !',seeRank:'Voir le classement',loading:'Chargement...',
 over:(l,b,e)=>`Niveau ${l} · Record : ${b} · ${e} fruit${e>1?'s':''} mangé${e>1?'s':''}`,
 emptyT:'Le classement est vide',emptyP:'Fais une partie et deviens le premier serpent de la liste !',playNow:'Jouer maintenant',player:'Joueur',you:'toi',
 skinsTab:'🎨 Skins',skTitle:'🎨 Tes skins',skSub:'Débloque des skins en jouant ou offre-toi les skins premium',equipped:'Équipé',choose:'Choisir',
@@ -240,7 +242,7 @@ dRock:'Crushed by a moving rock!',dWall:'Ouch, you hit the wall!',dRock2:'Boom, 
 tMove:'⚠️ Watch out, the rocks start moving!',tMagnet:'🧲 Magnet on: fruits come to you for 5 seconds',tShield:'🛡️ Shield on: one rock cannot hurt you',tShieldUsed:'🛡️ Shield used, rock smashed!',tSlow:'🍄 Slowed down for 5 seconds',tNoAd:'No video available right now',tEnd:'Finish the game to change mode',tWallsOn:'Careful, walls are deadly!',tWallsOff:'You can go through walls',
 lvUp:'⚡ Level ',wallsOn:'🧱 Deadly walls',wallsOff:'🌀 Pass-through walls',stT:'Ready to munch?',
 stP:'Every 8 fruits you reach the next level: it speeds up gently and rocks appear, from level 7 some of them move! ⭐ 50 pts, 🍄 slows down, 💎 100 pts, 🛡️ blocks one rock, 🧲 pulls the fruits.',
-playBtn:'▶ Play',psP:'Your snake is waiting patiently.',resume:'▶ Resume',restart:'↻ Restart',newRec:'🏆 New record!',replay:'↻ Play again',cont:'🎬 Continue with a video',seeRank:'See the leaderboard',loading:'Loading...',
+playBtn:'▶ Play',psP:'Your snake is waiting patiently.',resume:'▶ Resume',restart:'↻ Restart',newRec:'🏆 New record!',replay:'↻ Play again',cont:'🎬 Continue with a video',shieldAd:'🎬 Video: free shield 🛡️',shieldReady:'🛡️ Shield ready for your next game',tShieldAd:'🛡️ Shield saved for your next game!',seeRank:'See the leaderboard',loading:'Loading...',
 over:(l,b,e)=>`Level ${l} · Best: ${b} · ${e} fruit${e>1?'s':''} eaten`,
 emptyT:'The leaderboard is empty',emptyP:'Play a game and become the first snake on the list!',playNow:'Play now',player:'Player',you:'you',
 skinsTab:'🎨 Skins',skTitle:'🎨 Your skins',skSub:'Unlock skins by playing or treat yourself to premium skins',equipped:'Equipped',choose:'Choose',
@@ -502,23 +504,32 @@ function showOverlay(kind,rec){
   ovKind=kind;ovRec=!!rec;const b=$('#ovBox');
   if(kind==='start')b.innerHTML=`<div class="big-emo">🐍</div><h2>${T('stT')}</h2><p>${T('stP')}</p><button class="btn" data-act="start">${T('playBtn')}</button>`;
   else if(kind==='pause')b.innerHTML=`<div class="big-emo">⏸️</div><h2>${T('pause')}</h2><p>${T('psP')}</p><button class="btn" data-act="resume">${T('resume')}</button><button class="btn ghost" data-act="start">${T('restart')}</button>`;
-  else b.innerHTML=`${rec?`<div class="rec">${T('newRec')}</div>`:'<div class="big-emo">💥</div>'}<h2>${esc(T(cause))}</h2><div class="final">${score}</div><p>${T('over')(level,best,eaten)}</p><button class="btn" data-act="start">${T('replay')}</button>${!usedContinue&&score>0?`<button class="btn ad" data-act="continue">${T('cont')}</button>`:''}<button class="btn ghost" data-act="rank">${T('seeRank')}</button>`;
+  else b.innerHTML=`${rec?`<div class="rec">${T('newRec')}</div>`:'<div class="big-emo">💥</div>'}<h2>${esc(T(cause))}</h2><div class="final">${score}</div><p>${T('over')(level,best,eaten)}</p><button class="btn" data-act="start">${T('replay')}</button>${!usedContinue&&score>0?`<button class="btn ad" data-act="continue">${T('cont')}</button>`:nextShield?`<div class="rec sr">${T('shieldReady')}</div>`:`<button class="btn ad2" data-act="shieldad">${T('shieldAd')}</button>`}<button class="btn ghost" data-act="rank">${T('seeRank')}</button>`;
   $('#ov').classList.add('show');
 }
 const hideOverlay=()=>$('#ov').classList.remove('show');
 function setPauseBtn(){$('#pauseBtn').classList.toggle('on',running&&!paused&&!busy)}
-async function startGame(){
+async function startGame(fromOver){
   if(busy)return;busy=true;hideOverlay();dead=false;running=false;paused=false;
+  if(fromOver&&SA.interstitial&&Date.now()-lastAdAt>60000){try{await SA.interstitial()}catch(e){}}
   rocks=[];level=1;slowUntil=0;magnetUntil=0;tick=0;shield=false;spawnSnake(4);score=0;eaten=0;stepMs=165;usedContinue=false;parts=[];placeFruit(true);setScore();games++;setPauseBtn();
+  if(nextShield){shield=true;nextShield=false;toast(T('tShield'))}
   await countdown();acc=0;running=true;busy=false;setPauseBtn();
 }
 async function continueGame(btn){
   if(busy)return;btn.disabled=true;btn.textContent=T('loading');
   let ok=false;try{ok=await SA.ad()}catch(e){}
   if(!ok){btn.disabled=false;btn.textContent=T('cont');toast(T('tNoAd'));return}
-  busy=true;usedContinue=true;hideOverlay();dead=false;spawnSnake(Math.min(snake.length,6));
+  lastAdAt=Date.now();busy=true;usedContinue=true;hideOverlay();dead=false;spawnSnake(Math.min(snake.length,6));
   rocks=rocks.filter(r=>r.y!==Math.floor(N/2));slowUntil=0;magnetUntil=0;placeFruit(true);
   await countdown();acc=0;running=true;busy=false;setPauseBtn();
+}
+async function shieldAd(btn){
+  if(busy||nextShield)return;btn.disabled=true;btn.textContent=T('loading');
+  let ok=false;try{ok=await SA.ad()}catch(e){}
+  if(!ok){btn.disabled=false;btn.textContent=T('shieldAd');toast(T('tNoAd'));return}
+  lastAdAt=Date.now();nextShield=true;hap('ok');toast(T('tShieldAd'));
+  if(ovKind==='over'&&$('#ov').classList.contains('show'))showOverlay('over',ovRec);
 }
 function pause(){if(!running||paused||busy)return;paused=true;showOverlay('pause');setPauseBtn()}
 async function resume(){if(busy)return;busy=true;hideOverlay();await countdown();acc=0;paused=false;busy=false;setPauseBtn()}
@@ -538,7 +549,8 @@ async function loadRank(){
 }
 document.addEventListener('click',e=>{
   const a=e.target.closest('[data-act]');if(!a)return;const act=a.dataset.act;hap('tap');
-  if(act==='start')startGame();else if(act==='resume')resume();else if(act==='continue')continueGame(a);
+  if(act==='start')startGame(ovKind==='over'&&$('#ov').classList.contains('show'));else if(act==='resume')resume();else if(act==='continue')continueGame(a);
+  else if(act==='shieldad')shieldAd(a);
   else if(act==='rank')showTab('rank');else if(act==='goplay'){showTab('play');if(!running&&!busy)startGame()}
   else if(act==='skin')pickSkin(a.dataset.id);
   else if(act==='badge'){const b=ACH.find(x=>x.id===a.dataset.id);if(b){const d=T('achT')[b.id],v=Math.min(b.n,Number(b.v())||0);toast(b.e+' '+d[0]+' : '+d[1]+(v>=b.n?' ✓':' ('+v+'/'+b.n+')'))}}
