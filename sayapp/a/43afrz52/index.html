@@ -1,4 +1,4 @@
-<!-- sayapp 43afrz52 v2 -->
+<!-- sayapp 43afrz52 v3 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,6 +94,15 @@ nav button:active{transform:scale(.94)}
 .mbox h2{font-size:22px;text-transform:uppercase;letter-spacing:1px;text-shadow:2px 2px 0 var(--main2)}
 .mbox .num{font-size:72px;font-weight:700;color:var(--accent);line-height:1.1;margin:8px 0;text-shadow:4px 4px 0 #8a4b00}
 .mbox p{color:var(--mut);line-height:1.4}
+.shop{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.it{background:linear-gradient(180deg,var(--card),var(--bg2));clip-path:var(--px);padding:14px 12px;text-align:center;animation:fade .3s ease both}
+.it.sel{box-shadow:inset 0 0 0 2px var(--accent)}
+.it svg{width:64px;height:48px;margin:4px auto 8px;display:block;filter:drop-shadow(0 0 8px rgba(139,92,255,.6))}
+.it b{display:block;font-size:15px}
+.it small{display:block;color:var(--mut);font-size:12px;margin-top:2px;min-height:30px;line-height:1.25}
+.it .btn{font-size:13px;padding:10px;margin-top:10px;letter-spacing:1px}
+.turbo{font-size:40px;line-height:48px;height:48px;margin:4px 0 8px}
+.msg{text-align:center;color:var(--ok);font-weight:700;min-height:20px;margin-top:12px}
 </style>
 </head>
 <body>
@@ -135,6 +144,12 @@ nav button:active{transform:scale(.94)}
     <div id="board"></div>
   </section>
 
+  <section class="sec" id="s-shop">
+    <div class="card" style="padding-bottom:12px"><span class="lab" data-i="shopL"></span><p style="color:var(--mut);margin-top:6px" data-i="shopP"></p></div>
+    <div class="shop" id="shop"></div>
+    <div class="msg" id="shopMsg"></div>
+  </section>
+
   <div class="foot">Made with SayApp</div>
 </div>
 
@@ -142,6 +157,7 @@ nav button:active{transform:scale(.94)}
   <button class="on" data-tab="solo"><span>👾</span><em data-i="solo" style="font-style:normal"></em></button>
   <button data-tab="duel"><span>⚔️</span><em data-i="duel" style="font-style:normal"></em></button>
   <button data-tab="rank"><span>🏆</span><em data-i="rank" style="font-style:normal"></em></button>
+  <button data-tab="shop"><span>⭐</span><em data-i="shop" style="font-style:normal"></em></button>
 </div></nav>
 
 <div class="layer" id="play">
@@ -165,16 +181,16 @@ window.addEventListener('load',()=>{
 const S=window.SayApp||{user:{},get:async()=>null,set:async()=>{},top:async()=>[],haptic:()=>{}};
 const TG=window.Telegram&&Telegram.WebApp;try{TG&&TG.ready();TG&&TG.expand()}catch(e){}
 const T={
-en:{tag:'8-bit tap frenzy',heroT:'10 seconds. Tap like crazy.',heroP:'Smash the invader, chain fast taps for combos up to x4 and climb the world ranking.',best:'Best',played:'Games',last:'Last',play:'▶ Play',challenge:'⚔ Challenge a friend',solo:'Solo',duel:'Duel',rank:'Ranking',duelL:'Duel on one phone',duelP:'Two players, one phone. Each one gets 10 seconds, the highest score wins.',p1:'Player 1',p2:'Player 2',startDuel:'Start duel',lastDuel:'Last duel',noDuel:'No duel yet. Grab a friend!',world:'World ranking',worldP:'Best solo scores of all players.',score:'Score',tapStart:'Tap to start',turn:'turn',gameOver:'Game over',newBest:'New record!',tps:'taps/s',again:'Play again',close:'Close',next:'Go',nextTurn:'Pass the phone to',wins:'wins!',draw:'Draw!',rematch:'Rematch',loading:'Loading',empty:'No scores yet. Be the first legend!',you:'you',share:'I scored {n} in Pixel Pummel 👾 Can you beat me in 10 seconds?',combo:'COMBO',adBtn:'🎬 Watch a video: +3 s next game',adOk:'✓ +3 s ready for your next game',adNo:'No video available right now'},
-fr:{tag:'Frénésie de tap 8-bit',heroT:'10 secondes. Tape comme un fou.',heroP:'Écrase l\'envahisseur, enchaîne les taps rapides pour des combos jusqu\'à x4 et grimpe au classement mondial.',best:'Record',played:'Parties',last:'Dernier',play:'▶ Jouer',challenge:'⚔ Défier un ami',solo:'Solo',duel:'Duel',rank:'Classement',duelL:'Duel sur un téléphone',duelP:'Deux joueurs, un téléphone. Chacun a 10 secondes, le plus gros score gagne.',p1:'Joueur 1',p2:'Joueur 2',startDuel:'Lancer le duel',lastDuel:'Dernier duel',noDuel:'Pas encore de duel. Trouve un ami !',world:'Classement mondial',worldP:'Meilleurs scores solo de tous les joueurs.',score:'Score',tapStart:'Tape pour commencer',turn:'à toi',gameOver:'Partie finie',newBest:'Nouveau record !',tps:'taps/s',again:'Rejouer',close:'Fermer',next:'Go',nextTurn:'Passe le téléphone à',wins:'gagne !',draw:'Égalité !',rematch:'Revanche',loading:'Chargement',empty:'Aucun score. Sois la première légende !',you:'toi',share:'J\'ai fait {n} sur Pixel Pummel 👾 Tu me bats en 10 secondes ?',combo:'COMBO',adBtn:'🎬 Regarder une vidéo : +3 s à la prochaine partie',adOk:'✓ +3 s prêtes pour ta prochaine partie',adNo:'Aucune vidéo disponible pour le moment'},
-es:{tag:'Locura de toques 8-bit',heroT:'10 segundos. Toca sin parar.',heroP:'Aplasta al invasor, encadena toques rápidos para combos hasta x4 y sube en el ranking mundial.',best:'Récord',played:'Partidas',last:'Última',play:'▶ Jugar',challenge:'⚔ Retar a un amigo',solo:'Solo',duel:'Duelo',rank:'Ranking',duelL:'Duelo en un móvil',duelP:'Dos jugadores, un móvil. Cada uno tiene 10 segundos, gana la mayor puntuación.',p1:'Jugador 1',p2:'Jugador 2',startDuel:'Empezar duelo',lastDuel:'Último duelo',noDuel:'Aún no hay duelos. ¡Busca un amigo!',world:'Ranking mundial',worldP:'Mejores puntuaciones solo de todos.',score:'Puntos',tapStart:'Toca para empezar',turn:'tu turno',gameOver:'Fin del juego',newBest:'¡Nuevo récord!',tps:'toques/s',again:'Otra vez',close:'Cerrar',next:'Vamos',nextTurn:'Pasa el móvil a',wins:'¡gana!',draw:'¡Empate!',rematch:'Revancha',loading:'Cargando',empty:'Sin puntuaciones. ¡Sé la primera leyenda!',you:'tú',share:'Hice {n} en Pixel Pummel 👾 ¿Me ganas en 10 segundos?',combo:'COMBO',adBtn:'🎬 Ver un vídeo: +3 s en la próxima partida',adOk:'✓ +3 s listos para tu próxima partida',adNo:'No hay vídeo disponible ahora'},
-pt:{tag:'Frenesi de toques 8-bit',heroT:'10 segundos. Toque sem parar.',heroP:'Esmague o invasor, encadeie toques rápidos para combos até x4 e suba no ranking mundial.',best:'Recorde',played:'Partidas',last:'Última',play:'▶ Jogar',challenge:'⚔ Desafiar um amigo',solo:'Solo',duel:'Duelo',rank:'Ranking',duelL:'Duelo num celular',duelP:'Dois jogadores, um celular. Cada um tem 10 segundos, vence a maior pontuação.',p1:'Jogador 1',p2:'Jogador 2',startDuel:'Começar duelo',lastDuel:'Último duelo',noDuel:'Nenhum duelo ainda. Chame um amigo!',world:'Ranking mundial',worldP:'Melhores pontuações solo de todos.',score:'Pontos',tapStart:'Toque para começar',turn:'sua vez',gameOver:'Fim de jogo',newBest:'Novo recorde!',tps:'toques/s',again:'Jogar de novo',close:'Fechar',next:'Vai',nextTurn:'Passe o celular para',wins:'venceu!',draw:'Empate!',rematch:'Revanche',loading:'Carregando',empty:'Sem pontuações. Seja a primeira lenda!',you:'você',share:'Fiz {n} no Pixel Pummel 👾 Consegue me vencer em 10 segundos?',combo:'COMBO',adBtn:'🎬 Assistir um vídeo: +3 s na próxima partida',adOk:'✓ +3 s prontos para sua próxima partida',adNo:'Nenhum vídeo disponível agora'}};
+en:{tag:'8-bit tap frenzy',heroT:'10 seconds. Tap like crazy.',heroP:'Smash the invader, chain fast taps for combos up to x4 and climb the world ranking.',best:'Best',played:'Games',last:'Last',play:'▶ Play',challenge:'⚔ Challenge a friend',solo:'Solo',duel:'Duel',rank:'Ranking',duelL:'Duel on one phone',duelP:'Two players, one phone. Each one gets 10 seconds, the highest score wins.',p1:'Player 1',p2:'Player 2',startDuel:'Start duel',lastDuel:'Last duel',noDuel:'No duel yet. Grab a friend!',world:'World ranking',worldP:'Best solo scores of all players.',score:'Score',tapStart:'Tap to start',turn:'turn',gameOver:'Game over',newBest:'New record!',tps:'taps/s',again:'Play again',close:'Close',next:'Go',nextTurn:'Pass the phone to',wins:'wins!',draw:'Draw!',rematch:'Rematch',loading:'Loading',empty:'No scores yet. Be the first legend!',you:'you',share:'I scored {n} in Pixel Pummel 👾 Can you beat me in 10 seconds?',combo:'COMBO',adBtn:'🎬 Watch a video: +3 s next game',adOk:'✓ +3 s ready for your next game',adNo:'No video available right now',shop:'Shop',shopL:'Pixel shop',shopP:'Skins and boosts paid with Telegram Stars.',equip:'Equip',equipped:'Equipped',owned:'Owned',sk_base:'Classic',sk_gold:'Gold',sk_neon:'Neon',sk_ruby:'Ruby',skinD:'Invader skin',turbo:'Turbo +2 s',turboD:'+2 seconds in every solo game',bought:'Thanks! Unlocked',fail:'Payment cancelled'},
+fr:{tag:'Frénésie de tap 8-bit',heroT:'10 secondes. Tape comme un fou.',heroP:'Écrase l\'envahisseur, enchaîne les taps rapides pour des combos jusqu\'à x4 et grimpe au classement mondial.',best:'Record',played:'Parties',last:'Dernier',play:'▶ Jouer',challenge:'⚔ Défier un ami',solo:'Solo',duel:'Duel',rank:'Classement',duelL:'Duel sur un téléphone',duelP:'Deux joueurs, un téléphone. Chacun a 10 secondes, le plus gros score gagne.',p1:'Joueur 1',p2:'Joueur 2',startDuel:'Lancer le duel',lastDuel:'Dernier duel',noDuel:'Pas encore de duel. Trouve un ami !',world:'Classement mondial',worldP:'Meilleurs scores solo de tous les joueurs.',score:'Score',tapStart:'Tape pour commencer',turn:'à toi',gameOver:'Partie finie',newBest:'Nouveau record !',tps:'taps/s',again:'Rejouer',close:'Fermer',next:'Go',nextTurn:'Passe le téléphone à',wins:'gagne !',draw:'Égalité !',rematch:'Revanche',loading:'Chargement',empty:'Aucun score. Sois la première légende !',you:'toi',share:'J\'ai fait {n} sur Pixel Pummel 👾 Tu me bats en 10 secondes ?',combo:'COMBO',adBtn:'🎬 Regarder une vidéo : +3 s à la prochaine partie',adOk:'✓ +3 s prêtes pour ta prochaine partie',adNo:'Aucune vidéo disponible pour le moment',shop:'Boutique',shopL:'Boutique pixel',shopP:'Skins et boosts payés en étoiles Telegram.',equip:'Équiper',equipped:'Équipé',owned:'Acquis',sk_base:'Classique',sk_gold:'Or',sk_neon:'Néon',sk_ruby:'Rubis',skinD:'Skin de l\'envahisseur',turbo:'Turbo +2 s',turboD:'+2 secondes à chaque partie solo',bought:'Merci ! Débloqué',fail:'Paiement annulé'},
+es:{tag:'Locura de toques 8-bit',heroT:'10 segundos. Toca sin parar.',heroP:'Aplasta al invasor, encadena toques rápidos para combos hasta x4 y sube en el ranking mundial.',best:'Récord',played:'Partidas',last:'Última',play:'▶ Jugar',challenge:'⚔ Retar a un amigo',solo:'Solo',duel:'Duelo',rank:'Ranking',duelL:'Duelo en un móvil',duelP:'Dos jugadores, un móvil. Cada uno tiene 10 segundos, gana la mayor puntuación.',p1:'Jugador 1',p2:'Jugador 2',startDuel:'Empezar duelo',lastDuel:'Último duelo',noDuel:'Aún no hay duelos. ¡Busca un amigo!',world:'Ranking mundial',worldP:'Mejores puntuaciones solo de todos.',score:'Puntos',tapStart:'Toca para empezar',turn:'tu turno',gameOver:'Fin del juego',newBest:'¡Nuevo récord!',tps:'toques/s',again:'Otra vez',close:'Cerrar',next:'Vamos',nextTurn:'Pasa el móvil a',wins:'¡gana!',draw:'¡Empate!',rematch:'Revancha',loading:'Cargando',empty:'Sin puntuaciones. ¡Sé la primera leyenda!',you:'tú',share:'Hice {n} en Pixel Pummel 👾 ¿Me ganas en 10 segundos?',combo:'COMBO',adBtn:'🎬 Ver un vídeo: +3 s en la próxima partida',adOk:'✓ +3 s listos para tu próxima partida',adNo:'No hay vídeo disponible ahora',shop:'Tienda',shopL:'Tienda pixel',shopP:'Skins y mejoras pagadas con Telegram Stars.',equip:'Equipar',equipped:'Equipado',owned:'Comprado',sk_base:'Clásico',sk_gold:'Oro',sk_neon:'Neón',sk_ruby:'Rubí',skinD:'Skin del invasor',turbo:'Turbo +2 s',turboD:'+2 segundos en cada partida solo',bought:'¡Gracias! Desbloqueado',fail:'Pago cancelado'},
+pt:{tag:'Frenesi de toques 8-bit',heroT:'10 segundos. Toque sem parar.',heroP:'Esmague o invasor, encadeie toques rápidos para combos até x4 e suba no ranking mundial.',best:'Recorde',played:'Partidas',last:'Última',play:'▶ Jogar',challenge:'⚔ Desafiar um amigo',solo:'Solo',duel:'Duelo',rank:'Ranking',duelL:'Duelo num celular',duelP:'Dois jogadores, um celular. Cada um tem 10 segundos, vence a maior pontuação.',p1:'Jogador 1',p2:'Jogador 2',startDuel:'Começar duelo',lastDuel:'Último duelo',noDuel:'Nenhum duelo ainda. Chame um amigo!',world:'Ranking mundial',worldP:'Melhores pontuações solo de todos.',score:'Pontos',tapStart:'Toque para começar',turn:'sua vez',gameOver:'Fim de jogo',newBest:'Novo recorde!',tps:'toques/s',again:'Jogar de novo',close:'Fechar',next:'Vai',nextTurn:'Passe o celular para',wins:'venceu!',draw:'Empate!',rematch:'Revanche',loading:'Carregando',empty:'Sem pontuações. Seja a primeira lenda!',you:'você',share:'Fiz {n} no Pixel Pummel 👾 Consegue me vencer em 10 segundos?',combo:'COMBO',adBtn:'🎬 Assistir um vídeo: +3 s na próxima partida',adOk:'✓ +3 s prontos para sua próxima partida',adNo:'Nenhum vídeo disponível agora',shop:'Loja',shopL:'Loja pixel',shopP:'Skins e boosts pagos com Telegram Stars.',equip:'Equipar',equipped:'Equipado',owned:'Comprado',sk_base:'Clássico',sk_gold:'Ouro',sk_neon:'Neon',sk_ruby:'Rubi',skinD:'Skin do invasor',turbo:'Turbo +2 s',turboD:'+2 segundos em cada partida solo',bought:'Obrigado! Desbloqueado',fail:'Pagamento cancelado'}};
 const LANGS=['en','fr','es','pt'];
 let lc='en';try{lc=(TG.initDataUnsafe.user.language_code||'en').slice(0,2)}catch(e){}
 let lang=LANGS.includes(lc)?lc:'en';
 const t=k=>(T[lang][k]!=null?T[lang][k]:T.en[k]);
 const $=id=>document.getElementById(id);
-function i18n(){document.querySelectorAll('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));document.querySelectorAll('[data-ph]').forEach(e=>e.placeholder=t(e.dataset.ph));$('langBtn').textContent=lang.toUpperCase();document.documentElement.lang=lang;renderDuel();if(tab==='rank')loadBoard()}
+function i18n(){document.querySelectorAll('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));document.querySelectorAll('[data-ph]').forEach(e=>e.placeholder=t(e.dataset.ph));$('langBtn').textContent=lang.toUpperCase();document.documentElement.lang=lang;renderDuel();renderShop();if(tab==='rank')loadBoard()}
 $('langBtn').onclick=()=>{lang=LANGS[(LANGS.indexOf(lang)+1)%4];S.haptic('tap');i18n()};
 
 // pixel invader
@@ -210,8 +226,8 @@ function showAd(){const b=$('rB3');if(bonus||typeof S.ad!=='function')return;b.t
   b.onclick=async()=>{S.haptic('tap');b.disabled=true;let ok=false;try{ok=await S.ad()}catch(e){}
     if(ok){bonus=1;S.haptic('ok');b.textContent=t('adOk')}else{S.haptic('error');b.textContent=t('adNo')}}}
 const arena=$('arena'),play=$('play');
-function openPlay(mode,label){const extra=(mode==='solo'&&bonus)?3000:0;if(extra)bonus=0;g={mode,running:false,done:false,score:0,taps:0,combo:0,last:0,end:0,dur:DUR+extra};
-  $('pLabel').textContent=label+(extra?' +3s':'');$('pScore').textContent='0';$('pCombo').textContent='';$('pTime').textContent=(g.dur/1000).toFixed(1);
+function openPlay(mode,label){const extra=(mode==='solo'&&bonus)?3000:0;if(extra)bonus=0;const tb=(mode==='solo'&&owned.turbo)?2000:0;g={mode,running:false,done:false,score:0,taps:0,combo:0,last:0,end:0,dur:DUR+extra+tb};
+  $('pLabel').textContent=label+((extra+tb)?' +'+((extra+tb)/1000)+'s':'');$('pScore').textContent='0';$('pCombo').textContent='';$('pTime').textContent=(g.dur/1000).toFixed(1);
   $('tbar').style.transform='scaleX(1)';$('tbar').classList.remove('low');$('pHint').textContent=t('tapStart');play.classList.add('on')}
 function loop(){if(!g.running)return;const rem=Math.max(0,g.end-performance.now());
   $('tbar').style.transform=`scaleX(${rem/g.dur})`;$('tbar').classList.toggle('low',rem<3000);$('pTime').textContent=(rem/1000).toFixed(1);
@@ -254,6 +270,29 @@ function finish(){g.running=false;g.done=true;$('pTime').textContent='0.0';$('tb
       const w=sa===sb?t('draw'):`${sa>sb?duel.a:duel.b} ${t('wins')}`;confetti();
       modal(w,Math.max(sa,sb),`${duel.a} ${sa} - ${sb} ${duel.b}`,t('rematch'),()=>startGame('duelA',duel.a+' - '+t('turn')),t('close'),closeAll)}
   },450)}
+// shop (Telegram Stars)
+const SK={base:['#c7b2ff','#8b5cff'],gold:['#fff1a8','#f5a623'],neon:['#b6fff0','#00d9a8'],ruby:['#ffb3d6','#ff2d7a']};
+const ITEMS=[{id:'skin_gold',k:'gold',st:25},{id:'skin_neon',k:'neon',st:25},{id:'skin_ruby',k:'ruby',st:50},{id:'turbo',st:100}];
+let owned={},skin='base';
+function invSvg(k){let s=`<defs><linearGradient id="g_${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${SK[k][0]}"/><stop offset="1" stop-color="${SK[k][1]}"/></linearGradient></defs>`;
+  G.forEach((r,y)=>[...r].forEach((c,x)=>{if(c==='1')s+=`<rect x="${x}" y="${y}" width="1.02" height="1.02" fill="url(#g_${k})"/>`}));return `<svg viewBox="0 0 11 8">${s}</svg>`}
+function applySkin(){const c=SK[skin]||SK.base;document.querySelectorAll('.inv stop').forEach((s,i)=>s.setAttribute('stop-color',c[i%2]))}
+function renderShop(){const el=$('shop');if(!el)return;el.innerHTML='';
+  [{id:'skin_base',k:'base',st:0}].concat(ITEMS).forEach((it,i)=>{const d=document.createElement('div');const has=it.st===0||owned[it.id];const sel=it.k&&skin===it.k;
+    d.className='it'+(sel?' sel':'');d.style.animationDelay=i*40+'ms';
+    d.innerHTML=(it.k?invSvg(it.k):'<div class="turbo">⚡</div>')+`<b>${it.k?t('sk_'+it.k):t('turbo')}</b><small>${it.k?t('skinD'):t('turboD')}</small>`;
+    const b=document.createElement('button');b.className='btn'+(has?' alt':'');
+    if(!it.k&&has){b.textContent='✓ '+t('owned');b.disabled=true}
+    else if(has){b.textContent=sel?'✓ '+t('equipped'):t('equip');b.disabled=!!sel;b.onclick=()=>{skin=it.k;S.haptic('tap');applySkin();S.set('skin',skin).catch(()=>{});renderShop()}}
+    else{b.textContent='⭐ '+it.st;b.onclick=()=>buyItem(it,b)}
+    d.appendChild(b);el.appendChild(d)})}
+async function buyItem(it,b){if(typeof S.buy!=='function')return;S.haptic('tap');b.disabled=true;const title=it.k?t('sk_'+it.k):t('turbo');let ok=false;
+  try{ok=await S.buy(it.id,title,it.st)}catch(e){}
+  if(ok){owned[it.id]=true;S.haptic('ok');confetti();$('shopMsg').textContent=t('bought')+': '+title;if(it.k){skin=it.k;applySkin();S.set('skin',skin).catch(()=>{})}}
+  else{S.haptic('error');$('shopMsg').textContent=t('fail')}
+  renderShop()}
+(async()=>{try{const s=await S.get('skin');if(s&&SK[s])skin=s;if(typeof S.purchases==='function'){const p=await S.purchases()||[];p.forEach(x=>owned[x.item]=true)}}catch(e){}
+  if(skin!=='base'&&!owned['skin_'+skin])skin='base';applySkin();renderShop()})();
 $('playBtn').onclick=()=>{S.haptic('tap');startGame('solo',t('solo'))};
 $('duelBtn').onclick=()=>{S.haptic('tap');duel.a=$('n1').value.trim()||t('p1');duel.b=$('n2').value.trim()||t('p2');startGame('duelA',duel.a+' - '+t('turn'))};
 function share(n){const txt=t('share').replace('{n}',n==null?stats.best:n);const url=location.href.split('#')[0];
