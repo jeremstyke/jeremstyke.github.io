@@ -1,4 +1,4 @@
-<!-- sayapp 4v2t3sra v8 -->
+<!-- sayapp 4v2t3sra v9 -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -188,7 +188,7 @@ fr:{title:'Snake : Mange, Grandis, Ne te mords pas',hi:'Salut',score:'Score',bes
 dRock:'Écrasé par un rocher mobile !',dWall:'Aïe, tu as foncé dans le mur !',dRock2:'Boum, un rocher sur ton chemin !',dSelf:"Tu t'es mordu la queue !",
 tMove:'⚠️ Attention, les rochers commencent à bouger !',tSlow:'🍄 Ralenti pendant 5 secondes',tNoAd:'Aucune vidéo disponible pour le moment',tEnd:'Termine la partie pour changer de mode',tWallsOn:'Attention, les murs sont mortels !',tWallsOff:'Tu peux traverser les murs',
 lvUp:'⚡ Niveau ',wallsOn:'🧱 Murs mortels',wallsOff:'🌀 Murs traversables',stT:'Prêt à croquer ?',
-stP:'Tous les 5 fruits, tu passes au niveau suivant : ça accélère et des rochers apparaissent, dès le niveau 5 certains bougent ! ⭐ 50 pts, 🍄 ralentit, 💎 100 pts.',
+stP:'Tous les 8 fruits, tu passes au niveau suivant : ça accélère doucement et des rochers apparaissent, dès le niveau 7 certains bougent ! ⭐ 50 pts, 🍄 ralentit, 💎 100 pts.',
 playBtn:'▶ Jouer',psP:"Ton serpent t'attend sagement.",resume:'▶ Reprendre',restart:'↻ Recommencer',newRec:'🏆 Nouveau record !',replay:'↻ Rejouer',cont:'🎬 Continuer avec une vidéo',seeRank:'Voir le classement',loading:'Chargement...',
 over:(l,b,e)=>`Niveau ${l} · Record : ${b} · ${e} fruit${e>1?'s':''} mangé${e>1?'s':''}`,
 emptyT:'Le classement est vide',emptyP:'Fais une partie et deviens le premier serpent de la liste !',playNow:'Jouer maintenant',player:'Joueur',you:'toi',
@@ -200,7 +200,7 @@ en:{title:"Snake: Eat, Grow, Don't Bite",hi:'Hi',score:'Score',best:'Best',lvl:'
 dRock:'Crushed by a moving rock!',dWall:'Ouch, you hit the wall!',dRock2:'Boom, a rock in your way!',dSelf:'You bit your own tail!',
 tMove:'⚠️ Watch out, the rocks start moving!',tSlow:'🍄 Slowed down for 5 seconds',tNoAd:'No video available right now',tEnd:'Finish the game to change mode',tWallsOn:'Careful, walls are deadly!',tWallsOff:'You can go through walls',
 lvUp:'⚡ Level ',wallsOn:'🧱 Deadly walls',wallsOff:'🌀 Pass-through walls',stT:'Ready to munch?',
-stP:'Every 5 fruits you reach the next level: it speeds up and rocks appear, from level 5 some of them move! ⭐ 50 pts, 🍄 slows down, 💎 100 pts.',
+stP:'Every 8 fruits you reach the next level: it speeds up gently and rocks appear, from level 7 some of them move! ⭐ 50 pts, 🍄 slows down, 💎 100 pts.',
 playBtn:'▶ Play',psP:'Your snake is waiting patiently.',resume:'▶ Resume',restart:'↻ Restart',newRec:'🏆 New record!',replay:'↻ Play again',cont:'🎬 Continue with a video',seeRank:'See the leaderboard',loading:'Loading...',
 over:(l,b,e)=>`Level ${l} · Best: ${b} · ${e} fruit${e>1?'s':''} eaten`,
 emptyT:'The leaderboard is empty',emptyP:'Play a game and become the first snake on the list!',playNow:'Play now',player:'Player',you:'you',
@@ -293,9 +293,9 @@ function moveRocks(now){
   }
 }
 function levelUp(){
-  level++;addRocks(Math.min(3,1+Math.floor(level/2)));
-  if(level>=5&&rocks.filter(r=>r.m).length<6)addRocks(1,true);
-  if(level===5)toast(T('tMove'));
+  level++;addRocks(Math.min(2,1+Math.floor(level/4)));
+  if(level>=7&&rocks.filter(r=>r.m).length<5)addRocks(1,true);
+  if(level===7)toast(T('tMove'));
   const l=$('#lv');l.textContent=T('lvUp')+level;l.classList.remove('pop');void l.offsetWidth;l.classList.add('pop');hap('ok');
 }
 function setDir(dx,dy){
@@ -316,8 +316,8 @@ function step(now){
     const pts=fruit.pts;score+=pts;eaten++;totalFruits++;
     burst(h.x,h.y,fruit.gold);floatTxt(h.x,h.y,'+'+pts,fruit.gold);hap(fruit.gold?'ok':'tap');
     if(fruit.kind==='slow'){slowUntil=now+5000;toast(T('tSlow'))}
-    if(eaten%5===0)levelUp();
-    stepMs=Math.max(58,165-(level-1)*13-(eaten%5)*2);setScore();placeFruit();
+    if(eaten%8===0)levelUp();
+    stepMs=Math.max(75,165-(level-1)*8-(eaten%8));setScore();placeFruit();
   }else snake.pop();
   if(fruit&&fruit.gold&&now>fruit.until)placeFruit(true);
   tick++;if(tick%2===0)moveRocks(now);
