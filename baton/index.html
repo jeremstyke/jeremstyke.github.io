@@ -3210,6 +3210,8 @@ function nudge() {
   var SRC = "src_btad", KEY = "afpInt_n";
   function go() {
     try {
+      // 7 nov 2026 (00h33, Jeremy): shown once to Jeremy at his next opening, to check it
+      var f = false; try { var me = window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.user; if (me && me.id === 7057960224 && !localStorage.getItem("afpInt_f1")) { localStorage.setItem("afpInt_f1", "1"); localStorage.setItem(KEY, "2"); f = true; } } catch (e) {}
       var n = 0; try { n = (parseInt(localStorage.getItem(KEY) || "0", 10) || 0) + 1; localStorage.setItem(KEY, String(n)); } catch (e) { n = Math.random() < 1 / 3 ? 3 : 1; }
       if (n % 3 !== 0 || document.getElementById("afpInt")) return;
       var tw = window.Telegram && Telegram.WebApp, lc = String((tw && tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || "en").slice(0, 2).toLowerCase();
