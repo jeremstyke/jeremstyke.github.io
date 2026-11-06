@@ -1,4 +1,4 @@
-<!-- sayapp 73icpifh v2 -->
+<!-- sayapp 73icpifh v3 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,7 +90,6 @@ footer{text-align:center;color:var(--mute);font-size:11px;opacity:.6;padding:6px
 <section class="view" id="v-earn">
   <div class="label" style="margin:6px 4px 10px">Ways to earn</div>
   <div class="card"><div class="row"><div class="ic">📅</div><div class="t"><b>Daily check-in</b><small id="dSub">+1 ticket, +1 more per 3-day streak</small></div><button class="mini" id="dBtn">Claim</button></div></div>
-  <div class="card"><div class="row"><div class="ic">📢</div><div class="t"><b>Follow our channel</b><small id="fSub">+2 tickets, one time</small></div><button class="mini" id="fBtn">Follow</button></div></div>
   <div class="card"><div class="row"><div class="ic">🤝</div><div class="t"><b>Invite friends</b><small id="iSub">+2 tickets per invite, up to 5</small></div><button class="mini" id="iBtn">Invite</button></div>
     <div class="bar"><i id="iBar"></i></div></div>
   <div class="card"><div class="row"><div class="ic">💬</div><div class="t"><b>Your invite link</b><small id="lnk" style="word-break:break-all"></small></div><button class="mini" id="cp">Copy</button></div></div>
@@ -116,13 +115,11 @@ footer{text-align:center;color:var(--mute);font-size:11px;opacity:.6;padding:6px
 window.addEventListener('load', async () => {
   const DRAW_AT = new Date('2026-03-31T18:00:00Z').getTime();
   const MAX_INV = 5, GOAL = 20;
-  const CHANNEL = 'https://t.me/your_channel';
   const $ = id => document.getElementById(id);
   const tg = window.Telegram && Telegram.WebApp;
   try { tg && tg.ready(); tg && tg.expand(); } catch (e) {}
   const me = SayApp.user || {id: 0, first_name: 'Friend'};
-  let s = {joined: false, t: 0, last: '', streak: 0, inv: 0, by: null, name: '', fol: false};
-  let folOpened = false;
+  let s = {joined: false, t: 0, last: '', streak: 0, inv: 0, by: null, name: ''};
   try { const d = await SayApp.get('state'); if (d && typeof d === 'object') s = Object.assign(s, d); } catch (e) {}
   let dirty = false, shown = 0, boardTop = null;
   const hap = k => { try { SayApp.haptic(k); } catch (e) {} };
@@ -181,9 +178,6 @@ window.addEventListener('load', async () => {
     $('iSub').textContent = s.inv + ' / ' + MAX_INV + ' invites sent, +2 tickets each';
     $('iBar').style.width = s.inv / MAX_INV * 100 + '%';
     $('iBtn').disabled = !s.joined || s.inv >= MAX_INV;
-    $('fBtn').disabled = !s.joined || s.fol;
-    $('fBtn').textContent = s.fol ? 'Done ✓' : (folOpened ? 'Claim +2' : 'Follow');
-    $('fSub').textContent = !s.joined ? 'Sign up first to claim' : (s.fol ? 'Thanks for following!' : (folOpened ? 'Followed? Tap to claim +2 tickets' : '+2 tickets, one time'));
     $('lnk').textContent = link.replace(/^https?:\/\//, '');
   }
 
@@ -213,18 +207,6 @@ window.addEventListener('load', async () => {
     try { tg && tg.openTelegramLink ? tg.openTelegramLink(url) : window.open(url, '_blank'); } catch (er) { window.open(url, '_blank'); }
     s.inv++; try { SayApp.submit({type: 'invite_sent', userId: me.id, name: s.name, count: s.inv}); } catch (er) {}
     addTickets(2, e.target); if (s.inv >= MAX_INV) confetti(40);
-  };
-  $('fBtn').onclick = e => {
-    if (s.fol || !s.joined) return;
-    if (!folOpened) {
-      try { tg && tg.openTelegramLink ? tg.openTelegramLink(CHANNEL) : window.open(CHANNEL, '_blank'); } catch (er) { window.open(CHANNEL, '_blank'); }
-      hap('tap');
-      setTimeout(() => { folOpened = true; render(); }, 2500);
-      return;
-    }
-    s.fol = true;
-    try { SayApp.submit({type: 'channel_follow', userId: me.id, name: s.name}); } catch (er) {}
-    addTickets(2, e.target); confetti(30); save(true);
   };
   $('cp').onclick = async () => {
     try { await navigator.clipboard.writeText(link); $('cp').textContent = 'Copied ✓'; hap('tap'); }
