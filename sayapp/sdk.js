@@ -230,7 +230,16 @@
         pt: ['Segure o bastão e ganhe USDT de verdade', 'Pegue o bastão, aguente firme e passe para seus amigos para subir.', ['🆓 Grátis, 1 minuto por dia', '💵 Recompensas reais em USDT', '👥 Melhor com amigos'], '⚡ Jogar grátis'],
         ru: ['Держи эстафету и зарабатывай USDT', 'Хватай палочку, держись и передавай друзьям, чтобы расти.', ['🆓 Бесплатно, 1 минута в день', '💵 Настоящие награды в USDT', '👥 С друзьями ещё лучше'], '⚡ Играть бесплатно'],
         id: ['Pegang tongkatnya, dapatkan USDT asli', 'Ambil tongkatnya, bertahan, dan oper ke temanmu untuk naik.', ['🆓 Gratis, 1 menit sehari', '💵 Hadiah asli dalam USDT', '👥 Lebih seru bersama teman'], '⚡ Main gratis'],
-        tr: ['Bayrağı tut, gerçek USDT kazan', 'Bayrağı kap, dayan ve yükselmek için arkadaşlarına pasla.', ['🆓 Ücretsiz, günde 1 dakika', '💵 USDT ile gerçek ödüller', '👥 Arkadaşlarla daha güzel'], '⚡ Ücretsiz oyna'] } }
+        tr: ['Bayrağı tut, gerçek USDT kazan', 'Bayrağı kap, dayan ve yükselmek için arkadaşlarına pasla.', ['🆓 Ücretsiz, günde 1 dakika', '💵 USDT ile gerçek ödüller', '👥 Arkadaşlarla daha güzel'], '⚡ Ücretsiz oyna'] } },
+    // 7 nov 2026 (00h25, Jeremy): AI Football Predictor in the SayApp ad network (owner paid 0.02 $ per player, like Pass The Baton)
+    afp: { u: 'https://t.me/ai_football_predictorbot?start=src_sayapp_ad', c1: '#00e08a', c2: '#2f8dff', g: '#34d399', ic: ['⚽', '📊', '🧠', '🎯', '🏆'], lg: '⚽',
+      t: { fr: ['Les pronos foot calculés par une IA', 'Un modèle statistique analyse chaque match et ne garde que ses pronos les plus sûrs.', ['📊 Probabilités, xG et forme de chaque match', '✅ Historique public, victoires et défaites', '🆓 Gratuit'], '⚽ Voir les pronos du jour'],
+        en: ['Football predictions made by an AI', 'A statistical model analyses every match and only keeps its most confident picks.', ['📊 Probabilities, xG and form for every match', '✅ Public track record, wins and losses', '🆓 Free'], "⚽ See today's picks"],
+        es: ['Pronósticos de fútbol hechos por una IA', 'Un modelo estadístico analiza cada partido y solo conserva sus pronósticos más fiables.', ['📊 Probabilidades, xG y forma de cada partido', '✅ Historial público, aciertos y fallos', '🆓 Gratis'], '⚽ Ver los pronósticos de hoy'],
+        pt: ['Palpites de futebol feitos por uma IA', 'Um modelo estatístico analisa cada jogo e só mantém os palpites mais confiáveis.', ['📊 Probabilidades, xG e forma de cada jogo', '✅ Histórico público, acertos e erros', '🆓 Grátis'], '⚽ Ver os palpites de hoje'],
+        ru: ['Футбольные прогнозы от ИИ', 'Статистическая модель анализирует каждый матч и оставляет только самые надёжные прогнозы.', ['📊 Вероятности, xG и форма команд', '✅ Открытая история, победы и поражения', '🆓 Бесплатно'], '⚽ Прогнозы на сегодня'],
+        id: ['Prediksi sepak bola buatan AI', 'Model statistik menganalisis setiap laga dan hanya menyimpan prediksi paling yakin.', ['📊 Probabilitas, xG, dan performa tiap laga', '✅ Riwayat publik, menang dan kalah', '🆓 Gratis'], '⚽ Lihat prediksi hari ini'],
+        tr: ['Yapay zekâ ile futbol tahminleri', 'İstatistiksel bir model her maçı analiz eder ve yalnızca en güvendiği tahminleri tutar.', ['📊 Her maç için olasılıklar, xG ve form', '✅ Açık geçmiş, kazanılan ve kaybedilen', '🆓 Ücretsiz'], '⚽ Bugünün tahminleri'] } }
   };
   var NETUI = { fr: ['SPONSORISÉ', 'Ta récompense arrive dans', 'Récupère ta récompense', '🎁 Récupérer ma récompense', 'Fermer'], en: ['SPONSORED', 'Your reward is coming in', 'Claim your reward', '🎁 Claim my reward', 'Close'], es: ['PATROCINADO', 'Tu recompensa llega en', 'Recoge tu recompensa', '🎁 Recoger mi recompensa', 'Cerrar'], pt: ['PATROCINADO', 'Sua recompensa chega em', 'Pegue sua recompensa', '🎁 Pegar minha recompensa', 'Fechar'], ru: ['РЕКЛАМА', 'Награда через', 'Забери награду', '🎁 Забрать награду', 'Закрыть'], id: ['SPONSOR', 'Hadiahmu datang dalam', 'Ambil hadiahmu', '🎁 Ambil hadiahku', 'Tutup'], tr: ['SPONSORLU', 'Ödülün geliyor:', 'Ödülünü al', '🎁 Ödülümü al', 'Kapat'] };
   // 5 nov 2026 (13h35, Jeremy): the SayApp ad shows how many mini apps were created, instead of the free 48 h line
@@ -239,7 +248,7 @@
     return new Promise(function (done) {
       if (document.getElementById('sayappH')) return done(mode !== 'int');
       var rw = mode !== 'int', lg = String(user.language_code || navigator.language || 'en').slice(0, 2).toLowerCase(), r = Math.random();
-      var A = r < 0.8 ? NETAD.sa : r < 0.9 ? NETAD.mct : NETAD.ptb, L = A.t[lg] || A.t.en, U = NETUI[lg] || NETUI.en, left = rw ? 5 : 3, total = left;
+      var A = r < 0.7 ? NETAD.sa : r < 0.8 ? NETAD.mct : r < 0.9 ? NETAD.ptb : NETAD.afp, L = A.t[lg] || A.t.en, U = NETUI[lg] || NETUI.en, left = rw ? 5 : 3, total = left;
       if (A === NETAD.sa) { try { if (INFO && INFO.made) LS('sa_made', INFO.made); var mn = Number((INFO && INFO.made) || LS('sa_made') || 0), MT = MADETX[lg] || MADETX.en; L = [L[0], L[1], (mn > 0 ? [MT.replace('{n}', mn.toLocaleString('en'))] : []).concat(L[2]), L[3]]; } catch (z) {} }
       var hu = A.u.replace('src_sayapp_ad', 'src_sax_' + String(APP).replace(/[^a-z0-9]/gi, ''));
       var e = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
