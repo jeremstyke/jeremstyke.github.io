@@ -35,6 +35,8 @@ function es(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;"
 function pc(x){return Math.round(x*100)+(fr?" %":"%")}
 function hm(t){var d=new Date(t),td=new Date();var s=d.toLocaleTimeString(fr?"fr-FR":"en-GB",{hour:"2-digit",minute:"2-digit"});return (d.toDateString()==td.toDateString()?"":(fr?"demain ":"tomorrow "))+s}
 function size(){try{parent.postMessage({afp:1,h:document.getElementById("w").offsetHeight+2},"*")}catch(e){}}
+var hh=q.get("h")||"";if(!hh)try{hh=new URL(document.referrer).hostname}catch(e){}
+if(hh&&q.get("s")!=="app")fetch("https://txvrlvcxfnylnrpdrxtt.supabase.co/rest/v1/rpc/afp_widget_hit",{method:"POST",headers:{apikey:"sb_publishable_7aA-njoU5fU2ialO0ExwQQ_REHjAEIe","Content-Type":"application/json"},body:JSON.stringify({h:hh,pg:(document.referrer||"").slice(0,300)})}).catch(function(){});
 fetch("https://txvrlvcxfnylnrpdrxtt.supabase.co/rest/v1/rpc/afp_widget2",{method:"POST",headers:{apikey:"sb_publishable_7aA-njoU5fU2ialO0ExwQQ_REHjAEIe","Content-Type":"application/json"},body:JSON.stringify({lg:lg||null,lim:lim,team:team||null})}).then(function(r){return r.json()}).then(function(d){
  var h='<div class="hd"><b>⚽ '+(team?es(team)+" · "+(fr?"probabilités":"probabilities"):(fr?"Probabilités des matchs":"Match probabilities"))+'</b><a href="'+SITE+'" target="_blank" rel="noopener">AI FOOTBALL PREDICTOR</a></div>';
  var M=d.m||[];if(M.some(function(m){return m.s}))h+='<div class="lg"><em class="g">65'+(fr?" %":"%")+'+</em>'+(fr?"une équipe a au moins 65 % de chances de gagner":"a team has at least a 65% chance to win")+'</div>';if(!M.length)h+='<div class="e">'+(fr?"Pas de match dans les prochaines heures.":"No match in the next hours.")+'</div>';
