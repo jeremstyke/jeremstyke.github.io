@@ -40,6 +40,7 @@ Install: WordPress "Custom HTML" block; Wix Add > Embed > HTML code; Blogger "HT
 - [AI Football Predictor (English)](https://jeremstyke.github.io/ai-football-predictor/): every match of the day with its probabilities, live matches, reliability.
 - [AI Football Predictor (français)](https://jeremstyke.github.io/ai-football-predictor/fr/)
 - [Method](https://jeremstyke.github.io/ai-football-predictor/method/): how the probabilities are computed and checked.
+- [Open data (CSV)](https://jeremstyke.github.io/ai-football-predictor/data/predictions.csv): every finished match since launch with the probabilities locked before kickoff, the pure model, the bookmaker market without margin, xG and the score. Standard scores (RPS, Brier, log loss) versus the market and a naive model are shown in the app's Reliability tab.
 - [Blog](https://jeremstyke.github.io/ai-football-predictor/blog/): daily article with the most likely matches.
 - [Telegram bot](https://t.me/ai_football_predictorbot) and [channel](https://t.me/aifootballpredictorchannel).
 
