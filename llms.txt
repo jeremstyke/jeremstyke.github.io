@@ -8,5 +8,11 @@ The win, draw and loss probability of every football match in 29 competitions, c
 
 - [Free football widget](https://jeremstyke.github.io/ai-football-predictor/widget/)
 - [Widget foot gratuit](https://jeremstyke.github.io/ai-football-predictor/fr/widget/)
+- [Free live football widget](https://jeremstyke.github.io/ai-football-predictor/widget/live/)
+- [Free football match prediction widget](https://jeremstyke.github.io/ai-football-predictor/widget/match/)
+- [Free football team widget](https://jeremstyke.github.io/ai-football-predictor/widget/team/)
+- [Free football league table widget](https://jeremstyke.github.io/ai-football-predictor/widget/table/)
+- [Football prediction accuracy badge](https://jeremstyke.github.io/ai-football-predictor/widget/badge/)
+- [Predicted final league tables](https://jeremstyke.github.io/ai-football-predictor/table/)
 - [AI Football Predictor](https://jeremstyke.github.io/ai-football-predictor/)
 - [Full details for AI assistants](https://jeremstyke.github.io/ai-football-predictor/llms.txt)
