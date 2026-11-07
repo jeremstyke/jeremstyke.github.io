@@ -23,7 +23,7 @@ body{background:var(--bg);color:var(--txt);font:14px/1.4 Inter,-apple-system,Bli
 <script>
 (function(){
 var q=new URLSearchParams(location.search),fr=(q.get("lang")||navigator.language||"en").slice(0,2)=="fr",
-lg=q.get("lg")||"",lim=Math.min(20,Math.max(1,+q.get("n")||6)),src="src_widget"+(q.get("s")?"_"+q.get("s").replace(/[^a-z0-9]/gi,"").slice(0,20):"");
+lg=q.get("lg")||"",team=q.get("team")||"",lim=Math.min(20,Math.max(1,+q.get("n")||6)),src="src_widget"+(q.get("s")?"_"+q.get("s").replace(/[^a-z0-9]/gi,"").slice(0,20):"");
 if(q.get("theme")=="light")document.documentElement.classList.add("light");document.documentElement.lang=fr?"fr":"en";
 var SITE="https://jeremstyke.github.io/ai-football-predictor/"+(fr?"fr/":"")+"?utm_source=widget",BOT="https://t.me/ai_football_predictorbot?start="+src;
 function mUrl(n){return SITE+"&tab=m"+n}
@@ -32,8 +32,8 @@ function es(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;"
 function pc(x){return Math.round(x*100)+(fr?" %":"%")}
 function hm(t){var d=new Date(t),td=new Date();var s=d.toLocaleTimeString(fr?"fr-FR":"en-GB",{hour:"2-digit",minute:"2-digit"});return (d.toDateString()==td.toDateString()?"":(fr?"demain ":"tomorrow "))+s}
 function size(){try{parent.postMessage({afp:1,h:document.getElementById("w").offsetHeight+2},"*")}catch(e){}}
-fetch("https://txvrlvcxfnylnrpdrxtt.supabase.co/rest/v1/rpc/afp_widget",{method:"POST",headers:{apikey:"sb_publishable_7aA-njoU5fU2ialO0ExwQQ_REHjAEIe","Content-Type":"application/json"},body:JSON.stringify({lg:lg||null,lim:lim})}).then(function(r){return r.json()}).then(function(d){
- var h='<div class="hd"><b>⚽ '+(fr?"Probabilités des matchs":"Match probabilities")+'</b><a href="'+SITE+'" target="_blank" rel="noopener">AI FOOTBALL PREDICTOR</a></div>';
+fetch("https://txvrlvcxfnylnrpdrxtt.supabase.co/rest/v1/rpc/afp_widget2",{method:"POST",headers:{apikey:"sb_publishable_7aA-njoU5fU2ialO0ExwQQ_REHjAEIe","Content-Type":"application/json"},body:JSON.stringify({lg:lg||null,lim:lim,team:team||null})}).then(function(r){return r.json()}).then(function(d){
+ var h='<div class="hd"><b>⚽ '+(team?es(team)+" · "+(fr?"probabilités":"probabilities"):(fr?"Probabilités des matchs":"Match probabilities"))+'</b><a href="'+SITE+'" target="_blank" rel="noopener">AI FOOTBALL PREDICTOR</a></div>';
  var M=d.m||[];if(!M.length)h+='<div class="e">'+(fr?"Pas de match dans les prochaines heures.":"No match in the next hours.")+'</div>';
  h+=M.map(function(m){var a=[m.ph,m.pd,m.pa],k=a.indexOf(Math.max.apply(null,a));
   return '<a class="m" href="'+mUrl(m.n)+'" target="_blank" rel="noopener"><div class="t"><span>'+(F[m.lg]||"⚽")+" "+es(m.h)+" - "+es(m.a)+'</span><span>'+hm(m.ko)+'</span></div><div class="b">'+a.map(function(v,i){return '<i class="'+(i==k?"k":"")+'" style="width:'+(v*100)+'%"></i>'}).join("")+'</div><div class="p"><span class="'+(k==0?"k":"")+'">1 · '+pc(m.ph)+'</span><span class="'+(k==1?"k":"")+'">'+(fr?"N":"X")+" · "+pc(m.pd)+'</span><span class="'+(k==2?"k":"")+'">2 · '+pc(m.pa)+'</span></div></a>'}).join("");
