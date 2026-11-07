@@ -15,6 +15,8 @@ Key facts:
 
 - [Free football widget (English)](https://jeremstyke.github.io/ai-football-predictor/widget/): configurator, live preview, code to copy, install guide, FAQ.
 - [Widget foot gratuit (français)](https://jeremstyke.github.io/ai-football-predictor/fr/widget/): même page en français.
+- [Free live football widget (English)](https://jeremstyke.github.io/ai-football-predictor/widget/live/): live score, minute, scorers, match stats and win probabilities that move during the match. Add data-type="live" to the embed code.
+- [Widget foot en direct gratuit (français)](https://jeremstyke.github.io/ai-football-predictor/fr/widget/live/): score en direct, buteurs, stats et probabilités qui évoluent pendant le match.
 
 Embed code (paste where the widget should appear):
 
@@ -23,7 +25,7 @@ Embed code (paste where the widget should appear):
 <script async src="https://jeremstyke.github.io/ai-football-predictor/embed.js"></script>
 ```
 
-Options: data-lang (en or fr), data-lg (competition codes, comma separated, empty = all), data-team (exact club name), data-n (1 to 20), data-theme (dark or light).
+Options: data-type (empty = upcoming matches with probabilities, live = live matches), data-lang (en or fr), data-lg (competition codes, comma separated, empty = all), data-team (exact club name), data-n (1 to 20), data-theme (dark or light).
 
 Competition codes: E0 Premier League, F1 Ligue 1, SP1 LaLiga, I1 Serie A, D1 Bundesliga, CL Champions League, P1 Liga Portugal, N1 Eredivisie, SC0 Scottish Premiership, B1 Belgian Pro League, T1 Süper Lig, G1 Super League Greece, ROU Romania Liga 1, NOR Eliteserien, BRA Brasileirão, ARG Liga Profesional Argentina, HR HNL Croatia, RS Serbian SuperLiga, UA Ukrainian Premier League, SA Saudi Pro League, CY Cyprus First Division, BG Bulgarian First League, FAC FA Cup, EFL EFL Cup, DFB DFB-Pokal, CDR Copa del Rey, SCC Scottish Cup, SLC Scottish League Cup, TDP Taça de Portugal.
 
