@@ -1,4 +1,5 @@
 n,kickoff,league,home,away,p_home,p_draw,p_away,model_home,model_draw,model_away,mkt_home,mkt_draw,mkt_away,xg_home,xg_away,home_goals,away_goals,result
+78,2026-11-08T11:15:00+00:00,N1,Heerenveen,Feyenoord,0.2423,0.2332,0.5245,0.2551,0.2471,0.4978,0.2295,0.2192,0.5513,1.25,1.81,5,3,H
 161,2026-11-08T11:00:00+00:00,UA,Bukovyna,Kolos Kovalivka,0.2311,0.3666,0.4023,0.2311,0.3666,0.4023,,,,0.65,0.95,1,1,D
 104,2026-11-08T10:30:00+00:00,T1,Rizespor,Erzurumspor,0.4871,0.2731,0.2399,0.4932,0.2836,0.2232,0.4809,0.2625,0.2566,1.48,0.91,2,1,H
 145,2026-11-08T01:00:00+00:00,ARG,Instituto,Newells Old Boys,0.5029,0.2927,0.2044,0.5109,0.2897,0.1994,0.4949,0.2957,0.2094,1.43,0.8,2,2,D
