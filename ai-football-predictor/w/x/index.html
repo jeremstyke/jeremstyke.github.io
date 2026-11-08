@@ -61,9 +61,11 @@ function matchBody(m){var L=m.live,on=L&&LIVE[L.st],fin=(L&&FIN[L.st])||m.res,P=
  +'<div class="kv"><div><small>'+(fr?"Buts attendus":"Expected goals")+'</small><b>'+dec(m.xh)+" - "+dec(m.xa)+'</b></div><div><small>'+(fr?"Score probable":"Likely score")+'</small><b>'+es(m.sc||"-")+'</b></div><div><small>'+(fr?"+2,5 buts":"Over 2.5")+'</small><b>'+(m.o25!=null?pc(m.o25):"-")+'</b></div></div>';
  if(m.fh||m.fa)h+='<div class="row" style="margin-top:12px"><span>'+fm(m.fh)+'</span><span>'+(fr?"forme":"form")+'</span><span>'+fm(m.fa)+'</span></div>';
  return h}
+/* 8 nov 2026 (Jeremy): AI match preview and link to the blog article in the match widget */
+function pvBlock(d){var t=d.pv&&(fr?d.pv.fr:d.pv.en),a=d.art&&(fr?d.art.fr:d.art.en);if(!t&&!a)return "";return '<div class="sec">'+(fr?"Aperçu du match par l'IA":"AI match preview")+'</div>'+(t?'<p style="font-size:13.5px;line-height:1.55;margin:4px 0 0">'+es(t)+'</p>':"")+(a?'<a href="https://jeremstyke.github.io/ai-football-predictor/'+(fr?"fr/":"")+'blog/'+es(a)+'/" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;font-size:13px;font-weight:600">'+(fr?"Lire l’article complet ›":"Read the full article ›")+'</a>':"")}
 function render(d){var h="";
  if(T=="match"){if(!d||!d.n)h=head("⚽ "+(fr?"Match":"Match"))+'<div class="e">'+(fr?"Match introuvable.":"Match not found.")+'</div>';
-  else h=head("⚽ "+es(d.h)+" - "+es(d.a))+'<div class="bd">'+matchBody(d)+'</div>'+foot("📊 "+(fr?"<b>Tous les matchs</b> et leurs probabilités":"<b>Every match</b> and its probabilities"))}
+  else h=head("⚽ "+es(d.h)+" - "+es(d.a))+'<div class="bd">'+matchBody(d)+pvBlock(d)+'</div>'+foot("📊 "+(fr?"<b>Tous les matchs</b> et leurs probabilités":"<b>Every match</b> and its probabilities"))}
  else if(T=="team"){var nx=d&&d.next;h=head("⚽ "+es(team||(d&&d.team)||""));
   h+='<div class="bd">'+(nx?'<div class="sec" style="margin-top:0">'+(fr?"Prochain match":"Next match")+'</div>'+matchBody(nx):'<div class="e" style="padding:0">'+(fr?"Pas de match prévu dans les prochains jours.":"No match in the next days.")+'</div>');
   var t=nx&&(nx.h==team?nx.th:nx.a==team?nx.ta:null);
