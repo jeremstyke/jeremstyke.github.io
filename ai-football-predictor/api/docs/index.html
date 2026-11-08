@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Football Predictor API docs: football probabilities and match previews (JSON, HTML)</title>
+<meta name="description" content="Documentation of the AI Football Predictor API: win, draw and loss probabilities, expected goals, most likely score and AI match previews in JSON or ready HTML. Free key in 10 seconds.">
+<meta name="robots" content="index,follow"><link rel="canonical" href="https://jeremstyke.github.io/ai-football-predictor/api/docs/">
+<meta property="og:type" content="website"><meta property="og:title" content="AI Football Predictor API docs"><meta property="og:description" content="Football probabilities and AI match previews by API. Free key in 10 seconds."><meta property="og:url" content="https://jeremstyke.github.io/ai-football-predictor/api/docs/"><meta property="og:image" content="https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/afp-og?n=52"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#06090e"><link rel="icon" type="image/png" href="https://jeremstyke.github.io/ai-football-predictor/icon-192.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"AI Football Predictor API documentation","about":"Football match probabilities API","author":{"@type":"Person","name":"Jeremstyke","url":"https://t.me/jeremstyke"},"url":"https://jeremstyke.github.io/ai-football-predictor/api/docs/"}</script>
+<link rel="stylesheet" href="https://jeremstyke.github.io/ai-football-predictor/home.css">
+<style>.doc{display:grid;grid-template-columns:220px 1fr;gap:40px;padding:34px 0 60px}.toc{position:sticky;top:84px;align-self:start;font-size:14px}.toc a{display:block;color:#9fb0c4;text-decoration:none;padding:5px 0}.toc a:hover{color:#3ee0a8}
+.doc h1{font-size:clamp(30px,4.4vw,46px);line-height:1.08;letter-spacing:-.03em;margin:0 0 12px}.doc h2{font-size:26px;margin:44px 0 10px;padding-top:18px;border-top:1px dashed #1f2b3a;scroll-margin-top:80px}.doc h3{font-size:18px;margin:26px 0 8px}
+.doc p,.doc li{color:#c5d0de}.doc code{font:13px 'JetBrains Mono',monospace;background:#0c121b;border:1px solid #1b2533;padding:1px 6px;color:#e6edf6}.doc pre code{border:0;padding:0;background:none}
+.ep{display:inline-block;font:700 12px 'JetBrains Mono',monospace;color:#03110b;background:#3ee0a8;padding:3px 8px;margin-right:8px}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:10px 0 18px}th,td{text-align:left;padding:10px;border-bottom:1px solid #1b2533;vertical-align:top}th{font:700 12px 'JetBrains Mono',monospace;color:#7d8ba1}td code{white-space:nowrap}
+.plans{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #1b2533;background:#0c121b}.plans div{padding:20px 16px;border-right:1px solid #1b2533}.plans div:last-child{border-right:0}.plans b{display:block;font-size:17px}.plans .pr{font:800 26px 'JetBrains Mono',monospace;color:#3ee0a8;margin:6px 0}.plans ul{margin:8px 0 0;padding-left:18px;font-size:14px}.plans .hl{background:rgba(62,224,168,.06)}
+.keybox{border:1px solid #3ee0a8;background:rgba(62,224,168,.05);padding:20px;margin:18px 0}.keybox form{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.keybox input{flex:1;min-width:220px;padding:13px 12px;background:#0a0f16;border:1px solid #243246;color:#e6edf6;font:inherit}
+#kout{margin-top:12px;font-size:14.5px}#kout code{font-size:14px;color:#3ee0a8;word-break:break-all}
+@media(max-width:900px){.doc{grid-template-columns:1fr}.toc{display:none}.plans{grid-template-columns:1fr 1fr}.plans div:nth-child(2){border-right:0}.plans div:nth-child(-n+2){border-bottom:1px solid #1b2533}}
+@media(max-width:520px){.plans{grid-template-columns:1fr}.plans div{border-right:0!important;border-bottom:1px solid #1b2533}}</style>
+</head><body><div class="lp">
+<header class="lh"><div class="w"><a class="br" href="https://jeremstyke.github.io/ai-football-predictor/"><span class="mk">AFP</span><span>AI Football Predictor</span></a><nav><a class="h" href="https://jeremstyke.github.io/ai-football-predictor/api/">API</a><a class="h" href="https://jeremstyke.github.io/ai-football-predictor/widget/">Widget</a><a href="https://jeremstyke.github.io/ai-football-predictor/fr/api/">FR</a><a class="bt s" href="#key">Get a free key</a></nav></div></header>
+<main class="w doc">
+<nav class="toc"><a href="#start">Quick start</a><a href="#key">Free key</a><a href="#plans">Plans</a><a href="#auth">Authentication</a><a href="#matches">Matches</a><a href="#match">One match</a><a href="#previews">Previews</a><a href="#preview">One preview</a><a href="#reliability">Reliability</a><a href="#competitions">Competitions</a><a href="#errors">Errors</a><a href="#rules">Usage rules</a></nav>
+<div>
+<h1>AI Football Predictor API</h1>
+<p>Win, draw and loss probabilities, expected goals and most likely score for every football match in more than 25 competitions, plus AI-written match previews in JSON or ready-to-publish HTML. Every probability is locked before kickoff and checked against the result.</p>
+
+<h2 id="start">Quick start</h2>
+<p>Base URL:</p>
+<pre><code>https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/afp-api</code></pre>
+<pre><code>curl -H "x-api-key: YOUR_KEY" \
+  "https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/afp-api/v1/matches?competition=E0,CL"</code></pre>
+<pre><code>const r = await fetch("https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/afp-api/v1/matches?date=2026-11-09", {
+  headers: { "x-api-key": "YOUR_KEY" }
+});
+const { data } = await r.json();</code></pre>
+
+<div class="keybox" id="key"><b>Get a free key</b><p style="margin:4px 0 0">100 calls a day, probabilities included. One key per e-mail, shown once: keep it safe.</p>
+<form id="kf"><input type="email" required placeholder="you@company.com" aria-label="E-mail"><button class="bt" type="submit">🔑 Create my key</button></form><div id="kout" role="status"></div></div>
+
+<h2 id="plans">Plans</h2>
+<div class="plans">
+<div><b>Free</b><div class="pr">0 €</div><ul><li>100 calls a day</li><li>Probabilities</li><li>Preview titles</li><li>Attribution required</li></ul></div>
+<div><b>Starter</b><div class="pr">19 €</div><ul><li>5,000 calls a day</li><li>Probabilities</li><li>Preview titles</li><li>Attribution required</li></ul></div>
+<div class="hl"><b>Content</b><div class="pr">29 €</div><ul><li>1,000 calls a day</li><li>Probabilities</li><li>100 full previews a month (JSON + HTML)</li><li>Attribution required</li></ul></div>
+<div><b>Pro</b><div class="pr">99 €</div><ul><li>20,000 calls a day</li><li>Everything</li><li>1,000 full previews a month</li><li>No attribution</li></ul></div>
+</div>
+<p style="margin-top:12px">Prices per month. To move to a paid plan, <a href="https://t.me/jeremstyke?direct">write to us on Telegram</a> with your key: the plan is switched on the same key.</p>
+
+<h2 id="auth">Authentication</h2>
+<p>Send your key in the <code>x-api-key</code> header (recommended), or as <code>?key=</code> in the URL. Keep server-side keys on your server: anyone who sees a key can use its quota. Every successful answer has a <code>meta</code> object with your plan and <code>calls_left_today</code>. Quotas reset at midnight UTC (calls) and on the 1st of the month (previews).</p>
+
+<h2 id="matches"><span class="ep">GET</span>/v1/matches</h2>
+<p>Matches with their probabilities. Without a date: from 3 hours ago to 3 days ahead.</p>
+<table><tr><th>Parameter</th><th>Description</th></tr>
+<tr><td><code>date</code></td><td>One day, <code>YYYY-MM-DD</code> (UTC).</td></tr>
+<tr><td><code>from</code>, <code>to</code></td><td>ISO dates for a custom window.</td></tr>
+<tr><td><code>competition</code></td><td>Codes, comma separated: <code>E0,CL,F1</code>. See <a href="#competitions">competitions</a>.</td></tr>
+<tr><td><code>team</code></td><td>Part of a team name: <code>Arsenal</code>.</td></tr>
+<tr><td><code>min_probability</code></td><td>Only matches where one outcome reaches this value, for example <code>0.65</code>.</td></tr>
+<tr><td><code>limit</code></td><td>1 to 500, default 100.</td></tr></table>
+<pre><code>{
+  "data": [{
+    "id": 52,
+    "kickoff": "2026-11-08T20:00:00+00:00",
+    "competition": { "code": "SP1", "name": "LaLiga" },
+    "home": "Ath Madrid", "away": "Barcelona",
+    "probabilities": { "home": 0.29, "draw": 0.23, "away": 0.48 },
+    "most_likely": "away",
+    "expected_goals": { "home": 1.31, "away": 1.82 },
+    "most_likely_score": { "score": "1-2", "probability": 0.09 },
+    "over_2_5_goals": 0.6,
+    "both_teams_score": 0.6,
+    "locked": true,
+    "result": null,
+    "preview_image": "https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/afp-og?n=52"
+  }],
+  "count": 1,
+  "meta": { "plan": "free", "calls_left_today": 99, "attribution": { "source": "AI Football Predictor", "url": "https://jeremstyke.github.io/ai-football-predictor/" } }
+}</code></pre>
+<p><code>locked</code> becomes true 3 hours before kickoff: the probability no longer changes. After the match, <code>result</code> gives the score, the outcome and <code>most_likely_happened</code>.</p>
+
+<h2 id="match"><span class="ep">GET</span>/v1/matches/{id}</h2>
+<p>One match, same fields.</p>
+
+<h2 id="previews"><span class="ep">GET</span>/v1/previews</h2>
+<p>The latest match previews (title, standfirst, image, link), all plans. <code>lang</code>: <code>en</code> (default) or <code>fr</code>. <code>limit</code>: 1 to 50.</p>
+
+<h2 id="preview"><span class="ep">GET</span>/v1/previews/{id}</h2>
+<p>The full preview of a match (Content and Pro plans, counts as one preview in your monthly quota). <code>{id}</code> is the match id.</p>
+<table><tr><th>Parameter</th><th>Description</th></tr>
+<tr><td><code>lang</code></td><td><code>en</code> or <code>fr</code>.</td></tr>
+<tr><td><code>format</code></td><td><code>json</code> (default: title, lede, body paragraphs, image, url and ready <code>html</code>) or <code>html</code> (only the article, ready to paste).</td></tr></table>
+<pre><code>curl -H "x-api-key: YOUR_KEY" \
+  "https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/afp-api/v1/previews/52?lang=fr&amp;format=html"</code></pre>
+<p>Previews are written by our AI from our own data only (probabilities, expected goals, form, standings) and updated with the result after the match. Previews exist for the big matches.</p>
+
+<h2 id="reliability"><span class="ep">GET</span>/v1/reliability</h2>
+<p>No key needed. How often the most likely outcome happened and the Brier score, for every match since launch and for the 65%+ matches. Small samples move a lot: judge over hundreds of matches.</p>
+
+<h2 id="competitions"><span class="ep">GET</span>/v1/competitions</h2>
+<p>No key needed. The competition codes: <code>E0</code> Premier League, <code>CL</code> Champions League, <code>SP1</code> LaLiga, <code>I1</code> Serie A, <code>D1</code> Bundesliga, <code>F1</code> Ligue 1, <code>P1</code> Liga Portugal, <code>N1</code> Eredivisie, <code>SC0</code> Scottish Premiership and more.</p>
+
+<h2 id="errors">Errors</h2>
+<table><tr><th>Status</th><th>Code</th><th>Meaning</th></tr>
+<tr><td>401</td><td><code>missing_key</code>, <code>invalid_key</code></td><td>No key, or the key does not exist.</td></tr>
+<tr><td>403</td><td><code>plan_without_previews</code></td><td>Full previews need the Content or Pro plan.</td></tr>
+<tr><td>404</td><td><code>not_found</code></td><td>Unknown id or endpoint.</td></tr>
+<tr><td>429</td><td><code>daily_limit</code>, <code>monthly_article_limit</code></td><td>Quota reached.</td></tr></table>
+
+<h2 id="rules">Usage rules</h2>
+<ul><li>Free, Starter and Content: show "Source: AI Football Predictor" with a link to <a href="https://jeremstyke.github.io/ai-football-predictor/">our site</a> where you display the data. The HTML previews already include it.</li>
+<li>Probabilities are statistical estimates for information, not betting advice. Do not present them as certain or as tips. Show them to adults only where betting content is involved.</li>
+<li>Do not resell the raw API to third parties.</li></ul>
+<p>Questions: <a href="https://t.me/jeremstyke?direct">Telegram</a> · by <a href="https://t.me/jeremstyke">@jeremstyke</a></p>
+</div></main>
+<footer class="lf"><div class="w"><span>Statistical estimates for information only, not betting advice. 18+.</span><span><a href="https://jeremstyke.github.io/ai-football-predictor/">AI Football Predictor</a> · <a href="https://github.com/jeremstyke/ai-football-predictor">GitHub</a></span></div></footer>
+</div>
+<script>
+document.getElementById("kf").onsubmit=function(e){e.preventDefault();var f=this,b=f.querySelector("button"),o=document.getElementById("kout"),em=f.querySelector("input").value;b.disabled=true;o.textContent="…";
+ fetch("https://txvrlvcxfnylnrpdrxtt.supabase.co/rest/v1/rpc/afp_api_signup",{method:"POST",headers:{apikey:"sb_publishable_7aA-njoU5fU2ialO0ExwQQ_REHjAEIe","Content-Type":"application/json"},body:JSON.stringify({p_email:em})}).then(function(r){return r.json()}).then(function(d){
+  if(d&&d.ok){o.innerHTML='✅ Your key (shown once, copy it now):<br><code></code><br><button class="bt s" type="button" style="margin-top:8px">Copy</button>';o.querySelector("code").textContent=d.key;o.querySelector("button").onclick=function(){navigator.clipboard&&navigator.clipboard.writeText(d.key);this.textContent="Copied ✓"}}
+  else{var m={invalid_email:"This e-mail address looks wrong.",already_has_key:"This e-mail already has a key. Lost it? Write to us on Telegram.",busy:"Too many requests right now, try again in a few minutes."};o.textContent="⚠️ "+(m[d&&d.error]||"Something went wrong.");b.disabled=false}
+ }).catch(function(){o.textContent="⚠️ Network error, try again.";b.disabled=false})};
+</script>
+</body></html>
