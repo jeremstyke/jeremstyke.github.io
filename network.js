@@ -1,11 +1,13 @@
 // 13 oct 2026: "More by Jeremstyke" strip, shared by all my sites (one file, every site loads it)
 (function () {
+  // 8 nov 2026 (Jeremy): Daily Score is closed, every dailyscoreapp.com page goes to the AI Football Predictor game (through the home page message)
+  if (location.hostname.indexOf('dailyscoreapp') >= 0 && location.pathname !== '/' && location.pathname !== '/index.html') { location.replace('https://dailyscoreapp.com/'); return; }
   if (window.__jerNet) return; window.__jerNet = 1;
   // never inside a Telegram mini app (the app has its own fixed layout)
   try { if (window.Telegram && Telegram.WebApp && Telegram.WebApp.initData) return; } catch (e) {}
   var S = [
     ['home', '✨', 'Jeremstyke', 'All my free apps', 'https://jeremstyke.github.io/'],
-    ['dailyscore', '⚽', 'Daily Score', 'Football prediction game', 'https://dailyscoreapp.com/en/'],
+    ['aifp', '⚽', 'AI Football Predictor', 'Match probabilities and prediction game', 'https://aifootpredictor.com/?src=jnet'],
     ['memecointycoon', '🐸', 'Meme Coin Tycoon', 'Memecoin trading game', 'https://jeremstyke.github.io/memecointycoon/'],
   ];
   var ASK = { en: 'Any question? Contact @jeremstyke', fr: 'Une question ? Contacte @jeremstyke', es: '¿Alguna pregunta? Escribe a @jeremstyke', pt: 'Alguma dúvida? Fale com @jeremstyke', de: 'Eine Frage? Schreib @jeremstyke', it: 'Una domanda? Scrivi a @jeremstyke', ru: 'Есть вопрос? Пиши @jeremstyke', ar: 'لديك سؤال؟ تواصل مع @jeremstyke', tr: 'Bir sorun mu var? @jeremstyke ile iletişime geç', id: 'Ada pertanyaan? Hubungi @jeremstyke' };
