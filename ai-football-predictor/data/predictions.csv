@@ -1,4 +1,5 @@
 n,kickoff,league,home,away,p_home,p_draw,p_away,model_home,model_draw,model_away,mkt_home,mkt_draw,mkt_away,xg_home,xg_away,home_goals,away_goals,result
+161,2026-11-08T11:00:00+00:00,UA,Bukovyna,Kolos Kovalivka,0.2311,0.3666,0.4023,0.2311,0.3666,0.4023,,,,0.65,0.95,1,1,D
 104,2026-11-08T10:30:00+00:00,T1,Rizespor,Erzurumspor,0.4871,0.2731,0.2399,0.4932,0.2836,0.2232,0.4809,0.2625,0.2566,1.48,0.91,2,1,H
 145,2026-11-08T01:00:00+00:00,ARG,Instituto,Newells Old Boys,0.5029,0.2927,0.2044,0.5109,0.2897,0.1994,0.4949,0.2957,0.2094,1.43,0.8,2,2,D
 144,2026-11-07T20:30:00+00:00,ARG,Boca Juniors,Defensa y Justicia,0.6452,0.2246,0.1302,0.6143,0.2424,0.1433,0.676,0.2067,0.1172,1.79,0.75,1,0,H
