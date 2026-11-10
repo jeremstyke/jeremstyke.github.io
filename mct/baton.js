@@ -87,6 +87,7 @@
     } catch (e) {}
     // 5 nov 2026 (00h22, Jeremy): one opening out of two shows the SayApp promo (sayapp/promo.js) instead of the ad
     function saPromoOr(fb) {
+      return fb();  // 10 nov 2026 (21h39, Jeremy): no more SayApp interstitial anywhere, always the normal ad
       let n = 0; try { n = Number(localStorage.getItem('mct_sa_n') || 0) + 1; localStorage.setItem('mct_sa_n', String(n)); } catch (e) {}
       if (Math.random() < 0.5) return fb();  // 5 nov 2026 (00h57, Jeremy): at random, not every other time
       let lg = 'en'; try { lg = LANG; } catch (e) {}
