@@ -8,7 +8,8 @@
     if (document.getElementById('bbaiMade')) return;
     var main = document.querySelector('main'); if (!main) return;
     var lg = ''; try { lg = Telegram.WebApp.initDataUnsafe.user.language_code || ''; } catch (x) {} lg = String(lg || navigator.language || 'en').slice(0, 2).toLowerCase();
-    var TX = { fr: 'Essaie Big Bang AI, l’IA gratuite dans Telegram', es: 'Prueba Big Bang AI, la IA gratis en Telegram', pt: 'Experimente o Big Bang AI, a IA grátis no Telegram', ru: 'Попробуй Big Bang AI, бесплатный ИИ в Telegram', uk: 'Спробуй Big Bang AI, безкоштовний ШІ в Telegram', tr: 'Big Bang AI’yi dene, Telegram’da ücretsiz yapay zeka', id: 'Coba Big Bang AI, AI gratis di Telegram', de: 'Teste Big Bang AI, die kostenlose KI in Telegram', it: 'Prova Big Bang AI, l’IA gratuita su Telegram', ar: 'جرّب Big Bang AI، الذكاء الاصطناعي المجاني في Telegram', fa: 'Big Bang AI را امتحان کن، هوش مصنوعی رایگان در Telegram', en: 'Try Big Bang AI, the free AI in Telegram' };
+    // 10 nov 2026 (Jeremy): "Made with Big Bang AI" at the bottom of his apps
+    var TX = { fr: 'Fait avec Big Bang AI', es: 'Hecho con Big Bang AI', pt: 'Feito com Big Bang AI', ru: 'Сделано с Big Bang AI', uk: 'Зроблено з Big Bang AI', tr: 'Big Bang AI ile yapıldı', id: 'Dibuat dengan Big Bang AI', de: 'Gemacht mit Big Bang AI', it: 'Fatto con Big Bang AI', ar: 'صُنع باستخدام Big Bang AI', fa: 'ساخته شده با Big Bang AI', en: 'Made with Big Bang AI' };
     var s = document.createElement('style');
     s.textContent = '#bbaiMade{display:flex;justify-content:center;padding:18px 0 6px}#bbaiMade a{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:99px;background:rgba(47,128,255,.12);border:1px solid rgba(111,211,255,.28);color:rgba(255,255,255,.85);font:600 12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;text-decoration:none;text-align:center}#bbaiMade b{font-size:14px}';
     document.head.appendChild(s);
