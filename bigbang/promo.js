@@ -36,7 +36,7 @@
     return new Promise(function (done) {
       try {
         if (document.getElementById('bbpr')) return done(false);
-        try { if (Date.now() - Number(localStorage.getItem('bbpr_opened') || 0) < 7 * 864e5) return done(null); } catch (e) {}  // already opened Big Bang AI from here this week: the game shows its normal ad
+        try { if (Date.now() >= 1794956340000 && Date.now() - Number(localStorage.getItem('bbpr_opened') || 0) < 7 * 864e5) return done(null); } catch (e) {}  // 10 nov 2026 (Jeremy): until 17 nov 2026, only Big Bang AI interstitials (never skipped)  // already opened Big Bang AI from here this week: the game shows its normal ad
         var lg = String(o.lang || (navigator.language || 'en')).slice(0, 2).toLowerCase(), t = T[lg] || T.en;
         var src = String(o.src || 'promo').replace(/[^a-z0-9_]/gi, '').slice(0, 30);
         var appUrl = 'https://t.me/Bigbangaibot/App?startapp=src_' + src + '_int';

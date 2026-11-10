@@ -24,6 +24,8 @@
     let tries = 0;
     // 22 oct 2026 (18h45, Jeremy): at opening, when the Baton popup is not shown, an Adsgram interstitial (block int-55508). Never for Premium.
     function adInt() {
+      // 10 nov 2026 (Jeremy): for 7 days (until 17 nov 2026), no Adsgram: every interstitial is the Big Bang AI promo
+      if (Date.now() < 1794956340000) return saPromoOr(() => {});
       try {
         // 25 oct 2026 (3h45, Jeremy): when Adsgram has no ad, an Ads Galaxy video (game 135) takes over
         const agx = () => {};  /* 26 oct 2026 (18h25, Jeremy): no more Ads Galaxy backup, it played right after the Adsgram ad */
@@ -89,11 +91,11 @@
     function saPromoOr(fb) {
       // 10 nov 2026 (21h52, Jeremy): the SayApp promo is replaced by the Big Bang AI News interstitial (bigbang/promo.js)
       let n = 0; try { n = Number(localStorage.getItem('mct_sa_n') || 0) + 1; localStorage.setItem('mct_sa_n', String(n)); } catch (e) {}
-      if (Math.random() < 0.5) return fb();  // 5 nov 2026 (00h57, Jeremy): at random, not every other time
+      if (Date.now() >= 1794956340000 && Math.random() < 0.5) return fb();  // 5 nov 2026 (00h57, Jeremy): at random, not every other time. 10 nov 2026: until 17 nov, always Big Bang AI
       let lg = 'en'; try { lg = LANG; } catch (e) {}
       const run = () => { try { window.BigBangPromo.show({ src: 'mct', lang: lg }).then((r) => { if (r === null) fb(); }); } catch (e) { fb(); } };
       if (window.BigBangPromo) return run();
-      const s = document.createElement('script'); s.src = 'https://jeremstyke.github.io/bigbang/promo.js?v=1'; s.onload = run; s.onerror = () => fb(); document.head.appendChild(s);
+      const s = document.createElement('script'); s.src = 'https://jeremstyke.github.io/bigbang/promo.js?v=2'; s.onload = run; s.onerror = () => fb(); document.head.appendChild(s);
     }
     function popup() {
       if (document.getElementById('btpop')) return;
