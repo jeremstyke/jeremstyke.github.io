@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Big Bang AI - Your AI assistant inside Telegram</title>
+<meta name="description" content="Big Bang AI is a free AI assistant inside Telegram. Chat, search the web, send photos and PDFs, and build your own mini apps from one sentence. Powered by Claude.">
+<meta name="theme-color" content="#0b0a1f">
+<meta property="og:title" content="Big Bang AI - Your AI assistant inside Telegram">
+<meta property="og:description" content="Free AI chat in Telegram. Web search, photos and PDFs, and a mini app builder. No app to install, no account.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f5ff; --bg2:#ecebff; --card:#ffffff; --fg:#14122b; --muted:#585477; --line:#dcd9f5;
+  --accent:#5b3df5; --accent2:#c026d3; --accent-fg:#ffffff; --glow:rgba(91,61,245,.18);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0b0a1f; --bg2:#12102b; --card:#161337; --fg:#f1efff; --muted:#a8a3cf; --line:#2a2658;
+  --accent:#8b7bff; --accent2:#f0abfc; --accent-fg:#0b0a1f; --glow:rgba(139,123,255,.22); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0b0a1f; --bg2:#12102b; --card:#161337; --fg:#f1efff; --muted:#a8a3cf; --line:#2a2658;
+  --accent:#8b7bff; --accent2:#f0abfc; --accent-fg:#0b0a1f; --glow:rgba(139,123,255,.22); color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 Inter,system-ui,sans-serif;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:Sora,Inter,sans-serif;line-height:1.15;margin:0;text-wrap:balance}
+a{color:inherit}
+html[lang="fr"] .en,html[lang="en"] .fr{display:none!important}
+.wrap{max-width:1080px;margin:0 auto}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:18px}
+.brand{display:flex;align-items:center;gap:10px;font:700 18px Sora,sans-serif;text-decoration:none}
+.logo{width:34px;height:34px;border-radius:10px;background:radial-gradient(circle at 30% 30%,var(--accent2),var(--accent) 60%,#1b1550);box-shadow:0 0 24px var(--glow)}
+.hdr-r{display:flex;align-items:center;gap:10px}
+.lang{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:999px;padding:7px 14px;font:600 13px Inter,sans-serif;cursor:pointer}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font:600 15px Inter,sans-serif;text-decoration:none;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--accent-fg);box-shadow:0 8px 28px var(--glow);border:0;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line);box-shadow:none}
+.btn.sm{padding:9px 16px;font-size:14px}
+.hero{position:relative;text-align:center;padding-block:56px 40px}
+.hero::before{content:"";position:absolute;inset:-40px -20px auto;height:420px;z-index:-1;
+  background:radial-gradient(ellipse at 50% 0,var(--glow),transparent 70%),
+  radial-gradient(1.5px 1.5px at 12% 30%,var(--fg),transparent),radial-gradient(1.5px 1.5px at 80% 20%,var(--fg),transparent),
+  radial-gradient(1px 1px at 55% 60%,var(--fg),transparent),radial-gradient(1.5px 1.5px at 30% 75%,var(--fg),transparent),radial-gradient(1px 1px at 90% 70%,var(--fg),transparent);opacity:.9}
+.pill{display:inline-block;padding:6px 14px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:13px;background:var(--card)}
+.hero h1{font-size:clamp(34px,7vw,64px);margin:18px auto 16px;max-width:15em;letter-spacing:-.02em}
+.grad{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{font-size:clamp(16px,2.4vw,20px);color:var(--muted);max-width:36em;margin:0 auto 28px}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.note{color:var(--muted);font-size:13px;margin-top:14px}
+section{padding-block:48px}
+.eyebrow{font:600 12px Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+section h2{font-size:clamp(26px,4.4vw,40px);margin-bottom:14px}
+.sub{color:var(--muted);max-width:40em;margin:0 0 28px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;min-width:0}
+.card .ic{font-size:26px;margin-bottom:10px}
+.card h3{font-size:18px;margin-bottom:6px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.tiers{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.tier{border-radius:20px;padding:20px;background:var(--card);border:1px solid var(--line)}
+.tier b{font:700 18px Sora,sans-serif;display:block;margin-bottom:4px}
+.tier small{color:var(--muted);display:block;margin-bottom:10px}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--bg2);border:1px solid var(--line)}
+.plans{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));align-items:stretch}
+.plan{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.plan.best{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 20px 50px var(--glow)}
+.plan h3{font-size:22px}
+.price{font:800 34px Sora,sans-serif}
+.price small{font:500 14px Inter,sans-serif;color:var(--muted)}
+.plan ul{margin:6px 0 10px;padding-left:18px;color:var(--muted);font-size:15px}
+.plan li{margin:5px 0}
+.plan .btn{margin-top:auto;justify-content:center}
+.split{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:center}
+.steps{counter-reset:s;list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.steps li{counter-increment:s;display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.steps li::before{content:counter(s);flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:700 14px Sora,sans-serif;background:var(--accent);color:var(--accent-fg)}
+.phone{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:16px;max-width:340px;margin-inline:auto;box-shadow:0 24px 60px var(--glow)}
+.bub{padding:10px 14px;border-radius:16px;margin:8px 0;font-size:14px;max-width:88%}
+.bub.u{background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--accent-fg);margin-left:auto;border-bottom-right-radius:4px}
+.bub.a{background:var(--bg2);border:1px solid var(--line);border-bottom-left-radius:4px}
+details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:10px 0}
+summary{cursor:pointer;font-weight:600}
+details p{margin:10px 0 0;color:var(--muted)}
+.final{text-align:center;background:linear-gradient(135deg,var(--glow),transparent);border:1px solid var(--line);border-radius:28px;padding:44px 20px}
+footer{padding-block:36px 50px;color:var(--muted);font-size:13px;text-align:center}
+footer a{color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.btn{transition:transform .15s}.btn:hover{transform:translateY(-2px)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <a class="brand" href="#top"><span class="logo"></span>Big Bang AI</a>
+  <div class="hdr-r">
+    <button class="lang" id="lang" aria-label="Language">FR</button>
+    <a class="btn sm" href="https://t.me/Bigbangaibot/App?startapp=src_web_header"><span class="en">Open in Telegram</span><span class="fr">Ouvrir dans Telegram</span></a>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero">
+  <span class="pill"><span class="en">Free to start · Powered by Claude</span><span class="fr">Gratuit pour commencer · Propulsé par Claude</span></span>
+  <h1><span class="en">Your AI assistant, right inside <span class="grad">Telegram</span></span><span class="fr">Ton assistant IA, directement dans <span class="grad">Telegram</span></span></h1>
+  <p class="lead"><span class="en">Write, translate, code, learn and search the web. Send a photo or a PDF. Describe an app in one sentence and watch it get built. No app to install, no account to create.</span><span class="fr">Écris, traduis, code, apprends et cherche sur le web. Envoie une photo ou un PDF. Décris une appli en une phrase et regarde-la se construire. Rien à installer, aucun compte à créer.</span></p>
+  <div class="cta">
+    <a class="btn" href="https://t.me/Bigbangaibot/App?startapp=src_web_hero"><span class="en">Start for free</span><span class="fr">Commencer gratuitement</span></a>
+    <a class="btn ghost" href="#pricing"><span class="en">See the plans</span><span class="fr">Voir les offres</span></a>
+  </div>
+  <p class="note"><span class="en">Beta version. AI can make mistakes: check important information.</span><span class="fr">Version bêta. L'IA peut se tromper : vérifie les informations importantes.</span></p>
+</div>
+
+<section id="features">
+  <div class="eyebrow"><span class="en">What it does</span><span class="fr">Ce qu'elle fait</span></div>
+  <h2><span class="en">Everything an AI assistant should do</span><span class="fr">Tout ce qu'un assistant IA doit savoir faire</span></h2>
+  <div class="grid">
+    <div class="card"><div class="ic">💬</div><h3><span class="en">Chat that remembers</span><span class="fr">Un chat qui se souvient</span></h3><p><span class="en">It remembers what matters to you. See, edit or delete its memory at any time.</span><span class="fr">Elle retient ce qui compte pour toi. Tu peux voir, modifier ou effacer sa mémoire à tout moment.</span></p></div>
+    <div class="card"><div class="ic">🌐</div><h3><span class="en">Web search with sources</span><span class="fr">Recherche web avec sources</span></h3><p><span class="en">Ask about today's news, prices and scores. Sources are shown under every answer.</span><span class="fr">Pose des questions sur l'actu, les prix, les scores. Les sources s'affichent sous chaque réponse.</span></p></div>
+    <div class="card"><div class="ic">📎</div><h3><span class="en">Photos and PDFs</span><span class="fr">Photos et PDF</span></h3><p><span class="en">Snap a menu, an exercise or a contract and ask about it. Up to 4 photos per message.</span><span class="fr">Prends un menu, un exercice ou un contrat en photo et pose ta question. Jusqu'à 4 photos par message.</span></p></div>
+    <div class="card"><div class="ic">🧩</div><h3><span class="en">Mini app builder</span><span class="fr">Créateur de mini apps</span></h3><p><span class="en">Describe a game, a tool or a quiz. Big Bang AI builds a complete app you can share with a link.</span><span class="fr">Décris un jeu, un outil ou un quiz. Big Bang AI construit une appli complète à partager avec un lien.</span></p></div>
+    <div class="card"><div class="ic">🪐</div><h3><span class="en">4 power levels</span><span class="fr">4 niveaux de puissance</span></h3><p><span class="en">From fast and free to the smartest model. Switch level at any time, even mid-conversation.</span><span class="fr">Du rapide et gratuit au modèle le plus intelligent. Change de niveau à tout moment, même en pleine conversation.</span></p></div>
+    <div class="card"><div class="ic">💰</div><h3><span class="en">Earn by inviting friends</span><span class="fr">Gagne en invitant tes amis</span></h3><p><span class="en">10% of the stars your friends spend, for life, paid in USDT.</span><span class="fr">10 % des étoiles dépensées par tes amis, à vie, payés en USDT.</span></p></div>
+  </div>
+</section>
+
+<section id="levels">
+  <div class="eyebrow"><span class="en">Power levels</span><span class="fr">Niveaux</span></div>
+  <h2><span class="en">Free every single day</span><span class="fr">Gratuit chaque jour</span></h2>
+  <p class="sub"><span class="en">Start free, go further with credits only when you need the strongest models.</span><span class="fr">Commence gratuitement, passe aux crédits seulement quand tu as besoin des modèles les plus forts.</span></p>
+  <div class="tiers">
+    <div class="tier"><b>⚡ Simple</b><small><span class="en">Fast, for everyday questions</span><span class="fr">Rapide, pour le quotidien</span></small><span class="tag"><span class="en">Free · 40 messages a day</span><span class="fr">Gratuit · 40 messages par jour</span></span></div>
+    <div class="tier"><b>🪐 <span class="en">Medium</span><span class="fr">Moyen</span></b><small><span class="en">Balanced, great writing and reasoning</span><span class="fr">Équilibré, écrit et raisonne très bien</span></small><span class="tag"><span class="en">3 free messages a day</span><span class="fr">3 messages gratuits par jour</span></span></div>
+    <div class="tier"><b>🌟 <span class="en">Powerful</span><span class="fr">Puissant</span></b><small><span class="en">Complex tasks and code</span><span class="fr">Tâches complexes et code</span></small><span class="tag"><span class="en">With credits</span><span class="fr">Avec des crédits</span></span></div>
+    <div class="tier"><b>💥 <span class="en">Ultra powerful</span><span class="fr">Ultra puissant</span></b><small><span class="en">The smartest, for the hardest problems</span><span class="fr">Le plus intelligent, pour les problèmes les plus durs</span></small><span class="tag"><span class="en">With credits</span><span class="fr">Avec des crédits</span></span></div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="eyebrow"><span class="en">Plans</span><span class="fr">Offres</span></div>
+  <h2><span class="en">Simple pricing, paid with Telegram Stars</span><span class="fr">Des prix simples, payés en étoiles Telegram</span></h2>
+  <p class="sub"><span class="en">Cancel any time in Telegram settings. Subscribers can also buy credit packs on top.</span><span class="fr">Annulable à tout moment dans les réglages Telegram. Les abonnés peuvent aussi acheter des packs de crédits en plus.</span></p>
+  <div class="plans">
+    <div class="plan"><h3><span class="en">Free</span><span class="fr">Gratuit</span></h3><div class="price">0 <small>⭐</small></div>
+      <ul><li><span class="en">Simple: 40 messages a day</span><span class="fr">Simple : 40 messages par jour</span></li><li><span class="en">3 free Medium messages a day</span><span class="fr">3 messages Moyen gratuits par jour</span></li><li><span class="en">3 free web searches a day</span><span class="fr">3 recherches web gratuites par jour</span></li><li><span class="en">Photos in Simple</span><span class="fr">Photos en Simple</span></li></ul>
+      <a class="btn ghost" href="https://t.me/Bigbangaibot/App?startapp=src_web_free"><span class="en">Start free</span><span class="fr">Commencer</span></a></div>
+    <div class="plan best"><span class="tag">✨ <span class="en">Most popular</span><span class="fr">Le plus choisi</span></span><h3>Nova</h3><div class="price">200 ⭐ <small>/ <span class="en">month</span><span class="fr">mois</span></small></div>
+      <ul><li><span class="en">220 credits every month</span><span class="fr">220 crédits chaque mois</span></li><li><span class="en">Medium, Powerful and Ultra models</span><span class="fr">Modèles Moyen, Puissant et Ultra</span></li><li><span class="en">PDFs and mini app builder</span><span class="fr">PDF et créateur de mini apps</span></li><li><span class="en">Credit packs available on top</span><span class="fr">Packs de crédits en plus</span></li></ul>
+      <a class="btn" href="https://t.me/Bigbangaibot/App?startapp=src_web_nova"><span class="en">Get Nova</span><span class="fr">Prendre Nova</span></a></div>
+    <div class="plan"><h3>Supernova</h3><div class="price">400 ⭐ <small>/ <span class="en">month</span><span class="fr">mois</span></small></div>
+      <ul><li><span class="en">460 credits every month</span><span class="fr">460 crédits chaque mois</span></li><li><span class="en">For heavy users of the strongest models</span><span class="fr">Pour les gros utilisateurs des modèles les plus forts</span></li><li><span class="en">Everything in Nova</span><span class="fr">Tout ce qu'il y a dans Nova</span></li><li><span class="en">Credit packs available on top</span><span class="fr">Packs de crédits en plus</span></li></ul>
+      <a class="btn ghost" href="https://t.me/Bigbangaibot/App?startapp=src_web_supernova"><span class="en">Get Supernova</span><span class="fr">Prendre Supernova</span></a></div>
+  </div>
+  <p class="note"><span class="en">Credit packs: 50, 165 and 575 credits for 50, 150 and 500 stars. Credits from packs never expire; subscription credits renew every month.</span><span class="fr">Packs de crédits : 50, 165 et 575 crédits pour 50, 150 et 500 étoiles. Les crédits des packs n'expirent pas, ceux de l'abonnement se renouvellent chaque mois.</span></p>
+</section>
+
+<section id="builder">
+  <div class="split">
+    <div>
+      <div class="eyebrow"><span class="en">Mini app builder</span><span class="fr">Créateur de mini apps</span></div>
+      <h2><span class="en">From one sentence to a working app</span><span class="fr">D'une phrase à une appli qui marche</span></h2>
+      <p class="sub"><span class="en">No code, no setup. The app opens full screen, you can edit it by chatting, and share it with a link.</span><span class="fr">Pas de code, pas de configuration. L'appli s'ouvre en plein écran, tu la modifies en discutant, et tu la partages avec un lien.</span></p>
+      <a class="btn" href="https://t.me/Bigbangaibot/App?startapp=src_web_builder"><span class="en">Build my first app</span><span class="fr">Créer ma première appli</span></a>
+    </div>
+    <div class="phone" aria-hidden="true">
+      <div class="bub u"><span class="en">Make a quiz about space for my friends</span><span class="fr">Fais un quiz sur l'espace pour mes amis</span></div>
+      <div class="bub a"><span class="en">Done! Your Space Quiz is ready: 10 questions, a score and a share link. 🚀</span><span class="fr">C'est fait ! Ton Quiz de l'espace est prêt : 10 questions, un score et un lien de partage. 🚀</span></div>
+      <div class="bub u"><span class="en">Add a timer and dark mode</span><span class="fr">Ajoute un chrono et un mode sombre</span></div>
+      <div class="bub a"><span class="en">Updated. Want a leaderboard too?</span><span class="fr">Mis à jour. Tu veux aussi un classement ?</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="referral">
+  <div class="split">
+    <ol class="steps">
+      <li><span><span class="en">Open the app and tap <b>Referral</b></span><span class="fr">Ouvre l'appli et touche <b>Parrainage</b></span></span></li>
+      <li><span><span class="en">Share your personal link in one tap</span><span class="fr">Partage ton lien personnel en un geste</span></span></li>
+      <li><span><span class="en">Earn <b>10%</b> of the stars your friends buy, for life, plus $0.10 per active friend</span><span class="fr">Gagne <b>10 %</b> des étoiles achetées par tes amis, à vie, plus 0,10 $ par ami actif</span></span></li>
+      <li><span><span class="en">Earnings unlock after 30 days and are paid in USDT from $1</span><span class="fr">Les gains se débloquent après 30 jours et sont payés en USDT dès 1 $</span></span></li>
+    </ol>
+    <div>
+      <div class="eyebrow"><span class="en">Referral program</span><span class="fr">Programme de parrainage</span></div>
+      <h2><span class="en">Share it, get paid</span><span class="fr">Partage, sois payé</span></h2>
+      <p class="sub"><span class="en">Big Bang AI is free to start, so it is easy to share. Every friend who joins with your link becomes a small income.</span><span class="fr">Big Bang AI est gratuit pour commencer, donc facile à partager. Chaque ami qui rejoint avec ton lien devient un petit revenu.</span></p>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="eyebrow">FAQ</div>
+  <h2><span class="en">Questions</span><span class="fr">Questions</span></h2>
+  <details><summary><span class="en">Which AI is behind it?</span><span class="fr">Quelle IA se trouve derrière ?</span></summary><p><span class="en">Big Bang AI uses Anthropic's Claude models. It is an independent project, not affiliated with Anthropic or Telegram.</span><span class="fr">Big Bang AI utilise les modèles Claude d'Anthropic. C'est un projet indépendant, non affilié à Anthropic ni à Telegram.</span></p></details>
+  <details><summary><span class="en">Is it really free?</span><span class="fr">C'est vraiment gratuit ?</span></summary><p><span class="en">Yes. The Simple level is free every day, with a daily limit, and you also get free Medium messages and web searches. You only pay for the strongest models.</span><span class="fr">Oui. Le niveau Simple est gratuit chaque jour, avec une limite quotidienne, et tu as aussi des messages Moyen et des recherches web gratuits. Tu ne paies que pour les modèles les plus forts.</span></p></details>
+  <details><summary><span class="en">How do credits work?</span><span class="fr">Comment marchent les crédits ?</span></summary><p><span class="en">1 credit equals 1 Telegram star. A message costs according to its length and the level used. Subscription credits are used first and renew every month.</span><span class="fr">1 crédit vaut 1 étoile Telegram. Un message coûte selon sa longueur et le niveau utilisé. Les crédits de l'abonnement sont utilisés en premier et se renouvellent chaque mois.</span></p></details>
+  <details><summary><span class="en">What happens to my data?</span><span class="fr">Que deviennent mes données ?</span></summary><p><span class="en">Your conversations are stored so you can find them again, and you can delete them. The long-term memory is optional: see, edit or turn it off in the menu.</span><span class="fr">Tes conversations sont gardées pour que tu les retrouves, et tu peux les supprimer. La mémoire à long terme est optionnelle : tu la vois, la modifies ou la coupes dans le menu.</span></p></details>
+  <details><summary><span class="en">How do I cancel a subscription?</span><span class="fr">Comment annuler un abonnement ?</span></summary><p><span class="en">In Telegram: Settings, My Stars, Subscriptions. You keep your credits until the end of the period.</span><span class="fr">Dans Telegram : Réglages, Mes étoiles, Abonnements. Tu gardes tes crédits jusqu'à la fin de la période.</span></p></details>
+</section>
+
+<section>
+  <div class="final">
+    <h2><span class="en">Ready to try it?</span><span class="fr">Prêt à l'essayer ?</span></h2>
+    <p class="sub" style="margin:12px auto 22px"><span class="en">Open it in Telegram, say hello, and ask your first question.</span><span class="fr">Ouvre-la dans Telegram, dis bonjour et pose ta première question.</span></p>
+    <div class="cta">
+      <a class="btn" href="https://t.me/Bigbangaibot/App?startapp=src_web_footer"><span class="en">Open Big Bang AI</span><span class="fr">Ouvrir Big Bang AI</span></a>
+      <a class="btn ghost" href="https://t.me/bigbangainews"><span class="en">News channel</span><span class="fr">Chaîne d'actus</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <span class="en">Big Bang AI is an independent project and is not affiliated with Anthropic or Telegram. Beta version: AI can make mistakes.</span>
+  <span class="fr">Big Bang AI est un projet indépendant, non affilié à Anthropic ni à Telegram. Version bêta : l'IA peut se tromper.</span>
+</footer>
+</div>
+<script>
+(function(){
+  var h=document.documentElement,b=document.getElementById('lang'),l='en';
+  try{l=localStorage.getItem('bb_lang')||''}catch(e){}
+  if(l!=='fr'&&l!=='en')l=((navigator.language||'en').slice(0,2)==='fr')?'fr':'en';
+  function set(x){l=x;h.lang=x;b.textContent=x==='fr'?'EN':'FR';try{localStorage.setItem('bb_lang',x)}catch(e){}}
+  set(l);b.onclick=function(){set(l==='fr'?'en':'fr')};
+})();
+</script>
+</body>
+</html>
