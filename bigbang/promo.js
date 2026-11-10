@@ -1,17 +1,18 @@
-/* Big Bang AI News interstitial (10 nov 2026, Jeremy): replaces the SayApp promo in Meme Coin Tycoon, Pass The Baton and Rig Rush.
+/* Big Bang AI interstitial (10 nov 2026, Jeremy): replaces the SayApp promo in Meme Coin Tycoon, Pass The Baton and Rig Rush.
+   10 nov 2026 (Jeremy): "l'interstitiel de pub c'est pour l'app pas la chaine": it promotes the Big Bang AI app, not the channel.
    Usage: BigBangPromo.show({ src: 'mct', lang: 'fr' }) -> Promise resolved when closed. */
 (function () {
   if (window.BigBangPromo) return;
   var LOGO = 'https://bigbang-ai-production.up.railway.app/logo.jpg';
   var T = {
-    en: { b: 'Big Bang AI News', h: 'The free AI of Telegram has its channel', p: 'Tips, new features and the best mini apps made with Big Bang AI, every day.', l: ['⚡ Free and unlimited AI, right in Telegram', '🌐 Answers from the live web', '🧩 Build your own mini app in one sentence'], c: '📰 Join the channel', o: 'or open Big Bang AI', x: 'Close', bonus: { mct: '🎁 In this game: +$2,000 every day and +10% mining while you are in the channel', rr: '🎁 In this game: +5% mining while you are in the channel', ptb: '🎁 Join task in this game: one of the best paid' } },
-    fr: { b: 'Big Bang AI News', h: "L'IA gratuite de Telegram a sa chaîne", p: 'Astuces, nouveautés et les meilleures mini-apps créées avec Big Bang AI, chaque jour.', l: ['⚡ IA gratuite et illimitée, directement dans Telegram', '🌐 Réponses tirées du web en direct', '🧩 Crée ta propre mini-app en une phrase'], c: '📰 Rejoindre la chaîne', o: 'ou ouvrir Big Bang AI', x: 'Fermer', bonus: { mct: '🎁 Dans ce jeu : +2 000 $ chaque jour et +10 % de minage tant que tu es dans la chaîne', rr: '🎁 Dans ce jeu : +5 % de minage tant que tu es dans la chaîne', ptb: "🎁 Tâche dans ce jeu : l'une des mieux payées" } },
-    es: { b: 'Big Bang AI News', h: 'La IA gratis de Telegram tiene su canal', p: 'Trucos, novedades y las mejores mini apps hechas con Big Bang AI, cada día.', l: ['⚡ IA gratis e ilimitada, dentro de Telegram', '🌐 Respuestas desde la web en vivo', '🧩 Crea tu propia mini app con una frase'], c: '📰 Unirme al canal', o: 'o abrir Big Bang AI', x: 'Cerrar', bonus: { mct: '🎁 En este juego: +$2,000 cada día y +10% de minería mientras estés en el canal', rr: '🎁 En este juego: +5% de minería mientras estés en el canal', ptb: '🎁 Tarea en este juego: de las mejor pagadas' } },
-    pt: { b: 'Big Bang AI News', h: 'A IA grátis do Telegram tem seu canal', p: 'Dicas, novidades e os melhores mini apps feitos com Big Bang AI, todo dia.', l: ['⚡ IA grátis e ilimitada, dentro do Telegram', '🌐 Respostas da web ao vivo', '🧩 Crie seu próprio mini app com uma frase'], c: '📰 Entrar no canal', o: 'ou abrir Big Bang AI', x: 'Fechar', bonus: { mct: '🎁 Neste jogo: +$2,000 por dia e +10% de mineração enquanto estiver no canal', rr: '🎁 Neste jogo: +5% de mineração enquanto estiver no canal', ptb: '🎁 Tarefa neste jogo: uma das mais bem pagas' } },
-    ru: { b: 'Big Bang AI News', h: 'У бесплатного ИИ Telegram есть свой канал', p: 'Советы, новинки и лучшие мини-приложения, созданные с Big Bang AI, каждый день.', l: ['⚡ Бесплатный безлимитный ИИ прямо в Telegram', '🌐 Ответы из интернета в реальном времени', '🧩 Создай своё мини-приложение одной фразой'], c: '📰 Подписаться на канал', o: 'или открыть Big Bang AI', x: 'Закрыть', bonus: { mct: '🎁 В этой игре: +$2,000 каждый день и +10% майнинга, пока ты в канале', rr: '🎁 В этой игре: +5% майнинга, пока ты в канале', ptb: '🎁 Задание в этой игре: одно из самых выгодных' } },
-    id: { b: 'Big Bang AI News', h: 'AI gratis di Telegram kini punya channel', p: 'Tips, fitur baru, dan mini app terbaik buatan Big Bang AI, setiap hari.', l: ['⚡ AI gratis tanpa batas, langsung di Telegram', '🌐 Jawaban dari web secara langsung', '🧩 Buat mini app sendiri dengan satu kalimat'], c: '📰 Gabung channel', o: 'atau buka Big Bang AI', x: 'Tutup', bonus: { mct: '🎁 Di game ini: +$2,000 setiap hari dan +10% mining selama kamu di channel', rr: '🎁 Di game ini: +5% mining selama kamu di channel', ptb: '🎁 Tugas di game ini: salah satu bayaran tertinggi' } },
-    tr: { b: 'Big Bang AI News', h: "Telegram'ın ücretsiz yapay zekâsının kanalı", p: 'İpuçları, yenilikler ve Big Bang AI ile yapılan en iyi mini uygulamalar, her gün.', l: ["⚡ Ücretsiz ve sınırsız yapay zekâ, Telegram'da", '🌐 Canlı webden yanıtlar', '🧩 Tek cümleyle kendi mini uygulamanı yap'], c: '📰 Kanala katıl', o: "ya da Big Bang AI'ı aç", x: 'Kapat', bonus: { mct: '🎁 Bu oyunda: kanalda olduğun sürece her gün +$2,000 ve +%10 madencilik', rr: '🎁 Bu oyunda: kanalda olduğun sürece +%5 madencilik', ptb: '🎁 Bu oyundaki görev: en çok kazandıranlardan' } },
-    ar: { b: 'Big Bang AI News', h: 'للذكاء الاصطناعي المجاني في تيليجرام قناته', p: 'نصائح وميزات جديدة وأفضل التطبيقات المصغرة المصنوعة بـ Big Bang AI كل يوم.', l: ['⚡ ذكاء اصطناعي مجاني وغير محدود داخل تيليجرام', '🌐 إجابات من الويب مباشرة', '🧩 أنشئ تطبيقك المصغر بجملة واحدة'], c: '📰 انضم إلى القناة', o: 'أو افتح Big Bang AI', x: 'إغلاق', bonus: { mct: '🎁 في هذه اللعبة: +2,000$ يوميًا و+10% تعدين ما دمت في القناة', rr: '🎁 في هذه اللعبة: +5% تعدين ما دمت في القناة', ptb: '🎁 مهمة في هذه اللعبة: من الأعلى أجرًا' } }
+    en: { b: 'Big Bang AI', h: "The free AI of Telegram", p: "Write, translate, code, learn and build your own mini apps, right in Telegram.", l: ["⚡ Free and unlimited AI in Simple mode", "🌐 Answers from the live web", "🧩 Build your own mini app in one sentence"], c: "🚀 Open Big Bang AI", x: "Close" },
+    fr: { b: 'Big Bang AI', h: "L'IA gratuite de Telegram", p: "Écrire, traduire, coder, apprendre et créer tes propres mini-apps, directement dans Telegram.", l: ["⚡ IA gratuite et illimitée en mode Simple", "🌐 Réponses tirées du web en direct", "🧩 Crée ta propre mini-app en une phrase"], c: "🚀 Ouvrir Big Bang AI", x: "Fermer" },
+    es: { b: 'Big Bang AI', h: "La IA gratis de Telegram", p: "Escribe, traduce, programa, aprende y crea tus propias mini apps, dentro de Telegram.", l: ["⚡ IA gratis e ilimitada en modo Simple", "🌐 Respuestas desde la web en vivo", "🧩 Crea tu propia mini app con una frase"], c: "🚀 Abrir Big Bang AI", x: "Cerrar" },
+    pt: { b: 'Big Bang AI', h: "A IA grátis do Telegram", p: "Escreva, traduza, programe, aprenda e crie seus próprios mini apps, dentro do Telegram.", l: ["⚡ IA grátis e ilimitada no modo Simple", "🌐 Respostas da web ao vivo", "🧩 Crie seu próprio mini app com uma frase"], c: "🚀 Abrir Big Bang AI", x: "Fechar" },
+    ru: { b: 'Big Bang AI', h: "Бесплатный ИИ в Telegram", p: "Пиши, переводи, программируй, учись и создавай свои мини-приложения прямо в Telegram.", l: ["⚡ Бесплатный и безлимитный ИИ в режиме Simple", "🌐 Ответы из интернета в реальном времени", "🧩 Создай своё мини-приложение одной фразой"], c: "🚀 Открыть Big Bang AI", x: "Закрыть" },
+    id: { b: 'Big Bang AI', h: "AI gratis di Telegram", p: "Menulis, menerjemahkan, coding, belajar, dan membuat mini app sendiri, langsung di Telegram.", l: ["⚡ AI gratis tanpa batas di mode Simple", "🌐 Jawaban dari web secara langsung", "🧩 Buat mini app sendiri dengan satu kalimat"], c: "🚀 Buka Big Bang AI", x: "Tutup" },
+    tr: { b: 'Big Bang AI', h: "Telegram'ın ücretsiz yapay zekâsı", p: "Yaz, çevir, kodla, öğren ve kendi mini uygulamalarını yap, doğrudan Telegram'da.", l: ["⚡ Simple modda ücretsiz ve sınırsız yapay zekâ", "🌐 Canlı webden yanıtlar", "🧩 Tek cümleyle kendi mini uygulamanı yap"], c: "🚀 Big Bang AI'yi aç", x: "Kapat" },
+    ar: { b: 'Big Bang AI', h: "الذكاء الاصطناعي المجاني في Telegram", p: "اكتب وترجم وبرمج وتعلّم وأنشئ تطبيقاتك المصغّرة، مباشرة في Telegram.", l: ["⚡ ذكاء اصطناعي مجاني وغير محدود في وضع Simple", "🌐 إجابات من الويب مباشرة", "🧩 أنشئ تطبيقك المصغّر بجملة واحدة"], c: "🚀 افتح Big Bang AI", x: "إغلاق" },
   };
   var CSS = '#bbpr{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:calc(18px + env(safe-area-inset-top,0px)) 18px calc(18px + env(safe-area-inset-bottom,0px));background:rgba(2,2,10,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#fff;opacity:0;transition:opacity .3s}' +
     '#bbpr.on{opacity:1}#bbpr .k{position:relative;width:100%;max-width:380px;border-radius:30px;overflow:hidden;background:#05040f;border:1px solid rgba(160,140,255,.22);box-shadow:0 40px 90px -25px rgba(255,120,60,.45),0 0 0 1px rgba(255,255,255,.03) inset;transform:translateY(16px) scale(.96);transition:transform .45s cubic-bezier(.2,.9,.3,1.15)}#bbpr.on .k{transform:none}' +
@@ -35,7 +36,7 @@
     return new Promise(function (done) {
       try {
         if (document.getElementById('bbpr')) return done(false);
-        try { if (Date.now() - Number(localStorage.getItem('bbpr_joined') || 0) < 7 * 864e5) return done(null); } catch (e) {}  // already sent to the channel this week: the game shows its normal ad
+        try { if (Date.now() - Number(localStorage.getItem('bbpr_opened') || 0) < 7 * 864e5) return done(null); } catch (e) {}  // already opened Big Bang AI from here this week: the game shows its normal ad
         var lg = String(o.lang || (navigator.language || 'en')).slice(0, 2).toLowerCase(), t = T[lg] || T.en;
         var src = String(o.src || 'promo').replace(/[^a-z0-9_]/gi, '').slice(0, 30);
         var appUrl = 'https://t.me/Bigbangaibot/App?startapp=src_' + src + '_int';
@@ -43,19 +44,17 @@
         var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
         var stars = ''; for (var i = 0; i < 26; i++) stars += '<i class="st" style="left:' + (Math.random() * 100).toFixed(1) + '%;top:' + (Math.random() * 100).toFixed(1) + '%;animation-delay:' + (Math.random() * 3).toFixed(2) + 's"></i>';
         var w = document.createElement('div'); w.id = 'bbpr'; if (lg === 'ar') w.dir = 'rtl';
-        w.innerHTML = '<div class="k" role="dialog" aria-label="Big Bang AI News"><button class="x" disabled>3</button>' +
+        w.innerHTML = '<div class="k" role="dialog" aria-label="Big Bang AI"><button class="x" disabled>3</button>' +
           '<div class="sky">' + stars + '<div class="burst"></div><div class="glow"></div><img class="lg" alt="" src="' + LOGO + '"><span class="bd">📰 ' + esc(t.b) + '</span></div>' +
           '<div class="t"><h2>' + esc(t.h) + '</h2><p>' + esc(t.p) + '</p><ul>' + t.l.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' +
-          (t.bonus[src] ? '<div class="bn">' + esc(t.bonus[src]) + '</div>' : '') +
-          '<button class="go">' + esc(t.c) + '</button><button class="op">' + esc(t.o) + '</button></div></div>';
+          '<button class="go">' + esc(t.c) + '</button></div></div>';
         document.body.appendChild(w);
         requestAnimationFrame(function () { w.classList.add('on'); });
         var x = w.querySelector('.x'), left = 3, closed = false;
         var close = function (r) { if (closed) return; closed = true; clearInterval(iv); w.classList.remove('on'); setTimeout(function () { try { w.remove(); } catch (e) {} }, 300); done(r); };
         var iv = setInterval(function () { left--; if (left > 0) { x.textContent = String(left); return; } clearInterval(iv); x.disabled = false; x.textContent = '✕ ' + t.x; }, 1000);
         x.onclick = function () { if (!x.disabled) close(false); };
-        w.querySelector('.go').onclick = function () { try { localStorage.setItem('bbpr_joined', String(Date.now())); } catch (e) {} open('https://t.me/bigbangainews'); close(true); };
-        w.querySelector('.op').onclick = function () { open(appUrl); close(true); };
+        w.querySelector('.go').onclick = function () { try { localStorage.setItem('bbpr_opened', String(Date.now())); } catch (e) {} open(appUrl); close(true); };
       } catch (e) { done(false); }
     });
   }
