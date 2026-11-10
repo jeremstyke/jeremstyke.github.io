@@ -635,6 +635,13 @@ new MutationObserver(() => { document.querySelectorAll('#crsh:not([data-done])')
     const lj = { en: '📣 Join Jeremstyke', fr: '📣 Rejoins Jeremstyke', id: '📣 Gabung Jeremstyke', ar: '📣 انضم إلى Jeremstyke', es: '📣 Únete a Jeremstyke', fa: '📣 به Jeremstyke بپیوند', ru: '📣 Подпишись на Jeremstyke' };
     if (LL) Object.keys(LL).forEach((k) => { if (LL[k] && typeof LL[k] === 'object') LL[k].m_joinjs = lj[k] || lj.en; });
     if (GO) GO.joinjs = () => { try { tw.openTelegramLink('https://t.me/jeremstyke'); } catch (e) { location.href = 'https://t.me/jeremstyke'; } };
+    // 10 nov 2026 (Jeremy): every day $2,000 for being in Big Bang AI News (+10 % mining), and once $10,000 for asking Big Bang AI how to play
+    const lb = { en: '🌌 Be in Big Bang AI News (+10% mining)', fr: '🌌 Sois abonné à Big Bang AI News (+10 % de minage)', id: '🌌 Gabung Big Bang AI News (+10% mining)', ar: '🌌 اشترك في Big Bang AI News (+10% تعدين)', es: '🌌 Únete a Big Bang AI News (+10% minería)', fa: '🌌 عضو Big Bang AI News شو (+10% استخراج)', ru: '🌌 Подпишись на Big Bang AI News (+10% майнинга)' };
+    if (LL) Object.keys(LL).forEach((k) => { if (LL[k] && typeof LL[k] === 'object') LL[k].m_bbnews = lb[k] || lb.en; });
+    if (GO) GO.bbnews = () => { try { tw.openTelegramLink('https://t.me/bigbangainews'); } catch (e) { location.href = 'https://t.me/bigbangainews'; } };
+    const la = { en: '🤖 Ask Big Bang AI how to play Meme Coin Tycoon well', fr: '🤖 Demande à Big Bang AI comment bien jouer à Meme Coin Tycoon', id: '🤖 Tanya Big Bang AI cara main Meme Coin Tycoon', ar: '🤖 اسأل Big Bang AI كيف تلعب Meme Coin Tycoon جيدًا', es: '🤖 Pregunta a Big Bang AI cómo jugar bien a Meme Coin Tycoon', fa: '🤖 از Big Bang AI بپرس چطور Meme Coin Tycoon را خوب بازی کنی', ru: '🤖 Спроси Big Bang AI, как хорошо играть в Meme Coin Tycoon' };
+    if (LL) Object.keys(LL).forEach((k) => { if (LL[k] && typeof LL[k] === 'object') LL[k].m_askbb = la[k] || la.en; });
+    if (GO) GO.askbb = () => { const u = 'https://t.me/Bigbangaibot/App?startapp=src_mct_ask'; try { tw.openTelegramLink(u); } catch (e) { location.href = u; } };
     // 19 oct 2026 (Jeremy): special mission of the day "Make your prediction on Daily Score" (server 'dsprono', checked in the base)
     const ld = { en: '⚽ Make your prediction on Daily Score', fr: '⚽ Fais ton prono sur Daily Score', id: '⚽ Buat tebakanmu di Daily Score', ar: '⚽ قدّم توقعك على Daily Score', es: '⚽ Haz tu pronóstico en Daily Score', fa: '⚽ پیش‌بینی‌ات را در Daily Score ثبت کن', ru: '⚽ Сделай прогноз в Daily Score' };
     if (LL) Object.keys(LL).forEach((k) => { if (LL[k] && typeof LL[k] === 'object') LL[k].m_dsprono = ld[k] || ld.en; });
