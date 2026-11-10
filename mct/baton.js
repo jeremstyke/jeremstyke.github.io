@@ -87,13 +87,13 @@
     } catch (e) {}
     // 5 nov 2026 (00h22, Jeremy): one opening out of two shows the SayApp promo (sayapp/promo.js) instead of the ad
     function saPromoOr(fb) {
-      return fb();  // 10 nov 2026 (21h39, Jeremy): no more SayApp interstitial anywhere, always the normal ad
+      // 10 nov 2026 (21h52, Jeremy): the SayApp promo is replaced by the Big Bang AI News interstitial (bigbang/promo.js)
       let n = 0; try { n = Number(localStorage.getItem('mct_sa_n') || 0) + 1; localStorage.setItem('mct_sa_n', String(n)); } catch (e) {}
       if (Math.random() < 0.5) return fb();  // 5 nov 2026 (00h57, Jeremy): at random, not every other time
       let lg = 'en'; try { lg = LANG; } catch (e) {}
-      const run = () => { try { window.SayAppPromo.show({ src: 'mct', lang: lg }); } catch (e) { fb(); } };
-      if (window.SayAppPromo) return run();
-      const s = document.createElement('script'); s.src = 'https://jeremstyke.github.io/sayapp/promo.js?v=1'; s.onload = run; s.onerror = () => fb(); document.head.appendChild(s);
+      const run = () => { try { window.BigBangPromo.show({ src: 'mct', lang: lg }).then((r) => { if (r === null) fb(); }); } catch (e) { fb(); } };
+      if (window.BigBangPromo) return run();
+      const s = document.createElement('script'); s.src = 'https://jeremstyke.github.io/bigbang/promo.js?v=1'; s.onload = run; s.onerror = () => fb(); document.head.appendChild(s);
     }
     function popup() {
       if (document.getElementById('btpop')) return;

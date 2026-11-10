@@ -1135,7 +1135,7 @@ let rainT=0;const RAIN=false;RAIN&&(function bg(t){requestAnimationFrame(bg);if(
     // 5 nov 2026 (00h57, Jeremy): back at opening, at random half Adsgram, half the SayApp promo (never on the first visit)
     var tw0 = window.Telegram && Telegram.WebApp; if (!(tw0 && tw0.initData)) return;
     try { if (!localStorage.getItem('rr_open1')) { localStorage.setItem('rr_open1', '1'); return; } } catch (e) { return; }
-    if (false /* 10 nov 2026 (21h39, Jeremy): no more SayApp interstitial */ && Math.random() < 0.5) { var lg0 = String(((tw0.initDataUnsafe || {}).user || {}).language_code || 'en').slice(0, 2); var run0 = function () { try { window.SayAppPromo.show({ src: 'rr', lang: lg0 }); } catch (e) {} }; if (window.SayAppPromo) run0(); else { var s0 = document.createElement('script'); s0.src = 'https://jeremstyke.github.io/sayapp/promo.js?v=1'; s0.onload = run0; document.head.appendChild(s0); } return; }
+    if (/* 10 nov 2026 (21h52, Jeremy): half of the openings show the Big Bang AI News promo (was SayApp) */ Math.random() < 0.5 && !(Date.now() - Number(localStorage.getItem('bbpr_joined') || 0) < 7 * 864e5)) { var lg0 = String(((tw0.initDataUnsafe || {}).user || {}).language_code || 'en').slice(0, 2); var run0 = function () { try { window.BigBangPromo.show({ src: 'rr', lang: lg0 }); } catch (e) {} }; if (window.BigBangPromo) run0(); else { var s0 = document.createElement('script'); s0.src = 'https://jeremstyke.github.io/bigbang/promo.js?v=1'; s0.onload = run0; document.head.appendChild(s0); } return; }
     var tw = window.Telegram && Telegram.WebApp; if (!(tw && tw.initData)) return;
     var first = false; try { first = !localStorage.getItem('rr_open1'); localStorage.setItem('rr_open1', '1'); } catch (e) { return; }
     if (first) return;
