@@ -1,4 +1,4 @@
-/* Big Bang AI interstitial (10 nov 2026, Jeremy): replaces the SayApp promo in Meme Coin Tycoon, Pass The Baton and Rig Rush.
+/* Big Bang AI interstitial (10 nov 2026, Jeremy): replaces the SayApp promo in Meme Coin Tycoon and Pass The Baton.
    10 nov 2026 (Jeremy): "l'interstitiel de pub c'est pour l'app pas la chaine": it promotes the Big Bang AI app, not the channel.
    Usage: BigBangPromo.show({ src: 'mct', lang: 'fr' }) -> Promise resolved when closed. */
 (function () {
