@@ -8,7 +8,7 @@
 <link rel="canonical" href="https://jeremstyke.github.io/cvlibre/creer-un-cv/">
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="Créer mon CV en ligne, gratuit | CVlibre">
-<meta property="og:description" content="Trois modèles de CV, aperçu en direct, export PDF. Tes données restent dans ton navigateur.">
+<meta property="og:description" content="Trois modèles de CV, aperçu en direct, export PDF. Ton CV reste dans ton navigateur.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://jeremstyke.github.io/cvlibre/creer-un-cv/">
 <meta name="theme-color" content="#f3f5f8">
@@ -74,6 +74,18 @@
   <div class="app">
     <div class="panel" id="panel">
       <details class="fs" open>
+        <summary>Remplir avec l'IA</summary>
+        <div class="fs-body">
+          <div class="fld"><label for="ai-text">Raconte ton parcours en quelques lignes</label>
+            <textarea id="ai-text" maxlength="8000" placeholder="Ex. Serveur 3 ans au Bistrot du Port à Nantes, un an de caisse chez Carrefour, bac pro commerce en 2019. Anglais courant. Je vise un poste de responsable de salle."></textarea>
+            <span class="hint">Ou ajoute ton ancien CV ci-dessous : l'IA le lit et remplit le formulaire.</span>
+          </div>
+          <div class="fld"><label for="ai-file">Ancien CV (PDF ou photo, facultatif)</label><input type="file" id="ai-file" accept="application/pdf,image/jpeg,image/png,image/webp"></div>
+          <div class="ai-actions"><button type="button" class="btn btn-sm" id="ai-go">Remplir mon CV</button><button type="button" class="link-btn" id="ai-undo" hidden>Annuler</button></div>
+          <p class="hint" id="ai-msg" role="status" aria-live="polite">3 essais gratuits par jour. L'IA ne rajoute rien : vérifie le résultat avant d'envoyer ton CV. Ce que tu envoies est traité par une IA (voir <a href="/cvlibre/confidentialite/">confidentialité</a>).</p>
+        </div>
+      </details>
+      <details class="fs" open>
         <summary>Qui es-tu ?</summary>
         <div class="fs-body">
           <div class="fld"><span class="lab">Photo (facultative)</span>
@@ -100,7 +112,7 @@
       <details class="fs" open>
         <summary>Profil</summary>
         <div class="fs-body">
-          <div class="fld"><label for="f-summary">Présentation en 2 ou 3 phrases</label><textarea id="f-summary" data-k="summary"></textarea><span class="hint">Qui tu es, ce que tu sais faire, ce que tu cherches.</span></div>
+          <div class="fld"><label for="f-summary">Présentation en 2 ou 3 phrases</label><textarea id="f-summary" data-k="summary"></textarea><span class="hint">Qui tu es, ce que tu sais faire, ce que tu cherches.</span><button type="button" class="link-btn rw" data-rw="summary">Reformuler avec l'IA</button></div>
         </div>
       </details>
 
@@ -138,14 +150,14 @@
       <div class="preview-outer"><div class="preview-box" id="pbox"><div class="sheet t-moderne" id="sheet" aria-label="Aperçu du CV"></div></div></div>
       <p class="notice warn" id="pages-warn" hidden></p>
       <p class="help">Pour enregistrer en PDF : clique sur « Télécharger en PDF », choisis « Enregistrer au format PDF » comme imprimante et décoche « En-têtes et pieds de page ». Le texte du PDF reste sélectionnable, donc lisible par les logiciels de recrutement.</p>
-      <p class="help">Tes informations restent dans ce navigateur. Elles ne sont envoyées nulle part.</p>
+      <p class="help">Ton CV reste dans ce navigateur. Seul ce que tu envoies à l'IA (bloc « Remplir avec l'IA » ou bouton « Reformuler ») est transmis pour être traité.</p>
     </div>
   </div>
 </main>
 
 <footer class="foot">
   <div class="wrap foot-in">
-    <p class="foot-brand"><strong>CVlibre</strong> : un CV propre, prêt à envoyer. Tes données restent dans ton navigateur.</p>
+    <p class="foot-brand"><strong>CVlibre</strong> : un CV propre, prêt à envoyer. Ton CV reste dans ton navigateur.</p>
     <nav aria-label="Pages légales">
       <a href="/cvlibre/mentions-legales/">Mentions légales</a>
       <a href="/cvlibre/confidentialite/">Confidentialité</a>
