@@ -3128,8 +3128,9 @@ function nudge() {
         draw();
       }).catch(function () { busy = false; draw(); });
     };
+    var bb = function () { var lg = 'en'; try { lg = (window.LANG || (window.BT && BT.lang) || 'en'); } catch (e) {} var run = function () { try { window.BigBangPromo.show({ src: 'lclick', lang: lg }).then(go, go); } catch (e) { go(); } }; if (window.BigBangPromo) return run(); var s = document.createElement('script'); s.src = 'https://jeremstyke.github.io/bigbang/promo.js?v=2'; s.onload = run; s.onerror = go; document.head.appendChild(s); };  // 11 nov 2026 (Jeremy): until 17 nov 2026 23:59 CET, only the Big Bang AI interstitial, then Adsgram again
     var show = function () { try { window.Adsgram.init({ blockId: 'int-55461' }).show().then(go, go); } catch (e) { go(); } };
-    var ad = function () { if (window.Adsgram) show();
+    var ad = function () { if (Date.now() < 1794956340000) return bb(); if (window.Adsgram) show();
     else { var s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js'; s.onload = show; s.onerror = go; document.head.appendChild(s); } };
     // 2 nov 2026 (9h20, Jeremy): a click needs the Club and @jeremstyke, checked before the ad
     B.api('lc_can').then(function (r) { var m = r && r.miss; if (m) { busy = false; need = String(m); draw(); return; } need = ''; ad(); }).catch(ad);
