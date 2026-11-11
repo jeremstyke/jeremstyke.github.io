@@ -1,0 +1,298 @@
+<!-- sayapp my3p9gdi v1 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Baton Rush</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0615;--bg2:#120b26;--card:#171030;--card2:#1f1740;--line:rgba(255,255,255,.08);--main:#7c4dff;--main2:#a68bff;--acc:#ffb020;--acc2:#ff6b3d;--tx:#f4f1ff;--mut:#9b92c4;--ok:#3ddc97}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--tx);font-family:'Outfit',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;overflow-x:hidden}
+body{background:radial-gradient(120% 60% at 50% -10%,#2a1565 0%,transparent 60%),var(--bg);user-select:none}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+.app{max-width:480px;margin:0 auto;min-height:100%;display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:12px;padding:calc(var(--sa-top,0px) + 8px) 20px 8px}
+.av{width:40px;height:40px;border-radius:14px;background:linear-gradient(135deg,var(--main),var(--acc2));display:grid;place-items:center;font-weight:800;box-shadow:0 6px 20px rgba(124,77,255,.45)}
+.hi{flex:1;min-width:0}.hi small{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.hi b{font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.chip{padding:8px 12px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:14px;font-weight:600}
+main{flex:1;padding:8px 16px calc(110px + env(safe-area-inset-bottom))}
+.tab{display:none;animation:in .3s ease}.tab.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.lbl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);font-weight:600}
+h2{font-size:26px;font-weight:800;letter-spacing:-.02em;margin:8px 4px 4px}
+.sub{color:var(--mut);font-size:15px;margin:0 4px 16px;line-height:1.4}
+.hero{position:relative;background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:28px;padding:20px 16px 20px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.06);overflow:hidden}
+.lvl{display:inline-flex;gap:8px;align-items:center;padding:6px 12px;border-radius:99px;background:rgba(124,77,255,.18);border:1px solid rgba(166,139,255,.3);font-size:13px;font-weight:600}
+.ringw{position:relative;width:236px;height:236px;margin:12px auto 4px}
+.glow{position:absolute;inset:20px;border-radius:50%;background:radial-gradient(circle,rgba(255,176,32,.45),rgba(124,77,255,.25) 55%,transparent 72%);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.12);opacity:.7}}
+.ringw svg.ring{position:absolute;inset:0;transform:rotate(-90deg)}
+.baton{position:absolute;inset:0;display:grid;place-items:center;animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(3deg)}}
+.baton:active{transform:scale(.94)}
+.full .glow{animation-duration:.9s}
+.pts{font-size:48px;font-weight:800;letter-spacing:-.03em;line-height:1;background:linear-gradient(180deg,#fff,#cdbdff);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.rate{margin-top:6px;color:var(--acc);font-weight:600;font-size:15px}
+.bar{height:8px;border-radius:9px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:14px}
+.bar i{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,var(--main),var(--acc));transition:width .3s}
+.bl{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-top:6px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.st{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 8px;text-align:center}
+.st b{display:block;font-size:20px;font-weight:700;margin-top:2px}
+.btns{display:grid;grid-template-columns:1fr;gap:10px}
+.btn{position:relative;border-radius:20px;padding:16px;font-weight:700;font-size:17px;transition:transform .15s,opacity .2s,box-shadow .2s;display:flex;flex-direction:column;align-items:center;gap:2px}
+.btn small{font-size:12px;font-weight:500;opacity:.85}
+.btn:active{transform:scale(.97)}
+.pri{background:linear-gradient(135deg,var(--main),#b04dff);box-shadow:0 10px 30px rgba(124,77,255,.5),inset 0 1px 0 rgba(255,255,255,.3)}
+.sec{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#2a1200;box-shadow:0 10px 28px rgba(255,140,40,.35),inset 0 1px 0 rgba(255,255,255,.4)}
+.btn[disabled]{opacity:.45;box-shadow:none;cursor:default}
+.card{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px;margin-bottom:10px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.ic{width:44px;height:44px;border-radius:14px;background:var(--card2);display:grid;place-items:center;font-size:22px;flex:none}
+.cb{flex:1;min-width:0}.cb b{display:block;font-size:16px;font-weight:600}.cb span{font-size:13px;color:var(--mut)}
+.mini{height:5px;border-radius:5px;background:rgba(255,255,255,.08);margin-top:8px;overflow:hidden}.mini i{display:block;height:100%;background:linear-gradient(90deg,var(--main),var(--acc));border-radius:5px}
+.go{padding:10px 14px;border-radius:14px;font-weight:700;font-size:14px;background:linear-gradient(135deg,var(--main),#b04dff);white-space:nowrap;transition:transform .15s}
+.go:active{transform:scale(.94)}
+.go.off{background:var(--card2);color:var(--mut);cursor:default}.go.done{background:rgba(61,220,151,.15);color:var(--ok)}
+.sect{margin:20px 4px 10px}
+.row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;background:var(--card);border:1px solid var(--line);margin-bottom:8px}
+.row.me{background:linear-gradient(135deg,rgba(124,77,255,.35),rgba(255,176,32,.15));border-color:rgba(166,139,255,.5)}
+.rk{width:34px;text-align:center;font-weight:800;font-size:18px;color:var(--mut)}
+.rn{flex:1;min-width:0;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rv{font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums}
+.sk{height:54px;border-radius:18px;margin-bottom:8px;background:linear-gradient(90deg,var(--card) 25%,var(--card2) 50%,var(--card) 75%);background-size:200% 100%;animation:sh 1.2s linear infinite}
+@keyframes sh{to{background-position:-200% 0}}
+.empty{text-align:center;padding:40px 20px;color:var(--mut)}.empty big{font-size:48px;display:block;margin-bottom:8px}
+nav{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:480px;display:flex;gap:6px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent,var(--bg) 35%)}
+nav button{flex:1;padding:12px 4px;border-radius:18px;background:var(--card);border:1px solid var(--line);font-weight:600;font-size:13px;color:var(--mut);transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button span{font-size:20px}
+nav button.on{color:#fff;background:linear-gradient(135deg,rgba(124,77,255,.55),rgba(176,77,255,.3));border-color:rgba(166,139,255,.6);box-shadow:0 6px 20px rgba(124,77,255,.35)}
+nav button:active{transform:scale(.95)}
+footer{text-align:center;font-size:11px;color:var(--mut);opacity:.6;margin-top:20px;line-height:1.6}
+.fl{position:fixed;z-index:50;font-weight:800;font-size:22px;color:var(--acc);pointer-events:none;text-shadow:0 2px 12px rgba(255,176,32,.7);animation:fl 1s ease-out forwards}
+@keyframes fl{from{opacity:1;transform:translate(-50%,0)}to{opacity:0;transform:translate(-50%,-90px)}}
+.cf{position:fixed;z-index:50;width:9px;height:9px;border-radius:2px;pointer-events:none;animation:cf .95s ease-out forwards}
+@keyframes cf{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+#toast{position:fixed;left:50%;top:calc(var(--sa-top,0px) + 64px);transform:translate(-50%,-20px);background:rgba(31,23,64,.96);border:1px solid rgba(166,139,255,.4);padding:12px 18px;border-radius:16px;font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:all .3s;z-index:60;max-width:92%;text-align:center;box-shadow:0 12px 30px rgba(0,0,0,.5)}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="av" id="av">B</div>
+  <div class="hi"><small>Baton holder</small><b id="nm">Runner</b></div>
+  <div class="chip" id="streak">🔥 0</div>
+</header>
+<main>
+  <section class="tab on" id="t-baton">
+    <div class="hero" id="hero">
+      <div class="lvl"><span id="lvE">🌱</span><span id="lvN">Rookie</span></div>
+      <div class="ringw" id="ringw">
+        <div class="glow"></div>
+        <svg class="ring" viewBox="0 0 240 240"><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c4dff"/><stop offset="1" stop-color="#ffb020"/></linearGradient></defs>
+          <circle cx="120" cy="120" r="108" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="10"/>
+          <circle id="rc" cx="120" cy="120" r="108" fill="none" stroke="url(#rg)" stroke-width="10" stroke-linecap="round" stroke-dasharray="678.6" stroke-dashoffset="678.6" style="transition:stroke-dashoffset .2s linear"/></svg>
+        <div class="baton" id="baton">
+          <svg width="150" height="150" viewBox="0 0 150 150"><defs><linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd36b"/><stop offset="1" stop-color="#ff6b3d"/></linearGradient><linearGradient id="bg2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a68bff"/><stop offset="1" stop-color="#6a3dff"/></linearGradient></defs>
+            <g transform="rotate(38 75 75)"><rect x="62" y="14" width="26" height="122" rx="13" fill="url(#bg1)"/><rect x="62" y="14" width="26" height="26" rx="13" fill="url(#bg2)"/><rect x="62" y="110" width="26" height="26" rx="13" fill="url(#bg2)"/><rect x="62" y="56" width="26" height="8" fill="#fff" opacity=".85"/><rect x="62" y="86" width="26" height="8" fill="#fff" opacity=".85"/><rect x="67" y="18" width="5" height="114" rx="3" fill="#fff" opacity=".28"/></g></svg>
+        </div>
+      </div>
+      <div class="lbl">Your points</div>
+      <div class="pts" id="pts">0.0</div>
+      <div class="rate" id="rate">+12 / min</div>
+      <div class="bar"><i id="lvBar"></i></div>
+      <div class="bl"><span id="lvA">0</span><span id="lvB">Next: Runner</span></div>
+    </div>
+    <div class="stats">
+      <div class="st"><span class="lbl">Charge</span><b id="chg">0:00</b></div>
+      <div class="st"><span class="lbl">Boost</span><b id="mul">x1.0</b></div>
+      <div class="st"><span class="lbl">Passes</span><b id="pas">0</b></div>
+    </div>
+    <div class="btns">
+      <button class="btn pri" id="passB">🏃 Pass the baton<small id="passS">Send it to a friend, earn +100</small></button>
+      <button class="btn sec" id="colB">Collect<small>Bank your points and recharge</small></button>
+    </div>
+  </section>
+
+  <section class="tab" id="t-tasks">
+    <h2>Tasks</h2><p class="sub">Small moves, big points. Daily tasks reset at midnight.</p>
+    <div id="tasks"></div>
+    <div class="sect lbl">Rank rewards</div>
+    <div id="tiers"></div>
+  </section>
+
+  <section class="tab" id="t-ranks">
+    <h2>Leaderboard</h2><p class="sub">Who holds the most points? Pass the baton to climb.</p>
+    <div id="ranks"></div>
+  </section>
+  <footer>Points are virtual and have no cash value<br>Made with SayApp</footer>
+</main>
+<nav>
+  <button class="on" data-t="baton"><span>🏃</span>Baton</button>
+  <button data-t="tasks"><span>🎯</span>Tasks</button>
+  <button data-t="ranks"><span>🏆</span>Ranks</button>
+</nav>
+</div>
+<div id="toast"></div>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="my3p9gdi" data-full="1"></script>
+<script>
+window.addEventListener('load',async function(){
+const tg=window.Telegram&&Telegram.WebApp;
+try{tg&&(tg.ready(),tg.expand(),tg.setHeaderColor&&tg.setHeaderColor('#0a0615'),tg.setBackgroundColor&&tg.setBackgroundColor('#0a0615'))}catch(e){}
+const $=id=>document.getElementById(id);
+const RATE=12,CAP=30*60000,CD=120000,BONUS=100;
+const BOT_LINK=''; // set to your bot mini app link, e.g. https://t.me/YourBot/app
+const TIERS=[{n:'Rookie',e:'🌱',at:0,r:0},{n:'Runner',e:'🏃',at:500,r:50},{n:'Sprinter',e:'⚡',at:2000,r:200},{n:'Champion',e:'🏆',at:6000,r:600},{n:'Legend',e:'👑',at:15000,r:1500}];
+const U=(window.SayApp&&SayApp.user)||{};
+let S={pts:0,since:Date.now(),mult:1,passes:0,lastPass:0,holdMs:0,claimed:{},tiers:{},streak:0,lastDaily:'',from:'',day:{d:'',pass:0,col:0}};
+try{const d=await SayApp.get('state');if(d&&typeof d==='object')S=Object.assign(S,d)}catch(e){}
+S.claimed=S.claimed||{};S.tiers=S.tiers||{};
+const today=()=>new Date().toISOString().slice(0,10);
+const yest=()=>new Date(Date.now()-864e5).toISOString().slice(0,10);
+function dy(){const t=today();if(!S.day||S.day.d!==t)S.day={d:t,pass:0,col:0};return S.day}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const f1=n=>n.toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1});
+const f0=n=>Math.floor(n).toLocaleString('en-US');
+const mmss=ms=>{const s=Math.floor(ms/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+const hap=t=>{try{SayApp.haptic(t)}catch(e){}};
+const perMin=()=>RATE*S.mult;
+const earn=()=>Math.min(Date.now()-S.since,CAP)/60000*perMin();
+const total=()=>S.pts+earn();
+const lvl=p=>{let i=0;TIERS.forEach((t,k)=>{if(p>=t.at)i=k});return i};
+function bank(){const n=Date.now(),e=earn();S.pts+=e;S.holdMs+=Math.min(n-S.since,CAP);S.since=n;return e}
+let dirty=false;
+async function save(){try{await SayApp.set('state',S);await SayApp.set('points',Math.floor(total()))}catch(e){}dirty=false}
+let toastT;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),2600)}
+function floatTxt(txt,el){const r=el.getBoundingClientRect(),s=document.createElement('span');s.className='fl';s.textContent=txt;s.style.left=(r.left+r.width/2)+'px';s.style.top=(r.top+r.height/2-10)+'px';document.body.appendChild(s);setTimeout(()=>s.remove(),1000)}
+function burst(el,n){const r=el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,cols=['#7c4dff','#ffb020','#ff6b3d','#a68bff','#3ddc97'];
+ for(let i=0;i<(n||26);i++){const d=document.createElement('i'),a=Math.random()*6.28,k=60+Math.random()*110;d.className='cf';d.style.left=cx+'px';d.style.top=cy+'px';d.style.background=cols[i%5];d.style.setProperty('--dx',Math.cos(a)*k+'px');d.style.setProperty('--dy',Math.sin(a)*k+40+'px');d.style.setProperty('--r',Math.random()*720+'deg');document.body.appendChild(d);setTimeout(()=>d.remove(),1000)}}
+
+// identity
+const nm=U.first_name||'Runner';
+$('nm').textContent=nm;$('av').textContent=nm.charAt(0).toUpperCase();
+
+// incoming baton
+try{
+ const sp=(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.start_param)||new URLSearchParams(location.search).get('ref')||'';
+ const ref=String(sp).replace('ref_','');
+ if(ref&&!S.from&&String(ref)!==String(U.id)){S.from=ref;S.pts+=150;dirty=true;setTimeout(()=>{toast('🏃 A friend passed you the baton! +150 pts');hap('ok');burst($('baton'))},700)}
+}catch(e){}
+// welcome back
+(function(){const e=earn();if(S.pts>0&&e>=1&&Date.now()-S.since>60000&&!S.from)setTimeout(()=>toast('Welcome back! Your baton earned '+f0(e)+' pts'),700)})();
+
+// tabs
+let cur='baton';
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+ cur=b.dataset.t;hap('tap');
+ document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x===b));
+ document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x.id==='t-'+cur));
+ if(cur==='tasks')renderTasks();if(cur==='ranks')loadRanks();window.scrollTo(0,0);
+});
+
+// actions
+$('colB').onclick=function(){
+ const e=bank();if(e<1){S.since=Date.now();return}
+ dy().col++;S.pts=S.pts;dirty=true;floatTxt('+'+f0(e),this);hap('ok');burst(this,12);save();tick();
+};
+$('baton').onclick=()=>{hap('tap');burst($('baton'),8)};
+function link(){const id=U.id||'';return BOT_LINK?BOT_LINK+'?startapp=ref_'+id:location.href.split('#')[0].split('?')[0]+'?ref='+id}
+$('passB').onclick=function(){
+ bank();
+ const text='🏃 I am holding the baton and earning points every minute! Catch it before it drops';
+ const u='https://t.me/share/url?url='+encodeURIComponent(link())+'&text='+encodeURIComponent(text);
+ try{tg&&tg.openTelegramLink?tg.openTelegramLink(u):window.open(u,'_blank')}catch(e){window.open(u,'_blank')}
+ const n=Date.now();
+ if(n-S.lastPass>CD){
+  S.lastPass=n;S.passes++;dy().pass++;S.pts+=BONUS;S.mult=Math.min(3,Math.round((S.mult+0.1)*10)/10);
+  floatTxt('+'+BONUS,this);burst(this,34);hap('ok');toast('Baton passed! +'+BONUS+' pts and boost x'+S.mult.toFixed(1));
+ }else{hap('tap');toast('Shared! Next pass bonus in '+mmss(CD-(n-S.lastPass)))}
+ dirty=true;save();tick();
+};
+
+// tasks
+const nextStreak=()=>S.lastDaily===yest()?S.streak+1:(S.lastDaily===today()?S.streak:1);
+const TASKS=[
+ {id:'checkin',daily:1,e:'📅',t:'Daily check-in',d:'Come back every day for a bigger streak bonus',goal:1,p:()=>1,r:()=>50+10*Math.min(nextStreak(),7)},
+ {id:'pass1',daily:1,e:'🤝',t:'Pass the baton today',d:'Send the baton to a friend',goal:1,p:()=>dy().pass,r:()=>60},
+ {id:'col3',daily:1,e:'💰',t:'Collect 3 times',d:'Bank your points three times today',goal:3,p:()=>dy().col,r:()=>40},
+ {id:'hold10',e:'⏱️',t:'Hold for 10 minutes',d:'Total time spent holding the baton',goal:10,p:()=>Math.floor((S.holdMs+Math.min(Date.now()-S.since,CAP))/60000),r:()=>80},
+ {id:'pass5',e:'🔗',t:'Pass it 5 times',d:'Build your relay chain',goal:5,p:()=>S.passes,r:()=>300},
+ {id:'p1k',e:'💎',t:'Reach 1,000 points',d:'Your first big milestone',goal:1000,p:()=>Math.floor(total()),r:()=>150}
+];
+const isCl=t=>S.claimed[t.id]===(t.daily?today():true);
+function renderTasks(){
+ $('tasks').innerHTML=TASKS.map(t=>{
+  const p=Math.min(t.p(),t.goal),cl=isCl(t),ok=p>=t.goal;
+  const b=cl?'<button class="go done" disabled>Done ✓</button>':ok?'<button class="go" data-c="'+t.id+'">+'+t.r()+'</button>':'<button class="go off" disabled>+'+t.r()+'</button>';
+  return '<div class="card"><div class="ic">'+t.e+'</div><div class="cb"><b>'+t.t+(t.daily?' <span style="font-size:10px;letter-spacing:.1em;color:var(--acc)">DAILY</span>':'')+'</b><span>'+t.d+'</span><div class="mini"><i style="width:'+(p/t.goal*100)+'%"></i></div></div>'+b+'</div>';
+ }).join('');
+ const L=lvl(total());
+ $('tiers').innerHTML=TIERS.slice(1).map((t,k)=>{const i=k+1,cl=S.tiers[i],ok=L>=i;
+  const b=cl?'<button class="go done" disabled>Claimed ✓</button>':ok?'<button class="go" data-r="'+i+'">+'+t.r+'</button>':'<button class="go off" disabled>🔒 '+f0(t.at)+'</button>';
+  return '<div class="card"><div class="ic">'+t.e+'</div><div class="cb"><b>'+t.n+'</b><span>Reach '+f0(t.at)+' points</span></div>'+b+'</div>'}).join('');
+}
+$('t-tasks').addEventListener('click',function(ev){
+ const b=ev.target.closest('button');if(!b)return;
+ bank();
+ if(b.dataset.c){
+  const t=TASKS.find(x=>x.id===b.dataset.c);if(!t||isCl(t)||t.p()<t.goal)return;
+  const r=t.r();
+  if(t.id==='checkin'){S.streak=nextStreak();S.lastDaily=today()}
+  S.claimed[t.id]=t.daily?today():true;S.pts+=r;floatTxt('+'+r,b);burst(b,16);hap('ok');
+ }else if(b.dataset.r){
+  const i=+b.dataset.r;if(S.tiers[i]||lvl(total())<i)return;
+  S.tiers[i]=1;S.pts+=TIERS[i].r;floatTxt('+'+TIERS[i].r,b);burst(b,30);hap('ok');toast(TIERS[i].e+' '+TIERS[i].n+' reward claimed!');
+ }
+ dirty=true;save();renderTasks();tick();
+});
+
+// leaderboard
+async function loadRanks(){
+ const box=$('ranks');box.innerHTML='<div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div>';
+ await save();
+ let rows=null;
+ try{rows=await SayApp.top('points',25)}catch(e){}
+ if(cur!=='ranks')return;
+ if(!rows||!rows.length){box.innerHTML='<div class="empty"><big>🏁</big>No runners yet.<br>Be the first to grab the baton and set the pace!</div>';return}
+ const medal=['🥇','🥈','🥉'];let hasMe=false;
+ let h=rows.map((r,i)=>{if(r.me)hasMe=true;return '<div class="row'+(r.me?' me':'')+'"><div class="rk">'+(medal[i]||i+1)+'</div><div class="rn">'+esc(r.name||'Runner')+(r.me?' (you)':'')+'</div><div class="rv">'+f0(+r.value||0)+'</div></div>'}).join('');
+ if(!hasMe)h+='<div class="row me"><div class="rk">·</div><div class="rn">'+esc(nm)+' (you)</div><div class="rv">'+f0(total())+'</div></div>';
+ box.innerHTML=h;
+}
+
+// live loop
+const C=2*Math.PI*108;let lastL=lvl(total());
+function tick(){
+ const n=Date.now(),s=Math.min(n-S.since,CAP),p=total(),L=lvl(p),T=TIERS[L],N=TIERS[L+1];
+ $('pts').textContent=f1(p);
+ $('rate').textContent='+'+perMin().toFixed(1)+' / min';
+ $('rc').style.strokeDashoffset=C*(1-s/CAP);
+ $('ringw').classList.toggle('full',s>=CAP);
+ $('chg').textContent=s>=CAP?'FULL':mmss(s);
+ $('mul').textContent='x'+S.mult.toFixed(1);
+ $('pas').textContent=S.passes;
+ $('lvE').textContent=T.e;$('lvN').textContent=T.n;
+ $('lvBar').style.width=(N?Math.min(100,(p-T.at)/(N.at-T.at)*100):100)+'%';
+ $('lvA').textContent=f0(p)+' pts';$('lvB').textContent=N?'Next: '+N.n+' at '+f0(N.at):'Max rank reached';
+ const e=Math.floor(earn());
+ $('colB').disabled=e<1;
+ $('colB').firstChild.textContent=e>=1?'Collect +'+f0(e):'Collect';
+ const cd=CD-(n-S.lastPass);
+ $('passS').textContent=cd>0?'Next bonus in '+mmss(cd)+' (sharing still works)':'Send it to a friend, earn +'+BONUS+' and boost';
+ const st=(S.lastDaily===today()||S.lastDaily===yest())?S.streak:0;$('streak').textContent='🔥 '+st;
+ if(L>lastL){lastL=L;toast(T.e+' New rank: '+T.n+'! Claim your reward in Tasks');hap('ok');burst($('baton'),36)}
+}
+tick();setInterval(tick,100);
+setInterval(()=>{if(cur==='tasks')renderTasks()},5000);
+setInterval(save,15000);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)save()});
+save();
+});
+</script>
+</body>
+</html>

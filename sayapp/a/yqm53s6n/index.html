@@ -1,0 +1,234 @@
+<!-- sayapp yqm53s6n v1 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Channel Giveaway</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0816;--card:#161127;--card2:#1e1836;--main:#8b5cf6;--main2:#6d3df0;--acc:#fbbf24;--acc2:#f59e0b;--txt:#f5f3ff;--mut:#9a93b8;--line:rgba(255,255,255,.07);--ok:#34d399}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--txt);font-family:'Sora',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-size:15px;overflow-x:hidden}
+body{min-height:100vh;background:radial-gradient(500px 340px at 85% -5%,rgba(139,92,246,.35),transparent 70%),radial-gradient(420px 300px at -10% 30%,rgba(251,191,36,.12),transparent 70%),var(--bg);background-attachment:fixed}
+#app{max-width:480px;margin:0 auto;padding:calc(var(--sa-top,0px) + 8px) 16px calc(120px + env(safe-area-inset-bottom))}
+header{display:flex;align-items:center;justify-content:space-between;padding:12px 0 16px}
+.label{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--mut);font-weight:600}
+h1{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.hi{font-size:13px;color:var(--mut)}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-weight:700;font-size:13px;display:flex;gap:6px;align-items:center}
+.card{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:24px;padding:20px;margin-bottom:16px;box-shadow:0 10px 30px rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.3)}
+.prize{position:relative;overflow:hidden;text-align:center;padding:28px 20px;background:linear-gradient(150deg,#3b1d8f,#1b1238 60%,#2a1550);border-color:rgba(139,92,246,.4);box-shadow:0 0 40px rgba(139,92,246,.25),0 10px 30px rgba(0,0,0,.4)}
+.prize .gift{font-size:68px;display:inline-block;animation:float 3s ease-in-out infinite;filter:drop-shadow(0 8px 24px rgba(251,191,36,.5))}
+@keyframes float{50%{transform:translateY(-8px) rotate(3deg)}}
+.prize h2{font-size:22px;font-weight:800;margin:8px 0 4px}
+.prize p{color:#c9bff0;font-size:14px}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:20px}
+.cd div{background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:16px;padding:10px 0}
+.cd b{display:block;font-size:22px;font-weight:800;font-variant-numeric:tabular-nums}
+.cd span{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--mut)}
+.btn{width:100%;border:0;border-radius:18px;padding:17px;font:inherit;font-weight:700;font-size:16px;color:#1a1033;background:linear-gradient(135deg,var(--acc),var(--acc2));box-shadow:0 8px 24px rgba(245,158,11,.35);cursor:pointer;transition:transform .15s,opacity .2s}
+.btn:active{transform:scale(.97)}
+.btn.sec{background:linear-gradient(135deg,var(--main),var(--main2));color:#fff;box-shadow:0 8px 24px rgba(109,61,240,.4)}
+.btn.ghost{background:var(--card2);color:var(--txt);box-shadow:none;border:1px solid var(--line)}
+.btn:disabled{opacity:.5}
+.ticket{position:relative;text-align:center;padding:22px 20px;border-radius:24px;background:linear-gradient(135deg,var(--main),#c026d3 130%);box-shadow:0 12px 36px rgba(139,92,246,.45);margin-bottom:16px;-webkit-mask:radial-gradient(circle 12px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 12px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 12px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 12px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+.ticket .n{font-size:56px;font-weight:800;line-height:1;margin:6px 0;text-shadow:0 4px 20px rgba(0,0,0,.3)}
+.ticket .label{color:rgba(255,255,255,.8)}
+.ticket small{display:block;color:rgba(255,255,255,.85);font-size:13px}
+.odds{height:8px;border-radius:99px;background:rgba(0,0,0,.25);margin-top:14px;overflow:hidden}
+.odds i{display:block;height:100%;width:0;background:var(--acc);border-radius:99px;transition:width .6s}
+.task{display:flex;align-items:center;gap:14px;padding:14px;border-radius:20px;background:var(--card);border:1px solid var(--line);margin-bottom:12px;transition:transform .15s}
+.task:active{transform:scale(.98)}
+.task .ic{width:46px;height:46px;border-radius:14px;background:var(--card2);display:grid;place-items:center;font-size:22px;flex:none}
+.task .tx{flex:1;min-width:0}
+.task b{display:block;font-size:15px}
+.task span{font-size:12.5px;color:var(--mut)}
+.pill{border:0;border-radius:999px;padding:9px 14px;font:inherit;font-weight:700;font-size:13px;background:linear-gradient(135deg,var(--main),var(--main2));color:#fff;cursor:pointer;white-space:nowrap}
+.pill.done{background:rgba(52,211,153,.15);color:var(--ok)}
+.pill:disabled{opacity:.7}
+.sec-t{margin:20px 0 12px}
+.link{display:flex;gap:8px;margin:14px 0}
+.link div{flex:1;min-width:0;background:rgba(0,0,0,.3);border:1px dashed rgba(255,255,255,.18);border-radius:14px;padding:12px;font-size:12.5px;color:var(--mut);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;background:var(--card);border:1px solid var(--line);margin-bottom:8px}
+.row.me{border-color:var(--main);box-shadow:0 0 20px rgba(139,92,246,.3)}
+.row .rk{width:30px;text-align:center;font-weight:800;color:var(--mut)}
+.row .nm{flex:1;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .v{font-weight:800;color:var(--acc)}
+.empty{text-align:center;color:var(--mut);padding:36px 12px}
+.empty .e{font-size:42px;margin-bottom:8px}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;padding:0 16px calc(12px + env(safe-area-inset-bottom));pointer-events:none}
+nav div{pointer-events:auto;display:flex;gap:4px;width:100%;max-width:448px;background:rgba(22,17,39,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:24px;padding:6px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+nav button{flex:1;border:0;background:none;color:var(--mut);font:inherit;font-size:11px;font-weight:600;padding:9px 0;border-radius:18px;cursor:pointer;transition:all .2s}
+nav button span{display:block;font-size:20px;margin-bottom:2px}
+nav button.on{background:linear-gradient(135deg,var(--main),var(--main2));color:#fff;box-shadow:0 4px 16px rgba(109,61,240,.5)}
+.view{display:none;animation:in .3s ease}.view.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+footer{text-align:center;font-size:11px;color:var(--mut);opacity:.6;margin-top:24px}
+.fl{position:fixed;pointer-events:none;font-weight:800;font-size:26px;color:var(--acc);text-shadow:0 2px 12px rgba(0,0,0,.6);animation:up 1s ease-out forwards;z-index:50}
+@keyframes up{to{transform:translateY(-90px);opacity:0}}
+.cf{position:fixed;width:8px;height:12px;pointer-events:none;z-index:50;border-radius:2px}
+#toast{position:fixed;left:50%;top:calc(var(--sa-top,0px) + 12px);transform:translate(-50%,-80px);background:var(--card2);border:1px solid var(--line);padding:12px 18px;border-radius:16px;font-weight:600;font-size:14px;z-index:60;transition:transform .3s;box-shadow:0 10px 30px rgba(0,0,0,.5);max-width:90%;text-align:center}
+#toast.on{transform:translate(-50%,0)}
+.note{font-size:12px;color:var(--mut);text-align:center;margin-top:10px;line-height:1.5}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div><div class="label">Channel giveaway</div><h1>Win big, together</h1></div>
+    <div class="chip">🎟️ <span id="chipN">0</span></div>
+  </header>
+
+  <section class="view on" id="v-home">
+    <div class="card prize">
+      <div class="gift">🎁</div>
+      <h2>Telegram Premium, 12 months</h2>
+      <p>One winner drawn at random from all tickets</p>
+      <div class="cd" id="cd"><div><b>0</b><span>Days</span></div><div><b>0</b><span>Hours</span></div><div><b>0</b><span>Min</span></div><div><b>0</b><span>Sec</span></div></div>
+    </div>
+    <div id="homeBody"></div>
+    <div class="card">
+      <div class="label" style="margin-bottom:12px">How it works</div>
+      <div class="task" style="margin:0 0 10px"><div class="ic">1️⃣</div><div class="tx"><b>Sign up</b><span>Enter and get your first ticket</span></div></div>
+      <div class="task" style="margin:0 0 10px"><div class="ic">2️⃣</div><div class="tx"><b>Earn tickets</b><span>Daily bonus, channel and friends</span></div></div>
+      <div class="task" style="margin:0"><div class="ic">3️⃣</div><div class="tx"><b>Winner is drawn</b><span>More tickets, more chances</span></div></div>
+    </div>
+  </section>
+
+  <section class="view" id="v-earn">
+    <div class="label sec-t" style="margin-top:4px">Earn tickets</div>
+    <div id="tasks"></div>
+    <div class="card">
+      <div class="label">Invite friends</div>
+      <h2 style="font-size:20px;margin:6px 0">+3 tickets per friend</h2>
+      <p style="color:var(--mut);font-size:14px">Share your personal link. Your friend also starts with +2 bonus tickets.</p>
+      <div class="link"><div id="lnk"></div></div>
+      <button class="btn sec" id="share">Invite friends 🚀</button>
+      <button class="btn ghost" id="copy" style="margin-top:10px;padding:13px;font-size:14px">Copy link</button>
+      <div class="note">Friends joined: <b id="invN">0</b>. Invites are verified by the organizer before the draw.</div>
+    </div>
+  </section>
+
+  <section class="view" id="v-top">
+    <div class="label sec-t" style="margin-top:4px">Top players by tickets</div>
+    <div id="board"><div class="empty"><div class="e">⏳</div>Loading...</div></div>
+  </section>
+
+  <footer>Points and tickets have no cash value · Made with SayApp</footer>
+</div>
+<nav><div>
+  <button class="on" data-t="home"><span>🎁</span>Giveaway</button>
+  <button data-t="earn"><span>🎟️</span>Earn</button>
+  <button data-t="top"><span>🏆</span>Top</button>
+</div></nav>
+<div id="toast"></div>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="yqm53s6n" data-full="1"></script>
+<script>
+window.addEventListener('load', async function(){
+  var CHANNEL='https://t.me/yourchannel', BOT='https://t.me/yourbot/app';
+  var tg=window.Telegram&&Telegram.WebApp; try{tg&&tg.ready();tg&&tg.expand();}catch(e){}
+  var $=function(s){return document.querySelector(s)};
+  var user=(window.SayApp&&SayApp.user)||{id:0,first_name:'Friend'};
+  var S={joined:false,daily:'',dailyCount:0,channel:false,bonus:0,invites:0};
+  try{var d=await SayApp.get('gv'); if(d&&typeof d==='object') S=Object.assign(S,d);}catch(e){}
+  try{var iv=await SayApp.get('invites'); if(typeof iv==='number') S.invites=iv;}catch(e){}
+  var shown=0, saveT=null;
+  function tickets(){return (S.joined?1:0)+S.dailyCount+(S.channel?2:0)+S.bonus+S.invites*3}
+  function today(){return new Date().toISOString().slice(0,10)}
+  function save(){clearTimeout(saveT);saveT=setTimeout(function(){
+    try{SayApp.set('gv',S);SayApp.set('tickets',tickets());}catch(e){}},1200)}
+  function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove('on')},2200)}
+  function haptic(k){try{SayApp.haptic(k)}catch(e){}}
+  function count(el,to){var from=+el.textContent||0,t0=performance.now();
+    (function f(t){var p=Math.min(1,(t-t0)/600);el.textContent=Math.round(from+(to-from)*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)}
+  function floatN(txt,x,y){var e=document.createElement('div');e.className='fl';e.textContent=txt;e.style.left=(x-20)+'px';e.style.top=(y-20)+'px';document.body.appendChild(e);setTimeout(function(){e.remove()},1000)}
+  function confetti(){var c=['#8b5cf6','#fbbf24','#c026d3','#34d399','#fff'];
+    for(var i=0;i<46;i++){var e=document.createElement('div');e.className='cf';e.style.background=c[i%5];
+      var x=innerWidth/2,y=innerHeight/2.4;e.style.left=x+'px';e.style.top=y+'px';document.body.appendChild(e);
+      var a=Math.random()*Math.PI*2,v=120+Math.random()*180,dx=Math.cos(a)*v,dy=Math.sin(a)*v-120;
+      e.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:'translate('+dx+'px,'+(dy+260)+'px) rotate('+(Math.random()*720)+'deg)',opacity:0}],{duration:1200+Math.random()*600,easing:'cubic-bezier(.2,.7,.4,1)'}).onfinish=(function(n){return function(){n.remove()}})(e);}
+  }
+  function gain(n,ev){var x=innerWidth/2,y=innerHeight/2;if(ev&&ev.clientX){x=ev.clientX;y=ev.clientY}
+    floatN('+'+n+' 🎟️',x,y);haptic('ok');render();save();}
+  function openTg(u){try{tg.openTelegramLink(u)}catch(e){window.open(u,'_blank')}}
+
+  function link(){return BOT+'?startapp=ref_'+user.id}
+  function render(){
+    var t=tickets();count($('#chipN'),t);
+    var h=$('#homeBody');
+    if(!S.joined){
+      h.innerHTML='<div class="card" style="text-align:center"><div class="label">Hi '+esc(user.first_name||'there')+'</div><h2 style="margin:6px 0 14px;font-size:20px">Ready to try your luck?</h2><button class="btn" id="join">Enter the giveaway 🎟️</button><div class="note">Free to enter. No purchase needed.</div></div>';
+      $('#join').onclick=join;
+    }else{
+      var pct=Math.min(100,t*4);
+      h.innerHTML='<div class="ticket"><div class="label">Your tickets</div><div class="n" id="big">'+shown+'</div><small>Every ticket is one more chance to win</small><div class="odds"><i style="width:'+pct+'%"></i></div></div><button class="btn sec" id="go" style="margin-bottom:16px">Earn more tickets 🚀</button>';
+      count($('#big'),t);shown=t;
+      $('#go').onclick=function(){tab('earn')};
+    }
+    renderTasks();$('#invN').textContent=S.invites;$('#lnk').textContent=link();
+  }
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  async function join(e){
+    var ref=null;try{var sp=(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.start_param)||'';if(sp.indexOf('ref_')===0&&sp.slice(4)!==String(user.id))ref=sp.slice(4)}catch(x){}
+    S.joined=true;if(ref){S.bonus+=2;S.ref=ref}
+    confetti();haptic('ok');render();save();
+    toast(ref?'You are in! +2 welcome bonus 🎉':'You are in! Good luck 🍀');
+    try{await SayApp.submit({type:'signup',name:user.first_name,id:user.id,referrer:ref})}catch(x){}
+  }
+  function renderTasks(){
+    var dn=S.daily===today(),box=$('#tasks');
+    box.innerHTML=
+     '<div class="task"><div class="ic">📅</div><div class="tx"><b>Daily bonus</b><span>+1 ticket, come back every day</span></div><button class="pill'+(dn?' done':'')+'" id="t-d" '+(dn?'disabled':'')+'>'+(dn?'Done ✓':'Claim')+'</button></div>'+
+     '<div class="task"><div class="ic">📣</div><div class="tx"><b>Join our channel</b><span>+2 tickets, one time</span></div><button class="pill'+(S.channel?' done':'')+'" id="t-c" '+(S.channel?'disabled':'')+'>'+(S.channel?'Done ✓':'Join')+'</button></div>';
+    $('#t-d').onclick=function(ev){
+      if(!S.joined)return needJoin();
+      S.daily=today();S.dailyCount++;gain(1,ev);};
+    $('#t-c').onclick=function(ev){
+      if(!S.joined)return needJoin();
+      var b=ev.currentTarget;openTg(CHANNEL);b.disabled=true;b.textContent='Checking...';
+      setTimeout(function(){S.channel=true;gain(2,{clientX:innerWidth/2,clientY:innerHeight/2});confetti();},4000);};
+  }
+  function needJoin(){haptic('error');toast('Enter the giveaway first 🎟️');tab('home')}
+  $('#share').onclick=function(){
+    if(!S.joined)return needJoin();haptic('tap');
+    openTg('https://t.me/share/url?url='+encodeURIComponent(link())+'&text='+encodeURIComponent('Join this giveaway and win Telegram Premium for 12 months 🎁'));};
+  $('#copy').onclick=function(){
+    if(!S.joined)return needJoin();
+    var l=link(),ok=function(){haptic('ok');toast('Link copied ✓')};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(l).then(ok,ok)}
+    else{var i=document.createElement('input');i.value=l;document.body.appendChild(i);i.select();try{document.execCommand('copy')}catch(e){}i.remove();ok()}};
+
+  function tab(n){
+    document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('on',v.id==='v-'+n)});
+    document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('on',b.dataset.t===n)});
+    haptic('tap');scrollTo(0,0);if(n==='top')loadTop();
+  }
+  document.querySelectorAll('nav button').forEach(function(b){b.onclick=function(){tab(b.dataset.t)}});
+
+  async function loadTop(){
+    var box=$('#board'),list=[];
+    try{await SayApp.set('tickets',tickets());list=await SayApp.top('tickets',20)||[]}catch(e){}
+    if(!list.length){box.innerHTML='<div class="empty"><div class="e">🏆</div><b>No players yet</b><br>Be the first on the board!</div>';return}
+    var m=['🥇','🥈','🥉'];
+    box.innerHTML=list.map(function(r,i){
+      return '<div class="row'+(r.me?' me':'')+'"><div class="rk">'+(m[i]||i+1)+'</div><div class="nm">'+esc(r.name||'Player')+(r.me?' (you)':'')+'</div><div class="v">'+r.value+' 🎟️</div></div>'}).join('');
+  }
+
+  // draw date: next Sunday 18:00 UTC
+  var DRAW=new Date();DRAW.setUTCHours(18,0,0,0);
+  while(DRAW.getUTCDay()!==0||DRAW<new Date())DRAW.setUTCDate(DRAW.getUTCDate()+1);
+  function tick(){
+    var s=Math.max(0,Math.floor((DRAW-new Date())/1000)),
+        v=[Math.floor(s/86400),Math.floor(s%86400/3600),Math.floor(s%3600/60),s%60],
+        b=document.querySelectorAll('#cd b');
+    for(var i=0;i<4;i++)b[i].textContent=String(v[i]).padStart(2,'0');
+  }
+  tick();setInterval(tick,1000);
+  shown=tickets();render();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!-- sayapp srwd5xm3 v1 -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Bâton Relais</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0914;--card:#141226;--card2:#1b1833;--line:rgba(255,255,255,.07);--main:#7a5cff;--acc:#ffb23e;--txt:#f4f2ff;--mut:#9a96bd;--b1:#9b7bff;--b2:#ff4d8d;--ok:#37e6a0}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--txt);font-family:'Outfit',system-ui,-apple-system,sans-serif;overflow-x:hidden}
+body{min-height:100vh;background:radial-gradient(900px 500px at 50% -10%,rgba(122,92,255,.28),transparent 60%),radial-gradient(500px 400px at 100% 40%,rgba(255,77,141,.10),transparent 60%),var(--bg);background-attachment:fixed}
+header{padding:calc(var(--sa-top,0px) + 8px) 16px 8px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.hi small{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);font-weight:600}
+.hi b{font-size:20px;font-weight:700;display:block;max-width:190px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip{display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,rgba(122,92,255,.25),rgba(255,178,62,.15));border:1px solid rgba(255,255,255,.12);padding:10px 16px;border-radius:999px;box-shadow:0 6px 24px rgba(122,92,255,.25)}
+.chip b{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums}
+main{padding:8px 16px 150px;max-width:480px;margin:0 auto}
+.view{display:none;animation:in .3s ease}.view.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+h2{font-size:26px;font-weight:800;margin:8px 0 4px}
+.sub{color:var(--mut);font-size:15px;margin-bottom:16px;line-height:1.4}
+.lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);font-weight:700}
+.stage{position:relative;width:260px;height:260px;margin:12px auto 8px}
+.stage svg.ring{position:absolute;inset:0;transform:rotate(-90deg)}
+.ring .bg{stroke:rgba(255,255,255,.07)}
+.ring .pg{transition:stroke-dashoffset .9s linear;filter:drop-shadow(0 0 8px var(--b1))}
+.glow{position:absolute;inset:40px;border-radius:50%;background:radial-gradient(circle,var(--b1),transparent 70%);opacity:.35;filter:blur(20px);animation:pulse 3s ease-in-out infinite}
+.baton{position:absolute;left:50%;top:50%;width:60px;height:220px;margin:-110px 0 0 -30px;transform:rotate(35deg);animation:float 3.5s ease-in-out infinite;filter:drop-shadow(0 10px 18px rgba(0,0,0,.5)) drop-shadow(0 0 16px var(--b1));transition:opacity .3s,filter .3s}
+.baton.off{opacity:.25;filter:grayscale(1)}
+@keyframes float{0%,100%{transform:rotate(35deg) translateY(0)}50%{transform:rotate(30deg) translateY(-8px)}}
+@keyframes pulse{0%,100%{opacity:.25;transform:scale(.95)}50%{opacity:.45;transform:scale(1.05)}}
+.status{text-align:center}
+.status h3{font-size:24px;font-weight:800}
+.status p{color:var(--mut);margin-top:4px;font-size:15px}
+.timer{font-variant-numeric:tabular-nums;color:var(--acc);font-weight:700}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0}
+.st{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 8px;text-align:center;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+.st b{display:block;font-size:20px;font-weight:800;margin-top:4px}
+.btn{width:100%;border:0;border-radius:20px;padding:18px;font:700 17px 'Outfit',sans-serif;color:#fff;background:linear-gradient(135deg,var(--main),var(--b2));box-shadow:0 10px 30px rgba(122,92,255,.45),inset 0 1px 0 rgba(255,255,255,.3);transition:transform .15s,opacity .2s;cursor:pointer;margin-bottom:12px}
+.btn:active{transform:scale(.96)}
+.btn.sec{background:var(--card2);box-shadow:none;border:1px solid rgba(255,255,255,.12)}
+.btn:disabled{opacity:.45;box-shadow:none}
+.btn.hide{display:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px;margin-bottom:12px;box-shadow:0 10px 28px rgba(0,0,0,.3);display:flex;align-items:center;gap:14px}
+.card .ic{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,rgba(122,92,255,.35),rgba(255,178,62,.2));display:grid;place-items:center;font-size:24px;flex:none}
+.card .in{flex:1;min-width:0}
+.card .in b{font-size:16px;font-weight:700;display:block}
+.card .in span{font-size:13px;color:var(--mut)}
+.bar{height:6px;background:rgba(255,255,255,.08);border-radius:9px;margin-top:8px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--main),var(--acc));border-radius:9px;transition:width .5s}
+.mini{border:0;border-radius:14px;padding:10px 14px;font:700 14px 'Outfit',sans-serif;color:#1a1000;background:linear-gradient(135deg,#ffd27a,var(--acc));box-shadow:0 6px 16px rgba(255,178,62,.35);cursor:pointer;flex:none;transition:transform .15s}
+.mini:active{transform:scale(.93)}
+.mini.g{background:var(--card2);color:var(--mut);box-shadow:none;border:1px solid var(--line)}
+.mini.ok{background:rgba(55,230,160,.15);color:var(--ok);box-shadow:none}
+.row{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--card);border:1px solid var(--line);border-radius:18px;margin-bottom:8px}
+.row.me{border-color:var(--acc);background:linear-gradient(135deg,rgba(255,178,62,.14),var(--card))}
+.row .rk{width:32px;font-weight:800;font-size:18px;text-align:center}
+.row .nm{flex:1;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .v{font-weight:800;font-variant-numeric:tabular-nums;color:var(--acc)}
+.sk{height:52px;border-radius:18px;margin-bottom:8px;background:linear-gradient(90deg,var(--card),var(--card2),var(--card));background-size:200% 100%;animation:sh 1.2s infinite}
+@keyframes sh{to{background-position:-200% 0}}
+.empty{text-align:center;color:var(--mut);padding:32px 16px;background:var(--card);border-radius:22px;border:1px dashed rgba(255,255,255,.15)}
+.empty div{font-size:40px;margin-bottom:8px}
+footer{text-align:center;font-size:11px;color:rgba(255,255,255,.28);margin-top:16px;letter-spacing:.06em}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;padding:8px 12px calc(env(safe-area-inset-bottom) + 10px);background:linear-gradient(transparent,var(--bg) 40%);z-index:5}
+nav .in{display:flex;gap:4px;width:100%;max-width:456px;background:rgba(27,24,51,.92);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:6px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+nav button{flex:1;border:0;background:none;color:var(--mut);padding:8px 0;border-radius:18px;font:600 11px 'Outfit',sans-serif;display:flex;flex-direction:column;align-items:center;gap:2px;transition:all .2s;cursor:pointer;position:relative}
+nav button span{font-size:22px;transition:transform .2s}
+nav button.on{background:linear-gradient(135deg,rgba(122,92,255,.4),rgba(255,77,141,.25));color:#fff}
+nav button.on span{transform:scale(1.15)}
+nav button .dot{position:absolute;top:6px;right:22%;width:9px;height:9px;border-radius:50%;background:var(--acc);display:none;box-shadow:0 0 8px var(--acc)}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:20;overflow:hidden}
+.fl{position:absolute;left:50%;top:40%;font-size:34px;font-weight:800;color:var(--acc);text-shadow:0 0 18px rgba(255,178,62,.7);animation:fl 1.3s ease-out forwards;transform:translateX(-50%)}
+@keyframes fl{from{opacity:1;transform:translate(-50%,0) scale(.7)}30%{transform:translate(-50%,-30px) scale(1.2)}to{opacity:0;transform:translate(-50%,-130px) scale(1)}}
+.pt{position:absolute;left:50%;top:38%;width:9px;height:9px;border-radius:3px;animation:pt .9s ease-out forwards}
+@keyframes pt{to{transform:translate(var(--x),var(--y)) rotate(540deg);opacity:0}}
+#toast{position:fixed;left:50%;top:calc(var(--sa-top,0px) + 64px);transform:translate(-50%,-20px);background:var(--card2);border:1px solid rgba(255,255,255,.15);padding:12px 18px;border-radius:16px;font-weight:600;font-size:14px;opacity:0;transition:all .25s;z-index:30;max-width:90%;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<header>
+  <div class="hi"><small>Porteur du bâton</small><b id="name">Joueur</b></div>
+  <div class="chip"><span>🏑</span><b id="pts">0</b></div>
+</header>
+<main>
+  <section class="view on" id="v0">
+    <div class="stage">
+      <svg class="ring" width="260" height="260" viewBox="0 0 260 260">
+        <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--b1)"/><stop offset="1" style="stop-color:var(--b2)"/></linearGradient></defs>
+        <circle class="bg" cx="130" cy="130" r="120" fill="none" stroke-width="10"/>
+        <circle class="pg" id="pg" cx="130" cy="130" r="120" fill="none" stroke="url(#rg)" stroke-width="10" stroke-linecap="round" stroke-dasharray="753.98" stroke-dashoffset="753.98"/>
+      </svg>
+      <div class="glow"></div>
+      <div class="baton off" id="baton">
+        <svg viewBox="0 0 60 220" width="60" height="220">
+          <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--b1)"/><stop offset="1" style="stop-color:var(--b2)"/></linearGradient></defs>
+          <rect x="16" y="8" width="28" height="204" rx="14" fill="url(#bg)"/>
+          <rect x="16" y="52" width="28" height="12" fill="#fff" opacity=".35"/>
+          <rect x="16" y="156" width="28" height="12" fill="#fff" opacity=".35"/>
+          <rect x="22" y="14" width="5" height="192" rx="3" fill="#fff" opacity=".35"/>
+        </svg>
+      </div>
+    </div>
+    <div class="status"><h3 id="sT">Aucun bâton</h3><p id="sP">Attrape-le pour lancer ton premier tour.</p></div>
+    <div class="stats">
+      <div class="st"><span class="lbl">Par minute</span><b id="sR">+10</b></div>
+      <div class="st"><span class="lbl">Minutes</span><b id="sM">0</b></div>
+      <div class="st"><span class="lbl">Passes</span><b id="sPa">0</b></div>
+    </div>
+    <button class="btn hide" id="bPass">🚀 Passer à un ami</button>
+    <button class="btn hide" id="bCatch">🏑 Attraper le bâton</button>
+    <p class="sub" style="text-align:center;font-size:13px">Un tour dure 10 minutes. Passe le bâton à un ami pour relancer un tour et gagner +50.</p>
+  </section>
+
+  <section class="view" id="v1">
+    <h2>Tâches</h2><p class="sub">Accomplis des missions et empoche des points bonus.</p>
+    <div id="tasks"></div>
+  </section>
+
+  <section class="view" id="v2">
+    <h2>Classement</h2><p class="sub">Les meilleurs porteurs de bâton du moment.</p>
+    <div id="lb"></div>
+  </section>
+
+  <section class="view" id="v3">
+    <h2>Récompenses</h2><p class="sub">Débloque des boosts et des bâtons uniques avec tes points.</p>
+    <div id="rw"></div>
+  </section>
+  <footer>Made with SayApp<br>Les points n'ont aucune valeur en argent</footer>
+</main>
+<nav><div class="in" id="nav">
+  <button class="on" data-v="0"><span>🏑</span>Jeu</button>
+  <button data-v="1"><span>✅</span>Tâches<i class="dot" id="d1"></i></button>
+  <button data-v="2"><span>🏆</span>Classement</button>
+  <button data-v="3"><span>🎁</span>Cadeaux<i class="dot" id="d3"></i></button>
+</div></nav>
+<div id="fx"></div><div id="toast"></div>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="srwd5xm3" data-full="1"></script>
+<script>
+window.addEventListener('load',async()=>{
+const tg=window.Telegram&&Telegram.WebApp;
+try{tg&&tg.ready();tg&&tg.expand&&tg.expand();}catch(e){}
+const $=id=>document.getElementById(id);
+const ROUND=600000,CD=900000,MIN=60000,C=753.98;
+const SKINS={base:['#9b7bff','#ff4d8d'],neon:['#22e6ff','#37ff9a'],gold:['#ffe27a','#ff9d1f'],ice:['#e6faff','#7fb6ff']};
+const SKN={base:'Classique',neon:'Néon',gold:'Doré',ice:'Cristal'};
+const RW=[
+ {id:'r1',need:300,emo:'⚡',t:'Bâton Néon',d:'Un skin cyan électrique',skin:'neon'},
+ {id:'r2',need:1000,emo:'🚀',t:'Boost x1,5',d:'+50% de points par minute',mult:.5},
+ {id:'r3',need:2500,emo:'👑',t:'Bâton Doré',d:'Un skin en or massif',skin:'gold'},
+ {id:'r4',need:6000,emo:'🔥',t:'Boost x2',d:'Encore +50% par minute',mult:.5},
+ {id:'r5',need:15000,emo:'💎',t:'Bâton Cristal',d:'Le skin glacé légendaire',skin:'ice'}];
+const TK=[
+ {id:'t1',emo:'⏱️',t:'Premiers pas',d:'Tenir le bâton 5 minutes',g:5,v:()=>s.minutes,b:50},
+ {id:'t2',emo:'🤝',t:'Premier relais',d:'Passer le bâton 1 fois',g:1,v:()=>s.passes,b:100},
+ {id:'t3',emo:'📅',t:'Fidèle au poste',d:'Venir 3 jours de suite',g:3,v:()=>s.streak,b:150},
+ {id:'t4',emo:'💪',t:'Endurance',d:'Tenir le bâton 30 minutes',g:30,v:()=>s.minutes,b:200},
+ {id:'t5',emo:'🔗',t:'Chaîne humaine',d:'Passer le bâton 5 fois',g:5,v:()=>s.passes,b:300},
+ {id:'t6',emo:'🏅',t:'Marathonien',d:'Tenir le bâton 120 minutes',g:120,v:()=>s.minutes,b:800}];
+let s={pts:0,minutes:0,passes:0,start:0,acc:0,streak:0,day:'',tasks:{},rew:{},skin:'base'};
+try{const v=await SayApp.get('state');if(v&&typeof v==='object')s=Object.assign(s,v);}catch(e){}
+s.tasks=s.tasks||{};s.rew=s.rew||{};
+let dirty=false,shown=0,busy=false;
+const day=d=>d.toISOString().slice(0,10);
+const today=day(new Date());
+if(s.day!==today){const y=new Date();y.setDate(y.getDate()-1);s.streak=(s.day===day(y))?(s.streak||0)+1:1;s.day=today;dirty=true;}
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+$('name').textContent=(SayApp.user&&SayApp.user.first_name)||'Joueur';
+const mult=()=>1+RW.reduce((a,r)=>a+(s.rew[r.id]&&r.mult?r.mult:0),0);
+const rate=()=>Math.round(10*mult());
+function skin(){const k=SKINS[s.skin]||SKINS.base;document.documentElement.style.setProperty('--b1',k[0]);document.documentElement.style.setProperty('--b2',k[1]);}
+function num(el,from,to){const t0=performance.now();const f=n=>{const p=Math.min((n-t0)/500,1);el.textContent=Math.round(from+(to-from)*(1-Math.pow(1-p,3))).toLocaleString('fr-FR');if(p<1)requestAnimationFrame(f);};requestAnimationFrame(f);}
+function paintPts(){if(shown!==s.pts){num($('pts'),shown,s.pts);shown=s.pts;}}
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2200);}
+function float(t){const e=document.createElement('div');e.className='fl';e.textContent=t;$('fx').appendChild(e);setTimeout(()=>e.remove(),1400);}
+function burst(){const cols=['#ffb23e','#ff4d8d','#7a5cff','#37e6a0','#22e6ff'];for(let i=0;i<24;i++){const p=document.createElement('div');p.className='pt';const a=Math.random()*6.28,d=80+Math.random()*120;p.style.setProperty('--x',Math.cos(a)*d+'px');p.style.setProperty('--y',Math.sin(a)*d+'px');p.style.background=cols[i%5];$('fx').appendChild(p);setTimeout(()=>p.remove(),950);}}
+function add(g,fx){s.pts+=g;dirty=true;paintPts();if(fx){float('+'+g);try{SayApp.haptic('ok');}catch(e){}}}
+const fmt=ms=>{ms=Math.max(0,Math.ceil(ms/1000));return Math.floor(ms/60)+':'+String(ms%60).padStart(2,'0');};
+
+function tick(){
+ const now=Date.now();
+ if(s.start){
+  const el=Math.min(now-s.start,ROUND),m=Math.floor(el/MIN);
+  if(m>s.acc){const d=m-s.acc;s.acc=m;s.minutes+=d;add(d*rate(),true);badges();}
+ }
+ paint(now);
+}
+function paint(now){
+ const pass=$('bPass'),catchB=$('bCatch'),b=$('baton');
+ $('sR').textContent='+'+rate();$('sM').textContent=s.minutes.toLocaleString('fr-FR');$('sPa').textContent=s.passes;
+ if(!s.start){
+  b.classList.add('off');$('pg').style.strokeDashoffset=C;
+  $('sT').textContent='Aucun bâton';$('sP').textContent='Attrape-le pour lancer ton premier tour.';
+  pass.classList.add('hide');catchB.classList.remove('hide');catchB.disabled=false;catchB.textContent='🏑 Attraper le bâton';return;
+ }
+ const el=now-s.start;
+ if(el<ROUND){
+  b.classList.remove('off');$('pg').style.strokeDashoffset=C*(1-el/ROUND);
+  $('sT').textContent='Tu tiens le bâton !';
+  $('sP').innerHTML='Prochain gain dans <span class="timer">'+fmt(MIN-el%MIN)+'</span> · tour '+Math.floor(el/MIN)+'/10';
+  catchB.classList.add('hide');pass.classList.remove('hide');
+  const ok=el>=180000;pass.disabled=!ok;pass.textContent=ok?'🚀 Passer à un ami (+50)':'🔒 Passage possible dans '+fmt(180000-el);
+ }else{
+  b.classList.add('off');$('pg').style.strokeDashoffset=0;
+  $('sT').textContent='Bâton épuisé';
+  const left=s.start+ROUND+CD-now;
+  pass.classList.remove('hide');pass.disabled=false;pass.textContent='🚀 Passer à un ami (+50)';
+  catchB.classList.remove('hide');
+  if(left>0){$('sP').innerHTML='Il revient seul dans <span class="timer">'+fmt(left)+'</span>';catchB.disabled=true;catchB.textContent='⏳ Retour du bâton '+fmt(left);}
+  else{$('sP').textContent='Le bâton t\'attend, reprends-le !';catchB.disabled=false;catchB.textContent='🏑 Reprendre le bâton';}
+ }
+}
+function newRound(){s.start=Date.now();s.acc=0;dirty=true;}
+$('bCatch').onclick=()=>{if(busy)return;newRound();burst();try{SayApp.haptic('tap');}catch(e){}toast('Le bâton est à toi, c\'est parti !');tick();};
+$('bPass').onclick=()=>{
+ if(busy||!s.start||Date.now()-s.start<180000)return;busy=true;setTimeout(()=>busy=false,1500);
+ let link=SayApp.link||location.href.split('#')[0];
+ const text='🏑 Je te passe le bâton ! Garde-le et gagne des points chaque minute.';
+ const url='https://t.me/share/url?url='+encodeURIComponent(link)+'&text='+encodeURIComponent(text);
+ try{if(tg&&tg.openTelegramLink)tg.openTelegramLink(url);else window.open(url,'_blank');}catch(e){}
+ s.passes++;newRound();add(50,true);burst();badges();toast('Bâton passé ! Un nouveau tour commence.');tick();
+};
+
+function renderTasks(){
+ $('tasks').innerHTML=TK.map(t=>{
+  const v=Math.min(t.v(),t.g),done=s.tasks[t.id],can=v>=t.g&&!done;
+  return `<div class="card"><div class="ic">${t.emo}</div><div class="in"><b>${t.t}</b><span>${t.d} · +${t.b} pts</span><div class="bar"><i style="width:${v/t.g*100}%"></i></div></div>`+
+  (done?'<button class="mini ok">Fait ✓</button>':can?`<button class="mini" data-t="${t.id}">Récupérer</button>`:`<button class="mini g">${v}/${t.g}</button>`)+'</div>';
+ }).join('');
+}
+$('tasks').onclick=e=>{const id=e.target.dataset.t;if(!id)return;const t=TK.find(x=>x.id===id);if(!t||s.tasks[id]||t.v()<t.g)return;s.tasks[id]=1;add(t.b,true);burst();renderTasks();badges();};
+function renderRw(){
+ $('rw').innerHTML=RW.map(r=>{
+  const got=s.rew[r.id],can=s.pts>=r.need&&!got,p=Math.min(s.pts/r.need,1)*100;
+  let b;
+  if(got&&r.skin)b=s.skin===r.skin?'<button class="mini ok">Équipé ✓</button>':`<button class="mini" data-e="${r.skin}">Équiper</button>`;
+  else if(got)b='<button class="mini ok">Actif ✓</button>';
+  else if(can)b=`<button class="mini" data-r="${r.id}">Débloquer</button>`;
+  else b=`<button class="mini g">${r.need.toLocaleString('fr-FR')}</button>`;
+  return `<div class="card"><div class="ic">${r.emo}</div><div class="in"><b>${r.t}</b><span>${r.d}</span>${got?'':`<div class="bar"><i style="width:${p}%"></i></div>`}</div>${b}</div>`;
+ }).join('')+`<div class="card"><div class="ic">🎨</div><div class="in"><b>Bâton actuel</b><span>${SKN[s.skin]||'Classique'}${s.skin!=='base'?'':''}</span></div>${s.skin!=='base'?'<button class="mini g" data-e="base">Classique</button>':''}</div>`;
+}
+$('rw').onclick=e=>{
+ const r=e.target.dataset.r,k=e.target.dataset.e;
+ if(r){const x=RW.find(y=>y.id===r);if(!x||s.rew[r]||s.pts<x.need)return;s.rew[r]=1;if(x.skin)s.skin=x.skin;dirty=true;skin();burst();try{SayApp.haptic('ok');}catch(_){}toast(x.t+' débloqué !');renderRw();badges();}
+ else if(k&&SKINS[k]){s.skin=k;dirty=true;skin();renderRw();try{SayApp.haptic('tap');}catch(_){}}
+};
+function badges(){
+ $('d1').style.display=TK.some(t=>!s.tasks[t.id]&&t.v()>=t.g)?'block':'none';
+ $('d3').style.display=RW.some(r=>!s.rew[r.id]&&s.pts>=r.need)?'block':'none';
+ if($('v1').classList.contains('on'))renderTasks();
+ if($('v3').classList.contains('on'))renderRw();
+}
+async function loadLb(){
+ const box=$('lb');box.innerHTML='<div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div>';
+ await save(true);
+ let list=[];try{list=await SayApp.top('points',20)||[];}catch(e){}
+ if(!list.length){box.innerHTML='<div class="empty"><div>🏁</div>Personne au classement pour l\'instant.<br>Sois le premier à tenir le bâton !</div>';return;}
+ const med=['🥇','🥈','🥉'];
+ box.innerHTML=list.map((u,i)=>`<div class="row${u.me?' me':''}"><div class="rk">${med[i]||i+1}</div><div class="nm">${esc(u.name||'Joueur')}${u.me?' (toi)':''}</div><div class="v">${Number(u.value).toLocaleString('fr-FR')}</div></div>`).join('');
+}
+$('nav').onclick=e=>{
+ const b=e.target.closest('button');if(!b)return;
+ document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x===b));
+ document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v'+b.dataset.v));
+ try{SayApp.haptic('tap');}catch(_){}
+ const n=b.dataset.v;if(n==='1')renderTasks();if(n==='2')loadLb();if(n==='3')renderRw();window.scrollTo(0,0);
+};
+let saving=false;
+async function save(force){
+ if((!dirty&&!force)||saving)return;saving=true;dirty=false;
+ try{await SayApp.set('state',s);await SayApp.set('points',s.pts);}catch(e){dirty=true;}
+ saving=false;
+}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)save(true);else tick();});
+skin();shown=0;paintPts();badges();tick();
+setInterval(tick,1000);setInterval(()=>save(),6000);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!-- sayapp 8s45ck93 v1 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Nova Tap</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--main:#7c5cff;--main2:#a78bff;--accent:#ffc83d;--bg:#07061a;--card:rgba(255,255,255,.055);--line:rgba(255,255,255,.09);--txt:#f4f2ff;--mut:#9a96c4;--ok:#3ee0a0}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+html,body{height:100%;background:var(--bg);color:var(--txt);font-family:'Sora',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-size:15px;overflow:hidden}
+body{background:radial-gradient(120% 60% at 50% -10%,#2b1b73 0%,transparent 60%),radial-gradient(80% 50% at 100% 100%,#3a1250 0%,transparent 60%),var(--bg)}
+#app{height:100%;display:flex;flex-direction:column;max-width:480px;margin:0 auto;position:relative}
+header{padding:calc(var(--sa-top,0px) + 8px) 20px 8px;text-align:center}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.bal{font-size:44px;font-weight:800;letter-spacing:-.02em;margin-top:2px;background:linear-gradient(180deg,#fff,#cfc4ff);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.bal small{font-size:15px;color:var(--accent);-webkit-text-fill-color:var(--accent);font-weight:700;letter-spacing:.08em;margin-left:4px}
+.chip{display:inline-flex;gap:6px;align-items:center;padding:6px 12px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:12px;font-weight:600;margin-top:6px}
+main{flex:1;position:relative;overflow:hidden}
+.view{position:absolute;inset:0;overflow-y:auto;padding:8px 16px 24px;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s,transform .25s;-webkit-overflow-scrolling:touch}
+.view.on{opacity:1;pointer-events:auto;transform:none}
+#v-tap{display:flex;flex-direction:column;align-items:center;justify-content:space-between;overflow:hidden}
+.stage{flex:1;display:flex;align-items:center;justify-content:center;width:100%;perspective:700px}
+#orb{width:min(66vw,270px);aspect-ratio:1;border-radius:50%;position:relative;cursor:pointer;touch-action:manipulation;transition:transform .12s ease-out;
+background:radial-gradient(circle at 35% 28%,#c9b8ff 0%,var(--main) 38%,#3b1fb8 78%,#25107a 100%);
+box-shadow:0 0 0 10px rgba(124,92,255,.14),0 0 0 22px rgba(124,92,255,.07),0 24px 70px rgba(124,92,255,.55),inset 0 -14px 30px rgba(20,5,80,.55),inset 0 10px 24px rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center}
+#orb::after{content:"";position:absolute;inset:14%;border-radius:50%;border:2px solid rgba(255,255,255,.22)}
+#orb svg{width:46%;filter:drop-shadow(0 6px 14px rgba(0,0,0,.4));pointer-events:none}
+#orb.press{transition:transform .06s}
+#orb.dead{filter:grayscale(.7) brightness(.7)}
+.shake{animation:shake .3s}
+@keyframes shake{25%{translate:-6px 0}75%{translate:6px 0}}
+.float{position:fixed;font-weight:800;font-size:26px;color:#fff;text-shadow:0 2px 14px var(--main),0 0 4px var(--main);pointer-events:none;z-index:50;animation:fl .9s ease-out forwards}
+@keyframes fl{to{transform:translateY(-110px) scale(1.2);opacity:0}}
+.pt{position:fixed;width:9px;height:9px;border-radius:3px;pointer-events:none;z-index:60;animation:pt 1s ease-out forwards}
+@keyframes pt{to{transform:translate(var(--x),var(--y)) rotate(540deg);opacity:0}}
+.energy{width:100%;padding:8px 4px 4px}
+.erow{display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:8px}
+.bar{height:12px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--main),var(--accent));box-shadow:0 0 14px rgba(255,200,61,.5);transition:width .25s}
+.lg{margin-top:8px}.lg .bar{height:6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px;margin-bottom:12px;box-shadow:0 10px 30px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.05)}
+h2{font-size:22px;font-weight:800;margin:4px 2px 4px}
+.sub{color:var(--mut);margin:0 2px 14px;line-height:1.4;font-size:14px}
+.row{display:flex;align-items:center;gap:12px}
+.ic{width:46px;height:46px;border-radius:14px;background:linear-gradient(145deg,rgba(124,92,255,.35),rgba(124,92,255,.1));display:flex;align-items:center;justify-content:center;font-size:23px;flex:none;border:1px solid var(--line)}
+.grow{flex:1;min-width:0}
+.t{font-weight:700;font-size:15px}.d{font-size:12.5px;color:var(--mut);margin-top:2px}
+.btn{border:0;border-radius:14px;padding:12px 16px;font:700 14px 'Sora',sans-serif;color:#fff;background:linear-gradient(135deg,var(--main),#5a3df0);box-shadow:0 8px 22px rgba(124,92,255,.4);cursor:pointer;transition:transform .15s,opacity .2s;white-space:nowrap}
+.btn:active{transform:scale(.95)}
+.btn.gold{color:#2a1a00;background:linear-gradient(135deg,#ffe28a,var(--accent));box-shadow:0 8px 22px rgba(255,200,61,.35)}
+.btn.dis{opacity:.4;box-shadow:none}
+.btn.full{width:100%;padding:15px;font-size:15px}
+.btn.ghost{background:var(--card);border:1px solid var(--line);box-shadow:none}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:14px 0}
+.day{border-radius:12px;padding:8px 0;text-align:center;background:rgba(255,255,255,.05);border:1px solid var(--line);font-size:10px;color:var(--mut);font-weight:600}
+.day b{display:block;font-size:12px;color:var(--txt);margin-top:2px}
+.day.done{background:linear-gradient(160deg,rgba(62,224,160,.3),rgba(62,224,160,.08));border-color:rgba(62,224,160,.5)}
+.day.next{border-color:var(--accent);box-shadow:0 0 16px rgba(255,200,61,.3);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{transform:scale(1.06)}}
+.lv{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.06em}
+.rk{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--line)}
+.rk:last-child{border:0}
+.rk.me{background:linear-gradient(90deg,rgba(124,92,255,.25),transparent);border-radius:14px;padding-left:10px}
+.rn{width:30px;font-weight:800;color:var(--mut);text-align:center}
+.sk{height:44px;border-radius:12px;margin-bottom:8px;background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.1),rgba(255,255,255,.04));background-size:200% 100%;animation:sk 1.2s infinite}
+@keyframes sk{to{background-position:-200% 0}}
+nav{display:flex;gap:4px;padding:8px 12px calc(env(safe-area-inset-bottom) + 8px);background:rgba(10,8,32,.85);backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+nav button{flex:1;border:0;background:none;color:var(--mut);font:600 11px 'Sora',sans-serif;padding:8px 0;border-radius:14px;display:flex;flex-direction:column;gap:3px;align-items:center;cursor:pointer;transition:all .2s}
+nav button span{font-size:21px;transition:transform .2s}
+nav button.on{color:#fff;background:rgba(124,92,255,.22)}
+nav button.on span{transform:translateY(-2px) scale(1.12)}
+#toast{position:fixed;left:50%;top:calc(var(--sa-top,0px) + 64px);transform:translate(-50%,-20px);background:#1d1650;border:1px solid var(--main);padding:10px 16px;border-radius:14px;font-weight:600;font-size:13px;opacity:0;pointer-events:none;transition:all .25s;z-index:99;max-width:90%;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+footer{text-align:center;font-size:10px;color:#5e5a88;padding:10px 0 0;letter-spacing:.06em}
+.note{font-size:11px;color:var(--mut);text-align:center;margin-top:8px}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="lbl">Your balance</div>
+    <div class="bal"><span id="bal">0</span><small>NOVA</small></div>
+    <div class="chip" id="chip">🥉 Bronze</div>
+  </header>
+  <main>
+    <section class="view on" id="v-tap">
+      <div class="stage"><div id="orb"><svg viewBox="0 0 24 24" fill="#fff"><path d="M13.5 2 5 13.5h5.5L9.5 22 19 9.8h-5.7z"/></svg></div></div>
+      <div class="energy">
+        <div class="erow"><span>⚡ Energy</span><span id="en">0 / 0</span></div>
+        <div class="bar"><i id="enb"></i></div>
+        <div class="erow lg"><span class="lbl" id="lgn">Next league</span><span class="lbl" id="lgv"></span></div>
+        <div class="bar" style="height:6px;margin-top:-2px"><i id="lgb"></i></div>
+      </div>
+    </section>
+    <section class="view" id="v-boost">
+      <h2>Boosts</h2>
+      <p class="sub">Spend your points to tap stronger, last longer and earn while you sleep.</p>
+      <div id="boosts"></div>
+    </section>
+    <section class="view" id="v-earn">
+      <h2>Daily reward</h2>
+      <div class="card">
+        <div class="row"><div class="ic">🎁</div><div class="grow"><div class="t" id="dtit">Come back every day</div><div class="d" id="dsub"></div></div></div>
+        <div class="days" id="days"></div>
+        <button class="btn gold full" id="dbtn">Claim reward</button>
+      </div>
+      <h2 style="margin-top:20px">Tasks</h2>
+      <p class="sub">Complete missions and collect bonus points.</p>
+      <div id="tasks"></div>
+    </section>
+    <section class="view" id="v-friends">
+      <h2>Friends</h2>
+      <div class="card">
+        <div class="row"><div class="ic">🚀</div><div class="grow"><div class="t">Invite your crew</div><div class="d">Friends who join with your link start with +5,000 NOVA.</div></div></div>
+        <div style="display:flex;gap:8px;margin-top:14px"><button class="btn gold grow" id="invite">Invite friends</button><button class="btn ghost" id="copy">Copy link</button></div>
+      </div>
+      <h2 style="margin-top:20px">Leaderboard</h2>
+      <p class="sub">Top miners by total points earned.</p>
+      <div class="card" id="lb" style="padding:8px 14px"></div>
+      <div class="note">Points have no cash value</div>
+    </section>
+  </main>
+  <nav id="nav">
+    <button class="on" data-t="tap"><span>⚡</span>Tap</button>
+    <button data-t="boost"><span>🚀</span>Boost</button>
+    <button data-t="earn"><span>🎯</span>Earn</button>
+    <button data-t="friends"><span>👥</span>Friends</button>
+  </nav>
+  <footer style="padding-bottom:0;display:none">Made with SayApp</footer>
+</div>
+<div id="toast"></div>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="8s45ck93" data-full="1"></script>
+<script>
+window.addEventListener('load',async function(){
+const $=s=>document.querySelector(s);
+const fmt=n=>Math.floor(n).toLocaleString('en-US');
+const S={pts:0,total:0,taps:0,lv:{multi:0,tank:0,regen:0,bot:0},energy:500,ts:Date.now(),streak:0,lastDaily:-1,claimed:{},shared:false,welcome:false};
+const LEAGUES=[['Bronze','🥉',0],['Silver','🥈',5000],['Gold','🥇',50000],['Platinum','💠',250000],['Diamond','💎',1000000]];
+const BOOSTS=[
+ {k:'multi',ic:'👆',n:'Multitap',d:'+1 point per tap',base:500,max:20},
+ {k:'tank',ic:'🔋',n:'Energy tank',d:'+150 max energy',base:400,max:20},
+ {k:'regen',ic:'⚡',n:'Recharge speed',d:'+1 energy per second',base:800,max:10},
+ {k:'bot',ic:'🤖',n:'Auto miner',d:'+600 points per hour, even offline',base:2000,max:15}];
+const REW=[500,1000,1500,2500,4000,6000,10000];
+const TASKS=[
+ {id:'t100',ic:'👆',t:'Warm up',d:'Tap 100 times',goal:100,r:1000,get:()=>S.taps},
+ {id:'t2000',ic:'🔥',t:'On fire',d:'Tap 2,000 times',goal:2000,r:5000,get:()=>S.taps},
+ {id:'p10k',ic:'💰',t:'First stash',d:'Earn 10,000 points in total',goal:10000,r:3000,get:()=>S.total},
+ {id:'b3',ic:'🛠️',t:'Tinkerer',d:'Buy 3 boost upgrades',goal:3,r:2500,get:()=>lvSum()},
+ {id:'share',ic:'💌',t:'Spread the word',d:'Invite a friend',goal:1,r:5000,get:()=>S.shared?1:0},
+ {id:'st3',ic:'📅',t:'Regular',d:'Reach a 3-day streak',goal:3,r:4000,get:()=>effStreak()}];
+const lvSum=()=>S.lv.multi+S.lv.tank+S.lv.regen+S.lv.bot;
+const power=()=>1+S.lv.multi, maxE=()=>500+S.lv.tank*150, regen=()=>1+S.lv.regen, bot=()=>S.lv.bot*600;
+const day=()=>Math.floor((Date.now()-new Date().getTimezoneOffset()*60000)/86400000);
+const effStreak=()=>(S.lastDaily===day()||S.lastDaily===day()-1)?S.streak:0;
+let dirty=false,disp=0,tab='tap',toastT;
+
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),2200)}
+function hap(k){try{SayApp.haptic(k)}catch(e){}}
+function add(n){S.pts+=n;S.total+=n;dirty=true}
+function burst(x,y){const cols=['#ffc83d','#7c5cff','#a78bff','#3ee0a0','#fff'];
+ for(let i=0;i<28;i++){const p=document.createElement('i');p.className='pt';p.style.left=x+'px';p.style.top=y+'px';p.style.background=cols[i%5];
+ const a=Math.random()*6.28,d=60+Math.random()*130;p.style.setProperty('--x',Math.cos(a)*d+'px');p.style.setProperty('--y',Math.sin(a)*d+'px');
+ document.body.appendChild(p);setTimeout(()=>p.remove(),1000)}}
+function league(){let i=0;LEAGUES.forEach((l,j)=>{if(S.total>=l[2])i=j});return i}
+
+function renderTop(){const i=league(),l=LEAGUES[i],n=LEAGUES[i+1];
+ $('#chip').textContent=l[1]+' '+l[0]+' league';
+ if(n){$('#lgn').textContent='Next: '+n[0];$('#lgv').textContent=fmt(S.total)+' / '+fmt(n[2]);$('#lgb').style.width=Math.min(100,(S.total-l[2])/(n[2]-l[2])*100)+'%'}
+ else{$('#lgn').textContent='Max league';$('#lgv').textContent='';$('#lgb').style.width='100%'}}
+function renderEnergy(){const m=maxE();$('#en').textContent=fmt(S.energy)+' / '+fmt(m);$('#enb').style.width=(S.energy/m*100)+'%';$('#orb').classList.toggle('dead',S.energy<power())}
+const cost=b=>Math.round(b.base*Math.pow(1.7,S.lv[b.k]));
+function renderBoosts(){$('#boosts').innerHTML=BOOSTS.map(b=>{const L=S.lv[b.k],mx=L>=b.max;
+ return '<div class="card"><div class="row"><div class="ic">'+b.ic+'</div><div class="grow"><div class="t">'+b.n+' <span class="lv">LV '+L+'</span></div><div class="d">'+b.d+'</div></div>'+
+ '<button class="btn gold bb'+(mx?' dis':'')+'" data-k="'+b.k+'" data-c="'+cost(b)+'">'+(mx?'MAX':'🪙 '+fmt(cost(b)))+'</button></div></div>'}).join('');
+ refreshAfford()}
+function refreshAfford(){document.querySelectorAll('.bb').forEach(e=>{if(e.textContent!=='MAX')e.classList.toggle('dis',S.pts<+e.dataset.c)})}
+function renderDaily(){const t=day(),can=S.lastDaily!==t,eff=effStreak();
+ const done=can?eff%7:(eff===0?0:((eff-1)%7)+1);
+ $('#days').innerHTML=REW.map((r,i)=>'<div class="day'+(i<done?' done':(can&&i===done?' next':''))+'">D'+(i+1)+'<b>'+(r>=1000?(r/1000)+'k':r)+'</b></div>').join('');
+ $('#dtit').textContent=can?'Your reward is ready':'Reward collected';
+ $('#dsub').textContent=can?(eff>0?eff+'-day streak, keep it going!':'Start your streak today'):'Come back tomorrow to keep your '+eff+'-day streak';
+ const b=$('#dbtn');b.textContent=can?'Claim +'+fmt(REW[done])+' NOVA':'Come back tomorrow';b.classList.toggle('dis',!can)}
+function renderTasks(){$('#tasks').innerHTML=TASKS.map(k=>{const g=Math.min(k.goal,k.get()),ok=g>=k.goal,cl=S.claimed[k.id];
+ return '<div class="card"><div class="row"><div class="ic">'+k.ic+'</div><div class="grow"><div class="t">'+k.t+'</div><div class="d">'+k.d+' · +'+fmt(k.r)+'</div>'+
+ '<div class="bar" style="height:6px;margin-top:8px"><i style="width:'+(g/k.goal*100)+'%"></i></div></div>'+
+ (cl?'<span style="font-size:22px">✅</span>':'<button class="btn '+(ok?'gold':'ghost dis')+' tk" data-id="'+k.id+'">'+(ok?'Claim':fmt(g)+'/'+fmt(k.goal))+'</button>')+'</div></div>'}).join('')}
+async function renderLB(){const el=$('#lb');el.innerHTML='<div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div>';
+ let r=[];try{r=await SayApp.top('total',10)||[]}catch(e){}
+ if(!r.length){el.innerHTML='<div class="sub" style="text-align:center;margin:20px 0">No miners yet. Keep tapping, the first spot is yours! 🏆</div>';return}
+ const med=['🥇','🥈','🥉'];
+ el.innerHTML=r.map((u,i)=>'<div class="rk'+(u.me?' me':'')+'"><div class="rn">'+(med[i]||i+1)+'</div><div class="grow t">'+String(u.name||'Miner').replace(/[<>&]/g,'')+(u.me?' (you)':'')+'</div><div class="t" style="color:var(--accent)">'+fmt(u.value)+'</div></div>').join('')}
+
+function setTab(t){tab=t;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
+ document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+t));
+ if(t==='boost')renderBoosts();if(t==='earn'){renderDaily();renderTasks()}if(t==='friends')renderLB();hap('tap')}
+$('#nav').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setTab(b.dataset.t)});
+
+// tapping
+const orb=$('#orb');let lastH=0;
+orb.addEventListener('pointerdown',e=>{e.preventDefault();
+ const p=power();
+ if(S.energy<p){orb.classList.remove('shake');void orb.offsetWidth;orb.classList.add('shake');hap('error');return}
+ S.energy-=p;add(p);S.taps++;
+ const r=orb.getBoundingClientRect(),dx=(e.clientX-r.left)/r.width-.5,dy=(e.clientY-r.top)/r.height-.5;
+ orb.classList.add('press');orb.style.transform='scale(.94) rotateY('+dx*22+'deg) rotateX('+(-dy*22)+'deg)';
+ const f=document.createElement('div');f.className='float';f.textContent='+'+p;f.style.left=(e.clientX-14+(Math.random()*30-15))+'px';f.style.top=(e.clientY-40)+'px';
+ document.body.appendChild(f);setTimeout(()=>f.remove(),900);
+ const n=Date.now();if(n-lastH>70){lastH=n;hap('tap')}
+ renderEnergy();renderTop();if(tab==='tap')refreshAfford()});
+['pointerup','pointercancel','pointerleave'].forEach(ev=>orb.addEventListener(ev,()=>{orb.style.transform='';orb.classList.remove('press')}));
+orb.addEventListener('contextmenu',e=>e.preventDefault());
+
+// boosts
+$('#boosts').addEventListener('click',e=>{const b=e.target.closest('.bb');if(!b)return;
+ const d=BOOSTS.find(x=>x.k===b.dataset.k),c=cost(d);
+ if(S.lv[d.k]>=d.max)return;
+ if(S.pts<c){toast('Not enough points yet, keep tapping!');hap('error');return}
+ S.pts-=c;S.lv[d.k]++;if(d.k==='tank')S.energy+=150;dirty=true;hap('ok');
+ toast(d.n+' is now level '+S.lv[d.k]+' 🚀');renderBoosts();renderEnergy()});
+
+// daily
+$('#dbtn').addEventListener('click',e=>{const t=day();if(S.lastDaily===t)return;
+ const eff=effStreak(),done=eff%7,r=REW[done];
+ S.streak=eff+1;S.lastDaily=t;add(r);hap('ok');
+ const q=e.currentTarget.getBoundingClientRect();burst(q.left+q.width/2,q.top);
+ toast('+'+fmt(r)+' NOVA collected 🎁');renderDaily();renderTasks()});
+$('#tasks').addEventListener('click',e=>{const b=e.target.closest('.tk');if(!b||b.classList.contains('dis'))return;
+ const k=TASKS.find(x=>x.id===b.dataset.id);if(S.claimed[k.id]||k.get()<k.goal)return;
+ S.claimed[k.id]=1;add(k.r);hap('ok');const q=b.getBoundingClientRect();burst(q.left+q.width/2,q.top);
+ toast('Task done! +'+fmt(k.r)+' NOVA');renderTasks()});
+
+// invite
+const uid=(window.SayApp&&SayApp.user&&SayApp.user.id)||'';
+const link=location.href.split('#')[0].split('?')[0]+'?ref='+uid;
+$('#invite').addEventListener('click',()=>{
+ const u='https://t.me/share/url?url='+encodeURIComponent(link)+'&text='+encodeURIComponent('Join me on Nova Tap and start with +5,000 NOVA! ⚡');
+ try{Telegram.WebApp.openTelegramLink(u)}catch(e){window.open(u,'_blank')}
+ if(!S.shared){S.shared=true;dirty=true;toast('Invite sent! Task unlocked 💌')}});
+$('#copy').addEventListener('click',()=>{
+ const done=()=>{toast('Link copied ✅');hap('ok')};
+ try{navigator.clipboard.writeText(link).then(done,()=>{toast(link)})}catch(e){toast(link)}
+ if(!S.shared){S.shared=true;dirty=true}});
+
+// load
+try{const s=await SayApp.get('state');if(s&&typeof s==='object'){Object.assign(S,s);S.lv=Object.assign({multi:0,tank:0,regen:0,bot:0},s.lv||{});S.claimed=s.claimed||{}}}catch(e){}
+const now=Date.now(),dt=Math.max(0,Math.min((now-(S.ts||now))/1000,10800));
+S.energy=Math.min(maxE(),S.energy+regen()*dt);
+const off=bot()/3600*dt;if(off>=1){add(off);setTimeout(()=>toast('Welcome back! Your miner earned +'+fmt(off)+' 🤖'),600)}
+S.ts=now;
+if(!S.welcome){S.welcome=true;dirty=true;let ref='';
+ try{ref=(Telegram.WebApp.initDataUnsafe&&Telegram.WebApp.initDataUnsafe.start_param)||new URLSearchParams(location.search).get('ref')||''}catch(e){}
+ if(ref&&String(ref)!==String(uid)){add(5000);setTimeout(()=>toast('Welcome bonus: +5,000 NOVA 🎉'),900);try{SayApp.submit({type:'referral',from:String(ref),user:(SayApp.user&&SayApp.user.first_name)||''})}catch(e){}}}
+disp=S.pts;renderTop();renderEnergy();
+
+// loops
+setInterval(()=>{const m=maxE();S.energy=Math.min(m,S.energy+regen());if(bot()>0)add(bot()/3600);S.ts=Date.now();dirty=true;
+ renderEnergy();renderTop();if(tab==='boost')refreshAfford()},1000);
+(function loop(){disp+=(S.pts-disp)*.25;if(Math.abs(S.pts-disp)<.5)disp=S.pts;const t=fmt(disp);const el=$('#bal');if(el.textContent!==t)el.textContent=t;requestAnimationFrame(loop)})();
+async function save(){if(!dirty)return;dirty=false;try{await SayApp.set('state',S);await SayApp.set('total',Math.floor(S.total))}catch(e){dirty=true}}
+setInterval(save,5000);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)save()});
+try{Telegram.WebApp.ready();Telegram.WebApp.expand()}catch(e){}
+});
+</script>
+</body>
+</html>

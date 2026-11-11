@@ -1,0 +1,254 @@
+<!-- sayapp yinvtfnu v2 -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Coin Tap</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+html,body{margin:0;height:100%}
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:var(--tg-theme-bg-color,#fff);color:var(--tg-theme-text-color,#111);display:flex;flex-direction:column;overflow:hidden}
+header{padding:12px 16px 4px;text-align:center}
+.hello{font-size:13px;color:var(--tg-theme-hint-color,#888)}
+.score{font-size:42px;font-weight:800;letter-spacing:-1px;line-height:1.1}
+.score small{font-size:22px}
+.rate{font-size:13px;color:var(--tg-theme-hint-color,#888);margin-top:2px}
+.rate b{color:#e8590c}
+main{flex:1;overflow-y:auto;padding:8px 16px 16px;position:relative}
+.tab{display:none;animation:fade .25s}
+.tab.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+#play{text-align:center}
+.ebox{margin:4px 0 8px}
+.etop{display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:5px}
+.etop span:last-child{color:var(--tg-theme-hint-color,#888);font-weight:500}
+.ebar{height:16px;border-radius:10px;background:var(--tg-theme-secondary-bg-color,#f2f2f2);overflow:hidden}
+.ebar.shake{animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.efill{height:100%;width:100%;border-radius:10px;background:linear-gradient(90deg,#fab005,#40c057);transition:width .25s}
+.efill.low{background:linear-gradient(90deg,#e03131,#fd7e14)}
+#qb{border:0;border-radius:14px;padding:11px 14px;min-height:46px;max-width:100%;font-size:14px;font-weight:700;cursor:pointer;background:var(--tg-theme-secondary-bg-color,#f2f2f2);color:var(--tg-theme-text-color,#111);margin:4px 0}
+#qb.on{background:linear-gradient(90deg,#ffd43b,#fd7e14);color:#4a2500;animation:pulse 1s infinite}
+@keyframes pulse{50%{transform:scale(1.03)}}
+.coinwrap{position:relative;height:270px;display:flex;align-items:center;justify-content:center;touch-action:manipulation}
+.coin{--ring:rgba(180,90,0,.35);--sym:rgba(180,90,0,.55);--glow:rgba(245,159,0,.45);width:215px;height:215px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff6b0,#ffd43b 40%,#f59f00 78%,#d9480f);box-shadow:0 12px 30px var(--glow),inset 0 -10px 20px rgba(0,0,0,.18),inset 0 8px 16px rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;transition:transform .08s,filter .3s;cursor:pointer;position:relative}
+.coin::before{content:"";position:absolute;inset:18px;border-radius:50%;border:5px solid var(--ring)}
+.coin span{font-size:100px;color:var(--sym);text-shadow:0 2px 0 rgba(255,255,255,.5);pointer-events:none}
+.coin.hit{transform:scale(.92)}
+.coin.tired{filter:grayscale(.75) brightness(.9)}
+.float{position:absolute;font-weight:800;font-size:26px;color:#f59f00;pointer-events:none;animation:up .9s ease-out forwards;text-shadow:0 1px 2px rgba(0,0,0,.25);z-index:5}
+.float.crit{color:#e8590c;font-size:34px}
+@keyframes up{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-90px)}}
+.tip{color:var(--tg-theme-hint-color,#888);font-size:14px}
+.card{background:var(--tg-theme-secondary-bg-color,#f2f2f2);border-radius:18px;padding:14px;margin-bottom:12px;display:flex;align-items:center;gap:12px}
+.card .ic{font-size:30px;width:48px;height:48px;border-radius:14px;background:var(--tg-theme-bg-color,#fff);display:flex;align-items:center;justify-content:center;flex:none}
+.card .ic.sk{border-radius:50%;box-shadow:inset 0 -4px 8px rgba(0,0,0,.2),inset 0 3px 6px rgba(255,255,255,.5)}
+.card .tx{flex:1;min-width:0}
+.card b{display:block;font-size:16px}
+.card small{color:var(--tg-theme-hint-color,#888);font-size:13px}
+button.buy,button.big{border:0;border-radius:14px;background:var(--tg-theme-button-color,#2481cc);color:var(--tg-theme-button-text-color,#fff);font-weight:700;font-size:15px;padding:12px 14px;min-height:48px;cursor:pointer}
+button.buy{min-width:88px}
+button:disabled{opacity:.4}
+button.big{width:100%;font-size:17px;min-height:56px;margin-top:10px}
+h2{margin:6px 0 12px;font-size:20px}
+.sec{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--tg-theme-hint-color,#888);margin:8px 2px}
+.days{display:flex;gap:6px;justify-content:space-between;margin:14px 0}
+.day{flex:1;aspect-ratio:1;border-radius:12px;background:var(--tg-theme-secondary-bg-color,#f2f2f2);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;color:var(--tg-theme-hint-color,#888)}
+.day.done{background:#ffd43b;color:#7a4300;font-weight:700}
+.day i{font-style:normal;font-size:18px}
+.row{display:flex;align-items:center;gap:10px;padding:12px;border-radius:14px;margin-bottom:6px;background:var(--tg-theme-secondary-bg-color,#f2f2f2)}
+.row.me{outline:2px solid var(--tg-theme-button-color,#2481cc)}
+.row .rk{width:30px;text-align:center;font-weight:800;font-size:18px}
+.row .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .vl{font-weight:700}
+.ach .bd{font-size:28px;width:52px;height:52px;border-radius:50%;background:#ffd43b;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 3px 10px rgba(245,159,0,.4)}
+.ach:not(.got) .bd{background:var(--tg-theme-bg-color,#fff);filter:grayscale(1);opacity:.55;box-shadow:none}
+.pb{height:7px;border-radius:5px;background:var(--tg-theme-bg-color,#fff);margin:6px 0 4px;overflow:hidden}
+.pb i{display:block;height:100%;background:var(--tg-theme-button-color,#2481cc);border-radius:5px}
+.ach.got .pb i{background:#40c057}
+nav{display:flex;background:var(--tg-theme-secondary-bg-color,#f2f2f2);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+nav button{flex:1;border:0;background:none;color:var(--tg-theme-hint-color,#888);font-size:10px;padding:6px 0;min-height:52px;border-radius:12px;cursor:pointer;position:relative}
+nav button i{display:block;font-style:normal;font-size:21px}
+nav button.on{color:var(--tg-theme-button-color,#2481cc);font-weight:700}
+nav button .dot{display:none;color:#e03131;position:absolute;top:2px;right:8px;font-size:12px}
+footer{text-align:center;font-size:10px;color:var(--tg-theme-hint-color,#888);opacity:.7;padding:2px 0 0}
+.toast{position:fixed;left:50%;top:18px;transform:translate(-50%,-90px);background:var(--tg-theme-button-color,#2481cc);color:var(--tg-theme-button-text-color,#fff);padding:12px 18px;border-radius:14px;font-weight:600;transition:transform .3s;z-index:20;max-width:90%;text-align:center}
+.toast.show{transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<header>
+  <div class="hello" id="hello">Bienvenue</div>
+  <div class="score"><span id="pts">0</span> <small>🪙</small></div>
+  <div class="rate" id="rate"></div>
+</header>
+<main>
+  <section class="tab on" id="play">
+    <div class="ebox">
+      <div class="etop"><span id="etx">⚡ 100 / 100</span><span>se recharge avec le temps</span></div>
+      <div class="ebar" id="ebar"><div class="efill" id="efill"></div></div>
+    </div>
+    <button id="qb"></button>
+    <div class="coinwrap" id="cw"><div class="coin" id="coin"><span id="sym">★</span></div></div>
+    <div class="tip">Tape sur la pièce ! Chaque tap utilise 1 énergie.</div>
+  </section>
+  <section class="tab" id="shop">
+    <h2>🛠️ Boutique</h2>
+    <div id="shoplist"></div>
+  </section>
+  <section class="tab" id="skins">
+    <h2>🎨 Skins de pièces</h2>
+    <div id="skinlist"></div>
+  </section>
+  <section class="tab" id="ach">
+    <h2>🏅 Succès <small id="achcount" style="font-size:14px;color:var(--tg-theme-hint-color,#888)"></small></h2>
+    <div id="achlist"></div>
+  </section>
+  <section class="tab" id="daily">
+    <h2>🎁 Récompense du jour</h2>
+    <div class="card" style="display:block;text-align:center">
+      <div style="font-size:54px">🎁</div>
+      <b id="dtitle" style="font-size:18px"></b>
+      <small id="dsub"></small>
+      <div class="days" id="days"></div>
+      <button class="big" id="claim">Récupérer</button>
+    </div>
+  </section>
+  <section class="tab" id="top">
+    <h2>🏆 Classement</h2>
+    <div id="toplist"><div class="tip">Chargement...</div></div>
+  </section>
+</main>
+<footer>Made with SayApp</footer>
+<nav>
+  <button class="on" data-t="play"><i>🪙</i>Jouer</button>
+  <button data-t="shop"><i>🛠️</i>Boutique</button>
+  <button data-t="skins"><i>🎨</i>Skins</button>
+  <button data-t="ach"><i>🏅</i>Succès</button>
+  <button data-t="daily"><i>🎁</i>Cadeau<span class="dot" id="dot">●</span></button>
+  <button data-t="top"><i>🏆</i>Top</button>
+</nav>
+<div class="toast" id="toast"></div>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="yinvtfnu"></script>
+<script>
+window.addEventListener('load', async function () {
+  try { Telegram.WebApp.ready(); Telegram.WebApp.expand(); } catch (e) {}
+  var $ = function (id) { return document.getElementById(id); };
+  var S = { p: 0, t: 0, tap: 0, auto: 0, crit: 0, nrg: 0, daily: '', streak: 0, seen: 0, e: 100, et: 0, boost: 0, bn: 0, n: 0, skins: ['gold'], skin: 'gold', ach: [] };
+  var dirty = false, tab = 'play', lastHaptic = 0, lastWarn = 0, lastAct = false;
+  var REGEN = 2, BOOST_COST = 250, BOOST_MS = 30000;
+  var fmt = function (n) { return Math.floor(n).toLocaleString('fr-FR'); };
+  var hap = function (k) { try { SayApp.haptic(k); } catch (e) {} };
+
+  var UP = [
+    { k: 'tap', ic: '👆', name: 'Doigt en or', desc: function (l) { return '+1 point par tap (actuel : ' + (1 + l) + ')'; }, cost: function (l) { return Math.round(15 * Math.pow(1.55, l)); }, max: 999 },
+    { k: 'auto', ic: '⛏️', name: 'Mineur automatique', desc: function (l) { return '+1 point par seconde (actuel : ' + l + '/s)'; }, cost: function (l) { return Math.round(60 * Math.pow(1.6, l)); }, max: 999 },
+    { k: 'crit', ic: '🍀', name: 'Coup de chance', desc: function (l) { return 'Chance de tap x5 : ' + (l * 5) + '%'; }, cost: function (l) { return Math.round(100 * Math.pow(1.8, l)); }, max: 10 },
+    { k: 'nrg', ic: '🔋', name: 'Grand réservoir', desc: function (l) { return '+20 énergie max (actuel : ' + (100 + 20 * l) + ')'; }, cost: function (l) { return Math.round(80 * Math.pow(1.5, l)); }, max: 20 }
+  ];
+
+  var SK = [
+    { id: 'gold', name: 'Or classique', sy: '★', cost: 0, bg: 'radial-gradient(circle at 32% 28%,#fff6b0,#ffd43b 40%,#f59f00 78%,#d9480f)', glow: 'rgba(245,159,0,.45)', ring: 'rgba(180,90,0,.35)', sym: 'rgba(180,90,0,.55)' },
+    { id: 'silver', name: 'Argent', sy: '✦', cost: 300, bg: 'radial-gradient(circle at 32% 28%,#fff,#dee2e6 40%,#868e96 78%,#495057)', glow: 'rgba(134,142,150,.5)', ring: 'rgba(60,70,80,.35)', sym: 'rgba(60,70,80,.5)' },
+    { id: 'emerald', name: 'Émeraude', sy: '♣', cost: 1500, bg: 'radial-gradient(circle at 32% 28%,#d3f9d8,#51cf66 40%,#2b8a3e 78%,#14532d)', glow: 'rgba(43,138,62,.5)', ring: 'rgba(10,70,30,.4)', sym: 'rgba(10,70,30,.5)' },
+    { id: 'ruby', name: 'Rubis', sy: '♥', cost: 6000, bg: 'radial-gradient(circle at 32% 28%,#ffe3e3,#ff6b6b 40%,#c92a2a 78%,#7d1414)', glow: 'rgba(201,42,42,.5)', ring: 'rgba(100,10,10,.4)', sym: 'rgba(100,10,10,.5)' },
+    { id: 'cosmic', name: 'Cosmique', sy: '☾', cost: 25000, bg: 'radial-gradient(circle at 32% 28%,#e5dbff,#9775fa 40%,#5f3dc4 78%,#1b1464)', glow: 'rgba(95,61,196,.55)', ring: 'rgba(255,255,255,.3)', sym: 'rgba(255,255,255,.6)' },
+    { id: 'rainbow', name: 'Arc-en-ciel', sy: '✿', cost: 100000, bg: 'conic-gradient(from 0deg,#ff6b6b,#ffd43b,#51cf66,#4dabf7,#cc5de8,#ff6b6b)', glow: 'rgba(204,93,232,.5)', ring: 'rgba(255,255,255,.55)', sym: 'rgba(255,255,255,.8)' }
+  ];
+
+  var A = [
+    { id: 'n1', ic: '👆', name: 'Premier tap', desc: 'Tape une fois sur la pièce', goal: 1, val: function () { return S.n; } },
+    { id: 'n100', ic: '💪', name: 'Échauffement', desc: 'Tape 100 fois sur la pièce', goal: 100, val: function () { return S.n; } },
+    { id: 'n1000', ic: '🔥', name: '1000 taps', desc: 'Tape 1000 fois sur la pièce', goal: 1000, val: function () { return S.n; } },
+    { id: 'n10000', ic: '🏆', name: 'Légende du tap', desc: 'Tape 10 000 fois sur la pièce', goal: 10000, val: function () { return S.n; } },
+    { id: 's3', ic: '📅', name: '3 jours de suite', desc: 'Récupère ton cadeau 3 jours de suite', goal: 3, val: function () { return S.streak; } },
+    { id: 's7', ic: '🌟', name: '7 jours de suite', desc: 'Récupère ton cadeau 7 jours de suite', goal: 7, val: function () { return S.streak; } },
+    { id: 't10k', ic: '💰', name: 'Riche', desc: 'Gagne 10 000 points au total', goal: 10000, val: function () { return S.t; } },
+    { id: 't100k', ic: '💎', name: 'Fortune', desc: 'Gagne 100 000 points au total', goal: 100000, val: function () { return S.t; } },
+    { id: 'up10', ic: '🛠️', name: 'Investisseur', desc: 'Atteins 10 niveaux d\'améliorations', goal: 10, val: function () { return S.tap + S.auto + S.crit + S.nrg; } },
+    { id: 'sk3', ic: '🎨', name: 'Collectionneur', desc: 'Possède 3 skins de pièces', goal: 3, val: function () { return S.skins.length; } },
+    { id: 'bo3', ic: '🚀', name: 'Turbo', desc: 'Active 3 boosts x2', goal: 3, val: function () { return S.bn; } }
+  ];
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function dkey(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  function today() { return dkey(new Date()); }
+  function yesterday() { return dkey(new Date(Date.now() - 864e5)); }
+  function maxE() { return 100 + 20 * S.nrg; }
+  function mult() { return Date.now() < S.boost ? 2 : 1; }
+
+  function toast(m) {
+    var t = $('toast'); t.textContent = m; t.classList.add('show');
+    clearTimeout(toast.h); toast.h = setTimeout(function () { t.classList.remove('show'); }, 2400);
+  }
+
+  function regen() {
+    var now = Date.now(), m = maxE();
+    if (!S.et) S.et = now;
+    var dt = Math.max(0, now - S.et) / 1000;
+    S.e = Math.min(m, S.e + dt * REGEN);
+    S.et = now;
+  }
+
+  // load
+  try {
+    var saved = await SayApp.get('state');
+    if (saved && typeof saved === 'object') for (var k in S) if (saved[k] !== undefined) S[k] = saved[k];
+  } catch (e) {}
+  if (!Array.isArray(S.skins) || !S.skins.length) S.skins = ['gold'];
+  if (!Array.isArray(S.ach)) S.ach = [];
+  if (!SK.filter(function (s) { return s.id === S.skin; }).length) S.skin = 'gold';
+  var name = '';
+  try { name = SayApp.user && SayApp.user.first_name || ''; } catch (e) {}
+  $('hello').textContent = name ? 'Salut ' + name + ' 👋' : 'Bienvenue';
+  regen();
+
+  // offline gains (max 1h)
+  if (S.seen && S.auto > 0) {
+    var secs = Math.min(3600, Math.floor((Date.now() - S.seen) / 1000));
+    if (secs > 10) {
+      var gain = secs * S.auto;
+      S.p += gain; S.t += gain; dirty = true;
+      setTimeout(function () { toast('⛏️ Tes mineurs ont gagné ' + fmt(gain) + ' points !'); }, 500);
+    }
+  }
+
+  async function save() {
+    dirty = false; regen(); S.seen = Date.now();
+    try { await SayApp.set('state', S); await SayApp.set('score', Math.floor(S.t)); } catch (e) {}
+  }
+
+  function checkAch() {
+    var won = [];
+    A.forEach(function (a) {
+      if (S.ach.indexOf(a.id) < 0 && a.val() >= a.goal) { S.ach.push(a.id); won.push(a.ic + ' ' + a.name); }
+    });
+    if (won.length) {
+      dirty = true;
+      setTimeout(function () { hap('ok'); toast('🏅 Succès : ' + won.join(', ')); }, 700);
+      if (tab === 'ach') renderAch();
+      save();
+    }
+  }
+
+  function renderHead() {
+    var m = mult();
+    $('pts').textContent = fmt(S.p);
+    $('rate').innerHTML = '+' + fmt((1 + S.tap) * m) + ' par tap  ·  +' + fmt(S.auto * m) + ' par seconde' + (m > 1 ? ' <b>⚡x2</b>' : '');
+  }
+
+  function renderEnergy() {
+    var m = maxE();
+    $('etx').textContent = '⚡ ' + Math.floor(S.e) + ' / ' + m;
+    $('efill').style.width = (S.e / m * 100) + '%';
+    $('efill').classList.toggle('low', S.e < m * 0.2);
+    $('coin').classList.toggle('tired', S.e < 1);
+  }
+
+  function renderBoost() {
+    var left = Math.ceil((S.boost - Date.now()) / 1000), act = left > 0, q = $('qb');
+    q.classList.toggle('on',
+</html>

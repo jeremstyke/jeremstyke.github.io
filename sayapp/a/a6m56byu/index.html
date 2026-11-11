@@ -1,0 +1,315 @@
+<!-- sayapp a6m56byu v1 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<title>TicketVault</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--main:#7C5CFF;--main2:#A88BFF;--acc:#FFC94D;--acc2:#FF9F43;--bg:#09090F;--bg2:#12121C;--card:#171724;--line:rgba(255,255,255,.07);--txt:#F2F1FA;--mut:#8D8BA7;--ok:#3DDC97}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--txt);font-family:'Sora',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-size:15px;overflow-x:hidden}
+body{min-height:100vh;background:radial-gradient(600px 380px at 85% -10%,rgba(124,92,255,.28),transparent 70%),radial-gradient(500px 300px at -10% 30%,rgba(255,201,77,.08),transparent 70%),var(--bg)}
+.wrap{max-width:440px;margin:0 auto;padding:0 16px calc(96px + env(safe-area-inset-bottom))}
+header{padding-top:calc(var(--sa-top,0px) + 8px);display:flex;align-items:center;justify-content:space-between;padding-bottom:16px}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--main),var(--acc2));display:grid;place-items:center;font-size:20px;box-shadow:0 6px 20px rgba(124,92,255,.45)}
+.brand h1{font-size:20px;font-weight:800;letter-spacing:-.3px}
+.brand small{display:block;font-size:11px;color:var(--mut);letter-spacing:1.4px;text-transform:uppercase;font-weight:600}
+.pill{padding:8px 12px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-size:13px;font-weight:700;display:flex;gap:6px;align-items:center}
+.lbl{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--mut);font-weight:700}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01)),var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;margin-bottom:16px;box-shadow:0 10px 30px rgba(0,0,0,.35),0 1px 0 rgba(255,255,255,.04) inset}
+.prize{position:relative;overflow:hidden;background:linear-gradient(135deg,#2A1E66,#171724 60%);}
+.prize:after{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,201,77,.35),transparent 70%)}
+.prize .emo{font-size:46px;filter:drop-shadow(0 8px 18px rgba(255,201,77,.4));position:absolute;right:20px;top:18px;animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px) rotate(-6deg)}}
+.prize h2{font-size:22px;font-weight:800;margin:8px 0 4px;max-width:75%;line-height:1.25}
+.prize p{color:var(--mut);font-size:14px}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:18px;position:relative;z-index:1}
+.cd div{background:rgba(9,9,15,.6);border:1px solid var(--line);border-radius:14px;padding:10px 0;text-align:center}
+.cd b{display:block;font-size:24px;font-weight:800;font-variant-numeric:tabular-nums}
+.cd b.pop{animation:pop .3s ease}
+@keyframes pop{0%{transform:scale(1.18);color:var(--acc)}100%{transform:scale(1)}}
+.cd span{font-size:10px;color:var(--mut);letter-spacing:1.2px;text-transform:uppercase}
+.tk{display:flex;align-items:center;justify-content:space-between}
+.big{font-size:44px;font-weight:800;letter-spacing:-1px;background:linear-gradient(135deg,#fff,var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ticket{width:74px;height:52px;border-radius:10px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center;font-size:24px;box-shadow:0 8px 24px rgba(255,159,67,.4);transform:rotate(-8deg);position:relative}
+.ticket:before,.ticket:after{content:"";position:absolute;width:12px;height:12px;border-radius:50%;background:var(--card);top:20px}
+.ticket:before{left:-6px}.ticket:after{right:-6px}
+.row{display:flex;gap:8px;margin-top:14px}
+.stat{flex:1;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:12px}
+.stat b{font-size:18px;display:block;margin-top:4px}
+.btn{width:100%;border:0;border-radius:16px;padding:16px;font:700 16px 'Sora',system-ui,sans-serif;color:#fff;background:linear-gradient(135deg,var(--main),#5B3BEA);box-shadow:0 10px 26px rgba(124,92,255,.45);cursor:pointer;transition:transform .15s,opacity .2s}
+.btn:active{transform:scale(.97)}
+.btn.gold{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#1B1200;box-shadow:0 10px 26px rgba(255,159,67,.35)}
+.btn.ghost{background:var(--bg2);border:1px solid var(--line);box-shadow:none}
+.btn:disabled{opacity:.45;box-shadow:none}
+.dots{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:14px 0 16px}
+.dot{aspect-ratio:1;border-radius:12px;background:var(--bg2);border:1px solid var(--line);display:grid;place-items:center;font-size:11px;font-weight:700;color:var(--mut);transition:transform .25s}
+.dot.on{background:linear-gradient(135deg,var(--main),var(--main2));color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(124,92,255,.4)}
+.dot.g{border-color:rgba(255,201,77,.5);color:var(--acc)}
+.dot.on.g{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#1B1200}
+.code{display:flex;align-items:center;justify-content:space-between;background:var(--bg2);border:1px dashed rgba(168,139,255,.5);border-radius:16px;padding:16px;margin:14px 0}
+.code b{font-size:24px;letter-spacing:4px;color:var(--main2)}
+.code button{border:0;background:rgba(124,92,255,.18);color:var(--main2);font:700 13px 'Sora',sans-serif;padding:10px 14px;border-radius:12px;cursor:pointer}
+.steps li{list-style:none;display:flex;gap:12px;align-items:flex-start;padding:10px 0;color:#cfcde3;font-size:14px;line-height:1.45}
+.steps li i{font-style:normal;min-width:28px;height:28px;border-radius:9px;background:var(--bg2);display:grid;place-items:center;font-size:13px;font-weight:800;color:var(--acc)}
+.lb{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.lb:last-child{border:0}
+.rk{width:30px;height:30px;border-radius:10px;background:var(--bg2);display:grid;place-items:center;font-weight:800;font-size:13px}
+.lb.me .rk{background:var(--main)}
+.lb .n{flex:1;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb .n small{display:block;color:var(--mut);font-size:12px;font-weight:500}
+.lb .v{font-weight:800;color:var(--acc)}
+.empty{text-align:center;color:var(--mut);padding:24px 8px;font-size:14px}
+.empty div{font-size:36px;margin-bottom:8px}
+.field{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:14px;color:var(--txt);font:600 16px 'Sora',sans-serif;letter-spacing:2px;text-transform:uppercase;margin:8px 0 14px;outline:none}
+.field:focus{border-color:var(--main)}
+.chk{display:flex;gap:12px;align-items:center;padding:14px;background:var(--bg2);border-radius:14px;border:1px solid var(--line);margin:8px 0 16px;cursor:pointer;font-size:14px}
+.chk .box{width:24px;height:24px;border-radius:8px;border:2px solid var(--mut);display:grid;place-items:center;transition:.2s;flex-shrink:0}
+.chk.on .box{background:var(--ok);border-color:var(--ok)}
+.chk.on .box:after{content:"✓";color:#05261a;font-weight:800;font-size:14px}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent,rgba(9,9,15,.95) 35%)}
+nav .in{display:flex;gap:6px;background:rgba(23,23,36,.92);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:20px;padding:6px;width:100%;max-width:408px}
+nav button{flex:1;border:0;background:none;color:var(--mut);font:600 12px 'Sora',sans-serif;padding:8px 0;border-radius:14px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;transition:.2s}
+nav button span{font-size:19px}
+nav button.on{background:rgba(124,92,255,.18);color:#fff}
+.view{display:none;animation:fade .3s ease}.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.float{position:fixed;font-weight:800;font-size:28px;color:var(--acc);pointer-events:none;animation:up 1s ease-out forwards;z-index:50;text-shadow:0 4px 16px rgba(255,159,67,.6)}
+@keyframes up{to{transform:translateY(-90px) scale(1.3);opacity:0}}
+.conf{position:fixed;top:-12px;width:9px;height:14px;border-radius:2px;z-index:70;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg)}}
+#ov{position:fixed;inset:0;background:rgba(5,5,10,.88);backdrop-filter:blur(10px);z-index:60;display:none;align-items:center;justify-content:center;padding:24px}
+#ov.on{display:flex;animation:fade .3s}
+#ov .card{width:100%;max-width:380px;text-align:center;padding:28px 20px}
+.reel{font-size:26px;font-weight:800;margin:18px 0 6px;min-height:36px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.reel.win{background:linear-gradient(135deg,#fff,var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent;animation:pop .5s}
+.toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);background:#262640;padding:12px 18px;border-radius:14px;font-size:14px;font-weight:600;opacity:0;transition:.25s;z-index:80;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.skel{height:18px;border-radius:8px;background:linear-gradient(90deg,var(--bg2),#1e1e2e,var(--bg2));background-size:200% 100%;animation:sh 1.2s infinite;margin:12px 0}
+@keyframes sh{to{background-position:-200% 0}}
+footer{text-align:center;color:#55536e;font-size:11px;padding:8px 0 4px;letter-spacing:.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand"><div class="logo">🎟️</div><div><small>Weekly giveaway</small><h1>TicketVault</h1></div></div>
+  <div class="pill">🎟️ <span id="hTk">0</span></div>
+</header>
+
+<div class="card prize">
+  <div class="emo">🎁</div>
+  <div class="lbl">This week's prize</div>
+  <h2>Telegram Premium for 12 months</h2>
+  <p>Draw every Sunday at 18:00 UTC</p>
+  <div class="cd">
+    <div><b id="cD">0</b><span>Days</span></div>
+    <div><b id="cH">00</b><span>Hours</span></div>
+    <div><b id="cM">00</b><span>Min</span></div>
+    <div><b id="cS">00</b><span>Sec</span></div>
+  </div>
+</div>
+
+<section id="join" class="view">
+  <div class="card">
+    <div class="lbl">Enter the giveaway</div>
+    <h2 style="font-size:20px;margin:8px 0 6px">Get your first ticket free</h2>
+    <p style="color:var(--mut);font-size:14px;line-height:1.5">Sign up in one tap. Every ticket is one more chance to win.</p>
+    <div class="chk" id="chk"><div class="box"></div><div>I follow the channel and accept the giveaway rules</div></div>
+    <div class="lbl">Friend's invite code (optional, +1 ticket)</div>
+    <input class="field" id="refIn" maxlength="12" placeholder="E.G. 2K9XQ7" autocomplete="off">
+    <button class="btn gold" id="joinBtn">Join the giveaway 🎟️</button>
+  </div>
+</section>
+
+<section id="home" class="view">
+  <div class="card">
+    <div class="tk">
+      <div><div class="lbl">Your tickets</div><div class="big" id="tkBig">0</div></div>
+      <div class="ticket">🎟️</div>
+    </div>
+    <div class="row">
+      <div class="stat"><div class="lbl">Win chance</div><b id="chance">-</b></div>
+      <div class="stat"><div class="lbl">Friends</div><b id="invN">0</b></div>
+      <div class="stat"><div class="lbl">Streak</div><b id="stN">0🔥</b></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="lbl">Daily check-in</div>
+    <p style="color:var(--mut);font-size:14px;margin-top:6px">+1 ticket per day, +3 on day 7 of your streak.</p>
+    <div class="dots" id="dots"></div>
+    <button class="btn" id="ciBtn">Check in now</button>
+  </div>
+</section>
+
+<section id="invite" class="view">
+  <div class="card">
+    <div class="lbl">Invite friends</div>
+    <h2 style="font-size:20px;margin:8px 0 4px">+3 tickets per friend</h2>
+    <p style="color:var(--mut);font-size:14px">Friends who sign up with your code also get a bonus ticket.</p>
+    <div class="code"><b id="myCode">-</b><button id="copyBtn">Copy</button></div>
+    <button class="btn gold" id="shareBtn">Share with friends ✈️</button>
+  </div>
+  <div class="card">
+    <div class="lbl">How it works</div>
+    <ul class="steps" style="margin-top:6px">
+      <li><i>1</i>Share your code in a chat or group.</li>
+      <li><i>2</i>Your friend opens TicketVault and types it when joining.</li>
+      <li><i>3</i>You get 3 tickets, they get 1 bonus ticket. No limit.</li>
+    </ul>
+    <div class="row"><div class="stat"><div class="lbl">Friends joined</div><b id="invN2">0</b></div><div class="stat"><div class="lbl">Tickets earned</div><b id="invT">0</b></div></div>
+  </div>
+</section>
+
+<section id="board" class="view">
+  <div class="card">
+    <div class="lbl">Top entries</div>
+    <div id="lbList"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+  </div>
+  <button class="btn ghost" id="lastBtn">🏆 Replay last draw</button>
+  <div style="height:16px"></div>
+</section>
+<footer>Made with SayApp</footer>
+</div>
+
+<nav><div class="in">
+  <button data-v="home" class="on"><span>🎟️</span>Tickets</button>
+  <button data-v="invite"><span>🤝</span>Invite</button>
+  <button data-v="board"><span>🏆</span>Leaders</button>
+</div></nav>
+
+<div id="ov"><div class="card">
+  <div class="lbl" id="ovL">Live draw</div>
+  <div style="font-size:48px;margin-top:12px" id="ovE">🎰</div>
+  <div class="reel" id="reel">...</div>
+  <p style="color:var(--mut);font-size:14px;margin-bottom:20px" id="ovS">Picking a winner from all tickets</p>
+  <button class="btn" id="ovBtn" disabled>Close</button>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="a6m56byu" data-full="1"></script>
+<script>
+window.addEventListener('load',()=>{
+const $=id=>document.getElementById(id);
+const tg=window.Telegram&&Telegram.WebApp;
+try{tg&&tg.ready();tg&&tg.expand()}catch(e){}
+const uid=(SayApp.user&&SayApp.user.id)||0;
+const myCode=uid?uid.toString(36).toUpperCase():'GUEST';
+let S={joined:false,refBy:0,last:'',streak:0,bonus:0,seen:0};
+let invites=0,shownTk=0,lastTkSaved=-1,saveT=null,agree=false,curView='home',lastTarget=0,totalPool=0;
+
+const today=()=>new Date().toISOString().slice(0,10);
+const yday=()=>new Date(Date.now()-864e5).toISOString().slice(0,10);
+const tickets=()=>S.joined?1+S.bonus+invites*3:0;
+function nextDraw(){const n=new Date();let t=Date.UTC(n.getUTCFullYear(),n.getUTCMonth(),n.getUTCDate(),18);t+=((7-n.getUTCDay())%7)*864e5;if(t<=Date.now())t+=7*864e5;return t}
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),1800)}
+function save(){clearTimeout(saveT);saveT=setTimeout(async()=>{try{await SayApp.set('state',S);const tk=tickets();if(tk!==lastTkSaved){await SayApp.set('tickets',tk);lastTkSaved=tk}}catch(e){}},1500)}
+function floatAt(el,txt){const r=el.getBoundingClientRect();const f=document.createElement('div');f.className='float';f.textContent=txt;f.style.left=(r.left+r.width/2-24)+'px';f.style.top=(r.top-10)+'px';document.body.appendChild(f);setTimeout(()=>f.remove(),1000)}
+function confetti(n){const c=['#7C5CFF','#FFC94D','#FF9F43','#3DDC97','#A88BFF','#fff'];for(let i=0;i<n;i++){const d=document.createElement('div');d.className='conf';d.style.left=Math.random()*100+'vw';d.style.background=c[i%c.length];d.style.animationDuration=(1.6+Math.random()*1.6)+'s';d.style.animationDelay=Math.random()*.4+'s';document.body.appendChild(d);setTimeout(()=>d.remove(),3800)}}
+function animNum(el,to){const from=+el.dataset.v||0;el.dataset.v=to;const t0=performance.now();const step=t=>{const p=Math.min(1,(t-t0)/600),e=1-Math.pow(1-p,3);el.textContent=Math.round(from+(to-from)*e);if(p<1)requestAnimationFrame(step)};requestAnimationFrame(step)}
+
+function show(v){curView=v;['join','home','invite','board'].forEach(x=>$(x).classList.toggle('on',x===(S.joined?v:'join')));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+  if(v==='board'&&S.joined)loadBoard()}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{SayApp.haptic('tap');if(!S.joined){toast('Join the giveaway first');return}show(b.dataset.v)});
+
+function render(){
+  const tk=tickets();
+  if(tk!==shownTk){animNum($('tkBig'),tk);animNum($('hTk'),tk);shownTk=tk}
+  $('invN').textContent=invites;$('invN2').textContent=invites;$('invT').textContent=invites*3;
+  const alive=S.last===today()||S.last===yday();const st=alive?S.streak:0;
+  $('stN').textContent=st+'🔥';
+  const done=S.last===today();const pos=st===0?0:((st-1)%7)+1;
+  let h='';for(let i=1;i<=7;i++)h+=`<div class="dot ${i<=pos?'on':''} ${i===7?'g':''}">${i===7?'🎁':'D'+i}</div>`;
+  $('dots').innerHTML=h;
+  const ci=$('ciBtn');ci.disabled=done;ci.textContent=done?'Checked in, come back tomorrow ✓':'Check in now (+'+((st%7===6&&alive)?3:1)+')';
+  $('chance').textContent=totalPool>0&&tk>0?Math.min(100,tk/totalPool*100).toFixed(tk/totalPool<.1?1:0)+'%':'-';
+  $('myCode').textContent=myCode;
+}
+
+$('chk').onclick=()=>{agree=!agree;$('chk').classList.toggle('on',agree);SayApp.haptic('tap')};
+$('joinBtn').onclick=async()=>{
+  if(!agree){SayApp.haptic('error');toast('Please confirm you follow the channel');return}
+  const code=$('refIn').value.trim().toUpperCase();let ref=0;
+  if(code){ref=parseInt(code,36);if(!ref||isNaN(ref)||ref===uid){SayApp.haptic('error');toast('This invite code is not valid');return}}
+  $('joinBtn').disabled=true;
+  S.joined=true;S.refBy=ref;if(ref)S.bonus+=1;
+  try{if(ref)await SayApp.set('refby',ref);
+    SayApp.submit({type:'signup',name:SayApp.user&&SayApp.user.first_name,id:uid,username:SayApp.user&&SayApp.user.username,invitedBy:code||null})}catch(e){}
+  save();SayApp.haptic('ok');confetti(60);show('home');render();toast(ref?'You are in! 2 tickets 🎉':'You are in! 1 ticket 🎉');refresh();
+};
+$('ciBtn').onclick=e=>{
+  if(S.last===today())return;
+  S.streak=S.last===yday()?S.streak+1:1;
+  const r=S.streak%7===0?3:1;S.bonus+=r;S.last=today();
+  SayApp.haptic('ok');floatAt(e.currentTarget,'+'+r+' 🎟️');if(r===3)confetti(50);save();render();
+};
+$('copyBtn').onclick=()=>{const t=myCode;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast('Code copied ✓')).catch(()=>toast('Your code: '+t));SayApp.haptic('tap')};
+$('shareBtn').onclick=()=>{
+  const txt='🎁 Win Telegram Premium for 12 months! Open TicketVault in our channel and use my invite code '+myCode+' to get a bonus ticket 🎟️';
+  const url='https://t.me/share/url?url='+encodeURIComponent('TicketVault giveaway')+'&text='+encodeURIComponent(txt);
+  SayApp.haptic('tap');
+  try{if(tg&&tg.openTelegramLink)tg.openTelegramLink(url);else window.open(url,'_blank')}catch(e){window.open(url,'_blank')}
+};
+
+async function refresh(){
+  try{const l=await SayApp.top('refby',200)||[];invites=l.filter(x=>x.value===uid&&!x.me).length}catch(e){}
+  try{const t=await SayApp.top('tickets',100)||[];totalPool=t.reduce((a,x)=>a+(x.value>0?x.value:0),0);if(totalPool<tickets())totalPool=tickets()}catch(e){}
+  render();if(S.joined)save();
+}
+async function loadBoard(){
+  const box=$('lbList');
+  try{const l=(await SayApp.top('tickets',20)||[]).filter(x=>x.value>0);
+    if(!l.length){box.innerHTML='<div class="empty"><div>🎟️</div>No entries yet. Be the first to collect tickets!</div>';return}
+    const sum=Math.max(totalPool,l.reduce((a,x)=>a+x.value,0));
+    box.innerHTML=l.map((x,i)=>`<div class="lb ${x.me?'me':''}"><div class="rk">${i<3?['🥇','🥈','🥉'][i]:i+1}</div><div class="n">${esc(x.name||'Player')}${x.me?' (you)':''}<small>${(x.value/sum*100).toFixed(1)}% chance</small></div><div class="v">${x.value} 🎟️</div></div>`).join('');
+  }catch(e){box.innerHTML='<div class="empty"><div>📡</div>Could not load the leaderboard. Try again soon.</div>'}
+}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function rng(seed){return()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+
+async function runDraw(round){
+  const ov=$('ov'),reel=$('reel');ov.classList.add('on');$('ovBtn').disabled=true;reel.classList.remove('win');
+  $('ovE').textContent='🎰';$('ovL').textContent='Live draw, '+new Date(round).toUTCString().slice(0,16);$('ovS').textContent='Picking a winner from all tickets';
+  let list=[];try{list=(await SayApp.top('tickets',100)||[]).filter(x=>x.value>0)}catch(e){}
+  if(!list.length){reel.textContent='No entries yet';$('ovE').textContent='🎟️';$('ovS').textContent='Collect tickets for the next draw!';$('ovBtn').disabled=false;return}
+  list.sort((a,b)=>String(a.name).localeCompare(String(b.name))||a.value-b.value);
+  const sum=list.reduce((a,x)=>a+x.value,0);let r=rng(Math.floor(round/1000))()*sum,win=list[0];
+  for(const x of list){r-=x.value;if(r<0){win=x;break}}
+  let i=0,d=50;const spin=()=>{reel.textContent=list[i++%list.length].name||'Player';SayApp.haptic('tap');d*=1.12;
+    if(d<420)setTimeout(spin,d);else{reel.textContent=win.name||'Player';reel.classList.add('win');$('ovE').textContent='🏆';
+      $('ovS').textContent=win.me?'You won! The channel admin will contact you 🎉':'won with '+win.value+' tickets. Next draw next Sunday!';
+      confetti(win.me?120:60);SayApp.haptic('ok');$('ovBtn').disabled=false;
+      if(win.me&&S.seen!==round){try{SayApp.submit({type:'winner',round:new Date(round).toISOString(),name:SayApp.user&&SayApp.user.first_name,id:uid,tickets:win.value})}catch(e){}}
+      S.seen=round;save()}};
+  spin();
+}
+$('ovBtn').onclick=()=>$('ov').classList.remove('on');
+$('lastBtn').onclick=()=>{SayApp.haptic('tap');runDraw(nextDraw()-7*864e5)};
+
+const prev={};
+function tick(){
+  const t=nextDraw();
+  if(lastTarget&&t!==lastTarget&&S.joined)runDraw(lastTarget);
+  lastTarget=t;
+  let s=Math.max(0,Math.floor((t-Date.now())/1000));
+  const v={cD:Math.floor(s/86400),cH:Math.floor(s%86400/3600),cM:Math.floor(s%3600/60),cS:s%60};
+  for(const k in v){const txt=k==='cD'?String(v[k]):String(v[k]).padStart(2,'0');if(prev[k]!==txt){const el=$(k);el.textContent=txt;el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');prev[k]=txt}}
+}
+
+(async()=>{
+  tick();setInterval(tick,1000);
+  try{const g=await SayApp.get('state');if(g&&typeof g==='object')S=Object.assign(S,g)}catch(e){}
+  try{const sp=tg&&tg.initDataUnsafe&&tg.initDataUnsafe.start_param;if(sp&&!S.joined)$('refIn').value=String(sp).replace(/^r_?/i,'').toUpperCase().slice(0,12)}catch(e){}
+  show(S.joined?'home':'join');render();
+  if(S.joined){await refresh();const lastRound=nextDraw()-7*864e5;if(S.seen&&S.seen<lastRound)runDraw(lastRound)}
+  setInterval(()=>{if(S.joined){refresh();if(curView==='board')loadBoard()}},30000);
+})();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!-- sayapp ktereh7j v1 -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Celengan Ceria</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#17102b;--bg2:#1f1638;--card:#2a1f4a;--card2:#33275a;--main:#ff7eb6;--main2:#ff5a9d;--acc:#7af0c8;--gold:#ffd36e;--tx:#fff;--mut:#b5a8d8;--line:rgba(255,255,255,.08)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Outfit',system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(900px 500px at 80% -10%,rgba(255,126,182,.22),transparent 60%),radial-gradient(700px 500px at -10% 30%,rgba(122,240,200,.12),transparent 60%),var(--bg);color:var(--tx);font-size:16px;overflow-x:hidden;user-select:none}
+button{font-family:inherit;border:0;color:inherit;cursor:pointer}
+#app{max-width:480px;margin:0 auto;min-height:100%;padding:calc(var(--sa-top,0px) + 8px) 16px calc(96px + env(safe-area-inset-bottom));}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.lbl{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--mut);font-weight:600}
+h1{font-size:26px;font-weight:800;letter-spacing:-.02em}
+.chip{background:var(--card);border:1px solid var(--line);padding:8px 12px;border-radius:999px;font-weight:700;font-size:14px;display:flex;gap:6px;align-items:center}
+.hero{position:relative;background:linear-gradient(135deg,var(--main2),#9b6bff);border-radius:24px;padding:20px;box-shadow:0 16px 40px rgba(255,90,157,.28),0 2px 0 rgba(255,255,255,.25) inset;overflow:hidden;margin-bottom:16px}
+.hero:after{content:"🪙";position:absolute;right:-8px;top:-14px;font-size:96px;opacity:.18;transform:rotate(18deg)}
+.hero .lbl{color:rgba(255,255,255,.8)}
+.pts{font-size:46px;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:4px 0 12px}
+.pts small{font-size:16px;font-weight:600;opacity:.85}
+.bar{height:10px;border-radius:99px;background:rgba(0,0,0,.25);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--gold),#fff);transition:width .5s cubic-bezier(.3,1,.4,1)}
+.lv{display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-top:8px;opacity:.95}
+.sec{display:none;animation:in .3s ease}
+.sec.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.task{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px;margin-bottom:12px;box-shadow:0 8px 20px rgba(0,0,0,.22)}
+.task.done{opacity:.6}
+.ico{width:48px;height:48px;border-radius:16px;background:var(--card2);display:grid;place-items:center;font-size:26px;flex:none}
+.inf{flex:1;min-width:0}
+.inf b{display:block;font-size:16px;font-weight:700}
+.inf span{display:block;font-size:13px;color:var(--mut);margin:2px 0 8px}
+.mini{height:6px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden}
+.mini i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,var(--acc),#4fd1ff);transition:width .4s}
+.btn{background:linear-gradient(135deg,var(--main),var(--main2));padding:12px 14px;border-radius:14px;font-weight:700;font-size:14px;white-space:nowrap;box-shadow:0 6px 16px rgba(255,90,157,.35);transition:transform .15s;min-width:84px}
+.btn:active{transform:scale(.93)}
+.btn.claim{background:linear-gradient(135deg,var(--gold),#ffab4a);color:#3b2400;animation:pulse 1.4s infinite}
+.btn.off{background:var(--card2);color:var(--mut);box-shadow:none;animation:none}
+@keyframes pulse{50%{transform:scale(1.06)}}
+.chest{display:flex;gap:12px;align-items:center;border-radius:20px;padding:16px;margin:4px 0 12px;background:linear-gradient(135deg,#2c2160,#3c2a78);border:1px dashed rgba(255,211,110,.6)}
+.chest .ico{background:rgba(255,211,110,.18)}
+.pigwrap{text-align:center;padding-top:8px}
+.pig{width:220px;height:220px;border-radius:50%;margin:16px auto;display:grid;place-items:center;font-size:120px;background:radial-gradient(circle at 35% 30%,#ffc2dc,var(--main) 55%,var(--main2));box-shadow:0 0 0 12px rgba(255,126,182,.12),0 0 60px rgba(255,126,182,.5),0 20px 40px rgba(0,0,0,.35);transition:transform .12s;touch-action:manipulation}
+.pig:active,.pig.b{transform:scale(.92)}
+.pig.full{filter:grayscale(.5) brightness(.8)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:12px}
+.row{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:8px}
+.row.me{border-color:var(--main);background:linear-gradient(135deg,rgba(255,126,182,.2),var(--card))}
+.rk{width:32px;font-weight:800;color:var(--gold);font-size:18px;text-align:center}
+.rn{flex:1;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rv{font-weight:800;color:var(--acc)}
+.empty{text-align:center;color:var(--mut);padding:32px 16px}
+.empty div{font-size:48px;margin-bottom:8px}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;padding:8px 16px calc(8px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--bg) 40%);z-index:5}
+nav div{display:flex;gap:4px;width:100%;max-width:448px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:6px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+nav button{flex:1;background:none;padding:10px 4px;border-radius:16px;font-weight:600;font-size:12px;color:var(--mut);transition:all .2s;display:flex;flex-direction:column;gap:2px;align-items:center}
+nav button span{font-size:20px}
+nav button.on{background:linear-gradient(135deg,var(--main),var(--main2));color:#fff;box-shadow:0 6px 16px rgba(255,90,157,.4)}
+footer{text-align:center;font-size:11px;color:var(--mut);opacity:.7;margin-top:24px;line-height:1.6}
+#modal{position:fixed;inset:0;background:rgba(10,6,24,.75);backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center;z-index:20}
+#modal.on{display:flex}
+.sheet{width:100%;max-width:480px;background:var(--bg2);border-radius:28px 28px 0 0;padding:24px 20px calc(24px + env(safe-area-inset-bottom));animation:up .3s cubic-bezier(.3,1,.4,1);text-align:center;border-top:1px solid var(--line)}
+@keyframes up{from{transform:translateY(100%)}}
+.sheet h2{font-size:20px;margin-bottom:16px}
+.opt{display:block;width:100%;background:var(--card);border:1px solid var(--line);padding:14px;border-radius:16px;font-size:15px;font-weight:600;margin-bottom:8px;transition:transform .15s}
+.opt:active{transform:scale(.97)}
+.opt.bad{background:#5a2140;border-color:#ff5a7d}
+.opt.good{background:#14533f;border-color:var(--acc)}
+.breath{width:140px;height:140px;border-radius:50%;margin:16px auto 24px;background:radial-gradient(circle at 35% 30%,#c9fff0,var(--acc));box-shadow:0 0 50px rgba(122,240,200,.55);display:grid;place-items:center;color:#06392b;font-weight:800;font-size:28px;transform:scale(.6);transition:transform 4s ease-in-out}
+.breath.big{transform:scale(1.15)}
+.fl{position:fixed;pointer-events:none;font-weight:800;font-size:22px;color:var(--gold);text-shadow:0 2px 8px rgba(0,0,0,.5);z-index:30;animation:fl .9s ease-out forwards}
+@keyframes fl{from{opacity:1;transform:translate(-50%,0)}to{opacity:0;transform:translate(-50%,-70px)}}
+.pc{position:fixed;pointer-events:none;z-index:30;font-size:20px;animation:pc .9s ease-out forwards}
+@keyframes pc{from{opacity:1;transform:translate(0,0) scale(.6)}to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.2) rotate(240deg)}}
+#toast{position:fixed;left:50%;top:calc(var(--sa-top,0px) + 56px);transform:translate(-50%,-20px);background:var(--card2);padding:10px 16px;border-radius:99px;font-weight:600;font-size:14px;opacity:0;transition:.25s;z-index:40;border:1px solid var(--line);pointer-events:none;white-space:nowrap}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="top">
+    <div><div class="lbl" id="hi">Halo</div><h1>Celengan Ceria 🐷</h1></div>
+    <div class="chip">🔥 <span id="stk">0</span> hari</div>
+  </div>
+  <div class="hero">
+    <div class="lbl">Poin kamu</div>
+    <div class="pts"><span id="pts">0</span> <small>poin</small></div>
+    <div class="bar"><i id="lvb"></i></div>
+    <div class="lv"><span id="lvn">Level 1</span><span id="lvx"></span></div>
+  </div>
+
+  <section class="sec on" id="s-tasks">
+    <div class="lbl" style="margin:0 4px 8px">Tugas hari ini</div>
+    <div id="tasks"></div>
+    <div class="chest"><div class="ico">🎁</div>
+      <div class="inf"><b>Kotak kejutan</b><span id="chs">Selesaikan semua tugas</span><div class="mini"><i id="chb"></i></div></div>
+      <button class="btn off" id="chbtn" data-act="chest">+150</button>
+    </div>
+  </section>
+
+  <section class="sec" id="s-pig">
+    <div class="pigwrap">
+      <div class="lbl">Ketuk celengan untuk dapat poin</div>
+      <div class="pig" id="pig">🐷</div>
+      <b id="pigt" style="font-size:18px"></b>
+      <div class="card" style="margin-top:16px;text-align:left">
+        <div class="lbl">Kenyangnya celengan</div>
+        <div class="mini" style="height:10px;margin-top:8px"><i id="pigb"></i></div>
+        <p style="font-size:13px;color:var(--mut);margin-top:8px">Setiap ketukan memberi 1 poin, maksimal 60 ketukan per hari. Besok celengan lapar lagi!</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="s-top">
+    <div class="lbl" style="margin:0 4px 8px">Papan peringkat</div>
+    <div id="board"></div>
+  </section>
+
+  <footer>Poin tidak bernilai uang. Hanya untuk seru-seruan.<br>Made with SayApp</footer>
+</div>
+
+<nav><div>
+  <button class="on" data-tab="tasks"><span>✅</span>Tugas</button>
+  <button data-tab="pig"><span>🐷</span>Celengan</button>
+  <button data-tab="top"><span>🏆</span>Peringkat</button>
+</div></nav>
+<div id="modal"><div class="sheet" id="sheet"></div></div>
+<div id="toast"></div>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="ktereh7j" data-full="1"></script>
+<script>
+window.addEventListener('load', async function(){
+  var $=function(i){return document.getElementById(i)};
+  var CAP=60, BONUS=150;
+  var TASKS=[
+    {id:'in',ico:'☀️',t:'Absen harian',d:'Makin rajin, bonus beruntun makin besar',n:1,r:50,a:'Absen'},
+    {id:'pig',ico:'🐷',t:'Beri makan celengan',d:'Ketuk celengan 10 kali',n:10,r:30,a:'Ke celengan'},
+    {id:'air',ico:'💧',t:'Minum air putih',d:'Catat 5 gelas hari ini',n:5,r:40,a:'+1 gelas'},
+    {id:'nap',ico:'🌿',t:'Tarik napas dalam',d:'Ikuti ritme napas selama 10 detik',n:1,r:30,a:'Mulai'},
+    {id:'quiz',ico:'🧠',t:'Tebak cepat',d:'Jawab 1 pertanyaan seputar uang',n:1,r:40,a:'Main'}
+  ];
+  var QS=[
+    ['Kebiasaan mana yang bagus untuk menabung?',['Sisihkan di awal bulan','Tunggu sisa di akhir bulan','Belanja dulu'],0],
+    ['Apa itu dana darurat?',['Uang untuk liburan','Simpanan untuk kejadian tak terduga','Uang jajan'],1],
+    ['Beras termasuk kebutuhan atau keinginan?',['Kebutuhan','Keinginan','Hadiah'],0],
+    ['Pada aturan 50/30/20, angka 20 untuk apa?',['Hiburan','Tabungan','Makan'],1],
+    ['Sebelum beli barang mahal, sebaiknya...',['Langsung beli','Tunggu sehari lalu pikir lagi','Berutang dulu'],1],
+    ['Membandingkan harga sebelum membeli itu...',['Boros waktu','Bijak','Rugi'],1],
+    ['Cara teraman menyimpan PIN ATM?',['Ditulis di kartu','Diingat sendiri','Diberi ke teman'],1]
+  ];
+  var LV=['Pemula Hemat','Tukang Tabung','Juragan Receh','Sultan Celengan','Raja Hemat'];
+  function ymd(d){return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+  var now=new Date(), TODAY=ymd(now), yest=new Date(now.getTime()-864e5), YEST=ymd(yest);
+  var S={points:0,streak:0,last:'',day:'',p:{},c:{},taps:0};
+  try{var l=await SayApp.get('state'); if(l&&typeof l==='object') for(var k in l) S[k]=l[k];}catch(e){}
+  if(S.day!==TODAY){S.day=TODAY;S.p={};S.c={};S.taps=0;}
+  var shown=0, dirty=false, timer=null;
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function save(now){dirty=true; if(now){flush();return} if(!timer) timer=setTimeout(flush,3000);}
+  function flush(){clearTimeout(timer);timer=null;if(!dirty)return;dirty=false;try{SayApp.set('state',S);SayApp.set('poin',S.points);}catch(e){}}
+  document.addEventListener('visibilitychange',function(){if(document.hidden)flush()});
+  function toast(m){var t=$('toast');t.textContent=m;t.className='on';setTimeout(function(){t.className=''},1800)}
+  function haptic(t){try{SayApp.haptic(t)}catch(e){}}
+  function lvInfo(){var lv=Math.floor(S.points/500);var nm=LV[Math.min(lv,LV.length-1)];return{n:lv+1,nm:nm,pr:(S.points%500)/500,left:500-S.points%500}}
+  function tween(to){var from=shown,st=performance.now();shown=to;(function f(t){var p=Math.min(1,(t-st)/600),e=1-Math.pow(1-p,3);$('pts').textContent=Math.round(from+(to-from)*e).toLocaleString('id-ID');if(p<1)requestAnimationFrame(f)})(st)}
+  function fly(txt,x,y){var e=document.createElement('div');e.className='fl';e.textContent=txt;e.style.left=x+'px';e.style.top=y+'px';document.body.appendChild(e);setTimeout(function(){e.remove()},900)}
+  function burst(x,y,n){var em=['🪙','✨','💖','⭐'];for(var i=0;i<(n||12);i++){var e=document.createElement('div');e.className='pc';e.textContent=em[i%4];var a=Math.random()*6.28,d=50+Math.random()*80;e.style.left=x+'px';e.style.top=y+'px';e.style.setProperty('--dx',Math.cos(a)*d+'px');e.style.setProperty('--dy',Math.sin(a)*d-30+'px');document.body.appendChild(e);setTimeout(function(el){el.remove()},900,e)}}
+  function add(n,x,y,big){S.points+=n;tween(S.points);fly('+'+n,x,y);if(big)burst(x,y,16);renderHero();save()}
+  function renderHero(){var v=lvInfo();$('lvb').style.width=(v.pr*100)+'%';$('lvn').textContent='Level '+v.n+' · '+v.nm;$('lvx').textContent=v.left+' poin lagi';$('stk').textContent=S.streak}
+  function done(t){return S.c[t.id]}
+  function render(){
+    var h='',cl=0;
+    TASKS.forEach(function(t){
+      var p=Math.min(S.p[t.id]||0,t.n),c=!!S.c[t.id];if(c)cl++;
+      var btn=c?'<button class="btn off" disabled>Selesai ✓</button>':p>=t.n?'<button class="btn claim" data-act="claim" data-id="'+t.id+'">Klaim +'+(t.id==='in'?inBonus():t.r)+'</button>':'<button class="btn" data-act="'+t.id+'">'+t.a+'</button>';
+      h+='<div class="task'+(c?' done':'')+'"><div class="ico">'+t.ico+'</div><div class="inf"><b>'+t.t+'</b><span>'+t.d+(t.n>1?' ('+p+'/'+t.n+')':'')+'</span><div class="mini"><i style="width:'+(p/t.n*100)+'%"></i></div></div>'+btn+'</div>';
+    });
+    $('tasks').innerHTML=h;
+    $('chb').style.width=(cl/TASKS.length*100)+'%';
+    var b=$('chbtn');
+    if(S.c.bonus){b.className='btn off';b.disabled=true;b.textContent='Diambil ✓';$('chs').textContent='Sampai jumpa besok!'}
+    else if(cl===TASKS.length){b.className='btn claim';b.disabled=false;b.textContent='Buka +'+BONUS;$('chs').textContent='Semua tugas beres! Buka hadiahmu'}
+    else{b.className='btn off';b.disabled=false;b.textContent='+'+BONUS;$('chs').textContent=cl+' dari '+TASKS.length+' tugas selesai'}
+    renderPig();
+  }
+  function inBonus(){var s=(S.last===YEST?S.streak:0)+ (S.last===TODAY?0:1);if(S.last===TODAY)s=S.streak;return 50+Math.min(s,7)*10}
+  function renderPig(){
+    var f=S.taps>=CAP;$('pig').className='pig'+(f?' full':'');$('pigb').style.width=Math.min(100,S.taps/CAP*100)+'%';
+    $('pigt').textContent=f?'Celengan sudah kenyang 😴':'Ketukan hari ini: '+S.taps+'/'+CAP;
+  }
+  function tab(n){
+    document.querySelectorAll('.sec').forEach(function(s){s.classList.toggle('on',s.id==='s-'+n)});
+    document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('on',b.dataset.tab===n)});
+    if(n==='top')board();
+  }
+  async function board(){
+    $('board').innerHTML='<div class="empty"><div>⏳</div>Memuat peringkat...</div>';
+    flush();
+    var r=[];try{r=await SayApp.top('poin',10)||[]}catch(e){}
+    if(!r.length){$('board').innerHTML='<div class="empty"><div>🧸</div>Belum ada peringkat. Kumpulkan poin dan jadi yang pertama!</div>';return}
+    var md=['🥇','🥈','🥉'];
+    $('board').innerHTML=r.map(function(x,i){return '<div class="row'+(x.me?' me':'')+'"><div class="rk">'+(md[i]||(i+1))+'</div><div class="rn">'+esc(x.name||'Pemain')+(x.me?' (kamu)':'')+'</div><div class="rv">'+Number(x.value).toLocaleString('id-ID')+'</div></div>'}).join('');
+  }
+  function modal(h){$('sheet').innerHTML=h;$('modal').classList.add('on')}
+  function closeM(){$('modal').classList.remove('on');if(bt){clearInterval(bt);bt=null}}
+  var bt=null;
+  function breathe(){
+    modal('<h2>Tarik napas pelan-pelan 🌿</h2><div class="breath" id="br">10</div><div id="bm" style="color:var(--mut);margin-bottom:16px">Tarik napas...</div><button class="btn off" id="bx">Batal</button>');
+    var s=10,big=false;
+    setTimeout(function(){var b=$('br');if(b)b.classList.add('big')},50);
+    $('bx').onclick=closeM;
+    bt=setInterval(function(){
+      s--;var b=$('br');if(!b){clearInterval(bt);return}
+      b.textContent=s;
+      if(s%4===0||s===10-4){big=!big;b.classList.toggle('big',big);$('bm').textContent=big?'Tarik napas...':'Hembuskan...'}
+      if(s<=0){clearInterval(bt);bt=null;S.p.nap=1;save();closeM();haptic('ok');toast('Rileks banget! 🌿');render()}
+    },1000);
+  }
+  function quiz(){
+    var di=Math.floor(now/864e5)%QS.length,q=QS[di];
+    modal('<h2>'+esc(q[0])+'</h2>'+q[1].map(function(o,i){return '<button class="opt" data-q="'+i+'">'+esc(o)+'</button>'}).join('')+'<button class="btn off" id="qx" style="margin-top:8px">Tutup</button>');
+    $('qx').onclick=closeM;
+    document.querySelectorAll('.opt').forEach(function(b){b.onclick=function(){
+      if(+b.dataset.q===q[2]){b.classList.add('good');haptic('ok');S.p.quiz=1;save();setTimeout(function(){closeM();toast('Benar! Pintar 🎉');render()},700)}
+      else{b.classList.add('bad');haptic('error')}
+    }});
+  }
+  function claim(id,el){
+    var t=TASKS.filter(function(x){return x.id===id})[0];if(!t||S.c[id]||(S.p[id]||0)<t.n)return;
+    var r=t.r;
+    if(id==='in'){r=inBonus()}
+    S.c[id]=1;
+    var rc=el.getBoundingClientRect();haptic('ok');add(r,rc.left+rc.width/2,rc.top,true);render();
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-act],[data-tab]');if(!b)return;
+    if(b.dataset.tab){haptic('tap');tab(b.dataset.tab);return}
+    var a=b.dataset.act,rc=b.getBoundingClientRect();
+    if(a==='claim')claim(b.dataset.id,b);
+    else if(a==='chest'){
+      if(S.c.bonus)return;
+      if(TASKS.every(function(t){return S.c[t.id]})){S.c.bonus=1;haptic('ok');add(BONUS,rc.left+rc.width/2,rc.top,true);burst(innerWidth/2,innerHeight/2,24);render()}
+      else{haptic('error');toast('Selesaikan semua tugas dulu ya')}
+    }
+    else if(a==='in'){
+      if(S.last!==TODAY){S.streak=(S.last===YEST?S.streak:0)+1;S.last=TODAY}
+      S.p.in=1;haptic('tap');save();renderHero();render();toast('Absen berhasil! 🔥 '+S.streak+' hari beruntun');
+    }
+    else if(a==='pig'){tab('pig')}
+    else if(a==='air'){haptic('tap');S.p.air=Math.min(5,(S.p.air||0)+1);save();render()}
+    else if(a==='nap'){breathe()}
+    else if(a==='quiz'){quiz()}
+  });
+  $('modal').addEventListener('click',function(e){if(e.target.id==='modal')closeM()});
+  var pig=$('pig');
+  pig.addEventListener('click',function(e){
+    pig.classList.add('b');setTimeout(function(){pig.classList.remove('b')},110);
+    if(S.taps>=CAP){haptic('error');toast('Celengan kenyang, kembali besok 😴');return}
+    S.taps++;S.p.pig=Math.min(10,S.taps);haptic('tap');
+    S.points++;tween(S.points);fly('+1',e.clientX,e.clientY-20);
+    if(S.taps%20===0)burst(e.clientX,e.clientY,10);
+    renderHero();renderPig();save();
+    if(S.taps===10){toast('Tugas celengan selesai! Klaim di tab Tugas');render()}
+  });
+  var u=(window.SayApp&&SayApp.user)||{};
+  $('hi').textContent='Halo, '+(u.first_name||'teman')+' 👋';
+  shown=S.points;$('pts').textContent=S.points.toLocaleString('id-ID');
+  renderHero();render();
+  if(S.last!==TODAY&&S.last!==YEST&&S.streak){S.streak=0;renderHero()}
+  save();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!-- sayapp cvp8z59g v1 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Crypto Brain</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060c22;--navy:#0c1736;--navy2:#13224a;--gold:#f5c451;--gold2:#ffdf8a;--accent:#4fd1ff;--ok:#2ee59d;--bad:#ff5470;--txt:#eef2ff;--mut:#8d9bc4;--glass:rgba(255,255,255,.06);--line:rgba(255,255,255,.1)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--txt);font-family:'Sora',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;overflow-x:hidden}
+body{min-height:100vh;background:radial-gradient(600px 400px at 85% -10%,rgba(245,196,81,.18),transparent 60%),radial-gradient(500px 400px at -10% 30%,rgba(79,209,255,.12),transparent 60%),linear-gradient(180deg,#0a1430,#060c22 70%)}
+.wrap{max-width:440px;margin:0 auto;padding:0 16px calc(24px + env(safe-area-inset-bottom))}
+header{padding-top:calc(var(--sa-top,0px) + 8px);display:flex;align-items:center;justify-content:space-between;padding-bottom:16px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}
+.logo i{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-style:normal;background:linear-gradient(135deg,var(--gold2),var(--gold) 50%,#c8902a);color:#1a1300;box-shadow:0 6px 20px rgba(245,196,81,.4)}
+.chip{font-size:12px;font-weight:600;padding:6px 12px;border-radius:99px;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(12px)}
+.card{background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:22px;padding:20px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 20px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.08);margin-bottom:16px}
+.lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);font-weight:600}
+h1{font-size:30px;font-weight:800;line-height:1.15;margin:8px 0}
+h1 b{background:linear-gradient(90deg,var(--gold2),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+p{font-size:15px;color:var(--mut);line-height:1.5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.stat{background:rgba(0,0,0,.2);border:1px solid var(--line);border-radius:16px;padding:12px 8px;text-align:center}
+.stat b{display:block;font-size:20px;font-weight:800;color:var(--gold)}
+.stat span{font-size:11px;color:var(--mut)}
+.btn{width:100%;border:0;border-radius:18px;padding:17px;font:700 16px 'Sora',sans-serif;cursor:pointer;transition:transform .15s,opacity .2s,box-shadow .2s}
+.btn:active{transform:scale(.96)}
+.gold{background:linear-gradient(135deg,var(--gold2),var(--gold) 55%,#d39a2e);color:#1b1400;box-shadow:0 10px 30px rgba(245,196,81,.35),inset 0 1px 0 rgba(255,255,255,.5)}
+.ghost{background:var(--glass);color:var(--txt);border:1px solid var(--line)}
+.btn:disabled{opacity:.45;pointer-events:none}
+.screen{display:none;animation:in .35s ease}
+.screen.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.prog{flex:1;height:6px;border-radius:9px;background:rgba(255,255,255,.08);margin:0 12px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:9px;transition:width .3s}
+.ringbox{position:relative;width:104px;height:104px;margin:0 auto 16px}
+.ringbox svg{transform:rotate(-90deg)}
+.ringbox .t{position:absolute;inset:0;display:grid;place-items:center;font-size:28px;font-weight:800}
+#ring{transition:stroke .3s;filter:drop-shadow(0 0 6px rgba(245,196,81,.6))}
+.q{font-size:19px;font-weight:700;line-height:1.4;text-align:center;min-height:54px}
+.tag{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;font-weight:600}
+.ans{display:grid;gap:10px;margin-top:16px}
+.a{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:15px 16px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--txt);font:600 15px 'Sora',sans-serif;cursor:pointer;transition:transform .15s,background .2s,border-color .2s,opacity .3s}
+.a:active{transform:scale(.97)}
+.a em{font-style:normal;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:rgba(255,255,255,.08);font-size:13px;color:var(--gold);flex:none}
+.a.ok{background:rgba(46,229,157,.16);border-color:var(--ok);animation:pop .3s}
+.a.ok em{background:var(--ok);color:#002a19}
+.a.bad{background:rgba(255,84,112,.16);border-color:var(--bad);animation:shake .35s}
+.a.bad em{background:var(--bad);color:#fff}
+.a.gone{opacity:.15;pointer-events:none;transform:scale(.97)}
+@keyframes pop{50%{transform:scale(1.04)}}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.row{display:flex;gap:10px;margin-top:16px}
+.row .btn{padding:14px;font-size:14px}
+.scorebar{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:700}
+.streak{color:var(--gold);transition:transform .2s}
+.big{font-size:56px;font-weight:800;text-align:center;background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.1}
+.rank{text-align:center;font-size:20px;font-weight:800;margin-top:8px}
+.medal{font-size:54px;text-align:center;filter:drop-shadow(0 8px 20px rgba(245,196,81,.5))}
+.lb{list-style:none;margin-top:12px}
+.lb li{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:14px;font-size:14px;transition:background .2s}
+.lb li+li{margin-top:4px}
+.lb li.me{background:linear-gradient(90deg,rgba(245,196,81,.22),rgba(245,196,81,.05));border:1px solid rgba(245,196,81,.5)}
+.lb .n{width:26px;font-weight:800;color:var(--mut);text-align:center}
+.lb .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb .v{font-weight:800;color:var(--gold)}
+.skel{height:40px;border-radius:14px;background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.09),rgba(255,255,255,.04));background-size:200% 100%;animation:sk 1.2s infinite;margin-top:6px}
+@keyframes sk{to{background-position:-200% 0}}
+.empty{text-align:center;padding:20px 0;color:var(--mut);font-size:14px}
+.float{position:fixed;font-weight:800;font-size:22px;color:var(--gold);pointer-events:none;z-index:50;animation:fl 1s ease-out forwards;text-shadow:0 0 12px rgba(245,196,81,.7)}
+@keyframes fl{to{transform:translateY(-70px);opacity:0}}
+.pt{position:fixed;width:8px;height:8px;border-radius:50%;pointer-events:none;z-index:49;transition:transform .7s cubic-bezier(.2,.8,.3,1),opacity .7s}
+.cf{position:fixed;top:-12px;width:9px;height:14px;z-index:60;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,20px);opacity:0;background:var(--navy2);border:1px solid var(--line);padding:12px 18px;border-radius:14px;font-size:14px;z-index:70;transition:.25s;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+footer{text-align:center;font-size:11px;color:rgba(141,155,196,.6);padding:8px 0 4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="logo"><i>₿</i>Crypto Brain</div><div class="chip" id="hello">👋 Hi</div></header>
+
+<section class="screen on" id="home">
+ <div class="card">
+  <span class="lbl">Daily challenge</span>
+  <h1>Test your <b>crypto brain</b></h1>
+  <p>10 questions on Bitcoin, TON and Telegram. 15 seconds each. Chain correct answers for a streak bonus.</p>
+  <div class="stats">
+   <div class="stat"><b id="sBest">0</b><span>Best score</span></div>
+   <div class="stat"><b id="sDays">0</b><span>Day streak 🔥</span></div>
+   <div class="stat"><b id="sRounds">0</b><span>Rounds</span></div>
+  </div>
+ </div>
+ <button class="btn gold" id="startBtn">Start quiz ⚡</button>
+ <div class="card" style="margin-top:16px"><span class="lbl">🏆 Global leaderboard</span><ul class="lb" id="lbHome"></ul></div>
+</section>
+
+<section class="screen" id="quiz">
+ <div class="qtop"><span class="chip" id="qNum">1/10</span><div class="prog"><i id="progBar"></i></div><span class="chip streak" id="qStreak">🔥 0</span></div>
+ <div class="card">
+  <div class="ringbox">
+   <svg width="104" height="104"><circle cx="52" cy="52" r="44" stroke="rgba(255,255,255,.08)" stroke-width="8" fill="none"/><circle id="ring" cx="52" cy="52" r="44" stroke="#f5c451" stroke-width="8" fill="none" stroke-linecap="round" stroke-dasharray="276.46" stroke-dashoffset="0"/></svg>
+   <div class="t" id="tTxt">15</div>
+  </div>
+  <div style="text-align:center"><span class="tag" id="qTag">Bitcoin</span></div>
+  <div class="q" id="qTxt"></div>
+  <div class="ans" id="ans"></div>
+ </div>
+ <div class="scorebar"><span class="lbl">Score</span><span id="qScore" style="color:var(--gold);font-size:18px">0</span></div>
+ <div class="row"><button class="btn ghost" id="hintBtn">🎬 Hint (remove 2)</button></div>
+</section>
+
+<section class="screen" id="result">
+ <div class="card" style="text-align:center">
+  <div class="medal" id="rMedal">🏅</div>
+  <span class="lbl">Your score</span>
+  <div class="big" id="rScore">0</div>
+  <div class="rank" id="rRank">Newbie</div>
+  <p id="rInfo" style="margin-top:8px"></p>
+ </div>
+ <button class="btn gold" id="x2Btn">🎬 x2 score</button>
+ <div class="row"><button class="btn ghost" id="againBtn">↻ Play again</button><button class="btn ghost" id="homeBtn">🏠 Home</button></div>
+ <div class="card" style="margin-top:16px"><span class="lbl">🏆 Top 10</span><ul class="lb" id="lbRes"></ul></div>
+</section>
+<footer>Made with SayApp</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="cvp8z59g" data-full="1"></script>
+<script>
+window.addEventListener('load',()=>{
+const BANK=[
+["Bitcoin","Who created Bitcoin?","Satoshi Nakamoto","Vitalik Buterin","Pavel Durov","Hal Finney"],
+["Bitcoin","What is the maximum supply of Bitcoin?","21 million","100 million","18 million","Unlimited"],
+["Bitcoin","What is the smallest unit of Bitcoin called?","Satoshi","Gwei","Nano","Wei"],
+["Bitcoin","In which year was the Bitcoin genesis block mined?","2009","2008","2011","2013"],
+["TON","What does TON stand for?","The Open Network","Telegram Online Node","Token Of Nations","Trusted Open Node"],
+["Telegram","Who founded Telegram?","Pavel Durov","Elon Musk","Jack Dorsey","Brian Armstrong"],
+["Bitcoin","How often does a Bitcoin halving happen?","About every 4 years","Every year","Every 10 years","Every 6 months"],
+["Telegram","What is Telegram's in-app digital currency?","Telegram Stars","Telegram Gems","Durov Coins","TG Credits"],
+["Bitcoin","What was famously the first real purchase with BTC?","Two pizzas","A used car","A coffee","A laptop"],
+["Basics","What is a seed phrase?","Wallet recovery words","A mining password","An exchange login","A block hash"],
+["TON","Which language was created for TON smart contracts?","FunC","Solidity","Go","Python"],
+["Bitcoin","Which consensus does Bitcoin use?","Proof of Work","Proof of Stake","Proof of Authority","Proof of History"],
+["Basics","What does HODL mean in crypto slang?","Holding instead of selling","Fast day trading","A type of wallet","A mining tool"],
+["Bitcoin","What is Bitcoin's average block time?","About 10 minutes","About 1 minute","About 1 hour","About 10 seconds"],
+["Telegram","What is the name of Telegram's built-in crypto wallet?","Wallet","Vault","TonPay","DurovPay"],
+["Telegram","Where do Telegram Mini Apps run?","Inside Telegram","Only in Chrome","Only on desktop","On an exchange"],
+["Basics","In crypto, what is a whale?","A holder of huge amounts","A brand new coin","A failed project","A mining farm"],
+["TON","What is the native coin of the TON blockchain?","Toncoin","Notcoin","Ether","Gram Gold"],
+["Basics","What does DYOR mean?","Do Your Own Research","Don't Yield On Returns","Daily Yield Of Rewards","Decentralize Your Online Records"],
+["Telegram","Where are Telegram usernames sold as NFTs?","Fragment","eBay","Amazon","App Store"]];
+const S=window.SayApp||{},C=276.46,$=id=>document.getElementById(id);
+const hap=t=>{try{S.haptic&&S.haptic(t)}catch(e){}};
+let data={best:0,rounds:0,days:0,last:''};
+let round=[],qi=0,score=0,streak=0,correct=0,locked=false,endT=0,remain=15,raf=0,paused=false,hintUsed=false,doubled=false,shown=0;
+const name=(S.user&&S.user.first_name)||'Trader';$('hello').textContent='👋 '+name;
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const toast=m=>{const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2200)};
+const show=id=>{document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id===id));window.scrollTo(0,0)};
+function anim(el,to,ms=600){const from=+el.dataset.v||0;el.dataset.v=to;const t0=performance.now();const f=n=>{const p=Math.min(1,(n-t0)/ms);el.textContent=Math.round(from+(to-from)*(1-Math.pow(1-p,3))).toLocaleString('en');if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+function today(){return new Date().toISOString().slice(0,10)}
+function paintHome(){anim($('sBest'),data.best);$('sDays').textContent=data.days;$('sRounds').textContent=data.rounds}
+async function loadLb(el){
+ el.innerHTML='<div class="skel"></div><div class="skel"></div><div class="skel"></div>';
+ let list=[];try{list=(S.top?await S.top('best',10):[])||[]}catch(e){}
+ if(!list.length){el.innerHTML='<div class="empty">🏁 No scores yet, be the first legend!</div>';return}
+ const md=['🥇','🥈','🥉'];
+ el.innerHTML=list.map((r,i)=>`<li class="${r.me?'me':''}"><span class="n">${md[i]||i+1}</span><span class="nm">${String(r.name||'Anon').replace(/</g,'&lt;')}${r.me?' (you)':''}</span><span class="v">${(+r.value||0).toLocaleString('en')}</span></li>`).join('');
+}
+async function init(){try{const d=S.get?await S.get('data'):null;if(d)data=Object.assign(data,d)}catch(e){}paintHome();loadLb($('lbHome'))}
+
+function start(){
+ round=shuffle(BANK).slice(0,10).map(q=>{const opts=shuffle([0,1,2,3]);return{tag:q[0],q:q[1],a:opts.map(i=>q[2+i]),c:opts.indexOf(0)}});
+ qi=0;score=0;streak=0;correct=0;doubled=false;$('qScore').dataset.v=0;$('qScore').textContent='0';
+ show('quiz');renderQ();hap('tap');
+}
+function renderQ(){
+ const q=round[qi];locked=false;hintUsed=false;
+ $('qNum').textContent=(qi+1)+'/10';$('progBar').style.width=(qi*10)+'%';
+ $('qStreak').textContent='🔥 '+streak;$('qTag').textContent=q.tag;$('qTxt').textContent=q.q;
+ $('ans').innerHTML=q.a.map((t,i)=>`<button class="a" data-i="${i}"><em>${'ABCD'[i]}</em>${t}</button>`).join('');
+ $('hintBtn').disabled=false;$('hintBtn').textContent='🎬 Hint (remove 2)';
+ remain=15;runTimer();
+}
+function runTimer(){paused=false;endT=performance.now()+remain*1000;cancelAnimationFrame(raf);raf=requestAnimationFrame(tick)}
+function stopTimer(){cancelAnimationFrame(raf);remain=Math.max(0,(endT-performance.now())/1000)}
+function tick(n){
+ if(paused||locked)return;
+ const r=Math.max(0,(endT-n)/1000);
+ $('ring').style.strokeDashoffset=C*(1-r/15);$('ring').style.stroke=r<5?'#ff5470':'#f5c451';
+ $('tTxt').textContent=Math.ceil(r);
+ if(r<=0){answer(-1,null);return}
+ raf=requestAnimationFrame(tick);
+}
+function burst(x,y){
+ for(let i=0;i<14;i++){const p=document.createElement('div');p.className='pt';p.style.left=x+'px';p.style.top=y+'px';p.style.background=i%2?'#f5c451':'#4fd1ff';document.body.appendChild(p);
+ const a=Math.random()*6.28,d=40+Math.random()*60;requestAnimationFrame(()=>{p.style.transform=`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px) scale(.3)`;p.style.opacity=0});setTimeout(()=>p.remove(),750)}
+}
+function floatTxt(x,y,t){const f=document.createElement('div');f.className='float';f.textContent=t;f.style.left=(x-30)+'px';f.style.top=(y-20)+'px';document.body.appendChild(f);setTimeout(()=>f.remove(),1000)}
+function answer(i,btn){
+ if(locked)return;locked=true;stopTimer();$('hintBtn').disabled=true;
+ const q=round[qi],btns=$('ans').children;
+ if(i===q.c){
+  streak++;correct++;const bonus=streak>=3?(streak-2)*25:0;const pts=100+Math.round(remain*10)+bonus;score+=pts;
+  btn.classList.add('ok');const r=btn.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2);
+  floatTxt(r.left+r.width/2,r.top,'+'+pts+(bonus?' 🔥':''));hap('ok');anim($('qScore'),score,400);
+  if(bonus){$('qStreak').style.transform='scale(1.25)';setTimeout(()=>$('qStreak').style.transform='',250)}
+ }else{
+  streak=0;if(btn)btn.classList.add('bad');else toast('⏰ Time is up!');btns[q.c].classList.add('ok');hap('error');
+ }
+ $('qStreak').textContent='🔥 '+streak;
+ setTimeout(()=>{qi++;if(qi<10)renderQ();else finish()},1200);
+}
+$('ans').addEventListener('click',e=>{const b=e.target.closest('.a');if(b&&!b.classList.contains('gone'))answer(+b.dataset.i,b)});
+$('hintBtn').onclick=async()=>{
+ if(locked||hintUsed)return;hintUsed=true;const b=$('hintBtn');b.disabled=true;b.textContent='Loading…';
+ paused=true;stopTimer();let ok=false;try{ok=S.ad?await S.ad():false}catch(e){}
+ if(locked)return;
+ if(ok){const q=round[qi];shuffle([0,1,2,3].filter(i=>i!==q.c)).slice(0,2).forEach(i=>$('ans').children[i].classList.add('gone'));b.textContent='✅ 2 answers removed';hap('ok')}
+ else{hintUsed=false;b.disabled=false;b.textContent='🎬 Hint (remove 2)';toast('No ad available right now')}
+ runTimer();
+};
+function rankOf(c){return c>=10?['Satoshi','👑']:c>=7?['Whale','🐋']:c>=4?['Hodler','💎']:['Newbie','🐣']}
+async function save(){
+ try{if(S.set){await S.set('data',data);await S.set('best',data.best)}}catch(e){}
+}
+async function finish(){
+ $('progBar').style.width='100%';
+ const [rk,ic]=rankOf(correct);$('rMedal').textContent=ic;$('rRank').textContent=rk;
+ $('rScore').dataset.v=0;anim($('rScore'),score,900);
+ $('rInfo').textContent=`${correct}/10 correct answers`+(correct===10?' - perfect round!':'');
+ $('x2Btn').disabled=false;$('x2Btn').textContent='🎬 x2 score';
+ show('result');
+ if(correct===10){confetti();hap('ok')}
+ const t=today();if(data.last!==t){const y=new Date(Date.now()-864e5).toISOString().slice(0,10);data.days=data.last===y?data.days+1:1;data.last=t}
+ data.rounds++;if(score>data.best)data.best=score;
+ await save();loadLb($('lbRes'));
+}
+$('x2Btn').onclick=async()=>{
+ if(doubled)return;const b=$('x2Btn');b.disabled=true;b.textContent='Loading…';
+ let ok=false;try{ok=S.ad?await S.ad():false}catch(e){}
+ if(ok){doubled=true;score*=2;anim($('rScore'),score,800);b.textContent='✅ Score doubled';hap('ok');burst(innerWidth/2,innerHeight/3);
+  if(score>data.best){data.best=score;await save()}loadLb($('lbRes'))}
+ else{b.disabled=false;b.textContent='🎬 x2 score';toast('No ad available right now')}
+};
+function confetti(){const cols=['#f5c451','#ffdf8a','#4fd1ff','#2ee59d','#ffffff'];
+ for(let i=0;i<90;i++){const c=document.createElement('div');c.className='cf';c.style.left=Math.random()*100+'vw';c.style.background=cols[i%5];c.style.animationDuration=(1.8+Math.random()*1.8)+'s';c.style.animationDelay=Math.random()*.6+'s';c.style.borderRadius=i%3?'2px':'50%';document.body.appendChild(c);setTimeout(()=>c.remove(),4500)}}
+$('startBtn').onclick=start;$('againBtn').onclick=start;
+$('homeBtn').onclick=()=>{paintHome();show('home');loadLb($('lbHome'))};
+init();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!-- sayapp kwegehkb v2 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Lucky Wheel</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--p:#7c3aed;--p2:#a855f7;--p3:#c084fc;--gold:#f5c542;--gold2:#ffe08a;--gold3:#c8921a;--bg:#0d061c;--bg2:#160b2e;--card:rgba(32,18,64,.72);--line:rgba(196,160,255,.14);--txt:#f6f0ff;--mut:#a99bc9}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--txt);font-family:'Outfit',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-size:15px;overflow-x:hidden}
+body{min-height:100vh;background:radial-gradient(120% 60% at 50% -10%,#3b1678 0%,transparent 60%),radial-gradient(80% 50% at 100% 60%,rgba(245,197,66,.08),transparent 70%),var(--bg);padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+button{font-family:inherit;border:0;cursor:pointer;color:inherit;background:none}
+.lbl{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.hd{padding:calc(var(--sa-top,0px) + 8px) 16px 8px;max-width:480px;margin:0 auto}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,var(--p),var(--p2));box-shadow:0 6px 20px rgba(124,58,237,.5),inset 0 1px 0 rgba(255,255,255,.3)}
+h1{font-size:24px;font-weight:800;letter-spacing:-.02em;background:linear-gradient(180deg,#fff,var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lang{display:flex;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:12px;padding:3px}
+.lang button{padding:6px 10px;border-radius:9px;font-size:12px;font-weight:700;color:var(--mut);transition:.2s}
+.lang button.on{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#3a1d00}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.05);backdrop-filter:blur(12px)}
+.total{margin-top:16px;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden}
+.total:after{content:"";position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(245,197,66,.25),transparent 70%)}
+.big{font-size:32px;font-weight:900;letter-spacing:-.02em;color:var(--gold2);text-shadow:0 0 24px rgba(245,197,66,.45)}
+.big small{font-size:15px;color:var(--mut);font-weight:600}
+.chip{display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;background:rgba(124,58,237,.25);border:1px solid rgba(168,85,247,.4);font-size:13px;font-weight:600;z-index:1}
+main{max-width:480px;margin:0 auto;padding:0 16px}
+.view{display:none;animation:fade .3s ease}.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.wheelWrap{position:relative;width:min(86vw,340px);aspect-ratio:1;margin:24px auto 8px}
+.glow{position:absolute;inset:-8%;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,.55),transparent 65%);filter:blur(10px);animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.6;transform:scale(.96)}}
+#wheel{position:relative;width:100%;height:100%;filter:drop-shadow(0 18px 30px rgba(0,0,0,.55))}
+.lt{animation:blink 1.2s infinite}.lt.b{animation-delay:.6s}
+.fast .lt{animation-duration:.25s}
+@keyframes blink{50%{opacity:.25}}
+.pointer{position:absolute;left:50%;top:-14px;width:44px;height:58px;margin-left:-22px;transform-origin:50% 12px;z-index:3;filter:drop-shadow(0 4px 6px rgba(0,0,0,.5))}
+.pointer.tk{animation:tk .12s ease-out}
+@keyframes tk{40%{transform:rotate(-22deg)}100%{transform:rotate(0)}}
+.hub{position:absolute;left:50%;top:50%;width:24%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;z-index:2;background:radial-gradient(circle at 35% 30%,#fff6d0,var(--gold) 45%,var(--gold3));color:#3a1d00;font-weight:900;font-size:15px;letter-spacing:.06em;box-shadow:0 0 0 5px rgba(58,20,110,.9),0 0 24px rgba(245,197,66,.7),inset 0 -4px 8px rgba(0,0,0,.25);transition:transform .15s}
+.hub:active{transform:translate(-50%,-50%) scale(.92)}
+.status{text-align:center;font-size:15px;color:var(--mut);min-height:22px;margin:8px 0 16px}
+.status b{color:var(--gold2);font-variant-numeric:tabular-nums}
+.cta{width:100%;height:56px;border-radius:18px;font-size:17px;font-weight:800;letter-spacing:.02em;color:#3a1d00;background:linear-gradient(180deg,var(--gold2),var(--gold) 55%,var(--gold3));box-shadow:0 10px 26px rgba(245,197,66,.35),inset 0 1px 0 rgba(255,255,255,.6);transition:transform .15s,opacity .2s,filter .2s}
+.cta:active{transform:scale(.97)}
+.cta.off{filter:grayscale(.7) brightness(.7);box-shadow:none}
+.adBtn{display:none;width:100%;height:50px;margin-top:12px;border-radius:16px;font-size:15px;font-weight:800;letter-spacing:.01em;color:var(--gold2);background:linear-gradient(135deg,rgba(124,58,237,.95),rgba(168,85,247,.8));border:1px solid rgba(245,197,66,.55);box-shadow:0 8px 22px rgba(124,58,237,.45),0 0 18px rgba(245,197,66,.2),inset 0 1px 0 rgba(255,255,255,.2);transition:transform .15s,opacity .2s;position:relative;overflow:hidden;align-items:center;justify-content:center}
+.adBtn.show{display:flex;animation:fade .3s ease}
+.adBtn:after{content:"";position:absolute;top:0;left:0;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,224,138,.3),transparent);transform:translateX(-150%) skewX(-20deg);animation:shine 2.8s ease-in-out infinite}
+@keyframes shine{60%,100%{transform:translateX(320%) skewX(-20deg)}}
+.adBtn:active{transform:scale(.97)}
+.adBtn:disabled{opacity:.6}
+.prize .adBtn{margin:0 0 12px}
+.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.invite{margin-top:16px;padding:16px;display:flex;align-items:center;gap:12px}
+.invite .ic{width:48px;height:48px;flex:none;border-radius:16px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,#ec4899,var(--p));box-shadow:0 6px 18px rgba(236,72,153,.35)}
+.invite h3{font-size:16px;font-weight:700}.invite p{font-size:13px;color:var(--mut);margin-top:2px}
+.btn2{flex:none;padding:12px 16px;border-radius:14px;font-weight:700;font-size:14px;background:linear-gradient(135deg,var(--p),var(--p2));box-shadow:0 6px 18px rgba(124,58,237,.45);transition:transform .15s}
+.btn2:active{transform:scale(.95)}
+.sec{margin:24px 0 12px;display:flex;align-items:center;justify-content:space-between}
+.sec h2{font-size:19px;font-weight:800}
+.list{padding:8px}
+.it{display:flex;align-items:center;gap:12px;padding:10px;border-radius:14px;transition:background .2s}
+.it.me{background:linear-gradient(90deg,rgba(245,197,66,.18),rgba(245,197,66,.04));box-shadow:inset 0 0 0 1px rgba(245,197,66,.35)}
+.rk{width:28px;text-align:center;font-weight:800;color:var(--mut);font-size:15px}
+.av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:15px;flex:none;background:linear-gradient(135deg,var(--p),#ec4899)}
+.nm{flex:1;min-width:0;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nm small{display:block;font-weight:500;color:var(--mut);font-size:12px}
+.vl{font-weight:800;color:var(--gold2);font-variant-numeric:tabular-nums}
+.tag{font-size:10px;font-weight:800;letter-spacing:.1em;padding:3px 7px;border-radius:6px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#3a1d00;margin-left:6px}
+.sk{height:58px;border-radius:14px;margin:4px 0;background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.09),rgba(255,255,255,.04));background-size:200% 100%;animation:sk 1.2s infinite}
+@keyframes sk{to{background-position:-200% 0}}
+.empty{text-align:center;padding:24px 16px;color:var(--mut)}.empty div{font-size:36px;margin-bottom:8px}
+nav{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom));width:min(92vw,360px);display:flex;padding:6px;gap:6px;border-radius:22px;background:rgba(22,11,46,.86);border:1px solid var(--line);backdrop-filter:blur(16px);box-shadow:0 12px 30px rgba(0,0,0,.5);z-index:10}
+nav button{flex:1;height:48px;border-radius:16px;font-weight:700;font-size:14px;color:var(--mut);display:flex;align-items:center;justify-content:center;gap:8px;transition:.2s}
+nav button.on{color:#fff;background:linear-gradient(135deg,var(--p),var(--p2));box-shadow:0 6px 16px rgba(124,58,237,.45)}
+.ov{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:24px;background:rgba(8,3,20,.7);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .25s}
+.ov.on{opacity:1;pointer-events:auto}
+.prize{position:relative;width:100%;max-width:340px;padding:32px 24px 24px;text-align:center;border-radius:28px;overflow:hidden;background:linear-gradient(180deg,#2c145c,#170a33);border:1px solid rgba(245,197,66,.45);box-shadow:0 0 60px rgba(245,197,66,.35),0 20px 50px rgba(0,0,0,.6);transform:scale(.8);transition:transform .35s cubic-bezier(.2,1.4,.4,1)}
+.ov.on .prize{transform:scale(1)}
+.rays{position:absolute;left:50%;top:70px;width:420px;height:420px;margin:-210px 0 0 -210px;background:repeating-conic-gradient(rgba(245,197,66,.14) 0 10deg,transparent 10deg 20deg);border-radius:50%;animation:spin 12s linear infinite;-webkit-mask:radial-gradient(circle,#000 20%,transparent 65%);mask:radial-gradient(circle,#000 20%,transparent 65%)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pe{position:relative;font-size:64px;animation:pop .6s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{from{transform:scale(0) rotate(-30deg)}}
+.prize .lbl{position:relative;margin-top:8px;color:var(--gold2)}
+.pv{position:relative;font-size:48px;font-weight:900;letter-spacing:-.02em;color:var(--gold2);text-shadow:0 0 30px rgba(245,197,66,.6);margin:4px 0}
+.prize p{position:relative;color:var(--mut);margin-bottom:20px;font-size:15px}
+#cf{position:fixed;inset:0;pointer-events:none;z-index:30;width:100%;height:100%}
+.toast{position:fixed;left:50%;top:calc(var(--sa-top,0px) + 16px);transform:translate(-50%,-20px);opacity:0;padding:12px 18px;border-radius:14px;background:#2a1556;border:1px solid var(--line);font-weight:600;font-size:14px;z-index:40;transition:.25s;box-shadow:0 10px 30px rgba(0,0,0,.5);max-width:90vw;text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+footer{text-align:center;font-size:11px;color:rgba(169,155,201,.5);margin:28px 0 8px;letter-spacing:.06em}
+</style>
+</head>
+<body>
+<header class="hd">
+  <div class="row">
+    <div class="brand"><div class="logo">🎡</div><div><div class="lbl" data-t="giveaway"></div><h1>Lucky Wheel</h1></div></div>
+    <div class="lang"><button data-l="en">EN</button><button data-l="fr">FR</button></div>
+  </div>
+  <div class="card total">
+    <div><div class="lbl" data-t="total"></div><div class="big"><span id="tot">0</span> <small>pts</small></div></div>
+    <div class="chip">🎟️ <b id="spinsN">0</b> <span data-t="spins"></span></div>
+  </div>
+</header>
+<main>
+  <section class="view on" id="v-spin">
+    <div class="wheelWrap" id="ww">
+      <div class="glow"></div>
+      <svg id="wheel" viewBox="-210 -210 420 420"></svg>
+      <div class="pointer" id="ptr"><svg viewBox="0 0 44 58" width="44" height="58"><defs><linearGradient id="pg" x1="0" x2="1"><stop offset="0" stop-color="#ffe9a8"/><stop offset=".5" stop-color="#f5c542"/><stop offset="1" stop-color="#b9820f"/></linearGradient></defs><path d="M22 56 L5 16 A18 18 0 1 1 39 16 Z" fill="url(#pg)" stroke="#5b2a00" stroke-width="2"/><circle cx="22" cy="14" r="6" fill="#3a1470"/><circle cx="20" cy="12" r="2" fill="#fff" opacity=".7"/></svg></div>
+      <button class="hub" id="hub" data-t="spinHub"></button>
+    </div>
+    <div class="status" id="status"></div>
+    <button class="cta" id="spinBtn" data-t="spinNow"></button>
+    <button class="adBtn" id="adBtn" data-t="adSpin"></button>
+    <div class="card invite">
+      <div class="ic">💌</div>
+      <div style="flex:1;min-width:0"><h3 data-t="inviteT"></h3><p id="invD"></p></div>
+      <button class="btn2" id="invBtn" data-t="invite"></button>
+    </div>
+  </section>
+  <section class="view" id="v-win">
+    <div class="sec"><h2 data-t="bigWins"></h2><span class="lbl">🔥 1000 · 250 · 100</span></div>
+    <div class="card list" id="bigList"></div>
+    <div class="sec"><h2 data-t="board"></h2><span class="lbl">TOP 20</span></div>
+    <div class="card list" id="board"></div>
+  </section>
+  <footer>Made with SayApp</footer>
+</main>
+<nav><button class="on" data-v="spin">🎡 <span data-t="tabSpin"></span></button><button data-v="win">🏆 <span data-t="tabWin"></span></button></nav>
+<div class="ov" id="ov"><div class="prize"><div class="rays"></div><div class="pe" id="pE">🎉</div><div class="lbl" id="pL"></div><div class="pv" id="pV"></div><p id="pT"></p><button class="adBtn" id="x2Btn"></button><button class="cta" id="pOk"></button></div></div>
+<canvas id="cf"></canvas>
+<div class="toast" id="toast"></div>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="kwegehkb" data-full="1"></script>
+<script>
+const T={en:{giveaway:'Daily giveaway',total:'Total points',spins:'spins',spinHub:'SPIN',spinNow:'Spin the wheel',free:'✨ Your free daily spin is ready',bonus:'🎟️ Bonus spin ready',next:'Next free spin in',noSpin:'No spin left, invite a friend for a bonus spin!',inviteT:'Invite friends',inviteD:'+1 spin for every friend who joins',joined:'friends joined',invite:'Invite',tabSpin:'Spin',tabWin:'Winners',bigWins:'Big wins',board:'Leaderboard',emptyB:'No big wins yet. The first 100+ could be yours!',emptyL:'No players yet. Spin to open the leaderboard!',you:'you',won:'You won',jackpot:'JACKPOT!',again:'Not this time',againT:'So close! Come back for your next spin.',wonT:'Points added to your total.',jackT:'Incredible! The rarest prize of the wheel.',ok:'Awesome!',okAgain:'Got it',shareText:'Spin the Lucky Wheel with me and win points every day! 🎡',shared:'Invite link ready to share',againSeg:'TRY AGAIN',best:'biggest win',pts:'pts',err:'Connection issue, please retry',adSpin:'🎬 Watch an ad: +1 spin',adX2:'🎬 x2 my win',adNone:'No video available right now, try later',adGot:'🎟️ +1 spin added!',adDoubled:'🔥 Win doubled!'},
+fr:{giveaway:'Cadeau du jour',total:'Points totaux',spins:'tours',spinHub:'TOURNER',spinNow:'Tourner la roue',free:'✨ Ton tour gratuit du jour est prêt',bonus:'🎟️ Tour bonus prêt',next:'Prochain tour gratuit dans',noSpin:'Plus de tour, invite un ami pour un tour bonus !',inviteT:'Invite tes amis',inviteD:'+1 tour pour chaque ami qui rejoint',joined:'amis inscrits',invite:'Inviter',tabSpin:'Roue',tabWin:'Gagnants',bigWins:'Gros gains',board:'Classement',emptyB:'Aucun gros gain pour le moment. Le premier 100+ peut être le tien !',emptyL:'Aucun joueur pour le moment. Tourne pour ouvrir le classement !',you:'toi',won:'Tu as gagné',jackpot:'JACKPOT !',again:'Pas cette fois',againT:'Presque ! Reviens pour ton prochain tour.',wonT:'Points ajoutés à ton total.',jackT:'Incroyable ! Le lot le plus rare de la roue.',ok:'Génial !',okAgain:'Compris',shareText:'Tourne la Lucky Wheel avec moi et gagne des points chaque jour ! 🎡',shared:'Lien d\'invitation prêt à partager',againSeg:'REJOUE',best:'plus gros gain',pts:'pts',err:'Problème de connexion, réessaie',adSpin:'🎬 Regarde une pub : +1 tour',adX2:'🎬 x2 mon gain',adNone:'Aucune vidéo disponible pour le moment, réessaie plus tard',adGot:'🎟️ +1 tour ajouté !',adDoubled:'🔥 Gain doublé !'}};
+const SEG=[{v:10,c:['#8b5cf6','#5b21b6'],w:30},{v:25,c:['#ec4899','#9d174d'],w:20},{v:50,c:['#14b8a6','#0f766e'],w:14},{v:0,c:['#475569','#1e293b'],w:16},{v:100,c:['#f97316','#9a3412'],w:8},{v:25,c:['#6366f1','#3730a3'],w:20},{v:250,c:['#06b6d4','#0e7490'],w:3},{v:1000,c:['#ffe08a','#c8921a'],w:1}];
+const DAY=864e5,$=id=>document.getElementById(id);
+let L='en',S={total:0,last:0,used:0,bonus:0,refDone:null,best:0,lang:null},invites=0,uid=0,rot=0,spinning=false,tg=null,winLoaded=false,shown=0;
+const t=k=>(T[L]&&T[L][k])||T.en[k];
+const hap=k=>{try{SayApp.haptic(k)}catch(e){}};
+function applyLang(){document.documentElement.lang=L;document.querySelectorAll('[data-t]').forEach(e=>e.textContent=t(e.dataset.t));document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===L));renderInvite()}
+function pt(a,r){const x=a*Math.PI/180;return[(r*Math.sin(x)).toFixed(2),(-r*Math.cos(x)).toFixed(2)]}
+function buildWheel(){
+  let d='<defs>',seg='';
+  SEG.forEach((s,i)=>{d+=`<radialGradient id="g${i}" cx="0" cy="0" r="180" gradientUnits="userSpaceOnUse"><stop offset=".15" stop-color="${s.c[1]}"/><stop offset="1" stop-color="${s.c[0]}"/></radialGradient>`;
+    const a=i*45-22.5,[x1,y1]=pt(a,180),[x2,y2]=pt(a+45,180);
+    seg+=`<path d="M0 0L${x1} ${y1}A180 180 0 0 1 ${x2} ${y2}Z" fill="url(#g${i})" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>`;
+    const dark=s.v===1000?'#4a2500':'#fff';
+    let lab=s.v===0?`<text y="-128" font-size="14" font-weight="800" fill="#e2e8f0" letter-spacing="1">${t('againSeg')}</text><text y="-104" font-size="22">🍀</text>`
+      :s.v===1000?`<text y="-130" font-size="30" font-weight="900" fill="${dark}">1000</text><text y="-108" font-size="12" font-weight="800" fill="${dark}" letter-spacing="2">JACKPOT</text><text y="-80" font-size="18">💎</text>`
+      :`<text y="-122" font-size="${s.v>=100?30:34}" font-weight="900" fill="${dark}">${s.v}</text><text y="-100" font-size="11" font-weight="700" fill="rgba(255,255,255,.75)" letter-spacing="2">PTS</text>`;
+    seg+=`<g transform="rotate(${i*45})" text-anchor="middle" style="paint-order:stroke" stroke="rgba(0,0,0,.18)" stroke-width="1">${lab}</g>`});
+  d+=`<linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe9a8"/><stop offset=".5" stop-color="#c8921a"/><stop offset="1" stop-color="#ffe08a"/></linearGradient><radialGradient id="gl" cx="-60" cy="-90" r="230" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".5" stop-color="#fff" stop-opacity=".05"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>`;
+  let lights='';for(let i=0;i<24;i++){const[x,y]=pt(i*15,195);lights+=`<circle class="lt${i%2?' b':''}" cx="${x}" cy="${y}" r="4.5" fill="#fff6d0" style="filter:drop-shadow(0 0 4px #f5c542)"/>`}
+  $('wheel').innerHTML=d+`<circle r="207" fill="url(#rim)"/><circle r="186" fill="#2a0f55"/><g id="rot" style="transform:rotate(${rot}deg)">${seg}</g><circle r="180" fill="url(#gl)"/>${lights}`;
+}
+function animNum(el,from,to){const st=performance.now(),d=900;(function f(n){const p=Math.min(1,(n-st)/d),e=1-Math.pow(1-p,3);el.textContent=Math.round(from+(to-from)*e).toLocaleString();if(p<1)requestAnimationFrame(f)})(st)}
+const canFree=()=>Date.now()-S.last>=DAY;
+const extra=()=>Math.max(0,invites+(S.bonus||0)-S.used);
+const pad=n=>String(n).padStart(2,'0');
+function updateSpins(){
+  const n=(canFree()?1:0)+extra();$('spinsN').textContent=n;
+  const left=S.last+DAY-Date.now(),h=Math.floor(left/36e5),m=Math.floor(left%36e5/6e4),s=Math.floor(left%6e4/1e3);
+  const cd=`${t('next')} <b>${pad(h)}:${pad(m)}:${pad(s)}</b>`;
+  $('status').innerHTML=canFree()?t('free'):extra()>0?`${t('bonus')} · ${cd}`:cd;
+  $('spinBtn').classList.toggle('off',n<1||spinning);
+  $('adBtn').classList.toggle('show',n<1&&!spinning);
+}
+let adBusy=false;
+async function adSpin(){
+  if(adBusy||spinning)return;adBusy=true;const b=$('adBtn');b.disabled=true;hap('tap');
+  let ok=false;try{ok=await SayApp.ad()}catch(e){}
+  adBusy=false;b.disabled=false;
+  if(ok){S.bonus=(S.bonus||0)+1;save();hap('ok');toast(t('adGot'))}else toast(t('adNone'));
+  updateSpins();
+}
+function renderInvite(){$('invD').textContent=invites>0?`${invites} ${t('joined')} · ${t('inviteD')}`:t('inviteD')}
+let saveT=null;function save(){clearTimeout(saveT);saveT=setTimeout(async()=>{try{await SayApp.set('state',S);await SayApp.set('points',S.total);await SayApp.set('best',S.best)}catch(e){}},300)}
+function toast(m){const e=$('toast');e.textContent=m;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2600)}
+function pick(){const tot=SEG.reduce((a,s)=>a+s.w,0);let r=Math.random()*tot;for(let i=0;i<SEG.length;i++){r-=SEG[i].w;if(r<0)return i}return 0}
+function tickPtr(){const p=$('ptr');p.classList.remove('tk');void p.offsetWidth;p.classList.add('tk');const n=performance.now();if(n-shown>70){shown=n;hap('tap')}}
+function spin(){
+  if(spinning)return;
+  const free=canFree();
+  if(!free&&extra()<1){hap('error');const b=$('spinBtn');b.classList.remove('shake');void b.offsetWidth;b.classList.add('shake');toast(t('noSpin'));return}
+  spinning=true;hap('tap');
+  const idx=pick(),v=SEG[idx].v;
+  if(free)S.last=Date.now();else S.used++;
+  const before=S.total;S.total+=v;if(v>S.best)S.best=v;save();updateSpins();
+  const from=rot,base=((360-idx*45-(rot%360))%360+360)%360,to=rot+360*6+base+(Math.random()*28-14),dur=5600,st=performance.now(),g=$('rot');
+  let lastK=Math.floor((from+22.5)/45);
+  (function f(n){const p=Math.min(1,(n-st)/dur),e=1-Math.pow(1-p,4),cur=from+(to-from)*e;g.style.transform=`rotate(${cur}deg)`;
+    const k=Math.floor((cur+22.5)/45);if(k!==lastK){lastK=k;tickPtr()}
+    if(p<1)requestAnimationFrame(f);else{rot=to;setTimeout(()=>result(v,before),350)}})(st);
+}
+function result(v,before){
+  const w=$('ww');w.classList.add('fast');
+  $('pE').textContent=v===0?'🍀':v>=1000?'💎':v>=100?'🏆':'🎉';
+  $('pL').textContent=v===0?t('again'):v>=1000?t('jackpot'):t('won');
+  $('pV').textContent=v===0?'0':'+'+v.toLocaleString();
+  $('pT').textContent=v===0?t('againT'):v>=1000?t('jackT'):t('wonT');
+  $('pOk').textContent=v===0?t('okAgain'):t('ok');
+  const x=$('x2Btn');x.classList.toggle('show',v>0);x.disabled=false;x.textContent=t('adX2');
+  x.onclick=async()=>{if(x.disabled)return;x.disabled=true;hap('tap');let ok=false;try{ok=await SayApp.ad()}catch(e){}
+    if(ok){S.total+=v;if(v*2>S.best)S.best=v*2;save();$('pV').textContent='+'+(v*2).toLocaleString();x.classList.remove('show');hap('ok');burst(140);toast(t('adDoubled'));if(!$('ov').classList.contains('on'))animNum($('tot'),S.total-v,S.total)}
+    else{x.disabled=false;toast(t('adNone'))}};
+  $('ov').classList.add('on');
+  if(v>0){hap('ok');burst(v>=1000?260:v>=100?160:90)}else hap('error');
+  $('pOk').onclick=()=>{$('ov').classList.remove('on');w.classList.remove('fast');spinning=false;if(v>0)animNum($('tot'),before,S.total);updateSpins();winLoaded=false};
+}
+const cv=$('cf'),cx=cv.getContext('2d');let parts=[],running=false;
+function burst(n){cv.width=innerWidth*devicePixelRatio;cv.height=innerHeight*devicePixelRatio;cx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+  const cols=['#f5c542','#ffe08a','#a855f7','#ec4899','#14b8a6','#fff'];
+  for(let i=0;i<n;i++)parts.push({x:innerWidth/2,y:innerHeight*.42,vx:(Math.random()-.5)*14,vy:-Math.random()*14-4,w:6+Math.random()*6,h:4+Math.random()*5,c:cols[i%cols.length],r:Math.random()*6,vr:(Math.random()-.5)*.4,l:1});
+  if(!running){running=true;requestAnimationFrame(loop)}}
+function loop(){cx.clearRect(0,0,innerWidth,innerHeight);parts.forEach(p=>{p.vy+=.32;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.l-=.006;cx.save();cx.globalAlpha=Math.max(0,p.l);cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);cx.restore()});
+  parts=parts.filter(p=>p.l>0&&p.y<innerHeight+40);if(parts.length)requestAnimationFrame(loop);else{running=false;cx.clearRect(0,0,innerWidth,innerHeight)}}
+const esc=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+async function loadWinners(){
+  const sk='<div class="sk"></div><div class="sk"></div><div class="sk"></div>';$('bigList').innerHTML=sk;$('board').innerHTML=sk;
+  let top=[],best=[];try{[top,best]=await Promise.all([SayApp.top('points',20),SayApp.top('best',20)])}catch(e){toast(t('err'))}
+  winLoaded=true;
+  const big=(best||[]).filter(x=>x.value>=100).slice(0,8);
+  $('bigList').innerHTML=big.length?big.map(x=>`<div class="it${x.me?' me':''}"><div class="av" style="background:linear-gradient(135deg,#f5c542,#c8921a);color:#3a1d00">${x.value>=1000?'💎':'🏆'}</div><div class="nm">${esc(x.name)}${x.me?' ('+t('you')+')':''}<small>${t('best')}</small></div><div class="vl">+${x.value.toLocaleString()}${x.value>=1000?'<span class="tag">JACKPOT</span>':''}</div></div>`).join(''):`<div class="empty"><div>🎁</div>${t('emptyB')}</div>`;
+  const md=['🥇','🥈','🥉'];
+  $('board').innerHTML=(top||[]).length?top.map((x,i)=>`<div class="it${x.me?' me':''}"><div class="rk">${md[i]||i+1}</div><div class="av">${esc((x.name||'?').trim().charAt(0).toUpperCase()||'?')}</div><div class="nm">${esc(x.name)}${x.me?' ('+t('you')+')':''}</div><div class="vl">${Number(x.value).toLocaleString()} <small style="color:var(--mut);font-weight:600">${t('pts')}</small></div></div>`).join(''):`<div class="empty"><div>🏁</div>${t('emptyL')}</div>`;
+}
+async function getLink(){
+  try{if(typeof SayApp.shareLink==='function'){const l=await SayApp.shareLink('ref_'+uid);if(l)return l}}catch(e){}
+  const u=new URL(location.href);u.hash='';u.searchParams.set('startapp','ref_'+uid);return u.toString();
+}
+async function invite(){
+  hap('tap');const link=await getLink(),url='https://t.me/share/url?url='+encodeURIComponent(link)+'&text='+encodeURIComponent(t('shareText'));
+  try{if(tg&&tg.openTelegramLink){tg.openTelegramLink(url);return}}catch(e){}
+  try{if(navigator.share){await navigator.share({text:t('shareText'),url:link});return}}catch(e){}
+  try{await navigator.clipboard.writeText(link);toast(t('shared'))}catch(e){toast(link)}
+}
+function show(v){document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));hap('tap');if(v==='win'&&!winLoaded)loadWinners()}
+async function init(){
+  tg=window.Telegram&&Telegram.WebApp;try{tg.ready();tg.expand();tg.setHeaderColor&&tg.setHeaderColor('#0d061c')}catch(e){}
+  const u=(window.SayApp&&SayApp.user)||(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user)||{};uid=u.id||0;
+  try{const s=await SayApp.get('state');if(s&&typeof s==='object')Object.assign(S,s)}catch(e){}
+  L=S.lang||((u.language_code||navigator.language||'').toLowerCase().startsWith('fr')?'fr':'en');
+  applyLang();buildWheel();$('tot').textContent='0';animNum($('tot'),0,S.total);updateSpins();
+  $('spinBtn').onclick=spin;$('hub').onclick=spin;$('invBtn').onclick=invite;$('adBtn').onclick=adSpin;
+  document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>show(b.dataset.v));
+  document.querySelectorAll('.lang button').forEach(b=>b.onclick=()=>{if(L===b.dataset.l)return;L=b.dataset.l;S.lang=L;hap('tap');applyLang();buildWheel();updateSpins();if(winLoaded)loadWinners();save()});
+  setInterval(()=>{if(!spinning)updateSpins()},1000);
+  const sp=(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.start_param)||new URLSearchParams(location.search).get('startapp')||'';
+  if(/^ref_\d+$/.test(sp)){const r=sp.slice(4);if(r!==String(uid)&&!S.refDone){S.refDone=r;try{await SayApp.set('inv_'+r,1)}catch(e){}save()}}
+  try{const a=await SayApp.top('inv_'+uid,100);invites=(a||[]).filter(x=>!x.me).length}catch(e){}
+  renderInvite();updateSpins();
+}
+window.addEventListener('load',init);
+</script>
+</body>
+</html>

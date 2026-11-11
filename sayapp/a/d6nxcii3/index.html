@@ -1,0 +1,310 @@
+<!-- sayapp d6nxcii3 v3 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sneaker Drop</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f4f0;--card:#fff;--ink:#0b0b0c;--ink2:#55575c;--mute:#9a9ca1;--line:#e6e6e1;--lime:#c6ff1a;--lime2:#a8e600;
+--sh:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);--sh2:0 2px 4px rgba(0,0,0,.06),0 18px 40px rgba(0,0,0,.12)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--ink);font-family:'Space Grotesk',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;overflow-x:hidden}
+body{min-height:100vh;font-size:15px}
+button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer}
+.wrap{max-width:480px;margin:0 auto;padding:0 16px calc(110px + env(safe-area-inset-bottom))}
+header{display:flex;align-items:center;justify-content:space-between;padding:calc(var(--sa-top,0px) + 8px) 0 8px;position:relative}
+.brand{font-weight:700;font-size:22px;letter-spacing:-.5px;display:flex;align-items:center;gap:8px}
+.brand i{width:10px;height:10px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 3px var(--ink),0 0 14px var(--lime)}
+.lang{display:flex;background:#fff;border-radius:999px;padding:3px;box-shadow:var(--sh)}
+.lang button{font-size:12px;font-weight:700;padding:6px 10px;border-radius:999px;letter-spacing:1px;transition:.2s}
+.lang button.on{background:var(--ink);color:var(--lime)}
+.lbl{font-size:11px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--mute)}
+h1{font-size:32px;line-height:1.05;letter-spacing:-1.2px;font-weight:700;margin:12px 0 16px}
+h1 em{font-style:normal;background:var(--lime);padding:0 6px;border-radius:8px}
+.pane{display:none}.pane.on{display:block;animation:pin .32s cubic-bezier(.2,.8,.2,1)}
+@keyframes pin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.banner{background:var(--ink);color:#fff;border-radius:24px;padding:20px;position:relative;overflow:hidden;box-shadow:var(--sh2)}
+.banner:before{content:'';position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(198,255,26,.45),transparent 65%)}
+.banner .lbl{color:var(--lime);display:flex;align-items:center;gap:6px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pulse 1.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(198,255,26,.7)}100%{box-shadow:0 0 0 10px rgba(198,255,26,0)}}
+.banner h3{font-size:20px;margin:6px 0 14px;letter-spacing:-.4px;position:relative}
+.cd{display:flex;gap:8px;position:relative}
+.cd div{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:10px 0;text-align:center}
+.cd b{display:block;font-size:24px;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+.cd span{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#a5a7ab}
+.raf{position:relative;display:flex;align-items:center;gap:12px;margin-top:12px;padding:10px 10px 10px 14px;border-radius:18px;background:linear-gradient(135deg,rgba(198,255,26,.12),rgba(255,255,255,.04));border:1px solid rgba(198,255,26,.28)}
+.raf .el{flex:none}
+.raf .el span{display:block;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#a5a7ab;font-weight:600}
+.raf .el b{display:flex;align-items:center;gap:4px;font-size:24px;color:var(--lime);letter-spacing:-.5px;font-variant-numeric:tabular-nums;text-shadow:0 0 14px rgba(198,255,26,.5)}
+.raf .el b i{font-style:normal;font-size:18px;text-shadow:none}
+#ent{display:inline-block}
+#ent.bump{animation:pop .45s}
+.adb{flex:1;min-width:0;background:linear-gradient(135deg,var(--lime),var(--lime2));color:var(--ink);font-weight:700;font-size:13.5px;line-height:1.25;padding:12px 10px;border-radius:14px;box-shadow:0 6px 20px rgba(198,255,26,.35),inset 0 1px 0 rgba(255,255,255,.5);transition:transform .15s,opacity .2s,background .25s}
+.adb:active{transform:scale(.96)}
+.adb:disabled{opacity:.6}
+.adb.done{background:rgba(198,255,26,.1);color:var(--lime);box-shadow:inset 0 0 0 1px rgba(198,255,26,.35);opacity:1}
+.chips{display:flex;gap:8px;overflow-x:auto;margin:20px -16px 16px;padding:0 16px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:10px 16px;border-radius:999px;background:#fff;font-weight:600;font-size:14px;box-shadow:var(--sh);transition:transform .15s,background .2s,color .2s}
+.chip.on{background:var(--ink);color:var(--lime)}
+.chip:active,.card:active,.btn:active,.sz:active{transform:scale(.96)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:var(--card);border-radius:22px;padding:10px;box-shadow:var(--sh);position:relative;transition:transform .18s;animation:pin .4s both;cursor:pointer;min-width:0}
+.card.big{grid-column:1/-1}
+.pic{border-radius:16px;height:130px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.card.big .pic{height:190px}
+.pic svg{width:88%;transform:rotate(-8deg);filter:drop-shadow(0 10px 10px rgba(0,0,0,.18))}
+.card.big .pic svg{width:72%}
+.heart{position:absolute;top:8px;right:8px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;transition:transform .2s;z-index:2}
+.heart svg{width:18px;transform:none;filter:none}
+.heart.on svg path{fill:#ff2d55;stroke:#ff2d55}
+.heart.pop{animation:pop .35s}
+@keyframes pop{50%{transform:scale(1.35)}}
+.ci{padding:10px 4px 4px}
+.ci .n{font-weight:700;font-size:15px;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci .r{display:flex;justify-content:space-between;align-items:center;margin-top:4px;font-size:13px}
+.price{font-weight:700}
+.low{font-size:11px;font-weight:700;color:#d1002c}
+.ok{font-size:11px;color:var(--mute);font-weight:600}
+.tagp{position:absolute;left:8px;top:8px;background:var(--ink);color:var(--lime);font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:5px 8px;border-radius:8px;z-index:2}
+.empty{text-align:center;padding:48px 24px;background:#fff;border-radius:24px;box-shadow:var(--sh)}
+.empty .e{font-size:48px;margin-bottom:12px}
+.empty h3{font-size:19px;margin-bottom:6px}.empty p{color:var(--ink2);margin-bottom:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--ink);color:#fff;font-weight:700;font-size:16px;padding:16px 22px;border-radius:18px;transition:transform .15s,opacity .2s}
+.btn.lime{background:var(--lime);color:var(--ink);box-shadow:0 8px 24px rgba(168,230,0,.45)}
+.btn:disabled{opacity:.45}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.stat{background:var(--ink);color:#fff;border-radius:20px;padding:16px}
+.stat b{display:block;font-size:26px;margin-top:4px;color:var(--lime)}
+.order{display:flex;gap:12px;align-items:center;background:#fff;border-radius:20px;padding:10px;box-shadow:var(--sh);margin-bottom:10px;animation:pin .35s both}
+.order .pic{width:84px;height:68px;flex:none}
+.order .pic svg{width:92%}
+.order .n{font-weight:700}.order .m{font-size:13px;color:var(--ink2);margin-top:2px}
+.st{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;margin-top:6px;background:#f0ffd0;color:#3d5a00;padding:4px 8px;border-radius:8px}
+nav{position:fixed;left:50%;bottom:calc(12px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);border-radius:24px;padding:6px;display:flex;gap:4px;box-shadow:0 14px 40px rgba(0,0,0,.3);z-index:20;width:calc(100% - 32px);max-width:420px}
+nav button{flex:1;color:#8d8f94;font-size:12px;font-weight:600;padding:8px 4px;border-radius:18px;display:flex;flex-direction:column;align-items:center;gap:3px;transition:.2s;position:relative}
+nav button svg{width:22px;height:22px}
+nav button.on{color:var(--ink);background:var(--lime)}
+.badge{position:absolute;top:4px;right:calc(50% - 22px);background:#ff2d55;color:#fff;font-size:10px;min-width:16px;height:16px;border-radius:8px;padding:0 4px;display:none;align-items:center;justify-content:center}
+foot,.foot{display:block;text-align:center;font-size:11px;color:var(--mute);margin-top:28px;letter-spacing:.5px}
+.sheet{position:fixed;inset:0;background:var(--bg);z-index:30;transform:translateX(100%);transition:transform .38s cubic-bezier(.2,.8,.2,1);overflow-y:auto;overflow-x:hidden}
+.sheet.on{transform:none}
+.hero{position:relative;height:340px;display:flex;align-items:center;justify-content:center;border-radius:0 0 32px 32px;padding-top:var(--sa-top,0px)}
+.hero svg.shoe{width:84%;max-width:380px;transform:rotate(-10deg);filter:drop-shadow(0 22px 18px rgba(0,0,0,.22));animation:float 3.4s ease-in-out infinite}
+@keyframes float{50%{transform:rotate(-7deg) translateY(-10px)}}
+.top{position:absolute;left:16px;right:16px;top:calc(var(--sa-top,0px) + 8px);display:flex;justify-content:space-between}
+.rb{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;box-shadow:var(--sh);transition:transform .15s}
+.rb:active{transform:scale(.9)}
+.rb svg{width:20px}
+.rb.on svg path{fill:#ff2d55;stroke:#ff2d55}
+.body{max-width:480px;margin:0 auto;padding:20px 16px calc(120px + env(safe-area-inset-bottom))}
+.body h2{font-size:30px;letter-spacing:-1px;line-height:1.05;margin:6px 0 10px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.bigp{font-size:22px;font-weight:700}
+.stock{display:inline-flex;align-items:center;gap:6px;background:var(--ink);color:var(--lime);font-weight:700;font-size:13px;padding:8px 12px;border-radius:12px}
+.stock.calm{background:#fff;color:var(--ink);box-shadow:var(--sh)}
+.story{color:var(--ink2);line-height:1.55;font-size:15.5px;margin:8px 0 22px}
+.sizes{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}
+.sz{background:#fff;border-radius:14px;padding:13px 0;font-weight:700;font-size:15px;box-shadow:var(--sh);transition:transform .15s,background .2s,color .2s}
+.sz.on{background:var(--ink);color:var(--lime);box-shadow:0 0 0 2px var(--lime),var(--sh)}
+.sz:disabled{opacity:.35;text-decoration:line-through;box-shadow:none;background:#ececE7}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.buybar{position:fixed;left:0;right:0;bottom:0;z-index:31;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--bg) 30%);transform:translateY(120%);transition:transform .38s cubic-bezier(.2,.8,.2,1)}
+.buybar.on{transform:none}
+.buybar .btn{width:100%;max-width:448px;margin:0 auto;display:flex}
+.toast{position:fixed;left:50%;top:calc(var(--sa-top,0px) + 16px);transform:translate(-50%,-20px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:16px;font-weight:600;font-size:14px;opacity:0;transition:.25s;z-index:50;pointer-events:none;white-space:nowrap;box-shadow:var(--sh2)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.cf{position:fixed;width:9px;height:14px;z-index:60;pointer-events:none;border-radius:2px;animation:cf 1.3s ease-out forwards}
+@keyframes cf{to{transform:translate(var(--x),var(--y)) rotate(var(--r));opacity:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><i></i>SNEAKER DROP</div>
+    <div class="lang"><button data-lang="en">EN</button><button data-lang="fr">FR</button></div>
+  </header>
+  <section class="pane on" id="p-shop">
+    <h1 id="hero"></h1>
+    <div class="banner">
+      <div class="lbl"><span class="dot"></span><span data-t="next"></span></div>
+      <h3 data-t="dropname"></h3>
+      <div class="cd"><div><b id="cd-d">0</b><span data-t="d"></span></div><div><b id="cd-h">00</b><span data-t="h"></span></div><div><b id="cd-m">00</b><span data-t="m"></span></div><div><b id="cd-s">00</b><span data-t="s"></span></div></div>
+      <div class="raf"><div class="el"><span data-t="entries"></span><b><i>🎟️</i><span id="ent" style="font-size:24px;color:var(--lime);letter-spacing:-.5px;text-transform:none">1</span></b></div><button class="adb" id="rafbtn"></button></div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="grid" id="grid"></div>
+  </section>
+  <section class="pane" id="p-favs"><h1 data-t="favsT"></h1><div id="favgrid"></div></section>
+  <section class="pane" id="p-orders"><h1 data-t="ordersT"></h1><div id="olist"></div></section>
+  <span class="foot">Made with SayApp</span>
+</div>
+<nav>
+  <button data-tab="shop" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span data-t="shop"></span></button>
+  <button data-tab="favs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span data-t="favs"></span><i class="badge" id="fb"></i></button>
+  <button data-tab="orders"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h8M8 17h5"/></svg><span data-t="orders"></span></button>
+</nav>
+<div class="sheet" id="sheet"></div>
+<div class="buybar" id="buybar"><button class="btn lime" id="buybtn"></button></div>
+<div class="toast" id="toast"></div>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="d6nxcii3" data-full="1"></script>
+<script>
+window.addEventListener('load', async () => {
+const L = {
+ en:{hero:'Limited pairs.<br><em>Zero restocks.</em>',next:'Next drop',dropname:'Neon Orbit 02 drops in',d:'Days',h:'Hrs',m:'Min',s:'Sec',shop:'Shop',favs:'Favorites',orders:'My orders',favsT:'Saved pairs',ordersT:'My orders',
+  new:'New drops',run:'Running',bb:'Basketball',life:'Lifestyle',left:'Only {n} left',inst:'{n} in stock',sold:'Sold out',story:'The story',size:'Select size (EU)',buy:'Pay',pick:'Pick your size first',
+  paid:'Order sent, complete your payment',cancel:'Payment not completed',ef:'No saved pairs yet',efp:'Tap the heart on any sneaker to keep it here.',eo:'No orders yet',eop:'Your copped pairs will show up here.',browse:'Browse drops',
+  ships:'Order received, ships in 48h',spent:'Total spent',pairs:'Pairs copped',sz:'Size',ltd:'Limited',entries:'Your entries',adbtn:'🎬 Watch an ad: x2 raffle entries',x2on:'✓ x2 entries active',adload:'Loading...',adok:'Entries doubled for this drop',adno:'No ad available right now'},
+ fr:{hero:'Paires limitées.<br><em>Zéro restock.</em>',next:'Prochain drop',dropname:'Neon Orbit 02 sort dans',d:'Jours',h:'H',m:'Min',s:'Sec',shop:'Boutique',favs:'Favoris',orders:'Commandes',favsT:'Paires sauvées',ordersT:'Mes commandes',
+  new:'Nouveautés',run:'Running',bb:'Basket',life:'Lifestyle',left:'Plus que {n}',inst:'{n} en stock',sold:'Épuisé',story:"L'histoire",size:'Choisis ta taille (EU)',buy:'Payer',pick:"Choisis d'abord ta taille",
+  paid:'Commande envoyée, finalise ton paiement',cancel:'Paiement non finalisé',ef:'Aucun favori',efp:'Touche le cœur sur une paire pour la garder ici.',eo:'Aucune commande',eop:'Tes paires achetées apparaîtront ici.',browse:'Voir les drops',
+  ships:'Commande reçue, expédiée sous 48h',spent:'Total dépensé',pairs:'Paires achetées',sz:'Taille',ltd:'Limitée',entries:'Tes participations',adbtn:'🎬 Regarde une pub : x2 participations',x2on:'✓ x2 participations actif',adload:'Chargement...',adok:'Participations doublées pour ce drop',adno:'Aucune pub disponible pour le moment'}
+};
+const P = [
+ {id:1,c:'new',n:'Volt Phantom 01',pr:450,st:3,col:['#111','#c6ff1a','#f2f2f2','#e9ffd0'],s:{en:'Born in a blacked-out studio in Seoul, the Phantom glows lime under streetlights. Knit upper, carbon plate, 300 pairs worldwide.',fr:'Née dans un studio plongé dans le noir à Séoul, la Phantom brille vert citron sous les lampadaires. Tige en maille, plaque carbone, 300 paires dans le monde.'}},
+ {id:2,c:'new',n:'Midnight Pulse',pr:390,st:7,col:['#1c2340','#7c8cff','#ffffff','#e3e7ff'],s:{en:'Inspired by 2am city runs. Reflective violet panels catch every headlight, foam midsole keeps the rhythm.',fr:'Inspirée des runs urbains à 2h du matin. Panneaux violets réfléchissants et semelle en mousse pour garder le rythme.'}},
+ {id:3,c:'new',n:'Chrome Rift',pr:520,st:2,col:['#d9dde3','#111111','#9aa3ad','#eef0f3'],s:{en:'Liquid metal finish, hand-sprayed in Milan. Every pair carries a numbered heel tab. Built to be seen.',fr:'Finition métal liquide, peinte à la main à Milan. Chaque paire porte un talon numéroté. Faite pour être vue.'}},
+ {id:4,c:'run',n:'Aero Stride X',pr:340,st:9,col:['#ff5a36','#ffffff','#222222','#ffe5dd'],s:{en:'Tested on the Berlin marathon course. Ultra-light mesh, 8mm drop, a rocker sole that rolls you forward.',fr:'Testée sur le parcours du marathon de Berlin. Mesh ultra léger, drop de 8mm, semelle rocker qui te propulse.'}},
+ {id:5,c:'run',n:'Tempo Ghost',pr:310,st:4,col:['#f4f4f4','#c6ff1a','#111111','#f0f0ec'],s:{en:'Clean white with a lime flash, for runners who hate noise but love speed. Barely 210g per shoe.',fr:'Blanc pur avec un éclair citron, pour les coureurs qui aiment la vitesse sans le bruit. À peine 210g la chaussure.'}},
+ {id:6,c:'run',n:'Ridge Runner',pr:360,st:6,col:['#5b6b3a','#ffb800','#2b2b2b','#eef0df'],s:{en:'Trail grip meets city style. Lugged outsole, water-repellent upper, made for wet Sunday mornings.',fr:'Grip trail et style urbain. Semelle crantée, tige déperlante, faite pour les dimanches pluvieux.'}},
+ {id:7,c:'bb',n:'Court King Hi',pr:480,st:3,hi:1,col:['#b0122b','#ffffff','#ffffff','#ffe1e5'],s:{en:'A tribute to 90s playground legends. Full-grain leather, padded collar, ankle lockdown for every crossover.',fr:"Un hommage aux légendes des playgrounds des années 90. Cuir pleine fleur, col rembourré, maintien pour chaque crossover."}},
+ {id:8,c:'bb',n:'Dunk Theory',pr:430,st:8,hi:1,col:['#ffffff','#1f6bff','#1f6bff','#e2ecff'],s:{en:'Royal blue on crisp white. Responsive cushioning tuned for vertical, approved by streetball crews in Paris.',fr:'Bleu roi sur blanc éclatant. Amorti réactif pensé pour la détente, validé par les crews streetball de Paris.'}},
+ {id:9,c:'bb',n:'Rim Breaker',pr:460,st:1,hi:1,col:['#ff9d00','#111111','#ffffff','#fff0d6'],s:{en:'Orange like the ball, loud like the crowd. Last pair of the Summer League run, never coming back.',fr:'Orange comme le ballon, bruyante comme le public. Dernière paire de la Summer League, elle ne reviendra pas.'}},
+ {id:10,c:'life',n:'Concrete Low',pr:280,st:12,col:['#8c8c88','#ffffff','#e8e3d6','#ecebe7'],s:{en:'Inspired by brutalist architecture. Suede overlays, gum-tone sole, the pair that goes with everything.',fr:"Inspirée de l'architecture brutaliste. Empiècements en daim, semelle gomme, la paire qui va avec tout."}},
+ {id:11,c:'life',n:'Sunday Suede',pr:300,st:5,col:['#c9a27a','#5a3b22','#f3ead9','#f6ece0'],s:{en:'Caramel suede and cream sole, for slow coffee mornings and gallery afternoons. Soft as it looks.',fr:'Daim caramel et semelle crème, pour les cafés tranquilles et les après-midi au musée. Aussi douce qu’elle en a l’air.'}},
+ {id:12,c:'life',n:'Metro Classic',pr:260,st:10,col:['#0b0b0c','#ffffff','#ffffff','#e8e8e8'],s:{en:'Black and white, no compromise. A modern take on the subway icon, cushioned for 20k steps a day.',fr:'Noir et blanc, sans compromis. Une version moderne de l’icône du métro, amortie pour 20 000 pas par jour.'}}
+];
+const SIZES=[38,39,40,41,42,43,44,45,46];
+const EUR={1:219,2:189,3:249,4:169,5:159,6:179,7:229,8:209,9:219,10:139,11:149,12:129};
+const eur=p=>(EUR[p.id]||0)+' EUR';
+const CATS=['new','run','bb','life'];
+let lang='en',cat='new',favs=[],orders=[],cur=null,size=null,favTimer=null,raffle={drop:0,x2:false},adBusy=false;
+const $=s=>document.querySelector(s);
+const t=k=>(L[lang]&&L[lang][k]!=null?L[lang][k]:L.en[k]);
+const hap=x=>{try{SayApp.haptic(x)}catch(e){}};
+const stockOf=p=>Math.max(0,p.st-orders.filter(o=>o.id===p.id).length);
+const soldSize=(p,s)=>(p.id*7+s)%5===0;
+const heartSvg='<svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" fill="none" stroke="#0b0b0c" stroke-width="2" stroke-linejoin="round"/></svg>';
+function shoe(p,cls){const [u,a,so]=p.col;
+ return `<svg class="${cls||''}" viewBox="0 0 200 110"><ellipse cx="100" cy="104" rx="84" ry="4" fill="rgba(0,0,0,.12)"/>
+ ${p.hi?`<path d="M90 30 Q92 8 100 6 L124 6 Q128 20 126 34 Z" fill="${u}" stroke="rgba(0,0,0,.12)"/>`:''}
+ <path d="M14 78 L18 52 Q22 40 36 40 L70 38 Q86 36 96 22 L118 20 Q128 34 140 46 Q170 56 186 66 Q194 72 192 80 Z" fill="${u}" stroke="rgba(0,0,0,.12)"/>
+ <path d="M96 22 L118 20 L121 29 L99 31 Z" fill="rgba(0,0,0,.25)"/>
+ <path d="M36 72 Q92 74 156 50 Q124 68 58 79 Z" fill="${a}"/>
+ <g stroke="${a==='#ffffff'?'#bbb':a}" stroke-width="3" stroke-linecap="round"><path d="M104 36 l6 -4"/><path d="M113 41 l6 -4"/><path d="M122 46 l6 -4"/><path d="M131 51 l6 -4"/></g>
+ <path d="M10 80 Q10 96 26 96 L184 96 Q196 96 195 84 L194 78 Q160 82 10 78 Z" fill="${so}" stroke="rgba(0,0,0,.15)"/>
+ <path d="M14 88 L192 88" stroke="rgba(0,0,0,.12)" stroke-width="2"/></svg>`}
+function card(p,i,big){const n=stockOf(p),f=favs.includes(p.id);
+ return `<div class="card${big?' big':''}" data-open="${p.id}" style="animation-delay:${i*45}ms">
+ <div class="pic" style="background:radial-gradient(circle at 50% 40%,#fff,${p.col[3]} 70%)">
+ ${p.st<=3?`<span class="tagp">${t('ltd')}</span>`:''}
+ <button class="heart${f?' on':''}" data-fav="${p.id}">${heartSvg}</button>${shoe(p)}</div>
+ <div class="ci"><div class="n">${p.n}</div><div class="r"><span class="price">${eur(p)}</span>
+ ${n===0?`<span class="low">${t('sold')}</span>`:n<=5?`<span class="low">${t('left').replace('{n}',n)}</span>`:`<span class="ok">${t('inst').replace('{n}',n)}</span>`}</div></div></div>`}
+function renderShop(){
+ $('#chips').innerHTML=CATS.map(c=>`<button class="chip${c===cat?' on':''}" data-cat="${c}">${t(c)}</button>`).join('');
+ $('#grid').innerHTML=P.filter(p=>p.c===cat).map((p,i)=>card(p,i,i===0)).join('');}
+function renderFavs(){const list=P.filter(p=>favs.includes(p.id));
+ const b=$('#fb');b.style.display=favs.length?'flex':'none';b.textContent=favs.length;
+ $('#favgrid').innerHTML=list.length?`<div class="grid">${list.map((p,i)=>card(p,i)).join('')}</div>`:
+ `<div class="empty"><div class="e">🤍</div><h3>${t('ef')}</h3><p>${t('efp')}</p><button class="btn" data-tab="shop">${t('browse')}</button></div>`;}
+function renderOrders(){
+ if(!orders.length){$('#olist').innerHTML=`<div class="empty"><div class="e">📦</div><h3>${t('eo')}</h3><p>${t('eop')}</p><button class="btn" data-tab="shop">${t('browse')}</button></div>`;return}
+ const spent=orders.reduce((s,o)=>s+(EUR[o.id]||0),0);
+ $('#olist').innerHTML=`<div class="stats"><div class="stat"><span class="lbl">${t('pairs')}</span><b class="num" data-v="${orders.length}">0</b></div><div class="stat"><span class="lbl">${t('spent')}</span><b><span class="num" data-v="${spent}">0</span> EUR</b></div></div>`+
+ orders.slice().reverse().map((o,i)=>{const p=P.find(x=>x.id===o.id);if(!p)return'';
+ return `<div class="order" data-open="${p.id}" style="animation-delay:${i*50}ms"><div class="pic" style="background:${p.col[3]}">${shoe(p)}</div>
+ <div style="min-width:0"><div class="n">${p.n}</div><div class="m">${t('sz')} EU ${o.size} · ${EUR[o.id]||o.price} EUR · ${new Date(o.at).toLocaleDateString(lang==='fr'?'fr-FR':'en-GB',{day:'numeric',month:'short'})}</div>
+ <span class="st">✓ ${t('ships')}</span></div></div>`}).join('');
+ document.querySelectorAll('.num').forEach(el=>animNum(el,+el.dataset.v));}
+function animNum(el,to){const t0=performance.now();const f=n=>{const k=Math.min(1,(n-t0)/700);el.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+function renderAll(){
+ document.querySelectorAll('[data-t]').forEach(el=>el.textContent=t(el.dataset.t));
+ $('#hero').innerHTML=t('hero');
+ document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('on',b.dataset.lang===lang));
+ document.documentElement.lang=lang;
+ renderShop();renderFavs();renderOrders();renderRaffle();if(cur)renderSheet();}
+function renderRaffle(){const x2=raffle.drop===target.getTime()&&!!raffle.x2;const el=$('#ent'),b=$('#rafbtn');if(!el||!b)return;
+ const v=String(x2?2:1);if(el.textContent!==v){el.textContent=v;el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump')}
+ if(adBusy)return;b.disabled=x2;b.classList.toggle('done',x2);b.textContent=x2?t('x2on'):t('adbtn');}
+async function watchAd(){const b=$('#rafbtn');if(adBusy||b.disabled)return;adBusy=true;b.disabled=true;b.textContent=t('adload');hap('tap');
+ let ok=false;try{ok=await SayApp.ad()}catch(e){ok=false}
+ adBusy=false;
+ if(ok===true){raffle={drop:target.getTime(),x2:true};try{await SayApp.set('raffle',raffle)}catch(e){}hap('ok');confetti();toast('✓ '+t('adok'))}
+ else{hap('error');toast(t('adno'))}
+ renderRaffle();}
+function renderSheet(){const p=cur,n=stockOf(p),f=favs.includes(p.id);
+ $('#sheet').innerHTML=`<div class="hero" style="background:radial-gradient(circle at 50% 45%,#fff,${p.col[3]} 70%)">
+ <div class="top"><button class="rb" id="back"><svg viewBox="0 0 24 24" fill="none" stroke="#0b0b0c" stroke-width="2.4" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+ <button class="rb${f?' on':''}" data-fav="${p.id}">${heartSvg}</button></div>${shoe(p,'shoe')}</div>
+ <div class="body"><span class="lbl">${t(p.c)}</span><h2>${p.n}</h2>
+ <div class="row"><span class="bigp">${eur(p)}</span>
+ <span class="stock${n>5?' calm':''}">${n>0&&n<=5?'<span class="dot"></span>':''}${n===0?t('sold'):n<=5?t('left').replace('{n}',n):t('inst').replace('{n}',n)}</span></div>
+ <div style="height:20px"></div><span class="lbl">${t('story')}</span><p class="story">${p.s[lang]||p.s.en}</p>
+ <span class="lbl">${t('size')}</span><div class="sizes" id="sizes">${SIZES.map(s=>`<button class="sz${s===size?' on':''}" data-size="${s}" ${soldSize(p,s)||n===0?'disabled':''}>${s}</button>`).join('')}</div>
+ <span class="foot">Made with SayApp</span></div>`;
+ const bb=$('#buybtn');bb.textContent=n===0?t('sold'):`${t('buy')} ${eur(p)}`;bb.disabled=n===0;}
+const TG=window.Telegram&&Telegram.WebApp;
+function openP(id){cur=P.find(p=>p.id===id);size=null;renderSheet();$('#sheet').scrollTop=0;
+ $('#sheet').classList.add('on');$('#buybar').classList.add('on');hap('tap');
+ try{TG.BackButton.show()}catch(e){}}
+function closeP(){$('#sheet').classList.remove('on');$('#buybar').classList.remove('on');cur=null;try{TG.BackButton.hide()}catch(e){}}
+try{TG.BackButton.onClick(closeP)}catch(e){}
+function go(tab){document.querySelectorAll('.pane').forEach(p=>p.classList.toggle('on',p.id==='p-'+tab));
+ document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));
+ if(tab==='orders')renderOrders();window.scrollTo({top:0,behavior:'smooth'});hap('tap');}
+function toast(m){const el=$('#toast');el.textContent=m;el.classList.add('on');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('on'),2200)}
+function confetti(){const cols=['#c6ff1a','#0b0b0c','#ffffff','#a8e600'];
+ for(let i=0;i<40;i++){const d=document.createElement('div');d.className='cf';d.style.left=(window.innerWidth/2)+'px';d.style.bottom='90px';
+ d.style.background=cols[i%4];d.style.boxShadow='0 0 0 1px rgba(0,0,0,.08)';
+ d.style.setProperty('--x',(Math.random()*360-180)+'px');d.style.setProperty('--y',(-Math.random()*500-150)+'px');d.style.setProperty('--r',(Math.random()*720)+'deg');
+ document.body.appendChild(d);setTimeout(()=>d.remove(),1400)}}
+function toggleFav(id,btn){const i=favs.indexOf(id);if(i>=0)favs.splice(i,1);else favs.push(id);
+ hap(i>=0?'tap':'ok');
+ document.querySelectorAll(`[data-fav="${id}"]`).forEach(b=>{b.classList.toggle('on',i<0);b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop')});
+ renderFavs();clearTimeout(favTimer);favTimer=setTimeout(()=>{try{SayApp.set('favs',favs)}catch(e){}},1500);}
+async function buy(){const p=cur;if(!p||stockOf(p)<1)return;
+ if(!size){hap('error');toast(t('pick'));const g=$('#sizes');g.classList.remove('shake');void g.offsetWidth;g.classList.add('shake');return}
+ const bb=$('#buybtn');bb.disabled=true;let ok=true;const label=p.n+' - EU '+size,amount=eur(p);
+ try{const r=await SayApp.pay(label,amount);if(r===false)ok=false}catch(e){ok=false}
+ bb.disabled=false;
+ if(ok){try{await SayApp.submit({type:'order',product:p.n,size:'EU '+size,price:amount,user:(SayApp.user&&SayApp.user.first_name)||'',userId:(SayApp.user&&SayApp.user.id)||''})}catch(e){}
+  orders.push({id:p.id,size,price:EUR[p.id],at:Date.now()});try{await SayApp.set('orders',orders)}catch(e){}
+  hap('ok');confetti();toast('✓ '+t('paid'));size=null;renderSheet();renderShop();renderFavs();renderOrders();}
+ else{hap('error');toast(t('cancel'))}}
+$('#buybtn').addEventListener('click',buy);
+$('#rafbtn').addEventListener('click',watchAd);
+document.addEventListener('click',e=>{const el=e.target.closest('[data-fav],[data-open],[data-tab],[data-cat],[data-size],[data-lang],#back');if(!el)return;
+ if(el.id==='back')return closeP();
+ if(el.dataset.fav){e.stopPropagation();return toggleFav(+el.dataset.fav,el)}
+ if(el.dataset.open)return openP(+el.dataset.open);
+ if(el.dataset.tab)return go(el.dataset.tab);
+ if(el.dataset.cat){cat=el.dataset.cat;hap('tap');return renderShop()}
+ if(el.dataset.size){size=+el.dataset.size;hap('tap');document.querySelectorAll('.sz').forEach(b=>b.classList.toggle('on',+b.dataset.size===size));return}
+ if(el.dataset.lang){lang=el.dataset.lang;hap('tap');renderAll();try{SayApp.set('lang',lang)}catch(e){}}});
+function nextDrop(){const n=new Date(),d=new Date(n);d.setHours(18,0,0,0);d.setDate(d.getDate()+((6-d.getDay()+7)%7));if(d<=n)d.setDate(d.getDate()+7);return d}
+let target=nextDrop();const pad=x=>String(x).padStart(2,'0');
+function tick(){let ms=target-Date.now();if(ms<=0){target=nextDrop();ms=target-Date.now();renderRaffle()}
+ const s=Math.floor(ms/1000);$('#cd-d').textContent=Math.floor(s/86400);$('#cd-h').textContent=pad(Math.floor(s%86400/3600));
+ $('#cd-m').textContent=pad(Math.floor(s%3600/60));$('#cd-s').textContent=pad(s%60);}
+tick();setInterval(tick,1000);
+const tl=((window.SayApp&&SayApp.user&&SayApp.user.language_code)||(TG&&TG.initDataUnsafe&&TG.initDataUnsafe.user&&TG.initDataUnsafe.user.language_code)||navigator.language||'en').slice(0,2);
+lang=L[tl]?tl:'en';
+renderAll();
+try{const [sl,sf,so]=await Promise.all([SayApp.get('lang'),SayApp.get('favs'),SayApp.get('orders')]);
+ if(sl&&L[sl])lang=sl;if(Array.isArray(sf))favs=sf;if(Array.isArray(so))orders=so;}catch(e){}
+try{const sr=await SayApp.get('raffle');if(sr&&typeof sr==='object')raffle=sr;}catch(e){}
+try{const pur=await SayApp.purchases();let changed=false;
+ if(Array.isArray(pur))P.forEach(p=>{const bought=pur.filter(x=>x.item==='snk_'+p.id);const have=orders.filter(o=>o.id===p.id).length;
+  bought.slice(have).forEach(x=>{orders.push({id:p.id,size:'-',price:x.stars||p.pr,at:x.at?new Date(x.at).getTime()||Date.now():Date.now()});changed=true})});
+ if(changed){orders.sort((a,b)=>a.at-b.at);SayApp.set('orders',orders)}}catch(e){}
+renderAll();
+});
+</script>
+</body>
+</html>

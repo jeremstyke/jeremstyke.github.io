@@ -1,0 +1,312 @@
+<!-- sayapp an65edyg v1 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Raffle Rocket</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--main:#7C5CFF;--main2:#A78BFF;--acc:#FFC94D;--acc2:#FF9F43;--bg:#0A0A13;--card:#14142A;--card2:#1B1B36;--line:rgba(255,255,255,.07);--txt:#F2F1FF;--mut:#9895B8;--ok:#3DDC97}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--txt);font-family:'Sora',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-size:15px;overflow-x:hidden}
+body{min-height:100vh;background:radial-gradient(600px 400px at 85% -10%,rgba(124,92,255,.28),transparent 60%),radial-gradient(500px 360px at -10% 30%,rgba(255,201,77,.08),transparent 60%),var(--bg)}
+.wrap{max-width:460px;margin:0 auto;padding:0 16px calc(96px + env(safe-area-inset-bottom))}
+header{padding-top:calc(var(--sa-top,0px) + 8px);padding-bottom:8px;display:flex;align-items:center;gap:12px}
+.logo{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:linear-gradient(135deg,var(--main),#5236e0);box-shadow:0 8px 24px rgba(124,92,255,.45)}
+header h1{font-size:20px;font-weight:800;letter-spacing:-.3px}
+header p{font-size:12px;color:var(--mut)}
+.pill{margin-left:auto;padding:8px 12px;border-radius:999px;background:var(--card2);border:1px solid var(--line);font-weight:700;font-size:14px;display:flex;gap:6px;align-items:center}
+.lbl{font-size:11px;text-transform:uppercase;letter-spacing:1.6px;color:var(--mut);font-weight:600;margin:24px 4px 8px}
+.card{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 12px 32px rgba(0,0,0,.35)}
+.hero{position:relative;overflow:hidden;margin-top:8px;background:linear-gradient(135deg,#2A1C7A,#16123A 60%,#1E1430);text-align:center;padding:24px 20px}
+.hero:before{content:"";position:absolute;inset:-40%;background:conic-gradient(from 0deg,transparent,rgba(255,201,77,.18),transparent 30%);animation:spin 9s linear infinite}
+.hero>*{position:relative}
+@keyframes spin{to{transform:rotate(360deg)}}
+.prize-emoji{font-size:52px;filter:drop-shadow(0 8px 20px rgba(255,201,77,.5));animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.hero h2{font-size:22px;font-weight:800;margin:8px 0 4px}
+.hero p{color:#CFC8FF;font-size:14px}
+.cd{display:flex;justify-content:center;gap:8px;margin-top:16px}
+.cd div{background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:12px;padding:8px 0;width:62px}
+.cd b{display:block;font-size:20px;font-weight:800;font-variant-numeric:tabular-nums}
+.cd span{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:1px}
+.big{font-size:56px;font-weight:800;line-height:1;background:linear-gradient(135deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.row{display:flex;align-items:center;gap:12px}
+.btn{width:100%;border:0;border-radius:16px;padding:16px;font:700 16px 'Sora',sans-serif;color:#fff;background:linear-gradient(135deg,var(--main),#5A3BF0);box-shadow:0 10px 28px rgba(124,92,255,.45);cursor:pointer;transition:transform .15s,opacity .2s}
+.btn:active{transform:scale(.96)}
+.btn.gold{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#2A1A00;box-shadow:0 10px 28px rgba(255,170,60,.35)}
+.btn.ghost{background:var(--card2);box-shadow:none;border:1px solid var(--line)}
+.btn:disabled{opacity:.45;pointer-events:none}
+input[type=text]{width:100%;padding:14px 16px;border-radius:14px;background:#0F0F1F;border:1px solid var(--line);color:var(--txt);font:500 15px 'Sora',sans-serif;outline:none;transition:border .2s}
+input[type=text]:focus{border-color:var(--main)}
+.f{margin-bottom:12px}.f label{display:block;font-size:12px;color:var(--mut);margin:0 0 6px 4px}
+.chk{display:flex;gap:12px;align-items:center;padding:12px 4px;cursor:pointer;font-size:14px}
+.chk i{width:24px;height:24px;border-radius:8px;border:2px solid var(--main);display:grid;place-items:center;flex:none;transition:.2s;font-style:normal;font-size:14px}
+.chk.on i{background:var(--main)}
+.ways{display:grid;gap:8px}
+.way{display:flex;align-items:center;gap:12px;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.way .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:20px;background:rgba(124,92,255,.15)}
+.way b{font-size:14px}.way small{display:block;color:var(--mut);font-size:12px;margin-top:2px}
+.way .pts{margin-left:auto;font-weight:800;color:var(--acc);font-size:14px}
+.code{font-size:30px;font-weight:800;letter-spacing:4px;text-align:center;padding:16px;border-radius:16px;background:#0F0F1F;border:1px dashed rgba(167,139,255,.5);margin:12px 0;color:var(--main2)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;text-align:center}
+.stat b{font-size:26px;font-weight:800;display:block}.stat span{font-size:12px;color:var(--mut)}
+.lb{display:grid;gap:6px}
+.lr{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:var(--card);border:1px solid var(--line)}
+.lr.me{border-color:var(--main);background:rgba(124,92,255,.12)}
+.lr .n{width:26px;font-weight:800;color:var(--mut);text-align:center}
+.lr .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.lr .v{font-weight:800;color:var(--acc)}.lr .o{font-size:11px;color:var(--mut);width:44px;text-align:right}
+.empty{text-align:center;color:var(--mut);padding:24px 8px;font-size:14px}
+.empty div{font-size:36px;margin-bottom:8px}
+.winner{text-align:center}
+.reel{font-size:24px;font-weight:800;margin:12px 0;min-height:32px;color:var(--acc)}
+nav{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom));width:calc(100% - 32px);max-width:420px;display:flex;gap:4px;padding:6px;border-radius:22px;background:rgba(20,20,42,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);box-shadow:0 12px 40px rgba(0,0,0,.5);z-index:10}
+nav button{flex:1;border:0;background:none;color:var(--mut);font:600 12px 'Sora',sans-serif;padding:8px 0;border-radius:16px;display:flex;flex-direction:column;align-items:center;gap:2px;transition:.2s;cursor:pointer}
+nav button span{font-size:20px}
+nav button.on{background:linear-gradient(135deg,rgba(124,92,255,.35),rgba(124,92,255,.15));color:#fff}
+.page{display:none;animation:in .3s ease}.page.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+.toast{position:fixed;left:50%;top:calc(var(--sa-top,0px) + 16px);transform:translate(-50%,-20px);opacity:0;background:#fff;color:#14142A;padding:12px 18px;border-radius:14px;font-weight:700;font-size:14px;transition:.3s;z-index:30;pointer-events:none;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.cf{position:fixed;width:8px;height:12px;top:-20px;z-index:20;border-radius:2px;pointer-events:none}
+.float{position:fixed;font-weight:800;font-size:24px;color:var(--acc);pointer-events:none;z-index:25;animation:fl 1s ease-out forwards}
+@keyframes fl{to{transform:translateY(-80px);opacity:0}}
+.foot{text-align:center;font-size:11px;color:#55537A;margin-top:32px}
+.note{font-size:12px;color:var(--mut);text-align:center;margin-top:10px;line-height:1.5}
+.skel{height:48px;border-radius:14px;background:linear-gradient(90deg,var(--card),var(--card2),var(--card));background-size:200% 100%;animation:sk 1.2s infinite}
+@keyframes sk{to{background-position:-200% 0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo">🚀</div>
+  <div><h1>Raffle Rocket</h1><p id="roundTxt">Monthly channel giveaway</p></div>
+  <div class="pill">🎟️ <span id="tkTop">0</span></div>
+</header>
+
+<section class="page on" id="p-enter">
+  <div class="card hero">
+    <div class="prize-emoji">🎁</div>
+    <h2>3 months of Telegram Premium</h2>
+    <p id="heroSub">Draw in</p>
+    <div class="cd"><div><b id="cdD">0</b><span>days</span></div><div><b id="cdH">0</b><span>hrs</span></div><div><b id="cdM">0</b><span>min</span></div><div><b id="cdS">0</b><span>sec</span></div></div>
+  </div>
+
+  <div id="signupBox">
+    <div class="lbl">Join the giveaway</div>
+    <div class="card">
+      <div class="f"><label>Your name</label><input type="text" id="inName" maxlength="40" placeholder="Alex"></div>
+      <div class="f"><label>Telegram username</label><input type="text" id="inHandle" maxlength="40" placeholder="@username"></div>
+      <div class="f"><label>Invite code (optional, +2 tickets)</label><input type="text" id="inRef" maxlength="12" placeholder="e.g. 4F8K2Q"></div>
+      <div class="chk" id="chkJoin"><i></i>I joined the channel and accept the rules</div>
+      <button class="btn gold" id="btnJoin" disabled>Enter the giveaway 🎟️</button>
+      <p class="note">One entry per Telegram account. You start with 3 tickets.</p>
+    </div>
+  </div>
+
+  <div id="myBox" style="display:none">
+    <div class="lbl">Your tickets</div>
+    <div class="card" style="text-align:center">
+      <div class="big" id="tkBig">0</div>
+      <p style="color:var(--mut);margin-top:8px;font-size:14px" id="oddsTxt">Every ticket is one more chance to win</p>
+      <div style="margin-top:16px"><button class="btn" id="btnCheck">Daily check-in +1 🎟️</button></div>
+    </div>
+  </div>
+
+  <div class="lbl">How to earn tickets</div>
+  <div class="ways">
+    <div class="way"><div class="ic">✍️</div><div><b>Sign up</b><small>Enter once per round</small></div><div class="pts">+3</div></div>
+    <div class="way"><div class="ic">👥</div><div><b>Invite a friend</b><small>When they enter with your code</small></div><div class="pts">+5</div></div>
+    <div class="way"><div class="ic">📅</div><div><b>Daily check-in</b><small>Come back every day</small></div><div class="pts">+1</div></div>
+    <div class="way"><div class="ic">🤝</div><div><b>Use a friend's code</b><small>Bonus for joining via invite</small></div><div class="pts">+2</div></div>
+  </div>
+</section>
+
+<section class="page" id="p-invite">
+  <div class="lbl">Your invite code</div>
+  <div class="card">
+    <p style="color:var(--mut);font-size:14px;line-height:1.5">Share your code. Each friend who enters the giveaway with it gives you <b style="color:var(--acc)">+5 tickets</b>, and they get +2.</p>
+    <div class="code" id="myCode">------</div>
+    <div style="display:grid;gap:8px">
+      <button class="btn" id="btnShare">Share with friends 📨</button>
+      <button class="btn ghost" id="btnCopy">Copy code</button>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat"><b id="stF">0</b><span>friends joined</span></div>
+    <div class="stat"><b id="stT" style="color:var(--acc)">0</b><span>tickets earned</span></div>
+  </div>
+  <button class="btn ghost" id="btnRefresh" style="margin-top:8px">Refresh invites ↻</button>
+</section>
+
+<section class="page" id="p-draw">
+  <div class="lbl" id="drawLbl">The draw</div>
+  <div class="card winner" id="drawCard"></div>
+  <div class="lbl">Top ticket holders</div>
+  <div class="lb" id="lb"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+  <p class="note">The winner is picked at random, weighted by tickets. Same result for everyone.</p>
+</section>
+
+<div class="foot">Made with SayApp</div>
+</div>
+
+<nav>
+  <button class="on" data-p="enter"><span>🎟️</span>Enter</button>
+  <button data-p="invite"><span>👥</span>Invite</button>
+  <button data-p="draw"><span>🏆</span>Draw</button>
+</nav>
+<div class="toast" id="toast"></div>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://jeremstyke.github.io/sayapp/sdk.js" data-app="an65edyg" data-full="1"></script>
+<script>
+window.addEventListener('load', async function(){
+  const $ = id => document.getElementById(id);
+  const tg = window.Telegram && Telegram.WebApp;
+  try{ tg && tg.ready(); tg && tg.expand(); }catch(e){}
+  let tries=0; while(!window.SayApp && tries<50){ await new Promise(r=>setTimeout(r,100)); tries++; }
+  const SA = window.SayApp || {user:{},get:async()=>null,set:async()=>{},top:async()=>[],submit:async()=>{},haptic:()=>{}};
+  const user = SA.user || {};
+  const hap = t => { try{ SA.haptic(t); }catch(e){} };
+
+  // Round = current month, draw on last day 18:00 UTC
+  const now0 = new Date();
+  const Y = now0.getUTCFullYear(), M = now0.getUTCMonth();
+  const R = Y*100 + M + 1;
+  const prevR = M===0 ? (Y-1)*100+12 : Y*100+M;
+  const DRAW = Date.UTC(Y, M+1, 0, 18, 0, 0);
+  const monthName = now0.toLocaleString('en', {month:'long', timeZone:'UTC'});
+  $('roundTxt').textContent = monthName + ' ' + Y + ' giveaway';
+
+  let myCode = user.id ? Number(user.id).toString(36).toUpperCase() : null;
+  let st = (await SA.get('rr_'+R).catch(()=>null)) || {signed:false,name:'',handle:'',days:[],ref:'',refBonus:0};
+  if(!myCode){ myCode = st.code || Math.random().toString(36).slice(2,8).toUpperCase(); st.code = myCode; }
+  let friends = 0, shownTk = 0, saveT = null;
+  const today = new Date().toISOString().slice(0,10);
+
+  function tickets(){ return st.signed ? 3 + friends*5 + st.days.length + (st.refBonus||0) : 0; }
+  function save(){ clearTimeout(saveT); saveT = setTimeout(async()=>{ try{ await SA.set('rr_'+R, st); await SA.set('tk_'+R, tickets()); }catch(e){} }, 1500); }
+  function toast(t){ const el=$('toast'); el.textContent=t; el.classList.add('show'); clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove('show'),2200); }
+  function anim(el, to){ const from = Number(el.dataset.v||0); el.dataset.v = to; const t0=performance.now(); (function f(t){ const p=Math.min(1,(t-t0)/600), e=1-Math.pow(1-p,3); el.textContent=Math.round(from+(to-from)*e); if(p<1) requestAnimationFrame(f); })(t0); }
+  function confetti(){ const c=['#7C5CFF','#FFC94D','#FF9F43','#3DDC97','#fff']; for(let i=0;i<60;i++){ const d=document.createElement('div'); d.className='cf'; d.style.left=Math.random()*100+'vw'; d.style.background=c[i%5]; document.body.appendChild(d); const x=(Math.random()-.5)*200, r=Math.random()*720; d.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:`translate(${x}px,${innerHeight+40}px) rotate(${r}deg)`,opacity:.8}],{duration:1600+Math.random()*1200,easing:'cubic-bezier(.2,.6,.4,1)'}).onfinish=()=>d.remove(); } }
+  function floatN(el, txt){ const r=el.getBoundingClientRect(); const f=document.createElement('div'); f.className='float'; f.textContent=txt; f.style.left=(r.left+r.width/2-20)+'px'; f.style.top=(r.top-10)+'px'; document.body.appendChild(f); setTimeout(()=>f.remove(),1000); }
+  const esc = s => String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  function render(){
+    const t = tickets();
+    $('signupBox').style.display = st.signed ? 'none' : '';
+    $('myBox').style.display = st.signed ? '' : 'none';
+    anim($('tkTop'), t); anim($('tkBig'), t); anim($('stF'), friends); anim($('stT'), friends*5);
+    const checked = st.days.includes(today);
+    $('btnCheck').disabled = checked || Date.now()>=DRAW;
+    $('btnCheck').textContent = checked ? 'Checked in today ✓ Come back tomorrow' : 'Daily check-in +1 🎟️';
+    $('myCode').textContent = myCode;
+  }
+
+  // Sign-up form
+  $('inName').value = user.first_name || '';
+  if(user.username) $('inHandle').value = '@'+user.username;
+  let sp = '';
+  try{ sp = (tg && tg.initDataUnsafe && tg.initDataUnsafe.start_param) || ''; }catch(e){}
+  if(sp) $('inRef').value = sp.replace(/^r_?/i,'').toUpperCase().slice(0,12);
+  let agreed = false;
+  function validate(){ $('btnJoin').disabled = !(agreed && $('inName').value.trim().length>1 && $('inHandle').value.trim().length>1) || Date.now()>=DRAW; }
+  $('chkJoin').onclick = ()=>{ agreed=!agreed; $('chkJoin').classList.toggle('on',agreed); $('chkJoin').querySelector('i').textContent = agreed?'✓':''; hap('tap'); validate(); };
+  ['inName','inHandle'].forEach(id=>$(id).addEventListener('input',validate));
+  $('btnJoin').onclick = async ()=>{
+    const b=$('btnJoin'); b.disabled=true; b.textContent='Entering...';
+    let handle = $('inHandle').value.trim(); if(handle[0]!=='@') handle='@'+handle;
+    const ref = $('inRef').value.trim().toUpperCase();
+    st.signed=true; st.name=$('inName').value.trim(); st.handle=handle; st.days=[];
+    if(ref && ref!==myCode && /^[A-Z0-9]{3,12}$/.test(ref)){ st.ref=ref; st.refBonus=2; try{ await SA.set('inv_'+ref+'_'+R, 1); }catch(e){} }
+    try{ await SA.submit({type:'giveaway_entry', round:monthName+' '+Y, name:st.name, username:handle, code:myCode, invitedBy:st.ref||'-'}); }catch(e){}
+    try{ await SA.set('rr_'+R, st); await SA.set('tk_'+R, tickets()); }catch(e){}
+    hap('ok'); confetti(); render();
+    toast(st.refBonus ? "You're in! +5 tickets 🎉" : "You're in! +3 tickets 🎉");
+    b.textContent='Enter the giveaway 🎟️';
+  };
+  $('btnCheck').onclick = ()=>{
+    if(st.days.includes(today)) return;
+    st.days.push(today); if(st.days.length>40) st.days=st.days.slice(-40);
+    hap('ok'); floatN($('btnCheck'),'+1 🎟️'); render(); save(); toast('Check-in done, +1 ticket');
+  };
+
+  // Invites
+  async function loadFriends(){
+    try{ const l = await SA.top('inv_'+myCode+'_'+R, 200) || []; friends = l.filter(x=>!x.me && Number(x.value)>0).length; }catch(e){}
+    render(); if(st.signed) save();
+  }
+  const shareText = `🎁 Win 3 months of Telegram Premium in the Raffle Rocket giveaway! Open the app from our channel and enter my code ${myCode} to get +2 bonus tickets 🎟️`;
+  $('btnShare').onclick = ()=>{
+    hap('tap');
+    const url = 'https://t.me/share/url?url='+encodeURIComponent(' ')+'&text='+encodeURIComponent(shareText);
+    try{ if(tg && tg.openTelegramLink) tg.openTelegramLink(url); else window.open(url,'_blank'); }catch(e){ window.open(url,'_blank'); }
+  };
+  $('btnCopy').onclick = async ()=>{
+    try{ await navigator.clipboard.writeText(myCode); toast('Code copied: '+myCode); hap('ok'); }catch(e){ toast('Your code: '+myCode); }
+  };
+  $('btnRefresh').onclick = async ()=>{ hap('tap'); const f0=friends; await loadFriends(); toast(friends>f0 ? `+${(friends-f0)*5} tickets from new friends!` : 'No new friends yet, keep sharing'); if(friends>f0) confetti(); };
+
+  // Draw: deterministic weighted pick
+  function rng(seed){ return function(){ seed|=0; seed=seed+0x6D2B79F5|0; let t=Math.imul(seed^seed>>>15,1|seed); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+  function pick(list, round){
+    const l = list.filter(x=>Number(x.value)>0).sort((a,b)=>String(a.name).localeCompare(String(b.name)) || b.value-a.value);
+    const total = l.reduce((s,x)=>s+Number(x.value),0); if(!total) return null;
+    let r = rng(round*7919)()*total;
+    for(const x of l){ r -= Number(x.value); if(r<0) return x; } return l[l.length-1];
+  }
+  async function loadDraw(){
+    const closed = Date.now() >= DRAW;
+    let list=[], prev=[];
+    try{ list = await SA.top('tk_'+R, 100) || []; }catch(e){}
+    try{ prev = await SA.top('tk_'+prevR, 100) || []; }catch(e){}
+    const total = list.reduce((s,x)=>s+Number(x.value||0),0);
+    const mine = tickets();
+    $('oddsTxt').textContent = total && mine ? `Your chance right now: ${(mine/Math.max(total,mine)*100).toFixed(1)}%` : 'Every ticket is one more chance to win';
+    const lb=$('lb');
+    if(!list.length){ lb.innerHTML='<div class="empty"><div>🎟️</div>No entries yet. Be the first to join!</div>'; }
+    else lb.innerHTML = list.slice(0,10).map((x,i)=>`<div class="lr ${x.me?'me':''}"><div class="n">${['🥇','🥈','🥉'][i]||i+1}</div><div class="nm">${esc(x.name||'Player')}${x.me?' (you)':''}</div><div class="v">${x.value} 🎟️</div><div class="o">${total?(x.value/total*100).toFixed(1):0}%</div></div>`).join('');
+    const card=$('drawCard');
+    if(closed){
+      $('drawLbl').textContent = monthName+' winner';
+      const w = pick(list, R);
+      card.innerHTML = w ? `<div style="font-size:48px">🏆</div><div class="lbl" style="margin:8px 0 0">Drawing among ${list.length} players</div><div class="reel" id="reel">...</div><p style="color:var(--mut);font-size:14px" id="wTxt"></p>` : '<div class="empty"><div>🌙</div>No entries this round.</div>';
+      if(w){ const names=list.map(x=>x.name||'Player'); let k=0; const iv=setInterval(()=>{ $('reel').textContent=names[k++%names.length]; },70);
+        setTimeout(()=>{ clearInterval(iv); $('reel').textContent='🎉 '+(w.name||'Player'); $('wTxt').textContent = w.me ? 'That is you! The channel admin will contact you.' : `Won with ${w.value} tickets. Congrats!`; if(w.me){confetti();hap('ok');} },2400); }
+    } else {
+      $('drawLbl').textContent = 'Next draw';
+      const w = pick(prev, prevR);
+      const d = new Date(DRAW).toLocaleString('en',{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+      card.innerHTML = `<div style="font-size:44px">🎰</div><h3 style="font-size:18px;margin:8px 0 4px">Draw on ${d}</h3><p style="color:var(--mut);font-size:14px">${list.length} players, ${total} tickets in the vault</p>`+
+        (w ? `<div style="margin-top:16px;padding:12px;border-radius:14px;background:rgba(255,201,77,.08);border:1px solid rgba(255,201,77,.25);font-size:14px">Last month's winner: <b style="color:var(--acc)">${esc(w.name||'Player')}</b></div>` : '');
+    }
+  }
+
+  // Countdown
+  function tick(){
+    const ms = Math.max(0, DRAW - Date.now());
+    $('cdD').textContent=Math.floor(ms/864e5); $('cdH').textContent=Math.floor(ms/36e5)%24; $('cdM').textContent=Math.floor(ms/6e4)%60; $('cdS').textContent=Math.floor(ms/1e3)%60;
+    $('heroSub').textContent = ms ? 'Draw in' : 'Entries closed, see the winner in Draw';
+  }
+  tick(); setInterval(tick,1000);
+
+  // Tabs
+  document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+    hap('tap');
+    document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x===b));
+    document.querySelectorAll('.page').forEach(p=>p.classList.toggle('on',p.id==='p-'+b.dataset.p));
+    if(b.dataset.p==='draw') loadDraw();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  validate(); render();
+  await loadFriends();
+  loadDraw();
+});
+</script>
+</body>
+</html>
