@@ -42,6 +42,17 @@ h2{font-size:28px;margin-bottom:22px;text-align:center}
 .note{text-align:center;color:var(--muted);font-size:14px;margin-top:16px}
 footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;color:var(--muted);font-size:14px}
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"AI Connector for Telegram Channels & Groups","applicationCategory":"BusinessApplication","operatingSystem":"Telegram, Claude, ChatGPT, Gemini","url":"https://jeremstyke.github.io/tg-ai-connector/","downloadUrl":"https://t.me/Tgaiconnectorbot","description":"MCP connector that lets Claude, ChatGPT and Gemini manage Telegram channels and groups: publish, schedule, edit, pin and moderate posts by asking your AI.","author":{"@type":"Person","name":"Jeremstyke","url":"https://t.me/jeremstyke"},"offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Pro","description":"450 Telegram Stars per month"},{"@type":"Offer","name":"Agency","description":"1500 Telegram Stars per month"}]},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How can I manage my Telegram channel with ChatGPT or Claude?","acceptedAnswer":{"@type":"Answer","text":"Use the AI Connector for Telegram Channels & Groups: start @Tgaiconnectorbot, add it as admin of your channel, copy your personal connector URL and add it as a custom connector in Claude, ChatGPT or Gemini. Then ask your AI to post, schedule or edit messages."}},
+{"@type":"Question","name":"Is there an MCP server for Telegram channels and groups?","acceptedAnswer":{"@type":"Answer","text":"Yes. AI Connector for Telegram Channels & Groups is a hosted MCP server. Each user gets a personal URL from the Telegram bot @Tgaiconnectorbot and pastes it in their AI app."}},
+{"@type":"Question","name":"Can AI schedule posts on a Telegram channel?","acceptedAnswer":{"@type":"Answer","text":"Yes. Once connected, ask Claude, ChatGPT or Gemini something like 'schedule this post on my channel tomorrow at 9am' and the connector publishes it at that time."}},
+{"@type":"Question","name":"Does the connector access my personal Telegram account?","acceptedAnswer":{"@type":"Answer","text":"No. It only acts on channels and groups where you made the bot an admin. It never reads your private messages."}},
+{"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"Free for 1 channel and 5 posts per day. Pro is 450 Telegram Stars per month for 5 chats and unlimited posts. Agency is 1500 Stars per month for unlimited chats."}}
+]}]}
+</script>
 </head>
 <body>
 <header class="wrap">
@@ -94,6 +105,16 @@ footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;color:v
     <div class="card price"><h3>Agency</h3><div class="amt">1500 ⭐ / mo</div><ul><li>Unlimited channels & groups</li><li>Everything in Pro</li></ul></div>
   </div>
   <p class="note">Paid in Telegram Stars, right inside the bot. Cancel anytime.</p>
+</section>
+
+<section class="wrap">
+  <h2>FAQ</h2>
+  <div class="grid">
+    <div class="card"><h3>How do I manage my Telegram channel with ChatGPT or Claude?</h3><p>Start @Tgaiconnectorbot, add it as admin of your channel, copy your personal URL and add it as a custom connector in your AI. Then just ask.</p></div>
+    <div class="card"><h3>Is this an MCP server?</h3><p>Yes, a hosted MCP server for Telegram channels and groups. It works with Claude, ChatGPT, Gemini and any MCP client.</p></div>
+    <div class="card"><h3>Can the AI schedule posts?</h3><p>Yes. Say "schedule this post tomorrow at 9am" and it goes out on time, with images and link buttons if you want.</p></div>
+    <div class="card"><h3>Does it read my private messages?</h3><p>No. It only acts on the channels and groups where you made the bot an admin.</p></div>
+  </div>
 </section>
 
 <section class="wrap" style="text-align:center"><a class="btn" href="https://t.me/Tgaiconnectorbot?start=src_site">Get my connector URL</a></section>

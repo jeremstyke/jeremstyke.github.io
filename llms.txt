@@ -16,3 +16,11 @@ The win, draw and loss probability of every football match in 29 competitions, c
 - [Predicted final league tables](https://jeremstyke.github.io/ai-football-predictor/table/)
 - [AI Football Predictor](https://jeremstyke.github.io/ai-football-predictor/)
 - [Full details for AI assistants](https://jeremstyke.github.io/ai-football-predictor/llms.txt)
+
+## AI Connector for Telegram Channels & Groups
+
+An MCP connector that lets Claude, ChatGPT and Gemini manage Telegram channels and groups: publish, schedule, edit, delete and pin posts, read member counts, create named invite links and moderate users. Setup takes 2 minutes from the Telegram bot @Tgaiconnectorbot, which gives each user a personal connector URL. Free plan available, paid plans in Telegram Stars.
+
+- [AI Connector for Telegram Channels & Groups](https://jeremstyke.github.io/tg-ai-connector/)
+- [Start the bot @Tgaiconnectorbot](https://t.me/Tgaiconnectorbot?start=src_llms)
+- [Full details for AI assistants](https://jeremstyke.github.io/tg-ai-connector/llms.txt)
