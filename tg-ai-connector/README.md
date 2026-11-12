@@ -7,12 +7,13 @@ Manage your Telegram channels and groups from **Claude, ChatGPT and Gemini**. Ju
 
 ## How it works
 
-1. Add **@Tgaiconnectorbot** as an admin of your channel or group (post, edit and delete rights).
-2. Add your connector URL to your AI:
+1. Open [@Tgaiconnectorbot](https://t.me/Tgaiconnectorbot?start=src_github) and press **Start**: you get your personal connector URL and the setup steps for each AI.
+2. Add **@Tgaiconnectorbot** as an admin of your channel or group (post, edit and delete rights).
+3. Add your connector URL to your AI:
    - **Claude**: Settings > Connectors > Add custom connector
-   - **ChatGPT**: Settings > Apps > Developer mode > add the URL
-   - **Gemini / other MCP clients**: add it as a remote MCP server (Streamable HTTP)
-3. Ask: *"Schedule a post on my channel tomorrow at 9am."*
+   - **ChatGPT** (paid plans): Settings > Apps > Advanced settings > Developer mode, then Create
+   - **Gemini**: Settings > Connected Apps > Add a custom app, or Gemini CLI: `gemini mcp add --transport http telegram YOUR_URL`
+4. Ask: *"Schedule a post on my channel tomorrow at 9am."*
 
 ## Tools
 
@@ -39,10 +40,10 @@ Channels are detected automatically when you add the bot as admin. Posts are rat
 | Plan | Price | Limits |
 |---|---|---|
 | Free | 0 | 1 channel, 5 posts/day, 3 scheduled posts |
-| Pro | ~9 €/month | 5 channels, unlimited posts and scheduling |
-| Agency | ~29 €/month | Unlimited channels |
+| Pro | 450 Stars/month | 5 channels, unlimited posts and scheduling |
+| Agency | 1500 Stars/month | Unlimited channels |
 
-Paid in Telegram Stars inside the bot. Early access is free: [message me](https://t.me/jeremstyke?direct).
+Paid in Telegram Stars inside the bot (/upgrade). Questions: [message me](https://t.me/jeremstyke?direct).
 
 ## Privacy
 
