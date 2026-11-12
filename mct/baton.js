@@ -93,9 +93,9 @@
       let n = 0; try { n = Number(localStorage.getItem('mct_sa_n') || 0) + 1; localStorage.setItem('mct_sa_n', String(n)); } catch (e) {}
       if (Date.now() >= 1794956340000 && Math.random() < 0.5) return fb();  // 5 nov 2026 (00h57, Jeremy): at random, not every other time. 10 nov 2026: until 17 nov, always Big Bang AI
       let lg = 'en'; try { lg = LANG; } catch (e) {}
-      const run = () => { try { window.BigBangPromo.show({ src: 'mct', lang: lg }).then((r) => { if (r === null) fb(); }); } catch (e) { fb(); } };
-      if (window.BigBangPromo) return run();
-      const s = document.createElement('script'); s.src = 'https://jeremstyke.github.io/bigbang/promo.js?v=2'; s.onload = run; s.onerror = () => fb(); document.head.appendChild(s);
+      const run = () => { try { window.PostPayPromo.show({ src: 'mct', lang: lg }).then((r) => { if (r === null) fb(); }); } catch (e) { fb(); } };
+      if (window.PostPayPromo) return run();
+      const s = document.createElement('script'); s.src = 'https://jeremstyke.github.io/postpay/promo.js?v=1'; s.onload = run; s.onerror = () => fb(); document.head.appendChild(s);
     }
     function popup() {
       if (document.getElementById('btpop')) return;

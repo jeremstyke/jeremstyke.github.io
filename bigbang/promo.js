@@ -1,62 +1,68 @@
-/* Big Bang AI interstitial (10 nov 2026, Jeremy): replaces the SayApp promo in Meme Coin Tycoon and Pass The Baton.
-   10 nov 2026 (Jeremy): "l'interstitiel de pub c'est pour l'app pas la chaine": it promotes the Big Bang AI app, not the channel.
-   Usage: BigBangPromo.show({ src: 'mct', lang: 'fr' }) -> Promise resolved when closed. */
+/* 12 nov 2026 (Jeremy): this file now shows the PostPay interstitial (copy of postpay/promo.js), the Big Bang AI interstitial is removed everywhere.
+   "Gagner de l'argent avec votre chaîne ou acheter des posts sur d'autres chaînes".
+   Usage: PostPayPromo.show({ src: 'mct', lang: 'fr' }) -> Promise resolved when closed (true if a button was tapped).
+   window.BigBangPromo is kept as an alias so every old call shows PostPay. */
 (function () {
-  if (window.BigBangPromo) return;
-  var LOGO = 'https://bigbang-ai-production.up.railway.app/logo.jpg';
+  if (window.PostPayPromo) return;
+  var BOT = 'Postpayadsbot';
   var T = {
-    en: { b: 'Big Bang AI', h: "The free AI of Telegram", p: "Write, translate, code, learn and build your own mini apps, right in Telegram.", l: ["⚡ Free and unlimited AI in Simple mode", "🌐 Answers from the live web", "🧩 Build your own mini app in one sentence"], c: "🚀 Open Big Bang AI", x: "Close" },
-    fr: { b: 'Big Bang AI', h: "L'IA gratuite de Telegram", p: "Écrire, traduire, coder, apprendre et créer tes propres mini-apps, directement dans Telegram.", l: ["⚡ IA gratuite et illimitée en mode Simple", "🌐 Réponses tirées du web en direct", "🧩 Crée ta propre mini-app en une phrase"], c: "🚀 Ouvrir Big Bang AI", x: "Fermer" },
-    es: { b: 'Big Bang AI', h: "La IA gratis de Telegram", p: "Escribe, traduce, programa, aprende y crea tus propias mini apps, dentro de Telegram.", l: ["⚡ IA gratis e ilimitada en modo Simple", "🌐 Respuestas desde la web en vivo", "🧩 Crea tu propia mini app con una frase"], c: "🚀 Abrir Big Bang AI", x: "Cerrar" },
-    pt: { b: 'Big Bang AI', h: "A IA grátis do Telegram", p: "Escreva, traduza, programe, aprenda e crie seus próprios mini apps, dentro do Telegram.", l: ["⚡ IA grátis e ilimitada no modo Simple", "🌐 Respostas da web ao vivo", "🧩 Crie seu próprio mini app com uma frase"], c: "🚀 Abrir Big Bang AI", x: "Fechar" },
-    ru: { b: 'Big Bang AI', h: "Бесплатный ИИ в Telegram", p: "Пиши, переводи, программируй, учись и создавай свои мини-приложения прямо в Telegram.", l: ["⚡ Бесплатный и безлимитный ИИ в режиме Simple", "🌐 Ответы из интернета в реальном времени", "🧩 Создай своё мини-приложение одной фразой"], c: "🚀 Открыть Big Bang AI", x: "Закрыть" },
-    id: { b: 'Big Bang AI', h: "AI gratis di Telegram", p: "Menulis, menerjemahkan, coding, belajar, dan membuat mini app sendiri, langsung di Telegram.", l: ["⚡ AI gratis tanpa batas di mode Simple", "🌐 Jawaban dari web secara langsung", "🧩 Buat mini app sendiri dengan satu kalimat"], c: "🚀 Buka Big Bang AI", x: "Tutup" },
-    tr: { b: 'Big Bang AI', h: "Telegram'ın ücretsiz yapay zekâsı", p: "Yaz, çevir, kodla, öğren ve kendi mini uygulamalarını yap, doğrudan Telegram'da.", l: ["⚡ Simple modda ücretsiz ve sınırsız yapay zekâ", "🌐 Canlı webden yanıtlar", "🧩 Tek cümleyle kendi mini uygulamanı yap"], c: "🚀 Big Bang AI'yi aç", x: "Kapat" },
-    ar: { b: 'Big Bang AI', h: "الذكاء الاصطناعي المجاني في Telegram", p: "اكتب وترجم وبرمج وتعلّم وأنشئ تطبيقاتك المصغّرة، مباشرة في Telegram.", l: ["⚡ ذكاء اصطناعي مجاني وغير محدود في وضع Simple", "🌐 إجابات من الويب مباشرة", "🧩 أنشئ تطبيقك المصغّر بجملة واحدة"], c: "🚀 افتح Big Bang AI", x: "إغلاق" },
+    en: { b: 'PostPay', h: 'Your Telegram channel can pay you', p: 'Advertisers pay in USDT to post on your channel. You set the price, you approve each ad, the money goes straight to your wallet.', n: '+9 USDT received', ns: 'Ad on your channel', l: ['💰 You keep 90% of every ad', '⚡ Add your channel in 1 tap', '🔒 Paid directly, we never touch your money'], c: '💸 Earn with my channel', a: '📢 Buy posts on other channels', x: 'Close' },
+    fr: { b: 'PostPay', h: 'Ta chaîne Telegram peut te payer', p: 'Des annonceurs paient en USDT pour publier sur ta chaîne. Tu fixes ton prix, tu acceptes chaque pub, l\'argent arrive directement sur ton wallet.', n: '+9 USDT reçus', ns: 'Pub sur ta chaîne', l: ['💰 Tu gardes 90 % de chaque pub', '⚡ Ta chaîne ajoutée en 1 clic', '🔒 Paiement direct, on ne touche jamais ton argent'], c: '💸 Gagner avec ma chaîne', a: '📢 Acheter des posts sur d\'autres chaînes', x: 'Fermer' },
+    es: { b: 'PostPay', h: 'Tu canal de Telegram puede pagarte', p: 'Los anunciantes pagan en USDT por publicar en tu canal. Tú pones el precio, apruebas cada anuncio y el dinero llega directo a tu wallet.', n: '+9 USDT recibidos', ns: 'Anuncio en tu canal', l: ['💰 Te quedas el 90 % de cada anuncio', '⚡ Añade tu canal en 1 toque', '🔒 Pago directo, nunca tocamos tu dinero'], c: '💸 Ganar con mi canal', a: '📢 Comprar posts en otros canales', x: 'Cerrar' },
+    pt: { b: 'PostPay', h: 'Seu canal do Telegram pode te pagar', p: 'Anunciantes pagam em USDT para postar no seu canal. Você define o preço, aprova cada anúncio e o dinheiro cai direto na sua carteira.', n: '+9 USDT recebidos', ns: 'Anúncio no seu canal', l: ['💰 Você fica com 90 % de cada anúncio', '⚡ Adicione seu canal em 1 toque', '🔒 Pagamento direto, nunca tocamos no seu dinheiro'], c: '💸 Ganhar com meu canal', a: '📢 Comprar posts em outros canais', x: 'Fechar' },
+    ru: { b: 'PostPay', h: 'Твой Telegram-канал может платить тебе', p: 'Рекламодатели платят в USDT за пост в твоём канале. Ты ставишь цену, одобряешь каждую рекламу, деньги приходят прямо на кошелёк.', n: '+9 USDT получено', ns: 'Реклама в твоём канале', l: ['💰 Тебе 90 % с каждой рекламы', '⚡ Канал добавляется в 1 касание', '🔒 Прямая оплата, мы не трогаем твои деньги'], c: '💸 Зарабатывать на канале', a: '📢 Купить посты в других каналах', x: 'Закрыть' },
+    id: { b: 'PostPay', h: 'Kanal Telegram-mu bisa membayarmu', p: 'Pengiklan membayar USDT untuk posting di kanalmu. Kamu tentukan harga, setujui tiap iklan, uang langsung masuk ke wallet-mu.', n: '+9 USDT diterima', ns: 'Iklan di kanalmu', l: ['💰 Kamu dapat 90 % dari tiap iklan', '⚡ Tambah kanal dalam 1 ketuk', '🔒 Bayar langsung, kami tak menyentuh uangmu'], c: '💸 Hasilkan dari kanalku', a: '📢 Beli post di kanal lain', x: 'Tutup' },
+    tr: { b: 'PostPay', h: 'Telegram kanalın sana kazandırabilir', p: 'Reklamverenler kanalında paylaşım için USDT öder. Fiyatı sen belirlersin, her reklamı onaylarsın, para doğrudan cüzdanına gelir.', n: '+9 USDT alındı', ns: 'Kanalında reklam', l: ['💰 Her reklamın %90\'ı senin', '⚡ Kanalını 1 dokunuşla ekle', '🔒 Doğrudan ödeme, paranıza dokunmayız'], c: '💸 Kanalımla kazan', a: '📢 Diğer kanallarda post satın al', x: 'Kapat' },
+    ar: { b: 'PostPay', h: 'قناتك على Telegram يمكن أن تدفع لك', p: 'يدفع المعلنون بـ USDT للنشر في قناتك. أنت تحدد السعر وتوافق على كل إعلان، والمال يصل مباشرة إلى محفظتك.', n: '+9 USDT تم استلامها', ns: 'إعلان في قناتك', l: ['💰 لك 90 % من كل إعلان', '⚡ أضف قناتك بلمسة واحدة', '🔒 دفع مباشر، لا نلمس أموالك أبدًا'], c: '💸 اربح من قناتي', a: '📢 اشترِ منشورات في قنوات أخرى', x: 'إغلاق' },
   };
-  var CSS = '#bbpr{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:calc(18px + env(safe-area-inset-top,0px)) 18px calc(18px + env(safe-area-inset-bottom,0px));background:rgba(2,2,10,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#fff;opacity:0;transition:opacity .3s}' +
-    '#bbpr.on{opacity:1}#bbpr .k{position:relative;width:100%;max-width:380px;border-radius:30px;overflow:hidden;background:#05040f;border:1px solid rgba(160,140,255,.22);box-shadow:0 40px 90px -25px rgba(255,120,60,.45),0 0 0 1px rgba(255,255,255,.03) inset;transform:translateY(16px) scale(.96);transition:transform .45s cubic-bezier(.2,.9,.3,1.15)}#bbpr.on .k{transform:none}' +
-    '#bbpr .sky{position:relative;height:178px;overflow:hidden;background:radial-gradient(60% 80% at 50% 62%,#2a0f4d 0,#05040f 75%)}' +
-    '#bbpr .burst{position:absolute;left:50%;top:62%;width:440px;height:440px;margin:-220px 0 0 -220px;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 6%,rgba(255,170,80,.55) 8%,transparent 11% 22%,rgba(140,110,255,.5) 24%,transparent 27% 40%,rgba(80,200,255,.45) 42%,transparent 45% 58%,rgba(255,110,170,.5) 60%,transparent 63% 76%,rgba(255,210,120,.5) 78%,transparent 81% 100%);-webkit-mask:radial-gradient(circle,#000 0,transparent 62%);mask:radial-gradient(circle,#000 0,transparent 62%);animation:bbspin 18s linear infinite}' +
-    '#bbpr .glow{position:absolute;left:50%;top:62%;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;background:radial-gradient(circle,rgba(255,230,180,.95) 0,rgba(255,140,60,.55) 35%,transparent 70%);animation:bbpulse 2.6s ease-in-out infinite}' +
-    '#bbpr .st{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:.8;animation:bbtw 3s ease-in-out infinite}' +
-    '#bbpr .lg{position:absolute;left:50%;top:62%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:24px;object-fit:cover;box-shadow:0 0 0 3px rgba(255,255,255,.12),0 14px 40px rgba(255,140,60,.55);background:#140b2a}' +
-    '#bbpr .bd{position:absolute;left:16px;top:14px;padding:6px 11px;border-radius:99px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);font-size:12px;font-weight:750}' +
-    '@keyframes bbspin{to{transform:rotate(360deg)}}@keyframes bbpulse{0%,100%{transform:scale(.9);opacity:.85}50%{transform:scale(1.15);opacity:1}}@keyframes bbtw{0%,100%{opacity:.2}50%{opacity:1}}' +
-    '#bbpr .t{padding:6px 22px 20px}#bbpr h2{margin:0 0 8px;font-size:24px;line-height:1.15;letter-spacing:-.02em;font-weight:850;text-align:center}#bbpr p{margin:0 0 14px;color:#c9c6ea;text-align:center}' +
-    '#bbpr ul{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:7px}#bbpr li{padding:9px 12px;border-radius:13px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.06);font-weight:600;font-size:14px}' +
-    '#bbpr .bn{margin:0 0 14px;padding:10px 12px;border-radius:13px;background:linear-gradient(120deg,rgba(255,170,80,.18),rgba(255,110,170,.14));border:1px solid rgba(255,170,80,.35);font-weight:700;font-size:13.5px;color:#ffe2c4}' +
-    '#bbpr .go{display:block;width:100%;border:0;border-radius:17px;padding:16px;font-size:17px;font-weight:800;line-height:1.2;font-family:inherit;color:#1a0c00;background:linear-gradient(120deg,#ffd27a,#ff8a4c 55%,#ff5fa2);box-shadow:0 16px 36px -12px rgba(255,120,70,.85);cursor:pointer;animation:bbbtn 2.4s ease-in-out infinite}@keyframes bbbtn{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}' +
-    '#bbpr .op{display:block;width:100%;margin-top:10px;border:0;background:none;color:#b7b2ff;font:600 14px/1.3 inherit;font-family:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}' +
-    '#bbpr .x{position:absolute;top:12px;right:12px;z-index:2;min-width:34px;height:34px;padding:0 10px;border-radius:99px;border:0;background:rgba(0,0,0,.45);color:#fff;font-size:13px;font-weight:700;line-height:34px;font-family:inherit;cursor:pointer}#bbpr .x[disabled]{opacity:.6;cursor:default}' +
-    '@media (prefers-reduced-motion:reduce){#bbpr .burst,#bbpr .glow,#bbpr .st,#bbpr .go{animation:none}}';
+  var CSS = '#pppr{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:calc(18px + env(safe-area-inset-top,0px)) 18px calc(18px + env(safe-area-inset-bottom,0px));background:rgba(3,8,22,.84);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:15px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text",Inter,system-ui,sans-serif;color:#fff;opacity:0;transition:opacity .3s}' +
+    '#pppr.on{opacity:1}#pppr .k{position:relative;width:100%;max-width:380px;border-radius:30px;overflow:hidden;background:#070d1f;border:1px solid rgba(96,165,250,.25);box-shadow:0 40px 90px -25px rgba(37,99,235,.6);transform:translateY(16px) scale(.96);transition:transform .45s cubic-bezier(.2,.9,.3,1.15)}#pppr.on .k{transform:none}' +
+    '#pppr .top{position:relative;height:186px;overflow:hidden;background:radial-gradient(120% 140% at 0% 0%,#2563eb 0%,#1e3a8a 45%,#070d1f 100%)}' +
+    '#pppr .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:22px 22px;-webkit-mask:linear-gradient(#000,transparent);mask:linear-gradient(#000,transparent)}' +
+    '#pppr .brand{position:absolute;left:16px;top:14px;display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px}#pppr .lg{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#60a5fa,#2563eb);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;box-shadow:0 4px 14px rgba(37,99,235,.6)}' +
+    '#pppr .post{position:absolute;left:18px;top:56px;width:210px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:10px 12px;animation:ppfloat 4s ease-in-out infinite}' +
+    '#pppr .post i{display:block;height:8px;border-radius:6px;background:rgba(255,255,255,.22);margin:4px 0}#pppr .post i.s{width:62%}#pppr .post b{display:block;margin-top:8px;text-align:center;font-size:12px;font-weight:800;padding:7px;border-radius:9px;background:rgba(96,165,250,.3);color:#dbeafe}' +
+    '#pppr .nt{position:absolute;right:14px;top:112px;display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:16px;background:rgba(255,255,255,.96);color:#0b1020;box-shadow:0 14px 30px rgba(0,0,0,.35);animation:ppnt 3.2s cubic-bezier(.2,.9,.3,1.2) infinite}' +
+    '#pppr .nt .ic{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#22c55e,#16a34a);display:flex;align-items:center;justify-content:center;font-size:16px}#pppr .nt b{display:block;font-size:13.5px;color:#16a34a}#pppr .nt span{display:block;font-size:11px;color:#64748b;font-weight:600}' +
+    '#pppr .coin{position:absolute;bottom:-20px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#7ee2b8,#26a17b 60%,#13795b);box-shadow:0 0 12px rgba(38,161,123,.6);color:#fff;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;animation:ppcoin 3.6s linear infinite}' +
+    '@keyframes ppfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}@keyframes ppnt{0%{transform:translateY(16px) scale(.9);opacity:0}12%,80%{transform:none;opacity:1}100%{transform:translateY(-8px);opacity:0}}@keyframes ppcoin{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:1}100%{transform:translateY(-220px) rotate(360deg);opacity:0}}' +
+    '#pppr .t{padding:16px 22px 20px}#pppr h2{margin:0 0 8px;font-size:23px;line-height:1.15;letter-spacing:-.02em;font-weight:850;text-align:center}#pppr p{margin:0 0 14px;color:#b8c6e6;text-align:center;font-size:14px}' +
+    '#pppr ul{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:7px}#pppr li{padding:9px 12px;border-radius:13px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);font-weight:600;font-size:13.5px}' +
+    '#pppr .go{display:block;width:100%;border:0;border-radius:17px;padding:16px;font-size:16.5px;font-weight:800;line-height:1.2;font-family:inherit;color:#fff;background:linear-gradient(120deg,#3b82f6,#2563eb 55%,#1d4ed8);box-shadow:0 16px 36px -12px rgba(37,99,235,.9);cursor:pointer;animation:ppbtn 2.4s ease-in-out infinite}@keyframes ppbtn{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}' +
+    '#pppr .ad{display:block;width:100%;margin-top:9px;border:1px solid rgba(96,165,250,.35);border-radius:15px;padding:13px;background:rgba(37,99,235,.12);color:#cfe0ff;font:700 14.5px/1.2 inherit;font-family:inherit;cursor:pointer}' +
+    '#pppr .x{position:absolute;top:12px;right:12px;z-index:2;min-width:34px;height:34px;padding:0 10px;border-radius:99px;border:0;background:rgba(0,0,0,.4);color:#fff;font-size:13px;font-weight:700;line-height:34px;font-family:inherit;cursor:pointer}#pppr .x[disabled]{opacity:.6;cursor:default}' +
+    '@media (prefers-reduced-motion:reduce){#pppr .post,#pppr .nt,#pppr .coin,#pppr .go{animation:none}}';
   function open(u) { try { var tw = window.Telegram && window.Telegram.WebApp; if (tw && tw.openTelegramLink) tw.openTelegramLink(u); else window.open(u, '_blank'); } catch (e) { try { window.open(u, '_blank'); } catch (e2) {} } }
   function show(o) {
     o = o || {};
     return new Promise(function (done) {
       try {
-        if (document.getElementById('bbpr')) return done(false);
-        try { if (Date.now() >= 1794956340000 && Date.now() - Number(localStorage.getItem('bbpr_opened') || 0) < 7 * 864e5) return done(null); } catch (e) {}  // 10 nov 2026 (Jeremy): until 17 nov 2026, only Big Bang AI interstitials (never skipped)  // already opened Big Bang AI from here this week: the game shows its normal ad
+        if (document.getElementById('pppr')) return done(false);
         var lg = String(o.lang || (navigator.language || 'en')).slice(0, 2).toLowerCase(), t = T[lg] || T.en;
         var src = String(o.src || 'promo').replace(/[^a-z0-9_]/gi, '').slice(0, 30);
-        var appUrl = 'https://t.me/Bigbangaibot/App?startapp=src_' + src + '_int';
-        if (!document.getElementById('bbprc')) { var st = document.createElement('style'); st.id = 'bbprc'; st.textContent = CSS; document.head.appendChild(st); }
+        var owner = 'https://t.me/' + BOT + '?start=src_' + src + '_int';
+        var buyer = 'https://t.me/' + BOT + '?start=src_' + src + '_intad';
+        if (!document.getElementById('ppprc')) { var st = document.createElement('style'); st.id = 'ppprc'; st.textContent = CSS; document.head.appendChild(st); }
         var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
-        var stars = ''; for (var i = 0; i < 26; i++) stars += '<i class="st" style="left:' + (Math.random() * 100).toFixed(1) + '%;top:' + (Math.random() * 100).toFixed(1) + '%;animation-delay:' + (Math.random() * 3).toFixed(2) + 's"></i>';
-        var w = document.createElement('div'); w.id = 'bbpr'; if (lg === 'ar') w.dir = 'rtl';
-        w.innerHTML = '<div class="k" role="dialog" aria-label="Big Bang AI"><button class="x" disabled>3</button>' +
-          '<div class="sky">' + stars + '<div class="burst"></div><div class="glow"></div><img class="lg" alt="" src="' + LOGO + '"><span class="bd">📰 ' + esc(t.b) + '</span></div>' +
+        var coins = ''; for (var i = 0; i < 7; i++) coins += '<i class="coin" style="left:' + (8 + i * 13) + '%;animation-delay:' + (i * 0.5).toFixed(1) + 's">$</i>';
+        var w = document.createElement('div'); w.id = 'pppr'; if (lg === 'ar') w.dir = 'rtl';
+        w.innerHTML = '<div class="k" role="dialog" aria-label="PostPay"><button class="x" disabled>3</button>' +
+          '<div class="top"><div class="grid"></div>' + coins + '<div class="brand"><span class="lg">P</span>' + esc(t.b) + '</div>' +
+          '<div class="post"><i></i><i></i><i class="s"></i><b>Sponsored</b></div>' +
+          '<div class="nt"><span class="ic">💰</span><div><b>' + esc(t.n) + '</b><span>' + esc(t.ns) + '</span></div></div></div>' +
           '<div class="t"><h2>' + esc(t.h) + '</h2><p>' + esc(t.p) + '</p><ul>' + t.l.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' +
-          '<button class="go">' + esc(t.c) + '</button></div></div>';
+          '<button class="go">' + esc(t.c) + '</button><button class="ad">' + esc(t.a) + '</button></div></div>';
         document.body.appendChild(w);
         requestAnimationFrame(function () { w.classList.add('on'); });
         var x = w.querySelector('.x'), left = 3, closed = false;
         var close = function (r) { if (closed) return; closed = true; clearInterval(iv); w.classList.remove('on'); setTimeout(function () { try { w.remove(); } catch (e) {} }, 300); done(r); };
         var iv = setInterval(function () { left--; if (left > 0) { x.textContent = String(left); return; } clearInterval(iv); x.disabled = false; x.textContent = '✕ ' + t.x; }, 1000);
         x.onclick = function () { if (!x.disabled) close(false); };
-        w.querySelector('.go').onclick = function () { try { localStorage.setItem('bbpr_opened', String(Date.now())); } catch (e) {} open(appUrl); close(true); };
+        w.querySelector('.go').onclick = function () { open(owner); close(true); };
+        w.querySelector('.ad').onclick = function () { open(buyer); close(true); };
       } catch (e) { done(false); }
     });
   }
-  window.BigBangPromo = { show: show };
+  window.PostPayPromo = { show: show };
+  window.BigBangPromo = window.PostPayPromo;
 })();
