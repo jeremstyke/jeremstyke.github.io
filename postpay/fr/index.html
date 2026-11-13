@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PostPay : marketplace de pub Telegram, achat et vente de posts en USDT</title>
+<meta name="description" content="Achetez et vendez de la pub dans les chaînes Telegram. Les propriétaires fixent leur prix et touchent 90 % en USDT sur leur wallet. La pub est publiée automatiquement.">
+<link rel="canonical" href="https://jeremstyke.github.io/postpay/fr/">
+<link rel="alternate" hreflang="en" href="https://jeremstyke.github.io/postpay/">
+<link rel="alternate" hreflang="fr" href="https://jeremstyke.github.io/postpay/fr/">
+<link rel="alternate" hreflang="x-default" href="https://jeremstyke.github.io/postpay/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="PostPay">
+<meta property="og:title" content="PostPay : marketplace de pub Telegram, achat et vente de posts en USDT"><meta property="og:description" content="Achetez et vendez de la pub dans les chaînes Telegram. Les propriétaires fixent leur prix et touchent 90 % en USDT sur leur wallet. La pub est publiée automatiquement.">
+<meta property="og:url" content="https://jeremstyke.github.io/postpay/fr/"><meta property="og:image" content="https://jeremstyke.github.io/postpay/icon.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="https://jeremstyke.github.io/postpay/icon.png">
+<meta name="theme-color" content="#2481cc">
+<style>
+:root{--bg:#f6f8fc;--card:#fff;--ink:#0f1630;--mute:#5d6685;--line:#e2e7f2;--blue:#2481cc;--blue2:#1a6bb0;--green:#16a34a;--wash:#e8f2fb;--r:16px}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1222;--card:#151c33;--ink:#eef1fb;--mute:#a1a9c6;--line:#263055;--wash:#16284a}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif}
+a{color:var(--blue)}img{max-width:100%}
+.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .in{max-width:1080px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:14px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:19px;color:var(--ink);text-decoration:none}.logo img{width:30px;height:30px;border-radius:8px}
+.top nav{margin-left:auto;display:flex;gap:16px;align-items:center;flex-wrap:wrap}.top nav a{color:var(--mute);text-decoration:none;font-size:15px}.top nav a:hover{color:var(--ink)}.top nav a.btn{color:#fff}
+.top nav .lang{border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+@media(max-width:760px){.top nav a.hide{display:none}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:12px;background:var(--blue);color:#fff;font-weight:700;text-decoration:none;border:0;font-size:16px}
+.btn:hover{background:var(--blue2)}.btn.g{background:var(--green)}.btn.o{background:transparent;color:var(--blue);border:2px solid var(--blue)}
+.btn.sm{padding:8px 14px;font-size:14px;border-radius:10px}
+.hero{max-width:1080px;margin:0 auto;padding:56px 18px 30px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+@media(max-width:860px){.hero{grid-template-columns:1fr;padding-top:34px}}
+.kick{display:inline-block;background:var(--wash);color:var(--blue);font-weight:700;font-size:13px;padding:5px 12px;border-radius:999px;margin-bottom:14px}
+h1{font-size:clamp(32px,5vw,52px);line-height:1.08;margin:0 0 16px;letter-spacing:-.02em;text-wrap:balance}
+.lead{font-size:19px;color:var(--mute);margin:0 0 24px;max-width:46ch}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.trust{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;color:var(--mute);font-size:14px}.trust span::before{content:"✓ ";color:var(--green);font-weight:800}
+.mock{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 20px 50px rgba(20,40,90,.12)}
+.mock .row{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;border:1px solid var(--line);margin-bottom:10px}
+.mock .av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#2aabee,#229ed9);flex:none}
+.mock .av.b{background:linear-gradient(135deg,#f59e0b,#ef4444)}.mock .av.c{background:linear-gradient(135deg,#22c55e,#0ea5e9)}
+.mock b{display:block;font-size:15px}.mock small{color:var(--mute);font-size:13px}.mock .p{margin-left:auto;font-weight:800;color:var(--green);white-space:nowrap}
+.mock .pay{background:var(--wash);border-radius:14px;padding:12px;font-size:14px}
+section{max-width:1080px;margin:0 auto;padding:36px 18px}
+h2{font-size:clamp(26px,3.4vw,36px);line-height:1.15;margin:0 0 12px;letter-spacing:-.01em;text-wrap:balance}
+h3{font-size:20px;margin:0 0 6px}
+.sub{color:var(--mute);margin:0 0 24px;max-width:62ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.card p{margin:0;color:var(--mute)}
+.num{width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-weight:800;margin-bottom:12px}
+.ico{font-size:28px;margin-bottom:8px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:760px){.split{grid-template-columns:1fr}}
+.split .card h3{font-size:22px}.split .card ul{padding-left:20px;color:var(--mute);margin:10px 0 18px}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:var(--r);overflow:hidden;border:1px solid var(--line)}
+th,td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line)}th{background:var(--wash);font-size:14px}tr:last-child td{border-bottom:0}
+.calc{display:grid;gap:12px}.calc label{font-weight:700;font-size:15px}.calc input{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:17px}
+.out{font-size:22px;font-weight:800;color:var(--green)}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700;font-size:17px}details p{color:var(--mute);margin:10px 0 0}
+.art{max-width:760px}.art h2{margin-top:36px;font-size:28px}.art p,.art li{color:var(--ink)}.art .note{background:var(--wash);border-radius:14px;padding:16px 18px}
+.crumb{font-size:14px;color:var(--mute);margin-bottom:12px}.crumb a{color:var(--mute)}
+.band{background:linear-gradient(135deg,#2481cc,#1a5fa0);color:#fff;border-radius:22px;padding:34px;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.band h2{color:#fff;margin:0 0 6px}.band p{margin:0;opacity:.9}.band .btn{background:#fff;color:#1a5fa0}
+#live .ch{display:flex;align-items:center;gap:12px}#live .ch img{width:44px;height:44px;border-radius:50%;background:var(--wash);object-fit:cover;flex:none}
+#live .ch b{display:block}#live .ch small{color:var(--mute)}#live .pr{margin-left:auto;font-weight:800;color:var(--green);white-space:nowrap}
+footer{border-top:1px solid var(--line);margin-top:30px}footer .in{max-width:1080px;margin:0 auto;padding:26px 18px;display:flex;gap:18px;flex-wrap:wrap;color:var(--mute);font-size:14px}
+footer a{color:var(--mute)}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "PostPay", "url": "https://jeremstyke.github.io/postpay/", "logo": "https://jeremstyke.github.io/postpay/icon.png", "sameAs": ["https://t.me/Postpayadsbot"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Qu'est-ce que PostPay ?", "acceptedAnswer": {"@type": "Answer", "text": "PostPay est un bot et une mini app Telegram où les annonceurs achètent de la pub dans des chaînes Telegram et où les propriétaires de chaînes la vendent. Chaque propriétaire fixe son prix, payé en USDT sur la blockchain TON."}}, {"@type": "Question", "name": "Combien prend PostPay ?", "acceptedAnswer": {"@type": "Answer", "text": "PostPay prend 10 % de commission. Le propriétaire de la chaîne reçoit 90 % du prix de chaque pub, directement sur son propre wallet, dans la même transaction."}}, {"@type": "Question", "name": "PostPay garde-t-il mon argent ?", "acceptedAnswer": {"@type": "Answer", "text": "Non. PostPay ne détient jamais les fonds : le paiement va directement du wallet de l'annonceur à celui du propriétaire de la chaîne."}}, {"@type": "Question", "name": "Faut-il un nombre minimum d'abonnés ?", "acceptedAnswer": {"@type": "Answer", "text": "Non. Les petites chaînes sont les bienvenues. Le prix maximum d'une pub dépend de la taille de la chaîne, de 5 USDT sous 500 abonnés à 5 000 USDT au-delà de 500 000."}}, {"@type": "Question", "name": "Comment ajouter ma chaîne ?", "acceptedAnswer": {"@type": "Answer", "text": "Ouvrez @Postpayadsbot, appuyez sur Inscrire ma chaîne et ajoutez le bot comme admin avec le droit de publier. Votre chaîne est vérifiée par notre équipe sous 48 h, puis affichée dans le catalogue."}}, {"@type": "Question", "name": "Est-ce que je valide chaque pub ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Chaque demande de pub vous est envoyée d'abord. Vous l'acceptez ou la refusez. Seules les pubs acceptées peuvent être payées et publiées."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "PostPay", "url": "https://jeremstyke.github.io/postpay/fr/", "inLanguage": "fr"}</script>
+</head>
+<body>
+<header class="top"><div class="in"><a class="logo" href="https://jeremstyke.github.io/postpay/fr/"><img src="https://jeremstyke.github.io/postpay/icon.png" alt="PostPay" width="30" height="30">PostPay</a>
+<nav><a class="hide" href="https://jeremstyke.github.io/postpay/fr/acheter-pub-telegram/">Acheter de la pub</a><a class="hide" href="https://jeremstyke.github.io/postpay/fr/monetiser-chaine-telegram/">Monétiser</a><a class="hide" href="https://jeremstyke.github.io/postpay/fr/prix-pub-telegram/">Prix</a><a class="hide" href="https://jeremstyke.github.io/postpay/fr/faq/">FAQ</a><a class="lang" href="https://jeremstyke.github.io/postpay/" hreflang="en">EN</a><a class="btn sm" href="https://t.me/Postpayadsbot?start=src_seo_nav_fr">Ouvrir PostPay</a></nav></div></header>
+<main>
+
+
+<div class="hero"><div>
+<span class="kick">Marketplace de pub Telegram · payée en USDT</span>
+<h1>Achetez et vendez de la pub dans les chaînes Telegram</h1>
+<p class="lead">Les propriétaires fixent leur prix et touchent 90 % en USDT directement sur leur wallet. Les annonceurs choisissent une chaîne, paient, et la pub est publiée automatiquement.</p>
+<div class="ctas"><a class="btn g" href="https://t.me/Postpayadsbot?start=src_seo_home_fr">💸 Vendre la pub de ma chaîne</a><a class="btn o" href="https://t.me/Postpayadsbot?start=src_seo_home_fr_ad">📢 Acheter une pub Telegram</a></div>
+<div class="trust"><span>Personne ne garde votre argent</span><span>Chaque chaîne vérifiée</span><span>Petites chaînes bienvenues</span></div>
+</div><div class="mock" aria-hidden="true">
+<div class="row"><div class="av"></div><div><b>Crypto Daily</b><small>12&nbsp;400 abonnés · 🪙 Crypto</small></div><span class="p">40 USDT</span></div>
+<div class="row"><div class="av b"></div><div><b>Startup Notes</b><small>3&nbsp;100 abonnés · 💼 Business</small></div><span class="p">12 USDT</span></div>
+<div class="row"><div class="av c"></div><div><b>Gaming Zone</b><small>780 abonnés · 🎮 Gaming</small></div><span class="p">4 USDT</span></div>
+<div class="pay">✅ Pub acceptée · 💳 Payer 20 USDT · 90 % pour le propriétaire</div></div></div>
+<section><h2>Comment fonctionne PostPay</h2><p class="sub">Trois étapes, tout se passe dans Telegram. Pas de compte sur un site, pas de facture, pas d'attente de virement.</p>
+<div class="grid">
+<div class="card"><div class="num">1</div><h3>Les propriétaires inscrivent leur chaîne</h3><p>Ajoutez @Postpayadsbot en admin, fixez votre prix par post et le nombre de pubs acceptées par jour. Notre équipe vérifie chaque chaîne sous 48 h.</p></div>
+<div class="card"><div class="num">2</div><h3>Les annonceurs réservent un post</h3><p>Parcourez les chaînes par thème, abonnés et prix. Envoyez votre pub avec votre bouton. Le propriétaire l'accepte.</p></div>
+<div class="card"><div class="num">3</div><h3>Paiement en USDT, la pub est en ligne</h3><p>Le paiement va directement au propriétaire (90 %) et à PostPay (10 %). Le bot publie la pub pendant 24 h et envoie les clics.</p></div>
+</div></section>
+<section class="split">
+<div class="card"><h3>💸 Pour les propriétaires de chaînes</h3><p>Transformez votre audience en revenus sans courir après les annonceurs.</p>
+<ul><li>Vous fixez votre prix, jusqu'à la limite de votre taille de chaîne</li><li>Vous acceptez ou refusez chaque pub</li><li>90 % payés en USDT, directement sur votre wallet TON</li><li>Un lien personnel pour vendre votre espace pub partout</li></ul>
+<a class="btn g" href="https://t.me/Postpayadsbot?start=src_seo_owner_fr">Ajouter ma chaîne</a> <a href="https://jeremstyke.github.io/postpay/fr/monetiser-chaine-telegram/">Lire le guide</a></div>
+<div class="card"><h3>📢 Pour les annonceurs</h3><p>Touchez de vraies audiences Telegram en quelques clics.</p>
+<ul><li>Prix fixes, pas d'enchères, pas de budget minimum</li><li>Chaînes vérifiées par notre équipe</li><li>Votre pub publiée telle quelle, avec votre bouton</li><li>Clics et coût par clic à la fin</li></ul>
+<a class="btn" href="https://t.me/Postpayadsbot?start=src_seo_adv_fr_ad">Voir les chaînes</a> <a href="https://jeremstyke.github.io/postpay/fr/acheter-pub-telegram/">Comment acheter</a></div>
+</section>
+<section id="live"><h2>Des chaînes sur PostPay en ce moment</h2><p class="sub">De vraies chaînes du catalogue, avec leur prix par pub.</p><div class="grid" id="live-list"></div></section>
+<section><h2>Pourquoi PostPay</h2><div class="grid">
+<div class="card"><div class="ico">🔐</div><h3>Sans intermédiaire</h3><p>Les fonds passent du wallet de l'annonceur à celui du propriétaire en une transaction. Personne ne garde votre argent.</p></div>
+<div class="card"><div class="ico">✅</div><h3>Chaînes vérifiées</h3><p>Chaque chaîne est contrôlée avant d'apparaître. Une chaîne qui supprime une pub payée avant la fin est désactivée.</p></div>
+<div class="card"><div class="ico">⚡</div><h3>100 % automatique</h3><p>Le bot publie la pub, la garde 24 h, la retire et envoie les résultats. Rien à faire à la main.</p></div>
+<div class="card"><div class="ico">🌍</div><h3>Toutes les chaînes</h3><p>Crypto, business, jeux, actu, lifestyle et plus, en français, anglais, espagnol, russe et d'autres langues.</p></div>
+</div></section>
+<section><h2>Questions fréquentes</h2><details><summary>Qu&#x27;est-ce que PostPay ?</summary><p>PostPay est un bot et une mini app Telegram où les annonceurs achètent de la pub dans des chaînes Telegram et où les propriétaires de chaînes la vendent. Chaque propriétaire fixe son prix, payé en USDT sur la blockchain TON.</p></details><details><summary>Combien prend PostPay ?</summary><p>PostPay prend 10 % de commission. Le propriétaire de la chaîne reçoit 90 % du prix de chaque pub, directement sur son propre wallet, dans la même transaction.</p></details><details><summary>PostPay garde-t-il mon argent ?</summary><p>Non. PostPay ne détient jamais les fonds : le paiement va directement du wallet de l&#x27;annonceur à celui du propriétaire de la chaîne.</p></details><details><summary>Faut-il un nombre minimum d&#x27;abonnés ?</summary><p>Non. Les petites chaînes sont les bienvenues. Le prix maximum d&#x27;une pub dépend de la taille de la chaîne, de 5 USDT sous 500 abonnés à 5 000 USDT au-delà de 500 000.</p></details><details><summary>Comment ajouter ma chaîne ?</summary><p>Ouvrez @Postpayadsbot, appuyez sur Inscrire ma chaîne et ajoutez le bot comme admin avec le droit de publier. Votre chaîne est vérifiée par notre équipe sous 48 h, puis affichée dans le catalogue.</p></details><details><summary>Est-ce que je valide chaque pub ?</summary><p>Oui. Chaque demande de pub vous est envoyée d&#x27;abord. Vous l&#x27;acceptez ou la refusez. Seules les pubs acceptées peuvent être payées et publiées.</p></details><p><a href="https://jeremstyke.github.io/postpay/fr/faq/">Toutes les questions →</a></p></section>
+<section><div class="band"><div><h2>Votre chaîne peut vous payer.</h2><p>Ajoutez-la en 1 minute. Vérifiée sous 48 h. Gratuit.</p></div><a class="btn" href="https://t.me/Postpayadsbot?start=src_seo_band_home_fr">💸 Ajouter ma chaîne</a></div></section>
+
+</main>
+<footer><div class="in"><span>© 2026 PostPay</span><span><a href="https://jeremstyke.github.io/postpay/fr/acheter-pub-telegram/">Acheter de la pub</a> · <a href="https://jeremstyke.github.io/postpay/fr/monetiser-chaine-telegram/">Monétiser</a> · <a href="https://jeremstyke.github.io/postpay/fr/prix-pub-telegram/">Prix</a> · <a href="https://jeremstyke.github.io/postpay/fr/faq/">FAQ</a></span><span>PostPay est une marketplace de pub Telegram. Les paiements en USDT sur TON vont directement sur le wallet du propriétaire de la chaîne.</span><a href="https://t.me/jeremstyke?direct">Contact</a></div></footer>
+<script>
+(function(){var box=document.getElementById('live-list');if(!box)return;var L=document.documentElement.lang==='fr';
+fetch('https://marketplace-production-69adf935.up.railway.app/api/channels').then(function(r){return r.json()}).then(function(d){var l=(d.channels||[]).slice(0,6);if(!l.length){box.innerHTML='<p class="sub">'+(L?'Les premières chaînes arrivent. Ajoutez la vôtre !':'The first channels are joining. Add yours!')+'</p>';return}
+box.innerHTML='';l.forEach(function(c){var a=document.createElement('a');a.className='card ch';a.href='https://t.me/Postpayadsbot?start=src_seo_live';a.style.textDecoration='none';a.style.color='inherit';
+var img=document.createElement('img');img.alt='';img.loading='lazy';img.src='https://marketplace-production-69adf935.up.railway.app/photo/'+encodeURIComponent(c.id);img.onerror=function(){this.style.visibility='hidden'};
+var t=document.createElement('div');var b=document.createElement('b');b.textContent=c.title;var s=document.createElement('small');s.textContent=(c.members||0).toLocaleString()+(L?' abonnés':' subscribers');t.appendChild(b);t.appendChild(s);
+var p=document.createElement('span');p.className='pr';p.textContent=c.price+' USDT';a.appendChild(img);a.appendChild(t);a.appendChild(p);box.appendChild(a)})}).catch(function(){box.innerHTML=''})})();
+</script>
+</body>
+</html>

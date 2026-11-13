@@ -3,3 +3,4 @@ Allow: /
 
 Sitemap: https://jeremstyke.github.io/sitemap.xml
 Sitemap: https://jeremstyke.github.io/ai-football-predictor/sitemap.xml
+Sitemap: https://jeremstyke.github.io/postpay/sitemap.xml
