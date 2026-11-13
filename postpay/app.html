@@ -1,0 +1,176 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<title>Ads Marketplace</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://unpkg.com/@tonconnect/ui@2/dist/tonconnect-ui.min.js"></script>
+<style>
+:root{--bg:var(--tg-theme-bg-color,#fff);--tx:var(--tg-theme-text-color,#0f1419);--hint:var(--tg-theme-hint-color,#8a94a3);--btn:var(--tg-theme-button-color,#2aabee);--btx:var(--tg-theme-button-text-color,#fff);--card:var(--tg-theme-secondary-bg-color,#f4f6f9);--line:rgba(127,127,127,.14)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",Inter,system-ui,sans-serif;background:var(--bg);color:var(--tx);-webkit-font-smoothing:antialiased}
+.hero{background:radial-gradient(120% 140% at 0% 0%,#2563eb 0%,#1e3a8a 45%,#0b1020 100%);color:#fff;padding:20px 18px 50px}
+.brand{display:flex;align-items:center;gap:10px}.logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#60a5fa,#2563eb);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;box-shadow:0 4px 14px rgba(37,99,235,.5)}
+.brand b{font-size:19px;letter-spacing:-.01em}.brand .pill{margin-left:auto;font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;background:rgba(255,255,255,.12);color:#cfe0ff}
+.hero h1{margin:18px 0 0;font-size:25px;line-height:1.15;letter-spacing:-.02em;font-weight:800}.hero p{margin:8px 0 0;color:#b8c6e6;font-size:14px;line-height:1.45}
+.stats{display:flex;margin-top:18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:14px}.stat{flex:1;padding:10px 12px}.stat+.stat{border-left:1px solid rgba(255,255,255,.1)}
+.stat b{display:block;font-size:17px;font-weight:800}.stat span{font-size:11.5px;color:#9fb0d6}
+.wrap{padding:0 14px 30px;max-width:640px;margin:-28px auto 0}
+.search{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:12px;padding:11px 14px;color:var(--hint)}.search svg{flex:none}
+.search input{border:0;outline:0;background:transparent;color:var(--tx);font-size:15px;flex:1}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:14px 0 6px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:7px 14px;border-radius:999px;background:transparent;color:var(--hint);font-size:13px;font-weight:600;border:1px solid var(--line);cursor:pointer;white-space:nowrap}
+.chip.on{background:var(--tx);color:var(--bg);border-color:var(--tx)}
+.card{background:var(--card);border-radius:16px;padding:14px;margin-top:10px;display:flex;gap:12px;align-items:center;animation:in .25s ease both}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.av{width:48px;height:48px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;color:#fff;background-size:cover;background-position:center}
+.info{flex:1;min-width:0}.t{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.u{color:var(--hint);font-size:13px;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meta{color:var(--hint);font-size:12.5px;margin-top:5px;line-height:1.4}.meta b{color:var(--tx);font-weight:600}
+.badge{display:inline-block;font-size:11px;font-weight:700;color:#22c55e;margin-top:5px}
+.side{text-align:right;flex:none}.price{font-weight:800;font-size:17px;letter-spacing:-.01em;white-space:nowrap}.price small{font-size:11px;color:var(--hint);font-weight:600;display:block;margin-top:1px}
+.side button{padding:8px 16px;font-size:13.5px;border-radius:10px}
+button{background:var(--btn);color:var(--btx);border:0;border-radius:12px;padding:9px 16px;font-size:14px;font-weight:700;cursor:pointer;margin-top:8px;transition:transform .1s}
+button:active{transform:scale(.96)}button:disabled{opacity:.5}button.off{background:var(--bg);color:var(--hint);opacity:1;font-size:12.5px}
+.empty{text-align:center;color:var(--hint);padding:50px 20px;font-size:15px}.empty .big{font-size:46px;margin-bottom:10px}
+.cta{margin-top:18px;border-radius:16px;padding:16px;border:1px dashed var(--line);display:flex;gap:12px;align-items:center;cursor:pointer}.cta .go{margin-left:auto;color:var(--btn);font-weight:700;font-size:22px}
+.tabs{display:flex;background:var(--card);border-radius:16px;padding:5px;box-shadow:0 6px 24px rgba(0,0,0,.12);border:1px solid var(--line);margin-bottom:14px}
+.tabs b{flex:1;text-align:center;padding:10px 6px;border-radius:12px;font-size:14px;font-weight:700;color:var(--hint);cursor:pointer;transition:all .15s}.tabs b.on{background:var(--bg);color:var(--tx);box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.mc{background:var(--card);border-radius:20px;padding:16px;margin-bottom:14px;animation:in .25s ease both}
+.mhd{display:flex;gap:12px;align-items:center;padding-bottom:14px;border-bottom:1px solid var(--line)}.mhd .av{width:46px;height:46px;font-size:18px}
+.mhd b{display:block;font-size:16px}.mhd span{display:block;color:var(--hint);font-size:12.5px;margin-top:2px}
+.mrow{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}.mrow:last-of-type{border-bottom:0}
+.mrow .l{font-size:14.5px;font-weight:600}.mrow .l small{display:block;font-weight:500;color:var(--hint);font-size:12px;margin-top:2px}
+.stp{display:flex;align-items:center;gap:4px;background:rgba(127,127,127,.12);border-radius:12px;padding:3px}
+.stp i{width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:20px;font-weight:700;border-radius:10px;cursor:pointer;color:var(--btn)}.stp i:active{background:rgba(127,127,127,.18)}
+.stp span{min-width:62px;text-align:center;font-weight:800;font-size:15px}
+.seg{display:flex;background:rgba(127,127,127,.12);border-radius:12px;padding:3px}.seg i{width:32px;text-align:center;font-style:normal;padding:7px 0;border-radius:9px;font-weight:700;font-size:14px;cursor:pointer;color:var(--hint)}.seg i.on{background:var(--btn);color:var(--btx)}
+.sel{appearance:none;-webkit-appearance:none;background:rgba(127,127,127,.12) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a94a3' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat right 12px center;color:var(--tx);border:0;border-radius:12px;padding:10px 34px 10px 14px;font-size:14px;font-weight:700;font-family:inherit}
+.et{background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;border-radius:20px;padding:18px;margin-bottom:14px}.et>span{font-size:13px;color:#cfe0ff}.et>b{display:block;font-size:32px;font-weight:800;letter-spacing:-.02em;margin-top:2px}.et>b small{font-size:15px;color:#cfe0ff}
+.eg{display:flex;margin-top:14px;background:rgba(255,255,255,.1);border-radius:14px}.eg div{flex:1;padding:10px 12px}.eg div+div{border-left:1px solid rgba(255,255,255,.15)}.eg span{display:block;font-size:12px;color:#cfe0ff}.eg b{display:block;font-size:16px;margin-top:2px}.eg small{font-size:11.5px;color:#cfe0ff}
+.eh{display:block;font-size:16px}.ep{color:var(--hint);font-size:13.5px;line-height:1.45;margin:6px 0 12px}.lk{background:rgba(127,127,127,.12);border-radius:12px;padding:12px;font-size:13.5px;font-weight:600;word-break:break-all}.ok{color:#34c759;font-weight:800;font-size:20px}
+.hr{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.hr:last-child{border-bottom:0}.hr i{flex:none;width:36px;height:36px;border-radius:10px;font-style:normal;display:flex;align-items:center;justify-content:center;background:rgba(37,99,235,.15)}.hr i.ref{background:rgba(52,199,89,.15)}
+.hm{flex:1;min-width:0}.hm b{display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hm span{font-size:12px;color:var(--hint)}.ha{text-align:right;flex:none}.ha b{display:block;color:#34c759;font-size:14px}.ha a{font-size:12px;color:var(--btn);font-weight:700;cursor:pointer}
+.hw{display:flex;gap:12px;align-items:flex-start;margin-top:12px;font-size:13.5px;line-height:1.45}.hw i{flex:none;width:24px;height:24px;border-radius:50%;background:rgba(37,99,235,.15);color:var(--btn);font-style:normal;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.stw{margin-top:12px;padding:10px 12px;border-radius:12px;font-size:13px;font-weight:600;line-height:1.4;background:rgba(255,159,10,.14);color:#ff9f0a}.stw.no,.stw.ban{background:rgba(220,53,69,.14);color:#ff6b6b}
+.sort{display:flex;align-items:center;gap:6px;padding:4px 0 2px;font-size:12.5px;color:var(--hint)}.sort span{margin-right:2px}.sort b{padding:5px 11px;border-radius:999px;font-weight:700;cursor:pointer;color:var(--hint);background:rgba(127,127,127,.1)}.sort b.on{background:var(--btn);color:var(--btx)}.card.hl{outline:2px solid var(--btn);box-shadow:0 8px 26px rgba(37,99,235,.25)}.lb{display:flex;gap:6px}.lb i{font-style:normal;font-weight:700;font-size:13px;padding:8px 12px;border-radius:10px;cursor:pointer;background:rgba(127,127,127,.12);color:var(--btn)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:rgba(30,30,30,.92);color:#fff;padding:10px 18px;border-radius:20px;font-size:14px;font-weight:600;opacity:0;transition:all .25s;pointer-events:none;z-index:9}.toast.show{opacity:1;transform:translateX(-50%)}.toast.err{background:#dc3545}
+.cta .e{width:40px;height:40px;border-radius:12px;background:rgba(37,99,235,.15);color:var(--btn);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;flex:none}.cta b{display:block;font-size:15px}.cta span{font-size:13px;color:var(--hint)}
+/* paiement */
+.ph{padding:22px 18px 18px}.ph h1{margin:0;font-size:22px}.ph p{margin:6px 0 0;color:var(--hint);font-size:14px}
+.box{background:var(--card);border-radius:18px;padding:16px;margin:0 14px 12px}
+.prev{white-space:pre-wrap;font-size:14px;line-height:1.45;max-height:160px;overflow:auto}
+.fakebtn{margin-top:12px;text-align:center;padding:10px;border-radius:10px;background:var(--bg);font-weight:700;font-size:14px;color:var(--btn)}
+.line{display:flex;justify-content:space-between;padding:7px 0;font-size:14px}.line+.line{border-top:1px solid var(--line)}
+.line.tot{font-size:17px;font-weight:800}
+.steps{display:flex;gap:8px;margin:0 14px 12px}.step{flex:1;text-align:center;font-size:12px;color:var(--hint);padding:10px 4px;border-radius:12px;background:var(--card)}
+.step.on{background:var(--btn);color:var(--btx);font-weight:700}
+#tc{display:flex;justify-content:center;margin:6px 0 4px}.payb{width:calc(100% - 28px);margin:8px 14px;padding:15px;font-size:16px;border-radius:14px}
+.msg{margin:8px 14px;padding:12px 14px;border-radius:14px;font-size:14px;line-height:1.4;display:none}.msg.ok{display:block;background:rgba(31,157,85,.12);color:#1f9d55}
+.msg.err{display:block;background:rgba(220,53,69,.12);color:#dc3545}.msg.wait{display:block;background:var(--card);color:var(--hint)}
+.note{text-align:center;color:var(--hint);font-size:12.5px;margin:6px 20px 24px;line-height:1.4}
+</style></head><body><div id="root"></div>
+<script>
+const tg=window.Telegram.WebApp;tg.ready();tg.expand();try{tg.setHeaderColor&&tg.setHeaderColor('#1d4ed8')}catch(_){}
+const lang=((tg.initDataUnsafe.user||{}).language_code||'en').startsWith('fr')?'fr':'en';
+const T={en:{title:'Advertise in Telegram channels',sub:'Pick a channel, send your ad, pay in USDT. Posted automatically, results after 24h.',channels:'Channels',reach:'Total reach',feeL:'Platform fee',search:'Search a channel...',all:'All',buy:'Buy ad',per:'per ad · 24h',members:'members',ads:'ads',cpc:'/click',none:'No channel here yet',ctaT:'Own a channel?',ctaS:'List it and earn USDT from ads.',sent:'Go to the bot chat to send your ad.',pay:'Pay for your ad',paySub:'Payment goes directly to the channel owner.',s1:'Approved',s2:'Payment',s3:'Live',you:'Channel owner',fee:'Platform fee',total:'Total',payBtn:'Pay',wait:'Payment sent. Waiting for blockchain confirmation, your ad will be posted automatically...',done:'Payment confirmed. Your ad is live!',bal:'Not enough USDT in this wallet. Balance: ',nousdt:'No USDT found in this wallet.',notReady:'This ad is not waiting for payment.',own:'This is your own channel.',tBuy:'Buy ads',tMine:'My channels',tEarn:'Earnings',eTot:'Total received',eCh:'Ads sold',eKeep:'You keep',eCopy:'Copy',eShare:'Share',eCopied:'Link copied ✓',eHow:'How you get paid',eP1:'An advertiser buys an ad on your channel and you approve it.',eP2:'They pay: you get {p}% of the price straight in your wallet, in the same transaction.',eP3:'The ad is posted automatically and removed after 24h.',eSafe:'PostPay never holds your money. Every payment can be checked on the blockchain with the Proof button.',eW:'Payout wallet',eWno:'No wallet: you cannot get paid.',eWbtn:'Connect',eHist:'Payment history',eNone:'No payment yet.',eTch:'Ad on',eProof:'Proof',mPrice:'Price per ad',mTheme:'Theme',mLang:'Language',mMax:'max',mPer:'Ads per day',mPerS:'4h minimum between 2 ads',mSaved:'Saved ✓',mLink:'Link to sell your ad',mLinkS:'Advertisers land right on your channel',mShare:'📢 Advertise on {t} ({m} subscribers), paid in USDT 👇',sM:'Subscribers',sPa:'Price ↑',sPd:'Price ↓',sortL:'Sort',st_wait:'⏳ Waiting for approval by our team (within 48h). You can already set it up.',st_no:'❌ Not accepted on PostPay.',st_ban:'🚫 Disabled: an ad was deleted before 24h. It stays disabled until our team reactivates it.',kept:'{n} ads kept 24h',mAdded:'✅ Channel added! Approval within 48h.',mNone:'You have no channel yet.',mAdd:'➕ Add my channel',mErrP:'Price must be between 0.50 and ',mErrW:'Connect your wallet first (bot menu > Wallet).',busy:'Not available right now.',reserved:'Reserved',perDay:'/day',wT:'Connect your wallet',wS:'Receive your USDT payments directly in your TON wallet.',wOk:'Wallet connected! You can go back to the bot.',wBtn:'Back to the bot',note:'You need USDT and about 0.1 TON for network fees in your TON wallet (Wallet or Tonkeeper).'},
+fr:{title:'Votre pub dans les chaînes Telegram',sub:'Choisissez une chaîne, envoyez votre pub, payez en USDT. Publiée automatiquement, résultats après 24 h.',channels:'Chaînes',reach:'Audience totale',feeL:'Frais',search:'Rechercher une chaîne...',all:'Tout',buy:'Acheter',per:'la pub · 24 h',members:'abonnés',ads:'pubs',cpc:'/clic',none:'Aucune chaîne ici pour le moment',ctaT:'Vous avez une chaîne ?',ctaS:'Inscrivez-la et gagnez des USDT avec la pub.',sent:'Allez dans la conversation du bot pour envoyer votre pub.',pay:'Payer votre pub',paySub:'Le paiement va directement au propriétaire de la chaîne.',s1:'Acceptée',s2:'Paiement',s3:'En ligne',you:'Propriétaire',fee:'Frais plateforme',total:'Total',payBtn:'Payer',wait:'Paiement envoyé. En attente de confirmation sur la blockchain, la pub sera publiée automatiquement...',done:'Paiement confirmé. Votre pub est en ligne !',bal:"Pas assez d'USDT sur ce wallet. Solde : ",nousdt:"Aucun USDT trouvé sur ce wallet.",notReady:"Cette pub n'attend pas de paiement.",own:"C'est votre propre chaîne.",tBuy:'Acheter',tMine:'Mes chaînes',tEarn:'Gains',eTot:'Total reçu',eCh:'Pubs vendues',eKeep:'Tu gardes',eCopy:'Copier',eShare:'Partager',eCopied:'Lien copié ✓',eHow:'Comment tu es payé',eP1:'Un annonceur achète une pub sur ta chaîne et tu l\'acceptes.',eP2:'Il paie : tu reçois {p} % du prix directement sur ton wallet, dans la même transaction.',eP3:'La pub est publiée automatiquement puis retirée après 24 h.',eSafe:'PostPay ne garde jamais ton argent. Chaque paiement est vérifiable sur la blockchain avec le bouton Preuve.',eW:'Wallet de paiement',eWno:'Pas de wallet : tu ne peux pas être payé.',eWbtn:'Connecter',eHist:'Historique des paiements',eNone:'Aucun paiement pour le moment.',eTch:'Pub sur',eProof:'Preuve',mPrice:'Prix par pub',mTheme:'Thème',mLang:'Langue',mMax:'max',mPer:'Pubs par jour',mPerS:'4 h minimum entre 2 pubs',mSaved:'Enregistré ✓',mLink:'Lien pour vendre ta pub',mLinkS:'Les annonceurs arrivent sur ta chaîne',mShare:'📢 Fais ta pub sur {t} ({m} abonnés), payé en USDT 👇',sM:'Abonnés',sPa:'Prix ↑',sPd:'Prix ↓',sortL:'Trier',st_wait:'⏳ En attente de validation par notre équipe (sous 48 h). Tu peux déjà la régler.',st_no:'❌ Non acceptée sur PostPay.',st_ban:'🚫 Désactivée : une pub a été supprimée avant 24 h. Elle reste désactivée jusqu\'à sa réactivation par notre équipe.',kept:'{n} pubs gardées 24 h',mAdded:'✅ Chaîne ajoutée ! Validation sous 48 h.',mNone:"Tu n'as pas encore de chaîne.",mAdd:'➕ Ajouter ma chaîne',mErrP:'Le prix doit être entre 0,50 et ',mErrW:'Connectez d\'abord votre wallet (menu du bot > Wallet).',busy:'Pas disponible pour le moment.',reserved:'Réservée',perDay:'/jour',wT:'Connectez votre wallet',wS:'Recevez vos paiements en USDT directement sur votre wallet TON.',wOk:'Wallet connecté ! Vous pouvez retourner au bot.',wBtn:'Retour au bot',note:'Il faut des USDT et environ 0,1 TON de frais de réseau sur votre wallet TON (Wallet ou Tonkeeper).'}}[lang];
+const TH={crypto:['','Crypto'],business:['','Business'],finance:['','Finance'],tech:['','Tech'],gaming:['',lang==='fr'?'Jeux':'Gaming'],sports:['',lang==='fr'?'Sport':'Sports'],news:['',lang==='fr'?'Actu':'News'],entertainment:['',lang==='fr'?'Divertissement':'Entertainment'],lifestyle:['','Lifestyle'],education:['',lang==='fr'?'Éducation':'Education'],other:['',lang==='fr'?'Autre':'Other']};
+const LG={en:'EN',fr:'FR',es:'ES',ru:'RU',other:''};
+const COLORS=['#2aabee','#6c5ce7','#00b894','#e17055','#fd79a8','#0984e3','#e84393','#00cec9'];
+const root=document.getElementById('root');const e=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const post=(p,b)=>fetch(p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...b,initData:tg.initData})}).then(r=>r.json());
+const fmtN=n=>n>=1e6?(n/1e6).toFixed(1).replace('.0','')+'M':n>=1e3?(n/1e3).toFixed(1).replace('.0','')+'k':String(n);
+const q=new URLSearchParams(location.search);const payId=q.get('pay')||(tg.initDataUnsafe.start_param||'').replace('pay_','');
+const hap=()=>{try{tg.HapticFeedback.impactOccurred('light')}catch(_){}};
+async function catalog(){
+ const d=await fetch('/api/channels').then(r=>r.json());const ch=d.channels;
+ const reach=ch.reduce((a,c)=>a+(c.members||0),0);let theme='',term='',sortBy='m';const focus=q.get('ch');
+ root.innerHTML='<div class="hero"><div class="brand"><div class="logo">P</div><b>PostPay</b><span class="pill">USDT · TON</span></div><h1>'+T.title+'</h1><p>'+T.sub+'</p><div class="stats"><div class="stat"><b>'+ch.length+'</b><span>'+T.channels+'</span></div><div class="stat"><b>'+fmtN(reach)+'</b><span>'+T.reach+'</span></div><div class="stat"><b>'+d.fee+' %</b><span>'+T.feeL+'</span></div></div></div>'
+ +'<div class="wrap"><div class="tabs"><b data-t="buy" class="on">'+T.tBuy+'</b><b data-t="mine">'+T.tMine+'</b><b data-t="earn">'+T.tEarn+'</b></div><div id="vbuy"><div class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="s" placeholder="'+T.search+'"></div><div class="chips" id="chips"></div><div class="sort" id="sort"></div><div id="list"></div>'
+ +'<div class="cta" id="cta"><div class="e">+</div><div><b>'+T.ctaT+'</b><span>'+T.ctaS+'</span></div><div class="go">›</div></div></div><div id="mine" style="display:none"></div><div id="earn" style="display:none"></div></div><div class="toast" id="toast"></div>';
+ document.querySelectorAll('.tabs b').forEach(b=>b.onclick=()=>{hap();document.querySelectorAll('.tabs b').forEach(x=>x.className=x===b?'on':'');const t=b.dataset.t;vbuy.style.display=t==='buy'?'':'none';document.getElementById('mine').style.display=t==='mine'?'':'none';document.getElementById('earn').style.display=t==='earn'?'':'none';if(t==='earn')earn();});
+ const used=[...new Set(ch.map(c=>c.theme))];
+ const drawChips=()=>{chips.innerHTML=['',...Object.keys(TH).filter(k=>used.includes(k))].map(k=>'<div class="chip'+(k===theme?' on':'')+'" data-k="'+k+'">'+(k?TH[k][1]:T.all)+'</div>').join('');chips.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{hap();theme=c.dataset.k;drawChips();draw();});};
+ const drawSort=()=>{sort.innerHTML='<span>'+T.sortL+'</span>'+[['m',T.sM],['pa',T.sPa],['pd',T.sPd]].map(x=>'<b data-s="'+x[0]+'"'+(x[0]===sortBy?' class="on"':'')+'>'+x[1]+'</b>').join('');sort.querySelectorAll('b').forEach(b=>b.onclick=()=>{hap();sortBy=b.dataset.s;drawSort();draw();});};
+ const draw=()=>{const l=ch.filter(c=>(!theme||c.theme===theme)&&(!term||(c.title+' '+(c.username||'')).toLowerCase().includes(term))).sort((a,b)=>(focus?(String(b.id)===focus)-(String(a.id)===focus):0)||(sortBy==='pa'?a.price-b.price:sortBy==='pd'?b.price-a.price:b.members-a.members));
+  list.innerHTML=l.length?l.map((c,i)=>{const col=COLORS[Math.abs(String(c.id).split('').reduce((a,x)=>a+x.charCodeAt(0),0))%COLORS.length];
+   return '<div class="card'+(focus&&String(c.id)===focus?' hl':'')+'" style="animation-delay:'+(i*30)+'ms"><div class="av" style="background-color:'+col+';background-image:url(/photo/'+encodeURIComponent(c.id)+')">'+e((c.title||'?').trim()[0].toUpperCase())+'</div>'
+   +'<div class="info"><div class="t">'+e(c.title)+'</div><div class="u">'+(c.username?'@'+e(c.username):'')+'</div><div class="meta"><b>'+fmtN(c.members)+'</b> '+T.members+' · '+(TH[c.theme]?TH[c.theme][1]:'')+(LG[c.lang]?' · '+LG[c.lang]:'')+' · '+c.perDay+T.perDay+'</div>'+(c.kept?'<div class="badge">✅ '+T.kept.replace('{n}',c.kept)+'</div>':'')+(c.cpc?'<div class="badge" style="margin-left:8px">~'+c.cpc+' USDT'+T.cpc+'</div>':'')+'</div>'
+   +'<div class="side"><div class="price">'+c.price+' USDT<small>'+T.per+'</small></div>'+(c.free?'<button data-id="'+e(c.id)+'">'+T.buy+'</button>':'<button class="off" disabled>'+(c.next?'⏳ '+c.next:T.reserved)+'</button>')+'</div></div>';}).join('')
+   :'<div class="empty">'+T.none+'</div>';
+  list.querySelectorAll('.av').forEach(a=>{const img=new Image();img.onload=()=>{a.textContent=''};img.onerror=()=>{a.style.backgroundImage='none'};img.src=a.style.backgroundImage.slice(5,-2)});
+  list.querySelectorAll('button[data-id]').forEach(b=>b.onclick=async()=>{hap();b.disabled=true;const r=await post('/api/order',{channelId:b.dataset.id});if(r.ok){tg.showAlert(T.sent,()=>tg.close());}else{tg.showAlert(r.error==='own'?T.own:r.error==='busy'?T.busy:'Error: '+r.error);b.disabled=false;}});};
+ s.oninput=()=>{term=s.value.trim().toLowerCase();draw();};
+ cta.onclick=addCh;
+ drawChips();drawSort();draw();mine();if(q.get('tab'))(document.querySelector('.tabs b[data-t='+q.get('tab')+']')||{click(){}}).click();
+}
+let nCh=0,addIv;const addCh=()=>{hap();const before=nCh;tg.openTelegramLink('https://t.me/__BOT__?startchannel&admin=post_messages+edit_messages+delete_messages');let k=0;clearInterval(addIv);addIv=setInterval(async()=>{k++;if(k>72)return clearInterval(addIv);const d=await post('/api/mine',{});if((d.channels||[]).length>before){clearInterval(addIv);await mine();const b=document.querySelector('.tabs b[data-t=mine]');if(b)b.click();window.scrollTo(0,0);toast(T.mAdded);try{tg.HapticFeedback.notificationOccurred('success')}catch(_){}}},2500);};
+let toastT;const toast=(t,err)=>{const x=document.getElementById('toast');x.textContent=t;x.className='toast show'+(err?' err':'');clearTimeout(toastT);toastT=setTimeout(()=>x.className='toast',2600);};
+async function mine(){
+ const box=document.getElementById('mine');const d=tg.initData?await post('/api/mine',{}):{channels:[]};nCh=(d.channels||[]).length;
+ if(!d.channels||!d.channels.length){box.innerHTML='<div class="empty">'+T.mNone+'<br><button id="addc" style="margin-top:16px;padding:12px 20px">'+T.mAdd+'</button></div>';addc.onclick=addCh;return;}
+ box.innerHTML=d.channels.map(c=>{const col=COLORS[Math.abs(String(c.id).split('').reduce((a,x)=>a+x.charCodeAt(0),0))%COLORS.length];
+  return '<div class="mc" data-id="'+e(c.id)+'"><div class="mhd"><div class="av" style="background-color:'+col+';background-image:url(/photo/'+encodeURIComponent(c.id)+')">'+e((c.title||'?').trim()[0].toUpperCase())+'</div><div><b>'+e(c.title)+'</b><span>'+fmtN(c.members)+' '+T.members+' · '+c.ads+' '+T.ads+'</span></div></div>'+(c.st!=='ok'?'<div class="stw '+c.st+'">'+T['st_'+c.st]+'</div>':'')
+  +'<div class="mrow"><div class="l">'+T.mPrice+'<small>'+T.mMax+' '+c.max+' USDT</small></div><div class="stp"><i data-d="-1">−</i><span class="pv">'+(c.price||1)+' USDT</span><i data-d="1">+</i></div></div>'
+  +'<div class="mrow"><div class="l">'+T.mPer+'<small>'+T.mPerS+'</small></div><div class="seg">'+[1,2,3,4,5].map(n=>'<i data-n="'+n+'" class="'+(n===c.perDay?'on':'')+'">'+n+'</i>').join('')+'</div></div>'
+  +'<div class="mrow"><div class="l">'+T.mTheme+'</div><select class="sel th">'+Object.keys(TH).map(k=>'<option value="'+k+'"'+(k===c.theme?' selected':'')+'>'+TH[k][1]+'</option>').join('')+'</select></div>'
+  +'<div class="mrow"><div class="l">'+T.mLang+'</div><select class="sel lg">'+[['en','English'],['fr','Français'],['es','Español'],['ru','Русский'],['other',lang==='fr'?'Autre':'Other']].map(x=>'<option value="'+x[0]+'"'+(x[0]===c.lang?' selected':'')+'>'+x[1]+'</option>').join('')+'</select></div>'
+  +'<div class="mrow"><div class="l">'+T.mLink+'<small>'+T.mLinkS+'</small></div><div class="lb"><i class="cpl">'+T.eCopy+'</i><i class="shl">'+T.eShare+'</i></div></div>'
+  +'</div>';}).join('');
+ box.querySelectorAll('.av').forEach(a=>{const img=new Image();img.onload=()=>{a.textContent=''};img.onerror=()=>{a.style.backgroundImage='none'};img.src=a.style.backgroundImage.slice(5,-2)});
+ d.channels.forEach((c,i)=>{const card=box.querySelectorAll('.mc')[i];let st={price:c.price||1,perDay:c.perDay,theme:c.theme,lang:c.lang},tm;const stepOf=p=>p<10?0.5:1;
+  const send=()=>{clearTimeout(tm);tm=setTimeout(async()=>{const r=await post('/api/channel',{id:c.id,...st});if(r.ok){toast(T.mSaved);try{tg.HapticFeedback.notificationOccurred('success')}catch(_){}}else toast(r.error==='price'?T.mErrP+r.max+' USDT':r.error==='wallet'?T.mErrW:'Error: '+r.error,1);},500);};
+  card.querySelectorAll('.stp i').forEach(b=>b.onclick=()=>{hap();const up=Number(b.dataset.d)>0;st.price=Math.round(Math.min(c.max,Math.max(0.5,up?st.price+stepOf(st.price):st.price-stepOf(st.price-0.001)))*100)/100;card.querySelector('.pv').textContent=st.price+' USDT';send();});
+  card.querySelectorAll('.seg i').forEach(x=>x.onclick=()=>{hap();st.perDay=Number(x.dataset.n);card.querySelectorAll('.seg i').forEach(y=>y.className=y===x?'on':'');send();});
+  card.querySelector('.sel.th').onchange=function(){hap();st.theme=this.value;send();};
+  card.querySelector('.sel.lg').onchange=function(){hap();st.lang=this.value;send();};
+  card.querySelector('.cpl').onclick=()=>{hap();const ok=()=>toast(T.eCopied);try{navigator.clipboard.writeText(c.link).then(ok,()=>toast(c.link))}catch(_){toast(c.link)}};
+  card.querySelector('.shl').onclick=()=>{hap();tg.openTelegramLink('https://t.me/share/url?url='+encodeURIComponent(c.link)+'&text='+encodeURIComponent(T.mShare.replace('{t}',c.title).replace('{m}',fmtN(c.members))));};
+});
+}
+async function earn(){
+ const box=document.getElementById('earn');if(!tg.initData)return;const d=await post('/api/earn',{});if(d.error)return;
+ box.innerHTML='<div class="et"><span>'+T.eTot+'</span><b>'+d.ch+' <small>USDT</small></b><div class="eg"><div><span>'+T.eCh+'</span><b>'+d.ads+'</b></div><div><span>'+T.eKeep+'</span><b>'+(100-d.feePct)+' %</b></div></div></div>'
+ +'<div class="mc"><div class="mrow"><div class="l">'+T.eW+'<small>'+(d.wallet?e(d.wallet.slice(0,6)+'...'+d.wallet.slice(-6)):T.eWno)+'</small></div>'+(d.wallet?'<span class="ok">✓</span>':'<button id="ewc" style="margin:0">'+T.eWbtn+'</button>')+'</div></div>'
+ +'<div class="mc"><b class="eh">'+T.eHist+'</b>'+(d.hist.length?d.hist.map(h=>'<div class="hr"><i class="ch">📢</i><div class="hm"><b>'+T.eTch+' '+e(h.title)+'</b><span>'+new Date(h.at).toLocaleDateString(lang==='fr'?'fr-FR':'en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+'</span></div><div class="ha"><b>+'+h.amount+' USDT</b>'+(h.tx?'<a data-tx="'+e(h.tx)+'">'+T.eProof+' ↗</a>':'')+'</div></div>').join(''):'<p class="ep" style="margin:10px 0 0">'+T.eNone+'</p>')+'</div>'
+ +'<div class="mc"><b class="eh">'+T.eHow+'</b>'+[T.eP1,T.eP2.replace('{p}',100-d.feePct),T.eP3].map((x,i)=>'<div class="hw"><i>'+(i+1)+'</i><span>'+x+'</span></div>').join('')+'<p class="ep" style="margin:12px 0 0">🔒 '+T.eSafe+'</p></div>';
+ if(!d.wallet)ewc.onclick=()=>{hap();location.href='/app?wallet=1';};
+ box.querySelectorAll('a[data-tx]').forEach(a=>a.onclick=()=>{hap();tg.openLink('https://tonviewer.com/transaction/'+a.dataset.tx);});
+}
+async function pay(){
+ const o=await post('/api/pay',{orderId:payId});
+ if(o.error){root.innerHTML='<div class="empty"><div class="big">⚠️</div>'+e(o.error)+'</div>';return;}
+ const live=o.status==='posted'||o.status==='done'||o.status==='paid';
+ root.innerHTML='<div class="ph"><h1>💳 '+T.pay+'</h1><p>'+T.paySub+'</p></div>'
+ +'<div class="steps"><div class="step on">✓ '+T.s1+'</div><div class="step'+(o.status==='approved'?' on':'')+'">'+T.s2+'</div><div class="step'+(live?' on':'')+'">'+T.s3+'</div></div>'
+ +'<div class="box"><div class="prev">'+e(o.preview)+'</div><div class="fakebtn">'+e(o.btnText)+'</div></div>'
+ +'<div class="box"><div class="line"><span>📢 '+e(o.channel)+'</span><span></span></div><div class="line"><span>'+T.you+'</span><span>'+o.pub+' USDT</span></div>'+(o.fee!=='0'?'<div class="line"><span>'+T.fee+'</span><span>'+o.fee+' USDT</span></div>':'')+'<div class="line tot"><span>'+T.total+'</span><span>'+o.price+' USDT</span></div></div>'
+ +'<div id="tc"></div><button class="payb" id="pb">'+T.payBtn+' '+o.price+' USDT</button><div class="msg" id="st"></div><div class="note">'+T.note+'</div>';
+ const show=(cls,txt)=>{st.className='msg '+cls;st.textContent=txt;};
+ if(o.status!=='approved'){pb.disabled=true;show(live?'ok':'err',live?T.done:T.notReady);}
+ const ui=new TON_CONNECT_UI.TonConnectUI({manifestUrl:location.origin+'/tonconnect-manifest.json',buttonRootId:'tc'});
+ ui.uiOptions={twaReturnUrl:'https://t.me/__BOT__'};
+ pb.onclick=async()=>{hap();
+  if(!ui.connected){await ui.openModal();return;}
+  pb.disabled=true;show('wait','...');
+  const tx=await post('/api/tx',{orderId:payId,owner:ui.account.address});
+  if(tx.error){pb.disabled=false;show('err',tx.error==='balance'?T.bal+tx.balance+' USDT':tx.error==='no_usdt'?T.nousdt:'Error: '+tx.error);return;}
+  try{await ui.sendTransaction({validUntil:tx.validUntil,messages:tx.messages});show('wait',T.wait);watch();}
+  catch(err){pb.disabled=false;show('err',String(err&&err.message||err));}
+ };
+ function watch(){const iv=setInterval(async()=>{const r=await post('/api/pay',{orderId:payId});if(r.status==='posted'||r.status==='done'){clearInterval(iv);show('ok',T.done);try{tg.HapticFeedback.notificationOccurred('success')}catch(_){}}},8000);}
+}
+async function wallet(){
+ root.innerHTML='<div class="ph"><h1>👛 '+T.wT+'</h1><p>'+T.wS+'</p></div><div id="tc"></div><div class="msg" id="st"></div><button class="payb" id="bk" style="display:none">'+T.wBtn+'</button>';
+ const ui=new TON_CONNECT_UI.TonConnectUI({manifestUrl:location.origin+'/tonconnect-manifest.json',buttonRootId:'tc'});
+ ui.uiOptions={twaReturnUrl:'https://t.me/__BOT__'};
+ let done=false;
+ const save=async a=>{if(done||!a)return;done=true;const r=await post('/api/wallet',{address:a.address});
+  if(r.ok){st.className='msg ok';st.textContent=T.wOk;bk.style.display='block';try{tg.HapticFeedback.notificationOccurred('success')}catch(_){}setTimeout(()=>tg.close(),2500);}
+  else{done=false;st.className='msg err';st.textContent='Error: '+r.error;}};
+ bk.onclick=()=>tg.close();
+ ui.onStatusChange(w=>save(w&&w.account));
+ await ui.connectionRestored;
+ if(ui.connected){await ui.disconnect().catch(()=>{});}
+ ui.openModal();
+}
+q.get('wallet')?wallet():payId?pay():catalog();
+</script></body></html>
