@@ -104,7 +104,9 @@ def build():
     for lg in ("en", "fr"):
         for key in PAGES:
             p = os.path.join(ROOT, path(key, lg), "index.html")
-            open(p, "w", encoding="utf-8").write(chrome(open(p, encoding="utf-8").read(), key, lg))
+            cur = open(p, encoding="utf-8").read()  # read first: opening for writing empties the file
+            if not cur.strip(): raise SystemExit("RESTE page vide : " + p)
+            open(p, "w", encoding="utf-8").write(chrome(cur, key, lg))
     urls = [B + path(k, l) for l, _, _ in LANGS for k in PAGES if l in ("en", "fr") or os.path.exists(os.path.join(SD, l + ".json"))]
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(
         "  <url><loc>%s</loc><lastmod>2026-11-14</lastmod><priority>%s</priority></url>\n" % (u, "1.0" if u.rstrip("/").count("/") <= 4 else "0.8") for u in urls) + "</urlset>\n"
