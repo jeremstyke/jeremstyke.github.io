@@ -30,7 +30,7 @@ const maxPrice = (members: number) => TIERS.find(([m]) => (members || 0) < m)![1
 const PAIDS = ["paid", "posted", "done", "removed_early"]; // a paid ad, even removed too early
 const GAP_H = 4; // minimum entre 2 pubs sur une même chaîne
 const THEMES = ["crypto", "business", "finance", "tech", "gaming", "sports", "news", "entertainment", "lifestyle", "education", "other"];
-const LANGS = ["en", "fr", "es", "ru", "other"];
+const LANGS = ["en", "fr", "es", "pt", "ru", "tr", "id", "hi", "ar", "fa", "other"]; // 14 nov 2026 (Jeremy): same 10 languages as the site and the app
 
 if (!BOT_TOKEN) { console.error("BOT_TOKEN manquant"); process.exit(1); }
 let BOT_USERNAME = process.env.BOT_USERNAME || "";
@@ -158,7 +158,7 @@ const THEME_LABEL: any = {
   en: { crypto: "🪙 Crypto", business: "💼 Business", finance: "💰 Finance", tech: "💻 Tech", gaming: "🎮 Gaming", sports: "⚽ Sports", news: "📰 News", entertainment: "🎬 Entertainment", lifestyle: "🌴 Lifestyle", education: "📚 Education", other: "✨ Other" },
   fr: { crypto: "🪙 Crypto", business: "💼 Business", finance: "💰 Finance", tech: "💻 Tech", gaming: "🎮 Jeux", sports: "⚽ Sport", news: "📰 Actu", entertainment: "🎬 Divertissement", lifestyle: "🌴 Lifestyle", education: "📚 Éducation", other: "✨ Autre" },
 };
-const LANG_LABEL: any = { en: "🇬🇧 English", fr: "🇫🇷 Français", es: "🇪🇸 Español", ru: "🇷🇺 Русский", other: "🌍 Other" };
+const LANG_LABEL: any = { en: "🇬🇧 English", fr: "🇫🇷 Français", es: "🇪🇸 Español", pt: "🇧🇷 Português", ru: "🇷🇺 Русский", tr: "🇹🇷 Türkçe", id: "🇮🇩 Indonesia", hi: "🇮🇳 हिन्दी", ar: "🇸🇦 العربية", fa: "🇮🇷 فارسی", other: "🌍 Other" };
 
 const TX: any = {
   en: {
@@ -598,7 +598,7 @@ async function handleCallback(q: any) {
   if (k === "th" && u.state?.step === "theme" && u.state.ch === a) {
     db.channels[a].theme = b;
     u.state = { step: "clang", ch: a }; save();
-    const kb = [LANGS.slice(0, 3).map(x => ({ text: LANG_LABEL[x], callback_data: `cl:${a}:${x}` })), LANGS.slice(3).map(x => ({ text: LANG_LABEL[x], callback_data: `cl:${a}:${x}` }))];
+    const kb: any[] = []; for (let i = 0; i < LANGS.length; i += 3) kb.push(LANGS.slice(i, i + 3).map(x => ({ text: LANG_LABEL[x], callback_data: `cl:${a}:${x}` })));
     return say(u.id, t.askLang, kb, false);
   }
   if (k === "cl" && u.state?.step === "clang" && u.state.ch === a) {
