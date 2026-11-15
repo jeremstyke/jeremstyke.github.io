@@ -95,7 +95,6 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6'):
 <div><a class="logo" href="{R}"><span class="logo-ico" aria-hidden="true">🏡</span>Vieillir chez soi</a>
 <p>Des guides simples pour équiper la maison et rester chez soi en sécurité, le plus longtemps possible.</p></div>
 <nav aria-label="Pied de page"><a href="{R}checklist/">Checklist</a><a href="{R}guides/">Guides</a><a href="{R}a-propos/">À propos</a><a href="{R}mentions-legales/">Mentions légales</a><a href="{R}confidentialite/">Confidentialité</a><a href="mailto:{CONTACT}">Contact</a></nav>
-<p class="partner">♿ Handicap, aides et démarches : retrouvez aussi nos conseils sur <a href="https://handi360.fr/">Handi360</a>.</p>
 <p class="disc">{DISCLOSURE} Les informations de ce site sont générales et ne remplacent pas l'avis d'un médecin, d'un ergothérapeute ou d'un pharmacien. Les prix et les offres peuvent changer : vérifiez-les avant d'acheter. © {YEAR} {SITE}</p>
 </div></footer>
 <script src="{R}assets/app.js?v=1" defer></script>
@@ -218,7 +217,7 @@ def build():
     # Pages légales
     page('a-propos/', 'À propos de Vieillir chez soi', "Qui sommes-nous, comment nous choisissons nos conseils et comment le site est financé.",
          f'''<div class="wrap art-wrap"><article class="prose"><h1>À propos</h1>
-<p>Vieillir chez soi aide les seniors et leurs proches à choisir l'équipement utile pour rester à la maison en sécurité. Le site est édité par Jérémy Dacier-Jury, qui publie aussi <a href="https://handi360.fr/">Handi360</a>, un site consacré au handicap.</p>
+<p>Vieillir chez soi aide les seniors et leurs proches à choisir l'équipement utile pour rester à la maison en sécurité. Le site est édité par Jérémy Dacier-Jury.</p>
 <h2>Nos conseils</h2><p>Nous expliquons les critères de choix de chaque équipement. Nous ne citons pas de prix ni de caractéristiques que nous n'avons pas vérifiés. Nos articles sont des conseils généraux : pour une situation précise, l'avis du médecin, d'un ergothérapeute ou du pharmacien prime toujours.</p>
 <h2>Comment le site est financé</h2><p>{DISCLOSURE} Quand vous achetez après avoir cliqué sur un lien vers Amazon, nous touchons une commission, sans surcoût pour vous. Cela ne change pas nos conseils.</p>
 <h2>Contact</h2><p><a href="mailto:{CONTACT}">{CONTACT}</a></p></article></div>''', crumbs=[('À propos', 'a-propos/')], prio='0.3')
