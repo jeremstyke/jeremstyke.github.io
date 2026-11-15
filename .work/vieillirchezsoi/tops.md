@@ -3,6 +3,9 @@
 # Déjà publiés : meilleur-telephone-portable-senior/, meilleur-rollator/, meilleur-fauteuil-releveur/, meilleur-siege-de-douche/, meilleur-casque-tv-senior/, meilleur-detecteur-de-chute/, meilleur-rehausseur-wc/
 
 - [x] meilleur-rehausseur-wc/ | meilleur rehausseur WC | Salle de bains | avec et sans accoudoirs, fixation
+- [ ] meilleur-fauteuil-roulant-electrique/ | meilleur fauteuil roulant électrique pliant | Se déplacer | inclure les modèles Easwe vérifiés sur easwe.fr (lien partenaire, voir AUTOMATION.md) + autres marques sur Amazon
+- [ ] meilleur-scooter-electrique-senior/ | meilleur scooter électrique pour senior | Se déplacer | scooters PMR 3 et 4 roues, pliables ; Easwe s'il en vend (vérifier)
+- [ ] meilleur-tricycle-electrique-senior/ | meilleur tricycle électrique senior | Se déplacer | tricycles adultes à assistance électrique
 - [ ] meilleur-deambulateur/ | meilleur déambulateur | Se déplacer | fixe, 2 roues, pliant
 - [ ] meilleure-canne-de-marche/ | meilleure canne de marche | Se déplacer | pliante, réglable, tripode, quadripode
 - [ ] meilleur-pilulier-electronique/ | meilleur pilulier électronique | Vie quotidienne | alarme, distributeur automatique
