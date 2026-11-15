@@ -117,6 +117,7 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None,
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F6F3EC">
+<meta name="google-site-verification" content="4oaKmmaPhRk9e79dCF6veG1lJ3OI7VipcwnyIDy7JQE" />
 <link rel="icon" href="{R}assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="{R}assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{R}assets/fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
