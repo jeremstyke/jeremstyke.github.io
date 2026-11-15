@@ -38,11 +38,11 @@ CTA = ('<aside class="cta"><div><strong>Faites le point pièce par pièce</stron
        '<a class="btn" href="{R}amenager-logement-personne-agee/">Lire le guide</a></aside>')
 
 PDF_BOX = ('<aside class="pdfbox" id="pdf"><div><strong>📄 Le guide pièce par pièce en PDF</strong>'
-  '<span>À imprimer et à relire avec votre proche : tous les équipements, classés par pièce et par priorité. Gratuit.</span></div>'
+  '<span>À imprimer et à relire avec votre proche : tous les équipements, classés par pièce et par priorité. Gratuit, téléchargement immédiat.</span></div>'
   '<form class="pdf-form" data-src="@SRC@"><label class="sr" for="pdf-mail-@SRC@">Votre e-mail</label>'
   '<input type="email" id="pdf-mail-@SRC@" name="email" required placeholder="Votre adresse e-mail" autocomplete="email">'
   '<label class="chk"><input type="checkbox" name="news"> J\'accepte de recevoir de temps en temps des conseils par e-mail (désinscription en un clic).</label>'
-  '<button class="btn" type="submit">Recevoir le PDF</button>'
+  '<button class="btn" type="submit">Télécharger le PDF</button>'
   '<p class="pdf-ok" hidden>Merci ! <a href="{R}assets/guide-amenager-logement.pdf" download>Télécharger le guide (PDF)</a></p>'
   '<p class="small">Votre e-mail sert uniquement à ce que vous avez choisi. <a href="{R}confidentialite/">Confidentialité</a></p></form></aside>')
 def pdf_box(src): return PDF_BOX.replace('@SRC@', src)
