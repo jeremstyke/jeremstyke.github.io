@@ -13,3 +13,5 @@ Liens Amazon : uniquement `{AMZ:mots clés}` sous la forme `<a href="{AMZ:...}" 
 Aucun chiffre, prix, norme, remboursement ou aide inventé : vérifier par une recherche web (sources officielles : ameli.fr, service-public.fr, france-renov.gouv.fr, arcep.fr), sinon rester général. Ne citer une marque ou un modèle que si un fait précis est vérifié.
 Santé : conseils généraux uniquement, renvoyer vers le médecin, l'ergothérapeute, le pharmacien ou le kinésithérapeute.
 Ton : bienveillant, jamais infantilisant pour les seniors.
+
+Note : build.py met à jour .work/vieillirchezsoi/src/dates.json (date de publication de chaque guide) et génère vieillirchezsoi/og/<slug>.png : ces fichiers doivent être commités avec l'article.

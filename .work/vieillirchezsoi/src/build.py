@@ -38,12 +38,33 @@ CTA = ('<aside class="cta"><div><strong>Faites le point pièce par pièce</stron
 
 NAV = [('amenager-logement-personne-agee/', 'Pièce par pièce'), ('guides/', 'Guides'), ('a-propos/', 'À propos')]
 PAGES = []
+MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
+DATES_F = os.path.join(HERE, 'dates.json')
+def fr_date(iso):
+    y, m, d = iso.split('-'); return '%d %s %s' % (int(d), MOIS[int(m) - 1], y)
+def slugify(t):
+    import unicodedata
+    t = unicodedata.normalize('NFD', re.sub('<[^>]+>', '', t)).encode('ascii', 'ignore').decode().lower()
+    return re.sub(r'[^a-z0-9]+', '-', t).strip('-')[:60]
+def add_toc(body):
+    """Ajoute un id à chaque <h2> et place un sommaire juste après le {CTA}."""
+    heads = []
+    def h(m):
+        i = slugify(m.group(1)); heads.append((i, re.sub('<[^>]+>', '', m.group(1))))
+        return '<h2 id="%s">%s</h2>' % (i, m.group(1))
+    body = re.sub(r'<h2>(.*?)</h2>', h, body)
+    if len(heads) >= 3:
+        toc = '<nav class="toc" aria-label="Sommaire"><strong>Dans ce guide</strong><ol>' + ''.join('<li><a href="#%s">%s</a></li>' % (i, esc(t)) for i, t in heads) + '</ol></nav>'
+        body = body.replace('{CTA}', '{CTA}\n' + toc, 1) if '{CTA}' in body else toc + body
+    return body
+def read_min(html_):
+    return max(2, round(len(re.sub('<[^>]+>', ' ', html_).split()) / 200))
 
 def render(body):
     body = body.replace('{CTA}', CTA).replace('{R}checklist/', '{R}' + HUB)
     return re.sub(r'\{AMZ:([^}]+)\}', lambda m: amz(m.group(1)), body)
 
-def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6'):
+def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None, kind='website'):
     depth = path.count('/')
     R = '../' * depth
     url = BASE + '/' + path
@@ -67,11 +88,13 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6'):
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{url}">
-<meta property="og:type" content="website">
+<meta property="og:type" content="{kind}">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{BASE}/assets/og.png">
+<meta property="og:image" content="{BASE}/{og or "assets/og.png"}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:site_name" content="{SITE}">
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
@@ -79,14 +102,14 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6'):
 <link rel="icon" href="{R}assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="{R}assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{R}assets/fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="{R}assets/style.css?v=3">
+<link rel="stylesheet" href="{R}assets/style.css?v=4">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>
 <body>
 <a class="skip" href="#main">Aller au contenu</a>
 <header class="top"><div class="wrap top-in">
 <a class="logo" href="{R}"><span class="logo-ico" aria-hidden="true">🏡</span>Vieillir chez soi</a>
-<nav class="menu" aria-label="Menu">{nav}</nav>
+<nav class="menu" aria-label="Menu">{nav}<button type="button" class="txt-size" id="txt-size" aria-pressed="false" title="Agrandir le texte">A+</button></nav>
 </div></header>
 <main id="main">
 {('<div class="wrap">' + bc + '</div>') if bc else ''}
@@ -99,7 +122,8 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6'):
 <nav class="sites" aria-label="Nos sites"><span>Nos sites :</span><a href="https://malistebebe.fr/">🍼 Ma liste bébé</a><a href="https://malistedemariage.fr/">💍 Ma liste mariage</a><a aria-current="page" href="{R}">🏡 Vieillir chez soi</a></nav>
 <p class="disc">{DISCLOSURE} Les informations de ce site sont générales et ne remplacent pas l'avis d'un médecin, d'un ergothérapeute ou d'un pharmacien. Les prix et les offres peuvent changer : vérifiez-les avant d'acheter. © {YEAR} {SITE}</p>
 </div></footer>
-<script src="{R}assets/app.js?v=1" defer></script>
+<script>try{{if(localStorage.getItem("vcs_big")==="1")document.documentElement.classList.add("big")}}catch(e){{}}</script>
+<script src="{R}assets/app.js?v=2" defer></script>
 </body>
 </html>
 '''
@@ -141,6 +165,19 @@ def build():
             print('og.png non généré :', e)
 
     guides = GUIDES[:]
+    try: dates = json.load(open(DATES_F))
+    except Exception: dates = {}
+    for x in guides + [dict(slug=HUB)]:
+        dates.setdefault(x['slug'], TODAY)
+    json.dump(dates, open(DATES_F, 'w'), indent=1, ensure_ascii=False, sort_keys=True)
+    os.makedirs(os.path.join(OUT, 'og'), exist_ok=True)
+    def og_for(slug, title, emo_cat):
+        rel = 'og/' + slug.strip('/') + '.png'
+        try:
+            import og as ogm; ogm.make_article(os.path.join(OUT, rel), title, emo_cat)
+            return rel
+        except Exception as e:
+            print('og non généré', slug, e); return None
     latest = list(reversed(guides))
 
     # Accueil
@@ -150,6 +187,9 @@ def build():
                 ("Qui peut conseiller sur le bon équipement ?", "Le médecin traitant, le pharmacien et l'ergothérapeute. L'ergothérapeute peut venir au domicile pour proposer des aménagements adaptés."),
                 ("Ce site vend-il du matériel ?", "Non. Nous rédigeons des guides indépendants. Certains liens mènent vers Amazon et nous rapportent une commission, sans surcoût pour vous.")]
     fh, fs = faq_html(home_faq)
+    _g = {}
+    for x in guides: _g.setdefault(x['cat'], []).append(x)
+    themes = ''.join('<div class="theme"><h3>%s</h3><ul>%s</ul></div>' % (esc(c), ''.join('<li><a href="{R}%s">%s</a></li>' % (x['slug'], esc(x['short'])) for x in xs)) for c, xs in _g.items())
     body = f'''<section class="hero"><div class="wrap hero-in">
 <p class="kicker">Guides pratiques pour les seniors et leurs proches</p>
 <h1>Rester chez soi, en sécurité et en confiance</h1>
@@ -158,8 +198,9 @@ def build():
 </div></section>
 <div class="wrap">
 <section><h2>Par pièce et par besoin</h2><div class="rooms">{cats}</div></section>
-<section><h2>Nos derniers guides</h2><div class="cards">{''.join(card(x) for x in latest[:6])}</div>
-<p class="more"><a href="{{R}}guides/">Tous les guides</a></p></section>
+<section><h2>Nos derniers guides</h2><div class="cards">{''.join(card(x) for x in latest[:6])}</div></section>
+<section><h2>Tous les guides par thème</h2><div class="themes">{themes}</div>
+<p class="more"><a href="{{R}}guides/">Voir tous les guides</a></p></section>
 <section class="why"><h2>Pourquoi ce site ?</h2>
 <p>Quand un parent commence à perdre en autonomie, on doit souvent s'équiper vite, sans savoir quoi acheter. Les fiches produits des magasins listent des caractéristiques, mais expliquent rarement comment choisir. Ici, on vous dit ce qui compte vraiment, pour qui, et à quoi faire attention.</p>
 <p>Nos conseils sont généraux. Pour une situation précise, demandez l'avis du médecin, d'un ergothérapeute ou du pharmacien.</p></section>
@@ -184,10 +225,11 @@ def build():
     fh, fs = faq_html(HUB_FAQ)
     art = [{"@context": "https://schema.org", "@type": "Article", "headline": "Aménager le logement d'une personne âgée : le guide pièce par pièce",
             "inLanguage": "fr", "author": {"@type": "Organization", "name": SITE}, "publisher": {"@type": "Organization", "name": SITE},
-            "mainEntityOfPage": BASE + '/' + HUB}]
+            "mainEntityOfPage": BASE + '/' + HUB, "datePublished": dates[HUB], "dateModified": TODAY}]
     body = f'''<div class="wrap art-wrap"><article class="prose">
 <p class="art-cat t-sable"><span aria-hidden="true">🏡</span> Guide complet</p>
 <h1>Aménager le logement d'une personne âgée : le guide pièce par pièce</h1>
+<p class="meta">Mis à jour le {fr_date(TODAY)}</p>
 {HUB_INTRO}
 <nav class="toc" aria-label="Sommaire"><strong>Sommaire</strong><ol>{toc}</ol></nav>
 <p class="legend">Pour chaque équipement, un niveau de priorité : <span class="prio p1">Essentiel</span> <span class="prio p2">Utile</span> <span class="prio p3">Selon les besoins</span></p>
@@ -198,7 +240,7 @@ def build():
 </article></div>'''
     page(HUB, "Aménager le logement d'une personne âgée : guide pièce par pièce",
          f"Salle de bains, déplacements, sécurité, chambre : comment aménager le logement d'une personne âgée, avec {total} équipements classés par priorité.",
-         body, schema=art + fs, crumbs=[('Aménager le logement', HUB)], prio='0.9')
+         body, schema=art + fs, crumbs=[('Aménager le logement', HUB)], prio='0.9', kind='article', og=og_for(HUB, "Aménager le logement d'une personne âgée", '🏡 Guide pièce par pièce'))
     # Ancienne adresse /checklist/ : redirection
     d = os.path.join(OUT, 'checklist'); os.makedirs(d, exist_ok=True)
     open(os.path.join(d, 'index.html'), 'w', encoding='utf-8').write(
@@ -213,21 +255,24 @@ def build():
                  for c, xs in groups.items())
     page('guides/', 'Guides pour adapter la maison des seniors',
          "Tous nos guides pour choisir l'équipement du maintien à domicile : salle de bains, déplacements, sécurité, vie quotidienne et repos.",
-         '<div class="wrap"><h1>Tous les guides</h1><p class="lead">Des conseils pour choisir le bon équipement, sans jargon.</p>' + gb.replace('{R}', '../') + '</div>',
+         '<div class="wrap"><h1>Tous les guides</h1><p class="lead">' + str(len(guides)) + ' guides pour choisir le bon équipement, sans jargon.</p>' + gb.replace('{R}', '../') + '</div>',
          crumbs=[('Guides', 'guides/')], prio='0.8')
 
     for x in guides:
         fh, fs = faq_html(x['faq'])
         emo, tint = META.get(x['slug'], ('📘', 'sauge'))
-        others = [o for o in latest if o['slug'] != x['slug']][:3]
+        same = [o for o in latest if o['slug'] != x['slug'] and o['cat'] == x['cat']]
+        others = (same + [o for o in latest if o['slug'] != x['slug'] and o not in same])[:3]
+        gbody = add_toc(x['body'])
+        meta = '<p class="meta">Mis à jour le %s · %d min de lecture</p>' % (fr_date(dates[x['slug']]), read_min(x['body']))
         rel = '<section class="related"><h2>À lire aussi</h2><div class="cards">%s</div></section>' % ''.join(card(o) for o in others) if others else ''
         art = [{"@context": "https://schema.org", "@type": "Article", "headline": x['h1'], "description": x['desc'],
                 "inLanguage": "fr", "author": {"@type": "Organization", "name": SITE}, "publisher": {"@type": "Organization", "name": SITE},
-                "mainEntityOfPage": BASE + '/' + x['slug']}]
-        body = ('<div class="wrap art-wrap"><article class="prose"><p class="art-cat t-%s"><span aria-hidden="true">%s</span> %s</p><h1>%s</h1>%s%s'
+                "mainEntityOfPage": BASE + '/' + x['slug'], "datePublished": dates[x['slug']], "dateModified": dates[x['slug']]}]
+        body = ('<div class="wrap art-wrap"><article class="prose"><p class="art-cat t-%s"><span aria-hidden="true">%s</span> %s</p><h1>%s</h1>%s%s%s'
                 '<p class="disc-in">Ces conseils sont généraux et ne remplacent pas l\'avis d\'un professionnel de santé. Liens d\'affiliation : nous touchons une commission sur certains achats, sans surcoût pour vous.</p></article>%s</div>') % (
-            tint, emo, esc(x['cat']), esc(x['h1']), x['body'], fh, rel)
-        page(x['slug'], x['title'], x['desc'], body, schema=art + fs, crumbs=[('Guides', 'guides/'), (x['short'], x['slug'])], prio='0.7')
+            tint, emo, esc(x['cat']), esc(x['h1']), meta, gbody, fh, rel)
+        page(x['slug'], x['title'], x['desc'], body, schema=art + fs, crumbs=[('Guides', 'guides/'), (x['short'], x['slug'])], prio='0.7', kind='article', og=og_for(x['slug'], x['h1'], emo + ' ' + x['cat']))
 
     # Pages légales
     page('a-propos/', 'À propos de Vieillir chez soi', "Qui sommes-nous, comment nous choisissons nos conseils et comment le site est financé.",

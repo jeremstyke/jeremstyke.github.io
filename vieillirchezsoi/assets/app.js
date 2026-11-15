@@ -16,6 +16,16 @@
     try { fetch(SB, {method: 'POST', keepalive: true, headers: {'apikey': KEY, 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal'}, body: body}); } catch(e){}
   }
   hit('view');
+  var tb = document.getElementById('txt-size');
+  if (tb) {
+    var big = document.documentElement.classList.contains('big');
+    tb.setAttribute('aria-pressed', big ? 'true' : 'false');
+    tb.addEventListener('click', function(){
+      big = document.documentElement.classList.toggle('big');
+      tb.setAttribute('aria-pressed', big ? 'true' : 'false');
+      ls('vcs_big', big ? '1' : '0');
+    });
+  }
   document.addEventListener('click', function(e){
     var a = e.target.closest && e.target.closest('a[href*="amazon.fr"]');
     if (a) { var m = a.href.match(/[?&]k=([^&]+)/); hit('amz', m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : a.href); }
