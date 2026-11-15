@@ -8,10 +8,17 @@ from auto_articles import AUTO_META
 from quiz import ITEMS, QUESTIONS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-REPO = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
-OUT = os.path.join(REPO, 'vieillirchezsoi')
-# Sans domaine : sous-dossier de jeremstyke.github.io. Avec domaine : VCS_BASE=https://mondomaine.fr
-BASE = os.environ.get('VCS_BASE', 'https://jeremstyke.github.io/vieillirchezsoi')
+DOMAIN = 'viellirchezsoi.fr'
+# Deux dispositions possibles :
+#  - dépôt dédié (src/ à la racine) : site généré dans docs/, servi sur https://viellirchezsoi.fr (fichier CNAME)
+#  - ancienne disposition dans jeremstyke.github.io (.work/vieillirchezsoi/src) : sous-dossier vieillirchezsoi/
+STANDALONE = os.path.basename(os.path.dirname(os.path.dirname(HERE))) != '.work'
+if STANDALONE:
+    OUT = os.path.join(os.path.dirname(HERE), 'docs')
+    BASE = os.environ.get('VCS_BASE', 'https://' + DOMAIN)
+else:
+    OUT = os.path.join(os.path.abspath(os.path.join(HERE, '..', '..', '..')), 'vieillirchezsoi')
+    BASE = os.environ.get('VCS_BASE', 'https://jeremstyke.github.io/vieillirchezsoi')
 SITE = 'Vieillir chez soi'
 TAG = 'viellirchezsoi-21'   # identifiant Amazon Partenaires (orthographe exacte du compte)
 CONTACT = 'contact@cvlibre.com'
@@ -163,7 +170,7 @@ def faq_html(faq):
 def build():
     if os.path.isdir(OUT):
         for n in os.listdir(OUT):
-            if n != 'assets':
+            if n not in ('assets', 'CNAME', '.nojekyll'):
                 p = os.path.join(OUT, n)
                 shutil.rmtree(p) if os.path.isdir(p) else os.remove(p)
     os.makedirs(os.path.join(OUT, 'assets'), exist_ok=True)
@@ -339,6 +346,9 @@ def build():
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(
         '  <url><loc>%s/%s</loc><lastmod>%s</lastmod><priority>%s</priority></url>\n' % (BASE, p, TODAY, pr) for p, pr in PAGES) + '</urlset>\n'
     open(os.path.join(OUT, 'sitemap.xml'), 'w', encoding='utf-8').write(sm)
+    if STANDALONE:
+        open(os.path.join(OUT, 'CNAME'), 'w').write(DOMAIN + '\n')
+        open(os.path.join(OUT, '.nojekyll'), 'w').write('')
     open(os.path.join(OUT, 'robots.txt'), 'w').write('User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n' % BASE)
     print('%d pages, %d guides' % (len(PAGES), len(guides)))
 
