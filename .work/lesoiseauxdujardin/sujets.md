@@ -1,0 +1,30 @@
+# Articles à venir pour Les oiseaux du jardin (un par jour)
+# Format : - [ ] slug/ | requête visée | catégorie | angle
+- [x] nourrir-les-oiseaux-du-jardin/ | nourrir les oiseaux en hiver | Nourrir | lancement
+- [x] quelles-graines-pour-les-oiseaux/ | quelles graines pour les oiseaux | Nourrir | lancement
+- [x] comment-choisir-mangeoire-connectee/ | mangeoire connectée | Mangeoires | lancement
+- [x] installer-un-nichoir/ | installer un nichoir | Nichoirs | lancement
+- [ ] boule-de-graisse-oiseaux/ | boule de graisse oiseaux | Nourrir | sans filet, recette maison, quand en donner
+- [ ] eau-pour-les-oiseaux-en-hiver/ | abreuvoir oiseaux hiver | Nourrir | eau propre, gel, pas de sel ni antigel
+- [ ] nettoyer-une-mangeoire/ | nettoyer une mangeoire | Mangeoires | fréquence, produits, maladies (salmonellose, trichomonose)
+- [ ] fabriquer-une-mangeoire/ | fabriquer une mangeoire | Mangeoires | modèles simples, matériaux sans danger
+- [ ] proteger-la-mangeoire-des-chats/ | protéger la mangeoire des chats | Mangeoires | hauteur, emplacement, collerette
+- [ ] ecureuils-et-pigeons-a-la-mangeoire/ | éloigner pigeons mangeoire | Mangeoires | mangeoires sélectives
+- [ ] quand-arreter-de-nourrir-les-oiseaux/ | quand arrêter de nourrir les oiseaux | Nourrir | printemps, sevrage progressif
+- [ ] nichoir-a-mesange/ | nichoir à mésange | Nichoirs | trou d'envol, emplacement
+- [ ] nichoir-rouge-gorge/ | nichoir rouge-gorge | Nichoirs | semi-ouvert, hauteur
+- [ ] nichoir-hirondelles/ | nichoir hirondelle | Nichoirs | sous la toiture, réglementation sur les nids d'hirondelles si vérifiée
+- [ ] nichoir-avec-camera/ | nichoir avec caméra | Nichoirs | observer sans déranger
+- [ ] nettoyer-un-nichoir/ | nettoyer un nichoir | Nichoirs | période, méthode
+- [ ] reconnaitre-les-oiseaux-du-jardin/ | reconnaître les oiseaux du jardin | Observer | espèces courantes, applis
+- [ ] reconnaitre-les-mesanges/ | différentes mésanges | Observer | bleue, charbonnière, noire, huppée, nonnette
+- [ ] application-reconnaitre-chant-oiseaux/ | application reconnaître chant oiseaux | Observer | applis connues, sans avis inventé
+- [ ] comptage-des-oiseaux-des-jardins/ | comptage des oiseaux des jardins | Observer | opération LPO / Muséum, dates seulement si vérifiées
+- [ ] oiseau-blesse-que-faire/ | oiseau blessé que faire | Observer | centres de soins LPO, gestes à éviter
+- [ ] oisillon-tombe-du-nid/ | oisillon tombé du nid | Nichoirs | ne pas le ramasser à tort (recommandations LPO)
+- [ ] haie-pour-les-oiseaux/ | haie pour les oiseaux | Nichoirs | arbustes à baies, taille hors nidification
+- [ ] jardin-accueillant-oiseaux/ | jardin accueillant pour les oiseaux | Nichoirs | refuge LPO, gestes simples
+- [ ] choc-oiseau-vitre/ | oiseau contre les vitres | Observer | autocollants, espacement (sources LPO)
+- [ ] cadeau-amoureux-des-oiseaux/ | cadeau pour amoureux des oiseaux | Observer | idées par budget
+- [ ] mangeoire-balcon/ | mangeoire pour balcon | Mangeoires | ventouse, fenêtre, petit espace
+- [ ] oiseaux-du-jardin-en-hiver/ | quels oiseaux voit-on en hiver | Observer | espèces sédentaires et migratrices
