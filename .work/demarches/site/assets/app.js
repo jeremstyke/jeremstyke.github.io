@@ -306,6 +306,7 @@
     image: { label: 'Réduire une photo', accept: 'image/*,.heic,.heif', multi: true, hint: 'Déposez une ou plusieurs photos. Vous obtenez des JPG légers, HEIC compris.' },
     split: { label: 'Séparer les pages', accept: 'application/pdf,.pdf', multi: false, hint: 'Déposez un PDF : chaque page devient un fichier séparé.' }
   };
+  var ORGS = [['1m', 'CAF'], ['2m', 'MDPH'], ['2m', 'France Travail'], ['5m', 'Impôts'], ['1m', 'ANTS (carte grise)'], ['5m', 'ANEF (titre de séjour)'], ['2m', 'Ameli (photo carte Vitale)'], ['4m', 'Assurance retraite'], ['3m', 'MSA'], ['2m', 'URSSAF'], ['5m', "MaPrimeRénov'"], ['1m', 'Logement social'], ['2m', 'Dossier social étudiant'], ['2m', 'Inscription université'], ['1m', 'Association']];
   var SIZES = [['', 'Le plus léger possible'], ['100k', '100 Ko'], ['200k', '200 Ko'], ['300k', '300 Ko'], ['500k', '500 Ko'], ['1m', '1 Mo'], ['2m', '2 Mo'], ['3m', '3 Mo'], ['4m', '4 Mo'], ['5m', '5 Mo'], ['10m', '10 Mo']];
   function sizeBytes(code) {
     if (!code) return 0;
@@ -358,7 +359,11 @@
     var list = el('ul', { class: 'files' });
     var opts = el('div', { class: 'opts' });
     var sel = el('select', { 'aria-label': 'Taille maximale' });
-    SIZES.forEach(function (s) { var o = el('option', { value: s[0] }, s[1]); if (s[0] === size) o.selected = true; sel.appendChild(o); });
+    // 15 nov 2026 (Jeremy) : choisir directement l'organisme, sa limite est appliquée (mêmes limites que les pages de chaque organisme)
+    var g1 = el('optgroup', { label: 'Pour un organisme' }), g2 = el('optgroup', { label: 'Taille exacte' });
+    ORGS.forEach(function (s) { g1.appendChild(el('option', { value: s[0] }, s[1] + ' (' + s[0].replace('k', ' Ko').replace('m', ' Mo') + ' max)')); });
+    SIZES.forEach(function (s) { var o = el('option', { value: s[0] }, s[1]); if (s[0] === size) o.selected = true; g2.appendChild(o); });
+    sel.appendChild(g1); sel.appendChild(g2);
     var optLabel = el('label', { class: 'opt' }, '<span>Taille maximale par fichier</span>');
     optLabel.appendChild(sel);
     opts.appendChild(optLabel);
