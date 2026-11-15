@@ -350,6 +350,11 @@ def build():
         open(os.path.join(OUT, 'CNAME'), 'w').write(DOMAIN + '\n')
         open(os.path.join(OUT, '.nojekyll'), 'w').write('')
     open(os.path.join(OUT, 'robots.txt'), 'w').write('User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n' % BASE)
+    if not STANDALONE:
+        # L'ancienne adresse (jeremstyke.github.io/vieillirchezsoi/) ne sert plus que des renvois vers le domaine.
+        # Le vrai site est construit dans le dépôt jeremstyke/viellirchezsoi (synchronisation automatique toutes les heures).
+        import runpy
+        runpy.run_path(os.path.join(os.path.dirname(HERE), 'redirect_old.py'))
     print('%d pages, %d guides' % (len(PAGES), len(guides)))
 
 if __name__ == '__main__':
