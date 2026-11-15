@@ -6,16 +6,16 @@
 - [x] deambulateur-ou-rollator/ | déambulateur ou rollator | Se déplacer | publié au lancement
 - [x] barre-d-appui-salle-de-bain/ | barre d'appui salle de bain | Salle de bains | publié au lancement
 - [x] telephone-portable-senior/ | téléphone portable senior | Vie quotidienne | publié au lancement
-- [ ] rehausseur-wc/ | rehausseur WC | Salle de bains | avec ou sans accoudoirs, hauteur, fixation, hygiène
-- [ ] fauteuil-releveur/ | comment choisir un fauteuil releveur | Chambre et repos | 1 ou 2 moteurs, taille, tissu, essayer avant
-- [ ] detecteur-de-chute/ | détecteur de chute personne âgée | Sécurité | montre, pendentif, capteurs, limites, renvoi téléassistance
-- [ ] comment-choisir-rollator/ | comment choisir un rollator | Se déplacer | 3 ou 4 roues, poids, freins, siège, pliage
-- [ ] planche-de-bain/ | planche de bain senior | Salle de bains | planche ou siège de baignoire, largeur, sécurité
-- [ ] pilulier/ | quel pilulier choisir | Vie quotidienne | semaine, électronique avec alarme, rester général santé
-- [ ] canne-de-marche/ | comment choisir une canne de marche | Se déplacer | réglage, embout, pliante, tripode
-- [ ] veilleuse-detecteur-de-mouvement/ | veilleuse détecteur de mouvement senior | Sécurité | trajets de nuit, piles ou prise
-- [ ] prevenir-les-chutes-a-la-maison/ | prévenir les chutes à la maison | Sécurité | gestes et habitudes au quotidien (lever, chaussures, médicaments, activité), renvoi au guide pièce par pièce et au médecin
-- [ ] telephone-fixe-grosses-touches/ | téléphone fixe grosses touches | Vie quotidienne | amplifié, photos, sans fil
+- [x] rehausseur-wc/ | rehausseur WC | Salle de bains | avec ou sans accoudoirs, hauteur, fixation, hygiène
+- [x] fauteuil-releveur/ | comment choisir un fauteuil releveur | Chambre et repos | 1 ou 2 moteurs, taille, tissu, essayer avant
+- [x] detecteur-de-chute/ | détecteur de chute personne âgée | Sécurité | montre, pendentif, capteurs, limites, renvoi téléassistance
+- [x] comment-choisir-rollator/ | comment choisir un rollator | Se déplacer | 3 ou 4 roues, poids, freins, siège, pliage
+- [x] planche-de-bain/ | planche de bain senior | Salle de bains | planche ou siège de baignoire, largeur, sécurité
+- [x] pilulier/ | quel pilulier choisir | Vie quotidienne | semaine, électronique avec alarme, rester général santé
+- [x] canne-de-marche/ | comment choisir une canne de marche | Se déplacer | réglage, embout, pliante, tripode
+- [x] veilleuse-detecteur-de-mouvement/ | veilleuse détecteur de mouvement senior | Sécurité | trajets de nuit, piles ou prise
+- [x] prevenir-les-chutes-a-la-maison/ | prévenir les chutes à la maison | Sécurité | gestes et habitudes au quotidien (lever, chaussures, médicaments, activité), renvoi au guide pièce par pièce et au médecin
+- [x] telephone-fixe-grosses-touches/ | téléphone fixe grosses touches | Vie quotidienne | amplifié, photos, sans fil
 - [ ] pince-de-prehension/ | pince de préhension | Vie quotidienne | longueur, aimant, pliante
 - [ ] tapis-antiderapant-douche/ | tapis antidérapant douche | Salle de bains | ventouses, entretien, alternatives
 - [ ] bouton-appel-urgence-senior/ | bouton d'appel d'urgence senior | Sécurité | pendentif, bracelet, avec ou sans abonnement
