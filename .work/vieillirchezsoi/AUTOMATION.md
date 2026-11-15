@@ -19,4 +19,4 @@ Ton : bienveillant, jamais infantilisant pour les seniors.
 Note : build.py met à jour .work/vieillirchezsoi/src/dates.json (date de publication de chaque guide) et génère vieillirchezsoi/og/<slug>.png : ces fichiers doivent être commités avec l'article.
 Le PDF vieillirchezsoi/assets/guide-amenager-logement.pdf est généré par src/make_pdf.js (à relancer seulement si le guide pilier change, pas pour un article).
 
-Partenaire Easwe (fauteuils roulants électriques et mobilité) : Jeremy est affilié. Dans les pages qui parlent de fauteuils roulants électriques ou de scooters, on peut citer des modèles Easwe UNIQUEMENT après vérification de leur fiche sur easwe.fr (nom exact, caractéristiques lues). Lien partenaire : <a href="https://www.easwe.fr/?ref=handi360" rel="sponsored nofollow noopener" target="_blank">Voir chez Easwe</a>. Ne jamais inventer de prix ni de code promo. Rester équilibré : Easwe est un choix parmi d'autres, avec ses limites honnêtes.
+Easwe : AUCUN lien ni mention d'Easwe pour l'instant (partenariat suspendu par Jeremy). Seulement des liens Amazon.

@@ -18,7 +18,7 @@
 - [x] telephone-fixe-grosses-touches/ | téléphone fixe grosses touches | Vie quotidienne | amplifié, photos, sans fil
 - [x] pince-de-prehension/ | pince de préhension | Vie quotidienne | longueur, aimant, pliante
 - [ ] monte-escalier-prix-aides/ | monte-escalier prix et aides | Se déplacer | types (droit, tournant, extérieur, plateforme), ordre de grandeur des prix seulement si sources fiables, location, aides (MaPrimeAdapt' finance le monte-escalier : vérifier sur service-public), devis, renvoi ergothérapeute
-- [ ] fauteuil-roulant-electrique-comment-choisir/ | comment choisir un fauteuil roulant électrique | Se déplacer | pliant ou non, poids, autonomie, transport en voiture et avion, prise en charge sur prescription (vérifier ameli), lien partenaire Easwe
+- [ ] fauteuil-roulant-electrique-comment-choisir/ | comment choisir un fauteuil roulant électrique | Se déplacer | pliant ou non, poids, autonomie, transport en voiture et avion, prise en charge sur prescription (vérifier ameli)
 - [ ] tapis-antiderapant-douche/ | tapis antidérapant douche | Salle de bains | ventouses, entretien, alternatives
 - [ ] bouton-appel-urgence-senior/ | bouton d'appel d'urgence senior | Sécurité | pendentif, bracelet, avec ou sans abonnement
 - [ ] teleassistance-comment-ca-marche/ | téléassistance comment ça marche | Sécurité | principe, qui répond, rester général sur les aides
