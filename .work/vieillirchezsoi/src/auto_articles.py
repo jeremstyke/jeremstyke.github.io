@@ -1506,3 +1506,201 @@ g("meilleur-detecteur-de-chute/",
        ("Faut-il un abonnement pour un détecteur de chute ?", "Pas forcément. Les montres et appareils de cette sélection n'imposent pas d'abonnement à un service selon les fiches consultées, mais ceux qui fonctionnent seuls demandent une carte SIM avec un forfait mobile. Un service de téléassistance, lui, fonctionne avec un abonnement et une centrale d'écoute."),
        ("Avez-vous testé ces détecteurs de chute ?", "Non. Cette sélection repose sur les fiches publiées par les fabricants et les revendeurs. Nous n'indiquons que ce qui y figure, sans note ni avis de prise en main.")],
   short="Top 9 détecteurs de chute", cat="Sécurité")
+
+AUTO_META['pince-de-prehension/'] = ('🦾', 'sable')
+g("pince-de-prehension/",
+  "Pince de préhension : bien la choisir pour éviter de se baisser",
+  "Pince de préhension : comment bien la choisir ?",
+  "Longueur, aimant, mâchoires, modèle pliant : nos conseils pour choisir une pince de préhension qui vous évite de vous baisser ou de monter sur un escabeau.",
+  """
+<p>Ramasser une lettre tombée par terre, attraper un paquet en haut du placard, récupérer une chaussette sous le lit : ces gestes banals deviennent fatigants, voire risqués, quand le dos ou les genoux se font moins souples ou quand l'équilibre est moins sûr. Se pencher très bas ou monter sur une chaise fait partie des situations où l'on peut perdre l'équilibre. La pince de préhension, aussi appelée pince à long manche ou ramasse-objets, est une aide technique toute simple qui prolonge le bras et permet de saisir un objet sans se baisser ni grimper. Voici comment choisir un modèle adapté à la personne et à ses habitudes.</p>
+{CTA}
+<h2>À quoi sert une pince de préhension ?</h2>
+<p>Une pince de préhension se compose d'un manche, d'une gâchette ou d'une poignée que l'on serre, et de deux mâchoires au bout qui se referment sur l'objet. Elle rend service dans de nombreuses situations :</p>
+<ul>
+<li>ramasser un objet tombé au sol (lunettes, télécommande, stylo, journal) sans se pencher ;</li>
+<li>attraper un objet léger posé en hauteur, sans escabeau ;</li>
+<li>récupérer ce qui a glissé sous un meuble ou derrière le lit ;</li>
+<li>aider à enfiler une chaussette ou à remonter un pantalon, pour certaines personnes, en complément d'un enfile-bas ou d'un chausse-pied à long manche ;</li>
+<li>ramasser le linge dans le tambour de la machine à laver.</li>
+</ul>
+<p>Elle est particulièrement utile après une opération de la hanche ou du genou, quand le chirurgien ou le kinésithérapeute demande d'éviter certaines flexions, et pour les personnes qui se déplacent avec une canne ou un rollator. Dans ces situations, demandez à l'équipe soignante quels gestes sont à éviter : la pince ne remplace pas leurs consignes.</p>
+
+<h2>Les critères pour bien choisir</h2>
+<h3>La longueur</h3>
+<p>C'est le premier critère. Une pince courte, autour de 60 cm, se manie facilement et convient pour ramasser un objet en restant assis dans un fauteuil. Une pince plus longue, de 75 à 90 cm environ, permet d'atteindre le sol en restant debout et bien droit, ou d'aller chercher un objet en hauteur. Plus le manche est long, plus l'objet saisi semble lourd au bout du bras : pour une personne qui a peu de force dans les mains, une longueur moyenne est souvent le meilleur compromis. Certains foyers en gardent deux, une courte près du fauteuil et une longue dans la cuisine.</p>
+<h3>La poignée et la gâchette</h3>
+<p>La poignée doit tomber naturellement dans la main. Une gâchette qui se serre avec toute la main, et pas seulement avec un doigt, demande moins d'effort, ce qui compte en cas d'arthrose ou de douleurs des doigts. Une poignée qui forme un appui pour l'avant-bras aide aussi à garder le contrôle. Si possible, essayez la pince en magasin ou en pharmacie avant de l'acheter.</p>
+<h3>Les mâchoires</h3>
+<p>Des embouts en caoutchouc ou striés tiennent mieux les objets lisses ou fins, comme une feuille de papier ou une pièce de monnaie. Des mâchoires qui pivotent permettent d'attraper un objet posé de travers sans tordre le poignet. Certains modèles ont un petit crochet pour tirer un vêtement ou une anse de sac.</p>
+<h3>L'aimant</h3>
+<p>Un aimant placé au bout de la pince ramasse les petits objets métalliques : clés, épingles, aiguilles, trombones. C'est un plus appréciable pour les couturiers et les bricoleurs. Attention toutefois : par prudence, on évite d'approcher un aimant d'un stimulateur cardiaque ou d'un autre appareil médical implanté ; en cas de doute, posez la question à votre médecin.</p>
+<h3>Le poids et le modèle pliant</h3>
+<p>Une pince légère fatigue moins le bras. Un modèle pliant se range dans un sac, un panier de rollator ou une boîte à gants : pratique pour l'emporter en courses ou en voyage. Vérifiez simplement que l'articulation se verrouille bien et ne se replie pas pendant l'usage.</p>
+
+<h2>Le bon modèle selon la situation</h2>
+<table><thead><tr><th>Situation</th><th>Modèle conseillé</th><th>Pourquoi</th></tr></thead><tbody>
+<tr><td>Ramasser au sol en restant assis</td><td>Pince courte (environ 60 cm)</td><td>Légère et maniable depuis le fauteuil</td></tr>
+<tr><td>Ramasser au sol en restant debout</td><td>Pince longue (75 à 90 cm environ)</td><td>Évite de se pencher et protège le dos</td></tr>
+<tr><td>Mains douloureuses ou peu de force</td><td>Gâchette à pleine main, pince légère</td><td>Moins d'effort pour serrer et tenir</td></tr>
+<tr><td>Petits objets métalliques</td><td>Pince avec aimant</td><td>Ramasse clés et épingles sans les saisir</td></tr>
+<tr><td>Sorties, courses, voyage</td><td>Pince pliante</td><td>Se range dans un sac ou un panier</td></tr>
+<tr><td>Après une prothèse de hanche</td><td>Pince longue, avec les autres aides prescrites</td><td>Limite les flexions déconseillées</td></tr>
+</tbody></table>
+
+<h2>Notre sélection de types de pinces</h2>
+<p>Pour un usage courant à la maison, une <strong>pince de préhension classique d'environ 80 cm</strong> avec des embouts antidérapants couvre la plupart des besoins. <a href="{AMZ:pince de prehension senior}" """ + A + """>Voir les pinces de préhension</a>.</p>
+<p>Si vous laissez souvent tomber des clés ou des épingles, choisissez une <strong>pince avec aimant</strong>. <a href="{AMZ:pince de prehension aimant}" """ + A + """>Voir les pinces avec aimant</a>.</p>
+<p>Pour l'emporter partout, une <strong>pince pliante</strong> trouve sa place dans le panier du rollator. <a href="{AMZ:pince de prehension pliante}" """ + A + """>Voir les pinces pliantes</a>.</p>
+<p>La pince se complète bien avec d'autres aides à l'habillage : un <strong>enfile-bas</strong> pour les chaussettes et un <strong>chausse-pied à long manche</strong>. <a href="{AMZ:enfile bas senior}" """ + A + """>Voir les enfile-bas</a> et <a href="{AMZ:chausse pied long manche}" """ + A + """>voir les chausse-pieds à long manche</a>.</p>
+<p>Enfin, un <strong>clip ou un support</strong> pour accrocher la pince à la canne, au déambulateur ou au fauteuil évite de devoir la chercher. <a href="{AMZ:support pince de prehension}" """ + A + """>Voir les supports</a>.</p>
+
+<h2>Bien l'utiliser au quotidien</h2>
+<ul>
+<li><strong>Gardez-la à portée de main</strong> : près du fauteuil, au pied du lit, dans la cuisine. Une pince rangée au fond d'un placard ne sert à rien.</li>
+<li><strong>Restez stable</strong> : utilisez-la en position assise ou bien campé sur vos deux pieds, et appuyez-vous si besoin sur un meuble solide ou une barre d'appui.</li>
+<li><strong>Ne soulevez rien de lourd</strong> : la pince est faite pour des objets légers. Une bouteille ou une casserole pleine risque de glisser et de tomber sur vos pieds.</li>
+<li><strong>Rangez autrement</strong> : la pince ne dispense pas de réorganiser les placards. Placez les objets du quotidien entre la hauteur des hanches et celle des épaules, pour ne plus avoir à monter sur une chaise.</li>
+</ul>
+<p>Ces gestes font partie d'une démarche plus large pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a>. Si vous vous déplacez avec une aide à la marche, lisez aussi notre guide pour <a href="{R}canne-de-marche/">choisir une canne de marche</a>. Et pour revoir l'organisation de chaque pièce, suivez <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>. Une pince de préhension fait aussi partie des petites attentions utiles que nous suggérons dans nos <a href="{R}cadeau-personne-agee/">idées de cadeaux pour une personne âgée</a>.</p>
+
+<h2>Demander conseil</h2>
+<p>Si les difficultés à se baisser ou à attraper les objets sont récentes, ou si elles s'aggravent, parlez-en à votre médecin traitant. Un ergothérapeute peut évaluer les gestes du quotidien, proposer les aides techniques les plus adaptées et conseiller un réaménagement du logement ; depuis juillet 2023, les ergothérapeutes peuvent d'ailleurs prescrire certaines aides techniques, sous conditions. Le kinésithérapeute et le pharmacien sont aussi de bon conseil pour choisir et apprendre à utiliser ce type d'aide.</p>
+""",
+  faq=[("Quelle longueur de pince de préhension choisir ?", "Pour ramasser un objet en restant assis, une pince d'environ 60 cm suffit. Pour atteindre le sol debout sans se pencher, ou un objet en hauteur, préférez une pince plus longue, autour de 75 à 90 cm. Plus elle est longue, plus l'objet paraît lourd au bout : avec peu de force dans les mains, une longueur moyenne est un bon compromis."),
+       ("Une pince de préhension avec aimant est-elle utile ?", "Oui si vous faites souvent tomber de petits objets métalliques comme des clés ou des épingles. Par prudence, si vous portez un stimulateur cardiaque ou un autre appareil implanté, demandez conseil à votre médecin avant d'utiliser un aimant près de vous."),
+       ("Peut-on soulever un objet lourd avec une pince de préhension ?", "Non. La pince est conçue pour des objets légers. Un objet lourd ou fragile risque de glisser des mâchoires. Pour ce qui est lourd, mieux vaut le ranger à hauteur de taille ou demander de l'aide.")],
+  short="Pince de préhension", cat="Vie quotidienne")
+
+AUTO_META['meilleur-rehausseur-wc/'] = ('🏆', 'ciel')
+g("meilleur-rehausseur-wc/",
+  "Meilleur rehausseur WC senior 2026 : top 10 par usage",
+  "Meilleur rehausseur WC : 10 modèles comparés selon l'usage",
+  "Avec ou sans accoudoirs, à clips, à brides, à molettes ou sans fixation : 10 rehausseurs WC pour seniors comparés d'après les fiches des fabricants.",
+  """
+<p>Des toilettes trop basses obligent à plier fortement les genoux et les hanches pour s'asseoir, puis à pousser fort pour se relever. Un rehausseur WC, posé sur la cuvette, remonte l'assise de quelques centimètres et rend ce mouvement plus facile et plus sûr. Mais tous ne se valent pas : certains ont des accoudoirs pour prendre appui, d'autres se fixent par clips, par brides ou par molettes, d'autres encore se posent simplement. Voici dix modèles de marques de matériel médical, classés selon l'usage auquel ils conviennent le mieux.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs (brochures des fabricants, pharmacies en ligne, distributeurs de matériel médical), sans test en main. Nous n'indiquons que les chiffres lus sur ces fiches ; quand une donnée n'y figure pas, nous écrivons « non précisé ». Les valeurs peuvent changer selon la version ou la référence : vérifiez toujours la notice du modèle que vous achetez, et surtout sa compatibilité avec votre cuvette. Pour un besoin particulier, demandez conseil à un ergothérapeute, à un kinésithérapeute ou à votre pharmacien.</div>
+<h2>Le comparatif en un coup d'œil</h2>
+<table><thead><tr><th>Modèle</th><th>Rehausse</th><th>Accoudoirs</th><th>Fixation</th><th>Charge max</th><th>Idéal pour</th></tr></thead><tbody>
+<tr><td>Aquatec 90000</td><td>2, 6 ou 10 cm</td><td>En option, escamotables</td><td>Clips sans outils</td><td>150 kg</td><td>Notre choix : le plus polyvalent</td></tr>
+<tr><td>Etac Cloo avec accoudoirs</td><td>6, 10 ou 14 cm</td><td>Oui, rabattables et amovibles</td><td>Fixé à la cuvette</td><td>150 kg</td><td>Hauteur réglable et appui latéral</td></tr>
+<tr><td>Herdegen Clipper IV / V</td><td>11 cm</td><td>Oui, amovibles et escamotables</td><td>4 clips réglables</td><td>100 kg</td><td>Des accoudoirs sur un modèle léger</td></tr>
+<tr><td>Identités Capri</td><td>12 cm</td><td>Oui, relevables</td><td>Système breveté (non précisé)</td><td>130 kg</td><td>Accoudoirs relevables pour le transfert</td></tr>
+<tr><td>Aquatec 900</td><td>Plusieurs hauteurs (voir fiche)</td><td>En option, escamotables</td><td>Croix de fixation sous la lunette</td><td>120 kg</td><td>WC suspendus et cuvettes carrées</td></tr>
+<tr><td>Etac Hi-Loo à brides</td><td>6 ou 10 cm</td><td>Non précisé</td><td>Brides gainées de caoutchouc</td><td>150 kg</td><td>Une fixation stable et légère</td></tr>
+<tr><td>Réhotec</td><td>7 ou 10 cm</td><td>Non</td><td>Molettes de serrage</td><td>180 kg</td><td>Forte corpulence, fixation serrée</td></tr>
+<tr><td>Herdegen Clip Up</td><td>10 cm</td><td>Non précisé</td><td>Patins et crémaillère</td><td>150 kg</td><td>Le plus léger (0,95 kg)</td></tr>
+<tr><td>Herdegen Contact Plus Néo</td><td>11 cm</td><td>Non</td><td>Aucune (posé)</td><td>185 kg</td><td>Assise souple, sans montage</td></tr>
+<tr><td>Identités Soupless'</td><td>11 cm</td><td>Non</td><td>Aucune (emboîté)</td><td>180 kg</td><td>Mousse posée en une seconde</td></tr>
+</tbody></table>
+<p>Avant d'entrer dans le détail, retenez trois règles : si la personne a besoin de s'appuyer sur les côtés pour se relever, choisissez des accoudoirs (ou installez un cadre de toilettes ou une barre d'appui) ; la hauteur de rehausse se choisit selon la taille de la personne, les pieds devant rester à plat au sol ; et la fixation doit correspondre à la forme de votre cuvette.</p>
+
+<h2>1. Aquatec 90000 : idéal pour un rehausseur évolutif (notre choix)</h2>
+<p><strong>Pour qui ?</strong> Une personne qui a besoin d'un peu de hauteur aujourd'hui, et peut-être d'accoudoirs demain. C'est notre choix global, parce que ce modèle s'adapte à de nombreuses situations.</p>
+<ul>
+<li><strong>Points forts</strong> : trois hauteurs de rehausse (2, 6 ou 10 cm) selon la brochure française du fabricant. Accoudoirs escamotables proposés en option, qui peuvent être ajoutés plus tard. Fixation par clips, sans outils. Grande découpe hygiénique intégrée ; accoudoirs, couvercle et assise se démontent pour le nettoyage.</li>
+<li><strong>Données utiles</strong> : charge maximale 150 kg. Assise de 36,5 x 39 cm, ouverture de 20,5 x 27,5 cm. Largeur hors tout 38 cm sans accoudoirs, 54 cm avec ; 45 cm entre les accoudoirs. Poids de 2,4 à 4,4 kg selon la version. Couvercle amovible.</li>
+<li><strong>Limites</strong> : avec accoudoirs, la largeur de 54 cm demande un peu de place de chaque côté de la cuvette. Matériau non précisé sur la fiche consultée. La marque (anciennement Invacare) est aujourd'hui distribuée par DH Care : vérifiez la référence exacte selon la hauteur et les options choisies.</li>
+</ul>
+<p><a href="{AMZ:Aquatec 90000 rehausseur WC}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Etac Cloo avec accoudoirs : idéal pour régler la hauteur et s'appuyer</h2>
+<p><strong>Pour qui ?</strong> Une personne dont les besoins peuvent évoluer, ou un foyer où la hauteur idéale n'est pas encore connue, avec un vrai besoin d'appui pour se relever.</p>
+<ul>
+<li><strong>Points forts</strong> : hauteur réglable sans outils à 6, 10 ou 14 cm grâce à des cales (la hauteur de 14 cm demande des cales supplémentaires), avec une légère inclinaison vers l'avant possible pour aider à se relever. Accoudoirs rabattables, verrouillables en position basse et amovibles : on peut n'en garder qu'un pour faciliter un transfert latéral. Assise amovible sans outils, surfaces lisses, lavable en laveur-désinfecteur à 85 °C.</li>
+<li><strong>Données utiles</strong> : charge maximale 150 kg, ouverture de 29 x 22 cm, largeur d'assise 40 cm, 49 cm entre les accoudoirs, largeur totale 60 cm. Poids 4,8 kg (3,3 kg pour la version sans accoudoirs). Assise en polypropylène, fixation en aluminium.</li>
+<li><strong>Limites</strong> : la fiche consultée ne détaille pas le mécanisme de fixation à la cuvette ni le couvercle. Largeur totale de 60 cm, la plus importante de la sélection.</li>
+</ul>
+<p><a href="{AMZ:Etac Cloo rehausse WC accoudoirs}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Herdegen Clipper IV et Clipper V : idéal pour des accoudoirs sur un rehausseur léger</h2>
+<p><strong>Pour qui ?</strong> Une personne de corpulence moyenne qui a besoin d'accoudoirs, dans une salle d'eau où l'on veut un équipement simple à poser et à retirer.</p>
+<ul>
+<li><strong>Points forts</strong> : accoudoirs gainés, amovibles et escamotables pour un transfert latéral. Fixation par 4 clips réglables, sans outils. Le Clipper V a un couvercle, le Clipper IV n'en a pas.</li>
+<li><strong>Données utiles</strong> : rehausse de 11 cm, ouverture de 25 x 21 cm, encombrement de 66 x 42 cm, poids 2,7 kg (IV) ou 3,1 kg (V), en polypropylène. Charge maximale de 100 kg selon la pharmacie en ligne consultée.</li>
+<li><strong>Limites</strong> : 100 kg seulement, la charge la plus basse de cette sélection. La fiche donne deux plages légèrement différentes pour l'épaisseur du rebord de cuvette compatible (5,5 à 8,5 ou 8,8 cm) : mesurez votre cuvette. Hauteur unique.</li>
+</ul>
+<p><a href="{AMZ:Herdegen Clipper rehausse WC accoudoirs}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Identités Capri : idéal pour des accoudoirs relevables</h2>
+<p><strong>Pour qui ?</strong> Une personne qui s'appuie sur les accoudoirs pour se relever, mais qui doit parfois les relever pour passer d'un fauteuil roulant aux toilettes, ou pour laisser un aidant l'approcher.</p>
+<ul>
+<li><strong>Points forts</strong> : accoudoirs relevables, à 25,2 cm au-dessus de la cuvette, avec 46,3 cm entre eux. Existe avec ou sans couvercle. Système de fixation breveté selon le fabricant.</li>
+<li><strong>Données utiles</strong> : rehausse de 12 cm, charge maximale 130 kg, assise de 40,2 x 43,5 cm, ouverture de 18,8 x 24,2 cm, encombrement de 56,3 x 45,2 cm, poids d'environ 2,4 à 2,8 kg selon la version.</li>
+<li><strong>Limites</strong> : la fiche consultée ne décrit ni le mécanisme de fixation, ni le matériau, ni les aspects d'hygiène. Ouverture un peu plus petite que celle des autres modèles.</li>
+</ul>
+<p><a href="{AMZ:Identites Capri rehausse WC accoudoirs}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Aquatec 900 : idéal pour les WC suspendus et les cuvettes carrées</h2>
+<p><strong>Pour qui ?</strong> Un logement équipé de toilettes suspendues ou d'une cuvette de forme carrée, sur laquelle beaucoup de rehausseurs se fixent mal.</p>
+<ul>
+<li><strong>Points forts</strong> : compatible avec les cuvettes carrées et les WC suspendus selon le fabricant, grâce à une croix et une barre de fixation sous la lunette. Couvercle et assise se retirent sans outils grâce à un clip. Accoudoirs escamotables en option.</li>
+<li><strong>Données utiles</strong> : charge maximale 120 kg, assise de 36 x 42,5 cm, largeur totale 43 cm sans accoudoirs et 59 cm avec, poids 2,7 kg sans accoudoirs et 5 kg avec. Couvercle disponible.</li>
+<li><strong>Limites</strong> : les brochures du fabricant ne donnent pas les mêmes hauteurs de rehausse (6, 10 et 15 cm dans la brochure française, des valeurs plus basses dans une brochure européenne) : vérifiez la hauteur indiquée sur la référence que vous achetez. Hygiène et matériau non précisés.</li>
+</ul>
+<p><a href="{AMZ:Aquatec 900 rehausseur WC}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Etac Hi-Loo à brides : idéal pour une fixation stable et légère</h2>
+<p><strong>Pour qui ?</strong> Une personne qui n'a pas besoin d'accoudoirs mais veut un rehausseur qui ne bouge pas, facile à retirer pour le ménage.</p>
+<ul>
+<li><strong>Points forts</strong> : brides réglables gainées de caoutchouc, qui s'adaptent à la forme de la cuvette. L'assise se retire sans dérégler les brides. Découpes à l'avant et à l'arrière pour l'hygiène, assise relevable ou amovible, lavable en laveur-désinfecteur.</li>
+<li><strong>Données utiles</strong> : rehausse de 6 ou 10 cm, avec ou sans couvercle, charge maximale 150 kg, ouverture de 27 x 20 cm, dimensions extérieures de 36 x 39 cm, poids de 1,1 à 2,3 kg selon la version. Assise en polypropylène.</li>
+<li><strong>Limites</strong> : pas d'accoudoirs mentionnés : si la personne a besoin d'appui, associez-le à un cadre de toilettes ou à une barre d'appui.</li>
+</ul>
+<p><a href="{AMZ:Etac Hi-Loo rehausse WC}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Réhotec : idéal pour les personnes de forte corpulence</h2>
+<p><strong>Pour qui ?</strong> Une personne qui veut une large marge sur la charge maximale et un rehausseur solidement serré sur la cuvette.</p>
+<ul>
+<li><strong>Points forts</strong> : charge maximale de 180 kg. Fixation par molettes ergonomiques qui serrent des pattes, pour des cuvettes de 32 à 42 cm de large. Assise un peu plus basse à l'avant (par exemple 10 cm à l'arrière et 9 cm à l'avant), larges dégagements avant et arrière pour l'hygiène intime, pas de rebords extérieurs, conçu pour limiter les infiltrations par-dessous.</li>
+<li><strong>Données utiles</strong> : rehausse de 7 ou 10 cm, avec couvercle amovible ou sans, ouverture de 20,5 x 26 cm, 43 cm de large avec les pattes et 44 cm de profondeur, en polypropylène.</li>
+<li><strong>Limites</strong> : pas d'accoudoirs. Poids non précisé sur la fiche consultée.</li>
+</ul>
+<p><a href="{AMZ:Rehotec rehausse WC}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Herdegen Clip Up : idéal pour le rehausseur le plus léger</h2>
+<p><strong>Pour qui ?</strong> Une personne qui veut un rehausseur à enlever et remettre souvent, par exemple quand les toilettes sont partagées avec d'autres membres du foyer.</p>
+<ul>
+<li><strong>Points forts</strong> : 0,95 kg seulement. Fixation sans outils par 6 patins antidérapants et une crémaillère intégrée. Découpe anatomique pour faciliter l'essuyage, surface lisse anti-salissures.</li>
+<li><strong>Données utiles</strong> : rehausse de 10 cm, charge maximale 150 kg, largeur de 34 à 37 cm, profondeur 38,5 cm, en polypropylène.</li>
+<li><strong>Limites</strong> : accoudoirs, couvercle et dimensions de l'ouverture non précisés sur la fiche consultée. Hauteur unique.</li>
+</ul>
+<p><a href="{AMZ:Herdegen Clip Up rehausse WC}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>9. Herdegen Contact Plus Néo : idéal pour une assise souple sans montage</h2>
+<p><strong>Pour qui ?</strong> Une personne qui trouve les assises en plastique dures ou froides, ou qui reste longtemps assise, et un foyer qui ne veut rien fixer.</p>
+<ul>
+<li><strong>Points forts</strong> : en mousse injectée avec une peau en PVC présentée comme anti-allergique. Aucune fixation : il se pose sur la céramique et tient par son poids et un effet ventouse. Charge maximale de 185 kg, la plus élevée de la sélection.</li>
+<li><strong>Données utiles</strong> : 11 cm de rehausse utile (16 cm au total), ouverture de 21 x 26 cm, dimensions extérieures de 37 x 41 cm, poids 2 kg. Nettoyage à l'eau savonneuse ; le fabricant déconseille l'eau de Javel, qui le fait jaunir.</li>
+<li><strong>Limites</strong> : il faut retirer l'abattant existant. Pas de couvercle ni d'accoudoirs. Un modèle posé, sans fixation, demande de vérifier qu'il reste bien en place sur votre cuvette.</li>
+</ul>
+<p><a href="{AMZ:Herdegen Contact Plus rehausse WC mousse}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>10. Identités Soupless' : idéal pour une mousse posée en une seconde</h2>
+<p><strong>Pour qui ?</strong> Une personne qui veut une assise confortable et un rehausseur à poser ou retirer instantanément, par exemple pour des toilettes partagées.</p>
+<ul>
+<li><strong>Points forts</strong> : en mousse EVA à surface imperméable et désinfectable, fabriqué en France. Aucune fixation : des gouttières de 45 mm l'emboîtent sur la cuvette, la pose prend environ une seconde selon le fabricant. Existe avec ou sans couvercle.</li>
+<li><strong>Données utiles</strong> : rehausse de 11 cm, charge maximale 180 kg, dimensions de 43 x 43 cm, ouverture de 26 x 21,5 cm, poids 1,9 kg. Compatible avec une cuvette de 22 cm de large à l'intérieur, 35,3 cm à l'extérieur et un rebord jusqu'à 5 cm d'épaisseur.</li>
+<li><strong>Limites</strong> : pas d'accoudoirs. Les dimensions de cuvette compatibles sont précises : mesurez la vôtre avant de commander.</li>
+</ul>
+<p><a href="{AMZ:Identites Soupless rehausse WC}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment choisir</h2>
+<p>Partez de la personne, puis de la cuvette :</p>
+<ul>
+<li><strong>Besoin d'appui pour se relever</strong> : un rehausseur avec accoudoirs (Aquatec 90000 avec option, Etac Cloo, Herdegen Clipper, Identités Capri).</li>
+<li><strong>Transfert depuis un fauteuil roulant</strong> : des accoudoirs relevables ou amovibles d'un côté (Capri, Cloo, Clipper).</li>
+<li><strong>Bon équilibre, seulement des toilettes trop basses</strong> : un rehausseur simple, à brides, à clips ou à molettes (Hi-Loo, Clip Up, Réhotec).</li>
+<li><strong>Confort de l'assise</strong> : un modèle en mousse (Contact Plus Néo, Soupless').</li>
+<li><strong>WC suspendus ou cuvette carrée</strong> : vérifiez la compatibilité, comme sur l'Aquatec 900.</li>
+<li><strong>Forte corpulence</strong> : regardez d'abord la charge maximale et gardez de la marge (Réhotec, Soupless', Contact Plus Néo).</li>
+</ul>
+<p>Mesurez la largeur et la forme de la cuvette, l'épaisseur du rebord et la place disponible de chaque côté si vous voulez des accoudoirs. Pour la hauteur, une fois assise, la personne doit poser les pieds à plat avec les genoux à peu près à angle droit, ou légèrement plus haut que les hanches si le relevé est difficile. Tous les critères sont détaillés dans notre guide pour <a href="{R}rehausseur-wc/">bien choisir un rehausseur WC</a>. Une <a href="{R}barre-d-appui-salle-de-bain/">barre d'appui</a> à côté des toilettes complète utilement un rehausseur sans accoudoirs, et <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a> passe en revue les autres aménagements.</p>
+<h2>Prise en charge et conseils</h2>
+<p>Pour être remboursé par l'Assurance Maladie, un dispositif doit figurer sur la liste des produits et prestations remboursables et être prescrit par un professionnel de santé. Renseignez-vous auprès du pharmacien ou du revendeur pour savoir si un modèle précis est concerné, puis auprès de votre mutuelle ou de votre caisse de retraite pour d'éventuelles aides. Un ergothérapeute peut aussi évaluer les toilettes et vous conseiller entre rehausseur, cadre de toilettes ou barre d'appui.</p>
+""",
+  faq=[("Quel est le meilleur rehausseur WC pour une personne âgée ?", "Il dépend de ses besoins. Si elle a besoin de s'appuyer pour se relever, choisissez un modèle avec accoudoirs, comme l'Aquatec 90000 avec son option accoudoirs ou l'Etac Cloo. Si les toilettes sont seulement trop basses et que l'équilibre est bon, un rehausseur simple à clips, à brides ou à molettes suffit. En cas de doute, demandez conseil à un ergothérapeute."),
+       ("Quelle hauteur de rehausseur WC choisir ?", "La plupart des rehausseurs ajoutent entre 6 et 14 cm. Une fois assise, la personne doit pouvoir poser les pieds à plat, genoux à peu près à angle droit. Une personne grande, ou qui a du mal à se relever après une opération de la hanche ou du genou, aura souvent besoin d'une rehausse plus haute : suivez alors les consignes de l'équipe soignante."),
+       ("Avez-vous testé ces rehausseurs WC ?", "Non. Cette sélection repose uniquement sur les caractéristiques publiées par les fabricants et les revendeurs. Nous ne donnons ni note ni avis de prise en main, et nous vous conseillons de vérifier la notice et la compatibilité avec votre cuvette.")],
+  short="Top 10 rehausseurs WC", cat="Salle de bains")

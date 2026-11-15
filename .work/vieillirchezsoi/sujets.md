@@ -16,7 +16,7 @@
 - [x] veilleuse-detecteur-de-mouvement/ | veilleuse détecteur de mouvement senior | Sécurité | trajets de nuit, piles ou prise
 - [x] prevenir-les-chutes-a-la-maison/ | prévenir les chutes à la maison | Sécurité | gestes et habitudes au quotidien (lever, chaussures, médicaments, activité), renvoi au guide pièce par pièce et au médecin
 - [x] telephone-fixe-grosses-touches/ | téléphone fixe grosses touches | Vie quotidienne | amplifié, photos, sans fil
-- [ ] pince-de-prehension/ | pince de préhension | Vie quotidienne | longueur, aimant, pliante
+- [x] pince-de-prehension/ | pince de préhension | Vie quotidienne | longueur, aimant, pliante
 - [ ] tapis-antiderapant-douche/ | tapis antidérapant douche | Salle de bains | ventouses, entretien, alternatives
 - [ ] bouton-appel-urgence-senior/ | bouton d'appel d'urgence senior | Sécurité | pendentif, bracelet, avec ou sans abonnement
 - [ ] teleassistance-comment-ca-marche/ | téléassistance comment ça marche | Sécurité | principe, qui répond, rester général sur les aides
