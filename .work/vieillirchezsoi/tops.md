@@ -35,3 +35,21 @@
 - [ ] meilleur-detecteur-de-fumee/ | meilleur détecteur de fumée | Sécurité | NF, autonomie, connecté
 - [ ] meilleur-coussin-pivotant-voiture/ | meilleur coussin pivotant voiture senior | Se déplacer | entrer et sortir de la voiture
 - [ ] meilleur-oxymetre/ | meilleur oxymètre de pouls | Vie quotidienne | dispositif médical si lu ; renvoi médecin
+- [ ] meilleur-elevateur-de-bain/ | meilleur élévateur de bain | Salle de bains | sièges élévateurs de baignoire électriques
+- [ ] meilleure-chaise-de-douche-a-roulettes/ | meilleure chaise de douche à roulettes | Salle de bains | chaises garde-robe et douche à roulettes
+- [ ] meilleure-chaise-percee/ | meilleure chaise percée | Chambre et repos | fixe, pliante, à roulettes
+- [ ] meilleur-cadre-de-toilettes/ | meilleur cadre de toilettes | Salle de bains | réglable, sans perçage
+- [ ] meilleure-barre-de-lit/ | meilleure barre de lit pour se relever | Chambre et repos | poignées et barres d'appui de lit
+- [ ] meilleur-fauteuil-roulant-manuel-pliant/ | meilleur fauteuil roulant manuel pliant | Se déplacer | léger, de transfert, autopropulsé ; achat sans prescription, renvoi vers fauteuil-roulant-rembourse-100/
+- [ ] meilleur-telephone-senior-a-clapet/ | meilleur téléphone senior à clapet | Vie quotidienne | 4G VoLTE uniquement
+- [ ] meilleure-sonnette-sans-fil-flash/ | meilleure sonnette sans fil avec flash | Vie quotidienne | pour malentendants : flash, vibreur, volume fort
+- [ ] meilleur-reveil-vibrant/ | meilleur réveil vibrant | Vie quotidienne | coussin vibrant, flash, pour malentendants
+- [ ] meilleur-amplificateur-telephone/ | meilleur amplificateur de téléphone fixe | Vie quotidienne | amplification de l'écoute et de la sonnerie
+- [ ] meilleur-eclairage-led-escalier/ | meilleur éclairage LED d'escalier à détecteur | Sécurité | spots de marche, bandes LED
+- [ ] meilleur-thermometre-sans-contact/ | meilleur thermomètre sans contact | Vie quotidienne | frontal, lisible ; renvoi médecin
+- [ ] meilleure-montre-gps-senior/ | meilleure montre GPS pour senior | Sécurité | localisation, appel d'urgence ; rester général sur les maladies, renvoi médecin
+- [ ] meilleure-vaisselle-adaptee/ | meilleure vaisselle adaptée pour senior | Vie quotidienne | assiettes à rebord, tasses à deux anses, antidérapant
+- [ ] meilleur-fauteuil-de-bureau-senior/ | meilleur fauteuil confortable pour senior | Chambre et repos | assise haute, accoudoirs, sans moteur
+- [ ] meilleur-repose-jambes/ | meilleur repose-jambes | Chambre et repos | pouf, coussin incliné ; renvoi médecin en cas de problème circulatoire
+- [ ] meilleure-lampe-de-lecture-senior/ | meilleure lampe de lecture pour senior | Vie quotidienne | lumière forte, bras articulé, loupe
+- [ ] meilleure-balance-parlante/ | meilleure balance parlante | Vie quotidienne | pour malvoyants, grand écran
