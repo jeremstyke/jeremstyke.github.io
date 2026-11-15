@@ -81,6 +81,7 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None,
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-site-verification" content="27IBJnOIE9cITU2upGV9tTz35Gj59wx6mI_l6zG75Oo">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{url}">
