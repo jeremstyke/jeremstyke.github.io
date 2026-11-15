@@ -5,6 +5,7 @@ from urllib.parse import quote_plus
 sys.path.insert(0, os.path.dirname(__file__))
 from content import CHECKLIST, PRIO, GUIDES, ROOM_INTRO, ROOM_CAT, HUB_INTRO, HUB_OUTRO, HUB_FAQ
 from auto_articles import AUTO_META
+from quiz import ITEMS, QUESTIONS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
@@ -36,7 +37,17 @@ CTA = ('<aside class="cta"><div><strong>Faites le point pièce par pièce</stron
        '<span>Notre guide pour aménager le logement liste l\'équipement utile pièce par pièce, du plus urgent au plus confortable.</span></div>'
        '<a class="btn" href="{R}amenager-logement-personne-agee/">Lire le guide</a></aside>')
 
-NAV = [('amenager-logement-personne-agee/', 'Pièce par pièce'), ('guides/', 'Guides'), ('a-propos/', 'À propos')]
+PDF_BOX = ('<aside class="pdfbox" id="pdf"><div><strong>📄 Le guide pièce par pièce en PDF</strong>'
+  '<span>À imprimer et à relire avec votre proche : tous les équipements, classés par pièce et par priorité. Gratuit.</span></div>'
+  '<form class="pdf-form" data-src="@SRC@"><label class="sr" for="pdf-mail-@SRC@">Votre e-mail</label>'
+  '<input type="email" id="pdf-mail-@SRC@" name="email" required placeholder="Votre adresse e-mail" autocomplete="email">'
+  '<label class="chk"><input type="checkbox" name="news"> J\'accepte de recevoir de temps en temps des conseils par e-mail (désinscription en un clic).</label>'
+  '<button class="btn" type="submit">Recevoir le PDF</button>'
+  '<p class="pdf-ok" hidden>Merci ! <a href="{R}assets/guide-amenager-logement.pdf" download>Télécharger le guide (PDF)</a></p>'
+  '<p class="small">Votre e-mail sert uniquement à ce que vous avez choisi. <a href="{R}confidentialite/">Confidentialité</a></p></form></aside>')
+def pdf_box(src): return PDF_BOX.replace('@SRC@', src)
+
+NAV = [('amenager-logement-personne-agee/', 'Pièce par pièce'), ('quel-equipement/', 'Questionnaire'), ('guides/', 'Guides')]
 PAGES = []
 MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
 DATES_F = os.path.join(HERE, 'dates.json')
@@ -102,7 +113,7 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None,
 <link rel="icon" href="{R}assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="{R}assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{R}assets/fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="{R}assets/style.css?v=4">
+<link rel="stylesheet" href="{R}assets/style.css?v=6">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>
 <body>
@@ -118,12 +129,12 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None,
 <footer class="foot"><div class="wrap foot-in">
 <div><a class="logo" href="{R}"><span class="logo-ico" aria-hidden="true">🏡</span>Vieillir chez soi</a>
 <p>Des guides simples pour équiper la maison et rester chez soi en sécurité, le plus longtemps possible.</p></div>
-<nav aria-label="Pied de page"><a href="{R}amenager-logement-personne-agee/">Aménager le logement</a><a href="{R}guides/">Guides</a><a href="{R}a-propos/">À propos</a><a href="{R}mentions-legales/">Mentions légales</a><a href="{R}confidentialite/">Confidentialité</a><a href="mailto:{CONTACT}">Contact</a></nav>
+<nav aria-label="Pied de page"><a href="{R}amenager-logement-personne-agee/">Aménager le logement</a><a href="{R}quel-equipement/">Questionnaire</a><a href="{R}guides/">Guides</a><a href="{R}a-propos/">À propos</a><a href="{R}mentions-legales/">Mentions légales</a><a href="{R}confidentialite/">Confidentialité</a><a href="mailto:{CONTACT}">Contact</a></nav>
 <nav class="sites" aria-label="Nos sites"><span>Nos sites :</span><a href="https://malistebebe.fr/">🍼 Ma liste bébé</a><a href="https://malistedemariage.fr/">💍 Ma liste mariage</a><a aria-current="page" href="{R}">🏡 Vieillir chez soi</a></nav>
 <p class="disc">{DISCLOSURE} Les informations de ce site sont générales et ne remplacent pas l'avis d'un médecin, d'un ergothérapeute ou d'un pharmacien. Les prix et les offres peuvent changer : vérifiez-les avant d'acheter. © {YEAR} {SITE}</p>
 </div></footer>
 <script>try{{if(localStorage.getItem("vcs_big")==="1")document.documentElement.classList.add("big")}}catch(e){{}}</script>
-<script src="{R}assets/app.js?v=2" defer></script>
+<script src="{R}assets/app.js?v=3" defer></script>
 </body>
 </html>
 '''
@@ -197,6 +208,7 @@ def build():
 <div class="hero-btns"><a class="btn" href="{{R}}amenager-logement-personne-agee/">Le guide pièce par pièce</a><a class="btn ghost" href="{{R}}guides/">Lire les guides</a></div>
 </div></section>
 <div class="wrap">
+<aside class="quizcta"><div><strong>🧭 Quel équipement pour votre proche ?</strong><span>Répondez à 6 questions et obtenez une liste adaptée à sa situation, en 1 minute.</span></div><a class="btn" href="{{R}}quel-equipement/">Faire le questionnaire</a></aside>
 <section><h2>Par pièce et par besoin</h2><div class="rooms">{cats}</div></section>
 <section><h2>Nos derniers guides</h2><div class="cards">{''.join(card(x) for x in latest[:6])}</div></section>
 <section><h2>Tous les guides par thème</h2><div class="themes">{themes}</div>
@@ -204,6 +216,7 @@ def build():
 <section class="why"><h2>Pourquoi ce site ?</h2>
 <p>Quand un parent commence à perdre en autonomie, on doit souvent s'équiper vite, sans savoir quoi acheter. Les fiches produits des magasins listent des caractéristiques, mais expliquent rarement comment choisir. Ici, on vous dit ce qui compte vraiment, pour qui, et à quoi faire attention.</p>
 <p>Nos conseils sont généraux. Pour une situation précise, demandez l'avis du médecin, d'un ergothérapeute ou du pharmacien.</p></section>
+{pdf_box('accueil')}
 {fh}
 </div>'''
     page('', 'Vieillir chez soi : guides pour adapter la maison des seniors',
@@ -235,6 +248,7 @@ def build():
 <p class="legend">Pour chaque équipement, un niveau de priorité : <span class="prio p1">Essentiel</span> <span class="prio p2">Utile</span> <span class="prio p3">Selon les besoins</span></p>
 {secs}
 {HUB_OUTRO}
+{pdf_box('pilier')}
 {fh}
 <p class="disc-in">Ces conseils sont généraux et ne remplacent pas l'avis d'un professionnel de santé. Liens d'affiliation : nous touchons une commission sur certains achats, sans surcoût pour vous.</p>
 </article></div>'''
@@ -247,6 +261,31 @@ def build():
         '<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><title>Page déplacée</title>'
         '<link rel="canonical" href="%s/%s"><meta name="robots" content="noindex">'
         '<meta http-equiv="refresh" content="0; url=../%s"></head><body><p><a href="../%s">Aménager le logement d\'une personne âgée</a></p></body></html>' % (BASE, HUB, HUB, HUB))
+
+    # Questionnaire
+    qdata = {k: {"n": n, "u": amz(q), "c": c, "g": g} for k, (n, q, c, g) in ITEMS.items()}
+    qhtml = ''
+    for qi, (qid, txt, multi, opts) in enumerate(QUESTIONS):
+        typ = 'checkbox' if multi else 'radio'
+        qhtml += '<fieldset class="q"><legend><span>%d</span> %s</legend>%s</fieldset>' % (qi + 1, esc(txt), ''.join(
+            '<label class="opt"><input type="%s" name="%s" value="%s" data-e="%s" data-u="%s"%s> %s</label>' % (
+                typ, qid, v, ' '.join(e), ' '.join(u), ' required' if not multi and oi == 0 else '', esc(lab)) for oi, (v, lab, e, u) in enumerate(opts)))
+    qfaq = [("Ce questionnaire remplace-t-il l'avis d'un professionnel ?", "Non. Il donne des pistes générales. Le médecin traitant, l'ergothérapeute ou le pharmacien peuvent conseiller l'équipement adapté à la situation précise de la personne."),
+            ("Mes réponses sont-elles enregistrées ?", "Non. Les réponses restent dans votre navigateur. Seul le lien de partage contient vos choix, si vous décidez de l'envoyer.")]
+    fh, fs = faq_html(qfaq)
+    body = f'''<div class="wrap art-wrap"><article class="prose">
+<p class="art-cat t-ciel"><span aria-hidden="true">🧭</span> Questionnaire gratuit</p>
+<h1>Quel équipement pour mon parent âgé ?</h1>
+<p class="lead">Répondez à 6 questions sur la situation de votre proche. Vous obtenez une liste d'équipements classés par priorité, avec nos guides pour bien les choisir.</p>
+<form id="quiz" class="quiz">{qhtml}<button class="btn" type="submit">Voir les équipements conseillés</button></form>
+<section id="quiz-res" class="quiz-res" hidden aria-live="polite"></section>
+<script type="application/json" id="quiz-data">{json.dumps(qdata, ensure_ascii=False)}</script>
+<div class="note"><strong>Un conseil personnalisé ?</strong> Ce questionnaire donne des pistes générales. Pour une situation précise, demandez l\'avis du médecin traitant, d\'un ergothérapeute ou du pharmacien.</div>
+{{fh}}
+</article></div>'''.replace('{fh}', fh)
+    page('quel-equipement/', "Quel équipement pour une personne âgée ? Questionnaire gratuit",
+         "Questionnaire gratuit en 6 questions : découvrez quel équipement installer pour aider un parent âgé à rester chez lui en sécurité, classé par priorité.",
+         body, schema=fs, crumbs=[('Questionnaire', 'quel-equipement/')], prio='0.9')
 
     # Guides
     groups = {}
@@ -291,6 +330,7 @@ def build():
     page('confidentialite/', 'Confidentialité', 'Données collectées par le site Vieillir chez soi.',
          f'''<div class="wrap art-wrap"><article class="prose"><h1>Confidentialité</h1>
 <p>Le site fonctionne sans inscription.</p>
+<h2>Guide PDF et e-mails</h2><p>Si vous demandez le guide PDF, nous enregistrons votre adresse e-mail et, seulement si vous avez coché la case, votre accord pour recevoir des conseils par e-mail. Vous pouvez demander la suppression de votre adresse à tout moment en écrivant à <a href="mailto:{CONTACT}">{CONTACT}</a>. Chaque e-mail contiendra un lien de désinscription.</p>
 <h2>Mesure d'audience</h2><p>Nous comptons les pages vues et les clics vers Amazon de façon anonyme (page visitée, site d'origine, type d'appareil et un identifiant aléatoire stocké dans votre navigateur). Aucune donnée n'est vendue ni utilisée pour de la publicité. Ces données sont hébergées par Supabase dans l'Union européenne.</p>
 <h2>Amazon</h2><p>Quand vous cliquez sur un lien vers Amazon.fr, Amazon peut déposer des cookies pour attribuer la commission. Consultez la politique de confidentialité d'Amazon pour en savoir plus.</p>
 <h2>Contact</h2><p><a href="mailto:{CONTACT}">{CONTACT}</a></p></article></div>''',

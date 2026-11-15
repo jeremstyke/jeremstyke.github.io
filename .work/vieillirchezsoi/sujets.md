@@ -35,8 +35,10 @@
 - [ ] barriere-de-lit/ | barrière de lit adulte | Chambre et repos | prudence, alternatives, avis professionnel
 - [ ] table-de-lit/ | table de lit à roulettes | Chambre et repos | hauteur réglable, plateau inclinable
 - [ ] chaussures-personne-agee/ | chaussures pour personne âgée | Se déplacer | maintien, semelle, fermeture velcro
-- [ ] cadeau-personne-agee/ | cadeau utile pour personne âgée | Conseils pour les proches | idées par budget et par besoin
+- [x] cadeau-personne-agee/ | cadeau utile pour personne âgée | Conseils pour les proches | idées par budget et par besoin
 - [ ] parler-a-un-parent-age-de-son-logement/ | comment convaincre un parent âgé d'adapter son logement | Conseils pour les proches | en parler sans brusquer, faire accepter les aides, renvoi au guide pièce par pièce
 - [ ] materiel-maintien-domicile-acheter-ou-louer/ | matériel maintien à domicile acheter ou louer | Conseils pour les proches | ce qui se loue, prescription
 - [ ] boite-a-cle-securisee/ | boîte à clé sécurisée | Sécurité | aides à domicile, secours, code
-- [ ] aides-adapter-logement-senior/ | aides pour adapter son logement senior | Conseils pour les proches | uniquement les dispositifs vérifiés sur service-public.fr ou france-renov.gouv.fr, sinon rester général
+- [x] aides-adapter-logement-senior/ | aides pour adapter son logement senior | Conseils pour les proches | uniquement les dispositifs vérifiés sur service-public.fr ou france-renov.gouv.fr, sinon rester général
+- [x] meilleur-telephone-portable-senior/ | meilleur téléphone portable senior | Vie quotidienne | comparatif publié le 15 nov 2026 (modèles vérifiés sur les sites fabricants)
+- [x] meilleur-rollator/ | meilleur rollator | Se déplacer | comparatif publié le 15 nov 2026 (fiches techniques vérifiées)

@@ -15,3 +15,4 @@ Santé : conseils généraux uniquement, renvoyer vers le médecin, l'ergothéra
 Ton : bienveillant, jamais infantilisant pour les seniors.
 
 Note : build.py met à jour .work/vieillirchezsoi/src/dates.json (date de publication de chaque guide) et génère vieillirchezsoi/og/<slug>.png : ces fichiers doivent être commités avec l'article.
+Le PDF vieillirchezsoi/assets/guide-amenager-logement.pdf est généré par src/make_pdf.js (à relancer seulement si le guide pilier change, pas pour un article).

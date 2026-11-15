@@ -666,3 +666,337 @@ g("telephone-fixe-grosses-touches/",
        ("Un téléphone fixe fonctionne-t-il pendant une coupure de courant ?", "S'il est branché sur une box internet, non : la box a besoin d'électricité. Gardez un téléphone portable chargé pour pouvoir appeler en cas de coupure."),
        ("Filaire ou sans fil pour un senior ?", "Le filaire est le plus simple et n'a pas de batterie. Le sans fil évite de se précipiter quand le téléphone sonne. Beaucoup de foyers combinent les deux.")],
   short="Téléphone fixe senior", cat="Vie quotidienne")
+
+AUTO_META['cadeau-personne-agee/'] = ('🎁', 'rose')
+g("cadeau-personne-agee/",
+  "Cadeau personne âgée : idées utiles qui font vraiment plaisir",
+  "Quel cadeau offrir à une personne âgée ? Nos idées utiles",
+  "Confort, sécurité, lien avec la famille, loisirs, vue et audition : des idées de cadeaux utiles pour une personne âgée, classées par besoin et par budget.",
+  """
+<p>Trouver un cadeau pour un parent ou un grand-parent n'est pas toujours simple. On entend souvent « je n'ai besoin de rien », et l'on a peur d'offrir un objet de plus qui restera dans un placard. Le bon cadeau répond à un besoin réel, se sert facilement et fait plaisir dès le premier jour. Voici des idées classées par besoin, puis par budget.</p>
+{CTA}
+<h2>Partir de la personne, pas de l'objet</h2>
+<p>Avant de choisir, observez son quotidien ou posez-lui quelques questions, l'air de rien : a-t-elle froid le soir ? Monte-t-elle le son de la télévision ? Se plaint-elle de mal lire ? Aimerait-elle voir plus souvent les photos des petits-enfants ? Ses réponses vous donneront souvent la meilleure idée. Un cadeau utile n'a rien de triste s'il correspond à une envie : celui ou celle qui le reçoit doit d'abord se faire plaisir.</p>
+<h2>Les idées en un coup d'œil</h2>
+<table><thead><tr><th>Idée</th><th>Pour qui ?</th><th>Pourquoi c'est utile</th></tr></thead><tbody>
+<tr><td>Cadre photo numérique</td><td>Grands-parents éloignés de la famille</td><td>Les proches envoient des photos, elles s'affichent toutes seules</td></tr>
+<tr><td>Plaid chauffant</td><td>Personne frileuse, qui reste assise longtemps</td><td>Chaleur douce dans le fauteuil, sans surchauffer toute la pièce</td></tr>
+<tr><td>Chaussons fermés</td><td>Tout le monde, surtout en cas de pas hésitant</td><td>Tiennent bien le pied et limitent les glissades</td></tr>
+<tr><td>Casque TV sans fil</td><td>Personne qui monte beaucoup le son</td><td>Elle entend mieux sans gêner l'entourage</td></tr>
+<tr><td>Horloge calendrier</td><td>Personne qui perd parfois le fil des jours</td><td>Affiche clairement le jour, la date et le moment de la journée</td></tr>
+<tr><td>Loupe ou liseuse</td><td>Grand lecteur dont la vue baisse</td><td>Permet de continuer à lire avec plaisir</td></tr>
+<tr><td>Veilleuse à détecteur</td><td>Personne qui se lève la nuit</td><td>Éclaire le passage automatiquement</td></tr>
+</tbody></table>
+<h2>Confort : le plaisir du quotidien</h2>
+<p>Les cadeaux de confort sont souvent les plus appréciés, car on s'en sert tous les jours.</p>
+<ul>
+<li><strong>Un plaid chauffant</strong> réchauffe les jambes devant la télévision. Choisissez un modèle avec plusieurs niveaux de chaleur, une minuterie et un arrêt automatique, et une commande aux boutons bien lisibles. Il ne doit pas rester allumé pendant le sommeil. Si la personne sent mal le chaud ou le froid (certaines maladies peuvent diminuer la sensibilité de la peau), demandez d'abord l'avis de son médecin. <a href="{AMZ:plaid chauffant arret automatique}" """ + A + """>Voir les plaids chauffants</a>.</li>
+<li><strong>Des chaussons fermés</strong>, avec une semelle antidérapante et un contrefort qui maintient le talon, sont bien plus sûrs que des mules qui glissent du pied. Une fermeture par scratch aide quand les pieds gonflent ou qu'il est difficile de se pencher. <a href="{AMZ:chaussons fermes senior antiderapant}" """ + A + """>Voir les chaussons fermés</a>.</li>
+<li><strong>Un coussin de lecture ou un repose-pieds</strong> rend le fauteuil plus agréable pour les longues soirées.</li>
+</ul>
+<h2>Sécurité : utile, à condition d'en parler</h2>
+<p>Un équipement de sécurité peut être un très beau cadeau, car il rassure tout le monde. La <strong>veilleuse à détecteur de mouvement</strong> en est le meilleur exemple : discrète, elle s'allume seule quand on se lève la nuit, sans chercher l'interrupteur. Vous trouverez tous nos conseils dans le guide <a href="{R}veilleuse-detecteur-de-mouvement/">veilleuse à détecteur de mouvement</a>. <a href="{AMZ:veilleuse detecteur de mouvement}" """ + A + """>Voir les veilleuses à détecteur</a>.</p>
+<p>Pour d'autres idées d'équipements discrets, parcourez <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>. Gardez simplement en tête que ces objets touchent à l'autonomie : mieux vaut en discuter avant de les offrir (voir plus bas).</p>
+<h2>Garder le lien avec la famille</h2>
+<p>Pour beaucoup de personnes âgées, le plus beau cadeau reste de voir et d'entendre leurs proches.</p>
+<ul>
+<li><strong>Le cadre photo numérique</strong> est un favori. Selon les modèles, la famille peut envoyer des photos à distance, et elles s'affichent sans que la personne ait à toucher à quoi que ce soit. Vérifiez comment les photos sont envoyées (application, courriel, carte mémoire) et si le cadre a besoin d'une connexion internet à la maison. <a href="{AMZ:cadre photo numerique wifi}" """ + A + """>Voir les cadres photo numériques</a>.</li>
+<li><strong>Un téléphone adapté</strong> peut tout changer : grosses touches, son fort, touches mémoire pour appeler les enfants. Lisez notre guide pour <a href="{R}telephone-portable-senior/">choisir un téléphone portable senior</a> avant d'acheter.</li>
+<li><strong>Un album photo imprimé</strong> ou un calendrier personnalisé avec les photos de la famille fait toujours plaisir, et ne demande aucune prise en main.</li>
+</ul>
+<h2>Loisirs adaptés</h2>
+<p>Offrir de quoi continuer une passion est souvent plus touchant qu'un objet « pour personne âgée ». Pensez aux livres en grands caractères, aux livres audio, aux mots croisés ou aux jeux de cartes à gros chiffres, aux graines et outils légers pour un jardinier, ou à des fournitures pour les loisirs créatifs. Un abonnement à un magazine qu'elle aime ou une sortie partagée (concert, restaurant, spectacle) sont aussi des cadeaux qui créent des souvenirs.</p>
+<h2>Vue et audition : continuer à profiter</h2>
+<ul>
+<li><strong>Le casque TV sans fil</strong> permet de régler le son de la télévision pour soi, sans gêner le reste de la famille. Préférez un modèle léger, simple à recharger, avec un bouton de volume facile à trouver. Si la personne porte des appareils auditifs, demandez conseil à son audioprothésiste : il existe d'autres solutions compatibles. Et si elle a du mal à entendre depuis peu, une consultation chez le médecin est utile. <a href="{AMZ:casque tv sans fil senior}" """ + A + """>Voir les casques TV</a>.</li>
+<li><strong>Une loupe éclairante</strong> aide à lire le courrier, les notices ou un livre. Pour un grand lecteur, une <strong>liseuse</strong> permet d'agrandir les caractères à volonté, à condition de l'installer avec la personne. <a href="{AMZ:loupe de lecture eclairante}" """ + A + """>Voir les loupes de lecture</a>.</li>
+<li><strong>L'horloge calendrier</strong> affiche en grand le jour de la semaine, la date et souvent le moment de la journée (matin, après-midi, soir). Elle aide à se repérer, par exemple après une hospitalisation. <a href="{AMZ:horloge calendrier numerique senior}" """ + A + """>Voir les horloges calendrier</a>.</li>
+</ul>
+<p>Une vue ou une audition qui baisse mérite un rendez-vous chez le médecin ou le spécialiste : un cadeau aide au quotidien, mais ne remplace pas un bilan.</p>
+<h2>Selon votre budget</h2>
+<p>Les budgets ci-dessous sont indicatifs : les prix varient beaucoup d'un modèle à l'autre.</p>
+<ul>
+<li><strong>Petit budget</strong> : chaussons fermés, veilleuse à détecteur, loupe, livre en grands caractères, jeu de cartes, album photo fait maison.</li>
+<li><strong>Budget moyen</strong> : plaid chauffant, horloge calendrier, casque TV d'entrée de gamme, abonnement à un magazine.</li>
+<li><strong>Gros cadeau à plusieurs</strong> : cadre photo numérique connecté, liseuse, téléphone adapté, casque TV plus complet, sortie ou séjour en famille.</li>
+</ul>
+<h2>Pour Noël</h2>
+<p>À Noël, plutôt que plusieurs petits objets, pensez au <strong>cadeau commun entre frères et sœurs</strong> (et petits-enfants) : il permet d'offrir un équipement de qualité, et chacun peut ajouter un mot ou une photo. Surtout, prévoyez du temps pour <strong>installer et paramétrer l'appareil avec la personne</strong> : charger la batterie, régler le volume ou la taille des caractères, enregistrer les numéros, ajouter les premières photos. Montrez-lui les gestes, laissez-la essayer, et notez les étapes sur une petite fiche. Un appareil prêt à l'emploi et bien compris sera vraiment utilisé.</p>
+<h2>Les cadeaux à éviter</h2>
+<ul>
+<li><strong>Les gadgets compliqués</strong> : trop de boutons, des menus en anglais, une application obligatoire ou une mise à jour à faire seul. Si vous hésitez, choisissez le modèle le plus simple.</li>
+<li><strong>Les cadeaux qui rappellent la dépendance sans en avoir parlé avant</strong> : offrir un déambulateur, un détecteur de chute ou un rehausseur de WC par surprise peut blesser. Ces équipements sont utiles, mais ils se discutent à l'avance, en dehors de la fête, et se choisissent avec la personne.</li>
+<li><strong>Les objets encombrants</strong> qui ajoutent des obstacles au sol ou des fils à enjamber.</li>
+<li><strong>Les produits qui ne tiennent pas compte de la santé</strong> : chocolats pour une personne diabétique, alcool en cas de traitement. Dans le doute, demandez à la personne ou à ses proches.</li>
+</ul>
+<p>Au fond, le cadeau qui compte le plus reste souvent votre présence : un après-midi passé ensemble, un appel régulier, une visite. Un objet bien choisi vient simplement prolonger ce lien.</p>
+""",
+  faq=[("Quel cadeau utile offrir à une personne âgée ?", "Partez de ses besoins : un plaid chauffant ou des chaussons fermés pour le confort, un casque TV si elle monte le son, une loupe si elle a du mal à lire, un cadre photo numérique pour garder le lien avec la famille."),
+       ("Quelle idée de cadeau de Noël pour une personne âgée qui a déjà tout ?", "Misez sur le lien et les souvenirs : album photo, cadre photo numérique, sortie partagée ou moment en famille. Un cadeau commun entre frères et sœurs permet aussi d'offrir un équipement de qualité."),
+       ("Peut-on offrir un équipement de sécurité en cadeau ?", "Oui, s'il a été discuté avant. Une veilleuse à détecteur se prête bien à un cadeau. Pour un détecteur de chute ou une aide à la marche, parlez-en d'abord avec la personne et choisissez ensemble.")],
+  short="Idées cadeaux seniors", cat="Conseils pour les proches")
+
+AUTO_META['aides-adapter-logement-senior/'] = ('💶', 'sable')
+g("aides-adapter-logement-senior/",
+  "Aides pour adapter son logement senior : le guide 2026",
+  "Aides pour adapter le logement d'une personne âgée",
+  "MaPrimeAdapt', APA, caisses de retraite, aides locales : quelles aides pour adapter le logement d'un senior, pour qui, ce qu'elles financent et où les demander.",
+  """
+<p>Remplacer une baignoire par une douche de plain-pied, installer un monte-escalier, poser des barres d'appui : adapter le logement permet de rester chez soi plus longtemps et en sécurité. Ces travaux ont un coût, mais plusieurs aides publiques existent. Voici lesquelles, pour qui, et où les demander.</p>
+<p><em>Informations vérifiées en novembre 2026 sur les sites officiels (service-public.gouv.fr, anah.gouv.fr, france-renov.gouv.fr, lassuranceretraite.fr). Les règles évoluent : vérifiez toujours votre situation auprès de l'organisme concerné avant de vous engager.</em></p>
+{CTA}
+<h2>Les aides en un coup d'œil</h2>
+<table><thead><tr><th>Aide</th><th>Pour qui ?</th><th>Ce qu'elle finance</th><th>Où la demander ?</th></tr></thead><tbody>
+<tr><td>MaPrimeAdapt'</td><td>70 ans ou plus, ou 60 à 69 ans avec une perte d'autonomie évaluée, ou personne handicapée ; revenus modestes ou très modestes</td><td>Travaux d'adaptation : salle de bains, WC, accès, monte-escalier...</td><td>En ligne sur le site france-renov.gouv.fr, avec un accompagnateur (AMO)</td></tr>
+<tr><td>APA à domicile</td><td>60 ans ou plus, perte d'autonomie classée GIR 1 à 4</td><td>Un plan d'aide qui peut inclure des aides techniques et l'adaptation du logement, en plus de l'aide à domicile</td><td>Services du département (conseil départemental)</td></tr>
+<tr><td>Aides des caisses de retraite</td><td>Retraités encore autonomes qui ont des difficultés dans certains gestes du quotidien, sous conditions de ressources</td><td>Aides techniques, petits travaux d'aménagement, accompagnement à domicile</td><td>Votre caisse de retraite (principale et complémentaire)</td></tr>
+<tr><td>Aides locales</td><td>Variable selon le territoire</td><td>Aides ou prêts complémentaires, selon les règles locales</td><td>Mairie, CCAS ou CIAS, département</td></tr>
+</tbody></table>
+<h2>MaPrimeAdapt' : l'aide principale pour les travaux</h2>
+<p>MaPrimeAdapt' est l'aide de l'État, gérée par l'Anah, pour financer les travaux d'adaptation du logement à la perte d'autonomie. Elle concerne les propriétaires occupants et les locataires du parc privé (avec l'accord du bailleur).</p>
+<h3>Pour qui ?</h3>
+<ul>
+<li>une personne du foyer a <strong>70 ans ou plus</strong>, sans condition de perte d'autonomie ;</li>
+<li>ou elle a <strong>entre 60 et 69 ans</strong> et sa perte d'autonomie a été évaluée (classement en GIR) ;</li>
+<li>ou elle est en situation de handicap (taux d'incapacité d'au moins 50 % ou droit à la PCH, notamment).</li>
+</ul>
+<p>Le foyer doit aussi avoir des revenus <strong>modestes ou très modestes</strong>, selon des plafonds qui dépendent du nombre de personnes et de la région. Pour savoir si vous êtes concerné, comparez votre revenu fiscal de référence aux plafonds publiés sur le site service-public.gouv.fr, ou appelez le conseil gratuit France Rénov' au 0 808 800 700.</p>
+<h3>Quels travaux ?</h3>
+<p>Selon service-public.gouv.fr, l'aide peut financer par exemple :</p>
+<ul>
+<li>l'aménagement de la salle de bains, comme remplacer une baignoire par une douche ;</li>
+<li>des WC surélevés, l'aménagement de la cuisine ;</li>
+<li>un monte-escalier électrique, l'élargissement des couloirs ;</li>
+<li>un éclairage à détection de mouvement ;</li>
+<li>à l'extérieur : une rampe d'accès, des volets roulants, l'élargissement de la porte d'entrée.</li>
+</ul>
+<h3>Quel montant ?</h3>
+<p>L'aide couvre <strong>70 % des travaux pour les ménages très modestes</strong> et <strong>50 % pour les ménages modestes</strong>, dans la limite de <strong>22 000 € HT de travaux</strong>. Le montant exact dépend donc de vos revenus et de votre devis.</p>
+<h3>Comment faire la demande ?</h3>
+<p>Depuis le 17 août 2026, la demande se fait en créant un compte personnel sur le site france-renov.gouv.fr (un dépôt papier reste possible selon l'Anah). Vous êtes ensuite orienté vers un <strong>assistant à maîtrise d'ouvrage (AMO)</strong>, dont l'accompagnement est obligatoire : il vient au domicile, fait le diagnostic, vous aide à monter le dossier et suit les travaux jusqu'au versement de l'aide. Contactez France Rénov' avant de vous engager dans les travaux.</p>
+<h2>L'APA à domicile : quand l'autonomie diminue</h2>
+<p>L'allocation personnalisée d'autonomie (APA) s'adresse aux personnes de <strong>60 ans ou plus</strong> classées en <strong>GIR 1 à 4</strong>, c'est-à-dire avec une perte d'autonomie réelle. Les GIR 5 et 6 n'y ont pas droit.</p>
+<p>Après la demande, une équipe du département vient au domicile pour évaluer les besoins et propose un plan d'aide. Ce plan peut comprendre une aide à domicile, la livraison de repas, mais aussi des <strong>aides techniques et l'adaptation du logement</strong>. Selon vos revenus, une participation peut rester à votre charge.</p>
+<p>La demande se fait auprès des <strong>services de votre département</strong>, en ligne ou avec le formulaire cerfa n°16301, selon le département. Bon à savoir : l'APA n'est pas récupérable sur la succession.</p>
+<h2>Les aides des caisses de retraite</h2>
+<p>Vous êtes autonome mais certains gestes deviennent difficiles ? Votre caisse de retraite peut proposer un plan d'aides, sous conditions de ressources. À l'Assurance retraite, il peut comprendre :</p>
+<ul>
+<li>des forfaits de prévention pour installer des aides techniques ou une téléassistance, ou réaliser de petits travaux d'aménagement du logement ;</li>
+<li>des heures d'accompagnement à domicile (ménage, repas, aide à la toilette) ;</li>
+<li>des ateliers de prévention, par exemple sur l'habitat ou l'équilibre.</li>
+</ul>
+<p>La demande se fait en ligne depuis votre espace personnel sur le site lassuranceretraite.fr, ou par courrier avec le formulaire de demande d'aides à l'autonomie à domicile, accompagné de justificatifs comme l'avis d'imposition. Un professionnel vient ensuite au domicile. Si vous dépendez d'un autre régime, ou pour votre caisse complémentaire, renseignez-vous directement auprès d'elle : chaque caisse fixe ses propres règles.</p>
+<h2>Les aides locales : département, mairie, CCAS</h2>
+<p>Certaines collectivités accordent des aides ou des prêts supplémentaires pour adapter un logement, selon des règles qui varient d'un territoire à l'autre. Pour les connaître :</p>
+<ul>
+<li>adressez-vous à votre <strong>mairie</strong> ou à son <strong>CCAS</strong> (centre communal d'action sociale), ou au CIAS de l'intercommunalité ;</li>
+<li>consultez le site de votre <strong>département</strong>, qui gère aussi l'APA ;</li>
+<li>demandez au conseiller France Rénov' quelles aides locales peuvent compléter MaPrimeAdapt'.</li>
+</ul>
+<h2>Ce que vous pouvez faire sans attendre</h2>
+<p>Un dossier d'aide prend du temps. En attendant les travaux, quelques équipements simples, faciles à installer, sécurisent déjà la salle de bains et les toilettes :</p>
+<ul>
+<li>des <strong>barres d'appui</strong> vissées près de la douche et des toilettes. <a href="{AMZ:barre d'appui salle de bain}" """ + A + """>Voir les barres d'appui</a>. Notre guide pour <a href="{R}barre-d-appui-salle-de-bain/">bien choisir et placer une barre d'appui</a> vous aide à les installer ;</li>
+<li>un <strong>siège ou un tabouret de douche</strong>, pour se laver assis. <a href="{AMZ:siege de douche senior}" """ + A + """>Voir les sièges de douche</a>. Lisez aussi <a href="{R}comment-choisir-siege-de-douche/">comment choisir un siège de douche</a> ;</li>
+<li>un <strong>rehausseur de WC</strong>, quand se relever devient pénible. <a href="{AMZ:rehausseur wc}" """ + A + """>Voir les rehausseurs de WC</a>.</li>
+</ul>
+<p>Pour savoir quoi adapter en priorité, suivez <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a> et nos conseils pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a>.</p>
+<h2>Nos conseils pour bien démarrer</h2>
+<ul>
+<li><strong>Commencez par un appel</strong> au conseil gratuit France Rénov' (0 808 800 700) : il vous oriente vers les aides auxquelles vous pouvez prétendre.</li>
+<li><strong>Demandez l'avis d'un professionnel</strong> : le médecin traitant peut orienter vers un ergothérapeute, qui propose des aménagements adaptés à la personne.</li>
+<li><strong>Gardez vos documents à portée de main</strong> : dernier avis d'imposition, devis, justificatifs de propriété ou accord du bailleur.</li>
+<li><strong>Faites-vous aider</strong> : un proche peut accompagner la personne dans ses démarches, avec son accord.</li>
+</ul>
+""",
+  faq=[("Qui peut bénéficier de MaPrimeAdapt' ?", "Les foyers aux revenus modestes ou très modestes dont un membre a 70 ans ou plus, ou a entre 60 et 69 ans avec une perte d'autonomie évaluée, ou est en situation de handicap. Propriétaires occupants et locataires du parc privé (avec l'accord du bailleur) sont concernés."),
+       ("L'APA peut-elle financer l'adaptation du logement ?", "Oui, le plan d'aide de l'APA à domicile peut inclure des aides techniques et l'adaptation du logement. Elle est réservée aux personnes de 60 ans ou plus classées en GIR 1 à 4 et se demande auprès du département."),
+       ("Où se renseigner sur les aides pour adapter son logement ?", "Le conseil gratuit France Rénov' (0 808 800 700) pour MaPrimeAdapt', le département pour l'APA, votre caisse de retraite pour ses aides au maintien à domicile, et la mairie ou le CCAS pour les aides locales.")],
+  short="Aides pour adapter le logement", cat="Conseils pour les proches")
+
+AUTO_META['meilleur-telephone-portable-senior/'] = ('🏆', 'rose')
+g("meilleur-telephone-portable-senior/",
+  "Meilleur téléphone portable senior : 5 modèles 4G comparés",
+  "Meilleur téléphone portable senior : 5 modèles 4G à comparer",
+  "Doro Leva et Gigaset GL : 5 portables seniors 4G comparés d'après les fiches des fabricants. Clapet ou classique, bouton SOS, socle, appareils auditifs.",
+  """
+<p>Choisir un téléphone portable pour soi ou pour un parent âgé, c'est souvent se perdre entre des dizaines de modèles qui se ressemblent. Pour vous faire gagner du temps, nous avons retenu cinq téléphones à touches, vendus en France, dont le fabricant indique qu'ils fonctionnent en 4G avec les appels en VoLTE. C'est un point essentiel : les réseaux 2G et 3G ferment progressivement en France, et un téléphone qui n'appelle qu'en 2G ou en 3G risque de ne plus pouvoir téléphoner.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection :</strong> à partir des caractéristiques publiées par les fabricants sur leurs sites officiels, sans test en main. Nous n'avons pas eu ces téléphones entre les mains et nous ne donnons ni note ni prix. Avant d'acheter, vérifiez la compatibilité du modèle avec votre opérateur, en particulier pour les appels en 4G (VoLTE).</div>
+<h2>Le comparatif en un coup d'œil</h2>
+<table><thead><tr><th>Modèle</th><th>Format</th><th>4G</th><th>Bouton SOS</th><th>Socle</th><th>Pour qui ?</th></tr></thead><tbody>
+<tr><td>Doro Leva L20</td><td>Clapet</td><td>Oui, avec VoLTE</td><td>Oui, avec envoi de la position GPS</td><td>Cité par le fabricant, à vérifier dans la boîte</td><td>Amateur de clapet qui sort souvent seul</td></tr>
+<tr><td>Doro Leva E22</td><td>Clapet</td><td>Oui, avec VoLTE</td><td>Oui, sans envoi de position</td><td>Non indiqué</td><td>Usage simple : appeler, recevoir, SMS</td></tr>
+<tr><td>Doro Leva L10</td><td>Classique (barre)</td><td>Oui, avec VoLTE</td><td>Oui, avec envoi de position</td><td>Non indiqué</td><td>Personne qui préfère un téléphone sans clapet</td></tr>
+<tr><td>Gigaset GL795</td><td>Clapet</td><td>Oui, avec VoLTE</td><td>Oui, jusqu'à 5 contacts</td><td>Station de charge mentionnée, à vérifier</td><td>Porteur d'appareils auditifs qui aime le clapet</td></tr>
+<tr><td>Gigaset GL695</td><td>Classique</td><td>Oui, avec VoLTE</td><td>Oui, jusqu'à 5 contacts</td><td>Oui, socle fourni</td><td>Personne qui veut poser son téléphone pour le recharger</td></tr>
+</tbody></table>
+<p>Tous ces modèles ont un clavier physique, avec de vraies touches. Si la personne souhaite faire des appels vidéo ou recevoir des photos, il faudra plutôt regarder un smartphone simplifié : notre guide pour <a href="{R}telephone-portable-senior/">choisir un téléphone portable senior</a> explique les différences.</p>
+
+<h2>Doro Leva L20 : le clapet le plus complet de la sélection</h2>
+<p><strong>Pour qui ?</strong> Pour une personne qui aime décrocher en ouvrant son téléphone, qui sort seule et dont les proches veulent pouvoir être prévenus en cas de besoin.</p>
+<p><strong>Points forts selon le fabricant :</strong></p>
+<ul>
+<li>format à clapet, avec un écran de 2,8 pouces et des touches espacées et contrastées ;</li>
+<li>4G avec VoLTE et voix HD pour des conversations plus claires ;</li>
+<li>bouton d'assistance qui prévient des contacts de confiance et peut partager la position GPS du téléphone ;</li>
+<li>compatibilité avec les appareils auditifs indiquée dans la fiche technique (notation T4/M4) ;</li>
+<li>socle de charge cité parmi les points forts, indicateur lumineux de sonnerie, touches de raccourci vers les contacts favoris, résistance aux projections d'eau (IP54).</li>
+</ul>
+<p><strong>Limites :</strong> le fabricant précise que le câble de charge est fourni mais que l'adaptateur secteur est vendu séparément. La liste du contenu de la boîte ne cite que le câble : vérifiez sur la fiche du vendeur si le socle est inclus.</p>
+<p><a href="{AMZ:Doro Leva L20}" """ + A + """>Voir le prix sur Amazon</a></p>
+
+<h2>Doro Leva E22 : un clapet simple pour l'essentiel</h2>
+<p><strong>Pour qui ?</strong> Pour une personne qui veut surtout appeler, recevoir des appels et envoyer quelques SMS, dans un format à clapet.</p>
+<p><strong>Points forts selon le fabricant :</strong></p>
+<ul>
+<li>format à clapet, écran de 2,8 pouces et touches espacées à fort contraste ;</li>
+<li>4G avec VoLTE et voix HD ;</li>
+<li>bouton d'assistance (Doro Secure Button) pour alerter des proches de confiance ;</li>
+<li>compatibilité avec les appareils auditifs indiquée (notation M4/T4) ;</li>
+<li>sonnerie renforcée, volume du haut-parleur réglable, résistance aux projections d'eau (IP54).</li>
+</ul>
+<p><strong>Limites :</strong> d'après la fiche technique, ce modèle n'envoie pas la position du téléphone lors d'une alerte. Aucun socle de charge n'est mentionné, et l'adaptateur secteur est vendu séparément.</p>
+<p><a href="{AMZ:Doro Leva E22}" """ + A + """>Voir le prix sur Amazon</a></p>
+
+<h2>Doro Leva L10 : pour ceux qui n'aiment pas les clapets</h2>
+<p><strong>Pour qui ?</strong> Pour une personne qui préfère un téléphone droit, qu'on sort de la poche et qu'on utilise sans l'ouvrir.</p>
+<p><strong>Points forts selon le fabricant :</strong></p>
+<ul>
+<li>format classique en barre, avec un écran large de 2,4 pouces en mode paysage ;</li>
+<li>4G avec VoLTE ;</li>
+<li>bouton d'assistance qui alerte des contacts de confiance, avec envoi de la position ;</li>
+<li>compatibilité avec les appareils auditifs indiquée (notation T4/M4) ;</li>
+<li>grosses touches et clavier à fort contraste.</li>
+</ul>
+<p><strong>Limites :</strong> le fabricant ne mentionne pas de socle de charge : on recharge le téléphone avec le câble fourni, l'adaptateur secteur étant vendu séparément. Sans clapet, l'écran et les touches sont moins protégés dans un sac.</p>
+<p><a href="{AMZ:Doro Leva L10}" """ + A + """>Voir le prix sur Amazon</a></p>
+
+<h2>Gigaset GL795 : un clapet pensé pour les appareils auditifs</h2>
+<p><strong>Pour qui ?</strong> Pour une personne qui porte des appareils auditifs et qui aime le format à clapet.</p>
+<p><strong>Points forts selon le fabricant :</strong></p>
+<ul>
+<li>design à clapet, avec un écran principal de 2,8 pouces ;</li>
+<li>4G (LTE) et qualité HD des appels grâce à la VoLTE ;</li>
+<li>bouton SOS intégré qui appelle automatiquement jusqu'à cinq contacts ;</li>
+<li>compatibilité avec les appareils auditifs (HAC) annoncée ;</li>
+<li>recharge possible sur une station de charge ou par un câble USB-C.</li>
+</ul>
+<p><strong>Limites :</strong> la page du fabricant parle d'une station de charge sans préciser clairement si elle est fournie. Vérifiez le contenu de la boîte avant d'acheter si ce point compte pour vous.</p>
+<p><a href="{AMZ:Gigaset GL795}" """ + A + """>Voir le prix sur Amazon</a></p>
+
+<h2>Gigaset GL695 : le classique avec socle fourni</h2>
+<p><strong>Pour qui ?</strong> Pour une personne qui oublie de brancher son téléphone : il suffit de le poser sur son socle chaque soir.</p>
+<p><strong>Points forts selon le fabricant :</strong></p>
+<ul>
+<li>format classique, sans clapet ;</li>
+<li>4G (LTE) avec qualité vocale HD en VoLTE ;</li>
+<li>bouton SOS intégré qui appelle automatiquement jusqu'à cinq contacts enregistrés ;</li>
+<li>socle de charge fourni, avec aussi un port USB-C ;</li>
+<li>compatibilité avec les appareils auditifs (HAC) annoncée.</li>
+</ul>
+<p><strong>Limites :</strong> son écran de 2,31 pouces, à fort contraste, est le plus petit de cette sélection. Pour une vue qui baisse beaucoup, comparez avec les modèles à écran de 2,8 pouces.</p>
+<p><a href="{AMZ:Gigaset GL695}" """ + A + """>Voir le prix sur Amazon</a></p>
+
+<h2>Comment choisir entre ces modèles ?</h2>
+<p>Le meilleur téléphone est celui que la personne utilisera vraiment. Posez-vous ces quelques questions :</p>
+<ul>
+<li><strong>Clapet ou classique ?</strong> Le clapet protège l'écran et permet de décrocher en l'ouvrant. Le format classique se sort plus vite de la poche. Si la personne avait déjà un téléphone qui lui plaisait, restez sur le même format.</li>
+<li><strong>Le bouton SOS doit-il envoyer la position ?</strong> Pour une personne qui se promène seule, un bouton qui partage la localisation rassure davantage. Testez-le avec les proches enregistrés.</li>
+<li><strong>Un socle de charge ?</strong> Il évite de chercher la prise et le petit connecteur. C'est souvent ce qui fait qu'un téléphone reste chargé.</li>
+<li><strong>Des appareils auditifs ?</strong> Vérifiez la compatibilité indiquée par le fabricant et demandez à l'audioprothésiste comment régler les appareils pour le téléphone.</li>
+<li><strong>Quel opérateur ?</strong> Même compatible VoLTE, un téléphone doit être reconnu par l'opérateur pour appeler en 4G. Renseignez-vous auprès de lui avant l'achat.</li>
+</ul>
+<p>Pour aller plus loin sur chaque critère, lisez notre guide pour <a href="{R}telephone-portable-senior/">choisir un téléphone portable senior</a>. À la maison, un <a href="{R}telephone-fixe-grosses-touches/">téléphone fixe à grosses touches</a> reste un bon complément, toujours au même endroit. Le bouton d'urgence d'un portable ne sert que si l'on a le téléphone sur soi : pour une personne qui vit seule et risque de tomber, parlez aussi d'un dispositif de téléassistance avec elle et son médecin.</p>
+
+<h2>Bien préparer le téléphone avant de l'offrir</h2>
+<p>Un bon modèle mal réglé finit souvent dans un tiroir. Avant de le confier, prenez un moment pour :</p>
+<ul>
+<li>insérer la carte SIM et vérifier qu'un appel passe bien ;</li>
+<li>enregistrer les numéros des proches, du médecin et les contacts du bouton SOS ;</li>
+<li>régler le volume de la sonnerie et la taille du texte ;</li>
+<li>faire un essai du bouton d'urgence, en prévenant les personnes appelées ;</li>
+<li>montrer, sans se presser, comment décrocher, raccrocher et recharger.</li>
+</ul>
+<p>Le téléphone n'est qu'un élément pour vivre chez soi en sécurité. Retrouvez les autres dans <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
+""",
+  faq=[("Quel est le meilleur téléphone portable pour une personne âgée ?", "Il n'existe pas de modèle idéal pour tous. Un téléphone à touches compatible 4G avec VoLTE, avec bouton SOS et, si possible, un socle de charge, convient à la plupart des personnes qui veulent surtout appeler. Choisissez ensuite entre clapet et format classique selon ses habitudes."),
+       ("Pourquoi faut-il un téléphone senior compatible VoLTE ?", "Les réseaux 2G et 3G ferment progressivement en France. La VoLTE permet de passer les appels sur le réseau 4G. Vérifiez aussi auprès de l'opérateur que le modèle est bien compatible."),
+       ("Avez-vous testé ces téléphones ?", "Non. Cette sélection repose sur les caractéristiques publiées par les fabricants sur leurs sites officiels. Nous n'indiquons que ce qui y figure, sans note ni avis de prise en main.")],
+  short="Meilleurs téléphones seniors", cat="Vie quotidienne")
+
+AUTO_META['meilleur-rollator/'] = ('🏆', 'ciel')
+g("meilleur-rollator/",
+  "Meilleur rollator : 5 modèles comparés selon leur usage",
+  "Meilleur rollator : 5 modèles comparés selon l'usage",
+  "Léger, tout-terrain, 3 roues ou d'intérieur : 5 rollators de marques médicales comparés d'après leurs fiches techniques (poids, charge, largeur, siège).",
+  """
+<p>Il n'existe pas un meilleur rollator pour tout le monde, mais un modèle mieux adapté à chaque personne : selon qu'on marche surtout chez soi, qu'on fait ses courses à pied ou qu'on aime les chemins de campagne, les besoins changent. Voici cinq modèles de marques de matériel médical, chacun pensé pour un usage différent.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches techniques publiées par les fabricants ou par des distributeurs de matériel médical, sans test en main. Les chiffres ci-dessous sont ceux de ces fiches ; ils peuvent varier selon la taille ou la version. Avant d'acheter, faites-vous conseiller par un professionnel de santé (médecin, kinésithérapeute, ergothérapeute ou pharmacien).</div>
+<h2>Le comparatif en un coup d'œil</h2>
+<table><thead><tr><th>Modèle</th><th>Roues</th><th>Poids</th><th>Charge max</th><th>Siège</th><th>Pour qui ?</th></tr></thead><tbody>
+<tr><td>Drive DeVilbiss Nitro SL</td><td>4</td><td>5,5 kg (6,3 kg avec accessoires)</td><td>136 kg</td><td>Oui</td><td>Sorties, voiture, besoin d'un modèle léger</td></tr>
+<tr><td>Invacare Dolomite Legacy</td><td>4</td><td>7,2 kg (taille M) ou 7,6 kg (taille L)</td><td>125 kg</td><td>Oui</td><td>Courses et promenades en ville</td></tr>
+<tr><td>Trionic Walker 12er M/L</td><td>4</td><td>6,8 kg sans les roues</td><td>150 kg</td><td>Oui</td><td>Chemins, herbe, gravier, neige</td></tr>
+<tr><td>Invacare Delta</td><td>3</td><td>6 kg</td><td>135 kg</td><td>Non précisé</td><td>Logement étroit, bonne marche</td></tr>
+<tr><td>Drive DeVilbiss Roomba</td><td>Non précisé</td><td>5,6 kg avec accessoires</td><td>100 kg</td><td>Non précisé</td><td>Déplacements dans la maison</td></tr>
+</tbody></table>
+<p>Pour bien comparer, regardez aussi la largeur (pour passer les portes) et la hauteur des poignées (pour la taille de la personne), détaillées pour chaque modèle ci-dessous.</p>
+<h2>Drive DeVilbiss Nitro SL : le rollator léger</h2>
+<p><strong>Pour qui ?</strong> Une personne qui sort régulièrement, qui doit souvent charger son rollator dans une voiture ou qui manque de force dans les bras.</p>
+<ul>
+<li><strong>Points forts</strong> : 5,5 kg sans accessoires selon le fabricant, roues avant de 200 mm de diamètre, pliage avec verrouillage (27 cm de large une fois plié), roues démontables pour le transport, siège à 57 cm de hauteur.</li>
+<li><strong>Données utiles</strong> : largeur totale 70,5 cm, poignées réglables de 83 à 96 cm, charge maximale 136 kg.</li>
+<li><strong>Limites</strong> : avec plus de 70 cm de large, vérifiez vos portes intérieures. La plage de hauteur des poignées commence à 83 cm, ce qui peut être trop haut pour une personne de petite taille.</li>
+</ul>
+<p><a href="{AMZ:Drive Nitro SL rollator}" """ + A + """>Voir sur Amazon</a></p>
+<h2>Invacare Dolomite Legacy : le classique des courses</h2>
+<p><strong>Pour qui ?</strong> Une personne qui marche en ville, fait ses courses à pied et apprécie de pouvoir s'asseoir quelques minutes.</p>
+<ul>
+<li><strong>Points forts</strong> : existe en deux tailles (M et L), panier livré de série (capacité 9 kg) et plateau, siège rabattable qui libère de la place pour la marche quand il est relevé. Largeur hors-tout de 600 mm, plus compacte que bien des modèles d'extérieur.</li>
+<li><strong>Données utiles</strong> : poignées de 760 à 850 mm (taille M) ou de 835 à 920 mm (taille L), assise à 545 mm (M) ou 625 mm (L), roues de 200 mm de diamètre.</li>
+<li><strong>Limites</strong> : 7,2 à 7,6 kg, un peu plus lourd que les modèles allégés. La charge maximale indiquée sur la fiche commerciale est de 125 kg ; vérifiez la valeur sur la notice de la version que vous achetez.</li>
+</ul>
+<p><a href="{AMZ:Invacare Dolomite Legacy rollator}" """ + A + """>Voir sur Amazon</a></p>
+<h2>Trionic Walker 12er : le tout-terrain</h2>
+<p><strong>Pour qui ?</strong> Une personne active qui veut continuer à se promener hors des trottoirs : chemins de terre, herbe, graviers, plage ou neige.</p>
+<ul>
+<li><strong>Points forts</strong> : grandes roues de 12 pouces (31 cm) à pneus gonflables qui passent les obstacles, charge maximale de 150 kg, siège à 62 cm de hauteur, pliage en tirant la poignée du siège, roues démontables par bouton pour le rangement.</li>
+<li><strong>Données utiles</strong> (taille M/L) : largeur 69 cm, poignées de 76 à 96 cm, 6,8 kg sans les roues. Il existe aussi une taille S et des versions à roues de 9 ou 14 pouces.</li>
+<li><strong>Limites</strong> : longueur de 81 cm, donc encombrant à l'intérieur. Le fabricant n'indique en kilos que le poids sans les roues : avec les roues, l'ensemble est plus lourd à soulever.</li>
+</ul>
+<p><a href="{AMZ:Trionic Walker rollator tout terrain}" """ + A + """>Voir sur Amazon</a></p>
+<h2>Invacare Delta : le 3 roues maniable</h2>
+<p><strong>Pour qui ?</strong> Une personne qui garde un bon équilibre et vit dans un logement aux passages étroits, ou qui veut un rollator qui tourne facilement.</p>
+<ul>
+<li><strong>Points forts</strong> : 3 roues pour tourner court, 6 kg, charge maximale de 135 kg, pliant (310 mm de large une fois plié).</li>
+<li><strong>Données utiles</strong> : largeur hors-tout 670 mm, poignées réglables de 810 à 940 mm.</li>
+<li><strong>Limites</strong> : un rollator 3 roues est moins stable qu'un 4 roues, et la fiche consultée ne mentionne pas de siège : il ne convient pas si vous avez besoin de vous asseoir en chemin.</li>
+</ul>
+<p><a href="{AMZ:Invacare Delta rollator 3 roues}" """ + A + """>Voir sur Amazon</a></p>
+<h2>Drive DeVilbiss Roomba : le rollator d'intérieur</h2>
+<p><strong>Pour qui ?</strong> Une personne qui a besoin d'un appui pour circuler dans la maison et aimerait transporter une assiette, une tasse ou quelques affaires d'une pièce à l'autre.</p>
+<ul>
+<li><strong>Points forts</strong> : 57 cm de large seulement, 5,6 kg avec le panier et le plateau, plateau et panier fournis (5 kg maximum chacun), pliage peu encombrant.</li>
+<li><strong>Données utiles</strong> : poignées réglables de 81,4 à 94,1 cm, roues de 150 mm de diamètre.</li>
+<li><strong>Limites</strong> : charge maximale de 100 kg, la plus basse de cette sélection. Ses petites roues sont pensées pour l'intérieur, pas pour les trottoirs. La fiche consultée ne mentionne pas de siège.</li>
+</ul>
+<p><a href="{AMZ:Drive Roomba rollator interieur}" """ + A + """>Voir sur Amazon</a></p>
+<h2>Comment choisir parmi ces modèles</h2>
+<p>Partez de l'usage principal plutôt que de la fiche technique :</p>
+<ul>
+<li><strong>Surtout à l'intérieur</strong> : un modèle étroit comme le Roomba, ou un 3 roues si l'équilibre est bon.</li>
+<li><strong>Courses et ville</strong> : un 4 roues avec siège et panier, comme le Dolomite Legacy.</li>
+<li><strong>Transport fréquent en voiture</strong> : un modèle léger qui se plie facilement, comme le Nitro SL.</li>
+<li><strong>Promenades nature</strong> : de grandes roues, comme sur le Trionic Walker.</li>
+</ul>
+<p>Mesurez ensuite la largeur des portes, comparez la plage de hauteur des poignées à la taille de la personne et vérifiez la charge maximale. Tous les critères sont détaillés dans notre guide pour <a href="{R}comment-choisir-rollator/">bien choisir un rollator</a>. Et si vous hésitez encore sur le type d'aide à la marche, lisez notre comparatif <a href="{R}deambulateur-ou-rollator/">déambulateur ou rollator</a>.</p>
+<p>Un rollator est plus facile à utiliser dans un logement dégagé : suivez aussi <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
+<h2>Prise en charge et conseils</h2>
+<p>Un rollator peut être pris en charge en partie par l'Assurance maladie sur prescription médicale, la mutuelle pouvant compléter. Les conditions dépendent du modèle : renseignez-vous auprès du médecin et du pharmacien avant d'acheter. Un kinésithérapeute ou un ergothérapeute peut aussi vous aider à choisir et à régler la hauteur des poignées.</p>
+""",
+  faq=[("Quel est le meilleur rollator pour une personne âgée ?", "Celui qui correspond à son usage : un modèle étroit pour l'intérieur, un 4 roues avec siège et panier pour les courses, un modèle léger pour la voiture, de grandes roues pour les chemins. Demandez conseil à un professionnel de santé."),
+       ("Rollator 3 roues ou 4 roues ?", "Le 3 roues tourne plus facilement dans un logement étroit, mais il est moins stable et souvent sans siège. Le 4 roues est plus stable et permet généralement de s'asseoir."),
+       ("Comment savoir si un rollator passera mes portes ?", "Comparez la largeur totale indiquée par le fabricant à la largeur de vos portes et couloirs, en gardant de la marge pour les mains.")],
+  short="Meilleurs rollators", cat="Se déplacer")
