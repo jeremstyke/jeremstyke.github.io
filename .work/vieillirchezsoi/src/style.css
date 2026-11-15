@@ -80,3 +80,9 @@ a{color:var(--brand)}a:hover{color:var(--brand2)}
 .room-intro{margin:0 0 8px}.room-more{font-weight:700;margin:12px 0 4px}
 .item{grid-template-columns:1fr auto}.item .it-name{font-weight:700}
 .cl-sec,h2{scroll-margin-top:130px}
+
+.sites{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-top:14px;border-top:1px solid rgba(255,255,255,.15)}
+.sites span{font-size:14px;opacity:.8;margin-right:4px}
+.sites a{padding:6px 14px;border-radius:99px;border:1px solid rgba(255,255,255,.35);text-decoration:none;color:#fff!important;font-weight:700;font-size:14px}
+.sites a:hover{background:rgba(255,255,255,.12)}
+.sites a[aria-current]{background:#fff;color:#22302B!important;border-color:#fff}
