@@ -1,4 +1,4 @@
-/* CVLibre PDF - outils PDF dans le navigateur. Aucun fichier n'est envoyé sur un serveur. */
+/* PDF Démarches France - outils PDF dans le navigateur. Aucun fichier n'est envoyé sur un serveur. */
 (function () {
   'use strict';
   var ASSETS = (document.currentScript && document.currentScript.src || '').replace(/pdftools\.js(\?.*)?$/, '');
