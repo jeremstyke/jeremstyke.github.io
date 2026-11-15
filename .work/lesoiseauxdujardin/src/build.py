@@ -96,10 +96,10 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None,
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F5F7F2">
-<link rel="icon" href="{R}assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{R}assets/favicon.ico" sizes="32x32"><link rel="icon" href="{R}assets/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="{R}assets/apple-touch-icon.png">
 <link rel="preload" href="{R}assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{R}assets/fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="{R}assets/style.css?v=1">
+<link rel="stylesheet" href="{R}assets/style.css?v=2">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>
 <body>
@@ -116,7 +116,7 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None,
 <div><a class="logo" href="{R}"><span class="logo-ico" aria-hidden="true">🐦</span>Les oiseaux du jardin</a>
 <p>Des guides simples pour nourrir, loger et observer les oiseaux de votre jardin, en les respectant.</p></div>
 <nav aria-label="Pied de page"><a href="{R}{PILIER}">Bien nourrir les oiseaux</a><a href="{R}guides/">Guides</a><a href="{R}a-propos/">À propos</a><a href="{R}mentions-legales/">Mentions légales</a><a href="{R}confidentialite/">Confidentialité</a><a href="mailto:{CONTACT}">Contact</a></nav>
-<nav class="sites" aria-label="Nos sites"><span>Nos sites :</span><a href="https://malistebebe.fr/">🍼 Ma liste bébé</a><a href="https://malistedemariage.fr/">💍 Ma liste mariage</a><a href="https://viellirchezsoi.fr/">🏡 Vieillir chez soi</a><a aria-current="page" href="{R}">🐦 Les oiseaux du jardin</a></nav>
+<nav class="sites" aria-label="Nos autres sites"><p class="sites-t">Découvrez aussi nos autres sites</p><div class="sites-g"><a href="https://malistebebe.fr/"><img src="https://malistebebe.fr/assets/favicon.svg" alt="" width="40" height="40" loading="lazy"><span><strong>Ma liste bébé</strong><small>Préparer l'arrivée de bébé</small></span></a><a href="https://malistedemariage.fr/"><img src="https://malistedemariage.fr/assets/favicon.svg" alt="" width="40" height="40" loading="lazy"><span><strong>Ma liste mariage</strong><small>La liste de mariage, simplement</small></span></a><a href="https://viellirchezsoi.fr/"><img src="https://viellirchezsoi.fr/assets/favicon.svg" alt="" width="40" height="40" loading="lazy"><span><strong>Vieillir chez soi</strong><small>Rester autonome à la maison</small></span></a></div></nav>
 <p class="disc">{DISCLOSURE} Les prix et les offres peuvent changer : vérifiez-les avant d'acheter. © {YEAR} {SITE}</p>
 </div></footer>
 <script>try{{if(localStorage.getItem("loj_big")==="1")document.documentElement.classList.add("big")}}catch(e){{}}</script>
