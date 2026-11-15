@@ -115,7 +115,7 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None,
 <div><a class="logo" href="{R}"><span class="logo-ico" aria-hidden="true">🐦</span>Les oiseaux du jardin</a>
 <p>Des guides simples pour nourrir, loger et observer les oiseaux de votre jardin, en les respectant.</p></div>
 <nav aria-label="Pied de page"><a href="{R}{PILIER}">Bien nourrir les oiseaux</a><a href="{R}guides/">Guides</a><a href="{R}a-propos/">À propos</a><a href="{R}mentions-legales/">Mentions légales</a><a href="{R}confidentialite/">Confidentialité</a><a href="mailto:{CONTACT}">Contact</a></nav>
-<nav class="sites" aria-label="Nos sites"><span>Nos sites :</span><a aria-current="page" href="{R}">🐦 Les oiseaux du jardin</a><a href="https://viellirchezsoi.fr/">🏡 Vieillir chez soi</a><a href="https://malistebebe.fr/">🍼 Ma liste bébé</a><a href="https://malistedemariage.fr/">💍 Ma liste mariage</a></nav>
+<nav class="sites" aria-label="Nos sites"><span>Nos sites :</span><a href="https://malistebebe.fr/">🍼 Ma liste bébé</a><a href="https://malistedemariage.fr/">💍 Ma liste mariage</a><a href="https://viellirchezsoi.fr/">🏡 Vieillir chez soi</a><a aria-current="page" href="{R}">🐦 Les oiseaux du jardin</a></nav>
 <p class="disc">{DISCLOSURE} Les prix et les offres peuvent changer : vérifiez-les avant d'acheter. © {YEAR} {SITE}</p>
 </div></footer>
 <script>try{{if(localStorage.getItem("loj_big")==="1")document.documentElement.classList.add("big")}}catch(e){{}}</script>

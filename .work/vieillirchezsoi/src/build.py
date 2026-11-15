@@ -138,7 +138,7 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None,
 <div><a class="logo" href="{R}"><span class="logo-ico" aria-hidden="true">🏡</span>Vieillir chez soi</a>
 <p>Des guides simples pour équiper la maison et rester chez soi en sécurité, le plus longtemps possible.</p></div>
 <nav aria-label="Pied de page"><a href="{R}amenager-logement-personne-agee/">Aménager le logement</a><a href="{R}quel-equipement/">Questionnaire</a><a href="{R}guides/">Guides</a><a href="{R}a-propos/">À propos</a><a href="{R}mentions-legales/">Mentions légales</a><a href="{R}confidentialite/">Confidentialité</a><a href="mailto:{CONTACT}">Contact</a></nav>
-<nav class="sites" aria-label="Nos sites"><span>Nos sites :</span><a href="https://malistebebe.fr/">🍼 Ma liste bébé</a><a href="https://malistedemariage.fr/">💍 Ma liste mariage</a><a aria-current="page" href="{R}">🏡 Vieillir chez soi</a></nav>
+<nav class="sites" aria-label="Nos sites"><span>Nos sites :</span><a href="https://malistebebe.fr/">🍼 Ma liste bébé</a><a href="https://malistedemariage.fr/">💍 Ma liste mariage</a><a aria-current="page" href="{R}">🏡 Vieillir chez soi</a><a href="https://lesoiseauxdujardin.fr/">🐦 Les oiseaux du jardin</a></nav>
 <p class="disc">{DISCLOSURE} Les informations de ce site sont générales et ne remplacent pas l'avis d'un médecin, d'un ergothérapeute ou d'un pharmacien. Les prix et les offres peuvent changer : vérifiez-les avant d'acheter. © {YEAR} {SITE}</p>
 </div></footer>
 <script>try{{if(localStorage.getItem("vcs_big")==="1")document.documentElement.classList.add("big")}}catch(e){{}}</script>
