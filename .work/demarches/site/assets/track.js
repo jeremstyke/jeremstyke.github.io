@@ -16,6 +16,8 @@
     try { fetch(SB, {method: 'POST', keepalive: true, headers: {'apikey': KEY, 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal'}, body: body}); } catch(e){}
   }
   hit('view');
+  // 15 nov 2026 (Jeremy) : copie dans les stats de CVLibre (section Démarches de cvlibre.com/stats/)
+  try { if (!bot && ls('aff_moi') !== '1') fetch('https://zltqrnflowxkycrjmhbx.supabase.co/rest/v1/rpc/track', {method: 'POST', keepalive: true, headers: {'content-type': 'application/json', apikey: 'sb_publishable_KVXGhm7oHvaymjzOZyfp6A_03X6EcXr'}, body: JSON.stringify({p: ('/demarches' + location.pathname).slice(0, 120), e: 'dem_view', r: ref.slice(0, 80), d: dev})}).catch(function(){}); } catch(e) {}
   document.addEventListener('click', function(e){
     var a = e.target.closest && e.target.closest('a[href*="amazon.fr"]');
     if (a) { var m = a.href.match(/[?&]k=([^&]+)/); hit('amz', m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : a.href.split('?')[0]); }
