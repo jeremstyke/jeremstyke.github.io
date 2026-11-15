@@ -816,7 +816,7 @@ g("aides-adapter-logement-senior/",
 
 AUTO_META['meilleur-telephone-portable-senior/'] = ('🏆', 'rose')
 g("meilleur-telephone-portable-senior/",
-  "Meilleur téléphone portable senior : 5 modèles 4G comparés",
+  "Meilleur téléphone portable senior 2026 : 5 modèles 4G comparés",
   "Meilleur téléphone portable senior : 5 modèles 4G à comparer",
   "Doro Leva et Gigaset GL : 5 portables seniors 4G comparés d'après les fiches des fabricants. Clapet ou classique, bouton SOS, socle, appareils auditifs.",
   """
@@ -927,7 +927,7 @@ g("meilleur-telephone-portable-senior/",
 
 AUTO_META['meilleur-rollator/'] = ('🏆', 'ciel')
 g("meilleur-rollator/",
-  "Meilleur rollator : 5 modèles comparés selon leur usage",
+  "Meilleur rollator 2026 : 5 modèles comparés selon leur usage",
   "Meilleur rollator : 5 modèles comparés selon l'usage",
   "Léger, tout-terrain, 3 roues ou d'intérieur : 5 rollators de marques médicales comparés d'après leurs fiches techniques (poids, charge, largeur, siège).",
   """
@@ -1000,3 +1000,509 @@ g("meilleur-rollator/",
        ("Rollator 3 roues ou 4 roues ?", "Le 3 roues tourne plus facilement dans un logement étroit, mais il est moins stable et souvent sans siège. Le 4 roues est plus stable et permet généralement de s'asseoir."),
        ("Comment savoir si un rollator passera mes portes ?", "Comparez la largeur totale indiquée par le fabricant à la largeur de vos portes et couloirs, en gardant de la marge pour les mains.")],
   short="Meilleurs rollators", cat="Se déplacer")
+
+AUTO_META['meilleur-fauteuil-releveur/'] = ('🏆', 'sable')
+g("meilleur-fauteuil-releveur/",
+  "Meilleur fauteuil releveur 2026 : 9 modèles comparés par usage",
+  "Meilleur fauteuil releveur : 9 modèles comparés selon l'usage",
+  "1 ou 2 moteurs, grande taille, massage et chauffage : 9 fauteuils releveurs comparés d'après leurs fiches (charge maximale, hauteur d'assise, revêtement).",
+  """
+<p>Se lever d'un fauteuil devient parfois l'effort le plus difficile de la journée. Un fauteuil releveur électrique fait ce travail à votre place : il bascule doucement vers l'avant pour vous aider à vous mettre debout, puis vous permet de vous installer, de lever les jambes ou de vous allonger presque à plat. Mais entre un modèle à un moteur, à deux moteurs, pour grande corpulence ou avec massage, les différences sont importantes. Voici neuf modèles vendus en France, chacun avec ses points forts et ses limites.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants (Herdegen, Identités, VEVOR, MCombo), sans test en main. Nous n'avons reproduit que les chiffres lus sur ces fiches ; quand une donnée n'y figure pas, nous l'indiquons « non précisé ». Les caractéristiques peuvent varier selon la taille, le coloris ou la version : vérifiez toujours la fiche du modèle exact avant d'acheter, et demandez conseil à un ergothérapeute, à votre médecin ou à votre pharmacien si la personne a des difficultés de mobilité importantes.</div>
+<h2>Le comparatif en un coup d'œil</h2>
+<table><thead><tr><th>Modèle</th><th>Moteurs</th><th>Charge max</th><th>Hauteur d'assise</th><th>Revêtement</th><th>Idéal pour</th></tr></thead><tbody>
+<tr><td>Herdegen Stylea II</td><td>2</td><td>130 kg</td><td>50 cm</td><td>Microfibre ou simili-cuir</td><td>Notre choix polyvalent</td></tr>
+<tr><td>Identités Mint</td><td>1 ou 2</td><td>135 kg</td><td>49 cm</td><td>Tissu, simili-cuir ou microfibre</td><td>Choisir sa motorisation et son revêtement</td></tr>
+<tr><td>Herdegen Stylea I</td><td>1</td><td>130 kg</td><td>50 cm</td><td>Similicuir ou fibres</td><td>Le plus simple à utiliser</td></tr>
+<tr><td>Herdegen Primea</td><td>1</td><td>130 kg</td><td>48 cm</td><td>Microfibre</td><td>Le plus compact</td></tr>
+<tr><td>Identités Diamant</td><td>2</td><td>140 kg</td><td>50 cm</td><td>Microfibre, simili-cuir ou tissu</td><td>Existe en version à assise large</td></tr>
+<tr><td>Herdegen Optimum</td><td>1</td><td>180 kg</td><td>49 cm</td><td>Microfibre</td><td>Les fortes corpulences</td></tr>
+<tr><td>Identités Zéro G</td><td>2 (ou 3)</td><td>155 kg (150 kg en 3 moteurs)</td><td>53 cm</td><td>Simili-cuir et microfibre</td><td>Les longues siestes</td></tr>
+<tr><td>VEVOR double moteur chauffant et massant</td><td>2</td><td>159 kg</td><td>Non précisé</td><td>Tissu chenille</td><td>Le plus complet en confort</td></tr>
+<tr><td>MCombo 7040</td><td>Non précisé</td><td>350 lb (environ 159 kg)</td><td>Non précisé</td><td>Tissu</td><td>Massage et plusieurs tailles</td></tr>
+</tbody></table>
+<p>Un rappel utile : avec <strong>un moteur</strong>, le dossier et le repose-jambes bougent ensemble ; avec <strong>deux moteurs</strong>, vous les réglez séparément, ce qui permet par exemple de garder le dos droit tout en levant les jambes. Le détail de chaque modèle figure ci-dessous.</p>
+<h2>1. Herdegen Stylea II : idéal pour un usage quotidien polyvalent (notre choix)</h2>
+<p><strong>Pour qui ?</strong> Une personne qui passe une bonne partie de la journée dans son fauteuil, qui aime lire, regarder la télévision ou faire la sieste, et qui a besoin d'aide pour se lever.</p>
+<ul>
+<li><strong>Points forts</strong> : 2 moteurs pour incliner le dossier et relever le repose-jambes indépendamment, 3 positions (assis, levée, quasi-couchage), assise à 50 cm du sol, dossier composé de trois coussins en fibres creuses. Un kit batterie est proposé en option, pratique en cas de coupure de courant ou pour placer le fauteuil loin d'une prise.</li>
+<li><strong>Données utiles</strong> : charge maximale 130 kg, largeur totale 80 cm, profondeur 85 cm (166 cm en position allongée), hauteur totale 105 cm, largeur entre accoudoirs 55 cm, profondeur d'assise 51 cm, poids 52 kg. Revêtement microfibre ou similicuir, 4 coloris.</li>
+<li><strong>Limites</strong> : 130 kg de charge maximale, c'est moins que les modèles pensés pour les fortes corpulences. Le fabricant ne mentionne ni massage ni chauffage. Prévoyez 166 cm de profondeur au sol pour la position allongée.</li>
+</ul>
+<p><a href="{AMZ:Herdegen Stylea II fauteuil releveur}" """ + A + """>Voir sur Amazon</a></p>
+<h2>2. Identités Mint : idéal pour choisir sa motorisation et son revêtement</h2>
+<p><strong>Pour qui ?</strong> Une famille qui veut un modèle d'une marque spécialisée dans le matériel médical, en pouvant choisir entre une version simple à 1 moteur et une version à 2 moteurs.</p>
+<ul>
+<li><strong>Points forts</strong> : existe en 1 moteur ou 2 moteurs (la version 2 moteurs permet de régler le dossier indépendamment du repose-jambes), trois revêtements au choix : tissu gris chiné, simili-cuir chocolat imperméable ou microfibre taupe. Le simili-cuir imperméable est un vrai plus en cas de petites fuites urinaires ou de boisson renversée.</li>
+<li><strong>Données utiles</strong> : charge maximale 135 kg, assise de 51 cm de large, 49 cm de profondeur et 49 cm de hauteur, dimensions hors-tout de 77 cm de large et 110 cm de haut. Poids 50 kg (1 moteur) ou 53 kg (2 moteurs).</li>
+<li><strong>Limites</strong> : la fiche indique une profondeur de 83 cm et de 163 ou 172 cm déplié, sans préciser quelle valeur correspond à quelle version : prévoyez la plus grande. Pas de massage ni de chauffage mentionnés.</li>
+</ul>
+<p><a href="{AMZ:Identités fauteuil releveur Mint}" """ + A + """>Voir sur Amazon</a></p>
+<h2>3. Herdegen Stylea I : idéal pour une utilisation la plus simple possible</h2>
+<p><strong>Pour qui ?</strong> Une personne qui veut surtout être aidée à se lever et à s'asseoir, sans multiplier les réglages, ou qui risque d'être gênée par une télécommande à nombreux boutons.</p>
+<ul>
+<li><strong>Points forts</strong> : modèle monomoteur (classé ainsi par le fabricant), donc une commande plus intuitive. 3 positions (assis, levée, quasi-couchage), vérin électrique basse tension 24 volts, coussin d'assise amovible et déhoussable, kit batterie en option.</li>
+<li><strong>Données utiles</strong> : charge maximale 130 kg, assise à 50 cm du sol, profondeur d'assise 50 cm, largeur entre accoudoirs 56 cm, largeur totale 82 cm, profondeur 85 cm (157 cm allongé), hauteur 105 cm, poids 50,5 kg. Similicuir ou fibres, 4 coloris.</li>
+<li><strong>Limites</strong> : avec un seul moteur, on ne peut pas lever les jambes en gardant le dos droit. Charge maximale limitée à 130 kg.</li>
+</ul>
+<p><a href="{AMZ:Herdegen Stylea I fauteuil releveur}" """ + A + """>Voir sur Amazon</a></p>
+<h2>4. Herdegen Primea : idéal pour une petite pièce</h2>
+<p><strong>Pour qui ?</strong> Une personne qui vit dans un petit appartement ou une chambre où chaque centimètre compte, ou une personne de petite taille.</p>
+<ul>
+<li><strong>Points forts</strong> : le plus étroit de cette sélection avec 74 cm de large et 76 cm de profondeur, le plus léger aussi (44 kg). Assise basse à 48 cm du sol, mono moteur avec télécommande, positions levée, assise, lecture et quasi-couchage, batterie en option pour un usage sans fil. Mécanisme en acier, revêtement microfibre (coloris titane ou chocolat).</li>
+<li><strong>Données utiles</strong> : charge maximale 130 kg, largeur entre accoudoirs 50 cm, profondeur d'assise 55 cm, hauteur totale 104 cm, profondeur allongé 162 cm.</li>
+<li><strong>Limites</strong> : 50 cm entre les accoudoirs, c'est étroit pour une personne corpulente. La profondeur d'assise de 55 cm peut être un peu grande pour une personne de petite taille : vérifiez que les pieds touchent bien le sol. Ce modèle n'apparaît plus dans le catalogue en ligne actuel du fabricant, même s'il reste proposé à la vente : vérifiez sa disponibilité.</li>
+</ul>
+<p><a href="{AMZ:Herdegen Primea fauteuil releveur}" """ + A + """>Voir sur Amazon</a></p>
+<h2>5. Identités Diamant : idéal si vous hésitez entre taille standard et assise large</h2>
+<p><strong>Pour qui ?</strong> Une personne qui veut un fauteuil 2 moteurs et qui a besoin, ou non, d'une assise plus large. Le Diamant existe en version Standard et en version Maxi.</p>
+<ul>
+<li><strong>Points forts</strong> : 2 moteurs Okin pour régler le repose-pieds et le dossier indépendamment, position relax quasi allongée pour la sieste. La version Maxi offre une assise de 59 cm de large, contre 49 cm pour la Standard.</li>
+<li><strong>Données utiles</strong> : charge maximale 140 kg pour les deux versions, hauteur d'assise 50 cm, profondeur d'assise 50 cm. Standard : 86 cm de large, 85 cm de profondeur (176 cm déplié), 106 cm de haut, 48,5 kg. Maxi : 95 cm de large, 85 cm de profondeur (181 cm déplié), 114 cm de haut, 53 kg. Revêtement microfibre taupe, simili-cuir chocolat ou tissu gris chiné.</li>
+<li><strong>Limites</strong> : la version Maxi est large (95 cm) : mesurez la place disponible et la largeur des portes pour la livraison. La charge maximale reste de 140 kg, même en Maxi.</li>
+</ul>
+<p><a href="{AMZ:Identités fauteuil releveur Diamant 2 moteurs}" """ + A + """>Voir sur Amazon</a></p>
+<h2>6. Herdegen Optimum : idéal pour les personnes de forte corpulence</h2>
+<p><strong>Pour qui ?</strong> Une personne de forte corpulence qui a besoin d'une assise plus large et d'une structure prévue pour un poids important.</p>
+<ul>
+<li><strong>Points forts</strong> : charge maximale de 180 kg, la plus élevée de cette sélection. Largeur entre accoudoirs de 59 cm, accoudoirs avec porte-gobelets, repose-pieds dans la continuité de l'assise, batterie en option.</li>
+<li><strong>Données utiles</strong> : mono moteur avec télécommande, 3 positions (assis, levé, quasi-couchage), assise à 49 cm du sol, profondeur d'assise 51 cm, largeur totale 89 cm, profondeur 96 cm (164 cm allongé), hauteur 107 cm, poids 59 kg. Revêtement microfibre (titane ou chocolat).</li>
+<li><strong>Limites</strong> : un seul moteur, donc dossier et jambes liés. Fauteuil encombrant (89 x 96 cm au repos). Comme le Primea, il ne figure plus dans le catalogue en ligne actuel du fabricant : vérifiez la disponibilité.</li>
+</ul>
+<p><a href="{AMZ:Herdegen Optimum fauteuil releveur}" """ + A + """>Voir sur Amazon</a></p>
+<h2>7. Identités Zéro G : idéal pour les longues siestes</h2>
+<p><strong>Pour qui ?</strong> Une personne qui se repose longtemps dans son fauteuil, qui a les jambes lourdes ou qui apprécie une position où le poids du corps est mieux réparti.</p>
+<ul>
+<li><strong>Points forts</strong> : toute l'assise bascule vers l'arrière en position dite « zéro gravité ». Version 2 moteurs Okin (la position zéro gravité n'est alors accessible qu'en position inclinée) ou version 3 moteurs (accessible même assis ou semi-incliné). Housse en microfibre amovible et lavable en machine, fixée par velcro.</li>
+<li><strong>Données utiles</strong> : charge maximale 155 kg (2 moteurs) ou 150 kg (3 moteurs), assise de 50 x 50 cm à 53 cm du sol, dimensions hors-tout 76 x 98 x 113 cm, poids 58 kg. Simili-cuir marron avec microfibre chocolat, ou simili-cuir gris avec microfibre anthracite.</li>
+<li><strong>Limites</strong> : assise haute (53 cm), qui peut convenir à une personne grande mais moins à une personne de petite taille. 58 kg, donc difficile à déplacer. La fiche ne donne pas la profondeur en position allongée.</li>
+</ul>
+<p><a href="{AMZ:Identités fauteuil releveur Zéro G}" """ + A + """>Voir sur Amazon</a></p>
+<h2>8. VEVOR fauteuil releveur double moteur chauffant et massant : idéal pour le confort complet</h2>
+<p><strong>Pour qui ?</strong> Une personne qui souffre de tensions dans le dos ou de jambes fatiguées et qui aimerait profiter de chaleur et de massage en plus de l'aide au lever.</p>
+<ul>
+<li><strong>Points forts</strong> : 2 moteurs Okin qui règlent séparément le dossier et le repose-pieds, réglage en continu. Massage du dos, des lombaires, des cuisses et des mollets (8 modes, 5 intensités) et chauffage lombaire indépendant, avec arrêt automatique après 15 minutes. Bouton de retour en position assise en un seul appui, poches latérales.</li>
+<li><strong>Données utiles</strong> (taille M, modèle SX-81541-2) : charge maximale 159 kg, dimensions 975 x 830 x 1 075 mm (profondeur x largeur x hauteur), poids net 45 kg, revêtement en tissu chenille. Le fabricant indique qu'il convient aux personnes mesurant entre 5'1" et 5'9", soit environ 1,55 m à 1,75 m.</li>
+<li><strong>Limites</strong> : la hauteur et les dimensions de l'assise ne sont pas précisées. VEVOR n'est pas une marque spécialisée dans le matériel médical. Le massage et le chauffage peuvent être déconseillés dans certaines situations (troubles circulatoires, port d'un dispositif médical implanté) : demandez l'avis de votre médecin.</li>
+</ul>
+<p><a href="{AMZ:VEVOR fauteuil releveur électrique chauffant massant double moteur}" """ + A + """>Voir sur Amazon</a></p>
+<h2>9. MCombo 7040 : idéal pour trouver la bonne taille avec massage</h2>
+<p><strong>Pour qui ?</strong> Une personne qui veut massage et chaleur et qui cherche une taille adaptée à sa morphologie : la gamme se décline en plusieurs tailles.</p>
+<ul>
+<li><strong>Points forts</strong> : massage par 8 points de vibration et chauffage lombaire, ports de charge USB et USB-C, deux porte-gobelets, repose-pieds allongé, cordons anti-chute et conception anti-basculement vers l'arrière. Le dossier peut s'arrêter dans n'importe quelle position jusqu'à l'inclinaison maximale.</li>
+<li><strong>Données utiles</strong> : capacité de 350 lb (environ 159 kg) selon le site du fabricant, revêtement tissu, déclinaisons Small, Medium (7040), Large et versions larges. Montage annoncé sans outils en une vingtaine de minutes.</li>
+<li><strong>Limites</strong> : le site du fabricant ne précise ni le nombre de moteurs, ni la hauteur d'assise, ni les dimensions. Ces informations viennent du site international de la marque : vérifiez sur la fiche du revendeur que la version vendue en France est bien la même. Comme pour tout fauteuil massant, demandez l'avis de votre médecin en cas de problème de santé.</li>
+</ul>
+<p><a href="{AMZ:MCombo 7040 fauteuil releveur massant}" """ + A + """>Voir sur Amazon</a></p>
+<h2>Comment choisir</h2>
+<p>Partez de la personne qui utilisera le fauteuil, pas de la liste des options :</p>
+<ul>
+<li><strong>Un besoin simple d'aide au lever</strong> : un modèle 1 moteur, comme le Stylea I ou le Primea, avec une télécommande à peu de boutons.</li>
+<li><strong>Beaucoup de temps passé assis ou des jambes à surélever</strong> : un 2 moteurs, comme le Stylea II, le Mint 2 moteurs ou le Diamant, pour régler le dossier et les jambes séparément.</li>
+<li><strong>Forte corpulence</strong> : vérifiez d'abord la charge maximale et la largeur entre accoudoirs (Optimum, Diamant Maxi).</li>
+<li><strong>Repos prolongé</strong> : une position zéro gravité (Zéro G) ou quasi allongée.</li>
+<li><strong>Confort supplémentaire</strong> : massage et chauffage (VEVOR, MCombo), après avis médical si besoin.</li>
+</ul>
+<p>Vérifiez ensuite trois mesures. <strong>La hauteur d'assise</strong> : assis, les pieds doivent reposer à plat au sol avec les genoux à angle droit environ. <strong>La profondeur d'assise</strong> : le dos doit toucher le dossier sans que le bord du siège appuie derrière les genoux. <strong>L'encombrement</strong> : mesurez la place en position allongée et la distance au mur dont le fauteuil a besoin pour s'incliner. Pensez aussi au revêtement : un simili-cuir ou un tissu facile à nettoyer est préférable en cas d'incontinence.</p>
+<p>Tous les critères sont détaillés dans notre guide pour <a href="{R}fauteuil-releveur/">bien choisir un fauteuil releveur</a>. Un fauteuil releveur réduit l'effort du lever, mais le reste du logement compte aussi : lisez nos conseils pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a> et <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
+<h2>Conseils avant d'acheter</h2>
+<p>Si c'est possible, essayez un fauteuil releveur en magasin de matériel médical avant d'acheter en ligne, pour vérifier la hauteur et la largeur d'assise. Un ergothérapeute peut aussi vous aider à choisir le modèle adapté à la morphologie et à la mobilité de la personne. Pour savoir si une aide financière est possible dans votre situation, renseignez-vous auprès de votre médecin et de votre pharmacien.</p>
+<p>À la livraison, contrôlez la largeur des portes et des couloirs : ces fauteuils pèsent entre 44 et 59 kg pour les modèles de cette sélection dont le poids est indiqué, et mesurent jusqu'à 95 cm de large. Enfin, gardez la télécommande toujours à portée de main, par exemple dans la poche latérale prévue sur plusieurs modèles.</p>
+""",
+  faq=[("Quel est le meilleur fauteuil releveur pour une personne âgée ?", "Il n'y a pas de modèle idéal pour tous. Un fauteuil 1 moteur suffit si l'on a surtout besoin d'aide pour se lever ; un 2 moteurs convient mieux si l'on passe beaucoup de temps assis ou si l'on doit surélever les jambes. Vérifiez ensuite la charge maximale, la hauteur d'assise et l'encombrement, et demandez conseil à un ergothérapeute en cas de doute."),
+       ("Fauteuil releveur 1 ou 2 moteurs : quelle différence ?", "Avec un moteur, le dossier et le repose-jambes bougent ensemble. Avec deux moteurs, ils se règlent séparément : vous pouvez garder le dos droit en levant les jambes, ou incliner le dossier sans lever les pieds. Le 2 moteurs offre plus de positions, le 1 moteur est plus simple à utiliser."),
+       ("Avez-vous testé ces fauteuils releveurs ?", "Non. Cette sélection repose uniquement sur les caractéristiques publiées par les fabricants. Nous n'indiquons que ce qui figure sur leurs fiches, sans note ni avis de prise en main.")],
+  short="Top 9 fauteuils releveurs", cat="Chambre et repos")
+
+AUTO_META['meilleur-siege-de-douche/'] = ('🏆', 'sauge')
+g("meilleur-siege-de-douche/",
+  "Meilleur siège de douche senior 2026 : top 10 par usage",
+  "Meilleur siège de douche senior : 10 modèles comparés selon l'usage",
+  "Chaise avec dossier, tabouret, siège mural rabattable ou pivotant : 10 sièges de douche pour seniors comparés d'après les fiches des fabricants et revendeurs.",
+  """
+<p>Se laver assis réduit la fatigue et le risque de glissade sous la douche. Mais entre une chaise avec dossier et accoudoirs, un simple tabouret, un siège fixé au mur ou un tabouret pivotant, le bon choix dépend de la personne, de son équilibre et de la place disponible. Voici dix modèles de marques de matériel médical ou de salle de bains, classés selon l'usage auquel ils conviennent le mieux.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs (brochures des fabricants, pharmacies en ligne, distributeurs de matériel médical et de bricolage), sans test en main. Nous n'indiquons que les chiffres lus sur ces fiches ; quand une donnée n'y figure pas, nous écrivons « non précisé ». Les valeurs peuvent changer selon la version ou la référence : vérifiez toujours la notice du modèle que vous achetez. Pour un besoin particulier, demandez conseil à un ergothérapeute, à un kinésithérapeute ou à votre pharmacien.</div>
+<h2>Le comparatif en un coup d'œil</h2>
+<table><thead><tr><th>Modèle</th><th>Type</th><th>Charge max</th><th>Hauteur d'assise</th><th>Matériaux</th><th>Idéal pour</th></tr></thead><tbody>
+<tr><td>Aquatec Sorrento (chaise)</td><td>Chaise avec dossier et accoudoirs</td><td>135 kg</td><td>46 à 61 cm</td><td>Assise à revêtement souple</td><td>Notre choix : le plus complet</td></tr>
+<tr><td>Invacare I-Fit 9781E</td><td>Chaise avec dossier</td><td>180 kg</td><td>38 à 55 cm</td><td>Plastique traité</td><td>Personnes de forte corpulence</td></tr>
+<tr><td>Euromedis chaise avec accoudoirs</td><td>Chaise avec dossier et accoudoirs</td><td>100 kg</td><td>42 à 55 cm</td><td>Aluminium</td><td>Une chaise légère et simple</td></tr>
+<tr><td>Wenko Secura avec dossier</td><td>Tabouret avec dossier</td><td>130 kg</td><td>8 crans (plage non précisée)</td><td>Plastique, pieds aluminium</td><td>Un dossier sans accoudoirs</td></tr>
+<tr><td>Invacare Cadiz KD H291</td><td>Tabouret</td><td>143 kg</td><td>40,5 à 50,5 cm</td><td>Aluminium</td><td>Le plus léger à déplacer</td></tr>
+<tr><td>Wenko Secura 120 kg</td><td>Tabouret</td><td>120 kg</td><td>39,5 à 57,5 cm</td><td>Plastique, pieds aluminium</td><td>La plus grande plage de hauteur</td></tr>
+<tr><td>Pellet tabouret avec poignées</td><td>Tabouret à poignées</td><td>135 kg</td><td>8 positions</td><td>HDPE et aluminium</td><td>S'aider des mains pour se relever</td></tr>
+<tr><td>Herdegen tabouret rotatif</td><td>Tabouret pivotant</td><td>100 kg</td><td>42,5 à 52,5 cm</td><td>Aluminium anodisé</td><td>Tourner sans se lever</td></tr>
+<tr><td>Pellet Arsis</td><td>Siège mural escamotable</td><td>150 kg</td><td>50 cm (pose normalisée)</td><td>Polymère, aluminium époxy</td><td>Le mural le plus robuste</td></tr>
+<tr><td>Ridder Pro</td><td>Siège mural rabattable</td><td>130 kg</td><td>Selon la pose</td><td>Aluminium, polyamide</td><td>Le mural le plus compact</td></tr>
+</tbody></table>
+<p>Retenez trois règles avant de lire le détail : plus l'équilibre est fragile, plus le dossier et les accoudoirs sont utiles ; la charge maximale doit laisser de la marge par rapport au poids de la personne ; et la hauteur d'assise doit permettre de poser les pieds à plat avec les genoux à peu près à angle droit.</p>
+
+<h2>1. Aquatec Sorrento chaise de douche : idéal pour un usage quotidien en toute sécurité (notre choix)</h2>
+<p><strong>Pour qui ?</strong> Une personne qui se fatigue vite debout, qui a besoin de s'appuyer pour s'asseoir et se relever, ou dont l'équilibre est incertain. C'est notre choix global, parce que ce modèle réunit tout ce qu'on attend d'une chaise de douche pour senior.</p>
+<ul>
+<li><strong>Points forts</strong> : dossier en toile souple réglable en tension et accoudoirs, tous deux amovibles. Assise de 40 x 40 cm avec un revêtement en élastomère thermoplastique destiné à soulager les points d'appui. Hauteur d'assise réglable de 46 à 61 cm, par paliers de 2 cm, selon la brochure du fabricant. Pieds rabattables sous l'assise pour le rangement.</li>
+<li><strong>Données utiles</strong> : charge maximale 135 kg, largeur hors tout 52 cm, poids 5,5 kg. Existe avec ou sans découpe pour la toilette intime, et en version tabouret (avec ou sans accoudoirs).</li>
+<li><strong>Limites</strong> : avec 52 cm de large, vérifiez qu'elle tient dans votre receveur avec de la place pour les pieds. La plage de hauteur commence à 46 cm, ce qui peut être un peu haut pour une personne de petite taille. Le fabricant (anciennement Invacare, aujourd'hui DH Care en France) a publié plusieurs brochures : contrôlez les valeurs sur la notice de la version achetée.</li>
+</ul>
+<p><a href="{AMZ:Aquatec Sorrento chaise de douche}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Invacare I-Fit 9781E : idéal pour les personnes de forte corpulence</h2>
+<p><strong>Pour qui ?</strong> Une personne qui a besoin d'une chaise très robuste, ou qui préfère simplement une large marge de sécurité sur la charge.</p>
+<ul>
+<li><strong>Points forts</strong> : charge maximale de 180 kg, la plus élevée de cette sélection. Assise réglable en hauteur de 38 à 55 cm, au centimètre près, ce qui convient aussi aux personnes de petite taille. Dossier amovible.</li>
+<li><strong>Données utiles</strong> : chaise en plastique traité, poids 4,5 kg.</li>
+<li><strong>Limites</strong> : la fiche consultée ne mentionne pas d'accoudoirs et ne donne pas les dimensions de l'assise. Si vous avez besoin de vous appuyer sur les côtés pour vous relever, préférez un modèle avec accoudoirs.</li>
+</ul>
+<p><a href="{AMZ:Invacare I-Fit chaise de douche}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Euromedis chaise de douche avec accoudoirs : idéal pour une chaise légère et simple</h2>
+<p><strong>Pour qui ?</strong> Une personne de corpulence moyenne qui veut un dossier et des accoudoirs, dans une chaise facile à déplacer et à ranger après la douche.</p>
+<ul>
+<li><strong>Points forts</strong> : dossier et accoudoirs, structure en aluminium résistante à la corrosion, assise perforée pour que l'eau s'écoule, embouts en caoutchouc pour la stabilité dans le bac. Poids de 3,3 kg seulement.</li>
+<li><strong>Données utiles</strong> : hauteur sol/assise de 42 à 55 cm grâce aux quatre pieds réglables, assise de 40 cm de large sur 35 à 39 cm de profondeur, encombrement de 49 cm de large sur 47 cm de profondeur, garantie de 2 ans.</li>
+<li><strong>Limites</strong> : charge maximale de 100 kg, la plus basse de cette sélection avec le tabouret Herdegen. Assise un peu moins profonde que celle de la Sorrento.</li>
+</ul>
+<p><a href="{AMZ:Euromedis chaise de douche accoudoirs}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Wenko Secura tabouret avec dossier : idéal pour un dossier sans accoudoirs</h2>
+<p><strong>Pour qui ?</strong> Une personne qui aime s'adosser pour se laver mais trouve les accoudoirs gênants, par exemple pour se savonner les côtés ou dans une douche étroite.</p>
+<ul>
+<li><strong>Points forts</strong> : dossier amovible, poignées découpées dans l'assise pour aider à s'asseoir et à se relever, hauteur réglable sur 8 niveaux, pieds en aluminium avec embouts en caoutchouc antidérapants.</li>
+<li><strong>Données utiles</strong> : charge maximale 130 kg, assise et dossier en plastique.</li>
+<li><strong>Limites</strong> : la fiche consultée ne donne ni la plage complète de hauteur, ni les dimensions de l'assise, ni le poids. Pas d'accoudoirs : si l'appui sur les bras est indispensable, choisissez une vraie chaise.</li>
+</ul>
+<p><a href="{AMZ:Wenko Secura tabouret de douche dossier}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Invacare Cadiz KD H291 : idéal pour un tabouret très léger</h2>
+<p><strong>Pour qui ?</strong> Une personne qui garde un bon équilibre assise et veut un tabouret qu'on sort et range facilement, ou un aidant qui le déplace souvent.</p>
+<ul>
+<li><strong>Points forts</strong> : 2,4 kg seulement, châssis en aluminium présenté comme 100 % anticorrosion, assise ergonomique percée, réglage en hauteur sans outils de 40,5 à 50,5 cm sur 5 paliers, quatre pieds en caoutchouc légèrement biseautés, pieds amovibles et nettoyage facile.</li>
+<li><strong>Données utiles</strong> : charge maximale 143 kg. Il existe une version chaise (H296) avec les mêmes réglages.</li>
+<li><strong>Limites</strong> : ni dossier ni accoudoirs. La plage de hauteur, limitée à 10 cm, peut ne pas convenir aux personnes très grandes. Dimensions de l'assise non précisées sur la fiche consultée.</li>
+</ul>
+<p><a href="{AMZ:Invacare Cadiz tabouret de douche}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Wenko Secura tabouret 120 kg : idéal pour la plus grande plage de hauteur</h2>
+<p><strong>Pour qui ?</strong> Un foyer où plusieurs personnes de tailles différentes utilisent le même tabouret, ou une personne qui doit trouver la hauteur exacte pour se relever sans effort.</p>
+<ul>
+<li><strong>Points forts</strong> : hauteur réglable sur 8 crans, de 39,5 à 57,5 cm, soit la plage la plus étendue de cette sélection. Pieds en aluminium inoxydable et embouts en caoutchouc antidérapants. Utilisable dans la douche ou la baignoire.</li>
+<li><strong>Données utiles</strong> : charge maximale 120 kg, structure en plastique résistant.</li>
+<li><strong>Limites</strong> : ni dossier ni accoudoirs. Dimensions d'assise et poids non précisés sur la fiche consultée. Wenko est une marque d'accessoires de salle de bains, pas un fabricant de matériel médical : pour un besoin médical précis, demandez conseil à un professionnel.</li>
+</ul>
+<p><a href="{AMZ:Wenko Secura tabouret de douche reglable}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Pellet tabouret de douche avec poignées (047670) : idéal pour s'aider des mains en se relevant</h2>
+<p><strong>Pour qui ?</strong> Une personne qui n'a pas besoin de dossier mais apprécie d'avoir une prise solide sous les mains pour s'asseoir et se relever.</p>
+<ul>
+<li><strong>Points forts</strong> : deux poignées intégrées pour le maintien et la stabilité, hauteur ajustable sur 8 positions, pieds antidérapants. Pellet est un fabricant français d'équipements pour l'accessibilité.</li>
+<li><strong>Données utiles</strong> : charge admissible 135 kg, structure en HDPE et aluminium, garantie de 1 an.</li>
+<li><strong>Limites</strong> : le catalogue du fabricant ne détaille pas clairement la plage de hauteur ni les dimensions de l'assise. Pas de dossier.</li>
+</ul>
+<p><a href="{AMZ:Pellet tabouret de douche poignees}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Herdegen tabouret de douche rotatif : idéal pour tourner sans se lever</h2>
+<p><strong>Pour qui ?</strong> Une personne qui a du mal à pivoter sur elle-même, qui veut atteindre le robinet ou le savon sans se relever, ou qui doit installer le tabouret dans une baignoire.</p>
+<ul>
+<li><strong>Points forts</strong> : assise qui tourne à 360 degrés et se bloque grâce à une molette sous l'assise, cadre en aluminium anodisé anticorrosion, revêtement d'assise doux et antidérapant, pieds courbés à ventouses antidérapantes. Convient aux petits espaces et peut se placer dans une baignoire.</li>
+<li><strong>Données utiles</strong> : hauteur réglable par les pieds de 42,5 à 52,5 cm, charge maximale 100 kg, garantie de 2 ans.</li>
+<li><strong>Limites</strong> : 100 kg maximum. Une assise qui tourne demande de penser à la bloquer avant de s'asseoir et de se relever. Dimensions de l'assise et poids non précisés sur la fiche consultée.</li>
+</ul>
+<p><a href="{AMZ:Herdegen tabouret de douche rotatif}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>9. Pellet Arsis : idéal pour un siège mural robuste dans une douche de plain-pied</h2>
+<p><strong>Pour qui ?</strong> Un logement avec une douche à l'italienne ou de plain-pied, partagée avec d'autres personnes : le siège se relève contre le mur quand on n'en a pas besoin.</p>
+<ul>
+<li><strong>Points forts</strong> : charge admissible de 150 kg (testé à 225 kg selon le fabricant), grande assise de 45 x 44,2 cm, béquille qui descend automatiquement quand on abaisse le siège, saillie de seulement 10,2 cm une fois relevé. L'assise peut être remplacée par une tablette de douche du même fabricant.</li>
+<li><strong>Données utiles</strong> : assise en polymère sur structure en aluminium époxy, hauteur de pose normalisée à 50 cm. Une version anthracite à descente amortie existe aussi.</li>
+<li><strong>Limites</strong> : il doit être fixé solidement dans un mur capable de supporter la charge, de préférence par un professionnel. Ni dossier ni accoudoirs : associez-le à une barre d'appui.</li>
+</ul>
+<p><a href="{AMZ:Pellet Arsis siege de douche escamotable}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>10. Ridder Pro : idéal pour un siège mural rabattable compact</h2>
+<p><strong>Pour qui ?</strong> Une petite salle d'eau où chaque centimètre compte, pour une personne qui s'assoit surtout pour se laver les pieds ou se reposer un instant.</p>
+<ul>
+<li><strong>Points forts</strong> : rabattable, encombrement de 38,2 x 36 x 16 cm, ouvertures dans l'assise pour un séchage plus rapide, lattes remplaçables une à une. Charge maximale de 130 kg, portée à 175 kg avec un adaptateur XL vendu à part.</li>
+<li><strong>Données utiles</strong> : aluminium et polyamide, surface d'assise d'environ 36 x 25,4 cm. La visserie fournie est prévue pour la brique pleine ou le béton armé.</li>
+<li><strong>Limites</strong> : assise peu profonde, moins confortable pour une longue douche. Sur un autre type de mur, le revendeur conseille de faire appel à un professionnel. Pas de dossier.</li>
+</ul>
+<p><a href="{AMZ:Ridder Pro siege de douche rabattable}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment choisir</h2>
+<p>Partez de la personne et de la salle de bains, puis de la fiche technique :</p>
+<ul>
+<li><strong>Équilibre fragile ou grande fatigue</strong> : une chaise avec dossier et accoudoirs, comme la Sorrento ou la chaise Euromedis.</li>
+<li><strong>Bon équilibre assis</strong> : un tabouret suffit, plus léger et moins encombrant (Cadiz, Wenko Secura, Pellet).</li>
+<li><strong>Difficulté à se tourner</strong> : un tabouret pivotant, comme le Herdegen.</li>
+<li><strong>Douche de plain-pied partagée</strong> : un siège mural rabattable (Arsis ou Ridder Pro), à fixer dans un mur solide.</li>
+<li><strong>Forte corpulence</strong> : regardez d'abord la charge maximale, et gardez de la marge ; l'I-Fit 9781E annonce 180 kg.</li>
+</ul>
+<p>Mesurez ensuite le receveur ou la baignoire, et comparez la plage de hauteur d'assise à la taille de la personne : assise, elle doit poser les pieds à plat. Tous les critères sont détaillés dans notre guide pour <a href="{R}comment-choisir-siege-de-douche/">bien choisir un siège de douche</a>. Un siège est encore plus sûr avec un point d'appui fixe à portée de main : lisez aussi notre guide pour choisir une <a href="{R}barre-d-appui-salle-de-bain/">barre d'appui de salle de bain</a>.</p>
+<p>La douche n'est qu'une partie de la salle de bains : retrouvez les autres aménagements utiles dans <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
+<h2>Prise en charge et conseils</h2>
+<p>Certaines aides techniques pour la toilette peuvent être prises en charge en partie, sur prescription ou dans le cadre d'aides à l'autonomie, selon le produit et la situation. Renseignez-vous auprès du médecin, du pharmacien ou de votre caisse de retraite avant d'acheter. Un ergothérapeute peut aussi venir évaluer la salle de bains et vous conseiller le type de siège le plus adapté.</p>
+""",
+  faq=[("Quel est le meilleur siège de douche pour une personne âgée ?", "Il dépend surtout de l'équilibre de la personne. Si elle se fatigue vite ou a besoin de s'appuyer pour se relever, une chaise avec dossier et accoudoirs est la plus sûre. Si elle tient bien assise, un tabouret réglable suffit. Dans une douche de plain-pied partagée, un siège mural rabattable libère la place. En cas de doute, demandez conseil à un ergothérapeute."),
+       ("Tabouret, chaise ou siège mural : que choisir ?", "La chaise offre le plus de maintien grâce au dossier et aux accoudoirs. Le tabouret est plus léger et plus compact, mais suppose un bon équilibre. Le siège mural ne prend pas de place une fois relevé, mais il doit être fixé dans un mur solide, de préférence par un professionnel."),
+       ("Avez-vous testé ces sièges de douche ?", "Non. Cette sélection repose uniquement sur les caractéristiques publiées par les fabricants et les revendeurs. Nous ne donnons ni note ni avis de prise en main, et nous vous conseillons de vérifier la notice du modèle choisi.")],
+  short="Top 10 sièges de douche", cat="Salle de bains")
+
+AUTO_META['meilleur-casque-tv-senior/'] = ('🎧', 'lilas')
+g("meilleur-casque-tv-senior/",
+  "Meilleur casque TV sans fil pour senior : top 10 2026",
+  "Meilleur casque TV sans fil pour senior : notre top 10",
+  "Arceau, sous le menton ou stéthoscope : 10 casques TV sans fil pour senior comparés selon leur fiche (portée, autonomie, prise optique, mode voix, réglages).",
+  """
+<p>Le son de la télévision devient difficile à suivre, les dialogues se perdent et le volume monte au point de gêner le reste de la maison ? Un casque TV sans fil permet de régler le son à son oreille, sans déranger personne. Voici dix modèles réels, de marques reconnues, classés selon l'usage auquel ils conviennent le mieux.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et par des revendeurs français, sans test en main. Nous n'indiquons que les caractéristiques lues sur ces fiches ; quand une information n'y figure pas, nous écrivons « non précisé ». Aucun de ces casques ne remplace un appareil auditif : si vous avez l'impression d'entendre moins bien, parlez-en d'abord à votre médecin, qui pourra vous orienter vers un médecin ORL, puis vers un audioprothésiste.</div>
+<h2>Le comparatif en un coup d'œil</h2>
+<table><thead><tr><th>Modèle</th><th>Type</th><th>Portée</th><th>Autonomie</th><th>Connexion TV</th><th>Idéal pour</th></tr></thead><tbody>
+<tr><td>Sennheiser RS 5200</td><td>Sous le menton</td><td>Jusqu'à 70 m</td><td>Jusqu'à 12 h</td><td>Optique, jack 3,5 mm, RCA</td><td>Notre choix : dialogues plus clairs</td></tr>
+<tr><td>Sennheiser RS 120-W</td><td>Arceau</td><td>Jusqu'à 60 m</td><td>Jusqu'à 20 h</td><td>RCA (adaptateur jack fourni)</td><td>Le plus simple au quotidien</td></tr>
+<tr><td>Geemarc CL7400 OPTI</td><td>Arceau pliable</td><td>22 à 50 m selon la notice</td><td>Jusqu'à 8 h</td><td>Optique, jack 3,5 mm, RCA (adaptateur)</td><td>Le plus réglable (tonalité, balance)</td></tr>
+<tr><td>Amplicomms TV 2500</td><td>Stéthoscope</td><td>30 m en intérieur</td><td>Jusqu'à 5 h</td><td>Optique, jack 3,5 mm</td><td>Le plus puissant</td></tr>
+<tr><td>Sennheiser RS 2000</td><td>Stéthoscope</td><td>Jusqu'à 50 m</td><td>Environ 9 h</td><td>Jack 3,5 mm</td><td>Léger et discret</td></tr>
+<tr><td>Sony MDR-RF895RK</td><td>Arceau</td><td>Jusqu'à 100 m</td><td>Jusqu'à 20 h</td><td>Jack 3,5 mm</td><td>Longues soirées, mode voix</td></tr>
+<tr><td>Sennheiser RS 175-U</td><td>Arceau fermé</td><td>Jusqu'à 100 m</td><td>Environ 18 h</td><td>Optique, jack 3,5 mm</td><td>Films et musique</td></tr>
+<tr><td>CGV HEL Dolfin Onyx</td><td>Stéthoscope</td><td>20 m</td><td>Environ 8 h</td><td>Jack 3,5 mm</td><td>Le plus léger (66 g)</td></tr>
+<tr><td>CGV HEL Prelude 2</td><td>Arceau</td><td>Jusqu'à 30 m en intérieur</td><td>Plus de 8 h</td><td>Optique, jack</td><td>Grosses touches sur le casque</td></tr>
+<tr><td>Meliconi HP Easy Digital (lot de 2)</td><td>Arceau</td><td>Jusqu'à 100 m</td><td>Environ 8 h</td><td>Optique, jack 3,5 mm</td><td>Regarder la TV à deux</td></tr>
+</tbody></table>
+<p>Les portées annoncées sont mesurées en champ libre : à travers les murs et les planchers, elles sont nettement plus courtes. Aucune des fiches consultées n'indique de compatibilité particulière avec les appareils auditifs.</p>
+<h2>1. Sennheiser RS 5200 : idéal pour mieux comprendre les dialogues</h2>
+<p><strong>Pour qui ?</strong> Une personne qui entend encore la télévision mais a du mal à suivre ce que disent les acteurs ou les journalistes, surtout quand il y a de la musique ou du bruit de fond.</p>
+<ul>
+<li><strong>Points forts</strong> : port sous le menton, qui évite toute pression sur les tempes et convient aux porteurs de lunettes selon le fabricant. Fonction « Speech Clarity », activée d'un simple toucher, qui atténue les bruits de fond pour faire ressortir les voix. Trois profils d'écoute pour adapter le son à son audition. Volume réglable sur chaque écouteur.</li>
+<li><strong>Données utiles</strong> : portée jusqu'à 70 m, autonomie jusqu'à 12 heures, recharge en posant le récepteur sur la base. Branchement par câble optique numérique ou par câble audio analogique (jack 3,5 mm, adaptateur RCA fourni selon la fiche Fnac).</li>
+<li><strong>Limites</strong> : le port sous le menton ne plaît pas à tout le monde, et les embouts se placent dans l'oreille, ce qui demande un temps d'adaptation. Pas de réglage de balance distinct mentionné.</li>
+</ul>
+<p><a href="{AMZ:Sennheiser RS 5200}" """ + A + """>Voir sur Amazon</a></p>
+<h2>2. Sennheiser RS 120-W : idéal pour un usage simple au quotidien</h2>
+<p><strong>Pour qui ?</strong> Une personne qui préfère un casque classique à arceau, avec le moins de boutons possible, et qui regarde la télévision de longues heures.</p>
+<ul>
+<li><strong>Points forts</strong> : autonomie jusqu'à 20 heures, la base sert à la fois d'émetteur et de support de charge : il suffit de reposer le casque dessus. Molette de volume sur le casque, indépendante du volume de la télévision. Trois modes sonores (Parole, Musique, Neutre) choisis sur la base. Casque de 215 g selon Sennheiser.</li>
+<li><strong>Données utiles</strong> : portée jusqu'à 60 m, deux piles rechargeables AAA NiMH fournies, environ 5 heures pour une charge complète. Branchement par câble RCA stéréo, avec un adaptateur jack 3,5 mm fourni.</li>
+<li><strong>Limites</strong> : pas d'entrée optique mentionnée : vérifiez que votre téléviseur a une sortie casque ou RCA. Pas de réglage de balance gauche/droite.</li>
+</ul>
+<p><a href="{AMZ:Sennheiser RS 120-W}" """ + A + """>Voir sur Amazon</a></p>
+<h2>3. Geemarc CL7400 OPTI : idéal pour ajuster finement le son</h2>
+<p><strong>Pour qui ?</strong> Une personne qui entend différemment d'une oreille à l'autre, ou qui a besoin de renforcer les aigus ou les graves pour bien comprendre.</p>
+<ul>
+<li><strong>Points forts</strong> : volume réglable séparément pour chaque oreille, réglage de tonalité (aigus ou graves) et de balance, interrupteur stéréo/mono sous la base. Trois façons de se brancher : optique, jack 3,5 mm et RCA grâce à l'adaptateur fourni. Casque pliable.</li>
+<li><strong>Données utiles</strong> : autonomie jusqu'à 8 heures, environ 5 heures de charge sur la base. Le casque peut aussi se recharger par une prise micro-USB (câble non fourni).</li>
+<li><strong>Limites</strong> : la notice est contradictoire sur la portée (50 m en intérieur dans l'introduction, 22 m en champ libre dans les caractéristiques) : comptez plutôt sur la valeur la plus basse. Le niveau d'amplification n'est pas précisé.</li>
+</ul>
+<p><a href="{AMZ:Geemarc CL7400 OPTI}" """ + A + """>Voir sur Amazon</a></p>
+<h2>4. Amplicomms TV 2500 : idéal pour une audition plus faible</h2>
+<p><strong>Pour qui ?</strong> Une personne qui a besoin d'un son fort et qui apprécie un casque très léger de type stéthoscope, qui pend sous le menton.</p>
+<ul>
+<li><strong>Points forts</strong> : amplification jusqu'à 120 dB selon le fabricant, réglage du volume et de la balance gauche/droite, trois préréglages de tonalité, sélecteur stéréo/mono. Un microphone intégré permet d'entendre son entourage d'une simple pression. Une seconde batterie se recharge dans la base pendant que l'on utilise la première.</li>
+<li><strong>Données utiles</strong> : entrée optique (câble fourni) et jack 3,5 mm (avec adaptateur 6,35 mm). Portée jusqu'à 30 m en intérieur et 100 m en extérieur, environ 2 h 30 de charge.</li>
+<li><strong>Limites</strong> : autonomie de 5 heures seulement par batterie, la plus courte de cette sélection : pensez à échanger la batterie. Un son très fort n'est pas sans risque pour l'audition : demandez conseil à votre audioprothésiste avant de pousser le volume.</li>
+</ul>
+<p><a href="{AMZ:Amplicomms TV 2500}" """ + A + """>Voir sur Amazon</a></p>
+<h2>5. Sennheiser RS 2000 : idéal pour un casque léger et discret</h2>
+<p><strong>Pour qui ?</strong> Une personne qui trouve les casques à arceau trop lourds ou trop chauds, et qui veut un modèle de type stéthoscope d'une grande marque audio.</p>
+<ul>
+<li><strong>Points forts</strong> : récepteur d'environ 60 g, volume réglable directement sur le récepteur, avec un réglage séparé pour chaque écouteur. Recharge sur une station horizontale avec voyant. Une demi-heure de charge donne environ 2 heures d'écoute.</li>
+<li><strong>Données utiles</strong> : portée jusqu'à 50 m, autonomie d'environ 9 heures pour 3 heures de charge.</li>
+<li><strong>Limites</strong> : une seule entrée, analogique (mini-jack 3,5 mm) : pas d'entrée optique ni RCA mentionnée. Pas de mode voix indiqué sur la fiche.</li>
+</ul>
+<p><a href="{AMZ:Sennheiser RS 2000}" """ + A + """>Voir sur Amazon</a></p>
+<h2>6. Sony MDR-RF895RK : idéal pour les longues soirées</h2>
+<p><strong>Pour qui ?</strong> Une personne qui regarde la télévision plusieurs heures d'affilée et aime circuler d'une pièce à l'autre sans perdre le son.</p>
+<ul>
+<li><strong>Points forts</strong> : autonomie jusqu'à 20 heures, bouton « Mode vocal » pour mettre en avant les dialogues, molette de volume rotative facile à trouver. Le casque se recharge simplement posé sur sa station.</li>
+<li><strong>Données utiles</strong> : portée jusqu'à 100 m selon la fiche Son-Vidéo, poids de 275 g batterie comprise, environ 7 heures de charge complète.</li>
+<li><strong>Limites</strong> : branchement uniquement en jack 3,5 mm analogique. Le temps de charge est long. Il est indiqué comme indisponible chez certains revendeurs : vérifiez sa disponibilité.</li>
+</ul>
+<p><a href="{AMZ:Sony MDR-RF895RK}" """ + A + """>Voir sur Amazon</a></p>
+<h2>7. Sennheiser RS 175-U : idéal pour les films et la musique</h2>
+<p><strong>Pour qui ?</strong> Une personne qui entend bien mais veut regarder ses films le soir sans réveiller la maison, et profiter aussi de la musique.</p>
+<ul>
+<li><strong>Points forts</strong> : casque fermé qui isole bien du bruit ambiant, entrée optique et jack 3,5 mm sur la base, renfort des graves et mode son « surround » activables sur le casque. La base range et recharge le casque.</li>
+<li><strong>Données utiles</strong> : portée jusqu'à 100 m, autonomie d'environ 18 heures, deux piles rechargeables AAA NiMH.</li>
+<li><strong>Limites</strong> : environ 8 h 30 de charge, et 310 g sur la tête, le plus lourd de cette sélection. Pas de mode spécifique pour les voix ni de réglage de balance indiqué.</li>
+</ul>
+<p><a href="{AMZ:Sennheiser RS 175-U}" """ + A + """>Voir sur Amazon</a></p>
+<h2>8. CGV HEL Dolfin Onyx : idéal pour qui veut le plus léger</h2>
+<p><strong>Pour qui ?</strong> Une personne qui ne supporte pas le poids d'un casque et regarde la télévision dans la même pièce que l'émetteur.</p>
+<ul>
+<li><strong>Points forts</strong> : casque stéthoscope de 66 g, volume réglable séparément pour chaque oreille. Le bouton « MIC » coupe le son de la télévision et amplifie la voix de la personne qui vous parle : pratique pour échanger sans retirer le casque.</li>
+<li><strong>Données utiles</strong> : autonomie d'environ 8 heures, 3 heures de charge, entrée jack 3,5 mm, recharge par USB-C sur la station de charge.</li>
+<li><strong>Limites</strong> : portée de 20 m, la plus courte de cette sélection. Le chargeur secteur n'est pas inclus selon la fiche. Pas d'entrée optique mentionnée.</li>
+</ul>
+<p><a href="{AMZ:CGV HEL Dolfin Onyx}" """ + A + """>Voir sur Amazon</a></p>
+<h2>9. CGV HEL Prelude 2 : idéal pour des commandes faciles à trouver</h2>
+<p><strong>Pour qui ?</strong> Une personne qui préfère un casque à arceau léger, avec des boutons bien visibles, et dont le téléviseur a une sortie optique.</p>
+<ul>
+<li><strong>Points forts</strong> : grosses touches sur le casque pour la mise en marche, la coupure du son et le volume. Entrée optique et entrée ligne (jack). Casque de 203 g batterie comprise, station de recharge fournie.</li>
+<li><strong>Données utiles</strong> : autonomie de plus de 8 heures, recharge rapide en 1 à 2 heures. Portée jusqu'à 30 m en intérieur selon l'épaisseur des murs.</li>
+<li><strong>Limites</strong> : la fiche annonce plusieurs portées différentes (60 m et 80 m en champ libre) : retenez les 30 m en intérieur. Pas de réglage de tonalité ni de balance mentionné.</li>
+</ul>
+<p><a href="{AMZ:CGV HEL Prelude 2}" """ + A + """>Voir sur Amazon</a></p>
+<h2>10. Meliconi HP Easy Digital (lot de 2) : idéal pour regarder la télévision à deux</h2>
+<p><strong>Pour qui ?</strong> Un couple dont les deux personnes veulent régler leur propre volume, sans faire monter celui de la télévision.</p>
+<ul>
+<li><strong>Points forts</strong> : deux casques livrés avec un seul émetteur, entrée optique numérique et jack 3,5 mm (câbles fournis), deux canaux de transmission pour limiter les interférences. Volume réglable sur chaque casque.</li>
+<li><strong>Données utiles</strong> : portée jusqu'à 100 m en champ libre, autonomie d'environ 8 heures, recharge complète en 2 heures environ. Casque de 235 g selon la fiche LDLC.</li>
+<li><strong>Limites</strong> : pas de base de charge où poser le casque : il se recharge avec un câble USB, ce qui est moins pratique au quotidien. Aucun réglage de tonalité ni mode voix mentionné.</li>
+</ul>
+<p><a href="{AMZ:Meliconi HP Easy Digital bundle 2 casques}" """ + A + """>Voir sur Amazon</a></p>
+<h2>Comment choisir</h2>
+<p>Commencez par le confort, car un casque que l'on ne porte pas ne sert à rien :</p>
+<ul>
+<li><strong>Arceau</strong> (RS 120-W, CL7400 OPTI, Sony, Prelude 2) : le plus familier, mais il pèse sur la tête et peut gêner avec des lunettes.</li>
+<li><strong>Sous le menton ou stéthoscope</strong> (RS 5200, RS 2000, TV 2500, Dolfin Onyx) : très léger, sans pression sur les tempes, mais les embouts se placent dans l'oreille.</li>
+</ul>
+<p>Regardez ensuite trois points pratiques :</p>
+<ul>
+<li><strong>La connexion</strong> : vérifiez à l'arrière du téléviseur s'il a une sortie optique, une sortie casque (jack) ou des prises RCA.</li>
+<li><strong>Les réglages</strong> : un mode voix aide à suivre les dialogues ; un réglage de balance ou de volume par oreille est précieux si une oreille entend moins bien que l'autre.</li>
+<li><strong>La recharge</strong> : une base où l'on repose le casque est bien plus simple qu'un câble USB à brancher.</li>
+</ul>
+<p>Il n'existe pas encore sur ce site de guide détaillé consacré aux casques TV. Si les appels téléphoniques posent aussi problème, lisez notre guide du <a href="{R}telephone-fixe-grosses-touches/">téléphone fixe à grosses touches</a>, dont certains modèles amplifient le son. Un casque TV est aussi une bonne idée dans notre sélection de <a href="{R}cadeau-personne-agee/">cadeaux pour une personne âgée</a>. Et pour un logement plus confortable au quotidien, suivez <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
+<h2>Casque TV et audition : le bon réflexe</h2>
+<p>Un casque TV aide à mieux entendre la télévision, mais il ne corrige pas une baisse d'audition. Si vous montez souvent le son, faites répéter vos proches ou avez du mal à suivre une conversation, consultez votre médecin traitant, un médecin ORL ou un audioprothésiste. Si vous portez déjà des appareils auditifs, demandez à votre audioprothésiste comment les utiliser avec la télévision avant d'acheter un casque : aucune des fiches consultées ne précise de compatibilité.</p>
+""",
+  faq=[("Quel est le meilleur casque TV sans fil pour une personne âgée ?", "Celui qui correspond à son confort et à son audition. Dans notre sélection, le Sennheiser RS 5200 est notre choix global grâce à son port sous le menton et à sa fonction qui fait ressortir les voix ; le Sennheiser RS 120-W convient à qui préfère un arceau simple, et le Geemarc CL7400 OPTI à qui veut régler tonalité et balance."),
+       ("Un casque TV fonctionne-t-il avec toutes les télévisions ?", "Il faut que la base du casque puisse se brancher sur une sortie du téléviseur : optique, prise casque (jack) ou RCA selon les modèles. Regardez à l'arrière de votre téléviseur avant d'acheter et choisissez un modèle qui propose la même prise."),
+       ("Avez-vous testé ces casques ?", "Non. Cette sélection repose sur les caractéristiques publiées par les fabricants et par des revendeurs. Nous n'indiquons que ce qui y figure, sans note ni avis de prise en main.")],
+  short="Top 10 casques TV", cat="Vie quotidienne")
+
+AUTO_META['meilleur-detecteur-de-chute/'] = ('🏆', 'rose')
+g("meilleur-detecteur-de-chute/",
+  "Meilleure montre détection de chute senior 2026 : 9 modèles",
+  "Meilleure montre avec détection de chute pour senior : 9 modèles comparés selon l'usage",
+  "Montres connectées, montres seniors à carte SIM, médaillon d'appel ou téléphone fixe à bracelet : 9 détecteurs de chute comparés d'après les fiches officielles.",
+  """
+<p>Une montre ou un bracelet qui détecte les chutes peut faire gagner un temps précieux quand une personne âgée tombe seule et ne peut pas se relever. Mais tous ne fonctionnent pas de la même façon : certains appellent les secours, d'autres préviennent la famille, certains ont besoin d'un smartphone, d'autres d'une carte SIM ou d'une ligne fixe. Voici neuf appareils réellement vendus en France, classés selon l'usage auquel ils conviennent le mieux.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants (pages d'aide et de caractéristiques d'Apple, Google, Samsung et Garmin) et par de grands revendeurs français ou européens pour les appareils dédiés aux seniors, sans test en main. Nous n'indiquons que ce que nous avons lu sur ces pages ; quand une donnée n'y figure pas, nous écrivons « non précisé ». Vérifiez la fiche du modèle exact au moment de l'achat. Aucun de ces appareils n'est un dispositif médical de téléassistance, sauf mention contraire.</div>
+<h2>Le comparatif en un coup d'œil</h2>
+<table><thead><tr><th>Modèle</th><th>Type</th><th>Alerte en cas de chute</th><th>Besoin de</th><th>Autonomie annoncée</th><th>Idéal pour</th></tr></thead><tbody>
+<tr><td>Apple Watch SE 3</td><td>Montre connectée</td><td>Appel des secours puis message aux contacts</td><td>iPhone (ou version Cellular)</td><td>Jusqu'à 18 h</td><td>Notre choix : le plus complet</td></tr>
+<tr><td>Samsung Galaxy Watch8</td><td>Montre connectée</td><td>Appel des secours et SOS aux contacts (réglable)</td><td>Smartphone Android (ou version 4G)</td><td>30 à 40 h (44 mm)</td><td>Les utilisateurs d'Android</td></tr>
+<tr><td>Google Pixel Watch 4</td><td>Montre connectée</td><td>Appel des secours avec message vocal</td><td>Smartphone Android (ou version LTE)</td><td>30 à 40 h selon la taille</td><td>Android, pour tenir plus d'une journée</td></tr>
+<tr><td>Garmin Venu 4</td><td>Montre connectée sport</td><td>Message aux contacts pendant certaines activités</td><td>Smartphone avec données mobiles</td><td>10 à 12 jours</td><td>Pour l'extérieur et la marche</td></tr>
+<tr><td>SaveFamily Senior</td><td>Montre senior 4G</td><td>Appel automatique des contacts</td><td>Carte nano-SIM et forfait</td><td>Jusqu'à 3 jours</td><td>Une montre senior sans smartphone</td></tr>
+<tr><td>Newgen Medicals montre SOS 4G (JX7157)</td><td>Montre senior 4G</td><td>Alerte jusqu'à 5 contacts</td><td>Carte SIM et forfait</td><td>Non précisé</td><td>Sans abonnement supplémentaire</td></tr>
+<tr><td>Leotec Senior Smart Band 4G</td><td>Bracelet 4G à boutons</td><td>Non précisé par la fiche</td><td>Carte nano-SIM et forfait</td><td>Non précisé</td><td>Des gros boutons plutôt qu'un écran</td></tr>
+<tr><td>Mobiho Le Basic Sympa 4G</td><td>Téléphone SOS à porter au cou ou au poignet</td><td>SOS automatique (SMS avec position et appels)</td><td>Carte nano-SIM et forfait</td><td>Jusqu'à 7 jours en veille</td><td>Le plus simple</td></tr>
+<tr><td>Geemarc Serenities 100 (pack détection de chute)</td><td>Téléphone fixe et bracelet</td><td>Appel de 5 numéros avec message vocal</td><td>Ligne fixe ou box</td><td>Non précisé</td><td>À la maison, sans abonnement</td></tr>
+</tbody></table>
+<p>Avant de lire le détail, retenez une règle : <strong>aucune détection de chute n'est fiable à 100 %</strong>. Tous les fabricants dont nous avons lu la documentation le disent : certaines chutes, surtout les chutes lentes (glisser d'une chaise, s'affaisser contre un mur), ne sont pas reconnues, et un geste brusque peut déclencher une fausse alerte. Le bouton d'appel manuel reste donc indispensable.</p>
+
+<h2>1. Apple Watch SE 3 : idéal pour une personne qui a déjà un iPhone (notre choix)</h2>
+<p><strong>Pour qui ?</strong> Une personne autonome, qui utilise un iPhone ou dont un proche peut configurer la montre, et qui veut une montre classique avec une détection de chute très aboutie. C'est notre choix global, parce que le fonctionnement de l'alerte est le plus détaillé et le plus complet que nous ayons lu.</p>
+<ul>
+<li><strong>Comment elle alerte</strong> : selon l'assistance Apple, après une chute la montre vibre, sonne et affiche une alerte. Si la personne ne bouge pas pendant environ une minute, un compte à rebours de 30 secondes démarre, puis la montre appelle les secours. Elle envoie ensuite un message avec la position aux contacts d'urgence de la fiche médicale.</li>
+<li><strong>Points forts</strong> : la fonction s'active automatiquement si l'âge renseigné est de 55 ans ou plus. Étanche jusqu'à 50 mètres selon Apple. Existe en version GPS + Cellular, qui peut appeler sans iPhone à proximité (avec un forfait mobile).</li>
+<li><strong>Ce qu'il faut</strong> : un iPhone 11 ou ultérieur, ou un iPhone SE (2e génération) ou ultérieur, pour la configuration. Sans version Cellular, l'appel passe par l'iPhone à proximité ou par les appels Wi-Fi.</li>
+<li><strong>Limites</strong> : autonomie de 18 heures en usage normal (jusqu'à 32 heures en mode économie d'énergie), donc une recharge presque chaque jour. Apple précise que la montre ne détecte pas toutes les chutes. Inutilisable avec un téléphone Android.</li>
+</ul>
+<p><a href="{AMZ:Apple Watch SE 3}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Samsung Galaxy Watch8 : idéal pour les utilisateurs d'un smartphone Android</h2>
+<p><strong>Pour qui ?</strong> Une personne équipée d'un smartphone Samsung ou Android, qui veut une montre complète avec détection des chutes brutales.</p>
+<ul>
+<li><strong>Comment elle alerte</strong> : selon le guide de la Galaxy Watch8 publié par l'opérateur O2, après une chute brutale la montre peut appeler automatiquement le numéro d'urgence choisi, après un compte à rebours réglable, et envoyer un SOS avec la position aux contacts d'urgence si cette option est activée. On choisit si la détection fonctionne en permanence ou seulement pendant l'activité physique.</li>
+<li><strong>Points forts</strong> : version 4G qui fonctionne sans téléphone à proximité selon la fiche Samsung France, étanchéité 5 ATM et IP68, autonomie de 30 heures avec l'écran toujours allumé et jusqu'à 40 heures sans (modèle 44 mm).</li>
+<li><strong>Ce qu'il faut</strong> : un smartphone Android 12 ou ultérieur. L'application Galaxy Wearable n'est pas disponible sur iPhone.</li>
+<li><strong>Limites</strong> : Samsung indique que ses montres ne détectent pas toutes les chutes et qu'une activité intense peut déclencher une alerte.</li>
+</ul>
+<p><a href="{AMZ:Samsung Galaxy Watch8}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Google Pixel Watch 4 : idéal sous Android pour tenir plus d'une journée</h2>
+<p><strong>Pour qui ?</strong> Une personne équipée d'un smartphone Android qui veut une montre connectée tenant plus d'une journée.</p>
+<ul>
+<li><strong>Comment elle alerte</strong> : selon l'aide Google, après une chute brutale la montre attend environ 30 secondes, puis vibre, sonne et demande s'il faut appeler les secours. Sans réponse, elle déclenche une alarme et, au bout de 60 secondes, appelle les services d'urgence avec un message vocal automatique, en partageant la position si l'accès est autorisé.</li>
+<li><strong>Points forts</strong> : la France figure dans la liste des pays où la fonction est disponible. Autonomie annoncée jusqu'à 30 heures (41 mm) ou 40 heures (45 mm) avec l'écran toujours allumé, et jusqu'à 48 ou 72 heures en mode économiseur de batterie. Étanchéité 5 ATM et IP68.</li>
+<li><strong>Ce qu'il faut</strong> : un téléphone Android 11 ou ultérieur avec l'application Google Pixel Watch. Le modèle Wi-Fi a besoin du téléphone à proximité pour appeler ; le modèle LTE peut appeler seul avec un forfait.</li>
+<li><strong>Limites</strong> : la page d'aide décrit l'appel aux secours, mais ne précise pas que la famille est prévenue automatiquement. Google rappelle qu'un appareil sans fil ne doit jamais être le seul moyen d'appeler les secours.</li>
+</ul>
+<p><a href="{AMZ:Google Pixel Watch 4}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Garmin Venu 4 : idéal pour l'extérieur et les marches</h2>
+<p><strong>Pour qui ?</strong> Une personne active qui marche, fait du vélo ou randonne seule, et qui veut une montre sportive à très longue autonomie.</p>
+<ul>
+<li><strong>Comment elle alerte</strong> : selon le manuel Garmin, la détection d'incident fonctionne pendant certaines activités de plein air. Elle envoie un message automatique avec un lien de suivi et la position GPS aux contacts d'urgence enregistrés dans l'application Garmin Connect.</li>
+<li><strong>Points forts</strong> : autonomie annoncée jusqu'à 12 jours (45 mm) ou 10 jours (41 mm) en mode montre connectée, la meilleure de cette sélection. Compatible iPhone et Android.</li>
+<li><strong>Ce qu'il faut</strong> : un smartphone appairé en Bluetooth, avec un forfait de données et du réseau.</li>
+<li><strong>Limites</strong> : ce n'est pas un détecteur de chute pour la maison. La détection ne fonctionne que pendant certaines activités, pas au quotidien dans le logement. Garmin précise que l'application ne contacte pas les secours et que cette fonction ne doit pas être le moyen principal de demander de l'aide.</li>
+</ul>
+<p><a href="{AMZ:Garmin Venu 4}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. SaveFamily Senior : idéal pour une montre senior qui fonctionne sans smartphone</h2>
+<p><strong>Pour qui ?</strong> Une personne qui n'a pas de smartphone ou n'en veut pas, et dont les proches souhaitent être prévenus en cas de chute et pouvoir la localiser.</p>
+<ul>
+<li><strong>Comment elle alerte</strong> : selon la fiche du revendeur PcComponentes, en cas de chute ou de mouvement brusque, la montre lance une alerte téléphonique automatique vers les contacts définis dans l'application. Boulanger indique une détection réglable sur 6 niveaux de sensibilité.</li>
+<li><strong>Points forts</strong> : bouton SOS, zones de sécurité, autonomie jusqu'à 3 jours selon Boulanger, indice IP67. Application SaveFamily gratuite pour les proches, sur Android et iPhone.</li>
+<li><strong>Ce qu'il faut</strong> : une carte nano-SIM avec un forfait mobile, à souscrire chez l'opérateur de votre choix. La fiche ne précise pas si la carte est fournie.</li>
+<li><strong>Limites</strong> : la description parle de résistance aux éclaboussures, pas d'un usage sous la douche. Ce n'est pas un service de téléassistance : ce sont les proches qui reçoivent l'alerte et doivent pouvoir réagir.</li>
+</ul>
+<p><a href="{AMZ:SaveFamily Senior montre}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Newgen Medicals montre SOS 4G avec détecteur de chutes : idéal sans abonnement supplémentaire</h2>
+<p><strong>Pour qui ?</strong> Une famille qui veut une montre d'alerte autonome, avec localisation GPS, sans abonnement à un service en plus du forfait mobile.</p>
+<ul>
+<li><strong>Comment elle alerte</strong> : selon la fiche de Pearl, distributeur de la marque, la montre détecte une chute et prévient jusqu'à 5 contacts d'urgence enregistrés. Le bouton SOS appelle ces mêmes numéros.</li>
+<li><strong>Points forts</strong> : aucun abonnement supplémentaire n'est requis pour la montre ni pour l'application selon la fiche, suivi GPS et zones de sécurité dans l'application (Android et iOS).</li>
+<li><strong>Ce qu'il faut</strong> : votre propre carte SIM avec un forfait 4G.</li>
+<li><strong>Limites</strong> : indice IP66, qui protège des projections d'eau mais pas d'une immersion : à retirer pour la douche. L'autonomie n'est pas précisée, seulement la capacité de la batterie (600 mAh). La fiche ne détaille pas le déroulement de l'alerte en cas de chute.</li>
+</ul>
+<p><a href="{AMZ:Newgen Medicals montre SOS 4G detecteur de chutes}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Leotec Senior Smart Band 4G : idéal pour qui préfère des gros boutons à un écran tactile</h2>
+<p><strong>Pour qui ?</strong> Une personne qui n'est pas à l'aise avec les écrans et préfère appuyer sur un bouton pour appeler un proche.</p>
+<ul>
+<li><strong>Comment il alerte</strong> : la fiche du revendeur annonce un détecteur de chute accidentelle, sans préciser comment l'alerte est transmise.</li>
+<li><strong>Points forts</strong> : un gros bouton SOS central, plus des boutons d'appel vers des numéros préconfigurés. Fonctionne sans téléphone portable selon la fiche, avec une application gratuite pour la configuration. Indice IP67.</li>
+<li><strong>Ce qu'il faut</strong> : une carte nano-SIM de n'importe quel opérateur et un forfait.</li>
+<li><strong>Limites</strong> : l'autonomie n'est pas précisée (batterie de 1000 mAh), et le fonctionnement de l'alerte chute n'est pas détaillé.</li>
+</ul>
+<p><a href="{AMZ:Leotec Senior Smart Band 4G}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Mobiho Le Basic Sympa 4G : idéal pour la plus grande simplicité</h2>
+<p><strong>Pour qui ?</strong> Une personne qui ne veut ni montre ni écran, mais un petit appareil à grosse touche, porté au cou ou au poignet, qui prévient la famille.</p>
+<ul>
+<li><strong>Comment il alerte</strong> : selon les fiches de Boulanger et de La Poste, si la détection de chute est activée, le SOS se déclenche seul. Le SOS envoie un SMS avec la position GPS (lien Google Maps) à jusqu'à 6 contacts, puis les appelle.</li>
+<li><strong>Points forts</strong> : un appui de 3 secondes sur la grande touche suffit pour le SOS. Livré avec un tour de cou, un bracelet et une base de chargement. Pas d'abonnement en dehors de la carte SIM selon La Poste. Les proches peuvent le régler à distance par SMS. Alerte de batterie faible envoyée par SMS aux contacts.</li>
+<li><strong>Ce qu'il faut</strong> : une carte nano-SIM avec un forfait (le téléphone est débloqué).</li>
+<li><strong>Limites</strong> : le fabricant conseille de le recharger tous les 1 à 2 jours, même si la veille peut atteindre 7 jours. Indice IP56 selon Boulanger : à ne pas utiliser tous les jours sous la douche.</li>
+</ul>
+<p><a href="{AMZ:Mobiho Le Basic Sympa 4G}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>9. Geemarc Serenities 100 avec bracelet détection de chute : idéal à la maison, sans abonnement</h2>
+<p><strong>Pour qui ?</strong> Une personne qui sort peu, qui a une ligne fixe ou une box, et qui ne veut ni carte SIM ni recharge quotidienne.</p>
+<ul>
+<li><strong>Comment il alerte</strong> : selon la fiche du revendeur Office Easy, le bracelet VBC10 détecte les chutes lourdes et déclenche l'alerte. Le téléphone appelle alors jusqu'à 5 numéros d'urgence en diffusant un message vocal. Le bracelet vibre avant chaque envoi.</li>
+<li><strong>Points forts</strong> : aucun abonnement mentionné, bracelet étanche IP67 qui peut donc rester au poignet sous la douche, jusqu'à 4 télécommandes associables (pendentifs SOS en option).</li>
+<li><strong>Ce qu'il faut</strong> : une ligne téléphonique analogique ou une box internet avec prise téléphone.</li>
+<li><strong>Limites</strong> : ne fonctionne qu'à la maison, à portée du téléphone. Il ne détecte que les chutes lourdes : une glissade lente doit être signalée en appuyant sur le bouton. L'autonomie du bracelet n'est pas précisée.</li>
+</ul>
+<p><a href="{AMZ:Geemarc Serenities detection de chute}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment choisir</h2>
+<p>Partez de la vie de la personne plutôt que de la fiche technique :</p>
+<ul>
+<li><strong>Elle a déjà un smartphone et s'en sert</strong> : une montre connectée de la même famille (Apple Watch avec un iPhone, Galaxy Watch ou Pixel Watch avec Android). C'est la détection la plus aboutie, avec appel des secours.</li>
+<li><strong>Elle n'a pas de smartphone</strong> : une montre ou un appareil senior à carte SIM (SaveFamily, Newgen Medicals, Leotec, Mobiho). Ce sont alors les proches qui reçoivent l'alerte : assurez-vous qu'ils sont joignables.</li>
+<li><strong>Elle reste surtout à la maison</strong> : un téléphone fixe avec bracelet comme le Geemarc Serenities, qui ne demande pas de recharge quotidienne.</li>
+<li><strong>Elle sort marcher seule</strong> : une montre avec GPS ; la Garmin Venu 4 si l'autonomie compte avant tout, en sachant que sa détection ne marche que pendant certaines activités.</li>
+</ul>
+<p>Vérifiez ensuite quatre points : qui reçoit l'alerte (secours ou proches), ce dont l'appareil a besoin (smartphone, carte SIM, ligne fixe), s'il faut un abonnement en plus du forfait, et le rythme de recharge. Une montre qui charge sur la table de nuit ne protège pas lors d'un lever nocturne pour aller aux toilettes : prévoyez alors un autre moyen d'alerte à portée de main. Tous ces critères sont détaillés dans notre guide <a href="{R}detecteur-de-chute/">pour bien choisir un détecteur de chute</a>.</p>
+<h2>Les limites à connaître</h2>
+<ul>
+<li><strong>Aucune détection n'est fiable à 100 %</strong> : Apple, Google et Samsung l'écrivent eux-mêmes. Gardez toujours un bouton d'appel à presser à la main, et apprenez à la personne à s'en servir.</li>
+<li><strong>Le réseau compte</strong> : sans couverture mobile ou sans téléphone à proximité (selon le modèle), l'alerte ne part pas.</li>
+<li><strong>Un appareil n'aide que s'il est porté</strong> : choisissez un modèle que la personne acceptera de garder sur elle, y compris dans la salle de bains si possible.</li>
+</ul>
+<p>Le meilleur détecteur reste celui dont on n'a pas besoin : suivez nos conseils pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a>, et <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>. En cas de chutes répétées, parlez-en au médecin traitant, qui pourra rechercher une cause et proposer, si besoin, un bilan avec un kinésithérapeute ou un ergothérapeute.</p>
+""",
+  faq=[("Quelle est la meilleure montre avec détection de chute pour une personne âgée ?", "Cela dépend de son téléphone. Avec un iPhone, l'Apple Watch SE 3 est la plus complète : elle appelle les secours puis prévient les contacts. Avec Android, la Galaxy Watch8 ou la Pixel Watch 4. Sans smartphone, une montre senior à carte SIM qui prévient la famille."),
+       ("Faut-il un abonnement pour un détecteur de chute ?", "Pas forcément. Les montres et appareils de cette sélection n'imposent pas d'abonnement à un service selon les fiches consultées, mais ceux qui fonctionnent seuls demandent une carte SIM avec un forfait mobile. Un service de téléassistance, lui, fonctionne avec un abonnement et une centrale d'écoute."),
+       ("Avez-vous testé ces détecteurs de chute ?", "Non. Cette sélection repose sur les fiches publiées par les fabricants et les revendeurs. Nous n'indiquons que ce qui y figure, sans note ni avis de prise en main.")],
+  short="Top 9 détecteurs de chute", cat="Sécurité")

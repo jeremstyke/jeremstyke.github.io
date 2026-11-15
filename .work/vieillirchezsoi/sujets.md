@@ -42,3 +42,7 @@
 - [x] aides-adapter-logement-senior/ | aides pour adapter son logement senior | Conseils pour les proches | uniquement les dispositifs vérifiés sur service-public.fr ou france-renov.gouv.fr, sinon rester général
 - [x] meilleur-telephone-portable-senior/ | meilleur téléphone portable senior | Vie quotidienne | comparatif publié le 15 nov 2026 (modèles vérifiés sur les sites fabricants)
 - [x] meilleur-rollator/ | meilleur rollator | Se déplacer | comparatif publié le 15 nov 2026 (fiches techniques vérifiées)
+- [x] meilleur-fauteuil-releveur/ | top produits | | publié le 15 nov 2026 (modèles vérifiés)
+- [x] meilleur-siege-de-douche/ | top produits | | publié le 15 nov 2026 (modèles vérifiés)
+- [x] meilleur-casque-tv-senior/ | top produits | | publié le 15 nov 2026 (modèles vérifiés)
+- [x] meilleur-detecteur-de-chute/ | top produits | | publié le 15 nov 2026 (modèles vérifiés)
