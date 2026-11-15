@@ -350,6 +350,7 @@ def build():
     if STANDALONE:
         open(os.path.join(OUT, 'CNAME'), 'w').write(DOMAIN + '\n')
         open(os.path.join(OUT, '.nojekyll'), 'w').write('')
+        open(os.path.join(OUT, 'da4540821acf4048569bad7fbedc3ee1.txt'), 'w').write('da4540821acf4048569bad7fbedc3ee1')  # cle IndexNow
     open(os.path.join(OUT, 'robots.txt'), 'w').write('User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n' % BASE)
     if not STANDALONE:
         # L'ancienne adresse (jeremstyke.github.io/vieillirchezsoi/) ne sert plus que des renvois vers le domaine.

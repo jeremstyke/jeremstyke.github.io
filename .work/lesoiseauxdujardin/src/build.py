@@ -256,6 +256,7 @@ def build():
     open(os.path.join(OUT, 'robots.txt'), 'w').write('User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n' % BASE)
     open(os.path.join(OUT, 'CNAME'), 'w').write(DOMAIN + '\n')
     open(os.path.join(OUT, '.nojekyll'), 'w').write('')
+    open(os.path.join(OUT, 'da4540821acf4048569bad7fbedc3ee1.txt'), 'w').write('da4540821acf4048569bad7fbedc3ee1')  # cle IndexNow
     print('%d pages, %d guides' % (len(PAGES), len(guides)))
 
 if __name__ == '__main__':
