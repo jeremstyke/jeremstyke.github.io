@@ -14,7 +14,7 @@
 - [ ] pilulier/ | quel pilulier choisir | Vie quotidienne | semaine, électronique avec alarme, rester général santé
 - [ ] canne-de-marche/ | comment choisir une canne de marche | Se déplacer | réglage, embout, pliante, tripode
 - [ ] veilleuse-detecteur-de-mouvement/ | veilleuse détecteur de mouvement senior | Sécurité | trajets de nuit, piles ou prise
-- [ ] prevenir-les-chutes-a-la-maison/ | prévenir les chutes à la maison | Sécurité | checklist pièce par pièce, renvoi médecin
+- [ ] prevenir-les-chutes-a-la-maison/ | prévenir les chutes à la maison | Sécurité | gestes et habitudes au quotidien (lever, chaussures, médicaments, activité), renvoi au guide pièce par pièce et au médecin
 - [ ] telephone-fixe-grosses-touches/ | téléphone fixe grosses touches | Vie quotidienne | amplifié, photos, sans fil
 - [ ] pince-de-prehension/ | pince de préhension | Vie quotidienne | longueur, aimant, pliante
 - [ ] tapis-antiderapant-douche/ | tapis antidérapant douche | Salle de bains | ventouses, entretien, alternatives
@@ -36,7 +36,7 @@
 - [ ] table-de-lit/ | table de lit à roulettes | Chambre et repos | hauteur réglable, plateau inclinable
 - [ ] chaussures-personne-agee/ | chaussures pour personne âgée | Se déplacer | maintien, semelle, fermeture velcro
 - [ ] cadeau-personne-agee/ | cadeau utile pour personne âgée | Conseils pour les proches | idées par budget et par besoin
-- [ ] equiper-logement-parent-age/ | équiper le logement d'un parent âgé | Conseils pour les proches | par où commencer, en parler avec lui
+- [ ] parler-a-un-parent-age-de-son-logement/ | comment convaincre un parent âgé d'adapter son logement | Conseils pour les proches | en parler sans brusquer, faire accepter les aides, renvoi au guide pièce par pièce
 - [ ] materiel-maintien-domicile-acheter-ou-louer/ | matériel maintien à domicile acheter ou louer | Conseils pour les proches | ce qui se loue, prescription
 - [ ] boite-a-cle-securisee/ | boîte à clé sécurisée | Sécurité | aides à domicile, secours, code
 - [ ] aides-adapter-logement-senior/ | aides pour adapter son logement senior | Conseils pour les proches | uniquement les dispositifs vérifiés sur service-public.fr ou france-renov.gouv.fr, sinon rester général

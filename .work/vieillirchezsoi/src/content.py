@@ -46,6 +46,34 @@ CHECKLIST = [
   ]),
 ]
 
+# Guide pilier « Aménager le logement d'une personne âgée » (construit à partir de CHECKLIST)
+ROOM_CAT = {"Salle de bains et toilettes": "Salle de bains", "Se déplacer": "Se déplacer", "Sécurité et chutes": "Sécurité",
+            "Vie quotidienne": "Vie quotidienne", "Chambre et repos": "Chambre et repos"}
+
+ROOM_INTRO = {
+  "Salle de bains et toilettes": "C'est la pièce où l'on glisse le plus facilement : sol mouillé, rebord de baignoire à enjamber, toilettes basses. C'est donc par là qu'il faut commencer. Quelques achats simples suffisent souvent à la sécuriser, avant d'envisager des travaux comme une douche de plain-pied.",
+  "Se déplacer": "Dans le logement, le danger vient surtout des obstacles : tapis qui glissent, fils qui traînent, marches mal éclairées. Dégagez d'abord les passages, puis choisissez une aide à la marche adaptée. Le bon choix entre canne, déambulateur et rollator dépend de l'équilibre de la personne : le médecin ou le kinésithérapeute peut vous guider.",
+  "Sécurité et chutes": "La nuit, le trajet entre la chambre et les toilettes est un moment à risque : on est encore endormi et il fait sombre. Un bon éclairage et un moyen d'appeler à l'aide changent beaucoup de choses, surtout pour une personne qui vit seule.",
+  "Vie quotidienne": "Rester autonome, c'est aussi pouvoir appeler ses proches, prendre ses médicaments sans erreur et continuer ses activités. Ces petits équipements ne coûtent pas cher et évitent bien des difficultés au quotidien.",
+  "Chambre et repos": "Se lever du lit ou d'un fauteuil devient parfois difficile avec l'âge. Avant d'acheter du matériel plus important comme un fauteuil releveur ou un lit médicalisé, demandez conseil : certains équipements se louent, et l'avis d'un professionnel évite les mauvais achats.",
+}
+
+HUB_INTRO = """<p>Rester chez soi le plus longtemps possible, c'est le souhait de la plupart des personnes âgées. Pour que ce soit possible en sécurité, le logement doit parfois évoluer : un siège dans la douche, une barre d'appui près des toilettes, une veilleuse dans le couloir. Bonne nouvelle, la plupart de ces aménagements sont simples et peu coûteux.</p>
+<p>Ce guide fait le tour de la maison, pièce par pièce. Pour chaque équipement, nous indiquons s'il est essentiel, utile ou à prévoir selon les besoins, avec un conseil pour bien le choisir.</p>
+<h2>Par où commencer ?</h2>
+<p>Commencez par observer la personne dans ses gestes de tous les jours : entrer dans la douche, se relever des toilettes, monter l'escalier, se lever la nuit. Les difficultés que vous remarquez montrent les priorités. Les équipements marqués « Essentiel » sont ceux qui limitent le plus le risque de chute, à mettre en place en premier.</p>
+<p>Associez la personne aux choix : un aménagement qu'elle comprend et accepte sera vraiment utilisé. Et si la situation est complexe (chute récente, retour d'hospitalisation, maladie), demandez l'avis du médecin traitant. Il peut orienter vers un ergothérapeute, qui vient au domicile et propose des aménagements adaptés.</p>"""
+
+HUB_OUTRO = """<h2>Petits achats ou travaux ?</h2>
+<p>Les équipements de ce guide s'installent sans gros travaux. Quand ils ne suffisent plus, des travaux peuvent être envisagés : remplacer une baignoire par une douche de plain-pied, élargir une porte, installer un monte-escalier. Avant de vous lancer, renseignez-vous sur les aides possibles auprès des services de votre département, de votre caisse de retraite ou sur les sites officiels comme service-public.fr.</p>
+<div class="note"><strong>Un conseil personnalisé ?</strong> Un ergothérapeute peut venir au domicile et proposer les aménagements adaptés à la personne. Parlez-en au médecin traitant.</div>"""
+
+HUB_FAQ = [
+  ("Par quelle pièce commencer pour aménager le logement d'une personne âgée ?", "Par la salle de bains et les toilettes, où le risque de chute est le plus élevé, puis par le trajet de nuit entre la chambre et les toilettes."),
+  ("Qui peut aider à adapter le logement ?", "Le médecin traitant peut orienter vers un ergothérapeute, qui vient au domicile et propose des aménagements adaptés. Le pharmacien conseille aussi sur le matériel."),
+  ("Faut-il faire des travaux ?", "Pas forcément. Beaucoup d'équipements s'installent sans travaux. Des travaux comme une douche de plain-pied deviennent utiles quand ces équipements ne suffisent plus."),
+]
+
 PRIO = {1: "Essentiel", 2: "Utile", 3: "Selon les besoins"}
 
 GUIDES = []

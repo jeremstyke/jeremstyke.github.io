@@ -75,3 +75,8 @@ a{color:var(--brand)}a:hover{color:var(--brand2)}
 .disc{font-size:.85rem;color:#AEB7B1}.partner{font-size:.95rem}
 @media (max-width:600px){body{font-size:17px}.top-in{padding:8px 16px}.progress{top:110px}.hero{padding:28px 0 20px}}
 @media print{.top,.foot,.amz,.progress button,.btn{display:none}.progress{position:static}body{background:#fff}}
+.toc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px 20px;margin:20px 0}
+.toc ol{margin:6px 0 0;padding-left:22px}
+.room-intro{margin:0 0 8px}.room-more{font-weight:700;margin:12px 0 4px}
+.item{grid-template-columns:1fr auto}.item .it-name{font-weight:700}
+.cl-sec,h2{scroll-margin-top:130px}

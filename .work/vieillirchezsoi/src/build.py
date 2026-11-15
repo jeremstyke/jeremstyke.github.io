@@ -3,7 +3,7 @@
 import os, sys, json, html, re, shutil, datetime
 from urllib.parse import quote_plus
 sys.path.insert(0, os.path.dirname(__file__))
-from content import CHECKLIST, PRIO, GUIDES
+from content import CHECKLIST, PRIO, GUIDES, ROOM_INTRO, ROOM_CAT, HUB_INTRO, HUB_OUTRO, HUB_FAQ
 from auto_articles import AUTO_META
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -26,20 +26,21 @@ META = {
   'telephone-portable-senior/': ('📞', 'rose'),
 }
 META.update(AUTO_META)
+HUB = 'amenager-logement-personne-agee/'
 TINTS = ['sauge', 'ciel', 'sable', 'rose', 'lilas']
 
 def amz(q): return 'https://www.amazon.fr/s?k=' + quote_plus(q) + '&tag=' + TAG
 def esc(s): return html.escape(s, quote=True)
 
 CTA = ('<aside class="cta"><div><strong>Faites le point pièce par pièce</strong>'
-       '<span>Notre checklist gratuite liste l\'équipement utile pour rester chez soi en sécurité, du plus urgent au plus confortable.</span></div>'
-       '<a class="btn" href="{R}checklist/">Ouvrir la checklist</a></aside>')
+       '<span>Notre guide pour aménager le logement liste l\'équipement utile pièce par pièce, du plus urgent au plus confortable.</span></div>'
+       '<a class="btn" href="{R}amenager-logement-personne-agee/">Lire le guide</a></aside>')
 
-NAV = [('checklist/', 'Checklist'), ('guides/', 'Guides'), ('a-propos/', 'À propos')]
+NAV = [('amenager-logement-personne-agee/', 'Pièce par pièce'), ('guides/', 'Guides'), ('a-propos/', 'À propos')]
 PAGES = []
 
 def render(body):
-    body = body.replace('{CTA}', CTA)
+    body = body.replace('{CTA}', CTA).replace('{R}checklist/', '{R}' + HUB)
     return re.sub(r'\{AMZ:([^}]+)\}', lambda m: amz(m.group(1)), body)
 
 def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6'):
@@ -78,7 +79,7 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6'):
 <link rel="icon" href="{R}assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="{R}assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{R}assets/fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="{R}assets/style.css?v=1">
+<link rel="stylesheet" href="{R}assets/style.css?v=2">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>
 <body>
@@ -94,7 +95,7 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6'):
 <footer class="foot"><div class="wrap foot-in">
 <div><a class="logo" href="{R}"><span class="logo-ico" aria-hidden="true">🏡</span>Vieillir chez soi</a>
 <p>Des guides simples pour équiper la maison et rester chez soi en sécurité, le plus longtemps possible.</p></div>
-<nav aria-label="Pied de page"><a href="{R}checklist/">Checklist</a><a href="{R}guides/">Guides</a><a href="{R}a-propos/">À propos</a><a href="{R}mentions-legales/">Mentions légales</a><a href="{R}confidentialite/">Confidentialité</a><a href="mailto:{CONTACT}">Contact</a></nav>
+<nav aria-label="Pied de page"><a href="{R}amenager-logement-personne-agee/">Aménager le logement</a><a href="{R}guides/">Guides</a><a href="{R}a-propos/">À propos</a><a href="{R}mentions-legales/">Mentions légales</a><a href="{R}confidentialite/">Confidentialité</a><a href="mailto:{CONTACT}">Contact</a></nav>
 <p class="disc">{DISCLOSURE} Les informations de ce site sont générales et ne remplacent pas l'avis d'un médecin, d'un ergothérapeute ou d'un pharmacien. Les prix et les offres peuvent changer : vérifiez-les avant d'acheter. © {YEAR} {SITE}</p>
 </div></footer>
 <script src="{R}assets/app.js?v=1" defer></script>
@@ -142,9 +143,9 @@ def build():
     latest = list(reversed(guides))
 
     # Accueil
-    cats = ''.join('<a class="room" href="{R}checklist/#c%d"><span aria-hidden="true">%s</span>%s</a>' % (i, emo, esc(name))
+    cats = ''.join('<a class="room" href="{R}amenager-logement-personne-agee/#c%d"><span aria-hidden="true">%s</span>%s</a>' % (i, emo, esc(name))
                    for i, (name, emo, _) in enumerate(CHECKLIST))
-    home_faq = [("Par où commencer pour adapter la maison d'un parent âgé ?", "Commencez par la salle de bains et les trajets de nuit : tapis antidérapants, siège de douche, barres d'appui et veilleuses. Notre checklist classe tout par priorité."),
+    home_faq = [("Par où commencer pour adapter la maison d'un parent âgé ?", "Commencez par la salle de bains et les trajets de nuit : tapis antidérapants, siège de douche, barres d'appui et veilleuses. Notre guide pièce par pièce classe tout par priorité."),
                 ("Qui peut conseiller sur le bon équipement ?", "Le médecin traitant, le pharmacien et l'ergothérapeute. L'ergothérapeute peut venir au domicile pour proposer des aménagements adaptés."),
                 ("Ce site vend-il du matériel ?", "Non. Nous rédigeons des guides indépendants. Certains liens mènent vers Amazon et nous rapportent une commission, sans surcoût pour vous.")]
     fh, fs = faq_html(home_faq)
@@ -152,7 +153,7 @@ def build():
 <p class="kicker">Guides pratiques pour les seniors et leurs proches</p>
 <h1>Rester chez soi, en sécurité et en confiance</h1>
 <p class="lead">Siège de douche, barres d'appui, rollator, téléphone simple : des conseils clairs pour choisir le bon équipement et adapter la maison, pièce par pièce.</p>
-<div class="hero-btns"><a class="btn" href="{{R}}checklist/">Voir la checklist</a><a class="btn ghost" href="{{R}}guides/">Lire les guides</a></div>
+<div class="hero-btns"><a class="btn" href="{{R}}amenager-logement-personne-agee/">Le guide pièce par pièce</a><a class="btn ghost" href="{{R}}guides/">Lire les guides</a></div>
 </div></section>
 <div class="wrap">
 <section><h2>Par pièce et par besoin</h2><div class="rooms">{cats}</div></section>
@@ -164,32 +165,45 @@ def build():
 {fh}
 </div>'''
     page('', 'Vieillir chez soi : guides pour adapter la maison des seniors',
-         "Siège de douche, barres d'appui, rollator, téléphone senior : guides et checklist pour adapter la maison et rester chez soi en sécurité.", body, schema=fs, prio='1.0')
+         "Siège de douche, barres d'appui, rollator, téléphone senior : guides pour adapter la maison et rester chez soi en sécurité.", body, schema=fs, prio='1.0')
 
-    # Checklist
+    # Guide pilier : aménager le logement pièce par pièce (ancienne checklist)
     total = sum(len(it) for _, _, it in CHECKLIST)
+    toc = ''.join('<li><a href="#c%d">%s</a></li>' % (i, esc(n)) for i, (n, _, _) in enumerate(CHECKLIST))
     secs = ''
     for i, (name, emo, items) in enumerate(CHECKLIST):
         rows = ''.join(
-            '<li class="item p%d"><label><input type="checkbox" data-id="%s"><span class="it-name">%s</span></label>'
-            '<span class="prio">%s</span><p>%s</p><a class="amz" href="%s" %s>Voir les modèles</a></li>' % (
-                p, esc(re.sub(r'[^a-z0-9]+', '-', q)), esc(n), PRIO[p], esc(c), amz(q), A)
+            '<li class="item p%d"><span class="it-name">%s</span><span class="prio">%s</span><p>%s</p>'
+            '<a class="amz" href="%s" %s>Voir les modèles</a></li>' % (p, esc(n), PRIO[p], esc(c), amz(q), A)
             for n, q, p, c in items)
-        secs += '<section class="cl-sec t-%s" id="c%d"><h2><span aria-hidden="true">%s</span> %s</h2><ul class="cl">%s</ul></section>' % (
-            TINTS[i % len(TINTS)], i, emo, esc(name), rows)
-    body = f'''<div class="wrap art-wrap">
-<h1>Checklist du maintien à domicile</h1>
-<p class="lead">{total} équipements pour sécuriser la maison d'un senior, classés par pièce et par priorité. Cochez ce qui est déjà en place : votre progression reste enregistrée sur cet appareil.</p>
-<div class="progress" aria-live="polite"><div class="bar"><span id="bar"></span></div><p id="ptxt">0 sur {total}</p>
-<button class="btn ghost small" type="button" onclick="window.print()">Imprimer</button></div>
-<p class="legend"><span class="prio p1">Essentiel</span> <span class="prio p2">Utile</span> <span class="prio p3">Selon les besoins</span></p>
+        rel = [x for x in guides if x['cat'] == ROOM_CAT.get(name)]
+        more = ('<p class="room-more">Nos guides : ' + ', '.join('<a href="{R}%s">%s</a>' % (x['slug'], esc(x['short'])) for x in rel) + '.</p>') if rel else ''
+        secs += ('<section class="cl-sec t-%s" id="c%d"><h2><span aria-hidden="true">%s</span> %s</h2><p class="room-intro">%s</p>'
+                 '<ul class="cl">%s</ul>%s</section>') % (TINTS[i % len(TINTS)], i, emo, esc(name), ROOM_INTRO.get(name, ''), rows, more)
+    fh, fs = faq_html(HUB_FAQ)
+    art = [{"@context": "https://schema.org", "@type": "Article", "headline": "Aménager le logement d'une personne âgée : le guide pièce par pièce",
+            "inLanguage": "fr", "author": {"@type": "Organization", "name": SITE}, "publisher": {"@type": "Organization", "name": SITE},
+            "mainEntityOfPage": BASE + '/' + HUB}]
+    body = f'''<div class="wrap art-wrap"><article class="prose">
+<p class="art-cat t-sable"><span aria-hidden="true">🏡</span> Guide complet</p>
+<h1>Aménager le logement d'une personne âgée : le guide pièce par pièce</h1>
+{HUB_INTRO}
+<nav class="toc" aria-label="Sommaire"><strong>Sommaire</strong><ol>{toc}</ol></nav>
+<p class="legend">Pour chaque équipement, un niveau de priorité : <span class="prio p1">Essentiel</span> <span class="prio p2">Utile</span> <span class="prio p3">Selon les besoins</span></p>
 {secs}
-<div class="note"><strong>Un conseil personnalisé ?</strong> Un ergothérapeute peut venir au domicile et proposer les aménagements adaptés à la personne. Parlez-en au médecin traitant.</div>
-<p>Pour choisir chaque équipement, lisez nos guides : <a href="{{R}}comment-choisir-siege-de-douche/">siège de douche</a>, <a href="{{R}}barre-d-appui-salle-de-bain/">barres d'appui</a>, <a href="{{R}}deambulateur-ou-rollator/">déambulateur ou rollator</a>.</p>
-</div>'''
-    page('checklist/', 'Checklist maintien à domicile : équiper la maison d\'un senior',
-         f"La checklist gratuite du maintien à domicile : {total} équipements classés par pièce et par priorité pour sécuriser la maison d'une personne âgée.",
-         body, crumbs=[('Checklist', 'checklist/')], prio='0.9')
+{HUB_OUTRO}
+{fh}
+<p class="disc-in">Ces conseils sont généraux et ne remplacent pas l'avis d'un professionnel de santé. Liens d'affiliation : nous touchons une commission sur certains achats, sans surcoût pour vous.</p>
+</article></div>'''
+    page(HUB, "Aménager le logement d'une personne âgée : guide pièce par pièce",
+         f"Salle de bains, déplacements, sécurité, chambre : comment aménager le logement d'une personne âgée, avec {total} équipements classés par priorité.",
+         body, schema=art + fs, crumbs=[('Aménager le logement', HUB)], prio='0.9')
+    # Ancienne adresse /checklist/ : redirection
+    d = os.path.join(OUT, 'checklist'); os.makedirs(d, exist_ok=True)
+    open(os.path.join(d, 'index.html'), 'w', encoding='utf-8').write(
+        '<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><title>Page déplacée</title>'
+        '<link rel="canonical" href="%s/%s"><meta name="robots" content="noindex">'
+        '<meta http-equiv="refresh" content="0; url=../%s"></head><body><p><a href="../%s">Aménager le logement d\'une personne âgée</a></p></body></html>' % (BASE, HUB, HUB, HUB))
 
     # Guides
     groups = {}
@@ -231,7 +245,6 @@ def build():
     page('confidentialite/', 'Confidentialité', 'Données collectées par le site Vieillir chez soi.',
          f'''<div class="wrap art-wrap"><article class="prose"><h1>Confidentialité</h1>
 <p>Le site fonctionne sans inscription.</p>
-<h2>Checklist</h2><p>Les équipements que vous cochez sont enregistrés uniquement dans votre navigateur. Rien n'est envoyé sur un serveur.</p>
 <h2>Mesure d'audience</h2><p>Nous comptons les pages vues et les clics vers Amazon de façon anonyme (page visitée, site d'origine, type d'appareil et un identifiant aléatoire stocké dans votre navigateur). Aucune donnée n'est vendue ni utilisée pour de la publicité. Ces données sont hébergées par Supabase dans l'Union européenne.</p>
 <h2>Amazon</h2><p>Quand vous cliquez sur un lien vers Amazon.fr, Amazon peut déposer des cookies pour attribuer la commission. Consultez la politique de confidentialité d'Amazon pour en savoir plus.</p>
 <h2>Contact</h2><p><a href="mailto:{CONTACT}">{CONTACT}</a></p></article></div>''',
