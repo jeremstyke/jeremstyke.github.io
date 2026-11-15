@@ -1704,3 +1704,314 @@ g("meilleur-rehausseur-wc/",
        ("Quelle hauteur de rehausseur WC choisir ?", "La plupart des rehausseurs ajoutent entre 6 et 14 cm. Une fois assise, la personne doit pouvoir poser les pieds à plat, genoux à peu près à angle droit. Une personne grande, ou qui a du mal à se relever après une opération de la hanche ou du genou, aura souvent besoin d'une rehausse plus haute : suivez alors les consignes de l'équipe soignante."),
        ("Avez-vous testé ces rehausseurs WC ?", "Non. Cette sélection repose uniquement sur les caractéristiques publiées par les fabricants et les revendeurs. Nous ne donnons ni note ni avis de prise en main, et nous vous conseillons de vérifier la notice et la compatibilité avec votre cuvette.")],
   short="Top 10 rehausseurs WC", cat="Salle de bains")
+
+AUTO_META['fauteuil-roulant-rembourse-100/'] = ('♿', 'ciel')
+g("fauteuil-roulant-rembourse-100/",
+  "Fauteuil roulant remboursé à 100 % : ce qui change depuis 2025",
+  "Fauteuil roulant remboursé à 100 % : comment en bénéficier",
+  "Depuis le 1er décembre 2025, les fauteuils roulants prescrits sont pris en charge intégralement : qui prescrit, essai, prestataire, location ou achat.",
+  """
+<p>Pendant longtemps, obtenir un fauteuil roulant voulait dire monter plusieurs dossiers, attendre de longs mois et souvent payer une partie de sa poche. Depuis le 1er décembre 2025, une réforme a changé les règles : les fauteuils roulants inscrits sur la liste des produits remboursables sont désormais pris en charge intégralement par l'Assurance maladie, sur prescription. Voici, simplement, comment cela fonctionne et par où commencer, pour vous ou pour un proche.</p>
+{CTA}
+<h2>Ce que prévoit la réforme</h2>
+<p>Selon le ministère chargé des personnes handicapées et Service-Public, la réforme est entrée en vigueur le 1er décembre 2025, pour les demandes faites après cette date. Ses grands principes :</p>
+<ul>
+<li><strong>Une prise en charge intégrale</strong> des fauteuils roulants inscrits à la liste des produits et prestations remboursables (LPP) : manuels, électriques, modulaires, spécifiques et de sport. L'Assurance maladie devient le seul financeur, sans reste à charge.</li>
+<li><strong>Une seule demande</strong> à faire, auprès de l'Assurance maladie : plus besoin de dossiers séparés auprès de la mutuelle, de la MDPH ou de différents fonds pour financer le fauteuil.</li>
+<li><strong>Pas d'avance de frais</strong> quand le professionnel qui fournit le fauteuil est conventionné ou pratique le tiers payant.</li>
+<li><strong>Des délais de réponse encadrés</strong> : 15 jours au maximum pour les fauteuils les plus courants, 2 mois au maximum pour les besoins très spécifiques. Sans réponse dans ce délai, la demande est considérée comme acceptée.</li>
+</ul>
+<p>La condition essentielle reste la prescription : le fauteuil doit répondre à un besoin évalué par un professionnel de santé, et respecter les exigences techniques de la nomenclature officielle. Un fauteuil acheté seul, sans prescription, n'entre pas dans ce dispositif.</p>
+
+<h2>Les étapes, de la consultation à la livraison</h2>
+<table><thead><tr><th>Étape</th><th>Avec qui ?</th><th>Ce qui se passe</th></tr></thead><tbody>
+<tr><td>1. Évaluation des besoins</td><td>Médecin, ou équipe avec ergothérapeute ou kinésithérapeute selon le fauteuil</td><td>Le professionnel évalue la situation (mobilité, logement, sorties) et rédige une fiche de préconisation.</td></tr>
+<tr><td>2. Essai</td><td>Distributeur (prestataire de matériel médical)</td><td>Il propose plusieurs modèles adaptés, à essayer en conditions réelles. Un certificat d'essai est prévu pour la plupart des fauteuils.</td></tr>
+<tr><td>3. Prescription définitive</td><td>Le prescripteur</td><td>Il précise le modèle choisi, les réglages et les options.</td></tr>
+<tr><td>4. Demande de prise en charge</td><td>Le distributeur</td><td>Il envoie le dossier complet et le devis à l'Assurance maladie.</td></tr>
+<tr><td>5. Livraison et réglages</td><td>Le distributeur</td><td>Il prépare le fauteuil, fait les réglages et vous accompagne dans sa prise en main.</td></tr>
+</tbody></table>
+
+<h2>Qui peut prescrire un fauteuil roulant ?</h2>
+<p>Cela dépend du type de fauteuil et de la durée du besoin. D'après le point publié par l'Ordre des pharmaciens :</p>
+<ul>
+<li><strong>Tout médecin</strong>, y compris votre médecin traitant, peut prescrire l'achat d'un fauteuil manuel standard ou d'un fauteuil à pousser, ainsi que leur location de courte durée.</li>
+<li><strong>Un médecin spécialiste en médecine physique et de réadaptation</strong> (MPR), ou un médecin titulaire d'un diplôme d'appareillage, prescrit les fauteuils plus techniques : fauteuils électriques, fauteuils configurables ou multipositions, scooters, ainsi que la location longue durée.</li>
+<li><strong>Le renouvellement à l'identique</strong> peut être prescrit par le médecin généraliste ou par un ergothérapeute.</li>
+</ul>
+<p>Pour les fauteuils les plus spécifiques, le ministère prévoit des binômes de prescription associant un médecin et un ergothérapeute ou un kinésithérapeute, et des équipes pluridisciplinaires pour les situations complexes. Une cartographie des prescripteurs est publiée sur handicap.gouv.fr pour vous aider à en trouver un près de chez vous. En pratique, parlez-en d'abord à votre médecin traitant : il vous orientera.</p>
+
+<h2>Location ou achat ?</h2>
+<p>Le bon choix dépend surtout de la durée du besoin :</p>
+<ul>
+<li><strong>Besoin temporaire</strong> (après une opération, une fracture, pendant une rééducation) : la location de courte durée est la règle. Le distributeur peut mettre le fauteuil à disposition rapidement, et la prise en charge reste intégrale s'il est prescrit.</li>
+<li><strong>Besoin durable</strong> : l'achat ou la location longue durée. La location longue durée est notamment pensée pour les besoins qui évoluent, par exemple avec une maladie évolutive, car elle facilite le changement de fauteuil.</li>
+</ul>
+<p>Les règles précises (durées de location, possibilité d'acheter un fauteuil loué) dépendent du type de fauteuil : le prescripteur et le distributeur vous indiqueront celles qui s'appliquent à votre situation.</p>
+
+<h2>Quelques conseils pour bien préparer la démarche</h2>
+<ul>
+<li><strong>Décrivez votre quotidien</strong> au prescripteur : largeur des portes, ascenseur ou escaliers, sorties en ville, transport en voiture. Un fauteuil adapté à votre logement sera beaucoup plus utile.</li>
+<li><strong>Prenez le temps de l'essai</strong> : posture, confort de l'assise, facilité à le manœuvrer ou à le plier pour l'aidant. N'hésitez pas à demander un autre modèle.</li>
+<li><strong>Demandez le devis</strong> : il doit indiquer, pour chaque élément remboursé, le prix limite de vente fixé par les pouvoirs publics.</li>
+<li><strong>Pour les options hors liste</strong>, le distributeur fait une demande d'accord préalable : l'Assurance maladie a 2 mois au maximum pour répondre, et son silence vaut accord.</li>
+<li><strong>Pensez au logement</strong> : un fauteuil demande des passages dégagés, des seuils supprimés et parfois une salle de bains adaptée. Notre guide des <a href="{R}aides-adapter-logement-senior/">aides pour adapter le logement</a> présente les financements possibles, et notre guide pour <a href="{R}amenager-logement-personne-agee/">aménager le logement pièce par pièce</a> vous aide à repérer les obstacles.</li>
+</ul>
+<p>Si la marche reste possible avec un appui, un fauteuil n'est pas toujours la première solution : un <a href="{R}deambulateur-ou-rollator/">déambulateur ou un rollator</a> peut suffire pour l'intérieur, le fauteuil servant alors pour les sorties plus longues. Le médecin, l'ergothérapeute ou le kinésithérapeute vous aidera à trouver le bon équilibre. Pour les déplacements à l'intérieur, pensez aussi à <a href="{R}prevenir-les-chutes-a-la-maison/">sécuriser la maison contre les chutes</a>.</p>
+
+<h2>Les petits accessoires du quotidien</h2>
+<p>La prise en charge concerne le fauteuil et les éléments prévus par la nomenclature. Certains accessoires de confort, choisis librement, restent à votre charge : demandez d'abord au distributeur et au prescripteur ce qui peut être inclus, en particulier pour le coussin, qui joue un rôle important dans la prévention des escarres et doit parfois être prescrit.</p>
+<ul>
+<li>Un coussin d'assise de confort, en complément : <a href="{AMZ:coussin fauteuil roulant}" """ + A + """>Voir les coussins pour fauteuil roulant</a>.</li>
+<li>Une protection contre la pluie pour les sorties : <a href="{AMZ:poncho pluie fauteuil roulant}" """ + A + """>Voir les capes de pluie pour fauteuil</a>.</li>
+<li>Un sac à accrocher au dossier ou sous l'accoudoir : <a href="{AMZ:sac fauteuil roulant}" """ + A + """>Voir les sacs pour fauteuil roulant</a>.</li>
+<li>Une couverture ou chancelière pour garder les jambes au chaud l'hiver : <a href="{AMZ:couverture fauteuil roulant}" """ + A + """>Voir les couvertures pour fauteuil roulant</a>.</li>
+</ul>
+<p>Les règles évoluent encore : la foire aux questions du ministère, sur handicap.gouv.fr, est régulièrement mise à jour, notamment sur les réparations et la remise en état des fauteuils.</p>
+""",
+  faq=[("Un fauteuil roulant est-il vraiment remboursé à 100 % ?", "Oui, depuis le 1er décembre 2025, les fauteuils roulants inscrits sur la liste des produits remboursables sont pris en charge intégralement par l'Assurance maladie, à condition d'être prescrits par un professionnel de santé habilité et de respecter les exigences de la nomenclature. Les accessoires de confort choisis librement, hors liste, restent à votre charge."),
+       ("Mon médecin traitant peut-il prescrire un fauteuil roulant ?", "Oui pour un fauteuil manuel standard ou un fauteuil à pousser, à l'achat ou en location courte. Pour un fauteuil électrique, un fauteuil configurable ou un scooter, la prescription relève d'un médecin spécialiste en médecine physique et de réadaptation ou titulaire d'un diplôme d'appareillage. Votre médecin traitant peut vous orienter."),
+       ("Combien de temps faut-il pour obtenir l'accord ?", "L'Assurance maladie doit répondre en 15 jours au maximum pour les fauteuils les plus courants et en 2 mois au maximum pour les besoins très spécifiques. Sans réponse dans ce délai, la demande est considérée comme acceptée.")],
+  short="Fauteuil roulant remboursé à 100 %", cat="Se déplacer")
+
+AUTO_META['meilleur-fauteuil-roulant-electrique-pliant/'] = ('🏆', 'ciel')
+g("meilleur-fauteuil-roulant-electrique-pliant/",
+  "Fauteuil roulant électrique pliant de voyage : top 8 2026",
+  "Meilleur fauteuil roulant électrique pliant de voyage",
+  "Poids, autonomie, charge maximale, encombrement plié, batterie et avion : 8 fauteuils roulants électriques pliants comparés d'après les fiches des fabricants.",
+  """
+<p>Un fauteuil roulant électrique pliant permet de continuer à sortir, à rendre visite à ses proches ou à partir en vacances, sans dépendre de quelqu'un pour pousser. Encore faut-il qu'il soit assez léger pour être soulevé, assez compact pour entrer dans un coffre, et doté d'une autonomie suffisante pour vos trajets. Bon à savoir avant de comparer : sur prescription, un fauteuil roulant peut être pris en charge à 100 % depuis le 1er décembre 2025, comme nous l'expliquons dans notre guide du <a href="{R}fauteuil-roulant-rembourse-100/">fauteuil roulant remboursé à 100 %</a>. Voici huit modèles vendus en France, classés selon l'usage auquel ils conviennent le mieux.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs (sites et brochures des fabricants, notices, distributeurs français de matériel médical), sans test en main. Nous n'indiquons que les chiffres lus sur ces fiches ; quand une donnée n'y figure pas, nous écrivons « non précisé ». Nous n'avons retenu que huit modèles pour lesquels nous avons trouvé des données fiables, plutôt que de compléter la liste avec des fiches invérifiables. Les valeurs peuvent changer selon la version : vérifiez toujours la notice du modèle que vous achetez. Le choix d'un fauteuil électrique se fait idéalement avec un médecin et un ergothérapeute, après un essai.</div>
+<h2>Le comparatif en un coup d'œil</h2>
+<table><thead><tr><th>Modèle</th><th>Poids</th><th>Autonomie</th><th>Charge max</th><th>Plié</th><th>Idéal pour</th></tr></thead><tbody>
+<tr><td>WHILL Model F</td><td>24 kg sans batterie</td><td>20 km</td><td>115 kg</td><td>46,5 cm de long</td><td>Notre choix : l'avion et le pliage express</td></tr>
+<tr><td>Pride i-Go</td><td>19,8 kg sans batteries</td><td>Jusqu'à 10 km par batterie</td><td>120 kg</td><td>58 x 31 x 75,5 cm</td><td>Léger, sorties courtes</td></tr>
+<tr><td>WHILL Model C Lite</td><td>17 kg</td><td>23,4 km (38,5 km en option)</td><td>Non précisé</td><td>Non précisé</td><td>Le plus léger de la sélection</td></tr>
+<tr><td>Mobiclinic Troya</td><td>24,8 kg sans batterie</td><td>17 km</td><td>120 kg</td><td>64 x 34 x 74 cm</td><td>Un premier fauteuil pour le coffre</td></tr>
+<tr><td>Mobiclinic Troya Plus Ultra</td><td>24,8 kg sans batteries</td><td>51 km (3 batteries)</td><td>120 kg</td><td>64 x 34 x 74 cm</td><td>La grande autonomie</td></tr>
+<tr><td>Quirumed Easy Plus Ultralight</td><td>24 kg avec batterie</td><td>18 km</td><td>135 kg</td><td>71 x 58 x 30,5 cm</td><td>Un fauteuil plié très bas</td></tr>
+<tr><td>Motorlight (Identités)</td><td>29 kg</td><td>Non précisé</td><td>125 kg</td><td>67 x 80 x 35 cm</td><td>Un achat chez un distributeur médical</td></tr>
+<tr><td>Swift Pro</td><td>30,3 kg</td><td>Jusqu'à 23 km</td><td>150 kg (voir limites)</td><td>77 x 64 x 50 cm</td><td>Les chemins et la forte corpulence</td></tr>
+</tbody></table>
+<p>Retenez trois règles avant d'entrer dans le détail : le poids à soulever compte plus que tout si un proche doit charger le fauteuil seul ; l'autonomie annoncée est mesurée dans de bonnes conditions et baisse en côte, par temps froid ou avec une charge plus lourde ; et pour l'avion, seule la compagnie aérienne décide, au cas par cas, en fonction de la batterie.</p>
+
+<h2>1. WHILL Model F : idéal pour voyager en avion (notre choix)</h2>
+<p><strong>Pour qui ?</strong> Une personne qui voyage, en voiture comme en avion, et un aidant qui veut un fauteuil se pliant en quelques secondes.</p>
+<ul>
+<li><strong>Points forts</strong> : pliage en moins de 3 secondes selon le fabricant. Batterie présentée comme approuvée pour le transport aérien. Longueur pliée de 46,5 cm, compacte pour un coffre. Rayon de braquage de 78 cm, pratique à l'intérieur.</li>
+<li><strong>Données utiles</strong> : 24 kg sans batterie et 26,7 kg avec selon le site français du fabricant. Autonomie 20 km, vitesse 6 km/h, charge maximale 115 kg, pente de 10°. Batterie lithium-ion de 25,3 V et 10 Ah, recharge en 5 heures.</li>
+<li><strong>Limites</strong> : la brochure française indique des poids légèrement différents (24,4 kg et 27,1 kg). Largeur et hauteur pliées, largeur d'assise et caractère amovible de la batterie non précisés clairement. Charge maximale de 115 kg, la plus basse de la sélection.</li>
+</ul>
+<p><a href="{AMZ:WHILL Model F fauteuil roulant electrique}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Pride i-Go : idéal pour un fauteuil léger à soulever</h2>
+<p><strong>Pour qui ?</strong> Une personne qui fait surtout des sorties courtes (courses, rendez-vous, promenade) et un aidant qui doit soulever le fauteuil sans trop d'effort.</p>
+<ul>
+<li><strong>Points forts</strong> : 19,8 kg sans batteries selon la brochure française du fabricant, avec deux batteries de 1,35 kg chacune. Format plié compact de 58 x 31 x 75,5 cm. Deux moteurs.</li>
+<li><strong>Données utiles</strong> : autonomie jusqu'à 10 km par batterie (valeur théorique), charge maximale 120 kg, largeur d'assise 47 cm. Deux batteries lithium-ion de 24 V et 6,6 Ah. Deux moteurs de 200 W, vitesse 4,5 km/h.</li>
+<li><strong>Limites</strong> : vitesse de 4,5 km/h, la plus lente de la sélection. Compatibilité avion et batterie amovible non précisées sur la brochure. Un revendeur britannique donne d'autres dimensions (assise de 43 cm) : vérifiez la fiche de la version vendue.</li>
+</ul>
+<p><a href="{AMZ:Pride i-Go fauteuil roulant electrique pliant}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. WHILL Model C Lite : idéal pour le plus léger de la sélection</h2>
+<p><strong>Pour qui ?</strong> Une personne qui veut un fauteuil électrique pliant haut de gamme, très léger, avec une autonomie qui peut être augmentée.</p>
+<ul>
+<li><strong>Points forts</strong> : 17 kg selon le site français du fabricant. Batterie amovible. Autonomie de 23,4 km avec la batterie standard, 38,5 km avec la batterie haute capacité en option. Franchissement d'obstacles de 5 cm, protection contre les projections d'eau (IPX5).</li>
+<li><strong>Données utiles</strong> : double moteur. Le fabricant ne précise pas si le poids de 17 kg inclut la batterie.</li>
+<li><strong>Limites</strong> : charge maximale, dimensions pliées, largeur d'assise, vitesse et compatibilité avion non précisées sur la page consultée. Demandez la fiche technique complète avant d'acheter.</li>
+</ul>
+<p><a href="{AMZ:WHILL Model C Lite}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Mobiclinic Troya : idéal pour un premier fauteuil électrique à mettre dans le coffre</h2>
+<p><strong>Pour qui ?</strong> Une personne qui découvre le fauteuil électrique, pour des sorties de quelques kilomètres, avec un format plié qui tient dans la plupart des coffres.</p>
+<ul>
+<li><strong>Points forts</strong> : format plié de 64 x 34 x 74 cm selon la notice française. Batterie lithium de 1,7 kg, que la notice explique comment installer et retirer. Deux moteurs sans balais de 250 W. Largeur d'assise de 45 cm.</li>
+<li><strong>Données utiles</strong> : 24,8 kg sans batterie, autonomie 17 km, vitesse 8,5 km/h, charge maximale 120 kg. Batterie de 24 V et 10 Ah (une version 6 Ah existe).</li>
+<li><strong>Limites</strong> : compatibilité avion non précisée dans la notice. Autonomie modeste pour de longues sorties : voyez alors la version Plus Ultra.</li>
+</ul>
+<p><a href="{AMZ:Mobiclinic Troya fauteuil roulant electrique}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Mobiclinic Troya Plus Ultra : idéal pour la grande autonomie</h2>
+<p><strong>Pour qui ?</strong> Une personne qui fait de longues sorties à la journée ou qui ne veut pas recharger tous les jours.</p>
+<ul>
+<li><strong>Points forts</strong> : jusqu'à 51 km d'autonomie avec trois batteries lithium selon la notice française, de loin la plus grande de la sélection. Même châssis compact que la Troya.</li>
+<li><strong>Données utiles</strong> : 24,8 kg sans batteries, trois batteries de 24 V et 10 Ah de 1,7 kg chacune. Vitesse 8,5 km/h, charge maximale 120 kg, pente maximale de 15°, assise de 45 cm. Une version intermédiaire, la Troya Plus, est annoncée à 34 km avec deux batteries.</li>
+<li><strong>Limites</strong> : avec trois batteries, le poids total augmente d'environ 5 kg. Compatibilité avion non précisée.</li>
+</ul>
+<p><a href="{AMZ:Mobiclinic Troya Plus Ultra}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Quirumed Easy Plus Ultralight : idéal pour un fauteuil plié très bas</h2>
+<p><strong>Pour qui ?</strong> Une personne qui veut glisser son fauteuil sous la plage arrière d'un coffre peu profond, ou dont la corpulence demande une charge maximale un peu plus élevée.</p>
+<ul>
+<li><strong>Points forts</strong> : 24 kg batterie comprise selon le fabricant. Hauteur pliée de 30,5 cm seulement (71 x 58 x 30,5 cm). Batterie lithium amovible. Charge maximale de 135 kg.</li>
+<li><strong>Données utiles</strong> : autonomie 18 km, largeur d'assise 46 cm, batterie de 24 V et 11 Ah, un moteur sans balais à l'arrière.</li>
+<li><strong>Limites</strong> : vitesse indiquée de façon incomplète sur la fiche (« 8 km »). Compatibilité avion non précisée. Attention à ne pas confondre avec l'Easy Plus standard, bien plus lourde.</li>
+</ul>
+<p><a href="{AMZ:Quirumed Easy Plus Ultralight}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Motorlight : idéal pour un achat chez un distributeur médical</h2>
+<p><strong>Pour qui ?</strong> Une personne qui préfère passer par un réseau de distributeurs français de matériel médical, avec un conseil en magasin.</p>
+<ul>
+<li><strong>Points forts</strong> : distribué en France par Identités. Batterie lithium de 20 Ah, qui se recharge sans être retirée. Deux moteurs de 180 W. Charge maximale de 125 kg, largeur d'assise 45 cm.</li>
+<li><strong>Données utiles</strong> : 29 kg, dimensions pliées de 67 x 80 x 35 cm.</li>
+<li><strong>Limites</strong> : autonomie, vitesse et compatibilité avion non précisées sur la fiche consultée. On ne sait pas si le poids inclut la batterie. Plus lourd que les modèles de voyage.</li>
+</ul>
+<p><a href="{AMZ:fauteuil roulant electrique pliant Motorlight}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Swift Pro : idéal pour les chemins et la forte corpulence</h2>
+<p><strong>Pour qui ?</strong> Une personne qui sort sur des terrains variés (chemins, parcs, trottoirs abîmés) et qui recherche une charge maximale élevée.</p>
+<ul>
+<li><strong>Points forts</strong> : présenté comme tout-terrain par le revendeur français. Autonomie jusqu'à 23 km, vitesse 8 km/h, deux moteurs. Batterie lithium de 20 Ah.</li>
+<li><strong>Données utiles</strong> : 30,3 kg, dimensions pliées de 77 x 64 x 50 cm, assise de 42 cm.</li>
+<li><strong>Limites</strong> : la même page indique 150 kg dans la fiche technique et 200 kg en en-tête : retenez la valeur la plus prudente et demandez confirmation. Le plus lourd et le plus encombrant de la sélection, moins adapté aux voyages. Compatibilité avion non précisée.</li>
+</ul>
+<p><a href="{AMZ:Swift Pro fauteuil roulant electrique tout terrain pliant}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment choisir</h2>
+<p>Partez de l'usage, puis vérifiez chaque chiffre sur la fiche :</p>
+<ul>
+<li><strong>Le poids à soulever</strong> : regardez le poids sans batterie, puisqu'on retire souvent la batterie avant de charger le fauteuil (WHILL C Lite, Pride i-Go).</li>
+<li><strong>Le coffre</strong> : mesurez la longueur, la largeur et la hauteur utiles de votre coffre, puis comparez avec les dimensions pliées.</li>
+<li><strong>L'autonomie</strong> : comptez large. Pour de longues journées, une deuxième ou troisième batterie change tout (Troya Plus Ultra, C Lite en option).</li>
+<li><strong>L'avion</strong> : seules certaines fiches mentionnent une batterie adaptée au transport aérien (WHILL Model F). Prévenez toujours la compagnie à l'avance, avec la fiche de la batterie.</li>
+<li><strong>La corpulence</strong> : gardez de la marge sur la charge maximale et vérifiez la largeur d'assise.</li>
+<li><strong>Le confort</strong> : l'essai reste indispensable, en particulier pour l'assise, les accoudoirs et la commande.</li>
+</ul>
+<p>Avant d'acheter, renseignez-vous sur la prise en charge : un fauteuil prescrit et inscrit à la liste des produits remboursables peut être financé intégralement, après un essai chez un distributeur. Tout est expliqué dans notre guide du <a href="{R}fauteuil-roulant-rembourse-100/">fauteuil roulant remboursé à 100 %</a>. Si la marche reste possible avec un appui, comparez aussi avec un <a href="{R}deambulateur-ou-rollator/">déambulateur ou un rollator</a>. Enfin, un fauteuil demande des passages dégagés : notre guide pour <a href="{R}amenager-logement-personne-agee/">aménager le logement pièce par pièce</a> vous aide à préparer la maison.</p>
+""",
+  faq=[("Quel est le fauteuil roulant électrique pliant le plus léger ?", "Dans notre sélection, le WHILL Model C Lite est annoncé à 17 kg et le Pride i-Go à 19,8 kg sans batteries. Vérifiez toujours si le poids indiqué inclut ou non la batterie, car l'écart peut atteindre plusieurs kilos."),
+       ("Peut-on prendre l'avion avec un fauteuil roulant électrique pliant ?", "Souvent oui, mais c'est la compagnie aérienne qui décide, notamment selon le type et la capacité de la batterie. Certaines fiches, comme celle du WHILL Model F, indiquent une batterie approuvée pour le transport aérien. Contactez la compagnie bien avant le départ avec la fiche technique de la batterie."),
+       ("Avez-vous testé ces fauteuils roulants électriques ?", "Non. Cette sélection repose uniquement sur les caractéristiques publiées par les fabricants et les revendeurs. Nous ne donnons ni note ni avis de prise en main. Un essai chez un distributeur, idéalement avec un ergothérapeute, reste la meilleure façon de choisir.")],
+  short="Top 8 fauteuils électriques pliants", cat="Se déplacer")
+
+AUTO_META['meilleur-scooter-electrique-senior/'] = ('🏆', 'sable')
+g("meilleur-scooter-electrique-senior/",
+  "Meilleur scooter électrique senior 2026 : top 10 scooters PMR",
+  "Meilleur scooter électrique pour senior : 10 modèles comparés",
+  "Scooters PMR 3 ou 4 roues, pliables, démontables ou routiers : 10 modèles vendus en France comparés selon le poids, l'autonomie et la charge maximale.",
+  """
+<p>Quand les jambes ne suivent plus pour aller au marché, à la boulangerie ou chez des amis, un scooter électrique pour personne à mobilité réduite (PMR) permet de garder son indépendance dehors. Mais entre un petit modèle pliable qui tient dans un coffre et un scooter routier qui remplace presque la voiture, les écarts sont énormes. Voici dix scooters vendus en France, à trois ou quatre roues, classés selon l'usage auquel ils conviennent le mieux.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs (brochures, notices, distributeurs français de matériel médical, avis de la Haute Autorité de santé), sans test en main. Nous n'indiquons que les chiffres lus sur ces fiches ; quand une donnée n'y figure pas, nous écrivons « non précisé », et nous signalons les cas où deux sources ne donnent pas la même valeur. Vérifiez toujours la notice du modèle que vous achetez. Avant de choisir, parlez-en à votre médecin : la conduite d'un scooter demande une bonne vision, des réflexes et la capacité à tenir assis sans fatigue.</div>
+<h2>Le comparatif en un coup d'œil</h2>
+<table><thead><tr><th>Modèle</th><th>Roues</th><th>Transport</th><th>Autonomie</th><th>Vitesse</th><th>Charge max</th><th>Idéal pour</th></tr></thead><tbody>
+<tr><td>Invacare Leo</td><td>4</td><td>Démontable en 5 parties</td><td>38 km</td><td>8 km/h</td><td>136 kg</td><td>Notre choix : polyvalent ville et coffre</td></tr>
+<tr><td>Pride Go-Go Elite Traveller</td><td>3 ou 4</td><td>Démontable, pièces de 15 kg max</td><td>16 à 25,75 km</td><td>7 km/h</td><td>125 kg</td><td>Des pièces légères à charger</td></tr>
+<tr><td>Moving Life ATTO</td><td>3</td><td>Pliable façon valise</td><td>Jusqu'à 30 km</td><td>6,4 km/h</td><td>120 kg</td><td>Le train et l'avion</td></tr>
+<tr><td>Invacare Colibri</td><td>Voir détail</td><td>Démontable en 5 parties</td><td>Voir détail</td><td>8 km/h</td><td>136 kg</td><td>Les petits trajets</td></tr>
+<tr><td>Vermeiren Eris</td><td>4</td><td>Siège pliant, colonne repliable</td><td>29 ou 37 km</td><td>10 km/h</td><td>140 kg</td><td>Un scooter de quartier plus rapide</td></tr>
+<tr><td>Mobiclinic Libra</td><td>4</td><td>Démontable</td><td>Environ 30 km</td><td>8 km/h</td><td>135 kg</td><td>Un 4 roues confortable en ville</td></tr>
+<tr><td>Mobiclinic Piscis</td><td>Non précisé</td><td>Non précisé</td><td>Jusqu'à 34 km</td><td>8 km/h</td><td>135 kg</td><td>Le siège pivotant</td></tr>
+<tr><td>Kompact4 Plus</td><td>4</td><td>Non précisé</td><td>33 km</td><td>8,6 km/h</td><td>147 kg</td><td>L'usage quotidien en extérieur</td></tr>
+<tr><td>Invacare Comet Pro</td><td>4</td><td>Non démontable</td><td>55 km</td><td>15 km/h</td><td>160 kg</td><td>Les longues distances</td></tr>
+<tr><td>Vermeiren Carpo 2 SE</td><td>4</td><td>Non précisé</td><td>68,21 km</td><td>10 km/h</td><td>150 kg</td><td>La plus grande autonomie</td></tr>
+</tbody></table>
+<p>Retenez trois repères : un scooter à 3 roues tourne plus court et convient mieux aux espaces étroits, un 4 roues est plus stable sur les trottoirs inégaux ; si le scooter doit voyager en voiture, regardez le poids de la pièce la plus lourde plutôt que le poids total ; et l'autonomie annoncée baisse en côte, par temps froid et avec une charge plus lourde.</p>
+
+<h2>1. Invacare Leo : idéal pour un scooter polyvalent (notre choix)</h2>
+<p><strong>Pour qui ?</strong> Une personne qui veut un seul scooter pour ses sorties en ville, assez confortable pour les trajets quotidiens et démontable pour le coffre d'une voiture.</p>
+<ul>
+<li><strong>Points forts</strong> : 4 roues. Démontable sans outils en 5 parties (siège, bloc moteur, plancher et poste de conduite, batteries, panier) selon l'avis de la Haute Autorité de santé. Autonomie de 38 km selon le distributeur Girod Médical et la HAS. Inscrit sur la liste des produits remboursables, avec un renouvellement recommandé par la HAS en 2022.</li>
+<li><strong>Données utiles</strong> : vitesse 8 km/h, charge maximale 136 kg, pente de 10°. Deux batteries de 12 V et 36 Ah, amovibles. Dimensions de 122 x 59 x 99 cm.</li>
+<li><strong>Limites</strong> : 83 kg au total, avec une pièce la plus lourde de 25 kg : le chargement demande de la force. Une autre fiche revendeur annonce 36 km d'autonomie.</li>
+</ul>
+<p><a href="{AMZ:Invacare Leo scooter}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Pride Go-Go Elite Traveller : idéal pour des pièces légères à charger</h2>
+<p><strong>Pour qui ?</strong> Une personne qui emmène souvent son scooter en voiture, avec un aidant qui doit pouvoir le charger sans se faire mal au dos.</p>
+<ul>
+<li><strong>Points forts</strong> : existe en 3 ou 4 roues. Se démonte en une partie avant, une partie arrière et un boîtier batterie, « même d'une seule main » selon la brochure française du fabricant. Pièce la plus lourde de 12,75 à 15 kg selon la version.</li>
+<li><strong>Données utiles</strong> : 34 kg sans le boîtier batterie (9,5 ou 13 kg selon la batterie). Autonomie jusqu'à 16 km avec les batteries de 12 Ah, jusqu'à 25,75 km avec celles de 17 Ah en option. Vitesse 7 km/h, charge maximale 125 kg. Garde au sol d'environ 6,5 cm.</li>
+<li><strong>Limites</strong> : pente franchissable non précisée. Garde au sol basse, qui demande de la prudence sur les bordures.</li>
+</ul>
+<p><a href="{AMZ:Pride Go-Go Elite Traveller}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Moving Life ATTO : idéal pour le train et l'avion</h2>
+<p><strong>Pour qui ?</strong> Une personne qui voyage et veut un scooter qu'on roule comme une valise dans une gare ou un aéroport.</p>
+<ul>
+<li><strong>Points forts</strong> : 3 roues. Se plie en format valise à tirer et se sépare en 2 parties. Batterie lithium présentée par le fabricant comme acceptée par la plupart des compagnies aériennes. Garde au sol de 12 cm selon le fabricant.</li>
+<li><strong>Données utiles</strong> : 30 kg selon le revendeur français Scoot Motion, pièce la plus lourde d'environ 16 kg. Autonomie jusqu'à 30 km (jusqu'à 40 km avec la batterie longue autonomie selon le fabricant). Vitesse 6,4 km/h, charge maximale 120 kg, obstacles jusqu'à 7 cm.</li>
+<li><strong>Limites</strong> : dimensions pliées et capacité de la batterie non précisées sur les pages consultées. Comme pour tout appareil à batterie, l'accord de la compagnie aérienne reste nécessaire.</li>
+</ul>
+<p><a href="{AMZ:Moving Life ATTO scooter pliable}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Invacare Colibri : idéal pour les petits trajets</h2>
+<p><strong>Pour qui ?</strong> Une personne qui fait de courtes sorties (commerces, résidence, centre-ville) et veut un scooter compact pour le coffre d'une petite voiture.</p>
+<ul>
+<li><strong>Points forts</strong> : se démonte sans outils en 5 parties, avec une pièce la plus lourde de 15,6 kg selon Girod Médical. Format compact de 101 x 50,5 cm. Charge maximale de 136 kg.</li>
+<li><strong>Données utiles</strong> : 44 à 49 kg selon la version. Vitesse 8 km/h. Batteries de 12 ou 18 Ah, amovibles. Pente de 6°.</li>
+<li><strong>Limites</strong> : les sources se contredisent sur le nombre de roues (4 chez un distributeur, 3 dans l'avis de la HAS pour la version Outdoor) et sur l'autonomie (de 11 à 25 km selon les batteries chez un distributeur, 16 km ailleurs). Vérifiez la version exacte avant d'acheter.</li>
+</ul>
+<p><a href="{AMZ:Invacare Colibri scooter}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Vermeiren Eris : idéal pour un scooter de quartier un peu plus rapide</h2>
+<p><strong>Pour qui ?</strong> Une personne qui veut aller jusqu'à 10 km/h pour ses trajets en ville, avec un scooter qui reste transportable.</p>
+<ul>
+<li><strong>Points forts</strong> : 4 roues, vitesse 10 km/h, charge maximale de 140 kg. Siège pliant et colonne repliable (95 x 57 cm replié selon la notice). Autonomie de 29 km avec les batteries de 38 Ah, 37 km avec celles de 50 Ah, selon la notice. Inscription à la liste des produits remboursables recommandée par la HAS en 2018.</li>
+<li><strong>Données utiles</strong> : 75 kg selon la HAS, 46 kg sans siège ni batteries selon la notice. Batteries de 26,5 kg, siège de 11 kg.</li>
+<li><strong>Limites</strong> : pente de 6° seulement. Batteries lourdes à manipuler.</li>
+</ul>
+<p><a href="{AMZ:Vermeiren Eris scooter}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Mobiclinic Libra : idéal pour un 4 roues confortable en ville</h2>
+<p><strong>Pour qui ?</strong> Une personne qui sort chaque jour en ville et recherche un scooter 4 roues stable, avec siège et batteries amovibles.</p>
+<ul>
+<li><strong>Points forts</strong> : 4 roues, démontable, siège et batteries amovibles selon le site français de la marque. Pente de 12°. Charge maximale de 135 kg.</li>
+<li><strong>Données utiles</strong> : 87,9 kg avec batteries, vitesse 8 km/h, dimensions de 128 x 61 x 111 cm. Deux batteries gel de 12 V et 36 Ah.</li>
+<li><strong>Limites</strong> : la fiche annonce une autonomie d'environ 30 km, mais le titre du produit indique 45 km : retenez la valeur la plus prudente. Batterie seule de 24,7 kg, poids de la pièce la plus lourde non précisé.</li>
+</ul>
+<p><a href="{AMZ:Mobiclinic Libra scooter}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Mobiclinic Piscis : idéal pour le siège pivotant</h2>
+<p><strong>Pour qui ?</strong> Une personne pour qui s'asseoir sur le scooter et en descendre est la difficulté principale.</p>
+<ul>
+<li><strong>Points forts</strong> : siège pivotant à 360° et dossier rabattable, qui facilitent le transfert. Roulettes anti-bascule. Pente de 12°, charge maximale de 135 kg.</li>
+<li><strong>Données utiles</strong> : 67,5 kg avec batteries, vitesse 8 km/h, dimensions de 116 x 58 x 95 cm. Deux batteries gel de 12 V et 36 Ah. Autonomie jusqu'à 34 km, donnée à titre indicatif.</li>
+<li><strong>Limites</strong> : garde au sol de 4 cm seulement, à surveiller sur les trottoirs. Le titre du produit annonce 45 km, la fiche 34 km. Nombre de roues et démontage non précisés.</li>
+</ul>
+<p><a href="{AMZ:Mobiclinic Piscis scooter}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Kompact4 Plus : idéal pour un usage quotidien en extérieur</h2>
+<p><strong>Pour qui ?</strong> Une personne qui utilise son scooter tous les jours dehors et recherche une charge maximale élevée.</p>
+<ul>
+<li><strong>Points forts</strong> : 4 roues, charge maximale de 147 kg, moteur de 500 W, pente de 10°. Distribué en France par Medtrade. Inscription à la liste des produits remboursables recommandée par la HAS en décembre 2024.</li>
+<li><strong>Données utiles</strong> : 93 kg, autonomie de 33 km (mesurée avec un utilisateur de 75 kg), vitesse 8,6 km/h, dimensions de 130 x 65 x 133 cm. Deux batteries de 12 V et 38 Ah. Garde au sol de 8 cm.</li>
+<li><strong>Limites</strong> : diamètre de giration de 2,8 m, peu adapté aux petits espaces. Démontage non précisé.</li>
+</ul>
+<p><a href="{AMZ:scooter PMR Kompact4 Plus}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>9. Invacare Comet Pro : idéal pour les longues distances</h2>
+<p><strong>Pour qui ?</strong> Une personne qui vit à la campagne ou en périphérie et veut parcourir de longues distances sans voiture.</p>
+<ul>
+<li><strong>Points forts</strong> : 4 roues, autonomie de 55 km, vitesse de 15 km/h, charge maximale de 160 kg selon Girod Médical et Bastide. Franchissement d'obstacles de 10 cm. Une variante Comet Ultra va jusqu'à 220 kg.</li>
+<li><strong>Données utiles</strong> : 136 kg, dimensions de 145 x 67 à 69 x 126 cm, deux batteries de 75 Ah, pente de 10°.</li>
+<li><strong>Limites</strong> : non démontable (pièce la plus lourde de 63 kg) : il faut un garage ou un abri, et il ne se transporte pas en voiture.</li>
+</ul>
+<p><a href="{AMZ:Invacare Comet Pro scooter}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>10. Vermeiren Carpo 2 SE : idéal pour la plus grande autonomie</h2>
+<p><strong>Pour qui ?</strong> Une personne qui fait de très longues sorties et privilégie le confort routier.</p>
+<ul>
+<li><strong>Points forts</strong> : autonomie de 68,21 km selon l'avis de la HAS, la plus grande de la sélection. Moteur de 750 W, charge maximale de 150 kg, garde au sol de 8 cm, pente de 10°.</li>
+<li><strong>Données utiles</strong> : 147 kg, dimensions de 153 x 66 x 144 cm (84 cm de large avec les rétroviseurs), vitesse 10 km/h. Deux batteries de 12 V et 80 Ah, avec une charge d'environ 20 heures.</li>
+<li><strong>Limites</strong> : très lourd et encombrant, diamètre de giration de 4,1 m. Démontage non précisé : prévoyez un lieu de rangement avec une prise électrique.</li>
+</ul>
+<p><a href="{AMZ:Vermeiren Carpo scooter}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment choisir</h2>
+<p>Commencez par l'usage, puis vérifiez les chiffres :</p>
+<ul>
+<li><strong>Voyages en train ou en avion</strong> : un modèle pliable comme le Moving Life ATTO, en vérifiant toujours la batterie auprès de la compagnie.</li>
+<li><strong>Transport en voiture</strong> : un scooter démontable dont la pièce la plus lourde reste raisonnable (Go-Go Elite Traveller, Colibri, Leo).</li>
+<li><strong>Sorties quotidiennes en ville</strong> : un 4 roues de gamme intermédiaire (Leo, Eris, Libra, Kompact4 Plus).</li>
+<li><strong>Grandes distances</strong> : un scooter routier (Comet Pro, Carpo 2 SE), à condition d'avoir un garage.</li>
+<li><strong>Difficulté à s'installer</strong> : un siège pivotant (Piscis).</li>
+<li><strong>Rangement et recharge</strong> : prévoyez une place à l'abri avec une prise, et des passages assez larges.</li>
+</ul>
+<p>Un scooter ne remplace pas tous les équipements : à l'intérieur, un <a href="{R}deambulateur-ou-rollator/">déambulateur ou un rollator</a> reste souvent plus pratique, et notre <a href="{R}meilleur-rollator/">comparatif des rollators</a> vous aidera à choisir. Côté financement, les scooters font partie des véhicules pour personnes en situation de handicap concernés par la réforme de 2025, sur prescription d'un médecin spécialiste : voir notre guide du <a href="{R}fauteuil-roulant-rembourse-100/">fauteuil roulant remboursé à 100 %</a>. Pensez aussi à l'accès au logement (seuils, marches, garage) avec notre guide pour <a href="{R}amenager-logement-personne-agee/">aménager le logement pièce par pièce</a>.</p>
+""",
+  faq=[("Quel scooter électrique choisir pour une personne âgée ?", "Tout dépend de l'usage. Pour la ville et le coffre de la voiture, un 4 roues démontable comme l'Invacare Leo est polyvalent. Pour voyager, un modèle pliable comme le Moving Life ATTO est plus pratique. Pour de longues distances, un scooter routier comme l'Invacare Comet Pro. Parlez-en à votre médecin avant l'achat."),
+       ("Scooter 3 roues ou 4 roues : lequel est le plus sûr ?", "Un scooter à 4 roues est en général plus stable, notamment sur les trottoirs inégaux et dans les virages. Un 3 roues tourne plus court et se manœuvre mieux dans les espaces étroits. Un ergothérapeute peut vous aider à choisir selon votre équilibre et vos trajets."),
+       ("Avez-vous testé ces scooters électriques ?", "Non. Cette sélection repose uniquement sur les caractéristiques publiées par les fabricants, les revendeurs et les avis de la Haute Autorité de santé. Nous ne donnons ni note ni avis de prise en main, et nous vous conseillons un essai chez un distributeur avant d'acheter.")],
+  short="Top 10 scooters électriques senior", cat="Se déplacer")

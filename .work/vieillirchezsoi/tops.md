@@ -1,10 +1,10 @@
 # Tops 10 à venir pour Vieillir chez soi (un par jour)
 # Format : - [ ] slug/ | requête visée | catégorie | produits à couvrir
-# Déjà publiés : meilleur-telephone-portable-senior/, meilleur-rollator/, meilleur-fauteuil-releveur/, meilleur-siege-de-douche/, meilleur-casque-tv-senior/, meilleur-detecteur-de-chute/, meilleur-rehausseur-wc/
+# Déjà publiés : meilleur-telephone-portable-senior/, meilleur-rollator/, meilleur-fauteuil-releveur/, meilleur-siege-de-douche/, meilleur-casque-tv-senior/, meilleur-detecteur-de-chute/, meilleur-rehausseur-wc/, meilleur-fauteuil-roulant-electrique-pliant/, meilleur-scooter-electrique-senior/
 
 - [x] meilleur-rehausseur-wc/ | meilleur rehausseur WC | Salle de bains | avec et sans accoudoirs, fixation
-- [ ] meilleur-fauteuil-roulant-electrique-pliant/ | meilleur fauteuil roulant électrique pliant de voyage | Se déplacer | top 10 de fauteuils roulants électriques pliants vendus sur Amazon.fr (poids, autonomie, charge max, largeur pliée, batterie amovible) ; h1 « Meilleur fauteuil roulant électrique pliant de voyage » et title « Fauteuil roulant électrique pliant de voyage : top 10 2026 » ; angle : léger, compact, facile à mettre dans un coffre, compatible avion si la fiche l'indique ; une phrase courte en intro : sur prescription, un fauteuil peut être pris en charge à 100 % depuis le 1er décembre 2025, lien {R}fauteuil-roulant-rembourse-100/ ; sans Easwe
-- [ ] meilleur-scooter-electrique-senior/ | meilleur scooter électrique pour senior | Se déplacer | scooters PMR 3 et 4 roues, pliables, sans Easwe
+- [x] meilleur-fauteuil-roulant-electrique-pliant/ | meilleur fauteuil roulant électrique pliant de voyage | Se déplacer | top 10 de fauteuils roulants électriques pliants vendus sur Amazon.fr (poids, autonomie, charge max, largeur pliée, batterie amovible) ; h1 « Meilleur fauteuil roulant électrique pliant de voyage » et title « Fauteuil roulant électrique pliant de voyage : top 10 2026 » ; angle : léger, compact, facile à mettre dans un coffre, compatible avion si la fiche l'indique ; une phrase courte en intro : sur prescription, un fauteuil peut être pris en charge à 100 % depuis le 1er décembre 2025, lien {R}fauteuil-roulant-rembourse-100/ ; sans Easwe
+- [x] meilleur-scooter-electrique-senior/ | meilleur scooter électrique pour senior | Se déplacer | scooters PMR 3 et 4 roues, pliables, sans Easwe
 - [ ] meilleur-tricycle-electrique-senior/ | meilleur tricycle électrique senior | Se déplacer | tricycles adultes à assistance électrique
 - [ ] meilleur-deambulateur/ | meilleur déambulateur | Se déplacer | fixe, 2 roues, pliant
 - [ ] meilleure-canne-de-marche/ | meilleure canne de marche | Se déplacer | pliante, réglable, tripode, quadripode
