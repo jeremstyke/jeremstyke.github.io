@@ -506,7 +506,7 @@
         a.forEach(function (d) {
           var li = el('li');
           var date = new Date(d.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
-          li.appendChild(el('span', { class: 'd-name' }, (/outils/.test(d.type) ? '📄 ' : '🖼️ ') + d.name.replace(/</g, '&lt;') + '<small>' + fmt(d.size) + ' · ' + date + '</small>'));
+          li.appendChild(el('span', { class: 'd-name' }, (/pdf/.test(d.type) ? '📄 ' : '🖼️ ') + d.name.replace(/</g, '&lt;') + '<small>' + fmt(d.size) + ' · ' + date + '</small>'));
           var dl = el('a', { class: 'dl', href: URL.createObjectURL(Docs.blob(d)), download: d.name }, 'Télécharger');
           var del = el('button', { type: 'button', class: 'del', 'aria-label': 'Supprimer' }, 'Supprimer');
           del.onclick = function () { if (confirmDel(del)) Docs.del(d.id).then(draw); };

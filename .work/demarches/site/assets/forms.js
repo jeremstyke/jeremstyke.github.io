@@ -194,7 +194,7 @@
           keep.onclick = function () { keep.disabled = true; window.PDFDemDocs.add(name, blob).then(function () { keep.outerHTML = '<p class="kept">✓ Gardé sur cet appareil, dans <a href="' + HOME + 'mes-documents/">Mes documents</a>.</p>'; }); };
           box.appendChild(keep);
         }
-        box.appendChild(el('p', { class: 'note' }, 'Besoin de joindre une pièce d\'identité dans le même fichier ? Utilisez <a href="/outils/fusionner-pdf/">Fusionner des PDF</a>.'));
+        box.appendChild(el('p', { class: 'note' }, 'Besoin de joindre une pièce d\'identité dans le même fichier ? Utilisez <a href="/">Fusionner des PDF</a>.'));
         out.appendChild(box);
       }).catch(function (e) { console.error(e); out.innerHTML = '<p class="status">❌ Le PDF n\'a pas pu être créé. Réessayez.</p>'; }).then(function () { go.disabled = false; });
     };
