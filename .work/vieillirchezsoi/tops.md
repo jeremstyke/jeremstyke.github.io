@@ -3,7 +3,7 @@
 # Déjà publiés : meilleur-telephone-portable-senior/, meilleur-rollator/, meilleur-fauteuil-releveur/, meilleur-siege-de-douche/, meilleur-casque-tv-senior/, meilleur-detecteur-de-chute/, meilleur-rehausseur-wc/
 
 - [x] meilleur-rehausseur-wc/ | meilleur rehausseur WC | Salle de bains | avec et sans accoudoirs, fixation
-- [ ] meilleur-fauteuil-roulant-electrique/ | meilleur fauteuil roulant électrique pliant de voyage | Se déplacer | modèles pliants et légers vendus sur Amazon.fr pour un achat sans prescription (voyage, usage occasionnel), sans Easwe ; dire dès l'intro que, sur prescription, un fauteuil peut être pris en charge à 100 % depuis le 1er décembre 2025 et renvoyer vers {R}fauteuil-roulant-rembourse-100/
+- [ ] meilleur-fauteuil-roulant-electrique-pliant/ | meilleur fauteuil roulant électrique pliant | Se déplacer | top 10 de fauteuils roulants électriques pliants vendus sur Amazon.fr (poids, autonomie, charge max, largeur pliée, batterie amovible) ; titre du type « Meilleur fauteuil roulant électrique pliant 2026 : top 10 » ; une phrase courte en intro : sur prescription, un fauteuil peut être pris en charge à 100 % depuis le 1er décembre 2025, lien {R}fauteuil-roulant-rembourse-100/ ; sans Easwe
 - [ ] meilleur-scooter-electrique-senior/ | meilleur scooter électrique pour senior | Se déplacer | scooters PMR 3 et 4 roues, pliables, sans Easwe
 - [ ] meilleur-tricycle-electrique-senior/ | meilleur tricycle électrique senior | Se déplacer | tricycles adultes à assistance électrique
 - [ ] meilleur-deambulateur/ | meilleur déambulateur | Se déplacer | fixe, 2 roues, pliant
