@@ -25,7 +25,6 @@
     // 22 oct 2026 (18h45, Jeremy): at opening, when the Baton popup is not shown, an Adsgram interstitial (block int-55508). Never for Premium.
     function adInt() {
       // 10 nov 2026 (Jeremy): for 7 days (until 17 nov 2026), no Adsgram: every interstitial is the Big Bang AI promo
-      if (Date.now() < 1794956340000) return saPromoOr(() => {});
       try {
         // 25 oct 2026 (3h45, Jeremy): when Adsgram has no ad, an Ads Galaxy video (game 135) takes over
         const agx = () => {};  /* 26 oct 2026 (18h25, Jeremy): no more Ads Galaxy backup, it played right after the Adsgram ad */
@@ -90,6 +89,7 @@
     // 5 nov 2026 (00h22, Jeremy): one opening out of two shows the SayApp promo (sayapp/promo.js) instead of the ad
     function saPromoOr(fb) {
       // 10 nov 2026 (21h52, Jeremy): the SayApp promo is replaced by the Big Bang AI News interstitial (bigbang/promo.js)
+      return fb();  // 15 nov 2026 (Jeremy): Adsgram only, no more own interstitial (the PostPay promo below is no longer shown)
       let n = 0; try { n = Number(localStorage.getItem('mct_sa_n') || 0) + 1; localStorage.setItem('mct_sa_n', String(n)); } catch (e) {}
       if (Date.now() >= 1794956340000 && Math.random() < 0.5) return fb();  // 5 nov 2026 (00h57, Jeremy): at random, not every other time. 10 nov 2026: until 17 nov, always Big Bang AI
       let lg = 'en'; try { lg = LANG; } catch (e) {}
