@@ -307,7 +307,9 @@
     try { tonCall({ action: 'mon_agt' }).then((g) => {
       if (!g || !g.ok || !document.body.contains(w)) return;
       const mx = Number(g.max || 5), dn = Number(g.done || 0);
-      if (dn >= mx) { w.innerHTML = '<b style="display:block;font-size:15px;margin-bottom:6px">' + T.h + '</b><div style="color:#8fa197;font-weight:700">' + agtFull(mx) + '</div>'; w.hidden = false; return; }
+      window.__agtMx = mx;
+      // 16 nov 2026 (Jeremy): the daily mission(s) done: the block disappears completely (no "come back tomorrow" message)
+      if (dn >= mx) { gone = true; document.querySelectorAll('.agtk').forEach((x) => x.remove()); w.remove(); return; }
       if (Number(g.next) > Date.now() + 2000) { try { localStorage.setItem('mct_agt_until', String(g.next)); } catch (e) {} w.remove(); put(); return; }
       const hb = w.querySelector('b'); window.__agtDn = dn; if (hb) hb.textContent = T.h + ' · ' + dn + '/' + mx + (agtNx(dn) ? ' · ' + agtNx(dn) : '');  /* 2 nov 2026 (11h03, Jeremy): the next reward waiting */
     }).catch(() => {}); } catch (e) {}
@@ -318,7 +320,7 @@
     el.addEventListener('reward', () => {
       try { localStorage.setItem('mct_agt_until', String(Date.now() + 300000)); } catch (e) {}  // 16 nov 2026 (Jeremy): 5 minutes between two partner missions again
       try { haptic('ok'); } catch (e) {}
-      try { const nd = (window.__agtDn || 0) + 1, nx = agtNx(nd, true); window.__agtDn = nd; toast(T.ok + (nx ? ' · ' + nx : '')); } catch (e) {}
+      try { const nd = (window.__agtDn || 0) + 1, nx = agtNx(nd, true); window.__agtDn = nd; toast(T.ok + (nx ? ' · ' + nx : '')); if (nd >= (window.__agtMx || 1)) { gone = true; setTimeout(() => document.querySelectorAll('.agtk').forEach((x) => x.remove()), 2500); } } catch (e) {}
       setTimeout(() => { try { if (VIEW === 'market') market(); else if (typeof loadMe === 'function') loadMe(); } catch (e) {} }, 2500);  // the cash comes from the server (reward URL)
     });
     w.classList.add('agtk');
