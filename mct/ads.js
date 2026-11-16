@@ -249,13 +249,13 @@
   card();
 })();
 
-// 25 oct 2026 (20h, Jeremy): Adsgram Task block task-56017 on the market, right under the daily missions.
+// 25 oct 2026 (20h, Jeremy): Adsgram Task block task-59993 on the market, right under the daily missions.
 // The player does the partner task, Adsgram calls the reward URL (Supabase function mct-adreward) and he gets in-game cash
 // (mct_ad_reward, amount in ds_config mct_adreward_usd). Hidden when Adsgram has no task to show.
 // 26 oct 2026 (23h30, Jeremy): the tasks are what earns the most: $600 (was $300, more than a video, less than the 1,000 ⭐ pack),
 // and the block also shows in the "Out of cash?" sheet.
 (() => {
-  const BLOCK = 'task-56017';
+  const BLOCK = 'task-59993';
   const TT = {
     fr: { h: '🤝 Mission partenaire', r: '+500 $ · +500 $BATON', go: 'Go', claim: 'Récupérer', done: 'Fait ✅', wait: 'Prochaine mission dans', ok: '💵 +500 $ ajoutés à ton cash, et +500 $BATON sur Pass The Baton !' },
     id: { h: '🤝 Misi partner', r: '+$500 · +500 $BATON', go: 'Mulai', claim: 'Klaim', done: 'Selesai ✅', wait: 'Misi berikutnya dalam', ok: '💵 +$500 ditambahkan ke uangmu, dan +500 $BATON di Pass The Baton!' },
