@@ -33,8 +33,8 @@ button{font-family:inherit;font-weight:800;color:inherit;border:0;cursor:pointer
 .sub{display:flex;gap:7px;align-items:center;margin-top:5px;flex-wrap:wrap}
 .chip{font-size:13px;font-weight:800;background:rgba(255,255,255,.16);color:#fff;border-radius:99px;padding:4px 11px;white-space:nowrap}
 .chip.gold{background:var(--gold);color:var(--navy)}
-.scene{margin:10px 0 0;border-radius:26px;overflow:hidden;border:3px solid var(--navy);box-shadow:0 5px 0 var(--navy);background:linear-gradient(#4fb3f7,#bfe8ff 75%)}
-.sky{height:128px}
+.scene{margin:8px 0 0;border-radius:20px;overflow:hidden;border:3px solid var(--navy);box-shadow:0 5px 0 var(--navy);background:linear-gradient(#4fb3f7,#bfe8ff 75%)}
+.sky{height:84px}
 .sky svg{width:100%;height:100%;display:block}
 .sky .sun{animation:sun 4s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
 .sky .cloud{animation:drift 24s ease-in-out infinite alternate}
@@ -372,15 +372,15 @@ const BLD=[
 const bld = i => BLD[i]();
 let drawn = {};
 function buildSky() {
-  const W = 360, H = 128, base = H - 14;
+  const W = 360, H = 84, base = H - 10;
   let s = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMax slice">
-   <g class="cloud"><ellipse cx="60" cy="24" rx="24" ry="8" fill="#fff"/><ellipse cx="78" cy="19" rx="15" ry="8" fill="#fff"/></g>
-   <g class="cloud2"><ellipse cx="220" cy="14" rx="20" ry="6" fill="#fff"/><ellipse cx="233" cy="10" rx="11" ry="6" fill="#fff"/></g>
-   <circle class="sun" cx="326" cy="26" r="15" fill="#ffd34d" style="stroke:#12305e;stroke-width:2"/>`;
+   <g class="cloud"><ellipse cx="60" cy="16" rx="20" ry="6" fill="#fff"/><ellipse cx="74" cy="12" rx="12" ry="6" fill="#fff"/></g>
+   <g class="cloud2"><ellipse cx="220" cy="12" rx="16" ry="5" fill="#fff"/><ellipse cx="231" cy="8" rx="9" ry="5" fill="#fff"/></g>
+   <circle class="sun" cx="334" cy="18" r="11" fill="#ffd34d" style="stroke:#12305e;stroke-width:2"/>`;
   for (let i = 0; i < 10; i++) {
     const lvl = S.lv[i], x = 4 + i * 35;
-    if (lvl <= 0) { s += `<rect x="${x + 6}" y="${base - 14}" width="22" height="14" rx="4" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="1.6" stroke-dasharray="3 3"/>`; continue; }
-    const k = 0.95 + Math.min(lvl, 100) / 100 * 0.55;
+    if (lvl <= 0) continue;
+    const k = 1.2 + Math.min(lvl, 100) / 100 * 0.4;
     s += `<g class="bld"${drawn[i] === undefined ? '' : ' style="animation:none"'} transform="translate(${x - (k - 1) * 14} ${base - 48 * k}) scale(${k})">${bld(i)}</g>`;
     drawn[i] = lvl;
   }
