@@ -1,6 +1,6 @@
 # Tops 10 à venir pour Vieillir chez soi (un par jour)
 # Format : - [ ] slug/ | requête visée | catégorie | produits à couvrir
-# Déjà publiés : meilleur-telephone-portable-senior/, meilleur-rollator/, meilleur-fauteuil-releveur/, meilleur-siege-de-douche/, meilleur-casque-tv-senior/, meilleur-detecteur-de-chute/, meilleur-rehausseur-wc/, meilleur-fauteuil-roulant-electrique-pliant/, meilleur-scooter-electrique-senior/
+# Déjà publiés : meilleur-telephone-portable-senior/, meilleur-rollator/, meilleur-fauteuil-releveur/, meilleur-siege-de-douche/, meilleur-casque-tv-senior/, meilleur-detecteur-de-chute/, meilleur-rehausseur-wc/, meilleur-fauteuil-roulant-electrique-pliant/, meilleur-scooter-electrique-senior/, meilleur-deambulateur/, meilleure-canne-de-marche/
 
 - [x] meilleur-rehausseur-wc/ | meilleur rehausseur WC | Salle de bains | avec et sans accoudoirs, fixation
 - [x] meilleur-fauteuil-roulant-electrique-pliant/ | meilleur fauteuil roulant électrique pliant de voyage | Se déplacer | top 10 de fauteuils roulants électriques pliants vendus sur Amazon.fr (poids, autonomie, charge max, largeur pliée, batterie amovible) ; h1 « Meilleur fauteuil roulant électrique pliant de voyage » et title « Fauteuil roulant électrique pliant de voyage : top 10 2026 » ; angle : léger, compact, facile à mettre dans un coffre, compatible avion si la fiche l'indique ; une phrase courte en intro : sur prescription, un fauteuil peut être pris en charge à 100 % depuis le 1er décembre 2025, lien {R}fauteuil-roulant-rembourse-100/ ; sans Easwe
@@ -8,8 +8,8 @@
 - [x] meilleur-tricycle-electrique-senior/ | meilleur tricycle électrique senior | Se déplacer | tricycles adultes à assistance électrique
 - [x] meilleurs-livres-aidants/ | meilleurs livres pour les aidants familiaux | Conseils pour les proches | guides pratiques pour aider un parent âgé, maladie d'Alzheimer, épuisement de l'aidant ; titres, auteurs, éditeurs et éditions lus sur la page de l'éditeur ou d'un grand libraire (Fnac, Decitre, Cultura) et vérifiés sur Amazon.fr ; uniquement des livres réels et disponibles ; pour chaque livre : pour qui, ce qu'on y trouve, format (broché, poche, relié), nombre de pages si indiqué ; jamais de résumé inventé
 - [x] meilleurs-livres-gros-caracteres/ | livres en gros caractères pour seniors | Vie quotidienne | romans et livres en gros caractères (éditions spécialisées), jeux de mémoire et mots croisés gros caractères ; titres, auteurs, éditeurs et éditions lus sur la page de l'éditeur ou d'un grand libraire (Fnac, Decitre, Cultura) et vérifiés sur Amazon.fr ; uniquement des livres réels et disponibles ; pour chaque livre : pour qui, ce qu'on y trouve, format (broché, poche, relié), nombre de pages si indiqué ; jamais de résumé inventé
-- [ ] meilleur-deambulateur/ | meilleur déambulateur | Se déplacer | fixe, 2 roues, pliant
-- [ ] meilleure-canne-de-marche/ | meilleure canne de marche | Se déplacer | pliante, réglable, tripode, quadripode
+- [x] meilleur-deambulateur/ | meilleur déambulateur | Se déplacer | fixe, 2 roues, pliant
+- [x] meilleure-canne-de-marche/ | meilleure canne de marche | Se déplacer | pliante, réglable, tripode, quadripode
 - [ ] meilleur-pilulier-electronique/ | meilleur pilulier électronique | Vie quotidienne | alarme, distributeur automatique
 - [ ] meilleur-telephone-fixe-senior/ | meilleur téléphone fixe senior | Vie quotidienne | grosses touches, amplifié, touches photos
 - [ ] meilleure-veilleuse-detecteur-de-mouvement/ | meilleure veilleuse détecteur de mouvement | Sécurité | piles, prise, bandeau LED
