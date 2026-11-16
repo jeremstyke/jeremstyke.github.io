@@ -14,12 +14,21 @@
 - [x] meilleur-telephone-fixe-senior/ | meilleur téléphone fixe senior | Vie quotidienne | grosses touches, amplifié, touches photos
 - [x] meilleure-veilleuse-detecteur-de-mouvement/ | meilleure veilleuse détecteur de mouvement | Sécurité | piles, prise, bandeau LED
 - [x] meilleure-barre-d-appui/ | meilleure barre d'appui salle de bain | Salle de bains | droite, coudée, relevable
-- [ ] meilleure-planche-de-bain/ | meilleure planche de bain | Salle de bains | planche, siège de baignoire pivotant
-- [ ] meilleur-cadre-photo-numerique-senior/ | meilleur cadre photo numérique pour senior | Vie quotidienne | wifi, envoi de photos par la famille
+- [ ] meilleur-lit-medicalise/ | meilleur lit médicalisé électrique | Chambre et repos | modèles vendus aux particuliers, achat ou location, prescription et remboursement seulement si vérifié sur ameli, renvoi médecin
+- [ ] meilleur-matelas-anti-escarres/ | meilleur matelas anti-escarres | Chambre et repos | mousse, à air ; rester général, renvoi professionnel de santé
+- [ ] meilleur-pedalier-exercice-senior/ | meilleur pédalier d'exercice pour senior | Vie quotidienne | assis, motorisé ou non ; renvoi médecin ou kinésithérapeute
+- [ ] meilleur-elevateur-de-bain/ | meilleur élévateur de bain | Salle de bains | sièges élévateurs de baignoire électriques
+- [ ] meilleur-bouton-appel-urgence/ | meilleur bouton d'appel d'urgence senior | Sécurité | pendentif, bracelet, avec ou sans abonnement
+- [ ] meilleure-montre-gps-senior/ | meilleure montre GPS pour senior | Sécurité | localisation, appel d'urgence ; rester général sur les maladies, renvoi médecin
+- [ ] meilleure-chaise-de-douche-a-roulettes/ | meilleure chaise de douche à roulettes | Salle de bains | chaises garde-robe et douche à roulettes
+- [ ] meilleur-fauteuil-roulant-manuel-pliant/ | meilleur fauteuil roulant manuel pliant | Se déplacer | léger, de transfert, autopropulsé ; achat sans prescription, renvoi vers fauteuil-roulant-rembourse-100/
+- [ ] meilleure-barre-de-lit/ | meilleure barre de lit pour se relever | Chambre et repos | poignées et barres d'appui de lit
+- [ ] meilleure-chaise-percee/ | meilleure chaise percée | Chambre et repos | fixe, pliante, à roulettes
 - [ ] meilleure-tablette-senior/ | meilleure tablette pour senior | Vie quotidienne | tablettes simplifiées et classiques
 - [ ] meilleur-smartphone-senior/ | meilleur smartphone senior | Vie quotidienne | 4G VoLTE, interface simplifiée
+- [ ] meilleure-planche-de-bain/ | meilleure planche de bain | Salle de bains | planche, siège de baignoire pivotant
+- [ ] meilleur-cadre-photo-numerique-senior/ | meilleur cadre photo numérique pour senior | Vie quotidienne | wifi, envoi de photos par la famille
 - [ ] meilleure-loupe-electronique/ | meilleure loupe électronique | Vie quotidienne | portable, de bureau ; renvoi ophtalmologiste
-- [ ] meilleur-bouton-appel-urgence/ | meilleur bouton d'appel d'urgence senior | Sécurité | pendentif, bracelet, avec ou sans abonnement
 - [ ] meilleur-tapis-antiderapant-douche/ | meilleur tapis antidérapant douche | Salle de bains | ventouses, baignoire
 - [ ] meilleure-horloge-calendrier/ | meilleure horloge calendrier senior | Vie quotidienne | jour, moment de la journée, rappels
 - [ ] meilleure-pince-de-prehension/ | meilleure pince de préhension | Vie quotidienne | longueur, aimant, pliante
@@ -37,19 +46,13 @@
 - [ ] meilleur-detecteur-de-fumee/ | meilleur détecteur de fumée | Sécurité | NF, autonomie, connecté
 - [ ] meilleur-coussin-pivotant-voiture/ | meilleur coussin pivotant voiture senior | Se déplacer | entrer et sortir de la voiture
 - [ ] meilleur-oxymetre/ | meilleur oxymètre de pouls | Vie quotidienne | dispositif médical si lu ; renvoi médecin
-- [ ] meilleur-elevateur-de-bain/ | meilleur élévateur de bain | Salle de bains | sièges élévateurs de baignoire électriques
-- [ ] meilleure-chaise-de-douche-a-roulettes/ | meilleure chaise de douche à roulettes | Salle de bains | chaises garde-robe et douche à roulettes
-- [ ] meilleure-chaise-percee/ | meilleure chaise percée | Chambre et repos | fixe, pliante, à roulettes
 - [ ] meilleur-cadre-de-toilettes/ | meilleur cadre de toilettes | Salle de bains | réglable, sans perçage
-- [ ] meilleure-barre-de-lit/ | meilleure barre de lit pour se relever | Chambre et repos | poignées et barres d'appui de lit
-- [ ] meilleur-fauteuil-roulant-manuel-pliant/ | meilleur fauteuil roulant manuel pliant | Se déplacer | léger, de transfert, autopropulsé ; achat sans prescription, renvoi vers fauteuil-roulant-rembourse-100/
 - [ ] meilleur-telephone-senior-a-clapet/ | meilleur téléphone senior à clapet | Vie quotidienne | 4G VoLTE uniquement
 - [ ] meilleure-sonnette-sans-fil-flash/ | meilleure sonnette sans fil avec flash | Vie quotidienne | pour malentendants : flash, vibreur, volume fort
 - [ ] meilleur-reveil-vibrant/ | meilleur réveil vibrant | Vie quotidienne | coussin vibrant, flash, pour malentendants
 - [ ] meilleur-amplificateur-telephone/ | meilleur amplificateur de téléphone fixe | Vie quotidienne | amplification de l'écoute et de la sonnerie
 - [ ] meilleur-eclairage-led-escalier/ | meilleur éclairage LED d'escalier à détecteur | Sécurité | spots de marche, bandes LED
 - [ ] meilleur-thermometre-sans-contact/ | meilleur thermomètre sans contact | Vie quotidienne | frontal, lisible ; renvoi médecin
-- [ ] meilleure-montre-gps-senior/ | meilleure montre GPS pour senior | Sécurité | localisation, appel d'urgence ; rester général sur les maladies, renvoi médecin
 - [ ] meilleure-vaisselle-adaptee/ | meilleure vaisselle adaptée pour senior | Vie quotidienne | assiettes à rebord, tasses à deux anses, antidérapant
 - [ ] meilleur-fauteuil-de-bureau-senior/ | meilleur fauteuil confortable pour senior | Chambre et repos | assise haute, accoudoirs, sans moteur
 - [ ] meilleur-repose-jambes/ | meilleur repose-jambes | Chambre et repos | pouf, coussin incliné ; renvoi médecin en cas de problème circulatoire

@@ -23,7 +23,15 @@
 - [x] tapis-antiderapant-douche/ | tapis antidérapant douche | Salle de bains | ventouses, entretien, alternatives
 - [x] bouton-appel-urgence-senior/ | bouton d'appel d'urgence senior | Sécurité | pendentif, bracelet, avec ou sans abonnement
 - [x] teleassistance-comment-ca-marche/ | téléassistance comment ça marche | Sécurité | principe, qui répond, rester général sur les aides
+- [ ] siege-de-douche-ou-tabouret/ | siège de douche ou tabouret de douche | Salle de bains | aide au choix juste avant l'achat, selon l'équilibre et la place, renvoi vers le top sièges de douche
+- [ ] quel-deambulateur-apres-une-chute/ | quel déambulateur après une chute | Se déplacer | cadre, 2 roues, rollator selon la situation, renvoi kinésithérapeute ou ergothérapeute, liens vers les tops
+- [ ] fauteuil-releveur-1-ou-2-moteurs/ | fauteuil releveur 1 ou 2 moteurs | Chambre et repos | différences concrètes, pour qui, renvoi vers le top fauteuils releveurs
+- [ ] amenager-chambre-personne-agee/ | aménager la chambre d'une personne âgée | Chambre et repos | guide pilier de la pièce : lit, éclairage, barre de lit, chaise percée, relié à tous les tops du thème
+- [ ] securiser-escalier-personne-agee/ | sécuriser un escalier pour personne âgée | Sécurité | guide pilier : main courante, éclairage, monte-escalier, relié aux tops du thème
+- [ ] adapter-cuisine-personne-agee/ | adapter la cuisine d'une personne âgée | Vie quotidienne | guide pilier : rangements à hauteur, ustensiles adaptés, sécurité gaz et feu
 - [ ] adapter-salle-de-bain-personne-agee/ | adapter la salle de bain d'une personne âgée | Salle de bains | priorités, petits achats puis travaux
+- [ ] lit-medicalise-achat-ou-location/ | lit médicalisé achat ou location | Chambre et repos | location fréquente, prescription, vérifier sur ameli
+- [ ] coussin-anti-escarres/ | coussin anti-escarres | Chambre et repos | types, rester général, renvoi professionnel de santé
 - [ ] chaise-percee/ | chaise percée | Chambre et repos | usage nocturne, accoudoirs, entretien
 - [ ] cadre-de-toilettes/ | cadre de toilettes accoudoirs | Salle de bains | réglage, sans perçage
 - [ ] fauteuil-roulant-de-transfert/ | fauteuil roulant de transfert | Se déplacer | poids, pliage, usage occasionnel
@@ -33,8 +41,6 @@
 - [ ] horloge-calendrier-senior/ | horloge calendrier senior | Vie quotidienne | lisibilité, rappels
 - [ ] loupe-electronique/ | loupe électronique de lecture | Vie quotidienne | grossissement, éclairage, renvoi ophtalmologiste
 - [ ] casque-tv-senior/ | casque TV sans fil senior | Vie quotidienne | réglage volume, recharge, confort, renvoi audioprothésiste
-- [ ] coussin-anti-escarres/ | coussin anti-escarres | Chambre et repos | types, rester général, renvoi professionnel de santé
-- [ ] lit-medicalise-achat-ou-location/ | lit médicalisé achat ou location | Chambre et repos | location fréquente, prescription, vérifier sur ameli
 - [ ] barriere-de-lit/ | barrière de lit adulte | Chambre et repos | prudence, alternatives, avis professionnel
 - [ ] table-de-lit/ | table de lit à roulettes | Chambre et repos | hauteur réglable, plateau inclinable
 - [ ] chaussures-personne-agee/ | chaussures pour personne âgée | Se déplacer | maintien, semelle, fermeture velcro
