@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#ffffff">
+<title>Idle Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{
+  --bg:#ffffff; --mint:#eef9f2; --mint2:#dff3e7; --line:#d3ecdc;
+  --g1:#6fd39a; --g2:#2fa862; --g3:#1f7f49; --ink:#113a28; --mut:#5f8571;
+  --gold:#f4b73c; --gold2:#fff4d6; --red:#e5534b;
+  --disp:'Bricolage Grotesque','Figtree',system-ui,sans-serif;
+  --body:'Figtree',system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);overscroll-behavior:none;-webkit-user-select:none;user-select:none}
+body{min-height:100vh;padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+button{font-family:inherit;color:inherit;border:0;cursor:pointer}
+.wrap{max-width:520px;margin:0 auto;padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
+
+/* header */
+.hd{position:sticky;top:0;z-index:20;background:linear-gradient(#e6f7ed 0%,#f4fcf7 70%,rgba(255,255,255,0));padding-top:max(10px,env(safe-area-inset-top,0px));padding-bottom:6px;margin:0 calc(-1 * max(14px,env(safe-area-inset-left,0px)));padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
+.card[hidden]{display:none}
+.cash{font-family:var(--disp);font-weight:800;font-size:44px;letter-spacing:-.02em;line-height:1;display:flex;align-items:baseline;gap:4px;font-variant-numeric:tabular-nums}
+.cash small{font-size:24px;color:var(--g2)}
+.sub{display:flex;gap:8px;align-items:center;margin-top:6px;flex-wrap:wrap}
+.chip{font-size:12.5px;font-weight:600;background:rgba(255,255,255,.9);color:var(--g3);border-radius:99px;padding:4px 10px;white-space:nowrap}
+.chip.gold{background:var(--gold2);color:#8a5a00}
+.sky{height:78px;margin-top:4px}
+.sky svg{width:100%;height:100%;display:block;overflow:visible}
+.sky .sun{animation:sun 4s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+.sky .bld{animation:rise .6s cubic-bezier(.2,.9,.3,1.2) backwards}
+@keyframes sun{0%,100%{opacity:.9;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+@keyframes rise{from{transform:scaleY(0);opacity:0}to{transform:scaleY(1);opacity:1}}
+.sky .bld{transform-origin:bottom;transform-box:fill-box}
+
+/* banners */
+.bn{display:flex;align-items:center;gap:10px;border-radius:16px;padding:9px 11px;margin:8px 0;background:var(--mint)}
+.bn.gold{background:linear-gradient(120deg,#fff4d6,#ffe9ad)}
+.bn .tx{flex:1;min-width:0}
+.bn b{display:block;font-family:var(--disp);font-size:16px}
+.bn span{font-size:12.5px;color:var(--mut)}
+.bn.gold span{color:#8a5a00}
+.btn{background:var(--g2);color:#fff;font-weight:700;border-radius:12px;padding:10px 14px;font-size:14px;white-space:nowrap;transition:transform .08s}
+.btn:active{transform:scale(.95)}
+.btn.gold{background:var(--gold);color:#4a3000}
+.btn[disabled]{background:#cfe3d7;color:#fff;cursor:default}
+.dots{display:flex;gap:4px;margin-top:5px}
+.dots i{width:16px;height:6px;border-radius:3px;background:#c6e6d2}
+.dots i.on{background:var(--g2)}
+
+/* cards */
+.card{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:10px;margin:9px 0;position:relative;transition:transform .07s,border-color .2s}
+.card.tap:active{transform:scale(.985)}
+.card.ready{border-color:var(--g1)}
+.card.locked{background:var(--mint);border-style:dashed}
+.ic{width:58px;height:58px;border-radius:16px;background:linear-gradient(145deg,#f4fcf7,#d3f0df);box-shadow:inset 0 -3px 0 rgba(47,168,98,.12);display:grid;place-items:center;font-size:32px;position:relative;flex:none}
+.ic em{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);font-style:normal;font-size:10.5px;font-weight:700;background:var(--g2);color:#fff;border-radius:99px;padding:1px 7px;white-space:nowrap}
+.mid{flex:1;min-width:0}
+.nm{font-weight:700;font-size:15px;display:flex;gap:6px;align-items:center;white-space:nowrap;overflow:hidden}
+.nm s{text-decoration:none;font-size:11px;font-weight:600;color:var(--g3);background:var(--mint);border-radius:6px;padding:1px 6px}
+.bar{height:24px;border-radius:12px;background:#e4f4ea;margin-top:6px;position:relative;overflow:hidden;box-shadow:inset 0 1px 2px rgba(17,58,40,.08)}
+.bar i{position:absolute;inset:0;background:linear-gradient(180deg,#8ae3ae,#3fbf75);transform-origin:left;transform:scaleX(0);border-radius:12px}
+.bar b{position:relative;z-index:1;display:block;text-align:center;font-size:12.5px;line-height:24px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;text-shadow:0 0 6px #fff,0 0 3px #fff}
+.act{display:flex;flex-direction:column;gap:5px;flex:none;width:104px}
+.buy,.mgr{border-radius:11px;padding:7px 6px;font-weight:700;font-size:12.5px;line-height:1.15;text-align:center}
+.buy{background:linear-gradient(#45c47b,#2a9d5c);color:#fff;box-shadow:0 3px 0 #1f7f49;transition:transform .06s,box-shadow .06s}
+.buy:active{transform:translateY(2px);box-shadow:0 1px 0 #1f7f49}
+.buy small{display:block;font-weight:600;opacity:.95;font-size:11.5px}
+.buy.off{background:#e1efe6;color:#86ad96;box-shadow:0 3px 0 #cfe3d7}
+.buy.can{animation:glow 1.6s ease-in-out infinite}
+.mgr{background:var(--gold2);color:#7a4f00}
+.mgr.off{background:#f3efe2;color:#bba97a}
+.mgr.on{background:var(--mint);color:var(--g3);cursor:default}
+.seg{display:flex;gap:6px;margin:8px 0}
+.seg button{flex:1;background:var(--mint);color:var(--g3);font-weight:700;border-radius:10px;padding:7px 0;font-size:13px}
+.seg button.on{background:var(--g2);color:#fff}
+
+/* nav */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;border-top:1.5px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px)}
+.nav div{display:flex;width:100%;max-width:520px}
+.nav button{flex:1;background:none;padding:8px 0 9px;font-size:11.5px;font-weight:600;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:1px;position:relative}
+.nav button span{font-size:22px;line-height:1.1}
+.nav button.on{color:var(--g3)}
+.nav button.on::before{content:"";position:absolute;top:-1.5px;left:25%;right:25%;height:3px;border-radius:2px;background:var(--g2)}
+.nav i{position:absolute;top:5px;right:26%;width:9px;height:9px;border-radius:50%;background:var(--red);border:2px solid #fff}
+
+/* panels */
+.pane{display:none}.pane.on{display:block}
+h2{font-family:var(--disp);font-size:24px;margin:16px 0 4px;letter-spacing:-.01em}
+.lead{color:var(--mut);font-size:14px;margin:0 0 10px;line-height:1.4}
+.box{background:var(--mint);border-radius:18px;padding:14px;margin:10px 0}
+.big{font-family:var(--disp);font-weight:800;font-size:30px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.row{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:11px;margin:8px 0}
+.row .e{font-size:28px;width:44px;text-align:center;flex:none}
+.row .tx{flex:1;min-width:0}
+.row b{display:block;font-size:15px}
+.row span{font-size:12.5px;color:var(--mut);line-height:1.3;display:block}
+.row.hot{border-color:var(--gold);background:linear-gradient(120deg,#fffaf0,#fff2cc)}
+.star{background:var(--gold);color:#4a3000;font-weight:800;border-radius:12px;padding:9px 12px;font-size:14px;white-space:nowrap}
+.star:active{transform:scale(.95)}
+.top{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:12px;font-size:14px}
+.top:nth-child(odd){background:var(--mint)}
+.top.me{background:var(--gold2)}
+.top .rk{width:26px;font-family:var(--disp);font-weight:800;color:var(--g3)}
+.top .n{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.top .p{font-weight:700;color:#8a5a00;white-space:nowrap}
+.top .v{font-size:12px;color:var(--mut);width:64px;text-align:right}
+.sw{display:flex;align-items:center;justify-content:space-between;padding:12px 4px;font-size:14px;font-weight:600}
+.sw button{width:48px;height:28px;border-radius:14px;background:#cfe3d7;position:relative}
+.sw button::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .15s}
+.sw button.on{background:var(--g2)}.sw button.on::after{left:23px}
+
+/* vip */
+.vip{position:fixed;z-index:40;width:74px;height:74px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#ffe9a3,var(--gold));display:none;place-items:center;font-size:36px;box-shadow:0 6px 22px rgba(244,183,60,.6);animation:bob 1s ease-in-out infinite}
+.vip.on{display:grid}
+.vip svg{position:absolute;inset:-5px;width:84px;height:84px;transform:rotate(-90deg)}
+.vip circle{fill:none;stroke:var(--g2);stroke-width:4;stroke-linecap:round}
+.vip small{position:absolute;bottom:-18px;font-size:11px;font-weight:800;color:#8a5a00;white-space:nowrap}
+
+/* modal, toast, floats */
+.md{position:fixed;inset:0;z-index:60;background:rgba(17,58,40,.45);display:none;align-items:flex-end;justify-content:center}
+.md.on{display:flex}
+.sheet{background:#fff;width:100%;max-width:520px;border-radius:26px 26px 0 0;padding:22px 18px calc(22px + env(safe-area-inset-bottom,0px));text-align:center;animation:up .25s ease-out}
+.sheet h3{font-family:var(--disp);font-size:24px;margin:6px 0}
+.sheet p{color:var(--mut);margin:4px 0 14px;font-size:14.5px;line-height:1.4}
+.sheet .big{color:var(--g2);margin:6px 0 14px}
+.sheet .btn{width:100%;padding:14px;font-size:16px}
+.sheet .ghost{background:none;color:var(--mut);margin-top:6px;font-weight:600;padding:8px;width:100%}
+.toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:14px;padding:10px 16px;font-size:14px;font-weight:600;z-index:80;opacity:0;pointer-events:none;transition:opacity .2s;max-width:88vw;text-align:center}
+.toast.on{opacity:1}
+.fl{position:fixed;z-index:70;font-family:var(--disp);font-weight:800;font-size:20px;color:var(--g2);pointer-events:none;text-shadow:0 1px 0 #fff,0 0 8px #fff;animation:fly .9s ease-out forwards}
+.fl.gold{color:#c98a00;font-size:26px}
+.load{position:fixed;inset:0;background:#fff;z-index:90;display:grid;place-items:center;text-align:center;font-family:var(--disp);font-size:20px;color:var(--g3)}
+.load div{font-size:56px;animation:bob 1s ease-in-out infinite}
+
+@keyframes pop{from{transform:translateY(8px) scale(.6);opacity:0}to{transform:none;opacity:1}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(47,168,98,.0)}50%{box-shadow:0 0 0 5px rgba(47,168,98,.22)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes fly{from{transform:translateY(0);opacity:1}to{transform:translateY(-60px);opacity:0}}
+@keyframes up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="load" id="load"><div><div>🏠</div>Idle Estate</div></div>
+
+<div class="wrap">
+  <div class="hd">
+    <div class="cash"><small>$</small><span id="cash">0</span></div>
+    <div class="sub"><span class="chip" id="rate">$0/s</span><span class="chip" id="mult">x1</span><span class="chip gold" id="boost" hidden></span></div>
+    <div class="sky" id="sky"></div>
+  </div>
+
+  <section class="pane on" id="p-estate">
+    <div id="banners"></div>
+    <div class="seg" id="seg"></div>
+    <div id="cards"></div>
+  </section>
+
+  <section class="pane" id="p-shop"></section>
+  <section class="pane" id="p-prest"></section>
+  <section class="pane" id="p-top"></section>
+</div>
+
+<div class="vip" id="vip"><svg viewBox="0 0 84 84"><circle id="vipc" cx="42" cy="42" r="38" stroke-dasharray="238.8" stroke-dashoffset="0"/></svg>🤑<small id="vipt"></small></div>
+
+<div class="nav"><div id="nav"></div></div>
+<div class="md" id="md"><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+'use strict';
+const API = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/idle-estate';
+const tgw = window.Telegram && Telegram.WebApp;
+if (tgw) { try { tgw.ready(); tgw.expand(); tgw.setHeaderColor('#ffffff'); tgw.setBackgroundColor('#ffffff'); tgw.disableVerticalSwipes && tgw.disableVerticalSwipes(); } catch (e) {} }
+const lang = ((tgw && tgw.initDataUnsafe && tgw.initDataUnsafe.user && tgw.initDataUnsafe.user.language_code) || navigator.language || 'en').toLowerCase().startsWith('fr') ? 'fr' : 'en';
+
+const L = {
+ en: {
+  names:['Studio','Apartment','House','Apartment block','Residence','Hotel','Shopping mall','Skyscraper','District','City'],
+  estate:'Estate', shop:'Shop', prest:'Empire', top:'Top',
+  buy:'Buy', lvl:'Lv', manager:'Manager', auto:'Auto', tapStart:'Tap to collect', ms:'x2 @',
+  welcomeT:'Welcome pack', welcomeS:'2h of rent now + x2 income for 24h', claim:'Claim', daily:'Daily bonus', dailyS:'Day {n} of 7, come back every day',
+  away:'While you were away', awayS:'Your tenants kept paying rent.', collect:'Collect', great:'Great!',
+  vipMsg:'Golden tenant! +', per:'/s', max:'MAX',
+  shopT:'Shop', shopS:'Everything is paid in Telegram Stars. 20% of all Stars spent goes to the weekly top 10.',
+  items:{welcome:['🎁','Welcome pack','2h of rent instantly + x2 income for 24h. One time only.'],b2:['⚡','x2 Income, 4h','Double all your rent for 4 hours.'],b3:['🚀','x3 Income, 24h','Triple all your rent for a full day.'],perm2:['👑','Partner: x2 forever','Permanent x2 on everything, forever.'],vault:['🏦','Vault: 24h offline','Tenants pay up to 24h while you are away (instead of 3h).'],skip1:['⏩','Time skip 1h','Instantly get 1 hour of rent.'],skip8:['⏭️','Time skip 8h','Instantly get 8 hours of rent.']},
+  paid:'Payment received!', cancelled:'Payment cancelled',
+  prestT:'Empire', prestS:'Sell everything and restart with investors. Each investor gives +2% income forever.',
+  investors:'Investors', bonus:'Bonus', sell:'Sell and restart', sellFor:'Sell for {n} investors', needMore:'Earn more to sell for investors', sure:'Sure? Your properties reset, investors stay.', yes:'Yes, sell', no:'Cancel',
+  sold:'Empire sold! +{n} investors',
+  topT:'Weekly top 10', topS:'Ranked by money earned this week. 20% of all Stars spent this week is shared between the 10 best.',
+  pool:'Prize pool', ends:'Ends in', rank:'Your rank', yours:'You', wallet:'Wallet', avail:'Available', locked:'Locked 30 days after each win', noPool:'The pool grows with every Star spent.',
+  remind:'Reminders from the bot', openTg:'Open this game inside Telegram.', err:'Connection problem, retrying...',
+  boost:'Boost', offline:'Offline cap', hours:'h'
+ },
+ fr: {
+  names:['Studio','Appartement','Maison','Immeuble','Résidence','Hôtel','Centre commercial','Gratte-ciel','Quartier','Ville'],
+  estate:'Biens', shop:'Boutique', prest:'Empire', top:'Top',
+  buy:'Acheter', lvl:'Niv', manager:'Gestionnaire', auto:'Auto', tapStart:'Touche pour encaisser', ms:'x2 @',
+  welcomeT:'Pack de bienvenue', welcomeS:'2h de loyers tout de suite + x2 revenus pendant 24h', claim:'Récupérer', daily:'Bonus du jour', dailyS:'Jour {n} sur 7, reviens chaque jour',
+  away:'Pendant ton absence', awayS:'Tes locataires ont continué à payer.', collect:'Encaisser', great:'Super !',
+  vipMsg:'Locataire doré ! +', per:'/s', max:'MAX',
+  shopT:'Boutique', shopS:'Tout se paie en Étoiles Telegram. 20 % des Étoiles dépensées vont au top 10 de la semaine.',
+  items:{welcome:['🎁','Pack de bienvenue','2h de loyers tout de suite + x2 revenus pendant 24h. Une seule fois.'],b2:['⚡','Revenus x2, 4h','Double tous tes loyers pendant 4 heures.'],b3:['🚀','Revenus x3, 24h','Triple tous tes loyers pendant une journée.'],perm2:['👑','Associé : x2 à vie','x2 permanent sur tout, pour toujours.'],vault:['🏦','Coffre : 24h hors ligne','Les locataires paient jusqu\'à 24h pendant ton absence (au lieu de 3h).'],skip1:['⏩','Saut de 1h','Reçois tout de suite 1 heure de loyers.'],skip8:['⏭️','Saut de 8h','Reçois tout de suite 8 heures de loyers.']},
+  paid:'Paiement reçu !', cancelled:'Paiement annulé',
+  prestT:'Empire', prestS:'Vends tout et repars avec des investisseurs. Chaque investisseur donne +2 % de revenus à vie.',
+  investors:'Investisseurs', bonus:'Bonus', sell:'Vendre et recommencer', sellFor:'Vendre pour {n} investisseurs', needMore:'Gagne plus pour vendre contre des investisseurs', sure:'Sûr ? Tes biens repartent à zéro, les investisseurs restent.', yes:'Oui, vendre', no:'Annuler',
+  sold:'Empire vendu ! +{n} investisseurs',
+  topT:'Top 10 de la semaine', topS:'Classement selon l\'argent gagné cette semaine. 20 % des Étoiles dépensées cette semaine sont partagés entre les 10 meilleurs.',
+  pool:'Cagnotte', ends:'Fin dans', rank:'Ton rang', yours:'Toi', wallet:'Portefeuille', avail:'Disponible', locked:'Bloqué 30 jours après chaque gain', noPool:'La cagnotte grossit à chaque Étoile dépensée.',
+  remind:'Rappels du bot', openTg:'Ouvre ce jeu dans Telegram.', err:'Problème de connexion, nouvel essai...',
+  boost:'Boost', offline:'Plafond hors ligne', hours:'h'
+ }
+}[lang];
+
+// ---------- helpers
+const $ = id => document.getElementById(id);
+const SUF = ['', 'K', 'M', 'B', 'T', 'Qa', 'Qi', 'Sx', 'Sp', 'Oc', 'No', 'Dc'];
+function fmt(n) {
+  if (!isFinite(n)) return '0';
+  if (n < 0) n = 0;
+  if (n < 1000) return n < 10 ? (Math.floor(n * 100) / 100).toString() : n < 100 ? (Math.floor(n * 10) / 10).toString() : Math.floor(n).toString();
+  const e = Math.min(Math.floor(Math.log10(n) / 3), SUF.length - 1);
+  if (e >= SUF.length - 1 && n >= 1e36) return n.toExponential(2).replace('+', '');
+  const v = n / Math.pow(1000, e);
+  return (v < 10 ? v.toFixed(2) : v < 100 ? v.toFixed(1) : v.toFixed(0)) + SUF[e];
+}
+const hap = k => { try { tgw && tgw.HapticFeedback && (k === 'ok' ? tgw.HapticFeedback.notificationOccurred('success') : tgw.HapticFeedback.impactOccurred(k || 'light')); } catch (e) {} };
+const EM = ['🛋️', '🏠', '🏡', '🏢', '🏘️', '🏨', '🏬', '🌆', '🗺️', '🏙️'];
+let toastT;
+function toast(t) { const e = $('toast'); e.textContent = t; e.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => e.classList.remove('on'), 2200); }
+function float(txt, x, y, gold) {
+  const e = document.createElement('div'); e.className = 'fl' + (gold ? ' gold' : ''); e.textContent = txt;
+  e.style.left = Math.max(8, Math.min(innerWidth - 90, x - 30)) + 'px'; e.style.top = y + 'px';
+  document.body.appendChild(e); setTimeout(() => e.remove(), 950);
+}
+function modal(html) { $('sheet').innerHTML = html; $('md').classList.add('on'); }
+function closeModal() { $('md').classList.remove('on'); }
+$('md').addEventListener('click', e => { if (e.target.id === 'md') closeModal(); });
+
+// ---------- state + server
+let S = null, off = 0, pend = 0, chain = Promise.resolve(), mode = 1, tab = 'estate', topData = null, firstLoad = true;
+try { mode = JSON.parse(localStorage.getItem('ie_mode') || '1'); } catch (e) {}
+const snow = () => Date.now() / 1000 + off;
+const initData = tgw ? tgw.initData : '';
+
+function call(body) {
+  pend++;
+  const p = chain.then(async () => {
+    try {
+      const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ init: initData, ...body }) });
+      return await r.json();
+    } catch (e) { return { ok: false, err: 'net' }; }
+  });
+  chain = p.catch(() => {});
+  return p.then(r => { pend--; if (r && r.ok) apply(r, pend === 0 || body.act === 'top'); else if (r && r.err === 'net') {} return r; });
+}
+function apply(r, full) {
+  if (full || !S) {
+    off = r.now - Date.now() / 1000;
+    const keep = S;
+    S = { cash: r.cash, life_all: r.life_all, lv: r.lv.slice(), mg: r.mg.slice(), ts: r.ts.slice(), inv: r.inv, prest: r.prest, perm2: r.perm2, vault: r.vault, welcome: r.welcome, streak: r.streak, dailyOk: r.daily_ok,
+      boostEnd: r.boost ? r.now + r.boost.left : 0, bmult: r.boost ? r.boost.mult : 1, vipEnd: r.vip ? r.now + r.vip.left : 0, cfg: r.cfg, ms: r.ms, g: r.g, shop: r.shop, notify: r.notify, loc: r.now, cap: r.cap, stars: r.stars };
+    if (!keep) build();
+    else { buildSky(); }
+  }
+  if (r.top) topData = r;
+}
+
+// ---------- economy (mirror of the server)
+const mult = l => { let m = 1; for (const k of S.ms) if (l >= k) m *= 2; return m; };
+const curM = n => (1 + 0.02 * S.inv) * ((S.boostEnd > n) ? S.bmult : 1) * (S.perm2 ? 2 : 1);
+const inc = (i, n) => S.lv[i] > 0 ? S.cfg[i].r * S.lv[i] * mult(S.lv[i]) * curM(n) : 0;
+const gainInv = () => Math.max(0, Math.floor(150 * Math.sqrt(S.life_all / 1e9)) - Math.floor(S.inv));
+function rateNow() { const n = snow(); let g = 0; for (let i = 0; i < 10; i++) { const e = inc(i, n) / S.cfg[i].t; g += S.mg[i] ? e : e * 0.5; } return g; }
+function cost(i, n) { const c0 = S.cfg[i].c * Math.pow(S.g, S.lv[i]); return c0 * (Math.pow(S.g, n) - 1) / (S.g - 1); }
+function maxN(i) { const c0 = S.cfg[i].c * Math.pow(S.g, S.lv[i]); return Math.max(0, Math.min(1000, Math.floor(Math.log(1 + S.cash * (S.g - 1) / c0) / Math.log(S.g)))); }
+function buyN(i) { return mode === 'max' ? Math.max(1, maxN(i)) : mode; }
+
+function tick() {
+  if (!S) return;
+  const n = snow(); let dt = n - S.loc; S.loc = n;
+  if (dt <= 0) return; if (dt > 60) dt = 60;
+  const M = curM(n); let gain = 0;
+  for (let i = 0; i < 10; i++) {
+    if (S.lv[i] <= 0) continue;
+    const per = S.cfg[i].r * S.lv[i] * mult(S.lv[i]) * M;
+    if (S.mg[i]) gain += per / S.cfg[i].t * dt;
+    else if (S.ts[i] > 0 && n >= S.ts[i] + S.cfg[i].t) { gain += per; S.ts[i] = -1; popOn(i, per); }
+  }
+  S.cash += gain; S.life_all += gain;
+  paint();
+}
+function popOn(i, v) {
+  const c = cardEl[i]; if (!c) return; const r = c.getBoundingClientRect();
+  if (r.bottom < 60 || r.top > innerHeight) return;
+  float('+$' + fmt(v), r.left + r.width * 0.55, r.top + 6);
+}
+
+// ---------- UI build
+const cardEl = [];
+function build() {
+  $('load').style.display = 'none';
+  $('nav').innerHTML = [['estate', '🏠', L.estate], ['shop', '⭐', L.shop], ['prest', '🏛️', L.prest], ['top', '🏆', L.top]].map(([k, e, t]) => `<button data-t="${k}"${k === 'estate' ? ' class="on"' : ''}><span>${e}</span>${t}</button>`).join('');
+  $('nav').onclick = e => { const b = e.target.closest('button'); if (b) go(b.dataset.t); };
+  $('seg').innerHTML = [1, 10, 100, 'max'].map(m => `<button data-m="${m}">${m === 'max' ? L.max : 'x' + m}</button>`).join('');
+  $('seg').onclick = e => { const b = e.target.closest('button'); if (!b) return; mode = b.dataset.m === 'max' ? 'max' : Number(b.dataset.m); try { localStorage.setItem('ie_mode', JSON.stringify(mode)); } catch (e) {} hap('light'); paint(); };
+  let h = '';
+  for (let i = 0; i < 10; i++) {
+    h += `<div class="card" data-i="${i}" hidden>
+      <div class="ic">${EM[i]}<em></em></div>
+      <div class="mid"><div class="nm"><span class="n">${L.names[i]}</span><s></s></div><div class="bar"><i></i><b></b></div></div>
+      <div class="act"><button class="buy"></button><button class="mgr"></button></div></div>`;
+  }
+  $('cards').innerHTML = h;
+  document.querySelectorAll('#cards .card').forEach(c => { cardEl[+c.dataset.i] = c; });
+  $('cards').onclick = e => {
+    const c = e.target.closest('.card'); if (!c) return; const i = +c.dataset.i;
+    if (e.target.closest('.buy')) return doBuy(i);
+    if (e.target.closest('.mgr')) return doMgr(i);
+    doTap(i, e);
+  };
+  buildSky(); buildBanners(); paint();
+  setInterval(tick, 100);
+  setInterval(() => { if (!document.hidden) call({ act: 'state' }); }, 7000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) call({ act: 'state' }); });
+  setInterval(vipLoop, 250);
+  setInterval(() => { if (tab === 'top') loadTop(); }, 15000);
+}
+let drawn = {};
+function buildSky() {
+  const cols = ['#c9eed9', '#a8e2c0', '#8bd8ab', '#6fcd96', '#55c184', '#3fb574', '#2fa862', '#279655', '#1f7f49', '#17683b'];
+  const W = 360, H = 78, base = H - 6, bw = 27, gap = 6, x0 = 8;
+  let s = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMax meet"><circle class="sun" cx="330" cy="20" r="13" fill="#f7c85a"/><circle cx="330" cy="20" r="19" fill="#f7c85a" opacity=".22"/>`;
+  for (let i = 0; i < 10; i++) {
+    const x = x0 + i * (bw + gap);
+    const lvl = S.lv[i];
+    if (lvl <= 0) { s += `<rect x="${x}" y="${base - 14}" width="${bw}" height="14" rx="4" fill="none" stroke="#bfe3cd" stroke-dasharray="3 3"/>`; continue; }
+    const h = Math.min(22 + i * 5 + Math.min(lvl, 120) * 0.38, 68);
+    const fresh = drawn[i] !== undefined && drawn[i] !== lvl ? '' : '';
+    s += `<g class="bld"${drawn[i] === undefined ? '' : ' style="animation:none"'}><rect x="${x}" y="${base - h}" width="${bw}" height="${h}" rx="5" fill="${cols[i]}"/>`;
+    const rows = Math.max(1, Math.floor((h - 8) / 9));
+    for (let r = 0; r < rows; r++) for (let c = 0; c < 3; c++) s += `<rect x="${x + 4 + c * 7.4}" y="${base - h + 5 + r * 9}" width="4.4" height="5" rx="1" fill="#fffdf0" opacity="${((r * 3 + c + i) % 4 === 0) ? 0.45 : 0.95}"/>`;
+    s += '</g>'; drawn[i] = lvl;
+  }
+  s += `<rect x="0" y="${base}" width="${W}" height="3" rx="1.5" fill="#bfe3cd"/></svg>`;
+  $('sky').innerHTML = s;
+}
+let skyKey = '';
+function buildBanners() {
+  const b = $('banners'); let h = '';
+  if (!S.welcome) h += `<div class="bn gold"><div class="tx"><b>🎁 ${L.welcomeT}</b><span>${L.welcomeS}</span></div><button class="btn gold" data-sku="welcome">⭐ ${S.shop.welcome}</button></div>`;
+  if (S.dailyOk) {
+    const next = Math.min(S.streak + 1, 7);
+    h += `<div class="bn"><div class="tx"><b>🔥 ${L.daily}</b><span>${L.dailyS.replace('{n}', next)}</span><div class="dots">${[1, 2, 3, 4, 5, 6, 7].map(d => `<i class="${d < next ? 'on' : ''}"></i>`).join('')}</div></div><button class="btn" id="dailyBtn">${L.claim}</button></div>`;
+  }
+  b.innerHTML = h;
+  b.onclick = e => {
+    if (e.target.id === 'dailyBtn') {
+      call({ act: 'daily' }).then(r => { if (r.reward) { hap('ok'); float('+$' + fmt(r.reward), innerWidth / 2, 120, true); S.dailyOk = false; buildBanners(); } });
+    }
+    const s = e.target.closest('[data-sku]'); if (s) buy(s.dataset.sku);
+  };
+}
+let lastBanner = '';
+function paint() {
+  const n = snow();
+  $('cash').textContent = fmt(S.cash);
+  $('rate').textContent = '$' + fmt(rateNow()) + L.per;
+  $('mult').textContent = 'x' + fmt(curM(n));
+  const bo = $('boost');
+  if (S.boostEnd > n) { bo.hidden = false; const l = S.boostEnd - n; bo.textContent = '⚡ x' + S.bmult + ' ' + (l > 3600 ? Math.floor(l / 3600) + 'h' + String(Math.floor(l % 3600 / 60)).padStart(2, '0') : Math.floor(l / 60) + ':' + String(Math.floor(l % 60)).padStart(2, '0')); } else bo.hidden = true;
+  const bk = (S.welcome ? 1 : 0) + '' + (S.dailyOk ? 1 : 0) + S.streak;
+  if (bk !== lastBanner) { lastBanner = bk; buildBanners(); }
+  const sk = S.lv.map(l => l > 0 ? 1 + Math.floor(Math.min(l, 120) / 6) : 0).join(',');
+  if (sk !== skyKey) { skyKey = sk; buildSky(); }
+  document.querySelectorAll('#seg button').forEach(b => b.classList.toggle('on', b.dataset.m === String(mode)));
+  let top = -1; for (let i = 0; i < 10; i++) if (S.lv[i] > 0) top = i;
+  for (let i = 0; i < 10; i++) {
+    const c = cardEl[i]; const show = i <= top + 1; c.hidden = !show; if (!show) continue;
+    const owned = S.lv[i] > 0;
+    const teaser = !owned && i > top + 0 && i === top + 1 && i > 0 && S.cash < S.cfg[i].c * 0.1;
+    c.classList.toggle('locked', !owned);
+    const q = c.querySelector;
+    const nm = c.querySelector('.n'), em = c.querySelector('em'), ms = c.querySelector('s'), bar = c.querySelector('.bar i'), txt = c.querySelector('.bar b'), buyb = c.querySelector('.buy'), mg = c.querySelector('.mgr');
+    nm.textContent = L.names[i];
+    em.style.display = owned ? '' : 'none'; em.textContent = L.lvl + ' ' + S.lv[i];
+    if (owned) { const nx = S.ms.find(m => m > S.lv[i]); ms.textContent = nx ? L.ms + nx : 'MAX'; ms.style.display = ''; } else ms.style.display = 'none';
+    const per = inc(i, n);
+    if (!owned) { bar.style.transform = 'scaleX(0)'; txt.textContent = '$' + fmt(S.cfg[i].r * curM(n)) + ' / ' + fmtT(S.cfg[i].t); }
+    else if (S.mg[i]) { bar.style.transform = S.cfg[i].t < 2.5 ? 'scaleX(1)' : 'scaleX(' + ((n % S.cfg[i].t) / S.cfg[i].t) + ')'; txt.textContent = '$' + fmt(per) + ' / ' + fmtT(S.cfg[i].t); }
+    else if (S.ts[i] > 0) { const f = Math.min(1, (n - S.ts[i]) / S.cfg[i].t); bar.style.transform = 'scaleX(' + f + ')'; txt.textContent = '$' + fmt(per) + '  ' + fmtLeft(S.ts[i] + S.cfg[i].t - n); }
+    else { bar.style.transform = 'scaleX(0)'; txt.textContent = L.tapStart + ' $' + fmt(per); }
+    c.classList.toggle('ready', owned && !S.mg[i] && S.ts[i] < 0);
+    c.classList.toggle('tap', owned && !S.mg[i]);
+    const k = owned ? buyN(i) : 1; const co = cost(i, k); const can = S.cash >= co;
+    buyb.innerHTML = (owned ? '+' + k : L.buy) + '<small>$' + fmt(co) + '</small>';
+    buyb.classList.toggle('off', !can); buyb.classList.toggle('can', can);
+    if (!owned) mg.style.display = 'none';
+    else { mg.style.display = ''; mg.classList.toggle('on', S.mg[i]); mg.classList.toggle('off', !S.mg[i] && S.cash < S.cfg[i].m); mg.innerHTML = S.mg[i] ? '✅ ' + L.auto : '👔 $' + fmt(S.cfg[i].m); }
+  }
+  const nb = $('nav').querySelector('[data-t="prest"]');
+  if (nb) { let d = nb.querySelector('i'); if (gainInv() >= 1 && !d) nb.insertAdjacentHTML('beforeend', '<i></i>'); else if (gainInv() < 1 && d) d.remove(); }
+  if (tab === 'prest') paintPrest();
+}
+const fmtT = t => t < 60 ? t + 's' : t < 3600 ? Math.round(t / 60) + 'min' : (t / 3600).toFixed(t % 3600 ? 1 : 0) + 'h';
+const fmtLeft = s => s < 0 ? '0s' : s < 60 ? Math.ceil(s) + 's' : s < 3600 ? Math.floor(s / 60) + ':' + String(Math.ceil(s % 60) % 60).padStart(2, '0') : Math.floor(s / 3600) + 'h' + String(Math.floor(s % 3600 / 60)).padStart(2, '0');
+
+// ---------- actions
+function doTap(i, e) {
+  if (S.lv[i] <= 0 || S.mg[i] || S.ts[i] > 0) return;
+  S.ts[i] = snow(); hap('light'); call({ act: 'tap', i });
+}
+function doBuy(i) {
+  const k = buyN(i), co = cost(i, k);
+  if (S.cash < co) { hap('light'); toast('$' + fmt(co - S.cash) + ' ?'); return; }
+  S.cash -= co; S.lv[i] += k; hap('medium'); call({ act: 'buy', i, n: mode === 'max' ? -1 : k });
+}
+function doMgr(i) {
+  if (S.mg[i]) return;
+  if (S.cash < S.cfg[i].m) { hap('light'); toast('$' + fmt(S.cfg[i].m - S.cash) + ' ?'); return; }
+  S.cash -= S.cfg[i].m; S.mg[i] = true; S.ts[i] = -1; hap('heavy'); call({ act: 'mgr', i });
+}
+
+// vip tenant
+let vipShown = false, vipPos = null;
+function vipLoop() {
+  if (!S) return;
+  const n = snow(), el = $('vip');
+  if (S.vipEnd > n && tab === 'estate') {
+    if (!vipShown) { vipShown = true; vipPos = [Math.random() * (innerWidth - 110) + 16, innerHeight * 0.3 + Math.random() * innerHeight * 0.35]; el.style.left = vipPos[0] + 'px'; el.style.top = vipPos[1] + 'px'; el.classList.add('on'); hap('medium'); }
+    const l = S.vipEnd - n; $('vipc').style.strokeDashoffset = (238.8 * (1 - Math.max(0, l) / 25)).toFixed(1); $('vipt').textContent = Math.ceil(l) + 's';
+  } else if (vipShown) { vipShown = false; el.classList.remove('on'); }
+}
+$('vip').addEventListener('click', () => {
+  if (!S || S.vipEnd <= snow()) return;
+  S.vipEnd = 0; vipShown = false; $('vip').classList.remove('on'); hap('ok');
+  call({ act: 'vip' }).then(r => { if (r && r.reward) { float('+$' + fmt(r.reward), vipPos ? vipPos[0] : 100, vipPos ? vipPos[1] : 200, true); toast(L.vipMsg + '$' + fmt(r.reward)); } });
+});
+
+// tabs
+function go(t) {
+  tab = t;
+  document.querySelectorAll('.pane').forEach(p => p.classList.toggle('on', p.id === 'p-' + t));
+  document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
+  scrollTo(0, 0); hap('light');
+  if (t === 'shop') renderShop(); else if (t === 'prest') renderPrest(); else if (t === 'top') loadTop();
+}
+
+// shop
+function renderShop() {
+  const order = ['welcome', 'b2', 'b3', 'perm2', 'vault', 'skip1', 'skip8'].filter(k => !(k === 'welcome' && S.welcome));
+  let h = `<h2>${L.shopT}</h2><p class="lead">${L.shopS}</p>`;
+  for (const k of order) {
+    const it = L.items[k];
+    const own = (k === 'perm2' && S.perm2) || (k === 'vault' && S.vault);
+    h += `<div class="row${k === 'welcome' ? ' hot' : ''}"><div class="e">${it[0]}</div><div class="tx"><b>${it[1]}</b><span>${it[2]}</span></div>${own ? '<span class="chip">✅</span>' : `<button class="star" data-sku="${k}">⭐ ${S.shop[k]}</button>`}</div>`;
+  }
+  h += `<div class="sw"><span>🔔 ${L.remind}</span><button id="nt" class="${S.notify ? 'on' : ''}"></button></div>`;
+  const p = $('p-shop'); p.innerHTML = h;
+  p.onclick = e => {
+    const s = e.target.closest('[data-sku]'); if (s) buy(s.dataset.sku);
+    if (e.target.id === 'nt') { S.notify = !S.notify; e.target.classList.toggle('on', S.notify); call({ act: 'notify', on: S.notify }); }
+  };
+}
+function buy(sku) {
+  hap('medium');
+  call({ act: 'invoice', sku }).then(r => {
+    if (!r || !r.ok || !r.link) { toast(L.err); return; }
+    if (!tgw || !tgw.openInvoice) { window.open(r.link, '_blank'); return; }
+    tgw.openInvoice(r.link, st => {
+      if (st === 'paid') { hap('ok'); toast(L.paid); setTimeout(() => call({ act: 'state' }).then(() => { buildBanners(); if (tab === 'shop') renderShop(); }), 1200); setTimeout(() => call({ act: 'state' }), 4000); }
+      else if (st === 'cancelled' || st === 'failed') toast(L.cancelled);
+    });
+  });
+}
+
+// prestige
+let sureSell = false;
+function renderPrest() { sureSell = false; paintPrest(true); }
+function paintPrest(force) {
+  const p = $('p-prest'); const g = gainInv();
+  const key = [Math.floor(S.inv), g, sureSell].join();
+  if (!force && p.dataset.k === key) return; p.dataset.k = key;
+  p.innerHTML = `<h2>${L.prestT}</h2><p class="lead">${L.prestS}</p>
+   <div class="box"><span class="lead">${L.investors}</span><div class="big">${fmt(S.inv)} 👔</div><span class="lead">${L.bonus}: +${fmt(S.inv * 2)}%</span></div>
+   ${sureSell ? `<div class="box"><p class="lead">${L.sure}</p><div style="display:flex;gap:8px"><button class="btn" id="sellYes" style="flex:1">${L.yes}</button><button class="btn" id="sellNo" style="flex:1;background:#cfe3d7">${L.no}</button></div></div>`
+   : `<button class="btn gold" id="sellBtn" style="width:100%;padding:15px;font-size:16px" ${g < 1 ? 'disabled' : ''}>${g >= 1 ? L.sellFor.replace('{n}', fmt(g)) : L.needMore}</button>`}`;
+  p.onclick = e => {
+    if (e.target.id === 'sellBtn') { sureSell = true; paintPrest(true); }
+    else if (e.target.id === 'sellNo') { sureSell = false; paintPrest(true); }
+    else if (e.target.id === 'sellYes') { call({ act: 'prestige' }).then(r => { sureSell = false; if (r && r.gained) { hap('ok'); toast(L.sold.replace('{n}', fmt(r.gained))); go('estate'); } }); }
+  };
+}
+
+// top
+function loadTop() { call({ act: 'top' }).then(() => { if (tab === 'top') renderTop(); }); }
+function renderTop() {
+  const d = topData; const p = $('p-top'); if (!d) return;
+  const left = Math.max(0, d.ends - snow()); const dd = Math.floor(left / 86400), hh = Math.floor(left % 86400 / 3600), mm = Math.floor(left % 3600 / 60);
+  let h = `<h2>${L.topT}</h2><p class="lead">${L.topS}</p>
+   <div class="box"><span class="lead">${L.pool}</span><div class="big">⭐ ${fmt(d.pool)}</div><span class="lead">${d.pool > 0 ? '' : L.noPool + ' '}${L.ends} ${dd}d ${hh}h ${mm}m</span></div>`;
+  h += '<div>';
+  d.top.forEach((r, i) => { const pr = Math.floor(d.pool * d.shares[i] / 100); h += `<div class="top${r.me ? ' me' : ''}"><span class="rk">${i + 1}</span><span class="n">${esc(r.n)}${r.me ? ' (' + L.yours + ')' : ''}</span><span class="v">$${fmt(r.v)}</span><span class="p">${pr > 0 ? '⭐ ' + pr : ''}</span></div>`; });
+  h += '</div>';
+  h += `<div class="box"><span class="lead">${L.rank}</span><div class="big">#${d.rank}</div><span class="lead">$${fmt(d.score)}</span></div>`;
+  const w = d.wallet || {};
+  h += `<div class="box"><span class="lead">👛 ${L.wallet}</span><div class="big">⭐ ${fmt(w.avail || 0)}</div><span class="lead">${L.locked}: ⭐ ${fmt(w.locked || 0)}</span></div>`;
+  p.innerHTML = h;
+}
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+// ---------- boot
+async function boot() {
+  if (!initData) { $('load').innerHTML = '<div><div>📱</div>' + L.openTg + '</div>'; return; }
+  let r = await call({ act: 'state', first: true });
+  if (!r || !r.ok) { $('load').querySelector('div').insertAdjacentHTML('beforeend', '<p style="font-size:14px;color:#5f8571">' + L.err + '</p>'); setTimeout(boot, 2500); return; }
+  if (r.gap > 120 && r.away > 1) {
+    modal(`<div style="font-size:54px">🏠</div><h3>${L.away}</h3><div class="big">+$${fmt(r.away)}</div><p>${L.awayS}</p><button class="btn" id="okAway">${L.collect}</button>`);
+    $('okAway').onclick = () => { hap('ok'); closeModal(); };
+  }
+}
+boot();
+})();
+</script>
+</body>
+</html>
