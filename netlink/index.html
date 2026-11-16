@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NetLink Express - Achat de backlinks de qualité</title>
+<meta name="description" content="Achetez des backlinks dofollow sur des sites choisis à la main, généralistes ou dans votre thématique, de DA 10 à DA 40+. Article rédigé selon vos consignes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b1020;--card:#121a33;--line:#223058;--text:#e8ecf7;--muted:#97a3c4;
+  --accent:#4f8cff;--accent2:#22c55e;--warn:#f59e0b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{color:var(--accent)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{padding:22px 0;border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:800;font-size:1.25rem;letter-spacing:-.02em}
+.logo span{color:var(--accent)}
+nav a{color:var(--muted);text-decoration:none;margin-left:22px;font-weight:500}
+nav a:hover{color:var(--text)}
+.hero{padding:72px 0 56px;text-align:center}
+.hero h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.15;letter-spacing:-.03em;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--muted);font-size:1.15rem;max-width:640px;margin:18px auto 30px}
+.btn{display:inline-block;background:var(--accent);color:#fff;border:0;border-radius:10px;padding:14px 26px;font-weight:700;font-size:1rem;cursor:pointer;text-decoration:none;font-family:inherit}
+.btn:hover{filter:brightness(1.1)}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+.trust{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-top:34px;color:var(--muted);font-size:.95rem}
+.trust b{color:var(--text)}
+section{padding:56px 0}
+h2{font-size:1.9rem;letter-spacing:-.02em;margin-bottom:10px;text-align:center}
+.sub{color:var(--muted);text-align:center;margin-bottom:34px}
+.toggle{display:flex;justify-content:center;margin-bottom:28px}
+.toggle div{display:flex;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:5px}
+.toggle button{background:none;border:0;color:var(--muted);padding:10px 20px;border-radius:9px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem}
+.toggle button.on{background:var(--accent);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column}
+.card.pop{border-color:var(--accent);position:relative}
+.card.pop::before{content:"Le plus choisi";position:absolute;top:-11px;left:20px;background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:3px 10px;border-radius:20px}
+.da{font-size:.85rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.lvl{font-size:1.35rem;font-weight:800;margin:4px 0 10px}
+.price{font-size:2.3rem;font-weight:800;letter-spacing:-.03em}
+.price small{font-size:.95rem;color:var(--muted);font-weight:500}
+.card ul{list-style:none;margin:16px 0 22px;color:var(--muted);font-size:.93rem;flex:1}
+.card li{padding:4px 0 4px 22px;position:relative}
+.card li::before{content:"✓";position:absolute;left:0;color:var(--accent2);font-weight:700}
+.card .btn{text-align:center}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+.step .n{width:34px;height:34px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font-weight:800;margin-bottom:12px}
+.step h3{font-size:1.08rem;margin-bottom:6px}
+.step p{color:var(--muted);font-size:.93rem}
+#commande{background:#0e1530;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+form{max-width:680px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:block;font-weight:600;font-size:.92rem;margin:14px 0 6px}
+label .opt{color:var(--muted);font-weight:400}
+input,select,textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--text);font-family:inherit;font-size:.98rem}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
+textarea{min-height:130px;resize:vertical}
+.hint{color:var(--muted);font-size:.84rem;margin-top:5px}
+.recap{margin:22px 0 6px;padding:16px;border-radius:12px;background:var(--bg);border:1px dashed var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.recap b{font-size:1.4rem}
+.check{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:.88rem;color:var(--muted)}
+.check input{width:auto;margin-top:4px}
+form .btn{width:100%;margin-top:20px;font-size:1.05rem}
+.msg{margin-top:14px;padding:12px 14px;border-radius:10px;font-size:.93rem;display:none}
+.msg.err{display:block;background:#3b1220;border:1px solid #7f1d3a;color:#fecdd3}
+.msg.ok{display:block;background:#0f2e1d;border:1px solid #166534;color:#bbf7d0}
+.faq{max-width:760px;margin:0 auto}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:10px}
+summary{font-weight:600;cursor:pointer}
+details p{color:var(--muted);margin-top:10px;font-size:.95rem}
+footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem}
+@media(max-width:600px){.row{grid-template-columns:1fr}nav{display:none}form{padding:22px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">NetLink<span>Express</span></div>
+    <nav><a href="#tarifs">Tarifs</a><a href="#fonctionnement">Fonctionnement</a><a href="#faq">FAQ</a><a href="#commande">Commander</a></nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <h1>Des backlinks <em>qui comptent</em>,<br>sur des sites choisis à la main</h1>
+    <p>Vous choisissez l'autorité et la thématique, on sélectionne le site, on rédige l'article selon vos consignes et on publie votre lien.</p>
+    <a class="btn" href="#tarifs">Voir les tarifs</a>
+    <div class="trust">
+      <div><b>Dofollow</b> et permanent</div>
+      <div><b>500 mots</b> minimum</div>
+      <div><b>7 à 14 jours</b> de délai</div>
+      <div>Paiement sécurisé <b>Gumroad</b></div>
+    </div>
+  </div>
+</div>
+
+<section id="tarifs">
+  <div class="wrap">
+    <h2>Tarifs par lien</h2>
+    <p class="sub">Prix pour 1 backlink, article rédigé et publication inclus.</p>
+    <div class="toggle"><div>
+      <button type="button" data-type="gen" class="on">Site généraliste</button>
+      <button type="button" data-type="them">Site de votre thématique</button>
+    </div></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section id="fonctionnement">
+  <div class="wrap">
+    <h2>Comment ça marche</h2>
+    <p class="sub">Une commande en 2 minutes, on s'occupe du reste.</p>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Choisissez votre pack</h3><p>Autorité (DA) et type de site : généraliste ou spécialisé dans votre domaine.</p></div>
+      <div class="step"><div class="n">2</div><h3>Donnez vos consignes</h3><p>URL à pousser, ancre, thématique et consignes de rédaction : ton, mots-clés, sujets à éviter.</p></div>
+      <div class="step"><div class="n">3</div><h3>Payez sur Gumroad</h3><p>Paiement par carte ou PayPal, sécurisé par Gumroad. Facture envoyée automatiquement.</p></div>
+      <div class="step"><div class="n">4</div><h3>Recevez votre lien</h3><p>L'article est publié sous 7 à 14 jours. Vous recevez son adresse par email.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="commande">
+  <div class="wrap">
+    <h2>Passer commande</h2>
+    <p class="sub">Remplissez vos consignes, puis réglez sur Gumroad.</p>
+    <form id="orderForm" novalidate>
+      <label for="pack">Pack choisi</label>
+      <select id="pack" name="pack" required></select>
+
+      <div class="row">
+        <div><label for="nom">Nom</label><input id="nom" name="nom" required autocomplete="name"></div>
+        <div><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"><div class="hint">Utilisez le même email au paiement.</div></div>
+      </div>
+
+      <label for="url">URL à pousser</label>
+      <input id="url" name="url" type="url" placeholder="https://www.votresite.fr/page" required>
+
+      <div class="row">
+        <div><label for="ancre">Ancre du lien</label><input id="ancre" name="ancre" placeholder="ex : chaussures de running" required></div>
+        <div><label for="theme">Thématique de votre site</label><input id="theme" name="theme" placeholder="ex : sport, running" required></div>
+      </div>
+
+      <label for="consignes">Consignes d'écriture <span class="opt">(ton, mots-clés, angle, à éviter...)</span></label>
+      <textarea id="consignes" name="consignes" placeholder="ex : ton informatif, parler des bienfaits du running pour les débutants, placer les mots-clés &quot;chaussures running&quot; et &quot;foulée&quot;, ne pas citer de concurrents."></textarea>
+
+      <label for="langue">Langue de l'article</label>
+      <select id="langue" name="langue"><option>Français</option><option>Anglais</option></select>
+
+      <div class="recap"><span id="recapLabel">Pack</span><b id="recapPrice">0 €</b></div>
+
+      <label class="check"><input type="checkbox" id="cgv" required> <span>J'accepte que le site d'accueil soit choisi par NetLink Express selon le pack commandé. Commande validée à réception du paiement.</span></label>
+
+      <button class="btn" type="submit" id="submitBtn">Valider et payer sur Gumroad</button>
+      <div class="msg" id="msg"></div>
+    </form>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2>Questions fréquentes</h2>
+    <div class="faq">
+      <details><summary>C'est quoi le DA ?</summary><p>Le Domain Authority mesure la force d'un site aux yeux des moteurs de recherche, sur 100. Plus il est élevé, plus un lien venant de ce site a de poids.</p></details>
+      <details><summary>Généraliste ou thématique, quelle différence ?</summary><p>Un site généraliste parle de tout (actu, maison, lifestyle...). Un site thématique traite de votre domaine : le lien est plus pertinent pour Google, d'où un prix plus élevé.</p></details>
+      <details><summary>Qui rédige l'article ?</summary><p>Nous, à partir de vos consignes. L'article fait au moins 500 mots et intègre naturellement votre lien.</p></details>
+      <details><summary>Le lien est-il permanent ?</summary><p>Oui, l'article reste en ligne. Si le lien disparaît dans les 12 mois, il est remplacé gratuitement.</p></details>
+      <details><summary>Je veux plusieurs liens, comment faire ?</summary><p>Passez une commande par lien. Pour un gros volume, indiquez-le dans les consignes et on vous proposera un tarif.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© <span id="y"></span> NetLink Express. Paiements traités par Gumroad.</div>
+</footer>
+
+<script>
+// Adresse qui reçoit les commandes (via FormSubmit)
+const ORDER_ENDPOINT = "https://formsubmit.co/ajax/juryjeremy@gmail.com";
+
+const PACKS = [
+  {id:"da10-gen",  type:"gen",  da:"DA 10-20", lvl:"Starter", price:49,  url:"https://jeremstyke.gumroad.com/l/netlink-da10-generaliste"},
+  {id:"da20-gen",  type:"gen",  da:"DA 20-30", lvl:"Boost",   price:79,  url:"https://jeremstyke.gumroad.com/l/netlink-da20-generaliste", pop:true},
+  {id:"da30-gen",  type:"gen",  da:"DA 30-40", lvl:"Pro",     price:129, url:"https://jeremstyke.gumroad.com/l/netlink-da30-generaliste"},
+  {id:"da40-gen",  type:"gen",  da:"DA 40+",   lvl:"Premium", price:199, url:"https://jeremstyke.gumroad.com/l/netlink-da40-generaliste"},
+  {id:"da10-them", type:"them", da:"DA 10-20", lvl:"Starter", price:69,  url:"https://jeremstyke.gumroad.com/l/netlink-da10-thematique"},
+  {id:"da20-them", type:"them", da:"DA 20-30", lvl:"Boost",   price:109, url:"https://jeremstyke.gumroad.com/l/netlink-da20-thematique", pop:true},
+  {id:"da30-them", type:"them", da:"DA 30-40", lvl:"Pro",     price:179, url:"https://jeremstyke.gumroad.com/l/netlink-da30-thematique"},
+  {id:"da40-them", type:"them", da:"DA 40+",   lvl:"Premium", price:279, url:"https://jeremstyke.gumroad.com/l/netlink-da40-thematique"}
+];
+const TYPE_LABEL = {gen:"Généraliste", them:"Thématique"};
+const label = p => `${p.da} ${TYPE_LABEL[p.type]}`;
+
+const grid = document.getElementById("grid");
+const sel = document.getElementById("pack");
+
+function renderGrid(type){
+  grid.innerHTML = PACKS.filter(p => p.type === type).map(p => `
+    <div class="card${p.pop ? " pop" : ""}">
+      <div class="da">${p.da}</div>
+      <div class="lvl">${p.lvl}</div>
+      <div class="price">${p.price} €<small> / lien</small></div>
+      <ul>
+        <li>Site ${type === "gen" ? "généraliste" : "de votre thématique"}</li>
+        <li>Article de 500 mots inclus</li>
+        <li>Lien dofollow, ancre au choix</li>
+        <li>Publication sous 7 à 14 jours</li>
+      </ul>
+      <a class="btn${p.pop ? "" : " ghost"}" href="#commande" data-pick="${p.id}">Commander</a>
+    </div>`).join("");
+}
+
+PACKS.forEach(p => sel.insertAdjacentHTML("beforeend", `<option value="${p.id}">${label(p)} - ${p.price} €</option>`));
+
+function updateRecap(){
+  const p = PACKS.find(x => x.id === sel.value);
+  document.getElementById("recapLabel").textContent = label(p);
+  document.getElementById("recapPrice").textContent = p.price + " €";
+}
+
+document.querySelectorAll(".toggle button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".toggle button").forEach(x => x.classList.remove("on"));
+  b.classList.add("on");
+  renderGrid(b.dataset.type);
+}));
+
+grid.addEventListener("click", e => {
+  const a = e.target.closest("[data-pick]");
+  if (a) { sel.value = a.dataset.pick; updateRecap(); }
+});
+sel.addEventListener("change", updateRecap);
+
+renderGrid("gen");
+sel.value = "da20-gen";
+updateRecap();
+document.getElementById("y").textContent = new Date().getFullYear();
+
+const form = document.getElementById("orderForm");
+const msg = document.getElementById("msg");
+const btn = document.getElementById("submitBtn");
+
+function show(text, kind){ msg.textContent = text; msg.className = "msg " + kind; }
+
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = Object.fromEntries(new FormData(form));
+  if (!f.nom || !f.email || !f.url || !f.ancre || !f.theme) return show("Merci de remplir tous les champs obligatoires.", "err");
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email)) return show("Adresse email invalide.", "err");
+  if (!/^https?:\/\/.+\..+/.test(f.url)) return show("L'URL doit commencer par http:// ou https://", "err");
+  if (!document.getElementById("cgv").checked) return show("Merci de cocher la case de validation.", "err");
+
+  const p = PACKS.find(x => x.id === f.pack);
+  btn.disabled = true; btn.textContent = "Envoi en cours...";
+
+  try {
+    const r = await fetch(ORDER_ENDPOINT, {
+      method: "POST",
+      headers: {"Content-Type": "application/json", "Accept": "application/json"},
+      body: JSON.stringify({
+        _subject: `Nouvelle commande NetLink Express : ${label(p)} (${p.price} €)`,
+        _template: "table",
+        _captcha: "false",
+        _replyto: f.email,
+        "Pack": `${label(p)} - ${p.price} €`,
+        "Nom": f.nom,
+        "Email": f.email,
+        "URL à pousser": f.url,
+        "Ancre": f.ancre,
+        "Thématique": f.theme,
+        "Langue": f.langue,
+        "Consignes d'écriture": f.consignes || "(aucune)"
+      })
+    });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    show("Consignes bien reçues ! Redirection vers le paiement Gumroad...", "ok");
+    setTimeout(() => { window.location.href = p.url + "?email=" + encodeURIComponent(f.email); }, 1200);
+  } catch (err) {
+    show("L'envoi de vos consignes a échoué. Réessayez dans un instant.", "err");
+    btn.disabled = false; btn.textContent = "Valider et payer sur Gumroad";
+  }
+});
+</script>
+</body>
+</html>
