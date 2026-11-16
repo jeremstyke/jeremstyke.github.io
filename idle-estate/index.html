@@ -219,7 +219,7 @@ const lang = ((tgw && tgw.initDataUnsafe && tgw.initDataUnsafe.user && tgw.initD
 
 const L = {
  en: {
-  names:['Studio','Apartment','House','Apartment block','Residence','Hotel','Shopping mall','Skyscraper','District','City'],
+  names:['Studio','Loft','Villa','Apartment block','Residential tower','Hotel chain','Mall network','Business district','Resort island','Megacity'],
   estate:'Estate', shop:'Shop', prest:'Empire', top:'Top',
   buy:'Buy', lvl:'Lv', manager:'Manager', auto:'Auto', tapStart:'Tap to collect', ms:'x2 @',
   welcomeT:'Welcome pack', welcomeS:'2h of rent now + x2 income for 24h', claim:'Claim', daily:'Daily bonus', dailyS:'Day {n} of 7, come back every day',
@@ -237,7 +237,7 @@ const L = {
   boost:'Boost', offline:'Offline cap', hours:'h'
  },
  fr: {
-  names:['Studio','Appartement','Maison','Immeuble','Résidence','Hôtel','Centre commercial','Gratte-ciel','Quartier','Ville'],
+  names:['Studio','Loft','Villa','Immeuble','Tour résidentielle','Chaîne d\'hôtels','Centres commerciaux','Quartier d\'affaires','Île resort','Mégapole'],
   estate:'Biens', shop:'Boutique', prest:'Empire', top:'Top',
   buy:'Acheter', lvl:'Niv', manager:'Gestionnaire', auto:'Auto', tapStart:'Touche pour encaisser', ms:'x2 @',
   welcomeT:'Pack de bienvenue', welcomeS:'2h de loyers tout de suite + x2 revenus pendant 24h', claim:'Récupérer', daily:'Bonus du jour', dailyS:'Jour {n} sur 7, reviens chaque jour',
@@ -268,6 +268,8 @@ function fmt(n) {
   const v = n / Math.pow(1000, e);
   return (v < 10 ? v.toFixed(2) : v < 100 ? v.toFixed(1) : v.toFixed(0)) + SUF[e];
 }
+const K = 20000; // display scale: 1 game unit = $20,000, so a studio costs $80,000
+const fm = n => fmt(n * K);
 const hap = k => { try { tgw && tgw.HapticFeedback && (k === 'ok' ? tgw.HapticFeedback.notificationOccurred('success') : tgw.HapticFeedback.impactOccurred(k || 'light')); } catch (e) {} };
 const EM = ['🛋️', '🏠', '🏡', '🏢', '🏘️', '🏨', '🏬', '🌆', '🗺️', '🏙️'];
 let toastT;
@@ -337,7 +339,7 @@ function tick() {
 function popOn(i, v) {
   const c = cardEl[i]; if (!c) return; const r = c.getBoundingClientRect();
   if (r.bottom < 60 || r.top > innerHeight) return;
-  float('+$' + fmt(v), r.left + r.width * 0.55, r.top + 6);
+  float('+$' + fm(v), r.left + r.width * 0.55, r.top + 6);
 }
 
 // ---------- UI build
@@ -414,7 +416,7 @@ function buildBanners() {
   b.innerHTML = h;
   b.onclick = e => {
     if (e.target.id === 'dailyBtn') {
-      call({ act: 'daily' }).then(r => { if (r.reward) { hap('ok'); float('+$' + fmt(r.reward), innerWidth / 2, 120, true); S.dailyOk = false; buildBanners(); } });
+      call({ act: 'daily' }).then(r => { if (r.reward) { hap('ok'); float('+$' + fm(r.reward), innerWidth / 2, 120, true); S.dailyOk = false; buildBanners(); } });
     }
     const s = e.target.closest('[data-sku]'); if (s) buy(s.dataset.sku);
   };
@@ -422,8 +424,8 @@ function buildBanners() {
 let lastBanner = '';
 function paint() {
   const n = snow();
-  $('cash').textContent = fmt(S.cash);
-  $('rate').textContent = '$' + fmt(rateNow()) + L.per;
+  $('cash').textContent = fm(S.cash);
+  $('rate').textContent = '$' + fm(rateNow()) + L.per;
   $('mult').textContent = 'x' + fmt(curM(n));
   const bo = $('boost');
   if (S.boostEnd > n) { bo.hidden = false; const l = S.boostEnd - n; bo.textContent = '⚡ x' + S.bmult + ' ' + (l > 3600 ? Math.floor(l / 3600) + 'h' + String(Math.floor(l % 3600 / 60)).padStart(2, '0') : Math.floor(l / 60) + ':' + String(Math.floor(l % 60)).padStart(2, '0')); } else bo.hidden = true;
@@ -444,17 +446,17 @@ function paint() {
     em.style.display = owned ? '' : 'none'; em.textContent = L.lvl + ' ' + S.lv[i];
     if (owned) { const nx = S.ms.find(m => m > S.lv[i]); ms.textContent = nx ? L.ms + nx : 'MAX'; ms.style.display = ''; } else ms.style.display = 'none';
     const per = inc(i, n);
-    if (!owned) { bar.style.transform = 'scaleX(0)'; txt.textContent = '$' + fmt(S.cfg[i].r * curM(n)) + ' / ' + fmtT(S.cfg[i].t); }
-    else if (S.mg[i]) { bar.style.transform = S.cfg[i].t < 2.5 ? 'scaleX(1)' : 'scaleX(' + ((n % S.cfg[i].t) / S.cfg[i].t) + ')'; txt.textContent = '$' + fmt(per) + ' / ' + fmtT(S.cfg[i].t); }
-    else if (S.ts[i] > 0) { const f = Math.min(1, (n - S.ts[i]) / S.cfg[i].t); bar.style.transform = 'scaleX(' + f + ')'; txt.textContent = '$' + fmt(per) + '  ' + fmtLeft(S.ts[i] + S.cfg[i].t - n); }
-    else { bar.style.transform = 'scaleX(0)'; txt.textContent = L.tapStart + ' $' + fmt(per); }
+    if (!owned) { bar.style.transform = 'scaleX(0)'; txt.textContent = '$' + fm(S.cfg[i].r * curM(n)) + ' / ' + fmtT(S.cfg[i].t); }
+    else if (S.mg[i]) { bar.style.transform = S.cfg[i].t < 2.5 ? 'scaleX(1)' : 'scaleX(' + ((n % S.cfg[i].t) / S.cfg[i].t) + ')'; txt.textContent = '$' + fm(per) + ' / ' + fmtT(S.cfg[i].t); }
+    else if (S.ts[i] > 0) { const f = Math.min(1, (n - S.ts[i]) / S.cfg[i].t); bar.style.transform = 'scaleX(' + f + ')'; txt.textContent = '$' + fm(per) + '  ' + fmtLeft(S.ts[i] + S.cfg[i].t - n); }
+    else { bar.style.transform = 'scaleX(0)'; txt.textContent = L.tapStart + ' $' + fm(per); }
     c.classList.toggle('ready', owned && !S.mg[i] && S.ts[i] < 0);
     c.classList.toggle('tap', owned && !S.mg[i]);
     const k = owned ? buyN(i) : 1; const co = cost(i, k); const can = S.cash >= co;
-    buyb.innerHTML = (owned ? '+' + k : L.buy) + '<small>$' + fmt(co) + '</small>';
+    buyb.innerHTML = (owned ? '+' + k : L.buy) + '<small>$' + fm(co) + '</small>';
     buyb.classList.toggle('off', !can); buyb.classList.toggle('can', can);
     if (!owned) mg.style.display = 'none';
-    else { mg.style.display = ''; mg.classList.toggle('on', S.mg[i]); mg.classList.toggle('off', !S.mg[i] && S.cash < S.cfg[i].m); mg.innerHTML = S.mg[i] ? '✅ ' + L.auto : '👔 $' + fmt(S.cfg[i].m); }
+    else { mg.style.display = ''; mg.classList.toggle('on', S.mg[i]); mg.classList.toggle('off', !S.mg[i] && S.cash < S.cfg[i].m); mg.innerHTML = S.mg[i] ? '✅ ' + L.auto : '👔 $' + fm(S.cfg[i].m); }
   }
   const nb = $('nav').querySelector('[data-t="prest"]');
   if (nb) { let d = nb.querySelector('i'); if (gainInv() >= 1 && !d) nb.insertAdjacentHTML('beforeend', '<i></i>'); else if (gainInv() < 1 && d) d.remove(); }
@@ -470,12 +472,12 @@ function doTap(i, e) {
 }
 function doBuy(i) {
   const k = buyN(i), co = cost(i, k);
-  if (S.cash < co) { hap('light'); toast('$' + fmt(co - S.cash) + ' ?'); return; }
+  if (S.cash < co) { hap('light'); toast('$' + fm(co - S.cash) + ' ?'); return; }
   S.cash -= co; S.lv[i] += k; hap('medium'); call({ act: 'buy', i, n: mode === 'max' ? -1 : k });
 }
 function doMgr(i) {
   if (S.mg[i]) return;
-  if (S.cash < S.cfg[i].m) { hap('light'); toast('$' + fmt(S.cfg[i].m - S.cash) + ' ?'); return; }
+  if (S.cash < S.cfg[i].m) { hap('light'); toast('$' + fm(S.cfg[i].m - S.cash) + ' ?'); return; }
   S.cash -= S.cfg[i].m; S.mg[i] = true; S.ts[i] = -1; hap('heavy'); call({ act: 'mgr', i });
 }
 
@@ -492,7 +494,7 @@ function vipLoop() {
 $('vip').addEventListener('click', () => {
   if (!S || S.vipEnd <= snow()) return;
   S.vipEnd = 0; vipShown = false; $('vip').classList.remove('on'); hap('ok');
-  call({ act: 'vip' }).then(r => { if (r && r.reward) { float('+$' + fmt(r.reward), vipPos ? vipPos[0] : 100, vipPos ? vipPos[1] : 200, true); toast(L.vipMsg + '$' + fmt(r.reward)); } });
+  call({ act: 'vip' }).then(r => { if (r && r.reward) { float('+$' + fm(r.reward), vipPos ? vipPos[0] : 100, vipPos ? vipPos[1] : 200, true); toast(L.vipMsg + '$' + fm(r.reward)); } });
 });
 
 // tabs
@@ -558,9 +560,9 @@ function renderTop() {
   let h = `<h2>${L.topT}</h2><p class="lead">${L.topS}</p>
    <div class="box"><span class="lead">${L.pool}</span><div class="big">⭐ ${fmt(d.pool)}</div><span class="lead">${d.pool > 0 ? '' : L.noPool + ' '}${L.ends} ${dd}d ${hh}h ${mm}m</span></div>`;
   h += '<div>';
-  d.top.forEach((r, i) => { const pr = Math.floor(d.pool * d.shares[i] / 100); h += `<div class="top${r.me ? ' me' : ''}"><span class="rk">${i + 1}</span><span class="n">${esc(r.n)}${r.me ? ' (' + L.yours + ')' : ''}</span><span class="v">$${fmt(r.v)}</span><span class="p">${pr > 0 ? '⭐ ' + pr : ''}</span></div>`; });
+  d.top.forEach((r, i) => { const pr = Math.floor(d.pool * d.shares[i] / 100); h += `<div class="top${r.me ? ' me' : ''}"><span class="rk">${i + 1}</span><span class="n">${esc(r.n)}${r.me ? ' (' + L.yours + ')' : ''}</span><span class="v">$${fm(r.v)}</span><span class="p">${pr > 0 ? '⭐ ' + pr : ''}</span></div>`; });
   h += '</div>';
-  h += `<div class="box"><span class="lead">${L.rank}</span><div class="big">#${d.rank}</div><span class="lead">$${fmt(d.score)}</span></div>`;
+  h += `<div class="box"><span class="lead">${L.rank}</span><div class="big">#${d.rank}</div><span class="lead">$${fm(d.score)}</span></div>`;
   const w = d.wallet || {};
   h += `<div class="box"><span class="lead">👛 ${L.wallet}</span><div class="big">⭐ ${fmt(w.avail || 0)}</div><span class="lead">${L.locked}: ⭐ ${fmt(w.locked || 0)}</span></div>`;
   p.innerHTML = h;
@@ -573,7 +575,7 @@ async function boot() {
   let r = await call({ act: 'state', first: true });
   if (!r || !r.ok) { $('load').querySelector('div').insertAdjacentHTML('beforeend', '<p style="font-size:14px;color:#5f8571">' + L.err + '</p>'); setTimeout(boot, 2500); return; }
   if (r.gap > 120 && r.away > 1) {
-    modal(`<div style="font-size:54px">🏠</div><h3>${L.away}</h3><div class="big">+$${fmt(r.away)}</div><p>${L.awayS}</p><button class="btn" id="okAway">${L.collect}</button>`);
+    modal(`<div style="font-size:54px">🏠</div><h3>${L.away}</h3><div class="big">+$${fm(r.away)}</div><p>${L.awayS}</p><button class="btn" id="okAway">${L.collect}</button>`);
     $('okAway').onclick = () => { hap('ok'); closeModal(); };
   }
 }
