@@ -55,19 +55,22 @@ nav a:hover{color:var(--text)}
 .how h3{font-size:1.02rem;margin-bottom:6px}
 .how p{color:var(--muted);font-size:.93rem}
 footer{padding:40px 0;color:var(--muted);font-size:.85rem;text-align:center;border-top:1px solid var(--line)}
-@media(max-width:640px){nav{display:none}.phones{grid-template-columns:repeat(3,1fr);gap:8px}.tile a.free{font-size:.68rem;padding:5px;left:5px;right:5px;bottom:5px}.lock{font-size:.66rem!important}.strip img{width:80px}.ph h2{font-size:1.5rem}.buy{width:100%;justify-content:center}}
+.yt{display:inline-flex;align-items:center;gap:7px;background:#ff0033;color:#fff;text-decoration:none;font-weight:700;font-size:.88rem;padding:8px 14px;border-radius:10px;white-space:nowrap;margin-left:16px}.yt:hover{filter:brightness(1.1)}
+.ytcta{display:inline-flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-weight:600;margin-top:14px;opacity:.9}.ytcta:hover{opacity:1}
+@media(max-width:640px){nav{display:none}.yt{margin-left:0}.phones{grid-template-columns:repeat(3,1fr);gap:8px}.tile a.free{font-size:.68rem;padding:5px;left:5px;right:5px;bottom:5px}.lock{font-size:.66rem!important}.strip img{width:80px}.ph h2{font-size:1.5rem}.buy{width:100%;justify-content:center}}
 </style>
 </head>
 <body>
 <header><div class="wrap">
   <a class="logo" href="#top">Wall<span>Drop</span></a>
-  <nav id="nav"></nav>
+  <div style="display:flex;align-items:center"><nav id="nav"></nav><a class="yt" href="https://www.youtube.com/@walldrop-y8v" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>YouTube</a></div>
 </div></header>
 
 <section class="hero" id="top"><div class="wrap">
   <h1>Free <em>aesthetic wallpapers</em><br>for your phone and desktop</h1>
   <p>Original wallpapers in HD for iPhone and Android, and 4K for your computer. Download free ones below, or grab a full pack of 30 for just $1.</p>
   <p style="margin-top:22px"><a class="buy" href="free/walldrop-free-sampler.zip" download>Download all 20 free wallpapers</a></p>
+  <p><a class="ytcta" href="https://www.youtube.com/@walldrop-y8v" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>New wallpapers every day on our YouTube channel</a></p>
   <div class="strip" id="strip"></div>
 </div></section>
 
@@ -82,7 +85,7 @@ footer{padding:40px 0;color:var(--muted);font-size:.85rem;text-align:center;bord
   </div>
 </div></section>
 
-<footer><div class="wrap">© <span id="y"></span> WallDrop. All wallpapers are original works, free for personal use. Packs are sold securely through Gumroad.</div></footer>
+<footer><div class="wrap">© <span id="y"></span> WallDrop. All wallpapers are original works, free for personal use. Packs are sold securely through Gumroad. <a href="https://www.youtube.com/@walldrop-y8v" target="_blank" rel="noopener">Follow WallDrop on YouTube</a></div></footer>
 
 <script>
 const PACKS = [
