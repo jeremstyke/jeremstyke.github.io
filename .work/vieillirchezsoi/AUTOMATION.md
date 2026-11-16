@@ -1,4 +1,4 @@
-IMPORTANT : le site est en ligne sur https://viellirchezsoi.fr. Il est construit automatiquement (toutes les heures) dans le dépôt jeremstyke/viellirchezsoi à partir des sources de ce dossier. Le build lancé ici écrit seulement des renvois dans vieillirchezsoi/ (ancienne adresse) : c'est normal.
+IMPORTANT : le site est en ligne sur https://vieillir-chez-soi.fr. Il est construit automatiquement (toutes les heures) dans le dépôt jeremstyke/viellirchezsoi à partir des sources de ce dossier. Le build lancé ici écrit seulement des renvois dans vieillirchezsoi/ (ancienne adresse) : c'est normal.
 
 # Vieillir chez soi : article automatique tous les 2 jours
 

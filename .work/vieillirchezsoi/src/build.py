@@ -8,9 +8,9 @@ from auto_articles import AUTO_META
 from quiz import ITEMS, QUESTIONS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DOMAIN = 'viellirchezsoi.fr'
+DOMAIN = 'vieillir-chez-soi.fr'
 # Deux dispositions possibles :
-#  - dépôt dédié (src/ à la racine) : site généré dans docs/, servi sur https://viellirchezsoi.fr (fichier CNAME)
+#  - dépôt dédié (src/ à la racine) : site généré dans docs/, servi sur https://vieillir-chez-soi.fr (fichier CNAME)
 #  - ancienne disposition dans jeremstyke.github.io (.work/vieillirchezsoi/src) : sous-dossier vieillirchezsoi/
 STANDALONE = os.path.basename(os.path.dirname(os.path.dirname(HERE))) != '.work'
 if STANDALONE:
