@@ -1,0 +1,43 @@
+# Fiches espèces et pages d'identification pour Les oiseaux du jardin (2 par jour)
+# But : attirer le trafic (grosses recherches) puis renvoyer vers les produits utiles (mangeoire, nourriture, nichoir adapté à l'espèce)
+# Format : - [ ] slug/ | requête visée | catégorie | angle
+- [ ] oiseau-noir-bec-jaune/ | oiseau noir bec jaune | Observer | identification : merle noir (mâle), différence avec l'étourneau et le merle femelle, comment l'attirer
+- [ ] mesange-charbonniere/ | mésange charbonnière | Observer | fiche espèce : reconnaître, alimentation, nichoir (trou d'envol vérifié LPO), mangeoire adaptée
+- [ ] petit-oiseau-gris-jardin/ | petit oiseau gris jardin | Observer | identification : accenteur mouchet, moineau femelle, sittelle, mésange nonnette ; critères simples
+- [ ] rouge-gorge/ | rouge-gorge | Observer | fiche espèce : comportement, nourriture (au sol, vers de farine), nichoir semi-ouvert
+- [ ] oiseau-ventre-rouge/ | oiseau ventre rouge | Observer | identification : rouge-gorge, bouvreuil, rougequeue, pinson mâle
+- [ ] mesange-bleue/ | mésange bleue | Observer | fiche espèce : reconnaître, différence avec la charbonnière, nichoir et nourriture
+- [ ] oiseau-tete-noire/ | oiseau tête noire | Observer | identification : mésange charbonnière, fauvette à tête noire, bouvreuil, mésange noire
+- [ ] merle-noir/ | merle noir | Observer | fiche espèce : mâle, femelle, chant, que lui donner (fruits, pas de pain)
+- [ ] oiseau-jaune-et-vert/ | oiseau jaune et vert | Observer | identification : verdier, chardonneret, serin, mésange bleue, pic vert
+- [ ] moineau-domestique/ | moineau | Observer | fiche espèce : déclin (sources LPO/Vigie-Nature), nichoirs collectifs, graines
+- [ ] oiseau-noir-et-blanc-longue-queue/ | oiseau noir et blanc longue queue | Observer | identification : pie bavarde, bergeronnette grise, mésange à longue queue
+- [ ] pinson-des-arbres/ | pinson des arbres | Observer | fiche espèce : mâle et femelle, nourriture au sol
+- [ ] chardonneret-elegant/ | chardonneret élégant | Observer | fiche espèce : statut de protection vérifié, graines de niger, mangeoire à niger
+- [ ] petit-oiseau-marron-jardin/ | petit oiseau marron jardin | Observer | identification : troglodyte, moineau, grimpereau, accenteur
+- [ ] verdier-d-europe/ | verdier | Observer | fiche espèce : trichomonose et hygiène des mangeoires (sources sérieuses)
+- [ ] oiseau-qui-tape-a-la-fenetre/ | oiseau qui tape à la vitre | Observer | pourquoi (reflet, territoire au printemps), solutions sans danger
+- [ ] sittelle-torchepot/ | sittelle torchepot | Observer | fiche espèce : descend la tête en bas, nichoir, graisse et graines
+- [ ] pic-epeiche/ | pic épeiche | Observer | fiche espèce : reconnaître, tambourinage, attirer avec graisse
+- [ ] oiseau-qui-chante-la-nuit/ | oiseau qui chante la nuit | Observer | rouge-gorge, merle, rossignol ; éclairage urbain (sources sérieuses)
+- [ ] tourterelle-turque/ | tourterelle turque | Observer | fiche espèce : différence avec le pigeon, nourriture au sol
+- [ ] rougequeue-noir/ | rougequeue noir | Observer | fiche espèce : migrateur partiel, nichoir semi-ouvert
+- [ ] troglodyte-mignon/ | troglodyte mignon | Observer | fiche espèce : tout petit, chant puissant, abris en hiver
+- [ ] bouvreuil-pivoine/ | bouvreuil pivoine | Observer | fiche espèce : mâle et femelle, bourgeons, graines
+- [ ] mesange-a-longue-queue/ | mésange à longue queue | Observer | fiche espèce : groupes en hiver, graisse
+- [ ] accenteur-mouchet/ | accenteur mouchet | Observer | fiche espèce : souvent confondu avec le moineau, nourriture au sol
+- [ ] etourneau-sansonnet/ | étourneau sansonnet | Observer | fiche espèce : plumage selon la saison, groupes à la mangeoire
+- [ ] pie-bavarde/ | pie bavarde | Observer | fiche espèce : comportement, idées reçues, cohabitation avec les petits oiseaux
+- [ ] geai-des-chenes/ | geai des chênes | Observer | fiche espèce : glands, cris d'alarme
+- [ ] fauvette-a-tete-noire/ | fauvette à tête noire | Observer | fiche espèce : mâle et femelle, fruits en hiver
+- [ ] grive-musicienne/ | grive musicienne | Observer | fiche espèce : différence avec la grive draine, escargots, pommes en hiver
+- [ ] bergeronnette-grise/ | bergeronnette grise | Observer | fiche espèce : hoche-queue, au sol
+- [ ] pigeon-ramier/ | pigeon ramier | Observer | fiche espèce : le reconnaître, éviter qu'il vide la mangeoire
+- [ ] choucas-des-tours/ | choucas des tours | Observer | fiche espèce : différence avec la corneille, cheminées
+- [ ] corneille-noire/ | corneille noire | Observer | fiche espèce : différence avec le corbeau freux et le choucas
+- [ ] mesange-noire/ | mésange noire | Observer | fiche espèce : conifères, stockage de graines
+- [ ] mesange-huppee/ | mésange huppée | Observer | fiche espèce : reconnaître, forêts de conifères
+- [ ] grimpereau-des-jardins/ | grimpereau des jardins | Observer | fiche espèce : différence avec la sittelle
+- [ ] serin-cini/ | serin cini | Observer | fiche espèce : petit fringille jaune, chant
+- [ ] pic-vert/ | pic vert | Observer | fiche espèce : au sol sur la pelouse, fourmis
+- [ ] oiseaux-migrateurs-du-jardin/ | quels oiseaux partent en hiver | Observer | espèces qui partent et qui restent (sources LPO)
