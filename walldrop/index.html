@@ -4,11 +4,11 @@
 <meta name="p:domain_verify" content="502de97823af7b5b65ae1355e5e955dd"/>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WallDrop - Free Aesthetic Wallpapers for iPhone, Android & 4K Desktop</title>
-<meta name="description" content="Download free aesthetic wallpapers for iPhone, Android and 4K desktop: aurora, synthwave, gradients, AMOLED neon, galaxy, mountains, holographic and more. Full packs for $1.">
-<meta property="og:title" content="WallDrop - Free Aesthetic Wallpapers">
-<meta property="og:description" content="Free HD wallpapers for phone and 4K desktop. Full packs of 30 for $1.">
-<meta property="og:image" content="https://jeremstyke.github.io/walldrop/img/retro-sunset/cover.jpg">
+<title>WallDrop - Free Aesthetic Phone Wallpapers for iPhone & Android</title>
+<meta name="description" content="Free aesthetic phone wallpapers and lock screens for iPhone and Android: aurora, synthwave, gradients, AMOLED neon, galaxy, mountains, holographic and more. Full packs for $1.">
+<meta property="og:title" content="WallDrop - Free Aesthetic Phone Wallpapers">
+<meta property="og:description" content="Free HD lock screen wallpapers for iPhone and Android. Full packs for $1.">
+<meta property="og:image" content="https://jeremstyke.github.io/walldrop/img/og.jpg">
 <link rel="canonical" href="https://jeremstyke.github.io/walldrop/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
@@ -29,8 +29,8 @@ nav a:hover{color:var(--text)}
 .hero h1{font-size:clamp(2.1rem,6vw,3.6rem);line-height:1.08;letter-spacing:-.03em}
 .hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero p{color:var(--muted);max-width:620px;margin:16px auto 0;font-size:1.1rem}
-.strip{display:flex;gap:12px;justify-content:center;margin-top:36px;overflow:hidden}
-.strip img{width:110px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.strip{display:flex;gap:12px;justify-content:center;align-items:flex-start;margin-top:36px;padding-bottom:24px;overflow:hidden}
+.strip img{width:120px;height:auto;filter:drop-shadow(0 12px 24px rgba(0,0,0,.55))}
 .strip img:nth-child(odd){transform:translateY(16px)}
 .pack{padding:56px 0;border-top:1px solid var(--line)}
 .ph{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:22px}
@@ -139,7 +139,7 @@ const nav = document.getElementById("nav"), main = document.getElementById("pack
 
 PACKS.forEach((p, k) => {
   nav.insertAdjacentHTML("beforeend", `<a href="#${p.id}">${p.name.replace(" (AMOLED)", "")}</a>`);
-  strip.insertAdjacentHTML("beforeend", `<img src="img/${p.id}/p${pad(4 + (k % 9))}.jpg" alt="${p.name} wallpaper" loading="lazy">`);
+  strip.insertAdjacentHTML("beforeend", `<img src="img/lock/${p.id}.png" alt="${p.name} lock screen wallpaper on a phone" loading="lazy">`);
   let phones = "";
   for (let i = 1; i <= 6; i++) {
     const free = i <= 3;
