@@ -105,7 +105,7 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None,
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F5F7F2">
-<link rel="icon" href="{R}assets/favicon.ico" sizes="32x32"><link rel="icon" href="{R}assets/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="{R}assets/apple-touch-icon.png">
+<link rel="icon" href="{R}assets/favicon.ico" sizes="32x32"><link rel="icon" href="{R}assets/favicon.svg" type="image/svg+xml"><link rel="icon" href="{R}assets/icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="{R}assets/apple-touch-icon.png">
 <link rel="preload" href="{R}assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{R}assets/fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{R}assets/style.css?v=2">
@@ -267,6 +267,8 @@ def build():
     open(os.path.join(OUT, 'robots.txt'), 'w').write('User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n' % BASE)
     open(os.path.join(OUT, 'CNAME'), 'w').write(DOMAIN + '\n')
     open(os.path.join(OUT, '.nojekyll'), 'w').write('')
+    try: shutil.copy(os.path.join(OUT, 'assets', 'favicon.ico'), os.path.join(OUT, 'favicon.ico'))
+    except Exception: pass
     open(os.path.join(OUT, 'da4540821acf4048569bad7fbedc3ee1.txt'), 'w').write('da4540821acf4048569bad7fbedc3ee1')  # cle IndexNow
     print('%d pages, %d guides' % (len(PAGES), len(guides)))
 
