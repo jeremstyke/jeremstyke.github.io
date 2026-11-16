@@ -20,3 +20,5 @@ Note : build.py met à jour .work/vieillirchezsoi/src/dates.json (date de public
 Le PDF vieillirchezsoi/assets/guide-amenager-logement.pdf est généré par src/make_pdf.js (à relancer seulement si le guide pilier change, pas pour un article).
 
 Easwe : AUCUN lien ni mention d'Easwe pour l'instant (partenariat suspendu par Jeremy). Seulement des liens Amazon.
+
+Liens vers le site frère « Les oiseaux du jardin » (décidé par Jeremy le 16 nov 2026) : quand c'est vraiment pertinent pour le lecteur, et seulement là, ajoute dans le texte 1 lien naturel vers une page de https://lesoiseauxdujardin.fr/<slug>/ (liste des pages : les g("slug/" de .work/lesoiseauxdujardin/src/auto_articles.py et content.py). Exemples pertinents : idées de cadeaux pour une personne âgée (mangeoire connectée, nichoir avec caméra, jumelles), activités et lien social à la maison, rester actif au jardin, sortir sur son balcon. Jamais forcé, jamais plus d'un lien par page, et rien dans les pages purement santé ou salle de bain.
