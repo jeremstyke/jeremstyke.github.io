@@ -9,8 +9,8 @@
 - [x] mesange-bleue/ | mésange bleue | Observer | fiche espèce : reconnaître, différence avec la charbonnière, nichoir et nourriture
 - [x] oiseau-tete-noire/ | oiseau tête noire | Observer | identification : mésange charbonnière, fauvette à tête noire, bouvreuil, mésange noire
 - [x] merle-noir/ | merle noir | Observer | fiche espèce : mâle, femelle, chant, que lui donner (fruits, pas de pain)
-- [ ] oiseau-jaune-et-vert/ | oiseau jaune et vert | Observer | identification : verdier, chardonneret, serin, mésange bleue, pic vert
-- [ ] moineau-domestique/ | moineau | Observer | fiche espèce : déclin (sources LPO/Vigie-Nature), nichoirs collectifs, graines
+- [x] oiseau-jaune-et-vert/ | oiseau jaune et vert | Observer | identification : verdier, chardonneret, serin, mésange bleue, pic vert
+- [x] moineau-domestique/ | moineau | Observer | fiche espèce : déclin (sources LPO/Vigie-Nature), nichoirs collectifs, graines
 - [ ] oiseau-noir-et-blanc-longue-queue/ | oiseau noir et blanc longue queue | Observer | identification : pie bavarde, bergeronnette grise, mésange à longue queue
 - [ ] pinson-des-arbres/ | pinson des arbres | Observer | fiche espèce : mâle et femelle, nourriture au sol
 - [ ] chardonneret-elegant/ | chardonneret élégant | Observer | fiche espèce : statut de protection vérifié, graines de niger, mangeoire à niger
