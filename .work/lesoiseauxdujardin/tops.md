@@ -7,7 +7,7 @@
 - [x] meilleure-graine-tournesol/ | meilleures graines de tournesol pour oiseaux | Nourrir | marques et formats (noir, décortiqué)
 - [x] meilleure-boule-de-graisse/ | meilleures boules de graisse sans filet | Nourrir | graisse végétale, sans huile de palme si indiqué
 - [x] meilleur-abreuvoir-oiseaux/ | meilleur abreuvoir pour oiseaux | Nourrir | bain d'oiseaux, chauffant si vendu
-- [ ] meilleur-nichoir-mesange/ | meilleur nichoir à mésange | Nichoirs | bois, béton de bois, trou 28 et 32 mm
+- [x] meilleur-nichoir-mesange/ | meilleur nichoir à mésange | Nichoirs | bois, béton de bois, trou 28 et 32 mm
 - [ ] meilleure-mangeoire-fenetre/ | meilleure mangeoire de fenêtre | Mangeoires | ventouses, observation de près
 - [ ] meilleure-mangeoire-anti-pigeon/ | meilleure mangeoire anti-pigeons et anti-écureuils | Mangeoires | cages, sélectives
 - [ ] meilleure-camera-jardin-oiseaux/ | meilleure caméra pour observer les oiseaux | Observer | caméras de jardin, pièges photo

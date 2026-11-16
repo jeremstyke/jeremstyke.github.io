@@ -2019,3 +2019,259 @@ g("meilleur-abreuvoir-oiseaux/",
        ("Avez-vous testé ces abreuvoirs ?",
         "Non. Cette sélection repose sur les fiches publiées par les fabricants et les revendeurs. Quand une donnée manque, comme la profondeur, nous l'indiquons comme non précisée.")],
   short="Top 10 abreuvoirs", cat="Nourrir")
+
+AUTO_META['oiseau-tete-noire/'] = ('🐦', 'lilas')
+g("oiseau-tete-noire/",
+  "Oiseau à tête noire au jardin : mésange, fauvette ou bouvreuil ?",
+  "Oiseau à tête noire au jardin : comment savoir de quelle espèce il s'agit",
+  "Un petit oiseau à tête noire à la mangeoire ? C'est le plus souvent une mésange charbonnière. Fauvette, bouvreuil, mésange noire : le tableau pour trancher.",
+  """
+<p>Un petit oiseau à tête noire, aux joues blanches et au ventre jaune, qui se pend à votre mangeoire : c'est presque toujours une <strong>mésange charbonnière</strong>, l'oiseau à tête noire le plus courant des jardins. Si le ventre n'est pas jaune, trois autres espèces entrent en jeu : la <strong>fauvette à tête noire</strong>, le <strong>bouvreuil pivoine</strong> et la <strong>mésange noire</strong>.</p>
+<p>Regardez d'abord la couleur du ventre, puis l'étendue du noir sur la tête.</p>
+{CTA}
+
+<h2>Quel oiseau a la tête noire ? Le tableau des suspects</h2>
+<p>Tailles relevées sur les fiches espèces de la LPO, sauf la nonnette (oiseaux.net). Oiseaux.net donne parfois d'autres chiffres, sans conséquence pour l'identification.</p>
+<table><thead><tr><th>Espèce</th><th>Taille</th><th>Le noir sur la tête</th><th>Le reste du plumage</th><th>Où la voir</th></tr></thead><tbody>
+<tr><td>Mésange charbonnière</td><td>13,5 à 15 cm</td><td>Toute la tête, gorge et cravate noires</td><td>Joues blanches, ventre jaune barré de noir</td><td>À la mangeoire, toute l'année</td></tr>
+<tr><td>Fauvette à tête noire (mâle)</td><td>14 cm</td><td>Une simple calotte, comme un béret</td><td>Gris brun, sans jaune</td><td>Dans les haies et les arbustes à baies, rarement à la mangeoire</td></tr>
+<tr><td>Bouvreuil pivoine (mâle)</td><td>15,5 à 17,5 cm</td><td>Calotte bleu noir brillante</td><td>Dessous rose rouge, croupion blanc, bec court et gros</td><td>Discret, dans les arbres et les haies, surtout en hiver</td></tr>
+<tr><td>Mésange noire</td><td>10 à 11,5 cm</td><td>Tête et gorge noires</td><td>Tache blanche sur la nuque, joues blanches, pas de jaune</td><td>Près des conifères, à la mangeoire si le jardin est près d'un bois</td></tr>
+<tr><td>Mésange nonnette</td><td>11 à 12 cm</td><td>Calotte noire et petite bavette</td><td>Sans jaune ni tache blanche sur la nuque</td><td>Jardins proches des bois, en hiver</td></tr>
+</tbody></table>
+
+<h2>Tête noire et ventre jaune : la mésange charbonnière</h2>
+<p>C'est la plus grande de nos mésanges et la plus facile à reconnaître. La LPO la décrit avec la calotte, la gorge et une cravate noires, des joues blanches et le dessous jaune. La cravate est plus large chez le mâle, ce qui permet parfois de distinguer les deux sexes. Les jeunes de l'été, eux, ont les joues jaunâtres.</p>
+<p>Elle vient à la mangeoire toute l'année, attrape une graine de tournesol et file la casser sur une branche avec son bec solide. Au printemps, son « ti-dû ti-dû » répété est l'un des premiers chants du jardin. Tout le détail est dans notre fiche de la <a href="{R}mesange-charbonniere/">mésange charbonnière</a>.</p>
+<p>Ne la confondez pas avec la <a href="{R}mesange-bleue/">mésange bleue</a> : même ventre jaune, mais la calotte est bleue et la tête n'est pas noire.</p>
+
+<h2>Une calotte noire comme un béret : la fauvette à tête noire</h2>
+<p>Si seul le dessus de la tête est noir, et que le reste de l'oiseau est gris brun, pensez à la fauvette à tête noire. Attention, seul le mâle porte ce béret noir : la femelle et les jeunes ont une calotte rousse, rappelle la LPO. Un couple qui se nourrit dans le même buisson peut donc vous faire croire à deux espèces.</p>
+<p>Vous la verrez rarement à la mangeoire. Oiseaux.net le dit clairement : les graines ne l'intéressent pas. Elle mange des insectes à la belle saison, puis des baies (sureau, ronce, lierre). Elle est observable presque toute l'année en France selon la LPO : une partie des oiseaux du nord et de l'est passe l'hiver sur la façade atlantique et dans le sud. Son chant puissant et flûté, souvent précédé d'un petit bavardage grinçant, porte loin au printemps.</p>
+<p><strong>Notre conseil</strong> : pour l'attirer, plantez plutôt que d'acheter des graines. Un sureau, un lierre qu'on laisse fleurir et fructifier, une ronce dans un coin : c'est son garde-manger d'automne.</p>
+
+<h2>Calotte noire et poitrine rose : le bouvreuil pivoine</h2>
+<p>Le mâle est inoubliable : calotte noire brillante, dessous rose rouge, croupion blanc bien visible quand il s'envole, et un gros bec court. La femelle a la même calotte noire mais un plumage gris brun. Les jeunes, eux, n'ont pas encore de calotte noire.</p>
+<p>Le bouvreuil est très discret et se déplace en couple ou en petit groupe familial. Il mange surtout des graines et des bourgeons. En Normandie, la LPO note l'arrivée d'hivernants venus du nord et du centre de l'Europe de novembre à janvier, avec un pic en décembre : c'est donc maintenant que vous avez le plus de chances de le voir.</p>
+<p>Sa situation est préoccupante. La LPO le dit intégralement protégé et en déclin, et le suivi Vigie-Nature (programme STOC) mesure une baisse de 33 % de ses effectifs entre 2001 et 2019. La LPO Normandie le cite comme « vulnérable » sur la liste rouge des oiseaux nicheurs de France. Notre page sur les <a href="{R}oiseau-ventre-rouge/">oiseaux au ventre rouge</a> vous aide à ne pas le confondre avec le rouge-gorge ou le pinson.</p>
+
+<h2>Petite, tête noire et tache blanche sur la nuque : la mésange noire</h2>
+<p>Elle ressemble à une charbonnière en modèle réduit et sans jaune. Son signe distinctif : une tache blanche allongée sur la nuque, que la LPO met en avant, avec deux barres blanches sur l'aile et des flancs fauves. C'est la plus petite de nos mésanges, 8 à 10 g seulement.</p>
+<p>Elle vit surtout dans les conifères. La LPO précise qu'elle ne vient aux mangeoires que dans les jardins proches des boisements. Certaines années, elle arrive en nombre lors d'« invasions » hivernales irrégulières, ce qui explique qu'on la voie un hiver et plus du tout le suivant.</p>
+<p>Et la petite mésange à calotte noire et minuscule bavette, gris brun sans tache sur la nuque ? C'est la <strong>mésange nonnette</strong>, que nous présentons dans notre page sur le <a href="{R}petit-oiseau-gris-jardin/">petit oiseau gris du jardin</a>. Elle ressemble beaucoup à la mésange boréale : selon oiseaux.net, la voix est le meilleur moyen de les séparer.</p>
+
+<h2>Et si c'est un gros oiseau noir ?</h2>
+<p>Si l'oiseau est entièrement noir, et pas seulement la tête, vous avez sans doute affaire à un merle. Voyez notre fiche du <a href="{R}merle-noir/">merle noir</a> et notre page sur l'<a href="{R}oiseau-noir-bec-jaune/">oiseau noir au bec jaune</a>.</p>
+
+<h2>Comment confirmer l'espèce ?</h2>
+<p>Trois réflexes. D'abord, notez le ventre : jaune, rose, ou ni l'un ni l'autre. Ensuite, la nuque : une tache blanche signe la mésange noire. Enfin, écoutez. Les applications comme Merlin Bird ID ou BirdNET proposent un nom à partir d'un enregistrement fait au téléphone ; prenez leur réponse comme une piste, surtout pour la nonnette et la boréale.</p>
+<p>Avec des jumelles, la tache de la nuque ou la cravate de la charbonnière se voient sans sortir de la maison. Un modèle 8x42 convient très bien au jardin, comme nous l'expliquons dans notre comparatif des <a href="{R}meilleures-jumelles-oiseaux/">meilleures jumelles pour observer les oiseaux</a>.</p>
+<p><strong>Jumelles 8x42</strong> : pour voir la nuque et la calotte sans déranger. <a href="{AMZ:jumelles 8x42 ornithologie}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Guide d'identification</strong> : pour comparer mésanges, fauvettes et bouvreuils. <a href="{AMZ:guide ornitho oiseaux de france et d'europe}" """ + A + """>Voir sur Amazon</a></p>
+<p>Autre solution, plus coûteuse mais très parlante : une mangeoire avec caméra, qui photographie chaque visiteur et propose souvent un nom d'espèce. Nous avons comparé les modèles dans notre sélection des <a href="{R}meilleure-mangeoire-connectee/">meilleures mangeoires connectées</a>.</p>
+<p><strong>Mangeoire connectée avec caméra</strong> : <a href="{AMZ:mangeoire oiseaux camera solaire}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment attirer ces oiseaux à tête noire ?</h2>
+<p>Les mésanges viennent facilement. En hiver, une mangeoire suspendue garnie de tournesol noir et une boule de graisse sans filet suffisent. Pour le reste, suivez notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">bien nourrir les oiseaux du jardin</a>, et pas de pain.</p>
+<p><strong>Graines de tournesol noir</strong> : <a href="{AMZ:graines de tournesol noir oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+<p>Pour qu'elles restent au printemps, posez un nichoir dès l'automne. Le tutoriel nichoirs de la LPO donne un trou d'envol de <strong>32 mm</strong> pour la charbonnière et de <strong>25 à 27 mm</strong> pour la mésange noire. La fauvette et le bouvreuil, eux, construisent leur nid dans les buissons : une haie libre et dense leur sera plus utile que n'importe quel nichoir. Notre guide pour <a href="{R}installer-un-nichoir/">installer un nichoir</a> explique la pose.</p>
+<p><strong>Nichoir à mésange, trou de 32 mm</strong> : <a href="{AMZ:nichoir mesange charbonniere 32 mm}" """ + A + """>Voir sur Amazon</a></p>
+""",
+  faq=[("Quel est le petit oiseau à tête noire et ventre jaune ?",
+        "C'est la mésange charbonnière : tête et gorge noires, joues blanches, ventre jaune barré d'une cravate noire. C'est l'une des visiteuses les plus fréquentes des mangeoires, toute l'année."),
+       ("Quel oiseau a une calotte noire et le ventre rose ?",
+        "Le bouvreuil pivoine mâle : calotte noire brillante, dessous rose rouge et croupion blanc. La femelle a la même calotte noire sur un plumage gris brun. C'est une espèce protégée et en déclin."),
+       ("La fauvette à tête noire vient-elle à la mangeoire ?",
+        "Rarement. Elle mange des insectes puis des baies, et les graines ne l'intéressent pas selon oiseaux.net. Seul le mâle a la calotte noire ; celle de la femelle est rousse.")],
+  short="Oiseau à tête noire", cat="Observer")
+
+AUTO_META['merle-noir/'] = ('🐦‍⬛', 'mousse')
+g("merle-noir/",
+  "Merle noir : le reconnaître, que lui donner, où il niche",
+  "Merle noir : comment le reconnaître, le nourrir et l'aider à nicher au jardin",
+  "Mâle noir au bec jaune, femelle brune : reconnaître le merle noir, savoir quoi lui donner (fruits, jamais de pain), où il niche et quand il chante au printemps.",
+  """
+<p>Le merle noir est l'oiseau qui sautille sur votre pelouse, s'arrête net, tête penchée, puis tire un ver du sol. Le mâle est tout noir avec un bec jaune orangé, la femelle est brune. Pour l'aider en hiver, donnez-lui des <strong>fruits</strong> posés au sol ou sur un plateau, pommes ou poires bien mûres, et surtout pas de pain.</p>
+<p>C'est aussi l'un des plus beaux chanteurs de nos jardins, et un oiseau qu'on voit toute l'année.</p>
+{CTA}
+
+<h2>Comment reconnaître le mâle, la femelle et le jeune ?</h2>
+<table><thead><tr><th></th><th>Mâle</th><th>Femelle</th><th>Jeune</th></tr></thead><tbody>
+<tr><td>Plumage</td><td>Noir profond et mat</td><td>Brun, poitrine mouchetée, teinte très variable</td><td>Brun roussâtre moucheté de chamois</td></tr>
+<tr><td>Bec</td><td>Jaune orangé</td><td>Brunâtre, peut jaunir avec l'âge</td><td>Sombre</td></tr>
+<tr><td>Cercle autour de l'œil</td><td>Jaune, bien visible</td><td>Peu visible</td><td>Absent</td></tr>
+</tbody></table>
+<p>La description vient de la fiche LPO et d'oiseaux.net. Pour la taille, les deux sources ne s'accordent pas tout à fait : 24 à 25 cm pour la LPO, 24 à 27 cm pour oiseaux.net, avec une envergure de 34 à 38 cm. La LPO note un poids qui varie avec la saison : environ 85 g en été, 100 à 115 g en hiver.</p>
+<p>Le jeune peut faire penser à une grive : c'est la confusion la plus fréquente en été. Notre page sur l'<a href="{R}oiseau-noir-bec-jaune/">oiseau noir au bec jaune</a> détaille comment séparer merle, grive et étourneau.</p>
+<p>Vous avez vu un merle avec des plumes blanches ? Ce n'est pas rare. Oiseaux.net décrit le leucisme comme fréquent chez cette espèce, en particulier en ville : quelques plumes blanches dans le noir, parfois un oiseau presque entièrement blanc.</p>
+
+<h2>Où et quand le voir ?</h2>
+<p>Partout où il y a des arbustes et de l'herbe : sous-bois, parcs, jardins, et en pleine ville. La LPO souligne qu'il a besoin de pelouses pour se nourrir. En montagne, il laisse la place au merle à plastron au-dessus de 1 500 ou 1 600 m (oiseaux.net cite des merles noirs jusqu'à 2 300 m).</p>
+<p>Il est là toute l'année. Les sources le décrivent comme relativement sédentaire en France, surtout en ville, mais l'observatoire Oiseaux des jardins parle de migrateur partiel : certains de nos merles descendent vers le sud en hiver et sont remplacés par des oiseaux venus du nord de l'Europe. Le merle de votre pelouse en janvier n'est donc pas forcément celui de juillet.</p>
+<p>Bonne nouvelle, l'espèce se porte bien à l'échelle nationale : le suivi Vigie-Nature (STOC) mesure une hausse de 7 % entre 2001 et 2019. La LPO signale toutefois un recul d'environ 10 % dans le Grand Paris entre 2007 et 2017.</p>
+
+<h2>Que mange le merle, et que lui donner ?</h2>
+<p>Au naturel, il mange des vers de terre, des insectes, des escargots, des limaces et des araignées, avec un régime plus carnivore d'avril à juin d'après la LPO. Il adore aussi les fruits : cerises, mûres, baies de sureau, d'aubépine ou de pyracantha. Quand le sol gèle, oiseaux.net le décrit se rabattant sur les prunelles, les fruits de l'aubépine, de l'églantier et des cotonéasters.</p>
+<p>Le merle se nourrit au sol, pas à une mangeoire suspendue. En hiver, la LPO conseille des fruits de saison : pommes, poires, raisins. Coupez les pommes en deux et posez-les au sol, dans un endroit dégagé, ou sur un plateau un peu surélevé qui les garde propres. Les petites graines comme le millet ou l'avoine, posées au sol, peuvent compléter.</p>
+<p><strong>Ce qu'il faut éviter</strong>, selon la LPO : le pain (indigeste, et le sel peut tuer), le lait, le lard salé, les restes de viande ou de fromage et les restes de table. Ne nourrissez qu'en hiver, surtout par froid prolongé. Le reste est expliqué dans notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">bien nourrir les oiseaux du jardin</a>.</p>
+<p><strong>Plateau de nourrissage sur pied</strong> : pour les pommes et les fruits, à l'abri de la boue. <a href="{AMZ:mangeoire plateau oiseaux sur pied}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Notre conseil</strong> : gardez un coin de feuilles mortes sous une haie et plantez un arbuste à baies (aubépine, sureau, pyracantha). Le merle y trouvera vers et fruits sans vous, ce qui vaut mieux que n'importe quelle nourriture achetée.</p>
+<p>Le merle se baigne aussi beaucoup, même en hiver. Une vasque large et peu profonde lui convient mieux qu'un petit abreuvoir suspendu : voyez notre comparatif des <a href="{R}meilleur-abreuvoir-oiseaux/">meilleurs abreuvoirs pour oiseaux</a>.</p>
+<p><strong>Bain d'oiseaux en vasque</strong> : <a href="{AMZ:bain oiseaux vasque jardin}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Où le merle fait-il son nid ? Faut-il un nichoir ?</h2>
+<p>La femelle construit une coupe de tiges, de racines, de feuilles et de mousse, souvent cimentée de boue, en trois ou quatre jours selon la LPO. Elle l'installe le plus souvent entre 1 et 3 m de haut, dans la fourche d'un arbuste, une haie épaisse, un conifère, un recoin de maison ou sur une poutre. Oiseaux.net cite aussi le lierre, les tas de branches et les avant-toits.</p>
+<p>Les sources divergent sur le nombre d'œufs : 4 à 5 pour la LPO, 3 à 5 pour Oiseaux des jardins, 3 à 6 pour oiseaux.net. Ils éclosent après environ deux semaines. Le couple fait plusieurs nichées par an, deux le plus souvent, jusqu'à trois ou quatre selon la LPO Normandie. En ville, la nidification commence parfois en plein hiver.</p>
+<p>Un nichoir à trou ne lui sert à rien. La Ligue royale belge pour la protection des oiseaux indique que le <strong>nichoir semi-ouvert</strong>, conçu surtout pour le rouge-gorge, convient « parfois même au merle noir », posé entre 1 et 10 m de haut. Notre conseil : posez-en un dans une haie ou contre un mur couvert de lierre, mais misez d'abord sur une haie dense et non taillée au printemps. Voyez notre guide pour <a href="{R}installer-un-nichoir/">installer un nichoir</a> et notre fiche du <a href="{R}rouge-gorge/">rouge-gorge</a>, qui l'utilise aussi.</p>
+<p><strong>Nichoir semi-ouvert</strong> : <a href="{AMZ:nichoir semi-ouvert bois rouge-gorge merle}" """ + A + """>Voir sur Amazon</a></p>
+<p>Un jeune merle au sol, qui ne vole pas encore, n'est pas abandonné. La LPO explique que les jeunes quittent le nid un ou deux jours avant de savoir voler, et que les parents continuent de les nourrir : ne le ramassez pas. Éloignez simplement le chat.</p>
+
+<h2>Pourquoi le merle chante-t-il si tôt et si tard ?</h2>
+<p>Le mâle chante de février ou mars jusqu'en juillet, surtout à l'aube et au crépuscule, depuis un perchoir bien exposé. Son chant flûté et mélodieux est très variable : chaque mâle a son propre répertoire, selon oiseaux.net. Le soir, vous entendrez aussi un cri métallique « tjink » répété, et en cas de danger un « tjuk » d'alarme.</p>
+<p>Pour le voir chanter de près, une paire de jumelles 8x42 suffit largement : notre comparatif des <a href="{R}meilleures-jumelles-oiseaux/">meilleures jumelles pour observer les oiseaux</a> vous aidera à choisir.</p>
+<p><strong>Jumelles 8x42</strong> : <a href="{AMZ:jumelles 8x42 ornithologie}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Avec quels oiseaux peut-on le confondre ?</h2>
+<p>L'étourneau sansonnet, noir lui aussi, marche au lieu de sautiller et vit en bande. Les grives ont un ventre clair nettement tacheté, là où la femelle de merle est brune. En montagne, le merle à plastron porte un croissant blanc sur la poitrine. Et si seul le dessus de la tête est noir, ce n'est pas un merle : voyez notre page sur l'<a href="{R}oiseau-tete-noire/">oiseau à tête noire</a>.</p>
+<p>Un dernier point que beaucoup ignorent : contrairement à la plupart des oiseaux du jardin, le merle noir n'est pas protégé en France. La LPO rappelle qu'il figure parmi les gibiers chassables, et elle demande son retrait de cette liste.</p>
+""",
+  faq=[("Que donner à manger à un merle en hiver ?",
+        "Des fruits de saison posés au sol ou sur un plateau : pommes ou poires coupées en deux, raisins, comme le conseille la LPO. Jamais de pain, de lait ni de restes salés."),
+       ("Comment reconnaître une femelle de merle ?",
+        "Elle est brune, avec la poitrine mouchetée, un bec brunâtre et un cercle autour de l'œil peu visible. Elle sautille et se nourrit au sol exactement comme le mâle."),
+       ("Le merle noir utilise-t-il un nichoir ?",
+        "Rarement. Il construit une coupe dans une haie, un arbuste ou un recoin de bâtiment. La Ligue royale belge pour la protection des oiseaux indique qu'il occupe parfois un nichoir semi-ouvert posé entre 1 et 10 m de haut.")],
+  short="Merle noir", cat="Observer")
+
+AUTO_META['meilleur-nichoir-mesange/'] = ('🏆', 'sable')
+g("meilleur-nichoir-mesange/",
+  "Nichoir à mésange 2026 : 9 modèles en bois et béton de bois",
+  "Les meilleurs nichoirs à mésange : 9 modèles comparés, trou de 26 à 32 mm",
+  "Schwegler, Woodstone, LPO, Windhager, Green Feathers, Birdfy : 9 nichoirs à mésange comparés, en bois ou en béton de bois, avec le bon diamètre de trou d'envol.",
+  """
+<p>Le meilleur nichoir à mésange est celui qui a le bon trou d'envol, des parois épaisses et une façade qui s'ouvre pour le nettoyage d'automne. Pour la plupart des jardins, nous conseillons le <strong>Schwegler 1B en béton de bois</strong>, en 32 mm pour la charbonnière ou en 26 mm pour la mésange bleue : c'est une référence vendue par la LPO, qui dure des années et résiste aux pics. Si vous préférez le bois, le nichoir <strong>LPO Forez</strong> en Douglas est un très bon choix.</p>
+<p>Avant d'acheter, une seule question compte vraiment : quelle mésange voulez-vous accueillir ?</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
+
+<h2>Quel trou d'envol pour quelle mésange ?</h2>
+<p>Le tutoriel nichoirs des Refuges LPO donne ces mesures. Le diamètre du trou fait le tri : une mésange bleue passe dans un trou de 32 mm, mais la charbonnière, plus grosse, ne passe pas dans un trou de 28 mm. Un petit trou protège donc les petites espèces de la concurrence.</p>
+<table><thead><tr><th>Espèce</th><th>Trou d'envol</th><th>Fond intérieur</th><th>Du trou au fond</th><th>Hauteur de pose</th></tr></thead><tbody>
+<tr><td>Mésange noire</td><td>25 à 27 mm</td><td>10 x 10 cm</td><td>11 cm</td><td>2 à 4 m</td></tr>
+<tr><td>Mésange bleue</td><td>26 à 28 mm</td><td>13 x 13 cm</td><td>17 cm</td><td>2 à 5 m</td></tr>
+<tr><td>Mésange charbonnière</td><td>32 mm</td><td>14 x 14 cm</td><td>17 cm</td><td>2 à 6 m</td></tr>
+</tbody></table>
+<p>Nos fiches de la <a href="{R}mesange-bleue/">mésange bleue</a> et de la <a href="{R}mesange-charbonniere/">mésange charbonnière</a> détaillent les sources et les quelques divergences sur ces chiffres.</p>
+
+<h2>Le tableau récapitulatif</h2>
+<table><thead><tr><th>Produit</th><th>Matériau</th><th>Trou d'envol</th><th>Ouverture</th><th>Pour qui</th></tr></thead><tbody>
+<tr><td>Schwegler 1B 32 mm</td><td>Béton de bois</td><td>32 mm</td><td>Façade amovible</td><td>Charbonnière, longue durée</td></tr>
+<tr><td>Schwegler 1B 26 mm</td><td>Béton de bois</td><td>26 mm</td><td>Façade amovible sans outil</td><td>Mésange bleue, mésange noire</td></tr>
+<tr><td>Schwegler 2GR trois trous</td><td>Béton de bois</td><td>3 x 27 mm</td><td>Façade amovible</td><td>Jardins à prédateurs</td></tr>
+<tr><td>Woodstone (CJ Wildlife / Vivara Pro)</td><td>Béton et fibres de bois</td><td>28 ou 32 mm</td><td>Par l'avant</td><td>Alternative au Schwegler</td></tr>
+<tr><td>LPO Forez</td><td>Douglas</td><td>32 mm</td><td>Porte avant</td><td>Le meilleur choix en bois</td></tr>
+<tr><td>Windhager Delta</td><td>Bouleau FSC verni</td><td>28 mm</td><td>Façade ouvrante</td><td>Mésange bleue, petit budget</td></tr>
+<tr><td>Relaxdays nichoir à suspendre</td><td>Sapin non traité</td><td>32 mm</td><td>Façade à charnière</td><td>Premier nichoir, entrée de gamme</td></tr>
+<tr><td>Green Feathers nichoir prêt pour caméra</td><td>Pin</td><td>32 mm</td><td>Façade et toit vissés</td><td>Ajouter une caméra plus tard</td></tr>
+<tr><td>Birdfy Nest Duo</td><td>Bambou FSC et ABS</td><td>23, 25, 28, 38 ou 50 mm</td><td>Porte magnétique</td><td>Observer la nichée en vidéo</td></tr>
+</tbody></table>
+
+<h2>1. Schwegler 1B 32 mm : notre choix pour la mésange charbonnière</h2>
+<p><strong>Pour qui ?</strong> Vous voulez poser un nichoir une fois pour toutes et ne plus y penser.</p>
+<p>La boutique LPO le présente en béton de bois, 17 x 26 x 18 cm, avec une chambre de 12 cm de diamètre, pour 3,6 kg. La façade s'enlève pour le nettoyage. Il se cloue sur un tronc ou un mur avec le clou en aluminium fourni, ou se suspend à une branche par son anse. Fabriqué en Allemagne ; le revendeur Quickcrop annonce une durée de vie de 20 à 25 ans.</p>
+<ul>
+<li><strong>Points forts</strong> : matériau qui garde une température stable et que les pics n'agrandissent pas facilement, durée de vie très longue, vendu par la LPO.</li>
+<li><strong>Limites</strong> : lourd, la fixation doit être solide. Pas de réducteur : le trou reste à 32 mm. Plaque anti-prédateurs non précisée.</li>
+</ul>
+<p>Pourquoi en premier ? Parce qu'un nichoir en bois mince se fend ou se fait percer au bout de quelques saisons, alors que celui-ci sera encore là dans dix ans. Sur la durée, il revient moins cher.</p>
+<p><a href="{AMZ:Schwegler nichoir 1B 32 mm}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Schwegler 1B 26 mm : pour la mésange bleue et la mésange noire</h2>
+<p><strong>Pour qui ?</strong> Vous voulez réserver le nichoir aux petites mésanges.</p>
+<p>Même nichoir que le précédent, avec un trou de 26 mm. La fiche LPO précise une hauteur de chambre de 20 cm, une façade qui s'ouvre à la main grâce à un loquet en U, une sangle qui entoure la branche et un œillet pour le clouer. Avec 26 mm, le trou est dans la fourchette donnée par la LPO pour la mésange bleue comme pour la mésange noire.</p>
+<ul>
+<li><strong>Points forts</strong> : la charbonnière ne peut pas y entrer, ouverture sans outil, mêmes qualités de béton de bois.</li>
+<li><strong>Limites</strong> : pas de version 28 mm dans la gamme 1B (26 mm, 32 mm ou ovale). 3,6 kg à fixer.</li>
+</ul>
+<p><a href="{AMZ:Schwegler nichoir 1B 26 mm}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Schwegler 2GR à trois trous : le haut de gamme contre les prédateurs</h2>
+<p><strong>Pour qui ?</strong> Un jardin où pies, chats ou écureuils pillent les nids.</p>
+<p>Ce gros nichoir en béton de bois (19 x 30 x 27 cm, 7,4 kg) a trois entrées de 27 mm. D'après la boutique LPO, la façade protège la couvée, et la chambre claire pousse les parents à bâtir leur nid plus bas, donc plus loin des entrées. La façade se démonte grâce à une vis à manivelle. Il est livré avec sangle et clou en aluminium, à poser à 2 m minimum.</p>
+<ul>
+<li><strong>Points forts</strong> : conception pensée contre les prédateurs, robustesse, trous de 27 mm adaptés aux petites mésanges.</li>
+<li><strong>Limites</strong> : 7,4 kg, il faut un support costaud. Plus cher que la plupart des nichoirs. Trop étroit pour la charbonnière, qui demande 32 mm.</li>
+</ul>
+<p><a href="{AMZ:Schwegler 2GR nichoir 3 trous 27 mm}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Woodstone (CJ Wildlife / Vivara Pro) : l'alternative au béton de bois allemand</h2>
+<p><strong>Pour qui ?</strong> Vous voulez la solidité du béton de bois avec un look plus moderne.</p>
+<p>Le Woodstone est un mélange de béton et de fibres de bois issu de matériaux FSC, selon Vivara. La version Seville 28 mm pèse 6,3 kg pour 28,3 x 34,8 x 24,1 cm ; la version 32 mm, décrite par le revendeur NHBS, pèse 6,9 kg avec une façade amovible. La LPO vend un modèle voisin, le « Woodstone Original 28 mm », de 5,07 kg, qui se nettoie par l'avant et s'accroche par le dos. Le fabricant annonce un matériau qui résiste aux pics, aux chats et aux écureuils.</p>
+<ul>
+<li><strong>Points forts</strong> : existe en 28 mm (ce que n'offre pas le Schwegler 1B), très résistant, matériaux FSC.</li>
+<li><strong>Limites</strong> : très lourd, Vivara recommande des clous en aluminium. Sur Amazon.fr, la gamme est vendue sous le nom « CJ Woodstone Birdhouse 28 mm », sans que nous ayons pu confirmer qu'il s'agit exactement du Seville.</li>
+</ul>
+<p><a href="{AMZ:CJ Woodstone nichoir 28 mm}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. LPO Forez 32 mm : le meilleur nichoir en bois</h2>
+<p><strong>Pour qui ?</strong> Vous préférez le bois et voulez acheter auprès d'une association.</p>
+<p>Conçu par la LPO et fabriqué en France par un ESAT, ce nichoir est en Douglas imputrescible, 17,5 x 21,5 x 28 cm pour 2,1 kg, avec un trou de 32 mm. La porte avant se retire pour le nettoyage.</p>
+<ul>
+<li><strong>Points forts</strong> : bois naturellement durable, fabrication française et solidaire, poids raisonnable.</li>
+<li><strong>Limites</strong> : fixation et protection du trou non précisées. Vendu sur la boutique LPO, pas trouvé sur Amazon.fr : le lien ci-dessous mène à des nichoirs en bois de même type.</li>
+</ul>
+<p><a href="{AMZ:nichoir mesange charbonniere bois 32 mm}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Windhager Delta 28 mm : le nichoir en bois pour la mésange bleue</h2>
+<p><strong>Pour qui ?</strong> Un nichoir en bois simple, prêt à accrocher, réservé aux petites mésanges.</p>
+<p>Windhager le fabrique en bouleau certifié FSC verni, avec un trou de 28 mm. La façade s'ouvre et le fabricant conseille un nettoyage à l'automne à l'eau claire et à la brosse. Un crochet est prémonté au dos pour l'accrocher à un mur ou à un arbre. Fabriqué en Europe.</p>
+<ul>
+<li><strong>Points forts</strong> : bon diamètre pour la mésange bleue, prêt à poser, bois certifié.</li>
+<li><strong>Limites</strong> : dimensions et épaisseur des parois non précisées. Un bois verni fin isole moins bien qu'un béton de bois.</li>
+</ul>
+<p><a href="{AMZ:Windhager nichoir Delta 28 mm}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Relaxdays nichoir en bois à suspendre 32 mm : pour un premier essai</h2>
+<p><strong>Pour qui ?</strong> Vous voulez essayer sans dépenser beaucoup, ou équiper un balcon.</p>
+<p>D'après ManoMano, ce nichoir en sapin non traité mesure 26 x 12 x 14,5 cm et pèse environ 560 g. Son trou fait 32 mm et sa façade s'ouvre sur charnière. Il se suspend, à 2 m de haut minimum selon le vendeur.</p>
+<ul>
+<li><strong>Points forts</strong> : léger, facile à installer, ouverture pratique.</li>
+<li><strong>Limites</strong> : avec 12 cm de large, il est en dessous du fond de 14 x 14 cm conseillé par la LPO pour la charbonnière, et même du minimum général de 12 x 12 cm si les parois sont épaisses. Un nichoir suspendu se balance, et du sapin non traité vieillit vite. À réserver à un premier essai.</li>
+</ul>
+<p><a href="{AMZ:Relaxdays nichoir bois a suspendre 3,2 cm}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Green Feathers nichoir en bois prêt pour caméra : pour équiper plus tard</h2>
+<p><strong>Pour qui ?</strong> Vous voulez un nichoir classique aujourd'hui et une caméra l'an prochain.</p>
+<p>Green Feathers fabrique à la main ce nichoir en pin de 34 x 25 x 19 cm, avec des planches de 21 mm d'épaisseur et un trou de 32 mm. Une plaque en inox vendue à part permet de changer le diamètre. La façade et le toit se dévissent, un point de fixation pour caméra est prévu à l'arrière et les fentes d'aération servent de passage au câble. Deux équerres et quatre vis sont fournies.</p>
+<ul>
+<li><strong>Points forts</strong> : parois épaisses, grand volume intérieur, prévu pour la caméra de la marque.</li>
+<li><strong>Limites</strong> : la page du fabricant parle de pin puis de mélèze, elle se contredit. Ce modèle précis n'a pas été trouvé sur Amazon.fr, où la marque vend d'autres nichoirs et des kits avec caméra.</li>
+</ul>
+<p><a href="{AMZ:Green Feathers nichoir bois oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+<p>Si vous voulez directement l'image, notre comparatif des <a href="{R}meilleur-nichoir-camera/">meilleurs nichoirs avec caméra</a> présente les kits complets de la marque.</p>
+
+<h2>9. Birdfy Nest Duo : le nichoir avec deux caméras</h2>
+<p><strong>Pour qui ?</strong> Vous voulez suivre la nichée en direct sur votre téléphone, de l'intérieur et de l'extérieur.</p>
+<p>D'après Birdfy, ce nichoir en bambou FSC et ABS (25,5 x 19,8 x 40 cm, 3,4 à 3,6 kg selon les documents) intègre deux caméras 1080p, une dans la chambre et une tournée vers l'entrée, avec vision nocturne. Il fonctionne sur batterie de 9 000 mAh rechargée par un panneau solaire de 5 W. Cinq entrées interchangeables de 23, 25, 28, 38 et 50 mm sont fournies, chacune avec une protection métallique. La porte magnétique s'ouvre à 180°.</p>
+<ul>
+<li><strong>Points forts</strong> : aucun câble à tirer, protections métalliques autour du trou, entrée de 28 mm pour la mésange bleue.</li>
+<li><strong>Limites</strong> : pas d'entrée de 32 mm, donc pas idéal pour la charbonnière (la LPO donne 32 mm). C'est de loin le plus cher de la sélection. Sur Amazon.fr, nous avons trouvé la fiche Birdfy à deux caméras sans pouvoir confirmer la référence exacte.</li>
+</ul>
+<p>C'est aussi un très beau cadeau pour un parent qui sort peu : la vie du nid se suit depuis le fauteuil. Notre site Vieillir chez soi propose d'autres <a href="https://vieillir-chez-soi.fr/cadeau-personne-agee/">idées de cadeau pour une personne âgée</a>.</p>
+<p><a href="{AMZ:Birdfy Nest Duo nichoir camera}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment choisir son nichoir à mésange ?</h2>
+<p><strong>Le trou d'abord.</strong> 32 mm si vous voulez la charbonnière, 26 à 28 mm pour la mésange bleue, 25 à 27 mm pour la mésange noire. Par exemple, si vous avez déjà un nichoir de 32 mm occupé chaque année par des charbonnières, ajoutez un 28 mm à une quinzaine de mètres : vous laissez une chance aux bleues.</p>
+<p><strong>Béton de bois ou bois ?</strong> Le béton de bois (Schwegler, Woodstone) coûte plus cher mais dure beaucoup plus longtemps et résiste aux pics. Le bois est plus léger et plus facile à fixer. Dans ce cas, choisissez des parois épaisses et un bois durable non traité : les produits de traitement n'ont rien à faire dans un nid.</p>
+<p><strong>Vérifiez l'ouverture.</strong> La LPO conseille un nettoyage chaque année, idéalement en septembre ou octobre : vider l'ancien nid et brosser. Une façade amovible rend cette corvée rapide. Un nichoir qui ne s'ouvre pas finit plein de vieux nids et de parasites.</p>
+<p><strong>Pas de perchoir.</strong> Un perchoir sous le trou aide surtout les prédateurs. Aucun des modèles retenus n'en a.</p>
+<p><strong>Notre conseil</strong> : posez-le maintenant. Les mésanges visitent les nichoirs dès la fin de l'hiver, et un nichoir installé en avril a beaucoup moins de chances d'être occupé. Orientez le trou vers l'est ou le sud-est, à l'abri des vents dominants, légèrement penché vers l'avant, et laissez 15 à 20 m entre deux nichoirs à mésange bleue, 40 à 50 m entre deux nichoirs à charbonnière. Le pas à pas est dans notre guide pour <a href="{R}installer-un-nichoir/">installer un nichoir</a>.</p>
+<p>Et pour que le couple reste, gardez la mangeoire garnie en hiver : notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">bien nourrir les oiseaux du jardin</a> explique quand arrêter au printemps. Vous ne savez pas quelle mésange vous rend visite ? Notre page sur l'<a href="{R}oiseau-tete-noire/">oiseau à tête noire</a> vous aide à trancher.</p>
+""",
+  faq=[("Quel diamètre de trou pour un nichoir à mésange ?",
+        "Selon le tutoriel nichoirs des Refuges LPO : 32 mm pour la mésange charbonnière, 26 à 28 mm pour la mésange bleue, 25 à 27 mm pour la mésange noire. Un trou plus petit empêche les espèces plus grosses d'entrer."),
+       ("Nichoir en bois ou en béton de bois : lequel choisir ?",
+        "Le béton de bois, comme le Schwegler 1B, est plus cher et plus lourd mais dure des années et résiste aux pics. Un bon nichoir en bois épais et durable, comme le LPO Forez en Douglas, reste un très bon choix, plus facile à fixer."),
+       ("Avez-vous testé ces nichoirs ?",
+        "Non. Cette sélection repose sur les fiches publiées par les fabricants et les revendeurs. Quand une donnée manque, nous l'indiquons comme non précisée.")],
+  short="Top 9 nichoirs à mésange", cat="Nichoirs")
