@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WallDrop - Free Aesthetic Wallpapers for iPhone, Android & 4K Desktop</title>
+<meta name="description" content="Download free aesthetic wallpapers for iPhone, Android and 4K desktop: aurora, synthwave sunsets, soft gradients, AMOLED neon and paper waves. Full packs for $1.">
+<meta property="og:title" content="WallDrop - Free Aesthetic Wallpapers">
+<meta property="og:description" content="Free HD wallpapers for phone and 4K desktop. Full packs of 30 for $1.">
+<meta property="og:image" content="https://jeremstyke.github.io/walldrop/img/retro-sunset/cover.jpg">
+<link rel="canonical" href="https://jeremstyke.github.io/walldrop/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07070c;--card:#11111a;--line:#22222f;--text:#f2f2f7;--muted:#9a9ab0;--acc:#ff5fa2;--acc2:#7c5cff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Space Grotesk",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:10;background:rgba(7,7,12,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:62px}
+.logo{font-weight:700;font-size:1.3rem;text-decoration:none}
+.logo span{background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+nav{display:flex;gap:18px;overflow-x:auto}
+nav a{color:var(--muted);text-decoration:none;font-size:.92rem;white-space:nowrap}
+nav a:hover{color:var(--text)}
+.hero{padding:70px 0 40px;text-align:center}
+.hero h1{font-size:clamp(2.1rem,6vw,3.6rem);line-height:1.08;letter-spacing:-.03em}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);max-width:620px;margin:16px auto 0;font-size:1.1rem}
+.strip{display:flex;gap:12px;justify-content:center;margin-top:36px;overflow:hidden}
+.strip img{width:110px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.strip img:nth-child(odd){transform:translateY(16px)}
+.pack{padding:56px 0;border-top:1px solid var(--line)}
+.ph{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+.ph h2{font-size:1.9rem;letter-spacing:-.02em}
+.ph p{color:var(--muted);max-width:560px}
+.buy{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(90deg,var(--acc),var(--acc2));color:#fff;text-decoration:none;font-weight:700;padding:13px 22px;border-radius:12px;white-space:nowrap}
+.buy small{font-weight:500;opacity:.85}
+.buy:hover{filter:brightness(1.1)}
+.label{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:18px 0 10px}
+.phones{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
+.phones img,.desks img{width:100%;display:block;border-radius:14px;background:var(--card)}
+.desks{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.tile{position:relative}
+.tile .lock{position:absolute;inset:0;border-radius:14px;background:linear-gradient(transparent 55%,rgba(0,0,0,.7));display:flex;align-items:flex-end;justify-content:center;padding:8px;font-size:.75rem;color:#ddd}
+.tile a.free{position:absolute;left:8px;right:8px;bottom:8px;text-align:center;background:rgba(255,255,255,.92);color:#111;font-weight:700;font-size:.78rem;padding:6px;border-radius:9px;text-decoration:none}
+.tile a.free:hover{background:#fff}
+.tag{position:absolute;top:8px;left:8px;background:#22c55e;color:#04210f;font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:6px}
+.cta{margin-top:22px;padding:18px 20px;background:var(--card);border:1px solid var(--line);border-radius:14px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.cta b{font-size:1.05rem}
+.cta span{color:var(--muted);font-size:.93rem}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.how div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.how h3{font-size:1.02rem;margin-bottom:6px}
+.how p{color:var(--muted);font-size:.93rem}
+footer{padding:40px 0;color:var(--muted);font-size:.85rem;text-align:center;border-top:1px solid var(--line)}
+@media(max-width:640px){.strip img{width:80px}.ph h2{font-size:1.5rem}.buy{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="#top">Wall<span>Drop</span></a>
+  <nav id="nav"></nav>
+</div></header>
+
+<section class="hero" id="top"><div class="wrap">
+  <h1>Free <em>aesthetic wallpapers</em><br>for your phone and desktop</h1>
+  <p>Original wallpapers in HD for iPhone and Android, and 4K for your computer. Download free ones below, or grab a full pack of 30 for just $1.</p>
+  <div class="strip" id="strip"></div>
+</div></section>
+
+<main class="wrap" id="packs"></main>
+
+<section class="pack"><div class="wrap">
+  <div class="ph"><h2>How to set your wallpaper</h2></div>
+  <div class="how">
+    <div><h3>iPhone</h3><p>Save the image to Photos, open it, tap Share, then "Use as Wallpaper".</p></div>
+    <div><h3>Android</h3><p>Open the image in Gallery or Photos, tap the menu, then "Set as wallpaper".</p></div>
+    <div><h3>Windows / Mac</h3><p>Right-click the 4K image and choose "Set as desktop background" (Windows) or use System Settings, Wallpaper (Mac).</p></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">© <span id="y"></span> WallDrop. All wallpapers are original works, free for personal use. Packs are sold securely through Gumroad.</div></footer>
+
+<script>
+const PACKS = [
+  {id:"aurora", name:"Aurora", desc:"Northern lights over dark mountains. Calm, deep and easy on the eyes.", url:"https://jeremstyke.gumroad.com/l/aurora-wallpapers"},
+  {id:"retro-sunset", name:"Retro Sunset", desc:"80s synthwave: glowing suns, purple skies and neon grids.", url:"https://jeremstyke.gumroad.com/l/retro-sunset-wallpapers"},
+  {id:"soft-gradients", name:"Soft Gradients", desc:"Dreamy color blends for a clean, minimal setup.", url:"https://jeremstyke.gumroad.com/l/soft-gradients-wallpapers"},
+  {id:"neon-dark", name:"Neon Dark (AMOLED)", desc:"Pure black with glowing neon lines. Stunning on OLED screens and saves battery.", url:"https://jeremstyke.gumroad.com/l/neon-dark-wallpapers"},
+  {id:"paper-waves", name:"Paper Waves", desc:"Layered paper-cut waves with soft shadows, in warm, ocean, pastel and forest tones.", url:"https://jeremstyke.gumroad.com/l/paper-waves-wallpapers"}
+];
+const pad = n => String(n).padStart(2, "0");
+const nav = document.getElementById("nav"), main = document.getElementById("packs"), strip = document.getElementById("strip");
+
+PACKS.forEach((p, k) => {
+  nav.insertAdjacentHTML("beforeend", `<a href="#${p.id}">${p.name.replace(" (AMOLED)", "")}</a>`);
+  strip.insertAdjacentHTML("beforeend", `<img src="img/${p.id}/p${pad(4 + k)}.jpg" alt="${p.name} wallpaper" loading="lazy">`);
+  let phones = "";
+  for (let i = 1; i <= 15; i++) {
+    const free = i <= 3;
+    phones += `<div class="tile"><img src="img/${p.id}/p${pad(i)}.jpg" alt="${p.name} phone wallpaper ${i}" loading="lazy">` +
+      (free ? `<span class="tag">FREE</span><a class="free" href="free/${p.id}/${p.id}-phone-${pad(i)}.jpg" download>Download HD</a>`
+            : `<div class="lock">In the $1 pack</div>`) + `</div>`;
+  }
+  let desks = "";
+  for (let i = 1; i <= 3; i++) {
+    const free = i === 1;
+    desks += `<div class="tile"><img src="img/${p.id}/d${pad(i)}.jpg" alt="${p.name} 4K desktop wallpaper ${i}" loading="lazy">` +
+      (free ? `<span class="tag">FREE</span><a class="free" href="free/${p.id}/${p.id}-desktop-01.jpg" download>Download 4K</a>`
+            : `<div class="lock">In the $1 pack</div>`) + `</div>`;
+  }
+  main.insertAdjacentHTML("beforeend", `
+  <section class="pack" id="${p.id}">
+    <div class="ph">
+      <div><h2>${p.name} wallpapers</h2><p>${p.desc}</p></div>
+      <a class="buy" href="${p.url}">Get all 30 for $1 <small>phone + 4K</small></a>
+    </div>
+    <div class="label">Phone · 1440 x 3120</div>
+    <div class="phones">${phones}</div>
+    <div class="label">Desktop · 4K 3840 x 2160</div>
+    <div class="desks">${desks}</div>
+    <div class="cta"><div><b>Like this style?</b><br><span>Get the full ${p.name} pack: 15 phone + 15 4K desktop wallpapers, instant download.</span></div>
+      <a class="buy" href="${p.url}">Get the pack for $1</a></div>
+  </section>`);
+});
+document.getElementById("y").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
