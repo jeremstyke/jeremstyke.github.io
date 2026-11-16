@@ -1,6 +1,6 @@
 # Tops 10 à venir pour Vieillir chez soi (un par jour)
 # Format : - [ ] slug/ | requête visée | catégorie | produits à couvrir
-# Déjà publiés : meilleur-telephone-portable-senior/, meilleur-rollator/, meilleur-fauteuil-releveur/, meilleur-siege-de-douche/, meilleur-casque-tv-senior/, meilleur-detecteur-de-chute/, meilleur-rehausseur-wc/, meilleur-fauteuil-roulant-electrique-pliant/, meilleur-scooter-electrique-senior/, meilleur-deambulateur/, meilleure-canne-de-marche/, meilleur-pilulier-electronique/, meilleur-telephone-fixe-senior/
+# Déjà publiés : meilleur-telephone-portable-senior/, meilleur-rollator/, meilleur-fauteuil-releveur/, meilleur-siege-de-douche/, meilleur-casque-tv-senior/, meilleur-detecteur-de-chute/, meilleur-rehausseur-wc/, meilleur-fauteuil-roulant-electrique-pliant/, meilleur-scooter-electrique-senior/, meilleur-deambulateur/, meilleure-canne-de-marche/, meilleur-pilulier-electronique/, meilleur-telephone-fixe-senior/, meilleure-veilleuse-detecteur-de-mouvement/, meilleure-barre-d-appui/
 
 - [x] meilleur-rehausseur-wc/ | meilleur rehausseur WC | Salle de bains | avec et sans accoudoirs, fixation
 - [x] meilleur-fauteuil-roulant-electrique-pliant/ | meilleur fauteuil roulant électrique pliant de voyage | Se déplacer | top 10 de fauteuils roulants électriques pliants vendus sur Amazon.fr (poids, autonomie, charge max, largeur pliée, batterie amovible) ; h1 « Meilleur fauteuil roulant électrique pliant de voyage » et title « Fauteuil roulant électrique pliant de voyage : top 10 2026 » ; angle : léger, compact, facile à mettre dans un coffre, compatible avion si la fiche l'indique ; une phrase courte en intro : sur prescription, un fauteuil peut être pris en charge à 100 % depuis le 1er décembre 2025, lien {R}fauteuil-roulant-rembourse-100/ ; sans Easwe
@@ -12,8 +12,8 @@
 - [x] meilleure-canne-de-marche/ | meilleure canne de marche | Se déplacer | pliante, réglable, tripode, quadripode
 - [x] meilleur-pilulier-electronique/ | meilleur pilulier électronique | Vie quotidienne | alarme, distributeur automatique
 - [x] meilleur-telephone-fixe-senior/ | meilleur téléphone fixe senior | Vie quotidienne | grosses touches, amplifié, touches photos
-- [ ] meilleure-veilleuse-detecteur-de-mouvement/ | meilleure veilleuse détecteur de mouvement | Sécurité | piles, prise, bandeau LED
-- [ ] meilleure-barre-d-appui/ | meilleure barre d'appui salle de bain | Salle de bains | droite, coudée, relevable
+- [x] meilleure-veilleuse-detecteur-de-mouvement/ | meilleure veilleuse détecteur de mouvement | Sécurité | piles, prise, bandeau LED
+- [x] meilleure-barre-d-appui/ | meilleure barre d'appui salle de bain | Salle de bains | droite, coudée, relevable
 - [ ] meilleure-planche-de-bain/ | meilleure planche de bain | Salle de bains | planche, siège de baignoire pivotant
 - [ ] meilleur-cadre-photo-numerique-senior/ | meilleur cadre photo numérique pour senior | Vie quotidienne | wifi, envoi de photos par la famille
 - [ ] meilleure-tablette-senior/ | meilleure tablette pour senior | Vie quotidienne | tablettes simplifiées et classiques

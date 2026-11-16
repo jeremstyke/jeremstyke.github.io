@@ -3033,3 +3033,316 @@ g("meilleur-telephone-fixe-senior/",
        ("Un téléphone fixe amplifié fonctionne-t-il avec une box internet ?", "Oui, il se branche sur la prise téléphone de la box. Certaines fiches, comme celle du Geemarc 595 U.L.E, mentionnent la compatibilité avec les box des grands opérateurs. En cas de coupure de courant, la box s'éteint et la ligne fixe aussi."),
        ("Avez-vous testé ces téléphones ?", "Non. Cette sélection repose sur les caractéristiques publiées par les fabricants et les revendeurs, sans note ni avis de prise en main. Vérifiez la notice du modèle choisi.")],
   short="Top 9 téléphones fixes senior", cat="Vie quotidienne")
+
+AUTO_META['teleassistance-comment-ca-marche/'] = ('📞', 'ciel')
+g("teleassistance-comment-ca-marche/",
+  "Téléassistance : comment ça marche, qui répond, combien ça coûte",
+  "Téléassistance pour personne âgée : comment ça marche vraiment",
+  "Bouton porté sur soi, boîtier, plateforme d'écoute jour et nuit : comment fonctionne la téléassistance, qui répond à l'appel et quelles aides existent.",
+  """
+<p>La téléassistance, c'est un bouton que la personne porte au poignet ou autour du cou, relié à un boîtier chez elle. Une pression suffit pour être mise en relation avec une plateforme d'écoute ouverte jour et nuit, qui parle avec elle puis prévient un proche ou les secours selon la situation.</p>
+<p>Le principe tient en une phrase. Ce qui fait la différence d'un service à l'autre, c'est tout ce qui se passe après l'appui : qui répond, en combien de temps, et qui se déplace.</p>
+{CTA}
+<h2>Que se passe-t-il quand on appuie sur le bouton ?</h2>
+<p>Prenons un exemple. Votre mère glisse dans le couloir en pleine nuit, elle ne peut pas se relever et le téléphone est dans la cuisine. Elle appuie sur son pendentif. Le boîtier, posé dans le salon et branché sur une prise, déclenche l'appel vers la plateforme.</p>
+<p>Un opérateur décroche et lui parle à voix haute à travers le haut-parleur du boîtier. Il lui demande ce qui se passe. Si elle répond qu'elle va bien, qu'elle a juste appuyé par erreur, l'appel s'arrête là. Si elle est tombée, l'opérateur appelle la personne de la liste qui habite le plus près et qui a les clés. Si elle ne répond pas, ou si la situation semble grave, il contacte les secours.</p>
+<p>Ce dialogue à distance est le cœur du service. Il évite de déranger les pompiers pour un faux appel, mais il évite aussi qu'une personne reste des heures au sol parce que personne ne savait.</p>
+<h2>Qui décroche, au juste ?</h2>
+<p>Ce sont des opérateurs formés, employés par le service de téléassistance, et non des proches. Ils ont sous les yeux la fiche de la personne : adresse, informations utiles que la famille a choisi de donner, et surtout la liste des personnes à prévenir.</p>
+<p>Cette liste, on l'oublie souvent, est la partie qui compte le plus. Le service ne se déplace généralement pas lui-même : il s'appuie sur un réseau de proximité (enfants, voisins, amis) qui peut passer rapidement. Certains contrats proposent aussi l'intervention d'un professionnel ou la garde des clés. Vérifiez précisément ce que prévoit le contrat avant de signer.</p>
+<p>Notre conseil : désignez au moins deux personnes qui habitent à moins d'un quart d'heure et qui ont un double des clés. Un fils qui vit à 300 km sera prévenu, mais il ne pourra pas aider à se relever.</p>
+<h2>Les différentes formules</h2>
+<table><thead><tr><th>Formule</th><th>Comment ça marche</th><th>Pour qui ?</th><th>À savoir</th></tr></thead><tbody>
+<tr><td>Téléassistance à domicile</td><td>Bouton porté sur soi + boîtier relié à la plateforme</td><td>Personne qui sort peu et vit seule</td><td>Le bouton ne fonctionne qu'à portée du boîtier</td></tr>
+<tr><td>Avec détecteur de chute</td><td>Le bouton déclenche aussi l'alerte seul en cas de chute brutale</td><td>Risque de malaise ou de perte de connaissance</td><td>Ne repère pas toutes les chutes, notamment les glissades lentes</td></tr>
+<tr><td>Téléassistance mobile</td><td>Appareil avec carte SIM et souvent localisation</td><td>Personne qui sort seule, marche, fait ses courses</td><td>Batterie à recharger, couverture réseau à vérifier</td></tr>
+<tr><td>Avec capteurs d'activité</td><td>Capteurs dans le logement qui signalent une absence de mouvement inhabituelle</td><td>Personne qui oublie de porter son bouton</td><td>Réglages à affiner pour éviter les fausses alertes</td></tr>
+<tr><td>Bouton sans abonnement</td><td>Le bouton appelle directement des proches, sans plateforme</td><td>Entourage proche et très disponible</td><td>Personne ne répond si les proches ne décrochent pas</td></tr>
+</tbody></table>
+<p>Pour la dernière ligne, nous avons fait un guide complet sur le <a href="{R}bouton-appel-urgence-senior/">bouton d'appel d'urgence avec ou sans abonnement</a>. Si la chute est la crainte principale, lisez aussi notre guide du <a href="{R}detecteur-de-chute/">détecteur de chute</a>, qui détaille ce que ces capteurs savent faire et ce qu'ils ratent.</p>
+<h2>Combien ça coûte et quelles aides existent ?</h2>
+<p>La téléassistance fonctionne avec un abonnement mensuel, parfois avec des frais d'installation. Les tarifs varient beaucoup d'un service à l'autre et selon les options (détecteur de chute, mobilité, capteurs) : comparez deux ou trois devis, en regardant ce qui est inclus et la durée d'engagement.</p>
+<p>Côté impôts, la téléassistance ouvre droit au crédit d'impôt pour les services à la personne, égal à 50 % des dépenses, dans les limites fixées par la loi. Service-public.fr précise qu'elle y donne droit lorsqu'elle permet le maintien à domicile d'une personne fragile, même si elle n'est pas comprise dans un ensemble d'autres services. Gardez les factures et l'attestation annuelle du prestataire.</p>
+<p>D'autres aides peuvent alléger la facture, mais leurs règles dépendent de votre situation et de votre territoire. Pour une personne qui touche l'APA à domicile, la téléassistance peut être intégrée au plan d'aide : parlez-en au conseil départemental lors de l'évaluation. Certaines caisses de retraite, mairies ou départements proposent aussi leur propre service ou une participation. Le plus simple est d'appeler la mairie ou le CCAS, qui connaît les dispositifs locaux. Pour une vue d'ensemble, voyez notre guide des <a href="{R}aides-adapter-logement-senior/">aides pour adapter le logement d'un senior</a>.</p>
+<h2>Les erreurs qui rendent le service inutile</h2>
+<p>Le contrat est signé, le boîtier installé, et pourtant le jour où il faudrait s'en servir, rien ne se passe. Voici les causes les plus courantes.</p>
+<ul>
+<li><strong>Le bouton reste sur la table de nuit.</strong> C'est de loin la plus fréquente. Un pendentif qu'on enlève pour dormir ou pour se doucher ne sert à rien la nuit ni dans la salle de bains, là où l'on tombe le plus. Vérifiez qu'il est étanche et prévu pour être gardé sous la douche.</li>
+<li><strong>Personne ne teste.</strong> Faites un essai à l'installation, puis de temps en temps, en prévenant la plateforme. On vérifie que le signal passe depuis le jardin, la cave ou la salle de bains.</li>
+<li><strong>La liste des proches n'est pas à jour.</strong> Un voisin qui a déménagé, un numéro qui a changé : mettez la fiche à jour dès que quelque chose bouge.</li>
+<li><strong>Les clés.</strong> Si personne ne peut entrer, les secours devront forcer la porte. Une boîte à clés sécurisée à code, fixée près de l'entrée, règle souvent le problème.</li>
+<li><strong>La personne n'en veut pas.</strong> Imposer un bouton, c'est prendre le risque qu'il finisse dans un tiroir. Présentez-le comme ce qui permet de rester chez soi, pas comme un signe de faiblesse, et laissez-la choisir entre bracelet et pendentif.</li>
+</ul>
+<h2>Les petits équipements qui vont avec</h2>
+<p>La téléassistance ne remplace pas un logement sûr, elle le complète. Quelques achats simples réduisent le risque de devoir appuyer sur le bouton.</p>
+<p>Une <strong>boîte à clés sécurisée</strong> permet au voisin ou aux secours d'entrer sans casser la porte. <a href="{AMZ:boite a cle securisee code exterieur}" """ + A + """>Voir les boîtes à clés</a>.</p>
+<p>Des <strong>veilleuses à détecteur de mouvement</strong> éclairent le trajet de nuit entre le lit et les toilettes, moment où les chutes sont fréquentes. Notre guide de la <a href="{R}veilleuse-detecteur-de-mouvement/">veilleuse à détecteur</a> explique où les placer. <a href="{AMZ:veilleuse detecteur de mouvement}" """ + A + """>Voir les veilleuses</a>.</p>
+<p>Un <strong>téléphone fixe à grosses touches et amplifié</strong> reste utile pour appeler soi-même un proche, et certains ont une touche d'appel d'urgence. <a href="{AMZ:telephone fixe senior amplifie touche SOS}" """ + A + """>Voir les téléphones amplifiés</a>.</p>
+<p>Pour une personne qui ne veut pas d'abonnement mais accepte une alerte, une <strong>montre ou un pendentif SOS avec carte SIM</strong> qui appelle directement les proches peut servir de première étape. <a href="{AMZ:pendentif SOS senior carte SIM}" """ + A + """>Voir les boutons SOS</a>.</p>
+<p>Enfin, un <strong>tapis antidérapant de douche</strong> et des barres d'appui traitent la pièce la plus à risque. <a href="{AMZ:tapis antiderapant douche senior}" """ + A + """>Voir les tapis antidérapants</a>.</p>
+<p>Pour passer toute la maison en revue, suivez <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
+<div class="note"><strong>Des chutes répétées ou des malaises ?</strong> La téléassistance permet d'être secouru vite, elle n'empêche pas de tomber. Parlez des chutes au médecin traitant : il peut rechercher une cause (traitement, tension, vue) et prescrire des séances de kinésithérapie. Un ergothérapeute peut aussi venir au domicile pour adapter le logement.</div>
+""",
+  faq=[("Qui répond quand on appuie sur le bouton de téléassistance ?", "Un opérateur de la plateforme d'écoute du service, joignable jour et nuit. Il parle avec la personne par le haut-parleur du boîtier, puis prévient un proche de la liste ou les secours selon la situation."),
+       ("La téléassistance donne-t-elle droit à un crédit d'impôt ?", "Oui, d'après service-public.fr, la téléassistance ouvre droit au crédit d'impôt de 50 % pour les services à la personne lorsqu'elle permet le maintien à domicile d'une personne fragile, dans la limite des plafonds annuels."),
+       ("Le bouton de téléassistance fonctionne-t-il hors de la maison ?", "Un bouton classique ne fonctionne qu'à portée du boîtier installé au domicile. Pour être protégé dehors, il faut une téléassistance mobile, avec un appareil qui a sa propre carte SIM.")],
+  short="Téléassistance", cat="Sécurité")
+
+AUTO_META['meilleure-veilleuse-detecteur-de-mouvement/'] = ('🏆', 'lilas')
+g("meilleure-veilleuse-detecteur-de-mouvement/",
+  "Meilleure veilleuse à détecteur de mouvement 2026 : top 10",
+  "Meilleure veilleuse à détecteur de mouvement : piles, prise ou bandeau LED",
+  "Piles, prise, rechargeable, bandeau sous le lit ou douille : 10 veilleuses à détecteur de mouvement comparées pour sécuriser les levers de nuit d'un senior.",
+  """
+<p>Pour un couloir sans prise, une veilleuse à piles qui se colle au mur, comme la Ledvance Nightlux Hall, fait très bien l'affaire. Pour le moment le plus délicat, celui où l'on pose les pieds par terre en sortant du lit, un bandeau LED fixé sous le sommier éclaire le sol sans rien envoyer dans les yeux. Et si une prise est bien placée, autant en profiter : plus de piles à surveiller.</p>
+<p>Ces trois familles se complètent. Dans la plupart des logements, la bonne réponse est un bandeau sous le lit, puis deux ou trois veilleuses le long du trajet jusqu'aux toilettes.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs (Ledvance, Castorama, Leroy Merlin, Pearl, Alternate), sans test en main. Nous n'indiquons que les chiffres lus sur ces fiches ; quand une donnée n'y figure pas, nous écrivons « non précisé ». Nous ne donnons ni prix ni note : ils changent trop vite.</div>
+<h2>Les 10 veilleuses en un coup d'œil</h2>
+<table><thead><tr><th>Modèle</th><th>Alimentation</th><th>Détection</th><th>Lumière</th><th>Idéal pour</th></tr></thead><tbody>
+<tr><td>Ledvance Nightlux Hall</td><td>3 piles AAA (incluses)</td><td>Non précisée</td><td>14 lm, 4000 K</td><td>Notre choix : couloir sans prise</td></tr>
+<tr><td>Ledvance Nightlux Torch</td><td>3 piles AAA (incluses)</td><td>Non précisée</td><td>10 lm, 4000 K</td><td>Veilleuse qui devient lampe de poche</td></tr>
+<tr><td>Ledvance Nightlux Stair</td><td>3 piles AAA (incluses)</td><td>Non précisée</td><td>10 lm, 4000 K</td><td>Escalier, plinthe</td></tr>
+<tr><td>Varta Motion Sensor Light</td><td>3 piles AAA (non incluses)</td><td>120°, 3 m</td><td>17 lm, blanc chaud</td><td>Fixation aimantée</td></tr>
+<tr><td>Xiaomi Mi Motion-Activated Night Light 2</td><td>3 piles AA (non incluses)</td><td>120°, 6 m de face</td><td>2800 K</td><td>Lumière chaude, long couloir</td></tr>
+<tr><td>Otio veilleuse 2 en 1</td><td>Prise 230 V</td><td>Non précisée</td><td>Blanc neutre</td><td>Prise basse dans le couloir</td></tr>
+<tr><td>Lunartec 4 en 1 par induction (lot de 2)</td><td>Prise + batterie</td><td>Jusqu'à 4 m</td><td>25 lm (veilleuse)</td><td>Coupures de courant</td></tr>
+<tr><td>Ledvance Linear LED Flat Sensor USB 400 mm</td><td>Batterie rechargeable USB</td><td>Non précisée</td><td>200 lm</td><td>Placard, sous un meuble</td></tr>
+<tr><td>Lunartec bande LED pour cadre de lit</td><td>Adaptateur secteur 12 V</td><td>100°, 3,5 m</td><td>3000 K</td><td>Le lever, au pied du lit</td></tr>
+<tr><td>Lunartec douille E27 à détecteur</td><td>Douille de plafonnier</td><td>360°, 3 à 6 m</td><td>Selon l'ampoule</td><td>Toilettes, plafonnier de couloir</td></tr>
+</tbody></table>
+
+<h2>1. Ledvance Nightlux Hall : la veilleuse de couloir (notre choix)</h2>
+<p><strong>Pour qui ?</strong> Un couloir ou une entrée sans prise bien placée. Notre choix, parce qu'elle combine détecteur de mouvement, capteur de lumière du jour et une tête orientable qui permet de diriger la lumière vers le sol.</p>
+<ul>
+<li><strong>Points forts</strong> : capteur infrarouge de mouvement et capteur crépusculaire, tête orientable, commutateur Auto ou Marche/Arrêt. Piles fournies. Fixation par adhésif ou par vis. Indice de protection IP54.</li>
+<li><strong>Données utiles</strong> : 14 lumens, 4000 K, 3 piles AAA.</li>
+<li><strong>Limites</strong> : 4000 K, c'est une lumière blanche neutre, moins douce la nuit qu'une lumière jaune. Angle, portée de détection et durée d'allumage non précisés par le fabricant.</li>
+</ul>
+<p><a href="{AMZ:Ledvance Nightlux Hall}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Ledvance Nightlux Torch : on la décroche en cas de coupure</h2>
+<p><strong>Pour qui ?</strong> Une chambre ou une entrée, chez une personne qui aime avoir une lampe de poche à portée de main.</p>
+<ul>
+<li><strong>Points forts</strong> : elle se détache de son support et sert de lampe portative. Détecteur de mouvement et capteur crépusculaire, commutateur Auto ou Marche/Arrêt, piles fournies, adhésif ou vis.</li>
+<li><strong>Données utiles</strong> : 10 lumens, 4000 K, 3 piles AAA, IP54.</li>
+<li><strong>Limites</strong> : lumière faible pour un grand couloir, et blanche plutôt que chaude. Autonomie des piles non précisée.</li>
+</ul>
+<p><a href="{AMZ:Ledvance Nightlux Torch}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Ledvance Nightlux Stair : pour éclairer les marches</h2>
+<p><strong>Pour qui ?</strong> Un escalier emprunté la nuit, ou une plinthe le long d'un passage étroit.</p>
+<ul>
+<li><strong>Points forts</strong> : conçue pour éclairer vers le sol, ce qui évite l'éblouissement. Détecteur de mouvement, capteur crépusculaire, piles fournies, adhésif ou vis.</li>
+<li><strong>Données utiles</strong> : 10 lumens, 4000 K, 3 piles AAA, IP54.</li>
+<li><strong>Limites</strong> : une seule par marche ne suffit pas, il en faut plusieurs pour un escalier entier. Durée d'allumage non précisée.</li>
+</ul>
+<p><a href="{AMZ:Ledvance Nightlux Stair}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Varta Motion Sensor Light : la plus souple à poser</h2>
+<p><strong>Pour qui ?</strong> Quelqu'un qui veut pouvoir déplacer sa veilleuse facilement, par exemple d'une chambre d'amis à une autre.</p>
+<ul>
+<li><strong>Points forts</strong> : trois façons de la fixer (vis, aimant ou adhésif). Détection sur 120° jusqu'à 3 m. Lumière annoncée « blanc chaud ».</li>
+<li><strong>Données utiles</strong> : 17 lumens, 3 piles AAA non incluses, jusqu'à 28 h de fonctionnement continu d'après le revendeur.</li>
+<li><strong>Limites</strong> : s'éteint au bout de 30 secondes, sans réglage d'après la fiche : un peu court pour aller aux toilettes et revenir sans bouger devant le capteur. Capteur crépusculaire non précisé.</li>
+</ul>
+<p><a href="{AMZ:Varta Motion Sensor Light}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Xiaomi Mi Motion-Activated Night Light 2 : une vraie lumière chaude</h2>
+<p><strong>Pour qui ?</strong> Un long couloir, chez une personne que la lumière blanche réveille complètement.</p>
+<ul>
+<li><strong>Points forts</strong> : 2800 K, donc une lumière jaune et douce. Détection sur 120°, jusqu'à 6 m de face et 2,5 m sur les côtés. Deux niveaux de luminosité, tête orientable sur 360°.</li>
+<li><strong>Données utiles</strong> : 3 piles AA non incluses, capteur de lumière mentionné.</li>
+<li><strong>Limites</strong> : s'éteint après 15 secondes, c'est court. Lumens et mode de fixation non précisés sur la fiche lue.</li>
+</ul>
+<p><a href="{AMZ:Xiaomi Mi Motion-Activated Night Light 2}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Otio veilleuse 2 en 1 : sur prise, sans entretien</h2>
+<p><strong>Pour qui ?</strong> Un couloir ou des toilettes avec une prise basse, chez quelqu'un qui oublierait de changer les piles.</p>
+<ul>
+<li><strong>Points forts</strong> : une petite lumière douce s'allume seule dans le noir, et un éclairage plus fort s'ajoute au passage. Interrupteur pour choisir le mode automatique ou permanent.</li>
+<li><strong>Données utiles</strong> : 0,6 W, branchement direct sur prise 230 V, blanc neutre, IP20.</li>
+<li><strong>Limites</strong> : angle, portée et durée d'allumage non précisés. IP20 : pas pour une pièce humide.</li>
+</ul>
+<p><a href="{AMZ:Otio veilleuse 2 en 1 crepusculaire detection}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Lunartec veilleuses 4 en 1 rechargeables par induction : contre les coupures de courant</h2>
+<p><strong>Pour qui ?</strong> Un logement où les coupures arrivent, ou une personne qui se rassure en ayant une lampe de poche dans chaque pièce.</p>
+<ul>
+<li><strong>Points forts</strong> : le support se branche sur la prise et recharge la lampe par induction. La lampe s'allume seule en cas de coupure de courant et se détache pour servir de torche. Détection jusqu'à 4 m. Vendu par deux.</li>
+<li><strong>Données utiles</strong> : 25 lumens en veilleuse, 60 à 80 lumens en torche, batterie 600 mAh, 2,5 à 3 h d'autonomie en torche, extinction après 20 secondes.</li>
+<li><strong>Limites</strong> : 20 secondes d'éclairage, c'est peu. Angle de détection et couleur de lumière non précisés.</li>
+</ul>
+<p><a href="{AMZ:Lunartec veilleuse induction detecteur 4 en 1}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Ledvance Linear LED Flat Sensor USB 400 mm : la réglette qui éclaire large</h2>
+<p><strong>Pour qui ?</strong> Un placard, une entrée, le dessous d'un meuble de cuisine : partout où une veilleuse ponctuelle éclaire trop peu.</p>
+<ul>
+<li><strong>Points forts</strong> : 200 lumens sur 40 cm, détecteur de mouvement et capteur de lumière du jour, commutateur Auto ou Marche/Arrêt. Batterie rechargeable en USB.</li>
+<li><strong>Données utiles</strong> : batterie 1500 mAh, recharge en 3,5 h, versions 3000, 4000 ou 6500 K selon la référence.</li>
+<li><strong>Limites</strong> : trop lumineuse pour un trajet de nuit près du lit. Choisissez la version 3000 K pour une lumière chaude. Autonomie non précisée.</li>
+</ul>
+<p><a href="{AMZ:Ledvance Linear LED Flat Sensor USB 400}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>9. Lunartec bande LED pour cadre de lit : pour le moment du lever</h2>
+<p><strong>Pour qui ?</strong> Une personne qui se lève une ou plusieurs fois par nuit, surtout si elle partage son lit.</p>
+<ul>
+<li><strong>Points forts</strong> : la bande se colle sous le sommier et éclaire le sol dès que les pieds se posent. Détection sur 100° jusqu'à 3,5 m, capteur crépusculaire. Durée d'allumage réglable de 30 secondes à 6 minutes : de quoi faire l'aller-retour aux toilettes.</li>
+<li><strong>Données utiles</strong> : 1,2 m, recoupable tous les 10 cm, 3000 K, adaptateur secteur 12 V.</li>
+<li><strong>Limites</strong> : il faut une prise près du lit. Lumens non précisés.</li>
+</ul>
+<p><a href="{AMZ:Lunartec bande LED cadre de lit detecteur PIR}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>10. Lunartec douille E27 à détecteur : le plafonnier qui s'allume seul</h2>
+<p><strong>Pour qui ?</strong> Des toilettes ou un couloir où l'on cherche l'interrupteur à tâtons, quand on préfère un éclairage franc à une veilleuse.</p>
+<ul>
+<li><strong>Points forts</strong> : se visse entre la douille existante et l'ampoule. Détection à 360°, 3 m en portée optimale et 6 m au maximum. Durée réglable de 10 à 300 secondes, sensibilité à la lumière réglable.</li>
+<li><strong>Données utiles</strong> : ampoule de 60 W maximum. Existe aussi en lot de 4.</li>
+<li><strong>Limites</strong> : ne fonctionne pas derrière un abat-jour ou un hublot, le capteur doit « voir ». Choisissez une ampoule à lumière chaude et peu puissante pour la nuit.</li>
+</ul>
+<p><a href="{AMZ:Lunartec douille E27 detecteur de mouvement}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Combien de temps doit-elle rester allumée ?</h2>
+<p>C'est le critère que presque tout le monde oublie. Une veilleuse qui s'éteint au bout de 15 ou 20 secondes peut laisser la personne dans le noir au milieu des toilettes, si le capteur ne la voit plus. Par exemple, si votre père met deux minutes pour faire l'aller-retour, il faut un modèle qui tient au moins ce temps, ou dont la durée se règle, comme la bande Lunartec ou la douille à détecteur.</p>
+<p>Beaucoup de fiches ne donnent pas cette durée. Dans ce cas, faites le test le premier soir et placez une seconde veilleuse là où l'on se retrouve dans le noir.</p>
+<h2>Lumière blanche ou lumière chaude ?</h2>
+<p>La température de couleur s'exprime en kelvins (K). Autour de 2700 à 3000 K, la lumière est jaune et douce : on voit le sol sans se réveiller complètement. À 4000 K et plus, elle est blanche. Les Ledvance Nightlux sont à 4000 K : elles éclairent bien un couloir, mais pour la chambre, nous préférons un bandeau ou une veilleuse plus chaude.</p>
+<p>Ne cherchez pas la puissance. Dix à vingt lumens suffisent pour voir où l'on met les pieds la nuit. Au-delà, on éblouit.</p>
+<h2>Comment choisir, en pratique</h2>
+<p>Faites le trajet vous-même, lumières éteintes, du lit jusqu'aux toilettes. Notez chaque endroit où vous ne voyez plus rien : c'est là qu'il faut une veilleuse. Ensuite, regardez s'il y a une prise à proximité. Si oui, une veilleuse sur prise ; sinon, à piles ou rechargeable.</p>
+<p>Notre conseil : un bandeau sous le lit, une veilleuse sur prise ou à piles à la sortie de la chambre, une dans le couloir, une dans les toilettes. Quatre petits achats, et plus personne ne traverse le logement dans le noir. Les piles s'usent : notez la date du remplacement au dos de chaque veilleuse.</p>
+<p>Tous les conseils de placement sont détaillés dans notre guide de la <a href="{R}veilleuse-detecteur-de-mouvement/">veilleuse à détecteur de mouvement</a>. Pour aller plus loin, lisez aussi comment <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a> et suivez <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>. Si les levers de nuit deviennent fréquents, ou s'accompagnent de vertiges, parlez-en au médecin traitant.</p>
+""",
+  faq=[("Quelle est la meilleure veilleuse à détecteur pour une personne âgée ?", "Cela dépend de l'endroit. Pour un couloir sans prise, la Ledvance Nightlux Hall (piles, tête orientable, capteur crépusculaire). Pour le lever, une bande LED sous le lit comme celle de Lunartec, dont la durée d'allumage se règle jusqu'à 6 minutes."),
+       ("Combien de lumens faut-il pour une veilleuse de nuit ?", "Une dizaine à une vingtaine de lumens suffisent pour voir le sol et les obstacles sans être ébloui. Préférez une lumière chaude, autour de 2700 à 3000 K, près du lit."),
+       ("Avez-vous testé ces veilleuses ?", "Non. Cette sélection repose sur les caractéristiques publiées par les fabricants et les revendeurs, sans note ni avis de prise en main. Vérifiez la fiche du modèle exact avant d'acheter.")],
+  short="Top 10 veilleuses à détecteur", cat="Sécurité")
+
+AUTO_META['meilleure-barre-d-appui/'] = ('🏆', 'ciel')
+g("meilleure-barre-d-appui/",
+  "Meilleure barre d'appui salle de bain 2026 : top 10",
+  "Meilleure barre d'appui pour la salle de bain : droite, coudée ou relevable",
+  "Barres droites, coudées, en L, relevables pour les WC ou à ventouses : 10 barres d'appui comparées d'après les fiches, avec la charge maximale de chacune.",
+  """
+<p>Pour se relever des toilettes ou entrer dans la douche en toute sécurité, une barre en inox ou en nylon sur âme acier, vissée dans un mur plein et annoncée pour au moins 150 kg, reste la valeur sûre. La forme dépend de l'endroit : droite à l'entrée de la douche, coudée pour s'asseoir et se relever, relevable à côté des WC quand il n'y a pas de mur.</p>
+<p>La barre à ventouses, elle, dépanne en location ou en voyage. Elle ne remplace pas une barre vissée, et nous expliquons pourquoi plus bas.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs (Delabie, La Poste, Bricozor, Pharma GDD, Bricocash, Batiproduits), sans test en main. Les charges maximales sont celles annoncées sur ces fiches ; quand une donnée n'y figure pas, nous écrivons « non précisé ». Nous ne donnons ni prix ni note.</div>
+<h2>Le comparatif en un tableau</h2>
+<table><thead><tr><th>Modèle</th><th>Forme</th><th>Dimensions</th><th>Matériau</th><th>Charge annoncée</th></tr></thead><tbody>
+<tr><td>Normbau Inox Care 500 mm</td><td>Droite</td><td>500 mm, Ø 32 mm</td><td>Inox 304 mat</td><td>175 kg (notre choix)</td></tr>
+<tr><td>Delabie UltraPolish</td><td>Droite</td><td>300 à 900 mm, Ø 25 ou 32 mm</td><td>Inox 304 poli</td><td>115 kg recommandés (Ø 25)</td></tr>
+<tr><td>Ridder Pro 45 cm</td><td>Droite</td><td>Environ 45 cm</td><td>Aluminium chromé</td><td>110 kg</td></tr>
+<tr><td>Herdegen Profilo</td><td>Droite</td><td>30 à 45 cm, Ø 32 mm</td><td>Plastique</td><td>40 kg</td></tr>
+<tr><td>Normbau Inox Care coudée 135°</td><td>Coudée</td><td>400 x 400 mm, Ø 32 mm</td><td>Inox 304 mat</td><td>175 kg</td></tr>
+<tr><td>Pellet Ergolife coudée 90°</td><td>Équerre</td><td>476 x 476 mm</td><td>Nylon sur acier</td><td>150 kg</td></tr>
+<tr><td>Pellet Ergolife en L</td><td>Angle</td><td>1276 x 576 mm</td><td>Nylon sur acier</td><td>150 kg</td></tr>
+<tr><td>Pellet ASC relevable aluminium</td><td>Relevable</td><td>600 mm, Ø 30 mm</td><td>Aluminium époxy</td><td>150 kg</td></tr>
+<tr><td>AKW rabattable avec pied</td><td>Relevable</td><td>766 mm, Ø 32 mm</td><td>Acier époxy</td><td>200 kg (statique)</td></tr>
+<tr><td>Ridder Premium à ventouses</td><td>Ventouses</td><td>59,5 cm</td><td>ABS et caoutchouc</td><td>120 kg annoncés, usage temporaire</td></tr>
+</tbody></table>
+
+<h2>Quelle forme pour quel endroit ?</h2>
+<p>Avant de regarder les modèles, regardez la pièce. Une barre <strong>droite</strong> posée à la verticale aide à enjamber le rebord de la baignoire ou à entrer dans la douche ; posée à l'horizontale, elle sert de main courante. Une barre <strong>coudée</strong> suit le mouvement naturel du corps quand on passe d'assis à debout : c'est souvent la meilleure à côté des toilettes, si un mur est proche. La barre <strong>en L</strong> fait les deux à la fois dans une douche. Et la barre <strong>relevable</strong> se fixe au mur derrière les WC et se rabat sur le côté : c'est la solution quand les toilettes sont au milieu de la pièce.</p>
+
+<h2>1. Normbau Inox Care droite 500 mm : la plus solide pour une barre droite (notre choix)</h2>
+<p><strong>Pour qui ?</strong> L'entrée d'une douche ou d'une baignoire, pour une personne qui s'appuie franchement. Notre choix, parce que c'est la barre droite la plus robuste de la sélection, avec une charge annoncée de 175 kg.</p>
+<ul>
+<li><strong>Points forts</strong> : inox 304 mat avec traitement bactériostatique, tube de 32 mm qui tient bien en main, fixations invisibles sous des rosaces de 70 mm. Des sous-rosaces rattrapent les irrégularités du mur.</li>
+<li><strong>Données utiles</strong> : vis inox Torx 6 x 70 et chevilles fournies.</li>
+<li><strong>Limites</strong> : surface lisse, pas de zone antidérapante précisée. Une main mouillée et savonneuse y glisse plus que sur du nylon.</li>
+</ul>
+<p><a href="{AMZ:Normbau Inox Care barre droite 500}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Delabie UltraPolish : l'inox poli, en plusieurs longueurs</h2>
+<p><strong>Pour qui ?</strong> Ceux qui veulent choisir la longueur exacte, de 30 à 90 cm, et une finition brillante.</p>
+<ul>
+<li><strong>Points forts</strong> : gamme complète en Ø 32 mm (300, 400, 500, 600 et 900 mm) et en Ø 25 mm (500, 600 et 900 mm). Inox 304 bactériostatique, fixations invisibles, platine 3 trous, kit de vis inox pour mur béton fourni. Garantie 30 ans.</li>
+<li><strong>Données utiles</strong> : sur la fiche du modèle 5059P2 (Ø 25 mm, 900 mm), barre « testée à plus de 200 kg », avec un maximum utilisateur recommandé de 115 kg.</li>
+<li><strong>Limites</strong> : charge non indiquée sur la fiche des modèles Ø 32 que nous avons cherchée. Vérifiez la référence exacte avant de commander.</li>
+</ul>
+<p><a href="{AMZ:Delabie barre droite inox UltraPolish}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Ridder Pro 45 cm : une barre aluminium d'entrée de gamme sérieuse</h2>
+<p><strong>Pour qui ?</strong> Une salle de bains avec un mur en brique pleine ou en béton, quand on veut une barre droite simple et qui ne rouille pas.</p>
+<ul>
+<li><strong>Points forts</strong> : aluminium chromé, charge annoncée de 110 kg, supports muraux ajustables, matériel de montage fourni.</li>
+<li><strong>Données utiles</strong> : longueur d'environ 45 cm, prise de 2,85 cm de diamètre, à 7,95 cm du mur.</li>
+<li><strong>Limites</strong> : la visserie fournie est prévue pour la brique pleine ou le béton armé, pas pour une cloison en plaque de plâtre. Charge plus modeste que les modèles inox.</li>
+</ul>
+<p><a href="{AMZ:Ridder barre d'appui Pro 45 cm}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Herdegen Profilo : une poignée d'équilibre, pas un appui</h2>
+<p><strong>Pour qui ?</strong> Une personne encore très autonome qui veut simplement un point de repère pour garder l'équilibre sous la douche.</p>
+<ul>
+<li><strong>Points forts</strong> : partie centrale striée, donc plus sûre sous une main mouillée. Six vis, six chevilles et deux cache-vis fournis. Plusieurs longueurs, de 30 à 45 cm.</li>
+<li><strong>Données utiles</strong> : tube de 3,2 cm, en plastique, à 4 cm du mur.</li>
+<li><strong>Limites</strong> : 40 kg seulement. Il ne faut pas s'en servir pour se relever ou pour porter son poids. Si c'est l'usage prévu, prenez une autre barre de cette liste.</li>
+</ul>
+<p><a href="{AMZ:Herdegen barre d'appui Profilo}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Normbau Inox Care coudée 135° : pour se relever des toilettes</h2>
+<p><strong>Pour qui ?</strong> Des WC placés contre un mur latéral, pour une personne qui a du mal à se relever.</p>
+<ul>
+<li><strong>Points forts</strong> : l'angle de 135° accompagne la main pendant tout le mouvement, du bas vers le haut. Trois points de fixation, charge annoncée de 175 kg, inox 304 mat bactériostatique, pose à droite ou à gauche.</li>
+<li><strong>Données utiles</strong> : 400 x 400 mm, tube de 32 mm, rosaces de 70 mm, vis Torx 6 x 70 et chevilles fournies.</li>
+<li><strong>Limites</strong> : il faut un mur à portée de main, à côté de la cuvette. Sinon, voyez les barres relevables plus bas.</li>
+</ul>
+<p><a href="{AMZ:Normbau Inox Care barre coudee 135}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Pellet Ergolife coudée 90° : la prise douce du nylon</h2>
+<p><strong>Pour qui ?</strong> Une personne qui trouve l'inox froid ou glissant, ou qui a peu de force dans les mains.</p>
+<ul>
+<li><strong>Points forts</strong> : tube elliptique en nylon sur profil acier, plus agréable en main et moins glissant mouillé que l'inox lisse. Charge annoncée de 150 kg, trois points de fixation, visserie inox fournie, réversible gauche ou droite.</li>
+<li><strong>Données utiles</strong> : 476 x 476 mm.</li>
+<li><strong>Limites</strong> : la fiche lue donne deux sections différentes pour le tube (38 x 25 mm et 32 x 25 mm). L'équerre à 90° convient bien pour un appui horizontal puis vertical, moins pour un mouvement continu qu'une coudée à 135°.</li>
+</ul>
+<p><a href="{AMZ:Pellet Ergolife barre coudee 90}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Pellet Ergolife en L : douche ou baignoire, deux prises en une</h2>
+<p><strong>Pour qui ?</strong> Une douche où l'on veut à la fois une prise verticale pour se relever et une main courante horizontale.</p>
+<ul>
+<li><strong>Points forts</strong> : grande barre en L de 1276 mm de haut sur 576 mm, nylon blanc sur acier, tube elliptique de 38 x 25 mm, 150 kg annoncés. Visserie inox fournie.</li>
+<li><strong>Données utiles</strong> : trois points de fixation, livrée démontée.</li>
+<li><strong>Limites</strong> : grande, donc il faut un pan de mur libre et solide. Pas de porte-pommeau de douche intégré précisé.</li>
+</ul>
+<p><a href="{AMZ:Pellet Ergolife barre d'appui en L}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Pellet ASC relevable aluminium : fabriquée en France, verrouillage en position haute</h2>
+<p><strong>Pour qui ?</strong> Des toilettes sans mur latéral, ou un logement où d'autres personnes utilisent aussi les WC et veulent pouvoir relever la barre.</p>
+<ul>
+<li><strong>Points forts</strong> : se bloque en position verticale, ce qui évite qu'elle retombe. Aluminium avec peinture époxy blanche, charge annoncée de 150 kg, fixation invisible, garantie 5 ans, fabrication française.</li>
+<li><strong>Données utiles</strong> : 600 x 170 mm, tube de 30 mm.</li>
+<li><strong>Limites</strong> : porte-papier et pied d'appui non précisés. Cette fiche vient d'un annuaire de produits du bâtiment, pas d'un revendeur.</li>
+</ul>
+<p><a href="{AMZ:Pellet barre relevable aluminium}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>9. AKW rabattable avec pied réglable : la plus robuste des relevables</h2>
+<p><strong>Pour qui ?</strong> Une personne lourde, ou qui prend appui de tout son poids pour se relever des toilettes.</p>
+<ul>
+<li><strong>Points forts</strong> : un pied réglable descend jusqu'au sol et soulage la fixation murale. Charge annoncée de 200 kg en statique. Porte-papier toilette fourni.</li>
+<li><strong>Données utiles</strong> : 766 mm, tube de 32 mm, acier époxy blanc, pied en aluminium, plaque murale de 140 mm de large. Existe aussi en inox chez AKW.</li>
+<li><strong>Limites</strong> : verrouillage en position haute et visserie non précisés sur la fiche lue. Le pied prend un peu de place au sol.</li>
+</ul>
+<p><a href="{AMZ:AKW barre d'appui rabattable avec pied reglable}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>10. Ridder Premium à ventouses : seulement pour dépanner</h2>
+<p><strong>Pour qui ?</strong> Un séjour chez des proches, une location où l'on ne peut pas percer, en attendant une vraie barre.</p>
+<ul>
+<li><strong>Points forts</strong> : se pose sans outil sur une surface lisse. Trois ventouses de 12,5 cm, barre d'angle de 59,5 cm.</li>
+<li><strong>Données utiles</strong> : ABS et caoutchouc, 120 kg annoncés.</li>
+<li><strong>Limites</strong> : le vendeur lui-même la réserve à un usage temporaire, demande de la tester avant chaque utilisation et rappelle que la tenue dépend de l'état de la surface. Pas d'indicateur de tenue précisé. Ne vous en servez jamais pour vous relever de tout votre poids. Elle était temporairement indisponible chez le revendeur consulté.</li>
+</ul>
+<p><a href="{AMZ:Ridder barre d'appui ventouse Premium}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Le point que tout le monde oublie : le mur</h2>
+<p>Une barre de 175 kg posée sur une cloison creuse avec de mauvaises chevilles ne tiendra pas 175 kg. La charge annoncée suppose une pose dans un support adapté. Par exemple, sur une cloison en plaque de plâtre, il faut des chevilles prévues pour charges lourdes ou un renfort derrière la plaque, et sur du carrelage, percer avec un foret adapté pour ne pas le fendre.</p>
+<p>Notre conseil : si vous avez un doute sur la nature du mur, faites poser la barre par un artisan. C'est le seul élément de la salle de bains sur lequel on met tout son poids quand on perd l'équilibre.</p>
+<h2>Comment choisir la bonne barre</h2>
+<p>Faites le geste avant d'acheter : asseyez la personne sur les toilettes ou faites-la entrer dans la douche, et regardez où sa main cherche naturellement un appui. C'est là que va la barre, à cette hauteur. Ensuite, choisissez la forme (droite, coudée, relevable), puis vérifiez trois chiffres : la charge, le diamètre du tube (autour de 30 à 32 mm pour bien refermer la main) et l'écart au mur.</p>
+<p>Tous les critères de pose et de hauteur sont expliqués dans notre guide de la <a href="{R}barre-d-appui-salle-de-bain/">barre d'appui de salle de bain</a>. Pour les toilettes, notre <a href="{R}meilleur-rehausseur-wc/">sélection de rehausseurs WC</a> complète bien une barre. Et pour l'ensemble du logement, suivez <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>. Un ergothérapeute peut venir au domicile pour indiquer l'emplacement et la forme les plus adaptés.</p>
+""",
+  faq=[("Quelle barre d'appui choisir pour les toilettes ?", "Une barre coudée fixée sur le mur latéral si un mur est à portée de main, comme la Normbau Inox Care coudée 135°. Sinon, une barre relevable fixée derrière les WC, de préférence avec un pied d'appui comme l'AKW rabattable."),
+       ("Une barre d'appui à ventouses est-elle sûre ?", "Elle peut dépanner, mais les fabricants la réservent généralement à un usage temporaire et demandent de vérifier la tenue avant chaque utilisation. Pour se relever en prenant appui de tout son poids, il faut une barre vissée dans un mur solide."),
+       ("Avez-vous testé ces barres d'appui ?", "Non. Cette sélection repose sur les caractéristiques publiées par les fabricants et les revendeurs, sans note ni avis de prise en main. Vérifiez la référence exacte et la nature de votre mur avant d'acheter.")],
+  short="Top 10 barres d'appui", cat="Salle de bains")
