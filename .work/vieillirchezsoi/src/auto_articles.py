@@ -2743,3 +2743,293 @@ g("meilleure-canne-de-marche/",
        ("De quel côté tenir sa canne ?", "En général du côté opposé à la jambe douloureuse ou faible : la canne avance en même temps que cette jambe. Le kinésithérapeute peut vous montrer le bon geste et régler la hauteur."),
        ("Avez-vous testé ces cannes ?", "Non. Cette sélection repose sur les caractéristiques publiées par les fabricants et les revendeurs, sans note ni avis de prise en main. Vérifiez la notice du modèle choisi.")],
   short="Top 10 cannes de marche", cat="Se déplacer")
+
+AUTO_META['bouton-appel-urgence-senior/'] = ('🆘', 'rose')
+g("bouton-appel-urgence-senior/",
+  "Bouton d'appel d'urgence senior : avec ou sans abonnement ?",
+  "Bouton d'appel d'urgence pour senior : pendentif, bracelet, avec ou sans abonnement",
+  "Pendentif ou bracelet, téléassistance avec abonnement ou bouton qui appelle vos proches : comment choisir un bouton d'appel d'urgence pour une personne âgée.",
+  """
+<p>Un bouton d'appel d'urgence permet à une personne âgée de demander de l'aide d'une simple pression, même si elle ne peut pas atteindre le téléphone. La vraie question n'est pas pendentif ou bracelet, mais qui va répondre : une centrale d'écoute ouverte jour et nuit, avec un abonnement, ou des proches appelés directement, sans abonnement.</p>
+<p>Les deux solutions se défendent. Tout dépend de la personne, de son entourage et de la distance qui vous sépare.</p>
+{CTA}
+<h2>Que se passe-t-il quand on appuie sur le bouton ?</h2>
+<p>Le principe est toujours le même : le bouton, porté sur soi, envoie un signal. Ce qui change, c'est la suite.</p>
+<p><strong>Avec un service de téléassistance</strong>, le bouton est relié à un boîtier ou à un appareil mobile qui joint une plateforme d'écoute. Un opérateur parle avec la personne, évalue la situation, puis prévient un proche, un voisin qui a les clés, ou les secours si besoin. C'est un service payé chaque mois.</p>
+<p><strong>Sans abonnement</strong>, le bouton déclenche un appel ou un SMS vers une liste de numéros choisis à l'avance : un enfant, un voisin, un ami. Ces appareils fonctionnent souvent avec une carte SIM, qu'il faut prévoir. Il existe aussi des boutons tout simples qui font sonner un carillon dans la maison, utiles quand l'aidant vit sous le même toit.</p>
+<table><thead><tr><th>Solution</th><th>Qui répond ?</th><th>Points forts</th><th>Limites</th></tr></thead><tbody>
+<tr><td>Téléassistance avec abonnement</td><td>Une plateforme d'écoute, jour et nuit</td><td>Quelqu'un répond toujours, organise l'aide</td><td>Coût mensuel, contrat à lire avec attention</td></tr>
+<tr><td>Bouton GSM sans abonnement</td><td>Les proches enregistrés</td><td>Pas de frais de service, fonctionne aussi dehors</td><td>Si personne ne décroche, l'appel peut rester sans suite</td></tr>
+<tr><td>Montre ou téléphone avec touche SOS</td><td>Les proches enregistrés</td><td>Un seul appareil pour tout</td><td>Il faut penser à le porter et à le recharger</td></tr>
+<tr><td>Bouton relié à un carillon</td><td>La personne présente dans la maison</td><td>Très simple, aucun réseau nécessaire</td><td>Ne sert à rien si personne n'est là</td></tr>
+</tbody></table>
+<h2>Pendentif ou bracelet : lequel sera vraiment porté ?</h2>
+<p>Un bouton n'est utile que s'il est sur la personne au moment où elle en a besoin. Celui qui reste sur la table de nuit ne protège de rien. Le meilleur modèle est donc celui qu'elle acceptera de garder, y compris dans la salle de bains, là où l'on glisse le plus.</p>
+<p>Le <strong>pendentif</strong> se porte autour du cou, sous un vêtement. Il est facile à attraper, même avec une main qui tremble. Certains le trouvent voyant ou gênant la nuit.</p>
+<p>Le <strong>bracelet</strong> ressemble à une montre et se fait plus discret. Il reste à portée de l'autre main. En revanche, le bouton est parfois plus petit, ce qui peut gêner une personne qui a des doigts raides.</p>
+<p>Avant d'acheter, vérifiez trois points sur la fiche : la résistance à l'eau (pour la douche), la taille du bouton et la manière de le recharger ou de changer la pile. Par exemple, un bracelet à recharger chaque soir sera vite oublié par une personne qui n'a pas l'habitude des appareils électroniques.</p>
+<p><a href="{AMZ:pendentif bouton appel urgence senior}" """ + A + """>Voir les pendentifs d'appel d'urgence</a></p>
+<h2>Avec abonnement : pour qui ça vaut le coup ?</h2>
+<p>La téléassistance a un vrai avantage : quelqu'un répond, même à trois heures du matin, même si les enfants sont en voyage ou dorment avec leur téléphone en silencieux. L'opérateur sait qui prévenir et peut rester en ligne pour rassurer.</p>
+<p>Elle se justifie surtout quand la personne vit seule, que la famille habite loin, ou qu'elle a déjà chuté. Lisez bien le contrat : durée d'engagement, frais d'installation, conditions de résiliation, et liste des personnes à prévenir. Pour comprendre ce que les capteurs peuvent ou non détecter, voyez notre guide sur le <a href="{R}detecteur-de-chute/">détecteur de chute</a>.</p>
+<p>Côté budget, la fiche officielle de service-public.fr sur le crédit d'impôt pour les services à la personne cite la téléassistance parmi les services qui y ouvrent droit, quand elle permet le maintien à domicile d'une personne fragile. Le crédit d'impôt est de 50 % des dépenses retenues, dans la limite des plafonds prévus. Les conditions exactes (prestataire, factures, aides déjà perçues à déduire) sont détaillées sur <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F12" rel="noopener" target="_blank">service-public.fr</a>. D'autres aides peuvent exister selon votre département ou votre caisse de retraite : posez la question au service autonomie du département ou à la caisse avant de signer.</p>
+<h2>Sans abonnement : la bonne solution si l'entourage est proche</h2>
+<p>Un bouton qui appelle directement les proches convient bien à une personne entourée : un enfant à dix minutes, un voisin attentif, un conjoint. Il n'y a pas de frais de service, et beaucoup de modèles fonctionnent aussi à l'extérieur, ce qui rassure pour une promenade.</p>
+<p>Ce qu'on oublie souvent : il faut une carte SIM avec un forfait actif, des numéros à jour, et des proches qui décrochent vraiment. Notre conseil : enregistrez au moins trois numéros, dont un qui ne part jamais en même temps que les autres, et faites un essai réel une fois par mois. Un appareil qui appelle en boucle plusieurs numéros jusqu'à ce que quelqu'un réponde est préférable à celui qui n'en appelle qu'un.</p>
+<p><a href="{AMZ:bouton appel urgence senior sans abonnement GSM}" """ + A + """>Voir les boutons d'appel sans abonnement</a></p>
+<p>Si la personne a déjà un mobile, un <a href="{R}telephone-portable-senior/">téléphone portable senior</a> avec touche SOS peut faire l'affaire, à condition qu'il soit toujours sur elle. <a href="{AMZ:telephone senior touche SOS}" """ + A + """>Voir les téléphones avec touche SOS</a>.</p>
+<p>Une montre avec appel d'urgence et localisation peut aussi convenir à quelqu'un qui sort seul. <a href="{AMZ:montre senior bouton SOS}" """ + A + """>Voir les montres avec bouton SOS</a>.</p>
+<h2>Et quand l'aidant vit à la maison ?</h2>
+<p>Si vous habitez avec la personne, un bouton relié à un carillon sans fil suffit souvent. Elle appuie depuis son lit ou la salle de bains, la sonnerie retentit dans votre pièce. C'est simple et sans abonnement. En revanche, il ne prévient personne en votre absence : prévoyez une autre solution pour les journées où elle reste seule.</p>
+<p><a href="{AMZ:bouton appel sans fil personne agee carillon}" """ + A + """>Voir les boutons d'appel sans fil avec carillon</a></p>
+<h2>Les erreurs à éviter</h2>
+<ul>
+<li><strong>Choisir l'appareil sans la personne.</strong> Montrez-le, faites-le essayer. Un objet imposé finit dans un tiroir.</li>
+<li><strong>Oublier la salle de bains.</strong> Si le bouton ne supporte pas l'eau, il sera enlevé pendant la toilette, au pire moment.</li>
+<li><strong>Ne jamais tester.</strong> Un essai régulier vérifie la batterie, la carte SIM et les numéros.</li>
+<li><strong>Croire que le bouton évite la chute.</strong> Il aide à être secouru vite. Pour réduire le risque, il faut aussi agir sur le logement : relisez nos conseils pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a> et notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a>.</li>
+</ul>
+<p>Si la personne tombe souvent, a des malaises ou se sent moins sûre d'elle, parlez-en à son médecin : il pourra en chercher la cause et vous orienter, par exemple vers un ergothérapeute pour adapter le domicile.</p>
+""",
+  faq=[("Existe-t-il un bouton d'appel d'urgence sans abonnement ?", "Oui. Certains boutons, pendentifs ou montres appellent directement des proches enregistrés, grâce à une carte SIM. Il n'y a pas de frais de service, mais il faut un forfait mobile actif et des proches qui répondent. Sans réponse, personne d'autre ne prend le relais."),
+       ("Pendentif ou bracelet d'appel d'urgence : que choisir ?", "Celui que la personne portera tout le temps, y compris sous la douche. Le pendentif est plus facile à attraper, le bracelet plus discret. Vérifiez la résistance à l'eau, la taille du bouton et la recharge."),
+       ("La téléassistance est-elle déductible des impôts ?", "Selon service-public.fr, la téléassistance fait partie des services à la personne ouvrant droit au crédit d'impôt de 50 %, quand elle permet le maintien à domicile d'une personne fragile, dans la limite des plafonds. Vérifiez les conditions sur la fiche officielle avant de déclarer.")],
+  short="Bouton d'appel d'urgence", cat="Sécurité")
+
+AUTO_META['meilleur-pilulier-electronique/'] = ('🏆', 'lilas')
+g("meilleur-pilulier-electronique/",
+  "Meilleur pilulier électronique 2026 : 10 modèles à alarme",
+  "Meilleur pilulier électronique : boîtes à alarme et distributeurs automatiques",
+  "Boîte à alarme de poche, distributeur verrouillé ou connecté, simple minuteur : 10 piluliers électroniques comparés d'après les fiches des fabricants.",
+  """
+<p>Si le problème est d'oublier l'heure, une boîte à alarme suffit. Si le problème est de ne plus savoir si l'on a déjà pris son comprimé, ou de risquer d'en prendre deux fois, il faut un distributeur automatique verrouillé : il n'ouvre que la case du moment. Ce sont deux besoins différents, et la plupart des déceptions viennent d'un mauvais choix entre les deux.</p>
+<p>Voici dix appareils vendus en France, des plus simples aux plus encadrants.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches et notices publiées par les fabricants et les revendeurs (en France et, faute de fiche française, au Royaume-Uni), sans test en main. Nous n'indiquons que les données lues ; quand une information manque, nous écrivons « non précisé ». Un pilulier ne remplace pas l'avis du médecin ou du pharmacien : demandez-leur conseil pour l'organisation du traitement, et faites préparer les doses par une personne de confiance si besoin.</div>
+<h2>Le comparatif en un tableau</h2>
+<table><thead><tr><th>Modèle</th><th>Type</th><th>Alarmes par jour</th><th>Alerte</th><th>Verrouillé</th><th>Idéal pour</th></tr></thead><tbody>
+<tr><td>Medelert (TabTime)</td><td>Distributeur automatique</td><td>6 alarmes</td><td>Son et lumière</td><td>Oui, à clé</td><td>Notre choix : éviter les erreurs de prise</td></tr>
+<tr><td>Pivotell Mk3/11</td><td>Distributeur automatique</td><td>Jusqu'à 28</td><td>Son et lumière</td><td>Oui, à clé</td><td>Traitements à prises nombreuses</td></tr>
+<tr><td>Pivotell Advance</td><td>Distributeur automatique</td><td>1 à 24</td><td>Son et lumière</td><td>Volet autobloquant</td><td>Écran qui affiche la prochaine dose</td></tr>
+<tr><td>LiveFine WiFi</td><td>Distributeur connecté</td><td>Jusqu'à 9</td><td>Son et lumière</td><td>Oui, à clé</td><td>Suivi à distance par un proche</td></tr>
+<tr><td>Ivation GMIVPILLDW</td><td>Distributeur automatique</td><td>Jusqu'à 4</td><td>Son</td><td>Oui, à clé</td><td>Un distributeur simple</td></tr>
+<tr><td>TabTime Super 8</td><td>Boîte journalière</td><td>Jusqu'à 8</td><td>Son puis LED</td><td>Non</td><td>Beaucoup de prises dans la journée</td></tr>
+<tr><td>Identités 817112</td><td>Boîte journalière</td><td>5</td><td>Son et vibration</td><td>Non précisé</td><td>La poche ou le sac</td></tr>
+<tr><td>InnovaGoods Pilly</td><td>Boîte journalière</td><td>Jusqu'à 5</td><td>Son et vibration</td><td>Non précisé</td><td>Une petite boîte étanche</td></tr>
+<tr><td>Pivotell Minitell</td><td>Boîte ronde de poche</td><td>Jusqu'à 5</td><td>Son, vibration ou les deux</td><td>Réglages seulement</td><td>Un grand écran lisible</td></tr>
+<tr><td>TabTime Timer</td><td>Minuteur sans compartiment</td><td>Jusqu'à 8</td><td>Son et lumière</td><td>Sans objet</td><td>Garder son pilulier habituel</td></tr>
+</tbody></table>
+
+<h2>1. Medelert : le distributeur qui n'ouvre que la bonne case (notre choix)</h2>
+<p><strong>Pour qui ?</strong> Une personne qui oublie si elle a pris son traitement, ou qui risque de prendre deux fois la même dose. Notre choix, parce qu'il est distribué en France avec une notice en français et qu'il répond au vrai danger : l'erreur de prise.</p>
+<ul>
+<li><strong>Points forts</strong> : carrousel verrouillé à clé qui ne délivre que le compartiment programmé. Programmable pour une semaine à 4 prises par jour, deux semaines à 2 prises ou 28 jours à 1 prise. 6 disques fournis. Alarme sonore (3 tonalités ou silence) et lumineuse, jusqu'à 30 minutes. Horloge radio-pilotée qui se règle seule, y compris pour l'heure d'été.</li>
+<li><strong>Données utiles</strong> : 4 piles AA fournies, 19 cm de diamètre, garantie 1 an. Distribué en France par Identités.</li>
+<li><strong>Limites</strong> : il faut retourner l'appareil pour faire tomber les comprimés, un geste à vérifier avec la personne. Le remplissage demande un proche ou une aide à domicile. Autonomie non précisée sur les pages françaises.</li>
+</ul>
+<p><a href="{AMZ:TabTime Medelert pilulier}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Pivotell Mk3/11 : pour les traitements à prises nombreuses</h2>
+<p><strong>Pour qui ?</strong> Une personne dont le traitement compte beaucoup de prises dans la journée, ou des horaires très précis.</p>
+<ul>
+<li><strong>Points forts</strong> : plateau de 29 sections, jusqu'à 28 alarmes par jour, son (4 sonneries ou silence) et lumière clignotante. Fenêtre de prise et durée d'alarme réglables, mémoire des 28 dernières prises, alerte de piles faibles.</li>
+<li><strong>Données utiles</strong> : 4 piles AA, autonomie supérieure à un an selon la notice, 190 x 180 x 56 mm, 480 g avec piles.</li>
+<li><strong>Limites</strong> : la notice présente la clé comme une simple barrière supplémentaire, pas comme une sécurité absolue. Piles rechargeables déconseillées. Fiches lues en anglais.</li>
+</ul>
+<p><a href="{AMZ:Pivotell Mk3 distributeur automatique}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Pivotell Advance : l'écran qui dit ce qui reste à prendre</h2>
+<p><strong>Pour qui ?</strong> Une personne qui aime voir l'information écrite : heure de la prochaine dose, doses restantes.</p>
+<ul>
+<li><strong>Points forts</strong> : 28 compartiments, 1 à 24 alarmes par jour, 4 sons et lumière clignotante, volet autobloquant contre le double dosage. Écran LCD avec heure, date, prochaine dose, doses restantes et niveau des piles.</li>
+<li><strong>Données utiles</strong> : piles AA alcalines ou rechargeables, autonomie jusqu'à 12 mois selon le revendeur. Alarme réglable jusqu'à 5 heures.</li>
+<li><strong>Limites</strong> : dimensions et poids non précisés. Fiche lue chez un revendeur britannique.</li>
+</ul>
+<p><a href="{AMZ:Pivotell Advance distributeur}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. LiveFine WiFi : pour suivre les prises à distance</h2>
+<p><strong>Pour qui ?</strong> Un proche qui habite loin et veut savoir si le traitement a été pris, avec une personne qui accepte cet appareil connecté.</p>
+<ul>
+<li><strong>Points forts</strong> : 28 compartiments, 9 anneaux de dosage interchangeables, jusqu'à 9 alarmes par jour, alerte sonore et visuelle (3 tonalités, 3 volumes). Wifi 2,4 GHz et application pour le suivi.</li>
+<li><strong>Données utiles</strong> : verrouillé à clé, couvercle transparent, alimentation par adaptateur USB-C avec 4 piles AA en secours.</li>
+<li><strong>Limites</strong> : il faut une box wifi et quelqu'un pour configurer l'application. La notice consultée ne précise pas le détail des notifications envoyées.</li>
+</ul>
+<p><a href="{AMZ:LiveFine pilulier automatique WiFi}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Ivation GMIVPILLDW : un distributeur simple</h2>
+<p><strong>Pour qui ?</strong> Une personne qui prend son traitement 1 à 4 fois par jour et n'a pas besoin d'écran ni d'application.</p>
+<ul>
+<li><strong>Points forts</strong> : 4 disques interchangeables pour 1, 2, 3 ou 4 prises par jour, alarme sonore (3 tonalités ou silencieux), verrouillage à clé, indicateur de piles faibles.</li>
+<li><strong>Données utiles</strong> : 4 piles AA.</li>
+<li><strong>Limites</strong> : la notice lue ne mentionne pas d'alerte lumineuse, même si le titre de l'annonce l'indique. Nombre de compartiments, dimensions et autonomie non précisés.</li>
+</ul>
+<p><a href="{AMZ:Ivation distributeur automatique comprimes}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. TabTime Super 8 : jusqu'à 8 rappels dans la journée</h2>
+<p><strong>Pour qui ?</strong> Une personne autonome qui gère bien son traitement mais a beaucoup de prises à des heures différentes.</p>
+<ul>
+<li><strong>Points forts</strong> : 8 compartiments numérotés liés aux 8 alarmes, bip de 40 secondes puis LED rouge qui clignote jusqu'à l'ouverture. Volume réglable (65 ou 85 dB). Fermeture magnétique, notice avec une partie en français.</li>
+<li><strong>Données utiles</strong> : pile CR2032 fournie, 11 x 6 x 3 cm, garantie 12 mois après enregistrement.</li>
+<li><strong>Limites</strong> : non verrouillé, rien n'empêche d'ouvrir la mauvaise case. Petites cases.</li>
+</ul>
+<p><a href="{AMZ:TabTime Super 8}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Identités pilulier journalier 5 alarmes : le format poche</h2>
+<p><strong>Pour qui ?</strong> Une personne active qui sort beaucoup et veut un rappel qui vibre, discret en public.</p>
+<ul>
+<li><strong>Points forts</strong> : 4 compartiments, 5 alarmes indépendantes d'une minute, son et vibration, écran LCD, compte à rebours.</li>
+<li><strong>Données utiles</strong> : 6,2 x 6,2 x 2 cm, 45 g, pile CR2032 fournie.</li>
+<li><strong>Limites</strong> : petit écran et petites cases. Une autre fiche Identités, au nom proche, donne des caractéristiques différentes : vérifiez la référence 817112 à l'achat.</li>
+</ul>
+<p><a href="{AMZ:Identites pilulier journalier electronique 5 alarmes}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. InnovaGoods Pilly : une petite boîte étanche</h2>
+<p><strong>Pour qui ?</strong> Une personne qui veut une boîte de poche avec rappel, sans fonctions compliquées.</p>
+<ul>
+<li><strong>Points forts</strong> : 4 compartiments, jusqu'à 5 alarmes par jour, son et vibration, fermeture étanche, horloge et minuteur.</li>
+<li><strong>Données utiles</strong> : environ 6,5 x 6,5 x 2 cm, pile fournie (CR2032 selon le fabricant).</li>
+<li><strong>Limites</strong> : poids et verrouillage non précisés. Taille d'écran non indiquée.</li>
+</ul>
+<p><a href="{AMZ:InnovaGoods Pilly pilulier}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>9. Pivotell Minitell : le plus lisible des modèles de poche</h2>
+<p><strong>Pour qui ?</strong> Une personne qui voit moins bien et a besoin d'un écran plus grand qu'une petite boîte classique.</p>
+<ul>
+<li><strong>Points forts</strong> : grand écran LCD rétroéclairé, 5 compartiments d'environ 10 ml, jusqu'à 5 alarmes par jour (ou 1 par jour pendant 5 jours), son, vibration ou les deux, fonction rappel. Un interrupteur verrouille les réglages.</li>
+<li><strong>Données utiles</strong> : 8 cm de diamètre, 3 cm de haut, 95 g.</li>
+<li><strong>Limites</strong> : les compartiments ne sont pas verrouillés. Alimentation non précisée sur la fiche lue.</li>
+</ul>
+<p><a href="{AMZ:Pivotell Minitell}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>10. TabTime Timer : garder son pilulier habituel</h2>
+<p><strong>Pour qui ?</strong> Une personne qui a déjà un pilulier semainier préparé par la pharmacie et veut juste un rappel sonore.</p>
+<ul>
+<li><strong>Points forts</strong> : jusqu'à 8 alarmes par jour, son et lumière clignotante pendant une minute, compte à rebours.</li>
+<li><strong>Données utiles</strong> : 8 x 5,6 x 2 cm, 88 g, une pile AAA fournie.</li>
+<li><strong>Limites</strong> : il rappelle l'heure, rien de plus. Il ne dit pas si la prise a été faite.</li>
+</ul>
+<p><a href="{AMZ:TabTime Timer 8 alarmes}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Boîte à alarme ou distributeur : comment trancher ?</h2>
+<p>Posez-vous une question simple : que se passe-t-il aujourd'hui ? Si la personne oublie l'heure mais sait toujours ce qu'elle a pris, une <strong>boîte à alarme</strong> ou un <strong>minuteur</strong> suffit. Si elle ne se souvient plus d'avoir pris son comprimé, ou si l'on retrouve des cases pleines en fin de semaine, passez à un <strong>distributeur verrouillé</strong>.</p>
+<p>Notre conseil : avant d'acheter un distributeur, prévoyez qui va le remplir chaque semaine. C'est le maillon faible. Le pharmacien peut préparer les doses, et l'infirmier ou l'aide à domicile peut vérifier le remplissage. Tous les critères sont détaillés dans notre guide pour <a href="{R}pilulier/">choisir un pilulier</a>.</p>
+<p>Le pilulier n'est qu'un élément de la vie à la maison : retrouvez les autres aménagements dans <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>. Et si une personne qui vit seule a déjà oublié plusieurs prises, un <a href="{R}bouton-appel-urgence-senior/">bouton d'appel d'urgence</a> peut compléter l'équipement.</p>
+""",
+  faq=[("Quel pilulier électronique choisir pour une personne âgée ?", "Une boîte à alarme suffit si la personne oublie l'heure mais gère bien son traitement. Si elle ne sait plus si elle a pris sa dose, choisissez un distributeur automatique verrouillé, comme le Medelert, qui n'ouvre que la case du moment. Le pharmacien peut vous aider à choisir."),
+       ("Qui remplit un distributeur automatique de médicaments ?", "Un proche, une aide à domicile ou un infirmier, selon l'organisation. Le pharmacien peut aussi préparer les doses. Le remplissage doit être fait avec soin, car une erreur à ce moment se répète à chaque prise."),
+       ("Avez-vous testé ces piluliers ?", "Non. Cette sélection repose sur les caractéristiques publiées par les fabricants et les revendeurs, sans note ni avis de prise en main. Vérifiez la notice du modèle choisi.")],
+  short="Top 10 piluliers électroniques", cat="Vie quotidienne")
+
+AUTO_META['meilleur-telephone-fixe-senior/'] = ('🏆', 'ciel')
+g("meilleur-telephone-fixe-senior/",
+  "Meilleur téléphone fixe senior 2026 : 9 modèles amplifiés",
+  "Meilleur téléphone fixe pour senior : grosses touches, amplifié, touches photos",
+  "Grosses touches, son amplifié, touches photos, blocage d'appels ou touche SOS : 9 téléphones fixes pour seniors comparés d'après les fiches techniques.",
+  """
+<p>Pour une personne qui entend moins bien, le critère qui compte le plus est l'amplification de l'écoute, exprimée en décibels sur la fiche. Pour quelqu'un qui se trompe de numéro, ce sont les touches photos. Et pour celui qui reçoit des appels de démarchage à longueur de journée, c'est le blocage d'appels. Un bon téléphone senior coche au moins la case qui pose problème aujourd'hui.</p>
+<p>Nous avons retenu neuf modèles encore vendus en France, filaires et sans fil. Nous en avons écarté plusieurs annoncés en fin de vie par les revendeurs.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs (boutique La Poste, revendeurs de bureautique et d'informatique), sans test en main. Nous n'indiquons que les chiffres lus sur ces fiches ; quand une donnée n'y figure pas, nous écrivons « non précisé ». Les fabricants mesurent l'amplification de façons différentes : comparez les chiffres avec prudence. Pour une perte d'audition, l'audioprothésiste reste le meilleur conseil.</div>
+<h2>Les 9 téléphones en un tableau</h2>
+<table><thead><tr><th>Modèle</th><th>Type</th><th>Amplification</th><th>Sonnerie</th><th>Plus utile</th><th>Idéal pour</th></tr></thead><tbody>
+<tr><td>Geemarc AmpliDECT 595 U.L.E</td><td>Sans fil</td><td>Jusqu'à +50 dB</td><td>Jusqu'à +80 dB</td><td>Touche SOS, mode VIP</td><td>Notre choix : le plus complet</td></tr>
+<tr><td>Panasonic KX-TGM420</td><td>Sans fil</td><td>Jusqu'à 40 dB</td><td>100 dB sur la base</td><td>Blocage d'appels, voix lente</td><td>Grand démarchage, son fort</td></tr>
+<tr><td>Geemarc AmpliDECT Combi 295</td><td>Filaire + combiné sans fil</td><td>Jusqu'à 30 dB</td><td>80 dB (base)</td><td>3 touches photos</td><td>Deux postes dans la maison</td></tr>
+<tr><td>Amplicomms BigTel 40 Plus</td><td>Filaire</td><td>Jusqu'à +40 dB</td><td>Jusqu'à +90 dB</td><td>6 touches photos, flash</td><td>Forte perte d'audition</td></tr>
+<tr><td>Geemarc Photophone 110</td><td>Filaire</td><td>Jusqu'à 30 dB</td><td>Jusqu'à 85 dB</td><td>8 touches photos, appel d'urgence</td><td>Ne plus composer de numéro</td></tr>
+<tr><td>Swissvoice Xtra 1110</td><td>Filaire</td><td>Jusqu'à +30 dB</td><td>Jusqu'à 85 dB</td><td>6 touches photos, écran</td><td>Voir qui appelle</td></tr>
+<tr><td>Doro PhoneEasy 110</td><td>Sans fil</td><td>Voir détail</td><td>90 dB(A)</td><td>Touches parlantes</td><td>Vue qui baisse</td></tr>
+<tr><td>Amplicomms BigTel 48 Plus</td><td>Filaire</td><td>Boost +40 dB</td><td>Jusqu'à 90 dB</td><td>Fonctionne sans alimentation</td><td>Coupure de courant</td></tr>
+<tr><td>Gigaset E290</td><td>Sans fil</td><td>Audio Boost (dB non précisé)</td><td>Non précisé</td><td>Blocage de 32 numéros</td><td>Un sans-fil simple</td></tr>
+</tbody></table>
+
+<h2>1. Geemarc AmpliDECT 595 U.L.E : le plus complet (notre choix)</h2>
+<p><strong>Pour qui ?</strong> Une personne qui vit seule, entend mal et reçoit des appels indésirables. Notre choix, parce qu'il traite les trois problèmes à la fois.</p>
+<ul>
+<li><strong>Points forts</strong> : amplification jusqu'à +50 dB, sonnerie jusqu'à +80 dB avec flash lumineux. Touche SOS rouge qui appelle jusqu'à 4 proches en boucle. Mode VIP qui n'accepte que les numéros enregistrés (jusqu'à 50). Répondeur de 30 minutes consultable à distance.</li>
+<li><strong>Données utiles</strong> : combiné sans fil, portée de 50 m en intérieur et 300 m en extérieur, environ 8 h en conversation, compatible avec les box des principaux opérateurs selon le revendeur.</li>
+<li><strong>Limites</strong> : environ 2 jours en veille seulement : le combiné doit retourner sur sa base chaque jour. Le mode VIP bloque aussi le médecin ou l'infirmier s'ils ne sont pas enregistrés.</li>
+</ul>
+<p><a href="{AMZ:Geemarc AmpliDECT 595 ULE}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Panasonic KX-TGM420 : contre le démarchage, avec un son très fort</h2>
+<p><strong>Pour qui ?</strong> Une personne qui entend mal et que les appels commerciaux fatiguent ou inquiètent.</p>
+<ul>
+<li><strong>Points forts</strong> : amplification jusqu'à 40 dB, sonnerie de 100 dB sur la base, blocage avancé des appels indésirables (par numéro ou préfixe). Mode voix lente qui ralentit la parole de l'interlocuteur, réduction du bruit, mode « Ne pas déranger ». Compatible avec les aides auditives.</li>
+<li><strong>Données utiles</strong> : écran rétroéclairé de 1,8 pouce, répondeur de 30 minutes avec annonce vocale des messages, 13 h en conversation et 216 h en veille.</li>
+<li><strong>Limites</strong> : beaucoup de fonctions, donc des menus à régler au départ par un proche. Touches mémoires directes non précisées.</li>
+</ul>
+<p><a href="{AMZ:Panasonic KX-TGM420}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Geemarc AmpliDECT Combi 295 : un fixe et un sans-fil</h2>
+<p><strong>Pour qui ?</strong> Une maison à étage, ou une personne qui veut un poste fixe au salon et un combiné dans la chambre.</p>
+<ul>
+<li><strong>Points forts</strong> : base filaire et combiné sans fil, amplification jusqu'à 30 dB, sonnerie de 80 dB sur la base et 70 dB sur le combiné. 4 touches mémoires directes dont 3 touches photos. Mains libres sur la base et le combiné, interphone entre les deux.</li>
+<li><strong>Données utiles</strong> : répondeur de 15 minutes, répertoire de 50 numéros, prise casque, montage mural, 8 h d'utilisation pour le combiné.</li>
+<li><strong>Limites</strong> : amplification plus modeste que les modèles précédents. Blocage d'appels non précisé.</li>
+</ul>
+<p><a href="{AMZ:Geemarc AmpliDECT Combi 295}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Amplicomms BigTel 40 Plus : pour une forte perte d'audition</h2>
+<p><strong>Pour qui ?</strong> Une personne qui entend vraiment mal au téléphone et rate souvent la sonnerie.</p>
+<ul>
+<li><strong>Points forts</strong> : amplification jusqu'à +40 dB avec touche boost, sonnerie jusqu'à +90 dB et flash lumineux à l'appel. 6 touches photos et 10 numéros abrégés, grandes touches contrastées.</li>
+<li><strong>Données utiles</strong> : filaire, fixation murale possible, compatible avec les aides auditives.</li>
+<li><strong>Limites</strong> : filaire, donc on répond là où il est installé. Écran, répondeur et mains libres non précisés sur la fiche lue.</li>
+</ul>
+<p><a href="{AMZ:Amplicomms BigTel 40 Plus}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Geemarc Photophone 110 : appeler en touchant une photo</h2>
+<p><strong>Pour qui ?</strong> Une personne qui ne parvient plus à composer un numéro ou à se servir d'un répertoire, par exemple avec des troubles de la mémoire.</p>
+<ul>
+<li><strong>Points forts</strong> : 8 touches photos, grosses touches, amplification jusqu'à 30 dB, sonnerie jusqu'à 85 dB, mains libres. Appel automatique d'urgence vers 3 numéros préprogrammés.</li>
+<li><strong>Données utiles</strong> : filaire, montage mural, compatible avec les aides auditives.</li>
+<li><strong>Limites</strong> : pas d'écran ni de répondeur : on ne voit pas qui appelle.</li>
+</ul>
+<p><a href="{AMZ:Geemarc Photophone 110}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Swissvoice Xtra 1110 : touches photos et écran</h2>
+<p><strong>Pour qui ?</strong> Une personne qui veut des touches photos mais aussi savoir qui l'appelle avant de décrocher.</p>
+<ul>
+<li><strong>Points forts</strong> : 6 touches mémoires avec photos et 2 directes, grand écran rétroéclairé avec identification de l'appelant, Audio Boost jusqu'à +30 dB, sonnerie jusqu'à 85 dB, indicateur lumineux d'appel, mains libres, égaliseur de voix.</li>
+<li><strong>Données utiles</strong> : filaire, compatible avec les prothèses auditives. Une touche mémoire peut être dédiée à un numéro d'urgence.</li>
+<li><strong>Limites</strong> : pas de répondeur. Pas de vraie touche SOS qui appelle plusieurs numéros.</li>
+</ul>
+<p><a href="{AMZ:Swissvoice Xtra 1110}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Doro PhoneEasy 110 : des touches qui parlent</h2>
+<p><strong>Pour qui ?</strong> Une personne dont la vue baisse : chaque chiffre est annoncé à voix haute quand on appuie dessus.</p>
+<ul>
+<li><strong>Points forts</strong> : touches parlantes, sonnerie de 90 dB(A) à un mètre, indicateur visuel de sonnerie, mains libres à 5 niveaux, écran rétroéclairé de 23 x 38 mm, répertoire de 100 contacts.</li>
+<li><strong>Données utiles</strong> : sans fil, jusqu'à 10 h en conversation, portée de 50 m en intérieur, jusqu'à 5 combinés par base.</li>
+<li><strong>Limites</strong> : les fiches ne s'accordent pas sur l'amplification (+10 dB pour la touche dédiée chez Doro, jusqu'à 30 dB chez un revendeur). Répondeur non précisé.</li>
+</ul>
+<p><a href="{AMZ:Doro PhoneEasy 110}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Amplicomms BigTel 48 Plus : il marche même sans courant</h2>
+<p><strong>Pour qui ?</strong> Une personne qui veut un poste de secours sur une ligne qui le permet, avec deux numéros importants à portée de doigt.</p>
+<ul>
+<li><strong>Points forts</strong> : selon le revendeur, il fonctionne sans piles ni alimentation. Touche Audio Boost +40 dB, sonnerie jusqu'à 90 dB, indicateur d'appel rouge très lumineux, 2 touches mémoires directes et 10 indirectes.</li>
+<li><strong>Données utiles</strong> : grand écran alphanumérique, agenda de 32 noms.</li>
+<li><strong>Limites</strong> : pas de touches photos. Sur la fibre, la ligne fixe passe par la box, qui elle a besoin de courant. La fiche lue se contredit sur le type (filaire dans le texte, sans fil dans un tableau) : vérifiez à l'achat.</li>
+</ul>
+<p><a href="{AMZ:Amplicomms BigTel 48 Plus}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>9. Gigaset E290 : un sans-fil simple qui bloque les numéros</h2>
+<p><strong>Pour qui ?</strong> Une personne qui entend encore correctement mais veut de très grosses touches et un écran contrasté.</p>
+<ul>
+<li><strong>Points forts</strong> : très larges touches, écran rétroéclairé noir et blanc à fort contraste, mode volume élevé Audio Boost, blocage de 32 numéros, répertoire de 150 contacts.</li>
+<li><strong>Données utiles</strong> : sans fil DECT. Version E290A avec répondeur disponible.</li>
+<li><strong>Limites</strong> : amplification et volume de sonnerie non chiffrés. Pas une solution pour une forte perte d'audition.</li>
+</ul>
+<p><a href="{AMZ:Gigaset E290}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Quelle fonction regarder en premier ?</h2>
+<p>Partez du problème le plus gênant. <strong>L'audition</strong> : visez une amplification chiffrée d'au moins 30 dB et un flash lumineux pour la sonnerie. <strong>La mémoire</strong> : des touches photos, sans menu. <strong>La vue</strong> : grosses touches contrastées, touches parlantes. <strong>Le démarchage</strong> : un blocage d'appels ou un mode qui n'accepte que les contacts connus.</p>
+<p>Notre conseil : un sans-fil est plus pratique, mais il faut penser à le reposer sur sa base. Pour une personne qui l'oublie partout, un filaire bien placé au salon, avec un deuxième poste dans la chambre, évite le combiné déchargé au mauvais moment. Tous les critères sont détaillés dans notre guide du <a href="{R}telephone-fixe-grosses-touches/">téléphone fixe à grosses touches</a>. Pour la télévision, voyez aussi notre <a href="{R}meilleur-casque-tv-senior/">sélection de casques TV</a>.</p>
+<p>Retrouvez les autres équipements utiles dans <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>. Si l'audition baisse, un rendez-vous chez le médecin traitant ou l'ORL, puis chez l'audioprothésiste, peut changer bien plus qu'un téléphone.</p>
+""",
+  faq=[("Quel est le meilleur téléphone fixe pour une personne âgée ?", "Cela dépend de sa difficulté principale. Pour une personne qui entend mal, regardez l'amplification en décibels et la sonnerie lumineuse. Pour les troubles de mémoire, les touches photos. Le Geemarc AmpliDECT 595 U.L.E réunit amplification, touche SOS et blocage des appels inconnus."),
+       ("Un téléphone fixe amplifié fonctionne-t-il avec une box internet ?", "Oui, il se branche sur la prise téléphone de la box. Certaines fiches, comme celle du Geemarc 595 U.L.E, mentionnent la compatibilité avec les box des grands opérateurs. En cas de coupure de courant, la box s'éteint et la ligne fixe aussi."),
+       ("Avez-vous testé ces téléphones ?", "Non. Cette sélection repose sur les caractéristiques publiées par les fabricants et les revendeurs, sans note ni avis de prise en main. Vérifiez la notice du modèle choisi.")],
+  short="Top 9 téléphones fixes senior", cat="Vie quotidienne")

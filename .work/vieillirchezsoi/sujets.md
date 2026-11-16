@@ -21,7 +21,7 @@
 - [x] monte-escalier-prix-aides/ | monte-escalier prix et aides | Se déplacer | types (droit, tournant, extérieur, plateforme), ordre de grandeur des prix seulement si sources fiables, location, aides (MaPrimeAdapt' finance le monte-escalier : vérifier sur service-public), devis, renvoi ergothérapeute
 - [x] fauteuil-roulant-electrique-comment-choisir/ | comment choisir un fauteuil roulant électrique | Se déplacer | pliant ou non, poids, autonomie, transport en voiture et avion, rappeler la prise en charge à 100 % sur prescription depuis le 1er décembre 2025 et renvoyer vers le guide fauteuil-roulant-rembourse-100/ ; sur Amazon, seulement les modèles achetés sans prescription
 - [x] tapis-antiderapant-douche/ | tapis antidérapant douche | Salle de bains | ventouses, entretien, alternatives
-- [ ] bouton-appel-urgence-senior/ | bouton d'appel d'urgence senior | Sécurité | pendentif, bracelet, avec ou sans abonnement
+- [x] bouton-appel-urgence-senior/ | bouton d'appel d'urgence senior | Sécurité | pendentif, bracelet, avec ou sans abonnement
 - [ ] teleassistance-comment-ca-marche/ | téléassistance comment ça marche | Sécurité | principe, qui répond, rester général sur les aides
 - [ ] adapter-salle-de-bain-personne-agee/ | adapter la salle de bain d'une personne âgée | Salle de bains | priorités, petits achats puis travaux
 - [ ] chaise-percee/ | chaise percée | Chambre et repos | usage nocturne, accoudoirs, entretien
