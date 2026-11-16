@@ -220,9 +220,9 @@ const lang = ((tgw && tgw.initDataUnsafe && tgw.initDataUnsafe.user && tgw.initD
 const L = {
  en: {
   names:['Studio','Loft','Villa','Apartment block','Residential tower','Hotel chain','Mall network','Business district','Resort island','Megacity'],
-  pr:['month','quarter','6 months','year','2 years','5 years','10 years','20 years','50 years','century'],
-  estate:'Estate', shop:'Shop', prest:'Empire', top:'Top',
-  buy:'Buy', lvl:'Lv', manager:'Manager', auto:'Auto', tapStart:'Tap to collect', ms:'x2 @',
+  pr:['month','quarter','6 months','year','year','year','year','year','year','year'],
+  hint:'Tap a property to collect its rent. Hire a manager 👔 and it pays you automatically, even when you are away.', estate:'Estate', shop:'Shop', prest:'Empire', top:'Top',
+  buy:'Buy', lvl:'Lv', manager:'Manager', auto:'Auto', tapStart:'Tap to collect', ms:'x2.5 @',
   welcomeT:'Welcome pack', welcomeS:'2h of rent now + x2 income for 24h', claim:'Claim', daily:'Daily bonus', dailyS:'Day {n} of 7, come back every day',
   away:'While you were away', awayS:'Your tenants kept paying rent.', collect:'Collect', great:'Great!',
   vipMsg:'Golden tenant! +', per:'/s', max:'MAX',
@@ -239,9 +239,9 @@ const L = {
  },
  fr: {
   names:['Studio','Loft','Villa','Immeuble','Tour résidentielle','Chaîne d\'hôtels','Centres commerciaux','Quartier d\'affaires','Île resort','Mégapole'],
-  pr:['mois','trimestre','semestre','an','2 ans','5 ans','10 ans','20 ans','50 ans','siècle'],
-  estate:'Biens', shop:'Boutique', prest:'Empire', top:'Top',
-  buy:'Acheter', lvl:'Niv', manager:'Gestionnaire', auto:'Auto', tapStart:'Touche pour encaisser', ms:'x2 @',
+  pr:['mois','trimestre','semestre','an','an','an','an','an','an','an'],
+  hint:'Touche un bien pour encaisser son loyer. Embauche un gestionnaire 👔 et il te paie tout seul, même quand tu es absent.', estate:'Biens', shop:'Boutique', prest:'Empire', top:'Top',
+  buy:'Acheter', lvl:'Niv', manager:'Gestionnaire', auto:'Auto', tapStart:'Touche pour encaisser', ms:'x2.5 @',
   welcomeT:'Pack de bienvenue', welcomeS:'2h de loyers tout de suite + x2 revenus pendant 24h', claim:'Récupérer', daily:'Bonus du jour', dailyS:'Jour {n} sur 7, reviens chaque jour',
   away:'Pendant ton absence', awayS:'Tes locataires ont continué à payer.', collect:'Encaisser', great:'Super !',
   vipMsg:'Locataire doré ! +', per:'/s', max:'MAX',
@@ -307,7 +307,7 @@ function apply(r, full) {
     off = r.now - Date.now() / 1000;
     const keep = S;
     S = { cash: r.cash, life_all: r.life_all, lv: r.lv.slice(), mg: r.mg.slice(), ts: r.ts.slice(), inv: r.inv, prest: r.prest, perm2: r.perm2, vault: r.vault, welcome: r.welcome, streak: r.streak, dailyOk: r.daily_ok,
-      boostEnd: r.boost ? r.now + r.boost.left : 0, bmult: r.boost ? r.boost.mult : 1, vipEnd: r.vip ? r.now + r.vip.left : 0, cfg: r.cfg, ms: r.ms, g: r.g, shop: r.shop, notify: r.notify, loc: r.now, cap: r.cap, stars: r.stars };
+      boostEnd: r.boost ? r.now + r.boost.left : 0, bmult: r.boost ? r.boost.mult : 1, vipEnd: r.vip ? r.now + r.vip.left : 0, cfg: r.cfg, ms: r.ms, mb: r.mb || 2.5, g: r.g, shop: r.shop, notify: r.notify, loc: r.now, cap: r.cap, stars: r.stars };
     if (!keep) build();
     else { buildSky(); }
   }
@@ -315,7 +315,7 @@ function apply(r, full) {
 }
 
 // ---------- economy (mirror of the server)
-const mult = l => { let m = 1; for (const k of S.ms) if (l >= k) m *= 2; return m; };
+const mult = l => { let m = 1; for (const k of S.ms) if (l >= k) m *= S.mb; return m; };
 const curM = n => (1 + 0.02 * S.inv) * ((S.boostEnd > n) ? S.bmult : 1) * (S.perm2 ? 2 : 1);
 const inc = (i, n) => S.lv[i] > 0 ? S.cfg[i].r * S.lv[i] * mult(S.lv[i]) * curM(n) : 0;
 const gainInv = () => Math.max(0, Math.floor(150 * Math.sqrt(S.life_all / 1e9)) - Math.floor(S.inv));
@@ -410,6 +410,7 @@ function buildSky() {
 let skyKey = '';
 function buildBanners() {
   const b = $('banners'); let h = '';
+  if (!S.mg[0]) h += `<div class="bn" style="background:#e6f6fd"><div class="tx"><b>👆 ${L.hint.split('. ')[0]}.</b><span>${L.hint.split('. ').slice(1).join('. ')}</span></div></div>`;
   if (!S.welcome) h += `<div class="bn gold"><div class="tx"><b>🎁 ${L.welcomeT}</b><span>${L.welcomeS}</span></div><button class="btn gold" data-sku="welcome">⭐ ${S.shop.welcome}</button></div>`;
   if (S.dailyOk) {
     const next = Math.min(S.streak + 1, 7);
@@ -431,7 +432,7 @@ function paint() {
   $('mult').textContent = 'x' + fmt(curM(n));
   const bo = $('boost');
   if (S.boostEnd > n) { bo.hidden = false; const l = S.boostEnd - n; bo.textContent = '⚡ x' + S.bmult + ' ' + (l > 3600 ? Math.floor(l / 3600) + 'h' + String(Math.floor(l % 3600 / 60)).padStart(2, '0') : Math.floor(l / 60) + ':' + String(Math.floor(l % 60)).padStart(2, '0')); } else bo.hidden = true;
-  const bk = (S.welcome ? 1 : 0) + '' + (S.dailyOk ? 1 : 0) + S.streak;
+  const bk = (S.welcome ? 1 : 0) + '' + (S.dailyOk ? 1 : 0) + S.streak + (S.mg[0] ? 1 : 0);
   if (bk !== lastBanner) { lastBanner = bk; buildBanners(); }
   const sk = S.lv.map(l => l > 0 ? 1 + Math.floor(Math.min(l, 120) / 6) : 0).join(',');
   if (sk !== skyKey) { skyKey = sk; buildSky(); }
