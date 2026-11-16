@@ -312,7 +312,8 @@
       const hb = w.querySelector('b'); window.__agtDn = dn; if (hb) hb.textContent = T.h + ' · ' + dn + '/' + mx + (agtNx(dn) ? ' · ' + agtNx(dn) : '');  /* 2 nov 2026 (11h03, Jeremy): the next reward waiting */
     }).catch(() => {}); } catch (e) {}
     const el = w.querySelector('adsgram-task');
-    el.addEventListener('onBannerNotFound', () => { gone = true; document.querySelectorAll('.agtk').forEach((x) => x.remove()); w.remove(); });  // no task for this player: nothing shown until the app reopens
+    // 16 nov 2026 (Jeremy): no task for this player right now: the block is hidden, then tried again 5 minutes later (it used to stay hidden until the app reopened)
+    el.addEventListener('onBannerNotFound', () => { gone = true; setTimeout(() => { gone = false; try { put(); } catch (e) {} }, 300000); document.querySelectorAll('.agtk').forEach((x) => x.remove()); w.remove(); });
     el.addEventListener('onError', () => { w.remove(); });
     el.addEventListener('reward', () => {
       try { localStorage.setItem('mct_agt_until', String(Date.now() + 300000)); } catch (e) {}  // 16 nov 2026 (Jeremy): 5 minutes between two partner missions again
