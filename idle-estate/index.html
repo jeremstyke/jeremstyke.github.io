@@ -295,8 +295,9 @@ function call(body) {
   pend++;
   const p = chain.then(async () => {
     try {
-      const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ init: initData, ...body }) });
-      return await r.json();
+      const ac = new AbortController(); const to = setTimeout(() => ac.abort(), 15000);
+      const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ init: initData, ...body }), signal: ac.signal });
+      const j = await r.json(); clearTimeout(to); return j;
     } catch (e) { return { ok: false, err: 'net' }; }
   });
   chain = p.catch(() => {});
@@ -525,16 +526,31 @@ function renderShop() {
     if (e.target.id === 'nt') { S.notify = !S.notify; e.target.classList.toggle('on', S.notify); call({ act: 'notify', on: S.notify }); }
   };
 }
-function buy(sku) {
-  hap('medium');
-  call({ act: 'invoice', sku }).then(r => {
-    if (!r || !r.ok || !r.link) { toast(L.err); return; }
-    if (!tgw || !tgw.openInvoice) { window.open(r.link, '_blank'); return; }
+async function getInvoice(sku) {
+  for (let k = 0; k < 3; k++) {
+    const ac = new AbortController(); const to = setTimeout(() => ac.abort(), 9000);
+    try {
+      const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ init: initData, act: 'invoice', sku }), signal: ac.signal });
+      const j = await r.json(); clearTimeout(to);
+      if (j && j.ok && j.link) return j;
+      if (j && j.err === 'sku') return j;
+    } catch (e) { clearTimeout(to); }
+  }
+  return null;
+}
+let buying = false;
+async function buy(sku) {
+  if (buying) return; buying = true; hap('medium'); toast('⭐ ...');
+  const r = await getInvoice(sku); buying = false;
+  if (!r || !r.ok || !r.link) { toast(L.err); return; }
+  if (!tgw || !tgw.openInvoice) { window.open(r.link, '_blank'); return; }
+  try {
     tgw.openInvoice(r.link, st => {
       if (st === 'paid') { hap('ok'); toast(L.paid); setTimeout(() => call({ act: 'state' }).then(() => { buildBanners(); if (tab === 'shop') renderShop(); }), 1200); setTimeout(() => call({ act: 'state' }), 4000); }
-      else if (st === 'cancelled' || st === 'failed') toast(L.cancelled);
+      else if (st === 'cancelled') toast(L.cancelled);
+      else if (st === 'failed') toast(L.cancelled + ' (failed)');
     });
-  });
+  } catch (e) { toast(L.err); }
 }
 
 // prestige
