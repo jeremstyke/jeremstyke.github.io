@@ -69,18 +69,6 @@ footer{padding:40px 0;color:var(--muted);font-size:.85rem;text-align:center;bord
 .steps code{background:var(--card);border:1px solid var(--line);padding:1px 6px;border-radius:6px;color:var(--text)}
 @media(max-width:640px){.ctg{grid-template-columns:repeat(2,1fr);gap:10px}.ctg .nm{font-size:.82rem}}
 .newb{display:inline-block;margin-top:10px;color:var(--text);text-decoration:none;font-weight:600;border:1px solid var(--line);padding:7px 14px;border-radius:999px;font-size:.9rem}.newb:hover{border-color:var(--acc)}
-.fbar{position:sticky;top:62px;z-index:9;background:rgba(7,7,12,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:12px 0}
-.seg{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px;width:max-content;max-width:100%}
-.seg button,.chips button{font:inherit;cursor:pointer;border:0;color:var(--muted);background:transparent}
-.seg button{padding:9px 16px;border-radius:10px;font-weight:600;font-size:.95rem;white-space:nowrap}
-.seg button.on{background:linear-gradient(90deg,var(--acc),var(--acc2));color:#fff}
-.chips{display:flex;gap:8px;overflow-x:auto;margin-top:10px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
-.chips button{border:1px solid var(--line);padding:6px 13px;border-radius:999px;font-size:.88rem;white-space:nowrap}
-.chips button.on{border-color:var(--acc);color:var(--text);background:rgba(255,95,162,.12)}
-body[data-dev=phone] .dv-pc,body[data-dev=pc] .dv-phone{display:none}
-body[data-dev=chrome] #packs,body:not([data-dev=chrome]) #chrome-themes{display:none}
-#packs .pack:first-child,#chrome-themes{border-top:0}
-@media(max-width:640px){.hero{padding:34px 0 22px}.hero .strip,.hero p:has(.ytcta){display:none}.newb{margin-top:0}.seg{width:100%}.seg button{flex:1;padding:9px 6px;font-size:.85rem}}
 </style>
 </head>
 <body>
@@ -98,25 +86,20 @@ body[data-dev=chrome] #packs,body:not([data-dev=chrome]) #chrome-themes{display:
   <div class="strip" id="strip"></div>
 </div></section>
 
-<div class="fbar" id="browse"><div class="wrap">
-  <div class="seg"><button data-dev="phone">📱 Phone</button><button data-dev="pc">💻 PC 4K</button><button data-dev="chrome">🌐 Chrome themes</button></div>
-  <div class="chips"><button data-st="all" class="on">All styles</button><button data-st="aurora">Aurora</button><button data-st="retro-sunset">Retro Sunset</button><button data-st="soft-gradients">Soft Gradients</button><button data-st="neon-dark">Neon AMOLED</button><button data-st="paper-waves">Paper Waves</button><button data-st="minimal-mountains">Mountains</button><button data-st="galaxy">Galaxy</button><button data-st="holographic">Holographic</button><button data-st="geometric">Geometric</button></div>
-</div></div>
-
 <main class="wrap" id="packs"></main>
 
 <section class="pack" id="chrome-themes"><div class="wrap">
   <div class="ph"><div><h2>Chrome Themes</h2><p>Give Google Chrome a 4K new tab background and matching colors. 3 themes are free, the full pack has all 9.</p></div></div>
   <div class="ctg">
-    <div data-st="aurora"><div class="tile"><img src="chrome/aurora.jpg" alt="Aurora Chrome theme with 4K new tab background" loading="lazy"><span class="tag">FREE</span><a class="free" href="chrome/walldrop-aurora-theme.zip" download>Download theme</a></div><div class="nm">Aurora</div></div>
-    <div data-st="neon-dark"><div class="tile"><img src="chrome/neon-dark.jpg" alt="Neon AMOLED Chrome theme with 4K new tab background" loading="lazy"><span class="tag">FREE</span><a class="free" href="chrome/walldrop-neon-dark-theme.zip" download>Download theme</a></div><div class="nm">Neon AMOLED</div></div>
-    <div data-st="galaxy"><div class="tile"><img src="chrome/galaxy.jpg" alt="Galaxy Chrome theme with 4K new tab background" loading="lazy"><span class="tag">FREE</span><a class="free" href="chrome/walldrop-galaxy-theme.zip" download>Download theme</a></div><div class="nm">Galaxy</div></div>
-    <div data-st="retro-sunset"><div class="tile"><img src="chrome/retro-sunset.jpg" alt="Retro Sunset Chrome theme with 4K new tab background" loading="lazy"><div class="lock">In the full pack</div></div><div class="nm">Retro Sunset</div></div>
-    <div data-st="soft-gradients"><div class="tile"><img src="chrome/soft-gradients.jpg" alt="Soft Gradients Chrome theme with 4K new tab background" loading="lazy"><div class="lock">In the full pack</div></div><div class="nm">Soft Gradients</div></div>
-    <div data-st="holographic"><div class="tile"><img src="chrome/holographic.jpg" alt="Holographic Chrome theme with 4K new tab background" loading="lazy"><div class="lock">In the full pack</div></div><div class="nm">Holographic</div></div>
-    <div data-st="paper-waves"><div class="tile"><img src="chrome/paper-waves.jpg" alt="Paper Waves Chrome theme with 4K new tab background" loading="lazy"><div class="lock">In the full pack</div></div><div class="nm">Paper Waves</div></div>
-    <div data-st="minimal-mountains"><div class="tile"><img src="chrome/minimal-mountains.jpg" alt="Minimal Mountains Chrome theme with 4K new tab background" loading="lazy"><div class="lock">In the full pack</div></div><div class="nm">Minimal Mountains</div></div>
-    <div data-st="geometric"><div class="tile"><img src="chrome/geometric.jpg" alt="Geometric Chrome theme with 4K new tab background" loading="lazy"><div class="lock">In the full pack</div></div><div class="nm">Geometric</div></div>
+    <div><div class="tile"><img src="chrome/aurora.jpg" alt="Aurora Chrome theme with 4K new tab background" loading="lazy"><span class="tag">FREE</span><a class="free" href="chrome/walldrop-aurora-theme.zip" download>Download theme</a></div><div class="nm">Aurora</div></div>
+    <div><div class="tile"><img src="chrome/neon-dark.jpg" alt="Neon AMOLED Chrome theme with 4K new tab background" loading="lazy"><span class="tag">FREE</span><a class="free" href="chrome/walldrop-neon-dark-theme.zip" download>Download theme</a></div><div class="nm">Neon AMOLED</div></div>
+    <div><div class="tile"><img src="chrome/galaxy.jpg" alt="Galaxy Chrome theme with 4K new tab background" loading="lazy"><span class="tag">FREE</span><a class="free" href="chrome/walldrop-galaxy-theme.zip" download>Download theme</a></div><div class="nm">Galaxy</div></div>
+    <div><div class="tile"><img src="chrome/retro-sunset.jpg" alt="Retro Sunset Chrome theme with 4K new tab background" loading="lazy"><div class="lock">In the full pack</div></div><div class="nm">Retro Sunset</div></div>
+    <div><div class="tile"><img src="chrome/soft-gradients.jpg" alt="Soft Gradients Chrome theme with 4K new tab background" loading="lazy"><div class="lock">In the full pack</div></div><div class="nm">Soft Gradients</div></div>
+    <div><div class="tile"><img src="chrome/holographic.jpg" alt="Holographic Chrome theme with 4K new tab background" loading="lazy"><div class="lock">In the full pack</div></div><div class="nm">Holographic</div></div>
+    <div><div class="tile"><img src="chrome/paper-waves.jpg" alt="Paper Waves Chrome theme with 4K new tab background" loading="lazy"><div class="lock">In the full pack</div></div><div class="nm">Paper Waves</div></div>
+    <div><div class="tile"><img src="chrome/minimal-mountains.jpg" alt="Minimal Mountains Chrome theme with 4K new tab background" loading="lazy"><div class="lock">In the full pack</div></div><div class="nm">Minimal Mountains</div></div>
+    <div><div class="tile"><img src="chrome/geometric.jpg" alt="Geometric Chrome theme with 4K new tab background" loading="lazy"><div class="lock">In the full pack</div></div><div class="nm">Geometric</div></div>
   </div>
   <div class="cta"><div><b>Full pack: all 9 Chrome themes</b><br><span>Coming very soon for $1.</span></div></div>
   <ol class="steps">
@@ -177,35 +160,15 @@ PACKS.forEach((p, k) => {
       <div><h2>${p.name} wallpapers</h2><p>${p.desc}</p></div>
       <a class="buy" href="${p.url}">Get all 30 for $1 <small>phone + 4K</small></a>
     </div>
-    <div class="dv dv-phone"><div class="label">Phone · 1440 x 3120</div>
-    <div class="phones">${phones}</div></div>
-    <div class="dv dv-pc"><div class="label">Desktop · 4K 3840 x 2160</div>
-    <div class="desks">${desks}</div></div>
+    <div class="label">Phone · 1440 x 3120</div>
+    <div class="phones">${phones}</div>
+    <div class="label">Desktop · 4K 3840 x 2160</div>
+    <div class="desks">${desks}</div>
     <div class="cta"><div><b>Like this style?</b><br><span>Get the full ${p.name} pack: 15 phone + 15 4K desktop wallpapers, instant download.</span></div>
       <a class="buy" href="${p.url}">Get the pack for $1</a></div>
   </section>`);
 });
 document.getElementById("y").textContent = new Date().getFullYear();
-(function(){
-  var body=document.body, bar=document.getElementById("browse"), st="all";
-  function apply(){
-    document.querySelectorAll(".seg button").forEach(function(b){b.classList.toggle("on",b.dataset.dev===body.dataset.dev);});
-    document.querySelectorAll(".chips button").forEach(function(b){b.classList.toggle("on",b.dataset.st===st);});
-    document.querySelectorAll("#packs .pack").forEach(function(sec){sec.hidden=!(st==="all"||sec.id===st);});
-    document.querySelectorAll("#chrome-themes [data-st]").forEach(function(t){t.hidden=!(st==="all"||t.dataset.st===st);});
-  }
-  function go(){var y=bar.getBoundingClientRect().top+scrollY-62;if(scrollY>y)scrollTo({top:y,behavior:"smooth"});}
-  function setDev(d,scroll){body.dataset.dev=d;apply();if(scroll)go();}
-  document.querySelectorAll(".seg button").forEach(function(b){b.onclick=function(){setDev(b.dataset.dev,true);};});
-  document.querySelectorAll(".chips button").forEach(function(b){b.onclick=function(){st=b.dataset.st;apply();go();};});
-  document.querySelectorAll('a[href="#chrome-themes"]').forEach(function(a){a.onclick=function(e){e.preventDefault();setDev("chrome",false);var y=bar.getBoundingClientRect().top+scrollY-62;scrollTo({top:y,behavior:"smooth"});};});
-  document.querySelectorAll('nav a').forEach(function(a){a.onclick=function(e){e.preventDefault();st=a.getAttribute("href").slice(1);if(body.dataset.dev==="chrome")body.dataset.dev=matchMedia("(max-width:800px)").matches?"phone":"pc";apply();scrollTo({top:bar.getBoundingClientRect().top+scrollY-62,behavior:"smooth"});};});
-  var h=location.hash.slice(1);
-  body.dataset.dev=h==="chrome-themes"?"chrome":(matchMedia("(max-width:800px)").matches?"phone":"pc");
-  if(h&&h!=="chrome-themes"&&document.getElementById(h)&&document.getElementById(h).closest("#packs"))st=h;
-  apply();
-  if(h){var y=bar.getBoundingClientRect().top+scrollY-62;setTimeout(function(){scrollTo({top:y});},50);}
-})();
 </script>
 <script>
 (function(){
