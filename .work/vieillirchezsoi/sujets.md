@@ -1,5 +1,6 @@
 # Sujets d'articles à venir pour Vieillir chez soi (un tous les 2 jours)
-# Format : - [ ] slug/ | requête visée | catégorie | angle
+# Format : - [ ] livres-audio-personne-agee/ | livre audio pour personne âgée | Vie quotidienne | quand la vue baisse, comment écouter (enceinte simple, téléphone, tablette, casque), trouver des livres audio, installer avec son proche ; lien {AUDIBLE} vers l'essai gratuit en bonne place et liens {AMZ} vers les appareils
+- [ ] slug/ | requête visée | catégorie | angle
 # Cocher [x] une fois publié. Prendre toujours le premier sujet non coché.
 
 - [x] comment-choisir-siege-de-douche/ | siège de douche personne âgée | Salle de bains | publié au lancement

@@ -80,6 +80,8 @@ def read_min(html_):
 
 def render(body):
     body = body.replace('{CTA}', CTA).replace('{R}checklist/', '{R}' + HUB)
+    body = re.sub(r'\{AUDIBLE:([A-Z0-9]{10})\}', lambda m: 'https://www.amazon.fr/hz/audible/mlp/mfpdp/' + m.group(1) + '?actionCode=AMSTM1450129210001&tag=' + TAG, body)
+    body = body.replace('{AUDIBLE}', 'https://www.amazon.fr/hz/audible/mlp?actionCode=AMSTM1450129210001&tag=' + TAG)
     return re.sub(r'\{AMZ:([^}]+)\}', lambda m: amz(m.group(1)), body)
 
 def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None, kind='website'):
