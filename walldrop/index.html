@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>WallDrop - Free Aesthetic Wallpapers for iPhone, Android & 4K Desktop</title>
-<meta name="description" content="Download free aesthetic wallpapers for iPhone, Android and 4K desktop: aurora, synthwave sunsets, soft gradients, AMOLED neon and paper waves. Full packs for $1.">
+<meta name="description" content="Download free aesthetic wallpapers for iPhone, Android and 4K desktop: aurora, synthwave, gradients, AMOLED neon, galaxy, mountains, holographic and more. Full packs for $1.">
 <meta property="og:title" content="WallDrop - Free Aesthetic Wallpapers">
 <meta property="og:description" content="Free HD wallpapers for phone and 4K desktop. Full packs of 30 for $1.">
 <meta property="og:image" content="https://jeremstyke.github.io/walldrop/img/retro-sunset/cover.jpg">
@@ -90,14 +90,18 @@ const PACKS = [
   {id:"retro-sunset", name:"Retro Sunset", desc:"80s synthwave: glowing suns, purple skies and neon grids.", url:"https://jeremstyke.gumroad.com/l/retro-sunset-wallpapers"},
   {id:"soft-gradients", name:"Soft Gradients", desc:"Dreamy color blends for a clean, minimal setup.", url:"https://jeremstyke.gumroad.com/l/soft-gradients-wallpapers"},
   {id:"neon-dark", name:"Neon Dark (AMOLED)", desc:"Pure black with glowing neon lines. Stunning on OLED screens and saves battery.", url:"https://jeremstyke.gumroad.com/l/neon-dark-wallpapers"},
-  {id:"paper-waves", name:"Paper Waves", desc:"Layered paper-cut waves with soft shadows, in warm, ocean, pastel and forest tones.", url:"https://jeremstyke.gumroad.com/l/paper-waves-wallpapers"}
+  {id:"paper-waves", name:"Paper Waves", desc:"Layered paper-cut waves with soft shadows, in warm, ocean, pastel and forest tones.", url:"https://jeremstyke.gumroad.com/l/paper-waves-wallpapers"},
+  {id:"minimal-mountains", name:"Minimal Mountains", desc:"Calm layered mountains at sunrise, dusk and night.", url:"https://jeremstyke.gumroad.com/l/minimal-mountains-wallpapers"},
+  {id:"galaxy", name:"Galaxy", desc:"Deep space nebulas and star fields in purple, pink and teal.", url:"https://jeremstyke.gumroad.com/l/galaxy-wallpapers"},
+  {id:"holographic", name:"Holographic", desc:"Shiny iridescent swirls in pastel rainbow tones.", url:"https://jeremstyke.gumroad.com/l/holographic-wallpapers"},
+  {id:"geometric", name:"Geometric", desc:"Bold Bauhaus and mid-century shapes in vibrant palettes.", url:"https://jeremstyke.gumroad.com/l/geometric-wallpapers"}
 ];
 const pad = n => String(n).padStart(2, "0");
 const nav = document.getElementById("nav"), main = document.getElementById("packs"), strip = document.getElementById("strip");
 
 PACKS.forEach((p, k) => {
   nav.insertAdjacentHTML("beforeend", `<a href="#${p.id}">${p.name.replace(" (AMOLED)", "")}</a>`);
-  strip.insertAdjacentHTML("beforeend", `<img src="img/${p.id}/p${pad(4 + k)}.jpg" alt="${p.name} wallpaper" loading="lazy">`);
+  strip.insertAdjacentHTML("beforeend", `<img src="img/${p.id}/p${pad(4 + (k % 9))}.jpg" alt="${p.name} wallpaper" loading="lazy">`);
   let phones = "";
   for (let i = 1; i <= 15; i++) {
     const free = i <= 3;
