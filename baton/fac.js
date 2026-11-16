@@ -229,7 +229,7 @@
     var b = B(), L = T(); if (!E.ad || !b || !b.S) return;
     // 1 nov 2026 (22h27, Jeremy): once the factory has its own Adsgram block (fac_ad_block), its task is independent from the Tasks tab: its own limits, paid in crates
     var S = b.S, own = !!(st && st.ad_block), until = own ? (Number(st.ad_next) || 0) : Math.max(Number(S.adtNext) || 0, (function () { try { return Number(localStorage.getItem('bt_adt_pause')) || 0; } catch (e) { return 0; } })());
-    var blk = own ? String(st.ad_block) : 'task-55373', crt = own ? st.ad_crates : (st ? st.task_crates : 100);
+    var blk = own ? String(st.ad_block) : 'task-59990', crt = own ? st.ad_crates : (st ? st.task_crates : 100);
     if (own ? Number(st.ad_left) === 0 : S.adtLeft === 0) { adUntil = 0; E.ad.innerHTML = '<small>' + L.adDone + '</small>'; return; }
     if (until > Date.now()) { adUntil = until; E.ad.innerHTML = '<small>' + L.adWait + ' <b id="fAdCd"></b></small>'; return; }
     adUntil = 0;
