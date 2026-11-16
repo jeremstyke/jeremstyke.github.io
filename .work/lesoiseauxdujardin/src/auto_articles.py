@@ -1757,3 +1757,264 @@ g("meilleure-boule-de-graisse/",
        ("Avez-vous testé ces boules de graisse ?",
         "Non. Cette sélection repose sur les fiches publiées par les fabricants et les revendeurs. Quand une information manque, comme le type de graisse, nous l'indiquons comme non précisée.")],
   short="Top 10 boules de graisse", cat="Nourrir")
+
+AUTO_META['oiseau-ventre-rouge/'] = ('🍒', 'rouge')
+g("oiseau-ventre-rouge/",
+  "Oiseau au ventre rouge : rouge-gorge, bouvreuil ou pinson ?",
+  "Oiseau à la poitrine rouge au jardin : rouge-gorge, bouvreuil ou pinson ?",
+  "Poitrine orange, rose vif ou roux ? Au jardin, l'oiseau au ventre rouge est souvent un rouge-gorge, sinon un bouvreuil ou un pinson mâle. Comment trancher.",
+  """
+<p>Un petit oiseau rond avec une poitrine orangée, qui se tient au sol ou sur un piquet près de vous : c'est le <strong>rouge-gorge</strong>, de loin le plus fréquent. Si le rouge tire franchement sur le rose et que l'oiseau porte une calotte noire, c'est un <strong>bouvreuil pivoine mâle</strong>. Et si la poitrine est d'un roux couleur rouille, avec la tête gris-bleu, vous avez un <strong>pinson des arbres mâle</strong>.</p>
+<p>Un quatrième oiseau sème souvent le doute alors qu'il n'a pas le ventre rouge du tout : le rougequeue noir, dont le roux est sur la queue. Le tableau ci-dessous vous aide à faire le tri.</p>
+{CTA}
+
+<h2>Où est le rouge exactement ?</h2>
+<p>C'est la première question à se poser, avant même la taille. Les quatre espèces portent leur couleur à des endroits différents, d'après les fiches de la LPO et d'oiseaux.net.</p>
+<table><thead><tr><th>Ce que vous voyez</th><th>Rouge-gorge</th><th>Bouvreuil pivoine mâle</th><th>Pinson des arbres mâle</th><th>Rougequeue noir mâle</th></tr></thead><tbody>
+<tr><td>Couleur</td><td>Orangé</td><td>Rouge rosé</td><td>Roux-rouille</td><td>Roux</td></tr>
+<tr><td>Où ?</td><td>Plastron (gorge et poitrine), ventre blanchâtre</td><td>Joues, gorge, poitrine, flancs</td><td>Poitrine et ventre</td><td>Queue seulement</td></tr>
+<tr><td>Tête</td><td>Brun olive, liseré gris bleuté autour du plastron</td><td>Calotte noire</td><td>Dessus et nuque gris-bleu</td><td>Noire, comme le reste du corps au printemps</td></tr>
+<tr><td>Taille (LPO)</td><td>13 à 14 cm</td><td>15,5 à 17,5 cm</td><td>14 à 16 cm</td><td>14 cm</td></tr>
+<tr><td>Au jardin</td><td>Toute l'année, souvent au sol</td><td>Discret, dans les arbres et les haies</td><td>Au sol, sous la mangeoire</td><td>Perché en hauteur, près des bâtiments</td></tr>
+</tbody></table>
+<p>Pour le bouvreuil, les sources ne donnent pas la même taille : 15,5 à 17,5 cm pour la LPO, 14 à 16 cm pour oiseaux.net. Retenez qu'il paraît plus trapu que les autres, avec une grosse tête et un bec massif.</p>
+
+<h2>Une poitrine orangée : le rouge-gorge</h2>
+<p>Son plastron orangé est bordé d'un liseré gris bleuté, et le reste du dessous est blanchâtre. Le « ventre rouge » est donc surtout une poitrine. Le mâle et la femelle sont identiques, précise la LPO, été comme hiver. Inutile donc de chercher la différence.</p>
+<p>Ce qui le trahit, c'est son comportement. Il chasse au sol, dans les feuilles mortes, et il défend son coin de jardin presque toute l'année. Un détail utile en été : le jeune rouge-gorge n'a pas encore de plastron orangé, il est brun moucheté de roux. Toute sa fiche est sur notre page consacrée au <a href="{R}rouge-gorge/">rouge-gorge</a>.</p>
+
+<h2>Un rouge rosé et une calotte noire : le bouvreuil pivoine</h2>
+<p>Le mâle est l'un des plus beaux oiseaux du jardin. La LPO et oiseaux.net le décrivent avec le dessous rouge-rose (gorge, poitrine, flancs et haut du ventre), une calotte noire à reflets bleutés, un bec court et massif, un manteau gris, des ailes noires barrées de clair et un croupion blanc bien visible quand il s'envole. Le bas du ventre est blanc.</p>
+<p>La femelle est beaucoup plus discrète : gris-brun, avec la même calotte noire. Ici les sources divergent un peu, la LPO ne lui prête aucun rouge, oiseaux.net parle d'un dessous « beige rosé discret ». Le jeune, lui, n'a pas encore la calotte noire.</p>
+<p>Le bouvreuil est timide. Oiseaux.net note que c'est souvent son cri qui le trahit, un « iuh » plaintif et grave répété à intervalles réguliers. Il se nourrit de graines, de bourgeons au printemps, surtout ceux des fruitiers, et de baies. Ne comptez pas trop le voir à la mangeoire : oiseaux.net le décrit comme peu assidu en hiver. La LPO signale par ailleurs que ses populations sont en déclin.</p>
+<p>Par exemple, si vous voyez au printemps un oiseau rose et noir s'attaquer aux bourgeons de votre cerisier, c'est lui.</p>
+
+<h2>Une poitrine roux-rouille et une tête gris-bleu : le pinson des arbres</h2>
+<p>Le pinson mâle a le dessous roux-rouille, le dos marron, le dessus de la tête et la nuque gris-bleu, et deux barres blanches bien nettes sur l'aile noire, d'après la LPO. Le roux est moins vif que le rouge du bouvreuil, mais à contre-jour, la confusion arrive.</p>
+<p>Le meilleur indice, c'est l'endroit où il mange. La LPO précise qu'il fréquente les mangeoires et picore les graines tombées dessous. Le bouvreuil, lui, reste dans les branches. La femelle de pinson est terne, beige chamois dessous, sans bleu ni roux.</p>
+<p>Au printemps, écoutez son chant : une strophe vive qui commence par quelques notes aiguës répétées, descend, puis finit par une fioriture. Son cri le plus courant est un « pink » bref et fort.</p>
+
+<h2>Du roux mais sur la queue : le rougequeue noir</h2>
+<p>Beaucoup de gens le cherchent en tapant « oiseau ventre rouge », alors qu'il n'a rien de rouge sur le ventre. Le mâle, au printemps, est entièrement noir avec une tache blanche sur l'aile et la <strong>queue rousse</strong>, selon la LPO. Il se tient dressé sur ses pattes, souvent perché sur un point haut près des bâtiments, et capture des insectes au vol. Il niche volontiers sur une poutre, dans un bâtiment, et revient au même endroit d'une année sur l'autre.</p>
+
+<h2>Comment confirmer sans se tromper ?</h2>
+<p>Le plus fiable, c'est de combiner la couleur, l'endroit où se trouve l'oiseau et son cri. Un enregistrement fait avec une application comme Merlin Bird ID ou BirdNET donne une piste rapide, à vérifier dans un guide. Pour bien voir la calotte noire d'un bouvreuil caché dans une haie, des jumelles changent tout : notre comparatif des <a href="{R}meilleures-jumelles-oiseaux/">meilleures jumelles pour observer les oiseaux</a> explique quoi choisir, et notre sélection des <a href="{R}meilleur-guide-oiseaux/">meilleurs guides d'identification</a> vous aide à comparer les espèces.</p>
+<p><strong>Jumelles 8x42</strong> : lumineuses, idéales au jardin. <a href="{AMZ:jumelles 8x42 ornithologie}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Guide des oiseaux de France et d'Europe</strong> : <a href="{AMZ:guide ornitho oiseaux de france et d'europe}" """ + A + """>Voir sur Amazon</a></p>
+<p>Si vous voulez photographier vos visiteurs sans rester derrière la fenêtre, une mangeoire équipée d'une caméra fera le travail : voyez notre sélection des <a href="{R}meilleure-mangeoire-connectee/">meilleures mangeoires connectées</a>.</p>
+<p><strong>Mangeoire connectée avec caméra</strong> : <a href="{AMZ:mangeoire connectee camera oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment les attirer au jardin ?</h2>
+<p>Ces quatre oiseaux ne mangent pas la même chose, et c'est le piège : une seule mangeoire suspendue n'en fera venir qu'une partie. Le pinson et le rouge-gorge se nourrissent au sol. Un plateau bas, près d'une haie, leur convient mieux qu'un silo. Le pinson aime les graines, le rouge-gorge les petites graines et les insectes. Notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">bien nourrir les oiseaux du jardin</a> détaille les bons mélanges, et rappelle qu'il ne faut donner ni pain ni lait.</p>
+<p><strong>Plateau de nourrissage au sol</strong> : pour le pinson et le rouge-gorge. <a href="{AMZ:mangeoire plateau sol oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Graines de tournesol noir</strong> : la graine de base pour les fringilles comme le pinson. <a href="{AMZ:graines de tournesol noir oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+<p>Pour le bouvreuil, misez plutôt sur le jardin lui-même : des arbustes à baies et une haie épaisse, où il trouve graines, bourgeons et un endroit pour nicher. Et pour le rougequeue noir et le rouge-gorge, un nichoir semi-ouvert posé bas convient, d'après la notice de la Ligue royale belge pour la protection des oiseaux. Notre article sur <a href="{R}installer-un-nichoir/">l'installation d'un nichoir</a> explique où le placer.</p>
+<p><strong>Nichoir semi-ouvert</strong> : pour le rouge-gorge et le rougequeue noir. <a href="{AMZ:nichoir semi ouvert rouge-gorge rougequeue}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Notre conseil</strong> : avant d'acheter, regardez où vos oiseaux se posent pendant une semaine. S'ils sont tous au sol, un plateau bas sera plus utile qu'une nouvelle mangeoire suspendue.</p>
+""",
+  faq=[("Quel est le petit oiseau à la poitrine rouge dans mon jardin ?",
+        "Le plus souvent un rouge-gorge : petit, rond, plastron orangé bordé de gris, ventre blanchâtre, souvent au sol. Si le rouge est rosé avec une calotte noire, c'est un bouvreuil pivoine mâle ; s'il est roux-rouille avec la tête gris-bleu, un pinson des arbres mâle."),
+       ("Le rouge-gorge femelle a-t-elle aussi la poitrine rouge ?",
+        "Oui. D'après la LPO, le mâle et la femelle adultes ont exactement le même plumage. Seul le jeune n'a pas de plastron orangé : il est brun moucheté de roux."),
+       ("Le rougequeue noir a-t-il le ventre rouge ?",
+        "Non. Le mâle est noir avec une tache blanche sur l'aile, et c'est sa queue qui est rousse, selon la LPO. On le voit souvent perché en hauteur, près des maisons.")],
+  short="Oiseau au ventre rouge", cat="Observer")
+
+AUTO_META['mesange-bleue/'] = ('🐦', 'ciel')
+g("mesange-bleue/",
+  "Mésange bleue : la reconnaître, la nourrir, nichoir de 28 mm",
+  "Mésange bleue : comment la reconnaître, la nourrir et lui offrir un nichoir",
+  "Calotte bleue, ventre jaune, 11 grammes d'acrobatie : reconnaître la mésange bleue, la distinguer de la charbonnière, la nourrir et choisir son nichoir.",
+  """
+<p>La mésange bleue est le seul petit oiseau d'Europe à la fois bleu et jaune, rappelle la LPO : calotte, ailes et queue bleues, joues blanches, ventre jaune. Elle pèse 10 à 12 g pour 11,5 cm, et elle niche dans un nichoir dont le trou d'envol fait <strong>28 mm</strong> environ, plus petit que celui de la charbonnière.</p>
+<p>Au jardin, vous la reconnaîtrez aussi à sa façon de se suspendre la tête en bas au bout des rameaux et autour des mangeoires.</p>
+{CTA}
+
+<h2>Comment la reconnaître, et le mâle de la femelle ?</h2>
+<p>Le portrait est simple d'après la LPO : calotte bleue, ailes et une grande partie de la queue bleues, joues et contour de la tête blancs, une bande noirâtre qui traverse l'œil, dos gris verdâtre et dessous jaune.</p>
+<p>Pour le mâle et la femelle, les sources ne disent pas tout à fait la même chose. La fiche espèce de la LPO les décrit comme quasiment identiques. Un article de la boutique LPO précise que le bandeau sur l'œil est noir chez le mâle et bleu foncé chez la femelle, et la LPO PACA décrit des mâles plus colorés et des femelles plus ternes. En pratique, la différence est subtile : sans comparer deux oiseaux côte à côte, vous aurez du mal à trancher.</p>
+
+<h2>Mésange bleue ou mésange charbonnière ?</h2>
+<p>Ce sont les deux mésanges les plus courantes au jardin, et elles partagent le ventre jaune et le dos verdâtre. Trois détails les séparent tout de suite.</p>
+<table><thead><tr><th>Critère</th><th>Mésange bleue</th><th>Mésange charbonnière</th></tr></thead><tbody>
+<tr><td>Tête</td><td>Calotte bleue, bandeau sombre sur l'œil</td><td>Tête noire, large joue blanche</td></tr>
+<tr><td>Poitrine</td><td>Jaune, sans large bande</td><td>Jaune barrée d'un épais trait noir</td></tr>
+<tr><td>Taille et poids (LPO)</td><td>11,5 cm, 10 à 12 g</td><td>Un peu plus grande</td></tr>
+<tr><td>Trou d'envol du nichoir</td><td>26 à 28 mm</td><td>32 mm</td></tr>
+<tr><td>Espacement entre deux nichoirs (LPO)</td><td>15 à 20 m</td><td>40 à 50 m</td></tr>
+</tbody></table>
+<p>Pour tout savoir sur sa grande cousine, voyez notre fiche de la <a href="{R}mesange-charbonniere/">mésange charbonnière</a>.</p>
+
+<h2>Où et quand la voir ?</h2>
+<p>Toute l'année, presque partout. La LPO la trouve dans tous les habitats des régions de feuillus, bois comme jardins, sur tout le territoire. La boutique LPO rappelle qu'elle est d'origine forestière mais qu'elle fréquente aujourd'hui les jardins, les parcs, les vergers et même la ville.</p>
+<p>Sur ses déplacements, les sources nuancent : la fiche LPO la dit sédentaire, la LPO PACA majoritairement sédentaire avec de grands mouvements certaines années. En hiver, elle se joint aux « rondes » de mésanges qui parcourent les jardins, ce qui explique les arrivées soudaines à la mangeoire.</p>
+<p>Son cri est un « tsi-tsi » aigu, et son chant le prolonge en « tsi-tsi-tsou hou-hou-hou », selon la LPO.</p>
+
+<h2>Que mange-t-elle, et que lui donner ?</h2>
+<p>Au printemps et en été, des insectes : chenilles surtout, mais aussi pucerons, petits coléoptères, araignées. Ce sont aussi les chenilles qui nourrissent ses oisillons.</p>
+<p>En hiver, elle devient granivore et mange aussi des baies. À la mangeoire, la LPO cite le tournesol noir, les cacahuètes, les noix et noisettes, les fruits et les pains de graisse. Comme elle vient rarement au sol, une mangeoire suspendue lui convient mieux qu'un plateau. Par exemple, une mangeoire silo à tournesol accrochée à une branche fine, avec une boule de graisse sans filet à côté, et vous la verrez faire ses acrobaties toute la journée.</p>
+<p>Comme pour toutes les mésanges : graisse <strong>sans filet</strong>, cacahuètes non salées et non grillées, pas de pain ni de lait. Notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">bien nourrir les oiseaux du jardin</a> détaille tout cela.</p>
+<p><strong>Graines de tournesol noir</strong> : la base pour les mésanges. <a href="{AMZ:graines de tournesol noir oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Boules de graisse sans filet</strong> : <a href="{AMZ:boules de graisse sans filet oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Mangeoire silo en métal</strong> : <a href="{AMZ:mangeoire silo metal oiseaux tournesol}" """ + A + """>Voir sur Amazon</a></p>
+<p>Pour choisir les produits, voyez nos comparatifs des <a href="{R}meilleure-graine-tournesol/">meilleures graines de tournesol</a> et des <a href="{R}meilleure-boule-de-graisse/">meilleures boules de graisse sans filet</a>. Et si vous cherchez un cadeau pour un parent qui sort peu, une mangeoire posée bien en vue de sa fenêtre en est un très beau : notre site Vieillir chez soi propose d'autres <a href="https://viellirchezsoi.fr/cadeau-personne-agee/">idées de cadeau pour une personne âgée</a>.</p>
+
+<h2>Quel nichoir pour la mésange bleue ?</h2>
+<p>Elle niche dans une cavité : trou d'arbre, trou de mur, nichoir, et même parfois une boîte aux lettres. Le chiffre clé est le diamètre du trou d'envol. La fiche espèce de la LPO donne <strong>28 mm</strong>, le tutoriel nichoirs des Refuges LPO 26 à 28 mm, et un article de la boutique LPO 26 à 30 mm. Un trou de 28 mm convient donc dans tous les cas, et il a un gros avantage : la charbonnière, plus grosse, ne peut pas y entrer et lui prendre la place.</p>
+<table><thead><tr><th>Mesure</th><th>Tutoriel nichoirs Refuges LPO</th></tr></thead><tbody>
+<tr><td>Trou d'envol</td><td>26 à 28 mm</td></tr>
+<tr><td>Fond intérieur</td><td>13 x 13 cm</td></tr>
+<tr><td>Hauteur intérieure</td><td>23 cm</td></tr>
+<tr><td>Du trou d'envol au fond</td><td>17 cm</td></tr>
+<tr><td>Hauteur de pose</td><td>2 à 5 m</td></tr>
+<tr><td>Entre deux nichoirs identiques</td><td>15 à 20 m</td></tr>
+</tbody></table>
+<p>Le même tutoriel conseille d'orienter le trou vers l'est ou le sud-est, jamais face aux vents dominants, de pencher légèrement le nichoir vers l'avant et de le laisser en partie à l'ombre aux heures chaudes. Fixez-le sur un mur ou un tronc, jamais en bout de branche, et sans perchoir sous le trou. Une plaque métallique autour de l'entrée évite que les pics, les lérots ou les écureuils l'agrandissent.</p>
+<p><strong>Notre conseil</strong> : posez-le dès l'automne. Les mésanges commencent à visiter les nichoirs dès janvier, selon les Refuges LPO. Un nichoir installé en avril a beaucoup moins de chances d'être occupé. Notre guide pour <a href="{R}installer-un-nichoir/">installer un nichoir</a> explique la fixation pas à pas.</p>
+<p><strong>Nichoir à mésange trou de 28 mm</strong> : en bois épais ou en béton de bois. <a href="{AMZ:nichoir mesange bleue 28 mm}" """ + A + """>Voir sur Amazon</a></p>
+<p>La ponte compte beaucoup d'œufs, et les sources ne s'accordent pas sur le nombre : 6 à 15 pour la fiche LPO, 7 à 12 pour la boutique LPO, 6 à 12 pour la LPO PACA. Les jeunes quittent le nid vers 18 à 20 jours. Avec une telle nichée, un nichoir équipé d'une caméra offre un spectacle rare, sans jamais ouvrir le toit. Installez-le et réglez l'image avant la saison des nids. Nous avons comparé les modèles dans notre sélection des <a href="{R}meilleur-nichoir-camera/">meilleurs nichoirs avec caméra</a> ; vérifiez qu'un réducteur de 28 mm est fourni ou possible.</p>
+<p><strong>Nichoir avec caméra wifi</strong> : <a href="{AMZ:nichoir camera wifi oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+<p>Videz-le après la saison, fin septembre ou début octobre. La mésange bleue est intégralement protégée en France (arrêté ministériel du 29 octobre 2009), rappelle la LPO : on ne touche ni au nid ni aux oiseaux.</p>
+""",
+  faq=[("Quel diamètre de trou pour un nichoir à mésange bleue ?",
+        "28 mm selon la fiche espèce de la LPO, 26 à 28 mm selon le tutoriel nichoirs des Refuges LPO. Un trou de 28 mm empêche la mésange charbonnière, plus grosse, d'y entrer."),
+       ("Comment différencier la mésange bleue de la mésange charbonnière ?",
+        "La bleue a une calotte bleue et un bandeau sombre sur l'œil, sans large bande noire sur la poitrine. La charbonnière a la tête noire, de grandes joues blanches et un épais trait noir au milieu du ventre jaune. Elle est aussi un peu plus grande."),
+       ("Que donner à manger à une mésange bleue en hiver ?",
+        "Du tournesol noir, des cacahuètes non salées, des noix, des noisettes et de la graisse sans filet, de préférence dans une mangeoire suspendue. Évitez le pain et le lait.")],
+  short="Mésange bleue", cat="Observer")
+
+AUTO_META['meilleur-abreuvoir-oiseaux/'] = ('🏆', 'ciel')
+g("meilleur-abreuvoir-oiseaux/",
+  "Abreuvoir pour oiseaux 2026 : top 10 bains, vasques et dégivreur",
+  "Les meilleurs abreuvoirs et bains d'oiseaux pour le jardin : 10 modèles comparés",
+  "Vasque au sol, bain sur pied, abreuvoir suspendu ou mural, fontaine solaire, dégivreur : 10 abreuvoirs pour oiseaux comparés d'après les fiches des vendeurs.",
+  """
+<p>Le meilleur abreuvoir pour oiseaux est large, peu profond, facile à vider et à frotter. Pour la plupart des jardins, une <strong>vasque basse avec des marches intégrées</strong>, comme celles d'Esschert Design ou de la boutique LPO, fait parfaitement l'affaire. Les modèles sur pied, suspendus ou solaires ont leur intérêt, mais surtout pour des raisons de place, de chats ou de décoration.</p>
+<p>Rappel de base, valable pour tous les modèles : de l'eau claire et rien d'autre. Ni sel, ni antigel, ni alcool, insistent la LPO et la Ligue royale belge pour la protection des oiseaux. Nous l'expliquons dans notre article sur <a href="{R}eau-pour-les-oiseaux-en-hiver/">l'eau pour les oiseaux en hiver</a>.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
+
+<h2>Le tableau récapitulatif</h2>
+<table><thead><tr><th>Produit</th><th>Type</th><th>Matériau</th><th>Dimensions annoncées</th></tr></thead><tbody>
+<tr><td>Esschert Design abreuvoir en béton FB297</td><td>Vasque à poser</td><td>Béton</td><td>Ø 29,3 cm, H 10,5 cm</td></tr>
+<tr><td>LPO abreuvoir d'été céramique</td><td>Vasque à poser</td><td>Céramique</td><td>Ø 28,8 cm, H 5,5 cm</td></tr>
+<tr><td>Vierno Tajine</td><td>Suspendu</td><td>Céramique</td><td>Ø 19 cm, H 10 cm</td></tr>
+<tr><td>Esschert Design bain en fonte sur pied FB91</td><td>Sur pied</td><td>Fonte</td><td>Vasque Ø 27,2 cm, H 60 cm</td></tr>
+<tr><td>CJ Wildlife bain pour oiseaux Silbersee (Vivara)</td><td>Sur pied</td><td>Plastique recyclé</td><td>50 x 50 cm, H 70 cm</td></tr>
+<tr><td>Smart Garden fontaine solaire Pagode</td><td>Fontaine solaire au sol</td><td>Polyrésine</td><td>Ø 47 cm, H 72 cm</td></tr>
+<tr><td>LPO abreuvoir mural CAPI</td><td>Mural</td><td>Plastique recyclé</td><td>23 x 20 x 19 cm, 57,7 cl</td></tr>
+<tr><td>Relaxdays abreuvoir coquillage</td><td>Petit bain sur pied</td><td>Fonte</td><td>Soucoupe Ø 18 cm, H 24,5 cm</td></tr>
+<tr><td>LPO bain d'oiseau à suspendre</td><td>Suspendu</td><td>Fonte et métal</td><td>19,7 x 14 cm</td></tr>
+<tr><td>ALOVEZ dégivreur pour bain d'oiseaux</td><td>Accessoire chauffant</td><td>Base aluminium</td><td>25 x 15 x 8 cm, 15 W</td></tr>
+</tbody></table>
+<p>La profondeur de la vasque est rarement indiquée par les vendeurs. C'est pourtant le critère qui compte le plus : les fiches que nous citons dans notre article sur l'eau parlent de 3 à 4 cm pour les petites espèces. Si une vasque est plus creuse, posez un gros caillou au centre, comme le suggère la Ligue belge.</p>
+
+<h2>1. Esschert Design abreuvoir en béton FB297 : notre choix pour la plupart des jardins</h2>
+<p><strong>Pour qui ?</strong> Vous voulez une vasque stable, à poser au sol ou sur un muret, qui ne bouge pas quand un merle s'y ébroue.</p>
+<p>D'après la fiche de ManoMano, cette vasque en béton mesure 29,3 cm de diamètre pour 10,5 cm de haut et pèse environ 4 kg. Des marches sont intégrées pour que les oiseaux entrent et sortent sans danger. Elle est vendue sur Amazon.fr.</p>
+<ul>
+<li><strong>Points forts</strong> : lourde donc stable, marches pour les petits oiseaux, large surface.</li>
+<li><strong>Limites</strong> : profondeur non précisée. La fiche se contredit sur le poids (4 kg, 5 kg ou 5,7 kg selon les lignes) et sur la couleur. Posée au sol, elle est à portée des chats : dégagez bien les abords.</li>
+</ul>
+<p>Pourquoi en premier ? Parce qu'elle coche ce que demandent les associations : large, basse, avec des bords praticables, et facile à frotter.</p>
+<p><a href="{AMZ:Esschert Design bain oiseaux beton FB297}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. LPO abreuvoir d'été en céramique : le plus simple pour les beaux jours</h2>
+<p><strong>Pour qui ?</strong> Un abreuvoir léger pour le printemps et l'été, à poser au sol ou sur une table.</p>
+<p>La boutique LPO décrit une vasque en céramique grise de 28,8 cm de diamètre et 5,5 cm de haut, avec une partie centrale surélevée qui sert de perchoir et des marches intégrées. Elle est fabriquée au Portugal et pèse 1,1 kg environ.</p>
+<ul>
+<li><strong>Points forts</strong> : très basse, perchoir central, vendue par une association de protection des oiseaux.</li>
+<li><strong>Limites</strong> : la LPO conseille de la rentrer ou de la vider avant le gel. Ce n'est donc pas un abreuvoir d'hiver. Vendue surtout sur la boutique LPO.</li>
+</ul>
+<p><a href="{AMZ:abreuvoir oiseaux ceramique a poser}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Vierno Tajine : l'abreuvoir suspendu hors de portée des chats</h2>
+<p><strong>Pour qui ?</strong> Un jardin fréquenté par des chats, ou un balcon sans place au sol.</p>
+<p>La boutique LPO présente ce bain en céramique de 19 cm de diamètre et 10 cm de haut, à suspendre. Placé en hauteur, il limite l'accès des prédateurs. Il est vendu sur Amazon.fr sous le nom Vierno Tajine. Vivara propose une autre version suspendue de la marque, l'abreuvoir Vierno de 26,7 cm, avec chaîne fournie, à suspendre à au moins 1 m du sol.</p>
+<ul>
+<li><strong>Points forts</strong> : hors de portée des chats, joli objet, poids léger (0,58 kg).</li>
+<li><strong>Limites</strong> : 19 cm, c'est petit, plutôt pour les mésanges et les petits passereaux que pour les merles. Un bain suspendu se balance et se vide plus vite.</li>
+</ul>
+<p><a href="{AMZ:Vierno Tajine bain oiseaux suspendu}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Esschert Design bain d'oiseaux en fonte sur pied FB91 : le classique décoratif</h2>
+<p><strong>Pour qui ?</strong> Vous voulez un bain sur pied qui dure et qui décore le massif.</p>
+<p>Selon ManoMano, ce bain en fonte marron a une vasque de 27,2 cm et une hauteur de 60 cm. L'intérieur de la vasque est nervuré pour ne pas glisser, quatre petits oiseaux décoratifs ornent le bord, et le fabricant précise qu'il peut aussi servir de plateau à graines.</p>
+<ul>
+<li><strong>Points forts</strong> : fonte durable, fond antidérapant, hauteur qui met l'eau à l'abri des chats en embuscade au sol.</li>
+<li><strong>Limites</strong> : vasque assez petite. Le poids est indiqué de façon contradictoire. Une fiche Esschert Design en fonte existe sur Amazon.fr, mais nous n'avons pas pu vérifier qu'il s'agit exactement de ce modèle.</li>
+</ul>
+<p><a href="{AMZ:Esschert Design bain oiseaux fonte sur pied}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. CJ Wildlife Silbersee (Vivara) : le grand bain sur pied, léger et recyclé</h2>
+<p><strong>Pour qui ?</strong> Vous voulez une grande surface d'eau en hauteur, facile à déplacer.</p>
+<p>Vivara annonce un bain sur pied en plastique 100 % recyclé, de 50 x 50 cm pour 70 cm de haut, qui pèse moins de 2 kg. Il sert à boire et à se baigner, est garanti 2 ans, et Vivara conseille de le placer à l'ombre.</p>
+<ul>
+<li><strong>Points forts</strong> : grande taille, matériau recyclé, se déplace d'une main pour le nettoyer.</li>
+<li><strong>Limites</strong> : léger, donc moins stable qu'un modèle en fonte ou en béton par grand vent. Diamètre et profondeur de la vasque non précisés. Vendu chez Vivara, pas trouvé sur Amazon.fr.</li>
+</ul>
+<p><a href="{AMZ:bain oiseaux sur pied grand jardin}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Smart Garden fontaine solaire Pagode : l'eau qui bouge</h2>
+<p><strong>Pour qui ?</strong> Vous voulez un bain d'oiseaux qui fasse aussi fontaine, sans brancher de câble.</p>
+<p>D'après ManoMano, cette fontaine en polyrésine aspect pierre mesure 47 cm de diamètre et 72 cm de haut, pour environ 10 kg. Sa pompe immergée est alimentée par un panneau solaire de 1,1 W, sans batterie : elle ne tourne qu'au soleil. L'eau sort par quatre jets.</p>
+<ul>
+<li><strong>Points forts</strong> : pas d'électricité à tirer, effet décoratif, l'eau en mouvement se remarque de loin.</li>
+<li><strong>Limites</strong> : sans batterie, elle s'arrête dès que le soleil se cache. Une pompe demande plus d'entretien qu'une simple vasque, et la profondeur n'est pas précisée. Ce modèle précis n'a pas été trouvé sur Amazon.fr, où d'autres fontaines de la marque sont vendues.</li>
+</ul>
+<p><a href="{AMZ:fontaine solaire bain oiseaux jardin}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. LPO abreuvoir mural CAPI : pour une terrasse ou un balcon</h2>
+<p><strong>Pour qui ?</strong> Peu de place au sol, un mur ou une rambarde à disposition.</p>
+<p>La boutique LPO décrit un abreuvoir à fixer au mur, en plastique recyclé à 98 %, de 23 x 20 x 19 cm pour 57,7 cl d'eau, résistant aux UV et au gel, fabriqué en Belgique. La fiche rappelle de ne jamais ajouter de sel ni de sucre et, par temps de gel, de remplir dans la journée puis de vider le soir. La même boutique vend un abreuvoir à piquer dans une jardinière, de 19,5 cm de diamètre et 3 cm de profondeur, fabriqué en France.</p>
+<ul>
+<li><strong>Points forts</strong> : prend très peu de place, hors de portée des chats si bien placé, consignes d'usage claires.</li>
+<li><strong>Limites</strong> : petite contenance, à remplir souvent en été. Vendu surtout sur la boutique LPO.</li>
+</ul>
+<p><a href="{AMZ:abreuvoir mural oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Relaxdays abreuvoir coquillage en fonte : le petit format</h2>
+<p><strong>Pour qui ?</strong> Un petit balcon, une table de terrasse, un budget serré.</p>
+<p>ManoMano décrit un petit bain sur pied en fonte de 24,5 cm de haut, avec une soucoupe de 18 cm de diamètre et 3 cm de haut. Il résiste aux intempéries et au gel d'après le vendeur, qui conseille de le placer à environ 3 m des buissons à cause des chats et de laver la soucoupe à l'eau chaude une fois par semaine, sans détergent. Il est vendu sur Amazon.fr.</p>
+<ul>
+<li><strong>Points forts</strong> : peu profond, consignes d'entretien précises, facile à trouver.</li>
+<li><strong>Limites</strong> : soucoupe de 18 cm, trop petite pour qu'un merle s'y baigne. C'est un abreuvoir d'appoint, pas un bain.</li>
+</ul>
+<p><a href="{AMZ:Relaxdays abreuvoir oiseaux fonte coquillage}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>9. LPO bain d'oiseau à suspendre : le petit bain en fonte</h2>
+<p><strong>Pour qui ?</strong> Une branche solide près de la fenêtre, pour voir les oiseaux boire de près.</p>
+<p>La boutique LPO présente un plateau ovale en fonte de 19,7 x 14 cm, suspendu par une chaîne et un crochet (environ 30 cm de haut au total), orné de deux petits oiseaux. Consigne de la fiche : changer l'eau très régulièrement.</p>
+<ul>
+<li><strong>Points forts</strong> : se suspend facilement, matériau durable.</li>
+<li><strong>Limites</strong> : indiqué indisponible chez le fournisseur lors de notre consultation. Petite surface, comme tous les bains suspendus.</li>
+</ul>
+<p><a href="{AMZ:bain oiseaux fonte a suspendre}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>10. ALOVEZ dégivreur pour bain d'oiseaux : contre le gel</h2>
+<p><strong>Pour qui ?</strong> Vous avez déjà un bain d'oiseaux et vous vivez dans une région où il gèle souvent.</p>
+<p>Ce n'est pas un bain mais un petit appareil à poser dedans. D'après ManoMano, il a une base en aluminium de 25 x 15 cm, une puissance de 15 W sur secteur, et un thermostat qui le déclenche sous 10 °C. Nous n'avons pas trouvé de vrai bain d'oiseaux chauffant complet chez un grand revendeur français : ce type de dégivreur est ce qu'on trouve le plus, y compris sous d'autres marques sur Amazon.fr.</p>
+<ul>
+<li><strong>Points forts</strong> : garde un point d'eau liquide quand tout est gelé, thermostat intégré.</li>
+<li><strong>Limites</strong> : il faut une prise extérieure protégée. Tension et longueur du câble non précisées. La fiche LPO sur l'eau en hiver donne deux précautions pour tout appareil chauffant : ne le brancher que dans la journée et vérifier que la résistance reste toujours sous l'eau.</li>
+</ul>
+<p><a href="{AMZ:degivreur bain oiseaux thermostat}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment choisir son abreuvoir ?</h2>
+<p><strong>Peu profond et large.</strong> C'est le seul critère sur lequel toutes les associations insistent. Une vasque de 25 à 30 cm laisse de la place à plusieurs oiseaux à la fois. Des bords en pente douce, des marches ou un caillou au centre évitent les noyades.</p>
+<p><strong>Choisissez la hauteur selon vos chats.</strong> Au sol, un abreuvoir doit être dans un endroit dégagé, pour qu'aucun chat ne puisse se cacher tout près. S'il y a des chats dans le voisinage, un modèle sur pied ou suspendu est plus sûr. Notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">bien nourrir les oiseaux du jardin</a> donne les mêmes conseils de placement pour les mangeoires.</p>
+<p><strong>Pensez au nettoyage avant d'acheter.</strong> L'eau doit être changée souvent : de trois fois par semaine à tous les jours selon les associations, et le plus prudent est chaque jour. Un modèle lourd et fixe est stable, mais une vasque légère se vide et se frotte plus facilement. Par exemple, si votre abreuvoir est à l'autre bout du jardin, vous le négligerez : mettez-le là où vous passez tous les jours.</p>
+<p><strong>Et l'hiver ?</strong> Certains modèles ne sont pas faits pour le gel, comme l'abreuvoir en céramique de la LPO qu'il faut rentrer : lisez la fiche. Avant d'envisager un dégivreur, essayez les gestes simples détaillés dans notre article sur <a href="{R}eau-pour-les-oiseaux-en-hiver/">l'eau en hiver</a>, comme renouveler l'eau plusieurs fois dans la journée.</p>
+<p><strong>Notre conseil</strong> : une vasque basse et lourde au sol dans un coin dégagé, plus un petit abreuvoir suspendu près de la mangeoire. Vous couvrez ainsi les oiseaux qui boivent au sol, comme le merle, et ceux qui restent en hauteur, comme les mésanges.</p>
+
+<h2>Quels oiseaux viendront boire ?</h2>
+<p>Presque tous. Le merle adore se baigner dans une vasque large : notre page sur l'<a href="{R}oiseau-noir-bec-jaune/">oiseau noir au bec jaune</a> vous aide à le reconnaître. Le <a href="{R}rouge-gorge/">rouge-gorge</a> vient volontiers boire au sol, et les mésanges, comme la <a href="{R}mesange-charbonniere/">mésange charbonnière</a>, préfèrent souvent un abreuvoir en hauteur. Pour compléter le point d'eau, voyez notre sélection des <a href="{R}meilleure-mangeoire-oiseaux/">meilleures mangeoires pour oiseaux</a>.</p>
+""",
+  faq=[("Quelle profondeur pour un abreuvoir à oiseaux ?",
+        "Peu profond : les fiches des associations que nous citons parlent de 3 à 4 cm pour les petites espèces. Si votre vasque est plus creuse, posez un gros caillou ou une branche au centre pour que les oiseaux aient pied."),
+       ("Peut-on mettre du sel ou de l'antigel pour éviter le gel ?",
+        "Non, jamais. La LPO et la Ligue royale belge pour la protection des oiseaux sont formelles : sel, antigel et alcool sont dangereux voire mortels. Changez l'eau plusieurs fois par jour par grand froid, ou utilisez un dégivreur prévu pour les bains d'oiseaux, branché seulement dans la journée."),
+       ("Avez-vous testé ces abreuvoirs ?",
+        "Non. Cette sélection repose sur les fiches publiées par les fabricants et les revendeurs. Quand une donnée manque, comme la profondeur, nous l'indiquons comme non précisée.")],
+  short="Top 10 abreuvoirs", cat="Nourrir")

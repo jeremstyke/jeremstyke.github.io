@@ -5,8 +5,8 @@
 - [x] mesange-charbonniere/ | mésange charbonnière | Observer | fiche espèce : reconnaître, alimentation, nichoir (trou d'envol vérifié LPO), mangeoire adaptée
 - [x] petit-oiseau-gris-jardin/ | petit oiseau gris jardin | Observer | identification : accenteur mouchet, moineau femelle, sittelle, mésange nonnette ; critères simples
 - [x] rouge-gorge/ | rouge-gorge | Observer | fiche espèce : comportement, nourriture (au sol, vers de farine), nichoir semi-ouvert
-- [ ] oiseau-ventre-rouge/ | oiseau ventre rouge | Observer | identification : rouge-gorge, bouvreuil, rougequeue, pinson mâle
-- [ ] mesange-bleue/ | mésange bleue | Observer | fiche espèce : reconnaître, différence avec la charbonnière, nichoir et nourriture
+- [x] oiseau-ventre-rouge/ | oiseau ventre rouge | Observer | identification : rouge-gorge, bouvreuil, rougequeue, pinson mâle
+- [x] mesange-bleue/ | mésange bleue | Observer | fiche espèce : reconnaître, différence avec la charbonnière, nichoir et nourriture
 - [ ] oiseau-tete-noire/ | oiseau tête noire | Observer | identification : mésange charbonnière, fauvette à tête noire, bouvreuil, mésange noire
 - [ ] merle-noir/ | merle noir | Observer | fiche espèce : mâle, femelle, chant, que lui donner (fruits, pas de pain)
 - [ ] oiseau-jaune-et-vert/ | oiseau jaune et vert | Observer | identification : verdier, chardonneret, serin, mésange bleue, pic vert
