@@ -19,6 +19,19 @@
     var a = e.target.closest && e.target.closest('a[href*="amazon.fr"]');
     if (a) { var m = a.href.match(/[?&]k=([^&]+)/); hit('amz', m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : a.href.split('?')[0]); }
   }, true);
+  // Guide PDF contre e-mail
+  document.querySelectorAll('.pdf-form').forEach(function(f){
+    f.addEventListener('submit', function(e){
+      e.preventDefault();
+      var mail = f.email.value.trim(); if (!/^\S+@\S+\.\S+$/.test(mail)) return;
+      var btn = f.querySelector('button'); btn.disabled = true;
+      function ok(){ f.querySelector('.pdf-ok').hidden = false; btn.hidden = true; hit('lead', f.dataset.src); }
+      if (ls('loj_moi') === '1') { ok(); return; }
+      fetch(SB.replace('vcs_hits', 'vcs_leads'), {method: 'POST', headers: {'apikey': KEY, 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal'},
+        body: JSON.stringify({email: mail.slice(0, 200), news: f.news.checked, source: SITE + '-' + f.dataset.src})}).then(ok, ok);
+    });
+  });
+  document.addEventListener('click', function(e){ var a = e.target.closest && e.target.closest('a[href$=".pdf"]'); if (a) hit('pdf', location.pathname); });
   var tb = document.getElementById('txt-size');
   if (tb) {
     var big = document.documentElement.classList.contains('big');

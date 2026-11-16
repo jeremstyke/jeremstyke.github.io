@@ -55,6 +55,15 @@ def read_min(h): return max(2, round(len(re.sub('<[^>]+>', ' ', h).split()) / 20
 CTA = ('<aside class="cta"><div><strong>Nourrir les oiseaux sans leur nuire</strong>'
        '<span>Quand commencer, quoi donner, où placer la mangeoire : notre guide complet pour bien faire tout l\'hiver.</span></div>'
        '<a class="btn" href="{R}' + PILIER + '">Lire le guide</a></aside>')
+PDF_BOX = ('<aside class="pdfbox" id="pdf"><div><strong>📄 Le guide pour nourrir les oiseaux en PDF</strong>'
+  '<span>À imprimer et à garder près de la fenêtre : quand nourrir, quoi donner, où placer la mangeoire et comment la nettoyer. Gratuit, téléchargement immédiat.</span></div>'
+  '<form class="pdf-form" data-src="@SRC@"><label class="sr" for="pdf-mail-@SRC@">Votre e-mail</label>'
+  '<input type="email" id="pdf-mail-@SRC@" name="email" required placeholder="Votre adresse e-mail" autocomplete="email">'
+  '<label class="chk"><input type="checkbox" name="news"> J\'accepte de recevoir de temps en temps des conseils par e-mail (désinscription en un clic).</label>'
+  '<button class="btn" type="submit">Télécharger le PDF</button>'
+  '<p class="pdf-ok" hidden>Merci ! <a href="{R}assets/guide-nourrir-oiseaux.pdf" download>Télécharger le guide (PDF)</a></p>'
+  '<p class="small">Votre e-mail sert uniquement à ce que vous avez choisi. <a href="{R}confidentialite/">Confidentialité</a></p></form></aside>')
+def pdf_box(src): return PDF_BOX.replace('@SRC@', src)
 NAV = [(PILIER, 'Bien nourrir'), ('guides/', 'Guides'), ('a-propos/', 'À propos')]
 
 def render(body):
@@ -120,7 +129,7 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None,
 <p class="disc">{DISCLOSURE} Les prix et les offres peuvent changer : vérifiez-les avant d'acheter. © {YEAR} {SITE}</p>
 </div></footer>
 <script>try{{if(localStorage.getItem("loj_big")==="1")document.documentElement.classList.add("big")}}catch(e){{}}</script>
-<script src="{R}assets/app.js?v=1" defer></script>
+<script src="{R}assets/app.js?v=2" defer></script>
 </body>
 </html>
 '''
@@ -198,6 +207,7 @@ def build():
 <p class="more"><a href="{{R}}guides/">Voir tous les guides</a></p></section>
 <section class="why"><h2>Pourquoi ce site ?</h2>
 <p>On veut bien faire en installant une mangeoire ou un nichoir, mais beaucoup de conseils se contredisent et certains gestes nuisent aux oiseaux (pain, filets de boules de graisse, mangeoire jamais nettoyée). Nous rassemblons les recommandations des associations de protection de la nature et nous vous aidons à choisir le matériel adapté.</p></section>
+{pdf_box('accueil')}
 {fh}
 </div>'''
     page('', 'Les oiseaux du jardin : nourrir, loger et observer les oiseaux',
@@ -226,7 +236,7 @@ def build():
                 "mainEntityOfPage": BASE + '/' + x['slug'], "datePublished": dates[x['slug']], "dateModified": dates[x['slug']]}]
         body = ('<div class="wrap art-wrap"><article class="prose"><p class="art-cat t-%s"><span aria-hidden="true">%s</span> %s</p><h1>%s</h1>%s%s%s'
                 '<p class="disc-in">Liens d\'affiliation : nous touchons une commission sur certains achats, sans surcoût pour vous.</p></article>%s</div>') % (
-            tint, emo, esc(x['cat']), esc(x['h1']), meta, add_toc(x['body']), fh, rel)
+            tint, emo, esc(x['cat']), esc(x['h1']), meta, add_toc(x['body']) + (pdf_box('pilier') if x['slug'] == PILIER else ''), fh, rel)
         page(x['slug'], x['title'], x['desc'], body, schema=art + fs, crumbs=[('Guides', 'guides/'), (x['short'], x['slug'])],
              prio='0.9' if x['slug'] == PILIER else '0.7', kind='article', og=og_for(x['slug'], x['h1'], x['cat']))
 
@@ -244,6 +254,7 @@ def build():
     page('confidentialite/', 'Confidentialité', 'Données collectées par le site Les oiseaux du jardin.',
          f'''<div class="wrap art-wrap"><article class="prose"><h1>Confidentialité</h1>
 <p>Le site fonctionne sans inscription.</p>
+<h2>Guide PDF et e-mails</h2><p>Si vous demandez le guide PDF, nous enregistrons votre adresse e-mail et, seulement si vous avez coché la case, votre accord pour recevoir des conseils par e-mail. Vous pouvez demander la suppression de votre adresse à tout moment en écrivant à <a href="mailto:{CONTACT}">{CONTACT}</a>. Chaque e-mail contiendra un lien de désinscription.</p>
 <h2>Mesure d'audience</h2><p>Nous comptons les pages vues et les clics vers Amazon de façon anonyme (page visitée, site d'origine, type d'appareil et un identifiant aléatoire stocké dans votre navigateur). Ces données ne sont ni vendues ni utilisées pour de la publicité, et sont hébergées par Supabase dans l'Union européenne.</p>
 <h2>Amazon</h2><p>Quand vous cliquez sur un lien vers Amazon.fr, Amazon peut déposer des cookies pour attribuer la commission.</p>
 <h2>Contact</h2><p><a href="mailto:{CONTACT}">{CONTACT}</a></p></article></div>''', crumbs=[('Confidentialité', 'confidentialite/')], prio='0.1')
