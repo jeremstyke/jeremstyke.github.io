@@ -138,5 +138,23 @@ PACKS.forEach((p, k) => {
 });
 document.getElementById("y").textContent = new Date().getFullYear();
 </script>
+<script>
+(function(){
+  var U="https://zltqrnflowxkycrjmhbx.supabase.co/rest/v1/walldrop_events",K="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpsdHFybmZsb3d4a3ljcmptaGJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ0MDUxMTQsImV4cCI6MjEwOTk4MTExNH0.0zY1hktZ8Z7xWZCBhoKP1z_QWPx4-fuo3yQat4dIMsU";
+  var dev=matchMedia("(max-width:800px)").matches?"mobile":"desktop";
+  var q=new URLSearchParams(location.search),r=q.get("src")||q.get("utm_source")||"";
+  if(!r&&document.referrer){try{var h=new URL(document.referrer).hostname;if(h!==location.hostname)r=h;}catch(e){}}
+  function log(t,pack){try{fetch(U,{method:"POST",keepalive:true,headers:{"apikey":K,"Authorization":"Bearer "+K,"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify({type:t,pack:pack||null,ref:(r||"direct").slice(0,200),device:dev})});}catch(e){}}
+  log("visit");
+  document.addEventListener("click",function(e){
+    var a=e.target.closest("a");if(!a)return;
+    var h=a.getAttribute("href")||"",sec=a.closest("section[id]"),pk=sec?sec.id:null;
+    if(h.indexOf("gumroad.com")>-1)log("buy_click",pk);
+    else if(a.classList.contains("free")||h.indexOf("free/")===0)log("free_click",h.indexOf(".zip")>-1?"sampler":pk);
+    else if(h.indexOf("youtube.com")>-1)log("youtube_click");
+    else if(h.indexOf("pin.it")>-1||h.indexOf("pinterest")>-1)log("pinterest_click");
+  },true);
+})();
+</script>
 </body>
 </html>
