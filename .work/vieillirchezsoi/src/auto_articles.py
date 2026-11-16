@@ -2271,3 +2271,166 @@ g("meilleurs-livres-aidants/",
        ("Existe-t-il des livres pratiques sur la maladie d'Alzheimer pour les proches ?", "Oui. « Accompagner Alzheimer en pratique » (De Boeck Supérieur, 2025), écrit par un neurologue, explique la maladie et la communication avec le malade. « J'aide un proche atteint de la maladie d'Alzheimer » (Dunod) propose des fiches d'activités. Pour toute question sur la santé de votre proche, demandez conseil à son médecin."),
        ("Avez-vous lu tous ces livres ?", "Non. Cette sélection repose sur les présentations publiées par les éditeurs et les libraires. Nous ne donnons ni note ni avis de lecture ; feuilletez un extrait quand c'est possible avant d'acheter.")],
   short="Top 10 livres pour les aidants", cat="Conseils pour les proches")
+
+AUTO_META['fauteuil-roulant-electrique-comment-choisir/'] = ('♿', 'ciel')
+g("fauteuil-roulant-electrique-comment-choisir/",
+  "Fauteuil roulant électrique : comment bien le choisir",
+  "Comment choisir un fauteuil roulant électrique ?",
+  "Pliant ou non, poids, autonomie, voiture et avion : les bons critères pour choisir un fauteuil roulant électrique, et pourquoi passer par la prescription.",
+  """
+<p>Pour choisir un fauteuil roulant électrique, partez de la vie de la personne, pas de la fiche technique : où roule-t-elle, qui charge le fauteuil, doit-il entrer dans une voiture ou un avion ? Et avant tout achat, sachez que depuis le 1er décembre 2025, un fauteuil roulant prescrit et inscrit sur la liste des produits remboursables est pris en charge à 100 % par l'Assurance maladie.</p>
+<p>Ce deuxième point change souvent la décision. Un fauteuil électrique acheté seul, en ligne, ne bénéficie pas de ce remboursement. Il peut dépanner pour un usage d'appoint, mais pour un fauteuil de tous les jours, la voie de la prescription est presque toujours la plus sûre, et la moins chère.</p>
+{CTA}
+<h2>Faut-il passer par une prescription ?</h2>
+<p>Pour un usage quotidien, oui. Un fauteuil électrique se prescrit par un médecin spécialiste en médecine physique et de réadaptation (MPR) ou un médecin titulaire d'un diplôme d'appareillage. Il évalue les besoins, souvent avec un ergothérapeute ou un kinésithérapeute, puis vous essayez plusieurs modèles chez un distributeur de matériel médical avant la prescription définitive.</p>
+<p>Cet essai a une vraie valeur : il permet de vérifier la position assise, la commande, le passage des portes de la maison. Le parcours complet est détaillé dans notre guide du <a href="{R}fauteuil-roulant-rembourse-100/">fauteuil roulant remboursé à 100 %</a>. Commencez par en parler à votre médecin traitant, il vous orientera.</p>
+<p>L'achat sans prescription a du sens dans quelques cas : un second fauteuil léger pour les voyages, un usage occasionnel pour les sorties, ou en attendant le fauteuil prescrit. Les critères ci-dessous servent dans tous les cas, pour bien parler avec le prescripteur comme pour comparer des fiches.</p>
+<h2>Pliant ou châssis fixe : la première vraie décision</h2>
+<table><thead><tr><th>Critère</th><th>Fauteuil électrique pliant</th><th>Fauteuil électrique à châssis fixe</th></tr></thead><tbody>
+<tr><td>Transport</td><td>Se plie pour entrer dans un coffre de voiture</td><td>Demande un véhicule adapté avec rampe ou plateforme</td></tr>
+<tr><td>Poids</td><td>Plus léger, mais reste lourd à soulever</td><td>Nettement plus lourd, ne se soulève pas</td></tr>
+<tr><td>Confort et réglages</td><td>Assise plus simple, peu de réglages</td><td>Assise et dossier souvent réglables, options de positionnement</td></tr>
+<tr><td>Terrain</td><td>Plutôt sols lisses et trottoirs en bon état</td><td>Mieux adapté aux sorties longues et aux terrains irréguliers</td></tr>
+<tr><td>Pour qui ?</td><td>Personne qui se déplace encore un peu, sorties et voyages</td><td>Personne qui passe la journée assise dans son fauteuil</td></tr>
+</tbody></table>
+<p>Par exemple, si votre mère marche encore dans l'appartement mais ne peut plus faire le tour du quartier, un pliant pour les sorties suffit souvent. Si elle passe ses journées assise, le confort et le maintien deviennent prioritaires, et le prescripteur orientera plutôt vers un fauteuil à châssis fixe.</p>
+<h2>Les critères qui comptent vraiment</h2>
+<h3>Le poids, surtout celui qu'il faudra soulever</h3>
+<p>Regardez le poids sans la batterie, puis demandez-vous qui le mettra dans le coffre. Un aidant de 75 ans n'a pas la même force qu'un fils de 40 ans. Même les pliants les plus légers restent bien plus lourds qu'un fauteuil manuel, et certains pèsent davantage que ce qu'une personne peut soulever seule sans risque pour son dos.</p>
+<h3>L'autonomie réelle</h3>
+<p>L'autonomie annoncée est mesurée dans de bonnes conditions. Elle baisse en côte, par temps froid et avec une personne plus lourde. Notre conseil : comptez large, et préférez une batterie amovible, qu'on peut recharger dans la maison même si le fauteuil reste au garage.</p>
+<h3>Les dimensions et la maison</h3>
+<p>Mesurez la porte la plus étroite du trajet habituel, souvent celle des toilettes ou de la salle de bains, et comparez avec la largeur hors tout du fauteuil. Pensez au rayon de braquage pour tourner dans un couloir. Les seuils et les marches comptent aussi : notre guide pour <a href="{R}amenager-logement-personne-agee/">aménager le logement pièce par pièce</a> vous aide à repérer ce qui bloquera.</p>
+<h3>La charge maximale et l'assise</h3>
+<p>Vérifiez la charge maximale indiquée par le fabricant, avec une marge. La largeur et la profondeur d'assise conditionnent le confort sur la durée : une assise trop large fait pencher sur le côté, une assise trop étroite blesse.</p>
+<h3>La commande</h3>
+<p>La plupart des fauteuils se pilotent avec un joystick. Certains proposent une commande pour l'accompagnateur, utile si la personne fatigue ou si la main est moins sûre. Faites-la essayer : une commande mal placée gâche tout le reste.</p>
+<h2>Voyager en voiture et en avion</h2>
+<p>En voiture, un pliant doit tenir dans le coffre sans démontage acrobatique. Faites un essai avec votre propre véhicule avant d'acheter si c'est possible. Une rampe d'accès portable peut aider à franchir une marche ou à charger le fauteuil : <a href="{AMZ:rampe d'accès portable fauteuil roulant}" """ + A + """>Voir les rampes d'accès portables</a>.</p>
+<p>En avion, c'est la compagnie aérienne qui décide, au cas par cas, selon le type et la capacité de la batterie. Contactez-la bien avant le départ avec la fiche technique de la batterie, et gardez-la à portée de main le jour du vol. Ne vous fiez pas seulement à la mention « approuvé pour l'avion » d'une fiche produit.</p>
+<h2>Si vous achetez sans prescription</h2>
+<p>Pour un fauteuil d'appoint, privilégiez les modèles dont la fiche donne clairement le poids avec et sans batterie, l'autonomie, la charge maximale et les dimensions pliées. Méfiez-vous des annonces sans marque identifiable ni service après-vente en France. Nous avons comparé plusieurs modèles dans notre sélection des <a href="{R}meilleur-fauteuil-roulant-electrique-pliant/">fauteuils roulants électriques pliants de voyage</a>.</p>
+<ul>
+<li><a href="{AMZ:fauteuil roulant électrique pliant léger}" """ + A + """>Voir les fauteuils roulants électriques pliants</a></li>
+<li>Un coussin d'assise améliore le confort sur les longues sorties (en cas de risque d'escarre, demandez conseil à un professionnel de santé) : <a href="{AMZ:coussin fauteuil roulant}" """ + A + """>Voir les coussins de fauteuil roulant</a></li>
+<li>Une sacoche qui s'accroche au dossier ou à l'accoudoir garde téléphone et papiers à portée de main : <a href="{AMZ:sac fauteuil roulant accoudoir}" """ + A + """>Voir les sacs de fauteuil roulant</a></li>
+<li>Une cape de pluie adaptée protège sans gêner la commande : <a href="{AMZ:cape de pluie fauteuil roulant}" """ + A + """>Voir les capes de pluie pour fauteuil</a></li>
+</ul>
+<p>Pour des trajets plus longs en extérieur, un scooter électrique est parfois plus adapté qu'un fauteuil : voyez notre <a href="{R}meilleur-scooter-electrique-senior/">comparatif des scooters électriques senior</a>.</p>
+<h2>Les erreurs fréquentes</h2>
+<p>Acheter en ligne un fauteuil à usage quotidien sans savoir qu'il aurait pu être remboursé. Choisir le modèle le plus léger sans vérifier l'autonomie. Oublier de mesurer la porte des toilettes. Croire qu'un fauteuil « compatible avion » sera forcément accepté à bord. Et sous-estimer la place nécessaire pour le ranger et le recharger. Un essai chez un distributeur et l'avis d'un ergothérapeute évitent presque toutes ces déceptions.</p>
+""",
+  faq=[("Un fauteuil roulant électrique est-il remboursé ?", "Depuis le 1er décembre 2025, un fauteuil roulant inscrit sur la liste des produits remboursables et prescrit par un médecin habilité (pour un fauteuil électrique, un médecin MPR ou titulaire d'un diplôme d'appareillage) est pris en charge à 100 % par l'Assurance maladie. Un fauteuil acheté sans prescription n'est pas remboursé."),
+       ("Fauteuil électrique pliant ou non pliant ?", "Un pliant convient aux sorties et aux voyages en voiture, à condition que quelqu'un puisse le soulever. Pour une personne qui passe la journée assise, un fauteuil à châssis fixe offre plus de confort et de réglages. Le prescripteur et l'ergothérapeute vous aident à trancher."),
+       ("Peut-on prendre l'avion avec un fauteuil roulant électrique ?", "C'est possible, mais c'est la compagnie aérienne qui décide, selon la batterie. Contactez-la avant de réserver avec la fiche technique de la batterie.")],
+  short="Choisir un fauteuil roulant électrique", cat="Se déplacer")
+
+AUTO_META['meilleurs-livres-gros-caracteres/'] = ('🏆', 'rose')
+g("meilleurs-livres-gros-caracteres/",
+  "Livres en gros caractères pour seniors 2026 : notre top 10",
+  "Livres en gros caractères pour seniors : 10 titres à offrir ou à lire",
+  "Romans primés et jeux de mots fléchés ou sudoku en gros caractères : 10 livres réels pour seniors, avec éditeur, taille de police, pages et format.",
+  """
+<p>Si la lecture devient fatigante, un livre en gros caractères permet souvent de retrouver le plaisir de lire sans changer d'histoire : le texte est le même que l'original, seule la mise en page change. Pour bien choisir, regardez d'abord la taille de police indiquée (le « corps »), puis le nombre de volumes, parce qu'un gros roman se transforme vite en deux tomes épais.</p>
+<p>Nous avons réuni six romans récents ou très lus et quatre livres de jeux. Les uns pour s'évader, les autres pour occuper un après-midi de pluie en faisant travailler la tête.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les éditeurs (À vue d'œil, Éditions de La Loupe, Larousse, Bravo) et par de grands libraires (Fnac, Mollat), en vérifiant que chaque titre est référencé sur Amazon.fr, sans lecture complète de chaque ouvrage. Les résumés reprennent ce qu'annoncent l'éditeur ou le libraire ; nous ne donnons ni prix, ni notes, ni avis de lecteurs. Quand une donnée manque, nous écrivons « non précisé ». Attention : sur Amazon, l'édition originale et l'édition en gros caractères portent souvent le même titre, vérifiez bien l'éditeur avant de commander.</div>
+<h2>Qu'est-ce qui change dans un livre en gros caractères ?</h2>
+<p>Les deux éditeurs spécialisés les plus présents en France l'expliquent sur leur site. Les Éditions de La Loupe publient leurs titres en corps 16 ou 20 (on trouve aussi du corps 18 dans leurs fiches). À vue d'œil annonce une police agrandie et sobre, un interlignage important, un contraste fort et un papier opaque et léger, avec un corps de 16 à 25 selon les titres.</p>
+<p>Notre conseil : pour une personne qui porte déjà des lunettes de lecture et fatigue en fin de journée, le corps 16 suffit souvent. Si la vue baisse vraiment, visez 18 ou 20, et parlez-en à l'ophtalmologiste, car une baisse de vision mérite toujours un contrôle.</p>
+<h2>Les 10 livres en un coup d'œil</h2>
+<table><thead><tr><th>Livre</th><th>Auteur ou éditeur</th><th>Édition gros caractères</th><th>Corps</th><th>Pages</th><th>Idéal pour</th></tr></thead><tbody>
+<tr><td>La Maison vide</td><td>Laurent Mauvignier</td><td>À vue d'œil, 2 volumes</td><td>16</td><td>1 240</td><td>Le grand roman de la rentrée 2025</td></tr>
+<tr><td>Je voulais vivre</td><td>Adélaïde de Clermont-Tonnerre</td><td>À vue d'œil, 2 volumes</td><td>18</td><td>816</td><td>Le roman d'aventure historique</td></tr>
+<tr><td>Changer l'eau des fleurs</td><td>Valérie Perrin</td><td>À vue d'œil, 2 volumes</td><td>16</td><td>944</td><td>Un roman tendre et très lu</td></tr>
+<tr><td>Tata</td><td>Valérie Perrin</td><td>À vue d'œil, 2 volumes</td><td>16</td><td>1 104</td><td>Le suspense familial</td></tr>
+<tr><td>Cette vie ou celle d'après</td><td>Christian Signol</td><td>À vue d'œil</td><td>20</td><td>376</td><td>La plus grande police des romans</td></tr>
+<tr><td>Le vent souffle sur Little Balmoral</td><td>Sophie Jomain</td><td>La Loupe</td><td>16</td><td>528</td><td>Une romance un peu mystérieuse</td></tr>
+<tr><td>Le Pot de départ</td><td>Julien Aime</td><td>La Loupe</td><td>18</td><td>498</td><td>Rire de la retraite</td></tr>
+<tr><td>150 jeux pour stimuler ses neurones</td><td>Larousse</td><td>Édition spéciale seniors</td><td>Non précisé</td><td>192</td><td>Varier les jeux</td></tr>
+<tr><td>Gros caractères : Mots fléchés</td><td>Bravo</td><td>Collection Gros Caractères</td><td>Non précisé</td><td>192</td><td>Les amateurs de mots fléchés</td></tr>
+<tr><td>Gros caractères : Sudoku</td><td>Bravo</td><td>Collection Gros Caractères</td><td>Non précisé</td><td>192</td><td>Les amateurs de chiffres</td></tr>
+</tbody></table>
+
+<h2>Des romans pour retrouver le plaisir de lire</h2>
+<h3>1. La Maison vide, Laurent Mauvignier</h3>
+<p><strong>Pour qui ?</strong> Un grand lecteur qui aime les histoires de famille au long cours et ne craint pas un livre épais.</p>
+<p><strong>Ce qu'on y trouve</strong> : en 1976, le père du narrateur rouvre une maison familiale fermée depuis vingt ans, pleine d'objets et de photos aux visages découpés. Le narrateur reconstitue la vie de sa grand-mère Marguerite et des siens, à travers deux guerres mondiales et la vie rurale. Prix Goncourt 2025.</p>
+<p><strong>Édition</strong> : À vue d'œil, décembre 2025, 2 volumes, 1 240 pages, police Luciole en corps 16.</p>
+<p><strong>À savoir</strong> : c'est long. Pour quelqu'un qui reprend la lecture après une pause, commencez plutôt par un titre plus court de la liste.</p>
+<p><a href="{AMZ:La maison vide 2 volumes grands caractères}" """ + A + """>Voir sur Amazon</a></p>
+
+<h3>2. Je voulais vivre, Adélaïde de Clermont-Tonnerre</h3>
+<p><strong>Pour qui ?</strong> Ceux qui ont aimé Les Trois Mousquetaires et apprécient les romans historiques rythmés.</p>
+<p><strong>Ce qu'on y trouve</strong> : une fillette recueillie par un prêtre devient, vingt ans plus tard, Lady Clarick, protégée de Richelieu, traquée par quatre hommes qui connaissent son passé. Le roman revisite le personnage de Milady comme une femme qui se bat pour sa liberté. Prix Renaudot 2025.</p>
+<p><strong>Édition</strong> : À vue d'œil, septembre 2025, 2 volumes, 816 pages, police Luciole en corps 18.</p>
+<p><a href="{AMZ:Je voulais vivre 2 volumes grands caractères}" """ + A + """>Voir sur Amazon</a></p>
+
+<h3>3. Changer l'eau des fleurs, Valérie Perrin</h3>
+<p><strong>Pour qui ?</strong> Un lecteur qui aime les personnages attachants et les histoires qui se dévoilent peu à peu.</p>
+<p><strong>Ce qu'on y trouve</strong> : Violette Toussaint est gardienne de cimetière en Bourgogne. Dans sa loge, elle accueille visiteurs et confidences, jusqu'à ce qu'un enterrement révèle des liens cachés entre les vivants et les morts. Prix Maison de la presse 2018.</p>
+<p><strong>Édition</strong> : À vue d'œil, avril 2023, 2 volumes, 944 pages, police Luciole en corps 16.</p>
+<p><strong>À savoir</strong> : sur Amazon, nous n'avons pas pu confirmer avec certitude que la fiche correspond à l'édition en gros caractères ; vérifiez la mention À vue d'œil, ou commandez-la chez un libraire avec son code EAN 9791026906759.</p>
+<p><a href="{AMZ:Changer l'eau des fleurs 2 volumes grands caractères}" """ + A + """>Voir sur Amazon</a></p>
+
+<h3>4. Tata, Valérie Perrin</h3>
+<p><strong>Pour qui ?</strong> Ceux qui ont lu Changer l'eau des fleurs et en redemandent, ou qui aiment le suspense sans violence.</p>
+<p><strong>Ce qu'on y trouve</strong> : la police annonce à une femme la mort de sa tante Colette, qui avait pourtant été enterrée trois ans plus tôt. Plusieurs destins s'entremêlent dans une intrigue entre roman social et enquête.</p>
+<p><strong>Édition</strong> : À vue d'œil, novembre 2024, 2 volumes, 1 104 pages, police Luciole en corps 16.</p>
+<p><a href="{AMZ:Tata Valérie Perrin 2 volumes}" """ + A + """>Voir sur Amazon</a></p>
+
+<h3>5. Cette vie ou celle d'après, Christian Signol</h3>
+<p><strong>Pour qui ?</strong> Un lecteur fidèle de Christian Signol, ou une personne dont la vue a nettement baissé.</p>
+<p><strong>Ce qu'on y trouve</strong> : un roman de Christian Signol paru en septembre 2026 dans cette collection. C'est le roman le plus court de notre sélection et le seul en corps 20, ce qui le rend plus confortable pour une vue fatiguée.</p>
+<p><strong>Édition</strong> : À vue d'œil, septembre 2026, 376 pages, police Luciole en corps 20.</p>
+<p><strong>Limites</strong> : nous n'avons pas trouvé de résumé détaillé sur une page lisible, ni confirmé la présence de cette édition sur Amazon. Si elle n'y figure pas encore, un libraire peut la commander avec son EAN 9791026909187.</p>
+<p><a href="{AMZ:Christian Signol Cette vie ou celle d'après grands caractères}" """ + A + """>Voir sur Amazon</a></p>
+
+<h3>6. Le vent souffle sur Little Balmoral, Sophie Jomain</h3>
+<p><strong>Pour qui ?</strong> Les amateurs de romance avec une touche de mystère.</p>
+<p><strong>Ce qu'on y trouve</strong> : Phèdre hérite d'un manoir délabré à Little Balmoral, là où elle a vécu son plus grand chagrin d'amour. Des fenêtres qui s'ouvrent seules, des messages codés et le retour d'Adam, son ancien amour, lui font envisager la présence de fantômes.</p>
+<p><strong>Édition</strong> : Éditions de La Loupe, octobre 2025, 528 pages, corps 16, en un seul volume.</p>
+<p><strong>À savoir</strong> : sur Amazon, l'édition originale existe aussi ; l'édition La Loupe a l'ISBN 2382993197.</p>
+<p><a href="{AMZ:Le vent souffle sur Little Balmoral La Loupe}" """ + A + """>Voir sur Amazon</a></p>
+
+<h3>7. Le Pot de départ, Julien Aime</h3>
+<p><strong>Pour qui ?</strong> Un jeune retraité, ou quelqu'un sur le point de l'être, qui a envie de rire de cette étape.</p>
+<p><strong>Ce qu'on y trouve</strong> : Jean-Michel, sexagénaire grincheux à quelques semaines de la retraite, redoute le vide qui l'attend. Sa femme l'inscrit à un stage de préparation à la retraite. Une comédie caustique inspirée d'une histoire vraie.</p>
+<p><strong>Édition</strong> : Éditions de La Loupe, septembre 2026, 498 pages, corps 18.</p>
+<p><strong>Limites</strong> : sur Amazon, nous n'avons trouvé avec certitude que l'édition originale (Grasset), en caractères normaux. Pour l'édition en gros caractères, passez par un libraire avec l'EAN 9782382993682.</p>
+<p><a href="{AMZ:Le Pot de départ Julien Aime}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Des livres de jeux pour faire travailler la tête</h2>
+<p>Les cahiers de jeux en gros caractères sont nombreux sur Amazon, mais beaucoup sont auto-édités, sans éditeur identifiable. Nous avons gardé ceux dont l'éditeur est clairement indiqué.</p>
+<h3>8. 150 jeux pour stimuler ses neurones, Larousse</h3>
+<p><strong>Pour qui ?</strong> Une personne qui se lasse vite d'un seul type de jeu.</p>
+<p><strong>Ce qu'on y trouve</strong> : 150 jeux variés (messages codés, mots croisés, mots mêlés, sudokus, grilles logiques, images cachées) pour travailler la mémoire, la concentration, la déduction et l'observation, avec plusieurs niveaux de difficulté.</p>
+<p><strong>Édition</strong> : Larousse, octobre 2025, broché, 192 pages, grand format.</p>
+<p><strong>Limites</strong> : la mention « édition spéciale en grands caractères » apparaît dans le sous-titre chez un libraire, mais pas sur toutes les fiches, et la taille de police n'est pas précisée. Vérifiez la mention sur la couverture.</p>
+<p><a href="{AMZ:150 jeux pour stimuler ses neurones Larousse}" """ + A + """>Voir sur Amazon</a></p>
+
+<h3>9. Gros caractères : Mots fléchés, 150 grilles récréatives</h3>
+<p><strong>Pour qui ?</strong> Les fidèles des mots fléchés qui plissent les yeux sur les grilles des magazines.</p>
+<p><strong>Ce qu'on y trouve</strong> : 150 grilles de mots fléchés à grands caractères, avec des définitions faciles à lire. Grilles conçues par Louis-Luc Beaudoin.</p>
+<p><strong>Édition</strong> : Bravo, collection Gros Caractères, mai 2024, broché, 192 pages, environ 20 x 25 cm.</p>
+<p><strong>À savoir</strong> : Bravo est un éditeur québécois. Ses titres sont distribués en France, parfois avec un délai de livraison plus long.</p>
+<p><a href="{AMZ:Gros caractères Mots fléchés 150 grilles récréatives}" """ + A + """>Voir sur Amazon</a></p>
+
+<h3>10. Gros caractères : Sudoku, 150 grilles classiques</h3>
+<p><strong>Pour qui ?</strong> Ceux qui préfèrent les chiffres aux lettres.</p>
+<p><strong>Ce qu'on y trouve</strong> : 150 grilles de sudoku classiques imprimées en grands caractères, pour lire les cases et écrire les chiffres sans effort. Même auteur et même collection que le livre de mots fléchés.</p>
+<p><strong>Édition</strong> : Bravo, collection Gros Caractères, mai 2024, broché, 192 pages.</p>
+<p><strong>Limites</strong> : nous ne l'avons pas trouvé avec certitude sur Amazon.fr ; il est en revanche vendu par la Fnac (EAN 9782896705467).</p>
+<p><a href="{AMZ:sudoku gros caractères Bravo}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment choisir un livre en gros caractères ?</h2>
+<p><strong>Le corps avant le titre.</strong> Un roman que la personne n'arrive pas à lire confortablement restera sur la table de nuit. Si vous hésitez, prenez la taille au-dessus.</p>
+<p><strong>Le poids du livre.</strong> Agrandir le texte multiplie les pages : La Maison vide compte 1 240 pages dans son édition en gros caractères. Les éditions en deux volumes sont plus légères à tenir dans les mains, un vrai avantage pour des poignets fragiles.</p>
+<p><strong>Les goûts, toujours.</strong> Offrir un Goncourt à quelqu'un qui aime les polars, c'est risquer la déception. Demandez-vous ce que la personne lisait avant que sa vue ne la gêne.</p>
+<p><strong>Et la lumière.</strong> Un bon éclairage change tout, avec ou sans gros caractères. Une lampe placée sur le côté, sans reflet sur la page, aide beaucoup.</p>
+<p>Si la lecture devient vraiment difficile malgré tout, d'autres solutions existent : les livres audio, ou une loupe de lecture. Nos idées de <a href="{R}cadeau-personne-agee/">cadeaux pour une personne âgée</a> en proposent d'autres, et notre sélection de <a href="{R}meilleur-casque-tv-senior/">casques TV pour seniors</a> aidera ceux qui préfèrent écouter. Pour un éclairage sûr dans toute la maison, consultez notre guide pour <a href="{R}amenager-logement-personne-agee/">aménager le logement pièce par pièce</a>.</p>
+""",
+  faq=[("Quelle taille de police pour un livre en gros caractères ?", "Les éditeurs spécialisés publient le plus souvent en corps 16, 18 ou 20, et parfois jusqu'à 25. Le corps 16 convient à une vue un peu fatiguée ; au-delà, préférez 18 ou 20. Une baisse de la vue mérite toujours un avis de l'ophtalmologiste."),
+       ("Le texte est-il raccourci dans les éditions en gros caractères ?", "Non : selon le site spécialisé ActuaLitté, qui présente l'éditeur À vue d'œil, le texte d'origine n'est pas modifié, seule la mise en page change. C'est pourquoi un roman occupe souvent deux volumes."),
+       ("Avez-vous lu tous ces livres ?", "Non. Cette sélection repose sur les fiches des éditeurs et des libraires. Nous ne donnons ni note ni avis de lecture ; vérifiez toujours l'éditeur de l'édition que vous commandez.")],
+  short="Top 10 livres en gros caractères", cat="Vie quotidienne")
