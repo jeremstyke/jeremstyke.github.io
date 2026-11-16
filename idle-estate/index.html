@@ -220,6 +220,7 @@ const lang = ((tgw && tgw.initDataUnsafe && tgw.initDataUnsafe.user && tgw.initD
 const L = {
  en: {
   names:['Studio','Loft','Villa','Apartment block','Residential tower','Hotel chain','Mall network','Business district','Resort island','Megacity'],
+  pr:['month','quarter','6 months','year','2 years','5 years','10 years','20 years','50 years','century'],
   estate:'Estate', shop:'Shop', prest:'Empire', top:'Top',
   buy:'Buy', lvl:'Lv', manager:'Manager', auto:'Auto', tapStart:'Tap to collect', ms:'x2 @',
   welcomeT:'Welcome pack', welcomeS:'2h of rent now + x2 income for 24h', claim:'Claim', daily:'Daily bonus', dailyS:'Day {n} of 7, come back every day',
@@ -238,6 +239,7 @@ const L = {
  },
  fr: {
   names:['Studio','Loft','Villa','Immeuble','Tour résidentielle','Chaîne d\'hôtels','Centres commerciaux','Quartier d\'affaires','Île resort','Mégapole'],
+  pr:['mois','trimestre','semestre','an','2 ans','5 ans','10 ans','20 ans','50 ans','siècle'],
   estate:'Biens', shop:'Boutique', prest:'Empire', top:'Top',
   buy:'Acheter', lvl:'Niv', manager:'Gestionnaire', auto:'Auto', tapStart:'Touche pour encaisser', ms:'x2 @',
   welcomeT:'Pack de bienvenue', welcomeS:'2h de loyers tout de suite + x2 revenus pendant 24h', claim:'Récupérer', daily:'Bonus du jour', dailyS:'Jour {n} sur 7, reviens chaque jour',
@@ -446,8 +448,8 @@ function paint() {
     em.style.display = owned ? '' : 'none'; em.textContent = L.lvl + ' ' + S.lv[i];
     if (owned) { const nx = S.ms.find(m => m > S.lv[i]); ms.textContent = nx ? L.ms + nx : 'MAX'; ms.style.display = ''; } else ms.style.display = 'none';
     const per = inc(i, n);
-    if (!owned) { bar.style.transform = 'scaleX(0)'; txt.textContent = '$' + fm(S.cfg[i].r * curM(n)) + ' / ' + fmtT(S.cfg[i].t); }
-    else if (S.mg[i]) { bar.style.transform = S.cfg[i].t < 2.5 ? 'scaleX(1)' : 'scaleX(' + ((n % S.cfg[i].t) / S.cfg[i].t) + ')'; txt.textContent = '$' + fm(per) + ' / ' + fmtT(S.cfg[i].t); }
+    if (!owned) { bar.style.transform = 'scaleX(0)'; txt.textContent = '$' + fm(S.cfg[i].r * curM(n)) + ' / ' + L.pr[i]; }
+    else if (S.mg[i]) { bar.style.transform = S.cfg[i].t < 2.5 ? 'scaleX(1)' : 'scaleX(' + ((n % S.cfg[i].t) / S.cfg[i].t) + ')'; txt.textContent = '$' + fm(per) + ' / ' + L.pr[i]; }
     else if (S.ts[i] > 0) { const f = Math.min(1, (n - S.ts[i]) / S.cfg[i].t); bar.style.transform = 'scaleX(' + f + ')'; txt.textContent = '$' + fm(per) + '  ' + fmtLeft(S.ts[i] + S.cfg[i].t - n); }
     else { bar.style.transform = 'scaleX(0)'; txt.textContent = L.tapStart + ' $' + fm(per); }
     c.classList.toggle('ready', owned && !S.mg[i] && S.ts[i] < 0);
