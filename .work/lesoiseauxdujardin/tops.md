@@ -4,7 +4,7 @@
 - [x] meilleur-guide-oiseaux/ | meilleur guide d'identification des oiseaux | Observer | guides de terrain connus ; titres, auteurs, éditeurs et éditions lus sur la page de l'éditeur ou d'un grand libraire (Fnac, Decitre, Cultura) et vérifiés sur Amazon.fr ; uniquement des livres réels et disponibles ; pour chaque livre : pour qui, ce qu'on y trouve, format (broché, poche, relié), nombre de pages si indiqué ; jamais de résumé inventé
 - [x] meilleurs-livres-oiseaux-enfants/ | meilleurs livres sur les oiseaux pour enfants | Observer | documentaires et premiers guides pour enfants ; titres, auteurs, éditeurs et éditions lus sur la page de l'éditeur ou d'un grand libraire (Fnac, Decitre, Cultura) et vérifiés sur Amazon.fr ; uniquement des livres réels et disponibles ; pour chaque livre : pour qui, ce qu'on y trouve, format (broché, poche, relié), nombre de pages si indiqué ; jamais de résumé inventé
 - [x] meilleur-nichoir-camera/ | meilleur nichoir avec caméra | Nichoirs | caméras de nichoir, wifi ou filaire
-- [ ] meilleure-graine-tournesol/ | meilleures graines de tournesol pour oiseaux | Nourrir | marques et formats (noir, décortiqué)
+- [x] meilleure-graine-tournesol/ | meilleures graines de tournesol pour oiseaux | Nourrir | marques et formats (noir, décortiqué)
 - [ ] meilleure-boule-de-graisse/ | meilleures boules de graisse sans filet | Nourrir | graisse végétale, sans huile de palme si indiqué
 - [ ] meilleur-abreuvoir-oiseaux/ | meilleur abreuvoir pour oiseaux | Nourrir | bain d'oiseaux, chauffant si vendu
 - [ ] meilleur-nichoir-mesange/ | meilleur nichoir à mésange | Nichoirs | bois, béton de bois, trou 28 et 32 mm

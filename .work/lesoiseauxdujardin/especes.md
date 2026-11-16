@@ -1,8 +1,8 @@
 # Fiches espèces et pages d'identification pour Les oiseaux du jardin (2 par jour)
 # But : attirer le trafic (grosses recherches) puis renvoyer vers les produits utiles (mangeoire, nourriture, nichoir adapté à l'espèce)
 # Format : - [ ] slug/ | requête visée | catégorie | angle
-- [ ] oiseau-noir-bec-jaune/ | oiseau noir bec jaune | Observer | identification : merle noir (mâle), différence avec l'étourneau et le merle femelle, comment l'attirer
-- [ ] mesange-charbonniere/ | mésange charbonnière | Observer | fiche espèce : reconnaître, alimentation, nichoir (trou d'envol vérifié LPO), mangeoire adaptée
+- [x] oiseau-noir-bec-jaune/ | oiseau noir bec jaune | Observer | identification : merle noir (mâle), différence avec l'étourneau et le merle femelle, comment l'attirer
+- [x] mesange-charbonniere/ | mésange charbonnière | Observer | fiche espèce : reconnaître, alimentation, nichoir (trou d'envol vérifié LPO), mangeoire adaptée
 - [ ] petit-oiseau-gris-jardin/ | petit oiseau gris jardin | Observer | identification : accenteur mouchet, moineau femelle, sittelle, mésange nonnette ; critères simples
 - [ ] rouge-gorge/ | rouge-gorge | Observer | fiche espèce : comportement, nourriture (au sol, vers de farine), nichoir semi-ouvert
 - [ ] oiseau-ventre-rouge/ | oiseau ventre rouge | Observer | identification : rouge-gorge, bouvreuil, rougequeue, pinson mâle

@@ -1240,3 +1240,245 @@ g("meilleur-nichoir-camera/",
        ("La caméra dérange-t-elle les oiseaux la nuit ?", "Les fabricants équipent la plupart de ces caméras de LED infrarouges, dont plusieurs sont annoncées comme invisibles, c'est-à-dire sans lueur visible. Vérifiez cette mention sur la fiche du modèle, et installez la caméra avant la nidification pour ne pas avoir à ouvrir le nichoir ensuite."),
        ("Avez-vous testé ces nichoirs caméra ?", "Non. Cette sélection repose sur les fiches publiées par les fabricants et par des revendeurs. Nous indiquons « non précisé » quand une donnée manque, sans note ni avis de prise en main.")],
   short="Top 8 nichoirs caméra", cat="Nichoirs")
+
+AUTO_META['oiseau-noir-bec-jaune/'] = ('🐦‍⬛', 'sable')
+g("oiseau-noir-bec-jaune/",
+  "Oiseau noir au bec jaune : merle noir ou étourneau ?",
+  "Oiseau noir au bec jaune dans le jardin : comment savoir si c'est un merle ou un étourneau",
+  "Un oiseau tout noir au bec jaune orangé qui sautille sur la pelouse ? C'est très probablement un merle noir mâle. Voici comment l'écarter de l'étourneau.",
+  """
+<p>Un oiseau entièrement noir, avec un bec jaune orangé et un cercle de la même couleur autour de l'œil, qui sautille sur la pelouse : c'est presque à coup sûr un <strong>merle noir mâle</strong>. Le seul autre candidat courant au jardin est l'<strong>étourneau sansonnet</strong>, qui a lui aussi le bec jaune au printemps, mais qui marche au lieu de sautiller et dont le plumage est piqueté de petites taches claires.</p>
+<p>Le reste de la page vous aide à trancher en quelques secondes, puis à faire venir ces oiseaux plus souvent.</p>
+{CTA}
+
+<h2>Merle, étourneau ou grive : le tableau pour trancher</h2>
+<p>Les mesures ci-dessous viennent de l'INPN (Muséum national d'Histoire naturelle) et des fiches de l'observatoire Oiseaux des jardins (LPO et Muséum). Les deux sources ne donnent pas exactement les mêmes chiffres pour le merle : 24 cm et environ 100 g pour l'INPN, 25 cm et 80 à 110 g pour Oiseaux des jardins. Ces écarts n'ont aucune importance pour l'identification : retenez que le merle est un peu plus grand que l'étourneau, avec une queue plus longue.</p>
+<table><thead><tr><th>Ce que vous voyez</th><th>Merle noir mâle</th><th>Merle noir femelle</th><th>Jeune merle</th><th>Étourneau sansonnet</th></tr></thead><tbody>
+<tr><td>Plumage</td><td>Noir uni</td><td>Brun foncé, gorge striée, ventre plus ou moins tacheté</td><td>Brun foncé taché de roussâtre</td><td>Sombre, piqueté de petites taches claires, variable selon la saison</td></tr>
+<tr><td>Bec</td><td>Jaune orangé vif, cercle de la même couleur autour de l'œil</td><td>Moins voyant que celui du mâle</td><td>Noir</td><td>Long et jaune en période de reproduction, foncé en hiver</td></tr>
+<tr><td>Taille</td><td>24 à 25 cm</td><td>24 à 25 cm</td><td>Proche de l'adulte</td><td>Environ 21 cm, queue courte</td></tr>
+<tr><td>Au sol</td><td>Sautille</td><td>Sautille</td><td>Sautille</td><td>Marche</td></tr>
+<tr><td>En groupe ?</td><td>Seul ou en couple</td><td>Seule ou en couple</td><td>Près des parents</td><td>Souvent en bandes, dortoirs de milliers d'oiseaux en hiver</td></tr>
+</tbody></table>
+
+<h2>Le merle noir mâle, le suspect numéro un</h2>
+<p>Le mâle est le seul oiseau commun du jardin à combiner un plumage noir uni, un bec jaune orangé et un cercle oculaire de la même couleur. L'INPN le décrit exactement ainsi. Les fiches Oiseaux des jardins insistent sur un détail utile : son plumage est noir, et non brun foncé. Si votre oiseau tire franchement sur le brun, regardez plutôt du côté de la femelle.</p>
+<p>Son comportement aide aussi. Il cherche surtout des vers de terre et d'autres petits animaux du sol, en fouillant la pelouse ou les feuilles mortes. Vous le verrez donc souvent courir quelques mètres, s'arrêter net, la tête penchée, puis piquer le sol. Il mange aussi des fruits sauvages et ceux du verger.</p>
+<p>Au printemps, c'est sa voix qui le trahit. L'INPN décrit des phrases qui commencent par des notes flûtées et mélodieuses et se terminent par des sons plus faibles, grinçants. À la campagne, il chante souvent dès la fin février ; en ville, stimulé par l'éclairage artificiel, il peut commencer dès janvier.</p>
+
+<h2>Et si l'oiseau est brun avec un bec jaunâtre ?</h2>
+<p>C'est probablement une <strong>femelle de merle</strong>. Elle est brun foncé, avec des stries sombres sur la gorge et un ventre plus ou moins ponctué. Mâle et femelle se ressemblent par la silhouette, la taille et la façon de sautiller, ce qui permet de les associer quand ils se nourrissent côte à côte.</p>
+<p>La confusion la plus courante, selon les fiches Oiseaux des jardins, se fait avec les <strong>grives</strong> : leur plumage est moins sombre et nettement tacheté sur le ventre. L'INPN précise que la grive musicienne a aussi le dessous tacheté, mais sur un fond de poitrine bien plus pâle. Par exemple, si votre oiseau brun a un ventre crème couvert de points noirs bien nets, c'est une grive, pas une femelle de merle.</p>
+<p>Au début de l'été, vous croiserez aussi des <strong>jeunes merles</strong> : brun foncé tachés de roussâtre, avec un bec noir. Pas de bec jaune chez eux, donc. D'après Oiseaux des jardins, le jeune mâle a déjà la queue et les ailes plus noires que la jeune femelle.</p>
+
+<h2>Comment reconnaître l'étourneau sansonnet au premier coup d'œil ?</h2>
+<p>L'étourneau a lui aussi un bec jaune, mais seulement une partie de l'année. Les fiches Oiseaux des jardins le montrent avec un long bec jaune à base bleue en période de reproduction, et un bec gris foncé en hiver. Mâles et femelles se ressemblent beaucoup ; la femelle est un peu plus tachetée et son bec est moins jaune.</p>
+<p>Trois indices font la différence avec le merle, même de loin :</p>
+<ul>
+<li><strong>Il marche</strong> au sol, alors que le merle sautille.</li>
+<li><strong>Il est plus petit et trapu</strong> : environ 21 cm, avec une queue courte.</li>
+<li><strong>Il vit en groupe</strong>. En hiver, il se rassemble en dortoirs de plusieurs milliers d'oiseaux.</li>
+</ul>
+<p>Le jeune étourneau, lui, est brun gris uniforme, ce qui peut dérouter en juillet. Sa silhouette courte et sa façon de marcher restent les meilleurs repères.</p>
+
+<h2>Comment confirmer sans se tromper ?</h2>
+<p>Commencez par observer comment l'oiseau se déplace au sol : c'est souvent plus parlant que les couleurs, qui changent avec la lumière. Ensuite, écoutez. Le chant flûté du merle à la tombée du jour est facile à mémoriser, et les applications de reconnaissance des chants comme Merlin Bird ID ou BirdNET peuvent vous proposer un nom à partir d'un enregistrement fait avec votre téléphone. Prenez leur réponse comme une piste à vérifier, pas comme une certitude.</p>
+<p>Une paire de jumelles change beaucoup de choses : vous verrez le cercle orangé autour de l'œil du merle, ou les petites taches claires de l'étourneau, sans avoir à vous approcher. Pas besoin de matériel coûteux pour le jardin ; notre comparatif des <a href="{R}meilleures-jumelles-oiseaux/">meilleures jumelles pour observer les oiseaux</a> explique pourquoi un modèle 8x42 suffit largement. Un guide de terrain aide aussi à comparer les espèces voisines : voyez notre sélection des <a href="{R}meilleur-guide-oiseaux/">meilleurs guides d'identification</a>.</p>
+<p><strong>Jumelles 8x42</strong> : pour voir le bec et l'œil sans déranger l'oiseau. <a href="{AMZ:jumelles 8x42 ornithologie}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Guide d'identification des oiseaux</strong> : pour comparer merles, grives et étourneaux. <a href="{AMZ:guide ornitho oiseaux de france et d'europe}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment attirer les merles au jardin ?</h2>
+<p>Le merle se nourrit au sol, et c'est là qu'il faut le servir. Les fiches Oiseaux des jardins conseillent des fruits, comme des pommes coupées en deux, posés au sol ou sur un plateau. En hiver, quand le sol gèle et que les vers deviennent inaccessibles, ce petit geste compte. Un plateau un peu surélevé garde les fruits propres et les rend plus visibles.</p>
+<p>Ne lui donnez pas de pain : la LPO le déconseille pour tous les oiseaux, comme nous l'expliquons dans notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">bien nourrir les oiseaux du jardin</a>.</p>
+<p><strong>Plateau de nourrissage</strong> : pour poser pommes et fruits à hauteur, à l'abri de la boue. <a href="{AMZ:mangeoire plateau oiseaux sur pied}" """ + A + """>Voir sur Amazon</a></p>
+<p>Pensez aussi à l'eau. Les merles boivent et se baignent volontiers dans une coupelle peu profonde, même en plein hiver. Notre article sur <a href="{R}eau-pour-les-oiseaux-en-hiver/">l'eau pour les oiseaux en hiver</a> détaille comment éviter le gel sans danger.</p>
+<p><strong>Bain d'oiseaux</strong> : une vasque large et peu profonde convient bien aux merles. <a href="{AMZ:bain oiseaux vasque jardin}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Notre conseil</strong> : laissez un coin du jardin un peu « en désordre », avec des feuilles mortes sous une haie. C'est là que le merle trouve vers et petites bêtes, et ce garde-manger naturel vaut mieux que n'importe quelle mangeoire.</p>
+<p>Quant au nid, le merle n'utilise pas de nichoir à trou : il construit une coupe garnie de fines matières végétales, dans laquelle il pond 3 à 5 œufs, parfois 6, selon l'INPN. Une haie dense lui sera plus utile qu'un nichoir.</p>
+""",
+  faq=[("Quel est l'oiseau noir avec un bec jaune dans mon jardin ?",
+        "Dans la grande majorité des cas, c'est un merle noir mâle : plumage noir uni, bec jaune orangé et cercle orangé autour de l'œil. S'il marche au lieu de sautiller, vit en groupe et a de petites taches claires, c'est plutôt un étourneau sansonnet au printemps."),
+       ("Le merle femelle a-t-il aussi le bec jaune ?",
+        "Elle a un bec plus discret que le mâle, mais c'est surtout son plumage qui la trahit : brun foncé, avec la gorge striée et le ventre plus ou moins tacheté. Les jeunes merles, eux, ont le bec noir."),
+       ("Que donner à un merle en hiver ?",
+        "Les fiches Oiseaux des jardins conseillent des fruits, comme des pommes coupées en deux, posés au sol ou sur un plateau. Évitez le pain, déconseillé par la LPO, et proposez de l'eau propre non gelée.")],
+  short="Oiseau noir au bec jaune", cat="Observer")
+
+AUTO_META['mesange-charbonniere/'] = ('🐤', 'mousse')
+g("mesange-charbonniere/",
+  "Mésange charbonnière : la reconnaître, la nourrir, son nichoir",
+  "Mésange charbonnière : comment la reconnaître, la nourrir et l'aider à nicher",
+  "Mâle ou femelle, jeune, nourriture d'hiver, nichoir avec trou d'envol de 32 mm, hauteur et orientation : tout pour accueillir la mésange charbonnière au jardin.",
+  """
+<p>La mésange charbonnière, c'est la mésange au ventre jaune barré d'une bande noire, avec la tête noire et les joues blanches. Elle mesure 14 cm pour 16 à 21 g, d'après les fiches de l'observatoire Oiseaux des jardins (LPO et Muséum), et c'est l'une des habituées les plus fidèles de la mangeoire.</p>
+<p>Elle niche aussi très volontiers dans un nichoir, à condition que le trou d'envol ait le bon diamètre. Voici comment la reconnaître, quoi lui donner et comment lui offrir un nichoir qui lui convient.</p>
+{CTA}
+
+<h2>Mâle ou femelle : comment les distinguer ?</h2>
+<p>Ils se ressemblent presque trait pour trait, et c'est la bande noire au milieu de la poitrine et du ventre qui les départage. Les fiches Oiseaux des jardins sont claires : <strong>elle est plus large chez le mâle que chez la femelle</strong>.</p>
+<p>Le reste du portrait est commun aux deux : calotte et nuque noires, joues blanches, poitrine jaune vif, dos vert olive, queue gris-bleu foncé bordée de blanc et bec court noirâtre.</p>
+<p>Les <strong>jeunes</strong> de l'année vous feront peut-être hésiter en été. Ils ressemblent aux adultes en plus terne, leur bande ventrale est discrète et, détail qui ne trompe pas, leurs joues sont jaune pâle au lieu d'être blanches.</p>
+<table><thead><tr><th>Critère</th><th>Mâle</th><th>Femelle</th><th>Jeune</th></tr></thead><tbody>
+<tr><td>Bande noire du ventre</td><td>Large</td><td>Plus étroite</td><td>Discrète</td></tr>
+<tr><td>Joues</td><td>Blanches</td><td>Blanches</td><td>Jaune pâle</td></tr>
+<tr><td>Couleurs</td><td>Vives</td><td>Vives</td><td>Plus ternes</td></tr>
+</tbody></table>
+
+<h2>Avec quelles mésanges peut-on la confondre ?</h2>
+<p>La <strong>mésange bleue</strong> est beaucoup plus petite, n'a pas la tête noire et n'a pas ce large trait noir vertical sur la poitrine.</p>
+<p>La <strong>mésange noire</strong> est le piège classique : elle a aussi la tête noire et les joues blanches. Regardez la nuque. D'après les fiches Oiseaux des jardins, elle est blanche chez la mésange noire, noire chez la charbonnière. La mésange noire n'a pas non plus les tons jaunes et verts de sa cousine.</p>
+<table><thead><tr><th>Espèce</th><th>Tête</th><th>Poitrine et ventre</th></tr></thead><tbody>
+<tr><td>Mésange charbonnière</td><td>Calotte et nuque noires, joues blanches</td><td>Jaune vif avec large bande noire</td></tr>
+<tr><td>Mésange bleue (beaucoup plus petite)</td><td>Pas de tête noire</td><td>Sans large bande noire</td></tr>
+<tr><td>Mésange noire</td><td>Noire, nuque blanche</td><td>Sans tons jaunes ni verts</td></tr>
+</tbody></table>
+
+<h2>Que mange la mésange charbonnière, et que lui donner ?</h2>
+<p>Son menu change avec les saisons. En été, elle mange surtout des insectes et des chenilles, y compris celles de vos arbres fruitiers. En hiver, quand les insectes se font rares, elle passe aux graines. C'est à ce moment que la mangeoire lui rend vraiment service.</p>
+<p>La graine qu'elle préfère est facile à trouver : le <strong>tournesol</strong>. Les fiches Oiseaux des jardins décrivent un comportement que vous verrez sûrement : elle prend une graine à la mangeoire, puis part l'ouvrir plus loin, sur une branche, avant de revenir. Par exemple, si vous voyez un va-et-vient incessant entre la mangeoire et un arbuste voisin, c'est elle. La LPO recommande le tournesol noir, plus riche en matières grasses que le strié ; notre guide sur <a href="{R}quelles-graines-pour-les-oiseaux/">les graines pour les oiseaux</a> détaille les autres options, et notre comparatif des <a href="{R}meilleure-graine-tournesol/">meilleures graines de tournesol</a> vous aide à choisir un sac.</p>
+<p>Elle apprécie aussi la graisse végétale. Choisissez des boules <strong>sans filet</strong>, dans lequel les pattes des oiseaux peuvent se prendre : tout est expliqué dans notre article sur <a href="{R}boule-de-graisse-oiseaux/">les boules de graisse</a>. Et comme pour tous les oiseaux, pas de pain ni de lait.</p>
+<p><strong>Graines de tournesol noir</strong> : la base pour les mésanges en hiver. <a href="{AMZ:graines de tournesol noir oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Mangeoire silo en métal</strong> : garde les graines au sec et se remplit en quelques secondes. <a href="{AMZ:mangeoire silo metal oiseaux tournesol}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Boules de graisse sans filet</strong>, avec leur support : <a href="{AMZ:boules de graisse sans filet oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+<p>Pour aller plus loin dans le choix du modèle, voyez notre sélection des <a href="{R}meilleure-mangeoire-oiseaux/">meilleures mangeoires pour oiseaux</a>.</p>
+
+<h2>Quel nichoir pour la mésange charbonnière ?</h2>
+<p>Elle niche dans des cavités, et un nichoir fermé à trou rond lui convient parfaitement. Le point décisif est le <strong>diamètre du trou d'envol : 32 mm</strong>. C'est la valeur donnée par les fiches nichoirs de la LPO, et la Ligue royale belge pour la protection des oiseaux parle même de « diamètre universel » pour les mésanges. Les fiches Oiseaux des jardins donnent une fourchette un peu plus large, de 30 à 32 mm. Un trou de 26 à 28 mm, lui, est réservé aux petites mésanges comme la bleue : la charbonnière n'y passera pas.</p>
+<p>Les fiches LPO donnent aussi les mesures intérieures idéales pour cette espèce :</p>
+<table><thead><tr><th>Mesure</th><th>Recommandation LPO pour la charbonnière</th></tr></thead><tbody>
+<tr><td>Trou d'envol</td><td>32 mm</td></tr>
+<tr><td>Plancher</td><td>14 x 14 cm</td></tr>
+<tr><td>Hauteur intérieure</td><td>23 cm</td></tr>
+<tr><td>Du bas du trou au plancher</td><td>17 cm</td></tr>
+<tr><td>Hauteur de pose</td><td>2 à 6 m</td></tr>
+</tbody></table>
+<p>Sur la hauteur de pose, les sources divergent un peu : 2 à 6 m pour la LPO, 1 à 6 m pour la fiche belge consacrée aux grandes mésanges. Même chose pour l'espacement entre deux nichoirs identiques : 40 à 50 m selon la LPO, au moins 10 m selon la fiche belge. Dans un jardin de taille courante, un seul nichoir à 32 mm est donc la bonne idée ; si vous voulez en poser un second, prévoyez-le pour une autre espèce.</p>
+<p>Pour l'orientation, tout le monde est d'accord : le trou dos aux vents dominants, de préférence vers l'est ou le sud-est, le nichoir légèrement penché vers l'avant pour que la pluie n'entre pas. La LPO ajoute de ne le placer ni en plein soleil ni en pleine ombre. Posez-le à l'automne ou au début de l'hiver ; la fiche belge indique qu'il est encore temps jusqu'en mars. Une plaque métallique autour du trou empêche pics, loirs et écureuils de l'agrandir. Notre guide pour <a href="{R}installer-un-nichoir/">installer un nichoir</a> reprend tous ces gestes en détail.</p>
+<p><strong>Nichoir à mésange trou de 32 mm</strong> : en bois brut ou en béton de bois, plus durable. <a href="{AMZ:nichoir mesange charbonniere 32 mm}" """ + A + """>Voir sur Amazon</a></p>
+<p>Si vous voulez suivre la nichée sans ouvrir la boîte, un nichoir équipé d'une caméra est le plus beau cadeau à vous faire. Installez-le et réglez l'image avant la saison de nidification, pour ne jamais avoir à y toucher ensuite. Nous avons comparé les modèles dans notre sélection des <a href="{R}meilleur-nichoir-camera/">meilleurs nichoirs avec caméra</a>, dont certains sont livrés avec une réduction de 32 mm.</p>
+<p><strong>Nichoir avec caméra wifi</strong> : <a href="{AMZ:nichoir camera wifi oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+<p>Côté reproduction, les fiches belges parlent de pontes de 5 à 12 œufs, avec une ou deux couvées par an selon l'une, deux selon l'autre. Nettoyez le nichoir une fois par an, idéalement en septembre ou octobre, jamais pendant la nidification. La LPO conseille de le déplacer s'il reste vide deux ou trois ans de suite.</p>
+
+<h2>Comment se comporte-t-elle au jardin ?</h2>
+<p>En dehors de la saison des nids, la mésange charbonnière vit la plupart du temps en bandes, d'après la Ligue royale belge pour la protection des oiseaux. C'est pour cela que la mangeoire s'anime parfois d'un coup, puis se vide aussi vite. La fiche belge souligne aussi sa fidélité à son lieu de nidification : un couple qui a niché chez vous a de bonnes chances de revenir.</p>
+<p>Son chant est varié et parfois déroutant pour un débutant. Le plus simple est de l'enregistrer avec une application de reconnaissance des chants, puis de comparer avec un enregistrement de référence, comme ceux proposés par Oiseaux des jardins.</p>
+""",
+  faq=[("Quel diamètre de trou pour un nichoir à mésange charbonnière ?",
+        "32 mm selon les fiches nichoirs de la LPO et de la Ligue royale belge pour la protection des oiseaux. Les fiches Oiseaux des jardins donnent 30 à 32 mm. Un trou de 26 à 28 mm convient aux petites mésanges, pas à la charbonnière."),
+       ("Comment différencier la mésange charbonnière mâle et femelle ?",
+        "Par la bande noire qui descend sur la poitrine et le ventre : elle est plus large chez le mâle que chez la femelle. Le reste du plumage est quasiment identique."),
+       ("Que donner à manger à une mésange charbonnière en hiver ?",
+        "Des graines de tournesol, que la LPO conseille noires plutôt que striées, et de la graisse végétale en boules sans filet. Évitez le pain et le lait.")],
+  short="Mésange charbonnière", cat="Observer")
+
+AUTO_META['meilleure-graine-tournesol/'] = ('🏆', 'sable')
+g("meilleure-graine-tournesol/",
+  "Graines de tournesol pour oiseaux 2026 : top 7 noir ou décortiqué",
+  "Les meilleures graines de tournesol pour les oiseaux du jardin : 7 sacs comparés",
+  "Tournesol noir, strié ou décortiqué ? 7 sacs de graines pour oiseaux du jardin comparés : origine, matières grasses, formats, et lequel choisir pour vous.",
+  """
+<p>Pour la mangeoire, prenez du <strong>tournesol noir</strong> si vous voulez le meilleur rapport entre énergie et quantité, et du <strong>tournesol décortiqué</strong> si vous ne voulez plus balayer de coques sous la mangeoire. Le tournesol strié arrive après : la LPO le juge moins adapté, parce qu'il est moins riche en matières grasses.</p>
+<p>Reste à choisir un sac. Nous avons retenu sept produits réels, vendus en France, dont nous avons pu lire la fiche chez le fabricant ou chez un grand revendeur. Nous en avions repéré d'autres, mais sans fiche lisible ou suffisamment précise, nous les avons écartés plutôt que de deviner leur contenu.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
+
+<h2>Noir, strié ou décortiqué : lequel donner aux oiseaux ?</h2>
+<p>La LPO l'écrit sans détour : la meilleure graine à distribuer est le tournesol noir, mieux adapté que le strié. La LPO Occitanie explique pourquoi : les graines noires sont plus riches en lipides, donc en énergie, et c'est précisément ce dont un petit oiseau a besoin pour passer une nuit de gel.</p>
+<p>Le tournesol <strong>décortiqué</strong> (on parle aussi de cœurs de tournesol) a ses défenseurs. Natagora, en Belgique, le conseille même s'il est plus cher : les verdiers laissent les écorces au sol, et ces déchets peuvent devenir des foyers de maladies comme la trichomonose. Pas de coques, donc un sol plus propre, et rien de perdu dans le sac.</p>
+<p>Le tournesol <strong>strié</strong>, enfin, est moins riche en matières grasses. Il n'est pas mauvais, mais à prix proche, le noir est un meilleur choix.</p>
+<p><strong>Notre conseil</strong> : du tournesol noir dans la mangeoire principale, et un peu de décortiqué si la mangeoire est au-dessus d'une terrasse ou d'un massif que vous voulez garder propre. Si vous gardez le tournesol avec coque, balayez régulièrement les restes tombés au sol, comme le recommandent Natagora et la Ligue royale belge pour la protection des oiseaux.</p>
+
+<h2>Le tableau récapitulatif</h2>
+<table><thead><tr><th>Produit</th><th>Type</th><th>Formats</th><th>Origine</th><th>Matières grasses</th></tr></thead><tbody>
+<tr><td>Lyra Pet graines de tournesol noires</td><td>Noir</td><td>10 kg, 25 kg</td><td>Bulgarie</td><td>51 %</td></tr>
+<tr><td>Klasebo graines de tournesol noires</td><td>Noir</td><td>20 kg</td><td>Union européenne</td><td>Non précisé</td></tr>
+<tr><td>Lyra Pet graines de tournesol décortiquées</td><td>Décortiqué</td><td>10 kg, 25 kg</td><td>Non précisé</td><td>58 %</td></tr>
+<tr><td>Versele-Laga Menu Nature Sunflower hearts</td><td>Décortiqué</td><td>750 g</td><td>Non précisé</td><td>Non précisé</td></tr>
+<tr><td>Versele-Laga Menu Nature graines de tournesol entières</td><td>Avec coque</td><td>1,5 kg, 7,5 kg</td><td>Non précisé</td><td>Non précisé</td></tr>
+<tr><td>Lillebro graines de tournesol pour oiseaux sauvages</td><td>Strié (ou plus foncé selon la récolte)</td><td>1 à 20 kg</td><td>Non précisé</td><td>53 %</td></tr>
+<tr><td>Versele-Laga graines de tournesol striées nettoyées</td><td>Strié</td><td>12,5 kg</td><td>Non précisé</td><td>Non précisé</td></tr>
+</tbody></table>
+<p>Les taux de matières grasses sont ceux affichés sur les fiches des revendeurs (zooplus pour Lyra Pet et Lillebro). Ils varient d'une récolte à l'autre : prenez-les comme des ordres de grandeur, pas comme une garantie. Les formats aussi changent souvent, vérifiez au moment de commander.</p>
+
+<h2>1. Lyra Pet graines de tournesol noires : notre choix pour la mangeoire</h2>
+<p><strong>Pour qui ?</strong> Vous nourrissez tout l'hiver plusieurs mangeoires et voulez la graine recommandée par la LPO, en grande quantité.</p>
+<p>D'après la fiche de zooplus, ce sont des graines de tournesol noires récoltées en Bulgarie, sans additif, exhausteur de goût ni attractif, avec une composition à 100 % de tournesol. Le revendeur annonce 21 % de protéines et 51 % de matières grasses, et insiste sur des coques fines que les petits oiseaux peuvent ouvrir. Le sac de 10 kg est livré dans un tonneau de 30 litres, un vrai plus pour le stockage.</p>
+<ul>
+<li><strong>Points forts</strong> : tournesol noir, composition simple et lisible, origine indiquée, analyse chiffrée, contenant refermable.</li>
+<li><strong>Limites</strong> : c'est une marque distribuée surtout par zooplus ; vous ne la trouverez pas forcément sur Amazon. Pas de mention de nettoyage ni de contrôle de l'ambroisie sur la fiche consultée.</li>
+</ul>
+<p>Pourquoi en premier ? Parce que c'est exactement le type de graine que conseille la LPO, et que la fiche donne enfin les informations qu'on cherche : origine, composition, analyse. Peu de sacs en disent autant.</p>
+<p><a href="{AMZ:Lyra Pet graines de tournesol noires}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Klasebo graines de tournesol noires : le gros sac contrôlé contre l'ambroisie</h2>
+<p><strong>Pour qui ?</strong> Un grand jardin, plusieurs mangeoires ou un voisinage qui se partage les sacs.</p>
+<p>Le revendeur décrit des graines noires riches en huile, cultivées dans l'Union européenne, avec une pureté annoncée de 98 % : les 2 % restants sont des résidus de feuilles et de tiges. La fiche précise un contrôle qualité contre l'ambroisie, une plante très allergisante qui peut germer sous les mangeoires quand des graines indésirables se glissent dans les sacs. Elle cite les mésanges, pinsons, bouvreuils, sittelles, moineaux et tarins parmi les oiseaux visés.</p>
+<ul>
+<li><strong>Points forts</strong> : 20 kg d'un coup, origine UE, contrôle de l'ambroisie mis en avant.</li>
+<li><strong>Limites</strong> : pas d'analyse chiffrée sur la fiche consultée. Elle signale des traces possibles de blé, sorgho, millet, avoine ou arachide. Vendu par un vendeur tiers sur la plateforme où nous l'avons trouvé. Et 20 kg, c'est beaucoup si vous n'avez qu'une mangeoire : une graine qui prend l'humidité moisit.</li>
+</ul>
+<p><a href="{AMZ:Klasebo graines de tournesol noires oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Lyra Pet graines de tournesol décortiquées : zéro coque sous la mangeoire</h2>
+<p><strong>Pour qui ?</strong> Une mangeoire au-dessus d'une terrasse, d'un balcon ou d'une pelouse que vous voulez garder nette.</p>
+<p>Zooplus présente ces graines décortiquées comme issues de la nouvelle récolte, 100 % naturelles et sans additif. La fiche annonce 20,8 % de protéines et 58 % de matières grasses, le taux le plus élevé de notre sélection, ce qui se comprend : sans la coque, chaque gramme est mangeable. Le revendeur les juge adaptées aux jeunes oiseaux et aux petites espèces.</p>
+<ul>
+<li><strong>Points forts</strong> : pas de déchets au sol, rien de perdu dans le sac, analyse affichée.</li>
+<li><strong>Limites</strong> : le produit était indiqué temporairement épuisé lors de notre consultation. Sans coque, la graine se conserve moins bien à l'air libre : remplissez peu à la fois et gardez le seau bien fermé.</li>
+</ul>
+<p><a href="{AMZ:Lyra Pet graines de tournesol decortiquees}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Versele-Laga Menu Nature Sunflower hearts : le petit format pour essayer</h2>
+<p><strong>Pour qui ?</strong> Vous voulez tester le décortiqué, ou en ajouter un peu à votre mélange les jours de grand froid.</p>
+<p>La gamme Menu Nature de Versele-Laga est dédiée aux oiseaux du jardin. D'après la fiche de Truffaut, ce sachet contient des graines de tournesol décortiquées et nettoyées minutieusement, sans additif, avec « 0 % de déchets ». Le fabricant le présente comme un petit supplément à mélanger à la nourriture habituelle, et comme une source d'énergie pour les jours froids.</p>
+<ul>
+<li><strong>Points forts</strong> : marque spécialisée, graines nettoyées, format facile à stocker.</li>
+<li><strong>Limites</strong> : 750 g, c'est très peu pour une mangeoire fréquentée : le prix au kilo d'un si petit sachet est forcément moins intéressant qu'un sac de 10 kg. Ni origine ni analyse sur la fiche consultée. Indiqué en rupture chez Truffaut lors de notre consultation.</li>
+</ul>
+<p><a href="{AMZ:Versele-Laga Menu Nature sunflower hearts}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Versele-Laga Menu Nature graines de tournesol entières : le classique de jardinerie</h2>
+<p><strong>Pour qui ?</strong> Vous voulez une marque connue, trouvable facilement en magasin comme en ligne, en format moyen.</p>
+<p>Bricomarché présente ces graines entières, à coque noire striée, comme une source naturelle de lipides et de protéines pour les oiseaux du jardin. Elles se donnent en mangeoire, sur un plateau ou au sol, et la fiche cite les mésanges, les pinsons et les verdiers. Le sac de 7,5 kg existe aussi en 1,5 kg.</p>
+<ul>
+<li><strong>Points forts</strong> : gamme pensée pour les oiseaux sauvages, deux formats, large distribution.</li>
+<li><strong>Limites</strong> : la fiche ne précise ni l'origine, ni la composition exacte, ni le taux de matières grasses. On ne sait pas si le mélange penche plutôt vers le noir ou vers le strié.</li>
+</ul>
+<p><a href="{AMZ:Versele-Laga Menu Nature graines de tournesol 7,5 kg}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Lillebro graines de tournesol pour oiseaux sauvages : du 1 au 20 kg</h2>
+<p><strong>Pour qui ?</strong> Vous voulez choisir la quantité au plus juste, du petit sac pour un balcon jusqu'au double sac de 10 kg.</p>
+<p>La fiche de zooplus indique des graines de tournesol rayées, avec la précision honnête que des graines plus foncées peuvent s'y trouver selon la récolte. L'analyse affichée : 21,5 % de protéines, 53 % de matières grasses, 6,2 % de cellulose. Formats annoncés : 1, 3, 5, 10 et 20 kg.</p>
+<ul>
+<li><strong>Points forts</strong> : large choix de formats, analyse publiée, produit présenté pour les oiseaux sauvages.</li>
+<li><strong>Limites</strong> : c'est du strié, moins recommandé par la LPO que le noir. Origine non précisée. Humidité annoncée de 14 % : stockez au sec et au frais, dans un contenant fermé.</li>
+</ul>
+<p><a href="{AMZ:Lillebro graines de tournesol oiseaux sauvages}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Versele-Laga graines de tournesol striées nettoyées : à réserver aux volières</h2>
+<p><strong>Pour qui ?</strong> Surtout si vous avez aussi des oiseaux de volière, et que vous voulez un seul sac pour tout le monde.</p>
+<p>Bricomarché décrit ces graines striées comme nettoyées, en sac de 12,5 kg, destinées aux perroquets, perruches, tourterelles exotiques et oiseaux d'extérieur, en particulier en hiver.</p>
+<ul>
+<li><strong>Points forts</strong> : grande marque, graines nettoyées, grand sac.</li>
+<li><strong>Limites</strong> : c'est un produit pensé d'abord pour les oiseaux de cage et de volière, et c'est du strié. Pour les seules mésanges et les pinsons du jardin, un tournesol noir de la même taille de sac est un meilleur choix. Nous le citons pour être complets, pas comme une recommandation prioritaire.</li>
+</ul>
+<p><a href="{AMZ:Versele-Laga tournesol strie 12,5 kg}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment choisir son sac de tournesol ?</h2>
+<p><strong>Décidez d'abord : coque ou pas coque.</strong> Le noir avec coque est la graine de base conseillée par la LPO. Le décortiqué coûte plus cher au kilo, mais vous ne payez pas les coques et vous ne les balayez pas. Par exemple, pour une mangeoire accrochée au-dessus d'une table de jardin, le décortiqué vous évitera bien des corvées.</p>
+<p><strong>Lisez l'étiquette.</strong> Un bon sac indique au minimum la composition. Les meilleurs donnent aussi l'origine et l'analyse (protéines, matières grasses). Quand rien n'est précisé, vous achetez un peu à l'aveugle. Méfiez-vous des sacs « pour oiseaux » qui sont en fait des mélanges à base de céréales bon marché : la LPO Occitanie et la LPO Nord déconseillent ceux qui contiennent des pois, des lentilles et du riz.</p>
+<p><strong>Choisissez la taille selon votre consommation.</strong> Un grand sac revient moins cher au kilo, mais une graine qui prend l'humidité moisit, et la nourriture moisie rend les oiseaux malades. Si vous n'avez qu'une mangeoire, un sac de 5 à 10 kg suffit pour une bonne partie de l'hiver, à condition de le stocker dans un contenant fermé, au sec. Un bidon ou un seau à couvercle évite aussi les visites des rongeurs.</p>
+<p><strong>Pensez à l'ambroisie.</strong> Quelques fiches mentionnent un contrôle des graines d'ambroisie. C'est un vrai critère : cette plante très allergisante peut pousser à partir des graines tombées sous la mangeoire.</p>
+<p><strong>Associez la bonne mangeoire.</strong> Le tournesol se sert très bien dans une mangeoire silo, que la LPO Occitanie juge adaptée au tournesol noir. Notre sélection des <a href="{R}meilleure-mangeoire-oiseaux/">meilleures mangeoires pour oiseaux</a> vous aide à choisir, et si vous voulez savoir qui vient manger en votre absence, regardez les <a href="{R}meilleure-mangeoire-connectee/">mangeoires connectées avec caméra</a>.</p>
+
+<h2>Quels oiseaux mangent le tournesol ?</h2>
+<p>La liste est longue : mésanges, pinsons, verdiers, moineaux, bouvreuils, sittelles. La <a href="{R}mesange-charbonniere/">mésange charbonnière</a> est la plus facile à observer : elle prend une graine, part l'ouvrir sur une branche, puis revient aussitôt. En revanche, n'attendez pas grand-chose du merle : c'est un mangeur de vers et de fruits, qui préfère une pomme coupée en deux posée au sol. Si vous avez un doute sur l'oiseau noir qui fouille sous votre mangeoire, notre page <a href="{R}oiseau-noir-bec-jaune/">oiseau noir au bec jaune</a> vous aide à trancher.</p>
+<p>Le tournesol ne fait pas tout : quelques boules de graisse sans filet et de l'eau propre complètent bien la mangeoire en hiver. Tout est détaillé dans notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">bien nourrir les oiseaux du jardin</a> et dans notre article sur <a href="{R}quelles-graines-pour-les-oiseaux/">les graines à donner</a>.</p>
+""",
+  faq=[("Tournesol noir ou strié pour les oiseaux ?",
+        "Noir. La LPO le juge mieux adapté que le strié, et la LPO Occitanie précise qu'il est plus riche en lipides, donc en énergie. Le strié se mange aussi, mais il apporte moins d'énergie."),
+       ("Le tournesol décortiqué vaut-il le surcoût ?",
+        "Oui si les coques au sol vous gênent ou si la mangeoire est au-dessus d'une terrasse. Natagora le conseille, car les écorces accumulées sous la mangeoire peuvent favoriser des maladies comme la trichomonose. Sinon, le noir avec coque reste la base conseillée par la LPO, à condition de balayer les restes."),
+       ("Avez-vous testé ces graines ?",
+        "Non. Cette sélection repose sur les fiches publiées par les fabricants et les revendeurs. Quand une information manque (origine, analyse), nous l'indiquons comme non précisée.")],
+  short="Top 7 graines de tournesol", cat="Nourrir")
