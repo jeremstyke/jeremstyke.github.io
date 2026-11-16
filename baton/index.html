@@ -3028,7 +3028,7 @@ function nudge() {
     /* 21h21 (Jeremy): shown only when Adsgram really has a task for this player (the task block is built and not hidden) */
     var ab = document.getElementById('adtask'), av = window.__adt === true && !!ab && !ab.hidden;
     /* 2 nov 2026 (11h, Jeremy): always the next reward waiting for the player: the 10th task, then the 25th (tkGoal2), then nothing */
-    var n = Number(S.tkDone) || 0, g2 = Number(S.tkGoal2) || 0, tg = n < S.tkGoal ? S.tkGoal : (g2 > n ? g2 : 0), tb = tg === S.tkGoal ? S.tkBonus : S.tkBonus2;
+    var n = Number(S.tkDone) || 0, g2 = Number(S.tkGoal2) || 0, tg = 0 /* 16 nov 2026 (Jeremy): no more tiers, a fixed amount per sponsored task */, tb = 0;
     var pct = (tg ? Math.round(Math.min(n, tg) / tg * 100) : 100) + '%', key = [S.tkDone, done, B.lang, av, tg].join('|');
     var ln = tg ? T.nx(tg - n, Number(tb).toLocaleString(B.lang === 'fr' ? 'fr-FR' : 'en-US'), n, tg) : T.ok;
     // Home: right under the balance
@@ -3045,14 +3045,14 @@ function nudge() {
     // Tasks tab: the goal bar at the top
     var p = document.getElementById('p-tasks'), g = document.getElementById('tkGoalBox');
     if (p && !g) { g = document.createElement('div'); g.id = 'tkGoalBox'; var tt = document.getElementById('tTotTop'); if (tt && tt.parentNode === p) tt.insertAdjacentElement('afterend', g); else { var s2 = p.querySelector('.score'); if (s2) s2.insertAdjacentElement('afterend', g); else p.prepend(g); } }
-    if (g) g.hidden = !av && !done;
+    if (g) g.hidden = true;
     if (g && g.dataset.k !== key) { g.dataset.k = key; g.innerHTML = '<small>' + ln + '</small><div class="tkBar"><i style="width:' + pct + '"></i></div>'; }
     // red dot on the Tasks tab until the goal is reached
-    var nb = document.querySelector('nav button[data-p="tasks"]');     if (nb) nb.classList.toggle('tkDot', av && !done);
+    var nb = document.querySelector('nav button[data-p="tasks"]');     if (nb) nb.classList.toggle('tkDot', false);
   }
   setInterval(paint, 1000);
   // 2 nov 2026 (11h, Jeremy): the toast after a sponsored task also says the next reward (the state is not refreshed yet: +1)
-  window.__tkNext = function () { try { var B = window.BT, S = B.S, T = TX[B.lang === 'fr' ? 'fr' : 'en'], n = (Number(S.tkDone) || 0) + 1, g2 = Number(S.tkGoal2) || 0, tg = n < S.tkGoal ? S.tkGoal : (g2 > n ? g2 : 0); if (!tg) return ''; return T.nx(tg - n, Number(tg === S.tkGoal ? S.tkBonus : S.tkBonus2).toLocaleString(B.lang === 'fr' ? 'fr-FR' : 'en-US'), n, tg); } catch (e) { return ''; } };
+  window.__tkNext = function () { return ''; try { var B = window.BT, S = B.S, T = TX[B.lang === 'fr' ? 'fr' : 'en'], n = (Number(S.tkDone) || 0) + 1, g2 = Number(S.tkGoal2) || 0, tg = n < S.tkGoal ? S.tkGoal : (g2 > n ? g2 : 0); if (!tg) return ''; return T.nx(tg - n, Number(tg === S.tkGoal ? S.tkBonus : S.tkBonus2).toLocaleString(B.lang === 'fr' ? 'fr-FR' : 'en-US'), n, tg); } catch (e) { return ''; } };
 })();
 </script>
 <script>

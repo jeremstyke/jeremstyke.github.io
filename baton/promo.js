@@ -164,8 +164,10 @@
     }, 800);
     // 1 nov 2026 (5h58, Jeremy): the goal of the day, discreetly, right under the title of the sponsored tasks block: "10 tasks today = +5,000 $BATON · 3/10"
     var ms = document.createElement('style'); ms.textContent = '.tkMini{font-size:12px;font-weight:700;opacity:.75;margin:-2px 0 8px}'; document.head.appendChild(ms);
+    // 16 nov 2026 (Jeremy): no more tiers on the sponsored tasks, a fixed amount each time: the goal line is gone
     setInterval(function () {
       var B = window.BT, S = B && B.S, box = document.getElementById('adtask'); if (!S || S.tkGoal == null || !box) return;
+      return;
       var hd = box.querySelector('.adh'); if (!hd) return;
       /* 2 nov 2026 (13h01, Jeremy): the next reward waiting: the 10th task, then the 25th (tkGoal2) */
       var g = Number(S.tkGoal) || 10, n = Number(S.tkDone) || 0, g2 = Number(S.tkGoal2) || 0, tg = n < g ? g : (g2 > n ? g2 : 0), k = tg - n, b = nf(tg === g ? (S.tkBonus || 5000) : (S.tkBonus2 || 10000));
