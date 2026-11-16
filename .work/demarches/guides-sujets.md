@@ -2,7 +2,7 @@
 # Format : - [ ] slug/ | question visée | angle et organismes concernés
 # Règle : uniquement des informations lues sur les sites officiels (caf.fr, ants.gouv.fr, service-public.fr, impots.gouv.fr, francetravail.fr, ameli.fr, mdphenligne.cnsa.fr, demarches-simplifiees.fr, etudiant.gouv.fr, urssaf.fr, msa.fr, lassuranceretraite.fr, maprimerenov.gouv.fr)
 
-- [ ] justificatif-de-domicile/ | quel justificatif de domicile accepté pour une démarche | factures, ancienneté demandée, hébergé chez un tiers (lien vers le modèle d'attestation d'hébergement)
+- [x] justificatif-de-domicile/ | quel justificatif de domicile accepté pour une démarche | factures, ancienneté demandée, hébergé chez un tiers (lien vers le modèle d'attestation d'hébergement)
 - [ ] justificatifs-caf-changement-de-situation/ | quels justificatifs envoyer à la CAF en cas de changement de situation | séparation, naissance, déménagement, perte d'emploi ; comment les envoyer depuis Mon Compte
 - [ ] photo-identite-ants/ | photo d'identité acceptée par l'ANTS | photo numérique avec code e-photo, cabines agréées, ce qui est refusé
 - [ ] pieces-dossier-mdph/ | quelles pièces fournir pour un dossier MDPH | formulaire, certificat médical et sa durée de validité, justificatifs, dépôt en ligne
