@@ -617,3 +617,333 @@ g("meilleures-jumelles-oiseaux/",
        ("Des jumelles étanches sont-elles vraiment utiles ?", "Oui, si vous observez dehors par tous les temps. La fiche suisse recommande des jumelles étanches et remplies d'azote, ce qui protège de l'humidité et évite la buée à l'intérieur. Les fabricants l'indiquent de façon différente : profondeur et durée d'immersion, indice IPX7, ou simple mention « étanche »."),
        ("Avez-vous testé ces jumelles ?", "Non. Cette sélection repose uniquement sur les fiches publiées par les fabricants et par de grands revendeurs d'optique. Nous indiquons « non précisé » quand une donnée n'y figure pas, sans note ni avis de prise en main.")],
   short="Top 10 jumelles", cat="Observer")
+
+AUTO_META['boule-de-graisse-oiseaux/'] = ('🧈', 'sable')
+g("boule-de-graisse-oiseaux/",
+  "Boule de graisse pour oiseaux : sans filet, recette et bon moment",
+  "Boules de graisse pour les oiseaux : sans filet, faites maison, au bon moment",
+  "Pourquoi retirer le filet, quelle graisse choisir, quand en donner et comment faire vos boules maison : conseils de la LPO, de Natagora et de la Ligue belge.",
+  """
+<p>Oui, vous pouvez offrir des boules de graisse aux oiseaux du jardin, mais jamais dans leur filet, et plutôt pendant les vrais froids. Ce sont les deux points sur lesquels les associations de protection des oiseaux insistent le plus, et ce sont aussi les deux plus souvent oubliés.</p>
+<p>La graisse apporte beaucoup d'énergie à des oiseaux qui doivent tenir des nuits longues et glaciales. Mésanges, sittelles, merles ou rouges-gorges s'y intéressent. Encore faut-il choisir la bonne graisse, la présenter sans danger et savoir quand s'arrêter.</p>
+{CTA}
+
+<h2>Pourquoi faut-il enlever le filet des boules de graisse ?</h2>
+<p>Parce qu'un oiseau peut s'y prendre la patte, la langue ou le bec. Sur ce point, toutes les sources que nous avons consultées disent la même chose, et sans nuance. La Ligue royale belge pour la protection des oiseaux écrit qu'il ne faut jamais placer les boules dans des filets, car l'oiseau peut s'y piéger de façon fatale. Natagora parle d'un « piège mortel ». La fiche de la LPO Nord met en garde contre les filets à agrumes, où les oiseaux peuvent se blesser ou rester coincés par les pattes.</p>
+<p>Le geste est simple : coupez le filet avant de suspendre la boule, puis glissez-la dans un support prévu pour cela. Il existe des mangeoires « porte-boules » en grillage métallique rigide, ou des cages à pain de graisse. Le métal rigide ne se resserre pas autour d'une patte comme le fait une maille souple en plastique.</p>
+<p>Ce que beaucoup de gens oublient : le filet vide, une fois la boule mangée, reste dangereux. Ne le laissez pas pendre dans la haie.</p>
+<p><strong>Boules de graisse vendues sans filet</strong> : plus besoin de découper quoi que ce soit. <a href="{AMZ:boules de graisse oiseaux sans filet}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Support porte-boules en métal</strong> : pour suspendre plusieurs boules sans filet. <a href="{AMZ:mangeoire boules de graisse metal}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Quand donner des boules de graisse, et quand arrêter ?</h2>
+<p>Ici, les sources ne disent pas exactement la même chose, et il vaut mieux le savoir.</p>
+<p>Les associations belges sont les plus strictes. La Ligue royale belge pour la protection des oiseaux indique que les boules de graisse ne doivent être proposées qu'en période de gel prolongé, de façon exceptionnelle et temporaire. Natagora va dans le même sens : uniquement en période de gel intense en journée, et sur de courtes durées, puis plus du tout à partir du début du printemps.</p>
+<p>La fiche de la LPO Nord sur la mangeoire, elle, présente la boule de graisse maison comme une nourriture d'hiver parmi d'autres, sans condition de température. Et la LPO nationale situe plus largement l'aide alimentaire en hiver, de novembre à mars environ, comme nous l'expliquons dans notre <a href="{R}nourrir-les-oiseaux-du-jardin/">guide pour bien nourrir les oiseaux du jardin</a>.</p>
+<p><strong>Notre conseil</strong> : gardez la graisse pour les périodes de gel, surtout quand il dure plusieurs jours, et proposez plutôt des graines le reste de l'hiver. C'est la lecture la plus prudente, et elle respecte toutes les sources à la fois. Au printemps, retirez les boules : les oiseaux reviennent aux insectes, et la graisse rancit vite à la douceur.</p>
+
+<h2>Quelle graisse choisir ?</h2>
+<p>Là encore, petite divergence. La LPO Nord recommande une graisse végétale, sans additif et sans sel, du type margarine, et précise que les graisses contenant de l'huile de palme sont à proscrire, selon la politique de la LPO. Natagora accepte les graisses végétales ou animales (saindoux, couennes de lard, huile de tournesol), à condition qu'elles ne soient ni salées ni fumées.</p>
+<table><thead><tr><th>Graisse</th><th>LPO Nord</th><th>Natagora</th></tr></thead><tbody>
+<tr><td>Graisse végétale sans sel (type margarine)</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Huile de palme</td><td>À proscrire</td><td>Non précisé</td></tr>
+<tr><td>Saindoux, couenne de lard non salés, non fumés</td><td>Non cité</td><td>Oui</td></tr>
+<tr><td>Graisse salée ou fumée</td><td>Non (sans sel)</td><td>Non</td></tr>
+</tbody></table>
+<p>Dans le commerce, lisez l'étiquette : beaucoup de boules indiquent la nature de la graisse, d'autres restent vagues. Si l'huile de palme figure dans la liste, passez votre chemin. Si rien n'est précisé, préférez une marque qui l'indique clairement.</p>
+<p><strong>Pain de graisse végétale aux graines</strong> : un bloc à glisser dans une cage, pratique pour éviter les filets. <a href="{AMZ:pain de graisse vegetale oiseaux sans huile de palme}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>La recette maison de la LPO, pas à pas</h2>
+<p>La fiche de la LPO Nord propose une recette très simple. Il vous faut un mortier, un pot de yaourt vide et une cuillère.</p>
+<p>Pour les ingrédients, comptez une cuillère à café de chacun :</p>
+<ul>
+<li>graines de tournesol noires (pas les striées) ;</li>
+<li>beurre de cacahuètes non salé et non sucré, ou cacahuètes broyées ;</li>
+<li>flocons d'avoine ;</li>
+<li>raisins secs ;</li>
+<li>cerneaux de noix.</li>
+</ul>
+<p>Ajoutez-y de la graisse végétale de type margarine, sans sel. La fiche ne donne pas de quantité précise : mettez-en assez pour lier le tout, ni plus ni moins.</p>
+<p>Mélangez les graines, le beurre de cacahuètes et la graisse dans le pot. Laissez durcir quelques heures au réfrigérateur, ou dehors s'il fait froid. Une fois solide, démoulez et placez la boule dans une mangeoire porte-boules ou un petit récipient. Astuce donnée par la LPO Nord : glissez une ficelle dans le mélange avant qu'il ne fige, ce qui permet ensuite de l'accrocher. Autre variante : enrobez une pomme de pin avec la préparation et suspendez-la à une branche ou au balcon.</p>
+<p>Par exemple, si vous avez de la margarine sans sel, des flocons d'avoine et un reste de graines de tournesol, vous avez déjà presque tout. Évitez en revanche les restes de cuisine salés, le lard fumé ou le pain, que plusieurs associations déconseillent.</p>
+<p><strong>Graines de tournesol noir</strong> : la base de la recette, et de la mangeoire en général. <a href="{AMZ:graines de tournesol noir oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+<p>Pour savoir quelles autres graines ajouter, voyez notre article <a href="{R}quelles-graines-pour-les-oiseaux/">quelles graines pour les oiseaux</a>.</p>
+
+<h2>Où accrocher la boule et comment garder tout ça propre ?</h2>
+<p>Une boule de graisse est une mangeoire comme une autre, avec les mêmes règles d'hygiène. La Ligue belge conseille de ne mettre que la quantité nécessaire pour 24 heures. La LPO Nord rappelle de ne pas trop en donner d'un coup, pour éviter la moisissure. Une boule qui reste des jours sous la pluie, ou qui ramollit au soleil, n'a plus rien à faire dehors.</p>
+<p>Pour l'emplacement, la Ligue belge recommande de placer les points de nourrissage à moins d'un mètre ou à plus de dix mètres d'une vitre, pour limiter les chocs. Pensez aussi aux chats : une boule accrochée bas, à côté d'un buisson où un chat peut se cacher, devient un piège.</p>
+<p>Côté entretien, nettoyez régulièrement le support à l'eau chaude savonneuse. La fréquence varie selon les sources : la Ligue belge parle idéalement de tous les quinze jours, Natagora d'un brossage quotidien et d'un nettoyage régulier. Retenez qu'un support sale ou moisi se nettoie tout de suite, sans attendre la date prévue. Et si vous voyez des oiseaux malades, la Ligue belge conseille d'arrêter le nourrissage et de tout désinfecter.</p>
+<p>Si vous cherchez une mangeoire complète en plus du support à graisse, notre sélection des <a href="{R}meilleure-mangeoire-oiseaux/">meilleures mangeoires pour oiseaux</a> compare silos, plateaux et modèles à cage.</p>
+
+<h2>Les erreurs qu'on voit le plus souvent</h2>
+<ul>
+<li><strong>Laisser le filet</strong> « parce que c'est plus pratique pour accrocher ». C'est justement le danger.</li>
+<li><strong>Donner de la graisse tout l'hiver sans regarder le thermomètre.</strong> Les associations belges la réservent au gel.</li>
+<li><strong>Prendre une graisse salée</strong> ou des restes de charcuterie. Toutes les sources demandent une graisse sans sel.</li>
+<li><strong>Oublier la boule au printemps.</strong> Elle rancit, et les oiseaux doivent revenir à leur nourriture naturelle.</li>
+<li><strong>Accrocher au ras du sol</strong>, à portée des chats.</li>
+</ul>
+<p>Envie de les observer de plus près pendant qu'ils picorent ? Une paire de jumelles légère suffit au jardin : voyez notre comparatif des <a href="{R}meilleures-jumelles-oiseaux/">meilleures jumelles pour observer les oiseaux</a>.</p>
+<p><strong>Mangeoire à pain de graisse avec toit</strong> : la graisse reste à l'abri de la pluie. <a href="{AMZ:mangeoire pain de graisse toit oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+""",
+  faq=[("Peut-on laisser les boules de graisse dans leur filet ?", "Non. La LPO Nord, Natagora et la Ligue royale belge pour la protection des oiseaux déconseillent toutes les filets, où les oiseaux peuvent se prendre les pattes ou se blesser gravement. Retirez le filet et placez la boule dans un support métallique rigide, ou achetez des boules vendues sans filet."),
+       ("Quand donner des boules de graisse aux oiseaux ?", "En hiver, et surtout par temps de gel. Natagora et la Ligue belge les réservent aux périodes de gel intense ou prolongé, pour de courtes durées. La LPO situe l'aide alimentaire de novembre à mars environ. Dans tous les cas, on arrête au printemps."),
+       ("Quelle graisse utiliser pour une boule maison ?", "La LPO Nord recommande une graisse végétale sans sel ni additif, du type margarine, et proscrit l'huile de palme. Natagora accepte aussi les graisses animales comme le saindoux, à condition qu'elles ne soient ni salées ni fumées.")],
+  short="Boules de graisse", cat="Nourrir")
+
+AUTO_META['meilleure-mangeoire-oiseaux/'] = ('🏆', 'mousse')
+g("meilleure-mangeoire-oiseaux/",
+  "Meilleure mangeoire pour oiseaux 2026 : 10 modèles comparés",
+  "Les meilleures mangeoires pour oiseaux : silos, plateau et modèles anti-écureuils",
+  "Silos, plateau avec toit, mangeoires à cage ou anti-écureuils : 10 mangeoires pour oiseaux comparées d'après les fiches des fabricants et des revendeurs.",
+  """
+<p>La meilleure mangeoire pour la plupart des jardins, c'est un silo facile à démonter et à laver, accroché en hauteur, loin des cachettes des chats. Si des écureuils ou de gros oiseaux vident tout en une matinée, un modèle à cage ou à fermeture par le poids change la donne.</p>
+<p>Nous avons rassemblé dix mangeoires réelles, toutes trouvées sur Amazon.fr sauf une, que nous signalons. Il y a de petits silos, des grands, deux maisonnettes, un plateau sur piquet et des modèles conçus contre les écureuils.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
+
+<h2>Le comparatif en un coup d'œil</h2>
+<table><thead><tr><th>Modèle</th><th>Type</th><th>Contenance</th><th>Accès</th><th>Contre écureuils ou gros oiseaux</th></tr></thead><tbody>
+<tr><td>Squirrel Buster Legacy</td><td>Silo</td><td>env. 1,2 kg</td><td>4 ports</td><td>Oui, grillage qui se ferme sous le poids</td></tr>
+<tr><td>Squirrel Buster Mini</td><td>Petit silo</td><td>env. 450 g</td><td>4 ports</td><td>Oui, même principe</td></tr>
+<tr><td>Droll Yankees Yankee Whipper</td><td>Silo tube</td><td>env. 2,3 kg</td><td>4 ports</td><td>Oui, perchoirs qui se rabattent</td></tr>
+<tr><td>Perky-Pet Squirrel-Be-Gone III (337)</td><td>Silo maisonnette, 3 tubes</td><td>env. 3,6 kg</td><td>9 postes</td><td>Oui, volet actionné par le poids</td></tr>
+<tr><td>Windhager Ranch</td><td>Silo avec toit</td><td>env. 4,75 L</td><td>2 ouvertures</td><td>Non précisé</td></tr>
+<tr><td>Windhager Wilder Kaiser</td><td>Maisonnette silo en bois</td><td>env. 3 L</td><td>Non précisé</td><td>Non précisé</td></tr>
+<tr><td>Esschert Design table sur piquet</td><td>Plateau avec toit</td><td>Non précisé</td><td>Plateau ouvert</td><td>Non</td></tr>
+<tr><td>Roamwild PestOff</td><td>Distributeur de graisse</td><td>1,5 ou 2 L selon la page</td><td>Ports à ressort</td><td>Oui, ports qui se ferment sous le poids</td></tr>
+<tr><td>CJ Wildlife silo métal 6 ouvertures</td><td>Silo tube</td><td>Non précisé</td><td>6 ouvertures</td><td>Non précisé</td></tr>
+<tr><td>Vivara silo Bruxelles avec protection</td><td>Silo dans une cage</td><td>Non précisé</td><td>4 ouvertures</td><td>Oui, cage contre les oiseaux plus gros</td></tr>
+</tbody></table>
+<p>Les contenances viennent des fiches, parfois converties depuis des unités américaines. Elles varient d'une source à l'autre pour deux modèles, comme indiqué plus bas.</p>
+
+<h2>1. Squirrel Buster Legacy : le silo anti-écureuils réglable</h2>
+<p><strong>Pour qui ?</strong> Un jardin où les écureuils viennent se servir, avec une envie de garder la mangeoire pour les mésanges, pinsons et verdiers.</p>
+<p>Le principe est malin : quand un animal trop lourd s'accroche, son poids fait descendre un grillage qui ferme les quatre ports. Selon Brome Bird Care, un ressort permet de régler le poids qui déclenche la fermeture. Le silo mesure environ 14 x 14 x 41 cm et contient à peu près 1,2 kg de graines.</p>
+<ul>
+<li><strong>Points forts</strong> : fermeture réglable, pièces exposées conçues pour résister aux morsures, démontage à la main sans outil, ce qui facilite vraiment le nettoyage.</li>
+<li><strong>Limites</strong> : le fabricant précise lui-même qu'il n'arrête pas les étourneaux. Il parle de « certains gros oiseaux » bloqués, sans citer les pigeons. Il faut aussi environ 47 cm de dégagement tout autour.</li>
+</ul>
+<p><a href="{AMZ:Squirrel Buster Legacy}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Squirrel Buster Mini : la version compacte pour un petit coin</h2>
+<p><strong>Pour qui ?</strong> Un balcon ou un petit jardin, avec peu d'oiseaux à la fois mais des écureuils curieux.</p>
+<p>Même mécanisme que le Legacy, en plus petit : environ 10,5 x 10,5 x 31,4 cm, quatre ports avec perchoir. Le fabricant annonce environ 450 g de graines, la fiche Amazon 0,4 kg.</p>
+<ul>
+<li><strong>Points forts</strong> : se démonte sans outil, matériaux résistants aux UV selon Brome Bird Care, encombrement réduit.</li>
+<li><strong>Limites</strong> : mécanisme non réglable, et petite réserve. Quand le froid dure et que les mésanges arrivent en nombre, il faudra le remplir souvent. N'arrête pas les étourneaux non plus.</li>
+</ul>
+<p><a href="{AMZ:Squirrel Buster Mini}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Droll Yankees Yankee Whipper : des perchoirs qui se dérobent</h2>
+<p><strong>Pour qui ?</strong> Quelqu'un qui veut un grand silo tube, avec une grosse réserve, dans un jardin fréquenté par les écureuils.</p>
+<p>Ici, ce sont les perchoirs qui se rabattent dès qu'un poids d'environ 57 g s'y pose, d'après le fabricant. Le tube en polycarbonate stabilisé UV contient environ 2,3 kg. Le chapeau lourd empêche de soulever le tube par le haut.</p>
+<ul>
+<li><strong>Points forts</strong> : grande contenance, boucle de suspension en inox, conseils d'installation précis (environ 1,2 m du sol et 2,4 m de tout point d'appui pour les écureuils).</li>
+<li><strong>Limites</strong> : ne passe pas au lave-vaisselle, et le démontage n'est pas détaillé. Le fabricant conseille un trempage dans de l'eau javellisée puis un brossage. Grand silo, donc risque de graines qui restent longtemps si peu d'oiseaux viennent.</li>
+</ul>
+<p><a href="{AMZ:Droll Yankees Yankee Whipper}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Perky-Pet Squirrel-Be-Gone III (337) : trois graines dans une seule mangeoire</h2>
+<p><strong>Pour qui ?</strong> Un grand jardin où beaucoup d'espèces se croisent, et où vous aimeriez proposer plusieurs types de graines à la fois.</p>
+<p>C'est une maisonnette en métal à trois tubes, avec neuf postes et perchoirs en U. Contenance annoncée : environ 3,6 kg. Un volet actionné par le poids ferme les ports, et le couvercle se verrouille en tournant.</p>
+<ul>
+<li><strong>Points forts</strong> : trois compartiments pour varier tournesol, petites graines et autres, cadre métal contre le rongement.</li>
+<li><strong>Limites</strong> : à suspendre uniquement, le fabricant précise qu'elle n'est pas faite pour un poteau. Démontage détaillé non précisé. Avec 3,6 kg, ne la remplissez pas à ras bord si la fréquentation est faible.</li>
+</ul>
+<p><a href="{AMZ:Perky-Pet Squirrel-Be-Gone III 337}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Windhager Ranch : un silo simple avec toit, à suspendre ou poser</h2>
+<p><strong>Pour qui ?</strong> Un premier silo sans gadget, pour un jardin sans problème d'écureuils.</p>
+<p>Parois transparentes pour voir le niveau, toit rouge amovible pour remplir, contenance d'environ 4,75 L selon Windhager. Il se suspend avec le cordon fourni ou se pose sur un pied.</p>
+<ul>
+<li><strong>Points forts</strong> : deux modes d'installation, grande réserve, niveau de graines visible d'un coup d'œil.</li>
+<li><strong>Limites</strong> : seulement deux ouvertures, dimensions et protection contre les nuisibles non précisées. Rien sur le démontage pour le nettoyage.</li>
+</ul>
+<p><a href="{AMZ:Windhager Ranch 06937}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Windhager Wilder Kaiser : la maisonnette en bois qui fonctionne en silo</h2>
+<p><strong>Pour qui ?</strong> Ceux qui veulent l'allure d'une petite maison en bois sans les inconvénients d'un plateau ouvert.</p>
+<p>Le bois massif est présenté comme résistant aux intempéries, avec des vitres sur les deux côtés pour surveiller la réserve, d'environ 3 L. Windhager parle d'une « construction silo hygiénique » : les graines descendent au fur et à mesure au lieu de rester étalées.</p>
+<ul>
+<li><strong>Points forts</strong> : esthétique, réserve visible, remplissage par le toit amovible, cordon fourni.</li>
+<li><strong>Limites</strong> : dimensions, nombre d'accès et nettoyage non précisés. Le bois se lave moins facilement que le métal ou le plastique.</li>
+</ul>
+<p><a href="{AMZ:Windhager Wilder Kaiser mangeoire}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Esschert Design table mangeoire sur piquet : le plateau avec toit</h2>
+<p><strong>Pour qui ?</strong> Un jardin sans arbre ni branche pour suspendre, et l'envie de voir merles, rouges-gorges et moineaux se poser à découvert.</p>
+<p>Un plateau en pin coiffé d'un toit en zinc, sur un piquet à planter. L'ensemble mesure 28 x 28 x 120 cm. Le titre Amazon mentionne aussi un crochet pour boule de graisse.</p>
+<ul>
+<li><strong>Points forts</strong> : se plante n'importe où, le toit protège les graines de la pluie, et le plateau convient aux oiseaux qui s'accrochent mal aux silos.</li>
+<li><strong>Limites</strong> : c'est le modèle le plus exigeant en hygiène. La Ligue royale belge pour la protection des oiseaux préfère les silos et trémies, et estime que les plateaux demandent encore plus d'attention. Aucune protection contre les écureuils ou les pigeons. Le revendeur affirme que le piquet la tient hors de portée des chats : placez-la quand même loin des buissons.</li>
+</ul>
+<p><a href="{AMZ:Esschert Design table mangeoire piquet}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Roamwild PestOff : pour la graisse, pas pour les graines</h2>
+<p><strong>Pour qui ?</strong> Ceux qui veulent proposer de la graisse sans filet ni pillage par les écureuils pendant les périodes de gel.</p>
+<p>Ce distributeur accueille des pépites de suif ou des boules de graisse émiettées. Ses ports à ressort se ferment sous le poids des écureuils et des oiseaux plus lourds, et deux déflecteurs complètent le dispositif. Dimensions : 19 x 19 x 45 cm.</p>
+<ul>
+<li><strong>Points forts</strong> : graisse à l'abri de la pluie grâce au pare-pluie intégré, démontage sans outil, nettoyage à l'eau savonneuse et au goupillon selon le fabricant.</li>
+<li><strong>Limites</strong> : la page du fabricant annonce à la fois 1,5 L et 2 L. Usage limité à la graisse. Pour savoir quand en donner, lisez notre article sur les <a href="{R}boule-de-graisse-oiseaux/">boules de graisse pour oiseaux</a>.</li>
+</ul>
+<p><a href="{AMZ:Roamwild PestOff}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>9. CJ Wildlife silo métal 6 ouvertures : robuste et sans mécanisme</h2>
+<p><strong>Pour qui ?</strong> Un jardin très fréquenté par les petits passereaux, sans souci d'écureuils.</p>
+<p>Zinc moulé thermolaqué, tube en polycarbonate stabilisé UV, 6 ouvertures avec perchoirs en anneau, 588 mm de haut pour un peu plus de 500 g, selon Vivara qui distribue la marque. La base inclinée permet aux oiseaux de finir toutes les graines, ce qui limite les restes qui moisissent au fond.</p>
+<ul>
+<li><strong>Points forts</strong> : six accès, matériaux solides, crochet fourni.</li>
+<li><strong>Limites</strong> : contenance et protection anti-écureuils non précisées. Sur Amazon.fr, nous avons trouvé un silo CJ Wildlife vert en métal sans pouvoir confirmer qu'il s'agit exactement de ce modèle : vérifiez la description.</li>
+</ul>
+<p><a href="{AMZ:CJ Wildlife silo metal vert 6 ouvertures}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>10. Vivara silo Bruxelles avec protection : la cage pour les petites espèces</h2>
+<p><strong>Pour qui ?</strong> Un jardin où les mésanges se font chasser par des oiseaux plus gros et plus agressifs.</p>
+<p>Le silo à quatre ouvertures est enfermé dans une cage intégrée. Selon Vivara, les petites espèces mangent tranquillement pendant que les oiseaux plus gros restent dehors. Cage et silo se séparent sans tournevis, en tournant le couvercle.</p>
+<ul>
+<li><strong>Points forts</strong> : vraie sélection par la taille, nettoyage facilité, résistance annoncée aux dégâts des écureuils.</li>
+<li><strong>Limites</strong> : contenance, taille des mailles et fixation non précisées, et les ouvertures ne se démontent pas. Nous ne l'avons pas trouvé sur Amazon.fr : il est vendu chez Vivara. Le lien ci-dessous mène à des modèles à cage comparables.</li>
+</ul>
+<p><a href="{AMZ:mangeoire silo cage protection petits oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Silo, plateau ou cage : comment choisir votre mangeoire ?</h2>
+<p><strong>Pensez d'abord au nettoyage.</strong> Une mangeoire sale peut transmettre des maladies. La Ligue royale belge pour la protection des oiseaux conseille de la laver idéalement tous les quinze jours à l'eau chaude savonneuse ; Natagora va plus loin avec un brossage quotidien et un nettoyage régulier. Dans les deux cas, un modèle qui se démonte sans outil vous fera gagner du temps, et vous le nettoierez plus volontiers.</p>
+<p><strong>Ne surdimensionnez pas.</strong> La Ligue belge recommande de ne proposer que la quantité nécessaire pour 24 heures. Une grande réserve n'est donc pas un avantage en soi. Par exemple, avec un silo de 3 kg et seulement quelques mésanges, remplissez-le à moitié plutôt que de laisser des graines vieillir à l'humidité.</p>
+<p><strong>Choisissez le type selon vos visiteurs.</strong> Le silo convient aux mésanges, pinsons et verdiers qui s'accrochent. Le plateau attire aussi merles et rouges-gorges, mais demande plus d'entretien. La cage ou la fermeture par le poids n'a d'intérêt que si écureuils ou gros oiseaux posent vraiment problème.</p>
+<p><strong>Placez-la bien.</strong> La Ligue belge conseille de mettre les mangeoires à moins d'un mètre ou à plus de dix mètres d'une vitre. Évitez les buissons où un chat peut se cacher.</p>
+<p><strong>Notre conseil</strong> : pour un jardin ordinaire, un silo qui se démonte facilement, comme le Squirrel Buster Legacy, est le meilleur point de départ, parce que l'hygiène compte plus que la contenance. Prenez un modèle à cage seulement si vous voyez les petits oiseaux se faire chasser.</p>
+<p>Pour savoir quoi mettre dedans, voyez notre article <a href="{R}quelles-graines-pour-les-oiseaux/">quelles graines pour les oiseaux</a>, et notre <a href="{R}nourrir-les-oiseaux-du-jardin/">guide pour bien nourrir les oiseaux du jardin</a> pour le calendrier. Si vous voulez photographier vos visiteurs, regardez aussi les <a href="{R}meilleure-mangeoire-connectee/">meilleures mangeoires connectées</a>.</p>
+""",
+  faq=[("Quelle mangeoire choisir pour éviter les écureuils ?", "Un modèle dont l'accès se ferme sous le poids d'un animal trop lourd : grillage mobile (Squirrel Buster), perchoirs qui se rabattent (Droll Yankees Yankee Whipper) ou volet (Perky-Pet 337). Accrochez-la aussi loin des branches et des murs, à la distance indiquée par le fabricant."),
+       ("Silo ou plateau, lequel est le plus hygiénique ?", "Le silo. La Ligue royale belge pour la protection des oiseaux préfère les mangeoires de type silo ou trémie et juge que les plateaux demandent encore plus d'attention, car les graines y restent étalées et se salissent plus vite."),
+       ("Avez-vous testé ces mangeoires ?", "Non. Cette sélection repose sur les fiches publiées par les fabricants et par des revendeurs. Quand une donnée n'y figure pas, nous écrivons « non précisé », sans note ni avis de prise en main.")],
+  short="Top 10 mangeoires", cat="Mangeoires")
+
+AUTO_META['meilleur-guide-oiseaux/'] = ('🏆', 'lilas')
+g("meilleur-guide-oiseaux/",
+  "Meilleur guide d'identification des oiseaux 2026 : top 10",
+  "Les meilleurs guides pour identifier les oiseaux : 10 livres en français",
+  "Guide ornitho, Tous les oiseaux d'Europe, Belin, Salamandre, Ulmer : 10 guides d'identification des oiseaux en français, du débutant au passionné, comparés.",
+  """
+<p>Pour reconnaître les oiseaux de votre jardin, un petit guide centré sur les espèces communes suffit largement au début. Si vous voulez tout identifier, des mouettes en baie de Somme aux fauvettes de passage, le guide ornitho de Delachaux reste la référence la plus complète.</p>
+<p>Entre les deux, il existe beaucoup de livres, et ils ne servent pas à la même chose. Voici dix guides en français, tous réels et présents sur Amazon.fr, avec ce qu'ils contiennent selon leur éditeur ou un grand libraire.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
+
+<h2>Les 10 guides en un tableau</h2>
+<table><thead><tr><th>Livre</th><th>Éditeur</th><th>Parution</th><th>Format</th><th>Pages</th><th>Espèces</th></tr></thead><tbody>
+<tr><td>Le guide ornitho (3e édition)</td><td>Delachaux et Niestlé</td><td>2023</td><td>Broché</td><td>476</td><td>près de 900</td></tr>
+<tr><td>Tous les oiseaux d'Europe</td><td>Delachaux et Niestlé</td><td>2023</td><td>Broché</td><td>527</td><td>plus de 930</td></tr>
+<tr><td>Guide des oiseaux d'Europe, manuel d'identification photographique</td><td>Biotope</td><td>2023</td><td>Relié</td><td>640</td><td>900</td></tr>
+<tr><td>Tous les oiseaux de France, de Belgique, de Suisse et du Luxembourg</td><td>Delachaux</td><td>2020</td><td>Broché</td><td>320</td><td>plus de 650</td></tr>
+<tr><td>Le petit Larousse des oiseaux de France et d'Europe</td><td>Larousse</td><td>2021</td><td>Relié</td><td>416</td><td>plus de 545</td></tr>
+<tr><td>Guide Heinzel des oiseaux d'Europe</td><td>Delachaux et Niestlé</td><td>2020</td><td>Non précisé</td><td>384</td><td>plus de 900</td></tr>
+<tr><td>Guide des oiseaux de France</td><td>Belin</td><td>2017</td><td>Broché</td><td>528</td><td>500</td></tr>
+<tr><td>Le guide nature : Les oiseaux (2e édition)</td><td>La Salamandre</td><td>2022</td><td>Non précisé</td><td>228</td><td>plus de 500</td></tr>
+<tr><td>Identifier les oiseaux par la couleur</td><td>Delachaux</td><td>2022</td><td>Broché</td><td>224</td><td>Non précisé</td></tr>
+<tr><td>Reconnaître facilement les oiseaux du jardin</td><td>Ulmer</td><td>2026</td><td>Non précisé</td><td>128</td><td>70</td></tr>
+</tbody></table>
+<p>Plusieurs de ces livres existent en éditions plus anciennes, encore vendues d'occasion ou en neuf. Avant de commander, vérifiez l'année ou l'ISBN que nous indiquons.</p>
+
+<h2>1. Le guide ornitho (3e édition) : la référence pour tout identifier</h2>
+<p><strong>Pour qui ?</strong> L'observateur qui a dépassé le stade du jardin et veut un seul livre pour l'Europe, l'Afrique du Nord et le Moyen-Orient.</p>
+<p>Texte de Lars Svensson, illustrations de Killian Mullarney et Dan Zetterström. Selon la fiche du libraire Mollat, cette édition d'octobre 2023 couvre près de 900 espèces, avec 200 planches, 4 000 illustrations et 700 cartes de répartition. Elle ajoute 50 espèces et 32 pages par rapport à la précédente. Broché, 20 x 14 cm, 476 pages (ISBN 9782603029725).</p>
+<ul>
+<li><strong>Points forts</strong> : 4 000 illustrations et 700 cartes actualisées, la couverture la plus large de cette sélection en dessins. Les chants sont décrits dans le texte.</li>
+<li><strong>Limites</strong> : pour quelqu'un qui débute avec les mésanges de sa mangeoire, c'est beaucoup d'espèces qu'il ne verra jamais. Pas de sons à écouter mentionnés.</li>
+</ul>
+<p><a href="{AMZ:le guide ornitho Svensson Delachaux 3e edition}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Tous les oiseaux d'Europe : le choix photo de Jiguet et Audevard</h2>
+<p><strong>Pour qui ?</strong> Celui qui préfère les photos aux dessins et veut un guide européen très complet.</p>
+<p>Frédéric Jiguet et Aurélien Audevard, Delachaux et Niestlé, avril 2023. D'après Mollat : plus de 930 espèces toutes illustrées, plus de 3 000 photos détourées annotées de flèches et plus de 800 cartes. Des doubles pages traitent les identifications délicates. Broché, 527 pages.</p>
+<ul>
+<li><strong>Points forts</strong> : les flèches sur les photos montrent directement le détail qui compte, et les cas difficiles ont leurs pages.</li>
+<li><strong>Limites</strong> : 21 x 16 cm, un format plus grand que la poche, à garder plutôt dans le sac ou à la maison.</li>
+</ul>
+<p><a href="{AMZ:Tous les oiseaux d'Europe Jiguet Audevard Delachaux}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Guide des oiseaux d'Europe (Biotope) : le plus riche en photos</h2>
+<p><strong>Pour qui ?</strong> Le passionné qui veut voir chaque plumage en photo : mâle, femelle, jeune, plumage nuptial ou d'hiver.</p>
+<p>Rob Hume, Robert Still, Andy Swash et Hugh Harrop, aux éditions Biotope. Selon l'éditeur, 900 espèces et plus de 4 700 photographies, avec la mue, les vocalisations, la répartition et l'habitat. Relié, 15,5 x 21,5 cm, 640 pages.</p>
+<ul>
+<li><strong>Points forts</strong> : le plus grand nombre de photos de cette sélection, et tous les plumages couverts.</li>
+<li><strong>Limites</strong> : 640 pages reliées, c'est un livre de bibliothèque plus qu'un guide de poche. Les cartes ne sont pas mentionnées sur les fiches consultées.</li>
+</ul>
+<p><a href="{AMZ:Guide des oiseaux d'Europe manuel d'identification photographique Biotope}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Tous les oiseaux de France, de Belgique, de Suisse et du Luxembourg</h2>
+<p><strong>Pour qui ?</strong> Celui qui observe surtout en France et veut un guide photo plus léger que les grands guides européens.</p>
+<p>Les mêmes auteurs que le n°2, chez Delachaux, en 2020. Plus de 650 espèces observées en France, environ 1 500 photos. Pour chaque espèce : cris, habitat, répartition en France et confusions possibles. Broché, 13,7 x 19 cm, 320 pages.</p>
+<ul>
+<li><strong>Points forts</strong> : format compact, zone limitée à nos régions, ce qui évite de feuilleter des espèces d'Afrique du Nord.</li>
+<li><strong>Limites</strong> : édition de 2020, et les cartes ne sont pas précisées sur les fiches lues.</li>
+</ul>
+<p><a href="{AMZ:Tous les oiseaux de France Jiguet Audevard Delachaux}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Le petit Larousse des oiseaux de France et d'Europe : à feuilleter chez soi</h2>
+<p><strong>Pour qui ?</strong> Une famille qui veut un beau livre de référence sur la table du salon, près de la fenêtre qui donne sur la mangeoire.</p>
+<p>Encore Jiguet et Audevard, cette fois chez Larousse, en 2021. Plus de 545 espèces recensées en France métropolitaine, avec pour chacune les critères d'identification et les risques de confusion. Relié, 20,4 x 24,3 cm, 416 pages.</p>
+<ul>
+<li><strong>Points forts</strong> : grand format confortable à lire, centré sur la France.</li>
+<li><strong>Limites</strong> : trop grand pour partir en balade. Le type d'illustrations (photos ou dessins) n'est pas précisé sur la fiche consultée.</li>
+</ul>
+<p><a href="{AMZ:Le petit Larousse des oiseaux de France et d'Europe Jiguet}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Guide Heinzel : tout sur la même page</h2>
+<p><strong>Pour qui ?</strong> Celui qui aime les dessins et déteste tourner les pages entre la planche, le texte et la carte.</p>
+<p>Hermann Heinzel, Richard Fitter et John Parslow, Delachaux et Niestlé, édition de mai 2020. Plus de 900 espèces et plus de 3 000 dessins. Le texte, la carte et les illustrations de chaque espèce sont réunis sur la même page, avec un sommaire illustré. 384 pages.</p>
+<ul>
+<li><strong>Points forts</strong> : mise en page très lisible, âge, sexe et sous-espèces notables indiqués.</li>
+<li><strong>Limites</strong> : reliure non précisée sur la fiche consultée. Plus de 900 espèces, donc là aussi beaucoup pour un débutant de jardin.</li>
+</ul>
+<p><a href="{AMZ:Guide Heinzel des oiseaux d'Europe Delachaux}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Guide des oiseaux de France (Belin) : avec les chants sur smartphone</h2>
+<p><strong>Pour qui ?</strong> Celui qui veut apprendre les chants en même temps que les plumages.</p>
+<p>Jérôme Morin, Gérard Guillot et Julien Norwood, chez Belin, en 2017. 500 espèces, soit presque toutes celles observables en France, en Belgique et au Luxembourg. Environ 1 000 photos et 500 illustrations. Selon le libraire NHBS, 360 chants ou cris s'écoutent sur smartphone grâce à des QR codes. Broché, 528 pages.</p>
+<ul>
+<li><strong>Points forts</strong> : photos et dessins réunis, et des sons à écouter, ce qui aide énormément au printemps quand on entend plus qu'on ne voit.</li>
+<li><strong>Limites</strong> : édition de 2017, la plus ancienne de cette sélection. Cartes non précisées.</li>
+</ul>
+<p><a href="{AMZ:Guide des oiseaux de France Belin Morin}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Le guide nature : Les oiseaux (La Salamandre) : rangé par milieu</h2>
+<p><strong>Pour qui ?</strong> Le promeneur qui se demande d'abord « qu'est-ce qu'on voit ici ? » plutôt que « à quelle famille appartient cet oiseau ? ».</p>
+<p>Ouvrage collectif dirigé par Alessandro Staehli, 2e édition parue en avril 2022. D'après l'éditeur, plus de 500 espèces et plus de 1 000 dessins originaux. L'ouvrage est organisé par groupe et par milieu (champs, villes, jardins, lacs, rivières, mers, montagnes), avec une partie sur les traces et indices et une autre sur les migrations et les chants. 14 x 18,5 cm, 228 pages selon la pagination provisoire de la fiche éditeur.</p>
+<ul>
+<li><strong>Points forts</strong> : approche par milieu très intuitive, format compact, traces et indices en bonus.</li>
+<li><strong>Limites</strong> : reliure non précisée, pas de sons mentionnés.</li>
+</ul>
+<p><a href="{AMZ:Le guide nature les oiseaux Salamandre}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>9. Identifier les oiseaux par la couleur : le plus simple pour débuter</h2>
+<p><strong>Pour qui ?</strong> Le vrai débutant, qui voit « un petit oiseau jaune et vert » et ne sait pas par où commencer.</p>
+<p>Marc Duquet, illustrations de François Desbordes, Delachaux, édition revue de mai 2022. Les oiseaux sont classés par silhouette puis par couleur. Chaque espèce a une photo et des dessins annotés de ses plumages, avec habitat, répartition et comportement. Cette édition ajoute 14 espèces. Broché, 15,5 x 21 cm, 224 pages.</p>
+<ul>
+<li><strong>Points forts</strong> : la méthode la plus naturelle quand on ne connaît pas encore les familles d'oiseaux.</li>
+<li><strong>Limites</strong> : nombre total d'espèces non précisé pour cette édition (l'édition 2014 annonçait près de 200 espèces communes). Vous en ferez vite le tour si vous progressez.</li>
+</ul>
+<p><a href="{AMZ:Identifier les oiseaux par la couleur Duquet}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>10. Reconnaître facilement les oiseaux du jardin (Ulmer) : juste ce qu'il faut</h2>
+<p><strong>Pour qui ?</strong> Celui qui veut mettre un nom sur les visiteurs de sa mangeoire, et rien de plus.</p>
+<p>Daniela Strauss, éditions Ulmer, collection « Grandeur Nature », parution de janvier 2026. Selon Nature et Découvertes, 70 espèces courantes au jardin, dont 10 nouvelles dans cette édition, et plus de 235 photos. Pour chacune : critères d'identification, nid ou nichoir, habitat et mode de vie. Les chants s'écoutent par QR codes. 128 pages.</p>
+<ul>
+<li><strong>Points forts</strong> : l'édition la plus récente de la sélection, centrée sur le jardin, avec des sons et des infos sur les nichoirs.</li>
+<li><strong>Limites</strong> : 70 espèces seulement, inutile en balade loin de chez vous. Format non précisé. Sur Amazon, une ancienne édition existe aussi : prenez celle de 2026.</li>
+</ul>
+<p><a href="{AMZ:Reconnaitre facilement les oiseaux du jardin Strauss Ulmer}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Débutant ou passionné : quel guide prendre ?</h2>
+<p><strong>Regardez d'abord la zone couverte.</strong> Un guide « Europe, Afrique du Nord et Moyen-Orient » compte près de 900 espèces. C'est formidable quand on voyage ou qu'on traque les raretés, mais au jardin, vous verrez une poignée d'espèces, toujours les mêmes. Un guide limité à la France ou au jardin vous fera gagner du temps.</p>
+<p><strong>Dessins ou photos ?</strong> Les dessins (guide ornitho, Heinzel, Salamandre) montrent l'oiseau dans une pose type, avec tous les critères bien visibles. Les photos (Jiguet et Audevard, Biotope) montrent l'oiseau tel qu'on le voit vraiment, avec la lumière et les reflets. Rien n'empêche d'avoir un guide de chaque, ils se complètent bien.</p>
+<p><strong>Pensez au son.</strong> Au printemps, on entend souvent l'oiseau bien avant de le voir. Les guides Belin et Ulmer proposent des chants par QR code. Pour aller plus loin, le même éditeur Delachaux publie un livre entier sur les chants, « Chants et cris d'oiseaux » de Stanislas Wroza.</p>
+<p><strong>Et le format.</strong> Un guide relié de 640 pages reste à la maison. Si vous l'emportez en balade, visez un broché compact comme « Tous les oiseaux de France ».</p>
+<p><strong>Notre conseil</strong> : pour un jardin, commencez par le guide Ulmer ou celui de Marc Duquet, parce qu'ils ne vous noient pas sous des centaines d'espèces. Le jour où vous voulez identifier ce que vous voyez en balade, passez au guide ornitho ou à « Tous les oiseaux de France ».</p>
+<p>Un guide sert encore mieux avec de bonnes jumelles : voyez notre comparatif des <a href="{R}meilleures-jumelles-oiseaux/">meilleures jumelles pour observer les oiseaux</a>. Et pour faire venir les oiseaux sous vos fenêtres, notre <a href="{R}nourrir-les-oiseaux-du-jardin/">guide pour bien nourrir les oiseaux du jardin</a> et notre sélection des <a href="{R}meilleure-mangeoire-oiseaux/">meilleures mangeoires pour oiseaux</a> vous aideront.</p>
+""",
+  faq=[("Quel guide des oiseaux choisir pour débuter ?", "Un guide centré sur les espèces communes. « Reconnaître facilement les oiseaux du jardin » (Ulmer, 70 espèces) et « Identifier les oiseaux par la couleur » de Marc Duquet (Delachaux), qui classe les oiseaux par silhouette et par couleur, sont les plus accessibles de notre sélection."),
+       ("Quel est le guide d'identification le plus complet ?", "Parmi les guides en dessins, « Le guide ornitho » de Lars Svensson (Delachaux et Niestlé, 3e édition 2023) couvre près de 900 espèces. En photos, « Tous les oiseaux d'Europe » de Jiguet et Audevard annonce plus de 930 espèces, et le guide photographique de Biotope plus de 4 700 photos."),
+       ("Avez-vous lu tous ces livres ?", "Non. Cette sélection s'appuie sur les fiches des éditeurs et de grands libraires : titres, auteurs, formats, nombre de pages et contenu annoncé. Nous indiquons « non précisé » quand une donnée manque, sans note ni avis de lecture.")],
+  short="Top 10 guides oiseaux", cat="Observer")

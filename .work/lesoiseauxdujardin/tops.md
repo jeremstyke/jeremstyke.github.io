@@ -1,7 +1,7 @@
 # Tops 10 à venir pour Les oiseaux du jardin (un par jour)
 # Déjà publiés : meilleure-mangeoire-connectee/, meilleures-jumelles-oiseaux/
-- [ ] meilleure-mangeoire-oiseaux/ | meilleure mangeoire pour oiseaux | Mangeoires | silos, plateaux avec toit, sélectives
-- [ ] meilleur-guide-oiseaux/ | meilleur guide d'identification des oiseaux | Observer | guides de terrain connus ; titres, auteurs, éditeurs et éditions lus sur la page de l'éditeur ou d'un grand libraire (Fnac, Decitre, Cultura) et vérifiés sur Amazon.fr ; uniquement des livres réels et disponibles ; pour chaque livre : pour qui, ce qu'on y trouve, format (broché, poche, relié), nombre de pages si indiqué ; jamais de résumé inventé
+- [x] meilleure-mangeoire-oiseaux/ | meilleure mangeoire pour oiseaux | Mangeoires | silos, plateaux avec toit, sélectives
+- [x] meilleur-guide-oiseaux/ | meilleur guide d'identification des oiseaux | Observer | guides de terrain connus ; titres, auteurs, éditeurs et éditions lus sur la page de l'éditeur ou d'un grand libraire (Fnac, Decitre, Cultura) et vérifiés sur Amazon.fr ; uniquement des livres réels et disponibles ; pour chaque livre : pour qui, ce qu'on y trouve, format (broché, poche, relié), nombre de pages si indiqué ; jamais de résumé inventé
 - [ ] meilleurs-livres-oiseaux-enfants/ | meilleurs livres sur les oiseaux pour enfants | Observer | documentaires et premiers guides pour enfants ; titres, auteurs, éditeurs et éditions lus sur la page de l'éditeur ou d'un grand libraire (Fnac, Decitre, Cultura) et vérifiés sur Amazon.fr ; uniquement des livres réels et disponibles ; pour chaque livre : pour qui, ce qu'on y trouve, format (broché, poche, relié), nombre de pages si indiqué ; jamais de résumé inventé
 - [ ] meilleur-nichoir-camera/ | meilleur nichoir avec caméra | Nichoirs | caméras de nichoir, wifi ou filaire
 - [ ] meilleure-graine-tournesol/ | meilleures graines de tournesol pour oiseaux | Nourrir | marques et formats (noir, décortiqué)

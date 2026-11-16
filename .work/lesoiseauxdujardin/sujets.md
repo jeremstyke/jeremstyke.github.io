@@ -4,7 +4,7 @@
 - [x] quelles-graines-pour-les-oiseaux/ | quelles graines pour les oiseaux | Nourrir | lancement
 - [x] comment-choisir-mangeoire-connectee/ | mangeoire connectée | Mangeoires | lancement
 - [x] installer-un-nichoir/ | installer un nichoir | Nichoirs | lancement
-- [ ] boule-de-graisse-oiseaux/ | boule de graisse oiseaux | Nourrir | sans filet, recette maison, quand en donner
+- [x] boule-de-graisse-oiseaux/ | boule de graisse oiseaux | Nourrir | sans filet, recette maison, quand en donner
 - [ ] eau-pour-les-oiseaux-en-hiver/ | abreuvoir oiseaux hiver | Nourrir | eau propre, gel, pas de sel ni antigel
 - [ ] nettoyer-une-mangeoire/ | nettoyer une mangeoire | Mangeoires | fréquence, produits, maladies (salmonellose, trichomonose)
 - [ ] fabriquer-une-mangeoire/ | fabriquer une mangeoire | Mangeoires | modèles simples, matériaux sans danger
