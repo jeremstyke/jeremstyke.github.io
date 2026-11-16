@@ -273,7 +273,8 @@
   const AGN = { fr: (k, v) => '🎁 Encore ' + k + ' mission' + (k > 1 ? 's' : '') + ' → ' + v, en: (k, v) => '🎁 ' + k + ' more mission' + (k > 1 ? 's' : '') + ' → ' + v, id: (k, v) => '🎁 ' + k + ' misi lagi → ' + v, ru: (k, v) => '🎁 Ещё ' + k + ' → ' + v };
   const AGB = { fr: (v) => '🎯 Bonus du jour : ' + v + ' !', en: (v) => '🎯 Daily bonus: ' + v + '!', id: (v) => '🎯 Bonus harian: ' + v + '!', ru: (v) => '🎯 Бонус дня: ' + v + '!' };
   const agtNx = (n, justDone) => { let l = 'en'; try { l = LANG; } catch (e) {} const v = AGV[l] || AGV.en, bn = AGB[l] || AGB.en, nx = AGN[l] || AGN.en;
-    if (justDone && n === 10) return bn(v[0]); if (justDone && n === 25) return bn(v[1]); if (n < 10) return nx(10 - n, v[0]); if (n < 25) return nx(25 - n, v[1]); return ''; };
+    // 16 nov 2026 (Jeremy): no more tiers, a fixed amount for every partner mission
+    return ''; };
   let sdk = null, gone = false;
   const load = () => sdk || (sdk = new Promise((ok, ko) => {
     if (window.Adsgram) return ok();
@@ -314,7 +315,7 @@
     el.addEventListener('onBannerNotFound', () => { gone = true; document.querySelectorAll('.agtk').forEach((x) => x.remove()); w.remove(); });  // no task for this player: nothing shown until the app reopens
     el.addEventListener('onError', () => { w.remove(); });
     el.addEventListener('reward', () => {
-      try { localStorage.setItem('mct_agt_until', String(Date.now() + 30000)); } catch (e) {}  // 30 oct 2026 (19h12): next one in 30 seconds (was 5 minutes)
+      try { localStorage.setItem('mct_agt_until', String(Date.now() + 300000)); } catch (e) {}  // 16 nov 2026 (Jeremy): 5 minutes between two partner missions again
       try { haptic('ok'); } catch (e) {}
       try { const nd = (window.__agtDn || 0) + 1, nx = agtNx(nd, true); window.__agtDn = nd; toast(T.ok + (nx ? ' · ' + nx : '')); } catch (e) {}
       setTimeout(() => { try { if (VIEW === 'market') market(); else if (typeof loadMe === 'function') loadMe(); } catch (e) {} }, 2500);  // the cash comes from the server (reward URL)
