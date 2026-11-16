@@ -21,7 +21,7 @@ else:
     BASE = os.environ.get('VCS_BASE', 'https://jeremstyke.github.io/vieillirchezsoi')
 SITE = 'Vieillir chez soi'
 TAG = 'viellirchezsoi-21'   # identifiant Amazon Partenaires (orthographe exacte du compte)
-CONTACT = 'contact@cvlibre.com'
+CONTACT = 'contact@vieillir-chez-soi.fr'
 YEAR = 2026
 TODAY = datetime.date.today().isoformat()
 DISCLOSURE = "En tant que Partenaire Amazon, nous réalisons un bénéfice sur les achats remplissant les conditions requises."
@@ -140,7 +140,7 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None,
 <footer class="foot"><div class="wrap foot-in">
 <div><a class="logo" href="{R}"><span class="logo-ico" aria-hidden="true">🏡</span>Vieillir chez soi</a>
 <p>Des guides simples pour équiper la maison et rester chez soi en sécurité, le plus longtemps possible.</p></div>
-<nav aria-label="Pied de page"><a href="{R}amenager-logement-personne-agee/">Aménager le logement</a><a href="{R}quel-equipement/">Questionnaire</a><a href="{R}guides/">Guides</a><a href="{R}a-propos/">À propos</a><a href="{R}mentions-legales/">Mentions légales</a><a href="{R}confidentialite/">Confidentialité</a><a href="mailto:{CONTACT}">Contact</a></nav>
+<nav aria-label="Pied de page"><a href="{R}amenager-logement-personne-agee/">Aménager le logement</a><a href="{R}quel-equipement/">Questionnaire</a><a href="{R}guides/">Guides</a><a href="{R}a-propos/">À propos</a><a href="{R}mentions-legales/">Mentions légales</a><a href="{R}confidentialite/">Confidentialité</a><a href="{R}contact/">Contact</a><a href="{R}publicite-partenariats/">Publicité et partenariats</a></nav>
 <nav class="sites" aria-label="Nos autres sites"><p class="sites-t">Découvrez aussi notre autre site</p><div class="sites-g"><a href="https://lesoiseauxdujardin.fr/"><img src="https://lesoiseauxdujardin.fr/assets/favicon.svg" alt="" width="40" height="40" loading="lazy"><span><strong>Les oiseaux du jardin</strong><small>Nourrir et observer les oiseaux</small></span></a></div></nav>
 <p class="disc">{DISCLOSURE} Les informations de ce site sont générales et ne remplacent pas l'avis d'un médecin, d'un ergothérapeute ou d'un pharmacien. Les prix et les offres peuvent changer : vérifiez-les avant d'acheter. © {YEAR} {SITE}</p>
 </div></footer>
@@ -331,6 +331,32 @@ def build():
 <h2>Nos conseils</h2><p>Nous expliquons les critères de choix de chaque équipement. Nous ne citons pas de prix ni de caractéristiques que nous n'avons pas vérifiés. Nos articles sont des conseils généraux : pour une situation précise, l'avis du médecin, d'un ergothérapeute ou du pharmacien prime toujours.</p>
 <h2>Comment le site est financé</h2><p>{DISCLOSURE} Quand vous achetez après avoir cliqué sur un lien vers Amazon, nous touchons une commission, sans surcoût pour vous. Cela ne change pas nos conseils.</p>
 <h2>Contact</h2><p><a href="mailto:{CONTACT}">{CONTACT}</a></p></article></div>''', crumbs=[('À propos', 'a-propos/')], prio='0.3')
+    page('contact/', 'Contact : écrire à Vieillir chez soi', "Une question, une erreur à signaler ou une proposition de partenariat ? Écrivez à l'équipe de Vieillir chez soi : voici comment nous joindre.",
+         f'''<div class="wrap art-wrap"><article class="prose"><h1>Nous contacter</h1>
+<p>Le plus simple est de nous écrire à <a href="mailto:{CONTACT}"><strong>{CONTACT}</strong></a>. Nous lisons tous les messages et répondons en général sous quelques jours.</p>
+<h2>Pour quoi nous écrire ?</h2>
+<ul><li><strong>Une erreur ou une information dépassée</strong> sur une page : dites-nous laquelle, nous la corrigeons.</li>
+<li><strong>Une suggestion de sujet</strong> : un équipement ou une démarche que vous aimeriez voir expliqué.</li>
+<li><strong>Une proposition de partenariat ou de publicité</strong> : consultez d'abord notre page <a href="{{R}}publicite-partenariats/">Publicité et partenariats</a>.</li></ul>
+<h2>Ce que nous ne pouvons pas faire</h2>
+<p>Nous ne vendons rien nous-mêmes : pour une commande, une livraison ou un retour, adressez-vous au vendeur chez qui vous avez acheté. Nous ne pouvons pas non plus donner d'avis médical personnalisé. Pour une situation précise, le médecin traitant, un ergothérapeute ou le pharmacien sont les bons interlocuteurs.</p>
+<p>En cas d'urgence, appelez le 15 (Samu) ou le 112.</p></article></div>''', crumbs=[('Contact', 'contact/')], prio='0.3')
+    page('publicite-partenariats/', 'Publicité et partenariats sur Vieillir chez soi', "Marques, fabricants, services d'aide à domicile : découvrez comment travailler avec Vieillir chez soi, site de conseils sur le maintien à domicile des seniors.",
+         f'''<div class="wrap art-wrap"><article class="prose"><h1>Publicité et partenariats</h1>
+<p>Vieillir chez soi publie des guides pratiques et des comparatifs pour aider les seniors et leurs proches à rester à la maison en sécurité : salle de bain, chambre, escaliers, aides à la marche, téléassistance, sécurité du logement. Si votre entreprise propose des produits ou des services utiles à ce public, nous serons heureux d'en discuter.</p>
+<h2>Notre public</h2>
+<p>Deux types de lecteurs viennent sur le site : des seniors qui veulent garder leur autonomie, et surtout leurs proches aidants (enfants adultes, conjoints) qui cherchent une solution concrète, souvent après une chute, une sortie d'hôpital ou une perte d'autonomie. Ce sont des lecteurs qui comparent avant d'acheter.</p>
+<h2>Ce que nous proposons</h2>
+<ul><li><strong>Partenariat d'affiliation</strong> : votre produit ou service est présenté dans les guides où il est vraiment utile, avec un lien suivi.</li>
+<li><strong>Article sponsorisé</strong> : un contenu consacré à votre solution, rédigé par nos soins et clairement signalé comme « partenariat ».</li>
+<li><strong>Présentation de service</strong> : téléassistance, aide à domicile, adaptation du logement, monte-escalier, livraison de repas.</li></ul>
+<h2>Nos règles</h2>
+<ul><li>Tout contenu payé est signalé comme tel, et les liens sont marqués « sponsorisés ».</li>
+<li>Nos comparatifs restent indépendants : aucune place dans un classement ne s'achète.</li>
+<li>Nous n'acceptons que des produits et services liés au bien-vieillir à domicile, et rien qui promette un effet médical non prouvé.</li>
+<li>Nous nous réservons le droit de refuser une proposition qui ne servirait pas nos lecteurs.</li></ul>
+<h2>Nous écrire</h2>
+<p>Envoyez-nous un message à <a href="mailto:{CONTACT}?subject=Partenariat"><strong>{CONTACT}</strong></a> en présentant votre entreprise, votre produit ou service et le type de collaboration envisagé. Nous vous répondrons avec nos conditions.</p></article></div>''', crumbs=[('Publicité et partenariats', 'publicite-partenariats/')], prio='0.3')
     page('mentions-legales/', 'Mentions légales', 'Mentions légales du site Vieillir chez soi.',
          f'''<div class="wrap art-wrap"><article class="prose"><h1>Mentions légales</h1>
 <h2>Éditeur</h2><p>Jérémy Dacier-Jury, 9 passage des Tisserands, 38790 Charantonnay, France. Contact : <a href="mailto:{CONTACT}">{CONTACT}</a>.</p>
