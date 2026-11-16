@@ -947,3 +947,296 @@ g("meilleur-guide-oiseaux/",
        ("Quel est le guide d'identification le plus complet ?", "Parmi les guides en dessins, « Le guide ornitho » de Lars Svensson (Delachaux et Niestlé, 3e édition 2023) couvre près de 900 espèces. En photos, « Tous les oiseaux d'Europe » de Jiguet et Audevard annonce plus de 930 espèces, et le guide photographique de Biotope plus de 4 700 photos."),
        ("Avez-vous lu tous ces livres ?", "Non. Cette sélection s'appuie sur les fiches des éditeurs et de grands libraires : titres, auteurs, formats, nombre de pages et contenu annoncé. Nous indiquons « non précisé » quand une donnée manque, sans note ni avis de lecture.")],
   short="Top 10 guides oiseaux", cat="Observer")
+
+AUTO_META['eau-pour-les-oiseaux-en-hiver/'] = ('💧', 'ciel')
+g("eau-pour-les-oiseaux-en-hiver/",
+  "Eau pour les oiseaux en hiver : abreuvoir, gel, erreurs à éviter",
+  "De l'eau pour les oiseaux en hiver : comment garder un abreuvoir propre et hors gel",
+  "Pourquoi les oiseaux ont besoin d'eau en hiver, comment éviter le gel sans sel ni antigel, quel abreuvoir choisir et à quelle fréquence changer l'eau.",
+  """
+<p>En hiver, un point d'eau propre et non gelé aide autant les oiseaux qu'une mangeoire bien remplie. La règle d'or est simple : de l'eau claire, renouvelée souvent, et rien d'autre dedans. Ni sel, ni antigel, ni alcool.</p>
+<p>On pense spontanément aux graines quand le froid arrive, et on oublie l'eau. Pourtant, quand les flaques et les mares gèlent, boire devient un vrai problème pour les mésanges, les merles ou les moineaux.</p>
+{CTA}
+
+<h2>Pourquoi les oiseaux ont-ils besoin d'eau quand il gèle ?</h2>
+<p>D'abord pour boire. La fiche Refuges LPO consacrée à l'eau rappelle que le corps d'un oiseau est composé d'environ 60 % d'eau, et jusqu'à 85 % chez certains jeunes. La LPO Île-de-France ajoute que les granivores ont des besoins en eau plus élevés, parce que les graines en contiennent peu. Or ce sont justement eux qui fréquentent la mangeoire en hiver.</p>
+<p>Ensuite pour se baigner. Ça peut sembler étrange par temps froid, mais le bain sert surtout à entretenir les plumes. Selon la même fiche LPO, un plumage en bon état assure la protection contre le froid et la capacité à voler. Un oiseau aux plumes sales ou abîmées se refroidit plus vite.</p>
+<p>Enfin, quand tout est gelé, certains oiseaux mangent de la neige. La fiche LPO précise qu'ils gaspillent alors une énergie précieuse pour la faire fondre, alors qu'ils en manquent déjà en hiver.</p>
+
+<h2>Que mettre dans l'eau pour qu'elle ne gèle pas ? Rien du tout</h2>
+<p>C'est l'erreur à ne jamais faire, et toutes les sources sont d'accord. La fiche Refuges LPO est très claire : ne rien ajouter à l'eau, ni alcool, ni sel, ni huile, ni bien sûr antigel, tous dangereux voire mortels pour les oiseaux. La Ligue royale belge pour la protection des oiseaux écrit que l'antigel et le sel sont fatals. La LPO Île-de-France parle d'une pratique « fortement interdite », par peur d'empoisonner les oiseaux.</p>
+<p>Le réflexe « un peu de sel pour que ça ne gèle pas », hérité du trottoir, n'a donc pas sa place dans un abreuvoir.</p>
+
+<h2>Comment empêcher l'abreuvoir de geler, alors ?</h2>
+<p>Il n'existe pas de solution miracle, mais plusieurs gestes s'additionnent.</p>
+<ul>
+<li><strong>Changez l'eau à heure fixe.</strong> La Ligue belge explique que les oiseaux apprennent ainsi quand ils trouveront de l'eau liquide, et viennent boire avant qu'elle ne regèle. Natagora donne le même conseil.</li>
+<li><strong>Choisissez l'emplacement.</strong> La fiche LPO recommande l'endroit le plus abrité, et conseille d'isoler l'abreuvoir du sol par un socle creux pour qu'il gèle moins vite. La Ligue belge suggère, en hiver, une zone plutôt ensoleillée.</li>
+<li><strong>Pensez au matériel.</strong> Selon la LPO, un abreuvoir de couleur noire à double paroi isolante retarde le gel pendant la journée. La LPO Île-de-France propose aussi une pierre chauffée au four, posée au centre de la coupelle.</li>
+<li><strong>Si l'eau a gelé</strong>, la Ligue belge demande de la changer impérativement. Son dépliant de conseils parle aussi de briser la glace.</li>
+</ul>
+<p><strong>Eau tiède ou pas ?</strong> Ici, les sources divergent. La fiche Refuges LPO considère que verser de l'eau tiède à heures régulières est sans doute la meilleure solution, et la LPO PACA accepte une eau légèrement tiède. Le dépliant de la Ligue belge dit au contraire d'éviter l'eau chaude ou tiède. <strong>Notre conseil</strong> : si vous utilisez de l'eau tiède, restez sur « à peine tiède », jamais chaude, et associez-la au grillage décrit plus bas pour éviter les bains par grand froid.</p>
+<p>Il existe aussi des abreuvoirs chauffants électriques. La fiche LPO donne deux précautions : ne les sortir et ne les brancher que dans la journée, et vérifier que la résistance est toujours recouverte d'eau.</p>
+<p><strong>Abreuvoir chauffant pour oiseaux</strong> : pour les régions où il gèle souvent. <a href="{AMZ:abreuvoir chauffant oiseaux exterieur}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Faut-il les laisser se baigner par grand froid ?</h2>
+<p>Non, mieux vaut l'éviter. La fiche LPO le dit : par très grand froid, mieux vaut ne pas leur permettre de se baigner. Un oiseau trempé qui ne sèche pas assez vite risque de geler.</p>
+<p>La solution proposée par la Ligue belge et Natagora est simple : par temps froid, couvrez l'abreuvoir d'un grillage à mailles moyennes. Les oiseaux peuvent toujours boire à travers, mais ne peuvent plus se plonger dedans. Un morceau de grillage de jardin découpé à la taille de la soucoupe suffit. Retirez-le quand le temps se radoucit.</p>
+
+<h2>Quel abreuvoir choisir ?</h2>
+<p>Pas besoin d'un modèle sophistiqué. La Ligue belge et Natagora recommandent une soucoupe en terre cuite, peu profonde et assez large. La fiche LPO cite aussi la soucoupe de pot de fleur en terre cuite non vernie, ou un grand plat.</p>
+<p>Sur la profondeur, les chiffres varient un peu, comme le montre ce tableau.</p>
+<table><thead><tr><th>Point</th><th>LPO (fiche Refuges)</th><th>Ligue belge</th><th>Natagora</th></tr></thead><tbody>
+<tr><td>Profondeur</td><td>3 à 4 cm pour les petites espèces, jusqu'à 9 cm pour les plus grosses</td><td>3 à 4 cm (dépliant), 5 cm maximum environ (fiche abreuvoirs)</td><td>Soucoupe peu profonde</td></tr>
+<tr><td>Changement de l'eau en hiver</td><td>Trois fois par semaine</td><td>Idéalement tous les jours, au minimum 3 fois par semaine</td><td>Tous les jours</td></tr>
+<tr><td>Eau tiède</td><td>Oui, à heures régulières</td><td>À éviter</td><td>Non précisé</td></tr>
+<tr><td>Grillage par temps froid</td><td>Évitez le bain par grand froid</td><td>Oui, mailles moyennes</td><td>Oui</td></tr>
+</tbody></table>
+<p>Retenez qu'une petite profondeur évite les noyades, et que des bords en pente douce et non glissants, comme le demande la LPO, aident les oiseaux à entrer et sortir. La Ligue belge suggère de poser un gros caillou ou une branche dans l'abreuvoir, qui sert de perchoir.</p>
+<p><strong>Soucoupe en terre cuite</strong> : la solution la plus simple, recommandée par les associations. <a href="{AMZ:soucoupe terre cuite non vernie grande}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Bain d'oiseaux sur pied</strong> : pour mettre l'eau en hauteur, loin des chats. <a href="{AMZ:bain oiseaux sur pied}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Où installer le point d'eau ?</h2>
+<p>La fiche LPO et la Ligue belge préfèrent un abreuvoir en hauteur, posé comme une mangeoire plateau, accroché ou fixé sur un mur. La page de la LPO nationale sur les maladies admet aussi de petits points d'eau à même le sol, dans un endroit dégagé.</p>
+<p>Dans tous les cas, pensez aux prédateurs. La fiche LPO conseille de l'éloigner des buissons où un chat pourrait se poster, tout en gardant une haie ou un arbuste pas trop loin, où les oiseaux iront sécher leurs plumes, comme le précise la Ligue belge.</p>
+<p>Pour les fenêtres, nouvelle divergence : la Ligue belge juge le rebord de fenêtre acceptable, alors que la LPO nationale demande de ne pas placer mangeoires et abreuvoirs près des fenêtres, pour limiter les collisions. Par exemple, si vous n'avez qu'un balcon, le rebord reste une option ; si vous avez un jardin, placez plutôt l'eau à distance des vitres.</p>
+<p><strong>Abreuvoir à suspendre</strong> : pour un balcon ou une branche. <a href="{AMZ:abreuvoir oiseaux a suspendre}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Changer l'eau et nettoyer : à quel rythme ?</h2>
+<p>Un abreuvoir peut transmettre des maladies. La LPO explique que la trichomonose se transmet notamment par l'eau et la nourriture contaminées, souvent au niveau des mangeoires et des abreuvoirs des jardins, et que l'eau souillée par les fientes est l'un des principaux vecteurs de la salmonellose.</p>
+<p>Pour le rythme, voyez le tableau plus haut : de trois fois par semaine à tous les jours selon les sources. <strong>Notre conseil</strong> : changez l'eau chaque jour en hiver, parce que vous devez de toute façon la renouveler à cause du gel, et que c'est la fréquence la plus prudente.</p>
+<p>Côté nettoyage, la LPO nationale conseille de retirer fientes et souillures, de brosser avec de l'eau et du savon de Marseille ou du savon noir, et de désinfecter avec de l'eau de Javel diluée dans de l'eau froide, puis de bien rincer et laisser sécher. Portez des gants et lavez-vous les mains ensuite. La LPO met aussi en garde contre la période de dégel, où les bactéries prisonnières de la glace se retrouvent dans l'eau.</p>
+<p>Si vous voyez des oiseaux malades, la LPO demande de vider tous les points d'eau et de nourriture et d'arrêter le nourrissage, pendant 4 semaines selon sa fiche sur les maladies.</p>
+<p>L'eau va de pair avec la nourriture : notre <a href="{R}nourrir-les-oiseaux-du-jardin/">guide pour bien nourrir les oiseaux du jardin</a> explique quoi donner et quand. Par temps de gel, vous pouvez aussi proposer de la graisse, sans filet, comme expliqué dans notre article sur les <a href="{R}boule-de-graisse-oiseaux/">boules de graisse pour oiseaux</a>. Et pour choisir une mangeoire facile à nettoyer, voyez notre sélection des <a href="{R}meilleure-mangeoire-oiseaux/">meilleures mangeoires pour oiseaux</a>.</p>
+""",
+  faq=[("Peut-on mettre du sel ou de l'antigel dans l'abreuvoir des oiseaux ?", "Non, jamais. La LPO demande de ne rien ajouter à l'eau, ni sel, ni alcool, ni huile, ni antigel, tous dangereux voire mortels. La Ligue royale belge pour la protection des oiseaux rappelle que l'antigel et le sel sont fatals pour les animaux."),
+       ("À quelle fréquence changer l'eau des oiseaux en hiver ?", "Les sources varient : trois fois par semaine pour la fiche Refuges LPO, idéalement tous les jours et au minimum trois fois par semaine pour la Ligue belge, tous les jours pour Natagora. Changer l'eau chaque jour, à heure fixe, est le plus prudent et permet aussi d'éviter le gel."),
+       ("Faut-il empêcher les oiseaux de se baigner quand il gèle ?", "Oui, par grand froid. La LPO conseille d'éviter le bain par très grand froid. La Ligue belge et Natagora proposent de couvrir l'abreuvoir d'un grillage à mailles moyennes : les oiseaux boivent à travers sans pouvoir se tremper.")],
+  short="Eau en hiver", cat="Nourrir")
+
+AUTO_META['meilleurs-livres-oiseaux-enfants/'] = ('🏆', 'rouge')
+g("meilleurs-livres-oiseaux-enfants/",
+  "Meilleurs livres sur les oiseaux pour enfants 2026 : top 9",
+  "Les meilleurs livres sur les oiseaux pour enfants : 9 titres du livre sonore au guide",
+  "Livres sonores, documentaires, coffret Montessori, premiers guides : 9 livres sur les oiseaux pour enfants, de 1 à 10 ans et plus, classés par âge de lecture.",
+  """
+<p>Le bon livre sur les oiseaux dépend surtout de l'âge de l'enfant. Avant 3 ans, un livre sonore qui fait chanter le merle marche très bien. Vers 6 ans, les livres qui font entendre les chants avec une application ont beaucoup de succès. À partir de 9 ou 10 ans, un vrai petit guide permet de sortir avec des jumelles.</p>
+<p>Voici neuf livres réels, disponibles en France et présents sur Amazon.fr, rangés du plus jeune au plus grand. Nous n'en avons gardé que neuf : plusieurs titres connus sont épuisés, et deux nouveautés de 2026 n'étaient pas encore visibles sur Amazon.fr.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
+
+<h2>Les 9 livres en un coup d'œil</h2>
+<table><thead><tr><th>Livre</th><th>Éditeur</th><th>Âge indiqué</th><th>Format</th><th>Pages</th><th>Le plus</th></tr></thead><tbody>
+<tr><td>Chants d'oiseaux du jardin</td><td>Didier Jeunesse</td><td>Dès la naissance</td><td>Cartonné</td><td>14</td><td>5 chants</td></tr>
+<tr><td>Le chant des oiseaux (Mon livre sonore à toucher)</td><td>Usborne</td><td>Dès 1 an</td><td>Cartonné</td><td>Non précisé</td><td>Sons et matières</td></tr>
+<tr><td>Mon coffret Montessori des oiseaux</td><td>Nathan</td><td>Dès 3 ans</td><td>Coffret</td><td>Livret de 48</td><td>105 cartes</td></tr>
+<tr><td>Écoute les oiseaux des villes</td><td>Albin Michel Jeunesse</td><td>Dès 4 ans accompagné</td><td>Cartonné</td><td>32</td><td>Chants via application</td></tr>
+<tr><td>Je suis un oiseau de la ville</td><td>Helium</td><td>Dès 5 ou 6 ans</td><td>Non précisé</td><td>88</td><td>Plus de 30 oiseaux</td></tr>
+<tr><td>Écoute les oiseaux (édition 2022)</td><td>Albin Michel Jeunesse</td><td>Dès 6 ans</td><td>Cartonné</td><td>32</td><td>20 oiseaux qui chantent</td></tr>
+<tr><td>Guide des oiseaux du monde</td><td>Nuinui Jeunesse</td><td>Dès 6 ans</td><td>Cartonné</td><td>360</td><td>Tour du monde illustré</td></tr>
+<tr><td>Ornithorama</td><td>Helvetiq</td><td>Dès 9 ans</td><td>Relié</td><td>Non précisé</td><td>Plus de 80 oiseaux d'Europe</td></tr>
+<tr><td>Copain des oiseaux</td><td>Milan</td><td>Non précisé</td><td>Broché</td><td>256</td><td>Guide et activités</td></tr>
+</tbody></table>
+<p>Les âges sont ceux donnés par les libraires et les éditeurs. Quand deux âges différents sont indiqués pour un même livre, nous le signalons.</p>
+
+<h2>1. Chants d'oiseaux du jardin (Didier Jeunesse) : le tout premier</h2>
+<p><strong>Pour qui ?</strong> Un bébé ou un tout-petit, à qui l'on fait écouter les oiseaux qu'il entend déjà dehors.</p>
+<p>Illustré par Lisa Zordan, dans la collection « Mon petit livre sonore », paru en 2022. D'après la fiche du libraire Fnac, il fait entendre 5 chants : merle, tourterelle, mésange, rouge-gorge et chardonneret. Cartonné, 19 x 15 cm, 14 pages.</p>
+<ul>
+<li><strong>Points forts</strong> : des oiseaux qu'on croise vraiment au jardin, petit format facile à manipuler.</li>
+<li><strong>Limites</strong> : 5 chants seulement, et un livre que l'enfant dépassera vite.</li>
+</ul>
+<p><a href="{AMZ:Chants d'oiseaux du jardin Lisa Zordan Didier Jeunesse}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Le chant des oiseaux, Mon livre sonore à toucher (Usborne)</h2>
+<p><strong>Pour qui ?</strong> Un enfant de 1 à 3 ans qui aime toucher autant qu'écouter.</p>
+<p>Texte de Sam Taplin, illustrations de Federica Iossa, paru en 2020. Selon la Fnac, il combine des puces sonores et des chemins en creux à suivre du doigt, du merle au nid jusqu'au cygne sur la rivière. Cartonné, 21,8 x 21,8 cm.</p>
+<ul>
+<li><strong>Points forts</strong> : sons et toucher réunis, ce qui occupe longtemps les petites mains.</li>
+<li><strong>Limites</strong> : nombre de pages et de sons non précisés. Sur Amazon.fr, la fiche porte un titre un peu différent (« Les cris des oiseaux ») : vérifiez la collection.</li>
+</ul>
+<p><a href="{AMZ:Usborne livre sonore à toucher oiseaux Taplin}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Mon coffret Montessori des oiseaux (Nathan) : pour trier, classer, nommer</h2>
+<p><strong>Pour qui ?</strong> Un enfant de 3 à 6 ans qui adore manipuler, et un parent prêt à jouer avec lui.</p>
+<p>Ève Herrmann, illustrations de Roberta Rocchi, paru en 2017. D'après la Fnac, le coffret contient 105 cartes d'identification, dont 30 oiseaux à classer selon leur habitat et des plumes à associer. Il s'accompagne d'un livret de 48 pages avec des conseils aux parents, d'un carnet de croquis et d'un texte de la LPO sur l'observation et les nichoirs.</p>
+<ul>
+<li><strong>Points forts</strong> : une approche active, idéale pour apprendre les noms avant de sortir observer, avec un texte LPO pour les parents.</li>
+<li><strong>Limites</strong> : ce n'est pas un livre à feuilleter seul. Le stock affiché par la Fnac était faible au moment de nos recherches.</li>
+</ul>
+<p><a href="{AMZ:Mon coffret Montessori des oiseaux Nathan}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Écoute les oiseaux des villes (Albin Michel Jeunesse) : pour les enfants sans jardin</h2>
+<p><strong>Pour qui ?</strong> Un enfant qui grandit en ville et entend des oiseaux sans savoir lesquels.</p>
+<p>Léna Mazilu, Yoann Guény et Maxime Zucca, paru en 2025. On scanne l'oiseau avec une application pour entendre son chant. Parmi les espèces citées : mésange, pigeon, pie, merle. Cartonné, grand format (24,1 x 32,3 cm), 32 pages.</p>
+<ul>
+<li><strong>Points forts</strong> : des oiseaux qu'on voit depuis la fenêtre ou au parc, et de vrais chants à écouter.</li>
+<li><strong>Limites</strong> : il faut un smartphone ou une tablette. L'âge varie selon la fiche : dès 4 ans accompagné et 7 ans en autonomie dans la présentation, 6 ans dans la fiche technique.</li>
+</ul>
+<p><a href="{AMZ:Ecoute les oiseaux des villes Mazilu}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Je suis un oiseau de la ville (Helium) : le plus graphique</h2>
+<p><strong>Pour qui ?</strong> Un enfant de 5 à 8 ans sensible aux belles illustrations.</p>
+<p>Delphine Jaboeuf, illustrations d'Élodie Mandray et Caroline Aufort, paru en 2021. Selon la Fnac, c'est un documentaire « ludique et graphique » pour écouter et observer plus de trente oiseaux des villes. 20,6 x 28,6 cm, 88 pages.</p>
+<ul>
+<li><strong>Points forts</strong> : plus de trente espèces, et beaucoup plus de pages que la plupart des documentaires de cet âge.</li>
+<li><strong>Limites</strong> : reliure non précisée, et l'âge annoncé varie entre 5 et 6 ans selon la partie de la fiche.</li>
+</ul>
+<p><a href="{AMZ:Je suis un oiseau de la ville Jaboeuf Helium}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Écoute les oiseaux (Albin Michel Jeunesse) : l'original</h2>
+<p><strong>Pour qui ?</strong> Un enfant à partir de 6 ans qui veut apprendre à reconnaître les oiseaux à l'oreille.</p>
+<p>Les mêmes auteurs que le n°4, dans une édition de 2022. D'après la Fnac, il présente 20 oiseaux du quotidien que l'on « anime » avec une application pour les faire chanter. Cartonné, 24,3 x 32,4 cm, 32 pages.</p>
+<ul>
+<li><strong>Points forts</strong> : apprendre les chants, c'est ce qui permet ensuite de repérer un oiseau caché dans une haie au printemps.</li>
+<li><strong>Limites</strong> : 20 oiseaux, et besoin d'un écran. Si vous habitez en ville, le n°4 sera peut-être plus parlant.</li>
+</ul>
+<p><a href="{AMZ:Ecoute les oiseaux Mazilu Albin Michel}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Guide des oiseaux du monde (Nuinui) : pour les curieux de tout</h2>
+<p><strong>Pour qui ?</strong> Un enfant dès 6 ans qui veut savoir quels oiseaux vivent sur les autres continents.</p>
+<p>Cesare Della Pietà, illustrations de Shishi Nguyen, traduction de Cécile Breffort, paru en 2024. Une introduction sur le vol, les nids et les plumes, puis un chapitre par zone géographique avec des planches illustrées. Cartonné, 15,7 x 21,8 cm, 360 pages.</p>
+<ul>
+<li><strong>Points forts</strong> : beaucoup de contenu dans un format compact.</li>
+<li><strong>Limites</strong> : c'est un tour du monde, pas un guide pour reconnaître les oiseaux du jardin. Sur Amazon.fr, vérifiez qu'il s'agit bien de l'édition 2024.</li>
+</ul>
+<p><a href="{AMZ:Guide des oiseaux du monde Della Pietà Nuinui}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Ornithorama (Helvetiq) : le premier guide européen</h2>
+<p><strong>Pour qui ?</strong> Un enfant de 9 ans et plus qui commence à observer pour de bon.</p>
+<p>Lisa Voisard, paru en 2020. D'après la Fnac, il présente plus de 80 oiseaux d'Europe illustrés en couleur. Relié, 18,5 x 25,7 cm.</p>
+<ul>
+<li><strong>Points forts</strong> : une vraie sélection d'espèces européennes, donc utile en promenade.</li>
+<li><strong>Limites</strong> : nombre de pages non précisé sur la fiche consultée, stock faible à la Fnac au moment de nos recherches.</li>
+</ul>
+<p><a href="{AMZ:Ornithorama Lisa Voisard}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>9. Copain des oiseaux (Milan) : le guide des jeunes ornithologues</h2>
+<p><strong>Pour qui ?</strong> Un préado passionné qui veut tout savoir et passer à l'action.</p>
+<p>Guilhem Lesaffre, illustrations de Benjamin Flouw et d'un collectif, collection Copain, édition de 2019. D'après la Fnac, on y trouve des oiseaux du monde entier, des conseils pour reconnaître les chants, de quoi fabriquer nichoirs et mangeoires, et des réponses à des questions comme « pourquoi les flamants sont roses ». Broché, 19 x 25 cm, 256 pages.</p>
+<ul>
+<li><strong>Points forts</strong> : le plus complet de la sélection, avec de vraies activités à faire au jardin.</li>
+<li><strong>Limites</strong> : âge et nombre d'espèces non précisés. Trop dense pour un enfant qui ne lit pas encore seul.</li>
+</ul>
+<p><a href="{AMZ:Copain des oiseaux Lesaffre Milan}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Quel livre choisir selon l'âge de l'enfant ?</h2>
+<p><strong>Avant 3 ans</strong>, misez sur le son et le toucher : les n°1 et 2. Le plaisir vient de reconnaître le merle du livre quand il chante dans le jardin.</p>
+<p><strong>De 3 à 6 ans</strong>, l'enfant aime classer et nommer. Le coffret Montessori fonctionne bien si vous jouez avec lui ; les livres « Écoute les oiseaux » se partagent à deux, téléphone en main.</p>
+<p><strong>De 6 à 9 ans</strong>, il peut feuilleter seul un documentaire riche comme « Je suis un oiseau de la ville » ou le « Guide des oiseaux du monde ».</p>
+<p><strong>À partir de 9 ou 10 ans</strong>, un guide comme Ornithorama ou Copain des oiseaux l'accompagne dehors. Quand il voudra aller plus loin, les guides pour adultes prennent le relais : voyez notre sélection des <a href="{R}meilleur-guide-oiseaux/">meilleurs guides d'identification des oiseaux</a>.</p>
+<p><strong>Notre conseil</strong> : associez le livre à une vraie observation. Un livre lu le soir, puis une mangeoire installée devant la fenêtre le lendemain, c'est ce qui donne envie d'y revenir. Notre <a href="{R}nourrir-les-oiseaux-du-jardin/">guide pour bien nourrir les oiseaux du jardin</a> vous explique comment faire sans leur nuire, et notre comparatif des <a href="{R}meilleures-jumelles-oiseaux/">meilleures jumelles</a> vous aidera si l'enfant veut voir de plus près.</p>
+""",
+  faq=[("Quel livre sur les oiseaux pour un enfant de 3 ans ?", "Un livre sonore ou un support à manipuler. Dans notre sélection, « Chants d'oiseaux du jardin » (Didier Jeunesse) et « Le chant des oiseaux » (Usborne) font entendre des chants, et le coffret Montessori des oiseaux de Nathan est indiqué dès 3 ans."),
+       ("Comment apprendre les chants d'oiseaux à un enfant ?", "Les livres « Écoute les oiseaux » et « Écoute les oiseaux des villes » d'Albin Michel Jeunesse font entendre les chants grâce à une application. Pour les tout-petits, les livres sonores à puces sont plus simples, sans écran."),
+       ("Avez-vous lu ces livres ?", "Non. Cette sélection repose sur les fiches des éditeurs et des libraires : auteurs, âge conseillé, format, pages et contenu annoncé. Nous indiquons « non précisé » quand une donnée manque, sans note ni avis de lecture.")],
+  short="Top 9 livres enfants", cat="Observer")
+
+AUTO_META['meilleur-nichoir-camera/'] = ('🏆', 'sable')
+g("meilleur-nichoir-camera/",
+  "Meilleur nichoir avec caméra 2026 : 8 modèles wifi ou filaires",
+  "Les meilleurs nichoirs avec caméra : 8 modèles et caméras de nichoir comparés",
+  "Kit complet ou caméra seule, wifi, filaire ou solaire, vision nocturne, carte SD ou cloud : 8 nichoirs et caméras de nichoir comparés d'après les fiches.",
+  """
+<p>Si vous avez une prise électrique pas trop loin du nichoir, un kit avec caméra wifi alimentée sur secteur est le choix le plus simple. Sans prise, il faut passer au solaire avec batterie. Et si vous voulez la liaison la plus stable, la caméra filaire reste imbattable, au prix d'un câble à tirer jusqu'à la maison.</p>
+<p>Nous avons retenu huit produits réels, tous présents sur Amazon.fr : des kits complets avec nichoir, et des caméras seules à installer dans un nichoir que vous avez déjà. Nous en avions repéré d'autres, mais sans fiche fiable ou sans présence confirmée sur Amazon.fr, nous les avons laissés de côté.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
+
+<h2>Tableau comparatif des 8 modèles</h2>
+<table><thead><tr><th>Modèle</th><th>Nichoir</th><th>Connexion</th><th>Vidéo</th><th>Alimentation</th><th>Stockage</th></tr></thead><tbody>
+<tr><td>Green Feathers kit complet wifi 1080p</td><td>Oui, bois, trou 32 mm</td><td>Wifi 2,4 et 5 GHz</td><td>1080p</td><td>Secteur 12 V</td><td>microSD (non fournie)</td></tr>
+<tr><td>Green Feathers pack solaire wifi</td><td>Oui, bois, trou 32 mm</td><td>Wifi 2,4 GHz</td><td>3 MP</td><td>Solaire et batterie</td><td>microSD 64 Go incluse</td></tr>
+<tr><td>Green Feathers caméra wifi 1080p (3e gén.)</td><td>Non</td><td>Wifi 2,4 et 5 GHz</td><td>1080p</td><td>Secteur 12 V</td><td>microSD (non fournie)</td></tr>
+<tr><td>Green Feathers caméra filaire PoE</td><td>Non</td><td>Câble réseau</td><td>1080p</td><td>PoE ou 12 V</td><td>Mémoire 64 Go intégrée</td></tr>
+<tr><td>Green Feathers caméra filaire TV 20 m</td><td>Non</td><td>Câble vers téléviseur</td><td>1080p</td><td>Secteur 12 V</td><td>Non précisé</td></tr>
+<tr><td>Birdfy Nest Duo (Netvue)</td><td>Oui, bambou, 2 caméras</td><td>Wifi 2,4 GHz</td><td>2 MP</td><td>Batterie et solaire 5 W</td><td>Cloud, pas de microSD</td></tr>
+<tr><td>Nestera nichoir caméra wifi</td><td>Oui, cèdre rouge</td><td>Wifi 2,4 GHz</td><td>4 MP</td><td>Secteur, câble 10 m</td><td>microSD</td></tr>
+<tr><td>Camouflage EZ-NestEye</td><td>Oui, bois</td><td>Wifi 2,4 GHz</td><td>Full HD</td><td>Solaire et batterie</td><td>Mémoire 32 Go</td></tr>
+</tbody></table>
+<p>Une remarque importante : les fiches Green Feathers consultées sont celles du site britannique, qui décrit des alimentations avec prise anglaise. Vérifiez sur la fiche Amazon.fr que la version vendue est adaptée aux prises françaises.</p>
+
+<h2>1. Green Feathers kit complet wifi 1080p : le plus simple pour commencer</h2>
+<p><strong>Pour qui ?</strong> Vous partez de zéro et avez une prise extérieure ou un garage à proximité.</p>
+<p>Le kit réunit un nichoir en bois de 21 mm fait main, avec un trou d'envol de 32 mm, et une caméra wifi 1080p. La vision nocturne repose sur 4 LED infrarouges invisibles, d'une portée d'environ 1 m, ce qui suffit dans un nichoir. Un micro intégré capte les petits cris. L'adaptateur a un câble de 3 m, et une rallonge de 10 m est fournie, selon Green Feathers.</p>
+<ul>
+<li><strong>Points forts</strong> : tout est prévu, wifi 2,4 et 5 GHz pour les caméras vendues après octobre 2024, infrarouge invisible pour ne pas éclairer la nichée.</li>
+<li><strong>Limites</strong> : carte microSD non fournie, et les conditions du cloud ne sont pas précisées. Il faut une prise à moins de 13 m environ.</li>
+</ul>
+<p><a href="{AMZ:Green Feathers kit complet nichoir camera wifi}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Green Feathers pack solaire wifi : sans prise électrique</h2>
+<p><strong>Pour qui ?</strong> Le nichoir est au fond du jardin, loin de toute prise.</p>
+<p>Le nichoir en bois (trou de 32 mm, avec plaques de réduction en inox) est livré avec une caméra wifi 3 MP sur batterie, rechargée par un panneau solaire de 1,5 W. Green Feathers annonce 84 heures d'autonomie en continu, un micro avec audio bidirectionnel et une carte microSD de 64 Go incluse.</p>
+<ul>
+<li><strong>Points forts</strong> : aucun câble jusqu'à la maison, carte mémoire fournie, pas d'abonnement nécessaire pour le direct et l'enregistrement sur carte selon le fabricant.</li>
+<li><strong>Limites</strong> : wifi 2,4 GHz uniquement, portée annoncée d'environ 20 m : vérifiez que votre box couvre le fond du jardin. Le panneau ne doit pas être à plus de 4 m de la caméra. Sur Amazon.fr, le titre de la fiche est ambigu entre caméra seule et pack complet.</li>
+</ul>
+<p><a href="{AMZ:Green Feathers camera solaire nichoir wifi}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Green Feathers caméra wifi 1080p : pour équiper votre nichoir</h2>
+<p><strong>Pour qui ?</strong> Vous avez déjà un nichoir occupé chaque printemps et voulez simplement y ajouter une caméra.</p>
+<p>C'est la caméra du kit n°1, vendue seule : 1080p, wifi 2,4 et 5 GHz, 4 LED infrarouges invisibles, micro intégré, alimentation secteur 12 V avec un câble de 3 m et des rallonges possibles jusqu'à 20 m. Elle mesure 44 x 44 x 33 mm, assez petit pour se glisser sous le toit d'un nichoir classique.</p>
+<ul>
+<li><strong>Points forts</strong> : compacte, compatible avec la plupart des nichoirs, même qualité que le kit.</li>
+<li><strong>Limites</strong> : microSD non fournie, fixation dans le nichoir à prévoir vous-même.</li>
+</ul>
+<p><a href="{AMZ:Green Feathers camera wifi nichoir 1080p}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Green Feathers caméra filaire PoE : la liaison la plus fiable</h2>
+<p><strong>Pour qui ?</strong> Le wifi passe mal au jardin, et vous êtes prêt à tirer un câble réseau.</p>
+<p>Un seul câble Ethernet transporte à la fois l'image et le courant (PoE), jusqu'à 100 m selon Green Feathers. Vidéo 1080p en grand angle de 92°, LED infrarouges invisibles et éclairage blanc intégré, micro, mémoire de 64 Go intégrée.</p>
+<ul>
+<li><strong>Points forts</strong> : pas de souci de portée wifi, longue distance possible, boîtier IP66.</li>
+<li><strong>Limites</strong> : injecteur PoE non inclus, pas d'emplacement microSD, cloud par abonnement. Sur Amazon.fr, la fiche trouvée semble correspondre à une version plus ancienne : vérifiez la génération.</li>
+</ul>
+<p><a href="{AMZ:Green Feathers camera nichoir PoE filaire}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Green Feathers caméra filaire vers téléviseur : sans application</h2>
+<p><strong>Pour qui ?</strong> Une famille qui veut regarder la nichée sur la télé du salon, sans smartphone ni compte en ligne.</p>
+<p>La caméra se relie au téléviseur par un câble de 20 m, avec un adaptateur vers HDMI fourni. Image 1080p, LED infrarouges invisibles (images de nuit en noir et blanc), micro intégré, alimentation secteur 12 V.</p>
+<ul>
+<li><strong>Points forts</strong> : aucune application, aucun réglage réseau, les enfants voient la nichée en grand.</li>
+<li><strong>Limites</strong> : pas d'enregistrement précisé, pas de visionnage à distance. Nous n'avons pas pu confirmer que la fiche Amazon.fr correspond exactement à ce modèle.</li>
+</ul>
+<p><a href="{AMZ:Green Feathers camera filaire nichoir infrarouge 20 m}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Birdfy Nest Duo : deux caméras et des entrées interchangeables</h2>
+<p><strong>Pour qui ?</strong> Vous ne savez pas quelle espèce viendra et voulez un nichoir connecté tout-en-un, sans câble.</p>
+<p>Ce nichoir en bambou et ABS embarque deux caméras 2 MP, une batterie de 9000 mAh et un panneau solaire de 5 W. Selon le site français de Birdfy, l'entrée se change grâce à des grilles métalliques de 23, 25, 28, 38 et 50 mm. Vision de nuit infrarouge ou en lumière blanche.</p>
+<ul>
+<li><strong>Points forts</strong> : deux angles de vue, entrées adaptables à plusieurs espèces, autonome en énergie.</li>
+<li><strong>Limites</strong> : pas de microSD, l'enregistrement passe par le cloud (gratuit pendant la nidification selon Birdfy, abonnement ensuite en option). Lourd : 3,4 kg. Les sources de la marque se contredisent sur l'audio bidirectionnel.</li>
+</ul>
+<p><a href="{AMZ:Birdfy Nest Duo nichoir}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Nestera nichoir caméra wifi : la meilleure définition annoncée</h2>
+<p><strong>Pour qui ?</strong> Vous voulez l'image la plus détaillée et avez une prise à moins de 10 m.</p>
+<p>Nichoir en cèdre rouge certifié PEFC, avec caméra wifi 4 MP (2560 x 1440), LED infrarouges et micro intégré. Des plaques de réduction de 28 et 32 mm sont fournies pour adapter le trou d'envol. Alimentation secteur avec un câble de 10 m, carte microSD jusqu'à 128 Go.</p>
+<ul>
+<li><strong>Points forts</strong> : définition la plus élevée de cette sélection, bois de cèdre, deux tailles d'entrée.</li>
+<li><strong>Limites</strong> : wifi 2,4 GHz seulement, invisibilité de l'infrarouge non précisée, cloud non précisé. Nos informations viennent du site de la marque et de la documentation liée à la fiche Amazon.</li>
+</ul>
+<p><a href="{AMZ:Nestera nichoir camera wifi}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Camouflage EZ-NestEye : avec reconnaissance des espèces</h2>
+<p><strong>Pour qui ?</strong> Le curieux qui veut que l'application lui dise quel oiseau entre dans le nichoir.</p>
+<p>Selon Nature et Découvertes, ce nichoir en bois intègre une caméra Full HD, un panneau solaire, une batterie et une mémoire de 32 Go. Il propose trois ouvertures différentes et une détection des espèces par intelligence artificielle via l'application Birdlovers. 20 x 19 x 32 cm, 2,2 kg.</p>
+<ul>
+<li><strong>Points forts</strong> : autonome, identification automatique, plusieurs tailles d'entrée.</li>
+<li><strong>Limites</strong> : diamètres des ouvertures, vision nocturne et audio non précisés sur la fiche consultée.</li>
+</ul>
+<p><a href="{AMZ:Camouflage EZ NestEye nichoir}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Wifi, solaire ou filaire : comment choisir votre nichoir caméra ?</h2>
+<p><strong>Commencez par la distance.</strong> C'est le critère qui tranche. Mesurez la distance entre le nichoir et la prise la plus proche, puis entre le nichoir et votre box. Par exemple, un nichoir à 8 m de la maison et à portée du wifi : un modèle secteur comme le n°1 ou le n°7 convient. À 25 m, au fond du jardin : solaire, ou filaire PoE si le wifi n'arrive pas jusque-là.</p>
+<p><strong>Regardez l'infrarouge.</strong> Les LED « invisibles » n'émettent pas de lueur rouge visible dans le nichoir. Plusieurs fiches le précisent, d'autres non.</p>
+<p><strong>Anticipez l'enregistrement.</strong> Carte microSD, mémoire intégrée ou cloud : vérifiez si un abonnement devient nécessaire après la première saison.</p>
+<p><strong>Le trou d'envol compte autant que la caméra.</strong> Un nichoir caméra reste un nichoir : la taille de l'entrée détermine les espèces qui pourront s'y installer. Notre article sur <a href="{R}installer-un-nichoir/">l'installation d'un nichoir</a> explique l'orientation, la hauteur et la bonne période pour le poser.</p>
+<p><strong>Notre conseil</strong> : installez et réglez la caméra avant la saison de nidification, parce qu'ouvrir un nichoir occupé pour corriger un angle ou changer une carte mémoire va à l'encontre de l'idée même d'observer sans déranger. Faites vos essais d'image à vide, en hiver.</p>
+<p>Pour observer les oiseaux à la mangeoire en plus du nichoir, regardez aussi notre sélection des <a href="{R}meilleure-mangeoire-connectee/">meilleures mangeoires connectées</a>, et notre <a href="{R}nourrir-les-oiseaux-du-jardin/">guide pour bien nourrir les oiseaux du jardin</a>.</p>
+""",
+  faq=[("Faut-il un nichoir caméra wifi ou filaire ?", "Le wifi est le plus simple si votre box couvre l'emplacement du nichoir. Le filaire, par câble réseau PoE ou câble vers le téléviseur, donne une liaison plus stable et convient quand le wifi n'atteint pas le fond du jardin. Sans prise électrique à proximité, choisissez un modèle solaire avec batterie."),
+       ("La caméra dérange-t-elle les oiseaux la nuit ?", "Les fabricants équipent la plupart de ces caméras de LED infrarouges, dont plusieurs sont annoncées comme invisibles, c'est-à-dire sans lueur visible. Vérifiez cette mention sur la fiche du modèle, et installez la caméra avant la nidification pour ne pas avoir à ouvrir le nichoir ensuite."),
+       ("Avez-vous testé ces nichoirs caméra ?", "Non. Cette sélection repose sur les fiches publiées par les fabricants et par des revendeurs. Nous indiquons « non précisé » quand une donnée manque, sans note ni avis de prise en main.")],
+  short="Top 8 nichoirs caméra", cat="Nichoirs")

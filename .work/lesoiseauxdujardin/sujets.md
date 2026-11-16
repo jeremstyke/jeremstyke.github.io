@@ -5,7 +5,7 @@
 - [x] comment-choisir-mangeoire-connectee/ | mangeoire connectée | Mangeoires | lancement
 - [x] installer-un-nichoir/ | installer un nichoir | Nichoirs | lancement
 - [x] boule-de-graisse-oiseaux/ | boule de graisse oiseaux | Nourrir | sans filet, recette maison, quand en donner
-- [ ] eau-pour-les-oiseaux-en-hiver/ | abreuvoir oiseaux hiver | Nourrir | eau propre, gel, pas de sel ni antigel
+- [x] eau-pour-les-oiseaux-en-hiver/ | abreuvoir oiseaux hiver | Nourrir | eau propre, gel, pas de sel ni antigel
 - [ ] nettoyer-une-mangeoire/ | nettoyer une mangeoire | Mangeoires | fréquence, produits, maladies (salmonellose, trichomonose)
 - [ ] fabriquer-une-mangeoire/ | fabriquer une mangeoire | Mangeoires | modèles simples, matériaux sans danger
 - [ ] proteger-la-mangeoire-des-chats/ | protéger la mangeoire des chats | Mangeoires | hauteur, emplacement, collerette
