@@ -23,3 +23,7 @@ Liens internes et sources (décidé le 17 nov 2026), à chaque publication :
 - Titres : 60 caractères maximum si possible, mot-clé principal au début, année seulement sur les comparatifs et pages d'aides. Au premier dimanche de janvier, passer les « 2026 » des titres et H1 des comparatifs à « 2027 » après avoir revérifié que les produits sont toujours vendus.
 - Chaque nouvelle page : meta description unique de 140 à 160 caractères, une FAQ de 3 à 5 vraies questions, au moins 2 liens internes sortants vers des pages proches.
 - Interdits : contenu dupliqué entre pages, bourrage de mots-clés, faux avis, faux tests (« nous avons testé ») quand ce n'est pas vrai.
+
+## Liens entre les 4 sites (17 nov 2026)
+- Les 4 sites (Vieillir chez soi, Les oiseaux du jardin, Ma liste bébé, Ma liste mariage) se citent dans le pied de page.
+- Dans le texte : au maximum 1 lien vers un site frère par page, seulement quand c'est vraiment utile au lecteur (ex. mangeoire de fenêtre -> cadeau personne âgée ; cadeau personne âgée -> cadeau passionné d'oiseaux ; mariage avec bébé en route -> liste de naissance). Jamais de lien forcé, jamais d'ancre bourrée de mots-clés.

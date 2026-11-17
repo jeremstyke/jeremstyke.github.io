@@ -2418,6 +2418,7 @@ g("meilleure-mangeoire-fenetre/",
 {CTA}
 <div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
 
+<p>Elle fait aussi un très beau cadeau pour un parent âgé qui sort moins de chez lui : les oiseaux viennent jusqu'à sa fenêtre. D'autres idées dans ce guide des <a href="https://vieillir-chez-soi.fr/cadeau-personne-agee/">cadeaux pour une personne âgée</a>.</p>
 <h2>Le tableau récapitulatif</h2>
 <table><thead><tr><th>Produit</th><th>Matériau</th><th>Fixation</th><th>Toit</th><th>Dimensions annoncées</th></tr></thead><tbody>
 <tr><td>Nature Anywhere Birds-I-View</td><td>Polycarbonate 4 mm</td><td>Ventouses (3 selon la fiche Amazon.fr)</td><td>Non précisé</td><td>25 x 11 x 25 cm environ</td></tr>
