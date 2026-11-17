@@ -200,7 +200,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 <div class="wrap">
   <div class="hd">
     <div class="cash"><svg class="coin" viewBox="0 0 32 32" width="34" height="34"><circle cx="16" cy="16" r="15" fill="#f4b73c" stroke="#d9951a" stroke-width="2"/><circle cx="16" cy="16" r="11" fill="none" stroke="#fff3c4" stroke-width="1.5"/><path d="M16 8.5 L8.5 15 H11 V23 H21 V15 H23.5 Z" fill="#fff3c4"/></svg><span id="cash">0</span></div>
-    <div class="sub"><span class="chip" id="rate">$0/s</span><span class="chip" id="mult">x1</span><span class="chip gold" id="boost" hidden></span><span class="chip ev" id="evc"></span><span class="chip gold" id="goldc" hidden>👑 x1.5</span></div>
+    <div class="sub"><span class="chip" id="rate">$0/s</span><span class="chip" id="mult">x1</span><span class="chip gold" id="boost" hidden></span><span class="chip ev" id="evc"></span><span class="chip gold" id="goldc" hidden>👑 x1.5</span><span class="chip" id="invc" style="cursor:pointer">👥 +</span></div>
   </div>
   <div class="scene"><div class="sky" id="sky"></div></div>
 
@@ -434,6 +434,7 @@ function build() {
   };
   buildSky(); buildBanners(); paint();
   tutoStart();
+  $('invc').onclick = shareInvite;
   setInterval(tick, 100);
   setInterval(() => { if (!document.hidden) call({ act: 'state' }); }, 7000);
   document.addEventListener('visibilitychange', () => { if (!document.hidden) call({ act: 'state' }); });
@@ -458,6 +459,11 @@ const TUTO = {
     ['🏆', 'Top 10 de la semaine', 'Jouer est gratuit. Les 10 meilleurs de la semaine se partagent une partie des Étoiles dépensées. Ajoute ton portefeuille dans l\'onglet Top pour être payé en USDT.'],
   ],
 };
+function shareInvite() {
+  const link = 'https://t.me/Idleestatebot?start=ref_' + S.uid;
+  const u = 'https://t.me/share/url?url=' + encodeURIComponent(link) + '&text=' + encodeURIComponent(L.shareTxt);
+  try { if (tgw && tgw.openTelegramLink) tgw.openTelegramLink(u); else window.open(u, '_blank'); } catch (x) { window.open(u, '_blank'); }
+}
 function tutoStart() {
   try { if (localStorage.getItem('ie_tuto1')) return; } catch (e) {}
   const T = TUTO[lang] || TUTO.en; let k = 0;
