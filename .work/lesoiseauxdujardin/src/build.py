@@ -13,6 +13,7 @@ OUT = os.path.join(ROOT, 'docs')
 DOMAIN = 'lesoiseauxdujardin.fr'
 BASE = os.environ.get('LOJ_BASE', 'https://' + DOMAIN)
 SITE = 'Les oiseaux du jardin'
+AUTHOR_NAME = 'Jérémy Dacier-Jury'
 LLMS_INTRO = "Les oiseaux du jardin aide à reconnaître, nourrir et accueillir les oiseaux du jardin en France : fiches espèces, pages d'identification (par couleur, taille, chant), conseils pour nourrir les oiseaux et installer un nichoir, comparatifs de mangeoires, nichoirs avec caméra et jumelles. Les faits sur les oiseaux viennent de sources sérieuses (LPO, oiseaux.net, INPN). Les liens vers Amazon sont des liens d'affiliation."
 TAG = 'lesoiseauxdujardin-21'   # identifiant Amazon Partenaires
 CONTACT = 'contact@cvlibre.com'
@@ -71,10 +72,16 @@ def render(body):
     body = body.replace('{CTA}', CTA)
     return re.sub(r'\{AMZ:([^}]+)\}', lambda m: amz(m.group(1)), body)
 
+AUTHOR_LD = {"@type": "Person", "name": AUTHOR_NAME, "url": BASE + '/a-propos/'}
+PUBLISHER_LD = {"@type": "Organization", "name": SITE, "url": BASE + '/', "logo": {"@type": "ImageObject", "url": BASE + '/assets/icon-192.png'}}
+BYLINE = ' · par <a href="/a-propos/" rel="author">' + AUTHOR_NAME.split()[0] + '</a>'
+
+
 def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None, kind='website'):
     R = '../' * path.count('/')
     url = BASE + '/' + path
-    ld = [{"@context": "https://schema.org", "@type": "WebSite", "name": SITE, "url": BASE + '/'}]
+    ld = [{"@context": "https://schema.org", "@type": "WebSite", "name": SITE, "url": BASE + '/', "inLanguage": "fr", "publisher": PUBLISHER_LD}]
+    if path == '': ld.append(dict({"@context": "https://schema.org"}, **PUBLISHER_LD))
     if crumbs:
         items = [{"@type": "ListItem", "position": 1, "name": "Accueil", "item": BASE + '/'}]
         for i, (n, p) in enumerate(crumbs):
@@ -231,9 +238,9 @@ def build():
         same = [o for o in latest if o['slug'] != x['slug'] and o['cat'] == x['cat']]
         others = (same + [o for o in latest if o['slug'] != x['slug'] and o not in same])[:3]
         rel = '<section class="related"><h2>À lire aussi</h2><div class="cards">%s</div></section>' % ''.join(card(o) for o in others) if others else ''
-        meta = '<p class="meta">Mis à jour le %s · %d min de lecture</p>' % (fr_date(dates[x['slug']]), read_min(x['body']))
+        meta = ('<p class="meta">Mis à jour le %s' + BYLINE + ' · %d min de lecture</p>') % (fr_date(dates[x['slug']]), read_min(x['body']))
         art = [{"@context": "https://schema.org", "@type": "Article", "headline": x['h1'], "description": x['desc'], "inLanguage": "fr",
-                "author": {"@type": "Organization", "name": SITE}, "publisher": {"@type": "Organization", "name": SITE},
+                "author": AUTHOR_LD, "publisher": PUBLISHER_LD,
                 "mainEntityOfPage": BASE + '/' + x['slug'], "datePublished": dates[x['slug']], "dateModified": dates[x['slug']]}]
         body = ('<div class="wrap art-wrap"><article class="prose"><p class="art-cat t-%s"><span aria-hidden="true">%s</span> %s</p><h1>%s</h1>%s%s%s'
                 '<p class="disc-in">Liens d\'affiliation : nous touchons une commission sur certains achats, sans surcoût pour vous.</p></article>%s</div>') % (
@@ -244,6 +251,7 @@ def build():
     page('a-propos/', 'À propos des Oiseaux du jardin', "Qui sommes-nous, d'où viennent nos conseils et comment le site est financé.",
          f'''<div class="wrap art-wrap"><article class="prose"><h1>À propos</h1>
 <p>Les oiseaux du jardin aide chacun à nourrir, loger et observer les oiseaux près de chez soi, en respectant leurs besoins. Le site est édité par Jérémy Dacier-Jury.</p>
+<h2>Qui écrit</h2><p>Les articles sont rédigés et relus par Jérémy Dacier-Jury, éditeur du site, avec l'aide d'outils de rédaction. Chaque page indique sa date de mise à jour, et les sources (LPO, oiseaux.net, INPN) figurent en bas des articles. Une erreur ? <a href="mailto:{CONTACT}">Écrivez-nous</a>, nous corrigeons.</p>
 <h2>Nos conseils</h2><p>Nos conseils sur le nourrissage et les nichoirs s'appuient sur les recommandations publiées par les associations de protection des oiseaux, comme la LPO. Nous ne citons pas de prix ni de caractéristiques que nous n'avons pas vérifiés, et nous n'avons pas testé les produits présentés dans nos comparatifs : ils sont choisis d'après les fiches des fabricants et des revendeurs.</p>
 <h2>Comment le site est financé</h2><p>{DISCLOSURE} Quand vous achetez après avoir cliqué sur un lien vers Amazon, nous touchons une commission, sans surcoût pour vous.</p>
 <h2>Contact</h2><p><a href="mailto:{CONTACT}">{CONTACT}</a></p></article></div>''', crumbs=[('À propos', 'a-propos/')], prio='0.3')

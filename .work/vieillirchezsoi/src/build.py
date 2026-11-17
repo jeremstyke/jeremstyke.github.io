@@ -20,6 +20,7 @@ else:
     OUT = os.path.join(os.path.abspath(os.path.join(HERE, '..', '..', '..')), 'vieillirchezsoi')
     BASE = os.environ.get('VCS_BASE', 'https://jeremstyke.github.io/vieillirchezsoi')
 SITE = 'Vieillir chez soi'
+AUTHOR_NAME = 'Jérémy Dacier-Jury'
 LLMS_INTRO = "Vieillir chez soi aide les seniors et leurs proches aidants à rester à la maison en sécurité : guides pratiques pour adapter le logement pièce par pièce, comparatifs de matériel (aides à la marche, salle de bain, fauteuils releveurs, téléassistance), explications sur les aides (APA, aides des caisses de retraite, crédit d'impôt) et sur la retraite. Les informations sur les aides et la retraite sont vérifiées sur les sites officiels (service-public.fr, info-retraite.fr, lassuranceretraite.fr). Les liens vers Amazon sont des liens d'affiliation."
 TAG = 'viellirchezsoi-21'   # identifiant Amazon Partenaires (orthographe exacte du compte)
 CONTACT = 'contact@vieillir-chez-soi.fr'
@@ -85,11 +86,17 @@ def render(body):
     body = body.replace('{AUDIBLE}', 'https://www.amazon.fr/hz/audible/mlp?actionCode=AMSTM1450129210001&tag=' + TAG)
     return re.sub(r'\{AMZ:([^}]+)\}', lambda m: amz(m.group(1)), body)
 
+AUTHOR_LD = {"@type": "Person", "name": AUTHOR_NAME, "url": BASE + '/a-propos/'}
+PUBLISHER_LD = {"@type": "Organization", "name": SITE, "url": BASE + '/', "logo": {"@type": "ImageObject", "url": BASE + '/assets/icon-192.png'}}
+BYLINE = ' · par <a href="/a-propos/" rel="author">' + AUTHOR_NAME.split()[0] + '</a>'
+
+
 def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None, kind='website'):
     depth = path.count('/')
     R = '../' * depth
     url = BASE + '/' + path
-    ld = [{"@context": "https://schema.org", "@type": "WebSite", "name": SITE, "url": BASE + '/'}]
+    ld = [{"@context": "https://schema.org", "@type": "WebSite", "name": SITE, "url": BASE + '/', "inLanguage": "fr", "publisher": PUBLISHER_LD}]
+    if path == '': ld.append(dict({"@context": "https://schema.org"}, **PUBLISHER_LD))
     if crumbs:
         items = [{"@type": "ListItem", "position": 1, "name": "Accueil", "item": BASE + '/'}]
         for i, (n, p) in enumerate(crumbs):
@@ -249,7 +256,7 @@ def build():
                  '<ul class="cl">%s</ul>%s</section>') % (TINTS[i % len(TINTS)], i, emo, esc(name), ROOM_INTRO.get(name, ''), rows, more)
     fh, fs = faq_html(HUB_FAQ)
     art = [{"@context": "https://schema.org", "@type": "Article", "headline": "Aménager le logement d'une personne âgée : le guide pièce par pièce",
-            "inLanguage": "fr", "author": {"@type": "Organization", "name": SITE}, "publisher": {"@type": "Organization", "name": SITE},
+            "inLanguage": "fr", "author": AUTHOR_LD, "publisher": PUBLISHER_LD,
             "mainEntityOfPage": BASE + '/' + HUB, "datePublished": dates[HUB], "dateModified": TODAY}]
     body = f'''<div class="wrap art-wrap"><article class="prose">
 <p class="art-cat t-sable"><span aria-hidden="true">🏡</span> Guide complet</p>
@@ -315,10 +322,10 @@ def build():
         same = [o for o in latest if o['slug'] != x['slug'] and o['cat'] == x['cat']]
         others = (same + [o for o in latest if o['slug'] != x['slug'] and o not in same])[:3]
         gbody = add_toc(x['body'])
-        meta = '<p class="meta">Mis à jour le %s · %d min de lecture</p>' % (fr_date(dates[x['slug']]), read_min(x['body']))
+        meta = ('<p class="meta">Mis à jour le %s' + BYLINE + ' · %d min de lecture</p>') % (fr_date(dates[x['slug']]), read_min(x['body']))
         rel = '<section class="related"><h2>À lire aussi</h2><div class="cards">%s</div></section>' % ''.join(card(o) for o in others) if others else ''
         art = [{"@context": "https://schema.org", "@type": "Article", "headline": x['h1'], "description": x['desc'],
-                "inLanguage": "fr", "author": {"@type": "Organization", "name": SITE}, "publisher": {"@type": "Organization", "name": SITE},
+                "inLanguage": "fr", "author": AUTHOR_LD, "publisher": PUBLISHER_LD,
                 "mainEntityOfPage": BASE + '/' + x['slug'], "datePublished": dates[x['slug']], "dateModified": dates[x['slug']]}]
         body = ('<div class="wrap art-wrap"><article class="prose"><p class="art-cat t-%s"><span aria-hidden="true">%s</span> %s</p><h1>%s</h1>%s%s%s'
                 '<p class="disc-in">Ces conseils sont généraux et ne remplacent pas l\'avis d\'un professionnel de santé. Liens d\'affiliation : nous touchons une commission sur certains achats, sans surcoût pour vous.</p></article>%s</div>') % (
@@ -329,7 +336,12 @@ def build():
     page('a-propos/', 'À propos de Vieillir chez soi', "Qui sommes-nous, comment nous choisissons nos conseils et comment le site est financé.",
          f'''<div class="wrap art-wrap"><article class="prose"><h1>À propos</h1>
 <p>Vieillir chez soi aide les seniors et leurs proches à choisir l'équipement utile pour rester à la maison en sécurité. Le site est édité par Jérémy Dacier-Jury.</p>
-<h2>Nos conseils</h2><p>Nous expliquons les critères de choix de chaque équipement. Nous ne citons pas de prix ni de caractéristiques que nous n'avons pas vérifiés. Nos articles sont des conseils généraux : pour une situation précise, l'avis du médecin, d'un ergothérapeute ou du pharmacien prime toujours.</p>
+<h2>Qui écrit</h2><p>Les articles sont rédigés et relus par Jérémy Dacier-Jury, éditeur du site, avec l'aide d'outils de rédaction. Chaque page indique sa date de mise à jour.</p>
+<h2>Notre méthode</h2><ul><li><strong>Des sources officielles</strong> pour les aides, les droits et les démarches : service-public.fr, pour-les-personnes-agees.gouv.fr, l'Anah, l'Assurance retraite, l'Assurance maladie. Les liens figurent en bas des articles.</li>
+<li><strong>Des critères de choix expliqués</strong> pour chaque équipement : sécurité, normes, facilité d'usage, entretien. Nous ne testons pas nous-mêmes tous les produits : les comparatifs s'appuient sur les fiches des fabricants, les normes et les retours d'utilisateurs.</li>
+<li><strong>Aucun prix ni caractéristique non vérifiés.</strong> Les montants des aides sont datés et revérifiés lors des mises à jour.</li>
+<li><strong>Des corrections rapides</strong> : une erreur ou une information dépassée ? <a href="/contact/">Signalez-la</a>, nous la corrigeons.</li></ul>
+<p>Nos articles sont des conseils généraux : pour une situation précise, l'avis du médecin, d'un ergothérapeute ou du pharmacien prime toujours.</p>
 <h2>Comment le site est financé</h2><p>{DISCLOSURE} Quand vous achetez après avoir cliqué sur un lien vers Amazon, nous touchons une commission, sans surcoût pour vous. Cela ne change pas nos conseils.</p>
 <h2>Contact</h2><p><a href="mailto:{CONTACT}">{CONTACT}</a></p></article></div>''', crumbs=[('À propos', 'a-propos/')], prio='0.3')
     page('contact/', 'Contact : écrire à Vieillir chez soi', "Une question, une erreur à signaler ou une proposition de partenariat ? Écrivez à l'équipe de Vieillir chez soi : voici comment nous joindre.",

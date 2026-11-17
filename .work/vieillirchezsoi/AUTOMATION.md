@@ -43,3 +43,10 @@ Liens internes et externes (décidé le 17 nov 2026), à chaque publication :
 - ManoMano et Domaliance : une fois le lien fourni par Jeremy, utilisables directement.
 - Verisure : JAMAIS de publication automatique d'un contenu qui mentionne Verisure avec un lien affilié. Préparer la page ou le paragraphe en brouillon (hors sitemap, non publié), puis prévenir Jeremy pour qu'il demande la validation du contenu à Verisure via Awin. Publier seulement après son feu vert explicite.
 - Verisure et Sector Alarm : SEM et achat de mots-clés de marque interdits.
+
+## SEO renforcé (17 nov 2026)
+- Auteur : les articles sont signés Jérémy Dacier-Jury (byline + schema Person, publisher Organization avec logo). Ne pas retirer.
+- Relecture du dimanche : en plus du maillage, ajouter un bloc `<p class="sources">` (2 ou 3 liens officiels réellement pertinents, vérifiés en 200) à 8 anciennes pages qui n'en ont pas, les plus anciennes d'abord, jusqu'à ce que toutes en aient. Mettre à jour la date de la page dans src/dates.json seulement si le contenu a vraiment changé.
+- Titres : 60 caractères maximum si possible, mot-clé principal au début, année seulement sur les comparatifs et pages d'aides. Au premier dimanche de janvier, passer les « 2026 » des titres et H1 des comparatifs à « 2027 » après avoir revérifié que les produits sont toujours vendus.
+- Chaque nouvelle page : meta description unique de 140 à 160 caractères, une FAQ de 3 à 5 vraies questions, au moins 2 liens internes sortants vers des pages proches.
+- Interdits : contenu dupliqué entre pages, bourrage de mots-clés, faux avis, faux tests (« nous avons testé ») quand ce n'est pas vrai.

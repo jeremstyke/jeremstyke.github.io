@@ -16,3 +16,10 @@ Rythme quotidien et réapprovisionnement (décidé par Jeremy le 17 nov 2026) : 
 Liens internes et sources (décidé le 17 nov 2026), à chaque publication :
 - Maillage interne : après avoir écrit une nouvelle page, ajoute 1 à 3 liens vers elle DEPUIS des pages existantes proches (espèces qu'on confond, même famille, même mangeoire ou nichoir, top lié), dans une phrase naturelle avec une ancre descriptive. Jamais plus d'un nouveau lien par ancienne page et par publication.
 - Sources : chaque fiche espèce ou page d'identification se termine (avant la FAQ) par <p class="sources"><strong>Sources</strong> : <a href="URL" target="_blank" rel="noopener">LPO, oiseaux.net ou INPN : titre de la page</a> (vérifié le JJ mois AAAA)</p>, avec 1 à 3 pages réellement consultées.
+
+## SEO renforcé (17 nov 2026)
+- Auteur : les articles sont signés Jérémy Dacier-Jury (byline + schema Person, publisher Organization avec logo). Ne pas retirer.
+- Relecture du dimanche : en plus du maillage, ajouter un bloc `<p class="sources">` (2 ou 3 liens officiels réellement pertinents, vérifiés en 200) à 8 anciennes pages qui n'en ont pas, les plus anciennes d'abord, jusqu'à ce que toutes en aient. Mettre à jour la date de la page dans src/dates.json seulement si le contenu a vraiment changé.
+- Titres : 60 caractères maximum si possible, mot-clé principal au début, année seulement sur les comparatifs et pages d'aides. Au premier dimanche de janvier, passer les « 2026 » des titres et H1 des comparatifs à « 2027 » après avoir revérifié que les produits sont toujours vendus.
+- Chaque nouvelle page : meta description unique de 140 à 160 caractères, une FAQ de 3 à 5 vraies questions, au moins 2 liens internes sortants vers des pages proches.
+- Interdits : contenu dupliqué entre pages, bourrage de mots-clés, faux avis, faux tests (« nous avons testé ») quand ce n'est pas vrai.
