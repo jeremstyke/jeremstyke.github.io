@@ -1,6 +1,6 @@
 # Sujets d'articles à venir pour Vieillir chez soi (un tous les 2 jours)
-# Format : - [ ] livres-audio-personne-agee/ | livre audio pour personne âgée | Vie quotidienne | quand la vue baisse, comment écouter (enceinte simple, téléphone, tablette, casque), trouver des livres audio, installer avec son proche ; lien {AUDIBLE} vers l'essai gratuit en bonne place et liens {AMZ} vers les appareils
-- [ ] slug/ | requête visée | catégorie | angle
+# Format : - [ ] slug/ | requête visée | catégorie | angle
+- [ ] livres-audio-personne-agee/ | livre audio pour personne âgée | Vie quotidienne | quand la vue baisse, comment écouter (enceinte simple, téléphone, tablette, casque), trouver des livres audio, installer avec son proche ; lien {AUDIBLE} vers l'essai gratuit en bonne place et liens {AMZ} vers les appareils
 - [ ] apa-allocation-personnalisee-autonomie/ | APA allocation personnalisée d'autonomie | Conseils pour les proches | qui y a droit, GIR, démarche auprès du département, ce qu'elle finance (aide à domicile, téléassistance, aménagements), montants seulement si lus sur service-public.fr ou pour-les-personnes-agees.gouv.fr avec la date
 - [ ] siege-de-douche-ou-tabouret/ | siège de douche ou tabouret de douche | Salle de bains | aide au choix juste avant l'achat, selon l'équilibre et la place, renvoi vers le top sièges de douche
 - [ ] aide-menagere-caisse-de-retraite/ | aide ménagère caisse de retraite | Conseils pour les proches | aide de la caisse de retraite (Assurance retraite, Agirc-Arrco) pour les GIR 5 et 6, démarche, différence avec l'APA, sources officielles uniquement
