@@ -551,7 +551,7 @@ g("prevenir-les-chutes-a-la-maison/",
 <li><strong>Asseyez-vous</strong> au bord du lit, les pieds bien à plat au sol, et attendez quelques secondes.</li>
 <li><strong>Levez-vous</strong> en prenant appui sur un point stable, puis restez debout un moment avant de marcher.</li>
 </ul>
-<p>Si la tête tourne souvent quand vous vous levez, parlez-en à votre médecin. Une <a href="{AMZ:poignee aide au lever lit}" """ + A + """>poignée d'aide au lever</a> fixée au lit peut aussi rendre ce moment plus sûr. Quand se relever d'un fauteuil devient pénible, lisez notre guide sur le <a href="{R}fauteuil-releveur/">fauteuil releveur</a>.</p>
+<p>Si la tête tourne souvent quand vous vous levez, parlez-en à votre médecin. Une <a href="{AMZ:poignee aide au lever lit}" """ + A + """>poignée d'aide au lever</a> fixée au lit peut aussi rendre ce moment plus sûr. Quand se relever d'un fauteuil devient pénible, lisez notre guide sur le <a href="{R}fauteuil-releveur/">fauteuil releveur</a>. Et si se lever du lit lui-même devient difficile, notre <a href="{R}meilleur-lit-medicalise/">comparatif des lits médicalisés électriques</a> peut vous aider.</p>
 <h2>Bien se chausser, même à la maison</h2>
 <p>Les mules, les chaussons avachis et les chaussettes sur un sol lisse font partie des pièges les plus courants. À la maison comme dehors, préférez :</p>
 <ul>
@@ -731,7 +731,7 @@ g("cadeau-personne-agee/",
 </ul>
 <p>Au fond, le cadeau qui compte le plus reste souvent votre présence : un après-midi passé ensemble, un appel régulier, une visite. Un objet bien choisi vient simplement prolonger ce lien.</p>
 <h2>Une idée de cadeau qui ne prend pas de place</h2>
-<p>Si votre proche aimait lire mais se fatigue vite, pensez au livre audio. Le plus simple est de l'installer avec lui sur son téléphone ou sa tablette, puis de choisir ensemble un premier titre. Audible propose un essai gratuit de 30 jours avec un livre audio offert, résiliable à tout moment : de quoi vérifier que le format lui plaît avant tout abonnement. <a href="{AUDIBLE}" """ + A + """>Essayer Audible gratuitement</a></p>
+<p>Si votre proche aimait lire mais se fatigue vite, pensez au livre audio. Le plus simple est de l'installer avec lui sur son téléphone ou sa tablette, puis de choisir ensemble un premier titre (notre guide pour <a href="{R}livres-audio-personne-agee/">écouter des livres audio quand on est âgé</a> détaille chaque étape). Audible propose un essai gratuit de 30 jours avec un livre audio offert, résiliable à tout moment : de quoi vérifier que le format lui plaît avant tout abonnement. <a href="{AUDIBLE}" """ + A + """>Essayer Audible gratuitement</a></p>
 """,
   faq=[("Quel cadeau utile offrir à une personne âgée ?", "Partez de ses besoins : un plaid chauffant ou des chaussons fermés pour le confort, un casque TV si elle monte le son, une loupe si elle a du mal à lire, un cadre photo numérique pour garder le lien avec la famille."),
        ("Quelle idée de cadeau de Noël pour une personne âgée qui a déjà tout ?", "Misez sur le lien et les souvenirs : album photo, cadre photo numérique, sortie partagée ou moment en famille. Un cadeau commun entre frères et sœurs permet aussi d'offrir un équipement de qualité."),
@@ -2436,7 +2436,7 @@ g("meilleurs-livres-gros-caracteres/",
 <p><strong>Et la lumière.</strong> Un bon éclairage change tout, avec ou sans gros caractères. Une lampe placée sur le côté, sans reflet sur la page, aide beaucoup.</p>
 <p>Si la lecture devient vraiment difficile malgré tout, d'autres solutions existent : les livres audio, ou une loupe de lecture. Nos idées de <a href="{R}cadeau-personne-agee/">cadeaux pour une personne âgée</a> en proposent d'autres, et notre sélection de <a href="{R}meilleur-casque-tv-senior/">casques TV pour seniors</a> aidera ceux qui préfèrent écouter. Pour un éclairage sûr dans toute la maison, consultez notre guide pour <a href="{R}amenager-logement-personne-agee/">aménager le logement pièce par pièce</a>.</p>
 <h2>Et quand lire devient vraiment trop fatigant ?</h2>
-<p>Le livre audio prend le relais. On écoute le même roman, lu par un comédien, sur un téléphone, une tablette ou une petite enceinte, sans effort pour les yeux. Beaucoup de lecteurs alternent : le livre en gros caractères le matin, quand la vue est reposée, et l'écoute le soir.</p>
+<p>Le livre audio prend le relais. On écoute le même roman, lu par un comédien, sur un téléphone, une tablette ou une petite enceinte, sans effort pour les yeux. Beaucoup de lecteurs alternent : le livre en gros caractères le matin, quand la vue est reposée, et l'écoute le soir. Pour choisir l'appareil et trouver des titres, voyez notre guide du <a href="{R}livres-audio-personne-agee/">livre audio pour personne âgée</a>.</p>
 <p>Pour essayer sans risque, Audible propose un essai gratuit de 30 jours avec un livre audio offert, résiliable à tout moment, et le livre reste accessible même après l'arrêt. Notre conseil : choisissez pour ce premier livre un roman déjà aimé, la voix du lecteur compte autant que l'histoire. <a href="{AUDIBLE}" """ + A + """>Essayer Audible gratuitement</a></p>
 """,
   faq=[("Quelle taille de police pour un livre en gros caractères ?", "Les éditeurs spécialisés publient le plus souvent en corps 16, 18 ou 20, et parfois jusqu'à 25. Le corps 16 convient à une vue un peu fatiguée ; au-delà, préférez 18 ou 20. Une baisse de la vue mérite toujours un avis de l'ophtalmologiste."),
@@ -3355,3 +3355,160 @@ g("meilleure-barre-d-appui/",
        ("Une barre d'appui à ventouses est-elle sûre ?", "Elle peut dépanner, mais les fabricants la réservent généralement à un usage temporaire et demandent de vérifier la tenue avant chaque utilisation. Pour se relever en prenant appui de tout son poids, il faut une barre vissée dans un mur solide."),
        ("Avez-vous testé ces barres d'appui ?", "Non. Cette sélection repose sur les caractéristiques publiées par les fabricants et les revendeurs, sans note ni avis de prise en main. Vérifiez la référence exacte et la nature de votre mur avant d'acheter.")],
   short="Top 10 barres d'appui", cat="Salle de bains")
+
+AUTO_META['livres-audio-personne-agee/'] = ('🎧', 'lilas')
+g("livres-audio-personne-agee/",
+  "Livre audio pour personne âgée : appareils, idées et installation",
+  "Livre audio pour une personne âgée : comment l'écouter et où le trouver",
+  "Vue qui baisse, yeux fatigués : comment écouter des livres audio (enceinte, téléphone, lecteur Daisy), où les trouver et comment tout installer à la maison.",
+  """
+<p>Quand la vue baisse, on n'est pas obligé de renoncer aux livres : on peut les écouter. Pour une personne âgée, le plus simple est souvent un appareil qu'elle connaît déjà (téléphone, tablette, lecteur CD) ou une enceinte qui se commande à la voix, avec quelques titres préparés à l'avance par un proche.</p>
+<p>Le livre audio n'est pas un pis-aller. Beaucoup de lecteurs fidèles découvrent qu'ils retrouvent le plaisir de suivre une histoire sans se battre avec des lettres trop petites ni des yeux qui piquent au bout de dix pages. Le vrai obstacle est rarement l'envie : c'est l'appareil, mal choisi ou mal réglé.</p>
+{CTA}
+<h2>Quel appareil choisir pour écouter ?</h2>
+<p>Partez de ce que la personne sait déjà faire. Une dame qui utilise son smartphone tous les jours pour appeler ses petits-enfants s'en sortira très bien avec une application. Un monsieur qui n'a jamais touché un écran tactile sera plus à l'aise avec deux gros boutons, ou avec sa voix.</p>
+<table><thead><tr><th>Appareil</th><th>Pour qui ?</th><th>Points forts</th><th>Limites</th></tr></thead><tbody>
+<tr><td>Lecteur CD portable</td><td>Personne habituée aux CD, peu à l'aise avec le numérique</td><td>Gestes connus, aucun compte à créer</td><td>Un livre tient sur plusieurs disques, il faut les changer</td></tr>
+<tr><td>Enceinte connectée</td><td>Personne qui préfère parler plutôt que manipuler</td><td>Commande à la voix, pas d'écran</td><td>Installation à faire par un proche, connexion internet nécessaire</td></tr>
+<tr><td>Téléphone ou tablette</td><td>Personne qui utilise déjà son appareil</td><td>Accès à des milliers de titres, reprise là où l'on s'est arrêté</td><td>Petites icônes, notifications qui interrompent l'écoute</td></tr>
+<tr><td>Lecteur Daisy</td><td>Personne malvoyante ou aveugle</td><td>Gros boutons en relief, navigation par chapitre</td><td>Appareil spécialisé, plus rare dans le commerce</td></tr>
+<tr><td>Lecteur MP3 simple</td><td>Promenades, salle d'attente, lit</td><td>Petit, léger, autonome</td><td>Il faut y copier les fichiers depuis un ordinateur</td></tr>
+</tbody></table>
+<p><strong>Le lecteur CD</strong> reste une excellente solution pour démarrer. Beaucoup de médiathèques prêtent encore des livres audio sur CD. Choisissez un modèle avec de grosses touches et un haut-parleur qui porte. <a href="{AMZ:lecteur cd portable senior gros boutons}" """ + A + """>Voir les lecteurs CD portables</a></p>
+<p><strong>L'enceinte connectée</strong> plaît aux personnes qui ne veulent pas d'écran. Une fois installée, on lui demande de reprendre le livre en cours. Vérifiez sur la fiche du modèle qu'elle prend bien en charge le service de livres audio que vous comptez utiliser. <a href="{AMZ:enceinte connectee}" """ + A + """>Voir les enceintes connectées</a></p>
+<p><strong>Le lecteur Daisy</strong> est pensé pour les personnes qui voient très mal. Le format Daisy découpe le livre en chapitres et en pages, ce qui permet de s'y retrouver sans rien voir, et les boutons se repèrent au toucher. <a href="{AMZ:lecteur daisy}" """ + A + """>Voir les lecteurs Daisy</a></p>
+<p><strong>Le petit lecteur MP3</strong> dépanne pour écouter au lit sans déranger son conjoint ou en promenade, avec des écouteurs. <a href="{AMZ:lecteur mp3 simple gros boutons}" """ + A + """>Voir les lecteurs MP3 simples</a></p>
+<h2>Casque, écouteurs ou haut-parleur ?</h2>
+<p>Si l'audition baisse aussi, le confort d'écoute compte autant que l'appareil. Un casque sans fil permet de monter le volume sans gêner la maison, et certains se connectent en Bluetooth à un téléphone ou une tablette : vérifiez-le sur la fiche. Notre <a href="{R}meilleur-casque-tv-senior/">comparatif des casques TV pour seniors</a> indique ceux qui le permettent. Pour un usage au lit, un oreiller avec haut-parleur intégré ou de simples écouteurs légers évitent d'avoir un casque sur les oreilles en s'endormant. <a href="{AMZ:casque sans fil senior}" """ + A + """>Voir les casques sans fil</a></p>
+<h2>Où trouver des livres audio ?</h2>
+<p><strong>À la médiathèque.</strong> C'est le premier endroit où aller, et souvent le moins cher. Beaucoup de bibliothèques municipales prêtent des livres audio, et certaines ont un espace dédié aux personnes malvoyantes. Par exemple, à Paris, les bibliothèques de la Ville proposent des livres audio et des livres en gros caractères, et deux médiathèques ont un pôle consacré aux déficients visuels, avec des livres au format Daisy et des lecteurs Daisy à emprunter. Demandez aussi si votre médiathèque fait du portage à domicile pour les personnes qui ne peuvent plus se déplacer.</p>
+<p><strong>Auprès des associations.</strong> Des associations comme l'Association Valentin Haüy ou les bibliothèques sonores des Donneurs de Voix enregistrent des livres pour les personnes empêchées de lire. Les conditions d'inscription varient : renseignez-vous directement auprès d'elles.</p>
+<p><strong>Avec un abonnement.</strong> Les plateformes payantes offrent le plus grand choix et une lecture par des comédiens. Audible, par exemple, propose un essai gratuit de 30 jours avec un livre audio offert, résiliable à tout moment, et le livre reste acquis même après la résiliation. C'est une bonne façon de vérifier que le format plaît avant de s'engager. <a href="{AUDIBLE}" """ + A + """>Essayer Audible gratuitement</a></p>
+<p>Notre conseil : pour le premier livre, choisissez un titre que la personne connaît déjà ou un auteur qu'elle aime. Elle se concentrera sur l'écoute et non sur l'intrigue, et l'adoption sera beaucoup plus facile.</p>
+<h2>Comment l'installer avec votre proche</h2>
+<p>La réussite se joue souvent le jour de l'installation. Prévoyez une heure, pas dix minutes entre deux portes.</p>
+<ol>
+<li><strong>Préparez avant de venir</strong> : compte créé, application installée, premier livre téléchargé. Votre proche ne doit pas assister à vos essais ratés de mot de passe.</li>
+<li><strong>Simplifiez l'écran</strong> : mettez l'application en grand sur l'écran d'accueil, augmentez la taille du texte et coupez les notifications pendant l'écoute.</li>
+<li><strong>Montrez trois gestes, pas plus</strong> : lancer, mettre en pause, reprendre. Le reste peut attendre.</li>
+<li><strong>Laissez-la faire</strong> pendant que vous regardez. C'est elle qui doit appuyer sur les boutons, sinon elle ne saura pas le refaire seule.</li>
+<li><strong>Écrivez un mémo</strong> en gros caractères, posé à côté de l'appareil.</li>
+</ol>
+<p>Une erreur fréquente : télécharger dix livres d'un coup. Face à une longue liste, beaucoup de personnes n'osent rien choisir. Un ou deux titres suffisent au début. Autre oubli courant : la vitesse de lecture. Si la voix paraît trop rapide, la plupart des applications permettent de la ralentir un peu.</p>
+<h2>Et la lecture sur papier ?</h2>
+<p>Le livre audio ne remplace pas forcément le papier. Certaines personnes alternent : un roman à écouter le soir, le journal avec une loupe le matin. Si la lecture devient difficile, parlez-en à un ophtalmologiste : une baisse de vue n'est pas toujours une fatalité et mérite un bilan. En attendant, les livres en gros caractères restent une belle option, et nous en avons sélectionné quelques-uns dans notre <a href="{R}meilleurs-livres-gros-caracteres/">liste de livres en gros caractères</a>.</p>
+<p>Le livre audio est aussi une bonne idée pour un anniversaire ou pour Noël, accompagné de l'appareil prêt à l'emploi : d'autres pistes sont dans nos <a href="{R}cadeau-personne-agee/">idées de cadeaux pour une personne âgée</a>. Et pour adapter le reste du logement aux besoins de votre proche, suivez <a href="{R}amenager-logement-personne-agee/">notre guide pièce par pièce</a>.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://bibliotheques.paris.fr/poles-deficients-visuels.aspx" target="_blank" rel="noopener">Bibliothèques de la Ville de Paris, Les pôles déficients visuels</a> (vérifié le 17 novembre 2026)</p>
+""",
+  faq=[("Quel est l'appareil le plus simple pour écouter un livre audio quand on est âgé ?", "Celui que la personne utilise déjà. Pour quelqu'un qui n'aime pas les écrans, un lecteur CD à gros boutons ou une enceinte commandée à la voix sont les plus simples. Pour une personne malvoyante, un lecteur Daisy avec des touches en relief est conçu pour cet usage."),
+       ("Peut-on emprunter des livres audio gratuitement ?", "Beaucoup de médiathèques prêtent des livres audio, selon leurs propres conditions. Des associations enregistrent aussi des livres pour les personnes empêchées de lire. Renseignez-vous auprès de la médiathèque de votre commune."),
+       ("Comment aider un parent à utiliser une application de livres audio ?", "Installez tout à l'avance, placez l'application en grand sur l'écran d'accueil et montrez seulement trois gestes : lancer, mettre en pause, reprendre. Laissez votre parent manipuler lui-même et laissez-lui un mémo écrit en gros caractères.")],
+  short="Livres audio pour seniors", cat="Vie quotidienne")
+
+AUTO_META['meilleur-lit-medicalise/'] = ('🏆', 'sable')
+g("meilleur-lit-medicalise/",
+  "Meilleur lit médicalisé électrique 2026 : 8 modèles comparés",
+  "Meilleur lit médicalisé électrique : 8 modèles pour le domicile comparés",
+  "Hauteur variable, relève-buste, barrières, charge : 8 lits médicalisés électriques pour le domicile comparés d'après les fiches des fabricants et revendeurs.",
+  """
+<p>Un bon lit médicalisé pour le domicile monte et descend électriquement sur une large plage de hauteur, relève le buste et les jambes, et supporte sans peine le poids de la personne. Parmi les huit modèles que nous avons comparés, l'Invacare Medley Ergo est le plus complet pour un usage courant, le Capvital Euro 1400 est le plus simple à monter dans un logement exigu, et le Burmeier Lippe IV est celui qui ressemble le moins à un lit d'hôpital.</p>
+<p>Avant tout achat, parlez-en au médecin traitant. Un lit médicalisé peut être prescrit, il peut être pris en charge par l'Assurance maladie dans certaines conditions, et beaucoup de familles commencent par le louer. Un ergothérapeute peut aussi venir vérifier la place dans la chambre et les besoins réels de la personne.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs (brochures et notices des fabricants, distributeurs français de matériel médical), sans test en main. Nous n'indiquons que les chiffres lus sur ces fiches ; quand une donnée n'y figure pas, nous écrivons « non précisé ». Aucun prix n'est donné : il varie beaucoup selon les options et le prestataire. La plupart de ces lits sont surtout vendus ou loués par des prestataires de santé à domicile : le lien Amazon ouvre une recherche, vérifiez que la référence proposée correspond bien au modèle décrit.</div>
+<h2>Le comparatif en un coup d'œil</h2>
+<table><thead><tr><th>Modèle</th><th>Fonctions électriques</th><th>Hauteur du couchage</th><th>Couchage</th><th>Poids patient max</th><th>Idéal pour</th></tr></thead><tbody>
+<tr><td>Invacare Medley Ergo</td><td>Hauteur, buste, jambes (version 3 fonctions)</td><td>33 à 73 cm ou 40 à 80 cm</td><td>90 x 200 cm</td><td>145 kg</td><td>Notre choix : le plus complet</td></tr>
+<tr><td>Capvital Euro 1400</td><td>Hauteur, buste (jambes selon version)</td><td>29 à 82 cm</td><td>90 x 204 cm</td><td>Charge max 200 kg</td><td>Montage facile, démontable en 3 parties</td></tr>
+<tr><td>Burmeier Dali</td><td>Réglage électrique (détail non précisé)</td><td>40 à 80 cm</td><td>90 x 200 cm</td><td>155 kg</td><td>Barrières en bois incluses</td></tr>
+<tr><td>Burmeier Lippe IV</td><td>Buste et cuisses</td><td>29 à 74 cm</td><td>80 à 100 x 190 ou 200 cm</td><td>Charge de travail 200 kg</td><td>Aspect de lit classique</td></tr>
+<tr><td>Thuasne Multicomfort 2 G4</td><td>Hauteur, dossier, jambes</td><td>40 à 80 cm</td><td>90 x 200 cm (extensible)</td><td>135 kg</td><td>Personne grande</td></tr>
+<tr><td>Sotec Medical Valençay</td><td>Hauteur, buste (jambes manuel de série)</td><td>Environ 36,5 à 84 cm</td><td>90 x 200 cm</td><td>135 kg</td><td>Garantie longue, dosserets bois</td></tr>
+<tr><td>Vermeiren Luna (et Luna X-low)</td><td>Dossier, jambes, hauteur</td><td>40 à 80,5 cm (X-low : 20 à 60 cm)</td><td>Non précisé</td><td>140 kg</td><td>Risque de chute du lit</td></tr>
+<tr><td>VEVOR YXZ-C3</td><td>Dossier, pieds, hauteur</td><td>47,5 à 75 cm</td><td>80 x 195 cm</td><td>Capacité 250 kg</td><td>Achat en ligne, avec réserves</td></tr>
+</tbody></table>
+
+<h2>1. Invacare Medley Ergo : notre choix pour la plupart des familles</h2>
+<p><strong>Pour qui ?</strong> Une personne qui passe beaucoup de temps au lit et un aidant qui l'aide à se lever, à se laver ou à se tourner.</p>
+<ul>
+<li><strong>Points forts</strong> : existe en 2 fonctions (hauteur et relève-buste) ou en 3 fonctions avec un relève-jambes à plicature. La télécommande permet une position fauteuil, que l'on peut verrouiller. Barrières et potence sont incluses selon le revendeur consulté. Roulettes de 10 cm à freinage individuel.</li>
+<li><strong>Données utiles</strong> : couchage 200 x 90 cm, hauteur de 33 à 73 cm ou de 40 à 80 cm selon le réglage choisi au montage, utilisateur jusqu'à 145 kg, lit de 66 kg. Moteurs LINAK.</li>
+<li><strong>Limites</strong> : garantie non précisée sur la fiche lue. Vérifiez la référence exacte auprès du vendeur.</li>
+</ul>
+<p><a href="{AMZ:Invacare Medley Ergo lit medicalise}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Capvital Euro 1400 : le plus simple à faire entrer dans une chambre</h2>
+<p><strong>Pour qui ?</strong> Un appartement avec un escalier étroit ou une petite chambre, où il faut monter le lit soi-même.</p>
+<ul>
+<li><strong>Points forts</strong> : démontable en 3 parties. Hauteur variable très large, de 29 à 82 cm : assez bas pour s'asseoir les pieds au sol, assez haut pour les soins. Paire de barrières pliantes et potence annoncées avec le lit. Télécommande verrouillable par clé.</li>
+<li><strong>Données utiles</strong> : sommier de 204 x 90,4 cm, charge maximale de 200 kg, lit de 64 kg, 4 roues de 10 cm à frein, garantie 5 ans contre les vices de fabrication.</li>
+<li><strong>Limites</strong> : le relève-jambes électrique est présenté en option sur la fiche technique. Position proclive non précisée. Vérifiez la composition exacte de l'offre.</li>
+</ul>
+<p><a href="{AMZ:Capvital Euro 1400 lit medicalise}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Burmeier Dali : des barrières en bois et un montage sans outil</h2>
+<p><strong>Pour qui ?</strong> Une famille qui veut un lit de soins robuste, avec un aspect bois plus chaleureux, et des barrières déjà fournies.</p>
+<ul>
+<li><strong>Points forts</strong> : barrières en bois incluses, montage sans outil grâce au système Easy Click, décor hêtre et sommier à lattes en bois. C'est le seul lit de marque de cette sélection que nous avons trouvé référencé sur Amazon.fr.</li>
+<li><strong>Données utiles</strong> : couchage 90 x 200 cm, hauteur de 40 à 80 cm, patient jusqu'à 155 kg, charge de travail de 185 kg, lit de 97 kg, roulettes de 10 cm.</li>
+<li><strong>Limites</strong> : lourd. Nombre de moteurs, potence, garantie et position proclive non précisés sur la fiche lue (d'un revendeur allemand). Vérifiez la variante exacte vendue.</li>
+</ul>
+<p><a href="{AMZ:Burmeier Dali lit}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Burmeier Lippe IV : le lit qui ne ressemble pas à un lit d'hôpital</h2>
+<p><strong>Pour qui ?</strong> Une personne qui refuse un « lit d'hôpital » dans sa chambre, ou qui veut garder des dimensions proches de son ancien lit.</p>
+<ul>
+<li><strong>Points forts</strong> : sommier en 4 parties réglable électriquement (buste et cuisses), entourage en hêtre massif avec plusieurs décors. Largeurs de 80, 90 ou 100 cm, longueurs de 190 ou 200 cm. Il existe aussi en 120 et 140 cm de large. Télécommande avec verrouillage sélectif des fonctions.</li>
+<li><strong>Données utiles</strong> : hauteur de 29 à 74 cm, charge de travail de 200 kg pour le Lippe IV.</li>
+<li><strong>Limites</strong> : barrières et potence en option, roulettes en option sur la version de base. Poids du lit et garantie non précisés sur la brochure lue.</li>
+</ul>
+<p><a href="{AMZ:Burmeier Lippe lit de soins}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Thuasne Multicomfort 2 G4 : pour une personne grande</h2>
+<p><strong>Pour qui ?</strong> Un homme de grande taille dont les pieds touchent le bout d'un lit de 200 cm.</p>
+<ul>
+<li><strong>Points forts</strong> : couchage de 90 x 200 cm extensible à 210 ou 220 cm. Vérins électriques pour la hauteur, le dossier et le relève-jambes. Garnitures en bois (versions Haydn G4 ou Mantovani G4). Télécommande filaire avec verrou à clé.</li>
+<li><strong>Données utiles</strong> : hauteur de 40 à 80 cm, patient jusqu'à 135 kg, charge totale de 170 kg, lit de 84 kg, garantie de 5 ans sur le cadre et de 2 ans sur les composants électriques.</li>
+<li><strong>Limites</strong> : pas d'inclinaison du plan de couchage, selon la notice. Barrières et potence en option. Charge patient plus faible que les autres.</li>
+</ul>
+<p><a href="{AMZ:Thuasne Multicomfort lit medicalise}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Sotec Medical Valençay : la garantie la plus rassurante</h2>
+<p><strong>Pour qui ?</strong> Une installation prévue pour durer plusieurs années, chez une personne au poids moyen.</p>
+<ul>
+<li><strong>Points forts</strong> : garantie de 5 ans sur les parties électriques et mécaniques, télécommande comprise. Dosserets en bois, roues discrètes avec freinage centralisé sur 2 roues, sommier divisible de série. Barrières pliantes.</li>
+<li><strong>Données utiles</strong> : couchage 90 x 200 cm, hauteur d'environ 36,5 à 84 cm, patient jusqu'à 135 kg.</li>
+<li><strong>Limites</strong> : de série, le relève-jambes est manuel ; la version électrique est en option. Poids du lit non précisé. Potence en option.</li>
+</ul>
+<p><a href="{AMZ:Sotec Valencay lit medicalise}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Vermeiren Luna : la version X-low pour limiter les chutes du lit</h2>
+<p><strong>Pour qui ?</strong> Une personne qui risque de tomber du lit la nuit, notamment en version Luna X-low.</p>
+<ul>
+<li><strong>Points forts</strong> : la version X-low descend à 20 cm du sol (hauteur sans matelas). Un lit très bas limite la hauteur de chute, tout en remontant jusqu'à 60 cm pour les soins. Moteurs pour le dossier, les jambes et la hauteur.</li>
+<li><strong>Données utiles</strong> : hauteur de 40 à 80,5 cm pour la Luna standard, patient jusqu'à 140 kg, charge de travail de 175 kg, lit de 95 kg, 4 roulettes de 12,5 cm à frein.</li>
+<li><strong>Limites</strong> : dimensions exactes du couchage, barrières incluses et garantie non précisées sur le manuel consulté. Lit lourd.</li>
+</ul>
+<p><a href="{AMZ:Vermeiren Luna lit}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. VEVOR YXZ-C3 : vendu en ligne, à regarder de près</h2>
+<p><strong>Pour qui ?</strong> Un besoin ponctuel, quand on préfère acheter en ligne plutôt que passer par un prestataire, en acceptant moins de garanties.</p>
+<ul>
+<li><strong>Points forts</strong> : 3 fonctions électriques (dossier, pieds, hauteur), capacité de charge annoncée de 250 kg, télécommande, 4 roulettes à frein.</li>
+<li><strong>Données utiles</strong> : hauteur de 47,5 à 75 cm, couchage de 80 x 195 cm, lit de 94 kg.</li>
+<li><strong>Limites</strong> : couchage plus étroit et plus court que les autres. La position la plus basse (47,5 cm) est haute pour s'asseoir les pieds au sol. Garantie légale seulement, statut de dispositif médical non précisé, barrières non précisées. Les titres des annonces VEVOR sur Amazon ne correspondent pas tous à cette référence : comparez les caractéristiques une à une.</li>
+</ul>
+<p><a href="{AMZ:VEVOR lit medicalise electrique}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Acheter ou louer un lit médicalisé ?</h2>
+<p>Pour un retour d'hospitalisation ou une période de convalescence, la location est souvent plus raisonnable : le prestataire livre, monte, règle et reprend le lit. L'achat se justifie plutôt quand le besoin est durable, ou quand on veut un modèle précis, en bois par exemple.</p>
+<p>Côté remboursement, l'Assurance maladie indique sur son forum que la prise en charge d'un lit médicalisé est possible quand il est prescrit par un professionnel de santé et inscrit sur la liste des produits et prestations remboursables. Les modalités (location ou achat, montant) dépendent du produit : demandez un devis à un fournisseur habilité et interrogez votre caisse avant de vous engager. Un lit acheté en ligne hors de ce circuit ne sera pas forcément remboursé.</p>
+<h2>Comment choisir le bon lit ?</h2>
+<p>Commencez par la hauteur. Assise au bord du lit, la personne doit avoir les pieds à plat au sol et les genoux à angle droit : c'est la position la plus sûre pour se lever. Pour l'aidant, le lit doit pouvoir monter à hauteur de hanches pendant les soins. Une plage qui descend vers 30 cm et monte vers 80 cm couvre ces deux besoins.</p>
+<p>Viennent ensuite le poids de la personne (prenez de la marge par rapport à la charge patient indiquée), sa taille (un couchage de 200 cm est trop court pour certains), puis les barrières. Notre conseil : ne mettez pas de barrières « par précaution ». Une personne agitée peut chercher à les enjamber et tomber de plus haut. Demandez l'avis du médecin ou de l'ergothérapeute ; un lit très bas est parfois une meilleure solution.</p>
+<p>Pensez enfin à la chambre : il faut de la place des deux côtés pour l'aidant, et une prise électrique accessible. Pour se lever du lit plus facilement, une poignée d'aide au lever peut compléter l'installation, et pour la journée, notre <a href="{R}meilleur-fauteuil-releveur/">sélection de fauteuils releveurs</a> aide à se lever d'un siège. Le trajet de nuit vers les toilettes reste un moment à risque : notre guide pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a> donne les bons réflexes. Pour le reste du logement, suivez <a href="{R}amenager-logement-personne-agee/">notre guide pièce par pièce</a>.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://forum-assures.ameli.fr/questions/3727477-remboursement-lit-electrique" target="_blank" rel="noopener">Forum des assurés ameli, remboursement lit électrique</a> ; fiches et notices des fabricants Invacare, Capvital, Burmeier, Thuasne, Sotec Medical, Vermeiren et VEVOR (vérifié le 17 novembre 2026)</p>
+""",
+  faq=[("Un lit médicalisé est-il remboursé ?", "Il peut être pris en charge par l'Assurance maladie lorsqu'il est prescrit par un professionnel de santé et inscrit sur la liste des produits remboursables. Les modalités dépendent du produit : demandez un devis à un fournisseur habilité et renseignez-vous auprès de votre caisse."),
+       ("Quelle hauteur de lit choisir pour une personne âgée ?", "Une hauteur réglable qui permet à la personne de s'asseoir les pieds à plat au sol, puis de remonter pour les soins. Les modèles de cette sélection descendent entre 29 et 40 cm environ, et la version Luna X-low de Vermeiren jusqu'à 20 cm sans matelas."),
+       ("Avez-vous testé ces lits médicalisés ?", "Non. Cette sélection repose sur les caractéristiques publiées par les fabricants et les revendeurs, sans note ni avis de prise en main. Vérifiez la référence exacte et ses options auprès du vendeur avant d'acheter.")],
+  short="Top 8 lits médicalisés", cat="Chambre et repos")
