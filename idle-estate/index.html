@@ -181,6 +181,17 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 .chip.ev{cursor:pointer}
 .chip.ev.on{background:var(--gold);color:var(--navy);animation:bob 1s ease-in-out infinite}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.tuto{position:fixed;inset:0;z-index:9999;background:rgba(18,48,94,.72);display:flex;align-items:center;justify-content:center;padding:20px}
+.tuto .tc{background:#fff;border:3px solid var(--navy);border-radius:24px;box-shadow:0 8px 0 var(--navy);max-width:360px;width:100%;padding:22px 20px 18px;text-align:center}
+.tuto .te{font-size:54px;line-height:1}
+.tuto h3{font-family:var(--disp);font-size:24px;margin:8px 0 6px;color:var(--navy)}
+.tuto p{margin:0 0 14px;font-size:15px;line-height:1.4;color:var(--navy)}
+.tuto .td{display:flex;gap:6px;justify-content:center;margin-bottom:14px}
+.tuto .td i{width:9px;height:9px;border-radius:50%;background:#c9dcef}
+.tuto .td i.on{background:#25b537}
+.tuto .tb{display:flex;gap:10px;justify-content:center}
+.tuto .tb .sk{background:#fff;color:var(--navy);box-shadow:0 4px 0 var(--navy);text-shadow:none}
 </style>
 </head>
 <body>
@@ -422,11 +433,43 @@ function build() {
     doTap(i, e);
   };
   buildSky(); buildBanners(); paint();
+  tutoStart();
   setInterval(tick, 100);
   setInterval(() => { if (!document.hidden) call({ act: 'state' }); }, 7000);
   document.addEventListener('visibilitychange', () => { if (!document.hidden) call({ act: 'state' }); });
   setInterval(vipLoop, 250);
   setInterval(() => { if (tab === 'top') loadTop(); }, 15000);
+}
+
+// first-open tutorial
+const TUTO = {
+  en: [
+    ['🏠', 'Welcome to Idle Estate', 'Build a real estate empire. Rent pays in even while you are away, up to 3 hours offline.'],
+    ['👆', 'Tap to collect rent', 'Tap a property to start its rent cycle and collect the money when the bar is full.'],
+    ['👔', 'Buy and hire managers', 'Buy more levels to earn more. A manager collects the rent for you, automatically and nonstop.'],
+    ['🏛️', 'Sell your empire', 'Once you are big enough, sell it for investors: each one gives +2% income forever. Then start again, faster.'],
+    ['🏆', 'Weekly top 10', 'Playing is free. The 10 best players of the week share a part of the Stars spent. Add your wallet in the Top tab to get paid in USDT.'],
+  ],
+  fr: [
+    ['🏠', 'Bienvenue dans Idle Estate', 'Construis un empire immobilier. Les loyers tombent même quand tu es absent, jusqu\'à 3 heures hors ligne.'],
+    ['👆', 'Touche pour encaisser', 'Touche un bien pour lancer son cycle de loyer, puis récupère l\'argent quand la barre est pleine.'],
+    ['👔', 'Achète et embauche', 'Achète des niveaux pour gagner plus. Un gestionnaire encaisse les loyers pour toi, automatiquement et sans arrêt.'],
+    ['🏛️', 'Vends ton empire', 'Quand tu es assez gros, vends-le contre des investisseurs : chacun donne +2 % de revenus pour toujours. Puis recommence, plus vite.'],
+    ['🏆', 'Top 10 de la semaine', 'Jouer est gratuit. Les 10 meilleurs de la semaine se partagent une partie des Étoiles dépensées. Ajoute ton portefeuille dans l\'onglet Top pour être payé en USDT.'],
+  ],
+};
+function tutoStart() {
+  try { if (localStorage.getItem('ie_tuto1')) return; } catch (e) {}
+  const T = TUTO[lang] || TUTO.en; let k = 0;
+  const el = document.createElement('div'); el.className = 'tuto'; document.body.appendChild(el);
+  const done = () => { try { localStorage.setItem('ie_tuto1', '1'); } catch (e) {} el.remove(); };
+  const draw = () => {
+    const [e, t, d] = T[k]; const last = k === T.length - 1;
+    el.innerHTML = `<div class="tc"><div class="te">${e}</div><h3>${t}</h3><p>${d}</p><div class="td">${T.map((_, i) => `<i class="${i === k ? 'on' : ''}"></i>`).join('')}</div><div class="tb">${last ? '' : `<button class="sk" id="tSkip">${lang === 'fr' ? 'Passer' : 'Skip'}</button>`}<button class="btn" id="tNext">${last ? (lang === 'fr' ? 'C\'est parti !' : 'Let\'s go!') : (lang === 'fr' ? 'Suivant' : 'Next')}</button></div></div>`;
+    $('tNext').onclick = () => { if (last) done(); else { k++; draw(); } };
+    const sk = $('tSkip'); if (sk) sk.onclick = done;
+  };
+  draw();
 }
 const WL='#fff6df', GL='#8fd3ff', LT='#ffe27a';
 const RF=['#ff5a4d','#3b9cff','#ffa11a','#a66bff','#19c3d6','#ff6fae','#2fc13f','#5b6cff','#ff7a1a','#12a4ff'];
