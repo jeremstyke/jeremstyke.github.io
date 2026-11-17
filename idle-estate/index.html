@@ -33,8 +33,8 @@ button{font-family:inherit;font-weight:800;color:inherit;border:0;cursor:pointer
 .sub{display:flex;gap:7px;align-items:center;margin-top:5px;flex-wrap:wrap}
 .chip{font-size:13px;font-weight:800;background:rgba(255,255,255,.16);color:#fff;border-radius:99px;padding:4px 11px;white-space:nowrap}
 .chip.gold{background:var(--gold);color:var(--navy)}
-.scene{display:none!important;margin:8px 0 0;border-radius:20px;overflow:hidden;border:3px solid var(--navy);box-shadow:0 5px 0 var(--navy);background:linear-gradient(#4fb3f7,#bfe8ff 75%)}
-.sky{height:84px}
+.scene{margin:8px 0 0;border-radius:20px;overflow:hidden;border:3px solid var(--navy);box-shadow:0 5px 0 var(--navy);background:linear-gradient(#4fb3f7,#bfe8ff 75%)}
+.sky{height:188px}
 .sky svg{width:100%;height:100%;display:block}
 .sky .sun{animation:sun 4s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
 .sky .cloud{animation:drift 24s ease-in-out infinite alternate}
@@ -43,6 +43,12 @@ button{font-family:inherit;font-weight:800;color:inherit;border:0;cursor:pointer
 .sky .bld *,.ic svg *{stroke:var(--navy);stroke-width:1.2;stroke-linejoin:round}
 @keyframes sun{0%,100%{opacity:.92;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
 @keyframes drift{from{transform:translateX(-18px)}to{transform:translateX(26px)}}
+@keyframes carA{from{transform:translate(0,0)}to{transform:translate(160px,80px)}}
+@keyframes carB{from{transform:translate(0,0)}to{transform:translate(-160px,-80px)}}
+.sky .carA{animation:carA 9s linear infinite}
+.sky .carB{animation:carB 12s linear infinite;animation-delay:-4s}
+.sky .wn{stroke:none}
+.sky .plus{cursor:pointer;animation:bob 1.2s ease-in-out infinite}
 @keyframes rise{from{transform:scaleY(0);opacity:0}to{transform:scaleY(1);opacity:1}}
 
 /* banners */
@@ -440,22 +446,71 @@ const BLD=[
 ];
 const bld = i => BLD[i]();
 let drawn = {};
+const WALL = [['#fff4dc', '#e6d3a8'], ['#eef5ff', '#bcd6f2'], ['#fff0e0', '#f0cfa8'], ['#f5ecff', '#d2bff0'], ['#dcf8fb', '#9fdde6'], ['#ffe6f0', '#f3b7d0'], ['#e6f9e8', '#b9e3bd'], ['#e8ebff', '#bcc3f5'], ['#fff1d2', '#f5d08a'], ['#e2f3ff', '#9bcdf2']];
+const FP = [.62, .62, .7, .7, .62, .78, .86, .78, .7, .62], HB = [14, 20, 22, 34, 50, 38, 22, 54, 32, 66];
+const hsh = (a, b, c, d) => { let h = (a * 73856093) ^ (b * 19349663) ^ (c * 83492791) ^ (d * 2654435761); h = (h ^ (h >>> 13)) * 1274126177; return Math.abs((h ^ (h >>> 16)) % 100); };
+function skyPhase() { const h = new Date().getHours(); return (h >= 21 || h < 6) ? 'night' : (h >= 18 && h < 21) || (h >= 6 && h < 8) ? 'dusk' : 'day'; }
 function buildSky() {
-  const W = 360, H = 84, base = H - 10;
-  let s = `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMax slice">
-   <g class="cloud"><ellipse cx="60" cy="16" rx="20" ry="6" fill="#fff"/><ellipse cx="74" cy="12" rx="12" ry="6" fill="#fff"/></g>
-   <g class="cloud2"><ellipse cx="220" cy="12" rx="16" ry="5" fill="#fff"/><ellipse cx="231" cy="8" rx="9" ry="5" fill="#fff"/></g>
-   <circle class="sun" cx="334" cy="18" r="11" fill="#ffd34d" style="stroke:#12305e;stroke-width:2"/>`;
-  for (let i = 0; i < 10; i++) {
-    const lvl = S.lv[i], x = 4 + i * 35;
-    if (lvl <= 0) continue;
-    const k = 1.2 + Math.min(lvl, 100) / 100 * 0.4;
-    s += `<g class="bld"${drawn[i] === undefined ? '' : ' style="animation:none"'} transform="translate(${x - (k - 1) * 14} ${base - 48 * k}) scale(${k})">${bld(i)}</g>`;
-    drawn[i] = lvl;
-  }
-  s += `<rect x="0" y="${base}" width="${W}" height="${H - base}" fill="#5fd35f"/><rect x="0" y="${base}" width="${W}" height="4" fill="#3ab53a"/><rect x="0" y="${base}" width="${W}" height="${H - base}" fill="none" stroke="#12305e" stroke-width="0"/></svg>`;
-  $('sky').innerHTML = s;
+  const W = 360, H = 205, ox = 148, oy = 80, ph = skyPhase(), night = ph === 'night';
+  const ctr = (c, r) => [ox + (c - r) * 32, oy + (c + r) * 16];
+  let top = -1; for (let i = 0; i < 10; i++) if (S.lv[i] > 0) top = i;
+  const poly = (pts, fill, extra) => `<polygon points="${pts.map(q => q[0].toFixed(1) + ',' + q[1].toFixed(1)).join(' ')}" fill="${fill}"${extra || ''}/>`;
+  const sc = $('sky').parentNode; sc.style.background = night ? 'linear-gradient(#10224a,#2c4a86 80%)' : ph === 'dusk' ? 'linear-gradient(#ff8f6b,#ffd9a8 80%)' : 'linear-gradient(#4fb3f7,#bfe8ff 78%)';
+  let g = `<svg viewBox="30 34 300 171" preserveAspectRatio="xMidYMax meet">`;
+  if (night) { for (let k = 0; k < 14; k++) g += `<circle cx="${(k * 53 + 17) % 340 + 10}" cy="${(k * 29 + 9) % 56 + 40}" r="${k % 3 ? .9 : 1.4}" fill="#fff" opacity=".8"/>`; g += `<circle cx="304" cy="52" r="12" fill="#f4f1d0" style="stroke:#12305e;stroke-width:1.6"/><circle cx="310" cy="48" r="10" fill="#10224a" style="stroke:none"/>`; }
+  else g += `<g class="cloud"><ellipse cx="66" cy="48" rx="22" ry="7" fill="#fff"/><ellipse cx="82" cy="43" rx="13" ry="7" fill="#fff"/></g><g class="cloud2"><ellipse cx="226" cy="46" rx="18" ry="6" fill="#fff"/><ellipse cx="238" cy="42" rx="10" ry="5" fill="#fff"/></g><circle class="sun" cx="304" cy="52" r="12" fill="${ph === 'dusk' ? '#ffb347' : '#ffd34d'}" style="stroke:#12305e;stroke-width:2"/>`;
+  // platform
+  const t0 = [ox, oy - 24], r0 = [ox + 172, oy + 64], b0 = [ox + 64, oy + 124], l0 = [ox - 108, oy + 36];
+  g += `<g class="bld" style="animation:none">${poly([l0, b0, [b0[0], b0[1] + 11], [l0[0], l0[1] + 11]], '#9b6b3f')}${poly([b0, r0, [r0[0], r0[1] + 11], [b0[0], b0[1] + 11]], '#7c5230')}${poly([t0, r0, b0, l0], '#69d65f')}${poly([[l0[0] + 14, l0[1] + 1], [t0[0], t0[1] + 12], [r0[0] - 14, r0[1] - 1], [b0[0], b0[1] - 12]], '#79de6d', ' style="stroke:none"')}`;
+  // road row r=1
+  const P1 = [ox - 32, oy], P2 = [ox + 128, oy + 80], P3 = [ox + 96, oy + 96], P4 = [ox - 64, oy + 16];
+  g += poly([P1, P2, P3, P4], night ? '#3b4252' : '#6d7787') + `<line x1="${ox - 48}" y1="${oy + 8}" x2="${ox + 112}" y2="${oy + 88}" stroke="#fff4b0" stroke-width="1.6" stroke-dasharray="6 5" style="stroke:#fff4b0"/></g>`;
+  // buildings
+  const bld = (i, c, r) => {
+    const [cx, cy] = ctr(c, r), lvl = S.lv[i], f = FP[i], w = 32 * f, hh = 16 * f;
+    if (lvl <= 0) {
+      const nxt = i === top + 1;
+      let o = `<g class="bld" style="animation:none"><polygon points="${cx},${cy - hh} ${cx + w},${cy} ${cx},${cy + hh} ${cx - w},${cy}" fill="rgba(255,255,255,.22)" stroke="#fff" stroke-opacity=".75" stroke-width="1.2" stroke-dasharray="3 3" style="stroke:#fff"/>`;
+      if (nxt) o += `<g data-i="${i}" class="plus"><circle cx="${cx}" cy="${cy - 8}" r="9" fill="#ffc12e"/><path d="M${cx - 4} ${cy - 8}h8M${cx} ${cy - 12}v8" stroke="#12305e" stroke-width="2" stroke-linecap="round" fill="none"/></g>`;
+      else o += `<rect x="${cx - 1}" y="${cy - 10}" width="2" height="10" fill="#fff" style="stroke:none"/><rect x="${cx - 7}" y="${cy - 15}" width="14" height="7" rx="1.5" fill="#fff" style="stroke:#12305e"/>`;
+      return o + '</g>';
+    }
+    const h = HB[i] * (0.85 + Math.min(lvl, 100) / 100 * 0.5), wl = WALL[i];
+    const T = [cx, cy - hh], R = [cx + w, cy], B = [cx, cy + hh], L = [cx - w, cy];
+    const up = q => [q[0], q[1] - h];
+    const T2 = up(T), R2 = up(R), B2 = up(B), L2 = up(L);
+    let o = `<g class="bld" data-i="${i}"${drawn[i] === undefined ? '' : ' style="animation:none"'}>` + poly([L, B, B2, L2], wl[1]) + poly([B, R, R2, B2], wl[0]);
+    // windows
+    const rows = Math.max(1, Math.floor((h - 7) / 9)), cols = f > .75 ? 3 : 2;
+    const wins = (mat, face) => { let q = `<g transform="matrix(${mat})">`; for (let rr = 0; rr < rows; rr++) for (let k = 0; k < cols; k++) { const u0 = .14 + k * (.74 / cols), wu = .74 / cols - .1; const lit = hsh(i, rr, k, face) < (night ? 78 : 14); q += `<rect class="wn" x="${u0.toFixed(2)}" y="${6 + rr * 9}" width="${wu.toFixed(2)}" height="5" rx=".05" fill="${lit ? '#ffe28a' : night ? '#2b4a7c' : '#a9d8ff'}"/>`; } return q + '</g>'; };
+    o += wins(`${w} ${hh} 0 -1 ${L[0]} ${L[1]}`, 0); 
+    o += wins(`${w} ${-hh} 0 -1 ${B[0]} ${B[1]}`, 1); 
+    if (i < 3) {
+      const rh = 9 + i * 2, M1 = [(L2[0] + T2[0]) / 2, (L2[1] + T2[1]) / 2 - rh], M2 = [(B2[0] + R2[0]) / 2, (B2[1] + R2[1]) / 2 - rh];
+      o += poly([B2, R2, M2], wl[0]) + poly([L2, B2, M2, M1], RF[i]) + poly([T2, R2, M2, M1], RF[i], ' filter="url(#dk)"');
+    } else {
+      o += poly([T2, R2, B2, L2], RF[i]);
+      o += poly([[T2[0], T2[1] + 2], [R2[0] - 3, R2[1]], [B2[0], B2[1] - 2], [L2[0] + 3, L2[1]]], 'rgba(255,255,255,.28)', ' style="stroke:none"');
+      if (i >= 4 && i !== 6) o += `<line x1="${cx}" y1="${T2[1] + 4}" x2="${cx}" y2="${T2[1] - 9}" stroke="#12305e" stroke-width="1.4"/><circle cx="${cx}" cy="${T2[1] - 10}" r="1.6" fill="#ff5a4d"/>`;
+      if (i === 6) o += `<rect x="${cx - 8}" y="${T2[1] - 8}" width="16" height="6" rx="1.5" fill="#ffc12e"/>`;
+    }
+    return o + '</g>';
+  };
+  let back = '', front = '';
+  for (let c = 0; c < 5; c++) { back += bld(c, c, 0); front += bld(5 + c, c, 2); }
+  const car = (x0, y0, dx, dy, col, cls) => `<g transform="translate(${x0} ${y0})" class="bld" style="animation:none"><g class="${cls}"><ellipse cx="0" cy="2.5" rx="7" ry="2.4" fill="rgba(0,0,0,.22)" style="stroke:none"/><rect x="-6" y="-3.5" width="12" height="6" rx="2.2" fill="${col}" transform="rotate(26.5)"/><rect x="-2.6" y="-3.1" width="5.2" height="3.2" rx="1" fill="#dff3ff" transform="rotate(26.5)" style="stroke-width:.8"/></g></g>`;
+  g += back + car(ox - 40, oy + 4, 160, 80, '#ff5a4d', 'carA') + car(ox + 104, oy + 92, -160, -80, '#3b9cff', 'carB') + front;
+  // trees on the front edges
+  const tree = (x, y) => `<g class="bld" style="animation:none"><rect x="${x - 1}" y="${y - 4}" width="2.4" height="6" fill="#8a5a2b"/><circle cx="${x}" cy="${y - 9}" r="6" fill="#3ccf4e"/><circle cx="${x - 2}" cy="${y - 11}" r="2.2" fill="#7bf585" style="stroke:none"/></g>`;
+  for (const t of [.2, .5, .82]) { g += tree(l0[0] + (b0[0] - l0[0]) * t + 12, l0[1] + (b0[1] - l0[1]) * t - 5); g += tree(b0[0] + (r0[0] - b0[0]) * t - 12, b0[1] + (r0[1] - b0[1]) * t - 5); }
+  g += '<defs><filter id="dk"><feColorMatrix type="matrix" values=".82 0 0 0 0  0 .82 0 0 0  0 0 .82 0 0  0 0 0 1 0"/></filter></defs></svg>';
+  for (let i = 0; i < 10; i++) if (S.lv[i] > 0) drawn[i] = S.lv[i];
+  $('sky').innerHTML = g;
 }
+$('sky').addEventListener('click', e => {
+  const n = e.target.closest('[data-i]'); if (!n || !S) return; const i = +n.dataset.i, c = cardEl[i]; if (!c || c.hidden) return;
+  c.scrollIntoView({ behavior: 'smooth', block: 'center' }); c.classList.add('flash'); setTimeout(() => c.classList.remove('flash'), 1600); hap('light');
+});
 let skyKey = '';
 function buildBanners() {
   const b = $('banners'); let h = '';
@@ -485,7 +540,7 @@ function paint() {
   const bk = (S.welcome ? 1 : 0) + '' + (S.dailyOk ? 1 : 0) + S.streak + (S.mg[0] ? 1 : 0) + (S.deal ? S.deal.sku : '-');
   if (bk !== lastBanner) { lastBanner = bk; buildBanners(); }
   const sk = S.lv.map(l => l > 0 ? 1 + Math.floor(Math.min(l, 120) / 6) : 0).join(',');
-  if (sk !== skyKey) { skyKey = sk; buildSky(); }
+  const skk = sk + skyPhase(); if (skk !== skyKey) { skyKey = skk; buildSky(); }
   document.querySelectorAll('#seg button').forEach(b => b.classList.toggle('on', b.dataset.m === String(mode)));
   let top = -1; for (let i = 0; i < 10; i++) if (S.lv[i] > 0) top = i;
   for (let i = 0; i < 10; i++) {
