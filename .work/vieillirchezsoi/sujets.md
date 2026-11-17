@@ -3,57 +3,75 @@
 - [ ] livres-audio-personne-agee/ | livre audio pour personne âgée | Vie quotidienne | quand la vue baisse, comment écouter (enceinte simple, téléphone, tablette, casque), trouver des livres audio, installer avec son proche ; lien {AUDIBLE} vers l'essai gratuit en bonne place et liens {AMZ} vers les appareils
 - [ ] date-paiement-retraite-decembre-2026/ | date paiement retraite décembre 2026 | Retraite | dates de versement de décembre 2026 pour le régime général (Assurance retraite, MSA si vérifié) et l'Agirc-Arrco, lues sur les calendriers officiels ; tableau par caisse ; si une date n'est pas trouvée, le dire ; lien vers la page générale date-paiement-retraite/ si elle existe
 - [ ] apa-allocation-personnalisee-autonomie/ | APA allocation personnalisée d'autonomie | Conseils pour les proches | qui y a droit, GIR, démarche auprès du département, ce qu'elle finance (aide à domicile, téléassistance, aménagements), montants seulement si lus sur service-public.fr ou pour-les-personnes-agees.gouv.fr avec la date
+- [ ] viager-comment-ca-marche/ | viager comment ça marche | Argent et patrimoine | bouquet, rente, viager occupé ou libre, avantages et risques pour le vendeur et la famille ; règles seulement si vérifiées sur service-public.fr ou notaires.fr ; toujours renvoyer vers un notaire, aucun conseil personnalisé
 - [ ] date-paiement-retraite/ | date de paiement de la retraite | Retraite | base et complémentaire, jours de versement, cas des jours fériés ; dates seulement si lues sur lassuranceretraite.fr ou agirc-arrco.fr pour l'année en cours, sinon expliquer la règle
 - [ ] apa-refusee-que-faire/ | APA refusée que faire | Conseils pour les proches | recours, réévaluation du GIR, délais seulement si vérifiés sur service-public.fr, autres aides possibles
 - [ ] siege-de-douche-ou-tabouret/ | siège de douche ou tabouret de douche | Salle de bains | aide au choix juste avant l'achat, selon l'équilibre et la place, renvoi vers le top sièges de douche
+- [ ] viager-ou-pret-viager-hypothecaire/ | viager ou prêt viager hypothécaire | Argent et patrimoine | différences, pour qui, risques ; seulement des règles vérifiées (service-public.fr, notaires.fr, banque-france.fr), renvoi notaire
 - [ ] aide-menagere-caisse-de-retraite/ | aide ménagère caisse de retraite | Conseils pour les proches | aide de la caisse de retraite (Assurance retraite, Agirc-Arrco) pour les GIR 5 et 6, démarche, différence avec l'APA, sources officielles uniquement
 - [ ] retraite-progressive-fonctionnaire/ | retraite progressive fonctionnaire | Retraite | conditions pour les fonctionnaires lues sur service-public.fr ou la caisse concernée, différences avec le privé, démarche
 - [ ] quel-deambulateur-apres-une-chute/ | quel déambulateur après une chute | Se déplacer | cadre, 2 roues, rollator selon la situation, renvoi kinésithérapeute ou ergothérapeute, liens vers les tops
+- [ ] vendre-en-nue-propriete/ | vendre en nue-propriété senior | Argent et patrimoine | principe, différence avec le viager, garder l'usufruit ; règles vérifiées sur service-public.fr ou notaires.fr, renvoi notaire
 - [ ] age-depart-retraite/ | âge de départ à la retraite | Retraite | âge légal selon l'année de naissance, durée d'assurance, taux plein ; réformes récentes : seulement ce qui est lu sur service-public.fr ou info-retraite.fr avec la date de vérification, aucune prévision
 - [ ] rachat-trimestres-rentable/ | rachat de trimestres est-ce rentable | Retraite | méthode pour décider (âge, taux plein, déduction fiscale si vérifiée), simulateur officiel, sans montant inventé
 - [ ] credit-impot-aide-a-domicile/ | crédit d'impôt aide à domicile senior | Conseils pour les proches | services à la personne, téléassistance, taux et plafond seulement si lus sur impots.gouv.fr ou service-public.fr, exemples chiffrés simples
+- [ ] donation-aux-enfants-de-son-vivant/ | donation aux enfants de son vivant | Argent et patrimoine | donation simple, donation-partage, abattements seulement si lus sur service-public.fr ou impots.gouv.fr avec la date, renvoi notaire
 - [ ] fauteuil-releveur-1-ou-2-moteurs/ | fauteuil releveur 1 ou 2 moteurs | Chambre et repos | différences concrètes, pour qui, renvoi vers le top fauteuils releveurs
 - [ ] teleassistance-prise-en-charge/ | téléassistance prise en charge | Sécurité | APA, caisses de retraite, mutuelles, communes et départements, crédit d'impôt si vérifié ; lien vers teleassistance-comment-ca-marche/ et le top bouton d'appel
 - [ ] grille-aggir-gir/ | grille AGGIR GIR | Conseils pour les proches | les 6 GIR expliqués simplement, qui évalue, à quoi ça sert (APA, aides caisses de retraite), liens vers apa et aide ménagère
+- [ ] mandat-de-protection-future/ | mandat de protection future | Argent et patrimoine | anticiper la perte d'autonomie, sous seing privé ou notarié, démarche ; sources service-public.fr ou justice.fr
 - [ ] calcul-retraite/ | comment est calculée la retraite | Retraite | salaire annuel moyen, taux, trimestres, complémentaire en points, simulateur officiel (info-retraite.fr), exemple simple sans chiffre inventé
 - [ ] monte-escalier-credit-impot/ | monte-escalier crédit d'impôt | Se déplacer | crédit d'impôt adaptation du logement et MaPrimeAdapt' seulement si vérifiés sur service-public.fr ou anah.gouv.fr avec la date ; lien vers monte-escalier-prix-aides/
 - [ ] amenager-chambre-personne-agee/ | aménager la chambre d'une personne âgée | Chambre et repos | guide pilier de la pièce : lit, éclairage, barre de lit, chaise percée, relié à tous les tops du thème
+- [ ] tutelle-curatelle-difference/ | tutelle ou curatelle différence | Argent et patrimoine | sauvegarde de justice, curatelle, tutelle, habilitation familiale, qui demander, démarche ; sources justice.fr ou service-public.fr
 - [ ] carte-mobilite-inclusion-senior/ | carte mobilité inclusion personne âgée | Conseils pour les proches | mentions invalidité, priorité, stationnement, démarche MDPH ou département selon le GIR, sources officielles
 - [ ] aide-a-domicile-combien-ca-coute/ | aide à domicile prix de l'heure | Conseils pour les proches | ce qui fait varier le prix, emploi direct ou prestataire, CESU, crédit d'impôt, APA ; aucun tarif inventé, seulement des fourchettes lues sur une source sérieuse et datée
 - [ ] securiser-escalier-personne-agee/ | sécuriser un escalier pour personne âgée | Sécurité | guide pilier : main courante, éclairage, monte-escalier, relié aux tops du thème
+- [ ] associations-aide-personnes-agees/ | associations d'aide aux personnes âgées | Conseils pour les proches | grandes associations nationales (Petits Frères des Pauvres, France Alzheimer, Monalisa, Croix-Rouge, ADMR...) : ce qu'elles proposent vraiment, comment les contacter ; seulement des informations lues sur leurs sites officiels
 - [ ] releve-de-carriere/ | relevé de carrière | Retraite | où le trouver, comment le vérifier, corriger une erreur, à quel âge s'en occuper
 - [ ] parent-age-ne-veut-pas-d-aide/ | parent âgé refuse de l'aide | Conseils pour les proches | conseils concrets et bienveillants, en parler, essayer progressivement, interlocuteurs (médecin traitant, CLIC, assistante sociale)
 - [ ] droits-aidant-familial/ | droits de l'aidant familial | Conseils pour les proches | congé de proche aidant, AJPA, droit au répit, où se renseigner ; montants seulement si lus sur service-public.fr avec la date
+- [ ] lutter-contre-isolement-personne-agee/ | isolement personne âgée que faire | Conseils pour les proches | solutions concrètes : visites bénévoles, appels réguliers, activités, téléphone simple, tablette ; lien vers associations et liens {AMZ} vers téléphone et tablette
 - [ ] adapter-cuisine-personne-agee/ | adapter la cuisine d'une personne âgée | Vie quotidienne | guide pilier : rangements à hauteur, ustensiles adaptés, sécurité gaz et feu
 - [ ] quelles-aides-pour-personne-agee/ | quelles aides pour une personne âgée à domicile | Conseils pour les proches | page sommaire qui relie toutes les pages aides du site (APA, aide ménagère, crédit d'impôt, MaPrimeAdapt', téléassistance, CMI), tableau récapitulatif
 - [ ] demarches-depart-a-la-retraite/ | démarches départ à la retraite | Conseils pour les proches | calendrier des démarches (info-retraite.fr, demande unique), pièces, erreurs fréquentes ; terminer sur préparer son logement pour la suite avec lien vers le guide pilier
+- [ ] clic-point-information-seniors/ | CLIC point information seniors | Conseils pour les proches | à quoi sert un CLIC ou un point d'information local, comment le trouver (pour-les-personnes-agees.gouv.fr), ce qu'on peut y demander
 - [ ] retraite-complementaire-agirc-arrco/ | retraite complémentaire Agirc-Arrco | Retraite | points, valeur du point seulement si lue sur agirc-arrco.fr avec la date, démarche, coefficient de solidarité si vérifié
 - [ ] adapter-salle-de-bain-personne-agee/ | adapter la salle de bain d'une personne âgée | Salle de bains | priorités, petits achats puis travaux
 - [ ] pension-de-reversion/ | pension de réversion | Conseils pour les proches | qui y a droit, régime de base et complémentaire, démarche, conditions seulement si lues sur info-retraite.fr ou service-public.fr
+- [ ] aide-aux-aidants-repit/ | solutions de répit pour les aidants | Conseils pour les proches | accueil de jour, hébergement temporaire, relayage, plateformes de répit ; sources officielles, lien vers droits-aidant-familial/
 - [ ] lit-medicalise-achat-ou-location/ | lit médicalisé achat ou location | Chambre et repos | location fréquente, prescription, vérifier sur ameli
 - [ ] cumul-emploi-retraite/ | cumul emploi retraite | Retraite | conditions, cumul intégral ou plafonné, démarches ; règles seulement si lues sur service-public.fr
 - [ ] aspa-minimum-vieillesse/ | ASPA minimum vieillesse | Conseils pour les proches | conditions, démarche, récupération sur succession ; montants seulement si lus sur service-public.fr avec la date
+- [ ] portage-de-repas-a-domicile/ | portage de repas à domicile seniors | Vie quotidienne | qui le propose (communes, CCAS, associations, sociétés), prise en charge possible, crédit d'impôt si vérifié ; aucun tarif inventé
 - [ ] coussin-anti-escarres/ | coussin anti-escarres | Chambre et repos | types, rester général, renvoi professionnel de santé
 - [ ] occupations-retraite-a-la-maison/ | que faire à la retraite à la maison | Vie quotidienne | idées concrètes (lecture et livres audio, puzzles, jardinage sur balcon, oiseaux du jardin, jeux de mémoire, appels vidéo) avec liens {AMZ}, un lien {AUDIBLE} et un lien vers le site frère si pertinent
 - [ ] retraite-progressive/ | retraite progressive | Retraite | principe, conditions, démarche ; seulement des règles vérifiées sur sources officielles avec la date
+- [ ] residence-services-seniors/ | résidence services seniors | Conseils pour les proches | principe, différence avec résidence autonomie et EHPAD, coûts qui varient (sans chiffre inventé), questions à poser avant de signer
 - [ ] chaise-percee/ | chaise percée | Chambre et repos | usage nocturne, accoudoirs, entretien
 - [ ] cadre-de-toilettes/ | cadre de toilettes accoudoirs | Salle de bains | réglage, sans perçage
 - [ ] fauteuil-roulant-de-transfert/ | fauteuil roulant de transfert | Se déplacer | poids, pliage, usage occasionnel
+- [ ] residence-autonomie-ou-ehpad/ | résidence autonomie ou EHPAD | Conseils pour les proches | différences, pour qui, aides possibles (APL, APA, aide sociale à l'hébergement) seulement si vérifiées ; rappeler qu'adapter le logement est une autre option avec lien vers le guide pilier
 - [ ] rachat-de-trimestres/ | rachat de trimestres | Retraite | qui peut, pour quelles périodes, est-ce rentable (exemples sans montant inventé), démarche
 - [ ] rampe-acces-seuil/ | rampe d'accès seuil de porte | Se déplacer | hauteur de marche, pente, portable ou fixe
 - [ ] main-courante-escalier/ | main courante escalier | Sécurité | des deux côtés, fixation, éclairage
+- [ ] colocation-senior-habitat-partage/ | colocation senior et habitat partagé | Conseils pour les proches | colocation entre seniors, intergénérationnelle (cohabitation intergénérationnelle solidaire), habitat inclusif ; sources officielles
 - [ ] couverts-ergonomiques/ | couverts ergonomiques | Vie quotidienne | manche épais, coudés, vaisselle antidérapante
 - [ ] impots-retraites/ | impôts des retraités | Retraite | abattement de 10 %, CSG selon le revenu fiscal, demi-part ; taux et plafonds seulement si lus sur impots.gouv.fr ou service-public.fr avec la date
 - [ ] horloge-calendrier-senior/ | horloge calendrier senior | Vie quotidienne | lisibilité, rappels
+- [ ] accueil-familial-personne-agee/ | accueil familial personne âgée | Conseils pour les proches | famille d'accueil agréée par le département, fonctionnement, aides ; sources officielles
 - [ ] loupe-electronique/ | loupe électronique de lecture | Vie quotidienne | grossissement, éclairage, renvoi ophtalmologiste
 - [ ] casque-tv-senior/ | casque TV sans fil senior | Vie quotidienne | réglage volume, recharge, confort, renvoi audioprothésiste
 - [ ] revalorisation-retraite/ | revalorisation des retraites | Retraite | comment ça marche, date habituelle, taux de l'année seulement s'il est publié et lu sur une source officielle, sinon expliquer le mécanisme
+- [ ] mutuelle-senior-comment-choisir/ | mutuelle senior comment choisir | Argent et patrimoine | postes importants (optique, dentaire, audition, hospitalisation), 100 % santé, Complémentaire santé solidaire (conditions vérifiées sur ameli.fr), pièges ; aucun tarif inventé
 - [ ] barriere-de-lit/ | barrière de lit adulte | Chambre et repos | prudence, alternatives, avis professionnel
 - [ ] table-de-lit/ | table de lit à roulettes | Chambre et repos | hauteur réglable, plateau inclinable
 - [ ] chaussures-personne-agee/ | chaussures pour personne âgée | Se déplacer | maintien, semelle, fermeture velcro
+- [ ] appareil-auditif-100-sante/ | appareil auditif 100 % santé | Vie quotidienne | ce qui est remboursé, classe I et classe II, démarche (ORL, audioprothésiste) ; montants seulement si lus sur ameli.fr avec la date
 - [ ] parler-a-un-parent-age-de-son-logement/ | comment convaincre un parent âgé d'adapter son logement | Conseils pour les proches | en parler sans brusquer, faire accepter les aides, renvoi au guide pièce par pièce
 - [ ] materiel-maintien-domicile-acheter-ou-louer/ | matériel maintien à domicile acheter ou louer | Conseils pour les proches | ce qui se loue, prescription
 - [ ] boite-a-cle-securisee/ | boîte à clé sécurisée | Sécurité | aides à domicile, secours, code
+- [ ] transport-seniors-mobilite/ | transport pour personnes âgées | Se déplacer | transport à la demande, TPMR, sorties accompagnées, carte de réduction, aides des caisses de retraite (sorties accompagnées) si vérifiées
 # Cocher [x] une fois publié. Prendre toujours le premier sujet non coché.
 
 - [x] comment-choisir-siege-de-douche/ | siège de douche personne âgée | Salle de bains | publié au lancement
