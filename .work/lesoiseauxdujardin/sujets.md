@@ -7,29 +7,42 @@
 - [x] boule-de-graisse-oiseaux/ | boule de graisse oiseaux | Nourrir | sans filet, recette maison, quand en donner
 - [x] eau-pour-les-oiseaux-en-hiver/ | abreuvoir oiseaux hiver | Nourrir | eau propre, gel, pas de sel ni antigel
 - [ ] nettoyer-une-mangeoire/ | nettoyer une mangeoire | Mangeoires | fréquence, produits, maladies (salmonellose, trichomonose)
+- [ ] difference-hirondelle-martinet/ | différence hirondelle martinet | Observer | silhouette, cri, vol, période de présence, où ils nichent ; tableau comparatif
 - [ ] oiseaux-ne-viennent-pas-a-la-mangeoire/ | les oiseaux ne viennent pas à ma mangeoire | Mangeoires | délai normal, emplacement, graines, chat, propreté, saison
+- [ ] quand-commencer-a-nourrir-les-oiseaux/ | quand commencer à nourrir les oiseaux | Nourrir | période conseillée par la LPO, signes que les oiseaux ont besoin d'aide, comment commencer sans créer de dépendance
 - [ ] fabriquer-une-mangeoire/ | fabriquer une mangeoire | Mangeoires | modèles simples, matériaux sans danger
 - [ ] mangeoire-envahie-par-les-pigeons/ | mangeoire envahie par les pigeons | Mangeoires | grilles, mangeoires à cage, nourrir petit, nettoyer le sol
+- [ ] faut-il-nourrir-les-oiseaux-en-hiver/ | faut-il nourrir les oiseaux en hiver | Nourrir | arguments pour et contre, bonnes pratiques (propreté, régularité, eau), ce qu'il faut éviter
 - [ ] proteger-la-mangeoire-des-chats/ | protéger la mangeoire des chats | Mangeoires | hauteur, emplacement, collerette
 - [ ] ecureuils-et-pigeons-a-la-mangeoire/ | éloigner pigeons mangeoire | Mangeoires | mangeoires sélectives
+- [ ] bain-pour-oiseaux/ | bain pour oiseaux | Nourrir | utilité, profondeur, emplacement à l'abri des chats, entretien, hiver ; lien vers le top abreuvoirs
 - [ ] rat-sous-la-mangeoire/ | rat sous la mangeoire | Mangeoires | causes (graines au sol), plateau récupérateur, graines décortiquées, sans poison
 - [ ] quand-arreter-de-nourrir-les-oiseaux/ | quand arrêter de nourrir les oiseaux | Nourrir | printemps, sevrage progressif
+- [ ] taille-des-haies-periode-oiseaux/ | période interdite taille des haies oiseaux | Nichoirs | ce que dit la règle (vérifiée sur une source officielle, avec date), pourquoi, comment tailler sans déranger les nids
 - [ ] nichoir-a-mesange/ | nichoir à mésange | Nichoirs | trou d'envol, emplacement
 - [ ] peut-on-donner-du-pain-aux-oiseaux/ | peut-on donner du pain aux oiseaux | Nourrir | pourquoi éviter, alternatives, ce qui est dangereux (lait, sel, restes salés)
+- [ ] epervier-a-la-mangeoire/ | épervier attaque la mangeoire | Observer | ce qui se passe, pourquoi c'est naturel, rapace protégé, comment placer la mangeoire pour donner des abris aux petits oiseaux
 - [ ] nichoir-rouge-gorge/ | nichoir rouge-gorge | Nichoirs | semi-ouvert, hauteur
 - [ ] nichoir-hirondelles/ | nichoir hirondelle | Nichoirs | sous la toiture, réglementation sur les nids d'hirondelles si vérifiée
+- [ ] oiseau-mort-dans-le-jardin/ | oiseau mort dans le jardin que faire | Observer | précautions (gants, grippe aviaire), qui prévenir, signes de maladie aux mangeoires (salmonellose, trichomonose), nettoyer
 - [ ] nourrir-les-oiseaux-en-ete/ | faut-il nourrir les oiseaux en été | Nourrir | position de la LPO, eau surtout, risques, ce qu'on peut laisser
 - [ ] nichoir-avec-camera/ | nichoir avec caméra | Nichoirs | observer sans déranger
+- [ ] oisillons-combien-de-temps-au-nid/ | combien de temps les oisillons restent au nid | Nichoirs | durées par espèce courante si vérifiées, envol, jeunes au sol normaux, quand intervenir
 - [ ] nettoyer-un-nichoir/ | nettoyer un nichoir | Nichoirs | période, méthode
 - [ ] graines-pour-oiseaux-qui-germent/ | graines pour oiseaux qui germent dans la pelouse | Nourrir | graines décortiquées, plateau, que faire des pousses
+- [ ] vers-de-farine-oiseaux/ | vers de farine pour oiseaux | Nourrir | vivants ou séchés, quelles espèces en profitent, quand en donner, quantités raisonnables ; lien Amazon
 - [ ] reconnaitre-les-oiseaux-du-jardin/ | reconnaître les oiseaux du jardin | Observer | espèces courantes, applis
 - [ ] reconnaitre-les-mesanges/ | différentes mésanges | Observer | bleue, charbonnière, noire, huppée, nonnette
+- [ ] plantes-a-graines-pour-oiseaux/ | plantes à graines pour les oiseaux | Nourrir | tournesol, cardère, chardon, graminées, quand semer, laisser les têtes en hiver
 - [ ] nichoir-occupe-ou-pas/ | comment savoir si un nichoir est occupé | Nichoirs | signes, ne pas ouvrir, période, caméra
 - [ ] application-reconnaitre-chant-oiseaux/ | application reconnaître chant oiseaux | Observer | applis connues, sans avis inventé
+- [ ] herisson-au-jardin/ | hérisson au jardin | Observer | l'accueillir sans danger (abri, eau, pas de lait), dangers (robots tondeuses, granulés), cohabitation avec la mangeoire ; lien abri à hérisson
 - [ ] comptage-des-oiseaux-des-jardins/ | comptage des oiseaux des jardins | Observer | opération LPO / Muséum, dates seulement si vérifiées
 - [ ] oiseau-qui-attaque-sa-vitre/ | oiseau qui se jette contre la vitre au printemps | Observer | reflet et territoire, solutions simples (autocollants, voilage), différence avec le choc accidentel
+- [ ] ecureuil-roux-au-jardin/ | écureuil roux au jardin | Observer | reconnaître, espèce protégée, le nourrir ou non, protéger la mangeoire sans lui nuire
 - [ ] oiseau-blesse-que-faire/ | oiseau blessé que faire | Observer | centres de soins LPO, gestes à éviter
 - [ ] oisillon-tombe-du-nid/ | oisillon tombé du nid | Nichoirs | ne pas le ramasser à tort (recommandations LPO)
+- [ ] abri-pour-oiseaux-en-hiver/ | abri pour oiseaux en hiver | Nichoirs | dortoirs, nichoirs laissés en place, haies denses, ce qui aide vraiment par grand froid
 - [ ] oiseaux-en-hiver-que-mangent-ils/ | que mangent les oiseaux en hiver | Nourrir | besoins énergétiques, graisse, tournesol, fruits, eau
 - [ ] haie-pour-les-oiseaux/ | haie pour les oiseaux | Nichoirs | arbustes à baies, taille hors nidification
 - [ ] jardin-accueillant-oiseaux/ | jardin accueillant pour les oiseaux | Nichoirs | refuge LPO, gestes simples

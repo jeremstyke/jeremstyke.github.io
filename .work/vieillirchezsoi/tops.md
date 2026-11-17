@@ -58,3 +58,5 @@
 - [ ] meilleur-repose-jambes/ | meilleur repose-jambes | Chambre et repos | pouf, coussin incliné ; renvoi médecin en cas de problème circulatoire
 - [ ] meilleure-lampe-de-lecture-senior/ | meilleure lampe de lecture pour senior | Vie quotidienne | lumière forte, bras articulé, loupe
 - [ ] meilleure-balance-parlante/ | meilleure balance parlante | Vie quotidienne | pour malvoyants, grand écran
+- [ ] meilleur-disque-de-transfert/ | meilleur disque de transfert | Chambre et repos | disques pivotants et planches de transfert réellement vendus, pour le passage lit, fauteuil, voiture
+- [ ] meilleurs-jeux-memoire-senior/ | jeux de mémoire pour seniors | Vie quotidienne | jeux, puzzles à grosses pièces, jeux de société adaptés aux troubles de la mémoire

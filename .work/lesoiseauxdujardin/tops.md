@@ -20,3 +20,6 @@
 - [ ] meilleure-mangeoire-anti-pigeon/ | meilleure mangeoire anti-pigeons et anti-écureuils | Mangeoires | cages, sélectives
 - [ ] meilleur-nichoir-hirondelle/ | meilleur nichoir à hirondelles | Nichoirs | nids artificiels
 - [ ] meilleur-hotel-a-insectes/ | meilleur hôtel à insectes | Nichoirs | biodiversité au jardin
+- [ ] meilleur-bain-pour-oiseaux/ | meilleur bain pour oiseaux | Nourrir | bains et vasques sur pied ou à suspendre, faciles à nettoyer
+- [ ] meilleur-abri-herisson/ | meilleur abri à hérisson | Observer | abris réellement vendus, bois ou matériaux naturels, entrée anti-prédateurs
+- [ ] meilleurs-vers-de-farine-oiseaux/ | vers de farine séchés pour oiseaux | Nourrir | sachets réellement vendus, séchés, sans additifs

@@ -12,9 +12,12 @@
 - [x] oiseau-jaune-et-vert/ | oiseau jaune et vert | Observer | identification : verdier, chardonneret, serin, mésange bleue, pic vert
 - [x] moineau-domestique/ | moineau | Observer | fiche espèce : déclin (sources LPO/Vigie-Nature), nichoirs collectifs, graines
 - [ ] oiseau-noir-et-blanc-longue-queue/ | oiseau noir et blanc longue queue | Observer | identification : pie bavarde, bergeronnette grise, mésange à longue queue
+- [ ] martinet-noir/ | martinet noir | Observer | fiche espèce : reconnaître, vit en vol, nichoir à martinets, période de présence
 - [ ] pinson-des-arbres/ | pinson des arbres | Observer | fiche espèce : mâle et femelle, nourriture au sol
+- [ ] hirondelle-rustique/ | hirondelle rustique | Observer | fiche espèce : reconnaître, nid dans les bâtiments, protection, différence avec l'hirondelle de fenêtre
 - [ ] chardonneret-elegant/ | chardonneret élégant | Observer | fiche espèce : statut de protection vérifié, graines de niger, mangeoire à niger
 - [ ] petit-oiseau-marron-jardin/ | petit oiseau marron jardin | Observer | identification : troglodyte, moineau, grimpereau, accenteur
+- [ ] difference-corbeau-corneille/ | différence corbeau corneille | Observer | identification : corneille noire, grand corbeau, corbeau freux, choucas
 - [ ] verdier-d-europe/ | verdier | Observer | fiche espèce : trichomonose et hygiène des mangeoires (sources sérieuses)
 - [ ] oiseau-qui-tape-a-la-fenetre/ | oiseau qui tape à la vitre | Observer | pourquoi (reflet, territoire au printemps), solutions sans danger
 - [ ] sittelle-torchepot/ | sittelle torchepot | Observer | fiche espèce : descend la tête en bas, nichoir, graisse et graines
