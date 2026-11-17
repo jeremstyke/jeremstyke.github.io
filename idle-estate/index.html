@@ -235,6 +235,7 @@ const L = {
  en: {
   names:['Studio','Loft','Villa','Apartment block','Residential tower','Hotel chain','Mall network','Business district','Resort island','Megacity'],
   pr:['month','quarter','6 months','year','year','year','year','year','year','year'],
+  betaT:'Balancing in progress', betaS:'Progress may be reset while I tune the game.',
   hint:'Tap a property to collect its rent. Hire a manager 👔 and it pays you automatically, even when you are away.', estate:'Estate', shop:'Shop', prest:'Empire', top:'Top',
   buy:'Buy', lvl:'Lv', manager:'Manager', auto:'Auto', tapStart:'👆 Tap', ms:'x2.5 @',
   welcomeT:'Welcome pack', welcomeS:'2h of rent now + x2 income for 24h', claim:'Claim', daily:'Daily bonus', dailyS:'Day {n} of 7, come back every day',
@@ -264,6 +265,7 @@ const L = {
  fr: {
   names:['Studio','Loft','Villa','Immeuble','Tour résidentielle','Chaîne d\'hôtels','Centres commerciaux','Quartier d\'affaires','Île resort','Mégapole'],
   pr:['mois','trimestre','semestre','an','an','an','an','an','an','an'],
+  betaT:'Réglages en cours', betaS:'Des remises à zéro sont possibles pendant que j\'équilibre le jeu.',
   hint:'Touche un bien pour encaisser son loyer. Embauche un gestionnaire 👔 et il te paie tout seul, même quand tu es absent.', estate:'Biens', shop:'Boutique', prest:'Empire', top:'Top',
   buy:'Acheter', lvl:'Niv', manager:'Gestionnaire', auto:'Auto', tapStart:'👆 Touche', ms:'x2.5 @',
   welcomeT:'Pack de bienvenue', welcomeS:'2h de loyers tout de suite + x2 revenus pendant 24h', claim:'Récupérer', daily:'Bonus du jour', dailyS:'Jour {n} sur 7, reviens chaque jour',
@@ -564,6 +566,7 @@ $('sky').addEventListener('click', e => {
 let skyKey = '';
 function buildBanners() {
   const b = $('banners'); let h = '';
+  h += `<div class="bn" style="background:#fff3d6"><div class="tx"><b>⚠️ ${L.betaT}</b><span>${L.betaS}</span></div></div>`;
   if (!S.mg[0]) h += `<div class="bn" style="background:#e6f6fd"><div class="tx"><b>👆 ${L.hint.split('. ')[0]}.</b><span>${L.hint.split('. ').slice(1).join('. ')}</span></div></div>`;
   const promo = !S.welcome ? 'w' : 'd';
   if (promo === 'w') h += `<div class="bn gold"><div class="tx"><b>🎁 ${L.welcomeT}</b><span>${L.welcomeS}</span></div><button class="btn gold" data-sku="welcome">⭐ ${S.shop.welcome}</button></div>`;
