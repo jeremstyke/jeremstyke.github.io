@@ -9,11 +9,14 @@
 - [x] meilleur-abreuvoir-oiseaux/ | meilleur abreuvoir pour oiseaux | Nourrir | bain d'oiseaux, chauffant si vendu
 - [x] meilleur-nichoir-mesange/ | meilleur nichoir à mésange | Nichoirs | bois, béton de bois, trou 28 et 32 mm
 - [x] meilleure-mangeoire-fenetre/ | meilleure mangeoire de fenêtre | Mangeoires | ventouses, observation de près
+
 - [ ] cadeau-passionne-oiseaux/ | cadeau pour passionné d'oiseaux | Équiper | TITRE IMPOSÉ du type « Cadeau pour un passionné d'oiseaux : idées pour Noël 2026 » ; 10 à 15 idées RÉELLES vendues sur Amazon.fr, classées par budget (moins de 30 €, 30 à 100 €, plus de 100 €) avec seulement des fourchettes de budget vérifiables au moment de la rédaction ou sans prix : guide d'identification des oiseaux (titre, auteur, éditeur vérifiés), jumelles, mangeoire connectée ou à caméra, nichoir avec caméra, abreuvoir ou bain d'oiseaux, mangeoire de fenêtre, livre ou carnet d'observation, appareil photo ou piège photo si pertinent ; pour qui chaque idée, une phrase pourquoi, lien {AMZ:Marque Modèle} ; liens vers les tops existants (jumelles, nichoir caméra, mangeoires) ; idée non marchande en fin de page (adhérer à la LPO, participer au comptage des oiseaux des jardins) seulement si vérifiée sur lpo.fr ; FAQ 3 questions ; aucun prix ni avis inventé
-- [ ] meilleure-mangeoire-anti-pigeon/ | meilleure mangeoire anti-pigeons et anti-écureuils | Mangeoires | cages, sélectives
-- [ ] meilleure-camera-jardin-oiseaux/ | meilleure caméra pour observer les oiseaux | Observer | caméras de jardin, pièges photo
-- [ ] meilleure-longue-vue-ornithologie/ | meilleure longue-vue ornithologie | Observer | grossissement, poids
-- [ ] meilleur-nichoir-hirondelle/ | meilleur nichoir à hirondelles | Nichoirs | nids artificiels
-- [ ] meilleure-mangeoire-silo/ | meilleure mangeoire silo | Mangeoires | métal, plastique, nettoyage facile
 - [ ] meilleur-melange-graines-oiseaux/ | meilleur mélange de graines pour oiseaux | Nourrir | sans pois, lentilles ni riz (conseil LPO)
+- [ ] meilleure-camera-jardin-oiseaux/ | meilleure caméra pour observer les oiseaux | Observer | caméras de jardin, pièges photo
+- [ ] meilleure-mangeoire-boules-de-graisse/ | meilleure mangeoire boule de graisse | Mangeoires | mangeoires et supports pour boules et pains de graisse sans filet, hiver
+- [ ] meilleure-mangeoire-anti-ecureuil/ | mangeoire anti écureuil | Mangeoires | mangeoires à cage ou à contrepoids, plutôt haut de gamme
+- [ ] meilleure-longue-vue-ornithologie/ | meilleure longue-vue ornithologie | Observer | grossissement, poids
+- [ ] meilleure-mangeoire-silo/ | meilleure mangeoire silo | Mangeoires | métal, plastique, nettoyage facile
+- [ ] meilleure-mangeoire-anti-pigeon/ | meilleure mangeoire anti-pigeons et anti-écureuils | Mangeoires | cages, sélectives
+- [ ] meilleur-nichoir-hirondelle/ | meilleur nichoir à hirondelles | Nichoirs | nids artificiels
 - [ ] meilleur-hotel-a-insectes/ | meilleur hôtel à insectes | Nichoirs | biodiversité au jardin

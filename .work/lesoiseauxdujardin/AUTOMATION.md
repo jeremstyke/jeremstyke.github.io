@@ -27,3 +27,7 @@ Liens internes et sources (décidé le 17 nov 2026), à chaque publication :
 ## Liens entre les 4 sites (17 nov 2026)
 - Les 4 sites (Vieillir chez soi, Les oiseaux du jardin, Ma liste bébé, Ma liste mariage) se citent dans le pied de page.
 - Dans le texte : au maximum 1 lien vers un site frère par page, seulement quand c'est vraiment utile au lecteur (ex. mangeoire de fenêtre -> cadeau personne âgée ; cadeau personne âgée -> cadeau passionné d'oiseaux ; mariage avec bébé en route -> liste de naissance). Jamais de lien forcé, jamais d'ancre bourrée de mots-clés.
+
+## Rythme renforcé jusqu'à Noël (17 nov 2026)
+- Du 18 novembre au 31 décembre 2026 : une 2e publication à 10h37 (1 guide de sujets.md + 1 top), en plus de celle de 15h47. Retour à 3 pages par jour à partir du 1er janvier 2027.
+- En novembre et décembre, priorité aux pages d'hiver et de Noël (cadeaux, nourrissage d'hiver, mangeoires, caméras, jumelles).
