@@ -234,6 +234,8 @@ const L = {
   boost:'Boost', offline:'Offline cap', hours:'h',
   goals:'Goals', goalBuy:'Buy', goalMgr:'Hire a manager:', goalPrest:'Sell your empire for investors', achT:'Achievements', achS:'Reach milestones and claim rewards.', achOwn:'Own this property',
   invT:'Invite friends', invS:'You both get +1h of x2 income when a friend joins with your link, and +30 min more when your friend invites someone.', invBtn:'Invite a friend', invCount:'Friends joined',
+  offersT:'Investor offers', offersS:'A different investor shows up with a new deal. New offers in', accept:'Accept',
+  inv:{std:['🧑‍💼','Marc, the banker','A classic deal, no surprises.'],shark:['🦈','Lea, the shark','More investors, but you restart with no cash.'],angel:['😇','Sofia, the patron','Fewer investors, but your Studio keeps its manager and you start with capital.'],tech:['🚀','Yan, the visionary','Normal investors plus x2 income for 2h.'],heir:['🏡','Clara, the heiress','A few more investors and your Studio starts at level 10.']},
   shareTxt:'Build your real estate empire with me on Idle Estate!', snd:'Sounds', evInfo:'Golden hour every day: all your rent pays x2 for 60 minutes. Starts at', rewarded:'Reward claimed!', done:'Done',
   ach:{mgr1:['👔','First manager','Hire your first manager'],s10:['🛋️','Studio level 10','Reach level 10 on the Studio'],s25:['🛋️','Studio level 25','Reach level 25 on the Studio'],s50:['🛋️','Studio level 50','Reach level 50 on the Studio'],mgr5:['🧑‍💼','5 managers','Hire 5 managers'],mgr10:['🏅','Full staff','Hire a manager on every property'],pr1:['🏛️','First sale','Sell your empire once'],pr5:['💎','Tycoon','Sell your empire 5 times'],st7:['🔥','7 day streak','Claim the daily bonus 7 days in a row'],fr1:['👥','First friend','Invite a friend'],fr5:['🎉','Popular','Invite 5 friends']}
  },
@@ -257,6 +259,8 @@ const L = {
   boost:'Boost', offline:'Plafond hors ligne', hours:'h',
   goals:'Objectifs', goalBuy:'Acheter', goalMgr:'Embaucher un gestionnaire :', goalPrest:'Vends ton empire contre des investisseurs', achT:'Succès', achS:'Atteins des paliers et récupère des récompenses.', achOwn:'Possède ce bien',
   invT:'Invite tes amis', invS:'Vous gagnez tous les deux +1h de revenus x2 quand un ami rejoint avec ton lien, et +30 min de plus quand ton ami invite quelqu\'un.', invBtn:'Inviter un ami', invCount:'Amis arrivés',
+  offersT:'Offres d\'investisseurs', offersS:'Un investisseur différent arrive avec une nouvelle offre. Nouvelles offres dans', accept:'Accepter',
+  inv:{std:['🧑‍💼','Marc, le banquier','Une offre classique, sans surprise.'],shark:['🦈','Léa, la requin','Plus d\'investisseurs, mais tu repars sans un sou.'],angel:['😇','Sofia, la mécène','Moins d\'investisseurs, mais ton Studio garde son gestionnaire et tu pars avec du capital.'],tech:['🚀','Yan, le visionnaire','Investisseurs normaux et revenus x2 pendant 2h.'],heir:['🏡','Clara, l\'héritière','Un peu plus d\'investisseurs et ton Studio démarre au niveau 10.']},
   shareTxt:'Construis ton empire immobilier avec moi sur Idle Estate !', snd:'Sons', evInfo:'Heure dorée chaque jour : tous tes loyers sont doublés pendant 60 minutes. Début à', rewarded:'Récompense récupérée !', done:'Fait',
   ach:{mgr1:['👔','Premier gestionnaire','Embauche ton premier gestionnaire'],s10:['🛋️','Studio niveau 10','Monte le Studio au niveau 10'],s25:['🛋️','Studio niveau 25','Monte le Studio au niveau 25'],s50:['🛋️','Studio niveau 50','Monte le Studio au niveau 50'],mgr5:['🧑‍💼','5 gestionnaires','Embauche 5 gestionnaires'],mgr10:['🏅','Équipe au complet','Un gestionnaire sur chaque bien'],pr1:['🏛️','Première vente','Vends ton empire une fois'],pr5:['💎','Magnat','Vends ton empire 5 fois'],st7:['🔥','7 jours d\'affilée','Récupère le bonus du jour 7 jours de suite'],fr1:['👥','Premier ami','Invite un ami'],fr5:['🎉','Populaire','Invite 5 amis']}
  }
@@ -339,7 +343,7 @@ function apply(r, full) {
     off = r.now - Date.now() / 1000;
     const keep = S;
     S = { cash: r.cash, life_all: r.life_all, lv: r.lv.slice(), mg: r.mg.slice(), ts: r.ts.slice(), inv: r.inv, prest: r.prest, perm2: r.perm2, vault: r.vault, welcome: r.welcome, streak: r.streak, dailyOk: r.daily_ok,
-      boostEnd: r.boost ? r.now + r.boost.left : 0, bmult: r.boost ? r.boost.mult : 1, vipEnd: r.vip ? r.now + r.vip.left : 0, cfg: r.cfg, ms: r.ms, mb: r.mb || 2.5, g: r.g, shop: r.shop, notify: r.notify, loc: r.now, cap: r.cap, stars: r.stars, ach: r.ach || [], defs: r.ach_defs || [], uid: r.uid, ref_n: r.ref_n || 0, ref_cap: r.ref_cap || 20 };
+      boostEnd: r.boost ? r.now + r.boost.left : 0, bmult: r.boost ? r.boost.mult : 1, vipEnd: r.vip ? r.now + r.vip.left : 0, cfg: r.cfg, ms: r.ms, mb: r.mb || 2.5, g: r.g, shop: r.shop, notify: r.notify, loc: r.now, cap: r.cap, stars: r.stars, ach: r.ach || [], defs: r.ach_defs || [], uid: r.uid, ref_n: r.ref_n || 0, ref_cap: r.ref_cap || 20, offers: r.offers || [], offersEnd: r.offers_end || 0 };
     if (!keep) build();
     else { buildSky(); }
   }
@@ -599,22 +603,37 @@ async function buy(sku) {
 }
 
 // prestige
-let sureSell = false;
-function renderPrest() { sureSell = false; paintPrest(true); }
+let sureOffer = null;
+function renderPrest() { sureOffer = null; paintPrest(true); }
 function paintPrest(force) {
   const p = $('p-prest'); const g = gainInv();
-  const key = [Math.floor(S.inv), g, sureSell].join();
-  if (!force && p.dataset.k === key) return; p.dataset.k = key;
-  p.innerHTML = `<h2>${L.prestT}</h2><p class="lead">${L.prestS}</p>
-   <div class="box"><span class="lead">${L.investors}</span><div class="big">${fmt(S.inv)} 👔</div><span class="lead">${L.bonus}: +${fmt(S.inv * 2)}%</span></div>
-   ${sureSell ? `<div class="box"><p class="lead">${L.sure}</p><div style="display:flex;gap:8px"><button class="btn" id="sellYes" style="flex:1">${L.yes}</button><button class="btn" id="sellNo" style="flex:1;background:#cfe3d7">${L.no}</button></div></div>`
-   : `<button class="btn gold" id="sellBtn" style="width:100%;padding:15px;font-size:16px" ${g < 1 ? 'disabled' : ''}>${g >= 1 ? L.sellFor.replace('{n}', fmt(g)) : L.needMore}</button>`}`;
+  const offs = S.offers || [];
+  const key = [Math.floor(S.inv), g, sureOffer, offs.map(o => o.id).join()].join();
+  if (!force && p.dataset.k === key) { updPrestTimer(); return; }
+  p.dataset.k = key;
+  let h = `<h2>${L.prestT}</h2><p class="lead">${L.prestS}</p>
+   <div class="box"><span class="lead">${L.investors}</span><div class="big">${fmt(S.inv)} 👔</div><span class="lead">${L.bonus}: +${fmt(S.inv * 2)}%</span></div>`;
+  if (g < 1) h += `<button class="btn gold" style="width:100%;padding:15px;font-size:16px" disabled>${L.needMore}</button>`;
+  else {
+    h += `<h2 style="font-size:22px;margin-top:14px">${L.offersT}</h2><p class="lead">${L.offersS} <b id="offT"></b></p>`;
+    for (const o of offs) {
+      const d = L.inv[o.id]; if (!d) continue; const n = Math.max(1, Math.floor(g * o.m));
+      const tag = o.m > 1 ? ' (+' + Math.round((o.m - 1) * 100) + '%)' : o.m < 1 ? ' (' + Math.round((o.m - 1) * 100) + '%)' : '';
+      const sel = sureOffer === o.id;
+      h += `<div class="row${sel ? ' hot' : ''}"><div class="e">${d[0]}</div><div class="tx"><b>${d[1]}</b><span>${d[2]}</span><div class="rw">👔 +${fmt(n)}${tag}</div></div>` +
+        (sel ? `<div style="display:flex;flex-direction:column;gap:6px"><button class="btn" data-yes="${o.id}">${L.yes}</button><button class="btn" data-no="1" style="background:#cfdceb;box-shadow:0 4px 0 #8aa4c4;border-color:#8aa4c4">${L.no}</button></div>` : `<button class="btn gold" data-offer="${o.id}">${L.accept}</button>`) + `</div>`;
+    }
+    if (sureOffer) h += `<p class="lead" style="margin-top:8px">${L.sure}</p>`;
+  }
+  p.innerHTML = h; updPrestTimer();
   p.onclick = e => {
-    if (e.target.id === 'sellBtn') { sureSell = true; paintPrest(true); }
-    else if (e.target.id === 'sellNo') { sureSell = false; paintPrest(true); }
-    else if (e.target.id === 'sellYes') { call({ act: 'prestige' }).then(r => { sureSell = false; if (r && r.gained) { hap('ok'); toast(L.sold.replace('{n}', fmt(r.gained))); go('estate'); } }); }
+    const a = e.target.closest('[data-offer]'); if (a) { sureOffer = a.dataset.offer; hap('light'); return paintPrest(true); }
+    if (e.target.closest('[data-no]')) { sureOffer = null; return paintPrest(true); }
+    const y = e.target.closest('[data-yes]');
+    if (y) call({ act: 'prestige', offer: y.dataset.yes }).then(r => { sureOffer = null; if (r && r.gained) { hap('ok'); snd('win'); toast(L.sold.replace('{n}', fmt(r.gained))); go('estate'); } else { toast(L.err); paintPrest(true); } });
   };
 }
+function updPrestTimer() { const e = $('offT'); if (e && S.offersEnd) e.textContent = fmtLeft(S.offersEnd - snow()); }
 
 // top
 function loadTop() { call({ act: 'top' }).then(() => { if (tab === 'top') renderTop(); }); }
