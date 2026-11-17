@@ -805,6 +805,7 @@ g("aides-adapter-logement-senior/",
 <p>Pour savoir quoi adapter en priorité, suivez <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a> et nos conseils pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a>.</p>
 <h2>Nos conseils pour bien démarrer</h2>
 <ul>
+<li><strong>Préparez vos justificatifs en ligne</strong> : sur les sites officiels, un document trop lourd ou mal photographié est souvent refusé. L'outil gratuit <a href="https://demarches.cvlibre.com/">PDF Démarches France</a> réduit un PDF ou une photo à la bonne taille, directement sur votre appareil.</li>
 <li><strong>Commencez par un appel</strong> au conseil gratuit France Rénov' (0 808 800 700) : il vous oriente vers les aides auxquelles vous pouvez prétendre.</li>
 <li><strong>Demandez l'avis d'un professionnel</strong> : le médecin traitant peut orienter vers un ergothérapeute, qui propose des aménagements adaptés à la personne.</li>
 <li><strong>Gardez vos documents à portée de main</strong> : dernier avis d'imposition, devis, justificatifs de propriété ou accord du bailleur.</li>

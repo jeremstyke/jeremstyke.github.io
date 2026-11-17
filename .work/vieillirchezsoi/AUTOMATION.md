@@ -57,3 +57,7 @@ Liens internes et externes (décidé le 17 nov 2026), à chaque publication :
 
 ## Qui publie (17 nov 2026)
 - Toutes les publications de ce site sont faites UNIQUEMENT par les tâches programmées créées depuis la conversation de Jeremy dédiée aux 4 sites affiliés (Vieillir chez soi, Les oiseaux du jardin, Ma liste bébé, Ma liste mariage). Toute autre session ou conversation ne doit ni publier de page, ni créer, modifier ou dupliquer une tâche de publication pour ce site : elle signale le besoin à Jeremy et s'arrête.
+
+## Lien avec PDF Démarches France (17 nov 2026)
+- PDF Démarches France (https://demarches.cvlibre.com, site de Jeremy : outils gratuits pour réduire, convertir et fusionner les justificatifs des démarches en ligne) et Vieillir chez soi se citent quand c'est utile.
+- Sur Vieillir chez soi : dans une page aides, retraite ou dossier (MaPrimeAdapt', APA, MDPH, carte mobilité inclusion, demande de retraite, caisses de retraite), ajoute 1 lien vers la page Démarches de l'organisme concerné si elle existe (https://demarches.cvlibre.com/mdph/, /assurance-retraite/, /caf/, /impots/, /ameli/, /msa/, /maprimerenov/) ou sinon vers https://demarches.cvlibre.com/, au moment où le lecteur doit envoyer ses justificatifs. Jamais dans un top produits.

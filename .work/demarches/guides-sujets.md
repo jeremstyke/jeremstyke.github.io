@@ -1,4 +1,5 @@
 # Guides à venir pour Démarches (demarches.cvlibre.com), un par jour
+# Lien avec Vieillir chez soi (site frère de Jeremy, https://vieillir-chez-soi.fr) : dans un guide qui concerne les seniors, la retraite, la MDPH, l'APA ou l'adaptation du logement, ajoute 1 lien utile vers la page la plus proche de Vieillir chez soi (ex. https://vieillir-chez-soi.fr/aides-adapter-logement-senior/, https://vieillir-chez-soi.fr/teleassistance-comment-ca-marche/ ; vérifie que la page existe dans .work/vieillirchezsoi/src/). Pas de lien forcé dans les autres guides.
 # Format : - [ ] slug/ | question visée | angle et organismes concernés
 # Priorité : failles (messages d'erreur et limites précises, très peu de bonnes réponses en ligne). Une donnée (taille max, format) seulement si elle est lue sur le site officiel ou sur service-public.fr ; sinon dis qu'elle n'est pas publiée et donne la marche à suivre.
 # Quand il reste moins de 10 lignes « - [ ] », ajoute 20 nouvelles questions précises (messages d'erreur, tailles max, formats, pièces par démarche) en évitant tout doublon avec guides/.
