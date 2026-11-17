@@ -37,3 +37,9 @@ Réapprovisionnement automatique des listes (décidé le 17 nov 2026, pour ne ja
 Liens internes et externes (décidé le 17 nov 2026), à chaque publication :
 - Maillage interne : après avoir écrit une nouvelle page, ajoute 1 à 3 liens vers elle DEPUIS des pages existantes du même thème (dans src/auto_articles.py ou src/content.py), placés naturellement dans une phrase existante ou une courte phrase ajoutée, avec une ancre descriptive (pas « cliquez ici »). Jamais plus d'un nouveau lien ajouté par ancienne page et par publication, jamais de lien dans un titre.
 - Sources : chaque page qui cite une règle, un montant, une date ou une aide se termine (avant la FAQ) par <p class="sources"><strong>Sources</strong> : <a href="URL officielle" target="_blank" rel="noopener">Nom du site, titre de la page</a>, ... (vérifié le JJ mois AAAA)</p>, avec 1 à 3 liens vers les pages officielles réellement consultées (service-public.fr, ameli.fr, info-retraite.fr, lassuranceretraite.fr, impots.gouv.fr, anah.gouv.fr, notaires.fr, justice.fr, pour-les-personnes-agees.gouv.fr, LPO...). Jamais de lien vers un concurrent commercial.
+
+## Programmes Awin (Verisure, ManoMano, Domaliance) - règle stricte
+- Candidatures envoyées le 16 nov 2026, en attente d'acceptation. Tant que Jeremy n'a pas fourni un lien de suivi Awin, n'insérer AUCUN lien Awin et ne pas citer ces marques comme partenaires.
+- ManoMano et Domaliance : une fois le lien fourni par Jeremy, utilisables directement.
+- Verisure : JAMAIS de publication automatique d'un contenu qui mentionne Verisure avec un lien affilié. Préparer la page ou le paragraphe en brouillon (hors sitemap, non publié), puis prévenir Jeremy pour qu'il demande la validation du contenu à Verisure via Awin. Publier seulement après son feu vert explicite.
+- Verisure et Sector Alarm : SEM et achat de mots-clés de marque interdits.
