@@ -23,3 +23,4 @@
 - [ ] meilleur-bain-pour-oiseaux/ | meilleur bain pour oiseaux | Nourrir | bains et vasques sur pied ou à suspendre, faciles à nettoyer
 - [ ] meilleur-abri-herisson/ | meilleur abri à hérisson | Observer | abris réellement vendus, bois ou matériaux naturels, entrée anti-prédateurs
 - [ ] meilleurs-vers-de-farine-oiseaux/ | vers de farine séchés pour oiseaux | Nourrir | sachets réellement vendus, séchés, sans additifs
+- [ ] meilleur-nichoir-chouette/ | nichoir à chouette | Nichoirs | nichoirs réellement vendus pour chouette hulotte, effraie ou chevêche, dimensions et pose

@@ -12,19 +12,27 @@
 - [x] oiseau-jaune-et-vert/ | oiseau jaune et vert | Observer | identification : verdier, chardonneret, serin, mésange bleue, pic vert
 - [x] moineau-domestique/ | moineau | Observer | fiche espèce : déclin (sources LPO/Vigie-Nature), nichoirs collectifs, graines
 - [ ] oiseau-noir-et-blanc-longue-queue/ | oiseau noir et blanc longue queue | Observer | identification : pie bavarde, bergeronnette grise, mésange à longue queue
+- [ ] chouette-hulotte/ | chouette hulotte | Observer | fiche espèce : chant la nuit, l'attirer au jardin, nichoir à chouette, différence avec le hibou
 - [ ] martinet-noir/ | martinet noir | Observer | fiche espèce : reconnaître, vit en vol, nichoir à martinets, période de présence
+- [ ] difference-hibou-chouette/ | différence hibou chouette | Observer | identification : aigrettes, espèces courantes près des maisons (hulotte, effraie, chevêche, moyen-duc)
 - [ ] pinson-des-arbres/ | pinson des arbres | Observer | fiche espèce : mâle et femelle, nourriture au sol
 - [ ] hirondelle-rustique/ | hirondelle rustique | Observer | fiche espèce : reconnaître, nid dans les bâtiments, protection, différence avec l'hirondelle de fenêtre
+- [ ] huppe-fasciee/ | huppe fasciée | Observer | fiche espèce : reconnaître, où et quand la voir, ce qu'elle mange
 - [ ] chardonneret-elegant/ | chardonneret élégant | Observer | fiche espèce : statut de protection vérifié, graines de niger, mangeoire à niger
 - [ ] petit-oiseau-marron-jardin/ | petit oiseau marron jardin | Observer | identification : troglodyte, moineau, grimpereau, accenteur
+- [ ] heron-cendre/ | héron cendré | Observer | fiche espèce et bassin de jardin : protéger ses poissons (filet, leurre), espèce protégée
 - [ ] difference-corbeau-corneille/ | différence corbeau corneille | Observer | identification : corneille noire, grand corbeau, corbeau freux, choucas
 - [ ] verdier-d-europe/ | verdier | Observer | fiche espèce : trichomonose et hygiène des mangeoires (sources sérieuses)
+- [ ] martin-pecheur/ | martin-pêcheur | Observer | fiche espèce : reconnaître, où le voir, au bord des bassins et rivières
 - [ ] oiseau-qui-tape-a-la-fenetre/ | oiseau qui tape à la vitre | Observer | pourquoi (reflet, territoire au printemps), solutions sans danger
 - [ ] sittelle-torchepot/ | sittelle torchepot | Observer | fiche espèce : descend la tête en bas, nichoir, graisse et graines
+- [ ] buse-variable/ | buse variable | Observer | fiche espèce : reconnaître, différence avec le milan et l'épervier, rapace protégé
 - [ ] pic-epeiche/ | pic épeiche | Observer | fiche espèce : reconnaître, tambourinage, attirer avec graisse
 - [ ] oiseau-qui-chante-la-nuit/ | oiseau qui chante la nuit | Observer | rouge-gorge, merle, rossignol ; éclairage urbain (sources sérieuses)
+- [ ] coucou-gris/ | coucou gris | Observer | fiche espèce : chant, parasitisme des nids, période de présence
 - [ ] tourterelle-turque/ | tourterelle turque | Observer | fiche espèce : différence avec le pigeon, nourriture au sol
 - [ ] rougequeue-noir/ | rougequeue noir | Observer | fiche espèce : migrateur partiel, nichoir semi-ouvert
+- [ ] difference-mouette-goeland/ | différence mouette goéland | Observer | identification : taille, bec, pattes, espèces courantes en ville
 - [ ] troglodyte-mignon/ | troglodyte mignon | Observer | fiche espèce : tout petit, chant puissant, abris en hiver
 - [ ] bouvreuil-pivoine/ | bouvreuil pivoine | Observer | fiche espèce : mâle et femelle, bourgeons, graines
 - [ ] mesange-a-longue-queue/ | mésange à longue queue | Observer | fiche espèce : groupes en hiver, graisse
