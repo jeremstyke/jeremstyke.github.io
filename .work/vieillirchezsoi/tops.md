@@ -15,7 +15,7 @@
 - [x] meilleure-veilleuse-detecteur-de-mouvement/ | meilleure veilleuse détecteur de mouvement | Sécurité | piles, prise, bandeau LED
 - [x] meilleure-barre-d-appui/ | meilleure barre d'appui salle de bain | Salle de bains | droite, coudée, relevable
 - [x] meilleur-lit-medicalise/ | meilleur lit médicalisé électrique | Chambre et repos | modèles vendus aux particuliers, achat ou location, prescription et remboursement seulement si vérifié sur ameli, renvoi médecin
-- [ ] meilleur-matelas-anti-escarres/ | meilleur matelas anti-escarres | Chambre et repos | mousse, à air ; rester général, renvoi professionnel de santé
+- [x] meilleur-matelas-anti-escarres/ | meilleur matelas anti-escarres | Chambre et repos | mousse, à air ; rester général, renvoi professionnel de santé
 - [ ] meilleur-pedalier-exercice-senior/ | meilleur pédalier d'exercice pour senior | Vie quotidienne | assis, motorisé ou non ; renvoi médecin ou kinésithérapeute
 - [ ] meilleur-elevateur-de-bain/ | meilleur élévateur de bain | Salle de bains | sièges élévateurs de baignoire électriques
 - [ ] meilleur-bouton-appel-urgence/ | meilleur bouton d'appel d'urgence senior | Sécurité | pendentif, bracelet, avec ou sans abonnement

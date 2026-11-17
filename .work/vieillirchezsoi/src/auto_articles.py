@@ -3507,6 +3507,7 @@ g("meilleur-lit-medicalise/",
 <p>Commencez par la hauteur. Assise au bord du lit, la personne doit avoir les pieds à plat au sol et les genoux à angle droit : c'est la position la plus sûre pour se lever. Pour l'aidant, le lit doit pouvoir monter à hauteur de hanches pendant les soins. Une plage qui descend vers 30 cm et monte vers 80 cm couvre ces deux besoins.</p>
 <p>Viennent ensuite le poids de la personne (prenez de la marge par rapport à la charge patient indiquée), sa taille (un couchage de 200 cm est trop court pour certains), puis les barrières. Notre conseil : ne mettez pas de barrières « par précaution ». Une personne agitée peut chercher à les enjamber et tomber de plus haut. Demandez l'avis du médecin ou de l'ergothérapeute ; un lit très bas est parfois une meilleure solution.</p>
 <p>Pensez enfin à la chambre : il faut de la place des deux côtés pour l'aidant, et une prise électrique accessible. Pour se lever du lit plus facilement, une poignée d'aide au lever peut compléter l'installation, et pour la journée, notre <a href="{R}meilleur-fauteuil-releveur/">sélection de fauteuils releveurs</a> aide à se lever d'un siège. Le trajet de nuit vers les toilettes reste un moment à risque : notre guide pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a> donne les bons réflexes. Pour le reste du logement, suivez <a href="{R}amenager-logement-personne-agee/">notre guide pièce par pièce</a>.</p>
+<p>Si la personne reste alitée une grande partie de la journée, le matelas compte autant que le lit : consultez notre <a href="{R}meilleur-matelas-anti-escarres/">comparatif des matelas anti-escarres</a>, à valider avec le soignant.</p>
 <p class="sources"><strong>Sources</strong> : <a href="https://forum-assures.ameli.fr/questions/3727477-remboursement-lit-electrique" target="_blank" rel="noopener">Forum des assurés ameli, remboursement lit électrique</a> ; fiches et notices des fabricants Invacare, Capvital, Burmeier, Thuasne, Sotec Medical, Vermeiren et VEVOR (vérifié le 17 novembre 2026)</p>
 """,
   faq=[("Un lit médicalisé est-il remboursé ?", "Il peut être pris en charge par l'Assurance maladie lorsqu'il est prescrit par un professionnel de santé et inscrit sur la liste des produits remboursables. Les modalités dépendent du produit : demandez un devis à un fournisseur habilité et renseignez-vous auprès de votre caisse."),
@@ -3574,3 +3575,163 @@ g("personne-agee-qui-tombe-la-nuit/",
        ("Que faire après une chute la nuit, même sans blessure ?", "En parler au médecin traitant, même si la personne s'est relevée seule. Une chute peut révéler un vertige, un effet de médicament ou une fatigue qui se soignent. Profitez-en pour sécuriser le trajet de nuit et mettre en place un moyen d'alerte."),
        ("Faut-il installer des barrières de lit pour éviter les chutes ?", "Pas sans avis professionnel. Mal choisies ou mal posées, elles peuvent coincer un membre ou pousser la personne à les enjamber. Une poignée d'aide au lever, une veilleuse et un lit à la bonne hauteur sont souvent plus utiles. Demandez conseil au médecin ou à un ergothérapeute.")],
   short="Chutes la nuit", cat="Sécurité")
+
+AUTO_META['date-paiement-retraite-decembre-2026/'] = ('📅', 'ciel')
+g("date-paiement-retraite-decembre-2026/",
+  "Date de paiement de la retraite en décembre 2026 : le calendrier",
+  "Date de paiement de la retraite en décembre 2026",
+  "Retraite de décembre 2026 : Agirc-Arrco le mardi 1er, Assurance retraite et MSA le mercredi 9. Les dates par caisse, lues sur les calendriers officiels.",
+  """
+<p>En décembre 2026, la retraite complémentaire Agirc-Arrco arrive en premier : elle est versée le <strong>mardi 1er décembre</strong>. La retraite de base de l'Assurance retraite (régime général) et celle de la MSA suivent le <strong>mercredi 9 décembre</strong>. Attention, ces deux versements ne concernent pas le même mois, et c'est ce qui sème souvent le doute. Voici le détail, caisse par caisse.</p>
+{CTA}
+<p class="note"><strong>Informations vérifiées le 17 novembre 2026</strong> sur lassuranceretraite.fr, agirc-arrco.fr et msa.fr.</p>
+<h2>Le calendrier de décembre 2026 en un coup d'œil</h2>
+<table><thead><tr><th>Caisse</th><th>Date de versement</th><th>Mois payé</th></tr></thead><tbody>
+<tr><td>Agirc-Arrco (retraite complémentaire des salariés du privé)</td><td>Mardi 1er décembre 2026</td><td>Décembre 2026 (payé d'avance)</td></tr>
+<tr><td>Assurance retraite, régime général (hors Alsace-Moselle)</td><td>Mercredi 9 décembre 2026</td><td>Novembre 2026</td></tr>
+<tr><td>Assurance retraite, Carsat Alsace-Moselle</td><td>Mardi 1er décembre 2026</td><td>Décembre 2026</td></tr>
+<tr><td>MSA (retraite agricole, hors Alsace-Moselle)</td><td>Mercredi 9 décembre 2026</td><td>Novembre 2026</td></tr>
+<tr><td>MSA Alsace-Moselle</td><td>Mardi 1er décembre 2026</td><td>Décembre 2026</td></tr>
+</tbody></table>
+<p>Ces dates sont celles où la caisse envoie l'argent à votre banque. Selon les établissements, la somme peut apparaître sur votre compte le jour même ou un peu plus tard.</p>
+<h2>Pourquoi deux dates différentes dans le même mois ?</h2>
+<p>Parce que les caisses ne paient pas de la même façon. L'Agirc-Arrco verse la retraite complémentaire <strong>d'avance</strong>, en début de mois : l'argent reçu le 1er décembre correspond au mois de décembre. La caisse le dit elle-même : la pension est versée « d'avance et en début de mois », le premier jour ouvré.</p>
+<p>L'Assurance retraite et la MSA, elles, paient <strong>à terme échu</strong>, le 9 du mois suivant. Le virement du 9 décembre correspond donc à votre retraite de novembre. Votre retraite de base de décembre arrivera, elle, en janvier.</p>
+<p>Par exemple, si vous êtes ancien salarié du privé, vous recevez en décembre deux virements : la complémentaire de décembre le 1er, puis la base de novembre le 9. Rien n'est en retard, c'est simplement le rythme normal des deux régimes.</p>
+<h2>Et la retraite de base de décembre, quand arrive-t-elle ?</h2>
+<p>Pour le régime général, l'Assurance retraite annonce le paiement de la mensualité de décembre 2026 le <strong>vendredi 8 janvier 2027</strong>. Le 9 janvier tombant un samedi, le versement est avancé au dernier jour ouvré précédent.</p>
+<p>Pour la MSA, nous vous conseillons de vérifier la date de janvier directement sur son calendrier ou dans votre espace personnel : la règle reste un versement autour du 9, décalé quand ce jour n'est pas ouvré.</p>
+<p>Un point à garder en tête pour janvier : l'Assurance retraite indique que la retraite de base est habituellement revalorisée une fois par an, au moment de la mensualité de janvier. Le montant éventuel de cette hausse n'est connu qu'au moment où il est officiellement fixé : méfiez-vous des chiffres qui circulent avant.</p>
+<h2>Les fêtes approchent : comment éviter un découvert ?</h2>
+<p>Décembre est un mois chargé : cadeaux, repas, parfois un déplacement pour voir la famille. Or avec une retraite de base versée le 9, il s'écoule plusieurs semaines entre deux virements. Quelques réflexes simples aident à passer le cap sereinement.</p>
+<ul>
+<li><strong>Regardez la date des prélèvements.</strong> Loyer, électricité ou mutuelle prélevés le 5 du mois peuvent tomber avant le versement du 9. Si c'est souvent juste, demandez au fournisseur de décaler la date de prélèvement après le 10.</li>
+<li><strong>Notez les deux dates de janvier.</strong> Le 8 janvier pour la base du régime général, et le début de mois pour la complémentaire : la date exacte de janvier 2027 n'était pas encore affichée sur le calendrier de l'Agirc-Arrco au moment de notre vérification.</li>
+<li><strong>Prévoyez les achats importants après le 9.</strong> Par exemple, si vous offrez un équipement à un parent, comme une <a href="{R}teleassistance-comment-ca-marche/">téléassistance</a> ou du matériel pour la salle de bains, attendez le second virement pour ne pas fragiliser le compte.</li>
+</ul>
+<p>Pour un proche âgé qui gère seul son budget, un petit calendrier mural avec les deux dates entourées rend souvent plus de services qu'une longue explication. <a href="{AMZ:calendrier mural grand format senior}" """ + A + """>Voir les calendriers muraux grand format</a></p>
+<h2>Votre retraite n'est pas arrivée : que faire ?</h2>
+<p>Avant de vous inquiéter, vérifiez trois choses. D'abord, la bonne caisse et le bon mois : beaucoup de personnes attendent leur retraite de base de décembre en décembre, alors qu'elle arrive en janvier. Ensuite, le délai de votre banque, qui peut ajouter un ou deux jours. Enfin, votre espace personnel : le compte retraite de info-retraite.fr permet de consulter vos dates de paiement, tous régimes confondus.</p>
+<p>Si l'argent manque toujours quelques jours après la date prévue, contactez votre caisse depuis votre espace personnel ou par téléphone. Un changement de banque récent est souvent en cause : la caisse doit avoir reçu votre nouveau RIB avant la date de paiement. Pour l'envoyer, vous pouvez préparer votre justificatif avec <a href="https://demarches.cvlibre.com/assurance-retraite/" target="_blank" rel="noopener">l'outil gratuit de PDF Démarches France pour l'Assurance retraite</a>, qui réduit et convertit les fichiers au bon format.</p>
+<p>Notre conseil : si vous aidez un parent dans ses démarches, créez avec lui son compte sur info-retraite.fr une bonne fois pour toutes. Toutes ses caisses et ses dates de paiement y sont regroupées, ce qui évite d'appeler chaque organisme.</p>
+<h2>Et les autres régimes ?</h2>
+<p>Fonctionnaires, indépendants, professions libérales, Ircantec : chaque régime a son propre calendrier, que nous n'avons pas repris ici. Consultez le site de votre caisse ou votre compte retraite pour connaître la date exacte de votre versement.</p>
+<p>Pour aller plus loin, découvrez aussi les <a href="{R}aides-adapter-logement-senior/">aides pour adapter le logement d'un senior</a> et notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a>.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.lassuranceretraite.fr/portail-info/home/retraite/paiements-retraite/calendrier-paiement-retraite.html" target="_blank" rel="noopener">L'Assurance retraite, Calendrier et modalités de paiement de la retraite</a>, <a href="https://www.agirc-arrco.fr/particuliers/ma-retraite/vivre-ma-retraite/pension-de-retraite-calendrier-des-paiements/" target="_blank" rel="noopener">Agirc-Arrco, Calendrier des paiements</a>, <a href="https://www.msa.fr/lfp/retraite/dates-versement" target="_blank" rel="noopener">MSA, Dates de versement de votre retraite</a> (vérifié le 17 novembre 2026)</p>
+""",
+  faq=[("Quelle est la date de paiement de la retraite Agirc-Arrco en décembre 2026 ?", "Le mardi 1er décembre 2026. L'Agirc-Arrco verse la retraite complémentaire d'avance, le premier jour ouvré du mois : ce virement correspond donc au mois de décembre."),
+       ("Quand la Carsat verse-t-elle la retraite en décembre 2026 ?", "Pour le régime général hors Alsace-Moselle, le mercredi 9 décembre 2026. Ce versement correspond à la retraite de novembre. La retraite de décembre sera versée le vendredi 8 janvier 2027. En Alsace-Moselle, la mensualité de décembre est versée le 1er décembre."),
+       ("Pourquoi ma retraite de base de décembre n'arrive-t-elle qu'en janvier ?", "Parce que l'Assurance retraite et la MSA paient à terme échu : le mois est versé une fois écoulé, autour du 9 du mois suivant. La retraite complémentaire Agirc-Arrco, elle, est payée d'avance en début de mois.")],
+  short="Paiement retraite décembre 2026", cat="Retraite")
+
+AUTO_META['meilleur-matelas-anti-escarres/'] = ('🏆', 'lilas')
+g("meilleur-matelas-anti-escarres/",
+  "Meilleur matelas anti-escarres 2026 : 8 modèles mousse et air",
+  "Meilleur matelas anti-escarres : 8 modèles comparés, mousse et air alterné",
+  "Mousse viscoélastique ou air alterné avec compresseur : 8 matelas anti-escarres comparés d'après les fiches des fabricants et quand passer par une prescription.",
+  """
+<p>Le bon matelas anti-escarres dépend d'abord du niveau de risque de la personne, et ce niveau, c'est un soignant qui l'évalue. Pour une personne qui bouge encore un peu dans son lit, un matelas en mousse viscoélastique suffit souvent. Quand elle reste alitée la majeure partie de la journée ou qu'une rougeur est déjà apparue, on passe en général à un matelas à air alterné, avec compresseur. Voici huit modèles réellement commercialisés en France, de la mousse simple à l'air motorisé, et les questions à vous poser avant d'acheter.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs (fiches techniques des fabricants, pharmacies en ligne, distributeurs de matériel médical, avis de la Haute Autorité de santé), sans test en main. Nous n'indiquons que les données lues sur ces fiches ; quand une information n'y figure pas, nous écrivons « non précisé ». Les valeurs peuvent changer selon la version : vérifiez toujours la notice du modèle que vous achetez. Un matelas anti-escarres ne remplace ni les changements de position ni les soins de peau : demandez toujours l'avis du médecin, de l'infirmier ou d'un ergothérapeute.</div>
+<h2>Avant tout : achat ou prescription ?</h2>
+<p>C'est la question que beaucoup de familles se posent trop tard. Les supports d'aide à la prévention des escarres inscrits sur la liste des produits et prestations remboursables (LPP) peuvent être pris en charge par l'Assurance maladie, sur prescription médicale. Le pharmacien ou le prestataire de matériel médical vous dit ce qui est remboursé pour votre cas. Pour les matelas à air, la Haute Autorité de santé précise que le fournisseur livre, installe le matériel à domicile et forme le patient : un vrai plus quand on n'a jamais réglé un compresseur.</p>
+<p>Notre conseil : pour un risque moyen ou élevé, ou une escarre déjà présente, commencez par en parler au médecin traitant. L'achat en ligne a du sens pour un risque faible, en complément, ou quand vous savez exactement quel modèle on vous a conseillé.</p>
+<h2>Le comparatif en un coup d'œil</h2>
+<table><thead><tr><th>Modèle</th><th>Type</th><th>Poids patient</th><th>Niveau de risque indiqué</th><th>Dimensions</th><th>Idéal pour</th></tr></thead><tbody>
+<tr><td>Winncare Axtair Automorpho Plus</td><td>Air alterné, matelas de remplacement</td><td>30 à 180 kg</td><td>Modéré à élevé</td><td>195 x 87 x 17 cm</td><td>Notre choix : le plus complet</td></tr>
+<tr><td>Winncare Axtair One Plus</td><td>Air alterné, matelas de remplacement</td><td>30 à 165 kg</td><td>Modéré à élevé</td><td>195 x 87 x 17 cm</td><td>Un air alterné simple à régler</td></tr>
+<tr><td>Wellell Domus Auto</td><td>Air alterné, matelas de remplacement</td><td>Jusqu'à 250 kg</td><td>Non précisé</td><td>200 x 85, 100 ou 110 cm, 20,3 cm</td><td>Forte corpulence, lits larges</td></tr>
+<tr><td>Soft Air Simplex WDS</td><td>Air, statique ou alterné</td><td>40 à 140 kg</td><td>Faible</td><td>196 x 88 x 12,5 cm</td><td>Un air d'entrée de gamme silencieux</td></tr>
+<tr><td>Mobiclinic Mobi 1</td><td>Surmatelas à air alterné</td><td>Jusqu'à 135 kg</td><td>Escarres de grade I</td><td>200 x 90 x 7 cm</td><td>Un premier surmatelas, sur Amazon</td></tr>
+<tr><td>Winncare Alova</td><td>Mousse viscoélastique</td><td>30 à 180 kg (90 cm)</td><td>Moyen à élevé</td><td>Non précisé</td><td>Une mousse reconnue par la HAS</td></tr>
+<tr><td>Herdegen Visco Maxi</td><td>Mousse viscoélastique</td><td>120 ou 140 kg selon la taille</td><td>Modéré</td><td>195 x 88, 198 x 120 ou 198 x 140 cm, 14 cm</td><td>Une mousse en grand lit</td></tr>
+<tr><td>Systam Viscoflex Air</td><td>Mousse visco avec insert à air</td><td>35 à 130 kg</td><td>Élevé (prévention)</td><td>90 x 200 cm, 14 cm</td><td>Mousse renforcée sans compresseur</td></tr>
+</tbody></table>
+<p>Trois repères pour lire ce tableau : la fourchette de poids est une condition de bon fonctionnement, pas un détail ; le niveau de risque indiqué par le fabricant doit correspondre à celui évalué par le soignant ; et un « matelas de remplacement » se met à la place du matelas existant, alors qu'un « surmatelas » se pose dessus et remonte la hauteur de couchage.</p>
+
+<h2>1. Winncare Axtair Automorpho Plus : idéal pour un usage prolongé au lit (notre choix)</h2>
+<p><strong>Pour qui ?</strong> Une personne alitée une grande partie de la journée, à risque modéré à élevé, ou qui a déjà une escarre, avec l'accord de l'équipe soignante. C'est notre choix global parce qu'il réunit les réglages les plus utiles au quotidien.</p>
+<ul>
+<li><strong>Points forts</strong> : trois modes (dynamique, statique et soins), réglage du confort et gestion de la position assise dans chaque mode, ajustement automatique breveté, décharge des talons réglable par molette. Alarmes visuelles et sonores, valve CPR pour dégonfler en urgence, 8 heures d'autonomie.</li>
+<li><strong>Données utiles</strong> : 18 cellules de 12 cm sur une base en mousse de plus de 5 cm, 195 x 87 x 17 cm, patient de 30 à 180 kg. Le revendeur indique un usage pour un risque modéré à élevé et des escarres de stade 1 à 4. Matelas et housse lavables à 60 °C, garantie 2 ans.</li>
+<li><strong>Limites</strong> : niveau sonore non précisé sur la fiche consultée. Dispositif médical ni repris ni échangé : ne l'achetez pas sans avoir validé le choix avec un soignant. C'est typiquement le genre de matelas que l'on obtient aussi en location sur prescription.</li>
+</ul>
+<p><a href="{AMZ:Winncare Axtair Automorpho Plus}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Winncare Axtair One Plus : idéal pour un air alterné simple à utiliser</h2>
+<p><strong>Pour qui ?</strong> Un aidant qui veut un matelas à air sans multiplier les réglages, pour une personne à risque modéré qui reste plus de 15 heures par jour au lit.</p>
+<ul>
+<li><strong>Points forts</strong> : un seul mode dynamique avec ajustement automatique breveté, ce qui limite les erreurs de réglage. Gestion de la position assise et réglage du confort. Dégonflage CPR en moins de 15 secondes selon le fabricant (valeur donnée pour un patient de 80 kg à plat), alarmes visuelles et sonores, QR code sur le compresseur.</li>
+<li><strong>Données utiles</strong> : 18 cellules de 12 cm sur 5 cm de mousse, 195 x 87 x 17 cm pour un lit de 90 cm, patient de 30 à 165 kg, 8 heures d'autonomie en mode transport, housse lavable à 90 °C, garantie 2 ans.</li>
+<li><strong>Limites</strong> : pas de mode statique ni de mode soins, contrairement à l'Automorpho Plus. Cellules décrites comme silencieuses, mais aucun chiffre en décibels. Ni repris ni échangé.</li>
+</ul>
+<p><a href="{AMZ:Winncare Axtair One Plus matelas}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Wellell Domus Auto : idéal pour une personne de forte corpulence</h2>
+<p><strong>Pour qui ?</strong> Une personne lourde, ou un couchage plus large que 90 cm. C'est le seul modèle de cette sélection proposé en 100 et 110 cm de large.</p>
+<ul>
+<li><strong>Points forts</strong> : patient jusqu'à 250 kg, 20 cellules, plusieurs modes (alterné, basse pression continue, soins avec gonflage maximal, mode assis). Alarmes visuelles et sonores, verrouillage automatique du panneau de commande (pratique si la personne touche aux boutons), bouton CPR. Bruit annoncé sous 30 dB.</li>
+<li><strong>Données utiles</strong> : 200 cm de long, 85, 100 ou 110 cm de large, 20,3 cm de haut. Housse extensible dans quatre directions, coutures soudées. La fiche indique que le patient reste soutenu même en cas de coupure de courant.</li>
+<li><strong>Limites</strong> : niveau de risque, garantie et durée d'autonomie non précisés sur la fiche consultée. Avec plus de 20 cm d'épaisseur, vérifiez la hauteur des barrières de lit s'il y en a.</li>
+</ul>
+<p><a href="{AMZ:Domus Auto matelas air alterne}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Soft Air Simplex WDS : idéal pour un air d'entrée de gamme silencieux</h2>
+<p><strong>Pour qui ?</strong> Une personne à faible risque qui passe beaucoup de temps allongée, et qui dort mal à cause du bruit ou des vibrations.</p>
+<ul>
+<li><strong>Points forts</strong> : fonctionnement statique ou alterné une cellule sur deux, cycle de 10 minutes. La fiche annonce « pas de vibrations, pas de bruit ». 21 cellules amovibles une par une, ce qui facilite l'entretien. Système CPR conçu pour éviter toute ouverture accidentelle.</li>
+<li><strong>Données utiles</strong> : 196 x 88 x 12,5 cm pour un lit de 200 x 90 cm, patient de 40 à 140 kg, indiqué pour un faible risque et en aide au traitement des escarres de stade 2. Housse lavable à 95 °C, fabriqué en Allemagne, matelas et pompe garantis 2 ans.</li>
+<li><strong>Limites</strong> : alarmes non précisées sur la fiche consultée. Conçu pour un risque faible : pour une personne alitée en permanence, un modèle comme l'Automorpho Plus est plus adapté.</li>
+</ul>
+<p><a href="{AMZ:Soft Air Simplex matelas anti escarre}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Mobiclinic Mobi 1 : idéal pour un premier surmatelas à air</h2>
+<p><strong>Pour qui ?</strong> Une personne qui garde de la mobilité mais reste longtemps au lit, chez qui le soignant conseille un premier surmatelas, à poser sur le matelas existant.</p>
+<ul>
+<li><strong>Points forts</strong> : 130 cellules en PVC médical ignifugé, compresseur réglable de 40 à 100 mmHg, cycle de 6 minutes, bruit annoncé de 33 à 34 dB. Facile à trouver sur Amazon.fr.</li>
+<li><strong>Données utiles</strong> : 200 x 90 x 7 cm, patient jusqu'à 135 kg, indiqué pour les escarres de grade I.</li>
+<li><strong>Limites</strong> : avec 7 cm d'épaisseur, il apporte moins que les matelas de remplacement de cette sélection. Lavage à la main uniquement. Alarmes, système CPR et garantie non précisés sur la fiche consultée, qui provient d'un site de présentation et non du fabricant : vérifiez la notice à réception.</li>
+</ul>
+<p><a href="{AMZ:Mobiclinic Mobi 1 matelas anti escarres}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Winncare Alova : idéal pour une mousse reconnue par la HAS</h2>
+<p><strong>Pour qui ?</strong> Une personne à risque moyen à élevé qui ne souhaite pas de compresseur, ou dont l'entourage préfère un matelas sans réglage ni électricité.</p>
+<ul>
+<li><strong>Points forts</strong> : mousse viscoélastique de classe II inscrite sous son nom de marque sur la LPP, d'après l'avis de la Haute Autorité de santé. Indiquée en prévention pour les patients à risque moyen à élevé qui restent alités plus de 15 heures sur 24.</li>
+<li><strong>Données utiles</strong> : patient de 30 à 180 kg pour la version de 90 cm, de 30 à 135 kg pour les largeurs de 70 et 80 cm (avis HAS). Il existe une version XXL de 120 cm pour les personnes de forte corpulence.</li>
+<li><strong>Limites</strong> : en traitement d'une escarre, la HAS précise que l'association à un dispositif de décharge localisée ou de positionnement est obligatoire. Épaisseur et garantie non précisées dans les documents consultés pour le modèle standard.</li>
+</ul>
+<p><a href="{AMZ:Winncare Alova matelas viscoelastique}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Herdegen Visco Maxi : idéal pour une mousse en lit double</h2>
+<p><strong>Pour qui ?</strong> Un couple qui partage le même lit, ou une personne à risque modéré qui veut garder un couchage large.</p>
+<ul>
+<li><strong>Points forts</strong> : existe en 88, 120 et 140 cm de large, ce qui est rare pour un matelas médical. 6 cm de mousse viscoélastique sur 8 cm de mousse haute résilience Bultex. Housse intégrale imperméable et déhoussable, matelas réversible tête-pieds, fabriqué en France, garantie 3 ans.</li>
+<li><strong>Données utiles</strong> : 14 cm d'épaisseur, 120 kg maximum en 195 x 88 cm, 140 kg en 198 x 120 et 198 x 140 cm. Niveau de risque indiqué : modéré.</li>
+<li><strong>Limites</strong> : livré roulé, il lui faut 48 à 72 heures pour reprendre sa forme : ne l'utilisez pas le soir même. Ni repris ni échangé.</li>
+</ul>
+<p><a href="{AMZ:Herdegen matelas visco classe 2}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Systam Viscoflex Air : idéal pour une mousse renforcée sans compresseur</h2>
+<p><strong>Pour qui ?</strong> Une personne à risque élevé selon le soignant, par exemple qui ne sort plus du lit dans la journée, quand on veut éviter le bruit et l'électricité d'un compresseur.</p>
+<ul>
+<li><strong>Points forts</strong> : mousse viscoélastique moulée associée à un insert à cellules d'air de 6 cm, gonflé avec le manomètre électronique fourni. Housse imperméable et antibactérienne qui s'ouvre sur trois côtés, dessous antidérapant.</li>
+<li><strong>Données utiles</strong> : 90 x 200 cm, 14 cm d'épaisseur, patient de 35 à 130 kg. La fiche technique l'indique en prévention pour un risque élevé et en traitement des escarres de stade 1 et 2, avec décharge ou positionnement.</li>
+<li><strong>Limites</strong> : l'insert à air se contrôle de temps en temps au manomètre. Durée de garantie non précisée sur la fiche consultée. La fiche signale que l'Assurance maladie peut appliquer d'autres limites de poids que le fabricant.</li>
+</ul>
+<p><a href="{AMZ:Systam Viscoflex Air matelas}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment choisir un matelas anti-escarres ?</h2>
+<h3>Partez du niveau de risque, pas du prix</h3>
+<p>La HAS distingue grossièrement trois situations : la mousse pour la prévention, le surmatelas dynamique (à air) pour une personne qui a déjà eu une escarre peu profonde ou un risque élevé, et le matelas dynamique pour une escarre profonde chez une personne qui ne peut plus bouger seule au lit. Elle précise que ces repères viennent de l'expérience des professionnels. Un matelas trop « léger » pour la situation rassure à tort ; un matelas trop technique complique la vie pour rien.</p>
+<h3>Vérifiez le poids et la taille du lit</h3>
+<p>Sous le poids minimal, un matelas à air peut être trop ferme ; au-dessus du maximum, la personne s'enfonce jusqu'à toucher la base. Mesurez aussi le sommier : la plupart des modèles médicaux font 87 à 90 cm de large, pensés pour un <a href="{R}meilleur-lit-medicalise/">lit médicalisé</a>.</p>
+<h3>Pensez au quotidien de l'aidant</h3>
+<p>Housse lavable à haute température, alarme en cas de baisse de pression, valve CPR pour les secours, niveau de bruit la nuit : ce sont ces détails qui font qu'un matelas est bien utilisé ou qu'il finit débranché. Et quel que soit le matelas, la HAS recommande de planifier des changements de position toutes les 2 à 3 heures, voire plus souvent. Une <a href="{R}meilleur-fauteuil-releveur/">assise adaptée dans la journée</a> compte aussi, car une escarre peut aussi apparaître en position assise.</p>
+<p>Pour le reste de la chambre et du logement, consultez notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a>.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.has-sante.fr/upload/docs/application/pdf/Escarres_court.pdf" target="_blank" rel="noopener">HAS, Prévention et traitement des escarres de l'adulte et du sujet âgé</a>, <a href="https://www.has-sante.fr/upload/docs/evamed/CEPP-5707_ALOVA_22_octobre_2018_(5707)_avis.pdf" target="_blank" rel="noopener">HAS, avis sur le matelas Alova</a>, <a href="https://forum-assures.ameli.fr/questions/3348468-prise-charge-conditions-remboursement-matelas-anti-escarres" target="_blank" rel="noopener">ameli, prise en charge des matelas anti-escarres</a> (vérifié le 17 novembre 2026)</p>
+""",
+  faq=[("Quel matelas anti-escarres choisir pour une personne âgée alitée ?", "Cela dépend du risque évalué par le soignant. Pour un risque faible à modéré, une mousse viscoélastique de classe II suffit souvent. Pour une personne alitée en permanence, à risque élevé ou avec une escarre, on se tourne en général vers un matelas à air alterné avec compresseur. Demandez l'avis du médecin ou de l'infirmier avant d'acheter."),
+       ("Un matelas anti-escarres est-il remboursé ?", "Les supports d'aide à la prévention des escarres inscrits sur la LPP peuvent être pris en charge par l'Assurance maladie, sur prescription médicale. Le pharmacien ou le prestataire de matériel médical vous indique ce qui est remboursé, à l'achat ou en location, selon la situation."),
+       ("Avez-vous testé ces matelas anti-escarres ?", "Non. Cette sélection repose uniquement sur les fiches publiées par les fabricants, les revendeurs et les avis de la Haute Autorité de santé. Nous n'indiquons que ce qui figure sur ces documents, sans note ni avis de prise en main.")],
+  short="Top 8 matelas anti-escarres", cat="Chambre et repos")
