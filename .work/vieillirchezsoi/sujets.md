@@ -1,6 +1,40 @@
 # Sujets d'articles à venir pour Vieillir chez soi (un tous les 2 jours)
 # Format : - [ ] livres-audio-personne-agee/ | livre audio pour personne âgée | Vie quotidienne | quand la vue baisse, comment écouter (enceinte simple, téléphone, tablette, casque), trouver des livres audio, installer avec son proche ; lien {AUDIBLE} vers l'essai gratuit en bonne place et liens {AMZ} vers les appareils
 - [ ] slug/ | requête visée | catégorie | angle
+- [ ] apa-allocation-personnalisee-autonomie/ | APA allocation personnalisée d'autonomie | Conseils pour les proches | qui y a droit, GIR, démarche auprès du département, ce qu'elle finance (aide à domicile, téléassistance, aménagements), montants seulement si lus sur service-public.fr ou pour-les-personnes-agees.gouv.fr avec la date
+- [ ] siege-de-douche-ou-tabouret/ | siège de douche ou tabouret de douche | Salle de bains | aide au choix juste avant l'achat, selon l'équilibre et la place, renvoi vers le top sièges de douche
+- [ ] aide-menagere-caisse-de-retraite/ | aide ménagère caisse de retraite | Conseils pour les proches | aide de la caisse de retraite (Assurance retraite, Agirc-Arrco) pour les GIR 5 et 6, démarche, différence avec l'APA, sources officielles uniquement
+- [ ] quel-deambulateur-apres-une-chute/ | quel déambulateur après une chute | Se déplacer | cadre, 2 roues, rollator selon la situation, renvoi kinésithérapeute ou ergothérapeute, liens vers les tops
+- [ ] credit-impot-aide-a-domicile/ | crédit d'impôt aide à domicile senior | Conseils pour les proches | services à la personne, téléassistance, taux et plafond seulement si lus sur impots.gouv.fr ou service-public.fr, exemples chiffrés simples
+- [ ] fauteuil-releveur-1-ou-2-moteurs/ | fauteuil releveur 1 ou 2 moteurs | Chambre et repos | différences concrètes, pour qui, renvoi vers le top fauteuils releveurs
+- [ ] grille-aggir-gir/ | grille AGGIR GIR | Conseils pour les proches | les 6 GIR expliqués simplement, qui évalue, à quoi ça sert (APA, aides caisses de retraite), liens vers apa et aide ménagère
+- [ ] amenager-chambre-personne-agee/ | aménager la chambre d'une personne âgée | Chambre et repos | guide pilier de la pièce : lit, éclairage, barre de lit, chaise percée, relié à tous les tops du thème
+- [ ] carte-mobilite-inclusion-senior/ | carte mobilité inclusion personne âgée | Conseils pour les proches | mentions invalidité, priorité, stationnement, démarche MDPH ou département selon le GIR, sources officielles
+- [ ] securiser-escalier-personne-agee/ | sécuriser un escalier pour personne âgée | Sécurité | guide pilier : main courante, éclairage, monte-escalier, relié aux tops du thème
+- [ ] droits-aidant-familial/ | droits de l'aidant familial | Conseils pour les proches | congé de proche aidant, AJPA, droit au répit, où se renseigner ; montants seulement si lus sur service-public.fr avec la date
+- [ ] adapter-cuisine-personne-agee/ | adapter la cuisine d'une personne âgée | Vie quotidienne | guide pilier : rangements à hauteur, ustensiles adaptés, sécurité gaz et feu
+- [ ] demarches-depart-a-la-retraite/ | démarches départ à la retraite | Conseils pour les proches | calendrier des démarches (info-retraite.fr, demande unique), pièces, erreurs fréquentes ; terminer sur préparer son logement pour la suite avec lien vers le guide pilier
+- [ ] adapter-salle-de-bain-personne-agee/ | adapter la salle de bain d'une personne âgée | Salle de bains | priorités, petits achats puis travaux
+- [ ] pension-de-reversion/ | pension de réversion | Conseils pour les proches | qui y a droit, régime de base et complémentaire, démarche, conditions seulement si lues sur info-retraite.fr ou service-public.fr
+- [ ] lit-medicalise-achat-ou-location/ | lit médicalisé achat ou location | Chambre et repos | location fréquente, prescription, vérifier sur ameli
+- [ ] aspa-minimum-vieillesse/ | ASPA minimum vieillesse | Conseils pour les proches | conditions, démarche, récupération sur succession ; montants seulement si lus sur service-public.fr avec la date
+- [ ] coussin-anti-escarres/ | coussin anti-escarres | Chambre et repos | types, rester général, renvoi professionnel de santé
+- [ ] occupations-retraite-a-la-maison/ | que faire à la retraite à la maison | Vie quotidienne | idées concrètes (lecture et livres audio, puzzles, jardinage sur balcon, oiseaux du jardin, jeux de mémoire, appels vidéo) avec liens {AMZ}, un lien {AUDIBLE} et un lien vers le site frère si pertinent
+- [ ] chaise-percee/ | chaise percée | Chambre et repos | usage nocturne, accoudoirs, entretien
+- [ ] cadre-de-toilettes/ | cadre de toilettes accoudoirs | Salle de bains | réglage, sans perçage
+- [ ] fauteuil-roulant-de-transfert/ | fauteuil roulant de transfert | Se déplacer | poids, pliage, usage occasionnel
+- [ ] rampe-acces-seuil/ | rampe d'accès seuil de porte | Se déplacer | hauteur de marche, pente, portable ou fixe
+- [ ] main-courante-escalier/ | main courante escalier | Sécurité | des deux côtés, fixation, éclairage
+- [ ] couverts-ergonomiques/ | couverts ergonomiques | Vie quotidienne | manche épais, coudés, vaisselle antidérapante
+- [ ] horloge-calendrier-senior/ | horloge calendrier senior | Vie quotidienne | lisibilité, rappels
+- [ ] loupe-electronique/ | loupe électronique de lecture | Vie quotidienne | grossissement, éclairage, renvoi ophtalmologiste
+- [ ] casque-tv-senior/ | casque TV sans fil senior | Vie quotidienne | réglage volume, recharge, confort, renvoi audioprothésiste
+- [ ] barriere-de-lit/ | barrière de lit adulte | Chambre et repos | prudence, alternatives, avis professionnel
+- [ ] table-de-lit/ | table de lit à roulettes | Chambre et repos | hauteur réglable, plateau inclinable
+- [ ] chaussures-personne-agee/ | chaussures pour personne âgée | Se déplacer | maintien, semelle, fermeture velcro
+- [ ] parler-a-un-parent-age-de-son-logement/ | comment convaincre un parent âgé d'adapter son logement | Conseils pour les proches | en parler sans brusquer, faire accepter les aides, renvoi au guide pièce par pièce
+- [ ] materiel-maintien-domicile-acheter-ou-louer/ | matériel maintien à domicile acheter ou louer | Conseils pour les proches | ce qui se loue, prescription
+- [ ] boite-a-cle-securisee/ | boîte à clé sécurisée | Sécurité | aides à domicile, secours, code
 # Cocher [x] une fois publié. Prendre toujours le premier sujet non coché.
 
 - [x] comment-choisir-siege-de-douche/ | siège de douche personne âgée | Salle de bains | publié au lancement
@@ -24,31 +58,7 @@
 - [x] tapis-antiderapant-douche/ | tapis antidérapant douche | Salle de bains | ventouses, entretien, alternatives
 - [x] bouton-appel-urgence-senior/ | bouton d'appel d'urgence senior | Sécurité | pendentif, bracelet, avec ou sans abonnement
 - [x] teleassistance-comment-ca-marche/ | téléassistance comment ça marche | Sécurité | principe, qui répond, rester général sur les aides
-- [ ] siege-de-douche-ou-tabouret/ | siège de douche ou tabouret de douche | Salle de bains | aide au choix juste avant l'achat, selon l'équilibre et la place, renvoi vers le top sièges de douche
-- [ ] quel-deambulateur-apres-une-chute/ | quel déambulateur après une chute | Se déplacer | cadre, 2 roues, rollator selon la situation, renvoi kinésithérapeute ou ergothérapeute, liens vers les tops
-- [ ] fauteuil-releveur-1-ou-2-moteurs/ | fauteuil releveur 1 ou 2 moteurs | Chambre et repos | différences concrètes, pour qui, renvoi vers le top fauteuils releveurs
-- [ ] amenager-chambre-personne-agee/ | aménager la chambre d'une personne âgée | Chambre et repos | guide pilier de la pièce : lit, éclairage, barre de lit, chaise percée, relié à tous les tops du thème
-- [ ] securiser-escalier-personne-agee/ | sécuriser un escalier pour personne âgée | Sécurité | guide pilier : main courante, éclairage, monte-escalier, relié aux tops du thème
-- [ ] adapter-cuisine-personne-agee/ | adapter la cuisine d'une personne âgée | Vie quotidienne | guide pilier : rangements à hauteur, ustensiles adaptés, sécurité gaz et feu
-- [ ] adapter-salle-de-bain-personne-agee/ | adapter la salle de bain d'une personne âgée | Salle de bains | priorités, petits achats puis travaux
-- [ ] lit-medicalise-achat-ou-location/ | lit médicalisé achat ou location | Chambre et repos | location fréquente, prescription, vérifier sur ameli
-- [ ] coussin-anti-escarres/ | coussin anti-escarres | Chambre et repos | types, rester général, renvoi professionnel de santé
-- [ ] chaise-percee/ | chaise percée | Chambre et repos | usage nocturne, accoudoirs, entretien
-- [ ] cadre-de-toilettes/ | cadre de toilettes accoudoirs | Salle de bains | réglage, sans perçage
-- [ ] fauteuil-roulant-de-transfert/ | fauteuil roulant de transfert | Se déplacer | poids, pliage, usage occasionnel
-- [ ] rampe-acces-seuil/ | rampe d'accès seuil de porte | Se déplacer | hauteur de marche, pente, portable ou fixe
-- [ ] main-courante-escalier/ | main courante escalier | Sécurité | des deux côtés, fixation, éclairage
-- [ ] couverts-ergonomiques/ | couverts ergonomiques | Vie quotidienne | manche épais, coudés, vaisselle antidérapante
-- [ ] horloge-calendrier-senior/ | horloge calendrier senior | Vie quotidienne | lisibilité, rappels
-- [ ] loupe-electronique/ | loupe électronique de lecture | Vie quotidienne | grossissement, éclairage, renvoi ophtalmologiste
-- [ ] casque-tv-senior/ | casque TV sans fil senior | Vie quotidienne | réglage volume, recharge, confort, renvoi audioprothésiste
-- [ ] barriere-de-lit/ | barrière de lit adulte | Chambre et repos | prudence, alternatives, avis professionnel
-- [ ] table-de-lit/ | table de lit à roulettes | Chambre et repos | hauteur réglable, plateau inclinable
-- [ ] chaussures-personne-agee/ | chaussures pour personne âgée | Se déplacer | maintien, semelle, fermeture velcro
 - [x] cadeau-personne-agee/ | cadeau utile pour personne âgée | Conseils pour les proches | idées par budget et par besoin
-- [ ] parler-a-un-parent-age-de-son-logement/ | comment convaincre un parent âgé d'adapter son logement | Conseils pour les proches | en parler sans brusquer, faire accepter les aides, renvoi au guide pièce par pièce
-- [ ] materiel-maintien-domicile-acheter-ou-louer/ | matériel maintien à domicile acheter ou louer | Conseils pour les proches | ce qui se loue, prescription
-- [ ] boite-a-cle-securisee/ | boîte à clé sécurisée | Sécurité | aides à domicile, secours, code
 - [x] aides-adapter-logement-senior/ | aides pour adapter son logement senior | Conseils pour les proches | uniquement les dispositifs vérifiés sur service-public.fr ou france-renov.gouv.fr, sinon rester général
 - [x] meilleur-telephone-portable-senior/ | meilleur téléphone portable senior | Vie quotidienne | comparatif publié le 15 nov 2026 (modèles vérifiés sur les sites fabricants)
 - [x] meilleur-rollator/ | meilleur rollator | Se déplacer | comparatif publié le 15 nov 2026 (fiches techniques vérifiées)
