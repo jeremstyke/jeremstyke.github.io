@@ -73,6 +73,7 @@ g("rehausseur-wc/",
 <h2>Prise en charge et conseils</h2>
 <p>La prise en charge d'un rehausseur WC n'est pas automatique. Avant d'acheter, renseignez-vous auprès du médecin, du pharmacien ou du fournisseur de matériel médical, ainsi qu'auprès de la mutuelle. Pour une personne de 60 ans et plus qui perd en autonomie, l'allocation personnalisée d'autonomie (APA), attribuée par le département, peut financer des aides techniques prévues dans le plan d'aide.</p>
 <div class="note"><strong>Un doute sur le bon modèle ?</strong> Un ergothérapeute peut observer la personne aux toilettes et conseiller la hauteur, les accoudoirs ou les barres adaptés. Parlez-en au médecin traitant.</div>
+<p>Pour comparer des modèles précis, avec ou sans accoudoirs, lisez notre <a href="{R}meilleur-rehausseur-wc/">sélection des meilleurs rehausseurs WC</a>.</p>
 """,
   faq=[("Rehausseur WC avec ou sans accoudoirs ?", "Sans accoudoirs si seule la hauteur pose problème. Avec accoudoirs si la personne a besoin de pousser sur ses bras pour s'asseoir et se relever."),
        ("Quelle hauteur de rehausseur WC choisir ?", "Assise sur le rehausseur, la personne doit garder les pieds à plat au sol, les genoux à peu près à hauteur des hanches. Après une opération de la hanche, suivez les consignes de l'équipe médicale."),
@@ -138,6 +139,7 @@ g("fauteuil-releveur/",
 <h2>Prise en charge</h2>
 <p>La prise en charge d'un fauteuil releveur n'est pas automatique et dépend du modèle. Avant d'acheter, demandez au médecin et au pharmacien ou au fournisseur de matériel médical, puis contactez la mutuelle. Pour une personne de 60 ans et plus en perte d'autonomie, l'allocation personnalisée d'autonomie (APA), attribuée par le département, peut financer des aides techniques prévues dans le plan d'aide. La caisse de retraite peut aussi être interrogée.</p>
 <div class="note"><strong>Un conseil personnalisé ?</strong> Un ergothérapeute peut vérifier que le fauteuil releveur convient à la personne et l'aider à choisir la bonne taille. Parlez-en au médecin traitant.</div>
+<p>Pour une personne qui passe aussi beaucoup de temps au lit, notre <a href="{R}meilleur-matelas-anti-escarres/">comparatif des matelas anti-escarres</a> complète ces conseils, à voir avec le soignant.</p>
 """,
   faq=[("Fauteuil releveur 1 ou 2 moteurs : que choisir ?", "Un moteur suffit pour être aidé à se lever et se reposer simplement. Deux moteurs permettent de régler le dossier et le repose-jambes séparément, plus confortable si l'on reste longtemps assis."),
        ("Comment choisir la taille d'un fauteuil releveur ?", "Comparez la hauteur, la profondeur et la largeur d'assise avec les mesures de la personne : pieds à plat au sol, dos contre le dossier, bien calée sans être serrée. L'idéal est de l'essayer."),
@@ -199,6 +201,7 @@ g("detecteur-de-chute/",
 <h2>Prévenir reste la meilleure protection</h2>
 <p>Un détecteur aide après la chute, il ne l'empêche pas. Éclairer le trajet de nuit avec des <a href="{R}veilleuse-detecteur-de-mouvement/">veilleuses à détecteur de mouvement</a>, retirer les tapis qui glissent et poser des barres d'appui réduit le risque. Retrouvez toutes les pistes dans notre guide pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a> et dans <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>. Un <a href="{R}telephone-portable-senior/">téléphone portable senior</a> avec bouton d'urgence peut aussi compléter l'équipement.</p>
 <div class="note"><strong>Après une chute, parlez-en au médecin.</strong> Même sans blessure, une chute est un signal à prendre au sérieux. Le médecin traitant peut rechercher une cause (médicaments, vue, équilibre, tension) et orienter vers un kinésithérapeute ou un ergothérapeute.</div>
+<p>Pour comparer des appareils précis, montres, pendentifs ou boîtiers, consultez notre <a href="{R}meilleur-detecteur-de-chute/">sélection des meilleurs détecteurs de chute</a>.</p>
 """,
   faq=[("Un détecteur de chute détecte-t-il toutes les chutes ?", "Non. Les chutes lentes, quand on glisse doucement au sol, peuvent ne pas être repérées. C'est pourquoi il est important de garder un bouton d'appel à presser soi-même."),
        ("Faut-il un abonnement pour un détecteur de chute ?", "Pas toujours. Certains appareils préviennent directement des proches sans abonnement. Un service de téléassistance, relié à une centrale d'écoute, fonctionne en revanche avec un abonnement."),
@@ -254,6 +257,7 @@ g("comment-choisir-rollator/",
 <h2>Prise en charge et conseils</h2>
 <p>Un rollator peut être pris en charge en partie par l'Assurance maladie sur prescription médicale, à l'achat ou en location, la mutuelle pouvant compléter selon le contrat. Les conditions dépendent du modèle : renseignez-vous auprès du médecin et du pharmacien avant d'acheter. Le kinésithérapeute ou l'ergothérapeute peut aussi vous aider à choisir et à régler l'appareil.</p>
 <p>Quand l'équilibre est encore bon, une <a href="{R}canne-de-marche/">canne de marche</a> bien réglée suffit parfois. Et pour sécuriser les trajets dans la maison, consultez <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
+<p>Si un rollator semble encore trop tôt, notre <a href="{R}meilleure-canne-de-marche/">comparatif des cannes de marche</a> présente des modèles réglables et pliants.</p>
 """,
   faq=[("Rollator 3 ou 4 roues : lequel choisir ?", "Le 3 roues est plus maniable dans un logement étroit, mais moins stable et rarement équipé d'un siège. Le 4 roues est plus stable et permet de s'asseoir : il convient mieux pour sortir."),
        ("Quel rollator pour l'extérieur ?", "Un modèle 4 roues avec de grandes roues, des freins faciles à serrer avec position de blocage, un siège et un panier. Vérifiez son poids s'il doit monter en voiture."),
@@ -323,6 +327,7 @@ g("planche-de-bain/",
 <p>La salle de bains n'est qu'une étape : suivez <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
 <h2>Demander conseil</h2>
 <p>Si la personne a des difficultés à se tenir assise, des douleurs importantes, ou si elle a déjà chuté, parlez-en à son médecin traitant. Il peut orienter vers un ergothérapeute, qui vient au domicile, observe les gestes dans la vraie salle de bains et propose l'équipement le plus adapté. Certaines aides techniques peuvent être financées en partie : renseignez-vous auprès du médecin, du pharmacien, de la mutuelle et des services sociaux.</p>
+<p>Si la baignoire est remplacée un jour par une douche, notre <a href="{R}meilleur-siege-de-douche/">comparatif des sièges de douche</a> vous aidera à choisir la suite.</p>
 """,
   faq=[("Quelle est la différence entre une planche de bain et un siège de baignoire ?", "La planche se pose sur les rebords et n'a pas de dossier. Le siège de baignoire, suspendu ou pivotant, offre souvent un dossier et parfois des accoudoirs, ce qui rassure davantage."),
        ("Comment savoir si une planche de bain est compatible avec ma baignoire ?", "Mesurez la largeur extérieure et intérieure de la baignoire, ainsi que ses rebords, puis comparez avec les dimensions et la plage de réglage indiquées par le fabricant."),
@@ -390,6 +395,7 @@ g("pilulier/",
 <h2>Le pharmacien, votre meilleur allié</h2>
 <p>Le pharmacien peut vous aider à organiser les prises et à remplir le pilulier, et certaines pharmacies proposent de préparer les doses. Pour les personnes âgées qui prennent plusieurs médicaments, il peut aussi proposer un bilan partagé de médication, en lien avec le médecin traitant. N'hésitez pas à lui poser la question lors de votre prochain passage.</p>
 <p>Le pilulier fait partie des petits équipements qui facilitent la vie au quotidien : retrouvez les autres dans <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>. Certains médicaments peuvent aussi donner des vertiges : nos conseils pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a> complètent ce guide.</p>
+<p>Pour des modèles à alarme ou verrouillés, consultez notre <a href="{R}meilleur-pilulier-electronique/">comparatif des piluliers électroniques</a>.</p>
 """,
   faq=[("Pilulier de la semaine ou du mois ?", "Le pilulier de la semaine suffit dans la plupart des cas et limite les erreurs de remplissage. Le pilulier du mois est utile quand un proche prépare à l'avance un traitement qui change peu."),
        ("Un pilulier électronique est-il utile ?", "Oui si la personne oublie l'heure des prises : il sonne ou s'allume au bon moment. Si les oublis ou les confusions sont fréquents, parlez-en au médecin traitant."),
@@ -457,6 +463,7 @@ g("canne-de-marche/",
 <h2>Prise en charge et conseils d'un professionnel</h2>
 <p>Certaines cannes, notamment les modèles réglables, les cannes anglaises et les cannes tripodes ou quadripodes, peuvent être prises en charge en partie par l'Assurance maladie sur prescription médicale, si le modèle figure sur la liste des produits remboursables. La mutuelle peut compléter. Renseignez-vous auprès du médecin et du pharmacien avant d'acheter.</p>
 <p>Demander conseil est particulièrement important si la personne a déjà chuté, si elle sort d'une opération ou si la marche devient plus difficile sans raison claire. Le médecin traitant peut chercher la cause et orienter vers un <strong>kinésithérapeute</strong>, qui choisira l'aide adaptée et apprendra à s'en servir. Une canne n'empêche pas tout : un logement bien dégagé et éclairé compte autant. Pour cela, consultez nos conseils pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a> et <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
+<p>Pour ramasser un objet sans se baisser, pensez aussi à la <a href="{R}pince-de-prehension/">pince de préhension</a>.</p>
 """,
   faq=[("De quel côté tenir une canne ?", "En général, dans la main opposée à la jambe faible ou douloureuse : si le genou droit fait mal, la canne se tient à gauche. Suivez toujours la consigne de votre kinésithérapeute s'il vous en a donné une autre."),
        ("À quelle hauteur régler une canne de marche ?", "Debout, bras relâchés le long du corps, la poignée doit arriver à peu près au pli du poignet, avec les chaussures habituelles. En tenant la canne, le coude reste légèrement fléchi."),
@@ -518,6 +525,7 @@ g("veilleuse-detecteur-de-mouvement/",
 </ul>
 <p>Pour une personne qui vit seule, un moyen d'alerte en cas de chute complète utilement l'éclairage : voyez notre guide sur le <a href="{R}detecteur-de-chute/">détecteur de chute</a>. Retrouvez aussi nos conseils pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a> et <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
 <div class="note"><strong>Des levers fréquents la nuit ?</strong> Se lever souvent pour uriner ou avoir des vertiges au lever n'est pas une fatalité : parlez-en au médecin traitant. Un ergothérapeute peut aussi venir au domicile pour conseiller l'éclairage et l'aménagement de la chambre.</div>
+<p>Pour comparer des modèles précis, lisez notre <a href="{R}meilleure-veilleuse-detecteur-de-mouvement/">sélection des meilleures veilleuses à détecteur</a>.</p>
 """,
   faq=[("Où placer une veilleuse à détecteur de mouvement ?", "Le long du trajet de nuit : au pied du lit, à la sortie de la chambre, dans le couloir et dans les toilettes. Placez-les assez bas pour éclairer le sol et testez le trajet de nuit."),
        ("Quelle couleur de lumière choisir pour une veilleuse ?", "Une lumière chaude, jaune ou orangée, d'intensité douce et dirigée vers le sol : elle permet de voir les obstacles sans éblouir ni réveiller complètement."),
@@ -601,6 +609,7 @@ g("prevenir-les-chutes-a-la-maison/",
 </ul>
 <p>Pouvoir alerter quelqu'un change tout, surtout quand on vit seul. Un <a href="{AMZ:bouton appel urgence senior}" """ + A + """>bouton d'appel d'urgence</a> porté sur soi ou un service de téléassistance permet de prévenir sans atteindre le téléphone. Notre guide sur le <a href="{R}detecteur-de-chute/">détecteur de chute</a> compare les solutions. Un kinésithérapeute peut aussi vous apprendre à vous relever du sol en sécurité.</p>
 <div class="note"><strong>Un doute sur le risque de chute ?</strong> Parlez-en à votre médecin traitant. Il peut évaluer votre équilibre, revoir vos traitements et vous orienter vers un kinésithérapeute ou un ergothérapeute.</div>
+<p>Pour la douche et la baignoire, notre guide pour <a href="{R}tapis-antiderapant-douche/">choisir un tapis antidérapant</a> détaille les critères qui comptent.</p>
 """,
   faq=[("Comment éviter de tomber en se levant ?", "Faites-le en trois temps : restez un instant allongé, asseyez-vous au bord du lit quelques secondes, puis levez-vous en prenant appui. Si la tête tourne souvent, parlez-en à votre médecin."),
        ("Quelles chaussures porter à la maison pour éviter les chutes ?", "Des chaussures ou chaussons fermés à l'arrière, avec une semelle antidérapante et un talon bas. Évitez les mules et les chaussettes sur un sol lisse."),
@@ -661,6 +670,7 @@ g("telephone-fixe-grosses-touches/",
 <p>Le fixe ne suit pas la personne quand elle sort. Pour les courses, les promenades ou les rendez-vous, un portable simple est un bon complément : lisez notre guide pour <a href="{R}telephone-portable-senior/">choisir un téléphone portable senior</a>. Et pour garder un œil sur l'ensemble de la maison, consultez <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
 <h2>Bien installer le téléphone</h2>
 <p>Placez le téléphone là où la personne passe le plus de temps, à hauteur de main depuis son fauteuil, avec un éclairage suffisant. Enregistrez les numéros importants, réglez le volume, et faites quelques appels d'essai ensemble. Pensez aussi à un <a href="{AMZ:repertoire telephonique grand format}" """ + A + """>répertoire en grands caractères</a> posé à côté du téléphone, avec les numéros du médecin, des proches et des secours.</p>
+<p>Pour voir des modèles précis, lisez notre <a href="{R}meilleur-telephone-fixe-senior/">sélection des meilleurs téléphones fixes pour seniors</a>.</p>
 """,
   faq=[("Quel téléphone fixe pour une personne âgée malentendante ?", "Un téléphone amplifié, avec un volume d'écoute renforcé, une sonnerie forte et si possible un flash lumineux. S'il porte des appareils auditifs, vérifiez la compatibilité sur la fiche technique."),
        ("Un téléphone fixe fonctionne-t-il pendant une coupure de courant ?", "S'il est branché sur une box internet, non : la box a besoin d'électricité. Gardez un téléphone portable chargé pour pouvoir appeler en cas de coupure."),
@@ -732,6 +742,7 @@ g("cadeau-personne-agee/",
 <p>Au fond, le cadeau qui compte le plus reste souvent votre présence : un après-midi passé ensemble, un appel régulier, une visite. Un objet bien choisi vient simplement prolonger ce lien.</p>
 <h2>Une idée de cadeau qui ne prend pas de place</h2>
 <p>Si votre proche aimait lire mais se fatigue vite, pensez au livre audio. Le plus simple est de l'installer avec lui sur son téléphone ou sa tablette, puis de choisir ensemble un premier titre (notre guide pour <a href="{R}livres-audio-personne-agee/">écouter des livres audio quand on est âgé</a> détaille chaque étape). Audible propose un essai gratuit de 30 jours avec un livre audio offert, résiliable à tout moment : de quoi vérifier que le format lui plaît avant tout abonnement. <a href="{AUDIBLE}" """ + A + """>Essayer Audible gratuitement</a></p>
+<p>Pour un grand lecteur dont la vue baisse, notre <a href="{R}meilleurs-livres-gros-caracteres/">sélection de livres en gros caractères</a> donne des idées concrètes.</p>
 """,
   faq=[("Quel cadeau utile offrir à une personne âgée ?", "Partez de ses besoins : un plaid chauffant ou des chaussons fermés pour le confort, un casque TV si elle monte le son, une loupe si elle a du mal à lire, un cadre photo numérique pour garder le lien avec la famille."),
        ("Quelle idée de cadeau de Noël pour une personne âgée qui a déjà tout ?", "Misez sur le lien et les souvenirs : album photo, cadre photo numérique, sortie partagée ou moment en famille. Un cadeau commun entre frères et sœurs permet aussi d'offrir un équipement de qualité."),
@@ -811,6 +822,8 @@ g("aides-adapter-logement-senior/",
 <li><strong>Gardez vos documents à portée de main</strong> : dernier avis d'imposition, devis, justificatifs de propriété ou accord du bailleur.</li>
 <li><strong>Faites-vous aider</strong> : un proche peut accompagner la personne dans ses démarches, avec son accord.</li>
 </ul>
+<p>Si l'escalier est le principal obstacle, notre guide sur le <a href="{R}monte-escalier-prix-aides/">monte-escalier, ses types, son prix et ses aides</a> vous aidera à préparer les devis.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F37501" target="_blank" rel="noopener">Service-Public, MaPrimeAdapt' : travaux d'adaptation du logement à la perte d'autonomie</a>, <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F10009" target="_blank" rel="noopener">Service-Public, Allocation personnalisée d'autonomie (Apa)</a>, <a href="https://www.lassuranceretraite.fr/portail-info/home/retraite/aide-retraite/aide-quotidien.html" target="_blank" rel="noopener">L'Assurance retraite, Être aidé au quotidien</a> (vérifié le 17 novembre 2026)</p>
 """,
   faq=[("Qui peut bénéficier de MaPrimeAdapt' ?", "Les foyers aux revenus modestes ou très modestes dont un membre a 70 ans ou plus, ou a entre 60 et 69 ans avec une perte d'autonomie évaluée, ou est en situation de handicap. Propriétaires occupants et locataires du parc privé (avec l'accord du bailleur) sont concernés."),
        ("L'APA peut-elle financer l'adaptation du logement ?", "Oui, le plan d'aide de l'APA à domicile peut inclure des aides techniques et l'adaptation du logement. Elle est réservée aux personnes de 60 ans ou plus classées en GIR 1 à 4 et se demande auprès du département."),
@@ -922,6 +935,7 @@ g("meilleur-telephone-portable-senior/",
 <li>montrer, sans se presser, comment décrocher, raccrocher et recharger.</li>
 </ul>
 <p>Le téléphone n'est qu'un élément pour vivre chez soi en sécurité. Retrouvez les autres dans <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
+<p>Pour la maison, un fixe reste souvent rassurant : voyez notre <a href="{R}meilleur-telephone-fixe-senior/">comparatif des téléphones fixes pour seniors</a>.</p>
 """,
   faq=[("Quel est le meilleur téléphone portable pour une personne âgée ?", "Il n'existe pas de modèle idéal pour tous. Un téléphone à touches compatible 4G avec VoLTE, avec bouton SOS et, si possible, un socle de charge, convient à la plupart des personnes qui veulent surtout appeler. Choisissez ensuite entre clapet et format classique selon ses habitudes."),
        ("Pourquoi faut-il un téléphone senior compatible VoLTE ?", "Les réseaux 2G et 3G ferment progressivement en France. La VoLTE permet de passer les appels sur le réseau 4G. Vérifiez aussi auprès de l'opérateur que le modèle est bien compatible."),
@@ -998,6 +1012,7 @@ g("meilleur-rollator/",
 <p>Un rollator est plus facile à utiliser dans un logement dégagé : suivez aussi <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
 <h2>Prise en charge et conseils</h2>
 <p>Un rollator peut être pris en charge en partie par l'Assurance maladie sur prescription médicale, la mutuelle pouvant compléter. Les conditions dépendent du modèle : renseignez-vous auprès du médecin et du pharmacien avant d'acheter. Un kinésithérapeute ou un ergothérapeute peut aussi vous aider à choisir et à régler la hauteur des poignées.</p>
+<p>Pour les sorties plus longues, certains seniors passent au <a href="{R}meilleur-tricycle-electrique-senior/">tricycle électrique</a>, si l'équilibre et l'avis du médecin le permettent.</p>
 """,
   faq=[("Quel est le meilleur rollator pour une personne âgée ?", "Celui qui correspond à son usage : un modèle étroit pour l'intérieur, un 4 roues avec siège et panier pour les courses, un modèle léger pour la voiture, de grandes roues pour les chemins. Demandez conseil à un professionnel de santé."),
        ("Rollator 3 roues ou 4 roues ?", "Le 3 roues tourne plus facilement dans un logement étroit, mais il est moins stable et souvent sans siège. Le 4 roues est plus stable et permet généralement de s'asseoir."),
@@ -1112,6 +1127,7 @@ g("meilleur-fauteuil-releveur/",
 <h2>Conseils avant d'acheter</h2>
 <p>Si c'est possible, essayez un fauteuil releveur en magasin de matériel médical avant d'acheter en ligne, pour vérifier la hauteur et la largeur d'assise. Un ergothérapeute peut aussi vous aider à choisir le modèle adapté à la morphologie et à la mobilité de la personne. Pour savoir si une aide financière est possible dans votre situation, renseignez-vous auprès de votre médecin et de votre pharmacien.</p>
 <p>À la livraison, contrôlez la largeur des portes et des couloirs : ces fauteuils pèsent entre 44 et 59 kg pour les modèles de cette sélection dont le poids est indiqué, et mesurent jusqu'à 95 cm de large. Enfin, gardez la télécommande toujours à portée de main, par exemple dans la poche latérale prévue sur plusieurs modèles.</p>
+<p>Une fois assis, une <a href="{R}pince-de-prehension/">pince de préhension</a> évite de se pencher pour attraper la télécommande ou un objet tombé.</p>
 """,
   faq=[("Quel est le meilleur fauteuil releveur pour une personne âgée ?", "Il n'y a pas de modèle idéal pour tous. Un fauteuil 1 moteur suffit si l'on a surtout besoin d'aide pour se lever ; un 2 moteurs convient mieux si l'on passe beaucoup de temps assis ou si l'on doit surélever les jambes. Vérifiez ensuite la charge maximale, la hauteur d'assise et l'encombrement, et demandez conseil à un ergothérapeute en cas de doute."),
        ("Fauteuil releveur 1 ou 2 moteurs : quelle différence ?", "Avec un moteur, le dossier et le repose-jambes bougent ensemble. Avec deux moteurs, ils se règlent séparément : vous pouvez garder le dos droit en levant les jambes, ou incliner le dossier sans lever les pieds. Le 2 moteurs offre plus de positions, le 1 moteur est plus simple à utiliser."),
@@ -1245,6 +1261,7 @@ g("meilleur-siege-de-douche/",
 <p>La douche n'est qu'une partie de la salle de bains : retrouvez les autres aménagements utiles dans <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
 <h2>Prise en charge et conseils</h2>
 <p>Certaines aides techniques pour la toilette peuvent être prises en charge en partie, sur prescription ou dans le cadre d'aides à l'autonomie, selon le produit et la situation. Renseignez-vous auprès du médecin, du pharmacien ou de votre caisse de retraite avant d'acheter. Un ergothérapeute peut aussi venir évaluer la salle de bains et vous conseiller le type de siège le plus adapté.</p>
+<p>Un siège ne suffit pas si le sol glisse : notre guide pour <a href="{R}tapis-antiderapant-douche/">choisir un tapis antidérapant de douche</a> complète bien cet équipement.</p>
 """,
   faq=[("Quel est le meilleur siège de douche pour une personne âgée ?", "Il dépend surtout de l'équilibre de la personne. Si elle se fatigue vite ou a besoin de s'appuyer pour se relever, une chaise avec dossier et accoudoirs est la plus sûre. Si elle tient bien assise, un tabouret réglable suffit. Dans une douche de plain-pied partagée, un siège mural rabattable libère la place. En cas de doute, demandez conseil à un ergothérapeute."),
        ("Tabouret, chaise ou siège mural : que choisir ?", "La chaise offre le plus de maintien grâce au dossier et aux accoudoirs. Le tabouret est plus léger et plus compact, mais suppose un bon équilibre. Le siège mural ne prend pas de place une fois relevé, mais il doit être fixé dans un mur solide, de préférence par un professionnel."),
@@ -1704,6 +1721,7 @@ g("meilleur-rehausseur-wc/",
 <p>Mesurez la largeur et la forme de la cuvette, l'épaisseur du rebord et la place disponible de chaque côté si vous voulez des accoudoirs. Pour la hauteur, une fois assise, la personne doit poser les pieds à plat avec les genoux à peu près à angle droit, ou légèrement plus haut que les hanches si le relevé est difficile. Tous les critères sont détaillés dans notre guide pour <a href="{R}rehausseur-wc/">bien choisir un rehausseur WC</a>. Une <a href="{R}barre-d-appui-salle-de-bain/">barre d'appui</a> à côté des toilettes complète utilement un rehausseur sans accoudoirs, et <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a> passe en revue les autres aménagements.</p>
 <h2>Prise en charge et conseils</h2>
 <p>Pour être remboursé par l'Assurance Maladie, un dispositif doit figurer sur la liste des produits et prestations remboursables et être prescrit par un professionnel de santé. Renseignez-vous auprès du pharmacien ou du revendeur pour savoir si un modèle précis est concerné, puis auprès de votre mutuelle ou de votre caisse de retraite pour d'éventuelles aides. Un ergothérapeute peut aussi évaluer les toilettes et vous conseiller entre rehausseur, cadre de toilettes ou barre d'appui.</p>
+<p>Un rehausseur s'associe souvent à une barre fixée au mur : notre <a href="{R}meilleure-barre-d-appui/">sélection de barres d'appui</a> présente les modèles droits, coudés et relevables.</p>
 """,
   faq=[("Quel est le meilleur rehausseur WC pour une personne âgée ?", "Il dépend de ses besoins. Si elle a besoin de s'appuyer pour se relever, choisissez un modèle avec accoudoirs, comme l'Aquatec 90000 avec son option accoudoirs ou l'Etac Cloo. Si les toilettes sont seulement trop basses et que l'équilibre est bon, un rehausseur simple à clips, à brides ou à molettes suffit. En cas de doute, demandez conseil à un ergothérapeute."),
        ("Quelle hauteur de rehausseur WC choisir ?", "La plupart des rehausseurs ajoutent entre 6 et 14 cm. Une fois assise, la personne doit pouvoir poser les pieds à plat, genoux à peu près à angle droit. Une personne grande, ou qui a du mal à se relever après une opération de la hanche ou du genou, aura souvent besoin d'une rehausse plus haute : suivez alors les consignes de l'équipe soignante."),
@@ -1727,6 +1745,7 @@ g("fauteuil-roulant-rembourse-100/",
 <li><strong>Des délais de réponse encadrés</strong> : 15 jours au maximum pour les fauteuils les plus courants, 2 mois au maximum pour les besoins très spécifiques. Sans réponse dans ce délai, la demande est considérée comme acceptée.</li>
 </ul>
 <p>La condition essentielle reste la prescription : le fauteuil doit répondre à un besoin évalué par un professionnel de santé, et respecter les exigences techniques de la nomenclature officielle. Un fauteuil acheté seul, sans prescription, n'entre pas dans ce dispositif.</p>
+<p>Une période de transition s'achève le 30 novembre 2026 : jusqu'à cette date, un fauteuil prescrit avant le 1er décembre 2025 peut encore être remboursé selon les anciennes règles. À partir du 1er décembre 2026, seul le nouveau cadre s'applique. Si vous avez une ancienne prescription, parlez-en vite à votre distributeur.</p>
 
 <h2>Les étapes, de la consultation à la livraison</h2>
 <table><thead><tr><th>Étape</th><th>Avec qui ?</th><th>Ce qui se passe</th></tr></thead><tbody>
@@ -1773,6 +1792,8 @@ g("fauteuil-roulant-rembourse-100/",
 <li>Une couverture ou chancelière pour garder les jambes au chaud l'hiver : <a href="{AMZ:couverture fauteuil roulant}" """ + A + """>Voir les couvertures pour fauteuil roulant</a>.</li>
 </ul>
 <p>Les règles évoluent encore : la foire aux questions du ministère, sur handicap.gouv.fr, est régulièrement mise à jour, notamment sur les réparations et la remise en état des fauteuils.</p>
+<p>Si un fauteuil électrique est envisagé, notre guide pour <a href="{R}fauteuil-roulant-electrique-comment-choisir/">choisir un fauteuil roulant électrique</a> vous aide à préparer l'essai.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39480" target="_blank" rel="noopener">Service-Public, L'Assurance maladie prend-elle en charge les fauteuils roulants ?</a>, <a href="https://handicap.gouv.fr/reforme-de-la-prise-en-charge-integrale-des-fauteuils-roulants" target="_blank" rel="noopener">handicap.gouv.fr, Réforme de la prise en charge intégrale des fauteuils roulants</a>, <a href="https://www.ordre.pharmacien.fr/les-communications/focus-sur/les-actualites/fauteuils-roulants-le-point-sur-la-prise-en-charge-integrale-et-les-regles-de-prescription" target="_blank" rel="noopener">Ordre national des pharmaciens, Fauteuils roulants : le point sur la prise en charge intégrale et les règles de prescription</a> (vérifié le 17 novembre 2026)</p>
 """,
   faq=[("Un fauteuil roulant est-il vraiment remboursé à 100 % ?", "Oui, depuis le 1er décembre 2025, les fauteuils roulants inscrits sur la liste des produits remboursables sont pris en charge intégralement par l'Assurance maladie, à condition d'être prescrits par un professionnel de santé habilité et de respecter les exigences de la nomenclature. Les accessoires de confort choisis librement, hors liste, restent à votre charge."),
        ("Mon médecin traitant peut-il prescrire un fauteuil roulant ?", "Oui pour un fauteuil manuel standard ou un fauteuil à pousser, à l'achat ou en location courte. Pour un fauteuil électrique, un fauteuil configurable ou un scooter, la prescription relève d'un médecin spécialiste en médecine physique et de réadaptation ou titulaire d'un diplôme d'appareillage. Votre médecin traitant peut vous orienter."),
@@ -1884,6 +1905,7 @@ g("meilleur-fauteuil-roulant-electrique-pliant/",
 <li><strong>Le confort</strong> : l'essai reste indispensable, en particulier pour l'assise, les accoudoirs et la commande.</li>
 </ul>
 <p>Avant d'acheter, renseignez-vous sur la prise en charge : un fauteuil prescrit et inscrit à la liste des produits remboursables peut être financé intégralement, après un essai chez un distributeur. Tout est expliqué dans notre guide du <a href="{R}fauteuil-roulant-rembourse-100/">fauteuil roulant remboursé à 100 %</a>. Si la marche reste possible avec un appui, comparez aussi avec un <a href="{R}deambulateur-ou-rollator/">déambulateur ou un rollator</a>. Enfin, un fauteuil demande des passages dégagés : notre guide pour <a href="{R}amenager-logement-personne-agee/">aménager le logement pièce par pièce</a> vous aide à préparer la maison.</p>
+<p>Avant de comparer les modèles, lisez notre guide pour <a href="{R}fauteuil-roulant-electrique-comment-choisir/">choisir un fauteuil roulant électrique</a>.</p>
 """,
   faq=[("Quel est le fauteuil roulant électrique pliant le plus léger ?", "Dans notre sélection, le WHILL Model C Lite est annoncé à 17 kg et le Pride i-Go à 19,8 kg sans batteries. Vérifiez toujours si le poids indiqué inclut ou non la batterie, car l'écart peut atteindre plusieurs kilos."),
        ("Peut-on prendre l'avion avec un fauteuil roulant électrique pliant ?", "Souvent oui, mais c'est la compagnie aérienne qui décide, notamment selon le type et la capacité de la batterie. Certaines fiches, comme celle du WHILL Model F, indiquent une batterie approuvée pour le transport aérien. Contactez la compagnie bien avant le départ avec la fiche technique de la batterie."),
@@ -2015,6 +2037,7 @@ g("meilleur-scooter-electrique-senior/",
 <li><strong>Rangement et recharge</strong> : prévoyez une place à l'abri avec une prise, et des passages assez larges.</li>
 </ul>
 <p>Un scooter ne remplace pas tous les équipements : à l'intérieur, un <a href="{R}deambulateur-ou-rollator/">déambulateur ou un rollator</a> reste souvent plus pratique, et notre <a href="{R}meilleur-rollator/">comparatif des rollators</a> vous aidera à choisir. Côté financement, les scooters font partie des véhicules pour personnes en situation de handicap concernés par la réforme de 2025, sur prescription d'un médecin spécialiste : voir notre guide du <a href="{R}fauteuil-roulant-rembourse-100/">fauteuil roulant remboursé à 100 %</a>. Pensez aussi à l'accès au logement (seuils, marches, garage) avec notre guide pour <a href="{R}amenager-logement-personne-agee/">aménager le logement pièce par pièce</a>.</p>
+<p>Pour une personne qui aime encore pédaler, un tricycle peut être une alternative : voyez notre <a href="{R}meilleur-tricycle-electrique-senior/">sélection de tricycles électriques pour seniors</a>.</p>
 """,
   faq=[("Quel scooter électrique choisir pour une personne âgée ?", "Tout dépend de l'usage. Pour la ville et le coffre de la voiture, un 4 roues démontable comme l'Invacare Leo est polyvalent. Pour voyager, un modèle pliable comme le Moving Life ATTO est plus pratique. Pour de longues distances, un scooter routier comme l'Invacare Comet Pro. Parlez-en à votre médecin avant l'achat."),
        ("Scooter 3 roues ou 4 roues : lequel est le plus sûr ?", "Un scooter à 4 roues est en général plus stable, notamment sur les trottoirs inégaux et dans les virages. Un 3 roues tourne plus court et se manœuvre mieux dans les espaces étroits. Un ergothérapeute peut vous aider à choisir selon votre équilibre et vos trajets."),
@@ -2073,6 +2096,7 @@ g("monte-escalier-prix-aides/",
 <p>Pour l'éclairage, notre guide des <a href="{R}veilleuse-detecteur-de-mouvement/">veilleuses à détecteur de mouvement</a> vous aidera à choisir. Et pour repérer les autres pièges de la maison, consultez <a href="{R}prevenir-les-chutes-a-la-maison/">comment prévenir les chutes à la maison</a> puis notre guide pour <a href="{R}amenager-logement-personne-agee/">aménager le logement pièce par pièce</a>.</p>
 <h2>Les erreurs que l'on voit souvent</h2>
 <p>Signer le jour de la visite du commercial, sans autre devis. Oublier l'entretien dans le calcul du coût réel. Choisir un modèle sans siège pivotant alors que le palier d'arrivée est étroit. Lancer les travaux avant la demande d'aide. Et, plus discret, installer un monte-escalier pour une personne dont l'autonomie baisse vite, alors qu'une chambre en bas aurait été plus utile un an plus tard. Un échange avec l'ergothérapeute ou le médecin évite la plupart de ces regrets.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F37501" target="_blank" rel="noopener">Service-Public, MaPrimeAdapt' : travaux d'adaptation du logement à la perte d'autonomie</a>, <a href="https://www.anah.gouv.fr/presse/compter-du-17-aout-2026-france-renov-renforce-son-offre-de-services-avec-un-compte-personnel" target="_blank" rel="noopener">Anah, France Rénov' renforce son offre de services avec un compte personnel (17 août 2026)</a> (vérifié le 17 novembre 2026)</p>
 """,
   faq=[("MaPrimeAdapt' finance-t-elle un monte-escalier ?", "Oui, le monte-escalier électrique fait partie des travaux que MaPrimeAdapt' peut financer, à hauteur de 50 % ou 70 % selon vos revenus, dans la limite de 22 000 € HT de travaux. Il faut remplir les conditions d'âge ou de handicap et de ressources, être accompagné par un AMO et déposer la demande avant les travaux."),
        ("Peut-on louer un monte-escalier ?", "Oui, certains installateurs proposent la location, surtout pour les escaliers droits. C'est utile pour un besoin temporaire. Vérifiez la durée minimale, les frais de pose et de dépose et ce que couvre l'entretien."),
@@ -2165,6 +2189,7 @@ g("meilleur-tricycle-electrique-senior/",
 <p><strong>Regardez les freins.</strong> Des freins hydrauliques demandent moins de force dans les doigts, et un frein de stationnement évite que le tricycle ne recule quand on s'installe dans une pente.</p>
 <p><strong>Apprenez à tourner.</strong> Un tricycle ne se penche pas dans les virages comme un vélo : il faut ralentir avant de tourner, sinon une roue peut se soulever. Les premières sorties sur un parking vide permettent de prendre ses marques.</p>
 <p>Si la marche reste votre mode de déplacement principal, notre guide pour <a href="{R}comment-choisir-rollator/">choisir un rollator</a> peut compléter. Pour des trajets plus longs sans pédaler, comparez avec notre <a href="{R}meilleur-scooter-electrique-senior/">top des scooters électriques senior</a>. Et pour que le retour à la maison soit aussi sûr que la balade, consultez notre guide pour <a href="{R}amenager-logement-personne-agee/">aménager le logement pièce par pièce</a>.</p>
+<p>Si pédaler devient trop fatigant, un fauteuil électrique qui se plie pour la voiture peut prendre le relais : voyez notre <a href="{R}meilleur-fauteuil-roulant-electrique-pliant/">sélection de fauteuils roulants électriques pliants</a>.</p>
 """,
   faq=[("Faut-il un permis ou une assurance pour un tricycle électrique ?", "Un tricycle à assistance électrique dont le moteur fait 250 W au plus, avec une assistance qui se coupe à 25 km/h et ne fonctionne qu'en pédalant, est un vélo à assistance électrique : pas d'immatriculation. Au-delà, il devient un cyclomoteur. Pour l'assurance, renseignez-vous auprès de votre assureur, notamment sur la responsabilité civile."),
        ("Un tricycle est-il plus stable qu'un vélo pour une personne âgée ?", "À l'arrêt et à basse vitesse, oui : il ne tombe pas quand on s'arrête. En revanche, il se comporte différemment dans les virages et sur les dévers, et il faut ralentir pour tourner. Si vous avez des troubles de l'équilibre, demandez conseil à votre médecin ou à votre kinésithérapeute."),
@@ -2273,6 +2298,7 @@ g("meilleurs-livres-aidants/",
 <p>Côté maison, les livres ne règlent pas les risques du quotidien : notre guide pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a>, notre article sur le <a href="{R}pilulier/">pilulier</a> et notre panorama des <a href="{R}aides-adapter-logement-senior/">aides pour adapter le logement</a> complètent bien ces lectures. Pour tout reprendre pièce par pièce, voyez notre guide pour <a href="{R}amenager-logement-personne-agee/">aménager le logement d'une personne âgée</a>.</p>
 <h2>Pas le temps de lire ? Écoutez</h2>
 <p>Quand on accompagne un parent, les moments calmes sont rares. Beaucoup d'aidants écoutent leurs livres en voiture, en marchant ou en faisant le ménage. Audible propose un essai gratuit de 30 jours avec un livre audio offert, résiliable à tout moment, pour tester ce format. <a href="{AUDIBLE}" """ + A + """>Essayer Audible gratuitement</a></p>
+<p>Si vous aidez aussi votre parent à gérer son budget, notre page sur la <a href="{R}date-paiement-retraite-decembre-2026/">date de paiement de la retraite en décembre 2026</a> vous évitera les mauvaises surprises.</p>
 """,
   faq=[("Quel livre lire quand on devient aidant familial ?", "Pour démarrer, un guide généraliste comme « Mes parents vieillissent » (Vuibert, 2025) ou « J'aide mon parent à vieillir debout » (Chronique Sociale) donne une vue d'ensemble. Si vous travaillez, le « Guide du proche aidant » d'Hélène Rossinot (Pocket) s'adresse directement à vous."),
        ("Existe-t-il des livres pratiques sur la maladie d'Alzheimer pour les proches ?", "Oui. « Accompagner Alzheimer en pratique » (De Boeck Supérieur, 2025), écrit par un neurologue, explique la maladie et la communication avec le malade. « J'aide un proche atteint de la maladie d'Alzheimer » (Dunod) propose des fiches d'activités. Pour toute question sur la santé de votre proche, demandez conseil à son médecin."),
@@ -2439,6 +2465,7 @@ g("meilleurs-livres-gros-caracteres/",
 <h2>Et quand lire devient vraiment trop fatigant ?</h2>
 <p>Le livre audio prend le relais. On écoute le même roman, lu par un comédien, sur un téléphone, une tablette ou une petite enceinte, sans effort pour les yeux. Beaucoup de lecteurs alternent : le livre en gros caractères le matin, quand la vue est reposée, et l'écoute le soir. Pour choisir l'appareil et trouver des titres, voyez notre guide du <a href="{R}livres-audio-personne-agee/">livre audio pour personne âgée</a>.</p>
 <p>Pour essayer sans risque, Audible propose un essai gratuit de 30 jours avec un livre audio offert, résiliable à tout moment, et le livre reste accessible même après l'arrêt. Notre conseil : choisissez pour ce premier livre un roman déjà aimé, la voix du lecteur compte autant que l'histoire. <a href="{AUDIBLE}" """ + A + """>Essayer Audible gratuitement</a></p>
+<p>Si vous aidez un proche au quotidien, voyez aussi notre <a href="{R}meilleurs-livres-aidants/">sélection de livres pour les aidants</a>.</p>
 """,
   faq=[("Quelle taille de police pour un livre en gros caractères ?", "Les éditeurs spécialisés publient le plus souvent en corps 16, 18 ou 20, et parfois jusqu'à 25. Le corps 16 convient à une vue un peu fatiguée ; au-delà, préférez 18 ou 20. Une baisse de la vue mérite toujours un avis de l'ophtalmologiste."),
        ("Le texte est-il raccourci dans les éditions en gros caractères ?", "Non : selon le site spécialisé ActuaLitté, qui présente l'éditeur À vue d'œil, le texte d'origine n'est pas modifié, seule la mise en page change. C'est pourquoi un roman occupe souvent deux volumes."),
@@ -2495,6 +2522,7 @@ g("tapis-antiderapant-douche/",
 <p>Un antidérapant limite les glissades, mais il ne remplace pas un point d'appui. Si la personne se tient au porte-serviettes ou au rideau de douche pour entrer, c'est le signe qu'une <a href="{R}barre-d-appui-salle-de-bain/">barre d'appui</a> fixée solidement au mur serait utile. Si elle se fatigue debout, un <a href="{R}comment-choisir-siege-de-douche/">siège de douche</a> permet de se laver assis. Posez alors les pieds du siège bien à plat, jamais à cheval sur le bord du tapis, pour qu'il ne bascule pas.</p>
 <p>Si la marche pour entrer dans la baignoire devient difficile, aucun tapis ne règle ce problème. C'est le moment de réfléchir à une douche de plain-pied, et de regarder les <a href="{R}aides-adapter-logement-senior/">aides pour adapter le logement</a>. Pour les autres gestes du quotidien, notre guide pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a> complète cet article, et notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a> reprend la salle de bains en détail.</p>
 <p>Enfin, si la personne a déjà glissé ou se sent moins stable depuis quelque temps, parlez-en à son médecin. Un ergothérapeute peut aussi venir voir la salle de bains et proposer les équipements adaptés à sa situation.</p>
+<p>Si la personne garde sa baignoire, une <a href="{R}planche-de-bain/">planche de bain</a> lui permet de se laver assise.</p>
 """,
   faq=[("Pourquoi mon tapis de douche ne tient-il pas ?", "Le plus souvent, le fond de la douche n'est pas assez lisse pour que les ventouses fassent le vide, ou il est couvert de calcaire ou d'un film de savon. Nettoyez et séchez le fond, posez le tapis en appuyant sur toute sa surface. S'il glisse encore, préférez des bandes adhésives ou un traitement antidérapant."),
        ("Comment éviter les moisissures sous le tapis ?", "Décollez le tapis après chaque douche et laissez-le sécher suspendu. Lavez-le chaque semaine à l'eau savonneuse ou en machine si l'étiquette le permet, et remplacez-le quand les taches ne partent plus ou que les ventouses durcissent."),
@@ -2622,6 +2650,7 @@ g("meilleur-deambulateur/",
 <p>Un déambulateur aide à marcher, mais le logement doit suivre : tapis retirés, passages dégagés, éclairage la nuit. Tout est détaillé dans <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
 <h2>Faut-il l'acheter soi-même ?</h2>
 <p>Pas forcément. Un déambulateur peut être prescrit par le médecin et pris en charge en partie par l'Assurance maladie : l'Escort P435B et l'Aventia P402, par exemple, sont inscrits sur la liste des produits remboursables (LPP) selon leur revendeur. Avant d'acheter en ligne, demandez au médecin ou au pharmacien ce qui est possible dans votre cas, et gardez la facture.</p>
+<p>Si l'équilibre reste bon, une canne peut suffire : voyez notre <a href="{R}meilleure-canne-de-marche/">comparatif des cannes de marche</a>.</p>
 """,
   faq=[("Quel est le meilleur déambulateur pour une personne âgée ?", "Celui qui correspond à sa marche. Un cadre fixe pour l'appui le plus stable, un modèle à deux roues avant si soulever le cadre fatigue, un modèle pliant pour le transport. L'Invacare Asteria est un bon point de départ car on peut lui ajouter des roues plus tard. Le kinésithérapeute ou le médecin peut confirmer le choix."),
        ("Déambulateur fixe ou à roues ?", "Le fixe s'arrête net quand on s'appuie dessus, ce qui rassure en cas d'équilibre fragile, mais il faut le soulever à chaque pas. Le modèle à deux roues se pousse, ce qui est moins fatigant, à condition de garder un bon contrôle de la marche."),
@@ -2748,6 +2777,7 @@ g("meilleure-canne-de-marche/",
 <p>Notre conseil : ne prenez pas une quadripode « par précaution ». Elle ralentit la marche et n'aide que si elle a été conseillée par un professionnel. Si la personne a besoin d'un appui des deux côtés, une canne ne suffit plus : regardez plutôt notre <a href="{R}meilleur-deambulateur/">sélection de déambulateurs</a>.</p>
 <p>Tous les critères, de la hauteur à l'embout, sont détaillés dans notre guide pour <a href="{R}canne-de-marche/">bien choisir une canne de marche</a>. Pour que la canne serve vraiment, le logement compte aussi : retrouvez les aménagements utiles dans <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
 <p>Pensez enfin à l'embout. C'est la pièce qui s'use et qui accroche au sol : changez-le dès qu'il est lisse ou fendu, en prenant le bon diamètre (souvent indiqué sur la fiche, par exemple 18 ou 19 mm).</p>
+<p>Quand monter l'escalier devient trop difficile, même avec une canne, lisez notre guide sur le <a href="{R}monte-escalier-prix-aides/">monte-escalier et les aides possibles</a>.</p>
 """,
   faq=[("Quelle est la meilleure canne de marche pour une personne âgée ?", "Pour la plupart des personnes, une canne réglable et légère, avec un bon embout, suffit. La Stabilicane d'Identités a l'avantage de tenir debout seule. Une tripode ou une quadripode se choisit sur conseil du médecin ou du kinésithérapeute, quand il faut un appui plus large."),
        ("De quel côté tenir sa canne ?", "En général du côté opposé à la jambe douloureuse ou faible : la canne avance en même temps que cette jambe. Le kinésithérapeute peut vous montrer le bon geste et régler la hauteur."),
@@ -2800,6 +2830,7 @@ g("bouton-appel-urgence-senior/",
 <li><strong>Croire que le bouton évite la chute.</strong> Il aide à être secouru vite. Pour réduire le risque, il faut aussi agir sur le logement : relisez nos conseils pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a> et notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a>.</li>
 </ul>
 <p>Si la personne tombe souvent, a des malaises ou se sent moins sûre d'elle, parlez-en à son médecin : il pourra en chercher la cause et vous orienter, par exemple vers un ergothérapeute pour adapter le domicile.</p>
+<p>Certains téléphones portables ont aussi une touche d'urgence au dos : notre <a href="{R}meilleur-telephone-portable-senior/">comparatif des portables pour seniors</a> indique lesquels.</p>
 """,
   faq=[("Existe-t-il un bouton d'appel d'urgence sans abonnement ?", "Oui. Certains boutons, pendentifs ou montres appellent directement des proches enregistrés, grâce à une carte SIM. Il n'y a pas de frais de service, mais il faut un forfait mobile actif et des proches qui répondent. Sans réponse, personne d'autre ne prend le relais."),
        ("Pendentif ou bracelet d'appel d'urgence : que choisir ?", "Celui que la personne portera tout le temps, y compris sous la douche. Le pendentif est plus facile à attraper, le bracelet plus discret. Vérifiez la résistance à l'eau, la taille du bouton et la recharge."),
@@ -2808,12 +2839,12 @@ g("bouton-appel-urgence-senior/",
 
 AUTO_META['meilleur-pilulier-electronique/'] = ('🏆', 'lilas')
 g("meilleur-pilulier-electronique/",
-  "Meilleur pilulier électronique 2026 : 10 modèles à alarme",
+  "Meilleur pilulier électronique 2026 : 9 modèles à alarme",
   "Meilleur pilulier électronique : boîtes à alarme et distributeurs automatiques",
-  "Boîte à alarme de poche, distributeur verrouillé ou connecté, simple minuteur : 10 piluliers électroniques comparés d'après les fiches des fabricants.",
+  "Boîte à alarme de poche, distributeur verrouillé ou connecté, simple minuteur : 9 piluliers électroniques comparés d'après les fiches des fabricants.",
   """
 <p>Si le problème est d'oublier l'heure, une boîte à alarme suffit. Si le problème est de ne plus savoir si l'on a déjà pris son comprimé, ou de risquer d'en prendre deux fois, il faut un distributeur automatique verrouillé : il n'ouvre que la case du moment. Ce sont deux besoins différents, et la plupart des déceptions viennent d'un mauvais choix entre les deux.</p>
-<p>Voici dix appareils vendus en France, des plus simples aux plus encadrants.</p>
+<p>Voici neuf appareils vendus en France, des plus simples aux plus encadrants.</p>
 {CTA}
 <div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches et notices publiées par les fabricants et les revendeurs (en France et, faute de fiche française, au Royaume-Uni), sans test en main. Nous n'indiquons que les données lues ; quand une information manque, nous écrivons « non précisé ». Un pilulier ne remplace pas l'avis du médecin ou du pharmacien : demandez-leur conseil pour l'organisation du traitement, et faites préparer les doses par une personne de confiance si besoin.</div>
 <h2>Le comparatif en un tableau</h2>
@@ -2824,7 +2855,6 @@ g("meilleur-pilulier-electronique/",
 <tr><td>LiveFine WiFi</td><td>Distributeur connecté</td><td>Jusqu'à 9</td><td>Son et lumière</td><td>Oui, à clé</td><td>Suivi à distance par un proche</td></tr>
 <tr><td>Ivation GMIVPILLDW</td><td>Distributeur automatique</td><td>Jusqu'à 4</td><td>Son</td><td>Oui, à clé</td><td>Un distributeur simple</td></tr>
 <tr><td>TabTime Super 8</td><td>Boîte journalière</td><td>Jusqu'à 8</td><td>Son puis LED</td><td>Non</td><td>Beaucoup de prises dans la journée</td></tr>
-<tr><td>Identités 817112</td><td>Boîte journalière</td><td>5</td><td>Son et vibration</td><td>Non précisé</td><td>La poche ou le sac</td></tr>
 <tr><td>InnovaGoods Pilly</td><td>Boîte journalière</td><td>Jusqu'à 5</td><td>Son et vibration</td><td>Non précisé</td><td>Une petite boîte étanche</td></tr>
 <tr><td>Pivotell Minitell</td><td>Boîte ronde de poche</td><td>Jusqu'à 5</td><td>Son, vibration ou les deux</td><td>Réglages seulement</td><td>Un grand écran lisible</td></tr>
 <tr><td>TabTime Timer</td><td>Minuteur sans compartiment</td><td>Jusqu'à 8</td><td>Son et lumière</td><td>Sans objet</td><td>Garder son pilulier habituel</td></tr>
@@ -2878,22 +2908,13 @@ g("meilleur-pilulier-electronique/",
 <h2>6. TabTime Super 8 : jusqu'à 8 rappels dans la journée</h2>
 <p><strong>Pour qui ?</strong> Une personne autonome qui gère bien son traitement mais a beaucoup de prises à des heures différentes.</p>
 <ul>
-<li><strong>Points forts</strong> : 8 compartiments numérotés liés aux 8 alarmes, bip de 40 secondes puis LED rouge qui clignote jusqu'à l'ouverture. Volume réglable (65 ou 85 dB). Fermeture magnétique, notice avec une partie en français.</li>
+<li><strong>Points forts</strong> : 8 compartiments numérotés liés aux 8 alarmes, bip d'environ 30 à 40 secondes selon la notice, puis LED rouge qui clignote jusqu'à l'ouverture. Volume réglable (65 ou 85 dB). Fermeture magnétique, notice avec une partie en français.</li>
 <li><strong>Données utiles</strong> : pile CR2032 fournie, 11 x 6 x 3 cm, garantie 12 mois après enregistrement.</li>
 <li><strong>Limites</strong> : non verrouillé, rien n'empêche d'ouvrir la mauvaise case. Petites cases.</li>
 </ul>
 <p><a href="{AMZ:TabTime Super 8}" """ + A + """>Voir sur Amazon</a></p>
 
-<h2>7. Identités pilulier journalier 5 alarmes : le format poche</h2>
-<p><strong>Pour qui ?</strong> Une personne active qui sort beaucoup et veut un rappel qui vibre, discret en public.</p>
-<ul>
-<li><strong>Points forts</strong> : 4 compartiments, 5 alarmes indépendantes d'une minute, son et vibration, écran LCD, compte à rebours.</li>
-<li><strong>Données utiles</strong> : 6,2 x 6,2 x 2 cm, 45 g, pile CR2032 fournie.</li>
-<li><strong>Limites</strong> : petit écran et petites cases. Une autre fiche Identités, au nom proche, donne des caractéristiques différentes : vérifiez la référence 817112 à l'achat.</li>
-</ul>
-<p><a href="{AMZ:Identites pilulier journalier electronique 5 alarmes}" """ + A + """>Voir sur Amazon</a></p>
-
-<h2>8. InnovaGoods Pilly : une petite boîte étanche</h2>
+<h2>7. InnovaGoods Pilly : une petite boîte étanche</h2>
 <p><strong>Pour qui ?</strong> Une personne qui veut une boîte de poche avec rappel, sans fonctions compliquées.</p>
 <ul>
 <li><strong>Points forts</strong> : 4 compartiments, jusqu'à 5 alarmes par jour, son et vibration, fermeture étanche, horloge et minuteur.</li>
@@ -2902,7 +2923,7 @@ g("meilleur-pilulier-electronique/",
 </ul>
 <p><a href="{AMZ:InnovaGoods Pilly pilulier}" """ + A + """>Voir sur Amazon</a></p>
 
-<h2>9. Pivotell Minitell : le plus lisible des modèles de poche</h2>
+<h2>8. Pivotell Minitell : le plus lisible des modèles de poche</h2>
 <p><strong>Pour qui ?</strong> Une personne qui voit moins bien et a besoin d'un écran plus grand qu'une petite boîte classique.</p>
 <ul>
 <li><strong>Points forts</strong> : grand écran LCD rétroéclairé, 5 compartiments d'environ 10 ml, jusqu'à 5 alarmes par jour (ou 1 par jour pendant 5 jours), son, vibration ou les deux, fonction rappel. Un interrupteur verrouille les réglages.</li>
@@ -2911,7 +2932,7 @@ g("meilleur-pilulier-electronique/",
 </ul>
 <p><a href="{AMZ:Pivotell Minitell}" """ + A + """>Voir sur Amazon</a></p>
 
-<h2>10. TabTime Timer : garder son pilulier habituel</h2>
+<h2>9. TabTime Timer : garder son pilulier habituel</h2>
 <p><strong>Pour qui ?</strong> Une personne qui a déjà un pilulier semainier préparé par la pharmacie et veut juste un rappel sonore.</p>
 <ul>
 <li><strong>Points forts</strong> : jusqu'à 8 alarmes par jour, son et lumière clignotante pendant une minute, compte à rebours.</li>
@@ -2928,7 +2949,7 @@ g("meilleur-pilulier-electronique/",
   faq=[("Quel pilulier électronique choisir pour une personne âgée ?", "Une boîte à alarme suffit si la personne oublie l'heure mais gère bien son traitement. Si elle ne sait plus si elle a pris sa dose, choisissez un distributeur automatique verrouillé, comme le Medelert, qui n'ouvre que la case du moment. Le pharmacien peut vous aider à choisir."),
        ("Qui remplit un distributeur automatique de médicaments ?", "Un proche, une aide à domicile ou un infirmier, selon l'organisation. Le pharmacien peut aussi préparer les doses. Le remplissage doit être fait avec soin, car une erreur à ce moment se répète à chaque prise."),
        ("Avez-vous testé ces piluliers ?", "Non. Cette sélection repose sur les caractéristiques publiées par les fabricants et les revendeurs, sans note ni avis de prise en main. Vérifiez la notice du modèle choisi.")],
-  short="Top 10 piluliers électroniques", cat="Vie quotidienne")
+  short="Top 9 piluliers électroniques", cat="Vie quotidienne")
 
 AUTO_META['meilleur-telephone-fixe-senior/'] = ('🏆', 'ciel')
 g("meilleur-telephone-fixe-senior/",
@@ -3092,6 +3113,8 @@ g("teleassistance-comment-ca-marche/",
 <p>Enfin, un <strong>tapis antidérapant de douche</strong> et des barres d'appui traitent la pièce la plus à risque. <a href="{AMZ:tapis antiderapant douche senior}" """ + A + """>Voir les tapis antidérapants</a>.</p>
 <p>Pour passer toute la maison en revue, suivez <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
 <div class="note"><strong>Des chutes répétées ou des malaises ?</strong> La téléassistance permet d'être secouru vite, elle n'empêche pas de tomber. Parlez des chutes au médecin traitant : il peut rechercher une cause (traitement, tension, vue) et prescrire des séances de kinésithérapie. Un ergothérapeute peut aussi venir au domicile pour adapter le logement.</div>
+<p>L'abonnement est en général prélevé chaque mois : pour caler la date de prélèvement, notre page sur la <a href="{R}date-paiement-retraite-decembre-2026/">date de paiement de la retraite en décembre 2026</a> donne le calendrier des caisses.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F12" target="_blank" rel="noopener">Service-Public, Crédit d'impôt pour l'emploi d'un salarié à domicile</a>, <a href="https://www.sante.fr/node/14243197" target="_blank" rel="noopener">Santé.fr, Les aides financières pour installer une téléassistance</a>, <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F10009" target="_blank" rel="noopener">Service-Public, Allocation personnalisée d'autonomie (Apa)</a> (vérifié le 17 novembre 2026)</p>
 """,
   faq=[("Qui répond quand on appuie sur le bouton de téléassistance ?", "Un opérateur de la plateforme d'écoute du service, joignable jour et nuit. Il parle avec la personne par le haut-parleur du boîtier, puis prévient un proche de la liste ou les secours selon la situation."),
        ("La téléassistance donne-t-elle droit à un crédit d'impôt ?", "Oui, d'après service-public.fr, la téléassistance ouvre droit au crédit d'impôt de 50 % pour les services à la personne lorsqu'elle permet le maintien à domicile d'une personne fragile, dans la limite des plafonds annuels."),
@@ -3351,6 +3374,7 @@ g("meilleure-barre-d-appui/",
 <h2>Comment choisir la bonne barre</h2>
 <p>Faites le geste avant d'acheter : asseyez la personne sur les toilettes ou faites-la entrer dans la douche, et regardez où sa main cherche naturellement un appui. C'est là que va la barre, à cette hauteur. Ensuite, choisissez la forme (droite, coudée, relevable), puis vérifiez trois chiffres : la charge, le diamètre du tube (autour de 30 à 32 mm pour bien refermer la main) et l'écart au mur.</p>
 <p>Tous les critères de pose et de hauteur sont expliqués dans notre guide de la <a href="{R}barre-d-appui-salle-de-bain/">barre d'appui de salle de bain</a>. Pour les toilettes, notre <a href="{R}meilleur-rehausseur-wc/">sélection de rehausseurs WC</a> complète bien une barre. Et pour l'ensemble du logement, suivez <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>. Un ergothérapeute peut venir au domicile pour indiquer l'emplacement et la forme les plus adaptés.</p>
+<p>Dans une baignoire, une barre près du rebord se combine bien avec une <a href="{R}planche-de-bain/">planche de bain pour se laver assis</a>.</p>
 """,
   faq=[("Quelle barre d'appui choisir pour les toilettes ?", "Une barre coudée fixée sur le mur latéral si un mur est à portée de main, comme la Normbau Inox Care coudée 135°. Sinon, une barre relevable fixée derrière les WC, de préférence avec un pied d'appui comme l'AKW rabattable."),
        ("Une barre d'appui à ventouses est-elle sûre ?", "Elle peut dépanner, mais les fabricants la réservent généralement à un usage temporaire et demandent de vérifier la tenue avant chaque utilisation. Pour se relever en prenant appui de tout son poids, il faut une barre vissée dans un mur solide."),
@@ -3399,6 +3423,7 @@ g("livres-audio-personne-agee/",
 <h2>Et la lecture sur papier ?</h2>
 <p>Le livre audio ne remplace pas forcément le papier. Certaines personnes alternent : un roman à écouter le soir, le journal avec une loupe le matin. Si la lecture devient difficile, parlez-en à un ophtalmologiste : une baisse de vue n'est pas toujours une fatalité et mérite un bilan. En attendant, les livres en gros caractères restent une belle option, et nous en avons sélectionné quelques-uns dans notre <a href="{R}meilleurs-livres-gros-caracteres/">liste de livres en gros caractères</a>.</p>
 <p>Le livre audio est aussi une bonne idée pour un anniversaire ou pour Noël, accompagné de l'appareil prêt à l'emploi : d'autres pistes sont dans nos <a href="{R}cadeau-personne-agee/">idées de cadeaux pour une personne âgée</a>. Et pour adapter le reste du logement aux besoins de votre proche, suivez <a href="{R}amenager-logement-personne-agee/">notre guide pièce par pièce</a>.</p>
+<p>Et pour vous, si vous accompagnez un proche, notre <a href="{R}meilleurs-livres-aidants/">sélection de livres pour les aidants</a> peut vous être utile.</p>
 <p class="sources"><strong>Sources</strong> : <a href="https://bibliotheques.paris.fr/poles-deficients-visuels.aspx" target="_blank" rel="noopener">Bibliothèques de la Ville de Paris, Les pôles déficients visuels</a> (vérifié le 17 novembre 2026)</p>
 """,
   faq=[("Quel est l'appareil le plus simple pour écouter un livre audio quand on est âgé ?", "Celui que la personne utilise déjà. Pour quelqu'un qui n'aime pas les écrans, un lecteur CD à gros boutons ou une enceinte commandée à la voix sont les plus simples. Pour une personne malvoyante, un lecteur Daisy avec des touches en relief est conçu pour cet usage."),
@@ -3570,6 +3595,7 @@ g("personne-agee-qui-tombe-la-nuit/",
 </ul>
 <p>Le médecin peut revoir les traitements, chercher une cause aux vertiges ou aux envies fréquentes, et prescrire des séances de kinésithérapie pour travailler l'équilibre et apprendre à se relever du sol. Il peut aussi orienter vers un ergothérapeute, qui vient voir la chambre et le trajet de nuit pour proposer les aménagements les plus adaptés. Le pharmacien est également de bon conseil pour repérer un médicament qui fait tourner la tête.</p>
 <p>Pour aller plus loin, retrouvez les bons gestes du quotidien dans notre guide pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a>, et le tour complet du logement dans <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
+<p>Si les prises du soir sont parfois oubliées ou doublées, un <a href="{R}meilleur-pilulier-electronique/">pilulier électronique à alarme</a> peut aider, après avis du médecin ou du pharmacien.</p>
 """,
   faq=[("Pourquoi une personne âgée tombe-t-elle plus souvent la nuit ?", "Plusieurs fragilités se cumulent : lever trop rapide qui fait tourner la tête, pénombre, envie pressante d'uriner et réveil incomplet, parfois accentué par certains médicaments. Le trajet entre le lit et les toilettes est le moment le plus risqué."),
        ("Que faire après une chute la nuit, même sans blessure ?", "En parler au médecin traitant, même si la personne s'est relevée seule. Une chute peut révéler un vertige, un effet de médicament ou une fatigue qui se soignent. Profitez-en pour sécuriser le trajet de nuit et mettre en place un moyen d'alerte."),

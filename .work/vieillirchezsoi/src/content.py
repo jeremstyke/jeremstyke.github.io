@@ -121,6 +121,7 @@ g("comment-choisir-siege-de-douche/",
 <p>Pour faire le tour de la maison, suivez notre <a href="{R}checklist/">checklist du maintien à domicile</a>.</p>
 <h2>Demander conseil</h2>
 <p>Si la personne a du mal à se lever, a déjà chuté ou sort d'une hospitalisation, demandez conseil à son médecin, à un ergothérapeute ou au pharmacien. Ils peuvent recommander le bon équipement et vérifier l'installation. Certaines aides techniques peuvent aussi être financées en partie : renseignez-vous auprès de la mutuelle et des services sociaux.</p>
+<p>Pour comparer des modèles précis, consultez notre <a href="{R}meilleur-siege-de-douche/">sélection des meilleurs sièges de douche</a>.</p>
 """,
   faq=[("Quelle hauteur pour un siège de douche ?", "Assis, la personne doit avoir les pieds à plat sur le sol et les genoux à peu près à angle droit. Les pieds réglables permettent d'ajuster la hauteur."),
        ("Tabouret ou chaise de douche ?", "Le tabouret suffit si l'équilibre est bon. Une chaise avec dossier et accoudoirs est plus sûre quand on a besoin d'appui pour s'asseoir et se relever."),
@@ -164,6 +165,7 @@ g("deambulateur-ou-rollator/",
 <h2>Prise en charge et conseils</h2>
 <p>Les déambulateurs et les rollators peuvent être pris en charge en partie par l'Assurance maladie sur prescription médicale, la mutuelle pouvant compléter. Les conditions varient selon le modèle : demandez au médecin et au pharmacien avant d'acheter. Le médecin, le kinésithérapeute ou l'ergothérapeute peut aussi vous dire quel type d'aide convient le mieux.</p>
 <p>Une aide à la marche ne fait pas tout : pensez aussi à dégager les passages et à poser des <a href="{AMZ:veilleuse detecteur de mouvement}" """ + A + """>veilleuses à détecteur</a>. Toutes les étapes sont dans notre <a href="{R}checklist/">checklist du maintien à domicile</a>, et notre guide sur les <a href="{R}barre-d-appui-salle-de-bain/">barres d'appui</a> complète l'équipement.</p>
+<p>Pour comparer des modèles précis, consultez notre <a href="{R}meilleur-deambulateur/">sélection des meilleurs déambulateurs</a>.</p>
 """,
   faq=[("Quelle est la différence entre un déambulateur et un rollator ?", "Le déambulateur se soulève ou se pousse lentement et offre un appui très stable. Le rollator roule, a des freins et souvent un siège : il convient mieux pour sortir."),
        ("À quelle hauteur régler un rollator ?", "Repère courant : debout, bras le long du corps, les poignées arrivent à peu près au pli du poignet. Suivez la notice et faites vérifier en cas de doute."),
@@ -211,6 +213,7 @@ g("barre-d-appui-salle-de-bain/",
 <li><strong>Un matériau qui ne rouille pas</strong> : inox ou aluminium.</li>
 </ul>
 <p>Pour aller plus loin, lisez notre guide pour <a href="{R}comment-choisir-siege-de-douche/">choisir un siège de douche</a> et parcourez la <a href="{R}checklist/">checklist du maintien à domicile</a>. Un <a href="{AMZ:rehausseur wc}" """ + A + """>rehausseur de WC</a> complète souvent les barres près des toilettes.</p>
+<p>Pour voir des modèles précis, avec leur charge et leur fixation, parcourez notre <a href="{R}meilleure-barre-d-appui/">comparatif des barres d'appui</a>.</p>
 """,
   faq=[("Les barres d'appui à ventouses sont-elles fiables ?", "Elles aident à garder l'équilibre mais peuvent se décoller. Elles ne remplacent pas une barre vissée pour se relever en prenant appui."),
        ("Où mettre une barre d'appui près des toilettes ?", "Du côté où la personne se relève naturellement. Sans mur proche, une barre relevable ou un cadre de toilettes est une bonne solution."),
@@ -250,6 +253,7 @@ g("telephone-portable-senior/",
 <h2>Bien préparer le téléphone</h2>
 <p>Avant de l'offrir, enregistrez les numéros importants, réglez la taille du texte et le volume, et faites quelques essais ensemble. C'est souvent ce qui fait la différence entre un téléphone utilisé et un téléphone qui reste dans un tiroir.</p>
 <p>Le téléphone fait partie de notre <a href="{R}checklist/">checklist du maintien à domicile</a>. Pour la mobilité, lisez aussi <a href="{R}deambulateur-ou-rollator/">déambulateur ou rollator</a>.</p>
+<p>Pour comparer des modèles précis, consultez notre <a href="{R}meilleur-telephone-portable-senior/">sélection des meilleurs téléphones portables pour seniors</a>.</p>
 """,
   faq=[("Quel téléphone pour une personne âgée qui veut seulement appeler ?", "Un téléphone à grosses touches ou à clapet, compatible 4G, avec une sonnerie forte et un socle de charge, suffit dans la plupart des cas."),
        ("Pourquoi choisir un téléphone 4G ?", "Les réseaux 2G et 3G ferment progressivement en France. Un téléphone qui ne fonctionne qu'en 2G ou 3G risque de ne plus pouvoir appeler."),
