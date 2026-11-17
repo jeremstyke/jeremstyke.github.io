@@ -54,3 +54,6 @@ Liens internes et externes (décidé le 17 nov 2026), à chaque publication :
 ## Liens entre les 4 sites (17 nov 2026)
 - Les 4 sites (Vieillir chez soi, Les oiseaux du jardin, Ma liste bébé, Ma liste mariage) se citent dans le pied de page.
 - Dans le texte : au maximum 1 lien vers un site frère par page, seulement quand c'est vraiment utile au lecteur (ex. mangeoire de fenêtre -> cadeau personne âgée ; cadeau personne âgée -> cadeau passionné d'oiseaux ; mariage avec bébé en route -> liste de naissance). Jamais de lien forcé, jamais d'ancre bourrée de mots-clés.
+
+## Qui publie (17 nov 2026)
+- Toutes les publications de ce site sont faites UNIQUEMENT par les tâches programmées créées depuis la conversation de Jeremy dédiée aux 4 sites affiliés (Vieillir chez soi, Les oiseaux du jardin, Ma liste bébé, Ma liste mariage). Toute autre session ou conversation ne doit ni publier de page, ni créer, modifier ou dupliquer une tâche de publication pour ce site : elle signale le besoin à Jeremy et s'arrête.

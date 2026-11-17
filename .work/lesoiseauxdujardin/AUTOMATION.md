@@ -31,3 +31,6 @@ Liens internes et sources (décidé le 17 nov 2026), à chaque publication :
 ## Rythme renforcé jusqu'à Noël (17 nov 2026)
 - Du 18 novembre au 31 décembre 2026 : une 2e publication à 10h37 (1 guide de sujets.md + 1 top), en plus de celle de 15h47. Retour à 3 pages par jour à partir du 1er janvier 2027.
 - En novembre et décembre, priorité aux pages d'hiver et de Noël (cadeaux, nourrissage d'hiver, mangeoires, caméras, jumelles).
+
+## Qui publie (17 nov 2026)
+- Toutes les publications de ce site sont faites UNIQUEMENT par les tâches programmées créées depuis la conversation de Jeremy dédiée aux 4 sites affiliés (Vieillir chez soi, Les oiseaux du jardin, Ma liste bébé, Ma liste mariage). Toute autre session ou conversation ne doit ni publier de page, ni créer, modifier ou dupliquer une tâche de publication pour ce site : elle signale le besoin à Jeremy et s'arrête.
