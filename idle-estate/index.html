@@ -515,12 +515,13 @@ let skyKey = '';
 function buildBanners() {
   const b = $('banners'); let h = '';
   if (!S.mg[0]) h += `<div class="bn" style="background:#e6f6fd"><div class="tx"><b>👆 ${L.hint.split('. ')[0]}.</b><span>${L.hint.split('. ').slice(1).join('. ')}</span></div></div>`;
-  if (!S.welcome) h += `<div class="bn gold"><div class="tx"><b>🎁 ${L.welcomeT}</b><span>${L.welcomeS}</span></div><button class="btn gold" data-sku="welcome">⭐ ${S.shop.welcome}</button></div>`;
+  const promo = !S.welcome ? 'w' : 'd';
+  if (promo === 'w') h += `<div class="bn gold"><div class="tx"><b>🎁 ${L.welcomeT}</b><span>${L.welcomeS}</span></div><button class="btn gold" data-sku="welcome">⭐ ${S.shop.welcome}</button></div>`;
   if (S.dailyOk) {
     const next = Math.min(S.streak + 1, 7);
     h += `<div class="bn"><div class="tx"><b>🔥 ${L.daily}</b><span>${L.dailyS.replace('{n}', next)}</span><div class="dots">${[1, 2, 3, 4, 5, 6, 7].map(d => `<i class="${d < next ? 'on' : ''}"></i>`).join('')}</div></div><button class="btn" id="dailyBtn">${L.claim}</button></div>`;
   }
-  if (S.deal && L.items[S.deal.sku]) { const it = L.items[S.deal.sku]; h += `<div class="bn gold"><div class="tx"><b>🔥 ${L.dealT}: ${it[1]}</b><span>${L.dealS}</span></div><button class="btn gold" data-sku="${S.deal.sku}" data-deal="1">⭐ ${S.deal.price}</button></div>`; }
+  if (promo === 'd' && S.deal && L.items[S.deal.sku]) { const it = L.items[S.deal.sku]; h += `<div class="bn gold"><div class="tx"><b>🔥 ${L.dealT}: ${it[1]}</b><span>${L.dealS}</span></div><button class="btn gold" data-sku="${S.deal.sku}" data-deal="1">⭐ ${S.deal.price}</button></div>`; }
   b.innerHTML = h;
   b.onclick = e => {
     if (e.target.id === 'dailyBtn') {
