@@ -499,7 +499,7 @@ g("veilleuse-detecteur-de-mouvement/",
 <li><strong>Un mode allumé en continu</strong> peut rendre service les premières nuits, le temps de s'habituer.</li>
 </ul>
 <h2>Où placer les veilleuses ?</h2>
-<p>Pensez au trajet complet, du lit jusqu'aux toilettes, puis le retour. Le plus simple est de faire le chemin vous-même dans le noir et de noter les endroits où l'on ne voit plus rien.</p>
+<p>Pensez au trajet complet, du lit jusqu'aux toilettes, puis le retour. Le plus simple est de faire le chemin vous-même dans le noir et de noter les endroits où l'on ne voit plus rien. Si votre proche est déjà tombé la nuit, notre page sur <a href="{R}personne-agee-qui-tombe-la-nuit/">les chutes nocturnes d'une personne âgée</a> détaille les autres causes et solutions.</p>
 <ul>
 <li><strong>Au pied du lit</strong> ou sous le lit, du côté où la personne se lève.</li>
 <li><strong>À la sortie de la chambre</strong>, pour repérer la porte et le seuil.</li>
@@ -551,7 +551,7 @@ g("prevenir-les-chutes-a-la-maison/",
 <li><strong>Asseyez-vous</strong> au bord du lit, les pieds bien à plat au sol, et attendez quelques secondes.</li>
 <li><strong>Levez-vous</strong> en prenant appui sur un point stable, puis restez debout un moment avant de marcher.</li>
 </ul>
-<p>Si la tête tourne souvent quand vous vous levez, parlez-en à votre médecin. Une <a href="{AMZ:poignee aide au lever lit}" """ + A + """>poignée d'aide au lever</a> fixée au lit peut aussi rendre ce moment plus sûr. Quand se relever d'un fauteuil devient pénible, lisez notre guide sur le <a href="{R}fauteuil-releveur/">fauteuil releveur</a>. Et si se lever du lit lui-même devient difficile, notre <a href="{R}meilleur-lit-medicalise/">comparatif des lits médicalisés électriques</a> peut vous aider.</p>
+<p>Si la tête tourne souvent quand vous vous levez, parlez-en à votre médecin. C'est aussi l'une des causes fréquentes des <a href="{R}personne-agee-qui-tombe-la-nuit/">chutes de la personne âgée la nuit</a>. Une <a href="{AMZ:poignee aide au lever lit}" """ + A + """>poignée d'aide au lever</a> fixée au lit peut aussi rendre ce moment plus sûr. Quand se relever d'un fauteuil devient pénible, lisez notre guide sur le <a href="{R}fauteuil-releveur/">fauteuil releveur</a>. Et si se lever du lit lui-même devient difficile, notre <a href="{R}meilleur-lit-medicalise/">comparatif des lits médicalisés électriques</a> peut vous aider.</p>
 <h2>Bien se chausser, même à la maison</h2>
 <p>Les mules, les chaussons avachis et les chaussettes sur un sol lisse font partie des pièges les plus courants. À la maison comme dehors, préférez :</p>
 <ul>
@@ -3512,3 +3512,64 @@ g("meilleur-lit-medicalise/",
        ("Quelle hauteur de lit choisir pour une personne âgée ?", "Une hauteur réglable qui permet à la personne de s'asseoir les pieds à plat au sol, puis de remonter pour les soins. Les modèles de cette sélection descendent entre 29 et 40 cm environ, et la version Luna X-low de Vermeiren jusqu'à 20 cm sans matelas."),
        ("Avez-vous testé ces lits médicalisés ?", "Non. Cette sélection repose sur les caractéristiques publiées par les fabricants et les revendeurs, sans note ni avis de prise en main. Vérifiez la référence exacte et ses options auprès du vendeur avant d'acheter.")],
   short="Top 8 lits médicalisés", cat="Chambre et repos")
+
+AUTO_META['personne-agee-qui-tombe-la-nuit/'] = ('🌙', 'lilas')
+g("personne-agee-qui-tombe-la-nuit/",
+  "Personne âgée qui tombe la nuit : causes et solutions concrètes",
+  "Votre proche âgé tombe la nuit : comprendre pourquoi et agir",
+  "Lever trop rapide, pénombre, trajet vers les toilettes : pourquoi une personne âgée tombe la nuit, quoi installer près du lit et quand consulter le médecin.",
+  """
+<p>Si votre parent tombe la nuit, c'est presque toujours sur le même trajet : du lit aux toilettes, puis retour. Il se lève encore à moitié endormi, souvent trop vite, dans une pièce sombre, parfois pressé par l'envie d'uriner. Chacun de ces points se corrige, et c'est en les traitant ensemble que l'on fait vraiment baisser le risque.</p>
+<p>Une chute nocturne inquiète d'autant plus qu'elle arrive au moment où personne n'est là pour voir. Elle mérite d'être prise au sérieux même quand la personne s'est relevée seule et assure que « ce n'est rien » : c'est souvent le signe que quelque chose a changé.</p>
+{CTA}
+<h2>Pourquoi les chutes arrivent-elles surtout la nuit ?</h2>
+<p>Plusieurs fragilités se cumulent au même moment. Prises une à une, elles semblent anodines. Ensemble, elles suffisent à faire perdre l'équilibre.</p>
+<p><strong>Le lever trop rapide.</strong> En passant d'un coup de la position allongée à la position debout, la tension peut chuter brièvement : la tête tourne, les jambes flanchent. Les médecins parlent d'hypotension orthostatique. Certains médicaments, contre la tension ou pour dormir par exemple, peuvent accentuer ce phénomène.</p>
+<p><strong>La pénombre.</strong> Avec l'âge, l'œil s'habitue plus lentement au passage de la lumière au noir. Un tapis, une pantoufle, un fil de lampe deviennent invisibles. Et chercher l'interrupteur à tâtons, c'est déjà faire un pas dans le noir.</p>
+<p><strong>L'urgence.</strong> Se lever plusieurs fois par nuit pour uriner est fréquent après un certain âge. Quand l'envie est pressante, on se dépêche, on oublie ses chaussons, on coupe par le chemin le plus court.</p>
+<p><strong>Le réveil incomplet.</strong> Un somnifère ou un sommeil profond laisse l'esprit embrumé quelques minutes. Les réflexes sont moins vifs pour se rattraper.</p>
+<h2>Que mettre en place près du lit ?</h2>
+<p>Le tableau ci-dessous associe chaque cause à la solution la plus simple. Commencez par la première ligne qui correspond à la situation de votre proche.</p>
+<table><thead><tr><th>Ce qui pose problème</th><th>Solution simple</th><th>À savoir</th></tr></thead><tbody>
+<tr><td>Vertige en se levant</td><td>Se lever en trois temps, poignée ou barre de lit</td><td>En parler au médecin si cela se répète</td></tr>
+<tr><td>Chambre et couloir dans le noir</td><td>Veilleuses à détecteur de mouvement</td><td>Lumière douce, au ras du sol, sans éblouir</td></tr>
+<tr><td>Toilettes trop loin</td><td>Chaise percée ou urinal près du lit</td><td>Utile surtout en période de fatigue ou après une hospitalisation</td></tr>
+<tr><td>Pieds nus ou en mules</td><td>Chaussons fermés posés au pied du lit</td><td>Semelle antidérapante, talon tenu</td></tr>
+<tr><td>Personne seule, peur de rester au sol</td><td>Téléassistance ou détecteur de chute</td><td>Le porter aussi la nuit</td></tr>
+</tbody></table>
+<h3>Se lever en trois temps</h3>
+<p>C'est gratuit et c'est souvent ce qui change le plus. Avant de se mettre debout : s'asseoir au bord du lit, attendre quelques instants les pieds au sol, puis se lever en prenant appui. Si la tête tourne, on se rassoit. Écrivez-le sur un petit carton posé sur la table de nuit les premières semaines, le temps que l'habitude s'installe.</p>
+<h3>Un appui solide pour se redresser</h3>
+<p>Une poignée d'aide au lever se glisse sous le matelas et offre une prise pour s'asseoir puis se relever. Vérifiez qu'elle est bien maintenue (sangle ou plaque sous le matelas) et qu'elle ne bouge pas quand on tire dessus. <a href="{AMZ:poignee aide au lever lit}" """ + A + """>Voir les poignées d'aide au lever</a></p>
+<p>Attention, une poignée de lever n'est pas une barrière : elle aide à se redresser, elle n'empêche pas de tomber du lit. Les barrières de lit, elles, ne s'improvisent pas. Mal posées ou mal choisies, elles peuvent coincer un bras ou une jambe, ou pousser la personne à les enjamber. Demandez l'avis du médecin ou d'un ergothérapeute avant d'en installer.</p>
+<h3>De la lumière sans chercher l'interrupteur</h3>
+<p>Une veilleuse qui s'allume dès que les pieds touchent le sol règle d'un coup le problème de la pénombre. Le bon emplacement : une près du lit, une ou deux dans le couloir, une dans les toilettes. Un bandeau LED à détecteur collé sous le sommier éclaire le sol sans réveiller le conjoint. <a href="{AMZ:veilleuse detecteur de mouvement}" """ + A + """>Voir les veilleuses à détecteur</a> ou <a href="{AMZ:ruban led detecteur de mouvement lit}" """ + A + """>voir les bandeaux LED pour lit</a>. Notre <a href="{R}meilleure-veilleuse-detecteur-de-mouvement/">comparatif des veilleuses à détecteur</a> vous aide à choisir entre modèles sur prise, à piles ou rechargeables.</p>
+<p>Gardez aussi une lampe de chevet facile à allumer, tactile par exemple, pour les moments où l'on veut vraiment y voir clair. <a href="{AMZ:lampe de chevet tactile}" """ + A + """>Voir les lampes de chevet tactiles</a></p>
+<h3>Raccourcir le trajet</h3>
+<p>Quand les toilettes sont au bout d'un long couloir ou à un autre étage, une chaise percée dans la chambre évite le trajet le plus risqué. Beaucoup de personnes la refusent au début, par pudeur. Présentez-la comme une solution pour les nuits difficiles, pas comme un renoncement, et choisissez un modèle qui ressemble à un fauteuil. <a href="{AMZ:chaise percee avec accoudoirs}" """ + A + """>Voir les chaises percées</a></p>
+<p>Pour un homme, un urinal posé sur la table de nuit peut suffire. Et un conseil souvent oublié : mieux répartir les boissons dans la journée, en buvant davantage le matin et un peu moins après le dîner, à condition que le médecin soit d'accord. Il ne s'agit pas de moins boire au total.</p>
+<h2>Les erreurs fréquentes</h2>
+<ul>
+<li><strong>Le tapis de descente de lit.</strong> Joli et doux, mais il glisse ou fait trébucher. Retirez-le, ou fixez-le avec un antidérapant sur toute sa surface.</li>
+<li><strong>Le chemin encombré.</strong> Panier à linge, chaussures, fil de la lampe : faites le trajet vous-même dans le noir, vous verrez tout de suite ce qui gêne.</li>
+<li><strong>Le bouton d'appel posé sur la commode.</strong> Un détecteur de chute ou un médaillon de téléassistance ne sert à rien s'il est retiré pour dormir. Choisissez un modèle confortable à garder la nuit.</li>
+<li><strong>Le lit trop bas ou trop haut.</strong> Assis au bord, les pieds doivent être à plat au sol, genoux à peu près à angle droit.</li>
+</ul>
+<h2>Et si votre proche vit seul ?</h2>
+<p>Le plus grand danger d'une chute la nuit, c'est de rester au sol des heures sans pouvoir appeler. Un service de téléassistance, avec un médaillon ou une montre portés en permanence, permet de joindre une centrale d'écoute à toute heure. Certains appareils détectent aussi la chute automatiquement. Pour comprendre les différences, lisez notre guide <a href="{R}teleassistance-comment-ca-marche/">téléassistance : comment ça marche</a> et notre <a href="{R}meilleur-detecteur-de-chute/">comparatif des détecteurs de chute</a>. <a href="{AMZ:montre detection de chute senior}" """ + A + """>Voir les montres avec détection de chute</a></p>
+<p>Notre conseil : si votre proche est déjà tombé, commencez par la veilleuse et le moyen d'alerte. La veilleuse réduit le risque de chute, l'alerte réduit la gravité si elle arrive quand même. Les deux ensemble coûtent peu et rassurent tout le monde.</p>
+<h2>Quand faut-il consulter ?</h2>
+<p>Parlez-en au médecin traitant dès la première chute, même sans blessure, et plus encore si :</p>
+<ul>
+<li>la tête tourne régulièrement au lever ;</li>
+<li>les levers nocturnes pour uriner deviennent plus nombreux ;</li>
+<li>un nouveau médicament a été prescrit récemment, notamment pour dormir ou pour la tension ;</li>
+<li>la personne a du mal à se relever seule ou a peur de remarcher.</li>
+</ul>
+<p>Le médecin peut revoir les traitements, chercher une cause aux vertiges ou aux envies fréquentes, et prescrire des séances de kinésithérapie pour travailler l'équilibre et apprendre à se relever du sol. Il peut aussi orienter vers un ergothérapeute, qui vient voir la chambre et le trajet de nuit pour proposer les aménagements les plus adaptés. Le pharmacien est également de bon conseil pour repérer un médicament qui fait tourner la tête.</p>
+<p>Pour aller plus loin, retrouvez les bons gestes du quotidien dans notre guide pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a>, et le tour complet du logement dans <a href="{R}amenager-logement-personne-agee/">notre guide pour aménager le logement pièce par pièce</a>.</p>
+""",
+  faq=[("Pourquoi une personne âgée tombe-t-elle plus souvent la nuit ?", "Plusieurs fragilités se cumulent : lever trop rapide qui fait tourner la tête, pénombre, envie pressante d'uriner et réveil incomplet, parfois accentué par certains médicaments. Le trajet entre le lit et les toilettes est le moment le plus risqué."),
+       ("Que faire après une chute la nuit, même sans blessure ?", "En parler au médecin traitant, même si la personne s'est relevée seule. Une chute peut révéler un vertige, un effet de médicament ou une fatigue qui se soignent. Profitez-en pour sécuriser le trajet de nuit et mettre en place un moyen d'alerte."),
+       ("Faut-il installer des barrières de lit pour éviter les chutes ?", "Pas sans avis professionnel. Mal choisies ou mal posées, elles peuvent coincer un membre ou pousser la personne à les enjamber. Une poignée d'aide au lever, une veilleuse et un lit à la bonne hauteur sont souvent plus utiles. Demandez conseil au médecin ou à un ergothérapeute.")],
+  short="Chutes la nuit", cat="Sécurité")
