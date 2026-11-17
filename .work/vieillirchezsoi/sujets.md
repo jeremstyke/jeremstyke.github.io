@@ -2,33 +2,43 @@
 # Format : - [ ] slug/ | requête visée | catégorie | angle
 - [ ] livres-audio-personne-agee/ | livre audio pour personne âgée | Vie quotidienne | quand la vue baisse, comment écouter (enceinte simple, téléphone, tablette, casque), trouver des livres audio, installer avec son proche ; lien {AUDIBLE} vers l'essai gratuit en bonne place et liens {AMZ} vers les appareils
 - [ ] apa-allocation-personnalisee-autonomie/ | APA allocation personnalisée d'autonomie | Conseils pour les proches | qui y a droit, GIR, démarche auprès du département, ce qu'elle finance (aide à domicile, téléassistance, aménagements), montants seulement si lus sur service-public.fr ou pour-les-personnes-agees.gouv.fr avec la date
+- [ ] date-paiement-retraite/ | date de paiement de la retraite | Retraite | base et complémentaire, jours de versement, cas des jours fériés ; dates seulement si lues sur lassuranceretraite.fr ou agirc-arrco.fr pour l'année en cours, sinon expliquer la règle
 - [ ] siege-de-douche-ou-tabouret/ | siège de douche ou tabouret de douche | Salle de bains | aide au choix juste avant l'achat, selon l'équilibre et la place, renvoi vers le top sièges de douche
 - [ ] aide-menagere-caisse-de-retraite/ | aide ménagère caisse de retraite | Conseils pour les proches | aide de la caisse de retraite (Assurance retraite, Agirc-Arrco) pour les GIR 5 et 6, démarche, différence avec l'APA, sources officielles uniquement
 - [ ] quel-deambulateur-apres-une-chute/ | quel déambulateur après une chute | Se déplacer | cadre, 2 roues, rollator selon la situation, renvoi kinésithérapeute ou ergothérapeute, liens vers les tops
+- [ ] age-depart-retraite/ | âge de départ à la retraite | Retraite | âge légal selon l'année de naissance, durée d'assurance, taux plein ; réformes récentes : seulement ce qui est lu sur service-public.fr ou info-retraite.fr avec la date de vérification, aucune prévision
 - [ ] credit-impot-aide-a-domicile/ | crédit d'impôt aide à domicile senior | Conseils pour les proches | services à la personne, téléassistance, taux et plafond seulement si lus sur impots.gouv.fr ou service-public.fr, exemples chiffrés simples
 - [ ] fauteuil-releveur-1-ou-2-moteurs/ | fauteuil releveur 1 ou 2 moteurs | Chambre et repos | différences concrètes, pour qui, renvoi vers le top fauteuils releveurs
 - [ ] grille-aggir-gir/ | grille AGGIR GIR | Conseils pour les proches | les 6 GIR expliqués simplement, qui évalue, à quoi ça sert (APA, aides caisses de retraite), liens vers apa et aide ménagère
+- [ ] calcul-retraite/ | comment est calculée la retraite | Retraite | salaire annuel moyen, taux, trimestres, complémentaire en points, simulateur officiel (info-retraite.fr), exemple simple sans chiffre inventé
 - [ ] amenager-chambre-personne-agee/ | aménager la chambre d'une personne âgée | Chambre et repos | guide pilier de la pièce : lit, éclairage, barre de lit, chaise percée, relié à tous les tops du thème
 - [ ] carte-mobilite-inclusion-senior/ | carte mobilité inclusion personne âgée | Conseils pour les proches | mentions invalidité, priorité, stationnement, démarche MDPH ou département selon le GIR, sources officielles
 - [ ] securiser-escalier-personne-agee/ | sécuriser un escalier pour personne âgée | Sécurité | guide pilier : main courante, éclairage, monte-escalier, relié aux tops du thème
+- [ ] releve-de-carriere/ | relevé de carrière | Retraite | où le trouver, comment le vérifier, corriger une erreur, à quel âge s'en occuper
 - [ ] droits-aidant-familial/ | droits de l'aidant familial | Conseils pour les proches | congé de proche aidant, AJPA, droit au répit, où se renseigner ; montants seulement si lus sur service-public.fr avec la date
 - [ ] adapter-cuisine-personne-agee/ | adapter la cuisine d'une personne âgée | Vie quotidienne | guide pilier : rangements à hauteur, ustensiles adaptés, sécurité gaz et feu
 - [ ] demarches-depart-a-la-retraite/ | démarches départ à la retraite | Conseils pour les proches | calendrier des démarches (info-retraite.fr, demande unique), pièces, erreurs fréquentes ; terminer sur préparer son logement pour la suite avec lien vers le guide pilier
+- [ ] retraite-complementaire-agirc-arrco/ | retraite complémentaire Agirc-Arrco | Retraite | points, valeur du point seulement si lue sur agirc-arrco.fr avec la date, démarche, coefficient de solidarité si vérifié
 - [ ] adapter-salle-de-bain-personne-agee/ | adapter la salle de bain d'une personne âgée | Salle de bains | priorités, petits achats puis travaux
 - [ ] pension-de-reversion/ | pension de réversion | Conseils pour les proches | qui y a droit, régime de base et complémentaire, démarche, conditions seulement si lues sur info-retraite.fr ou service-public.fr
 - [ ] lit-medicalise-achat-ou-location/ | lit médicalisé achat ou location | Chambre et repos | location fréquente, prescription, vérifier sur ameli
+- [ ] cumul-emploi-retraite/ | cumul emploi retraite | Retraite | conditions, cumul intégral ou plafonné, démarches ; règles seulement si lues sur service-public.fr
 - [ ] aspa-minimum-vieillesse/ | ASPA minimum vieillesse | Conseils pour les proches | conditions, démarche, récupération sur succession ; montants seulement si lus sur service-public.fr avec la date
 - [ ] coussin-anti-escarres/ | coussin anti-escarres | Chambre et repos | types, rester général, renvoi professionnel de santé
 - [ ] occupations-retraite-a-la-maison/ | que faire à la retraite à la maison | Vie quotidienne | idées concrètes (lecture et livres audio, puzzles, jardinage sur balcon, oiseaux du jardin, jeux de mémoire, appels vidéo) avec liens {AMZ}, un lien {AUDIBLE} et un lien vers le site frère si pertinent
+- [ ] retraite-progressive/ | retraite progressive | Retraite | principe, conditions, démarche ; seulement des règles vérifiées sur sources officielles avec la date
 - [ ] chaise-percee/ | chaise percée | Chambre et repos | usage nocturne, accoudoirs, entretien
 - [ ] cadre-de-toilettes/ | cadre de toilettes accoudoirs | Salle de bains | réglage, sans perçage
 - [ ] fauteuil-roulant-de-transfert/ | fauteuil roulant de transfert | Se déplacer | poids, pliage, usage occasionnel
+- [ ] rachat-de-trimestres/ | rachat de trimestres | Retraite | qui peut, pour quelles périodes, est-ce rentable (exemples sans montant inventé), démarche
 - [ ] rampe-acces-seuil/ | rampe d'accès seuil de porte | Se déplacer | hauteur de marche, pente, portable ou fixe
 - [ ] main-courante-escalier/ | main courante escalier | Sécurité | des deux côtés, fixation, éclairage
 - [ ] couverts-ergonomiques/ | couverts ergonomiques | Vie quotidienne | manche épais, coudés, vaisselle antidérapante
+- [ ] impots-retraites/ | impôts des retraités | Retraite | abattement de 10 %, CSG selon le revenu fiscal, demi-part ; taux et plafonds seulement si lus sur impots.gouv.fr ou service-public.fr avec la date
 - [ ] horloge-calendrier-senior/ | horloge calendrier senior | Vie quotidienne | lisibilité, rappels
 - [ ] loupe-electronique/ | loupe électronique de lecture | Vie quotidienne | grossissement, éclairage, renvoi ophtalmologiste
 - [ ] casque-tv-senior/ | casque TV sans fil senior | Vie quotidienne | réglage volume, recharge, confort, renvoi audioprothésiste
+- [ ] revalorisation-retraite/ | revalorisation des retraites | Retraite | comment ça marche, date habituelle, taux de l'année seulement s'il est publié et lu sur une source officielle, sinon expliquer le mécanisme
 - [ ] barriere-de-lit/ | barrière de lit adulte | Chambre et repos | prudence, alternatives, avis professionnel
 - [ ] table-de-lit/ | table de lit à roulettes | Chambre et repos | hauteur réglable, plateau inclinable
 - [ ] chaussures-personne-agee/ | chaussures pour personne âgée | Se déplacer | maintien, semelle, fermeture velcro
