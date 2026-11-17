@@ -13,6 +13,7 @@ OUT = os.path.join(ROOT, 'docs')
 DOMAIN = 'lesoiseauxdujardin.fr'
 BASE = os.environ.get('LOJ_BASE', 'https://' + DOMAIN)
 SITE = 'Les oiseaux du jardin'
+LLMS_INTRO = "Les oiseaux du jardin aide à reconnaître, nourrir et accueillir les oiseaux du jardin en France : fiches espèces, pages d'identification (par couleur, taille, chant), conseils pour nourrir les oiseaux et installer un nichoir, comparatifs de mangeoires, nichoirs avec caméra et jumelles. Les faits sur les oiseaux viennent de sources sérieuses (LPO, oiseaux.net, INPN). Les liens vers Amazon sont des liens d'affiliation."
 TAG = 'lesoiseauxdujardin-21'   # identifiant Amazon Partenaires
 CONTACT = 'contact@cvlibre.com'
 YEAR = 2026
@@ -265,6 +266,22 @@ def build():
         '  <url><loc>%s/%s</loc><lastmod>%s</lastmod><priority>%s</priority></url>\n' % (BASE, p, TODAY, pr) for p, pr in PAGES) + '</urlset>\n'
     open(os.path.join(OUT, 'sitemap.xml'), 'w', encoding='utf-8').write(sm)
     open(os.path.join(OUT, 'robots.txt'), 'w').write('User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n' % BASE)
+    # llms.txt : résumé du site pour les IA (généré à chaque build)
+    try:
+        import html as _h
+        _out = ['# ' + SITE, '', '> ' + LLMS_INTRO, '', 'Site : ' + BASE + '/', 'Langue : français', '', '## Pages']
+        for _loc in re.findall(r'<loc>([^<]+)</loc>', sm):
+            _rel = _loc[len(BASE):].strip('/')
+            _f = os.path.join(OUT, _rel, 'index.html') if _rel else os.path.join(OUT, 'index.html')
+            if not os.path.exists(_f): continue
+            _t = open(_f, encoding='utf-8').read()
+            _ti = re.search(r'<title>(.*?)</title>', _t, re.S)
+            _de = re.search(r'<meta name="description" content="([^"]*)"', _t)
+            if not _ti or 'http-equiv="refresh"' in _t: continue
+            _out.append('- [%s](%s)%s' % (_h.unescape(_ti.group(1)).strip(), _loc, (': ' + _h.unescape(_de.group(1)).strip()) if _de else ''))
+        open(os.path.join(OUT, 'llms.txt'), 'w', encoding='utf-8').write('\n'.join(_out) + '\n')
+    except Exception as _e:
+        print('llms.txt non généré :', _e)
     open(os.path.join(OUT, 'CNAME'), 'w').write(DOMAIN + '\n')
     open(os.path.join(OUT, '.nojekyll'), 'w').write('')
     try: shutil.copy(os.path.join(OUT, 'assets', 'favicon.ico'), os.path.join(OUT, 'favicon.ico'))

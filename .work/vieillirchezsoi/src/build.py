@@ -20,6 +20,7 @@ else:
     OUT = os.path.join(os.path.abspath(os.path.join(HERE, '..', '..', '..')), 'vieillirchezsoi')
     BASE = os.environ.get('VCS_BASE', 'https://jeremstyke.github.io/vieillirchezsoi')
 SITE = 'Vieillir chez soi'
+LLMS_INTRO = "Vieillir chez soi aide les seniors et leurs proches aidants à rester à la maison en sécurité : guides pratiques pour adapter le logement pièce par pièce, comparatifs de matériel (aides à la marche, salle de bain, fauteuils releveurs, téléassistance), explications sur les aides (APA, aides des caisses de retraite, crédit d'impôt) et sur la retraite. Les informations sur les aides et la retraite sont vérifiées sur les sites officiels (service-public.fr, info-retraite.fr, lassuranceretraite.fr). Les liens vers Amazon sont des liens d'affiliation."
 TAG = 'viellirchezsoi-21'   # identifiant Amazon Partenaires (orthographe exacte du compte)
 CONTACT = 'contact@vieillir-chez-soi.fr'
 YEAR = 2026
@@ -383,6 +384,22 @@ def build():
         except Exception: pass
         open(os.path.join(OUT, 'da4540821acf4048569bad7fbedc3ee1.txt'), 'w').write('da4540821acf4048569bad7fbedc3ee1')  # cle IndexNow
     open(os.path.join(OUT, 'robots.txt'), 'w').write('User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n' % BASE)
+    # llms.txt : résumé du site pour les IA (généré à chaque build)
+    try:
+        import html as _h
+        _out = ['# ' + SITE, '', '> ' + LLMS_INTRO, '', 'Site : ' + BASE + '/', 'Langue : français', '', '## Pages']
+        for _loc in re.findall(r'<loc>([^<]+)</loc>', sm):
+            _rel = _loc[len(BASE):].strip('/')
+            _f = os.path.join(OUT, _rel, 'index.html') if _rel else os.path.join(OUT, 'index.html')
+            if not os.path.exists(_f): continue
+            _t = open(_f, encoding='utf-8').read()
+            _ti = re.search(r'<title>(.*?)</title>', _t, re.S)
+            _de = re.search(r'<meta name="description" content="([^"]*)"', _t)
+            if not _ti or 'http-equiv="refresh"' in _t: continue
+            _out.append('- [%s](%s)%s' % (_h.unescape(_ti.group(1)).strip(), _loc, (': ' + _h.unescape(_de.group(1)).strip()) if _de else ''))
+        open(os.path.join(OUT, 'llms.txt'), 'w', encoding='utf-8').write('\n'.join(_out) + '\n')
+    except Exception as _e:
+        print('llms.txt non généré :', _e)
     if not STANDALONE:
         # L'ancienne adresse (jeremstyke.github.io/vieillirchezsoi/) ne sert plus que des renvois vers le domaine.
         # Le vrai site est construit dans le dépôt jeremstyke/viellirchezsoi (synchronisation automatique toutes les heures).
