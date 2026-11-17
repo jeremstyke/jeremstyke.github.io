@@ -11,8 +11,8 @@
 - [x] merle-noir/ | merle noir | Observer | fiche espèce : mâle, femelle, chant, que lui donner (fruits, pas de pain)
 - [x] oiseau-jaune-et-vert/ | oiseau jaune et vert | Observer | identification : verdier, chardonneret, serin, mésange bleue, pic vert
 - [x] moineau-domestique/ | moineau | Observer | fiche espèce : déclin (sources LPO/Vigie-Nature), nichoirs collectifs, graines
-- [ ] oiseau-noir-et-blanc-longue-queue/ | oiseau noir et blanc longue queue | Observer | identification : pie bavarde, bergeronnette grise, mésange à longue queue
-- [ ] chouette-hulotte/ | chouette hulotte | Observer | fiche espèce : chant la nuit, l'attirer au jardin, nichoir à chouette, différence avec le hibou
+- [x] oiseau-noir-et-blanc-longue-queue/ | oiseau noir et blanc longue queue | Observer | identification : pie bavarde, bergeronnette grise, mésange à longue queue
+- [x] chouette-hulotte/ | chouette hulotte | Observer | fiche espèce : chant la nuit, l'attirer au jardin, nichoir à chouette, différence avec le hibou
 - [ ] martinet-noir/ | martinet noir | Observer | fiche espèce : reconnaître, vit en vol, nichoir à martinets, période de présence
 - [ ] difference-hibou-chouette/ | différence hibou chouette | Observer | identification : aigrettes, espèces courantes près des maisons (hulotte, effraie, chevêche, moyen-duc)
 - [ ] pinson-des-arbres/ | pinson des arbres | Observer | fiche espèce : mâle et femelle, nourriture au sol

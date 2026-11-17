@@ -437,6 +437,7 @@ g("installer-un-nichoir/",
 <tr><td>Hirondelle de fenêtre</td><td>Nid artificiel sous une corniche</td><td>4 m minimum, l'idéal étant plus haut</td></tr>
 </tbody></table>
 <p>Pour les nichoirs semi-ouverts en général (rouge-gorge, rougequeue noir, bergeronnette des ruisseaux, gobemouche gris), la LPO et la Ligue belge indiquent 1,5 à 3 m de hauteur, contre un mur ou derrière un arbre, sous une végétation dense qui les cache des prédateurs.</p>
+<p>Les rapaces nocturnes sont un cas à part : le nichoir de la <a href="{R}chouette-hulotte/">chouette hulotte</a> est une grande caisse avec une entrée d'environ 12 cm, posée à plusieurs mètres de haut dans un grand arbre.</p>
 <p>La Ligue belge présente le trou de 32 mm comme « universel » : il convient aussi bien à la charbonnière qu'à la mésange bleue, aux moineaux ou à la sittelle. Si vous ne voulez accueillir que les petites mésanges (bleue, noire, nonnette, huppée), choisissez un trou de 26 ou 28 mm. Pour les hirondelles de fenêtre, elle conseille un emplacement sous une avancée de toit, plutôt côté rue, mais pas juste au-dessus d'une porte, avec une planchette 40 à 50 cm sous les nids pour recueillir les fientes. Vous pouvez aussi lire notre guide <a href="{R}meilleures-jumelles-oiseaux/">pour choisir des jumelles</a> afin de les observer de loin.</p>
 
 <h2>À l'abri des chats et des autres prédateurs</h2>
@@ -613,6 +614,7 @@ g("meilleures-jumelles-oiseaux/",
 <li><strong>L'essai</strong> : la fiche conseille de tester et de comparer les jumelles avant l'achat, et de signaler au vendeur une forte différence de correction entre vos deux yeux. Si vous le pouvez, essayez le modèle en boutique, ou vérifiez les conditions de retour avant de commander.</li>
 </ul>
 <p>Pour profiter de vos jumelles, encore faut-il que les oiseaux viennent au jardin. Notre <a href="{R}nourrir-les-oiseaux-du-jardin/">guide pour bien nourrir les oiseaux du jardin</a> explique quand et comment les aider, et notre article sur <a href="{R}installer-un-nichoir/">l'installation d'un nichoir</a> vous aide à accueillir une nichée. Si vous préférez observer sans être sur place, regardez aussi notre sélection des <a href="{R}meilleure-mangeoire-connectee/">meilleures mangeoires connectées</a>.</p>
+<p>Vous cherchez des jumelles à offrir ? Notre liste d'<a href="{R}cadeau-passionne-oiseaux/">idées de cadeau pour un passionné d'oiseaux</a> les compare à d'autres présents, du guide au nichoir avec caméra.</p>
 """,
   faq=[("Faut-il choisir des jumelles 8x42 ou 10x42 pour observer les oiseaux ?", "Le premier chiffre est le grossissement, le second le diamètre de l'objectif en millimètres. Selon la fiche de la Station ornithologique suisse, de BirdLife Suisse et de Nos Oiseaux, le 8x offre un champ plus large et une image plus stable, tandis que le 10x montre plus de détails et est apprécié de nombreux ornithologues. Pour un jardin, où les oiseaux sont souvent proches, le 8x42 est un choix confortable."),
        ("Des jumelles étanches sont-elles vraiment utiles ?", "Oui, si vous observez dehors par tous les temps. La fiche suisse recommande des jumelles étanches et remplies d'azote, ce qui protège de l'humidité et évite la buée à l'intérieur. Les fabricants l'indiquent de façon différente : profondeur et durée d'immersion, indice IPX7, ou simple mention « étanche »."),
@@ -2061,7 +2063,7 @@ g("oiseau-tete-noire/",
 <p>Et la petite mésange à calotte noire et minuscule bavette, gris brun sans tache sur la nuque ? C'est la <strong>mésange nonnette</strong>, que nous présentons dans notre page sur le <a href="{R}petit-oiseau-gris-jardin/">petit oiseau gris du jardin</a>. Elle ressemble beaucoup à la mésange boréale : selon oiseaux.net, la voix est le meilleur moyen de les séparer.</p>
 
 <h2>Et si c'est un gros oiseau noir ?</h2>
-<p>Si l'oiseau est entièrement noir, et pas seulement la tête, vous avez sans doute affaire à un merle. Voyez notre fiche du <a href="{R}merle-noir/">merle noir</a> et notre page sur l'<a href="{R}oiseau-noir-bec-jaune/">oiseau noir au bec jaune</a>.</p>
+<p>Si l'oiseau est entièrement noir, et pas seulement la tête, vous avez sans doute affaire à un merle. Voyez notre fiche du <a href="{R}merle-noir/">merle noir</a> et notre page sur l'<a href="{R}oiseau-noir-bec-jaune/">oiseau noir au bec jaune</a>. Et s'il est noir et blanc avec une longue queue, consultez notre page sur l'<a href="{R}oiseau-noir-et-blanc-longue-queue/">oiseau noir et blanc à longue queue</a> : pie, bergeronnette ou mésange à longue queue.</p>
 
 <h2>Comment confirmer l'espèce ?</h2>
 <p>Trois réflexes. D'abord, notez le ventre : jaune, rose, ou ni l'un ni l'autre. Ensuite, la nuque : une tache blanche signe la mésange noire. Enfin, écoutez. Les applications comme Merlin Bird ID ou BirdNET proposent un nom à partir d'un enregistrement fait au téléphone ; prenez leur réponse comme une piste, surtout pour la nonnette et la boréale.</p>
@@ -2548,3 +2550,291 @@ g("meilleure-mangeoire-fenetre/",
        ("Avez-vous testé ces mangeoires ?",
         "Non. Cette sélection repose sur les fiches publiées par les fabricants et les revendeurs. Quand une donnée manque, nous l'indiquons comme non précisée.")],
   short="Top 10 mangeoires de fenêtre", cat="Mangeoires")
+
+AUTO_META['oiseau-noir-et-blanc-longue-queue/'] = ('🪶', 'ciel')
+g("oiseau-noir-et-blanc-longue-queue/",
+  "Oiseau noir et blanc à longue queue : pie ou bergeronnette ?",
+  "Oiseau noir et blanc à longue queue : comment savoir lequel c'est",
+  "Grand et bruyant, c'est la pie bavarde. Petit et au sol, la bergeronnette grise. En bande dans les arbres, la mésange à longue queue. Les critères simples.",
+  """
+<p>Un oiseau noir et blanc avec une longue queue, nettement plus grand que les petits oiseaux de la mangeoire et qui jacasse fort : c'est presque toujours une <strong>pie bavarde</strong>. S'il est petit et trottine sur la pelouse en balançant la queue, pensez plutôt à la <strong>bergeronnette grise</strong>. Et si vous voyez une petite boule de plumes avec une queue démesurée, en groupe dans une haie, c'est la <strong>mésange à longue queue</strong>.</p>
+<p>La taille règle la question neuf fois sur dix. La pie fait facilement deux fois et demie la longueur des deux autres.</p>
+{CTA}
+
+<h2>Quelle taille faisait l'oiseau ?</h2>
+<p>Commencez par là, avant même les couleurs. Une pie dépasse les 40 cm, alors que la bergeronnette et la mésange à longue queue restent sous les 20 cm, longue queue comprise. Et chez la mésange, la queue fait une bonne partie de la longueur : le corps paraît minuscule.</p>
+<table><thead><tr><th>Critère</th><th>Pie bavarde</th><th>Bergeronnette grise</th><th>Mésange à longue queue</th></tr></thead><tbody>
+<tr><td>Longueur</td><td>40 à 51 cm</td><td>18 cm</td><td>16 cm, queue comprise</td></tr>
+<tr><td>Bec</td><td>Fort, noir</td><td>Fin, noir</td><td>Très court</td></tr>
+<tr><td>Couleurs</td><td>Noir et blanc franc, queue à reflets verts</td><td>Calotte, nuque et bavette noires, dos gris, face blanche</td><td>Noir, blanc et une touche brun rosé sur l'aile</td></tr>
+<tr><td>Où la voir</td><td>Dans les arbres, sur les toits, au sol</td><td>Au sol, sur la pelouse, les toits plats, les parkings</td><td>Dans les buissons et les arbres, rarement au sol</td></tr>
+<tr><td>Comportement</td><td>Seule ou en couple, cris secs et répétés</td><td>Marche vite, queue qui bat de haut en bas</td><td>En petite bande qui passe d'arbre en arbre</td></tr>
+<tr><td>Quand</td><td>Toute l'année</td><td>Toute l'année dans beaucoup de régions, migratrice partielle</td><td>Surtout remarquée en hiver, en groupes</td></tr>
+</tbody></table>
+
+<h2>La pie bavarde : le grand oiseau noir et blanc qui jacasse</h2>
+<p>Difficile de la manquer. Noir et blanc bien tranché, longue queue aux reflets vert brillant, œil noir. De près et au soleil, les ailes et la queue prennent des reflets bleus et verts que l'on ne soupçonne pas de loin. Mâle, femelle et jeunes se ressemblent ; le jeune qui vient de quitter le nid se reconnaît surtout à sa queue plus courte.</p>
+<p>Elle est presque totalement sédentaire : selon la SHNA-OFAB, elle s'éloigne rarement à plus de 10 km de son lieu de naissance. Elle vit volontiers près des maisons, dans les parcs et les jardins qui ont de grands arbres. En hiver, les pies se regroupent la nuit en dortoirs de quelques dizaines d'oiseaux.</p>
+<p>Son nid aussi la trahit : une grosse boule de branchages perchée haut dans un arbre, coiffée d'un dôme avec une entrée sur le côté. Le couple en construit un nouveau chaque année, à la fin de l'hiver.</p>
+<p><strong>Et sa mauvaise réputation ?</strong> La pie mange de tout, y compris des œufs et des oisillons, c'est vrai. Mais la même fiche rappelle que les invertébrés (limaces, insectes) font plus de 80 % de son alimentation, et que les nids de petits passereaux pèsent environ 2 % de son régime au printemps et en été. Quant à la pie voleuse d'objets brillants, cela concerne des oiseaux apprivoisés ; une pie sauvage cherche surtout ses propres cachettes de nourriture.</p>
+
+<h2>La bergeronnette grise : la petite qui hoche la queue sur la pelouse</h2>
+<p>Elle marche vite, s'arrête net, repart, et sa longue queue noire et blanche monte et descend sans arrêt. C'est ce manège qui lui vaut son surnom populaire de hoche-queue. L'adulte a une calotte et une nuque noires, une bavette noire, le dos gris et une large bande blanche de la face à l'épaule. La femelle ressemble au mâle, avec en général un dos plus clair et moins de noir sur la tête.</p>
+<p>Le jeune déroute davantage : pas de calotte noire, une tête mêlée de gris et de blanc. Par exemple, si vous voyez en fin d'été un oiseau gris pâle et fin qui court sur la terrasse avec le même balancement de queue, c'est probablement un jeune.</p>
+<p>Elle se nourrit d'insectes, de petits mollusques et de quelques graines, qu'elle chasse sur les pelouses ou autour d'un tas de compost. En hiver, vous pouvez croiser une forme au dos plus sombre, la bergeronnette de Yarrell. Et si la queue est bordée de jaune vif, vous avez affaire à sa cousine, la bergeronnette des ruisseaux.</p>
+
+<h2>La mésange à longue queue : la boule de plumes en bande</h2>
+<p>Elle pèse 7 à 9 grammes, autant dire presque rien, et sa queue représente une bonne partie de ses 16 cm. Tête blanche barrée d'une bande noire au-dessus de l'œil, ailes noires et blanches avec une touche brun rosé, dessous blanc sale, bec minuscule. Mâle et femelle sont identiques. Le jeune a une tête plus sombre et un cercle rouge autour de l'œil.</p>
+<p>On la repère rarement seule. En hiver, elle passe dans les jardins en petites bandes bavardes qui fouillent écorces et buissons à la recherche de petits insectes et d'araignées. L'observatoire Oiseaux des jardins précise qu'elle ne fréquente pas spécialement les mangeoires, mais qu'elle vient volontiers se suspendre aux boules de graisse.</p>
+<p>Elle n'a rien à voir avec la <a href="{R}mesange-charbonniere/">mésange charbonnière</a> ou la <a href="{R}mesange-bleue/">mésange bleue</a> malgré son nom : sa silhouette et sa queue suffisent à la distinguer.</p>
+
+<h2>Comment confirmer ce que vous avez vu ?</h2>
+<p>Trois réflexes aident beaucoup. D'abord, notez où était l'oiseau : à terre sur la pelouse, haut dans un arbre, en groupe dans une haie. Ensuite, écoutez : le jacassement sec de la pie ne ressemble à rien d'autre, tandis que les mésanges à longue queue se suivent en émettant de petits cris fins et continus. Enfin, une application d'identification par le chant, comme Merlin Bird ID, peut vous mettre sur la piste ; vérifiez toujours son résultat avec un guide.</p>
+<p>Pour ces trois espèces, une paire de jumelles 8x42 change tout, surtout pour la mésange à longue queue qui ne tient pas en place. Notre comparatif des <a href="{R}meilleures-jumelles-oiseaux/">meilleures jumelles pour observer les oiseaux</a> vous aide à choisir.</p>
+<p><strong>Jumelles 8x42</strong> : <a href="{AMZ:Nikon Prostaff P7 8x42}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Guide avec les chants</strong> : <a href="{AMZ:Guide des oiseaux de France Belin Morin}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment attirer les petits sans nourrir toutes les pies ?</h2>
+<p>C'est la vraie question pour beaucoup de jardins. La SHNA-OFAB donne des conseils simples : ne pas laisser de grosses quantités de graines en libre-service, et accrocher la nourriture à des branches d'arbustes où seuls les petits oiseaux peuvent s'agripper. Une mangeoire entourée d'une cage, ou un silo dont les perchoirs se ferment sous le poids d'un gros oiseau, fait le même travail.</p>
+<p>Pour la mésange à longue queue, misez sur la graisse : un pain ou une boule sans filet, dans un support en métal. Pour la bergeronnette, rien à acheter : une pelouse un peu vivante, sans insecticide, lui suffit.</p>
+<p><strong>Mangeoire avec cage de protection</strong> : <a href="{AMZ:mangeoire oiseaux cage protection petits oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Support pour boules de graisse</strong> : <a href="{AMZ:support boule de graisse metal oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Silo qui se ferme sous le poids</strong> : <a href="{AMZ:Squirrel Buster Legacy}" """ + A + """>Voir sur Amazon</a></p>
+<p>Côté nichoirs, la SHNA-OFAB conseille une plaque métallique autour du trou d'envol pour éviter qu'il soit agrandi, et des buissons épineux ou touffus (aubépine, églantier, sureau noir) où les petits oiseaux nichent à l'abri. Notre guide pour <a href="{R}installer-un-nichoir/">installer un nichoir</a> détaille la pose, et notre comparatif de la <a href="{R}meilleure-mangeoire-oiseaux/">meilleure mangeoire pour oiseaux</a> présente les modèles qui trient les visiteurs. Pour le reste, notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a> explique quoi donner et quand.</p>
+
+<p class="sources"><strong>Sources</strong> : <a href="https://shna-ofab.fr/moxieFiles/sos_nature/sos_oiseaux/documents_a_telecharger/fiche_pie_bavarde_interactif.pdf" target="_blank" rel="noopener">SHNA-OFAB : fiche SOS Nature, la pie bavarde</a> ; <a href="https://cdnfiles2.biolovision.net/www.oiseauxdesjardins.fr/pdffiles/news/Fiche_espaceBG-9224.pdf" target="_blank" rel="noopener">Oiseaux des jardins (LPO, MNHN) : fiche bergeronnette grise</a> ; <a href="https://cdnfiles2.biolovision.net/www.oiseauxdesjardins.fr/pdffiles/news/Fiche_especeMLQ-5665.pdf" target="_blank" rel="noopener">Oiseaux des jardins (LPO, MNHN) : fiche mésange à longue queue</a> (vérifié le 17 novembre 2026)</p>
+""",
+  faq=[("Quel est l'oiseau noir et blanc avec une longue queue le plus courant au jardin ?",
+        "La pie bavarde. Elle mesure 40 à 51 cm, vit près des maisons toute l'année et se repère à son jacassement. Si l'oiseau est petit et marche sur la pelouse, c'est plutôt une bergeronnette grise."),
+       ("Pourquoi la bergeronnette remue-t-elle la queue ?",
+        "C'est son comportement typique, qui lui vaut le surnom de hoche-queue : sa longue queue noire et blanche monte et descend presque sans arrêt pendant qu'elle marche et s'arrête pour attraper des insectes."),
+       ("La mésange à longue queue vient-elle aux mangeoires ?",
+        "Peu aux mangeoires à graines, selon l'observatoire Oiseaux des jardins, mais elle se suspend volontiers aux boules de graisse, surtout en hiver quand elle circule en petites bandes.")],
+  short="Oiseau noir et blanc à longue queue", cat="Observer")
+
+AUTO_META['chouette-hulotte/'] = ('🦉', 'lilas')
+g("chouette-hulotte/",
+  "Chouette hulotte : chant la nuit, nichoir et comment l'aider",
+  "Chouette hulotte : reconnaître son chant et l'accueillir au jardin",
+  "Le « hou-hou » de la nuit, c'est le mâle de chouette hulotte. Comment la reconnaître, quand l'entendre, quel nichoir poser et que faire d'un jeune tombé au sol.",
+  """
+<p>Si vous entendez la nuit un long « houuu » tremblé, suivi parfois d'un « kiouik » aigu, c'est presque sûrement la <strong>chouette hulotte</strong>. Le premier est le chant du mâle, le second le cri de la femelle qui lui répond. C'est le rapace nocturne le plus répandu en France, et un vieux jardin arboré peut très bien en abriter une.</p>
+<p>Elle ne viendra jamais à la mangeoire. Mais un grand arbre, un peu de calme et éventuellement un nichoir adapté peuvent la convaincre de rester.</p>
+{CTA}
+
+<h2>Comment reconnaître une chouette hulotte ?</h2>
+<p>Une grosse tête ronde, sans plumes dressées, et de grands yeux sombres. Le plumage varie d'un oiseau à l'autre : il existe des hulottes grises et des hulottes rousses, et cette couleur ne dépend ni du sexe ni de l'âge, précise l'INPN. Mâle et femelle se ressemblent, la femelle étant un peu plus grande.</p>
+<p>Les chiffres varient selon les sources, ce qui est normal pour une espèce aussi variable :</p>
+<table><thead><tr><th>Mesure</th><th>Oiseaux des jardins (LPO, MNHN)</th><th>INPN (MNHN)</th><th>Livret Nuit de la chouette (PNR)</th></tr></thead><tbody>
+<tr><td>Longueur</td><td>39 cm</td><td>40 à 42 cm</td><td>37 à 46 cm</td></tr>
+<tr><td>Envergure</td><td>94 à 104 cm</td><td>93 cm (mâle) à 98 cm (femelle) en moyenne</td><td>90 à 100 cm</td></tr>
+<tr><td>Poids</td><td>420 à 590 g</td><td>330 à 475 g (mâle), 400 à 630 g (femelle)</td><td>330 à 700 g</td></tr>
+</tbody></table>
+<p>Les jeunes de quelques semaines gardent un reste de duvet pâle sur la tête.</p>
+
+<h2>Chouette ou hibou : quelle différence ?</h2>
+<p>Regardez le dessus de la tête. Les hiboux adultes portent des aigrettes, ces touffes de plumes qui ressemblent à des oreilles mais ne servent pas à entendre. La hulotte n'en a pas : sa tête est parfaitement ronde. Le hibou le plus proche des jardins, le moyen-duc, a des aigrettes de 3 à 4 cm et des yeux orangés, bien différents des yeux sombres de la hulotte.</p>
+<p>Autre chouette de nos campagnes, l'effraie est très claire, presque blanche dessous, et pousse un chuintement prolongé plutôt qu'un hululement. La chevêche d'Athéna, elle, est petite, tachetée de blanc, avec des yeux jaunes.</p>
+
+<h2>Pourquoi entend-on la hulotte la nuit, et à quelle saison ?</h2>
+<p>Le mâle chante pour défendre son territoire et appeler sa femelle. Selon le livret Nuit de la chouette publié par le parc naturel de la Haute Vallée de Chevreuse, le hululement du mâle peut s'entendre tout au long de l'année, et le cri de la femelle sert de lien au couple. La reproduction commence tôt : l'INPN indique une ponte vers janvier ou février, de 1 à 6 œufs, couvés 28 à 30 jours.</p>
+<p>Par exemple, si vous entendez un duo « hou » et « kiouik » derrière la maison en novembre, il y a de bonnes chances qu'un couple occupe le secteur, et la ponte n'est plus très loin.</p>
+<p>Pour vérifier, une application de reconnaissance des chants comme Merlin Bird ID donne une piste, et un guide avec des enregistrements permet de comparer.</p>
+<p><strong>Guide avec les chants à écouter</strong> : <a href="{AMZ:Guide des oiseaux de France Belin Morin}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Où vit-elle et que mange-t-elle ?</h2>
+<p>C'est un oiseau sédentaire, d'abord forestier, mais qui s'installe dans les petits bois, les parcs et jusque dans les villes, à condition de trouver de grands arbres. La LPO Champagne-Ardenne la dit présente toute l'année partout en France, sauf en Corse et au-dessus de 1 500 m d'altitude.</p>
+<p>Elle chasse surtout de petits rongeurs comme les campagnols et les mulots, mais aussi des oiseaux (notamment en ville), des amphibiens, de gros insectes et même des chauves-souris, selon l'INPN. Inutile donc de lui offrir quoi que ce soit : nourrir une chouette n'a aucun intérêt et peut la rendre dépendante. Son meilleur garde-manger, c'est un jardin sans raticide ni pesticide, puisque les rapaces nocturnes s'empoisonnent en mangeant des proies contaminées.</p>
+
+<h2>Quel nichoir pour la chouette hulotte ?</h2>
+<p>Elle niche dans les cavités amples des vieux arbres, et parfois dans d'anciens nids de corneilles ou de rapaces. Quand ces cavités manquent, un nichoir peut l'aider, mais ce n'est pas un nichoir de jardin ordinaire : c'est une grande caisse à fixer haut.</p>
+<ul>
+<li><strong>Le trou d'envol</strong> : environ 12 cm. La LPO Champagne-Ardenne l'indique dans sa fiche de construction, et la boutique LPO annonce une entrée de 12 x 12 cm pour le modèle Schwegler 1WK.</li>
+<li><strong>La hauteur</strong> : les sources divergent. La boutique LPO parle d'une pose entre 4 et 6 m pour le Schwegler, la LPO Champagne-Ardenne conseille 6 à 10 m, dans un arbre ou contre la façade d'un grand bâtiment.</li>
+<li><strong>L'orientation</strong> : trou d'envol à l'opposé des vents dominants, en général vers le sud-est, et loin d'une route.</li>
+<li><strong>Le moment</strong> : dès l'automne, pour qu'il soit en place avant les pontes de fin d'hiver. Nettoyage en septembre ou octobre, jamais pendant la nidification.</li>
+</ul>
+<p><strong>Notre conseil</strong> : si vous n'avez pas d'arbre solide assez grand, ne posez pas de nichoir à hulotte. Gardez plutôt les vieux arbres creux et les branches mortes qui ne menacent personne, c'est ce qui l'aide le plus. Et si vous en posez un, prévoyez une échelle sûre et quelqu'un pour vous aider : le modèle en béton de bois de Schwegler pèse 18 kg selon la boutique LPO.</p>
+<p><strong>Nichoir à chouette hulotte</strong> : <a href="{AMZ:Schwegler 1WK nichoir chouette hulotte}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Nichoir à chouette en bois</strong> : <a href="{AMZ:nichoir chouette hulotte bois}" """ + A + """>Voir sur Amazon</a></p>
+<p>Les règles générales de pose sont dans notre guide pour <a href="{R}installer-un-nichoir/">installer un nichoir</a>.</p>
+
+<h2>Peut-on la filmer ou l'observer sans la déranger ?</h2>
+<p>Oui, à distance. Un piège photo à infrarouge posé près d'un arbre qu'elle fréquente permet de la voir passer sans lumière gênante. Pour un nichoir, une caméra intérieure montée avant la saison évite toute visite pendant la couvaison. Notre comparatif du <a href="{R}meilleur-nichoir-camera/">meilleur nichoir avec caméra</a> explique les différences entre wifi et filaire ; vérifiez que la caméra choisie convient à un grand nichoir. Au crépuscule, de bonnes jumelles lumineuses aident aussi : voyez nos <a href="{R}meilleures-jumelles-oiseaux/">meilleures jumelles pour les oiseaux</a>.</p>
+<p><strong>Piège photo avec vision nocturne</strong> : <a href="{AMZ:piege photo vision nocturne infrarouge}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Jumelles 8x42 lumineuses</strong> : <a href="{AMZ:Zeiss Terra ED 8x42}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>J'ai trouvé un jeune au sol : que faire ?</h2>
+<p>En général, rien de plus que le remettre en hauteur. Les jeunes hulottes quittent le nid avant de savoir voler et restent deux à trois semaines aux alentours, toujours nourries par leurs parents, selon l'INPN. Le livret Nuit de la chouette est clair : ne les ramassez pas. Si l'oiseau est exposé, posez-le sur une branche haute, à l'abri des chats et des chiens, et éloignez-vous. Les parents s'en occupent la nuit suivante.</p>
+<p>En revanche, un oiseau blessé ou adulte au sol doit être confié à un centre de soins pour la faune sauvage. Rappelons que tous les rapaces nocturnes sont protégés par la loi en France.</p>
+<p>Pour les autres habitants du jardin, ceux qui viennent aux mangeoires, notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a> vous dit quoi leur donner en hiver. Et si vous entendez aussi chanter un oiseau la nuit en pleine ville, ce peut être un <a href="{R}rouge-gorge/">rouge-gorge</a> ou un <a href="{R}merle-noir/">merle noir</a>, deux espèces qu'on entend souvent en ville.</p>
+
+<p class="sources"><strong>Sources</strong> : <a href="https://inpn.mnhn.fr/espece/cd_nom/3518" target="_blank" rel="noopener">INPN (MNHN) : fiche Strix aluco</a> ; <a href="https://champagne-ardenne.lpo.fr/images/mediatheque/fichiers/Protection/Especes/Avifaune/fiche_nichoirs_nocturnes.pdf" target="_blank" rel="noopener">LPO Champagne-Ardenne : fiche nichoirs pour rapaces nocturnes</a> ; <a href="https://cdnfiles2.biolovision.net/www.oiseauxdesjardins.fr/userfiles/FicheespceCH.pdf" target="_blank" rel="noopener">Oiseaux des jardins (LPO, MNHN) : fiche chouette hulotte</a> (vérifié le 17 novembre 2026)</p>
+""",
+  faq=[("Quel oiseau fait « hou-hou » la nuit ?",
+        "Le plus souvent, le mâle de chouette hulotte. Son hululement peut s'entendre toute l'année. Le « kiouik » aigu qui lui répond est le cri de la femelle."),
+       ("Quelle taille de trou pour un nichoir à chouette hulotte ?",
+        "Environ 12 cm. La LPO Champagne-Ardenne l'indique dans sa fiche de construction et la boutique LPO annonce 12 x 12 cm pour le nichoir Schwegler 1WK. Il se pose haut, entre 4 et 10 m selon les sources."),
+       ("Faut-il nourrir une chouette hulotte ?",
+        "Non. Elle chasse surtout des petits rongeurs. Le plus utile est de garder les vieux arbres creux et de ne pas utiliser de raticide ni de pesticide, car les rapaces nocturnes s'empoisonnent avec leurs proies.")],
+  short="Chouette hulotte", cat="Observer")
+
+AUTO_META['cadeau-passionne-oiseaux/'] = ('🏆', 'rouge')
+g("cadeau-passionne-oiseaux/",
+  "Cadeau pour un passionné d'oiseaux : idées pour Noël 2026",
+  "Cadeau pour un passionné d'oiseaux : 12 idées pour Noël 2026",
+  "Jumelles, mangeoire à caméra, nichoir connecté, guide, abreuvoir : 12 idées de cadeau pour un passionné d'oiseaux à Noël 2026, choisies selon son profil.",
+  """
+<p>Pour un passionné d'oiseaux, le cadeau qui fait le plus plaisir est souvent celui qui lui permet de voir mieux ou de voir plus près : une bonne paire de jumelles, une mangeoire avec caméra ou un nichoir connecté. Si vous voulez rester simple, un guide d'identification récent ou une mangeoire de fenêtre bien conçue font aussi très bien l'affaire.</p>
+<p>Tout dépend de la personne. Quelqu'un qui part en balade chaque week-end n'a pas les mêmes envies qu'un grand-parent qui regarde ses mésanges depuis la cuisine. Nous avons donc rangé nos 12 idées par profil plutôt que par prix, que nous ne pouvons pas garantir : ils bougent beaucoup à l'approche de Noël.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
+
+<h2>Le récapitulatif des 12 idées</h2>
+<table><thead><tr><th>Idée</th><th>Pour qui</th><th>Gamme</th></tr></thead><tbody>
+<tr><td>Birdfy Feeder 2 Pro</td><td>Le curieux qui aime la technologie</td><td>Haut de gamme</td></tr>
+<tr><td>Green Feathers kit nichoir caméra wifi</td><td>Celui qui veut suivre une nichée</td><td>Haut de gamme</td></tr>
+<tr><td>Birdfy Nest Duo</td><td>Un jardin sans prise électrique</td><td>Haut de gamme</td></tr>
+<tr><td>Zeiss Terra ED 8x42</td><td>L'observateur régulier</td><td>Haut de gamme</td></tr>
+<tr><td>Nikon Prostaff P7 8x42</td><td>Le marcheur qui veut des jumelles légères</td><td>Milieu de gamme</td></tr>
+<tr><td>Celestron Nature DX 8x42</td><td>Le débutant ou la famille</td><td>Entrée de gamme</td></tr>
+<tr><td>Squirrel Buster Legacy</td><td>Le jardin envahi par les écureuils</td><td>Milieu de gamme</td></tr>
+<tr><td>Schwegler 1B 32 mm</td><td>Celui qui veut accueillir des mésanges</td><td>Milieu de gamme</td></tr>
+<tr><td>Nature Anywhere Birds-I-View</td><td>Une personne qui sort peu</td><td>Entrée de gamme</td></tr>
+<tr><td>Esschert Design FB297</td><td>Le jardinier</td><td>Entrée de gamme</td></tr>
+<tr><td>Le guide ornitho (3e édition)</td><td>L'observateur confirmé</td><td>Livre</td></tr>
+<tr><td>Guide des oiseaux de France (Belin)</td><td>Celui qui veut apprendre les chants</td><td>Livre</td></tr>
+</tbody></table>
+<p>La colonne « gamme » situe chaque idée par rapport aux autres produits de sa catégorie, pas par un prix précis. Vérifiez le tarif du jour sur la fiche du vendeur.</p>
+
+<h2>1. Birdfy Feeder 2 Pro : la mangeoire qui filme et reconnaît les oiseaux</h2>
+<p><strong>Pour qui ?</strong> Le passionné qui aime les gadgets, ou celui qui travaille la journée et veut voir ce qu'il a manqué.</p>
+<p>C'est le cadeau qui fait le plus d'effet le matin de Noël. Cette mangeoire embarque deux caméras, l'une en 2K qui pivote pour suivre les oiseaux, l'autre en 1080p grand angle. Birdfy annonce un panneau solaire de 5 W fourni, une batterie de 9 000 mAh et un réservoir de 2,5 L. La version vendue avec l'IA « à vie » identifie les espèces sans abonnement, selon le fabricant.</p>
+<ul>
+<li><strong>Points forts</strong> : deux angles de vue, autonomie solaire, reconnaissance des espèces sans abonnement sur la bonne version.</li>
+<li><strong>Limites</strong> : pas de carte microSD, tout passe par le cloud du fabricant. Wi-Fi 2,4 GHz uniquement : vérifiez que la box porte jusqu'au fond du jardin. Birdfy vend aussi une version avec IA par abonnement du même modèle, regardez bien la mention « Lifetime » avant d'acheter.</li>
+</ul>
+<p><a href="{AMZ:Birdfy Feeder 2 Pro}" """ + A + """>Voir sur Amazon</a></p>
+<p>Les autres modèles, dont plusieurs plus simples, sont comparés dans notre sélection des <a href="{R}meilleure-mangeoire-connectee/">meilleures mangeoires connectées</a>.</p>
+
+<h2>2. Green Feathers kit nichoir caméra wifi : suivre une nichée en direct</h2>
+<p><strong>Pour qui ?</strong> Celui qui rêve de voir éclore des mésanges, et qui a une prise extérieure ou un garage à proximité.</p>
+<p>C'est un cadeau de Noël malin, parce qu'il faut poser un nichoir avant le printemps : le timing est parfait. Le kit réunit un nichoir en bois de 21 mm avec un trou d'envol de 32 mm et une caméra wifi 1080p. La vision nocturne utilise 4 LED infrarouges invisibles, et un micro capte les petits cris, d'après Green Feathers. Une rallonge de 10 m est fournie.</p>
+<ul>
+<li><strong>Points forts</strong> : tout est dans la boîte, infrarouge invisible qui n'éclaire pas la nichée.</li>
+<li><strong>Limites</strong> : carte microSD non fournie, conditions du cloud non précisées, prise nécessaire à proximité.</li>
+</ul>
+<p><a href="{AMZ:Green Feathers kit complet nichoir camera wifi}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Birdfy Nest Duo : le nichoir connecté sans câble</h2>
+<p><strong>Pour qui ?</strong> Un jardin sans électricité au fond, ou quelqu'un qui ne sait pas encore quelle espèce viendra.</p>
+<p>Ce nichoir en bambou et ABS a deux caméras, une batterie de 9 000 mAh et un panneau solaire de 5 W. Son entrée se change grâce à des grilles métalliques de 23 à 50 mm, ce qui permet de viser plusieurs espèces, selon le site français de Birdfy.</p>
+<ul>
+<li><strong>Points forts</strong> : autonome, deux angles de vue, entrées adaptables.</li>
+<li><strong>Limites</strong> : 3,4 kg, à fixer solidement. Pas de microSD : l'enregistrement passe par le cloud, gratuit pendant la nidification selon Birdfy, avec abonnement optionnel ensuite.</li>
+</ul>
+<p><a href="{AMZ:Birdfy Nest Duo nichoir}" """ + A + """>Voir sur Amazon</a></p>
+<p>Wifi, filaire, solaire : notre comparatif du <a href="{R}meilleur-nichoir-camera/">meilleur nichoir avec caméra</a> vous aide à trancher.</p>
+
+<h2>4. Zeiss Terra ED 8x42 : des jumelles pour longtemps</h2>
+<p><strong>Pour qui ?</strong> L'observateur qui sort souvent, au jardin comme au bord des étangs, et qui garde ses jumelles des années.</p>
+<p>Zeiss annonce une mise au point dès 1,6 m, pratique pour un oiseau posé tout près de la fenêtre, des verres ED et une étanchéité de 100 mbar. Plusieurs coloris existent.</p>
+<ul>
+<li><strong>Points forts</strong> : grande marque d'optique, mise au point rapprochée, étanche.</li>
+<li><strong>Limites</strong> : 725 g, parmi les plus lourdes de notre comparatif. Une sangle confortable n'est pas un luxe.</li>
+</ul>
+<p><a href="{AMZ:Zeiss Terra ED 8x42}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Nikon Prostaff P7 8x42 : les jumelles légères</h2>
+<p><strong>Pour qui ?</strong> Le marcheur qui garde ses jumelles autour du cou pendant des heures.</p>
+<p>Avec 590 g selon Nikon, ce sont les plus légères de notre comparatif. Elles sont étanches jusqu'à 1 m pendant 10 minutes, d'après le fabricant.</p>
+<ul>
+<li><strong>Points forts</strong> : poids plume pour du 8x42, grande marque.</li>
+<li><strong>Limites</strong> : mise au point minimale de 3 m. Pour un oiseau posé sur le rebord de la fenêtre, il faudra reculer.</li>
+</ul>
+<p><a href="{AMZ:Nikon Prostaff P7 8x42}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Celestron Nature DX 8x42 : une première paire pour toute la famille</h2>
+<p><strong>Pour qui ?</strong> Un débutant, ou une famille qui veut partager une paire de jumelles au jardin.</p>
+<p>Celestron annonce 629 g, et le revendeur Astroshop précise qu'elles sont remplies d'azote, ce qui évite la buée à l'intérieur. Mise au point dès 2 m.</p>
+<ul>
+<li><strong>Points forts</strong> : complètes, étanches, une bonne porte d'entrée.</li>
+<li><strong>Limites</strong> : pas d'indice d'étanchéité chiffré, et un poids différent selon les fiches (820 g chez un revendeur, sans doute avec accessoires).</li>
+</ul>
+<p><a href="{AMZ:Celestron Nature DX 8x42}" """ + A + """>Voir sur Amazon</a></p>
+<p>Les dix modèles sont comparés en détail dans notre sélection des <a href="{R}meilleures-jumelles-oiseaux/">meilleures jumelles pour les oiseaux</a>.</p>
+
+<h2>7. Squirrel Buster Legacy : la mangeoire qui résiste aux écureuils</h2>
+<p><strong>Pour qui ?</strong> Celui qui peste chaque hiver contre l'écureuil qui vide sa mangeoire en une matinée.</p>
+<p>Quand un animal trop lourd s'accroche, son poids fait descendre un grillage qui ferme les quatre ouvertures. Un ressort permet de régler le poids qui déclenche la fermeture, selon Brome Bird Care. Le silo mesure environ 14 x 14 x 41 cm pour 1,2 kg de graines, et se démonte à la main pour le nettoyage.</p>
+<ul>
+<li><strong>Points forts</strong> : mécanisme réglable, pièces exposées conçues pour résister aux morsures, nettoyage facile.</li>
+<li><strong>Limites</strong> : le fabricant précise lui-même qu'il n'arrête pas les étourneaux. Il faut environ 47 cm de dégagement tout autour.</li>
+</ul>
+<p><a href="{AMZ:Squirrel Buster Legacy}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Schwegler 1B 32 mm : le nichoir qu'on pose pour vingt ans</h2>
+<p><strong>Pour qui ?</strong> Celui qui veut accueillir des mésanges charbonnières et préfère un objet durable à un gadget.</p>
+<p>Ce nichoir en béton de bois mesure 17 x 26 x 18 cm pour 3,6 kg, selon la boutique LPO. La façade s'enlève pour le nettoyage. Le revendeur Quickcrop annonce une durée de vie de 20 à 25 ans.</p>
+<ul>
+<li><strong>Points forts</strong> : matériau stable en température, que les pics agrandissent difficilement ; vendu par la LPO.</li>
+<li><strong>Limites</strong> : lourd, demande une fixation solide. Trou fixe de 32 mm.</li>
+</ul>
+<p><a href="{AMZ:Schwegler nichoir 1B 32 mm}" """ + A + """>Voir sur Amazon</a></p>
+<p>Pour la mésange bleue, il existe une version 26 mm : tout est expliqué dans notre comparatif du <a href="{R}meilleur-nichoir-mesange/">meilleur nichoir à mésange</a>.</p>
+
+<h2>9. Nature Anywhere Birds-I-View : les oiseaux à la fenêtre</h2>
+<p><strong>Pour qui ?</strong> Une personne qui sort peu, en appartement avec une fenêtre dégagée, ou un enfant qui veut voir les mésanges de tout près.</p>
+<p>Le fabricant annonce une coque en polycarbonate de 4 mm, plus résistante que l'acrylique, et un plateau coulissant qui se retire sans décoller la mangeoire. Environ 25 x 11 x 25 cm, garantie à vie par la marque.</p>
+<ul>
+<li><strong>Points forts</strong> : solide, facile à remplir et à laver.</li>
+<li><strong>Limites</strong> : toit, drainage et contenance non précisés sur la page du fabricant.</li>
+</ul>
+<p><a href="{AMZ:Nature Anywhere mangeoire fenetre oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+<p>C'est souvent un cadeau très apprécié par un parent ou un grand-parent qui se déplace moins. Notre site frère Vieillir chez soi rassemble d'autres <a href="https://vieillir-chez-soi.fr/cadeau-personne-agee/">idées de cadeau pour une personne âgée</a>. Les autres modèles sont dans notre sélection de la <a href="{R}meilleure-mangeoire-fenetre/">meilleure mangeoire de fenêtre</a>.</p>
+
+<h2>10. Esschert Design FB297 : un bain d'oiseaux stable</h2>
+<p><strong>Pour qui ?</strong> Le jardinier qui a déjà sa mangeoire et à qui il manque un point d'eau.</p>
+<p>D'après la fiche de ManoMano, cette vasque en béton mesure 29,3 cm de diamètre pour 10,5 cm de haut et pèse environ 4 kg. Des marches intégrées permettent aux petits oiseaux d'entrer et de sortir sans risque. Elle est vendue sur Amazon.fr.</p>
+<ul>
+<li><strong>Points forts</strong> : lourde donc stable, large, facile à frotter.</li>
+<li><strong>Limites</strong> : profondeur non précisée, poids qui varie selon les lignes de la fiche. Posée au sol, elle est à portée des chats.</li>
+</ul>
+<p><a href="{AMZ:Esschert Design bain oiseaux beton FB297}" """ + A + """>Voir sur Amazon</a></p>
+<p>L'eau compte autant que la nourriture en hiver, comme nous l'expliquons dans notre page sur l'<a href="{R}eau-pour-les-oiseaux-en-hiver/">eau pour les oiseaux en hiver</a>.</p>
+
+<h2>11. Le guide ornitho (3e édition) : la bible de l'observateur</h2>
+<p><strong>Pour qui ?</strong> Celui qui a dépassé les oiseaux de sa mangeoire et veut identifier tout ce qu'il croise en Europe.</p>
+<p>Texte de Lars Svensson, illustrations de Killian Mullarney et Dan Zetterström. Selon le libraire Mollat, l'édition d'octobre 2023 couvre près de 900 espèces avec 4 000 illustrations et 700 cartes. Broché, 476 pages.</p>
+<ul>
+<li><strong>Points forts</strong> : la référence des observateurs, très complète.</li>
+<li><strong>Limites</strong> : trop riche pour un débutant qui veut juste reconnaître ses mésanges. Pas de sons.</li>
+</ul>
+<p><a href="{AMZ:le guide ornitho Svensson Delachaux 3e edition}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>12. Guide des oiseaux de France (Belin) : avec les chants</h2>
+<p><strong>Pour qui ?</strong> Celui qui entend plus qu'il ne voit, et veut apprendre les chants.</p>
+<p>Jérôme Morin, Gérard Guillot et Julien Norwood, chez Belin, 2017. 500 espèces, environ 1 000 photos et 500 illustrations. Selon le libraire NHBS, 360 chants ou cris s'écoutent sur smartphone grâce à des QR codes. Broché, 528 pages.</p>
+<ul>
+<li><strong>Points forts</strong> : photos, dessins et sons dans un seul livre.</li>
+<li><strong>Limites</strong> : édition de 2017, la plus ancienne de notre sélection de guides.</li>
+</ul>
+<p><a href="{AMZ:Guide des oiseaux de France Belin Morin}" """ + A + """>Voir sur Amazon</a></p>
+<p>Huit autres guides sont présentés dans notre sélection du <a href="{R}meilleur-guide-oiseaux/">meilleur guide d'identification des oiseaux</a>, et notre page des <a href="{R}meilleurs-livres-oiseaux-enfants/">meilleurs livres sur les oiseaux pour enfants</a> couvre les plus jeunes.</p>
+
+<h2>Comment choisir le bon cadeau ?</h2>
+<p><strong>Regardez ce qu'il a déjà.</strong> Un passionné possède souvent des jumelles et un guide. Lui offrir une deuxième paire d'entrée de gamme a peu d'intérêt ; une mangeoire à caméra ou un nichoir connecté lui ouvrira au contraire quelque chose de nouveau.</p>
+<p><strong>Pensez au lieu.</strong> Une mangeoire connectée ou un nichoir caméra wifi demandent un signal correct à l'endroit où ils seront posés. Par exemple, si le jardin est grand et la box au fond de la maison, un modèle filaire ou solaire avec une bonne portée évitera bien des déceptions. En appartement, une mangeoire de fenêtre est souvent le seul choix réaliste.</p>
+<p><strong>Méfiez-vous des abonnements.</strong> Certaines mangeoires et certains nichoirs connectés réservent la reconnaissance des espèces ou l'historique des vidéos à une formule payante. Lisez la fiche avant d'offrir un cadeau qui coûtera chaque mois à la personne.</p>
+<p><strong>Notre conseil</strong> : pour un cadeau de Noël, le nichoir avec caméra est le plus judicieux, parce qu'il se pose en hiver et que le spectacle commence au printemps. Ajoutez un sac de graines de qualité pour que la mangeoire serve dès janvier : notre comparatif des <a href="{R}meilleure-graine-tournesol/">meilleures graines de tournesol</a> vous aide à le choisir, et notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a> rappelle ce qu'il faut éviter.</p>
+
+<h2>Quels oiseaux verra-t-il avec ces cadeaux ?</h2>
+<p>Au jardin en hiver, les premières clientes d'une mangeoire sont presque toujours la <a href="{R}mesange-charbonniere/">mésange charbonnière</a> et la <a href="{R}mesange-bleue/">mésange bleue</a>, qui sont aussi celles qui occupent les nichoirs au printemps. Le <a href="{R}rouge-gorge/">rouge-gorge</a>, lui, préfère se nourrir au sol, juste en dessous.</p>
+""",
+  faq=[("Quel cadeau offrir à quelqu'un qui aime observer les oiseaux ?",
+        "Une mangeoire avec caméra ou un nichoir connecté si la personne aime la technologie, de bonnes jumelles 8x42 si elle sort souvent, ou un guide d'identification avec les chants si elle débute. Une mangeoire de fenêtre convient très bien à quelqu'un qui sort peu."),
+       ("Un nichoir avec caméra est-il un bon cadeau de Noël ?",
+        "Oui, parce qu'il faut poser un nichoir avant le printemps. Vérifiez la portée du wifi ou la présence d'une prise à proximité, et les éventuels abonnements pour stocker les vidéos."),
+       ("Avez-vous testé ces produits ?",
+        "Non. Cette sélection repose sur les fiches publiées par les fabricants et les revendeurs. Quand une information manque, nous l'indiquons comme non précisée.")],
+  short="Top 10 cadeaux pour passionné d'oiseaux", cat="Observer")
