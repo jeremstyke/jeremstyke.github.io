@@ -2247,17 +2247,19 @@ function nudge() {
   };
   try {
     const box = document.getElementById('gamesCard'); if (!box) return;
-    box.hidden = true; return;  // 31 oct 2026 (23h55, Jeremy): Meme Coin Tycoon pays RIGZ now (on Rig Rush), no more $BATON: the card is hidden
+    // 17 nov 2026 (21h30, Jeremy): the card now promotes Idle Estate (the Meme Coin Tycoon row stays removed)
     const tw = window.Telegram && window.Telegram.WebApp;  // 27 oct 2026 (23h05): LANG and openLink live inside the game's own closure
     const lc = String((tw && tw.initDataUnsafe && tw.initDataUnsafe.user && tw.initDataUnsafe.user.language_code) || navigator.language || 'en').toLowerCase();
     const L2 = /^fr/.test(lc) ? 'fr' : /^es/.test(lc) ? 'es' : /^pt/.test(lc) ? 'pt' : /^(ru|be|kk)/.test(lc) ? 'ru' : /^uk/.test(lc) ? 'uk' : /^tr/.test(lc) ? 'tr' : /^(id|ms)/.test(lc) ? 'id' : /^ar/.test(lc) ? 'ar' : /^fa/.test(lc) ? 'fa' : 'en';
     const g = G[L2];
+    const IE = /^fr/.test(lc) ? ['🏠 Idle Estate', 'Jeu idle immobilier gratuit. Le top 10 de la semaine se partage 30 % des Étoiles dépensées, payé en USDT.', '🎮 Mon autre jeu'] : ['🏠 Idle Estate', 'Free idle real estate game. The weekly top 10 shares 30% of the Stars spent, paid in USDT.', '🎮 My other game'];
+    g[0] = IE[2];
     const st = document.createElement('style');
     st.textContent = '#gamesCard{margin:0 0 12px}#gamesCard .gh{font-weight:800;font-size:14px;color:#ffd43b;margin:0 0 4px}#gamesCard .gr{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid rgba(255,255,255,.08)}#gamesCard .gt{flex:1;min-width:0}#gamesCard .gt b{display:block;font-size:14px}#gamesCard .gt span{display:block;font-size:12px;opacity:.75;line-height:1.35;margin-top:2px}#gamesCard .gb{flex:none;padding:8px 14px;border-radius:99px;background:#ffd43b;color:#17091e;font-weight:800;font-size:13px;border:0}';
     document.head.appendChild(st);
     const row = (name, txt, url) => '<div class="gr"><div class="gt"><b>' + name + '</b><span>' + txt + '</span></div><button class="gb" data-u="' + url + '">' + g[5] + '</button></div>';
     box.className = 'card';
-    box.innerHTML = '<div class="gh">' + g[0] + '</div>' + /* 28 oct 2026: no more $BATON on Daily Score */ row(g[3], g[4], 'https://t.me/Memecointycoonbot?startapp=src_btgames');
+    box.innerHTML = '<div class="gh">' + g[0] + '</div>' + /* 28 oct 2026: no more $BATON on Daily Score */ row(IE[0], IE[1], 'https://t.me/Idleestatebot?start=src_baton');
     box.querySelectorAll('[data-u]').forEach((b) => b.onclick = () => { try { tw.HapticFeedback.impactOccurred('light'); } catch (e) {} try { tw.openTelegramLink(b.dataset.u); } catch (e) { location.href = b.dataset.u; } });
   } catch (e) {}
 })();

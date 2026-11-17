@@ -4,8 +4,8 @@
 // Leaders tab moves here too. The game's own functions are used (go, api, t, rchBuy, shareGame, mctFriends, mctPremium).
 (() => {
   const TX = {
-    fr: { more: 'Plus', title: 'Plus d\'options', fr: '👥 Mes amis', frs: 'Classement entre amis et cadeau du jour', inv: 'Ton lien d\'invitation', rch: 'Jusqu\'à +16 000 $ · 1er achat doublé', pr: '💎 Premium', prs: 'Sans vidéo, +1 000 $ par jour et plus', faq: '❓ Aide et FAQ', faqs: 'Toutes les règles du jeu', ct: '💬 Me contacter', cts: 'Une question, un souci', close: 'Fermer', st: (d, s) => 'Jour ' + d + '/7' },
-    en: { more: 'More', title: 'More options', fr: '👥 My friends', frs: 'Ranking between friends and daily gift', inv: 'Your invite link', rch: 'Up to +$16,000 · first purchase doubled', pr: '💎 Premium', prs: 'No videos, +$1,000 a day and more', faq: '❓ Help and FAQ', faqs: 'All the rules of the game', ct: '💬 Contact me', cts: 'A question, a problem', close: 'Close' },
+    fr: { more: 'Plus', title: 'Plus d\'options', fr: '👥 Mes amis', frs: 'Classement entre amis et cadeau du jour', inv: 'Ton lien d\'invitation', rch: 'Jusqu\'à +16 000 $ · 1er achat doublé', pr: '💎 Premium', prs: 'Sans vidéo, +1 000 $ par jour et plus', faq: '❓ Aide et FAQ', faqs: 'Toutes les règles du jeu', ie: '🏠 Idle Estate', ies: 'Jeu idle immobilier gratuit. Le top 10 de la semaine se partage 30 % des Étoiles dépensées, payé en USDT.', ct: '💬 Me contacter', cts: 'Une question, un souci', close: 'Fermer', st: (d, s) => 'Jour ' + d + '/7' },
+    en: { more: 'More', title: 'More options', fr: '👥 My friends', frs: 'Ranking between friends and daily gift', inv: 'Your invite link', rch: 'Up to +$16,000 · first purchase doubled', pr: '💎 Premium', prs: 'No videos, +$1,000 a day and more', faq: '❓ Help and FAQ', faqs: 'All the rules of the game', ie: '🏠 Idle Estate', ies: 'Free idle real estate game. The weekly top 10 shares 30% of the Stars spent, paid in USDT.', ct: '💬 Contact me', cts: 'A question, a problem', close: 'Close' },
     id: { more: 'Lainnya', title: 'Opsi lainnya', fr: '👥 Temanku', frs: 'Peringkat antar teman dan hadiah harian', inv: 'Link undanganmu', rch: 'Hingga +$16,000 · pembelian pertama x2', pr: '💎 Premium', prs: 'Tanpa video, +$1,000 per hari dan lainnya', faq: '❓ Bantuan dan FAQ', faqs: 'Semua aturan game', ct: '💬 Hubungi aku', cts: 'Pertanyaan, masalah', close: 'Tutup' },
     ru: { more: 'Ещё', title: 'Другие опции', fr: '👥 Мои друзья', frs: 'Рейтинг среди друзей и подарок дня', inv: 'Твоя ссылка-приглашение', rch: 'До +$16,000 · первая покупка x2', pr: '💎 Премиум', prs: 'Без видео, +$1,000 в день и другое', faq: '❓ Помощь и FAQ', faqs: 'Все правила игры', ct: '💬 Связаться со мной', cts: 'Вопрос, проблема', close: 'Закрыть' },
     ar: { more: 'المزيد', title: 'خيارات أخرى', fr: '👥 أصدقائي', frs: 'الترتيب بين الأصدقاء وهدية اليوم', inv: 'رابط دعوتك', rch: 'حتى ‎+$16,000 · أول شراء مضاعف', pr: '💎 بريميوم', prs: 'بدون فيديو، ‎+$1,000 يوميًا والمزيد', faq: '❓ المساعدة والأسئلة', faqs: 'كل قواعد اللعبة', ct: '💬 تواصل معي', cts: 'سؤال أو مشكلة', close: 'إغلاق' },
@@ -59,6 +59,7 @@
       + row('code', tt('code_h'), tt('code_s'))
       + '<div class="cd field" id="mrcd" hidden><input id="mrci" maxlength="12" autocapitalize="characters" autocomplete="off" placeholder="' + ec(tt('code_ph')) + '"><button class="ghost sm" id="mrcb">' + ec(tt('code_b')) + '</button></div>'
       + row('faq', T.faq, T.faqs)
+      + row('ie', T.ie || TX.en.ie, T.ies || TX.en.ies)
       + row('ct', T.ct, T.cts)
       + '<button class="ghost" id="mrx" style="width:100%;margin-top:6px">' + ec(T.close) + '</button></div>';
     d.onclick = (e) => { if (e.target === d) { close(); return; } const mr = e.target.closest('[data-mk]'); if (mr && !e.target.closest('[data-mc]') && !mr.querySelector('.msn-ok')) setTimeout(close, 0); };
@@ -79,6 +80,7 @@
     if (k === 'rch') { close(); const f = G('rchBuy'); if (f) f(); return; }
     if (k === 'prem') { close(); if (window.mctPremium) window.mctPremium(); return; }
     if (k === 'fr') { close(); if (window.mctFriends) window.mctFriends(); return; }
+    if (k === 'ie') { close(); openTg('https://t.me/Idleestatebot?start=src_mct'); return; }
     if (k === 'inv') { close(); const sg = G('shareGame'); if (sg) sg('invite', 0, 'https://t.me/Memecointycoonbot?startapp=r_' + ME.uid, tt('inv_msg')); return; }
     if (k === 'led') { close(); if (go) go('ledger'); return; }
     if (k === 'chn') { close(); if (go) go('chains'); return; }

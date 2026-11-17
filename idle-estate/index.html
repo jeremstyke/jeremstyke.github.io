@@ -770,7 +770,7 @@ function renderTop() {
   let h = `<h2>${L.topT}</h2><p class="lead">${L.topS}</p>
    <div class="box"><span class="lead">${L.pool}</span><div class="big">⭐ ${fmt(d.pool)}</div><span class="lead">${d.pool > 0 ? '' : L.noPool + ' '}${L.ends} ${dd}d ${hh}h ${mm}m</span></div>`;
   h += '<div>';
-  d.top.forEach((r, i) => { const pr = Math.floor(d.pool * d.shares[i] / 100); h += `<div class="top${r.me ? ' me' : ''}"><span class="rk">${i + 1}</span><span class="n">${esc(r.n)}${r.me ? ' (' + L.yours + ')' : ''}</span><span class="v">$${fm(r.v)}</span><span class="p">${pr > 0 ? '⭐ ' + pr : ''}</span></div>`; });
+  d.top.forEach((r, i) => { const pr = Math.floor(d.pool * (d.shares[i] || 0) / 100); h += `<div class="top${r.me ? ' me' : ''}"><span class="rk">${i + 1}</span><span class="n">${esc(r.n)}${r.me ? ' (' + L.yours + ')' : ''}</span><span class="v">$${fm(r.v)}</span><span class="p">${pr > 0 ? '⭐ ' + pr : ''}</span></div>`; });
   h += '</div>';
   h += `<div class="box"><span class="lead">${L.rank}</span><div class="big">#${d.rank}</div><span class="lead">$${fm(d.score)}</span></div>`;
   const w = d.wallet || {};
