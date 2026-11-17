@@ -383,7 +383,7 @@ const mult = l => { let m = 1; for (const k of S.ms) if (l >= k) m *= S.mb; retu
 const evOn = n => { const s = n % 86400; return s >= 61200 && s < 64800; };
 const curM = n => (1 + 0.02 * S.inv) * ((S.boostEnd > n) ? S.bmult : 1) * (S.perm2 ? 2 : 1) * (evOn(n) ? 2 : 1) * (S.goldEnd > n ? 1.5 : 1);
 const inc = (i, n) => S.lv[i] > 0 ? S.cfg[i].r * S.lv[i] * mult(S.lv[i]) * curM(n) : 0;
-const gainInv = () => Math.max(0, Math.floor(150 * Math.sqrt(S.life_all / 1e10)) - Math.floor(S.inv));
+const gainInv = () => Math.max(0, Math.floor(150 * Math.sqrt(S.life_all / 1e11)) - Math.floor(S.inv));
 function rateNow() { const n = snow(); let g = 0; for (let i = 0; i < 10; i++) { const e = inc(i, n) / S.cfg[i].t; g += S.mg[i] ? e : e * 0.5; } return g; }
 function cost(i, n) { const c0 = S.cfg[i].c * Math.pow(S.g, S.lv[i]); return c0 * (Math.pow(S.g, n) - 1) / (S.g - 1); }
 function maxN(i) { const c0 = S.cfg[i].c * Math.pow(S.g, S.lv[i]); return Math.max(0, Math.min(1000, Math.floor(Math.log(1 + S.cash * (S.g - 1) / c0) / Math.log(S.g)))); }
