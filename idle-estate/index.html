@@ -182,7 +182,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 <div class="wrap">
   <div class="hd">
     <div class="cash"><svg class="coin" viewBox="0 0 32 32" width="34" height="34"><circle cx="16" cy="16" r="15" fill="#f4b73c" stroke="#d9951a" stroke-width="2"/><circle cx="16" cy="16" r="11" fill="none" stroke="#fff3c4" stroke-width="1.5"/><path d="M16 8.5 L8.5 15 H11 V23 H21 V15 H23.5 Z" fill="#fff3c4"/></svg><span id="cash">0</span></div>
-    <div class="sub"><span class="chip" id="rate">$0/s</span><span class="chip" id="mult">x1</span><span class="chip gold" id="boost" hidden></span><span class="chip ev" id="evc"></span></div>
+    <div class="sub"><span class="chip" id="rate">$0/s</span><span class="chip" id="mult">x1</span><span class="chip gold" id="boost" hidden></span><span class="chip ev" id="evc"></span><span class="chip gold" id="goldc" hidden>👑 x1.5</span></div>
   </div>
   <div class="scene"><div class="sky" id="sky"></div></div>
 
@@ -236,6 +236,10 @@ const L = {
   invT:'Invite friends', invS:'You both get +1h of x2 income when a friend joins with your link, and +30 min more when your friend invites someone.', invBtn:'Invite a friend', invCount:'Friends joined',
   offersT:'Investor offers', offersS:'A different investor shows up with a new deal. New offers in', accept:'Accept',
   inv:{std:['🧑‍💼','Marc, the banker','A classic deal, no surprises.'],shark:['🦈','Lea, the shark','More investors, but you restart with no cash.'],angel:['😇','Sofia, the patron','Fewer investors, but your Studio keeps its manager and you start with capital.'],tech:['🚀','Yan, the visionary','Normal investors plus x2 income for 2h.'],heir:['🏡','Clara, the heiress','A few more investors and your Studio starts at level 10.']},
+  goldT:'Idle Estate Gold', goldS:'x1.5 income, 24h offline, double quest and bonus rewards, and a 👑 next to your name. Renews every 30 days, cancel anytime in Telegram.', goldOn:'Gold active', goldLeft:'days left', perMonth:'/ 30 days',
+  dealT:'Deal of the day', dealS:'-30% today only', was:'instead of',
+  questsT:'Daily quests', questsS:'Complete quests and claim rewards. They reset every day.', chestT:'Daily chest', chestS:'Finish all 3 quests: x2 income for 1h',
+  q:{tap:['👆','Collect rent {n} times'],buy:['🏗️','Buy {n} property levels'],vip:['🤑','Catch {n} golden tenants'],mgr:['👔','Hire a manager'],daily:['🔥','Claim the daily bonus']},
   shareTxt:'Build your real estate empire with me on Idle Estate!', snd:'Sounds', evInfo:'Golden hour every day: all your rent pays x2 for 60 minutes. Starts at', rewarded:'Reward claimed!', done:'Done',
   ach:{mgr1:['👔','First manager','Hire your first manager'],s10:['🛋️','Studio level 10','Reach level 10 on the Studio'],s25:['🛋️','Studio level 25','Reach level 25 on the Studio'],s50:['🛋️','Studio level 50','Reach level 50 on the Studio'],mgr5:['🧑‍💼','5 managers','Hire 5 managers'],mgr10:['🏅','Full staff','Hire a manager on every property'],pr1:['🏛️','First sale','Sell your empire once'],pr5:['💎','Tycoon','Sell your empire 5 times'],st7:['🔥','7 day streak','Claim the daily bonus 7 days in a row'],fr1:['👥','First friend','Invite a friend'],fr5:['🎉','Popular','Invite 5 friends']}
  },
@@ -261,6 +265,10 @@ const L = {
   invT:'Invite tes amis', invS:'Vous gagnez tous les deux +1h de revenus x2 quand un ami rejoint avec ton lien, et +30 min de plus quand ton ami invite quelqu\'un.', invBtn:'Inviter un ami', invCount:'Amis arrivés',
   offersT:'Offres d\'investisseurs', offersS:'Un investisseur différent arrive avec une nouvelle offre. Nouvelles offres dans', accept:'Accepter',
   inv:{std:['🧑‍💼','Marc, le banquier','Une offre classique, sans surprise.'],shark:['🦈','Léa, la requin','Plus d\'investisseurs, mais tu repars sans un sou.'],angel:['😇','Sofia, la mécène','Moins d\'investisseurs, mais ton Studio garde son gestionnaire et tu pars avec du capital.'],tech:['🚀','Yan, le visionnaire','Investisseurs normaux et revenus x2 pendant 2h.'],heir:['🏡','Clara, l\'héritière','Un peu plus d\'investisseurs et ton Studio démarre au niveau 10.']},
+  goldT:'Idle Estate Gold', goldS:'Revenus x1,5, 24h hors ligne, récompenses de quêtes et bonus doublées, et une 👑 à côté de ton nom. Se renouvelle tous les 30 jours, annulable à tout moment dans Telegram.', goldOn:'Gold actif', goldLeft:'jours restants', perMonth:'/ 30 jours',
+  dealT:'Offre du jour', dealS:'-30 % aujourd\'hui seulement', was:'au lieu de',
+  questsT:'Quêtes du jour', questsS:'Termine les quêtes et récupère les récompenses. Elles se renouvellent chaque jour.', chestT:'Coffre du jour', chestS:'Finis les 3 quêtes : revenus x2 pendant 1h',
+  q:{tap:['👆','Encaisse {n} loyers'],buy:['🏗️','Achète {n} niveaux de biens'],vip:['🤑','Attrape {n} locataires dorés'],mgr:['👔','Embauche un gestionnaire'],daily:['🔥','Récupère le bonus du jour']},
   shareTxt:'Construis ton empire immobilier avec moi sur Idle Estate !', snd:'Sons', evInfo:'Heure dorée chaque jour : tous tes loyers sont doublés pendant 60 minutes. Début à', rewarded:'Récompense récupérée !', done:'Fait',
   ach:{mgr1:['👔','Premier gestionnaire','Embauche ton premier gestionnaire'],s10:['🛋️','Studio niveau 10','Monte le Studio au niveau 10'],s25:['🛋️','Studio niveau 25','Monte le Studio au niveau 25'],s50:['🛋️','Studio niveau 50','Monte le Studio au niveau 50'],mgr5:['🧑‍💼','5 gestionnaires','Embauche 5 gestionnaires'],mgr10:['🏅','Équipe au complet','Un gestionnaire sur chaque bien'],pr1:['🏛️','Première vente','Vends ton empire une fois'],pr5:['💎','Magnat','Vends ton empire 5 fois'],st7:['🔥','7 jours d\'affilée','Récupère le bonus du jour 7 jours de suite'],fr1:['👥','Premier ami','Invite un ami'],fr5:['🎉','Populaire','Invite 5 amis']}
  }
@@ -343,7 +351,7 @@ function apply(r, full) {
     off = r.now - Date.now() / 1000;
     const keep = S;
     S = { cash: r.cash, life_all: r.life_all, lv: r.lv.slice(), mg: r.mg.slice(), ts: r.ts.slice(), inv: r.inv, prest: r.prest, perm2: r.perm2, vault: r.vault, welcome: r.welcome, streak: r.streak, dailyOk: r.daily_ok,
-      boostEnd: r.boost ? r.now + r.boost.left : 0, bmult: r.boost ? r.boost.mult : 1, vipEnd: r.vip ? r.now + r.vip.left : 0, cfg: r.cfg, ms: r.ms, mb: r.mb || 2.5, g: r.g, shop: r.shop, notify: r.notify, loc: r.now, cap: r.cap, stars: r.stars, ach: r.ach || [], defs: r.ach_defs || [], uid: r.uid, ref_n: r.ref_n || 0, ref_cap: r.ref_cap || 20, offers: r.offers || [], offersEnd: r.offers_end || 0 };
+      boostEnd: r.boost ? r.now + r.boost.left : 0, bmult: r.boost ? r.boost.mult : 1, vipEnd: r.vip ? r.now + r.vip.left : 0, cfg: r.cfg, ms: r.ms, mb: r.mb || 2.5, g: r.g, shop: r.shop, notify: r.notify, loc: r.now, cap: r.cap, stars: r.stars, ach: r.ach || [], defs: r.ach_defs || [], uid: r.uid, ref_n: r.ref_n || 0, ref_cap: r.ref_cap || 20, offers: r.offers || [], offersEnd: r.offers_end || 0, goldEnd: r.gold ? r.now + r.gold.left : 0, deal: r.deal || null, q: r.q || { list: [], all: false } };
     if (!keep) build();
     else { buildSky(); }
   }
@@ -353,7 +361,7 @@ function apply(r, full) {
 // ---------- economy (mirror of the server)
 const mult = l => { let m = 1; for (const k of S.ms) if (l >= k) m *= S.mb; return m; };
 const evOn = n => { const s = n % 86400; return s >= 61200 && s < 64800; };
-const curM = n => (1 + 0.02 * S.inv) * ((S.boostEnd > n) ? S.bmult : 1) * (S.perm2 ? 2 : 1) * (evOn(n) ? 2 : 1);
+const curM = n => (1 + 0.02 * S.inv) * ((S.boostEnd > n) ? S.bmult : 1) * (S.perm2 ? 2 : 1) * (evOn(n) ? 2 : 1) * (S.goldEnd > n ? 1.5 : 1);
 const inc = (i, n) => S.lv[i] > 0 ? S.cfg[i].r * S.lv[i] * mult(S.lv[i]) * curM(n) : 0;
 const gainInv = () => Math.max(0, Math.floor(150 * Math.sqrt(S.life_all / 1e9)) - Math.floor(S.inv));
 function rateNow() { const n = snow(); let g = 0; for (let i = 0; i < 10; i++) { const e = inc(i, n) / S.cfg[i].t; g += S.mg[i] ? e : e * 0.5; } return g; }
@@ -457,12 +465,13 @@ function buildBanners() {
     const next = Math.min(S.streak + 1, 7);
     h += `<div class="bn"><div class="tx"><b>🔥 ${L.daily}</b><span>${L.dailyS.replace('{n}', next)}</span><div class="dots">${[1, 2, 3, 4, 5, 6, 7].map(d => `<i class="${d < next ? 'on' : ''}"></i>`).join('')}</div></div><button class="btn" id="dailyBtn">${L.claim}</button></div>`;
   }
+  if (S.deal && L.items[S.deal.sku]) { const it = L.items[S.deal.sku]; h += `<div class="bn gold"><div class="tx"><b>🔥 ${L.dealT}: ${it[1]}</b><span>${L.dealS}</span></div><button class="btn gold" data-sku="${S.deal.sku}" data-deal="1">⭐ ${S.deal.price}</button></div>`; }
   b.innerHTML = h;
   b.onclick = e => {
     if (e.target.id === 'dailyBtn') {
       call({ act: 'daily' }).then(r => { if (r.reward) { hap('ok'); float('+$' + fm(r.reward), innerWidth / 2, 120, true); S.dailyOk = false; buildBanners(); } });
     }
-    const s = e.target.closest('[data-sku]'); if (s) buy(s.dataset.sku);
+    const s = e.target.closest('[data-sku]'); if (s) buy(s.dataset.sku, s.dataset.deal === '1');
   };
 }
 let lastBanner = '';
@@ -473,7 +482,7 @@ function paint() {
   $('mult').textContent = 'x' + fmt(curM(n));
   const bo = $('boost');
   if (S.boostEnd > n) { bo.hidden = false; const l = S.boostEnd - n; bo.textContent = '⚡ x' + S.bmult + ' ' + (l > 3600 ? Math.floor(l / 3600) + 'h' + String(Math.floor(l % 3600 / 60)).padStart(2, '0') : Math.floor(l / 60) + ':' + String(Math.floor(l % 60)).padStart(2, '0')); } else bo.hidden = true;
-  const bk = (S.welcome ? 1 : 0) + '' + (S.dailyOk ? 1 : 0) + S.streak + (S.mg[0] ? 1 : 0);
+  const bk = (S.welcome ? 1 : 0) + '' + (S.dailyOk ? 1 : 0) + S.streak + (S.mg[0] ? 1 : 0) + (S.deal ? S.deal.sku : '-');
   if (bk !== lastBanner) { lastBanner = bk; buildBanners(); }
   const sk = S.lv.map(l => l > 0 ? 1 + Math.floor(Math.min(l, 120) / 6) : 0).join(',');
   if (sk !== skyKey) { skyKey = sk; buildSky(); }
@@ -502,9 +511,9 @@ function paint() {
     if (!owned) mg.style.display = 'none';
     else { mg.style.display = ''; mg.classList.toggle('on', S.mg[i]); mg.classList.toggle('off', !S.mg[i] && S.cash < S.cfg[i].m); mg.innerHTML = S.mg[i] ? '✅ ' + L.auto : '👔 $' + fm(S.cfg[i].m); }
   }
-  goalPaint(n); evPaint(n);
+  goalPaint(n); evPaint(n); $('goldc').hidden = !(S.goldEnd > n);
   const gb = $('nav').querySelector('[data-t="goals"]');
-  if (gb) { const rc = readyIds().length; const d = gb.querySelector('i'); if (rc && !d) gb.insertAdjacentHTML('beforeend', '<i></i>'); else if (!rc && d) d.remove(); }
+  if (gb) { const rc = readyIds().length + qReady(); const d = gb.querySelector('i'); if (rc && !d) gb.insertAdjacentHTML('beforeend', '<i></i>'); else if (!rc && d) d.remove(); }
   if (tab === 'goals') renderGoals();
   const nb = $('nav').querySelector('[data-t="prest"]');
   if (nb) { let d = nb.querySelector('i'); if (gainInv() >= 1 && !d) nb.insertAdjacentHTML('beforeend', '<i></i>'); else if (gainInv() < 1 && d) d.remove(); }
@@ -563,6 +572,9 @@ function go(t) {
 function renderShop() {
   const order = ['welcome', 'b2', 'b3', 'perm2', 'vault', 'skip1', 'skip8'].filter(k => !(k === 'welcome' && S.welcome));
   let h = `<h2>${L.shopT}</h2><p class="lead">${L.shopS}</p>`;
+  const gOn = S.goldEnd > snow();
+  h += `<div class="row hot" style="border-color:#a15e00"><div class="e">👑</div><div class="tx"><b>${L.goldT}</b><span>${L.goldS}</span>${gOn ? `<div class="rw">✅ ${L.goldOn} · ${Math.ceil((S.goldEnd - snow()) / 86400)} ${L.goldLeft}</div>` : ''}</div><button class="star" data-sku="gold">⭐ ${S.shop.gold}<small style="display:block;font-size:11px;font-weight:700">${L.perMonth}</small></button></div>`;
+  if (S.deal && L.items[S.deal.sku]) { const it = L.items[S.deal.sku]; h += `<div class="row hot"><div class="e">🔥</div><div class="tx"><b>${L.dealT}: ${it[1]}</b><span>${L.dealS}. ${it[2]}</span><div class="rw">${S.deal.price} ⭐ <s style="opacity:.7">${S.shop[S.deal.sku]}</s></div></div><button class="star" data-sku="${S.deal.sku}" data-deal="1">⭐ ${S.deal.price}</button></div>`; }
   for (const k of order) {
     const it = L.items[k];
     const own = (k === 'perm2' && S.perm2) || (k === 'vault' && S.vault);
@@ -571,15 +583,15 @@ function renderShop() {
   h += `<div class="sw"><span>🔔 ${L.remind}</span><button id="nt" class="${S.notify ? 'on' : ''}"></button></div>`;
   const p = $('p-shop'); p.innerHTML = h;
   p.onclick = e => {
-    const s = e.target.closest('[data-sku]'); if (s) buy(s.dataset.sku);
+    const s = e.target.closest('[data-sku]'); if (s) buy(s.dataset.sku, s.dataset.deal === '1');
     if (e.target.id === 'nt') { S.notify = !S.notify; e.target.classList.toggle('on', S.notify); call({ act: 'notify', on: S.notify }); }
   };
 }
-async function getInvoice(sku) {
+async function getInvoice(sku, deal) {
   for (let k = 0; k < 3; k++) {
     const ac = new AbortController(); const to = setTimeout(() => ac.abort(), 9000);
     try {
-      const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ init: initData, act: 'invoice', sku }), signal: ac.signal });
+      const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ init: initData, act: 'invoice', sku, deal: !!deal }), signal: ac.signal });
       const j = await r.json(); clearTimeout(to);
       if (j && j.ok && j.link) return j;
       if (j && j.err === 'sku') return j;
@@ -588,9 +600,9 @@ async function getInvoice(sku) {
   return null;
 }
 let buying = false;
-async function buy(sku) {
+async function buy(sku, deal) {
   if (buying) return; buying = true; hap('medium'); toast('⭐ ...');
-  const r = await getInvoice(sku); buying = false;
+  const r = await getInvoice(sku, deal); buying = false;
   if (!r || !r.ok || !r.link) { toast(L.err); return; }
   if (!tgw || !tgw.openInvoice) { window.open(r.link, '_blank'); return; }
   try {
@@ -694,21 +706,27 @@ const achProg = id => {
   return ({ mgr1: [mgc, 1], s10: [S.lv[0], 10], s25: [S.lv[0], 25], s50: [S.lv[0], 50], mgr5: [mgc, 5], mgr10: [mgc, 10], pr1: [S.prest, 1], pr5: [S.prest, 5], st7: [S.streak, 7], fr1: [S.ref_n, 1], fr5: [S.ref_n, 5] })[id] || [0, 1];
 };
 const achInfo = id => { const m = /^p(\d)$/.exec(id); return m ? [EM[+m[1]], L.names[+m[1]], L.achOwn] : (L.ach[id] || ['🏆', id, '']); };
+const qReady = () => (S && S.q ? S.q.list.filter(x => !x.done && x.v >= x.t).length + (!S.q.all && S.q.list.length && S.q.list.every(x => x.done) ? 1 : 0) : 0);
 const readyIds = () => (S && S.defs ? S.defs.filter(d => !S.ach.includes(d.id) && achProg(d.id)[0] >= achProg(d.id)[1]).map(d => d.id) : []);
 function rewTxt(d) { return d.k === 'c' ? '🪙 +' + d.v + ' min' : '⚡ x2 ' + fmtT(d.v); }
 let goalsKey = '';
 function renderGoals(force) {
   const rd = readyIds();
-  const key = [S.ach.length, rd.join(), S.ref_n, sndOn].join('|') + (force ? Math.random() : '');
+  const key = [S.ach.length, rd.join(), S.ref_n, sndOn, S.q.list.map(x => x.v + (x.done ? 'd' : '')).join(), S.q.all].join('|') + (force ? Math.random() : '');
   if (!force && key === goalsKey) {
     // refresh progress bars only
-    document.querySelectorAll('#p-goals .pg i').forEach(b => { const id = b.dataset.id, pr = achProg(id); b.style.width = Math.min(100, pr[0] / pr[1] * 100) + '%'; });
+    document.querySelectorAll('#p-goals .pg i').forEach(b => { const id = b.dataset.id; if (!id) return; const pr = achProg(id); b.style.width = Math.min(100, pr[0] / pr[1] * 100) + '%'; });
     return;
   }
   goalsKey = key;
   const order = [...S.defs.filter(d => rd.includes(d.id)), ...S.defs.filter(d => !rd.includes(d.id) && !S.ach.includes(d.id)), ...S.defs.filter(d => S.ach.includes(d.id))];
-  let h = `<h2>${L.goals}</h2>
-   <div class="box"><b style="font-family:var(--disp);font-size:19px">👥 ${L.invT}</b><p class="lead" style="margin:4px 0 8px">${L.invS}</p>
+  let h = `<h2>${L.goals}</h2><h2 style="font-size:22px;margin-top:6px">${L.questsT}</h2><p class="lead">${L.questsS}</p>`;
+  for (const q of S.q.list) {
+    const d = L.q[q.id]; const ok = !q.done && q.v >= q.t;
+    h += `<div class="row${q.done ? ' done' : ''}${ok ? ' hot' : ''}"><div class="e">${d[0]}</div><div class="tx"><b>${d[1].replace('{n}', q.t)}</b>${q.done ? '' : `<div class="pg"><i style="width:${Math.min(100, q.v / q.t * 100)}%"></i></div>`}<div class="rw">🪙 +${q.m} min${S.goldEnd > snow() ? ' x2 👑' : ''}</div></div>${q.done ? '<span class="chip" style="background:#d6f3dc;color:#1c7a2b">✅</span>' : ok ? `<button class="btn" data-q="${q.id}">${L.claim}</button>` : `<span class="chip" style="background:#e3edf7;color:var(--mut)">${q.v}/${q.t}</span>`}</div>`;
+  }
+  { const allDone = S.q.list.length && S.q.list.every(x => x.done); h += `<div class="row${allDone && !S.q.all ? ' hot' : ''}${S.q.all ? ' done' : ''}"><div class="e">🎁</div><div class="tx"><b>${L.chestT}</b><span>${L.chestS}${S.goldEnd > snow() ? ' (2h 👑)' : ''}</span></div>${S.q.all ? '<span class="chip" style="background:#d6f3dc;color:#1c7a2b">✅</span>' : allDone ? `<button class="btn" data-q="all">${L.claim}</button>` : '<span class="chip" style="background:#e3edf7;color:var(--mut)">🔒</span>'}</div>`; }
+  h += `<div class="box"><b style="font-family:var(--disp);font-size:19px">👥 ${L.invT}</b><p class="lead" style="margin:4px 0 8px">${L.invS}</p>
    <div style="display:flex;align-items:center;gap:10px"><div style="flex:1"><span class="lead">${L.invCount}</span><div class="big" style="font-size:26px">${S.ref_n} / ${S.ref_cap}</div></div><button class="btn gold" id="shareBtn">${L.invBtn}</button></div></div>
    <h2 style="font-size:22px;margin-top:14px">${L.achT}</h2><p class="lead">${L.achS}</p>`;
   for (const d of order) {
@@ -718,6 +736,16 @@ function renderGoals(force) {
   h += `<div class="sw"><span>🔊 ${L.snd}</span><button id="sndBtn" class="${sndOn ? 'on' : ''}"></button></div>`;
   const p = $('p-goals'); p.innerHTML = h;
   p.onclick = e => {
+    const qb = e.target.closest('[data-q]');
+    if (qb) {
+      qb.disabled = true;
+      call({ act: 'qclaim', id: qb.dataset.q }).then(r => {
+        if (r && (r.qclaimed || r.qall)) { S.q = r.q; hap('ok'); snd('win'); const b = qb.getBoundingClientRect(); burst(b.left + b.width / 2, b.top + 10, 14); toast(L.rewarded + ' ' + (r.reward ? '+$' + fm(r.reward) : '⚡ x2')); }
+        else call({ act: 'state' });
+        renderGoals(true);
+      });
+      return;
+    }
     const c = e.target.closest('[data-claim]');
     if (c) {
       const id = c.dataset.claim; c.disabled = true;
