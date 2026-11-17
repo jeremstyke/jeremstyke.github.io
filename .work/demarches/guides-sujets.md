@@ -1,5 +1,17 @@
 # Guides à venir pour Démarches (demarches.cvlibre.com), un par jour
 # Format : - [ ] slug/ | question visée | angle et organismes concernés
+# Priorité : failles (messages d'erreur et limites précises, très peu de bonnes réponses en ligne). Une donnée (taille max, format) seulement si elle est lue sur le site officiel ou sur service-public.fr ; sinon dis qu'elle n'est pas publiée et donne la marche à suivre.
+# Quand il reste moins de 10 lignes « - [ ] », ajoute 20 nouvelles questions précises (messages d'erreur, tailles max, formats, pièces par démarche) en évitant tout doublon avec guides/.
+- [ ] taille-max-fichier-caf/ | taille maximum d'un fichier sur le site de la CAF | fichier trop volumineux, formats acceptés, comment réduire (lien outil compresser)
+- [ ] taille-max-fichier-ants/ | taille maximum des pièces sur l'ANTS | format non accepté, fichier trop lourd, photos de pièces
+- [ ] taille-max-fichier-mdph/ | taille maximum des fichiers pour un dossier MDPH en ligne | varie selon le département, comment savoir, réduire le PDF
+- [ ] taille-max-fichier-france-travail/ | taille maximum d'un document sur France Travail | erreur au dépôt, formats acceptés
+- [ ] taille-max-fichier-impots/ | taille maximum d'une pièce jointe sur impots.gouv | messagerie sécurisée, formats, nombre de pièces
+- [ ] format-fichier-non-accepte/ | format de fichier non accepté sur un site administratif | HEIC, DOCX, PNG, comment convertir en PDF ou JPG
+- [ ] fusionner-justificatifs-un-seul-pdf/ | mettre plusieurs justificatifs dans un seul PDF pour une démarche | quand c'est demandé, ordre des pages, outil fusionner
+- [ ] scanner-avis-imposition-plusieurs-pages/ | envoyer un avis d'imposition de plusieurs pages en un seul fichier | toutes les pages exigées, fusion, taille
+- [ ] photo-document-refusee-reflet/ | photo de document refusée : reflet, ombre, coins coupés | règles de lisibilité, astuces au téléphone
+- [ ] erreur-televersement-document/ | erreur au téléversement d'un document en ligne | causes fréquentes (taille, nom, format, connexion), ce qu'il faut vérifier
 # Règle : uniquement des informations lues sur les sites officiels (caf.fr, ants.gouv.fr, service-public.fr, impots.gouv.fr, francetravail.fr, ameli.fr, mdphenligne.cnsa.fr, demarches-simplifiees.fr, etudiant.gouv.fr, urssaf.fr, msa.fr, lassuranceretraite.fr, maprimerenov.gouv.fr)
 
 - [x] justificatif-de-domicile/ | quel justificatif de domicile accepté pour une démarche | factures, ancienneté demandée, hébergé chez un tiers (lien vers le modèle d'attestation d'hébergement)
