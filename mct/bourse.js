@@ -9,6 +9,7 @@
   // 26 oct 2026 (19h11, Jeremy): open to every player (no more testers list; the server switch is ds_config 'mct_bs_cfg'.open)
   const tw = window.Telegram && Telegram.WebApp;
   const FN = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/mct-bourse';
+  const BATON = 'https://t.me/PassTheBatonBot/play?startapp=src_mctbs';
   const lg = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TX[l] ? l : 'en'; };  // 26 oct 2026 (19h22): the 6 languages of the game
   const TX = {
     fr: {
@@ -18,7 +19,7 @@
       mine: 'Mes actions', all: 'Tous les actifs', kind: { stock: 'Action', crypto: 'Crypto', mat: 'Matière première' }, closed: 'fermé',
       buy: 'Acheter', sell: 'Vendre', sellAll: 'Tout vendre', max: 'Max', amount: 'Montant en $', cash: 'Ton cash', have: 'Tu possèdes', pl: 'Plus-value',
       bought: (q, n) => '✅ Acheté : ' + q + ' ' + n, sold: (a) => '✅ Vendu : +' + a,
-      pfH: '📈 Investir en bourse', pfE: '250 actions : Apple, Tesla, Nvidia, l’or… aux vrais cours, avec ton cash du jeu.', pfB: 'Investir', title: '📈 Bourse', tot: 'Tes actions', back: '← Portefeuille', pfV: (v, g) => 'Valeur : ' + v + ' · ' + g,
+      pfH: '📈 Investir en bourse', pfE: '250 actions : Apple, Tesla, Nvidia, l’or… aux vrais cours, avec ton cash du jeu. 🏆 Top 3 de la semaine : des $BATON.', pfB: 'Investir', title: '📈 Bourse', tot: 'Tes actions', back: '← Portefeuille', pfV: (v, g) => 'Valeur : ' + v + ' · ' + g,
       err: { cash: 'Pas assez de cash', stale: 'Cours trop ancien, réessaie dans un instant', none: 'Tu n’en as pas', small: 'Montant trop petit', soon: 'Bientôt disponible', x: 'Problème de connexion, réessaie' },
     },
     en: {
@@ -28,7 +29,7 @@
       mine: 'My shares', all: 'All assets', kind: { stock: 'Stock', crypto: 'Crypto', mat: 'Commodity' }, closed: 'closed',
       buy: 'Buy', sell: 'Sell', sellAll: 'Sell all', max: 'Max', amount: 'Amount in $', cash: 'Your cash', have: 'You own', pl: 'Gain',
       bought: (q, n) => '✅ Bought: ' + q + ' ' + n, sold: (a) => '✅ Sold: +' + a,
-      pfH: '📈 Invest in the stock market', pfE: '250 stocks: Apple, Tesla, Nvidia, gold… at real prices, with your game cash.', pfB: 'Invest', title: '📈 Stock market', tot: 'Your shares', back: '← Portfolio', pfV: (v, g) => 'Value: ' + v + ' · ' + g,
+      pfH: '📈 Invest in the stock market', pfE: '250 stocks: Apple, Tesla, Nvidia, gold… at real prices, with your game cash. 🏆 Top 3 of the week: $BATON.', pfB: 'Invest', title: '📈 Stock market', tot: 'Your shares', back: '← Portfolio', pfV: (v, g) => 'Value: ' + v + ' · ' + g,
       err: { cash: 'Not enough cash', stale: 'Price too old, try again in a moment', none: 'You do not own any', small: 'Amount too small', soon: 'Coming soon', x: 'Connection problem, try again' },
     },
     ru: {
@@ -38,7 +39,7 @@
       mine: 'Мои акции', all: 'Все активы', kind: { stock: 'Акция', crypto: 'Крипто', mat: 'Сырьё' }, closed: 'закрыто',
       buy: 'Купить', sell: 'Продать', sellAll: 'Продать всё', max: 'Макс', amount: 'Сумма в $', cash: 'Твои деньги', have: 'У тебя', pl: 'Прибыль',
       bought: (q, n) => '✅ Куплено: ' + q + ' ' + n, sold: (a) => '✅ Продано: +' + a,
-      pfH: '📈 Инвестировать на бирже', pfE: '250 акций: Apple, Tesla, Nvidia, золото… по реальным ценам, на игровые деньги.', pfB: 'Инвестировать', title: '📈 Биржа', tot: 'Твои акции', back: '← Портфель', pfV: (v, g) => 'Стоимость: ' + v + ' · ' + g,
+      pfH: '📈 Инвестировать на бирже', pfE: '250 акций: Apple, Tesla, Nvidia, золото… по реальным ценам, на игровые деньги. 🏆 Топ-3 недели: $BATON.', pfB: 'Инвестировать', title: '📈 Биржа', tot: 'Твои акции', back: '← Портфель', pfV: (v, g) => 'Стоимость: ' + v + ' · ' + g,
       err: { cash: 'Не хватает денег', stale: 'Цена устарела, попробуй через минуту', none: 'У тебя их нет', small: 'Слишком маленькая сумма', soon: 'Скоро', x: 'Проблема с соединением, попробуй ещё раз' },
     },
     ar: {
@@ -48,7 +49,7 @@
       mine: 'أسهمي', all: 'كل الأصول', kind: { stock: 'سهم', crypto: 'عملة رقمية', mat: 'سلعة' }, closed: 'مغلق',
       buy: 'شراء', sell: 'بيع', sellAll: 'بيع الكل', max: 'الكل', amount: 'المبلغ بالدولار', cash: 'رصيدك', have: 'تملك', pl: 'الربح',
       bought: (q, n) => '✅ تم الشراء: ' + q + ' ' + n, sold: (a) => '✅ تم البيع: +' + a,
-      pfH: '📈 استثمر في البورصة', pfE: '250 سهمًا: Apple وTesla وNvidia والذهب… بأسعار حقيقية، برصيدك في اللعبة.', pfB: 'استثمر', title: '📈 البورصة', tot: 'أسهمك', back: '→ المحفظة', pfV: (v, g) => 'القيمة: ' + v + ' · ' + g,
+      pfH: '📈 استثمر في البورصة', pfE: '250 سهمًا: Apple وTesla وNvidia والذهب… بأسعار حقيقية، برصيدك في اللعبة. 🏆 أفضل 3 في الأسبوع: $BATON.', pfB: 'استثمر', title: '📈 البورصة', tot: 'أسهمك', back: '→ المحفظة', pfV: (v, g) => 'القيمة: ' + v + ' · ' + g,
       err: { cash: 'رصيدك غير كافٍ', stale: 'السعر قديم، حاول بعد لحظة', none: 'لا تملك منه شيئًا', small: 'المبلغ صغير جدًا', soon: 'قريبًا', x: 'مشكلة في الاتصال، حاول مجددًا' },
     },
     fa: {
@@ -58,7 +59,7 @@
       mine: 'سهام من', all: 'همه دارایی‌ها', kind: { stock: 'سهم', crypto: 'رمزارز', mat: 'کالا' }, closed: 'بسته',
       buy: 'خرید', sell: 'فروش', sellAll: 'فروش همه', max: 'همه', amount: 'مبلغ به دلار', cash: 'پول تو', have: 'داری', pl: 'سود',
       bought: (q, n) => '✅ خریده شد: ' + q + ' ' + n, sold: (a) => '✅ فروخته شد: +' + a,
-      pfH: '📈 سرمایه‌گذاری در بورس', pfE: '۲۵۰ سهم: Apple، Tesla، Nvidia، طلا… با قیمت واقعی، با پول بازی.', pfB: 'سرمایه‌گذاری', title: '📈 بورس', tot: 'سهام تو', back: '→ پرتفوی', pfV: (v, g) => 'ارزش: ' + v + ' · ' + g,
+      pfH: '📈 سرمایه‌گذاری در بورس', pfE: '۲۵۰ سهم: Apple، Tesla، Nvidia، طلا… با قیمت واقعی، با پول بازی. 🏆 ۳ نفر برتر هفته: $BATON.', pfB: 'سرمایه‌گذاری', title: '📈 بورس', tot: 'سهام تو', back: '→ پرتفوی', pfV: (v, g) => 'ارزش: ' + v + ' · ' + g,
       err: { cash: 'پول کافی نداری', stale: 'قیمت قدیمی است، کمی بعد دوباره امتحان کن', none: 'از این سهم نداری', small: 'مبلغ خیلی کم است', soon: 'به‌زودی', x: 'مشکل اتصال، دوباره امتحان کن' },
     },
     id: {
@@ -68,7 +69,7 @@
       mine: 'Sahamku', all: 'Semua aset', kind: { stock: 'Saham', crypto: 'Kripto', mat: 'Komoditas' }, closed: 'tutup',
       buy: 'Beli', sell: 'Jual', sellAll: 'Jual semua', max: 'Maks', amount: 'Jumlah dalam $', cash: 'Uangmu', have: 'Kamu punya', pl: 'Untung',
       bought: (q, n) => '✅ Dibeli: ' + q + ' ' + n, sold: (a) => '✅ Dijual: +' + a,
-      pfH: '📈 Investasi di bursa saham', pfE: '250 saham: Apple, Tesla, Nvidia, emas… dengan harga asli, pakai uang game-mu.', pfB: 'Investasi', title: '📈 Bursa saham', tot: 'Sahammu', back: '← Portofolio', pfV: (v, g) => 'Nilai: ' + v + ' · ' + g,
+      pfH: '📈 Investasi di bursa saham', pfE: '250 saham: Apple, Tesla, Nvidia, emas… dengan harga asli, pakai uang game-mu. 🏆 Top 3 minggu ini: $BATON.', pfB: 'Investasi', title: '📈 Bursa saham', tot: 'Sahammu', back: '← Portofolio', pfV: (v, g) => 'Nilai: ' + v + ' · ' + g,
       err: { cash: 'Uangmu tidak cukup', stale: 'Harga sudah lama, coba lagi sebentar', none: 'Kamu tidak punya', small: 'Jumlah terlalu kecil', soon: 'Segera hadir', x: 'Masalah koneksi, coba lagi' },
     },
   };
@@ -222,7 +223,7 @@
     const T2 = L2(), r = RK;
     if (!r) return '<div class="skel"></div><div class="skel"></div>';
     const pz = r.prizes || [100000, 50000, 25000], left = Math.max(0, Number(r.end || 0) - Date.now() / 1000), dd = Math.floor(left / 86400), hh = Math.floor(left % 86400 / 3600);
-    let h = '<div class="bsprz"><small style="color:var(--mute)">' + T2.rule(r.need || 3, usd(r.min_inv || 100)) + '</small></div>';
+    let h = '<div class="bsprz">' + T2.prize(kpi(pz[0]), kpi(pz[1]), kpi(pz[2]), (dd ? dd + ' ' + T2.d + ' ' : '') + hh + ' h') + (pz.length > 3 || r.rest ? '<br>' + T2.prize2(kpi(pz[3] || 10000), kpi(r.rest || 1000)) : '') + '<br><small style="color:var(--mute)">' + T2.rule(r.need || 3, usd(r.min_inv || 100)) + '</small></div>';
     h += '<p class="hint" style="margin:0 0 8px;font-weight:800">' + (r.me ? T2.rMe(r.me.rank, pc(r.me.pct)) : T2.rNot(Math.min(r.mine || 0, r.need || 3), r.need || 3)) + '</p>';
     const top = r.top || [];
     h += top.length ? top.map((x) => '<div class="row' + (x.me ? ' bsme' : '') + '"><span class="bsrk">' + (['🥇', '🥈', '🥉'][x.rank - 1] || x.rank) + '</span><div class="who"><b>' + ec(x.name) + '</b><small>' + (Number(x.gain) >= 0 ? '+' : '') + usd(x.gain) + '</small></div><div class="px num"><span class="chip ' + (Number(x.pct) >= 0 ? 'up' : 'down') + '">' + pc(x.pct) + '</span></div></div>').join('') : '<p class="hint">' + T2.rNone + '</p>';
@@ -265,7 +266,7 @@
     if (q) q.oninput = () => { Q = q.value.trim(); SHOWN = 40; x.querySelectorAll('[data-bssec]').forEach((b) => b.setAttribute('aria-pressed', String(!Q && SEC === b.dataset.bssec))); drawList(); };
     drawList();
     const bt = document.getElementById('bsbt');
-    
+    if (bt) bt.onclick = () => { hp(); try { tw.openTelegramLink(BATON); } catch (e) { location.href = BATON; } };
   }
 
   async function loadMine() {
@@ -305,6 +306,14 @@
 
   // 27 oct 2026 (19h36, Jeremy): the Portfolio shows the $BATON won on Meme Coin Tycoon (missions, contests, referrals: server mct_bs_mine 'bt'),
   // with a link to Pass The Baton where they are
+  const BTL = {
+    en: ['$BATON won: real money in USDT', '🎯 Partner mission +1,000 · 👥 Invited friend +10,000 · 🏆 Weekly contests up to 100,000. They go to Pass The Baton', 'Win $BATON: real money in USDT', '🎯 Partner mission +1,000 · 👥 Invited friend +10,000 · 🏆 Weekly contests up to 100,000. They go to Pass The Baton', 'Open'],
+    fr: ['$BATON gagnés : de l\'argent réel en USDT', '🎯 Mission partenaire +1 000 · 👥 Ami invité +10 000 · 🏆 Concours de la semaine jusqu\'à 100 000. Ils arrivent sur Pass The Baton', 'Gagne des $BATON : de l\'argent réel en USDT', '🎯 Mission partenaire +1 000 · 👥 Ami invité +10 000 · 🏆 Concours de la semaine jusqu\'à 100 000. Ils arrivent sur Pass The Baton', 'Ouvrir'],
+    ru: ['$BATON выиграно: реальные деньги в USDT', '🎯 Миссия партнёра +1 000 · 👥 Приглашённый друг +10 000 · 🏆 Конкурсы недели до 100 000. Они идут в Pass The Baton', 'Выигрывай $BATON: реальные деньги в USDT', '🎯 Миссия партнёра +1 000 · 👥 Приглашённый друг +10 000 · 🏆 Конкурсы недели до 100 000. Они идут в Pass The Baton', 'Открыть'],
+    ar: ['$BATON مربوحة: مال حقيقي بـ USDT', '🎯 مهمة شريك \u200e+1,000 · 👥 صديق مدعو \u200e+10,000 · 🏆 مسابقات الأسبوع حتى 100,000. تذهب إلى Pass The Baton', 'اربح $BATON: مال حقيقي بـ USDT', '🎯 مهمة شريك \u200e+1,000 · 👥 صديق مدعو \u200e+10,000 · 🏆 مسابقات الأسبوع حتى 100,000. تذهب إلى Pass The Baton', 'افتح'],
+    fa: ['$BATON برده‌شده: پول واقعی به USDT', '🎯 مأموریت شریک \u200e+1,000 · 👥 دوست دعوت‌شده \u200e+10,000 · 🏆 مسابقه‌های هفته تا 100,000. به Pass The Baton می‌روند', '$BATON ببر: پول واقعی به USDT', '🎯 مأموریت شریک \u200e+1,000 · 👥 دوست دعوت‌شده \u200e+10,000 · 🏆 مسابقه‌های هفته تا 100,000. به Pass The Baton می‌روند', 'باز کن'],
+    id: ['$BATON dimenangkan: uang sungguhan dalam USDT', '🎯 Misi partner +1.000 · 👥 Teman diundang +10.000 · 🏆 Kontes mingguan hingga 100.000. Masuk ke Pass The Baton', 'Menangkan $BATON: uang sungguhan dalam USDT', '🎯 Misi partner +1.000 · 👥 Teman diundang +10.000 · 🏆 Kontes mingguan hingga 100.000. Masuk ke Pass The Baton', 'Buka'],
+  };
   let BT = null, btAt = 0;
   async function btLoad() {
     if (Date.now() - btAt < 15000) return;  // 27 oct 2026 (21h06): refreshed often, a Task's $BATON show up within seconds
@@ -314,7 +323,6 @@
   let btView = '';
   document.addEventListener('visibilitychange', () => { if (!document.hidden) btAt = 0; });
   function btCard() {
-    return;  // 18 nov 2026 (Jeremy): no more $BATON card in the Portfolio
     let c = document.getElementById('bsbt');
     if (btView !== view()) { btView = view(); if (btView === 'portfolio') btAt = 0; }  // fresh total each time the Portfolio opens
     if (view() !== 'portfolio') { if (c) c.remove(); return; }
@@ -393,7 +401,7 @@
     const GO = (0, eval)('typeof MSN_GO !== "undefined" ? MSN_GO : null');
     if (GO) GO.bourse = () => { try { go('portfolio'); } catch (e) {} setTimeout(open, 300); };
     // 27 oct 2026 (13h43, Jeremy): a friend who really plays also pays +10,000 $BATON on Pass The Baton (server mct_tok_ref): shown on the invite texts
-    const RB = { en: '' };  // 18 nov 2026 (Jeremy): no more $BATON per invited friend
+    const RB = { en: ' · +10,000 $BATON per friend', fr: ' · +10 000 $BATON par ami', ru: ' · +10 000 $BATON за друга', ar: ' · ‎+10,000 $BATON لكل صديق', fa: ' · ‎+10,000 $BATON برای هر دوست', id: ' · +10.000 $BATON per teman', es: ' · +10.000 $BATON por amigo' };
     if (LL) Object.keys(LL).forEach((k) => {
       const o = LL[k]; if (!o || typeof o !== 'object' || o._rb) return; o._rb = true; const sx = RB[k] || RB.en;
       if (typeof o.inv_t === 'function') { const f = o.inv_t; o.inv_t = (...a) => f(...a) + sx; }

@@ -257,19 +257,19 @@
 (() => {
   const BLOCK = 'task-59993';
   const TT = {
-    fr: { h: '🤝 Mission partenaire', r: '+500 $', go: 'Go', claim: 'Récupérer', done: 'Fait ✅', wait: 'Prochaine mission dans', ok: '💵 +500 $ ajoutés à ton cash !' },
-    id: { h: '🤝 Misi partner', r: '+$500', go: 'Mulai', claim: 'Klaim', done: 'Selesai ✅', wait: 'Misi berikutnya dalam', ok: '💵 +$500 ditambahkan ke uangmu!' },
-    ru: { h: '🤝 Задание партнёра', r: '+$500', go: 'Go', claim: 'Забрать', done: 'Готово ✅', wait: 'Следующее задание через', ok: '💵 +$500 к твоим деньгам!' },
-    ar: { h: '🤝 مهمة شريك', r: '+$500', go: 'ابدأ', claim: 'استلم', done: 'تم ✅', wait: 'المهمة التالية بعد', ok: '💵 تمت إضافة $500 إلى أموالك!' },
-    fa: { h: '🤝 مأموریت همکار', r: '+500 دلار', go: 'برو', claim: 'دریافت', done: 'انجام شد ✅', wait: 'مأموریت بعدی تا', ok: '💵 500 دلار به پولت اضافه شد!' },
-    en: { h: '🤝 Partner mission', r: '+$500', go: 'Go', claim: 'Claim', done: 'Done ✅', wait: 'Next mission in', ok: '💵 +$500 added to your cash!' },
+    fr: { h: '🤝 Mission partenaire', r: '+500 $ · +500 $BATON', go: 'Go', claim: 'Récupérer', done: 'Fait ✅', wait: 'Prochaine mission dans', ok: '💵 +500 $ ajoutés à ton cash, et +500 $BATON sur Pass The Baton !' },
+    id: { h: '🤝 Misi partner', r: '+$500 · +500 $BATON', go: 'Mulai', claim: 'Klaim', done: 'Selesai ✅', wait: 'Misi berikutnya dalam', ok: '💵 +$500 ditambahkan ke uangmu, dan +500 $BATON di Pass The Baton!' },
+    ru: { h: '🤝 Задание партнёра', r: '+$500 · +500 $BATON', go: 'Go', claim: 'Забрать', done: 'Готово ✅', wait: 'Следующее задание через', ok: '💵 +$500 к твоим деньгам и +500 $BATON в Pass The Baton!' },
+    ar: { h: '🤝 مهمة شريك', r: '+$500 · +500 $BATON', go: 'ابدأ', claim: 'استلم', done: 'تم ✅', wait: 'المهمة التالية بعد', ok: '💵 تمت إضافة $500 إلى أموالك و500 $BATON في Pass The Baton!' },
+    fa: { h: '🤝 مأموریت همکار', r: '+500 دلار · +500 $BATON', go: 'برو', claim: 'دریافت', done: 'انجام شد ✅', wait: 'مأموریت بعدی تا', ok: '💵 500 دلار به پولت و 500 $BATON در Pass The Baton اضافه شد!' },
+    en: { h: '🤝 Partner mission', r: '+$500 · +500 $BATON', go: 'Go', claim: 'Claim', done: 'Done ✅', wait: 'Next mission in', ok: '💵 +$500 added to your cash, and +500 $BATON on Pass The Baton!' },
   };
   const L = () => { let l = 'en'; try { l = LANG; } catch (e) {} return TT[l] || TT.en; };
   // 28 oct 2026 (18h, Jeremy): 5 partner missions a day at most: once done, the block says so instead of offering more
   const AGF = { fr: (m) => '✅ Tes ' + m + ' missions du jour sont faites, reviens demain', en: (m) => '✅ Your ' + m + ' missions of the day are done, come back tomorrow', id: (m) => '✅ ' + m + ' misi hari ini selesai, kembali besok', ru: (m) => '✅ Все ' + m + ' заданий на сегодня выполнены, возвращайся завтра', ar: (m) => '✅ أنجزت مهامك الـ' + m + ' لهذا اليوم، عد غدًا', fa: (m) => '✅ ' + m + ' مأموریت امروزت انجام شد، فردا برگرد' };
   const agtFull = (m) => { let l = 'en'; try { l = LANG; } catch (e) {} return (AGF[l] || AGF.en)(m); };
   // 2 nov 2026 (11h03, Jeremy): the next reward waiting (the 10th partner mission of the day: +5,000 $ and +5,000 $BATON)
-  const AGV = { fr: ['+5 000 $', '+10 000 $'], en: ['+$5,000', '+$10,000'] };  // 11h05: 2nd goal at the 25th
+  const AGV = { fr: ['+5 000 $ +5 000 $BATON', '+10 000 $ +10 000 $BATON'], en: ['+$5,000 +5,000 $BATON', '+$10,000 +10,000 $BATON'] };  // 11h05: 2nd goal at the 25th
   const AGN = { fr: (k, v) => '🎁 Encore ' + k + ' mission' + (k > 1 ? 's' : '') + ' → ' + v, en: (k, v) => '🎁 ' + k + ' more mission' + (k > 1 ? 's' : '') + ' → ' + v, id: (k, v) => '🎁 ' + k + ' misi lagi → ' + v, ru: (k, v) => '🎁 Ещё ' + k + ' → ' + v };
   const AGB = { fr: (v) => '🎯 Bonus du jour : ' + v + ' !', en: (v) => '🎯 Daily bonus: ' + v + '!', id: (v) => '🎯 Bonus harian: ' + v + '!', ru: (v) => '🎯 Бонус дня: ' + v + '!' };
   const agtNx = (n, justDone) => { let l = 'en'; try { l = LANG; } catch (e) {} const v = AGV[l] || AGV.en, bn = AGB[l] || AGB.en, nx = AGN[l] || AGN.en;
