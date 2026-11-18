@@ -108,6 +108,27 @@ g("comment-choisir-siege-de-douche/",
 <li><strong>Les dimensions</strong> : mesurez le bac de douche ou la baignoire avant d'acheter, en gardant de la place pour les pieds.</li>
 <li><strong>Les matériaux</strong> : un cadre en aluminium ne rouille pas et reste léger.</li>
 </ul>
+<p>Notre conseil : en cas de doute entre tabouret et chaise, prenez la chaise avec accoudoirs. Le tabouret est plus compact, mais c'est au moment de se relever que l'on glisse ou que l'on perd l'équilibre, et c'est là que les accoudoirs servent.</p>
+<h2>Comment mesurer avant d'acheter ?</h2>
+<p>La plupart des retours viennent d'un siège trop large pour le receveur ou trop haut pour la personne. Cinq minutes avec un mètre ruban évitent ce problème.</p>
+<ol>
+<li><strong>Le receveur ou la baignoire</strong> : mesurez la largeur et la profondeur utiles, à l'intérieur des rebords. Comparez avec l'encombrement total du siège indiqué sur la fiche (pieds écartés compris), pas seulement avec la largeur de l'assise.</li>
+<li><strong>La place pour les jambes</strong> : une fois assise, la personne doit pouvoir poser les deux pieds devant elle sans toucher la paroi.</li>
+<li><strong>La hauteur sous le genou</strong> : la personne assise sur une chaise, pieds nus et à plat, mesurez du sol jusqu'au creux du genou. La hauteur d'assise du siège doit pouvoir se régler autour de cette valeur.</li>
+<li><strong>Le passage</strong> : vérifiez que le siège passe la porte de douche ou la paroi, surtout pour une chaise avec accoudoirs.</li>
+<li><strong>Le mur, pour un siège rabattable</strong> : une cloison en plaque de plâtre ne suffit pas sans renfort. Faites vérifier le support avant l'achat.</li>
+</ol>
+<h2>Les erreurs qui rendent un siège dangereux</h2>
+<p>Un bon siège mal installé peut basculer. Voici ce que l'on voit le plus souvent :</p>
+<ul>
+<li><strong>Un pied posé sur la bonde ou à cheval sur un joint</strong> : le siège devient bancal. Les quatre embouts doivent reposer à plat sur une surface continue.</li>
+<li><strong>Des pieds réglés à des hauteurs différentes</strong> sans raison : vérifiez que chaque réglage est bien verrouillé (le bouton ou la goupille doit ressortir dans son trou) avant la première utilisation.</li>
+<li><strong>Un tabouret pour une personne qui se relève difficilement</strong> : sans appui, elle se retient au rideau ou au porte-serviettes, qui ne sont pas faits pour ça.</li>
+<li><strong>Un siège de douche posé dans le fond d'une baignoire</strong> : le fond est arrondi et glissant, la stabilité n'est pas garantie.</li>
+<li><strong>Un siège prêté ou ancien jamais contrôlé</strong> : embouts durcis, vis desserrées, cadre fissuré. Jetez un œil à tout cela avant de l'utiliser.</li>
+</ul>
+<h2>Comment l'entretenir pour qu'il reste sûr ?</h2>
+<p>Après la douche, rincez le siège pour enlever le savon, qui rend l'assise glissante, puis laissez-le sécher. Une fois par mois, retournez-le : regardez l'usure des embouts en caoutchouc, resserrez les vis et vérifiez qu'aucun réglage n'a bougé. Des embouts usés ou fendus se remplacent souvent facilement ; la notice du fabricant indique les pièces compatibles. Si le cadre est fissuré ou plié, ne réparez pas : remplacez le siège.</p>
 <h2>Douche ou baignoire ?</h2>
 <p>Dans une baignoire, un siège de douche classique est souvent instable. Mieux vaut une <strong>planche de bain</strong> posée sur les rebords, ou un siège de baignoire prévu pour cet usage. Enjamber le rebord reste toutefois le moment le plus risqué : si cela devient difficile, il est peut-être temps de penser à remplacer la baignoire par une douche de plain-pied. <a href="{AMZ:planche de bain senior}" """ + A + """>Voir les planches de bain</a>.</p>
 <h2>Les compléments indispensables</h2>
@@ -125,7 +146,8 @@ g("comment-choisir-siege-de-douche/",
 """,
   faq=[("Quelle hauteur pour un siège de douche ?", "Assis, la personne doit avoir les pieds à plat sur le sol et les genoux à peu près à angle droit. Les pieds réglables permettent d'ajuster la hauteur."),
        ("Tabouret ou chaise de douche ?", "Le tabouret suffit si l'équilibre est bon. Une chaise avec dossier et accoudoirs est plus sûre quand on a besoin d'appui pour s'asseoir et se relever."),
-       ("Peut-on utiliser un siège de douche dans une baignoire ?", "Ce n'est pas l'idéal. Préférez une planche de bain ou un siège de baignoire prévu pour cet usage.")],
+       ("Peut-on utiliser un siège de douche dans une baignoire ?", "Ce n'est pas l'idéal. Préférez une planche de bain ou un siège de baignoire prévu pour cet usage."),
+       ("Comment savoir si un siège de douche est trop large ?", "Mesurez l'intérieur du receveur et comparez avec l'encombrement total du siège, pieds compris. Il doit rester de la place devant pour poser les deux pieds.")],
   short="Choisir un siège de douche", cat="Salle de bains")
 
 g("deambulateur-ou-rollator/",

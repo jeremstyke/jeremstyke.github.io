@@ -80,7 +80,60 @@ def add_toc(body):
 def read_min(html_):
     return max(2, round(len(re.sub('<[^>]+>', ' ', html_).split()) / 200))
 
+REL = 'rel="sponsored nofollow noopener" target="_blank"'
+def top_pick(body):
+    """Produit n°1 d'un top : (nom, raison, ancre, requête Amazon) ou None.
+    Premier intertitre (« 1. » en priorité) suivi, avant l'intertitre suivant, d'un lien « Voir ... Amazon »."""
+    heads = list(re.finditer(r'<h([23])(?: id="([^"]*)")?>\s*(.+?)</h\1>', body))
+    order = [h for h in heads if re.match(r'1\.\s', h.group(3))] + heads
+    for k, h in enumerate(order):
+        nxt = next((x.start() for x in heads if x.start() > h.start()), len(body))
+        a = re.search(r'href="\{AMZ:([^}]+)\}"[^>]*>\s*Voir[^<]*Amazon', body[h.end():nxt])
+        if not a: continue
+        title = re.sub(r'^1\.\s*', '', re.sub('<[^>]+>', '', h.group(3)))
+        name, _, why = title.partition(' : ')
+        why = re.sub(r'\s*\((?:notre|mon) choix\)\s*$', '', why.strip(), flags=re.I)
+        return name.strip(), (why[:1].upper() + why[1:]) if why else '', h.group(2), a.group(1)
+    return None
+
+def pick_box(body):
+    """Encadré « Notre choix » juste après l'intro : produit n°1 des tops, ou n°1 du comparatif lié pour les guides."""
+    if '{CTA}' not in body or 'class="pick"' in body: return body
+    p = top_pick(body)
+    if p:
+        name, why, anchor, q = p
+        more = ('<a class="pick-more" href="#%s">Pourquoi ce choix</a>' % anchor) if anchor else ''
+        box = ('<aside class="pick"><div><span class="pick-tag">⭐ Notre choix n°1</span><strong>%s</strong><span>%s</span>%s</div>'
+               '<a class="btn" href="{AMZ:%s}" %s>Voir sur Amazon</a></aside>') % (esc(name), esc(why or 'Notre recommandation n°1 dans ce comparatif.'), more, q, REL)
+        return body.replace('{CTA}', box + '\n{CTA}', 1)
+    return body
+
+def pick_box_guide(body, slug):
+    """Pour un guide : n°1 du comparatif lié qui parle du même produit (mots communs dans l'adresse)."""
+    if '{CTA}' not in body or 'class="pick"' in body or slug.startswith('meilleur'): return body
+    stop = {'livre', 'livres', 'meilleur', 'meilleure', 'meilleurs', 'comment', 'choisir', 'senior', 'personne', 'agee', 'de', 'du', 'la', 'le', 'les', 'pour', 'bien', 'quel', 'quelle'}
+    if re.search(r'aide|rembours|prix|retraite', slug): return body
+    words = [w for w in slug.strip('/').split('-') if w not in stop]
+    if not words: return body
+    mine = set(words)
+    best, score = None, 0
+    cands = list(dict.fromkeys(re.findall(r'href="\{R\}(meilleur[a-z0-9-]*/)"', body))) + [gd['slug'] for gd in GUIDES if gd['slug'].startswith('meilleur')]
+    for cand in cands:
+        cw = set(cand.strip('/').split('-')) - stop
+        sc = len(mine & cw) if words[0] in cw else 0
+        if sc > score: best, score = cand, sc
+    if not best: return body
+    top = next((gd for gd in GUIDES if gd['slug'] == best), None)
+    p = top_pick(top['body']) if top else None
+    if not p: return body
+    name, why, anchor, q = p
+    box = ('<aside class="pick"><div><span class="pick-tag">⭐ Pressé ? Notre n°1</span><strong>%s</strong><span>%s</span>'
+           '<a class="pick-more" href="{R}%s">Voir tout le comparatif</a></div>'
+           '<a class="btn" href="{AMZ:%s}" %s>Voir sur Amazon</a></aside>') % (esc(name), esc(why or ('Extrait de notre comparatif « %s ».' % top['short'])), best, q, REL)
+    return body.replace('{CTA}', box + '\n{CTA}', 1)
+
 def render(body):
+    body = pick_box(body)
     body = body.replace('{CTA}', CTA).replace('{R}checklist/', '{R}' + HUB)
     body = re.sub(r'\{AUDIBLE:([A-Z0-9]{10})\}', lambda m: 'https://www.amazon.fr/hz/audible/mlp/mfpdp/' + m.group(1) + '?actionCode=AMSTM1450129210001&tag=' + TAG, body)
     body = body.replace('{AUDIBLE}', 'https://www.amazon.fr/hz/audible/mlp?actionCode=AMSTM1450129210001&tag=' + TAG)
@@ -321,7 +374,7 @@ def build():
         emo, tint = META.get(x['slug'], ('📘', 'sauge'))
         same = [o for o in latest if o['slug'] != x['slug'] and o['cat'] == x['cat']]
         others = (same + [o for o in latest if o['slug'] != x['slug'] and o not in same])[:3]
-        gbody = add_toc(x['body'])
+        gbody = pick_box_guide(add_toc(x['body']), x['slug'])
         meta = ('<p class="meta">Mis à jour le %s' + BYLINE + ' · %d min de lecture</p>') % (fr_date(dates[x['slug']]), read_min(x['body']))
         rel = '<section class="related"><h2>À lire aussi</h2><div class="cards">%s</div></section>' % ''.join(card(o) for o in others) if others else ''
         art = [{"@context": "https://schema.org", "@type": "Article", "headline": x['h1'], "description": x['desc'],
