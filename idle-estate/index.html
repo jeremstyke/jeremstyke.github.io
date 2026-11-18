@@ -573,7 +573,6 @@ $('sky').addEventListener('click', e => {
 let skyKey = '';
 function buildBanners() {
   const b = $('banners'); let h = '';
-  h += `<div class="bn" style="background:#fff3d6"><div class="tx"><b>⚠️ ${L.betaT}</b><span>${L.betaS}</span></div></div>`;
   if (!S.mg[0]) h += `<div class="bn" style="background:#e6f6fd"><div class="tx"><b>👆 ${L.hint.split('. ')[0]}.</b><span>${L.hint.split('. ').slice(1).join('. ')}</span></div></div>`;
   const promo = !S.welcome ? 'w' : 'd';
   if (promo === 'w') h += `<div class="bn gold"><div class="tx"><b>🎁 ${L.welcomeT}</b><span>${L.welcomeS}</span></div><button class="btn gold" data-sku="welcome">⭐ ${S.shop.welcome}</button></div>`;
