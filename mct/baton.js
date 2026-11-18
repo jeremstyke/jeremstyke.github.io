@@ -145,6 +145,7 @@
 // (the TON referral sheet #tonsheet and the diamond #diam), with a button to Baton where USDT can still be earned
 (function () {
   try {
+    return;  // 18 nov 2026 (Jeremy): no more Pass The Baton in Meme Coin Tycoon
     const N = {
       en: ['⏳ The referral program and the diamond stop on Sunday 1 November. Commissions already earned are paid from $0.01.', '🏃 Keep earning USDT on Pass The Baton', 'Play'],
       fr: ['⏳ Le parrainage et le diamant s\'arrêtent le dimanche 1er novembre. Les commissions déjà gagnées sont payées dès 0,01 $.', '🏃 Continue de gagner des USDT sur Pass The Baton', 'Jouer'],

@@ -122,7 +122,7 @@
     b.innerHTML = '<div class="rtabs">' + ['pl', 'rf'].map((k) => '<button data-rt="' + k + '" class="' + (k === TAB ? 'on' : '') + '">' + ec(T[k]) + '</button>').join('') + '</div>'
       + '<div class="rc"><p class="rsm">' + ec(TAB === 'pl' ? T.plx : TAB === 'rf' ? T.rfx : T.dgx) + '</p>'
       + (c && c.ends ? '<p class="rsm">' + ec(T.ends) + ' <b id="rkcd" data-end="' + ec(c.ends) + '">' + cd(c.ends) + '</b></p>' : '')
-      + '<div class="rpz">' + pz.slice(0, 3).map((p, i) => '<span>' + md[i] + ' ' + (bt ? kb(p) : usd(p)) + '</span>').join('') + '</div><p class="rsm" style="margin:-4px 0 8px;font-size:12px">' + ec(bt ? (PZB[lg()] || PZB.en) : T.prizes) + '</p>'
+      + (pz.length ? '<div class="rpz">' + pz.slice(0, 3).map((p, i) => '<span>' + md[i] + ' ' + (bt ? kb(p) : usd(p)) + '</span>').join('') + '</div><p class="rsm" style="margin:-4px 0 8px;font-size:12px">' + ec(bt ? (PZB[lg()] || PZB.en) : T.prizes) + '</p>' : '')
       + rows + me + '</div>' + act;
     b.querySelectorAll('[data-rt]').forEach((x) => x.onclick = () => { hp(); TAB = x.dataset.rt; paint(); });
     // 16 oct 2026: a tap on a name opens that player's profile (profile.js)
