@@ -158,7 +158,7 @@ g("quelles-graines-pour-les-oiseaux/",
 
 <h2>Les mélanges de graines : bien lire l'étiquette</h2>
 <p>Un mélange permet de satisfaire plusieurs espèces à la fois. Selon la LPO Occitanie, le mélange idéal se compose de tournesol noir, de cacahuètes et de maïs concassé. La LPO nationale cite aussi le millet et l'avoine parmi les graines courantes, et Natagora ajoute le chènevis, l'orge, le blé ou le sésame.</p>
-<p>Méfiez-vous en revanche des mélanges très bon marché. La LPO Occitanie comme la LPO Nord déconseillent ceux qui contiennent des pois, des lentilles et du riz. Regardez donc la composition avant d'acheter, et privilégiez un mélange où le tournesol domine, comme le mélange courant décrit par la LPO. Natagora conseille par ailleurs de ne mettre qu'un seul type de nourriture par mangeoire et d'en donner peu à la fois.</p>
+<p>Méfiez-vous en revanche des mélanges très bon marché. La LPO Occitanie comme la LPO Nord déconseillent ceux qui contiennent des pois, des lentilles et du riz. Regardez donc la composition avant d'acheter, et privilégiez un mélange où le tournesol domine, comme le mélange courant décrit par la LPO. Nous avons comparé sept sacs du commerce dans notre sélection du <a href="{R}meilleur-melange-graines-oiseaux/">meilleur mélange de graines pour oiseaux</a>. Natagora conseille par ailleurs de ne mettre qu'un seul type de nourriture par mangeoire et d'en donner peu à la fois.</p>
 <p><a href="{AMZ:mélange graines oiseaux du ciel tournesol}" """ + A + """>Voir sur Amazon</a></p>
 
 <h2>Les cacahuètes : non salées, et pas n'importe quand</h2>
@@ -474,7 +474,7 @@ g("installer-un-nichoir/",
 <li><strong>Comment</strong> : videz tout le contenu, brossez l'intérieur avec une brosse métallique et vérifiez la fixation. La LPO Auvergne-Rhône-Alpes conseille aussi de rincer à l'eau bouillante et de bien laisser sécher. En cas de parasites, la LPO et la Ligue belge citent l'essence de thym ou de serpolet passée sur les parois.</li>
 <li><strong>Jamais pendant la nidification</strong> : n'ouvrez pas le nichoir au printemps ni en été. Les parents pourraient abandonner leurs petits.</li>
 </ul>
-<p>Pour les nids d'hirondelles de fenêtre, la Ligue belge indique que le nettoyage n'est généralement pas nécessaire avant plusieurs années d'utilisation. Contrôlez simplement la fixation chaque année.</p>
+<p>Pour les nids d'hirondelles de fenêtre, la Ligue belge indique que le nettoyage n'est généralement pas nécessaire avant plusieurs années d'utilisation. Contrôlez simplement la fixation chaque année. Les nichoirs à martinets, eux, demandent une entrée en fente et une pose très haute : tout est expliqué dans notre fiche du <a href="{R}martinet-noir/">martinet noir</a>.</p>
 
 <h2>Un nichoir avec caméra pour observer sans déranger</h2>
 <p>L'envie de soulever le toit pour voir les oisillons est forte. Il ne faut pas le faire. La LPO Auvergne-Rhône-Alpes rappelle de ne pas ouvrir un nichoir pour regarder à l'intérieur et suggère, pour les curieux, des nichoirs avec webcam intégrée : « une bonne solution pour observer sans déranger ». La Ligue belge a d'ailleurs lancé son propre nichoir connecté. Choisissez un modèle qui respecte les mêmes règles qu'un nichoir classique : bon diamètre de trou, pas de perchoir, bois non traité à l'intérieur. Posez-le de préférence en automne, comme un nichoir ordinaire. Sur le même principe, une <a href="{R}comment-choisir-mangeoire-connectee/">mangeoire connectée</a> permet de voir les oiseaux de près l'hiver.</p>
@@ -2315,6 +2315,7 @@ g("oiseau-jaune-et-vert/",
 <h2>Un grand oiseau vert sur la pelouse : le pic vert</h2>
 <p>Pas de doute possible à cause de la taille : 30 à 36 cm selon la LPO. Calotte rouge vif, long bec fin, et une moustache noire avec du rouge au centre chez le mâle, entièrement noire chez la femelle. Il passe beaucoup de temps au sol, car il mange surtout des fourmis. Son cri ricanant, « kiu-kiu-kiuk », s'entend de loin.</p>
 <p>Pour l'aider, Oiseaux des jardins donne un conseil simple : ne détruisez pas les fourmilières. Une pelouse tondue moins souvent lui offre un vrai garde-manger.</p>
+<p>Et si l'oiseau vert est encore plus grand, avec une longue queue fine, un bec rouge et un cri strident, en bande dans les platanes d'une grande ville, c'est une <a href="{R}perruche-a-collier/">perruche à collier</a>.</p>
 
 <h2>Du rouge en plus du jaune ? Le chardonneret</h2>
 <p>Si votre oiseau a un masque rouge et une large bande jaune sur une aile noire, c'est un chardonneret élégant. Mâle et femelle sont identiques de loin. Les jeunes gardent une tête beige jusqu'au premier hiver, ce qui trompe souvent en fin d'été. Il est intégralement protégé et en net recul : moins 31 % entre 2001 et 2019 selon le STOC. Il vient volontiers à la mangeoire pour le tournesol, et la boutique LPO le cite parmi les amateurs de graines de niger.</p>
@@ -2838,3 +2839,235 @@ g("cadeau-passionne-oiseaux/",
        ("Avez-vous testé ces produits ?",
         "Non. Cette sélection repose sur les fiches publiées par les fabricants et les revendeurs. Quand une information manque, nous l'indiquons comme non précisée.")],
   short="Top 10 cadeaux pour passionné d'oiseaux", cat="Observer")
+
+AUTO_META['martinet-noir/'] = ('🪶', 'ciel')
+g("martinet-noir/",
+  "Martinet noir : le reconnaître et lui poser un nichoir",
+  "Martinet noir : comment le reconnaître et l'accueillir sous votre toit",
+  "Le martinet noir passe presque toute sa vie en vol et ne reste chez nous que l'été. Comment le reconnaître, où il niche et quel nichoir poser avant son retour.",
+  """
+<p>Ces oiseaux sombres qui filent en criant au-dessus des toits les soirs d'été, ce sont des <strong>martinets noirs</strong>. On les prend souvent pour des hirondelles, mais ce n'est pas du tout la même famille : le martinet ne se pose presque jamais, ni sur un fil, ni sur une branche, et encore moins au sol.</p>
+<p>En ce moment, vous ne le verrez pas : il passe l'hiver en Afrique. C'est justement la bonne saison pour lui préparer un nichoir, qui doit être en place avant son retour au printemps.</p>
+{CTA}
+
+<h2>Martinet ou hirondelle : comment ne plus les confondre ?</h2>
+<p>La silhouette suffit. Le martinet est entièrement sombre, avec juste la gorge plus pâle, et ses ailes très longues forment un croissant, une « lame de faux » comme le dit la LPO PACA. L'hirondelle de fenêtre montre au contraire un ventre et un croupion bien blancs. Le martinet est aussi plus grand : la même fiche de la LPO PACA lui donne 17 à 18,5 cm.</p>
+<table><thead><tr><th>Critère</th><th>Martinet noir</th><th>Hirondelle de fenêtre</th><th>Hirondelle rustique</th></tr></thead><tbody>
+<tr><td>Couleur</td><td>Tout sombre, gorge plus pâle</td><td>Dessus bleu noir, ventre et croupion blancs</td><td>Dessus bleu noir, gorge rouge, ventre clair</td></tr>
+<tr><td>Ailes</td><td>Très longues, en croissant</td><td>Plus courtes, plus larges</td><td>Plus courtes, queue à longs filets</td></tr>
+<tr><td>Se pose</td><td>Presque jamais, jamais au sol</td><td>Sur les fils, au nid, au sol pour la boue</td><td>Sur les fils, dans les bâtiments</td></tr>
+<tr><td>Nid</td><td>Invisible, dans une cavité du bâti</td><td>Boule de boue sous le débord du toit</td><td>Coupe de boue dans les granges et étables</td></tr>
+<tr><td>Fientes sur la façade</td><td>Non</td><td>Oui, sous le nid</td><td>Oui, dans le bâtiment</td></tr>
+</tbody></table>
+<p>Le détail des fientes est souvent oublié, et il rassure les propriétaires : selon la LPO PACA, les adultes de martinet ne se posent pratiquement jamais au bord du nid, si bien qu'ils ne salissent pas les murs. Le nid est caché sous une tuile ou dans une fente, vous ne le verrez pas.</p>
+<p>De bonnes jumelles aident à voir la gorge pâle et la forme des ailes : <a href="{AMZ:Nikon Prostaff P7 8x42}" """ + A + """>Voir sur Amazon</a>. Nous comparons d'autres modèles dans notre sélection des <a href="{R}meilleures-jumelles-oiseaux/">meilleures jumelles pour les oiseaux</a>.</p>
+
+<h2>Est-ce vrai qu'il vit en vol ?</h2>
+<p>Presque. La Ligue royale belge pour la protection des oiseaux écrit qu'il vole 99 % du temps et ne se pose en général qu'en période de reproduction. La boutique de la LPO précise qu'il se nourrit, boit et ramasse les matériaux de son nid en volant. Il utilise aussi les courants aériens pour se reposer, selon la LPO Grand Est.</p>
+<p>Ses pattes sont minuscules. D'après la LPO PACA, elles ne lui permettent pas de s'envoler depuis le sol : posé par terre, il est coincé. Il s'accroche en revanche très bien aux surfaces verticales, ce qui explique ses nids dans les murs.</p>
+
+<h2>Quand le voit-on en France ?</h2>
+<p>Peu de temps. La LPO PACA le dit présent de fin avril à la mi-août sous nos latitudes, et la LPO Grand Est signale des départs dès la fin juillet, parfois du jour au lendemain. La boutique LPO annonce un retour plus précoce, entre fin mars et début avril : les dates varient d'une région et d'une année à l'autre. Par exemple, si le ciel de votre quartier se tait brusquement début août, ils sont simplement partis vers l'Afrique.</p>
+
+<h2>Que mange-t-il, et peut-on le nourrir ?</h2>
+<p>Uniquement des insectes attrapés en vol : mouches, moucherons, moustiques ou petits coléoptères, cite la boutique LPO. Il ne viendra donc jamais à une mangeoire, et il n'y a rien à lui donner. Ce qui l'aide vraiment, c'est un environnement riche en insectes : moins de pesticides, des haies, un coin de prairie fleurie, des mares.</p>
+<p>Vos autres visiteurs, eux, profitent d'un coup de pouce l'hiver : tout est expliqué dans notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a>.</p>
+
+<h2>Où niche le martinet noir ?</h2>
+<p>Dans le bâti, surtout. Sous les tuiles, derrière les gouttières, dans les coffres de volets roulants ou une fissure du mur, liste la boutique LPO. La LPO PACA ajoute les falaises naturelles. Le nid est une petite coupe de plumes et de débris attrapés en vol, collés à la salive. La femelle pond 1 à 3 œufs blancs, une seule fois par an, entre début mai et mi-juin, et les deux parents s'occupent de la couvée et des jeunes pendant une quarantaine de jours, selon la LPO PACA.</p>
+<p>Le martinet revient chaque année au même endroit. C'est là que les rénovations font des dégâts : une toiture refaite ou une façade isolée sans précaution, et une colonie perd ses cavités. Le martinet est protégé : la LPO PACA rappelle que le Code de l'environnement et l'arrêté du 29 octobre 2009 interdisent notamment de détruire ses nids. Si vous prévoyez des travaux, faites-les hors de la période de nidification et renseignez-vous auprès de votre LPO locale.</p>
+
+<h2>Quel nichoir pour les martinets, et où le poser ?</h2>
+<p>Un nichoir à martinet ne ressemble pas à un nichoir à mésange. C'est une boîte allongée, avec une entrée en fente et non un trou rond. Les mesures varient selon les sources :</p>
+<ul>
+<li><strong>L'entrée</strong> : 28 x 65 mm pour le nichoir à encastrer vendu par la boutique LPO. La LPO PACA donne 60 x 30 mm comme valeur générale et 70 x 28 mm comme valeur propre au martinet noir.</li>
+<li><strong>L'intérieur</strong> : le modèle « boîte à chaussures » le plus courant mesure 280 x 150 mm à l'intérieur, et la LPO PACA demande au moins 400 cm² de surface pour le nid.</li>
+<li><strong>La hauteur</strong> : au moins 3 m, idéalement plus de 5 m, pour la Ligue belge ; au moins 6 à 8 m, de préférence sous une avancée de toit, pour la boutique LPO.</li>
+<li><strong>L'orientation</strong> : pas déterminante selon la Ligue belge, mais évitez le plein soleil et le ruissellement de la pluie. Laissez surtout quelques mètres dégagés devant l'entrée : le martinet arrive en vol direct.</li>
+<li><strong>Le nombre</strong> : au moins 2 ou 3 côte à côte, conseille la Ligue belge, car c'est un oiseau colonial.</li>
+</ul>
+<p><strong>Notre conseil</strong> : visez haut, sous le débord du toit d'une maison à étage, et posez-en plusieurs. Ne vous découragez pas la première année : la Ligue belge prévient que l'installation peut prendre plusieurs années. Elle propose une astuce qui accélère les choses : diffuser des enregistrements de cris de martinets, matin et soir, dès le début du printemps.</p>
+<p>Autre piège fréquent : les étourneaux et les moineaux s'installent volontiers dans les nichoirs à martinets. La Ligue belge conseille de boucher l'entrée après l'envol, vers la mi-août, et de la rouvrir vers le 20 avril.</p>
+<p><strong>Nichoir à martinet à encastrer</strong> : <a href="{AMZ:nichoir martinet noir encastrer}" """ + A + """>Voir sur Amazon</a></p>
+<p><strong>Nichoir à martinet en béton de bois</strong> : <a href="{AMZ:Schwegler nichoir martinet}" """ + A + """>Voir sur Amazon</a></p>
+<p>Les règles générales (fixation, entretien, période de pose) sont dans notre guide pour <a href="{R}installer-un-nichoir/">installer un nichoir</a>. Le moineau, qui niche lui aussi sous les toits, a ses propres besoins : voyez notre fiche du <a href="{R}moineau-domestique/">moineau domestique</a>.</p>
+
+<h2>J'ai trouvé un martinet au sol, que faire ?</h2>
+<p>Ne le laissez pas sur place : il ne peut pas redécoller seul depuis le sol. Mettez-le dans un carton aéré, au calme, et contactez sans attendre un centre de soins pour la faune sauvage ou votre LPO locale, qui vous diront quoi faire.</p>
+<p>Pour apprendre son cri strident et le distinguer des hirondelles à l'oreille, un guide avec les sons est utile : <a href="{AMZ:Guide des oiseaux de France Belin Morin}" """ + A + """>Voir sur Amazon</a>. D'autres titres sont présentés dans notre sélection du <a href="{R}meilleur-guide-oiseaux/">meilleur guide d'identification des oiseaux</a>.</p>
+
+<p class="sources"><strong>Sources</strong> : <a href="https://paca.lpo.fr/images/mediatheque/fichiers/section_etudes/connaissance/abc/abc_briancon/enq_hiron_fiche_martinet_noir.pdf" target="_blank" rel="noopener">LPO PACA : fiche martinet noir</a> ; <a href="https://protectiondesoiseaux.be/wp-content/uploads/2021/03/Martinets-fiche-nichoir.pdf" target="_blank" rel="noopener">Ligue royale belge pour la protection des oiseaux : fiche nichoir à martinets</a> ; <a href="https://paca.lpo.fr/images/mediatheque/fichiers/section_actualite/2020/05/cohabiter_avec_les_hirondelles_et_les_martinets.pdf" target="_blank" rel="noopener">LPO PACA : cohabiter avec les hirondelles et les martinets</a> (vérifié le 18 novembre 2026)</p>
+""",
+  faq=[("Quand poser un nichoir à martinet ?",
+        "Avant son retour au printemps, donc pendant l'hiver. La Ligue royale belge pour la protection des oiseaux cite le 20 avril comme date à laquelle les entrées doivent être ouvertes. Posez-le haut, au moins 3 à 5 m selon la Ligue belge, 6 à 8 m selon la boutique LPO."),
+       ("Quelle est la différence entre un martinet et une hirondelle ?",
+        "Le martinet est tout sombre, avec des ailes en croissant très longues, et ne se pose presque jamais. L'hirondelle de fenêtre a le ventre et le croupion blancs, et se pose souvent sur les fils. Le martinet ne laisse pas de fientes sur les façades."),
+       ("Le martinet noir est-il protégé ?",
+        "Oui. La LPO PACA rappelle qu'il est protégé par le Code de l'environnement et l'arrêté du 29 octobre 2009 : il est interdit de détruire ses nids, y compris pendant des travaux de toiture.")],
+  short="Martinet noir", cat="Observer")
+
+AUTO_META['perruche-a-collier/'] = ('🦜', 'mousse')
+g("perruche-a-collier/",
+  "Perruche à collier : la perruche verte des villes et jardins",
+  "Perruche à collier : d'où vient la perruche verte de nos jardins ?",
+  "Une grande perruche verte au bec rouge dans votre jardin ? C'est la perruche à collier. Origine, cri, alimentation et que faire si elle monopolise la mangeoire.",
+  """
+<p>Une grande perruche vert vif, à longue queue et bec rouge, qui crie fort dans les platanes : c'est la <strong>perruche à collier</strong>. Non, elle ne s'est pas échappée de chez le voisin la semaine dernière. Elle vit en liberté en Île-de-France depuis les années 1970 et s'est installée dans plusieurs grandes villes.</p>
+<p>Elle fréquente volontiers les mangeoires en hiver, ce qui pose une vraie question aux jardiniers : faut-il la nourrir, et comment laisser leur place aux mésanges ?</p>
+{CTA}
+
+<h2>Comment reconnaître une perruche à collier ?</h2>
+<p>Difficile de se tromper. La LPO Occitanie la décrit comme une grande perruche au plumage vert, à longue queue, avec un bec crochu rouge plus ou moins foncé. Elle mesure 37 à 43 cm pour 85 à 140 g, et une bonne partie de cette longueur, c'est la queue.</p>
+<p>Le collier qui lui donne son nom n'appartient qu'au mâle adulte : un trait noir et rose-rouge autour du cou, qui n'apparaît qu'à partir de sa troisième année, selon la LPO Occitanie. Les femelles et les jeunes n'en ont pas. Un groupe de perruches toutes vertes n'est donc pas forcément un groupe de femelles.</p>
+<p>Vous l'entendrez souvent avant de la voir : son cri est puissant et strident, et une colonie au dortoir fait beaucoup de bruit au coucher du soleil.</p>
+<table><thead><tr><th>Oiseau vert</th><th>Taille</th><th>Signe distinctif</th><th>Où le voir</th></tr></thead><tbody>
+<tr><td>Perruche à collier</td><td>37 à 43 cm</td><td>Bec rouge crochu, longue queue fine, cri strident</td><td>Parcs et jardins des grandes villes, en groupe</td></tr>
+<tr><td>Pic vert</td><td>30 à 36 cm</td><td>Calotte rouge, long bec droit, souvent au sol</td><td>Pelouses, vergers, lisières</td></tr>
+<tr><td>Verdier d'Europe</td><td>Taille d'un moineau</td><td>Gros bec rose pâle, jaune vif sur l'aile</td><td>Mangeoires, haies</td></tr>
+</tbody></table>
+<p>Pour les autres oiseaux verts et jaunes, notre page <a href="{R}oiseau-jaune-et-vert/">oiseau jaune et vert</a> vous aide à trancher entre verdier, serin, tarin et mésange bleue.</p>
+
+<h2>D'où viennent les perruches vertes qu'on voit en ville ?</h2>
+<p>D'Afrique subsaharienne et du sous-continent indien, du Pakistan à la Birmanie. Elle a été importée comme oiseau de cage, et les individus échappés ou relâchés ont formé des colonies près de leur point de départ. En France, la LPO Occitanie situe les premières observations en 1974, dans le Val-de-Marne et le Val-d'Oise.</p>
+<p>Depuis, elle a été vue dans tous les départements franciliens et jusque dans l'Oise, et elle s'est installée à Marseille, Toulouse, Nancy ou Roubaix. Elle aime les espaces suburbains des grandes villes, les parcs et les jardins, et surtout les alignements de grands platanes.</p>
+
+<h2>Que mange-t-elle et où niche-t-elle ?</h2>
+<p>Elle mange des céréales, des fruits, des bourgeons et des fleurs. En hiver, les mangeoires comptent beaucoup pour elle : la LPO Occitanie cite une étude francilienne par radiopistage de quatre perruches, qui passaient la moitié de leur temps d'alimentation en automne et en hiver aux mangeoires pour passereaux, publiques ou privées. Quatre oiseaux, c'est peu, mais l'indication est parlante.</p>
+<p>Elle niche tôt, dès la fin de l'hiver, dans des cavités de gros arbres ou des fissures de rochers, à plus de 8 m de haut. La femelle pond 2 à 6 œufs, couvés 21 jours, selon la LPO Occitanie. Inutile de lui poser un nichoir : la LPO cherche plutôt à freiner son expansion, au point de citer la stérilisation des œufs parmi les pistes de gestion.</p>
+
+<h2>Gêne-t-elle les autres oiseaux à la mangeoire ?</h2>
+<p>C'est la question que tout le monde se pose, et la réponse est plus nuancée qu'on ne le croit. La LPO Occitanie rapporte une étude menée au parc de Sceaux : les perruches n'y avaient pas d'effet négatif plus fort que des espèces locales de taille comparable, comme la tourterelle turque, ou grégaires, comme l'étourneau. Pas d'agressivité notable envers les autres oiseaux non plus, mais des comportements agressifs envers les écureuils.</p>
+<p>En revanche, par leur nombre, elles restent l'espèce la plus gênante aux mangeoires selon cette même fiche. Une bande de perruches peut vider un silo de tournesol en une matinée, et les petits passereaux attendent leur tour. La LPO note qu'il existe encore peu d'études et que, si les impacts semblent très faibles en France aujourd'hui, le risque existe.</p>
+
+<h2>Faut-il la nourrir ? Que faire si elle vide vos mangeoires ?</h2>
+<p>Il vaut mieux ne pas l'encourager. La LPO Occitanie la classe parmi les espèces exotiques envahissantes, et l'arrêté du 14 février 2018 interdit de l'introduire dans le milieu naturel en métropole. Parmi les pistes de gestion qu'elle cite, la LPO propose justement de limiter le nourrissage dans les parcs, les jardins et sur les balcons, et d'utiliser des mangeoires à petite maille, placées dans des endroits peu accessibles et réservées aux petits passereaux.</p>
+<p>Concrètement, plusieurs options s'offrent à vous :</p>
+<ul>
+<li><strong>Une mangeoire en cage</strong> : un silo enfermé dans un grillage laisse passer les mésanges et les moineaux, pas les grands oiseaux. C'est la solution la plus simple. <a href="{AMZ:mangeoire cage petits oiseaux anti pigeon}" """ + A + """>Voir sur Amazon</a></li>
+<li><strong>Une mangeoire qui se ferme sous le poids</strong> : le Squirrel Buster Legacy referme ses ouvertures quand un animal trop lourd s'y accroche, avec un ressort réglable. Le fabricant parle d'écureuils, pas de perruches : réglez le seuil au plus bas et observez le résultat. <a href="{AMZ:Squirrel Buster Legacy}" """ + A + """>Voir sur Amazon</a></li>
+<li><strong>Des boules de graisse dans un support grillagé à mailles serrées</strong>, plutôt que du tournesol en vrac sur un plateau. <a href="{AMZ:support boule de graisse grillage metal}" """ + A + """>Voir sur Amazon</a></li>
+<li><strong>Moins de nourriture à la fois</strong> : un plateau rempli à ras bord attire les groupes. Donnez de petites quantités, comme le recommande notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a>.</li>
+</ul>
+<p><strong>Notre conseil</strong> : si les perruches arrivent chaque jour en bande, passez à une mangeoire en cage pour l'essentiel des graines, et gardez un peu de nourriture au sol, sous un buisson, pour le <a href="{R}rouge-gorge/">rouge-gorge</a> et l'accenteur. Vous trouverez d'autres modèles dans notre sélection de la <a href="{R}meilleure-mangeoire-oiseaux/">meilleure mangeoire pour oiseaux</a>.</p>
+
+<h2>Peut-on signaler ses observations ?</h2>
+<p>Oui, et c'est utile. La LPO invite à noter ses observations de perruches sur les plateformes de sciences participatives comme Faune France ou l'application NaturaList. Elle rappelle aussi que des prédateurs naturels s'en chargent en partie, comme le faucon pèlerin, l'épervier d'Europe ou la <a href="{R}chouette-hulotte/">chouette hulotte</a>. Pour bien les observer dans un grand platane sans déranger la colonie, des jumelles 8x42 suffisent : <a href="{AMZ:Celestron Nature DX 8x42}" """ + A + """>Voir sur Amazon</a>.</p>
+
+<p class="sources"><strong>Sources</strong> : <a href="https://occitanie.lpo.fr/wp-content/uploads/2019/07/Fiches_perruches_collier_2019_Web.pdf" target="_blank" rel="noopener">LPO Occitanie : fiche Perruche à collier (mise à jour mai 2019)</a> (vérifié le 18 novembre 2026)</p>
+""",
+  faq=[("Pourquoi y a-t-il des perruches vertes à Paris ?",
+        "Ce sont des perruches à collier, originaires d'Afrique et d'Asie, importées comme oiseaux de cage. Des oiseaux échappés ou relâchés ont fondé des colonies. La LPO Occitanie situe les premières observations en France en 1974, dans le Val-de-Marne et le Val-d'Oise."),
+       ("La perruche à collier est-elle dangereuse pour les autres oiseaux ?",
+        "Une étude au parc de Sceaux citée par la LPO n'a pas montré d'effet plus négatif que celui de la tourterelle turque ou de l'étourneau à la mangeoire, ni d'agressivité notable envers les autres oiseaux. Par leur nombre, les perruches restent toutefois gênantes aux mangeoires, et la LPO juge que le risque existe."),
+       ("Comment empêcher les perruches de manger dans ma mangeoire ?",
+        "Utilisez une mangeoire en cage ou à petite maille, réservée aux petits passereaux, et donnez de petites quantités. C'est ce que propose la LPO parmi ses pistes de gestion de l'espèce.")],
+  short="Perruche à collier", cat="Observer")
+
+AUTO_META['meilleur-melange-graines-oiseaux/'] = ('🏆', 'sable')
+g("meilleur-melange-graines-oiseaux/",
+  "Mélange de graines pour oiseaux 2026 : 7 sacs comparés",
+  "Le meilleur mélange de graines pour les oiseaux du jardin : 7 sacs comparés",
+  "Quel mélange de graines pour les oiseaux du jardin ? 7 sacs comparés sur leur composition réelle : tournesol, blé, ambroisie, déchets, et lequel choisir.",
+  """
+<p>Un bon mélange de graines pour oiseaux se reconnaît à son étiquette : du tournesol en bonne place, du maïs concassé, éventuellement des cacahuètes, et pas de pois, de lentilles ni de riz, que la LPO Occitanie et la LPO Nord déconseillent. Notre préféré est le <strong>Versele-Laga Menu Nature Clean Garden</strong>, parce que c'est l'un des rares sacs dont la fiche donne la composition détaillée et qui ne laisse pas de coques au sol.</p>
+<p>Le problème des mélanges, c'est qu'on achète souvent à l'aveugle. Beaucoup de sacs se contentent d'un vague « céréales, graines, noix ». Nous avons donc lu les fiches de sept produits vendus en France et classé ceux qui disent clairement ce qu'ils contiennent avant ceux qui restent flous.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
+
+<h2>Le tableau récapitulatif</h2>
+<table><thead><tr><th>Produit</th><th>Formats lus</th><th>Tournesol</th><th>Blé</th><th>Ambroisie</th><th>Point fort</th></tr></thead><tbody>
+<tr><td>Versele-Laga Menu Nature Clean Garden</td><td>2,5 kg, 10 kg</td><td>Décortiqué, 22 %</td><td>Absent de la liste</td><td>Non précisé</td><td>Composition complète, sans coques</td></tr>
+<tr><td>Lillebro nourriture sans déchets</td><td>4 kg, 20 kg</td><td>Décortiqué, 20 %</td><td>10 %</td><td>Teneur contrôlée</td><td>Analyse chiffrée complète</td></tr>
+<tr><td>Versele-Laga Menu Nature Superseeds</td><td>1 kg</td><td>Décortiqué</td><td>Non précisé</td><td>Non précisé</td><td>Graines riches : chanvre, niger, sésame</td></tr>
+<tr><td>Versele-Laga Menu Nature 4 saisons</td><td>1 kg, 4 kg, 20 kg</td><td>Non précisé</td><td>Non précisé</td><td>Contrôlée</td><td>Pensé pour toute l'année</td></tr>
+<tr><td>Lillebro nourriture pour oiseaux sauvages</td><td>20 kg</td><td>Oui, part non précisée</td><td>Oui</td><td>Contrôlé sans ambroisie</td><td>Gros sac</td></tr>
+<tr><td>Vitakraft VitaGarden Protein Mix</td><td>1 kg, lot de 5</td><td>Non précisé</td><td>38 %</td><td>Contrôlée</td><td>Insectes ajoutés</td></tr>
+<tr><td>Versele-Laga Menu Nature Allround Mix</td><td>5 kg</td><td>Non précisé</td><td>Non précisé</td><td>Non précisé</td><td>Sans additif, origine Hongrie</td></tr>
+</tbody></table>
+<p>« Non précisé » veut dire que la fiche lue ne le dit pas, pas que l'ingrédient est absent. Les formats changent souvent : vérifiez au moment de commander.</p>
+
+<h2>1. Versele-Laga Menu Nature Clean Garden : notre choix</h2>
+<p><strong>Pour qui ?</strong> Vous nourrissez au sol, sur un plateau ou dans un abri, au-dessus d'une terrasse que vous voulez garder propre.</p>
+<p>D'après la fiche de zooplus, ce mélange contient du maïs, des graines de tournesol décortiquées (22 %), de l'avoine, du milo, du millet, des arachides blanchies (2 %), des graines de niger (1 %), du haricot mungo (katjang idjoe) et des raisins secs, sans additif. Pas de blé, pas de pois, pas de lentilles, pas de riz dans la liste. Les graines sont décortiquées, d'où son nom : rien à balayer sous la mangeoire, et moins de restes qui moisissent.</p>
+<ul>
+<li><strong>Points forts</strong> : composition détaillée, tournesol décortiqué en bonne part, aucun des ingrédients que la LPO déconseille.</li>
+<li><strong>Limites</strong> : la fiche le destine au sol ou à un abri, pas explicitement aux silos. Contrôle de l'ambroisie non précisé. Il contient des raisins secs, toxiques pour les chiens : si le vôtre fouille sous la mangeoire, gardez-le à l'œil.</li>
+</ul>
+<p>Pourquoi en premier ? Parce que c'est le seul de notre sélection qui combine une liste complète, des graines sans coques et l'absence de céréales bas de gamme. C'est exactement ce que la LPO décrit comme un bon mélange.</p>
+<p><a href="{AMZ:Versele-Laga Menu Nature Clean Garden}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Lillebro nourriture sans déchets : le mieux documenté</h2>
+<p><strong>Pour qui ?</strong> Plusieurs mangeoires, un grand jardin, et l'envie de savoir précisément ce que vous donnez.</p>
+<p>La fiche de zooplus donne tout : tournesol décortiqué 20 %, millet jaune 19 %, maïs 16 %, avoine décortiquée 15 %, blé 10 %, sorgho rouge 10 %, navette 5 %, arachides épluchées 5 %. L'analyse aussi : 14 % de protéines et 18 % de matières grasses. La teneur en ambroisie est contrôlée, et le mélange se donne en mangeoire, en distributeur ou au sol.</p>
+<ul>
+<li><strong>Points forts</strong> : composition et analyse chiffrées, sans coques, ambroisie contrôlée, plusieurs formats jusqu'à 20 kg.</li>
+<li><strong>Limites</strong> : 10 % de blé, une céréale que Natagora cite parmi les graines possibles mais qui nourrit moins qu'un tournesol. Marque surtout distribuée par zooplus, pas toujours disponible sur Amazon.</li>
+</ul>
+<p><a href="{AMZ:Lillebro nourriture sans dechets oiseaux sauvages}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Versele-Laga Menu Nature Superseeds : le mélange riche pour les grands froids</h2>
+<p><strong>Pour qui ?</strong> Vous avez déjà une base de tournesol et voulez un complément très énergétique pour les jours de gel.</p>
+<p>Truffaut cite des graines de chanvre, de niger, de tournesol décortiquées et de sésame, avec une origine belge. Ce sont des graines grasses, appréciées des petits granivores. Le niger, en particulier, attire les chardonnerets.</p>
+<ul>
+<li><strong>Points forts</strong> : que des graines nobles dans la description, pas de céréale de remplissage citée.</li>
+<li><strong>Limites</strong> : la composition n'est pas donnée en entier ni en pourcentages. Sac de 1 kg seulement, et Truffaut l'affichait en déstockage lors de notre lecture. Le niger, très fin, demande une mangeoire adaptée.</li>
+</ul>
+<p><strong>Notre conseil</strong> : ne le donnez pas seul tout l'hiver, mélangez-en une poignée à votre base les jours de grand froid.</p>
+<p><a href="{AMZ:Versele-Laga Menu Nature Superseeds}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Versele-Laga Menu Nature 4 saisons : le classique facile à trouver</h2>
+<p><strong>Pour qui ?</strong> Vous voulez un mélange de jardinerie connu, disponible en petit et en très grand format.</p>
+<p>Zooplus le présente comme un mélange de céréales, graines et noix, sans additif, avec des teneurs réduites en protéines et en graisses, et une recette contrôlée sur la présence de graines d'ambroisie. On le trouve en 1 kg, 4 kg et 20 kg.</p>
+<ul>
+<li><strong>Points forts</strong> : contrôle de l'ambroisie, grande disponibilité, plusieurs formats.</li>
+<li><strong>Limites</strong> : composition vague, sans liste ni pourcentage : impossible de savoir s'il contient du blé ou des pois. Le fabricant le dit utilisable toute l'année, alors que la LPO conseille de ne nourrir qu'en hiver.</li>
+</ul>
+<p><a href="{AMZ:Versele-Laga Menu Nature 4 saisons}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Lillebro nourriture pour oiseaux sauvages : le gros sac économique</h2>
+<p><strong>Pour qui ?</strong> Un jardin qui reçoit beaucoup de monde, avec des moineaux et des pinsons qui mangent au sol.</p>
+<p>D'après zooplus, ce mélange réunit blé, sorgho, maïs, sarrasin, tournesol, graines sauvages, millet blanc et cacahuètes. Il est contrôlé sans ambroisie et vendu en 20 kg.</p>
+<ul>
+<li><strong>Points forts</strong> : sans ambroisie, pas de pois ni de riz dans la liste.</li>
+<li><strong>Limites</strong> : pas de pourcentages, donc la part de tournesol est inconnue. Le blé figure en tête de liste. Tournesol avec coques probable, non précisé.</li>
+</ul>
+<p><a href="{AMZ:Lillebro nourriture oiseaux sauvages 20 kg}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Vitakraft VitaGarden Protein Mix : avec des insectes</h2>
+<p><strong>Pour qui ?</strong> Vous voulez varier avec un apport d'insectes pour les oiseaux qui n'en trouvent plus en hiver.</p>
+<p>La fiche de zooplus détaille des céréales dont 38 % de blé, 17,3 % de graines, 4 % de cacahuètes, 3 % de larves de mouches séchées et 2 % de dattes, avec vitamines A et D3 ajoutées. Ambroisie contrôlée, fabriqué en Allemagne.</p>
+<ul>
+<li><strong>Points forts</strong> : composition transparente, insectes inclus.</li>
+<li><strong>Limites</strong> : 38 % de blé, c'est beaucoup. Le nom « Protein Mix » promet plus que ce que la composition apporte. Petit format de 1 kg.</li>
+</ul>
+<p><a href="{AMZ:Vitakraft VitaGarden Protein Mix}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Versele-Laga Menu Nature Allround Mix : à réserver au dépannage</h2>
+<p><strong>Pour qui ?</strong> Vous trouvez ce sac en magasin et il vous en faut un tout de suite.</p>
+<p>Truffaut le décrit comme un mélange de céréales, graines et noix sans additif, d'origine hongroise, en 5 kg, à distribuer à volonté.</p>
+<ul>
+<li><strong>Points forts</strong> : sans additif, marque connue.</li>
+<li><strong>Limites</strong> : aucune liste détaillée, aucune analyse, pas de mention de l'ambroisie. Indisponible en ligne chez Truffaut lors de notre lecture.</li>
+</ul>
+<p>Il ferme la marche pour une raison simple : on ne sait pas ce qu'il y a dedans. Si vous avez le choix, prenez un des six autres.</p>
+<p><a href="{AMZ:Versele-Laga Menu Nature Allround Mix}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment choisir un mélange de graines pour oiseaux ?</h2>
+<p><strong>Lisez la liste dans l'ordre.</strong> Les ingrédients sont en général listés du plus abondant au moins abondant. Un mélange qui commence par le blé ou l'orge est surtout un sac de céréales. Le mélange que la LPO Occitanie juge idéal repose sur le tournesol noir, les cacahuètes et le maïs concassé ; notre page <a href="{R}quelles-graines-pour-les-oiseaux/">quelles graines pour les oiseaux</a> détaille le rôle de chacune.</p>
+<p><strong>Fuyez les pois, lentilles et riz.</strong> Ce sont les ingrédients que la LPO Occitanie et la LPO Nord associent aux mélanges bas de gamme. On en trouve dans de vrais produits : par exemple, le Lyra Pet Streufutter à 29 composants vendu chez zooplus liste des pois mange-tout et du riz paddy, et le mélange Klasebo de 25 kg contient des pois concassés. Lisez donc la liste avant d'acheter, même pour une marque connue.</p>
+<p><strong>Cherchez la mention ambroisie.</strong> L'ambroisie est une plante très allergisante dont les graines se glissent parfois dans les sacs et germent sous les mangeoires. Un sac « contrôlé sans ambroisie » vous évite de la semer chez vous.</p>
+<p><strong>Décortiqué ou non ?</strong> Les graines décortiquées coûtent plus cher au kilo, mais vous ne payez pas les coques. Elles laissent surtout le sol propre : Natagora conseille le tournesol décortiqué pour limiter les déchets qui favorisent les maladies.</p>
+<p><strong>Adaptez au support.</strong> Regardez où la fiche conseille de servir le mélange : certains sont prévus pour le sol ou un plateau, d'autres pour les mangeoires et distributeurs. Notre sélection de la <a href="{R}meilleure-mangeoire-oiseaux/">meilleure mangeoire pour oiseaux</a> vous aide à associer les deux.</p>
+<p><strong>Notre conseil</strong> : un sac de mélange sans coques comme le Clean Garden pour le plateau, et à côté une mangeoire de <a href="{R}meilleure-graine-tournesol/">tournesol noir</a> pure. Les mésanges vont droit au tournesol, les pinsons et les moineaux picorent le mélange, et chacun trouve sa place.</p>
+
+<h2>Quels oiseaux viendront manger votre mélange ?</h2>
+<p>Un mélange varié attire surtout les granivores : <a href="{R}moineau-domestique/">moineaux</a>, pinsons, verdiers, tourterelles. Les mésanges préfèrent le tournesol et la graisse, et le <a href="{R}rouge-gorge/">rouge-gorge</a> se nourrit au sol, sous la mangeoire. Si une bande de <a href="{R}perruche-a-collier/">perruches à collier</a> vide tout chaque matin, une mangeoire en cage sera plus efficace qu'un changement de graines.</p>
+<p>Et pour savoir quand commencer, combien donner et comment garder les mangeoires propres, suivez notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a>.</p>
+""",
+  faq=[("Quel est le meilleur mélange de graines pour les oiseaux ?",
+        "Un mélange dont la composition est affichée, avec du tournesol en bonne place, et sans pois, lentilles ni riz, que la LPO déconseille. Dans notre sélection, le Versele-Laga Menu Nature Clean Garden coche ces cases, avec des graines décortiquées qui ne laissent pas de coques au sol."),
+       ("Le blé est-il mauvais pour les oiseaux du jardin ?",
+        "Non, Natagora le cite parmi les graines possibles. Mais un mélange où le blé domine nourrit moins qu'un mélange riche en tournesol. Regardez sa place dans la liste des ingrédients."),
+       ("Avez-vous testé ces mélanges ?",
+        "Non. Cette sélection repose sur les fiches publiées par les fabricants et les revendeurs. Quand une information manque, nous l'indiquons comme non précisée.")],
+  short="Top 7 mélanges de graines pour oiseaux", cat="Nourrir")
