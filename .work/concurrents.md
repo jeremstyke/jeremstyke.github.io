@@ -5,9 +5,9 @@
 - [x] capretraite.fr | vieillir (17 nov 2026)
 - [x] oiseaux.net | oiseaux (17 nov 2026)
 - [x] millemercismariage.com | mariage (17 nov 2026)
-- [ ] magicmaman.com | bebe
-- [ ] aidonslesnotres.fr | vieillir
-- [ ] jardiner-malin.fr | oiseaux
+- [x] magicmaman.com | bebe (18 nov 2026)
+- [x] aidonslesnotres.fr | vieillir (18 nov 2026)
+- [x] jardiner-malin.fr | oiseaux (18 nov 2026)
 - [ ] zankyou.fr | mariage
 - [ ] mpedia.fr | bebe
 - [ ] essentiel-autonomie.com | vieillir
