@@ -275,7 +275,8 @@
   const agtNx = (n, justDone) => { let l = 'en'; try { l = LANG; } catch (e) {} const v = AGV[l] || AGV.en, bn = AGB[l] || AGB.en, nx = AGN[l] || AGN.en;
     // 16 nov 2026 (Jeremy): no more tiers, a fixed amount for every partner mission
     return ''; };
-  let sdk = null, gone = false;
+  // 18 nov 2026 (Jeremy): the partner mission is removed from Meme Coin Tycoon (never shown again)
+  let sdk = null, gone = true;
   const load = () => sdk || (sdk = new Promise((ok, ko) => {
     if (window.Adsgram) return ok();
     const s = document.createElement('script'); s.src = 'https://sad.adsgram.ai/js/sad.min.js';
@@ -327,7 +328,7 @@
     load().then(() => { if (document.body.contains(w)) w.hidden = false; }).catch(() => w.remove());
   }
   function put() {
-    if (gone) return;
+    if (gone) { ['agtask', 'agtask3'].forEach((i) => { const e = document.getElementById(i); if (e) e.remove(); }); return; }
     let v = ''; try { v = VIEW; } catch (e) {}
     // the market, right under the daily missions
     /* 30 oct 2026 (19h15, Jeremy): at the very top of the market, so it is seen (the daily missions it followed are hidden) */
