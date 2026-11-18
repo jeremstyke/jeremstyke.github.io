@@ -1770,6 +1770,7 @@ function shopDraw() {
   const can = okAge && okPass && okWeek && okClub && (!r.auto || okMin);
   const st = { wait: 'sWait', paid: 'sPaid', refused: 'sRefused', failed: 'sWait' };
   sheet('<h3>' + T('shopH') + '</h3><p class="foot" style="text-align:start;margin:0">' + (r.closed ? (LANG === 'fr' ? 'Retrait à partir de 100 000 $BATON (0,10 $), en USDT sur ton wallet TON. Paiement vérifié et envoyé à la main, un par un, sous 10 jours. Tu reçois un message dans le bot.' : 'Withdraw from 100,000 $BATON ($0.10), in USDT to your TON wallet. Each payment is checked and sent by hand, one by one, within 10 days. You get a message in the bot.') : T('shopS')) + '</p>' +
+    (r.orders.some((o) => o.status === 'wait') ? '<div class="shc" style="font-weight:800;font-size:15px;padding:12px;border-radius:14px;background:rgba(255,160,60,.15);margin:10px 0">⏳ ' + esc(LANG === 'fr' ? 'Retrait en attente de paiement : ' : 'Withdrawal waiting for payment: ') + esc(r.orders.filter((o) => o.status === 'wait').map((o) => o.usd + ' $').join(' + ')) + '<br><span style="font-weight:500;font-size:13px">' + esc(LANG === 'fr' ? 'Vérifié et envoyé à la main sous 10 jours. Tu recevras un message dans le bot.' : 'Checked and sent by hand within 10 days. You will get a message in the bot.') + '</span></div>' : '') +
     '<div class="shHave">' + T('have', fmt(pts)) + '</div>' +
     /* 2 nov 2026 (0h40, Jeremy): a link to the public payment proofs */ '<button class="opt" data-k="proofs"><span class="t"><b>' + (LANG === 'fr' ? '🧾 Preuves de paiement' : '🧾 Payment proofs') + '</b><span>' + (LANG === 'fr' ? 'Tous les retraits déjà payés, vérifiables sur la blockchain' : 'Every withdrawal already paid, checkable on the blockchain') + '</span></span></button>' +
     (r.auto ? '<div class="opt shItem on"><span class="t"><b>' + fmt(conv) + ' $BATON</b></span><span class="mult">' + usdv + ' $</span></div>' + (okMin ? '' : '<div class="shc">⏳ ' + esc(LANG === 'fr' ? 'Minimum : 100 000 $BATON (0,10 $)' : 'Minimum: 100,000 $BATON ($0.10)') + '</div>') : r.items.map((it, i) => '<button class="opt shItem' + (shopPick === i ? ' on' : '') + '" data-shop="' + i + '"' + (pts < it[0] ? ' disabled' : '') + '><span class="t"><b>' + fmt(it[0]) + ' $BATON</b></span><span class="mult">' + it[1] + ' $</span></button>').join('')) +
@@ -1777,7 +1778,7 @@ function shopDraw() {
     '<button class="btn ghost" data-k="tcgo">' + (r.tc ? T('tcOn') : T('tcGo')) + '</button>' +
     '<label class="shL" for="shAddr">' + T('addrL') + '</label><input id="shAddr" class="shIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="UQ…" value="' + esc(r.addr || '') + '">' +
     '<button class="btn gold" data-k="shopgo"' + (can && (r.auto || shopPick >= 0) ? '' : ' disabled') + '>' + (r.auto ? (okMin ? (LANG === 'fr' ? '💸 Tout retirer' : '💸 Withdraw all') + ' · ' + usdv + ' $' : (LANG === 'fr' ? 'Minimum 100 000 $BATON' : 'Minimum 100,000 $BATON')) : shopPick >= 0 ? T('shopGo') + ' · ' + r.items[shopPick][1] + ' $' : T('goPick')) + '</button>' +
-    (r.orders.length ? '<div class="pachh">' + T('hist') + '</div>' + r.orders.map((o) => '<div class="shOrd"><span>' + new Date(o.at * 1000).toLocaleDateString(LANG === 'fa' ? 'fa-IR' : LANG, { day: 'numeric', month: 'short' }) + ' · ' + o.usd + ' $</span><b class="s-' + o.status + '">' + T(st[o.status] || 'sWait') + '</b></div>').join('') : '') +
+    (r.orders.length ? '<div class="pachh">' + T('hist') + '</div>' + r.orders.map((o) => '<div class="shOrd"><span>' + new Date(o.at * 1000).toLocaleDateString(LANG === 'fa' ? 'fa-IR' : LANG, { day: 'numeric', month: 'short' }) + ' · ' + o.usd + ' $</span><b class="s-' + o.status + '">' + (o.status === 'wait' ? (LANG === 'fr' ? 'En attente de paiement' : 'Waiting for payment') : T(st[o.status] || 'sWait')) + '</b></div>').join('') : '') +
     '<button class="btn ghost" data-k="keep">OK</button>');
 }
 async function openShop() {
@@ -1811,7 +1812,7 @@ $('#sheet').addEventListener('click', async (e) => {
   const r = await api('shop_buy', { item: SH && SH.auto ? -1 : shopPick, addr });
   if (r && r.error === 'club') { hap('err'); toast(LANG === 'fr' ? '👥 Rejoins le Club pour retirer tes USDT, puis réessaie.' : '👥 Join the Club to withdraw your USDT, then try again.'); go.disabled = false; openLink('https://t.me/passthebatonclub'); return; }  // 29 oct 2026 (9h33, Jeremy)
   if (!r || !r.ok) { hap('err'); toast(r && SHOPERR[r.error] ? T(SHOPERR[r.error]) : errMsg(r)); go.disabled = false; return; }
-  hap('ok'); toast(r.review ? T('okReview') : T('okPaid'));
+  hap('ok'); toast(LANG === 'fr' ? '✅ Demande envoyée : en attente de paiement.' : '✅ Request sent: waiting for payment.');
   if (r.state) setState(r.state);
   const s2 = await api('shop'); if (s2 && s2.ok) { SH = s2; shopPick = -1; shopDraw(); }
 }, true);
