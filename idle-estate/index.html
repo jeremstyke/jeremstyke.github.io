@@ -242,7 +242,7 @@ const L = {
   hint:'Tap a property to collect its rent. Hire a manager 👔 and it pays you automatically, even when you are away.', estate:'Estate', shop:'Shop', prest:'Empire', top:'Top',
   buy:'Buy', lvl:'Lv', manager:'Manager', auto:'Auto', tapStart:'👆 Tap', ms:'x',
   welcomeT:'Welcome pack', welcomeS:'2h of rent now + x2 income for 24h', claim:'Claim', daily:'Daily bonus', dailyS:'Day {n} of 7, come back every day',
-  away:'While you were away', awayX:'Double it', awayXd:'Doubled!', awayS:'Your tenants kept paying rent.', collect:'Collect', great:'Great!',
+  away:'While you were away', adT:'Watch an ad', adS:'x2 income for 15 min. Once every 30 min.', adB:'Watch', adWait:'Stay on the ad for 10 seconds...', adOk:'x2 for 15 min!', adCool:'Come back later for the next one', awayX:'Double it', awayXd:'Doubled!', awayS:'Your tenants kept paying rent.', collect:'Collect', great:'Great!',
   vipMsg:'Golden tenant! +', per:'/s', max:'MAX',
   shopT:'Shop', shopS:'Everything is paid in Telegram Stars. 30% of all Stars spent goes to the weekly top 10 (this share may go up or down).',
   items:{welcome:['🎁','Welcome pack','2h of rent instantly + x2 income for 24h. One time only.'],b2:['⚡','x2 Income, 4h','Double all your rent for 4 hours.'],b3:['🚀','x3 Income, 24h','Triple all your rent for a full day.'],perm2:['👑','Partner: x2 forever','Permanent x2 on everything, forever.'],vault:['🏦','Vault: 24h offline','Tenants pay up to 24h while you are away (instead of 3h).'],skip1:['⏩','Time skip 1h','Instantly get 1 hour of rent.'],skip8:['⏭️','Time skip 8h','Instantly get 8 hours of rent.']},
@@ -275,7 +275,7 @@ const L = {
   hint:'Touche un bien pour encaisser son loyer. Embauche un gestionnaire 👔 et il te paie tout seul, même quand tu es absent.', estate:'Biens', shop:'Boutique', prest:'Empire', top:'Top',
   buy:'Acheter', lvl:'Niv', manager:'Gestionnaire', auto:'Auto', tapStart:'👆 Touche', ms:'x',
   welcomeT:'Pack de bienvenue', welcomeS:'2h de loyers tout de suite + x2 revenus pendant 24h', claim:'Récupérer', daily:'Bonus du jour', dailyS:'Jour {n} sur 7, reviens chaque jour',
-  away:'Pendant ton absence', awayX:'Doubler', awayXd:'Doublé !', awayS:'Tes locataires ont continué à payer.', collect:'Encaisser', great:'Super !',
+  away:'Pendant ton absence', adT:'Regarder une pub', adS:'Revenus x2 pendant 15 min. Une fois toutes les 30 min.', adB:'Regarder', adWait:'Reste 10 secondes sur la pub...', adOk:'x2 pendant 15 min !', adCool:'Reviens plus tard pour la prochaine', awayX:'Doubler', awayXd:'Doublé !', awayS:'Tes locataires ont continué à payer.', collect:'Encaisser', great:'Super !',
   vipMsg:'Locataire doré ! +', per:'/s', max:'MAX',
   shopT:'Boutique', shopS:'Tout se paie en Étoiles Telegram. 30 % des Étoiles dépensées vont au top 10 de la semaine (ce pourcentage peut augmenter ou baisser).',
   items:{welcome:['🎁','Pack de bienvenue','2h de loyers tout de suite + x2 revenus pendant 24h. Une seule fois.'],b2:['⚡','Revenus x2, 4h','Double tous tes loyers pendant 4 heures.'],b3:['🚀','Revenus x3, 24h','Triple tous tes loyers pendant une journée.'],perm2:['👑','Associé : x2 à vie','x2 permanent sur tout, pour toujours.'],vault:['🏦','Coffre : 24h hors ligne','Les locataires paient jusqu\'à 24h pendant ton absence (au lieu de 3h).'],skip1:['⏩','Saut de 1h','Reçois tout de suite 1 heure de loyers.'],skip8:['⏭️','Saut de 8h','Reçois tout de suite 8 heures de loyers.']},
@@ -693,6 +693,7 @@ function renderShop() {
   const gOn = S.goldEnd > snow();
   h += `<div class="row hot" style="border-color:#a15e00"><div class="e">👑</div><div class="tx"><b>${L.goldT}</b><span>${L.goldS}</span>${gOn ? `<div class="rw">✅ ${L.goldOn} · ${Math.ceil((S.goldEnd - snow()) / 86400)} ${L.goldLeft}</div>` : ''}</div><button class="star" data-sku="gold">⭐ ${S.shop.gold}<small style="display:block;font-size:11px;font-weight:700">${L.perMonth}</small></button></div>`;
   if (S.deal && L.items[S.deal.sku]) { const it = L.items[S.deal.sku]; h += `<div class="row hot"><div class="e">🔥</div><div class="tx"><b>${L.dealT}: ${it[1]}</b><span>${L.dealS}. ${it[2]}</span><div class="rw">${S.deal.price} ⭐ <s style="opacity:.7">${S.shop[S.deal.sku]}</s></div></div><button class="star" data-sku="${S.deal.sku}" data-deal="1">⭐ ${S.deal.price}</button></div>`; }
+  h += `<div class="row"><div class="e">📺</div><div class="tx"><b>${L.adT}</b><span>${L.adS}</span></div><button class="star" id="adb">${L.adB}</button></div>`;
   for (const k of order) {
     const it = L.items[k];
     const own = (k === 'perm2' && S.perm2) || (k === 'vault' && S.vault);
@@ -701,6 +702,7 @@ function renderShop() {
   h += `<div class="sw"><span>🔔 ${L.remind}</span><button id="nt" class="${S.notify ? 'on' : ''}"></button></div>`;
   const p = $('p-shop'); p.innerHTML = h;
   p.onclick = e => {
+    if (e.target.closest('#adb')) { watchAd(); return; }
     const s = e.target.closest('[data-sku]'); if (s) buy(s.dataset.sku, s.dataset.deal === '1');
     if (e.target.id === 'nt') { S.notify = !S.notify; e.target.classList.toggle('on', S.notify); call({ act: 'notify', on: S.notify }); }
   };
@@ -716,6 +718,19 @@ async function getInvoice(sku, deal) {
     } catch (e) { clearTimeout(to); }
   }
   return null;
+}
+let adBusy = false;
+async function watchAd() {
+  if (adBusy) return;
+  const st = await call({ act: 'adstart' });
+  if (!st || !st.ok || st.err) { toast(L.adCool); return; }
+  adBusy = true; toast(L.adWait);
+  const url = 'https://uplcm.com/4/12140639';
+  try { if (tgw && tgw.openLink) tgw.openLink(url); else window.open(url, '_blank'); } catch (e) { window.open(url, '_blank'); }
+  setTimeout(async () => {
+    const r = await call({ act: 'adclaim' }); adBusy = false;
+    if (r && r.ok && !r.err) { hap('ok'); toast(L.adOk); } else toast(L.adCool);
+  }, 11000);
 }
 let buying = false;
 async function buy(sku, deal) {
