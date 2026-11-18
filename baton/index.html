@@ -2072,12 +2072,10 @@ function closed() {
     + '<p>' + (F ? 'Il y a eu beaucoup de triche et de vol, donc le jeu est fermé pour l\'instant.' : 'There has been a lot of cheating and theft, so the game is closed for now.') + '</p>'
     + '<p><b>' + (F ? 'Tes $BATON sont conservés.' : 'Your $BATON are kept.') + '</b></p>'
     + '<p>' + (F ? '💸 Tu peux retirer dès maintenant à partir de 100 000 $BATON (0,10 $). Chaque paiement est vérifié et envoyé à la main, un par un (pas de paiement automatique), car certains joueurs se sont ajouté des millions de $BATON. Payé sous 10 jours, tu reçois un message dans le bot.' : '💸 You can withdraw now from 100,000 $BATON ($0.10). Every payment is checked and sent by hand, one by one (no automatic payment), because some players added millions of $BATON to their balance. Paid within 10 days, you get a message in the bot.') + '</p>'
-    + '<button class="btn gold" id="clWd" style="margin-bottom:14px">💸 ' + (F ? 'Retirer mes $BATON' : 'Withdraw my $BATON') + '</button>'
-    + '<button class="btn gold" id="clMct" style="margin-bottom:10px">🪙 Meme Coin Tycoon</button><button class="btn" id="clIe">🏠 Idle Estate</button></div>';
+    + '<button class="btn gold" id="clWd">💸 ' + (F ? 'Retirer mes $BATON' : 'Withdraw my $BATON') + '</button>'
+    + '</div>';
   document.body.appendChild(el); $('#loader').hidden = true;
   el.querySelector('#clWd').onclick = () => { try { $('#scrim').style.zIndex = 80; } catch (e) {} openShop(); };
-  el.querySelector('#clMct').onclick = () => { try { hap(); } catch (e) {} openLink('https://t.me/Memecointycoonbot?startapp=src_btclosed'); };
-  el.querySelector('#clIe').onclick = () => { try { hap(); } catch (e) {} openLink('https://t.me/Idleestatebot?startapp=src_btclosed'); };
 }
 // 21 oct 2026: maintenance screen (the server answers error 'maint'); it checks again every 15 s and reloads when Baton is back
 function maint() {
