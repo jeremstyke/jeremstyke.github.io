@@ -22,7 +22,7 @@ let TONON = null; // one status call per session, shared by every caller
 let TONLAST = null;
 const tonMini = (s) => '✅ ' + tonM(s.balance) + (LANG === 'fr' ? ' validé' : ' validated') + ' · ⏳ ' + tonM(Number(s.pending || 0) * Number(s.usd || 0)) + (LANG === 'fr' ? ' en attente' : ' pending') + ' · 💸 ' + tonM(Number(s.paid || 0) + Number(s.waiting || 0)) + (LANG === 'fr' ? ' payé' : ' paid');
 // 27 oct 2026 (21h48, Jeremy): from Sunday 1 November (Paris) the green earnings bar becomes a $BATON bar, like Daily Score
-function BTNOW() { return Date.now() >= 1793487600000; }
+function BTNOW() { return false; }  // 18 nov 2026 (Jeremy): no more $BATON in Meme Coin Tycoon
 function tonOn() {
   if (!TONON) TONON = tonCall({}).then((s) => { TONLAST = s; return !!(s && s.ok && s.on); }).catch(() => { TONON = null; return false; });
   return TONON;
@@ -294,6 +294,7 @@ function usdtWays() {
 (() => { try { const st = document.createElement('style'); st.id = 'diahide'; st.textContent = '#diatop{display:none!important}'; document.head.appendChild(st); } catch (e) {} })();
 const diaShow = () => { const h = document.getElementById('diahide'); if (h) h.remove(); };
 async function usdtBar() {
+  return;  // 18 nov 2026 (Jeremy): no more earnings bar at the bottom of Meme Coin Tycoon (virtual money only)
   if (!tw || !tw.initData) return diaShow();
   if (USDTB && document.body.contains(USDTB)) {
     const m = USDTB.querySelector('.ubm'); if (m && m.textContent !== usdtGain()) m.textContent = usdtGain();
