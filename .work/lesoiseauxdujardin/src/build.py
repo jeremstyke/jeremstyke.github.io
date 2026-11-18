@@ -173,6 +173,7 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None,
 <link rel="preload" href="{R}assets/fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{R}assets/style.css?v=2">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8638687738606649" crossorigin="anonymous"></script>
 </head>
 <body>
 <a class="skip" href="#main">Aller au contenu</a>
@@ -320,7 +321,7 @@ def build():
 <p>Le site fonctionne sans inscription.</p>
 <h2>Guide PDF et e-mails</h2><p>Si vous demandez le guide PDF, nous enregistrons votre adresse e-mail et, seulement si vous avez coché la case, votre accord pour recevoir des conseils par e-mail. Vous pouvez demander la suppression de votre adresse à tout moment en écrivant à <a href="mailto:{CONTACT}">{CONTACT}</a>. Chaque e-mail contiendra un lien de désinscription.</p>
 <h2>Mesure d'audience</h2><p>Nous comptons les pages vues et les clics vers Amazon de façon anonyme (page visitée, site d'origine, type d'appareil et un identifiant aléatoire stocké dans votre navigateur). Ces données ne sont ni vendues ni utilisées pour de la publicité, et sont hébergées par Supabase dans l'Union européenne.</p>
-<h2>Amazon</h2><p>Quand vous cliquez sur un lien vers Amazon.fr, Amazon peut déposer des cookies pour attribuer la commission.</p>
+<h2>Amazon</h2><p>Quand vous cliquez sur un lien vers Amazon.fr, Amazon peut déposer des cookies pour attribuer la commission.</p><h2>Publicité</h2><p>Le site affiche des annonces Google AdSense. Google et ses partenaires peuvent utiliser des cookies pour diffuser et mesurer ces annonces, selon vos choix de consentement. Plus d'informations : <a href=\"https://policies.google.com/technologies/ads?hl=fr\" rel=\"noopener\" target=\"_blank\">règles de Google sur la publicité</a>.</p>
 <h2>Contact</h2><p><a href="mailto:{CONTACT}">{CONTACT}</a></p></article></div>''', crumbs=[('Confidentialité', 'confidentialite/')], prio='0.1')
 
     if os.path.isdir(OG_DIR):
@@ -328,6 +329,7 @@ def build():
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(
         '  <url><loc>%s/%s</loc><lastmod>%s</lastmod><priority>%s</priority></url>\n' % (BASE, p, TODAY, pr) for p, pr in PAGES) + '</urlset>\n'
     open(os.path.join(OUT, 'sitemap.xml'), 'w', encoding='utf-8').write(sm)
+    open(os.path.join(OUT, 'ads.txt'), 'w').write('google.com, pub-8638687738606649, DIRECT, f08c47fec0942fa0\n')
     open(os.path.join(OUT, 'robots.txt'), 'w').write('User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n' % BASE)
     # llms.txt : résumé du site pour les IA (généré à chaque build)
     try:
