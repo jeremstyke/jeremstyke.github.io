@@ -901,8 +901,10 @@ async function boot() {
   if (!r || !r.ok) { $('load').querySelector('div').insertAdjacentHTML('beforeend', '<p style="font-size:14px;color:#5f8571">' + L.err + '</p>'); setTimeout(boot, 2500); return; }
   const showAway = () => {
     if (r.gap > 120 && r.away > 0.05) {
+      const bk = S.bank > 0;
       const x2 = r.away_ok && S.shop && S.shop.away2;
-      modal(`<div style="font-size:54px">🏠</div><h3>${L.away}</h3><div class="big">+$${fm(r.away)}</div><p>${L.awayS}</p><button class="btn" id="okAway">${L.collect}</button>` + (x2 ? `<button class="btn gold" id="x2Away" style="margin-top:8px">⭐ ${S.shop.away2} · ${L.awayX} (+$${fm(r.away)})</button>` : ''));
+      modal(`<div style="font-size:54px">🏠</div><h3>${L.away}</h3><div class="big">+$${fm(r.away)}</div><p>${L.awayS}</p><button class="btn" id="okAway">${L.collect}</button>` + (bk ? `<button class="btn" id="bkAway" style="margin-top:8px">${L.bankT} · +${Math.round(S.bank / 60)} min x2</button>` : '') + (x2 ? `<button class="btn gold" id="x2Away" style="margin-top:8px">⭐ ${S.shop.away2} · ${L.awayX} (+$${fm(r.away)})</button>` : ''));
+      if (bk) $('bkAway').onclick = () => { S.bank = 0; hap('ok'); closeModal(); call({ act: 'usebonus' }); };
       $('okAway').onclick = () => { hap('ok'); closeModal(); };
       if (x2) $('x2Away').onclick = () => { closeModal(); buy('away2'); };
     }
