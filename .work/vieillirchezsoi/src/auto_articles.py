@@ -581,7 +581,7 @@ g("prevenir-les-chutes-a-la-maison/",
 <p>L'équilibre et la force des jambes s'entretiennent. Moins on bouge, plus on risque de tomber : c'est pourquoi il ne faut pas renoncer à marcher par peur de la chute. Une activité régulière et adaptée aide à rester stable :</p>
 <ul>
 <li>la marche quotidienne, même courte ;</li>
-<li>des exercices d'équilibre et de renforcement des jambes ;</li>
+<li>des exercices d'équilibre et de renforcement des jambes, ou quelques minutes sur un <a href="{R}meilleur-pedalier-exercice-senior/">pédalier d'exercice</a> les jours où l'on ne sort pas ;</li>
 <li>des activités douces en groupe, souvent proposées par les communes, les caisses de retraite ou les associations.</li>
 </ul>
 <p>Avant de commencer, demandez conseil à votre médecin, surtout en cas de maladie ou de chute récente. Il peut orienter vers un kinésithérapeute ou prescrire une activité physique adaptée à votre état de santé. Si la marche devient moins sûre, une aide à la marche bien réglée peut rassurer : demandez conseil au kinésithérapeute pour choisir et régler une canne ou un rollator.</p>
@@ -802,7 +802,7 @@ g("aides-adapter-logement-senior/",
 <h2>Les aides locales : département, mairie, CCAS</h2>
 <p>Certaines collectivités accordent des aides ou des prêts supplémentaires pour adapter un logement, selon des règles qui varient d'un territoire à l'autre. Pour les connaître :</p>
 <ul>
-<li>adressez-vous à votre <strong>mairie</strong> ou à son <strong>CCAS</strong> (centre communal d'action sociale), ou au CIAS de l'intercommunalité ;</li>
+<li>adressez-vous à votre <strong>mairie</strong> ou à son <strong>CCAS</strong> (centre communal d'action sociale), ou au CIAS de l'intercommunalité (voir <a href="{R}ccas-aides-personnes-agees/">ce que le CCAS peut faire pour une personne âgée</a>) ;</li>
 <li>consultez le site de votre <strong>département</strong>, qui gère aussi l'APA ;</li>
 <li>demandez au conseiller France Rénov' quelles aides locales peuvent compléter MaPrimeAdapt'.</li>
 </ul>
@@ -3761,3 +3761,173 @@ g("meilleur-matelas-anti-escarres/",
        ("Un matelas anti-escarres est-il remboursé ?", "Les supports d'aide à la prévention des escarres inscrits sur la LPP peuvent être pris en charge par l'Assurance maladie, sur prescription médicale. Le pharmacien ou le prestataire de matériel médical vous indique ce qui est remboursé, à l'achat ou en location, selon la situation."),
        ("Avez-vous testé ces matelas anti-escarres ?", "Non. Cette sélection repose uniquement sur les fiches publiées par les fabricants, les revendeurs et les avis de la Haute Autorité de santé. Nous n'indiquons que ce qui figure sur ces documents, sans note ni avis de prise en main.")],
   short="Top 8 matelas anti-escarres", cat="Chambre et repos")
+
+AUTO_META['ccas-aides-personnes-agees/'] = ('🏛️', 'sable')
+g("ccas-aides-personnes-agees/",
+  "CCAS et personnes âgées : quelles aides demander à votre mairie ?",
+  "CCAS : les aides possibles pour une personne âgée, et comment les demander",
+  "Le CCAS de votre commune peut aider une personne âgée : dossier APA, aide à domicile, portage de repas, aide ponctuelle. Ce qu'il fait et comment le joindre.",
+  """
+<p>Le CCAS, c'est le centre communal d'action sociale : le service social de votre mairie. Pour une personne âgée, il peut aider à monter un dossier d'aide (l'APA par exemple), orienter vers une aide à domicile ou un portage de repas, et parfois accorder un coup de pouce financier. Ce qu'il propose exactement dépend de la commune, d'où l'intérêt de l'appeler plutôt que de deviner.</p>
+<p>Beaucoup de familles le découvrent tard, souvent au moment d'une hospitalisation ou d'une facture qui ne passe plus. C'est dommage : un simple rendez-vous permet souvent de savoir à quoi votre parent a droit, et à qui s'adresser pour le reste.</p>
+{CTA}
+<h2>Le CCAS, c'est qui exactement ?</h2>
+<p>C'est un service public de proximité, rattaché à la commune, dont le rôle est d'accompagner les personnes les plus fragiles au quotidien. Il est <strong>obligatoire dans les communes de plus de 1 500 habitants</strong>. En dessous, il est facultatif.</p>
+<p>Quand plusieurs communes se regroupent, on parle de <strong>CIAS</strong>, centre intercommunal d'action sociale. Il joue le même rôle, mais à l'échelle de la communauté de communes ou de l'agglomération.</p>
+<p>Et si votre village n'a ni CCAS ni CIAS ? Adressez-vous directement à la mairie. C'est elle qui fera le lien.</p>
+<h2>Ce que le CCAS peut faire pour une personne âgée</h2>
+<p>Il faut distinguer deux choses. D'un côté, des missions prévues par la loi, les mêmes partout. De l'autre, des aides que chaque commune choisit de proposer ou non, qu'on appelle aides facultatives.</p>
+<table><thead><tr><th>Type d'aide</th><th>Exemples</th><th>Partout ?</th></tr></thead><tbody>
+<tr><td>Information et orientation</td><td>Savoir à quelles aides on a droit, vers quel organisme se tourner</td><td>Oui</td></tr>
+<tr><td>Aide aux dossiers</td><td>Constituer une demande d'APA ou d'aide sociale à l'hébergement, la transmettre au département</td><td>Oui</td></tr>
+<tr><td>Services à domicile</td><td>Aide à domicile, aide-ménagère, portage de repas</td><td>Selon la commune</td></tr>
+<tr><td>Aides financières ponctuelles</td><td>Secours d'urgence, aide pour une facture de chauffage, d'électricité ou d'alimentation</td><td>Selon la commune</td></tr>
+<tr><td>Aides remboursables</td><td>Microcrédit social, caution locative</td><td>Selon la commune</td></tr>
+<tr><td>Lien social et aidants</td><td>Activités collectives, actions contre l'isolement, solutions de répit pour les aidants</td><td>Selon la commune</td></tr>
+</tbody></table>
+<p>Certains CCAS gèrent aussi des établissements : résidence autonomie, accueil de jour, voire EHPAD. Ce n'est pas systématique, mais quand c'est le cas, ils connaissent très bien les places disponibles et les délais du secteur.</p>
+<h2>L'aide aux dossiers : souvent le service le plus utile</h2>
+<p>Les grosses aides pour les personnes âgées, comme l'<strong>APA</strong> (allocation personnalisée d'autonomie) ou l'aide sociale à l'hébergement, sont gérées par le département. Mais le dossier se prépare souvent avec le CCAS, qui aide à le remplir et le transmet. Dans certains départements, le CCAS va plus loin et instruit lui-même les demandes, par délégation.</p>
+<p>Par exemple, si votre mère commence à avoir du mal à faire ses courses et sa toilette seule, le CCAS peut vous expliquer comment demander l'APA, quelles pièces fournir, et vous orienter vers un service d'aide à domicile en attendant la réponse. Au moment d'envoyer les justificatifs, des outils gratuits comme <a href="https://demarches.cvlibre.com/" target="_blank" rel="noopener">PDF Démarches France</a> aident à réduire ou rassembler les scans en un seul fichier.</p>
+<p>Il peut aussi vous parler d'une <strong>aide extralégale</strong>, versée par la mairie ou le département en plus des aides prévues par la loi. Elles existent dans certaines communes seulement, d'où l'intérêt de poser la question.</p>
+<h2>Les aides d'urgence et les coups de pouce</h2>
+<p>Quand une facture d'énergie dérape après un hiver froid, ou qu'un retraité modeste se retrouve sans réserve pour la fin du mois, le CCAS peut parfois accorder un secours ponctuel, non remboursable. D'autres communes proposent de l'aide alimentaire, des chèques d'accompagnement ou la prise en charge de frais de transport.</p>
+<p>Il n'existe pas de barème national pour ces aides facultatives. Chaque CCAS fixe ses propres règles, en général après une évaluation de la situation par un travailleur social. Méfiez-vous donc des listes trouvées en ligne qui promettent des montants précis : ce qui vaut à Angers ne vaut pas forcément dans votre commune.</p>
+<h2>Ce que le CCAS ne fera pas à votre place</h2>
+<p>Le CCAS ne finance pas, en général, l'adaptation du logement : pour une douche de plain-pied ou un monte-escalier, il faut se tourner vers les <a href="{R}aides-adapter-logement-senior/">aides pour adapter le logement d'un senior</a>, comme MaPrimeAdapt'. Il peut en revanche vous orienter vers les bons interlocuteurs.</p>
+<p>Il ne remplace pas non plus le médecin ni l'ergothérapeute pour évaluer ce dont votre parent a besoin chez lui. Le CCAS travaille sur l'administratif et le social ; le soignant, sur la santé et l'autonomie.</p>
+<h2>Comment contacter le CCAS de votre commune ?</h2>
+<p>Le plus simple est de passer par la mairie, à l'accueil ou par téléphone. Depuis janvier 2026, les coordonnées des CCAS figurent aussi dans <a href="https://lannuaire.service-public.gouv.fr/" target="_blank" rel="noopener">l'annuaire Service Public</a>.</p>
+<p>Pour que le premier rendez-vous serve vraiment, préparez :</p>
+<ul>
+<li>une pièce d'identité et un justificatif de domicile de la personne aidée ;</li>
+<li>son dernier avis d'imposition et le montant de ses retraites ;</li>
+<li>une liste simple de ce qui pose problème au quotidien (repas, ménage, toilette, sorties, factures).</li>
+</ul>
+<p>Un trieur ou une pochette dédiée aux papiers de votre parent évite de chercher un document à chaque rendez-vous. <a href="{AMZ:trieur documents administratifs}" """ + A + """>Voir les trieurs de documents</a></p>
+<p>Notre conseil : allez-y <strong>avant</strong> la crise. Un rendez-vous pris au calme, quand tout va encore à peu près bien, vous donne une vue d'ensemble des aides locales. Le jour où il faut agir vite, après une chute ou une sortie d'hôpital, vous saurez déjà qui appeler.</p>
+<p>En parallèle, pensez à sécuriser le quotidien : une <a href="{R}teleassistance-comment-ca-marche/">téléassistance</a> rassure beaucoup les familles quand le parent vit seul, et notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a> aide à repérer ce qui peut être amélioré.</p>
+<p class="note"><strong>Informations vérifiées le 18 novembre 2026</strong> sur monparcourshandicap.gouv.fr, service-public.gouv.fr et les documents de la CNSA et de la DREES.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.monparcourshandicap.gouv.fr/principaux-interlocuteurs/centre-communal-ou-intercommunal-daction-sociale-ccascias" target="_blank" rel="noopener">Mon Parcours Handicap, Centre communal ou intercommunal d'action sociale (CCAS/CIAS)</a>, <a href="https://www.service-public.gouv.fr/particuliers/actualites/a18757" target="_blank" rel="noopener">Service Public, Les coordonnées des CCAS disponibles dans l'annuaire Service Public</a>, <a href="https://www.cnsa.fr/sites/default/files/2026-03/PUB_10_SPDA_plaquette_CCAS_WEB_ACCESS_compressed.pdf" target="_blank" rel="noopener">CNSA, Le SPDA et les CCAS/CIAS</a> (vérifié le 18 novembre 2026)</p>
+""",
+  faq=[("Le CCAS existe-t-il dans toutes les communes ?", "Non. Il est obligatoire dans les communes de plus de 1 500 habitants et facultatif en dessous. Certaines communes se regroupent dans un CIAS, centre intercommunal d'action sociale. Sans CCAS ni CIAS, adressez-vous directement à la mairie."),
+       ("Le CCAS peut-il aider à demander l'APA ?", "Oui. L'APA est versée par le département, mais le CCAS peut vous aider à constituer le dossier et le transmettre. Dans certains départements, il instruit même la demande par délégation."),
+       ("Les aides du CCAS sont-elles les mêmes partout ?", "Non. L'information, l'orientation et l'aide aux dossiers sont prévues partout. En revanche, le portage de repas, les secours financiers ou les activités contre l'isolement dépendent des choix de chaque commune. Renseignez-vous auprès de votre CCAS.")],
+  short="CCAS et personnes âgées", cat="Conseils pour les proches")
+
+AUTO_META['meilleur-pedalier-exercice-senior/'] = ('🏆', 'sauge')
+g("meilleur-pedalier-exercice-senior/",
+  "Meilleur pédalier d'exercice senior 2026 : 8 modèles comparés",
+  "Meilleur pédalier d'exercice pour senior : 8 modèles, mécaniques ou motorisés",
+  "Pédalier simple à molette ou motorisé avec télécommande : 8 pédaliers bras et jambes comparés pour bouger assis à la maison, d'après les fiches fabricants.",
+  """
+<p>Pour une personne âgée qui marche peu mais peut encore pédaler seule, un pédalier mécanique à molette suffit, et il coûte en général bien moins cher. Le pédalier motorisé se justifie quand les jambes ont du mal à lancer le mouvement : le moteur fait tourner les pédales, la personne accompagne. Entre les deux, regardez surtout la stabilité au sol et la facilité de lecture de l'écran.</p>
+<p>Un pédalier se glisse devant un fauteuil, se range sous un meuble et permet de bouger les jambes en regardant la télévision. C'est son grand intérêt : il rend l'exercice possible les jours où sortir marcher n'est pas envisageable.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs (sites des marques, grandes enseignes françaises, pharmacies en ligne), sans test en main. Nous n'indiquons que les données lues sur ces fiches ; quand une information n'y figure pas, nous écrivons « non précisé ». Aucun prix n'est indiqué, car il change souvent.</div>
+<h2>Avant d'acheter : un mot avec le médecin ou le kiné</h2>
+<p>Pédaler assis est une activité douce, mais pas anodine pour tout le monde : après une opération du genou ou de la hanche, avec des problèmes cardiaques ou des douleurs articulaires, le bon rythme et la bonne durée se décident avec le médecin ou le kinésithérapeute. Il peut aussi vous dire si un modèle motorisé, qui entraîne les jambes, est adapté ou non.</p>
+<p>Pour situer les choses, les recommandations de santé publique conseillent après 65 ans au moins 30 minutes d'activité physique dynamique par jour. L'Assurance retraite suggère, après une longue pause, de commencer par 5 à 10 minutes par jour. Un pédalier est un bon moyen d'y arriver par petites touches.</p>
+<h2>Le comparatif en un coup d'œil</h2>
+<table><thead><tr><th>Modèle</th><th>Type</th><th>Bras et jambes</th><th>Réglage</th><th>Poids</th><th>Charge max</th><th>Idéal pour</th></tr></thead><tbody>
+<tr><td>Tunturi Cardio Fit M50</td><td>Motorisé, 70 W</td><td>Oui (bras sur table)</td><td>12 vitesses, 7 programmes</td><td>5,6 kg</td><td>100 kg</td><td>Notre choix motorisé</td></tr>
+<tr><td>Klarfit Cycloony</td><td>Motorisé, 70 W</td><td>Oui</td><td>12 vitesses</td><td>Environ 4,6 kg</td><td>120 kg</td><td>Pédaler assis ou allongé</td></tr>
+<tr><td>Ultrasport Mini Bike 50</td><td>Mécanique, volant 2 kg</td><td>Oui</td><td>Molette</td><td>4,28 kg</td><td>100 kg</td><td>Notre choix mécanique</td></tr>
+<tr><td>Uten X1460</td><td>Mécanique, friction</td><td>Oui</td><td>Molette</td><td>3,5 kg</td><td>150 kg</td><td>Forte corpulence</td></tr>
+<tr><td>Care Fitness M Bike</td><td>Mécanique</td><td>Oui (bras sur table)</td><td>Molette</td><td>3,5 à 3,8 kg</td><td>Non précisé</td><td>Un écran complet</td></tr>
+<tr><td>Jocca 6158</td><td>Mécanique</td><td>Oui</td><td>Manuel</td><td>3,1 kg</td><td>Non précisé</td><td>Le plus léger à écran</td></tr>
+<tr><td>Joleti Pédalier standard</td><td>Mécanique</td><td>Oui</td><td>Molette</td><td>2,25 kg</td><td>Non précisé</td><td>Le plus simple, sans écran</td></tr>
+<tr><td>HOMCOM A90-290</td><td>Vélo de rééducation</td><td>Oui (guidons)</td><td>Bouton de tension</td><td>Non précisé</td><td>120 kg</td><td>Bras et jambes en même temps</td></tr>
+</tbody></table>
+<p>Retenez ceci : la charge maximale concerne la solidité de l'appareil, et le poids de l'appareil compte si quelqu'un doit le déplacer souvent. Un pédalier de 2 à 4 kg se porte d'une main ; un modèle motorisé de 5 à 6 kg se manipule encore, mais moins facilement.</p>
+
+<h2>1. Tunturi Cardio Fit M50 : idéal pour un pédalier motorisé complet (notre choix)</h2>
+<p><strong>Pour qui ?</strong> Une personne qui a du mal à lancer seule le mouvement des jambes, ou qui fatigue vite. Le fabricant indique que le moteur aide à initier et à maintenir le mouvement.</p>
+<ul>
+<li><strong>Points forts</strong> : moteur de 70 W, 12 niveaux de vitesse, 7 programmes, rotation en avant et en arrière. Télécommande intégrée et détachable, très pratique pour ne pas se pencher vers l'appareil. Base extra-large antidérapante et sangles de pieds réglables.</li>
+<li><strong>Données utiles</strong> : écran LED (temps, distance, calories, vitesse), 44 x 40 x 29 cm, 5,6 kg, utilisateur jusqu'à 100 kg, alimentation secteur 230 V.</li>
+<li><strong>Limites</strong> : charge maximale de 100 kg, la plus basse de la sélection avec l'Ultrasport. Non pliable. La fiche du revendeur français mentionne aussi des piles, ce qui contredit celle du fabricant : vérifiez la notice à réception.</li>
+</ul>
+<p><a href="{AMZ:Tunturi Cardio Fit M50}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Klarfit Cycloony : idéal pour pédaler assis ou allongé</h2>
+<p><strong>Pour qui ?</strong> Une personne qui passe beaucoup de temps au lit ou au fauteuil. La fiche indique un usage des jambes assis ou allongé, et des bras en posant l'appareil sur une table.</p>
+<ul>
+<li><strong>Points forts</strong> : les pédales tournent sans effort de l'utilisateur grâce au moteur, 12 vitesses, sens avant et arrière, séances réglables par tranches de 5 minutes. Utilisateur jusqu'à 120 kg.</li>
+<li><strong>Données utiles</strong> : écran LCD (durée, distance, vitesse, calories), 41 x 30 x 48 cm, environ 4,6 kg, secteur 220 à 240 V, garantie légale de 2 ans.</li>
+<li><strong>Limites</strong> : la fiche consultée se contredit sur la télécommande (absente dans le tableau, filaire dans la description). Antidérapant et pliage non précisés. Pour un usage allongé, demandez au kiné la bonne position.</li>
+</ul>
+<p><a href="{AMZ:Klarfit Cycloony}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Ultrasport Mini Bike 50 : idéal pour un pédalier mécanique fluide (notre choix)</h2>
+<p><strong>Pour qui ?</strong> Une personne qui pédale seule sans difficulté et veut un appareil simple, sans prise électrique.</p>
+<ul>
+<li><strong>Points forts</strong> : volant d'inertie de 2 kg et entraînement par courroie, ce qui donne en principe un mouvement plus régulier qu'un frein à friction. Résistance réglable par molette, pieds antidérapants et sangles. Écran LCD riche : temps, distance, vitesse, pouls, tours, calories.</li>
+<li><strong>Données utiles</strong> : 4,28 kg, utilisateur jusqu'à 100 kg, une pile AAA incluse.</li>
+<li><strong>Limites</strong> : la fiche consultée donne deux jeux de dimensions différents. Garantie non précisée. Charge maximale limitée à 100 kg.</li>
+</ul>
+<p><a href="{AMZ:Ultrasport Mini Bike 50}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Uten X1460 : idéal pour une personne de forte corpulence</h2>
+<p><strong>Pour qui ?</strong> Une personne plus lourde, puisque c'est le pédalier de cette sélection qui annonce la charge la plus élevée, 150 kg.</p>
+<ul>
+<li><strong>Points forts</strong> : léger (3,5 kg), résistance réglable par molette, écran LCD (durée, calories, tours, tours par minute). Se pose au sol pour les jambes ou sur une table pour les bras.</li>
+<li><strong>Données utiles</strong> : 40,5 x 35 x 30,6 cm, une pile AA non incluse. La fiche précise de l'utiliser assis pour les jambes.</li>
+<li><strong>Limites</strong> : résistance par friction, souvent moins douce qu'un volant d'inertie. Antidérapant non précisé : la fiche conseille un tapis dessous. Garantie non précisée.</li>
+</ul>
+<p><a href="{AMZ:Uten pedalier appartement}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Care Fitness M Bike : idéal pour suivre ses progrès</h2>
+<p><strong>Pour qui ?</strong> Quelqu'un qui aime voir ses chiffres et noter ses séances, par exemple pour en parler avec son kinésithérapeute.</p>
+<ul>
+<li><strong>Points forts</strong> : écran qui affiche la distance de la séance mais aussi la distance totale, en plus du temps, de la vitesse et des calories. Pédales et stabilisateurs antidérapants, sangles.</li>
+<li><strong>Données utiles</strong> : 38,5 x 41 x 30 cm, 3,5 ou 3,8 kg selon la partie de la fiche. Jambes au sol, bras sur une table.</li>
+<li><strong>Limites</strong> : charge maximale, alimentation de l'écran et garantie non précisées sur la fiche consultée. Nombre de niveaux de résistance non indiqué.</li>
+</ul>
+<p><a href="{AMZ:Care Fitness mini pedalier M Bike}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Jocca 6158 : idéal pour un pédalier léger avec écran</h2>
+<p><strong>Pour qui ?</strong> Une personne qui veut déplacer facilement son pédalier d'une pièce à l'autre, ou l'emporter chez ses enfants.</p>
+<ul>
+<li><strong>Points forts</strong> : 3,1 kg seulement, écran LCD avec temps, distance, tours, calories et historique. Pédales antidérapantes avec sangles.</li>
+<li><strong>Données utiles</strong> : 41 x 36 x 32 cm, une pile AAA de 1,5 V, résistance réglable à la main.</li>
+<li><strong>Limites</strong> : charge maximale, type de frein et garantie non précisés. Un appareil très léger peut glisser sur un parquet : un tapis antidérapant dessous est une bonne précaution.</li>
+</ul>
+<p><a href="{AMZ:Jocca pedalier ecran LCD}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Joleti Pédalier standard : idéal pour la simplicité</h2>
+<p><strong>Pour qui ?</strong> Une personne que les écrans et les boutons agacent, et qui veut juste pédaler.</p>
+<ul>
+<li><strong>Points forts</strong> : pas d'écran, pas de pile, juste une molette de résistance. Pédales et pieds antidérapants. Démontable, ce qui facilite le rangement. Vendu en pharmacie en ligne.</li>
+<li><strong>Données utiles</strong> : 2,25 kg, pied de 40 x 55 cm, 25 cm de haut. Utilisable au sol ou sur une table pour les bras.</li>
+<li><strong>Limites</strong> : aucun compteur pour suivre le temps de séance (un minuteur de cuisine fait l'affaire). Charge maximale et garantie non précisées.</li>
+</ul>
+<p><a href="{AMZ:pedalier Joleti}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. HOMCOM A90-290 : idéal pour travailler bras et jambes en même temps</h2>
+<p><strong>Pour qui ?</strong> Une personne qui veut faire travailler le haut et le bas du corps ensemble, sans poser l'appareil sur une table. Ce n'est pas un mini pédalier mais un petit vélo de rééducation avec guidons.</p>
+<ul>
+<li><strong>Points forts</strong> : guidons pour les bras et pédales pour les jambes, hauteur et largeur réglables, bouton de tension, patins antidérapants. Structure en acier, certification EN 20957 indiquée. Utilisateur jusqu'à 120 kg.</li>
+<li><strong>Données utiles</strong> : 56 x 44 à 56 cm au sol, 75 à 97 cm de haut. Écran : temps, tours, distance, calories.</li>
+<li><strong>Limites</strong> : bien plus encombrant qu'un pédalier au sol. Poids de l'appareil non précisé. Garantie : seulement la garantie légale mentionnée.</li>
+</ul>
+<p><a href="{AMZ:HOMCOM velo reeducation bras et jambes}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Mécanique ou motorisé : comment trancher ?</h2>
+<p>Posez-vous une seule question : la personne arrive-t-elle à faire un tour de pédale complet, seule, sans grimacer ? Si oui, un pédalier mécanique suffit. On commence avec la molette au plus léger, et on durcit avec le temps.</p>
+<p>Si non, ou si les jambes se raidissent vite, le motorisé prend le relais. Attention toutefois : quand le moteur fait tout, l'effort musculaire est faible. C'est utile pour entretenir la souplesse et la circulation, moins pour se muscler. Le kinésithérapeute saura vous dire ce qui convient.</p>
+<p>Notre conseil : pour un premier achat, sans avis contraire du soignant, prenez un mécanique stable comme l'Ultrasport. Un motorisé coûte plus cher, demande une prise à côté du fauteuil, et n'apporte vraiment quelque chose que si les jambes ne suivent plus.</p>
+<h2>Les erreurs que l'on voit souvent</h2>
+<ul>
+<li><strong>Pédaler sur une chaise à roulettes ou un fauteuil qui recule.</strong> Le siège doit être stable, avec accoudoirs si possible. Un fauteuil releveur verrouillé ou une chaise lourde conviennent bien.</li>
+<li><strong>Poser le pédalier sur un sol glissant.</strong> Même avec des pieds antidérapants, un tapis dessous évite qu'il avance à chaque tour.</li>
+<li><strong>Vouloir trop en faire au début.</strong> Mieux vaut 5 minutes tous les jours qu'une heure le dimanche.</li>
+<li><strong>Oublier les sangles.</strong> Un pied qui glisse de la pédale peut faire un bleu, ou pire. Serrez-les à chaque séance.</li>
+</ul>
+<p>Bouger régulièrement entretient la force des jambes, ce qui compte beaucoup pour l'équilibre. Pour aller plus loin, lisez nos conseils pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a>, et si la personne a besoin d'aide pour se relever de son siège, notre sélection de <a href="{R}meilleur-fauteuil-releveur/">fauteuils releveurs</a>. Pour le reste du logement, consultez notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a>.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.sante.fr/rester-en-forme-apres-65-ans" target="_blank" rel="noopener">Santé.fr, Rester en forme après 65 ans</a>, <a href="https://www.lassuranceretraite.fr/portail-info/hors-menu/newsletter/activite-physique-retraite.html" target="_blank" rel="noopener">L'Assurance retraite, Activité physique à la retraite</a>, <a href="https://www.tunturi.com/en/go/product/132076073" target="_blank" rel="noopener">Tunturi, fiche Cardio Fit M50</a> (vérifié le 18 novembre 2026)</p>
+""",
+  faq=[("Un pédalier est-il efficace pour une personne âgée ?", "C'est une façon simple de bouger les jambes ou les bras en restant assis, utile les jours où l'on ne sort pas. Il ne remplace pas la marche ni un programme de rééducation. Le médecin ou le kinésithérapeute peut vous indiquer la durée et le rythme adaptés."),
+       ("Faut-il choisir un pédalier motorisé ou mécanique ?", "Si la personne arrive à pédaler seule, un mécanique à molette suffit et ne demande ni prise ni réglage. Le motorisé est utile quand les jambes ont du mal à lancer le mouvement : le moteur fait tourner les pédales et la personne accompagne."),
+       ("Avez-vous testé ces pédaliers ?", "Non. Cette sélection repose uniquement sur les fiches publiées par les fabricants et les revendeurs. Nous n'indiquons que ce qui figure sur ces fiches, sans note ni avis de prise en main.")],
+  short="Top 8 pédaliers d'exercice", cat="Vie quotidienne")
