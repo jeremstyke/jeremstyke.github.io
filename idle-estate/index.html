@@ -240,7 +240,7 @@ const L = {
   pr:['month','month','month','month','month','month','month','month','month','month'],
   betaT:'Balancing in progress', betaS:'Progress may be reset while I tune the game.',
   hint:'Tap a property to collect its rent. Hire a manager 👔 and it pays you automatically, even when you are away.', estate:'Estate', shop:'Shop', prest:'Empire', top:'Top',
-  buy:'Buy', lvl:'Lv', manager:'Manager', auto:'Auto', tapStart:'👆 Tap', ms:'x2.5 @',
+  buy:'Buy', lvl:'Lv', manager:'Manager', auto:'Auto', tapStart:'👆 Tap', ms:'x',
   welcomeT:'Welcome pack', welcomeS:'2h of rent now + x2 income for 24h', claim:'Claim', daily:'Daily bonus', dailyS:'Day {n} of 7, come back every day',
   away:'While you were away', awayX:'Double it', awayXd:'Doubled!', awayS:'Your tenants kept paying rent.', collect:'Collect', great:'Great!',
   vipMsg:'Golden tenant! +', per:'/s', max:'MAX',
@@ -273,7 +273,7 @@ const L = {
   pr:['mois','mois','mois','mois','mois','mois','mois','mois','mois','mois'],
   betaT:'Réglages en cours', betaS:'Des remises à zéro sont possibles pendant que j\'équilibre le jeu.',
   hint:'Touche un bien pour encaisser son loyer. Embauche un gestionnaire 👔 et il te paie tout seul, même quand tu es absent.', estate:'Biens', shop:'Boutique', prest:'Empire', top:'Top',
-  buy:'Acheter', lvl:'Niv', manager:'Gestionnaire', auto:'Auto', tapStart:'👆 Touche', ms:'x2.5 @',
+  buy:'Acheter', lvl:'Niv', manager:'Gestionnaire', auto:'Auto', tapStart:'👆 Touche', ms:'x',
   welcomeT:'Pack de bienvenue', welcomeS:'2h de loyers tout de suite + x2 revenus pendant 24h', claim:'Récupérer', daily:'Bonus du jour', dailyS:'Jour {n} sur 7, reviens chaque jour',
   away:'Pendant ton absence', awayX:'Doubler', awayXd:'Doublé !', awayS:'Tes locataires ont continué à payer.', collect:'Encaisser', great:'Super !',
   vipMsg:'Locataire doré ! +', per:'/s', max:'MAX',
@@ -614,7 +614,7 @@ function paint() {
     const nm = c.querySelector('.n'), em = c.querySelector('em'), ms = c.querySelector('s'), bar = c.querySelector('.bar i'), txt = c.querySelector('.bar b'), buyb = c.querySelector('.buy'), mg = c.querySelector('.mgr');
     nm.textContent = (lk ? '🔒 ' : '') + L.names[i];
     em.style.display = owned ? '' : 'none'; em.textContent = L.lvl + ' ' + S.lv[i];
-    if (owned) { const nx = S.ms.find(m => m > S.lv[i]); ms.textContent = nx ? L.ms + nx : 'MAX'; ms.style.display = ''; } else ms.style.display = 'none';
+    if (owned) { const nx = S.ms.find(m => m > S.lv[i]); ms.textContent = nx ? L.ms + S.mb + ' @' + nx : 'MAX'; ms.style.display = ''; } else ms.style.display = 'none';
     const per = inc(i, n);
     if (!owned) { bar.style.transform = 'scaleX(0)'; txt.textContent = '$' + fm(S.cfg[i].r * curM(n)) + ' / ' + L.pr[i]; }
     else if (S.mg[i]) { bar.style.transform = S.cfg[i].t < 2.5 ? 'scaleX(1)' : 'scaleX(' + ((n % S.cfg[i].t) / S.cfg[i].t) + ')'; txt.textContent = '$' + fm(per) + ' / ' + L.pr[i]; }
