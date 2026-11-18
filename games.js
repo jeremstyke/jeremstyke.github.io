@@ -69,8 +69,7 @@
   var G = [
     { id: 'mct', e: '🐸', n: 'Meme Coin Tycoon', u: 'https://t.me/Memecointycoonbot?startapp=src_xg_', c: '#ffd43b',
       d: { en: 'Launch your memecoin and become #1', fr: 'Lance ton memecoin et deviens n°1', es: 'Lanza tu memecoin y sé el n.º 1', pt: 'Lance sua memecoin e seja o nº 1', ru: 'Запусти свой мемкоин и стань №1', uk: 'Запусти свій мемкоїн і стань №1', tr: 'Memecoin\'ini çıkar, 1 numara ol', id: 'Luncurkan memecoin-mu dan jadi #1', ar: 'أطلق عملتك الميم وكن الأول', fa: 'میم‌کوین خودت را بساز و اول شو', de: 'Starte deinen Memecoin und werde Nr. 1', it: 'Lancia il tuo memecoin e diventa il n. 1' } },
-    { id: 'bt', e: '🏃', n: 'Pass The Baton', u: 'https://t.me/PassTheBatonBot/play?startapp=src_xg_', c: '#2f8dff',
-      d: { en: 'Hold the baton, earn real USDT', fr: 'Garde le bâton, gagne de vrais USDT', es: 'Guarda el testigo y gana USDT reales', pt: 'Segure o bastão e ganhe USDT de verdade', ru: 'Держи эстафету и зарабатывай USDT', uk: 'Тримай естафету й заробляй USDT', tr: 'Bayrağı tut, gerçek USDT kazan', id: 'Pegang tongkat, dapatkan USDT asli', ar: 'احتفظ بالعصا واربح USDT حقيقية', fa: 'باتوم را نگه دار و USDT واقعی بگیر', de: 'Halte den Staffelstab, verdiene echte USDT', it: 'Tieni il testimone e guadagna USDT veri' } },
+    // 18 nov 2026 (Jeremy): Pass The Baton is closed for now, removed from the list
     // 29 oct 2026 (19h01, Jeremy): the 🎮 menu everywhere with all the games: Tic Tac Cash and Rig Rush (relaunched)
     // 30 oct 2026 (0h28, Jeremy): Tic Tac Cash closed
     // 1 nov 2026 (00h35, Jeremy): Rig Rush closed again (its RIGZ became $BATON), removed from the list
