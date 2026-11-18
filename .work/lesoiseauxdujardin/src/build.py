@@ -81,7 +81,7 @@ def top_pick(body):
         if not a: continue
         title = re.sub(r'^1\.\s*', '', re.sub('<[^>]+>', '', h.group(3)))
         name, _, why = title.partition(' : ')
-        why = re.sub(r'\s*\((?:notre|mon) choix\)\s*$', '', why.strip(), flags=re.I)
+        why = re.sub(r'\s*\((?:notre|mon) choix[^)]*\)\s*$', '', why.strip(), flags=re.I)
         return name.strip(), (why[:1].upper() + why[1:]) if why else '', h.group(2), a.group(1)
     return None
 
@@ -100,7 +100,7 @@ def pick_box(body):
 def pick_box_guide(body, slug):
     """Pour un guide : n°1 du comparatif lié qui parle du même produit (mots communs dans l'adresse)."""
     if '{CTA}' not in body or 'class="pick"' in body or slug.startswith('meilleur'): return body
-    stop = {'oiseau', 'oiseaux', 'jardin', 'livre', 'livres', 'meilleur', 'meilleure', 'meilleurs', 'comment', 'choisir', 'senior', 'personne', 'agee', 'de', 'du', 'la', 'le', 'les', 'pour', 'bien', 'quel', 'quelle'}
+    stop = {'a', 'd', 'l', 'au', 'aux', 'des', 'en', 'et', 'un', 'une', 'par', 'sa', 'son', 'ses', 'ma', 'mon', 'mes', 'ta', 'ton', 'tes', 'noces', 'annee', 'ans', 'oiseau', 'oiseaux', 'jardin', 'livre', 'livres', 'meilleur', 'meilleure', 'meilleurs', 'comment', 'choisir', 'senior', 'personne', 'agee', 'de', 'du', 'la', 'le', 'les', 'pour', 'bien', 'quel', 'quelle'}
     if re.search(r'aide|rembours|prix|retraite', slug): return body
     if any(gd['slug'] == slug and gd.get('cat') == 'Observer' for gd in GUIDES): return body  # fiches espèces : pas d'encadré
     words = [w for w in slug.strip('/').split('-') if w not in stop]
@@ -112,7 +112,7 @@ def pick_box_guide(body, slug):
         cw = set(cand.strip('/').split('-')) - stop
         sc = len(mine & cw) if words[0] in cw else 0
         if sc > score: best, score = cand, sc
-    if not best: return body
+    if not best or score < min(2, len(mine)): return body
     top = next((gd for gd in GUIDES if gd['slug'] == best), None)
     p = top_pick(top['body']) if top else None
     if not p: return body
