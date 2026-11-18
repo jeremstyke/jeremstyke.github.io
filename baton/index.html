@@ -1358,6 +1358,7 @@ async function api(action, body) {
     const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ initData: (tg && tg.initData) || '', action }, body || {})) });
     const j = await r.json();
     if (j && j.error === 'maint') maint();
+    if (j && j.error === 'closed') closed();
     return j;
   } catch (e) { return { ok: false, error: 'other' }; }
 }
@@ -2062,6 +2063,20 @@ document.querySelector('.chip.g').onclick = () => {
       + (today ? '<button class="btn ghost" data-k="keep">OK</button>' : '<button class="btn mint" data-k="harv">⛏️ ' + T('harvest') + '</button>'));
   };
 })();
+// 18 nov 2026 (Jeremy): Pass The Baton is closed for now (cheating and theft). The server answers error 'closed'; $BATON are kept.
+function closed() {
+  if (document.querySelector('.maint')) return;
+  const F = LANG === 'fr';
+  const el = document.createElement('div'); el.className = 'maint';
+  el.innerHTML = '<div class="tcard" style="max-width:380px"><div class="tic">🔒</div><h2>' + (F ? 'Pass The Baton est fermé pour le moment' : 'Pass The Baton is closed for now') + '</h2>'
+    + '<p>' + (F ? 'Il y a eu beaucoup de triche et de vol, donc le jeu est fermé pour l\'instant.' : 'There has been a lot of cheating and theft, so the game is closed for now.') + '</p>'
+    + '<p><b>' + (F ? 'Tes $BATON sont conservés.' : 'Your $BATON are kept.') + '</b></p>'
+    + '<p>' + (F ? 'En attendant, tu peux jouer à Meme Coin Tycoon et à Idle Estate :' : 'Meanwhile, you can play Meme Coin Tycoon and Idle Estate:') + '</p>'
+    + '<button class="btn gold" id="clMct" style="margin-bottom:10px">🪙 Meme Coin Tycoon</button><button class="btn" id="clIe">🏠 Idle Estate</button></div>';
+  document.body.appendChild(el); $('#loader').hidden = true;
+  el.querySelector('#clMct').onclick = () => { try { hap(); } catch (e) {} openLink('https://t.me/Memecointycoonbot?startapp=src_btclosed'); };
+  el.querySelector('#clIe').onclick = () => { try { hap(); } catch (e) {} openLink('https://t.me/Idleestatebot?startapp=src_btclosed'); };
+}
 // 21 oct 2026: maintenance screen (the server answers error 'maint'); it checks again every 15 s and reloads when Baton is back
 function maint() {
   if (document.querySelector('.maint')) return;
@@ -2118,7 +2133,7 @@ function nudge() {
     el.querySelector('#cgOk').onclick = () => { hap(); location.reload(); };
     return;
   }
-  if (!r.ok) { if (r.error !== 'maint') { toast(errMsg(r)); const ld = $('#loader'); ld.innerHTML = '<button class="btn gold" style="width:auto;padding:0 28px" onclick="location.reload()">↻</button>'; ld.hidden = false; } return; }
+  if (!r.ok) { if (r.error !== 'maint' && r.error !== 'closed') { toast(errMsg(r)); const ld = $('#loader'); ld.innerHTML = '<button class="btn gold" style="width:auto;padding:0 28px" onclick="location.reload()">↻</button>'; ld.hidden = false; } return; }
   setState(r);
   // 29 oct 2026 (9h33, Jeremy): the Club is no longer needed to play: a player outside it is invited once a day (it is needed to withdraw USDT)
   if (r.club_in === false) {
