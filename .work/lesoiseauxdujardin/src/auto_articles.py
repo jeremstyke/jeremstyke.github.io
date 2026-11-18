@@ -2972,6 +2972,7 @@ g("meilleur-melange-graines-oiseaux/",
 <p>Un bon mélange de graines pour oiseaux se reconnaît à son étiquette : du tournesol en bonne place, du maïs concassé, éventuellement des cacahuètes, et pas de pois, de lentilles ni de riz, que la LPO Occitanie et la LPO Nord déconseillent. Notre préféré est le <strong>Versele-Laga Menu Nature Clean Garden</strong>, parce que c'est l'un des rares sacs dont la fiche donne la composition détaillée et qui ne laisse pas de coques au sol.</p>
 <p>Le problème des mélanges, c'est qu'on achète souvent à l'aveugle. Beaucoup de sacs se contentent d'un vague « céréales, graines, noix ». Nous avons donc lu les fiches de sept produits vendus en France et classé ceux qui disent clairement ce qu'ils contiennent avant ceux qui restent flous.</p>
 {CTA}
+<p><strong>Notre choix, le Clean Garden</strong> : <a href="{AMZ:Versele-Laga Menu Nature Clean Garden}" """ + A + """>Voir sur Amazon</a></p>
 <div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
 
 <h2>Le tableau récapitulatif</h2>
