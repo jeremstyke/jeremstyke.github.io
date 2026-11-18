@@ -285,7 +285,7 @@ g("planche-de-bain/",
 <h3>Le siège de baignoire pivotant</h3>
 <p>Son assise tourne sur elle-même. On s'assoit face à l'extérieur de la baignoire, les pieds au sol, puis on fait pivoter l'assise pour faire passer les jambes. Ce geste est souvent plus facile que de soulever les jambes au-dessus du rebord. Beaucoup de modèles ont un dossier, et certains des accoudoirs, ce qui rassure. <a href="{AMZ:siege de baignoire pivotant}" """ + A + """>Voir les sièges de baignoire pivotants</a>.</p>
 <h3>L'élévateur de bain</h3>
-<p>L'élévateur de bain est un siège qui descend doucement au fond de la baignoire, puis remonte la personne à la hauteur du rebord. Il permet de garder le plaisir du bain quand se relever seul n'est plus possible. C'est un équipement plus important : avant de l'acheter, demandez l'avis d'un ergothérapeute, qui vérifiera qu'il convient à la personne et à la baignoire. <a href="{AMZ:elevateur de bain}" """ + A + """>Voir les élévateurs de bain</a>.</p>
+<p>L'élévateur de bain est un siège qui descend doucement au fond de la baignoire, puis remonte la personne à la hauteur du rebord (voir notre <a href="{R}meilleur-elevateur-de-bain/">comparatif des élévateurs de bain</a>). Il permet de garder le plaisir du bain quand se relever seul n'est plus possible. C'est un équipement plus important : avant de l'acheter, demandez l'avis d'un ergothérapeute, qui vérifiera qu'il convient à la personne et à la baignoire. <a href="{AMZ:elevateur de bain}" """ + A + """>Voir les élévateurs de bain</a>.</p>
 <h2>Bien mesurer la baignoire avant d'acheter</h2>
 <p>C'est l'erreur la plus fréquente : une planche trop courte qui ne tient pas sur les rebords, ou trop longue qui dépasse dans le passage. Avant de commander, prenez quelques mesures.</p>
 <ul>
@@ -3639,7 +3639,7 @@ g("date-paiement-retraite-decembre-2026/",
 <h2>Votre retraite n'est pas arrivée : que faire ?</h2>
 <p>Avant de vous inquiéter, vérifiez trois choses. D'abord, la bonne caisse et le bon mois : beaucoup de personnes attendent leur retraite de base de décembre en décembre, alors qu'elle arrive en janvier. Ensuite, le délai de votre banque, qui peut ajouter un ou deux jours. Enfin, votre espace personnel : le compte retraite de info-retraite.fr permet de consulter vos dates de paiement, tous régimes confondus.</p>
 <p>Si l'argent manque toujours quelques jours après la date prévue, contactez votre caisse depuis votre espace personnel ou par téléphone. Un changement de banque récent est souvent en cause : la caisse doit avoir reçu votre nouveau RIB avant la date de paiement. Pour l'envoyer, vous pouvez préparer votre justificatif avec <a href="https://demarches.cvlibre.com/assurance-retraite/" target="_blank" rel="noopener">l'outil gratuit de PDF Démarches France pour l'Assurance retraite</a>, qui réduit et convertit les fichiers au bon format.</p>
-<p>Notre conseil : si vous aidez un parent dans ses démarches, créez avec lui son compte sur info-retraite.fr une bonne fois pour toutes. Toutes ses caisses et ses dates de paiement y sont regroupées, ce qui évite d'appeler chaque organisme.</p>
+<p>Notre conseil : si vous aidez un parent dans ses démarches, créez avec lui son compte sur info-retraite.fr une bonne fois pour toutes. Pour régler ses factures à sa place, pensez aussi à la <a href="{R}procuration-bancaire-parent-age/">procuration bancaire</a>. Toutes ses caisses et ses dates de paiement y sont regroupées, ce qui évite d'appeler chaque organisme.</p>
 <h2>Et les autres régimes ?</h2>
 <p>Fonctionnaires, indépendants, professions libérales, Ircantec : chaque régime a son propre calendrier, que nous n'avons pas repris ici. Consultez le site de votre caisse ou votre compte retraite pour connaître la date exacte de votre versement.</p>
 <p>Pour aller plus loin, découvrez aussi les <a href="{R}aides-adapter-logement-senior/">aides pour adapter le logement d'un senior</a> et notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a>.</p>
@@ -3931,3 +3931,166 @@ g("meilleur-pedalier-exercice-senior/",
        ("Faut-il choisir un pédalier motorisé ou mécanique ?", "Si la personne arrive à pédaler seule, un mécanique à molette suffit et ne demande ni prise ni réglage. Le motorisé est utile quand les jambes ont du mal à lancer le mouvement : le moteur fait tourner les pédales et la personne accompagne."),
        ("Avez-vous testé ces pédaliers ?", "Non. Cette sélection repose uniquement sur les fiches publiées par les fabricants et les revendeurs. Nous n'indiquons que ce qui figure sur ces fiches, sans note ni avis de prise en main.")],
   short="Top 8 pédaliers d'exercice", cat="Vie quotidienne")
+
+AUTO_META['procuration-bancaire-parent-age/'] = ('🏦', 'sable')
+g("procuration-bancaire-parent-age/",
+  "Procuration bancaire pour un parent âgé : comment la faire",
+  "Procuration bancaire pour un parent âgé : ce qu'elle permet, comment la faire",
+  "Procuration bancaire pour aider un parent âgé : générale ou limitée, démarche en agence, limites, et quand passer à l'habilitation familiale ou au mandat.",
+  """
+<p>Une procuration bancaire permet à votre parent de vous autoriser à faire des opérations sur son compte à sa place : payer ses factures, faire un virement, retirer de l'argent. Elle se signe à la banque, avec lui, tant qu'il est en état de donner son accord. Il garde l'accès complet à ses comptes et peut l'annuler quand il veut.</p>
+<p>C'est souvent la première solution à laquelle pensent les familles, et pour de bonnes raisons : elle est simple, rapide et ne passe pas par le juge. Mais elle a des limites, et elle ne se fait plus une fois que votre parent ne peut plus exprimer sa volonté. Voilà pourquoi il vaut mieux y penser tôt.</p>
+{CTA}
+<p class="note"><strong>Informations vérifiées le 18 novembre 2026</strong> sur service-public.gouv.fr, lesclesdelabanque.com (site de la Fédération bancaire française) et laposte.fr. Ce sont des informations générales : pour un cas précis, parlez-en au conseiller bancaire ou à un notaire.</p>
+<h2>Procuration générale ou limitée : laquelle choisir ?</h2>
+<p>Il existe deux grandes formes. La <strong>procuration générale</strong> couvre toutes les opérations courantes sur le compte, sans limite de durée. La <strong>procuration limitée</strong> encadre ce que vous pouvez faire : un montant maximum, une durée, ou un type d'opération seulement.</p>
+<p>Par exemple, si votre père veut simplement que vous régliez ses factures pendant une hospitalisation, une procuration limitée à quelques mois suffit. Si votre mère ne peut plus du tout se déplacer à la banque et vous demande de tout gérer au quotidien, une procuration générale sera plus pratique. Elle peut porter sur un compte ou sur plusieurs.</p>
+<p>Notre conseil : même dans une famille où tout le monde s'entend, une procuration limitée en montant est une bonne protection pour tout le monde. Elle rassure votre parent, et elle vous protège des soupçons de vos frères et sœurs.</p>
+<h2>Ce que vous pourrez faire, et ce que vous ne pourrez pas faire</h2>
+<p>Avec une procuration, le mandataire (vous) peut en général déposer et retirer de l'argent, faire des virements, payer des factures, consulter les relevés et le compte en ligne, utiliser une carte bancaire à son nom et le chéquier, dans les limites prévues par la procuration.</p>
+<p>En revanche, seul le titulaire peut demander la clôture du compte. D'après La Poste, le mandataire ne peut pas non plus souscrire un crédit au nom de son parent ni modifier un contrat d'assurance-vie. Et un point que beaucoup oublient : c'est votre parent qui reste responsable des opérations. Si un découvert ou un chèque sans provision survient, c'est lui qui en subit les conséquences.</p>
+<h2>Comment la mettre en place à la banque ?</h2>
+<p>La démarche se fait en agence (au bureau de poste pour La Banque Postale), <strong>en présence de votre parent</strong>. La banque vérifie qu'il donne son accord en toute connaissance de cause. Prévoyez :</p>
+<ul>
+<li>la pièce d'identité de chacun ;</li>
+<li>un justificatif de domicile récent pour le mandataire ;</li>
+<li>le formulaire de procuration de la banque, qui précise les noms, l'étendue de la procuration (montants, durée) et les signatures.</li>
+</ul>
+<p>Le mandataire n'est pas forcément un membre de la famille : un ami ou un voisin de confiance peut l'être. La banque peut demander quel lien vous unit, et elle peut refuser si elle a un doute sur la volonté de votre parent ou sur le profil du mandataire. En cas de doute sur ses facultés, elle peut aussi demander un certificat médical.</p>
+<p>Si votre parent ne peut vraiment plus se déplacer, appelez l'agence avant : certaines banques ont des solutions, mais elles varient d'un établissement à l'autre.</p>
+<h2>Procuration, habilitation familiale, mandat : le tableau pour s'y retrouver</h2>
+<table><thead><tr><th>Solution</th><th>Quand l'utiliser</th><th>Qui décide</th><th>Ce qu'elle couvre</th></tr></thead><tbody>
+<tr><td>Procuration bancaire</td><td>Votre parent a toute sa tête mais a besoin d'aide pour ses opérations</td><td>Votre parent, à la banque</td><td>Les comptes désignés, dans les limites fixées</td></tr>
+<tr><td>Mandat de protection future</td><td>Votre parent veut organiser à l'avance une éventuelle perte d'autonomie</td><td>Votre parent, par un acte sous signature privée ou chez le notaire</td><td>Plus large : gestion du patrimoine, et même de la personne. Ne produit d'effet qu'une fois activé</td></tr>
+<tr><td>Habilitation familiale</td><td>Votre parent ne peut plus défendre seul ses intérêts et la famille est d'accord</td><td>Le juge des tutelles, sur demande d'un proche</td><td>Générale ou limitée à certains actes ; permet d'agir sur ses comptes</td></tr>
+<tr><td>Curatelle ou tutelle</td><td>Les autres solutions ne suffisent pas ou la famille n'est pas d'accord</td><td>Le juge des tutelles</td><td>Protection encadrée par le juge</td></tr>
+</tbody></table>
+<h2>Que se passe-t-il si sa mémoire baisse ?</h2>
+<p>C'est la vraie limite de la procuration. Elle repose sur la volonté de votre parent : s'il a des troubles cognitifs importants, la banque peut refuser de l'enregistrer. Et une procuration existante prend fin automatiquement en cas de mise sous tutelle ou curatelle.</p>
+<p>Dans ce cas, deux voies existent. Le <strong>mandat de protection future</strong>, que votre parent signe pendant qu'il le peut encore, et qui sera activé plus tard sur certificat d'un médecin inscrit sur une liste du procureur. Et l'<strong>habilitation familiale</strong>, demandée au juge des tutelles avec un certificat médical circonstancié établi par un médecin agréé. Peuvent être habilités notamment les enfants, petits-enfants, frères et sœurs, l'époux, le partenaire de Pacs ou le concubin. Avec une habilitation générale, la personne habilitée peut agir seule sur les comptes bancaires.</p>
+<p>Le moment à ne pas rater, c'est celui où votre parent va encore bien, mais où vous sentez que les papiers deviennent lourds. Une conversation calme à ce moment évite bien des démarches compliquées plus tard. Pour les autres aides du quotidien, le <a href="{R}ccas-aides-personnes-agees/">CCAS de sa commune</a> peut aussi vous orienter.</p>
+<h2>Les précautions à prendre quand vous gérez son argent</h2>
+<ul>
+<li><strong>Gardez une trace de tout.</strong> Le mandataire doit pouvoir justifier chaque dépense. Un cahier ou un tableur avec les dates et les montants suffit.</li>
+<li><strong>Ne mélangez jamais ses comptes et les vôtres.</strong> Pas de virement « provisoire » vers votre compte, même pour avancer une course.</li>
+<li><strong>Informez vos frères et sœurs.</strong> La transparence évite les tensions, surtout au moment d'une succession.</li>
+<li><strong>Pensez à la révocation.</strong> Votre parent peut annuler la procuration à tout moment par écrit à sa banque. Vous devez alors rendre la carte et le chéquier.</li>
+</ul>
+<p>Sachez aussi qu'au décès du titulaire, la procuration prend fin immédiatement : le compte est bloqué et vous n'avez plus aucun droit dessus. Ne faites plus aucune opération à partir de ce moment.</p>
+<p>Gérer l'argent d'un parent va souvent de pair avec d'autres sujets : connaître les <a href="{R}date-paiement-retraite-decembre-2026/">dates de versement de sa retraite</a> pour caler les prélèvements, ou s'assurer qu'il peut appeler à l'aide s'il vit seul, avec une <a href="{R}teleassistance-comment-ca-marche/">téléassistance</a>. Et pour son logement, notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a> fait le tour de ce qui peut être adapté.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F33367" target="_blank" rel="noopener">Service Public, Habilitation familiale</a>, <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F16670" target="_blank" rel="noopener">Service Public, Mandat de protection future</a>, <a href="https://www.lesclesdelabanque.com/particulier/la-procuration-sur-compte-bancaire/" target="_blank" rel="noopener">Les clés de la banque, La procuration sur compte bancaire</a> (vérifié le 18 novembre 2026)</p>
+""",
+  faq=[("Peut-on faire une procuration bancaire pour un parent atteint d'Alzheimer ?", "Pas toujours. La procuration suppose que votre parent donne son accord en connaissance de cause, et la banque peut refuser ou demander un certificat médical en cas de doute. Si ses facultés sont trop atteintes, l'habilitation familiale, demandée au juge des tutelles, est souvent plus adaptée."),
+       ("Le mandataire peut-il fermer le compte de son parent ?", "Non. Seul le titulaire peut demander la clôture de son compte. Selon La Poste, le mandataire ne peut pas non plus souscrire un crédit en son nom ni modifier un contrat d'assurance-vie."),
+       ("La procuration est-elle valable après le décès ?", "Non. Elle prend fin automatiquement au décès du titulaire : le compte est bloqué et le mandataire n'a plus aucun droit dessus. Elle prend aussi fin en cas de mise sous tutelle ou curatelle.")],
+  short="Procuration bancaire parent âgé", cat="Argent et patrimoine")
+
+AUTO_META['meilleur-elevateur-de-bain/'] = ('🏆', 'ciel')
+g("meilleur-elevateur-de-bain/",
+  "Meilleur élévateur de bain 2026 : 8 sièges électriques comparés",
+  "Meilleur élévateur de bain : 8 sièges élévateurs électriques comparés",
+  "Charge maximale, hauteur d'assise, dossier inclinable, poids à soulever : 8 élévateurs de bain électriques comparés d'après les fiches des fabricants.",
+  """
+<p>Pour la plupart des personnes, un élévateur de bain à dossier inclinable et batterie dans la télécommande, comme l'Aquatec Orca ou le Bellavita, fait très bien l'affaire : ils acceptent jusqu'à 140 kg et descendent à quelques centimètres du fond. Les vraies différences se jouent ailleurs : le poids de la plus lourde pièce à soulever, la largeur une fois les rabats ouverts et la garantie.</p>
+<p>Un élévateur de bain descend la personne assise au fond de la baignoire, puis la remonte à hauteur du rebord sur simple pression d'un bouton. Il permet de garder le bain quand se relever seul n'est plus possible, sans gros travaux. Avant d'acheter, un ergothérapeute peut vérifier qu'il convient à la personne et à la baignoire.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs (fiches techniques des marques, distributeurs de matériel médical, avis de la Haute Autorité de santé), sans test en main. Nous n'indiquons que les données lues sur ces fiches ; quand une information n'y figure pas, nous écrivons « non précisé ». Aucun prix n'est indiqué, car il change souvent.</div>
+<h2>Le comparatif en un coup d'œil</h2>
+<table><thead><tr><th>Modèle</th><th>Charge max</th><th>Hauteur d'assise</th><th>Dossier</th><th>Poids</th><th>Idéal pour</th></tr></thead><tbody>
+<tr><td>Invacare Aquatec Orca</td><td>140 kg (XL : 170 kg)</td><td>6 à 42 cm</td><td>8 à 40°</td><td>10,8 kg</td><td>Notre choix : le plus documenté</td></tr>
+<tr><td>Drive Bellavita</td><td>140 kg</td><td>6 à 48 cm</td><td>10 à 50°</td><td>9,7 kg</td><td>Le dossier le plus inclinable</td></tr>
+<tr><td>Bellavita Eco</td><td>140 kg</td><td>6 à 48 cm</td><td>10 à 50°</td><td>9,7 kg</td><td>Version sans capitonnage</td></tr>
+<tr><td>Identités Galapagos</td><td>140 kg</td><td>8 à 48 cm</td><td>10 à 45°</td><td>9,6 kg</td><td>Une assise large</td></tr>
+<tr><td>Invacare Aquatec Kogia</td><td>140 kg</td><td>6 à 42 cm</td><td>Jusqu'à 40°</td><td>10 kg + batterie 1,6 kg</td><td>Un modèle simple</td></tr>
+<tr><td>Kanjo</td><td>140 kg</td><td>6,5 à 45,5 cm</td><td>Jusqu'à 40°</td><td>10,5 kg</td><td>Une recharge rapide</td></tr>
+<tr><td>Mangar Archimedes</td><td>165 kg</td><td>8 à 45 cm</td><td>Non précisé</td><td>Pièce la plus lourde : 5,2 kg</td><td>Un aidant qui le démonte souvent</td></tr>
+<tr><td>Mangar Bathing Cushion</td><td>150 kg</td><td>À plat à 40 cm</td><td>Sans dossier motorisé</td><td>2 kg</td><td>Le plus léger à manipuler</td></tr>
+</tbody></table>
+<p>Un repère simple : la plupart des élévateurs pèsent autour de 10 kg, mais se démontent en deux parties. Ce qui compte pour l'aidant, c'est le poids de la pièce la plus lourde, qu'il faudra sortir de la baignoire si d'autres membres de la famille veulent prendre une douche.</p>
+
+<h2>1. Invacare Aquatec Orca : le plus documenté (notre choix)</h2>
+<p><strong>Pour qui ?</strong> Une personne qui ne tient plus bien assise sans appui dans le dos et tient à garder son bain. C'est notre choix parce que c'est le modèle de cette sélection dont les caractéristiques sont les plus détaillées, et le seul à avoir reçu en janvier 2026 un avis favorable de la Haute Autorité de santé pour son inscription sur la liste des produits remboursables.</p>
+<ul>
+<li><strong>Points forts</strong> : dossier inclinable de 8 à 40°, assise de 6 à 42 cm, démontage en deux parties sans outils, housse amovible lavable à 60 °C. La descente est bloquée quand la batterie est trop faible, ce qui évite de rester coincé au fond. Version XL jusqu'à 170 kg.</li>
+<li><strong>Données utiles</strong> : 140 kg maximum, 10,8 kg sans télécommande, assise de 37,5 cm de large sans rabats et 71,5 cm avec. Batterie lithium-ion dans la télécommande, recharge en 4,5 heures, autonomie annoncée de 5 cycles pour une personne de 140 kg. Garantie 2 ans, batterie 1 an.</li>
+<li><strong>Limites</strong> : l'avis de la HAS ne vaut pas remboursement automatique : vérifiez auprès du pharmacien ou du prestataire. Indice d'étanchéité de la télécommande non précisé (elle est annoncée étanche et flottante).</li>
+</ul>
+<p><a href="{AMZ:Aquatec Orca elevateur de bain}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Drive Bellavita : le dossier le plus inclinable</h2>
+<p><strong>Pour qui ?</strong> Une personne qui aime se détendre allongée dans le bain. Avec 50° d'inclinaison, son dossier va plus loin que celui de l'Orca.</p>
+<ul>
+<li><strong>Points forts</strong> : assise de 6 à 48 cm, dossier de 10 à 50°, revêtement confort bleu ou blanc, rabats latéraux qui portent la largeur à 70 cm pour s'asseoir plus facilement. Garantie à vie sur le moteur d'après le revendeur, 2 ans sur la batterie et la télécommande.</li>
+<li><strong>Données utiles</strong> : 140 kg maximum, 9,7 kg avec batterie, assise de 35 x 42 cm, base de 31 x 56 cm. Démontable en deux parties. Télécommande étanche et flottante.</li>
+<li><strong>Limites</strong> : ventouses vendues à part. Autonomie de la batterie non précisée. Plusieurs versions du Bellavita circulent : vérifiez la référence exacte avant de commander.</li>
+</ul>
+<p><a href="{AMZ:Drive Bellavita elevateur de bain}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Bellavita Eco : la même base, sans capitonnage</h2>
+<p><strong>Pour qui ?</strong> Celui ou celle qui veut les caractéristiques du Bellavita sans housse confort, par exemple parce que la personne préfère une surface facile à rincer.</p>
+<ul>
+<li><strong>Points forts</strong> : mêmes repères que le Bellavita (6 à 48 cm, dossier de 10 à 50°, rabats de 35 à 70 cm), télécommande étanche et flottante, démontage en deux parties.</li>
+<li><strong>Données utiles</strong> : 140 kg maximum, 9,7 kg avec batterie. Garantie à vie sur le moteur, 2 ans sur la batterie et la télécommande selon le revendeur.</li>
+<li><strong>Limites</strong> : sans capitonnage, l'assise est plus dure : à éviter pour une personne très amaigrie ou à la peau fragile. Nombre de cycles par charge non précisé.</li>
+</ul>
+<p><a href="{AMZ:Bellavita Eco elevateur de bain}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Identités Galapagos : une assise plus large</h2>
+<p><strong>Pour qui ?</strong> Une personne plus large d'épaules ou de hanches, qui se sent à l'étroit sur les assises de 35 à 38 cm.</p>
+<ul>
+<li><strong>Points forts</strong> : assise de 40 x 50 cm, volets latéraux pliables qui portent la largeur à 72,5 cm, capitonnage intégral. Batterie lithium-ion dans la télécommande, recharge en 3 heures.</li>
+<li><strong>Données utiles</strong> : 140 kg maximum, hauteur de 8 à 48 cm, dossier de 10 à 45°, 9,6 kg sans télécommande. Le fabricant annonce une garantie à vie sur le moteur et la structure, 2 ans sur la batterie et la télécommande.</li>
+<li><strong>Limites</strong> : une fiche revendeur indique seulement « garantie 2 ans » : faites-vous confirmer la garantie à l'achat. Ventouses et démontage non précisés. Vendu aussi sous le nom Gala.</li>
+</ul>
+<p><a href="{AMZ:Identites elevateur de bain Galapagos}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Invacare Aquatec Kogia : un modèle simple</h2>
+<p><strong>Pour qui ?</strong> Une personne qui a besoin d'un élévateur sans options, avec une assise un peu plus profonde.</p>
+<ul>
+<li><strong>Points forts</strong> : assise de 6 à 42 cm, dossier jusqu'à 40°, assise de 37 cm de large et 45 cm de profondeur, revêtement antidérapant blanc en option lavable à 60 °C.</li>
+<li><strong>Données utiles</strong> : 140 kg maximum, 10 kg sans batterie, batterie de 1,6 kg, base de 57 x 26,6 cm, dossier de 66 cm de haut.</li>
+<li><strong>Limites</strong> : rabats latéraux, autonomie, garantie et démontage non précisés sur la fiche consultée. Moins documenté que l'Orca du même fabricant.</li>
+</ul>
+<p><a href="{AMZ:Aquatec Kogia}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Kanjo : une recharge rapide</h2>
+<p><strong>Pour qui ?</strong> Un foyer où l'on oublie souvent de recharger la télécommande : sa batterie se recharge en 1 heure d'après la fiche.</p>
+<ul>
+<li><strong>Points forts</strong> : batterie lithium-ion, recharge en 1 heure, télécommande étanche et flottante, rabats qui font passer la largeur de 37,5 à 71 cm. Fabriqué en Allemagne d'après le revendeur.</li>
+<li><strong>Données utiles</strong> : 140 kg maximum, hauteur de 6,5 à 45,5 cm, dossier jusqu'à 40°, 10,5 kg. Garantie 2 ans.</li>
+<li><strong>Limites</strong> : nombre de cycles par charge et démontage non précisés. Moins répandu que les Bellavita ou les Aquatec.</li>
+</ul>
+<p><a href="{AMZ:Kanjo elevateur de baignoire}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Mangar Archimedes : pour l'aidant qui le démonte souvent</h2>
+<p><strong>Pour qui ?</strong> Un aidant qui doit sortir l'élévateur de la baignoire après chaque bain. Il se démonte en trois pièces, la plus lourde pesant 5,2 kg.</p>
+<ul>
+<li><strong>Points forts</strong> : charge maximale de 165 kg, la plus élevée de la sélection en version standard. Deux rabats de transfert conçus contre le pincement, quatre ventouses à dégagement rapide.</li>
+<li><strong>Données utiles</strong> : hauteur de 8 à 45 cm, assise de 39,5 cm de large, télécommande à batterie scellée.</li>
+<li><strong>Limites</strong> : angle du dossier, autonomie et garantie non précisés sur les fiches consultées, qui sont en anglais.</li>
+</ul>
+<p><a href="{AMZ:Mangar Archimedes elevateur baignoire}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Mangar Bathing Cushion : le plus léger</h2>
+<p><strong>Pour qui ?</strong> Quelqu'un qui veut un élévateur presque invisible une fois rangé. Ce n'est pas un siège rigide mais un coussin gonflable, relié à un petit compresseur.</p>
+<ul>
+<li><strong>Points forts</strong> : 2 kg seulement, se pose à plat au fond de la baignoire puis se gonfle jusqu'à 40 cm. Charge maximale de 150 kg. Télécommande annoncée étanche selon la norme IP67.</li>
+<li><strong>Données utiles</strong> : assise de 44 cm de profondeur et 58 cm de large, fonctionnement sur batterie.</li>
+<li><strong>Limites</strong> : pas de dossier inclinable motorisé, donc moins adapté à une personne qui ne tient pas assise seule. Type de batterie, autonomie et garantie non précisés.</li>
+</ul>
+<p><a href="{AMZ:Mangar coussin de bain}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment choisir un élévateur de bain ?</h2>
+<h3>Mesurez la baignoire avant tout</h3>
+<p>Largeur du fond, forme (droite, arrondie, avec des reliefs), longueur : les ventouses ont besoin d'un fond plat et lisse pour bien tenir. Mesurez aussi l'espace entre la baignoire et le mur, car le dossier s'incline vers l'arrière. Une baignoire d'angle ou à fond texturé pose souvent problème.</p>
+<h3>Regardez la hauteur basse</h3>
+<p>Plus l'assise descend bas, plus la personne profite de l'eau. Entre 6 et 8 cm, la différence se sent peu ; en revanche, un modèle qui ne descend qu'à 10 ou 12 cm laisse le buste hors de l'eau.</p>
+<h3>Pensez à celui qui l'installe</h3>
+<p>Si l'élévateur reste en place, le poids compte peu. S'il faut le sortir tous les jours, privilégiez une pièce lourde de 5 à 7 kg plutôt que 10. Et vérifiez que la sécurité batterie faible existe : elle empêche la descente si la batterie ne permet plus de remonter.</p>
+<p>Notre conseil : si se relever devient vraiment difficile, demandez d'abord une visite d'un ergothérapeute. Il vérifiera si l'élévateur est la bonne solution, ou si une <a href="{R}planche-de-bain/">planche de bain</a>, un <a href="{R}meilleur-siege-de-douche/">siège de douche</a> ou le remplacement de la baignoire par une douche serait plus sûr. Pour ce dernier cas, les <a href="{R}aides-adapter-logement-senior/">aides pour adapter le logement</a>, comme MaPrimeAdapt', peuvent financer une partie des travaux. Et quoi que vous choisissiez, une <a href="{R}meilleure-barre-d-appui/">barre d'appui</a> près de la baignoire reste utile. Pour le reste de la maison, consultez notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a>.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.has-sante.fr/upload/docs/evamed/CNEDIMTS-8003_AQUATEC_ORCA_20%20janvier%202026_8003_avis.pdf" target="_blank" rel="noopener">HAS, avis de la CNEDIMTS sur l'Aquatec Orca (20 janvier 2026)</a>, <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F37501" target="_blank" rel="noopener">Service Public, MaPrimeAdapt'</a> (vérifié le 18 novembre 2026)</p>
+""",
+  faq=[("Un élévateur de bain est-il remboursé par la Sécurité sociale ?", "Ne comptez pas sur un remboursement automatique. En janvier 2026, la Haute Autorité de santé a rendu un avis favorable à l'inscription de l'Aquatec Orca sur la liste des produits remboursables, mais nous n'avons pas trouvé de tarif publié. Demandez au pharmacien, au prestataire ou à l'ergothérapeute ce qui s'applique à votre situation."),
+       ("Quel poids maximum supporte un élévateur de bain ?", "La plupart des modèles acceptent 140 kg. Pour une personne plus lourde, regardez les versions XL (170 kg pour l'Aquatec Orca XL) ou le Mangar Archimedes, annoncé à 165 kg."),
+       ("Avez-vous testé ces élévateurs de bain ?", "Non. Cette sélection repose uniquement sur les fiches publiées par les fabricants, les revendeurs et l'avis de la Haute Autorité de santé. Nous n'indiquons que ce qui figure sur ces documents, sans note ni avis de prise en main.")],
+  short="Top 8 élévateurs de bain", cat="Salle de bains")

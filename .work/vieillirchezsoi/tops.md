@@ -17,7 +17,7 @@
 - [x] meilleur-lit-medicalise/ | meilleur lit médicalisé électrique | Chambre et repos | modèles vendus aux particuliers, achat ou location, prescription et remboursement seulement si vérifié sur ameli, renvoi médecin
 - [x] meilleur-matelas-anti-escarres/ | meilleur matelas anti-escarres | Chambre et repos | mousse, à air ; rester général, renvoi professionnel de santé
 - [x] meilleur-pedalier-exercice-senior/ | meilleur pédalier d'exercice pour senior | Vie quotidienne | assis, motorisé ou non ; renvoi médecin ou kinésithérapeute
-- [ ] meilleur-elevateur-de-bain/ | meilleur élévateur de bain | Salle de bains | sièges élévateurs de baignoire électriques
+- [x] meilleur-elevateur-de-bain/ | meilleur élévateur de bain | Salle de bains | sièges élévateurs de baignoire électriques
 - [ ] meilleur-bouton-appel-urgence/ | meilleur bouton d'appel d'urgence senior | Sécurité | pendentif, bracelet, avec ou sans abonnement
 - [ ] meilleure-montre-gps-senior/ | meilleure montre GPS pour senior | Sécurité | localisation, appel d'urgence ; rester général sur les maladies, renvoi médecin
 - [ ] meilleure-chaise-de-douche-a-roulettes/ | meilleure chaise de douche à roulettes | Salle de bains | chaises garde-robe et douche à roulettes
