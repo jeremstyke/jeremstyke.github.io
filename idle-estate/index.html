@@ -234,6 +234,7 @@ const lang = ((tgw && tgw.initDataUnsafe && tgw.initDataUnsafe.user && tgw.initD
 const L = {
  en: {
   lockT:'Unlocks after sale #{n}',
+  testT:'Testing period', testS:'Idle Estate is still in testing until November 25. Accounts can be reset again if we need to adjust the balance. After that, no more resets.', testOk:'Got it',
   names:['Studio','Loft','Villa','Apartment block','Residential tower','Hotel chain','Mall network','Business district','Resort island','Megacity'],
   pr:['month','month','month','month','month','month','month','month','month','month'],
   betaT:'Balancing in progress', betaS:'Progress may be reset while I tune the game.',
@@ -265,6 +266,7 @@ const L = {
  },
  fr: {
   lockT:'S\'ouvre à la vente n°{n}',
+  testT:'Période de test', testS:'Idle Estate est encore en test jusqu\'au 25 novembre. Les comptes peuvent être remis à zéro si on doit ajuster l\'équilibre. Après, plus de remise à zéro.', testOk:'Compris',
   names:['Studio','Loft','Villa','Immeuble','Tour résidentielle','Chaîne d\'hôtels','Centres commerciaux','Quartier d\'affaires','Île resort','Mégapole'],
   pr:['mois','mois','mois','mois','mois','mois','mois','mois','mois','mois'],
   betaT:'Réglages en cours', betaS:'Des remises à zéro sont possibles pendant que j\'équilibre le jeu.',
@@ -894,10 +896,17 @@ async function boot() {
   if (!initData) { $('load').innerHTML = '<div><div>📱</div>' + L.openTg + '</div>'; return; }
   let r = await call({ act: 'state', first: true });
   if (!r || !r.ok) { $('load').querySelector('div').insertAdjacentHTML('beforeend', '<p style="font-size:14px;color:#5f8571">' + L.err + '</p>'); setTimeout(boot, 2500); return; }
-  if (r.gap > 120 && r.away > 1) {
-    modal(`<div style="font-size:54px">🏠</div><h3>${L.away}</h3><div class="big">+$${fm(r.away)}</div><p>${L.awayS}</p><button class="btn" id="okAway">${L.collect}</button>`);
-    $('okAway').onclick = () => { hap('ok'); closeModal(); };
-  }
+  const showAway = () => {
+    if (r.gap > 120 && r.away > 1) {
+      modal(`<div style="font-size:54px">🏠</div><h3>${L.away}</h3><div class="big">+$${fm(r.away)}</div><p>${L.awayS}</p><button class="btn" id="okAway">${L.collect}</button>`);
+      $('okAway').onclick = () => { hap('ok'); closeModal(); };
+    }
+  };
+  // shown at every opening until the test period ends (25 Nov 2026)
+  if (Date.now() < Date.UTC(2026, 10, 26)) {
+    modal(`<div style="font-size:54px">🧪</div><h3>${L.testT}</h3><p>${L.testS}</p><button class="btn" id="okTest">${L.testOk}</button>`);
+    $('okTest').onclick = () => { hap('ok'); closeModal(); showAway(); };
+  } else showAway();
 }
 boot();
 })();
