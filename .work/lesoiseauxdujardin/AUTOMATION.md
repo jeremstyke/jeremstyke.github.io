@@ -34,3 +34,21 @@ Liens internes et sources (décidé le 17 nov 2026), à chaque publication :
 
 ## Qui publie (17 nov 2026)
 - Toutes les publications de ce site sont faites UNIQUEMENT par les tâches programmées créées depuis la conversation de Jeremy dédiée aux 4 sites affiliés (Vieillir chez soi, Les oiseaux du jardin, Ma liste bébé, Ma liste mariage). Toute autre session ou conversation ne doit ni publier de page, ni créer, modifier ou dupliquer une tâche de publication pour ce site : elle signale le besoin à Jeremy et s'arrête.
+
+## Exploiter les failles des concurrents (règle du 18 nov 2026, obligatoire pour chaque nouvelle page)
+Avant d'écrire une page, cherche sa requête principale sur le web et ouvre les 3 premiers résultats (hors Amazon et marchands). Note ce qui leur manque, puis fais-le mieux :
+- page datée (ancienne année dans le titre, produits plus vendus) : produits actuels et année en cours ;
+- page mince ou trop courte : réponds à toutes les vraies questions du lecteur (FAQ, cas particuliers, erreurs fréquentes) ;
+- pas de tableau comparatif : mets-en un dès le haut de la page ;
+- peu de produits ou un seul budget : couvre petit budget, milieu de gamme et haut de gamme ;
+- critères vagues : critères de choix concrets et vérifiés (dimensions, matériaux, entretien, sécurité) ;
+- liens d'achat tardifs : premier lien utile dès l'introduction, après {CTA} ;
+- angle oublié (situation précise, saison, petit logement, aide financière, entretien) : traite-le dans une section dédiée.
+Ne copie jamais leurs phrases ni leur structure. N'invente rien pour paraître plus complet : chaque ajout reste vérifié comme le reste de la page.
+
+## Mots clés longue traîne (règle du 18 nov 2026, obligatoire pour chaque nouvelle page)
+Le site est jeune : il gagne d'abord sur des requêtes précises de 4 mots et plus, peu disputées par les gros sites.
+- Choisis pour chaque page une requête principale longue traîne (ex. « siège de douche pliable petite douche » plutôt que « siège de douche »), mets-la dans le title, le h1, le premier paragraphe et le slug d'une nouvelle page.
+- Repère 5 à 10 variantes et questions voisines (suggestions de recherche, « Autres questions posées », forums) et traite-les dans les intertitres et la FAQ, formulées comme les gens les tapent.
+- Une page par intention : n'écris pas deux pages qui visent la même requête ; complète plutôt la page existante.
+- Quand une liste de sujets ou de tops se réapprovisionne, privilégie les requêtes longue traîne à intention d'achat (meilleur, pour qui, pour quel usage, comparatif, avis, petit budget).
