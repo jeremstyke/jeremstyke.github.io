@@ -3,9 +3,9 @@
 # Format : - [ ] slug/ | question visée | angle et organismes concernés
 # Priorité : failles (messages d'erreur et limites précises, très peu de bonnes réponses en ligne). Une donnée (taille max, format) seulement si elle est lue sur le site officiel ou sur service-public.fr ; sinon dis qu'elle n'est pas publiée et donne la marche à suivre.
 # Quand il reste moins de 10 lignes « - [ ] », ajoute 20 nouvelles questions précises (messages d'erreur, tailles max, formats, pièces par démarche) en évitant tout doublon avec guides/.
-- [ ] taille-max-fichier-caf/ | taille maximum d'un fichier sur le site de la CAF | fichier trop volumineux, formats acceptés, comment réduire (lien outil compresser)
+- [x] taille-max-fichier-caf/ | taille maximum d'un fichier sur le site de la CAF | fichier trop volumineux, formats acceptés, comment réduire (lien outil compresser)
 - [ ] taille-max-fichier-ants/ | taille maximum des pièces sur l'ANTS | format non accepté, fichier trop lourd, photos de pièces
-- [ ] taille-max-fichier-mdph/ | taille maximum des fichiers pour un dossier MDPH en ligne | varie selon le département, comment savoir, réduire le PDF
+- [x] taille-max-fichier-mdph/ | taille maximum des fichiers pour un dossier MDPH en ligne | varie selon le département, comment savoir, réduire le PDF
 - [ ] taille-max-fichier-france-travail/ | taille maximum d'un document sur France Travail | erreur au dépôt, formats acceptés
 - [ ] taille-max-fichier-impots/ | taille maximum d'une pièce jointe sur impots.gouv | messagerie sécurisée, formats, nombre de pièces
 - [ ] format-fichier-non-accepte/ | format de fichier non accepté sur un site administratif | HEIC, DOCX, PNG, comment convertir en PDF ou JPG
