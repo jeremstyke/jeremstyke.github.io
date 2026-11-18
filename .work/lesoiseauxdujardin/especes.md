@@ -15,8 +15,8 @@
 - [x] chouette-hulotte/ | chouette hulotte | Observer | fiche espèce : chant la nuit, l'attirer au jardin, nichoir à chouette, différence avec le hibou
 - [x] martinet-noir/ | martinet noir | Observer | fiche espèce : reconnaître, vit en vol, nichoir à martinets, période de présence
 - [x] perruche-a-collier/ | perruche à collier | Observer | fiche espèce : la perruche verte qu'on voit de plus en plus en ville et dans les jardins (Île-de-France, grandes villes), comment la reconnaître, cri, origine, ce qu'elle mange, si elle gêne les autres oiseaux à la mangeoire ; liens vers mangeoires et tops du site
-- [ ] difference-hibou-chouette/ | différence hibou chouette | Observer | identification : aigrettes, espèces courantes près des maisons (hulotte, effraie, chevêche, moyen-duc)
-- [ ] pinson-des-arbres/ | pinson des arbres | Observer | fiche espèce : mâle et femelle, nourriture au sol
+- [x] difference-hibou-chouette/ | différence hibou chouette | Observer | identification : aigrettes, espèces courantes près des maisons (hulotte, effraie, chevêche, moyen-duc)
+- [x] pinson-des-arbres/ | pinson des arbres | Observer | fiche espèce : mâle et femelle, nourriture au sol
 - [ ] hirondelle-rustique/ | hirondelle rustique | Observer | fiche espèce : reconnaître, nid dans les bâtiments, protection, différence avec l'hirondelle de fenêtre
 - [ ] huppe-fasciee/ | huppe fasciée | Observer | fiche espèce : reconnaître, où et quand la voir, ce qu'elle mange
 - [ ] chardonneret-elegant/ | chardonneret élégant | Observer | fiche espèce : statut de protection vérifié, graines de niger, mangeoire à niger

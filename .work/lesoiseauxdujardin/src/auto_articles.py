@@ -227,7 +227,7 @@ g("comment-choisir-mangeoire-connectee/",
   "Comment choisir une mangeoire connectée avec caméra",
   "Caméra, panneau solaire, wifi, stockage, reconnaissance des espèces : les critères pour choisir une mangeoire à oiseaux avec caméra et bien l'installer.",
   """
-<p>Une mangeoire connectée, c'est une mangeoire à graines équipée d'une petite caméra. Elle filme les mésanges, les rouges-gorges ou les pinsons qui viennent se nourrir et vous envoie les images sur votre téléphone. C'est une belle façon d'observer les oiseaux de près sans sortir ni les déranger. Encore faut-il choisir un modèle adapté à votre jardin, et surtout l'utiliser dans le respect des oiseaux.</p>
+<p>Une mangeoire connectée, c'est une mangeoire à graines équipée d'une petite caméra. Elle filme les mésanges, les rouges-gorges ou les pinsons qui viennent se nourrir et vous envoie les images sur votre téléphone. C'est une belle façon d'observer les oiseaux de près sans sortir ni les déranger. Encore faut-il choisir un modèle adapté à votre jardin, et surtout l'utiliser dans le respect des oiseaux. Si vous hésitez avec un piège photo ou une caméra wifi, notre comparatif de la <a href="{R}meilleure-camera-jardin-oiseaux/">meilleure caméra pour observer les oiseaux</a> explique les différences.</p>
 {CTA}
 
 <h2>Comment fonctionne une mangeoire à oiseaux avec caméra</h2>
@@ -1794,7 +1794,7 @@ g("oiseau-ventre-rouge/",
 
 <h2>Une poitrine roux-rouille et une tête gris-bleu : le pinson des arbres</h2>
 <p>Le pinson mâle a le dessous roux-rouille, le dos marron, le dessus de la tête et la nuque gris-bleu, et deux barres blanches bien nettes sur l'aile noire, d'après la LPO. Le roux est moins vif que le rouge du bouvreuil, mais à contre-jour, la confusion arrive.</p>
-<p>Le meilleur indice, c'est l'endroit où il mange. La LPO précise qu'il fréquente les mangeoires et picore les graines tombées dessous. Le bouvreuil, lui, reste dans les branches. La femelle de pinson est terne, beige chamois dessous, sans bleu ni roux.</p>
+<p>Le meilleur indice, c'est l'endroit où il mange. La LPO précise qu'il fréquente les mangeoires et picore les graines tombées dessous. Le bouvreuil, lui, reste dans les branches. La femelle de pinson est terne, beige chamois dessous, sans bleu ni roux. Notre fiche du <a href="{R}pinson-des-arbres/">pinson des arbres</a> détaille aussi le jeune et ce qu'il faut lui donner.</p>
 <p>Au printemps, écoutez son chant : une strophe vive qui commence par quelques notes aiguës répétées, descend, puis finit par une fioriture. Son cri le plus courant est un « pink » bref et fort.</p>
 
 <h2>Du roux mais sur la queue : le rougequeue noir</h2>
@@ -2635,7 +2635,7 @@ g("chouette-hulotte/",
 
 <h2>Chouette ou hibou : quelle différence ?</h2>
 <p>Regardez le dessus de la tête. Les hiboux adultes portent des aigrettes, ces touffes de plumes qui ressemblent à des oreilles mais ne servent pas à entendre. La hulotte n'en a pas : sa tête est parfaitement ronde. Le hibou le plus proche des jardins, le moyen-duc, a des aigrettes de 3 à 4 cm et des yeux orangés, bien différents des yeux sombres de la hulotte.</p>
-<p>Autre chouette de nos campagnes, l'effraie est très claire, presque blanche dessous, et pousse un chuintement prolongé plutôt qu'un hululement. La chevêche d'Athéna, elle, est petite, tachetée de blanc, avec des yeux jaunes.</p>
+<p>Autre chouette de nos campagnes, l'effraie est très claire, presque blanche dessous, et pousse un chuintement prolongé plutôt qu'un hululement. La chevêche d'Athéna, elle, est petite, tachetée de blanc, avec des yeux jaunes. Pour les reconnaître toutes, cris compris, voyez notre page sur la <a href="{R}difference-hibou-chouette/">différence entre hibou et chouette</a>.</p>
 
 <h2>Pourquoi entend-on la hulotte la nuit, et à quelle saison ?</h2>
 <p>Le mâle chante pour défendre son territoire et appeler sa femelle. Selon le livret Nuit de la chouette publié par le parc naturel de la Haute Vallée de Chevreuse, le hululement du mâle peut s'entendre tout au long de l'année, et le cri de la femelle sert de lien au couple. La reproduction commence tôt : l'INPN indique une ponte vers janvier ou février, de 1 à 6 œufs, couvés 28 à 30 jours.</p>
@@ -3072,3 +3072,261 @@ g("meilleur-melange-graines-oiseaux/",
        ("Avez-vous testé ces mélanges ?",
         "Non. Cette sélection repose sur les fiches publiées par les fabricants et les revendeurs. Quand une information manque, nous l'indiquons comme non précisée.")],
   short="Top 7 mélanges de graines pour oiseaux", cat="Nourrir")
+
+AUTO_META['difference-hibou-chouette/'] = ('🦉', 'lilas')
+g("difference-hibou-chouette/",
+  "Différence hibou chouette : aigrettes, cris et 6 espèces",
+  "Différence entre hibou et chouette : comment savoir qui vit près de chez vous",
+  "Hibou ou chouette ? Regardez les aigrettes. Hulotte, effraie, chevêche, moyen-duc, petit-duc : tailles, yeux et cris pour savoir qui chante près de chez vous.",
+  """
+<p>La différence entre un hibou et une chouette tient aux <strong>aigrettes</strong> : ces deux touffes de plumes dressées sur la tête, comme de petites oreilles. Le hibou en a, la chouette n'en a pas. Près des maisons en France, l'oiseau de nuit le plus probable est la <a href="{R}chouette-hulotte/">chouette hulotte</a>, celle qui fait « hou-hou ».</p>
+<p>Et non, la chouette n'est pas la femelle du hibou. Ce sont des espèces différentes, chacune avec son mâle et sa femelle.</p>
+{CTA}
+
+<h2>Quelles chouettes et quels hiboux vit-on près des maisons ?</h2>
+<p>La LPO Tarn range les rapaces nocturnes de nos régions en deux groupes : les chouettes, sans aigrettes (hulotte, effraie, chevêche), et les hiboux, avec aigrettes (moyen-duc, petit-duc, grand-duc). Voici de quoi les distinguer d'un coup d'œil, ou d'oreille.</p>
+<table><thead><tr><th>Espèce</th><th>Groupe</th><th>Taille</th><th>Yeux</th><th>Ce qu'on remarque</th><th>Où près de chez vous</th></tr></thead><tbody>
+<tr><td>Chouette hulotte</td><td>Chouette</td><td>Environ 38 à 39 cm</td><td>Noirs</td><td>Tête ronde, plumage gris brun ou roux, le fameux « hou-hou »</td><td>Parcs, grands jardins arborés, même en ville</td></tr>
+<tr><td>Effraie des clochers</td><td>Chouette</td><td>29 à 44 cm</td><td>Sombres</td><td>Visage blanc en cœur, dessous très clair, chuintements</td><td>Granges, clochers, combles, villages entourés de prairies</td></tr>
+<tr><td>Chevêche d'Athéna</td><td>Chouette</td><td>21 à 23 cm</td><td>Jaunes, sourcils blancs</td><td>Petite, brune tachetée de blanc, tête aplatie</td><td>Vieux vergers, villages agricoles, bâti ancien</td></tr>
+<tr><td>Hibou moyen-duc</td><td>Hibou</td><td>35 à 40 cm</td><td>Jaune orangé</td><td>Longues aigrettes noires, plumage strié</td><td>Jusqu'au cœur des villages, conifères et haies</td></tr>
+<tr><td>Petit-duc scops</td><td>Hibou</td><td>Environ 20 cm</td><td>Jaunes</td><td>Courtes aigrettes, chant « tiou » régulier</td><td>Vergers, oliveraies, villages du sud, de mars à octobre</td></tr>
+<tr><td>Grand-duc d'Europe</td><td>Hibou</td><td>Environ 75 cm</td><td>Non détaillé ici</td><td>Le plus grand de tous</td><td>Rarement au jardin</td></tr>
+</tbody></table>
+<p>Les tailles viennent d'oiseaux.net pour l'effraie, la chevêche et le moyen-duc, de la LPO Champagne-Ardenne et de la LPO Tarn pour les autres. Les sources ne donnent pas toujours les mêmes chiffres : la LPO Champagne-Ardenne compte par exemple 20 cm pour la chevêche, oiseaux.net 21 à 23 cm. Ce sont des ordres de grandeur.</p>
+
+<h2>À quoi servent les aigrettes du hibou ?</h2>
+<p>Ce sont de simples plumes, pas des oreilles. Chez le moyen-duc, oiseaux.net les décrit comme deux longues touffes de plumes noires, souvent dressées quand il est posé et rabattues en vol. Celles du petit-duc sont courtes et se dressent quand il est effrayé, précise la LPO Champagne-Ardenne.</p>
+<p>Le piège, c'est justement qu'un hibou peut coucher ses aigrettes. Un moyen-duc en vol, aigrettes à plat, peut passer pour une chouette. Regardez alors les yeux : orangés chez lui, noirs chez la hulotte.</p>
+
+<h2>Quel oiseau fait « hou-hou » la nuit, et qui chuinte ?</h2>
+<p>À l'oreille, c'est souvent plus simple qu'à l'œil, puisqu'on les entend bien plus qu'on ne les voit.</p>
+<ul>
+<li><strong>Un long « houuu » tremblé</strong> : le mâle de chouette hulotte. La femelle répond par un « kiouik » aigu.</li>
+<li><strong>Un chuintement éraillé, comme un souffle</strong> : l'effraie. Oiseaux.net le décrit comme un gloussement chuinté et éraillé, et les jeunes réclament à manger la nuit par des chuintements sonores. De quoi inquiéter quand on ne sait pas d'où ça vient.</li>
+<li><strong>Des miaulements ou un « hou-oû ? » interrogatif</strong> au crépuscule : la chevêche, très bavarde en période de reproduction.</li>
+<li><strong>Des « ououuh » sourds et dédoublés, à partir de mars</strong> : le mâle de moyen-duc, audible à plus d'un kilomètre selon oiseaux.net. En juin et juillet, ses jeunes poussent des « kiiiih » grinçants.</li>
+<li><strong>Un « tiou » flûté, régulier comme un métronome</strong>, les nuits de printemps et d'été dans le sud : le petit-duc. La LPO Champagne-Ardenne prévient qu'on le confond avec le chant du crapaud alyte.</li>
+</ul>
+<p>Pour vérifier, enregistrez le son avec votre téléphone et passez-le dans une application de reconnaissance comme Merlin Bird ID, puis comparez avec un guide sonore. <strong>Guide avec les chants à écouter</strong> : <a href="{AMZ:Guide des oiseaux de France Belin Morin}" """ + A + """>Voir sur Amazon</a>. D'autres titres sont présentés dans notre sélection du <a href="{R}meilleur-guide-oiseaux/">meilleur guide d'identification des oiseaux</a>.</p>
+
+<h2>Comment les observer sans les déranger ?</h2>
+<p>Au crépuscule, avec des jumelles lumineuses, depuis un endroit où vous ne bougez plus. La chevêche se montre parfois en plein jour, posée sur un piquet ou un toit, d'après la LPO Champagne-Ardenne ; oiseaux.net la dit plutôt active au crépuscule. Les deux observations se rejoignent : c'est la plus facile à voir de jour.</p>
+<p><strong>Jumelles 8x42 lumineuses</strong> : <a href="{AMZ:Zeiss Terra ED 8x42}" """ + A + """>Voir sur Amazon</a></p>
+<p>Le plus discret reste un piège photo à infrarouge invisible posé près d'un arbre ou d'un nichoir fréquenté. Il filme sans lumière gênante, et vous découvrez le lendemain qui est passé. <strong>Piège photo à LED invisibles</strong> : <a href="{AMZ:Bushnell Core DS-4K No Glow}" """ + A + """>Voir sur Amazon</a>. Nous comparons d'autres modèles dans notre sélection de la <a href="{R}meilleure-camera-jardin-oiseaux/">meilleure caméra pour observer les oiseaux</a>.</p>
+
+<h2>Peut-on attirer une chouette ou un hibou au jardin ?</h2>
+<p>Pas avec de la nourriture : ces oiseaux chassent des rongeurs, des insectes ou des petits oiseaux, et ne viennent jamais à la mangeoire. On peut en revanche leur offrir un endroit où nicher, et un jardin sans raticide ni pesticide, puisqu'ils s'empoisonnent avec leurs proies.</p>
+<ul>
+<li><strong>Chouette hulotte</strong> : une grande caisse posée à 6 à 10 m de haut, dans un arbre ou contre la façade d'un grand bâtiment, selon la LPO Champagne-Ardenne. Le détail (trou d'environ 12 cm) est dans notre fiche <a href="{R}chouette-hulotte/">chouette hulotte</a>.</li>
+<li><strong>Effraie</strong> : un nichoir dans une grange ou un clocher, dans un endroit sombre et peu fréquenté, idéalement à 10 à 15 m, avec un accès permanent vers l'extérieur.</li>
+<li><strong>Chevêche</strong> : deux nichoirs par site, à environ 50 m l'un de l'autre, suspendus sous une grosse branche ou sous un toit à 2 à 4 m, conseille la LPO Champagne-Ardenne. Il lui faut des prairies autour.</li>
+<li><strong>Petit-duc</strong> : un nichoir dans un arbre à 2 à 5 m, posé à partir de mi-mai pour éviter que les choucas ne le prennent.</li>
+</ul>
+<p><strong>Nichoir à chouette</strong> : <a href="{AMZ:nichoir chouette cheveche}" """ + A + """>Voir sur Amazon</a></p>
+<p>Le moment de pose, l'orientation et l'entretien sont les mêmes que pour tous les nichoirs : voyez notre guide pour <a href="{R}installer-un-nichoir/">installer un nichoir</a>. Pas de visite pendant la nidification : la LPO Champagne-Ardenne demande de ne pas ouvrir le nichoir de la chevêche d'avril à juin.</p>
+
+<h2>J'ai trouvé un jeune hibou ou une jeune chouette au sol : que faire ?</h2>
+<p>Dans la plupart des cas, rien de plus que le remettre en hauteur. La LPO Tarn et la LPO Champagne-Ardenne l'expliquent : les jeunes rapaces nocturnes quittent souvent le nid avant de savoir voler, et leurs parents continuent à les nourrir. Les ramasser est une erreur fréquente. Si l'oiseau est exposé, posez-le sur une branche haute, sans l'emporter. L'effraie fait exception, selon la LPO Tarn : elle ne quitte pas le nid de cette façon, et un jeune effraie au sol mérite l'avis d'un centre de soins pour la faune sauvage, tout comme un adulte blessé.</p>
+<p>Toutes ces espèces sont protégées en France : la LPO Champagne-Ardenne rappelle que leur capture, leur dérangement intentionnel et l'enlèvement des nids et des œufs sont interdits.</p>
+<p>Pour les oiseaux qui viennent à la mangeoire cet hiver, suivez notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a>.</p>
+
+<p class="sources"><strong>Sources</strong> : <a href="https://tarn.lpo.fr/wp-content/uploads/2021/04/Fiche-identification-rapaces-nocturnes.pdf" target="_blank" rel="noopener">LPO Tarn : fiche d'identification des rapaces nocturnes</a> ; <a href="https://champagne-ardenne.lpo.fr/images/mediatheque/fichiers/Protection/Especes/Avifaune/fiche_nichoirs_nocturnes.pdf" target="_blank" rel="noopener">LPO Champagne-Ardenne : nichoirs pour rapaces nocturnes</a> ; <a href="https://www.oiseaux.net/oiseaux/hibou.moyen-duc.html" target="_blank" rel="noopener">oiseaux.net : Hibou moyen-duc</a> (vérifié le 18 novembre 2026)</p>
+""",
+  faq=[("Quelle est la différence entre un hibou et une chouette ?",
+        "Le hibou porte des aigrettes, deux touffes de plumes dressées sur la tête ; la chouette n'en a pas. Ce sont des espèces différentes : la chouette n'est pas la femelle du hibou."),
+       ("Quel oiseau fait « hou-hou » la nuit près des maisons ?",
+        "Le plus souvent, le mâle de chouette hulotte. Un chuintement éraillé évoque plutôt l'effraie, des « ououuh » sourds au printemps le hibou moyen-duc, et un « tiou » régulier dans le sud le petit-duc."),
+       ("Les chouettes et les hiboux sont-ils protégés ?",
+        "Oui. La LPO Champagne-Ardenne rappelle qu'ils sont protégés en France : il est interdit de les capturer, de les déranger intentionnellement ou d'enlever leurs nids et leurs œufs.")],
+  short="Différence hibou chouette", cat="Observer")
+
+AUTO_META['pinson-des-arbres/'] = ('🐦', 'rouge')
+g("pinson-des-arbres/",
+  "Pinson des arbres : reconnaître le mâle et la femelle, le nourrir",
+  "Pinson des arbres : reconnaître le mâle et la femelle et bien le nourrir",
+  "Le pinson des arbres se reconnaît à ses deux barres blanches sur l'aile. Mâle, femelle, jeune, ce qu'il mange au sol et comment l'aider au jardin en hiver.",
+  """
+<p>Ce petit oiseau à la poitrine rose orangé et à la tête gris bleu qui picore sous la mangeoire, c'est le <strong>mâle de pinson des arbres</strong>. La femelle, toute en beige et brun, passe plus inaperçue. Le signe qui ne trompe pas chez les deux : <strong>deux barres blanches sur l'aile</strong>, bien visibles posé comme en vol.</p>
+<p>C'est l'un des oiseaux les plus communs des jardins, et pourtant on le confond souvent avec un moineau ou un bouvreuil.</p>
+{CTA}
+
+<h2>Comment reconnaître le mâle, la femelle et le jeune ?</h2>
+<p>Le <strong>mâle</strong> au printemps est le plus coloré. Oiseaux.net décrit une tête gris ardoise bleuté avec le front noir, des joues châtain, un dos brun marron chaud, un dessous rose vineux (roux rouille pour la LPO), un croupion olive et un bec gris bleuté. En hiver, ses couleurs sont plus ternes, avec la tête teintée de brun ocre, précise la fiche d'Oiseaux des jardins (LPO et MNHN). Selon oiseaux.net, les belles couleurs réapparaissent au printemps par l'usure des plumes.</p>
+<p>La <strong>femelle</strong> est brun terne dessus, beige nuancé de gris dessous, avec un croupion verdâtre. Elle garde les deux barres blanches de l'aile. Le <strong>jeune</strong> ressemble à une femelle encore plus terne, avec une tache pâle sur la nuque ; là encore, le blanc des ailes et de la queue permet de le reconnaître.</p>
+<table><thead><tr><th>Critère</th><th>Mâle</th><th>Femelle</th><th>Jeune</th></tr></thead><tbody>
+<tr><td>Tête</td><td>Gris bleu, front noir (plus brune en hiver)</td><td>Beige grisâtre, calotte plus sombre</td><td>Terne, tache pâle sur la nuque</td></tr>
+<tr><td>Poitrine</td><td>Rose vineux</td><td>Beige gris</td><td>Beige terne</td></tr>
+<tr><td>Ailes</td><td colspan="3">Deux barres blanches dans tous les plumages</td></tr>
+<tr><td>Croupion</td><td>Olive</td><td>Verdâtre</td><td>Non détaillé</td></tr>
+</tbody></table>
+<p>Pour la taille, les sources ne sont pas d'accord : 14 à 16 cm pour oiseaux.net, 18 cm pour la fiche Oiseaux des jardins. Le poids, lui, est cohérent : 19 à 24 g selon Oiseaux des jardins, environ 24 g selon oiseaux.net. Retenez qu'il est à peu près de la taille d'un moineau.</p>
+
+<h2>Pinson, moineau ou bouvreuil : comment ne pas se tromper ?</h2>
+<p>Trois confusions reviennent sans cesse, et la fiche « attention aux confusions » d'Oiseaux des jardins les règle en quelques critères :</p>
+<ul>
+<li><strong>Moineau domestique femelle</strong> : pas de deux barres alaires claires, pas de croupion vert olive. Si vous voyez du blanc net sur l'aile, c'est un pinson. Voyez aussi notre fiche du <a href="{R}moineau-domestique/">moineau domestique</a>.</li>
+<li><strong>Bouvreuil pivoine</strong> : calotte noire, bec noir très court et épais, dos gris. Le mâle a le ventre rouge vif, bien plus franc que le rose du pinson. Notre page <a href="{R}oiseau-ventre-rouge/">oiseau ventre rouge</a> compare aussi le rouge-gorge et le rougequeue.</li>
+<li><strong>Pinson du Nord</strong> : un proche cousin. Son croupion est blanc, celui du pinson des arbres vert olive. Son plumage est plus orangé.</li>
+</ul>
+<p>Par exemple, si un groupe de « pinsons » se pose sous la mangeoire en janvier et que vous voyez du blanc sur le bas du dos quand ils s'envolent, regardez mieux : il y a sans doute des pinsons du Nord parmi eux.</p>
+
+<h2>Le pinson reste-t-il tout l'hiver ?</h2>
+<p>Oui, on le voit toute l'année en France. Selon oiseaux.net, les populations du nord et de l'est de l'Europe sont en partie migratrices et viennent passer l'hiver sous des climats plus doux. En hiver, il y a donc souvent plus de pinsons au jardin qu'en été, et ils se déplacent volontiers en groupes.</p>
+
+<h2>Que donner à manger au pinson des arbres ?</h2>
+<p>Le pinson vient aux mangeoires, mais il <strong>préfère ramasser les graines au sol</strong>, note la fiche Oiseaux des jardins, qui recommande les graines de tournesol. Il mange aussi des petits fruits et des baies, et des invertébrés en été pour nourrir ses poussins.</p>
+<p>Concrètement, la mangeoire suspendue en haut d'un poteau ne lui convient qu'à moitié. Il profitera surtout de ce qui tombe, ou d'un plateau bas.</p>
+<ul>
+<li><strong>Tournesol noir ou décortiqué</strong> : la base. Le décortiqué évite de laisser des coques au sol. Notre comparatif des <a href="{R}meilleure-graine-tournesol/">meilleures graines de tournesol</a> vous aide à choisir. <a href="{AMZ:graines tournesol decortiquees oiseaux 10 kg}" """ + A + """>Voir sur Amazon</a></li>
+<li><strong>Un mélange sans pois ni riz</strong>, servi sur un plateau : voyez notre sélection du <a href="{R}meilleur-melange-graines-oiseaux/">meilleur mélange de graines pour oiseaux</a>. <a href="{AMZ:Versele-Laga Menu Nature Clean Garden}" """ + A + """>Voir sur Amazon</a></li>
+<li><strong>Un plateau de sol ou sur pieds</strong>, facile à nettoyer, placé dans un endroit dégagé. <a href="{AMZ:mangeoire plateau sol oiseaux}" """ + A + """>Voir sur Amazon</a></li>
+</ul>
+<p><strong>Notre conseil</strong> : nourrir au sol attire aussi les chats. Placez le plateau à découvert, à plusieurs mètres de tout buisson, et ne donnez que ce qui sera mangé dans la journée : les restes au sol moisissent et propagent les maladies. Tout est détaillé dans notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a>.</p>
+
+<h2>Où niche-t-il, et faut-il un nichoir ?</h2>
+<p>Le pinson construit son nid dans un arbre, un arbuste ou une haie, d'après Oiseaux des jardins. Ce n'est pas un oiseau de cavité comme la mésange : un nichoir fermé à trou rond ne lui sert pas. Ce qui l'aide vraiment, ce sont des haies et des arbres touffus, et surtout une taille au bon moment. La fiche Oiseaux des jardins demande de tailler arbres et haies entre octobre et mars, pour ne pas détruire les nichées.</p>
+<p>Pour les espèces qui, elles, utilisent un nichoir, notre guide pour <a href="{R}installer-un-nichoir/">installer un nichoir</a> donne les bonnes dimensions.</p>
+
+<h2>Comment reconnaître son chant ?</h2>
+<p>Au printemps, on l'entend souvent avant de le voir. Oiseaux.net classe ses enregistrements en chant, cris d'alarme, cris de quémande des jeunes et cris de vol : écouter ces sons est le moyen le plus sûr de le repérer avant même de le voir. Une application comme Merlin Bird ID ou un guide sonore font très bien l'affaire, et de bonnes jumelles aident à voir les barres alaires de loin : <a href="{AMZ:Nikon Prostaff P7 8x42}" """ + A + """>Voir sur Amazon</a>.</p>
+
+<p class="sources"><strong>Sources</strong> : <a href="https://cdnfiles2.biolovision.net/www.oiseauxdesjardins.fr/pdffiles/news/Fiche_especePDA-7523.pdf" target="_blank" rel="noopener">Oiseaux des jardins (LPO, MNHN) : fiche pinson des arbres</a> ; <a href="https://cdnfiles2.biolovision.net/www.oiseauxdesjardins.fr/userfiles/Fichesconfusion/Attentionauxconfusions-pinsonbouvreuil.pdf" target="_blank" rel="noopener">Oiseaux des jardins : attention aux confusions, pinson et bouvreuil</a> ; <a href="https://www.oiseaux.net/oiseaux/pinson.des.arbres.html" target="_blank" rel="noopener">oiseaux.net : Pinson des arbres</a> (vérifié le 18 novembre 2026)</p>
+""",
+  faq=[("Comment différencier le pinson mâle de la femelle ?",
+        "Le mâle a la tête gris bleu, le front noir et la poitrine rose vineux. La femelle est brun beige, sans couleurs vives. Tous deux ont deux barres blanches sur l'aile."),
+       ("Que donner à manger à un pinson des arbres ?",
+        "Des graines de tournesol, de préférence servies au sol ou sur un plateau bas, car il aime ramasser les graines par terre. Un mélange sans pois, lentilles ni riz convient aussi. Donnez peu à la fois pour éviter les restes qui moisissent."),
+       ("Le pinson des arbres utilise-t-il un nichoir ?",
+        "Pas un nichoir à trou : il construit son nid en coupe dans un arbre, un arbuste ou une haie. Le meilleur moyen de l'aider est de garder des haies touffues et de les tailler entre octobre et mars.")],
+  short="Pinson des arbres", cat="Observer")
+
+AUTO_META['meilleure-camera-jardin-oiseaux/'] = ('🏆', 'ciel')
+g("meilleure-camera-jardin-oiseaux/",
+  "Caméra pour observer les oiseaux au jardin 2026 : 8 modèles",
+  "Quelle caméra pour observer les oiseaux du jardin ? 8 modèles comparés",
+  "Piège photo, caméra wifi ou mangeoire filmée : 8 caméras pour observer les oiseaux du jardin, avec emplacement, nettoyage, chats et abonnements expliqués.",
+  """
+<p>Pour observer les oiseaux de votre jardin sans être derrière la fenêtre, il existe trois grandes familles : le <strong>piège photo</strong>, qui se déclenche tout seul au passage d'un animal, la <strong>caméra wifi</strong> qu'on regarde en direct sur son téléphone, et la <strong>mangeoire avec caméra intégrée</strong>, qui filme de tout près. Si vous ne devez en retenir qu'une pour les petits oiseaux, prenez la mangeoire filmée : c'est la seule qui place l'objectif à quelques centimètres des mésanges.</p>
+<p>Pour les hérissons, les renards, la chouette qui passe la nuit ou le héron au bord du bassin, un vrai piège photo à infrarouge invisible fait mieux. Nous avons retenu huit modèles vendus en France, du petit budget au haut de gamme, et nous expliquons surtout ce que les fiches oublient : où la poser, comment l'entretenir et ce que coûtent les abonnements.</p>
+{CTA}
+<p><strong>Notre choix pour les petits oiseaux, la Birdfy Feeder 2 Pro</strong> : <a href="{AMZ:Birdfy Feeder 2 Pro}" """ + A + """>Voir sur Amazon</a></p>
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
+
+<h2>Le tableau récapitulatif</h2>
+<table><thead><tr><th>Modèle</th><th>Type</th><th>Vidéo</th><th>Nuit</th><th>Connexion</th><th>Abonnement</th><th>Gamme</th></tr></thead><tbody>
+<tr><td>Birdfy Feeder 2 Pro</td><td>Mangeoire à 2 caméras</td><td>2K et 1080p</td><td>Non précisé</td><td>Wifi</td><td>Optionnel</td><td>Haut</td></tr>
+<tr><td>Green Feathers caméra wifi extérieure (3e gén.)</td><td>Caméra filaire</td><td>1080p</td><td>Infrarouge 20 m</td><td>Wifi, Ethernet</td><td>Aucun</td><td>Milieu</td></tr>
+<tr><td>Bushnell CORE DS-4K No Glow</td><td>Piège photo</td><td>4K</td><td>LED invisibles, 36 m</td><td>Aucune</td><td>Aucun</td><td>Haut</td></tr>
+<tr><td>Browning Recon Force Elite HP5</td><td>Piège photo</td><td>1080p</td><td>Infrarouge 40 m</td><td>Aucune</td><td>Aucun</td><td>Haut</td></tr>
+<tr><td>Zeiss Secacam 7</td><td>Piège photo 4G</td><td>1080p</td><td>LED 940 nm invisibles, 25 m</td><td>4G</td><td>Obligatoire</td><td>Haut</td></tr>
+<tr><td>Spypoint Flex-M</td><td>Piège photo 4G</td><td>720p</td><td>27 m</td><td>4G</td><td>100 photos gratuites par mois</td><td>Milieu</td></tr>
+<tr><td>Bresser caméra wifi 4-24 MP</td><td>Piège photo wifi</td><td>1080p</td><td>LED 850 nm</td><td>Wifi</td><td>Aucun</td><td>Entrée</td></tr>
+<tr><td>Bresser caméra faune 5 MP Full HD</td><td>Piège photo</td><td>1080p</td><td>LED invisibles</td><td>Aucune</td><td>Aucun</td><td>Entrée</td></tr>
+</tbody></table>
+<p>Un point manque sur toutes les fiches que nous avons lues : la <strong>distance minimale de mise au point</strong>. Aucun fabricant ne l'indique. C'est pourtant ce qui décide si une mésange à 50 cm sera nette ou floue. Prévoyez donc des essais à différentes distances avant de fixer définitivement un piège photo.</p>
+
+<h2>1. Birdfy Feeder 2 Pro : la plus proche des oiseaux</h2>
+<p><strong>Pour qui ?</strong> Vous voulez voir les mésanges et les rouges-gorges de très près, et savoir quelles espèces sont passées pendant votre journée de travail.</p>
+<p>C'est une mangeoire avec deux caméras : un objectif 2K orientable qui suit l'oiseau, et un grand angle en 1080p, selon Birdfy. Elle fonctionne sur batterie rechargeable avec un panneau solaire fourni et elle est classée IP66. L'identification des oiseaux est gratuite à vie sur cette version, d'après le fabricant.</p>
+<ul>
+<li><strong>Points forts</strong> : l'objectif est à quelques centimètres du sujet, reconnaissance des espèces incluse, autonome grâce au solaire.</li>
+<li><strong>Limites</strong> : pas de carte microSD, tout passe par le cloud du fabricant, avec 30 jours de vidéos et 5 Go de collection en gratuit. Les formules Plus et Pro sont payantes. Elle ne filme que ce qui vient manger : pas de hérisson ni de renard.</li>
+</ul>
+<p><a href="{AMZ:Birdfy Feeder 2 Pro}" """ + A + """>Voir sur Amazon</a></p>
+<p>Les autres mangeoires filmées sont comparées dans notre sélection des <a href="{R}meilleure-mangeoire-connectee/">meilleures mangeoires connectées</a>.</p>
+
+<h2>2. Green Feathers caméra wifi extérieure : le direct sans abonnement</h2>
+<p><strong>Pour qui ?</strong> Vous avez une prise extérieure et voulez regarder une mangeoire, un bain d'oiseaux ou un nichoir en direct, sans frais mensuels.</p>
+<p>Cette caméra filaire de type « bullet » filme en 1080p, avec un angle d'environ 90° et un infrarouge annoncé jusqu'à 20 m. Elle se connecte en wifi 2,4 ou 5 GHz ou par câble Ethernet, enregistre sur microSD jusqu'à 128 Go et fonctionne avec une application gratuite, selon Green Feathers. Elle supporte de -30 à +60 °C.</p>
+<ul>
+<li><strong>Points forts</strong> : pas d'abonnement, wifi 5 GHz rare sur ce type d'appareil, enregistrement continu ou sur détection.</li>
+<li><strong>Limites</strong> : alimentation secteur obligatoire (câble de 3 m, rallonges jusqu'à 20 m). Indice d'étanchéité IP non précisé. Détection de mouvement limitée à 5 m.</li>
+</ul>
+<p><a href="{AMZ:Green Feathers camera wifi exterieure faune}" """ + A + """>Voir sur Amazon</a></p>
+<p>Pour suivre une nichée, un kit nichoir et caméra est plus simple : voyez notre comparatif du <a href="{R}meilleur-nichoir-camera/">meilleur nichoir avec caméra</a>.</p>
+
+<h2>3. Bushnell CORE DS-4K No Glow : le piège photo le plus complet</h2>
+<p><strong>Pour qui ?</strong> Vous voulez filmer la vie nocturne du jardin, chouette, hérisson ou renard, en très bonne qualité et sans la moindre lueur.</p>
+<p>Bushnell annonce deux capteurs, un pour le jour et un pour la nuit, une vidéo 4K à 30 images par seconde, des photos de 32 MP et un déclenchement en 0,15 s. Les LED sont « no glow », donc invisibles pour les animaux, avec une portée d'environ 36 m. Six piles AA promettent jusqu'à 12 mois d'autonomie, et la carte SD peut monter à 512 Go.</p>
+<ul>
+<li><strong>Points forts</strong> : double capteur, 4K, infrarouge invisible, très grande autonomie, aucun abonnement.</li>
+<li><strong>Limites</strong> : pas de wifi, il faut relever la carte. Carte SD de taille normale, pas microSD. Indice IP non précisé.</li>
+</ul>
+<p><a href="{AMZ:Bushnell Core DS-4K No Glow}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Browning Recon Force Elite HP5 : le déclenchement le plus rapide</h2>
+<p><strong>Pour qui ?</strong> Les sujets rapides : un épervier qui fond sur la mangeoire, un pic qui ne reste qu'une seconde.</p>
+<p>Browning annonce un déclenchement réglable de 0,1 à 0,7 s, des photos de 24 MP, de la vidéo 1080p à 30 ou 60 images par seconde avec le son, et un infrarouge d'environ 40 m. Elle accepte des cartes jusqu'à 512 Go et une alimentation externe 12 V en plus des 8 piles AA.</p>
+<ul>
+<li><strong>Points forts</strong> : très réactive, vidéo à 60 images par seconde pour des ralentis, prise 12 V pour une installation durable.</li>
+<li><strong>Limites</strong> : type de LED et étanchéité non précisés. Pas de connexion sans fil.</li>
+</ul>
+<p><a href="{AMZ:Browning Recon Force Elite HP5}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Zeiss Secacam 7 : les photos sur le téléphone, partout</h2>
+<p><strong>Pour qui ?</strong> Une maison de campagne ou un terrain loin de chez vous, que vous voulez surveiller à distance.</p>
+<p>Elle envoie ses images par le réseau 4G, grâce à une carte SIM multi-réseaux. Zeiss annonce 60 LED noires de 940 nm, invisibles, d'une portée d'environ 25 m, un angle de 60°, un déclenchement de 0,35 à 0,45 s, 32 Go de mémoire interne et un GPS. Elle mesure 143 x 120 x 75 mm pour 440 g sans piles.</p>
+<ul>
+<li><strong>Points forts</strong> : infrarouge vraiment invisible, réception à distance, grande marque d'optique.</li>
+<li><strong>Limites</strong> : abonnement obligatoire pour la transmission, sans engagement selon Zeiss. Capteur de 5 MP (12 MP par interpolation). Les vidéos envoyées sur l'application sont en 480p ; la vidéo HD et la reconnaissance des espèces sont réservées à la formule Premium.</li>
+</ul>
+<p><a href="{AMZ:Zeiss Secacam 7}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Spypoint Flex-M : la 4G pour commencer</h2>
+<p><strong>Pour qui ?</strong> Vous voulez recevoir des photos sur votre téléphone sans payer chaque mois, tant que vous restez sous un petit volume.</p>
+<p>D'après Spypoint et le revendeur Studio Sport, elle prend des photos de 27 MP, filme en 720p, se déclenche en 0,4 s et éclaire jusqu'à 27 m la nuit. Une carte SIM préprogrammée est fournie, et 100 photos par mois sont gratuites. Classée IP65.</p>
+<ul>
+<li><strong>Points forts</strong> : 4G avec un forfait gratuit de base, alimentation par piles ou batterie rechargeable.</li>
+<li><strong>Limites</strong> : vidéo en 720p seulement, et l'envoi des vidéos demande un forfait payant. Type de LED non précisé.</li>
+</ul>
+<p><a href="{AMZ:Spypoint Flex-M}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Bresser caméra wifi 4-24 MP : le wifi à petit prix</h2>
+<p><strong>Pour qui ?</strong> Vous voulez récupérer les vidéos sur votre téléphone sans aller chercher la carte, et la caméra reste à moins de 15 m de la maison.</p>
+<p>Bresser annonce un capteur de 4 MP (24 MP par interpolation), de la vidéo 1080p avec le son, un grand champ de vision de 105°, un déclenchement en moins de 0,5 s et jusqu'à 6 mois de veille avec 8 piles AA. Le wifi fonctionne sur environ 15 m avec l'application Bresser EagleEye, et la microSD peut aller jusqu'à 256 Go.</p>
+<ul>
+<li><strong>Points forts</strong> : wifi sans abonnement, grand angle, grosse capacité de stockage.</li>
+<li><strong>Limites</strong> : LED de 850 nm, qui laissent voir une légère lueur rouge la nuit. Étanchéité IP54 seulement, la plus faible de notre sélection : à protéger des pluies battantes. Poids et dimensions contradictoires sur la fiche.</li>
+</ul>
+<p><a href="{AMZ:Bresser camera wifi 24MP 1080P IP54}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Bresser caméra faune 5 MP Full HD : pour essayer</h2>
+<p><strong>Pour qui ?</strong> Vous voulez découvrir le piège photo sans gros budget, ou en offrir un à un enfant curieux.</p>
+<p>Capteur de 5 MP, vidéo 1080p de 10 secondes, déclenchement en moins de 0,6 s, LED infrarouges invisibles et classement IP65, selon Bresser. Quatre piles AA suffisent pour environ 3 mois de veille. Elle est compacte : 88 x 129 x 44 mm pour 185 g.</p>
+<ul>
+<li><strong>Points forts</strong> : légère, simple, étanche IP65, carte fournie.</li>
+<li><strong>Limites</strong> : microSD limitée à 32 Go, angle étroit de 52°, aucune connexion. La carte annoncée sur Amazon (16 Go) ne correspond pas à celle de la fiche Bresser : vérifiez la version.</li>
+</ul>
+<p><a href="{AMZ:Bresser camera faune sauvage 5MP Full HD}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Où placer une caméra pour filmer les oiseaux ?</h2>
+<p>C'est là que se joue la réussite, bien plus que dans le nombre de mégapixels.</p>
+<ul>
+<li><strong>Visez un point fixe.</strong> Les oiseaux reviennent toujours aux mêmes endroits : une mangeoire, un bain, un perchoir naturel juste à côté. Fixez la caméra face à ce point plutôt que sur une vue d'ensemble du jardin.</li>
+<li><strong>Testez la distance.</strong> Puisque la mise au point minimale n'est indiquée nulle part, faites des essais à 1 m, 2 m et 3 m avec un objet de la taille d'une mésange, puis gardez la distance la plus nette.</li>
+<li><strong>Dos au soleil.</strong> Un objectif tourné vers le sud filme à contre-jour une bonne partie de la journée. Orientez-le plutôt vers le nord ou de côté.</li>
+<li><strong>Évitez les branches qui bougent</strong> devant un piège photo : le vent déclenche le capteur et remplit la carte de vidéos vides.</li>
+<li><strong>Vérifiez le signal.</strong> Pour une caméra wifi, testez la réception à l'endroit exact avec votre téléphone avant de percer quoi que ce soit.</li>
+</ul>
+<p>N'oubliez pas les oiseaux eux-mêmes. La LPO conseille de placer les mangeoires dans un endroit dégagé, loin des buissons où un chat peut se cacher, et en hauteur. Une caméra est d'ailleurs un bon révélateur : si vous voyez un chat revenir chaque matin sous la mangeoire, déplacez-la. Les bons réflexes sont détaillés dans notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a>.</p>
+
+<h2>Comment entretenir une caméra d'extérieur ?</h2>
+<p>Peu de choses, mais régulièrement. Essuyez la vitre de l'objectif et le capteur infrarouge avec un chiffon doux quand vous relevez la carte : une goutte séchée ou une fiente suffit à flouter toutes les images. Videz la carte avant qu'elle soit pleine, et préférez les piles lithium quand le fabricant les conseille, comme Spypoint pour la Flex-M. Pour une mangeoire filmée, le nettoyage du plateau compte autant que celui de la caméra : des restes moisis rendent les oiseaux malades.</p>
+
+<h2>Quelle saison pour installer sa caméra ?</h2>
+<p>L'hiver est la meilleure saison pour une mangeoire filmée : c'est la période où la LPO conseille de nourrir, et les oiseaux se pressent au même endroit. Pour un nichoir, installez la caméra en automne ou en hiver, avant les premières visites, pour ne jamais ouvrir le nichoir au printemps. Un piège photo, lui, sert toute l'année : en été, il vous montrera les jeunes qui découvrent le bain d'oiseaux.</p>
+
+<h2>Comment choisir ?</h2>
+<p><strong>Pour les petits oiseaux de la mangeoire</strong>, une mangeoire avec caméra intégrée ou une caméra wifi placée à faible distance. <strong>Pour la faune de nuit</strong>, un piège photo à LED invisibles (no glow ou 940 nm), qui ne trahit pas sa présence : la Bushnell ou la Zeiss. <strong>Pour un terrain éloigné</strong>, la 4G, en acceptant un abonnement.</p>
+<p><strong>Regardez les frais cachés.</strong> Un abonnement de quelques euros par mois finit par coûter plus cher que la caméra. Lisez ce qui est gratuit avant d'acheter : historique des vidéos, reconnaissance des espèces, nombre de photos envoyées.</p>
+<p><strong>Notre conseil</strong> : commencez par la mangeoire filmée si ce sont les oiseaux qui vous intéressent, et ajoutez un piège photo à LED invisibles l'année suivante pour découvrir ce qui se passe la nuit. Inutile de payer la 4G si la caméra est dans votre propre jardin.</p>
+<p>Ces caméras vous montreront vite qui fréquente votre jardin : la <a href="{R}mesange-charbonniere/">mésange charbonnière</a> en premier à la mangeoire, et peut-être, la nuit, une <a href="{R}chouette-hulotte/">chouette hulotte</a> de passage.</p>
+""",
+  faq=[("Quelle caméra choisir pour filmer les oiseaux de près ?",
+        "Une mangeoire avec caméra intégrée, comme la Birdfy Feeder 2 Pro, place l'objectif à quelques centimètres des oiseaux. Un piège photo convient mieux aux animaux plus gros et à la faune de nuit, car aucun fabricant n'indique sa distance minimale de mise au point."),
+       ("Un piège photo dérange-t-il les oiseaux la nuit ?",
+        "Les modèles à LED invisibles (no glow ou 940 nm), comme la Bushnell CORE DS-4K No Glow ou la Zeiss Secacam 7, n'émettent pas de lueur visible. Les LED de 850 nm laissent voir une légère lueur rouge."),
+       ("Avez-vous testé ces caméras ?",
+        "Non. Cette sélection repose sur les fiches publiées par les fabricants et les revendeurs. Quand une information manque, nous l'indiquons comme non précisée.")],
+  short="Top 8 caméras pour observer les oiseaux", cat="Observer")
