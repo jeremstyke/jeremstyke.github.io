@@ -200,7 +200,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 <div class="wrap">
   <div class="hd">
     <div class="cash"><svg class="coin" viewBox="0 0 32 32" width="34" height="34"><circle cx="16" cy="16" r="15" fill="#f4b73c" stroke="#d9951a" stroke-width="2"/><circle cx="16" cy="16" r="11" fill="none" stroke="#fff3c4" stroke-width="1.5"/><path d="M16 8.5 L8.5 15 H11 V23 H21 V15 H23.5 Z" fill="#fff3c4"/></svg><span id="cash">0</span></div>
-    <div class="sub"><span class="chip" id="rate">$0/s</span><span class="chip" id="mult">x1</span><span class="chip gold" id="boost" hidden></span><span class="chip ev" id="evc"></span><span class="chip gold" id="goldc" hidden>👑 x1.5</span><span class="chip" id="invc" style="cursor:pointer">👥 +</span></div>
+    <div class="sub"><span class="chip" id="rate">$0/s</span><span class="chip" id="mult">x1</span><span class="chip gold" id="boost" hidden></span><span class="chip gold" id="bankc" hidden style="cursor:pointer"></span><span class="chip ev" id="evc"></span><span class="chip gold" id="goldc" hidden>👑 x1.5</span><span class="chip" id="invc" style="cursor:pointer">👥 +</span></div>
   </div>
   <div class="scene"><div class="sky" id="sky"></div></div>
 
@@ -234,6 +234,7 @@ const lang = ((tgw && tgw.initDataUnsafe && tgw.initDataUnsafe.user && tgw.initD
 const L = {
  en: {
   lockT:'Unlocks after sale #{n}',
+  bankT:'🎁 Use bonus',
   testT:'Testing period', testS:'Idle Estate is still in testing until November 25. Accounts can be reset again if we need to adjust the balance. After that, no more resets.', testOk:'Got it',
   names:['Studio','Loft','Villa','Apartment block','Residential tower','Hotel chain','Mall network','Business district','Resort island','Megacity'],
   pr:['month','month','month','month','month','month','month','month','month','month'],
@@ -266,6 +267,7 @@ const L = {
  },
  fr: {
   lockT:'S\'ouvre à la vente n°{n}',
+  bankT:'🎁 Utiliser le bonus',
   testT:'Période de test', testS:'Idle Estate est encore en test jusqu\'au 25 novembre. Les comptes peuvent être remis à zéro si on doit ajuster l\'équilibre. Après, plus de remise à zéro.', testOk:'Compris',
   names:['Studio','Loft','Villa','Immeuble','Tour résidentielle','Chaîne d\'hôtels','Centres commerciaux','Quartier d\'affaires','Île resort','Mégapole'],
   pr:['mois','mois','mois','mois','mois','mois','mois','mois','mois','mois'],
@@ -375,7 +377,7 @@ function apply(r, full) {
     off = r.now - Date.now() / 1000;
     const keep = S;
     S = { cash: r.cash, life_all: r.life_all, lv: r.lv.slice(), mg: r.mg.slice(), ts: r.ts.slice(), inv: r.inv, prest: r.prest, unl: r.unl || 10, ib: r.ib || 0.02, perm2: r.perm2, vault: r.vault, welcome: r.welcome, streak: r.streak, dailyOk: r.daily_ok,
-      boostEnd: r.boost ? r.now + r.boost.left : 0, bmult: r.boost ? r.boost.mult : 1, vipEnd: r.vip ? r.now + r.vip.left : 0, cfg: r.cfg, ms: r.ms, mb: r.mb || 2.5, g: r.g, shop: r.shop, notify: r.notify, loc: r.now, cap: r.cap, stars: r.stars, ach: r.ach || [], defs: r.ach_defs || [], uid: r.uid, ref_n: r.ref_n || 0, ref_cap: r.ref_cap || 20, ref_got: r.ref_got || 0, ref_share: r.ref_share || 0.1, ref_com: r.ref_com || 0.1, wallet_addr: r.wallet_addr || null, offers: r.offers || [], offersEnd: r.offers_end || 0, goldEnd: r.gold ? r.now + r.gold.left : 0, deal: r.deal || null, q: r.q || { list: [], all: false } };
+      bank: r.bank || 0, boostEnd: r.boost ? r.now + r.boost.left : 0, bmult: r.boost ? r.boost.mult : 1, vipEnd: r.vip ? r.now + r.vip.left : 0, cfg: r.cfg, ms: r.ms, mb: r.mb || 2.5, g: r.g, shop: r.shop, notify: r.notify, loc: r.now, cap: r.cap, stars: r.stars, ach: r.ach || [], defs: r.ach_defs || [], uid: r.uid, ref_n: r.ref_n || 0, ref_cap: r.ref_cap || 20, ref_got: r.ref_got || 0, ref_share: r.ref_share || 0.1, ref_com: r.ref_com || 0.1, wallet_addr: r.wallet_addr || null, offers: r.offers || [], offersEnd: r.offers_end || 0, goldEnd: r.gold ? r.now + r.gold.left : 0, deal: r.deal || null, q: r.q || { list: [], all: false } };
     if (!keep) build();
     else { buildSky(); }
   }
@@ -441,6 +443,7 @@ function build() {
   buildSky(); buildBanners(); paint();
   tutoStart();
   $('invc').onclick = shareInvite;
+  $('bankc').onclick = () => { S.bank = 0; call({ act: 'usebonus' }); };
   setInterval(tick, 100);
   setInterval(() => { if (!document.hidden) call({ act: 'state' }); }, 7000);
   document.addEventListener('visibilitychange', () => { if (!document.hidden) call({ act: 'state' }); });
@@ -595,6 +598,7 @@ function paint() {
   $('mult').textContent = 'x' + fmt(curM(n));
   const bo = $('boost');
   if (S.boostEnd > n) { bo.hidden = false; const l = S.boostEnd - n; bo.textContent = '⚡ x' + S.bmult + ' ' + (l > 3600 ? Math.floor(l / 3600) + 'h' + String(Math.floor(l % 3600 / 60)).padStart(2, '0') : Math.floor(l / 60) + ':' + String(Math.floor(l % 60)).padStart(2, '0')); } else bo.hidden = true;
+  const bc = $('bankc'); if (S.bank > 0) { bc.hidden = false; bc.textContent = L.bankT + ' +' + Math.round(S.bank / 60) + ' min x2'; } else bc.hidden = true;
   const bk = (S.welcome ? 1 : 0) + '' + (S.dailyOk ? 1 : 0) + S.streak + (S.mg[0] ? 1 : 0) + (S.deal ? S.deal.sku : '-');
   if (bk !== lastBanner) { lastBanner = bk; buildBanners(); }
   const sk = S.lv.map(l => l > 0 ? 1 + Math.floor(Math.min(l, 120) / 6) : 0).join(',');
