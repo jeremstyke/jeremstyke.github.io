@@ -1764,12 +1764,12 @@ function shopDraw() {
   // 29 oct 2026 (10h02, Jeremy): being in the Club is one of the shop's conditions (r.club from the server; tap it to join)
   const okClub = r.club !== false;
   const CLC = { fr: ['Membre du Club', 'Rejoindre le Club @passthebatonclub 👉'], es: ['Miembro del Club', 'Unirte al Club @passthebatonclub 👉'], pt: ['Membro do Club', 'Entrar no Club @passthebatonclub 👉'], ru: ['Участник Club', 'Вступить в Club @passthebatonclub 👉'], uk: ['Учасник Club', 'Вступити до Club @passthebatonclub 👉'], tr: ['Club üyesi', 'Club\'a katıl @passthebatonclub 👉'], id: ['Anggota Club', 'Gabung Club @passthebatonclub 👉'], ar: ['عضو في Club', 'انضم إلى Club @passthebatonclub 👉'], fa: ['عضو Club', 'عضویت در Club @passthebatonclub 👉'] }[LANG] || ['Club member', 'Join the Club @passthebatonclub 👉'];
-  const pts = (S && S.pts) || 0, okAge = r.days >= r.min_days, okPass = r.passes >= r.min_passes, okWeek = !r.next_at;
+  const pts = r.pts != null ? Number(r.pts) : (S && S.pts) || 0, okAge = r.days >= r.min_days, okPass = r.passes >= r.min_passes, okWeek = !r.next_at;
   const cond = (ok, txt) => '<div class="shc' + (ok ? ' ok' : '') + '">' + (ok ? '✅ ' : '⏳ ') + esc(txt) + '</div>';
   const when = r.next_at ? new Date(r.next_at * 1000).toLocaleDateString(LANG === 'fa' ? 'fa-IR' : LANG, { day: 'numeric', month: 'short' }) : '';
   const can = okAge && okPass && okWeek && okClub;
   const st = { wait: 'sWait', paid: 'sPaid', refused: 'sRefused', failed: 'sWait' };
-  sheet('<h3>' + T('shopH') + '</h3><p class="foot" style="text-align:start;margin:0">' + T('shopS') + '</p>' +
+  sheet('<h3>' + T('shopH') + '</h3><p class="foot" style="text-align:start;margin:0">' + (r.closed ? (LANG === 'fr' ? 'Retrait à partir de 100 000 $BATON (0,10 $), en USDT sur ton wallet TON. Payé sous 10 jours.' : 'Withdraw from 100,000 $BATON ($0.10), in USDT to your TON wallet. Paid within 10 days.') : T('shopS')) + '</p>' +
     '<div class="shHave">' + T('have', fmt(pts)) + '</div>' +
     /* 2 nov 2026 (0h40, Jeremy): a link to the public payment proofs */ '<button class="opt" data-k="proofs"><span class="t"><b>' + (LANG === 'fr' ? '🧾 Preuves de paiement' : '🧾 Payment proofs') + '</b><span>' + (LANG === 'fr' ? 'Tous les retraits déjà payés, vérifiables sur la blockchain' : 'Every withdrawal already paid, checkable on the blockchain') + '</span></span></button>' +
     r.items.map((it, i) => '<button class="opt shItem' + (shopPick === i ? ' on' : '') + '" data-shop="' + i + '"' + (pts < it[0] ? ' disabled' : '') + '><span class="t"><b>' + fmt(it[0]) + ' $BATON</b></span><span class="mult">' + it[1] + ' $</span></button>').join('') +
@@ -2071,9 +2071,12 @@ function closed() {
   el.innerHTML = '<div class="tcard" style="max-width:380px"><div class="tic">🔒</div><h2>' + (F ? 'Pass The Baton est fermé pour le moment' : 'Pass The Baton is closed for now') + '</h2>'
     + '<p>' + (F ? 'Il y a eu beaucoup de triche et de vol, donc le jeu est fermé pour l\'instant.' : 'There has been a lot of cheating and theft, so the game is closed for now.') + '</p>'
     + '<p><b>' + (F ? 'Tes $BATON sont conservés.' : 'Your $BATON are kept.') + '</b></p>'
+    + '<p>' + (F ? '💸 Tu peux retirer dès maintenant à partir de 100 000 $BATON (0,10 $). Payé sous 10 jours.' : '💸 You can withdraw now from 100,000 $BATON ($0.10). Paid within 10 days.') + '</p>'
+    + '<button class="btn gold" id="clWd" style="margin-bottom:14px">💸 ' + (F ? 'Retirer mes $BATON' : 'Withdraw my $BATON') + '</button>'
     + '<p>' + (F ? 'En attendant, tu peux jouer à Meme Coin Tycoon et à Idle Estate :' : 'Meanwhile, you can play Meme Coin Tycoon and Idle Estate:') + '</p>'
     + '<button class="btn gold" id="clMct" style="margin-bottom:10px">🪙 Meme Coin Tycoon</button><button class="btn" id="clIe">🏠 Idle Estate</button></div>';
   document.body.appendChild(el); $('#loader').hidden = true;
+  el.querySelector('#clWd').onclick = () => { try { $('#scrim').style.zIndex = 80; } catch (e) {} openShop(); };
   el.querySelector('#clMct').onclick = () => { try { hap(); } catch (e) {} openLink('https://t.me/Memecointycoonbot?startapp=src_btclosed'); };
   el.querySelector('#clIe').onclick = () => { try { hap(); } catch (e) {} openLink('https://t.me/Idleestatebot?startapp=src_btclosed'); };
 }
