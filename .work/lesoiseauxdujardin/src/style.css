@@ -127,3 +127,5 @@ html.big{font-size:118%}
 .t-mousse{background:var(--mousse)}.t-rouge{background:var(--rouge)}
 .room{flex-direction:column;align-items:flex-start;gap:4px}.room b{font-size:1.1rem}.room small{font-weight:400;color:var(--mute);font-size:.92rem}
 .foot{background:#1F2A22}
+
+.pick{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#fff;border:2px solid var(--accent);border-radius:var(--r);padding:16px 18px;margin:20px 0}.pick>div{display:flex;flex-direction:column;gap:4px;flex:1 1 260px}.pick-tag{font-size:.85em;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em}.pick strong{font-size:1.1em}.pick-more{font-size:.92em}

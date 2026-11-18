@@ -84,6 +84,7 @@ REL = 'rel="sponsored nofollow noopener" target="_blank"'
 def top_pick(body):
     """Produit n°1 d'un top : (nom, raison, ancre, requête Amazon) ou None.
     Premier intertitre (« 1. » en priorité) suivi, avant l'intertitre suivant, d'un lien « Voir ... Amazon »."""
+    if not re.search(r'Comment (?:nous avons|on a) fait cette sélection', body): return None
     heads = list(re.finditer(r'<h([23])(?: id="([^"]*)")?>\s*(.+?)</h\1>', body))
     order = [h for h in heads if re.match(r'1\.\s', h.group(3))] + heads
     for k, h in enumerate(order):
