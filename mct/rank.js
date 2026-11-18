@@ -83,7 +83,7 @@
   function cd(end) { const x = Math.max(0, Math.floor((Date.parse(end) - Date.now()) / 1000)), d = Math.floor(x / 86400), p = (n) => String(n).padStart(2, '0'); return (d ? d + (lg() === 'fr' ? 'j ' : 'd ') : '') + p(Math.floor(x % 86400 / 3600)) + ':' + p(Math.floor(x % 3600 / 60)) + ':' + p(x % 60); }
   setInterval(() => { const e = document.getElementById('rkcd'); if (e) e.textContent = cd(e.dataset.end); }, 1000);
 
-  const PZB = { en: 'Monday prizes in $BATON on Pass The Baton · 10,000 from 4th to 10th · 1,000 for every other ranked player', fr: 'Gains du lundi en $BATON sur Pass The Baton · 10 000 du 4e au 10e · 1 000 pour tous les autres classés', ru: 'Призы в понедельник в $BATON в Pass The Baton · 10 000 с 4-го по 10-е · 1 000 всем остальным в рейтинге', ar: 'جوائز الاثنين بـ $BATON في Pass The Baton · 10,000 من الرابع إلى العاشر · 1,000 لكل المصنّفين الآخرين', fa: 'جوایز دوشنبه با $BATON در Pass The Baton · ۱۰٬۰۰۰ برای نفر ۴ تا ۱۰ · ۱٬۰۰۰ برای بقیه رتبه‌ها', id: 'Hadiah Senin dalam $BATON di Pass The Baton · 10.000 untuk peringkat 4-10 · 1.000 untuk semua peserta lain' };
+  const PZB = { en: 'Monday prizes in game cash · 1st to 10th, from $50,000 down to $5,000', fr: 'Gains du lundi en argent du jeu · du 1er au 10e, de 50 000 $ à 5 000 $', ru: 'Призы в понедельник в игровых деньгах · с 1-го по 10-е место, от $50 000 до $5 000', ar: 'جوائز الاثنين بنقود اللعبة · من المركز 1 إلى 10، من 50,000$ إلى 5,000$', fa: 'جوایز دوشنبه با پول بازی · نفر ۱ تا ۱۰، از ۵۰٬۰۰۰ تا ۵٬۰۰۰ دلار', id: 'Hadiah Senin berupa uang game · peringkat 1 sampai 10, dari $50.000 sampai $5.000' };
   function closeIt() { const d = document.getElementById('rkm'); if (d) d.remove(); }
   async function show(tab) {
     if (tab) TAB = tab;
@@ -107,7 +107,7 @@
     const T = L(), c = TAB === 'pl' ? D.player : TAB === 'rf' ? D.ref : D.dia;
     const md = ['🥇', '🥈', '🥉'], pz = (c && c.prizes) || [];
     // 27 oct 2026 (Jeremy): from the week of 2 November, the gains contest pays $BATON on Pass The Baton (server mct_week_board unit 'BATON')
-    const bt = !!(c && c.unit === 'BATON'), kb = (n) => (Number(n) >= 1000 ? Math.round(Number(n) / 1000) + 'K' : String(n)) + ' $BATON';
+    const bt = !!(c && c.unit === 'CASH'), kb = (n) => '$' + (Number(n) >= 1000 ? Math.round(Number(n) / 1000) + 'K' : String(n));  // 18 nov 2026 (Jeremy): in-game cash prizes
     const val = (n) => TAB === 'pl' ? big(n) : nf(n) + ' ' + T.u[TAB];
     // 16 oct 2026 (Jeremy): Jeremy shows with 👨‍💻 at his place, out of the ranking and the prizes (the medals stay with the players)
     const list = ((c && c.top) || []).slice(0, 10).map((x, i) => ({ x, lab: md[i] || (i + 1) + '.' }));
