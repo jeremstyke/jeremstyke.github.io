@@ -248,6 +248,22 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 .tuto .td i.on{background:#25b537}
 .tuto .tb{display:flex;gap:10px;justify-content:center}
 .tuto .tb .sk{background:#fff;color:var(--navy);box-shadow:0 4px 0 var(--navy);text-shadow:none}
+
+/* polish 20 nov */
+.hd{background:radial-gradient(260px 120px at 90% -10%,rgba(255,255,255,.16),transparent),linear-gradient(#245fb5,#12305e 92%)}
+.chip{background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.18);backdrop-filter:blur(2px)}
+.chip.gold{background:linear-gradient(#ffe27a,#ffb82b);box-shadow:0 2px 0 rgba(18,48,94,.55),inset 0 1px 0 rgba(255,255,255,.55)}
+.nav{background:linear-gradient(#17386e,#0f2850);box-shadow:0 -6px 18px rgba(10,28,60,.28)}
+.nav div{padding:7px 6px}
+.nav button{font-size:10.5px;letter-spacing:.01em;padding:6px 0 7px;transition:background .15s,color .15s,transform .1s}
+.nav button span{font-size:23px}
+.nav button.on{box-shadow:0 3px 0 rgba(18,48,94,.55),inset 0 1px 0 rgba(255,255,255,.6)}
+.nav button:active{transform:scale(.94)}
+.box{background:linear-gradient(#fff,#e9f4ff)}
+.mrl button{padding:8px 12px;font-size:15px}
+.mrl{gap:7px;max-height:68vh}
+.mrl button i{width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-size:21px;border-radius:12px;background:#fff;border:2px solid var(--navy)}
+.sheet{box-shadow:0 -10px 30px rgba(10,28,60,.28)}
 </style>
 <script src="https://yoszi.com/sdk.js" data-zone="12296718" data-sdk="show_12296718"></script>
 </head>
@@ -291,7 +307,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261120-0045';
+const BUILD = '20261120-0105';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
