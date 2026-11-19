@@ -695,7 +695,7 @@ function renderShop() {
   const gOn = S.goldEnd > snow();
   h += `<div class="row hot" style="border-color:#a15e00"><div class="e">👑</div><div class="tx"><b>${L.goldT}</b><span>${L.goldS}</span>${gOn ? `<div class="rw">✅ ${L.goldOn} · ${Math.ceil((S.goldEnd - snow()) / 86400)} ${L.goldLeft}</div>` : ''}</div><button class="star" data-sku="gold">⭐ ${S.shop.gold}<small style="display:block;font-size:11px;font-weight:700">${L.perMonth}</small></button></div>`;
   if (S.deal && L.items[S.deal.sku]) { const it = L.items[S.deal.sku]; h += `<div class="row hot"><div class="e">🔥</div><div class="tx"><b>${L.dealT}: ${it[1]}</b><span>${L.dealS}. ${it[2]}</span><div class="rw">${S.deal.price} ⭐ <s style="opacity:.7">${S.shop[S.deal.sku]}</s></div></div><button class="star" data-sku="${S.deal.sku}" data-deal="1">⭐ ${S.deal.price}</button></div>`; }
-  h += `<div class="row"><div class="e">📺</div><div class="tx"><b>${L.adT}</b><span>${L.adS}</span></div><button class="star" id="adb">${L.adB}</button></div>`;
+  h += `<div class="row"><div class="e">📺</div><div class="tx"><b>${L.adT}</b><span>${L.adS}</span></div><button class="star" id="adb"${adDone() ? ' disabled style="opacity:.45;filter:grayscale(1)"' : ''}>${adDone() ? '✅' : L.adB}</button></div>`;
   for (const k of order) {
     const it = L.items[k];
     const own = (k === 'perm2' && S.perm2) || (k === 'vault' && S.vault);
@@ -721,17 +721,19 @@ async function getInvoice(sku, deal) {
   }
   return null;
 }
+const adDone = () => { try { return Date.now() - Number(localStorage.getItem('ie_ad') || 0) < 86400000; } catch (e) { return false; } };
+const adMark = () => { try { localStorage.setItem('ie_ad', String(Date.now())); } catch (e) {} };
 let adBusy = false;
 async function watchAd() {
-  if (adBusy) return;
+  if (adBusy || adDone()) { toast(L.adCool); return; }
   const st = await call({ act: 'adstart' });
-  if (!st || !st.ok || st.err) { toast(L.adCool); return; }
+  if (!st || !st.ok || st.err) { if (st && st.err === 'cool') { adMark(); renderShop(); } toast(L.adCool); return; }
   adBusy = true; toast(L.adWait);
   const url = 'https://uplcm.com/4/12140639';
   try { if (tgw && tgw.openLink) tgw.openLink(url); else window.open(url, '_blank'); } catch (e) { window.open(url, '_blank'); }
   setTimeout(async () => {
     const r = await call({ act: 'adclaim' }); adBusy = false;
-    if (r && r.ok && !r.err) { hap('ok'); toast(L.adOk); } else toast(L.adCool);
+    if (r && r.ok && !r.err) { adMark(); hap('ok'); toast(L.adOk); renderShop(); } else toast(L.adCool);
   }, 11000);
 }
 let buying = false;
