@@ -313,7 +313,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261120-0145';
+const BUILD = '20261120-0010';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -322,6 +322,8 @@ const BUILD = '20261120-0145';
 const API = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/idle-estate';
 const tgw = window.Telegram && Telegram.WebApp;
 if (tgw) { try { tgw.ready(); tgw.expand(); tgw.setHeaderColor('#ffffff'); tgw.setBackgroundColor('#ffffff'); tgw.disableVerticalSwipes && tgw.disableVerticalSwipes(); } catch (e) {} }
+// Telegram on iOS sometimes keeps a stale short viewport after the page reloads itself: expand again and force a resize a few times
+if (tgw) { const fixVp = () => { try { tgw.expand(); } catch (e) {} try { window.dispatchEvent(new Event('resize')); } catch (e) {} }; try { tgw.onEvent('viewportChanged', fixVp); } catch (e) {} [300, 1200, 3000].forEach(t => setTimeout(fixVp, t)); document.addEventListener('visibilitychange', () => { if (!document.hidden) fixVp(); }); }
 const lang = ((tgw && tgw.initDataUnsafe && tgw.initDataUnsafe.user && tgw.initDataUnsafe.user.language_code) || navigator.language || 'en').toLowerCase().startsWith('fr') ? 'fr' : 'en';
 
 // maintenance screen: set MAINT to true while the game is being reworked, false when it is done (bump BUILD so Telegram reloads the page)
