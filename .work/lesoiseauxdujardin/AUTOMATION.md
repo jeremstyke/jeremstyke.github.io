@@ -52,3 +52,11 @@ Le site est jeune : il gagne d'abord sur des requêtes précises de 4 mots et pl
 - Repère 5 à 10 variantes et questions voisines (suggestions de recherche, « Autres questions posées », forums) et traite-les dans les intertitres et la FAQ, formulées comme les gens les tapent.
 - Une page par intention : n'écris pas deux pages qui visent la même requête ; complète plutôt la page existante.
 - Quand une liste de sujets ou de tops se réapprovisionne, privilégie les requêtes longue traîne à intention d'achat (meilleur, pour qui, pour quel usage, comparatif, avis, petit budget).
+
+## Angle du site dans chaque top (règle du 19 nov 2026, obligatoire pour chaque top)
+- Un top de Les oiseaux du jardin ne vise jamais la requête générique seule (« meilleur X ») face aux grands comparateurs : il vise la requête liée au sujet du site, les oiseaux du jardin (les nourrir, les loger, les observer). Exemples : « meilleur abreuvoir pour oiseaux du jardin ».
+- Le title, le h1, la description et la première phrase annoncent cet angle.
+- Juste après l'encadré « Comment nous avons fait cette sélection », une section <h2> du type « Pourquoi cet abreuvoir convient aux oiseaux du jardin ? » explique en quoi le produit sert vraiment les oiseaux du jardin et quelles espèces il attire ou aide (avec liens vers leurs fiches). 2 paragraphes concrets, un avis clair (« Notre conseil : ... »), aucun fait inventé.
+- La FAQ contient une question sur cet angle, par exemple « Quels oiseaux viennent à un abreuvoir ? ».
+- Chaque fiche produit dit aussi, en une phrase, pour quel lecteur ce produit est le bon choix.
+- Avant de prendre une ligne de tops.md : si sa requête est générique, réécris-la avec l'angle du site (slug compris si la page n'existe pas encore) ; si le produit n'a vraiment aucun lien avec le sujet du site, coche-la « abandonné, hors sujet » et prends la suivante.
