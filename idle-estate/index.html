@@ -233,7 +233,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1215';
+const BUILD = '20261119-1230';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -245,7 +245,7 @@ if (tgw) { try { tgw.ready(); tgw.expand(); tgw.setHeaderColor('#ffffff'); tgw.s
 const lang = ((tgw && tgw.initDataUnsafe && tgw.initDataUnsafe.user && tgw.initDataUnsafe.user.language_code) || navigator.language || 'en').toLowerCase().startsWith('fr') ? 'fr' : 'en';
 
 // maintenance screen: set MAINT to true while the game is being reworked, false when it is done (bump BUILD so Telegram reloads the page)
-const MAINT = true;
+const MAINT = false;
 if (MAINT) {
   const T = lang === 'fr' ? ['Travaux en cours', "Idle Estate est en maintenance : je refais l'économie du jeu. Reviens dans un moment.", 'Réessayer'] : ['Under construction', 'Idle Estate is in maintenance while the economy is being reworked. Come back soon.', 'Try again'];
   const m = document.getElementById('maint'); document.getElementById('maintT').textContent = T[0]; document.getElementById('maintS').textContent = T[1];
@@ -256,10 +256,10 @@ if (MAINT) {
 
 const L = {
  en: {
-  lockT:'Unlocks after sale #{n}',
+  lockT:'Buy the previous property first',
   bankT:'🎁 Use bonus',
   testT:'Testing period', testS:'Idle Estate is still in testing until November 25. Accounts can be reset again if we need to adjust the balance. After that, no more resets.', testOk:'Got it',
-  names:['Studio','Loft','Villa','Apartment block','Residential tower','Hotel chain','Mall network','Business district','Resort island','Megacity'],
+  names:['Studio','Loft','Villa','Apartment block','Residential tower','Hotel chain','Mall network','Business district','Resort island','Megacity','Skyscraper','Airport','Theme park','Stadium','Harbour','Tech campus','Mountain resort','Island chain','Floating city','Orbital hotel','Lunar base','Mars colony','Space elevator','Asteroid mine','Terraformed planet','Star port','Orbital ring','Arcology','Dyson swarm','Galactic hub'],
   pr:['month','month','month','month','month','month','month','month','month','month'],
   betaT:'Balancing in progress', betaS:'Progress may be reset while I tune the game.',
   hint:'Tap a property to collect its rent. Hire a manager 👔 and it pays you automatically, even when you are away.', estate:'Estate', shop:'Shop', prest:'Empire', top:'Top',
@@ -286,13 +286,13 @@ const L = {
   questsT:'Daily quests', questsS:'Complete quests and claim rewards. They reset every day.', chestT:'Daily chest', chestS:'Finish all 3 quests: x2 income for 1h',
   q:{tap:['👆','Collect rent {n} times'],buy:['🏗️','Buy {n} property levels'],vip:['🤑','Catch {n} golden tenants'],mgr:['👔','Hire a manager'],daily:['🔥','Claim the daily bonus']},
   shareTxt:'Build your real estate empire with me on Idle Estate!', snd:'Sounds', evInfo:'Golden hour every day: all your rent pays x2 for 60 minutes. Starts at', rewarded:'Reward claimed!', done:'Done',
-  ach:{mgr1:['👔','First manager','Hire your first manager'],s10:['🛋️','Studio level 10','Reach level 10 on the Studio'],s25:['🛋️','Studio level 25','Reach level 25 on the Studio'],s50:['🛋️','Studio level 50','Reach level 50 on the Studio'],mgr5:['🧑‍💼','5 managers','Hire 5 managers'],mgr10:['🏅','Full staff','Hire a manager on every property'],pr1:['🏛️','First sale','Sell your empire once'],pr5:['💎','Tycoon','Sell your empire 5 times'],st7:['🔥','7 day streak','Claim the daily bonus 7 days in a row'],fr1:['👥','First friend','Invite a friend'],fr5:['🎉','Popular','Invite 5 friends']}
+  ach:{mgr1:['👔','First manager','Hire your first manager'],s10:['🛋️','Studio level 10','Reach level 10 on the Studio'],s25:['🛋️','Studio level 25','Reach level 25 on the Studio'],s50:['🛋️','Studio level 50','Reach level 50 on the Studio'],mgr5:['🧑‍💼','5 managers','Hire 5 managers'],mgr10:['🏅','Full staff','Hire a manager on every property'],pr1:['🏙️','Skyline','Own the 15th property'],pr5:['💎','Tycoon','Own the 20th property'],st7:['🔥','7 day streak','Claim the daily bonus 7 days in a row'],fr1:['👥','First friend','Invite a friend'],fr5:['🎉','Popular','Invite 5 friends']}
  },
  fr: {
-  lockT:'S\'ouvre à la vente n°{n}',
+  lockT:'Achète d\'abord le bien précédent',
   bankT:'🎁 Utiliser le bonus',
   testT:'Période de test', testS:'Idle Estate est encore en test jusqu\'au 25 novembre. Les comptes peuvent être remis à zéro si on doit ajuster l\'équilibre. Après, plus de remise à zéro.', testOk:'Compris',
-  names:['Studio','Loft','Villa','Immeuble','Tour résidentielle','Chaîne d\'hôtels','Centres commerciaux','Quartier d\'affaires','Île resort','Mégapole'],
+  names:['Studio','Loft','Villa','Immeuble','Tour résidentielle','Chaîne d\'hôtels','Centres commerciaux','Quartier d\'affaires','Île resort','Mégapole','Gratte-ciel','Aéroport','Parc d\'attractions','Stade','Port','Campus tech','Station de montagne','Archipel','Ville flottante','Hôtel orbital','Base lunaire','Colonie martienne','Ascenseur spatial','Mine d\'astéroïdes','Planète terraformée','Spatioport','Anneau orbital','Arcologie','Essaim de Dyson','Pôle galactique'],
   pr:['mois','mois','mois','mois','mois','mois','mois','mois','mois','mois'],
   betaT:'Réglages en cours', betaS:'Des remises à zéro sont possibles pendant que j\'équilibre le jeu.',
   hint:'Touche un bien pour encaisser son loyer. Embauche un gestionnaire 👔 et il te paie tout seul, même quand tu es absent.', estate:'Biens', shop:'Boutique', prest:'Empire', top:'Top',
@@ -319,7 +319,7 @@ const L = {
   questsT:'Quêtes du jour', questsS:'Termine les quêtes et récupère les récompenses. Elles se renouvellent chaque jour.', chestT:'Coffre du jour', chestS:'Finis les 3 quêtes : revenus x2 pendant 1h',
   q:{tap:['👆','Encaisse {n} loyers'],buy:['🏗️','Achète {n} niveaux de biens'],vip:['🤑','Attrape {n} locataires dorés'],mgr:['👔','Embauche un gestionnaire'],daily:['🔥','Récupère le bonus du jour']},
   shareTxt:'Construis ton empire immobilier avec moi sur Idle Estate !', snd:'Sons', evInfo:'Heure dorée chaque jour : tous tes loyers sont doublés pendant 60 minutes. Début à', rewarded:'Récompense récupérée !', done:'Fait',
-  ach:{mgr1:['👔','Premier gestionnaire','Embauche ton premier gestionnaire'],s10:['🛋️','Studio niveau 10','Monte le Studio au niveau 10'],s25:['🛋️','Studio niveau 25','Monte le Studio au niveau 25'],s50:['🛋️','Studio niveau 50','Monte le Studio au niveau 50'],mgr5:['🧑‍💼','5 gestionnaires','Embauche 5 gestionnaires'],mgr10:['🏅','Équipe au complet','Un gestionnaire sur chaque bien'],pr1:['🏛️','Première vente','Vends ton empire une fois'],pr5:['💎','Magnat','Vends ton empire 5 fois'],st7:['🔥','7 jours d\'affilée','Récupère le bonus du jour 7 jours de suite'],fr1:['👥','Premier ami','Invite un ami'],fr5:['🎉','Populaire','Invite 5 amis']}
+  ach:{mgr1:['👔','Premier gestionnaire','Embauche ton premier gestionnaire'],s10:['🛋️','Studio niveau 10','Monte le Studio au niveau 10'],s25:['🛋️','Studio niveau 25','Monte le Studio au niveau 25'],s50:['🛋️','Studio niveau 50','Monte le Studio au niveau 50'],mgr5:['🧑‍💼','5 gestionnaires','Embauche 5 gestionnaires'],mgr10:['🏅','Équipe au complet','Un gestionnaire sur chaque bien'],pr1:['🏙️','Skyline','Possède le 15e bien'],pr5:['💎','Magnat','Possède le 20e bien'],st7:['🔥','7 jours d\'affilée','Récupère le bonus du jour 7 jours de suite'],fr1:['👥','Premier ami','Invite un ami'],fr5:['🎉','Populaire','Invite 5 amis']}
  }
 }[lang];
 
@@ -338,7 +338,8 @@ function fmt(n) {
 const K = 20000; // display scale: 1 game unit = $20,000, so a studio costs $80,000
 const fm = n => fmt(n * K);
 const hap = k => { try { tgw && tgw.HapticFeedback && (k === 'ok' ? tgw.HapticFeedback.notificationOccurred('success') : tgw.HapticFeedback.impactOccurred(k || 'light')); } catch (e) {} };
-const EM = ['🛋️', '🏠', '🏡', '🏢', '🏘️', '🏨', '🏬', '🌆', '🗺️', '🏙️'];
+const EM = ['🛋️', '🏠', '🏡', '🏢', '🏘️', '🏨', '🏬', '🌆', '🗺️', '🏙️', '🌇', '✈️', '🎢', '🏟️', '⚓', '💻', '🏔️', '🏝️', '🎈', '🛰️', '🌙', '🔴', '🚀', '☄️', '🌍', '⭐', '💫', '🌀', '☀️', '🌌'];
+const NB = 30; // number of properties (the ladder is endless in spirit: more can be added)
 let toastT;
 function toast(t) { const e = $('toast'); e.textContent = t; e.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => e.classList.remove('on'), 2200); }
 function float(txt, x, y, gold) {
@@ -417,7 +418,7 @@ const inc = (i, n) => S.lv[i] > 0 ? S.cfg[i].r * S.lv[i] * mult(S.lv[i]) * curM(
 // a sale is offered only when it brings at least gmin investors (same rule as the server)
 const gMin = () => Math.max(2, Math.ceil(0.25 * Math.floor(S.inv)));
 const gainInv = () => { const g = Math.max(0, Math.floor(10 * Math.sqrt(S.life_all / 2500)) - Math.floor(S.inv)); return g >= gMin() ? g : 0; };
-function rateNow() { const n = snow(); let g = 0; for (let i = 0; i < 10; i++) { const e = inc(i, n) / S.cfg[i].t; g += S.mg[i] ? e : e * 0.5; } return g; }
+function rateNow() { const n = snow(); let g = 0; for (let i = 0; i < NB; i++) { const e = inc(i, n) / S.cfg[i].t; g += S.mg[i] ? e : e * 0.5; } return g; }
 function cost(i, n) { const c0 = S.cfg[i].c * Math.pow(S.g, S.lv[i]); return c0 * (Math.pow(S.g, n) - 1) / (S.g - 1); }
 function maxN(i) { const c0 = S.cfg[i].c * Math.pow(S.g, S.lv[i]); return Math.max(0, Math.min(1000, Math.floor(Math.log(1 + S.cash * (S.g - 1) / c0) / Math.log(S.g)))); }
 function buyN(i) { return mode === 'max' ? Math.max(1, maxN(i)) : mode; }
@@ -427,7 +428,7 @@ function tick() {
   const n = snow(); let dt = n - S.loc; S.loc = n;
   if (dt <= 0) return; if (dt > 60) dt = 60;
   const M = curM(n); let gain = 0;
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < NB; i++) {
     if (S.lv[i] <= 0) continue;
     const per = S.cfg[i].r * S.lv[i] * mult(S.lv[i]) * M;
     if (S.mg[i]) gain += per / S.cfg[i].t * dt;
@@ -448,12 +449,12 @@ function popOn(i, v) {
 const cardEl = [];
 function build() {
   $('load').style.display = 'none';
-  $('nav').innerHTML = [['estate', '🏠', L.estate], ['goals', '🎯', L.goals], ['shop', '⭐', L.shop], ['prest', '🏛️', L.prest], ['top', '🏆', L.top]].map(([k, e, t]) => `<button data-t="${k}"${k === 'estate' ? ' class="on"' : ''}><span>${e}</span>${t}</button>`).join('');
+  $('nav').innerHTML = [['estate', '🏠', L.estate], ['goals', '🎯', L.goals], ['shop', '⭐', L.shop], ['top', '🏆', L.top]].map(([k, e, t]) => `<button data-t="${k}"${k === 'estate' ? ' class="on"' : ''}><span>${e}</span>${t}</button>`).join('');
   $('nav').onclick = e => { const b = e.target.closest('button'); if (b) go(b.dataset.t); };
   $('seg').innerHTML = [1, 10, 100, 'max'].map(m => `<button data-m="${m}">${m === 'max' ? L.max : 'x' + m}</button>`).join('');
   $('seg').onclick = e => { const b = e.target.closest('button'); if (!b) return; mode = b.dataset.m === 'max' ? 'max' : Number(b.dataset.m); try { localStorage.setItem('ie_mode', JSON.stringify(mode)); } catch (e) {} hap('light'); paint(); };
   let h = '';
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < NB; i++) {
     h += `<div class="card" data-i="${i}" hidden>
       <div class="ic"><svg viewBox="0 0 40 48">${bld(i)}</svg><em></em></div>
       <div class="mid"><div class="nm"><span class="n">${L.names[i]}</span><s></s></div><div class="bar"><i></i><b></b></div></div>
@@ -485,7 +486,7 @@ const TUTO = {
     ['⚡', 'x10 at the start', 'Your income is multiplied by 10 at the start of your first hour, then it fades gently (x6, x4, x2) over the hour. Use it to buy properties and hire your first manager fast.'],
     ['👆', 'Tap to collect rent', 'Tap a property to start its rent cycle and collect the money when the bar is full.'],
     ['👔', 'Buy and hire managers', 'Buy more levels to earn more. A manager collects the rent for you, automatically and nonstop.'],
-    ['🏛️', 'Sell your empire', 'Once you are big enough, sell it for investors: each type gives its own bonus forever (income, offline time, boost duration or rewards) and every sale unlocks new properties. Then start again, faster.'],
+    ['🏛️', 'An endless empire', 'Every new property is bigger and more expensive than the last, and it unlocks as soon as you own the previous one. Keep building: there is always a next one.'],
     ['🏆', 'Weekly top 10', 'Playing is free. The 10 best players of the week share a part of the Stars spent. Add your wallet in the Top tab to get paid in USDT.'],
   ],
   fr: [
@@ -493,7 +494,7 @@ const TUTO = {
     ['⚡', 'x10 au départ', 'Tes revenus sont multipliés par 10 au début de ta première heure, puis le bonus baisse doucement (x6, x4, x2) pendant l\'heure. Profites-en pour acheter des biens et embaucher ton premier gestionnaire vite.'],
     ['👆', 'Touche pour encaisser', 'Touche un bien pour lancer son cycle de loyer, puis récupère l\'argent quand la barre est pleine.'],
     ['👔', 'Achète et embauche', 'Achète des niveaux pour gagner plus. Un gestionnaire encaisse les loyers pour toi, automatiquement et sans arrêt.'],
-    ['🏛️', 'Vends ton empire', 'Quand tu es assez gros, vends-le contre des investisseurs : chaque type donne son propre bonus à vie (revenus, temps hors-ligne, durée des boosts ou récompenses) et chaque vente débloque de nouveaux biens. Puis recommence, plus vite.'],
+    ['🏛️', 'Un empire sans fin', 'Chaque nouveau bien est plus grand et plus cher que le précédent, et il se débloque dès que tu possèdes le précédent. Continue à bâtir : il y en a toujours un autre.'],
     ['🏆', 'Top 10 de la semaine', 'Jouer est gratuit. Les 10 meilleurs de la semaine se partagent une partie des Étoiles dépensées. Ajoute ton portefeuille dans l\'onglet Top pour être payé en USDT.'],
   ],
 };
@@ -504,7 +505,7 @@ function shareInvite() {
 }
 function tutoStart() {
   // shown once per account start: a fresh account (reset or new) has its own marker, the x10 first hour end time
-  const fresh = S.prest === 0 && S.life_all < 1 && S.startEnd > snow() + 3300;
+  const fresh = S.life_all < 1 && S.startEnd > snow() + 3300;
   const mark = fresh ? 'f' + Math.round(S.startEnd / 60) : '1';
   try { if (localStorage.getItem('ie_tuto4') === mark) return; } catch (e) {}
   const T = TUTO[lang] || TUTO.en; let k = 0;
@@ -535,7 +536,7 @@ const BLD=[
  ()=>`<path d="M0 44 Q5 41 10 44 T20 44 T30 44 T40 44 V48 H0Z" fill="#5cc8f0"/><rect x="5" y="28" width="22" height="16" rx="2" fill="${WL}"/><rect x="3" y="24" width="26" height="6" rx="2" fill="${RF[8]}"/>${WN(9,33,5,6,1)}${WN(18,33,5,6,0)}<path d="M33 44 Q31 32 35 22" stroke="#8a5a2b" stroke-width="2" fill="none"/><ellipse cx="31" cy="22" rx="6" ry="2.4" fill="#3ccf4e" transform="rotate(-25 31 22)"/><ellipse cx="38" cy="22" rx="6" ry="2.4" fill="#22a634" transform="rotate(25 38 22)"/>`,
  ()=>`<rect x="2" y="20" width="9" height="26" rx="1" fill="${RF[9]}"/><rect x="12" y="8" width="10" height="38" rx="1" fill="#e6f4ff"/><rect x="23" y="15" width="9" height="31" rx="1" fill="${RF[2]}"/><rect x="32" y="24" width="7" height="22" rx="1" fill="${RF[5]}"/><rect x="16.4" y="0" width="1.4" height="9" fill="#12305e"/>${GRID(4,23,2,4,3,3.4,4.4,6,0)}${GRID(14,11,2,6,3.4,3.6,4.8,5.6,1)}${GRID(25,18,2,5,3,3.4,4,5.8,2)}`
 ];
-const bld = i => BLD[i]();
+const bld = i => BLD[i % 10]();
 let drawn = {};
 const WALL = [['#fff4dc', '#e6d3a8'], ['#eef5ff', '#bcd6f2'], ['#fff0e0', '#f0cfa8'], ['#f5ecff', '#d2bff0'], ['#dcf8fb', '#9fdde6'], ['#ffe6f0', '#f3b7d0'], ['#e6f9e8', '#b9e3bd'], ['#e8ebff', '#bcc3f5'], ['#fff1d2', '#f5d08a'], ['#e2f3ff', '#9bcdf2']];
 const FP = [.62, .62, .7, .7, .62, .78, .86, .78, .7, .62], HB = [14, 20, 22, 34, 50, 38, 22, 54, 32, 66];
@@ -544,7 +545,8 @@ function skyPhase() { const h = new Date().getHours(); return (h >= 21 || h < 6)
 function buildSky() {
   const W = 360, H = 205, ox = 148, oy = 80, ph = skyPhase(), night = ph === 'night';
   const ctr = (c, r) => [ox + (c - r) * 32, oy + (c + r) * 16];
-  let top = -1; for (let i = 0; i < 10; i++) if (S.lv[i] > 0) top = i;
+  let top = -1; for (let i = 0; i < NB; i++) if (S.lv[i] > 0) top = i;
+  const base = Math.max(0, top - 8);
   const poly = (pts, fill, extra) => `<polygon points="${pts.map(q => q[0].toFixed(1) + ',' + q[1].toFixed(1)).join(' ')}" fill="${fill}"${extra || ''}/>`;
   const sc = $('sky').parentNode; sc.style.background = night ? 'linear-gradient(#10224a,#2c4a86 80%)' : ph === 'dusk' ? 'linear-gradient(#ff8f6b,#ffd9a8 80%)' : 'linear-gradient(#4fb3f7,#bfe8ff 78%)';
   let g = `<svg viewBox="30 34 300 171" preserveAspectRatio="xMidYMax meet">`;
@@ -558,7 +560,7 @@ function buildSky() {
   g += poly([P1, P2, P3, P4], night ? '#3b4252' : '#6d7787') + `<line x1="${ox - 48}" y1="${oy + 8}" x2="${ox + 112}" y2="${oy + 88}" stroke="#fff4b0" stroke-width="1.6" stroke-dasharray="6 5" style="stroke:#fff4b0"/></g>`;
   // buildings
   const bld = (i, c, r) => {
-    const [cx, cy] = ctr(c, r), lvl = S.lv[i], f = FP[i], w = 32 * f, hh = 16 * f;
+    if (i >= NB) return ''; const ki = i % 10; const [cx, cy] = ctr(c, r), lvl = S.lv[i], f = FP[ki], w = 32 * f, hh = 16 * f;
     if (lvl <= 0) {
       const nxt = i === top + 1;
       let o = `<g class="bld" style="animation:none"><polygon points="${cx},${cy - hh} ${cx + w},${cy} ${cx},${cy + hh} ${cx - w},${cy}" fill="rgba(255,255,255,.22)" stroke="#fff" stroke-opacity=".75" stroke-width="1.2" stroke-dasharray="3 3" style="stroke:#fff"/>`;
@@ -566,7 +568,7 @@ function buildSky() {
       else o += `<rect x="${cx - 1}" y="${cy - 10}" width="2" height="10" fill="#fff" style="stroke:none"/><rect x="${cx - 7}" y="${cy - 15}" width="14" height="7" rx="1.5" fill="#fff" style="stroke:#12305e"/>`;
       return o + '</g>';
     }
-    const h = HB[i] * (0.85 + Math.min(lvl, 100) / 100 * 0.5), wl = WALL[i];
+    const h = HB[ki] * (0.85 + Math.min(lvl, 100) / 100 * 0.5), wl = WALL[ki];
     const T = [cx, cy - hh], R = [cx + w, cy], B = [cx, cy + hh], L = [cx - w, cy];
     const up = q => [q[0], q[1] - h];
     const T2 = up(T), R2 = up(R), B2 = up(B), L2 = up(L);
@@ -576,26 +578,26 @@ function buildSky() {
     const wins = (mat, face) => { let q = `<g transform="matrix(${mat})">`; for (let rr = 0; rr < rows; rr++) for (let k = 0; k < cols; k++) { const u0 = .14 + k * (.74 / cols), wu = .74 / cols - .1; const lit = hsh(i, rr, k, face) < (night ? 78 : 14); q += `<rect class="wn" x="${u0.toFixed(2)}" y="${6 + rr * 9}" width="${wu.toFixed(2)}" height="5" rx=".05" fill="${lit ? '#ffe28a' : night ? '#2b4a7c' : '#a9d8ff'}"/>`; } return q + '</g>'; };
     o += wins(`${w} ${hh} 0 -1 ${L[0]} ${L[1]}`, 0); 
     o += wins(`${w} ${-hh} 0 -1 ${B[0]} ${B[1]}`, 1); 
-    if (i < 3) {
+    if (ki < 3) {
       const rh = 9 + i * 2, M1 = [(L2[0] + T2[0]) / 2, (L2[1] + T2[1]) / 2 - rh], M2 = [(B2[0] + R2[0]) / 2, (B2[1] + R2[1]) / 2 - rh];
-      o += poly([B2, R2, M2], wl[0]) + poly([L2, B2, M2, M1], RF[i]) + poly([T2, R2, M2, M1], RF[i], ' filter="url(#dk)"');
+      o += poly([B2, R2, M2], wl[0]) + poly([L2, B2, M2, M1], RF[ki]) + poly([T2, R2, M2, M1], RF[ki], ' filter="url(#dk)"');
     } else {
-      o += poly([T2, R2, B2, L2], RF[i]);
+      o += poly([T2, R2, B2, L2], RF[ki]);
       o += poly([[T2[0], T2[1] + 2], [R2[0] - 3, R2[1]], [B2[0], B2[1] - 2], [L2[0] + 3, L2[1]]], 'rgba(255,255,255,.28)', ' style="stroke:none"');
-      if (i >= 4 && i !== 6) o += `<line x1="${cx}" y1="${T2[1] + 4}" x2="${cx}" y2="${T2[1] - 9}" stroke="#12305e" stroke-width="1.4"/><circle cx="${cx}" cy="${T2[1] - 10}" r="1.6" fill="#ff5a4d"/>`;
-      if (i === 6) o += `<rect x="${cx - 8}" y="${T2[1] - 8}" width="16" height="6" rx="1.5" fill="#ffc12e"/>`;
+      if (ki >= 4 && ki !== 6) o += `<line x1="${cx}" y1="${T2[1] + 4}" x2="${cx}" y2="${T2[1] - 9}" stroke="#12305e" stroke-width="1.4"/><circle cx="${cx}" cy="${T2[1] - 10}" r="1.6" fill="#ff5a4d"/>`;
+      if (ki === 6) o += `<rect x="${cx - 8}" y="${T2[1] - 8}" width="16" height="6" rx="1.5" fill="#ffc12e"/>`;
     }
     return o + '</g>';
   };
   let back = '', front = '';
-  for (let c = 0; c < 5; c++) { back += bld(c, c, 0); front += bld(5 + c, c, 2); }
+  for (let c = 0; c < 5; c++) { back += bld(base + c, c, 0); front += bld(base + 5 + c, c, 2); }
   const car = (x0, y0, dx, dy, col, cls) => `<g transform="translate(${x0} ${y0})" class="bld" style="animation:none"><g class="${cls}"><ellipse cx="0" cy="2.5" rx="7" ry="2.4" fill="rgba(0,0,0,.22)" style="stroke:none"/><rect x="-6" y="-3.5" width="12" height="6" rx="2.2" fill="${col}" transform="rotate(26.5)"/><rect x="-2.6" y="-3.1" width="5.2" height="3.2" rx="1" fill="#dff3ff" transform="rotate(26.5)" style="stroke-width:.8"/></g></g>`;
   g += back + car(ox - 40, oy + 4, 160, 80, '#ff5a4d', 'carA') + car(ox + 104, oy + 92, -160, -80, '#3b9cff', 'carB') + front;
   // trees on the front edges
   const tree = (x, y) => `<g class="bld" style="animation:none"><rect x="${x - 1}" y="${y - 4}" width="2.4" height="6" fill="#8a5a2b"/><circle cx="${x}" cy="${y - 9}" r="6" fill="#3ccf4e"/><circle cx="${x - 2}" cy="${y - 11}" r="2.2" fill="#7bf585" style="stroke:none"/></g>`;
   for (const t of [.2, .5, .82]) { g += tree(l0[0] + (b0[0] - l0[0]) * t + 12, l0[1] + (b0[1] - l0[1]) * t - 5); g += tree(b0[0] + (r0[0] - b0[0]) * t - 12, b0[1] + (r0[1] - b0[1]) * t - 5); }
   g += '<defs><filter id="dk"><feColorMatrix type="matrix" values=".82 0 0 0 0  0 .82 0 0 0  0 0 .82 0 0  0 0 0 1 0"/></filter></defs></svg>';
-  for (let i = 0; i < 10; i++) if (S.lv[i] > 0) drawn[i] = S.lv[i];
+  for (let i = 0; i < NB; i++) if (S.lv[i] > 0) drawn[i] = S.lv[i];
   $('sky').innerHTML = g;
 }
 $('sky').addEventListener('click', e => {
@@ -637,8 +639,8 @@ function paint() {
   const sk = S.lv.map(l => l > 0 ? 1 + Math.floor(Math.min(l, 120) / 6) : 0).join(',');
   const skk = sk + skyPhase(); if (skk !== skyKey) { skyKey = skk; buildSky(); }
   document.querySelectorAll('#seg button').forEach(b => b.classList.toggle('on', b.dataset.m === String(mode)));
-  let top = -1; for (let i = 0; i < 10; i++) if (S.lv[i] > 0) top = i;
-  for (let i = 0; i < 10; i++) {
+  let top = -1; for (let i = 0; i < NB; i++) if (S.lv[i] > 0) top = i;
+  for (let i = 0; i < NB; i++) {
     const c = cardEl[i]; const lk = i >= S.unl; const show = lk ? i === S.unl : i <= top + 1; c.hidden = !show; if (!show) continue;
     const owned = S.lv[i] > 0;
     const teaser = !owned && i > top + 0 && i === top + 1 && i > 0 && S.cash < S.cfg[i].c * 0.1;
@@ -649,8 +651,8 @@ function paint() {
     em.style.display = owned ? '' : 'none'; em.textContent = L.lvl + ' ' + S.lv[i];
     if (owned) { const nx = S.ms.find(m => m > S.lv[i]); ms.textContent = nx ? L.ms + S.mb + ' @' + nx : 'MAX'; ms.style.display = ''; } else ms.style.display = 'none';
     const per = inc(i, n);
-    if (!owned) { bar.style.transform = 'scaleX(0)'; txt.textContent = '$' + fm(S.cfg[i].r * curM(n)) + ' / ' + L.pr[i]; }
-    else if (S.mg[i]) { bar.style.transform = S.cfg[i].t < 2.5 ? 'scaleX(1)' : 'scaleX(' + ((n % S.cfg[i].t) / S.cfg[i].t) + ')'; txt.textContent = '$' + fm(per) + ' / ' + L.pr[i]; }
+    if (!owned) { bar.style.transform = 'scaleX(0)'; txt.textContent = '$' + fm(S.cfg[i].r * curM(n)) + ' / ' + L.pr[0]; }
+    else if (S.mg[i]) { bar.style.transform = S.cfg[i].t < 2.5 ? 'scaleX(1)' : 'scaleX(' + ((n % S.cfg[i].t) / S.cfg[i].t) + ')'; txt.textContent = '$' + fm(per) + ' / ' + L.pr[0]; }
     else if (S.ts[i] > 0) { const f = Math.min(1, (n - S.ts[i]) / S.cfg[i].t); bar.style.transform = 'scaleX(' + f + ')'; txt.textContent = '$' + fm(per) + '  ' + fmtLeft(S.ts[i] + S.cfg[i].t - n); }
     else { bar.style.transform = 'scaleX(0)'; txt.textContent = L.tapStart + ' $' + fm(per); }
     c.classList.toggle('ready', owned && !S.mg[i] && S.ts[i] < 0);
@@ -856,11 +858,11 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;'
 // ---------- goal bar, event chip, achievements
 function goalPaint(n) {
   const g = $('goal'); if (tab !== 'estate') return;
-  let top = -1; for (let i = 0; i < 10; i++) if (S.lv[i] > 0) top = i;
+  let top = -1; for (let i = 0; i < NB; i++) if (S.lv[i] > 0) top = i;
   let best = null;
-  if (top + 1 < 10) { const i = top + 1; best = { k: 'buy', i, c: cost(i, 1) }; }
-  for (let i = 0; i < 10; i++) if (S.lv[i] > 0 && !S.mg[i]) { const c = S.cfg[i].m; if (!best || c < best.c) best = { k: 'mgr', i, c }; }
-  if (!best) { if (gainInv() >= 1) best = { k: 'prest', c: 0 }; else { g.hidden = true; return; } }
+  if (top + 1 < NB) { const i = top + 1; best = { k: 'buy', i, c: cost(i, 1) }; }
+  for (let i = 0; i < NB; i++) if (S.lv[i] > 0 && !S.mg[i]) { const c = S.cfg[i].m; if (!best || c < best.c) best = { k: 'mgr', i, c }; }
+  if (!best) { g.hidden = true; return; }
   g.hidden = false;
   const ready = best.k === 'prest' || S.cash >= best.c;
   const key = best.k + (best.i === undefined ? '' : best.i) + ready;
@@ -892,7 +894,7 @@ $('evc').addEventListener('click', () => {
 const achProg = id => {
   const m = /^p(\d)$/.exec(id); if (m) return [S.lv[+m[1]] > 0 ? 1 : 0, 1];
   const mgc = S.mg.filter(Boolean).length;
-  return ({ mgr1: [mgc, 1], s10: [S.lv[0], 10], s25: [S.lv[0], 25], s50: [S.lv[0], 50], mgr5: [mgc, 5], mgr10: [mgc, 10], pr1: [S.prest, 1], pr5: [S.prest, 5], st7: [S.streak, 7], fr1: [S.ref_n, 1], fr5: [S.ref_n, 5] })[id] || [0, 1];
+  return ({ mgr1: [mgc, 1], s10: [S.lv[0], 10], s25: [S.lv[0], 25], s50: [S.lv[0], 50], mgr5: [mgc, 5], mgr10: [mgc, 10], pr1: [S.lv[14] > 0 ? 1 : 0, 1], pr5: [S.lv[19] > 0 ? 1 : 0, 1], st7: [S.streak, 7], fr1: [S.ref_n, 1], fr5: [S.ref_n, 5] })[id] || [0, 1];
 };
 const achInfo = id => { const m = /^p(\d)$/.exec(id); return m ? [EM[+m[1]], L.names[+m[1]], L.achOwn] : (L.ach[id] || ['🏆', id, '']); };
 const qReady = () => (S && S.q ? S.q.list.filter(x => !x.done && x.v >= x.t).length + (!S.q.all && S.q.list.length && S.q.list.every(x => x.done) ? 1 : 0) : 0);
