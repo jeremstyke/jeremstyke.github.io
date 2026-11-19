@@ -195,6 +195,12 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 </style>
 </head>
 <body>
+<div id="maint" style="display:none;position:fixed;inset:0;z-index:99999;background:linear-gradient(#4fb3f7,#cdeeff 70%);align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px;font-family:inherit;color:#12305e">
+  <div style="font-size:72px;line-height:1">🏗️</div>
+  <h1 id="maintT" style="font-size:26px;margin:16px 0 8px"></h1>
+  <p id="maintS" style="font-size:16px;max-width:320px;margin:0 0 20px;line-height:1.4"></p>
+  <button id="maintB" style="font-size:16px;font-weight:700;border:3px solid #12305e;background:#fff;color:#12305e;border-radius:14px;padding:10px 20px;box-shadow:0 4px 0 #12305e;cursor:pointer"></button>
+</div>
 <div class="load" id="load"><div><img src="logo.png" alt="Idle Estate" width="200" height="200" style="display:block;margin:0 auto;border-radius:44px;box-shadow:0 12px 36px rgba(17,58,40,.25);animation:bob 1.4s ease-in-out infinite"></div></div>
 
 <div class="wrap">
@@ -227,7 +233,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1200';
+const BUILD = '20261119-1210';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -237,6 +243,16 @@ const API = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/idle-estate';
 const tgw = window.Telegram && Telegram.WebApp;
 if (tgw) { try { tgw.ready(); tgw.expand(); tgw.setHeaderColor('#ffffff'); tgw.setBackgroundColor('#ffffff'); tgw.disableVerticalSwipes && tgw.disableVerticalSwipes(); } catch (e) {} }
 const lang = ((tgw && tgw.initDataUnsafe && tgw.initDataUnsafe.user && tgw.initDataUnsafe.user.language_code) || navigator.language || 'en').toLowerCase().startsWith('fr') ? 'fr' : 'en';
+
+// maintenance screen: set MAINT to true while the game is being reworked, false when it is done (bump BUILD so Telegram reloads the page)
+const MAINT = true;
+if (MAINT) {
+  const T = lang === 'fr' ? ['Travaux en cours', "Idle Estate est en maintenance : je refais l'économie du jeu. Ta progression est gardée. Reviens dans un moment.", 'Réessayer'] : ['Under construction', 'Idle Estate is in maintenance while the economy is being reworked. Your progress is safe. Come back soon.', 'Try again'];
+  const m = document.getElementById('maint'); document.getElementById('maintT').textContent = T[0]; document.getElementById('maintS').textContent = T[1];
+  const b = document.getElementById('maintB'); b.textContent = T[2]; b.onclick = () => location.reload();
+  m.style.display = 'flex';
+  return;
+}
 
 const L = {
  en: {
