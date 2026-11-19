@@ -156,7 +156,9 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 .pfav{width:88px;height:88px;margin:-46px auto 0;border-radius:50%;border:4px solid #fff;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-size:38px;color:#fff;background:linear-gradient(#2a5aa8,#17386e);box-shadow:0 0 0 2.5px var(--navy),0 6px 14px rgba(18,48,94,.3);position:relative}
 .pfav img{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;object-fit:cover}
 .top .av{width:30px;height:30px;border-radius:50%;border:2px solid var(--navy);object-fit:cover;flex:none;background:#e4f3ff}
-.mrl{display:flex;flex-direction:column;gap:9px;margin:12px 0 2px}
+.sub #refc,.sub #prc,.sub #evc,.sub #goldc,.sub #invc{display:none!important}
+.nav button.ping span{position:relative}.nav button.ping span::after{content:"";position:absolute;top:0;right:-5px;width:11px;height:11px;border-radius:50%;background:#ff4b3a;border:2px solid #fff}
+.mrl{display:flex;flex-direction:column;gap:8px;margin:12px 0 2px;max-height:60vh;overflow:auto}
 .mrl button{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;border:2.5px solid var(--navy);background:linear-gradient(#fff,#e4f3ff);box-shadow:0 3px 0 var(--navy);font-family:var(--disp);font-size:16px;color:var(--navy);text-align:left}
 .mrl button i{font-style:normal;font-size:24px}.mrl button span{flex:1}.mrl button b{color:#a15e00;font-size:16px}
 .mrl button:active{transform:translateY(2px);box-shadow:0 1px 0 var(--navy)}
@@ -289,7 +291,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261120-0030';
+const BUILD = '20261120-0045';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -314,7 +316,7 @@ const L = {
  en: {
   lockT:'Buy the previous property first',
   bankT:'🎁 Start x2 boost',
-  prT:'Start over with a bonus', prNow:'You own {n} properties', prLoseH:'You lose', prKeepH:'You keep', prGainH:'You gain', prLoseS:'Property levels, managers and cash. You restart with one studio.', prKeepS:'Boosts, Stars purchases, achievements, quests and ranking score.', prGainS:'+{x}% income forever', prAfter:'Total bonus: +{t}%', prConf:'Confirm: reset everything', prConfH:'This cannot be undone', pfT:'Profile', more:'More', mrPot:'Weekly prize pool', mrWal:'My wallet', mrPr:'Prestige ranking', mrMe:'My profile', tpWeek:'This week', tpPr:'Prestiges', tpEmpty:'Nobody has done a prestige yet.', tpYou:'Your rank', pfRk:['Rookie','Investor','Developer','Tycoon','Legend'], pfSince:'Playing for {d} days', pfPr:'Prestiges', pfBonus:'Permanent bonus', pfOwn:'Properties owned', pfLv:'Levels', pfAch:'Achievements', pfDays:'Days playing', pfRank:'Rank this week', pfMe:'You', pfNone:'Player not found', pfBtn:'My profile', pfNoPr:'No prestige yet', pfClose:'Close', prP:'You own {n} properties. You can sell everything and restart.', prLose:'Lost: all property levels, managers and cash. You restart with one studio.', prKeep:'Kept: boost reserve, Stars purchases, achievements, quests and ranking score.', prGain:'Permanent income bonus: +{x}%', prTot:'(on top of your current +{t}%)', prGo:'Start over', prNo:'Not now', prChip:'Prestige', prMk:'Cancel your market listings and rentals first.', prLow:'Not available yet.', prDone:'New start! Your permanent bonus is active.', prNeed:'Own {n} properties to start over with a bonus.',
+  prT:'Start over with a bonus', prNow:'You own {n} properties', prLoseH:'You lose', prKeepH:'You keep', prGainH:'You gain', prLoseS:'Property levels, managers and cash. You restart with one studio.', prKeepS:'Boosts, Stars purchases, achievements, quests and ranking score.', prGainS:'+{x}% income forever', prAfter:'Total bonus: +{t}%', prConf:'Confirm: reset everything', prConfH:'This cannot be undone', pfT:'Profile', mrRef:'Friends income', mrInv:'Invite a friend', mrPres:'Prestige', mrEv:'Golden hour', mrNo:'Not yet', more:'More', mrPot:'Weekly prize pool', mrWal:'My wallet', mrPr:'Prestige ranking', mrMe:'My profile', tpWeek:'This week', tpPr:'Prestiges', tpEmpty:'Nobody has done a prestige yet.', tpYou:'Your rank', pfRk:['Rookie','Investor','Developer','Tycoon','Legend'], pfSince:'Playing for {d} days', pfPr:'Prestiges', pfBonus:'Permanent bonus', pfOwn:'Properties owned', pfLv:'Levels', pfAch:'Achievements', pfDays:'Days playing', pfRank:'Rank this week', pfMe:'You', pfNone:'Player not found', pfBtn:'My profile', pfNoPr:'No prestige yet', pfClose:'Close', prP:'You own {n} properties. You can sell everything and restart.', prLose:'Lost: all property levels, managers and cash. You restart with one studio.', prKeep:'Kept: boost reserve, Stars purchases, achievements, quests and ranking score.', prGain:'Permanent income bonus: +{x}%', prTot:'(on top of your current +{t}%)', prGo:'Start over', prNo:'Not now', prChip:'Prestige', prMk:'Cancel your market listings and rentals first.', prLow:'Not available yet.', prDone:'New start! Your permanent bonus is active.', prNeed:'Own {n} properties to start over with a bonus.',
   testT:'Testing period', testS:'Idle Estate is still in testing until November 25. Accounts can be reset again if we need to adjust the balance. After that, no more resets.', testOk:'Got it',
   names:['Studio','Loft','Villa','Apartment block','Residential tower','Hotel chain','Mall network','Business district','Resort island','Skyscraper','Megacity','Airport','Theme park','Stadium','Harbour','Tech campus','Mountain resort','Island chain','Floating city','Orbital hotel','Lunar base','Mars colony','Space elevator','Asteroid mine','Terraformed planet','Star port','Orbital ring','Arcology','Dyson swarm','Galactic hub', 'Neon district', 'Cloud palace', 'Underwater dome', 'Volcano spa', 'Glacier resort', 'Desert oasis', 'Rainforest lodge', 'Casino strip', 'Film studio', 'Rocket park', 'Crystal tower', 'Sky bridge', 'Robot city', 'Clone district', 'Fusion plant', 'Time hotel', 'Dragon keep', 'Wizard college', 'Pirate cove', 'Ice moon', 'Shooting-star port', 'Black hole spa', 'Nebula garden', 'Quantum lab', 'Hyperloop hub', 'Pocket universe', 'Mirror dimension', 'Dream city', 'Infinity tower', 'Heart of the cosmos'],
   pr:['month','month','month','month','month','month','month','month','month','month'],
@@ -348,7 +350,7 @@ const L = {
  fr: {
   lockT:'Achète d\'abord le bien précédent',
   bankT:'🎁 Lancer le boost x2',
-  prT:'Repartir avec un bonus', prNow:'Tu possèdes {n} biens', prLoseH:'Tu perds', prKeepH:'Tu gardes', prGainH:'Tu gagnes', prLoseS:'Niveaux de biens, gestionnaires et cash. Tu repars avec un studio.', prKeepS:'Boosts, achats en Étoiles, succès, quêtes et score du classement.', prGainS:'+{x}% de revenus pour toujours', prAfter:'Bonus total : +{t}%', prConf:'Confirmer : tout remettre à zéro', prConfH:'Impossible de revenir en arrière', pfT:'Profil', more:'Plus', mrPot:'Cagnotte de la semaine', mrWal:'Mon portefeuille', mrPr:'Classement des prestiges', mrMe:'Mon profil', tpWeek:'Cette semaine', tpPr:'Prestiges', tpEmpty:'Personne n\'a encore fait de prestige.', tpYou:'Ton rang', pfRk:['Débutant','Investisseur','Promoteur','Magnat','Légende'], pfSince:'En jeu depuis {d} jours', pfPr:'Prestiges', pfBonus:'Bonus permanent', pfOwn:'Biens possédés', pfLv:'Niveaux', pfAch:'Succès', pfDays:'Jours de jeu', pfRank:'Classement de la semaine', pfMe:'Toi', pfNone:'Joueur introuvable', pfBtn:'Mon profil', pfNoPr:'Aucun prestige', pfClose:'Fermer', prP:'Tu possèdes {n} biens. Tu peux tout vendre et repartir de zéro.', prLose:'Perdu : tous les niveaux de biens, les gestionnaires et le cash. Tu repars avec un studio.', prKeep:'Conservé : réserve de boosts, achats en Étoiles, succès, quêtes et score du classement.', prGain:'Bonus de revenus permanent : +{x}%', prTot:'(en plus de ton +{t}% actuel)', prGo:'Repartir', prNo:'Pas maintenant', prChip:'Prestige', prMk:'Annule d\'abord tes annonces et locations du marché.', prLow:'Pas encore disponible.', prDone:'Nouveau départ ! Ton bonus permanent est actif.', prNeed:'Possède {n} biens pour repartir avec un bonus.',
+  prT:'Repartir avec un bonus', prNow:'Tu possèdes {n} biens', prLoseH:'Tu perds', prKeepH:'Tu gardes', prGainH:'Tu gagnes', prLoseS:'Niveaux de biens, gestionnaires et cash. Tu repars avec un studio.', prKeepS:'Boosts, achats en Étoiles, succès, quêtes et score du classement.', prGainS:'+{x}% de revenus pour toujours', prAfter:'Bonus total : +{t}%', prConf:'Confirmer : tout remettre à zéro', prConfH:'Impossible de revenir en arrière', pfT:'Profil', mrRef:'Revenus des amis', mrInv:'Inviter un ami', mrPres:'Prestige', mrEv:'Heure dorée', mrNo:'Pas encore', more:'Plus', mrPot:'Cagnotte de la semaine', mrWal:'Mon portefeuille', mrPr:'Classement des prestiges', mrMe:'Mon profil', tpWeek:'Cette semaine', tpPr:'Prestiges', tpEmpty:'Personne n\'a encore fait de prestige.', tpYou:'Ton rang', pfRk:['Débutant','Investisseur','Promoteur','Magnat','Légende'], pfSince:'En jeu depuis {d} jours', pfPr:'Prestiges', pfBonus:'Bonus permanent', pfOwn:'Biens possédés', pfLv:'Niveaux', pfAch:'Succès', pfDays:'Jours de jeu', pfRank:'Classement de la semaine', pfMe:'Toi', pfNone:'Joueur introuvable', pfBtn:'Mon profil', pfNoPr:'Aucun prestige', pfClose:'Fermer', prP:'Tu possèdes {n} biens. Tu peux tout vendre et repartir de zéro.', prLose:'Perdu : tous les niveaux de biens, les gestionnaires et le cash. Tu repars avec un studio.', prKeep:'Conservé : réserve de boosts, achats en Étoiles, succès, quêtes et score du classement.', prGain:'Bonus de revenus permanent : +{x}%', prTot:'(en plus de ton +{t}% actuel)', prGo:'Repartir', prNo:'Pas maintenant', prChip:'Prestige', prMk:'Annule d\'abord tes annonces et locations du marché.', prLow:'Pas encore disponible.', prDone:'Nouveau départ ! Ton bonus permanent est actif.', prNeed:'Possède {n} biens pour repartir avec un bonus.',
   testT:'Période de test', testS:'Idle Estate est encore en test jusqu\'au 25 novembre. Les comptes peuvent être remis à zéro si on doit ajuster l\'équilibre. Après, plus de remise à zéro.', testOk:'Compris',
   names:['Studio','Loft','Villa','Immeuble','Tour résidentielle','Chaîne d\'hôtels','Centres commerciaux','Quartier d\'affaires','Île resort','Gratte-ciel','Mégapole','Aéroport','Parc d\'attractions','Stade','Port','Campus tech','Station de montagne','Archipel','Ville flottante','Hôtel orbital','Base lunaire','Colonie martienne','Ascenseur spatial','Mine d\'astéroïdes','Planète terraformée','Spatioport','Anneau orbital','Arcologie','Essaim de Dyson','Pôle galactique', 'Quartier néon', 'Palais des nuages', 'Dôme sous-marin', 'Spa du volcan', 'Station de glacier', 'Oasis du désert', 'Lodge de la jungle', 'Strip des casinos', 'Studio de cinéma', 'Parc des fusées', 'Tour de cristal', 'Pont céleste', 'Cité des robots', 'Quartier des clones', 'Centrale à fusion', 'Hôtel du temps', 'Donjon du dragon', 'École des sorciers', 'Crique des pirates', 'Lune de glace', 'Port des étoiles filantes', 'Spa du trou noir', 'Jardin de nébuleuse', 'Labo quantique', 'Hub hyperloop', 'Univers de poche', 'Dimension miroir', 'Cité des rêves', 'Tour de l\'infini', 'Cœur du cosmos'],
   pr:['mois','mois','mois','mois','mois','mois','mois','mois','mois','mois'],
@@ -448,16 +450,26 @@ const PAPI = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/idle-estate-
 let PRK = [], PRKat = 0, PMK = {}, PMKat = 0, PRL = null, PRLat = 0, topMode = 'week';
 function openMore() {
   const pool = topData ? topData.pool || 0 : 0, av = topData && topData.wallet ? topData.wallet.avail || 0 : 0;
+  const ev = ($('evc').textContent || '').replace('🌟', '').trim();
+  const pv = S.prgain > 0 ? '+' + Math.round(S.prgain * 100) + '%' : (S.pr > 0 ? '+' + Math.round(S.pbonus * 100) + '%' : L.mrNo);
   modal(`<h3>${L.more}</h3><div class="mrl">
+    <button data-mr="ref"><i>👥</i><span>${L.mrRef}</span><b>+$${fm(S.ref_pend || 0)}</b></button>
+    <button data-mr="inv"><i>💌</i><span>${L.mrInv}</span><b>›</b></button>
+    <button data-mr="pres"><i>🔄</i><span>${L.mrPres}</span><b>${pv}</b></button>
+    <button data-mr="ev"><i>🌟</i><span>${L.mrEv}</span><b>${esc(ev)}</b></button>
     <button data-mr="pot"><i>🏆</i><span>${L.mrPot}</span><b>⭐ ${fmt(pool)}</b></button>
     <button data-mr="wal"><i>👛</i><span>${L.mrWal}</span><b>⭐ ${fmt(av)}</b></button>
-    <button data-mr="pr"><i>🔄</i><span>${L.mrPr}</span><b>›</b></button>
+    <button data-mr="pr"><i>📊</i><span>${L.mrPr}</span><b>›</b></button>
     <button data-mr="me"><i>👤</i><span>${L.mrMe}</span><b>›</b></button></div>
     <button class="btn ghost" id="mrx">${L.pfClose}</button>`);
   $('mrx').onclick = closeModal;
   $('sheet').querySelectorAll('[data-mr]').forEach(b => b.onclick = () => {
     const k = b.dataset.mr; closeModal();
     if (k === 'me') { openProfile(S.uid); return; }
+    if (k === 'ref') { if (S.ref_pend > 0) $('refc').click(); else shareInvite(); return; }
+    if (k === 'inv') { shareInvite(); return; }
+    if (k === 'pres') { if (S.prgain > 0) prModal(); else toast(L.prNeed.replace('{n}', S.prmin)); return; }
+    if (k === 'ev') { $('evc').click(); return; }
     topMode = k === 'pr' ? 'pr' : 'week'; go('top');
     if (k === 'wal') setTimeout(() => { const w = $('walBox'); if (w) w.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 450);
   });
@@ -782,6 +794,7 @@ function paint() {
   const bo = $('boost');
   slotTick(n);
   if (S.boostEnd > n || S.startEnd > n || S.adEnd > n) { bo.hidden = false; const q = slotSt(n); const l = (q.ms === q.sb ? S.startEnd : q.ma === q.sb ? S.adEnd : S.boostEnd) - n; bo.textContent = (q.run ? '⚡ x' : '⏸ x') + q.sb + ' ' + (l > 3600 ? Math.floor(l / 3600) + 'h' + String(Math.floor(l % 3600 / 60)).padStart(2, '0') : Math.floor(l / 60) + ':' + String(Math.floor(l % 60)).padStart(2, '0')); } else bo.hidden = true;
+  { const mb = $('nav').querySelector('[data-t="more"]'); if (mb) mb.classList.toggle('ping', S.ref_pend > 0 || S.prgain > 0); }
   const rf = $('refc'); if (S.ref_pend > 0 || S.ref_n > 0) { rf.hidden = false; rf.textContent = '👥 +$' + fm(S.ref_pend || 0); rf.style.opacity = S.ref_pend > 0 ? 1 : .55; } else rf.hidden = true;
   const bc = $('bankc'); if (S.bank > 0) { bc.hidden = false; bc.textContent = '🎁 x2 : ' + fmtT(S.bank) + ' · ' + L.use + ' ' + fmtT(Math.min(S.bank, S.use)); } else bc.hidden = true;
   paintAd();
