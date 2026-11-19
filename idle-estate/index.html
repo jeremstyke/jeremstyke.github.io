@@ -106,6 +106,7 @@ button{font-family:inherit;font-weight:800;color:inherit;border:0;cursor:pointer
 
 /* bottom nav */
 .adbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 74px);z-index:29;width:calc(100% - 24px);max-width:496px;display:flex;align-items:center;gap:10px;border-radius:20px;padding:8px 10px 8px 14px;background:linear-gradient(#ffe38a,#ffc12e);border:3px solid var(--navy);box-shadow:0 4px 0 var(--navy)}
+body.hasad{padding-bottom:calc(172px + env(safe-area-inset-bottom,0px))}
 .adbar[hidden]{display:none}
 .adbar .tx{flex:1;min-width:0}
 .adbar b{display:block;font-family:var(--disp);font-size:16px;font-weight:600}
@@ -249,7 +250,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-2030';
+const BUILD = '20261119-2040';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -817,7 +818,7 @@ function paintAd() {
   if (adShown !== key) {
     adShown = key;
     el.innerHTML = `<div class="tx"><b>📺 ${L.adT}</b><span id="adTx"></span></div><button class="btn" id="adBtn"></button>`;
-    $('adBtn').onclick = watchAd; el.hidden = false;
+    $('adBtn').onclick = watchAd; el.hidden = false; document.body.classList.add('hasad');
   }
   const left = Math.max(0, (S.adAt || 0) - snow());
   const t = $('adTx'), bt = $('adBtn');
