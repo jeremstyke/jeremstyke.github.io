@@ -697,7 +697,7 @@ function renderShop() {
   const gOn = S.goldEnd > snow();
   h += `<div class="row hot" style="border-color:#a15e00"><div class="e">👑</div><div class="tx"><b>${L.goldT}</b><span>${L.goldS}</span>${gOn ? `<div class="rw">✅ ${L.goldOn} · ${Math.ceil((S.goldEnd - snow()) / 86400)} ${L.goldLeft}</div>` : ''}</div><button class="star" data-sku="gold">⭐ ${S.shop.gold}<small style="display:block;font-size:11px;font-weight:700">${L.perMonth}</small></button></div>`;
   if (S.deal && L.items[S.deal.sku]) { const it = L.items[S.deal.sku]; h += `<div class="row hot"><div class="e">🔥</div><div class="tx"><b>${L.dealT}: ${it[1]}</b><span>${L.dealS}. ${it[2]}</span><div class="rw">${S.deal.price} ⭐ <s style="opacity:.7">${S.shop[S.deal.sku]}</s></div></div><button class="star" data-sku="${S.deal.sku}" data-deal="1">⭐ ${S.deal.price}</button></div>`; }
-  h += `<div class="row"><div class="e">📺</div><div class="tx"><b>${L.adT}</b><span>${L.adS}</span></div><button class="star" id="adb"${adDone() ? ' disabled style="opacity:.45;filter:grayscale(1)"' : ''}>${adDone() ? '✅' : L.adB}</button></div>`;
+  if (!adDone()) h += `<div class="row"><div class="e">📺</div><div class="tx"><b>${L.adT}</b><span>${L.adS}</span></div><button class="star" id="adb">${L.adB}</button></div>`;
   for (const k of order) {
     const it = L.items[k];
     const own = (k === 'perm2' && S.perm2) || (k === 'vault' && S.vault);
