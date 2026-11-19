@@ -154,6 +154,8 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 .pfbn.t3{background:radial-gradient(120px 80px at 85% 0,rgba(255,255,255,.3),transparent),linear-gradient(135deg,#9a6200,#f2b630)}
 .pfbn.t4{background:radial-gradient(120px 80px at 85% 0,rgba(255,255,255,.25),transparent),linear-gradient(135deg,#3b1578,#9a62ff)}
 .pfav{width:88px;height:88px;margin:-46px auto 0;border-radius:50%;border:4px solid #fff;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-size:38px;color:#fff;background:linear-gradient(#2a5aa8,#17386e);box-shadow:0 0 0 2.5px var(--navy),0 6px 14px rgba(18,48,94,.3);position:relative}
+.pfav img{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;object-fit:cover}
+.top .av{width:30px;height:30px;border-radius:50%;border:2px solid var(--navy);object-fit:cover;flex:none;background:#e4f3ff}
 .pfc h3{margin:10px 0 4px;font-size:24px}
 .pfrk{display:inline-block;padding:3px 12px;border-radius:999px;background:#eef3fa;color:var(--navy);font-size:12.5px;font-weight:800;letter-spacing:.02em}
 .pfrk.me{background:var(--navy);color:#fff;margin-left:6px}
@@ -283,7 +285,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-2330';
+const BUILD = '20261119-2345';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -454,7 +456,7 @@ function openProfile(u) {
     const p = r.p, nm = (p.gold ? '👑 ' : '') + p.n, ini = Array.from(p.n.replace(/^[^\p{L}\p{N}]+/u, '') || '?')[0].toUpperCase();
     const tot = (S.defs || []).length || 26;
     const tr = p.pr >= 10 ? 4 : p.pr >= 5 ? 3 : p.pr >= 3 ? 2 : p.pr >= 1 ? 1 : 0, rk = (L.pfRk || [])[p.pr >= 10 ? 4 : p.pr >= 5 ? 3 : p.pr >= 3 ? 2 : p.pr >= 1 ? 1 : 0] || '';
-    modal(`<div class="pfc"><div class="pfbn${tr ? ' t' + tr : ''}"></div><div class="pfav">${esc(ini)}</div>
+    modal(`<div class="pfc"><div class="pfbn${tr ? ' t' + tr : ''}"></div><div class="pfav">${p.ph ? `<img src="${esc(p.ph)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<span>${esc(ini)}</span></div>
       <h3>${esc(nm)}</h3><span class="pfrk">${esc(rk)}</span>${p.me ? `<span class="pfrk me">${L.pfMe}</span>` : ''}
       <div class="pfm"><div><b>${p.pr}</b><span>${L.pfPr}</span></div><div><b>${p.pr ? '+' + Math.round(p.pb * 100) + '%' : '-'}</b><span>${L.pfBonus}</span></div><div><b>${p.rank ? '#' + p.rank : '-'}</b><span>${L.pfRank}</span></div></div>
       <div class="pfl"><div><span>${L.pfOwn}</span><b>${p.owned}</b></div><div><span>${L.pfLv}</span><b>${p.levels}</b></div><div><span>${L.pfAch}</span><b>${p.ach}/${tot}</b></div></div>
@@ -598,6 +600,7 @@ function build() {
   setInterval(vipLoop, 250);
   setInterval(prAsk, 2000);
   setInterval(() => { if (tab === 'mk' && mkD && (mkYoung || (S.startEnd || 0) > snow())) renderMk(); }, 5000);
+  pcall({ act: 'me' });
   setInterval(() => { if (tab === 'top') loadTop(); }, 15000);
 }
 
@@ -1148,7 +1151,7 @@ function renderTop() {
   let h = `<h2>${L.topT}</h2><p class="lead">${L.topS}</p>
    <div class="box"><span class="lead">${L.pool}</span><div class="big">⭐ ${fmt(d.pool)}</div><span class="lead">${d.pool > 0 ? '' : L.noPool + ' '}${L.ends} ${dd}d ${hh}h ${mm}m</span></div>`;
   h += '<div>';
-  d.top.forEach((r, i) => { const pr = Math.floor(d.pool * (d.shares[i] || 0) / 100); const ex = (PRK[i] && PRK[i].n === r.n) ? PRK[i] : PRK.find(x => x.n === r.n); h += `<div class="top${r.me ? ' me' : ''}"${ex ? ` data-u="${ex.u}"` : ''}><span class="rk">${i + 1}</span><span class="n">${esc(r.n)}${ex ? prBadge(ex.pr) : ''}${r.me ? ' (' + L.yours + ')' : ''}</span><span class="v">$${fm(r.v)}</span><span class="p">${pr > 0 ? '⭐ ' + pr : ''}</span></div>`; });
+  d.top.forEach((r, i) => { const pr = Math.floor(d.pool * (d.shares[i] || 0) / 100); const ex = (PRK[i] && PRK[i].n === r.n) ? PRK[i] : PRK.find(x => x.n === r.n); h += `<div class="top${r.me ? ' me' : ''}"${ex ? ` data-u="${ex.u}"` : ''}><span class="rk">${i + 1}</span>${ex && ex.ph ? `<img class="av" src="${esc(ex.ph)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<span class="n">${esc(r.n)}${ex ? prBadge(ex.pr) : ''}${r.me ? ' (' + L.yours + ')' : ''}</span><span class="v">$${fm(r.v)}</span><span class="p">${pr > 0 ? '⭐ ' + pr : ''}</span></div>`; });
   h += '</div>';
   h += `<div class="box"><span class="lead">${L.rank}</span><div class="big">#${(() => { const k = d.top.findIndex(r => r.me); return k >= 0 ? k + 1 : d.rank; })()}</div><span class="lead">$${fm(d.score)}</span></div>`;
   const w = d.wallet || {};
