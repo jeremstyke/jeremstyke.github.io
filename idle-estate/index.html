@@ -242,7 +242,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1510';
+const BUILD = '20261119-1535';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -414,7 +414,7 @@ function apply(r, full) {
     off = r.now - Date.now() / 1000;
     const keep = S;
     S = { cash: r.cash, life_all: r.life_all, lv: r.lv.slice(), mg: r.mg.slice(), ts: r.ts.slice(), inv: r.inv, prest: r.prest, unl: r.unl || 10, ib: r.ib || 0.05, incm: r.incm || 1, ibt: r.ibt || {}, ibv: r.ibv || {}, perm2: r.perm2, vault: r.vault, welcome: r.welcome, streak: r.streak, dailyOk: r.daily_ok,
-      bank: r.bank || 0, bank3: r.bank3 || 0, boostEnd: r.boost ? r.now + r.boost.left : 0, startEnd: r.start ? r.now + r.start.left : 0, adEnd: r.adx ? r.now + r.adx.left : 0, bmult: r.boost ? r.boost.mult : 1, vipEnd: r.vip ? r.now + r.vip.left : 0, cfg: r.cfg, ms: r.ms, mb: r.mb || 2.5, g: r.g, shop: r.shop, notify: r.notify, loc: r.now, cap: r.cap, stars: r.stars, ach: r.ach || [], defs: r.ach_defs || [], uid: r.uid, ref_n: r.ref_n || 0, ref_cap: r.ref_cap || 20, ref_got: r.ref_got || 0, ref_share: r.ref_share || 0.1, ref_com: r.ref_com || 0.1, wallet_addr: r.wallet_addr || null, offers: r.offers || [], offersEnd: r.offers_end || 0, goldEnd: r.gold ? r.now + r.gold.left : 0, deal: r.deal || null, q: r.q || { list: [], all: false } };
+      bank: r.bank || 0, bank3: r.bank3 || 0, use: r.use || 3600, boostEnd: r.boost ? r.now + r.boost.left : 0, startEnd: r.start ? r.now + r.start.left : 0, adEnd: r.adx ? r.now + r.adx.left : 0, bmult: r.boost ? r.boost.mult : 1, vipEnd: r.vip ? r.now + r.vip.left : 0, cfg: r.cfg, ms: r.ms, mb: r.mb || 2.5, g: r.g, shop: r.shop, notify: r.notify, loc: r.now, cap: r.cap, stars: r.stars, ach: r.ach || [], defs: r.ach_defs || [], uid: r.uid, ref_n: r.ref_n || 0, ref_cap: r.ref_cap || 20, ref_got: r.ref_got || 0, ref_share: r.ref_share || 0.1, ref_com: r.ref_com || 0.1, wallet_addr: r.wallet_addr || null, offers: r.offers || [], offersEnd: r.offers_end || 0, goldEnd: r.gold ? r.now + r.gold.left : 0, deal: r.deal || null, q: r.q || { list: [], all: false } };
     if (!keep) build();
     else { buildSky(); }
   }
@@ -651,7 +651,7 @@ function paint() {
   $('mult').textContent = 'x' + fmt(curM(n));
   const bo = $('boost');
   if (S.boostEnd > n || S.startEnd > n || S.adEnd > n) { bo.hidden = false; const l = Math.max(S.boostEnd, S.startEnd, S.adEnd || 0) - n; bo.textContent = '⚡ x' + Math.max(startM(n), S.boostEnd > n ? S.bmult : 0, S.adEnd > n ? 2 : 0) + ' ' + (l > 3600 ? Math.floor(l / 3600) + 'h' + String(Math.floor(l % 3600 / 60)).padStart(2, '0') : Math.floor(l / 60) + ':' + String(Math.floor(l % 60)).padStart(2, '0')); } else bo.hidden = true;
-  const bc = $('bankc'); if (S.bank > 0) { bc.hidden = false; bc.textContent = '🎁 x2 : ' + fmtT(S.bank) + ' · ' + L.use; } else bc.hidden = true;
+  const bc = $('bankc'); if (S.bank > 0) { bc.hidden = false; bc.textContent = '🎁 x2 : ' + fmtT(S.bank) + ' · ' + L.use + ' ' + fmtT(Math.min(S.bank, S.use)); } else bc.hidden = true;
   const bc3 = $('bankc3'); if (S.bank3 > 0) { bc3.hidden = false; bc3.textContent = '🎁 x3 : ' + fmtT(S.bank3) + ' · ' + L.use; } else bc3.hidden = true;
   const bk = (adDone() ? 1 : 0) + '' + (S.welcome ? 1 : 0) + '' + (S.dailyOk ? 1 : 0) + S.streak + (S.mg[0] ? 1 : 0) + (S.deal ? S.deal.sku : '-');
   if (bk !== lastBanner) { lastBanner = bk; buildBanners(); }
@@ -1089,7 +1089,7 @@ async function boot() {
     if (r.gap > 120 && r.away > 0.05) {
       const bk = S.bank > 0;
       const x2 = r.away_ok && S.shop && S.shop.away2;
-      modal(`<div style="font-size:54px">🏠</div><h3>${L.away}</h3><div class="big">+$${fm(r.away)}</div><p>${L.awayS}</p><button class="btn" id="okAway">${L.collect}</button>` + (bk ? `<button class="btn" id="bkAway" style="margin-top:8px">${L.bankT} · ${fmtT(S.bank)}</button>` : '') + (x2 ? `<button class="btn gold" id="x2Away" style="margin-top:8px">⭐ ${S.shop.away2} · ${L.awayX} (+$${fm(r.away)})</button>` : ''));
+      modal(`<div style="font-size:54px">🏠</div><h3>${L.away}</h3><div class="big">+$${fm(r.away)}</div><p>${L.awayS}</p><button class="btn" id="okAway">${L.collect}</button>` + (bk ? `<button class="btn" id="bkAway" style="margin-top:8px">${L.bankT} · ${fmtT(Math.min(S.bank, S.use))}</button>` : '') + (x2 ? `<button class="btn gold" id="x2Away" style="margin-top:8px">⭐ ${S.shop.away2} · ${L.awayX} (+$${fm(r.away)})</button>` : ''));
       if (bk) $('bkAway').onclick = () => { closeModal(); useBonus(2); };
       $('okAway').onclick = () => { hap('ok'); closeModal(); };
       if (x2) $('x2Away').onclick = () => { closeModal(); buy('away2'); };
