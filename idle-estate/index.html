@@ -242,7 +242,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1610';
+const BUILD = '20261119-1640';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -296,7 +296,7 @@ const L = {
   questsT:'Daily quests', questsS:'Complete quests and claim rewards. They reset every day.', chestT:'Daily chest', chestS:'Finish all 3 quests: x2 income for 1h',
   q:{tap:['👆','Collect rent {n} times'],buy:['🏗️','Buy {n} property levels'],vip:['🤑','Catch {n} golden tenants'],mgr:['👔','Hire a manager'],daily:['🔥','Claim the daily bonus']},
   shareTxt:'Build your real estate empire with me on Idle Estate!', snd:'Sounds', evInfo:'Golden hour every day: all your rent pays x2 for 60 minutes. Starts at', rewarded:'Reward claimed!', done:'Done',
-  ach:{mgr1:['👔','First manager','Hire your first manager'],s10:['🛋️','Studio level 10','Reach level 10 on the Studio'],s25:['🛋️','Studio level 25','Reach level 25 on the Studio'],s50:['🛋️','Studio level 50','Reach level 50 on the Studio'],mgr5:['🧑‍💼','5 managers','Hire 5 managers'],mgr10:['🏅','Full staff','Hire a manager on every property'],pr1:['🏙️','Skyline','Own the 15th property'],pr5:['💎','Tycoon','Own the 20th property'],st7:['🔥','7 day streak','Claim the daily bonus 7 days in a row'],fr1:['👥','First friend','Invite a friend'],fr5:['🎉','Popular','Invite 5 friends']}
+  ach:{mgr1:['👔','First manager','Hire your first manager'],s10:['🛋️','Studio level 10','Reach level 10 on the Studio'],s25:['🛋️','Studio level 25','Reach level 25 on the Studio'],s50:['🛋️','Studio level 50','Reach level 50 on the Studio'],mgr5:['🧑‍💼','5 managers','Hire 5 managers'],mgr10:['🏅','Full staff','Hire a manager on every property'],pr1:['🏙️','Skyline','Own the 15th property'],pr5:['💎','Tycoon','Own the 20th property'],st7:['🔥','7 day streak','Claim the daily bonus 7 days in a row'],fr1:['👥','First friend','Invite a friend'],fr5:['🎉','Popular','Invite 5 friends'],pg1:['🔄','New start','Do your first prestige'],pg3:['🔄','Veteran','Do 3 prestiges'],pg5:['⭐','Serial owner','Do 5 prestiges'],pg10:['👑','Legend','Do 10 prestiges'],p30:['🏙️','Skyline','Own the 30th property'],p45:['🌆','Metropolis','Own the 45th property']}
  },
  fr: {
   lockT:'Achète d\'abord le bien précédent',
@@ -330,7 +330,7 @@ const L = {
   questsT:'Quêtes du jour', questsS:'Termine les quêtes et récupère les récompenses. Elles se renouvellent chaque jour.', chestT:'Coffre du jour', chestS:'Finis les 3 quêtes : revenus x2 pendant 1h',
   q:{tap:['👆','Encaisse {n} loyers'],buy:['🏗️','Achète {n} niveaux de biens'],vip:['🤑','Attrape {n} locataires dorés'],mgr:['👔','Embauche un gestionnaire'],daily:['🔥','Récupère le bonus du jour']},
   shareTxt:'Construis ton empire immobilier avec moi sur Idle Estate !', snd:'Sons', evInfo:'Heure dorée chaque jour : tous tes loyers sont doublés pendant 60 minutes. Début à', rewarded:'Récompense récupérée !', done:'Fait',
-  ach:{mgr1:['👔','Premier gestionnaire','Embauche ton premier gestionnaire'],s10:['🛋️','Studio niveau 10','Monte le Studio au niveau 10'],s25:['🛋️','Studio niveau 25','Monte le Studio au niveau 25'],s50:['🛋️','Studio niveau 50','Monte le Studio au niveau 50'],mgr5:['🧑‍💼','5 gestionnaires','Embauche 5 gestionnaires'],mgr10:['🏅','Équipe au complet','Un gestionnaire sur chaque bien'],pr1:['🏙️','Skyline','Possède le 15e bien'],pr5:['💎','Magnat','Possède le 20e bien'],st7:['🔥','7 jours d\'affilée','Récupère le bonus du jour 7 jours de suite'],fr1:['👥','Premier ami','Invite un ami'],fr5:['🎉','Populaire','Invite 5 amis']}
+  ach:{mgr1:['👔','Premier gestionnaire','Embauche ton premier gestionnaire'],s10:['🛋️','Studio niveau 10','Monte le Studio au niveau 10'],s25:['🛋️','Studio niveau 25','Monte le Studio au niveau 25'],s50:['🛋️','Studio niveau 50','Monte le Studio au niveau 50'],mgr5:['🧑‍💼','5 gestionnaires','Embauche 5 gestionnaires'],mgr10:['🏅','Équipe au complet','Un gestionnaire sur chaque bien'],pr1:['🏙️','Skyline','Possède le 15e bien'],pr5:['💎','Magnat','Possède le 20e bien'],st7:['🔥','7 jours d\'affilée','Récupère le bonus du jour 7 jours de suite'],fr1:['👥','Premier ami','Invite un ami'],fr5:['🎉','Populaire','Invite 5 amis'],pg1:['🔄','Nouveau départ','Fais ton premier prestige'],pg3:['🔄','Vétéran','Fais 3 prestiges'],pg5:['⭐','Habitué','Fais 5 prestiges'],pg10:['👑','Légende','Fais 10 prestiges'],p30:['🏙️','Skyline','Possède le 30e bien'],p45:['🌆','Métropole','Possède le 45e bien']}
  }
 }[lang];
 
@@ -1027,7 +1027,7 @@ $('evc').addEventListener('click', () => {
 const achProg = id => {
   const m = /^p(\d)$/.exec(id); if (m) return [S.lv[+m[1]] > 0 ? 1 : 0, 1];
   const mgc = S.mg.filter(Boolean).length;
-  return ({ mgr1: [mgc, 1], s10: [S.lv[0], 10], s25: [S.lv[0], 25], s50: [S.lv[0], 50], mgr5: [mgc, 5], mgr10: [mgc, 10], pr1: [S.lv[14] > 0 ? 1 : 0, 1], pr5: [S.lv[19] > 0 ? 1 : 0, 1], st7: [S.streak, 7], fr1: [S.ref_n, 1], fr5: [S.ref_n, 5] })[id] || [0, 1];
+  return ({ mgr1: [mgc, 1], s10: [S.lv[0], 10], s25: [S.lv[0], 25], s50: [S.lv[0], 50], mgr5: [mgc, 5], mgr10: [mgc, 10], pr1: [S.lv[14] > 0 ? 1 : 0, 1], pr5: [S.lv[19] > 0 ? 1 : 0, 1], st7: [S.streak, 7], fr1: [S.ref_n, 1], fr5: [S.ref_n, 5], pg1: [S.pr, 1], pg3: [S.pr, 3], pg5: [S.pr, 5], pg10: [S.pr, 10], p30: [S.lv[29] > 0 ? 1 : 0, 1], p45: [S.lv[44] > 0 ? 1 : 0, 1] })[id] || [0, 1];
 };
 const achInfo = id => { const m = /^p(\d)$/.exec(id); return m ? ['🏆', L.names[+m[1]], L.achOwn] : (L.ach[id] || ['🏆', id, '']); };
 const qReady = () => (S && S.q ? S.q.list.filter(x => !x.done && x.v >= x.t).length + (!S.q.all && S.q.list.length && S.q.list.every(x => x.done) ? 1 : 0) : 0);
