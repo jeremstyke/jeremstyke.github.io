@@ -249,7 +249,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-2100';
+const BUILD = '20261119-1905';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -670,7 +670,7 @@ function paint() {
   const bo = $('boost');
   slotTick(n);
   if (S.boostEnd > n || S.startEnd > n || S.adEnd > n) { bo.hidden = false; const q = slotSt(n); const l = (q.ms === q.sb ? S.startEnd : q.ma === q.sb ? S.adEnd : S.boostEnd) - n; bo.textContent = (q.run ? '⚡ x' : '⏸ x') + q.sb + ' ' + (l > 3600 ? Math.floor(l / 3600) + 'h' + String(Math.floor(l % 3600 / 60)).padStart(2, '0') : Math.floor(l / 60) + ':' + String(Math.floor(l % 60)).padStart(2, '0')); } else bo.hidden = true;
-  const rf = $('refc'); if (S.ref_pend > 0) { rf.hidden = false; rf.textContent = '👥 +$' + fm(S.ref_pend); } else rf.hidden = true;
+  const rf = $('refc'); if (S.ref_pend > 0 || S.ref_n > 0) { rf.hidden = false; rf.textContent = '👥 +$' + fm(S.ref_pend || 0); rf.style.opacity = S.ref_pend > 0 ? 1 : .55; } else rf.hidden = true;
   const bc = $('bankc'); if (S.bank > 0) { bc.hidden = false; bc.textContent = '🎁 x2 : ' + fmtT(S.bank) + ' · ' + L.use + ' ' + fmtT(Math.min(S.bank, S.use)); } else bc.hidden = true;
   paintAd();
   const pc = $('prc'); if (S.prgain > 0 || S.pr > 0) { pc.hidden = false; pc.textContent = (S.prgain > 0 ? '🔄 ' + L.prChip + ' +' + Math.round(S.prgain * 100) + '%' : '⭐ +' + Math.round(S.pbonus * 100) + '%'); } else pc.hidden = true;
