@@ -242,7 +242,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1342';
+const BUILD = '20261119-1348';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -466,7 +466,7 @@ function build() {
   let h = '';
   for (let i = 0; i < NB; i++) {
     h += `<div class="card" data-i="${i}" hidden>
-      <div class="ic${i >= 10 ? ' bare' : ''}">${i >= 10 ? '' : `<svg viewBox="0 0 40 48">${bld(i)}</svg>`}<em></em></div>
+      <div class="ic bare"><em></em></div>
       <div class="mid"><div class="nm"><span class="n">${L.names[i]}</span><s></s></div><div class="bar"><i></i><b></b></div></div>
       <div class="act"><button class="buy"></button><button class="mgr"></button></div></div>`;
   }
@@ -893,7 +893,7 @@ function renderMk() {
       if (m.out && m.st === 'open') { st = m.k === 'rent' ? MKT.forRent : MKT.forSale; btn = `<button class="btn" data-cancel="${m.id}" style="background:linear-gradient(#ff9a9a,#e03c3c)">${MKT.cancel}</button>`; }
       else if (m.out) st = MKT.rentedOut + ' ' + left;
       else st = MKT.rentedIn + ' ' + left;
-      h += `<div class="row"><div class="e">${EM[m.i] || '🏠'}</div><div class="tx"><b>${m.n} x ${esc(nameOf(m.i))}</b><span>${st}</span>${m.pc != null ? `<div class="rw2">$${fm(m.pc)}</div>` : ''}</div>${btn}</div>`;
+      h += `<div class="row"><div class="tx"><b>${m.n} x ${esc(nameOf(m.i))}</b><span>${st}</span>${m.pc != null ? `<div class="rw2">$${fm(m.pc)}</div>` : ''}</div>${btn}</div>`;
     }
   }
   h += `<div class="mkh">${MKT.list}</div>`;
@@ -901,7 +901,7 @@ function renderMk() {
   if (!rows.length) h += `<p class="lead" style="margin-top:8px">${MKT.empty}</p>`;
   for (const l of rows) {
     const rent = l.k === 'rent';
-    h += `<div class="row${rent ? '' : ' hot'}"><div class="e">${EM[l.i] || '🏠'}</div><div class="tx"><b>${l.n} x ${esc(nameOf(l.i))}</b><span>${rent ? MKT.forRent : MKT.forSale} · ${MKT.by} ${esc(l.s)}</span>${l.pc != null ? `<div class="rw2">$${fm(l.pc)}</div>` : ''}</div>${l.pc != null ? `<button class="btn" data-buy="${l.id}">${rent ? MKT.rentB : MKT.buyB}</button>` : ''}</div>`;
+    h += `<div class="row${rent ? '' : ' hot'}"><div class="tx"><b>${l.n} x ${esc(nameOf(l.i))}</b><span>${rent ? MKT.forRent : MKT.forSale} · ${MKT.by} ${esc(l.s)}</span>${l.pc != null ? `<div class="rw2">$${fm(l.pc)}</div>` : ''}</div>${l.pc != null ? `<button class="btn" data-buy="${l.id}">${rent ? MKT.rentB : MKT.buyB}</button>` : ''}</div>`;
   }
   p.innerHTML = h;
   p.onclick = e => {
@@ -914,7 +914,7 @@ function openMkBuy(id) {
   const l = mkD && mkD.list.find(x => x.id === id); if (!l) return;
   if (S.cash < l.pc) { hap('light'); toast(MKT.err.poor + ' ($' + fm(l.pc - S.cash) + ' ?)'); return; }
   const rent = l.k === 'rent';
-  modal(`<h3>${EM[l.i] || '🏠'} ${l.n} x ${esc(nameOf(l.i))}</h3><p>${(rent ? MKT.confirmRent : MKT.confirmBuy).replace('{n}', l.n).replace('{p}', esc(nameOf(l.i))).replace('{c}', '$' + fm(l.pc))}</p><button class="btn" id="mkYes">${MKT.yes}</button>`);
+  modal(`<h3>${l.n} x ${esc(nameOf(l.i))}</h3><p>${(rent ? MKT.confirmRent : MKT.confirmBuy).replace('{n}', l.n).replace('{p}', esc(nameOf(l.i))).replace('{c}', '$' + fm(l.pc))}</p><button class="btn" id="mkYes">${MKT.yes}</button>`);
   $('mkYes').onclick = () => { $('mkYes').disabled = true; call({ act: 'mk_buy', id }).then(r => { if (r && r.mk && r.mk.ok) snd('win'); mkDone(r, rent ? MKT.okRent : MKT.okBuy); }); };
 }
 function openMkNew() {
@@ -928,7 +928,7 @@ function openMkNew() {
     modal(`<h3>🏪 ${MKT.create}</h3>
       <div class="seg"><button data-k="sell"${kind === 'sell' ? ' class="on"' : ''}>${MKT.sell}</button><button data-k="rent"${kind === 'rent' ? ' class="on"' : ''}>${MKT.rent}</button></div>
       <p style="margin:4px 0 6px">${kind === 'sell' ? MKT.sellInfo : MKT.rentInfo}</p>
-      <div class="fld"><label>${MKT.prop}</label><select id="mkI">${idx.map(k => `<option value="${k}"${k === i ? ' selected' : ''}>${EM[k] || ''} ${esc(nameOf(k))} (${free[k]} ${MKT.lv})</option>`).join('')}</select></div>
+      <div class="fld"><label>${MKT.prop}</label><select id="mkI">${idx.map(k => `<option value="${k}"${k === i ? ' selected' : ''}>${esc(nameOf(k))} (${free[k]} ${MKT.lv})</option>`).join('')}</select></div>
       <div class="fld"><label>${MKT.qty}</label><input id="mkN" type="number" inputmode="numeric" min="1" max="${mx}" value="${n}"></div>
       <div class="fld"><label>${MKT.price}</label><input id="mkP" type="text" inputmode="decimal" autocomplete="off"><small id="mkR"></small></div>
       <button class="btn" id="mkGo">${MKT.submit}</button>`);
@@ -983,7 +983,7 @@ function goalPaint(n) {
   if (g.dataset.k !== key) {
     g.dataset.k = key; g.dataset.g = best.k; g.dataset.i = best.i === undefined ? '' : best.i;
     g.classList.toggle('rdy', ready);
-    const icon = best.k === 'buy' ? EM[best.i] : best.k === 'mgr' ? '👔' : '🏛️';
+    const icon = best.k === 'buy' ? '🏗️' : best.k === 'mgr' ? '👔' : '🏛️';
     const label = best.k === 'buy' ? L.goalBuy + ' ' + L.names[best.i] : best.k === 'mgr' ? L.goalMgr + ' ' + L.names[best.i] : L.goalPrest;
     g.innerHTML = `<div class="gi">${icon}</div><div class="gm"><div class="gt"></div><div class="gb"><i></i></div></div>`;
     g.querySelector('.gt').textContent = label + (ready ? '  👆' : '');
@@ -1010,7 +1010,7 @@ const achProg = id => {
   const mgc = S.mg.filter(Boolean).length;
   return ({ mgr1: [mgc, 1], s10: [S.lv[0], 10], s25: [S.lv[0], 25], s50: [S.lv[0], 50], mgr5: [mgc, 5], mgr10: [mgc, 10], pr1: [S.lv[14] > 0 ? 1 : 0, 1], pr5: [S.lv[19] > 0 ? 1 : 0, 1], st7: [S.streak, 7], fr1: [S.ref_n, 1], fr5: [S.ref_n, 5] })[id] || [0, 1];
 };
-const achInfo = id => { const m = /^p(\d)$/.exec(id); return m ? [EM[+m[1]], L.names[+m[1]], L.achOwn] : (L.ach[id] || ['🏆', id, '']); };
+const achInfo = id => { const m = /^p(\d)$/.exec(id); return m ? ['🏆', L.names[+m[1]], L.achOwn] : (L.ach[id] || ['🏆', id, '']); };
 const qReady = () => (S && S.q ? S.q.list.filter(x => !x.done && x.v >= x.t).length + (!S.q.all && S.q.list.length && S.q.list.every(x => x.done) ? 1 : 0) : 0);
 const readyIds = () => (S && S.defs ? S.defs.filter(d => !S.ach.includes(d.id) && achProg(d.id)[0] >= achProg(d.id)[1]).map(d => d.id) : []);
 const minTxt = m => '🪙 ~$' + fm(Math.max(rateNow() * 60 * m, 0.001 * m)) + ' (' + m + ' ' + L.minInc + ')';
