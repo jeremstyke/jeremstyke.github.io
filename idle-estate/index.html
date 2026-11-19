@@ -249,7 +249,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1915';
+const BUILD = '20261119-1930';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -899,13 +899,13 @@ function initTon() {
 const MKT = {
   en: { vsM: '{p} % vs market price', vsF: 'Market price', fAll: 'All properties', sRent: 'Most profitable', sPrice: 'Lowest price', payback: 'Pays back in {t}', profit: '24h profit', wait: 'Selling opens in {t}', tab: 'Market', t: 'Market', s: 'Sell levels of your properties for good, or rent them out for 24h. Paid in game cash. 10% of each price is burned.', create: 'List something', mine: 'My listings', list: 'For sale and for rent', empty: 'Nothing listed right now. Be the first!',
     sell: 'Sell', rent: 'Rent 24h', buyB: 'Buy', rentB: 'Rent', cancel: 'Cancel', lv: 'levels', sellInfo: 'You sell these levels for good. Your first level always stays with you.', rentInfo: 'The levels come back to you after 24h. The tenant earns their rent meanwhile.',
-    starP: 'Price in Stars (optional)', starH: 'Paid in Stars: the seller gets {s} % in Stars (locked 30 days), the rest feeds the game and the weekly prize pool.', starB: 'Pay in Stars', starE: 'Payment could not start',
+    starP: 'Price in Stars (optional)', starH: 'Paid in Stars: the seller gets {s} % in Stars (locked 30 days), the rest feeds the game and the weekly prize pool.', starMax: 'Max {b} Stars for these levels.', starB: 'Pay in Stars', starE: 'Payment could not start',
     prop: 'Property', qty: 'Levels', price: 'Price in $', range: 'Between {a} and {b}', max: 'Maximum {b}', submit: 'Publish', nofree: 'You need at least 2 levels of a property to list some', forSale: 'For sale', forRent: 'For rent 24h', rentedOut: 'Rented out, back in', rentedIn: 'Rented, ends in', by: 'by',
     confirmBuy: 'Buy {n} x {p} for {c}?', confirmRent: 'Rent {n} x {p} for 24h for {c}?', yes: 'Confirm', okBuy: 'Bought!', okRent: 'Rented for 24h!', okNew: 'Listed!', okCancel: 'Listing cancelled',
     err: { young: 'Selling opens after your first hour', gone: 'Already gone', own: 'This is your own listing', poor: 'Not enough cash', locked: 'Unlock this property first', reserved: 'Someone is paying for it', free: 'Not enough free levels', max: 'You can have 3 listings at most', price: 'Enter a price', bad: 'Invalid', busy: 'Try again', off: 'Market closed for now', server: 'Error, try again', nostars: 'Not available' } },
   fr: { vsM: '{p} % vs prix du marché', vsF: 'Prix du marché', fAll: 'Tous les biens', sRent: 'Les plus rentables', sPrice: 'Prix croissant', payback: 'Rentabilisé en {t}', profit: 'Bénéfice sur 24h', wait: 'Vente ouverte dans {t}', tab: 'Marché', t: 'Marché', s: 'Vends des niveaux de tes biens pour de bon, ou loue-les 24h. Payé en cash du jeu. 10 % de chaque prix part en fumée.', create: 'Mettre en vente', mine: 'Mes annonces', list: 'À vendre et à louer', empty: 'Rien en vente pour l\'instant. Sois le premier !',
     sell: 'Vendre', rent: 'Louer 24h', buyB: 'Acheter', rentB: 'Louer', cancel: 'Annuler', lv: 'niveaux', sellInfo: 'Tu vends ces niveaux pour de bon. Ton premier niveau reste toujours à toi.', rentInfo: 'Les niveaux te reviennent après 24h. Le locataire encaisse les loyers entre-temps.',
-    starP: 'Prix en Étoiles (facultatif)', starH: 'Payé en Étoiles : le vendeur reçoit {s} % en Étoiles (bloqué 30 jours), le reste finance le jeu et la cagnotte de la semaine.', starB: 'Payer en Étoiles', starE: 'Le paiement n\'a pas pu démarrer',
+    starP: 'Prix en Étoiles (facultatif)', starH: 'Payé en Étoiles : le vendeur reçoit {s} % en Étoiles (bloqué 30 jours), le reste finance le jeu et la cagnotte de la semaine.', starMax: 'Maximum {b} Étoiles pour ces niveaux.', starB: 'Payer en Étoiles', starE: 'Le paiement n\'a pas pu démarrer',
     prop: 'Bien', qty: 'Niveaux', price: 'Prix en $', range: 'Entre {a} et {b}', max: 'Maximum {b}', submit: 'Publier', nofree: 'Il te faut au moins 2 niveaux d\'un bien pour en proposer', forSale: 'À vendre', forRent: 'À louer 24h', rentedOut: 'Loué, retour dans', rentedIn: 'Loué, fin dans', by: 'par',
     confirmBuy: 'Acheter {n} x {p} pour {c} ?', confirmRent: 'Louer {n} x {p} 24h pour {c} ?', yes: 'Confirmer', okBuy: 'Acheté !', okRent: 'Loué pour 24h !', okNew: 'Annonce publiée !', okCancel: 'Annonce annulée',
     err: { young: 'La vente s\'ouvre après ta première heure', gone: 'Déjà parti', own: 'C\'est ton annonce', poor: 'Pas assez de cash', locked: 'Débloque d\'abord ce bien', reserved: 'Quelqu\'un est en train de payer', free: 'Pas assez de niveaux libres', max: '3 annonces maximum', price: 'Entre un prix', bad: 'Invalide', busy: 'Réessaie', off: 'Marché fermé pour le moment', server: 'Erreur, réessaie', nostars: 'Indisponible' } },
@@ -929,6 +929,7 @@ function mkDone(r, ok) {
 }
 let mkYoung = false, mkF = -1, mkS = 'rent';
 // income per second (steady, managed, no temporary boost) gained by adding n levels of property i
+function starCap(i, n) { const d = mkD || {}; return Math.min(d.maxs || 10000, Math.max(d.mins || 5, Math.ceil(refV(i, n) * (d.srate || 2.5)))); }
 function mkVal(i, n) { return S.cfg[i].c * Math.pow(S.g, S.lv[i] || 0) * (Math.pow(S.g, n) - 1) / (S.g - 1); }
 function mkGain(i, n) { const c = S.cfg[i], b = S.incm * (S.perm2 ? 2 : 1), f = l => c.r * l * mult(l) * b / c.t; return f(S.lv[i] + n) - f(S.lv[i]); }
 function renderMk() {
@@ -1016,13 +1017,14 @@ function openMkNew() {
       <p style="margin:4px 0 6px">${kind === 'sell' ? MKT.sellInfo : MKT.rentInfo}</p>
       <div class="fld"><label>${MKT.prop}</label><select id="mkI">${idx.map(k => `<option value="${k}"${k === i ? ' selected' : ''}>${esc(nameOf(k))} (${free[k]} ${MKT.lv})</option>`).join('')}</select></div>
       <div class="fld"><label>${MKT.qty}</label><input id="mkN" type="number" inputmode="numeric" min="1" max="${mx}" value="${n}"></div>
-      <div class="fld"><label>${MKT.price}</label><input id="mkP" type="text" inputmode="decimal" autocomplete="off"><small id="mkR"></small></div>${mkD && mkD.stars ? `<div class="fld"><label>${MKT.starP}</label><input id="mkSt" type="number" inputmode="numeric" min="${mkD.mins}" max="${mkD.maxs}" placeholder="${mkD.mins} - ${mkD.maxs}"><small>${MKT.starH.replace('{s}', Math.round((1 - mkD.fee_s) * 100))}</small></div>` : ''}
+      <div class="fld"><label>${MKT.price}</label><input id="mkP" type="text" inputmode="decimal" autocomplete="off"><small id="mkR"></small></div>${mkD && mkD.stars ? `<div class="fld"><label>${MKT.starP}</label><input id="mkSt" type="number" inputmode="numeric" min="${mkD.mins}" max="${starCap(i, n)}" placeholder="${mkD.mins} - ${starCap(i, n)}"><small id="mkSR"></small><small>${MKT.starH.replace('{s}', Math.round((1 - mkD.fee_s) * 100))}</small></div>` : ''}
       <button class="btn" id="mkGo">${MKT.submit}</button>`);
     const refresh = () => {
       const ref = refV(i, n), bd = (mkD && mkD.bounds) || { loS: 0, loR: 0, hiS: 10, hiR: 2 }, lo = (kind === 'sell' ? bd.loS : bd.loR) * ref, hi = (kind === 'sell' ? bd.hiS : bd.hiR) * ref;
       $('mkR').textContent = lo > 0 ? MKT.range.replace('{a}', '$' + fmt(lo * K)).replace('{b}', '$' + fmt(hi * K)) : MKT.max.replace('{b}', '$' + fmt(hi * K));
       return { ref, def: (kind === 'sell' ? 1 : 0.08) * ref };
     };
+    if ($('mkSR')) $('mkSR').textContent = MKT.starMax.replace('{b}', starCap(i, n));
     let r0 = refresh(); $('mkP').value = fmt(r0.def * K);
     $('sheet').querySelectorAll('[data-k]').forEach(bt => bt.onclick = () => { kind = bt.dataset.k; draw(); });
     $('mkI').onchange = e => { i = Number(e.target.value); n = 1; draw(); };
@@ -1030,6 +1032,7 @@ function openMkNew() {
     $('mkGo').onclick = () => {
       n = Math.max(1, Math.min(free[i], Math.floor(Number($('mkN').value) || 1)));
       const pc = parseUsd($('mkP').value) || 0, stE = $('mkSt'), ps = stE ? Math.floor(Number(stE.value) || 0) : 0;
+      if (ps > starCap(i, n)) { toast(MKT.starMax.replace('{b}', starCap(i, n))); return; }
       if (!(pc > 0) && !(ps > 0)) { toast(MKT.err.price); return; }
       const body = { act: 'mk_new', kind, i, n }; if (pc > 0) body.pc = pc; if (ps > 0) body.ps = ps;
       $('mkGo').disabled = true; call(body).then(r => mkDone(r, MKT.okNew));
