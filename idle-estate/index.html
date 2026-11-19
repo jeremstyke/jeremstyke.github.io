@@ -249,7 +249,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1940';
+const BUILD = '20261119-1955';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -282,7 +282,7 @@ const L = {
   hint:'Tap a property to collect its rent. Hire a manager 👔 and it pays you automatically, even when you are away.', estate:'Estate', shop:'Shop', prest:'Empire', top:'Top',
   buy:'Buy', lvl:'Lv', manager:'Manager', auto:'Auto', tapStart:'👆 Tap', ms:'x',
   welcomeT:'Welcome pack', welcomeS:'2h of rent now + x2 income for 24h', claim:'Claim', daily:'Daily bonus', dailyS:'Day {n} of 7: you get {m} min of your income ({x}). Come back every day, day 7 adds x2 for 1h',
-  away:'While you were away', adErr:'Ad unavailable, try again', adT:'Free reward', adS:'At least {x} in cash every 2 hours, more as your income grows.', adB:'Open', adWait:'Stay on the page for 10 seconds...', adOk:'Reward received!', boostActive:'A boost is already running. Boosts do not stack.', adCool:'Come back in a bit', awayX:'Double it', awayXd:'Doubled!', awayS:'Your tenants kept paying rent.', collect:'Collect', great:'Great!',
+  away:'While you were away', adErr:'Ad unavailable, try again', adT:'Free reward', adS:'At least {x} in cash every 2 hours, more as your income grows.', adB:'Open', adWait:'Stay on the page for 10 seconds...', adNext:'Next reward in {t}', adOk:'Reward received!', boostActive:'A boost is already running. Boosts do not stack.', adCool:'Come back in a bit', awayX:'Double it', awayXd:'Doubled!', awayS:'Your tenants kept paying rent.', collect:'Collect', great:'Great!',
   vipMsg:'Golden tenant! +', per:'/s', max:'MAX',
   shopT:'Shop', shopS:'Everything is paid in Telegram Stars. 30% of all Stars spent goes to the weekly top 10 (this share may go up or down).',
   items:{welcome:['🎁','Welcome pack','2h of rent instantly + x2 income for 24h. One time only.'],b2:['⚡','x2 Income, 4h','Double all your rent for 4 hours.'],b3:['🚀','x3 Income, 24h','Triple all your rent for a full day.'],perm2:['👑','Partner: x2 forever','Permanent x2 on everything, forever.'],vault:['🏦','Vault: 24h offline','Tenants pay up to 24h while you are away (instead of 3h).'],skip1:['⏩','Time skip 1h','Instantly get 1 hour of rent.'],skip8:['⏭️','Time skip 8h','Instantly get 8 hours of rent.']},
@@ -316,7 +316,7 @@ const L = {
   hint:'Touche un bien pour encaisser son loyer. Embauche un gestionnaire 👔 et il te paie tout seul, même quand tu es absent.', estate:'Biens', shop:'Boutique', prest:'Empire', top:'Top',
   buy:'Acheter', lvl:'Niv', manager:'Gestionnaire', auto:'Auto', tapStart:'👆 Touche', ms:'x',
   welcomeT:'Pack de bienvenue', welcomeS:'2h de loyers tout de suite + x2 revenus pendant 24h', claim:'Récupérer', daily:'Bonus du jour', dailyS:'Jour {n} sur 7 : tu gagnes {m} min de tes revenus ({x}). Reviens chaque jour, le jour 7 ajoute x2 pendant 1 h',
-  away:'Pendant ton absence', adErr:'Pub indisponible, réessaie', adT:'Récompense gratuite', adS:'Au moins {x} de cash toutes les 2 heures, plus quand tes revenus montent.', adB:'Ouvrir', adWait:'Reste 10 secondes sur la page...', adOk:'Récompense reçue !', boostActive:'Un boost est déjà en cours. Les boosts ne se cumulent pas.', adCool:'Reviens un peu plus tard', awayX:'Doubler', awayXd:'Doublé !', awayS:'Tes locataires ont continué à payer.', collect:'Encaisser', great:'Super !',
+  away:'Pendant ton absence', adErr:'Pub indisponible, réessaie', adT:'Récompense gratuite', adS:'Au moins {x} de cash toutes les 2 heures, plus quand tes revenus montent.', adB:'Ouvrir', adWait:'Reste 10 secondes sur la page...', adNext:'Prochaine récompense dans {t}', adOk:'Récompense reçue !', boostActive:'Un boost est déjà en cours. Les boosts ne se cumulent pas.', adCool:'Reviens un peu plus tard', awayX:'Doubler', awayXd:'Doublé !', awayS:'Tes locataires ont continué à payer.', collect:'Encaisser', great:'Super !',
   vipMsg:'Locataire doré ! +', per:'/s', max:'MAX',
   shopT:'Boutique', shopS:'Tout se paie en Étoiles Telegram. 30 % des Étoiles dépensées vont au top 10 de la semaine (ce pourcentage peut augmenter ou baisser).',
   items:{welcome:['🎁','Pack de bienvenue','2h de loyers tout de suite + x2 revenus pendant 24h. Une seule fois.'],b2:['⚡','Revenus x2, 4h','Double tous tes loyers pendant 4 heures.'],b3:['🚀','Revenus x3, 24h','Triple tous tes loyers pendant une journée.'],perm2:['👑','Associé : x2 à vie','x2 permanent sur tout, pour toujours.'],vault:['🏦','Coffre : 24h hors ligne','Les locataires paient jusqu\'à 24h pendant ton absence (au lieu de 3h).'],skip1:['⏩','Saut de 1h','Reçois tout de suite 1 heure de loyers.'],skip8:['⏭️','Saut de 8h','Reçois tout de suite 8 heures de loyers.']},
@@ -801,9 +801,17 @@ const adUnmark = () => { if (S) S.adAt = 0; };
 let adShown = null;
 function paintAd() {
   const el = $('adbar'); if (!el || !S) return;
-  const on = !adDone() && !adBusy;
-  if (on === adShown) return; adShown = on;
-  if (on) { el.innerHTML = `<div class="tx"><b>📺 ${L.adT}</b><span>${L.adS.replace('{x}', '$' + fm(2.5))}</span></div><button class="btn" id="adBtn">${L.adB}</button>`; $('adBtn').onclick = watchAd; el.hidden = false; } else el.hidden = true;
+  const ready = !adDone();
+  const key = ready ? 'r' : 'c';
+  if (adShown !== key) {
+    adShown = key;
+    el.innerHTML = `<div class="tx"><b>📺 ${L.adT}</b><span id="adTx"></span></div><button class="btn" id="adBtn"></button>`;
+    $('adBtn').onclick = watchAd; el.hidden = false;
+  }
+  const left = Math.max(0, (S.adAt || 0) - snow());
+  const t = $('adTx'), bt = $('adBtn');
+  if (t) t.textContent = ready ? L.adS.replace('{x}', '$' + fm(2.5)) : L.adNext.replace('{t}', fmtT(left));
+  if (bt) { bt.textContent = ready ? L.adB : '⏳'; bt.disabled = !ready; bt.style.opacity = ready ? 1 : .5; }
 }
 let adBusy = false;
 async function watchAd() {
@@ -899,13 +907,13 @@ function initTon() {
 const MKT = {
   en: { vsM: '{p} % vs market price', vsF: 'Market price', fAll: 'All properties', sRent: 'Most profitable', sPrice: 'Lowest price', payback: 'Pays back in {t}', profit: '24h profit', wait: 'Selling opens in {t}', tab: 'Market', t: 'Market', s: 'Sell levels of your properties for good, or rent them out for 24h. Paid in game cash. 10% of each price is burned.', create: 'List something', mine: 'My listings', list: 'For sale and for rent', empty: 'Nothing listed right now. Be the first!',
     sell: 'Sell', rent: 'Rent 24h', buyB: 'Buy', rentB: 'Rent', cancel: 'Cancel', lv: 'levels', sellInfo: 'You sell these levels for good. Your first level always stays with you.', rentInfo: 'The levels come back to you after 24h. The tenant earns their rent meanwhile.',
-    starP: 'Price in Stars (optional)', starH: 'You receive {s} % of the price in Stars, locked for 30 days.', starGet: 'You will receive {x} Stars (locked 30 days).', starMax: 'Max {b} Stars for these levels.', starB: 'Pay in Stars', starE: 'Payment could not start',
+    starP: 'Price in Stars (optional)', starH: 'You receive {s} % of the price in Stars, locked for 30 days.', starStep: 'The Stars price must be a multiple of 10.', starGet: 'You will receive {x} Stars (locked 30 days).', starMax: 'In steps of 10, max {b} Stars for these levels.', starB: 'Pay in Stars', starE: 'Payment could not start',
     prop: 'Property', qty: 'Levels', price: 'Price in $', range: 'Between {a} and {b}', max: 'Maximum {b}', submit: 'Publish', nofree: 'You need at least 2 levels of a property to list some', forSale: 'For sale', forRent: 'For rent 24h', rentedOut: 'Rented out, back in', rentedIn: 'Rented, ends in', by: 'by',
     confirmBuy: 'Buy {n} x {p} for {c}?', confirmRent: 'Rent {n} x {p} for 24h for {c}?', yes: 'Confirm', okBuy: 'Bought!', okRent: 'Rented for 24h!', okNew: 'Listed!', okCancel: 'Listing cancelled',
     err: { young: 'Selling opens after your first hour', gone: 'Already gone', own: 'This is your own listing', poor: 'Not enough cash', locked: 'Unlock this property first', reserved: 'Someone is paying for it', free: 'Not enough free levels', max: 'You can have 3 listings at most', price: 'Enter a price', bad: 'Invalid', busy: 'Try again', off: 'Market closed for now', server: 'Error, try again', nostars: 'Not available' } },
   fr: { vsM: '{p} % vs prix du marché', vsF: 'Prix du marché', fAll: 'Tous les biens', sRent: 'Les plus rentables', sPrice: 'Prix croissant', payback: 'Rentabilisé en {t}', profit: 'Bénéfice sur 24h', wait: 'Vente ouverte dans {t}', tab: 'Marché', t: 'Marché', s: 'Vends des niveaux de tes biens pour de bon, ou loue-les 24h. Payé en cash du jeu. 10 % de chaque prix part en fumée.', create: 'Mettre en vente', mine: 'Mes annonces', list: 'À vendre et à louer', empty: 'Rien en vente pour l\'instant. Sois le premier !',
     sell: 'Vendre', rent: 'Louer 24h', buyB: 'Acheter', rentB: 'Louer', cancel: 'Annuler', lv: 'niveaux', sellInfo: 'Tu vends ces niveaux pour de bon. Ton premier niveau reste toujours à toi.', rentInfo: 'Les niveaux te reviennent après 24h. Le locataire encaisse les loyers entre-temps.',
-    starP: 'Prix en Étoiles (facultatif)', starH: 'Tu reçois {s} % du prix en Étoiles, bloquées 30 jours.', starGet: 'Tu recevras {x} Étoiles (bloquées 30 jours).', starMax: 'Maximum {b} Étoiles pour ces niveaux.', starB: 'Payer en Étoiles', starE: 'Le paiement n\'a pas pu démarrer',
+    starP: 'Prix en Étoiles (facultatif)', starH: 'Tu reçois {s} % du prix en Étoiles, bloquées 30 jours.', starStep: 'Le prix en Étoiles doit être un multiple de 10.', starGet: 'Tu recevras {x} Étoiles (bloquées 30 jours).', starMax: 'Par tranches de 10, maximum {b} Étoiles pour ces niveaux.', starB: 'Payer en Étoiles', starE: 'Le paiement n\'a pas pu démarrer',
     prop: 'Bien', qty: 'Niveaux', price: 'Prix en $', range: 'Entre {a} et {b}', max: 'Maximum {b}', submit: 'Publier', nofree: 'Il te faut au moins 2 niveaux d\'un bien pour en proposer', forSale: 'À vendre', forRent: 'À louer 24h', rentedOut: 'Loué, retour dans', rentedIn: 'Loué, fin dans', by: 'par',
     confirmBuy: 'Acheter {n} x {p} pour {c} ?', confirmRent: 'Louer {n} x {p} 24h pour {c} ?', yes: 'Confirmer', okBuy: 'Acheté !', okRent: 'Loué pour 24h !', okNew: 'Annonce publiée !', okCancel: 'Annonce annulée',
     err: { young: 'La vente s\'ouvre après ta première heure', gone: 'Déjà parti', own: 'C\'est ton annonce', poor: 'Pas assez de cash', locked: 'Débloque d\'abord ce bien', reserved: 'Quelqu\'un est en train de payer', free: 'Pas assez de niveaux libres', max: '3 annonces maximum', price: 'Entre un prix', bad: 'Invalide', busy: 'Réessaie', off: 'Marché fermé pour le moment', server: 'Erreur, réessaie', nostars: 'Indisponible' } },
@@ -929,7 +937,7 @@ function mkDone(r, ok) {
 }
 let mkYoung = false, mkF = -1, mkS = 'rent';
 // income per second (steady, managed, no temporary boost) gained by adding n levels of property i
-function starCap(i, n) { const d = mkD || {}; return Math.min(d.maxs || 10000, Math.max(d.mins || 5, Math.ceil(refV(i, n) * (d.srate || 2.5)))); }
+function starCap(i, n) { const d = mkD || {}; const mn = d.mins || 10; return Math.min(d.maxs || 10000, Math.max(mn, Math.floor(refV(i, n) * (d.srate || 2.5) / 10) * 10)); }
 function mkVal(i, n) { return S.cfg[i].c * Math.pow(S.g, S.lv[i] || 0) * (Math.pow(S.g, n) - 1) / (S.g - 1); }
 function mkGain(i, n) { const c = S.cfg[i], b = S.incm * (S.perm2 ? 2 : 1), f = l => c.r * l * mult(l) * b / c.t; return f(S.lv[i] + n) - f(S.lv[i]); }
 function renderMk() {
@@ -1017,7 +1025,7 @@ function openMkNew() {
       <p style="margin:4px 0 6px">${kind === 'sell' ? MKT.sellInfo : MKT.rentInfo}</p>
       <div class="fld"><label>${MKT.prop}</label><select id="mkI">${idx.map(k => `<option value="${k}"${k === i ? ' selected' : ''}>${esc(nameOf(k))} (${free[k]} ${MKT.lv})</option>`).join('')}</select></div>
       <div class="fld"><label>${MKT.qty}</label><input id="mkN" type="number" inputmode="numeric" min="1" max="${mx}" value="${n}"></div>
-      <div class="fld"><label>${MKT.price}</label><input id="mkP" type="text" inputmode="decimal" autocomplete="off"><small id="mkR"></small></div>${mkD && mkD.stars ? `<div class="fld"><label>${MKT.starP}</label><input id="mkSt" type="number" inputmode="numeric" min="${mkD.mins}" max="${starCap(i, n)}" placeholder="${mkD.mins} - ${starCap(i, n)}"><small id="mkSR"></small><small id="mkSG" style="font-weight:600"></small><small>${MKT.starH.replace('{s}', Math.round((1 - mkD.fee_s) * 100))}</small></div>` : ''}
+      <div class="fld"><label>${MKT.price}</label><input id="mkP" type="text" inputmode="decimal" autocomplete="off"><small id="mkR"></small></div>${mkD && mkD.stars ? `<div class="fld"><label>${MKT.starP}</label><input id="mkSt" type="number" inputmode="numeric" min="${mkD.mins}" step="10" max="${starCap(i, n)}" placeholder="${mkD.mins} - ${starCap(i, n)}"><small id="mkSR"></small><small id="mkSG" style="font-weight:600"></small><small>${MKT.starH.replace('{s}', Math.round((1 - mkD.fee_s) * 100))}</small></div>` : ''}
       <button class="btn" id="mkGo">${MKT.submit}</button>`);
     const refresh = () => {
       const ref = refV(i, n), bd = (mkD && mkD.bounds) || { loS: 0, loR: 0, hiS: 10, hiR: 2 }, lo = (kind === 'sell' ? bd.loS : bd.loR) * ref, hi = (kind === 'sell' ? bd.hiS : bd.hiR) * ref;
@@ -1025,7 +1033,7 @@ function openMkNew() {
       return { ref, def: (kind === 'sell' ? 1 : 0.08) * ref };
     };
     if ($('mkSR')) $('mkSR').textContent = MKT.starMax.replace('{b}', starCap(i, n));
-    const stI = $('mkSt'); if (stI) stI.oninput = () => { const v = Math.floor(Number(stI.value) || 0); $('mkSG').textContent = v > 0 ? MKT.starGet.replace('{x}', Math.floor(v * (1 - mkD.fee_s))) : ''; };
+    const stI = $('mkSt'); if (stI) stI.oninput = () => { const v = Math.floor(Number(stI.value) || 0); $('mkSG').textContent = v > 0 ? MKT.starGet.replace('{x}', (v - Math.round(v * mkD.fee_s))) : ''; };
     let r0 = refresh(); $('mkP').value = fmt(r0.def * K);
     $('sheet').querySelectorAll('[data-k]').forEach(bt => bt.onclick = () => { kind = bt.dataset.k; draw(); });
     $('mkI').onchange = e => { i = Number(e.target.value); n = 1; draw(); };
@@ -1033,6 +1041,7 @@ function openMkNew() {
     $('mkGo').onclick = () => {
       n = Math.max(1, Math.min(free[i], Math.floor(Number($('mkN').value) || 1)));
       const pc = parseUsd($('mkP').value) || 0, stE = $('mkSt'), ps = stE ? Math.floor(Number(stE.value) || 0) : 0;
+      if (ps > 0 && ps % 10) { toast(MKT.starStep); return; }
       if (ps > starCap(i, n)) { toast(MKT.starMax.replace('{b}', starCap(i, n))); return; }
       if (!(pc > 0) && !(ps > 0)) { toast(MKT.err.price); return; }
       const body = { act: 'mk_new', kind, i, n }; if (pc > 0) body.pc = pc; if (ps > 0) body.ps = ps;
