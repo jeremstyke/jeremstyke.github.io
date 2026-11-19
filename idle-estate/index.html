@@ -105,6 +105,11 @@ button{font-family:inherit;font-weight:800;color:inherit;border:0;cursor:pointer
 .mgr.on{background:#d6f3dc;color:#1c7a2b;box-shadow:none;border-color:#1c7a2b;text-shadow:none;cursor:default;transform:none}
 
 /* bottom nav */
+.adbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 74px);z-index:29;width:calc(100% - 24px);max-width:496px;display:flex;align-items:center;gap:10px;border-radius:20px;padding:8px 10px 8px 14px;background:linear-gradient(#ffe38a,#ffc12e);border:3px solid var(--navy);box-shadow:0 4px 0 var(--navy)}
+.adbar[hidden]{display:none}
+.adbar .tx{flex:1;min-width:0}
+.adbar b{display:block;font-family:var(--disp);font-size:16px;font-weight:600}
+.adbar span{font-size:12px;color:#7a4d00;font-weight:700;display:block}
 .nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--navy);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px);border-radius:24px 24px 0 0;box-shadow:0 -4px 0 rgba(18,48,94,.2)}
 .nav div{display:flex;width:100%;max-width:520px;padding:6px 8px}
 .nav button{flex:1;background:none;padding:5px 0 6px;font-size:12px;font-family:var(--disp);font-weight:600;color:#9db8de;display:flex;flex-direction:column;align-items:center;gap:0;position:relative;border-radius:16px}
@@ -234,6 +239,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 
 <div class="vip" id="vip"><svg viewBox="0 0 84 84"><circle id="vipc" cx="42" cy="42" r="38" stroke-dasharray="238.8" stroke-dashoffset="0"/></svg>🤑<small id="vipt"></small></div>
 
+<div class="adbar" id="adbar" hidden></div>
 <div class="nav"><div id="nav"></div></div>
 <div class="md" id="md"><div class="sheet" id="sheet"></div></div>
 <div class="toast" id="toast"></div>
@@ -242,7 +248,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1740';
+const BUILD = '20261119-1800';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -275,7 +281,7 @@ const L = {
   hint:'Tap a property to collect its rent. Hire a manager 👔 and it pays you automatically, even when you are away.', estate:'Estate', shop:'Shop', prest:'Empire', top:'Top',
   buy:'Buy', lvl:'Lv', manager:'Manager', auto:'Auto', tapStart:'👆 Tap', ms:'x',
   welcomeT:'Welcome pack', welcomeS:'2h of rent now + x2 income for 24h', claim:'Claim', daily:'Daily bonus', dailyS:'Day {n} of 7: you get {m} min of your income ({x}). Come back every day, day 7 adds x2 for 1h',
-  away:'While you were away', adT:'Daily reward', adS:'+15 min of x2 income in your reserve. Once a day.', adB:'Open', adWait:'Stay on the page for 10 seconds...', adOk:'+15 min of x2 in your reserve!', boostActive:'A boost is already running. Boosts do not stack.', adCool:'Come back tomorrow', awayX:'Double it', awayXd:'Doubled!', awayS:'Your tenants kept paying rent.', collect:'Collect', great:'Great!',
+  away:'While you were away', adT:'Free reward', adS:'+{x} cash every 2 hours.', adB:'Open', adWait:'Stay on the page for 10 seconds...', adOk:'Reward received!', boostActive:'A boost is already running. Boosts do not stack.', adCool:'Come back in a bit', awayX:'Double it', awayXd:'Doubled!', awayS:'Your tenants kept paying rent.', collect:'Collect', great:'Great!',
   vipMsg:'Golden tenant! +', per:'/s', max:'MAX',
   shopT:'Shop', shopS:'Everything is paid in Telegram Stars. 30% of all Stars spent goes to the weekly top 10 (this share may go up or down).',
   items:{welcome:['🎁','Welcome pack','2h of rent instantly + x2 income for 24h. One time only.'],b2:['⚡','x2 Income, 4h','Double all your rent for 4 hours.'],b3:['🚀','x3 Income, 24h','Triple all your rent for a full day.'],perm2:['👑','Partner: x2 forever','Permanent x2 on everything, forever.'],vault:['🏦','Vault: 24h offline','Tenants pay up to 24h while you are away (instead of 3h).'],skip1:['⏩','Time skip 1h','Instantly get 1 hour of rent.'],skip8:['⏭️','Time skip 8h','Instantly get 8 hours of rent.']},
@@ -309,7 +315,7 @@ const L = {
   hint:'Touche un bien pour encaisser son loyer. Embauche un gestionnaire 👔 et il te paie tout seul, même quand tu es absent.', estate:'Biens', shop:'Boutique', prest:'Empire', top:'Top',
   buy:'Acheter', lvl:'Niv', manager:'Gestionnaire', auto:'Auto', tapStart:'👆 Touche', ms:'x',
   welcomeT:'Pack de bienvenue', welcomeS:'2h de loyers tout de suite + x2 revenus pendant 24h', claim:'Récupérer', daily:'Bonus du jour', dailyS:'Jour {n} sur 7 : tu gagnes {m} min de tes revenus ({x}). Reviens chaque jour, le jour 7 ajoute x2 pendant 1 h',
-  away:'Pendant ton absence', adT:'Récompense du jour', adS:'+15 min de revenus x2 dans ta réserve. Une fois par jour.', adB:'Ouvrir', adWait:'Reste 10 secondes sur la page...', adOk:'+15 min de x2 dans ta réserve !', boostActive:'Un boost est déjà en cours. Les boosts ne se cumulent pas.', adCool:'Reviens demain', awayX:'Doubler', awayXd:'Doublé !', awayS:'Tes locataires ont continué à payer.', collect:'Encaisser', great:'Super !',
+  away:'Pendant ton absence', adT:'Récompense gratuite', adS:'+{x} de cash toutes les 2 heures.', adB:'Ouvrir', adWait:'Reste 10 secondes sur la page...', adOk:'Récompense reçue !', boostActive:'Un boost est déjà en cours. Les boosts ne se cumulent pas.', adCool:'Reviens un peu plus tard', awayX:'Doubler', awayXd:'Doublé !', awayS:'Tes locataires ont continué à payer.', collect:'Encaisser', great:'Super !',
   vipMsg:'Locataire doré ! +', per:'/s', max:'MAX',
   shopT:'Boutique', shopS:'Tout se paie en Étoiles Telegram. 30 % des Étoiles dépensées vont au top 10 de la semaine (ce pourcentage peut augmenter ou baisser).',
   items:{welcome:['🎁','Pack de bienvenue','2h de loyers tout de suite + x2 revenus pendant 24h. Une seule fois.'],b2:['⚡','Revenus x2, 4h','Double tous tes loyers pendant 4 heures.'],b3:['🚀','Revenus x3, 24h','Triple tous tes loyers pendant une journée.'],perm2:['👑','Associé : x2 à vie','x2 permanent sur tout, pour toujours.'],vault:['🏦','Coffre : 24h hors ligne','Les locataires paient jusqu\'à 24h pendant ton absence (au lieu de 3h).'],skip1:['⏩','Saut de 1h','Reçois tout de suite 1 heure de loyers.'],skip8:['⏭️','Saut de 8h','Reçois tout de suite 8 heures de loyers.']},
@@ -422,7 +428,7 @@ function apply(r, full) {
     off = r.now - Date.now() / 1000;
     const keep = S;
     S = { cash: r.cash, life_all: r.life_all, lv: r.lv.slice(), mg: r.mg.slice(), ts: r.ts.slice(), inv: r.inv, prest: r.prest, unl: r.unl || 10, ib: r.ib || 0.05, incm: r.incm || 1, ibt: r.ibt || {}, ibv: r.ibv || {}, perm2: r.perm2, vault: r.vault, welcome: r.welcome, streak: r.streak, dailyOk: r.daily_ok,
-      pr: r.pr || 0, pbonus: r.pbonus || 0, prn: r.prn || 0, prmin: r.prmin || 15, prgain: r.prgain || 0, bank: r.bank || 0, bank3: r.bank3 || 0, use: r.use || 3600, boostEnd: r.boost ? r.now + r.boost.left : 0, startEnd: r.start ? r.now + r.start.left : 0, adEnd: r.adx ? r.now + r.adx.left : 0, bmult: r.boost ? r.boost.mult : 1, vipEnd: r.vip ? r.now + r.vip.left : 0, cfg: r.cfg, ms: r.ms, mb: r.mb || 2.5, g: r.g, shop: r.shop, notify: r.notify, loc: r.now, cap: r.cap, stars: r.stars, ach: r.ach || [], defs: r.ach_defs || [], uid: r.uid, ref_n: r.ref_n || 0, ref_cap: r.ref_cap || 20, ref_got: r.ref_got || 0, ref_share: r.ref_share || 0.1, ref_com: r.ref_com || 0.1, wallet_addr: r.wallet_addr || null, offers: r.offers || [], offersEnd: r.offers_end || 0, goldEnd: r.gold ? r.now + r.gold.left : 0, deal: r.deal || null, q: r.q || { list: [], all: false } };
+      adAt: r.now + (r.adn || 0), pr: r.pr || 0, pbonus: r.pbonus || 0, prn: r.prn || 0, prmin: r.prmin || 15, prgain: r.prgain || 0, bank: r.bank || 0, bank3: r.bank3 || 0, use: r.use || 3600, boostEnd: r.boost ? r.now + r.boost.left : 0, startEnd: r.start ? r.now + r.start.left : 0, adEnd: r.adx ? r.now + r.adx.left : 0, bmult: r.boost ? r.boost.mult : 1, vipEnd: r.vip ? r.now + r.vip.left : 0, cfg: r.cfg, ms: r.ms, mb: r.mb || 2.5, g: r.g, shop: r.shop, notify: r.notify, loc: r.now, cap: r.cap, stars: r.stars, ach: r.ach || [], defs: r.ach_defs || [], uid: r.uid, ref_n: r.ref_n || 0, ref_cap: r.ref_cap || 20, ref_got: r.ref_got || 0, ref_share: r.ref_share || 0.1, ref_com: r.ref_com || 0.1, wallet_addr: r.wallet_addr || null, offers: r.offers || [], offersEnd: r.offers_end || 0, goldEnd: r.gold ? r.now + r.gold.left : 0, deal: r.deal || null, q: r.q || { list: [], all: false } };
     if (!keep) build();
     else { buildSky(); }
   }
@@ -641,7 +647,6 @@ function buildBanners() {
     const next = Math.min(S.streak + 1, 7);
     h += `<div class="bn"><div class="tx"><b>🔥 ${L.daily}</b><span>${L.dailyS.replace('{n}', () => next).replace('{m}', () => 10 * next).replace('{x}', () => '$' + fm(Math.max(rateNow() * 600 * next, 0.01 * next)))}</span><div class="dots">${[1, 2, 3, 4, 5, 6, 7].map(d => `<i class="${d < next ? 'on' : ''}"></i>`).join('')}</div></div><button class="btn" id="dailyBtn">${L.claim}</button></div>`;
   }
-  if (!adDone()) h += `<div class="bn" style="background:#fff3d6"><div class="tx"><b>📺 ${L.adT}</b><span>${L.adS}</span></div><button class="btn" id="adBtn">${L.adB}</button></div>`;
   if (promo === 'd' && S.deal && L.items[S.deal.sku]) { const it = L.items[S.deal.sku]; h += `<div class="bn gold"><div class="tx"><b>🔥 ${L.dealT}: ${it[1]}</b><span>${L.dealS}</span></div><button class="btn gold" data-sku="${S.deal.sku}" data-deal="1">⭐ ${S.deal.price}</button></div>`; }
   b.innerHTML = h;
   b.onclick = e => {
@@ -661,6 +666,7 @@ function paint() {
   const bo = $('boost');
   if (S.boostEnd > n || S.startEnd > n || S.adEnd > n) { bo.hidden = false; const l = Math.max(S.boostEnd, S.startEnd, S.adEnd || 0) - n; bo.textContent = '⚡ x' + Math.max(startM(n), S.boostEnd > n ? S.bmult : 0, S.adEnd > n ? 2 : 0) + ' ' + (l > 3600 ? Math.floor(l / 3600) + 'h' + String(Math.floor(l % 3600 / 60)).padStart(2, '0') : Math.floor(l / 60) + ':' + String(Math.floor(l % 60)).padStart(2, '0')); } else bo.hidden = true;
   const bc = $('bankc'); if (S.bank > 0) { bc.hidden = false; bc.textContent = '🎁 x2 : ' + fmtT(S.bank) + ' · ' + L.use + ' ' + fmtT(Math.min(S.bank, S.use)); } else bc.hidden = true;
+  paintAd();
   const pc = $('prc'); if (S.prgain > 0 || S.pr > 0) { pc.hidden = false; pc.textContent = (S.prgain > 0 ? '🔄 ' + L.prChip + ' +' + Math.round(S.prgain * 100) + '%' : '⭐ +' + Math.round(S.pbonus * 100) + '%'); } else pc.hidden = true;
   const bc3 = $('bankc3'); if (S.bank3 > 0) { bc3.hidden = false; bc3.textContent = '🎁 x3 : ' + fmtT(S.bank3) + ' · ' + L.use; } else bc3.hidden = true;
   const bk = (adDone() ? 1 : 0) + '' + (S.welcome ? 1 : 0) + '' + (S.dailyOk ? 1 : 0) + S.streak + (S.mg[0] ? 1 : 0) + (S.deal ? S.deal.sku : '-');
@@ -758,7 +764,6 @@ function renderShop() {
   const gOn = S.goldEnd > snow();
   h += `<div class="row hot" style="border-color:#a15e00"><div class="e">👑</div><div class="tx"><b>${L.goldT}</b><span>${L.goldS}</span>${gOn ? `<div class="rw">✅ ${L.goldOn} · ${Math.ceil((S.goldEnd - snow()) / 86400)} ${L.goldLeft}</div>` : ''}</div><button class="star" data-sku="gold">⭐ ${S.shop.gold}<small style="display:block;font-size:11px;font-weight:700">${L.perMonth}</small></button></div>`;
   if (S.deal && L.items[S.deal.sku]) { const it = L.items[S.deal.sku]; h += `<div class="row hot"><div class="e">🔥</div><div class="tx"><b>${L.dealT}: ${it[1]}</b><span>${L.dealS}. ${it[2]}</span><div class="rw">${S.deal.price} ⭐ <s style="opacity:.7">${S.shop[S.deal.sku]}</s></div></div><button class="star" data-sku="${S.deal.sku}" data-deal="1">⭐ ${S.deal.price}</button></div>`; }
-  if (!adDone()) h += `<div class="row"><div class="e">📺</div><div class="tx"><b>${L.adT}</b><span>${L.adS}</span></div><button class="star" id="adb">${L.adB}</button></div>`;
   for (const k of order) {
     const it = L.items[k];
     const own = (k === 'perm2' && S.perm2) || (k === 'vault' && S.vault);
@@ -784,9 +789,16 @@ async function getInvoice(sku, deal) {
   }
   return null;
 }
-const adDone = () => { try { return Date.now() - Number(localStorage.getItem('ie_ad3') || 0) < 86400000; } catch (e) { return false; } };
-const adMark = () => { try { localStorage.setItem('ie_ad3', String(Date.now())); } catch (e) {} };
-const adUnmark = () => { try { localStorage.removeItem('ie_ad3'); } catch (e) {} };
+const adDone = () => !S || snow() < (S.adAt || 0);
+const adMark = () => { if (S) S.adAt = snow() + 7200; };
+const adUnmark = () => { if (S) S.adAt = 0; };
+let adShown = null;
+function paintAd() {
+  const el = $('adbar'); if (!el || !S) return;
+  const on = !adDone() && !adBusy;
+  if (on === adShown) return; adShown = on;
+  if (on) { el.innerHTML = `<div class="tx"><b>📺 ${L.adT}</b><span>${L.adS.replace('{x}', '$' + fm(2.5))}</span></div><button class="btn" id="adBtn">${L.adB}</button>`; $('adBtn').onclick = watchAd; el.hidden = false; } else el.hidden = true;
+}
 let adBusy = false;
 async function watchAd() {
   if (adBusy || adDone()) { toast(L.adCool); return; }
