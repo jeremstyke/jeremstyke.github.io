@@ -476,10 +476,13 @@ function shareInvite() {
   try { if (tgw && tgw.openTelegramLink) tgw.openTelegramLink(u); else window.open(u, '_blank'); } catch (x) { window.open(u, '_blank'); }
 }
 function tutoStart() {
-  try { if (localStorage.getItem('ie_tuto3')) return; } catch (e) {}
+  // shown once per account start: a fresh account (reset or new) has its own marker, the x10 first hour end time
+  const fresh = S.prest === 0 && S.life_all < 1 && S.startEnd > snow() + 3300;
+  const mark = fresh ? 'f' + Math.round(S.startEnd / 60) : '1';
+  try { if (localStorage.getItem('ie_tuto4') === mark) return; } catch (e) {}
   const T = TUTO[lang] || TUTO.en; let k = 0;
   const el = document.createElement('div'); el.className = 'tuto'; document.body.appendChild(el);
-  const done = () => { try { localStorage.setItem('ie_tuto3', '1'); } catch (e) {} el.remove(); };
+  const done = () => { try { localStorage.setItem('ie_tuto4', mark); } catch (e) {} el.remove(); };
   const draw = () => {
     const [e, t, d] = T[k]; const last = k === T.length - 1;
     el.innerHTML = `<div class="tc"><div class="te">${e}</div><h3>${t}</h3><p>${d}</p><div class="td">${T.map((_, i) => `<i class="${i === k ? 'on' : ''}"></i>`).join('')}</div><div class="tb">${last ? '' : `<button class="sk" id="tSkip">${lang === 'fr' ? 'Passer' : 'Skip'}</button>`}<button class="btn" id="tNext">${last ? (lang === 'fr' ? 'C\'est parti !' : 'Let\'s go!') : (lang === 'fr' ? 'Suivant' : 'Next')}</button></div></div>`;
