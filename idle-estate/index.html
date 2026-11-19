@@ -377,7 +377,7 @@ function apply(r, full) {
     off = r.now - Date.now() / 1000;
     const keep = S;
     S = { cash: r.cash, life_all: r.life_all, lv: r.lv.slice(), mg: r.mg.slice(), ts: r.ts.slice(), inv: r.inv, prest: r.prest, unl: r.unl || 10, ib: r.ib || 0.02, perm2: r.perm2, vault: r.vault, welcome: r.welcome, streak: r.streak, dailyOk: r.daily_ok,
-      bank: r.bank || 0, boostEnd: r.boost ? r.now + r.boost.left : 0, startEnd: r.start ? r.now + r.start.left : 0, bmult: r.boost ? r.boost.mult : 1, vipEnd: r.vip ? r.now + r.vip.left : 0, cfg: r.cfg, ms: r.ms, mb: r.mb || 2.5, g: r.g, shop: r.shop, notify: r.notify, loc: r.now, cap: r.cap, stars: r.stars, ach: r.ach || [], defs: r.ach_defs || [], uid: r.uid, ref_n: r.ref_n || 0, ref_cap: r.ref_cap || 20, ref_got: r.ref_got || 0, ref_share: r.ref_share || 0.1, ref_com: r.ref_com || 0.1, wallet_addr: r.wallet_addr || null, offers: r.offers || [], offersEnd: r.offers_end || 0, goldEnd: r.gold ? r.now + r.gold.left : 0, deal: r.deal || null, q: r.q || { list: [], all: false } };
+      bank: r.bank || 0, boostEnd: r.boost ? r.now + r.boost.left : 0, startEnd: r.start ? r.now + r.start.left : 0, adEnd: r.adx ? r.now + r.adx.left : 0, bmult: r.boost ? r.boost.mult : 1, vipEnd: r.vip ? r.now + r.vip.left : 0, cfg: r.cfg, ms: r.ms, mb: r.mb || 2.5, g: r.g, shop: r.shop, notify: r.notify, loc: r.now, cap: r.cap, stars: r.stars, ach: r.ach || [], defs: r.ach_defs || [], uid: r.uid, ref_n: r.ref_n || 0, ref_cap: r.ref_cap || 20, ref_got: r.ref_got || 0, ref_share: r.ref_share || 0.1, ref_com: r.ref_com || 0.1, wallet_addr: r.wallet_addr || null, offers: r.offers || [], offersEnd: r.offers_end || 0, goldEnd: r.gold ? r.now + r.gold.left : 0, deal: r.deal || null, q: r.q || { list: [], all: false } };
     if (!keep) build();
     else { buildSky(); }
   }
@@ -387,7 +387,7 @@ function apply(r, full) {
 // ---------- economy (mirror of the server)
 const mult = l => { let m = 1; for (const k of S.ms) if (l >= k) m *= S.mb; return m; };
 const evOn = n => { const s = n % 86400; return s >= 61200 && s < 64800; };
-const curM = n => (1 + S.ib * S.inv) * (((S.startEnd > n ? 10 : 0) + (S.boostEnd > n ? S.bmult : 0)) || 1) * (S.perm2 ? 2 : 1) * (evOn(n) ? 2 : 1) * (S.goldEnd > n ? 1.5 : 1);
+const curM = n => (1 + S.ib * S.inv) * (((S.startEnd > n ? 10 : 0) + (S.boostEnd > n ? S.bmult : 0) + (S.adEnd > n ? 2 : 0)) || 1) * (S.perm2 ? 2 : 1) * (evOn(n) ? 2 : 1) * (S.goldEnd > n ? 1.5 : 1);
 const inc = (i, n) => S.lv[i] > 0 ? S.cfg[i].r * S.lv[i] * mult(S.lv[i]) * curM(n) : 0;
 const gainInv = () => Math.max(0, Math.floor(10 * Math.sqrt(S.life_all / 2500)) - Math.floor(S.inv));
 function rateNow() { const n = snow(); let g = 0; for (let i = 0; i < 10; i++) { const e = inc(i, n) / S.cfg[i].t; g += S.mg[i] ? e : e * 0.5; } return g; }
@@ -600,7 +600,7 @@ function paint() {
   $('rate').textContent = '$' + fm(rateNow()) + L.per;
   $('mult').textContent = 'x' + fmt(curM(n));
   const bo = $('boost');
-  if (S.boostEnd > n || S.startEnd > n) { bo.hidden = false; const l = Math.max(S.boostEnd, S.startEnd) - n; bo.textContent = '⚡ x' + ((S.startEnd > n ? 10 : 0) + (S.boostEnd > n ? S.bmult : 0)) + ' ' + (l > 3600 ? Math.floor(l / 3600) + 'h' + String(Math.floor(l % 3600 / 60)).padStart(2, '0') : Math.floor(l / 60) + ':' + String(Math.floor(l % 60)).padStart(2, '0')); } else bo.hidden = true;
+  if (S.boostEnd > n || S.startEnd > n || S.adEnd > n) { bo.hidden = false; const l = Math.max(S.boostEnd, S.startEnd, S.adEnd || 0) - n; bo.textContent = '⚡ x' + ((S.startEnd > n ? 10 : 0) + (S.boostEnd > n ? S.bmult : 0) + (S.adEnd > n ? 2 : 0)) + ' ' + (l > 3600 ? Math.floor(l / 3600) + 'h' + String(Math.floor(l % 3600 / 60)).padStart(2, '0') : Math.floor(l / 60) + ':' + String(Math.floor(l % 60)).padStart(2, '0')); } else bo.hidden = true;
   const bc = $('bankc'); if (S.bank > 0) { bc.hidden = false; bc.textContent = L.bankT + ' +' + Math.round(S.bank / 60) + ' min x2'; } else bc.hidden = true;
   const bk = (adDone() ? 1 : 0) + '' + (S.welcome ? 1 : 0) + '' + (S.dailyOk ? 1 : 0) + S.streak + (S.mg[0] ? 1 : 0) + (S.deal ? S.deal.sku : '-');
   if (bk !== lastBanner) { lastBanner = bk; buildBanners(); }
