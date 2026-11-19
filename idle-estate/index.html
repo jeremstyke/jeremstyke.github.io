@@ -249,7 +249,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-2000';
+const BUILD = '20261119-2030';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -402,11 +402,21 @@ try { mode = JSON.parse(localStorage.getItem('ie_mode') || '1'); } catch (e) {}
 const snow = () => Date.now() / 1000 + off;
 const initData = tgw ? tgw.initData : '';
 
+
+// the prestige offer pops up by itself at every multiple of prmin properties (15, 30, 45...); a refusal is remembered, so it asks again at the next multiple
+function prAskGet() { try { return Number(localStorage.getItem('ie_prask') || 0) || 0; } catch (e) { return 0; } }
+function prAskSet(v) { try { localStorage.setItem('ie_prask', String(v)); } catch (e) {} }
+function prAsk() {
+  if (!S || !S.prmin || S.prn < S.prmin) return;
+  const br = Math.floor(S.prn / S.prmin);
+  if (br <= prAskGet() || $('md').classList.contains('on')) return;
+  prAskSet(br); prModal();
+}
 function prModal() {
   const x = Math.round(S.prgain * 100), t = Math.round(S.pbonus * 100);
   modal(`<h3>${L.prT}</h3><p>${L.prP.replace('{n}', S.prn)}</p><p>${L.prLose}</p><p>${L.prKeep}</p><p><b>${L.prGain.replace('{x}', x)}</b>${t ? ' ' + L.prTot.replace('{t}', t) : ''}</p><button class="btn" id="prgo">${L.prGo}</button> <button class="btn" id="prno" style="opacity:.7">${L.prNo}</button>`);
   $('prno').onclick = closeModal;
-  $('prgo').onclick = () => { hap('ok'); call({ act: 'prestige' }).then(r => { if (r && r.err === 'pr_market') toast(L.prMk); else if (r && r.err) toast(L.prLow); else if (r && r.pr_done) { closeModal(); toast(L.prDone); } }); };
+  $('prgo').onclick = () => { hap('ok'); call({ act: 'prestige' }).then(r => { if (r && r.err === 'pr_market') toast(L.prMk); else if (r && r.err) toast(L.prLow); else if (r && r.pr_done) { prAskSet(0); closeModal(); toast(L.prDone); } }); };
 }
 function useBonus(m) {
   hap('ok');
@@ -510,6 +520,7 @@ function build() {
   setInterval(() => { if (!document.hidden) call({ act: 'state' }); }, 7000);
   document.addEventListener('visibilitychange', () => { if (!document.hidden) call({ act: 'state' }); });
   setInterval(vipLoop, 250);
+  setInterval(prAsk, 2000);
   setInterval(() => { if (tab === 'mk' && mkD && (mkYoung || (S.startEnd || 0) > snow())) renderMk(); }, 5000);
   setInterval(() => { if (tab === 'top') loadTop(); }, 15000);
 }
