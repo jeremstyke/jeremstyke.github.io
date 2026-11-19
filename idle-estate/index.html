@@ -242,7 +242,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1322';
+const BUILD = '20261119-1325';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -254,7 +254,7 @@ if (tgw) { try { tgw.ready(); tgw.expand(); tgw.setHeaderColor('#ffffff'); tgw.s
 const lang = ((tgw && tgw.initDataUnsafe && tgw.initDataUnsafe.user && tgw.initDataUnsafe.user.language_code) || navigator.language || 'en').toLowerCase().startsWith('fr') ? 'fr' : 'en';
 
 // maintenance screen: set MAINT to true while the game is being reworked, false when it is done (bump BUILD so Telegram reloads the page)
-const MAINT = false;
+const MAINT = true;
 if (MAINT) {
   const T = lang === 'fr' ? ['Travaux en cours', "Idle Estate est en maintenance : je refais l'économie du jeu. Reviens dans un moment.", 'Réessayer'] : ['Under construction', 'Idle Estate is in maintenance while the economy is being reworked. Come back soon.', 'Try again'];
   const m = document.getElementById('maint'); document.getElementById('maintT').textContent = T[0]; document.getElementById('maintS').textContent = T[1];
