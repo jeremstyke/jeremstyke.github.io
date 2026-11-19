@@ -257,7 +257,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 <div class="wrap">
   <div class="hd">
     <div class="cash"><svg class="coin" viewBox="0 0 32 32" width="34" height="34"><circle cx="16" cy="16" r="15" fill="#f4b73c" stroke="#d9951a" stroke-width="2"/><circle cx="16" cy="16" r="11" fill="none" stroke="#fff3c4" stroke-width="1.5"/><path d="M16 8.5 L8.5 15 H11 V23 H21 V15 H23.5 Z" fill="#fff3c4"/></svg><span id="cash">0</span></div>
-    <div class="sub"><span class="chip" id="rate">$0/s</span><span class="chip" id="mult">x1</span><span class="chip gold" id="boost" hidden></span><span class="chip gold" id="refc" hidden style="cursor:pointer"></span><span class="chip gold" id="bankc" hidden style="cursor:pointer"></span><span class="chip gold" id="bankc3" hidden style="cursor:pointer"></span><span class="chip gold" id="prc" hidden style="cursor:pointer"></span><span class="chip ev" id="evc"></span><span class="chip gold" id="goldc" hidden>👑 x1.5</span><span class="chip" id="invc" style="cursor:pointer">👥 +</span></div>
+    <div class="sub"><span class="chip gold" id="potc" style="cursor:pointer">🏆 ⭐ 0</span><span class="chip" id="rate">$0/s</span><span class="chip" id="mult">x1</span><span class="chip gold" id="boost" hidden></span><span class="chip gold" id="refc" hidden style="cursor:pointer"></span><span class="chip gold" id="bankc" hidden style="cursor:pointer"></span><span class="chip gold" id="bankc3" hidden style="cursor:pointer"></span><span class="chip gold" id="prc" hidden style="cursor:pointer"></span><span class="chip ev" id="evc"></span><span class="chip gold" id="goldc" hidden>👑 x1.5</span><span class="chip" id="invc" style="cursor:pointer">👥 +</span></div>
   </div>
   <div class="scene"><div class="sky" id="sky"></div></div>
 
@@ -285,7 +285,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-2345';
+const BUILD = '20261120-0000';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -601,6 +601,8 @@ function build() {
   setInterval(prAsk, 2000);
   setInterval(() => { if (tab === 'mk' && mkD && (mkYoung || (S.startEnd || 0) > snow())) renderMk(); }, 5000);
   pcall({ act: 'me' });
+  $('potc').onclick = () => go('top');
+  call({ act: 'top' }); setInterval(() => { call({ act: 'top' }); }, 60000);
   setInterval(() => { if (tab === 'top') loadTop(); }, 15000);
 }
 
@@ -760,6 +762,7 @@ function paint() {
   const bo = $('boost');
   slotTick(n);
   if (S.boostEnd > n || S.startEnd > n || S.adEnd > n) { bo.hidden = false; const q = slotSt(n); const l = (q.ms === q.sb ? S.startEnd : q.ma === q.sb ? S.adEnd : S.boostEnd) - n; bo.textContent = (q.run ? '⚡ x' : '⏸ x') + q.sb + ' ' + (l > 3600 ? Math.floor(l / 3600) + 'h' + String(Math.floor(l % 3600 / 60)).padStart(2, '0') : Math.floor(l / 60) + ':' + String(Math.floor(l % 60)).padStart(2, '0')); } else bo.hidden = true;
+  { const pt = $('potc'); if (pt) pt.textContent = '🏆 ⭐ ' + fmt(topData ? topData.pool || 0 : 0); }
   const rf = $('refc'); if (S.ref_pend > 0 || S.ref_n > 0) { rf.hidden = false; rf.textContent = '👥 +$' + fm(S.ref_pend || 0); rf.style.opacity = S.ref_pend > 0 ? 1 : .55; } else rf.hidden = true;
   const bc = $('bankc'); if (S.bank > 0) { bc.hidden = false; bc.textContent = '🎁 x2 : ' + fmtT(S.bank) + ' · ' + L.use + ' ' + fmtT(Math.min(S.bank, S.use)); } else bc.hidden = true;
   paintAd();
