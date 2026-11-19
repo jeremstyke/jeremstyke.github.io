@@ -241,7 +241,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1310';
+const BUILD = '20261119-1345';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -852,12 +852,12 @@ function initTon() {
 const MKT = {
   en: { tab: 'Market', t: 'Market', s: 'Sell levels of your properties for good, or rent them out for 24h. Paid in game cash. 5% of each price is burned.', create: 'List something', mine: 'My listings', list: 'For sale and for rent', empty: 'Nothing listed right now. Be the first!',
     sell: 'Sell', rent: 'Rent 24h', buyB: 'Buy', rentB: 'Rent', cancel: 'Cancel', lv: 'levels', sellInfo: 'You sell these levels for good. Your first level always stays with you.', rentInfo: 'The levels come back to you after 24h. The tenant earns their rent meanwhile.',
-    prop: 'Property', qty: 'Levels', price: 'Price in $', range: 'Between {a} and {b}', submit: 'Publish', nofree: 'You need at least 2 levels of a property to list some', forSale: 'For sale', forRent: 'For rent 24h', rentedOut: 'Rented out, back in', rentedIn: 'Rented, ends in', by: 'by',
+    prop: 'Property', qty: 'Levels', price: 'Price in $', range: 'Between {a} and {b}', max: 'Maximum {b}', submit: 'Publish', nofree: 'You need at least 2 levels of a property to list some', forSale: 'For sale', forRent: 'For rent 24h', rentedOut: 'Rented out, back in', rentedIn: 'Rented, ends in', by: 'by',
     confirmBuy: 'Buy {n} x {p} for {c}?', confirmRent: 'Rent {n} x {p} for 24h for {c}?', yes: 'Confirm', okBuy: 'Bought!', okRent: 'Rented for 24h!', okNew: 'Listed!', okCancel: 'Listing cancelled',
     err: { gone: 'Already gone', own: 'This is your own listing', poor: 'Not enough cash', locked: 'Unlock this property first', reserved: 'Someone is paying for it', free: 'Not enough free levels', max: 'You can have 3 listings at most', price: 'Enter a price', bad: 'Invalid', busy: 'Try again', off: 'Market closed for now', server: 'Error, try again', nostars: 'Not available' } },
   fr: { tab: 'Marché', t: 'Marché', s: 'Vends des niveaux de tes biens pour de bon, ou loue-les 24h. Payé en cash du jeu. 5 % de chaque prix part en fumée.', create: 'Mettre en vente', mine: 'Mes annonces', list: 'À vendre et à louer', empty: 'Rien en vente pour l\'instant. Sois le premier !',
     sell: 'Vendre', rent: 'Louer 24h', buyB: 'Acheter', rentB: 'Louer', cancel: 'Annuler', lv: 'niveaux', sellInfo: 'Tu vends ces niveaux pour de bon. Ton premier niveau reste toujours à toi.', rentInfo: 'Les niveaux te reviennent après 24h. Le locataire encaisse les loyers entre-temps.',
-    prop: 'Bien', qty: 'Niveaux', price: 'Prix en $', range: 'Entre {a} et {b}', submit: 'Publier', nofree: 'Il te faut au moins 2 niveaux d\'un bien pour en proposer', forSale: 'À vendre', forRent: 'À louer 24h', rentedOut: 'Loué, retour dans', rentedIn: 'Loué, fin dans', by: 'par',
+    prop: 'Bien', qty: 'Niveaux', price: 'Prix en $', range: 'Entre {a} et {b}', max: 'Maximum {b}', submit: 'Publier', nofree: 'Il te faut au moins 2 niveaux d\'un bien pour en proposer', forSale: 'À vendre', forRent: 'À louer 24h', rentedOut: 'Loué, retour dans', rentedIn: 'Loué, fin dans', by: 'par',
     confirmBuy: 'Acheter {n} x {p} pour {c} ?', confirmRent: 'Louer {n} x {p} 24h pour {c} ?', yes: 'Confirmer', okBuy: 'Acheté !', okRent: 'Loué pour 24h !', okNew: 'Annonce publiée !', okCancel: 'Annonce annulée',
     err: { gone: 'Déjà parti', own: 'C\'est ton annonce', poor: 'Pas assez de cash', locked: 'Débloque d\'abord ce bien', reserved: 'Quelqu\'un est en train de payer', free: 'Pas assez de niveaux libres', max: '3 annonces maximum', price: 'Entre un prix', bad: 'Invalide', busy: 'Réessaie', off: 'Marché fermé pour le moment', server: 'Erreur, réessaie', nostars: 'Indisponible' } },
 }[lang];
@@ -874,7 +874,7 @@ function loadMk() { call({ act: 'mk_list' }).then(() => { if (tab === 'mk') rend
 function mkDone(r, ok) {
   const e = r && r.mk && r.mk.err;
   if (r && r.mk && r.mk.ok) { hap('ok'); toast(ok); closeModal(); }
-  else if (e === 'range') toast(MKT.range.replace('{a}', '$' + fmt(r.mk.lo * K)).replace('{b}', '$' + fmt(r.mk.hi * K)));
+  else if (e === 'range') toast(r.mk.lo > 0 ? MKT.range.replace('{a}', '$' + fmt(r.mk.lo * K)).replace('{b}', '$' + fmt(r.mk.hi * K)) : MKT.max.replace('{b}', '$' + fmt(r.mk.hi * K)));
   else { hap('light'); toast(MKT.err[e] || L.err); }
   if (tab === 'mk') renderMk();
 }
@@ -932,8 +932,8 @@ function openMkNew() {
       <div class="fld"><label>${MKT.price}</label><input id="mkP" type="text" inputmode="decimal" autocomplete="off"><small id="mkR"></small></div>
       <button class="btn" id="mkGo">${MKT.submit}</button>`);
     const refresh = () => {
-      const ref = refV(i, n), lo = (kind === 'sell' ? 0.3 : 0.02) * ref, hi = (kind === 'sell' ? 10 : 2) * ref;
-      $('mkR').textContent = MKT.range.replace('{a}', '$' + fmt(lo * K)).replace('{b}', '$' + fmt(hi * K));
+      const ref = refV(i, n), bd = (mkD && mkD.bounds) || { loS: 0, loR: 0, hiS: 10, hiR: 2 }, lo = (kind === 'sell' ? bd.loS : bd.loR) * ref, hi = (kind === 'sell' ? bd.hiS : bd.hiR) * ref;
+      $('mkR').textContent = lo > 0 ? MKT.range.replace('{a}', '$' + fmt(lo * K)).replace('{b}', '$' + fmt(hi * K)) : MKT.max.replace('{b}', '$' + fmt(hi * K));
       return { ref, def: (kind === 'sell' ? 1 : 0.08) * ref };
     };
     let r0 = refresh(); $('mkP').value = fmt(r0.def * K);
