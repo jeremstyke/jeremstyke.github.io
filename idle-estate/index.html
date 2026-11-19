@@ -108,6 +108,8 @@ button{font-family:inherit;font-weight:800;color:inherit;border:0;cursor:pointer
 .adbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 74px);z-index:29;width:calc(100% - 24px);max-width:496px;display:flex;align-items:center;gap:10px;border-radius:20px;padding:8px 10px 8px 14px;background:linear-gradient(#ffe38a,#ffc12e);border:3px solid var(--navy);box-shadow:0 4px 0 var(--navy)}
 body.hasad{padding-bottom:calc(172px + env(safe-area-inset-bottom,0px))}
 .adbar[hidden]{display:none}
+.adbar.wait{padding:5px 8px 5px 14px;border-radius:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 72px)}.adbar.wait b{display:none}.adbar.wait span{font-size:13px}.adbar.wait .btn{padding:4px 10px;font-size:13px;box-shadow:0 3px 0 var(--navy)}.adbar.off{display:none}
+body.adwait .pane.on::after{height:calc(150px + env(safe-area-inset-bottom,0px))}body.adoff .pane.on::after{height:calc(96px + env(safe-area-inset-bottom,0px))}
 .adbar .tx{flex:1;min-width:0}
 .adbar b{display:block;font-family:var(--disp);font-size:16px;font-weight:600}
 .adbar span{font-size:12px;color:#7a4d00;font-weight:700;display:block}
@@ -311,7 +313,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261120-0130';
+const BUILD = '20261120-0145';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -953,6 +955,8 @@ function paintAd() {
     el.innerHTML = `<div class="tx"><b>📺 ${L.adT}</b><span id="adTx"></span></div><button class="btn" id="adBtn"></button>`;
     $('adBtn').onclick = watchAd; el.hidden = false; document.body.classList.add('hasad');
   }
+  el.classList.toggle('wait', !ready); el.classList.toggle('off', !ready && tab !== 'estate');
+  document.body.classList.toggle('adwait', !ready); document.body.classList.toggle('adoff', !ready && tab !== 'estate');
   const left = Math.max(0, (S.adAt || 0) - snow());
   const t = $('adTx'), bt = $('adBtn');
   if (t) t.textContent = ready ? L.adS.replace('{x}', '$' + fm(2.5)) : L.adNext.replace('{t}', left >= 3600 ? Math.floor(left / 3600) + 'h ' + String(Math.floor(left % 3600 / 60)).padStart(2, '0') + 'min' : left >= 60 ? Math.ceil(left / 60) + 'min' : Math.ceil(left) + 's');
