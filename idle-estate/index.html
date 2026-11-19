@@ -723,19 +723,20 @@ async function getInvoice(sku, deal) {
   }
   return null;
 }
-const adDone = () => { try { return Date.now() - Number(localStorage.getItem('ie_ad2') || 0) < 86400000; } catch (e) { return false; } };
-const adMark = () => { try { localStorage.setItem('ie_ad2', String(Date.now())); } catch (e) {} };
+const adDone = () => { try { return Date.now() - Number(localStorage.getItem('ie_ad3') || 0) < 86400000; } catch (e) { return false; } };
+const adMark = () => { try { localStorage.setItem('ie_ad3', String(Date.now())); } catch (e) {} };
+const adUnmark = () => { try { localStorage.removeItem('ie_ad3'); } catch (e) {} };
 let adBusy = false;
 async function watchAd() {
   if (adBusy || adDone()) { toast(L.adCool); return; }
   const st = await call({ act: 'adstart' });
   if (!st || !st.ok || st.err) { if (st && st.err === 'cool') { adMark(); renderShop(); buildBanners(); } toast(L.adCool); return; }
-  adBusy = true; toast(L.adWait);
+  adBusy = true; toast(L.adWait); adMark(); buildBanners(); if (tab === 'shop') renderShop();
   const url = 'https://uplcm.com/4/12140639';
   try { if (tgw && tgw.openLink) tgw.openLink(url); else window.open(url, '_blank'); } catch (e) { window.open(url, '_blank'); }
   setTimeout(async () => {
     const r = await call({ act: 'adclaim' }); adBusy = false;
-    if (r && r.ok && !r.err) { adMark(); hap('ok'); toast(L.adOk); renderShop(); buildBanners(); } else toast(L.adCool);
+    if (r && r.ok && !r.err) { adMark(); hap('ok'); toast(L.adOk); renderShop(); buildBanners(); } else { adUnmark(); renderShop(); buildBanners(); toast(L.adCool); }
   }, 11000);
 }
 let buying = false;
