@@ -241,7 +241,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1300';
+const BUILD = '20261119-1310';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -496,6 +496,7 @@ const TUTO = {
     ['👆', 'Tap to collect rent', 'Tap a property to start its rent cycle and collect the money when the bar is full.'],
     ['👔', 'Buy and hire managers', 'Buy more levels to earn more. A manager collects the rent for you, automatically and nonstop.'],
     ['🏛️', 'An endless empire', 'Every new property is bigger and more expensive than the last, and it unlocks as soon as you own the previous one. Keep building: there is always a next one.'],
+    ['🏪', 'The Market', 'Sell levels of your properties to other players for good, or rent them out for 24h, paid in game cash. Find it in the Market tab.'],
     ['🏆', 'Weekly top 10', 'Playing is free. The 10 best players of the week share a part of the Stars spent. Add your wallet in the Top tab to get paid in USDT.'],
   ],
   fr: [
@@ -504,6 +505,7 @@ const TUTO = {
     ['👆', 'Touche pour encaisser', 'Touche un bien pour lancer son cycle de loyer, puis récupère l\'argent quand la barre est pleine.'],
     ['👔', 'Achète et embauche', 'Achète des niveaux pour gagner plus. Un gestionnaire encaisse les loyers pour toi, automatiquement et sans arrêt.'],
     ['🏛️', 'Un empire sans fin', 'Chaque nouveau bien est plus grand et plus cher que le précédent, et il se débloque dès que tu possèdes le précédent. Continue à bâtir : il y en a toujours un autre.'],
+    ['🏪', 'Le Marché', 'Vends des niveaux de tes biens à d\'autres joueurs pour de bon, ou loue-les 24h, payé en cash du jeu. C\'est dans l\'onglet Marché.'],
     ['🏆', 'Top 10 de la semaine', 'Jouer est gratuit. Les 10 meilleurs de la semaine se partagent une partie des Étoiles dépensées. Ajoute ton portefeuille dans l\'onglet Top pour être payé en USDT.'],
   ],
 };
