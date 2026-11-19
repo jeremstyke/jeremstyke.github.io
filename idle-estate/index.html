@@ -249,7 +249,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1905';
+const BUILD = '20261119-1915';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -818,12 +818,17 @@ async function watchAd() {
   try { const res = await pop; if (res && res.reward_event_type === 'non_valued') ok = false; } catch (e) { ok = false; }
   const st = await stP;
   if (!ok || !st || !st.ok || st.err) { adBusy = false; if (st && st.err === 'cool') { adMark(); renderShop(); buildBanners(); } toast(ok ? L.adCool : L.adErr); return; }
-  toast(L.adWait); adMark(); buildBanners(); if (tab === 'shop') renderShop();
-  setTimeout(async () => {
-    const r = await call({ act: 'adclaim' }); adBusy = false;
-    if (r && r.ok && !r.err) { adMark(); hap('ok'); toast(L.adOk); renderShop(); buildBanners(); } else { adUnmark(); renderShop(); buildBanners(); toast(L.adCool); }
-  }, Math.max(0, 11500 - (Date.now() - t0)));
+  // the reward is paid right at the click; the amount pops up as soon as the player is back on the game
+  const r = await call({ act: 'adclaim' }); adBusy = false;
+  if (r && r.ok && !r.err) { adMark(); hap('ok'); snd('win'); buildBanners(); if (tab === 'shop') renderShop(); showAdWin(r.ad_cash || 0); } else { adUnmark(); renderShop(); buildBanners(); toast(L.adCool); }
 }
+let adWinQ = null;
+function showAdWin(x) {
+  if (document.visibilityState !== 'visible') { adWinQ = x; return; }
+  modal(`<div style="font-size:54px">🎁</div><h3>${L.adOk}</h3><div class="big">+$${fm(x)}</div><button class="btn" id="okAd">${L.great}</button>`);
+  const b = $('okAd'); if (b) b.onclick = closeModal;
+}
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && adWinQ !== null) { const x = adWinQ; adWinQ = null; showAdWin(x); } });
 let buying = false;
 async function buy(sku, deal) {
   if (buying) return; buying = true; hap('medium'); toast('⭐ ...');
