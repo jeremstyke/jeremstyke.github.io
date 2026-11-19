@@ -8,9 +8,9 @@
 - [x] magicmaman.com | bebe (18 nov 2026)
 - [x] aidonslesnotres.fr | vieillir (18 nov 2026)
 - [x] jardiner-malin.fr | oiseaux (18 nov 2026)
-- [ ] zankyou.fr | mariage
-- [ ] mpedia.fr | bebe
-- [ ] essentiel-autonomie.com | vieillir
+- [x] zankyou.fr | mariage (19 nov 2026, aucune donnée Ubersuggest pour la France)
+- [x] mpedia.fr | bebe (19 nov 2026)
+- [x] essentiel-autonomie.com | vieillir (19 nov 2026)
 - [ ] ornithomedia.com | oiseaux
 - [ ] mariages.net | mariage
 - [ ] parents.fr | bebe
