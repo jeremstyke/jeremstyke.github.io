@@ -2830,7 +2830,7 @@ g("bouton-appel-urgence-senior/",
 <li><strong>Croire que le bouton évite la chute.</strong> Il aide à être secouru vite. Pour réduire le risque, il faut aussi agir sur le logement : relisez nos conseils pour <a href="{R}prevenir-les-chutes-a-la-maison/">prévenir les chutes à la maison</a> et notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a>.</li>
 </ul>
 <p>Si la personne tombe souvent, a des malaises ou se sent moins sûre d'elle, parlez-en à son médecin : il pourra en chercher la cause et vous orienter, par exemple vers un ergothérapeute pour adapter le domicile.</p>
-<p>Certains téléphones portables ont aussi une touche d'urgence au dos : notre <a href="{R}meilleur-telephone-portable-senior/">comparatif des portables pour seniors</a> indique lesquels.</p>
+<p>Certains téléphones portables ont aussi une touche d'urgence au dos : notre <a href="{R}meilleur-telephone-portable-senior/">comparatif des portables pour seniors</a> indique lesquels. Pour choisir un modèle précis, voyez notre <a href="{R}meilleur-bouton-appel-urgence/">comparatif des boutons d'appel d'urgence sans abonnement</a>.</p>
 """,
   faq=[("Existe-t-il un bouton d'appel d'urgence sans abonnement ?", "Oui. Certains boutons, pendentifs ou montres appellent directement des proches enregistrés, grâce à une carte SIM. Il n'y a pas de frais de service, mais il faut un forfait mobile actif et des proches qui répondent. Sans réponse, personne d'autre ne prend le relais."),
        ("Pendentif ou bracelet d'appel d'urgence : que choisir ?", "Celui que la personne portera tout le temps, y compris sous la douche. Le pendentif est plus facile à attraper, le bracelet plus discret. Vérifiez la résistance à l'eau, la taille du bouton et la recharge."),
@@ -3967,7 +3967,7 @@ g("procuration-bancaire-parent-age/",
 </tbody></table>
 <h2>Que se passe-t-il si sa mémoire baisse ?</h2>
 <p>C'est la vraie limite de la procuration. Elle repose sur la volonté de votre parent : s'il a des troubles cognitifs importants, la banque peut refuser de l'enregistrer. Et une procuration existante prend fin automatiquement en cas de mise sous tutelle ou curatelle.</p>
-<p>Dans ce cas, deux voies existent. Le <strong>mandat de protection future</strong>, que votre parent signe pendant qu'il le peut encore, et qui sera activé plus tard sur certificat d'un médecin inscrit sur une liste du procureur. Et l'<strong>habilitation familiale</strong>, demandée au juge des tutelles avec un certificat médical circonstancié établi par un médecin agréé. Peuvent être habilités notamment les enfants, petits-enfants, frères et sœurs, l'époux, le partenaire de Pacs ou le concubin. Avec une habilitation générale, la personne habilitée peut agir seule sur les comptes bancaires.</p>
+<p>Dans ce cas, deux voies existent. Le <strong>mandat de protection future</strong>, que votre parent signe pendant qu'il le peut encore, et qui sera activé plus tard sur certificat d'un médecin inscrit sur une liste du procureur. Et l'<strong><a href="{R}habilitation-familiale/">habilitation familiale</a></strong>, demandée au juge des tutelles avec un certificat médical circonstancié établi par un médecin agréé. Peuvent être habilités notamment les enfants, petits-enfants, frères et sœurs, l'époux, le partenaire de Pacs ou le concubin. Avec une habilitation générale, la personne habilitée peut agir seule sur les comptes bancaires.</p>
 <p>Le moment à ne pas rater, c'est celui où votre parent va encore bien, mais où vous sentez que les papiers deviennent lourds. Une conversation calme à ce moment évite bien des démarches compliquées plus tard. Pour les autres aides du quotidien, le <a href="{R}ccas-aides-personnes-agees/">CCAS de sa commune</a> peut aussi vous orienter.</p>
 <h2>Les précautions à prendre quand vous gérez son argent</h2>
 <ul>
@@ -4094,3 +4094,157 @@ g("meilleur-elevateur-de-bain/",
        ("Quel poids maximum supporte un élévateur de bain ?", "La plupart des modèles acceptent 140 kg. Pour une personne plus lourde, regardez les versions XL (170 kg pour l'Aquatec Orca XL) ou le Mangar Archimedes, annoncé à 165 kg."),
        ("Avez-vous testé ces élévateurs de bain ?", "Non. Cette sélection repose uniquement sur les fiches publiées par les fabricants, les revendeurs et l'avis de la Haute Autorité de santé. Nous n'indiquons que ce qui figure sur ces documents, sans note ni avis de prise en main.")],
   short="Top 8 élévateurs de bain", cat="Salle de bains")
+
+AUTO_META['habilitation-familiale/'] = ('⚖️', 'lilas')
+g("habilitation-familiale/",
+  "Habilitation familiale : qui peut la demander et comment",
+  "Habilitation familiale : ce que c'est, qui peut la demander et comment faire",
+  "Habilitation familiale pour un parent âgé : qui peut être habilité, différence avec tutelle et curatelle, certificat médical, demande au juge et durée.",
+  """
+<p>L'habilitation familiale permet à un proche (un enfant, un conjoint, un frère ou une sœur, par exemple) de représenter un parent qui ne peut plus défendre seul ses intérêts, sans passer par une tutelle ou une curatelle. C'est le juge qui l'accorde, mais une fois la décision rendue, la famille gère sans rendre de comptes annuels au tribunal.</p>
+<p>Elle convient bien aux familles qui s'entendent : le juge vérifie que les proches sont d'accord, ou du moins qu'ils ne s'y opposent pas. Si la famille se déchire sur la question, c'est souvent une autre mesure qui sera prononcée.</p>
+{CTA}
+<p class="note"><strong>Informations vérifiées le 19 novembre 2026</strong> sur service-public.gouv.fr et justice.fr. Ce sont des informations générales : pour une situation précise (patrimoine important, vente d'un bien, conflit familial), parlez-en à un notaire ou à un avocat.</p>
+<h2>Dans quels cas peut-on demander une habilitation familiale ?</h2>
+<p>Il faut que les facultés mentales ou physiques de votre parent soient altérées, au point qu'il ne puisse plus exprimer sa volonté ou faire seul les actes de la vie courante. Cette altération doit être constatée par un médecin agréé, on y revient plus bas.</p>
+<p>La mesure n'est accordée qu'en cas de nécessité. Si une solution plus simple suffit, le juge ne l'ouvrira pas. Par exemple, si votre mère a toute sa tête mais ne peut plus se déplacer à la banque, une <a href="{R}procuration-bancaire-parent-age/">procuration bancaire</a> fait l'affaire. Si elle a signé un mandat de protection future, c'est lui qui s'applique. L'habilitation intervient quand ces outils ne suffisent plus ou n'ont pas été prévus à temps.</p>
+<p>La situation typique : un père atteint de troubles de la mémoire, qui ne comprend plus ses courriers ni ses relevés, et dont les enfants doivent gérer ses comptes, son loyer ou son entrée en établissement.</p>
+<h2>Qui peut être habilité, et qui peut faire la demande ?</h2>
+<p>La liste est fixée par la loi. Peuvent être habilités :</p>
+<ul>
+<li>les parents, grands-parents et arrière-grands-parents ;</li>
+<li>les enfants, petits-enfants et arrière-petits-enfants ;</li>
+<li>les frères et sœurs ;</li>
+<li>l'époux ou l'épouse, le partenaire de Pacs ou le concubin, sauf si la vie commune a cessé.</li>
+</ul>
+<p>Ce que beaucoup ignorent : un neveu, une nièce, un gendre, une belle-fille, un beau-frère ou une belle-sœur ne peuvent pas être habilités. Si la personne la plus présente au quotidien est une belle-fille, ce n'est donc pas elle qui pourra être désignée. En revanche, plusieurs proches peuvent être habilités ensemble.</p>
+<p>La demande peut être faite par la personne à protéger elle-même, par l'un des proches de la liste, ou par le procureur de la République.</p>
+<h2>Habilitation familiale, tutelle, curatelle : quelles différences ?</h2>
+<p>Toutes ces mesures protègent un adulte vulnérable, mais elles ne pèsent pas le même poids au quotidien pour la famille.</p>
+<table><thead><tr><th>Mesure</th><th>Qui décide</th><th>Qui agit</th><th>Contrôle ensuite</th><th>Durée</th></tr></thead><tbody>
+<tr><td>Procuration bancaire</td><td>Le parent, à sa banque</td><td>Le mandataire choisi</td><td>Aucun par le juge</td><td>Jusqu'à révocation</td></tr>
+<tr><td>Mandat de protection future</td><td>Le parent, à l'avance</td><td>Le mandataire qu'il a choisi</td><td>Selon le mandat</td><td>Activé quand l'état de santé l'exige</td></tr>
+<tr><td>Habilitation familiale</td><td>Le juge, sur demande d'un proche</td><td>Un ou plusieurs proches de la liste</td><td>Pas de compte de gestion, contrôle possible en cas de litige</td><td>10 ans maximum (générale), renouvelable</td></tr>
+<tr><td>Curatelle</td><td>Le juge</td><td>La personne, assistée d'un curateur</td><td>Encadrée par le juge</td><td>Fixée par le juge</td></tr>
+<tr><td>Tutelle</td><td>Le juge</td><td>Un tuteur qui représente la personne</td><td>Encadrée par le juge</td><td>5 ans en principe, jusqu'à 10 ans</td></tr>
+</tbody></table>
+<p>La grande différence avec la tutelle, c'est l'allègement. Après le jugement, le juge n'intervient en principe plus, sauf pour certains actes graves. Pour une famille unie, c'est beaucoup moins lourd. Pour une famille où la confiance manque, c'est justement ce qui peut poser problème.</p>
+<h2>Générale ou limitée à certains actes : laquelle demander ?</h2>
+<p>L'<strong>habilitation spéciale</strong> porte sur un ou plusieurs actes précis, définis par le juge : vendre une voiture, résilier un bail, signer un contrat d'hébergement. Elle prend fin une fois les actes accomplis.</p>
+<p>L'<strong>habilitation générale</strong> couvre l'ensemble des actes, de la gestion courante des comptes aux décisions plus importantes. Le juge en fixe la durée, dans la limite de 10 ans. Elle peut être renouvelée pour la même durée sur un nouveau certificat médical, et jusqu'à 20 ans si l'état de la personne ne peut pas s'améliorer.</p>
+<p>Le juge choisit aussi entre la <strong>représentation</strong> (le proche agit à la place de son parent) et l'<strong>assistance</strong> (le parent agit lui-même, accompagné par le proche, selon les règles de la curatelle).</p>
+<p>Notre conseil : si un seul acte pose problème, demandez une habilitation spéciale. Elle laisse plus de liberté à votre parent. Si la gestion de tous les jours devient impossible pour lui, l'habilitation générale évite de revenir devant le juge à chaque démarche.</p>
+<h2>Comment faire la demande, étape par étape</h2>
+<p><strong>1. Le certificat médical circonstancié.</strong> Il est obligatoire : sans lui, la demande est irrecevable. Il doit être rédigé par un médecin inscrit sur la liste du procureur de la République, et pas par le médecin traitant à ce titre. La liste s'obtient auprès du greffe du tribunal du lieu de résidence de votre parent. Ce certificat coûte 192 €, selon service-public.fr.</p>
+<p><strong>2. La requête.</strong> Elle s'adresse au juge des contentieux de la protection (l'ancien juge des tutelles), au tribunal judiciaire ou au tribunal de proximité dont dépend votre parent. Un formulaire en ligne existe sur service-public.fr. Joignez la copie intégrale de l'acte de naissance de votre parent, les pièces d'identité (la sienne et la vôtre), le certificat médical, et si possible les lettres d'accord des autres proches. Si vous envoyez des scans trop lourds, l'outil gratuit <a href="https://demarches.cvlibre.com/" target="_blank" rel="noopener">PDF Démarches France</a> réduit et fusionne les justificatifs en un seul fichier.</p>
+<p><strong>3. L'audition.</strong> Le juge entend votre parent, sauf si le médecin agréé estime que cela nuirait à sa santé ou qu'il ne peut pas s'exprimer. Il entend aussi la personne qui sera habilitée, et les autres proches s'il le juge utile, parfois par simple questionnaire. L'audience n'est pas publique.</p>
+<p><strong>4. La décision.</strong> Le juge vérifie que la mesure est conforme aux intérêts de votre parent et que la famille est d'accord ou ne s'y oppose pas. Il doit statuer dans un délai d'un an maximum. L'avocat n'est pas obligatoire, et une aide juridictionnelle est possible si les ressources sont faibles.</p>
+<p>Pour garder tous ces papiers au même endroit, un trieur ou un classeur dédié rend vraiment service, surtout si plusieurs frères et sœurs se partagent les démarches. <a href="{AMZ:trieur documents administratifs}" """ + A + """>Voir les trieurs de documents</a></p>
+<h2>Ce que le proche habilité ne peut pas faire seul</h2>
+<p>Même avec une habilitation générale, certains actes demandent l'autorisation du juge : une donation, la vente de la résidence principale ou secondaire, la désignation ou la modification du bénéficiaire de certains contrats d'assurance-vie, ou un acte où les intérêts du proche et ceux du parent s'opposent.</p>
+<p>D'autres sont tout simplement interdits : racheter les biens de son parent, faire du commerce en son nom ou se porter caution pour lui. Même sans contrôle régulier, gardez une trace claire des opérations. En cas de désaccord dans la famille, le juge peut demander des comptes.</p>
+<h2>Quand l'habilitation prend-elle fin ?</h2>
+<p>L'habilitation générale s'arrête au décès de la personne protégée, à la fin de sa durée si elle n'est pas renouvelée, sur décision du juge (mainlevée), ou si une sauvegarde de justice, une curatelle ou une tutelle est prononcée. Elle s'arrête aussi au décès du proche habilité, si personne ne peut prendre le relais. L'habilitation spéciale, elle, se termine dès que les actes prévus sont faits.</p>
+<p>La protection juridique ne règle pas tout. Si votre parent vit seul, pensez aussi à sa sécurité au quotidien : une <a href="{R}teleassistance-comment-ca-marche/">téléassistance</a>, un logement adapté grâce à notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a>, et les aides locales que le <a href="{R}ccas-aides-personnes-agees/">CCAS</a> peut vous indiquer.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F33367" target="_blank" rel="noopener">Service Public, Habilitation familiale</a>, <a href="https://www.justice.fr/fiche/habilitation-familiale" target="_blank" rel="noopener">Justice.fr, Habilitation familiale</a>, <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F2120" target="_blank" rel="noopener">Service Public, Tutelle d'un majeur</a> (vérifié le 19 novembre 2026)</p>
+""",
+  faq=[("Un neveu ou une belle-fille peut-il être habilité ?", "Non. Seuls les ascendants, les descendants, les frères et sœurs et le conjoint, partenaire de Pacs ou concubin (si la vie commune continue) peuvent être habilités. Un neveu, une nièce, un gendre, une belle-fille, un beau-frère ou une belle-sœur ne le peuvent pas."),
+       ("Combien coûte une habilitation familiale ?", "Le certificat médical circonstancié, obligatoire, coûte 192 € selon service-public.fr. L'avocat n'est pas obligatoire, et une aide juridictionnelle est possible si les ressources sont faibles."),
+       ("Faut-il rendre des comptes au juge chaque année ?", "Non. Contrairement à la tutelle, l'habilitation familiale ne prévoit pas de compte de gestion. Le juge peut toutefois contrôler la personne habilitée en cas de litige, et certains actes graves (donation, vente du logement) restent soumis à son autorisation.")],
+  short="Habilitation familiale", cat="Argent et patrimoine")
+
+AUTO_META['meilleur-bouton-appel-urgence/'] = ('🏆', 'rose')
+g("meilleur-bouton-appel-urgence/",
+  "Meilleur bouton d'appel d'urgence senior 2026 : 7 modèles",
+  "Meilleur bouton d'appel d'urgence pour senior : 7 modèles sans abonnement comparés",
+  "Pendentif relié au téléphone fixe, bouton GSM avec GPS ou carillon pour l'aidant : 7 boutons d'appel d'urgence sans abonnement comparés selon l'usage.",
+  """
+<p>Pour une personne âgée qui vit seule et a gardé une ligne fixe, un téléphone livré avec un médaillon SOS, comme le Geemarc AmpliDECT 295 SOS Pro, est la solution la plus simple : une pression sur le pendentif et le téléphone appelle jusqu'à 4 proches. Si elle sort souvent, il faut plutôt un bouton à carte SIM avec GPS. Et si vous vivez sous le même toit, un simple bouton qui fait sonner un carillon dans votre pièce suffit souvent.</p>
+<p>Avant de choisir un modèle, posez-vous la seule question qui compte : qui va répondre quand elle appuiera ? Les sept appareils ci-dessous fonctionnent sans abonnement de téléassistance. Ils préviennent des proches, pas une centrale d'écoute.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs (fiches techniques, notices, distributeurs de matériel médical et revendeurs français), sans test en main. Nous n'indiquons que les données lues sur ces pages ; quand une information n'y figure pas, nous écrivons « non précisé ». Aucun prix n'est indiqué, car il change souvent. Vérifiez la fiche du modèle exact au moment de l'achat.</div>
+<h2>Le comparatif en un coup d'œil</h2>
+<table><thead><tr><th>Modèle</th><th>Type</th><th>Qui est prévenu</th><th>Besoin de</th><th>Portée ou zone</th><th>Idéal pour</th></tr></thead><tbody>
+<tr><td>Geemarc AmpliDECT 295 SOS Pro</td><td>Téléphone sans fil + médaillon</td><td>Jusqu'à 4 numéros</td><td>Ligne fixe ou box</td><td>30 m en intérieur</td><td>Notre choix : à la maison, avec une ligne fixe</td></tr>
+<tr><td>Geemarc AmpliDECT 595 SOS Pro</td><td>Téléphone sans fil + pendentif mains libres</td><td>Jusqu'à 4 numéros</td><td>Ligne fixe</td><td>30 m en intérieur</td><td>Parler directement dans le pendentif</td></tr>
+<tr><td>Fysic FX3960</td><td>Téléphone filaire + émetteur SOS</td><td>2 numéros en accès direct</td><td>Ligne fixe</td><td>Jusqu'à 50 m</td><td>Un couple (jusqu'à 5 émetteurs)</td></tr>
+<tr><td>Fysic FXA-100</td><td>Bouton GSM avec GPS</td><td>5 numéros SOS</td><td>Carte SIM et forfait</td><td>Partout où le réseau passe</td><td>Une personne qui sort seule</td></tr>
+<tr><td>Vigicom ATI-401 GPS</td><td>Boîtier d'alerte 4G avec GPS</td><td>Jusqu'à 10 numéros, appels et SMS</td><td>Nano SIM et forfait</td><td>Partout où le réseau passe</td><td>Le plus complet, avec détection de chute</td></tr>
+<tr><td>Daytech CC02</td><td>Bouton + carillon</td><td>L'aidant présent dans la maison</td><td>Piles</td><td>Environ 150 m en champ libre</td><td>Un aidant qui vit sur place</td></tr>
+<tr><td>CASAcontrol SNS-110</td><td>2 boutons + récepteur sur prise</td><td>L'aidant présent dans la maison</td><td>Prise de courant</td><td>Jusqu'à 180 m</td><td>Un récepteur toujours alimenté</td></tr>
+</tbody></table>
+<p>Un point de vigilance avant tout achat d'appareil à carte SIM : les opérateurs éteignent la 2G en métropole. Selon l'Arcep et l'Institut national de la consommation, Orange arrête son réseau 2G de fin septembre à fin décembre 2026, SFR et Bouygues Telecom en décembre 2026, et la 3G suivra à partir de fin 2028. Un bouton qui ne fonctionne qu'en 2G ne pourra donc plus appeler personne. Exigez la mention 4G sur la fiche.</p>
+
+<h2>1. Geemarc AmpliDECT 295 SOS Pro : le plus simple à la maison (notre choix)</h2>
+<p><strong>Pour qui ?</strong> Une personne qui vit seule, passe l'essentiel de son temps chez elle et a gardé une ligne fixe ou une box. C'est notre choix parce qu'il remplace le téléphone de la maison : il n'y a pas d'appareil en plus à apprendre, ni de carte SIM à gérer.</p>
+<ul>
+<li><strong>Points forts</strong> : un médaillon à 5 touches (SOS, mains libres, deux touches d'appel direct M1 et M2, volume du haut-parleur sur 5 niveaux) ; jusqu'à 4 numéros prédéfinis appelés en cas d'alerte ; un bip prévient quand le médaillon sort de la zone de portée ; le combiné est amplifié et équipé d'un répondeur.</li>
+<li><strong>Limites</strong> : portée du médaillon de 30 m en intérieur (200 m en champ libre), donc inutile hors de la maison ; autonomie du médaillon de 100 h en veille et 5 à 7 h en utilisation, il faut penser à le reposer sur son socle ; étanchéité non précisée ; pas de détection de chute.</li>
+</ul>
+<p>Notre conseil : faites un essai depuis chaque pièce, surtout la salle de bains et le fond du jardin, pour vérifier que le médaillon reste à portée.</p>
+<p><a href="{AMZ:Geemarc AmpliDECT 295 SOS Pro}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Geemarc AmpliDECT 595 SOS Pro : pour parler dans le pendentif</h2>
+<p><strong>Pour qui ?</strong> Une personne qui risque de ne pas pouvoir atteindre le combiné après une chute. Le pendentif de 58 g permet une conversation mains libres : on parle directement à la personne appelée, depuis le sol s'il le faut.</p>
+<ul>
+<li><strong>Points forts</strong> : jusqu'à 4 numéros d'urgence ; conversation mains libres sur le pendentif ; téléphone avec répondeur, 50 m de portée en intérieur et 300 m en champ libre ; 2 jours d'autonomie en veille et 10 h en conversation pour le combiné.</li>
+<li><strong>Limites</strong> : pendentif à 30 m en intérieur, 100 h en veille et 5 h en utilisation ; étanchéité non précisée ; détection de chute non précisée ; le raccordement exact n'est pas détaillé sur la fiche, vérifiez la compatibilité avec votre box.</li>
+</ul>
+<p><a href="{AMZ:Geemarc AmpliDECT 595 SOS Pro}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Fysic FX3960 : pour un couple qui vit à deux</h2>
+<p><strong>Pour qui ?</strong> Un couple âgé qui préfère un téléphone filaire classique. On peut associer jusqu'à 5 émetteurs SOS au même téléphone, donc équiper les deux conjoints.</p>
+<ul>
+<li><strong>Points forts</strong> : émetteur sans fil avec 2 touches de numérotation rapide ; conversation mains libres une fois l'appel établi ; cordon de cou et clip ceinture fournis ; jusqu'à 150 h de veille pour l'émetteur ; téléphone avec répondeur.</li>
+<li><strong>Limites</strong> : portée limitée à 50 m ; seulement 2 numéros en accès direct ; étanchéité, appel en boucle et détection de chute non précisés. Nous n'avons trouvé de fiche détaillée que chez un revendeur néerlandais : vérifiez la compatibilité avec votre ligne avant de commander.</li>
+</ul>
+<p><a href="{AMZ:Fysic FX3960}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Fysic FXA-100 : un bouton GSM à emporter partout</h2>
+<p><strong>Pour qui ?</strong> Une personne autonome qui sort seule, fait ses courses ou se promène, et dont les proches veulent pouvoir la localiser en cas de problème. Il se porte autour du cou avec un cordon.</p>
+<ul>
+<li><strong>Points forts</strong> : une pression appelle jusqu'à 5 numéros SOS ; 3 numéros mémoire supplémentaires ; GPS, avec une localisation par le réseau si le signal GPS ne passe pas ; mains libres ; sans contrat, avec la carte SIM de votre choix ; réglages par SMS.</li>
+<li><strong>Limites</strong> : les fiches se contredisent sur le réseau (un revendeur allemand indique 2G et 3G seulement, la notice mentionne la 4G). Avec l'arrêt de la 2G, faites confirmer la compatibilité 4G par le vendeur avant d'acheter. Autonomie, étanchéité et détection de chute non précisées.</li>
+</ul>
+<p><a href="{AMZ:Fysic FXA-100}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Vigicom ATI-401 GPS : le plus complet, avec détection de chute</h2>
+<p><strong>Pour qui ?</strong> Une personne qui a déjà chuté, vit seule et sort encore. Attention, c'est à l'origine un appareil professionnel, conçu pour les travailleurs isolés, pas un produit pensé pour les seniors : il est plus technique à régler.</p>
+<ul>
+<li><strong>Points forts</strong> : appels et SMS en cascade vers jusqu'à 10 numéros ; alerte automatique en cas de chute, de perte de verticalité ou d'immobilité ; micro et haut-parleur mains libres ; GPS ; réseau 4G, 3G et 2G, tous opérateurs ; étanche IP67 ; environ 3 jours d'autonomie en fonctionnement et 30 jours en veille.</li>
+<li><strong>Limites</strong> : porté au bras avec un brassard velcro ou à la ceinture, pas en pendentif ; carte nano SIM non fournie ; réglages plus complexes, mieux vaut qu'un proche s'en charge ; comme toute détection automatique, elle ne repère pas toutes les chutes.</li>
+</ul>
+<p><a href="{AMZ:Vigicom ATI-401 GPS}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Daytech CC02 : quand l'aidant vit sous le même toit</h2>
+<p><strong>Pour qui ?</strong> Un enfant ou un conjoint qui habite avec la personne âgée et veut être prévenu quand elle a besoin d'aide, la nuit ou depuis la salle de bains. Le kit comprend un récepteur et deux boutons.</p>
+<ul>
+<li><strong>Points forts</strong> : bouton étanche IP55, annoncé utilisable sous la douche ; portée d'environ 150 m en champ libre ; 55 mélodies et 5 niveaux de volume jusqu'à 110 dB, ou un simple flash lumineux ; aucune carte SIM ni ligne à prévoir.</li>
+<li><strong>Limites</strong> : il ne prévient personne en dehors de la maison, donc inutile si l'aidant s'absente ; autonomie non précisée ; les informations viennent du manuel de la version britannique, vérifiez l'alimentation du récepteur sur la fiche française.</li>
+</ul>
+<p><a href="{AMZ:Daytech CC02 bouton appel}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. CASAcontrol SNS-110 : un récepteur branché en permanence</h2>
+<p><strong>Pour qui ?</strong> Le même usage que le Daytech, pour qui préfère un récepteur branché sur une prise : pas de piles à surveiller côté aidant. Le kit comprend deux gros boutons rouges caoutchoutés.</p>
+<ul>
+<li><strong>Points forts</strong> : portée jusqu'à 180 m ; récepteur sur secteur jusqu'à 110 dB, 5 niveaux de volume et 64 mélodies ; boutons sur pile CR2032 ; protection IP44 contre les projections d'eau.</li>
+<li><strong>Limites</strong> : IP44 seulement, à ne pas utiliser sous la douche ; aucun appel téléphonique ; manière de le porter et autonomie non précisées. La marque est surtout distribuée par Pearl, sa présence sur Amazon peut varier.</li>
+</ul>
+<p><a href="{AMZ:CASAcontrol bouton alarme SOS}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Et si personne ne peut répondre ? La téléassistance avec abonnement</h2>
+<p>Tous les appareils de ce comparatif reposent sur les proches. Si vos enfants travaillent loin, dorment avec le téléphone en silencieux ou partent en vacances, l'appel peut rester sans réponse. Dans ce cas, un service de téléassistance avec centrale d'écoute 24h/24 est plus sûr. Par exemple, La Poste propose une formule sur ligne fixe ou box et une formule avec carte SIM 4G intégrée, avec médaillon en pendentif ou en bracelet, et un bracelet détecteur de chutes lourdes en option ; La Poste précise qu'il ne détecte pas les chutes molles ou ralenties. Notre guide <a href="{R}teleassistance-comment-ca-marche/">téléassistance : comment ça marche</a> détaille le fonctionnement, et notre article <a href="{R}bouton-appel-urgence-senior/">bouton d'appel d'urgence avec ou sans abonnement</a> vous aide à trancher.</p>
+
+<h2>Comment choisir un bouton d'appel d'urgence ?</h2>
+<p><strong>Partez du lieu où le risque est le plus grand.</strong> Si votre parent tombe surtout chez lui, un médaillon relié au téléphone fixe suffit. S'il sort seul, il faut une carte SIM et un GPS. Une erreur fréquente consiste à acheter un appareil GSM complexe pour quelqu'un qui ne quitte presque plus son appartement.</p>
+<p><strong>Vérifiez l'eau.</strong> La salle de bains est l'endroit où l'on glisse le plus, et l'endroit où l'on enlève ses appareils. Si la fiche n'indique ni indice IP ni usage sous la douche, partez du principe que le bouton sera retiré pendant la toilette.</p>
+<p><strong>Regardez la recharge.</strong> Un pendentif à poser chaque soir sur son socle convient à quelqu'un qui a ses habitudes. Pour une personne qui oublie, un modèle à pile, qui tient des mois, est plus sûr.</p>
+<p><strong>Comptez les numéros.</strong> Enregistrez au moins trois contacts, dont un voisin qui a les clés. Un appareil qui appelle plusieurs numéros à la suite jusqu'à ce que quelqu'un décroche vaut mieux qu'un appareil qui n'en appelle qu'un.</p>
+<p><strong>Testez une fois par mois.</strong> Batterie, carte SIM, numéros à jour, portée : un essai réel évite les mauvaises surprises.</p>
+<p>Si votre parent tombe déjà, un bouton ne suffit pas : parlez-en à son médecin, qui pourra chercher la cause et l'orienter vers un kinésithérapeute ou un ergothérapeute. Côté équipement, comparez aussi les <a href="{R}meilleur-detecteur-de-chute/">montres avec détection de chute</a> et les <a href="{R}meilleur-telephone-fixe-senior/">téléphones fixes pour seniors</a>, et faites le tour du logement avec notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a>.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.arcep.fr/mes-demarches-et-services/entreprises/fiches-pratiques/extinction-reseaux-mobiles-2g-3g.html" target="_blank" rel="noopener">Arcep, Extinction des réseaux mobiles 2G et 3G</a>, <a href="https://www.inc-conso.fr/content/fermeture-des-reseaux-2g-et-3g-partir-du-31-mars-2026" target="_blank" rel="noopener">INC, Fermeture des réseaux 2G et 3G</a>, <a href="https://www.laposte.fr/services-seniors/teleassistance-personne-agee" target="_blank" rel="noopener">La Poste, Téléassistance personne âgée</a> (vérifié le 19 novembre 2026)</p>
+""",
+  faq=[("Existe-t-il un bouton d'appel d'urgence sans abonnement ?", "Oui. Les téléphones fixes livrés avec un médaillon SOS, comme le Geemarc AmpliDECT 295 SOS Pro, appellent des proches sans frais de service. Les boutons GSM, comme le Fysic FXA-100, demandent seulement une carte SIM avec un forfait actif. Dans les deux cas, ce sont vos proches qui répondent, pas une centrale."),
+       ("Un bouton d'appel d'urgence 2G fonctionnera-t-il encore ?", "Non, pas longtemps. Selon l'Arcep et l'INC, les opérateurs arrêtent la 2G en métropole entre fin septembre et fin décembre 2026, et la 3G à partir de fin 2028. Choisissez un appareil dont la fiche mentionne clairement la 4G."),
+       ("Avez-vous testé ces boutons d'appel d'urgence ?", "Non. Cette sélection repose uniquement sur les fiches des fabricants, les notices et les pages de revendeurs. Nous n'indiquons que ce qui y figure, sans note ni avis de prise en main.")],
+  short="Top 7 boutons d'appel d'urgence", cat="Sécurité")
