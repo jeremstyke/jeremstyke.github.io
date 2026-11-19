@@ -387,7 +387,9 @@ function apply(r, full) {
 // ---------- economy (mirror of the server)
 const mult = l => { let m = 1; for (const k of S.ms) if (l >= k) m *= S.mb; return m; };
 const evOn = n => { const s = n % 86400; return s >= 61200 && s < 64800; };
-const curM = n => S.incm * (((S.startEnd > n ? 10 : 0) + (S.boostEnd > n ? S.bmult : 0) + (S.adEnd > n ? 2 : 0)) || 1) * (S.perm2 ? 2 : 1) * (evOn(n) ? 2 : 1) * (S.goldEnd > n ? 1.5 : 1);
+// first-hour boost fades in 4 steps of 15 min: x10, x6, x4, x2 (same schedule as the server)
+const startM = n => { if (!(S.startEnd > n)) return 0; const e = n - (S.startEnd - 3600); return e < 900 ? 10 : e < 1800 ? 6 : e < 2700 ? 4 : 2; };
+const curM = n => S.incm * ((startM(n) + (S.boostEnd > n ? S.bmult : 0) + (S.adEnd > n ? 2 : 0)) || 1) * (S.perm2 ? 2 : 1) * (evOn(n) ? 2 : 1) * (S.goldEnd > n ? 1.5 : 1);
 const inc = (i, n) => S.lv[i] > 0 ? S.cfg[i].r * S.lv[i] * mult(S.lv[i]) * curM(n) : 0;
 const gainInv = () => Math.max(0, Math.floor(10 * Math.sqrt(S.life_all / 2500)) - Math.floor(S.inv));
 function rateNow() { const n = snow(); let g = 0; for (let i = 0; i < 10; i++) { const e = inc(i, n) / S.cfg[i].t; g += S.mg[i] ? e : e * 0.5; } return g; }
@@ -455,7 +457,7 @@ function build() {
 const TUTO = {
   en: [
     ['🏠', 'Welcome to Idle Estate', 'Build a real estate empire. Rent pays in even while you are away, up to 3 hours offline.'],
-    ['⚡', 'x10 for your first hour', 'Your income is multiplied by 10 during your first hour of play. Use it to buy properties and hire your first manager fast.'],
+    ['⚡', 'x10 at the start', 'Your income is multiplied by 10 at the start of your first hour, then it fades gently (x6, x4, x2) over the hour. Use it to buy properties and hire your first manager fast.'],
     ['👆', 'Tap to collect rent', 'Tap a property to start its rent cycle and collect the money when the bar is full.'],
     ['👔', 'Buy and hire managers', 'Buy more levels to earn more. A manager collects the rent for you, automatically and nonstop.'],
     ['🏛️', 'Sell your empire', 'Once you are big enough, sell it for investors: each type gives its own bonus forever (income, offline time, boost duration or rewards) and every sale unlocks new properties. Then start again, faster.'],
@@ -463,7 +465,7 @@ const TUTO = {
   ],
   fr: [
     ['🏠', 'Bienvenue dans Idle Estate', 'Construis un empire immobilier. Les loyers tombent même quand tu es absent, jusqu\'à 3 heures hors ligne.'],
-    ['⚡', 'x10 pendant ta première heure', 'Tes revenus sont multipliés par 10 pendant ta première heure de jeu. Profites-en pour acheter des biens et embaucher ton premier gestionnaire vite.'],
+    ['⚡', 'x10 au départ', 'Tes revenus sont multipliés par 10 au début de ta première heure, puis le bonus baisse doucement (x6, x4, x2) pendant l\'heure. Profites-en pour acheter des biens et embaucher ton premier gestionnaire vite.'],
     ['👆', 'Touche pour encaisser', 'Touche un bien pour lancer son cycle de loyer, puis récupère l\'argent quand la barre est pleine.'],
     ['👔', 'Achète et embauche', 'Achète des niveaux pour gagner plus. Un gestionnaire encaisse les loyers pour toi, automatiquement et sans arrêt.'],
     ['🏛️', 'Vends ton empire', 'Quand tu es assez gros, vends-le contre des investisseurs : chaque type donne son propre bonus à vie (revenus, temps hors-ligne, durée des boosts ou récompenses) et chaque vente débloque de nouveaux biens. Puis recommence, plus vite.'],
@@ -603,7 +605,7 @@ function paint() {
   $('rate').textContent = '$' + fm(rateNow()) + L.per;
   $('mult').textContent = 'x' + fmt(curM(n));
   const bo = $('boost');
-  if (S.boostEnd > n || S.startEnd > n || S.adEnd > n) { bo.hidden = false; const l = Math.max(S.boostEnd, S.startEnd, S.adEnd || 0) - n; bo.textContent = '⚡ x' + ((S.startEnd > n ? 10 : 0) + (S.boostEnd > n ? S.bmult : 0) + (S.adEnd > n ? 2 : 0)) + ' ' + (l > 3600 ? Math.floor(l / 3600) + 'h' + String(Math.floor(l % 3600 / 60)).padStart(2, '0') : Math.floor(l / 60) + ':' + String(Math.floor(l % 60)).padStart(2, '0')); } else bo.hidden = true;
+  if (S.boostEnd > n || S.startEnd > n || S.adEnd > n) { bo.hidden = false; const l = Math.max(S.boostEnd, S.startEnd, S.adEnd || 0) - n; bo.textContent = '⚡ x' + (startM(n) + (S.boostEnd > n ? S.bmult : 0) + (S.adEnd > n ? 2 : 0)) + ' ' + (l > 3600 ? Math.floor(l / 3600) + 'h' + String(Math.floor(l % 3600 / 60)).padStart(2, '0') : Math.floor(l / 60) + ':' + String(Math.floor(l % 60)).padStart(2, '0')); } else bo.hidden = true;
   const bc = $('bankc'); if (S.bank > 0) { bc.hidden = false; bc.textContent = L.bankT + ' +' + Math.round(S.bank / 60) + ' min x2'; } else bc.hidden = true;
   const bk = (adDone() ? 1 : 0) + '' + (S.welcome ? 1 : 0) + '' + (S.dailyOk ? 1 : 0) + S.streak + (S.mg[0] ? 1 : 0) + (S.deal ? S.deal.sku : '-');
   if (bk !== lastBanner) { lastBanner = bk; buildBanners(); }
