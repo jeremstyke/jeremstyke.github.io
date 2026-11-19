@@ -476,10 +476,10 @@ function shareInvite() {
   try { if (tgw && tgw.openTelegramLink) tgw.openTelegramLink(u); else window.open(u, '_blank'); } catch (x) { window.open(u, '_blank'); }
 }
 function tutoStart() {
-  try { if (localStorage.getItem('ie_tuto2')) return; } catch (e) {}
+  try { if (localStorage.getItem('ie_tuto3')) return; } catch (e) {}
   const T = TUTO[lang] || TUTO.en; let k = 0;
   const el = document.createElement('div'); el.className = 'tuto'; document.body.appendChild(el);
-  const done = () => { try { localStorage.setItem('ie_tuto2', '1'); } catch (e) {} el.remove(); };
+  const done = () => { try { localStorage.setItem('ie_tuto3', '1'); } catch (e) {} el.remove(); };
   const draw = () => {
     const [e, t, d] = T[k]; const last = k === T.length - 1;
     el.innerHTML = `<div class="tc"><div class="te">${e}</div><h3>${t}</h3><p>${d}</p><div class="td">${T.map((_, i) => `<i class="${i === k ? 'on' : ''}"></i>`).join('')}</div><div class="tb">${last ? '' : `<button class="sk" id="tSkip">${lang === 'fr' ? 'Passer' : 'Skip'}</button>`}<button class="btn" id="tNext">${last ? (lang === 'fr' ? 'C\'est parti !' : 'Let\'s go!') : (lang === 'fr' ? 'Suivant' : 'Next')}</button></div></div>`;
@@ -930,11 +930,7 @@ async function boot() {
       if (x2) $('x2Away').onclick = () => { closeModal(); buy('away2'); };
     }
   };
-  // shown at every opening until the test period ends (25 Nov 2026)
-  if (Date.now() < Date.UTC(2026, 10, 26)) {
-    modal(`<div style="font-size:54px">🧪</div><h3>${L.testT}</h3><p>${L.testS}</p><button class="btn" id="okTest">${L.testOk}</button>`);
-    $('okTest').onclick = () => { hap('ok'); closeModal(); showAway(); };
-  } else showAway();
+  showAway();
 }
 boot();
 })();
