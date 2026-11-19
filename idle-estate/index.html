@@ -150,6 +150,14 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 .sheet p{color:var(--mut);margin:4px 0 14px;font-size:14.5px;line-height:1.4}
 .sheet .big{color:#1c9a2c;margin:6px 0 14px}
 .sheet .btn{width:100%;padding:14px;font-size:18px}
+.fld{display:flex;flex-direction:column;gap:4px;text-align:left;margin:8px 0}
+.fld label{font-family:var(--disp);font-weight:600;font-size:14px;color:var(--navy)}
+.fld input,.fld select{font:inherit;font-weight:800;font-size:16px;padding:10px 12px;border:2.5px solid var(--navy);border-radius:12px;background:#fff;color:var(--navy);width:100%}
+.fld small{color:var(--mut);font-weight:700;font-size:12.5px}
+.mkh{font-family:var(--disp);font-size:20px;font-weight:600;margin:18px 0 0}
+.row .rw2{font-family:var(--disp);font-size:18px;font-weight:600;color:#1c9a2c;margin-top:2px}
+.sheet .seg{margin:8px 0}
+.row .btn{padding:8px 12px;font-size:14px}
 .toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy);color:#fff;border-radius:16px;padding:10px 16px;font-size:14px;font-weight:800;z-index:80;opacity:0;pointer-events:none;transition:opacity .2s;max-width:88vw;text-align:center;border:2px solid #fff}
 .toast.on{opacity:1}
 .fl{position:fixed;z-index:70;font-family:var(--disp);font-weight:700;font-size:22px;color:#fff;-webkit-text-stroke:3px var(--navy);paint-order:stroke fill;pointer-events:none;animation:fly .9s ease-out forwards}
@@ -219,7 +227,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 
   <section class="pane" id="p-goals"></section>
   <section class="pane" id="p-shop"></section>
-  <section class="pane" id="p-prest"></section>
+  <section class="pane" id="p-mk"></section>
   <section class="pane" id="p-top"></section>
 </div>
 
@@ -233,7 +241,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1215';
+const BUILD = '20261119-1240';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -406,6 +414,7 @@ function apply(r, full) {
     else { buildSky(); }
   }
   if (r.top) topData = r;
+  if (r.market) mkD = r.market;
 }
 
 // ---------- economy (mirror of the server)
@@ -449,7 +458,7 @@ function popOn(i, v) {
 const cardEl = [];
 function build() {
   $('load').style.display = 'none';
-  $('nav').innerHTML = [['estate', '🏠', L.estate], ['goals', '🎯', L.goals], ['shop', '⭐', L.shop], ['top', '🏆', L.top]].map(([k, e, t]) => `<button data-t="${k}"${k === 'estate' ? ' class="on"' : ''}><span>${e}</span>${t}</button>`).join('');
+  $('nav').innerHTML = [['estate', '🏠', L.estate], ['goals', '🎯', L.goals], ['shop', '⭐', L.shop], ['mk', '🏪', MKT.tab], ['top', '🏆', L.top]].map(([k, e, t]) => `<button data-t="${k}"${k === 'estate' ? ' class="on"' : ''}><span>${e}</span>${t}</button>`).join('');
   $('nav').onclick = e => { const b = e.target.closest('button'); if (b) go(b.dataset.t); };
   $('seg').innerHTML = [1, 10, 100, 'max'].map(m => `<button data-m="${m}">${m === 'max' ? L.max : 'x' + m}</button>`).join('');
   $('seg').onclick = e => { const b = e.target.closest('button'); if (!b) return; mode = b.dataset.m === 'max' ? 'max' : Number(b.dataset.m); try { localStorage.setItem('ie_mode', JSON.stringify(mode)); } catch (e) {} hap('light'); paint(); };
@@ -719,7 +728,7 @@ function go(t) {
   document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
   document.querySelector('.scene').style.display = t === 'estate' ? '' : 'none';
   scrollTo(0, 0); hap('light');
-  if (t === 'shop') renderShop(); else if (t === 'prest') renderPrest(); else if (t === 'top') loadTop(); else if (t === 'goals') renderGoals(true);
+  if (t === 'shop') renderShop(); else if (t === 'mk') loadMk(); else if (t === 'top') loadTop(); else if (t === 'goals') renderGoals(true);
 }
 
 // shop
@@ -836,6 +845,108 @@ function initTon() {
     tcui.onStatusChange(w => { const a = w && w.account && w.account.address; if (a && a !== S.wallet_addr) call({ act: 'wallet', addr: a }).then(() => { toast('👛 OK'); if (tab === 'top') renderTop(); }); });
   } catch (e) { tcui = null; }
 }
+
+// ---------- market: sell levels for good or rent them for 24h, paid in game cash (Stars side is switched on server side)
+const MKT = {
+  en: { tab: 'Market', t: 'Market', s: 'Sell levels of your properties for good, or rent them out for 24h. Paid in game cash. 5% of each price is burned.', create: 'List something', mine: 'My listings', list: 'For sale and for rent', empty: 'Nothing listed right now. Be the first!',
+    sell: 'Sell', rent: 'Rent 24h', buyB: 'Buy', rentB: 'Rent', cancel: 'Cancel', lv: 'levels', sellInfo: 'You sell these levels for good. Your first level always stays with you.', rentInfo: 'The levels come back to you after 24h. The tenant earns their rent meanwhile.',
+    prop: 'Property', qty: 'Levels', price: 'Price in $', range: 'Between {a} and {b}', submit: 'Publish', nofree: 'You need at least 2 levels of a property to list some', forSale: 'For sale', forRent: 'For rent 24h', rentedOut: 'Rented out, back in', rentedIn: 'Rented, ends in', by: 'by',
+    confirmBuy: 'Buy {n} x {p} for {c}?', confirmRent: 'Rent {n} x {p} for 24h for {c}?', yes: 'Confirm', okBuy: 'Bought!', okRent: 'Rented for 24h!', okNew: 'Listed!', okCancel: 'Listing cancelled',
+    err: { gone: 'Already gone', own: 'This is your own listing', poor: 'Not enough cash', locked: 'Unlock this property first', reserved: 'Someone is paying for it', free: 'Not enough free levels', max: 'You can have 3 listings at most', price: 'Enter a price', bad: 'Invalid', busy: 'Try again', off: 'Market closed for now', server: 'Error, try again', nostars: 'Not available' } },
+  fr: { tab: 'Marché', t: 'Marché', s: 'Vends des niveaux de tes biens pour de bon, ou loue-les 24h. Payé en cash du jeu. 5 % de chaque prix part en fumée.', create: 'Mettre en vente', mine: 'Mes annonces', list: 'À vendre et à louer', empty: 'Rien en vente pour l\'instant. Sois le premier !',
+    sell: 'Vendre', rent: 'Louer 24h', buyB: 'Acheter', rentB: 'Louer', cancel: 'Annuler', lv: 'niveaux', sellInfo: 'Tu vends ces niveaux pour de bon. Ton premier niveau reste toujours à toi.', rentInfo: 'Les niveaux te reviennent après 24h. Le locataire encaisse les loyers entre-temps.',
+    prop: 'Bien', qty: 'Niveaux', price: 'Prix en $', range: 'Entre {a} et {b}', submit: 'Publier', nofree: 'Il te faut au moins 2 niveaux d\'un bien pour en proposer', forSale: 'À vendre', forRent: 'À louer 24h', rentedOut: 'Loué, retour dans', rentedIn: 'Loué, fin dans', by: 'par',
+    confirmBuy: 'Acheter {n} x {p} pour {c} ?', confirmRent: 'Louer {n} x {p} 24h pour {c} ?', yes: 'Confirmer', okBuy: 'Acheté !', okRent: 'Loué pour 24h !', okNew: 'Annonce publiée !', okCancel: 'Annonce annulée',
+    err: { gone: 'Déjà parti', own: 'C\'est ton annonce', poor: 'Pas assez de cash', locked: 'Débloque d\'abord ce bien', reserved: 'Quelqu\'un est en train de payer', free: 'Pas assez de niveaux libres', max: '3 annonces maximum', price: 'Entre un prix', bad: 'Invalide', busy: 'Réessaie', off: 'Marché fermé pour le moment', server: 'Erreur, réessaie', nostars: 'Indisponible' } },
+}[lang];
+let mkD = null;
+const nameOf = i => (L.names && L.names[i]) || ('#' + (i + 1));
+const refV = (i, n) => S.cfg[i].c * Math.pow(S.g, Math.max(0, S.lv[i] - n)) * (Math.pow(S.g, n) - 1) / (S.g - 1);
+// "1.5M", "250k", "40000" -> game units (1 unit = K dollars)
+function parseUsd(t) {
+  const m = /^\s*([\d]+(?:[.,]\d+)?)\s*([kmbt]?)/i.exec(String(t)); if (!m) return 0;
+  const x = parseFloat(m[1].replace(',', '.')) * ({ '': 1, k: 1e3, m: 1e6, b: 1e9, t: 1e12 }[m[2].toLowerCase()]);
+  return x / K;
+}
+function loadMk() { call({ act: 'mk_list' }).then(() => { if (tab === 'mk') renderMk(); }); renderMk(); }
+function mkDone(r, ok) {
+  const e = r && r.mk && r.mk.err;
+  if (r && r.mk && r.mk.ok) { hap('ok'); toast(ok); closeModal(); }
+  else if (e === 'range') toast(MKT.range.replace('{a}', '$' + fmt(r.mk.lo * K)).replace('{b}', '$' + fmt(r.mk.hi * K)));
+  else { hap('light'); toast(MKT.err[e] || L.err); }
+  if (tab === 'mk') renderMk();
+}
+function renderMk() {
+  const p = $('p-mk'); const d = mkD;
+  let h = `<h2>${MKT.t}</h2><p class="lead">${MKT.s}</p>`;
+  if (!d) { p.innerHTML = h; return; }
+  if (d.on === false) { p.innerHTML = h + `<p class="lead">${MKT.err.off}</p>`; return; }
+  h += `<button class="btn" id="mkNew" style="width:100%">➕ ${MKT.create}</button>`;
+  if (d.mine.length) {
+    h += `<div class="mkh">${MKT.mine}</div>`;
+    for (const m of d.mine) {
+      const left = m.until ? fmtLeft(m.until - snow()) : '';
+      let st, btn = '';
+      if (m.out && m.st === 'open') { st = m.k === 'rent' ? MKT.forRent : MKT.forSale; btn = `<button class="btn" data-cancel="${m.id}" style="background:linear-gradient(#ff9a9a,#e03c3c)">${MKT.cancel}</button>`; }
+      else if (m.out) st = MKT.rentedOut + ' ' + left;
+      else st = MKT.rentedIn + ' ' + left;
+      h += `<div class="row"><div class="e">${EM[m.i] || '🏠'}</div><div class="tx"><b>${m.n} x ${esc(nameOf(m.i))}</b><span>${st}</span>${m.pc != null ? `<div class="rw2">$${fm(m.pc)}</div>` : ''}</div>${btn}</div>`;
+    }
+  }
+  h += `<div class="mkh">${MKT.list}</div>`;
+  const rows = d.list.filter(l => l.pc != null || (d.stars && l.ps != null));
+  if (!rows.length) h += `<p class="lead" style="margin-top:8px">${MKT.empty}</p>`;
+  for (const l of rows) {
+    const rent = l.k === 'rent';
+    h += `<div class="row${rent ? '' : ' hot'}"><div class="e">${EM[l.i] || '🏠'}</div><div class="tx"><b>${l.n} x ${esc(nameOf(l.i))}</b><span>${rent ? MKT.forRent : MKT.forSale} · ${MKT.by} ${esc(l.s)}</span>${l.pc != null ? `<div class="rw2">$${fm(l.pc)}</div>` : ''}</div>${l.pc != null ? `<button class="btn" data-buy="${l.id}">${rent ? MKT.rentB : MKT.buyB}</button>` : ''}</div>`;
+  }
+  p.innerHTML = h;
+  p.onclick = e => {
+    if (e.target.closest('#mkNew')) return openMkNew();
+    const c = e.target.closest('[data-cancel]'); if (c) { hap('light'); call({ act: 'mk_cancel', id: Number(c.dataset.cancel) }).then(r => mkDone(r, MKT.okCancel)); return; }
+    const b = e.target.closest('[data-buy]'); if (b) openMkBuy(Number(b.dataset.buy));
+  };
+}
+function openMkBuy(id) {
+  const l = mkD && mkD.list.find(x => x.id === id); if (!l) return;
+  if (S.cash < l.pc) { hap('light'); toast(MKT.err.poor + ' ($' + fm(l.pc - S.cash) + ' ?)'); return; }
+  const rent = l.k === 'rent';
+  modal(`<h3>${EM[l.i] || '🏠'} ${l.n} x ${esc(nameOf(l.i))}</h3><p>${(rent ? MKT.confirmRent : MKT.confirmBuy).replace('{n}', l.n).replace('{p}', esc(nameOf(l.i))).replace('{c}', '$' + fm(l.pc))}</p><button class="btn" id="mkYes">${MKT.yes}</button>`);
+  $('mkYes').onclick = () => { $('mkYes').disabled = true; call({ act: 'mk_buy', id }).then(r => { if (r && r.mk && r.mk.ok) snd('win'); mkDone(r, rent ? MKT.okRent : MKT.okBuy); }); };
+}
+function openMkNew() {
+  const free = (mkD && mkD.free) || [];
+  const idx = []; for (let i = 0; i < S.unl && i < NB; i++) if ((free[i] || 0) >= 1) idx.push(i);
+  if (!idx.length) { hap('light'); toast(MKT.nofree); return; }
+  let kind = 'sell', i = idx[idx.length - 1], n = 1;
+  const draw = () => {
+    const mx = free[i];
+    n = Math.max(1, Math.min(mx, n));
+    modal(`<h3>🏪 ${MKT.create}</h3>
+      <div class="seg"><button data-k="sell"${kind === 'sell' ? ' class="on"' : ''}>${MKT.sell}</button><button data-k="rent"${kind === 'rent' ? ' class="on"' : ''}>${MKT.rent}</button></div>
+      <p style="margin:4px 0 6px">${kind === 'sell' ? MKT.sellInfo : MKT.rentInfo}</p>
+      <div class="fld"><label>${MKT.prop}</label><select id="mkI">${idx.map(k => `<option value="${k}"${k === i ? ' selected' : ''}>${EM[k] || ''} ${esc(nameOf(k))} (${free[k]} ${MKT.lv})</option>`).join('')}</select></div>
+      <div class="fld"><label>${MKT.qty}</label><input id="mkN" type="number" inputmode="numeric" min="1" max="${mx}" value="${n}"></div>
+      <div class="fld"><label>${MKT.price}</label><input id="mkP" type="text" inputmode="decimal" autocomplete="off"><small id="mkR"></small></div>
+      <button class="btn" id="mkGo">${MKT.submit}</button>`);
+    const refresh = () => {
+      const ref = refV(i, n), lo = (kind === 'sell' ? 0.3 : 0.02) * ref, hi = (kind === 'sell' ? 10 : 2) * ref;
+      $('mkR').textContent = MKT.range.replace('{a}', '$' + fmt(lo * K)).replace('{b}', '$' + fmt(hi * K));
+      return { ref, def: (kind === 'sell' ? 1 : 0.08) * ref };
+    };
+    let r0 = refresh(); $('mkP').value = fmt(r0.def * K);
+    $('sheet').querySelectorAll('[data-k]').forEach(bt => bt.onclick = () => { kind = bt.dataset.k; draw(); });
+    $('mkI').onchange = e => { i = Number(e.target.value); n = 1; draw(); };
+    $('mkN').onchange = e => { n = Math.max(1, Math.min(free[i], Math.floor(Number(e.target.value) || 1))); draw(); };
+    $('mkGo').onclick = () => {
+      n = Math.max(1, Math.min(free[i], Math.floor(Number($('mkN').value) || 1)));
+      const pc = parseUsd($('mkP').value); if (!(pc > 0)) { toast(MKT.err.price); return; }
+      $('mkGo').disabled = true; call({ act: 'mk_new', kind, i, n, pc }).then(r => mkDone(r, MKT.okNew));
+    };
+  };
+  draw();
+}
+
 // top
 function loadTop() { call({ act: 'top' }).then(() => { if (tab === 'top') renderTop(); }); }
 function renderTop() {
