@@ -248,7 +248,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1800';
+const BUILD = '20261119-1830';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -880,12 +880,12 @@ function initTon() {
 
 // ---------- market: sell levels for good or rent them for 24h, paid in game cash (Stars side is switched on server side)
 const MKT = {
-  en: { wait: 'Selling opens in {t}', tab: 'Market', t: 'Market', s: 'Sell levels of your properties for good, or rent them out for 24h. Paid in game cash. 10% of each price is burned.', create: 'List something', mine: 'My listings', list: 'For sale and for rent', empty: 'Nothing listed right now. Be the first!',
+  en: { fAll: 'All properties', sRent: 'Most profitable', sPrice: 'Lowest price', payback: 'Pays back in {t}', profit: '24h profit', wait: 'Selling opens in {t}', tab: 'Market', t: 'Market', s: 'Sell levels of your properties for good, or rent them out for 24h. Paid in game cash. 10% of each price is burned.', create: 'List something', mine: 'My listings', list: 'For sale and for rent', empty: 'Nothing listed right now. Be the first!',
     sell: 'Sell', rent: 'Rent 24h', buyB: 'Buy', rentB: 'Rent', cancel: 'Cancel', lv: 'levels', sellInfo: 'You sell these levels for good. Your first level always stays with you.', rentInfo: 'The levels come back to you after 24h. The tenant earns their rent meanwhile.',
     prop: 'Property', qty: 'Levels', price: 'Price in $', range: 'Between {a} and {b}', max: 'Maximum {b}', submit: 'Publish', nofree: 'You need at least 2 levels of a property to list some', forSale: 'For sale', forRent: 'For rent 24h', rentedOut: 'Rented out, back in', rentedIn: 'Rented, ends in', by: 'by',
     confirmBuy: 'Buy {n} x {p} for {c}?', confirmRent: 'Rent {n} x {p} for 24h for {c}?', yes: 'Confirm', okBuy: 'Bought!', okRent: 'Rented for 24h!', okNew: 'Listed!', okCancel: 'Listing cancelled',
     err: { young: 'Selling opens after your first hour', gone: 'Already gone', own: 'This is your own listing', poor: 'Not enough cash', locked: 'Unlock this property first', reserved: 'Someone is paying for it', free: 'Not enough free levels', max: 'You can have 3 listings at most', price: 'Enter a price', bad: 'Invalid', busy: 'Try again', off: 'Market closed for now', server: 'Error, try again', nostars: 'Not available' } },
-  fr: { wait: 'Vente ouverte dans {t}', tab: 'Marché', t: 'Marché', s: 'Vends des niveaux de tes biens pour de bon, ou loue-les 24h. Payé en cash du jeu. 10 % de chaque prix part en fumée.', create: 'Mettre en vente', mine: 'Mes annonces', list: 'À vendre et à louer', empty: 'Rien en vente pour l\'instant. Sois le premier !',
+  fr: { fAll: 'Tous les biens', sRent: 'Les plus rentables', sPrice: 'Prix croissant', payback: 'Rentabilisé en {t}', profit: 'Bénéfice sur 24h', wait: 'Vente ouverte dans {t}', tab: 'Marché', t: 'Marché', s: 'Vends des niveaux de tes biens pour de bon, ou loue-les 24h. Payé en cash du jeu. 10 % de chaque prix part en fumée.', create: 'Mettre en vente', mine: 'Mes annonces', list: 'À vendre et à louer', empty: 'Rien en vente pour l\'instant. Sois le premier !',
     sell: 'Vendre', rent: 'Louer 24h', buyB: 'Acheter', rentB: 'Louer', cancel: 'Annuler', lv: 'niveaux', sellInfo: 'Tu vends ces niveaux pour de bon. Ton premier niveau reste toujours à toi.', rentInfo: 'Les niveaux te reviennent après 24h. Le locataire encaisse les loyers entre-temps.',
     prop: 'Bien', qty: 'Niveaux', price: 'Prix en $', range: 'Entre {a} et {b}', max: 'Maximum {b}', submit: 'Publier', nofree: 'Il te faut au moins 2 niveaux d\'un bien pour en proposer', forSale: 'À vendre', forRent: 'À louer 24h', rentedOut: 'Loué, retour dans', rentedIn: 'Loué, fin dans', by: 'par',
     confirmBuy: 'Acheter {n} x {p} pour {c} ?', confirmRent: 'Louer {n} x {p} 24h pour {c} ?', yes: 'Confirmer', okBuy: 'Acheté !', okRent: 'Loué pour 24h !', okNew: 'Annonce publiée !', okCancel: 'Annonce annulée',
@@ -908,7 +908,9 @@ function mkDone(r, ok) {
   else { hap('light'); toast(MKT.err[e] || L.err); }
   if (tab === 'mk') renderMk();
 }
-let mkYoung = false;
+let mkYoung = false, mkF = -1, mkS = 'rent';
+// income per second (steady, managed, no temporary boost) gained by adding n levels of property i
+function mkGain(i, n) { const c = S.cfg[i], b = S.incm * (S.perm2 ? 2 : 1), f = l => c.r * l * mult(l) * b / c.t; return f(S.lv[i] + n) - f(S.lv[i]); }
 function renderMk() {
   const p = $('p-mk'); const d = mkD;
   let h = `<h2>${MKT.t}</h2><p class="lead">${MKT.s}</p>`;
@@ -928,13 +930,27 @@ function renderMk() {
     }
   }
   h += `<div class="mkh">${MKT.list}</div>`;
-  const rows = d.list.filter(l => l.pc != null || (d.stars && l.ps != null));
+  let rows = d.list.filter(l => l.pc != null || (d.stars && l.ps != null));
+  for (const l of rows) { const g = l.pc != null ? mkGain(l.i, l.n) : 0; l.g = g; l.sc = l.pc > 0 ? (l.k === 'rent' ? g * 86400 / l.pc : g * 3600 / l.pc) : 0; }
+  const props = Array.from(new Set(rows.map(l => l.i))).sort((a, b) => a - b);
+  if (mkF >= 0 && !props.includes(mkF)) mkF = -1;
+  if (rows.length) h += `<div style="display:flex;gap:8px;margin:8px 0"><select id="mkF" style="flex:1;min-width:0;padding:8px;border-radius:12px;border:2px solid var(--navy);font:inherit"><option value="-1">${MKT.fAll}</option>${props.map(i => `<option value="${i}"${i === mkF ? ' selected' : ''}>${esc(nameOf(i))}</option>`).join('')}</select><select id="mkS" style="flex:1;min-width:0;padding:8px;border-radius:12px;border:2px solid var(--navy);font:inherit"><option value="rent"${mkS === 'rent' ? ' selected' : ''}>${MKT.sRent}</option><option value="price"${mkS === 'price' ? ' selected' : ''}>${MKT.sPrice}</option></select></div>`;
+  if (mkF >= 0) rows = rows.filter(l => l.i === mkF);
+  rows.sort((a, b) => mkS === 'price' ? (a.pc || 0) - (b.pc || 0) : b.sc - a.sc);
   if (!rows.length) h += `<p class="lead" style="margin-top:8px">${MKT.empty}</p>`;
   for (const l of rows) {
     const rent = l.k === 'rent';
-    h += `<div class="row${rent ? '' : ' hot'}"><div class="tx"><b>${l.n} x ${esc(nameOf(l.i))}</b><span>${rent ? MKT.forRent : MKT.forSale} · ${MKT.by} ${esc(l.s)}</span>${l.pc != null ? `<div class="rw2">$${fm(l.pc)}</div>` : ''}</div>${l.pc != null ? `<button class="btn" data-buy="${l.id}">${rent ? MKT.rentB : MKT.buyB}</button>` : ''}</div>`;
+    let roi = '';
+    if (l.pc != null && l.g > 0) {
+      if (rent) { const pf = l.g * 86400 - l.pc; roi = `<div style="font-size:12px;font-weight:700;color:${pf >= 0 ? '#1b8a3a' : '#c0392b'}">${MKT.profit} : ${pf >= 0 ? '+' : '-'}$${fm(Math.abs(pf))}</div>`; }
+      else roi = `<div style="font-size:12px;font-weight:700;color:#1b6aa5">${MKT.payback.replace('{t}', fmtT(Math.ceil(l.pc / l.g)))}</div>`;
+    }
+    h += `<div class="row${rent ? '' : ' hot'}"><div class="tx"><b>${l.n} x ${esc(nameOf(l.i))}</b><span>${rent ? MKT.forRent : MKT.forSale} · ${MKT.by} ${esc(l.s)}</span>${l.pc != null ? `<div class="rw2">$${fm(l.pc)}</div>` : ''}${roi}</div>${l.pc != null ? `<button class="btn" data-buy="${l.id}">${rent ? MKT.rentB : MKT.buyB}</button>` : ''}</div>`;
   }
   p.innerHTML = h;
+  const sf = $('mkF'), ss = $('mkS');
+  if (sf) sf.onchange = () => { mkF = Number(sf.value); renderMk(); };
+  if (ss) ss.onchange = () => { mkS = ss.value; renderMk(); };
   p.onclick = e => {
     if (e.target.closest('#mkNew')) return mkYoung ? toast(MKT.err.young) : openMkNew();
     const c = e.target.closest('[data-cancel]'); if (c) { hap('light'); call({ act: 'mk_cancel', id: Number(c.dataset.cancel) }).then(r => mkDone(r, MKT.okCancel)); return; }
