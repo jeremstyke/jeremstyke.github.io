@@ -147,13 +147,25 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 .prsub{display:inline-block;margin:4px 0 2px;padding:3px 12px;border-radius:999px;background:#e4f3ff;border:2px solid var(--navy);font-weight:800;font-size:13px;color:var(--navy)}
 .btn.ghost{background:#fff;color:var(--navy);text-shadow:none;box-shadow:0 4px 0 var(--navy);margin-top:10px}
 .btn.warn{background:linear-gradient(#ff8a7a,#e5412e)}
-.pfav{width:84px;height:84px;margin:4px auto 6px;border-radius:50%;border:4px solid var(--navy);display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-size:40px;color:var(--navy);box-shadow:0 4px 0 var(--navy);background:linear-gradient(#cfe6ff,#8fbdf0);position:relative}
-.pfav.t1{background:linear-gradient(#f3c9a0,#d9965b)}.pfav.t2{background:linear-gradient(#f4f8fc,#b9c9db)}.pfav.t3{background:linear-gradient(#ffe48a,#ffb82e)}.pfav.t4{background:linear-gradient(#e7c8ff,#a86bff)}
-.pfav em{position:absolute;right:-8px;bottom:-6px;font-style:normal;font-size:12px;font-weight:800;padding:2px 7px;border-radius:999px;border:2.5px solid var(--navy);background:#fff;color:var(--navy);font-family:system-ui,sans-serif}
-.pfg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0 4px}
-.pfg div{border:2.5px solid var(--navy);border-radius:14px;padding:8px 6px;background:linear-gradient(#fff,#e4f3ff)}
-.pfg b{display:block;font-family:var(--disp);font-size:22px;color:var(--navy)}
-.pfg span{font-size:12px;color:var(--mut)}
+.pfc{margin:-22px -18px 0;padding:0 0 4px;text-align:center}
+.pfbn{height:92px;border-radius:27px 27px 0 0;background:radial-gradient(120px 80px at 85% 0,rgba(255,255,255,.18),transparent),linear-gradient(135deg,#17386e,#2a5aa8)}
+.pfbn.t1{background:radial-gradient(120px 80px at 85% 0,rgba(255,255,255,.2),transparent),linear-gradient(135deg,#6b3f1d,#c98a4e)}
+.pfbn.t2{background:radial-gradient(120px 80px at 85% 0,rgba(255,255,255,.3),transparent),linear-gradient(135deg,#46566b,#a9bad0)}
+.pfbn.t3{background:radial-gradient(120px 80px at 85% 0,rgba(255,255,255,.3),transparent),linear-gradient(135deg,#9a6200,#f2b630)}
+.pfbn.t4{background:radial-gradient(120px 80px at 85% 0,rgba(255,255,255,.25),transparent),linear-gradient(135deg,#3b1578,#9a62ff)}
+.pfav{width:88px;height:88px;margin:-46px auto 0;border-radius:50%;border:4px solid #fff;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-size:38px;color:#fff;background:linear-gradient(#2a5aa8,#17386e);box-shadow:0 0 0 2.5px var(--navy),0 6px 14px rgba(18,48,94,.3);position:relative}
+.pfc h3{margin:10px 0 4px;font-size:24px}
+.pfrk{display:inline-block;padding:3px 12px;border-radius:999px;background:#eef3fa;color:var(--navy);font-size:12.5px;font-weight:800;letter-spacing:.02em}
+.pfrk.me{background:var(--navy);color:#fff;margin-left:6px}
+.pfm{display:flex;justify-content:center;gap:22px;margin:16px 14px 6px;padding:12px 0;border-top:1.5px solid #e3ebf5;border-bottom:1.5px solid #e3ebf5}
+.pfm div{flex:1}
+.pfm b{display:block;font-family:var(--disp);font-size:26px;color:var(--navy);line-height:1.1}
+.pfm span{font-size:11.5px;color:var(--mut);font-weight:700}
+.pfl{margin:6px 14px 0;text-align:left}
+.pfl div{display:flex;justify-content:space-between;align-items:center;padding:9px 2px;border-bottom:1px solid #edf2f8;font-size:14px;color:#33507a}
+.pfl div:last-child{border-bottom:0}
+.pfl b{color:var(--navy);font-family:var(--disp);font-size:16px}
+.pfs{font-size:12px;color:var(--mut);margin:8px 0 12px}
 .top .rk{width:28px;font-family:var(--disp);font-weight:700;font-size:18px;color:var(--navy)}
 .top .n{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:800}
 .top .p{font-weight:800;color:#a15e00;white-space:nowrap}
@@ -271,7 +283,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-2315';
+const BUILD = '20261119-2330';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -296,7 +308,7 @@ const L = {
  en: {
   lockT:'Buy the previous property first',
   bankT:'🎁 Start x2 boost',
-  prT:'Start over with a bonus', prNow:'You own {n} properties', prLoseH:'You lose', prKeepH:'You keep', prGainH:'You gain', prLoseS:'Property levels, managers and cash. You restart with one studio.', prKeepS:'Boosts, Stars purchases, achievements, quests and ranking score.', prGainS:'+{x}% income forever', prAfter:'Total bonus: +{t}%', prConf:'Confirm: reset everything', prConfH:'This cannot be undone', pfT:'Profile', pfPr:'Prestiges', pfBonus:'Permanent bonus', pfOwn:'Properties owned', pfLv:'Levels', pfAch:'Achievements', pfDays:'Days playing', pfRank:'Rank this week', pfMe:'You', pfNone:'Player not found', pfBtn:'My profile', pfNoPr:'No prestige yet', pfClose:'Close', prP:'You own {n} properties. You can sell everything and restart.', prLose:'Lost: all property levels, managers and cash. You restart with one studio.', prKeep:'Kept: boost reserve, Stars purchases, achievements, quests and ranking score.', prGain:'Permanent income bonus: +{x}%', prTot:'(on top of your current +{t}%)', prGo:'Start over', prNo:'Not now', prChip:'Prestige', prMk:'Cancel your market listings and rentals first.', prLow:'Not available yet.', prDone:'New start! Your permanent bonus is active.', prNeed:'Own {n} properties to start over with a bonus.',
+  prT:'Start over with a bonus', prNow:'You own {n} properties', prLoseH:'You lose', prKeepH:'You keep', prGainH:'You gain', prLoseS:'Property levels, managers and cash. You restart with one studio.', prKeepS:'Boosts, Stars purchases, achievements, quests and ranking score.', prGainS:'+{x}% income forever', prAfter:'Total bonus: +{t}%', prConf:'Confirm: reset everything', prConfH:'This cannot be undone', pfT:'Profile', pfRk:['Rookie','Investor','Developer','Tycoon','Legend'], pfSince:'Playing for {d} days', pfPr:'Prestiges', pfBonus:'Permanent bonus', pfOwn:'Properties owned', pfLv:'Levels', pfAch:'Achievements', pfDays:'Days playing', pfRank:'Rank this week', pfMe:'You', pfNone:'Player not found', pfBtn:'My profile', pfNoPr:'No prestige yet', pfClose:'Close', prP:'You own {n} properties. You can sell everything and restart.', prLose:'Lost: all property levels, managers and cash. You restart with one studio.', prKeep:'Kept: boost reserve, Stars purchases, achievements, quests and ranking score.', prGain:'Permanent income bonus: +{x}%', prTot:'(on top of your current +{t}%)', prGo:'Start over', prNo:'Not now', prChip:'Prestige', prMk:'Cancel your market listings and rentals first.', prLow:'Not available yet.', prDone:'New start! Your permanent bonus is active.', prNeed:'Own {n} properties to start over with a bonus.',
   testT:'Testing period', testS:'Idle Estate is still in testing until November 25. Accounts can be reset again if we need to adjust the balance. After that, no more resets.', testOk:'Got it',
   names:['Studio','Loft','Villa','Apartment block','Residential tower','Hotel chain','Mall network','Business district','Resort island','Skyscraper','Megacity','Airport','Theme park','Stadium','Harbour','Tech campus','Mountain resort','Island chain','Floating city','Orbital hotel','Lunar base','Mars colony','Space elevator','Asteroid mine','Terraformed planet','Star port','Orbital ring','Arcology','Dyson swarm','Galactic hub', 'Neon district', 'Cloud palace', 'Underwater dome', 'Volcano spa', 'Glacier resort', 'Desert oasis', 'Rainforest lodge', 'Casino strip', 'Film studio', 'Rocket park', 'Crystal tower', 'Sky bridge', 'Robot city', 'Clone district', 'Fusion plant', 'Time hotel', 'Dragon keep', 'Wizard college', 'Pirate cove', 'Ice moon', 'Shooting-star port', 'Black hole spa', 'Nebula garden', 'Quantum lab', 'Hyperloop hub', 'Pocket universe', 'Mirror dimension', 'Dream city', 'Infinity tower', 'Heart of the cosmos'],
   pr:['month','month','month','month','month','month','month','month','month','month'],
@@ -330,7 +342,7 @@ const L = {
  fr: {
   lockT:'Achète d\'abord le bien précédent',
   bankT:'🎁 Lancer le boost x2',
-  prT:'Repartir avec un bonus', prNow:'Tu possèdes {n} biens', prLoseH:'Tu perds', prKeepH:'Tu gardes', prGainH:'Tu gagnes', prLoseS:'Niveaux de biens, gestionnaires et cash. Tu repars avec un studio.', prKeepS:'Boosts, achats en Étoiles, succès, quêtes et score du classement.', prGainS:'+{x}% de revenus pour toujours', prAfter:'Bonus total : +{t}%', prConf:'Confirmer : tout remettre à zéro', prConfH:'Impossible de revenir en arrière', pfT:'Profil', pfPr:'Prestiges', pfBonus:'Bonus permanent', pfOwn:'Biens possédés', pfLv:'Niveaux', pfAch:'Succès', pfDays:'Jours de jeu', pfRank:'Classement de la semaine', pfMe:'Toi', pfNone:'Joueur introuvable', pfBtn:'Mon profil', pfNoPr:'Aucun prestige', pfClose:'Fermer', prP:'Tu possèdes {n} biens. Tu peux tout vendre et repartir de zéro.', prLose:'Perdu : tous les niveaux de biens, les gestionnaires et le cash. Tu repars avec un studio.', prKeep:'Conservé : réserve de boosts, achats en Étoiles, succès, quêtes et score du classement.', prGain:'Bonus de revenus permanent : +{x}%', prTot:'(en plus de ton +{t}% actuel)', prGo:'Repartir', prNo:'Pas maintenant', prChip:'Prestige', prMk:'Annule d\'abord tes annonces et locations du marché.', prLow:'Pas encore disponible.', prDone:'Nouveau départ ! Ton bonus permanent est actif.', prNeed:'Possède {n} biens pour repartir avec un bonus.',
+  prT:'Repartir avec un bonus', prNow:'Tu possèdes {n} biens', prLoseH:'Tu perds', prKeepH:'Tu gardes', prGainH:'Tu gagnes', prLoseS:'Niveaux de biens, gestionnaires et cash. Tu repars avec un studio.', prKeepS:'Boosts, achats en Étoiles, succès, quêtes et score du classement.', prGainS:'+{x}% de revenus pour toujours', prAfter:'Bonus total : +{t}%', prConf:'Confirmer : tout remettre à zéro', prConfH:'Impossible de revenir en arrière', pfT:'Profil', pfRk:['Débutant','Investisseur','Promoteur','Magnat','Légende'], pfSince:'En jeu depuis {d} jours', pfPr:'Prestiges', pfBonus:'Bonus permanent', pfOwn:'Biens possédés', pfLv:'Niveaux', pfAch:'Succès', pfDays:'Jours de jeu', pfRank:'Classement de la semaine', pfMe:'Toi', pfNone:'Joueur introuvable', pfBtn:'Mon profil', pfNoPr:'Aucun prestige', pfClose:'Fermer', prP:'Tu possèdes {n} biens. Tu peux tout vendre et repartir de zéro.', prLose:'Perdu : tous les niveaux de biens, les gestionnaires et le cash. Tu repars avec un studio.', prKeep:'Conservé : réserve de boosts, achats en Étoiles, succès, quêtes et score du classement.', prGain:'Bonus de revenus permanent : +{x}%', prTot:'(en plus de ton +{t}% actuel)', prGo:'Repartir', prNo:'Pas maintenant', prChip:'Prestige', prMk:'Annule d\'abord tes annonces et locations du marché.', prLow:'Pas encore disponible.', prDone:'Nouveau départ ! Ton bonus permanent est actif.', prNeed:'Possède {n} biens pour repartir avec un bonus.',
   testT:'Période de test', testS:'Idle Estate est encore en test jusqu\'au 25 novembre. Les comptes peuvent être remis à zéro si on doit ajuster l\'équilibre. Après, plus de remise à zéro.', testOk:'Compris',
   names:['Studio','Loft','Villa','Immeuble','Tour résidentielle','Chaîne d\'hôtels','Centres commerciaux','Quartier d\'affaires','Île resort','Gratte-ciel','Mégapole','Aéroport','Parc d\'attractions','Stade','Port','Campus tech','Station de montagne','Archipel','Ville flottante','Hôtel orbital','Base lunaire','Colonie martienne','Ascenseur spatial','Mine d\'astéroïdes','Planète terraformée','Spatioport','Anneau orbital','Arcologie','Essaim de Dyson','Pôle galactique', 'Quartier néon', 'Palais des nuages', 'Dôme sous-marin', 'Spa du volcan', 'Station de glacier', 'Oasis du désert', 'Lodge de la jungle', 'Strip des casinos', 'Studio de cinéma', 'Parc des fusées', 'Tour de cristal', 'Pont céleste', 'Cité des robots', 'Quartier des clones', 'Centrale à fusion', 'Hôtel du temps', 'Donjon du dragon', 'École des sorciers', 'Crique des pirates', 'Lune de glace', 'Port des étoiles filantes', 'Spa du trou noir', 'Jardin de nébuleuse', 'Labo quantique', 'Hub hyperloop', 'Univers de poche', 'Dimension miroir', 'Cité des rêves', 'Tour de l\'infini', 'Cœur du cosmos'],
   pr:['mois','mois','mois','mois','mois','mois','mois','mois','mois','mois'],
@@ -441,11 +453,12 @@ function openProfile(u) {
     if (!r || !r.ok) { modal(`<h3>${L.pfT}</h3><p>${L.pfNone}</p><button class="btn" id="pfx">${L.pfClose}</button>`); $('pfx').onclick = closeModal; return; }
     const p = r.p, nm = (p.gold ? '👑 ' : '') + p.n, ini = Array.from(p.n.replace(/^[^\p{L}\p{N}]+/u, '') || '?')[0].toUpperCase();
     const tot = (S.defs || []).length || 26;
-    modal(`<div class="pfav${p.pr ? ' t' + prTier(p.pr) : ''}">${esc(ini)}${p.pr ? `<em>🔄 ${p.pr}</em>` : ''}</div>
-      <h3 style="margin:8px 0 2px">${esc(nm)}</h3>${p.me ? `<span class="prsub">${L.pfMe}</span>` : ''}
-      <div class="box" style="margin:10px 0 6px"><span class="lead">${L.pfPr}</span><div class="big">${p.pr ? '🔄 ' + p.pr : '-'}</div><span class="lead">${p.pr ? L.pfBonus + ' : +' + Math.round(p.pb * 100) + '%' : L.pfNoPr}</span></div>
-      <div class="pfg"><div><b>${p.owned}</b><span>${L.pfOwn}</span></div><div><b>${p.levels}</b><span>${L.pfLv}</span></div><div><b>${p.ach}/${tot}</b><span>${L.pfAch}</span></div><div><b>${p.rank ? '#' + p.rank : '-'}</b><span>${L.pfRank}</span></div></div>
-      <p class="lead" style="margin:4px 0 10px">${L.pfDays} : ${p.days}</p>
+    const tr = p.pr >= 10 ? 4 : p.pr >= 5 ? 3 : p.pr >= 3 ? 2 : p.pr >= 1 ? 1 : 0, rk = (L.pfRk || [])[p.pr >= 10 ? 4 : p.pr >= 5 ? 3 : p.pr >= 3 ? 2 : p.pr >= 1 ? 1 : 0] || '';
+    modal(`<div class="pfc"><div class="pfbn${tr ? ' t' + tr : ''}"></div><div class="pfav">${esc(ini)}</div>
+      <h3>${esc(nm)}</h3><span class="pfrk">${esc(rk)}</span>${p.me ? `<span class="pfrk me">${L.pfMe}</span>` : ''}
+      <div class="pfm"><div><b>${p.pr}</b><span>${L.pfPr}</span></div><div><b>${p.pr ? '+' + Math.round(p.pb * 100) + '%' : '-'}</b><span>${L.pfBonus}</span></div><div><b>${p.rank ? '#' + p.rank : '-'}</b><span>${L.pfRank}</span></div></div>
+      <div class="pfl"><div><span>${L.pfOwn}</span><b>${p.owned}</b></div><div><span>${L.pfLv}</span><b>${p.levels}</b></div><div><span>${L.pfAch}</span><b>${p.ach}/${tot}</b></div></div>
+      <p class="pfs">${L.pfSince.replace('{d}', p.days)}</p></div>
       <button class="btn" id="pfx">${L.pfClose}</button>`);
     $('pfx').onclick = closeModal;
   });
