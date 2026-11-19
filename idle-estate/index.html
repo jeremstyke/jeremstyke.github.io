@@ -249,7 +249,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-2030';
+const BUILD = '20261119-2100';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -894,11 +894,13 @@ function initTon() {
 const MKT = {
   en: { vsM: '{p} % vs market price', vsF: 'Market price', fAll: 'All properties', sRent: 'Most profitable', sPrice: 'Lowest price', payback: 'Pays back in {t}', profit: '24h profit', wait: 'Selling opens in {t}', tab: 'Market', t: 'Market', s: 'Sell levels of your properties for good, or rent them out for 24h. Paid in game cash. 10% of each price is burned.', create: 'List something', mine: 'My listings', list: 'For sale and for rent', empty: 'Nothing listed right now. Be the first!',
     sell: 'Sell', rent: 'Rent 24h', buyB: 'Buy', rentB: 'Rent', cancel: 'Cancel', lv: 'levels', sellInfo: 'You sell these levels for good. Your first level always stays with you.', rentInfo: 'The levels come back to you after 24h. The tenant earns their rent meanwhile.',
+    starP: 'Price in Stars (optional)', starH: 'Paid in Stars: the seller gets {s} % in Stars (locked 30 days), the rest feeds the game and the weekly prize pool.', starB: 'Pay in Stars', starE: 'Payment could not start',
     prop: 'Property', qty: 'Levels', price: 'Price in $', range: 'Between {a} and {b}', max: 'Maximum {b}', submit: 'Publish', nofree: 'You need at least 2 levels of a property to list some', forSale: 'For sale', forRent: 'For rent 24h', rentedOut: 'Rented out, back in', rentedIn: 'Rented, ends in', by: 'by',
     confirmBuy: 'Buy {n} x {p} for {c}?', confirmRent: 'Rent {n} x {p} for 24h for {c}?', yes: 'Confirm', okBuy: 'Bought!', okRent: 'Rented for 24h!', okNew: 'Listed!', okCancel: 'Listing cancelled',
     err: { young: 'Selling opens after your first hour', gone: 'Already gone', own: 'This is your own listing', poor: 'Not enough cash', locked: 'Unlock this property first', reserved: 'Someone is paying for it', free: 'Not enough free levels', max: 'You can have 3 listings at most', price: 'Enter a price', bad: 'Invalid', busy: 'Try again', off: 'Market closed for now', server: 'Error, try again', nostars: 'Not available' } },
   fr: { vsM: '{p} % vs prix du marché', vsF: 'Prix du marché', fAll: 'Tous les biens', sRent: 'Les plus rentables', sPrice: 'Prix croissant', payback: 'Rentabilisé en {t}', profit: 'Bénéfice sur 24h', wait: 'Vente ouverte dans {t}', tab: 'Marché', t: 'Marché', s: 'Vends des niveaux de tes biens pour de bon, ou loue-les 24h. Payé en cash du jeu. 10 % de chaque prix part en fumée.', create: 'Mettre en vente', mine: 'Mes annonces', list: 'À vendre et à louer', empty: 'Rien en vente pour l\'instant. Sois le premier !',
     sell: 'Vendre', rent: 'Louer 24h', buyB: 'Acheter', rentB: 'Louer', cancel: 'Annuler', lv: 'niveaux', sellInfo: 'Tu vends ces niveaux pour de bon. Ton premier niveau reste toujours à toi.', rentInfo: 'Les niveaux te reviennent après 24h. Le locataire encaisse les loyers entre-temps.',
+    starP: 'Prix en Étoiles (facultatif)', starH: 'Payé en Étoiles : le vendeur reçoit {s} % en Étoiles (bloqué 30 jours), le reste finance le jeu et la cagnotte de la semaine.', starB: 'Payer en Étoiles', starE: 'Le paiement n\'a pas pu démarrer',
     prop: 'Bien', qty: 'Niveaux', price: 'Prix en $', range: 'Entre {a} et {b}', max: 'Maximum {b}', submit: 'Publier', nofree: 'Il te faut au moins 2 niveaux d\'un bien pour en proposer', forSale: 'À vendre', forRent: 'À louer 24h', rentedOut: 'Loué, retour dans', rentedIn: 'Loué, fin dans', by: 'par',
     confirmBuy: 'Acheter {n} x {p} pour {c} ?', confirmRent: 'Louer {n} x {p} 24h pour {c} ?', yes: 'Confirmer', okBuy: 'Acheté !', okRent: 'Loué pour 24h !', okNew: 'Annonce publiée !', okCancel: 'Annonce annulée',
     err: { young: 'La vente s\'ouvre après ta première heure', gone: 'Déjà parti', own: 'C\'est ton annonce', poor: 'Pas assez de cash', locked: 'Débloque d\'abord ce bien', reserved: 'Quelqu\'un est en train de payer', free: 'Pas assez de niveaux libres', max: '3 annonces maximum', price: 'Entre un prix', bad: 'Invalide', busy: 'Réessaie', off: 'Marché fermé pour le moment', server: 'Erreur, réessaie', nostars: 'Indisponible' } },
@@ -939,7 +941,7 @@ function renderMk() {
       if (m.out && m.st === 'open') { st = m.k === 'rent' ? MKT.forRent : MKT.forSale; btn = `<button class="btn" data-cancel="${m.id}" style="background:linear-gradient(#ff9a9a,#e03c3c)">${MKT.cancel}</button>`; }
       else if (m.out) st = MKT.rentedOut + ' ' + left;
       else st = MKT.rentedIn + ' ' + left;
-      h += `<div class="row"><div class="tx"><b>${m.n} x ${esc(nameOf(m.i))}</b><span>${st}</span>${m.pc != null ? `<div class="rw2">$${fm(m.pc)}</div>` : ''}</div>${btn}</div>`;
+      h += `<div class="row"><div class="tx"><b>${m.n} x ${esc(nameOf(m.i))}</b><span>${st}</span>${m.pc != null ? `<div class="rw2">$${fm(m.pc)}</div>` : ''}${m.ps != null ? `<div class="rw2">⭐ ${m.ps}</div>` : ''}</div>${btn}</div>`;
     }
   }
   h += `<div class="mkh">${MKT.list}</div>`;
@@ -960,7 +962,7 @@ function renderMk() {
     }
     let vs = '';
     if (!rent && l.pc != null) { const v = mkVal(l.i, l.n), d = v > 0 ? Math.round((l.pc / v - 1) * 100) : 0; vs = d <= -1 ? `<div style="font-size:12px;font-weight:700;color:#1b8a3a">${MKT.vsM.replace('{p}', d)}</div>` : d >= 1 ? `<div style="font-size:12px;font-weight:700;color:#c0392b">${MKT.vsM.replace('{p}', '+' + d)}</div>` : `<div style="font-size:12px;font-weight:700;color:var(--mut)">${MKT.vsF}</div>`; }
-    h += `<div class="row${rent ? '' : ' hot'}"><div class="tx"><b>${l.n} x ${esc(nameOf(l.i))}</b><span>${rent ? MKT.forRent : MKT.forSale} · ${MKT.by} ${esc(l.s)}</span>${l.pc != null ? `<div class="rw2">$${fm(l.pc)}</div>` : ''}${vs}${roi}</div>${l.pc != null ? `<button class="btn" data-buy="${l.id}">${rent ? MKT.rentB : MKT.buyB}</button>` : ''}</div>`;
+    h += `<div class="row${rent ? '' : ' hot'}"><div class="tx"><b>${l.n} x ${esc(nameOf(l.i))}</b><span>${rent ? MKT.forRent : MKT.forSale} · ${MKT.by} ${esc(l.s)}</span>${l.pc != null ? `<div class="rw2">$${fm(l.pc)}</div>` : ''}${d.stars && l.ps != null ? `<div class="rw2">⭐ ${l.ps}</div>` : ''}${vs}${roi}</div><div style="display:flex;flex-direction:column;gap:6px">${l.pc != null ? `<button class="btn" data-buy="${l.id}">${rent ? MKT.rentB : MKT.buyB}</button>` : ''}${d.stars && l.ps != null ? `<button class="btn gold" data-star="${l.id}">⭐ ${l.ps}</button>` : ''}</div></div>`;
   }
   p.innerHTML = h;
   const sf = $('mkF'), ss = $('mkS');
@@ -969,8 +971,25 @@ function renderMk() {
   p.onclick = e => {
     if (e.target.closest('#mkNew')) return mkYoung ? toast(MKT.err.young) : openMkNew();
     const c = e.target.closest('[data-cancel]'); if (c) { hap('light'); call({ act: 'mk_cancel', id: Number(c.dataset.cancel) }).then(r => mkDone(r, MKT.okCancel)); return; }
+    const sb2 = e.target.closest('[data-star]'); if (sb2) { openMkStars(Number(sb2.dataset.star)); return; }
     const b = e.target.closest('[data-buy]'); if (b) openMkBuy(Number(b.dataset.buy));
   };
+}
+let mkPay = false;
+function openMkStars(id) {
+  if (mkPay) return; mkPay = true; hap('medium'); toast('⭐ ...');
+  call({ act: 'mk_invoice', id }).then(r => {
+    mkPay = false; const m = r && r.mk;
+    if (!m || !m.ok || !m.link) { hap('light'); toast(MKT.err[m && m.err] || MKT.starE); if (tab === 'mk') renderMk(); return; }
+    if (!tgw || !tgw.openInvoice) { window.open(m.link, '_blank'); return; }
+    try {
+      tgw.openInvoice(m.link, st => {
+        if (st === 'paid') { hap('ok'); snd('win'); toast(L.paid); const rf = () => call({ act: 'mklist' }).then(() => { if (tab === 'mk') renderMk(); }); setTimeout(rf, 1500); setTimeout(rf, 5000); }
+        else if (st === 'cancelled') { toast(L.cancelled); call({ act: 'mklist' }).then(() => { if (tab === 'mk') renderMk(); }); }
+        else if (st === 'failed') toast(L.cancelled + ' (failed)');
+      });
+    } catch (e) { toast(L.err); }
+  });
 }
 function openMkBuy(id) {
   const l = mkD && mkD.list.find(x => x.id === id); if (!l) return;
@@ -992,7 +1011,7 @@ function openMkNew() {
       <p style="margin:4px 0 6px">${kind === 'sell' ? MKT.sellInfo : MKT.rentInfo}</p>
       <div class="fld"><label>${MKT.prop}</label><select id="mkI">${idx.map(k => `<option value="${k}"${k === i ? ' selected' : ''}>${esc(nameOf(k))} (${free[k]} ${MKT.lv})</option>`).join('')}</select></div>
       <div class="fld"><label>${MKT.qty}</label><input id="mkN" type="number" inputmode="numeric" min="1" max="${mx}" value="${n}"></div>
-      <div class="fld"><label>${MKT.price}</label><input id="mkP" type="text" inputmode="decimal" autocomplete="off"><small id="mkR"></small></div>
+      <div class="fld"><label>${MKT.price}</label><input id="mkP" type="text" inputmode="decimal" autocomplete="off"><small id="mkR"></small></div>${mkD && mkD.stars ? `<div class="fld"><label>${MKT.starP}</label><input id="mkSt" type="number" inputmode="numeric" min="${mkD.mins}" max="${mkD.maxs}" placeholder="${mkD.mins} - ${mkD.maxs}"><small>${MKT.starH.replace('{s}', Math.round((1 - mkD.fee_s) * 100))}</small></div>` : ''}
       <button class="btn" id="mkGo">${MKT.submit}</button>`);
     const refresh = () => {
       const ref = refV(i, n), bd = (mkD && mkD.bounds) || { loS: 0, loR: 0, hiS: 10, hiR: 2 }, lo = (kind === 'sell' ? bd.loS : bd.loR) * ref, hi = (kind === 'sell' ? bd.hiS : bd.hiR) * ref;
@@ -1005,8 +1024,10 @@ function openMkNew() {
     $('mkN').onchange = e => { n = Math.max(1, Math.min(free[i], Math.floor(Number(e.target.value) || 1))); draw(); };
     $('mkGo').onclick = () => {
       n = Math.max(1, Math.min(free[i], Math.floor(Number($('mkN').value) || 1)));
-      const pc = parseUsd($('mkP').value); if (!(pc > 0)) { toast(MKT.err.price); return; }
-      $('mkGo').disabled = true; call({ act: 'mk_new', kind, i, n, pc }).then(r => mkDone(r, MKT.okNew));
+      const pc = parseUsd($('mkP').value) || 0, stE = $('mkSt'), ps = stE ? Math.floor(Number(stE.value) || 0) : 0;
+      if (!(pc > 0) && !(ps > 0)) { toast(MKT.err.price); return; }
+      const body = { act: 'mk_new', kind, i, n }; if (pc > 0) body.pc = pc; if (ps > 0) body.ps = ps;
+      $('mkGo').disabled = true; call(body).then(r => mkDone(r, MKT.okNew));
     };
   };
   draw();
