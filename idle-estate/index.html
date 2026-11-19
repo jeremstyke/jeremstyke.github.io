@@ -242,7 +242,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1650';
+const BUILD = '20261119-1700';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -1097,7 +1097,7 @@ async function boot() {
   if (!r || !r.ok) { $('load').querySelector('div').insertAdjacentHTML('beforeend', '<p style="font-size:14px;color:#5f8571">' + L.err + '</p>'); setTimeout(boot, 2500); return; }
   const showAway = () => {
     if (r.gap > 120 && r.away > 0.05) {
-      const bk = S.bank > 0;
+      const bn = snow(); const bk = S.bank > 0 && !(startM(bn) > 0 || S.boostEnd > bn || S.adEnd > bn);
       const x2 = r.away_ok && S.shop && S.shop.away2;
       modal(`<div style="font-size:54px">🏠</div><h3>${L.away}</h3><div class="big">+$${fm(r.away)}</div><p>${L.awayS}</p><button class="btn" id="okAway">${L.collect}</button>` + (bk ? `<button class="btn" id="bkAway" style="margin-top:8px">${L.bankT} · ${fmtT(Math.min(S.bank, S.use))}</button>` : '') + (x2 ? `<button class="btn gold" id="x2Away" style="margin-top:8px">⭐ ${S.shop.away2} · ${L.awayX} (+$${fm(r.away)})</button>` : ''));
       if (bk) $('bkAway').onclick = () => { closeModal(); useBonus(2); };
