@@ -120,7 +120,7 @@ body.hasad{padding-bottom:calc(172px + env(safe-area-inset-bottom,0px))}
 
 /* panels */
 .pane{display:none}.pane.on{display:block}
-.pane.on::after{content:"";display:block;height:calc(150px + env(safe-area-inset-bottom,0px))}
+.pane.on::after{content:"";display:block;height:calc(240px + env(safe-area-inset-bottom,0px))}
 h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;color:var(--navy)}
 .lead{color:var(--mut);font-size:14px;margin:0 0 10px;line-height:1.4;font-weight:700}
 .box{background:linear-gradient(#ffffff,#e4f3ff);border:3px solid var(--navy);border-radius:22px;padding:14px;margin:12px 0;box-shadow:0 4px 0 var(--navy)}
@@ -251,7 +251,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-2125';
+const BUILD = '20261119-2135';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -823,7 +823,7 @@ function paintAd() {
   }
   const left = Math.max(0, (S.adAt || 0) - snow());
   const t = $('adTx'), bt = $('adBtn');
-  if (t) t.textContent = ready ? L.adS.replace('{x}', '$' + fm(2.5)) : L.adNext.replace('{t}', fmtT(left));
+  if (t) t.textContent = ready ? L.adS.replace('{x}', '$' + fm(2.5)) : L.adNext.replace('{t}', left >= 3600 ? Math.floor(left / 3600) + 'h ' + String(Math.floor(left % 3600 / 60)).padStart(2, '0') + 'min' : left >= 60 ? Math.ceil(left / 60) + 'min' : Math.ceil(left) + 's');
   if (bt) { bt.textContent = ready ? L.adB : '⏳'; bt.disabled = !ready; bt.style.opacity = ready ? 1 : .5; }
 }
 let adBusy = false;
