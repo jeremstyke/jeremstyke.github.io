@@ -250,7 +250,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-2040';
+const BUILD = '20261119-2115';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -835,7 +835,8 @@ async function watchAd() {
   const pop = window.show_12296718({ type: 'pop' });
   const stP = call({ act: 'adstart' });
   let ok = true;
-  try { const res = await pop; if (res && res.reward_event_type === 'non_valued') ok = false; } catch (e) { ok = false; }
+  // the player really left to the ad if some seconds went by before the promise settled: pay anyway (Monetag can reject when the player comes back early)
+  try { const res = await pop; if (res && res.reward_event_type === 'non_valued' && Date.now() - t0 < 4000) ok = false; } catch (e) { if (Date.now() - t0 < 4000) ok = false; }
   const st = await stP;
   if (!ok || !st || !st.ok || st.err) { adBusy = false; if (st && st.err === 'cool') { adMark(); renderShop(); buildBanners(); } toast(ok ? L.adCool : L.adErr); return; }
   // the reward is paid right at the click; the amount pops up as soon as the player is back on the game
