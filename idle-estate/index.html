@@ -242,7 +242,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1440';
+const BUILD = '20261119-1510';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -266,7 +266,7 @@ if (MAINT) {
 const L = {
  en: {
   lockT:'Buy the previous property first',
-  bankT:'🎁 Use bonus',
+  bankT:'🎁 Start x2 boost',
   testT:'Testing period', testS:'Idle Estate is still in testing until November 25. Accounts can be reset again if we need to adjust the balance. After that, no more resets.', testOk:'Got it',
   names:['Studio','Loft','Villa','Apartment block','Residential tower','Hotel chain','Mall network','Business district','Resort island','Skyscraper','Megacity','Airport','Theme park','Stadium','Harbour','Tech campus','Mountain resort','Island chain','Floating city','Orbital hotel','Lunar base','Mars colony','Space elevator','Asteroid mine','Terraformed planet','Star port','Orbital ring','Arcology','Dyson swarm','Galactic hub', 'Neon district', 'Cloud palace', 'Underwater dome', 'Volcano spa', 'Glacier resort', 'Desert oasis', 'Rainforest lodge', 'Casino strip', 'Film studio', 'Rocket park', 'Crystal tower', 'Sky bridge', 'Robot city', 'Clone district', 'Fusion plant', 'Time hotel', 'Dragon keep', 'Wizard college', 'Pirate cove', 'Ice moon', 'Shooting-star port', 'Black hole spa', 'Nebula garden', 'Quantum lab', 'Hyperloop hub', 'Pocket universe', 'Mirror dimension', 'Dream city', 'Infinity tower', 'Heart of the cosmos'],
   pr:['month','month','month','month','month','month','month','month','month','month'],
@@ -299,7 +299,7 @@ const L = {
  },
  fr: {
   lockT:'Achète d\'abord le bien précédent',
-  bankT:'🎁 Utiliser le bonus',
+  bankT:'🎁 Lancer le boost x2',
   testT:'Période de test', testS:'Idle Estate est encore en test jusqu\'au 25 novembre. Les comptes peuvent être remis à zéro si on doit ajuster l\'équilibre. Après, plus de remise à zéro.', testOk:'Compris',
   names:['Studio','Loft','Villa','Immeuble','Tour résidentielle','Chaîne d\'hôtels','Centres commerciaux','Quartier d\'affaires','Île resort','Gratte-ciel','Mégapole','Aéroport','Parc d\'attractions','Stade','Port','Campus tech','Station de montagne','Archipel','Ville flottante','Hôtel orbital','Base lunaire','Colonie martienne','Ascenseur spatial','Mine d\'astéroïdes','Planète terraformée','Spatioport','Anneau orbital','Arcologie','Essaim de Dyson','Pôle galactique', 'Quartier néon', 'Palais des nuages', 'Dôme sous-marin', 'Spa du volcan', 'Station de glacier', 'Oasis du désert', 'Lodge de la jungle', 'Strip des casinos', 'Studio de cinéma', 'Parc des fusées', 'Tour de cristal', 'Pont céleste', 'Cité des robots', 'Quartier des clones', 'Centrale à fusion', 'Hôtel du temps', 'Donjon du dragon', 'École des sorciers', 'Crique des pirates', 'Lune de glace', 'Port des étoiles filantes', 'Spa du trou noir', 'Jardin de nébuleuse', 'Labo quantique', 'Hub hyperloop', 'Univers de poche', 'Dimension miroir', 'Cité des rêves', 'Tour de l\'infini', 'Cœur du cosmos'],
   pr:['mois','mois','mois','mois','mois','mois','mois','mois','mois','mois'],
@@ -1089,7 +1089,7 @@ async function boot() {
     if (r.gap > 120 && r.away > 0.05) {
       const bk = S.bank > 0;
       const x2 = r.away_ok && S.shop && S.shop.away2;
-      modal(`<div style="font-size:54px">🏠</div><h3>${L.away}</h3><div class="big">+$${fm(r.away)}</div><p>${L.awayS}</p><button class="btn" id="okAway">${L.collect}</button>` + (bk ? `<button class="btn" id="bkAway" style="margin-top:8px">${L.bankT} · +${Math.round(S.bank / 60)} min x2</button>` : '') + (x2 ? `<button class="btn gold" id="x2Away" style="margin-top:8px">⭐ ${S.shop.away2} · ${L.awayX} (+$${fm(r.away)})</button>` : ''));
+      modal(`<div style="font-size:54px">🏠</div><h3>${L.away}</h3><div class="big">+$${fm(r.away)}</div><p>${L.awayS}</p><button class="btn" id="okAway">${L.collect}</button>` + (bk ? `<button class="btn" id="bkAway" style="margin-top:8px">${L.bankT} · ${fmtT(S.bank)}</button>` : '') + (x2 ? `<button class="btn gold" id="x2Away" style="margin-top:8px">⭐ ${S.shop.away2} · ${L.awayX} (+$${fm(r.away)})</button>` : ''));
       if (bk) $('bkAway').onclick = () => { closeModal(); useBonus(2); };
       $('okAway').onclick = () => { hap('ok'); closeModal(); };
       if (x2) $('x2Away').onclick = () => { closeModal(); buy('away2'); };
