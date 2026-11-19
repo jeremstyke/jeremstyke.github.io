@@ -439,6 +439,7 @@ g("installer-un-nichoir/",
 <p>Pour les nichoirs semi-ouverts en général (rouge-gorge, rougequeue noir, bergeronnette des ruisseaux, gobemouche gris), la LPO et la Ligue belge indiquent 1,5 à 3 m de hauteur, contre un mur ou derrière un arbre, sous une végétation dense qui les cache des prédateurs.</p>
 <p>Les rapaces nocturnes sont un cas à part : le nichoir de la <a href="{R}chouette-hulotte/">chouette hulotte</a> est une grande caisse avec une entrée d'environ 12 cm, posée à plusieurs mètres de haut dans un grand arbre.</p>
 <p>La Ligue belge présente le trou de 32 mm comme « universel » : il convient aussi bien à la charbonnière qu'à la mésange bleue, aux moineaux ou à la sittelle. Si vous ne voulez accueillir que les petites mésanges (bleue, noire, nonnette, huppée), choisissez un trou de 26 ou 28 mm. Pour les hirondelles de fenêtre, elle conseille un emplacement sous une avancée de toit, plutôt côté rue, mais pas juste au-dessus d'une porte, avec une planchette 40 à 50 cm sous les nids pour recueillir les fientes. Vous pouvez aussi lire notre guide <a href="{R}meilleures-jumelles-oiseaux/">pour choisir des jumelles</a> afin de les observer de loin.</p>
+<p>Les nichoirs ne servent pas qu'aux mésanges : dans la moitié sud de la France surtout, la LPO Tarn conseille aussi d'en poser pour une espèce bien plus spectaculaire, présentée dans notre fiche de la <a href="{R}huppe-fasciee/">huppe fasciée</a>.</p>
 
 <h2>À l'abri des chats et des autres prédateurs</h2>
 <ul>
@@ -1734,7 +1735,7 @@ g("meilleure-boule-de-graisse/",
 <p><a href="{AMZ:Esschert Design boules de graisse sans filet}" """ + A + """>Voir sur Amazon</a></p>
 
 <h2>Et pour les accrocher ?</h2>
-<p>Une boule sans filet ne s'accroche pas toute seule. Il faut un support en métal rigide, qui ne se resserre pas autour d'une patte. Trois modèles dont nous avons lu la fiche :</p>
+<p>Une boule sans filet ne s'accroche pas toute seule. Il faut un support en métal rigide, qui ne se resserre pas autour d'une patte. Si vous cherchez une cage contre les écureuils ou les pies, voyez notre comparatif des <a href="{R}meilleure-mangeoire-boules-de-graisse/">meilleures mangeoires pour boules de graisse</a>. Trois modèles dont nous avons lu la fiche :</p>
 <ul>
 <li><strong>CJ Wildlife Adélaïde</strong> (Vivara) : métal thermolaqué, 12 x 12 x 25 cm, garanti 5 ans, prévu pour les boules sans filet.</li>
 <li><strong>TIAKI anneau métallique</strong> (zooplus) : 6 à 8 boules, couvercle amovible contre la pluie, chaînette avec crochet.</li>
@@ -2851,7 +2852,7 @@ g("martinet-noir/",
 {CTA}
 
 <h2>Martinet ou hirondelle : comment ne plus les confondre ?</h2>
-<p>La silhouette suffit. Le martinet est entièrement sombre, avec juste la gorge plus pâle, et ses ailes très longues forment un croissant, une « lame de faux » comme le dit la LPO PACA. L'hirondelle de fenêtre montre au contraire un ventre et un croupion bien blancs. Le martinet est aussi plus grand : la même fiche de la LPO PACA lui donne 17 à 18,5 cm.</p>
+<p>La silhouette suffit. Le martinet est entièrement sombre, avec juste la gorge plus pâle, et ses ailes très longues forment un croissant, une « lame de faux » comme le dit la LPO PACA. L'hirondelle de fenêtre montre au contraire un ventre et un croupion bien blancs. Sa cousine l'hirondelle rustique, elle, se reconnaît à sa gorge rouge brique et à ses longs filets de queue : tout est dans notre fiche de l'<a href="{R}hirondelle-rustique/">hirondelle rustique</a>. Le martinet est aussi plus grand : la même fiche de la LPO PACA lui donne 17 à 18,5 cm.</p>
 <table><thead><tr><th>Critère</th><th>Martinet noir</th><th>Hirondelle de fenêtre</th><th>Hirondelle rustique</th></tr></thead><tbody>
 <tr><td>Couleur</td><td>Tout sombre, gorge plus pâle</td><td>Dessus bleu noir, ventre et croupion blancs</td><td>Dessus bleu noir, gorge rouge, ventre clair</td></tr>
 <tr><td>Ailes</td><td>Très longues, en croissant</td><td>Plus courtes, plus larges</td><td>Plus courtes, queue à longs filets</td></tr>
@@ -3330,3 +3331,266 @@ g("meilleure-camera-jardin-oiseaux/",
        ("Avez-vous testé ces caméras ?",
         "Non. Cette sélection repose sur les fiches publiées par les fabricants et les revendeurs. Quand une information manque, nous l'indiquons comme non précisée.")],
   short="Top 8 caméras pour observer les oiseaux", cat="Observer")
+
+AUTO_META['hirondelle-rustique/'] = ('🐦', 'ciel')
+g("hirondelle-rustique/",
+  "Hirondelle rustique : la reconnaître, son nid et comment l'aider",
+  "Hirondelle rustique : la reconnaître, protéger son nid et l'accueillir chez vous",
+  "Gorge rouge brique, longs filets de queue, nid de boue dans la grange : comment reconnaître l'hirondelle rustique, l'accueillir et ce que dit la loi sur le nid.",
+  """
+<p>L'hirondelle à la <strong>gorge rouge brique</strong> et aux <strong>longs filets de queue</strong> qui entre dans votre grange ou votre garage pour nicher, c'est l'<strong>hirondelle rustique</strong>. Celle qui colle un nid fermé sous le rebord du toit, à l'extérieur, avec un croupion blanc, c'est sa cousine l'hirondelle de fenêtre.</p>
+<p>En ce moment, elle est loin : elle passe l'hiver en Afrique. Mais l'automne et l'hiver sont justement la bonne période pour préparer son retour, et c'est aussi la seule saison où des travaux près d'un nid sont envisageables.</p>
+{CTA}
+
+<h2>Comment reconnaître une hirondelle rustique ?</h2>
+<p>D'après la fiche de la LPO, l'adulte a le dessus bleu foncé à reflets métalliques, la gorge rouge brique et le dessous blanchâtre lavé de roux. Oiseaux.net ajoute le front de la même couleur brique et un bandeau noirâtre sur la poitrine, qui sépare la gorge du ventre. Le bec est petit et noir, les pattes très courtes.</p>
+<p>Le <strong>mâle</strong> a les filets de la queue plus longs et un plumage un peu plus brillant que la <strong>femelle</strong>. Le <strong>jeune</strong> se reconnaît à sa gorge rose orangé (fauve rosé pour oiseaux.net) et à sa queue sans longs filets : en fin d'été, ne le prenez pas pour une autre espèce.</p>
+<p>Pour les mesures, les sources ne donnent pas tout à fait les mêmes chiffres : 19 à 22 cm selon la LPO, 18 cm selon oiseaux.net, 20 cm selon la LPO Occitanie, filets compris. Le poids varie de 16 à 25 g pour la LPO, 16 à 17,9 g pour oiseaux.net. Oiseaux.net donne une envergure de 32 à 34 cm.</p>
+
+<h2>Hirondelle rustique, hirondelle de fenêtre ou martinet : lequel est-ce ?</h2>
+<p>Ces trois oiseaux d'été sont sans cesse confondus. Le tableau ci-dessous reprend les critères donnés par la LPO Morbihan et la LPO Occitanie.</p>
+<table><thead><tr><th>Critère</th><th>Hirondelle rustique</th><th>Hirondelle de fenêtre</th><th>Martinet noir</th></tr></thead><tbody>
+<tr><td>Gorge</td><td>Rouge brique</td><td>Blanche</td><td>Blanc sale, le reste tout sombre</td></tr>
+<tr><td>Croupion</td><td>Sombre</td><td>Blanc bien visible</td><td>Sombre</td></tr>
+<tr><td>Queue</td><td>Longs filets</td><td>Fourchue, sans filets</td><td>Courte, ailes en faucille</td></tr>
+<tr><td>Nid</td><td>Coupe ouverte, à l'intérieur des bâtiments</td><td>Boule de boue fermée, sous un rebord extérieur</td><td>Cavité en hauteur (toit, mur)</td></tr>
+<tr><td>Où la voir</td><td>Plutôt à la campagne</td><td>Plutôt en ville et au village</td><td>Au-dessus des toits, en ville</td></tr>
+<tr><td>Se pose ?</td><td>Oui, sur les fils et les poutres</td><td>Oui</td><td>Presque jamais</td></tr>
+</tbody></table>
+<p>Le plus simple, c'est de regarder où l'oiseau entre. S'il disparaît par une porte ouverte dans une étable, c'est une rustique. S'il file sous l'avant-toit vers une boule de boue, c'est une hirondelle de fenêtre. Et si la bande hurle au-dessus des toits sans jamais se poser, ce sont des martinets : leur fiche complète est sur notre page du <a href="{R}martinet-noir/">martinet noir</a>.</p>
+
+<h2>Quand revient-elle, et où passe-t-elle l'hiver ?</h2>
+<p>Les premières arrivent dès la fin février dans le Sud, mais le gros du retour a lieu en avril, selon la LPO. Oiseaux.net parle de mi-mars à avril, les mâles en premier. Les départs commencent dès la fin août (LPO PACA) et s'étalent jusqu'au début octobre (oiseaux.net).</p>
+<p>Elle hiverne en Afrique, équatoriale pour la LPO, tropicale et méridionale pour la LPO PACA. Certaines parcourent jusqu'à 12 000 km par an, d'après la LPO. Si vous voyez une hirondelle en décembre, c'est donc un fait vraiment inhabituel, qui mérite d'être signalé sur une base comme Faune France.</p>
+
+<h2>Que mange-t-elle, et peut-on la nourrir ?</h2>
+<p>Elle ne mange que des insectes, capturés en vol. Oiseaux.net cite plus de 80 familles d'insectes, surtout des mouches et moustiques, et près de 400 allers-retours par jour quand les parents nourrissent les jeunes. Aucune mangeoire ne l'attirera : ce qui la nourrit, ce sont les insectes de votre environnement.</p>
+<p>La LPO conseille donc de garder des haies, une prairie fleurie ou une mare, et surtout de ne pas utiliser de pesticides. Par exemple, une bande d'herbe haute laissée au fond du jardin et un petit point d'eau font plus pour elle que n'importe quel achat. Les autres oiseaux du jardin, eux, profiteront en hiver des conseils de notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a>.</p>
+
+<h2>Où fait-elle son nid ?</h2>
+<p>Son nid est une demi-coupe de boue et de salive, garnie de paille ou de laine, posée <strong>à l'intérieur</strong> des granges et des étables, contre une poutre ou un gros clou, selon la LPO. La LPO PACA la signale aussi sur les poutres des garages, et la LPO Morbihan à 2 ou 3 m de haut.</p>
+<p>La femelle pond 4 ou 5 œufs selon la LPO (2 à 7, le plus souvent 4 ou 5, selon oiseaux.net), avec 2 à 3 nichées par an. L'incubation dure 14 à 15 jours et les jeunes s'envolent à 19 à 21 jours. Elle est fidèle à son site et répare de préférence un nid existant, qui peut resservir plusieurs années. C'est pour cela qu'un vieux nid ne doit jamais être retiré.</p>
+
+<h2>A-t-on le droit d'enlever un nid d'hirondelle ?</h2>
+<p>Non. L'hirondelle rustique est intégralement protégée par l'arrêté du 29 octobre 2009 : les oiseaux, les œufs, les nids et les sites sont protégés. L'OFB rappelle que les sanctions peuvent aller jusqu'à 3 ans de prison et 150 000 € d'amende. Un nid ne peut être déplacé ou détruit qu'avec l'accord de la DREAL, d'octobre à mars, et avec une compensation.</p>
+<p>Elle est aussi classée <strong>quasi menacée</strong> sur la liste rouge des oiseaux nicheurs de France (2016), d'après l'INPN. Le suivi STOC de Vigie-Nature mesure une baisse de 25 % entre 2001 et 2019. La LPO avance un chiffre plus fort, plus de 40 % en dix ans, sans préciser sa source : retenez surtout que le déclin est net.</p>
+
+<h2>Comment l'accueillir chez vous ?</h2>
+<p>Les conseils de la LPO et de ses délégations régionales se résument en quelques gestes simples :</p>
+<ul>
+<li><strong>Laissez une ouverture</strong> d'au moins 12 x 8 cm dans la grange ou le garage (LPO Occitanie, LPO Champagne-Ardenne). Une fois le nid commencé, elle doit rester ouverte en permanence, sinon les oiseaux se retrouvent piégés.</li>
+<li><strong>Offrez un appui</strong> : un clou, une cheville ou un petit support en bois sous une poutre suffit à ancrer le nid.</li>
+<li><strong>Posez un nid artificiel</strong> si le bâtiment n'a jamais accueilli d'hirondelles : il en existe de prêts à fixer. <a href="{AMZ:nid artificiel hirondelle rustique}" """ + A + """>Voir sur Amazon</a></li>
+<li><strong>Prévoyez une planchette sous le nid</strong> contre les fientes. Les distances conseillées varient : environ 15 cm pour la LPO Occitanie, au moins 15 à 20 cm pour la LPO Morbihan, 40 cm pour l'OFB. Notre conseil : placez-la assez loin sous le nid pour qu'un chat ou une fouine ne puisse pas s'en servir pour l'atteindre.</li>
+<li><strong>Gardez une flaque de boue</strong> au printemps, arrosée chaque jour, pour qu'elle trouve de quoi construire.</li>
+</ul>
+<p>L'erreur fréquente : poser le nid artificiel au printemps, quand les oiseaux sont déjà là. Faites-le pendant l'hiver. Pour les autres nichoirs du jardin et leurs dimensions, voyez notre guide pour <a href="{R}installer-un-nichoir/">installer un nichoir</a>.</p>
+
+<h2>Comment reconnaître son chant ?</h2>
+<p>En vol, elle lance un « vit » ou « uit » répété, et un « tsivitt » d'alarme quand un chat approche (LPO, oiseaux.net). Son chant est un long gazouillis grasseyant mais mélodieux, terminé par un trille grinçant. Un guide avec les sons aide à faire la différence avec les cris stridents des martinets : <a href="{AMZ:Guide des oiseaux de France Belin Morin}" """ + A + """>Voir sur Amazon</a>. D'autres titres sont dans notre sélection du <a href="{R}meilleur-guide-oiseaux/">meilleur guide d'identification des oiseaux</a>.</p>
+<p>Pour voir la couleur de la gorge sur un fil électrique, de bonnes jumelles 8x42 changent tout : <a href="{AMZ:Nikon Prostaff P7 8x42}" """ + A + """>Voir sur Amazon</a>. Notre comparatif des <a href="{R}meilleures-jumelles-oiseaux/">meilleures jumelles pour les oiseaux</a> couvre tous les budgets.</p>
+
+<p class="sources"><strong>Sources</strong> : <a href="https://www.lpo.fr/decouvrir-la-nature/fiches-especes/fiches-especes/oiseaux/hirondelles-martinets/hirondelle-rustique" target="_blank" rel="noopener">LPO : fiche hirondelle rustique</a> ; <a href="https://www.oiseaux.net/oiseaux/hirondelle.rustique.html" target="_blank" rel="noopener">oiseaux.net : Hirondelle rustique</a> ; <a href="https://inpn.mnhn.fr/espece/cd_nom/3696/tab/statut" target="_blank" rel="noopener">INPN : statuts de l'hirondelle rustique</a> (vérifié le 19 novembre 2026)</p>
+""",
+  faq=[("Comment différencier l'hirondelle rustique de l'hirondelle de fenêtre ?",
+        "L'hirondelle rustique a la gorge rouge brique, un croupion sombre et de longs filets de queue ; elle niche à l'intérieur des bâtiments. L'hirondelle de fenêtre a la gorge et le croupion blancs, pas de filets, et un nid fermé collé sous un rebord extérieur."),
+       ("Peut-on enlever un nid d'hirondelle rustique ?",
+        "Non. L'espèce est protégée par l'arrêté du 29 octobre 2009, nids compris. Un nid ne peut être déplacé qu'avec l'accord de la DREAL, d'octobre à mars, avec une compensation. Les sanctions peuvent atteindre 3 ans de prison et 150 000 € d'amende."),
+       ("Quand les hirondelles rustiques reviennent-elles ?",
+        "Les premières arrivent dès la fin février dans le Sud, mais la plupart reviennent en avril. Elles repartent vers l'Afrique entre la fin août et le début octobre.")],
+  short="Hirondelle rustique", cat="Observer")
+
+AUTO_META['huppe-fasciee/'] = ('🪶', 'sable')
+g("huppe-fasciee/",
+  "Huppe fasciée : la reconnaître, où et quand la voir, l'attirer",
+  "Huppe fasciée : comment la reconnaître, où la voir et l'attirer au jardin",
+  "Roux orangé, ailes zébrées, huppe en éventail et chant « oup-oup-oup » : où et quand voir la huppe fasciée, ce qu'elle mange et comment l'aider au jardin.",
+  """
+<p>Un oiseau roux orangé de la taille d'un merle, avec les ailes rayées de noir et de blanc, un long bec fin un peu courbé et une huppe qui s'ouvre en éventail : c'est la <strong>huppe fasciée</strong>, et aucune autre espèce d'Europe ne lui ressemble. Si vous l'entendez avant de la voir, c'est un « oup-oup-oup » sourd, répété au loin.</p>
+<p>On la croise d'avril à septembre, surtout dans la moitié sud de la France, en train de fouiller une pelouse rase ou le pied des vignes. L'hiver, elle est en Afrique.</p>
+{CTA}
+
+<h2>À quoi ressemble une huppe fasciée ?</h2>
+<p>La LPO la décrit chamois orangé, avec les ailes et la queue barrées de noir et de blanc et une huppe érectile à pointe noire. Le ventre est blanc et le croupion aussi. En vol, avec ses larges ailes arrondies et zébrées, elle paraît bien plus grande et fait penser à un gros papillon.</p>
+<p>Le mâle et la femelle se ressemblent beaucoup. Selon oiseaux.net, la femelle est un peu plus petite et plus pâle ; le jeune ressemble à la femelle en plus terne, avec la huppe et le bec plus courts.</p>
+<table><thead><tr><th>Mesure</th><th>LPO PACA (Mont Ventoux)</th><th>INPN</th><th>oiseaux.net</th></tr></thead><tbody>
+<tr><td>Longueur</td><td>26 à 32 cm</td><td>26 à 32 cm</td><td>19 à 32 cm</td></tr>
+<tr><td>Envergure</td><td>42 à 46 cm</td><td>Non indiquée</td><td>42 à 46 cm</td></tr>
+<tr><td>Poids</td><td>Non indiqué</td><td>60 à 75 g</td><td>55 à 80 g</td></tr>
+</tbody></table>
+<p>Les chiffres varient d'une source à l'autre, notamment parce que le bec compte beaucoup dans la longueur. Retenez l'ordre de grandeur donné par la LPO : la taille d'un merle.</p>
+
+<h2>Peut-on la confondre avec un autre oiseau ?</h2>
+<p>Pas vraiment. Les cahiers d'habitats du MNHN et la LPO PACA le disent clairement : aucune espèce européenne ne lui ressemble. Le geai des chênes, souvent cité, ne sert que de repère de taille. La vraie difficulté, c'est de la voir : elle reste au sol, discrète, et ses couleurs se fondent bien dans l'herbe sèche.</p>
+<p>Pour vous entraîner à reconnaître les autres oiseaux du jardin, notre page sur l'<a href="{R}oiseau-noir-et-blanc-longue-queue/">oiseau noir et blanc à longue queue</a> aide aussi à démêler la pie, la bergeronnette et la mésange à longue queue.</p>
+
+<h2>Où et quand voir la huppe fasciée en France ?</h2>
+<p>C'est une visiteuse d'été. La LPO la donne présente d'avril à septembre, l'INPN de mars à septembre ou octobre. Dans le détail, la LPO Tarn signale les premières arrivées dès la fin février dans le Sud, puis en mars et avril plus au nord, et des départs en août, plus rarement en septembre. Oiseaux.net signale des retardataires jusqu'en octobre.</p>
+<p>Elle hiverne dans les savanes au sud du Sahara. Quelques oiseaux restent autour de la Méditerranée, mais en France c'est anecdotique, selon la LPO.</p>
+<p>Côté géographie, elle est bien présente au sud d'une ligne Rennes-Grenoble et nettement plus rare au nord, d'après la LPO. On compte environ 150 couples en Normandie (LPO Normandie) et seulement 10 à 20 couples en Île-de-France en 2014, où elle est classée « en danger » sur la liste rouge régionale.</p>
+<p>Cherchez-la dans les milieux à herbe rase et sol meuble : prairies pâturées, vergers, vignes, oliveraies, parcs et jardins en bordure de village.</p>
+
+<h2>Que mange-t-elle ?</h2>
+<p>Elle est strictement insectivore et se nourrit uniquement au sol, selon oiseaux.net. Elle enfonce son long bec dans la terre meuble et repère ses proies au toucher : vers blancs, grillons, larves de tipules, vers de terre, et surtout la courtilière, sa proie favorite dans beaucoup de régions d'après l'INPN. La LPO précise qu'elle assomme les gros coléoptères sur une pierre et qu'elle fouille aussi les bouses.</p>
+<p>Elle ne vient donc pas aux mangeoires. Ce qui l'attire, c'est un sol riche en larves et accessible. Par exemple, une pelouse tondue court par endroits, sans insecticide ni anti-larves, est pour elle un garde-manger. Une pelouse traitée contre les vers blancs, à l'inverse, la prive de son repas principal.</p>
+<p>Les oiseaux qui restent l'hiver, eux, profitent d'un coup de pouce : voyez notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a>.</p>
+
+<h2>Où niche la huppe, et quel nichoir lui convient ?</h2>
+<p>La huppe niche dans des cavités : trous d'arbres, de murs, tas de pierres selon la LPO, et aussi terriers de lapin ou nichoirs selon le MNHN, du sol jusqu'à une dizaine de mètres. La femelle pond 5 à 8 œufs d'après la LPO (5 à 7 pour oiseaux.net), à même le fond de la cavité, et les couve 16 jours environ.</p>
+<p>Le nid a une réputation méritée : il sent très fort. La LPO explique que la femelle et ses petits sécrètent une substance malodorante qui éloigne les prédateurs. Si un nichoir de votre jardin dégage une odeur forte en juin, ne l'ouvrez pas.</p>
+<p>Comme les vieux arbres creux et les murs de pierre sèche disparaissent, la LPO Tarn et oiseaux.net conseillent de poser des nichoirs. La boutique de la LPO propose un modèle spécifique de 21 x 22 x 37 cm, à fixer vers 1,50 m de haut sur un tronc, dans un endroit dégagé et calme. Nous ne donnons pas de diamètre de trou d'envol : la fiche de ce nichoir indique deux valeurs différentes. Choisissez un nichoir vendu expressément pour la huppe. <a href="{AMZ:nichoir huppe fasciée}" """ + A + """>Voir sur Amazon</a></p>
+<p>Notre guide pour <a href="{R}installer-un-nichoir/">installer un nichoir</a> rappelle les règles de pose (orientation, hauteur, période). Et pour suivre une nichée sans déranger, un piège photo posé à distance est une bonne idée : notre sélection de <a href="{R}meilleure-camera-jardin-oiseaux/">caméras pour observer les oiseaux</a> compare les modèles. <a href="{AMZ:Bushnell Core DS-4K No Glow}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>À quoi ressemble son chant ?</h2>
+<p>Le chant est le plus souvent un trisyllabe « houpoupoup », rarement deux ou quatre notes, selon la LPO. Il paraît sourd de près, mais il porte très loin. C'est souvent lui qui trahit sa présence au printemps. La LPO PACA note de deux à six syllabes selon les individus.</p>
+<p>Pour la repérer ensuite au sol, à 50 mètres dans une prairie, des jumelles sont indispensables : <a href="{AMZ:Nikon Monarch M7 8x42}" """ + A + """>Voir sur Amazon</a>. Notre comparatif des <a href="{R}meilleures-jumelles-oiseaux/">meilleures jumelles pour observer les oiseaux</a> vous aide à choisir.</p>
+
+<h2>Est-elle protégée, et pourquoi a-t-elle reculé ?</h2>
+<p>Oui : elle est protégée en France par l'arrêté du 29 octobre 2009, rappelle la LPO. Sur la liste rouge des oiseaux nicheurs de France (2016), elle est en « préoccupation mineure ». Mais elle a beaucoup reculé : le suivi STOC cité par le MNHN mesure une baisse de 56 % entre 1989 et 2003, et la LPO note une lente remontée depuis.</p>
+<p>Les causes citées par la LPO et oiseaux.net : les pesticides et la raréfaction des gros insectes, la disparition des haies, des vergers et des prairies pâturées, la rénovation du bâti ancien qui supprime les cavités. La LPO PACA ajoute les vermifuges du bétail, qui appauvrissent les bouses en insectes.</p>
+
+<p class="sources"><strong>Sources</strong> : <a href="https://www.lpo.fr/decouvrir-la-nature/fiches-especes/fiches-especes/oiseaux/huppe-fasciee" target="_blank" rel="noopener">LPO : fiche huppe fasciée</a> ; <a href="https://www.oiseaux.net/oiseaux/huppe.fasciee.html" target="_blank" rel="noopener">oiseaux.net : Huppe fasciée</a> ; <a href="https://inpn.mnhn.fr/espece/cd_nom/3590" target="_blank" rel="noopener">INPN : Upupa epops</a> (vérifié le 19 novembre 2026)</p>
+""",
+  faq=[("Quand peut-on voir la huppe fasciée en France ?",
+        "D'avril à septembre en général. Les premières arrivent dès la fin février dans le Sud, et quelques retardataires restent jusqu'en octobre. Elle passe l'hiver en Afrique, au sud du Sahara."),
+       ("La huppe fasciée vient-elle aux mangeoires ?",
+        "Non. Elle mange uniquement des insectes et des larves qu'elle trouve dans le sol. Pour l'attirer, gardez une pelouse rase par endroits, sans insecticide, et posez un nichoir adapté."),
+       ("Pourquoi le nid de la huppe sent-il mauvais ?",
+        "La femelle et ses petits sécrètent une substance malodorante qui éloigne les prédateurs, explique la LPO. C'est normal : ne touchez pas au nid.")],
+  short="Huppe fasciée", cat="Observer")
+
+AUTO_META['meilleure-mangeoire-boules-de-graisse/'] = ('🏆', 'rouge')
+g("meilleure-mangeoire-boules-de-graisse/",
+  "Mangeoire boule de graisse 2026 : 10 supports sans filet",
+  "Meilleure mangeoire pour boules de graisse : 10 supports sans filet comparés",
+  "Spirale, cylindre grillagé ou cage anti-écureuil : 10 mangeoires pour boules et pains de graisse sans filet, du petit budget au haut de gamme, hiver 2026.",
+  """
+<p>La meilleure mangeoire pour boules de graisse est celle qui vous permet de jeter le filet. Un simple cylindre grillagé de quatre boules suffit sur un balcon. Si des écureuils, des pies ou des choucas vident tout en une matinée, il faut monter en gamme vers une cage : notre préférée est la <strong>Brome Squirrel Buster Suet</strong>, dont la grille se ferme sous le poids d'un écureuil.</p>
+<p>Le filet n'est pas un détail. « Ne choisissez que des boules de graisse sans filet », écrit la LPO Auvergne-Rhône-Alpes, parce que les pattes des oiseaux s'y prennent ; la LPO Bourgogne-Franche-Comté parle d'un « piège mortel ». Voici dix supports réellement vendus en France, classés du plus robuste au plus simple.</p>
+{CTA}
+<p><strong>Notre choix contre les écureuils, la Brome Squirrel Buster Suet</strong> : <a href="{AMZ:Squirrel Buster Suet}" """ + A + """>Voir sur Amazon</a></p>
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
+
+<h2>Le tableau récapitulatif</h2>
+<table><thead><tr><th>Modèle</th><th>Type</th><th>Capacité</th><th>Matériau</th><th>Contre les gros oiseaux ou écureuils</th><th>Gamme</th></tr></thead><tbody>
+<tr><td>Brome Squirrel Buster Suet</td><td>Cage à grille mobile</td><td>2 pains de graisse</td><td>Non précisé</td><td>Écureuils (grille qui se ferme)</td><td>Haut</td></tr>
+<tr><td>CJ Wildlife Aura</td><td>Silo dans une cage</td><td>Non précisée</td><td>Métal laqué</td><td>Gros oiseaux</td><td>Haut</td></tr>
+<tr><td>Cage de protection CJ Wildlife Guardian (Vivara)</td><td>Grande cage</td><td>10 boules ou 2 pains</td><td>Métal</td><td>Gros oiseaux</td><td>Haut</td></tr>
+<tr><td>Gardman Heavy Duty Squirrel Proof</td><td>Cage en fonte</td><td>Non précisée</td><td>Fonte</td><td>Écureuils adultes</td><td>Milieu à haut</td></tr>
+<tr><td>Gardman Squirrel Proof Fat Snax</td><td>Tube dans une cage</td><td>4 boules</td><td>Métal</td><td>Écureuils</td><td>Milieu</td></tr>
+<tr><td>Vivara Bruxelles avec protection</td><td>Support dans une cage</td><td>Environ 4 boules</td><td>Métal noir</td><td>Gros oiseaux</td><td>Milieu</td></tr>
+<tr><td>Vivara support boules de graisse vert</td><td>Cylindre grillagé</td><td>4 boules</td><td>Métal</td><td>Non</td><td>Entrée</td></tr>
+<tr><td>Esschert Design silo en plastique recyclé</td><td>Silo</td><td>Non précisée</td><td>Plastique recyclé</td><td>Non</td><td>Entrée</td></tr>
+<tr><td>Trixie 55623</td><td>Cylindre avec toit</td><td>4 boules</td><td>Métal laqué époxy</td><td>Non</td><td>Entrée</td></tr>
+<tr><td>Best For Birds spirale gland</td><td>Spirale</td><td>Non précisée</td><td>Fer et zinc</td><td>Non</td><td>Entrée</td></tr>
+</tbody></table>
+<p>Une remarque avant d'entrer dans le détail : beaucoup de fiches ne donnent pas la capacité exacte. Une boule de graisse standard ne fait pas toujours le même diamètre d'une marque à l'autre, ce qui explique sans doute ce flou. Quand la capacité compte pour vous, comptez sur quatre boules pour un cylindre de 25 à 30 cm de haut.</p>
+
+<h2>1. Brome Squirrel Buster Suet : la vraie parade anti-écureuil</h2>
+<p><strong>Pour qui ?</strong> Vous avez des écureuils qui vident tout, et vous préférez nourrir les mésanges avec des pains de graisse plutôt qu'avec des boules.</p>
+<p>Le principe, décrit par le fabricant et le revendeur Nature Expert : une grille métallique descend dès qu'un écureuil se pose et masque la graisse. Les mésanges, trop légères, ne déclenchent rien. Le modèle accueille 2 pains d'environ 11,4 x 11,4 x 3,8 cm. Il mesure environ 22 x 11 x 47 cm sans le crochet et pèse 1,4 kg.</p>
+<ul>
+<li><strong>Points forts</strong> : un mécanisme qui ne dépend pas de l'écartement des barreaux, donc efficace aussi contre les jeunes écureuils ; format pain, plus propre que les boules.</li>
+<li><strong>Limites</strong> : il se suspend à une branche, pas en haut d'un poteau, selon Brome. Matériau et toit non précisés. Il faut acheter des pains au bon format.</li>
+</ul>
+<p><a href="{AMZ:Squirrel Buster Suet}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. CJ Wildlife Aura : le silo protégé le plus soigné</h2>
+<p><strong>Pour qui ?</strong> Vous voulez réserver la graisse aux petits oiseaux face aux pies, choucas et pigeons, avec un objet solide qui durera.</p>
+<p>Vendu en France par Vivara, l'Aura associe un silo pour boules de graisse et une cage extérieure. Il est en métal à revêtement poudre, mesure 27,2 x 26,2 x 34,6 cm et pèse 1,67 kg. Le haut se dévisse sans outil pour remplir et nettoyer, et Vivara annonce une garantie de 5 ans.</p>
+<ul>
+<li><strong>Points forts</strong> : construction lourde, démontage facile, garantie longue.</li>
+<li><strong>Limites</strong> : la fiche parle des gros oiseaux, pas des écureuils. Capacité non précisée.</li>
+</ul>
+<p><a href="{AMZ:CJ Wildlife Aura mangeoire boules de graisse}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Cage de protection CJ Wildlife Guardian : la plus grande capacité</h2>
+<p><strong>Pour qui ?</strong> Un grand jardin avec beaucoup de mésanges, où vous ne voulez pas remplir tous les deux jours.</p>
+<p>Cette grande cage verte, vendue par Vivara et sous le nom Guardian par CJ Wildlife au Royaume-Uni, contient 10 boules, ou 2 pains à la cacahuète, ou un tube de graisse de 500 ml ou 1 l. Elle mesure 32 x 28 x 32 cm pour 1,4 kg et se démonte facilement pour le remplissage et le nettoyage. Elle peut être suspendue, fixée sur un poteau ou posée.</p>
+<ul>
+<li><strong>Points forts</strong> : polyvalente (boules, pains, tube), trois modes de pose.</li>
+<li><strong>Limites</strong> : le titre dit « résistante aux écureuils », mais la description ne parle que des gros oiseaux ; pas de toit.</li>
+</ul>
+<p><a href="{AMZ:CJ Wildlife Guardian mangeoire boules de graisse}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Gardman Heavy Duty Squirrel Proof : la cage en fonte</h2>
+<p><strong>Pour qui ?</strong> Vous voulez du lourd, qui ne bouge pas au vent et ne se tord pas sous les dents d'un écureuil.</p>
+<p>Cette cage en fonte finition gris anthracite mesure 24 x 24 x 29 cm, avec un crochet métal. Le revendeur Garden Wildlife Direct mentionne un revêtement biocide « Feedsafe ».</p>
+<ul>
+<li><strong>Points forts</strong> : matériau très solide, look soigné qui se voit bien depuis la fenêtre.</li>
+<li><strong>Limites</strong> : le revendeur reconnaît que les jeunes écureuils peuvent passer entre les barreaux. Capacité et poids non précisés, pas de toit.</li>
+</ul>
+<p><a href="{AMZ:Gardman Heavy Duty Squirrel Proof Fat Ball Feeder}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Gardman Squirrel Proof Fat Snax : le compromis</h2>
+<p><strong>Pour qui ?</strong> Vous voulez une protection anti-écureuil sans dépenser autant que pour les cages lourdes.</p>
+<p>Un tube grillagé de 4 boules, placé dans une cage métallique extérieure, de 26 cm de haut selon Homebase. Le revendeur conseille de le suspendre à une branche, à environ 2 m d'un abri, pour que les oiseaux puissent se réfugier vite.</p>
+<ul>
+<li><strong>Points forts</strong> : double protection tube plus cage, petit encombrement.</li>
+<li><strong>Limites</strong> : 4 boules seulement ; nettoyage et toit non précisés.</li>
+</ul>
+<p><a href="{AMZ:Gardman Fat Snax squirrel proof}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Vivara Bruxelles avec protection : sobre et facile à démonter</h2>
+<p><strong>Pour qui ?</strong> Une terrasse ou un petit jardin où les pies se servent avant les mésanges.</p>
+<p>Ce support de 4 boules environ est intégré dans une cage en métal noir de 23,5 x 23,5 x 30 cm (0,89 kg). On l'ouvre en tournant le couvercle, sans outil. Vivara la dit résistante aux dégâts des écureuils, sans détailler le mécanisme.</p>
+<ul>
+<li><strong>Points forts</strong> : démontage rapide, poids raisonnable, discrète.</li>
+<li><strong>Limites</strong> : accroche et toit non précisés ; protection anti-écureuil peu détaillée.</li>
+</ul>
+<p><a href="{AMZ:Vivara mangeoire boules de graisse protection}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Vivara support boules de graisse vert : le basique bien fait</h2>
+<p><strong>Pour qui ?</strong> Un premier hiver de nourrissage, un balcon, ou pour multiplier les points de nourriture.</p>
+<p>Un cylindre grillagé en métal de 4 boules, 10,5 x 10,5 x 27,5 cm pour 190 g. Rien de plus, et c'est souvent ce qu'il faut.</p>
+<ul>
+<li><strong>Points forts</strong> : léger, sans pièce fragile, facile à suspendre presque partout.</li>
+<li><strong>Limites</strong> : aucune protection, pas de toit, accroche non précisée.</li>
+</ul>
+<p><a href="{AMZ:Vivara support boules de graisse}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Esschert Design silo en plastique recyclé</h2>
+<p><strong>Pour qui ?</strong> Vous voulez un silo à boules simple, pour un budget serré.</p>
+<p>Le modèle FB613 d'Esschert Design est en plastique recyclé et mesure 14,6 x 14,6 x 29,9 cm, selon le revendeur Bloomling. Une page Amazon.fr existe pour un distributeur de boules de graisse Esschert de 28 cm : vérifiez la référence avant de commander.</p>
+<ul>
+<li><strong>Points forts</strong> : matière recyclée, format silo plus abrité qu'une spirale.</li>
+<li><strong>Limites</strong> : capacité et accroche non précisées ; le plastique se griffe et se nettoie moins bien que le métal.</li>
+</ul>
+<p><a href="{AMZ:Esschert Design boules de graisse}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>9. Trixie 55623 : le cylindre avec un toit</h2>
+<p><strong>Pour qui ?</strong> Vous voulez garder les boules au sec sans changer de budget.</p>
+<p>D'après la fiche Amazon.fr, ce support contient 4 boules, en métal laqué époxy, avec un toit amovible, pour 11 x 25 x 10 cm.</p>
+<ul>
+<li><strong>Points forts</strong> : le toit limite la pluie sur la graisse, ce que n'ont pas les cylindres de base.</li>
+<li><strong>Limites</strong> : aucune protection contre les gros oiseaux ; caractéristiques lues seulement sur la fiche du revendeur.</li>
+</ul>
+<p><a href="{AMZ:Trixie 55623}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>10. Best For Birds spirale gland : la plus petite</h2>
+<p><strong>Pour qui ?</strong> Accrocher une ou deux boules à une branche fine ou au rebord d'une fenêtre.</p>
+<p>Vendue chez Truffaut, cette spirale en fer et zinc en forme de gland mesure 9,7 x 9,7 x 22,8 cm pour environ 73 g. Le couvercle se dévisse pour la remplir.</p>
+<ul>
+<li><strong>Points forts</strong> : minuscule, décorative, se nettoie d'un coup de brosse.</li>
+<li><strong>Limites</strong> : capacité non précisée, aucune protection.</li>
+</ul>
+<p><a href="{AMZ:Best For Birds spirale boules de graisse}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment choisir une mangeoire pour boules de graisse ?</h2>
+<p><strong>Partez de vos « voleurs ».</strong> Sans écureuil ni bande de pies, un cylindre grillagé à petit prix suffit. Avec des pies, des choucas ou des pigeons, il faut une cage dont les barreaux laissent passer une mésange mais pas un gros oiseau (modèles 2, 3 et 6). Avec des écureuils, seule une vraie protection marche : la grille mobile du Brome est la plus sûre, la fonte Gardman la plus solide mais avec la limite des jeunes écureuils.</p>
+<p><strong>Boules ou pains ?</strong> Les boules sont plus faciles à trouver, mais elles s'effritent et salissent le sol. Les pains de graisse (« suet cakes ») se rangent dans une cage plate et laissent moins de miettes. Les cages 1 et 3 acceptent les pains.</p>
+<p><strong>Pensez au nettoyage.</strong> La LPO recommande de nettoyer régulièrement les mangeoires et leurs abords, avec une brosse, de l'eau et du savon noir ou de Marseille, puis de les ranger à la fin de l'hiver. Un modèle qui s'ouvre sans outil (Aura, Bruxelles, cage Guardian) sera nettoyé plus souvent, tout simplement. C'est la vraie différence entre un support qu'on garde dix ans et un qu'on jette.</p>
+<p><strong>Choisissez une graisse végétale.</strong> La LPO Bourgogne-Franche-Comté demande de proscrire la graisse animale et l'huile de palme, et de préférer les pains de graisse végétale. Notre comparatif des <a href="{R}meilleure-boule-de-graisse/">meilleures boules de graisse sans filet</a> liste des produits qui le respectent, et notre guide sur les <a href="{R}boule-de-graisse-oiseaux/">boules de graisse pour oiseaux</a> explique comment les faire vous-même.</p>
+<p><strong>Placez-la bien.</strong> À environ 2 m d'un buisson où les oiseaux peuvent se réfugier, mais hors de portée d'un chat qui s'y cacherait. Et suspendez-la là où vous la voyez depuis la fenêtre : c'est tout le plaisir.</p>
+<p>L'erreur que l'on voit le plus : glisser dans un beau support la boule avec son filet vert « parce que c'est plus pratique ». Retirez-le toujours. Une boule sans filet tient très bien dans n'importe quel cylindre grillagé.</p>
+
+<h2>Quels oiseaux viendront à votre mangeoire ?</h2>
+<p>Les premières clientes sont les mésanges. La <a href="{R}mesange-charbonniere/">mésange charbonnière</a> et la <a href="{R}mesange-bleue/">mésange bleue</a> s'accrochent sans difficulté aux grillages et aux spirales. Pour attirer aussi les oiseaux qui mangent au sol, comme le pinson ou le rouge-gorge, ajoutez un plateau à côté : notre comparatif des <a href="{R}meilleure-mangeoire-oiseaux/">meilleures mangeoires pour oiseaux</a> compare silos et plateaux. Et pour toutes les règles du nourrissage d'hiver, de la mi-novembre à la fin mars, voyez notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a>.</p>
+""",
+  faq=[("Faut-il enlever le filet des boules de graisse ?",
+        "Oui, toujours. La LPO conseille de ne choisir que des boules sans filet, car les oiseaux peuvent s'y prendre les pattes et se blesser gravement. Placez la boule nue dans un support grillagé."),
+       ("Comment empêcher les écureuils de manger les boules de graisse ?",
+        "Avec une mangeoire à grille mobile qui se ferme sous leur poids, comme la Brome Squirrel Buster Suet, ou une cage à barreaux serrés. Les cages simples arrêtent les écureuils adultes, mais pas toujours les jeunes."),
+       ("Quand mettre des boules de graisse pour les oiseaux ?",
+        "Pendant l'hiver, de la mi-novembre à la fin mars environ selon la LPO, sans interruption une fois commencé. Arrêtez progressivement au début du printemps.")],
+  short="Top 10 mangeoires à boules de graisse", cat="Mangeoires")

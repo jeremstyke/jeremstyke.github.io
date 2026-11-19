@@ -17,8 +17,8 @@
 - [x] perruche-a-collier/ | perruche à collier | Observer | fiche espèce : la perruche verte qu'on voit de plus en plus en ville et dans les jardins (Île-de-France, grandes villes), comment la reconnaître, cri, origine, ce qu'elle mange, si elle gêne les autres oiseaux à la mangeoire ; liens vers mangeoires et tops du site
 - [x] difference-hibou-chouette/ | différence hibou chouette | Observer | identification : aigrettes, espèces courantes près des maisons (hulotte, effraie, chevêche, moyen-duc)
 - [x] pinson-des-arbres/ | pinson des arbres | Observer | fiche espèce : mâle et femelle, nourriture au sol
-- [ ] hirondelle-rustique/ | hirondelle rustique | Observer | fiche espèce : reconnaître, nid dans les bâtiments, protection, différence avec l'hirondelle de fenêtre
-- [ ] huppe-fasciee/ | huppe fasciée | Observer | fiche espèce : reconnaître, où et quand la voir, ce qu'elle mange
+- [x] hirondelle-rustique/ | hirondelle rustique | Observer | fiche espèce : reconnaître, nid dans les bâtiments, protection, différence avec l'hirondelle de fenêtre
+- [x] huppe-fasciee/ | huppe fasciée | Observer | fiche espèce : reconnaître, où et quand la voir, ce qu'elle mange
 - [ ] chardonneret-elegant/ | chardonneret élégant | Observer | fiche espèce : statut de protection vérifié, graines de niger, mangeoire à niger
 - [ ] petit-oiseau-marron-jardin/ | petit oiseau marron jardin | Observer | identification : troglodyte, moineau, grimpereau, accenteur
 - [ ] heron-cendre/ | héron cendré | Observer | fiche espèce et bassin de jardin : protéger ses poissons (filet, leurre), espèce protégée
