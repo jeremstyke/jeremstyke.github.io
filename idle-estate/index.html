@@ -257,7 +257,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 <div class="wrap">
   <div class="hd">
     <div class="cash"><svg class="coin" viewBox="0 0 32 32" width="34" height="34"><circle cx="16" cy="16" r="15" fill="#f4b73c" stroke="#d9951a" stroke-width="2"/><circle cx="16" cy="16" r="11" fill="none" stroke="#fff3c4" stroke-width="1.5"/><path d="M16 8.5 L8.5 15 H11 V23 H21 V15 H23.5 Z" fill="#fff3c4"/></svg><span id="cash">0</span></div>
-    <div class="sub"><span class="chip gold" id="potc" style="cursor:pointer">🏆 ⭐ 0</span><span class="chip" id="rate">$0/s</span><span class="chip" id="mult">x1</span><span class="chip gold" id="boost" hidden></span><span class="chip gold" id="refc" hidden style="cursor:pointer"></span><span class="chip gold" id="bankc" hidden style="cursor:pointer"></span><span class="chip gold" id="bankc3" hidden style="cursor:pointer"></span><span class="chip gold" id="prc" hidden style="cursor:pointer"></span><span class="chip ev" id="evc"></span><span class="chip gold" id="goldc" hidden>👑 x1.5</span><span class="chip" id="invc" style="cursor:pointer">👥 +</span></div>
+    <div class="sub"><span class="chip gold" id="potc" style="cursor:pointer">🏆 ⭐ 0</span><span class="chip gold" id="walc" style="cursor:pointer">👛 ⭐ 0</span><span class="chip" id="rate">$0/s</span><span class="chip" id="mult">x1</span><span class="chip gold" id="boost" hidden></span><span class="chip gold" id="refc" hidden style="cursor:pointer"></span><span class="chip gold" id="bankc" hidden style="cursor:pointer"></span><span class="chip gold" id="bankc3" hidden style="cursor:pointer"></span><span class="chip gold" id="prc" hidden style="cursor:pointer"></span><span class="chip ev" id="evc"></span><span class="chip gold" id="goldc" hidden>👑 x1.5</span><span class="chip" id="invc" style="cursor:pointer">👥 +</span></div>
   </div>
   <div class="scene"><div class="sky" id="sky"></div></div>
 
@@ -285,7 +285,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261120-0000';
+const BUILD = '20261120-0015';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -310,7 +310,7 @@ const L = {
  en: {
   lockT:'Buy the previous property first',
   bankT:'🎁 Start x2 boost',
-  prT:'Start over with a bonus', prNow:'You own {n} properties', prLoseH:'You lose', prKeepH:'You keep', prGainH:'You gain', prLoseS:'Property levels, managers and cash. You restart with one studio.', prKeepS:'Boosts, Stars purchases, achievements, quests and ranking score.', prGainS:'+{x}% income forever', prAfter:'Total bonus: +{t}%', prConf:'Confirm: reset everything', prConfH:'This cannot be undone', pfT:'Profile', pfRk:['Rookie','Investor','Developer','Tycoon','Legend'], pfSince:'Playing for {d} days', pfPr:'Prestiges', pfBonus:'Permanent bonus', pfOwn:'Properties owned', pfLv:'Levels', pfAch:'Achievements', pfDays:'Days playing', pfRank:'Rank this week', pfMe:'You', pfNone:'Player not found', pfBtn:'My profile', pfNoPr:'No prestige yet', pfClose:'Close', prP:'You own {n} properties. You can sell everything and restart.', prLose:'Lost: all property levels, managers and cash. You restart with one studio.', prKeep:'Kept: boost reserve, Stars purchases, achievements, quests and ranking score.', prGain:'Permanent income bonus: +{x}%', prTot:'(on top of your current +{t}%)', prGo:'Start over', prNo:'Not now', prChip:'Prestige', prMk:'Cancel your market listings and rentals first.', prLow:'Not available yet.', prDone:'New start! Your permanent bonus is active.', prNeed:'Own {n} properties to start over with a bonus.',
+  prT:'Start over with a bonus', prNow:'You own {n} properties', prLoseH:'You lose', prKeepH:'You keep', prGainH:'You gain', prLoseS:'Property levels, managers and cash. You restart with one studio.', prKeepS:'Boosts, Stars purchases, achievements, quests and ranking score.', prGainS:'+{x}% income forever', prAfter:'Total bonus: +{t}%', prConf:'Confirm: reset everything', prConfH:'This cannot be undone', pfT:'Profile', tpWeek:'This week', tpPr:'Prestiges', tpEmpty:'Nobody has done a prestige yet.', tpYou:'Your rank', pfRk:['Rookie','Investor','Developer','Tycoon','Legend'], pfSince:'Playing for {d} days', pfPr:'Prestiges', pfBonus:'Permanent bonus', pfOwn:'Properties owned', pfLv:'Levels', pfAch:'Achievements', pfDays:'Days playing', pfRank:'Rank this week', pfMe:'You', pfNone:'Player not found', pfBtn:'My profile', pfNoPr:'No prestige yet', pfClose:'Close', prP:'You own {n} properties. You can sell everything and restart.', prLose:'Lost: all property levels, managers and cash. You restart with one studio.', prKeep:'Kept: boost reserve, Stars purchases, achievements, quests and ranking score.', prGain:'Permanent income bonus: +{x}%', prTot:'(on top of your current +{t}%)', prGo:'Start over', prNo:'Not now', prChip:'Prestige', prMk:'Cancel your market listings and rentals first.', prLow:'Not available yet.', prDone:'New start! Your permanent bonus is active.', prNeed:'Own {n} properties to start over with a bonus.',
   testT:'Testing period', testS:'Idle Estate is still in testing until November 25. Accounts can be reset again if we need to adjust the balance. After that, no more resets.', testOk:'Got it',
   names:['Studio','Loft','Villa','Apartment block','Residential tower','Hotel chain','Mall network','Business district','Resort island','Skyscraper','Megacity','Airport','Theme park','Stadium','Harbour','Tech campus','Mountain resort','Island chain','Floating city','Orbital hotel','Lunar base','Mars colony','Space elevator','Asteroid mine','Terraformed planet','Star port','Orbital ring','Arcology','Dyson swarm','Galactic hub', 'Neon district', 'Cloud palace', 'Underwater dome', 'Volcano spa', 'Glacier resort', 'Desert oasis', 'Rainforest lodge', 'Casino strip', 'Film studio', 'Rocket park', 'Crystal tower', 'Sky bridge', 'Robot city', 'Clone district', 'Fusion plant', 'Time hotel', 'Dragon keep', 'Wizard college', 'Pirate cove', 'Ice moon', 'Shooting-star port', 'Black hole spa', 'Nebula garden', 'Quantum lab', 'Hyperloop hub', 'Pocket universe', 'Mirror dimension', 'Dream city', 'Infinity tower', 'Heart of the cosmos'],
   pr:['month','month','month','month','month','month','month','month','month','month'],
@@ -344,7 +344,7 @@ const L = {
  fr: {
   lockT:'Achète d\'abord le bien précédent',
   bankT:'🎁 Lancer le boost x2',
-  prT:'Repartir avec un bonus', prNow:'Tu possèdes {n} biens', prLoseH:'Tu perds', prKeepH:'Tu gardes', prGainH:'Tu gagnes', prLoseS:'Niveaux de biens, gestionnaires et cash. Tu repars avec un studio.', prKeepS:'Boosts, achats en Étoiles, succès, quêtes et score du classement.', prGainS:'+{x}% de revenus pour toujours', prAfter:'Bonus total : +{t}%', prConf:'Confirmer : tout remettre à zéro', prConfH:'Impossible de revenir en arrière', pfT:'Profil', pfRk:['Débutant','Investisseur','Promoteur','Magnat','Légende'], pfSince:'En jeu depuis {d} jours', pfPr:'Prestiges', pfBonus:'Bonus permanent', pfOwn:'Biens possédés', pfLv:'Niveaux', pfAch:'Succès', pfDays:'Jours de jeu', pfRank:'Classement de la semaine', pfMe:'Toi', pfNone:'Joueur introuvable', pfBtn:'Mon profil', pfNoPr:'Aucun prestige', pfClose:'Fermer', prP:'Tu possèdes {n} biens. Tu peux tout vendre et repartir de zéro.', prLose:'Perdu : tous les niveaux de biens, les gestionnaires et le cash. Tu repars avec un studio.', prKeep:'Conservé : réserve de boosts, achats en Étoiles, succès, quêtes et score du classement.', prGain:'Bonus de revenus permanent : +{x}%', prTot:'(en plus de ton +{t}% actuel)', prGo:'Repartir', prNo:'Pas maintenant', prChip:'Prestige', prMk:'Annule d\'abord tes annonces et locations du marché.', prLow:'Pas encore disponible.', prDone:'Nouveau départ ! Ton bonus permanent est actif.', prNeed:'Possède {n} biens pour repartir avec un bonus.',
+  prT:'Repartir avec un bonus', prNow:'Tu possèdes {n} biens', prLoseH:'Tu perds', prKeepH:'Tu gardes', prGainH:'Tu gagnes', prLoseS:'Niveaux de biens, gestionnaires et cash. Tu repars avec un studio.', prKeepS:'Boosts, achats en Étoiles, succès, quêtes et score du classement.', prGainS:'+{x}% de revenus pour toujours', prAfter:'Bonus total : +{t}%', prConf:'Confirmer : tout remettre à zéro', prConfH:'Impossible de revenir en arrière', pfT:'Profil', tpWeek:'Cette semaine', tpPr:'Prestiges', tpEmpty:'Personne n\'a encore fait de prestige.', tpYou:'Ton rang', pfRk:['Débutant','Investisseur','Promoteur','Magnat','Légende'], pfSince:'En jeu depuis {d} jours', pfPr:'Prestiges', pfBonus:'Bonus permanent', pfOwn:'Biens possédés', pfLv:'Niveaux', pfAch:'Succès', pfDays:'Jours de jeu', pfRank:'Classement de la semaine', pfMe:'Toi', pfNone:'Joueur introuvable', pfBtn:'Mon profil', pfNoPr:'Aucun prestige', pfClose:'Fermer', prP:'Tu possèdes {n} biens. Tu peux tout vendre et repartir de zéro.', prLose:'Perdu : tous les niveaux de biens, les gestionnaires et le cash. Tu repars avec un studio.', prKeep:'Conservé : réserve de boosts, achats en Étoiles, succès, quêtes et score du classement.', prGain:'Bonus de revenus permanent : +{x}%', prTot:'(en plus de ton +{t}% actuel)', prGo:'Repartir', prNo:'Pas maintenant', prChip:'Prestige', prMk:'Annule d\'abord tes annonces et locations du marché.', prLow:'Pas encore disponible.', prDone:'Nouveau départ ! Ton bonus permanent est actif.', prNeed:'Possède {n} biens pour repartir avec un bonus.',
   testT:'Période de test', testS:'Idle Estate est encore en test jusqu\'au 25 novembre. Les comptes peuvent être remis à zéro si on doit ajuster l\'équilibre. Après, plus de remise à zéro.', testOk:'Compris',
   names:['Studio','Loft','Villa','Immeuble','Tour résidentielle','Chaîne d\'hôtels','Centres commerciaux','Quartier d\'affaires','Île resort','Gratte-ciel','Mégapole','Aéroport','Parc d\'attractions','Stade','Port','Campus tech','Station de montagne','Archipel','Ville flottante','Hôtel orbital','Base lunaire','Colonie martienne','Ascenseur spatial','Mine d\'astéroïdes','Planète terraformée','Spatioport','Anneau orbital','Arcologie','Essaim de Dyson','Pôle galactique', 'Quartier néon', 'Palais des nuages', 'Dôme sous-marin', 'Spa du volcan', 'Station de glacier', 'Oasis du désert', 'Lodge de la jungle', 'Strip des casinos', 'Studio de cinéma', 'Parc des fusées', 'Tour de cristal', 'Pont céleste', 'Cité des robots', 'Quartier des clones', 'Centrale à fusion', 'Hôtel du temps', 'Donjon du dragon', 'École des sorciers', 'Crique des pirates', 'Lune de glace', 'Port des étoiles filantes', 'Spa du trou noir', 'Jardin de nébuleuse', 'Labo quantique', 'Hub hyperloop', 'Univers de poche', 'Dimension miroir', 'Cité des rêves', 'Tour de l\'infini', 'Cœur du cosmos'],
   pr:['mois','mois','mois','mois','mois','mois','mois','mois','mois','mois'],
@@ -441,7 +441,8 @@ const initData = tgw ? tgw.initData : '';
 
 // ---------- profiles (separate edge function idle-estate-prof)
 const PAPI = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/idle-estate-prof';
-let PRK = [], PRKat = 0, PMK = {}, PMKat = 0;
+let PRK = [], PRKat = 0, PMK = {}, PMKat = 0, PRL = null, PRLat = 0, topMode = 'week';
+function loadRkp() { if (PRL && Date.now() - PRLat < 20000) return; PRLat = Date.now(); pcall({ act: 'rkp' }).then(r => { if (r && r.ok) { PRL = r; if (tab === 'top') renderTop(); } }); }
 function pcall(body) {
   const ac = new AbortController(); const to = setTimeout(() => ac.abort(), 12000);
   return fetch(PAPI, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ init: initData, ...body }), signal: ac.signal }).then(r => r.json()).then(j => { clearTimeout(to); return j; }).catch(() => ({ ok: false }));
@@ -601,7 +602,8 @@ function build() {
   setInterval(prAsk, 2000);
   setInterval(() => { if (tab === 'mk' && mkD && (mkYoung || (S.startEnd || 0) > snow())) renderMk(); }, 5000);
   pcall({ act: 'me' });
-  $('potc').onclick = () => go('top');
+  $('potc').onclick = () => { topMode = 'week'; go('top'); };
+  $('walc').onclick = () => { go('top'); setTimeout(() => { const w = $('walBox'); if (w) w.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 400); };
   call({ act: 'top' }); setInterval(() => { call({ act: 'top' }); }, 60000);
   setInterval(() => { if (tab === 'top') loadTop(); }, 15000);
 }
@@ -762,6 +764,7 @@ function paint() {
   const bo = $('boost');
   slotTick(n);
   if (S.boostEnd > n || S.startEnd > n || S.adEnd > n) { bo.hidden = false; const q = slotSt(n); const l = (q.ms === q.sb ? S.startEnd : q.ma === q.sb ? S.adEnd : S.boostEnd) - n; bo.textContent = (q.run ? '⚡ x' : '⏸ x') + q.sb + ' ' + (l > 3600 ? Math.floor(l / 3600) + 'h' + String(Math.floor(l % 3600 / 60)).padStart(2, '0') : Math.floor(l / 60) + ':' + String(Math.floor(l % 60)).padStart(2, '0')); } else bo.hidden = true;
+  { const wc = $('walc'); if (wc) wc.textContent = '👛 ⭐ ' + fmt(topData && topData.wallet ? topData.wallet.avail || 0 : 0); }
   { const pt = $('potc'); if (pt) pt.textContent = '🏆 ⭐ ' + fmt(topData ? topData.pool || 0 : 0); }
   const rf = $('refc'); if (S.ref_pend > 0 || S.ref_n > 0) { rf.hidden = false; rf.textContent = '👥 +$' + fm(S.ref_pend || 0); rf.style.opacity = S.ref_pend > 0 ? 1 : .55; } else rf.hidden = true;
   const bc = $('bankc'); if (S.bank > 0) { bc.hidden = false; bc.textContent = '🎁 x2 : ' + fmtT(S.bank) + ' · ' + L.use + ' ' + fmtT(Math.min(S.bank, S.use)); } else bc.hidden = true;
@@ -1147,22 +1150,31 @@ function openMkNew() {
 }
 
 // top
-function loadTop() { call({ act: 'top' }).then(() => { if (tab === 'top') renderTop(); }); loadRk(); }
+function loadTop() { call({ act: 'top' }).then(() => { if (tab === 'top') renderTop(); }); loadRk(); if (topMode === 'pr') loadRkp(); }
 function renderTop() {
   const d = topData; const p = $('p-top'); if (!d) return;
   const left = Math.max(0, d.ends - snow()); const dd = Math.floor(left / 86400), hh = Math.floor(left % 86400 / 3600), mm = Math.floor(left % 3600 / 60);
   let h = `<h2>${L.topT}</h2><p class="lead">${L.topS}</p>
    <div class="box"><span class="lead">${L.pool}</span><div class="big">⭐ ${fmt(d.pool)}</div><span class="lead">${d.pool > 0 ? '' : L.noPool + ' '}${L.ends} ${dd}d ${hh}h ${mm}m</span></div>`;
+  h += `<div class="seg"><button data-tm="week"${topMode === 'week' ? ' class="on"' : ''}>🏆 ${L.tpWeek}</button><button data-tm="pr"${topMode === 'pr' ? ' class="on"' : ''}>🔄 ${L.tpPr}</button></div>`;
+  if (topMode === 'pr') {
+    h += '<div>';
+    if (!PRL) h += `<p class="lead">…</p>`; else if (!PRL.rows.length) h += `<p class="lead">${L.tpEmpty}</p>`;
+    else PRL.rows.forEach((r, i) => { h += `<div class="top${r.me ? ' me' : ''}" data-u="${r.u}"><span class="rk">${i + 1}</span>${r.ph ? `<img class="av" src="${esc(r.ph)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<span class="n">${esc(r.n)}${prBadge(r.pr)}${r.me ? ' (' + L.yours + ')' : ''}</span><span class="p" style="color:var(--navy)">+${Math.round(r.pb * 100)}%</span></div>`; });
+    h += '</div>';
+    if (PRL && PRL.mine) h += `<div class="box"><span class="lead">${L.tpYou}</span><div class="big">#${PRL.mine.rank}</div><span class="lead">🔄 ${PRL.mine.pr}</span></div>`;
+  } else {
   h += '<div>';
   d.top.forEach((r, i) => { const pr = Math.floor(d.pool * (d.shares[i] || 0) / 100); const ex = (PRK[i] && PRK[i].n === r.n) ? PRK[i] : PRK.find(x => x.n === r.n); h += `<div class="top${r.me ? ' me' : ''}"${ex ? ` data-u="${ex.u}"` : ''}><span class="rk">${i + 1}</span>${ex && ex.ph ? `<img class="av" src="${esc(ex.ph)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<span class="n">${esc(r.n)}${ex ? prBadge(ex.pr) : ''}${r.me ? ' (' + L.yours + ')' : ''}</span><span class="v">$${fm(r.v)}</span><span class="p">${pr > 0 ? '⭐ ' + pr : ''}</span></div>`; });
   h += '</div>';
   h += `<div class="box"><span class="lead">${L.rank}</span><div class="big">#${(() => { const k = d.top.findIndex(r => r.me); return k >= 0 ? k + 1 : d.rank; })()}</div><span class="lead">$${fm(d.score)}</span></div>`;
+  }
   const w = d.wallet || {};
-  h += `<div class="box"><span class="lead">👛 ${L.wallet}</span><div style="display:flex;gap:10px;margin-top:6px"><div style="flex:1;background:#d6f3dc;border-radius:12px;padding:8px"><span class="lead">✅ ${L.wAvail}</span><div class="big" style="font-size:24px">⭐ ${fmt(w.avail || 0)}</div><span class="lead">≈ ${((w.avail || 0) * (w.rate || 0.013)).toFixed(2)} USDT</span></div><div style="flex:1;background:#e3edf7;border-radius:12px;padding:8px"><span class="lead">🔒 ${L.wLocked}</span><div class="big" style="font-size:24px">⭐ ${fmt(w.locked || 0)}</div><span class="lead">≈ ${((w.locked || 0) * (w.rate || 0.013)).toFixed(2)} USDT</span></div></div><span class="lead">${w.next ? L.wNext + ' ' + new Date(w.next).toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-GB') + '. ' : ''}${L.locked}.</span><br><span class="lead">${L.wUsdt2}</span>${w.ref > 0 ? `<br><span class="lead">${L.wRef}: ⭐ ${fmt(w.ref)}</span>` : ''}
+  h += `<div class="box" id="walBox"><span class="lead">👛 ${L.wallet}</span><div style="display:flex;gap:10px;margin-top:6px"><div style="flex:1;background:#d6f3dc;border-radius:12px;padding:8px"><span class="lead">✅ ${L.wAvail}</span><div class="big" style="font-size:24px">⭐ ${fmt(w.avail || 0)}</div><span class="lead">≈ ${((w.avail || 0) * (w.rate || 0.013)).toFixed(2)} USDT</span></div><div style="flex:1;background:#e3edf7;border-radius:12px;padding:8px"><span class="lead">🔒 ${L.wLocked}</span><div class="big" style="font-size:24px">⭐ ${fmt(w.locked || 0)}</div><span class="lead">≈ ${((w.locked || 0) * (w.rate || 0.013)).toFixed(2)} USDT</span></div></div><span class="lead">${w.next ? L.wNext + ' ' + new Date(w.next).toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-GB') + '. ' : ''}${L.locked}.</span><br><span class="lead">${L.wUsdt2}</span>${w.ref > 0 ? `<br><span class="lead">${L.wRef}: ⭐ ${fmt(w.ref)}</span>` : ''}
    <div style="margin-top:10px">${S.wallet_addr ? `<span class="lead">${L.wAddr}: <b>${esc(S.wallet_addr.slice(0, 6) + '...' + S.wallet_addr.slice(-4))}</b></span><br>` : `<span class="lead">${L.wHint}</span><br>`}<button class="btn gold" id="walBtn" style="margin-top:6px">👛 ${S.wallet_addr ? L.wChange : L.wConn}</button></div></div>`;
   h += `<button class="btn" id="pfMe" style="margin:4px 0 12px;width:100%">👤 ${L.pfBtn}</button>`;
   p.innerHTML = h;
-  p.onclick = e => { if (e.target.closest('#pfMe')) { openProfile(S.uid); return; } const row = e.target.closest('[data-u]'); if (row) openProfile(Number(row.dataset.u)); };
+  p.onclick = e => { const tm = e.target.closest('[data-tm]'); if (tm) { topMode = tm.dataset.tm; if (topMode === 'pr') loadRkp(); renderTop(); return; } if (e.target.closest('#pfMe')) { openProfile(S.uid); return; } const row = e.target.closest('[data-u]'); if (row) openProfile(Number(row.dataset.u)); };
   const wb = $('walBtn'); if (wb) wb.onclick = () => { initTon(); if (!tcui) { toast(L.err); return; } try { if (tcui.connected) tcui.disconnect().then(() => tcui.openModal()); else tcui.openModal(); } catch (e) { toast(L.err); } };
 }
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
