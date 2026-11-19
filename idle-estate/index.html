@@ -455,6 +455,7 @@ function build() {
 const TUTO = {
   en: [
     ['🏠', 'Welcome to Idle Estate', 'Build a real estate empire. Rent pays in even while you are away, up to 3 hours offline.'],
+    ['⚡', 'x10 for your first hour', 'Your income is multiplied by 10 during your first hour of play. Use it to buy properties and hire your first manager fast.'],
     ['👆', 'Tap to collect rent', 'Tap a property to start its rent cycle and collect the money when the bar is full.'],
     ['👔', 'Buy and hire managers', 'Buy more levels to earn more. A manager collects the rent for you, automatically and nonstop.'],
     ['🏛️', 'Sell your empire', 'Once you are big enough, sell it for investors: each one gives +5% income forever and every sale unlocks new properties. Then start again, faster.'],
@@ -462,6 +463,7 @@ const TUTO = {
   ],
   fr: [
     ['🏠', 'Bienvenue dans Idle Estate', 'Construis un empire immobilier. Les loyers tombent même quand tu es absent, jusqu\'à 3 heures hors ligne.'],
+    ['⚡', 'x10 pendant ta première heure', 'Tes revenus sont multipliés par 10 pendant ta première heure de jeu. Profites-en pour acheter des biens et embaucher ton premier gestionnaire vite.'],
     ['👆', 'Touche pour encaisser', 'Touche un bien pour lancer son cycle de loyer, puis récupère l\'argent quand la barre est pleine.'],
     ['👔', 'Achète et embauche', 'Achète des niveaux pour gagner plus. Un gestionnaire encaisse les loyers pour toi, automatiquement et sans arrêt.'],
     ['🏛️', 'Vends ton empire', 'Quand tu es assez gros, vends-le contre des investisseurs : chacun donne +5 % de revenus pour toujours et chaque vente débloque de nouveaux biens. Puis recommence, plus vite.'],
@@ -474,10 +476,10 @@ function shareInvite() {
   try { if (tgw && tgw.openTelegramLink) tgw.openTelegramLink(u); else window.open(u, '_blank'); } catch (x) { window.open(u, '_blank'); }
 }
 function tutoStart() {
-  try { if (localStorage.getItem('ie_tuto1')) return; } catch (e) {}
+  try { if (localStorage.getItem('ie_tuto2')) return; } catch (e) {}
   const T = TUTO[lang] || TUTO.en; let k = 0;
   const el = document.createElement('div'); el.className = 'tuto'; document.body.appendChild(el);
-  const done = () => { try { localStorage.setItem('ie_tuto1', '1'); } catch (e) {} el.remove(); };
+  const done = () => { try { localStorage.setItem('ie_tuto2', '1'); } catch (e) {} el.remove(); };
   const draw = () => {
     const [e, t, d] = T[k]; const last = k === T.length - 1;
     el.innerHTML = `<div class="tc"><div class="te">${e}</div><h3>${t}</h3><p>${d}</p><div class="td">${T.map((_, i) => `<i class="${i === k ? 'on' : ''}"></i>`).join('')}</div><div class="tb">${last ? '' : `<button class="sk" id="tSkip">${lang === 'fr' ? 'Passer' : 'Skip'}</button>`}<button class="btn" id="tNext">${last ? (lang === 'fr' ? 'C\'est parti !' : 'Let\'s go!') : (lang === 'fr' ? 'Suivant' : 'Next')}</button></div></div>`;
