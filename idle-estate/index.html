@@ -207,6 +207,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 .tuto .tb{display:flex;gap:10px;justify-content:center}
 .tuto .tb .sk{background:#fff;color:var(--navy);box-shadow:0 4px 0 var(--navy);text-shadow:none}
 </style>
+<script src="https://yoszi.com/sdk.js" data-zone="12296718" data-sdk="show_12296718"></script>
 </head>
 <body>
 <div id="maint" style="display:none;position:fixed;inset:0;z-index:99999;background:linear-gradient(#4fb3f7,#cdeeff 70%);align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px;font-family:inherit;color:#12305e">
@@ -248,7 +249,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-2010';
+const BUILD = '20261119-2020';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -281,7 +282,7 @@ const L = {
   hint:'Tap a property to collect its rent. Hire a manager 👔 and it pays you automatically, even when you are away.', estate:'Estate', shop:'Shop', prest:'Empire', top:'Top',
   buy:'Buy', lvl:'Lv', manager:'Manager', auto:'Auto', tapStart:'👆 Tap', ms:'x',
   welcomeT:'Welcome pack', welcomeS:'2h of rent now + x2 income for 24h', claim:'Claim', daily:'Daily bonus', dailyS:'Day {n} of 7: you get {m} min of your income ({x}). Come back every day, day 7 adds x2 for 1h',
-  away:'While you were away', adT:'Free reward', adS:'At least {x} in cash every 2 hours, more as your income grows.', adB:'Open', adWait:'Stay on the page for 10 seconds...', adOk:'Reward received!', boostActive:'A boost is already running. Boosts do not stack.', adCool:'Come back in a bit', awayX:'Double it', awayXd:'Doubled!', awayS:'Your tenants kept paying rent.', collect:'Collect', great:'Great!',
+  away:'While you were away', adErr:'Ad unavailable, try again', adT:'Free reward', adS:'At least {x} in cash every 2 hours, more as your income grows.', adB:'Open', adWait:'Stay on the page for 10 seconds...', adOk:'Reward received!', boostActive:'A boost is already running. Boosts do not stack.', adCool:'Come back in a bit', awayX:'Double it', awayXd:'Doubled!', awayS:'Your tenants kept paying rent.', collect:'Collect', great:'Great!',
   vipMsg:'Golden tenant! +', per:'/s', max:'MAX',
   shopT:'Shop', shopS:'Everything is paid in Telegram Stars. 30% of all Stars spent goes to the weekly top 10 (this share may go up or down).',
   items:{welcome:['🎁','Welcome pack','2h of rent instantly + x2 income for 24h. One time only.'],b2:['⚡','x2 Income, 4h','Double all your rent for 4 hours.'],b3:['🚀','x3 Income, 24h','Triple all your rent for a full day.'],perm2:['👑','Partner: x2 forever','Permanent x2 on everything, forever.'],vault:['🏦','Vault: 24h offline','Tenants pay up to 24h while you are away (instead of 3h).'],skip1:['⏩','Time skip 1h','Instantly get 1 hour of rent.'],skip8:['⏭️','Time skip 8h','Instantly get 8 hours of rent.']},
@@ -315,7 +316,7 @@ const L = {
   hint:'Touche un bien pour encaisser son loyer. Embauche un gestionnaire 👔 et il te paie tout seul, même quand tu es absent.', estate:'Biens', shop:'Boutique', prest:'Empire', top:'Top',
   buy:'Acheter', lvl:'Niv', manager:'Gestionnaire', auto:'Auto', tapStart:'👆 Touche', ms:'x',
   welcomeT:'Pack de bienvenue', welcomeS:'2h de loyers tout de suite + x2 revenus pendant 24h', claim:'Récupérer', daily:'Bonus du jour', dailyS:'Jour {n} sur 7 : tu gagnes {m} min de tes revenus ({x}). Reviens chaque jour, le jour 7 ajoute x2 pendant 1 h',
-  away:'Pendant ton absence', adT:'Récompense gratuite', adS:'Au moins {x} de cash toutes les 2 heures, plus quand tes revenus montent.', adB:'Ouvrir', adWait:'Reste 10 secondes sur la page...', adOk:'Récompense reçue !', boostActive:'Un boost est déjà en cours. Les boosts ne se cumulent pas.', adCool:'Reviens un peu plus tard', awayX:'Doubler', awayXd:'Doublé !', awayS:'Tes locataires ont continué à payer.', collect:'Encaisser', great:'Super !',
+  away:'Pendant ton absence', adErr:'Pub indisponible, réessaie', adT:'Récompense gratuite', adS:'Au moins {x} de cash toutes les 2 heures, plus quand tes revenus montent.', adB:'Ouvrir', adWait:'Reste 10 secondes sur la page...', adOk:'Récompense reçue !', boostActive:'Un boost est déjà en cours. Les boosts ne se cumulent pas.', adCool:'Reviens un peu plus tard', awayX:'Doubler', awayXd:'Doublé !', awayS:'Tes locataires ont continué à payer.', collect:'Encaisser', great:'Super !',
   vipMsg:'Locataire doré ! +', per:'/s', max:'MAX',
   shopT:'Boutique', shopS:'Tout se paie en Étoiles Telegram. 30 % des Étoiles dépensées vont au top 10 de la semaine (ce pourcentage peut augmenter ou baisser).',
   items:{welcome:['🎁','Pack de bienvenue','2h de loyers tout de suite + x2 revenus pendant 24h. Une seule fois.'],b2:['⚡','Revenus x2, 4h','Double tous tes loyers pendant 4 heures.'],b3:['🚀','Revenus x3, 24h','Triple tous tes loyers pendant une journée.'],perm2:['👑','Associé : x2 à vie','x2 permanent sur tout, pour toujours.'],vault:['🏦','Coffre : 24h hors ligne','Les locataires paient jusqu\'à 24h pendant ton absence (au lieu de 3h).'],skip1:['⏩','Saut de 1h','Reçois tout de suite 1 heure de loyers.'],skip8:['⏭️','Saut de 8h','Reçois tout de suite 8 heures de loyers.']},
@@ -805,15 +806,21 @@ function paintAd() {
 let adBusy = false;
 async function watchAd() {
   if (adBusy || adDone()) { toast(L.adCool); return; }
-  const st = await call({ act: 'adstart' });
-  if (!st || !st.ok || st.err) { if (st && st.err === 'cool') { adMark(); renderShop(); buildBanners(); } toast(L.adCool); return; }
-  adBusy = true; toast(L.adWait); adMark(); buildBanners(); if (tab === 'shop') renderShop();
-  const url = 'https://uplcm.com/4/12140639';
-  try { if (tgw && tgw.openLink) tgw.openLink(url); else window.open(url, '_blank'); } catch (e) { window.open(url, '_blank'); }
+  if (typeof window.show_12296718 !== 'function') { toast(L.adErr); return; }
+  adBusy = true;
+  const t0 = Date.now();
+  // the Monetag popup must be opened straight from the click, so it starts before the server call
+  const pop = window.show_12296718({ type: 'pop' });
+  const stP = call({ act: 'adstart' });
+  let ok = true;
+  try { const res = await pop; if (res && res.reward_event_type === 'non_valued') ok = false; } catch (e) { ok = false; }
+  const st = await stP;
+  if (!ok || !st || !st.ok || st.err) { adBusy = false; if (st && st.err === 'cool') { adMark(); renderShop(); buildBanners(); } toast(ok ? L.adCool : L.adErr); return; }
+  toast(L.adWait); adMark(); buildBanners(); if (tab === 'shop') renderShop();
   setTimeout(async () => {
     const r = await call({ act: 'adclaim' }); adBusy = false;
     if (r && r.ok && !r.err) { adMark(); hap('ok'); toast(L.adOk); renderShop(); buildBanners(); } else { adUnmark(); renderShop(); buildBanners(); toast(L.adCool); }
-  }, 11000);
+  }, Math.max(0, 11500 - (Date.now() - t0)));
 }
 let buying = false;
 async function buy(sku, deal) {
