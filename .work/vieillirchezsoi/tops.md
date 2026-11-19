@@ -19,7 +19,7 @@
 - [x] meilleur-pedalier-exercice-senior/ | meilleur pédalier d'exercice pour senior | Vie quotidienne | assis, motorisé ou non ; renvoi médecin ou kinésithérapeute
 - [x] meilleur-elevateur-de-bain/ | meilleur élévateur de bain | Salle de bains | sièges élévateurs de baignoire électriques
 - [x] meilleur-bouton-appel-urgence/ | meilleur bouton d'appel d'urgence senior | Sécurité | pendentif, bracelet, avec ou sans abonnement
-- [ ] meilleure-montre-gps-senior/ | meilleure montre GPS pour senior | Sécurité | localisation, appel d'urgence ; rester général sur les maladies, renvoi médecin
+- [x] meilleure-montre-gps-senior/ | meilleure montre GPS pour senior | Sécurité | localisation, appel d'urgence ; rester général sur les maladies, renvoi médecin
 - [ ] meilleure-chaise-de-douche-a-roulettes/ | meilleure chaise de douche à roulettes | Salle de bains | chaises garde-robe et douche à roulettes
 - [ ] meilleur-fauteuil-roulant-manuel-pliant/ | meilleur fauteuil roulant manuel pliant | Se déplacer | léger, de transfert, autopropulsé ; achat sans prescription, renvoi vers fauteuil-roulant-rembourse-100/
 - [ ] meilleure-barre-de-lit/ | meilleure barre de lit pour se relever | Chambre et repos | poignées et barres d'appui de lit

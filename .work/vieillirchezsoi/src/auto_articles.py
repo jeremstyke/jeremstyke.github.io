@@ -2818,7 +2818,7 @@ g("bouton-appel-urgence-senior/",
 <p>Ce qu'on oublie souvent : il faut une carte SIM avec un forfait actif, des numéros à jour, et des proches qui décrochent vraiment. Notre conseil : enregistrez au moins trois numéros, dont un qui ne part jamais en même temps que les autres, et faites un essai réel une fois par mois. Un appareil qui appelle en boucle plusieurs numéros jusqu'à ce que quelqu'un réponde est préférable à celui qui n'en appelle qu'un.</p>
 <p><a href="{AMZ:bouton appel urgence senior sans abonnement GSM}" """ + A + """>Voir les boutons d'appel sans abonnement</a></p>
 <p>Si la personne a déjà un mobile, un <a href="{R}telephone-portable-senior/">téléphone portable senior</a> avec touche SOS peut faire l'affaire, à condition qu'il soit toujours sur elle. <a href="{AMZ:telephone senior touche SOS}" """ + A + """>Voir les téléphones avec touche SOS</a>.</p>
-<p>Une montre avec appel d'urgence et localisation peut aussi convenir à quelqu'un qui sort seul. <a href="{AMZ:montre senior bouton SOS}" """ + A + """>Voir les montres avec bouton SOS</a>.</p>
+<p>Une <a href="{R}meilleure-montre-gps-senior/">montre GPS avec appel d'urgence</a> peut aussi convenir à quelqu'un qui sort seul. <a href="{AMZ:montre senior bouton SOS}" """ + A + """>Voir les montres avec bouton SOS</a>.</p>
 <h2>Et quand l'aidant vit à la maison ?</h2>
 <p>Si vous habitez avec la personne, un bouton relié à un carillon sans fil suffit souvent. Elle appuie depuis son lit ou la salle de bains, la sonnerie retentit dans votre pièce. C'est simple et sans abonnement. En revanche, il ne prévient personne en votre absence : prévoyez une autre solution pour les journées où elle reste seule.</p>
 <p><a href="{AMZ:bouton appel sans fil personne agee carillon}" """ + A + """>Voir les boutons d'appel sans fil avec carillon</a></p>
@@ -4108,7 +4108,7 @@ g("habilitation-familiale/",
 <h2>Dans quels cas peut-on demander une habilitation familiale ?</h2>
 <p>Il faut que les facultés mentales ou physiques de votre parent soient altérées, au point qu'il ne puisse plus exprimer sa volonté ou faire seul les actes de la vie courante. Cette altération doit être constatée par un médecin agréé, on y revient plus bas.</p>
 <p>La mesure n'est accordée qu'en cas de nécessité. Si une solution plus simple suffit, le juge ne l'ouvrira pas. Par exemple, si votre mère a toute sa tête mais ne peut plus se déplacer à la banque, une <a href="{R}procuration-bancaire-parent-age/">procuration bancaire</a> fait l'affaire. Si elle a signé un mandat de protection future, c'est lui qui s'applique. L'habilitation intervient quand ces outils ne suffisent plus ou n'ont pas été prévus à temps.</p>
-<p>La situation typique : un père atteint de troubles de la mémoire, qui ne comprend plus ses courriers ni ses relevés, et dont les enfants doivent gérer ses comptes, son loyer ou son entrée en établissement.</p>
+<p>La situation typique : un père atteint de troubles de la mémoire, qui ne comprend plus ses courriers ni ses relevés, et dont les enfants doivent gérer ses comptes, son loyer ou son entrée en <a href="{R}qu-est-ce-qu-un-ehpad/">EHPAD</a>.</p>
 <h2>Qui peut être habilité, et qui peut faire la demande ?</h2>
 <p>La liste est fixée par la loi. Peuvent être habilités :</p>
 <ul>
@@ -4248,3 +4248,151 @@ g("meilleur-bouton-appel-urgence/",
        ("Un bouton d'appel d'urgence 2G fonctionnera-t-il encore ?", "Non, pas longtemps. Selon l'Arcep et l'INC, les opérateurs arrêtent la 2G en métropole entre fin septembre et fin décembre 2026, et la 3G à partir de fin 2028. Choisissez un appareil dont la fiche mentionne clairement la 4G."),
        ("Avez-vous testé ces boutons d'appel d'urgence ?", "Non. Cette sélection repose uniquement sur les fiches des fabricants, les notices et les pages de revendeurs. Nous n'indiquons que ce qui y figure, sans note ni avis de prise en main.")],
   short="Top 7 boutons d'appel d'urgence", cat="Sécurité")
+
+AUTO_META['qu-est-ce-qu-un-ehpad/'] = ('🏡', 'sable')
+g("qu-est-ce-qu-un-ehpad/",
+  "EHPAD c'est quoi ? Définition, prix, aides et choix",
+  "EHPAD, c'est quoi ? Définition simple, prix, aides et comment choisir",
+  "EHPAD c'est quoi : définition simple, différence avec résidence autonomie et USLD, prix moyen, aides (APA, ASH, APL, impôt) et comment choisir l'établissement.",
+  """
+<p>Un EHPAD, c'est un établissement d'hébergement pour personnes âgées dépendantes : une maison de retraite médicalisée, où vivent des personnes de 60 ans et plus qui ont besoin d'aide et de soins au quotidien. On y trouve une chambre, les repas, des animations, et une équipe soignante présente sur place.</p>
+<p>C'est souvent le mot qu'on découvre quand le maintien à domicile devient trop difficile. Voici ce qu'il recouvre vraiment, ce que ça coûte, et comment s'y retrouver entre les différentes structures.</p>
+{CTA}
+<p class="note"><strong>Informations vérifiées le 19 novembre 2026</strong> sur service-public.gouv.fr, cnsa.fr et pour-les-personnes-agees.gouv.fr. Les règles d'aide dépendent de votre situation : le conseil départemental et l'établissement restent vos interlocuteurs.</p>
+<h2>Qui peut entrer en EHPAD ?</h2>
+<p>Il faut avoir au moins 60 ans et avoir besoin d'aide pour les actes de la vie courante : se lever, se laver, s'habiller, prendre ses médicaments. Avant 60 ans, une dérogation est possible, accordée par le département où se trouve l'établissement.</p>
+<p>L'EHPAD a remplacé ce qu'on appelait autrefois la maison de retraite. La différence tient au soin : il y a au moins un médecin coordonnateur, un infirmier coordinateur, des infirmiers et des aides-soignants. Le médecin coordonnateur évalue le niveau de dépendance de chaque résident avec la grille AGGIR, de GIR 1 (le plus dépendant) à GIR 6 (autonome).</p>
+<p>Le séjour peut être permanent, mais aussi temporaire : quelques semaines après une hospitalisation, ou pour permettre à l'aidant de souffler.</p>
+<h2>EHPAD, résidence autonomie, USLD : quelle différence ?</h2>
+<p>Ces trois structures sont souvent confondues. Elles ne s'adressent pourtant pas aux mêmes personnes.</p>
+<table><thead><tr><th>Structure</th><th>Pour qui</th><th>Logement</th><th>Soins</th></tr></thead><tbody>
+<tr><td>Résidence autonomie</td><td>Personnes âgées autonomes ou un peu fragiles</td><td>Appartement individuel</td><td>Non médicalisée, services collectifs (repas, ménage, animations)</td></tr>
+<tr><td>EHPAD</td><td>Personnes qui ont besoin d'aide ou de soins au quotidien</td><td>Chambre individuelle ou partagée</td><td>Médicalisé, équipe soignante sur place</td></tr>
+<tr><td>USLD (unité de soins de longue durée)</td><td>Personnes qui ont besoin d'une surveillance médicale constante</td><td>Chambre, souvent dans un hôpital</td><td>Moyens médicaux plus importants qu'en EHPAD</td></tr>
+</tbody></table>
+<p>Par exemple, une personne de 82 ans encore autonome mais qui se sent seule dans sa maison trouvera souvent sa place en résidence autonomie. Si elle a besoin d'aide pour sa toilette chaque matin et de soins réguliers, ce sera plutôt l'EHPAD. L'USLD concerne des situations médicales plus lourdes.</p>
+<p>Avant de penser à un établissement, vérifiez aussi ce qui peut encore être fait à la maison : notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a> et la page sur les <a href="{R}aides-adapter-logement-senior/">aides pour adapter le logement</a> permettent parfois de gagner quelques années chez soi.</p>
+<h2>Combien coûte un EHPAD ?</h2>
+<p>Le prix se compose de trois parts, et c'est là que beaucoup de familles se perdent :</p>
+<ul>
+<li><strong>l'hébergement</strong> (chambre, repas, linge, animations) : payé par le résident, le même pour tous ceux qui ont le même niveau de confort ;</li>
+<li><strong>la dépendance</strong> (aide pour les gestes du quotidien) : payée par le résident, selon son GIR, en partie couverte par l'APA ;</li>
+<li><strong>les soins</strong> : pris en charge par l'Assurance maladie.</li>
+</ul>
+<p>Selon la CNSA, en 2024, le prix mensuel d'une chambre seule en hébergement permanent (hébergement et part dépendance minimale) était en moyenne de 2 164 € dans les chambres habilitées à l'aide sociale, et de 3 128 € dans les autres. L'écart est donc d'environ 1 000 € par mois. Ces chiffres sont des moyennes nationales, avant aides : le prix réel varie beaucoup d'une région à l'autre.</p>
+<p>Ce qu'on oublie souvent : en plus du prix affiché, il y a des dépenses personnelles (coiffeur, vêtements, mutuelle, téléphone). Beaucoup d'établissements demandent aussi de marquer le linge au nom du résident ; renseignez-vous avant l'entrée. <a href="{AMZ:etiquettes thermocollantes vetements nom}" """ + A + """>Voir les étiquettes de vêtements à coudre ou thermocollantes</a></p>
+<h2>Quelles aides pour payer l'EHPAD ?</h2>
+<p>Plusieurs aides existent, et elles se cumulent :</p>
+<ul>
+<li><strong>L'APA en établissement</strong> finance une partie du tarif dépendance, pour les personnes en GIR 1 à 4. La demande se fait auprès du département.</li>
+<li><strong>L'ASH (aide sociale à l'hébergement)</strong> aide à payer l'hébergement quand les revenus ne suffisent pas, à condition d'avoir plus de 65 ans (60 ans en cas d'inaptitude au travail) et d'être dans une place habilitée à l'aide sociale. Les enfants, gendres et belles-filles peuvent être sollicités au titre de l'obligation alimentaire, les petits-enfants en sont dispensés. Les sommes peuvent être récupérées sur la succession. Pour être aidé dès l'entrée, la demande doit être faite dans les 2 mois qui suivent.</li>
+<li><strong>L'APL ou l'ALS</strong>, versée par la CAF ou la MSA, réduit le coût de l'hébergement selon les ressources.</li>
+<li><strong>La réduction d'impôt</strong> : 25 % des frais de dépendance et d'hébergement, dans la limite de 10 000 € de dépenses par an et par personne, soit 2 500 € au maximum, après déduction des aides perçues.</li>
+</ul>
+<p>Le CCAS de la commune peut vous aider à monter ces dossiers : voyez notre page sur les <a href="{R}ccas-aides-personnes-agees/">aides du CCAS pour les personnes âgées</a>. Au moment d'envoyer les justificatifs à la CAF ou au département, l'outil gratuit <a href="https://demarches.cvlibre.com/caf/" target="_blank" rel="noopener">PDF Démarches France</a> réduit et fusionne vos documents.</p>
+<h2>Comment choisir et faire la demande ?</h2>
+<p><strong>Comparez les prix.</strong> Le site officiel pour-les-personnes-agees.gouv.fr propose un annuaire et un comparateur qui affiche les prix et prestations de 3 établissements à la fois, indique s'ils sont habilités à l'aide sociale, et estime le reste à charge mensuel (sans tenir compte du GIR).</p>
+<p><strong>Visitez.</strong> Rien ne remplace une visite, si possible à l'heure du repas. Regardez comment les résidents sont accompagnés, demandez combien de soignants sont présents la nuit, et si la personne pourra apporter quelques meubles à elle.</p>
+<p><strong>Remplissez le dossier unique.</strong> Le formulaire cerfa n° 14732*03 sert pour tous les EHPAD : un volet administratif, et un volet médical rempli par le médecin traitant et envoyé sous pli confidentiel. On le remplit une fois et on l'envoie à plusieurs établissements. Dans beaucoup de départements, la demande peut se faire en ligne sur ViaTrajectoire. Attention, déposer un dossier revient seulement à s'inscrire sur une liste d'attente.</p>
+<p><strong>Lisez le contrat de séjour.</strong> Il est obligatoire dès que le séjour peut dépasser 2 mois. Prenez le temps de le lire avec la personne concernée.</p>
+<p>Notre conseil : inscrivez-vous dans plusieurs établissements dès que l'idée se précise, parce que les délais peuvent être longs. Et associez votre parent à chaque étape. Une entrée choisie se passe presque toujours mieux qu'une entrée décidée dans l'urgence après une hospitalisation. Si votre parent ne peut plus donner son avis sur ses papiers, l'<a href="{R}habilitation-familiale/">habilitation familiale</a> permet à un proche d'agir pour lui.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F763" target="_blank" rel="noopener">Service Public, Éhpad</a>, <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F255" target="_blank" rel="noopener">Service Public, Différences entre établissements pour personnes âgées</a>, <a href="https://www.cnsa.fr/sites/default/files/2026-04/PUB_RS-n27_Prix-EHPAD_2024_vf.pdf" target="_blank" rel="noopener">CNSA, Prix des EHPAD en 2024</a> (vérifié le 19 novembre 2026)</p>
+""",
+  faq=[("Quelle est la différence entre un EHPAD et une maison de retraite ?", "L'EHPAD est le nom actuel de ce qu'on appelait maison de retraite, avec une différence : il est médicalisé. Une équipe soignante, avec un médecin coordonnateur et des infirmiers, accompagne les résidents qui ont besoin d'aide et de soins au quotidien."),
+       ("Combien coûte un EHPAD par mois ?", "Selon la CNSA, en 2024, une chambre seule coûtait en moyenne 2 164 € par mois dans les places habilitées à l'aide sociale et 3 128 € dans les autres, avant aides. Les prix varient beaucoup selon les régions : utilisez le comparateur de pour-les-personnes-agees.gouv.fr."),
+       ("Les enfants doivent-ils payer l'EHPAD de leurs parents ?", "Pas automatiquement. Mais si le parent demande l'aide sociale à l'hébergement, ses enfants, gendres et belles-filles peuvent être sollicités au titre de l'obligation alimentaire, selon leurs moyens. Les petits-enfants en sont dispensés.")],
+  short="EHPAD c'est quoi", cat="Conseils pour les proches")
+
+AUTO_META['meilleure-montre-gps-senior/'] = ('🏆', 'ciel')
+g("meilleure-montre-gps-senior/",
+  "Meilleure montre GPS pour personne âgée 2026 : 7 modèles",
+  "Meilleure montre GPS pour personne âgée : 7 modèles avec bouton SOS comparés",
+  "Montre GPS pour personne âgée qui sort seule : 7 modèles avec bouton SOS, zone de sécurité et appels, comparés d'après les fiches officielles des marques.",
+  """
+<p>Pour une personne âgée qui sort encore seule et n'a pas de smartphone, la meilleure montre GPS est une montre senior 4G à carte SIM, comme la SPC Smartee 4G Senior : elle appelle, envoie sa position aux proches par un bouton SOS, et prévient la famille si elle quitte une zone définie. Si votre parent utilise déjà un iPhone ou un smartphone Samsung, une montre connectée cellulaire peut faire le même travail, avec en plus une détection de chute.</p>
+<p>Sept appareils réellement vendus en France sont comparés ci-dessous. Tous demandent un forfait mobile avec des données : sans lui, ni la position ni l'alerte ne partent.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs (pages produits, fiches techniques, modes d'emploi), sans test en main. Nous n'indiquons que les données lues sur ces pages ; quand une information n'y figure pas, nous écrivons « non précisé ». Aucun prix n'est indiqué, car il change souvent. Vérifiez la fiche du modèle exact au moment de l'achat.</div>
+<h2>Pourquoi une montre GPS aide une personne âgée à rester autonome ?</h2>
+<p>La peur de se perdre ou de faire un malaise dehors pousse beaucoup de personnes âgées à ne plus sortir seules, et leurs proches à les en dissuader. Une montre GPS change ce rapport : votre mère peut continuer à aller au marché ou chez une amie, et vous savez que si quelque chose arrive, une pression sur un bouton vous enverra un appel et sa position. Une montre se porte toute la journée, sans y penser, là où un téléphone reste souvent au fond d'un sac ou sur la commode.</p>
+<p>Elle ne remplace pas une surveillance, et elle ne soigne rien. Si votre parent a des troubles de la mémoire ou de l'orientation, parlez-en à son médecin avant de compter sur un appareil. Notre conseil : choisissez la montre avec la personne, montrez-lui le bouton SOS, et faites un essai dans la rue avant le premier vrai usage. Un appareil accepté sera porté ; un appareil imposé finira dans un tiroir.</p>
+<h2>Le comparatif en un coup d'œil</h2>
+<table><thead><tr><th>Modèle</th><th>Type</th><th>SOS</th><th>Zone de sécurité</th><th>Détection de chute</th><th>Étanchéité</th><th>Autonomie annoncée</th><th>Idéal pour</th></tr></thead><tbody>
+<tr><td>SPC Smartee 4G Senior</td><td>Montre senior 4G</td><td>Appel des contacts + position</td><td>Oui</td><td>Non précisé</td><td>IP68</td><td>Jusqu'à 3 jours</td><td>Notre choix : sans smartphone</td></tr>
+<tr><td>Newgen Medicals montre 4G GPS seniors (ZX5482)</td><td>Montre senior 4G</td><td>3 contacts, appel + SMS avec position</td><td>Oui</td><td>Non précisé</td><td>IP68</td><td>Jusqu'à 2 jours</td><td>Le SOS le plus détaillé</td></tr>
+<tr><td>Garett Senior Vita 4G</td><td>Montre senior 4G</td><td>Alerte aux contacts</td><td>Oui</td><td>Oui</td><td>IP68</td><td>Environ 1 jour en usage, 3 jours en veille</td><td>Une montre senior avec détection de chute</td></tr>
+<tr><td>SaveFamily Senior</td><td>Montre senior 4G</td><td>Bouton SOS</td><td>Oui</td><td>Oui</td><td>IP67</td><td>Jusqu'à 3 jours</td><td>Une alerte de chute réglable</td></tr>
+<tr><td>Leotec Smart Tracker 4G GPS</td><td>Boîtier traceur</td><td>Appel des contacts à tour de rôle</td><td>Oui</td><td>Contradictoire</td><td>Non précisé</td><td>Non précisé</td><td>Qui ne veut pas de montre</td></tr>
+<tr><td>Apple Watch Series 11 GPS + Cellular</td><td>Montre connectée</td><td>Appel d'urgence</td><td>Non précisé</td><td>Oui</td><td>50 m</td><td>Jusqu'à 24 h</td><td>Une famille équipée en iPhone</td></tr>
+<tr><td>Samsung Galaxy Watch Ultra LTE</td><td>Montre connectée</td><td>SOS par message + sirène</td><td>Non précisé</td><td>Oui</td><td>IP68, 10 ATM</td><td>60 à 80 h</td><td>Un senior qui a un smartphone Samsung</td></tr>
+</tbody></table>
+<p>Un point de vigilance : la 2G s'éteint en métropole fin 2026. Tous les modèles retenus fonctionnent en 4G. Évitez en revanche les appareils 2G seulement : par exemple, la fiche du traceur Weenect Silver indique une carte SIM « GPRS/2G », c'est pourquoi nous ne l'avons pas retenu.</p>
+
+<h2>1. SPC Smartee 4G Senior : la plus simple sans smartphone (notre choix)</h2>
+<p><strong>Pour qui ?</strong> Une personne qui n'a pas de smartphone et n'en veut pas, mais dont les enfants veulent pouvoir la joindre et la localiser. C'est notre choix parce que la fiche du fabricant précise clairement qu'elle fonctionne sans téléphone mobile et que les proches gèrent tout depuis une appli gratuite.</p>
+<ul>
+<li><strong>Points forts</strong> : appui long sur le bouton SOS pour appeler automatiquement les contacts d'urgence et partager la position ; GPS en temps réel et Wi-Fi ; zones de sécurité ; appels vocaux et vidéo avec une liste de contacts autorisés ; IP68 ; jusqu'à 3 jours d'autonomie ; appli SPC SMART CLAN pour les proches.</li>
+<li><strong>Limites</strong> : nombre de contacts SOS et envoi de SMS non précisés ; pas de détection de chute mentionnée ; carte nano-SIM avec données à prévoir.</li>
+</ul>
+<p><a href="{AMZ:SPC Smartee 4G Senior}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Newgen Medicals montre 4G avec GPS pour seniors : le bouton SOS le plus complet</h2>
+<p><strong>Pour qui ?</strong> Une personne qui sort seule et dont la famille veut recevoir à la fois un appel et la position par SMS. C'est le bon choix si vous tenez à un SOS qui décroche tout seul au rappel.</p>
+<ul>
+<li><strong>Points forts</strong> : appui long sur le bouton pour joindre jusqu'à 3 contacts, avec SMS de position, rappel et décroché automatique en mains libres ; localisation GPS, A-GPS, Wi-Fi et réseau ; alerte quand la personne quitte une zone définie ; appels vocaux et vidéo ; IP68 ; sans abonnement à la marque ni blocage SIM.</li>
+<li><strong>Limites</strong> : autonomie jusqu'à 2 jours seulement ; pas de détection de chute mentionnée ; carte nano-SIM non fournie ; la fiche Pearl cite à la fois Newgen Medicals et simvalley comme marque.</li>
+</ul>
+<p><a href="{AMZ:Newgen Medicals montre telephone 4G GPS seniors}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Garett Senior Vita 4G : une montre senior avec détection de chute</h2>
+<p><strong>Pour qui ?</strong> Une personne qui a déjà chuté et sort encore, sans smartphone. Elle réunit dans un seul appareil la localisation et l'alerte automatique en cas de chute.</p>
+<ul>
+<li><strong>Points forts</strong> : détection automatique des chutes, avec alerte même si la personne ne réagit pas ; GPS, A-GPS, Wi-Fi (utile en intérieur) et réseau ; zones de sécurité ; appels vocaux et vidéo ; IP68 ; appli Garett Care pour les proches.</li>
+<li><strong>Limites</strong> : autonomie d'environ 1 jour avec GPS actif et appels fréquents, il faut la recharger chaque soir ; IP68 annoncé pour la pluie et les éclaboussures, pas pour la baignade ; informations lues chez un revendeur, pas sur une page du fabricant ; présence sur Amazon non confirmée.</li>
+</ul>
+<p><a href="{AMZ:Garett Senior Vita 4G}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. SaveFamily Senior : une alerte de chute réglable</h2>
+<p><strong>Pour qui ?</strong> Une personne sans smartphone qui bouge beaucoup et pour qui l'on craint les fausses alertes : la sensibilité de la détection se règle.</p>
+<ul>
+<li><strong>Points forts</strong> : bouton SOS ; alerte téléphonique automatique vers les contacts en cas de chute ou de mouvement brusque, selon PcComponentes ; détection réglable sur 6 niveaux de sensibilité selon Boulanger ; zones de sécurité ; IP67 ; jusqu'à 3 jours d'autonomie ; appli SaveFamily gratuite pour les proches.</li>
+<li><strong>Limites</strong> : résistance annoncée aux éclaboussures, pas à la douche ; carte nano-SIM avec forfait à prévoir ; ce sont les proches, pas une centrale, qui reçoivent l'alerte. Nous la présentons aussi dans notre <a href="{R}meilleur-detecteur-de-chute/">comparatif des montres avec détection de chute</a>.</li>
+</ul>
+<p><a href="{AMZ:SaveFamily Senior montre}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Leotec Smart Tracker 4G GPS : pour qui refuse de porter une montre</h2>
+<p><strong>Pour qui ?</strong> Une personne qui ne supporte rien au poignet, ou qui a déjà une montre à laquelle elle tient. Ce petit boîtier de 44 g se glisse dans une poche ou un sac.</p>
+<ul>
+<li><strong>Points forts</strong> : appui de 3 secondes pour appeler les contacts programmés à tour de rôle jusqu'à ce que l'un réponde ; GPS, Wi-Fi et réseau ; clôtures virtuelles ; 2 touches d'appel vers des numéros autorisés ; batterie de 1000 mAh ; carte nano-SIM de l'opérateur de votre choix.</li>
+<li><strong>Limites</strong> : un boîtier oublié sur la table ne sert à rien ; étanchéité et autonomie non précisées ; la fiche d'un revendeur annonce une détection de chute, le manuel n'en parle pas, ne comptez pas dessus.</li>
+</ul>
+<p><a href="{AMZ:Leotec Smart Tracker 4G GPS}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Apple Watch Series 11 GPS + Cellular : pour une famille équipée en iPhone</h2>
+<p><strong>Pour qui ?</strong> Un senior à l'aise avec les écrans, dans une famille qui utilise des iPhone. Avec la configuration familiale, la montre cellulaire se règle depuis l'iPhone d'un proche, sans que votre parent ait lui-même un iPhone.</p>
+<ul>
+<li><strong>Points forts</strong> : appel d'urgence ; détection des chutes ; GPS, avec partage de position et Localiser proposés dans la configuration familiale ; étanche jusqu'à 50 m ; jusqu'à 24 h d'autonomie, 38 h en mode économie d'énergie.</li>
+<li><strong>Limites</strong> : à recharger chaque jour ; un forfait de données compatible chez votre opérateur est indispensable, vérifiez-le avant l'achat ; écran tactile et menus plus complexes qu'une montre senior.</li>
+</ul>
+<p><a href="{AMZ:Apple Watch Series 11 GPS Cellular}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Samsung Galaxy Watch Ultra LTE : la plus endurante, avec un smartphone Samsung</h2>
+<p><strong>Pour qui ?</strong> Un senior actif qui marche beaucoup et utilise déjà un smartphone Samsung Galaxy. Sans ce téléphone, elle ne convient pas.</p>
+<ul>
+<li><strong>Points forts</strong> : 4G avec carte SIM intégrée ; fonction SOS qui envoie un message à un proche ; sirène de 86 dB par un appui de 5 secondes ; détection de chute ; IP68, 10 ATM et norme militaire MIL-STD-810H ; 60 à 80 h d'autonomie selon l'affichage.</li>
+<li><strong>Limites</strong> : exige un smartphone Samsung Galaxy sous Android 11 ou plus, pas d'iPhone ; le partage de position avec les proches n'est pas détaillé sur la fiche ; montre volumineuse, pensée pour le sport.</li>
+</ul>
+<p><a href="{AMZ:Samsung Galaxy Watch Ultra LTE}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment choisir une montre GPS pour une personne âgée ?</h2>
+<p><strong>Avec ou sans smartphone ?</strong> C'est la première question. Une personne qui n'a pas de smartphone prendra une montre senior 4G (SPC, Newgen Medicals, Garett, SaveFamily). Les montres Apple et Samsung sont plus puissantes, mais plus complexes et dépendantes de l'écosystème de la famille.</p>
+<p><strong>Le forfait.</strong> Toutes ces montres ont besoin d'une carte SIM avec des données. Choisissez un petit forfait avec un peu de data, et vérifiez la couverture 4G là où votre parent se promène.</p>
+<p><strong>La recharge.</strong> Une autonomie de 24 h impose une recharge quotidienne. Pour une personne qui oublie, préférez 2 ou 3 jours, et installez le chargeur à côté de la table de nuit.</p>
+<p><strong>Qui reçoit l'alerte ?</strong> Ce sont les proches. Enregistrez plusieurs contacts, dont un voisin, et testez le bouton une fois par mois. Si personne ne peut répondre à toute heure, regardez plutôt la téléassistance : notre guide <a href="{R}teleassistance-comment-ca-marche/">téléassistance : comment ça marche</a> l'explique, et notre <a href="{R}meilleur-bouton-appel-urgence/">comparatif des boutons d'appel d'urgence</a> couvre les solutions pour la maison.</p>
+<p>Pour que le domicile reste aussi sûr que les sorties, faites le tour du logement avec notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a>.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://onspc.com/en-fr/products/spc-smartee-4g-senior" target="_blank" rel="noopener">SPC, Smartee 4G Senior</a>, <a href="https://www.apple.com/fr/apple-watch-series-11/specs/" target="_blank" rel="noopener">Apple, caractéristiques Apple Watch Series 11</a>, <a href="https://www.arcep.fr/mes-demarches-et-services/entreprises/fiches-pratiques/extinction-reseaux-mobiles-2g-3g.html" target="_blank" rel="noopener">Arcep, Extinction des réseaux 2G et 3G</a> (vérifié le 19 novembre 2026)</p>
+""",
+  faq=[("Une montre GPS permet-elle à une personne âgée de sortir seule en sécurité ?", "Elle y aide : un bouton SOS envoie un appel et la position aux proches, et une zone de sécurité les prévient si la personne s'en éloigne. Mais elle ne remplace ni la vigilance de l'entourage ni l'avis du médecin, surtout en cas de troubles de la mémoire ou de l'orientation."),
+       ("Faut-il un abonnement pour une montre GPS senior ?", "Il faut au minimum une carte SIM avec un forfait mobile comprenant des données, chez l'opérateur de votre choix. Les montres seniors de ce comparatif acceptent une carte nano-SIM de l'opérateur de votre choix ; les montres Apple et Samsung demandent un forfait compatible avec leur version cellulaire."),
+       ("Avez-vous testé ces montres GPS ?", "Non. Cette sélection repose uniquement sur les fiches des fabricants, les modes d'emploi et les pages de revendeurs. Nous n'indiquons que ce qui y figure, sans note ni avis de prise en main.")],
+  short="Top 7 montres GPS senior", cat="Sécurité")
