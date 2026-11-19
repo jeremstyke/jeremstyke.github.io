@@ -83,6 +83,7 @@ button{font-family:inherit;font-weight:800;color:inherit;border:0;cursor:pointer
 .card.locked .ic svg{filter:grayscale(.85) brightness(.9);opacity:.7}
 .ic{width:64px;height:70px;border-radius:18px;border:2.5px solid var(--navy);background:linear-gradient(#7ccaff,#d5f1ff);display:grid;place-items:center;position:relative;flex:none;overflow:visible}
 .ic svg{width:50px;height:58px;margin-top:-2px}
+.ic.bare em{position:static;transform:none;font-size:15px}
 .ic em{position:absolute;bottom:-11px;left:50%;transform:translateX(-50%);font-style:normal;font-family:var(--disp);font-size:12px;font-weight:600;background:var(--gold);color:var(--navy);border:2px solid var(--navy);border-radius:99px;padding:0 8px;white-space:nowrap;line-height:17px}
 .mid{flex:1;min-width:0}
 .nm{font-family:var(--disp);font-weight:600;font-size:17px;display:flex;gap:6px;align-items:center;white-space:nowrap;overflow:hidden}
@@ -241,7 +242,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1312';
+const BUILD = '20261119-1322';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -465,7 +466,7 @@ function build() {
   let h = '';
   for (let i = 0; i < NB; i++) {
     h += `<div class="card" data-i="${i}" hidden>
-      <div class="ic"><svg viewBox="0 0 40 48">${bld(i)}</svg><em></em></div>
+      <div class="ic${i >= 10 ? ' bare' : ''}">${i >= 10 ? '' : `<svg viewBox="0 0 40 48">${bld(i)}</svg>`}<em></em></div>
       <div class="mid"><div class="nm"><span class="n">${L.names[i]}</span><s></s></div><div class="bar"><i></i><b></b></div></div>
       <div class="act"><button class="buy"></button><button class="mgr"></button></div></div>`;
   }
