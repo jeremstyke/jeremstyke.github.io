@@ -247,7 +247,7 @@ const L = {
   shopT:'Shop', shopS:'Everything is paid in Telegram Stars. 30% of all Stars spent goes to the weekly top 10 (this share may go up or down).',
   items:{welcome:['🎁','Welcome pack','2h of rent instantly + x2 income for 24h. One time only.'],b2:['⚡','x2 Income, 4h','Double all your rent for 4 hours.'],b3:['🚀','x3 Income, 24h','Triple all your rent for a full day.'],perm2:['👑','Partner: x2 forever','Permanent x2 on everything, forever.'],vault:['🏦','Vault: 24h offline','Tenants pay up to 24h while you are away (instead of 3h).'],skip1:['⏩','Time skip 1h','Instantly get 1 hour of rent.'],skip8:['⏭️','Time skip 8h','Instantly get 8 hours of rent.']},
   paid:'Payment received!', cancelled:'Payment cancelled',
-  prestT:'Empire', prestS:'Sell your whole empire to investors and start over, faster.<br>🏠 <b>You lose</b>: your properties and your cash.<br>👔 <b>You keep</b>: your investors, each one gives +5% income forever.<br>🔓 <b>You gain</b>: 2 new properties unlocked with every sale.', ifSell:'If you sell now', nextInv:'Next investor', toGo:'to go (total rent earned)',
+  prestT:'Empire', prestS:'Sell your whole empire to investors and start over, faster.<br>🏠 <b>You lose</b>: your properties and your cash.<br>👔 <b>You keep</b>: your investors. Each type of investor gives its own bonus forever.<br>🔓 <b>You gain</b>: 2 new properties unlocked with every sale.', ifSell:'If you sell now', nextInv:'Next investor', toGo:'to go (total rent earned)',
   investors:'Investors', bonus:'Income bonus', sell:'Sell and restart', sellFor:'Sell for {n} investors', needMore:'Earn more to sell for investors', sure:'Sure? Your properties reset, investors stay.', yes:'Yes, sell', no:'Cancel',
   sold:'Empire sold! +{n} investors',
   topT:'Weekly top 10', topS:'Fair ranking: your score is the base rent you earn this week. Investors and the permanent x2 do not count, paid boosts count for 1.5x at most, so newcomers can win too. 30% of all Stars spent this week is shared between the 10 best. This share may go up or down.',
@@ -257,7 +257,7 @@ const L = {
   goals:'Goals', goalBuy:'Buy', goalMgr:'Hire a manager:', goalPrest:'Sell your empire for investors', achT:'Achievements', achS:'Reach milestones and claim rewards.', achOwn:'Own this property',
   invT:'Invite friends', invS:'You both get +1h of x2 income when a friend joins with your link, and +30 min more when your friend invites someone.', invBtn:'Invite a friend', invCount:'Friends joined', invPct:'You also get {a}% of what your friends earn (in-game cash) and {b}% of the Stars they spend (in your wallet, locked 30 days).', invGot:'Earned from friends', wConn:'Add my wallet', wChange:'Change wallet', wAddr:'Payout wallet', wHint:'Connect your TON wallet in one tap to receive your prizes.', wRef:'of which from friends', wAvail:'Available to withdraw', wLocked:'Locked', wNext:'Next unlock:', wUsdt2:'Paid in USDT (TON) to your wallet, converted from Stars at the rate we receive.', wUsdt:'Paid in USDT (TON) to your wallet, converted from Stars at the rate we receive. Estimate:', 
   offersT:'Investor offers', offersS:'A different investor shows up with a new deal. New offers in', accept:'Accept',
-  invs:'investors', forever:'income, forever', inv:{std:['🧑‍💼','Marc, the banker','Standard deal. Nothing special.'],shark:['🦈','Lea, the shark','30% more investors, but you restart with $0.'],angel:['😇','Sofia, the patron','20% fewer investors, but you restart with 5x more cash and your Studio keeps its manager.'],tech:['🚀','Yan, the visionary','Normal investors, plus x2 income for 2 hours.'],heir:['🏡','Clara, the heiress','15% more investors, and your Studio starts at level 10.']},
+  invs:'investors', ibk:{inc:'income, forever',off:'offline time, forever',bst:'boost duration, forever',rew:'rewards, forever'}, inv:{std:['🧑‍💼','Marc, the banker','Standard deal: each investor gives +5% income.'],shark:['🦈','Lea, the shark','30% more investors, each +6% income, but you restart with $0.'],angel:['😇','Sofia, the patron','20% fewer investors, each +15% offline time, but you restart with 5x more cash and your Studio keeps its manager.'],tech:['🚀','Yan, the visionary','Normal number of investors, each +5% boost duration, plus x2 income for 2 hours.'],heir:['🏡','Clara, the heiress','15% more investors, each +10% rewards, and your Studio starts at level 10.']},
   goldT:'Idle Estate Gold', goldS:'x1.5 income, 24h offline, double quest and bonus rewards, and a 👑 next to your name. Renews every 30 days, cancel anytime in Telegram.', goldOn:'Gold active', goldLeft:'days left', perMonth:'/ 30 days',
   dealT:'Deal of the day', dealS:'-30% today only', was:'instead of',
   questsT:'Daily quests', questsS:'Complete quests and claim rewards. They reset every day.', chestT:'Daily chest', chestS:'Finish all 3 quests: x2 income for 1h',
@@ -280,7 +280,7 @@ const L = {
   shopT:'Boutique', shopS:'Tout se paie en Étoiles Telegram. 30 % des Étoiles dépensées vont au top 10 de la semaine (ce pourcentage peut augmenter ou baisser).',
   items:{welcome:['🎁','Pack de bienvenue','2h de loyers tout de suite + x2 revenus pendant 24h. Une seule fois.'],b2:['⚡','Revenus x2, 4h','Double tous tes loyers pendant 4 heures.'],b3:['🚀','Revenus x3, 24h','Triple tous tes loyers pendant une journée.'],perm2:['👑','Associé : x2 à vie','x2 permanent sur tout, pour toujours.'],vault:['🏦','Coffre : 24h hors ligne','Les locataires paient jusqu\'à 24h pendant ton absence (au lieu de 3h).'],skip1:['⏩','Saut de 1h','Reçois tout de suite 1 heure de loyers.'],skip8:['⏭️','Saut de 8h','Reçois tout de suite 8 heures de loyers.']},
   paid:'Paiement reçu !', cancelled:'Paiement annulé',
-  prestT:'Empire', prestS:'Vends ton empire à des investisseurs et recommence, en plus rapide.<br>🏠 <b>Tu perds</b> : tes biens et ton argent.<br>👔 <b>Tu gardes</b> : tes investisseurs, chacun donne +5 % de revenus à vie.<br>🔓 <b>Tu gagnes</b> : 2 biens de plus débloqués à chaque vente.', ifSell:'Si tu vends maintenant', nextInv:'Prochain investisseur', toGo:'à gagner (loyers cumulés)',
+  prestT:'Empire', prestS:'Vends ton empire à des investisseurs et recommence, en plus rapide.<br>🏠 <b>Tu perds</b> : tes biens et ton argent.<br>👔 <b>Tu gardes</b> : tes investisseurs. Chaque type d\'investisseur donne son propre bonus à vie.<br>🔓 <b>Tu gagnes</b> : 2 biens de plus débloqués à chaque vente.', ifSell:'Si tu vends maintenant', nextInv:'Prochain investisseur', toGo:'à gagner (loyers cumulés)',
   investors:'Investisseurs', bonus:'Bonus de revenus', sell:'Vendre et recommencer', sellFor:'Vendre pour {n} investisseurs', needMore:'Gagne plus pour vendre contre des investisseurs', sure:'Sûr ? Tes biens repartent à zéro, les investisseurs restent.', yes:'Oui, vendre', no:'Annuler',
   sold:'Empire vendu ! +{n} investisseurs',
   topT:'Top 10 de la semaine', topS:'Classement équitable : ton score = les loyers de base gagnés cette semaine. Les investisseurs et le x2 permanent ne comptent pas, les boosts payants comptent x1,5 au maximum, donc un nouveau joueur peut gagner. 30 % des Étoiles dépensées cette semaine sont partagés entre les 10 meilleurs. Ce pourcentage peut augmenter ou baisser.',
@@ -290,7 +290,7 @@ const L = {
   goals:'Objectifs', goalBuy:'Acheter', goalMgr:'Embaucher un gestionnaire :', goalPrest:'Vends ton empire contre des investisseurs', achT:'Succès', achS:'Atteins des paliers et récupère des récompenses.', achOwn:'Possède ce bien',
   invT:'Invite tes amis', invS:'Vous gagnez tous les deux +1h de revenus x2 quand un ami rejoint avec ton lien, et +30 min de plus quand ton ami invite quelqu\'un.', invBtn:'Inviter un ami', invCount:'Amis arrivés', invPct:'Tu reçois aussi {a} % de ce que gagnent tes amis (en argent du jeu) et {b} % des Étoiles qu\'ils dépensent (dans ton portefeuille, bloqué 30 jours).', invGot:'Gagné grâce à tes amis', wConn:'Ajouter mon portefeuille', wChange:'Changer de portefeuille', wAddr:'Portefeuille de paiement', wHint:'Connecte ton portefeuille TON en un clic pour recevoir tes gains.', wRef:'dont via tes amis', wAvail:'Disponibles au retrait', wLocked:'Bloquées', wNext:'Prochain déblocage :', wUsdt2:'Payé en USDT (TON) sur ton portefeuille, converti depuis les Étoiles au taux que nous recevons.', wUsdt:'Payé en USDT (TON) sur ton portefeuille, converti depuis les Étoiles au taux que nous recevons. Estimation :', 
   offersT:'Offres d\'investisseurs', offersS:'Un investisseur différent arrive avec une nouvelle offre. Nouvelles offres dans', accept:'Accepter',
-  invs:'investisseurs', forever:'de revenus à vie', inv:{std:['🧑‍💼','Marc, le banquier','Offre standard. Rien de spécial.'],shark:['🦈','Léa, la requin','30 % d\'investisseurs en plus, mais tu repars avec 0 $.'],angel:['😇','Sofia, la mécène','20 % d\'investisseurs en moins, mais tu repars avec 5 fois plus d\'argent et ton Studio garde son gestionnaire.'],tech:['🚀','Yan, le visionnaire','Nombre normal d\'investisseurs, et revenus x2 pendant 2 h.'],heir:['🏡','Clara, l\'héritière','15 % d\'investisseurs en plus, et ton Studio démarre au niveau 10.']},
+  invs:'investisseurs', ibk:{inc:'de revenus à vie',off:'de temps hors-ligne à vie',bst:'de durée des boosts à vie',rew:'de récompenses à vie'}, inv:{std:['🧑‍💼','Marc, le banquier','Offre standard : chaque investisseur donne +5 % de revenus.'],shark:['🦈','Léa, la requin','30 % d\'investisseurs en plus, chacun +6 % de revenus, mais tu repars avec 0 $.'],angel:['😇','Sofia, la mécène','20 % d\'investisseurs en moins, chacun +15 % de temps hors-ligne, mais tu repars avec 5 fois plus d\'argent et ton Studio garde son gestionnaire.'],tech:['🚀','Yan, le visionnaire','Nombre normal d\'investisseurs, chacun +5 % de durée des boosts, et revenus x2 pendant 2 h.'],heir:['🏡','Clara, l\'héritière','15 % d\'investisseurs en plus, chacun +10 % de récompenses, et ton Studio démarre au niveau 10.']},
   goldT:'Idle Estate Gold', goldS:'Revenus x1,5, 24h hors ligne, récompenses de quêtes et bonus doublées, et une 👑 à côté de ton nom. Se renouvelle tous les 30 jours, annulable à tout moment dans Telegram.', goldOn:'Gold actif', goldLeft:'jours restants', perMonth:'/ 30 jours',
   dealT:'Offre du jour', dealS:'-30 % aujourd\'hui seulement', was:'au lieu de',
   questsT:'Quêtes du jour', questsS:'Termine les quêtes et récupère les récompenses. Elles se renouvellent chaque jour.', chestT:'Coffre du jour', chestS:'Finis les 3 quêtes : revenus x2 pendant 1h',
@@ -376,7 +376,7 @@ function apply(r, full) {
   if (full || !S) {
     off = r.now - Date.now() / 1000;
     const keep = S;
-    S = { cash: r.cash, life_all: r.life_all, lv: r.lv.slice(), mg: r.mg.slice(), ts: r.ts.slice(), inv: r.inv, prest: r.prest, unl: r.unl || 10, ib: r.ib || 0.02, perm2: r.perm2, vault: r.vault, welcome: r.welcome, streak: r.streak, dailyOk: r.daily_ok,
+    S = { cash: r.cash, life_all: r.life_all, lv: r.lv.slice(), mg: r.mg.slice(), ts: r.ts.slice(), inv: r.inv, prest: r.prest, unl: r.unl || 10, ib: r.ib || 0.05, incm: r.incm || 1, ibt: r.ibt || {}, ibv: r.ibv || {}, perm2: r.perm2, vault: r.vault, welcome: r.welcome, streak: r.streak, dailyOk: r.daily_ok,
       bank: r.bank || 0, boostEnd: r.boost ? r.now + r.boost.left : 0, startEnd: r.start ? r.now + r.start.left : 0, adEnd: r.adx ? r.now + r.adx.left : 0, bmult: r.boost ? r.boost.mult : 1, vipEnd: r.vip ? r.now + r.vip.left : 0, cfg: r.cfg, ms: r.ms, mb: r.mb || 2.5, g: r.g, shop: r.shop, notify: r.notify, loc: r.now, cap: r.cap, stars: r.stars, ach: r.ach || [], defs: r.ach_defs || [], uid: r.uid, ref_n: r.ref_n || 0, ref_cap: r.ref_cap || 20, ref_got: r.ref_got || 0, ref_share: r.ref_share || 0.1, ref_com: r.ref_com || 0.1, wallet_addr: r.wallet_addr || null, offers: r.offers || [], offersEnd: r.offers_end || 0, goldEnd: r.gold ? r.now + r.gold.left : 0, deal: r.deal || null, q: r.q || { list: [], all: false } };
     if (!keep) build();
     else { buildSky(); }
@@ -387,7 +387,7 @@ function apply(r, full) {
 // ---------- economy (mirror of the server)
 const mult = l => { let m = 1; for (const k of S.ms) if (l >= k) m *= S.mb; return m; };
 const evOn = n => { const s = n % 86400; return s >= 61200 && s < 64800; };
-const curM = n => (1 + S.ib * S.inv) * (((S.startEnd > n ? 10 : 0) + (S.boostEnd > n ? S.bmult : 0) + (S.adEnd > n ? 2 : 0)) || 1) * (S.perm2 ? 2 : 1) * (evOn(n) ? 2 : 1) * (S.goldEnd > n ? 1.5 : 1);
+const curM = n => S.incm * (((S.startEnd > n ? 10 : 0) + (S.boostEnd > n ? S.bmult : 0) + (S.adEnd > n ? 2 : 0)) || 1) * (S.perm2 ? 2 : 1) * (evOn(n) ? 2 : 1) * (S.goldEnd > n ? 1.5 : 1);
 const inc = (i, n) => S.lv[i] > 0 ? S.cfg[i].r * S.lv[i] * mult(S.lv[i]) * curM(n) : 0;
 const gainInv = () => Math.max(0, Math.floor(10 * Math.sqrt(S.life_all / 2500)) - Math.floor(S.inv));
 function rateNow() { const n = snow(); let g = 0; for (let i = 0; i < 10; i++) { const e = inc(i, n) / S.cfg[i].t; g += S.mg[i] ? e : e * 0.5; } return g; }
@@ -458,7 +458,7 @@ const TUTO = {
     ['⚡', 'x10 for your first hour', 'Your income is multiplied by 10 during your first hour of play. Use it to buy properties and hire your first manager fast.'],
     ['👆', 'Tap to collect rent', 'Tap a property to start its rent cycle and collect the money when the bar is full.'],
     ['👔', 'Buy and hire managers', 'Buy more levels to earn more. A manager collects the rent for you, automatically and nonstop.'],
-    ['🏛️', 'Sell your empire', 'Once you are big enough, sell it for investors: each one gives +5% income forever and every sale unlocks new properties. Then start again, faster.'],
+    ['🏛️', 'Sell your empire', 'Once you are big enough, sell it for investors: each type gives its own bonus forever (income, offline time, boost duration or rewards) and every sale unlocks new properties. Then start again, faster.'],
     ['🏆', 'Weekly top 10', 'Playing is free. The 10 best players of the week share a part of the Stars spent. Add your wallet in the Top tab to get paid in USDT.'],
   ],
   fr: [
@@ -466,7 +466,7 @@ const TUTO = {
     ['⚡', 'x10 pendant ta première heure', 'Tes revenus sont multipliés par 10 pendant ta première heure de jeu. Profites-en pour acheter des biens et embaucher ton premier gestionnaire vite.'],
     ['👆', 'Touche pour encaisser', 'Touche un bien pour lancer son cycle de loyer, puis récupère l\'argent quand la barre est pleine.'],
     ['👔', 'Achète et embauche', 'Achète des niveaux pour gagner plus. Un gestionnaire encaisse les loyers pour toi, automatiquement et sans arrêt.'],
-    ['🏛️', 'Vends ton empire', 'Quand tu es assez gros, vends-le contre des investisseurs : chacun donne +5 % de revenus pour toujours et chaque vente débloque de nouveaux biens. Puis recommence, plus vite.'],
+    ['🏛️', 'Vends ton empire', 'Quand tu es assez gros, vends-le contre des investisseurs : chaque type donne son propre bonus à vie (revenus, temps hors-ligne, durée des boosts ou récompenses) et chaque vente débloque de nouveaux biens. Puis recommence, plus vite.'],
     ['🏆', 'Top 10 de la semaine', 'Jouer est gratuit. Les 10 meilleurs de la semaine se partagent une partie des Étoiles dépensées. Ajoute ton portefeuille dans l\'onglet Top pour être payé en USDT.'],
   ],
 };
@@ -757,16 +757,22 @@ async function buy(sku, deal) {
 // prestige
 let sureOffer = null;
 function renderPrest() { sureOffer = null; paintPrest(true); }
+function bonTxt(id, n) { const b = (S.ibv || {})[id]; if (!b) return ''; const v = Math.round(n * b.v * 1000) / 10; return `+${v} % ${L.ibk[b.k]}`; }
+function invRows() {
+  const t = S.ibt || {}; let h = '';
+  for (const id of ['std', 'shark', 'angel', 'tech', 'heir']) { const n = Math.floor(t[id] || 0); if (n < 1 || !(S.ibv || {})[id] || !L.inv[id]) continue; h += `<span class="lead" style="display:block;margin-top:3px">${L.inv[id][0]} ${fmt(n)} : ${bonTxt(id, n)}</span>`; }
+  return h;
+}
 function paintPrest(force) {
   const p = $('p-prest'); const g = gainInv();
   const offs = S.offers || [];
   const base = 2500 * Math.pow(Math.floor(S.inv) / 10, 2), need = 2500 * Math.pow((Math.floor(S.inv) + 1) / 10, 2);
   const frac = Math.max(0, Math.min(1, (S.life_all - base) / (need - base)));
-  const key = [Math.floor(S.inv), g, sureOffer, offs.map(o => o.id).join(), Math.floor(frac * 100)].join();
+  const key = [Math.floor(S.inv), JSON.stringify(S.ibt), g, sureOffer, offs.map(o => o.id).join(), Math.floor(frac * 100)].join();
   if (!force && p.dataset.k === key) { updPrestTimer(); return; }
   p.dataset.k = key;
   let h = `<h2>${L.prestT}</h2><p class="lead">${L.prestS}</p>
-   <div class="box"><span class="lead">${L.investors}</span><div class="big">${fmt(S.inv)} 👔</div><span class="lead">${L.bonus}: +${fmt(S.inv * S.ib * 100)}%</span></div>`;
+   <div class="box"><span class="lead">${L.investors}</span><div class="big">${fmt(S.inv)} 👔</div>${invRows()}</div>`;
   if (g < 1) h += `<div class="box" style="margin-top:10px"><span class="lead">${L.nextInv}</span><div class="bar"><i style="transform:scaleX(${frac})"></i><b>${Math.floor(frac * 100)}%</b></div><span class="lead">$${fm(Math.max(0, need - S.life_all))} ${L.toGo}</span></div><button class="btn gold" style="width:100%;padding:15px;font-size:16px;margin-top:10px" disabled>${L.needMore}</button>`;
   else {
     h += `<div class="box" style="margin-top:10px"><span class="lead">${L.ifSell}</span><div class="big">+${fmt(g)} 👔</div></div><h2 style="font-size:22px;margin-top:14px">${L.offersT}</h2><p class="lead">${L.offersS} <b id="offT"></b></p>`;
@@ -774,7 +780,7 @@ function paintPrest(force) {
       const d = L.inv[o.id]; if (!d) continue; const n = Math.max(1, Math.floor(g * o.m));
       const tag = o.m > 1 ? ' (+' + Math.round((o.m - 1) * 100) + '%)' : o.m < 1 ? ' (' + Math.round((o.m - 1) * 100) + '%)' : '';
       const sel = sureOffer === o.id;
-      h += `<div class="row${sel ? ' hot' : ''}"><div class="e">${d[0]}</div><div class="tx"><b>${d[1]}</b><span>${d[2]}</span><div class="rw">👔 +${fmt(n)} ${L.invs}</div><span style="display:block;margin-top:2px">= +${fmt(n * S.ib * 100)} % ${L.forever}</span></div>` +
+      h += `<div class="row${sel ? ' hot' : ''}"><div class="e">${d[0]}</div><div class="tx"><b>${d[1]}</b><span>${d[2]}</span><div class="rw">👔 +${fmt(n)} ${L.invs}</div><span style="display:block;margin-top:2px">= ${bonTxt(o.id, n)}</span></div>` +
         (sel ? `<div style="display:flex;flex-direction:column;gap:6px"><button class="btn" data-yes="${o.id}">${L.yes}</button><button class="btn" data-no="1" style="background:#cfdceb;box-shadow:0 4px 0 #8aa4c4;border-color:#8aa4c4">${L.no}</button></div>` : `<button class="btn gold" data-offer="${o.id}">${L.accept}</button>`) + `</div>`;
     }
     if (sureOffer) h += `<p class="lead" style="margin-top:8px">${L.sure}</p>`;
