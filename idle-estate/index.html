@@ -726,17 +726,35 @@ async function getInvoice(sku, deal) {
 const adDone = () => { try { return Date.now() - Number(localStorage.getItem('ie_ad2') || 0) < 86400000; } catch (e) { return false; } };
 const adMark = () => { try { localStorage.setItem('ie_ad2', String(Date.now())); } catch (e) {} };
 let adBusy = false;
+const MTG_FN = 'show_12296718';
+function mtgLoad() {
+  return window.__mtgL || (window.__mtgL = new Promise((res, rej) => {
+    if (typeof window[MTG_FN] === 'function') return res();
+    const sc = document.createElement('script'); sc.src = 'https://libtl.com/sdk.js';
+    sc.setAttribute('data-zone', '12296718'); sc.setAttribute('data-sdk', MTG_FN);
+    sc.onerror = () => { window.__mtgL = null; rej(new Error('load')); };
+    document.head.appendChild(sc);
+    const t0 = Date.now(), iv = setInterval(() => {
+      if (typeof window[MTG_FN] === 'function') { clearInterval(iv); res(); }
+      else if (Date.now() - t0 > 12000) { clearInterval(iv); window.__mtgL = null; rej(new Error('timeout')); }
+    }, 100);
+  }));
+}
 async function watchAd() {
   if (adBusy || adDone()) { toast(L.adCool); return; }
+  adBusy = true;
+  try { await mtgLoad(); } catch (e) { adBusy = false; toast(L.err); return; }
   const st = await call({ act: 'adstart' });
-  if (!st || !st.ok || st.err) { if (st && st.err === 'cool') { adMark(); renderShop(); buildBanners(); } toast(L.adCool); return; }
-  adBusy = true; toast(L.adWait);
-  const url = 'https://uplcm.com/4/12140639';
-  try { if (tgw && tgw.openLink) tgw.openLink(url); else window.open(url, '_blank'); } catch (e) { window.open(url, '_blank'); }
-  setTimeout(async () => {
-    const r = await call({ act: 'adclaim' }); adBusy = false;
-    if (r && r.ok && !r.err) { adMark(); hap('ok'); toast(L.adOk); renderShop(); buildBanners(); } else toast(L.adCool);
-  }, 11000);
+  if (!st || !st.ok || st.err) { adBusy = false; if (st && st.err === 'cool') { adMark(); renderShop(); buildBanners(); } toast(L.adCool); return; }
+  const t0 = Date.now();
+  let shown = false;
+  try { await window[MTG_FN]('pop'); shown = true; } catch (e) { shown = false; }
+  if (!shown) { adBusy = false; toast(L.err); return; }
+  // the server wants at least 10 s between adstart and adclaim
+  const wait = Math.max(0, 10500 - (Date.now() - t0));
+  if (wait) await new Promise(r => setTimeout(r, wait));
+  const r = await call({ act: 'adclaim' }); adBusy = false;
+  if (r && r.ok && !r.err) { adMark(); hap('ok'); toast(L.adOk); renderShop(); buildBanners(); } else toast(L.adCool);
 }
 let buying = false;
 async function buy(sku, deal) {
