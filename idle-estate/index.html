@@ -242,7 +242,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1325';
+const BUILD = '20261119-1334';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -421,8 +421,8 @@ function apply(r, full) {
 // ---------- economy (mirror of the server)
 const mult = l => { let m = 1; for (const k of S.ms) if (l >= k) m *= S.mb; return m; };
 const evOn = n => { const s = n % 86400; return s >= 61200 && s < 64800; };
-// first-hour boost fades in 4 steps of 15 min: x10, x6, x4, x2 (same schedule as the server)
-const startM = n => { if (!(S.startEnd > n)) return 0; const e = n - (S.startEnd - 3600); return e < 900 ? 10 : e < 1800 ? 6 : e < 2700 ? 4 : 2; };
+// first-hour boost fades in 4 steps of 15 min: x5, x3, x2, x2 (same schedule as the server)
+const startM = n => { if (!(S.startEnd > n)) return 0; const e = n - (S.startEnd - 3600); return e < 900 ? 5 : e < 1800 ? 3 : 2; };
 const curM = n => S.incm * ((startM(n) + (S.boostEnd > n ? S.bmult : 0) + (S.adEnd > n ? 2 : 0)) || 1) * (S.perm2 ? 2 : 1) * (evOn(n) ? 2 : 1) * (S.goldEnd > n ? 1.5 : 1);
 const inc = (i, n) => S.lv[i] > 0 ? S.cfg[i].r * S.lv[i] * mult(S.lv[i]) * curM(n) : 0;
 // a sale is offered only when it brings at least gmin investors (same rule as the server)
@@ -493,7 +493,7 @@ function build() {
 const TUTO = {
   en: [
     ['🏠', 'Welcome to Idle Estate', 'Build a real estate empire. Rent pays in even while you are away, up to 3 hours offline.'],
-    ['⚡', 'x10 at the start', 'Your income is multiplied by 10 at the start of your first hour, then it fades gently (x6, x4, x2) over the hour. Use it to buy properties and hire your first manager fast.'],
+    ['⚡', 'x5 at the start', 'Your income is multiplied by 5 at the start of your first hour, then it fades gently (x3, x2) over the hour. Use it to buy properties and hire your first manager fast.'],
     ['👆', 'Tap to collect rent', 'Tap a property to start its rent cycle and collect the money when the bar is full.'],
     ['👔', 'Buy and hire managers', 'Buy more levels to earn more. A manager collects the rent for you, automatically and nonstop.'],
     ['🏛️', 'An endless empire', 'Every new property is bigger and more expensive than the last, and it unlocks as soon as you own the previous one. Keep building: there is always a next one.'],
@@ -502,7 +502,7 @@ const TUTO = {
   ],
   fr: [
     ['🏠', 'Bienvenue dans Idle Estate', 'Construis un empire immobilier. Les loyers tombent même quand tu es absent, jusqu\'à 3 heures hors ligne.'],
-    ['⚡', 'x10 au départ', 'Tes revenus sont multipliés par 10 au début de ta première heure, puis le bonus baisse doucement (x6, x4, x2) pendant l\'heure. Profites-en pour acheter des biens et embaucher ton premier gestionnaire vite.'],
+    ['⚡', 'x5 au départ', 'Tes revenus sont multipliés par 5 au début de ta première heure, puis le bonus baisse doucement (x3, x2) pendant l\'heure. Profites-en pour acheter des biens et embaucher ton premier gestionnaire vite.'],
     ['👆', 'Touche pour encaisser', 'Touche un bien pour lancer son cycle de loyer, puis récupère l\'argent quand la barre est pleine.'],
     ['👔', 'Achète et embauche', 'Achète des niveaux pour gagner plus. Un gestionnaire encaisse les loyers pour toi, automatiquement et sans arrêt.'],
     ['🏛️', 'Un empire sans fin', 'Chaque nouveau bien est plus grand et plus cher que le précédent, et il se débloque dès que tu possèdes le précédent. Continue à bâtir : il y en a toujours un autre.'],
