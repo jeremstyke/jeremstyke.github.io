@@ -242,7 +242,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1640';
+const BUILD = '20261119-1650';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -979,7 +979,7 @@ function renderTop() {
   h += '<div>';
   d.top.forEach((r, i) => { const pr = Math.floor(d.pool * (d.shares[i] || 0) / 100); h += `<div class="top${r.me ? ' me' : ''}"><span class="rk">${i + 1}</span><span class="n">${esc(r.n)}${r.me ? ' (' + L.yours + ')' : ''}</span><span class="v">$${fm(r.v)}</span><span class="p">${pr > 0 ? '⭐ ' + pr : ''}</span></div>`; });
   h += '</div>';
-  h += `<div class="box"><span class="lead">${L.rank}</span><div class="big">#${d.rank}</div><span class="lead">$${fm(d.score)}</span></div>`;
+  h += `<div class="box"><span class="lead">${L.rank}</span><div class="big">#${(() => { const k = d.top.findIndex(r => r.me); return k >= 0 ? k + 1 : d.rank; })()}</div><span class="lead">$${fm(d.score)}</span></div>`;
   const w = d.wallet || {};
   h += `<div class="box"><span class="lead">👛 ${L.wallet}</span><div style="display:flex;gap:10px;margin-top:6px"><div style="flex:1;background:#d6f3dc;border-radius:12px;padding:8px"><span class="lead">✅ ${L.wAvail}</span><div class="big" style="font-size:24px">⭐ ${fmt(w.avail || 0)}</div><span class="lead">≈ ${((w.avail || 0) * (w.rate || 0.013)).toFixed(2)} USDT</span></div><div style="flex:1;background:#e3edf7;border-radius:12px;padding:8px"><span class="lead">🔒 ${L.wLocked}</span><div class="big" style="font-size:24px">⭐ ${fmt(w.locked || 0)}</div><span class="lead">≈ ${((w.locked || 0) * (w.rate || 0.013)).toFixed(2)} USDT</span></div></div><span class="lead">${w.next ? L.wNext + ' ' + new Date(w.next).toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-GB') + '. ' : ''}${L.locked}.</span><br><span class="lead">${L.wUsdt2}</span>${w.ref > 0 ? `<br><span class="lead">${L.wRef}: ⭐ ${fmt(w.ref)}</span>` : ''}
    <div style="margin-top:10px">${S.wallet_addr ? `<span class="lead">${L.wAddr}: <b>${esc(S.wallet_addr.slice(0, 6) + '...' + S.wallet_addr.slice(-4))}</b></span><br>` : `<span class="lead">${L.wHint}</span><br>`}<button class="btn gold" id="walBtn" style="margin-top:6px">👛 ${S.wallet_addr ? L.wChange : L.wConn}</button></div></div>`;
