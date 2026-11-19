@@ -700,7 +700,7 @@ g("meilleure-mangeoire-oiseaux/",
   "Les meilleures mangeoires pour oiseaux : silos, plateau et modèles anti-écureuils",
   "Silos, plateau avec toit, mangeoires à cage ou anti-écureuils : 10 mangeoires pour oiseaux comparées d'après les fiches des fabricants et des revendeurs.",
   """
-<p>La meilleure mangeoire pour la plupart des jardins, c'est un silo facile à démonter et à laver, accroché en hauteur, loin des cachettes des chats. Si des écureuils ou de gros oiseaux vident tout en une matinée, un modèle à cage ou à fermeture par le poids change la donne.</p>
+<p>La meilleure mangeoire pour la plupart des jardins, c'est un silo facile à démonter et à laver, accroché en hauteur, loin des cachettes des chats. Si des écureuils ou de gros oiseaux vident tout en une matinée, un modèle à cage ou à fermeture par le poids change la donne. Nous les comparons en détail dans notre sélection des <a href="{R}meilleure-mangeoire-anti-ecureuil/">mangeoires anti-écureuil</a>.</p>
 <p>Nous avons rassemblé dix mangeoires réelles, toutes trouvées sur Amazon.fr sauf une, que nous signalons. Il y a de petits silos, des grands, deux maisonnettes, un plateau sur piquet et des modèles conçus contre les écureuils.</p>
 {CTA}
 <div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
@@ -1539,6 +1539,7 @@ g("petit-oiseau-gris-jardin/",
 <p>Côté nid, l'accenteur veut une haie dense, pas un nichoir. La sittelle et la nonnette nichent dans des cavités, et la sittelle accepte les nichoirs. Le moineau aussi : la LPO conseille pour lui un nichoir fixé sous une avancée de toit, à 2,50 ou 3 m. Notre article sur <a href="{R}installer-un-nichoir/">l'installation d'un nichoir</a> explique où et quand le poser.</p>
 <p><strong>Nichoir pour moineaux</strong> : à fixer sous le toit, idéal pour une espèce qui niche en colonie. <a href="{AMZ:nichoir moineau domestique}" """ + A + """>Voir sur Amazon</a></p>
 <p><strong>Notre conseil</strong> : avant d'acheter quoi que ce soit, laissez un coin de haie épais et non taillé, avec un tapis de feuilles mortes au pied. C'est le garde-manger et le refuge de l'accenteur, et vous l'y verrez bien plus souvent qu'à la mangeoire.</p>
+<p>Votre oiseau tire plutôt sur le brun, avec un bec fin et une queue dressée, ou grimpe le long des troncs ? Voyez notre page sur le <a href="{R}petit-oiseau-marron-jardin/">petit oiseau marron au jardin</a>, qui présente le troglodyte et le grimpereau.</p>
 """,
   faq=[("Quel est ce petit oiseau gris et brun qui mange par terre ?",
         "Le plus souvent un accenteur mouchet : tête et poitrine gris bleuté, dos brun strié, bec fin. Il reste près des buissons, seul ou à deux. S'il a un gros bec, un sourcil crème et vit en groupe, c'est plutôt une femelle de moineau domestique."),
@@ -2319,7 +2320,7 @@ g("oiseau-jaune-et-vert/",
 <p>Et si l'oiseau vert est encore plus grand, avec une longue queue fine, un bec rouge et un cri strident, en bande dans les platanes d'une grande ville, c'est une <a href="{R}perruche-a-collier/">perruche à collier</a>.</p>
 
 <h2>Du rouge en plus du jaune ? Le chardonneret</h2>
-<p>Si votre oiseau a un masque rouge et une large bande jaune sur une aile noire, c'est un chardonneret élégant. Mâle et femelle sont identiques de loin. Les jeunes gardent une tête beige jusqu'au premier hiver, ce qui trompe souvent en fin d'été. Il est intégralement protégé et en net recul : moins 31 % entre 2001 et 2019 selon le STOC. Il vient volontiers à la mangeoire pour le tournesol, et la boutique LPO le cite parmi les amateurs de graines de niger.</p>
+<p>Si votre oiseau a un masque rouge et une large bande jaune sur une aile noire, c'est un chardonneret élégant. Mâle et femelle sont identiques de loin. Les jeunes gardent une tête beige jusqu'au premier hiver, ce qui trompe souvent en fin d'été. Tout le détail est dans notre fiche du <a href="{R}chardonneret-elegant/">chardonneret élégant</a>. Il est intégralement protégé et en net recul : moins 31 % entre 2001 et 2019 selon le STOC. Il vient volontiers à la mangeoire pour le tournesol, et la boutique LPO le cite parmi les amateurs de graines de niger.</p>
 <p><strong>Graines de niger</strong> : la petite graine des chardonnerets et des tarins, à servir dans une mangeoire à petits trous. <a href="{AMZ:graines de niger oiseaux}" """ + A + """>Voir sur Amazon</a></p>
 
 <h2>Comment être sûr de l'espèce ?</h2>
@@ -3594,3 +3595,262 @@ g("meilleure-mangeoire-boules-de-graisse/",
        ("Quand mettre des boules de graisse pour les oiseaux ?",
         "Pendant l'hiver, de la mi-novembre à la fin mars environ selon la LPO, sans interruption une fois commencé. Arrêtez progressivement au début du printemps.")],
   short="Top 10 mangeoires à boules de graisse", cat="Mangeoires")
+
+AUTO_META['chardonneret-elegant/'] = ('🐦', 'sable')
+g("chardonneret-elegant/",
+  "Chardonneret élégant : le reconnaître, le nourrir, sa protection",
+  "Chardonneret élégant : comment le reconnaître, le nourrir et le protéger",
+  "Masque rouge, ailes barrées de jaune : reconnaître le chardonneret élégant, mâle, femelle et jeune, ce qu'il mange en hiver, et pourquoi la cage est interdite.",
+  """
+<p>Le petit oiseau au <strong>masque rouge vif</strong>, à la tête noir et blanc et aux <strong>ailes noires barrées d'un jaune éclatant</strong>, c'est le chardonneret élégant. Il vient de plus en plus souvent aux mangeoires en hiver, souvent en petite bande, et il adore le tournesol.</p>
+<p>C'est aussi une espèce en difficulté : classée vulnérable en France et victime d'un braconnage qui augmente. Le capturer ou le garder en cage est interdit.</p>
+{CTA}
+
+<h2>Comment reconnaître un chardonneret ?</h2>
+<p>La fiche de l'Observatoire des oiseaux des jardins (LPO et MNHN) le décrit ainsi : tête noir et blanc avec un masque rouge vif, dos brun, ailes noires traversées d'une large bande jaune vif, croupion blanc, queue noire tachée de blanc et bec clair et pointu. Une fois vu, on ne l'oublie pas.</p>
+<p>Distinguer le mâle de la femelle est plus subtil. D'après oiseaux.net et l'OFB, chez le <strong>mâle</strong> le rouge déborde derrière l'œil, alors que chez la <strong>femelle</strong> il s'arrête au niveau de l'œil. Il faut un oiseau bien de profil et, souvent, des jumelles.</p>
+<p>Le <strong>jeune</strong> déroute beaucoup de monde en fin d'été : il a déjà la barre jaune de l'aile, mais pas de rouge. Sa tête est beige grisâtre et finement striée jusqu'au premier hiver. Si vous voyez un oiseau terne avec une belle bande jaune sur l'aile noire, pensez à un jeune chardonneret.</p>
+<table><thead><tr><th>Critère</th><th>Mâle</th><th>Femelle</th><th>Jeune</th></tr></thead><tbody>
+<tr><td>Masque rouge</td><td>Déborde derrière l'œil</td><td>S'arrête à l'œil</td><td>Absent</td></tr>
+<tr><td>Tête</td><td>Noir et blanc</td><td>Noir et blanc</td><td>Beige grisâtre, striée</td></tr>
+<tr><td>Aile</td><td colspan="3">Noire avec une large bande jaune vif, dans tous les plumages</td></tr>
+<tr><td>Bec</td><td colspan="3">Clair et pointu</td></tr>
+</tbody></table>
+<p>Côté mesures, la fiche de l'Observatoire donne 12 cm, oiseaux.net 10 à 14 cm. Le poids est de 14 à 18 g selon l'Observatoire et l'OFB (16 g pour oiseaux.net), pour une envergure de 21 à 25 cm.</p>
+
+<h2>Chardonneret, verdier ou tarin : comment ne pas se tromper ?</h2>
+<p>Le verdier d'Europe et le tarin des aulnes ont eux aussi du jaune sur les ailes. Mais, comme le rappelle l'Observatoire des oiseaux des jardins, aucun des deux n'a le rouge ni le blanc de la face.</p>
+<p>Notre page sur l'<a href="{R}oiseau-jaune-et-vert/">oiseau jaune et vert</a> compare en détail le verdier, le serin, le tarin et la mésange bleue.</p>
+
+<h2>Le voit-on toute l'année ?</h2>
+<p>Oui, dans la majeure partie de la France. Oiseaux.net le décrit comme sédentaire sur l'essentiel de son aire, avec des déplacements de migration surtout chez les populations du nord de l'Europe. L'OFB précise que les oiseaux venus du nord passent plutôt l'hiver dans le sud de la France et au Maghreb.</p>
+<p>Hors période de nidification, il vit en groupes, parfois de plusieurs dizaines d'oiseaux. On le trouve en lisière, dans le bocage, au bord des routes, dans les parcs, les vergers et les jardins. Les friches, avec leurs plantes montées en graines, comptent beaucoup pour lui.</p>
+<p>Bonne nouvelle pour les jardins : le bilan de l'Observatoire des oiseaux des jardins sur 2012 à 2022 note une forte augmentation des chardonnerets observés en hiver dans les jardins.</p>
+
+<h2>Que donner à manger à un chardonneret ?</h2>
+<p>C'est un granivore. Dans la nature, il picore les graines des chardons, des asters et du tussilage, et celles des bouleaux, des aulnes et des pins, selon oiseaux.net. En été, il ajoute des insectes pour nourrir ses petits.</p>
+<p>À la mangeoire, l'Observatoire des oiseaux des jardins est clair : il aime particulièrement le <strong>tournesol</strong>, qu'il prend à la mangeoire comme au sol. Le tournesol décortiqué a un avantage pratique pour vous : pas de coques à ramasser sous la mangeoire. Notre comparatif des <a href="{R}meilleure-graine-tournesol/">meilleures graines de tournesol</a> vous aide à choisir. <a href="{AMZ:graines tournesol decortiquees oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+<p>Et le niger ? Ces minuscules graines noires sont vendues pour les chardonnerets, et la LPO Occitanie les cite comme très nutritives, à servir dans un distributeur spécial à petits orifices (sinon elles tombent toutes au sol). Aucune des sources consultées ne le présente toutefois comme indispensable : voyez-le comme un complément pour attirer les chardonnerets, pas comme une obligation. <a href="{AMZ:graines de niger oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+<p>Si vous tentez le niger, prenez un vrai silo à niger. Le modèle Squirrel Buster Finch de Brome, par exemple, a 8 orifices et se ferme sous le poids d'un gros animal ; il est présenté dans notre comparatif des <a href="{R}meilleure-mangeoire-anti-ecureuil/">mangeoires anti-écureuil</a>. <a href="{AMZ:Squirrel Buster Finch}" """ + A + """>Voir sur Amazon</a></p>
+<p>Comme pour tous les oiseaux, la LPO Occitanie conseille de nourrir de la mi-novembre à la fin mars. Les règles complètes sont dans notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a>.</p>
+
+<h2>Où fait-il son nid ?</h2>
+<p>Pas dans un nichoir. La femelle construit seule une coupe de mousse, d'herbes, de lichens et de soie d'araignée, garnie de duvet végétal, de laine et de plumes. Elle la place dans une fourche d'arbre ou d'arbuste, près du bout d'une branche, entre 2 et 10 m de haut, d'après oiseaux.net.</p>
+<p>Elle pond 4 à 5 œufs bleu pâle tachetés et les couve 12 à 14 jours ; les jeunes quittent le nid 13 à 16 jours après l'éclosion. Deux nichées sont possibles dans la saison. Pour l'aider, gardez des arbres et des arbustes, et taillez en dehors de la saison de nidification. Les espèces qui utilisent un nichoir sont présentées dans notre guide pour <a href="{R}installer-un-nichoir/">installer un nichoir</a>.</p>
+
+<h2>Est-il protégé ? Peut-on le garder en cage ?</h2>
+<p>Le chardonneret est protégé depuis 1981, rappelle l'OFB. La capture, la détention, le transport, l'achat et la vente sont interdits, et les sanctions peuvent atteindre 3 ans de prison et 150 000 € d'amende (article L. 415-3 du Code de l'environnement). L'OFB a saisi 353 chardonnerets en 2023 et constate que le braconnage augmente, avec des pièges ou de la glu posés notamment dans les friches urbaines.</p>
+<p>Sur la liste rouge des oiseaux nicheurs de France, il est passé de « préoccupation mineure » en 2008 à <strong>« vulnérable »</strong> en 2016, avec une baisse de près de 40 % en dix ans citée par cette liste. Les chiffres varient selon les sources et les périodes : au moins 30 % en dix ans pour l'OFB, 35 % en 18 ans selon la LPO d'après le suivi STOC. Toutes vont dans le même sens.</p>
+<p>Si un voisin ou une annonce propose un chardonneret, signalez-le à l'OFB plutôt que de l'acheter, même pour le « sauver ».</p>
+
+<h2>Comment l'attirer au jardin ?</h2>
+<ul>
+<li><strong>Laissez des plantes monter en graines.</strong> L'Observatoire des oiseaux des jardins conseille de planter des chardons. Un coin non tondu en fin d'été lui offre un vrai garde-manger.</li>
+<li><strong>Pas de pesticides</strong>, et un coin un peu sauvage, comme le recommande la Ligue royale belge pour la protection des oiseaux.</li>
+<li><strong>Du tournesol en hiver</strong>, servi dans une mangeoire propre, et éventuellement un silo à niger.</li>
+<li><strong>Participez aux comptages</strong> : vos observations alimentent les suivis qui ont révélé son déclin.</li>
+</ul>
+
+<h2>À quoi ressemble son chant ?</h2>
+<p>Oiseaux.net décrit une phrase assez mélodieuse, faite de notes roulées et d'accélérations, et des cris comme « tsi du dut » ou un « tchuii » montant. Souvent, c'est ce gazouillis qui annonce la bande avant qu'elle ne se pose. Pour voir le masque rouge et savoir si c'est un mâle, de bonnes jumelles changent tout : notre comparatif des <a href="{R}meilleures-jumelles-oiseaux/">meilleures jumelles pour les oiseaux</a> couvre tous les budgets.</p>
+
+<p class="sources"><strong>Sources</strong> : <a href="https://cdnfiles2.biolovision.net/www.oiseauxdesjardins.fr/pdffiles/news/Fiche_especeCEG-5462.pdf" target="_blank" rel="noopener">Oiseaux des jardins (LPO, MNHN) : fiche chardonneret élégant</a> ; <a href="https://www.oiseaux.net/oiseaux/chardonneret.elegant.html" target="_blank" rel="noopener">oiseaux.net : Chardonneret élégant</a> ; <a href="https://ofb.gouv.fr/doc/connaitre-et-proteger-le-chardonneret-elegant" target="_blank" rel="noopener">OFB : connaître et protéger le chardonneret élégant</a> (vérifié le 19 novembre 2026)</p>
+""",
+  faq=[("Comment différencier le chardonneret mâle de la femelle ?",
+        "Regardez le masque rouge de profil : chez le mâle, il déborde derrière l'œil ; chez la femelle, il s'arrête au niveau de l'œil. La différence est subtile et demande souvent des jumelles."),
+       ("Que mange le chardonneret élégant à la mangeoire ?",
+        "Surtout du tournesol, à la mangeoire ou au sol, selon l'Observatoire des oiseaux des jardins. Le niger, servi dans un silo spécial à petits orifices, peut compléter."),
+       ("A-t-on le droit d'avoir un chardonneret en cage ?",
+        "Non. L'espèce est protégée : capture, détention, transport, achat et vente sont interdits, avec des sanctions jusqu'à 3 ans de prison et 150 000 € d'amende, rappelle l'OFB.")],
+  short="Chardonneret élégant", cat="Observer")
+
+AUTO_META['petit-oiseau-marron-jardin/'] = ('🔎', 'mousse')
+g("petit-oiseau-marron-jardin/",
+  "Petit oiseau marron au jardin : moineau, troglodyte, grimpereau ?",
+  "Petit oiseau marron au jardin : comment savoir lequel c'est ?",
+  "Petit oiseau marron au jardin ? Moineau femelle, troglodyte, grimpereau ou accenteur : taille, bec et comportement pour savoir lequel c'est, et comment l'aider.",
+  """
+<p>Le petit oiseau marron que vous voyez le plus souvent au jardin est un <strong>moineau domestique femelle</strong> : brun rayé, bec conique, presque toujours en groupe. S'il est minuscule, tout rond, avec la <strong>queue dressée</strong>, c'est un <strong>troglodyte mignon</strong>. Et s'il grimpe le long d'un tronc comme une souris, c'est un <strong>grimpereau des jardins</strong>.</p>
+<p>Le plus fiable n'est pas la couleur, qui varie avec la lumière, mais trois indices : le bec, l'endroit où l'oiseau se tient et sa façon de bouger.</p>
+{CTA}
+
+<h2>Le tableau pour l'identifier en un coup d'œil</h2>
+<table><thead><tr><th>Espèce</th><th>Taille</th><th>Bec</th><th>Où il se tient</th><th>Signe qui ne trompe pas</th></tr></thead><tbody>
+<tr><td>Moineau domestique</td><td>15 cm</td><td>Court, épais, conique</td><td>Au sol, en groupe</td><td>Bande bruyante ; mâle à bavette noire</td></tr>
+<tr><td>Troglodyte mignon</td><td>9 à 10 cm</td><td>Fin, pointu, un peu arqué</td><td>Au ras du sol, dans les buissons et tas de bois</td><td>Queue courte relevée, chant très puissant</td></tr>
+<tr><td>Grimpereau des jardins</td><td>12 cm</td><td>Long, fin, arqué</td><td>Sur les troncs</td><td>Monte le tronc, redescend en volant</td></tr>
+<tr><td>Accenteur mouchet</td><td>14 cm</td><td>Fin et sombre</td><td>Au sol, près des haies, seul</td><td>Tête et poitrine gris cendré</td></tr>
+<tr><td>Moineau friquet</td><td>14 cm</td><td>Court, conique</td><td>Campagne, peu courant au jardin</td><td>Calotte marron, tache noire sur la joue</td></tr>
+</tbody></table>
+<p>Tailles d'après les fiches de l'Observatoire des oiseaux des jardins (LPO et MNHN) et de la LPO. Tous ces oiseaux restent chez nous toute l'année.</p>
+
+<h2>Il est en groupe et bruyant : un moineau</h2>
+<p>Le moineau domestique mesure environ 15 cm selon l'Observatoire des oiseaux des jardins (16 à 17 cm pour oiseaux.net). Le <strong>mâle</strong> a la calotte grise, la nuque châtaine, les joues blanchâtres et une bavette noire. La <strong>femelle</strong>, celle qu'on décrit comme « petit oiseau marron », est plus terne, avec un sourcil clair bien marqué et un bec brun clair, précise la fiche « attention aux confusions » de l'Observatoire.</p>
+<p>Son bec court et conique de mangeur de graines, ses « tchip » répétés et sa vie en bande le trahissent vite. Il se nourrit au sol en sautillant et vient volontiers au tournesol noir.</p>
+<p>Si la calotte est entièrement marron avec une tache noire sur la joue blanche, et que mâle et femelle se ressemblent, c'est un <strong>moineau friquet</strong>, plus rare dans les jardins. Tout sur le premier dans notre fiche du <a href="{R}moineau-domestique/">moineau domestique</a>.</p>
+
+<h2>Il est minuscule, rond, la queue en l'air : un troglodyte</h2>
+<p>Avec 9 à 10,5 cm et 8 à 9 g selon la LPO, le troglodyte mignon est l'un des plus petits oiseaux du jardin. Dessus brun roux, dessous blanc brunâtre finement rayé, un sourcil pâle, un bec fin légèrement arqué, et surtout cette petite queue relevée à la verticale.</p>
+<p>Il fouille les buissons, les tas de bois, le lierre et le sol nu à la recherche d'insectes et d'araignées. Il vient très peu aux mangeoires, note l'Observatoire. On l'entend bien plus qu'on ne le voit : son chant est « fort et puissant » pour sa taille, dit la LPO, avec un « tjek » répété en cri d'alarme.</p>
+
+<h2>Il grimpe le long des troncs : un grimpereau</h2>
+<p>Le grimpereau des jardins mesure 12 cm (12,5 cm pour la LPO). Dos brun tacheté de crème, ventre blanchâtre, long bec fin et arqué, queue rigide sur laquelle il s'appuie. Il <strong>monte le tronc de bas en haut</strong> en fouillant les écorces, puis redescend en volant au pied de l'arbre suivant, décrivent la LPO et oiseaux.net. Il ne mange que des petits invertébrés.</p>
+<p>Le grimpereau des bois lui ressemble énormément. Oiseaux.net et l'Observatoire s'accordent : le chant et l'habitat sont les meilleurs critères. Le grimpereau des jardins fréquente davantage les jardins et les feuillus, le grimpereau des bois les conifères.</p>
+<p>Attention à une confusion fréquente : la sittelle torchepot circule aussi sur les troncs, et on la décrit plutôt comme un oiseau gris : elle est présentée sur notre page du <a href="{R}petit-oiseau-gris-jardin/">petit oiseau gris au jardin</a>.</p>
+
+<h2>Il est discret, seul, au pied de la haie : un accenteur</h2>
+<p>L'accenteur mouchet est souvent pris pour un moineau femelle. La fiche de l'Observatoire donne la clé : son bec est fin et sombre, « beaucoup plus fin » que celui du moineau, et sa tête et sa poitrine sont gris cendré. Il mesure 14 cm pour une vingtaine de grammes.</p>
+<p>Il ne vit pas en bande et se déplace au sol par petits sauts nerveux, queue agitée (oiseaux.net), en ramassant les graines tombées des mangeoires. Son chant est un petit babil aigrelet de 2 à 3 secondes.</p>
+
+<h2>Comment confirmer ce que vous avez vu ?</h2>
+<p>Notez trois choses avant qu'il s'envole : la forme du bec, l'endroit (sol, tronc, buisson) et s'il est seul ou en groupe. Ensuite, le chant tranche souvent. Une application comme Merlin Bird ID ou BirdNET enregistre le chant et propose l'espèce ; prenez sa réponse comme une piste à confirmer, pas comme une certitude.</p>
+<p>Un bon guide de terrain avec les sons reste le plus sûr pour séparer les deux grimpereaux : <a href="{AMZ:Guide des oiseaux de France Belin Morin}" """ + A + """>Voir sur Amazon</a>. D'autres titres dans notre sélection du <a href="{R}meilleur-guide-oiseaux/">meilleur guide d'identification des oiseaux</a>.</p>
+
+<h2>Que leur donner, et quel nichoir leur poser ?</h2>
+<p>Ces quatre oiseaux ne mangent pas la même chose, et c'est ce qui fait la différence au jardin :</p>
+<ul>
+<li><strong>Moineaux</strong> : tournesol noir, à la mangeoire ou au sol. Ils nichent en colonie : la LPO Auvergne-Rhône-Alpes conseille des nichoirs à trou de 32 à 40 mm, posés à 3 à 8 m de haut. Un nichoir collectif à plusieurs loges leur convient bien. <a href="{AMZ:nichoir moineaux collectif}" """ + A + """>Voir sur Amazon</a></li>
+<li><strong>Troglodyte</strong> : il vient peu à la mangeoire, mais les vers de farine sont cités par la LPO PACA pour les petits insectivores. Nichoir semi-ouvert sur un mur, entre 1,50 et 3 m, ou pot en terre cuite caché dans le lierre (LPO Auvergne-Rhône-Alpes, Observatoire des oiseaux des jardins).</li>
+<li><strong>Grimpereau</strong> : en hiver, l'Observatoire conseille de la graisse ou des vers de farine le long des troncs. Il lui faut un nichoir à entrée latérale, plaqué contre le tronc, que la LPO vend à poser à 2 m minimum. <a href="{AMZ:nichoir grimpereau}" """ + A + """>Voir sur Amazon</a></li>
+<li><strong>Accenteur</strong> : petites graines tombées au sol. Pas de nichoir : il niche dans les haies, qu'il ne faut pas tailler de mars à août.</li>
+</ul>
+<p>Par exemple, si le troglodyte et le grimpereau passent chez vous, quelques vers de farine séchés déposés sur une souche ou une petite coupelle valent mieux qu'une mangeoire de plus. <a href="{AMZ:vers de farine séchés oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+<p>Pour le reste, suivez notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a> et celui pour <a href="{R}installer-un-nichoir/">installer un nichoir</a>.</p>
+
+<p class="sources"><strong>Sources</strong> : <a href="https://cdnfiles1.biolovision.net/www.oiseauxdesjardins.fr/userfiles/FichesespcesTOUTESVF2-compress.pdf" target="_blank" rel="noopener">Oiseaux des jardins (LPO, MNHN) : fiches espèces</a> ; <a href="https://www.lpo.fr/decouvrir-la-nature/fiches-especes/fiches-especes/oiseaux/troglodyte-mignon" target="_blank" rel="noopener">LPO : fiche troglodyte mignon</a> ; <a href="https://www.lpo.fr/decouvrir-la-nature/fiches-especes/fiches-especes/oiseaux/grimpereau-des-jardins" target="_blank" rel="noopener">LPO : fiche grimpereau des jardins</a> (vérifié le 19 novembre 2026)</p>
+""",
+  faq=[("Quel est ce tout petit oiseau marron à la queue dressée ?",
+        "C'est presque sûrement un troglodyte mignon. Il mesure environ 9 à 10 cm, tient sa queue courte relevée et chante très fort pour sa taille. Il reste au ras du sol, dans les buissons et les tas de bois."),
+       ("Comment différencier un accenteur mouchet d'un moineau femelle ?",
+        "Regardez le bec : celui de l'accenteur est fin et sombre, celui du moineau court et conique. L'accenteur a aussi la tête et la poitrine gris cendré, et vit seul alors que le moineau est en groupe."),
+       ("Quel petit oiseau marron grimpe aux arbres ?",
+        "Le grimpereau des jardins. Il monte le tronc de bas en haut en fouillant l'écorce avec son long bec arqué, puis redescend en volant au pied de l'arbre suivant.")],
+  short="Petit oiseau marron au jardin", cat="Observer")
+
+AUTO_META['meilleure-mangeoire-anti-ecureuil/'] = ('🏆', 'lilas')
+g("meilleure-mangeoire-anti-ecureuil/",
+  "Mangeoire anti-écureuil 2026 : 9 modèles à contrepoids et cage",
+  "Mangeoire anti-écureuil : 9 modèles à contrepoids ou à cage comparés",
+  "Squirrel Buster, Perky-Pet, Gardman : 9 mangeoires anti-écureuil à contrepoids ou à cage, capacité, nettoyage, et ce qu'elles valent face à l'écureuil roux.",
+  """
+<p>Une mangeoire anti-écureuil efficace ferme ses orifices dès qu'un animal trop lourd s'y pose : c'est le principe du contrepoids, et le modèle le plus abouti est la <strong>Brome Squirrel Buster Plus</strong>, réglable, avec 6 orifices et près de 3 litres de graines. Les cages, elles, arrêtent surtout les pigeons et les gros oiseaux.</p>
+<p>Un point que les fiches oublient en France : ces mangeoires sont conçues pour l'écureuil gris américain. Notre écureuil roux est plus léger, et Brome reconnaît que les jeunes écureuils roux ne sont pas arrêtés. Il est aussi protégé par la loi. On fait le point ci-dessous, avant les 9 modèles retenus.</p>
+{CTA}
+<p><strong>Notre choix, la Brome Squirrel Buster Plus</strong> : <a href="{AMZ:Brome Squirrel Buster Plus}" """ + A + """>Voir sur Amazon</a></p>
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
+
+<h2>Le tableau récapitulatif</h2>
+<table><thead><tr><th>Modèle</th><th>Mécanisme</th><th>Réglable</th><th>Capacité</th><th>Orifices</th><th>Graines</th></tr></thead><tbody>
+<tr><td>Brome Squirrel Buster Plus</td><td>Contrepoids à ressort</td><td>Oui</td><td>2,8 à 3 L (2,3 kg)</td><td>6</td><td>Tournesol noir conseillé</td></tr>
+<tr><td>Brome Squirrel Buster Legacy</td><td>Contrepoids à ressort</td><td>Oui</td><td>1,4 L (1,2 kg)</td><td>4</td><td>Non précisé</td></tr>
+<tr><td>Brome Squirrel Buster Classic</td><td>Contrepoids</td><td>Non</td><td>1,3 L (1,1 kg)</td><td>4</td><td>Non précisé</td></tr>
+<tr><td>Brome Squirrel Buster Standard</td><td>Contrepoids à ressort</td><td>Oui</td><td>Non précisé clairement</td><td>4</td><td>Non précisé</td></tr>
+<tr><td>Brome Squirrel Buster Mini</td><td>Contrepoids</td><td>Non</td><td>0,45 kg</td><td>4</td><td>Non précisé</td></tr>
+<tr><td>Brome Squirrel Buster Finch</td><td>Contrepoids</td><td>Non</td><td>1,1 kg</td><td>8</td><td>Niger</td></tr>
+<tr><td>Perky-Pet Squirrel-Be-Gone II (338)</td><td>Perchoirs à ressort</td><td>Oui, 4 positions</td><td>3,6 kg</td><td>Non précisé</td><td>Tournesol, mélange, carthame</td></tr>
+<tr><td>Perky-Pet Fortress Breakaway (5110PP)</td><td>Perchoirs qui cèdent, capots</td><td>Non précisé</td><td>1,6 kg</td><td>4</td><td>Non précisé</td></tr>
+<tr><td>Gardman Heavy Duty Squirrel Proof (A01820)</td><td>Cage autour d'un tube</td><td>Sans objet</td><td>500 g</td><td>Non précisé</td><td>Mélange</td></tr>
+</tbody></table>
+
+<h2>Avant d'acheter : l'écureuil roux est protégé</h2>
+<p>L'écureuil roux figure dans l'arrêté du 23 avril 2007 qui fixe la liste des mammifères protégés en France. Il n'est donc pas question de le piéger ni de le blesser. Une mangeoire à contrepoids ne lui fait aucun mal : elle se ferme et il repart bredouille.</p>
+<p>Le vrai problème est ailleurs. Ces mangeoires viennent d'Amérique du Nord, où l'écureuil gris est lourd. Brome écrit lui-même que ses modèles n'arrêtent pas les jeunes écureuils roux. Concrètement, avec un contrepoids réglé au plus sensible, vous écarterez une partie des visites d'adultes, les pigeons et les tourterelles, mais pas tout. Notre conseil : si un écureuil roux vient chez vous, voyez-le aussi comme une chance, et placez-lui un peu de noisettes ailleurs, loin de la mangeoire des oiseaux.</p>
+
+<h2>1. Brome Squirrel Buster Plus : la référence</h2>
+<p><strong>Pour qui ?</strong> Un jardin très fréquenté, avec des écureuils et des pigeons qui vident tout.</p>
+<p>Un capot descend et ferme les 6 orifices dès qu'un animal trop lourd se pose, avec un ressort réglable. Selon Brome, il contient 2,8 litres (2,3 kg) de graines, 3 litres selon Vivara. Il mesure 16,5 x 16,5 x 60,5 cm (environ 71 cm avec l'anse) et pèse 1,7 kg. Il se démonte à la main, sans outil, et Vivara annonce une garantie de 5 ans. Les oiseaux se posent sur un anneau perchoir qui fait le tour de la mangeoire.</p>
+<ul>
+<li><strong>Points forts</strong> : le réglage écarte aussi les gros oiseaux, d'après Vivara ; grande capacité ; démontage sans outil.</li>
+<li><strong>Limites</strong> : encombrant, et Vivara demande 47 cm de dégagement tout autour pour qu'un écureuil ne puisse pas l'atteindre depuis une branche. Brome conseille le tournesol noir et déconseille les mélanges avec gros fruits ou noix.</li>
+</ul>
+<p><a href="{AMZ:Brome Squirrel Buster Plus}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Brome Squirrel Buster Legacy : le même principe, en plus compact</h2>
+<p><strong>Pour qui ?</strong> Un jardin moyen où la Plus serait surdimensionnée.</p>
+<p>Ressort réglable, 4 orifices avec perchoirs et une grille pour les oiseaux qui s'accrochent, environ 1,4 litre (1,2 kg) de graines. Il mesure 14 x 14 x 40,6 cm pour 1,2 kg. Brome annonce des matériaux anti-mastication et anti-UV.</p>
+<ul>
+<li><strong>Points forts</strong> : réglable comme la Plus, plus facile à placer.</li>
+<li><strong>Limites</strong> : à remplir deux fois plus souvent ; graines conseillées non précisées.</li>
+</ul>
+<p><a href="{AMZ:Squirrel Buster Legacy}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Brome Squirrel Buster Classic : simple et robuste</h2>
+<p><strong>Pour qui ?</strong> Vous voulez le mécanisme Brome sans réglage à faire.</p>
+<p>Contrepoids fixe, 4 orifices, environ 1,3 litre (1,1 kg). Métal et plastique anti-UV, 13,5 x 13,5 x 52,4 cm pour 1,2 kg.</p>
+<ul>
+<li><strong>Points forts</strong> : rien à régler, démontage à la main.</li>
+<li><strong>Limites</strong> : pas de réglage, donc moins de marge face à un écureuil roux léger. Disponibilité sur Amazon.fr incertaine.</li>
+</ul>
+<p><a href="{AMZ:Brome Squirrel Buster Classic}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Brome Squirrel Buster Standard : le petit réglable</h2>
+<p><strong>Pour qui ?</strong> Un petit jardin, avec l'envie de pouvoir régler la sensibilité.</p>
+<p>Ressort réglable, 4 orifices, 12,7 x 12,7 x 33,7 cm pour 0,9 kg. La capacité n'est pas exprimée clairement sur la fiche du fabricant.</p>
+<ul>
+<li><strong>Points forts</strong> : le réglage dans un format court.</li>
+<li><strong>Limites</strong> : petite contenance ; disponibilité sur Amazon.fr incertaine.</li>
+</ul>
+<p><a href="{AMZ:Squirrel Buster Standard}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Brome Squirrel Buster Mini : pour un balcon</h2>
+<p><strong>Pour qui ?</strong> Un balcon ou une petite terrasse où un écureuil passe parfois.</p>
+<p>Contrepoids fixe, 4 orifices, 0,45 kg de graines, 10,5 x 10,5 x 31,4 cm pour 0,66 kg.</p>
+<ul>
+<li><strong>Points forts</strong> : le plus léger de la gamme, facile à suspendre.</li>
+<li><strong>Limites</strong> : se vide vite en hiver ; pas de réglage.</li>
+</ul>
+<p><a href="{AMZ:Squirrel Buster Mini}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Brome Squirrel Buster Finch : pour le niger</h2>
+<p><strong>Pour qui ?</strong> Vous voulez attirer les chardonnerets avec du niger sans nourrir tout le voisinage.</p>
+<p>La version à niger de la gamme : 8 orifices fins, 1,1 kg de graines, contrepoids fixe, 13,5 x 13,5 x 52,4 cm pour 1,2 kg. Notre fiche du <a href="{R}chardonneret-elegant/">chardonneret élégant</a> explique ce qu'il mange vraiment.</p>
+<ul>
+<li><strong>Points forts</strong> : orifices adaptés aux petites graines, moins de gaspillage.</li>
+<li><strong>Limites</strong> : uniquement pour le niger ; pas de réglage.</li>
+</ul>
+<p><a href="{AMZ:Squirrel Buster Finch}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Perky-Pet Squirrel-Be-Gone II Country House : la plus grande</h2>
+<p><strong>Pour qui ?</strong> Vous préférez une maisonnette, avec beaucoup de graines et peu de remplissages.</p>
+<p>Maisonnette en métal laqué époxy de 35,6 x 27,9 x 34,9 cm pour 2 kg, avec des perchoirs qui se ferment sous le poids, réglables sur 4 positions. Elle contient 3,6 kg de graines : tournesol noir ou décortiqué, mélange ou carthame. Le toit se retire pour le remplissage, et Perky-Pet conseille un nettoyage au moins toutes les deux semaines.</p>
+<ul>
+<li><strong>Points forts</strong> : la plus grande capacité, 4 niveaux de réglage.</li>
+<li><strong>Limites</strong> : lourde et volumineuse ; nombre d'orifices et garantie non précisés.</li>
+</ul>
+<p><a href="{AMZ:Perky-Pet Squirrel-be-Gone 338}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>8. Perky-Pet Fortress Breakaway : le silo à capots</h2>
+<p><strong>Pour qui ?</strong> Vous voulez un silo transparent pour voir le niveau de graines d'un coup d'œil.</p>
+<p>Les perchoirs cèdent sous le poids et les 4 orifices se ferment ensemble derrière des capots métalliques. Il contient 1,6 kg et mesure 19 x 9 x 40,8 cm. Coque en plastique, réservoir transparent, toit en métal. Perky-Pet conseille un nettoyage deux fois par semaine à l'eau savonneuse.</p>
+<ul>
+<li><strong>Points forts</strong> : capots en métal sur les orifices, réservoir visible.</li>
+<li><strong>Limites</strong> : beaucoup de plastique face aux dents d'un écureuil ; réglage et poids non précisés.</li>
+</ul>
+<p><a href="{AMZ:Perky-Pet 5110PP Forteresse}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>9. Gardman Heavy Duty Squirrel Proof : la cage contre les pigeons</h2>
+<p><strong>Pour qui ?</strong> Votre problème, ce sont surtout les pigeons et les tourterelles.</p>
+<p>Une cage en métal laqué entoure un tube en polycarbonate de 500 g de mélange. Gardman la présente aussi comme anti-pigeons. Le collier se dévisse, et les orifices et perchoirs se retirent d'un quart de tour, sans outil, pour le nettoyage.</p>
+<ul>
+<li><strong>Points forts</strong> : aucun réglage, démontage complet facile, efficace contre les gros oiseaux.</li>
+<li><strong>Limites</strong> : petite contenance ; une cage n'arrête pas un jeune écureuil assez fin pour passer entre les barreaux. Dimensions non précisées.</li>
+</ul>
+<p><a href="{AMZ:Gardman A01820}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Comment choisir une mangeoire anti-écureuil ?</h2>
+<p><strong>Contrepoids ou cage ?</strong> Le contrepoids agit sur le poids de l'animal : il gère les écureuils et, s'il est réglable, les pigeons. La cage agit sur la taille : parfaite contre les pigeons, moins fiable contre un écureuil mince. Si vous ne savez pas qui vide votre mangeoire, observez une matinée avant d'acheter.</p>
+<p><strong>Le réglage compte plus que la marque.</strong> Avec l'écureuil roux, plus léger que l'écureuil gris, un modèle réglable (Plus, Legacy, Standard, Perky-Pet 338) vous laisse une marge que les modèles fixes n'ont pas.</p>
+<p><strong>L'emplacement fait la moitié du travail.</strong> Aucune mangeoire ne résiste à un écureuil qui saute dessus depuis une branche ou un toit. Vivara demande 47 cm de dégagement autour de la Squirrel Buster Plus. La LPO Occitanie conseille un endroit abrité des intempéries, plutôt ensoleillé, assez dégagé pour que les oiseaux voient venir les chats, mais proche d'arbres où se percher, et de déplacer la mangeoire une ou deux fois par hiver.</p>
+<p><strong>Pensez au nettoyage.</strong> La LPO Occitanie recommande de nettoyer les mangeoires chaque semaine (chaque jour pour un plateau). La LPO Alsace conseille de le faire dehors, avec des gants, et de désinfecter à l'eau de Javel diluée dans de l'eau froide, puis de rincer et de laisser sécher. Les Brome et la Gardman se démontent sans outil : vous le ferez plus volontiers.</p>
+<p><strong>La graine change tout.</strong> Le tournesol noir, conseillé par Brome et par la LPO, convient à la plupart des oiseaux de la mangeoire. Notre comparatif des <a href="{R}meilleure-graine-tournesol/">meilleures graines de tournesol</a> vous aide à choisir.</p>
+
+<h2>Quels oiseaux en profiteront ?</h2>
+<p>Les mésanges en premier : la <a href="{R}mesange-charbonniere/">mésange charbonnière</a> comme la <a href="{R}mesange-bleue/">mésange bleue</a> se moquent des capots, trop légères pour les déclencher. Si vos boules de graisse disparaissent également, voyez notre sélection des <a href="{R}meilleure-mangeoire-boules-de-graisse/">mangeoires pour boules de graisse</a>, avec une Squirrel Buster dédiée aux pains de graisse. Les autres modèles, sans protection, sont dans notre comparatif des <a href="{R}meilleure-mangeoire-oiseaux/">meilleures mangeoires pour oiseaux</a>, et toutes les règles du nourrissage d'hiver dans notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a>.</p>
+""",
+  faq=[("Une mangeoire anti-écureuil fait-elle mal à l'écureuil ?",
+        "Non. Les modèles à contrepoids ferment simplement les orifices sous son poids, et l'écureuil repart sans rien. C'est important, car l'écureuil roux est une espèce protégée en France."),
+       ("Les mangeoires anti-écureuil marchent-elles contre l'écureuil roux ?",
+        "En partie. Elles sont conçues pour l'écureuil gris, plus lourd, et Brome reconnaît que les jeunes écureuils roux ne sont pas arrêtés. Un modèle réglable, bien placé loin des branches, donne les meilleurs résultats."),
+       ("Une mangeoire anti-écureuil arrête-t-elle aussi les pigeons ?",
+        "Oui pour les modèles à contrepoids réglable, comme la Squirrel Buster Plus, et pour les cages comme la Gardman A01820, présentée aussi comme anti-pigeons.")],
+  short="Top 9 mangeoires anti-écureuil", cat="Mangeoires")

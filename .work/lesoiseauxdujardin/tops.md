@@ -14,7 +14,7 @@
 - [x] meilleur-melange-graines-oiseaux/ | meilleur mélange de graines pour oiseaux | Nourrir | sans pois, lentilles ni riz (conseil LPO)
 - [x] meilleure-camera-jardin-oiseaux/ | meilleure caméra pour observer les oiseaux | Observer | caméras de jardin, pièges photo
 - [x] meilleure-mangeoire-boules-de-graisse/ | meilleure mangeoire boule de graisse | Mangeoires | mangeoires et supports pour boules et pains de graisse sans filet, hiver
-- [ ] meilleure-mangeoire-anti-ecureuil/ | mangeoire anti écureuil | Mangeoires | mangeoires à cage ou à contrepoids, plutôt haut de gamme
+- [x] meilleure-mangeoire-anti-ecureuil/ | mangeoire anti écureuil | Mangeoires | mangeoires à cage ou à contrepoids, plutôt haut de gamme
 - [ ] meilleure-longue-vue-ornithologie/ | meilleure longue-vue ornithologie | Observer | grossissement, poids
 - [ ] meilleure-mangeoire-silo/ | meilleure mangeoire silo | Mangeoires | métal, plastique, nettoyage facile
 - [ ] meilleure-mangeoire-anti-pigeon/ | meilleure mangeoire anti-pigeons et anti-écureuils | Mangeoires | cages, sélectives

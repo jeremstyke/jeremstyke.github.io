@@ -19,8 +19,8 @@
 - [x] pinson-des-arbres/ | pinson des arbres | Observer | fiche espèce : mâle et femelle, nourriture au sol
 - [x] hirondelle-rustique/ | hirondelle rustique | Observer | fiche espèce : reconnaître, nid dans les bâtiments, protection, différence avec l'hirondelle de fenêtre
 - [x] huppe-fasciee/ | huppe fasciée | Observer | fiche espèce : reconnaître, où et quand la voir, ce qu'elle mange
-- [ ] chardonneret-elegant/ | chardonneret élégant | Observer | fiche espèce : statut de protection vérifié, graines de niger, mangeoire à niger
-- [ ] petit-oiseau-marron-jardin/ | petit oiseau marron jardin | Observer | identification : troglodyte, moineau, grimpereau, accenteur
+- [x] chardonneret-elegant/ | chardonneret élégant | Observer | fiche espèce : statut de protection vérifié, graines de niger, mangeoire à niger
+- [x] petit-oiseau-marron-jardin/ | petit oiseau marron jardin | Observer | identification : troglodyte, moineau, grimpereau, accenteur
 - [ ] heron-cendre/ | héron cendré | Observer | fiche espèce et bassin de jardin : protéger ses poissons (filet, leurre), espèce protégée
 - [ ] difference-corbeau-corneille/ | différence corbeau corneille | Observer | identification : corneille noire, grand corbeau, corbeau freux, choucas
 - [ ] verdier-d-europe/ | verdier | Observer | fiche espèce : trichomonose et hygiène des mangeoires (sources sérieuses)
