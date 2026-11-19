@@ -270,6 +270,15 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 .mrl{gap:7px;max-height:68vh}
 .mrl button i{width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-size:21px;border-radius:12px;background:#fff;border:2px solid var(--navy)}
 .sheet{box-shadow:0 -10px 30px rgba(10,28,60,.28)}
+
+/* alignment pass */
+.sub #mult{display:none}
+.hd{padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+.cash{gap:6px}.cash .coin{margin-left:-6px}
+.sub{gap:8px;margin-top:6px}
+.sub .chip{height:30px;display:inline-flex;align-items:center;padding:0 12px}
+.sub .chip[hidden]{display:none}
+.nav button span{height:30px;display:flex;align-items:center;justify-content:center;line-height:1}
 </style>
 <script src="https://yoszi.com/sdk.js" data-zone="12296718" data-sdk="show_12296718"></script>
 </head>
@@ -313,7 +322,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261120-0010';
+const BUILD = '20261120-0025';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
