@@ -226,6 +226,13 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 <script>
 (() => {
 'use strict';
+// self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
+const BUILD = '20261119-1140';
+(async () => { try {
+  const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
+  const m = /const BUILD = '([^']+)'/.exec(t);
+  if (m && m[1] !== BUILD && !sessionStorage.getItem('ie_reload_' + m[1])) { sessionStorage.setItem('ie_reload_' + m[1], '1'); location.replace(location.pathname + '?v=' + m[1]); }
+} catch (e) {} })();
 const API = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/idle-estate';
 const tgw = window.Telegram && Telegram.WebApp;
 if (tgw) { try { tgw.ready(); tgw.expand(); tgw.setHeaderColor('#ffffff'); tgw.setBackgroundColor('#ffffff'); tgw.disableVerticalSwipes && tgw.disableVerticalSwipes(); } catch (e) {} }
