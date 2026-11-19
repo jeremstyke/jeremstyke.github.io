@@ -248,7 +248,7 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 (() => {
 'use strict';
 // self-update: Telegram caches the page; if the live file has a newer BUILD, reload it once (bump BUILD at each release)
-const BUILD = '20261119-1900';
+const BUILD = '20261119-1920';
 (async () => { try {
   const r = await fetch(location.pathname + '?_=' + Date.now(), { cache: 'no-store' }); const t = await r.text();
   const m = /const BUILD = '([^']+)'/.exec(t);
@@ -441,7 +441,9 @@ const mult = l => { let m = 1; for (const k of S.ms) if (l >= k) m *= S.mb; retu
 const evOn = n => { const s = n % 86400; return s >= 61200 && s < 64800; };
 // first-hour boost fades in 4 steps of 15 min: x5, x3, x2, x2 (same schedule as the server)
 const startM = n => { if (!(S.startEnd > n)) return 0; const e = n - (S.startEnd - 3600); return e < 900 ? 5 : e < 1800 ? 3 : 2; };
-const curM = n => S.incm * (Math.max(startM(n), S.boostEnd > n ? S.bmult : 0, S.adEnd > n ? 2 : 0) || 1) * (S.perm2 ? 2 : 1) * (evOn(n) ? 2 : 1) * (S.goldEnd > n ? 1.5 : 1);
+const slotSt = n => { const ms = startM(n), mb = S.boostEnd > n ? S.bmult : 0, ma = S.adEnd > n ? 2 : 0, me = evOn(n) ? 2 : 1, sb = Math.max(ms, mb, ma); return { ms, mb, ma, me, sb, run: sb > 0 && sb > me ? (ms === sb ? 1 : ma === sb ? 3 : 2) : 0 }; };
+const slotTick = n => { const t0 = S._tk || n; S._tk = n; const d = n - t0; if (!(d > 0 && d < 60)) return; const q = slotSt(n); if (S.startEnd > n && q.run !== 1) S.startEnd += d; if (S.boostEnd > n && q.run !== 2) S.boostEnd += d; if (S.adEnd > n && q.run !== 3) S.adEnd += d; };
+const curM = n => S.incm * Math.max(slotSt(n).sb, evOn(n) ? 2 : 1) * (S.perm2 ? 2 : 1) * (S.goldEnd > n ? 1.5 : 1);
 const inc = (i, n) => S.lv[i] > 0 ? S.cfg[i].r * S.lv[i] * mult(S.lv[i]) * curM(n) : 0;
 // a sale is offered only when it brings at least gmin investors (same rule as the server)
 const gMin = () => Math.max(2, Math.ceil(0.25 * Math.floor(S.inv)));
@@ -664,7 +666,8 @@ function paint() {
   $('rate').textContent = '$' + fm(rateNow()) + L.per;
   $('mult').textContent = 'x' + fmt(curM(n));
   const bo = $('boost');
-  if (S.boostEnd > n || S.startEnd > n || S.adEnd > n) { bo.hidden = false; const l = Math.max(S.boostEnd, S.startEnd, S.adEnd || 0) - n; bo.textContent = '⚡ x' + Math.max(startM(n), S.boostEnd > n ? S.bmult : 0, S.adEnd > n ? 2 : 0) + ' ' + (l > 3600 ? Math.floor(l / 3600) + 'h' + String(Math.floor(l % 3600 / 60)).padStart(2, '0') : Math.floor(l / 60) + ':' + String(Math.floor(l % 60)).padStart(2, '0')); } else bo.hidden = true;
+  slotTick(n);
+  if (S.boostEnd > n || S.startEnd > n || S.adEnd > n) { bo.hidden = false; const q = slotSt(n); const l = (q.ms === q.sb ? S.startEnd : q.ma === q.sb ? S.adEnd : S.boostEnd) - n; bo.textContent = (q.run ? '⚡ x' : '⏸ x') + q.sb + ' ' + (l > 3600 ? Math.floor(l / 3600) + 'h' + String(Math.floor(l % 3600 / 60)).padStart(2, '0') : Math.floor(l / 60) + ':' + String(Math.floor(l % 60)).padStart(2, '0')); } else bo.hidden = true;
   const bc = $('bankc'); if (S.bank > 0) { bc.hidden = false; bc.textContent = '🎁 x2 : ' + fmtT(S.bank) + ' · ' + L.use + ' ' + fmtT(Math.min(S.bank, S.use)); } else bc.hidden = true;
   paintAd();
   const pc = $('prc'); if (S.prgain > 0 || S.pr > 0) { pc.hidden = false; pc.textContent = (S.prgain > 0 ? '🔄 ' + L.prChip + ' +' + Math.round(S.prgain * 100) + '%' : '⭐ +' + Math.round(S.pbonus * 100) + '%'); } else pc.hidden = true;
