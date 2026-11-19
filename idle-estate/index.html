@@ -247,7 +247,7 @@ const L = {
   shopT:'Shop', shopS:'Everything is paid in Telegram Stars. 30% of all Stars spent goes to the weekly top 10 (this share may go up or down).',
   items:{welcome:['🎁','Welcome pack','2h of rent instantly + x2 income for 24h. One time only.'],b2:['⚡','x2 Income, 4h','Double all your rent for 4 hours.'],b3:['🚀','x3 Income, 24h','Triple all your rent for a full day.'],perm2:['👑','Partner: x2 forever','Permanent x2 on everything, forever.'],vault:['🏦','Vault: 24h offline','Tenants pay up to 24h while you are away (instead of 3h).'],skip1:['⏩','Time skip 1h','Instantly get 1 hour of rent.'],skip8:['⏭️','Time skip 8h','Instantly get 8 hours of rent.']},
   paid:'Payment received!', cancelled:'Payment cancelled',
-  prestT:'Empire', prestS:'Sell your whole empire to investors and start over, faster.<br>🏠 <b>You lose</b>: your properties and your cash.<br>👔 <b>You keep</b>: your investors. Each type of investor gives its own bonus forever.<br>🔓 <b>You gain</b>: 2 new properties unlocked with every sale.', ifSell:'If you sell now', nextInv:'Next investor', toGo:'to go (total rent earned)',
+  prestT:'Empire', prestS:'Sell your whole empire to investors and start over, faster.<br>🏠 <b>You lose</b>: your properties and your cash.<br>👔 <b>You keep</b>: your investors. Each type of investor gives its own bonus forever.<br>🔓 <b>You gain</b>: 2 new properties unlocked with every sale.', ifSell:'If you sell now', nextInv:'Next sale available', toGo:'to go (total rent earned)',
   investors:'Investors', bonus:'Income bonus', sell:'Sell and restart', sellFor:'Sell for {n} investors', needMore:'Earn more to sell for investors', sure:'Sure? Your properties reset, investors stay.', yes:'Yes, sell', no:'Cancel',
   sold:'Empire sold! +{n} investors',
   topT:'Weekly top 10', topS:'Fair ranking: your score is the base rent you earn this week. Investors and the permanent x2 do not count, paid boosts count for 1.5x at most, so newcomers can win too. 30% of all Stars spent this week is shared between the 10 best. This share may go up or down.',
@@ -280,7 +280,7 @@ const L = {
   shopT:'Boutique', shopS:'Tout se paie en Étoiles Telegram. 30 % des Étoiles dépensées vont au top 10 de la semaine (ce pourcentage peut augmenter ou baisser).',
   items:{welcome:['🎁','Pack de bienvenue','2h de loyers tout de suite + x2 revenus pendant 24h. Une seule fois.'],b2:['⚡','Revenus x2, 4h','Double tous tes loyers pendant 4 heures.'],b3:['🚀','Revenus x3, 24h','Triple tous tes loyers pendant une journée.'],perm2:['👑','Associé : x2 à vie','x2 permanent sur tout, pour toujours.'],vault:['🏦','Coffre : 24h hors ligne','Les locataires paient jusqu\'à 24h pendant ton absence (au lieu de 3h).'],skip1:['⏩','Saut de 1h','Reçois tout de suite 1 heure de loyers.'],skip8:['⏭️','Saut de 8h','Reçois tout de suite 8 heures de loyers.']},
   paid:'Paiement reçu !', cancelled:'Paiement annulé',
-  prestT:'Empire', prestS:'Vends ton empire à des investisseurs et recommence, en plus rapide.<br>🏠 <b>Tu perds</b> : tes biens et ton argent.<br>👔 <b>Tu gardes</b> : tes investisseurs. Chaque type d\'investisseur donne son propre bonus à vie.<br>🔓 <b>Tu gagnes</b> : 2 biens de plus débloqués à chaque vente.', ifSell:'Si tu vends maintenant', nextInv:'Prochain investisseur', toGo:'à gagner (loyers cumulés)',
+  prestT:'Empire', prestS:'Vends ton empire à des investisseurs et recommence, en plus rapide.<br>🏠 <b>Tu perds</b> : tes biens et ton argent.<br>👔 <b>Tu gardes</b> : tes investisseurs. Chaque type d\'investisseur donne son propre bonus à vie.<br>🔓 <b>Tu gagnes</b> : 2 biens de plus débloqués à chaque vente.', ifSell:'Si tu vends maintenant', nextInv:'Prochaine vente possible', toGo:'à gagner (loyers cumulés)',
   investors:'Investisseurs', bonus:'Bonus de revenus', sell:'Vendre et recommencer', sellFor:'Vendre pour {n} investisseurs', needMore:'Gagne plus pour vendre contre des investisseurs', sure:'Sûr ? Tes biens repartent à zéro, les investisseurs restent.', yes:'Oui, vendre', no:'Annuler',
   sold:'Empire vendu ! +{n} investisseurs',
   topT:'Top 10 de la semaine', topS:'Classement équitable : ton score = les loyers de base gagnés cette semaine. Les investisseurs et le x2 permanent ne comptent pas, les boosts payants comptent x1,5 au maximum, donc un nouveau joueur peut gagner. 30 % des Étoiles dépensées cette semaine sont partagés entre les 10 meilleurs. Ce pourcentage peut augmenter ou baisser.',
@@ -391,7 +391,9 @@ const evOn = n => { const s = n % 86400; return s >= 61200 && s < 64800; };
 const startM = n => { if (!(S.startEnd > n)) return 0; const e = n - (S.startEnd - 3600); return e < 900 ? 10 : e < 1800 ? 6 : e < 2700 ? 4 : 2; };
 const curM = n => S.incm * ((startM(n) + (S.boostEnd > n ? S.bmult : 0) + (S.adEnd > n ? 2 : 0)) || 1) * (S.perm2 ? 2 : 1) * (evOn(n) ? 2 : 1) * (S.goldEnd > n ? 1.5 : 1);
 const inc = (i, n) => S.lv[i] > 0 ? S.cfg[i].r * S.lv[i] * mult(S.lv[i]) * curM(n) : 0;
-const gainInv = () => Math.max(0, Math.floor(10 * Math.sqrt(S.life_all / 2500)) - Math.floor(S.inv));
+// a sale is offered only when it brings at least gmin investors (same rule as the server)
+const gMin = () => Math.max(2, Math.ceil(0.5 * Math.floor(S.inv)));
+const gainInv = () => { const g = Math.max(0, Math.floor(10 * Math.sqrt(S.life_all / 2500)) - Math.floor(S.inv)); return g >= gMin() ? g : 0; };
 function rateNow() { const n = snow(); let g = 0; for (let i = 0; i < 10; i++) { const e = inc(i, n) / S.cfg[i].t; g += S.mg[i] ? e : e * 0.5; } return g; }
 function cost(i, n) { const c0 = S.cfg[i].c * Math.pow(S.g, S.lv[i]); return c0 * (Math.pow(S.g, n) - 1) / (S.g - 1); }
 function maxN(i) { const c0 = S.cfg[i].c * Math.pow(S.g, S.lv[i]); return Math.max(0, Math.min(1000, Math.floor(Math.log(1 + S.cash * (S.g - 1) / c0) / Math.log(S.g)))); }
@@ -771,7 +773,7 @@ function invRows() {
 function paintPrest(force) {
   const p = $('p-prest'); const g = gainInv();
   const offs = S.offers || [];
-  const base = 2500 * Math.pow(Math.floor(S.inv) / 10, 2), need = 2500 * Math.pow((Math.floor(S.inv) + 1) / 10, 2);
+  const base = 2500 * Math.pow(Math.floor(S.inv) / 10, 2), need = 2500 * Math.pow((Math.floor(S.inv) + gMin()) / 10, 2);
   const frac = Math.max(0, Math.min(1, (S.life_all - base) / (need - base)));
   const key = [Math.floor(S.inv), JSON.stringify(S.ibt), offs.map(o => Math.round(o.st || 0)).join('-'), g, sureOffer, offs.map(o => o.id).join(), Math.floor(frac * 100)].join();
   if (!force && p.dataset.k === key) { updPrestTimer(); return; }
