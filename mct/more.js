@@ -85,7 +85,7 @@
     if (k === 'led') { close(); if (go) go('ledger'); return; }
     if (k === 'chn') { close(); if (go) go('chains'); return; }
     if (k === 'faq') { openUrl('https://jeremstyke.github.io/memecointycoon/faq/'); return; }
-    if (k === 'ct') { openTg('https://t.me/jeremstyke?direct'); return; }
+    if (k === 'ct') { openTg('https://t.me/jeremstyke'); return; }
     if (k === 'code') { const c = document.getElementById('mrcd'); if (c) { c.hidden = !c.hidden; if (!c.hidden) { const i = c.querySelector('input'); if (i) i.focus(); } } return; }
     if (k === 'join') {
       // same as the old row of the Portfolio: open the channel, then "I joined" checks it and gives the bonus

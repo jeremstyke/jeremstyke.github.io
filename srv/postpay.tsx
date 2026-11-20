@@ -217,7 +217,7 @@ Payments go directly to the channel owner's wallet. We never hold your money.`,
     noOrders: "No orders yet.",
     pending: "You already have an ad in progress. Finish it or send /cancel.",
     cancelled: "Cancelled.",
-    help: "Commands:\n/start - menu\n/channels - your channels\n/orders - your orders\n/earnings - my earnings\n/wallet - your wallet\n/cancel - cancel current step\n/language - Français / English\n\nQuestions: https://t.me/jeremstyke?direct",
+    help: "Commands:\n/start - menu\n/channels - your channels\n/orders - your orders\n/earnings - my earnings\n/wallet - your wallet\n/cancel - cancel current step\n/language - Français / English\n\nQuestions: https://t.me/jeremstyke",
     // diffuseur
     req: (t: string, p: number, you: string) => `📥 <b>New ad request</b> for <b>${esc(t)}</b>\n💰 ${p} USDT (you receive ${you} USDT)\n\nThe ad is just above. Approve to let the advertiser pay.\n⚠️ Once posted, the ad must stay 24h: a channel that deletes an ad early is removed from PostPay.`,
     approve: "✅ Approve", reject: "❌ Refuse",
@@ -282,7 +282,7 @@ Les paiements vont directement sur le wallet du propriétaire de la chaîne. Nou
     noOrders: "Aucune commande pour l'instant.",
     pending: "Vous avez déjà une pub en cours. Terminez-la ou envoyez /cancel.",
     cancelled: "Annulé.",
-    help: "Commandes :\n/start - menu\n/channels - vos chaînes\n/orders - vos commandes\n/earnings - mes gains\n/wallet - votre wallet\n/cancel - annuler l'étape en cours\n/language - Français / English\n\nQuestions : https://t.me/jeremstyke?direct",
+    help: "Commandes :\n/start - menu\n/channels - vos chaînes\n/orders - vos commandes\n/earnings - mes gains\n/wallet - votre wallet\n/cancel - annuler l'étape en cours\n/language - Français / English\n\nQuestions : https://t.me/jeremstyke",
     req: (t: string, p: number, you: string) => `📥 <b>Nouvelle demande de pub</b> pour <b>${esc(t)}</b>\n💰 ${p} USDT (vous recevez ${you} USDT)\n\nLa pub est juste au-dessus. Acceptez pour que l'annonceur puisse payer.\n⚠️ Une fois publiée, la pub doit rester 24 h : une chaîne qui supprime une pub avant est retirée de PostPay.`,
     approve: "✅ Accepter", reject: "❌ Refuser",
     youApproved: "✅ Acceptée. La pub sera publiée automatiquement dès réception du paiement.",
@@ -550,7 +550,7 @@ async function reviewChannel(u: any, c: any, ok: boolean) {
     } else {
       c.approved = false; c.rejected = true; c.listed = false; save();
       await say(u.id, `❌ ${esc(c.title)} refusée.`, undefined, false);
-      try { await say(c.owner, fr ? `❌ <b>${esc(c.title)}</b> n'a pas été acceptée sur PostPay. Pour en savoir plus : https://t.me/jeremstyke?direct` : `❌ <b>${esc(c.title)}</b> was not accepted on PostPay. To know more: https://t.me/jeremstyke?direct`, undefined, false); } catch {}
+      try { await say(c.owner, fr ? `❌ <b>${esc(c.title)}</b> n'a pas été acceptée sur PostPay. Pour en savoir plus : https://t.me/jeremstyke` : `❌ <b>${esc(c.title)}</b> was not accepted on PostPay. To know more: https://t.me/jeremstyke`, undefined, false); } catch {}
     }
 }
 // 13 nov 2026 (Jeremy): approve or refuse an ad request, from the bot or the mini app. Returns "ok" or an error code.
@@ -722,8 +722,8 @@ async function tick() {
           c.clicks = (c.clicks || 0) + o.clicks; c.broken = (c.broken || 0) + 1; c.banned = true; c.listed = false; save();
           const h = hhmm(o.postedAt + AD_HOURS * 3600e3);
           const adv = db.users[o.adv], own = db.users[c.owner];
-          try { await say(o.adv, L(adv) === "fr" ? `⚠️ Ta pub sur <b>${esc(c.title)}</b> a été supprimée par le propriétaire avant la fin des 24 h (il restait ${h}).\n\nLa chaîne est retirée du catalogue. 👆 ${o.clicks} clics avant la suppression.\n\nPour être aidé : https://t.me/jeremstyke?direct` : `⚠️ Your ad on <b>${esc(c.title)}</b> was deleted by the owner before the 24h ended (${h} left).\n\nThe channel has been removed from the catalog. 👆 ${o.clicks} clicks before it was deleted.\n\nNeed help: https://t.me/jeremstyke?direct`, undefined, false); } catch {}
-          try { await say(c.owner, L(own) === "fr" ? `⚠️ La pub de la commande #${o.id} a été supprimée de <b>${esc(c.title)}</b> avant 24 h.\n\n🚫 Ta chaîne est <b>désactivée</b> sur PostPay jusqu'à sa réactivation par notre équipe. Pour la demander, écris à https://t.me/jeremstyke?direct` : `⚠️ The ad of order #${o.id} was deleted from <b>${esc(c.title)}</b> before 24h.\n\n🚫 Your channel is <b>disabled</b> on PostPay until our team reactivates it. To ask for it, write to https://t.me/jeremstyke?direct`, undefined, false); } catch {}
+          try { await say(o.adv, L(adv) === "fr" ? `⚠️ Ta pub sur <b>${esc(c.title)}</b> a été supprimée par le propriétaire avant la fin des 24 h (il restait ${h}).\n\nLa chaîne est retirée du catalogue. 👆 ${o.clicks} clics avant la suppression.\n\nPour être aidé : https://t.me/jeremstyke` : `⚠️ Your ad on <b>${esc(c.title)}</b> was deleted by the owner before the 24h ended (${h} left).\n\nThe channel has been removed from the catalog. 👆 ${o.clicks} clicks before it was deleted.\n\nNeed help: https://t.me/jeremstyke`, undefined, false); } catch {}
+          try { await say(c.owner, L(own) === "fr" ? `⚠️ La pub de la commande #${o.id} a été supprimée de <b>${esc(c.title)}</b> avant 24 h.\n\n🚫 Ta chaîne est <b>désactivée</b> sur PostPay jusqu'à sa réactivation par notre équipe. Pour la demander, écris à https://t.me/jeremstyke` : `⚠️ The ad of order #${o.id} was deleted from <b>${esc(c.title)}</b> before 24h.\n\n🚫 Your channel is <b>disabled</b> on PostPay until our team reactivates it. To ask for it, write to https://t.me/jeremstyke`, undefined, false); } catch {}
           await askApproval(c, own);
           continue;
         }

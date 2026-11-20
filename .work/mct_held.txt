@@ -1050,7 +1050,7 @@ function help() {
   $('#view').innerHTML = `<h1>${t('help')}</h1><button class="btn" id="faqb" style="margin:0 0 12px;width:100%">${t('faq_b')}</button><button class="btn ghost" onclick="go('start')" style="margin:0 0 12px;width:100%">${t('st_h')}</button>` + ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'h10'].map((k, i) => { const [e, b, s] = t(k); return `<div class="row"><span class="med sm" style="--c:${COLORS[i % COLORS.length]}">${e}</span><div class="who"><b>${b}</b><small style="white-space:normal">${s}</small></div></div>`; }).join('') + `<p class="note">${t('disclaimer')}</p>`;
   // 13 oct 2026: the complete FAQ on the game's website, in the player's language
   $('#faqb').onclick = () => { haptic(); const u = 'https://jeremstyke.github.io/memecointycoon/' + (LANG === 'en' ? '' : LANG + '/') + 'faq/'; try { tw.openLink(u); } catch (e) { window.open(u, '_blank'); } };
-  if ($('#askb')) $('#askb').onclick = () => { haptic(); try { tw.openTelegramLink('https://t.me/jeremstyke?direct'); } catch (e) { window.open('https://t.me/jeremstyke?direct', '_blank'); } };
+  if ($('#askb')) $('#askb').onclick = () => { haptic(); try { tw.openTelegramLink('https://t.me/jeremstyke'); } catch (e) { window.open('https://t.me/jeremstyke', '_blank'); } };
 }
 
 /* ---------- coin sheet ---------- */

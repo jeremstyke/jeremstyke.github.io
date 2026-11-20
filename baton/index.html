@@ -1874,7 +1874,7 @@ $('#sheet').onclick = async (e) => {
     return;
   }
   if (k === 'tuto') { closeSheet(); return tutorial(); }
-  if (k === 'contact') { e.preventDefault(); return openLink('https://t.me/jeremstyke?direct'); }
+  if (k === 'contact') { e.preventDefault(); return openLink('https://t.me/jeremstyke'); }
   if (k === 'harv') { closeSheet(); return $('#harvest').onclick(); }
   if (k === 'friend') {
     const r = await api('friends');
