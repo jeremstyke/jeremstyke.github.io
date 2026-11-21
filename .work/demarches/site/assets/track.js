@@ -22,4 +22,10 @@
     var a = e.target.closest && e.target.closest('a[href*="amazon.fr"]');
     if (a) { var m = a.href.match(/[?&]k=([^&]+)/); hit('amz', m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : a.href.split('?')[0]); }
   }, true);
+  // 21 nov 2026 : clics vers le partenaire NordVPN, et chargement de l'encart (assets/partner.js)
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href*="go.nordvpn.net"]');
+    if (a) hit('vpn', location.pathname);
+  }, true);
+  try { var ps = document.createElement('script'); ps.src = '/assets/partner.js?v=20261121'; document.head.appendChild(ps); } catch(e) {}
 })();
