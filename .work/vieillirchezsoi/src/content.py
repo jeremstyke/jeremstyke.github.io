@@ -187,7 +187,7 @@ g("deambulateur-ou-rollator/",
 <h2>Prise en charge et conseils</h2>
 <p>Les déambulateurs et les rollators peuvent être pris en charge en partie par l'Assurance maladie sur prescription médicale, la mutuelle pouvant compléter. Les conditions varient selon le modèle : demandez au médecin et au pharmacien avant d'acheter. Le médecin, le kinésithérapeute ou l'ergothérapeute peut aussi vous dire quel type d'aide convient le mieux.</p>
 <p>Une aide à la marche ne fait pas tout : pensez aussi à dégager les passages et à poser des <a href="{AMZ:veilleuse detecteur de mouvement}" """ + A + """>veilleuses à détecteur</a>. Toutes les étapes sont dans notre <a href="{R}checklist/">checklist du maintien à domicile</a>, et notre guide sur les <a href="{R}barre-d-appui-salle-de-bain/">barres d'appui</a> complète l'équipement.</p>
-<p>Pour comparer des modèles précis, consultez notre <a href="{R}meilleur-deambulateur/">sélection des meilleurs déambulateurs</a>.</p>
+<p>Pour comparer des modèles précis, consultez notre <a href="{R}meilleur-deambulateur/">sélection des meilleurs déambulateurs</a> et notre <a href="{R}meilleur-rollator/">comparatif des meilleurs rollators</a>.</p>
 """,
   faq=[("Quelle est la différence entre un déambulateur et un rollator ?", "Le déambulateur se soulève ou se pousse lentement et offre un appui très stable. Le rollator roule, a des freins et souvent un siège : il convient mieux pour sortir."),
        ("À quelle hauteur régler un rollator ?", "Repère courant : debout, bras le long du corps, les poignées arrivent à peu près au pli du poignet. Suivez la notice et faites vérifier en cas de doute."),
