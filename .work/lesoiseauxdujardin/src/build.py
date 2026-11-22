@@ -148,7 +148,7 @@ BYLINE = ' · par <a href="/a-propos/" rel="author">' + AUTHOR_NAME.split()[0] +
 
 
 # Boutons de partage (22 nov 2026, demande de Jeremy)
-SHARE_SKIP = ('', 'a-propos/', 'mentions-legales/', 'confidentialite/', 'contact/', 'publicite/', 'partenariats/', '404-tmp/')
+SHARE_SKIP = ('a-propos/', 'mentions-legales/', 'confidentialite/', 'contact/', 'publicite/', 'partenariats/', '404-tmp/')
 def share_html(url, title):
     from urllib.parse import quote
     import json as _j
@@ -173,7 +173,9 @@ def share_html(url, title):
 def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None, kind='website'):
     R = '../' * path.count('/')
     url = BASE + '/' + path
-    if path not in SHARE_SKIP and body.count('</article>') == 1: body = body.replace('</article>', share_html(url, title) + '</article>')
+    if path not in SHARE_SKIP:
+        if body.count('</article>') == 1: body = body.replace('</article>', share_html(url, title) + '</article>')
+        else: body += '<div class="wrap">' + share_html(url, title) + '</div>'
     ld = [{"@context": "https://schema.org", "@type": "WebSite", "name": SITE, "url": BASE + '/', "inLanguage": "fr", "publisher": PUBLISHER_LD}]
     if path == '': ld.append(dict({"@context": "https://schema.org"}, **PUBLISHER_LD))
     if crumbs:
