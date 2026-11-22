@@ -4457,3 +4457,42 @@ g("cadeau-noel-personne-agee-a-domicile/",
        ("Comment offrir un cadeau de sécurité sans vexer un parent âgé ?", "Parlez-en avant, présentez l'objet par ce qu'il apporte (lire plus facilement, se lever sans effort) plutôt que par la fragilité, et laissez la personne choisir le modèle. Pour un équipement important comme un fauteuil releveur, faites-le essayer si possible."),
        ("Faut-il acheter ses cadeaux de Noël pendant le Black Friday ?", "C'est un bon moment pour commander tôt et éviter les retards de livraison de décembre. Comparez quand même le prix avec celui des semaines précédentes et vérifiez les caractéristiques importantes, comme l'arrêt automatique d'un plaid chauffant.")],
   short="Cadeaux de Noël personne âgée", cat="Vie quotidienne")
+
+
+AUTO_META['fiche-urgence-personne-agee/'] = ('🆘', 'sable')
+g("fiche-urgence-personne-agee/",
+  "Fiche d'urgence personne âgée à imprimer (PDF gratuit)",
+  "Fiche d'urgence à afficher chez une personne âgée",
+  "Fiche d'urgence gratuite à imprimer pour une personne âgée qui vit chez elle : contacts, médecin, traitements, allergies. À afficher sur le frigo pour les secours.",
+  """
+<p>Quand les secours arrivent chez une personne âgée qui a fait un malaise ou une chute, elle n'est pas toujours en état de répondre. Une fiche d'urgence affichée sur le réfrigérateur leur donne en quelques secondes l'essentiel : qui prévenir, quel médecin, quels médicaments, quelles allergies. Voici une fiche gratuite à imprimer et à remplir.</p>
+<p><a class="btn" href="{R}assets/fiche-urgence-personne-agee.pdf" download>Télécharger la fiche d'urgence (PDF, 1 page)</a></p>
+<p class="small">Gratuit, sans inscription. À imprimer et remplir à la main.</p>
+<h2>Que contient la fiche d'urgence ?</h2>
+<table><thead><tr><th>Rubrique</th><th>Pourquoi c'est utile</th></tr></thead><tbody>
+<tr><td>Numéros d'urgence (15, 18, 17, 112, 114)</td><td>Pour la personne elle-même, un voisin ou une aide à domicile qui la trouverait mal</td></tr>
+<tr><td>Identité et adresse complète, avec étage et code</td><td>Pour guider les secours sans chercher</td></tr>
+<tr><td>Deux personnes à prévenir</td><td>Les secours peuvent appeler la famille tout de suite</td></tr>
+<tr><td>Médecin traitant, pharmacie</td><td>Pour connaître l'historique de santé</td></tr>
+<tr><td>Traitements, allergies, maladies importantes</td><td>C'est ce que le médecin du SAMU demande en premier</td></tr>
+<tr><td>Appareils (pacemaker, appareil auditif...)</td><td>Certains changent la prise en charge</td></tr>
+<tr><td>Personne de confiance, directives anticipées</td><td>Pour savoir qui consulter et où trouver les documents</td></tr>
+<tr><td>Animal, double des clés, aide à domicile</td><td>Pour que la maison ne reste pas sans solution en cas d'hospitalisation</td></tr>
+</tbody></table>
+<h2>Où afficher la fiche d'urgence ?</h2>
+<p>Sur la porte du réfrigérateur, avec un aimant, ou derrière la porte d'entrée. Ce sont les deux endroits que les secours et les proches regardent spontanément. Évitez un tiroir ou un classeur : le jour où l'on en a besoin, personne ne pense à les ouvrir.</p>
+<p>Notre conseil : remplissez-la avec votre parent, pas à sa place. C'est l'occasion de faire le point sur ses médicaments, de vérifier qu'il sait appeler le 15, et de parler sans dramatiser de ce qui se passerait en cas de chute.</p>
+<h2>Les erreurs qui rendent la fiche inutile</h2>
+<ul>
+<li><strong>Une liste de médicaments périmée.</strong> Refaites la fiche à chaque changement de traitement, et notez la date de mise à jour en bas.</li>
+<li><strong>Un seul contact.</strong> Si votre téléphone est éteint, les secours doivent pouvoir joindre quelqu'un d'autre.</li>
+<li><strong>Une écriture illisible.</strong> Écrivez en majuscules, au stylo noir.</li>
+</ul>
+<p>La fiche ne remplace pas un vrai dispositif d'alerte pour une personne qui vit seule et risque de tomber. Pour ça, voyez notre comparatif des <a href="{R}meilleure-montre-gps-senior/">montres GPS avec bouton SOS</a> et notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement</a> et limiter les chutes.</p>
+<h2>Pour les aidants, CCAS, associations et professionnels</h2>
+<p>La fiche se photocopie librement pour un usage non commercial : distribution aux bénéficiaires d'un service d'aide à domicile, d'un CCAS ou d'une association d'aidants. Si vous la proposez sur votre site, merci de mettre un lien vers cette page plutôt que vers le fichier PDF, pour que chacun ait toujours la dernière version.</p>
+""",
+  faq=[("Quels numéros d'urgence noter chez une personne âgée ?", "Le 15 pour le SAMU, le 18 pour les pompiers, le 17 pour la police ou la gendarmerie, le 112 qui fonctionne dans toute l'Europe, et le 114, joignable par SMS ou appli, pour les personnes sourdes, malentendantes ou qui ne peuvent pas parler."),
+       ("Où ranger une fiche d'urgence pour qu'on la trouve ?", "Sur le réfrigérateur ou derrière la porte d'entrée, bien visible. Un tiroir ou un classeur ne sera pas ouvert dans l'urgence."),
+       ("À quelle fréquence mettre à jour la fiche d'urgence ?", "À chaque changement de traitement, de médecin ou de contact, et au moins une fois par an. Notez la date de mise à jour en bas de la fiche.")],
+  short="Fiche d'urgence à imprimer", cat="Sécurité")

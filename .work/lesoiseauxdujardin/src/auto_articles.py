@@ -3854,3 +3854,34 @@ g("meilleure-mangeoire-anti-ecureuil/",
        ("Une mangeoire anti-écureuil arrête-t-elle aussi les pigeons ?",
         "Oui pour les modèles à contrepoids réglable, comme la Squirrel Buster Plus, et pour les cages comme la Gardman A01820, présentée aussi comme anti-pigeons.")],
   short="Top 9 mangeoires anti-écureuil", cat="Mangeoires")
+
+
+AUTO_META['fiche-oiseaux-du-jardin-a-imprimer/'] = ('🖨️', 'sable')
+g("fiche-oiseaux-du-jardin-a-imprimer/",
+  "Fiche oiseaux du jardin à imprimer : 20 espèces (PDF gratuit)",
+  "Fiche des oiseaux du jardin à imprimer",
+  "Fiche gratuite à imprimer pour reconnaître les 20 oiseaux les plus courants du jardin, avec une feuille de comptage. PDF sans inscription, pour la maison ou l'école.",
+  """
+<p>Voici une fiche gratuite à imprimer pour reconnaître les 20 oiseaux que l'on voit le plus souvent au jardin, du moineau au pic épeiche. Elle tient sur une page, avec pour chaque espèce sa taille et les deux ou trois détails qui permettent de la reconnaître. Une deuxième page sert de feuille de comptage.</p>
+<p><a class="btn" href="{R}assets/fiche-oiseaux-du-jardin.pdf" download>Télécharger la fiche (PDF, 2 pages)</a></p>
+<p class="small">Gratuit, sans inscription. Imprimez-la en couleur ou en noir et blanc, elle reste lisible.</p>
+<h2>Ce que contient la fiche</h2>
+<ul>
+<li><strong>Page 1 :</strong> les 20 espèces les plus fréquentes dans les jardins de France, avec leur taille et leurs signes distinctifs, et une case pour noter la date et le nombre d'oiseaux vus.</li>
+<li><strong>Page 2 :</strong> une feuille de comptage d'une heure, prête à remplir.</li>
+</ul>
+<p>Les espèces : moineau domestique, mésange charbonnière, mésange bleue, merle noir, rougegorge, pinson des arbres, tourterelle turque, pigeon ramier, étourneau sansonnet, pie bavarde, corneille noire, verdier d'Europe, chardonneret élégant, accenteur mouchet, troglodyte mignon, mésange à longue queue, pic épeiche, sittelle torchepot, grive musicienne et rougequeue noir.</p>
+<h2>Comment reconnaître un oiseau du jardin rapidement ?</h2>
+<p>Commencez par la taille, en le comparant à trois oiseaux que tout le monde connaît : le moineau, le merle et le pigeon. Regardez ensuite la tête et le ventre, là où se trouvent les couleurs les plus nettes. Enfin, observez ce qu'il fait : un oiseau qui descend le tronc la tête en bas est une sittelle, une petite boule brune à la queue dressée est un troglodyte.</p>
+<p>Par exemple, deux petits oiseaux à ventre jaune se ressemblent beaucoup : la mésange charbonnière a une bande noire au milieu du ventre et la tête noire, la mésange bleue une calotte bleue et pas de bande. Pour aller plus loin, chaque espèce a sa fiche détaillée sur le site, comme celle de la <a href="{R}mesange-charbonniere/">mésange charbonnière</a>, du <a href="{R}rouge-gorge/">rougegorge</a> ou du <a href="{R}chardonneret-elegant/">chardonneret</a>.</p>
+<h2>Utiliser la fiche pour le comptage national des oiseaux des jardins</h2>
+<p>La LPO et le Muséum national d'Histoire naturelle organisent un comptage national des oiseaux des jardins deux fois par an, dont un le dernier week-end de janvier. Le principe : observer son jardin, son balcon ou un parc pendant une heure et noter les oiseaux vus.</p>
+<p>Le point qui trompe tout le monde : pour chaque espèce, on note <strong>le plus grand nombre d'oiseaux vus en même temps</strong>, pas le total des passages. Un merle qui revient dix fois à la mangeoire compte pour un. La feuille de comptage de la page 2 est faite pour ça. Les résultats se saisissent ensuite sur le site de l'Observatoire des oiseaux des jardins.</p>
+<p>Notre conseil : faites le comptage près d'une mangeoire garnie depuis quelques jours, les oiseaux auront pris l'habitude de venir. Notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a> explique quoi mettre et où la placer.</p>
+<h2>Pour les écoles, les centres de loisirs et les associations</h2>
+<p>La fiche se photocopie librement pour un usage non commercial : en classe, en sortie nature ou lors d'une animation. Si vous la proposez sur votre site ou votre blog, merci de mettre un lien vers cette page plutôt que vers le fichier PDF, pour que vos lecteurs aient toujours la dernière version.</p>
+""",
+  faq=[("Quels sont les oiseaux les plus courants dans les jardins en France ?", "Le moineau domestique, la mésange charbonnière, la mésange bleue, le merle noir, le rougegorge, le pinson des arbres et la tourterelle turque font partie des espèces que l'on voit le plus souvent. La fiche en présente 20 au total."),
+       ("Quand a lieu le comptage national des oiseaux des jardins ?", "Il est organisé deux fois par an par la LPO et le Muséum national d'Histoire naturelle, dont une fois le dernier week-end de janvier. Les dates exactes de chaque édition sont annoncées sur le site de l'Observatoire des oiseaux des jardins."),
+       ("Peut-on utiliser cette fiche en classe ?", "Oui, elle est gratuite et se photocopie librement pour un usage non commercial, en classe comme en animation nature.")],
+  short="Fiche oiseaux à imprimer", cat="Observer")
