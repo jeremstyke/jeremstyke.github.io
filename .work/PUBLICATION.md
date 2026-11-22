@@ -6,7 +6,7 @@ Les règles détaillées de chaque site restent dans son AUTOMATION.md (ou fichi
 
 ## Règles communes (toutes les tâches)
 - Français, tutoie Jeremy dans le message final, sois très concis (il lit sur mobile).
-- JAMAIS de tiret long (—) ni demi-cadratin (–), ni dans les fichiers, ni dans les messages.
+- JAMAIS de tiret long ni de demi-cadratin, ni dans les fichiers, ni dans les messages.
 - Publications seulement du lundi au vendredi, UNE page par site et par jour au maximum. Samedi et dimanche : entretien seulement.
 - Si une page échoue, continue avec les autres et signale-le à la fin.
 - Avant d'écrire un sujet, vérifie que son slug n'existe pas déjà ; s'il existe, coche la ligne et prends la suivante.
