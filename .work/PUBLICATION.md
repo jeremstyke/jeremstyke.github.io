@@ -9,6 +9,7 @@ Les règles détaillées de chaque site restent dans son AUTOMATION.md (ou fichi
 - JAMAIS de tiret long ni de demi-cadratin, ni dans les fichiers, ni dans les messages.
 - Publications seulement du lundi au vendredi, UNE page par site et par jour au maximum. Samedi et dimanche : entretien seulement.
 - Si une page échoue, continue avec les autres et signale-le à la fin.
+- Articles manuels : Jeremy peut demander un article à tout moment dans une conversation. Avant de publier sur un site, regarde l'historique Git du jour (git log --since="today 00:00") : si une page a déjà été publiée aujourd'hui sur ce site, ne publie rien sur ce site et dis-le en une ligne. Le sujet prévu passe au prochain créneau.
 - Avant d'écrire un sujet, vérifie que son slug n'existe pas déjà ; s'il existe, coche la ligne et prends la suivante.
 - Aucune requête SQL destructive. Ne dépense jamais d'argent.
 - Ne mets jamais « by @jeremstyke » sur AI Football Predictor.
