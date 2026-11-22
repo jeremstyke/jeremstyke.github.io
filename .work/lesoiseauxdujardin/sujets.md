@@ -7,6 +7,7 @@
 - [x] boule-de-graisse-oiseaux/ | boule de graisse oiseaux | Nourrir | sans filet, recette maison, quand en donner
 - [x] eau-pour-les-oiseaux-en-hiver/ | abreuvoir oiseaux hiver | Nourrir | eau propre, gel, pas de sel ni antigel
 - [ ] nettoyer-une-mangeoire/ | nettoyer une mangeoire | Mangeoires | fréquence, produits, maladies (salmonellose, trichomonose)
+- [ ] livres-sur-les-oiseaux/ | livre sur les oiseaux du jardin | guides d'identification papier pour débutant et enfant avec {AMZ}, livres de chants avec QR codes, beaux livres à offrir, livres audio nature avec un lien {AUDIBLE} ; relie activite-oiseaux-avec-enfants/
 - [ ] difference-hirondelle-martinet/ | différence hirondelle martinet | Observer | silhouette, cri, vol, période de présence, où ils nichent ; tableau comparatif
 - [ ] oiseaux-ne-viennent-pas-a-la-mangeoire/ | les oiseaux ne viennent pas à ma mangeoire | Mangeoires | délai normal, emplacement, graines, chat, propreté, saison
 - [ ] quand-commencer-a-nourrir-les-oiseaux/ | quand commencer à nourrir les oiseaux | Nourrir | période conseillée par la LPO, signes que les oiseaux ont besoin d'aide, comment commencer sans créer de dépendance
