@@ -2353,6 +2353,7 @@ g("fauteuil-roulant-electrique-comment-choisir/",
 <p>Pour des trajets plus longs en extérieur, un scooter électrique est parfois plus adapté qu'un fauteuil : voyez notre <a href="{R}meilleur-scooter-electrique-senior/">comparatif des scooters électriques senior</a>.</p>
 <h2>Les erreurs fréquentes</h2>
 <p>Acheter en ligne un fauteuil à usage quotidien sans savoir qu'il aurait pu être remboursé. Choisir le modèle le plus léger sans vérifier l'autonomie. Oublier de mesurer la porte des toilettes. Croire qu'un fauteuil « compatible avion » sera forcément accepté à bord. Et sous-estimer la place nécessaire pour le ranger et le recharger. Un essai chez un distributeur et l'avis d'un ergothérapeute évitent presque toutes ces déceptions.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.justice.fr/fiche/lassurance-maladie-prend-charge-fauteuils-roulants" target="_blank" rel="noopener">Justice.fr, L'Assurance maladie prend en charge les fauteuils roulants</a>, <a href="https://www.ordre.pharmacien.fr/les-communications/focus-sur/les-actualites/fauteuils-roulants-le-point-sur-la-prise-en-charge-integrale-et-les-regles-de-prescription" target="_blank" rel="noopener">Ordre national des pharmaciens, Fauteuils roulants : prise en charge intégrale et règles de prescription</a> (vérifié le 22 novembre 2026)</p>
 """,
   faq=[("Un fauteuil roulant électrique est-il remboursé ?", "Depuis le 1er décembre 2025, un fauteuil roulant inscrit sur la liste des produits remboursables et prescrit par un médecin habilité (pour un fauteuil électrique, un médecin MPR ou titulaire d'un diplôme d'appareillage) est pris en charge à 100 % par l'Assurance maladie. Un fauteuil acheté sans prescription n'est pas remboursé."),
        ("Fauteuil électrique pliant ou non pliant ?", "Un pliant convient aux sorties et aux voyages en voiture, à condition que quelqu'un puisse le soulever. Pour une personne qui passe la journée assise, un fauteuil à châssis fixe offre plus de confort et de réglages. Le prescripteur et l'ergothérapeute vous aident à trancher."),
@@ -2832,6 +2833,7 @@ g("bouton-appel-urgence-senior/",
 </ul>
 <p>Si la personne tombe souvent, a des malaises ou se sent moins sûre d'elle, parlez-en à son médecin : il pourra en chercher la cause et vous orienter, par exemple vers un ergothérapeute pour adapter le domicile.</p>
 <p>Certains téléphones portables ont aussi une touche d'urgence au dos : notre <a href="{R}meilleur-telephone-portable-senior/">comparatif des portables pour seniors</a> indique lesquels. Pour choisir un modèle précis, voyez notre <a href="{R}meilleur-bouton-appel-urgence/">comparatif des boutons d'appel d'urgence sans abonnement</a>.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.justice.fr/fiche/impot-revenu-credit-impot-emploi-salarie-domicile" target="_blank" rel="noopener">Justice.fr, Crédit d'impôt pour l'emploi d'un salarié à domicile</a>, <a href="https://www.sante.fr/node/8753711" target="_blank" rel="noopener">Sante.fr, Les aides fiscales pour l'aide à domicile</a> (vérifié le 22 novembre 2026)</p>
 """,
   faq=[("Existe-t-il un bouton d'appel d'urgence sans abonnement ?", "Oui. Certains boutons, pendentifs ou montres appellent directement des proches enregistrés, grâce à une carte SIM. Il n'y a pas de frais de service, mais il faut un forfait mobile actif et des proches qui répondent. Sans réponse, personne d'autre ne prend le relais."),
        ("Pendentif ou bracelet d'appel d'urgence : que choisir ?", "Celui que la personne portera tout le temps, y compris sous la douche. Le pendentif est plus facile à attraper, le bracelet plus discret. Vérifiez la résistance à l'eau, la taille du bouton et la recharge."),
@@ -3543,7 +3545,7 @@ g("meilleur-lit-medicalise/",
 
 AUTO_META['personne-agee-qui-tombe-la-nuit/'] = ('🌙', 'lilas')
 g("personne-agee-qui-tombe-la-nuit/",
-  "Personne âgée qui tombe la nuit : causes et solutions concrètes",
+  "Personne âgée qui tombe la nuit : causes et solutions",
   "Votre proche âgé tombe la nuit : comprendre pourquoi et agir",
   "Lever trop rapide, pénombre, trajet vers les toilettes : pourquoi une personne âgée tombe la nuit, quoi installer près du lit et quand consulter le médecin.",
   """
@@ -3988,19 +3990,21 @@ g("procuration-bancaire-parent-age/",
 
 AUTO_META['meilleur-elevateur-de-bain/'] = ('🏆', 'ciel')
 g("meilleur-elevateur-de-bain/",
-  "Meilleur élévateur de bain 2026 : 8 sièges électriques comparés",
-  "Meilleur élévateur de bain : 8 sièges élévateurs électriques comparés",
-  "Charge maximale, hauteur d'assise, dossier inclinable, poids à soulever : 8 élévateurs de bain électriques comparés d'après les fiches des fabricants.",
+  "Élévateur de bain pour personne âgée 2026 : 7 modèles comparés",
+  "Meilleur élévateur de bain pour personne âgée : 7 sièges électriques comparés",
+  "Élévateur de bain pour une personne âgée qui ne se relève plus de la baignoire : 7 modèles électriques comparés (charge, hauteur, dossier, poids).",
   """
-<p>Pour la plupart des personnes, un élévateur de bain à dossier inclinable et batterie dans la télécommande, comme l'Aquatec Orca ou le Bellavita, fait très bien l'affaire : ils acceptent jusqu'à 140 kg et descendent à quelques centimètres du fond. Les vraies différences se jouent ailleurs : le poids de la plus lourde pièce à soulever, la largeur une fois les rabats ouverts et la garantie.</p>
+<p>Pour une personne âgée qui n'arrive plus à se relever du fond de la baignoire, un élévateur de bain à dossier inclinable et batterie dans la télécommande, comme l'Aquatec Orca ou le Bellavita, fait très bien l'affaire : ils acceptent jusqu'à 140 kg et descendent à quelques centimètres du fond. Les vraies différences se jouent ailleurs : le poids de la plus lourde pièce à soulever, la largeur une fois les rabats ouverts et la garantie.</p>
 <p>Un élévateur de bain descend la personne assise au fond de la baignoire, puis la remonte à hauteur du rebord sur simple pression d'un bouton. Il permet de garder le bain quand se relever seul n'est plus possible, sans gros travaux. Avant d'acheter, un ergothérapeute peut vérifier qu'il convient à la personne et à la baignoire.</p>
 {CTA}
 <div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs (fiches techniques des marques, distributeurs de matériel médical, avis de la Haute Autorité de santé), sans test en main. Nous n'indiquons que les données lues sur ces fiches ; quand une information n'y figure pas, nous écrivons « non précisé ». Aucun prix n'est indiqué, car il change souvent.</div>
+<h2>Pourquoi un élévateur de bain aide une personne âgée ?</h2>
+<p>Entrer dans la baignoire, s'asseoir au fond puis se relever demande de la force dans les jambes, de l'équilibre et une prise solide sur des parois mouillées. C'est souvent le moment où la personne glisse, ou celui où elle reste bloquée au fond sans pouvoir remonter. Beaucoup de personnes âgées renoncent alors au bain, ou se lavent à la hâte par peur de ne plus pouvoir sortir. L'élévateur fait le travail le plus difficile : la personne s'assoit à hauteur du rebord, descend doucement dans l'eau et remonte de la même façon, sur simple pression d'un bouton.</p>
+<p>Il convient surtout à une personne qui tient encore assise, peut pivoter pour passer les jambes par-dessus le rebord, avec ou sans aide, et tient à garder son bain. Il ne remplace pas une aide humaine quand les transferts deviennent impossibles, et il ne rend pas le sol de la salle de bains moins glissant. Notre conseil : faites d'abord évaluer la toilette par un ergothérapeute ou le médecin, puis choisissez un modèle avec sécurité batterie faible et dossier inclinable si la personne fatigue vite.</p>
 <h2>Le comparatif en un coup d'œil</h2>
 <table><thead><tr><th>Modèle</th><th>Charge max</th><th>Hauteur d'assise</th><th>Dossier</th><th>Poids</th><th>Idéal pour</th></tr></thead><tbody>
 <tr><td>Invacare Aquatec Orca</td><td>140 kg (XL : 170 kg)</td><td>6 à 42 cm</td><td>8 à 40°</td><td>10,8 kg</td><td>Notre choix : le plus documenté</td></tr>
 <tr><td>Drive Bellavita</td><td>140 kg</td><td>6 à 48 cm</td><td>10 à 50°</td><td>9,7 kg</td><td>Le dossier le plus inclinable</td></tr>
-<tr><td>Bellavita Eco</td><td>140 kg</td><td>6 à 48 cm</td><td>10 à 50°</td><td>9,7 kg</td><td>Version sans capitonnage</td></tr>
 <tr><td>Identités Galapagos</td><td>140 kg</td><td>8 à 48 cm</td><td>10 à 45°</td><td>9,6 kg</td><td>Une assise large</td></tr>
 <tr><td>Invacare Aquatec Kogia</td><td>140 kg</td><td>6 à 42 cm</td><td>Jusqu'à 40°</td><td>10 kg + batterie 1,6 kg</td><td>Un modèle simple</td></tr>
 <tr><td>Kanjo</td><td>140 kg</td><td>6,5 à 45,5 cm</td><td>Jusqu'à 40°</td><td>10,5 kg</td><td>Une recharge rapide</td></tr>
@@ -4013,7 +4017,7 @@ g("meilleur-elevateur-de-bain/",
 <p><strong>Pour qui ?</strong> Une personne qui ne tient plus bien assise sans appui dans le dos et tient à garder son bain. C'est notre choix parce que c'est le modèle de cette sélection dont les caractéristiques sont les plus détaillées, et le seul à avoir reçu en janvier 2026 un avis favorable de la Haute Autorité de santé pour son inscription sur la liste des produits remboursables.</p>
 <ul>
 <li><strong>Points forts</strong> : dossier inclinable de 8 à 40°, assise de 6 à 42 cm, démontage en deux parties sans outils, housse amovible lavable à 60 °C. La descente est bloquée quand la batterie est trop faible, ce qui évite de rester coincé au fond. Version XL jusqu'à 170 kg.</li>
-<li><strong>Données utiles</strong> : 140 kg maximum, 10,8 kg sans télécommande, assise de 37,5 cm de large sans rabats et 71,5 cm avec. Batterie lithium-ion dans la télécommande, recharge en 4,5 heures, autonomie annoncée de 5 cycles pour une personne de 140 kg. Garantie 2 ans, batterie 1 an.</li>
+<li><strong>Données utiles</strong> : 140 kg maximum, 10,8 kg sans télécommande, assise de 39 cm de large rabats repliés et 71,5 cm rabats ouverts selon l'avis de la HAS. Batterie lithium-ion dans la télécommande, recharge en 4,5 heures, autonomie annoncée de 5 cycles pour une personne de 140 kg. Garantie 2 ans, batterie 1 an.</li>
 <li><strong>Limites</strong> : l'avis de la HAS ne vaut pas remboursement automatique : vérifiez auprès du pharmacien ou du prestataire. Indice d'étanchéité de la télécommande non précisé (elle est annoncée étanche et flottante).</li>
 </ul>
 <p><a href="{AMZ:Aquatec Orca elevateur de bain}" """ + A + """>Voir sur Amazon</a></p>
@@ -4027,17 +4031,8 @@ g("meilleur-elevateur-de-bain/",
 </ul>
 <p><a href="{AMZ:Drive Bellavita elevateur de bain}" """ + A + """>Voir sur Amazon</a></p>
 
-<h2>3. Bellavita Eco : la même base, sans capitonnage</h2>
-<p><strong>Pour qui ?</strong> Celui ou celle qui veut les caractéristiques du Bellavita sans housse confort, par exemple parce que la personne préfère une surface facile à rincer.</p>
-<ul>
-<li><strong>Points forts</strong> : mêmes repères que le Bellavita (6 à 48 cm, dossier de 10 à 50°, rabats de 35 à 70 cm), télécommande étanche et flottante, démontage en deux parties.</li>
-<li><strong>Données utiles</strong> : 140 kg maximum, 9,7 kg avec batterie. Garantie à vie sur le moteur, 2 ans sur la batterie et la télécommande selon le revendeur.</li>
-<li><strong>Limites</strong> : sans capitonnage, l'assise est plus dure : à éviter pour une personne très amaigrie ou à la peau fragile. Nombre de cycles par charge non précisé.</li>
-</ul>
-<p><a href="{AMZ:Bellavita Eco elevateur de bain}" """ + A + """>Voir sur Amazon</a></p>
-
-<h2>4. Identités Galapagos : une assise plus large</h2>
-<p><strong>Pour qui ?</strong> Une personne plus large d'épaules ou de hanches, qui se sent à l'étroit sur les assises de 35 à 38 cm.</p>
+<h2>3. Identités Galapagos : une assise plus large</h2>
+<p><strong>Pour qui ?</strong> Une personne plus large d'épaules ou de hanches, qui se sent à l'étroit sur les assises de 35 à 39 cm.</p>
 <ul>
 <li><strong>Points forts</strong> : assise de 40 x 50 cm, volets latéraux pliables qui portent la largeur à 72,5 cm, capitonnage intégral. Batterie lithium-ion dans la télécommande, recharge en 3 heures.</li>
 <li><strong>Données utiles</strong> : 140 kg maximum, hauteur de 8 à 48 cm, dossier de 10 à 45°, 9,6 kg sans télécommande. Le fabricant annonce une garantie à vie sur le moteur et la structure, 2 ans sur la batterie et la télécommande.</li>
@@ -4045,7 +4040,7 @@ g("meilleur-elevateur-de-bain/",
 </ul>
 <p><a href="{AMZ:Identites elevateur de bain Galapagos}" """ + A + """>Voir sur Amazon</a></p>
 
-<h2>5. Invacare Aquatec Kogia : un modèle simple</h2>
+<h2>4. Invacare Aquatec Kogia : un modèle simple</h2>
 <p><strong>Pour qui ?</strong> Une personne qui a besoin d'un élévateur sans options, avec une assise un peu plus profonde.</p>
 <ul>
 <li><strong>Points forts</strong> : assise de 6 à 42 cm, dossier jusqu'à 40°, assise de 37 cm de large et 45 cm de profondeur, revêtement antidérapant blanc en option lavable à 60 °C.</li>
@@ -4054,7 +4049,7 @@ g("meilleur-elevateur-de-bain/",
 </ul>
 <p><a href="{AMZ:Aquatec Kogia}" """ + A + """>Voir sur Amazon</a></p>
 
-<h2>6. Kanjo : une recharge rapide</h2>
+<h2>5. Kanjo : une recharge rapide</h2>
 <p><strong>Pour qui ?</strong> Un foyer où l'on oublie souvent de recharger la télécommande : sa batterie se recharge en 1 heure d'après la fiche.</p>
 <ul>
 <li><strong>Points forts</strong> : batterie lithium-ion, recharge en 1 heure, télécommande étanche et flottante, rabats qui font passer la largeur de 37,5 à 71 cm. Fabriqué en Allemagne d'après le revendeur.</li>
@@ -4063,7 +4058,7 @@ g("meilleur-elevateur-de-bain/",
 </ul>
 <p><a href="{AMZ:Kanjo elevateur de baignoire}" """ + A + """>Voir sur Amazon</a></p>
 
-<h2>7. Mangar Archimedes : pour l'aidant qui le démonte souvent</h2>
+<h2>6. Mangar Archimedes : pour l'aidant qui le démonte souvent</h2>
 <p><strong>Pour qui ?</strong> Un aidant qui doit sortir l'élévateur de la baignoire après chaque bain. Il se démonte en trois pièces, la plus lourde pesant 5,2 kg.</p>
 <ul>
 <li><strong>Points forts</strong> : charge maximale de 165 kg, la plus élevée de la sélection en version standard. Deux rabats de transfert conçus contre le pincement, quatre ventouses à dégagement rapide.</li>
@@ -4072,7 +4067,7 @@ g("meilleur-elevateur-de-bain/",
 </ul>
 <p><a href="{AMZ:Mangar Archimedes elevateur baignoire}" """ + A + """>Voir sur Amazon</a></p>
 
-<h2>8. Mangar Bathing Cushion : le plus léger</h2>
+<h2>7. Mangar Bathing Cushion : le plus léger</h2>
 <p><strong>Pour qui ?</strong> Quelqu'un qui veut un élévateur presque invisible une fois rangé. Ce n'est pas un siège rigide mais un coussin gonflable, relié à un petit compresseur.</p>
 <ul>
 <li><strong>Points forts</strong> : 2 kg seulement, se pose à plat au fond de la baignoire puis se gonfle jusqu'à 40 cm. Charge maximale de 150 kg. Télécommande annoncée étanche selon la norme IP67.</li>
@@ -4093,8 +4088,9 @@ g("meilleur-elevateur-de-bain/",
 """,
   faq=[("Un élévateur de bain est-il remboursé par la Sécurité sociale ?", "Ne comptez pas sur un remboursement automatique. En janvier 2026, la Haute Autorité de santé a rendu un avis favorable à l'inscription de l'Aquatec Orca sur la liste des produits remboursables, mais nous n'avons pas trouvé de tarif publié. Demandez au pharmacien, au prestataire ou à l'ergothérapeute ce qui s'applique à votre situation."),
        ("Quel poids maximum supporte un élévateur de bain ?", "La plupart des modèles acceptent 140 kg. Pour une personne plus lourde, regardez les versions XL (170 kg pour l'Aquatec Orca XL) ou le Mangar Archimedes, annoncé à 165 kg."),
-       ("Avez-vous testé ces élévateurs de bain ?", "Non. Cette sélection repose uniquement sur les fiches publiées par les fabricants, les revendeurs et l'avis de la Haute Autorité de santé. Nous n'indiquons que ce qui figure sur ces documents, sans note ni avis de prise en main.")],
-  short="Top 8 élévateurs de bain", cat="Salle de bains")
+       ("Un élévateur de bain évite-t-il les chutes dans la baignoire ?", "Il supprime le moment le plus difficile, se relever du fond de la baignoire, puisque l'assise remonte à hauteur du rebord. Il ne rend pas l'entrée et la sortie sans risque pour autant : gardez un tapis antidérapant, une barre d'appui à portée de main et, si besoin, une aide pour passer les jambes. Un ergothérapeute peut vérifier qu'il convient à la personne."),
+       ("Comment avez-vous choisi ces élévateurs de bain ?", "Uniquement à partir des fiches publiées par les fabricants, les revendeurs et l'avis de la Haute Autorité de santé, sans prise en main. Nous n'indiquons que ce qui figure sur ces documents, sans note ni avis inventé.")],
+  short="Top 7 élévateurs de bain", cat="Salle de bains")
 
 AUTO_META['habilitation-familiale/'] = ('⚖️', 'lilas')
 g("habilitation-familiale/",
@@ -4105,7 +4101,7 @@ g("habilitation-familiale/",
 <p>L'habilitation familiale permet à un proche (un enfant, un conjoint, un frère ou une sœur, par exemple) de représenter un parent qui ne peut plus défendre seul ses intérêts, sans passer par une tutelle ou une curatelle. C'est le juge qui l'accorde, mais une fois la décision rendue, la famille gère sans rendre de comptes annuels au tribunal.</p>
 <p>Elle convient bien aux familles qui s'entendent : le juge vérifie que les proches sont d'accord, ou du moins qu'ils ne s'y opposent pas. Si la famille se déchire sur la question, c'est souvent une autre mesure qui sera prononcée.</p>
 {CTA}
-<p class="note"><strong>Informations vérifiées le 19 novembre 2026</strong> sur service-public.gouv.fr et justice.fr. Ce sont des informations générales : pour une situation précise (patrimoine important, vente d'un bien, conflit familial), parlez-en à un notaire ou à un avocat.</p>
+<p class="note"><strong>Informations vérifiées le 22 novembre 2026</strong> sur justice.fr et justice.gouv.fr. Ce sont des informations générales : pour une situation précise (patrimoine important, vente d'un bien, conflit familial), parlez-en à un notaire ou à un avocat.</p>
 <h2>Dans quels cas peut-on demander une habilitation familiale ?</h2>
 <p>Il faut que les facultés mentales ou physiques de votre parent soient altérées, au point qu'il ne puisse plus exprimer sa volonté ou faire seul les actes de la vie courante. Cette altération doit être constatée par un médecin agréé, on y revient plus bas.</p>
 <p>La mesure n'est accordée qu'en cas de nécessité. Si une solution plus simple suffit, le juge ne l'ouvrira pas. Par exemple, si votre mère a toute sa tête mais ne peut plus se déplacer à la banque, une <a href="{R}procuration-bancaire-parent-age/">procuration bancaire</a> fait l'affaire. Si elle a signé un mandat de protection future, c'est lui qui s'applique. L'habilitation intervient quand ces outils ne suffisent plus ou n'ont pas été prévus à temps.</p>
@@ -4127,31 +4123,31 @@ g("habilitation-familiale/",
 <tr><td>Mandat de protection future</td><td>Le parent, à l'avance</td><td>Le mandataire qu'il a choisi</td><td>Selon le mandat</td><td>Activé quand l'état de santé l'exige</td></tr>
 <tr><td>Habilitation familiale</td><td>Le juge, sur demande d'un proche</td><td>Un ou plusieurs proches de la liste</td><td>Pas de compte de gestion, contrôle possible en cas de litige</td><td>10 ans maximum (générale), renouvelable</td></tr>
 <tr><td>Curatelle</td><td>Le juge</td><td>La personne, assistée d'un curateur</td><td>Encadrée par le juge</td><td>Fixée par le juge</td></tr>
-<tr><td>Tutelle</td><td>Le juge</td><td>Un tuteur qui représente la personne</td><td>Encadrée par le juge</td><td>5 ans en principe, jusqu'à 10 ans</td></tr>
+<tr><td>Tutelle</td><td>Le juge</td><td>Un tuteur qui représente la personne</td><td>Encadrée par le juge, comptes de gestion</td><td>Fixée par le juge, renouvelable</td></tr>
 </tbody></table>
 <p>La grande différence avec la tutelle, c'est l'allègement. Après le jugement, le juge n'intervient en principe plus, sauf pour certains actes graves. Pour une famille unie, c'est beaucoup moins lourd. Pour une famille où la confiance manque, c'est justement ce qui peut poser problème.</p>
 <h2>Générale ou limitée à certains actes : laquelle demander ?</h2>
 <p>L'<strong>habilitation spéciale</strong> porte sur un ou plusieurs actes précis, définis par le juge : vendre une voiture, résilier un bail, signer un contrat d'hébergement. Elle prend fin une fois les actes accomplis.</p>
-<p>L'<strong>habilitation générale</strong> couvre l'ensemble des actes, de la gestion courante des comptes aux décisions plus importantes. Le juge en fixe la durée, dans la limite de 10 ans. Elle peut être renouvelée pour la même durée sur un nouveau certificat médical, et jusqu'à 20 ans si l'état de la personne ne peut pas s'améliorer.</p>
+<p>L'<strong>habilitation générale</strong> couvre l'ensemble des actes, de la gestion courante des comptes aux décisions plus importantes. Le juge en fixe la durée, dans la limite de 10 ans. Elle peut être renouvelée pour la même durée sur un nouveau certificat médical, et jusqu'à 20 ans si l'état de la personne ne peut manifestement pas s'améliorer. Selon justice.fr, la demande de renouvellement se fait au moins 6 mois avant l'échéance.</p>
 <p>Le juge choisit aussi entre la <strong>représentation</strong> (le proche agit à la place de son parent) et l'<strong>assistance</strong> (le parent agit lui-même, accompagné par le proche, selon les règles de la curatelle).</p>
 <p>Notre conseil : si un seul acte pose problème, demandez une habilitation spéciale. Elle laisse plus de liberté à votre parent. Si la gestion de tous les jours devient impossible pour lui, l'habilitation générale évite de revenir devant le juge à chaque démarche.</p>
 <h2>Comment faire la demande, étape par étape</h2>
-<p><strong>1. Le certificat médical circonstancié.</strong> Il est obligatoire : sans lui, la demande est irrecevable. Il doit être rédigé par un médecin inscrit sur la liste du procureur de la République, et pas par le médecin traitant à ce titre. La liste s'obtient auprès du greffe du tribunal du lieu de résidence de votre parent. Ce certificat coûte 192 €, selon service-public.fr.</p>
+<p><strong>1. Le certificat médical circonstancié.</strong> Il est obligatoire : sans lui, la demande est irrecevable. Il doit être rédigé par un médecin inscrit sur la liste du procureur de la République, et pas par le médecin traitant à ce titre. La liste s'obtient auprès du greffe du tribunal du lieu de résidence de votre parent. Ce certificat coûte 192 € TTC selon justice.fr, il n'est pas remboursé par l'Assurance maladie, et des frais de déplacement peuvent s'ajouter si le médecin vient au domicile.</p>
 <p><strong>2. La requête.</strong> Elle s'adresse au juge des contentieux de la protection (l'ancien juge des tutelles), au tribunal judiciaire ou au tribunal de proximité dont dépend votre parent. Un formulaire en ligne existe sur service-public.fr. Joignez la copie intégrale de l'acte de naissance de votre parent, les pièces d'identité (la sienne et la vôtre), le certificat médical, et si possible les lettres d'accord des autres proches. Si vous envoyez des scans trop lourds, l'outil gratuit <a href="https://demarches.cvlibre.com/" target="_blank" rel="noopener">PDF Démarches France</a> réduit et fusionne les justificatifs en un seul fichier.</p>
 <p><strong>3. L'audition.</strong> Le juge entend votre parent, sauf si le médecin agréé estime que cela nuirait à sa santé ou qu'il ne peut pas s'exprimer. Il entend aussi la personne qui sera habilitée, et les autres proches s'il le juge utile, parfois par simple questionnaire. L'audience n'est pas publique.</p>
-<p><strong>4. La décision.</strong> Le juge vérifie que la mesure est conforme aux intérêts de votre parent et que la famille est d'accord ou ne s'y oppose pas. Il doit statuer dans un délai d'un an maximum. L'avocat n'est pas obligatoire, et une aide juridictionnelle est possible si les ressources sont faibles.</p>
+<p><strong>4. La décision.</strong> Le juge vérifie que la mesure est conforme aux intérêts de votre parent et que la famille est d'accord ou ne s'y oppose pas. Le délai varie selon les tribunaux : le greffe peut vous renseigner. L'avocat n'est pas obligatoire. Si vous en prenez un, l'aide juridictionnelle peut être demandée selon vos ressources ; elle ne finance pas le certificat médical.</p>
 <p>Pour garder tous ces papiers au même endroit, un trieur ou un classeur dédié rend vraiment service, surtout si plusieurs frères et sœurs se partagent les démarches. <a href="{AMZ:trieur documents administratifs}" """ + A + """>Voir les trieurs de documents</a></p>
 <h2>Ce que le proche habilité ne peut pas faire seul</h2>
-<p>Même avec une habilitation générale, certains actes demandent l'autorisation du juge : une donation, la vente de la résidence principale ou secondaire, la désignation ou la modification du bénéficiaire de certains contrats d'assurance-vie, ou un acte où les intérêts du proche et ceux du parent s'opposent.</p>
-<p>D'autres sont tout simplement interdits : racheter les biens de son parent, faire du commerce en son nom ou se porter caution pour lui. Même sans contrôle régulier, gardez une trace claire des opérations. En cas de désaccord dans la famille, le juge peut demander des comptes.</p>
+<p>Même avec une habilitation générale, certains actes demandent l'autorisation du juge : une donation, la renonciation à une succession déficitaire, la vente ou la location du logement de votre parent, ou un acte où les intérêts du proche et ceux du parent s'opposent (par exemple dans une succession où le proche habilité est aussi héritier).</p>
+<p>D'autres sont tout simplement interdits : acheter ou louer pour soi les biens de son parent, faire du commerce en son nom avec ses biens, se porter caution en son nom ou souscrire pour lui une assurance en cas de décès. Même sans contrôle régulier, gardez une trace claire des opérations. En cas de désaccord dans la famille, le juge peut demander des comptes.</p>
 <h2>Quand l'habilitation prend-elle fin ?</h2>
 <p>L'habilitation générale s'arrête au décès de la personne protégée, à la fin de sa durée si elle n'est pas renouvelée, sur décision du juge (mainlevée), ou si une sauvegarde de justice, une curatelle ou une tutelle est prononcée. Elle s'arrête aussi au décès du proche habilité, si personne ne peut prendre le relais. L'habilitation spéciale, elle, se termine dès que les actes prévus sont faits.</p>
 <p>La protection juridique ne règle pas tout. Si votre parent vit seul, pensez aussi à sa sécurité au quotidien : une <a href="{R}teleassistance-comment-ca-marche/">téléassistance</a>, un logement adapté grâce à notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a>, et les aides locales que le <a href="{R}ccas-aides-personnes-agees/">CCAS</a> peut vous indiquer.</p>
-<p class="sources"><strong>Sources</strong> : <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F33367" target="_blank" rel="noopener">Service Public, Habilitation familiale</a>, <a href="https://www.justice.fr/fiche/habilitation-familiale" target="_blank" rel="noopener">Justice.fr, Habilitation familiale</a>, <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F2120" target="_blank" rel="noopener">Service Public, Tutelle d'un majeur</a> (vérifié le 19 novembre 2026)</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.justice.fr/fiche/habilitation-familiale" target="_blank" rel="noopener">Justice.fr, Habilitation familiale</a>, <a href="https://www.justice.fr/fiche/cout-dune-tutelle-dune-curatelle-dune-habilitation-familiale-dune-sauvegarde-justice-dune-personne-majeure" target="_blank" rel="noopener">Justice.fr, Coût d'une tutelle, d'une curatelle ou d'une habilitation familiale</a>, <a href="https://www.justice.gouv.fr/actualites/actualite/lhabilitation-familiale" target="_blank" rel="noopener">Ministère de la Justice, L'habilitation familiale</a> (vérifié le 22 novembre 2026)</p>
 """,
   faq=[("Un neveu ou une belle-fille peut-il être habilité ?", "Non. Seuls les ascendants, les descendants, les frères et sœurs et le conjoint, partenaire de Pacs ou concubin (si la vie commune continue) peuvent être habilités. Un neveu, une nièce, un gendre, une belle-fille, un beau-frère ou une belle-sœur ne le peuvent pas."),
-       ("Combien coûte une habilitation familiale ?", "Le certificat médical circonstancié, obligatoire, coûte 192 € selon service-public.fr. L'avocat n'est pas obligatoire, et une aide juridictionnelle est possible si les ressources sont faibles."),
-       ("Faut-il rendre des comptes au juge chaque année ?", "Non. Contrairement à la tutelle, l'habilitation familiale ne prévoit pas de compte de gestion. Le juge peut toutefois contrôler la personne habilitée en cas de litige, et certains actes graves (donation, vente du logement) restent soumis à son autorisation.")],
+       ("Combien coûte une habilitation familiale ?", "Le certificat médical circonstancié, obligatoire, coûte 192 € TTC selon justice.fr, sans remboursement par l'Assurance maladie, plus d'éventuels frais de déplacement du médecin. L'avocat n'est pas obligatoire ; l'aide juridictionnelle ne finance pas le certificat."),
+       ("Faut-il rendre des comptes au juge chaque année ?", "Non. Contrairement à la tutelle, l'habilitation familiale ne prévoit pas de compte de gestion. Le juge peut toutefois contrôler la personne habilitée en cas de litige, et certains actes graves (donation, vente ou location du logement) restent soumis à son autorisation.")],
   short="Habilitation familiale", cat="Argent et patrimoine")
 
 AUTO_META['meilleur-bouton-appel-urgence/'] = ('🏆', 'rose')
@@ -4306,12 +4302,12 @@ g("qu-est-ce-qu-un-ehpad/",
 
 AUTO_META['meilleure-montre-gps-senior/'] = ('🏆', 'ciel')
 g("meilleure-montre-gps-senior/",
-  "Meilleure montre GPS pour personne âgée 2026 : 7 modèles",
-  "Meilleure montre GPS pour personne âgée : 7 modèles avec bouton SOS comparés",
-  "Montre GPS pour personne âgée qui sort seule : 7 modèles avec bouton SOS, zone de sécurité et appels, comparés d'après les fiches officielles des marques.",
+  "Meilleure montre GPS pour personne âgée 2026 : 6 modèles",
+  "Meilleure montre GPS pour personne âgée : 6 modèles avec bouton SOS comparés",
+  "Montre GPS pour personne âgée qui sort seule : 6 modèles avec bouton SOS, zone de sécurité et appels, comparés d'après les fiches officielles des marques.",
   """
 <p>Pour une personne âgée qui sort encore seule et n'a pas de smartphone, la meilleure montre GPS est une montre senior 4G à carte SIM, comme la SPC Smartee 4G Senior : elle appelle, envoie sa position aux proches par un bouton SOS, et prévient la famille si elle quitte une zone définie. Si votre parent utilise déjà un iPhone ou un smartphone Samsung, une montre connectée cellulaire peut faire le même travail, avec en plus une détection de chute.</p>
-<p>Sept appareils réellement vendus en France sont comparés ci-dessous. Tous demandent un forfait mobile avec des données : sans lui, ni la position ni l'alerte ne partent.</p>
+<p>Six appareils réellement vendus en France sont comparés ci-dessous. Tous demandent un forfait mobile avec des données : sans lui, ni la position ni l'alerte ne partent.</p>
 {CTA}
 <div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs (pages produits, fiches techniques, modes d'emploi), sans test en main. Nous n'indiquons que les données lues sur ces pages ; quand une information n'y figure pas, nous écrivons « non précisé ». Aucun prix n'est indiqué, car il change souvent. Vérifiez la fiche du modèle exact au moment de l'achat.</div>
 <h2>Pourquoi une montre GPS aide une personne âgée à rester autonome ?</h2>
@@ -4321,7 +4317,6 @@ g("meilleure-montre-gps-senior/",
 <table><thead><tr><th>Modèle</th><th>Type</th><th>SOS</th><th>Zone de sécurité</th><th>Détection de chute</th><th>Étanchéité</th><th>Autonomie annoncée</th><th>Idéal pour</th></tr></thead><tbody>
 <tr><td>SPC Smartee 4G Senior</td><td>Montre senior 4G</td><td>Appel des contacts + position</td><td>Oui</td><td>Non précisé</td><td>IP68</td><td>Jusqu'à 3 jours</td><td>Notre choix : sans smartphone</td></tr>
 <tr><td>Newgen Medicals montre 4G GPS seniors (ZX5482)</td><td>Montre senior 4G</td><td>3 contacts, appel + SMS avec position</td><td>Oui</td><td>Non précisé</td><td>IP68</td><td>Jusqu'à 2 jours</td><td>Le SOS le plus détaillé</td></tr>
-<tr><td>Garett Senior Vita 4G</td><td>Montre senior 4G</td><td>Alerte aux contacts</td><td>Oui</td><td>Oui</td><td>IP68</td><td>Environ 1 jour en usage, 3 jours en veille</td><td>Une montre senior avec détection de chute</td></tr>
 <tr><td>SaveFamily Senior</td><td>Montre senior 4G</td><td>Bouton SOS</td><td>Oui</td><td>Oui</td><td>IP67</td><td>Jusqu'à 3 jours</td><td>Une alerte de chute réglable</td></tr>
 <tr><td>Leotec Smart Tracker 4G GPS</td><td>Boîtier traceur</td><td>Appel des contacts à tour de rôle</td><td>Oui</td><td>Contradictoire</td><td>Non précisé</td><td>Non précisé</td><td>Qui ne veut pas de montre</td></tr>
 <tr><td>Apple Watch Series 11 GPS + Cellular</td><td>Montre connectée</td><td>Appel d'urgence</td><td>Non précisé</td><td>Oui</td><td>50 m</td><td>Jusqu'à 24 h</td><td>Une famille équipée en iPhone</td></tr>
@@ -4333,7 +4328,7 @@ g("meilleure-montre-gps-senior/",
 <p><strong>Pour qui ?</strong> Une personne qui n'a pas de smartphone et n'en veut pas, mais dont les enfants veulent pouvoir la joindre et la localiser. C'est notre choix parce que la fiche du fabricant précise clairement qu'elle fonctionne sans téléphone mobile et que les proches gèrent tout depuis une appli gratuite.</p>
 <ul>
 <li><strong>Points forts</strong> : appui long sur le bouton SOS pour appeler automatiquement les contacts d'urgence et partager la position ; GPS en temps réel et Wi-Fi ; zones de sécurité ; appels vocaux et vidéo avec une liste de contacts autorisés ; IP68 ; jusqu'à 3 jours d'autonomie ; appli SPC SMART CLAN pour les proches.</li>
-<li><strong>Limites</strong> : nombre de contacts SOS et envoi de SMS non précisés ; pas de détection de chute mentionnée ; carte nano-SIM avec données à prévoir.</li>
+<li><strong>Limites</strong> : jusqu'à 3 contacts prioritaires d'après le revendeur PcComponentes, envoi de SMS non précisé ; pas de détection de chute mentionnée ; carte nano-SIM avec données à prévoir.</li>
 </ul>
 <p><a href="{AMZ:SPC Smartee 4G Senior}" """ + A + """>Voir sur Amazon</a></p>
 
@@ -4345,15 +4340,7 @@ g("meilleure-montre-gps-senior/",
 </ul>
 <p><a href="{AMZ:Newgen Medicals montre telephone 4G GPS seniors}" """ + A + """>Voir sur Amazon</a></p>
 
-<h2>3. Garett Senior Vita 4G : une montre senior avec détection de chute</h2>
-<p><strong>Pour qui ?</strong> Une personne qui a déjà chuté et sort encore, sans smartphone. Elle réunit dans un seul appareil la localisation et l'alerte automatique en cas de chute.</p>
-<ul>
-<li><strong>Points forts</strong> : détection automatique des chutes, avec alerte même si la personne ne réagit pas ; GPS, A-GPS, Wi-Fi (utile en intérieur) et réseau ; zones de sécurité ; appels vocaux et vidéo ; IP68 ; appli Garett Care pour les proches.</li>
-<li><strong>Limites</strong> : autonomie d'environ 1 jour avec GPS actif et appels fréquents, il faut la recharger chaque soir ; IP68 annoncé pour la pluie et les éclaboussures, pas pour la baignade ; informations lues chez un revendeur, pas sur une page du fabricant ; présence sur Amazon non confirmée.</li>
-</ul>
-<p><a href="{AMZ:Garett Senior Vita 4G}" """ + A + """>Voir sur Amazon</a></p>
-
-<h2>4. SaveFamily Senior : une alerte de chute réglable</h2>
+<h2>3. SaveFamily Senior : une alerte de chute réglable</h2>
 <p><strong>Pour qui ?</strong> Une personne sans smartphone qui bouge beaucoup et pour qui l'on craint les fausses alertes : la sensibilité de la détection se règle.</p>
 <ul>
 <li><strong>Points forts</strong> : bouton SOS ; alerte téléphonique automatique vers les contacts en cas de chute ou de mouvement brusque, selon PcComponentes ; détection réglable sur 6 niveaux de sensibilité selon Boulanger ; zones de sécurité ; IP67 ; jusqu'à 3 jours d'autonomie ; appli SaveFamily gratuite pour les proches.</li>
@@ -4361,7 +4348,7 @@ g("meilleure-montre-gps-senior/",
 </ul>
 <p><a href="{AMZ:SaveFamily Senior montre}" """ + A + """>Voir sur Amazon</a></p>
 
-<h2>5. Leotec Smart Tracker 4G GPS : pour qui refuse de porter une montre</h2>
+<h2>4. Leotec Smart Tracker 4G GPS : pour qui refuse de porter une montre</h2>
 <p><strong>Pour qui ?</strong> Une personne qui ne supporte rien au poignet, ou qui a déjà une montre à laquelle elle tient. Ce petit boîtier de 44 g se glisse dans une poche ou un sac.</p>
 <ul>
 <li><strong>Points forts</strong> : appui de 3 secondes pour appeler les contacts programmés à tour de rôle jusqu'à ce que l'un réponde ; GPS, Wi-Fi et réseau ; clôtures virtuelles ; 2 touches d'appel vers des numéros autorisés ; batterie de 1000 mAh ; carte nano-SIM de l'opérateur de votre choix.</li>
@@ -4369,7 +4356,7 @@ g("meilleure-montre-gps-senior/",
 </ul>
 <p><a href="{AMZ:Leotec Smart Tracker 4G GPS}" """ + A + """>Voir sur Amazon</a></p>
 
-<h2>6. Apple Watch Series 11 GPS + Cellular : pour une famille équipée en iPhone</h2>
+<h2>5. Apple Watch Series 11 GPS + Cellular : pour une famille équipée en iPhone</h2>
 <p><strong>Pour qui ?</strong> Un senior à l'aise avec les écrans, dans une famille qui utilise des iPhone. Avec la configuration familiale, la montre cellulaire se règle depuis l'iPhone d'un proche, sans que votre parent ait lui-même un iPhone.</p>
 <ul>
 <li><strong>Points forts</strong> : appel d'urgence ; détection des chutes ; GPS, avec partage de position et Localiser proposés dans la configuration familiale ; étanche jusqu'à 50 m ; jusqu'à 24 h d'autonomie, 38 h en mode économie d'énergie.</li>
@@ -4377,7 +4364,7 @@ g("meilleure-montre-gps-senior/",
 </ul>
 <p><a href="{AMZ:Apple Watch Series 11 GPS Cellular}" """ + A + """>Voir sur Amazon</a></p>
 
-<h2>7. Samsung Galaxy Watch Ultra LTE : la plus endurante, avec un smartphone Samsung</h2>
+<h2>6. Samsung Galaxy Watch Ultra LTE : la plus endurante, avec un smartphone Samsung</h2>
 <p><strong>Pour qui ?</strong> Un senior actif qui marche beaucoup et utilise déjà un smartphone Samsung Galaxy. Sans ce téléphone, elle ne convient pas.</p>
 <ul>
 <li><strong>Points forts</strong> : 4G avec carte SIM intégrée ; fonction SOS qui envoie un message à un proche ; sirène de 86 dB par un appui de 5 secondes ; détection de chute ; IP68, 10 ATM et norme militaire MIL-STD-810H ; 60 à 80 h d'autonomie selon l'affichage.</li>
@@ -4386,7 +4373,7 @@ g("meilleure-montre-gps-senior/",
 <p><a href="{AMZ:Samsung Galaxy Watch Ultra LTE}" """ + A + """>Voir sur Amazon</a></p>
 
 <h2>Comment choisir une montre GPS pour une personne âgée ?</h2>
-<p><strong>Avec ou sans smartphone ?</strong> C'est la première question. Une personne qui n'a pas de smartphone prendra une montre senior 4G (SPC, Newgen Medicals, Garett, SaveFamily). Les montres Apple et Samsung sont plus puissantes, mais plus complexes et dépendantes de l'écosystème de la famille.</p>
+<p><strong>Avec ou sans smartphone ?</strong> C'est la première question. Une personne qui n'a pas de smartphone prendra une montre senior 4G (SPC, Newgen Medicals, SaveFamily). Les montres Apple et Samsung sont plus puissantes, mais plus complexes et dépendantes de l'écosystème de la famille.</p>
 <p><strong>Le forfait.</strong> Toutes ces montres ont besoin d'une carte SIM avec des données. Choisissez un petit forfait avec un peu de data, et vérifiez la couverture 4G là où votre parent se promène.</p>
 <p><strong>La recharge.</strong> Une autonomie de 24 h impose une recharge quotidienne. Pour une personne qui oublie, préférez 2 ou 3 jours, et installez le chargeur à côté de la table de nuit.</p>
 <p><strong>Qui reçoit l'alerte ?</strong> Ce sont les proches. Enregistrez plusieurs contacts, dont un voisin, et testez le bouton une fois par mois. Si personne ne peut répondre à toute heure, regardez plutôt la téléassistance : notre guide <a href="{R}teleassistance-comment-ca-marche/">téléassistance : comment ça marche</a> l'explique, et notre <a href="{R}meilleur-bouton-appel-urgence/">comparatif des boutons d'appel d'urgence</a> couvre les solutions pour la maison.</p>
@@ -4395,12 +4382,12 @@ g("meilleure-montre-gps-senior/",
 """,
   faq=[("Une montre GPS permet-elle à une personne âgée de sortir seule en sécurité ?", "Elle y aide : un bouton SOS envoie un appel et la position aux proches, et une zone de sécurité les prévient si la personne s'en éloigne. Mais elle ne remplace ni la vigilance de l'entourage ni l'avis du médecin, surtout en cas de troubles de la mémoire ou de l'orientation."),
        ("Faut-il un abonnement pour une montre GPS senior ?", "Il faut au minimum une carte SIM avec un forfait mobile comprenant des données, chez l'opérateur de votre choix. Les montres seniors de ce comparatif acceptent une carte nano-SIM de l'opérateur de votre choix ; les montres Apple et Samsung demandent un forfait compatible avec leur version cellulaire."),
-       ("Avez-vous testé ces montres GPS ?", "Non. Cette sélection repose uniquement sur les fiches des fabricants, les modes d'emploi et les pages de revendeurs. Nous n'indiquons que ce qui y figure, sans note ni avis de prise en main.")],
-  short="Top 7 montres GPS senior", cat="Sécurité")
+       ("Comment avez-vous choisi ces montres GPS ?", "Uniquement à partir des fiches des fabricants, des modes d'emploi et des pages de revendeurs, sans prise en main. Nous n'indiquons que ce qui y figure, sans note ni avis inventé.")],
+  short="Top 6 montres GPS senior", cat="Sécurité")
 
 AUTO_META['cadeau-noel-personne-agee-a-domicile/'] = ('🎁', 'rose')
 g("cadeau-noel-personne-agee-a-domicile/",
-  "Idées cadeaux de Noël pour une personne âgée qui vit chez elle",
+  "Cadeau de Noël pour personne âgée à domicile : idées utiles",
   "Cadeau de Noël pour une personne âgée qui vit chez elle : idées utiles par budget",
   "Cadeaux de Noël pour une personne âgée qui vit chez elle : idées utiles pour l'hiver, l'autonomie et le confort, du petit budget au cadeau à plusieurs.",
   """

@@ -954,7 +954,7 @@ g("meilleur-guide-oiseaux/",
 
 AUTO_META['eau-pour-les-oiseaux-en-hiver/'] = ('💧', 'ciel')
 g("eau-pour-les-oiseaux-en-hiver/",
-  "Eau pour les oiseaux en hiver : abreuvoir, gel, erreurs à éviter",
+  "Eau pour les oiseaux en hiver : abreuvoir hors gel, erreurs",
   "De l'eau pour les oiseaux en hiver : comment garder un abreuvoir propre et hors gel",
   "Pourquoi les oiseaux ont besoin d'eau en hiver, comment éviter le gel sans sel ni antigel, quel abreuvoir choisir et à quelle fréquence changer l'eau.",
   """
@@ -963,12 +963,12 @@ g("eau-pour-les-oiseaux-en-hiver/",
 {CTA}
 
 <h2>Pourquoi les oiseaux ont-ils besoin d'eau quand il gèle ?</h2>
-<p>D'abord pour boire. La fiche Refuges LPO consacrée à l'eau rappelle que le corps d'un oiseau est composé d'environ 60 % d'eau, et jusqu'à 85 % chez certains jeunes. La LPO Île-de-France ajoute que les granivores ont des besoins en eau plus élevés, parce que les graines en contiennent peu. Or ce sont justement eux qui fréquentent la mangeoire en hiver.</p>
+<p>D'abord pour boire. La fiche Refuges LPO consacrée à l'eau rappelle que le corps d'un oiseau est composé d'environ 60 % d'eau, et jusqu'à 85 % chez certains jeunes. Une version plus ancienne de cette fiche LPO, toujours en ligne sur le site de la LPO Hérault, ajoute que les granivores, qui consomment des graines sèches, boivent plus que les insectivores. Or ce sont justement eux qui fréquentent la mangeoire en hiver.</p>
 <p>Ensuite pour se baigner. Ça peut sembler étrange par temps froid, mais le bain sert surtout à entretenir les plumes. Selon la même fiche LPO, un plumage en bon état assure la protection contre le froid et la capacité à voler. Un oiseau aux plumes sales ou abîmées se refroidit plus vite.</p>
 <p>Enfin, quand tout est gelé, certains oiseaux mangent de la neige. La fiche LPO précise qu'ils gaspillent alors une énergie précieuse pour la faire fondre, alors qu'ils en manquent déjà en hiver.</p>
 
 <h2>Que mettre dans l'eau pour qu'elle ne gèle pas ? Rien du tout</h2>
-<p>C'est l'erreur à ne jamais faire, et toutes les sources sont d'accord. La fiche Refuges LPO est très claire : ne rien ajouter à l'eau, ni alcool, ni sel, ni huile, ni bien sûr antigel, tous dangereux voire mortels pour les oiseaux. La Ligue royale belge pour la protection des oiseaux écrit que l'antigel et le sel sont fatals. La LPO Île-de-France parle d'une pratique « fortement interdite », par peur d'empoisonner les oiseaux.</p>
+<p>C'est l'erreur à ne jamais faire, et toutes les sources sont d'accord. La fiche Refuges LPO est très claire : ne rien ajouter à l'eau, ni alcool, ni sel, ni huile, ni bien sûr antigel, tous dangereux voire mortels pour les oiseaux. La Ligue royale belge pour la protection des oiseaux écrit que l'antigel et le sel sont fatals pour les animaux, et son dépliant de conseils demande de n'ajouter aucun additif.</p>
 <p>Le réflexe « un peu de sel pour que ça ne gèle pas », hérité du trottoir, n'a donc pas sa place dans un abreuvoir.</p>
 
 <h2>Comment empêcher l'abreuvoir de geler, alors ?</h2>
@@ -976,11 +976,11 @@ g("eau-pour-les-oiseaux-en-hiver/",
 <ul>
 <li><strong>Changez l'eau à heure fixe.</strong> La Ligue belge explique que les oiseaux apprennent ainsi quand ils trouveront de l'eau liquide, et viennent boire avant qu'elle ne regèle. Natagora donne le même conseil.</li>
 <li><strong>Choisissez l'emplacement.</strong> La fiche LPO recommande l'endroit le plus abrité, et conseille d'isoler l'abreuvoir du sol par un socle creux pour qu'il gèle moins vite. La Ligue belge suggère, en hiver, une zone plutôt ensoleillée.</li>
-<li><strong>Pensez au matériel.</strong> Selon la LPO, un abreuvoir de couleur noire à double paroi isolante retarde le gel pendant la journée. La LPO Île-de-France propose aussi une pierre chauffée au four, posée au centre de la coupelle.</li>
+<li><strong>Pensez au matériel.</strong> Selon la LPO, un abreuvoir de couleur noire à double paroi isolante retarde le gel pendant la journée.</li>
 <li><strong>Si l'eau a gelé</strong>, la Ligue belge demande de la changer impérativement. Son dépliant de conseils parle aussi de briser la glace.</li>
 </ul>
-<p><strong>Eau tiède ou pas ?</strong> Ici, les sources divergent. La fiche Refuges LPO considère que verser de l'eau tiède à heures régulières est sans doute la meilleure solution, et la LPO PACA accepte une eau légèrement tiède. Le dépliant de la Ligue belge dit au contraire d'éviter l'eau chaude ou tiède. <strong>Notre conseil</strong> : si vous utilisez de l'eau tiède, restez sur « à peine tiède », jamais chaude, et associez-la au grillage décrit plus bas pour éviter les bains par grand froid.</p>
-<p>Il existe aussi des abreuvoirs chauffants électriques. La fiche LPO donne deux précautions : ne les sortir et ne les brancher que dans la journée, et vérifier que la résistance est toujours recouverte d'eau.</p>
+<p><strong>Eau tiède ou pas ?</strong> Ici, les sources divergent. La fiche Refuges LPO considère que verser de l'eau tiède à heures régulières est sans doute la meilleure solution. Le dépliant de la Ligue belge dit au contraire d'éviter l'eau chaude ou tiède. <strong>Notre conseil</strong> : si vous utilisez de l'eau tiède, restez sur « à peine tiède », jamais chaude, et associez-la au grillage décrit plus bas pour éviter les bains par grand froid.</p>
+<p>Il existe aussi des abreuvoirs chauffants électriques. La fiche LPO décrit un modèle à fabriquer soi-même avec une résistance basse tension pour aquarium, réservé aux bricoleurs avertis, avec deux précautions : ne sortir et ne brancher le système que dans la journée, et vérifier que la résistance est toujours recouverte d'eau. Pour un modèle du commerce, suivez la notice du fabricant.</p>
 <p><strong>Abreuvoir chauffant pour oiseaux</strong> : pour les régions où il gèle souvent. <a href="{AMZ:abreuvoir chauffant oiseaux exterieur}" """ + A + """>Voir sur Amazon</a></p>
 
 <h2>Faut-il les laisser se baigner par grand froid ?</h2>
@@ -1002,16 +1002,18 @@ g("eau-pour-les-oiseaux-en-hiver/",
 
 <h2>Où installer le point d'eau ?</h2>
 <p>La fiche LPO et la Ligue belge préfèrent un abreuvoir en hauteur, posé comme une mangeoire plateau, accroché ou fixé sur un mur. La page de la LPO nationale sur les maladies admet aussi de petits points d'eau à même le sol, dans un endroit dégagé.</p>
-<p>Dans tous les cas, pensez aux prédateurs. La fiche LPO conseille de l'éloigner des buissons où un chat pourrait se poster, tout en gardant une haie ou un arbuste pas trop loin, où les oiseaux iront sécher leurs plumes, comme le précise la Ligue belge.</p>
+<p>Dans tous les cas, pensez aux prédateurs. La fiche LPO conseille de l'éloigner des buissons où un chat pourrait se poster, tout en gardant une haie ou un arbuste pas trop loin, où les oiseaux pourront se réfugier en cas d'attaque d'un rapace, comme le précise la Ligue belge.</p>
 <p>Pour les fenêtres, nouvelle divergence : la Ligue belge juge le rebord de fenêtre acceptable, alors que la LPO nationale demande de ne pas placer mangeoires et abreuvoirs près des fenêtres, pour limiter les collisions. Par exemple, si vous n'avez qu'un balcon, le rebord reste une option ; si vous avez un jardin, placez plutôt l'eau à distance des vitres.</p>
 <p><strong>Abreuvoir à suspendre</strong> : pour un balcon ou une branche. <a href="{AMZ:abreuvoir oiseaux a suspendre}" """ + A + """>Voir sur Amazon</a></p>
 
 <h2>Changer l'eau et nettoyer : à quel rythme ?</h2>
-<p>Un abreuvoir peut transmettre des maladies. La LPO explique que la trichomonose se transmet notamment par l'eau et la nourriture contaminées, souvent au niveau des mangeoires et des abreuvoirs des jardins, et que l'eau souillée par les fientes est l'un des principaux vecteurs de la salmonellose.</p>
+<p>Un abreuvoir mal entretenu peut favoriser les maladies. La LPO cite la trichomonose et la salmonellose parmi les maladies les plus courantes des oiseaux des jardins, rappelle que ces maladies se transmettent par les fientes, par contact direct ou par de la nourriture contaminée, et qu'un nettoyage régulier des mangeoires et des abreuvoirs permet d'éviter une contamination.</p>
 <p>Pour le rythme, voyez le tableau plus haut : de trois fois par semaine à tous les jours selon les sources. <strong>Notre conseil</strong> : changez l'eau chaque jour en hiver, parce que vous devez de toute façon la renouveler à cause du gel, et que c'est la fréquence la plus prudente.</p>
-<p>Côté nettoyage, la LPO nationale conseille de retirer fientes et souillures, de brosser avec de l'eau et du savon de Marseille ou du savon noir, et de désinfecter avec de l'eau de Javel diluée dans de l'eau froide, puis de bien rincer et laisser sécher. Portez des gants et lavez-vous les mains ensuite. La LPO met aussi en garde contre la période de dégel, où les bactéries prisonnières de la glace se retrouvent dans l'eau.</p>
+<p>Côté nettoyage, la LPO nationale conseille de retirer fientes et souillures, de brosser avec de l'eau et du savon de Marseille ou du savon noir, et de désinfecter avec de l'eau de Javel diluée dans de l'eau froide, puis de bien rincer et laisser sécher. Portez des gants et lavez-vous les mains ensuite. La LPO met aussi en garde contre la période de dégel, où les bactéries présentes dans l'eau gelée se mélangent à la nourriture.</p>
 <p>Si vous voyez des oiseaux malades, la LPO demande de vider tous les points d'eau et de nourriture et d'arrêter le nourrissage, pendant 4 semaines selon sa fiche sur les maladies.</p>
 <p>L'eau va de pair avec la nourriture : notre <a href="{R}nourrir-les-oiseaux-du-jardin/">guide pour bien nourrir les oiseaux du jardin</a> explique quoi donner et quand. Par temps de gel, vous pouvez aussi proposer de la graisse, sans filet, comme expliqué dans notre article sur les <a href="{R}boule-de-graisse-oiseaux/">boules de graisse pour oiseaux</a>. Et pour choisir une mangeoire facile à nettoyer, voyez notre sélection des <a href="{R}meilleure-mangeoire-oiseaux/">meilleures mangeoires pour oiseaux</a>.</p>
+
+<p class="sources"><strong>Sources</strong> : <a href="https://occitanie.lpo.fr/wp-content/uploads/2020/04/ficherefuges_eau_et_oiseaux_br.pdf" target="_blank" rel="noopener">LPO : fiche Refuges « L'eau et les oiseaux »</a> ; <a href="https://www.lpo.fr/decouvrir-la-nature/conseils-biodiversite/conseils-biodiversite/accueillir-la-faune-sauvage/nourrissage-et-maladies-des-oiseaux" target="_blank" rel="noopener">LPO : nourrissage et maladies des oiseaux</a> ; <a href="https://protectiondesoiseaux.be/wp-content/uploads/2024/09/Fiche-abreuvoirs.pdf" target="_blank" rel="noopener">Ligue royale belge pour la protection des oiseaux : fiche abreuvoirs</a> (vérifié le 22 novembre 2026)</p>
 """,
   faq=[("Peut-on mettre du sel ou de l'antigel dans l'abreuvoir des oiseaux ?", "Non, jamais. La LPO demande de ne rien ajouter à l'eau, ni sel, ni alcool, ni huile, ni antigel, tous dangereux voire mortels. La Ligue royale belge pour la protection des oiseaux rappelle que l'antigel et le sel sont fatals pour les animaux."),
        ("À quelle fréquence changer l'eau des oiseaux en hiver ?", "Les sources varient : trois fois par semaine pour la fiche Refuges LPO, idéalement tous les jours et au minimum trois fois par semaine pour la Ligue belge, tous les jours pour Natagora. Changer l'eau chaque jour, à heure fixe, est le plus prudent et permet aussi d'éviter le gel."),
@@ -1138,14 +1140,18 @@ g("meilleurs-livres-oiseaux-enfants/",
 
 AUTO_META['meilleur-nichoir-camera/'] = ('🏆', 'sable')
 g("meilleur-nichoir-camera/",
-  "Meilleur nichoir avec caméra 2026 : 8 modèles wifi ou filaires",
-  "Les meilleurs nichoirs avec caméra : 8 modèles et caméras de nichoir comparés",
-  "Kit complet ou caméra seule, wifi, filaire ou solaire, vision nocturne, carte SD ou cloud : 8 nichoirs et caméras de nichoir comparés d'après les fiches.",
+  "Nichoir avec caméra pour oiseaux du jardin : 8 modèles 2026",
+  "Les meilleurs nichoirs avec caméra pour les oiseaux du jardin : 8 modèles comparés",
+  "Suivre la nichée des mésanges du jardin sans ouvrir le nichoir : 8 kits et caméras de nichoir wifi, solaires ou filaires comparés d'après les fiches.",
   """
-<p>Si vous avez une prise électrique pas trop loin du nichoir, un kit avec caméra wifi alimentée sur secteur est le choix le plus simple. Sans prise, il faut passer au solaire avec batterie. Et si vous voulez la liaison la plus stable, la caméra filaire reste imbattable, au prix d'un câble à tirer jusqu'à la maison.</p>
+<p>Pour suivre la nichée des oiseaux de votre jardin sans ouvrir le nichoir, partez de l'emplacement. Si vous avez une prise électrique pas trop loin du nichoir, un kit avec caméra wifi alimentée sur secteur est le choix le plus simple. Sans prise, il faut passer au solaire avec batterie. Et si vous voulez la liaison la plus stable, la caméra filaire reste imbattable, au prix d'un câble à tirer jusqu'à la maison.</p>
 <p>Nous avons retenu huit produits réels, tous présents sur Amazon.fr : des kits complets avec nichoir, et des caméras seules à installer dans un nichoir que vous avez déjà. Nous en avions repéré d'autres, mais sans fiche fiable ou sans présence confirmée sur Amazon.fr, nous les avons laissés de côté.</p>
 {CTA}
 <div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
+
+<h2>Pourquoi un nichoir avec caméra convient aux oiseaux du jardin ?</h2>
+<p>Parce qu'il permet de suivre la ponte, l'éclosion et le nourrissage des jeunes sans jamais soulever le toit. Un nichoir qu'on ouvre pour « jeter un œil » dérange les adultes ; avec une caméra, vous regardez sur votre téléphone ou votre téléviseur, et le nichoir reste fermé jusqu'au nettoyage d'automne. Les LED infrarouges annoncées comme invisibles éclairent l'intérieur la nuit sans lueur visible.</p>
+<p>La caméra ne change rien aux règles du nichoir : c'est le trou d'envol qui décide qui s'installe. Les kits Green Feathers ont une entrée de 32 mm, celle que nous conseillons pour la <a href="{R}mesange-charbonniere/">mésange charbonnière</a> ; les plaques de 28 mm du Nestera conviennent à la <a href="{R}mesange-bleue/">mésange bleue</a>. Un <a href="{R}rouge-gorge/">rouge-gorge</a>, lui, n'entrera pas dans un nichoir à trou rond : il lui faut un modèle semi-ouvert. <strong>Notre conseil</strong> : choisissez d'abord l'espèce que vous voulez accueillir, puis le diamètre d'entrée, et seulement ensuite la caméra.</p>
 
 <h2>Tableau comparatif des 8 modèles</h2>
 <table><thead><tr><th>Modèle</th><th>Nichoir</th><th>Connexion</th><th>Vidéo</th><th>Alimentation</th><th>Stockage</th></tr></thead><tbody>
@@ -1154,8 +1160,8 @@ g("meilleur-nichoir-camera/",
 <tr><td>Green Feathers caméra wifi 1080p (3e gén.)</td><td>Non</td><td>Wifi 2,4 et 5 GHz</td><td>1080p</td><td>Secteur 12 V</td><td>microSD (non fournie)</td></tr>
 <tr><td>Green Feathers caméra filaire PoE</td><td>Non</td><td>Câble réseau</td><td>1080p</td><td>PoE ou 12 V</td><td>Mémoire 64 Go intégrée</td></tr>
 <tr><td>Green Feathers caméra filaire TV 20 m</td><td>Non</td><td>Câble vers téléviseur</td><td>1080p</td><td>Secteur 12 V</td><td>Non précisé</td></tr>
-<tr><td>Birdfy Nest Duo (Netvue)</td><td>Oui, bambou, 2 caméras</td><td>Wifi 2,4 GHz</td><td>2 MP</td><td>Batterie et solaire 5 W</td><td>Cloud, pas de microSD</td></tr>
-<tr><td>Nestera nichoir caméra wifi</td><td>Oui, cèdre rouge</td><td>Wifi 2,4 GHz</td><td>4 MP</td><td>Secteur, câble 10 m</td><td>microSD</td></tr>
+<tr><td>Birdfy Nest Duo (Netvue)</td><td>Oui, bambou, 2 caméras</td><td>Wifi 2,4 GHz</td><td>1080p ou 2048 x 1152</td><td>Batterie et solaire 5 W</td><td>Cloud, pas de microSD</td></tr>
+<tr><td>Nestera nichoir caméra wifi</td><td>Oui, cèdre rouge</td><td>Wifi 2,4 GHz</td><td>4 MP (2560 x 1440 ou 2304 x 1296 selon les fiches)</td><td>Secteur, câble 10 m</td><td>microSD</td></tr>
 <tr><td>Camouflage EZ-NestEye</td><td>Oui, bois</td><td>Wifi 2,4 GHz</td><td>Full HD</td><td>Solaire et batterie</td><td>Mémoire 32 Go</td></tr>
 </tbody></table>
 <p>Une remarque importante : les fiches Green Feathers consultées sont celles du site britannique, qui décrit des alimentations avec prise anglaise. Vérifiez sur la fiche Amazon.fr que la version vendue est adaptée aux prises françaises.</p>
@@ -1207,16 +1213,16 @@ g("meilleur-nichoir-camera/",
 
 <h2>6. Birdfy Nest Duo : deux caméras et des entrées interchangeables</h2>
 <p><strong>Pour qui ?</strong> Vous ne savez pas quelle espèce viendra et voulez un nichoir connecté tout-en-un, sans câble.</p>
-<p>Ce nichoir en bambou et ABS embarque deux caméras 2 MP, une batterie de 9000 mAh et un panneau solaire de 5 W. Selon le site français de Birdfy, l'entrée se change grâce à des grilles métalliques de 23, 25, 28, 38 et 50 mm. Vision de nuit infrarouge ou en lumière blanche.</p>
+<p>Ce nichoir en bambou et ABS embarque deux caméras, une batterie de 9000 mAh et un panneau solaire de 5 W. La fiche technique du support Birdfy annonce une vidéo en 1080p, ou 2048 x 1152 en mode haute qualité, et un poids de 3,4 kg. Selon le site français de Birdfy, l'entrée se change grâce à des grilles métalliques de 23, 25, 28, 38 et 50 mm. Vision de nuit infrarouge ou en lumière blanche.</p>
 <ul>
 <li><strong>Points forts</strong> : deux angles de vue, entrées adaptables à plusieurs espèces, autonome en énergie.</li>
-<li><strong>Limites</strong> : pas de microSD, l'enregistrement passe par le cloud (gratuit pendant la nidification selon Birdfy, abonnement ensuite en option). Lourd : 3,4 kg. Les sources de la marque se contredisent sur l'audio bidirectionnel.</li>
+<li><strong>Limites</strong> : pas de microSD, l'enregistrement passe par le cloud (gratuit pendant la nidification selon Birdfy, abonnement ensuite en option). Lourd : 3,4 kg. La fiche technique du support Birdfy indique qu'il n'y a pas d'audio bidirectionnel, alors que d'autres pages de la marque le mentionnent : vérifiez avant d'acheter si c'est important pour vous.</li>
 </ul>
 <p><a href="{AMZ:Birdfy Nest Duo nichoir}" """ + A + """>Voir sur Amazon</a></p>
 
 <h2>7. Nestera nichoir caméra wifi : la meilleure définition annoncée</h2>
 <p><strong>Pour qui ?</strong> Vous voulez l'image la plus détaillée et avez une prise à moins de 10 m.</p>
-<p>Nichoir en cèdre rouge certifié PEFC, avec caméra wifi 4 MP (2560 x 1440), LED infrarouges et micro intégré. Des plaques de réduction de 28 et 32 mm sont fournies pour adapter le trou d'envol. Alimentation secteur avec un câble de 10 m, carte microSD jusqu'à 128 Go.</p>
+<p>Nichoir en cèdre rouge certifié PEFC, avec caméra wifi 4 MP, LED de vision nocturne et micro intégré. La définition annoncée varie selon les fiches : 2560 x 1440 dans la description du revendeur Greenweez, 2304 x 1296 dans ses caractéristiques. Des plaques de réduction de 28 et 32 mm sont fournies pour adapter le trou d'envol. Alimentation secteur avec un câble de 10 m, carte microSD jusqu'à 128 Go.</p>
 <ul>
 <li><strong>Points forts</strong> : définition la plus élevée de cette sélection, bois de cèdre, deux tailles d'entrée.</li>
 <li><strong>Limites</strong> : wifi 2,4 GHz seulement, invisibilité de l'infrarouge non précisée, cloud non précisé. Nos informations viennent du site de la marque et de la documentation liée à la fiche Amazon.</li>
@@ -1242,7 +1248,8 @@ g("meilleur-nichoir-camera/",
 """,
   faq=[("Faut-il un nichoir caméra wifi ou filaire ?", "Le wifi est le plus simple si votre box couvre l'emplacement du nichoir. Le filaire, par câble réseau PoE ou câble vers le téléviseur, donne une liaison plus stable et convient quand le wifi n'atteint pas le fond du jardin. Sans prise électrique à proximité, choisissez un modèle solaire avec batterie."),
        ("La caméra dérange-t-elle les oiseaux la nuit ?", "Les fabricants équipent la plupart de ces caméras de LED infrarouges, dont plusieurs sont annoncées comme invisibles, c'est-à-dire sans lueur visible. Vérifiez cette mention sur la fiche du modèle, et installez la caméra avant la nidification pour ne pas avoir à ouvrir le nichoir ensuite."),
-       ("Avez-vous testé ces nichoirs caméra ?", "Non. Cette sélection repose sur les fiches publiées par les fabricants et par des revendeurs. Nous indiquons « non précisé » quand une donnée manque, sans note ni avis de prise en main.")],
+       ("Quels oiseaux du jardin s'installent dans un nichoir avec caméra ?", "Les mêmes que dans un nichoir classique, selon le diamètre du trou d'envol : 32 mm pour la mésange charbonnière, 28 mm pour la mésange bleue. Le rouge-gorge préfère un nichoir semi-ouvert. La caméra ne les attire pas, elle sert seulement à les observer sans ouvrir le nichoir."),
+       ("Cette sélection de nichoirs caméra repose-t-elle sur une prise en main ?", "Non. Cette sélection repose sur les fiches publiées par les fabricants et par des revendeurs. Nous indiquons « non précisé » quand une donnée manque, sans note ni avis de prise en main.")],
   short="Top 8 nichoirs caméra", cat="Nichoirs")
 
 AUTO_META['oiseau-noir-bec-jaune/'] = ('🐦‍⬛', 'sable')
@@ -1366,6 +1373,8 @@ g("mesange-charbonniere/",
 <h2>Comment se comporte-t-elle au jardin ?</h2>
 <p>En dehors de la saison des nids, la mésange charbonnière vit la plupart du temps en bandes, d'après la Ligue royale belge pour la protection des oiseaux. C'est pour cela que la mangeoire s'anime parfois d'un coup, puis se vide aussi vite. La fiche belge souligne aussi sa fidélité à son lieu de nidification : un couple qui a niché chez vous a de bonnes chances de revenir.</p>
 <p>Son chant est varié et parfois déroutant pour un débutant. Le plus simple est de l'enregistrer avec une application de reconnaissance des chants, puis de comparer avec un enregistrement de référence, comme ceux proposés par Oiseaux des jardins.</p>
+
+<p class="sources"><strong>Sources</strong> : <a href="https://www.lpo.fr/decouvrir-la-nature/fiches-especes/fiches-especes/oiseaux/mesanges/mesange-charbonniere" target="_blank" rel="noopener">LPO : fiche mésange charbonnière</a> ; <a href="https://www.oiseaux.net/oiseaux/mesange.charbonniere.html" target="_blank" rel="noopener">oiseaux.net : Mésange charbonnière</a> (vérifié le 22 novembre 2026)</p>
 """,
   faq=[("Quel diamètre de trou pour un nichoir à mésange charbonnière ?",
         "32 mm selon les fiches nichoirs de la LPO et de la Ligue royale belge pour la protection des oiseaux. Les fiches Oiseaux des jardins donnent 30 à 32 mm. Un trou de 26 à 28 mm convient aux petites mésanges, pas à la charbonnière."),
@@ -1551,11 +1560,11 @@ g("petit-oiseau-gris-jardin/",
 
 AUTO_META['rouge-gorge/'] = ('🐦', 'rouge')
 g("rouge-gorge/",
-  "Rouge-gorge : le reconnaître, le nourrir et lui offrir un nichoir",
+  "Rouge-gorge : le reconnaître, le nourrir, son nichoir",
   "Le rouge-gorge au jardin : le reconnaître, le nourrir, l'aider à nicher",
   "Mâle ou femelle, jeune sans plastron, territoire, chant d'hiver, nourriture au sol et nichoir semi-ouvert : tout pour accueillir le rouge-gorge chez vous.",
   """
-<p>Le rouge-gorge, c'est ce petit oiseau rond au plastron orangé qui vient vous regarder bêcher le potager. Il mesure 13 à 14 cm pour environ 16 g d'après la LPO, il se nourrit surtout au sol, et il ne niche pas dans un nichoir à trou rond mais dans un nichoir <strong>semi-ouvert</strong>, posé bas.</p>
+<p>Le rouge-gorge, c'est ce petit oiseau rond au plastron orangé qui vient vous regarder bêcher le potager. Il mesure 13 à 14 cm pour 22 cm d'envergure et environ 16 g d'après la LPO (oiseaux.net donne 14 cm, 20 à 22 cm et 16 à 22 g), il se nourrit surtout au sol, et il ne niche pas dans un nichoir à trou rond mais dans un nichoir <strong>semi-ouvert</strong>, posé bas.</p>
 <p>Retenez surtout ceci : servez-le au sol ou sur un plateau bas, près d'un buisson, avec des petites graines.</p>
 {CTA}
 
@@ -1578,15 +1587,15 @@ g("rouge-gorge/",
 <p>Le rouge-gorge chante depuis un perchoir bien visible, un chant riche et mélodieux selon la LPO. Contrairement à beaucoup d'oiseaux qui se taisent après l'été, il reprend son chant dès l'automne : oiseaux.net explique que ce chant d'hiver sert à défendre un territoire de nourriture. Si vous entendez un oiseau chanter dans le jardin un matin de novembre, il y a de bonnes chances que ce soit lui.</p>
 
 <h2>Que mange le rouge-gorge, et que lui donner ?</h2>
-<p>C'est avant tout un insectivore qui chasse au sol, dans les feuilles mortes ou sur la terre nue. La LPO cite les insectes et leurs larves, les araignées, les cloportes, les vers de terre et les petits escargots. Il suit même parfois les taupes ou les sangliers pour attraper les vers qu'ils déterrent.</p>
+<p>C'est avant tout un insectivore qui chasse au sol, dans les feuilles mortes ou sur la terre nue. La LPO cite les insectes et leurs larves, les araignées, les cloportes, les vers de terre et les petits escargots. Il lui arrive même de suivre une taupe qui creuse sa galerie pour attraper les vers qui remontent, et, en forêt, de profiter du sol retourné par les sangliers.</p>
 <p>En hiver, il se rapproche des maisons, fouille le compost et passe aux mangeoires. Il complète alors son menu avec des petits fruits : lierre, sureau, aubépine, troène, cornouiller, viorne, fusain.</p>
 <p>À la mangeoire, gardez en tête trois points :</p>
 <ul>
 <li><strong>Au sol ou presque.</strong> Il se perche mal sur un silo. Un plateau bas, près d'un buisson pour qu'il puisse s'y réfugier, lui convient bien mieux.</li>
-<li><strong>Des petites graines.</strong> La LPO PACA rappelle que le millet et les autres petites graines sont indispensables aux passereaux à bec fin comme lui. Oiseaux.net précise qu'il en mange en petite quantité.</li>
-<li><strong>Un peu de graisse.</strong> Oiseaux.net note qu'il profite d'une boule de graisse, toujours sans filet. Émiettée sur le plateau, elle est plus facile à prendre pour lui.</li>
+<li><strong>Des petites graines.</strong> Un dépliant de la LPO PACA (groupe Littoral ouest varois) rappelle que les petites graines comme le millet sont indispensables aux passereaux à bec fin, et cite le rouge-gorge parmi eux. Oiseaux.net confirme qu'il peut consommer de petites graines.</li>
+<li><strong>Un peu de graisse.</strong> Oiseaux.net note qu'il profite à l'occasion d'une boule de graisse. Prenez-la sans filet et émiettez-la sur le plateau : elle est plus facile à prendre pour lui.</li>
 </ul>
-<p>Et les vers de farine ? Ils ne figurent pas dans les fiches espèces que nous avons consultées. Certains mélanges de graisse aux insectes les incluent et citent le rouge-gorge parmi les oiseaux visés : c'est un complément, pas une base. Quant au pain, les sources ne disent pas la même chose : oiseaux.net mentionne que des miettes l'attirent sur un balcon, mais la LPO nationale déconseille le pain pour tous les oiseaux. Suivez l'avis le plus prudent et n'en donnez pas. Tout est détaillé dans notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">bien nourrir les oiseaux du jardin</a>.</p>
+<p>Et les vers de farine ? Le même dépliant de la LPO PACA les propose pour les insectivores et cite le rouge-gorge en premier. Ils ne figurent pas dans les fiches espèces de la LPO nationale ni d'oiseaux.net : voyez-les comme un complément, pas une base. Quant au pain, les sources ne disent pas la même chose : oiseaux.net mentionne que des miettes l'attirent sur un balcon, mais la LPO nationale juge que le pain ne convient pas aux oiseaux sauvages, et le dépliant de la LPO PACA explique que le pain sec gonfle et provoque des troubles digestifs. Suivez l'avis le plus prudent et n'en donnez pas. Tout est détaillé dans notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">bien nourrir les oiseaux du jardin</a>.</p>
 <p><strong>Mélange de petites graines pour oiseaux du sol</strong> : millet et graines fines pour les becs fins. <a href="{AMZ:melange graines oiseaux sol millet rouge-gorge}" """ + A + """>Voir sur Amazon</a></p>
 <p><strong>Plateau de nourrissage bas</strong> : pour le servir à sa hauteur, à l'abri de la boue. <a href="{AMZ:mangeoire plateau sol oiseaux}" """ + A + """>Voir sur Amazon</a></p>
 <p><strong>Boules de graisse aux insectes sans filet</strong> : à émietter sur le plateau les jours de gel. <a href="{AMZ:boules de graisse insectes sans filet oiseaux}" """ + A + """>Voir sur Amazon</a></p>
@@ -1595,27 +1604,29 @@ g("rouge-gorge/",
 <h2>Où niche-t-il, et quel nichoir lui convient ?</h2>
 <p>Dans la nature, la femelle construit en avril un nid volumineux au ras du sol : creux de talus, souche, touffe d'herbe, tas de branches mortes, lierre. La LPO cite aussi des choix plus inattendus, comme un trou de mur ou un vieux pot jeté dans les broussailles. Elle pond 5 à 6 œufs selon la LPO, 5 à 7 selon oiseaux.net, et peut faire deux couvées par an, parfois trois.</p>
 <p>Il ne rentre pas dans un nichoir à trou rond comme celui des mésanges. Il lui faut un <strong>nichoir semi-ouvert</strong>, dont la façade est à moitié ouverte. Les recommandations varient un peu :</p>
-<table><thead><tr><th>Point</th><th>Notice de la Ligue royale belge pour la protection des oiseaux</th><th>Fiche du nichoir rouge-gorge de la boutique LPO</th></tr></thead><tbody>
-<tr><td>Hauteur</td><td>Environ 1,50 m</td><td>1,50 à 3 m</td></tr>
-<tr><td>Orientation</td><td>Est ou sud-est, dos aux vents dominants</td><td>Sud ou sud-est</td></tr>
-<tr><td>Pose</td><td>Automne ou fin d'hiver</td><td>Possible dès le début de l'hiver</td></tr>
+<table><thead><tr><th>Point</th><th>Fiche nichoir rouge-gorge de la Ligue royale belge pour la protection des oiseaux</th><th>Conseils généraux de la boutique LPO (tous nichoirs semi-ouverts)</th></tr></thead><tbody>
+<tr><td>Hauteur</td><td>Environ 1,50 m</td><td>Généralement 2 à 5 m</td></tr>
+<tr><td>Orientation</td><td>Est ou sud-est, dos aux vents dominants</td><td>Sud ou sud-est, loin des vents dominants</td></tr>
+<tr><td>Pose</td><td>Automne (idéal) ou fin d'hiver</td><td>Automne ou début du printemps</td></tr>
 <tr><td>Nettoyage</td><td>Septembre ou octobre</td><td>Septembre ou octobre</td></tr>
 </tbody></table>
-<p>Dans les deux cas, le nichoir est légèrement penché vers l'avant pour que la pluie n'entre pas. La notice belge précise que ce modèle sert aussi au troglodyte, au rougequeue noir et à la bergeronnette grise. <strong>Notre conseil</strong> : posez-le vers 1,50 m, caché dans du lierre ou une haie dense, plutôt qu'en plein milieu d'un mur nu. Le rouge-gorge cherche avant tout un endroit couvert et tranquille. Notre guide pour <a href="{R}installer-un-nichoir/">installer un nichoir</a> détaille la fixation sans abîmer l'arbre.</p>
+<p>La fiche belge demande un nichoir légèrement penché vers l'avant pour que la pluie n'entre pas. Sa fiche consacrée au nichoir semi-ouvert précise que ce modèle sert aussi au troglodyte, au rougequeue noir et à la bergeronnette grise. <strong>Notre conseil</strong> : posez-le vers 1,50 m, caché dans du lierre ou une haie dense, plutôt qu'en plein milieu d'un mur nu. Le rouge-gorge cherche avant tout un endroit couvert et tranquille. Notre guide pour <a href="{R}installer-un-nichoir/">installer un nichoir</a> détaille la fixation sans abîmer l'arbre.</p>
 <p><strong>Nichoir semi-ouvert pour rouge-gorge</strong> : en bois ou en béton de bois, plus durable. <a href="{AMZ:nichoir semi ouvert rouge-gorge}" """ + A + """>Voir sur Amazon</a></p>
 <p>Envie de suivre la couvée sans jamais ouvrir le nichoir ? Il existe des nichoirs équipés d'une caméra, à installer avant le printemps. Notre sélection des <a href="{R}meilleur-nichoir-camera/">meilleurs nichoirs avec caméra</a> les compare ; vérifiez qu'un modèle propose une façade semi-ouverte avant de le prévoir pour un rouge-gorge.</p>
 <p><strong>Nichoir avec caméra</strong> : <a href="{AMZ:nichoir camera wifi oiseaux}" """ + A + """>Voir sur Amazon</a></p>
 
 <h2>Avec quels oiseaux peut-on le confondre ?</h2>
 <p>L'adulte, presque jamais : son plastron orangé bordé de gris est unique au jardin. Le jeune, en revanche, ressemble à un jeune rossignol ou à un jeune rougequeue, comme le signale la LPO. Et quand il fouille au pied des haies en hiver, on le voit souvent à côté d'un autre petit oiseau discret, gris et brun : l'accenteur mouchet. Notre page sur le <a href="{R}petit-oiseau-gris-jardin/">petit oiseau gris du jardin</a> vous aide à le reconnaître. Pour admirer le liseré gris du plastron sans le faire fuir, une paire de <a href="{R}meilleures-jumelles-oiseaux/">jumelles légères</a> suffit.</p>
-<p>Enfin, le rouge-gorge est intégralement protégé en France par l'arrêté ministériel du 29 octobre 2009, rappelle la LPO : il est interdit de le capturer, de le détenir ou de toucher à son nid.</p>
+<p>Enfin, le rouge-gorge est intégralement protégé en France par l'arrêté ministériel du 29 octobre 2009, rappelle la LPO : sa capture, sa destruction, celle de ses œufs et de son nid, ainsi que sa vente, sont interdites en tout temps.</p>
+
+<p class="sources"><strong>Sources</strong> : <a href="https://www.lpo.fr/decouvrir-la-nature/fiches-especes/fiches-especes/oiseaux/rougegorge-familier" target="_blank" rel="noopener">LPO : fiche rougegorge familier</a> ; <a href="https://www.oiseaux.net/oiseaux/rougegorge.familier.html" target="_blank" rel="noopener">oiseaux.net : Rougegorge familier</a> ; <a href="https://protectiondesoiseaux.be/wp-content/uploads/2024/09/Fiche-nichoir-Rouge-gorge.pdf" target="_blank" rel="noopener">Ligue royale belge pour la protection des oiseaux : fiche nichoir rouge-gorge</a> (vérifié le 22 novembre 2026)</p>
 """,
   faq=[("Comment savoir si un rouge-gorge est mâle ou femelle ?",
         "On ne peut pas à l'œil nu : d'après la LPO, mâle et femelle adultes ont exactement le même plumage, été comme hiver. Seul le jeune se distingue, avec un plumage brun moucheté de roux et sans plastron orangé."),
        ("Que donner à manger à un rouge-gorge en hiver ?",
         "Des petites graines comme le millet, posées au sol ou sur un plateau bas près d'un buisson, et un peu de graisse émiettée, sans filet. Des arbustes à baies (lierre, sureau, aubépine) l'aident aussi. Évitez le pain, déconseillé par la LPO."),
        ("Quel nichoir pour un rouge-gorge ?",
-        "Un nichoir semi-ouvert, posé bas : environ 1,50 m selon la notice de la Ligue royale belge pour la protection des oiseaux, 1,50 à 3 m selon la boutique LPO, orienté à l'est ou au sud-est et caché dans la végétation.")],
+        "Un nichoir semi-ouvert, posé bas : environ 1,50 m selon la fiche de la Ligue royale belge pour la protection des oiseaux, orienté à l'est ou au sud-est, dos aux vents dominants, et caché dans la végétation. Posez-le de préférence à l'automne.")],
   short="Rouge-gorge", cat="Observer")
 
 AUTO_META['meilleure-boule-de-graisse/'] = ('🏆', 'ciel')
@@ -1880,6 +1891,8 @@ g("mesange-bleue/",
 <p>La ponte compte beaucoup d'œufs, et les sources ne s'accordent pas sur le nombre : 6 à 15 pour la fiche LPO, 7 à 12 pour la boutique LPO, 6 à 12 pour la LPO PACA. Les jeunes quittent le nid vers 18 à 20 jours. Avec une telle nichée, un nichoir équipé d'une caméra offre un spectacle rare, sans jamais ouvrir le toit. Installez-le et réglez l'image avant la saison des nids. Nous avons comparé les modèles dans notre sélection des <a href="{R}meilleur-nichoir-camera/">meilleurs nichoirs avec caméra</a> ; vérifiez qu'un réducteur de 28 mm est fourni ou possible.</p>
 <p><strong>Nichoir avec caméra wifi</strong> : <a href="{AMZ:nichoir camera wifi oiseaux}" """ + A + """>Voir sur Amazon</a></p>
 <p>Videz-le après la saison, fin septembre ou début octobre. La mésange bleue est intégralement protégée en France (arrêté ministériel du 29 octobre 2009), rappelle la LPO : on ne touche ni au nid ni aux oiseaux.</p>
+
+<p class="sources"><strong>Sources</strong> : <a href="https://www.lpo.fr/decouvrir-la-nature/fiches-especes/fiches-especes/oiseaux/mesanges/mesange-bleue" target="_blank" rel="noopener">LPO : fiche mésange bleue</a> ; <a href="https://www.oiseaux.net/oiseaux/mesange.bleue.html" target="_blank" rel="noopener">oiseaux.net : Mésange bleue</a> (vérifié le 22 novembre 2026)</p>
 """,
   faq=[("Quel diamètre de trou pour un nichoir à mésange bleue ?",
         "28 mm selon la fiche espèce de la LPO, 26 à 28 mm selon le tutoriel nichoirs des Refuges LPO. Un trou de 28 mm empêche la mésange charbonnière, plus grosse, d'y entrer."),
@@ -2138,6 +2151,8 @@ g("merle-noir/",
 <h2>Avec quels oiseaux peut-on le confondre ?</h2>
 <p>L'étourneau sansonnet, noir lui aussi, marche au lieu de sautiller et vit en bande. Les grives ont un ventre clair nettement tacheté, là où la femelle de merle est brune. En montagne, le merle à plastron porte un croissant blanc sur la poitrine. Et si seul le dessus de la tête est noir, ce n'est pas un merle : voyez notre page sur l'<a href="{R}oiseau-tete-noire/">oiseau à tête noire</a>.</p>
 <p>Un dernier point que beaucoup ignorent : contrairement à la plupart des oiseaux du jardin, le merle noir n'est pas protégé en France. La LPO rappelle qu'il figure parmi les gibiers chassables, et elle demande son retrait de cette liste.</p>
+
+<p class="sources"><strong>Sources</strong> : <a href="https://www.lpo.fr/decouvrir-la-nature/fiches-especes/fiches-especes/oiseaux/merle-noir" target="_blank" rel="noopener">LPO : fiche merle noir</a> ; <a href="https://www.oiseaux.net/oiseaux/merle.noir.html" target="_blank" rel="noopener">oiseaux.net : Merle noir</a> (vérifié le 22 novembre 2026)</p>
 """,
   faq=[("Que donner à manger à un merle en hiver ?",
         "Des fruits de saison posés au sol ou sur un plateau : pommes ou poires coupées en deux, raisins, comme le conseille la LPO. Jamais de pain, de lait ni de restes salés."),
@@ -3335,7 +3350,7 @@ g("meilleure-camera-jardin-oiseaux/",
 
 AUTO_META['hirondelle-rustique/'] = ('🐦', 'ciel')
 g("hirondelle-rustique/",
-  "Hirondelle rustique : la reconnaître, son nid et comment l'aider",
+  "Hirondelle rustique : la reconnaître, son nid, l'aider",
   "Hirondelle rustique : la reconnaître, protéger son nid et l'accueillir chez vous",
   "Gorge rouge brique, longs filets de queue, nid de boue dans la grange : comment reconnaître l'hirondelle rustique, l'accueillir et ce que dit la loi sur le nid.",
   """
@@ -3374,7 +3389,7 @@ g("hirondelle-rustique/",
 
 <h2>A-t-on le droit d'enlever un nid d'hirondelle ?</h2>
 <p>Non. L'hirondelle rustique est intégralement protégée par l'arrêté du 29 octobre 2009 : les oiseaux, les œufs, les nids et les sites sont protégés. L'OFB rappelle que les sanctions peuvent aller jusqu'à 3 ans de prison et 150 000 € d'amende. Un nid ne peut être déplacé ou détruit qu'avec l'accord de la DREAL, d'octobre à mars, et avec une compensation.</p>
-<p>Elle est aussi classée <strong>quasi menacée</strong> sur la liste rouge des oiseaux nicheurs de France (2016), d'après l'INPN. Le suivi STOC de Vigie-Nature mesure une baisse de 25 % entre 2001 et 2019. La LPO avance un chiffre plus fort, plus de 40 % en dix ans, sans préciser sa source : retenez surtout que le déclin est net.</p>
+<p>Elle est aussi classée <strong>quasi menacée</strong> sur la liste rouge des oiseaux nicheurs de France (2016), d'après l'INPN. Le suivi STOC de Vigie-Nature mesure une baisse de 25 % entre 2001 et 2019. La LPO, sur sa page consacrée à la cohabitation avec les hirondelles, avance un chiffre plus fort, plus de 40 % en dix ans, sans préciser la période ni la méthode : retenez surtout que le déclin est net.</p>
 
 <h2>Comment l'accueillir chez vous ?</h2>
 <p>Les conseils de la LPO et de ses délégations régionales se résument en quelques gestes simples :</p>
@@ -3388,10 +3403,10 @@ g("hirondelle-rustique/",
 <p>L'erreur fréquente : poser le nid artificiel au printemps, quand les oiseaux sont déjà là. Faites-le pendant l'hiver. Pour les autres nichoirs du jardin et leurs dimensions, voyez notre guide pour <a href="{R}installer-un-nichoir/">installer un nichoir</a>.</p>
 
 <h2>Comment reconnaître son chant ?</h2>
-<p>En vol, elle lance un « vit » ou « uit » répété, et un « tsivitt » d'alarme quand un chat approche (LPO, oiseaux.net). Son chant est un long gazouillis grasseyant mais mélodieux, terminé par un trille grinçant. Un guide avec les sons aide à faire la différence avec les cris stridents des martinets : <a href="{AMZ:Guide des oiseaux de France Belin Morin}" """ + A + """>Voir sur Amazon</a>. D'autres titres sont dans notre sélection du <a href="{R}meilleur-guide-oiseaux/">meilleur guide d'identification des oiseaux</a>.</p>
+<p>En vol, elle lance un « vit » ou « uit » répété, et un « tsivitt » d'alarme quand un chat approche (LPO, oiseaux.net). Son chant, d'après oiseaux.net, est un long gazouillis assez mélodieux, terminé par un trille étiré. Un guide avec les sons aide à faire la différence avec les cris stridents des martinets : <a href="{AMZ:Guide des oiseaux de France Belin Morin}" """ + A + """>Voir sur Amazon</a>. D'autres titres sont dans notre sélection du <a href="{R}meilleur-guide-oiseaux/">meilleur guide d'identification des oiseaux</a>.</p>
 <p>Pour voir la couleur de la gorge sur un fil électrique, de bonnes jumelles 8x42 changent tout : <a href="{AMZ:Nikon Prostaff P7 8x42}" """ + A + """>Voir sur Amazon</a>. Notre comparatif des <a href="{R}meilleures-jumelles-oiseaux/">meilleures jumelles pour les oiseaux</a> couvre tous les budgets.</p>
 
-<p class="sources"><strong>Sources</strong> : <a href="https://www.lpo.fr/decouvrir-la-nature/fiches-especes/fiches-especes/oiseaux/hirondelles-martinets/hirondelle-rustique" target="_blank" rel="noopener">LPO : fiche hirondelle rustique</a> ; <a href="https://www.oiseaux.net/oiseaux/hirondelle.rustique.html" target="_blank" rel="noopener">oiseaux.net : Hirondelle rustique</a> ; <a href="https://inpn.mnhn.fr/espece/cd_nom/3696/tab/statut" target="_blank" rel="noopener">INPN : statuts de l'hirondelle rustique</a> (vérifié le 19 novembre 2026)</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.lpo.fr/decouvrir-la-nature/fiches-especes/fiches-especes/oiseaux/hirondelles-martinets/hirondelle-rustique" target="_blank" rel="noopener">LPO : fiche hirondelle rustique</a> ; <a href="https://www.oiseaux.net/oiseaux/hirondelle.rustique.html" target="_blank" rel="noopener">oiseaux.net : Hirondelle rustique</a> ; <a href="https://inpn.mnhn.fr/espece/cd_nom/3696/tab/statut" target="_blank" rel="noopener">INPN : statuts de l'hirondelle rustique</a> (vérifié le 22 novembre 2026)</p>
 """,
   faq=[("Comment différencier l'hirondelle rustique de l'hirondelle de fenêtre ?",
         "L'hirondelle rustique a la gorge rouge brique, un croupion sombre et de longs filets de queue ; elle niche à l'intérieur des bâtiments. L'hirondelle de fenêtre a la gorge et le croupion blancs, pas de filets, et un nid fermé collé sous un rebord extérieur."),
@@ -3729,24 +3744,25 @@ g("petit-oiseau-marron-jardin/",
 
 AUTO_META['meilleure-mangeoire-anti-ecureuil/'] = ('🏆', 'lilas')
 g("meilleure-mangeoire-anti-ecureuil/",
-  "Mangeoire anti-écureuil 2026 : 9 modèles à contrepoids et cage",
-  "Mangeoire anti-écureuil : 9 modèles à contrepoids ou à cage comparés",
-  "Squirrel Buster, Perky-Pet, Gardman : 9 mangeoires anti-écureuil à contrepoids ou à cage, capacité, nettoyage, et ce qu'elles valent face à l'écureuil roux.",
+  "Mangeoire anti-écureuil oiseaux du jardin : 6 modèles 2026",
+  "Mangeoire anti-écureuil pour les oiseaux du jardin : 6 modèles à contrepoids ou à cage",
+  "6 mangeoires anti-écureuil à contrepoids ou à cage pour garder les graines aux mésanges du jardin : capacité, réglage, nettoyage, limites avec l'écureuil roux.",
   """
-<p>Une mangeoire anti-écureuil efficace ferme ses orifices dès qu'un animal trop lourd s'y pose : c'est le principe du contrepoids, et le modèle le plus abouti est la <strong>Brome Squirrel Buster Plus</strong>, réglable, avec 6 orifices et près de 3 litres de graines. Les cages, elles, arrêtent surtout les pigeons et les gros oiseaux.</p>
-<p>Un point que les fiches oublient en France : ces mangeoires sont conçues pour l'écureuil gris américain. Notre écureuil roux est plus léger, et Brome reconnaît que les jeunes écureuils roux ne sont pas arrêtés. Il est aussi protégé par la loi. On fait le point ci-dessous, avant les 9 modèles retenus.</p>
+<p>Pour que les graines restent aux mésanges et aux autres oiseaux du jardin, une mangeoire anti-écureuil efficace ferme ses orifices dès qu'un animal trop lourd s'y pose : c'est le principe du contrepoids, et le modèle le plus abouti est la <strong>Brome Squirrel Buster Plus</strong>, réglable, avec 6 orifices et près de 3 litres de graines. Les cages, elles, arrêtent surtout les pigeons et les gros oiseaux.</p>
+<p>Un point que les fiches oublient en France : ces mangeoires sont pensées pour l'écureuil gris d'Amérique du Nord, nettement plus lourd que notre écureuil roux, qui est en plus protégé par la loi. On fait le point ci-dessous, avant les 6 modèles retenus.</p>
 {CTA}
 <p><strong>Notre choix, la Brome Squirrel Buster Plus</strong> : <a href="{AMZ:Brome Squirrel Buster Plus}" """ + A + """>Voir sur Amazon</a></p>
 <div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
+
+<h2>Pourquoi une mangeoire anti-écureuil convient aux oiseaux du jardin ?</h2>
+<p>Parce que le mécanisme trie les visiteurs au poids. Sur un modèle à contrepoids, c'est le poids de l'animal posé sur le perchoir qui déclenche la fermeture des orifices : un petit passereau comme la <a href="{R}mesange-charbonniere/">mésange charbonnière</a> ou la <a href="{R}mesange-bleue/">mésange bleue</a> continue de manger, alors qu'un écureuil gris, un pigeon ou une tourterelle trouve porte close si le réglage est assez sensible. Les graines que vous achetez pour l'hiver restent ainsi aux petits oiseaux, et vous remplissez moins souvent.</p>
+<p>La cage fonctionne autrement : elle laisse passer les petits oiseaux entre ses barreaux et arrête les gros, pigeons en tête. Dans les deux cas, la mangeoire reste un silo à graines, à garnir de tournesol noir comme le conseille la LPO, et à nettoyer régulièrement. <strong>Notre conseil</strong> : si votre problème vient surtout des pigeons, une cage suffit ; si ce sont des écureuils, prenez un modèle à contrepoids réglable et suspendez-le loin de toute branche.</p>
 
 <h2>Le tableau récapitulatif</h2>
 <table><thead><tr><th>Modèle</th><th>Mécanisme</th><th>Réglable</th><th>Capacité</th><th>Orifices</th><th>Graines</th></tr></thead><tbody>
 <tr><td>Brome Squirrel Buster Plus</td><td>Contrepoids à ressort</td><td>Oui</td><td>2,8 à 3 L (2,3 kg)</td><td>6</td><td>Tournesol noir conseillé</td></tr>
 <tr><td>Brome Squirrel Buster Legacy</td><td>Contrepoids à ressort</td><td>Oui</td><td>1,4 L (1,2 kg)</td><td>4</td><td>Non précisé</td></tr>
-<tr><td>Brome Squirrel Buster Classic</td><td>Contrepoids</td><td>Non</td><td>1,3 L (1,1 kg)</td><td>4</td><td>Non précisé</td></tr>
-<tr><td>Brome Squirrel Buster Standard</td><td>Contrepoids à ressort</td><td>Oui</td><td>Non précisé clairement</td><td>4</td><td>Non précisé</td></tr>
 <tr><td>Brome Squirrel Buster Mini</td><td>Contrepoids</td><td>Non</td><td>0,45 kg</td><td>4</td><td>Non précisé</td></tr>
-<tr><td>Brome Squirrel Buster Finch</td><td>Contrepoids</td><td>Non</td><td>1,1 kg</td><td>8</td><td>Niger</td></tr>
 <tr><td>Perky-Pet Squirrel-Be-Gone II (338)</td><td>Perchoirs à ressort</td><td>Oui, 4 positions</td><td>3,6 kg</td><td>Non précisé</td><td>Tournesol, mélange, carthame</td></tr>
 <tr><td>Perky-Pet Fortress Breakaway (5110PP)</td><td>Perchoirs qui cèdent, capots</td><td>Non précisé</td><td>1,6 kg</td><td>4</td><td>Non précisé</td></tr>
 <tr><td>Gardman Heavy Duty Squirrel Proof (A01820)</td><td>Cage autour d'un tube</td><td>Sans objet</td><td>500 g</td><td>Non précisé</td><td>Mélange</td></tr>
@@ -3754,11 +3770,11 @@ g("meilleure-mangeoire-anti-ecureuil/",
 
 <h2>Avant d'acheter : l'écureuil roux est protégé</h2>
 <p>L'écureuil roux figure dans l'arrêté du 23 avril 2007 qui fixe la liste des mammifères protégés en France. Il n'est donc pas question de le piéger ni de le blesser. Une mangeoire à contrepoids ne lui fait aucun mal : elle se ferme et il repart bredouille.</p>
-<p>Le vrai problème est ailleurs. Ces mangeoires viennent d'Amérique du Nord, où l'écureuil gris est lourd. Brome écrit lui-même que ses modèles n'arrêtent pas les jeunes écureuils roux. Concrètement, avec un contrepoids réglé au plus sensible, vous écarterez une partie des visites d'adultes, les pigeons et les tourterelles, mais pas tout. Notre conseil : si un écureuil roux vient chez vous, voyez-le aussi comme une chance, et placez-lui un peu de noisettes ailleurs, loin de la mangeoire des oiseaux.</p>
+<p>Le vrai problème est ailleurs. Ces mangeoires viennent d'Amérique du Nord, où l'écureuil gris pèse 300 à 710 g, environ 500 g en moyenne d'après l'INPN. Notre écureuil roux pèse environ 300 g selon le portail forestier Waldwissen, et les fiches des fabricants consultées ne promettent rien à son sujet. Concrètement, rien ne garantit qu'un écureuil roux déclenche la fermeture, même avec un contrepoids réglé au plus sensible ; ce réglage reste utile contre les pigeons et les tourterelles. Notre conseil : si un écureuil roux vient chez vous, voyez-le aussi comme une chance, et placez-lui un peu de noisettes ailleurs, loin de la mangeoire des oiseaux.</p>
 
 <h2>1. Brome Squirrel Buster Plus : la référence</h2>
 <p><strong>Pour qui ?</strong> Un jardin très fréquenté, avec des écureuils et des pigeons qui vident tout.</p>
-<p>Un capot descend et ferme les 6 orifices dès qu'un animal trop lourd se pose, avec un ressort réglable. Selon Brome, il contient 2,8 litres (2,3 kg) de graines, 3 litres selon Vivara. Il mesure 16,5 x 16,5 x 60,5 cm (environ 71 cm avec l'anse) et pèse 1,7 kg. Il se démonte à la main, sans outil, et Vivara annonce une garantie de 5 ans. Les oiseaux se posent sur un anneau perchoir qui fait le tour de la mangeoire.</p>
+<p>Un capot descend et ferme les 6 orifices dès qu'un animal trop lourd se pose, avec un ressort réglable. Selon Brome, il contient 2,8 litres (2,3 kg) de graines. Il mesure 16,5 x 16,5 x 60,5 cm (environ 71 cm avec l'anse) et pèse 1,7 kg. Il se démonte à la main, sans outil, et Vivara annonce une garantie de 5 ans. Les oiseaux se posent sur un anneau perchoir qui fait le tour de la mangeoire.</p>
 <ul>
 <li><strong>Points forts</strong> : le réglage écarte aussi les gros oiseaux, d'après Vivara ; grande capacité ; démontage sans outil.</li>
 <li><strong>Limites</strong> : encombrant, et Vivara demande 47 cm de dégagement tout autour pour qu'un écureuil ne puisse pas l'atteindre depuis une branche. Brome conseille le tournesol noir et déconseille les mélanges avec gros fruits ou noix.</li>
@@ -3774,25 +3790,7 @@ g("meilleure-mangeoire-anti-ecureuil/",
 </ul>
 <p><a href="{AMZ:Squirrel Buster Legacy}" """ + A + """>Voir sur Amazon</a></p>
 
-<h2>3. Brome Squirrel Buster Classic : simple et robuste</h2>
-<p><strong>Pour qui ?</strong> Vous voulez le mécanisme Brome sans réglage à faire.</p>
-<p>Contrepoids fixe, 4 orifices, environ 1,3 litre (1,1 kg). Métal et plastique anti-UV, 13,5 x 13,5 x 52,4 cm pour 1,2 kg.</p>
-<ul>
-<li><strong>Points forts</strong> : rien à régler, démontage à la main.</li>
-<li><strong>Limites</strong> : pas de réglage, donc moins de marge face à un écureuil roux léger. Disponibilité sur Amazon.fr incertaine.</li>
-</ul>
-<p><a href="{AMZ:Brome Squirrel Buster Classic}" """ + A + """>Voir sur Amazon</a></p>
-
-<h2>4. Brome Squirrel Buster Standard : le petit réglable</h2>
-<p><strong>Pour qui ?</strong> Un petit jardin, avec l'envie de pouvoir régler la sensibilité.</p>
-<p>Ressort réglable, 4 orifices, 12,7 x 12,7 x 33,7 cm pour 0,9 kg. La capacité n'est pas exprimée clairement sur la fiche du fabricant.</p>
-<ul>
-<li><strong>Points forts</strong> : le réglage dans un format court.</li>
-<li><strong>Limites</strong> : petite contenance ; disponibilité sur Amazon.fr incertaine.</li>
-</ul>
-<p><a href="{AMZ:Squirrel Buster Standard}" """ + A + """>Voir sur Amazon</a></p>
-
-<h2>5. Brome Squirrel Buster Mini : pour un balcon</h2>
+<h2>3. Brome Squirrel Buster Mini : pour un balcon</h2>
 <p><strong>Pour qui ?</strong> Un balcon ou une petite terrasse où un écureuil passe parfois.</p>
 <p>Contrepoids fixe, 4 orifices, 0,45 kg de graines, 10,5 x 10,5 x 31,4 cm pour 0,66 kg.</p>
 <ul>
@@ -3801,16 +3799,7 @@ g("meilleure-mangeoire-anti-ecureuil/",
 </ul>
 <p><a href="{AMZ:Squirrel Buster Mini}" """ + A + """>Voir sur Amazon</a></p>
 
-<h2>6. Brome Squirrel Buster Finch : pour le niger</h2>
-<p><strong>Pour qui ?</strong> Vous voulez attirer les chardonnerets avec du niger sans nourrir tout le voisinage.</p>
-<p>La version à niger de la gamme : 8 orifices fins, 1,1 kg de graines, contrepoids fixe, 13,5 x 13,5 x 52,4 cm pour 1,2 kg. Notre fiche du <a href="{R}chardonneret-elegant/">chardonneret élégant</a> explique ce qu'il mange vraiment.</p>
-<ul>
-<li><strong>Points forts</strong> : orifices adaptés aux petites graines, moins de gaspillage.</li>
-<li><strong>Limites</strong> : uniquement pour le niger ; pas de réglage.</li>
-</ul>
-<p><a href="{AMZ:Squirrel Buster Finch}" """ + A + """>Voir sur Amazon</a></p>
-
-<h2>7. Perky-Pet Squirrel-Be-Gone II Country House : la plus grande</h2>
+<h2>4. Perky-Pet Squirrel-Be-Gone II Country House : la plus grande</h2>
 <p><strong>Pour qui ?</strong> Vous préférez une maisonnette, avec beaucoup de graines et peu de remplissages.</p>
 <p>Maisonnette en métal laqué époxy de 35,6 x 27,9 x 34,9 cm pour 2 kg, avec des perchoirs qui se ferment sous le poids, réglables sur 4 positions. Elle contient 3,6 kg de graines : tournesol noir ou décortiqué, mélange ou carthame. Le toit se retire pour le remplissage, et Perky-Pet conseille un nettoyage au moins toutes les deux semaines.</p>
 <ul>
@@ -3819,7 +3808,7 @@ g("meilleure-mangeoire-anti-ecureuil/",
 </ul>
 <p><a href="{AMZ:Perky-Pet Squirrel-be-Gone 338}" """ + A + """>Voir sur Amazon</a></p>
 
-<h2>8. Perky-Pet Fortress Breakaway : le silo à capots</h2>
+<h2>5. Perky-Pet Fortress Breakaway : le silo à capots</h2>
 <p><strong>Pour qui ?</strong> Vous voulez un silo transparent pour voir le niveau de graines d'un coup d'œil.</p>
 <p>Les perchoirs cèdent sous le poids et les 4 orifices se ferment ensemble derrière des capots métalliques. Il contient 1,6 kg et mesure 19 x 9 x 40,8 cm. Coque en plastique, réservoir transparent, toit en métal. Perky-Pet conseille un nettoyage deux fois par semaine à l'eau savonneuse.</p>
 <ul>
@@ -3828,7 +3817,7 @@ g("meilleure-mangeoire-anti-ecureuil/",
 </ul>
 <p><a href="{AMZ:Perky-Pet 5110PP Forteresse}" """ + A + """>Voir sur Amazon</a></p>
 
-<h2>9. Gardman Heavy Duty Squirrel Proof : la cage contre les pigeons</h2>
+<h2>6. Gardman Heavy Duty Squirrel Proof : la cage contre les pigeons</h2>
 <p><strong>Pour qui ?</strong> Votre problème, ce sont surtout les pigeons et les tourterelles.</p>
 <p>Une cage en métal laqué entoure un tube en polycarbonate de 500 g de mélange. Gardman la présente aussi comme anti-pigeons. Le collier se dévisse, et les orifices et perchoirs se retirent d'un quart de tour, sans outil, pour le nettoyage.</p>
 <ul>
@@ -3839,21 +3828,24 @@ g("meilleure-mangeoire-anti-ecureuil/",
 
 <h2>Comment choisir une mangeoire anti-écureuil ?</h2>
 <p><strong>Contrepoids ou cage ?</strong> Le contrepoids agit sur le poids de l'animal : il gère les écureuils et, s'il est réglable, les pigeons. La cage agit sur la taille : parfaite contre les pigeons, moins fiable contre un écureuil mince. Si vous ne savez pas qui vide votre mangeoire, observez une matinée avant d'acheter.</p>
-<p><strong>Le réglage compte plus que la marque.</strong> Avec l'écureuil roux, plus léger que l'écureuil gris, un modèle réglable (Plus, Legacy, Standard, Perky-Pet 338) vous laisse une marge que les modèles fixes n'ont pas.</p>
+<p><strong>Le réglage compte plus que la marque.</strong> Avec l'écureuil roux, plus léger que l'écureuil gris, un modèle réglable (Plus, Legacy, Perky-Pet 338) vous laisse une marge que les modèles fixes n'ont pas.</p>
 <p><strong>L'emplacement fait la moitié du travail.</strong> Aucune mangeoire ne résiste à un écureuil qui saute dessus depuis une branche ou un toit. Vivara demande 47 cm de dégagement autour de la Squirrel Buster Plus. La LPO Occitanie conseille un endroit abrité des intempéries, plutôt ensoleillé, assez dégagé pour que les oiseaux voient venir les chats, mais proche d'arbres où se percher, et de déplacer la mangeoire une ou deux fois par hiver.</p>
 <p><strong>Pensez au nettoyage.</strong> La LPO Occitanie recommande de nettoyer les mangeoires chaque semaine (chaque jour pour un plateau). La LPO Alsace conseille de le faire dehors, avec des gants, et de désinfecter à l'eau de Javel diluée dans de l'eau froide, puis de rincer et de laisser sécher. Les Brome et la Gardman se démontent sans outil : vous le ferez plus volontiers.</p>
 <p><strong>La graine change tout.</strong> Le tournesol noir, conseillé par Brome et par la LPO, convient à la plupart des oiseaux de la mangeoire. Notre comparatif des <a href="{R}meilleure-graine-tournesol/">meilleures graines de tournesol</a> vous aide à choisir.</p>
 
-<h2>Quels oiseaux en profiteront ?</h2>
-<p>Les mésanges en premier : la <a href="{R}mesange-charbonniere/">mésange charbonnière</a> comme la <a href="{R}mesange-bleue/">mésange bleue</a> se moquent des capots, trop légères pour les déclencher. Si vos boules de graisse disparaissent également, voyez notre sélection des <a href="{R}meilleure-mangeoire-boules-de-graisse/">mangeoires pour boules de graisse</a>, avec une Squirrel Buster dédiée aux pains de graisse. Les autres modèles, sans protection, sont dans notre comparatif des <a href="{R}meilleure-mangeoire-oiseaux/">meilleures mangeoires pour oiseaux</a>, et toutes les règles du nourrissage d'hiver dans notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a>.</p>
+<p>Si vos boules de graisse disparaissent également, voyez notre sélection des <a href="{R}meilleure-mangeoire-boules-de-graisse/">mangeoires pour boules de graisse</a>, avec une Squirrel Buster dédiée aux pains de graisse. Les autres modèles, sans protection, sont dans notre comparatif des <a href="{R}meilleure-mangeoire-oiseaux/">meilleures mangeoires pour oiseaux</a>, et toutes les règles du nourrissage d'hiver dans notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a>.</p>
+
+<p class="sources"><strong>Sources</strong> : <a href="https://occitanie.lpo.fr/wp-content/uploads/2017/11/ficherefugeslpo_mangeoires_br.pdf" target="_blank" rel="noopener">LPO : fiche Refuges « Mangeoires pour oiseaux des jardins »</a> ; <a href="https://inpn.mnhn.fr/espece/cd_nom/61171" target="_blank" rel="noopener">INPN : écureuil gris (Sciurus carolinensis)</a> ; <a href="https://www.waldwissen.net/fr/economie-forestiere/gestion-des-degats/especes-invasives/lecureuil-gris-bientot-en-suisse" target="_blank" rel="noopener">Waldwissen : l'écureuil gris bientôt en Suisse ?</a> (vérifié le 22 novembre 2026)</p>
 """,
   faq=[("Une mangeoire anti-écureuil fait-elle mal à l'écureuil ?",
         "Non. Les modèles à contrepoids ferment simplement les orifices sous son poids, et l'écureuil repart sans rien. C'est important, car l'écureuil roux est une espèce protégée en France."),
        ("Les mangeoires anti-écureuil marchent-elles contre l'écureuil roux ?",
-        "En partie. Elles sont conçues pour l'écureuil gris, plus lourd, et Brome reconnaît que les jeunes écureuils roux ne sont pas arrêtés. Un modèle réglable, bien placé loin des branches, donne les meilleurs résultats."),
+        "En partie seulement. Elles sont conçues pour l'écureuil gris d'Amérique du Nord, environ 500 g en moyenne d'après l'INPN, alors que notre écureuil roux pèse environ 300 g. Un modèle réglable, bien placé loin des branches, vous laisse le plus de marge."),
+       ("Quels oiseaux du jardin profitent d'une mangeoire anti-écureuil ?",
+        "Les petits passereaux, comme la mésange charbonnière et la mésange bleue, trop légers pour déclencher la fermeture d'un modèle à contrepoids. Les pigeons et les tourterelles, eux, sont écartés par un contrepoids réglé assez sensible ou par une cage."),
        ("Une mangeoire anti-écureuil arrête-t-elle aussi les pigeons ?",
         "Oui pour les modèles à contrepoids réglable, comme la Squirrel Buster Plus, et pour les cages comme la Gardman A01820, présentée aussi comme anti-pigeons.")],
-  short="Top 9 mangeoires anti-écureuil", cat="Mangeoires")
+  short="Top 6 mangeoires anti-écureuil", cat="Mangeoires")
 
 
 AUTO_META['fiche-oiseaux-du-jardin-a-imprimer/'] = ('🖨️', 'sable')
