@@ -60,3 +60,8 @@ Le site est jeune : il gagne d'abord sur des requêtes précises de 4 mots et pl
 - La FAQ contient une question sur cet angle, par exemple « Quels oiseaux viennent à un abreuvoir ? ».
 - Chaque fiche produit dit aussi, en une phrase, pour quel lecteur ce produit est le bon choix.
 - Avant de prendre une ligne de tops.md : si sa requête est générique, réécris-la avec l'angle du site (slug compris si la page n'existe pas encore) ; si le produit n'a vraiment aucun lien avec le sujet du site, coche-la « abandonné, hors sujet » et prends la suivante.
+
+## Bouton « Voir le prix sur Amazon » (demande de Jeremy du 22 nov 2026)
+- Dans chaque top (page avec l'encadré « Comment nous avons fait cette sélection »), build.py ajoute automatiquement, juste sous l'intertitre de chaque produit numéroté (« N. Modèle »), un bouton « Voir le prix sur Amazon » qui reprend le lien {AMZ:...} de la fiche.
+- Ne l'écris jamais à la main. Il faut seulement que chaque fiche produit ait un h2 « N. Modèle » et, avant l'intertitre suivant, le lien habituel <a href="{AMZ:Marque Modèle}" """ + A + """>Voir sur Amazon</a>.
+- Le site n'affiche toujours aucun prix : le bouton renvoie vers Amazon.

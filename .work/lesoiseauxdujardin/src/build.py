@@ -122,8 +122,22 @@ def pick_box_guide(body, slug):
            '<a class="btn" href="{AMZ:%s}" %s>Voir sur Amazon</a></aside>') % (esc(name), esc(why or ('Extrait de notre comparatif « %s ».' % top['short'])), best, q, REL)
     return body.replace('{CTA}', box + '\n{CTA}', 1)
 
+def price_buttons(body):
+    """Tops : bouton « Voir le prix sur Amazon » juste sous l'intertitre de chaque produit numéroté (aucun prix affiché sur le site)."""
+    if not re.search(r'Comment (?:nous avons|on a) fait cette sélection', body) or 'class="price-btn"' in body: return body
+    heads = list(re.finditer(r'<h([23])(?: id="[^"]*")?>\s*\d+\.\s.+?</h\1>\n?', body))
+    for h in reversed(heads):
+        nxt = re.search(r'<h[23][ >]', body[h.end():])
+        seg = body[h.end():h.end() + nxt.start()] if nxt else body[h.end():]
+        a = re.search(r'href="\{AMZ:([^}]+)\}"[^>]*>\s*Voir[^<]*Amazon', seg)
+        if not a: continue
+        btn = '<p class="price-btn"><a class="btn small" href="{AMZ:%s}" %s>Voir le prix sur Amazon</a></p>\n' % (a.group(1), REL)
+        body = body[:h.end()] + btn + body[h.end():]
+    return body
+
 def render(body):
     body = pick_box(body)
+    body = price_buttons(body)
     body = body.replace('{CTA}', CTA)
     return re.sub(r'\{AMZ:([^}]+)\}', lambda m: amz(m.group(1)), body)
 

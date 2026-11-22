@@ -129,3 +129,4 @@ html.big{font-size:118%}
 .foot{background:#1F2A22}
 
 .pick{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#fff;border:2px solid var(--accent);border-radius:var(--r);padding:16px 18px;margin:20px 0}.pick>div{display:flex;flex-direction:column;gap:4px;flex:1 1 260px}.pick-tag{font-size:.85em;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em}.pick strong{font-size:1.1em}.pick-more{font-size:.92em}
+.price-btn{margin:.2rem 0 1rem}
