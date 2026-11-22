@@ -732,6 +732,7 @@ g("cadeau-personne-agee/",
 </ul>
 <h2>Pour Noël</h2>
 <p>À Noël, plutôt que plusieurs petits objets, pensez au <strong>cadeau commun entre frères et sœurs</strong> (et petits-enfants) : il permet d'offrir un équipement de qualité, et chacun peut ajouter un mot ou une photo. Surtout, prévoyez du temps pour <strong>installer et paramétrer l'appareil avec la personne</strong> : charger la batterie, régler le volume ou la taille des caractères, enregistrer les numéros, ajouter les premières photos. Montrez-lui les gestes, laissez-la essayer, et notez les étapes sur une petite fiche. Un appareil prêt à l'emploi et bien compris sera vraiment utilisé.</p>
+<p>Pour des idées pensées pour l'hiver à la maison, classées par budget, voyez aussi nos <a href="{R}cadeau-noel-personne-agee-a-domicile/">idées de cadeaux de Noël pour une personne âgée qui vit chez elle</a>.</p>
 <h2>Les cadeaux à éviter</h2>
 <ul>
 <li><strong>Les gadgets compliqués</strong> : trop de boutons, des menus en anglais, une application obligatoire ou une mise à jour à faire seul. Si vous hésitez, choisissez le modèle le plus simple.</li>
@@ -4396,3 +4397,63 @@ g("meilleure-montre-gps-senior/",
        ("Faut-il un abonnement pour une montre GPS senior ?", "Il faut au minimum une carte SIM avec un forfait mobile comprenant des données, chez l'opérateur de votre choix. Les montres seniors de ce comparatif acceptent une carte nano-SIM de l'opérateur de votre choix ; les montres Apple et Samsung demandent un forfait compatible avec leur version cellulaire."),
        ("Avez-vous testé ces montres GPS ?", "Non. Cette sélection repose uniquement sur les fiches des fabricants, les modes d'emploi et les pages de revendeurs. Nous n'indiquons que ce qui y figure, sans note ni avis de prise en main.")],
   short="Top 7 montres GPS senior", cat="Sécurité")
+
+AUTO_META['cadeau-noel-personne-agee-a-domicile/'] = ('🎁', 'rose')
+g("cadeau-noel-personne-agee-a-domicile/",
+  "Idées cadeaux de Noël pour une personne âgée qui vit chez elle",
+  "Cadeau de Noël pour une personne âgée qui vit chez elle : idées utiles par budget",
+  "Cadeaux de Noël pour une personne âgée qui vit chez elle : idées utiles pour l'hiver, l'autonomie et le confort, du petit budget au cadeau à plusieurs.",
+  """
+<p>Pour une personne âgée qui vit chez elle, le meilleur cadeau de Noël est celui qui rend l'hiver plus facile à la maison : mieux voir quand la nuit tombe tôt, avoir chaud sans monter le chauffage, sortir sans glisser, garder le contact avec la famille. Voici des idées classées par budget, toutes choisies pour l'autonomie et le confort au quotidien, avec un tableau pour décider vite.</p>
+{CTA}
+<h2>Les idées en un coup d'œil</h2>
+<table><thead><tr><th>Cadeau</th><th>Budget</th><th>Ce qu'il change en hiver</th><th>Pour qui</th></tr></thead><tbody>
+<tr><td>Crampons antidérapants pour chaussures</td><td>Petit budget</td><td>Sortir chercher le pain ou le courrier sur un sol gelé</td><td>Une personne qui sort encore seule</td></tr>
+<tr><td>Thermomètre d'intérieur à grand écran</td><td>Petit budget</td><td>Voir d'un coup d'œil si la maison est trop froide</td><td>Une personne qui chauffe peu par économie</td></tr>
+<tr><td>Veilleuses à détecteur de mouvement</td><td>Petit budget</td><td>Éclairer le chemin la nuit, quand il fait noir dès 17 h</td><td>Tout le monde, surtout après une chute</td></tr>
+<tr><td>Plaid chauffant avec arrêt automatique</td><td>Budget moyen</td><td>Avoir chaud au fauteuil sans chauffer toute la pièce</td><td>Une personne frileuse ou peu active</td></tr>
+<tr><td>Bottines chaudes et fermées</td><td>Budget moyen</td><td>Pieds au chaud et bien tenus, dedans comme dehors</td><td>Une personne qui porte encore des mules</td></tr>
+<tr><td>Lampe de lecture lumineuse</td><td>Budget moyen</td><td>Lire et faire ses mots croisés quand la lumière baisse</td><td>Une personne dont la vue fatigue</td></tr>
+<tr><td>Cadre photo connecté</td><td>Budget moyen</td><td>Recevoir les photos de la famille sans rien manipuler</td><td>Un proche qui voit peu ses petits-enfants</td></tr>
+<tr><td>Fauteuil releveur ou téléassistance</td><td>Cadeau à plusieurs</td><td>Se lever sans effort, pouvoir appeler à l'aide</td><td>Une personne plus fragile, avec son accord</td></tr>
+</tbody></table>
+<p>Notre conseil : avant de choisir, passez une soirée chez la personne en décembre. Vous verrez tout de suite ce qui la gêne : le couloir trop sombre, le salon froid, les chaussons qui glissent. Le bon cadeau est souvent sous vos yeux.</p>
+
+<h2>Petit budget : les cadeaux qui sécurisent l'hiver</h2>
+<h3>Des crampons pour ne pas glisser dehors</h3>
+<p>Le verglas sur le trottoir ou les marches du perron fait peur, et beaucoup de personnes âgées renoncent à sortir pendant les jours froids. Des crampons qui s'enfilent sur les chaussures redonnent de l'assurance pour les petites sorties. Choisissez un modèle facile à enfiler sans se pencher longtemps, et rappelez qu'on les retire en rentrant pour ne pas glisser sur le carrelage. <a href="{AMZ:crampons antiderapants chaussures neige verglas}" """ + A + """>Voir les crampons antidérapants</a></p>
+<h3>Un thermomètre d'intérieur lisible</h3>
+<p>Avec l'âge, on sent moins bien le froid, et certaines personnes baissent le chauffage pour économiser sans se rendre compte que la maison devient trop fraîche. Un thermomètre à gros chiffres posé dans le salon rend la température visible, pour elle comme pour vous quand vous passez. C'est un cadeau discret, qui ouvre la discussion sans faire la leçon. <a href="{AMZ:thermometre interieur grand ecran}" """ + A + """>Voir les thermomètres à grand écran</a></p>
+<h3>Des veilleuses pour les longues nuits</h3>
+<p>En décembre, il fait nuit tôt et longtemps. Les veilleuses qui s'allument seules au passage éclairent le trajet entre la chambre et les toilettes, là où se produisent beaucoup de chutes. Pour comparer les modèles, voyez notre sélection des <a href="{R}meilleure-veilleuse-detecteur-de-mouvement/">meilleures veilleuses à détecteur</a>. <a href="{AMZ:veilleuse detecteur de mouvement}" """ + A + """>Voir les veilleuses à détecteur</a></p>
+
+<h2>Budget moyen : le confort au quotidien</h2>
+<h3>Un plaid chauffant, avec arrêt automatique</h3>
+<p>Un plaid chauffant permet d'avoir chaud au fauteuil sans chauffer toute la maison. Le point à vérifier avant d'acheter : un arrêt automatique au bout d'un certain temps, pour qu'il ne reste pas allumé si la personne s'endort. Évitez-le si elle a des troubles de la sensibilité aux jambes, par exemple liés au diabète : demandez l'avis du médecin. <a href="{AMZ:plaid chauffant arret automatique}" """ + A + """>Voir les plaids chauffants</a></p>
+<h3>Des bottines chaudes à la place des mules</h3>
+<p>Les mules et les vieux chaussons usés font partie des causes de chute que l'on oublie. Des bottines d'intérieur fermées, avec une semelle antidérapante et une fermeture facile (scratch ou zip), gardent les pieds au chaud et tiennent bien le talon. Prenez la pointure habituelle et vérifiez que la personne peut les mettre seule, assise. <a href="{AMZ:chaussons bottines fermes senior antiderapant}" """ + A + """>Voir les bottines d'intérieur</a></p>
+<h3>Une lampe pour lire quand le jour baisse</h3>
+<p>Lire le journal, faire des mots fléchés ou coudre devient pénible dès 16 h en hiver. Une lampe de lecture puissante, orientable, posée près du fauteuil, change les après-midi. Si la vue baisse vraiment, pensez aussi aux <a href="{R}meilleurs-livres-gros-caracteres/">livres en gros caractères</a>.</p>
+<p>Et pour celles et ceux qui fatiguent à la lecture, un abonnement aux livres audio est une belle idée : Audible propose un essai gratuit de 30 jours avec un livre audio offert, résiliable à tout moment, et le livre reste acquis après résiliation. Notre guide des <a href="{R}livres-audio-personne-agee/">livres audio pour une personne âgée</a> explique comment l'installer simplement. <a href="{AUDIBLE}" """ + A + """>Essayer Audible gratuitement</a></p>
+<h3>Un cadre photo connecté pour garder le lien</h3>
+<p>Le cadre se branche une fois, puis la famille y envoie ses photos depuis son téléphone : la personne n'a rien à manipuler. C'est souvent le cadeau qui fait le plus plaisir aux grands-parents éloignés. Point de vigilance : il a besoin d'une connexion internet à la maison, vérifiez-le avant d'acheter. <a href="{AMZ:cadre photo numerique wifi}" """ + A + """>Voir les cadres photo connectés</a></p>
+<p>Si votre proche aime regarder le jardin depuis sa fenêtre, une mangeoire fixée à la vitre attire les mésanges et les rouges-gorges tout l'hiver, sans avoir à sortir : notre site frère Les oiseaux du jardin a comparé les <a href="https://lesoiseauxdujardin.fr/meilleure-mangeoire-fenetre/" target="_blank" rel="noopener">mangeoires de fenêtre</a>.</p>
+
+<h2>Le cadeau à plusieurs : un équipement plus important</h2>
+<p>Noël est aussi l'occasion de se mettre à plusieurs pour un achat que la personne ne ferait pas seule. Deux idées reviennent souvent : un <a href="{R}meilleur-fauteuil-releveur/">fauteuil releveur</a>, quand se lever du fauteuil devient pénible, et un <a href="{R}meilleur-bouton-appel-urgence/">bouton d'appel d'urgence</a> ou un service de téléassistance, quand elle vit seule.</p>
+<p>Ces cadeaux-là ne s'offrent jamais par surprise. Parlez-en avant, présentez-les comme une façon de rester chez soi plus longtemps, et laissez la personne choisir. Un fauteuil releveur s'essaie si possible en magasin ; un ergothérapeute peut aussi vous conseiller. Pensez enfin que certains équipements de l'habitat peuvent être aidés : voyez les <a href="{R}aides-adapter-logement-senior/">aides pour adapter le logement</a>.</p>
+
+<h2>Les erreurs à éviter à Noël</h2>
+<ul>
+<li><strong>Le gadget compliqué.</strong> Une tablette ou une enceinte connectée sans personne pour l'installer finit dans un tiroir. Si vous l'offrez, offrez aussi l'après-midi pour la régler ensemble.</li>
+<li><strong>Le cadeau qui rappelle l'âge.</strong> Un objet « pour vieux » emballé sous le sapin peut vexer. Présentez l'utilité, pas la fragilité : « pour lire plus facilement », pas « parce que tu vois mal ».</li>
+<li><strong>Encore un objet à ranger.</strong> Quand la maison est déjà pleine, préférez un cadeau qui se consomme ou un moment partagé : un repas, une sortie, une journée pour faire ensemble le tri ou les petits travaux.</li>
+<li><strong>Acheter trop tard.</strong> Les commandes de mi-décembre arrivent parfois après le 25. Le Black Friday, le 27 novembre, est un bon moment pour comparer et commander tôt, à condition de vérifier que le prix affiché est vraiment intéressant.</li>
+</ul>
+<p>Pour d'autres idées valables toute l'année, consultez notre guide <a href="{R}cadeau-personne-agee/">cadeau pour une personne âgée</a>, et pour repérer ce qui manque dans la maison, notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a>.</p>
+""",
+  faq=[("Quel cadeau de Noël offrir à une personne âgée qui vit seule chez elle ?", "Un cadeau qui facilite l'hiver à la maison : veilleuses à détecteur pour les nuits, plaid chauffant avec arrêt automatique, bottines fermées, cadre photo connecté pour recevoir les photos de la famille. Si elle est plus fragile, un bouton d'appel d'urgence offert à plusieurs, après en avoir parlé avec elle."),
+       ("Quel cadeau utile offrir à petit prix à une personne âgée ?", "Des crampons antidérapants pour les sorties par temps de gel, un thermomètre d'intérieur à grand écran ou des veilleuses à détecteur de mouvement. Ce sont de petits achats qui améliorent vraiment la sécurité et le confort en hiver."),
+       ("Comment offrir un cadeau de sécurité sans vexer un parent âgé ?", "Parlez-en avant, présentez l'objet par ce qu'il apporte (lire plus facilement, se lever sans effort) plutôt que par la fragilité, et laissez la personne choisir le modèle. Pour un équipement important comme un fauteuil releveur, faites-le essayer si possible."),
+       ("Faut-il acheter ses cadeaux de Noël pendant le Black Friday ?", "C'est un bon moment pour commander tôt et éviter les retards de livraison de décembre. Comparez quand même le prix avec celui des semaines précédentes et vérifiez les caractéristiques importantes, comme l'arrêt automatique d'un plaid chauffant.")],
+  short="Cadeaux de Noël personne âgée", cat="Vie quotidienne")

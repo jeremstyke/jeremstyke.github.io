@@ -133,8 +133,23 @@ def pick_box_guide(body, slug):
            '<a class="btn" href="{AMZ:%s}" %s>Voir sur Amazon</a></aside>') % (esc(name), esc(why or ('Extrait de notre comparatif « %s ».' % top['short'])), best, q, REL)
     return body.replace('{CTA}', box + '\n{CTA}', 1)
 
+def price_buttons(body):
+    """Tops : bouton « Voir le prix sur Amazon » juste sous l'intertitre de chaque produit (« N. Nom »)."""
+    if not re.search(r'Comment (?:nous avons|on a) fait cette sélection', body) or 'class="price-btn"' in body: return body
+    heads = list(re.finditer(r'<h2(?: id="[^"]*")?>\s*\d+\.\s.+?</h2>', body))
+    out, last = [], 0
+    for k, h in enumerate(heads):
+        nxt = heads[k + 1].start() if k + 1 < len(heads) else len(body)
+        a = re.search(r'href="\{AMZ:([^}]+)\}"[^>]*>\s*Voir[^<]*Amazon', body[h.end():nxt])
+        out.append(body[last:h.end()])
+        if a: out.append('\n<p class="price-btn"><a class="btn" href="{AMZ:%s}" %s>Voir le prix sur Amazon</a></p>' % (a.group(1), REL))
+        last = h.end()
+    out.append(body[last:])
+    return ''.join(out)
+
 def render(body):
     body = pick_box(body)
+    body = price_buttons(body)
     body = body.replace('{CTA}', CTA).replace('{R}checklist/', '{R}' + HUB)
     body = re.sub(r'\{AUDIBLE:([A-Z0-9]{10})\}', lambda m: 'https://www.amazon.fr/hz/audible/mlp/mfpdp/' + m.group(1) + '?actionCode=AMSTM1450129210001&tag=' + TAG, body)
     body = body.replace('{AUDIBLE}', 'https://www.amazon.fr/hz/audible/mlp?actionCode=AMSTM1450129210001&tag=' + TAG)
@@ -186,7 +201,7 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None,
 <link rel="icon" href="{R}assets/favicon.ico" sizes="32x32"><link rel="icon" href="{R}assets/favicon.svg" type="image/svg+xml"><link rel="icon" href="{R}assets/icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="{R}assets/apple-touch-icon.png">
 <link rel="preload" href="{R}assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{R}assets/fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="{R}assets/style.css?v=7">
+<link rel="stylesheet" href="{R}assets/style.css?v=8">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8638687738606649" crossorigin="anonymous"></script>
 </head>

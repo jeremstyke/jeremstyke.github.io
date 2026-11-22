@@ -1,5 +1,9 @@
 # Sujets d'articles à venir pour Vieillir chez soi (un tous les 2 jours)
 # Format : - [ ] slug/ | requête visée | catégorie | angle
+- [x] cadeau-noel-personne-agee-a-domicile/ | idées cadeaux de Noël pour une personne âgée qui vit chez elle | Vie quotidienne | demandé par Jeremy le 22 nov 2026, publié le 22 nov
+- [~] black-friday-materiel-maintien-domicile/ | Black Friday matériel maintien à domicile | Vie quotidienne | RÉSERVÉ : publié le lun. 23 nov par une tâche ponctuelle demandée par Jeremy ; produits de nos tops seulement, aucun prix ni promo inventés
+- [~] cadeau-aidant-familial/ | cadeau pour un aidant familial | Conseils pour les proches | RÉSERVÉ : publié le mar. 24 nov par une tâche ponctuelle demandée par Jeremy
+- [~] cadeau-noel-grand-parent-plus-de-80-ans/ | cadeau de Noël grand-père grand-mère plus de 80 ans | Vie quotidienne | RÉSERVÉ : publié le mer. 25 nov par une tâche ponctuelle demandée par Jeremy
 - [x] livres-audio-personne-agee/ | livre audio pour personne âgée | Vie quotidienne | quand la vue baisse, comment écouter (enceinte simple, téléphone, tablette, casque), trouver des livres audio, installer avec son proche ; lien {AUDIBLE} vers l'essai gratuit en bonne place et liens {AMZ} vers les appareils
 - [x] date-paiement-retraite-decembre-2026/ | date paiement retraite décembre 2026 | Retraite | dates de versement de décembre 2026 pour le régime général (Assurance retraite, MSA si vérifié) et l'Agirc-Arrco, lues sur les calendriers officiels ; tableau par caisse ; si une date n'est pas trouvée, le dire ; lien vers la page générale date-paiement-retraite/ si elle existe
 - [x] ccas-aides-personnes-agees/ | CCAS aides personnes âgées | Conseils pour les proches | ce qu'est le CCAS, les aides qu'il peut proposer aux seniors (variables selon les communes), comment le contacter ; sources service-public.fr
