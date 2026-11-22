@@ -277,7 +277,7 @@ def faq_html(faq):
 def build():
     if os.path.isdir(OUT):
         for n in os.listdir(OUT):
-            if n not in ('assets', 'CNAME', '.nojekyll'):
+            if n not in ('assets', 'og', 'CNAME', '.nojekyll'):
                 p = os.path.join(OUT, n)
                 shutil.rmtree(p) if os.path.isdir(p) else os.remove(p)
     os.makedirs(os.path.join(OUT, 'assets'), exist_ok=True)
@@ -302,7 +302,8 @@ def build():
             import og as ogm; ogm.make_article(os.path.join(OUT, rel), title, emo_cat, tint)
             return rel
         except Exception as e:
-            print('og non généré', slug, e); return None
+            print('og non généré', slug, e)
+            return rel if os.path.exists(os.path.join(OUT, rel)) else None
     latest = list(reversed(guides))
 
     # Accueil
