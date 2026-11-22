@@ -1,35 +1,75 @@
 # -*- coding: utf-8 -*-
+# Images de partage (Open Graph) 1200x630, même style que Ma liste bébé (22 nov 2026)
 from PIL import Image, ImageDraw, ImageFont
-import os
-def make(out):
-    W, H = 1200, 630
-    im = Image.new('RGB', (W, H), '#F5F7F2'); d = ImageDraw.Draw(im)
-    d.rectangle([0, H - 140, W, H], fill='#3F6B3A')
-    def font(sz):
-        for p in ['/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf']:
-            if os.path.exists(p): return ImageFont.truetype(p, sz)
-        return ImageFont.load_default()
-    d.text((80, 170), 'Les oiseaux du jardin', font=font(96), fill='#1F2A22')
-    d.text((80, 300), "Nourrir, loger et observer", font=font(44), fill='#55635D')
-    d.text((80, 360), "les oiseaux de votre jardin", font=font(44), fill='#55635D')
-    d.text((80, H - 100), 'Mangeoires  ·  Nichoirs  ·  Observation', font=font(38), fill='#F5F7F2')
-    im.save(out, optimize=True)
+import os, re
+HERE = os.path.dirname(os.path.abspath(__file__))
+F_TITLE = os.path.join(HERE, 'fonts', 'bricolage-grotesque-latin-800-normal.woff')
+F_TEXT = os.path.join(HERE, 'fonts', 'figtree-latin-600-normal.woff')
+F_EMOJI = os.path.join(HERE, 'fonts', 'NotoColorEmoji.ttf')
+SITE = 'Les oiseaux du jardin'; DOMAIN = 'lesoiseauxdujardin.fr'
+BG = (245, 247, 242); INK = (31, 42, 34); MUTE = (86, 100, 90); BRAND = (63, 107, 58); ACCENT = (231, 163, 111)
+TINTS = {'sauge': (228, 238, 221), 'ciel': (224, 236, 243), 'sable': (244, 234, 213), 'rose': (247, 226, 214), 'lilas': (236, 230, 243), 'mousse': (228, 238, 221), 'rouge': (247, 226, 214)}
 
-def make_article(out, title, cat):
-    import re, textwrap
-    if os.path.exists(out): return
+def _f(p, sz):
+    try: return ImageFont.truetype(p, sz)
+    except Exception: return ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', sz)
+
+def _emoji(e, size):
+    try:
+        f = ImageFont.truetype(F_EMOJI, 109)
+        im = Image.new('RGBA', (160, 160), (0, 0, 0, 0))
+        ImageDraw.Draw(im).text((10, 10), e, font=f, embedded_color=True)
+        bb = im.getbbox()
+        if not bb: return None
+        im = im.crop(bb); r = size / max(im.size)
+        return im.resize((max(1, int(im.width * r)), max(1, int(im.height * r))), Image.LANCZOS)
+    except Exception:
+        return None
+
+def _wrap(d, text, font, width):
+    words, lines, cur = text.split(), [], ''
+    for w in words:
+        t = (cur + ' ' + w).strip()
+        if d.textlength(t, font=font) <= width: cur = t
+        else:
+            if cur: lines.append(cur)
+            cur = w
+    if cur: lines.append(cur)
+    return lines
+
+def card(out, title, emoji, kicker, tint=None):
     W, H = 1200, 630
-    im = Image.new('RGB', (W, H), '#F5F7F2'); d = ImageDraw.Draw(im)
-    def font(sz):
-        p = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
-        return ImageFont.truetype(p, sz) if os.path.exists(p) else ImageFont.load_default()
-    cat = re.sub(r'[^\u0000-￿]|[☀-➿️]', '', cat).strip()
-    d.rounded_rectangle([80, 70, 80 + 24 * len(cat) + 60, 130], 30, fill='#E4EEDD')
-    d.text((110, 82), cat, font=font(34), fill='#3F6B3A')
-    y = 180
-    for line in textwrap.wrap(title, 26)[:4]:
-        d.text((80, y), line, font=font(64), fill='#1F2A22'); y += 82
-    d.rectangle([0, H - 90, W, H], fill='#3F6B3A')
-    d.text((80, H - 68), 'Les oiseaux du jardin', font=font(40), fill='#F5F7F2')
+    bg = TINTS.get(tint or '', BG)
+    im = Image.new('RGB', (W, H), bg); d = ImageDraw.Draw(im)
+    for x in range(640, W, 34):
+        for y in range(0, H, 34):
+            d.ellipse([x, y, x + 5, y + 5], fill=tuple(max(0, c - 14) for c in bg))
+    d.rounded_rectangle([86, 96, 1124, 548], radius=40, fill=ACCENT)
+    d.rounded_rectangle([70, 80, 1108, 532], radius=40, fill=(255, 255, 255))
+    d.ellipse([890, 120, 1060, 290], fill=bg)
+    em = _emoji(emoji, 100) if emoji else None
+    if em: im.paste(em, (975 - em.width // 2, 205 - em.height // 2), em)
+    size = 70
+    while size > 40:
+        ft = _f(F_TITLE, size); lines = _wrap(d, title, ft, 720)
+        if len(lines) <= 3: break
+        size -= 4
+    y = 170
+    for ln in lines[:3]:
+        d.text((130, y), ln, font=ft, fill=INK); y += int(size * 1.12)
+    fk = _f(F_TEXT, 30); tw = d.textlength(DOMAIN, font=fk)
+    d.rounded_rectangle([130, 452, 130 + tw + 40, 500], radius=24, fill=BRAND)
+    d.text((150, 457), DOMAIN, font=fk, fill=(255, 255, 255))
+    if kicker: d.text((130 + tw + 64, 459), kicker, font=fk, fill=MUTE)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     im.save(out, optimize=True)
+
+def make(out):
+    card(out, SITE + ' : nourrir et observer les oiseaux', '🐦', '')
+
+def make_article(out, title, emo_cat, tint=None):
+    if os.path.exists(out): return
+    m = re.match(r'^(\S+)\s+(.*)$', emo_cat or '')
+    if m and not re.match(r'^[\wÀ-ſ]', m.group(1)): emo, cat = m.group(1), m.group(2)
+    else: emo, cat = '', emo_cat or ''
+    card(out, title, emo, cat, tint)

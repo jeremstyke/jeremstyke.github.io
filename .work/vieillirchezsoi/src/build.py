@@ -160,10 +160,35 @@ PUBLISHER_LD = {"@type": "Organization", "name": SITE, "url": BASE + '/', "logo"
 BYLINE = ' · par <a href="/a-propos/" rel="author">' + AUTHOR_NAME.split()[0] + '</a>'
 
 
+
+# Boutons de partage (22 nov 2026, demande de Jeremy)
+SHARE_SKIP = ('', 'a-propos/', 'mentions-legales/', 'confidentialite/', 'contact/', 'publicite/', 'partenariats/', '404-tmp/')
+def share_html(url, title):
+    from urllib.parse import quote
+    import json as _j
+    t = title.split(' | ')[0]
+    u, tq = quote(url, safe=''), quote(t, safe='')
+    return ('<style>.share{margin:28px 0 8px;padding:14px 0 0;border-top:1px solid var(--line,var(--trait,#ddd))}'
+      '.share-t{font-weight:700;margin:0 0 8px}.share-b{display:flex;flex-wrap:wrap;gap:8px}'
+      '.sh{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--brand,var(--framboise,#2F6B57));'
+      'background:#fff;color:var(--brand,var(--framboise,#2F6B57));font:inherit;font-size:.92em;font-weight:700;text-decoration:none;cursor:pointer}'
+      '.sh:hover,.sh:focus-visible{background:var(--brand,var(--framboise,#2F6B57));color:#fff}.sh[hidden]{display:none}</style>'
+      '<div class="share"><p class="share-t">Partager cette page</p><div class="share-b">'
+      '<button type="button" class="sh sh-n" hidden>Partager</button>'
+      f'<a class="sh" href="https://wa.me/?text={tq}%20{u}" target="_blank" rel="noopener nofollow">WhatsApp</a>'
+      f'<a class="sh" href="https://www.facebook.com/sharer/sharer.php?u={u}" target="_blank" rel="noopener nofollow">Facebook</a>'
+      f'<a class="sh" href="mailto:?subject={tq}&amp;body={u}">E-mail</a>'
+      '<button type="button" class="sh sh-c">Copier le lien</button></div></div>'
+      '<script>(function(){var s=document.currentScript.previousElementSibling,u=' + _j.dumps(url) + ',t=' + _j.dumps(t) + ';'
+      'var n=s.querySelector(".sh-n");if(navigator.share){n.hidden=false;n.onclick=function(){navigator.share({title:t,url:u}).catch(function(){})}}'
+      'var c=s.querySelector(".sh-c");c.onclick=function(){var ok=function(){c.textContent="Lien copié"};'
+      'if(navigator.clipboard){navigator.clipboard.writeText(u).then(ok,function(){})}else{var i=document.createElement("input");i.value=u;document.body.appendChild(i);i.select();try{document.execCommand("copy");ok()}catch(e){}i.remove()}}})()</script>')
+
 def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None, kind='website'):
     depth = path.count('/')
     R = '../' * depth
     url = BASE + '/' + path
+    if path not in SHARE_SKIP and body.count('</article>') == 1: body = body.replace('</article>', share_html(url, title) + '</article>')
     ld = [{"@context": "https://schema.org", "@type": "WebSite", "name": SITE, "url": BASE + '/', "inLanguage": "fr", "publisher": PUBLISHER_LD}]
     if path == '': ld.append(dict({"@context": "https://schema.org"}, **PUBLISHER_LD))
     if crumbs:
@@ -271,10 +296,10 @@ def build():
         dates.setdefault(x['slug'], TODAY)
     json.dump(dates, open(DATES_F, 'w'), indent=1, ensure_ascii=False, sort_keys=True)
     os.makedirs(os.path.join(OUT, 'og'), exist_ok=True)
-    def og_for(slug, title, emo_cat):
+    def og_for(slug, title, emo_cat, tint=None):
         rel = 'og/' + slug.strip('/') + '.png'
         try:
-            import og as ogm; ogm.make_article(os.path.join(OUT, rel), title, emo_cat)
+            import og as ogm; ogm.make_article(os.path.join(OUT, rel), title, emo_cat, tint)
             return rel
         except Exception as e:
             print('og non généré', slug, e); return None
@@ -400,7 +425,7 @@ def build():
         body = ('<div class="wrap art-wrap"><article class="prose"><p class="art-cat t-%s"><span aria-hidden="true">%s</span> %s</p><h1>%s</h1>%s%s%s'
                 '<p class="disc-in">Ces conseils sont généraux et ne remplacent pas l\'avis d\'un professionnel de santé. Liens d\'affiliation : nous touchons une commission sur certains achats, sans surcoût pour vous.</p></article>%s</div>') % (
             tint, emo, esc(x['cat']), esc(x['h1']), meta, gbody, fh, rel)
-        page(x['slug'], x['title'], x['desc'], body, schema=art + fs, crumbs=[('Guides', 'guides/'), (x['short'], x['slug'])], prio='0.7', kind='article', og=og_for(x['slug'], x['h1'], emo + ' ' + x['cat']))
+        page(x['slug'], x['title'], x['desc'], body, schema=art + fs, crumbs=[('Guides', 'guides/'), (x['short'], x['slug'])], prio='0.7', kind='article', og=og_for(x['slug'], x['h1'], emo + ' ' + x['cat'], tint))
 
     # Pages légales
     page('a-propos/', 'À propos de Vieillir chez soi', "Qui sommes-nous, comment nous choisissons nos conseils et comment le site est financé.",
