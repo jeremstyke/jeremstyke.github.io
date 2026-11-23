@@ -66,7 +66,7 @@
       }).catch(function () { busy = false; draw(); });
     };
     if (window.MCTPREM) return go();  // Premium: no ad
-    var bb = function () { go(); };  // 11 nov 2026 (Jeremy): until 17 nov 2026 23:59 CET, only the Big Bang AI interstitial, then Adsgram again
+    var bb = function () { go(); };
     var show = function () { try { window.Adsgram.init({ blockId: 'int-55508' }).show().then(go, go); } catch (e) { go(); } };
     /* 15 nov 2026 (Jeremy): Adsgram only, no more own interstitial */
     if (window.Adsgram) show();
