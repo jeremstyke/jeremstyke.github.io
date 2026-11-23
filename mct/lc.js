@@ -66,7 +66,7 @@
       }).catch(function () { busy = false; draw(); });
     };
     if (window.MCTPREM) return go();  // Premium: no ad
-    var bb = function () { var lg = 'en'; try { lg = (window.LANG || (window.BT && BT.lang) || 'en'); } catch (e) {} var run = function () { try { window.PostPayPromo.show({ src: 'lclick', lang: lg }).then(go, go); } catch (e) { go(); } }; if (window.PostPayPromo) return run(); var s = document.createElement('script'); s.src = 'https://jeremstyke.github.io/postpay/promo.js?v=1'; s.onload = run; s.onerror = go; document.head.appendChild(s); };  // 11 nov 2026 (Jeremy): until 17 nov 2026 23:59 CET, only the Big Bang AI interstitial, then Adsgram again
+    var bb = function () { go(); };  // 11 nov 2026 (Jeremy): until 17 nov 2026 23:59 CET, only the Big Bang AI interstitial, then Adsgram again
     var show = function () { try { window.Adsgram.init({ blockId: 'int-55508' }).show().then(go, go); } catch (e) { go(); } };
     /* 15 nov 2026 (Jeremy): Adsgram only, no more own interstitial */
     if (window.Adsgram) show();
