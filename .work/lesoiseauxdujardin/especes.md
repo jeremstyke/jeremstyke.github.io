@@ -21,7 +21,7 @@
 - [x] huppe-fasciee/ | huppe fasciée | Observer | fiche espèce : reconnaître, où et quand la voir, ce qu'elle mange
 - [x] chardonneret-elegant/ | chardonneret élégant | Observer | fiche espèce : statut de protection vérifié, graines de niger, mangeoire à niger
 - [x] petit-oiseau-marron-jardin/ | petit oiseau marron jardin | Observer | identification : troglodyte, moineau, grimpereau, accenteur
-- [ ] heron-cendre/ | héron cendré | Observer | fiche espèce et bassin de jardin : protéger ses poissons (filet, leurre), espèce protégée
+- [x] heron-cendre/ | héron cendré | Observer | fiche espèce et bassin de jardin : protéger ses poissons (filet, leurre), espèce protégée
 - [ ] difference-corbeau-corneille/ | différence corbeau corneille | Observer | identification : corneille noire, grand corbeau, corbeau freux, choucas
 - [ ] verdier-d-europe/ | verdier | Observer | fiche espèce : trichomonose et hygiène des mangeoires (sources sérieuses)
 - [ ] martin-pecheur/ | martin-pêcheur | Observer | fiche espèce : reconnaître, où le voir, au bord des bassins et rivières

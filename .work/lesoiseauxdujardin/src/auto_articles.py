@@ -3225,7 +3225,7 @@ g("meilleure-camera-jardin-oiseaux/",
   "Piège photo, caméra wifi ou mangeoire filmée : 8 caméras pour observer les oiseaux du jardin, avec emplacement, nettoyage, chats et abonnements expliqués.",
   """
 <p>Pour observer les oiseaux de votre jardin sans être derrière la fenêtre, il existe trois grandes familles : le <strong>piège photo</strong>, qui se déclenche tout seul au passage d'un animal, la <strong>caméra wifi</strong> qu'on regarde en direct sur son téléphone, et la <strong>mangeoire avec caméra intégrée</strong>, qui filme de tout près. Si vous ne devez en retenir qu'une pour les petits oiseaux, prenez la mangeoire filmée : c'est la seule qui place l'objectif à quelques centimètres des mésanges.</p>
-<p>Pour les hérissons, les renards, la chouette qui passe la nuit ou le héron au bord du bassin, un vrai piège photo à infrarouge invisible fait mieux. Nous avons retenu huit modèles vendus en France, du petit budget au haut de gamme, et nous expliquons surtout ce que les fiches oublient : où la poser, comment l'entretenir et ce que coûtent les abonnements.</p>
+<p>Pour les hérissons, les renards, la chouette qui passe la nuit ou le <a href="{R}heron-cendre/">héron cendré au bord du bassin</a>, un vrai piège photo à infrarouge invisible fait mieux. Nous avons retenu huit modèles vendus en France, du petit budget au haut de gamme, et nous expliquons surtout ce que les fiches oublient : où la poser, comment l'entretenir et ce que coûtent les abonnements.</p>
 {CTA}
 <p><strong>Notre choix pour les petits oiseaux, la Birdfy Feeder 2 Pro</strong> : <a href="{AMZ:Birdfy Feeder 2 Pro}" """ + A + """>Voir sur Amazon</a></p>
 <div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
@@ -3877,3 +3877,62 @@ g("fiche-oiseaux-du-jardin-a-imprimer/",
        ("Quand a lieu le comptage national des oiseaux des jardins ?", "Il est organisé deux fois par an par la LPO et le Muséum national d'Histoire naturelle, dont une fois le dernier week-end de janvier. Les dates exactes de chaque édition sont annoncées sur le site de l'Observatoire des oiseaux des jardins."),
        ("Peut-on utiliser cette fiche en classe ?", "Oui, elle est gratuite et se photocopie librement pour un usage non commercial, en classe comme en animation nature.")],
   short="Fiche oiseaux à imprimer", cat="Observer")
+
+
+AUTO_META['heron-cendre/'] = ('🐦', 'ciel')
+g("heron-cendre/",
+  "Héron cendré au jardin : le reconnaître et protéger son bassin",
+  "Héron cendré dans le jardin : le reconnaître et protéger les poissons du bassin",
+  "Un héron cendré vide votre bassin ? Comment le reconnaître, pourquoi il vient, et les protections efficaces et légales : fils tendus, filet, abris pour les poissons.",
+  """
+<p><strong>En bref</strong> : le héron cendré est le grand oiseau gris de 90 à 98 cm qui se poste au bord des bassins pour pêcher les poissons. C'est une espèce protégée : on ne peut ni le blesser ni le piéger, mais on peut protéger son bassin. D'après la Station ornithologique suisse, deux fils tendus à 20 cm et 35 cm au-dessus du sol tout autour du bassin l'empêchent de pêcher, alors que les épouvantails ne l'effraient que temporairement.</p>
+<p>Si vous découvrez un matin un grand oiseau gris immobile au bord de votre bassin, et que vos poissons rouges disparaissent les uns après les autres, le coupable est presque toujours le héron cendré. Il ne vient pas par hasard : un bassin peu profond rempli de poissons bien visibles est pour lui un garde-manger facile. Voici comment le reconnaître, et comment le dissuader sans lui faire de mal.</p>
+{CTA}
+
+<h2>Comment reconnaître un héron cendré ?</h2>
+<p>C'est le plus grand oiseau que l'on voit couramment dans un jardin. Oiseaux.net donne une taille de 90 à 98 cm, une envergure de 175 à 195 cm et un poids d'environ 1,5 kg. Le dessus est gris moyen, le dessous blanc, les grandes plumes des ailes et de la queue noirâtres. L'adulte porte une calotte noire prolongée par une petite huppe, et au printemps son bec vire au jaune orangé.</p>
+<p>En vol, le signe qui ne trompe pas : le héron replie son cou en S, qui forme une bosse sous la tête, et laisse ses pattes tendues vers l'arrière. Une cigogne ou une grue, elles, volent le cou tendu.</p>
+<table><thead><tr><th>Critère</th><th>Héron cendré</th><th>Grande aigrette</th><th>Cigogne blanche</th></tr></thead><tbody>
+<tr><td>Couleur</td><td>Gris dessus, blanc dessous, calotte noire</td><td>Entièrement blanche</td><td>Blanche, ailes noires</td></tr>
+<tr><td>Bec</td><td>Jaune, jaune orangé au printemps</td><td>Jaune ou noir selon la saison</td><td>Rouge</td></tr>
+<tr><td>Cou en vol</td><td>Replié en S</td><td>Replié en S</td><td>Tendu</td></tr>
+<tr><td>Au jardin</td><td>Fréquent près des bassins</td><td>Rare, plutôt en zone humide</td><td>Rare</td></tr>
+</tbody></table>
+<p>Son cri est rude et râpeux, un « waarr » que l'on entend souvent au moment où il s'envole, dérangé.</p>
+
+<h2>Pourquoi vient-il dans votre jardin ?</h2>
+<p>Pour manger. Selon oiseaux.net, il se nourrit surtout de poissons, qu'il pêche à l'affût, immobile pendant de longues minutes avant de détendre le cou d'un coup. Les amphibiens et les écrevisses ne comptent que pour une petite part de son menu. Un bassin d'ornement avec des poissons colorés, sans cachette, sur un fond clair et peu profond, lui offre une pêche très facile.</p>
+<p>Il vient surtout tôt le matin, quand le jardin est calme. En France, oiseaux.net le décrit comme sédentaire ou tout au plus erratique : un héron qui a trouvé votre bassin peut donc revenir toute l'année, et particulièrement quand les étangs naturels gèlent.</p>
+<p>Il niche en colonies, souvent en haut de grands arbres, avec 3 à 5 œufs bleu-vert pâle couvés environ 26 jours. Les jeunes restent au nid environ deux mois : au printemps, les adultes cherchent donc beaucoup de poissons pour les nourrir, et les visites au bassin se multiplient.</p>
+
+<h2>Est-il protégé ?</h2>
+<p>Oui. L'INPN (Muséum national d'Histoire naturelle) classe le héron cendré parmi les espèces protégées en France. Il est interdit de le tuer, de le capturer, de le blesser ou de le perturber volontairement, et de détruire ses nids. Les protections ci-dessous visent seulement à l'empêcher de pêcher : il repartira chercher sa nourriture ailleurs. N'utilisez jamais de pièges, de glu ou de dispositifs qui pourraient le blesser.</p>
+
+<h2>Comment protéger les poissons de son bassin ?</h2>
+<h3>Deux fils tendus autour du bassin</h3>
+<p>C'est la méthode que recommandent la Station ornithologique suisse et la LPO Alsace, qui diffuse sa fiche. Le héron ne se pose pas dans l'eau : il atterrit à côté et entre dans le bassin à pied, par le bord. Deux fils tendus tout autour, à 20 cm et à 35 cm du sol, lui barrent le passage. Les grenouilles, les hérissons et les petits oiseaux passent toujours dessous. Utilisez des piquets solides et un fil bien visible. <a href="{AMZ:fil cloture bassin anti heron}" """ + A + """>Voir sur Amazon</a></p>
+<h3>Un filet sur les zones sensibles</h3>
+<p>La fiche de la LPO Alsace conseille aussi de couvrir les zones les plus exposées avec un filet ou des bandes de matériel coloré. Un filet tendu au-dessus de l'eau est très efficace pour un petit bassin. Choisissez-le à mailles assez fines, bien tendu et fixé au sol tout autour : un filet lâche peut piéger un oiseau ou un hérisson, vérifiez-le régulièrement. <a href="{AMZ:filet protection bassin heron}" """ + A + """>Voir sur Amazon</a></p>
+<h3>Des cachettes pour les poissons</h3>
+<p>Les deux fiches insistent sur les refuges sous l'eau : pierres creuses ou entassées au fond, plantes aquatiques, et en été des nénuphars qui couvrent la surface et cachent les poissons. Un abri tubulaire posé au fond leur offre aussi un endroit où fuir. <a href="{AMZ:abri poisson bassin}" """ + A + """>Voir sur Amazon</a></p>
+<h3>Un bassin plus profond</h3>
+<p>Pour que les poissons passent l'hiver, la Station ornithologique suisse conseille une profondeur d'au moins 1,5 à 2 m. Une zone profonde sert aussi de refuge : le héron pêche là où il a pied. À l'inverse, évitez les pierres, les îlots ou les troncs qui dépassent de l'eau près du bord : ils lui servent de poste d'affût.</p>
+
+<h2>Les leurres et épouvantails marchent-ils ?</h2>
+<p>Pas longtemps. Les épouvantails et autres signaux visuels n'effraient le héron que temporairement, d'après la Station ornithologique suisse : il s'y habitue vite. Le faux héron en plastique, souvent vendu pour ça, n'est cité comme efficace par aucune des fiches que nous avons lues. Notre conseil : si vous en mettez un, changez-le de place tous les jours, et comptez d'abord sur les fils et les cachettes.</p>
+
+<h2>Observer le héron sans lui faire peur</h2>
+<p>Si votre bassin est protégé, le héron devient un beau visiteur à regarder de loin. Restez derrière une fenêtre : il s'envole dès qu'il vous voit bouger. Avec de bonnes jumelles, on suit très bien sa technique de pêche ; notre comparatif des <a href="{R}meilleures-jumelles-oiseaux/">meilleures jumelles pour les oiseaux</a> couvre tous les budgets. <a href="{AMZ:jumelles 8x42 observation oiseaux}" """ + A + """>Voir sur Amazon</a></p>
+<p>Le bassin profite aussi aux petits oiseaux, qui viennent y boire et s'y baigner : pensez à garder un bord en pente douce. Nos conseils pour leur offrir de l'<a href="{R}eau-pour-les-oiseaux-en-hiver/">eau en hiver</a> et notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a> complètent cette page. Chez Les oiseaux du jardin, nous rappelons qu'un jardin accueillant pour les oiseaux l'est aussi pour leurs prédateurs : le tout est de trouver un équilibre.</p>
+
+<p class="sources"><strong>Sources</strong> : <a href="https://www.oiseaux.net/oiseaux/heron.cendre.html" target="_blank" rel="noopener">oiseaux.net : Héron cendré</a> ; <a href="https://cdnfiles2.biolovision.net/www.nosoiseaux.ch/pdffiles/infos/Herons_cendres_dans_les_etangs_de_jardin-3082.pdf" target="_blank" rel="noopener">Station ornithologique suisse : Hérons cendrés dans les étangs de jardin</a> ; <a href="https://alsace.lpo.fr/images/stories/Articles/docLPO/heron-dans-etang.pdf" target="_blank" rel="noopener">LPO Alsace : le héron dans l'étang</a> ; <a href="https://inpn.mnhn.fr/espece/cd_nom/2506/tab/statut" target="_blank" rel="noopener">INPN : statuts du héron cendré</a> (vérifié le 23 novembre 2026)</p>
+""",
+  faq=[("Comment empêcher un héron de manger les poissons de mon bassin ?",
+        "Tendez deux fils tout autour du bassin, à 20 cm et 35 cm du sol, comme le conseille la Station ornithologique suisse : le héron entre dans l'eau à pied et ne peut plus passer. Ajoutez des cachettes sous l'eau (pierres, plantes, abri tubulaire) et, pour un petit bassin, un filet bien tendu."),
+       ("A-t-on le droit de chasser un héron cendré ?",
+        "On peut l'empêcher de pêcher, mais pas lui nuire. Le héron cendré est une espèce protégée en France selon l'INPN : il est interdit de le tuer, de le capturer, de le blesser ou de détruire ses nids."),
+       ("Un faux héron éloigne-t-il les vrais hérons ?",
+        "Rarement de façon durable. Les épouvantails et signaux visuels n'effraient le héron que temporairement, d'après la Station ornithologique suisse. Les fils tendus et les cachettes pour les poissons sont bien plus fiables."),
+       ("À quelle heure le héron vient-il au bassin ?",
+        "Le plus souvent tôt le matin, quand le jardin est calme et que personne ne bouge. C'est pour cela qu'on découvre souvent les pertes de poissons sans jamais avoir vu l'oiseau.")],
+  short="Héron cendré", cat="Observer")
