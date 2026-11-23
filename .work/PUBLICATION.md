@@ -18,11 +18,11 @@ Les règles détaillées de chaque site restent dans son AUTOMATION.md (ou fichi
 
 | Jour | Sites affiliés | Autres sites |
 |---|---|---|
-| Lundi | Vieillir chez soi : 1 article ; Les oiseaux du jardin : 1 fiche ; Ma liste mariage : 1 top | CVLibre étranger : 1 article ; adresse-temporaire.fr : 1 guide ; jetboxmail.com : 1 guide ; Guide Systeme.io : 1 article français |
+| Lundi | Vieillir chez soi : 1 article ; Les oiseaux du jardin : 1 fiche ; Ma liste mariage : 1 top | CVLibre étranger : 1 article ; adresse-temporaire.fr : 1 guide ; jetboxmail.com : 1 guide |
 | Mardi | Ma liste bébé : 1 article | CVLibre français : 1 page métier ; PDF Démarches : 1 guide ; jetboxmail.com : 1 guide |
-| Mercredi | Vieillir chez soi : 1 top ; Les oiseaux du jardin : 1 top | CVLibre étranger : 1 article ; adresse-temporaire.fr : 1 guide ; jetboxmail.com : 1 guide ; Guide Systeme.io : 1 article anglais |
+| Mercredi | Vieillir chez soi : 1 top ; Les oiseaux du jardin : 1 top | CVLibre étranger : 1 article ; adresse-temporaire.fr : 1 guide ; jetboxmail.com : 1 guide |
 | Jeudi | Vieillir chez soi : 1 article ; Ma liste mariage : 1 article | CVLibre français : 1 article ; PDF Démarches : 1 guide ; jetboxmail.com : 1 guide |
-| Vendredi | Les oiseaux du jardin : 1 fiche ; Ma liste bébé : 1 top | CVLibre étranger : 1 article ; adresse-temporaire.fr : 1 guide ; jetboxmail.com : 1 guide ; Guide Systeme.io : 1 article français |
+| Vendredi | Les oiseaux du jardin : 1 fiche ; Ma liste bébé : 1 top | CVLibre étranger : 1 article ; adresse-temporaire.fr : 1 guide ; jetboxmail.com : 1 guide |
 
 Jour : `TZ=Europe/Paris date +%u` (1 = lundi ... 5 = vendredi).
 
@@ -84,7 +84,7 @@ Dépôt jeremstyke/adresse-temporaire. articles.py (liste ARTICLES, règle de lo
 Même dépôt jeremstyke/adresse-temporaire. Prends la première ligne « - [ ] » de KEYWORDS-EN.md, écris le guide dans guides_en.py en suivant exactement les règles et faits de son en-tête (900 à 1 300 mots, anglais américain, h2 en vraies questions, FAQ 3 en h3, 1 ou 2 liens internes + 1 lien ajouté depuis un guide existant). Coche la ligne, `python3 build.py` (doit afficher ok), commit « Guide anglais : <titre> », push. Vérifie https://jetboxmail.com/guides/<slug>/ puis IndexNow (host jetboxmail.com). S'il reste moins de 3 sujets, ajoutes-en 10 (Ubersuggest, locId 2840, en).
 Les jours où adresse-temporaire.fr et jetboxmail.com publient tous les deux, fais-les l'un après l'autre avec un seul build et un seul push.
 
-### Guide Systeme.io (jeremstyke.github.io/systeme-guide, ajouté le 22 nov 2026)
+### Guide Systeme.io (jeremstyke.github.io/systeme-guide) : EN PAUSE depuis le 23 nov 2026, ne rien publier tant que Jeremy ne l'a pas relancé
 Site d'affiliation Systeme.io en 16 langues, dépôt jeremstyke/systeme-guide (add_repo, access push), servi par GitHub Pages depuis la branche main. Lis SUJETS.md (règles et file de sujets) et tools/articles.py (format des articles). Prends la première ligne « - [ ] » de la bonne langue (français lundi et vendredi, anglais mercredi). Vérifie chaque fait sur systeme.io (tarifs : gratuit, Startup 17, Webinar 47, Unlimited 97 par mois ; prix en euros dans les articles français, en dollars dans les articles anglais) et, pour un comparatif, sur le site officiel du concurrent. Ajoute l'article dans ARTICLES (date du jour), ajoute dans BLOGTXT la langue si elle manque, coche la ligne, lance `python3 tools/build.py .` (doit afficher ok), vérifie l'absence de tiret long, commit, `git -c push.negotiate=true push`. Attends 2 minutes, vérifie que https://jeremstyke.github.io/systeme-guide/<chemin langue>/blog/<slug>/ répond 200, puis IndexNow avec host jeremstyke.github.io, clé da4540821acf4048569bad7fbedc3ee1, keyLocation https://jeremstyke.github.io/da4540821acf4048569bad7fbedc3ee1.txt. S'il reste moins de 4 sujets dans une langue, ajoute-en 8 vrais (Ubersuggest si le quota le permet).
 
 ## Entretien du samedi
