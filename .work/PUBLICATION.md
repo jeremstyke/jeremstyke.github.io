@@ -18,11 +18,11 @@ Les règles détaillées de chaque site restent dans son AUTOMATION.md (ou fichi
 
 | Jour | Sites affiliés | Autres sites |
 |---|---|---|
-| Lundi | Vieillir chez soi : 1 article ; Les oiseaux du jardin : 1 fiche ; Ma liste mariage : 1 top | CVLibre étranger : 1 article |
+| Lundi | Vieillir chez soi : 1 article ; Les oiseaux du jardin : 1 fiche ; Ma liste mariage : 1 top | CVLibre français : 1 article |
 | Mardi | Ma liste bébé : 1 article | CVLibre français : 1 page métier ; PDF Démarches : 1 guide |
-| Mercredi | Vieillir chez soi : 1 top ; Les oiseaux du jardin : 1 top | CVLibre étranger : 1 article |
+| Mercredi | Vieillir chez soi : 1 top ; Les oiseaux du jardin : 1 top | CVLibre français : 1 article |
 | Jeudi | Vieillir chez soi : 1 article ; Ma liste mariage : 1 article | CVLibre français : 1 article ; PDF Démarches : 1 guide |
-| Vendredi | Les oiseaux du jardin : 1 fiche ; Ma liste bébé : 1 top | CVLibre étranger : 1 article |
+| Vendredi | Les oiseaux du jardin : 1 fiche ; Ma liste bébé : 1 top | CVLibre français : 1 article |
 
 Mail jetable (adresse-temporaire.fr et jetboxmail.com) : publication EN PAUSE depuis le 23 nov 2026 à la demande de Jeremy, n'y publie rien. Priorité : les 4 sites affiliés et CVLibre ; PDF Démarches continue.
 
@@ -79,7 +79,8 @@ Dépôt jeremstyke/malistemariage, même fonctionnement que Ma liste bébé (src
 Dépôt jeremstyke/cvlibre-site. Lis tools/i18n/BLOG.md, tools/i18n/MOTS-CLES.md, et tools/i18n/AMAZON.md (format des liens seulement, identifiant cvlibre-21, aucun top Amazon). Aucun lien vers /pdf/ ou /pdf-demarches-france/. L'encart NordVPN est ajouté par assets/partner.js : ne l'écris pas.
 - Français mardi : page CV par métier (slug cv-<metier>, première ligne cv- de MOTS-CLES.md ; modèle blog/cv-aide-soignant/ et blog/cv-cariste/ ; titre et accroches types, compétences, exemple d'expérience, diplômes vérifiés sur onisep.fr, francetravail.fr ou service-public.fr, erreurs, lien vers /creer-un-cv/). S'il reste moins de 10 métiers, ajoute-en 30.
 - Français jeudi : première ligne de MOTS-CLES.md qui n'est pas une page métier. Groupe « résiliation » : faits lus sur le site officiel du service seulement.
-- Étranger lundi, mercredi, vendredi : 1 article sur la version (en, us, ca, au, nz, de) dont le dernier article est le plus ancien (tools/i18n/ROTATION-ETRANGER.md, à tenir à jour). Sur la semaine, au moins 2 des 3 sont des pages métier du pays (vocabulaire et sources officielles du pays). Jamais de traduction d'une autre version.
+- Français lundi, mercredi, vendredi (règle du 23 nov 2026, la France fait plus de 80 % du trafic) : lundi et vendredi une page CV par métier comme le mardi, mercredi un article comme le jeudi.
+- Étranger : EN PAUSE depuis le 23 nov 2026, plus aucun nouvel article sur les versions en, us, ca, au, nz, de (elles restent en ligne telles quelles, pas de redirection). Ancienne règle, pour mémoire : 1 article sur la version (en, us, ca, au, nz, de) dont le dernier article est le plus ancien (tools/i18n/ROTATION-ETRANGER.md, à tenir à jour). Sur la semaine, au moins 2 des 3 sont des pages métier du pays (vocabulaire et sources officielles du pays). Jamais de traduction d'une autre version.
 - 900 à 1 400 mots, tableau ou liste, FAQ 3, lien vers l'outil CVLibre utile, 2 ou 3 liens internes + 1 lien ajouté depuis un article existant. Suis BLOG.md (page, carte d'index, sitemap, hreflang). Build `sh tools/i18n/build_all.sh` (« RESTE » ne doit apparaître pour aucune page). Commit, push, attends 2 minutes, IndexNow (host cvlibre.com).
 
 ### PDF Démarches France (https://demarches.cvlibre.com), vouvoiement
