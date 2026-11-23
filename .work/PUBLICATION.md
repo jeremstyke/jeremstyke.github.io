@@ -24,6 +24,8 @@ Les règles détaillées de chaque site restent dans son AUTOMATION.md (ou fichi
 | Jeudi | Vieillir chez soi : 1 article ; Ma liste mariage : 1 article | CVLibre français : 1 article ; PDF Démarches : 1 guide |
 | Vendredi | Les oiseaux du jardin : 1 fiche ; Ma liste bébé : 1 top | CVLibre français : 1 article |
 
+Priorité achat (règle du 23 nov 2026) : les listes sujets.md et tops.md des 4 sites affiliés ont été réordonnées, pages qui font acheter et cadeaux de Noël en tête ; garde cet ordre. Jusqu'au 15 décembre 2026, Les oiseaux du jardin prend le vendredi le premier « - [ ] » de sujets.md au lieu de especes.md. Quand tu ajoutes des sujets, place en tête ceux qui mènent à un achat.
+
 Mail jetable (adresse-temporaire.fr et jetboxmail.com) : publication EN PAUSE depuis le 23 nov 2026 à la demande de Jeremy, n'y publie rien. Priorité : les 4 sites affiliés et CVLibre ; PDF Démarches continue.
 
 Jour : `TZ=Europe/Paris date +%u` (1 = lundi ... 5 = vendredi).
