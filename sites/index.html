@@ -101,5 +101,28 @@ footer nav{display:flex;flex-wrap:wrap;gap:8px 16px}
 
 <footer><span>© 2026 Jeremstyke</span><nav aria-label="Statistiques (accès privé)"><a href="https://claude.ai/artifact/FeHXq1ULWsajrLNiwLM2jk" rel="nofollow">Stats sites affiliés</a><a href="https://cvlibre.com/stats/" rel="nofollow">Stats CVLibre</a></nav></footer>
 </main>
+<script>
+(function(){
+if((navigator.language||"").toLowerCase().indexOf("fr")===0)return;
+var T={
+"Nos sites":"Our websites",
+"Des outils gratuits et des guides d'achat simples, faits en France par Jeremstyke.":"Free tools and simple buying guides, made in France by Jeremstyke.",
+"Outils et guides gratuits":"Free tools and guides",
+"Guides d'achat":"Buying guides (in French)",
+"Créez un CV gratuit avec l'IA : 33 modèles, PDF sans filigrane, lettres de motivation et offres d'emploi.":"Create a free resume with AI: 33 templates, PDF without watermark, cover letters and job offers.",
+"Compresser, fusionner ou convertir un PDF pour la CAF, l'ANTS, France Travail ou les impôts, avec des guides simples sur les pièces à fournir.":"Compress, merge or convert a PDF for French administrations (CAF, ANTS, France Travail, taxes), with simple guides. In French.",
+"Extension gratuite pour Chrome et Edge qui vide le cache, les cookies et l'historique en un clic, ou automatiquement. En anglais.":"Free extension for Chrome and Edge that clears cache, cookies and history in one click, or automatically.",
+"Une adresse e-mail jetable en un clic, pour s'inscrire sans donner sa vraie adresse ni recevoir de spam.":"A disposable email address in one click, to sign up without giving your real address. In French.",
+"La version anglaise de l'adresse e-mail jetable, pour les sites étrangers.":"A free disposable email address in one click, to sign up anywhere without spam.",
+"Préparer l'arrivée de bébé : la liste de naissance, les guides et les meilleurs équipements.":"Getting ready for a baby: the baby registry, guides and the best gear.",
+"Faire sa liste de mariage simplement, avec des idées de cadeaux utiles et des sélections de produits.":"Building a wedding registry simply, with useful gift ideas and product picks.",
+"Aménager le logement d'un proche âgé pour rester autonome à la maison, pièce par pièce.":"Adapting an elderly relative's home so they can stay independent, room by room.",
+"Nourrir, loger et observer les oiseaux de votre jardin, en les respectant.":"Feeding, housing and watching the birds in your garden, the right way.",
+"Visiter le site →":"Visit the site →"};
+document.documentElement.lang="en";document.title="Our websites | Jeremstyke";
+document.querySelectorAll("h1,h2,p,.go").forEach(function(e){var k=e.textContent.trim();if(T[k])e.textContent=T[k];});
+var a=document.querySelector('a.card[href="https://cvlibre.com/"]');if(a)a.href="https://cvlibre.com/us/";
+})();
+</script>
 </body>
 </html>
