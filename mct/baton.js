@@ -86,9 +86,9 @@
         return r;
       };
     } catch (e) {}
-    // 5 nov 2026 (00h22, Jeremy): one opening out of two shows the SayApp promo (sayapp/promo.js) instead of the ad
+    // 5 nov 2026 (00h22, Jeremy): one opening out of two shows the SayApp promo instead of the ad
     function saPromoOr(fb) {
-      // 10 nov 2026 (21h52, Jeremy): the SayApp promo is replaced by the Big Bang AI News interstitial (bigbang/promo.js)
+      // 10 nov 2026 (21h52, Jeremy): the SayApp promo is replaced by the Big Bang AI News interstitial
       return fb();  // 15 nov 2026 (Jeremy): Adsgram only, no more own interstitial
     }
     function popup() {
