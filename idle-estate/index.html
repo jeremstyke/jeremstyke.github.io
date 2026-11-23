@@ -357,8 +357,8 @@ const L = {
   betaT:'Balancing in progress', betaS:'Progress may be reset while I tune the game.',
   hint:'Tap a property to collect its rent. Hire a manager 👔 and it pays you automatically, even when you are away.', estate:'Estate', shop:'Shop', prest:'Empire', top:'Top',
   buy:'Buy', lvl:'Lv', manager:'Manager', auto:'Auto', tapStart:'👆 Tap', ms:'x',
-  welcomeT:'Welcome pack', welcomeS:'2h of rent now + x2 income for 24h', claim:'Claim', daily:'Daily bonus', dailyS:'Day {n} of 7: you get {m} min of your income ({x}). Come back every day, day 7 adds x2 for 1h',
-  away:'While you were away', adErr:'Ad unavailable, try again', adT:'Free reward', adS:'At least {x} in cash every 2 hours, more as your income grows.', adB:'Open', adWait:'Stay on the page for 10 seconds...', adNext:'Next reward in {t}', adStay:'Stay on the ad for 5 seconds to get your reward', adOk:'Reward received!', boostActive:'A boost is already running. Boosts do not stack.', adCool:'Come back in a bit', awayX:'Double it', awayXd:'Doubled!', awayS:'Your tenants kept paying rent.', collect:'Collect', great:'Great!',
+  welcomeT:'Welcome pack', welcomeS:'2h of rent now + x2 income for 24h', claim:'Claim', daily:'Daily bonus', dailyS:'Day {n} of 7 (streak: {s}): you get {m} min of your income ({x}). Days 3 and 5 add x2 for 30 min, day 7 adds x2 for 1h, and the streak goes on up to 30 days!',
+  away:'While you were away', adErr:'Ad unavailable, try again', adT:'Free reward', adS:'At least {x} in cash every 30 minutes, more as your income grows.', adS2:'Every 30 minutes: x2 income for 4 hours, added to your bonus reserve.', adB:'Open', adWait:'Stay on the page for 10 seconds...', adNext:'Next reward in {t}', adStay:'Stay on the ad for 5 seconds to get your reward', adOk:'Reward received!', boostActive:'A boost is already running. Boosts do not stack.', adCool:'Come back in a bit', awayX:'x4 it', awayL:'x1.5 with a link', awayLink:'Opening the link...', awayXd:'Doubled!', awayS:'Your tenants kept paying rent.', collect:'Collect', great:'Great!',
   vipMsg:'Golden tenant! +', per:'/s', max:'MAX',
   shopT:'Shop', shopS:'Everything is paid in Telegram Stars. 30% of all Stars spent goes to the weekly top 10 (this share may go up or down).',
   items:{welcome:['🎁','Welcome pack','2h of rent instantly + x2 income for 24h. One time only.'],b2:['⚡','x2 Income, 4h','Double all your rent for 4 hours.'],b3:['🚀','x3 Income, 24h','Triple all your rent for a full day.'],perm2:['👑','Partner: x2 forever','Permanent x2 on everything, forever.'],vault:['🏦','Vault: 24h offline','Tenants pay up to 24h while you are away (instead of 3h).'],skip1:['⏩','Time skip 1h','Instantly get 1 hour of rent.'],skip8:['⏭️','Time skip 8h','Instantly get 8 hours of rent.']},
@@ -376,10 +376,10 @@ const L = {
   x2av:'x2 available', use:'Use', minInc:'min of income', startC:'Starting cash:', invs:'investors', ibk:{inc:'income, forever',off:'offline time, forever',bst:'boost duration, forever',rew:'rewards, forever'}, inv:{std:['🧑‍💼','Marc, the banker','Standard deal: each investor gives +30% income.'],shark:['🦈','Lea, the shark','30% more investors, each +36% income, but you restart with $0.'],angel:['😇','Sofia, the patron','20% fewer investors, each +30% offline time, but you restart with 5x more cash and keep 50% of your levels instead of 30%.'],tech:['🚀','Yan, the visionary','Normal number of investors, each +15% boost duration, plus x2 income for 2 hours.'],heir:['🏡','Clara, the heiress','15% more investors, each +30% rewards, and your Studio is at least level 10.']},
   goldT:'Idle Estate Gold', goldS:'x1.5 income, 24h offline, double quest and bonus rewards, and a 👑 next to your name. Renews every 30 days, cancel anytime in Telegram.', goldOn:'Gold active', goldLeft:'days left', perMonth:'/ 30 days',
   dealT:'Deal of the day', dealS:'-30% today only', was:'instead of',
-  questsT:'Daily quests', questsS:'Complete quests and claim rewards. They reset every day.', chestT:'Daily chest', chestS:'Finish all 3 quests: x2 income for 1h',
-  q:{tap:['👆','Collect rent {n} times'],buy:['🏗️','Buy {n} property levels'],vip:['🤑','Catch {n} golden tenants'],mgr:['👔','Hire a manager'],daily:['🔥','Claim the daily bonus']},
+  questsT:'Daily quests', questsS:'Complete quests and claim rewards. They reset every day.', chestT:'Daily chest', chestS:'Finish all 4 quests: x2 income for 1h',
+  q:{tap:['👆','Collect rent {n} times'],buy:['🏗️','Buy {n} property levels'],vip:['🤑','Catch {n} golden tenants'],mgr:['👔','Hire a manager'],daily:['🔥','Claim the daily bonus'],tap2:['👆','Collect rent {n} times (big round)'],buy2:['🏗️','Buy {n} property levels (big round)']},
   shareTxt:'Build your real estate empire with me on Idle Estate!', snd:'Sounds', evInfo:'Golden hour every day: all your rent pays x2 for 60 minutes. Starts at', rewarded:'Reward claimed!', done:'Done',
-  ach:{mgr1:['👔','First manager','Hire your first manager'],s10:['🛋️','Studio level 10','Reach level 10 on the Studio'],s25:['🛋️','Studio level 25','Reach level 25 on the Studio'],s50:['🛋️','Studio level 50','Reach level 50 on the Studio'],mgr5:['🧑‍💼','5 managers','Hire 5 managers'],mgr10:['🏅','Full staff','Hire a manager on every property'],pr1:['🏙️','Skyline','Own the 15th property'],pr5:['💎','Tycoon','Own the 20th property'],st7:['🔥','7 day streak','Claim the daily bonus 7 days in a row'],fr1:['👥','First friend','Invite a friend'],fr5:['🎉','Popular','Invite 5 friends'],pg1:['🔄','New start','Do your first prestige'],pg3:['🔄','Veteran','Do 3 prestiges'],pg5:['⭐','Serial owner','Do 5 prestiges'],pg10:['👑','Legend','Do 10 prestiges'],p30:['🏙️','Skyline','Own the 30th property'],p45:['🌆','Metropolis','Own the 45th property']}
+  ach:{mgr1:['👔','First manager','Hire your first manager'],s10:['🛋️','Studio level 10','Reach level 10 on the Studio'],s25:['🛋️','Studio level 25','Reach level 25 on the Studio'],s50:['🛋️','Studio level 50','Reach level 50 on the Studio'],mgr5:['🧑‍💼','5 managers','Hire 5 managers'],mgr10:['🏅','Full staff','Hire a manager on every property'],pr1:['🏙️','Skyline','Own the 15th property'],pr5:['💎','Tycoon','Own the 20th property'],st7:['🔥','7 day streak','Claim the daily bonus 7 days in a row'],fr1:['👥','First friend','Invite a friend'],fr5:['🎉','Popular','Invite 5 friends'],pg1:['🔄','New start','Do your first prestige'],pg3:['🔄','Veteran','Do 3 prestiges'],pg5:['⭐','Serial owner','Do 5 prestiges'],pg10:['👑','Legend','Do 10 prestiges'],p30:['🏙️','Skyline','Own the 30th property'],p45:['🌆','Metropolis','Own the 45th property'],s75:['🛋️','Studio level 75','Reach level 75 on the Studio'],s100:['🛋️','Studio level 100','Reach level 100 on the Studio'],s150:['🛋️','Studio level 150','Reach level 150 on the Studio'],tl100:['🧱','100 levels','Own 100 property levels in total'],tl500:['🧱','500 levels','Own 500 property levels in total'],tl1000:['🏗️','1,000 levels','Own 1,000 property levels in total'],tl2500:['🏗️','2,500 levels','Own 2,500 property levels in total'],p35:['🌇','Skyline 35','Own the 35th property'],p40:['🌃','Skyline 40','Own the 40th property'],p50:['🏙️','Half a hundred','Own the 50th property'],p55:['🌉','Almost there','Own the 55th property'],p60:['👑','Top of the ladder','Own the 60th property'],mgr20:['🧑‍💼','20 managers','Hire 20 managers'],mgr30:['🧑‍💼','30 managers','Hire 30 managers'],mgr45:['🏅','45 managers','Hire 45 managers'],mgr60:['🏆','Dream team','Hire a manager on all 60 properties'],st3:['🔥','3 day streak','Claim the daily bonus 3 days in a row'],st14:['🔥','2 week streak','Claim the daily bonus 14 days in a row'],st30:['🌋','30 day streak','Claim the daily bonus 30 days in a row'],fr10:['🤝','Networker','Invite 10 friends'],fr20:['🌍','Community','Invite 20 friends'],pg15:['🔄','Restart master','Do 15 prestiges'],pg25:['💫','Eternal','Do 25 prestiges']}
  },
  fr: {
   lockT:'Achète d\'abord le bien précédent',
@@ -391,8 +391,8 @@ const L = {
   betaT:'Réglages en cours', betaS:'Des remises à zéro sont possibles pendant que j\'équilibre le jeu.',
   hint:'Touche un bien pour encaisser son loyer. Embauche un gestionnaire 👔 et il te paie tout seul, même quand tu es absent.', estate:'Biens', shop:'Boutique', prest:'Empire', top:'Top',
   buy:'Acheter', lvl:'Niv', manager:'Gestionnaire', auto:'Auto', tapStart:'👆 Touche', ms:'x',
-  welcomeT:'Pack de bienvenue', welcomeS:'2h de loyers tout de suite + x2 revenus pendant 24h', claim:'Récupérer', daily:'Bonus du jour', dailyS:'Jour {n} sur 7 : tu gagnes {m} min de tes revenus ({x}). Reviens chaque jour, le jour 7 ajoute x2 pendant 1 h',
-  away:'Pendant ton absence', adErr:'Pub indisponible, réessaie', adT:'Récompense gratuite', adS:'Au moins {x} de cash toutes les 2 heures, plus quand tes revenus montent.', adB:'Ouvrir', adWait:'Reste 10 secondes sur la page...', adNext:'Prochaine récompense dans {t}', adStay:'Reste 5 secondes sur la pub pour recevoir ta récompense', adOk:'Récompense reçue !', boostActive:'Un boost est déjà en cours. Les boosts ne se cumulent pas.', adCool:'Reviens un peu plus tard', awayX:'Doubler', awayXd:'Doublé !', awayS:'Tes locataires ont continué à payer.', collect:'Encaisser', great:'Super !',
+  welcomeT:'Pack de bienvenue', welcomeS:'2h de loyers tout de suite + x2 revenus pendant 24h', claim:'Récupérer', daily:'Bonus du jour', dailyS:'Jour {n} sur 7 (série : {s}) : tu gagnes {m} min de tes revenus ({x}). Les jours 3 et 5 ajoutent x2 pendant 30 min, le jour 7 x2 pendant 1 h, et la série continue jusqu\'à 30 jours !',
+  away:'Pendant ton absence', adErr:'Pub indisponible, réessaie', adT:'Récompense gratuite', adS:'Au moins {x} de cash toutes les 30 minutes, plus quand tes revenus montent.', adS2:'Toutes les 30 minutes : revenus x2 pendant 4 heures, ajoutés à ta réserve de bonus.', adB:'Ouvrir', adWait:'Reste 10 secondes sur la page...', adNext:'Prochaine récompense dans {t}', adStay:'Reste 5 secondes sur la pub pour recevoir ta récompense', adOk:'Récompense reçue !', boostActive:'Un boost est déjà en cours. Les boosts ne se cumulent pas.', adCool:'Reviens un peu plus tard', awayX:'Passer en x4', awayL:'x1,5 avec un lien', awayLink:'Ouverture du lien...', awayXd:'Doublé !', awayS:'Tes locataires ont continué à payer.', collect:'Encaisser', great:'Super !',
   vipMsg:'Locataire doré ! +', per:'/s', max:'MAX',
   shopT:'Boutique', shopS:'Tout se paie en Étoiles Telegram. 30 % des Étoiles dépensées vont au top 10 de la semaine (ce pourcentage peut augmenter ou baisser).',
   items:{welcome:['🎁','Pack de bienvenue','2h de loyers tout de suite + x2 revenus pendant 24h. Une seule fois.'],b2:['⚡','Revenus x2, 4h','Double tous tes loyers pendant 4 heures.'],b3:['🚀','Revenus x3, 24h','Triple tous tes loyers pendant une journée.'],perm2:['👑','Associé : x2 à vie','x2 permanent sur tout, pour toujours.'],vault:['🏦','Coffre : 24h hors ligne','Les locataires paient jusqu\'à 24h pendant ton absence (au lieu de 3h).'],skip1:['⏩','Saut de 1h','Reçois tout de suite 1 heure de loyers.'],skip8:['⏭️','Saut de 8h','Reçois tout de suite 8 heures de loyers.']},
@@ -410,10 +410,10 @@ const L = {
   x2av:'x2 dispo', use:'Utiliser', minInc:'min de revenus', startC:'Capital de départ :', invs:'investisseurs', ibk:{inc:'de revenus à vie',off:'de temps hors-ligne à vie',bst:'de durée des boosts à vie',rew:'de récompenses à vie'}, inv:{std:['🧑‍💼','Marc, le banquier','Offre standard : chaque investisseur donne +30 % de revenus.'],shark:['🦈','Léa, la requin','30 % d\'investisseurs en plus, chacun +36 % de revenus, mais tu repars avec 0 $.'],angel:['😇','Sofia, la mécène','20 % d\'investisseurs en moins, chacun +30 % de temps hors-ligne, mais tu repars avec 5 fois plus d\'argent et tu gardes 50 % des niveaux au lieu de 30 %.'],tech:['🚀','Yan, le visionnaire','Nombre normal d\'investisseurs, chacun +15 % de durée des boosts, et revenus x2 pendant 2 h.'],heir:['🏡','Clara, l\'héritière','15 % d\'investisseurs en plus, chacun +30 % de récompenses, et ton Studio est au moins au niveau 10.']},
   goldT:'Idle Estate Gold', goldS:'Revenus x1,5, 24h hors ligne, récompenses de quêtes et bonus doublées, et une 👑 à côté de ton nom. Se renouvelle tous les 30 jours, annulable à tout moment dans Telegram.', goldOn:'Gold actif', goldLeft:'jours restants', perMonth:'/ 30 jours',
   dealT:'Offre du jour', dealS:'-30 % aujourd\'hui seulement', was:'au lieu de',
-  questsT:'Quêtes du jour', questsS:'Termine les quêtes et récupère les récompenses. Elles se renouvellent chaque jour.', chestT:'Coffre du jour', chestS:'Finis les 3 quêtes : revenus x2 pendant 1h',
-  q:{tap:['👆','Encaisse {n} loyers'],buy:['🏗️','Achète {n} niveaux de biens'],vip:['🤑','Attrape {n} locataires dorés'],mgr:['👔','Embauche un gestionnaire'],daily:['🔥','Récupère le bonus du jour']},
+  questsT:'Quêtes du jour', questsS:'Termine les quêtes et récupère les récompenses. Elles se renouvellent chaque jour.', chestT:'Coffre du jour', chestS:'Finis les 4 quêtes : revenus x2 pendant 1h',
+  q:{tap:['👆','Encaisse {n} loyers'],buy:['🏗️','Achète {n} niveaux de biens'],vip:['🤑','Attrape {n} locataires dorés'],mgr:['👔','Embauche un gestionnaire'],daily:['🔥','Récupère le bonus du jour'],tap2:['👆','Encaisse {n} loyers (grosse série)'],buy2:['🏗️','Achète {n} niveaux de biens (grosse série)']},
   shareTxt:'Construis ton empire immobilier avec moi sur Idle Estate !', snd:'Sons', evInfo:'Heure dorée chaque jour : tous tes loyers sont doublés pendant 60 minutes. Début à', rewarded:'Récompense récupérée !', done:'Fait',
-  ach:{mgr1:['👔','Premier gestionnaire','Embauche ton premier gestionnaire'],s10:['🛋️','Studio niveau 10','Monte le Studio au niveau 10'],s25:['🛋️','Studio niveau 25','Monte le Studio au niveau 25'],s50:['🛋️','Studio niveau 50','Monte le Studio au niveau 50'],mgr5:['🧑‍💼','5 gestionnaires','Embauche 5 gestionnaires'],mgr10:['🏅','Équipe au complet','Un gestionnaire sur chaque bien'],pr1:['🏙️','Skyline','Possède le 15e bien'],pr5:['💎','Magnat','Possède le 20e bien'],st7:['🔥','7 jours d\'affilée','Récupère le bonus du jour 7 jours de suite'],fr1:['👥','Premier ami','Invite un ami'],fr5:['🎉','Populaire','Invite 5 amis'],pg1:['🔄','Nouveau départ','Fais ton premier prestige'],pg3:['🔄','Vétéran','Fais 3 prestiges'],pg5:['⭐','Habitué','Fais 5 prestiges'],pg10:['👑','Légende','Fais 10 prestiges'],p30:['🏙️','Skyline','Possède le 30e bien'],p45:['🌆','Métropole','Possède le 45e bien']}
+  ach:{mgr1:['👔','Premier gestionnaire','Embauche ton premier gestionnaire'],s10:['🛋️','Studio niveau 10','Monte le Studio au niveau 10'],s25:['🛋️','Studio niveau 25','Monte le Studio au niveau 25'],s50:['🛋️','Studio niveau 50','Monte le Studio au niveau 50'],mgr5:['🧑‍💼','5 gestionnaires','Embauche 5 gestionnaires'],mgr10:['🏅','Équipe au complet','Un gestionnaire sur chaque bien'],pr1:['🏙️','Skyline','Possède le 15e bien'],pr5:['💎','Magnat','Possède le 20e bien'],st7:['🔥','7 jours d\'affilée','Récupère le bonus du jour 7 jours de suite'],fr1:['👥','Premier ami','Invite un ami'],fr5:['🎉','Populaire','Invite 5 amis'],pg1:['🔄','Nouveau départ','Fais ton premier prestige'],pg3:['🔄','Vétéran','Fais 3 prestiges'],pg5:['⭐','Habitué','Fais 5 prestiges'],pg10:['👑','Légende','Fais 10 prestiges'],p30:['🏙️','Skyline','Possède le 30e bien'],p45:['🌆','Métropole','Possède le 45e bien'],s75:['🛋️','Studio niveau 75','Monte le Studio au niveau 75'],s100:['🛋️','Studio niveau 100','Monte le Studio au niveau 100'],s150:['🛋️','Studio niveau 150','Monte le Studio au niveau 150'],tl100:['🧱','100 niveaux','Possède 100 niveaux de biens au total'],tl500:['🧱','500 niveaux','Possède 500 niveaux de biens au total'],tl1000:['🏗️','1 000 niveaux','Possède 1 000 niveaux de biens au total'],tl2500:['🏗️','2 500 niveaux','Possède 2 500 niveaux de biens au total'],p35:['🌇','Skyline 35','Possède le 35e bien'],p40:['🌃','Skyline 40','Possède le 40e bien'],p50:['🏙️','Demi-cent','Possède le 50e bien'],p55:['🌉','Presque au bout','Possède le 55e bien'],p60:['👑','Tout en haut','Possède le 60e bien'],mgr20:['🧑‍💼','20 gestionnaires','Embauche 20 gestionnaires'],mgr30:['🧑‍💼','30 gestionnaires','Embauche 30 gestionnaires'],mgr45:['🏅','45 gestionnaires','Embauche 45 gestionnaires'],mgr60:['🏆','Dream team','Embauche un gestionnaire sur les 60 biens'],st3:['🔥','Série de 3 jours','Récupère le bonus du jour 3 jours de suite'],st14:['🔥','Série de 2 semaines','Récupère le bonus du jour 14 jours de suite'],st30:['🌋','Série de 30 jours','Récupère le bonus du jour 30 jours de suite'],fr10:['🤝','Réseauteur','Invite 10 amis'],fr20:['🌍','Communauté','Invite 20 amis'],pg15:['🔄','Maître du restart','Fais 15 prestiges'],pg25:['💫','Éternel','Fais 25 prestiges']}
  }
 }[lang];
 
@@ -585,7 +585,7 @@ function apply(r, full) {
     off = r.now - Date.now() / 1000;
     const keep = S;
     S = { cash: r.cash, life_all: r.life_all, lv: r.lv.slice(), mg: r.mg.slice(), ts: r.ts.slice(), inv: r.inv, prest: r.prest, unl: r.unl || 10, ib: r.ib || 0.05, incm: r.incm || 1, ibt: r.ibt || {}, ibv: r.ibv || {}, perm2: r.perm2, vault: r.vault, welcome: r.welcome, streak: r.streak, dailyOk: r.daily_ok,
-      adAt: r.now + (r.adn || 0), pr: r.pr || 0, pbonus: r.pbonus || 0, prn: r.prn || 0, prmin: r.prmin || 15, prgain: r.prgain || 0, bank: r.bank || 0, bank3: r.bank3 || 0, bank5: r.bank5 || 0, bank10: r.bank10 || 0, use: r.use || 3600, boostEnd: r.boost ? r.now + r.boost.left : 0, startEnd: r.start ? r.now + r.start.left : 0, adEnd: r.adx ? r.now + r.adx.left : 0, bmult: r.boost ? r.boost.mult : 1, vipEnd: r.vip ? r.now + r.vip.left : 0, cfg: r.cfg, ms: r.ms, mb: r.mb || 2.5, g: r.g, shop: r.shop, notify: r.notify, loc: r.now, cap: r.cap, stars: r.stars, ach: r.ach || [], defs: r.ach_defs || [], uid: r.uid, ref_n: r.ref_n || 0, ref_cap: r.ref_cap || 20, ref_got: r.ref_got || 0, ref_pend: r.ref_pend || 0, ref_share: r.ref_share || 0.1, ref_com: r.ref_com || 0.1, wallet_addr: r.wallet_addr || null, offers: r.offers || [], offersEnd: r.offers_end || 0, goldEnd: r.gold ? r.now + r.gold.left : 0, deal: r.deal || null, q: r.q || { list: [], all: false } };
+      adAt: r.now + (r.adn || 0), adk: r.adk || 0, pr: r.pr || 0, pbonus: r.pbonus || 0, prn: r.prn || 0, prmin: r.prmin || 15, prgain: r.prgain || 0, bank: r.bank || 0, bank3: r.bank3 || 0, bank5: r.bank5 || 0, bank10: r.bank10 || 0, use: r.use || 3600, boostEnd: r.boost ? r.now + r.boost.left : 0, startEnd: r.start ? r.now + r.start.left : 0, adEnd: r.adx ? r.now + r.adx.left : 0, bmult: r.boost ? r.boost.mult : 1, vipEnd: r.vip ? r.now + r.vip.left : 0, cfg: r.cfg, ms: r.ms, mb: r.mb || 2.5, g: r.g, shop: r.shop, notify: r.notify, loc: r.now, cap: r.cap, stars: r.stars, ach: r.ach || [], defs: r.ach_defs || [], uid: r.uid, ref_n: r.ref_n || 0, ref_cap: r.ref_cap || 20, ref_got: r.ref_got || 0, ref_pend: r.ref_pend || 0, ref_share: r.ref_share || 0.1, ref_com: r.ref_com || 0.1, wallet_addr: r.wallet_addr || null, offers: r.offers || [], offersEnd: r.offers_end || 0, goldEnd: r.gold ? r.now + r.gold.left : 0, deal: r.deal || null, q: r.q || { list: [], all: false } };
     if (!keep) build();
     else { buildSky(); }
   }
@@ -809,8 +809,8 @@ function buildBanners() {
   const promo = !S.welcome ? 'w' : 'd';
   if (promo === 'w') h += `<div class="bn gold"><div class="tx"><b>🎁 ${L.welcomeT}</b><span>${L.welcomeS}</span></div><button class="btn gold" data-sku="welcome">⭐ ${S.shop.welcome}</button></div>`;
   if (S.dailyOk) {
-    const next = Math.min(S.streak + 1, 7);
-    h += `<div class="bn"><div class="tx"><b>🔥 ${L.daily}</b><span>${L.dailyS.replace('{n}', () => next).replace('{m}', () => 10 * next).replace('{x}', () => '$' + fm(Math.max(rateNow() * 600 * next, 0.01 * next)))}</span><div class="dots">${[1, 2, 3, 4, 5, 6, 7].map(d => `<i class="${d < next ? 'on' : ''}"></i>`).join('')}</div></div><button class="btn" id="dailyBtn">${L.claim}</button></div>`;
+    const nextAll = Math.min(S.streak + 1, 30), next = ((nextAll - 1) % 7) + 1;
+    h += `<div class="bn"><div class="tx"><b>🔥 ${L.daily}</b><span>${L.dailyS.replace('{n}', () => next).replace('{s}', () => nextAll).replace('{m}', () => 10 * next).replace('{x}', () => '$' + fm(Math.max(rateNow() * 600 * next, 0.01 * next)))}</span><div class="dots">${[1, 2, 3, 4, 5, 6, 7].map(d => `<i class="${d < next ? 'on' : ''}"></i>`).join('')}</div></div><button class="btn" id="dailyBtn">${L.claim}</button></div>`;
   }
   if (promo === 'd' && S.deal && L.items[S.deal.sku]) { const it = L.items[S.deal.sku]; h += `<div class="bn gold"><div class="tx"><b>🔥 ${L.dealT}: ${it[1]}</b><span>${L.dealS}</span></div><button class="btn gold" data-sku="${S.deal.sku}" data-deal="1">⭐ ${S.deal.price}</button></div>`; }
   b.innerHTML = h;
@@ -960,7 +960,7 @@ async function getInvoice(sku, deal) {
   return null;
 }
 const adDone = () => !S || snow() < (S.adAt || 0);
-const adMark = () => { if (S) S.adAt = snow() + 7200; };
+const adMark = () => { if (S) { S.adAt = snow() + 1800; S.adk = 1 - (S.adk || 0); } };
 const adUnmark = () => { if (S) S.adAt = 0; };
 let adShown = null;
 function paintAd() {
@@ -976,10 +976,23 @@ function paintAd() {
   document.body.classList.toggle('adwait', !ready); document.body.classList.toggle('adoff', !ready && tab !== 'estate');
   const left = Math.max(0, (S.adAt || 0) - snow());
   const t = $('adTx'), bt = $('adBtn');
-  if (t) t.textContent = ready ? L.adS.replace('{x}', '$' + fm(2.5)) : L.adNext.replace('{t}', left >= 3600 ? Math.floor(left / 3600) + 'h ' + String(Math.floor(left % 3600 / 60)).padStart(2, '0') + 'min' : left >= 60 ? Math.ceil(left / 60) + 'min' : Math.ceil(left) + 's');
+  if (t) t.textContent = ready ? (S.adk ? L.adS2 : L.adS.replace('{x}', '$' + fm(2.5))) : L.adNext.replace('{t}', left >= 3600 ? Math.floor(left / 3600) + 'h ' + String(Math.floor(left % 3600 / 60)).padStart(2, '0') + 'min' : left >= 60 ? Math.ceil(left / 60) + 'min' : Math.ceil(left) + 's');
   if (bt) { bt.textContent = ready ? L.adB : '⏳'; bt.disabled = !ready; bt.style.opacity = ready ? 1 : .5; }
 }
 let adBusy = false;
+let awayBusy = false;
+async function watchAway(amount) {
+  if (awayBusy) return;
+  if (typeof window.show_12296718 !== 'function') { toast(L.adErr); return; }
+  awayBusy = true;
+  const t0 = Date.now();
+  const pop = window.show_12296718({ type: 'pop' });
+  let ok = true;
+  try { const res = await pop; if (res && res.reward_event_type === 'non_valued' && Date.now() - t0 < 5000) ok = false; } catch (e) { if (Date.now() - t0 < 5000) ok = false; }
+  if (!ok) { awayBusy = false; toast(L.adStay); return; }
+  const r = await call({ act: 'awayclaim' }); awayBusy = false;
+  if (r && r.ok && !r.err) { hap('ok'); snd('win'); showAdWin(r.away_bonus || amount * 0.5, 0); } else toast(L.adCool);
+}
 async function watchAd() {
   if (adBusy || adDone()) { toast(L.adCool); return; }
   if (typeof window.show_12296718 !== 'function') { toast(L.adErr); return; }
@@ -995,15 +1008,15 @@ async function watchAd() {
   if (!ok || !st || !st.ok || st.err) { adBusy = false; if (st && st.err === 'cool') { adMark(); renderShop(); buildBanners(); } toast(!ok ? L.adStay : L.adCool); return; }
   // the reward is paid right at the click; the amount pops up as soon as the player is back on the game
   const r = await call({ act: 'adclaim' }); adBusy = false;
-  if (r && r.ok && !r.err) { adMark(); hap('ok'); snd('win'); buildBanners(); if (tab === 'shop') renderShop(); showAdWin(r.ad_cash || 0); } else { adUnmark(); renderShop(); buildBanners(); toast(L.adCool); }
+  if (r && r.ok && !r.err) { adMark(); hap('ok'); snd('win'); buildBanners(); if (tab === 'shop') renderShop(); showAdWin(r.ad_cash || 0, r.ad_boost || 0); } else { adUnmark(); renderShop(); buildBanners(); toast(L.adCool); }
 }
 let adWinQ = null;
-function showAdWin(x) {
-  if (document.visibilityState !== 'visible') { adWinQ = x; return; }
-  modal(`<div style="font-size:54px">🎁</div><h3>${L.adOk}</h3><div class="big">+$${fm(x)}</div><button class="btn" id="okAd">${L.great}</button>`);
+function showAdWin(x, bs) {
+  if (document.visibilityState !== 'visible') { adWinQ = [x, bs]; return; }
+  modal(`<div style="font-size:54px">🎁</div><h3>${L.adOk}</h3><div class="big">${bs ? '+' + fmtT(bs) + ' x2' : '+$' + fm(x)}</div><button class="btn" id="okAd">${L.great}</button>`);
   const b = $('okAd'); if (b) b.onclick = closeModal;
 }
-document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && adWinQ !== null) { const x = adWinQ; adWinQ = null; showAdWin(x); } });
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && adWinQ !== null) { const x = adWinQ; adWinQ = null; showAdWin(x[0], x[1]); } });
 let buying = false;
 async function buy(sku, deal) {
   if (buying) return; buying = true; hap('medium'); toast('⭐ ...');
@@ -1287,8 +1300,8 @@ $('evc').addEventListener('click', () => {
 });
 const achProg = id => {
   const m = /^p(\d)$/.exec(id); if (m) return [S.lv[+m[1]] > 0 ? 1 : 0, 1];
-  const mgc = S.mg.filter(Boolean).length;
-  return ({ mgr1: [mgc, 1], s10: [S.lv[0], 10], s25: [S.lv[0], 25], s50: [S.lv[0], 50], mgr5: [mgc, 5], mgr10: [mgc, 10], pr1: [S.lv[14] > 0 ? 1 : 0, 1], pr5: [S.lv[19] > 0 ? 1 : 0, 1], st7: [S.streak, 7], fr1: [S.ref_n, 1], fr5: [S.ref_n, 5], pg1: [S.pr, 1], pg3: [S.pr, 3], pg5: [S.pr, 5], pg10: [S.pr, 10], p30: [S.lv[29] > 0 ? 1 : 0, 1], p45: [S.lv[44] > 0 ? 1 : 0, 1] })[id] || [0, 1];
+  const mgc = S.mg.filter(Boolean).length, tl = S.lv.reduce((a, b) => a + b, 0);
+  return ({ mgr1: [mgc, 1], s10: [S.lv[0], 10], s25: [S.lv[0], 25], s50: [S.lv[0], 50], mgr5: [mgc, 5], mgr10: [mgc, 10], pr1: [S.lv[14] > 0 ? 1 : 0, 1], pr5: [S.lv[19] > 0 ? 1 : 0, 1], st7: [S.streak, 7], fr1: [S.ref_n, 1], fr5: [S.ref_n, 5], pg1: [S.pr, 1], pg3: [S.pr, 3], pg5: [S.pr, 5], pg10: [S.pr, 10], p30: [S.lv[29] > 0 ? 1 : 0, 1], p45: [S.lv[44] > 0 ? 1 : 0, 1], s75: [S.lv[0], 75], s100: [S.lv[0], 100], s150: [S.lv[0], 150], tl100: [tl, 100], tl500: [tl, 500], tl1000: [tl, 1000], tl2500: [tl, 2500], p35: [S.lv[34] > 0 ? 1 : 0, 1], p40: [S.lv[39] > 0 ? 1 : 0, 1], p50: [S.lv[49] > 0 ? 1 : 0, 1], p55: [S.lv[54] > 0 ? 1 : 0, 1], p60: [S.lv[59] > 0 ? 1 : 0, 1], mgr20: [mgc, 20], mgr30: [mgc, 30], mgr45: [mgc, 45], mgr60: [mgc, 60], st3: [S.streak, 3], st14: [S.streak, 14], st30: [S.streak, 30], fr10: [S.ref_n, 10], fr20: [S.ref_n, 20], pg15: [S.pr, 15], pg25: [S.pr, 25] })[id] || [0, 1];
 };
 const achInfo = id => { const m = /^p(\d)$/.exec(id); return m ? ['🏆', L.names[+m[1]], L.achOwn] : (L.ach[id] || ['🏆', id, '']); };
 const qReady = () => (S && S.q ? S.q.list.filter(x => !x.done && x.v >= x.t).length + (!S.q.all && S.q.list.length && S.q.list.every(x => x.done) ? 1 : 0) : 0);
@@ -1361,10 +1374,11 @@ async function boot() {
     if (r.gap > 120 && r.away > 0.05) {
       const bk = false;
       const x2 = r.away_ok && S.shop && S.shop.away2;
-      modal(`<div style="font-size:54px">🏠</div><h3>${L.away}</h3><div class="big">+$${fm(r.away)}</div><p>${L.awayS}</p><button class="btn" id="okAway">${L.collect}</button>` + (bk ? `<button class="btn" id="bkAway" style="margin-top:8px">${L.bankT} · ${fmtT(Math.min(S.bank, S.use))}</button>` : '') + (x2 ? `<button class="btn gold" id="x2Away" style="margin-top:8px">⭐ ${S.shop.away2} · ${L.awayX} (+$${fm(r.away)})</button>` : ''));
+      modal(`<div style="font-size:54px">🏠</div><h3>${L.away}</h3><div class="big">+$${fm(r.away)}</div><p>${L.awayS}</p><button class="btn" id="okAway">${L.collect}</button>` + (bk ? `<button class="btn" id="bkAway" style="margin-top:8px">${L.bankT} · ${fmtT(Math.min(S.bank, S.use))}</button>` : '') + (x2 ? `<button class="btn gold" id="x2Away" style="margin-top:8px">⭐ ${S.shop.away2} · ${L.awayX} (+$${fm(r.away * 3)})</button><button class="btn" id="lkAway" style="margin-top:8px">📺 ${L.awayL} (+$${fm(r.away * 0.5)})</button>` : ''));
       if (bk) $('bkAway').onclick = () => { closeModal(); useBonus(2); };
       $('okAway').onclick = () => { hap('ok'); closeModal(); };
       if (x2) $('x2Away').onclick = () => { closeModal(); buy('away2'); };
+      if (x2) $('lkAway').onclick = () => { closeModal(); watchAway(r.away); };
     }
   };
   showAway();
