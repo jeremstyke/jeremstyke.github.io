@@ -1,4 +1,4 @@
-/* AI Football Predictor - home page (readable landing page + full-screen app mode). by @jeremstyke */
+/* AI Football Predictor - home page (readable landing page + full-screen app mode). */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@600;700;800&display=swap');
 html,body{margin:0;background:#06090e;color:#e6edf6;font:16px/1.6 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
 body{background-image:linear-gradient(rgba(76,195,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(76,195,255,.04) 1px,transparent 1px);background-size:22px 22px}

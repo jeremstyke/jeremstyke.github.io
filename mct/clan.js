@@ -1,4 +1,4 @@
-// 17 oct 2026 (Jeremy): the clans of Meme Coin Tycoon, by @jeremstyke.
+// 17 oct 2026 (Jeremy): the clans of Meme Coin Tycoon.
 // A clan costs $5,000 (game money), 20 members max, the chief accepts each member. Creating a clan creates its coin: the coin's
 // creator fees go to the clan. Every Monday half of what the clan earned in the week is shared equally between the members
 // present for 3 days, the other half goes to the chief's pot (take, give, lock 7 days +10 % or 30 days +50 %).

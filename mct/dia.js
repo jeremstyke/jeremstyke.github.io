@@ -1,7 +1,7 @@
 // 16 oct 2026 (Jeremy): the diamond inside Meme Coin Tycoon. A small 💎 at the top, next to the FAQ: tap it and earn real TON,
 // kept in the diamond until the player taps "Add to my balance" (16 oct 2026: not automatic any more), then paid every Monday from $0.10.
 // The rate changes every day (3,500 to 10,000 taps per $0.01) and is announced every morning on @memecointycoon.
-// +10 % for subscribers of @memecointycoon and +10 % for subscribers of @jeremstyke. A weekly contest of the best tappers.
+// +10 % for subscribers of @memecointycoon and . A weekly contest of the best tappers.
 // The server counts every tap, limits the speed and asks a human check (Supabase function mct-ton: dia, dia_tap, dia_check).
 (() => {
   const TX = {
@@ -162,7 +162,7 @@
     b.style.cssText = '';
     b.innerHTML = '<div class="dc dhero"><div class="dl">' + ec(T.mine) + '</div><div class="dbig"><span class="dgi">💎</span><span id="dusd"></span></div><div class="dbar"><i id="dbar"></i></div>'
       + (S && S.banned ? '<div style="margin:8px 0;padding:10px 12px;border-radius:12px;background:rgba(255,59,92,.14);border:1px solid rgba(255,59,92,.55);color:#ff8fa3;font-weight:700;font-size:13px">🚫 ' + ec(AXL().ban) + '</div>' : '') + '<button id="dclaim" type="button"></button><div id="dsolde"></div><div class="dmeta"><span id="dtoday"></span><span>' + ec(T.rate(nf(S.tpc))) + '</span></div><div id="darea"></div><p class="dnote">' + ec(T.pay) + '</p><p class="dnote" style="margin-top:4px">' + ec(({ fr: '🪙 +1 $MCT tous les 100 taps (200 max par jour)', id: '🪙 +1 $MCT setiap 100 ketukan (maks 200 per hari)', ar: '🪙 +1 $MCT لكل 100 نقرة (200 كحد أقصى يوميًا)', fa: '🪙 هر ۱۰۰ ضربه +۱ $MCT (حداکثر ۲۰۰ در روز)', ru: '🪙 +1 $MCT за каждые 100 нажатий (до 200 в день)' })[(() => { try { return LANG; } catch (e) { return 'en'; } })()] || '🪙 +1 $MCT every 100 taps (max 200 a day)') + '</p></div>'
-      + (Number(S.sub_pct) > 0 ? '<div class="dc"><div class="dl">' + ec(T.bon) + '</div>' + sub('bm', S.sub_mct, 'https://t.me/memecointycoon') + sub('bj', S.sub_js, 'https://t.me/jeremstyke')
+      + (Number(S.sub_pct) > 0 ? '<div class="dc"><div class="dl">' + ec(T.bon) + '</div>' + sub('bm', S.sub_mct, 'https://t.me/memecointycoon') + sub('bj', S.sub_js, '')
         + (S.qz_chat && Number(S.qz_pct) > 0 ? sub('bq', S.sub_qz, 'https://t.me/' + String(S.qz_chat).replace(/^@/, ''), Number(S.qz_pct)) : '')
         + (S.sub_mct && S.sub_js && (S.sub_qz || !(S.qz_chat && Number(S.qz_pct) > 0)) ? '' : '<button class="btn ghost" id="drc" style="width:100%;margin:8px 0 0">' + ec(T.recheck) + '</button>') + '</div>' : '')
       + (c.on ? '<div class="dc"><div class="dl">' + ec(T.con) + '</div><div class="dsm">' + ec(T.ends) + ' <b id="dcd">' + cd(c.ends) + '</b> · ' + ec(T.prizes) + ' : ' + pz.map((p) => usd(p)).join(' / ') + '</div>' + rows

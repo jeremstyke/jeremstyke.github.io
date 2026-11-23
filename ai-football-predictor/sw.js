@@ -1,4 +1,4 @@
-// AI Football Predictor - site service worker: match notifications (web push) for the web app installed from the site. by @jeremstyke
+// AI Football Predictor - site service worker: match notifications (web push) for the web app installed from the site.
 self.addEventListener("install",e=>{self.skipWaiting()});
 self.addEventListener("activate",e=>{e.waitUntil(self.clients.claim())});
 self.addEventListener("push",e=>{let d={};try{d=e.data?e.data.json():{}}catch(x){d={title:"AI Football Predictor",body:e.data?e.data.text():""}}

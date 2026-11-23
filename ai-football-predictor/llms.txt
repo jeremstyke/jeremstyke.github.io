@@ -9,7 +9,7 @@ Key facts:
 - Updated automatically. Lazy loaded in an iframe, so it does not slow the host page down.
 - Every probability is locked before kickoff and compared with the real result on a public reliability page.
 - Probabilities, not certainty. Not betting advice. 18+.
-- Made by @jeremstyke (https://t.me/jeremstyke).
+- Made.
 
 ## Free football widget
 

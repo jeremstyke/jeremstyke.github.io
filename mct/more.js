@@ -60,7 +60,6 @@
       + '<div class="cd field" id="mrcd" hidden><input id="mrci" maxlength="12" autocapitalize="characters" autocomplete="off" placeholder="' + ec(tt('code_ph')) + '"><button class="ghost sm" id="mrcb">' + ec(tt('code_b')) + '</button></div>'
       + row('faq', T.faq, T.faqs)
       + row('ie', T.ie || TX.en.ie, T.ies || TX.en.ies)
-      + row('ct', T.ct, T.cts)
       + '<button class="ghost" id="mrx" style="width:100%;margin-top:6px">' + ec(T.close) + '</button></div>';
     d.onclick = (e) => { if (e.target === d) { close(); return; } const mr = e.target.closest('[data-mk]'); if (mr && !e.target.closest('[data-mc]') && !mr.querySelector('.msn-ok')) setTimeout(close, 0); };
     document.body.appendChild(d); missions();
@@ -85,7 +84,7 @@
     if (k === 'led') { close(); if (go) go('ledger'); return; }
     if (k === 'chn') { close(); if (go) go('chains'); return; }
     if (k === 'faq') { openUrl('https://jeremstyke.github.io/memecointycoon/faq/'); return; }
-    if (k === 'ct') { openTg('https://t.me/jeremstyke'); return; }
+    if (k === 'ct') { openTg(''); return; }
     if (k === 'code') { const c = document.getElementById('mrcd'); if (c) { c.hidden = !c.hidden; if (!c.hidden) { const i = c.querySelector('input'); if (i) i.focus(); } } return; }
     if (k === 'join') {
       // same as the old row of the Portfolio: open the channel, then "I joined" checks it and gives the bonus

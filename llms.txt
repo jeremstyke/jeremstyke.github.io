@@ -1,6 +1,6 @@
 # Jeremstyke
 
-> Projects by Jeremstyke (@jeremstyke), a French independent developer.
+> Projects by a French independent developer.
 
 ## AI Football Predictor
 

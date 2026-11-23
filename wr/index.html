@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>Wallet Radar</title>
-<!-- 17 oct 2026: Wallet Radar (@getwalletradarbot), by @jeremstyke. Connects a TON wallet in read-only mode (TON Connect), then hands the
+<!-- 17 oct 2026: Wallet Radar (@getwalletradarbot). Connects a TON wallet in read-only mode (TON Connect), then hands the
      address to the bot. Opened from the bot's "Connect my wallet" button. Nothing here can move funds. -->
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="https://unpkg.com/@tonconnect/ui@2.0.9/dist/tonconnect-ui.min.js"></script>
@@ -22,7 +22,7 @@ button{width:100%;max-width:340px;border:0;border-radius:14px;padding:15px;font-
 <button class="sec" id="back"></button>
 <div id="msg"></div>
 <div class="lock" id="lock"></div>
-<small>by @jeremstyke</small>
+<small></small>
 <script>
 const API = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/wallet-radar';
 const tw = window.Telegram && Telegram.WebApp; try { tw.ready(); tw.expand(); } catch (e) {}

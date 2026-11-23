@@ -1,5 +1,5 @@
-// 16 oct 2026 (Jeremy): Meme Coin Tycoon, by @jeremstyke. The TON wallet is linked in one tap, right in the game, with TON Connect
-// (Wallet in Telegram, Tonkeeper...). Replaces the old link to Earn by Jeremstyke and the field to paste an address.
+// 16 oct 2026 (Jeremy): Meme Coin Tycoon. The TON wallet is linked in one tap, right in the game, with TON Connect
+// (Wallet in Telegram, Tonkeeper...). Replaces the old link to Earn and the field to paste an address.
 // The diamond panel shows a big "Add my wallet" button while the player has no wallet.
 (function () {
   const TCU = 'https://unpkg.com/@tonconnect/ui@2.0.9/dist/tonconnect-ui.min.js';

@@ -1,4 +1,4 @@
-// 17 oct 2026 (Jeremy): Meme Coin Tycoon Premium, by @jeremstyke. 50 ⭐ a month (from 17 oct 20h50, was 50) (Telegram subscription, cancel anytime):
+// 17 oct 2026 (Jeremy): Meme Coin Tycoon Premium. 50 ⭐ a month (from 17 oct 20h50, was 50) (Telegram subscription, cancel anytime):
 // unlimited news (scoop), 10 mining boosts a day, zero videos, +$1,000 free every day, 1 free coin promotion a day,
 // 2 streak saves a month and the 💎 badge. A Premium player is also a Supporter for the same time (badge, saves, free boosts).
 // Where it shows: a button on the player's own profile, a line under every limit (videos, scoop, boost), a tile in "Low on cash?",

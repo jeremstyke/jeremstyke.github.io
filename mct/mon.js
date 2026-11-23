@@ -1,4 +1,4 @@
-// 17 oct 2026 (Jeremy): Meme Coin Monsters, HIDDEN inside Meme Coin Tycoon, by @jeremstyke. Only Jeremy and Doriane see it
+// 17 oct 2026 (Jeremy): Meme Coin Monsters, HIDDEN inside Meme Coin Tycoon. Only Jeremy and Doriane see it
 // (the server answers 'hidden' to everyone else, ds_config mmon_allow). A monster is born from a coin held for $100 or more
 // (one monster per coin; the daily egg of a coin he already has makes it grow), and is tied to its coin: its strength follows the coin's price over 24 h, grows with the coins held,
 // and a pump news boosts it. Feeding it BUYS its coin with cash (the price goes up, the coins are eaten), merge two of the same stage, fight other players' teams (automatic, 3 a day).

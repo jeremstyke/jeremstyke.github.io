@@ -1,4 +1,4 @@
-// 16 oct 2026 (Jeremy): Meme Coin Tycoon, by @jeremstyke. The daily bonus and its streak.
+// 16 oct 2026 (Jeremy): Meme Coin Tycoon. The daily bonus and its streak.
 // 17 oct 2026 (Jeremy): nothing in the top menu any more (it made it heavy): the old 🎁 button is hidden, and when today's bonus is
 // waiting, a small card shows at the top of the Market: "🎁 Daily bonus · 🔥 Day 4/7 · Claim" (a tap opens the bonus).
 // Cycle of 7 days, day 7 = $1,000. The card goes away once the bonus is claimed.
