@@ -280,7 +280,6 @@ h2{font-family:var(--disp);font-size:28px;font-weight:700;margin:18px 0 2px;colo
 .sub .chip[hidden]{display:none}
 .nav button span{height:30px;display:flex;align-items:center;justify-content:center;line-height:1}
 </style>
-<script src="https://yoszi.com/sdk.js" data-zone="12296718" data-sdk="show_12296718"></script>
 </head>
 <body>
 <div id="maint" style="display:none;position:fixed;inset:0;z-index:99999;background:linear-gradient(#4fb3f7,#cdeeff 70%);align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px;font-family:inherit;color:#12305e">
@@ -964,7 +963,8 @@ const adMark = () => { if (S) S.adAt = snow() + 1800; };
 const adUnmark = () => { if (S) S.adAt = 0; };
 let adShown = null;
 function paintAd() {
-  const el = $('adbar'); if (!el || !S) return;
+  const el = $('adbar'); if (el) el.hidden = true; document.body.classList.remove('hasad', 'adwait', 'adoff'); return;
+  if (!el || !S) return;
   const ready = !adDone();
   const key = ready ? 'r' : 'c';
   if (adShown !== key) {
@@ -1374,11 +1374,10 @@ async function boot() {
     if (r.gap > 120 && r.away > 0.05) {
       const bk = false;
       const x2 = r.away_ok && S.shop && S.shop.away2;
-      modal(`<div style="font-size:54px">🏠</div><h3>${L.away}</h3><div class="big">+$${fm(r.away)}</div><p>${L.awayS}</p><button class="btn" id="okAway">${L.collect}</button>` + (bk ? `<button class="btn" id="bkAway" style="margin-top:8px">${L.bankT} · ${fmtT(Math.min(S.bank, S.use))}</button>` : '') + (x2 ? `<button class="btn gold" id="x2Away" style="margin-top:8px">⭐ ${S.shop.away2} · ${L.awayX} (+$${fm(r.away * 3)})</button><button class="btn" id="lkAway" style="margin-top:8px">📺 ${L.awayL} (+$${fm(r.away * 0.5)})</button>` : ''));
+      modal(`<div style="font-size:54px">🏠</div><h3>${L.away}</h3><div class="big">+$${fm(r.away)}</div><p>${L.awayS}</p><button class="btn" id="okAway">${L.collect}</button>` + (bk ? `<button class="btn" id="bkAway" style="margin-top:8px">${L.bankT} · ${fmtT(Math.min(S.bank, S.use))}</button>` : '') + (x2 ? `<button class="btn gold" id="x2Away" style="margin-top:8px">⭐ ${S.shop.away2} · ${L.awayX} (+$${fm(r.away * 3)})</button>` : ''));
       if (bk) $('bkAway').onclick = () => { closeModal(); useBonus(2); };
       $('okAway').onclick = () => { hap('ok'); closeModal(); };
       if (x2) $('x2Away').onclick = () => { closeModal(); buy('away2'); };
-      if (x2) $('lkAway').onclick = () => { closeModal(); watchAway(r.away); };
     }
   };
   showAway();
