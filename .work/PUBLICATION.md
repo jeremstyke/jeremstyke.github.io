@@ -26,7 +26,7 @@ Les règles détaillées de chaque site restent dans son AUTOMATION.md (ou fichi
 
 Priorité achat (règle du 23 nov 2026) : les listes sujets.md et tops.md des 4 sites affiliés ont été réordonnées, pages qui font acheter et cadeaux de Noël en tête ; garde cet ordre. Jusqu'au 15 décembre 2026, Les oiseaux du jardin prend le vendredi le premier « - [ ] » de sujets.md au lieu de especes.md. Quand tu ajoutes des sujets, place en tête ceux qui mènent à un achat.
 
-Mail jetable (adresse-temporaire.fr et jetboxmail.com) : publication EN PAUSE depuis le 23 nov 2026 à la demande de Jeremy, n'y publie rien. Priorité : les 4 sites affiliés et CVLibre ; PDF Démarches continue.
+Mail jetable (adresse-temporaire.fr et jetboxmail.com) : publication EN PAUSE depuis le 23 nov 2026 à la demande de Jeremy, n'y publie rien. Depuis le 24 nov 2026, on n'y touche plus du tout (ni pages, ni bot, ni réglages) et il n'apparaît plus dans le bilan du lundi : seul le bilan du premier lundi de chaque mois lui consacre une ligne (visiteurs du mois, comptes créés, Premium vendus). Domaines à renouveler vers le 21 nov 2027 : décision à prendre à ce moment-là. Priorité : les 4 sites affiliés et CVLibre ; PDF Démarches continue.
 
 Jour : `TZ=Europe/Paris date +%u` (1 = lundi ... 5 = vendredi).
 
