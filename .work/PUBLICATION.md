@@ -29,6 +29,16 @@ Jour : `TZ=Europe/Paris date +%u` (1 = lundi ... 5 = vendredi).
 ## Écriture humaine (toutes les pages)
 Écris comme un connaisseur qui parle à un proche. Réponds à la question dès les 2 premières phrases, jamais « Dans cet article, nous allons voir ». Phrases de longueurs variées, mots simples, ton chaleureux. Bannis : « il est important de noter », « en conclusion », « en résumé », « plongeons », « que vous soyez… ou… », « n'hésitez pas à », « véritable », « incontournable », « allié idéal », « un must », « crucial » ou « essentiel » à répétition, les intertitres génériques. Sois concret (exemples présentés comme des exemples, erreurs fréquentes, avis clair avec sa raison). Jamais d'expérience inventée, de « testé », de faux avis, de prix ou de chiffre inventé. Varie la structure d'une page à l'autre. Relis chaque page en entier avant de publier.
 
+## Être cité par les IA (ChatGPT, Perplexity, Gemini, Google AI Overviews), règle du 23 nov 2026
+Pour toutes les nouvelles pages des 4 sites affiliés, et pour chaque page améliorée le samedi :
+- Un paragraphe « En bref » de 2 ou 3 phrases juste sous le h1, qui répond seul à la question, avec des chiffres précis (dimensions, âge, prix moyen constaté, nombre). Les IA reprennent ces phrases autonomes.
+- Des affirmations nettes et vérifiables, avec la source nommée dans la phrase (« selon service-public.fr », « d'après la LPO ») et un bloc Sources en bas de page.
+- Au moins un tableau comparatif ou une liste chiffrée par top et par guide.
+- Une FAQ de 3 à 5 vraies questions, chacune avec une réponse de 2 à 3 phrases qui se suffit à elle-même (le FAQPage JSON-LD est déjà produit par les gabarits).
+- La date de mise à jour visible et à jour.
+- Le nom du site écrit en clair dans le texte au moins une fois (« Chez Vieillir chez soi, nous conseillons... »), pour que les IA associent le conseil au site.
+- Jamais de contenu caché ou de texte écrit pour les robots : les IA citent ce qu'un lecteur humain trouverait utile.
+
 ## Tops produits (tous les sites affiliés)
 Produits RÉELS vendus en France, vérifiés par une recherche limitée à amazon.fr ; caractéristiques lues sur la page du fabricant ou d'un grand revendeur, « non précisé » sinon ; aucun prix, note, avis ni « testé ». Minimum 6 produits (titre adapté s'il y en a moins de 10). Structure des tops existants : intro, {CTA}, note « Comment nous avons fait cette sélection : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main », tableau récapitulatif, une h2 par produit (pour qui, points forts, limites, lien {AMZ:Marque Modèle} « Voir sur Amazon » dans son propre paragraphe), « Comment choisir », FAQ 3 questions. Title avec « 2026 », 65 car. max, 1 500 à 2 500 mots, short « Top 10 ... », AUTO_META (🏆, teinte). Respecte la règle « Angle du site dans chaque top » de AUTOMATION.md.
 
