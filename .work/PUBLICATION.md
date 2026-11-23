@@ -18,11 +18,13 @@ Les règles détaillées de chaque site restent dans son AUTOMATION.md (ou fichi
 
 | Jour | Sites affiliés | Autres sites |
 |---|---|---|
-| Lundi | Vieillir chez soi : 1 article ; Les oiseaux du jardin : 1 fiche ; Ma liste mariage : 1 top | CVLibre étranger : 1 article ; adresse-temporaire.fr : 1 guide ; jetboxmail.com : 1 guide |
-| Mardi | Ma liste bébé : 1 article | CVLibre français : 1 page métier ; PDF Démarches : 1 guide ; jetboxmail.com : 1 guide |
-| Mercredi | Vieillir chez soi : 1 top ; Les oiseaux du jardin : 1 top | CVLibre étranger : 1 article ; adresse-temporaire.fr : 1 guide ; jetboxmail.com : 1 guide |
-| Jeudi | Vieillir chez soi : 1 article ; Ma liste mariage : 1 article | CVLibre français : 1 article ; PDF Démarches : 1 guide ; jetboxmail.com : 1 guide |
-| Vendredi | Les oiseaux du jardin : 1 fiche ; Ma liste bébé : 1 top | CVLibre étranger : 1 article ; adresse-temporaire.fr : 1 guide ; jetboxmail.com : 1 guide |
+| Lundi | Vieillir chez soi : 1 article ; Les oiseaux du jardin : 1 fiche ; Ma liste mariage : 1 top | CVLibre étranger : 1 article |
+| Mardi | Ma liste bébé : 1 article | CVLibre français : 1 page métier ; PDF Démarches : 1 guide |
+| Mercredi | Vieillir chez soi : 1 top ; Les oiseaux du jardin : 1 top | CVLibre étranger : 1 article |
+| Jeudi | Vieillir chez soi : 1 article ; Ma liste mariage : 1 article | CVLibre français : 1 article ; PDF Démarches : 1 guide |
+| Vendredi | Les oiseaux du jardin : 1 fiche ; Ma liste bébé : 1 top | CVLibre étranger : 1 article |
+
+Mail jetable (adresse-temporaire.fr et jetboxmail.com) : publication EN PAUSE depuis le 23 nov 2026 à la demande de Jeremy, n'y publie rien. Priorité : les 4 sites affiliés et CVLibre ; PDF Démarches continue.
 
 Jour : `TZ=Europe/Paris date +%u` (1 = lundi ... 5 = vendredi).
 
@@ -85,12 +87,12 @@ Sources : jeremstyke/jeremstyke.github.io, dossier .work/demarches/site/ (pages 
 - Guide : premier « - [ ] » de .work/demarches/guides-sujets.md (règles en tête). Copie la structure d'un guide existant (ex. guides/pdf-trop-lourd/), infos lues sur le site officiel de l'organisme ou service-public.fr avec « Vérifié le <date> » et les liens, 800 à 1 200 mots, FAQ 3, liens vers la page de l'organisme et l'outil utile du site. Carte en tête de guides/index.html, ligne dans sitemap.xml, lien depuis une page proche. L'encart NordVPN est ajouté par assets/track.js : ne l'écris pas.
 - Commit, push, mise en ligne via `gh api -X POST repos/jeremstyke/demarches/actions/workflows/sync.yml/dispatches -f ref=main` (vérifie le run), puis IndexNow.
 
-### adresse-temporaire.fr (français), vouvoiement
+### adresse-temporaire.fr (français), vouvoiement (EN PAUSE depuis le 23 nov 2026)
 Dépôt jeremstyke/adresse-temporaire. articles.py (liste ARTICLES, règle de longueur en tête) ; n'écris pas dans extra.py ; l'encart NordVPN est ajouté par build.py.
 - 1 guide : une vraie recherche autour du mail jetable ou de la vie privée en ligne, jamais en doublon (Ubersuggest, fr, locId 2250, si quota). Sujets INTERDITS : contourner un bannissement, faux comptes en masse, « indétectable », plateformes précises, piratage, envoi anonyme. 900 à 1 200 mots, FAQ en h2 avec 2 ou 3 h3, 2 liens internes /blog/<slug>/ et un lien vers /. Offres exactes : sans compte messages 1 h ; compte gratuit 1 adresse réservée, messages 24 h ; Premium 2,99 €/mois : 100 adresses privées, transfert ou alerte (30 par jour), pièces jointes 10 Mo, messages 30 jours.
 - `python3 build.py`, supprime __pycache__, commit « Blog : <titre> », `git -c push.negotiate=true push`. Vérifie la page au bout de 2 minutes.
 
-### jetboxmail.com (anglais)
+### jetboxmail.com (anglais) (EN PAUSE depuis le 23 nov 2026)
 Même dépôt jeremstyke/adresse-temporaire. Prends la première ligne « - [ ] » de KEYWORDS-EN.md, écris le guide dans guides_en.py en suivant exactement les règles et faits de son en-tête (900 à 1 300 mots, anglais américain, h2 en vraies questions, FAQ 3 en h3, 1 ou 2 liens internes + 1 lien ajouté depuis un guide existant). Coche la ligne, `python3 build.py` (doit afficher ok), commit « Guide anglais : <titre> », push. Vérifie https://jetboxmail.com/guides/<slug>/ puis IndexNow (host jetboxmail.com). S'il reste moins de 3 sujets, ajoutes-en 10 (Ubersuggest, locId 2840, en).
 Les jours où adresse-temporaire.fr et jetboxmail.com publient tous les deux, fais-les l'un après l'autre avec un seul build et un seul push.
 
