@@ -2204,7 +2204,7 @@ g("meilleurs-livres-aidants/",
   "Aider un parent âgé, accompagner Alzheimer, éviter l'épuisement : 10 livres pratiques pour les aidants familiaux, avec auteur, éditeur, format et pages.",
   """
 <p>Le bon livre pour un aidant, c'est celui qui répond à la question qui l'empêche de dormir en ce moment : comment s'organiser, comment parler à un parent qui perd la mémoire, ou comment tenir sans s'effondrer. C'est pourquoi nous avons classé ces dix titres selon la situation à laquelle ils répondent, plutôt que dans un ordre de préférence.</p>
-<p>Beaucoup d'aidants ne se reconnaissent pas comme tels : ils « donnent juste un coup de main » à leur mère, à leur conjoint, puis un jour la charge déborde. Un livre ne remplace ni le médecin ni une association, mais il aide souvent à mettre des mots sur ce qu'on vit et à découvrir des aides dont on ignorait l'existence.</p>
+<p>Beaucoup d'aidants ne se reconnaissent pas comme tels : ils « donnent juste un coup de main » à leur mère, à leur conjoint, puis un jour la charge déborde. Si vous cherchez plutôt à faire plaisir à un aidant de votre entourage, voyez nos <a href="{R}cadeau-aidant-familial/">idées de cadeaux pour un aidant familial</a>. Un livre ne remplace ni le médecin ni une association, mais il aide souvent à mettre des mots sur ce qu'on vit et à découvrir des aides dont on ignorait l'existence.</p>
 {CTA}
 <div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les éditeurs et les grands libraires (Fnac, Mollat, Decitre, sites des éditeurs), en vérifiant que chaque livre est référencé sur Amazon.fr, sans lecture complète de chaque ouvrage. Les descriptions résument ce qu'annoncent l'éditeur ou le libraire ; nous ne reprenons ni prix, ni notes, ni avis de lecteurs. Quand une donnée manque, nous écrivons « non précisé ». Vérifiez l'édition (date, format) au moment de commander.</div>
 <h2>Les 10 livres en un coup d'œil</h2>
@@ -4483,3 +4483,70 @@ g("fiche-urgence-personne-agee/",
        ("Où ranger une fiche d'urgence pour qu'on la trouve ?", "Sur le réfrigérateur ou derrière la porte d'entrée, bien visible. Un tiroir ou un classeur ne sera pas ouvert dans l'urgence."),
        ("À quelle fréquence mettre à jour la fiche d'urgence ?", "À chaque changement de traitement, de médecin ou de contact, et au moins une fois par an. Notez la date de mise à jour en bas de la fiche.")],
   short="Fiche d'urgence à imprimer", cat="Sécurité")
+
+
+AUTO_META['cadeau-aidant-familial/'] = ('🎁', 'lilas')
+g("cadeau-aidant-familial/",
+  "Cadeau pour un aidant familial : 12 idées qui soulagent",
+  "Quel cadeau offrir à un aidant familial ? Des idées qui soulagent vraiment",
+  "Quel cadeau offrir à un aidant familial qui s'occupe d'un parent âgé ? Du temps libre, du repos, moins de charge mentale : 12 idées classées par budget.",
+  """
+<p><strong>En bref</strong> : le cadeau qui fait le plus de bien à un aidant familial, c'est du temps libre, par exemple une demi-journée où quelqu'un d'autre prend le relais auprès du proche. Viennent ensuite les objets qui allègent son quotidien (pilulier, repas prêts, téléassistance) et ceux qui l'aident à se reposer. Selon la DREES, 9,3 millions de personnes aidaient régulièrement un proche en 2021, soit un adulte sur six : vous en connaissez forcément un.</p>
+<p>Offrir un cadeau à un aidant familial, c'est souvent la façon la plus simple de lui dire « je vois ce que tu fais ». Votre sœur qui passe chaque soir chez votre mère, un ami qui s'occupe de son épouse malade, un voisin qui fait les courses de son père : ils n'attendent rien, et c'est justement pour ça qu'un geste juste les touche. Chez Vieillir chez soi, nous conseillons de partir d'une seule question : qu'est-ce qui lui pèse le plus en ce moment ?</p>
+{CTA}
+<h2>Les 12 idées en un coup d'œil</h2>
+<table><thead><tr><th>Idée</th><th>Budget</th><th>Ce que ça soulage</th><th>Pour quel aidant</th></tr></thead><tbody>
+<tr><td>Bon pour une demi-journée de relais</td><td>Gratuit</td><td>Le manque de temps pour soi</td><td>Tous, surtout celui qui vit avec son proche</td></tr>
+<tr><td>Des plats faits maison à congeler</td><td>Petit budget</td><td>Les repas du soir après une journée chargée</td><td>Celui qui cuisine pour deux foyers</td></tr>
+<tr><td>Un carnet de suivi pour le proche aidé</td><td>Petit budget</td><td>La charge mentale (rendez-vous, traitements)</td><td>Celui qui gère les papiers et les médecins</td></tr>
+<tr><td>Un masque de nuit et des bouchons d'oreilles</td><td>Petit budget</td><td>Le sommeil haché</td><td>Celui qui dort mal à cause des nuits agitées</td></tr>
+<tr><td>Un livre écrit pour les aidants</td><td>Petit budget</td><td>Le sentiment d'être seul face à la situation</td><td>Celui qui débute ou qui s'épuise</td></tr>
+<tr><td>Un essai de livres audio</td><td>Gratuit le premier mois</td><td>Le besoin de souffler dans les trajets</td><td>Celui qui passe du temps en voiture</td></tr>
+<tr><td>Un pilulier électronique</td><td>Budget moyen</td><td>La peur des oublis de médicaments</td><td>Celui qui vit loin de son parent</td></tr>
+<tr><td>Un casque antibruit ou à réduction de bruit</td><td>Budget moyen</td><td>La fatigue nerveuse, la télé trop forte</td><td>Celui qui vit avec son proche</td></tr>
+<tr><td>Un coussin chauffant ou un appareil de massage</td><td>Budget moyen</td><td>Le dos et les épaules (transferts, ménage)</td><td>Celui qui aide physiquement</td></tr>
+<tr><td>Une séance de massage ou de soin</td><td>Budget moyen</td><td>L'oubli de soi</td><td>Celui qui ne s'accorde jamais rien</td></tr>
+<tr><td>Un week-end avec relais organisé</td><td>Cadeau à plusieurs</td><td>L'épuisement</td><td>Celui qui n'est pas parti depuis des mois</td></tr>
+<tr><td>Une montre ou un bouton d'alerte pour le proche</td><td>Cadeau à plusieurs</td><td>L'inquiétude permanente</td><td>Celui dont le parent vit seul</td></tr>
+</tbody></table>
+
+<h2>Le cadeau qui compte le plus : du temps</h2>
+<p>Demandez à un aidant ce qui lui manque, il répondra rarement « un objet ». Il répondra du temps, du sommeil, une soirée sans téléphone à côté de lui. Le plus beau cadeau, et le moins cher, est donc un bon écrit à la main : « Je reste avec maman samedi de 14 h à 19 h, tu fais ce que tu veux. » Fixez la date tout de suite, sinon le bon finit oublié dans un tiroir.</p>
+<p>Notre conseil : proposez un relais régulier plutôt qu'un exploit unique. Un après-midi par mois, tenu dans la durée, soulage plus qu'un grand geste en décembre. Si vous n'êtes pas disponible, vous pouvez offrir quelques heures d'aide à domicile ou de garde, en vous renseignant auprès d'un service local. Le département et le CCAS connaissent aussi les solutions de répit (accueil de jour, hébergement temporaire) : notre page sur les <a href="{R}ccas-aides-personnes-agees/">aides du CCAS</a> explique par où commencer.</p>
+
+<h2>Petit budget : alléger le quotidien</h2>
+<h3>Des repas prêts</h3>
+<p>Un aidant qui passe sa soirée chez son père rentre souvent sans avoir envie de cuisiner. Quelques plats faits maison, en portions, à mettre au congélateur, rendent service pendant des semaines. Pour qu'ils voyagent bien, offrez-les dans de bonnes boîtes. <a href="{AMZ:boites conservation verre congelation lot}" """ + A + """>Voir les boîtes de conservation en verre</a></p>
+<h3>Un carnet pour tout noter</h3>
+<p>Rendez-vous chez le cardiologue, changement de traitement, numéro de l'infirmière, code de la porte : tout cela tient dans la tête de l'aidant, et c'est épuisant. Un agenda ou un carnet de suivi médical rassemble tout au même endroit, et il peut passer de main en main quand un frère ou une sœur prend le relais. <a href="{AMZ:carnet de suivi medical aidant}" """ + A + """>Voir les carnets de suivi</a></p>
+<h3>De quoi mieux dormir</h3>
+<p>Beaucoup d'aidants dorment d'une oreille, surtout s'ils vivent avec la personne aidée. Un masque de nuit confortable et des bouchons d'oreilles en mousse ne règlent pas tout, mais ils aident à récupérer pendant une sieste ou quand quelqu'un d'autre veille. <a href="{AMZ:masque de nuit sommeil confortable}" """ + A + """>Voir les masques de nuit</a></p>
+<h3>Un livre ou des livres audio</h3>
+<p>Un bon livre aide à mettre des mots sur ce qu'on vit et à découvrir des aides dont on ignorait l'existence. Nous avons classé les titres par situation dans notre sélection des <a href="{R}meilleurs-livres-aidants/">meilleurs livres pour les aidants</a>. Pour celui qui n'a plus l'énergie de lire le soir, les livres audio s'écoutent en voiture ou en marchant : Audible propose un essai gratuit de 30 jours avec un livre audio offert, résiliable à tout moment, et le livre reste acquis après résiliation. <a href="{AUDIBLE}" """ + A + """>Essayer Audible gratuitement</a></p>
+
+<h2>Budget moyen : moins d'inquiétude, plus de repos</h2>
+<h3>Un pilulier électronique pour le proche</h3>
+<p>Offrir un objet au parent pour soulager l'aidant, c'est souvent malin. Un pilulier qui sonne à l'heure de la prise limite les oublis et évite à l'aidant d'appeler trois fois par jour pour vérifier. Nos critères sont détaillés dans le comparatif des <a href="{R}meilleur-pilulier-electronique/">piluliers électroniques</a>. Faites valider l'organisation des médicaments par le pharmacien. <a href="{AMZ:pilulier electronique alarme}" """ + A + """>Voir les piluliers électroniques</a></p>
+<h3>Un casque pour s'isoler un moment</h3>
+<p>Quand on vit avec un proche qui regarde la télévision très fort ou qui parle beaucoup, un casque à réduction de bruit permet de lire ou d'écouter de la musique sans quitter la pièce. <a href="{AMZ:casque reduction de bruit sans fil}" """ + A + """>Voir les casques à réduction de bruit</a></p>
+<h3>Un coussin chauffant ou de massage</h3>
+<p>Aider quelqu'un à se lever, à se laver ou à s'habiller sollicite le dos et les épaules. Un coussin chauffant ou un coussin de massage pour le cou et le dos fait plaisir le soir. Si les douleurs durent, c'est le médecin ou le kinésithérapeute qu'il faut voir, et un ergothérapeute peut montrer les bons gestes pour les transferts. <a href="{AMZ:coussin massage shiatsu chauffant cou dos}" """ + A + """>Voir les coussins de massage</a></p>
+
+<h2>À plusieurs : offrir une vraie pause</h2>
+<p>Quand la famille se cotise, deux cadeaux changent vraiment la vie de l'aidant. Le premier : un week-end ou quelques jours de vacances, à condition d'organiser en même temps qui s'occupe du proche (vous, un autre membre de la famille, un hébergement temporaire). Un séjour sans relais organisé n'est pas un cadeau, c'est une source d'angoisse.</p>
+<p>Le second : un équipement qui rassure quand le parent vit seul, comme une <a href="{R}meilleure-montre-gps-senior/">montre avec bouton SOS</a> ou un service de <a href="{R}teleassistance-comment-ca-marche/">téléassistance</a>. L'aidant dort mieux en sachant que son père peut appeler à l'aide en cas de chute. Parlez-en d'abord avec la personne aidée : c'est son quotidien qui change.</p>
+
+<h2>Les erreurs à éviter</h2>
+<ul>
+<li><strong>Le conseil déguisé en cadeau.</strong> Un livre sur « comment prendre soin de soi » offert sans rien d'autre peut être reçu comme un reproche. Accompagnez-le d'un bon de relais.</li>
+<li><strong>Le bon jamais utilisé.</strong> Un bon de massage ou de restaurant sans personne pour garder le proche reste dans le portefeuille. Prévoyez le relais avec.</li>
+<li><strong>Le cadeau pour la maladie.</strong> L'aidant reste une personne avec ses goûts. Si elle adore le jardinage ou les concerts, un cadeau lié à sa passion lui rappelle qu'elle existe en dehors de son rôle.</li>
+</ul>
+<p>Pour aider l'aidant au-delà du cadeau, notre <a href="{R}fiche-urgence-personne-agee/">fiche d'urgence à imprimer</a> se remplit en 10 minutes, et notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a> repère ce qui rendrait le quotidien plus sûr chez le parent.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://drees.solidarites-sante.gouv.fr/publications-communique-de-presse/etudes-et-resultats/93-millions-de-personnes-declarent-apporter" target="_blank" rel="noopener">DREES, 9,3 millions de personnes déclarent apporter une aide régulière à un proche (Études et Résultats n° 1255, février 2023)</a> (vérifié le 23 novembre 2026)</p>
+""",
+  faq=[("Quel cadeau offrir à un aidant familial pour Noël ?", "Le plus apprécié est du temps libre : un bon pour une demi-journée ou une soirée où vous gardez le proche aidé, avec une date fixée. En complément, des plats faits maison à congeler, un livre pour les aidants ou un coussin de massage font plaisir sans rappeler la maladie."),
+       ("Quel petit cadeau pour remercier un aidant ?", "Un carnet pour noter rendez-vous et traitements, un masque de nuit, des plats préparés ou un essai de livres audio. Ce sont de petits budgets, mais ils allègent la charge du quotidien ou offrent un moment de repos."),
+       ("Comment aider un aidant qui refuse de l'aide ?", "Proposez quelque chose de précis et limité plutôt qu'un « dis-moi si tu as besoin » : faire les courses le mardi, rester avec le proche samedi après-midi. Un service concret est plus facile à accepter qu'une offre vague."),
+       ("Combien y a-t-il d'aidants familiaux en France ?", "Selon la DREES, 9,3 millions de personnes déclaraient en 2021 aider régulièrement un proche en raison de son âge, d'une maladie ou d'un handicap : 8,8 millions d'adultes, soit un adulte sur six, et 0,5 million de mineurs.")],
+  short="Cadeau pour un aidant", cat="Conseils pour les proches")
