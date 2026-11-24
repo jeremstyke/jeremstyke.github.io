@@ -1,5 +1,6 @@
 # Articles à venir pour Les oiseaux du jardin (un par jour)
 # Format : - [ ] slug/ | requête visée | catégorie | angle
+- [x] black-friday-2026-mangeoire-nichoir-jumelles/ | black friday mangeoire nichoir caméra jumelles | Observer | demandé par Jeremy le 23 nov 2026, publié le 24 nov
 - [x] nourrir-les-oiseaux-du-jardin/ | nourrir les oiseaux en hiver | Nourrir | lancement
 - [x] quelles-graines-pour-les-oiseaux/ | quelles graines pour les oiseaux | Nourrir | lancement
 - [x] comment-choisir-mangeoire-connectee/ | mangeoire connectée | Mangeoires | lancement

@@ -316,6 +316,7 @@ g("meilleure-mangeoire-connectee/",
 <tr><td>Bird Buddy Pro Solar</td><td>Photos 5 Mpx, vidéo 2K (fiche contradictoire)</td><td>Toit solaire amovible</td><td>3 800 mAh</td><td>Oui</td><td>Oui pour la reconnaissance automatique</td><td>Non précisé</td></tr>
 <tr><td>Avidsen Smart Birdfeeder</td><td>1080p</td><td>Inclus (1,5 W)</td><td>4 400 mAh (2 accus 18650)</td><td>Non mentionnée</td><td>Non mentionné</td><td>microSD 4 à 128 Go (non fournie)</td></tr>
 </tbody></table>
+<p>Vous guettez une baisse de prix ? Consultez notre <a href="{R}black-friday-2026-mangeoire-nichoir-jumelles/">liste des mangeoires, nichoirs caméra et jumelles à surveiller pendant le Black Friday</a>.</p>
 <p>Retenez trois points avant d'entrer dans le détail : la plupart de ces mangeoires ne se connectent qu'au Wi-Fi 2,4 GHz, la reconnaissance des espèces n'est pas toujours gratuite, et le stockage se fait soit dans le cloud du fabricant, soit sur une carte microSD, rarement les deux.</p>
 
 <h2>1. Birdfy Feeder 2 Pro : idéal pour la meilleure image (notre choix)</h2>
@@ -3936,3 +3937,55 @@ g("heron-cendre/",
        ("À quelle heure le héron vient-il au bassin ?",
         "Le plus souvent tôt le matin, quand le jardin est calme et que personne ne bouge. C'est pour cela qu'on découvre souvent les pertes de poissons sans jamais avoir vu l'oiseau.")],
   short="Héron cendré", cat="Observer")
+
+AUTO_META['black-friday-2026-mangeoire-nichoir-jumelles/'] = ('🏷️', 'rouge')
+g("black-friday-2026-mangeoire-nichoir-jumelles/",
+  "Black Friday 2026 : mangeoire, nichoir caméra, jumelles à guetter",
+  "Black Friday 2026 : mangeoires, nichoirs caméra et jumelles à surveiller pour l'hiver",
+  "Black Friday le 27 novembre 2026 : mangeoire connectée, nichoir caméra, jumelles et guide, repris de nos comparatifs, et comment repérer une vraie baisse.",
+  """
+<p><strong>En bref</strong> : le Black Friday tombe le vendredi 27 novembre 2026, juste au début de la saison où la LPO nationale préconise une aide alimentaire, de novembre à mars environ. C'est un bon moment pour l'équipement qui sert tout l'hiver (mangeoire connectée, mangeoire de fenêtre, jumelles) et pour un nichoir à caméra, qui se pose de préférence en automne ou au début de l'hiver. Selon service-public.fr, une réduction affichée doit se comparer au prix pratiqué pendant au moins 30 jours avant.</p>
+<p>Chez Les oiseaux du jardin, nous ne savons pas quels produits seront en promotion. Nous vous donnons donc une liste courte de modèles arrivés en tête de nos comparatifs, à regarder vendredi, et ce qu'il faut vérifier pour ne pas acheter le mauvais.</p>
+{CTA}
+<h2>Les modèles de nos comparatifs à surveiller</h2>
+<table><thead><tr><th>Produit</th><th>Comparatif</th><th>Pour quel usage</th><th>À vérifier avant d'acheter</th></tr></thead><tbody>
+<tr><td>Birdfy Feeder 2 Pro</td><td>Mangeoires connectées</td><td>Photographier et identifier les visiteurs</td><td>La version (avec ou sans IA à vie) et le wifi au jardin</td></tr>
+<tr><td>Green Feathers kit complet wifi 1080p</td><td>Nichoirs caméra</td><td>Suivre une nichée sans ouvrir le nichoir</td><td>La portée du wifi jusqu'à l'arbre ou au mur</td></tr>
+<tr><td>Nikon Prostaff P7 8x42</td><td>Jumelles</td><td>Observer au jardin et en balade</td><td>Le grossissement 8x42, confortable pour débuter</td></tr>
+<tr><td>Nature Anywhere Birds-I-View</td><td>Mangeoires de fenêtre</td><td>Voir les oiseaux de très près depuis la maison</td><td>Une vitre accessible pour remplir et nettoyer</td></tr>
+<tr><td>Squirrel Buster Legacy</td><td>Mangeoires</td><td>Un silo à graines quand les écureuils se servent</td><td>L'endroit où le suspendre, loin des appuis des écureuils</td></tr>
+<tr><td>Le guide ornitho (3e édition)</td><td>Guides oiseaux</td><td>Identifier toutes les espèces d'Europe</td><td>Bien prendre la 3e édition</td></tr>
+<tr><td>Schwegler 1B 32 mm</td><td>Nichoirs à mésange</td><td>Accueillir la mésange charbonnière</td><td>Le diamètre du trou selon l'espèce</td></tr>
+</tbody></table>
+
+<h2>L'équipement qui sert tout l'hiver</h2>
+<h3>La mangeoire connectée</h3>
+<p>C'est l'achat le plus cher de cette liste, donc celui où une vraie baisse change quelque chose. La <a href="{AMZ:Birdfy Feeder 2 Pro}" """ + A + """>Birdfy Feeder 2 Pro</a> est notre choix pour la qualité d'image : deux objectifs, dont un en 2K, et un panneau solaire inclus selon le fabricant. Attention aux versions : la même mangeoire se vend avec ou sans l'identification par IA à vie, et une promotion peut porter sur la version la moins équipée. Les critères sont dans notre <a href="{R}meilleure-mangeoire-connectee/">comparatif des mangeoires connectées</a>.</p>
+<h3>La mangeoire de fenêtre</h3>
+<p>Pour regarder les mésanges à un mètre de son fauteuil, la <a href="{AMZ:Nature Anywhere mangeoire fenetre oiseaux}" """ + A + """>Nature Anywhere Birds-I-View</a> arrive en tête de notre <a href="{R}meilleure-mangeoire-fenetre/">comparatif des mangeoires de fenêtre</a>, avec un plateau qui sort pour le remplissage et le nettoyage. C'est aussi une belle idée de cadeau pour un parent âgé qui sort moins en hiver, comme le propose notre site frère Vieillir chez soi dans ses <a href="https://vieillir-chez-soi.fr/cadeau-noel-personne-agee-a-domicile/" target="_blank" rel="noopener">idées de cadeaux de Noël pour une personne âgée</a>.</p>
+<h3>Le silo qui résiste aux écureuils</h3>
+<p>Si les écureuils vident vos graines chaque matin, le <a href="{AMZ:Squirrel Buster Legacy}" """ + A + """>Squirrel Buster Legacy</a> est le silo réglable de notre <a href="{R}meilleure-mangeoire-oiseaux/">comparatif des mangeoires</a>. Pour le contenu, pensez aux graines et boules de graisse sans filet ; notre guide <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a> explique quoi donner et quand arrêter.</p>
+
+<h2>À acheter maintenant pour le printemps</h2>
+<p>Le nichoir est l'achat qu'on fait trop tard. Selon la fiche Refuges de la LPO Auvergne-Rhône-Alpes, mieux vaut le poser dès l'automne ou au début de l'hiver, car certaines mésanges cherchent un site très tôt. Le Black Friday tombe donc au bon moment.</p>
+<p>Le <a href="{AMZ:Green Feathers kit complet nichoir camera wifi}" """ + A + """>kit Green Feathers wifi 1080p</a> est le plus simple pour commencer avec une caméra, avec un infrarouge invisible pour ne pas éclairer la nichée. Avant d'acheter, vérifiez que votre wifi porte jusqu'à l'endroit de la pose. Sans caméra, le <a href="{AMZ:Schwegler nichoir 1B 32 mm}" """ + A + """>Schwegler 1B 32 mm</a> est notre choix pour la mésange charbonnière. Voir aussi notre <a href="{R}meilleur-nichoir-camera/">comparatif des nichoirs caméra</a>.</p>
+
+<h2>Pour bien observer : jumelles et guide</h2>
+<p>Les <a href="{AMZ:Nikon Prostaff P7 8x42}" """ + A + """>Nikon Prostaff P7 8x42</a> sont les plus légères de notre <a href="{R}meilleures-jumelles-oiseaux/">comparatif des jumelles</a>, à 590 g selon Nikon, et étanches selon le fabricant. Pour mettre un nom sur ce que vous voyez, <a href="{AMZ:le guide ornitho Svensson Delachaux 3e edition}" """ + A + """>Le guide ornitho</a> (3e édition) reste la référence la plus complète de nos guides, avec 4 000 illustrations. Ce sont deux cadeaux de Noël faciles, à commander tôt.</p>
+
+<h2>Comment reconnaître une vraie bonne affaire ?</h2>
+<ul>
+<li><strong>Le prix de référence.</strong> Selon service-public.fr, une annonce de réduction doit indiquer le prix pratiqué pendant au moins 30 jours avant la réduction. Notez le prix des modèles qui vous intéressent cette semaine.</li>
+<li><strong>La version exacte.</strong> Mangeoires connectées et nichoirs caméra existent en plusieurs versions (solaire ou non, IA ou non, wifi ou filaire). Comparez le nom complet.</li>
+<li><strong>Les avis réels sur la fiche</strong>, surtout ceux qui parlent de la tenue l'hiver, de l'autonomie et de l'application.</li>
+<li><strong>Le droit de rétractation.</strong> Pour un achat en ligne, service-public.fr indique un délai minimum de 14 jours à compter du lendemain de la réception, promotion ou non.</li>
+<li><strong>L'abonnement caché.</strong> Certaines caméras demandent un abonnement pour l'enregistrement ou l'identification : lisez la fiche avant de payer.</li>
+</ul>
+<p>Notre conseil : choisissez maintenant un seul équipement pour cet hiver, celui qui vous fera le plus profiter de vos visiteurs, et ne regardez que celui-là vendredi.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://entreprendre.service-public.gouv.fr/vosdroits/F34344" target="_blank" rel="noopener">service-public.fr, Affichage des prix : règles à respecter</a>, <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F10485" target="_blank" rel="noopener">service-public.fr, Achat à distance : droit de rétractation du consommateur</a> (vérifié le 24 novembre 2026)</p>
+""",
+  faq=[("Quand a lieu le Black Friday 2026 ?", "Le vendredi 27 novembre 2026. Beaucoup de sites lancent leurs offres quelques jours avant : notez dès maintenant le prix des modèles qui vous intéressent pour comparer."),
+       ("Est-ce le bon moment pour acheter un nichoir ?", "Oui. La LPO Auvergne-Rhône-Alpes conseille de poser le nichoir dès l'automne ou au début de l'hiver, car certaines mésanges cherchent un site très tôt. Un nichoir acheté fin novembre a le temps d'être installé avant le printemps."),
+       ("Quelle mangeoire acheter pendant le Black Friday ?", "Celle qui correspond à votre jardin : une mangeoire connectée pour photographier les visiteurs, une mangeoire de fenêtre pour les voir de près, un silo anti-écureuils si ceux-ci se servent. Vérifiez la version exacte avant de commander."),
+       ("Faut-il nourrir les oiseaux dès la fin novembre ?", "La LPO nationale préconise une aide hivernale de novembre à mars environ, et déconseille de nourrir pendant la reproduction. Une mangeoire achetée pendant le Black Friday sert donc tout de suite.")],
+  short="Black Friday oiseaux du jardin", cat="Observer")
