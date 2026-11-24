@@ -4435,7 +4435,7 @@ g("cadeau-noel-personne-agee-a-domicile/",
 <li><strong>Le gadget compliqué.</strong> Une tablette ou une enceinte connectée sans personne pour l'installer finit dans un tiroir. Si vous l'offrez, offrez aussi l'après-midi pour la régler ensemble.</li>
 <li><strong>Le cadeau qui rappelle l'âge.</strong> Un objet « pour vieux » emballé sous le sapin peut vexer. Présentez l'utilité, pas la fragilité : « pour lire plus facilement », pas « parce que tu vois mal ».</li>
 <li><strong>Encore un objet à ranger.</strong> Quand la maison est déjà pleine, préférez un cadeau qui se consomme ou un moment partagé : un repas, une sortie, une journée pour faire ensemble le tri ou les petits travaux.</li>
-<li><strong>Acheter trop tard.</strong> Les commandes de mi-décembre arrivent parfois après le 25. Le Black Friday, le 27 novembre, est un bon moment pour comparer et commander tôt, à condition de vérifier que le prix affiché est vraiment intéressant.</li>
+<li><strong>Acheter trop tard.</strong> Les commandes de mi-décembre arrivent parfois après le 25. Le Black Friday, le 27 novembre, est un bon moment pour comparer et commander tôt, à condition de vérifier que le prix affiché est vraiment intéressant : voyez notre <a href="{R}black-friday-2026-materiel-maintien-domicile/">liste du matériel de maintien à domicile à surveiller pendant le Black Friday</a>.</li>
 </ul>
 <p>Pour d'autres idées valables toute l'année, consultez notre guide <a href="{R}cadeau-personne-agee/">cadeau pour une personne âgée</a>, et pour repérer ce qui manque dans la maison, notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a>.</p>
 """,
@@ -4550,3 +4550,56 @@ g("cadeau-aidant-familial/",
        ("Comment aider un aidant qui refuse de l'aide ?", "Proposez quelque chose de précis et limité plutôt qu'un « dis-moi si tu as besoin » : faire les courses le mardi, rester avec le proche samedi après-midi. Un service concret est plus facile à accepter qu'une offre vague."),
        ("Combien y a-t-il d'aidants familiaux en France ?", "Selon la DREES, 9,3 millions de personnes déclaraient en 2021 aider régulièrement un proche en raison de son âge, d'une maladie ou d'un handicap : 8,8 millions d'adultes, soit un adulte sur six, et 0,5 million de mineurs.")],
   short="Cadeau pour un aidant", cat="Conseils pour les proches")
+
+AUTO_META['black-friday-2026-materiel-maintien-domicile/'] = ('🏷️', 'sable')
+g("black-friday-2026-materiel-maintien-domicile/",
+  "Black Friday 2026 : le matériel de maintien à domicile à guetter",
+  "Black Friday 2026 : le matériel de maintien à domicile à surveiller pour un senior",
+  "Black Friday le 27 novembre 2026 : le matériel pour aider un senior à rester chez lui, repris de nos comparatifs, et comment savoir si une baisse est réelle.",
+  """
+<p><strong>En bref</strong> : le Black Friday a lieu le vendredi 27 novembre 2026. Pour le maintien à domicile d'une personne âgée, il peut valoir le coup sur le matériel qu'on achète de toute façon (fauteuil releveur, casque TV, téléphone, veilleuses), à condition d'avoir choisi le modèle avant. Selon service-public.fr, une réduction affichée doit se comparer au prix pratiqué pendant au moins 30 jours avant.</p>
+<p>Une promotion n'a de valeur que sur un équipement adapté à la personne. Chez Vieillir chez soi, nous vous proposons donc une liste courte : les modèles arrivés en tête de nos comparatifs, à surveiller vendredi, et les achats pour lesquels mieux vaut demander un avis médical ou une prescription avant de payer quoi que ce soit.</p>
+{CTA}
+<h2>Les modèles de nos comparatifs à surveiller</h2>
+<table><thead><tr><th>Produit</th><th>Comparatif</th><th>Pour qui</th><th>À vérifier avant d'acheter</th></tr></thead><tbody>
+<tr><td>Herdegen Stylea II</td><td>Fauteuils releveurs</td><td>Se lever du fauteuil devient pénible</td><td>La taille de la personne et la place derrière le dossier</td></tr>
+<tr><td>Sennheiser RS 5200</td><td>Casques TV</td><td>Les dialogues de la télévision sont difficiles à suivre</td><td>Le branchement disponible sur la télévision</td></tr>
+<tr><td>Geemarc AmpliDECT 595 U.L.E</td><td>Téléphones fixes</td><td>Une personne qui entend mal au téléphone</td><td>La compatibilité avec sa box ou sa ligne</td></tr>
+<tr><td>Ledvance Nightlux Hall</td><td>Veilleuses à détecteur</td><td>Les levers de nuit dans le couloir</td><td>Le nombre de veilleuses pour tout le trajet</td></tr>
+<tr><td>Geemarc AmpliDECT 295 SOS Pro</td><td>Boutons d'appel d'urgence</td><td>Une personne qui vit seule</td><td>Les numéros à programmer et la portée dans la maison</td></tr>
+<tr><td>Aquatec Sorrento</td><td>Sièges de douche</td><td>Une personne qui se fatigue debout sous la douche</td><td>La largeur du receveur</td></tr>
+<tr><td>Invacare Asteria</td><td>Déambulateurs</td><td>Un appui pour marcher dans le logement</td><td>L'avis du médecin ou du kiné, et la prise en charge possible</td></tr>
+<tr><td>Invacare Medley Ergo</td><td>Lits médicalisés</td><td>Une personne alitée ou aidée pour les soins</td><td>La location sur prescription, souvent plus adaptée</td></tr>
+</tbody></table>
+<p>Nous ne savons pas à l'avance lesquels de ces modèles seront en promotion. Regardez le prix le jour même et comparez-le avec celui des semaines précédentes.</p>
+
+<h2>Le confort de tous les jours : là où une promotion est bienvenue</h2>
+<p>Certains achats ne demandent pas d'avis médical et servent dès le premier soir. Ce sont les plus faciles à faire pendant le Black Friday.</p>
+<p>Le casque <a href="{AMZ:Sennheiser RS 5200}" """ + A + """>Sennheiser RS 5200</a> est notre choix pour mieux comprendre les dialogues sans monter le son pour toute la maison. Le téléphone <a href="{AMZ:Geemarc AmpliDECT 595 ULE}" """ + A + """>Geemarc AmpliDECT 595 U.L.E</a> arrive en tête de notre <a href="{R}meilleur-telephone-fixe-senior/">comparatif des téléphones fixes pour senior</a>. Et pour la nuit, la <a href="{AMZ:Ledvance Nightlux Hall}" """ + A + """>Ledvance Nightlux Hall</a> éclaire le couloir au passage : comptez-en plusieurs pour couvrir tout le trajet jusqu'aux toilettes. Tous les détails sont dans notre <a href="{R}meilleur-casque-tv-senior/">comparatif des casques TV</a> et notre <a href="{R}meilleure-veilleuse-detecteur-de-mouvement/">sélection de veilleuses à détecteur</a>.</p>
+
+<h2>Le gros achat de l'année : le fauteuil releveur</h2>
+<p>C'est souvent la dépense la plus importante pour le salon, donc celle où une vraie baisse compte. Le <a href="{AMZ:Herdegen Stylea II fauteuil releveur}" """ + A + """>Herdegen Stylea II</a> est notre choix pour un usage quotidien. Avant de commander, mesurez la personne assise (hauteur sous les genoux, largeur des hanches) et la place derrière le dossier : un fauteuil releveur qui ne convient pas à la morphologie ne rend pas service, même à prix réduit. Notre <a href="{R}meilleur-fauteuil-releveur/">comparatif des fauteuils releveurs</a> explique quoi mesurer.</p>
+
+<h2>Sécurité : utile, mais à décider avec la personne</h2>
+<p>Le bouton d'appel <a href="{AMZ:Geemarc AmpliDECT 295 SOS Pro}" """ + A + """>Geemarc AmpliDECT 295 SOS Pro</a> est notre choix pour une personne seule qui a gardé une ligne fixe : il remplace le téléphone de la maison, avec un médaillon qui appelle jusqu'à 4 numéros en cas d'alerte (portée de 30 m en intérieur selon le fabricant). Pour la salle de bains, la chaise <a href="{AMZ:Aquatec Sorrento chaise de douche}" """ + A + """>Aquatec Sorrento</a> est la plus complète de notre <a href="{R}meilleur-siege-de-douche/">comparatif des sièges de douche</a>. Ces équipements ne s'offrent pas par surprise : parlez-en avant, pour qu'ils soient vraiment utilisés.</p>
+
+<h2>Le matériel médical : attention avant de profiter d'une promo</h2>
+<p>Pour un déambulateur, un lit médicalisé ou un matelas anti-escarres, la bonne question n'est pas le prix mais le besoin. Certains de ces équipements peuvent être loués ou pris en charge par l'Assurance maladie sur prescription, avec un prestataire qui livre et règle le matériel. Avant d'acheter, demandez à votre médecin, au kinésithérapeute, à l'ergothérapeute ou au pharmacien ce qui convient et ce qui est remboursé.</p>
+<p>Le déambulateur <a href="{AMZ:Invacare Asteria deambulateur}" """ + A + """>Invacare Asteria</a> et le lit <a href="{R}meilleur-lit-medicalise/">Invacare Medley Ergo</a> sont nos premiers choix, mais un modèle prescrit et adapté vaut mieux qu'une bonne affaire. Voyez aussi notre <a href="{R}meilleur-deambulateur/">comparatif des déambulateurs</a>.</p>
+
+<h2>Comment reconnaître une vraie bonne affaire ?</h2>
+<ul>
+<li><strong>Le prix de référence.</strong> Selon service-public.fr, une annonce de réduction doit indiquer le prix pratiqué pendant au moins 30 jours avant la réduction. Notez le prix quelques jours avant vendredi pour pouvoir comparer.</li>
+<li><strong>La référence exacte.</strong> Une ancienne version, un autre coloris ou un pack sans accessoire peuvent expliquer un prix plus bas. Comparez le nom complet du modèle.</li>
+<li><strong>Les avis réels sur la fiche</strong>, surtout ceux qui parlent de l'usage au bout de plusieurs mois et du service après-vente.</li>
+<li><strong>Le droit de rétractation.</strong> Pour un achat en ligne, service-public.fr indique un délai minimum de 14 jours à compter du lendemain de la réception. Les produits ouverts et non retournables pour des raisons d'hygiène en sont exclus : pensez-y pour le matériel de toilette.</li>
+<li><strong>Le compte à rebours.</strong> Un minuteur ou un « plus que 2 en stock » pousse à décider trop vite. Si l'équipement n'était pas sur votre liste la veille, il peut attendre.</li>
+</ul>
+<p>Notre conseil : faites le tour du logement avec la personne cette semaine, notez ce qui manque, puis ne regardez que ces produits-là vendredi. Notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a> vous aide à faire ce tour.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://entreprendre.service-public.gouv.fr/vosdroits/F34344" target="_blank" rel="noopener">service-public.fr, Affichage des prix : règles à respecter</a>, <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F10485" target="_blank" rel="noopener">service-public.fr, Achat à distance : droit de rétractation du consommateur</a> (vérifié le 24 novembre 2026)</p>
+""",
+  faq=[("Quand a lieu le Black Friday 2026 ?", "Le vendredi 27 novembre 2026. Beaucoup de sites lancent leurs offres quelques jours avant : notez dès maintenant le prix des équipements qui vous intéressent pour pouvoir comparer."),
+       ("Faut-il acheter un fauteuil releveur pendant le Black Friday ?", "Oui si le modèle est déjà choisi et adapté à la morphologie de la personne : c'est un achat important, et une vraie baisse fait une différence. Mesurez la personne assise et la place dans le salon avant de commander."),
+       ("Un déambulateur ou un lit médicalisé en promotion, est-ce une bonne idée ?", "Pas forcément. Ces équipements peuvent être loués ou pris en charge sur prescription, avec un réglage par un professionnel. Demandez d'abord l'avis du médecin, du kinésithérapeute ou du pharmacien."),
+       ("Peut-on renvoyer un article acheté pendant le Black Friday ?", "Pour un achat en ligne, le droit de rétractation est d'au moins 14 jours à compter du lendemain de la réception, selon service-public.fr, promotion ou non. Les produits ouverts et non retournables pour des raisons d'hygiène en sont exclus.")],
+  short="Black Friday maintien à domicile", cat="Vie quotidienne")

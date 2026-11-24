@@ -1,5 +1,6 @@
 # Sujets d'articles à venir pour Vieillir chez soi (un tous les 2 jours)
 # Format : - [ ] slug/ | requête visée | catégorie | angle
+- [x] black-friday-2026-materiel-maintien-domicile/ | black friday matériel maintien à domicile | Vie quotidienne | demandé par Jeremy le 23 nov 2026, publié le 24 nov
 - [x] cadeau-aidant-familial/ | cadeau pour un aidant familial | Conseils pour les proches
 - [x] cadeau-noel-personne-agee-a-domicile/ | idées cadeaux de Noël pour une personne âgée qui vit chez elle | Vie quotidienne | demandé par Jeremy le 22 nov 2026, publié le 22 nov
 - [x] livres-audio-personne-agee/ | livre audio pour personne âgée | Vie quotidienne | quand la vue baisse, comment écouter (enceinte simple, téléphone, tablette, casque), trouver des livres audio, installer avec son proche ; lien {AUDIBLE} vers l'essai gratuit en bonne place et liens {AMZ} vers les appareils
