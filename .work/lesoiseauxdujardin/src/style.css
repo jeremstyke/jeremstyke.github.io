@@ -99,6 +99,7 @@ html.big{font-size:118%}
 .prose a[href*="amazon.fr"]{display:inline-block;background:var(--sauge);border:1px solid #C9DDD0;border-radius:10px;padding:2px 10px;text-decoration:none;font-weight:700;margin:2px 0}
 .prose a[href*="amazon.fr"]::before{content:"🛒 ";}
 .prose a[href*="amazon.fr"]:hover{background:#D3E6DA}
+.prose .amz-row{margin:-.4em 0 1.2em;display:flex;flex-wrap:wrap;gap:8px}
 .themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
 .theme{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:4px 18px 12px}
 .theme h3{font-size:1.15rem;margin:.8em 0 .4em}.theme ul{margin:0;padding-left:18px}.theme li{margin:4px 0}

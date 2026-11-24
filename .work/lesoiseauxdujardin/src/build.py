@@ -135,13 +135,31 @@ def price_buttons(body):
         body = body[:h.end()] + btn + body[h.end():]
     return body
 
+def inline_amz(body):
+    """Un lien Amazon posé au milieu d'une phrase s'affiche en gros bouton et casse la lecture.
+    Le nom du produit reste en gras dans le texte, et le bouton « Voir ... sur Amazon » passe sous le paragraphe."""
+    link = re.compile(r'<a ([^>]*href="https://www\.amazon\.fr/s\?[^"]*"[^>]*)>([^<]+)</a>')
+    def fix(m):
+        tag, inner = m.group(1), m.group(2)
+        btns = []
+        def rep(a):
+            txt = a.group(2).strip()
+            if re.match(r'(Voir|Essayer)\b', txt): return a.group(0)
+            btns.append('<a %s>Voir %s sur Amazon</a>' % (a.group(1), txt))
+            return '<strong>%s</strong>' % txt
+        new = link.sub(rep, inner)
+        if not btns: return m.group(0)
+        if tag == 'li': return '<li>%s<br>%s</li>' % (new, ' '.join(btns))
+        return '<p>%s</p>\n<p class="amz-row">%s</p>' % (new, ' '.join(btns))
+    return re.sub(r'<(p|li)>(.*?)</\1>', lambda m: fix(m) if m.group(1) in ('p', 'li') else m.group(0), body, flags=re.S)
+
 def render(body):
     body = pick_box(body)
     body = price_buttons(body)
     body = body.replace('{CTA}', CTA)
     body = re.sub(r'\{AUDIBLE:([A-Z0-9]{10})\}', lambda m: 'https://www.amazon.fr/hz/audible/mlp/mfpdp/' + m.group(1) + '?actionCode=AMSTM1450129210001&tag=' + TAG, body)
     body = body.replace('{AUDIBLE}', 'https://www.amazon.fr/hz/audible/mlp?actionCode=AMSTM1450129210001&tag=' + TAG)
-    return re.sub(r'\{AMZ:([^}]+)\}', lambda m: amz(m.group(1)), body)
+    return inline_amz(re.sub(r'\{AMZ:([^}]+)\}', lambda m: amz(m.group(1)), body))
 
 AUTHOR_LD = {"@type": "Person", "name": AUTHOR_NAME, "url": BASE + '/a-propos/'}
 PUBLISHER_LD = {"@type": "Organization", "name": SITE, "url": BASE + '/', "logo": {"@type": "ImageObject", "url": BASE + '/assets/icon-192.png'}}
@@ -214,7 +232,7 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None,
 <link rel="icon" href="{R}assets/favicon.ico" sizes="32x32"><link rel="icon" href="{R}assets/favicon.svg" type="image/svg+xml"><link rel="icon" href="{R}assets/icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="{R}assets/apple-touch-icon.png">
 <link rel="preload" href="{R}assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{R}assets/fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="{R}assets/style.css?v=2">
+<link rel="stylesheet" href="{R}assets/style.css?v=3">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8638687738606649" crossorigin="anonymous"></script>
 </head>

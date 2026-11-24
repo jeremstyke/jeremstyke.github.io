@@ -87,3 +87,5 @@ Le site est jeune : il gagne d'abord sur des requêtes précises de 4 mots et pl
 - La FAQ contient une question sur cet angle, par exemple « Une veilleuse à détecteur évite-t-elle les chutes la nuit ? ».
 - Chaque fiche produit dit aussi, en une phrase, pour quel lecteur ce produit est le bon choix.
 - Avant de prendre une ligne de tops.md : si sa requête est générique, réécris-la avec l'angle du site (slug compris si la page n'existe pas encore) ; si le produit n'a vraiment aucun lien avec le sujet du site, coche-la « abandonné, hors sujet » et prends la suivante.
+
+- Liens Amazon (règle du 24 nov 2026, demandée par Jeremy) : JAMAIS de lien Amazon posé sur un nom de produit au milieu d'une phrase (il s'affiche en gros bouton et casse la lecture). Le nom du produit reste en texte (gras si besoin) et le lien va dans son propre paragraphe ou en fin de paragraphe, sous la forme « Voir ... sur Amazon » ou « Voir les ... ». build.py corrige automatiquement les oublis (fonction inline_amz), mais écris directement au bon format.

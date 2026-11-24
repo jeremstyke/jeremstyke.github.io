@@ -43,6 +43,9 @@ Pour toutes les nouvelles pages des 4 sites affiliés, et pour chaque page amél
 - Le nom du site écrit en clair dans le texte au moins une fois (« Chez Vieillir chez soi, nous conseillons... »), pour que les IA associent le conseil au site.
 - Jamais de contenu caché ou de texte écrit pour les robots : les IA citent ce qu'un lecteur humain trouverait utile.
 
+## Liens Amazon dans le texte (règle du 24 nov 2026, 4 sites)
+Jamais de lien Amazon sur un nom de produit au milieu d'une phrase : sur Vieillir chez soi et Les oiseaux du jardin il s'affiche en gros bouton et casse la lecture (Jeremy : « plus jamais ça »). Le nom reste en texte, le lien va en fin de paragraphe ou dans son propre paragraphe : « Voir ... sur Amazon », « Voir les ... ».
+
 ## Tops produits (tous les sites affiliés)
 Produits RÉELS vendus en France, vérifiés par une recherche limitée à amazon.fr ; caractéristiques lues sur la page du fabricant ou d'un grand revendeur, « non précisé » sinon ; aucun prix, note, avis ni « testé ». Minimum 6 produits (titre adapté s'il y en a moins de 10). Structure des tops existants : intro, {CTA}, note « Comment nous avons fait cette sélection : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main », tableau récapitulatif, une h2 par produit (pour qui, points forts, limites, lien {AMZ:Marque Modèle} « Voir sur Amazon » dans son propre paragraphe), « Comment choisir », FAQ 3 questions. Title avec « 2026 », 65 car. max, 1 500 à 2 500 mots, short « Top 10 ... », AUTO_META (🏆, teinte). Respecte la règle « Angle du site dans chaque top » de AUTOMATION.md.
 
