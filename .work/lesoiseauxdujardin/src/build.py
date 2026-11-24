@@ -123,35 +123,62 @@ def pick_box_guide(body, slug):
     return body.replace('{CTA}', box + '\n{CTA}', 1)
 
 def price_buttons(body):
-    """Tops : bouton « Voir le prix sur Amazon » juste sous l'intertitre de chaque produit numéroté (aucun prix affiché sur le site)."""
-    if not re.search(r'Comment (?:nous avons|on a) fait cette sélection', body) or 'class="price-btn"' in body: return body
-    heads = list(re.finditer(r'<h([23])(?: id="[^"]*")?>\s*\d+\.\s.+?</h\1>\n?', body))
-    for h in reversed(heads):
-        nxt = re.search(r'<h[23][ >]', body[h.end():])
-        seg = body[h.end():h.end() + nxt.start()] if nxt else body[h.end():]
-        a = re.search(r'href="\{AMZ:([^}]+)\}"[^>]*>\s*Voir[^<]*Amazon', seg)
-        if not a: continue
-        btn = '<p class="price-btn"><a class="btn small" href="{AMZ:%s}" %s>Voir le prix sur Amazon</a></p>\n' % (a.group(1), REL)
-        body = body[:h.end()] + btn + body[h.end():]
-    return body
+    """Tops : UN seul bouton Amazon par produit, juste sous son intertitre (« N. Nom »),
+    au même style que les autres boutons du texte ; le lien « Voir sur Amazon » en bas de fiche est retiré."""
+    if not re.search(r'Comment (?:nous avons|on a) fait cette sélection', body) or 'class="amz-row price-btn"' in body: return body
+    heads = list(re.finditer(r'<h2(?: id="[^"]*")?>\s*\d+\.\s(.+?)</h2>', body))
+    out, last = [], 0
+    for k, h in enumerate(heads):
+        nxt = heads[k + 1].start() if k + 1 < len(heads) else len(body)
+        sec = body[h.end():nxt]
+        a = re.search(r'href="\{AMZ:([^}]+)\}"[^>]*>\s*Voir[^<]*Amazon', sec)
+        out.append(body[last:h.end()])
+        if a:
+            out.append('\n<p class="amz-row price-btn"><a href="{AMZ:%s}" %s><span class="amz-name">Voir le prix sur Amazon</span><span class="amz-go"></span></a></p>' % (a.group(1), REL))
+            sec = re.sub(r'\s*<p>\s*<a [^>]*href="\{AMZ:[^}]+\}"[^>]*>\s*Voir sur Amazon\s*</a>\s*</p>', '', sec, count=1)
+        out.append(sec)
+        last = nxt
+    out.append(body[last:])
+    return ''.join(out)
 
 def inline_amz(body):
     """Un lien Amazon posé au milieu d'une phrase s'affiche en gros bouton et casse la lecture.
     Le nom du produit reste en gras dans le texte, et le bouton « Voir ... sur Amazon » passe sous le paragraphe."""
-    link = re.compile(r'<a ([^>]*href="https://www\.amazon\.fr/s\?[^"]*"[^>]*)>([^<]+)</a>')
+    link = re.compile(r'<a ([^>]*href="https://www\.amazon\.fr/(?:s\?|hz/audible)[^"]*"[^>]*)>([^<]+)</a>')
     def fix(m):
         tag, inner = m.group(1), m.group(2)
         btns = []
         def rep(a):
             txt = a.group(2).strip()
-            if re.match(r'(Voir|Essayer)\b', txt): return a.group(0)
-            btns.append('<a %s>Voir %s sur Amazon</a>' % (a.group(1), txt))
+            if re.match(r'(Voir|Essayer)\b', txt):
+                if not re.sub(r'<a [^>]*>[^<]*</a>|<[^>]+>|\s', '', inner): return a.group(0)
+                btns.append('<a %s><span class="amz-name">%s</span><span class="amz-go"></span></a>' % (a.group(1), txt))
+                return ''
+            btns.append('<a %s><span class="amz-name">%s</span><span class="amz-go">Voir le prix</span></a>' % (a.group(1), txt))
             return '<strong>%s</strong>' % txt
         new = link.sub(rep, inner)
         if not btns: return m.group(0)
-        if tag == 'li': return '<li>%s<br>%s</li>' % (new, ' '.join(btns))
-        return '<p>%s</p>\n<p class="amz-row">%s</p>' % (new, ' '.join(btns))
+        new = re.sub(r'([.!?:])\s*\.$', r'\1', new.rstrip())
+        if tag == 'li': return '<li>%s<span class="amz-row">%s</span></li>' % (new, ''.join(btns))
+        return '<p>%s</p>\n<p class="amz-row">%s</p>' % (new, ''.join(btns))
     return re.sub(r'<(p|li)>(.*?)</\1>', lambda m: fix(m) if m.group(1) in ('p', 'li') else m.group(0), body, flags=re.S)
+
+def card_tables(body):
+    """Sur téléphone, chaque ligne d'un tableau devient une petite fiche (étiquettes tirées de l'en-tête)."""
+    def one(m):
+        tb = m.group(0)
+        heads = [re.sub('<[^>]+>', '', h).strip() for h in re.findall(r'<th[^>]*>(.*?)</th>', tb, re.S)]
+        if len(heads) < 3 or 'class=' in tb[:20]: return tb
+        def row(r):
+            k = [0]
+            def cell(c):
+                lab = heads[k[0]] if k[0] < len(heads) else ''
+                k[0] += 1
+                return '<td data-label="%s">' % esc(lab)
+            return re.sub(r'<td>', cell, r.group(0))
+        tb = re.sub(r'<tr>.*?</tr>', row, tb, flags=re.S)
+        return tb.replace('<table>', '<table class="cards">', 1)
+    return re.sub(r'<table>.*?</table>', one, body, flags=re.S)
 
 def render(body):
     body = pick_box(body)
@@ -159,7 +186,7 @@ def render(body):
     body = body.replace('{CTA}', CTA)
     body = re.sub(r'\{AUDIBLE:([A-Z0-9]{10})\}', lambda m: 'https://www.amazon.fr/hz/audible/mlp/mfpdp/' + m.group(1) + '?actionCode=AMSTM1450129210001&tag=' + TAG, body)
     body = body.replace('{AUDIBLE}', 'https://www.amazon.fr/hz/audible/mlp?actionCode=AMSTM1450129210001&tag=' + TAG)
-    return inline_amz(re.sub(r'\{AMZ:([^}]+)\}', lambda m: amz(m.group(1)), body))
+    return card_tables(inline_amz(re.sub(r'\{AMZ:([^}]+)\}', lambda m: amz(m.group(1)), body)))
 
 AUTHOR_LD = {"@type": "Person", "name": AUTHOR_NAME, "url": BASE + '/a-propos/'}
 PUBLISHER_LD = {"@type": "Organization", "name": SITE, "url": BASE + '/', "logo": {"@type": "ImageObject", "url": BASE + '/assets/icon-192.png'}}
@@ -232,7 +259,7 @@ def page(path, title, desc, body, schema=None, crumbs=None, prio='0.6', og=None,
 <link rel="icon" href="{R}assets/favicon.ico" sizes="32x32"><link rel="icon" href="{R}assets/favicon.svg" type="image/svg+xml"><link rel="icon" href="{R}assets/icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" href="{R}assets/apple-touch-icon.png">
 <link rel="preload" href="{R}assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{R}assets/fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="{R}assets/style.css?v=3">
+<link rel="stylesheet" href="{R}assets/style.css?v=4">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8638687738606649" crossorigin="anonymous"></script>
 </head>

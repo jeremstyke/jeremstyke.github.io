@@ -99,7 +99,6 @@ html.big{font-size:118%}
 .prose a[href*="amazon.fr"]{display:inline-block;background:var(--sauge);border:1px solid #C9DDD0;border-radius:10px;padding:2px 10px;text-decoration:none;font-weight:700;margin:2px 0}
 .prose a[href*="amazon.fr"]::before{content:"🛒 ";}
 .prose a[href*="amazon.fr"]:hover{background:#D3E6DA}
-.prose .amz-row{margin:-.4em 0 1.2em;display:flex;flex-wrap:wrap;gap:8px}
 .themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
 .theme{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:4px 18px 12px}
 .theme h3{font-size:1.15rem;margin:.8em 0 .4em}.theme ul{margin:0;padding-left:18px}.theme li{margin:4px 0}
@@ -130,8 +129,24 @@ html.big{font-size:118%}
 .foot{background:#1F2A22}
 
 .pick{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#fff;border:2px solid var(--accent);border-radius:var(--r);padding:16px 18px;margin:20px 0}.pick>div{display:flex;flex-direction:column;gap:4px;flex:1 1 260px}.pick-tag{font-size:.85em;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em}.pick strong{font-size:1.1em}.pick-more{font-size:.92em}
-.price-btn{margin:.2rem 0 1rem}
 /* Boutons Amazon bien visibles (22 nov 2026) */
 .prose a.btn[href*="amazon.fr"],.prose .pick a.btn[href*="amazon.fr"],.prose .price-btn a.btn[href*="amazon.fr"]{background:var(--brand);color:#fff;border:2px solid var(--brand);padding:12px 20px;border-radius:12px;font-size:1rem}
 .prose a.btn[href*="amazon.fr"]:hover,.prose .pick a.btn[href*="amazon.fr"]:hover,.prose .price-btn a.btn[href*="amazon.fr"]:hover{background:var(--brand2);border-color:var(--brand2);color:#fff}
 .prose a[href*="amazon.fr"]:not(.btn){color:var(--brand2);border:1.5px solid var(--brand)}
+.prose .amz-row{display:flex;flex-direction:column;gap:8px;margin:-.2em 0 1.4em}
+.prose li .amz-row{margin:.5em 0 .2em}
+.prose .amz-row a{display:flex;align-items:center;gap:10px;margin:0;padding:10px 14px;font-weight:600;font-size:.95rem;border-radius:12px;max-width:520px}
+.prose .amz-row a::before{flex:none}
+.prose .amz-row .amz-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prose .amz-row .amz-go{flex:none;font-weight:800;color:var(--brand);font-size:.9rem}
+.prose .amz-row .amz-go::after{content:" \203A"}
+@media (max-width:600px){
+.prose table.cards{display:block;background:none;border-radius:0;overflow:visible}
+.prose table.cards thead{display:none}
+.prose table.cards tbody{display:block}
+.prose table.cards tr{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:0 0 10px}
+.prose table.cards td{display:block;border:0;padding:3px 0}
+.prose table.cards td:first-child{font-weight:800;font-size:1.02rem;padding-bottom:6px}
+.prose table.cards td:not(:first-child)::before{content:attr(data-label) " : ";font-weight:700;color:var(--mute)}
+}
+.prose .amz-row.price-btn{margin:.1em 0 1.1em}
