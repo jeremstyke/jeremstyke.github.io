@@ -7,7 +7,7 @@
 <title>Vos fichiers sont prêts</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Cormorant:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root { --ink:#171B26; --slate:#5A6172; --line:#E3E6EC; --mist:#F4F6F9; --cyan:#1F47C4; --cyan-deep:#15328C; --ad:#FFF6DA; --accent:var(--cyan); }
   * { box-sizing:border-box; }
@@ -70,6 +70,34 @@
   .ph .rm { position:absolute; right:6px; top:6px; background:rgba(0,0,0,.55); color:#fff; border:0; border-radius:4px; font-size:11px; padding:3px 6px; cursor:pointer; }
   .toast { position:fixed; left:50%; bottom:28px; transform:translateX(-50%); background:var(--ink); color:#fff; padding:10px 16px; border-radius:8px; font-size:14px; z-index:20; }
   .hidden { display:none !important; }
+  /* Galerie Pro */
+  body.pg { background:var(--gbg,#fff); color:var(--gfg,#20201E); font-family:"Manrope",system-ui,sans-serif; display:block; }
+  body.pg header, body.pg footer#foot { display:none; }
+  .cover { position:relative; min-height:72vh; display:flex; flex-direction:column; justify-content:flex-end; padding:40px clamp(20px,5vw,64px); color:#fff; background:#2b2a27 center/cover no-repeat; }
+  .cover::before { content:""; position:absolute; inset:0; background:linear-gradient(rgba(0,0,0,.25),transparent 30%,transparent 50%,rgba(0,0,0,.65)); }
+  .cover > * { position:relative; }
+  .cover .clogo { position:absolute; top:28px; left:clamp(20px,5vw,64px); max-height:64px; max-width:200px; object-fit:contain; }
+  .cover .cname { position:absolute; top:30px; left:clamp(20px,5vw,64px); font-family:"Cormorant",serif; font-style:italic; font-size:24px; }
+  .cover h1 { font-family:"Cormorant",serif; font-weight:500; font-size:clamp(48px,8vw,104px); line-height:.95; margin:0; letter-spacing:-1px; word-break:normal; }
+  .cover p { margin:12px 0 0; font-size:15px; opacity:.92; max-width:40em; }
+  .cover .scroll { margin-top:28px; font-size:13px; opacity:.85; }
+  body.pg main { display:block; padding:0; }
+  body.pg .card { max-width:1200px; margin:0 auto; background:transparent; box-shadow:none; border-radius:0; padding:28px clamp(16px,4vw,48px) 60px; text-align:left; }
+  body.pg .top { position:sticky; top:0; z-index:5; background:var(--gbg,#fff); padding:14px 0; margin:0 0 18px; border-bottom:1px solid rgba(128,128,128,.25); align-items:center; }
+  body.pg .top h1 { font-family:"Cormorant",serif; font-weight:600; font-size:26px; }
+  body.pg .meta { color:inherit; opacity:.7; }
+  body.pg .message { background:transparent; border-left:2px solid currentColor; border-radius:0; padding:4px 0 4px 16px; font-family:"Cormorant",serif; font-style:italic; font-size:24px; margin:8px 0 28px; opacity:.9; }
+  body.pg .dl { background:var(--gfg,#20201E); color:var(--gbg,#fff); border-radius:2px; font-size:14px; padding:11px 18px; }
+  body.pg .share { border-radius:2px; font-size:14px; padding:10px 16px; background:transparent; color:inherit; border-color:currentColor; }
+  body.pg video, body.pg .poster { border-radius:0; }
+  body.pg .section-t { font-family:"Cormorant",serif; font-size:28px; font-weight:600; margin:40px 0 12px; }
+  body.pg .grid { grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:6px; }
+  body.pg .ph { border-radius:0; }
+  body.pg .gbox { border-radius:0; border-color:rgba(128,128,128,.4); }
+  body.pg .gbox .meta { color:inherit; }
+  body.pg .report button { color:inherit; opacity:.6; }
+  .credit { text-align:center; padding:30px 16px; font-size:13px; opacity:.7; }
+  .credit a { color:inherit; font-weight:700; }
   @media (max-width: 520px) { .grid { grid-template-columns:repeat(2,1fr); gap:6px; } .card { padding:20px; } }
   @media (max-width: 820px) { .ad { display:none; } .free .ad-inline { display:block; } }
 </style>
@@ -141,14 +169,35 @@ if (files.length > 1 && !data.gallery) {
   $("dl").textContent = "Tout télécharger";
 }
 
+function isDark(hex) { const h = (hex || "#ffffff").replace("#", ""); const r = parseInt(h.substr(0, 2), 16), g = parseInt(h.substr(2, 2), 16), b = parseInt(h.substr(4, 2), 16); return (r * 299 + g * 587 + b * 114) / 1000 < 140; }
+if (data.pro && data.gallery && (photos.length || videos.length)) {
+  document.body.classList.add("pg");
+  const bgc = data.color || "#FFFFFF";
+  document.body.style.setProperty("--gbg", bgc);
+  document.body.style.setProperty("--gfg", isDark(bgc) ? "#F6F5F1" : "#20201E");
+  const cover = document.createElement("div"); cover.className = "cover";
+  const coverSrc = data.bg || (photos[0] && photos[0].src) || "";
+  if (coverSrc) cover.style.backgroundImage = "url(" + coverSrc + ")";
+  if (data.logo) { const l = document.createElement("img"); l.className = "clogo"; l.src = data.logo; l.alt = ""; cover.append(l); }
+  const h = document.createElement("h1"); h.textContent = data.title || "Votre galerie"; cover.append(h);
+  const sub = document.createElement("p"); sub.textContent = files.length + " fichiers, " + data.size + ", en ligne encore " + (data.days || 30) + " jours"; cover.append(sub);
+  const sc = document.createElement("div"); sc.className = "scroll"; sc.textContent = "Faites défiler pour voir la galerie"; cover.append(sc);
+  document.querySelector(".demo-bar").after(cover);
+  document.title = data.title || "Votre galerie";
+  $("name").textContent = data.title || "Votre galerie";
+  $("logo").remove();
+  const cr = document.createElement("div"); cr.className = "credit"; cr.innerHTML = 'Galerie livrée avec <a href="./">EnvoiXL</a>'; document.body.append(cr);
+}
 if (data.pro) {
-  document.title = data.name || "Vos fichiers";
+  if (!document.body.classList.contains("pg")) document.title = data.name || "Vos fichiers";
   $("hdr").style.visibility = "hidden";
   $("ad-left").remove(); $("ad-right").remove(); document.querySelector(".ad-inline").remove();
-  if (data.logo) { $("logo").src = data.logo; $("logo").classList.remove("hidden"); }
+  if (data.logo && $("logo")) { $("logo").src = data.logo; $("logo").classList.remove("hidden"); }
   if (data.message) { $("message").textContent = data.message; $("message").classList.remove("hidden"); }
-  if (data.bg) document.body.style.background = "#222 url(" + data.bg + ") center/cover no-repeat fixed";
-  else if (data.color) document.body.style.background = data.color;
+  if (!document.body.classList.contains("pg")) {
+    if (data.bg) document.body.style.background = "#222 url(" + data.bg + ") center/cover no-repeat fixed";
+    else if (data.color) document.body.style.background = data.color;
+  }
   if (data.gallery && (photos.length || videos.length)) {
     $("card").classList.add("gallery");
     const acts = document.createElement("div"); acts.className = "acts"; $("top").append(acts);
@@ -248,6 +297,8 @@ document.addEventListener("keydown", (e) => {
 function poster() {
   const b = document.createElement("button");
   b.className = "poster"; b.type = "button";
+  const ps = photos.find((f) => f.src);
+  if (ps) b.style.background = "linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.35)), url(" + ps.src + ") center/cover";
   b.innerHTML = "<i></i><span>Lecture vidéo</span>";
   b.onclick = () => { b.querySelector("span").textContent = "Démo : ici le film se lance directement"; };
   return b;

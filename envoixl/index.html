@@ -4,149 +4,169 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>EnvoiXL - Envoyez vos fichiers avec une page à votre image</title>
-<meta name="description" content="Transfert de gros fichiers pour photographes et vidéastes. Gratuit jusqu'à 20 Go, ou Pro avec votre logo, sans publicité, jusqu'à 100 Go.">
+<title>EnvoiXL - Livrez vos photos et vos films à vos clients</title>
+<meta name="description" content="Galeries et transfert de gros fichiers pour photographes et vidéastes. Vos clients voient, téléchargent et partagent leurs photos et leur film sur une page à votre nom.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink:#171B26; --slate:#5A6172; --line:#E3E6EC; --paper:#FFFFFF; --mist:#F4F6F9;
-    --cyan:#1F47C4; --cyan-deep:#15328C; --cyan-tint:#EAF0FC; --ad:#FFF6DA;
+    --ink:#20201E; --grey:#6E6E68; --line:#E6E5E1; --paper:#FFFFFF; --frame:#F4F4F1;
+    --sage:#56634C; --sage-deep:#414C39; --sage-tint:#EEF1EA; --film:#262420; --pencil:#C8372D; --ad:#FFF6DA;
+    --serif:"Cormorant",Georgia,serif; --sans:"Manrope",system-ui,sans-serif;
   }
   * { box-sizing:border-box; }
   html { scroll-behavior:smooth; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } * { transition:none !important; } }
-  body { margin:0; font-family:"Schibsted Grotesk",system-ui,sans-serif; color:var(--ink); background:var(--paper); line-height:1.5; font-size:16px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+  body { margin:0; font-family:var(--sans); color:var(--ink); background:var(--paper); line-height:1.55; font-size:16px; }
   a { color:inherit; }
-  :focus-visible { outline:3px solid var(--cyan); outline-offset:2px; border-radius:4px; }
-  .wrap { max-width:1120px; margin:0 auto; padding:0 24px; }
+  :focus-visible { outline:2px solid var(--sage); outline-offset:3px; }
+  .wrap { max-width:1160px; margin:0 auto; padding:0 28px; }
   .demo-bar { background:var(--ad); color:#6b5300; text-align:center; font-size:13px; padding:7px 12px; }
+  .hidden { display:none !important; }
 
-  /* Navigation */
-  nav { display:flex; align-items:center; justify-content:space-between; padding:20px 0; }
-  .logo { font-weight:800; font-size:22px; letter-spacing:-.6px; text-decoration:none; }
-  .logo i { font-style:normal; display:inline-block; background:var(--cyan); color:#fff; border-radius:6px; padding:0 5px; margin-left:2px; }
-  nav .links { display:flex; gap:28px; align-items:center; font-size:15px; }
-  nav .links a { text-decoration:none; color:var(--slate); }
-  nav .links a.btn-line { color:var(--ink); border:1.5px solid var(--ink); border-radius:8px; padding:7px 14px; font-weight:600; }
+  nav { display:flex; align-items:center; justify-content:space-between; padding:22px 0; }
+  .logo { font-family:var(--serif); font-weight:600; font-size:30px; letter-spacing:-.5px; text-decoration:none; line-height:1; }
+  .logo span { font-style:italic; color:var(--sage); }
+  nav .links { display:flex; gap:30px; align-items:center; font-size:15px; }
+  nav .links a { text-decoration:none; color:var(--grey); }
+  nav .links a.btn-line { color:var(--ink); border:1px solid var(--ink); border-radius:2px; padding:8px 16px; font-weight:600; }
 
-  /* Hero */
-  .hero { display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:center; padding:48px 0 80px; }
-  h1 { font-size:clamp(36px,5vw,58px); line-height:1.04; letter-spacing:-2px; margin:0 0 20px; font-weight:800; }
-  .lead { font-size:19px; color:var(--slate); max-width:30em; margin:0 0 28px; }
-  .proof { list-style:none; padding:0; margin:0; display:grid; gap:10px; font-size:15px; }
-  .proof li { display:flex; gap:10px; align-items:baseline; }
-  .proof li::before { content:""; flex:none; width:8px; height:8px; border-radius:2px; background:var(--cyan); transform:translateY(-1px); }
+  .hero { display:grid; grid-template-columns:1fr 440px; gap:64px; align-items:center; padding:40px 0 64px; }
+  h1, h2, h3 { font-family:var(--serif); font-weight:500; letter-spacing:-.5px; }
+  h1 { font-size:clamp(44px,6vw,78px); line-height:.98; margin:0 0 24px; }
+  .lead { font-size:18px; color:var(--grey); max-width:31em; margin:0 0 30px; }
+  .proof { list-style:none; padding:0; margin:0; display:grid; gap:9px; font-size:15px; }
+  .proof li { padding-left:20px; position:relative; }
+  .proof li::before { content:""; position:absolute; left:0; top:.65em; width:10px; height:1px; background:var(--sage); }
 
-  /* Widget d'envoi */
-  .sender { background:var(--paper); border:1px solid var(--line); border-radius:16px; box-shadow:0 30px 60px -30px rgba(23,27,38,.35); overflow:hidden; }
+  /* Module d'envoi */
+  .sender { background:var(--paper); border:1px solid var(--line); border-radius:4px; box-shadow:0 40px 70px -40px rgba(32,32,30,.45); }
   .mode { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--line); }
-  .mode button { all:unset; cursor:pointer; padding:14px; text-align:center; font-weight:600; font-size:15px; color:var(--slate); background:var(--mist); }
-  .mode button[aria-pressed="true"] { background:var(--paper); color:var(--ink); box-shadow:inset 0 -3px 0 var(--cyan); }
+  .mode button { all:unset; cursor:pointer; padding:14px; text-align:center; font-weight:600; font-size:15px; color:var(--grey); background:var(--frame); }
+  .mode button[aria-pressed="true"] { background:var(--paper); color:var(--ink); box-shadow:inset 0 -2px 0 var(--sage); }
   .mode button small { display:block; font-weight:400; font-size:12px; }
   .sender-body { padding:22px; }
-  .drop { display:block; border:1.5px dashed #C6CCD8; border-radius:12px; padding:26px 16px; text-align:center; cursor:pointer; background:var(--mist); }
-  .drop:hover, .drop.over { border-color:var(--cyan); background:var(--cyan-tint); }
-  .drop strong { display:block; font-size:16px; }
-  .drop span { color:var(--slate); font-size:14px; }
+  .drop { display:block; border:1px dashed #BDBCB4; border-radius:3px; padding:26px 16px; text-align:center; cursor:pointer; background:var(--frame); }
+  .drop:hover, .drop.over { border-color:var(--sage); background:var(--sage-tint); }
+  .drop strong { display:block; font-family:var(--serif); font-size:22px; font-weight:600; }
+  .drop span { color:var(--grey); font-size:14px; }
   input[type=file] { position:absolute; width:1px; height:1px; opacity:0; }
   .file { margin-top:12px; font-size:14px; word-break:break-all; }
-  .file small { color:var(--slate); }
-  .pro-fields { margin-top:16px; display:grid; gap:12px; }
+  .file small { color:var(--grey); }
+  .pro-fields { margin-top:16px; display:grid; gap:10px; }
   .row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-  .field label { display:block; font-size:13px; color:var(--slate); margin-bottom:4px; }
-  .pick { display:flex; align-items:center; gap:8px; border:1px solid var(--line); border-radius:8px; padding:8px 10px; font-size:13px; cursor:pointer; background:#fff; }
-  .pick:hover { border-color:var(--cyan); }
+  .field label { display:block; font-size:13px; color:var(--grey); margin-bottom:4px; }
+  .pick { display:flex; align-items:center; gap:8px; border:1px solid var(--line); border-radius:3px; padding:8px 10px; font-size:13px; cursor:pointer; background:#fff; }
+  .pick:hover { border-color:var(--sage); }
   .pick b { font-weight:600; padding-right:8px; border-right:1px solid var(--line); }
-  .pick em { font-style:normal; color:var(--slate); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .field textarea { width:100%; border:1px solid var(--line); border-radius:8px; padding:9px 10px; font:inherit; font-size:14px; resize:vertical; }
+  .pick em { font-style:normal; color:var(--grey); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .field textarea { width:100%; border:1px solid var(--line); border-radius:3px; padding:9px 10px; font:inherit; font-size:14px; resize:vertical; }
   .colors { display:flex; gap:6px; align-items:center; }
   .sw { width:26px; height:26px; border-radius:50%; border:2px solid #fff; box-shadow:0 0 0 1px var(--line); cursor:pointer; padding:0; }
   .sw[aria-pressed="true"] { box-shadow:0 0 0 2px var(--ink); }
   .colors input[type=color] { width:30px; height:30px; border:0; padding:0; background:none; cursor:pointer; }
-  .vopt { display:flex; gap:10px; align-items:flex-start; border:1px solid var(--line); border-radius:8px; padding:10px; font-size:13px; color:var(--slate); cursor:pointer; }
+  .opts { border:1px solid var(--line); border-radius:3px; }
+  .vopt { display:flex; gap:10px; align-items:flex-start; padding:9px 10px; font-size:13px; color:var(--grey); cursor:pointer; border-bottom:1px solid var(--line); }
+  .vopt:last-child { border-bottom:0; }
   .vopt b { color:var(--ink); font-size:14px; }
-  .vopt input { margin-top:3px; accent-color:var(--cyan); width:16px; height:16px; flex:none; }
-  .player { width:190px; aspect-ratio:16/9; border-radius:6px; margin-bottom:8px; background:linear-gradient(135deg,#C9B38C,#3F5237); display:flex; align-items:center; justify-content:center; }
-  .player i { width:0; height:0; border-left:16px solid #fff; border-top:10px solid transparent; border-bottom:10px solid transparent; margin-left:4px; }
-  .summary { display:flex; justify-content:space-between; align-items:center; margin-top:18px; font-size:14px; color:var(--slate); }
-  .summary b { color:var(--ink); font-size:16px; }
-  .send { width:100%; margin-top:12px; padding:15px; border:0; border-radius:10px; background:var(--cyan); color:#fff; font:inherit; font-weight:700; font-size:16px; cursor:pointer; }
-  .send:hover { background:var(--cyan-deep); }
-  .send:disabled { opacity:.45; cursor:default; }
-  .err { color:#B4232C; font-size:14px; margin:10px 0 0; }
-  .bar { height:8px; background:var(--line); border-radius:99px; overflow:hidden; margin-top:18px; }
-  .bar div { height:100%; width:0; background:var(--cyan); }
-  .stats { display:flex; justify-content:space-between; color:var(--slate); font-size:13px; margin-top:8px; }
-  .ad-slot { margin-top:18px; border:1px dashed #E2C96F; background:var(--ad); border-radius:10px; padding:16px; text-align:center; font-size:13px; color:#7a6420; }
+  .vopt input { margin-top:3px; accent-color:var(--sage); width:16px; height:16px; flex:none; }
+  .summary { display:flex; justify-content:space-between; align-items:center; margin-top:16px; font-size:14px; color:var(--grey); gap:10px; }
+  .summary b { color:var(--ink); }
+  .send { width:100%; margin-top:12px; padding:15px; border:0; border-radius:2px; background:var(--ink); color:#fff; font:inherit; font-weight:700; font-size:15px; cursor:pointer; letter-spacing:.2px; }
+  .send:hover { background:var(--sage-deep); }
+  .send:disabled { opacity:.35; cursor:default; }
+  .err { color:var(--pencil); font-size:14px; margin:10px 0 0; }
+  .bar { height:3px; background:var(--line); overflow:hidden; margin-top:18px; }
+  .bar div { height:100%; width:0; background:var(--sage); }
+  .stats { display:flex; justify-content:space-between; color:var(--grey); font-size:13px; margin-top:8px; }
+  .ad-slot { margin-top:18px; border:1px dashed #E2C96F; background:var(--ad); padding:16px; text-align:center; font-size:13px; color:#7a6420; }
   .link { display:flex; gap:8px; margin-top:14px; }
-  .link input { flex:1; min-width:0; padding:11px; border:1px solid var(--line); border-radius:8px; font:inherit; font-size:14px; }
-  .link button { border:0; border-radius:8px; padding:0 16px; background:var(--ink); color:#fff; font:inherit; font-weight:600; cursor:pointer; }
-  .ghost { all:unset; cursor:pointer; color:var(--slate); font-size:14px; text-decoration:underline; display:block; text-align:center; margin-top:14px; }
-  .hidden { display:none !important; }
-  .demo-link { display:block; text-align:center; margin-top:12px; font-size:13px; color:var(--cyan); }
+  .link input { flex:1; min-width:0; padding:11px; border:1px solid var(--line); border-radius:2px; font:inherit; font-size:14px; }
+  .link button { border:0; border-radius:2px; padding:0 16px; background:var(--sage); color:#fff; font:inherit; font-weight:600; cursor:pointer; }
+  .ghost { all:unset; cursor:pointer; color:var(--grey); font-size:14px; text-decoration:underline; display:block; text-align:center; margin-top:14px; }
+  .demo-link { display:block; text-align:center; margin-top:12px; font-size:13px; color:var(--sage); }
 
-  /* Comparaison des pages client */
-  section { padding:88px 0; }
-  .alt { background:var(--mist); }
-  h2 { font-size:clamp(28px,3.4vw,40px); letter-spacing:-1.2px; line-height:1.1; margin:0 0 12px; font-weight:800; }
-  .intro { color:var(--slate); font-size:18px; max-width:36em; margin:0 0 44px; }
-  .compare { display:grid; grid-template-columns:1fr 1fr; gap:28px; }
-  .shot figcaption { font-weight:700; margin-bottom:10px; display:flex; justify-content:space-between; align-items:baseline; }
-  .shot figcaption span { font-weight:400; color:var(--slate); font-size:14px; }
+  /* Pellicule */
+  .strip { background:var(--film); padding:26px 0 18px; overflow:hidden; position:relative; }
+  .strip::before, .strip::after { content:""; position:absolute; left:0; right:0; height:8px; background:repeating-linear-gradient(90deg,transparent 0 14px,#F4F4F1 14px 24px); opacity:.85; }
+  .strip::before { top:8px; } .strip::after { bottom:30px; }
+  .frames { display:flex; gap:10px; padding:0 10px; width:max-content; }
+  .frames figure { margin:0; }
+  .frames img { display:block; width:270px; height:180px; object-fit:cover; filter:grayscale(1) contrast(1.05); background:#3a3833; }
+  .frames figcaption { color:#E0A33A; font-size:11px; font-family:var(--sans); letter-spacing:1px; margin-top:22px; padding-left:4px; }
+  .frames figure.picked { position:relative; }
+  .frames figure.picked img { filter:none; }
+  .frames figure.picked::after { content:""; position:absolute; inset:-8px -10px 22px -10px; border:3px solid var(--pencil); border-radius:46% 54% 50% 50% / 52% 48% 52% 48%; transform:rotate(-2deg); pointer-events:none; }
+
+  section { padding:96px 0; }
+  .alt { background:var(--frame); }
+  h2 { font-size:clamp(34px,4.2vw,52px); line-height:1.02; margin:0 0 14px; }
+  .intro { color:var(--grey); font-size:18px; max-width:36em; margin:0 0 48px; }
+
+  /* Ce que voit votre client */
+  .compare { display:grid; grid-template-columns:1fr 1.25fr; gap:32px; align-items:end; }
   .shot figure { margin:0; }
-  .browser { border-radius:12px; overflow:hidden; border:1px solid var(--line); background:#fff; }
-  .browser .top { height:30px; background:#EEF0F4; display:flex; align-items:center; gap:6px; padding:0 12px; }
-  .browser .top i { width:9px; height:9px; border-radius:50%; background:#CDD2DB; }
-  .browser .top span { margin-left:10px; font-size:11px; color:var(--slate); background:#fff; border-radius:5px; padding:2px 10px; }
-  .page { height:300px; display:flex; align-items:center; justify-content:center; gap:14px; padding:18px; }
-  .page.free { background:var(--mist); }
-  .page.pro { background:#2E3B2F url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23C9B38C'/%3E%3Cstop offset='1' stop-color='%23556B4E'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='300' fill='url(%23g)'/%3E%3Ccircle cx='310' cy='70' r='38' fill='%23F3E6C8' opacity='.7'/%3E%3Cpath d='M0 230 Q100 170 200 215 T400 200 V300 H0Z' fill='%233F5237'/%3E%3C/svg%3E") center/cover; }
-  .mini { background:#fff; border-radius:10px; width:190px; padding:16px; text-align:center; box-shadow:0 12px 30px -12px rgba(0,0,0,.35); font-size:12px; }
-  .mini .brand { font-family:Georgia,serif; font-style:italic; font-size:17px; color:#3F5237; margin-bottom:8px; }
-  .mini .ex { font-weight:800; letter-spacing:-.3px; margin-bottom:8px; }
-  .mini .ex i { font-style:normal; background:var(--cyan); color:#fff; border-radius:4px; padding:0 3px; }
-  .mini .fn { font-weight:700; }
-  .mini .meta { color:var(--slate); font-size:11px; margin:2px 0 10px; }
-  .mini .msg { background:#F3EFE6; border-radius:6px; padding:6px; margin-bottom:10px; color:#4b4b4b; }
-  .mini .dl { background:var(--cyan); color:#fff; border-radius:6px; padding:6px; font-weight:700; }
-  .mini.pro-card .dl { background:#3F5237; }
-  .mini-ad { width:110px; height:190px; border:1px dashed #E2C96F; background:var(--ad); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:11px; color:#7a6420; text-align:center; padding:6px; }
+  .shot figcaption { font-weight:600; margin-bottom:12px; font-size:15px; }
+  .shot figcaption span { font-weight:400; color:var(--grey); }
+  .browser { border:1px solid var(--line); background:#fff; box-shadow:0 30px 60px -40px rgba(0,0,0,.45); }
+  .browser .top { height:28px; background:#EDEDEA; display:flex; align-items:center; gap:6px; padding:0 12px; }
+  .browser .top i { width:8px; height:8px; border-radius:50%; background:#CFCEC8; }
+  .browser .top span { margin-left:10px; font-size:11px; color:var(--grey); background:#fff; padding:1px 10px; }
+  .free-page { height:330px; background:#F4F6F9; display:flex; align-items:center; justify-content:center; gap:12px; font-size:12px; }
+  .free-card { background:#fff; border-radius:10px; padding:16px; width:170px; text-align:center; box-shadow:0 10px 24px -12px rgba(0,0,0,.3); }
+  .free-card .fn { font-weight:700; margin:6px 0 2px; }
+  .free-card .dl { background:#3B5BDB; color:#fff; border-radius:6px; padding:6px; font-weight:700; margin-top:10px; }
+  .free-ad { width:100px; height:180px; border:1px dashed #E2C96F; background:var(--ad); display:flex; align-items:center; justify-content:center; color:#7a6420; font-size:11px; }
+  .pro-page { height:400px; overflow:hidden; background:#fff; }
+  .pro-cover { height:190px; position:relative; color:#fff; display:flex; flex-direction:column; justify-content:flex-end; padding:18px 20px; background:#3a3833 center/cover; }
+  .pro-cover::before { content:""; position:absolute; inset:0; background:linear-gradient(transparent 30%,rgba(0,0,0,.6)); }
+  .pro-cover * { position:relative; }
+  .pro-cover .studio { position:absolute; top:14px; left:20px; font-family:var(--serif); font-style:italic; font-size:18px; }
+  .pro-cover h4 { font-family:var(--serif); font-weight:500; font-size:34px; margin:0; line-height:1; }
+  .pro-cover p { margin:4px 0 0; font-size:12px; opacity:.9; }
+  .pro-bar { display:flex; justify-content:space-between; align-items:center; padding:10px 20px; font-size:11px; border-bottom:1px solid var(--line); }
+  .pro-bar b { background:var(--ink); color:#fff; padding:5px 10px; font-weight:600; }
+  .pro-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:4px; padding:4px 20px; }
+  .pro-grid img { width:100%; aspect-ratio:3/2; object-fit:cover; display:block; background:#ddd; }
 
   /* Tarifs */
-  .plans { display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:860px; }
-  .plan { border:1px solid var(--line); border-radius:16px; padding:30px; background:#fff; display:flex; flex-direction:column; }
-  .plan.pro { border:2px solid var(--cyan); }
-  .plan h3 { margin:0; font-size:20px; }
-  .plan .price { font-size:44px; font-weight:800; letter-spacing:-1.5px; margin:14px 0 2px; }
-  .plan .price small { font-size:16px; font-weight:500; color:var(--slate); letter-spacing:0; }
-  .plan .for { color:var(--slate); margin:0 0 20px; font-size:15px; }
-  .plan ul { list-style:none; padding:0; margin:0 0 26px; display:grid; gap:10px; font-size:15px; flex:1; align-content:start; }
-  .plan li { display:flex; gap:10px; }
-  .plan li::before { content:"✓"; color:var(--cyan); font-weight:800; }
-  .plan li.no::before { content:"•"; color:#B9A04E; }
-  .plan a.cta { display:block; text-align:center; padding:13px; border-radius:10px; font-weight:700; text-decoration:none; border:1.5px solid var(--ink); }
-  .plan.pro a.cta { background:var(--cyan); border-color:var(--cyan); color:#fff; }
-  .plan .once { font-size:13px; color:var(--slate); text-align:center; margin:10px 0 0; }
+  .plans { display:grid; grid-template-columns:1fr 1fr; gap:0; max-width:900px; border:1px solid var(--line); background:#fff; }
+  .plan { padding:36px; display:flex; flex-direction:column; }
+  .plan + .plan { border-left:1px solid var(--line); }
+  .plan.pro { background:var(--ink); color:#fff; }
+  .plan h3 { margin:0; font-size:30px; }
+  .plan .price { font-family:var(--serif); font-size:56px; line-height:1; margin:18px 0 4px; }
+  .plan .price small { font-family:var(--sans); font-size:15px; color:var(--grey); }
+  .plan.pro .price small, .plan.pro .for { color:#B9B8B0; }
+  .plan .for { color:var(--grey); margin:0 0 24px; font-size:15px; }
+  .plan ul { list-style:none; padding:0; margin:0 0 30px; display:grid; gap:11px; font-size:15px; flex:1; align-content:start; }
+  .plan li { padding-left:22px; position:relative; }
+  .plan li::before { content:""; position:absolute; left:0; top:.7em; width:12px; height:1px; background:var(--sage); }
+  .plan.pro li::before { background:#A9B79C; }
+  .plan li.no { color:var(--grey); }
+  .plan a.cta { display:block; text-align:center; padding:14px; font-weight:700; text-decoration:none; border:1px solid var(--ink); border-radius:2px; }
+  .plan.pro a.cta { background:#fff; color:var(--ink); border-color:#fff; }
+  .plan .once { font-size:13px; color:#B9B8B0; text-align:center; margin:12px 0 0; }
 
-  /* Questions */
-  .faq { max-width:720px; }
-  details.q { border-bottom:1px solid var(--line); padding:18px 0; }
-  details.q summary { cursor:pointer; font-weight:600; font-size:17px; list-style:none; display:flex; justify-content:space-between; gap:16px; }
-  details.q summary::after { content:"+"; color:var(--cyan); font-size:22px; line-height:1; }
-  details.q[open] summary::after { content:"–"; }
-  details.q p { color:var(--slate); margin:10px 0 0; max-width:60ch; }
+  .faq { max-width:760px; }
+  details.q { border-bottom:1px solid var(--line); padding:20px 0; }
+  details.q summary { cursor:pointer; font-family:var(--serif); font-size:24px; font-weight:500; list-style:none; display:flex; justify-content:space-between; gap:16px; }
+  details.q summary::-webkit-details-marker { display:none; }
+  details.q summary::after { content:"+"; color:var(--sage); font-family:var(--sans); font-size:22px; }
+  details.q[open] summary::after { content:"-"; }
+  details.q p { color:var(--grey); margin:10px 0 0; max-width:62ch; }
 
-  footer { border-top:1px solid var(--line); padding:28px 0; color:var(--slate); font-size:14px; }
+  footer { border-top:1px solid var(--line); padding:30px 0; color:var(--grey); font-size:14px; }
   footer .wrap { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
 
-  @media (max-width: 860px) {
+  @media (max-width: 920px) {
     .hero, .compare, .plans { grid-template-columns:1fr; }
-    .hero { gap:36px; padding-top:20px; }
+    .plan + .plan { border-left:0; border-top:1px solid var(--line); }
+    .hero { gap:40px; padding-top:16px; }
     nav .links a:not(.btn-line) { display:none; }
-    section { padding:64px 0; }
-    .mini-ad { display:none; }
+    section { padding:68px 0; }
+    .frames img { width:200px; height:134px; }
   }
 </style>
 </head>
@@ -155,9 +175,9 @@
 
 <div class="wrap">
   <nav>
-    <a class="logo" href="./">Envoi<i>XL</i></a>
+    <a class="logo" href="./">Envoi<span>XL</span></a>
     <div class="links">
-      <a href="#pages">La page client</a>
+      <a href="#pages">La galerie client</a>
       <a href="#tarifs">Tarifs</a>
       <a href="#questions">Questions</a>
       <a class="btn-line" href="#tarifs">Passer Pro</a>
@@ -166,107 +186,107 @@
 
   <div class="hero">
     <div>
-      <h1>Livrez vos photos et vos films avec une page à votre nom.</h1>
-      <p class="lead">Votre client regarde son film et télécharge ses fichiers sur une page avec votre logo, votre fond et votre message. Pas de publicité, pas de marque concurrente.</p>
+      <h1>Vos images méritent mieux qu'un lien de téléchargement.</h1>
+      <p class="lead">Livrez les photos et le film d'un mariage sur une galerie à votre nom. Les mariés regardent, téléchargent et partagent avec leurs invités, qui peuvent ajouter leurs propres photos.</p>
       <ul class="proof">
-        <li>Jusqu'à 100 Go par envoi en Pro, 20 Go en gratuit</li>
-        <li>Aucun compte à créer pour votre client</li>
-        <li>Fichiers hébergés en Europe et supprimés automatiquement</li>
+        <li>Jusqu'à 100 Go par livraison, vidéo 4K comprise</li>
+        <li>Votre logo, vos couleurs, aucune publicité</li>
+        <li>Aucun compte à créer pour vos clients</li>
       </ul>
     </div>
 
     <div class="sender" id="sender">
       <div class="mode" role="group" aria-label="Type d'envoi">
         <button type="button" id="m-free" aria-pressed="false">Gratuit<small>20 Go, avec publicité</small></button>
-        <button type="button" id="m-pro" aria-pressed="true">Pro<small>100 Go, à votre image</small></button>
+        <button type="button" id="m-pro" aria-pressed="true">Pro<small>galerie à votre nom</small></button>
       </div>
-
       <div class="sender-body">
         <div id="step-pick">
           <label class="drop" id="drop">
-            <strong>Déposez vos fichiers ici</strong>
+            <strong>Déposez photos et vidéos</strong>
             <span id="drop-hint">ou cliquez pour les choisir, jusqu'à 100 Go</span>
             <input type="file" id="input" multiple>
           </label>
           <div class="file hidden" id="file"></div>
-
           <div class="pro-fields" id="pro-fields">
             <div class="row">
               <div class="field"><label>Votre logo</label>
                 <label class="pick"><b>Choisir</b><em id="logo-name">PNG, JPG ou WebP</em><input type="file" id="logo" accept="image/png,image/jpeg,image/webp"></label></div>
-              <div class="field"><label>Image de fond</label>
-                <label class="pick"><b>Choisir</b><em id="bg-name">facultatif</em><input type="file" id="bg" accept="image/png,image/jpeg,image/webp"></label></div>
+              <div class="field"><label>Photo de couverture</label>
+                <label class="pick"><b>Choisir</b><em id="bg-name">sinon la 1re photo</em><input type="file" id="bg" accept="image/png,image/jpeg,image/webp"></label></div>
             </div>
-            <div class="field"><label>Ou une couleur de fond</label>
+            <div class="field"><label>Couleur de la galerie</label>
               <div class="colors" id="colors">
-                <button type="button" class="sw" style="background:#F4F6F9" data-c="#F4F6F9" aria-label="Gris clair" aria-pressed="true"></button>
-                <button type="button" class="sw" style="background:#1F2A3A" data-c="#1F2A3A" aria-label="Bleu nuit" aria-pressed="false"></button>
-                <button type="button" class="sw" style="background:#3F5237" data-c="#3F5237" aria-label="Vert sauge" aria-pressed="false"></button>
+                <button type="button" class="sw" style="background:#FFFFFF" data-c="#FFFFFF" aria-label="Blanc" aria-pressed="true"></button>
+                <button type="button" class="sw" style="background:#20201E" data-c="#20201E" aria-label="Noir" aria-pressed="false"></button>
+                <button type="button" class="sw" style="background:#56634C" data-c="#56634C" aria-label="Sauge" aria-pressed="false"></button>
                 <button type="button" class="sw" style="background:#E9DCC9" data-c="#E9DCC9" aria-label="Sable" aria-pressed="false"></button>
                 <input type="color" id="color" value="#8A5A44" aria-label="Autre couleur">
               </div>
             </div>
-            <label class="vopt"><input type="checkbox" id="video" checked><span><b>Galerie en ligne</b><br>Votre client voit les photos et regarde les vidéos sur la page, puis télécharge tout ou seulement ce qu'il veut.</span></label>
-            <label class="vopt"><input type="checkbox" id="share" checked><span><b>Partage avec les invités</b><br>Vos clients partagent la galerie avec leurs proches en un clic. Votre logo voyage avec chaque partage.</span></label>
-            <label class="vopt"><input type="checkbox" id="guests" checked><span><b>Photos des invités</b><br>Les invités ajoutent leurs propres photos dans la galerie. Vous et les mariés pouvez en retirer.</span></label>
-            <div class="field"><label for="message">Message pour votre client</label>
-              <textarea id="message" rows="2" maxlength="200" placeholder="Merci pour votre confiance, voici les photos de votre mariage."></textarea></div>
+            <div class="opts">
+              <label class="vopt"><input type="checkbox" id="video" checked><span><b>Galerie en ligne</b> : photos et film visibles sur la page</span></label>
+              <label class="vopt"><input type="checkbox" id="share" checked><span><b>Partage</b> : les mariés envoient la galerie à leurs invités</span></label>
+              <label class="vopt"><input type="checkbox" id="guests" checked><span><b>Photos des invités</b> : chacun ajoute les siennes</span></label>
+            </div>
+            <div class="field"><label for="gtitle">Titre de la galerie</label>
+              <input id="gtitle" maxlength="60" placeholder="Julie & Tom" style="width:100%;border:1px solid var(--line);border-radius:3px;padding:9px 10px;font:inherit;font-size:14px"></div>
+            <div class="field"><label for="message">Message pour vos clients</label>
+              <textarea id="message" rows="2" maxlength="200" placeholder="Julie et Tom, merci pour votre confiance. Voici votre mariage."></textarea></div>
           </div>
-
-          <div class="summary"><span id="sum-label">Envoi Pro, lien valable 30 jours</span><b id="sum-price">Inclus</b></div>
+          <div class="summary"><span id="sum-label">Livraison Pro, en ligne 30 jours</span><b id="sum-price">Inclus</b></div>
           <button class="send" id="send" disabled>Envoyer</button>
           <p class="err hidden" id="err"></p>
           <a href="#" class="demo-link" id="fake">Démo : simuler un mariage (1 film et 24 photos)</a>
         </div>
-
         <div id="step-up" class="hidden">
           <strong id="up-name"></strong>
           <div class="bar"><div id="bar"></div></div>
           <div class="stats"><span id="pct">0 %</span><span id="speed"></span></div>
-          <div class="ad-slot" id="up-ad">Publicité<br><small>Passez Pro pour envoyer sans publicité</small></div>
+          <div class="ad-slot" id="up-ad">Publicité<br><small>Passez Pro pour livrer sans publicité</small></div>
           <button class="ghost" id="cancel">Annuler l'envoi</button>
         </div>
-
         <div id="step-done" class="hidden">
-          <strong>Envoi terminé</strong>
-          <p style="color:var(--slate);margin:4px 0 0;font-size:14px" id="done-sub">Partagez ce lien avec votre client.</p>
-          <div class="link"><input id="out" readonly aria-label="Lien de téléchargement"><button id="copy">Copier</button></div>
-          <button class="send" id="view">Voir la page de votre client</button>
-          <button class="ghost" id="again">Faire un autre envoi</button>
+          <strong style="font-family:var(--serif);font-size:24px;font-weight:600">Livraison prête</strong>
+          <p style="color:var(--grey);margin:4px 0 0;font-size:14px" id="done-sub">Partagez ce lien avec vos clients.</p>
+          <div class="link"><input id="out" readonly aria-label="Lien de la galerie"><button id="copy">Copier</button></div>
+          <button class="send" id="view">Voir la galerie de vos clients</button>
+          <button class="ghost" id="again">Faire une autre livraison</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<section class="alt" id="pages">
+<div class="strip" aria-hidden="true"><div class="frames" id="frames"></div></div>
+
+<section id="pages">
   <div class="wrap">
-    <h2>Ce que voit votre client</h2>
-    <p class="intro">En gratuit, la page porte notre nom et affiche de la publicité. En Pro, c'est votre studio qui apparaît, et vos vidéos se regardent directement sur la page.</p>
+    <h2>Ce que voient vos clients</h2>
+    <p class="intro">En gratuit, une simple page de téléchargement avec de la publicité. En Pro, une vraie galerie à votre nom : couverture, photos, film, partage et photos des invités.</p>
     <div class="compare">
       <figure class="shot">
-        <figcaption>Gratuit <span>page EnvoiXL, avec publicité</span></figcaption>
-        <div class="browser"><div class="top"><i></i><i></i><i></i><span>envoixl.fr/d/7kq2...</span></div>
-          <div class="page free">
-            <div class="mini"><div class="ex">Envoi<i>XL</i></div><div class="fn">photos-mariage.zip</div><div class="meta">12 Go, encore 7 jours</div><div class="dl">Télécharger</div></div>
-            <div class="mini-ad">Publicité</div>
-          </div></div>
+        <figcaption>Gratuit <span>page de téléchargement avec publicité</span></figcaption>
+        <div class="browser"><div class="top"><i></i><i></i><i></i><span>envoixl.fr/d/7kq2</span></div>
+          <div class="free-page"><div class="free-card"><div>EnvoiXL</div><div class="fn">25 fichiers</div><div>8,7 Go, 7 jours</div><div class="dl">Télécharger</div></div><div class="free-ad">Publicité</div></div></div>
       </figure>
       <figure class="shot">
-        <figcaption>Pro <span>à votre image, sans publicité</span></figcaption>
-        <div class="browser"><div class="top"><i></i><i></i><i></i><span>envoixl.fr/d/m4xp...</span></div>
-          <div class="page pro">
-            <div class="mini pro-card" style="width:222px"><div class="brand">Atelier Lumière</div><div class="player"><i></i></div><div class="fn">film-mariage-Julie-Tom.mp4</div><div class="meta">8,4 Go, encore 30 jours</div><div class="msg">Merci Julie et Tom, voici votre film !</div><div class="dl">Télécharger</div></div>
+        <figcaption>Pro <span>galerie à votre nom, sans publicité</span></figcaption>
+        <div class="browser"><div class="top"><i></i><i></i><i></i><span>envoixl.fr/d/julie-et-tom</span></div>
+          <div class="pro-page">
+            <div class="pro-cover" id="mock-cover"><span class="studio">Atelier Lumière</span><h4>Julie &amp; Tom</h4><p>14 juin 2026, Domaine des Saules</p></div>
+            <div class="pro-bar"><span>Film, 24 photos, photos des invités</span><span><b>Tout télécharger</b></span></div>
+            <div class="pro-grid" id="mock-grid"></div>
           </div></div>
       </figure>
     </div>
   </div>
 </section>
 
-<section id="tarifs">
+<section class="alt" id="tarifs">
   <div class="wrap">
     <h2>Deux formules, sans engagement</h2>
-    <p class="intro">Commencez gratuitement. Passez Pro quand vous voulez livrer vos clients à votre image.</p>
+    <p class="intro">Essayez gratuitement. Passez Pro quand vous voulez livrer vos clients à votre image.</p>
     <div class="plans">
       <div class="plan">
         <h3>Gratuit</h3>
@@ -276,47 +296,43 @@
           <li>Jusqu'à 20 Go par envoi</li>
           <li>Lien valable 7 jours</li>
           <li>Sans inscription</li>
-          <li class="no">Page EnvoiXL avec publicité</li>
+          <li class="no">Page de téléchargement avec publicité</li>
         </ul>
         <a class="cta" href="#sender" id="cta-free">Envoyer gratuitement</a>
       </div>
       <div class="plan pro">
         <h3>Pro</h3>
         <div class="price">7,99 € <small>par mois</small></div>
-        <p class="for">Pour les photographes, vidéastes et agences.</p>
+        <p class="for">Pour les photographes, vidéastes et studios.</p>
         <ul>
-          <li>Jusqu'à 100 Go par envoi, envois illimités</li>
-          <li>Votre logo, votre fond et votre message</li>
-          <li>Galerie en ligne : photos et vidéos visibles sur la page</li>
-          <li>Vos clients partagent la galerie avec leurs invités</li>
-          <li>Les invités ajoutent leurs propres photos</li>
-          <li>Aucune publicité, ni pour vous ni pour vos clients</li>
-          <li>Lien valable 30 jours</li>
-          <li>Suivi des téléchargements et mot de passe</li>
+          <li>Galeries à votre nom, livraisons illimitées</li>
+          <li>Jusqu'à 100 Go par livraison, en ligne 30 jours</li>
+          <li>Film lisible directement dans la galerie</li>
+          <li>Partage aux invités et photos des invités</li>
+          <li>Aucune publicité, suivi des téléchargements</li>
         </ul>
-        <a class="cta" href="#sender" id="cta-pro">Essayer un envoi Pro</a>
-        <p class="once">Un seul envoi ? 2,99 € sans abonnement.</p>
+        <a class="cta" href="#sender" id="cta-pro">Essayer une livraison Pro</a>
+        <p class="once">Une seule livraison ? 2,99 € sans abonnement.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="alt" id="questions">
+<section id="questions">
   <div class="wrap faq">
     <h2>Questions fréquentes</h2>
-    <details class="q"><summary>Mon client doit-il créer un compte ?</summary><p>Non. Il ouvre le lien, voit votre page et télécharge ses fichiers. C'est tout.</p></details>
-    <details class="q"><summary>Combien de temps les fichiers restent-ils en ligne ?</summary><p>7 jours en gratuit, 30 jours en Pro. Ils sont ensuite supprimés automatiquement de nos serveurs.</p></details>
-    <details class="q"><summary>Puis-je arrêter mon abonnement Pro quand je veux ?</summary><p>Oui, sans engagement. Vos liens déjà envoyés restent valables jusqu'à leur date d'expiration.</p></details>
-    <details class="q"><summary>Mon client peut-il voir les photos et la vidéo sans tout télécharger ?</summary><p>Oui, en Pro. Avec la galerie en ligne, il parcourt les photos en grand, regarde le film directement sur votre page, puis télécharge tout d'un coup ou seulement les photos qu'il veut.</p></details>
-    <details class="q"><summary>Les mariés peuvent-ils partager les photos avec leurs invités ?</summary><p>Oui. En un clic, ils envoient le lien de la galerie par message, WhatsApp ou e-mail. Les invités voient les photos et le film sur votre page, avec votre logo : chaque partage vous fait connaître.</p></details>
-    <details class="q"><summary>Les invités peuvent-ils ajouter leurs photos ?</summary><p>Oui, si vous activez l'option. Chaque invité indique son prénom et ajoute ses photos dans un espace à part de la galerie. Vous et les mariés pouvez retirer une photo à tout moment.</p></details>
-    <details class="q"><summary>Pourquoi de la publicité en gratuit ?</summary><p>Elle paie le stockage et la bande passante des envois gratuits. En Pro, il n'y en a aucune, ni sur votre page ni pendant l'envoi.</p></details>
+    <details class="q"><summary>Mes clients doivent-ils créer un compte ?</summary><p>Non. Ils ouvrent le lien, découvrent leur galerie et téléchargent ce qu'ils veulent.</p></details>
+    <details class="q"><summary>Combien de temps la galerie reste-t-elle en ligne ?</summary><p>30 jours en Pro, 7 jours en gratuit. Les fichiers sont ensuite supprimés automatiquement.</p></details>
+    <details class="q"><summary>Mes clients peuvent-ils regarder le film sans le télécharger ?</summary><p>Oui, en Pro. Le film se lance directement dans la galerie, sur ordinateur comme sur téléphone. Le téléchargement reste disponible.</p></details>
+    <details class="q"><summary>Les invités peuvent-ils voir et ajouter des photos ?</summary><p>Oui, si vous activez ces options. Les mariés partagent la galerie en un clic, et chaque invité peut ajouter ses photos dans un espace à part. Vous et les mariés pouvez retirer une photo à tout moment.</p></details>
+    <details class="q"><summary>Puis-je arrêter mon abonnement Pro quand je veux ?</summary><p>Oui, sans engagement. Les galeries déjà livrées restent en ligne jusqu'à leur date d'expiration.</p></details>
   </div>
 </section>
 
-<footer><div class="wrap"><span>EnvoiXL, transfert de fichiers pour les pros de l'image</span><span>Démo</span></div></footer>
+<footer><div class="wrap"><span>EnvoiXL, galeries et livraison de fichiers pour photographes et vidéastes</span><span>Démo</span></div></footer>
 
 <script>
+const PICS = [1011, 1027, 64, 65, 91, 177, 338, 349, 375, 399, 453, 513, 523, 550, 659, 823, 883, 996, 1005, 1012, 1062, 1074, 22, 39];
 const GB = 1024 ** 3;
 const LIMIT = { free: 20 * GB, pro: 100 * GB };
 const $ = (id) => document.getElementById(id);
@@ -337,7 +353,7 @@ function setMode(m) {
   $("m-pro").setAttribute("aria-pressed", m === "pro");
   $("pro-fields").classList.toggle("hidden", m !== "pro");
   $("drop-hint").textContent = "ou cliquez pour les choisir, jusqu'à " + (m === "pro" ? "100" : "20") + " Go";
-  $("sum-label").textContent = m === "pro" ? "Envoi Pro, lien valable 30 jours" : "Envoi gratuit, lien valable 7 jours, avec publicité";
+  $("sum-label").textContent = m === "pro" ? "Livraison Pro, en ligne 30 jours" : "Envoi gratuit, 7 jours, avec publicité";
   $("sum-price").textContent = m === "pro" ? "2,99 € ou inclus en Pro" : "0 €";
   if (file) check();
 }
@@ -380,7 +396,7 @@ const drop = $("drop");
 ["dragleave", "drop"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove("over"); }));
 drop.addEventListener("drop", (e) => pick(e.dataTransfer.files));
 $("fake").addEventListener("click", (e) => { e.preventDefault(); const fake = [{ name: "film-mariage-Julie-et-Tom.mp4", size: 8.4 * GB, type: "video/mp4", fake: true }];
-  for (let i = 1; i <= 24; i++) fake.push({ name: "JT-" + String(i).padStart(3, "0") + ".jpg", size: 14 * 1024 * 1024, type: "image/jpeg", fake: true });
+  PICS.forEach((id, i) => fake.push({ name: "JT-" + String(i + 1).padStart(3, "0") + ".jpg", size: 14 * 1024 * 1024, type: "image/jpeg", fake: true, src: "https://picsum.photos/id/" + id + "/1200/800" }));
   pick(fake); });
 
 function pickImg(kind, max) {
@@ -435,8 +451,8 @@ $("send").addEventListener("click", async () => {
   const data = { pro, days: pro ? 30 : 7, name: file.name, size: fmt(file.size),
     color: pro ? brand.color : "", message: pro ? $("message").value.slice(0, 200) : "",
     logo: pro ? await shrink(brand.logo, 400) : "", bg: pro ? await shrink(brand.bg, 1600) : "",
-    gallery: pro && $("video").checked, share: pro && $("share").checked, guests: pro && $("guests").checked,
-    files: files.slice(0, 80).map((f) => ({ n: f.name, s: fmt(f.size), k: kind(f), src: (!f.fake && f instanceof Blob && kind(f) !== "other") ? URL.createObjectURL(f) : "" })) };
+    gallery: pro && $("video").checked, share: pro && $("share").checked, title: pro ? $("gtitle").value.trim().slice(0, 60) : "", guests: pro && $("guests").checked,
+    files: files.slice(0, 80).map((f) => ({ n: f.name, s: fmt(f.size), k: kind(f), src: (!f.fake && f instanceof Blob && kind(f) !== "other") ? URL.createObjectURL(f) : (f.src || "") })) };
   try { sessionStorage.setItem("envoixl-demo", JSON.stringify(data)); }
   catch (e) { data.bg = ""; try { sessionStorage.setItem("envoixl-demo", JSON.stringify(data)); } catch (e2) {} }
   $("out").value = location.href.replace(/[^/]*$/, "") + "d.html";
@@ -454,6 +470,20 @@ $("again").addEventListener("click", () => {
   check(); show("step-pick");
 });
 setMode("pro");
+
+// Pellicule et maquette de galerie
+const pic = (id, w, h) => "https://picsum.photos/id/" + id + "/" + w + "/" + h;
+function img(src, alt) { const i = new Image(); i.src = src; i.alt = alt || ""; i.loading = "lazy"; i.onerror = () => { i.removeAttribute("src"); }; return i; }
+const frames = $("frames");
+PICS.slice(0, 12).forEach((id, i) => {
+  const f = document.createElement("figure");
+  if (i === 3) f.className = "picked";
+  f.append(img(pic(id, 540, 360)));
+  const c = document.createElement("figcaption"); c.textContent = (14 + i) + "  ▸  " + (14 + i) + "A"; f.append(c);
+  frames.append(f);
+});
+$("mock-cover").style.backgroundImage = "url(" + pic(PICS[0], 900, 400) + ")";
+PICS.slice(1, 9).forEach((id) => $("mock-grid").append(img(pic(id, 300, 200))));
 </script>
 </body>
 </html>
