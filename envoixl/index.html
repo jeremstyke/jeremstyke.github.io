@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>EnvoiXL - Envoyer un gros fichier gratuitement</title>
-<meta name="description" content="Envoyez un gros fichier jusqu'à 5 Go gratuitement, sans inscription. Lien de téléchargement valable 7 jours.">
+<title>EnvoiXL - Envoyer un fichier jusqu'à 100 Go</title>
+<meta name="description" content="Envoyez un fichier jusqu'à 100 Go, sans inscription et sans abonnement. Gratuit jusqu'à 5 Go. Lien de téléchargement valable 7 jours.">
 <style>
   :root { --bg:#f5f6fa; --card:#fff; --text:#16181d; --muted:#6b7080; --accent:#2f5bea; --accent2:#1d3fb8; --line:#e3e5ec; --ok:#17924a; --err:#c8323c; }
   * { box-sizing:border-box; }
@@ -47,6 +47,16 @@
   .field input[type=color] { width:52px; height:34px; border:1px solid var(--line); border-radius:8px; padding:2px; background:#fff; }
   .pv { margin-top:12px; border-radius:10px; height:90px; display:flex; align-items:center; justify-content:center; background:#f5f6fa center/cover no-repeat; }
   .pv img { max-height:60px; max-width:150px; object-fit:contain; background:#fff; border-radius:8px; padding:4px; }
+  .hero { display:inline-block; background:#e8edff; color:var(--accent2); border-radius:99px; padding:6px 14px; font-size:14px; margin-bottom:12px; }
+  .hero b { font-size:16px; }
+  .drop small { color:var(--accent); font-weight:600; }
+  .plans { display:flex; gap:8px; margin-top:20px; }
+  .plan { flex:1; border:1px solid var(--line); border-radius:12px; padding:10px 6px; text-align:center; font-size:13px; color:var(--muted); }
+  .plan b { display:block; color:var(--text); font-size:17px; margin-bottom:2px; }
+  .plan.best { border-color:var(--accent); background:#f0f3ff; }
+  .plan-note { color:var(--muted); font-size:12px; text-align:center; margin:8px 0 0; }
+  .price { margin-top:12px; background:#f0f3ff; border-radius:12px; padding:12px; font-size:14px; }
+  .price b { color:var(--accent2); }
   ul.points { list-style:none; padding:0; margin:22px 0 0; color:var(--muted); font-size:14px; }
   ul.points li { margin:6px 0; }
   footer { text-align:center; color:var(--muted); font-size:13px; padding:20px; }
@@ -58,14 +68,16 @@
 <main>
   <div class="card">
     <div id="step-pick">
-      <h1>Envoyer un gros fichier</h1>
-      <p class="sub">Gratuit jusqu'à 5 Go, sans inscription.</p>
+      <div class="hero">Jusqu'à <b>100 Go</b></div>
+      <h1>Envoyez vos très gros fichiers</h1>
+      <p class="sub">Gratuit jusqu'à 5 Go. Au-delà, un paiement unique, sans abonnement ni compte.</p>
       <label class="drop" id="drop">
         <div class="big">📦</div>
-        <p><b>Glissez votre fichier ici</b><br>ou cliquez pour le choisir</p>
+        <p><b>Glissez votre fichier ici</b><br>ou cliquez pour le choisir<br><small>jusqu'à 100 Go</small></p>
         <input type="file" id="input">
       </label>
       <div class="file hidden" id="file"></div>
+      <div class="price hidden" id="price"></div>
       <details class="brand">
         <summary>🎨 Personnaliser la page de téléchargement</summary>
         <div class="field"><label>Votre logo (PNG, JPG ou WebP, 2 Mo max)</label><input type="file" id="logo" accept="image/png,image/jpeg,image/webp"></div>
@@ -75,10 +87,17 @@
         <div class="pv" id="pv"></div>
       </details>
       <button id="send" disabled>Envoyer</button>
+      <div class="plans">
+        <div class="plan"><b>Gratuit</b><span>jusqu'à 5 Go</span></div>
+        <div class="plan"><b>1,99 €</b><span>jusqu'à 50 Go</span></div>
+        <div class="plan best"><b>3,99 €</b><span>jusqu'à 100 Go</span></div>
+      </div>
+      <p class="plan-note">Paiement unique par envoi. Pas d'abonnement, pas de compte.</p>
+      <p class="plan-note"><a href="#" id="fake" style="color:var(--accent)">Démo : simuler un fichier de 42 Go</a></p>
       <ul class="points">
         <li>✓ Lien valable 7 jours</li>
         <li>✓ Aucun compte à créer</li>
-        <li>✓ Le fichier est supprimé automatiquement</li>
+        <li>✓ Fichiers supprimés automatiquement</li>
       </ul>
     </div>
 
@@ -106,7 +125,10 @@
 <footer>EnvoiXL - démo</footer>
 
 <script>
-const MAX = 5 * 1024 ** 3;
+const FREE = 5 * 1024 ** 3;
+const MAX = 100 * 1024 ** 3;
+const GB = 1024 ** 3;
+function priceFor(size) { return size <= FREE ? 0 : size <= 50 * GB ? 1.99 : 3.99; }
 const PARALLEL = 3;
 const $ = (id) => document.getElementById(id);
 let file = null, state = null, cancelled = false;
@@ -124,16 +146,26 @@ function error(t) { $("err").textContent = t; $("err").classList.toggle("hidden"
 function pick(f) {
   error("");
   if (!f) return;
-  if (f.size > MAX) { file = null; $("send").disabled = true; $("file").classList.add("hidden"); return error("Ce fichier fait " + fmt(f.size) + ". La limite gratuite est de 5 Go."); }
+  if (f.size > MAX) { file = null; $("send").disabled = true; $("file").classList.add("hidden"); $("price").classList.add("hidden"); return error("Ce fichier fait " + fmt(f.size) + ". La limite est de 100 Go par envoi."); }
   file = f;
   $("file").innerHTML = "";
   const b = document.createElement("b"); b.textContent = f.name;
   const s = document.createElement("small"); s.textContent = " - " + fmt(f.size);
   $("file").append(b, s);
   $("file").classList.remove("hidden");
+  const price = priceFor(f.size);
+  if (price) {
+    $("price").innerHTML = "Ce fichier dépasse 5 Go : envoi à <b>" + price.toFixed(2).replace(".", ",") + " €</b>, paiement unique.";
+    $("price").classList.remove("hidden");
+    $("send").textContent = "Payer " + price.toFixed(2).replace(".", ",") + " € et envoyer";
+  } else {
+    $("price").classList.add("hidden");
+    $("send").textContent = "Envoyer gratuitement";
+  }
   $("send").disabled = false;
 }
 
+$("fake").addEventListener("click", (e) => { e.preventDefault(); pick({ name: "rushes-tournage-4K.zip", size: 42 * GB, type: "application/zip" }); });
 $("input").addEventListener("change", (e) => pick(e.target.files[0]));
 const drop = $("drop");
 ["dragenter", "dragover"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("over"); }));
@@ -205,6 +237,7 @@ function shrink(f, max) {
 $("send").addEventListener("click", async () => {
   if (!file) return;
   error(""); cancelled = false;
+  if (priceFor(file.size) && !confirm("Démo : ici s'ouvrirait le paiement de " + priceFor(file.size).toFixed(2).replace(".", ",") + " €. Continuer ?")) return;
   $("up-name").textContent = file.name + " - " + fmt(file.size);
   $("bar").style.width = "0"; $("pct").textContent = "0 %"; $("speed").textContent = "";
   show("step-up");
@@ -242,7 +275,7 @@ $("copy").addEventListener("click", async () => {
   $("copied").classList.remove("hidden");
 });
 $("again").addEventListener("click", () => {
-  file = null; $("input").value = ""; $("file").classList.add("hidden"); $("send").disabled = true; $("copied").classList.add("hidden");
+  file = null; $("input").value = ""; $("file").classList.add("hidden"); $("send").disabled = true; $("send").textContent = "Envoyer"; $("price").classList.add("hidden"); $("copied").classList.add("hidden");
   show("step-pick");
 });
 </script>
