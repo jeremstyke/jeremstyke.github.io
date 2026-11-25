@@ -19,10 +19,12 @@ Les règles détaillées de chaque site restent dans son AUTOMATION.md (ou fichi
 | Jour | Sites affiliés | Autres sites |
 |---|---|---|
 | Lundi | Vieillir chez soi : 1 article ; Les oiseaux du jardin : 1 fiche ; Ma liste mariage : 1 top | CVLibre français : 1 article |
-| Mardi | Ma liste bébé : 1 article | CVLibre français : 1 page métier ; PDF Démarches : 1 guide |
+| Mardi | Ma liste bébé : 1 article ; Les oiseaux du jardin : 1 top | CVLibre français : 1 page métier ; PDF Démarches : 1 guide |
 | Mercredi | Vieillir chez soi : 1 top ; Les oiseaux du jardin : 1 top | CVLibre français : 1 article |
-| Jeudi | Vieillir chez soi : 1 article ; Ma liste mariage : 1 article | CVLibre français : 1 article ; PDF Démarches : 1 guide |
+| Jeudi | Vieillir chez soi : 1 article ; Ma liste mariage : 1 article ; Les oiseaux du jardin : 1 article (premier « - [ ] » de sujets.md) | CVLibre français : 1 article ; PDF Démarches : 1 guide |
 | Vendredi | Les oiseaux du jardin : 1 fiche ; Ma liste bébé : 1 top | CVLibre français : 1 article |
+
+Les oiseaux du jardin passe à 5 pages par semaine (règle du 25 nov 2026, une par jour du lundi au vendredi) : priorité de Jeremy avec Vieillir chez soi.
 
 Priorité achat (règle du 23 nov 2026) : les listes sujets.md et tops.md des 4 sites affiliés ont été réordonnées, pages qui font acheter et cadeaux de Noël en tête ; garde cet ordre. Jusqu'au 15 décembre 2026, Les oiseaux du jardin prend le vendredi le premier « - [ ] » de sujets.md au lieu de especes.md. Quand tu ajoutes des sujets, place en tête ceux qui mènent à un achat.
 
