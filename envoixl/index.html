@@ -207,6 +207,7 @@
               </div>
             </div>
             <label class="vopt"><input type="checkbox" id="video" checked><span><b>Galerie en ligne</b><br>Votre client voit les photos et regarde les vidéos sur la page, puis télécharge tout ou seulement ce qu'il veut.</span></label>
+            <label class="vopt"><input type="checkbox" id="share" checked><span><b>Partage avec les invités</b><br>Vos clients partagent la galerie avec leurs proches en un clic. Votre logo voyage avec chaque partage.</span></label>
             <div class="field"><label for="message">Message pour votre client</label>
               <textarea id="message" rows="2" maxlength="200" placeholder="Merci pour votre confiance, voici les photos de votre mariage."></textarea></div>
           </div>
@@ -286,6 +287,7 @@
           <li>Jusqu'à 100 Go par envoi, envois illimités</li>
           <li>Votre logo, votre fond et votre message</li>
           <li>Galerie en ligne : photos et vidéos visibles sur la page</li>
+          <li>Vos clients partagent la galerie avec leurs invités</li>
           <li>Aucune publicité, ni pour vous ni pour vos clients</li>
           <li>Lien valable 30 jours</li>
           <li>Suivi des téléchargements et mot de passe</li>
@@ -304,6 +306,7 @@
     <details class="q"><summary>Combien de temps les fichiers restent-ils en ligne ?</summary><p>7 jours en gratuit, 30 jours en Pro. Ils sont ensuite supprimés automatiquement de nos serveurs.</p></details>
     <details class="q"><summary>Puis-je arrêter mon abonnement Pro quand je veux ?</summary><p>Oui, sans engagement. Vos liens déjà envoyés restent valables jusqu'à leur date d'expiration.</p></details>
     <details class="q"><summary>Mon client peut-il voir les photos et la vidéo sans tout télécharger ?</summary><p>Oui, en Pro. Avec la galerie en ligne, il parcourt les photos en grand, regarde le film directement sur votre page, puis télécharge tout d'un coup ou seulement les photos qu'il veut.</p></details>
+    <details class="q"><summary>Les mariés peuvent-ils partager les photos avec leurs invités ?</summary><p>Oui. En un clic, ils envoient le lien de la galerie par message, WhatsApp ou e-mail. Les invités voient les photos et le film sur votre page, avec votre logo : chaque partage vous fait connaître.</p></details>
     <details class="q"><summary>Pourquoi de la publicité en gratuit ?</summary><p>Elle paie le stockage et la bande passante des envois gratuits. En Pro, il n'y en a aucune, ni sur votre page ni pendant l'envoi.</p></details>
   </div>
 </section>
@@ -429,7 +432,7 @@ $("send").addEventListener("click", async () => {
   const data = { pro, days: pro ? 30 : 7, name: file.name, size: fmt(file.size),
     color: pro ? brand.color : "", message: pro ? $("message").value.slice(0, 200) : "",
     logo: pro ? await shrink(brand.logo, 400) : "", bg: pro ? await shrink(brand.bg, 1600) : "",
-    gallery: pro && $("video").checked,
+    gallery: pro && $("video").checked, share: pro && $("share").checked,
     files: files.slice(0, 80).map((f) => ({ n: f.name, s: fmt(f.size), k: kind(f), src: (!f.fake && f instanceof Blob && kind(f) !== "other") ? URL.createObjectURL(f) : "" })) };
   try { sessionStorage.setItem("envoixl-demo", JSON.stringify(data)); }
   catch (e) { data.bg = ""; try { sessionStorage.setItem("envoixl-demo", JSON.stringify(data)); } catch (e2) {} }

@@ -59,7 +59,11 @@
   .files li { display:flex; justify-content:space-between; gap:10px; padding:9px 12px; border-bottom:1px solid var(--line); }
   .files li:last-child { border-bottom:0; }
   .files li span { color:var(--slate); white-space:nowrap; }
+  .acts { display:flex; gap:8px; flex-wrap:wrap; }
+  .share { display:inline-block; padding:12px 18px; border-radius:10px; border:1.5px solid var(--ink); background:#fff; color:var(--ink); font:inherit; font-weight:700; font-size:16px; cursor:pointer; }
+  .toast { position:fixed; left:50%; bottom:28px; transform:translateX(-50%); background:var(--ink); color:#fff; padding:10px 16px; border-radius:8px; font-size:14px; z-index:20; }
   .hidden { display:none !important; }
+  @media (max-width: 520px) { .grid { grid-template-columns:repeat(2,1fr); gap:6px; } .card { padding:20px; } }
   @media (max-width: 820px) { .ad { display:none; } .free .ad-inline { display:block; } }
 </style>
 </head>
@@ -92,7 +96,8 @@
   <div class="ad" id="ad-right">Publicité<br><small>emplacement 300 x 250</small></div>
 </main>
 <div class="lb hidden" id="lb" role="dialog" aria-label="Photo en grand"><div class="view" id="lb-view"></div>
-  <div class="bar"><button id="lb-prev" aria-label="Photo précédente">Précédente</button><span id="lb-n"></span><button id="lb-next" aria-label="Photo suivante">Suivante</button><button class="main" id="lb-dl">Télécharger cette photo</button><button id="lb-x">Fermer</button></div></div>
+  <div class="bar"><button id="lb-prev" aria-label="Photo précédente">Précédente</button><span id="lb-n"></span><button id="lb-next" aria-label="Photo suivante">Suivante</button><button class="main" id="lb-dl">Télécharger cette photo</button><button id="lb-share" class="hidden">Partager</button><button id="lb-x">Fermer</button></div></div>
+<div class="toast hidden" id="toast" role="status"></div>
 <footer id="foot">Envoyé avec <a href="./">EnvoiXL</a>. Envoyez vos fichiers à votre image, <a href="./">essayez gratuitement</a>.</footer>
 <script>
 let data = {};
@@ -128,7 +133,13 @@ if (data.pro) {
   else if (data.color) document.body.style.background = data.color;
   if (data.gallery && (photos.length || videos.length)) {
     $("card").classList.add("gallery");
-    $("top").append($("dl"));
+    const acts = document.createElement("div"); acts.className = "acts"; $("top").append(acts);
+    if (data.share) {
+      const sh = document.createElement("button"); sh.className = "share"; sh.type = "button"; sh.textContent = "Partager avec les invités";
+      sh.onclick = () => shareLink(data.name || "Nos photos", "Les photos et le film sont ici :");
+      acts.append(sh); $("lb-share").classList.remove("hidden");
+    }
+    acts.append($("dl"));
     $("dl").textContent = files.length > 1 ? "Tout télécharger (" + data.size + ")" : "Télécharger";
     if (videos.length) {
       const zone = $("player-zone"); zone.classList.remove("hidden");
@@ -157,6 +168,14 @@ if (data.pro) {
   $("ad-right").remove();
 }
 
+function toast(t) { const e = $("toast"); e.textContent = t; e.classList.remove("hidden"); clearTimeout(toast.t); toast.t = setTimeout(() => e.classList.add("hidden"), 2500); }
+async function shareLink(title, text) {
+  const url = location.href;
+  if (navigator.share) { try { await navigator.share({ title, text, url }); return; } catch (e) { if (e.name === "AbortError") return; } }
+  try { await navigator.clipboard.writeText(url); toast("Lien copié : collez-le dans WhatsApp, un SMS ou un e-mail"); }
+  catch (e) { toast("Copiez l'adresse de cette page pour la partager"); }
+}
+$("lb-share").onclick = () => shareLink(photos[cur].n, "Regarde cette photo :");
 let cur = 0;
 function openLb(i) {
   cur = (i + photos.length) % photos.length;
