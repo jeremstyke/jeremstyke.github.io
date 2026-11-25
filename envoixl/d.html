@@ -4,79 +4,111 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Télécharger un fichier - EnvoiXL</title>
+<title>Vos fichiers sont prêts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root { --bg:#f5f6fa; --card:#fff; --text:#16181d; --muted:#6b7080; --accent:#2f5bea; --accent2:#1d3fb8; --line:#e3e5ec; --ok:#17924a; }
+  :root { --ink:#171B26; --slate:#5A6172; --line:#E3E6EC; --mist:#F4F6F9; --cyan:#1F47C4; --cyan-deep:#15328C; --ad:#FFF6DA; --accent:var(--cyan); }
   * { box-sizing:border-box; }
-  body { margin:0; font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
-  header { padding:22px 24px; font-weight:800; font-size:22px; letter-spacing:-.5px; }
-  header a { display:inline-block; background:#fff; padding:6px 14px; border-radius:10px; }
-  header a { color:inherit; text-decoration:none; }
-  header span { color:var(--accent); }
-  main { flex:1; display:flex; align-items:center; justify-content:center; padding:16px; }
-  .card { background:var(--card); border-radius:18px; box-shadow:0 10px 40px rgba(20,30,60,.08); width:100%; max-width:440px; padding:28px; text-align:center; }
-  .big { font-size:46px; }
-  h1 { font-size:20px; margin:12px 0 4px; word-break:break-all; }
-  .sub { color:var(--muted); margin:0 0 20px; }
-  a.btn { display:block; padding:14px; border-radius:12px; background:var(--accent); color:#fff; font-weight:700; text-decoration:none; font-size:16px; }
-  a.btn:hover { background:var(--accent2); }
+  body { margin:0; font-family:"Schibsted Grotesk",system-ui,sans-serif; color:var(--ink); background:var(--mist); min-height:100vh; display:flex; flex-direction:column; }
+  :focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
+  .demo-bar { background:var(--ad); color:#6b5300; text-align:center; font-size:13px; padding:7px 12px; }
+  header { padding:20px 24px; }
+  .logo { font-weight:800; font-size:22px; letter-spacing:-.6px; text-decoration:none; color:var(--ink); background:#fff; padding:4px 10px; border-radius:8px; }
+  .logo i { font-style:normal; background:var(--cyan); color:#fff; border-radius:6px; padding:0 5px; margin-left:2px; }
+  main { flex:1; display:flex; align-items:center; justify-content:center; gap:24px; padding:16px; }
+  .card { background:#fff; border-radius:16px; box-shadow:0 30px 60px -30px rgba(23,27,38,.45); width:100%; max-width:460px; padding:30px; text-align:center; }
+  .card.wide { max-width:720px; }
+  .brand-logo { max-width:200px; max-height:90px; object-fit:contain; display:block; margin:0 auto 18px; }
+  video { width:100%; border-radius:10px; background:#000; display:block; margin-bottom:18px; }
+  .poster { width:100%; aspect-ratio:16/9; border-radius:10px; margin-bottom:18px; background:linear-gradient(135deg,#C9B38C,#3F5237); display:flex; align-items:center; justify-content:center; border:0; cursor:pointer; color:#fff; font:inherit; font-size:14px; flex-direction:column; gap:12px; }
+  .poster i { width:0; height:0; border-left:30px solid #fff; border-top:18px solid transparent; border-bottom:18px solid transparent; margin-left:6px; }
+  h1 { font-size:20px; margin:0 0 4px; word-break:break-all; letter-spacing:-.3px; }
+  .meta { color:var(--slate); margin:0 0 20px; font-size:15px; }
+  .message { background:var(--mist); border-radius:10px; padding:14px; margin:0 0 20px; white-space:pre-wrap; text-align:left; }
+  .dl { display:block; padding:15px; border-radius:10px; background:var(--accent); color:#fff; font-weight:700; text-decoration:none; font-size:16px; }
   .report { margin-top:22px; font-size:13px; }
-  .report button { background:none; border:0; color:var(--muted); text-decoration:underline; cursor:pointer; font-size:13px; }
-  .report textarea { width:100%; margin-top:10px; border:1px solid var(--line); border-radius:10px; padding:10px; font:inherit; }
-  .report .send { margin-top:8px; background:var(--text); color:#fff; text-decoration:none; padding:8px 14px; border-radius:8px; }
-  .hidden { display:none; }
-  .ok { color:var(--ok); }
-  footer { text-align:center; color:var(--muted); font-size:13px; padding:20px; }
-  .logo { max-width:180px; max-height:90px; object-fit:contain; display:block; margin:0 auto 6px; }
-  .message { background:#f5f6fa; border-radius:10px; padding:12px; margin:0 0 18px; white-space:pre-wrap; }
-  
+  .report button { background:none; border:0; color:var(--slate); text-decoration:underline; cursor:pointer; font:inherit; font-size:13px; }
+  .report textarea { width:100%; margin-top:10px; border:1px solid var(--line); border-radius:8px; padding:10px; font:inherit; }
+  .report .send { margin-top:8px; background:var(--ink); color:#fff; text-decoration:none; padding:8px 14px; border-radius:8px; }
+  .ok { color:#17803f; }
+  .ad { width:300px; min-height:250px; border:1px dashed #E2C96F; background:var(--ad); border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#7a6420; font-size:13px; text-align:center; padding:12px; flex:none; }
+  .ad-inline { margin-top:20px; border:1px dashed #E2C96F; background:var(--ad); border-radius:10px; padding:16px; color:#7a6420; font-size:13px; display:none; }
+  footer { text-align:center; color:var(--slate); font-size:13px; padding:18px; background:rgba(255,255,255,.92); }
+  footer a { color:var(--cyan); font-weight:700; text-decoration:none; }
+  .hidden { display:none !important; }
+  @media (max-width: 820px) { .ad { display:none; } .free .ad-inline { display:block; } }
 </style>
 </head>
 <body>
-<div style="background:#fff3cd;color:#6b5300;text-align:center;font-size:13px;padding:8px">Démo : aperçu de la page que verra le destinataire.</div>
-<header id="hdr"><a href="./">Envoi<span>XL</span></a></header>
+<div class="demo-bar">Démo : aperçu de la page que verra votre client.</div>
+<header id="hdr"><a class="logo" href="./">Envoi<i>XL</i></a></header>
 <main>
-  <div class="card" id="ok">
-    <img class="logo hidden" id="logo" alt="">
-    <div class="big">📦</div>
+  <div class="ad" id="ad-left">Publicité<br><small>emplacement 300 x 250</small></div>
+  <div class="card" id="card">
+    <img class="brand-logo hidden" id="logo" alt="">
+    <div id="player-zone" class="hidden"></div>
     <h1 id="name">photos-mariage.zip</h1>
-    <p class="sub"><span id="size">2,4 Go</span> - disponible encore <span id="days">7</span> jours</p>
+    <p class="meta"><span id="size">12 Go</span>, disponible encore <span id="days">7</span> jours</p>
     <p class="message hidden" id="message"></p>
-    <a class="btn" href="#" onclick="this.textContent='Démo : pas de vrai fichier';return false">Télécharger</a>
+    <a class="dl" href="#" id="dl">Télécharger</a>
+    <div class="ad-inline">Publicité</div>
     <div class="report">
       <button id="rep">Signaler ce fichier</button>
       <div id="repbox" class="hidden">
         <textarea id="reason" rows="3" placeholder="Pourquoi signalez-vous ce fichier ?"></textarea>
         <button class="send" id="repsend">Envoyer le signalement</button>
       </div>
-      <p id="repok" class="ok hidden">Merci, le signalement a bien été envoyé.</p>
+      <p id="repok" class="ok hidden">Signalement envoyé, merci.</p>
     </div>
   </div>
-  <div class="card hidden" id="expired">
-    <div class="big">⌛</div>
-    <h1>Lien expiré ou introuvable</h1>
-    <p class="sub">Ce fichier n'est plus disponible. Les fichiers sont supprimés au bout de 7 jours.</p>
-    <a class="btn" href="./">Envoyer un fichier</a>
-  </div>
+  <div class="ad" id="ad-right">Publicité<br><small>emplacement 300 x 250</small></div>
 </main>
-<footer style="background:rgba(255,255,255,.9)">Envoyé avec <a href="./" style="color:var(--accent);font-weight:700;text-decoration:none">EnvoiXL</a> - envoyez vos fichiers à votre image, <a href="./" style="color:var(--accent)">essayez gratuitement</a></footer>
+<footer id="foot">Envoyé avec <a href="./">EnvoiXL</a>. Envoyez vos fichiers à votre image, <a href="./">essayez gratuitement</a>.</footer>
 <script>
 let data = {};
 try { data = JSON.parse(sessionStorage.getItem("envoixl-demo") || "{}"); } catch (e) {}
-if (data.name) document.getElementById("name").textContent = data.name;
-if (data.size) document.getElementById("size").textContent = data.size;
-if (data.days) document.getElementById("days").textContent = data.days;
-if (data.pro) document.getElementById("hdr").style.visibility = "hidden";
-if (data.logo) { const l = document.getElementById("logo"); l.src = data.logo; l.classList.remove("hidden"); }
-if (data.message) { const m = document.getElementById("message"); m.textContent = data.message; m.classList.remove("hidden"); }
-if (data.bg) document.body.style.background = "#111 url(" + data.bg + ") center/cover no-repeat fixed";
-else if (data.color) document.body.style.background = data.color;
-document.getElementById("rep").onclick = () => document.getElementById("repbox").classList.toggle("hidden");
-document.getElementById("repsend").onclick = () => {
-  document.getElementById("repbox").classList.add("hidden");
-  document.getElementById("rep").classList.add("hidden");
-  document.getElementById("repok").classList.remove("hidden");
-};
+const $ = (id) => document.getElementById(id);
+if (data.name) $("name").textContent = data.name;
+if (data.size) $("size").textContent = data.size;
+if (data.days) $("days").textContent = data.days;
+
+if (data.pro) {
+  document.title = data.name || "Vos fichiers";
+  $("hdr").style.visibility = "hidden";
+  $("ad-left").remove(); $("ad-right").remove(); document.querySelector(".ad-inline").remove();
+  if (data.logo) { $("logo").src = data.logo; $("logo").classList.remove("hidden"); }
+  if (data.message) { $("message").textContent = data.message; $("message").classList.remove("hidden"); }
+  if (data.bg) document.body.style.background = "#222 url(" + data.bg + ") center/cover no-repeat fixed";
+  else if (data.color) document.body.style.background = data.color;
+  if (data.video) {
+    $("card").classList.add("wide");
+    const zone = $("player-zone"); zone.classList.remove("hidden");
+    if (data.src) {
+      const v = document.createElement("video");
+      v.controls = true; v.playsInline = true; v.preload = "metadata"; v.src = data.src;
+      v.onerror = () => { zone.innerHTML = ""; zone.append(poster()); };
+      zone.append(v);
+    } else zone.append(poster());
+    $("dl").textContent = "Télécharger le film";
+  }
+} else {
+  document.body.classList.add("free");
+  $("ad-right").remove();
+}
+
+function poster() {
+  const b = document.createElement("button");
+  b.className = "poster"; b.type = "button";
+  b.innerHTML = "<i></i><span>Lecture vidéo</span>";
+  b.onclick = () => { b.querySelector("span").textContent = "Démo : ici le film se lance directement"; };
+  return b;
+}
+
+$("dl").onclick = (e) => { e.preventDefault(); $("dl").textContent = "Démo : pas de vrai fichier"; };
+$("rep").onclick = () => $("repbox").classList.toggle("hidden");
+$("repsend").onclick = () => { $("repbox").classList.add("hidden"); $("rep").classList.add("hidden"); $("repok").classList.remove("hidden"); };
 </script>
 </body>
 </html>
