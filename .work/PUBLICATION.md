@@ -24,6 +24,13 @@ Les règles détaillées de chaque site restent dans son AUTOMATION.md (ou fichi
 | Jeudi | Vieillir chez soi : 1 article ; Ma liste mariage : 1 article ; Les oiseaux du jardin : 1 article (premier « - [ ] » de sujets.md) | CVLibre français : 1 article ; PDF Démarches : 1 guide |
 | Vendredi | Les oiseaux du jardin : 1 fiche ; Ma liste bébé : 1 top | CVLibre français : 1 article |
 
+Pages utiles d'abord (règle du 25 nov 2026, à appliquer à partir du mercredi 16 décembre 2026 ; avant cette date, garde le planning ci-dessus et les cadeaux de Noël en tête) : environ 2 pages utiles (fiche, guide, article pratique) pour 1 top sur les 4 sites affiliés, car les pages utiles se placent plus vite sur un site jeune, amènent les liens et nourrissent les tops par le maillage. À partir du 16 décembre, remplace donc dans le tableau :
+- Les oiseaux du jardin : mercredi = 1 fiche (premier « - [ ] » de especes.md) au lieu d'un top, et vendredi = 1 top au lieu d'un sujet ; soit lundi fiche, mardi top, mercredi fiche, jeudi article, vendredi top.
+- Ma liste bébé : les semaines paires (numéro de semaine ISO pair, `date +%V`), le vendredi publie 1 article de sujets.md au lieu d'un top.
+- Ma liste mariage : les semaines paires, le lundi publie 1 article de sujets.md au lieu d'un top.
+- Vieillir chez soi : inchangé (déjà 2 articles pour 1 top).
+Dans les sujets.md, après les sujets de Noël, fais passer en tête les guides pratiques très recherchés (aides, démarches, « comment », « quand », reconnaître une espèce) plutôt que les sujets « quel produit choisir ». Chaque page utile renvoie vers 1 ou 2 tops existants du même site, avec un lien dans le texte.
+
 Les oiseaux du jardin passe à 5 pages par semaine (règle du 25 nov 2026, une par jour du lundi au vendredi) : priorité de Jeremy avec Vieillir chez soi.
 
 Priorité achat (règle du 23 nov 2026) : les listes sujets.md et tops.md des 4 sites affiliés ont été réordonnées, pages qui font acheter et cadeaux de Noël en tête ; garde cet ordre. Jusqu'au 15 décembre 2026, Les oiseaux du jardin prend le vendredi le premier « - [ ] » de sujets.md au lieu de especes.md. Quand tu ajoutes des sujets, place en tête ceux qui mènent à un achat.
