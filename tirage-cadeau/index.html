@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tirage au sort cadeaux, Père Noël secret gratuit (démo)</title>
+<meta name="description" content="Organisez un Père Noël secret en 1 minute : tirage au sort gratuit, sans inscription, un lien privé pour chaque participant et des idées cadeaux selon le budget.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--pin:#123d34;--pin2:#1d5a4c;--or:#e9b949;--baie:#b8344a;--papier:#f7f8f4;--encre:#17221f;--gris:#5d6b67;--ligne:#d9e1dc}
+*{box-sizing:border-box}
+body{margin:0;background:var(--papier);color:var(--encre);font:17px/1.55 "Atkinson Hyperlegible",system-ui,sans-serif}
+a{color:var(--pin2)}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+header.hero{background:var(--pin);color:#fff;padding:44px 0 56px;position:relative;overflow:hidden}
+.hero h1{font:800 clamp(34px,7vw,58px)/1.02 "Bricolage Grotesque",sans-serif;margin:0 0 14px;letter-spacing:-.02em;max-width:12ch}
+.hero p{margin:0;max-width:46ch;color:#d6e6e0}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.chips span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:4px 12px;font-size:14px}
+.ruban{position:absolute;right:-40px;top:0;bottom:0;width:120px;background:var(--baie);transform:skewX(-12deg);opacity:.9}
+.ruban:after{content:"";position:absolute;left:44px;top:0;bottom:0;width:12px;background:var(--or)}
+.demo{background:var(--or);color:var(--encre);font-size:14px;text-align:center;padding:6px 12px}
+main{padding:28px 0 60px}
+.carte{background:#fff;border:1px solid var(--ligne);border-radius:14px;padding:22px;margin-bottom:18px}
+.carte h2{font:800 22px/1.2 "Bricolage Grotesque",sans-serif;margin:0 0 4px}
+.carte .sous{color:var(--gris);margin:0 0 16px;font-size:15px}
+label{display:block;font-weight:700;font-size:15px;margin:12px 0 6px}
+input,select{width:100%;font:inherit;padding:11px 12px;border:1px solid #b9c6c0;border-radius:10px;background:#fff;color:var(--encre)}
+input:focus,select:focus,button:focus-visible,a:focus-visible{outline:3px solid var(--or);outline-offset:2px}
+.ligne{display:flex;gap:10px}.ligne>*{flex:1}
+.pers{display:flex;gap:8px;margin-bottom:8px}
+.pers input{flex:1}
+.x{flex:0 0 44px;border:1px solid var(--ligne);background:#fff;border-radius:10px;font-size:20px;color:var(--gris);cursor:pointer}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 17px "Atkinson Hyperlegible",sans-serif;border:0;border-radius:12px;padding:13px 20px;cursor:pointer;text-decoration:none}
+.btn.p{background:var(--baie);color:#fff;width:100%;font-size:18px;padding:16px}
+.btn.s{background:#e8efeb;color:var(--pin)}
+.btn.petit{padding:8px 12px;font-size:15px}
+.exc{display:flex;gap:8px;align-items:center;margin-bottom:8px}.exc select{flex:1}
+.err{color:var(--baie);font-weight:700;margin-top:10px;min-height:1em}
+.res li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-top:1px solid var(--ligne);list-style:none}
+.res ul{padding:0;margin:0}
+.res .act{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.note{font-size:14px;color:var(--gris)}
+.reveal{text-align:center}
+.reveal .pour{font:800 clamp(40px,10vw,72px)/1 "Bricolage Grotesque",sans-serif;color:var(--baie);margin:10px 0 4px}
+.paquet{width:180px;height:150px;margin:20px auto;position:relative;cursor:pointer;background:var(--baie);border-radius:10px;transition:transform .5s}
+.paquet:before{content:"";position:absolute;left:78px;top:0;bottom:0;width:24px;background:var(--or)}
+.paquet:after{content:"";position:absolute;left:0;right:0;top:58px;height:24px;background:var(--or)}
+.paquet.ouvert{transform:scale(.6) rotate(-8deg);opacity:.25}
+@media (prefers-reduced-motion:reduce){.paquet{transition:none}}
+.idees{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:12px}
+.idee{border:1px solid var(--ligne);border-radius:12px;padding:14px;background:#fff}
+.idee b{display:block;margin-bottom:4px}.idee span{display:block;color:var(--gris);font-size:14px;margin-bottom:10px}
+.cache{display:none}
+footer{color:var(--gris);font-size:14px;text-align:center;padding:24px 0 40px}
+</style>
+</head>
+<body>
+<div class="demo">Démo de présentation, les liens Amazon ne sont pas encore des liens affiliés.</div>
+
+<div id="vue-orga">
+<header class="hero"><div class="ruban" aria-hidden="true"></div><div class="wrap">
+<h1>Votre Père Noël secret en 1 minute</h1>
+<p>Entrez les prénoms, lancez le tirage, envoyez à chacun son lien privé. Personne ne voit qui offre à qui, pas même l'organisateur.</p>
+<div class="chips"><span>Gratuit</span><span>Sans inscription</span><span>Idées cadeaux selon le budget</span></div>
+</div></header>
+<main class="wrap">
+<section class="carte">
+<h2>1. L'événement</h2>
+<p class="sous">Noël en famille, entre collègues, anniversaire, départ en retraite...</p>
+<label for="ev">Nom de l'événement</label>
+<input id="ev" value="Noël en famille 2026">
+<div class="ligne">
+<div><label for="budget">Budget par cadeau</label>
+<select id="budget"><option value="10">10 €</option><option value="20" selected>20 €</option><option value="30">30 €</option><option value="50">50 €</option></select></div>
+<div><label for="date">Date de l'échange</label><input id="date" type="date" value="2026-12-24"></div>
+</div>
+</section>
+
+<section class="carte">
+<h2>2. Les participants</h2>
+<p class="sous">Au moins 3 personnes.</p>
+<div id="liste"></div>
+<button class="btn s petit" id="ajout">Ajouter une personne</button>
+</section>
+
+<section class="carte">
+<h2>3. Les exclusions (facultatif)</h2>
+<p class="sous">Par exemple, deux conjoints qui ne doivent pas se tirer l'un l'autre.</p>
+<div id="excs"></div>
+<button class="btn s petit" id="ajoutExc">Ajouter une exclusion</button>
+</section>
+
+<button class="btn p" id="tirer">Lancer le tirage au sort</button>
+<p class="err" id="err" role="alert"></p>
+
+<section class="carte res cache" id="res">
+<h2>C'est tiré !</h2>
+<p class="sous">Envoyez à chaque personne son lien. Il n'affiche que son propre résultat.</p>
+<ul id="liens"></ul>
+<p class="note">Dans la version finale, chacun pourra aussi recevoir son résultat par mail, avec un rappel avant la date.</p>
+</section>
+</main>
+</div>
+
+<div id="vue-res" class="cache">
+<header class="hero"><div class="ruban" aria-hidden="true"></div><div class="wrap">
+<h1 id="r-titre">Bonjour</h1>
+<p id="r-ev"></p>
+</div></header>
+<main class="wrap">
+<section class="carte reveal">
+<p>Ton tirage est prêt. Appuie sur le paquet pour découvrir à qui tu offres un cadeau.</p>
+<div class="paquet" id="paquet" role="button" tabindex="0" aria-label="Ouvrir le paquet"></div>
+<div id="nom" class="cache"><p>Tu offres un cadeau à</p><div class="pour" id="r-pour"></div><p id="r-budget"></p></div>
+</section>
+<section class="carte cache" id="r-idees">
+<h2>Des idées à moins de <span id="r-b"></span> €</h2>
+<p class="sous">Une sélection simple pour ne pas chercher pendant des heures.</p>
+<div class="idees" id="grille"></div>
+</section>
+<p class="note" style="text-align:center"><a href="./">Organiser mon propre tirage</a></p>
+</main>
+</div>
+
+<footer>Démo réalisée par Jeremy, tirage calculé dans votre navigateur.</footer>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var noms=["Marie","Thomas","Julie","Lucas","Emma"];
+function rendreListe(){
+  var l=$("liste");l.innerHTML="";
+  noms.forEach(function(n,i){
+    var d=document.createElement("div");d.className="pers";
+    d.innerHTML='<input aria-label="Prénom '+(i+1)+'" value="'+n.replace(/"/g,"&quot;")+'"><button class="x" aria-label="Retirer">×</button>';
+    d.querySelector("input").oninput=function(e){noms[i]=e.target.value;rendreExc()};
+    d.querySelector("button").onclick=function(){noms.splice(i,1);rendreListe();rendreExc()};
+    l.appendChild(d);
+  });
+}
+var excs=[[0,1]];
+function opts(sel){return noms.map(function(n,i){return '<option value="'+i+'"'+(i==sel?" selected":"")+'>'+(n||"Personne "+(i+1))+'</option>'}).join("")}
+function rendreExc(){
+  var e=$("excs");e.innerHTML="";
+  excs=excs.filter(function(p){return p[0]<noms.length&&p[1]<noms.length});
+  excs.forEach(function(p,k){
+    var d=document.createElement("div");d.className="exc";
+    d.innerHTML='<select aria-label="Personne">'+opts(p[0])+'</select><span>et</span><select aria-label="Personne">'+opts(p[1])+'</select><button class="x" aria-label="Retirer">×</button>';
+    var s=d.querySelectorAll("select");
+    s[0].onchange=function(){p[0]=+this.value};s[1].onchange=function(){p[1]=+this.value};
+    d.querySelector("button").onclick=function(){excs.splice(k,1);rendreExc()};
+    e.appendChild(d);
+  });
+}
+$("ajout").onclick=function(){noms.push("");rendreListe();rendreExc();var ins=document.querySelectorAll("#liste input");ins[ins.length-1].focus()};
+$("ajoutExc").onclick=function(){if(noms.length>1){excs.push([0,1]);rendreExc()}};
+
+function interdit(a,b){return a===b||excs.some(function(p){return (p[0]===a&&p[1]===b)||(p[0]===b&&p[1]===a)})}
+function tirage(n){
+  for(var essai=0;essai<500;essai++){
+    var ordre=[],pris={},ok=true;
+    for(var i=0;i<n&&ok;i++){
+      var c=[];for(var j=0;j<n;j++)if(!pris[j]&&!interdit(i,j))c.push(j);
+      if(!c.length){ok=false;break}
+      var k=c[Math.floor(Math.random()*c.length)];ordre.push(k);pris[k]=1;
+    }
+    if(ok)return ordre;
+  }
+  return null;
+}
+function code(o){var s=unescape(encodeURIComponent(JSON.stringify(o))),r="";for(var i=0;i<s.length;i++)r+=String.fromCharCode(s.charCodeAt(i)^23);return btoa(r).replace(/=+$/,"")}
+function decode(t){var s=atob(t),r="";for(var i=0;i<s.length;i++)r+=String.fromCharCode(s.charCodeAt(i)^23);return JSON.parse(decodeURIComponent(escape(r)))}
+
+$("tirer").onclick=function(){
+  var liste=noms.map(function(n){return n.trim()});
+  $("err").textContent="";
+  if(liste.filter(Boolean).length<3||liste.some(function(n){return !n})){$("err").textContent="Il faut au moins 3 prénoms, sans ligne vide.";return}
+  var t=tirage(liste.length);
+  if(!t){$("err").textContent="Impossible avec ces exclusions. Retirez-en une et relancez.";return}
+  var ev=$("ev").value.trim()||"Père Noël secret",b=$("budget").value,d=$("date").value;
+  var ul=$("liens");ul.innerHTML="";
+  liste.forEach(function(n,i){
+    var url=location.href.split("#")[0]+"#r="+code({e:ev,b:b,d:d,de:n,a:liste[t[i]]});
+    var li=document.createElement("li");
+    var msg=encodeURIComponent("Ton tirage pour « "+ev+" » est prêt : "+url);
+    li.innerHTML='<b>'+n.replace(/</g,"&lt;")+'</b><span class="act"><button class="btn s petit">Copier le lien</button><a class="btn s petit" target="_blank" rel="noopener" href="https://wa.me/?text='+msg+'">WhatsApp</a><a class="btn s petit" href="sms:?&body='+msg+'">SMS</a></span>';
+    li.querySelector("button").onclick=function(){var bt=this;navigator.clipboard&&navigator.clipboard.writeText(url).then(function(){bt.textContent="Copié"})};
+    ul.appendChild(li);
+  });
+  $("res").classList.remove("cache");$("res").scrollIntoView({behavior:"smooth"});
+};
+
+var IDEES={
+ "10":[["Mug original","Un classique qui fait toujours plaisir","mug cadeau original"],["Chaussettes de Noël","Drôles et douillettes","chaussettes noel fantaisie"],["Jeu de cartes d'apéro","Pour rire entre amis","jeu de cartes apero"],["Bougie parfumée","Une ambiance cocooning","bougie parfumee"]],
+ "20":[["Plaid tout doux","Pour les soirées d'hiver","plaid polaire doux"],["Jeu de société rapide","Une partie en 15 minutes","jeu de societe ambiance"],["Coffret thé ou café","Pour les gourmands","coffret the cadeau"],["Lampe veilleuse","Jolie sur une table de nuit","lampe veilleuse deco"]],
+ "30":[["Enceinte Bluetooth","Petite mais puissante","enceinte bluetooth portable"],["Coffret cocktail","Pour jouer au barman","coffret cocktail"],["Livre de recettes","Du nouveau en cuisine","livre de recettes"],["Gourde isotherme","Utile tous les jours","gourde isotherme inox"]],
+ "50":[["Écouteurs sans fil","Un vrai cadeau plaisir","ecouteurs sans fil"],["Appareil à fondue ou raclette","Pour les repas à plusieurs","appareil raclette"],["Lampe de lecture","Pour les lecteurs du soir","lampe de lecture led"],["Coffret jeu de société expert","Des heures de jeu","jeu de societe strategie"]]
+};
+function afficherRes(o){
+  $("vue-orga").classList.add("cache");$("vue-res").classList.remove("cache");
+  $("r-titre").textContent="Bonjour "+o.de;
+  var dt=o.d?new Date(o.d+"T12:00").toLocaleDateString("fr-FR",{day:"numeric",month:"long"}):"";
+  $("r-ev").textContent=o.e+(dt?", échange le "+dt:"");
+  $("r-pour").textContent=o.a;$("r-budget").textContent="Budget : "+o.b+" € environ";$("r-b").textContent=o.b;
+  var g=$("grille");g.innerHTML="";
+  (IDEES[o.b]||IDEES["20"]).forEach(function(x){
+    var a=document.createElement("div");a.className="idee";
+    a.innerHTML='<b>'+x[0]+'</b><span>'+x[1]+'</span><a class="btn s petit" target="_blank" rel="nofollow noopener" href="https://www.amazon.fr/s?k='+encodeURIComponent(x[2])+'">Voir les idées</a>';
+    g.appendChild(a);
+  });
+  function ouvrir(){$("paquet").classList.add("ouvert");$("nom").classList.remove("cache");$("r-idees").classList.remove("cache")}
+  $("paquet").onclick=ouvrir;$("paquet").onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();ouvrir()}};
+}
+var m=location.hash.match(/r=([^&]+)/);
+if(m){try{afficherRes(decode(m[1]))}catch(e){rendreListe();rendreExc()}}else{rendreListe();rendreExc()}
+})();
+</script>
+</body>
+</html>
