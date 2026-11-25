@@ -20,7 +20,7 @@
 - [x] meilleur-elevateur-de-bain/ | meilleur élévateur de bain | Salle de bains | sièges élévateurs de baignoire électriques
 - [x] meilleur-bouton-appel-urgence/ | meilleur bouton d'appel d'urgence senior | Sécurité | pendentif, bracelet, avec ou sans abonnement
 - [x] meilleure-montre-gps-senior/ | meilleure montre GPS pour senior | Sécurité | localisation, appel d'urgence ; rester général sur les maladies, renvoi médecin
-- [ ] meilleure-tablette-senior/ | meilleure tablette pour senior | Vie quotidienne | tablettes simplifiées et classiques
+- [x] meilleure-tablette-senior/ | meilleure tablette pour senior | Vie quotidienne | tablettes simplifiées et classiques
 - [ ] meilleur-cadre-photo-numerique-senior/ | meilleur cadre photo numérique pour senior | Vie quotidienne | wifi, envoi de photos par la famille
 - [ ] meilleur-smartphone-senior/ | meilleur smartphone senior | Vie quotidienne | 4G VoLTE, interface simplifiée
 - [ ] meilleur-plaid-chauffant/ | meilleur plaid chauffant | Chambre et repos | arrêt automatique, minuterie

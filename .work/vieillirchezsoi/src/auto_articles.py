@@ -3390,7 +3390,7 @@ g("livres-audio-personne-agee/",
   "Livre audio pour une personne âgée : comment l'écouter et où le trouver",
   "Vue qui baisse, yeux fatigués : comment écouter des livres audio (enceinte, téléphone, lecteur Daisy), où les trouver et comment tout installer à la maison.",
   """
-<p>Quand la vue baisse, on n'est pas obligé de renoncer aux livres : on peut les écouter. Pour une personne âgée, le plus simple est souvent un appareil qu'elle connaît déjà (téléphone, tablette, lecteur CD) ou une enceinte qui se commande à la voix, avec quelques titres préparés à l'avance par un proche.</p>
+<p>Quand la vue baisse, on n'est pas obligé de renoncer aux livres : on peut les écouter. Pour une personne âgée, le plus simple est souvent un appareil qu'elle connaît déjà (téléphone, tablette, lecteur CD) ou une enceinte qui se commande à la voix, avec quelques titres préparés à l'avance par un proche. Si elle n'a pas encore de tablette, notre sélection de la <a href="{R}meilleure-tablette-senior/">meilleure tablette pour senior</a> peut aider à choisir.</p>
 <p>Le livre audio n'est pas un pis-aller. Beaucoup de lecteurs fidèles découvrent qu'ils retrouvent le plaisir de suivre une histoire sans se battre avec des lettres trop petites ni des yeux qui piquent au bout de dix pages. Le vrai obstacle est rarement l'envie : c'est l'appareil, mal choisi ou mal réglé.</p>
 {CTA}
 <h2>Quel appareil choisir pour écouter ?</h2>
@@ -4432,7 +4432,7 @@ g("cadeau-noel-personne-agee-a-domicile/",
 
 <h2>Les erreurs à éviter à Noël</h2>
 <ul>
-<li><strong>Le gadget compliqué.</strong> Une tablette ou une enceinte connectée sans personne pour l'installer finit dans un tiroir. Si vous l'offrez, offrez aussi l'après-midi pour la régler ensemble.</li>
+<li><strong>Le gadget compliqué.</strong> Une tablette ou une enceinte connectée sans personne pour l'installer finit dans un tiroir. Si vous l'offrez, offrez aussi l'après-midi pour la régler ensemble (notre comparatif de la <a href="{R}meilleure-tablette-senior/">meilleure tablette pour senior</a> indique les modèles les plus simples).</li>
 <li><strong>Le cadeau qui rappelle l'âge.</strong> Un objet « pour vieux » emballé sous le sapin peut vexer. Présentez l'utilité, pas la fragilité : « pour lire plus facilement », pas « parce que tu vois mal ».</li>
 <li><strong>Encore un objet à ranger.</strong> Quand la maison est déjà pleine, préférez un cadeau qui se consomme ou un moment partagé : un repas, une sortie, une journée pour faire ensemble le tri ou les petits travaux.</li>
 <li><strong>Acheter trop tard.</strong> Les commandes de mi-décembre arrivent parfois après le 25. Le Black Friday, le 27 novembre, est un bon moment pour comparer et commander tôt, à condition de vérifier que le prix affiché est vraiment intéressant : voyez notre <a href="{R}black-friday-2026-materiel-maintien-domicile/">liste du matériel de maintien à domicile à surveiller pendant le Black Friday</a>.</li>
@@ -4603,3 +4603,114 @@ g("black-friday-2026-materiel-maintien-domicile/",
        ("Un déambulateur ou un lit médicalisé en promotion, est-ce une bonne idée ?", "Pas forcément. Ces équipements peuvent être loués ou pris en charge sur prescription, avec un réglage par un professionnel. Demandez d'abord l'avis du médecin, du kinésithérapeute ou du pharmacien."),
        ("Peut-on renvoyer un article acheté pendant le Black Friday ?", "Pour un achat en ligne, le droit de rétractation est d'au moins 14 jours à compter du lendemain de la réception, selon service-public.fr, promotion ou non. Les produits ouverts et non retournables pour des raisons d'hygiène en sont exclus.")],
   short="Black Friday maintien à domicile", cat="Vie quotidienne")
+
+AUTO_META['meilleure-tablette-senior/'] = ('🏆', 'sauge')
+g("meilleure-tablette-senior/",
+  "Meilleure tablette pour senior 2026 : 7 modèles comparés",
+  "Meilleure tablette pour senior : 7 modèles simples pour une personne âgée",
+  "Meilleure tablette pour senior en 2026 : Facilotab, iPad, Galaxy Tab A11+, Idea Tab... 7 modèles comparés pour une personne âgée qui veut rester en contact.",
+  """
+<p><strong>En bref</strong> : pour une personne âgée qui découvre le numérique, la meilleure tablette est une Facilotab de 10,1 pouces, dont l'interface à gros boutons se gère à distance par un proche. Pour quelqu'un qui se débrouille déjà un peu, un iPad 11 pouces avec son « Accès d'aide » ou une Samsung Galaxy Tab A11+ de 11 pouces suffisent. Selon l'Insee, 54 % des 75 ans et plus étaient en situation d'illectronisme en 2025 : le bon choix dépend d'abord de qui aidera à l'installer.</p>
+<p>Une tablette, chez un parent âgé, sert surtout à trois choses : voir le visage des petits-enfants en visio, regarder les photos qu'on lui envoie, et garder une fenêtre sur le monde quand on sort moins. Ce n'est pas l'appareil le plus puissant qui gagne, c'est celui qu'elle osera allumer seule un mardi après-midi.</p>
+<p>Nous avons donc comparé sept modèles vendus en France en 2026, des tablettes pensées pour les seniors aux tablettes classiques bien réglées, en regardant ce qui compte vraiment pour une personne âgée : la taille de l'écran, le poids dans la main, le son, la caméra pour la visio et l'aide possible à distance.</p>
+{CTA}
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs (Apple, Samsung, Lenovo, Xiaomi, Boulanger, Darty), sans test en main. Nous n'indiquons que les données lues sur ces pages ; quand une information n'y figure pas, nous écrivons « non précisé ». Aucun prix n'est indiqué, car il change souvent.</div>
+
+<h2>Pourquoi une tablette aide une personne âgée à rester chez elle ?</h2>
+<p>L'isolement est souvent ce qui use le plus le moral quand on vit seul à la maison. Une tablette posée sur un support, au salon, permet de voir sa famille en visio sans tenir un téléphone à bout de bras, de lire le journal en grossissant les caractères, d'écouter la radio ou un livre audio, et de recevoir les photos de la semaine. Pour les proches, c'est aussi un moyen simple de garder un lien quotidien, sans attendre le week-end.</p>
+<p>Le revers, c'est la peur de « faire une bêtise ». Un écran plein d'icônes, des mises à jour qui s'affichent sans prévenir, un mot de passe oublié, et la tablette finit dans un tiroir. Notre conseil : choisissez une tablette simplifiée si personne dans la famille ne peut passer régulièrement, et une tablette classique bien réglée si un enfant ou un petit-enfant habite à côté et peut dépanner. Dans les deux cas, prévoyez un après-midi pour l'installer ensemble.</p>
+
+<h2>Le comparatif en un coup d'œil</h2>
+<table><thead><tr><th>Modèle</th><th>Écran</th><th>Poids</th><th>Réseau</th><th>Aide pour le senior</th><th>Idéal pour</th></tr></thead><tbody>
+<tr><td>Facilotab Nomad</td><td>10,1 pouces</td><td>538 g</td><td>Wifi + 4G</td><td>Interface simplifiée, gestion à distance par un proche</td><td>Notre choix : grand débutant</td></tr>
+<tr><td>Facilotab XXL</td><td>12,7 pouces</td><td>710 g</td><td>Wifi</td><td>Interface simplifiée, gestion à distance</td><td>Vue qui baisse, usage posé sur une table</td></tr>
+<tr><td>Apple iPad 11 pouces (A16)</td><td>11 pouces</td><td>477 g</td><td>Wifi ou 5G</td><td>Accès d'aide intégré</td><td>Famille déjà équipée Apple</td></tr>
+<tr><td>Samsung Galaxy Tab A11+</td><td>11 pouces</td><td>482 g (5G)</td><td>Wifi ou 5G</td><td>Non précisé</td><td>Bon équilibre, grande autonomie</td></tr>
+<tr><td>Lenovo Idea Tab</td><td>11 pouces</td><td>480 g</td><td>Wifi ou 5G</td><td>Non précisé</td><td>Le son et l'image pour les films</td></tr>
+<tr><td>Xiaomi Redmi Pad 2</td><td>11 pouces</td><td>510 g</td><td>Wifi (4G selon version)</td><td>Non précisé</td><td>Petit budget avec un proche pour régler</td></tr>
+<tr><td>Amazon Fire HD 10</td><td>10,1 pouces</td><td>434 g</td><td>Wifi</td><td>Non précisé</td><td>Lecture et vidéo, la plus légère</td></tr>
+</tbody></table>
+<p>Le poids compte plus qu'on ne le croit : au-delà de 500 g, une tablette fatigue vite le poignet si on la tient en lisant. Pour la visio, un support ou un étui pliable règle la question.</p>
+
+<h2>1. Facilotab Nomad : la plus simple pour un grand débutant (notre choix)</h2>
+<p><strong>Pour qui ?</strong> Une personne qui n'a jamais utilisé d'ordinateur ni de smartphone, et dont les proches vivent loin. C'est notre choix parce que l'interface Facilotab affiche de gros boutons clairs et que la famille peut gérer la tablette à distance : ajouter un contact, installer une application, sans se déplacer.</p>
+<ul>
+<li><strong>Points forts</strong> : écran IPS de 10,1 pouces ; Android 15 avec l'interface Facilotab, Google Play et visio par WhatsApp ; messagerie et navigateur simplifiés ; accès à distance pour les proches ; wifi et 4G avec la carte SIM de l'opérateur de votre choix, pratique s'il n'y a pas de box ; 128 Go extensibles par carte microSD ; deux haut-parleurs et prise casque. Le pack comprend un étui, une sacoche, un support et un stylet, selon Boulanger.</li>
+<li><strong>Limites</strong> : autonomie annoncée de 5 heures seulement, il faut prendre l'habitude de la recharger ; définition d'écran modeste (1 280 x 800) ; l'assistance téléphonique au-delà des 30 minutes offertes et l'accès aidant à la plateforme dépendent de l'offre choisie (achat seul ou formule mensuelle sans engagement, selon Facilotab).</li>
+</ul>
+<p>Un mot sur les formules : Facilotab propose un achat sans abonnement, avec une licence perpétuelle, ou une offre mensuelle qui ajoute l'assistance téléphonique en semaine et l'accès aidant. Comparez le coût sur deux ou trois ans avant de choisir.</p>
+<p><a href="{AMZ:Facilotab Nomad 4G tablette senior}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>2. Facilotab XXL : le grand écran pour une vue qui baisse</h2>
+<p><strong>Pour qui ?</strong> Une personne dont la vue a baissé, qui utilisera surtout sa tablette posée sur une table ou sur un support, au salon. Même logiciel simplifié que la Nomad, sur un écran nettement plus grand.</p>
+<ul>
+<li><strong>Points forts</strong> : écran de 12,7 pouces en 2 160 x 1 620 ; Android 15 avec l'interface Facilotab ; 256 Go ; quatre haut-parleurs ; caméra avant de 13 Mpx d'après la fiche technique de Boulanger, utile pour une visio nette.</li>
+<li><strong>Limites</strong> : 710 g, trop lourde pour être tenue longtemps à la main ; wifi seulement, pas de 4G ; stockage non extensible ; autonomie de 5 heures ; la fiche Boulanger se contredit sur la prise casque, vérifiez-la si votre parent utilise un casque filaire.</li>
+</ul>
+<p><a href="{AMZ:Facilotab XXL tablette 12,7 pouces}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>3. Apple iPad 11 pouces (A16) : si la famille est déjà sur iPhone</h2>
+<p><strong>Pour qui ?</strong> Un parent dont les enfants et petits-enfants ont un iPhone : la visio FaceTime et le partage de photos fonctionnent tout de suite, et chacun sait où se trouvent les réglages pour dépanner.</p>
+<ul>
+<li><strong>Points forts</strong> : écran Liquid Retina de 11 pouces, 2 360 x 1 640 ; 477 g en version wifi ; jusqu'à 10 heures de navigation ou de vidéo selon Apple ; caméra avant de 12 Mpx placée sur le grand côté, avec Cadrage centré qui garde le visage au milieu de l'image pendant la visio ; haut-parleurs stéréo. Surtout, l'<strong>Accès d'aide</strong> d'Apple remplace l'écran habituel par une grille de grosses tuiles (Appels, Appareil photo, Messages, Photos, Musique, Loupe) : c'est le mode le plus abouti que nous ayons vu sur une tablette classique.</li>
+<li><strong>Limites</strong> : pas de prise casque, il faut un casque Bluetooth ou un adaptateur USB-C ; pas de carte mémoire, choisissez la capacité au départ (128 Go suffisent pour la visio et les photos) ; l'Accès d'aide doit être configuré par un proche, avec un code.</li>
+</ul>
+<p><a href="{AMZ:Apple iPad 11 pouces A16}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>4. Samsung Galaxy Tab A11+ : l'autonomie pour toute la journée</h2>
+<p><strong>Pour qui ?</strong> Une personne déjà un peu à l'aise avec un smartphone Android, qui oublie volontiers de recharger ses appareils. Samsung annonce jusqu'à 15 heures de vidéo.</p>
+<ul>
+<li><strong>Points forts</strong> : écran de 11 pouces en 1 920 x 1 200 ; Android 16 ; 128 ou 256 Go, extensibles par microSD ; 482 g en version 5G ; prise casque ; existe en wifi seul ou en 5G. C'est d'ailleurs la tablette que la boutique Ordissimo propose aujourd'hui à la place de son ancienne Celia.</li>
+<li><strong>Limites</strong> : caméra avant de 5 Mpx, correcte pour la visio sans plus ; le nombre de haut-parleurs varie selon les fiches (deux sur la page Samsung) ; mode simplifié non précisé sur la page produit, il faudra agrandir soi-même les icônes et le texte dans les réglages.</li>
+</ul>
+<p><a href="{AMZ:Samsung Galaxy Tab A11+}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>5. Lenovo Idea Tab : pour les films et les émissions de télé</h2>
+<p><strong>Pour qui ?</strong> Un parent qui regardera surtout des vidéos, des émissions en replay ou des concerts, et qui apprécie un son clair. Lenovo annonce quatre haut-parleurs Dolby Atmos.</p>
+<ul>
+<li><strong>Points forts</strong> : écran IPS de 11 pouces en 2 560 x 1 600, lumineux (500 nits selon Lenovo) ; 480 g ; jusqu'à 12 heures de vidéo en streaming et 14 heures de navigation ; 128 ou 256 Go, extensibles par microSD ; prise casque ; stylet inclus selon la configuration.</li>
+<li><strong>Limites</strong> : caméra avant de 5 Mpx ; aucun mode simplifié mentionné sur la fiche Lenovo ; vérifiez la version exacte (wifi ou 5G, quantité de mémoire) avant de commander.</li>
+</ul>
+<p><a href="{AMZ:Lenovo Idea Tab 11 pouces}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>6. Xiaomi Redmi Pad 2 : un bel écran pour un petit budget</h2>
+<p><strong>Pour qui ?</strong> Une famille qui cherche une tablette abordable et dont un proche se chargera de la configuration. L'écran est l'un des plus fins de cette sélection.</p>
+<ul>
+<li><strong>Points forts</strong> : écran de 11 pouces en 2 560 x 1 600 ; batterie de 9 000 mAh ; 128 ou 256 Go, extensibles ; 510 g.</li>
+<li><strong>Limites</strong> : surcouche HyperOS de Xiaomi, moins connue que celle de Samsung pour dépanner à distance ; chargeur non inclus selon la page de Xiaomi (les fiches marchandes disent l'inverse, vérifiez) ; prise casque et haut-parleurs non précisés par Xiaomi ; caméra avant de 5 Mpx.</li>
+</ul>
+<p><a href="{AMZ:Xiaomi Redmi Pad 2}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>7. Amazon Fire HD 10 : la plus légère pour lire et regarder</h2>
+<p><strong>Pour qui ?</strong> Une personne qui veut surtout lire, écouter des livres audio et regarder des vidéos, sans passer d'appels en visio tous les jours. C'est la plus légère de notre sélection.</p>
+<ul>
+<li><strong>Points forts</strong> : écran de 10,1 pouces en 1 920 x 1 200 ; 434 g ; autonomie annoncée de 13 heures ; prise casque ; 32 ou 64 Go extensibles par microSD.</li>
+<li><strong>Limites</strong> : modèle de 2023 ; système Fire OS d'Amazon, avec sa propre boutique d'applications, ce qui complique l'installation de certaines applis de visio ou de banque : vérifiez que celles dont votre parent a besoin y sont ; 3 Go de mémoire vive, à réserver aux usages simples ; aucun mode simplifié précisé.</li>
+</ul>
+<p><a href="{AMZ:Amazon Fire HD 10 tablette}" """ + A + """>Voir sur Amazon</a></p>
+
+<h2>Tablette pour senior ou tablette classique : que choisir ?</h2>
+<p>Une tablette dite « senior », comme la Facilotab, n'est pas une tablette différente à l'intérieur : c'est une tablette Android sur laquelle on a posé une interface plus simple et un service d'aide. Ce que vous payez en plus, c'est cette tranquillité, et la possibilité pour un proche de tout régler de loin.</p>
+<p>Une tablette classique peut très bien convenir si quelqu'un passe régulièrement. Par exemple, une fille qui vit à dix minutes peut configurer un iPad avec l'Accès d'aide, ne laisser que trois tuiles (Appels, Photos, Appareil photo) et dépanner au besoin. Le piège, c'est l'inverse : offrir une tablette classique à un parent isolé, que personne ne peut aider, et qui ne l'allumera plus au bout de quinze jours.</p>
+<p>Un mot sur l'Ordissimo Celia, souvent citée dans les comparatifs : elle tourne sous Android 10 et apparaît comme épuisée chez Darty, et la boutique Ordissimo ne la propose plus. Nous ne la conseillons plus pour un achat neuf.</p>
+
+<h2>Comment choisir une tablette pour une personne âgée ?</h2>
+<p><strong>La taille d'écran.</strong> 10 à 11 pouces est le bon compromis entre lisibilité et poids. Au-delà, comme la Facilotab XXL, la tablette se pose sur une table plutôt qu'elle ne se tient.</p>
+<p><strong>Le poids.</strong> Entre 430 et 540 g pour la plupart des modèles de ce comparatif. Si votre parent a de l'arthrose ou peu de force dans les mains, prévoyez un étui qui fait support : il n'aura jamais à la tenir. <a href="{AMZ:etui support tablette 11 pouces}" """ + A + """>Voir les étuis support pour tablette</a></p>
+<p><strong>Le son.</strong> Les haut-parleurs d'une tablette restent petits. Si l'audition baisse, un casque sans fil change tout pour la visio et les vidéos : notre <a href="{R}meilleur-casque-tv-senior/">comparatif des casques TV pour seniors</a> indique ceux qui se connectent en Bluetooth.</p>
+<p><strong>La connexion.</strong> Sans box à la maison, il faut une tablette 4G ou 5G avec une carte SIM, comme la Facilotab Nomad. Avec une box, le wifi suffit.</p>
+<p><strong>L'aide.</strong> Avant d'acheter, demandez-vous qui répondra quand votre parent appellera parce que « ça ne marche plus ». C'est la vraie question.</p>
+<p>Les erreurs fréquentes : garder les notifications de toutes les applis (elles affolent), oublier de noter les mots de passe sur une feuille rangée en lieu sûr, et installer trop d'applications le premier jour. Commencez par une seule : la visio avec la famille.</p>
+
+<h2>Se faire aider gratuitement près de chez soi</h2>
+<p>Votre parent n'est pas seul face à sa tablette. Les conseillers numériques, financés par l'État, proposent des rendez-vous individuels ou des ateliers gratuits pour prendre en main un appareil, dans les mairies, les médiathèques ou les espaces France Services. D'après le tableau de bord de l'Agence nationale de la cohésion des territoires, les retraités sont le premier public accompagné, et « prendre en main du matériel » le premier thème. Chez Vieillir chez soi, nous conseillons de prendre ce rendez-vous dans le mois qui suit l'achat : c'est là que l'habitude se prend.</p>
+<p>Une fois la tablette apprivoisée, elle ouvre d'autres plaisirs : écouter des romans lus par des comédiens quand la lecture fatigue, par exemple. Notre guide pour <a href="{R}livres-audio-personne-agee/">écouter des livres audio quand on est âgé</a> explique comment s'y prendre, et Audible propose un essai gratuit avec un livre audio offert, résiliable à tout moment. <a href="{AUDIBLE}" """ + A + """>Essayer Audible gratuitement</a></p>
+<p>Si vous cherchez plutôt un appareil pour téléphoner, voyez notre sélection du <a href="{R}meilleur-telephone-portable-senior/">meilleur téléphone portable pour senior</a>. Et si la tablette est un cadeau, d'autres idées sont réunies dans notre page <a href="{R}cadeau-noel-personne-agee-a-domicile/">cadeau de Noël pour une personne âgée à domicile</a>. Pour le reste de la maison, notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a> fait le tour de chaque pièce.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.insee.fr/fr/statistiques/8739245" target="_blank" rel="noopener">Insee, Insee Focus n° 376 sur les compétences numériques</a>, <a href="https://support.apple.com/fr-fr/guide/assistive-access-ipad/welcome/ipados" target="_blank" rel="noopener">Apple, Guide de l'Accès d'aide sur iPad</a>, <a href="https://conseiller-numerique.gouv.fr/" target="_blank" rel="noopener">Conseiller numérique, site officiel</a> (vérifié le 25 novembre 2026)</p>
+""",
+  faq=[("Quelle est la tablette la plus simple pour une personne âgée ?", "Une tablette à interface simplifiée comme la Facilotab, avec de gros boutons et une gestion à distance par un proche, est la plus simple pour un grand débutant. Pour quelqu'un qui a déjà utilisé un smartphone, un iPad réglé avec l'Accès d'aide d'Apple offre une grille de grosses tuiles tout aussi claire."),
+       ("Une tablette aide-t-elle une personne âgée à rompre l'isolement ?", "Elle peut y contribuer, surtout grâce à la visio avec la famille et au partage de photos. Mais elle ne remplace pas les visites : sans quelqu'un pour l'installer et répondre aux questions, beaucoup de tablettes ne servent plus au bout de quelques semaines."),
+       ("Faut-il un abonnement pour une tablette senior ?", "Non, pas forcément. Facilotab propose par exemple un achat sans abonnement et une formule mensuelle sans engagement qui ajoute l'assistance téléphonique et l'accès aidant. Les tablettes classiques comme l'iPad ou la Galaxy Tab A11+ n'ont pas d'abonnement, mais pas d'assistance dédiée non plus."),
+       ("Quelle taille d'écran choisir pour un senior ?", "10 à 11 pouces est le bon compromis entre lisibilité et poids, entre 430 et 540 g pour les modèles de ce comparatif. Un écran de 12,7 pouces comme la Facilotab XXL est plus confortable pour une vue qui baisse, mais il pèse 710 g et s'utilise posé."),
+       ("Avez-vous testé ces tablettes ?", "Non. Cette sélection repose uniquement sur les fiches des fabricants et des grands revendeurs. Nous n'indiquons que ce qui y figure, sans note ni avis de prise en main.")],
+  short="Top 7 tablettes pour senior", cat="Vie quotidienne")
