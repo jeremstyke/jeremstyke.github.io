@@ -34,13 +34,13 @@
 </head>
 <body>
 <div style="background:#fff3cd;color:#6b5300;text-align:center;font-size:13px;padding:8px">Démo : aperçu de la page que verra le destinataire.</div>
-<header><a href="./">Envoi<span>XL</span></a></header>
+<header id="hdr"><a href="./">Envoi<span>XL</span></a></header>
 <main>
   <div class="card" id="ok">
     <img class="logo hidden" id="logo" alt="">
     <div class="big">📦</div>
     <h1 id="name">photos-mariage.zip</h1>
-    <p class="sub"><span id="size">2,4 Go</span> - disponible encore 7 jour(s)</p>
+    <p class="sub"><span id="size">2,4 Go</span> - disponible encore <span id="days">7</span> jours</p>
     <p class="message hidden" id="message"></p>
     <a class="btn" href="#" onclick="this.textContent='Démo : pas de vrai fichier';return false">Télécharger</a>
     <div class="report">
@@ -59,12 +59,14 @@
     <a class="btn" href="./">Envoyer un fichier</a>
   </div>
 </main>
-<footer style="background:rgba(255,255,255,.85)">EnvoiXL - envoyer un gros fichier gratuitement</footer>
+<footer style="background:rgba(255,255,255,.9)">Envoyé avec <a href="./" style="color:var(--accent);font-weight:700;text-decoration:none">EnvoiXL</a> - envoyez vos fichiers à votre image, <a href="./" style="color:var(--accent)">essayez gratuitement</a></footer>
 <script>
 let data = {};
 try { data = JSON.parse(sessionStorage.getItem("envoixl-demo") || "{}"); } catch (e) {}
 if (data.name) document.getElementById("name").textContent = data.name;
 if (data.size) document.getElementById("size").textContent = data.size;
+if (data.days) document.getElementById("days").textContent = data.days;
+if (data.pro) document.getElementById("hdr").style.visibility = "hidden";
 if (data.logo) { const l = document.getElementById("logo"); l.src = data.logo; l.classList.remove("hidden"); }
 if (data.message) { const m = document.getElementById("message"); m.textContent = data.message; m.classList.remove("hidden"); }
 if (data.bg) document.body.style.background = "#111 url(" + data.bg + ") center/cover no-repeat fixed";

@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>EnvoiXL - Envoyer un fichier jusqu'à 100 Go</title>
-<meta name="description" content="Envoyez un fichier jusqu'à 100 Go, sans inscription et sans abonnement. Gratuit jusqu'à 5 Go. Lien de téléchargement valable 7 jours.">
+<title>EnvoiXL - Envoyez vos fichiers à votre image</title>
+<meta name="description" content="Envoyez vos fichiers avec une page de téléchargement à votre image : logo, fond, message. Pour photographes, vidéastes et agences. Lien de téléchargement valable 7 jours.">
 <style>
   :root { --bg:#f5f6fa; --card:#fff; --text:#16181d; --muted:#6b7080; --accent:#2f5bea; --accent2:#1d3fb8; --line:#e3e5ec; --ok:#17924a; --err:#c8323c; }
   * { box-sizing:border-box; }
@@ -57,6 +57,15 @@
   .plan-note { color:var(--muted); font-size:12px; text-align:center; margin:8px 0 0; }
   .price { margin-top:12px; background:#f0f3ff; border-radius:12px; padding:12px; font-size:14px; }
   .price b { color:var(--accent2); }
+  .tag { background:var(--accent); color:#fff; font-size:11px; border-radius:6px; padding:2px 6px; vertical-align:middle; }
+  .pv { height:auto !important; padding:18px; }
+  .pv-card { background:#fff; border-radius:10px; width:70%; padding:12px; text-align:center; box-shadow:0 4px 14px rgba(0,0,0,.1); }
+  .pv-logo { color:var(--muted); font-size:12px; border:1px dashed var(--line); border-radius:6px; padding:8px; }
+  .pv-logo img { max-height:40px; max-width:120px; object-fit:contain; background:none; padding:0; display:block; margin:0 auto; }
+  .pv-logo.has { border:0; padding:0; }
+  .pv-line { height:6px; background:var(--line); border-radius:4px; margin:10px 15%; }
+  .pv-btn { background:var(--accent); color:#fff; border-radius:6px; font-size:11px; padding:5px; }
+  .plan span { line-height:1.5; }
   ul.points { list-style:none; padding:0; margin:22px 0 0; color:var(--muted); font-size:14px; }
   ul.points li { margin:6px 0; }
   footer { text-align:center; color:var(--muted); font-size:13px; padding:20px; }
@@ -68,34 +77,35 @@
 <main>
   <div class="card">
     <div id="step-pick">
-      <div class="hero">Jusqu'à <b>100 Go</b></div>
-      <h1>Envoyez vos très gros fichiers</h1>
-      <p class="sub">Gratuit jusqu'à 5 Go. Au-delà, un paiement unique, sans abonnement ni compte.</p>
+      <div class="hero">Pour photographes, vidéastes et agences</div>
+      <h1>Envoyez vos fichiers à votre image</h1>
+      <p class="sub">Votre logo, votre fond et votre message sur la page que voit votre client. Jusqu'à 100 Go.</p>
       <label class="drop" id="drop">
         <div class="big">📦</div>
-        <p><b>Glissez votre fichier ici</b><br>ou cliquez pour le choisir<br><small>jusqu'à 100 Go</small></p>
+        <p><b>Glissez votre fichier ici</b><br>ou cliquez pour le choisir<br><small>gratuit jusqu'à 20 Go</small></p>
         <input type="file" id="input">
       </label>
       <div class="file hidden" id="file"></div>
-      <div class="price hidden" id="price"></div>
-      <details class="brand">
-        <summary>🎨 Personnaliser la page de téléchargement</summary>
+      <details class="brand" open>
+        <summary>🎨 Votre page de téléchargement <span class="tag">Pro</span></summary>
         <div class="field"><label>Votre logo (PNG, JPG ou WebP, 2 Mo max)</label><input type="file" id="logo" accept="image/png,image/jpeg,image/webp"></div>
         <div class="field"><label>Image de fond (5 Mo max)</label><input type="file" id="bg" accept="image/png,image/jpeg,image/webp"></div>
         <div class="field"><label>Ou une couleur de fond</label><input type="color" id="color" value="#f5f6fa"></div>
-        <div class="field"><label>Message pour le destinataire</label><textarea id="message" rows="2" maxlength="200" placeholder="Ex : Voici les photos du mariage !"></textarea></div>
-        <div class="pv" id="pv"></div>
+        <div class="field"><label>Message pour votre client</label><textarea id="message" rows="2" maxlength="200" placeholder="Ex : Voici les photos de votre mariage, merci pour votre confiance !"></textarea></div>
+        <div class="field"><label>Aperçu de ce que verra votre client</label></div>
+        <div class="pv" id="pv"><div class="pv-card"><div id="pv-logo" class="pv-logo">Votre logo</div><div class="pv-line"></div><div class="pv-btn">Télécharger</div></div></div>
       </details>
+      <div class="price hidden" id="price"></div>
       <button id="send" disabled>Envoyer</button>
       <div class="plans">
-        <div class="plan"><b>Gratuit</b><span>jusqu'à 5 Go</span></div>
-        <div class="plan"><b>1,99 €</b><span>jusqu'à 50 Go</span></div>
-        <div class="plan best"><b>3,99 €</b><span>jusqu'à 100 Go</span></div>
+        <div class="plan"><b>Gratuit</b><span>20 Go<br>7 jours<br>page EnvoiXL</span></div>
+        <div class="plan best"><b>2,99 €</b><span>l'envoi<br>100 Go, 30 jours<br>à votre image</span></div>
+        <div class="plan"><b>7,99 €</b><span>par mois<br>envois Pro<br>illimités</span></div>
       </div>
-      <p class="plan-note">Paiement unique par envoi. Pas d'abonnement, pas de compte.</p>
-      <p class="plan-note"><a href="#" id="fake" style="color:var(--accent)">Démo : simuler un fichier de 42 Go</a></p>
+      <p class="plan-note">Envoi Pro : paiement unique, sans compte. Abonnement pour ceux qui envoient souvent.</p>
+      <p class="plan-note"><a href="#" id="fake" style="color:var(--accent)">Démo : simuler un fichier de 12 Go</a></p>
       <ul class="points">
-        <li>✓ Lien valable 7 jours</li>
+        <li>✓ Votre marque, pas la nôtre, sur la page Pro</li>
         <li>✓ Aucun compte à créer</li>
         <li>✓ Fichiers supprimés automatiquement</li>
       </ul>
@@ -115,7 +125,7 @@
       <p class="sub">Partagez ce lien. Il reste valable 7 jours.</p>
       <div class="link"><input id="out" readonly><button id="copy">Copier</button></div>
       <p class="msg ok hidden" id="copied">Lien copié</p>
-      <button id="view" onclick="window.open('d.html','_blank')">Voir la page du destinataire</button>
+      <button id="view" onclick="window.open('d.html','_blank')">Voir la page de votre client</button>
       <button class="ghost" id="again">Envoyer un autre fichier</button>
     </div>
 
@@ -125,10 +135,25 @@
 <footer>EnvoiXL - démo</footer>
 
 <script>
-const FREE = 5 * 1024 ** 3;
-const MAX = 100 * 1024 ** 3;
 const GB = 1024 ** 3;
-function priceFor(size) { return size <= FREE ? 0 : size <= 50 * GB ? 1.99 : 3.99; }
+const FREE = 20 * GB;
+const MAX = 100 * GB;
+function isPro() { return !!(brand.logo || brand.bg || brand.colorSet || $("message").value.trim()); }
+function priceFor(size) { return (size > FREE || isPro()) ? 2.99 : 0; }
+function updatePrice() {
+  if (!file) return;
+  const price = priceFor(file.size);
+  const eur = price.toFixed(2).replace(".", ",") + " €";
+  if (price) {
+    const why = isPro() ? "Page à votre image" : "Fichier de plus de 20 Go";
+    $("price").innerHTML = "<b>Envoi Pro : " + eur + "</b><br>" + why + ", jusqu'à 100 Go, lien valable 30 jours. Paiement unique.";
+    $("price").classList.remove("hidden");
+    $("send").textContent = "Payer " + eur + " et envoyer";
+  } else {
+    $("price").classList.add("hidden");
+    $("send").textContent = "Envoyer gratuitement";
+  }
+}
 const PARALLEL = 3;
 const $ = (id) => document.getElementById(id);
 let file = null, state = null, cancelled = false;
@@ -153,19 +178,11 @@ function pick(f) {
   const s = document.createElement("small"); s.textContent = " - " + fmt(f.size);
   $("file").append(b, s);
   $("file").classList.remove("hidden");
-  const price = priceFor(f.size);
-  if (price) {
-    $("price").innerHTML = "Ce fichier dépasse 5 Go : envoi à <b>" + price.toFixed(2).replace(".", ",") + " €</b>, paiement unique.";
-    $("price").classList.remove("hidden");
-    $("send").textContent = "Payer " + price.toFixed(2).replace(".", ",") + " € et envoyer";
-  } else {
-    $("price").classList.add("hidden");
-    $("send").textContent = "Envoyer gratuitement";
-  }
+  updatePrice();
   $("send").disabled = false;
 }
 
-$("fake").addEventListener("click", (e) => { e.preventDefault(); pick({ name: "rushes-tournage-4K.zip", size: 42 * GB, type: "application/zip" }); });
+$("fake").addEventListener("click", (e) => { e.preventDefault(); pick({ name: "photos-mariage-Julie-et-Tom.zip", size: 12 * GB, type: "application/zip" }); });
 $("input").addEventListener("change", (e) => pick(e.target.files[0]));
 const drop = $("drop");
 ["dragenter", "dragover"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("over"); }));
@@ -177,8 +194,11 @@ function preview() {
   const pv = $("pv");
   pv.style.backgroundImage = brand.bg ? "url(" + URL.createObjectURL(brand.bg) + ")" : "";
   pv.style.backgroundColor = $("color").value;
-  pv.innerHTML = "";
-  if (brand.logo) { const i = document.createElement("img"); i.src = URL.createObjectURL(brand.logo); pv.append(i); }
+  const l = $("pv-logo");
+  l.innerHTML = "";
+  if (brand.logo) { const i = document.createElement("img"); i.src = URL.createObjectURL(brand.logo); l.append(i); l.classList.add("has"); }
+  else { l.textContent = "Votre logo"; l.classList.remove("has"); }
+  updatePrice();
 }
 function pickImg(kind, max) {
   return (e) => {
@@ -191,6 +211,7 @@ function pickImg(kind, max) {
 $("logo").addEventListener("change", pickImg("logo", 2));
 $("bg").addEventListener("change", pickImg("bg", 5));
 $("color").addEventListener("input", () => { brand.colorSet = true; preview(); });
+$("message").addEventListener("input", updatePrice);
 preview();
 
 async function sendBrand(kind) {
@@ -256,7 +277,7 @@ $("send").addEventListener("click", async () => {
     }, 100);
   });
   if (cancelled) return;
-  const data = {
+  const data = { pro: isPro(), days: isPro() || file.size > FREE ? 30 : 7,
     name: file.name, size: fmt(file.size),
     color: brand.colorSet ? $("color").value : "",
     message: $("message").value.slice(0, 200),
