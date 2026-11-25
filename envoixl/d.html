@@ -37,6 +37,28 @@
   .ad-inline { margin-top:20px; border:1px dashed #E2C96F; background:var(--ad); border-radius:10px; padding:16px; color:#7a6420; font-size:13px; display:none; }
   footer { text-align:center; color:var(--slate); font-size:13px; padding:18px; background:rgba(255,255,255,.92); }
   footer a { color:var(--cyan); font-weight:700; text-decoration:none; }
+  .card.gallery { max-width:1040px; text-align:left; }
+  .gallery .top { display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap; margin-bottom:20px; }
+  .gallery .top h1 { font-size:24px; }
+  .gallery .top .meta { margin:0; }
+  .gallery .brand-logo { margin:0 0 18px; }
+  .gallery .dl { display:inline-block; padding:12px 20px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:8px; margin-top:8px; }
+  .ph { position:relative; aspect-ratio:3/2; border-radius:6px; overflow:hidden; border:0; padding:0; cursor:zoom-in; background:#ddd; }
+  .ph img, .ph .fake { width:100%; height:100%; object-fit:cover; display:block; }
+  .ph .fake { display:flex; align-items:flex-end; padding:6px; color:rgba(255,255,255,.85); font-size:11px; }
+  .lb { position:fixed; inset:0; background:#0D0F15; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:10; padding:20px; }
+  .lb .view { max-width:min(1100px,100%); max-height:78vh; width:100%; display:flex; justify-content:center; }
+  .lb img, .lb .fake { max-width:100%; max-height:78vh; border-radius:6px; }
+  .lb .fake { width:min(900px,100%); aspect-ratio:3/2; display:flex; align-items:center; justify-content:center; color:#fff; }
+  .lb .bar { display:flex; gap:10px; align-items:center; margin-top:16px; color:#fff; font-size:14px; }
+  .lb button { background:rgba(255,255,255,.12); color:#fff; border:0; border-radius:8px; padding:10px 14px; font:inherit; cursor:pointer; }
+  .lb button.main { background:var(--accent); font-weight:700; }
+  .section-t { font-weight:700; margin:24px 0 4px; font-size:15px; }
+  .files { list-style:none; padding:0; margin:0 0 20px; text-align:left; font-size:14px; border:1px solid var(--line); border-radius:10px; max-height:220px; overflow:auto; }
+  .files li { display:flex; justify-content:space-between; gap:10px; padding:9px 12px; border-bottom:1px solid var(--line); }
+  .files li:last-child { border-bottom:0; }
+  .files li span { color:var(--slate); white-space:nowrap; }
   .hidden { display:none !important; }
   @media (max-width: 820px) { .ad { display:none; } .free .ad-inline { display:block; } }
 </style>
@@ -48,11 +70,15 @@
   <div class="ad" id="ad-left">Publicité<br><small>emplacement 300 x 250</small></div>
   <div class="card" id="card">
     <img class="brand-logo hidden" id="logo" alt="">
+    <div class="top" id="top">
+      <div><h1 id="name">photos-mariage.zip</h1>
+      <p class="meta"><span id="size">12 Go</span>, disponible encore <span id="days">7</span> jours</p></div>
+    </div>
+    <ul class="files hidden" id="list"></ul>
     <div id="player-zone" class="hidden"></div>
-    <h1 id="name">photos-mariage.zip</h1>
-    <p class="meta"><span id="size">12 Go</span>, disponible encore <span id="days">7</span> jours</p>
     <p class="message hidden" id="message"></p>
     <a class="dl" href="#" id="dl">Télécharger</a>
+    <div id="photos" class="hidden"><p class="section-t" id="ph-t"></p><div class="grid" id="grid"></div></div>
     <div class="ad-inline">Publicité</div>
     <div class="report">
       <button id="rep">Signaler ce fichier</button>
@@ -65,6 +91,8 @@
   </div>
   <div class="ad" id="ad-right">Publicité<br><small>emplacement 300 x 250</small></div>
 </main>
+<div class="lb hidden" id="lb" role="dialog" aria-label="Photo en grand"><div class="view" id="lb-view"></div>
+  <div class="bar"><button id="lb-prev" aria-label="Photo précédente">Précédente</button><span id="lb-n"></span><button id="lb-next" aria-label="Photo suivante">Suivante</button><button class="main" id="lb-dl">Télécharger cette photo</button><button id="lb-x">Fermer</button></div></div>
 <footer id="foot">Envoyé avec <a href="./">EnvoiXL</a>. Envoyez vos fichiers à votre image, <a href="./">essayez gratuitement</a>.</footer>
 <script>
 let data = {};
@@ -74,6 +102,22 @@ if (data.name) $("name").textContent = data.name;
 if (data.size) $("size").textContent = data.size;
 if (data.days) $("days").textContent = data.days;
 
+const files = data.files || [];
+const photos = files.filter((f) => f.k === "image");
+const videos = files.filter((f) => f.k === "video");
+const hues = [32, 18, 95, 140, 200, 260, 330, 45, 10, 170];
+function fakePhoto(i, label) {
+  const d = document.createElement("div"); d.className = "fake";
+  const h = hues[i % hues.length];
+  d.style.background = "linear-gradient(" + (120 + i * 23) + "deg,hsl(" + h + ",35%,62%),hsl(" + (h + 40) + ",30%,32%))";
+  d.textContent = label || ""; return d;
+}
+if (files.length > 1 && !data.gallery) {
+  const ul = $("list"); ul.classList.remove("hidden");
+  files.forEach((f) => { const li = document.createElement("li"); const n = document.createElement("b"); n.textContent = f.n; n.style.fontWeight = "500"; const z = document.createElement("span"); z.textContent = f.s; li.append(n, z); ul.append(li); });
+  $("dl").textContent = "Tout télécharger";
+}
+
 if (data.pro) {
   document.title = data.name || "Vos fichiers";
   $("hdr").style.visibility = "hidden";
@@ -82,21 +126,57 @@ if (data.pro) {
   if (data.message) { $("message").textContent = data.message; $("message").classList.remove("hidden"); }
   if (data.bg) document.body.style.background = "#222 url(" + data.bg + ") center/cover no-repeat fixed";
   else if (data.color) document.body.style.background = data.color;
-  if (data.video) {
-    $("card").classList.add("wide");
-    const zone = $("player-zone"); zone.classList.remove("hidden");
-    if (data.src) {
-      const v = document.createElement("video");
-      v.controls = true; v.playsInline = true; v.preload = "metadata"; v.src = data.src;
-      v.onerror = () => { zone.innerHTML = ""; zone.append(poster()); };
-      zone.append(v);
-    } else zone.append(poster());
-    $("dl").textContent = "Télécharger le film";
+  if (data.gallery && (photos.length || videos.length)) {
+    $("card").classList.add("gallery");
+    $("top").append($("dl"));
+    $("dl").textContent = files.length > 1 ? "Tout télécharger (" + data.size + ")" : "Télécharger";
+    if (videos.length) {
+      const zone = $("player-zone"); zone.classList.remove("hidden");
+      const v0 = videos[0];
+      if (v0.src) {
+        const v = document.createElement("video");
+        v.controls = true; v.playsInline = true; v.preload = "metadata"; v.src = v0.src;
+        v.onerror = () => { zone.innerHTML = ""; zone.append(poster()); };
+        zone.append(v);
+      } else zone.append(poster());
+    }
+    if (photos.length) {
+      $("photos").classList.remove("hidden");
+      $("ph-t").textContent = photos.length + " photo" + (photos.length > 1 ? "s" : "");
+      photos.forEach((f, i) => {
+        const b = document.createElement("button"); b.className = "ph"; b.type = "button"; b.setAttribute("aria-label", "Voir " + f.n);
+        if (f.src) { const im = document.createElement("img"); im.loading = "lazy"; im.src = f.src; im.alt = f.n; b.append(im); }
+        else b.append(fakePhoto(i, f.n));
+        b.onclick = () => openLb(i);
+        $("grid").append(b);
+      });
+    }
   }
 } else {
   document.body.classList.add("free");
   $("ad-right").remove();
 }
+
+let cur = 0;
+function openLb(i) {
+  cur = (i + photos.length) % photos.length;
+  const f = photos[cur], view = $("lb-view"); view.innerHTML = "";
+  if (f.src) { const im = document.createElement("img"); im.src = f.src; im.alt = f.n; view.append(im); }
+  else view.append(fakePhoto(cur, f.n));
+  $("lb-n").textContent = (cur + 1) + " / " + photos.length;
+  $("lb-dl").textContent = "Télécharger cette photo";
+  $("lb").classList.remove("hidden");
+}
+$("lb-prev").onclick = () => openLb(cur - 1);
+$("lb-next").onclick = () => openLb(cur + 1);
+$("lb-x").onclick = () => $("lb").classList.add("hidden");
+$("lb-dl").onclick = () => { const f = photos[cur]; if (f.src) { const a = document.createElement("a"); a.href = f.src; a.download = f.n; a.click(); } else $("lb-dl").textContent = "Démo : pas de vrai fichier"; };
+document.addEventListener("keydown", (e) => {
+  if ($("lb").classList.contains("hidden")) return;
+  if (e.key === "Escape") $("lb-x").click();
+  if (e.key === "ArrowLeft") openLb(cur - 1);
+  if (e.key === "ArrowRight") openLb(cur + 1);
+});
 
 function poster() {
   const b = document.createElement("button");

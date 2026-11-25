@@ -186,7 +186,7 @@
           <label class="drop" id="drop">
             <strong>Déposez vos fichiers ici</strong>
             <span id="drop-hint">ou cliquez pour les choisir, jusqu'à 100 Go</span>
-            <input type="file" id="input">
+            <input type="file" id="input" multiple>
           </label>
           <div class="file hidden" id="file"></div>
 
@@ -206,7 +206,7 @@
                 <input type="color" id="color" value="#8A5A44" aria-label="Autre couleur">
               </div>
             </div>
-            <label class="vopt"><input type="checkbox" id="video" checked><span><b>Lecture vidéo en ligne</b><br>Votre client regarde la vidéo sur la page, puis la télécharge s'il le souhaite.</span></label>
+            <label class="vopt"><input type="checkbox" id="video" checked><span><b>Galerie en ligne</b><br>Votre client voit les photos et regarde les vidéos sur la page, puis télécharge tout ou seulement ce qu'il veut.</span></label>
             <div class="field"><label for="message">Message pour votre client</label>
               <textarea id="message" rows="2" maxlength="200" placeholder="Merci pour votre confiance, voici les photos de votre mariage."></textarea></div>
           </div>
@@ -214,7 +214,7 @@
           <div class="summary"><span id="sum-label">Envoi Pro, lien valable 30 jours</span><b id="sum-price">Inclus</b></div>
           <button class="send" id="send" disabled>Envoyer</button>
           <p class="err hidden" id="err"></p>
-          <a href="#" class="demo-link" id="fake">Démo : simuler un film de 8,4 Go</a>
+          <a href="#" class="demo-link" id="fake">Démo : simuler un mariage (1 film et 24 photos)</a>
         </div>
 
         <div id="step-up" class="hidden">
@@ -285,7 +285,7 @@
         <ul>
           <li>Jusqu'à 100 Go par envoi, envois illimités</li>
           <li>Votre logo, votre fond et votre message</li>
-          <li>Vos vidéos se regardent en ligne avant le téléchargement</li>
+          <li>Galerie en ligne : photos et vidéos visibles sur la page</li>
           <li>Aucune publicité, ni pour vous ni pour vos clients</li>
           <li>Lien valable 30 jours</li>
           <li>Suivi des téléchargements et mot de passe</li>
@@ -303,7 +303,7 @@
     <details class="q"><summary>Mon client doit-il créer un compte ?</summary><p>Non. Il ouvre le lien, voit votre page et télécharge ses fichiers. C'est tout.</p></details>
     <details class="q"><summary>Combien de temps les fichiers restent-ils en ligne ?</summary><p>7 jours en gratuit, 30 jours en Pro. Ils sont ensuite supprimés automatiquement de nos serveurs.</p></details>
     <details class="q"><summary>Puis-je arrêter mon abonnement Pro quand je veux ?</summary><p>Oui, sans engagement. Vos liens déjà envoyés restent valables jusqu'à leur date d'expiration.</p></details>
-    <details class="q"><summary>Mon client peut-il regarder la vidéo sans la télécharger ?</summary><p>Oui, en Pro. Avec la lecture vidéo en ligne, le film se lance directement sur votre page, sur ordinateur comme sur téléphone. Le téléchargement reste disponible juste en dessous.</p></details>
+    <details class="q"><summary>Mon client peut-il voir les photos et la vidéo sans tout télécharger ?</summary><p>Oui, en Pro. Avec la galerie en ligne, il parcourt les photos en grand, regarde le film directement sur votre page, puis télécharge tout d'un coup ou seulement les photos qu'il veut.</p></details>
     <details class="q"><summary>Pourquoi de la publicité en gratuit ?</summary><p>Elle paie le stockage et la bande passante des envois gratuits. En Pro, il n'y en a aucune, ni sur votre page ni pendant l'envoi.</p></details>
   </div>
 </section>
@@ -349,22 +349,33 @@ function check() {
   $("send").disabled = !ok;
   $("send").textContent = mode === "pro" ? "Envoyer en Pro" : "Envoyer gratuitement";
 }
-function isVideo(f) { return /^video\//.test(f.type || "") || /\.(mp4|mov|m4v|webm|mkv)$/i.test(f.name || ""); }
-function pick(f) {
-  if (!f) return;
-  file = f;
+function kind(f) {
+  if (/^image\//.test(f.type || "") || /\.(jpe?g|png|webp|gif|heic)$/i.test(f.name || "")) return "image";
+  if (/^video\//.test(f.type || "") || /\.(mp4|mov|m4v|webm|mkv)$/i.test(f.name || "")) return "video";
+  return "other";
+}
+let files = [];
+function pick(list) {
+  list = Array.from(list || []);
+  if (!list.length) return;
+  files = list;
+  const total = files.reduce((a, f) => a + f.size, 0);
+  file = { name: files.length > 1 ? files.length + " fichiers" : files[0].name, size: total };
   $("file").textContent = "";
-  const b = document.createElement("b"); b.textContent = f.name;
-  const s = document.createElement("small"); s.textContent = " - " + fmt(f.size);
+  const b = document.createElement("b"); b.textContent = file.name;
+  const s = document.createElement("small"); s.textContent = " - " + fmt(total);
   $("file").append(b, s); $("file").classList.remove("hidden");
   check();
 }
-$("input").addEventListener("change", (e) => pick(e.target.files[0]));
+
+$("input").addEventListener("change", (e) => pick(e.target.files));
 const drop = $("drop");
 ["dragenter", "dragover"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("over"); }));
 ["dragleave", "drop"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove("over"); }));
-drop.addEventListener("drop", (e) => pick(e.dataTransfer.files[0]));
-$("fake").addEventListener("click", (e) => { e.preventDefault(); pick({ name: "film-mariage-Julie-et-Tom.mp4", size: 8.4 * GB, type: "video/mp4" }); });
+drop.addEventListener("drop", (e) => pick(e.dataTransfer.files));
+$("fake").addEventListener("click", (e) => { e.preventDefault(); const fake = [{ name: "film-mariage-Julie-et-Tom.mp4", size: 8.4 * GB, type: "video/mp4", fake: true }];
+  for (let i = 1; i <= 24; i++) fake.push({ name: "JT-" + String(i).padStart(3, "0") + ".jpg", size: 14 * 1024 * 1024, type: "image/jpeg", fake: true });
+  pick(fake); });
 
 function pickImg(kind, max) {
   return (e) => {
@@ -418,7 +429,8 @@ $("send").addEventListener("click", async () => {
   const data = { pro, days: pro ? 30 : 7, name: file.name, size: fmt(file.size),
     color: pro ? brand.color : "", message: pro ? $("message").value.slice(0, 200) : "",
     logo: pro ? await shrink(brand.logo, 400) : "", bg: pro ? await shrink(brand.bg, 1600) : "",
-    video: pro && $("video").checked && isVideo(file), src: (pro && $("video").checked && file instanceof Blob && isVideo(file)) ? URL.createObjectURL(file) : "" };
+    gallery: pro && $("video").checked,
+    files: files.slice(0, 80).map((f) => ({ n: f.name, s: fmt(f.size), k: kind(f), src: (!f.fake && f instanceof Blob && kind(f) !== "other") ? URL.createObjectURL(f) : "" })) };
   try { sessionStorage.setItem("envoixl-demo", JSON.stringify(data)); }
   catch (e) { data.bg = ""; try { sessionStorage.setItem("envoixl-demo", JSON.stringify(data)); } catch (e2) {} }
   $("out").value = location.href.replace(/[^/]*$/, "") + "d.html";
@@ -432,7 +444,7 @@ $("copy").addEventListener("click", async () => {
 });
 $("view").addEventListener("click", () => window.open("d.html", "_blank"));
 $("again").addEventListener("click", () => {
-  file = null; $("input").value = ""; $("file").classList.add("hidden"); $("copy").textContent = "Copier";
+  file = null; files = []; $("input").value = ""; $("file").classList.add("hidden"); $("copy").textContent = "Copier";
   check(); show("step-pick");
 });
 setMode("pro");
