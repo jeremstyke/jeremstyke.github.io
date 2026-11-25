@@ -61,6 +61,13 @@
   .files li span { color:var(--slate); white-space:nowrap; }
   .acts { display:flex; gap:8px; flex-wrap:wrap; }
   .share { display:inline-block; padding:12px 18px; border-radius:10px; border:1.5px solid var(--ink); background:#fff; color:var(--ink); font:inherit; font-weight:700; font-size:16px; cursor:pointer; }
+  .gbox { margin-top:28px; border:1.5px dashed var(--line); border-radius:12px; padding:16px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; align-items:center; }
+  .gup { display:flex; gap:8px; flex-wrap:wrap; }
+  .gup input[type=text], .gup input:not([type]) { border:1px solid var(--line); border-radius:10px; padding:11px 12px; font:inherit; min-width:150px; }
+  .gup input[type=file] { position:absolute; width:1px; height:1px; opacity:0; }
+  .gerr { color:#B4232C; font-size:14px; margin:8px 0 0; }
+  .ph .by { position:absolute; left:6px; bottom:6px; background:rgba(0,0,0,.55); color:#fff; font-size:11px; border-radius:4px; padding:2px 6px; }
+  .ph .rm { position:absolute; right:6px; top:6px; background:rgba(0,0,0,.55); color:#fff; border:0; border-radius:4px; font-size:11px; padding:3px 6px; cursor:pointer; }
   .toast { position:fixed; left:50%; bottom:28px; transform:translateX(-50%); background:var(--ink); color:#fff; padding:10px 16px; border-radius:8px; font-size:14px; z-index:20; }
   .hidden { display:none !important; }
   @media (max-width: 520px) { .grid { grid-template-columns:repeat(2,1fr); gap:6px; } .card { padding:20px; } }
@@ -83,6 +90,17 @@
     <p class="message hidden" id="message"></p>
     <a class="dl" href="#" id="dl">Télécharger</a>
     <div id="photos" class="hidden"><p class="section-t" id="ph-t"></p><div class="grid" id="grid"></div></div>
+    <div id="guests" class="hidden">
+      <div class="gbox">
+        <div><p class="section-t" style="margin-top:0">Photos des invités</p>
+        <p class="meta" style="margin:0">Vous étiez là ? Ajoutez vos photos pour les mariés et les autres invités.</p></div>
+        <div class="gup"><input id="gname" placeholder="Votre prénom" maxlength="40" aria-label="Votre prénom">
+        <label class="share" tabindex="0">Ajouter mes photos<input type="file" id="gfile" multiple accept="image/*"></label></div>
+      </div>
+      <p class="gerr hidden" id="gerr"></p>
+      <p class="meta" id="gempty" style="margin-top:12px">Aucune photo d'invité pour l'instant. Soyez le premier !</p>
+      <div class="grid" id="ggrid"></div>
+    </div>
     <div class="ad-inline">Publicité</div>
     <div class="report">
       <button id="rep">Signaler ce fichier</button>
@@ -158,7 +176,7 @@ if (data.pro) {
         const b = document.createElement("button"); b.className = "ph"; b.type = "button"; b.setAttribute("aria-label", "Voir " + f.n);
         if (f.src) { const im = document.createElement("img"); im.loading = "lazy"; im.src = f.src; im.alt = f.n; b.append(im); }
         else b.append(fakePhoto(i, f.n));
-        b.onclick = () => openLb(i);
+        b.onclick = () => openLb(i, photos);
         $("grid").append(b);
       });
     }
@@ -175,21 +193,51 @@ async function shareLink(title, text) {
   try { await navigator.clipboard.writeText(url); toast("Lien copié : collez-le dans WhatsApp, un SMS ou un e-mail"); }
   catch (e) { toast("Copiez l'adresse de cette page pour la partager"); }
 }
-$("lb-share").onclick = () => shareLink(photos[cur].n, "Regarde cette photo :");
-let cur = 0;
-function openLb(i) {
-  cur = (i + photos.length) % photos.length;
-  const f = photos[cur], view = $("lb-view"); view.innerHTML = "";
+$("lb-share").onclick = () => shareLink(list[cur].n, "Regarde cette photo :");
+const gphotos = [];
+if (data.pro && data.gallery && data.guests) {
+  $("guests").classList.remove("hidden");
+  $("gfile").addEventListener("change", (e) => {
+    const name = $("gname").value.trim();
+    $("gerr").classList.add("hidden");
+    if (!name) { $("gerr").textContent = "Indiquez votre prénom pour que les mariés sachent qui a pris la photo."; $("gerr").classList.remove("hidden"); e.target.value = ""; return; }
+    const imgs = Array.from(e.target.files).filter((f) => /^image\//.test(f.type));
+    imgs.forEach((f) => gphotos.push({ n: f.name, src: URL.createObjectURL(f), by: name }));
+    e.target.value = "";
+    renderGuests();
+    if (imgs.length) toast(imgs.length + " photo" + (imgs.length > 1 ? "s ajoutées" : " ajoutée") + ", merci " + name + " !");
+  });
+}
+function renderGuests() {
+  const g = $("ggrid"); g.innerHTML = "";
+  $("gempty").classList.toggle("hidden", gphotos.length > 0);
+  gphotos.forEach((f, i) => {
+    const b = document.createElement("div"); b.className = "ph"; b.tabIndex = 0; b.setAttribute("role", "button"); b.setAttribute("aria-label", "Photo de " + f.by);
+    const im = document.createElement("img"); im.src = f.src; im.alt = "Photo de " + f.by; im.style.cssText = "width:100%;height:100%;object-fit:cover";
+    const by = document.createElement("span"); by.className = "by"; by.textContent = f.by;
+    const rm = document.createElement("button"); rm.className = "rm"; rm.type = "button"; rm.textContent = "Retirer"; rm.title = "Les mariés et le photographe peuvent retirer une photo";
+    rm.onclick = (e) => { e.stopPropagation(); gphotos.splice(i, 1); renderGuests(); };
+    b.append(im, by, rm); b.onclick = () => openLb(i, gphotos);
+    b.onkeydown = (e) => { if (e.key === "Enter") openLb(i, gphotos); };
+    g.append(b);
+  });
+}
+$("guests").querySelector("label.share").onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("gfile").click(); } };
+let cur = 0, list = photos;
+function openLb(i, l) {
+  if (l) list = l;
+  cur = (i + list.length) % list.length;
+  const f = list[cur], view = $("lb-view"); view.innerHTML = "";
   if (f.src) { const im = document.createElement("img"); im.src = f.src; im.alt = f.n; view.append(im); }
   else view.append(fakePhoto(cur, f.n));
-  $("lb-n").textContent = (cur + 1) + " / " + photos.length;
+  $("lb-n").textContent = (f.by ? "Photo de " + f.by + ", " : "") + (cur + 1) + " / " + list.length;
   $("lb-dl").textContent = "Télécharger cette photo";
   $("lb").classList.remove("hidden");
 }
 $("lb-prev").onclick = () => openLb(cur - 1);
 $("lb-next").onclick = () => openLb(cur + 1);
 $("lb-x").onclick = () => $("lb").classList.add("hidden");
-$("lb-dl").onclick = () => { const f = photos[cur]; if (f.src) { const a = document.createElement("a"); a.href = f.src; a.download = f.n; a.click(); } else $("lb-dl").textContent = "Démo : pas de vrai fichier"; };
+$("lb-dl").onclick = () => { const f = list[cur]; if (f.src) { const a = document.createElement("a"); a.href = f.src; a.download = f.n; a.click(); } else $("lb-dl").textContent = "Démo : pas de vrai fichier"; };
 document.addEventListener("keydown", (e) => {
   if ($("lb").classList.contains("hidden")) return;
   if (e.key === "Escape") $("lb-x").click();
