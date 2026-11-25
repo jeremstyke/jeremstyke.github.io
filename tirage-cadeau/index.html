@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tirage au sort cadeaux, Père Noël secret gratuit (démo)</title>
-<meta name="description" content="Organisez un Père Noël secret en 1 minute : tirage au sort gratuit, sans inscription, un lien privé pour chaque participant et des idées cadeaux selon le budget.">
+<title>Tirage au sort cadeaux gratuit : Noël, anniversaire, collègues (démo)</title>
+<meta name="description" content="Organisez un échange de cadeaux en 1 minute pour Noël, un anniversaire, entre collègues ou entre amis : tirage au sort gratuit, sans inscription, un lien privé pour chaque participant et des idées cadeaux selon le budget.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
@@ -62,14 +62,16 @@ footer{color:var(--gris);font-size:14px;text-align:center;padding:24px 0 40px}
 
 <div id="vue-orga">
 <header class="hero"><div class="ruban" aria-hidden="true"></div><div class="wrap">
-<h1>Votre Père Noël secret en 1 minute</h1>
-<p>Entrez les prénoms, lancez le tirage, envoyez à chacun son lien privé. Personne ne voit qui offre à qui, pas même l'organisateur.</p>
+<h1>Votre tirage au sort de cadeaux en 1 minute</h1>
+<p>Noël, anniversaire, entre collègues, entre amis : entrez les prénoms, lancez le tirage, envoyez à chacun son lien privé. Personne ne voit qui offre à qui, pas même l'organisateur.</p>
 <div class="chips"><span>Gratuit</span><span>Sans inscription</span><span>Idées cadeaux selon le budget</span></div>
 </div></header>
 <main class="wrap">
 <section class="carte">
 <h2>1. L'événement</h2>
-<p class="sous">Noël en famille, entre collègues, anniversaire, départ en retraite...</p>
+<p class="sous">Choisissez l'occasion, puis donnez-lui un nom.</p>
+<label for="type">Occasion</label>
+<select id="type"><option value="noel">Noël (Père Noël secret)</option><option value="nouvelan">Nouvel An</option><option value="stnicolas">Saint-Nicolas</option><option value="anniv">Anniversaire</option><option value="collegues">Entre collègues</option><option value="amis">Soirée entre amis</option><option value="classe">Fin d'année (classe, club, asso)</option><option value="autre">Autre occasion</option></select>
 <label for="ev">Nom de l'événement</label>
 <input id="ev" value="Noël en famille 2026">
 <div class="ligne">
@@ -121,7 +123,7 @@ footer{color:var(--gris);font-size:14px;text-align:center;padding:24px 0 40px}
 <p class="sous">Une sélection simple pour ne pas chercher pendant des heures.</p>
 <div class="idees" id="grille"></div>
 </section>
-<p class="note" style="text-align:center"><a href="./">Organiser mon propre tirage</a></p>
+<p class="note" style="text-align:center"><a href="./">Organiser mon propre tirage (Noël, anniversaire, collègues...)</a></p>
 </main>
 </div>
 
@@ -180,10 +182,10 @@ $("tirer").onclick=function(){
   if(liste.filter(Boolean).length<3||liste.some(function(n){return !n})){$("err").textContent="Il faut au moins 3 prénoms, sans ligne vide.";return}
   var t=tirage(liste.length);
   if(!t){$("err").textContent="Impossible avec ces exclusions. Retirez-en une et relancez.";return}
-  var ev=$("ev").value.trim()||"Père Noël secret",b=$("budget").value,d=$("date").value;
+  var ty=$("type").value,ev=$("ev").value.trim()||NOMS[ty],b=$("budget").value,d=$("date").value;
   var ul=$("liens");ul.innerHTML="";
   liste.forEach(function(n,i){
-    var url=location.href.split("#")[0]+"#r="+code({e:ev,b:b,d:d,de:n,a:liste[t[i]]});
+    var url=location.href.split("#")[0]+"#r="+code({e:ev,t:ty,b:b,d:d,de:n,a:liste[t[i]]});
     var li=document.createElement("li");
     var msg=encodeURIComponent("Ton tirage pour « "+ev+" » est prêt : "+url);
     li.innerHTML='<b>'+n.replace(/</g,"&lt;")+'</b><span class="act"><button class="btn s petit">Copier le lien</button><a class="btn s petit" target="_blank" rel="noopener" href="https://wa.me/?text='+msg+'">WhatsApp</a><a class="btn s petit" href="sms:?&body='+msg+'">SMS</a></span>';
@@ -193,6 +195,9 @@ $("tirer").onclick=function(){
   $("res").classList.remove("cache");$("res").scrollIntoView({behavior:"smooth"});
 };
 
+var NOMS={noel:"Père Noël secret",nouvelan:"Échange de cadeaux du Nouvel An",stnicolas:"Saint-Nicolas",anniv:"Échange de cadeaux d'anniversaire",collegues:"Échange de cadeaux entre collègues",amis:"Échange de cadeaux entre amis",classe:"Échange de cadeaux de fin d'année",autre:"Échange de cadeaux"};
+var DEF={noel:["Noël en famille 2026","2026-12-24"],nouvelan:["Nouvel An entre amis","2026-12-31"],stnicolas:["Saint-Nicolas en famille","2026-12-06"],anniv:["Anniversaire de Léa",""],collegues:["Cadeaux de l'équipe",""],amis:["Soirée cadeaux entre amis",""],classe:["Fin d'année du club",""],autre:["Échange de cadeaux",""]};
+$("type").onchange=function(){var x=DEF[this.value];$("ev").value=x[0];$("date").value=x[1]};
 var IDEES={
  "10":[["Mug original","Un classique qui fait toujours plaisir","mug cadeau original"],["Chaussettes de Noël","Drôles et douillettes","chaussettes noel fantaisie"],["Jeu de cartes d'apéro","Pour rire entre amis","jeu de cartes apero"],["Bougie parfumée","Une ambiance cocooning","bougie parfumee"]],
  "20":[["Plaid tout doux","Pour les soirées d'hiver","plaid polaire doux"],["Jeu de société rapide","Une partie en 15 minutes","jeu de societe ambiance"],["Coffret thé ou café","Pour les gourmands","coffret the cadeau"],["Lampe veilleuse","Jolie sur une table de nuit","lampe veilleuse deco"]],
@@ -204,6 +209,7 @@ function afficherRes(o){
   $("r-titre").textContent="Bonjour "+o.de;
   var dt=o.d?new Date(o.d+"T12:00").toLocaleDateString("fr-FR",{day:"numeric",month:"long"}):"";
   $("r-ev").textContent=o.e+(dt?", échange le "+dt:"");
+  if(o.t&&o.t!=="noel"){document.querySelector("#vue-res .hero h1").style.maxWidth="none"}
   $("r-pour").textContent=o.a;$("r-budget").textContent="Budget : "+o.b+" € environ";$("r-b").textContent=o.b;
   var g=$("grille");g.innerHTML="";
   (IDEES[o.b]||IDEES["20"]).forEach(function(x){
