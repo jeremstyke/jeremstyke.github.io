@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>EnvoiXL - Envoyer un gros fichier gratuitement</title>
+<meta name="description" content="Envoyez un gros fichier jusqu'à 5 Go gratuitement, sans inscription. Lien de téléchargement valable 7 jours.">
+<style>
+  :root { --bg:#f5f6fa; --card:#fff; --text:#16181d; --muted:#6b7080; --accent:#2f5bea; --accent2:#1d3fb8; --line:#e3e5ec; --ok:#17924a; --err:#c8323c; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
+  header { padding:22px 24px; font-weight:800; font-size:22px; letter-spacing:-.5px; }
+  header span { color:var(--accent); }
+  main { flex:1; display:flex; align-items:center; justify-content:center; padding:16px; }
+  .card { background:var(--card); border-radius:18px; box-shadow:0 10px 40px rgba(20,30,60,.08); width:100%; max-width:440px; padding:28px; }
+  h1 { font-size:24px; margin:0 0 6px; letter-spacing:-.4px; }
+  .sub { color:var(--muted); margin:0 0 22px; font-size:15px; }
+  .drop { display:block; border:2px dashed var(--line); border-radius:14px; padding:34px 16px; text-align:center; cursor:pointer; transition:.15s; }
+  .drop:hover, .drop.over { border-color:var(--accent); background:#f0f3ff; }
+  .drop .big { font-size:40px; line-height:1; }
+  .drop p { margin:10px 0 0; color:var(--muted); }
+  .drop b { color:var(--text); }
+  input[type=file] { display:none; }
+  .file { margin-top:16px; font-size:15px; word-break:break-all; }
+  .file small { color:var(--muted); }
+  button { width:100%; margin-top:18px; padding:14px; border:0; border-radius:12px; background:var(--accent); color:#fff; font-size:16px; font-weight:700; cursor:pointer; }
+  button:hover { background:var(--accent2); }
+  button:disabled { opacity:.5; cursor:default; }
+  button.ghost { background:transparent; color:var(--muted); font-weight:500; margin-top:8px; }
+  .bar { height:10px; background:var(--line); border-radius:99px; overflow:hidden; margin-top:18px; }
+  .bar div { height:100%; width:0; background:var(--accent); transition:width .2s; }
+  .stats { display:flex; justify-content:space-between; color:var(--muted); font-size:13px; margin-top:8px; }
+  .link { display:flex; gap:8px; margin-top:14px; }
+  .link input { flex:1; padding:12px; border:1px solid var(--line); border-radius:10px; font-size:14px; }
+  .link button { width:auto; margin:0; padding:12px 16px; }
+  .msg { margin-top:14px; font-size:14px; }
+  .msg.err { color:var(--err); }
+  .msg.ok { color:var(--ok); font-weight:600; }
+  .hidden { display:none; }
+  details.brand { margin-top:16px; border:1px solid var(--line); border-radius:12px; padding:12px 14px; }
+  details.brand summary { cursor:pointer; font-weight:600; font-size:15px; }
+  .field { margin-top:12px; font-size:14px; }
+  .field label { display:block; color:var(--muted); margin-bottom:5px; }
+  .field input[type=file] { display:block; font-size:13px; }
+  .field textarea { width:100%; border:1px solid var(--line); border-radius:10px; padding:10px; font:inherit; }
+  .field input[type=color] { width:52px; height:34px; border:1px solid var(--line); border-radius:8px; padding:2px; background:#fff; }
+  .pv { margin-top:12px; border-radius:10px; height:90px; display:flex; align-items:center; justify-content:center; background:#f5f6fa center/cover no-repeat; }
+  .pv img { max-height:60px; max-width:150px; object-fit:contain; background:#fff; border-radius:8px; padding:4px; }
+  ul.points { list-style:none; padding:0; margin:22px 0 0; color:var(--muted); font-size:14px; }
+  ul.points li { margin:6px 0; }
+  footer { text-align:center; color:var(--muted); font-size:13px; padding:20px; }
+</style>
+</head>
+<body>
+<div style="background:#fff3cd;color:#6b5300;text-align:center;font-size:13px;padding:8px">Démo : aucun fichier n'est réellement envoyé, l'envoi est simulé.</div>
+<header>Envoi<span>XL</span></header>
+<main>
+  <div class="card">
+    <div id="step-pick">
+      <h1>Envoyer un gros fichier</h1>
+      <p class="sub">Gratuit jusqu'à 5 Go, sans inscription.</p>
+      <label class="drop" id="drop">
+        <div class="big">📦</div>
+        <p><b>Glissez votre fichier ici</b><br>ou cliquez pour le choisir</p>
+        <input type="file" id="input">
+      </label>
+      <div class="file hidden" id="file"></div>
+      <details class="brand">
+        <summary>🎨 Personnaliser la page de téléchargement</summary>
+        <div class="field"><label>Votre logo (PNG, JPG ou WebP, 2 Mo max)</label><input type="file" id="logo" accept="image/png,image/jpeg,image/webp"></div>
+        <div class="field"><label>Image de fond (5 Mo max)</label><input type="file" id="bg" accept="image/png,image/jpeg,image/webp"></div>
+        <div class="field"><label>Ou une couleur de fond</label><input type="color" id="color" value="#f5f6fa"></div>
+        <div class="field"><label>Message pour le destinataire</label><textarea id="message" rows="2" maxlength="200" placeholder="Ex : Voici les photos du mariage !"></textarea></div>
+        <div class="pv" id="pv"></div>
+      </details>
+      <button id="send" disabled>Envoyer</button>
+      <ul class="points">
+        <li>✓ Lien valable 7 jours</li>
+        <li>✓ Aucun compte à créer</li>
+        <li>✓ Le fichier est supprimé automatiquement</li>
+      </ul>
+    </div>
+
+    <div id="step-up" class="hidden">
+      <h1>Envoi en cours...</h1>
+      <p class="sub" id="up-name"></p>
+      <div class="bar"><div id="bar"></div></div>
+      <div class="stats"><span id="pct">0 %</span><span id="speed"></span></div>
+      <p class="msg">Gardez cette page ouverte jusqu'à la fin.</p>
+      <button class="ghost" id="cancel">Annuler</button>
+    </div>
+
+    <div id="step-done" class="hidden">
+      <h1>C'est envoyé ! 🎉</h1>
+      <p class="sub">Partagez ce lien. Il reste valable 7 jours.</p>
+      <div class="link"><input id="out" readonly><button id="copy">Copier</button></div>
+      <p class="msg ok hidden" id="copied">Lien copié</p>
+      <button id="view" onclick="window.open('d.html','_blank')">Voir la page du destinataire</button>
+      <button class="ghost" id="again">Envoyer un autre fichier</button>
+    </div>
+
+    <p class="msg err hidden" id="err"></p>
+  </div>
+</main>
+<footer>EnvoiXL - démo</footer>
+
+<script>
+const MAX = 5 * 1024 ** 3;
+const PARALLEL = 3;
+const $ = (id) => document.getElementById(id);
+let file = null, state = null, cancelled = false;
+
+function fmt(n) {
+  const u = ["o", "Ko", "Mo", "Go", "To"]; let i = 0;
+  while (n >= 1024 && i < u.length - 1) { n /= 1024; i++; }
+  return n.toFixed(i ? 1 : 0).replace(".", ",") + " " + u[i];
+}
+function show(step) {
+  ["step-pick", "step-up", "step-done"].forEach((s) => $(s).classList.toggle("hidden", s !== step));
+}
+function error(t) { $("err").textContent = t; $("err").classList.toggle("hidden", !t); }
+
+function pick(f) {
+  error("");
+  if (!f) return;
+  if (f.size > MAX) { file = null; $("send").disabled = true; $("file").classList.add("hidden"); return error("Ce fichier fait " + fmt(f.size) + ". La limite gratuite est de 5 Go."); }
+  file = f;
+  $("file").innerHTML = "";
+  const b = document.createElement("b"); b.textContent = f.name;
+  const s = document.createElement("small"); s.textContent = " - " + fmt(f.size);
+  $("file").append(b, s);
+  $("file").classList.remove("hidden");
+  $("send").disabled = false;
+}
+
+$("input").addEventListener("change", (e) => pick(e.target.files[0]));
+const drop = $("drop");
+["dragenter", "dragover"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("over"); }));
+["dragleave", "drop"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove("over"); }));
+drop.addEventListener("drop", (e) => pick(e.dataTransfer.files[0]));
+
+const brand = { logo: null, bg: null, colorSet: false };
+function preview() {
+  const pv = $("pv");
+  pv.style.backgroundImage = brand.bg ? "url(" + URL.createObjectURL(brand.bg) + ")" : "";
+  pv.style.backgroundColor = $("color").value;
+  pv.innerHTML = "";
+  if (brand.logo) { const i = document.createElement("img"); i.src = URL.createObjectURL(brand.logo); pv.append(i); }
+}
+function pickImg(kind, max) {
+  return (e) => {
+    error("");
+    const f = e.target.files[0] || null;
+    if (f && f.size > max * 1024 * 1024) { e.target.value = ""; brand[kind] = null; preview(); return error((kind === "logo" ? "Logo" : "Image de fond") + " trop lourd : " + max + " Mo maximum."); }
+    brand[kind] = f; preview();
+  };
+}
+$("logo").addEventListener("change", pickImg("logo", 2));
+$("bg").addEventListener("change", pickImg("bg", 5));
+$("color").addEventListener("input", () => { brand.colorSet = true; preview(); });
+preview();
+
+async function sendBrand(kind) {
+  const f = brand[kind]; if (!f) return;
+  const r = await fetch(`/api/brand?id=${state.id}&token=${state.token}&kind=${kind}`, { method: "PUT", headers: { "content-type": f.type }, body: f });
+  if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || "Image refusée."); }
+}
+
+async function api(path, body) {
+  const r = await fetch(path, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
+  const d = await r.json();
+  if (!r.ok) throw new Error(d.error || "Erreur");
+  return d;
+}
+
+async function uploadPart(n, blob, tries = 0) {
+  try {
+    const r = await fetch(`/api/part?id=${state.id}&uploadId=${encodeURIComponent(state.uploadId)}&n=${n}`, { method: "PUT", body: blob });
+    if (!r.ok) throw new Error("part");
+    return await r.json();
+  } catch (e) {
+    if (cancelled || tries >= 4) throw e;
+    await new Promise((res) => setTimeout(res, 1500 * (tries + 1)));
+    return uploadPart(n, blob, tries + 1);
+  }
+}
+
+function shrink(f, max) {
+  return new Promise((res) => {
+    if (!f) return res("");
+    const img = new Image();
+    img.onload = () => {
+      const r = Math.min(1, max / Math.max(img.width, img.height));
+      const c = document.createElement("canvas");
+      c.width = Math.round(img.width * r); c.height = Math.round(img.height * r);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      res(c.toDataURL(f.type === "image/png" ? "image/png" : "image/jpeg", 0.85));
+    };
+    img.onerror = () => res("");
+    img.src = URL.createObjectURL(f);
+  });
+}
+
+$("send").addEventListener("click", async () => {
+  if (!file) return;
+  error(""); cancelled = false;
+  $("up-name").textContent = file.name + " - " + fmt(file.size);
+  $("bar").style.width = "0"; $("pct").textContent = "0 %"; $("speed").textContent = "";
+  show("step-up");
+  const speed = 40 * 1024 * 1024;
+  const duration = Math.min(6, Math.max(2, file.size / speed)) * 1000;
+  const start = Date.now();
+  await new Promise((resolve) => {
+    const t = setInterval(() => {
+      if (cancelled) { clearInterval(t); return resolve(); }
+      const k = Math.min(1, (Date.now() - start) / duration);
+      const pct = Math.floor(k * 100);
+      $("bar").style.width = pct + "%"; $("pct").textContent = pct + " %";
+      const left = Math.round((duration - (Date.now() - start)) / 1000);
+      $("speed").textContent = fmt(file.size / (duration / 1000)) + "/s - " + Math.max(0, left) + " s restantes";
+      if (k >= 1) { clearInterval(t); resolve(); }
+    }, 100);
+  });
+  if (cancelled) return;
+  const data = {
+    name: file.name, size: fmt(file.size),
+    color: brand.colorSet ? $("color").value : "",
+    message: $("message").value.slice(0, 200),
+    logo: await shrink(brand.logo, 400),
+    bg: await shrink(brand.bg, 1600),
+  };
+  try { sessionStorage.setItem("envoixl-demo", JSON.stringify(data)); }
+  catch (e) { data.bg = ""; try { sessionStorage.setItem("envoixl-demo", JSON.stringify(data)); } catch (e2) {} }
+  $("out").value = location.href.replace(/[^/]*$/, "") + "d.html";
+  show("step-done");
+});
+
+$("cancel").addEventListener("click", () => { cancelled = true; show("step-pick"); });
+$("copy").addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText($("out").value); } catch { $("out").select(); document.execCommand("copy"); }
+  $("copied").classList.remove("hidden");
+});
+$("again").addEventListener("click", () => {
+  file = null; $("input").value = ""; $("file").classList.add("hidden"); $("send").disabled = true; $("copied").classList.add("hidden");
+  show("step-pick");
+});
+</script>
+</body>
+</html>

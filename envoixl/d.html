@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Télécharger un fichier - EnvoiXL</title>
+<style>
+  :root { --bg:#f5f6fa; --card:#fff; --text:#16181d; --muted:#6b7080; --accent:#2f5bea; --accent2:#1d3fb8; --line:#e3e5ec; --ok:#17924a; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
+  header { padding:22px 24px; font-weight:800; font-size:22px; letter-spacing:-.5px; }
+  header a { display:inline-block; background:#fff; padding:6px 14px; border-radius:10px; }
+  header a { color:inherit; text-decoration:none; }
+  header span { color:var(--accent); }
+  main { flex:1; display:flex; align-items:center; justify-content:center; padding:16px; }
+  .card { background:var(--card); border-radius:18px; box-shadow:0 10px 40px rgba(20,30,60,.08); width:100%; max-width:440px; padding:28px; text-align:center; }
+  .big { font-size:46px; }
+  h1 { font-size:20px; margin:12px 0 4px; word-break:break-all; }
+  .sub { color:var(--muted); margin:0 0 20px; }
+  a.btn { display:block; padding:14px; border-radius:12px; background:var(--accent); color:#fff; font-weight:700; text-decoration:none; font-size:16px; }
+  a.btn:hover { background:var(--accent2); }
+  .report { margin-top:22px; font-size:13px; }
+  .report button { background:none; border:0; color:var(--muted); text-decoration:underline; cursor:pointer; font-size:13px; }
+  .report textarea { width:100%; margin-top:10px; border:1px solid var(--line); border-radius:10px; padding:10px; font:inherit; }
+  .report .send { margin-top:8px; background:var(--text); color:#fff; text-decoration:none; padding:8px 14px; border-radius:8px; }
+  .hidden { display:none; }
+  .ok { color:var(--ok); }
+  footer { text-align:center; color:var(--muted); font-size:13px; padding:20px; }
+  .logo { max-width:180px; max-height:90px; object-fit:contain; display:block; margin:0 auto 6px; }
+  .message { background:#f5f6fa; border-radius:10px; padding:12px; margin:0 0 18px; white-space:pre-wrap; }
+  
+</style>
+</head>
+<body>
+<div style="background:#fff3cd;color:#6b5300;text-align:center;font-size:13px;padding:8px">Démo : aperçu de la page que verra le destinataire.</div>
+<header><a href="./">Envoi<span>XL</span></a></header>
+<main>
+  <div class="card" id="ok">
+    <img class="logo hidden" id="logo" alt="">
+    <div class="big">📦</div>
+    <h1 id="name">photos-mariage.zip</h1>
+    <p class="sub"><span id="size">2,4 Go</span> - disponible encore 7 jour(s)</p>
+    <p class="message hidden" id="message"></p>
+    <a class="btn" href="#" onclick="this.textContent='Démo : pas de vrai fichier';return false">Télécharger</a>
+    <div class="report">
+      <button id="rep">Signaler ce fichier</button>
+      <div id="repbox" class="hidden">
+        <textarea id="reason" rows="3" placeholder="Pourquoi signalez-vous ce fichier ?"></textarea>
+        <button class="send" id="repsend">Envoyer le signalement</button>
+      </div>
+      <p id="repok" class="ok hidden">Merci, le signalement a bien été envoyé.</p>
+    </div>
+  </div>
+  <div class="card hidden" id="expired">
+    <div class="big">⌛</div>
+    <h1>Lien expiré ou introuvable</h1>
+    <p class="sub">Ce fichier n'est plus disponible. Les fichiers sont supprimés au bout de 7 jours.</p>
+    <a class="btn" href="./">Envoyer un fichier</a>
+  </div>
+</main>
+<footer style="background:rgba(255,255,255,.85)">EnvoiXL - envoyer un gros fichier gratuitement</footer>
+<script>
+let data = {};
+try { data = JSON.parse(sessionStorage.getItem("envoixl-demo") || "{}"); } catch (e) {}
+if (data.name) document.getElementById("name").textContent = data.name;
+if (data.size) document.getElementById("size").textContent = data.size;
+if (data.logo) { const l = document.getElementById("logo"); l.src = data.logo; l.classList.remove("hidden"); }
+if (data.message) { const m = document.getElementById("message"); m.textContent = data.message; m.classList.remove("hidden"); }
+if (data.bg) document.body.style.background = "#111 url(" + data.bg + ") center/cover no-repeat fixed";
+else if (data.color) document.body.style.background = data.color;
+document.getElementById("rep").onclick = () => document.getElementById("repbox").classList.toggle("hidden");
+document.getElementById("repsend").onclick = () => {
+  document.getElementById("repbox").classList.add("hidden");
+  document.getElementById("rep").classList.add("hidden");
+  document.getElementById("repok").classList.remove("hidden");
+};
+</script>
+</body>
+</html>
