@@ -19,10 +19,10 @@ Les règles détaillées de chaque site restent dans son AUTOMATION.md (ou fichi
 | Jour | Sites affiliés | Autres sites |
 |---|---|---|
 | Lundi | Vieillir chez soi : 1 article ; Les oiseaux du jardin : 1 fiche ; Ma liste mariage : 1 top | CVLibre français : 1 article |
-| Mardi | Ma liste bébé : 1 article ; Les oiseaux du jardin : 1 top | CVLibre français : 1 page métier ; PDF Démarches : 1 guide |
+| Mardi | Ma liste bébé : 1 article ; Les oiseaux du jardin : 1 top ; Vieillir chez soi : 1 article utile | CVLibre français : 1 page métier ; PDF Démarches : 1 guide |
 | Mercredi | Vieillir chez soi : 1 top ; Les oiseaux du jardin : 1 top | CVLibre français : 1 article |
 | Jeudi | Vieillir chez soi : 1 article ; Ma liste mariage : 1 article ; Les oiseaux du jardin : 1 article (premier « - [ ] » de sujets.md) | CVLibre français : 1 article ; PDF Démarches : 1 guide |
-| Vendredi | Les oiseaux du jardin : 1 fiche ; Ma liste bébé : 1 top | CVLibre français : 1 article |
+| Vendredi | Les oiseaux du jardin : 1 fiche ; Ma liste bébé : 1 top ; Vieillir chez soi : 1 article utile | CVLibre français : 1 article |
 
 Pages utiles d'abord (règle du 25 nov 2026, à appliquer à partir du mercredi 16 décembre 2026 ; avant cette date, garde le planning ci-dessus et les cadeaux de Noël en tête) : environ 2 pages utiles (fiche, guide, article pratique) pour 1 top sur les 4 sites affiliés, car les pages utiles se placent plus vite sur un site jeune, amènent les liens et nourrissent les tops par le maillage. À partir du 16 décembre, remplace donc dans le tableau :
 - Les oiseaux du jardin : mercredi = 1 fiche (premier « - [ ] » de especes.md) au lieu d'un top, et vendredi = 1 top au lieu d'un sujet ; soit lundi fiche, mardi top, mercredi fiche, jeudi article, vendredi top.
@@ -30,6 +30,8 @@ Pages utiles d'abord (règle du 25 nov 2026, à appliquer à partir du mercredi 
 - Ma liste mariage : les semaines paires, le lundi publie 1 article de sujets.md au lieu d'un top.
 - Vieillir chez soi : inchangé (déjà 2 articles pour 1 top).
 Dans les sujets.md, après les sujets de Noël, fais passer en tête les guides pratiques très recherchés (aides, démarches, « comment », « quand », reconnaître une espèce) plutôt que les sujets « quel produit choisir ». Chaque page utile renvoie vers 1 ou 2 tops existants du même site, avec un lien dans le texte.
+
+Vieillir chez soi passe aussi à 5 pages par semaine (règle du 25 nov 2026) : les articles « utiles » du mardi et du vendredi sont des guides pratiques (aides et démarches, aménagement, santé au quotidien, conseils aux aidants, « comment » et « quand »), pris en priorité dans sujets.md parmi ces sujets, jamais un « quel produit choisir » ; ajoutes-en à sujets.md s'il en reste moins de 10, avec Ubersuggest (locId 2250, fr). Si la Search Console montre beaucoup de pages « Détectée, actuellement non indexée » sur un site, signale-le à Jeremy dans le bilan du lundi : c'est le signe qu'il faut ralentir.
 
 Les oiseaux du jardin passe à 5 pages par semaine (règle du 25 nov 2026, une par jour du lundi au vendredi) : priorité de Jeremy avec Vieillir chez soi.
 
