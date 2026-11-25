@@ -2700,99 +2700,67 @@ g("chouette-hulotte/",
 
 AUTO_META['cadeau-passionne-oiseaux/'] = ('🏆', 'rouge')
 g("cadeau-passionne-oiseaux/",
-  "Cadeau pour un passionné d'oiseaux : idées pour Noël 2026",
-  "Cadeau pour un passionné d'oiseaux : 12 idées pour Noël 2026",
-  "Jumelles, mangeoire à caméra, nichoir connecté, guide, abreuvoir : 12 idées de cadeau pour un passionné d'oiseaux à Noël 2026, choisies selon son profil.",
+  "Cadeau pour un passionné d'oiseaux : idées Noël 2026 par budget",
+  "Cadeau de Noël pour un amoureux des oiseaux : idées par budget",
+  "Cadeau de Noël pour un amoureux des oiseaux : kit nichoir, guide, mangeoire, caméra ou jumelles, classés par budget, de moins de 30 € à plus de 100 €.",
   """
-<p>Pour un passionné d'oiseaux, le cadeau qui fait le plus plaisir est souvent celui qui lui permet de voir mieux ou de voir plus près : une bonne paire de jumelles, une mangeoire avec caméra ou un nichoir connecté. Si vous voulez rester simple, un guide d'identification récent ou une mangeoire de fenêtre bien conçue font aussi très bien l'affaire.</p>
-<p>Tout dépend de la personne. Quelqu'un qui part en balade chaque week-end n'a pas les mêmes envies qu'un grand-parent qui regarde ses mésanges depuis la cuisine. Nous avons donc rangé nos 12 idées par profil plutôt que par prix, que nous ne pouvons pas garantir : ils bougent beaucoup à l'approche de Noël.</p>
+<p><strong>En bref</strong> : pour moins de 30 €, offrez un kit de nichoir à monter ou un guide d'identification avec les chants. Entre 30 et 100 €, un nichoir en béton de bois qui durera vingt ans ou une mangeoire qui résiste aux écureuils. Au-delà de 100 €, une mangeoire avec caméra, un nichoir connecté ou de bonnes jumelles 8x42. Selon la LPO, un nichoir doit être en place dès l'automne ou le début de l'hiver : Noël tombe pile au bon moment.</p>
+<p>Un amoureux des oiseaux a souvent déjà ses jumelles et son guide. Le cadeau qui lui fait plaisir, c'est celui qui lui ouvre quelque chose de nouveau : voir une nichée en direct, accueillir une espèce de plus au jardin, ou partager sa passion avec un petit-enfant autour d'un nichoir à monter ensemble.</p>
+<p>Nous avons rangé nos idées en trois budgets, à partir des prix constatés chez des revendeurs français en novembre 2026. Ce sont des tranches, pas des prix exacts : ils bougent beaucoup à l'approche de Noël, vérifiez le tarif du jour avant de commander.</p>
 {CTA}
-<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants et les revendeurs, sans test en main.</div>
+<div class="note"><strong>Comment nous avons fait cette sélection</strong> : à partir des fiches publiées par les fabricants, les éditeurs et les revendeurs (Birdfy, Green Feathers, Brome, boutique LPO, Nature & Découvertes, Belin, Delachaux et Niestlé), sans test en main. Quand une information manque, nous écrivons « non précisé ».</div>
 
-<h2>Le récapitulatif des 12 idées</h2>
-<table><thead><tr><th>Idée</th><th>Pour qui</th><th>Gamme</th></tr></thead><tbody>
-<tr><td>Birdfy Feeder 2 Pro</td><td>Le curieux qui aime la technologie</td><td>Haut de gamme</td></tr>
-<tr><td>Green Feathers kit nichoir caméra wifi</td><td>Celui qui veut suivre une nichée</td><td>Haut de gamme</td></tr>
-<tr><td>Birdfy Nest Duo</td><td>Un jardin sans prise électrique</td><td>Haut de gamme</td></tr>
-<tr><td>Zeiss Terra ED 8x42</td><td>L'observateur régulier</td><td>Haut de gamme</td></tr>
-<tr><td>Nikon Prostaff P7 8x42</td><td>Le marcheur qui veut des jumelles légères</td><td>Milieu de gamme</td></tr>
-<tr><td>Celestron Nature DX 8x42</td><td>Le débutant ou la famille</td><td>Entrée de gamme</td></tr>
-<tr><td>Squirrel Buster Legacy</td><td>Le jardin envahi par les écureuils</td><td>Milieu de gamme</td></tr>
-<tr><td>Schwegler 1B 32 mm</td><td>Celui qui veut accueillir des mésanges</td><td>Milieu de gamme</td></tr>
-<tr><td>Nature Anywhere Birds-I-View</td><td>Une personne qui sort peu</td><td>Entrée de gamme</td></tr>
-<tr><td>Esschert Design FB297</td><td>Le jardinier</td><td>Entrée de gamme</td></tr>
-<tr><td>Le guide ornitho (3e édition)</td><td>L'observateur confirmé</td><td>Livre</td></tr>
-<tr><td>Guide des oiseaux de France (Belin)</td><td>Celui qui veut apprendre les chants</td><td>Livre</td></tr>
+<h2>Pourquoi ces cadeaux servent aussi les oiseaux du jardin ?</h2>
+<p>Un bon cadeau pour un passionné d'oiseaux profite aussi aux oiseaux eux-mêmes. Un nichoir posé en hiver offre un abri à la <a href="{R}mesange-charbonniere/">mésange charbonnière</a> ou à la <a href="{R}mesange-bleue/">mésange bleue</a>, qui commencent à prospecter les cavités dès janvier selon la LPO. Une mangeoire bien conçue, propre et protégée des écureuils, aide les petits oiseaux à passer les journées froides, quand la nourriture naturelle manque.</p>
+<p>Notre conseil : si vous hésitez, offrez un nichoir. C'est le cadeau le plus utile aux oiseaux à cette période, il ne demande ni électricité ni abonnement, et le spectacle commence au printemps. Ajoutez simplement la bonne taille de trou : 26 à 28 mm pour la mésange bleue, 32 mm pour la charbonnière, d'après la LPO.</p>
+
+<h2>Le récapitulatif par budget</h2>
+<table><thead><tr><th>Idée</th><th>Budget</th><th>Pour qui</th></tr></thead><tbody>
+<tr><td>Esschert Design nichoir à assembler</td><td>Moins de 30 €</td><td>Un grand-parent qui bricole avec ses petits-enfants</td></tr>
+<tr><td>HABA Terra Kids kit nichoir</td><td>Moins de 30 €</td><td>Un enfant dès 6 ans, selon le fabricant</td></tr>
+<tr><td>Guide des oiseaux de France (Belin)</td><td>Moins de 30 €</td><td>Celui qui veut apprendre les chants</td></tr>
+<tr><td>Schwegler 1B 32 mm</td><td>30 à 100 €</td><td>Celui qui veut accueillir des mésanges pour longtemps</td></tr>
+<tr><td>Squirrel Buster Legacy</td><td>30 à 100 €</td><td>Le jardin envahi par les écureuils</td></tr>
+<tr><td>Le guide ornitho (3e édition)</td><td>30 à 100 €</td><td>L'observateur confirmé</td></tr>
+<tr><td>Birdfy Feeder 2 Pro</td><td>Plus de 100 €</td><td>Le curieux qui aime la technologie</td></tr>
+<tr><td>Green Feathers kit nichoir caméra wifi</td><td>Plus de 100 €</td><td>Celui qui rêve de suivre une nichée</td></tr>
+<tr><td>Jumelles 8x42 (Nikon Prostaff P7, Zeiss Terra ED)</td><td>Plus de 100 €</td><td>L'observateur qui sort souvent</td></tr>
 </tbody></table>
-<p>La colonne « gamme » situe chaque idée par rapport aux autres produits de sa catégorie, pas par un prix précis. Vérifiez le tarif du jour sur la fiche du vendeur.</p>
 
-<h2>1. Birdfy Feeder 2 Pro : la mangeoire qui filme et reconnaît les oiseaux</h2>
-<p><strong>Pour qui ?</strong> Le passionné qui aime les gadgets, ou celui qui travaille la journée et veut voir ce qu'il a manqué.</p>
-<p>C'est le cadeau qui fait le plus d'effet le matin de Noël. Cette mangeoire embarque deux caméras, l'une en 2K qui pivote pour suivre les oiseaux, l'autre en 1080p grand angle. Birdfy annonce un panneau solaire de 5 W fourni, une batterie de 9 000 mAh et un réservoir de 2,5 L. La version vendue avec l'IA « à vie » identifie les espèces sans abonnement, selon le fabricant.</p>
+<h2>Moins de 30 € : les petits cadeaux qui font mouche</h2>
+
+<h2>1. Esschert Design nichoir à assembler : à monter en famille</h2>
+<p><strong>Pour qui ?</strong> Un grand-parent qui aime bricoler et veut partager un moment avec ses petits-enfants pendant les vacances de Noël.</p>
+<p>Ce nichoir en bois de la marque néerlandaise Esschert Design se livre en kit, à assembler soi-même. Il mesure 17 x 21,3 x 23,3 cm d'après Nature & Découvertes, qui le présente comme un nichoir à construire avec des enfants.</p>
 <ul>
-<li><strong>Points forts</strong> : deux angles de vue, autonomie solaire, reconnaissance des espèces sans abonnement sur la bonne version.</li>
-<li><strong>Limites</strong> : pas de carte microSD, tout passe par le cloud du fabricant. Wi-Fi 2,4 GHz uniquement : vérifiez que la box porte jusqu'au fond du jardin. Birdfy vend aussi une version avec IA par abonnement du même modèle, regardez bien la mention « Lifetime » avant d'acheter.</li>
+<li><strong>Points forts</strong> : petit budget, activité à faire ensemble, un vrai nichoir à poser au jardin ensuite.</li>
+<li><strong>Limites</strong> : diamètre du trou, contenu détaillé et âge conseillé non précisés sur les fiches lues. Vérifiez le trou avant de l'installer pour savoir quelle mésange vous visez.</li>
 </ul>
-<p><a href="{AMZ:Birdfy Feeder 2 Pro}" """ + A + """>Voir sur Amazon</a></p>
-<p>Les autres modèles, dont plusieurs plus simples, sont comparés dans notre sélection des <a href="{R}meilleure-mangeoire-connectee/">meilleures mangeoires connectées</a>.</p>
+<p><a href="{AMZ:Esschert Design nichoir a assembler KG52}" """ + A + """>Voir sur Amazon</a></p>
 
-<h2>2. Green Feathers kit nichoir caméra wifi : suivre une nichée en direct</h2>
-<p><strong>Pour qui ?</strong> Celui qui rêve de voir éclore des mésanges, et qui a une prise extérieure ou un garage à proximité.</p>
-<p>C'est un cadeau de Noël malin, parce qu'il faut poser un nichoir avant le printemps : le timing est parfait. Le kit réunit un nichoir en bois de 21 mm avec un trou d'envol de 32 mm et une caméra wifi 1080p. La vision nocturne utilise 4 LED infrarouges invisibles, et un micro capte les petits cris, d'après Green Feathers. Une rallonge de 10 m est fournie.</p>
+<h2>2. HABA Terra Kids kit nichoir : le premier nichoir d'un enfant</h2>
+<p><strong>Pour qui ?</strong> Un enfant curieux de nature, dès 6 ans selon le fabricant, avec un adulte à côté pour visser.</p>
+<p>Le kit Terra Kids de HABA contient 19 pièces, vis comprises, d'après les revendeurs Greenweez et Toys Boulevard. C'est un cadeau qui se transforme en souvenir : l'enfant voit au printemps si « son » nichoir est occupé.</p>
 <ul>
-<li><strong>Points forts</strong> : tout est dans la boîte, infrarouge invisible qui n'éclaire pas la nichée.</li>
-<li><strong>Limites</strong> : carte microSD non fournie, conditions du cloud non précisées, prise nécessaire à proximité.</li>
+<li><strong>Points forts</strong> : marque de jouets réputée, âge indiqué, vis fournies.</li>
+<li><strong>Limites</strong> : diamètre du trou non précisé ; les dimensions affichées par les revendeurs semblent être celles de l'emballage.</li>
 </ul>
-<p><a href="{AMZ:Green Feathers kit complet nichoir camera wifi}" """ + A + """>Voir sur Amazon</a></p>
+<p><a href="{AMZ:HABA Terra Kids kit nichoir 304544}" """ + A + """>Voir sur Amazon</a></p>
+<p>D'autres idées pour les plus jeunes sont dans notre sélection des <a href="{R}meilleurs-livres-oiseaux-enfants/">meilleurs livres sur les oiseaux pour enfants</a>.</p>
 
-<h2>3. Birdfy Nest Duo : le nichoir connecté sans câble</h2>
-<p><strong>Pour qui ?</strong> Un jardin sans électricité au fond, ou quelqu'un qui ne sait pas encore quelle espèce viendra.</p>
-<p>Ce nichoir en bambou et ABS a deux caméras, une batterie de 9 000 mAh et un panneau solaire de 5 W. Son entrée se change grâce à des grilles métalliques de 23 à 50 mm, ce qui permet de viser plusieurs espèces, selon le site français de Birdfy.</p>
+<h2>3. Guide des oiseaux de France (Belin) : avec les chants</h2>
+<p><strong>Pour qui ?</strong> Celui qui entend plus qu'il ne voit, et veut enfin mettre un nom sur le chant qui le réveille le matin.</p>
+<p>Jérôme Morin, Gérard Guillot et Julien Norwood, chez Belin, 2017. 500 espèces, environ 1 000 photos et 500 illustrations. Selon le libraire NHBS, 360 chants ou cris s'écoutent sur smartphone grâce à des QR codes. Broché, 528 pages.</p>
 <ul>
-<li><strong>Points forts</strong> : autonome, deux angles de vue, entrées adaptables.</li>
-<li><strong>Limites</strong> : 3,4 kg, à fixer solidement. Pas de microSD : l'enregistrement passe par le cloud, gratuit pendant la nidification selon Birdfy, avec abonnement optionnel ensuite.</li>
+<li><strong>Points forts</strong> : photos, dessins et sons dans un seul livre.</li>
+<li><strong>Limites</strong> : édition de 2017, la plus ancienne de notre sélection.</li>
 </ul>
-<p><a href="{AMZ:Birdfy Nest Duo nichoir}" """ + A + """>Voir sur Amazon</a></p>
-<p>Wifi, filaire, solaire : notre comparatif du <a href="{R}meilleur-nichoir-camera/">meilleur nichoir avec caméra</a> vous aide à trancher.</p>
+<p><a href="{AMZ:Guide des oiseaux de France Belin Morin}" """ + A + """>Voir sur Amazon</a></p>
+<p>Pour un tout petit budget, les éditions Ulmer ont publié en janvier 2026 « Reconnaître facilement les oiseaux du jardin » de Daniela Strauss, un livre centré sur les espèces qu'on voit à la mangeoire. Et si la personne aime écouter plutôt que lire, Audible propose un essai gratuit avec un livre audio offert, résiliable à tout moment, de quoi découvrir des récits de naturalistes. <a href="{AUDIBLE}" rel="sponsored nofollow noopener" target="_blank">Essayer Audible gratuitement</a></p>
 
-<h2>4. Zeiss Terra ED 8x42 : des jumelles pour longtemps</h2>
-<p><strong>Pour qui ?</strong> L'observateur qui sort souvent, au jardin comme au bord des étangs, et qui garde ses jumelles des années.</p>
-<p>Zeiss annonce une mise au point dès 1,6 m, pratique pour un oiseau posé tout près de la fenêtre, des verres ED et une étanchéité de 100 mbar. Plusieurs coloris existent.</p>
-<ul>
-<li><strong>Points forts</strong> : grande marque d'optique, mise au point rapprochée, étanche.</li>
-<li><strong>Limites</strong> : 725 g, parmi les plus lourdes de notre comparatif. Une sangle confortable n'est pas un luxe.</li>
-</ul>
-<p><a href="{AMZ:Zeiss Terra ED 8x42}" """ + A + """>Voir sur Amazon</a></p>
+<h2>De 30 à 100 € : les cadeaux qui durent</h2>
 
-<h2>5. Nikon Prostaff P7 8x42 : les jumelles légères</h2>
-<p><strong>Pour qui ?</strong> Le marcheur qui garde ses jumelles autour du cou pendant des heures.</p>
-<p>Avec 590 g selon Nikon, ce sont les plus légères de notre comparatif. Elles sont étanches jusqu'à 1 m pendant 10 minutes, d'après le fabricant.</p>
-<ul>
-<li><strong>Points forts</strong> : poids plume pour du 8x42, grande marque.</li>
-<li><strong>Limites</strong> : mise au point minimale de 3 m. Pour un oiseau posé sur le rebord de la fenêtre, il faudra reculer.</li>
-</ul>
-<p><a href="{AMZ:Nikon Prostaff P7 8x42}" """ + A + """>Voir sur Amazon</a></p>
-
-<h2>6. Celestron Nature DX 8x42 : une première paire pour toute la famille</h2>
-<p><strong>Pour qui ?</strong> Un débutant, ou une famille qui veut partager une paire de jumelles au jardin.</p>
-<p>Celestron annonce 629 g, et le revendeur Astroshop précise qu'elles sont remplies d'azote, ce qui évite la buée à l'intérieur. Mise au point dès 2 m.</p>
-<ul>
-<li><strong>Points forts</strong> : complètes, étanches, une bonne porte d'entrée.</li>
-<li><strong>Limites</strong> : pas d'indice d'étanchéité chiffré, et un poids différent selon les fiches (820 g chez un revendeur, sans doute avec accessoires).</li>
-</ul>
-<p><a href="{AMZ:Celestron Nature DX 8x42}" """ + A + """>Voir sur Amazon</a></p>
-<p>Les dix modèles sont comparés en détail dans notre sélection des <a href="{R}meilleures-jumelles-oiseaux/">meilleures jumelles pour les oiseaux</a>.</p>
-
-<h2>7. Squirrel Buster Legacy : la mangeoire qui résiste aux écureuils</h2>
-<p><strong>Pour qui ?</strong> Celui qui peste chaque hiver contre l'écureuil qui vide sa mangeoire en une matinée.</p>
-<p>Quand un animal trop lourd s'accroche, son poids fait descendre un grillage qui ferme les quatre ouvertures. Un ressort permet de régler le poids qui déclenche la fermeture, selon Brome Bird Care. Le silo mesure environ 14 x 14 x 41 cm pour 1,2 kg de graines, et se démonte à la main pour le nettoyage.</p>
-<ul>
-<li><strong>Points forts</strong> : mécanisme réglable, pièces exposées conçues pour résister aux morsures, nettoyage facile.</li>
-<li><strong>Limites</strong> : le fabricant précise lui-même qu'il n'arrête pas les étourneaux. Il faut environ 47 cm de dégagement tout autour.</li>
-</ul>
-<p><a href="{AMZ:Squirrel Buster Legacy}" """ + A + """>Voir sur Amazon</a></p>
-
-<h2>8. Schwegler 1B 32 mm : le nichoir qu'on pose pour vingt ans</h2>
+<h2>4. Schwegler 1B 32 mm : le nichoir qu'on pose pour vingt ans</h2>
 <p><strong>Pour qui ?</strong> Celui qui veut accueillir des mésanges charbonnières et préfère un objet durable à un gadget.</p>
 <p>Ce nichoir en béton de bois mesure 17 x 26 x 18 cm pour 3,6 kg, selon la boutique LPO. La façade s'enlève pour le nettoyage. Le revendeur Quickcrop annonce une durée de vie de 20 à 25 ans.</p>
 <ul>
@@ -2800,63 +2768,73 @@ g("cadeau-passionne-oiseaux/",
 <li><strong>Limites</strong> : lourd, demande une fixation solide. Trou fixe de 32 mm.</li>
 </ul>
 <p><a href="{AMZ:Schwegler nichoir 1B 32 mm}" """ + A + """>Voir sur Amazon</a></p>
-<p>Pour la mésange bleue, il existe une version 26 mm : tout est expliqué dans notre comparatif du <a href="{R}meilleur-nichoir-mesange/">meilleur nichoir à mésange</a>.</p>
+<p>Pour la mésange bleue, il existe une version 26 mm : tout est expliqué dans notre comparatif du <a href="{R}meilleur-nichoir-mesange/">meilleur nichoir à mésange</a>, et notre guide pour <a href="{R}installer-un-nichoir/">installer un nichoir</a> donne la hauteur et l'orientation.</p>
 
-<h2>9. Nature Anywhere Birds-I-View : les oiseaux à la fenêtre</h2>
-<p><strong>Pour qui ?</strong> Une personne qui sort peu, en appartement avec une fenêtre dégagée, ou un enfant qui veut voir les mésanges de tout près.</p>
-<p>Le fabricant annonce une coque en polycarbonate de 4 mm, plus résistante que l'acrylique, et un plateau coulissant qui se retire sans décoller la mangeoire. Environ 25 x 11 x 25 cm, garantie à vie par la marque.</p>
+<h2>5. Squirrel Buster Legacy : la mangeoire qui résiste aux écureuils</h2>
+<p><strong>Pour qui ?</strong> Celui qui peste chaque hiver contre l'écureuil qui vide sa mangeoire en une matinée.</p>
+<p>Quand un animal trop lourd s'accroche, son poids fait descendre un grillage qui ferme les quatre ouvertures. Un ressort permet de régler le poids qui déclenche la fermeture, selon Brome Bird Care. Le silo contient environ 1,2 kg de graines et se démonte à la main pour le nettoyage.</p>
 <ul>
-<li><strong>Points forts</strong> : solide, facile à remplir et à laver.</li>
-<li><strong>Limites</strong> : toit, drainage et contenance non précisés sur la page du fabricant.</li>
+<li><strong>Points forts</strong> : mécanisme réglable, pièces exposées conçues pour résister aux morsures, nettoyage facile.</li>
+<li><strong>Limites</strong> : le fabricant précise lui-même qu'il n'arrête pas les étourneaux. Il faut environ 47 cm de dégagement tout autour.</li>
 </ul>
-<p><a href="{AMZ:Nature Anywhere mangeoire fenetre oiseaux}" """ + A + """>Voir sur Amazon</a></p>
-<p>C'est souvent un cadeau très apprécié par un parent ou un grand-parent qui se déplace moins. Notre site frère Vieillir chez soi rassemble d'autres <a href="https://vieillir-chez-soi.fr/cadeau-personne-agee/">idées de cadeau pour une personne âgée</a>. Les autres modèles sont dans notre sélection de la <a href="{R}meilleure-mangeoire-fenetre/">meilleure mangeoire de fenêtre</a>.</p>
+<p><a href="{AMZ:Squirrel Buster Legacy}" """ + A + """>Voir sur Amazon</a></p>
+<p>Les autres modèles sont comparés dans notre sélection de la <a href="{R}meilleure-mangeoire-anti-ecureuil/">meilleure mangeoire anti-écureuil</a>.</p>
 
-<h2>10. Esschert Design FB297 : un bain d'oiseaux stable</h2>
-<p><strong>Pour qui ?</strong> Le jardinier qui a déjà sa mangeoire et à qui il manque un point d'eau.</p>
-<p>D'après la fiche de ManoMano, cette vasque en béton mesure 29,3 cm de diamètre pour 10,5 cm de haut et pèse environ 4 kg. Des marches intégrées permettent aux petits oiseaux d'entrer et de sortir sans risque. Elle est vendue sur Amazon.fr.</p>
-<ul>
-<li><strong>Points forts</strong> : lourde donc stable, large, facile à frotter.</li>
-<li><strong>Limites</strong> : profondeur non précisée, poids qui varie selon les lignes de la fiche. Posée au sol, elle est à portée des chats.</li>
-</ul>
-<p><a href="{AMZ:Esschert Design bain oiseaux beton FB297}" """ + A + """>Voir sur Amazon</a></p>
-<p>L'eau compte autant que la nourriture en hiver, comme nous l'expliquons dans notre page sur l'<a href="{R}eau-pour-les-oiseaux-en-hiver/">eau pour les oiseaux en hiver</a>.</p>
-
-<h2>11. Le guide ornitho (3e édition) : la bible de l'observateur</h2>
+<h2>6. Le guide ornitho (3e édition) : la bible de l'observateur</h2>
 <p><strong>Pour qui ?</strong> Celui qui a dépassé les oiseaux de sa mangeoire et veut identifier tout ce qu'il croise en Europe.</p>
-<p>Texte de Lars Svensson, illustrations de Killian Mullarney et Dan Zetterström. Selon le libraire Mollat, l'édition d'octobre 2023 couvre près de 900 espèces avec 4 000 illustrations et 700 cartes. Broché, 476 pages.</p>
+<p>Texte de Lars Svensson, illustrations de Killian Mullarney et Dan Zetterström, chez Delachaux et Niestlé. Selon le libraire Mollat, l'édition d'octobre 2023 couvre près de 900 espèces avec 4 000 illustrations et 700 cartes. Broché, 476 pages.</p>
 <ul>
 <li><strong>Points forts</strong> : la référence des observateurs, très complète.</li>
 <li><strong>Limites</strong> : trop riche pour un débutant qui veut juste reconnaître ses mésanges. Pas de sons.</li>
 </ul>
 <p><a href="{AMZ:le guide ornitho Svensson Delachaux 3e edition}" """ + A + """>Voir sur Amazon</a></p>
+<p>Huit autres guides sont présentés dans notre sélection du <a href="{R}meilleur-guide-oiseaux/">meilleur guide d'identification des oiseaux</a>.</p>
 
-<h2>12. Guide des oiseaux de France (Belin) : avec les chants</h2>
-<p><strong>Pour qui ?</strong> Celui qui entend plus qu'il ne voit, et veut apprendre les chants.</p>
-<p>Jérôme Morin, Gérard Guillot et Julien Norwood, chez Belin, 2017. 500 espèces, environ 1 000 photos et 500 illustrations. Selon le libraire NHBS, 360 chants ou cris s'écoutent sur smartphone grâce à des QR codes. Broché, 528 pages.</p>
+<h2>Plus de 100 € : les cadeaux qui font de l'effet</h2>
+
+<h2>7. Birdfy Feeder 2 Pro : la mangeoire qui filme et reconnaît les oiseaux</h2>
+<p><strong>Pour qui ?</strong> Le passionné qui aime les gadgets, ou celui qui travaille la journée et veut voir ce qu'il a manqué.</p>
+<p>C'est le cadeau qui fait le plus d'effet le matin de Noël. Cette mangeoire embarque deux caméras, l'une en 2K qui pivote pour suivre les oiseaux, l'autre en 1080p grand angle. Birdfy annonce un panneau solaire de 5 W fourni, une batterie de 9 000 mAh et un réservoir de 2,5 L. La version vendue avec l'IA « à vie » identifie les espèces sans abonnement, selon le fabricant.</p>
 <ul>
-<li><strong>Points forts</strong> : photos, dessins et sons dans un seul livre.</li>
-<li><strong>Limites</strong> : édition de 2017, la plus ancienne de notre sélection de guides.</li>
+<li><strong>Points forts</strong> : deux angles de vue, autonomie solaire, reconnaissance des espèces sans abonnement sur la bonne version.</li>
+<li><strong>Limites</strong> : pas de carte microSD, tout passe par le cloud du fabricant. Wi-Fi 2,4 GHz uniquement : vérifiez que la box porte jusqu'à l'endroit prévu. Birdfy vend aussi une version avec IA par abonnement, regardez bien la mention « Lifetime » avant d'acheter.</li>
 </ul>
-<p><a href="{AMZ:Guide des oiseaux de France Belin Morin}" """ + A + """>Voir sur Amazon</a></p>
-<p>Huit autres guides sont présentés dans notre sélection du <a href="{R}meilleur-guide-oiseaux/">meilleur guide d'identification des oiseaux</a>, et notre page des <a href="{R}meilleurs-livres-oiseaux-enfants/">meilleurs livres sur les oiseaux pour enfants</a> couvre les plus jeunes.</p>
+<p><a href="{AMZ:Birdfy Feeder 2 Pro}" """ + A + """>Voir sur Amazon</a></p>
+<p>Une mangeoire à caméra est aussi un très joli cadeau pour un parent âgé qui sort moins : il voit les mésanges de près, et les petits-enfants reçoivent les photos. Notre site frère Vieillir chez soi rassemble d'autres <a href="https://vieillir-chez-soi.fr/cadeau-personne-agee/">idées de cadeau pour une personne âgée</a>. Les autres modèles sont comparés dans notre sélection des <a href="{R}meilleure-mangeoire-connectee/">meilleures mangeoires connectées</a>.</p>
+
+<h2>8. Green Feathers kit nichoir caméra wifi : suivre une nichée en direct</h2>
+<p><strong>Pour qui ?</strong> Celui qui rêve de voir éclore des mésanges, et qui a une prise extérieure ou un garage à proximité.</p>
+<p>C'est un cadeau de Noël malin, parce qu'il faut poser un nichoir avant le printemps. Le kit réunit un nichoir en bois de 21 mm avec un trou d'envol de 32 mm et une caméra wifi 1080p. La vision nocturne utilise des LED infrarouges invisibles, et un micro capte les petits cris, d'après Green Feathers et Nature & Découvertes. Une rallonge de 10 m est fournie.</p>
+<ul>
+<li><strong>Points forts</strong> : tout est dans la boîte, infrarouge invisible qui n'éclaire pas la nichée.</li>
+<li><strong>Limites</strong> : carte microSD non fournie, conditions du cloud non précisées, prise nécessaire à proximité.</li>
+</ul>
+<p><a href="{AMZ:Green Feathers kit complet nichoir camera wifi}" """ + A + """>Voir sur Amazon</a></p>
+<p>Wifi, filaire, solaire : notre comparatif du <a href="{R}meilleur-nichoir-camera/">meilleur nichoir avec caméra</a> présente aussi des modèles sans câble.</p>
+
+<h2>Et des jumelles ?</h2>
+<p>Ce sont les cadeaux les plus personnels : mieux vaut savoir si la personne en a déjà. Pour un marcheur, les <strong>Nikon Prostaff P7 8x42</strong> pèsent 590 g selon Nikon, les plus légères de notre comparatif. Pour un observateur qui garde ses jumelles des années, les <strong>Zeiss Terra ED 8x42</strong> font la mise au point dès 1,6 m, pratique pour un oiseau posé près de la fenêtre, mais pèsent 725 g. Les deux dépassent largement 100 € chez les revendeurs français. Les dix modèles sont comparés, avec leurs liens, dans notre sélection des <a href="{R}meilleures-jumelles-oiseaux/">meilleures jumelles pour les oiseaux</a>.</p>
 
 <h2>Comment choisir le bon cadeau ?</h2>
-<p><strong>Regardez ce qu'il a déjà.</strong> Un passionné possède souvent des jumelles et un guide. Lui offrir une deuxième paire d'entrée de gamme a peu d'intérêt ; une mangeoire à caméra ou un nichoir connecté lui ouvrira au contraire quelque chose de nouveau.</p>
-<p><strong>Pensez au lieu.</strong> Une mangeoire connectée ou un nichoir caméra wifi demandent un signal correct à l'endroit où ils seront posés. Par exemple, si le jardin est grand et la box au fond de la maison, un modèle filaire ou solaire avec une bonne portée évitera bien des déceptions. En appartement, une mangeoire de fenêtre est souvent le seul choix réaliste.</p>
-<p><strong>Méfiez-vous des abonnements.</strong> Certaines mangeoires et certains nichoirs connectés réservent la reconnaissance des espèces ou l'historique des vidéos à une formule payante. Lisez la fiche avant d'offrir un cadeau qui coûtera chaque mois à la personne.</p>
-<p><strong>Notre conseil</strong> : pour un cadeau de Noël, le nichoir avec caméra est le plus judicieux, parce qu'il se pose en hiver et que le spectacle commence au printemps. Ajoutez un sac de graines de qualité pour que la mangeoire serve dès janvier : notre comparatif des <a href="{R}meilleure-graine-tournesol/">meilleures graines de tournesol</a> vous aide à le choisir, et notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a> rappelle ce qu'il faut éviter.</p>
+<p><strong>Regardez ce qu'il a déjà.</strong> Un passionné possède souvent des jumelles et un guide. Lui offrir une deuxième paire d'entrée de gamme a peu d'intérêt ; un nichoir connecté ou une mangeoire à caméra lui ouvrira au contraire quelque chose de nouveau.</p>
+<p><strong>Pensez au lieu.</strong> Une mangeoire connectée ou un nichoir caméra wifi demandent un bon signal à l'endroit où ils seront posés. Par exemple, si le jardin est grand et la box au fond de la maison, un modèle solaire ou filaire évitera bien des déceptions. En appartement, une <a href="{R}meilleure-mangeoire-fenetre/">mangeoire de fenêtre</a> est souvent le seul choix réaliste.</p>
+<p><strong>Méfiez-vous des abonnements.</strong> Certaines caméras réservent la reconnaissance des espèces ou l'historique des vidéos à une formule payante. Lisez la fiche avant d'offrir un cadeau qui coûtera chaque mois à la personne.</p>
+<p><strong>Complétez avec de quoi nourrir.</strong> Un sac de graines de qualité permet d'utiliser la mangeoire dès janvier : notre comparatif des <a href="{R}meilleure-graine-tournesol/">meilleures graines de tournesol</a> vous aide à le choisir, et notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a> rappelle ce qu'il faut éviter.</p>
+<p>Chez Les oiseaux du jardin, nous aimons aussi un cadeau qui ne coûte rien : proposer de participer ensemble au Comptage national des oiseaux des jardins de la LPO et du Muséum national d'Histoire naturelle, annoncé les 30 et 31 janvier 2027. Il suffit d'observer une heure dans un jardin, sur un balcon ou dans un parc, puis de saisir ses observations sur oiseauxdesjardins.fr.</p>
 
 <h2>Quels oiseaux verra-t-il avec ces cadeaux ?</h2>
-<p>Au jardin en hiver, les premières clientes d'une mangeoire sont presque toujours la <a href="{R}mesange-charbonniere/">mésange charbonnière</a> et la <a href="{R}mesange-bleue/">mésange bleue</a>, qui sont aussi celles qui occupent les nichoirs au printemps. Le <a href="{R}rouge-gorge/">rouge-gorge</a>, lui, préfère se nourrir au sol, juste en dessous.</p>
+<p>Au jardin en hiver, les premières clientes d'une mangeoire sont presque toujours la mésange charbonnière et la mésange bleue, qui sont aussi celles qui occupent les nichoirs au printemps. Le <a href="{R}rouge-gorge/">rouge-gorge</a>, lui, préfère se nourrir au sol, juste en dessous.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.lpo.fr/la-lpo-en-actions/mobilisation-citoyenne/refuges-lpo/tutoriels/nichoirs-pour-passereaux" target="_blank" rel="noopener">LPO : Nichoirs pour passereaux</a>, <a href="https://www.oiseauxdesjardins.fr/" target="_blank" rel="noopener">LPO et MNHN : Observatoire des oiseaux des jardins</a>, <a href="https://boutique.lpo.fr/produit/JO0278" target="_blank" rel="noopener">Boutique LPO : nichoirs Schwegler</a> (vérifié le 25 novembre 2026)</p>
 """,
-  faq=[("Quel cadeau offrir à quelqu'un qui aime observer les oiseaux ?",
-        "Une mangeoire avec caméra ou un nichoir connecté si la personne aime la technologie, de bonnes jumelles 8x42 si elle sort souvent, ou un guide d'identification avec les chants si elle débute. Une mangeoire de fenêtre convient très bien à quelqu'un qui sort peu."),
-       ("Un nichoir avec caméra est-il un bon cadeau de Noël ?",
-        "Oui, parce qu'il faut poser un nichoir avant le printemps. Vérifiez la portée du wifi ou la présence d'une prise à proximité, et les éventuels abonnements pour stocker les vidéos."),
+  faq=[("Quel cadeau de Noël offrir à un amoureux des oiseaux ?",
+        "Pour moins de 30 €, un kit de nichoir à monter ou un guide avec les chants. Entre 30 et 100 €, un nichoir en béton de bois ou une mangeoire anti-écureuils. Au-delà de 100 €, une mangeoire avec caméra, un nichoir connecté ou des jumelles 8x42 si la personne n'en a pas."),
+       ("Un nichoir est-il un bon cadeau de Noël ?",
+        "Oui. Selon la LPO, un nichoir doit être en place dès l'automne ou le début de l'hiver, car les mésanges prospectent les cavités dès janvier. Offert à Noël, il est posé à temps pour la saison de nidification."),
+       ("Quels oiseaux viendront à un nichoir ou une mangeoire offerts ?",
+        "Au jardin, ce sont surtout la mésange charbonnière et la mésange bleue, à la fois à la mangeoire et au nichoir. La LPO conseille un trou de 32 mm pour la charbonnière et de 26 à 28 mm pour la bleue."),
        ("Avez-vous testé ces produits ?",
-        "Non. Cette sélection repose sur les fiches publiées par les fabricants et les revendeurs. Quand une information manque, nous l'indiquons comme non précisée.")],
-  short="Top 10 cadeaux pour passionné d'oiseaux", cat="Observer")
+        "Non. Cette sélection repose sur les fiches publiées par les fabricants, les éditeurs et les revendeurs. Les budgets sont des tranches tirées des prix constatés en novembre 2026, à vérifier au moment de l'achat.")],
+  short="Top 10 cadeaux pour amoureux des oiseaux", cat="Observer")
 
 AUTO_META['martinet-noir/'] = ('🪶', 'ciel')
 g("martinet-noir/",
