@@ -143,4 +143,4 @@ Fichiers en ligne sur https://qui-offre-a-qui.fr/media/ (le dépôt qui-offre-a-
 - qoaq-tuto-tirage-au-sort.mp4 (tuto 1 min 12, 16:9) + qoaq-miniature-tuto.jpg + qoaq-tuto-sous-titres.srt
 - qoaq-short-papiers.mp4 (Short 15 s, 9:16), aussi pour TikTok
 - Titres, descriptions, tags : qoaq-youtube-seo.txt
-Jeremy veut que Claude les publie lui-même sur Metricool (YouTube connecté sur Metricool le 26 nov) une fois le connecteur réparé. Étaler du lundi au vendredi. Faire aussi les 2 Shorts suivants (« L'organisateur ne sait rien », « Qui apporte quoi au repas »).
+Metricool marque « Qui offre à qui » (blogId 8318595, YouTube + page Facebook). Programmé le 26 nov : Short jeu 26/11 18h30 (YouTube Short + Reel Facebook), tuto ven 27/11 18h (YouTube + Facebook). Reste à Jeremy dans YouTube Studio : miniature, sous-titres SRT, commentaire épinglé. Étaler du lundi au vendredi. Faire aussi les 2 Shorts suivants (« L'organisateur ne sait rien », « Qui apporte quoi au repas »).
