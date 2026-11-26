@@ -14,6 +14,8 @@ Les règles détaillées de chaque site restent dans son AUTOMATION.md (ou fichi
 - Aucune requête SQL destructive. Ne dépense jamais d'argent.
 - Ne mets jamais « by @jeremstyke » sur AI Football Predictor.
 
+- Liens vers Qui offre à qui (demande de Jeremy du 26 nov 2026) : sur les 4 sites affiliés, quand un article parle de Noël en famille, de cadeaux à plusieurs, de repas de fête, d'EVJF, de mariage entre amis ou de cadeaux de collègues, ajoute dans le texte UNE phrase naturelle avec un lien vers la page la plus utile de https://qui-offre-a-qui.fr (pere-noel-secret-famille/, qui-apporte-quoi/, jeu-ange-gardien/, secret-santa-a-distance/, idee-cadeau-<budget>-euros/ ou l'accueil). Jamais forcé, jamais plus d'un lien par page, et respecte le tutoiement ou le vouvoiement du site.
+
 ## Planning de la semaine
 
 | Jour | Sites affiliés | Autres sites |
