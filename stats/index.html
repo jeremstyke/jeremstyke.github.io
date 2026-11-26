@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Mes stats</title>
+<style>
+:root{--pin:#123d34;--pin2:#1d5a4c;--or:#e9b949;--baie:#b8344a;--papier:#f4f6f2;--encre:#17221f;--gris:#5d6b67;--ligne:#dbe3de;--carte:#fff}
+@media(prefers-color-scheme:dark){:root{--papier:#0e1a17;--encre:#e8efec;--gris:#9fb1ab;--ligne:#24382f;--carte:#15241f}}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--papier);color:var(--encre);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:var(--pin);color:#fff;padding:16px max(4vw,14px) 14px;position:sticky;top:0;z-index:2}
+header h1{font-size:20px;margin:0 0 10px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+header h1 small{font-size:13px;font-weight:400;color:#b9cdc5}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap}
+select,button,input{font:inherit;font-size:16px;border-radius:10px;border:0;padding:9px 12px;min-height:44px}
+select{background:#fff;color:var(--encre)}
+.seg{display:flex;background:rgba(255,255,255,.12);border-radius:10px;padding:3px}
+.seg button{background:transparent;color:#fff;padding:6px 12px;min-height:38px;cursor:pointer}
+.seg button.on{background:var(--or);color:var(--encre);font-weight:700}
+main{padding:16px max(4vw,14px) 40px;max-width:1100px;margin:0 auto}
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.kpi{background:var(--carte);border:1px solid var(--ligne);border-radius:14px;padding:12px 14px}
+.kpi b{display:block;font-size:clamp(24px,6vw,32px);line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi span{font-size:14px;color:var(--gris)}
+.kpi small{display:block;font-size:13px;color:var(--gris);margin-top:2px}
+.kpi.live b{color:var(--baie)}
+.bloc{background:var(--carte);border:1px solid var(--ligne);border-radius:14px;padding:16px;margin-top:14px}
+.bloc h2{font-size:17px;margin:0 0 10px}
+.grille{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px}
+.grille .bloc{margin-top:0}
+.barres{display:flex;align-items:flex-end;gap:3px;height:160px;border-bottom:1px solid var(--ligne)}
+.barres div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;position:relative}
+.barres i{display:block;width:100%;background:var(--pin2);border-radius:4px 4px 0 0;min-height:2px}
+@media(prefers-color-scheme:dark){.barres i{background:#3f8f78}}
+.barres em{font-style:normal;font-size:11px;color:var(--gris);margin-bottom:2px}
+.axe{display:flex;gap:3px;font-size:11px;color:var(--gris);margin-top:4px}
+.axe span{flex:1;text-align:center;overflow:hidden;white-space:nowrap}
+.liste{list-style:none;margin:0;padding:0}
+.liste li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;padding:6px 0;border-bottom:1px solid var(--ligne);font-size:15px}
+.liste li:last-child{border:0}
+.liste .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.liste .n{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}
+.liste .j{grid-column:1/-1;height:5px;background:var(--ligne);border-radius:3px;overflow:hidden}
+.liste .j i{display:block;height:100%;background:var(--or)}
+.entonnoir{display:grid;gap:8px}
+.entonnoir div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;font-size:15px}
+.entonnoir .r{grid-column:1/-1;height:12px;background:var(--ligne);border-radius:6px;overflow:hidden}
+.entonnoir .r i{display:block;height:100%;background:var(--pin2);border-radius:6px}
+.vide{color:var(--gris);font-size:15px}
+.note{font-size:13px;color:var(--gris);margin-top:16px}
+#code{max-width:420px;margin:60px auto;padding:0 16px}
+#code input{width:100%;border:1px solid var(--ligne);margin:10px 0}
+#code button{background:var(--baie);color:#fff;font-weight:700;width:100%;cursor:pointer}
+.err{color:var(--baie);font-weight:700}
+.cache{display:none}
+</style>
+</head>
+<body>
+<header class="cache" id="tete">
+<h1>Mes stats <small id="maj"></small></h1>
+<div class="ctrl">
+<select id="site" aria-label="Site">
+<option value="qoaq">Qui offre à qui</option>
+<option value="tous">Tous mes sites</option>
+<option value="vieillir">Vieillir chez soi</option>
+<option value="oiseaux">Les oiseaux du jardin</option>
+<option value="bebe">Ma liste bébé</option>
+<option value="mariage">Ma liste mariage</option>
+<option value="demarches">PDF Démarches</option>
+</select>
+<div class="seg" id="per" role="group" aria-label="Période">
+<button data-j="1">Aujourd'hui</button><button data-j="7" class="on">7 j</button><button data-j="30">30 j</button><button data-j="90">90 j</button>
+</div>
+</div>
+</header>
+
+<div id="code" class="cache">
+<h1>Mes stats</h1>
+<p>Entre ton code d'accès (une seule fois sur cet appareil).</p>
+<input id="k" type="password" autocomplete="current-password" aria-label="Code d'accès">
+<button id="ok">Ouvrir</button>
+<p class="err" id="kerr"></p>
+</div>
+
+<main id="app" class="cache">
+<div class="kpis" id="kpis"></div>
+<section class="bloc"><h2 id="t-jours">Visiteurs par jour</h2><div class="barres" id="barres"></div><div class="axe" id="axe"></div></section>
+<section class="bloc" id="b-tirage"><h2>Ce que font les gens (Qui offre à qui)</h2><div class="entonnoir" id="entonnoir"></div><p class="note" id="mails"></p></section>
+<div class="grille" style="margin-top:14px">
+<section class="bloc"><h2>Pages les plus vues</h2><ul class="liste" id="pages"></ul></section>
+<section class="bloc"><h2>D'où viennent les visiteurs</h2><ul class="liste" id="sources"></ul></section>
+<section class="bloc"><h2>Produits cliqués sur Amazon</h2><ul class="liste" id="amz"></ul></section>
+<section class="bloc"><h2>Pages qui font cliquer sur Amazon</h2><ul class="liste" id="amzp"></ul></section>
+<section class="bloc"><h2>Temps passé par page</h2><ul class="liste" id="duree"></ul></section>
+<section class="bloc"><h2>Tirages par occasion</h2><ul class="liste" id="occ"></ul></section>
+<section class="bloc"><h2>Budgets choisis</h2><ul class="liste" id="budgets"></ul></section>
+<section class="bloc"><h2>Appareils</h2><ul class="liste" id="apps"></ul></section>
+<section class="bloc" id="b-sites"><h2>Par site</h2><ul class="liste" id="sites"></ul></section>
+<section class="bloc"><h2>Heures de visite</h2><div class="barres" id="heures" style="height:110px"></div><div class="axe" id="axeh"></div></section>
+</div>
+<p class="note">Mesure anonyme, robots et tes propres visites exclus (ouvre un de tes sites avec ?moi=1 une fois sur chaque appareil). Le temps passé ne compte que les visites depuis le 26 novembre 2026. Mise à jour automatique chaque minute.</p>
+</main>
+
+<script>
+{
+const API = 'https://txvrlvcxfnylnrpdrxtt.supabase.co/functions/v1/stats';
+const $ = (i) => document.getElementById(i);
+const esc = (x) => String(x ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const nb = (x) => (x ?? 0).toLocaleString('fr-FR');
+const temps = (s) => s == null ? 'pas encore' : s < 60 ? Math.round(s) + ' s' : Math.floor(s / 60) + ' min ' + String(Math.round(s % 60)).padStart(2, '0');
+const NOMS = {qoaq:'Qui offre à qui', vieillir:'Vieillir chez soi', oiseaux:'Les oiseaux du jardin', bebe:'Ma liste bébé', mariage:'Ma liste mariage', demarches:'PDF Démarches'};
+const OCC = {noel:'Noël', nouvelan:'Nouvel An', stnicolas:'Saint-Nicolas', anniv:'Anniversaire', collegues:'Collègues', amis:'Amis', classe:'Classe, club', autre:'Autre'};
+let code = '', jours = 7, site = 'qoaq', minuteur = null;
+try { code = localStorage.getItem('stats_code') || ''; site = localStorage.getItem('stats_site') || 'qoaq'; } catch (e) {}
+const q = new URLSearchParams(location.search).get('k');
+if (q) { code = q; try { localStorage.setItem('stats_code', q); } catch (e) {} history.replaceState(null, '', location.pathname); }
+$('site').value = site;
+
+function liste(id, rows, lab, val) {
+  const el = $(id);
+  if (!rows || !rows.length) { el.innerHTML = '<li class="vide">Rien pour l\'instant</li>'; return; }
+  const max = Math.max(...rows.map(val), 1);
+  el.innerHTML = rows.map((r) => `<li><span class="t" title="${esc(lab(r))}">${esc(lab(r))}</span><span class="n">${esc(nb(val(r)))}</span><span class="j"><i style="width:${(val(r) / max * 100).toFixed(1)}%"></i></span></li>`).join('');
+}
+function barres(id, axe, rows, val, lab) {
+  const max = Math.max(...rows.map(val), 1);
+  $(id).innerHTML = rows.map((r) => `<div title="${esc(lab(r))} : ${val(r)}"><em>${rows.length <= 14 && val(r) ? esc(val(r)) : ''}</em><i style="height:${(val(r) / max * 100).toFixed(1)}%"></i></div>`).join('');
+  const pas = Math.ceil(rows.length / 10);
+  $(axe).innerHTML = rows.map((r, i) => `<span>${i % pas === 0 ? esc(lab(r)) : ''}</span>`).join('');
+}
+
+function afficher(d) {
+  const a = d.aujourdhui || {};
+  const tiles = [
+    ['Visiteurs', d.visiteurs, jours > 1 ? `aujourd'hui : ${nb(a.visiteurs)}` : ''],
+    ['Pages vues', d.vues, `${String(d.pages_par_visiteur ?? 0).replace('.', ',')} par visiteur`],
+    ['Temps moyen sur le site', null, `médiane : ${temps(d.duree_med)}`, temps(d.duree_moy)],
+    ['Clics Amazon', d.amz, d.visiteurs ? `${(d.amz / d.visiteurs * 100).toFixed(1).replace('.', ',')} % des visiteurs` : ''],
+  ];
+  if (site === 'qoaq' || site === 'tous') tiles.push(['Tirages faits', d.tirages, jours > 1 ? `aujourd'hui : ${nb(a.tirages)}` : '']);
+  tiles.push(['En ligne maintenant', d.en_ligne, '5 dernières minutes', null, 'live']);
+  $('kpis').innerHTML = tiles.map(([l, v, s, txt, c]) => `<div class="kpi ${c || ''}"><b>${esc(txt ?? nb(v))}</b><span>${esc(l)}</span>${s ? `<small>${esc(s)}</small>` : ''}</div>`).join('');
+
+  const pj = d.par_jour || [];
+  $('t-jours').textContent = jours === 1 ? 'Visites par heure' : 'Visiteurs par jour';
+  if (jours === 1) {
+    const hh = Array.from({length: 24}, (_, h) => ({h, n: ((d.heures || []).find((x) => x.hh === h) || {}).n || 0}));
+    barres('barres', 'axe', hh, (r) => r.n, (r) => r.h + 'h');
+  } else barres('barres', 'axe', pj, (r) => r.visiteurs, (r) => new Date(r.j + 'T12:00').toLocaleDateString('fr-FR', {day: 'numeric', month: 'numeric'}));
+
+  const qo = site === 'qoaq' || site === 'tous';
+  $('b-tirage').classList.toggle('cache', !qo);
+  if (qo) {
+    const etapes = [['Visiteurs', d.visiteurs], ['Tirages lancés', d.tirages], ['Liens partagés (WhatsApp, SMS, copie)', d.partages], ['E-mails envoyés', d.emails_envoyes], ['Paquets ouverts (résultat vu)', d.reveals], ['Clics vers Amazon', d.amz]];
+    const m = Math.max(...etapes.map((e) => e[1] || 0), 1);
+    $('entonnoir').innerHTML = etapes.map(([l, v]) => `<div><span>${esc(l)}</span><b>${esc(nb(v))}</b><span class="r"><i style="width:${Math.max(1, (v || 0) / m * 100).toFixed(1)}%"></i></span></div>`).join('');
+    $('mails').textContent = `${nb(d.emails_rappel)} organisateur(s) inscrit(s) au rappel de l'an prochain (total).`;
+  }
+  liste('pages', d.pages, (r) => r.p, (r) => r.n);
+  liste('sources', d.sources, (r) => r.r === 'direct' ? 'Direct ou inconnu (souvent des robots)' : r.r, (r) => r.n);
+  liste('amz', d.clics_amz, (r) => r.t, (r) => r.n);
+  liste('amzp', d.clics_amz_pages, (r) => r.p, (r) => r.n);
+  const dp = $('duree'); const rows = d.duree_pages || [];
+  dp.innerHTML = rows.length ? rows.map((r) => `<li><span class="t">${esc(r.p)}</span><span class="n">${esc(temps(r.s))}</span></li>`).join('') : '<li class="vide">Rien pour l\'instant</li>';
+  liste('occ', (d.tirages_detail || []).map((r) => ({...r, l: (OCC[r.occ] || r.occ) + (r.parts ? ` (${String(r.parts).replace('.', ',')} pers. en moyenne)` : '')})), (r) => r.l, (r) => r.n);
+  liste('budgets', d.budgets, (r) => r.b + ' €', (r) => r.n);
+  liste('apps', d.appareils, (r) => r.d === 'mobile' ? 'Téléphone' : 'Ordinateur', (r) => r.n);
+  $('b-sites').classList.toggle('cache', site !== 'tous');
+  liste('sites', d.par_site, (r) => `${NOMS[r.s] || r.s} (${nb(r.vu)} vues, ${nb(r.a)} clics Amazon)`, (r) => r.u);
+  const hh = Array.from({length: 24}, (_, h) => ({h, n: ((d.heures || []).find((x) => x.hh === h) || {}).n || 0}));
+  barres('heures', 'axeh', hh, (r) => r.n, (r) => r.h + 'h');
+  $('maj').textContent = 'à jour à ' + new Date().toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'});
+}
+
+async function charger() {
+  try {
+    const r = await fetch(`${API}?k=${encodeURIComponent(code)}&site=${site}&jours=${jours}`);
+    if (r.status === 401) { montrerCode('Code incorrect.'); return; }
+    const d = await r.json();
+    $('code').classList.add('cache'); $('tete').classList.remove('cache'); $('app').classList.remove('cache');
+    afficher(d);
+  } catch (e) { $('maj').textContent = 'hors ligne, nouvel essai dans 1 min'; }
+}
+function montrerCode(msg) {
+  $('tete').classList.add('cache'); $('app').classList.add('cache'); $('code').classList.remove('cache');
+  $('kerr').textContent = msg || '';
+}
+$('ok').addEventListener('click', () => { code = $('k').value.trim(); try { localStorage.setItem('stats_code', code); } catch (e) {} charger(); });
+$('k').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('ok').click(); });
+$('site').addEventListener('change', (e) => { site = e.target.value; try { localStorage.setItem('stats_site', site); } catch (x) {} charger(); });
+$('per').addEventListener('click', (e) => {
+  const b = e.target.closest('button'); if (!b) return;
+  jours = +b.dataset.j; for (const x of $('per').children) x.classList.toggle('on', x === b); charger();
+});
+if (code) charger(); else montrerCode();
+minuteur = setInterval(() => { if (code && document.visibilityState === 'visible') charger(); }, 60000);
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && code) charger(); });
+}
+</script>
+</body>
+</html>
