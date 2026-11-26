@@ -160,10 +160,10 @@ function afficher(d) {
   const qo = site === 'qoaq' || site === 'tous';
   $('b-tirage').classList.toggle('cache', !qo);
   if (qo) {
-    const etapes = [['Visiteurs', d.visiteurs], ['Tirages lancés', d.tirages], ['Liens partagés (WhatsApp, SMS, copie)', d.partages], ['E-mails envoyés', d.emails_envoyes], ['Paquets ouverts (résultat vu)', d.reveals], ['Clics vers Amazon', d.amz]];
+    const etapes = [['Visiteurs', d.visiteurs], ['Tirages lancés', d.tirages], ['dont lancés par d\'anciens participants (viralité)', d.tirages_viraux], ['Liens partagés (WhatsApp, SMS, copie)', d.partages], ['E-mails envoyés', d.emails_envoyes], ['Paquets ouverts (résultat vu)', d.reveals], ['Clics vers Amazon', d.amz]];
     const m = Math.max(...etapes.map((e) => e[1] || 0), 1);
     $('entonnoir').innerHTML = etapes.map(([l, v]) => `<div><span>${esc(l)}</span><b>${esc(nb(v))}</b><span class="r"><i style="width:${Math.max(1, (v || 0) / m * 100).toFixed(1)}%"></i></span></div>`).join('');
-    $('mails').textContent = `${nb(d.emails_rappel)} organisateur(s) inscrit(s) au rappel de l'an prochain (total).`;
+    $('mails').textContent = `Viralité : ${d.tirages ? Math.round((d.tirages_viraux || 0) / d.tirages * 100) : 0} % des tirages viennent d'un ancien participant. Partages du site : ${nb(d.partages_site)}. Organisateurs inscrits au rappel : ${nb(d.emails_rappel)}.`;
   }
   liste('pages', d.pages, (r) => r.p, (r) => r.n);
   liste('sources', d.sources, (r) => r.r === 'direct' ? 'Direct ou inconnu (souvent des robots)' : r.r, (r) => r.n);
