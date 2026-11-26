@@ -137,3 +137,10 @@ Puis build de chaque site touché, commit, push, mise en ligne (sync.yml pour Vi
 1. Relecture des pages publiées cette semaine sur Vieillir chez soi et Les oiseaux du jardin (5 pages au hasard par site) : faits sur les sources officielles (ou LPO pour les oiseaux), 3 produits vérifiés par top, bloc Sources, phrases creuses réécrites ; journal dans relecture.md du dossier.
 2. Remise à niveau des anciennes pages des 4 sites affiliés : 3 pages par site au maximum, publiées il y a plus de 3 semaines, en commençant par les tops et celles qui ont des impressions sans clics (Search Console via Windsor.ai) ; produits arrêtés remplacés, faits revérifiés, angle du site ajouté aux tops ; trace dans REFRESH.md du dossier (une page n'est pas reprise avant 3 mois). Aucune nouvelle page.
 Puis build, commit, push, mise en ligne, IndexNow. Message : une ligne par site.
+
+## Qui offre à qui : vidéos YouTube et TikTok (à publier via Metricool quand le connecteur marchera)
+Fichiers en ligne sur https://qui-offre-a-qui.fr/media/ (le dépôt qui-offre-a-qui, dossier media/) :
+- qoaq-tuto-tirage-au-sort.mp4 (tuto 1 min 12, 16:9) + qoaq-miniature-tuto.jpg + qoaq-tuto-sous-titres.srt
+- qoaq-short-papiers.mp4 (Short 15 s, 9:16), aussi pour TikTok
+- Titres, descriptions, tags : qoaq-youtube-seo.txt
+Jeremy veut que Claude les publie lui-même sur Metricool (YouTube connecté sur Metricool le 26 nov) une fois le connecteur réparé. Étaler du lundi au vendredi. Faire aussi les 2 Shorts suivants (« L'organisateur ne sait rien », « Qui apporte quoi au repas »).
