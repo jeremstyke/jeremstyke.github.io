@@ -8,7 +8,7 @@
 - [x] taille-max-fichier-mdph/ | taille maximum des fichiers pour un dossier MDPH en ligne | varie selon le département, comment savoir, réduire le PDF
 - [x] taille-max-fichier-france-travail/ | taille maximum d'un document sur France Travail | erreur au dépôt, formats acceptés
 - [ ] taille-max-fichier-impots/ | taille maximum d'une pièce jointe sur impots.gouv | messagerie sécurisée, formats, nombre de pièces
-- [ ] format-fichier-non-accepte/ | format de fichier non accepté sur un site administratif | HEIC, DOCX, PNG, comment convertir en PDF ou JPG
+- [x] format-fichier-non-accepte/ | format de fichier non accepté sur un site administratif | HEIC, DOCX, PNG, comment convertir en PDF ou JPG
 - [ ] fusionner-justificatifs-un-seul-pdf/ | mettre plusieurs justificatifs dans un seul PDF pour une démarche | quand c'est demandé, ordre des pages, outil fusionner
 - [ ] scanner-avis-imposition-plusieurs-pages/ | envoyer un avis d'imposition de plusieurs pages en un seul fichier | toutes les pages exigées, fusion, taille
 - [ ] photo-document-refusee-reflet/ | photo de document refusée : reflet, ombre, coins coupés | règles de lisibilité, astuces au téléphone
