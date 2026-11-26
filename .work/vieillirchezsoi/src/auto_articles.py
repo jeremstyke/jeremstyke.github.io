@@ -732,6 +732,7 @@ g("cadeau-personne-agee/",
 </ul>
 <h2>Pour Noël</h2>
 <p>À Noël, plutôt que plusieurs petits objets, pensez au <strong>cadeau commun entre frères et sœurs</strong> (et petits-enfants) : il permet d'offrir un équipement de qualité, et chacun peut ajouter un mot ou une photo. Surtout, prévoyez du temps pour <strong>installer et paramétrer l'appareil avec la personne</strong> : charger la batterie, régler le volume ou la taille des caractères, enregistrer les numéros, ajouter les premières photos. Montrez-lui les gestes, laissez-la essayer, et notez les étapes sur une petite fiche. Un appareil prêt à l'emploi et bien compris sera vraiment utilisé.</p>
+<p>Et si le repas de Noël se fait chez vos parents, un <a href="https://qui-offre-a-qui.fr/qui-apporte-quoi/">tableau partagé « qui apporte quoi »</a> permet de répartir les plats entre enfants et petits-enfants sans les fatiguer.</p>
 <p>Pour des idées pensées pour l'hiver à la maison, classées par budget, voyez aussi nos <a href="{R}cadeau-noel-personne-agee-a-domicile/">idées de cadeaux de Noël pour une personne âgée qui vit chez elle</a>. Pour un grand-père ou une grand-mère de 85 ou 90 ans, nos <a href="{R}cadeau-noel-grand-parent-plus-de-80-ans/">idées de cadeaux de Noël après 80 ans</a> misent sur les souvenirs et le temps partagé.</p>
 <h2>Les cadeaux à éviter</h2>
 <ul>
