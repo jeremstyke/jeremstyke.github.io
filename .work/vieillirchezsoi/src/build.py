@@ -26,7 +26,7 @@ TAG = 'viellirchezsoi-21'   # identifiant Amazon Partenaires (orthographe exacte
 CONTACT = 'contact@vieillir-chez-soi.fr'
 YEAR = 2026
 TODAY = datetime.date.today().isoformat()
-DISCLOSURE = "En tant que Partenaire Amazon, nous réalisons un bénéfice sur les achats remplissant les conditions requises."
+DISCLOSURE = "En tant que Partenaire Amazon, nous réalisons un bénéfice sur les achats remplissant les conditions requises. Certains liens vers d'autres boutiques sont aussi des liens affiliés."
 A = 'rel="sponsored nofollow noopener" target="_blank"'
 
 META = {
