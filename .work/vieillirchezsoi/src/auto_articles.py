@@ -732,7 +732,7 @@ g("cadeau-personne-agee/",
 </ul>
 <h2>Pour Noël</h2>
 <p>À Noël, plutôt que plusieurs petits objets, pensez au <strong>cadeau commun entre frères et sœurs</strong> (et petits-enfants) : il permet d'offrir un équipement de qualité, et chacun peut ajouter un mot ou une photo. Surtout, prévoyez du temps pour <strong>installer et paramétrer l'appareil avec la personne</strong> : charger la batterie, régler le volume ou la taille des caractères, enregistrer les numéros, ajouter les premières photos. Montrez-lui les gestes, laissez-la essayer, et notez les étapes sur une petite fiche. Un appareil prêt à l'emploi et bien compris sera vraiment utilisé.</p>
-<p>Pour des idées pensées pour l'hiver à la maison, classées par budget, voyez aussi nos <a href="{R}cadeau-noel-personne-agee-a-domicile/">idées de cadeaux de Noël pour une personne âgée qui vit chez elle</a>.</p>
+<p>Pour des idées pensées pour l'hiver à la maison, classées par budget, voyez aussi nos <a href="{R}cadeau-noel-personne-agee-a-domicile/">idées de cadeaux de Noël pour une personne âgée qui vit chez elle</a>. Pour un grand-père ou une grand-mère de 85 ou 90 ans, nos <a href="{R}cadeau-noel-grand-parent-plus-de-80-ans/">idées de cadeaux de Noël après 80 ans</a> misent sur les souvenirs et le temps partagé.</p>
 <h2>Les cadeaux à éviter</h2>
 <ul>
 <li><strong>Les gadgets compliqués</strong> : trop de boutons, des menus en anglais, une application obligatoire ou une mise à jour à faire seul. Si vous hésitez, choisissez le modèle le plus simple.</li>
@@ -4438,7 +4438,7 @@ g("cadeau-noel-personne-agee-a-domicile/",
 <li><strong>Encore un objet à ranger.</strong> Quand la maison est déjà pleine, préférez un cadeau qui se consomme ou un moment partagé : un repas, une sortie, une journée pour faire ensemble le tri ou les petits travaux.</li>
 <li><strong>Acheter trop tard.</strong> Les commandes de mi-décembre arrivent parfois après le 25. Le Black Friday, le 27 novembre, est un bon moment pour comparer et commander tôt, à condition de vérifier que le prix affiché est vraiment intéressant : voyez notre <a href="{R}black-friday-2026-materiel-maintien-domicile/">liste du matériel de maintien à domicile à surveiller pendant le Black Friday</a>.</li>
 </ul>
-<p>Pour d'autres idées valables toute l'année, consultez notre guide <a href="{R}cadeau-personne-agee/">cadeau pour une personne âgée</a>, et pour repérer ce qui manque dans la maison, notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a>.</p>
+<p>Si le cadeau est pour un grand-parent très âgé, chez lui ou en EHPAD, voyez nos <a href="{R}cadeau-noel-grand-parent-plus-de-80-ans/">idées de cadeaux de Noël pour un grand-parent de plus de 80 ans</a>. Pour d'autres idées valables toute l'année, consultez notre guide <a href="{R}cadeau-personne-agee/">cadeau pour une personne âgée</a>, et pour repérer ce qui manque dans la maison, notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a>.</p>
 """,
   faq=[("Quel cadeau de Noël offrir à une personne âgée qui vit seule chez elle ?", "Un cadeau qui facilite l'hiver à la maison : veilleuses à détecteur pour les nuits, plaid chauffant avec arrêt automatique, bottines fermées, cadre photo connecté pour recevoir les photos de la famille. Si elle est plus fragile, un bouton d'appel d'urgence offert à plusieurs, après en avoir parlé avec elle."),
        ("Quel cadeau utile offrir à petit prix à une personne âgée ?", "Des crampons antidérapants pour les sorties par temps de gel, un thermomètre d'intérieur à grand écran ou des veilleuses à détecteur de mouvement. Ce sont de petits achats qui améliorent vraiment la sécurité et le confort en hiver."),
@@ -4715,3 +4715,67 @@ g("meilleure-tablette-senior/",
        ("Quelle taille d'écran choisir pour un senior ?", "10 à 11 pouces est le bon compromis entre lisibilité et poids, entre 430 et 540 g pour les modèles de ce comparatif. Un écran de 12,7 pouces comme la Facilotab XXL est plus confortable pour une vue qui baisse, mais il pèse 710 g et s'utilise posé."),
        ("Avez-vous testé ces tablettes ?", "Non. Cette sélection repose uniquement sur les fiches des fabricants et des grands revendeurs. Nous n'indiquons que ce qui y figure, sans note ni avis de prise en main.")],
   short="Top 7 tablettes pour senior", cat="Vie quotidienne")
+
+AUTO_META['cadeau-noel-grand-parent-plus-de-80-ans/'] = ('🎄', 'lilas')
+g("cadeau-noel-grand-parent-plus-de-80-ans/",
+  "Cadeau de Noël pour grand-parent de plus de 80 ans : idées",
+  "Cadeau de Noël pour un grand-père ou une grand-mère de plus de 80 ans",
+  "Quel cadeau de Noël offrir à un grand-père ou une grand-mère de plus de 80 ans, chez soi ou en EHPAD ? Des idées simples, sans mode d'emploi, et les erreurs à éviter.",
+  """
+<p><strong>En bref</strong> : après 80 ans, le cadeau de Noël qui touche le plus est rarement un objet. C'est du temps, des souvenirs et de la famille : un album de photos annoté, un livre de souvenirs à remplir ensemble, une visite programmée en janvier. Côté objets, choisissez ce qui s'utilise sans apprendre et ne prend pas de place, surtout en EHPAD. Selon l'Insee, les personnes d'au moins 75 ans représentaient 11,1 % de la population début 2026 : beaucoup de familles se posent la question.</p>
+<p>« Je n'ai besoin de rien, ne dépensez pas d'argent pour moi. » À 85 ou 90 ans, cette phrase est souvent sincère. La maison est pleine, les placards aussi, et un nouvel appareil inquiète plus qu'il ne réjouit. Chez Vieillir chez soi, nous conseillons de se poser une autre question que « qu'est-ce qui lui manque ? » : « qu'est-ce qui lui ferait passer un bon moment cet hiver ? ».</p>
+{CTA}
+<h2>Les idées selon la situation de votre grand-parent</h2>
+<table><thead><tr><th>Situation</th><th>Idées qui marchent</th><th>À éviter</th></tr></thead><tbody>
+<tr><td>Vit chez lui, encore autonome</td><td>Album photo, sortie au restaurant, radio simple, gilet chaud</td><td>Le gadget connecté à installer</td></tr>
+<tr><td>Vit chez lui, sort peu</td><td>Visites programmées, livres audio, mangeoire de fenêtre, jeux à gros caractères</td><td>Un objet de plus à ranger</td></tr>
+<tr><td>Vit en EHPAD</td><td>Photos encadrées, vêtements faciles à enfiler et marqués à son nom, plaid</td><td>Les gros objets, l'électrique sans accord de l'équipe</td></tr>
+<tr><td>Troubles de la mémoire</td><td>Photos anciennes légendées, musique de sa jeunesse, objets à toucher</td><td>Les cadeaux qui demandent d'apprendre quelque chose</td></tr>
+<tr><td>Vue ou audition qui baisse</td><td>Livres en gros caractères, livres audio, téléphone amplifié</td><td>Le livre imprimé petit, le cadeau « surprise » à ouvrir seul</td></tr>
+</tbody></table>
+<p>Notre conseil : si vous hésitez, appelez la personne qui la voit le plus souvent (un parent, l'aide à domicile, l'équipe de l'EHPAD). Elle sait ce qui sert vraiment et ce qui dort au fond d'un tiroir.</p>
+
+<h2>Le cadeau des souvenirs</h2>
+<p>Un album de photos de famille, avec le nom de chacun et l'année écrits sous chaque image, est presque toujours un succès après 80 ans. Mélangez les photos anciennes (le mariage, la maison d'avant) et les récentes (les arrière-petits-enfants, que l'on confond facilement quand on les voit peu). Imprimez gros, une ou deux photos par page, et préférez un album rigide qu'on peut feuilleter sur les genoux.</p>
+<p>Autre idée qui crée de vrais moments : un livre de souvenirs à remplir, avec des questions sur l'enfance, le métier, la guerre ou le premier bal. Ne le laissez pas seul sous le sapin. Le cadeau, c'est l'après-midi où un petit-enfant pose les questions et écrit les réponses. Beaucoup de familles découvrent ce jour-là des histoires qu'elles n'avaient jamais entendues. <a href="{AMZ:livre souvenirs grand-mere raconte-moi ta vie}" """ + A + """>Voir les livres de souvenirs à remplir</a></p>
+
+<h2>Les cadeaux des petits-enfants</h2>
+<p>Pour un arrière-grand-parent, un dessin, une lettre écrite à la main ou une vidéo de la chorale de l'école valent plus qu'un achat. Quelques idées faciles à faire avec des enfants :</p>
+<ul>
+<li>un calendrier 2027 avec une photo de famille par mois et les anniversaires de chacun notés en gros ;</li>
+<li>un « bocal à mots doux » : 31 petits papiers pliés, un souvenir ou un mot gentil à ouvrir chaque jour de janvier ;</li>
+<li>une carte postale envoyée chaque mois de l'année, promise dans une jolie enveloppe à Noël.</li>
+</ul>
+<p>Un enfant qui revient en mars avec sa carte de printemps offre deux fois le même cadeau.</p>
+
+<h2>Des objets simples, sans mode d'emploi</h2>
+<h3>Une radio à gros boutons</h3>
+<p>Beaucoup de personnes très âgées gardent la radio allumée toute la journée. Une radio avec deux ou trois gros boutons et un son clair remplace avantageusement le vieux poste qui grésille. Réglez les stations préférées avant de l'offrir. <a href="{AMZ:radio simple gros boutons senior}" """ + A + """>Voir les radios simples à gros boutons</a></p>
+<h3>Un gilet chaud qui s'enfile facilement</h3>
+<p>À cet âge, on a souvent froid, et les boutons deviennent difficiles avec l'arthrose. Un gilet polaire ou en laine qui ferme par un zip ou des pressions, avec des poches, se porte tous les jours. Prenez une taille confortable aux épaules. <a href="{AMZ:gilet zippe polaire senior}" """ + A + """>Voir les gilets zippés</a></p>
+<h3>Des jeux à gros caractères</h3>
+<p>Les cartes à jouer à gros chiffres, les mots fléchés en grands caractères ou un puzzle à grosses pièces permettent de continuer un passe-temps quand la vue ou les mains fatiguent. Ils se partagent aussi pendant les visites. <a href="{AMZ:jeu de cartes gros chiffres malvoyants}" """ + A + """>Voir les jeux de cartes à gros chiffres</a></p>
+<p>Si votre grand-parent n'entend plus bien au téléphone, un appareil amplifié peut changer ses appels avec la famille : notre <a href="{R}meilleur-telephone-fixe-senior/">comparatif des téléphones fixes pour senior</a> en présente plusieurs. Et s'il aime regarder le jardin, une mangeoire fixée à la vitre fait venir les oiseaux tout l'hiver : voyez les <a href="https://lesoiseauxdujardin.fr/meilleure-mangeoire-fenetre/" target="_blank" rel="noopener">mangeoires de fenêtre</a> comparées par notre site frère Les oiseaux du jardin.</p>
+
+<h2>Quand la lecture devient difficile</h2>
+<p>Un grand lecteur qui ne peut plus lire vit souvent ce renoncement comme une vraie perte. Deux pistes : les livres imprimés en gros caractères, que nous avons classés dans notre <a href="{R}meilleurs-livres-gros-caracteres/">sélection de livres en gros caractères</a>, et les livres audio, écoutés sur une enceinte simple ou un téléphone. Notre guide des <a href="{R}livres-audio-personne-agee/">livres audio pour une personne âgée</a> explique comment les installer. Audible propose un essai gratuit de 30 jours avec un livre audio offert, résiliable à tout moment, et le livre reste acquis après résiliation. <a href="{AUDIBLE}" """ + A + """>Essayer Audible gratuitement</a></p>
+
+<h2>Grand-parent en EHPAD : ce qu'il faut savoir</h2>
+<p>La chambre est petite, les placards aussi. Les cadeaux qui plaisent sont ceux qui personnalisent l'espace sans l'encombrer : un cadre avec des photos récentes, un plaid à ses couleurs, un coussin qu'elle reconnaît. Pour les vêtements, beaucoup d'établissements demandent qu'ils soient marqués au nom du résident pour la blanchisserie : renseignez-vous et prévoyez des étiquettes. <a href="{AMZ:etiquettes thermocollantes nom vetements ehpad}" """ + A + """>Voir les étiquettes à coudre ou thermocollantes</a></p>
+<p>Avant d'offrir des chocolats ou un appareil électrique (plaid chauffant, bouilloire), demandez à l'équipe : certains résidents suivent un régime ou ont des difficultés à avaler, et les règles sur les appareils varient d'un établissement à l'autre. Notre page <a href="{R}qu-est-ce-qu-un-ehpad/">EHPAD, c'est quoi</a> explique comment fonctionne ce type d'établissement.</p>
+
+<h2>Les erreurs fréquentes</h2>
+<ul>
+<li><strong>Offrir pour soi.</strong> La tablette « pour qu'on puisse faire des visios » arrange surtout la famille. Si elle n'est pas installée et accompagnée, elle ne servira pas.</li>
+<li><strong>Le paquet difficile à ouvrir.</strong> Ruban serré, scotch partout : avec des mains raides, ouvrir son cadeau devant tout le monde peut gêner. Emballez simplement.</li>
+<li><strong>Le cadeau qui parle de l'âge.</strong> Un objet présenté « parce que tu tombes » vexe. Parlez de ce qu'il apporte : « pour lire plus facilement ».</li>
+<li><strong>Oublier janvier.</strong> Les fêtes passées, les visites se raréfient. Le plus beau cadeau est parfois une date notée dans l'agenda pour revenir.</li>
+</ul>
+<p>Pour des idées classées par budget autour du confort et de la sécurité en hiver, voyez notre page <a href="{R}cadeau-noel-personne-agee-a-domicile/">cadeau de Noël pour une personne âgée qui vit chez elle</a>, et pour le reste de l'année, notre guide <a href="{R}cadeau-personne-agee/">cadeau pour une personne âgée</a>. Si vous profitez des fêtes pour repérer ce qui manque dans la maison, notre <a href="{R}amenager-logement-personne-agee/">guide pour aménager le logement pièce par pièce</a> vous aide à en faire le tour.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.insee.fr/fr/statistiques/8719824" target="_blank" rel="noopener">Insee, Bilan démographique 2025 (Insee Première n° 2087, janvier 2026)</a> (vérifié le 26 novembre 2026)</p>
+""",
+  faq=[("Quel cadeau de Noël offrir à une grand-mère de 90 ans qui a tout ?", "Un cadeau de souvenirs ou de temps partagé : un album photo de famille légendé, un livre de souvenirs rempli ensemble lors d'une visite, ou une sortie au restaurant. À cet âge, un moment avec la famille fait souvent plus plaisir qu'un objet de plus."),
+       ("Quel cadeau offrir à un grand-parent en EHPAD ?", "Des cadeaux qui personnalisent la chambre sans l'encombrer : photos récentes encadrées, plaid, coussin, vêtements faciles à enfiler et marqués à son nom. Demandez à l'équipe avant d'offrir de la nourriture ou un appareil électrique."),
+       ("Quel cadeau faire faire aux petits-enfants pour leur arrière-grand-parent ?", "Un dessin, une lettre écrite à la main, un calendrier avec une photo de famille par mois, ou des cartes postales envoyées tout au long de l'année. Ces cadeaux faits main touchent beaucoup et entretiennent le lien après les fêtes."),
+       ("Faut-il offrir une tablette à un grand-parent de plus de 80 ans ?", "Seulement si quelqu'un peut l'installer avec lui et revenir l'aider régulièrement. Sinon, elle risque de rester éteinte. Une radio simple, un téléphone amplifié ou un album photo sont souvent plus utilisés.")],
+  short="Cadeau Noël grand-parent 80 ans et plus", cat="Vie quotidienne")
