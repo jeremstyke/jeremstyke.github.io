@@ -4428,6 +4428,7 @@ g("cadeau-noel-personne-agee-a-domicile/",
 
 <h2>Le cadeau à plusieurs : un équipement plus important</h2>
 <p>Noël est aussi l'occasion de se mettre à plusieurs pour un achat que la personne ne ferait pas seule. Deux idées reviennent souvent : un <a href="{R}meilleur-fauteuil-releveur/">fauteuil releveur</a>, quand se lever du fauteuil devient pénible, et un <a href="{R}meilleur-bouton-appel-urgence/">bouton d'appel d'urgence</a> ou un service de téléassistance, quand elle vit seule.</p>
+<p>En famille nombreuse, beaucoup choisissent aussi un Père Noël secret entre adultes pour garder un budget raisonnable : chacun n'offre qu'un cadeau, et le tirage au sort se fait en ligne sur <a href="https://qui-offre-a-qui.fr/">Qui offre à qui</a>, gratuitement et sans compte.</p>
 <p>Ces cadeaux-là ne s'offrent jamais par surprise. Parlez-en avant, présentez-les comme une façon de rester chez soi plus longtemps, et laissez la personne choisir. Un fauteuil releveur s'essaie si possible en magasin ; un ergothérapeute peut aussi vous conseiller. Pensez enfin que certains équipements de l'habitat peuvent être aidés : voyez les <a href="{R}aides-adapter-logement-senior/">aides pour adapter le logement</a>.</p>
 
 <h2>Les erreurs à éviter à Noël</h2>
