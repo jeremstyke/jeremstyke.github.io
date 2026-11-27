@@ -479,7 +479,7 @@ g("installer-un-nichoir/",
 <p>Pour les nids d'hirondelles de fenêtre, la Ligue belge indique que le nettoyage n'est généralement pas nécessaire avant plusieurs années d'utilisation. Contrôlez simplement la fixation chaque année. Les nichoirs à martinets, eux, demandent une entrée en fente et une pose très haute : tout est expliqué dans notre fiche du <a href="{R}martinet-noir/">martinet noir</a>.</p>
 
 <h2>Un nichoir avec caméra pour observer sans déranger</h2>
-<p>L'envie de soulever le toit pour voir les oisillons est forte. Il ne faut pas le faire. La LPO Auvergne-Rhône-Alpes rappelle de ne pas ouvrir un nichoir pour regarder à l'intérieur et suggère, pour les curieux, des nichoirs avec webcam intégrée : « une bonne solution pour observer sans déranger ». La Ligue belge a d'ailleurs lancé son propre nichoir connecté. Choisissez un modèle qui respecte les mêmes règles qu'un nichoir classique : bon diamètre de trou, pas de perchoir, bois non traité à l'intérieur. Posez-le de préférence en automne, comme un nichoir ordinaire. Sur le même principe, une <a href="{R}comment-choisir-mangeoire-connectee/">mangeoire connectée</a> permet de voir les oiseaux de près l'hiver.</p>
+<p>L'envie de soulever le toit pour voir les oisillons est forte. Il ne faut pas le faire. La LPO Auvergne-Rhône-Alpes rappelle de ne pas ouvrir un nichoir pour regarder à l'intérieur et suggère, pour les curieux, des nichoirs avec webcam intégrée : « une bonne solution pour observer sans déranger ». La Ligue belge a d'ailleurs lancé son propre nichoir connecté. Choisissez un modèle qui respecte les mêmes règles qu'un nichoir classique : bon diamètre de trou, pas de perchoir, bois non traité à l'intérieur. Posez-le de préférence en automne, comme un nichoir ordinaire : notre guide pour <a href="{R}nichoir-avec-camera/">installer un nichoir avec caméra et suivre la nichée</a> détaille le placement de la caméra et le calendrier de la saison. Sur le même principe, une <a href="{R}comment-choisir-mangeoire-connectee/">mangeoire connectée</a> permet de voir les oiseaux de près l'hiver.</p>
 <ul>
 <li><a href="{AMZ:nichoir avec caméra oiseaux}" """ + A + """>Voir sur Amazon</a> : nichoir avec caméra intégrée.</li>
 <li><a href="{AMZ:nichoir hirondelle de fenêtre}" """ + A + """>Voir sur Amazon</a> : nid artificiel pour hirondelles de fenêtre.</li>
@@ -1244,7 +1244,7 @@ g("meilleur-nichoir-camera/",
 <p><strong>Regardez l'infrarouge.</strong> Les LED « invisibles » n'émettent pas de lueur rouge visible dans le nichoir. Plusieurs fiches le précisent, d'autres non.</p>
 <p><strong>Anticipez l'enregistrement.</strong> Carte microSD, mémoire intégrée ou cloud : vérifiez si un abonnement devient nécessaire après la première saison.</p>
 <p><strong>Le trou d'envol compte autant que la caméra.</strong> Un nichoir caméra reste un nichoir : la taille de l'entrée détermine les espèces qui pourront s'y installer. Notre article sur <a href="{R}installer-un-nichoir/">l'installation d'un nichoir</a> explique l'orientation, la hauteur et la bonne période pour le poser.</p>
-<p><strong>Notre conseil</strong> : installez et réglez la caméra avant la saison de nidification, parce qu'ouvrir un nichoir occupé pour corriger un angle ou changer une carte mémoire va à l'encontre de l'idée même d'observer sans déranger. Faites vos essais d'image à vide, en hiver.</p>
+<p><strong>Notre conseil</strong> : installez et réglez la caméra avant la saison de nidification, parce qu'ouvrir un nichoir occupé pour corriger un angle ou changer une carte mémoire va à l'encontre de l'idée même d'observer sans déranger. Faites vos essais d'image à vide, en hiver, en suivant notre guide pour <a href="{R}nichoir-avec-camera/">installer un nichoir avec caméra</a>.</p>
 <p>Pour observer les oiseaux à la mangeoire en plus du nichoir, regardez aussi notre sélection des <a href="{R}meilleure-mangeoire-connectee/">meilleures mangeoires connectées</a>, et notre <a href="{R}nourrir-les-oiseaux-du-jardin/">guide pour bien nourrir les oiseaux du jardin</a>.</p> <p>Un nichoir avec caméra branché sur le téléviseur est aussi une belle idée pour une personne âgée qui passe beaucoup de temps chez elle : elle suit la nichée en direct, sans application. Notre site frère Vieillir chez soi rassemble d'autres <a href="https://vieillir-chez-soi.fr/cadeau-personne-agee/">idées de cadeaux pour une personne âgée</a>.</p>
 """,
   faq=[("Faut-il un nichoir caméra wifi ou filaire ?", "Le wifi est le plus simple si votre box couvre l'emplacement du nichoir. Le filaire, par câble réseau PoE ou câble vers le téléviseur, donne une liaison plus stable et convient quand le wifi n'atteint pas le fond du jardin. Sans prise électrique à proximité, choisissez un modèle solaire avec batterie."),
@@ -4027,3 +4027,84 @@ g("livres-sur-les-oiseaux/",
        ("Quel livre offrir à quelqu'un qui aime regarder les oiseaux à sa mangeoire ?", "Un petit guide des oiseaux du jardin, pour mettre un nom sur les visiteurs, ou un livre illustré comme le Guide d'observation des oiseaux de Chris Packham (Flammarion) pour le plaisir de feuilleter. Accompagné d'une mangeoire de fenêtre, c'est un cadeau complet."),
        ("Un livre suffit-il pour identifier un oiseau au chant ?", "Pas sans les sons. Choisissez un livre avec des enregistrements accessibles par QR codes, et apprenez quelques chants à la fois en commençant par les oiseaux que vous entendez déjà au jardin.")],
   short="Livres sur les oiseaux du jardin", cat="Observer")
+
+AUTO_META['nichoir-avec-camera/'] = ('🎥', 'ciel')
+g("nichoir-avec-camera/",
+  "Nichoir avec caméra : l'installer et suivre la nichée",
+  "Nichoir avec caméra : comment l'installer et suivre la nichée sans déranger",
+  "Comment installer une caméra dans un nichoir, quand la poser, où la placer et que regarder mois par mois, sans jamais ouvrir le toit pendant la nidification.",
+  """
+<p><strong>En bref</strong> : installez votre nichoir avec caméra en automne ou en hiver, réglez l'image à vide, puis n'y touchez plus jusqu'au nettoyage de fin septembre ou d'octobre. Les mésanges commencent à bâtir leur nid vers la mi-mars, et chez la mésange bleue les jeunes quittent le nichoir vers 18 à 20 jours. Tout réglage oublié devra attendre l'automne : c'est la règle qui permet d'observer sans déranger.</p>
+<p>Comment installer une caméra dans un nichoir sans gâcher la saison ? En faisant tout le travail avant que les oiseaux arrivent. La caméra ne remplace pas les règles d'un nichoir classique, elle s'y ajoute : bon trou d'envol, bonne orientation, bois brut à l'intérieur. Chez Les oiseaux du jardin, nous voyons surtout des déceptions qui viennent d'un réglage fait trop tard, quand le nid est déjà là.</p>
+{CTA}
+
+<h2>Quand installer un nichoir avec caméra ?</h2>
+<p>Le plus tôt possible, comme n'importe quel nichoir. La LPO Auvergne-Rhône-Alpes conseille de le poser dès l'automne ou le début de l'hiver, car certaines mésanges cherchent un site très tôt. La Ligue royale belge pour la protection des oiseaux situe le début de la construction des nids vers la mi-mars. Avec une caméra, ajoutez une marge : il faut du temps pour tirer un câble, tester le wifi et trouver le bon angle.</p>
+<p>Notre conseil : visez une installation terminée en février au plus tard. Si vous offrez un nichoir caméra à Noël, c'est le bon calendrier, à condition de le poser dans les semaines qui suivent.</p>
+
+<h2>Le calendrier d'une saison derrière l'écran</h2>
+<p>Voici ce que vous pouvez faire, et surtout ne pas faire, mois après mois. Les dates varient selon les régions et la météo : prenez-les comme des repères.</p>
+<table><thead><tr><th>Période</th><th>Ce qui se passe</th><th>Ce que vous faites</th></tr></thead><tbody>
+<tr><td>Octobre à février</td><td>Les oiseaux visitent les cavités ; le troglodyte vient parfois dormir dans un nichoir l'hiver, selon la LPO Auvergne-Rhône-Alpes</td><td>Pose, branchement, essais d'image et de son, carte mémoire en place</td></tr>
+<tr><td>Mars</td><td>Construction du nid, à partir de la mi-mars environ</td><td>Vous regardez, vous ne touchez plus à rien</td></tr>
+<tr><td>Avril à juin</td><td>Ponte, couvaison, nourrissage ; chez la mésange bleue, 6 à 15 œufs selon la fiche LPO</td><td>Écran seulement, pas d'ouverture, pas de lampe</td></tr>
+<tr><td>Après l'envol</td><td>Jeunes hors du nid vers 18 à 20 jours chez la mésange bleue ; parfois une deuxième nichée chez la charbonnière</td><td>Patience : le nichoir peut resservir dans la saison</td></tr>
+<tr><td>Fin septembre, octobre</td><td>Le nichoir est vide</td><td>Nettoyage, vérification de la caméra et des câbles</td></tr>
+</tbody></table>
+
+<h2>Où placer la caméra dans le nichoir ?</h2>
+<p>La caméra se fixe sous le toit, objectif tourné vers le fond, pour voir le nid d'en haut. Les caméras de nichoir sont petites : celle de Green Feathers mesure 44 x 44 x 33 mm selon le fabricant, et ses LED infrarouges portent à environ 1 m, ce qui suffit largement dans une boîte de cette taille.</p>
+<p>Deux points comptent plus que la définition annoncée :</p>
+<ul>
+<li><strong>La distance entre l'objectif et le fond.</strong> Un nichoir trop bas de plafond donne une image floue et coupée. Pour les mésanges, le tutoriel nichoirs des Refuges LPO donne une hauteur intérieure de 23 cm, dont 17 cm entre le trou d'envol et le fond : il reste donc peu de place au-dessus de l'entrée, et la caméra doit y tenir sans la gêner.</li>
+<li><strong>Le câble.</strong> Il doit passer par un petit trou bouché autour, jamais par le trou d'envol, et ne laisser aucune boucle où un oiseau pourrait se prendre.</li>
+</ul>
+<p>Si vous équipez un nichoir que vous avez déjà, choisissez une caméra vendue seule et vérifiez qu'elle entre sous le toit avant de commander.</p>
+<p><strong>Caméra seule pour équiper votre nichoir</strong> : modèle compact à glisser sous le toit, avec infrarouge invisible.</p>
+<p><a href="{AMZ:Green Feathers camera wifi nichoir 1080p}" """ + A + """>Voir les caméras de nichoir sur Amazon</a></p>
+
+<h2>Le nichoir lui-même : les règles ne changent pas</h2>
+<p>Une caméra n'attire aucun oiseau. C'est le nichoir qui décide. Gardez les repères de notre guide pour <a href="{R}installer-un-nichoir/">installer un nichoir</a> :</p>
+<ul>
+<li>trou d'envol de 32 mm pour la <a href="{R}mesange-charbonniere/">mésange charbonnière</a>, 26 à 28 mm pour la <a href="{R}mesange-bleue/">mésange bleue</a> ;</li>
+<li>entrée tournée vers l'est ou le sud-est, ni plein soleil ni ombre complète ;</li>
+<li>pas de perchoir, et une plaque métallique autour du trou contre les pics et les écureuils ;</li>
+<li>bois brut et non traité à l'intérieur, toit ou façade amovible pour le nettoyage.</li>
+</ul>
+<p>Un point propre aux kits caméra : le toit sert souvent à loger l'électronique. Vérifiez qu'il ferme bien et qu'aucune pluie ne peut couler le long du câble jusqu'à la caméra.</p>
+<p><strong>Plaque de protection du trou d'envol</strong> : utile si un pic ou un écureuil s'attaque à l'entrée.</p>
+<p><a href="{AMZ:plaque protection trou envol nichoir metal}" """ + A + """>Voir les plaques de protection sur Amazon</a></p>
+
+<h2>Wifi, solaire ou câble : faites les essais en hiver</h2>
+<p>Le moment de découvrir que le wifi ne passe pas, c'est en janvier, pas en avril. Posez votre téléphone à l'emplacement du nichoir et regardez la barre de réseau. Pour un kit solaire, Green Feathers indique par exemple une portée wifi d'environ 20 m et un panneau à moins de 4 m de la caméra : mesurez avant de percer.</p>
+<p>Testez aussi l'image de nuit, nichoir fermé. Une lueur rouge visible à l'intérieur indique des LED infrarouges qui ne sont pas « invisibles » : à vous de juger, mais mieux vaut le savoir avant la ponte. Enfin, insérez la carte mémoire dès l'installation et vérifiez qu'elle enregistre : la changer en mai obligerait à ouvrir.</p>
+<p>Si vous hésitez encore entre les modèles, notre comparatif des <a href="{R}meilleur-nichoir-camera/">meilleurs nichoirs avec caméra</a> classe huit kits et caméras selon l'alimentation et la liaison.</p>
+<p><a href="{AMZ:nichoir avec camera wifi oiseaux}" """ + A + """>Voir les nichoirs avec caméra sur Amazon</a></p>
+
+<h2>Observer sans déranger : ce qu'il ne faut pas faire</h2>
+<p>La caméra existe justement pour que le toit reste fermé. La LPO Auvergne-Rhône-Alpes rappelle de ne pas ouvrir un nichoir pour regarder dedans et présente les nichoirs avec webcam comme une bonne solution pour observer sans déranger.</p>
+<ul>
+<li><strong>Ne l'ouvrez pas, même si l'image se fige.</strong> Une caméra en panne en mai attendra l'automne.</li>
+<li><strong>N'éclairez pas l'entrée</strong> avec une lampe ou un projecteur pour mieux voir les allées et venues.</li>
+<li><strong>Ne restez pas planté devant.</strong> Regardez depuis la maison : c'est tout l'intérêt de l'écran.</li>
+<li><strong>N'intervenez pas sur une nichée qui semble en difficulté.</strong> C'est souvent dur à regarder, mais c'est la vie d'une nichée.</li>
+</ul>
+<p>C'est aussi la loi. La plupart des oiseaux du jardin, mésanges comprises, sont intégralement protégés en France par l'arrêté ministériel du 29 octobre 2009, qui interdit notamment la destruction des nids et des œufs et la perturbation intentionnelle des oiseaux pendant la reproduction.</p>
+
+<h2>Et si personne ne s'installe ?</h2>
+<p>C'est fréquent la première année, caméra ou pas. La LPO conseille, quand un nichoir reste vide deux ou trois ans, de revoir son installation puis de le déplacer. Vérifiez d'abord les points les plus souvent fautifs : orientation, plein soleil l'après-midi, chat qui rôde, nichoir trop exposé. Gardez aussi en tête que les mésanges défendent leur territoire : deux nichoirs identiques côte à côte ne doublent pas les chances.</p>
+<p>En attendant, la caméra garde un intérêt l'hiver. Un troglodyte qui vient dormir au chaud, c'est déjà un beau moment. Et pour les aider à passer le froid, notre guide pour <a href="{R}nourrir-les-oiseaux-du-jardin/">nourrir les oiseaux du jardin</a> rappelle les bons gestes de la saison.</p>
+
+<h2>Le nettoyage de fin de saison</h2>
+<p>Une fois par an, en septembre ou en octobre, videz le vieux nid, brossez l'intérieur et laissez sécher. Avec une caméra, profitez-en pour essuyer l'objectif, contrôler l'étanchéité du câble et refaire un test d'image. Si vous ajoutez de l'essence de thym contre les parasites, comme le citent la LPO et la Ligue belge, gardez-la loin de l'objectif.</p>
+
+<h2>Une idée de cadeau qui se regarde de la maison</h2>
+<p>Un nichoir avec caméra relié au téléviseur fait un beau cadeau pour quelqu'un qui sort peu : il suit la nichée depuis son fauteuil, sans application. Notre site frère Vieillir chez soi réunit d'autres <a href="https://vieillir-chez-soi.fr/cadeau-personne-agee/" target="_blank" rel="noopener">idées de cadeaux pour une personne âgée</a>. Pour voir aussi les oiseaux en hiver, une <a href="{R}meilleure-mangeoire-connectee/">mangeoire connectée</a> prend le relais quand les nichoirs sont vides.</p>
+
+<p class="sources"><strong>Sources</strong> : <a href="https://www.lpo.fr/la-lpo-en-actions/mobilisation-citoyenne/refuges-lpo/tutoriels/nichoirs-pour-passereaux" target="_blank" rel="noopener">LPO : Nichoirs pour passereaux</a> ; <a href="https://www.lpo.fr/decouvrir-la-nature/fiches-especes/fiches-especes/oiseaux/mesanges/mesange-bleue" target="_blank" rel="noopener">LPO : fiche mésange bleue</a> ; <a href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000021384277" target="_blank" rel="noopener">Légifrance : arrêté du 29 octobre 2009 sur les oiseaux protégés</a> (vérifié le 27 novembre 2026)</p>
+""",
+  faq=[("Quand faut-il installer un nichoir avec caméra ?", "En automne ou en hiver, comme un nichoir classique, et au plus tard en février. Les mésanges commencent leur nid vers la mi-mars : tous les essais d'image, de son et de réseau doivent être faits avant, nichoir vide."),
+       ("Peut-on ouvrir le nichoir pour régler la caméra pendant la nidification ?", "Non. Ouvrir un nichoir occupé dérange les adultes, et les mésanges sont des espèces protégées en France. Si la caméra tombe en panne au printemps, attendez le nettoyage de fin septembre ou d'octobre pour intervenir."),
+       ("Où fixer la caméra dans un nichoir ?", "Sous le toit, objectif tourné vers le fond, pour voir le nid d'en haut. Le câble sort par un petit trou à part, jamais par le trou d'envol, et la caméra ne doit pas réduire l'espace au-dessus de l'entrée."),
+       ("Une caméra attire-t-elle plus d'oiseaux dans le nichoir ?", "Non. Ce sont le diamètre du trou d'envol, l'orientation et le calme de l'emplacement qui comptent : 32 mm pour la mésange charbonnière, 26 à 28 mm pour la mésange bleue. La caméra sert seulement à observer sans ouvrir.")],
+  short="Nichoir avec caméra : installation", cat="Nichoirs")

@@ -8,7 +8,7 @@
 - [x] boule-de-graisse-oiseaux/ | boule de graisse oiseaux | Nourrir | sans filet, recette maison, quand en donner
 - [x] eau-pour-les-oiseaux-en-hiver/ | abreuvoir oiseaux hiver | Nourrir | eau propre, gel, pas de sel ni antigel
 - [x] livres-sur-les-oiseaux/ | livre sur les oiseaux du jardin | guides d'identification papier pour débutant et enfant avec {AMZ}, livres de chants avec QR codes, beaux livres à offrir, livres audio nature avec un lien {AUDIBLE} ; relie activite-oiseaux-avec-enfants/
-- [ ] nichoir-avec-camera/ | nichoir avec caméra | Nichoirs | observer sans déranger
+- [x] nichoir-avec-camera/ | nichoir avec caméra | Nichoirs | observer sans déranger
 - [ ] abri-pour-oiseaux-en-hiver/ | abri pour oiseaux en hiver | Nichoirs | dortoirs, nichoirs laissés en place, haies denses, ce qui aide vraiment par grand froid
 - [ ] faut-il-nourrir-les-oiseaux-en-hiver/ | faut-il nourrir les oiseaux en hiver | Nourrir | arguments pour et contre, bonnes pratiques (propreté, régularité, eau), ce qu'il faut éviter
 - [ ] mangeoire-balcon/ | mangeoire pour balcon | Mangeoires | ventouse, fenêtre, petit espace
