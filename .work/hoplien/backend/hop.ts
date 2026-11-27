@@ -86,7 +86,7 @@ function cle() { const a = new Uint8Array(12); crypto.getRandomValues(a); return
 async function envoyer(to: string, sujet: string, html: string, text: string) {
   const { data } = await sb.from("tm_cfg").select("v").eq("k", "resend_qoaq").maybeSingle();
   if (!data?.v) return false;
-  for (const from of ["Hoplien <connexion@hoplien.fr>", "Hoplien <hoplien@qui-offre-a-qui.fr>"]) {
+  for (const from of ["Hoplien <nepasrepondre@hoplien.fr>", "Hoplien <hoplien@qui-offre-a-qui.fr>"]) {
     try {
       const r = await fetch("https://api.resend.com/emails", { method: "POST", headers: { Authorization: `Bearer ${data.v}`, "Content-Type": "application/json" }, body: JSON.stringify({ from, to: [to], subject: sujet, html, text }) });
       if (r.ok) return true;
@@ -139,8 +139,8 @@ Deno.serve(async (req) => {
     if ((ni || 0) >= 8 || (ne || 0) >= 3) return J({ ok: false, raison: "limite" }, 429);
     await sb.from("hop_envois").insert({ email_hash: eh, ip_hash: ipH });
     const url = `${SITE}/compte/#t=${await jeton(em)}`;
-    const html = `<!doctype html><html lang="fr"><body style="margin:0;background:#EDF1FF"><div style="font-family:Arial,Helvetica,sans-serif;max-width:520px;margin:0 auto;background:#fff;color:#12173A;padding:28px 24px"><p style="margin:0 0 18px;font-size:22px;font-weight:bold">hop<span style="color:#2F4BFF">/</span>lien</p><h1 style="font-size:22px;margin:0 0 12px">Votre lien de connexion</h1><p style="font-size:15px;line-height:1.5;margin:0 0 20px">Cliquez sur le bouton pour ouvrir votre compte Hoplien : vous y retrouvez tous vos liens courts et leurs clics. Pas de mot de passe à retenir.</p><p style="margin:0 0 24px"><a href="${url}" style="display:inline-block;background:#2F4BFF;color:#fff;text-decoration:none;font-weight:bold;padding:14px 22px;border-radius:12px">Ouvrir mon compte</a></p><p style="font-size:13px;color:#5A6185;line-height:1.5;margin:0">Ce lien reste valable 6 mois sur l'appareil où vous l'ouvrez. Vous n'avez rien demandé ? Ignorez ce message : sans clic, rien ne se passe.</p></div></body></html>`;
-    const ok = await envoyer(em, "Votre lien de connexion Hoplien", html, `Ouvrez votre compte Hoplien : ${url}\n\nVous n'avez rien demandé ? Ignorez ce message.`);
+    const html = `<!doctype html><html lang="fr"><body style="margin:0;background:#EDF1FF"><div style="font-family:Arial,Helvetica,sans-serif;max-width:520px;margin:0 auto;background:#fff;color:#12173A;padding:28px 24px"><p style="margin:0 0 18px;font-size:22px;font-weight:bold">hop<span style="color:#2F4BFF">/</span>lien</p><h1 style="font-size:22px;margin:0 0 12px">Votre lien de connexion</h1><p style="font-size:15px;line-height:1.5;margin:0 0 20px">Cliquez sur le bouton pour ouvrir votre compte Hoplien : vous y retrouvez tous vos liens courts et leurs clics. Pas de mot de passe à retenir.</p><p style="margin:0 0 24px"><a href="${url}" style="display:inline-block;background:#2F4BFF;color:#fff;text-decoration:none;font-weight:bold;padding:14px 22px;border-radius:12px">Ouvrir mon compte</a></p><p style="font-size:13px;color:#5A6185;line-height:1.5;margin:0">Ce lien reste valable 6 mois sur l'appareil où vous l'ouvrez. Vous n'avez rien demandé ? Ignorez ce message : sans clic, rien ne se passe.</p><p style="font-size:12px;color:#5A6185;margin:16px 0 0">Cet e-mail est envoyé automatiquement, merci de ne pas y répondre.</p></div></body></html>`;
+    const ok = await envoyer(em, "Votre lien de connexion Hoplien", html, `Ouvrez votre compte Hoplien : ${url}\n\nVous n'avez rien demandé ? Ignorez ce message.\n\nE-mail automatique, merci de ne pas y répondre.`);
     return J({ ok });
   }
   if (b.action === "moi" || b.action === "supprimer") {
