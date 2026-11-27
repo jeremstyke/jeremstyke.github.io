@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Hoplien</title>
+<script>
+// Redirection des liens courts (hoplien.fr/ab3k9) : le plus tôt possible, avant tout affichage
+(function(){
+  var p=location.pathname.replace(/^\/+|\/+$/g,"").toLowerCase();
+  var PAGES={"compte":1,"guides":1,"signaler":1,"bloque":1,"introuvable":1,"mentions-legales":1,"assets":1};
+  if(!/^[a-z0-9][a-z0-9-]{1,38}[a-z0-9]$/.test(p)||PAGES[p]){document.documentElement.className="perdu";return}
+  document.documentElement.className="attente";
+  fetch("https://txvrlvcxfnylnrpdrxtt.supabase.co/rest/v1/rpc/hop_go",{method:"POST",headers:{"apikey":"sb_publishable_7aA-njoU5fU2ialO0ExwQQ_REHjAEIe","Content-Type":"application/json"},body:JSON.stringify({c:p})})
+    .then(function(r){return r.json()})
+    .then(function(j){var l=Array.isArray(j)&&j[0];
+      if(l&&l.statut==="ok"&&/^https?:\/\//i.test(l.url)){location.replace(l.url);return}
+      document.documentElement.className=l?"bloque":"perdu"})
+    .catch(function(){document.documentElement.className="erreur"});
+})();
+</script>
+<style>
+html{background:#EDF1FF;color:#12173A;font:17px/1.6 Arial,Helvetica,sans-serif}
+body{margin:0;padding:48px 20px;max-width:640px;margin:0 auto}
+.logo{font-weight:700;font-size:26px;text-decoration:none;color:#12173A}
+.logo i{font-style:normal;color:#2F4BFF;display:inline-block;transform:skewX(-14deg)}
+h1{font-size:34px;line-height:1.1;margin:40px 0 12px}
+p{color:#5A6185}
+a.btn{display:inline-block;background:#2F4BFF;color:#fff;text-decoration:none;font-weight:700;padding:14px 22px;border-radius:16px;margin-top:10px}
+.v{display:none}
+html.attente .v-attente,html.perdu .v-perdu,html.bloque .v-bloque,html.erreur .v-erreur{display:block}
+.point{display:inline-block;width:10px;height:10px;border-radius:50%;background:#2F4BFF;animation:b 1s infinite alternate}
+@keyframes b{to{opacity:.2}}
+</style>
+</head>
+<body>
+<a class="logo" href="/">hop<i>/</i>lien</a>
+<div class="v v-attente"><h1>Hop<span class="point"></span></h1><p>Redirection en cours...</p></div>
+<div class="v v-perdu"><h1>Ce lien n'existe pas.</h1><p>Le lien court que vous avez ouvert n'existe pas ou a été supprimé par son créateur. Vérifiez qu'il n'y a pas d'erreur de frappe.</p><a class="btn" href="/">Raccourcir un lien</a></div>
+<div class="v v-bloque"><h1>Ce lien a été bloqué.</h1><p>Ce lien court menait vers un site signalé comme dangereux ou frauduleux. Pour votre sécurité, nous ne vous y envoyons pas.</p><a class="btn" href="/">Aller sur Hoplien</a></div>
+<div class="v v-erreur"><h1>Petit souci de connexion.</h1><p>Nous n'avons pas pu ouvrir ce lien. Vérifiez votre connexion et rechargez la page.</p><a class="btn" href="">Réessayer</a></div>
+</body>
+</html>
