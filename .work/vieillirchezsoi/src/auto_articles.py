@@ -2189,6 +2189,7 @@ g("meilleur-tricycle-electrique-senior/",
 <p><strong>Commencez par la hauteur d'enjambement.</strong> Si lever la jambe est difficile, visez un cadre très bas (Van Raam Maxi, Mooncool TK1). Mesurez la hauteur que la personne enjambe sans peine, par exemple en passant au-dessus d'un tabouret bas.</p>
 <p><strong>Pensez au rangement avant l'autonomie.</strong> Un tricycle est bien plus large qu'un vélo, et les modèles de cette sélection pèsent de 40 à 61 kg. Comparez la largeur indiquée sur la fiche avec celle de la porte du garage ou du local à vélos. Une marche à l'entrée suffit à rendre un tricycle de 50 kg pénible à sortir chaque jour.</p>
 <p><strong>Regardez les freins.</strong> Des freins hydrauliques demandent moins de force dans les doigts, et un frein de stationnement évite que le tricycle ne recule quand on s'installe dans une pente.</p>
+<p><strong>Renseignez-vous sur les aides avant d'acheter.</strong> Il n'y a plus de bonus vélo national, mais certaines communes et régions aident encore, parfois aussi pour les vélos adaptés : voyez notre guide des <a href="{R}aide-achat-velo-tricycle-electrique-senior/">aides pour acheter un tricycle électrique</a>.</p>
 <p><strong>Apprenez à tourner.</strong> Un tricycle ne se penche pas dans les virages comme un vélo : il faut ralentir avant de tourner, sinon une roue peut se soulever. Les premières sorties sur un parking vide permettent de prendre ses marques.</p>
 <p>Si la marche reste votre mode de déplacement principal, notre guide pour <a href="{R}comment-choisir-rollator/">choisir un rollator</a> peut compléter. Pour des trajets plus longs sans pédaler, comparez avec notre <a href="{R}meilleur-scooter-electrique-senior/">top des scooters électriques senior</a>. Et pour que le retour à la maison soit aussi sûr que la balade, consultez notre guide pour <a href="{R}amenager-logement-personne-agee/">aménager le logement pièce par pièce</a>.</p>
 <p>Si pédaler devient trop fatigant, un fauteuil électrique qui se plie pour la voiture peut prendre le relais : voyez notre <a href="{R}meilleur-fauteuil-roulant-electrique-pliant/">sélection de fauteuils roulants électriques pliants</a>.</p>
@@ -3797,6 +3798,7 @@ g("ccas-aides-personnes-agees/",
 <h2>Les aides d'urgence et les coups de pouce</h2>
 <p>Quand une facture d'énergie dérape après un hiver froid, ou qu'un retraité modeste se retrouve sans réserve pour la fin du mois, le CCAS peut parfois accorder un secours ponctuel, non remboursable. D'autres communes proposent de l'aide alimentaire, des chèques d'accompagnement ou la prise en charge de frais de transport.</p>
 <p>Il n'existe pas de barème national pour ces aides facultatives. Chaque CCAS fixe ses propres règles, en général après une évaluation de la situation par un travailleur social. Méfiez-vous donc des listes trouvées en ligne qui promettent des montants précis : ce qui vaut à Angers ne vaut pas forcément dans votre commune.</p>
+<p>Certaines communes aident aussi à l'achat d'un vélo ou d'un tricycle électrique, ou d'un vélo adapté : notre page sur les <a href="{R}aide-achat-velo-tricycle-electrique-senior/">aides pour acheter un tricycle électrique quand on est senior</a> explique où chercher.</p>
 <h2>Ce que le CCAS ne fera pas à votre place</h2>
 <p>Le CCAS ne finance pas, en général, l'adaptation du logement : pour une douche de plain-pied ou un monte-escalier, il faut se tourner vers les <a href="{R}aides-adapter-logement-senior/">aides pour adapter le logement d'un senior</a>, comme MaPrimeAdapt'. Il peut en revanche vous orienter vers les bons interlocuteurs.</p>
 <p>Il ne remplace pas non plus le médecin ni l'ergothérapeute pour évaluer ce dont votre parent a besoin chez lui. Le CCAS travaille sur l'administratif et le social ; le soignant, sur la santé et l'autonomie.</p>
@@ -4782,3 +4784,73 @@ g("cadeau-noel-grand-parent-plus-de-80-ans/",
        ("Quel cadeau faire faire aux petits-enfants pour leur arrière-grand-parent ?", "Un dessin, une lettre écrite à la main, un calendrier avec une photo de famille par mois, ou des cartes postales envoyées tout au long de l'année. Ces cadeaux faits main touchent beaucoup et entretiennent le lien après les fêtes."),
        ("Faut-il offrir une tablette à un grand-parent de plus de 80 ans ?", "Seulement si quelqu'un peut l'installer avec lui et revenir l'aider régulièrement. Sinon, elle risque de rester éteinte. Une radio simple, un téléphone amplifié ou un album photo sont souvent plus utilisés.")],
   short="Cadeau Noël grand-parent 80 ans et plus", cat="Vie quotidienne")
+
+AUTO_META['aide-achat-velo-tricycle-electrique-senior/'] = ('💶', 'sable')
+g("aide-achat-velo-tricycle-electrique-senior/",
+  "Aide achat tricycle électrique senior : les aides en 2026",
+  "Aide à l'achat d'un tricycle ou d'un vélo électrique pour un senior : ce qui existe vraiment",
+  "Prime vélo électrique pour retraité : l'aide nationale a pris fin en 2025. Aides locales, vélo adapté, MDPH, CCAS : où chercher et comment monter le dossier.",
+  """
+<p><strong>En bref</strong> : il n'existe plus d'aide nationale pour acheter un vélo ou un tricycle électrique. Selon le ministère de la Transition écologique, le bonus vélo et la prime à la conversion ont pris fin le 14 février 2025. Il reste des aides locales, versées par certaines régions, intercommunalités ou villes, et quelques aides réservées aux vélos adaptés : à Paris, par exemple, la Ville rembourse 50 % du prix hors taxes d'un vélo adapté, dans la limite de 1 500 €.</p>
+<p>Beaucoup de retraités cherchent encore « la prime vélo électrique » vue dans la presse il y a quelques années. Elle a disparu, mais cela ne veut pas dire qu'il n'y a rien. Chez Vieillir chez soi, nous vous conseillons de faire les recherches dans le bon ordre, et surtout avant de passer à la caisse : la plupart des aides locales exigent une facture datée après l'ouverture du dispositif, et certaines refusent les achats faits en ligne ou d'occasion.</p>
+{CTA}
+<h2>Les aides possibles, résumées dans un tableau</h2>
+<table><thead><tr><th>Aide</th><th>Pour qui ?</th><th>Où se renseigner ?</th><th>À savoir</th></tr></thead><tbody>
+<tr><td>Bonus vélo de l'État</td><td>Plus personne</td><td>ecologie.gouv.fr</td><td>Supprimé le 14 février 2025</td></tr>
+<tr><td>Aide d'une région ou d'une intercommunalité</td><td>Habitants du territoire, souvent sous condition de revenus</td><td>Site de la collectivité, simulateur MesAidesVélo</td><td>Montants et règles très variables, budget parfois épuisé en cours d'année</td></tr>
+<tr><td>Aide de la commune</td><td>Habitants de la commune</td><td>Mairie, CCAS</td><td>Parfois cumulable avec l'aide de l'agglomération</td></tr>
+<tr><td>Aide pour vélo adapté (exemple : Ville de Paris)</td><td>Personnes à mobilité réduite qui ne peuvent pas utiliser un vélo classique</td><td>paris.fr</td><td>50 % du prix HT, plafond 1 500 €, tricycles avec différentiel inclus</td></tr>
+<tr><td>Prestation de compensation du handicap (PCH)</td><td>Personne dont le handicap est reconnu, sous conditions</td><td>MDPH du département</td><td>Le tricycle n'est pas pris en charge d'office : la demande s'étudie au cas par cas</td></tr>
+</tbody></table>
+
+<h2>Pourquoi l'aide nationale ne revient pas dans les simulateurs</h2>
+<p>Entre 2017 et 2024, le bonus écologique et la prime à la conversion ont aidé de nombreux foyers à acheter un vélo, y compris des vélos adaptés au handicap : le ministère en compte 2 143. Depuis le 14 février 2025, ces aides nationales n'existent plus. Le ministère renvoie désormais vers les aides des collectivités locales.</p>
+<p>Méfiez-vous donc des sites qui annoncent encore « jusqu'à 400 € de bonus vélo de l'État » : ce sont souvent des pages anciennes jamais mises à jour. Si une nouvelle aide nationale était créée, elle serait annoncée sur service-public.fr. C'est la seule source à croire sur ce point.</p>
+
+<h2>Trouver les aides de votre commune et de votre région</h2>
+<p>C'est là que se trouve l'essentiel de l'argent. Les montants, les conditions de revenus et les vélos acceptés changent d'un territoire à l'autre, et d'une année à l'autre. Trois réflexes :</p>
+<ol>
+<li><strong>Tapez votre commune dans le simulateur MesAidesVélo</strong> (mesaidesvelo.fr). Il recense les aides par lieu de résidence. Vérifiez ensuite chaque aide trouvée sur le site de la collectivité qui la verse, car c'est elle qui fixe les règles.</li>
+<li><strong>Appelez la mairie ou le CCAS.</strong> Certaines petites aides communales ne sont presque pas annoncées en ligne. Le CCAS peut aussi vous dire si une aide sociale ponctuelle est envisageable : voyez notre page sur <a href="{R}ccas-aides-personnes-agees/">les aides du CCAS pour une personne âgée</a>.</li>
+<li><strong>Lisez la liste des vélos acceptés.</strong> Certaines aides visent seulement les vélos électriques classiques, d'autres incluent les vélos cargos, les triporteurs ou les vélos adaptés. Un tricycle peut entrer dans l'une ou l'autre catégorie selon le règlement.</li>
+</ol>
+<p>Notre conseil : faites ces recherches avant de choisir le modèle. Si une aide n'accepte que les achats chez un commerçant du territoire, mieux vaut le savoir avant de commander.</p>
+
+<h2>Le cas du vélo adapté : l'exemple de Paris</h2>
+<p>Pour une personne âgée dont l'équilibre ne permet plus le vélo à deux roues, le tricycle n'est pas un confort, c'est la condition pour continuer à pédaler. Certaines collectivités l'ont compris et financent spécifiquement les vélos adaptés.</p>
+<p>La Ville de Paris est l'exemple le plus détaillé. D'après sa page mise à jour le 1er octobre 2026, l'aide est de 50 % du prix d'achat hors taxes, plafonnée à 1 500 €. Elle concerne notamment les tricycles assis, semi-couchés ou couchés équipés d'un différentiel entre les roues arrière, ainsi que les vélos à deux roues dont le cadre est très bas. Les conditions principales :</p>
+<ul>
+<li>être majeur et avoir sa résidence principale à Paris, une seule aide par personne ;</li>
+<li>être une personne à mobilité réduite qui ne peut pas utiliser un vélo classique, avec un justificatif ;</li>
+<li>acheter un vélo neuf, pour son usage personnel, marqué et inscrit au Fichier national unique des cycles identifiés.</li>
+</ul>
+<p>Un complément de 33 % du prix hors taxes, plafonné à 50 €, peut être demandé pour un casque ou un antivol achetés en même temps, sur la même facture. La Ville indique une réponse sous 2 à 3 semaines et un versement dans les 4 à 6 mois. Elle précise aussi que cette aide peut être complétée par celle d'Île-de-France Mobilités pour les vélos adaptés.</p>
+<p>Hors de Paris, posez la question à votre collectivité avec les mêmes mots : « vélo adapté » ou « vélo pour personne à mobilité réduite ».</p>
+<p>Si vous profitez de l'achat pour vous équiper, prenez un casque bien réglé et un antivol solide, surtout si le tricycle reste dehors. <a href="{AMZ:casque velo adulte led}" """ + A + """>Voir les casques de vélo avec éclairage</a></p>
+<p><a href="{AMZ:antivol u velo}" """ + A + """>Voir les antivols en U</a></p>
+
+<h2>MDPH et handicap : quand faire une demande</h2>
+<p>Si la personne a un handicap reconnu, la maison départementale des personnes handicapées (MDPH) peut étudier une demande de prestation de compensation du handicap, qui comprend un volet « aides techniques ». Les conditions d'âge et de handicap sont précises, et rien ne garantit qu'un tricycle sera retenu. Faites la demande avant l'achat, avec un argumentaire de l'ergothérapeute ou du médecin qui explique en quoi le tricycle compense une difficulté de déplacement.</p>
+<p>Le dossier MDPH demande beaucoup de pièces scannées. Si les fichiers sont trop lourds pour le formulaire en ligne, les outils gratuits de <a href="https://demarches.cvlibre.com/mdph/" target="_blank" rel="noopener">PDF Démarches France</a> permettent de les réduire et de les rassembler.</p>
+
+<h2>Monter le dossier sans se faire refuser</h2>
+<p>Les refus viennent rarement du fond, plus souvent d'un détail. Avant d'acheter, gardez en tête cette liste :</p>
+<ul>
+<li><strong>La date de la facture</strong> : elle doit être postérieure à l'ouverture de l'aide, et parfois au dépôt de la demande.</li>
+<li><strong>Le nom sur la facture</strong> : celui du demandeur, pas celui de l'enfant qui a payé pour son parent.</li>
+<li><strong>Le marquage du vélo</strong> : les vélos neufs vendus par un professionnel doivent être marqués ; gardez le certificat d'inscription au fichier national.</li>
+<li><strong>Le type de moteur</strong> : un vélo à assistance électrique au sens de la loi a un moteur de 250 W au plus, qui aide seulement quand on pédale et se coupe à 25 km/h. Un tricycle plus puissant est un cyclomoteur, et les aides vélo ne le couvrent pas.</li>
+<li><strong>Les justificatifs</strong> : pièce d'identité, justificatif de domicile, RIB, avis d'imposition si l'aide dépend des revenus.</li>
+</ul>
+<p>Pour choisir un modèle qui respecte la limite de 250 W et passe la porte du garage, voyez notre <a href="{R}meilleur-tricycle-electrique-senior/">comparatif des tricycles électriques pour senior</a>. Si pédaler devient difficile, notre <a href="{R}meilleur-scooter-electrique-senior/">top des scooters électriques senior</a> présente une autre façon de garder son autonomie dehors.</p>
+
+<h2>Et si l'aide ne suffit pas ?</h2>
+<p>Un tricycle électrique neuf reste un achat important. Deux pistes moins connues : la location longue durée de vélos adaptés, proposée par certains réseaux de transport (Véligo Location en Île-de-France en propose), qui permet d'essayer plusieurs mois avant d'acheter ; et les journées d'essai de vélos adaptés organisées par certaines villes, comme celle de la Ville de Paris le 3 octobre 2026. Essayer avant d'acheter évite surtout le tricycle trop lourd ou trop large qui finit au fond du garage.</p>
+<p>Enfin, pensez à ce qui entoure les sorties : un logement facile à quitter et à retrouver compte autant que le véhicule. Notre guide pour <a href="{R}amenager-logement-personne-agee/">aménager le logement pièce par pièce</a> vous aide à repérer les marches et les passages trop étroits.</p>
+<p class="sources"><strong>Sources</strong> : <a href="https://www.ecologie.gouv.fr/actualites/extension-aides-nationales-lachat-dun-velo-jusquen-2027" target="_blank" rel="noopener">Ministère de la Transition écologique, Aides vélo : 135 millions de subventions versées</a>, <a href="https://www.paris.fr/pages/aide-a-l-acquisition-de-velo-adapte-aux-personnes-a-mobilite-reduite-32157" target="_blank" rel="noopener">Ville de Paris, Aide à l'acquisition de vélo adapté aux personnes à mobilité réduite</a>, <a href="https://mesaidesvelo.fr/" target="_blank" rel="noopener">MesAidesVélo, recherche des aides par commune</a> (vérifié le 27 novembre 2026)</p>
+""",
+  faq=[("Existe-t-il une prime vélo électrique pour les retraités en 2026 ?", "Pas au niveau national : selon le ministère de la Transition écologique, le bonus vélo et la prime à la conversion ont pris fin le 14 février 2025. Des aides locales existent dans certaines régions, agglomérations et communes, avec leurs propres conditions. Le simulateur MesAidesVélo permet de les chercher par lieu de résidence."),
+       ("Un tricycle électrique pour senior peut-il être aidé ?", "Oui, si le règlement de l'aide locale l'accepte, comme vélo électrique, triporteur ou vélo adapté. À Paris, l'aide aux vélos adaptés couvre les tricycles équipés d'un différentiel, à hauteur de 50 % du prix hors taxes dans la limite de 1 500 €, pour les personnes à mobilité réduite."),
+       ("Faut-il demander l'aide avant ou après l'achat ?", "Lisez le règlement avant d'acheter. La plupart des aides se demandent après l'achat avec la facture, mais elles imposent une date minimale, un vélo neuf, un vendeur professionnel ou un marquage. Une facture trop ancienne ou au mauvais nom suffit à faire refuser le dossier."),
+       ("La MDPH peut-elle financer un tricycle ?", "La prestation de compensation du handicap comprend un volet aides techniques, mais un tricycle n'est pas pris en charge d'office. La demande s'étudie au cas par cas : joignez un argumentaire du médecin ou de l'ergothérapeute et déposez-la avant l'achat.")],
+  short="Aides achat tricycle électrique senior", cat="Se déplacer")
