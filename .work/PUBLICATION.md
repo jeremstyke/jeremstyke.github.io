@@ -13,6 +13,7 @@ Les règles détaillées de chaque site restent dans son AUTOMATION.md (ou fichi
 - Avant d'écrire un sujet, vérifie que son slug n'existe pas déjà ; s'il existe, coche la ligne et prends la suivante.
 - Aucune requête SQL destructive. Ne dépense jamais d'argent.
 - Ne mets jamais « by @jeremstyke » sur AI Football Predictor.
+- Liens Hoplien (règle du 27 nov 2026) : tout lien court hoplien.fr que tu crées doit être dans le compte de Jeremy (juryjeremy@gmail.com). Crée-le avec la fonction SQL du projet Supabase pote-ia : `select hop_creer_jeremy('https://url-complete', 'nom-perso-facultatif');` (renvoie le lien court). Jamais pour les liens Amazon affiliés (interdit par Amazon) ni pour les liens entre ses sites dans les articles (on garde le lien direct pour Google).
 
 - Liens vers Qui offre à qui (demande de Jeremy du 26 nov 2026) : sur les 4 sites affiliés, quand un article parle de Noël en famille, de cadeaux à plusieurs, de repas de fête, d'EVJF, de mariage entre amis ou de cadeaux de collègues, ajoute dans le texte UNE phrase naturelle avec un lien vers la page la plus utile de https://qui-offre-a-qui.fr (pere-noel-secret-famille/, qui-apporte-quoi/, jeu-ange-gardien/, secret-santa-a-distance/, idee-cadeau-<budget>-euros/ ou l'accueil). Jamais forcé, jamais plus d'un lien par page, et respecte le tutoiement ou le vouvoiement du site.
 
