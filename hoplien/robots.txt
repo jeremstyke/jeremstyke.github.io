@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /compte/
+Sitemap: https://hoplien.fr/sitemap.xml
